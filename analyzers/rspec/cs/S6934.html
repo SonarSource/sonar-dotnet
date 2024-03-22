@@ -1,0 +1,108 @@
+<p>When a route template is defined through an attribute on an action method, conventional routing for that action is disabled. To maintain good
+practice, it’s recommended not to combine conventional and attribute-based routing within a single controller to avoid unpredicted behavior. As such,
+the controller should exclude itself from conventional routing by applying a <code>[Route]</code> attribute.</p>
+<h2>Why is this an issue?</h2>
+<p>In <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/overview">ASP.NET Core MVC</a>, the <a
+href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/routing">routing</a> middleware utilizes a series of rules and conventions to
+identify the appropriate controller and action method to handle a specific HTTP request. This process, known as <em>conventional routing</em>, is
+generally established using the <a
+href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.builder.controllerendpointroutebuilderextensions.mapcontrollerroute"><code>MapControllerRoute</code></a>
+method. This method is typically configured in one central location for all controllers during the application setup.</p>
+<p>Conversely, <em>attribute routing</em> allows routes to be defined at the controller or action method level. It is possible to <a
+href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/routing#mixed-routing-attribute-routing-vs-conventional-routing">mix both
+mechanisms</a>. Although it’s permissible to employ diverse routing strategies across multiple controllers, combining both mechanisms within one
+controller can result in confusion and increased complexity, as illustrated below.</p>
+<pre>
+// Conventional mapping definition
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+public class PersonController
+{
+        // Conventional routing:
+        // Matches e.g. /Person/Index/123
+        public IActionResult Index(int? id) =&gt; View();
+
+        // Attribute routing:
+        // Matches e.g. /Age/Ascending (and model binds "Age" to sortBy and "Ascending" to direction)
+        // but does not match /Person/List/Age/Ascending
+        [HttpGet(template: "{sortBy}/{direction}")]
+        public IActionResult List(string sortBy, SortOrder direction) =&gt; View();
+}
+</pre>
+<h2>How to fix it in ASP.NET Core</h2>
+<p>When any of the controller actions are annotated with a <a
+href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.routing.httpmethodattribute"><code>HttpMethodAttribute</code></a> with a
+route template defined, you should specify a route template on the controller with the <a
+href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.routeattribute"><code>RouteAttribute</code></a> as well.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public class PersonController: Controller
+{
+    // Matches /Person/Index/123
+    public IActionResult Index(int? id) =&gt; View();
+
+    // Matches /Age/Ascending
+    [HttpGet(template: "{sortBy}/{direction}")] // Noncompliant: The "Index" and the "List" actions are
+                                                // reachable via different routing mechanisms and routes
+    public IActionResult List(string sortBy, SortOrder direction) =&gt; View();
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+[Route("[controller]/{action=Index}")]
+public class PersonController: Controller
+{
+    // Matches /Person/Index/123
+    [Route("{id?}")]
+    public IActionResult Index(int? id) =&gt; View();
+
+    // Matches Person/List/Age/Ascending
+    [HttpGet("{sortBy}/{direction}")] // Compliant: The route is relative to the controller
+    public IActionResult List(string sortBy, SortOrder direction) =&gt; View();
+}
+</pre>
+<p>There are also alternative options to prevent the mixing of conventional and attribute-based routing:</p>
+<pre>
+// Option 1. Replace the attribute-based routing with a conventional route
+app.MapControllerRoute(
+    name: "Lists",
+    pattern: "{controller}/List/{sortBy}/{direction}",
+    defaults: new { action = "List" } ); // Matches Person/List/Age/Ascending
+
+// Option 2. Use a binding, that does not depend on route templates
+public class PersonController: Controller
+{
+    // Matches Person/List?sortBy=Age&amp;direction=Ascending
+    [HttpGet] // Compliant: Parameters are bound from the query string
+    public IActionResult List(string sortBy, SortOrder direction) =&gt; View();
+}
+
+// Option 3. Use an absolute route
+public class PersonController: Controller
+{
+    // Matches Person/List/Age/Ascending
+    [HttpGet("/[controller]/[action]/{sortBy}/{direction}")] // Illustrate the expected route by starting with "/"
+    public IActionResult List(string sortBy, SortOrder direction) =&gt; View();
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/overview">Overview of ASP.NET Core MVC</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/routing">Routing to controller actions in ASP.NET
+  Core</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/routing#mixed-routing-attribute-routing-vs-conventional-routing">Mixed routing:
+  Attribute routing vs conventional routing</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.routing.httpmethodattribute">HttpMethodAttribute Class</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.routeattribute">RouteAttribute Class</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> Medium - <a href="https://medium.com/quick-code/routing-in-asp-net-core-c433bff3f1a4">Routing in ASP.NET Core</a> </li>
+</ul>
+
