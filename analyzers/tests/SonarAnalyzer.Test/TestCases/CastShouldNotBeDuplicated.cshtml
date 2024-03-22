@@ -1,0 +1,11 @@
+﻿@* the next line is necessary for the razor generator to properly interpret the asp-for attribute *@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Base
+
+@if (Model is Derived) // Compliant
+{
+    <div>
+        <input class="form-control" type="text" asp-for="@(((Derived)Model).Prop)" /> @* // Compliant *@
+        <span asp-validation-for="@(((Derived)Model).Prop)" class="text-danger"></span> @* // Compliant *@
+    </div>
+}
