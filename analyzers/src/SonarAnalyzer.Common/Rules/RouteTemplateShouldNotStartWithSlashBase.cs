@@ -45,12 +45,12 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
                 var symbol = (INamedTypeSymbol)symbolStartContext.Symbol;
                 if (symbol.IsControllerType())
                 {
-                    var controllerActionInfo = new ConcurrentStack<ControllerActionInfo>();
+                    var controllerActionInfo = new ConcurrentStack<ActionParametersInfo>();
                     symbolStartContext.RegisterSyntaxNodeAction(nodeContext =>
                     {
                         if (nodeContext.SemanticModel.GetDeclaredSymbol(nodeContext.Node) is IMethodSymbol methodSymbol && methodSymbol.IsControllerMethod())
                         {
-                            controllerActionInfo.Push(new ControllerActionInfo(methodSymbol, RouteAttributeTemplateArguments(methodSymbol.GetAttributes())));
+                            controllerActionInfo.Push(new ActionParametersInfo(RouteAttributeTemplateArguments(methodSymbol.GetAttributes())));
                         }
                     }, Language.SyntaxKind.MethodDeclarations);
 
@@ -60,7 +60,7 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
             }, SymbolKind.NamedType);
         });
 
-    private void ReportIssues(SonarSymbolReportingContext context, INamedTypeSymbol controllerSymbol, ConcurrentStack<ControllerActionInfo> actions)
+    private void ReportIssues(SonarSymbolReportingContext context, INamedTypeSymbol controllerSymbol, ConcurrentStack<ActionParametersInfo> actions)
     {
         // If one of the following conditions is true, the rule won't raise an issue
         // 1. The controller does not have any actions defined
@@ -75,7 +75,7 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
             ? MessageOnlyActions
             : MessageActionsAndController;
 
-        var secondaryLocations = actions.SelectMany(x => x.RouteParameters).Select(x => x.Key);
+        var secondaryLocations = actions.SelectMany(x => x.RouteParameters.Keys);
         foreach (var classDeclaration in controllerSymbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax()))
         {
             context.ReportIssue(
@@ -98,5 +98,5 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
         return templates;
     }
 
-    private readonly record struct ControllerActionInfo(IMethodSymbol Action, Dictionary<Location, string> RouteParameters);
+    private readonly record struct ActionParametersInfo(Dictionary<Location, string> RouteParameters);
 }
