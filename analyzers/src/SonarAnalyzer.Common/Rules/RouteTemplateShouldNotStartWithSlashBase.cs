@@ -75,21 +75,13 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
             ? MessageOnlyActions
             : MessageActionsAndController;
 
-        if (ControllerDeclarationSyntax(controllerSymbol) is { Length: > 0 } controllerSyntaxDeclarations)
+        var secondaryLocations = actions.SelectMany(x => x.RouteParameters).Select(x => x.Key);
+        foreach (var classDeclaration in controllerSymbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax()))
         {
-            var secondaryLocations = actions.SelectMany(x => x.RouteParameters).Select(x => x.Key);
-            foreach (var classDeclaration in controllerSyntaxDeclarations)
-            {
-                context.ReportIssue(
-                    Language.GeneratedCodeRecognizer,
-                    Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(classDeclaration)?.GetLocation(), secondaryLocations, issueMessage));
-            }
+            context.ReportIssue(
+                Language.GeneratedCodeRecognizer,
+                Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(classDeclaration)?.GetLocation(), secondaryLocations, issueMessage));
         }
-
-        static SyntaxNode[] ControllerDeclarationSyntax(INamedTypeSymbol symbol) =>
-            symbol.DeclaringSyntaxReferences
-            .Select(x => x.GetSyntax())
-            .ToArray();
     }
 
     private static Dictionary<Location, string> RouteAttributeTemplateArguments(ImmutableArray<AttributeData> attributes)
