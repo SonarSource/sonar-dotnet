@@ -840,5 +840,4 @@ public class VerifierTest
 
     private static void ContainsSyntaxTreeWithName(CompilationData compilation, string suffix) =>
         compilation.Compilation.SyntaxTrees.Select(x => x.FilePath).Should().Contain(x => x.EndsWith(suffix));
-
 }
