@@ -6,25 +6,25 @@ using MA = Microsoft.AspNetCore;
 
 public class RouteTemplateIsNotSpecifiedController : Controller
 {
-    public IActionResult Index() => View();                                     // Compliant
+    public IActionResult NoAttribute() => View();                               // Compliant
 
     [HttpGet]
-    public IActionResult Index2() => View();                                    // Compliant
+    public IActionResult WithHttpGetAttribute() => View();                      // Compliant
 
     [HttpGet()]
-    public IActionResult Index3() => View();                                    // Compliant
+    public IActionResult WithHttpGetAttributeWithParanthesis() => View();       // Compliant
 
     [HttpGetAttribute]
-    public IActionResult Index4() => View();                                    // Compliant
+    public IActionResult WithFullAttributeName() => View();                     // Compliant
 
     [Microsoft.AspNetCore.Mvc.HttpGet]
-    public IActionResult Index5() => View();                                    // Compliant
+    public IActionResult WithNamespaceAttribute() => View();                    // Compliant
 
     [MA.Mvc.HttpGet]
-    public IActionResult Index6() => View();                                    // Compliant
+    public IActionResult WithAliasedNamespaceAttribute() => View();             // Compliant
 
     [method: HttpGet]
-    public IActionResult Index7() => View();                                    // Compliant
+    public IActionResult WithScopedAttribute() => View();                       // Compliant
 
     [HttpGet("/[controller]/[action]/{sortBy}")]
     public IActionResult AbsoluteUri1(string sortBy) => View();                 // Compliant, absolute uri
@@ -50,7 +50,15 @@ public class RouteTemplatesAreSpecifiedController : Controller                  
 
     [HttpGet("GetFirst")]
     [HttpPut("PutFirst")]
-    public IActionResult Mix() => View();                                       // Secondary [controller]
+    public IActionResult MixGetAndPut() => View();                              // Secondary [controller]
+
+    [HttpGet("GetFirst")]
+    [HttpPut()]
+    public IActionResult MixWithTemplateAndWithout() => View();                 // Secondary [controller]
+
+    [HttpGet()]
+    [HttpPut()]
+    public IActionResult MixWithoutTemplate() => View();
 
     [HttpPost("CreateObject")]
     public IActionResult Post() => View();                                      // Secondary [controller]
@@ -113,6 +121,12 @@ public class RouteTemplatesAreSpecifiedController : Controller                  
 
     [HttpGet("GetObject")]
     public ActionResult WithActionResult() => View();                           // Secondary [controller]
+
+    [Route(" ")]
+    public IActionResult WithSpace() => View();                                 // Secondary [controller]
+
+    [Route("\t")]
+    public IActionResult WithTab() => View();                                 // Secondary [controller]
 
     // [HttpPost("Comment")]
     public IActionResult Comment() => View();
