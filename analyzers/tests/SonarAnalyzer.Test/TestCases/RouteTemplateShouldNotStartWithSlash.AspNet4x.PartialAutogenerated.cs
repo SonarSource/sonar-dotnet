@@ -2,13 +2,13 @@
 using System.Web.Mvc;
 
 [Route("[controller]")]
-public partial class PartialController : Controller // This is non-compliant but primary issues are not reported on auto-generated classes
+public partial class NonCompliantPartialController : Controller // This is non-compliant but primary issues are not reported on auto-generated classes
 {
-    [Route("/[action]")]                           // Secondary [first, second]
+    [Route("/[action]")]                                        // Secondary [first, second]
     public ActionResult Index5() => View();
 
-    [Route("/SubPath/Index6_1")]                   // Secondary [first, second]
-    [Route("/[controller]/Index6_2")]              // Secondary [first, second]
+    [Route("/SubPath/Index6_1")]                               // Secondary [first, second]
+    [Route("/[controller]/Index6_2")]                          // Secondary [first, second]
     public ActionResult Index6() => View();
 }
 

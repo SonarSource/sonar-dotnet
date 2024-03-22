@@ -148,7 +148,7 @@ namespace WithAliases
 }
 
 [Route("[controller]")]
-public partial class PartialController : Controller // Noncompliant [first]
+public partial class NonCompliantPartialController : Controller // Noncompliant [first]
 {
     [Route("/Index1")]                              // Secondary [first, second]
     public ActionResult Index1() => View();
@@ -159,7 +159,7 @@ public partial class PartialController : Controller // Noncompliant [first]
 }
 
 [Route("[controller]")]
-public partial class PartialController : Controller // Noncompliant [second]
+public partial class NonCompliantPartialController : Controller // Noncompliant [second]
 {
     [Route("/[action]")]                            // Secondary [first, second]
     public ActionResult Index3() => View();
@@ -168,6 +168,23 @@ public partial class PartialController : Controller // Noncompliant [second]
 
     [Route("/[controller]/Index4_2")]               // Secondary [first, second]
     public ActionResult Index4() => View();
+}
+
+[Route("[controller]")]
+public partial class CompliantPartialController : Controller // Compliant, due to the other partial part of this class
+{
+    [Route("/Index1")]
+    public ActionResult Index1() => View();
+
+    [Route("/SubPath/Index2")]
+    public ActionResult Index2() => View();
+}
+
+[Route("[controller]")]
+public partial class CompliantPartialController : Controller
+{
+    [Route("[action]")]
+    public ActionResult Index3() => View();
 }
 
 [Route("[controller]")]
