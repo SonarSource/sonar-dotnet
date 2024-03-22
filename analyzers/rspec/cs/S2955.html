@@ -27,7 +27,7 @@ bool IsDefault&lt;T&gt;(T value)
 <pre data-diff-id="1" data-diff-type="compliant">
 bool IsDefault&lt;T&gt;(T value)
 {
-  if(object.Equals(value, default(T)))
+  if (EqualityComparer&lt;T&gt;.Default.Equals(value, default(T)))
   {
     // ...
   }
