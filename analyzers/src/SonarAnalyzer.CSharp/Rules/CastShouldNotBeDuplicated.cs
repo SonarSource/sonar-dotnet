@@ -98,21 +98,23 @@ namespace SonarAnalyzer.Rules.CSharp
             ReportPatternAtMainVariable(analysisContext, isExpression.Left, isExpression.GetLocation(), parentIfStatement.Statement, castType, ReplaceWithAsAndNullCheckMessage);
         }
 
-        private static List<Location> GetDuplicatedCastLocations(SonarSyntaxNodeReportingContext analysisContext, SyntaxNode parentStatement, TypeSyntax castType, SyntaxNode typedVariable)
+        private static List<Location> GetDuplicatedCastLocations(SonarSyntaxNodeReportingContext context, SyntaxNode parentStatement, TypeSyntax castType, SyntaxNode typedVariable)
         {
-            var typeExpressionSymbol = analysisContext.SemanticModel.GetSymbolInfo(typedVariable).Symbol
-                                       ?? analysisContext.SemanticModel.GetDeclaredSymbol(typedVariable);
-            return typeExpressionSymbol == null
-                ? new List<Location>()
+            var typeExpressionSymbol = context.SemanticModel.GetSymbolInfo(typedVariable).Symbol
+                                       ?? context.SemanticModel.GetDeclaredSymbol(typedVariable);
+
+            return typeExpressionSymbol is null
+                ? []
                 : parentStatement
                     .DescendantNodes()
                     .OfType<CastExpressionSyntax>()
                     .Where(x => x.Type.WithoutTrivia().IsEquivalentTo(castType.WithoutTrivia())
-                                && IsCastOnSameSymbol(x))
+                                && IsCastOnSameSymbol(x)
+                                && !CSharpFacade.Instance.Syntax.IsInExpressionTree(context.SemanticModel, x)) // see https://github.com/SonarSource/sonar-dotnet/issues/8735#issuecomment-1943419398
                     .Select(x => x.GetLocation()).ToList();
 
             bool IsCastOnSameSymbol(CastExpressionSyntax castExpression) =>
-                Equals(analysisContext.SemanticModel.GetSymbolInfo(castExpression.Expression).Symbol, typeExpressionSymbol);
+                Equals(context.SemanticModel.GetSymbolInfo(castExpression.Expression).Symbol, typeExpressionSymbol);
         }
 
         private static void ProcessPatternExpression(SonarSyntaxNodeReportingContext analysisContext,

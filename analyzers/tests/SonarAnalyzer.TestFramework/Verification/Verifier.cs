@@ -244,6 +244,7 @@ internal class Verifier
     private List<string> PrepareRazorFiles(string projectRoot)
     {
         var razorFiles = new List<string>();
+        var snippetCount = 0;
         // To improve: Paths are currently relative to entry assembly => needs to be duplicated in different projects for now.
         foreach (var file in builder.Paths.Select(TestCasePath))
         {
@@ -254,11 +255,14 @@ internal class Verifier
                 razorFiles.Add(filePath);
             }
         }
-        foreach (var snippet in builder.Snippets.Where(x => IsRazorOrCshtml(x.FileName)))
+        foreach (var snippet in builder.Snippets)
         {
-            var filePath = Path.Combine(projectRoot, snippet.FileName);
+            var filePath = Path.Combine(projectRoot, snippet.FileName ?? $"snippet.{snippetCount++}{language.FileExtension}");
             File.WriteAllText(filePath, snippet.Content);
-            razorFiles.Add(filePath);
+            if (IsRazorOrCshtml(filePath))
+            {
+                razorFiles.Add(filePath);
+            }
         }
         return razorFiles;
     }

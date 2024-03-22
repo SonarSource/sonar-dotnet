@@ -24,6 +24,7 @@ using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 using SonarAnalyzer.TestFramework.Verification;
+using static SonarAnalyzer.TestFramework.Verification.Verifier;
 
 namespace SonarAnalyzer.Test.TestFramework.Tests.Verification;
 
@@ -259,6 +260,82 @@ public class VerifierTest
             .Compile(false);
         var references = compilations.Single().Compilation.References;
         references.Should().NotContain(x => x.Display.Contains("Microsoft.Azure.DocumentDB"));
+    }
+
+    [TestMethod]
+    public void Compile_Razor_Snippet_NoName()
+    {
+        var compilation = DummyWithLocation
+            .AddPaths("Dummy.cshtml")
+            .AddSnippet("class Sample {}")
+            .WithLanguageVersion(LanguageVersion.Latest)
+            .Build()
+            .Compile(false)
+            .Single();
+
+        compilation.AdditionalSourceFiles.Should().ContainSingle();
+        ContainsAdditionalSourceFileWithName(compilation, "Dummy.cshtml");
+        ContainsSyntaxTreeWithName(compilation, "snippet.0.cs");
+    }
+
+    [TestMethod]
+    public void Compile_Razor_Snippet_Name_CSharp()
+    {
+        var compilation = DummyWithLocation
+            .AddPaths("Dummy.cshtml")
+            .AddSnippet("class Sample {}", "snippet.cs")
+            .WithLanguageVersion(LanguageVersion.Latest)
+            .Build()
+            .Compile(false)
+            .Single();
+
+        compilation.AdditionalSourceFiles.Should().ContainSingle();
+        ContainsAdditionalSourceFileWithName(compilation, "Dummy.cshtml");
+        ContainsSyntaxTreeWithName(compilation, "snippet.cs");
+    }
+
+    [TestMethod]
+    public void Compile_Razor_Snippet_Name_Cshtml()
+    {
+        var compilation = DummyWithLocation
+            .AddPaths("Dummy.cshtml")
+            .AddSnippet("class Sample {}", "snippet.cshtml")
+            .WithLanguageVersion(LanguageVersion.Latest)
+            .Build()
+            .Compile(false)
+            .Single();
+
+        compilation.AdditionalSourceFiles.Should().HaveCount(2);
+
+        ContainsAdditionalSourceFileWithName(compilation, "Dummy.cshtml");
+        ContainsAdditionalSourceFileWithName(compilation, "snippet.cshtml");
+
+        ContainsSyntaxTreeWithName(compilation, "snippet_cshtml.g.cs");
+    }
+
+    [TestMethod]
+    public void Compile_Razor_Snippet_MixedNames()
+    {
+        var compilation = DummyWithLocation
+            .AddPaths("Dummy.cshtml")
+            .AddSnippet("class Sample {}")                     // No name, .0.cs
+            .AddSnippet("class Sample {}")                     // No name, .1.cs
+            .AddSnippet("class Sample {}", "snippet.cs")       // Named, c#
+            .AddSnippet("class Sample {}", "snippet.cshtml")   // Named, c#
+            .WithLanguageVersion(LanguageVersion.Latest)
+            .Build()
+            .Compile(false)
+            .Single();
+
+        compilation.AdditionalSourceFiles.Should().HaveCount(2);
+
+        ContainsAdditionalSourceFileWithName(compilation, "Dummy.cshtml");
+        ContainsAdditionalSourceFileWithName(compilation, "snippet.cshtml");
+
+        ContainsSyntaxTreeWithName(compilation, "snippet.0.cs");
+        ContainsSyntaxTreeWithName(compilation, "snippet.1.cs");
+        ContainsSyntaxTreeWithName(compilation, "snippet.cs");
+        ContainsSyntaxTreeWithName(compilation, "snippet_cshtml.g.cs");
     }
 
 #endif
@@ -757,4 +834,10 @@ public class VerifierTest
 
     private string WriteFile(string name, string content) =>
         TestHelper.WriteFile(TestContext, $@"TestCases\{name}", content);
+
+    private static void ContainsAdditionalSourceFileWithName(CompilationData compilation, string suffix) =>
+        compilation.AdditionalSourceFiles.Should().ContainSingle(x => x.EndsWith(suffix));
+
+    private static void ContainsSyntaxTreeWithName(CompilationData compilation, string suffix) =>
+        compilation.Compilation.SyntaxTrees.Select(x => x.FilePath).Should().Contain(x => x.EndsWith(suffix));
 }
