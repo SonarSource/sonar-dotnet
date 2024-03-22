@@ -19,7 +19,6 @@
  */
 
 using CS = SonarAnalyzer.Rules.CSharp;
-using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.Test.Rules;
 
