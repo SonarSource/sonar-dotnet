@@ -191,10 +191,10 @@ public class DerivedController : Controller { }
 [Controller]
 public class Endpoint { }
 
-public class ControllerWithInheritedRoute : ControllerWithRouteAttribute            // Noncompliant FP
+public class ControllerWithInheritedRoute : ControllerWithRouteAttribute            // Compliant, attribute is inherited
 {
     [HttpGet("Test")]
-    public string Index() => "Hi!";                                                 // Secondary
+    public string Index() => "Hi!";
 }
 
 [Route("api/[controller]")]
