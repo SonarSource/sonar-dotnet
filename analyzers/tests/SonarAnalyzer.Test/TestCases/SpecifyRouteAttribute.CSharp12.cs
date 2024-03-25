@@ -191,22 +191,26 @@ public class DerivedController : Controller { }
 [Controller]
 public class Endpoint { }
 
+[Route("api/[controller]")]
+public class ControllerWithRouteAttribute : Controller { }
+
 public class ControllerWithInheritedRoute : ControllerWithRouteAttribute            // Compliant, attribute is inherited
 {
     [HttpGet("Test")]
     public string Index() => "Hi!";
 }
 
-[Route("api/[controller]")]
-public class ControllerWithRouteAttribute : Controller { }
-
-public class ControllerOverridesActionWithRoute : BaseControllerWithActionWithRoute // Noncompliant
-{
-    public override string Index() => "Hi!";                                        // Secondary
-}
-
 public class BaseControllerWithActionWithRoute : Controller                         // Noncompliant
 {
     [HttpGet("Test")]
     public virtual string Index() => "Hi!";                                         // Secondary
+
+    public virtual string Index(int id) => "Hi!";                                   // Compliant
+}
+
+public class ControllerOverridesActionWithRoute : BaseControllerWithActionWithRoute // Noncompliant
+{
+    public override string Index() => "Hi!";                                        // Secondary
+
+    public override string Index(int id) => "Hi!";                                  // Compliant
 }
