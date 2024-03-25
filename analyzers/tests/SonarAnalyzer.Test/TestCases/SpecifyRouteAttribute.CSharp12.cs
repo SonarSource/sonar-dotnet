@@ -196,21 +196,24 @@ public class ControllerWithRouteAttribute : Controller { }
 
 public class ControllerWithInheritedRoute : ControllerWithRouteAttribute            // Compliant, attribute is inherited
 {
-    [HttpGet("Test")]
+    [HttpGet("Test")]                                                               // Route: api/ControllerWithInheritedRoute/Test
     public string Index() => "Hi!";
 }
 
 public class BaseControllerWithActionWithRoute : Controller                         // Noncompliant
 {
-    [HttpGet("Test")]
+    [HttpGet("Test")]                                                               //Route: /Test (AmbiguousMatchException raised because of the override in ControllerOverridesActionWithRoute)
     public virtual string Index() => "Hi!";                                         // Secondary
 
+    // Route: BaseControllerWithActionWithRoute/Index/1
     public virtual string Index(int id) => "Hi!";                                   // Compliant
 }
 
 public class ControllerOverridesActionWithRoute : BaseControllerWithActionWithRoute // Noncompliant
 {
+    //Route: /Test (AmbiguousMatchException raised because the base method is also in scope)
     public override string Index() => "Hi!";                                        // Secondary
 
+    // Route: ControllerOverridesActionWithRoute/Index/1
     public override string Index(int id) => "Hi!";                                  // Compliant
 }
