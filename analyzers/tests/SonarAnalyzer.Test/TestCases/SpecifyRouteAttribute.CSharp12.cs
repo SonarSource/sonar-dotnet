@@ -190,3 +190,23 @@ public class DerivedController : Controller { }
 
 [Controller]
 public class Endpoint { }
+
+public class ControllerWithInheritedRoute : ControllerWithRouteAttribute            // Noncompliant FP
+{
+    [HttpGet("Test")]
+    public string Index() => "Hi!";                                                 // Secondary
+}
+
+[Route("api/[controller]")]
+public class ControllerWithRouteAttribute : Controller { }
+
+public class ControllerOverridesActionWithRoute : BaseControllerWithActionWithRoute // FN
+{
+    public override string Index() => "Hi!";                                        // FN
+}
+
+public class BaseControllerWithActionWithRoute : Controller                         // Noncompliant
+{
+    [HttpGet("Test")]
+    public virtual string Index() => "Hi!";                                         // Secondary
+}
