@@ -211,7 +211,7 @@ public class BaseControllerWithActionWithRoute : Controller                     
 
 public class ControllerOverridesActionWithRoute : BaseControllerWithActionWithRoute // Noncompliant
 {
-    //Route: /Test (AmbiguousMatchException raised because the base method is also in scope)
+    // Route: /Test (AmbiguousMatchException raised because the base method is also in scope)
     public override string Index() => "Hi!";                                        // Secondary
 
     // Route: ControllerOverridesActionWithRoute/Index/1
