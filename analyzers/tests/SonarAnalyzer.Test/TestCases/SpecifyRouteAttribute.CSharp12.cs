@@ -200,9 +200,9 @@ public class ControllerWithInheritedRoute : ControllerWithRouteAttribute        
 [Route("api/[controller]")]
 public class ControllerWithRouteAttribute : Controller { }
 
-public class ControllerOverridesActionWithRoute : BaseControllerWithActionWithRoute // FN
+public class ControllerOverridesActionWithRoute : BaseControllerWithActionWithRoute // Noncompliant
 {
-    public override string Index() => "Hi!";                                        // FN
+    public override string Index() => "Hi!";                                        // Secondary
 }
 
 public class BaseControllerWithActionWithRoute : Controller                         // Noncompliant
