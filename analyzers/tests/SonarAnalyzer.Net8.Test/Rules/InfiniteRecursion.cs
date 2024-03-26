@@ -27,8 +27,7 @@ namespace SonarAnalyzer.Net8.Test.Rules;
 public class InfiniteRecursionTest
 {
     private readonly VerifierBuilder roslynCfg = new VerifierBuilder().AddAnalyzer(() => new InfiniteRecursion())
-        .AddReferences(MetadataReferenceFacade.NetStandard21)
-        .AddReferences(NuGetMetadataReference.DocumentFormatOpenXml("3.0.2"));
+        .AddReferences(MetadataReferenceFacade.NetStandard21);
 
     [TestMethod]
     public void InfiniteRecursion_RoslynCfg_8977() =>
