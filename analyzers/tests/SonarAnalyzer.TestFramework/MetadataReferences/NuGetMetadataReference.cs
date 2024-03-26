@@ -46,6 +46,7 @@ public static class NuGetMetadataReference
     public static References CastleCore(string packageVersion = "5.1.1") => Create("Castle.Core", packageVersion);
     public static References Dapper(string packageVersion = "1.50.5") => Create("Dapper", packageVersion);
     public static References CommonLoggingCore(string packageVersion = Constants.NuGetLatestVersion) => Create("Common.Logging.Core", packageVersion);
+    public static References DocumentFormatOpenXml(string packageVersion = Constants.NuGetLatestVersion) => Create("DocumentFormat.OpenXml", packageVersion);
     public static References EntityFramework(string packageVersion = "6.2.0") => Create("EntityFramework", packageVersion);
     public static References FluentAssertions(string packageVersion) => Create("FluentAssertions", packageVersion);
     public static References FakeItEasy(string packageVersion) => Create("FakeItEasy", packageVersion);
