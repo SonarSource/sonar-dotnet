@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Extensions
 {
-    public static partial class ExpressionSyntaxExtensions
+    public static class ExpressionSyntaxExtensions
     {
         private static readonly ISet<SyntaxKind> EqualsOrNotEquals = new HashSet<SyntaxKind>
         {
