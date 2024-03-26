@@ -31,21 +31,42 @@ namespace SonarAnalyzer.CFG.Roslyn
         protected CfgAllPathValidator(ControlFlowGraph cfg) =>
             this.cfg = cfg;
 
-        public bool CheckAllPaths() =>
-            IsBlockOrAllSuccessorsValid(cfg.EntryBlock);
-
-        private bool IsBlockOrAllSuccessorsValid(BasicBlock block)
+        public bool CheckAllPaths()
         {
-            var isValid = !IsInvalid(block) && (IsValid(block) || AreAllSuccessorsValid(block));
-            visitedStatus[block] = isValid;
-            return isValid;
+            var stack = new Stack<BasicBlock>();
+            stack.Push(cfg.EntryBlock);
+            return IsBlockOrAllSuccessorsValid(stack);
         }
 
-        private bool AreAllSuccessorsValid(BasicBlock block)
+        private bool IsBlockOrAllSuccessorsValid(Stack<BasicBlock> blocks)
         {
-            visitedStatus[block] = true; // protects from loops, don't fail the computation if hits itself
-            return block.SuccessorBlocks.Any()
-                   && block.SuccessorBlocks.All(x => x != cfg.ExitBlock && (visitedStatus.ContainsKey(x) ? visitedStatus[x] : IsBlockOrAllSuccessorsValid(x)));
+            while (blocks.Count > 0)
+            {
+                var block = blocks.Pop();
+                var visitedBlockStatus = visitedStatus.ContainsKey(block) ? visitedStatus[block] : (bool?)null;
+                if (IsInvalid(block) || block == cfg.ExitBlock || visitedBlockStatus == false)
+                {
+                    visitedStatus[block] = false;
+                    return false;
+                }
+                visitedStatus[block] = true;
+                if (visitedBlockStatus == true || IsValid(block))
+                {
+                    return true;
+                }
+                foreach (var successorBlock in block.SuccessorBlocks)
+                {
+                    blocks.Push(successorBlock);
+                }
+            }
+            return true;
+
+            //bool AreAllSuccessorsValid(BasicBlock block)
+            //{
+            //    visitedStatus[block] = true; // protects from loops, don't fail the computation if hits itself
+            //    return block.SuccessorBlocks.Any()
+            //           && block.SuccessorBlocks.All(x => x != cfg.ExitBlock && (visitedStatus.ContainsKey(x) ? visitedStatus[x] : IsBlockOrAllSuccessorsValid(x)));
+            //}
         }
     }
 }
