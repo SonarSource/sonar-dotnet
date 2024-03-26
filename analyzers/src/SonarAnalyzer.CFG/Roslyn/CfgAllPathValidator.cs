@@ -59,7 +59,7 @@ namespace SonarAnalyzer.CFG.Roslyn
                     blocks.Push(successorBlock);
                 }
             }
-            return true;
+            return false;
 
             //bool AreAllSuccessorsValid(BasicBlock block)
             //{
