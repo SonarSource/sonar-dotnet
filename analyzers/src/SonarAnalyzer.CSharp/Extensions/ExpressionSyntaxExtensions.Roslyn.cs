@@ -1,29 +1,13 @@
-﻿/*
- * SonarAnalyzer for .NET
- * Copyright (C) 2015-2023 SonarSource SA
- * mailto: contact AT sonarsource DOT com
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 3 of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this program; if not, write to the Free Software Foundation,
- * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- */
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
 
 using System.CodeDom.Compiler;
 
-namespace SonarAnalyzer.Extensions;
+namespace Microsoft.CodeAnalysis.CSharp.Extensions;
 
 [GeneratedCode("Copied From Roslyn", "575bc42589145ba18b4f1cc2267d02695f861d8f")]
-public partial class ExpressionSyntaxExtensions
+public static class ExpressionSyntaxExtensions
 {
     // Copied from
     // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L319
