@@ -19,7 +19,6 @@ public class MarkupCompatibilityAttributes
 {
     public string Ignorable { get; set; }
 }
-
 public class Row
 {
     public UInt32Value RowIndex { get; set; }
@@ -41,13 +40,12 @@ public class CellValue
 {
     public string Text { get; set; }
 }
+
 class Program
 {
 
-    public static void Main()
-    {
+    public static void Main() { }
 
-    }
     void GenerateWorksheetPart1Content(WorksheetPart worksheetPart1)
     {
         Worksheet worksheet1 = new Worksheet() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "x14ac xr xr2 xr3" } };
