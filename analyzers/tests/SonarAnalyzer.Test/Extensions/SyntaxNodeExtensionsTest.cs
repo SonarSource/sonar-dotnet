@@ -30,6 +30,7 @@ using StyleCop.Analyzers.Lightup;
 using static csharp::SonarAnalyzer.Extensions.SyntaxTokenExtensions;
 using ExtensionsCS = csharp::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
 using ExtensionsVB = vbnet::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
+using MicrosoftExtensionsCS = csharp::Microsoft.CodeAnalysis.CSharp.Extensions.SyntaxNodeExtensions;
 using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using SyntaxVB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
@@ -691,7 +692,7 @@ End Class";
                 }
                 """;
             var node = NodeBetweenMarkers(code, LanguageNames.CSharp);
-            var parentConditional = ExtensionsCS.GetParentConditionalAccessExpression(node);
+            var parentConditional = MicrosoftExtensionsCS.GetParentConditionalAccessExpression(node);
             parentConditional.ToString().Should().Be(parent);
             parentConditional.Expression.ToString().Should().Be(parentExpression);
         }
@@ -759,7 +760,7 @@ public class X
 }}
 ";
             var node = NodeBetweenMarkers(code, LanguageNames.CSharp);
-            var parentConditional = ExtensionsCS.GetRootConditionalAccessExpression(node);
+            var parentConditional = MicrosoftExtensionsCS.GetRootConditionalAccessExpression(node);
             parentConditional.ToString().Should().Be(expression.Replace("$$", string.Empty));
         }
 
