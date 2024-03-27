@@ -81,23 +81,6 @@ namespace SonarAnalyzer.Test.Rules
         public void MemberInitializerRedundant_CSharp12() =>
             builder.AddPaths("MemberInitializerRedundant.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
 
-        [TestMethod]
-        public void MyTestMethod()
-        {
-            builder.AddSnippet("""
-                using System;
-                class Person4
-                {
-                    int age = 42;
-                    public Person4()
-                    {
-                        Console.WriteLine(this?.age);
-                        this.age = 40;
-                    }
-                }
-                """).Verify();
-        }
-
 #endif
 
     }

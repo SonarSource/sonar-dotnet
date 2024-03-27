@@ -32,7 +32,7 @@ public class InfiniteRecursionTest
     [TestMethod]
     // see https://github.com/SonarSource/sonar-dotnet/issues/8977
     public void InfiniteRecursion_RoslynCfg_8977() =>
-    roslynCfg.AddPaths("InfiniteRecursion_8977.cs")
-        .WithOptions(ParseOptionsHelper.FromCSharp8)
-        .Verify();
+        roslynCfg.AddPaths("InfiniteRecursion_8977.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
 }
