@@ -42,7 +42,7 @@ namespace SonarAnalyzer.CFG.Roslyn
                 {
                     return false;
                 }
-                visitedStatus.Add(block);
+                visitedStatus.Add(block); // protects from loops, don't fail the computation if hits itself
                 if (IsValid(block))
                 {
                     continue;
