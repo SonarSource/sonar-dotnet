@@ -30,7 +30,7 @@ namespace SomeNamespace
     }
 }
 
-namespace Issue_123
+namespace Issue_8988
 {
     public partial class PartialMethod
     {
