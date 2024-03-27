@@ -94,16 +94,13 @@ public class Sample
 
         [TestMethod]
         public void MethodParameterUnused_CSharp11_CS() =>
-            roslynCS
-            .AddPaths("MethodParameterUnused.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
-            .Verify();
+            roslynCS.AddPaths("MethodParameterUnused.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
 
         [TestMethod]
         public void MethodParameterUnused_GeneratedCode_CS() =>
-            roslynCS
-            .AddSnippet("""
-                using System;
+            roslynCS.AddSnippet("""
                 using System.CodeDom.Compiler;
 
                 [GeneratedCode("TestTool", "Version")]
