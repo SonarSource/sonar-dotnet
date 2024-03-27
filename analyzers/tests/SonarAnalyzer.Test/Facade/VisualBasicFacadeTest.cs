@@ -97,8 +97,8 @@ public class VisualBasicFacadeTest
         var root = tree.GetRoot();
         var argumentList = root.DescendantNodes().OfType<ArgumentListSyntax>().First();
         var method = model.GetDeclaredSymbol(root.DescendantNodes().OfType<MethodStatementSyntax>().First());
-        var actual = () => sut.MethodParameterLookup(argumentList, method);
-        actual.Should().Throw<InvalidOperationException>();
+        var actual = sut.MethodParameterLookup(argumentList, method);
+        actual.Should().NotBeNull().And.BeOfType<VisualBasicMethodParameterLookup>();
     }
 
     [TestMethod]
