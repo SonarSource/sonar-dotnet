@@ -43,7 +43,6 @@ public class CellValue
 
 class Program
 {
-
     public static void Main() { }
 
     void GenerateWorksheetPart1Content(WorksheetPart worksheetPart1)
