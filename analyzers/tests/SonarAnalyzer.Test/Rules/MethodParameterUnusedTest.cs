@@ -114,7 +114,6 @@ public class Sample
                 """)
             .AddSnippet("""
                 using System;
-                using System.CodeDom.Compiler;
 
                 public partial class Generated
                 {
