@@ -346,6 +346,19 @@ namespace Tests.TestCases
         public System.Action<int> MyReference = MethodAssignedToActionFromPartialClass.MyMethod5;
     }
 
+    public partial class PartialMethod
+    {
+        partial void FalsePositive(string one, string two);
+    }
+
+    public partial class PartialMethod
+    {
+        partial void FalsePositive(string one, string two) // Noncompliant FP
+        {
+            Console.Write(two);
+        }
+    }
+
     public class Dead
     {
         private int Method1(int p) => (new Func<int>(() => { p = 10; return p; }))(); // Not reporting on this

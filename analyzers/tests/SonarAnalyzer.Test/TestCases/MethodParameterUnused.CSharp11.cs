@@ -30,3 +30,19 @@ namespace SomeNamespace
     }
 }
 
+namespace Issue_123
+{
+    public partial class PartialMethod
+    {
+        private partial string ExtendedPartialMethod(string one, string two);
+    }
+
+    public partial class PartialMethod
+    {
+        private partial string ExtendedPartialMethod(string one, string two) // Noncompliant FP
+        {
+            return two;
+        }
+    }
+}
+
