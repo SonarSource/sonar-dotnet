@@ -51,7 +51,7 @@ public class InfiniteRecursionTest
             public class Worksheet
             {
                 public MarkupCompatibilityAttributes MCAttributes { get; set; }
-                public void AddNamespaceDeclaration(string alias, string namespace) { }
+                public void AddNamespaceDeclaration(string alias, string xmlNamespace) { }
                 public void Append(SheetData sheetData1) { }
             }
             public class SheetData
