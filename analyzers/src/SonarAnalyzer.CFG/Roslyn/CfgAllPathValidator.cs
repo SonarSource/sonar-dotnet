@@ -42,7 +42,7 @@ namespace SonarAnalyzer.CFG.Roslyn
                 {
                     continue; // We already visited this block. (This protects from endless loops)
                 }
-                if (IsInvalid(block))
+                if (IsInvalid(block) || block == cfg.ExitBlock)
                 {
                     return false;
                 }
@@ -56,10 +56,6 @@ namespace SonarAnalyzer.CFG.Roslyn
                 }
                 foreach (var successorBlock in block.SuccessorBlocks)
                 {
-                    if (successorBlock == cfg.ExitBlock)
-                    {
-                        return false;
-                    }
                     blocks.Push(successorBlock);
                 }
             }
