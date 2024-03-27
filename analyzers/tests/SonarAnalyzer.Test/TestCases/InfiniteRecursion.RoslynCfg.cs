@@ -47,7 +47,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        void Test3() // Noncompliant
+        void Test3()
         {
             var i = 10;
             switch (i)
@@ -223,7 +223,7 @@ namespace Tests.Diagnostics
             return FixIt(a);
         }
 
-        int CSharp8_SwitchExpressions_OK(int a) //Noncompliant
+        int CSharp8_SwitchExpressions_OK(int a)
         {
             return a switch
             {
@@ -448,7 +448,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        int ThrowsInIf(int a) // Noncompliant
+        int ThrowsInIf(int a)
         {
             if (a > 1)
             {

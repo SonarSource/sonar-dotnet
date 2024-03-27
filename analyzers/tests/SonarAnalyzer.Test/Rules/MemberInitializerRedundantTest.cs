@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Test.Rules
@@ -79,6 +80,23 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void MemberInitializerRedundant_CSharp12() =>
             builder.AddPaths("MemberInitializerRedundant.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+
+        [TestMethod]
+        public void MyTestMethod()
+        {
+            builder.AddSnippet("""
+                using System;
+                class Person4
+                {
+                    int age = 42;
+                    public Person4()
+                    {
+                        Console.WriteLine(this?.age);
+                        this.age = 40;
+                    }
+                }
+                """).Verify();
+        }
 
 #endif
 

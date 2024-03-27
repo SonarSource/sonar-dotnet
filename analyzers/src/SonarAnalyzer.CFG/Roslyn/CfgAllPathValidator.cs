@@ -38,26 +38,41 @@ namespace SonarAnalyzer.CFG.Roslyn
             while (blocks.Count > 0)
             {
                 var block = blocks.Pop();
-                if (visitedStatus.TryGetValue(block, out var result))
-                {
-                    return result;
-                }
-                if (IsInvalid(block) || block == cfg.ExitBlock)
+                if (IsInvalid(block))
                 {
                     visitedStatus[block] = false;
                     return false;
                 }
-                visitedStatus[block] = true;
                 if (IsValid(block))
                 {
-                    return true;
+                    visitedStatus[block] = true;
+                    continue;
+                }
+                visitedStatus[block] = true;
+                if (block.SuccessorBlocks.IsEmpty)
+                {
+                    return false;
                 }
                 foreach (var successorBlock in block.SuccessorBlocks)
                 {
-                    blocks.Push(successorBlock);
+                    if (successorBlock == cfg.ExitBlock)
+                    {
+                        return false;
+                    }
+                    if (visitedStatus.TryGetValue(successorBlock, out var result))
+                    {
+                        if (!result)
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        blocks.Push(successorBlock);
+                    }
                 }
             }
-            return false;
+            return true;
         }
     }
 }
