@@ -38,11 +38,14 @@ namespace SonarAnalyzer.CFG.Roslyn
             while (blocks.Count > 0)
             {
                 var block = blocks.Pop();
+                if (!visited.Add(block))
+                {
+                    continue; // We already visited this block. (This protects from endless loops)
+                }
                 if (IsInvalid(block))
                 {
                     return false;
                 }
-                visited.Add(block); // protects from loops, don't fail the computation if hits itself
                 if (IsValid(block))
                 {
                     continue;
@@ -57,10 +60,7 @@ namespace SonarAnalyzer.CFG.Roslyn
                     {
                         return false;
                     }
-                    if (!visited.Contains(successorBlock))
-                    {
-                        blocks.Push(successorBlock);
-                    }
+                    blocks.Push(successorBlock);
                 }
             }
             return true;
