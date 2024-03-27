@@ -23,7 +23,7 @@ namespace SonarAnalyzer.CFG.Roslyn
     public abstract class CfgAllPathValidator
     {
         private readonly ControlFlowGraph cfg;
-        private readonly Dictionary<BasicBlock, bool> visitedStatus = new Dictionary<BasicBlock, bool>();
+        private readonly HashSet<BasicBlock> visitedStatus = [];
 
         protected abstract bool IsValid(BasicBlock block);
         protected abstract bool IsInvalid(BasicBlock block);
@@ -40,15 +40,13 @@ namespace SonarAnalyzer.CFG.Roslyn
                 var block = blocks.Pop();
                 if (IsInvalid(block))
                 {
-                    visitedStatus[block] = false;
                     return false;
                 }
+                visitedStatus.Add(block);
                 if (IsValid(block))
                 {
-                    visitedStatus[block] = true;
                     continue;
                 }
-                visitedStatus[block] = true;
                 if (block.SuccessorBlocks.IsEmpty)
                 {
                     return false;
@@ -59,14 +57,7 @@ namespace SonarAnalyzer.CFG.Roslyn
                     {
                         return false;
                     }
-                    if (visitedStatus.TryGetValue(successorBlock, out var result))
-                    {
-                        if (!result)
-                        {
-                            return false;
-                        }
-                    }
-                    else
+                    if (!visitedStatus.Contains(successorBlock))
                     {
                         blocks.Push(successorBlock);
                     }
