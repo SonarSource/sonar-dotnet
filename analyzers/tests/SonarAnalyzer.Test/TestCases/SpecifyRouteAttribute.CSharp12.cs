@@ -217,3 +217,13 @@ public class ControllerOverridesActionWithRoute : BaseControllerWithActionWithRo
     // Route: ControllerOverridesActionWithRoute/Index/1
     public override string Index(int id) => "Hi!";                                  // Compliant
 }
+
+// Repro: https://github.com/SonarSource/sonar-dotnet/issues/8985
+public sealed class ExtendedRouteAttribute() : RouteAttribute("[controller]/[action]");
+
+[ExtendedRoute]
+public class SomeController : ControllerBase // Noncompliant, FP the route attribute template is set in the base class of ExtendedRouteAttribute
+{
+    [HttpGet("foo")]
+    public string Foo() => "Hi";            // Secondary
+}
