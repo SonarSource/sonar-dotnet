@@ -23,7 +23,6 @@ namespace SonarAnalyzer.CFG.Roslyn
     public abstract class CfgAllPathValidator
     {
         private readonly ControlFlowGraph cfg;
-        private readonly Dictionary<BasicBlock, bool> visitedStatus = new Dictionary<BasicBlock, bool>();
 
         protected abstract bool IsValid(BasicBlock block);
         protected abstract bool IsInvalid(BasicBlock block);
@@ -31,21 +30,36 @@ namespace SonarAnalyzer.CFG.Roslyn
         protected CfgAllPathValidator(ControlFlowGraph cfg) =>
             this.cfg = cfg;
 
-        public bool CheckAllPaths() =>
-            IsBlockOrAllSuccessorsValid(cfg.EntryBlock);
-
-        private bool IsBlockOrAllSuccessorsValid(BasicBlock block)
+        public bool CheckAllPaths()
         {
-            var isValid = !IsInvalid(block) && (IsValid(block) || AreAllSuccessorsValid(block));
-            visitedStatus[block] = isValid;
-            return isValid;
-        }
-
-        private bool AreAllSuccessorsValid(BasicBlock block)
-        {
-            visitedStatus[block] = true; // protects from loops, don't fail the computation if hits itself
-            return block.SuccessorBlocks.Any()
-                   && block.SuccessorBlocks.All(x => x != cfg.ExitBlock && (visitedStatus.ContainsKey(x) ? visitedStatus[x] : IsBlockOrAllSuccessorsValid(x)));
+            HashSet<BasicBlock> visited = [];
+            var blocks = new Stack<BasicBlock>();
+            blocks.Push(cfg.EntryBlock);
+            while (blocks.Count > 0)
+            {
+                var block = blocks.Pop();
+                if (!visited.Add(block))
+                {
+                    continue; // We already visited this block. (This protects from endless loops)
+                }
+                if (block == cfg.ExitBlock || IsInvalid(block))
+                {
+                    return false;
+                }
+                if (IsValid(block))
+                {
+                    continue;
+                }
+                if (block.SuccessorBlocks.IsEmpty)
+                {
+                    return false;
+                }
+                foreach (var successorBlock in block.SuccessorBlocks)
+                {
+                    blocks.Push(successorBlock);
+                }
+            }
+            return true;
         }
     }
 }
