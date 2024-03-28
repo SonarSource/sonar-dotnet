@@ -242,4 +242,28 @@ namespace Tests.Diagnostics
             if (convertible is true) { }
         }
     }
+
+    class MaybeBooleans
+    {
+        public void  Dynamic(dynamic flag)
+        {
+            if (flag) // Fixed
+            { }
+        }
+        public void NullableBool(bool? flag)
+        {
+            if (flag == true) // Compliant
+            { }
+        }
+        public void NullableStruct(YesNo? yesNo)
+        {
+            if (yesNo) // Fixed
+            { }
+        }
+
+        public struct YesNo
+        {
+            public static implicit operator bool(YesNo yesNo) => true;
+        }
+    }
 }
