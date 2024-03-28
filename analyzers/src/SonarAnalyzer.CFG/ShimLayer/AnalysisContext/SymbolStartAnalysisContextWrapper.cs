@@ -76,6 +76,10 @@ public readonly struct SymbolStartAnalysisContextWrapper
         // receiverParameter => ((symbolStartAnalysisContextType)receiverParameter)."propertyName"
         Func<object, TProperty> CreatePropertyAccessor<TProperty>(string propertyName)
         {
+            if (symbolStartAnalysisContextType == null)
+            {
+                return static _ => default;
+            }
             var receiverParameter = Parameter(typeof(object));
             return Lambda<Func<object, TProperty>>(
                 Property(Convert(receiverParameter, symbolStartAnalysisContextType), propertyName),
@@ -86,6 +90,10 @@ public readonly struct SymbolStartAnalysisContextWrapper
         //     ((symbolStartAnalysisContextType)receiverParameter)."registrationMethodName"<typeArguments>(registerActionParameter)
         Action<object, Action<TContext>> CreateRegistrationMethod<TContext>(string registrationMethodName, params Type[] typeArguments)
         {
+            if (symbolStartAnalysisContextType == null)
+            {
+                return static (_, _) => { };
+            }
             var receiverParameter = Parameter(typeof(object));
             var registerActionParameter = Parameter(typeof(Action<TContext>));
             return Lambda<Action<object, Action<TContext>>>(
@@ -98,6 +106,10 @@ public readonly struct SymbolStartAnalysisContextWrapper
         //     ((symbolStartAnalysisContextType)receiverParameter)."registrationMethodName"<typeArguments>(registerActionParameter, additionalParameter)
         Action<object, Action<TContext>, TParameter> CreateRegistrationMethodWithAdditionalParameter<TContext, TParameter>(string registrationMethodName, params Type[] typeArguments)
         {
+            if (symbolStartAnalysisContextType == null)
+            {
+                return static (_, _, _) => { };
+            }
             var receiverParameter = Parameter(typeof(object));
             var registerActionParameter = Parameter(typeof(Action<TContext>));
             var additionalParameter = Parameter(typeof(TParameter));
