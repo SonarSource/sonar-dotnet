@@ -100,27 +100,28 @@ public class Sample
 
         [TestMethod]
         public void MethodParameterUnused_GeneratedCode_CS() =>
-            roslynCS.AddSnippet("""
-                using System.CodeDom.Compiler;
+            roslynCS
+                .AddSnippet("""
+                    using System.CodeDom.Compiler;
 
-                [GeneratedCode("TestTool", "Version")]
-                public partial class Generated
-                {
-                    private partial void M(int a, int unused);
-                }             
-                """)
-            .AddSnippet("""
-                using System;
-
-                public partial class Generated
-                {
-                    private partial void M(int a, int unused) // Noncompliant FP
+                    [GeneratedCode("TestTool", "Version")]
+                    public partial class Generated
                     {
-                        Console.WriteLine(a);
+                        private partial void M(int a, int unused);
+                    }             
+                    """)
+                .AddSnippet("""
+                    using System;
+
+                    public partial class Generated
+                    {
+                        private partial void M(int a, int unused) // Noncompliant FP
+                        {
+                            Console.WriteLine(a);
+                        }
                     }
-                }
-                """)
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
-            .Verify();
+                    """)
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
     }
 }
