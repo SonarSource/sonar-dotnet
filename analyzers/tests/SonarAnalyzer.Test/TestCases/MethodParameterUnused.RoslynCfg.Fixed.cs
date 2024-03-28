@@ -344,14 +344,15 @@ namespace Tests.TestCases
         public System.Action<int> MyReference = MethodAssignedToActionFromPartialClass.MyMethod5;
     }
 
-    public partial class PartialMethod
+    // https://github.com/SonarSource/sonar-dotnet/issues/8988
+    public partial class PartialMethod_Issue_8988
     {
-        partial void FalsePositive(string one, string two);
+        partial void Partial(string one, string two);
     }
 
-    public partial class PartialMethod
+    public partial class PartialMethod_Issue_8988
     {
-        partial void FalsePositive(string two) // Fixed
+        partial void Partial(string two) // Fixed
         {
             Console.Write(two);
         }
