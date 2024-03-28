@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 
 namespace Tests.Diagnostics
@@ -245,9 +246,12 @@ namespace Tests.Diagnostics
 
     class MaybeBooleans
     {
-        public void  Dynamic(dynamic flag)
+        // https://github.com/SonarSource/sonar-dotnet/issues/8995
+        public void  Dynamic(dynamic bag) // The behavior of a dynamic object can be anything with respect to all kinds of accesses. See ViewBag below for a non-throwing implementation of an DynamicObject
         {
-            if (flag) // Fixed
+            if (bag.Flag) // Fixed
+                                  // if (null == true) can be evaluated at runtime, but
+                                  // if (null) not
             { }
         }
         public void NullableBool(bool? flag)
@@ -255,6 +259,8 @@ namespace Tests.Diagnostics
             if (flag == true) // Compliant
             { }
         }
+
+        // https://github.com/SonarSource/sonar-dotnet/issues/8995
         public void NullableStruct(YesNo? yesNo)
         {
             if (yesNo) // Fixed
@@ -264,6 +270,19 @@ namespace Tests.Diagnostics
         public struct YesNo
         {
             public static implicit operator bool(YesNo yesNo) => true;
+        }
+
+        // Mimics the (non-throwing) behavior of
+        // https://github.com/dotnet/aspnetcore/blob/1c8f20be1fc4e97044d7ca93edae3af528bc3521/src/Mvc/Mvc.ViewFeatures/src/DynamicViewData.cs#L13
+        // See https://github.com/SonarSource/sonar-dotnet/issues/8995
+        class ViewBag : DynamicObject
+        {
+            public override bool TryGetMember(GetMemberBinder binder, out object result)
+            {
+                result = null;
+                return true;
+            }
+            public override bool TrySetMember(SetMemberBinder binder, object value) => true;
         }
     }
 }
