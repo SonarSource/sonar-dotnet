@@ -99,6 +99,7 @@ public class Sample
                 .Verify();
 
         [TestMethod]
+        // https://github.com/SonarSource/sonar-dotnet/issues/8988
         public void MethodParameterUnused_GeneratedCode_CS() =>
             roslynCS
                 .AddSnippet("""
