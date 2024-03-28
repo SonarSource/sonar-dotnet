@@ -94,9 +94,35 @@ public class Sample
 
         [TestMethod]
         public void MethodParameterUnused_CSharp11_CS() =>
-                 roslynCS
-                    .AddPaths("MethodParameterUnused.CSharp11.cs")
-                    .WithOptions(ParseOptionsHelper.FromCSharp11)
-                    .Verify();
+            roslynCS.AddPaths("MethodParameterUnused.CSharp11.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+        [TestMethod]
+        // https://github.com/SonarSource/sonar-dotnet/issues/8988
+        public void MethodParameterUnused_GeneratedCode_CS() =>
+            roslynCS
+                .AddSnippet("""
+                    using System.CodeDom.Compiler;
+
+                    [GeneratedCode("TestTool", "Version")]
+                    public partial class Generated
+                    {
+                        private partial void M(int a, int unused);
+                    }             
+                    """)
+                .AddSnippet("""
+                    using System;
+
+                    public partial class Generated
+                    {
+                        private partial void M(int a, int unused) // Noncompliant FP
+                        {
+                            Console.WriteLine(a);
+                        }
+                    }
+                    """)
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Verify();
     }
 }

@@ -344,6 +344,20 @@ namespace Tests.TestCases
         public System.Action<int> MyReference = MethodAssignedToActionFromPartialClass.MyMethod5;
     }
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/8988
+    public partial class PartialMethod_Issue_8988
+    {
+        partial void Partial(string one, string two);
+    }
+
+    public partial class PartialMethod_Issue_8988
+    {
+        partial void Partial(string two) // Fixed
+        {
+            Console.Write(two);
+        }
+    }
+
     public class Dead
     {
         private int Method1(int p) => (new Func<int>(() => { p = 10; return p; }))(); // Not reporting on this

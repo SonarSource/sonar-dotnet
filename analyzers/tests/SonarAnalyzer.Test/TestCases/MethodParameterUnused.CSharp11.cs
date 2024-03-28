@@ -30,3 +30,20 @@ namespace SomeNamespace
     }
 }
 
+// https://github.com/SonarSource/sonar-dotnet/issues/8988
+namespace Issue_8988
+{
+    public partial class PartialMethod
+    {
+        private partial string ExtendedPartialMethod(string one, string two);
+    }
+
+    public partial class PartialMethod
+    {
+        private partial string ExtendedPartialMethod(string one, string two) // Noncompliant FP
+        {
+            return two;
+        }
+    }
+}
+
