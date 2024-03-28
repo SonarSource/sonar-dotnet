@@ -45,7 +45,6 @@ namespace SonarAnalyzer.Test.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
 
-
 #if NET
 
         [TestMethod]
