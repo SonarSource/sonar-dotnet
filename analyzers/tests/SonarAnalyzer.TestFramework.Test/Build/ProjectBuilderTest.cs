@@ -23,6 +23,8 @@ namespace SonarAnalyzer.Test.TestFramework.Tests.Build;
 [TestClass]
 public class ProjectBuilderTest
 {
+    private const string RazorSnippet = "@{ var count = 1; } <p>@count</p>";
+
     private static readonly ProjectBuilder EmptyCS = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp);
     private static readonly ProjectBuilder EmptyVB = SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic);
 
@@ -59,36 +61,82 @@ public class ProjectBuilderTest
     }
 
     [TestMethod]
-    public void AddDocument_InvalidExtension()
+    public void AddDocument_SupportsRazorSnippets_CS()
     {
-        EmptyCS.Invoking(x => x.AddDocument(@"TestCases\ProjectBuilder.AddDocument.unknown")).Should().Throw<ArgumentException>();
-        EmptyVB.Invoking(x => x.AddDocument(@"TestCases\ProjectBuilder.AddDocument.unknown")).Should().Throw<ArgumentException>();
+        var result = EmptyCS.AddDocument(@"TestCases\ProjectBuilder.AddDocument.razor");
+
+        result.FindAdditionalDocument("ProjectBuilder.AddDocument.razor").Should().NotBeNull();
+        result.FindDocument("ProjectBuilder.AddDocument.razor").Should().BeNull();
+    }
+
+    [TestMethod]
+    public void AddDocument_SupportsRazorSnippets_VB()
+    {
+        var result = EmptyVB.AddDocument(@"TestCases\ProjectBuilder.AddDocument.razor");
+
+        result.FindAdditionalDocument("ProjectBuilder.AddDocument.razor").Should().NotBeNull();
+        result.FindDocument("ProjectBuilder.AddDocument.razor").Should().BeNull();
     }
 
     [TestMethod]
     public void AddDocument_SupportsRazorFiles()
     {
-        EmptyCS.AddDocument(@"TestCases\ProjectBuilder.AddDocument.razor").FindDocument("ProjectBuilder.AddDocument.razor").Should().NotBeNull();
-        EmptyVB.AddDocument(@"TestCases\ProjectBuilder.AddDocument.razor").FindDocument("ProjectBuilder.AddDocument.razor").Should().NotBeNull();
+        EmptyCS.AddDocument(@"TestCases\ProjectBuilder.AddDocument.razor").FindAdditionalDocument("ProjectBuilder.AddDocument.razor").Should().NotBeNull();
+        EmptyVB.AddDocument(@"TestCases\ProjectBuilder.AddDocument.razor").FindAdditionalDocument("ProjectBuilder.AddDocument.razor").Should().NotBeNull();
     }
 
     [TestMethod]
     public void AddDocument_CsharpSupportsCshtmlFiles() =>
-        EmptyCS.AddDocument(@"TestCases\ProjectBuilder.AddDocument.cshtml").FindDocument("ProjectBuilder.AddDocument.cshtml").Should().NotBeNull();
+        EmptyCS.AddDocument(@"TestCases\ProjectBuilder.AddDocument.cshtml").FindAdditionalDocument("ProjectBuilder.AddDocument.cshtml").Should().NotBeNull();
 
     [TestMethod]
     public void AddDocument_VbnetDoesntSupportCshtmlFiles() =>
-        EmptyVB.Invoking(x => x.AddDocument(@"TestCases\ProjectBuilder.AddDocument.cshtml").FindDocument("ProjectBuilder.AddDocument.cshtml")).Should().Throw<ArgumentException>();
+        EmptyVB.Invoking(x => x.AddDocument(@"TestCases\ProjectBuilder.AddDocument.cshtml")).Should().Throw<ArgumentException>();
 
     [TestMethod]
     public void AddDocument_CsharpDoesntSupportVbnetFiles() =>
-        EmptyCS.Invoking(x => x.AddDocument(@"TestCases\ProjectBuilder.AddDocument.vbhtml").FindDocument("ProjectBuilder.AddDocument.vbhtml").Should().NotBeNull()).Should().Throw<ArgumentException>();
+        EmptyCS.Invoking(x => x.AddDocument(@"TestCases\ProjectBuilder.AddDocument.vbhtml")).Should().Throw<ArgumentException>();
 
     [TestMethod]
     public void AddDocument_VbnetDoesntSupportVbnetFiles() =>
-        EmptyVB.Invoking(x => x.AddDocument(@"TestCases\ProjectBuilder.AddDocument.vbhtml").FindDocument("ProjectBuilder.AddDocument.vbhtml").Should().NotBeNull()).Should().Throw<ArgumentException>();
+        EmptyVB.Invoking(x => x.AddDocument(@"TestCases\ProjectBuilder.AddDocument.vbhtml")).Should().Throw<ArgumentException>();
 
     [TestMethod]
     public void AddSnippet_Null_Throws() =>
         EmptyCS.Invoking(x => x.AddSnippet(null)).Should().Throw<ArgumentNullException>().Which.ParamName.Should().Be("code");
+
+    [TestMethod]
+    public void AddSnippet_SupportsRazorSnippets_CS()
+    {
+        var result = EmptyCS.AddSnippet(RazorSnippet, "ProjectBuilder.AddSnippet.razor");
+
+        result.FindAdditionalDocument("ProjectBuilder.AddSnippet.razor").Should().NotBeNull();
+        result.FindDocument("ProjectBuilder.AddSnippet.razor").Should().BeNull();
+    }
+
+    [TestMethod]
+    public void AddSnippet_SupportsRazorSnippets_VB()
+    {
+        var result = EmptyVB.AddSnippet(RazorSnippet, "ProjectBuilder.AddSnippet.razor");
+
+        result.FindAdditionalDocument("ProjectBuilder.AddSnippet.razor").Should().NotBeNull();
+        result.FindDocument("ProjectBuilder.AddSnippet.razor").Should().BeNull();
+    }
+
+    [TestMethod]
+    public void AddSnippet_CsharpSupportsCshtmlFiles() =>
+        EmptyCS.AddSnippet(RazorSnippet, "ProjectBuilder.AddDocument.cshtml").FindAdditionalDocument("ProjectBuilder.AddDocument.cshtml").Should().NotBeNull();
+
+    [TestMethod]
+    public void AddSnippet_VbnetDoesntSupportCshtmlFiles() =>
+        EmptyVB.Invoking(x => x.AddSnippet(RazorSnippet, "ProjectBuilder.AddDocument.cshtml")).Should().Throw<ArgumentException>();
+
+    [TestMethod]
+    public void AddSnippet_CsharpDoesntSupportVbnetFiles() =>
+        EmptyCS.Invoking(x => x.AddSnippet(RazorSnippet, "ProjectBuilder.AddDocument.vbhtml")).Should().Throw<ArgumentException>();
+
+    [TestMethod]
+    public void AddSnippet_VbnetDoesntSupportVbnetFiles() =>
+        EmptyVB.Invoking(x => x.AddSnippet(RazorSnippet, "ProjectBuilder.AddDocument.vbhtml")).Should().Throw<ArgumentException>();
+
 }

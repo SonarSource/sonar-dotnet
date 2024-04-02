@@ -47,7 +47,10 @@ public readonly struct ProjectBuilder
     }
 
     public Document FindDocument(string name) =>
-        project.Documents.Single(d => d.Name == name);
+        project.Documents.SingleOrDefault(d => d.Name == name);
+
+    public TextDocument FindAdditionalDocument(string name) =>
+        project.AdditionalDocuments.SingleOrDefault(d => d.Name == name);
 
     public ProjectBuilder AddReferences(IEnumerable<MetadataReference> references)
     {
@@ -78,10 +81,20 @@ public readonly struct ProjectBuilder
         var relativePathFromTestCases = testCasesIndex < 0
             ? throw new ArgumentException($"{nameof(path)} must contain '{TestCases}'", nameof(path))
             : fileInfo.FullName.Substring(testCasesIndex + TestCases.Length);
-        return IsExtensionOfSupportedType(fileInfo)
-            ? AddDocument(project, relativePathFromTestCases, File.ReadAllText(fileInfo.FullName, Encoding.UTF8))
-            : throw new ArgumentException($"The file extension '{fileInfo.Extension}' does not match the project language '{project.Language}' nor Razor.", nameof(path));
+
+        if (!IsExtensionOfSupportedType(fileInfo.Extension))
+        {
+            throw new ArgumentException($"The file extension '{fileInfo.Extension}' does not match the project language '{project.Language}' nor Razor.", nameof(path));
+        }
+
+        return IsRazorDocument(fileInfo.Extension)
+            ? AddAdditionalDocument(project, relativePathFromTestCases, File.ReadAllText(fileInfo.FullName, Encoding.UTF8))
+            : AddDocument(project, relativePathFromTestCases, File.ReadAllText(fileInfo.FullName, Encoding.UTF8));
     }
+
+    private bool IsRazorDocument(string extension) =>
+        extension.Equals(".razor", StringComparison.OrdinalIgnoreCase)
+        || (extension.Equals(".cshtml", StringComparison.OrdinalIgnoreCase) && project.Language == LanguageNames.CSharp);
 
     public ProjectBuilder AddSnippets(params string[] snippets) =>
         snippets.Aggregate(this, (current, snippet) => current.AddSnippet(snippet));
@@ -93,19 +106,28 @@ public readonly struct ProjectBuilder
     {
         _ = code ?? throw new ArgumentNullException(nameof(code));
         fileName ??= $"snippet{project.Documents.Count()}{fileExtension}";
-        return AddDocument(project, fileName, code);
+        var extension = Path.GetExtension(fileName);
+
+        if (!IsExtensionOfSupportedType(extension))
+        {
+            throw new ArgumentException($"The file extension '{extension}' does not match the project language '{project.Language}' nor Razor.", nameof(fileName));
+        }
+
+        return IsRazorDocument(extension) ? AddAdditionalDocument(project, fileName, code) : AddDocument(project, fileName, code);
     }
 
     public static ProjectBuilder FromProject(Project project) =>
         new(project);
 
-    private bool IsExtensionOfSupportedType(FileInfo fileInfo) =>
-        fileInfo.Extension.Equals(fileExtension, StringComparison.OrdinalIgnoreCase)
-        || fileInfo.Extension.Equals(".razor", StringComparison.OrdinalIgnoreCase)
-        || (fileInfo.Extension.Equals(".cshtml", StringComparison.OrdinalIgnoreCase) && project.Language == LanguageNames.CSharp);
+    private bool IsExtensionOfSupportedType(string extension) =>
+        extension.Equals(fileExtension, StringComparison.OrdinalIgnoreCase)
+        || IsRazorDocument(extension);
 
     private static ProjectBuilder AddDocument(Project project, string fileName, string fileContent) =>
         FromProject(project.AddDocument(fileName, fileContent).Project);
+
+    private static ProjectBuilder AddAdditionalDocument(Project project, string fileName, string fileContent) =>
+        FromProject(project.AddAdditionalDocument(fileName, fileContent).Project);
 }
 
 public record Snippet(string Content, string FileName);
