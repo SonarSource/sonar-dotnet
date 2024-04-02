@@ -61,4 +61,41 @@ public class TestHelperTest
         TestHelper.TestPath(TestContext, "This is also pretty long file name that will make sure we exceed the maximum reasonable file length 1.txt").Should().Contain("TooLongTestName.0");
         TestHelper.TestPath(TestContext, "This is also pretty long file name that will make sure we exceed the maximum reasonable file length 2.txt").Should().Contain("TooLongTestName.1");
     }
+
+    [DataTestMethod]
+    [DataRow(@"C:\", @"C:\", @"\")]
+    [DataRow(@"C:\a", @"C:\a\", @"\")]
+    [DataRow(@"C:\A", @"C:\a\", @"\")]
+    [DataRow(@"C:\a\", @"C:\a", @"")]
+    [DataRow(@"C:\", @"C:\b", @"b")]
+    [DataRow(@"C:\a", @"C:\b", @"..\b")]
+    [DataRow(@"C:\a", @"C:\b\", @"..\b\")]
+    [DataRow(@"C:\a\b", @"C:\a", @"..")]
+    [DataRow(@"C:\a\b", @"C:\a\", @"..")]
+    [DataRow(@"C:\a\b\", @"C:\a", @"..")]
+    [DataRow(@"C:\a\b\", @"C:\a\", @"..")]
+    [DataRow(@"C:\a\b\c", @"C:\a\b", @"..")]
+    [DataRow(@"C:\a\b\c", @"C:\a\b\", @"..")]
+    [DataRow(@"C:\a\b\c", @"C:\a", @"..\..")]
+    [DataRow(@"C:\a\b\c", @"C:\a\", @"..\..")]
+    [DataRow(@"C:\a\b\c\", @"C:\a\b", @"..")]
+    [DataRow(@"C:\a\b\c\", @"C:\a\b\", @"..")]
+    [DataRow(@"C:\a\b\c\", @"C:\a", @"..\..")]
+    [DataRow(@"C:\a\b\c\", @"C:\a\", @"..\..")]
+    [DataRow(@"C:\a\", @"C:\b", @"..\b")]
+    [DataRow(@"C:\a", @"C:\a\b", @"b")]
+    [DataRow(@"C:\a", @"C:\A\b", @"b")]
+    [DataRow(@"C:\a", @"C:\b\c", @"..\b\c")]
+    [DataRow(@"C:\a\", @"C:\a\b", @"b")]
+    [DataRow(@"C:\", @"D:\", @"D:\")]
+    [DataRow(@"C:\", @"D:\b", @"D:\b")]
+    [DataRow(@"C:\", @"D:\b\", @"D:\b\")]
+    [DataRow(@"C:\a", @"D:\b", @"D:\b")]
+    [DataRow(@"C:\a\", @"D:\b", @"D:\b")]
+    [DataRow(@"C:\ab", @"C:\a", @"..\a")]
+    [DataRow(@"C:\a", @"C:\ab", @"..\ab")]
+    [DataRow(@"C:\", @"\\LOCALHOST\Share\b", @"\\LOCALHOST\Share\b")]
+    [DataRow(@"\\LOCALHOST\Share\a", @"\\LOCALHOST\Share\b", @"..\b")]
+    public void GetRelativePath_ValidPaths_ReturnsRelativePath(string relativeTo, string path, string expected) =>
+        TestHelper.GetRelativePath(relativeTo, path).Should().Be(expected);
 }
