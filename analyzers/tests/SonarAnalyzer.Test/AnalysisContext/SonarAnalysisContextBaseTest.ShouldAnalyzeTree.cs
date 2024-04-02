@@ -341,66 +341,66 @@ public partial class SonarAnalysisContextBaseTest
     }
 
     [DataTestMethod]
-    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, false)]
-    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, true)]
-    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, true)]
-    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Test, true)]
+    [DataRow("Foo.cs", new string[] { "Foo.cs" }, ProjectType.Product, false)]
+    [DataRow("Foo.cs", new string[] { "NotFoo.cs" }, ProjectType.Product, true)]
+    [DataRow("Foo.cs", new string[] { "Foo.cs" }, ProjectType.Test, true)]
+    [DataRow("Foo.cs", new string[] { "NotFoo.cs" }, ProjectType.Test, true)]
     public void ShouldAnalyzeTree_Exclusions_ReturnExpected(string filePath, string[] exclusions, ProjectType projectType, bool expectedResult) =>
         ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, exclusions: exclusions);
 
     [DataTestMethod]
-    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, false)]
-    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, true)]
-    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, true)]
-    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Test, true)]
+    [DataRow("Foo.cs", new string[] { "Foo.cs" }, ProjectType.Product, false)]
+    [DataRow("Foo.cs", new string[] { "NotFoo.cs" }, ProjectType.Product, true)]
+    [DataRow("Foo.cs", new string[] { "Foo.cs" }, ProjectType.Test, true)]
+    [DataRow("Foo.cs", new string[] { "NotFoo.cs" }, ProjectType.Test, true)]
     public void ShouldAnalyzeTree_GlobalExclusions_ReturnExpected(string filePath, string[] globalExclusions, ProjectType projectType, bool expectedResult) =>
         ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, globalExclusions: globalExclusions);
 
     [DataTestMethod]
-    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, true)]
-    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, true)]
-    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, false)]
-    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Test, true)]
+    [DataRow("Foo.cs", new string[] { "Foo.cs" }, ProjectType.Product, true)]
+    [DataRow("Foo.cs", new string[] { "NotFoo.cs" }, ProjectType.Product, true)]
+    [DataRow("Foo.cs", new string[] { "Foo.cs" }, ProjectType.Test, false)]
+    [DataRow("Foo.cs", new string[] { "NotFoo.cs" }, ProjectType.Test, true)]
     public void ShouldAnalyzeTree_TestExclusions_ReturnExpected(string filePath, string[] testExclusions, ProjectType projectType, bool expectedResult) =>
         ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, testExclusions: testExclusions);
 
     [DataTestMethod]
-    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, true)]
-    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, true)]
-    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, false)]
-    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Test, true)]
+    [DataRow("Foo.cs", new string[] { "Foo.cs" }, ProjectType.Product, true)]
+    [DataRow("Foo.cs", new string[] { "NotFoo.cs" }, ProjectType.Product, true)]
+    [DataRow("Foo.cs", new string[] { "Foo.cs" }, ProjectType.Test, false)]
+    [DataRow("Foo.cs", new string[] { "NotFoo.cs" }, ProjectType.Test, true)]
     public void ShouldAnalyzeTree_GlobalTestExclusions_ReturnExpected(string filePath, string[] globalTestExclusions, ProjectType projectType, bool expectedResult) =>
         ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, globalTestExclusions: globalTestExclusions);
 
     [DataTestMethod]
-    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, true)]
-    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, false)]
-    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, true)]
-    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Test, true)]
+    [DataRow("Foo.cs", new string[] { "Foo.cs" }, ProjectType.Product, true)]
+    [DataRow("Foo.cs", new string[] { "NotFoo.cs" }, ProjectType.Product, false)]
+    [DataRow("Foo.cs", new string[] { "Foo.cs" }, ProjectType.Test, true)]
+    [DataRow("Foo.cs", new string[] { "NotFoo.cs" }, ProjectType.Test, true)]
     public void ShouldAnalyzeTree_Inclusions_ReturnExpected(string filePath, string[] inclusions, ProjectType projectType, bool expectedResult) =>
         ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, inclusions: inclusions);
 
     [DataTestMethod]
-    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, true)]
-    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, true)]
-    [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, true)]
-    [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Test, false)]
+    [DataRow("Foo.cs", new string[] { "Foo.cs" }, ProjectType.Product, true)]
+    [DataRow("Foo.cs", new string[] { "NotFoo.cs" }, ProjectType.Product, true)]
+    [DataRow("Foo.cs", new string[] { "Foo.cs" }, ProjectType.Test, true)]
+    [DataRow("Foo.cs", new string[] { "NotFoo.cs" }, ProjectType.Test, false)]
     public void ShouldAnalyzeTree_TestInclusions_ReturnExpected(string filePath, string[] testInclusions, ProjectType projectType, bool expectedResult) =>
         ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, testInclusions: testInclusions);
 
     [DataTestMethod]
-    [DataRow("Foo", new string[] { "Foo" }, new string[] { "Foo" }, false)]
-    [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "Foo" }, false)]
-    [DataRow("Foo", new string[] { "Foo" }, new string[] { "NotFoo" }, true)]
-    [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "NotFoo" }, false)]
+    [DataRow("Foo.cs", new string[] { "Foo.cs" }, new string[] { "Foo.cs" }, false)]
+    [DataRow("Foo.cs", new string[] { "NotFoo.cs" }, new string[] { "Foo.cs" }, false)]
+    [DataRow("Foo.cs", new string[] { "Foo.cs" }, new string[] { "NotFoo.cs" }, true)]
+    [DataRow("Foo.cs", new string[] { "NotFoo.cs" }, new string[] { "NotFoo.cs" }, false)]
     public void ShouldAnalyzeTree_MixedInput_ProductProject_ReturnExpected(string filePath, string[] inclusions, string[] exclusions, bool expectedResult) =>
         ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, ProjectType.Product, expectedResult, inclusions: inclusions, exclusions: exclusions);
 
     [DataTestMethod]
-    [DataRow("Foo", new string[] { "Foo" }, new string[] { "Foo" }, false)]
-    [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "Foo" }, false)]
-    [DataRow("Foo", new string[] { "Foo" }, new string[] { "NotFoo" }, true)]
-    [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "NotFoo" }, false)]
+    [DataRow("Foo.cs", new string[] { "Foo.cs" }, new string[] { "Foo.cs" }, false)]
+    [DataRow("Foo.cs", new string[] { "NotFoo.cs" }, new string[] { "Foo.cs" }, false)]
+    [DataRow("Foo.cs", new string[] { "Foo.cs" }, new string[] { "NotFoo.cs" }, true)]
+    [DataRow("Foo.cs", new string[] { "NotFoo.cs" }, new string[] { "NotFoo.cs" }, false)]
     public void ShouldAnalyzeTree_MixedInput_TestProject_ReturnExpected(string filePath, string[] testInclusions, string[] testExclusions, bool expectedResult) =>
         ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, ProjectType.Test, expectedResult, testInclusions: testInclusions, testExclusions: testExclusions);
 
