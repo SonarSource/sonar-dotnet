@@ -165,12 +165,11 @@ End Class", AnalyzerLanguage.VisualBasic);
         var p2 = relativeTo.Split(new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries);
 
         var i = 0;
-        for (; i < p1.Length && i < p2.Length; i++)
+        while (i < p1.Length
+            && i < p2.Length
+            && string.Equals(p1[i], p2[i], StringComparison.OrdinalIgnoreCase))
         {
-            if (!string.Equals(p1[i], p2[i], StringComparison.OrdinalIgnoreCase))
-            {
-                break;
-            }
+            i++;
         }
 
         if (i == 0)
@@ -186,5 +185,5 @@ End Class", AnalyzerLanguage.VisualBasic);
     }
 
     public static string ReplaceLineEndings(string input, string replacement) =>
-        Regex.Replace(input, @"\r\n?|\n", replacement);
+        Regex.Replace(input, @"\r\n?|\n", replacement, RegexOptions.None, RegexConstants.DefaultTimeout);
 }

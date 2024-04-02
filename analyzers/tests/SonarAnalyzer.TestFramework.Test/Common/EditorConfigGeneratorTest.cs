@@ -99,6 +99,7 @@ public class EditorConfigGeneratorTest
         """.ReplaceLineEndings(Environment.NewLine));
     }
 
+    [TestMethod]
     public void GenerateEditorConfig_NullFile_Throws()
     {
         var rootPath = "C:/Users/Johnny/source/repos/WebApplication";
