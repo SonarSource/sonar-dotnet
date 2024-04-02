@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Roslyn;
@@ -155,4 +156,35 @@ End Class", AnalyzerLanguage.VisualBasic);
         File.WriteAllText(path, content);
         return path;
     }
+
+    public static string GetRelativePath(string relativeTo, string path)
+    {
+        var itemPath = Path.GetFullPath(path);
+        var isDirectory = path.EndsWith(Path.DirectorySeparatorChar.ToString());
+        var p1 = itemPath.Split(new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries);
+        var p2 = relativeTo.Split(new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries);
+
+        var i = 0;
+        for (; i < p1.Length && i < p2.Length; i++)
+        {
+            if (!string.Equals(p1[i], p2[i], StringComparison.OrdinalIgnoreCase))
+            {
+                break;
+            }
+        }
+
+        if (i == 0)
+        {
+            return itemPath;
+        }
+        var relativePath = Path.Combine(Enumerable.Repeat("..", p2.Length - i).Concat(p1.Skip(i).Take(p1.Length - i)).ToArray());
+        if (isDirectory && p1.Length >= p2.Length)
+        {
+            relativePath += Path.DirectorySeparatorChar;
+        }
+        return relativePath;
+    }
+
+    public static string ReplaceLineEndings(string input, string replacement) =>
+        Regex.Replace(input, @"\r\n?|\n", replacement);
 }

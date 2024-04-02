@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.IO;
 using System.Text;
 
 namespace SonarAnalyzer.TestFramework.Common;
@@ -44,16 +43,9 @@ public class EditorConfigGenerator
         razorFiles.Select(x => x.Replace('\\', '/')).Select(ToConfigLine).Prepend("is_global = true").JoinStr(Environment.NewLine);
 
     private string ToConfigLine(string file) =>
-        ReplaceLineEndings(
+        TestHelper.ReplaceLineEndings(
             $"""
             [{file}]
-            build_metadata.AdditionalFiles.TargetPath = {Convert.ToBase64String(Encoding.UTF8.GetBytes(GetRelativePath(rootPath, file)))}
+            build_metadata.AdditionalFiles.TargetPath = {Convert.ToBase64String(Encoding.UTF8.GetBytes(TestHelper.GetRelativePath(rootPath, file)))}
             """, Environment.NewLine);
-
-    public static string GetRelativePath(string fromPath, string toPath) =>
-        Uri.UnescapeDataString(new Uri(fromPath).MakeRelativeUri(new Uri(toPath)).ToString())
-            .Replace('/', Path.DirectorySeparatorChar);
-
-    public static string ReplaceLineEndings(string input, string replacement) =>
-        input.Replace("\r\n", replacement).Replace("\n", replacement).Replace("\r", replacement);
 }
