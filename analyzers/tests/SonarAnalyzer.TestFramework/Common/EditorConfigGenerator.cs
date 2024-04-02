@@ -46,6 +46,10 @@ public class EditorConfigGenerator
     private string ToConfigLine(string file) =>
         $"""
         [{file}]
-        build_metadata.AdditionalFiles.TargetPath = {Convert.ToBase64String(Encoding.UTF8.GetBytes(Path.GetRelativePath(rootPath, file)))}
+        build_metadata.AdditionalFiles.TargetPath = {Convert.ToBase64String(Encoding.UTF8.GetBytes(GetRelativePath(rootPath, file)))}
         """.ReplaceLineEndings(Environment.NewLine);
+
+    public static string GetRelativePath(string fromPath, string toPath) =>
+        Uri.UnescapeDataString(new Uri(fromPath).MakeRelativeUri(new Uri(toPath)).ToString())
+            .Replace('/', Path.DirectorySeparatorChar);
 }
