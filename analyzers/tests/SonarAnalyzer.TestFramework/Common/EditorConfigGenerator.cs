@@ -23,7 +23,7 @@ using System.Text;
 
 namespace SonarAnalyzer.TestFramework.Common;
 
-/* 
+/*
  * This class has copy-pasted logic similar to EditorConfigGenerator in Autoscan .Net.
  * See https://github.com/SonarSource/sonar-dotnet-autoscan/blob/master/AutoScan.NET/Build/EditorConfigGenerator.cs
 */
