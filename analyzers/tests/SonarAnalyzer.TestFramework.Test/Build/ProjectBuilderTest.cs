@@ -138,5 +138,4 @@ public class ProjectBuilderTest
     [TestMethod]
     public void AddSnippet_VbnetDoesntSupportVbnetFiles() =>
         EmptyVB.Invoking(x => x.AddSnippet(RazorSnippet, "ProjectBuilder.AddDocument.vbhtml")).Should().Throw<ArgumentException>();
-
 }
