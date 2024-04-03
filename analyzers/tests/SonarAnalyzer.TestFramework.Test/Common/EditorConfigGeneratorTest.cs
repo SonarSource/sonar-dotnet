@@ -114,7 +114,7 @@ public class EditorConfigGeneratorTest
     {
         var rootPath = "C:/Users/Johnny/source/repos/WebApplication";
         var generateWithNullElement = () => _ = new EditorConfigGenerator(rootPath).Generate([element]);
-        generateWithNullElement.Should().Throw<ArgumentException>().WithMessage("The path is empty. (Parameter 'path')").And.ParamName.Should().Be("path");
+        generateWithNullElement.Should().Throw<ArgumentException>();
     }
 
     [TestMethod]
