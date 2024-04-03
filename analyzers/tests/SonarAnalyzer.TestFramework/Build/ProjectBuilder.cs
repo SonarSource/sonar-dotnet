@@ -78,10 +78,6 @@ public readonly struct ProjectBuilder
     public ProjectBuilder AddAdditionalDocument(string path) =>
         AddAdditionalDocument(project, GetTestCaseFileRelativePath(path), File.ReadAllText(path, Encoding.UTF8));
 
-    private bool IsRazorDocument(string extension) =>
-        extension.Equals(".razor", StringComparison.OrdinalIgnoreCase)
-        || (extension.Equals(".cshtml", StringComparison.OrdinalIgnoreCase) && project.Language == LanguageNames.CSharp);
-
     public ProjectBuilder AddSnippets(params string[] snippets) =>
         snippets.Aggregate(this, (current, snippet) => current.AddSnippet(snippet));
 
