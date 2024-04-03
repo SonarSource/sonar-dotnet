@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Xml.Linq;
+
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -28,7 +30,7 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
     protected override bool IsEmptyAndNotPartial(SyntaxNode node) =>
         node is TypeDeclarationSyntax { Members.Count: 0 } typeDeclaration
         && !typeDeclaration.Modifiers.Any(x => x.IsKind(SyntaxKind.PartialKeyword))
-        && (node is ClassDeclarationSyntax || IsParameterlessRecord(node));
+        && LacksParameterizedPrimaryConstructor(node);
 
     protected override BaseTypeDeclarationSyntax GetIfHasDeclaredBaseClassOrInterface(SyntaxNode node) =>
         node is TypeDeclarationSyntax { BaseList: not null } declaration
@@ -54,19 +56,36 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
             SyntaxKind.ElseDirectiveTrivia,
             SyntaxKind.EndIfDirectiveTrivia));
 
+    private static bool LacksParameterizedPrimaryConstructor(SyntaxNode node) =>
+        IsParameterlessClass(node)
+        || IsParameterlessRecord(node);
+
+    private static bool IsParameterlessClass(SyntaxNode node) =>
+        ClassDeclarationSyntax(node) is { } declaration
+            ? LacksParameters(declaration.ParameterList, declaration.BaseList)
+            : node is ClassDeclarationSyntax;
+
     private static bool IsParameterlessRecord(SyntaxNode node) =>
         RecordDeclarationSyntax(node) is { } declaration
-        && (declaration.ParameterList is null || declaration.ParameterList.Parameters.Count == 0)
-        && BaseTypeSyntax(declaration) is not { ArgumentList.Arguments.Count: >= 1 };
+        && LacksParameters(declaration.ParameterList, declaration.BaseList);
+
+    private static bool LacksParameters(ParameterListSyntax parameterList, BaseListSyntax baseList) =>
+        parameterList?.Parameters is not { Count: >= 1 }
+        && BaseTypeSyntax(baseList) is not { ArgumentList.Arguments.Count: >= 1 };
+
+    private static ClassDeclarationSyntaxWrapper? ClassDeclarationSyntax(SyntaxNode node) =>
+       ClassDeclarationSyntaxWrapper.IsInstance(node)
+           ? (ClassDeclarationSyntaxWrapper)node
+           : null;
 
     private static RecordDeclarationSyntaxWrapper? RecordDeclarationSyntax(SyntaxNode node) =>
         RecordDeclarationSyntaxWrapper.IsInstance(node)
             ? (RecordDeclarationSyntaxWrapper)node
             : null;
 
-    private static PrimaryConstructorBaseTypeSyntaxWrapper? BaseTypeSyntax(RecordDeclarationSyntaxWrapper node) =>
-        node.BaseList?.Types.FirstOrDefault() is { } type
-        && PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(type)
-            ? (PrimaryConstructorBaseTypeSyntaxWrapper)type
-            : null;
+    private static PrimaryConstructorBaseTypeSyntaxWrapper? BaseTypeSyntax(BaseListSyntax list) =>
+       list?.Types.FirstOrDefault() is { } type
+       && PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(type)
+           ? (PrimaryConstructorBaseTypeSyntaxWrapper)type
+           : null;
 }
