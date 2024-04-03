@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <!-- 01/2024: Using net8.0-windows breaks Verifier.CompileRazor -->
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFrameworks>net48;net7.0-windows</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
