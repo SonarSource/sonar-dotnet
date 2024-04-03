@@ -59,7 +59,7 @@ public class EditorConfigGeneratorTest
         editorConfig.Should().Be(
         $"""
         is_global = true
-        """.ReplaceLineEndings(Environment.NewLine));
+        """.Replace("\n", Environment.NewLine));
     }
 
     [TestMethod]
@@ -73,7 +73,7 @@ public class EditorConfigGeneratorTest
         is_global = true
         [C:/Users/Johnny/source/repos/WebApplication/Component.razor]
         build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50LnJhem9y
-        """.ReplaceLineEndings(Environment.NewLine));
+        """.Replace("\n", Environment.NewLine));
     }
 
     [TestMethod]
@@ -96,7 +96,7 @@ public class EditorConfigGeneratorTest
         build_metadata.AdditionalFiles.TargetPath = Rm9sZGVyXENoaWxkLnJhem9y
         [C:/Users/Johnny/source/repos/Parent.razor]
         build_metadata.AdditionalFiles.TargetPath = Li5cUGFyZW50LnJhem9y
-        """.ReplaceLineEndings(Environment.NewLine));
+        """.Replace("\n", Environment.NewLine));
     }
 
     [TestMethod]
