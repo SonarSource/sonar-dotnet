@@ -53,7 +53,7 @@ internal class Verifier
         {
             throw new ArgumentException($"{nameof(builder.Analyzers)} cannot be empty. Use {nameof(VerifierBuilder)}<TAnalyzer> instead or add at least one analyzer using {nameof(builder)}.{nameof(builder.AddAnalyzer)}().");
         }
-        if (analyzers.Any(x => x == null))
+        if (Array.Exists(analyzers, x => x == null))
         {
             throw new ArgumentException("Analyzer instance cannot be null.");
         }
@@ -269,11 +269,16 @@ internal class Verifier
 
     private ProjectBuilder CreateProject(bool concurrentAnalysis)
     {
-        var paths = builder.Paths.Select(TestCasePath).ToArray();
+        var paths = builder.Paths.Select(TestCasePath).GroupBy(IsRazorOrCshtml).ToDictionary(x => x.Key, x => x.ToArray());
+        var razorPaths = paths.GetOrAdd(true, _ => []);
+        var documentPaths = paths.GetOrAdd(false, _ => []);
+
         return SolutionBuilder.Create()
             .AddProject(language, builder.OutputKind)
-            .AddDocuments(paths)
-            .AddDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(paths) : Enumerable.Empty<string>())
+            .AddDocuments(documentPaths)
+            .AddAdditionalDocuments(razorPaths)
+            .AddDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(documentPaths) : [])
+            .AddAdditionalDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(razorPaths) : [])
             .AddSnippets(builder.Snippets.ToArray())
             .AddReferences(builder.References);
     }
@@ -282,7 +287,7 @@ internal class Verifier
     {
         foreach (var path in paths)
         {
-            var newPath = Path.ChangeExtension(path, ".Concurrent" + language.FileExtension);
+            var newPath = Path.ChangeExtension(path, ".Concurrent" + Path.GetExtension(path));
             var content = File.ReadAllText(path, Encoding.UTF8);
             File.WriteAllText(newPath, InsertConcurrentNamespace(content));
             yield return newPath;
