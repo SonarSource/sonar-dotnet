@@ -50,9 +50,6 @@ public readonly struct ProjectBuilder
     public Document FindDocument(string name) =>
         project.Documents.Single(d => d.Name == name);
 
-    public AnalyzerConfigDocument FindAnalyzerConfigDocument(string name) =>
-        project.AnalyzerConfigDocuments.SingleOrDefault(d => d.Name == name);
-
     public ProjectBuilder AddReferences(IEnumerable<MetadataReference> references)
     {
         if (references == null || !references.Any())
@@ -127,8 +124,8 @@ public readonly struct ProjectBuilder
     private static ProjectBuilder AddAdditionalDocument(Project project, string fileName, string fileContent) =>
         FromProject(project.AddAdditionalDocument(fileName, fileContent).Project);
 
-    public ProjectBuilder AddAnalyzerConfigDocument(string editorConfigPath, SourceText text) =>
-        FromProject(project.AddAnalyzerConfigDocument(editorConfigPath, text, filePath: editorConfigPath).Project);
+    public ProjectBuilder AddAnalyzerConfigDocument(string editorConfigPath, string content) =>
+        FromProject(project.AddAnalyzerConfigDocument(editorConfigPath, SourceText.From(content), filePath: editorConfigPath).Project);
 }
 
 public record Snippet(string Content, string FileName);

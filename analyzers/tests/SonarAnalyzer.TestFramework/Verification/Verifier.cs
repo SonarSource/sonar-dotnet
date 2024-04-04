@@ -28,7 +28,6 @@ using Microsoft.Build.Locator;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.MSBuild;
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Rules;
 using SonarAnalyzer.TestFramework.Build;
 
@@ -282,7 +281,7 @@ internal class Verifier
             .AddAdditionalDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(contentFilePaths) : [])
             .AddSnippets(builder.Snippets.ToArray())
             .AddReferences(builder.References)
-            .AddAnalyzerConfigDocument(Path.Combine(TestCaseDirectory(), ".editorconfig"), SourceText.From(editorConfigGenerator.Generate(contentFilePaths)));
+            .AddAnalyzerConfigDocument(Path.Combine(TestCaseDirectory(), ".editorconfig"), editorConfigGenerator.Generate(contentFilePaths));
     }
 
     private IEnumerable<string> CreateConcurrencyTest(IEnumerable<string> paths)

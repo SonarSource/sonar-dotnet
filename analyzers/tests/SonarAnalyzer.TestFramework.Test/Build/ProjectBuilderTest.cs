@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.Text;
-
 namespace SonarAnalyzer.Test.TestFramework.Tests.Build;
 
 [TestClass]
@@ -99,5 +97,6 @@ public class ProjectBuilderTest
 
     [TestMethod]
     public void AddAnalyzerConfigDocument_ShouldAddDocumentToProject() =>
-        EmptyCS.AddAnalyzerConfigDocument("path/to/config.editorconfig", SourceText.From("root = true")).FindAnalyzerConfigDocument("path/to/config.editorconfig").Should().NotBeNull();
+        EmptyCS.AddAnalyzerConfigDocument("path/to/config.editorconfig", "root = true").Project
+            .AnalyzerConfigDocuments.SingleOrDefault(d => d.Name == "path/to/config.editorconfig").Should().NotBeNull();
 }
