@@ -92,6 +92,18 @@ public class ProjectBuilderTest
     public void AddSnippet_Null_Throws() =>
         EmptyCS.Invoking(x => x.AddSnippet(null)).Should().Throw<ArgumentNullException>().Which.ParamName.Should().Be("code");
 
+    [TestMethod]
+    public void AddAnalyzerReferences_Null_Throws() =>
+        EmptyCS.Invoking(x => x.AddAnalyzerReferences(null)).Should().Throw<ArgumentNullException>().Which.ParamName.Should().Be("sourceGenerators");
+
+    [TestMethod]
+    public void AddAnalyzerReferences_NullAnalyzer_Throws() =>
+        EmptyCS.Invoking(x => x.AddAnalyzerReferences([null])).Should().Throw<ArgumentNullException>();
+
+    [TestMethod]
+    public void AddAnalyzerReferences_AddAnalyzer() =>
+        EmptyCS.AddAnalyzerReferences(SourceGeneratorProvider.SourceGenerators).Project.AnalyzerReferences.Should().BeEquivalentTo(SourceGeneratorProvider.SourceGenerators);
+
     private static void AssertAdditionalDocumentContains(ProjectBuilder builder, string fileName) =>
         builder.Project.AdditionalDocuments.Should().ContainSingle(x => x.Name == fileName);
 }

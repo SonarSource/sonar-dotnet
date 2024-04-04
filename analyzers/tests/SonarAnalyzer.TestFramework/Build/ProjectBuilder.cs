@@ -91,6 +91,12 @@ public readonly struct ProjectBuilder
         return AddDocument(project, fileName, code);
     }
 
+    public ProjectBuilder AddAnalyzerReferences(IEnumerable<AnalyzerFileReference> sourceGenerators)
+    {
+        _ = sourceGenerators ?? throw new ArgumentNullException(nameof(sourceGenerators));
+        return FromProject(project.WithAnalyzerReferences(sourceGenerators));
+    }
+
     public static ProjectBuilder FromProject(Project project) =>
         new(project);
 
