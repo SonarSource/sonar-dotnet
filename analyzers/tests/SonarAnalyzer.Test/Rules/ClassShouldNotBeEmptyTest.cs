@@ -65,6 +65,13 @@ public class ClassShouldNotBeEmptyTest
             .Verify();
 
     [TestMethod]
+    public void ClassShouldNotBeEmpty_CSharp12() =>
+        builderCS
+            .AddPaths("ClassShouldNotBeEmpty.CSharp12.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .Verify();
+
+    [TestMethod]
     public void ClassShouldNotBeEmpty_Inheritance_CS() =>
         builderCS
             .AddPaths("ClassShouldNotBeEmpty.Inheritance.cs")
