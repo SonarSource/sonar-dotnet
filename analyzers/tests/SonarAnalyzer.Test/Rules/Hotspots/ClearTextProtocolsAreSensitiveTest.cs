@@ -35,6 +35,16 @@ namespace SonarAnalyzer.Test.Rules
                 .WithConcurrentAnalysis(false)
                 .Verify();
 
+#if NETFRAMEWORK
+
+        [TestMethod]
+        public void ClearTextProtocolsAreSensitive_NetFx() =>
+            builder.AddPaths("ClearTextProtocolsAreSensitive.NetFramework.cs")
+                .AddReferences(FrameworkMetadataReference.SystemWebServices)
+                .Verify();
+
+#endif
+
 #if NET
 
         [TestMethod]
@@ -67,9 +77,10 @@ namespace SonarAnalyzer.Test.Rules
 #endif
 
         internal static IEnumerable<MetadataReference> AdditionalReferences =>
-            MetadataReferenceFacade.SystemNetHttp.Concat(
-            MetadataReferenceFacade.SystemComponentModelPrimitives).Concat(
-            MetadataReferenceFacade.SystemXml).Concat(
-            MetadataReferenceFacade.SystemXmlLinq);
+            MetadataReferenceFacade.SystemNetHttp
+                .Concat(MetadataReferenceFacade.SystemComponentModelPrimitives)
+                .Concat(MetadataReferenceFacade.SystemXml)
+                .Concat(MetadataReferenceFacade.SystemXmlLinq)
+                .Concat(MetadataReferenceFacade.SystemWeb);
     }
 }

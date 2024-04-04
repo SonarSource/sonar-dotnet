@@ -52,6 +52,7 @@ public static class FrameworkMetadataReference
     public static References SystemThreadingTasks { get; } = Create("System.Threading.Tasks.dll");
     public static References SystemWeb { get; } = Create("System.Web.dll");
     public static References SystemWebExtensions { get; } = Create("System.Web.Extensions.dll");
+    public static References SystemWebServices { get; } = Create("System.Web.Services.dll");
     public static References SystemWindowsForms { get; } = Create("System.Windows.Forms.dll");
     public static References SystemXaml { get; } = Create("System.Xaml.dll");
     public static References SystemXml { get; } = Create("System.Xml.dll");
