@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.Text;
+
 namespace SonarAnalyzer.Test.TestFramework.Tests.Build;
 
 [TestClass]
@@ -94,4 +96,8 @@ public class ProjectBuilderTest
 
     private static void AssertAdditionalDocumentContains(ProjectBuilder builder, string fileName) =>
         builder.Project.AdditionalDocuments.Should().ContainSingle(x => x.Name == fileName);
+
+    [TestMethod]
+    public void AddAnalyzerConfigDocument_ShouldAddDocumentToProject() =>
+        EmptyCS.AddAnalyzerConfigDocument("path/to/config.editorconfig", SourceText.From("root = true")).FindAnalyzerConfigDocument("path/to/config.editorconfig").Should().NotBeNull();
 }

@@ -28,6 +28,7 @@ using Microsoft.Build.Locator;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.MSBuild;
+using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Rules;
 using SonarAnalyzer.TestFramework.Build;
 
@@ -272,7 +273,7 @@ internal class Verifier
         var paths = builder.Paths.Select(TestCasePath).ToList();
         var contentFilePaths = paths.Where(IsRazorOrCshtml).ToArray();
         var sourceFilePaths = paths.Except(contentFilePaths).ToArray();
-
+        var editorConfigGenerator = new EditorConfigGenerator(Path.GetDirectoryName(builder.BasePath));
         return SolutionBuilder.Create()
             .AddProject(language, builder.OutputKind)
             .AddDocuments(sourceFilePaths)
@@ -280,7 +281,7 @@ internal class Verifier
             .AddDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(sourceFilePaths) : [])
             .AddAdditionalDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(contentFilePaths) : [])
             .AddSnippets(builder.Snippets.ToArray())
-            .AddReferences(builder.References);
+            .AddAnalyzerConfigDocument(Path.Combine(builder.BasePath, ".editorconfig"), SourceText.From(editorConfigGenerator.Generate(razorPaths)));
     }
 
     private IEnumerable<string> CreateConcurrencyTest(IEnumerable<string> paths)

@@ -20,6 +20,7 @@
 
 using System.IO;
 using System.Text;
+using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.TestFramework.Build;
 
@@ -48,6 +49,9 @@ public readonly struct ProjectBuilder
 
     public Document FindDocument(string name) =>
         project.Documents.Single(d => d.Name == name);
+
+    public AnalyzerConfigDocument FindAnalyzerConfigDocument(string name) =>
+        project.AnalyzerConfigDocuments.SingleOrDefault(d => d.Name == name);
 
     public ProjectBuilder AddReferences(IEnumerable<MetadataReference> references)
     {
@@ -122,6 +126,9 @@ public readonly struct ProjectBuilder
 
     private static ProjectBuilder AddAdditionalDocument(Project project, string fileName, string fileContent) =>
         FromProject(project.AddAdditionalDocument(fileName, fileContent).Project);
+
+    public ProjectBuilder AddAnalyzerConfigDocument(string editorConfigPath, SourceText text) =>
+        FromProject(project.AddAnalyzerConfigDocument(editorConfigPath, text, filePath: editorConfigPath).Project);
 }
 
 public record Snippet(string Content, string FileName);
