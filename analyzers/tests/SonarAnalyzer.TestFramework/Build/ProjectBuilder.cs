@@ -69,19 +69,14 @@ public readonly struct ProjectBuilder
     public ProjectBuilder AddDocuments(IEnumerable<string> paths) =>
         paths.Aggregate(this, (projectBuilder, path) => projectBuilder.AddDocument(path));
 
-    public ProjectBuilder AddDocument(string path)
-    {
-        const string TestCases = @"TestCases\";
-        _ = path ?? throw new ArgumentNullException(nameof(path));
-        var fileInfo = new FileInfo(path);
-        var testCasesIndex = fileInfo.FullName.IndexOf(TestCases);
-        var relativePathFromTestCases = testCasesIndex < 0
-            ? throw new ArgumentException($"{nameof(path)} must contain '{TestCases}'", nameof(path))
-            : fileInfo.FullName.Substring(testCasesIndex + TestCases.Length);
-        return IsExtensionOfSupportedType(fileInfo)
-            ? AddDocument(project, relativePathFromTestCases, File.ReadAllText(fileInfo.FullName, Encoding.UTF8))
-            : throw new ArgumentException($"The file extension '{fileInfo.Extension}' does not match the project language '{project.Language}' nor Razor.", nameof(path));
-    }
+    public ProjectBuilder AddAdditionalDocuments(IEnumerable<string> paths) =>
+        paths.Aggregate(this, (projectBuilder, path) => projectBuilder.AddAdditionalDocument(path));
+
+    public ProjectBuilder AddDocument(string path) =>
+        AddDocument(project, GetTestCaseFileRelativePath(path), File.ReadAllText(path, Encoding.UTF8));
+
+    public ProjectBuilder AddAdditionalDocument(string path) =>
+        AddAdditionalDocument(project, GetTestCaseFileRelativePath(path), File.ReadAllText(path, Encoding.UTF8));
 
     public ProjectBuilder AddSnippets(params string[] snippets) =>
         snippets.Aggregate(this, (current, snippet) => current.AddSnippet(snippet));
@@ -99,6 +94,24 @@ public readonly struct ProjectBuilder
     public static ProjectBuilder FromProject(Project project) =>
         new(project);
 
+    private string GetTestCaseFileRelativePath(string path)
+    {
+        const string TestCases = @"TestCases\";
+        _ = path ?? throw new ArgumentNullException(nameof(path));
+        var fileInfo = new FileInfo(path);
+        var testCasesIndex = fileInfo.FullName.IndexOf(TestCases, StringComparison.Ordinal);
+        var relativePathFromTestCases = testCasesIndex < 0
+            ? throw new ArgumentException($"{nameof(path)} must contain '{TestCases}'", nameof(path))
+            : fileInfo.FullName.Substring(testCasesIndex + TestCases.Length);
+
+        if (!IsExtensionOfSupportedType(fileInfo))
+        {
+            throw new ArgumentException($"The file extension '{fileInfo.Extension}' does not match the project language '{project.Language}' nor Razor.", nameof(path));
+        }
+
+        return relativePathFromTestCases;
+    }
+
     private bool IsExtensionOfSupportedType(FileInfo fileInfo) =>
         fileInfo.Extension.Equals(fileExtension, StringComparison.OrdinalIgnoreCase)
         || fileInfo.Extension.Equals(".razor", StringComparison.OrdinalIgnoreCase)
@@ -106,6 +119,9 @@ public readonly struct ProjectBuilder
 
     private static ProjectBuilder AddDocument(Project project, string fileName, string fileContent) =>
         FromProject(project.AddDocument(fileName, fileContent).Project);
+
+    private static ProjectBuilder AddAdditionalDocument(Project project, string fileName, string fileContent) =>
+        FromProject(project.AddAdditionalDocument(fileName, fileContent).Project);
 }
 
 public record Snippet(string Content, string FileName);
