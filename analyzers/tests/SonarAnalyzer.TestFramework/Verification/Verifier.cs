@@ -281,6 +281,7 @@ internal class Verifier
             .AddDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(sourceFilePaths) : [])
             .AddAdditionalDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(contentFilePaths) : [])
             .AddSnippets(builder.Snippets.ToArray())
+            .AddReferences(builder.References)
             .AddAnalyzerConfigDocument(Path.Combine(builder.BasePath, ".editorconfig"), SourceText.From(editorConfigGenerator.Generate(contentFilePaths)));
     }
 
