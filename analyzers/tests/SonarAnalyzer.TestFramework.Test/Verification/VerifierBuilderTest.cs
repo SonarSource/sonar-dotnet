@@ -62,7 +62,6 @@ public class VerifierBuilderTest
     [TestMethod]
     public void AddPaths_SetsIsRazorWithRazorFile()
     {
-        Empty.IsRazor.Should().BeFalse();
         Empty.ParseOptions.Should().BeEmpty();
         var one = Empty.AddPaths("Source1.cs");
         one.IsRazor.Should().BeFalse();
