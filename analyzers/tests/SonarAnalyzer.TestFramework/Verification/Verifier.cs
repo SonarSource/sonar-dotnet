@@ -269,16 +269,16 @@ internal class Verifier
 
     private ProjectBuilder CreateProject(bool concurrentAnalysis)
     {
-        var paths = builder.Paths.Select(TestCasePath).GroupBy(IsRazorOrCshtml).ToDictionary(x => x.Key, x => x.ToArray());
-        var razorPaths = paths.GetOrAdd(true, _ => []);
-        var documentPaths = paths.GetOrAdd(false, _ => []);
+        var paths = builder.Paths.Select(TestCasePath).ToList();
+        var contentFilePaths = paths.Where(IsRazorOrCshtml).ToArray();
+        var sourceFilePaths = paths.Except(contentFilePaths).ToArray();
 
         return SolutionBuilder.Create()
             .AddProject(language, builder.OutputKind)
-            .AddDocuments(documentPaths)
-            .AddAdditionalDocuments(razorPaths)
-            .AddDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(documentPaths) : [])
-            .AddAdditionalDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(razorPaths) : [])
+            .AddDocuments(sourceFilePaths)
+            .AddAdditionalDocuments(contentFilePaths)
+            .AddDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(sourceFilePaths) : [])
+            .AddAdditionalDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(contentFilePaths) : [])
             .AddSnippets(builder.Snippets.ToArray())
             .AddReferences(builder.References);
     }

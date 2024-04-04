@@ -68,33 +68,30 @@ public class ProjectBuilderTest
     [TestMethod]
     public void AddAdditionalDocument_SupportsRazorFiles()
     {
-        EmptyCS.AddAdditionalDocument(@"TestCases\ProjectBuilder.AddDocument.razor").FindAdditionalDocument("ProjectBuilder.AddDocument.razor").Should().NotBeNull();
-        EmptyVB.AddAdditionalDocument(@"TestCases\ProjectBuilder.AddDocument.razor").FindAdditionalDocument("ProjectBuilder.AddDocument.razor").Should().NotBeNull();
+        AssertAdditionalDocumentContains(EmptyCS.AddAdditionalDocument(@"TestCases\ProjectBuilder.AddDocument.razor"), "ProjectBuilder.AddDocument.razor");
+        AssertAdditionalDocumentContains(EmptyVB.AddAdditionalDocument(@"TestCases\ProjectBuilder.AddDocument.razor"), "ProjectBuilder.AddDocument.razor");
     }
 
     [TestMethod]
     public void AddAdditionalDocument_CsharpSupportsCshtmlFiles() =>
-        EmptyCS.AddAdditionalDocument(@"TestCases\ProjectBuilder.AddDocument.cshtml").FindAdditionalDocument("ProjectBuilder.AddDocument.cshtml").Should().NotBeNull();
+        AssertAdditionalDocumentContains(EmptyCS.AddAdditionalDocument(@"TestCases\ProjectBuilder.AddDocument.cshtml"), "ProjectBuilder.AddDocument.cshtml");
 
     [TestMethod]
     public void AddAdditionalDocument_VbnetDoesntSupportCshtmlFiles() =>
-        EmptyVB.Invoking(x => x.AddAdditionalDocument(@"TestCases\ProjectBuilder.AddDocument.cshtml").FindAdditionalDocument("ProjectBuilder.AddDocument.cshtml")).Should().Throw<ArgumentException>();
+        EmptyVB.Invoking(x => x.AddAdditionalDocument(@"TestCases\ProjectBuilder.AddDocument.cshtml")).Should().Throw<ArgumentException>();
 
     [TestMethod]
-    public void AddAdditionalDocument_CsharpDoesntSupportVbnetFiles() =>
-        EmptyCS
-            .Invoking(x => x.AddAdditionalDocument(@"TestCases\ProjectBuilder.AddDocument.vbhtml").FindAdditionalDocument("ProjectBuilder.AddDocument.vbhtml").Should().NotBeNull())
-            .Should()
-            .Throw<ArgumentException>();
+    public void AddAdditionalDocument_CsharpDoesntSupportVbhtmlFiles() =>
+        EmptyCS.Invoking(x => x.AddAdditionalDocument(@"TestCases\ProjectBuilder.AddDocument.vbhtml")).Should().Throw<ArgumentException>();
 
     [TestMethod]
-    public void AddAdditionalDocument_VbnetDoesntSupportVbnetFiles() =>
-        EmptyVB
-            .Invoking(x => x.AddAdditionalDocument(@"TestCases\ProjectBuilder.AddDocument.vbhtml").FindAdditionalDocument("ProjectBuilder.AddDocument.vbhtml").Should().NotBeNull())
-            .Should()
-            .Throw<ArgumentException>();
+    public void AddAdditionalDocument_VbnetDoesntSupportVbhtmlFiles() =>
+        EmptyVB.Invoking(x => x.AddAdditionalDocument(@"TestCases\ProjectBuilder.AddDocument.vbhtml")).Should().Throw<ArgumentException>();
 
     [TestMethod]
     public void AddSnippet_Null_Throws() =>
         EmptyCS.Invoking(x => x.AddSnippet(null)).Should().Throw<ArgumentNullException>().Which.ParamName.Should().Be("code");
+
+    private static void AssertAdditionalDocumentContains(ProjectBuilder builder, string fileName) =>
+        builder.Project.AdditionalDocuments.Should().ContainSingle(x => x.Name == fileName);
 }

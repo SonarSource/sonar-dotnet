@@ -47,10 +47,7 @@ public readonly struct ProjectBuilder
     }
 
     public Document FindDocument(string name) =>
-        project.Documents.SingleOrDefault(d => d.Name == name);
-
-    public TextDocument FindAdditionalDocument(string name) =>
-        project.AdditionalDocuments.SingleOrDefault(d => d.Name == name);
+        project.Documents.Single(d => d.Name == name);
 
     public ProjectBuilder AddReferences(IEnumerable<MetadataReference> references)
     {
