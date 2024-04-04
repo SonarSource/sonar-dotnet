@@ -273,7 +273,7 @@ internal class Verifier
         var paths = builder.Paths.Select(TestCasePath).ToList();
         var contentFilePaths = paths.Where(IsRazorOrCshtml).ToArray();
         var sourceFilePaths = paths.Except(contentFilePaths).ToArray();
-        var editorConfigGenerator = new EditorConfigGenerator(Path.GetDirectoryName(builder.BasePath));
+        var editorConfigGenerator = new EditorConfigGenerator(TestCaseDirectory());
         return SolutionBuilder.Create()
             .AddProject(language, builder.OutputKind)
             .AddDocuments(sourceFilePaths)
@@ -282,7 +282,7 @@ internal class Verifier
             .AddAdditionalDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(contentFilePaths) : [])
             .AddSnippets(builder.Snippets.ToArray())
             .AddReferences(builder.References)
-            .AddAnalyzerConfigDocument(Path.Combine(builder.BasePath, ".editorconfig"), SourceText.From(editorConfigGenerator.Generate(contentFilePaths)));
+            .AddAnalyzerConfigDocument(Path.Combine(TestCaseDirectory(), ".editorconfig"), SourceText.From(editorConfigGenerator.Generate(contentFilePaths)));
     }
 
     private IEnumerable<string> CreateConcurrencyTest(IEnumerable<string> paths)
@@ -311,6 +311,9 @@ internal class Verifier
 
     private string TestCasePath(string fileName) =>
         Path.GetFullPath(builder.BasePath == null ? Path.Combine(TestCases, fileName) : Path.Combine(TestCases, builder.BasePath, fileName));
+
+    private string TestCaseDirectory() =>
+        Path.GetFullPath(builder.BasePath == null ? TestCases : Path.Combine(TestCases, builder.BasePath));
 
     private void ValidateSingleAnalyzer(string propertyName)
     {
