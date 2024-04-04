@@ -309,11 +309,11 @@ internal class Verifier
             ImportsRegexVB.Match(content) is { Success: true } match ? match.Index + match.Length + 1 : 0;
     }
 
-    private string TestCasePath(string fileName) =>
-        Path.GetFullPath(builder.BasePath == null ? Path.Combine(TestCases, fileName) : Path.Combine(TestCases, builder.BasePath, fileName));
-
     private string TestCaseDirectory() =>
         Path.GetFullPath(builder.BasePath == null ? TestCases : Path.Combine(TestCases, builder.BasePath));
+
+    private string TestCasePath(string fileName) =>
+        Path.Combine(TestCaseDirectory(), fileName);
 
     private void ValidateSingleAnalyzer(string propertyName)
     {
