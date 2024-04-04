@@ -107,10 +107,10 @@ public record VerifierBuilder
         this with { ErrorBehavior = errorBehavior };
 
     public VerifierBuilder WithLanguageVersion(CS.LanguageVersion languageVersion) =>
-        WithOptions(ImmutableArray.Create<ParseOptions>(new CS.CSharpParseOptions(languageVersion)));
+        WithOptions([new CS.CSharpParseOptions(languageVersion)]);
 
     public VerifierBuilder WithLanguageVersion(VB.LanguageVersion languageVersion) =>
-        WithOptions(ImmutableArray.Create<ParseOptions>(new VB.VisualBasicParseOptions(languageVersion)));
+        WithOptions([new VB.VisualBasicParseOptions(languageVersion)]);
 
     public VerifierBuilder WithOnlyDiagnostics(params DiagnosticDescriptor[] onlyDiagnostics) =>
         this with { OnlyDiagnostics = onlyDiagnostics.ToImmutableArray() };

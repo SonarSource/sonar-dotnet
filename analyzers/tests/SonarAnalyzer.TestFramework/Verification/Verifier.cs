@@ -171,6 +171,9 @@ internal class Verifier
             .AddAnalyzerReferences(contentFilePaths.Length > 0 ? SourceGeneratorProvider.SourceGenerators : [])
             .AddSnippets(builder.Snippets.ToArray())
             .AddReferences(builder.References)
+            .AddReferences(contentFilePaths.Length > 0 ? NuGetMetadataReference.MicrosoftAspNetCore("8.0.3") : [])
+            .AddReferences(contentFilePaths.Length > 0 ? NuGetMetadataReference.MicrosoftAspNetCoreComponents("8.0.3") : [])
+            .AddReferences(contentFilePaths.Length > 0 ? NuGetMetadataReference.MicrosoftAspNetCoreComponentsWeb("8.0.3") : [])
             .AddAnalyzerConfigDocument(Path.Combine(TestCaseDirectory(), ".editorconfig"), editorConfigGenerator.Generate(contentFilePaths));
     }
 
@@ -259,19 +262,4 @@ internal class Verifier
         && (extension.Equals(".razor", StringComparison.OrdinalIgnoreCase) || extension.Equals(".cshtml", StringComparison.OrdinalIgnoreCase));
 
     public sealed record CompilationData(Compilation Compilation, string[] AdditionalSourceFiles);
-
-    private static bool RestorePackages(string path, string workingDirectory)
-    {
-        using var process = new Process();
-        process.StartInfo = new ProcessStartInfo
-            {
-                FileName = Environment.GetEnvironmentVariable("DOTNET_PATH") ?? "dotnet",
-                Arguments = $"restore \"{path}\"",
-                WorkingDirectory = workingDirectory
-            };
-
-        process.Start();
-        process.WaitForExit();
-        return process.ExitCode == 0;
-    }
 }
