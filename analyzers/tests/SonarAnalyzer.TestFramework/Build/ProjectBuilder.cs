@@ -85,6 +85,9 @@ public readonly struct ProjectBuilder
     public ProjectBuilder AddSnippets(IEnumerable<Snippet> snippets) =>
         snippets.Aggregate(this, (current, snippet) => current.AddSnippet(snippet.Content, snippet.FileName));
 
+    public ProjectBuilder AddSnippetAsAdditionalDocument(IEnumerable<Snippet> snippets) =>
+        snippets.Aggregate(this, (current, snippet) => AddAdditionalDocument(current.Project, snippet.Content, snippet.FileName));
+
     public ProjectBuilder AddSnippet(string code, string fileName = null)
     {
         _ = code ?? throw new ArgumentNullException(nameof(code));

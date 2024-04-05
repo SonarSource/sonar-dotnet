@@ -161,6 +161,8 @@ internal class Verifier
         var paths = builder.Paths.Select(TestCasePath).ToList();
         var contentFilePaths = paths.Where(IsRazorOrCshtml).ToArray();
         var sourceFilePaths = paths.Except(contentFilePaths).ToArray();
+        var contentSnippets = builder.Snippets.Where(x => IsRazorOrCshtml(x.FileName)).ToArray();
+        var sourceSnippets = builder.Snippets.Except(contentSnippets).ToArray();
         var editorConfigGenerator = new EditorConfigGenerator(TestCaseDirectory());
         return SolutionBuilder.Create()
             .AddProject(language, builder.OutputKind)
@@ -169,11 +171,12 @@ internal class Verifier
             .AddDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(sourceFilePaths) : [])
             .AddAdditionalDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(contentFilePaths) : [])
             .AddAnalyzerReferences(contentFilePaths.Length > 0 ? SourceGeneratorProvider.SourceGenerators : [])
-            .AddSnippets(builder.Snippets.ToArray())
+            .AddSnippets(sourceSnippets)
+            .AddSnippetAsAdditionalDocument(contentSnippets)
             .AddReferences(builder.References)
-            .AddReferences(contentFilePaths.Length > 0 ? NuGetMetadataReference.MicrosoftAspNetCore("8.0.3") : [])
-            .AddReferences(contentFilePaths.Length > 0 ? NuGetMetadataReference.MicrosoftAspNetCoreComponents("8.0.3") : [])
-            .AddReferences(contentFilePaths.Length > 0 ? NuGetMetadataReference.MicrosoftAspNetCoreComponentsWeb("8.0.3") : [])
+            .AddReferences(contentFilePaths.Length > 0 ? NuGetMetadataReference.MicrosoftAspNetCore("2.2.0") : [])
+            .AddReferences(contentFilePaths.Length > 0 ? NuGetMetadataReference.MicrosoftAspNetCoreComponents("7.0.17") : [])
+            .AddReferences(contentFilePaths.Length > 0 ? NuGetMetadataReference.MicrosoftAspNetCoreComponentsWeb("7.0.17") : [])
             .AddAnalyzerConfigDocument(Path.Combine(TestCaseDirectory(), ".editorconfig"), editorConfigGenerator.Generate(contentFilePaths));
     }
 
