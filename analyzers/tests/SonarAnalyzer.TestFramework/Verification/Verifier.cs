@@ -164,20 +164,21 @@ internal class Verifier
         var contentSnippets = builder.Snippets.Where(x => IsRazorOrCshtml(x.FileName)).ToArray();
         var sourceSnippets = builder.Snippets.Except(contentSnippets).ToArray();
         var editorConfigGenerator = new EditorConfigGenerator(TestCaseDirectory());
+        var hasContentDocuments = contentFilePaths.Length > 0 || contentSnippets.Length > 0;
         return SolutionBuilder.Create()
             .AddProject(language, builder.OutputKind)
             .AddDocuments(sourceFilePaths)
             .AddAdditionalDocuments(contentFilePaths)
             .AddDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(sourceFilePaths) : [])
             .AddAdditionalDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(contentFilePaths) : [])
-            .AddAnalyzerReferences(contentFilePaths.Length > 0 ? SourceGeneratorProvider.SourceGenerators : [])
+            .AddAnalyzerReferences(hasContentDocuments ? SourceGeneratorProvider.SourceGenerators : [])
             .AddSnippets(sourceSnippets)
             .AddSnippetAsAdditionalDocument(contentSnippets)
             .AddReferences(builder.References)
-            .AddReferences(contentFilePaths.Length > 0 ? NuGetMetadataReference.MicrosoftAspNetCore("2.2.0") : [])
-            .AddReferences(contentFilePaths.Length > 0 ? NuGetMetadataReference.MicrosoftAspNetCoreComponents("7.0.17") : [])
-            .AddReferences(contentFilePaths.Length > 0 ? NuGetMetadataReference.MicrosoftAspNetCoreComponentsWeb("7.0.17") : [])
-            .AddAnalyzerConfigDocument(Path.Combine(TestCaseDirectory(), ".editorconfig"), editorConfigGenerator.Generate(contentFilePaths));
+            .AddReferences(hasContentDocuments ? NuGetMetadataReference.MicrosoftAspNetCore("2.2.0") : [])
+            .AddReferences(hasContentDocuments ? NuGetMetadataReference.MicrosoftAspNetCoreComponents("7.0.17") : [])
+            .AddReferences(hasContentDocuments ? NuGetMetadataReference.MicrosoftAspNetCoreComponentsWeb("7.0.17") : [])
+            .AddAnalyzerConfigDocument(Path.Combine(TestCaseDirectory(), ".editorconfig"), editorConfigGenerator.Generate(contentFilePaths.Concat(contentSnippets.Select(x => x.FileName))));
     }
 
     private IEnumerable<string> CreateConcurrencyTest(IEnumerable<string> paths)

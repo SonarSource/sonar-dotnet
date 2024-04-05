@@ -209,6 +209,13 @@ public class VerifierTest
             .Compile(false)
             .Single();
         compilation.Compilation.GetSpecialType(SpecialType.System_Object).ContainingAssembly.Identity.Version.Major.Should().Be(7, "This version is used in EmptyProject.csproj");
+
+        compilation.Compilation.ExternalReferences.Select(x => Path.GetFileName(x.Display)).Should().Contain([
+            "Microsoft.AspNetCore.dll",
+            "Microsoft.AspNetCore.Components.dll",
+            "Microsoft.AspNetCore.Components.Web.dll"
+        ]);
+        // compilation.Compilation.ExternalReferences.Select(x => x.Display).Should().C
     }
 
     [TestMethod]

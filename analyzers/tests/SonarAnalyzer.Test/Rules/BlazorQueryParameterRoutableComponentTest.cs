@@ -33,7 +33,6 @@ public class BlazorQueryParameterRoutableComponentTest
     [TestMethod]
     public void BlazorQueryParameterRoutableComponent_Blazor() =>
         builder.AddPaths("BlazorQueryParameterRoutableComponent.razor")
-            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
     [TestMethod]
