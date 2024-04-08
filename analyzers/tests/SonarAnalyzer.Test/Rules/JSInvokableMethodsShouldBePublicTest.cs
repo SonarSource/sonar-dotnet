@@ -38,10 +38,7 @@ public class JSInvokableMethodsShouldBePublicTest
 
     [TestMethod]
     public void JSInvokableMethodsShouldBePublic_Razor() =>
-        builder
-            .AddPaths("JSInvokableMethodsShouldBePublic.razor", "JSInvokableMethodsShouldBePublic.razor.cs")
-            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-            .Verify();
+        builder.AddPaths("JSInvokableMethodsShouldBePublic.razor", "JSInvokableMethodsShouldBePublic.razor.cs").Verify();
 
     [TestMethod]
     public void JSInvokableMethodsShouldBePublic_CSharp8() =>

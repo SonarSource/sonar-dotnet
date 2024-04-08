@@ -40,7 +40,6 @@ namespace SonarAnalyzer.Test.Rules
         [DataTestMethod]
         public void VerifyMetrics() =>
             CreateBuilder(false, AllMetricsFileName)
-                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
                     {
                         messages.Should().ContainSingle();
@@ -62,7 +61,6 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void VerifyMetrics_Razor() =>
             CreateBuilder(false, RazorFileName, "Component.razor")
-                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
                 {
                     var orderedMessages = messages.OrderBy(x => x.FilePath, StringComparer.InvariantCulture).ToArray();
@@ -84,7 +82,6 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void VerifyMetrics_CsHtml() =>
             CreateBuilder(false, CsHtmlFileName)
-                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
                         // There should be no metrics messages for the cshtml files.
                         messages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo("_Imports.razor"));
@@ -92,7 +89,6 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void VerifyMetrics_CSharp12() =>
             CreateBuilder(false, CSharp12FileName)
-                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
                 {
                     messages.Should().ContainSingle();

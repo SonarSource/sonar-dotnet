@@ -110,7 +110,6 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow("Razor.cshtml")]
         public void Verify_RazorFilesAreIgnored(string fileName) =>
             CreateBuilder(ProjectType.Product, fileName)
-                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<FileMetadataInfo>(messages =>
                     messages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEmpty());    // There are more files on some PCs: JSExports.g.cs, LibraryImports.g.cs, JSImports.g.cs
 

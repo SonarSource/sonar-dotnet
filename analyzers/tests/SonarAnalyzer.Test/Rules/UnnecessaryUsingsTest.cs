@@ -53,20 +53,14 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow("_viewimports.cshtml")]
         [DataRow("_viEwiMpoRts.cshtml")]
         public void UnnecessaryUsings_RazorViewImportsCshtmlFile_NoIssueReported(string fileName) =>
-            builder
-                .AddSnippet(@"@using System.Text.Json;", fileName)
-                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-                .VerifyNoIssueReported();
+            builder.AddSnippet(@"@using System.Text.Json;", fileName).VerifyNoIssueReported();
 
         [DataTestMethod]
         [DataRow("_Imports.razor")]
         [DataRow("_imports.razor")]
         [DataRow("_iMpoRts.razor")]
         public void UnnecessaryUsings_RazorImportsRazorFile_NoIssueReported(string fileName) =>
-            builder
-                .AddSnippet(@"@using System.Text.Json;", fileName)
-                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-                .VerifyNoIssueReported();
+            builder.AddSnippet(@"@using System.Text.Json;", fileName).VerifyNoIssueReported();
 
         [DataTestMethod]
         [DataRow("RandomFile_ViewImports.cshtml")]
@@ -76,7 +70,6 @@ namespace SonarAnalyzer.Test.Rules
             builder
                 .AddSnippet("@using System.Linq;", "_ViewImports.cshtml")
                 .AddSnippet(@"@using System.Text.Json; @* Noncompliant *@", fileName)
-                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .Verify();
 
         [DataTestMethod]
@@ -87,7 +80,6 @@ namespace SonarAnalyzer.Test.Rules
             builder
             .AddSnippet("@using System.Linq;", "_Imports.razor")
             .AddSnippet(@"@using System.Text.Json; @* Noncompliant *@", fileName)
-            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
         [DataTestMethod]

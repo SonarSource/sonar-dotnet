@@ -90,7 +90,6 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void Verify_Duplicated_CS_GlobalUsings() =>
             CreateBuilder(ProjectType.Product, "Duplicated.CSharp10.cs")
-                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<CopyPasteTokenInfo>(messages =>
                     {
                         messages.Should().ContainSingle();
@@ -122,7 +121,6 @@ namespace SonarAnalyzer.Test.Rules
 
         private void Verify(string fileName, Action<IReadOnlyList<CopyPasteTokenInfo.Types.TokenInfo>> verifyTokenInfo) =>
             CreateBuilder(ProjectType.Product, fileName)
-                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<CopyPasteTokenInfo>(messages =>
                     {
                         messages.Should().ContainSingle();
@@ -138,8 +136,9 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow("Razor.cshtml")]
         public void Verify_NoMetricsAreComputedForRazorFiles(string fileName) =>
             CreateBuilder(ProjectType.Product, fileName)
-                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-                .VerifyUtilityAnalyzer<CopyPasteTokenInfo>(messages => messages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEmpty());
+                .VerifyUtilityAnalyzer<CopyPasteTokenInfo>(messages => messages.Select(x => Path.GetFileName(x.FilePath))
+                .Should()
+                .BeEmpty());
 
 #endif
 
