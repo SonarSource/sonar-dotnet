@@ -168,36 +168,25 @@ public class VerifierTest
     [DataRow("Dummy.SecondaryLocation.razor")]
     [DataRow("Dummy.SecondaryLocation.cshtml")]
     public void Verify_RazorWithAdditionalLocation(string path) =>
-        DummyWithLocation
-            .AddPaths(path)
-            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-            .Verify();
+        DummyWithLocation.AddPaths(path).Verify();
 
     [TestMethod]
     [DataRow("Dummy.razor")]
     [DataRow("Dummy.cshtml")]
     public void Verify_Razor(string path) =>
-        DummyWithLocation
-            .AddPaths(path)
-            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-            .Verify();
+        DummyWithLocation.AddPaths(path).Verify();
 
     [DataTestMethod]
     [DataRow("Dummy.razor")]
     [DataRow("Dummy.cshtml")]
     public void Verify_RazorAnalysisIsDisabled_DoesNotRaise(string path) =>
-        DummyWithLocation.AddPaths(path)
-            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarLintXml(TestContext, analyzeRazorCode: false))
-            .VerifyNoIssueReported();
+        DummyWithLocation.AddPaths(path).VerifyNoIssueReported();
 
     [DataTestMethod]
     [DataRow("Dummy.razor")]
     [DataRow("Dummy.cshtml")]
     public void Verify_RazorAnalysisInSLAndNugetContext_DoesNotRaise(string path) =>
-        DummyWithLocation
-            .AddPaths(path)
-            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Unknown))
-            .VerifyNoIssueReported();
+        DummyWithLocation.AddPaths(path).VerifyNoIssueReported();
 
     [TestMethod]
     public void Compile_Razor_DefaultFramework()
