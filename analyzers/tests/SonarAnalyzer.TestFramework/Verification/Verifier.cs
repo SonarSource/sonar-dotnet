@@ -165,6 +165,7 @@ internal class Verifier
         var sourceSnippets = builder.Snippets.Except(contentSnippets).ToArray();
         var editorConfigGenerator = new EditorConfigGenerator(Directory.GetCurrentDirectory());
         var hasContentDocuments = contentFilePaths.Length > 0 || contentSnippets.Length > 0;
+        concurrentAnalysis = !hasContentDocuments && concurrentAnalysis; // Concurrent analysis is not supported for Razor or cshtml files due to namespace issues
         var concurrentContentFiles = concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(contentFilePaths) : [];
         return SolutionBuilder.Create()
             .AddProject(language, builder.OutputKind)
@@ -176,9 +177,8 @@ internal class Verifier
             .AddSnippets(sourceSnippets)
             .AddSnippetAsAdditionalDocument(contentSnippets)
             .AddReferences(builder.References)
-            .AddReferences(hasContentDocuments ? NuGetMetadataReference.MicrosoftAspNetCore("2.2.0") : [])
-            .AddReferences(hasContentDocuments ? NuGetMetadataReference.MicrosoftAspNetCoreComponents("7.0.17") : [])
-            .AddReferences(hasContentDocuments ? NuGetMetadataReference.MicrosoftAspNetCoreComponentsWeb("7.0.17") : [])
+            .AddReferences(hasContentDocuments ? NuGetMetadataReference.MicrosoftAspNetCoreAppRef("7.0.17") : [])
+            .AddReferences(hasContentDocuments ? NuGetMetadataReference.SystemTextEncodingsWeb("7.0.0") : [])
             .AddAnalyzerConfigDocument(Path.Combine(Directory.GetCurrentDirectory(), ".editorconfig"), editorConfigGenerator.Generate(concurrentContentFiles.Concat(contentFilePaths).Concat(contentSnippets.Select(x => x.FileName))));
     }
 

@@ -223,27 +223,26 @@ namespace SonarAnalyzer.Test.Rules
                 .VerifyUtilityAnalyzer<SymbolReferenceInfo>(symbols =>
                     {
                         var orderedSymbols = symbols.OrderBy(x => x.FilePath, StringComparer.InvariantCulture).ToArray();
-                        orderedSymbols.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo("_Imports.razor", "Razor.razor", "Razor.razor.cs", "RazorComponent.razor", "ToDo.cs");
-                        orderedSymbols[0].FilePath.Should().EndWith("_Imports.razor");
-                        orderedSymbols[1].FilePath.Should().EndWith("Razor.razor");
+                        orderedSymbols.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo("Razor.razor", "Razor.razor.cs", "RazorComponent.razor", "ToDo.cs");
+                        orderedSymbols[0].FilePath.Should().EndWith("Razor.razor");
 
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 13, 4, 6, 20);     // currentCount
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 16, 10, 20, 21);   // IncrementAmount
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 18, 8);            // IncrementCount
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 34, 34);           // x
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 37, 28, 34);       // todos
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 39, 25);           // AddTodo
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 41);               // x
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 42);               // y
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 44, 41);           // LocalMethod
+                        VerifyReferences(orderedSymbols[0].Reference, 9, 13, 4, 6, 20);     // currentCount
+                        VerifyReferences(orderedSymbols[0].Reference, 9, 16, 10, 20, 21);   // IncrementAmount
+                        VerifyReferences(orderedSymbols[0].Reference, 9, 18, 8);            // IncrementCount
+                        VerifyReferences(orderedSymbols[0].Reference, 9, 34, 34);           // x
+                        VerifyReferences(orderedSymbols[0].Reference, 9, 37, 28, 34);       // todos
+                        VerifyReferences(orderedSymbols[0].Reference, 9, 39, 25);           // AddTodo
+                        VerifyReferences(orderedSymbols[0].Reference, 9, 41);               // x
+                        VerifyReferences(orderedSymbols[0].Reference, 9, 42);               // y
+                        VerifyReferences(orderedSymbols[0].Reference, 9, 44, 41);           // LocalMethod
 
-                        orderedSymbols[3].FilePath.Should().EndWith("RazorComponent.razor"); // RazorComponent.razor
+                        orderedSymbols[2].FilePath.Should().EndWith("RazorComponent.razor"); // RazorComponent.razor
                         // https://github.com/SonarSource/sonar-dotnet/issues/8417
                         // Net8 SDK: Declaration (1,0) - (1,17) Reference (1,6) - (1,23) <- Overlapping
                         // Declaration of TSomeVeryLongName is placed starting at index 0 (ignoring "@typeparam ")
                         // Reference "where TSomeVeryLongName" is placed starting at index 6 (ignoring "@typeparam TSomeVeryLongName ")
-                        VerifyReferences(orderedSymbols[3].Reference, 1, 1, 1);
-                        orderedSymbols[3].Reference.Single().Reference.Single().Should().BeEquivalentTo(new TextRange { StartLine = 1, EndLine = 1, StartOffset = 6, EndOffset = 23 });
+                        VerifyReferences(orderedSymbols[2].Reference, 1, 1, 1);
+                        orderedSymbols[2].Reference.Single().Reference.Single().Should().BeEquivalentTo(new TextRange { StartLine = 1, EndLine = 1, StartOffset = 6, EndOffset = 23 });
                     });
 
         [DataTestMethod]

@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Test.Rules
                 .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
                 {
                     var orderedMessages = messages.OrderBy(x => x.FilePath, StringComparer.InvariantCulture).ToArray();
-                    orderedMessages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo("_Imports.razor", RazorFileName, "Component.razor");
+                    orderedMessages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo(RazorFileName, "Component.razor");
 
                     var metrics = messages.Single(x => x.FilePath.EndsWith(RazorFileName));
 
@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Test.Rules
             CreateBuilder(false, CsHtmlFileName)
                 .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
                         // There should be no metrics messages for the cshtml files.
-                        messages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo("_Imports.razor"));
+                        messages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEmpty());
 
         [TestMethod]
         public void VerifyMetrics_CSharp12() =>
