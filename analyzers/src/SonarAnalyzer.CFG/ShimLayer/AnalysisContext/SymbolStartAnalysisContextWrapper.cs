@@ -35,6 +35,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
 
     private static readonly Action<object, Action<CodeBlockAnalysisContext>> RegisterCodeBlockActionMethod;
     private static readonly Action<object, Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>>> RegisterCodeBlockStartActionCS;
+    private static readonly Action<object, Action<object>> RegisterCodeBlockStartActionVB;
     private static readonly Action<object, Action<OperationAnalysisContext>, ImmutableArray<OperationKind>> RegisterOperationActionMethod;
     private static readonly Action<object, Action<OperationBlockAnalysisContext>> RegisterOperationBlockActionMethod;
     private static readonly Action<object, Action<OperationBlockStartAnalysisContext>> RegisterOperationBlockStartActionMethod;
@@ -53,6 +54,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
     static SymbolStartAnalysisContextWrapper()
     {
         var symbolStartAnalysisContextType = typeof(CompilationStartAnalysisContext).Assembly.GetType("Microsoft.CodeAnalysis.Diagnostics.SymbolStartAnalysisContext");
+        var languageKindEnumVBType = Type.GetType("Microsoft.CodeAnalysis.VisualBasic.SyntaxKind, Microsoft.CodeAnalysis.VisualBasic, Culture=neutral, PublicKeyToken=31bf3856ad364e35");
         CancellationTokenAccessor = CreatePropertyAccessor<CancellationToken>(nameof(CancellationToken));
         CompilationAccessor = CreatePropertyAccessor<Compilation>(nameof(Compilation));
         OptionsAccessor = CreatePropertyAccessor<AnalyzerOptions>(nameof(Options));
@@ -60,6 +62,10 @@ public readonly struct SymbolStartAnalysisContextWrapper
         RegisterCodeBlockActionMethod = CreateRegistrationMethod<CodeBlockAnalysisContext>(nameof(RegisterCodeBlockAction));
         RegisterCodeBlockStartActionCS =
             CreateRegistrationMethod<CodeBlockStartAnalysisContext<CS.SyntaxKind>>(nameof(RegisterCodeBlockStartAction), typeof(CS.SyntaxKind));
+        if (languageKindEnumVBType != null)
+        {
+            RegisterCodeBlockStartActionVB = CreateRegistrationMethodCodeBlockStart(languageKindEnumVBType);
+        }
         RegisterOperationActionMethod =
             CreateRegistrationMethodWithAdditionalParameter<OperationAnalysisContext, ImmutableArray<OperationKind>>(nameof(RegisterOperationAction));
         RegisterOperationBlockActionMethod = CreateRegistrationMethod<OperationBlockAnalysisContext>(nameof(RegisterOperationBlockAction));
@@ -97,6 +103,27 @@ public readonly struct SymbolStartAnalysisContextWrapper
                 registerActionParameter).Compile();
         }
 
+        // (object receiverParameter, Action<object> actionObjectParameter) =>
+        //     ((symbolStartAnalysisContextType)receiverParameter).RegisterCodeBlockStartAction<languageKindEnumType>(contextLanguageParameter => actionObjectParameter.Invoke(contextLanguageParameter))
+        Action<object, Action<object>> CreateRegistrationMethodCodeBlockStart(Type languageKindEnumType)
+        {
+            if (symbolStartAnalysisContextType == null)
+            {
+                return static (_, _) => { };
+            }
+            var receiverParameter = Parameter(typeof(object));
+            var actionObjectParameter = Parameter(typeof(Action<object>));
+            var contextLanguageType = typeof(CodeBlockStartAnalysisContext<>).MakeGenericType(languageKindEnumType);
+            var actionContextLanguageType = typeof(Action<>).MakeGenericType(contextLanguageType);
+            var contextLanguageParameter = Parameter(contextLanguageType);
+            var registerActionParameter = Parameter(actionContextLanguageType);
+            var innerRegistration = Lambda(actionContextLanguageType, Call(actionObjectParameter, nameof(Action.Invoke), [], contextLanguageParameter), contextLanguageParameter);
+            return Lambda<Action<object, Action<object>>>(
+                Call(Convert(receiverParameter, symbolStartAnalysisContextType), nameof(RegisterCodeBlockStartAction), [languageKindEnumType], innerRegistration),
+                receiverParameter,
+                actionObjectParameter).Compile();
+        }
+
         // (object receiverParameter, Action<TContext> registerActionParameter, TParameter additionalParameter) =>
         //     ((symbolStartAnalysisContextType)receiverParameter)."registrationMethodName"<typeArguments>(registerActionParameter, additionalParameter)
         Action<object, Action<TContext>, TParameter> CreateRegistrationMethodWithAdditionalParameter<TContext, TParameter>(string registrationMethodName, params Type[] typeArguments)
@@ -132,10 +159,8 @@ public readonly struct SymbolStartAnalysisContextWrapper
         }
         else if (languageKindType.FullName == VBSyntaxKind)
         {
-            // See https://github.com/SonarSource/sonar-dotnet/pull/9028 for how to implement this
-            // Attention: Do not add a package reference to "Microsoft.CodeAnalysis.VisualBasic.Workspaces".
-            // It creates hard to detect file not found errors in .NET SDK 3 and .NET SDK 5 and other scenarios
-            // we do not fully understand.
+            Action<object> cast = x => action((CodeBlockStartAnalysisContext<TLanguageKindEnum>)x);
+            RegisterCodeBlockStartActionVB(RoslynSymbolStartAnalysisContext, cast);
         }
         else
         {

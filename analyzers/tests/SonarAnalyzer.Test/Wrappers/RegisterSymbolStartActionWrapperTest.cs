@@ -159,7 +159,14 @@ public class RegisterSymbolStartActionWrapperTest
                 });
             }, SymbolKind.NamedType)));
         var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
-        visited.Should().BeEmpty();
+        visited.Should().BeEquivalentTo([
+            """Private i As Integer = 0""",
+            """
+            Public Sub M()
+                    Call ToString()
+                End Sub
+            """,
+            """ToString()"""]);
         diagnostics.Should().BeEmpty();
     }
 
