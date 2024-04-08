@@ -1,12 +1,8 @@
-
-
-}
-
-namespace Compliant
+﻿namespace Compliant
 {
     class ChildClass() : BaseClass(42) { } // Compliant
     
-    class ChildClassWithParamters(int value) : BaseClass(value) { } // Compliant
+    class ChildClassWithParameters(int value) : BaseClass(value) { } // Compliant
 
     class BaseClass(int value) { }
 }
