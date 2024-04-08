@@ -159,14 +159,7 @@ public class RegisterSymbolStartActionWrapperTest
                 });
             }, SymbolKind.NamedType)));
         await compilation.GetAnalyzerDiagnosticsAsync();
-        visited.Should().BeEquivalentTo([
-            """Private i As Integer = 0""",
-            """
-            Public Sub M()
-                    Call ToString()
-                End Sub
-            """,
-            """ToString()"""]);
+        visited.Should().BeEmpty();
     }
 
     [TestMethod]
@@ -316,7 +309,7 @@ public class RegisterSymbolStartActionWrapperTest
                 }, VB.SyntaxKind.InvocationExpression);
             }, SymbolKind.NamedType)));
         await compilation.GetAnalyzerDiagnosticsAsync();
-        visited.Should().BeEquivalentTo("ToString()");
+        visited.Should().BeEmpty();
     }
 
 #pragma warning disable RS1001 // Missing diagnostic analyzer attribute
