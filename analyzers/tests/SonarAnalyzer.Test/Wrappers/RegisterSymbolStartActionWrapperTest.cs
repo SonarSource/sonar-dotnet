@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.ShimLayer.AnalysisContext;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
@@ -158,8 +159,9 @@ public class RegisterSymbolStartActionWrapperTest
                     blockStart.RegisterSyntaxNodeAction(nodeContext => visited.Add(nodeContext.Node.ToString()), VB.SyntaxKind.InvocationExpression);
                 });
             }, SymbolKind.NamedType)));
-        await compilation.GetAnalyzerDiagnosticsAsync();
+        var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
         visited.Should().BeEmpty();
+        diagnostics.Should().BeEmpty();
     }
 
     [TestMethod]
@@ -308,8 +310,9 @@ public class RegisterSymbolStartActionWrapperTest
                     visited.Add(nodeName);
                 }, VB.SyntaxKind.InvocationExpression);
             }, SymbolKind.NamedType)));
-        await compilation.GetAnalyzerDiagnosticsAsync();
+        var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
         visited.Should().BeEmpty();
+        diagnostics.Should().BeEmpty();
     }
 
 #pragma warning disable RS1001 // Missing diagnostic analyzer attribute
