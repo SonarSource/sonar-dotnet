@@ -115,6 +115,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
             var actionContextLanguageType = typeof(Action<>).MakeGenericType(contextLanguageType);
             var contextLanguageParameter = Parameter(contextLanguageType);
             var registerActionParameter = Parameter(actionContextLanguageType);
+            // Action<CodeBlockStartAnalysisContext<languageKindEnumType>> innerRegistration = contextLanguageParameter => actionObjectParameter.Invoke(contextLanguageParameter)
             var innerRegistration = Lambda(actionContextLanguageType, Call(actionObjectParameter, nameof(Action.Invoke), [], contextLanguageParameter), contextLanguageParameter);
             return Lambda<Action<object, Action<object>>>(
                 Call(Convert(receiverParameter, symbolStartAnalysisContextType), nameof(RegisterCodeBlockStartAction), [languageKindEnumType], innerRegistration),
@@ -157,8 +158,8 @@ public readonly struct SymbolStartAnalysisContextWrapper
         }
         else if (languageKindType.FullName == "Microsoft.CodeAnalysis.VisualBasic.SyntaxKind")
         {
-            Action<object> cast = x => action((CodeBlockStartAnalysisContext<TLanguageKindEnum>)x);
-            RegisterCodeBlockStartActionVB(RoslynSymbolStartAnalysisContext, cast);
+            Action<object> wrapper = x => action((CodeBlockStartAnalysisContext<TLanguageKindEnum>)x);
+            RegisterCodeBlockStartActionVB(RoslynSymbolStartAnalysisContext, wrapper);
         }
         else
         {
