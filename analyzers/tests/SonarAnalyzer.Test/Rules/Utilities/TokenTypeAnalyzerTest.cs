@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
-        [DataRow(ProjectType.Test)]
+        [DataRow(ProjectType.Test)] 
         public void Verify_MainTokens_VB(ProjectType projectType) =>
             Verify("Tokens.vb", projectType, info =>
             {
