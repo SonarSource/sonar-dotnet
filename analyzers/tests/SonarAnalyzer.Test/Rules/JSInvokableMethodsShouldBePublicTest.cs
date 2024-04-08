@@ -38,7 +38,10 @@ public class JSInvokableMethodsShouldBePublicTest
 
     [TestMethod]
     public void JSInvokableMethodsShouldBePublic_Razor() =>
-        builder.AddPaths("JSInvokableMethodsShouldBePublic.razor", "JSInvokableMethodsShouldBePublic.razor.cs").Verify();
+        builder
+            .AddPaths("JSInvokableMethodsShouldBePublic.razor", "JSInvokableMethodsShouldBePublic.razor.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .Verify();
 
     [TestMethod]
     public void JSInvokableMethodsShouldBePublic_CSharp8() =>
