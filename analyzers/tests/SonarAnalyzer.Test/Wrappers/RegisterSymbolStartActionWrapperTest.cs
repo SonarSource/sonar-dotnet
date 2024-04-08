@@ -158,7 +158,7 @@ public class RegisterSymbolStartActionWrapperTest
                     blockStart.RegisterSyntaxNodeAction(nodeContext => visited.Add(nodeContext.Node.ToString()), VB.SyntaxKind.InvocationExpression);
                 });
             }, SymbolKind.NamedType)));
-        await compilation.GetAnalyzerDiagnosticsAsync();
+        var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
         visited.Should().BeEquivalentTo([
             """Private i As Integer = 0""",
             """
@@ -167,6 +167,7 @@ public class RegisterSymbolStartActionWrapperTest
                 End Sub
             """,
             """ToString()"""]);
+        diagnostics.Should().BeEmpty();
     }
 
     [TestMethod]
