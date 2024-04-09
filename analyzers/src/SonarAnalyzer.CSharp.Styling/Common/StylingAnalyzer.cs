@@ -18,16 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp.Styling;
+namespace SonarAnalyzer.CSharp.Styling.Common;
 
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class FileScopeNamespace : StylingAnalyzer
+public abstract class StylingAnalyzer : SonarDiagnosticAnalyzer
 {
-    public FileScopeNamespace() : base("T0001", "Use file-scoped namespace.") { }
+    protected DiagnosticDescriptor Rule { get; }
 
-    protected override void Initialize(SonarAnalysisContext context) =>
-        // ToDo: Rework reporting
-        context.RegisterNodeAction(
-            c => c.ReportIssue(Diagnostic.Create(Rule, ((NamespaceDeclarationSyntax)c.Node).Name.GetLocation())),
-            SyntaxKind.NamespaceDeclaration);
+    public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+    protected StylingAnalyzer(string id, string messageFormat, SourceScope scope = SourceScope.All) =>
+       Rule = DescriptorFactory.Create(id, messageFormat, scope);
 }
