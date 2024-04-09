@@ -170,4 +170,28 @@ namespace Tests.Diagnostics
             fileStream.Dispose();
         }
     }
+
+    public class Repro_8336_1 : IDisposable
+    {
+        private readonly CancellationTokenSource source;
+
+        public Repro_8336_1() =>
+            source = new CancellationTokenSource(); // Compliant
+
+        public void Dispose() =>
+             source.Dispose();
+    }
+
+    public class Repro_8336_2 : IDisposable
+    {
+        private readonly CancellationTokenSource source;
+
+        public Repro_8336_2() =>
+            source = new CancellationTokenSource(); // Noncompliant
+
+        public void Dispose()
+        {
+            // Did we forget to dispose something here?
+        }
+    }
 }
