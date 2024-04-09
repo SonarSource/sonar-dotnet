@@ -163,6 +163,7 @@ internal class Verifier
         var sourceFilePaths = paths.Except(contentFilePaths).ToArray();
         var contentSnippets = builder.Snippets.Where(x => IsRazorOrCshtml(x.FileName)).ToArray();
         var sourceSnippets = builder.Snippets.Except(contentSnippets).ToArray();
+        contentSnippets = contentSnippets.Select(x => x with { FileName = Path.Combine(Directory.GetCurrentDirectory(), "TestCases", x.FileName) }).ToArray();
         var editorConfigGenerator = new EditorConfigGenerator(Directory.GetCurrentDirectory());
         var hasContentDocuments = contentFilePaths.Length > 0 || contentSnippets.Length > 0;
         concurrentAnalysis = !hasContentDocuments && concurrentAnalysis; // Concurrent analysis is not supported for Razor or cshtml files due to namespace issues

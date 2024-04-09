@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
+
 namespace SonarAnalyzer.Test.TestFramework.Tests.Build;
 
 [TestClass]
@@ -105,7 +107,7 @@ public class ProjectBuilderTest
         EmptyCS.AddAnalyzerReferences(SourceGeneratorProvider.SourceGenerators).Project.AnalyzerReferences.Should().BeEquivalentTo(SourceGeneratorProvider.SourceGenerators);
 
     private static void AssertAdditionalDocumentContains(ProjectBuilder builder, string fileName) =>
-        builder.Project.AdditionalDocuments.Should().ContainSingle(x => x.Name == fileName);
+        builder.Project.AdditionalDocuments.Should().ContainSingle(x => x.Name == Path.Combine(Directory.GetCurrentDirectory(), "TestCases", fileName));
 
     [TestMethod]
     public void AddAnalyzerConfigDocument_ShouldAddDocumentToProject() =>

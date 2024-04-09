@@ -215,15 +215,6 @@ public class VerifierTest
             .Throw<NotSupportedException>();
 
     [TestMethod]
-    public void Compile_Razor_ParseOptions_DefaultLanguageVersion()
-    {
-        // Version below C# 10 are not compatible with our EmptyProject scaffolding due to nullable context and global using statements.
-        var expectedLanguageVersions = ParseOptionsHelper.FromCSharp10.Cast<CSharpParseOptions>().Select(x => x.LanguageVersion.ToString());
-        var compilations = DummyWithLocation.AddPaths("Dummy.razor").Build().Compile(false);
-        compilations.Select(c => c.Compilation.LanguageVersionString()).Should().BeEquivalentTo(expectedLanguageVersions);
-    }
-
-    [TestMethod]
     public void Compile_Razor_ParseOptions_WithSpecificVersion()
     {
         var builder = DummyWithLocation.AddPaths("Dummy.razor");
@@ -259,6 +250,43 @@ public class VerifierTest
     }
 
     [TestMethod]
+    public void Compile_Razor_Snippet()
+    {
+        var compilation = DummyWithLocation
+            .AddSnippet("""
+                <p>@Counter</p>
+
+                @code {
+                    int Counter = 0;
+                }
+                """, "snippet.razor")
+            .WithLanguageVersion(LanguageVersion.Latest)
+            .Build()
+            .Compile(false)
+            .Single();
+
+        compilation.Compilation.SyntaxTrees.Should().ContainSingle();
+        ContainsSyntaxTreeWithName(compilation, "snippet_razor.g.cs");
+    }
+
+    [TestMethod]
+    public void Compile_Cshtml_Snippet()
+    {
+        var compilation = DummyWithLocation
+            .AddSnippet("""
+                @{ var total = 7; }
+                <p>@total</p>
+                """, "snippet.cshtml")
+            .WithLanguageVersion(LanguageVersion.Latest)
+            .Build()
+            .Compile(false)
+            .Single();
+
+        compilation.Compilation.SyntaxTrees.Should().ContainSingle();
+        ContainsSyntaxTreeWithName(compilation, "snippet_cshtml.g.cs");
+    }
+
+    [TestMethod]
     public void Compile_Razor_Snippet_NoName()
     {
         var compilation = DummyWithLocation
@@ -269,9 +297,8 @@ public class VerifierTest
             .Compile(false)
             .Single();
 
-        compilation.AdditionalSourceFiles.Should().ContainSingle();
-        ContainsAdditionalSourceFileWithName(compilation, "Dummy.cshtml");
-        ContainsSyntaxTreeWithName(compilation, "snippet.0.cs");
+        ContainsSyntaxTreeWithName(compilation, "Dummy_cshtml.g.cs");
+        ContainsSyntaxTreeWithName(compilation, "snippet0.cs");
     }
 
     [TestMethod]
@@ -285,8 +312,7 @@ public class VerifierTest
             .Compile(false)
             .Single();
 
-        compilation.AdditionalSourceFiles.Should().ContainSingle();
-        ContainsAdditionalSourceFileWithName(compilation, "Dummy.cshtml");
+        ContainsSyntaxTreeWithName(compilation, "Dummy_cshtml.g.cs");
         ContainsSyntaxTreeWithName(compilation, "snippet.cs");
     }
 
@@ -301,11 +327,7 @@ public class VerifierTest
             .Compile(false)
             .Single();
 
-        compilation.AdditionalSourceFiles.Should().HaveCount(2);
-
-        ContainsAdditionalSourceFileWithName(compilation, "Dummy.cshtml");
-        ContainsAdditionalSourceFileWithName(compilation, "snippet.cshtml");
-
+        ContainsSyntaxTreeWithName(compilation, "Dummy_cshtml.g.cs");
         ContainsSyntaxTreeWithName(compilation, "snippet_cshtml.g.cs");
     }
 
@@ -323,15 +345,11 @@ public class VerifierTest
             .Compile(false)
             .Single();
 
-        compilation.AdditionalSourceFiles.Should().HaveCount(2);
-
-        ContainsAdditionalSourceFileWithName(compilation, "Dummy.cshtml");
-        ContainsAdditionalSourceFileWithName(compilation, "snippet.cshtml");
-
-        ContainsSyntaxTreeWithName(compilation, "snippet.0.cs");
-        ContainsSyntaxTreeWithName(compilation, "snippet.1.cs");
-        ContainsSyntaxTreeWithName(compilation, "snippet.cs");
+        ContainsSyntaxTreeWithName(compilation, "Dummy_cshtml.g.cs");
         ContainsSyntaxTreeWithName(compilation, "snippet_cshtml.g.cs");
+        ContainsSyntaxTreeWithName(compilation, "snippet0.cs");
+        ContainsSyntaxTreeWithName(compilation, "snippet1.cs");
+        ContainsSyntaxTreeWithName(compilation, "snippet.cs");
     }
 
 #endif
@@ -830,9 +848,6 @@ public class VerifierTest
 
     private string WriteFile(string name, string content) =>
         TestHelper.WriteFile(TestContext, $@"TestCases\{name}", content);
-
-    private static void ContainsAdditionalSourceFileWithName(CompilationData compilation, string suffix) =>
-        compilation.AdditionalSourceFiles.Should().ContainSingle(x => x.EndsWith(suffix));
 
     private static void ContainsSyntaxTreeWithName(CompilationData compilation, string suffix) =>
         compilation.Compilation.SyntaxTrees.Select(x => x.FilePath).Should().Contain(x => x.EndsWith(suffix));
