@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Xml.Linq;
-
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -44,7 +42,7 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
         || declaration.BaseList.Types.Any(x => x.Type is GenericNameSyntax); // or a generic class/interface
 
     protected override bool HasAnyAttribute(SyntaxNode node) =>
-        node is TypeDeclarationSyntax { AttributeLists.Count: > 0  };
+        node is TypeDeclarationSyntax { AttributeLists.Count: > 0 };
 
     protected override string DeclarationTypeKeyword(SyntaxNode node) =>
         ((TypeDeclarationSyntax)node).Keyword.ValueText;
@@ -61,22 +59,16 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
         || IsParameterlessRecord(node);
 
     private static bool IsParameterlessClass(SyntaxNode node) =>
-        ClassDeclarationSyntax(node) is { } declaration
-            ? LacksParameters(declaration.ParameterList, declaration.BaseList)
-            : node is ClassDeclarationSyntax;
+        node is ClassDeclarationSyntax declaration
+        && LacksParameters(declaration.ParameterList(), declaration.BaseList);
 
     private static bool IsParameterlessRecord(SyntaxNode node) =>
         RecordDeclarationSyntax(node) is { } declaration
         && LacksParameters(declaration.ParameterList, declaration.BaseList);
 
     private static bool LacksParameters(ParameterListSyntax parameterList, BaseListSyntax baseList) =>
-        parameterList?.Parameters is not { Count: >= 1 }
-        && BaseTypeSyntax(baseList) is not { ArgumentList.Arguments.Count: >= 1 };
-
-    private static ClassDeclarationSyntaxWrapper? ClassDeclarationSyntax(SyntaxNode node) =>
-       ClassDeclarationSyntaxWrapper.IsInstance(node)
-           ? (ClassDeclarationSyntaxWrapper)node
-           : null;
+        parameterList?.Parameters is not { Count: > 0 }
+        && BaseTypeSyntax(baseList) is not { ArgumentList.Arguments.Count: > 0 };
 
     private static RecordDeclarationSyntaxWrapper? RecordDeclarationSyntax(SyntaxNode node) =>
         RecordDeclarationSyntaxWrapper.IsInstance(node)
