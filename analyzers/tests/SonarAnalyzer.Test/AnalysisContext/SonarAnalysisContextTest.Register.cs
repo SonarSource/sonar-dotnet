@@ -430,6 +430,7 @@ public partial class SonarAnalysisContextTest
             .AddAnalyzer(() => new DummyAnalyzerWithLocation(ruleId, DiagnosticDescriptorFactory.MainSourceScopeTag))
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .AddSnippet(Snippet(extension), $"SomeFile.{extension}")
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
             .VerifyNoIssueReported();
 
     [DataTestMethod]
@@ -440,6 +441,7 @@ public partial class SonarAnalysisContextTest
             .AddAnalyzer(() => new DummyAnalyzerWithLocation("DummyId", DiagnosticDescriptorFactory.TestSourceScopeTag))
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Test))
             .AddSnippet(Snippet(extension), $"SomeFile.{extension}")
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
             .VerifyNoIssueReported();
 
     [DataTestMethod]
