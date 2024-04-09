@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (IsViolatingRule(methodSymbol) && !IsExceptionToTheRule(methodDeclaration, methodSymbol))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.ReturnType.GetLocation()));
+                        c.ReportIssue(Rule, methodDeclaration.ReturnType);
                     }
                 },
                 SyntaxKind.MethodDeclaration);
