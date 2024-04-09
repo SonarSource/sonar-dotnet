@@ -68,6 +68,7 @@ packages/
 
 # Analyzer binaries
 analyzers/packaging/binaries/
+analyzers/packaging/internal/
 
 # Actual SARIF files
 analyzers/its/actual/

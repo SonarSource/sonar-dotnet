@@ -31,9 +31,14 @@
     <ItemGroup>
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CFG.dll" />
-      <BinariesToCopy Include="$(OutputPath)$(TargetFileName)" />
     </ItemGroup>
     <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)" />
+    <!-- Avoid this analyzer to picked up by Java ITs by putting it outside of the binaries folder -->
+    <Copy SourceFiles="$(OutputPath)$(TargetFileName)" DestinationFolder="$(BinariesFolder)\..\internal" />
+  </Target>
+
+  <Target Name="CleanInternal" AfterTargets="Clean">
+    <RemoveDir Directories="$(BinariesFolder)\..\internal" />
   </Target>
 
 </Project>
