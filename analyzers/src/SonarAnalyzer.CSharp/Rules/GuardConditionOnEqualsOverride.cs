@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly ISet<string> MethodNames = new HashSet<string> { GetHashCodeEqualsOverride.EqualsName };
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterCodeBlockStartAction<SyntaxKind>(
+            context.RegisterCodeBlockStartAction(
                 cb =>
                 {
                     if (!(cb.OwningSymbol is IMethodSymbol methodSymbol)

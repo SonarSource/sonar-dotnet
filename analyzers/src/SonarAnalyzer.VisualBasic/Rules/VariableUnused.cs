@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterCodeBlockStartAction<SyntaxKind>(cbc =>
+            context.RegisterCodeBlockStartAction(cbc =>
             {
                 var collector = new UnusedLocalsCollector();
 
