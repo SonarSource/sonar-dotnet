@@ -21,18 +21,13 @@
 namespace SonarAnalyzer.Rules.CSharp.Styling;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class FileScopeNamespace : SonarDiagnosticAnalyzer    // ToDo: https://github.com/SonarSource/sonar-dotnet/issues/9035 Extract into a usefull base class
+public sealed class FileScopeNamespace : StylingAnalyzer
 {
-    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create("T0001", "Use file-scoped namespaces");
+    public FileScopeNamespace() : base("T0001", "Use file-scoped namespace.") { }
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);   // ToDo: https://github.com/SonarSource/sonar-dotnet/issues/9035 Remove this
-
-    protected override void Initialize(SonarAnalysisContext context)
-    {
-        // ToDo: https://github.com/SonarSource/sonar-dotnet/issues/9035
-        if (context is null)
-        {
-            return; // This is a useless coverage test for now. It will be removed
-        }
-    }
+    protected override void Initialize(SonarAnalysisContext context) =>
+        // ToDo: Rework reporting
+        context.RegisterNodeAction(
+            c => c.ReportIssue(Diagnostic.Create(Rule, ((NamespaceDeclarationSyntax)c.Node).Name.GetLocation())),
+            SyntaxKind.NamespaceDeclaration);
 }

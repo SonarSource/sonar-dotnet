@@ -18,18 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Styling.Test.Rules;
+namespace SonarAnalyzer.CSharp.Styling.Common;
 
-[TestClass]
-public class FileScopeNamespaceTest
+public abstract class StylingAnalyzer : SonarDiagnosticAnalyzer
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<FileScopeNamespace>().WithOptions(ParseOptionsHelper.CSharpLatest).WithConcurrentAnalysis(false);
+    protected DiagnosticDescriptor Rule { get; }
 
-    [TestMethod]
-    public void FileScopeNamespace() =>
-        builder.AddPaths("FileScopeNamespace.cs").Verify();
+    public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-    [TestMethod]
-    public void FileScopeNamespace_Compliant() =>
-        builder.AddPaths("FileScopeNamespace.Compliant.cs").VerifyNoIssueReported();
+    protected StylingAnalyzer(string id, string messageFormat, SourceScope scope = SourceScope.All) =>
+       Rule = DescriptorFactory.Create(id, messageFormat, scope);
 }
