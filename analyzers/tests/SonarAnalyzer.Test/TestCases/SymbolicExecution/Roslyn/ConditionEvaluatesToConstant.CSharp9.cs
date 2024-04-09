@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Tests.Diagnostics
@@ -318,4 +319,17 @@ public class Repro_8008
             ("A", "B") => 0,
             (var x, _) => -1,    // Noncompliant - FP
         };
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9051
+class Repro_9051
+{
+    string Method(bool b) =>
+        TrySomething(out var s) switch
+        {
+            true => s,
+            false => ""     // Noncompliant FP
+        };
+
+    bool TrySomething([NotNullWhen(true)] out string outValue) => throw new NotImplementedException();
 }
