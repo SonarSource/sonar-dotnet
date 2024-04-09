@@ -50,9 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .OfType<IMethodSymbol>()
                         .Where(IsIEquatableEqualsMethodCandidate)
                         .ToList()
-                        .ForEach(ms => c.ReportIssue(Diagnostic.Create(rule,
-                            classDeclaration.Identifier.GetLocation(),
-                            ms.Parameters[0].Type.Name)));
+                        .ForEach(ms => c.ReportIssue(rule, classDeclaration.Identifier, ms.Parameters[0].Type.Name));
                 }, SyntaxKind.ClassDeclaration);
         }
 

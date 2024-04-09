@@ -26,8 +26,7 @@ public sealed class FileScopeNamespace : StylingAnalyzer
     public FileScopeNamespace() : base("T0001", "Use file-scoped namespace.") { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        // ToDo: Rework reporting
         context.RegisterNodeAction(
-            c => c.ReportIssue(Diagnostic.Create(Rule, ((NamespaceDeclarationSyntax)c.Node).Name.GetLocation())),
+            c => c.ReportIssue(Rule, ((NamespaceDeclarationSyntax)c.Node).Name),
             SyntaxKind.NamespaceDeclaration);
 }

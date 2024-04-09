@@ -95,8 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
                 && HasCountProperty(memberAccessExpression, context.SemanticModel))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, GetReportLocation(invocation),
-                    string.Format(MessageUseInstead, $"'{CountName}' property")));
+                context.ReportIssue(Rule, GetReportLocation(invocation), string.Format(MessageUseInstead, $"'{CountName}' property"));
             }
 
             static bool HasCountProperty(ExpressionSyntax expression, SemanticModel semanticModel) =>
