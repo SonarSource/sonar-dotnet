@@ -120,9 +120,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (context.SemanticModel.GetSymbolInfo(innerInvocation).Symbol is IMethodSymbol innerMethodSymbol
                 && IsToCollectionCall(innerMethodSymbol))
             {
-                context.ReportIssue(Diagnostic.Create(Rule,
-                    GetReportLocation(innerInvocation),
-                    GetToCollectionCallsMessage(context, innerInvocation, innerMethodSymbol)));
+                context.ReportIssue(Rule, GetReportLocation(innerInvocation), GetToCollectionCallsMessage(context, innerInvocation, innerMethodSymbol));
             }
         }
 
@@ -272,8 +270,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && IsFirstExpressionInLambdaIsNullChecking(outerMethodSymbol, outerInvocation)
                 && TryGetCastInLambda(SyntaxKind.AsExpression, innerMethodSymbol, innerInvocation, out var typeNameInInner))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, GetReportLocation(innerInvocation),
-                    string.Format(MessageUseInstead, $"'OfType<{typeNameInInner}>()'")));
+                context.ReportIssue(Rule, GetReportLocation(innerInvocation), string.Format(MessageUseInstead, $"'OfType<{typeNameInInner}>()'"));
             }
 
             if (outerMethodSymbol.Name == SelectMethodName
@@ -282,8 +279,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && TryGetCastInLambda(SyntaxKind.IsExpression, innerMethodSymbol, innerInvocation, out typeNameInInner)
                 && typeNameInOuter == typeNameInInner)
             {
-                context.ReportIssue(Diagnostic.Create(Rule, GetReportLocation(innerInvocation),
-                    string.Format(MessageUseInstead, $"'OfType<{typeNameInInner}>()'")));
+                context.ReportIssue(Rule, GetReportLocation(innerInvocation), string.Format(MessageUseInstead, $"'OfType<{typeNameInInner}>()'"));
             }
         }
 
@@ -433,8 +429,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && innerMethodSymbol.Name == WhereMethodName
                 && innerMethodSymbol.Parameters.Any(symbol => (symbol.Type as INamedTypeSymbol)?.TypeArguments.Length == WherePredicateTypeArgumentNumber))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, GetReportLocation(innerInvocation),
-                    string.Format(MessageDropAndChange, WhereMethodName, outerMethodSymbol.Name)));
+                context.ReportIssue(Rule, GetReportLocation(innerInvocation), string.Format(MessageDropAndChange, WhereMethodName, outerMethodSymbol.Name));
                 return true;
             }
 
