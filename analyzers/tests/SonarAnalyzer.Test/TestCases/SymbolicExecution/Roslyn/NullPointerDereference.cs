@@ -140,7 +140,7 @@ namespace Tests.Diagnostics
                 Property = null;
                 _ = Property.HasValue;  // Compliant
                 Property = null;
-                Property.GetType();     // FN https://github.com/SonarSource/sonar-dotnet/issues/6930
+                Property.GetType();     // Noncompliant
                 Property = default(T);
                 Property.GetType();     // Compliant
             }
@@ -366,7 +366,7 @@ namespace Tests.Diagnostics
             public void M()
             {
                 Property = null;
-                Property.ToString();  // FN https://github.com/SonarSource/sonar-dotnet/issues/6930
+                Property.ToString();  // Noncompliant
             }
         }
 
@@ -2123,7 +2123,7 @@ class Repro_8905
 
         if (Value != null)                      // Both branches enter here because PropertyReference is not learning from TrackedSymbol
         {
-            Console.WriteLine(value.Length);    // Noncompliant FP
+            Console.WriteLine(value.Length);    // Compliant
         }
     }
 }

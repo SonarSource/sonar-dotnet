@@ -133,9 +133,7 @@ Public Class Program
             Prop = Nothing
             Dim X = Prop.HasValue   ' Compliant
             Prop = Nothing
-            Prop.GetType()          ' FN https://github.com/SonarSource/sonar-dotnet/issues/6930
-            Prop = Nothing
-            Prop.GetType()          ' Compliant
+            Prop.GetType()          ' Noncompliant
         End Sub
     End Class
 

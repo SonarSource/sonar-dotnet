@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Data;
 using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
@@ -1079,9 +1078,9 @@ Sample UntrackedSymbol() => this;";
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.PropertyReference);
         validator.TagValue("AfterSetNull").Should().HaveOnlyConstraints(ObjectConstraint.Null);
-        validator.TagValue("AfterSetNull_Operation").Should().BeNull();          // Should be .HaveOnlyConstraints(ObjectConstraint.Null)
+        validator.TagValue("AfterSetNull_Operation").Should().HaveOnlyConstraints(ObjectConstraint.Null);
         validator.TagValue("AfterReadReference").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
-        validator.TagValue("AfterReadReference_Operation").Should().BeNull();    // Should be .HaveOnlyConstraints(ObjectConstraint.NotNull)
+        validator.TagValue("AfterReadReference_Operation").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
     }
 
     [TestMethod]

@@ -73,20 +73,23 @@ internal sealed class PropertyReference : BranchingProcessor<IPropertyReferenceO
 
     protected override ProgramState PreProcess(ProgramState state, IPropertyReferenceOperationWrapper operation, bool isInLoop)
     {
-        var symbol = operation.Instance.TrackedSymbol(state);
-        if (symbol is not null)
+        if (operation.WrappedOperation.TrackedSymbol(state) is { } propertySymbol && state[propertySymbol] is { } propertyValue)
+        {
+            state = state.SetOperationValue(operation, propertyValue);
+        }
+        var instanceSymbol = operation.Instance.TrackedSymbol(state);
+        if (instanceSymbol is not null)
         {
             if (!IsNullableProperty(operation, "HasValue"))
             {
-                state = state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
+                state = state.SetSymbolConstraint(instanceSymbol, ObjectConstraint.NotNull);
             }
-            if (IsNullableProperty(operation, "Value") && state[symbol] is { } value)
+            if (IsNullableProperty(operation, "Value") && state[instanceSymbol] is { } instanceValue)
             {
-                state = state.SetOperationValue(operation, value);
+                state = state.SetOperationValue(operation, instanceValue);
             }
         }
-        state = CollectionTracker.LearnFrom(state, operation, symbol);
-        return state;
+        return CollectionTracker.LearnFrom(state, operation, instanceSymbol);
     }
 
     protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IPropertyReferenceOperationWrapper operation) =>
