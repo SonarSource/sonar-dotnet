@@ -27,4 +27,13 @@
     <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
   </ItemGroup>
 
+  <Target Name="CopyBinaries" AfterTargets="Build">
+    <ItemGroup>
+      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.dll" />
+      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CFG.dll" />
+      <BinariesToCopy Include="$(OutputPath)$(TargetFileName)" />
+    </ItemGroup>
+    <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)" />
+  </Target>
+
 </Project>

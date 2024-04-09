@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>SonarAnalyzer.CSharp.Styling</id>
+    <version>9.24.0.0</version>
+    <title>Internal styling analyzer for C#</title>
+    <authors>SonarSource</authors>
+    <owners>SonarSource</owners>
+    <license type="expression">LGPL-3.0-only</license>
+    <projectUrl>https://redirect.sonarsource.com/doc/sonar-visualstudio.html</projectUrl>
+    <repository type="git" url="https://github.com/SonarSource/sonar-dotnet" />
+    <icon>images\sonarsource_64.png</icon>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>Internal styling analyzer for C#</summary>
+    <description>We do not provide support for this package.</description>
+    <language>en-US</language>
+    <copyright>Copyright © 2015-2024 SonarSource SA</copyright>
+    <developmentDependency>true</developmentDependency>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System" targetFramework="" />
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+    <file src="binaries\SonarAnalyzer.dll" target="analyzers" />
+    <file src="binaries\SonarAnalyzer.CFG.dll" target="analyzers" />
+    <file src="binaries\SonarAnalyzer.CSharp.dll" target="analyzers" />
+    <file src="binaries\SonarAnalyzer.CSharp.Styling.dll" target="analyzers" />
+    <file src="logos\sonarsource_64.png" target="images\" />
+    <file src="..\..\THIRD-PARTY-NOTICES.txt" target="license\" />
+  </files>
+</package>
