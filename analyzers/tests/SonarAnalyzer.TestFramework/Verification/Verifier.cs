@@ -164,10 +164,9 @@ internal class Verifier
         var contentSnippets = builder.Snippets.Where(x => IsRazorOrCshtml(x.FileName)).ToArray();
         var sourceSnippets = builder.Snippets.Where(x => !contentSnippets.Contains(x)).ToArray(); // Cannot use Except because it Distincts the elements
 
-        //var tempPath = Path.GetTempPath();
         contentSnippets = contentSnippets.Select(x =>
         {
-            var tempFilePath = Path.Combine(Directory.GetCurrentDirectory(), "TestCases", x.FileName); // Path.Combine(tempPath, x.FileName);
+            var tempFilePath = Path.Combine(Directory.GetCurrentDirectory(), "TestCases", x.FileName);
             File.WriteAllText(tempFilePath, x.Content);
             return x with { FileName = tempFilePath };
         }).ToArray();
