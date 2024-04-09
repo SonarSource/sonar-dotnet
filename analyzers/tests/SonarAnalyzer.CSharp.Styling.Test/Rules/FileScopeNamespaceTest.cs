@@ -23,7 +23,13 @@ namespace SonarAnalyzer.CSharp.Styling.Test.Rules;
 [TestClass]
 public class FileScopeNamespaceTest
 {
+    private readonly VerifierBuilder builder = new VerifierBuilder<FileScopeNamespace>().WithOptions(ParseOptionsHelper.CSharpLatest).WithConcurrentAnalysis(false);
+
     [TestMethod]
     public void FileScopeNamespace() =>
-        new VerifierBuilder<FileScopeNamespace>().WithOptions(ParseOptionsHelper.CSharpLatest).AddPaths("FileScopeNamespace.cs").Verify();
+        builder.AddPaths("FileScopeNamespace.cs").Verify();
+
+    [TestMethod]
+    public void FileScopeNamespace_Compliant() =>
+        builder.AddPaths("FileScopeNamespace.Compliant.cs").Verify();
 }
