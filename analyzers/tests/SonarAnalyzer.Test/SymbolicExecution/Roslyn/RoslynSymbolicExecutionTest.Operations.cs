@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Data;
 using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
@@ -1066,16 +1065,22 @@ Sample UntrackedSymbol() => this;";
     [TestMethod]
     public void PropertyReference_AutoProperty_IsTracked()
     {
-        const string code = """
-                AutoProperty = null;
-                Tag("AfterSetNull", AutoProperty);
-                AutoProperty.ToString();
-                Tag("AfterReadReference", AutoProperty);
-                """;
+        var code = """
+            AutoProperty = null;
+            var x = AutoProperty;
+            Tag("AfterSetNull", AutoProperty);
+            Tag("AfterSetNull_Operation", x);
+            AutoProperty.ToString();
+            x = AutoProperty;
+            Tag("AfterReadReference", AutoProperty);
+            Tag("AfterReadReference_Operation", x);
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.PropertyReference);
         validator.TagValue("AfterSetNull").Should().HaveOnlyConstraints(ObjectConstraint.Null);
+        validator.TagValue("AfterSetNull_Operation").Should().HaveOnlyConstraints(ObjectConstraint.Null);
         validator.TagValue("AfterReadReference").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+        validator.TagValue("AfterReadReference_Operation").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
