@@ -163,7 +163,15 @@ internal class Verifier
         var sourceFilePaths = paths.Except(contentFilePaths).ToArray();
         var contentSnippets = builder.Snippets.Where(x => IsRazorOrCshtml(x.FileName)).ToArray();
         var sourceSnippets = builder.Snippets.Except(contentSnippets).ToArray();
-        contentSnippets = contentSnippets.Select(x => x with { FileName = Path.Combine(Directory.GetCurrentDirectory(), "TestCases", x.FileName) }).ToArray();
+
+        //var tempPath = Path.GetTempPath();
+        contentSnippets = contentSnippets.Select(x =>
+        {
+            var tempFilePath = Path.Combine(Directory.GetCurrentDirectory(), "TestCases", x.FileName); // Path.Combine(tempPath, x.FileName);
+            File.WriteAllText(tempFilePath, x.Content);
+            return x with { FileName = tempFilePath };
+        }).ToArray();
+
         var editorConfigGenerator = new EditorConfigGenerator(Directory.GetCurrentDirectory());
         var hasContentDocuments = contentFilePaths.Length > 0 || contentSnippets.Length > 0;
         concurrentAnalysis = !hasContentDocuments && concurrentAnalysis; // Concurrent analysis is not supported for Razor or cshtml files due to namespace issues
@@ -176,7 +184,8 @@ internal class Verifier
             .AddAdditionalDocuments(concurrentContentFiles)
             .AddAnalyzerReferences(hasContentDocuments ? SourceGeneratorProvider.SourceGenerators : [])
             .AddSnippets(sourceSnippets)
-            .AddSnippetAsAdditionalDocument(contentSnippets)
+            //.AddSnippetAsAdditionalDocument(contentSnippets)
+            .AddAdditionalDocuments(contentSnippets.Length > 0 ? contentSnippets.Select(x => x.FileName) : [])
             .AddReferences(builder.References)
             .AddReferences(hasContentDocuments ? NuGetMetadataReference.MicrosoftAspNetCoreAppRef("7.0.17") : [])
             .AddReferences(hasContentDocuments ? NuGetMetadataReference.SystemTextEncodingsWeb("7.0.0") : [])
