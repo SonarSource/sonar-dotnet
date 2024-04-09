@@ -28,7 +28,7 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
     protected override bool IsEmptyAndNotPartial(SyntaxNode node) =>
         node is TypeDeclarationSyntax { Members.Count: 0 } typeDeclaration
         && !typeDeclaration.Modifiers.Any(x => x.IsKind(SyntaxKind.PartialKeyword))
-        && (node is ClassDeclarationSyntax || IsParameterlessRecord(node));
+        && LacksParameterizedPrimaryConstructor(node);
 
     protected override BaseTypeDeclarationSyntax GetIfHasDeclaredBaseClassOrInterface(SyntaxNode node) =>
         node is TypeDeclarationSyntax { BaseList: not null } declaration
@@ -42,7 +42,7 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
         || declaration.BaseList.Types.Any(x => x.Type is GenericNameSyntax); // or a generic class/interface
 
     protected override bool HasAnyAttribute(SyntaxNode node) =>
-        node is TypeDeclarationSyntax { AttributeLists.Count: > 0  };
+        node is TypeDeclarationSyntax { AttributeLists.Count: > 0 };
 
     protected override string DeclarationTypeKeyword(SyntaxNode node) =>
         ((TypeDeclarationSyntax)node).Keyword.ValueText;
@@ -54,19 +54,30 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
             SyntaxKind.ElseDirectiveTrivia,
             SyntaxKind.EndIfDirectiveTrivia));
 
+    private static bool LacksParameterizedPrimaryConstructor(SyntaxNode node) =>
+        IsParameterlessClass(node)
+        || IsParameterlessRecord(node);
+
+    private static bool IsParameterlessClass(SyntaxNode node) =>
+        node is ClassDeclarationSyntax declaration
+        && LacksParameters(declaration.ParameterList(), declaration.BaseList);
+
     private static bool IsParameterlessRecord(SyntaxNode node) =>
         RecordDeclarationSyntax(node) is { } declaration
-        && (declaration.ParameterList is null || declaration.ParameterList.Parameters.Count == 0)
-        && BaseTypeSyntax(declaration) is not { ArgumentList.Arguments.Count: >= 1 };
+        && LacksParameters(declaration.ParameterList, declaration.BaseList);
+
+    private static bool LacksParameters(ParameterListSyntax parameterList, BaseListSyntax baseList) =>
+        parameterList?.Parameters is not { Count: > 0 }
+        && BaseTypeSyntax(baseList) is not { ArgumentList.Arguments.Count: > 0 };
 
     private static RecordDeclarationSyntaxWrapper? RecordDeclarationSyntax(SyntaxNode node) =>
         RecordDeclarationSyntaxWrapper.IsInstance(node)
             ? (RecordDeclarationSyntaxWrapper)node
             : null;
 
-    private static PrimaryConstructorBaseTypeSyntaxWrapper? BaseTypeSyntax(RecordDeclarationSyntaxWrapper node) =>
-        node.BaseList?.Types.FirstOrDefault() is { } type
-        && PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(type)
-            ? (PrimaryConstructorBaseTypeSyntaxWrapper)type
-            : null;
+    private static PrimaryConstructorBaseTypeSyntaxWrapper? BaseTypeSyntax(BaseListSyntax list) =>
+       list?.Types.FirstOrDefault() is { } type
+       && PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(type)
+           ? (PrimaryConstructorBaseTypeSyntaxWrapper)type
+           : null;
 }

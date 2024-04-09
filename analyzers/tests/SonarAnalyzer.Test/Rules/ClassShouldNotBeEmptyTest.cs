@@ -43,12 +43,12 @@ public class ClassShouldNotBeEmptyTest
 
 #if NET
 
-    private static readonly MetadataReference[] AdditionalReferences = new[]
-    {
+    private static readonly MetadataReference[] AdditionalReferences =
+    [
         AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
         AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
         AspNetCoreMetadataReference.MicrosoftAspNetCoreRazorPages,
-    };
+    ];
 
     [TestMethod]
     public void ClassShouldNotBeEmpty_CSharp9() =>

@@ -1,10 +1,18 @@
-﻿using System.Collections.Generic;
-
-public class TestCaseData(List<int> list, int expectedCount)
+﻿namespace Compliant
 {
-    public List<int> List { get; }
-    public int ExpectedCount { get; }
+    class ChildClass() : BaseClass(42) { } // Compliant
+    
+    class ChildClassWithParameters(int value) : BaseClass(value) { } // Compliant
+
+    class BaseClass(int value) { }
 }
 
-// See https://github.com/SonarSource/sonar-dotnet/issues/9011
-public class CountTestCaseData(List<int> list, int expectedCount) : TestCaseData(list, expectedCount); // Noncompliant - FP
+namespace Noncompliant
+{
+    class ChildClass() : BaseClass() { } // Noncompliant
+
+    class BaseClass()
+    {
+        public int Value { get; init; }
+    }
+}
