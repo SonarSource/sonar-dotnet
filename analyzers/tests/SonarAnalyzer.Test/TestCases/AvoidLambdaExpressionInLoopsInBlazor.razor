@@ -1,4 +1,6 @@
-﻿@foreach (var button in Buttons)
+﻿@using Microsoft.AspNetCore.Components.Web
+
+@foreach (var button in Buttons)
 {
     <button @key="button.Id" @onclick="button.Action"> @* Compliant *@
         Button #@button.Id

@@ -78,9 +78,11 @@ public class ProjectBuilderTest
     public void AddAdditionalDocument_CsharpSupportsCshtmlFiles() =>
         AssertAdditionalDocumentContains(EmptyCS.AddAdditionalDocument(@"TestCases\ProjectBuilder.AddDocument.cshtml"), "ProjectBuilder.AddDocument.cshtml");
 
-    [TestMethod]
-    public void AddAdditionalDocument_VbnetDoesntSupportCshtmlFiles() =>
-        EmptyVB.Invoking(x => x.AddAdditionalDocument(@"TestCases\ProjectBuilder.AddDocument.cshtml")).Should().Throw<ArgumentException>();
+    [DataTestMethod]
+    [DataRow("cshtml")]
+    [DataRow("razor")]
+    public void AddAdditionalDocument_VbnetDoesntSupportRazorFiles(string extension) =>
+        EmptyVB.Invoking(x => x.AddAdditionalDocument(@$"TestCases\ProjectBuilder.AddDocument.{extension}")).Should().Throw<ArgumentException>();
 
     [TestMethod]
     public void AddAdditionalDocument_CsharpDoesntSupportVbhtmlFiles() =>

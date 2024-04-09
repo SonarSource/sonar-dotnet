@@ -1,4 +1,6 @@
-﻿<AvoidLambdaExpressionInLoopsInBlazor_RenderFragment>
+﻿@using Microsoft.AspNetCore.Components.Web
+
+<AvoidLambdaExpressionInLoopsInBlazor_RenderFragment>
     @foreach (var button in Buttons)
     {
         <button @key="button.Id" @onclick="(e) => button.Action(e)"> @* Noncompliant *@

@@ -162,7 +162,7 @@ internal class Verifier
         var contentFilePaths = paths.Where(IsRazorOrCshtml).ToArray();
         var sourceFilePaths = paths.Except(contentFilePaths).ToArray();
         var contentSnippets = builder.Snippets.Where(x => IsRazorOrCshtml(x.FileName)).ToArray();
-        var sourceSnippets = builder.Snippets.Except(contentSnippets).ToArray();
+        var sourceSnippets = builder.Snippets.Where(x => !contentSnippets.Contains(x)).ToArray(); // Cannot use Except because it Distincts the elements
 
         //var tempPath = Path.GetTempPath();
         contentSnippets = contentSnippets.Select(x =>
@@ -184,7 +184,6 @@ internal class Verifier
             .AddAdditionalDocuments(concurrentContentFiles)
             .AddAnalyzerReferences(hasContentDocuments ? SourceGeneratorProvider.SourceGenerators : [])
             .AddSnippets(sourceSnippets)
-            //.AddSnippetAsAdditionalDocument(contentSnippets)
             .AddAdditionalDocuments(contentSnippets.Length > 0 ? contentSnippets.Select(x => x.FileName) : [])
             .AddReferences(builder.References)
             .AddReferences(hasContentDocuments ? NuGetMetadataReference.MicrosoftAspNetCoreAppRef("7.0.17") : [])

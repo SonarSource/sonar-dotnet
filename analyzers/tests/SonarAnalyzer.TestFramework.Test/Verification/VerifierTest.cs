@@ -126,16 +126,6 @@ public class VerifierTest
         DummyCS.AddSnippet("//Empty").WithProtobufPath("Proto.pb")
             .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("DummyAnalyzerCS does not inherit from UtilityAnalyzerBase.");
 
-    [TestMethod]
-    public void Constructor_IsRazor_NoOptions_Throws() =>
-        DummyCS.AddSnippet("//Empty", "File.razor").WithOptions(ImmutableArray<ParseOptions>.Empty)
-            .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("IsRazor was set. ParseOptions must be specified.");
-
-    [TestMethod]
-    public void Constructor_IsRazor_VB_Throws() =>
-        DummyVB.AddSnippet("//Empty", "File.razor")
-            .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("IsRazor was set for Visual Basic analyzer. Only C# is supported.");
-
 #if NET
 
     [TestMethod]
@@ -206,13 +196,6 @@ public class VerifierTest
         ]);
         // compilation.Compilation.ExternalReferences.Select(x => x.Display).Should().C
     }
-
-    [TestMethod]
-    public void Compile_Razor_ParseOptions_OldVersion() =>
-        DummyWithLocation.AddPaths("Dummy.razor").WithOptions(ImmutableArray.Create<ParseOptions>(new CSharpParseOptions(LanguageVersion.CSharp6))).Build().Compile(false)
-            .Invoking(x => x.ToArray()) // Force evaluation of the collection
-            .Should()
-            .Throw<NotSupportedException>();
 
     [TestMethod]
     public void Compile_Razor_ParseOptions_WithSpecificVersion()
