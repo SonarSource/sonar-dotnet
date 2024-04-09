@@ -18,45 +18,37 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Extensions;
+
+public static class SonarAnalysisContextExtensions
 {
-    internal static class SonarAnalysisContextExtensions
-    {
-        public static void RegisterNodeAction<TSyntaxKind>(this SonarAnalysisContext context,
-                                                                               Action<SonarSyntaxNodeReportingContext> action,
-                                                                               params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
-            context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
+    public static void RegisterNodeAction(this SonarAnalysisContext context, Action<SonarSyntaxNodeReportingContext> action, params SyntaxKind[] syntaxKinds) =>
+        context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
 
-        public static void RegisterNodeAction<TSyntaxKind>(this SonarParametrizedAnalysisContext context,
-                                                                               Action<SonarSyntaxNodeReportingContext> action,
-                                                                               params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
-            context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
+    public static void RegisterNodeAction(this SonarParametrizedAnalysisContext context, Action<SonarSyntaxNodeReportingContext> action, params SyntaxKind[] syntaxKinds) =>
+        context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
 
-        public static void RegisterNodeAction<TSyntaxKind>(this SonarCompilationStartAnalysisContext context,
-                                                                               Action<SonarSyntaxNodeReportingContext> action,
-                                                                               params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
-            context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
+    public static void RegisterNodeAction(this SonarCompilationStartAnalysisContext context, Action<SonarSyntaxNodeReportingContext> action, params SyntaxKind[] syntaxKinds) =>
+        context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
 
-        public static void RegisterTreeAction(this SonarAnalysisContext context, Action<SonarSyntaxTreeReportingContext> action) =>
-            context.RegisterTreeAction(CSharpGeneratedCodeRecognizer.Instance, action);
+    public static void RegisterTreeAction(this SonarAnalysisContext context, Action<SonarSyntaxTreeReportingContext> action) =>
+        context.RegisterTreeAction(CSharpGeneratedCodeRecognizer.Instance, action);
 
-        public static void RegisterTreeAction(this SonarParametrizedAnalysisContext context, Action<SonarSyntaxTreeReportingContext> action) =>
-            context.RegisterTreeAction(CSharpGeneratedCodeRecognizer.Instance, action);
+    public static void RegisterTreeAction(this SonarParametrizedAnalysisContext context, Action<SonarSyntaxTreeReportingContext> action) =>
+        context.RegisterTreeAction(CSharpGeneratedCodeRecognizer.Instance, action);
 
-        public static void RegisterSemanticModelAction(this SonarParametrizedAnalysisContext context, Action<SonarSemanticModelReportingContext> action) =>
-            context.RegisterSemanticModelAction(CSharpGeneratedCodeRecognizer.Instance, action);
+    public static void RegisterSemanticModelAction(this SonarParametrizedAnalysisContext context, Action<SonarSemanticModelReportingContext> action) =>
+        context.RegisterSemanticModelAction(CSharpGeneratedCodeRecognizer.Instance, action);
 
-        public static void RegisterSemanticModelAction(this SonarAnalysisContext context, Action<SonarSemanticModelReportingContext> action) =>
-            context.RegisterSemanticModelAction(CSharpGeneratedCodeRecognizer.Instance, action);
+    public static void RegisterSemanticModelAction(this SonarAnalysisContext context, Action<SonarSemanticModelReportingContext> action) =>
+        context.RegisterSemanticModelAction(CSharpGeneratedCodeRecognizer.Instance, action);
 
-        public static void RegisterCodeBlockStartAction<TSyntaxKind>(this SonarAnalysisContext context, Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action)
-            where TSyntaxKind : struct =>
-            context.RegisterCodeBlockStartAction(CSharpGeneratedCodeRecognizer.Instance, action);
+    public static void RegisterCodeBlockStartAction(this SonarAnalysisContext context, Action<SonarCodeBlockStartAnalysisContext<SyntaxKind>> action) =>
+        context.RegisterCodeBlockStartAction(CSharpGeneratedCodeRecognizer.Instance, action);
 
-        public static void ReportIssue(this SonarCompilationReportingContext context, Diagnostic diagnostic) =>
-            context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, diagnostic);
+    public static void ReportIssue(this SonarCompilationReportingContext context, Diagnostic diagnostic) =>
+        context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, diagnostic);
 
-        public static void ReportIssue(this SonarSymbolReportingContext context, Diagnostic diagnostic) =>
-            context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, diagnostic);
-    }
+    public static void ReportIssue(this SonarSymbolReportingContext context, Diagnostic diagnostic) =>
+        context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, diagnostic);
 }
