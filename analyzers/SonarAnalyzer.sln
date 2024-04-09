@@ -71,6 +71,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITs.JsonParser", "src\ITs.J
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITs.JsonParser.Test", "tests\ITs.JsonParser.Test\ITs.JsonParser.Test.csproj", "{A60741AF-6809-430E-AD3D-F4B91C52BD95}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.CSharp.Styling", "src\SonarAnalyzer.CSharp.Styling\SonarAnalyzer.CSharp.Styling.csproj", "{7F1A25AD-2EEF-4CF9-92D9-FE5B203EECE3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.CSharp.Styling.Test", "tests\SonarAnalyzer.CSharp.Styling.Test\SonarAnalyzer.CSharp.Styling.Test.csproj", "{6F4F7666-8A0D-47FE-A312-56010C4CE082}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +133,14 @@ Global
 		{A60741AF-6809-430E-AD3D-F4B91C52BD95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A60741AF-6809-430E-AD3D-F4B91C52BD95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A60741AF-6809-430E-AD3D-F4B91C52BD95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F1A25AD-2EEF-4CF9-92D9-FE5B203EECE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F1A25AD-2EEF-4CF9-92D9-FE5B203EECE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F1A25AD-2EEF-4CF9-92D9-FE5B203EECE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F1A25AD-2EEF-4CF9-92D9-FE5B203EECE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F4F7666-8A0D-47FE-A312-56010C4CE082}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F4F7666-8A0D-47FE-A312-56010C4CE082}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F4F7666-8A0D-47FE-A312-56010C4CE082}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F4F7666-8A0D-47FE-A312-56010C4CE082}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -145,6 +157,7 @@ Global
 		{ADBE6CFE-980F-4D4F-8E25-E391581D291E} = {B7233F78-E142-4882-B084-7C83BE472109}
 		{4C1DB1C4-C1FC-4AA1-B855-0D1948E68FB8} = {B7233F78-E142-4882-B084-7C83BE472109}
 		{A60741AF-6809-430E-AD3D-F4B91C52BD95} = {B7233F78-E142-4882-B084-7C83BE472109}
+		{6F4F7666-8A0D-47FE-A312-56010C4CE082} = {B7233F78-E142-4882-B084-7C83BE472109}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4259CA71-C565-42DD-8D58-F59819A11065}

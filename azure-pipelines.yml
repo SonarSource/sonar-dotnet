@@ -236,6 +236,11 @@ stages:
             TestResultsArtifactName: 'DotNetTestResultsNet8'
             ProjectFilePath: 'tests\SonarAnalyzer.Net8.Test\SonarAnalyzer.Net8.Test.csproj'
             FrameworkMoniker: 'net8.0-windows'
+          Styling:
+            CoverageArtifactName: 'DotNetCoverageStyling'
+            TestResultsArtifactName: 'DotNetTestResultsStyling'
+            ProjectFilePath: 'tests\SonarAnalyzer.CSharp.Styling.Test\SonarAnalyzer.CSharp.Styling.Test.csproj'
+            FrameworkMoniker: 'net8.0-windows'
           TestFrameworkNet70:
             CoverageArtifactName: 'DotNetCoverageTestFrameworkNet70'
             TestResultsArtifactName: 'DotNetTestResultsTestFrameworkNet70'
@@ -387,6 +392,12 @@ stages:
       - task: DownloadPipelineArtifact@2
         displayName: 'Download coverage reports'
         inputs:
+          artifact: DotNetCoverageStyling
+          targetPath: 'coverage'
+
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download coverage reports'
+        inputs:
           artifact: DotNetCoverageTestFrameworkNet70
           targetPath: 'coverage'
 
@@ -418,6 +429,12 @@ stages:
         displayName: 'Download test results'
         inputs:
           artifact: DotNetTestResultsNet8
+          targetPath: 'TestResults'
+
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download test results'
+        inputs:
+          artifact: DotNetTestResultsStyling
           targetPath: 'TestResults'
 
       - task: DownloadPipelineArtifact@2

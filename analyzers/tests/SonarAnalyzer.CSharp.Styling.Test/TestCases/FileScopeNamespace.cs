@@ -1,0 +1,1 @@
+﻿// FIXME: Rewrite this file in https://github.com/SonarSource/sonar-dotnet/issues/9035
