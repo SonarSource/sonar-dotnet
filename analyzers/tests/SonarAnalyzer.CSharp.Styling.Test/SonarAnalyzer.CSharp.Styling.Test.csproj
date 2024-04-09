@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- The -windows suffix is needed because SonarAnalyzer.TestFramework references Microsoft.WindowsDesktop.App.WindowsForms framework reference. -->
+    <TargetFrameworks>net8.0-windows</TargetFrameworks>
+    <IsPackable>false</IsPackable>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="altcover" Version="8.7.3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="TestCases\**\*" />
+    <None Include="TestCases\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SonarAnalyzer.TestFramework\SonarAnalyzer.TestFramework.csproj" />
+    <ProjectReference Include="..\..\src\SonarAnalyzer.CSharp.Styling\SonarAnalyzer.CSharp.Styling.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+    <Using Include="SonarAnalyzer.Rules.CSharp.Styling" />
+    <Using Include="SonarAnalyzer.TestFramework.Build" />
+    <Using Include="SonarAnalyzer.TestFramework.Verification" />
+  </ItemGroup>
+
+</Project>
