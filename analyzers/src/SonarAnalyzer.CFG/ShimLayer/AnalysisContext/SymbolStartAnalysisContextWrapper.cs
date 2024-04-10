@@ -26,6 +26,8 @@ namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 
 public readonly struct SymbolStartAnalysisContextWrapper
 {
+    private const string VBSyntaxKind = "Microsoft.CodeAnalysis.VisualBasic.SyntaxKind";
+
     private static readonly Func<object, CancellationToken> CancellationTokenAccessor;
     private static readonly Func<object, Compilation> CompilationAccessor;
     private static readonly Func<object, AnalyzerOptions> OptionsAccessor;
@@ -128,7 +130,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
             var cast = (Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>>)action;
             RegisterCodeBlockStartActionCS(RoslynSymbolStartAnalysisContext, cast);
         }
-        else if (languageKindType.FullName == "Microsoft.CodeAnalysis.VisualBasic.SyntaxKind")
+        else if (languageKindType.FullName == VBSyntaxKind)
         {
             // See https://github.com/SonarSource/sonar-dotnet/pull/9028 for how to implement this
             // Attention: Do not add a package reference to "Microsoft.CodeAnalysis.VisualBasic.Workspaces".
@@ -160,7 +162,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
         {
             RegisterSyntaxNodeActionCS(RoslynSymbolStartAnalysisContext, action, syntaxKinds.Cast<CS.SyntaxKind>().ToImmutableArray());
         }
-        else if (languageKindType.FullName == "Microsoft.CodeAnalysis.VisualBasic.SyntaxKind")
+        else if (languageKindType.FullName == VBSyntaxKind)
         {
             // See RegisterCodeBlockStartAction for how to implement this
         }
