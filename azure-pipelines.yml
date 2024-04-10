@@ -236,16 +236,11 @@ stages:
             TestResultsArtifactName: 'DotNetTestResultsStyling'
             ProjectFilePath: 'tests\SonarAnalyzer.CSharp.Styling.Test\SonarAnalyzer.CSharp.Styling.Test.csproj'
             FrameworkMoniker: 'net8.0'
-          TestFrameworkNet80:
-            CoverageArtifactName: 'DotNetCoverageTestFrameworkNet80'
-            TestResultsArtifactName: 'DotNetTestResultsTestFrameworkNet80'
+          TestFramework:
+            CoverageArtifactName: 'DotNetCoverageTestFramework'
+            TestResultsArtifactName: 'DotNetTestResultsTestFramework'
             ProjectFilePath: 'tests\SonarAnalyzer.TestFramework.Test\SonarAnalyzer.TestFramework.Test.csproj'
             FrameworkMoniker: 'net8.0'
-          TestFrameworkNet48:
-            CoverageArtifactName: 'DotNetCoverageTestFrameworkNet48'
-            TestResultsArtifactName: 'DotNetTestResultsTestFrameworkNet48'
-            ProjectFilePath: 'tests\SonarAnalyzer.TestFramework.Test\SonarAnalyzer.TestFramework.Test.csproj'
-            FrameworkMoniker: 'net48'
           ITs.JsonParser:
             CoverageArtifactName: 'ITs.JsonParserCoverage'
             TestResultsArtifactName: 'ITs.JsonParserResults'
@@ -387,13 +382,7 @@ stages:
       - task: DownloadPipelineArtifact@2
         displayName: 'Download coverage reports'
         inputs:
-          artifact: DotNetCoverageTestFrameworkNet80
-          targetPath: 'coverage'
-
-      - task: DownloadPipelineArtifact@2
-        displayName: 'Download coverage reports'
-        inputs:
-          artifact: DotNetCoverageTestFrameworkNet48
+          artifact: DotNetCoverageTestFramework
           targetPath: 'coverage'
 
       - task: DownloadPipelineArtifact@2
@@ -423,13 +412,7 @@ stages:
       - task: DownloadPipelineArtifact@2
         displayName: 'Download test results'
         inputs:
-          artifact: DotNetTestResultsTestFrameworkNet80
-          targetPath: 'TestResults'
-
-      - task: DownloadPipelineArtifact@2
-        displayName: 'Download test results'
-        inputs:
-          artifact: DotNetTestResultsTestFrameworkNet48
+          artifact: DotNetTestResultsTestFramework
           targetPath: 'TestResults'
 
       - task: DownloadPipelineArtifact@2
