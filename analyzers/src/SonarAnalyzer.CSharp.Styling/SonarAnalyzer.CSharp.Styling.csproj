@@ -1,6 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <!-- SonarScanner for .NET would remove the analyzer if the DLL name starts with SonarAnalyzer -->
+    <!-- See GetAnalyzerSettings task: -->
+    <!-- https://github.com/SonarSource/sonar-scanner-msbuild/blob/master/src/SonarScanner.MSBuild.Tasks/GetAnalyzerSettings.cs#L319-L321 -->
+    <AssemblyName>Internal.SonarAnalyzer.CSharp.Styling</AssemblyName>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
@@ -30,6 +34,7 @@
   <Target Name="CopyBinaries" AfterTargets="Build">
     <ItemGroup>
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.dll" />
+      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CSharp.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CFG.dll" />
     </ItemGroup>
     <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)" />
