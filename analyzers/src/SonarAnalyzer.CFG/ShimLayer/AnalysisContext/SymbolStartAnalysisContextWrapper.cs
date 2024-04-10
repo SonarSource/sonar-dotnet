@@ -131,6 +131,8 @@ public readonly struct SymbolStartAnalysisContextWrapper
         else if (languageKindType.FullName == "Microsoft.CodeAnalysis.VisualBasic.SyntaxKind")
         {
             // See https://github.com/SonarSource/sonar-dotnet/pull/9028 for how to implement this
+            // Attention: Do not add a package reference to Microsoft.CodeAnalysis.VisualBasic.Workspaces.
+            // It creates hard to detect file not found errors in .NET SDK 3 and .NET SDK 5
         }
         else
         {
@@ -159,7 +161,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
         }
         else if (languageKindType.FullName == "Microsoft.CodeAnalysis.VisualBasic.SyntaxKind")
         {
-            // See https://github.com/SonarSource/sonar-dotnet/pull/9028 for how to implement this
+            // See RegisterCodeBlockStartAction for how to implement this
         }
         else
         {
