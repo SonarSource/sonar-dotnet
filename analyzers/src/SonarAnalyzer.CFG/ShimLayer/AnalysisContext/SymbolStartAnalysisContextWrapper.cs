@@ -130,14 +130,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
         }
         else if (languageKindType.FullName == "Microsoft.CodeAnalysis.VisualBasic.SyntaxKind")
         {
-            // Call RegisterCodeBlockStartAction for VB by:
-            // * Create Action<object, Action<TContext>> CreateRegistrationMethodCodeBlockStart<TContext, TLanguageKindEnum>(string registrationMethodName, params Type[] typeArguments)
-            //     where TContext: CodeBlockStartAnalysisContext<TLanguageKindEnum>
-            //     where TLanguageKindEnum: struct
-            // In the static constructor use
-            // * Type.GetType("Microsoft.CodeAnalysis.VisualBasic.SyntaxKind, Microsoft.CodeAnalysis.VisualBasic, Culture=neutral, PublicKeyToken=31bf3856ad364e35");
-            // * typeof(..).GetMethod("CreateRegistrationMethodCodeBlockStart").MakeGeneric(vbSyntaxKind);
-            // Dynamic invoke that method here.
+            // See https://github.com/SonarSource/sonar-dotnet/pull/9028 for how to implement this
         }
         else
         {
@@ -166,7 +159,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
         }
         else if (languageKindType.FullName == "Microsoft.CodeAnalysis.VisualBasic.SyntaxKind")
         {
-            // see RegisterCodeBlockStartAction for how to implement this
+            // See https://github.com/SonarSource/sonar-dotnet/pull/9028 for how to implement this
         }
         else
         {
