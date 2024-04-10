@@ -187,26 +187,14 @@ public class VerifierTest
             .Build()
             .Compile(false)
             .Single();
-        compilation.Compilation.GetSpecialType(SpecialType.System_Object).ContainingAssembly.Identity.Version.Major.Should().Be(7, "This version is used in EmptyProject.csproj");
+        compilation.Compilation.GetSpecialType(SpecialType.System_Object).ContainingAssembly.Identity.Version.Major.Should().Be(7, "This version is used when creating the project");
 
         compilation.Compilation.ExternalReferences.Select(x => Path.GetFileName(x.Display)).Should().Contain([
             "Microsoft.AspNetCore.dll",
             "Microsoft.AspNetCore.Components.dll",
-            "Microsoft.AspNetCore.Components.Web.dll"
+            "Microsoft.AspNetCore.Components.Web.dll",
+            "System.Text.Encodings.Web.dll"
         ]);
-        // compilation.Compilation.ExternalReferences.Select(x => x.Display).Should().C
-    }
-
-    [TestMethod]
-    public void Compile_Razor_ParseOptions_WithSpecificVersion()
-    {
-        var builder = DummyWithLocation.AddPaths("Dummy.razor");
-        // Version below C# 10 are not compatible with our EmptyProject scaffolding due to nullable context and global using statements.
-        foreach (var options in ParseOptionsHelper.FromCSharp10)
-        {
-            // Update Verifier.LanguageVersionReference() in case this breaks
-            builder.WithOptions(ImmutableArray.Create(options)).Build().Compile(false).Should().ContainSingle();
-        }
     }
 
     [TestMethod]

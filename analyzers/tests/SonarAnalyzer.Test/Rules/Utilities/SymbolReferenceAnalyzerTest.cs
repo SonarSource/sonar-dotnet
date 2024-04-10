@@ -228,10 +228,10 @@ namespace SonarAnalyzer.Test.Rules
 
                         VerifyReferences(orderedSymbols[0].Reference, 9, 13, 4, 6, 20);     // currentCount
                         VerifyReferences(orderedSymbols[0].Reference, 9, 16, 10, 20, 21);   // IncrementAmount
-                        // VerifyReferences(orderedSymbols[0].Reference, 9, 18, 8);         // IncrementCount - ToDo: Reintroduce
+                        // VerifyReferences(orderedSymbols[0].Reference, 9, 18, 8);         // IncrementCount - ToDo: Reintroduce it with https://trello.com/c/IGOMGx27/1316-investigate-symbol-reference-issue-with-razor-generated-code
                         VerifyReferences(orderedSymbols[0].Reference, 9, 34, 34);           // x
                         VerifyReferences(orderedSymbols[0].Reference, 9, 37, 28, 34);       // todos
-                        // VerifyReferences(orderedSymbols[0].Reference, 9, 39, 25);        // AddTodo - ToDo: Reintroduce
+                        // VerifyReferences(orderedSymbols[0].Reference, 9, 39, 25);        // AddTodo - ToDo: Reintroduce it with https://trello.com/c/IGOMGx27/1316-investigate-symbol-reference-issue-with-razor-generated-code
                         VerifyReferences(orderedSymbols[0].Reference, 9, 41);               // x
                         VerifyReferences(orderedSymbols[0].Reference, 9, 42);               // y
                         VerifyReferences(orderedSymbols[0].Reference, 9, 44, 41);           // LocalMethod
