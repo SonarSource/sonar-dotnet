@@ -109,9 +109,7 @@ public class SonarSyntaxNodeReportingContextTest
     }
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-#pragma warning disable RS1036 // Specify analyzer banned API enforcement setting
     private sealed class TestAnalyzer : SonarDiagnosticAnalyzer
-#pragma warning restore RS1036 // Specify analyzer banned API enforcement setting
     {
         private readonly SyntaxKind[] syntaxKinds;
         private readonly Func<SonarSyntaxNodeReportingContext, string> message;
@@ -128,7 +126,6 @@ public class SonarSyntaxNodeReportingContextTest
         }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, c =>
-                c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), message(c))), syntaxKinds);
+            context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, c => c.ReportIssue(Rule, c.Node, message(c)), syntaxKinds);
     }
 }

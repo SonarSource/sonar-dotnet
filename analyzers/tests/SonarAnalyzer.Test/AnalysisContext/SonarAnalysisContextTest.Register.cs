@@ -621,7 +621,6 @@ public partial class SonarAnalysisContextTest
         }
     }
 
-#pragma warning disable RS1036 // Specify analyzer banned API enforcement setting
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     private class DummyAnalyzerForGenerated : SonarDiagnosticAnalyzer
     {
@@ -630,7 +629,7 @@ public partial class SonarAnalysisContextTest
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeActionInAllFiles(c => c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation())), SyntaxKind.ClassDeclaration);
+            context.RegisterNodeActionInAllFiles(c => c.ReportIssue(rule, c.Node), SyntaxKind.ClassDeclaration);
     }
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
