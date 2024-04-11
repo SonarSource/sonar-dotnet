@@ -24,6 +24,6 @@ namespace SonarAnalyzer.CSharp.Styling.Test.Rules;
 public class ArrowLocationTest
 {
     [TestMethod]
-    public void FileScopeNamespace() =>
+    public void ArrowLocation() =>
         new VerifierBuilder<ArrowLocation>().WithOptions(ParseOptionsHelper.CSharpLatest).AddPaths("ArrowLocation.cs").Verify();
 }

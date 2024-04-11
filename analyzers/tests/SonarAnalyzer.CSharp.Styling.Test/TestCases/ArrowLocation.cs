@@ -7,6 +7,10 @@ public class NoncompliantCases
         => "wrong"; // Noncompliant {{Place the arrow at the end of the previous line.}}
     //  ^^
 
+    public string AloneOnLine()
+        =>          // Noncompliant
+        "wrong";
+
     public string NoWhitespace()
 => "wrong"; // Noncompliant
 
@@ -160,6 +164,14 @@ public class CompliantCases
 
     public static int operator +(CompliantCases a, CompliantCases b) =>
         42;
+
+    public int Generic<T>() where T : struct
+        => 0;   // Noncompliant
+
+    public int WrongParenthesis(
+        )
+        => 0; // Noncompliant
+
 
     public void DoSomething() { }
 }
