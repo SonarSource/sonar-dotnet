@@ -144,5 +144,5 @@ namespace Ignore
         protected BaseWithNonPublicConstructor() { }
     }
 
-    public class WidensTheConstructorVisibility : BaseWithNonPublicConstructor { }  // Noncompliant FP
+    public class WidensTheConstructorVisibility : BaseWithNonPublicConstructor { }  // Compliant
 }
