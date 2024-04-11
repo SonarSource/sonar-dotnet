@@ -29,7 +29,7 @@
       <ExpectedMatchCount>1</ExpectedMatchCount>
     </NugetAnalyzer>
 
-    <NugetReleaseNotes Include="$(SolutionRoot)\packaging\SonarAnalyzer.*.nuspec">
+    <NugetReleaseNotes Include="$(SolutionRoot)\packaging\SonarAnalyzer.CSharp.nuspec;$(SolutionRoot)\packaging\SonarAnalyzer.VisualBasic.nuspec">
       <Find>(?&lt;=&lt;releaseNotes&gt;https:\/\/github.com\/SonarSource\/sonar-dotnet\/releases\/tag\/)([^&lt;]*)</Find>
       <ReplaceWith>$(NugetVersion)</ReplaceWith>
       <ExpectedMatchCount>1</ExpectedMatchCount>
