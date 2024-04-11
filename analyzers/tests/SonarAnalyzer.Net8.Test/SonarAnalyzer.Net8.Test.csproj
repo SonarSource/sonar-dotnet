@@ -3,7 +3,6 @@
   <PropertyGroup>
     <!-- `-windows` is required in order to be able to reference SonarAnalyzer.Test to resolve e.g. WinForms references -->
     <TargetFramework>net8.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
