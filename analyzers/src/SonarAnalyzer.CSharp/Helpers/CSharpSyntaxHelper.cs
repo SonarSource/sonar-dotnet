@@ -167,15 +167,23 @@ internal static class CSharpSyntaxHelper
             .Any(symbolPredicate);
     }
 
-    public static SyntaxToken? GetIdentifierOrDefault(this BaseMethodDeclarationSyntax methodDeclaration) =>
-        methodDeclaration?.Kind() switch
+    public static SyntaxToken? GetIdentifierOrDefault(this BaseMethodDeclarationSyntax methodDeclaration)
+    {
+        switch (methodDeclaration?.Kind())
         {
-            SyntaxKind.ConstructorDeclaration => ((ConstructorDeclarationSyntax)methodDeclaration).Identifier,
-            SyntaxKind.DestructorDeclaration => ((DestructorDeclarationSyntax)methodDeclaration).Identifier,
-            SyntaxKind.MethodDeclaration => ((MethodDeclarationSyntax)methodDeclaration).Identifier,
-            _ when LocalFunctionStatementSyntaxWrapper.IsInstance(methodDeclaration) => ((LocalFunctionStatementSyntaxWrapper)methodDeclaration).Identifier,
-            _ => null,
-        };
+            case SyntaxKind.ConstructorDeclaration:
+                return ((ConstructorDeclarationSyntax) methodDeclaration).Identifier;
+
+            case SyntaxKind.DestructorDeclaration:
+                return ((DestructorDeclarationSyntax) methodDeclaration).Identifier;
+
+            case SyntaxKind.MethodDeclaration:
+                return ((MethodDeclarationSyntax) methodDeclaration).Identifier;
+
+            default:
+                return null;
+        }
+    }
 
     public static bool IsMethodInvocation(this InvocationExpressionSyntax invocation, KnownType type, string methodName, SemanticModel semanticModel) =>
         invocation.Expression.NameIs(methodName) &&
