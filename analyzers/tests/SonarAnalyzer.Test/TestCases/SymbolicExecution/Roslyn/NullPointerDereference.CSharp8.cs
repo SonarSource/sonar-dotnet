@@ -220,3 +220,16 @@ namespace JetBrains.Annotations
 {
     public sealed class TerminatesProgramAttribute : Attribute { }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9078
+class Repro_9078
+{
+    string Method(string s)
+    {
+        return s?.Length switch
+        {
+            1 => s.ToString(),  // Noncompliant FP
+            _ => s.ToString()   // Noncompliant
+        };
+    }
+}
