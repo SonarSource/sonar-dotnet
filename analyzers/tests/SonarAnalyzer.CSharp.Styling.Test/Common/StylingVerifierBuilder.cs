@@ -18,18 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Styling.Test.Rules;
+using Microsoft.CodeAnalysis.Diagnostics;
 
-[TestClass]
-public class FileScopeNamespaceTest
+namespace SonarAnalyzer.CSharp.Styling.Test.Common;
+
+public static class StylingVerifierBuilder
 {
-    private readonly VerifierBuilder builder = StylingVerifierBuilder.Create<FileScopeNamespace>().WithConcurrentAnalysis(false);
-
-    [TestMethod]
-    public void FileScopeNamespace() =>
-        builder.AddPaths("FileScopeNamespace.cs").Verify();
-
-    [TestMethod]
-    public void FileScopeNamespace_Compliant() =>
-        builder.AddPaths("FileScopeNamespace.Compliant.cs").VerifyNoIssueReported();
+    // This shoudl solve only simple cases. Do not add parametrized overloads to preserver the builder logic.
+    public static VerifierBuilder Create<TAnalyzer>() where TAnalyzer : DiagnosticAnalyzer, new() =>
+        new VerifierBuilder<TAnalyzer>().WithOptions(ParseOptionsHelper.CSharpLatest);  // We don't use older version on our codebase => we don't need to waste time testing them.
 }
