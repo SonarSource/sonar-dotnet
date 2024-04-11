@@ -28,9 +28,11 @@ public sealed class LambdaParameterName : StylingAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
             {
-                var lambda = (SimpleLambdaExpressionSyntax)c.Node;
-                // FIXME: Condition name "x", not nested
-                c.ReportIssue(Rule, lambda.Parameter);
+                var parameter = ((SimpleLambdaExpressionSyntax)c.Node).Parameter;
+                if (parameter.Identifier.ValueText != "x" && c.Node.Parent.FirstAncestorOrSelf<LambdaExpressionSyntax>() is null)
+                {
+                    c.ReportIssue(Rule, parameter);
+                }
             },
             SyntaxKind.SimpleLambdaExpression);
 }

@@ -6,9 +6,7 @@ public class Sample
     public void SimpleLambdas()
     {
         Method(x => 42);
-        Method(_ => 42);
         Method(x => { });
-        Method(_ => { });
 
         Method(item => 42);     // Noncompliant {{Use 'x' for the lambda parameter name.}}
         Method(item => { });    // Noncompliant
@@ -18,6 +16,7 @@ public class Sample
         Method(b => 42);        // Noncompliant
         Method(y => 42);        // Noncompliant
         Method(z => 42);        // Noncompliant
+        Method(_ => 42);        // Noncompliant, it's not a discard, it's a parameter named "_"
         Method(node => 42);     // Noncompliant
         Method(dataGridViewCellContextMenuStripNeededEventArgs => 42);     // Noncompliant
 
@@ -33,6 +32,27 @@ public class Sample
         Method(() => { });
         Method((a, b) => 42);
         Method((a, b) => { });
+    }
+
+    public void Errors()
+    {
+        // Error@+5 [CS1001] Identifier expected
+        // Error@+4 [CS1003] Syntax error, '=>' expected
+        // Error@+3 [CS1026] ) expected
+        // Error@+2 [CS1593] Delegate 'Func<int, int>' does not take 0 arguments
+        // Error@+1 [CS1003] Syntax error, ',' expected
+        Func<int, int> f = ( => 42);
+
+        // Error@+2 [CS1001] Identifier expected
+        // Error@+1 [CS1503] Argument 1: cannot convert from 'int' to 'System.Func<int>'
+        Method( => 42);
+
+        // Error@+5 [CS1501] No overload for method 'Method' takes 0 arguments
+        // Error@+4 [CS1001] Identifier expected
+        // Error@+3 [CS1002] ; expected
+        // Error@+2 [CS1026] ) expected
+        // Error@+1 [CS1513] Closing curly brace expected
+        Method( => { });
     }
 
     private void Method(Func<int> f) { }
