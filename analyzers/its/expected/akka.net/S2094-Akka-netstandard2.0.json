@@ -23,24 +23,6 @@
       "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Inet.cs#L229",
       "Location": "Line 229 Position 31-43"
-    },
-    {
-      "Id": "S2094",
-      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Tcp.cs#L738",
-      "Location": "Line 738 Position 22-27"
-    },
-    {
-      "Id": "S2094",
-      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/Listeners.cs#L37",
-      "Location": "Line 37 Position 27-42"
-    },
-    {
-      "Id": "S2094",
-      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/RouterMsg.cs#L31",
-      "Location": "Line 31 Position 27-50"
     }
   ]
 }
