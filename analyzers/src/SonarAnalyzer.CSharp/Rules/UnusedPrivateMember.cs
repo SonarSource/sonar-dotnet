@@ -328,7 +328,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     VisitBaseTypeDeclaration(node);
                 }
 
-                if (LocalFunctionStatementSyntaxWrapper.IsInstance(node))
+                if (node.IsKind(SyntaxKindEx.LocalFunctionStatement))
                 {
                     ConditionalStore((IMethodSymbol)GetDeclaredSymbol(node), IsRemovableMethod);
                 }

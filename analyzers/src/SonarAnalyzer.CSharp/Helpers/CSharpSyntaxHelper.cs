@@ -170,9 +170,9 @@ internal static class CSharpSyntaxHelper
     public static SyntaxToken? GetIdentifierOrDefault(this BaseMethodDeclarationSyntax methodDeclaration) =>
         methodDeclaration?.Kind() switch
         {
-            SyntaxKind.ConstructorDeclaration => ((ConstructorDeclarationSyntax)methodDeclaration)?.Identifier,
-            SyntaxKind.DestructorDeclaration => ((DestructorDeclarationSyntax)methodDeclaration)?.Identifier,
-            SyntaxKind.MethodDeclaration => ((MethodDeclarationSyntax)methodDeclaration)?.Identifier,
+            SyntaxKind.ConstructorDeclaration => ((ConstructorDeclarationSyntax)methodDeclaration).Identifier,
+            SyntaxKind.DestructorDeclaration => ((DestructorDeclarationSyntax)methodDeclaration).Identifier,
+            SyntaxKind.MethodDeclaration => ((MethodDeclarationSyntax)methodDeclaration).Identifier,
             _ when LocalFunctionStatementSyntaxWrapper.IsInstance(methodDeclaration) => ((LocalFunctionStatementSyntaxWrapper)methodDeclaration).Identifier,
             _ => null,
         };
