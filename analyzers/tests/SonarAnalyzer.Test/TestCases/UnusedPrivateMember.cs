@@ -144,11 +144,17 @@ class UnusedPrivateMember
         public void Method() { }
     }
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/6699
     public void MethodUsingLocalMethod()
     {
-        void LocalMethod() // FN: local function is never used
-        {
+        LocalMethod();
 
+        void LocalMethod()
+        {
+        }
+
+        void UnusedLocalMethod() // Noncompliant {{Remove the unused private local function 'UnusedLocalMethod'.}}
+        {
         }
     }
 }

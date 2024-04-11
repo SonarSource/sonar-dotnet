@@ -320,12 +320,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 this.containingTypeAccessibility = containingTypeAccessibility;
             }
 
-            // This override is needed because VisitRecordDeclaration is not available due to the Roslyn version.
+            // This override is needed because VisitRecordDeclaration and LocalFunctionStatementSyntax are not available due to the Roslyn version.
             public override void Visit(SyntaxNode node)
             {
                 if (node.IsAnyKind(SyntaxKindEx.RecordClassDeclaration, SyntaxKindEx.RecordStructDeclaration))
                 {
                     VisitBaseTypeDeclaration(node);
+                }
+
+                if (LocalFunctionStatementSyntaxWrapper.IsInstance(node))
+                {
+                    ConditionalStore((IMethodSymbol)GetDeclaredSymbol(node), IsRemovableMethod);
                 }
 
                 base.Visit(node);
@@ -488,7 +493,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static bool IsRemovableMethod(IMethodSymbol methodSymbol) =>
                 IsRemovableMember(methodSymbol)
-                && (methodSymbol.MethodKind == MethodKind.Ordinary || methodSymbol.MethodKind == MethodKind.Constructor)
+                && (methodSymbol.MethodKind is MethodKind.Ordinary or MethodKind.Constructor or MethodKindEx.LocalFunction)
                 && !methodSymbol.IsMainMethod()
                 && (!methodSymbol.IsEventHandler() || !IsDeclaredInPartialClass(methodSymbol)) // Event handlers could be added in XAML and no method reference will be generated in the .g.cs file.
                 && !methodSymbol.IsSerializationConstructor()

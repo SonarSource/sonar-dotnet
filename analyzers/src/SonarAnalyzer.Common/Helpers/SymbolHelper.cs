@@ -315,6 +315,7 @@ namespace SonarAnalyzer.Helpers
                     { MethodKind: MethodKind.Destructor } => "destructor",
                     { MethodKind: MethodKind.PropertyGet } => "getter",
                     { MethodKind: MethodKind.PropertySet } => "setter",
+                    { MethodKind: MethodKindEx.LocalFunction } => "local function",
                     _ => "method",
                 },
                 INamedTypeSymbol namedTypeSymbol => namedTypeSymbol switch

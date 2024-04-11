@@ -198,15 +198,6 @@ public class WithEnums
     }
 }
 
-// https://github.com/SonarSource/sonar-dotnet/issues/6699
-public class Repro_6699
-{
-    public void MethodUsingLocalMethod()
-    {
-        void LocalMethod() { } // FN
-    }
-}
-
 // https://github.com/SonarSource/sonar-dotnet/issues/6724
 public class Repro_6724
 {
