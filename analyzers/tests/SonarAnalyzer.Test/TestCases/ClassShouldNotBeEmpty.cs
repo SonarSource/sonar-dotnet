@@ -126,4 +126,8 @@ namespace Ignore
     struct EmptyStruct { }                       // Compliant - this rule only deals with classes
 
     enum EmptyEnum { }                           // Compliant - this rule only deals with classes
+
+    class SomeCommand { }                        // Noncompliant FP, should be ignored because of the suffix
+    class SomeEvent { }                          // Noncompliant FP, should be ignored because of the suffix
+    class SomeMessage { }                        // Noncompliant FP, should be ignored because of the suffix
 }
