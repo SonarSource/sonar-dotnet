@@ -113,12 +113,12 @@ namespace SonarAnalyzer.Test.Rules
         private static IEnumerable<MetadataReference> AspNetCoreLoggingReferences(string version) =>
             new[]
                 {
+                    AspNetCoreMetadataReference.MicrosoftAspNetCore,
                     AspNetCoreMetadataReference.MicrosoftAspNetCoreDiagnostics,
+                    AspNetCoreMetadataReference.MicrosoftAspNetCoreHosting,
                     AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions,
-                    AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingWebHostBuilderExtensions,
                     AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
                     AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions,
-                    AspNetCoreMetadataReference.MicrosoftAspNetCoreWebHost,
                     AspNetCoreMetadataReference.MicrosoftExtensionsLoggingEventSource
                 }
                 .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(version))

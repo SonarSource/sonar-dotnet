@@ -136,9 +136,9 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
             AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpFeatures,
             AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
             AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcRazorPages,       // For RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage
             AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
             AspNetCoreMetadataReference.MicrosoftAspNetCoreRouting,             // For IEndpointRouteBuilder
-            AspNetCoreMetadataReference.MicrosoftAspNetCoreRazorPages,          // For RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage
         ];
 
     [TestMethod]
