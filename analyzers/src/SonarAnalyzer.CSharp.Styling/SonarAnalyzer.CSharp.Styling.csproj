@@ -37,11 +37,11 @@
     </ItemGroup>
     <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)" />
     <!-- Avoid this analyzer to picked up by Java ITs by putting it outside of the binaries folder -->
-    <Copy SourceFiles="$(OutputPath)$(TargetFileName)" DestinationFolder="$(InternalBinariesFolder)" />
+    <Copy SourceFiles="$(OutputPath)$(TargetFileName)" DestinationFolder="$(BinariesFolderInternal)" />
   </Target>
 
   <Target Name="CleanInternal" AfterTargets="Clean">
-    <RemoveDir Directories="$(InternalBinariesFolder)" />
+    <RemoveDir Directories="$(BinariesFolderInternal)" />
   </Target>
 
 </Project>

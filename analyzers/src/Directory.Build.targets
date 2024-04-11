@@ -5,7 +5,7 @@
   <PropertyGroup>
     <!-- `BinariesFolder` - binary files folder used by ITs and java packaging -->
     <BinariesFolder>$(MSBuildThisFileDirectory)..\packaging\binaries\</BinariesFolder>
-    <InternalBinariesFolder>$(BinariesFolder)internal\</InternalBinariesFolder>
+    <BinariesFolderInternal>$(BinariesFolder)internal\</BinariesFolderInternal>
   </PropertyGroup>
 
   <Target Name="CleanBinaries" AfterTargets="Clean">
