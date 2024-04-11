@@ -172,13 +172,13 @@ internal static class CSharpSyntaxHelper
         switch (methodDeclaration?.Kind())
         {
             case SyntaxKind.ConstructorDeclaration:
-                return ((ConstructorDeclarationSyntax) methodDeclaration).Identifier;
+                return ((ConstructorDeclarationSyntax)methodDeclaration).Identifier;
 
             case SyntaxKind.DestructorDeclaration:
-                return ((DestructorDeclarationSyntax) methodDeclaration).Identifier;
+                return ((DestructorDeclarationSyntax)methodDeclaration).Identifier;
 
             case SyntaxKind.MethodDeclaration:
-                return ((MethodDeclarationSyntax) methodDeclaration).Identifier;
+                return ((MethodDeclarationSyntax)methodDeclaration).Identifier;
 
             default:
                 return null;
