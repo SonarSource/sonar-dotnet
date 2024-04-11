@@ -6,43 +6,14 @@
     <IsPackable>false</IsPackable>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
-    <!-- FIXME: This should be likely moved to MetadataReferences -->
-    <!--
-      This allows, on AzureDevops builds, to restore the NuGet packages which are not targeting .Net Standard or a compatible version by
-      usign as fallbacks .Net Framwework 4.0 client profile (net40-client) and Portable profile (portable-net45+win8+wp8+wpa81).
-      The following packages are affected:
-      - Microsoft.Composition 1.0.27 (portable-net45+win8+wp8+wpa81)
-      - Microsoft.Web.Xdt 2.1.0 (net40-client)
-      - NuGet.Core 2.14.0 (net40-client)
-      -->
-    <AssetTargetFallback>$(AssetTargetFallback);net40-client;portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
   </PropertyGroup>
 
-  <!-- FIXME: We should be able to remove this now -->
-  <ItemGroup Condition="'$(TargetFramework)' != 'net48'">
-    <!-- Class AspNetCoreMetadataReference needs this FrameworkReference to generate metadata references for ASP.NET Core related test cases. -->
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-    <!-- Class WindowsFormsMetadataReference needs this FrameworkReference to generate metadata references for Windows Forms related test cases. -->
-    <FrameworkReference Include="Microsoft.WindowsDesktop.App.WindowsForms" />
-  </ItemGroup>
-
   <ItemGroup>
-    <!-- FIXME: Review what's still needed and what is not -->
     <PackageReference Include="altcover" Version="8.7.3" />
-    <PackageReference Include="FluentAssertions" Version="6.12.0" />
-    <PackageReference Include="FluentAssertions.Analyzers" Version="0.31.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
     <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
     <PackageReference Include="Moq" Version="4.18.4" />
-    <PackageReference Include="Microsoft.Build.Locator" Version="1.5.5" />
-    <PackageReference Include="Microsoft.Composition" Version="1.0.27">
-      <!-- This package is a dependency of Microsoft.CodeAnalysis.CSharp.Workspaces. It is safe to use since it's compatible with .Net Portable runtime -->
-      <NoWarn>NU1701</NoWarn>
-    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>

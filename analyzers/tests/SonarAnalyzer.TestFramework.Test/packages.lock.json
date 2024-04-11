@@ -8,21 +8,6 @@
         "resolved": "8.7.3",
         "contentHash": "4005/JkoNwLAGnPPkQHnPIaLFWb6POcKFh7b2V/6FrOXmxPzmX0+scjYhFHWy9F59u7+eLQp+tyLwgVFKgV1yA=="
       },
-      "FluentAssertions": {
-        "type": "Direct",
-        "requested": "[6.12.0, )",
-        "resolved": "6.12.0",
-        "contentHash": "ZXhHT2YwP9lajrwSKbLlFqsmCCvFJMoRSK9t7sImfnCyd0OB3MhgxdoMcVqxbq1iyxD6mD2fiackWmBb7ayiXQ==",
-        "dependencies": {
-          "System.Threading.Tasks.Extensions": "4.5.0"
-        }
-      },
-      "FluentAssertions.Analyzers": {
-        "type": "Direct",
-        "requested": "[0.31.0, )",
-        "resolved": "0.31.0",
-        "contentHash": "KWyAnqT5gCx1vHr/oNhyEV8HV1aCJswREoxEbZcWOWBGTWm7aAeMnzwjfAPNNYumzhT8Y8IafgcLur0OXrLZrA=="
-      },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
         "requested": "[17.9.0, )",
@@ -57,6 +42,14 @@
         "type": "Transitive",
         "resolved": "5.1.1",
         "contentHash": "rpYtIczkzGpf+EkZgDr9CClTdemhsrwA/W5hMoPjLkRFnXzH44zDLoovXeKtmxb1ykXK9aJVODSpiJml8CTw2g=="
+      },
+      "FluentAssertions": {
+        "type": "Transitive",
+        "resolved": "6.12.0",
+        "contentHash": "ZXhHT2YwP9lajrwSKbLlFqsmCCvFJMoRSK9t7sImfnCyd0OB3MhgxdoMcVqxbq1iyxD6mD2fiackWmBb7ayiXQ==",
+        "dependencies": {
+          "System.Threading.Tasks.Extensions": "4.5.0"
+        }
       },
       "Google.Protobuf": {
         "type": "Transitive",
@@ -596,21 +589,6 @@
         "resolved": "8.7.3",
         "contentHash": "4005/JkoNwLAGnPPkQHnPIaLFWb6POcKFh7b2V/6FrOXmxPzmX0+scjYhFHWy9F59u7+eLQp+tyLwgVFKgV1yA=="
       },
-      "FluentAssertions": {
-        "type": "Direct",
-        "requested": "[6.12.0, )",
-        "resolved": "6.12.0",
-        "contentHash": "ZXhHT2YwP9lajrwSKbLlFqsmCCvFJMoRSK9t7sImfnCyd0OB3MhgxdoMcVqxbq1iyxD6mD2fiackWmBb7ayiXQ==",
-        "dependencies": {
-          "System.Configuration.ConfigurationManager": "4.4.0"
-        }
-      },
-      "FluentAssertions.Analyzers": {
-        "type": "Direct",
-        "requested": "[0.31.0, )",
-        "resolved": "0.31.0",
-        "contentHash": "KWyAnqT5gCx1vHr/oNhyEV8HV1aCJswREoxEbZcWOWBGTWm7aAeMnzwjfAPNNYumzhT8Y8IafgcLur0OXrLZrA=="
-      },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
         "requested": "[17.9.0, )",
@@ -648,6 +626,14 @@
         "contentHash": "rpYtIczkzGpf+EkZgDr9CClTdemhsrwA/W5hMoPjLkRFnXzH44zDLoovXeKtmxb1ykXK9aJVODSpiJml8CTw2g==",
         "dependencies": {
           "System.Diagnostics.EventLog": "6.0.0"
+        }
+      },
+      "FluentAssertions": {
+        "type": "Transitive",
+        "resolved": "6.12.0",
+        "contentHash": "ZXhHT2YwP9lajrwSKbLlFqsmCCvFJMoRSK9t7sImfnCyd0OB3MhgxdoMcVqxbq1iyxD6mD2fiackWmBb7ayiXQ==",
+        "dependencies": {
+          "System.Configuration.ConfigurationManager": "4.4.0"
         }
       },
       "Google.Protobuf": {
