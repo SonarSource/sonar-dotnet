@@ -63,3 +63,34 @@ public class Sample
     private void Method(Action<int> a) { }
     private void Method(Action<int, int> a) { }
 }
+
+public class RuleRegistration
+{
+    public void Initialize()
+    {
+        RegisterSonarWhateverAnalysisContext(c => { });
+        RegisterSonarWhateverAnalysisContext(context => { });
+        RegisterSonarWhateverAnalysisContext(whateverContext => { });
+        RegisterSonarWhateverReportingContext(c => { });
+        RegisterSonarSometing(c => { });
+        RegisterSometingAnalysisContext(c => { });
+        RegisterSometingReportingContext(c => { });
+        RegisterSonarSometingContext(c => { });
+    }
+
+    protected void RegisterSonarWhateverAnalysisContext(Action<SonarWhateverAnalysisContext> action) { }
+    protected void RegisterSonarWhateverReportingContext(Action<SonarWhateverReportingContext> action) { }
+    protected void RegisterSonarSometing(Action<SonarSometing> action) { }
+    protected void RegisterSometingAnalysisContext(Action<SometingAnalysisContext> action) { }
+    protected void RegisterSometingReportingContext(Action<SometingReportingContext> action) { }
+    protected void RegisterSonarSometingContext(Action<SonarSometingContext> action) { }
+
+    // Well-known expected classes patterns
+    public class SonarWhateverAnalysisContext { }
+    public class SonarWhateverReportingContext { }
+    // Unexpected types
+    public class SonarSometing { }
+    public class SometingAnalysisContext { }
+    public class SometingReportingContext { }
+    public class SonarSometingContext { }
+}
