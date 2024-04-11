@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Test.Rules
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreDiagnostics,
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions,
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
-                CoreMetadataReference.MicrosoftExtensionsHostingAbstractions
+                AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions
             };
 
 #endif

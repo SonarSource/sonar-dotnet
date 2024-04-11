@@ -108,7 +108,7 @@ namespace SonarAnalyzer.Test.Rules
                 .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.DotNetCore220Version))
                 .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(Constants.DotNetCore220Version))
                 .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.DotNetCore220Version))
-                .Concat(new[] { CoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions });
+                .Concat(new[] { AspNetCoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions });
 
         private static IEnumerable<MetadataReference> AspNetCoreLoggingReferences(string version) =>
             new[]
@@ -119,7 +119,7 @@ namespace SonarAnalyzer.Test.Rules
                     AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
                     AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions,
                     AspNetCoreMetadataReference.MicrosoftAspNetCoreWebHost,
-                    AspNetCoreMetadataReference.MicrosoftAspNetCoreEventSourceLoggerFactoryExtensions
+                    AspNetCoreMetadataReference.MicrosoftExtensionsLoggingEventSource
                 }
                 .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(version))
                 .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(version))
