@@ -138,4 +138,11 @@ namespace Ignore
     class Command { }                            // Compliant, ignored because of the suffix
     class Event { }                              // Compliant, ignored because of the suffix
     class Message { }                            // Compliant, ignored because of the suffix
+
+    public class BaseWithNonPublicConstructor
+    {
+        protected BaseWithNonPublicConstructor() { }
+    }
+
+    public class WidensTheConstructorVisibility : BaseWithNonPublicConstructor { }  // Noncompliant FP
 }
