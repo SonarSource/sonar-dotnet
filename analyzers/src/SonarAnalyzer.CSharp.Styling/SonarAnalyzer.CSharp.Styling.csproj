@@ -1,9 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <!-- SonarScanner for .NET would remove the analyzer if the DLL name starts with SonarAnalyzer -->
-    <!-- See GetAnalyzerSettings task: -->
-    <!-- https://github.com/SonarSource/sonar-scanner-msbuild/blob/master/src/SonarScanner.MSBuild.Tasks/GetAnalyzerSettings.cs#L319-L321 -->
+    <!-- SonarScanner for .NET would remove the analyzer if the DLL name starts with SonarAnalyzer. See GetAnalyzerSettings S4NET task. -->
     <AssemblyName>Internal.SonarAnalyzer.CSharp.Styling</AssemblyName>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
@@ -39,11 +37,11 @@
     </ItemGroup>
     <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)" />
     <!-- Avoid this analyzer to picked up by Java ITs by putting it outside of the binaries folder -->
-    <Copy SourceFiles="$(OutputPath)$(TargetFileName)" DestinationFolder="$(BinariesFolder)\..\internal" />
+    <Copy SourceFiles="$(OutputPath)$(TargetFileName)" DestinationFolder="$(InternalBinariesFolder)" />
   </Target>
 
   <Target Name="CleanInternal" AfterTargets="Clean">
-    <RemoveDir Directories="$(BinariesFolder)\..\internal" />
+    <RemoveDir Directories="$(InternalBinariesFolder)" />
   </Target>
 
 </Project>
