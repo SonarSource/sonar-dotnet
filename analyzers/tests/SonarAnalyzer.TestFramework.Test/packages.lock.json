@@ -582,7 +582,7 @@
         }
       }
     },
-    "net7.0-windows7.0": {
+    "net7.0": {
       "altcover": {
         "type": "Direct",
         "requested": "[8.8.21, )",

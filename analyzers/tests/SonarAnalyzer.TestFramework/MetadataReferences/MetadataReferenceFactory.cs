@@ -22,6 +22,17 @@ using System.IO;
 
 namespace SonarAnalyzer.TestFramework.MetadataReferences;
 
+#if NET
+
+public enum Sdk
+{
+    NETCore,    // This is the default folder with system assemblies
+    AspNetCore,
+    WindowsDesktop
+}
+
+#endif
+
 internal static class MetadataReferenceFactory
 {
     private static readonly string SystemAssembliesFolder = Path.GetDirectoryName(typeof(object).Assembly.Location);
@@ -31,6 +42,13 @@ internal static class MetadataReferenceFactory
 
     public static MetadataReference Create(Type type) =>
         MetadataReference.CreateFromFile(type.Assembly.Location);
+
+#if NET
+
+    public static MetadataReference CreateReference(string assemblyName, Sdk sdk) =>
+        MetadataReference.CreateFromFile(Path.Combine(SystemAssembliesFolder.Replace(Sdk.NETCore.ToString(), sdk.ToString()), assemblyName));
+
+#endif
 
     public static MetadataReference CreateReference(string assemblyName) =>
         MetadataReference.CreateFromFile(Path.Combine(SystemAssembliesFolder, assemblyName));
