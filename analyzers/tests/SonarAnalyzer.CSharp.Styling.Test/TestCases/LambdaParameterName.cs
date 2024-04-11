@@ -72,10 +72,10 @@ public class RuleRegistration
         RegisterSonarWhateverAnalysisContext(context => { });
         RegisterSonarWhateverAnalysisContext(whateverContext => { });
         RegisterSonarWhateverReportingContext(c => { });
-        RegisterSonarSometing(c => { });
-        RegisterSometingAnalysisContext(c => { });
-        RegisterSometingReportingContext(c => { });
-        RegisterSonarSometingContext(c => { });
+        RegisterSonarSometing(c => { });                // Noncompliant, wrong suffix
+        RegisterSometingAnalysisContext(c => { });      // Noncompliant, wrong prefix
+        RegisterSometingReportingContext(c => { });     // Noncompliant, wrong prefix
+        RegisterSonarSometingContext(c => { });         // Noncompliant, wrong suffix
     }
 
     protected void RegisterSonarWhateverAnalysisContext(Action<SonarWhateverAnalysisContext> action) { }

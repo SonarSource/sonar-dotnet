@@ -29,10 +29,20 @@ public sealed class LambdaParameterName : StylingAnalyzer
         context.RegisterNodeAction(c =>
             {
                 var parameter = ((SimpleLambdaExpressionSyntax)c.Node).Parameter;
-                if (parameter.Identifier.ValueText != "x" && c.Node.Parent.FirstAncestorOrSelf<LambdaExpressionSyntax>() is null)
+                if (parameter.Identifier.ValueText != "x"
+                    && c.Node.Parent.FirstAncestorOrSelf<LambdaExpressionSyntax>() is null
+                    && !IsSonarContextAction(c))
                 {
                     c.ReportIssue(Rule, parameter);
                 }
             },
             SyntaxKind.SimpleLambdaExpression);
+
+    private static bool IsSonarContextAction(SonarSyntaxNodeReportingContext context) =>
+        context.SemanticModel.GetSymbolInfo(context.Node).Symbol is IMethodSymbol lambda
+        && lambda.ReturnsVoid
+        && IsSonarContextName(lambda.Parameters.Single().Type.Name);
+
+    private static bool IsSonarContextName(string name) =>
+        name.StartsWith("Sonar") && (name.EndsWith("AnalysisContext") || name.EndsWith("ReportingContext"));
 }
