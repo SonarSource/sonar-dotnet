@@ -70,7 +70,7 @@ namespace Tests.Diagnostics
             [Obsolete]
             static void ForCoverage() { }
 
-            static void NoAttribute() { }
+            static void NoAttribute() { } // Noncompliant
         }
     }
 

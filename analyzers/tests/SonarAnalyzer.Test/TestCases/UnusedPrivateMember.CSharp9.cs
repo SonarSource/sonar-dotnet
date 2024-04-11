@@ -69,7 +69,7 @@ namespace Tests.Diagnostics
             [Obsolete]
             static void ForCoverage() { }
 
-            static void NoAttribute() { }
+            static void NoAttribute() { } // Noncompliant
         }
     }
 
@@ -158,7 +158,7 @@ namespace Tests.Diagnostics
             {
                 return false;
 
-                bool PrintMembers(StringBuilder builder) => true;       // FN - local functions are not handled
+                bool PrintMembers(StringBuilder builder) => true;       // Noncompliant
             }
         }
 

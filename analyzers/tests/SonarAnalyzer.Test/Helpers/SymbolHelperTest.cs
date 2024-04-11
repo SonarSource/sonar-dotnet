@@ -398,7 +398,7 @@ namespace NS
         [DataRow(MethodKind.ExplicitInterfaceImplementation, "method")]
         [DataRow(MethodKind.FunctionPointerSignature, "method")]
         [DataRow(MethodKind.LambdaMethod, "method")]
-        [DataRow(MethodKind.LocalFunction, "method")]
+        [DataRow(MethodKind.LocalFunction, "local function")]
         [DataRow(MethodKind.Ordinary, "method")]
         [DataRow(MethodKind.PropertyGet, "getter")]
         [DataRow(MethodKind.PropertySet, "setter")]
