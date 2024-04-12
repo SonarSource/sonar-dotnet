@@ -133,6 +133,8 @@ namespace Ignore
     class Some_Command { }                       // Compliant, ignored because of the suffix
     class Someevent { }                          // Noncompliant
     class SOMEMESSAGE { }                        // Noncompliant
+    class SomeCommandHandler { }                 // Noncompliant
+    class MessageHandler { }                     // Noncompliant
     class Command { }                            // Compliant, ignored because of the suffix
     class Event { }                              // Compliant, ignored because of the suffix
     class Message { }                            // Compliant, ignored because of the suffix
