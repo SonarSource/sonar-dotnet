@@ -139,10 +139,28 @@ namespace Ignore
     class Event { }                              // Compliant, ignored because of the suffix
     class Message { }                            // Compliant, ignored because of the suffix
 
-    public class BaseWithNonPublicConstructor
+    class BaseWithProtectedConstructor
     {
-        protected BaseWithNonPublicConstructor() { }
+        protected BaseWithProtectedConstructor() { }
     }
 
-    public class WidensTheConstructorVisibility : BaseWithNonPublicConstructor { }  // Compliant
+    class WidensConstructorVisibility1 : BaseWithProtectedConstructor { }           // Compliant
+
+    class BaseWithInternalConstructor
+    {
+        internal BaseWithInternalConstructor() { }
+    }
+
+    class WidensConstructorVisibility2 : BaseWithInternalConstructor { }            // Compliant
+
+    class BaseWithPublicConstructor
+    {
+        public BaseWithPublicConstructor() { }
+    }
+
+    class ConstructorIsPublicAlready1 : BaseWithPublicConstructor { }               // Noncompliant
+
+    class BaseWithDefaultConstructor { }                                            // Noncompliant
+
+    class ConstructorIsPublicAlready2 : BaseWithDefaultConstructor { }              // Noncompliant
 }

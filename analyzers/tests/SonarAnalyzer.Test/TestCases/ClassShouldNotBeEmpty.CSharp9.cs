@@ -54,6 +54,15 @@ namespace Noncompliant
     record EmptyGenericRecord<T>();                              // Noncompliant
     //     ^^^^^^^^^^^^^^^^^^
     record EmptyGenericRecordWithContraint<T>() where T : class; // Noncompliant
+
+    record ConstructorIsPublicAlready : EmptyRecord { }          // Noncompliant
+
+    record BaseRecordWithProtectedConstructor
+    {
+        protected BaseRecordWithProtectedConstructor() { }
+    }
+
+    record WidensConstructorVisibility : BaseRecordWithProtectedConstructor { } // Compliant
 }
 
 namespace Ignore
@@ -68,4 +77,3 @@ namespace Repro_7709
     record ImplementsMarker : IMarker { }
     record ImplementsEmptyRecordAndMarker : Noncompliant.EmptyRecord, IMarker { }
 }
-
