@@ -21,15 +21,9 @@
 namespace SonarAnalyzer.CSharp.Styling.Test.Rules;
 
 [TestClass]
-public class FileScopeNamespaceTest
+public class LambdaParameterNameTest
 {
-    private readonly VerifierBuilder builder = StylingVerifierBuilder.Create<FileScopeNamespace>().WithConcurrentAnalysis(false);
-
     [TestMethod]
-    public void FileScopeNamespace() =>
-        builder.AddPaths("FileScopeNamespace.cs").Verify();
-
-    [TestMethod]
-    public void FileScopeNamespace_Compliant() =>
-        builder.AddPaths("FileScopeNamespace.Compliant.cs").VerifyNoIssueReported();
+    public void LambdaParameterName() =>
+        StylingVerifierBuilder.Create<LambdaParameterName>().AddPaths("LambdaParameterName.cs").Verify();
 }
