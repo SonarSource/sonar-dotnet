@@ -31,6 +31,8 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind, TDeclarationSyntax>
         KnownType.System_Attribute,
         KnownType.System_Exception);
 
+    private static readonly IEnumerable<string> IgnoredNames = ["AssemblyDoc", "NamespaceDoc"]; // https://github.com/Doraku/DefaultDocumentation
+
     private static readonly IEnumerable<string> IgnoredSuffixes = ["Command", "Event", "Message"];
 
     protected abstract bool IsEmptyAndNotPartial(SyntaxNode node);
@@ -62,7 +64,8 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind, TDeclarationSyntax>
             Language.SyntaxKind.ClassAndRecordClassDeclarations);
 
     private static bool ShouldIgnoreBecauseOfName(SyntaxToken identifier) =>
-        IgnoredSuffixes.Any(identifier.ValueText.EndsWith);
+        IgnoredNames.Contains(identifier.ValueText)
+        || IgnoredSuffixes.Any(identifier.ValueText.EndsWith);
 
     private bool ShouldIgnoreBecauseOfBaseClassOrInterface(SyntaxNode node, SemanticModel model) =>
         GetIfHasDeclaredBaseClassOrInterface(node) is { } declaration
