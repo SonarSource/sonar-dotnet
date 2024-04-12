@@ -31,6 +31,8 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind, TDeclarationSyntax>
         KnownType.System_Attribute,
         KnownType.System_Exception);
 
+    private static readonly IEnumerable<string> IgnoredSuffixes = ["Command", "Event", "Message"];
+
     protected abstract bool IsEmptyAndNotPartial(SyntaxNode node);
     protected abstract TDeclarationSyntax GetIfHasDeclaredBaseClassOrInterface(SyntaxNode node);
     protected abstract bool HasInterfaceOrGenericBaseClass(TDeclarationSyntax declaration);
@@ -51,12 +53,16 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind, TDeclarationSyntax>
                     && IsEmptyAndNotPartial(c.Node)
                     && !HasAnyAttribute(c.Node)
                     && !HasConditionalCompilationDirectives(c.Node)
+                    && !ShouldIgnoreBecauseOfName(identifier)
                     && !ShouldIgnoreBecauseOfBaseClassOrInterface(c.Node, c.SemanticModel))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), DeclarationTypeKeyword(c.Node)));
                 }
             },
             Language.SyntaxKind.ClassAndRecordClassDeclarations);
+
+    private static bool ShouldIgnoreBecauseOfName(SyntaxToken identifier) =>
+        IgnoredSuffixes.Any(identifier.ValueText.EndsWith);
 
     private bool ShouldIgnoreBecauseOfBaseClassOrInterface(SyntaxNode node, SemanticModel model) =>
         GetIfHasDeclaredBaseClassOrInterface(node) is { } declaration
