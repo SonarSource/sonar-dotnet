@@ -66,11 +66,15 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind, TDeclarationSyntax>
 
     private bool ShouldIgnoreBecauseOfBaseClassOrInterface(SyntaxNode node, SemanticModel model) =>
         GetIfHasDeclaredBaseClassOrInterface(node) is { } declaration
-        && (HasInterfaceOrGenericBaseClass(declaration) || ShouldIgnoreType(declaration, model));
+        && (HasInterfaceOrGenericBaseClass(declaration) || ShouldIgnoreType(declaration, model) || HasNonPublicDefaultConstructor(declaration, model));
 
     private static bool ShouldIgnoreType(TDeclarationSyntax node, SemanticModel model) =>
         model.GetDeclaredSymbol(node) is INamedTypeSymbol classSymbol
             && (classSymbol.BaseType is { IsAbstract: true }
             || classSymbol.DerivesFromAny(BaseClassesToIgnore)
             || classSymbol.Interfaces.Any(x => !x.Is(KnownType.System_IEquatable_T))); // every record type implicitly implements System.IEquatable<T>
+
+    private static bool HasNonPublicDefaultConstructor(TDeclarationSyntax declaration, SemanticModel model) =>
+        model.GetDeclaredSymbol(declaration) is INamedTypeSymbol classSymbol
+        && classSymbol.BaseType.Constructors.FirstOrDefault(x => x.Parameters.Length == 0) is { DeclaredAccessibility: not Accessibility.Public };
 }
