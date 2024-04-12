@@ -139,6 +139,9 @@ namespace Ignore
     class Event { }                              // Compliant, ignored because of the suffix
     class Message { }                            // Compliant, ignored because of the suffix
 
+    class AssemblyDoc { }                        // Noncompliant FP, used for DefaultDocumentation tool
+    class NamespaceDoc { }                       // Noncompliant FP, used for DefaultDocumentation tool
+
     class BaseWithProtectedConstructor
     {
         protected BaseWithProtectedConstructor() { }
