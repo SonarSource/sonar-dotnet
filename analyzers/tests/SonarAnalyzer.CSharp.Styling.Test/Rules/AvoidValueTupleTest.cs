@@ -23,7 +23,7 @@ namespace SonarAnalyzer.CSharp.Styling.Test.Rules;
 [TestClass]
 public class AvoidValueTupleTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<AvoidValueTuple>().WithOptions(ParseOptionsHelper.CSharpLatest).AddPaths("AvoidValueTuple.cs");
+    private readonly VerifierBuilder builder = StylingVerifierBuilder.Create<AvoidValueTuple>().AddPaths("AvoidValueTuple.cs");
 
     [TestMethod]
     public void AvoidValueTuple() =>
