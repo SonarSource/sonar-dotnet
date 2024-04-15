@@ -241,8 +241,8 @@ public class PropertyAccess
 //                         ^^^
     private int NotAccessed { get; set; }                                           // Noncompliant {{Remove the unused private property 'NotAccessed'.}}
 //              ^^^^^^^^^^^
-    public int PrivateGetter { private get; set; }                                  // FN - unused private getter
-    public int PrivateSetter { get; private set; }                                  // FN - unused private setter
+    public int PrivateGetter { private get; set; }                                  // Noncompliant
+    public int PrivateSetter { get; private set; }                                  // Noncompliant
 
     private int ExpressionBodiedProperty => 1;                                      // Noncompliant {{Remove the unused private property 'ExpressionBodiedProperty'.}}
 //              ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -253,8 +253,8 @@ public class PropertyAccess
 //                                          ^^^
     private int ExpressionBodiedProperty6 { get => 1; set => _ = value; }           // Noncompliant
 //                                                    ^^^
-    public int ExpressionBodiedProperty7 { private get => 1; set => _ = value; }    // FN - unused private getter
-    public int ExpressionBodiedProperty8 { get => 1; private set => _ = value; }    // FN - unused private setter
+    public int ExpressionBodiedProperty7 { private get => 1; set => _ = value; }    // Noncompliant
+    public int ExpressionBodiedProperty8 { get => 1; private set => _ = value; }    // Noncompliant
 
     private int BothAccessed { get; set; }
 

@@ -175,10 +175,18 @@ namespace SonarAnalyzer.Rules.CSharp
             removableSymbols
                 .Except(usageCollector.UsedSymbols)
                 .Where(symbol => !IsMentionedInDebuggerDisplay(symbol, usageCollector))
+                .Where(x => !IsAccessorUsed(x, usageCollector))
                 .ToHashSet();
 
         private static IEnumerable<Diagnostic> GetDiagnosticsForUnreadFields(IEnumerable<SymbolUsage> unreadFields) =>
             unreadFields.Select(usage => Diagnostic.Create(RuleS4487, usage.Declaration.GetLocation(), GetFieldAccessibilityForMessage(usage.Symbol), usage.Symbol.Name));
+
+        private static bool IsAccessorUsed(ISymbol symbol, CSharpSymbolUsageCollector usageCollector) =>
+            symbol is IMethodSymbol { } accessor
+                && accessor.AssociatedSymbol is IPropertySymbol { } property
+                && usageCollector.PropertyAccess.TryGetValue(property, out var access)
+                && ((access == AccessorAccess.Get && accessor.MethodKind == MethodKind.PropertyGet)
+                    || (access == AccessorAccess.Set && accessor.MethodKind == MethodKind.PropertySet));
 
         private static string GetFieldAccessibilityForMessage(ISymbol symbol) =>
             symbol.DeclaredAccessibility == Accessibility.Private ? SyntaxConstants.Private : "private class";
@@ -314,9 +322,9 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly Func<SyntaxNode, SemanticModel> getSemanticModel;
             private readonly Accessibility containingTypeAccessibility;
 
-            public Dictionary<ISymbol, SyntaxNode> FieldLikeSymbols { get; } = new();
-            public HashSet<ISymbol> InternalSymbols { get; } = new();
-            public HashSet<ISymbol> PrivateSymbols { get; } = new();
+            public Dictionary<ISymbol, SyntaxNode> FieldLikeSymbols { get; } = [];
+            public HashSet<ISymbol> InternalSymbols { get; } = [];
+            public HashSet<ISymbol> PrivateSymbols { get; } = [];
 
             public CSharpRemovableSymbolWalker(Func<SyntaxTree, bool, SemanticModel> getSemanticModel, Accessibility containingTypeAccessibility)
             {
@@ -428,6 +436,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 base.VisitMethodDeclaration(node);
+            }
+            public override void VisitAccessorDeclaration(AccessorDeclarationSyntax node)
+            {
+                if (node.Modifiers.Any(SyntaxKind.PrivateKeyword))
+                {
+                    ConditionalStore(GetDeclaredSymbol(node), IsRemovableMember);
+                }
+
+                base.VisitAccessorDeclaration(node);
             }
 
             public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)

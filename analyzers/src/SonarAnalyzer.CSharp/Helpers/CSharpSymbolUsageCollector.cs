@@ -51,8 +51,8 @@ namespace SonarAnalyzer.Helpers
 
         public ISet<ISymbol> UsedSymbols { get; } = new HashSet<ISymbol>();
         public IDictionary<ISymbol, SymbolUsage> FieldSymbolUsages { get; } = new Dictionary<ISymbol, SymbolUsage>();
-        public HashSet<string> DebuggerDisplayValues { get; } = new();
-        public Dictionary<IPropertySymbol, AccessorAccess> PropertyAccess { get; } = new();
+        public HashSet<string> DebuggerDisplayValues { get; } = [];
+        public Dictionary<IPropertySymbol, AccessorAccess> PropertyAccess { get; } = [];
 
         public CSharpSymbolUsageCollector(Compilation compilation, IEnumerable<ISymbol> knownSymbols)
         {
@@ -159,7 +159,9 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitIdentifierName(IdentifierNameSyntax node)
         {
-            if (IsKnownIdentifier(node.Identifier))
+            if (IsKnownIdentifier(node.Identifier)
+                || knownSymbolNames.Contains($"get_{node.Identifier.ValueText}")
+                || knownSymbolNames.Contains($"set_{node.Identifier.ValueText}"))
             {
                 var symbols = GetSymbols(node);
                 TryStoreFieldAccess(node, symbols);
@@ -246,6 +248,17 @@ namespace SonarAnalyzer.Helpers
                 StorePropertyAccess(symbol, AccessorAccess.Set);
             }
             base.VisitPropertyDeclaration(node);
+        }
+
+        public override void VisitAccessorDeclaration(AccessorDeclarationSyntax node)
+        {
+            if (semanticModel.GetDeclaredSymbol(node) is { } symbol
+                && knownSymbolNames.Contains(symbol.Name))
+            {
+                var usage = GetFieldSymbolUsage(symbol);
+                usage.Declaration = node;
+            }
+            base.VisitAccessorDeclaration(node);
         }
 
         private SymbolAccess ParentAccessType(SyntaxNode node) =>

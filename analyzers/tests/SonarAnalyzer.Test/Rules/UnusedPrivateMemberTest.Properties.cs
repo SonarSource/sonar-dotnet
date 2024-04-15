@@ -137,5 +137,29 @@ public class PropertyUsages
     private int Property12 { get; set; } = 42; // FN
 }
 ").Verify();
+
+        [TestMethod]
+        public void UnusedPrivateMember_Properties_Accessors() =>
+            builder.AddSnippet(@"
+using System;
+public class PropertyUsages
+{
+    public int AProperty { private get; set; } // Noncompliant {{Remove the unused private getter 'get_AProperty'.}}
+    public int BProperty { get; private set; } // Noncompliant {{Remove the unused private setter 'set_BProperty'.}}
+    public int CProperty { internal get; set; } // Compliant
+    public int DProperty { get; internal set; } // Compliant
+    protected int EProperty { private get; set; } // Noncompliant {{Remove the unused private getter 'get_EProperty'.}}
+    public int FProperty { get; private set; } // Compliant
+    public int GProperty { private get; set; } // Noncompliant {{Remove the unused private getter 'get_GProperty'.}}
+    public int HProperty { get; private set; } // Noncompliant {{Remove the unused private setter 'set_HProperty'.}}
+    public int IProperty { private get; set; } // Compliant
+
+    public void Method()
+    {
+        FProperty = HProperty;
+        GProperty = IProperty;
+    }
+}
+").Verify();
     }
 }
