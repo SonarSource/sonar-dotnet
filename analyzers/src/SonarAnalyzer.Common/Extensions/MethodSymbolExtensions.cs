@@ -20,31 +20,30 @@
 
 using Comparison = SonarAnalyzer.Helpers.ComparisonKind;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public static class MethodSymbolExtensions
 {
-    public static class MethodSymbolExtensions
-    {
-        internal static bool Is(this IMethodSymbol methodSymbol, KnownType knownType, string name) =>
-            methodSymbol.ContainingType.Is(knownType) && methodSymbol.Name == name;
+    public static bool Is(this IMethodSymbol methodSymbol, KnownType knownType, string name) =>
+        methodSymbol.ContainingType.Is(knownType) && methodSymbol.Name == name;
 
-        internal static bool IsAny(this IMethodSymbol methodSymbol, KnownType knownType, params string[] names) =>
-            methodSymbol.ContainingType.Is(knownType) && names.Contains(methodSymbol.Name);
+    public static bool IsAny(this IMethodSymbol methodSymbol, KnownType knownType, params string[] names) =>
+        methodSymbol.ContainingType.Is(knownType) && names.Contains(methodSymbol.Name);
 
-        public static Comparison ComparisonKind(this IMethodSymbol method) =>
-            method?.MethodKind == MethodKind.UserDefinedOperator
-                ? ComparisonKind(method.Name)
-                : Comparison.None;
+    public static Comparison ComparisonKind(this IMethodSymbol method) =>
+        method?.MethodKind == MethodKind.UserDefinedOperator
+            ? ComparisonKind(method.Name)
+            : Comparison.None;
 
-        private static Comparison ComparisonKind(string method) =>
-            method switch
-            {
-                "op_Equality" => Comparison.Equals,
-                "op_Inequality" => Comparison.NotEquals,
-                "op_LessThan" => Comparison.LessThan,
-                "op_LessThanOrEqual" => Comparison.LessThanOrEqual,
-                "op_GreaterThan" => Comparison.GreaterThan,
-                "op_GreaterThanOrEqual" => Comparison.GreaterThanOrEqual,
-                _ => Comparison.None,
-            };
-    }
+    private static Comparison ComparisonKind(string method) =>
+        method switch
+        {
+            "op_Equality" => Comparison.Equals,
+            "op_Inequality" => Comparison.NotEquals,
+            "op_LessThan" => Comparison.LessThan,
+            "op_LessThanOrEqual" => Comparison.LessThanOrEqual,
+            "op_GreaterThan" => Comparison.GreaterThan,
+            "op_GreaterThanOrEqual" => Comparison.GreaterThanOrEqual,
+            _ => Comparison.None,
+        };
 }

@@ -21,9 +21,9 @@
 namespace SonarAnalyzer.CSharp.Styling.Test.Rules;
 
 [TestClass]
-public class ArrowLocationTest
+public class AvoidListForEachTest
 {
     [TestMethod]
-    public void ArrowLocation() =>
-        StylingVerifierBuilder.Create<ArrowLocation>().AddPaths("ArrowLocation.cs").Verify();
+    public void AvoidListForEach() =>
+        StylingVerifierBuilder.Create<AvoidListForEach>().AddPaths("AvoidListForEach.cs").Verify();
 }

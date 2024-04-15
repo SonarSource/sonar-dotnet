@@ -18,18 +18,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Styling.Test.Rules;
+namespace SonarAnalyzer.Rules.CSharp.Styling;
 
-[TestClass]
-public class AvoidValueTupleTest
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class AvoidListForEach : StylingAnalyzer
 {
-    private readonly VerifierBuilder builder = StylingVerifierBuilder.Create<AvoidValueTuple>().AddPaths("AvoidValueTuple.cs");
+    public AvoidListForEach() : base("T0011", "Use 'foreach' iteration instead of 'List.ForEach'.") { }
 
-    [TestMethod]
-    public void AvoidValueTuple() =>
-        builder.Verify();
-
-    [TestMethod]
-    public void AvoidValueTuple_TestCode() =>
-        builder.AddTestReference().VerifyNoIssueReported();
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(c =>
+            {
+                var name = ((MemberAccessExpressionSyntax)c.Node).Name;
+                if (name.Identifier.ValueText == nameof(List<int>.ForEach)
+                    && c.SemanticModel.GetSymbolInfo(name).Symbol is IMethodSymbol method
+                    && method.Is(KnownType.System_Collections_Generic_List_T, nameof(List<int>.ForEach)))
+                {
+                    c.ReportIssue(Rule, name);
+                }
+            },
+            SyntaxKind.SimpleMemberAccessExpression);
 }
