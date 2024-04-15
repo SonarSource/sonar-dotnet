@@ -1,0 +1,100 @@
+{
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_BarrierData\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L146",
+      "Location": "Line 146 Position 44-56"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_BarrierData\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L198",
+      "Location": "Line 198 Position 44-56"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_BarrierData\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L251",
+      "Location": "Line 251 Position 44-56"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Node\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L253",
+      "Location": "Line 253 Position 52-64"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Barrier\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L310",
+      "Location": "Line 310 Position 42-54"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Client\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L312",
+      "Location": "Line 312 Position 44-56"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_BarrierData\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L314",
+      "Location": "Line 314 Position 44-56"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_BarrierData\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L372",
+      "Location": "Line 372 Position 44-56"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_BarrierData\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L425",
+      "Location": "Line 425 Position 44-56"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Client\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L427",
+      "Location": "Line 427 Position 43-55"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Name\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L48",
+      "Location": "Line 48 Position 41-53"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Clients\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L69",
+      "Location": "Line 69 Position 73-85"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Barrier\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L71",
+      "Location": "Line 71 Position 42-54"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Arrived\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L73",
+      "Location": "Line 73 Position 63-75"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Deadline\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L75",
+      "Location": "Line 75 Position 45-57"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Channel\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L210",
+      "Location": "Line 210 Position 44-56"
+    }
+  ]
+}

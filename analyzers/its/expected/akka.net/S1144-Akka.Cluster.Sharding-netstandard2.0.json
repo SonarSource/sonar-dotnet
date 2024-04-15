@@ -11,6 +11,12 @@
       "Message": "Remove the unused private field \u0027_sharding\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L156",
       "Location": "Line 156 Position 9-90"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_GracefulShutdownInProgress\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L478",
+      "Location": "Line 478 Position 55-67"
     }
   ]
 }

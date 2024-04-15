@@ -1,0 +1,274 @@
+{
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Classname\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/TimelineItem.cs#L25",
+      "Location": "Line 25 Position 40-52"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Content\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/TimelineItem.cs#L27",
+      "Location": "Line 27 Position 38-50"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Title\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/TimelineItem.cs#L29",
+      "Location": "Line 29 Position 36-48"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Start\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/TimelineItem.cs#L31",
+      "Location": "Line 31 Position 38-50"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_GroupId\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/TimelineItem.cs#L33",
+      "Location": "Line 33 Position 35-47"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Prefix\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/VisualizerRuntimeTemplate.Tree.cs#L18",
+      "Location": "Line 18 Position 37-49"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Passed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/MultiNodeMessage.cs#L134",
+      "Location": "Line 134 Position 35-47"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_ActorPath\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/MultiNodeMessage.cs#L185",
+      "Location": "Line 185 Position 40-52"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_LogLevel\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/MultiNodeMessage.cs#L190",
+      "Location": "Line 190 Position 41-53"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_ActorPath\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/MultiNodeMessage.cs#L264",
+      "Location": "Line 264 Position 40-52"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_LogLevel\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/MultiNodeMessage.cs#L269",
+      "Location": "Line 269 Position 41-53"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_TimeStamp\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/MultiNodeMessage.cs#L37",
+      "Location": "Line 37 Position 38-50"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Message\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/MultiNodeMessage.cs#L42",
+      "Location": "Line 42 Position 38-50"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_NodeIndex\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/MultiNodeMessage.cs#L47",
+      "Location": "Line 47 Position 37-49"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_NodeRole\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/MultiNodeMessage.cs#L52",
+      "Location": "Line 52 Position 39-51"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Nodes\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/SpecRunCoordinator.cs#L35",
+      "Location": "Line 35 Position 45-57"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Subscriber\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunCoordinator.cs#L39",
+      "Location": "Line 39 Position 48-60"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Subscriber\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunCoordinator.cs#L53",
+      "Location": "Line 53 Position 48-60"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_TestRunCompleted\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunCoordinator.cs#L80",
+      "Location": "Line 80 Position 53-65"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_FactName\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L171",
+      "Location": "Line 171 Position 39-51"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_StartTime\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L180",
+      "Location": "Line 180 Position 38-50"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_NodeIndex\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L313",
+      "Location": "Line 313 Position 37-49"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_NodeRole\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L318",
+      "Location": "Line 318 Position 39-51"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_StartTime\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L323",
+      "Location": "Line 323 Position 38-50"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_StartTime\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L43",
+      "Location": "Line 43 Position 38-50"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_NodeIndex\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/Messages.cs#L110",
+      "Location": "Line 110 Position 37-49"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_NodeRole\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/Messages.cs#L111",
+      "Location": "Line 111 Position 39-51"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_When\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/Messages.cs#L113",
+      "Location": "Line 113 Position 37-49"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Message\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/Messages.cs#L115",
+      "Location": "Line 115 Position 38-50"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_When\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/Messages.cs#L136",
+      "Location": "Line 136 Position 37-49"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Message\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/Messages.cs#L138",
+      "Location": "Line 138 Position 38-50"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_LogSource\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/Messages.cs#L140",
+      "Location": "Line 140 Position 40-52"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Level\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/Messages.cs#L142",
+      "Location": "Line 142 Position 38-50"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_IsOpen\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/MessageSink.cs#L49",
+      "Location": "Line 49 Position 35-47"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_IsClosed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/MessageSink.cs#L50",
+      "Location": "Line 50 Position 37-49"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Subscriber\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/MessageSinkActor.cs#L35",
+      "Location": "Line 35 Position 48-60"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Sink\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/SinkCoordinator.cs#L35",
+      "Location": "Line 35 Position 44-56"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Message\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/SinkCoordinator.cs#L60",
+      "Location": "Line 60 Position 42-54"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Code\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/SinkCoordinator.cs#L78",
+      "Location": "Line 78 Position 36-48"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_NodeIndex\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/Spec.cs#L34",
+      "Location": "Line 34 Position 37-49"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_NodeRole\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/Spec.cs#L35",
+      "Location": "Line 35 Position 39-51"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_TestDisplayName\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/Spec.cs#L37",
+      "Location": "Line 37 Position 46-58"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_FailureMessages\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/Spec.cs#L64",
+      "Location": "Line 64 Position 53-65"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_FailureStackTraces\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/Spec.cs#L65",
+      "Location": "Line 65 Position 56-68"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_FailureExceptionTypes\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/Spec.cs#L66",
+      "Location": "Line 66 Position 59-71"
+    }
+  ]
+}

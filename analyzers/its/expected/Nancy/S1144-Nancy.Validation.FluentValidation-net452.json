@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_ModelType\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Validation.FluentValidation/FluentValidationValidator.cs#L46",
+      "Location": "Line 46 Position 38-50"
+    }
+  ]
+}

@@ -266,6 +266,12 @@
     },
     {
       "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Property\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S4015.cs#L12",
+      "Location": "Line 12 Position 36-49"
+    },
+    {
+      "Id": "S1144",
       "Message": "Remove the unused private property \u0027Property\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S4015.cs#L7",
       "Location": "Line 7 Position 20-28"

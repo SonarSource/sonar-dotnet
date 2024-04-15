@@ -2,6 +2,12 @@
   "Issues": [
     {
       "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_PropagationCount\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/DeltaPropagationSelector.cs#L26",
+      "Location": "Line 26 Position 45-57"
+    },
+    {
+      "Id": "S1144",
       "Message": "Remove the unused private field \u0027_pruningPerformed\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L307",
       "Location": "Line 307 Position 9-125"

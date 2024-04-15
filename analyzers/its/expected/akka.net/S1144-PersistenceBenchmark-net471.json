@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_StartedAt\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/PersistenceBenchmark/Messages.cs#L44",
+      "Location": "Line 44 Position 42-54"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_StoppedAt\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/PersistenceBenchmark/Messages.cs#L45",
+      "Location": "Line 45 Position 42-54"
+    }
+  ]
+}

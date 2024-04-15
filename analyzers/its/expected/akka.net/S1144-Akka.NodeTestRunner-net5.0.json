@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_TestCases\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.NodeTestRunner/Discovery.cs#L21",
+      "Location": "Line 21 Position 49-61"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Finished\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.NodeTestRunner/Sink.cs#L27",
+      "Location": "Line 27 Position 49-61"
+    }
+  ]
+}

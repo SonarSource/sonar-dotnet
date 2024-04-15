@@ -2,15 +2,429 @@
   "Issues": [
     {
       "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_CumulativeAck\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L310",
+      "Location": "Line 310 Position 43-55"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Nacks\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L315",
+      "Location": "Line 315 Position 46-58"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_RawValue\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L35",
+      "Location": "Line 35 Position 37-49"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_MaxSeq\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L424",
+      "Location": "Line 424 Position 36-48"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_TransportFailureDetectorConfig\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/AkkaProtocolSettings.cs#L21",
+      "Location": "Line 21 Position 61-73"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_When\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Deadline.cs#L45",
+      "Location": "Line 45 Position 37-49"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_ProtocolHandle\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L1671",
+      "Location": "Line 1671 Position 61-73"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_ReplyTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L1676",
+      "Location": "Line 1676 Position 45-57"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_ProtocolHandle\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L1769",
+      "Location": "Line 1769 Position 61-73"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_ReplyTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L1796",
+      "Location": "Line 1796 Position 45-57"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Ack\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L1836",
+      "Location": "Line 1836 Position 35-47"
+    },
+    {
+      "Id": "S1144",
       "Message": "Remove the unused private field \u0027AckIdleTimerName\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L1839",
       "Location": "Line 1839 Position 9-64"
     },
     {
       "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_UidConfirmed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L513",
+      "Location": "Line 513 Position 41-53"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Uid\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L820",
+      "Location": "Line 820 Position 35-47"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_AddressesPromise\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/EndpointManager.cs#L134",
+      "Location": "Line 134 Position 102-114"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Message\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/EndpointManager.cs#L170",
+      "Location": "Line 170 Position 42-54"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_SenderOption\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/EndpointManager.cs#L175",
+      "Location": "Line 175 Position 50-62"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Recipient\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/EndpointManager.cs#L180",
+      "Location": "Line 180 Position 52-64"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_RemoteAddress\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/EndpointManager.cs#L234",
+      "Location": "Line 234 Position 49-61"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Uid\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/EndpointManager.cs#L239",
+      "Location": "Line 239 Position 36-48"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Cmd\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/EndpointManager.cs#L259",
+      "Location": "Line 259 Position 38-50"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_AddressesPromise\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/EndpointManager.cs#L310",
+      "Location": "Line 310 Position 102-114"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Results\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/EndpointManager.cs#L316",
+      "Location": "Line 316 Position 20-32"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_AddressesPromise\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/EndpointManager.cs#L338",
+      "Location": "Line 338 Position 102-114"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Cause\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/EndpointManager.cs#L343",
+      "Location": "Line 343 Position 43-55"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Uid\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/EndpointManager.cs#L416",
+      "Location": "Line 416 Position 35-47"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Buffer\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/EndpointManager.cs#L421",
+      "Location": "Line 421 Position 62-74"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_History\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L147",
+      "Location": "Line 147 Position 52-64"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_TimeStamp\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L152",
+      "Location": "Line 152 Position 43-55"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_LocalAddressToUse\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteActorRef.cs#L74",
+      "Location": "Line 74 Position 49-61"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Remote\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteActorRef.cs#L80",
+      "Location": "Line 80 Position 48-60"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_RemoteSettings\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L161",
+      "Location": "Line 161 Position 53-65"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Transport\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L650",
+      "Location": "Line 650 Position 53-65"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_RemoteDaemon\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L660",
+      "Location": "Line 660 Position 58-70"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Actor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteDeploymentWatcher.cs#L67",
+      "Location": "Line 67 Position 43-55"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Supervisor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteDeploymentWatcher.cs#L71",
+      "Location": "Line 71 Position 56-68"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Config\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L93",
+      "Location": "Line 93 Position 37-49"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Cause\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemotingLifecycleEvent.cs#L168",
+      "Location": "Line 168 Position 39-51"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_ListenAddresses\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemotingLifecycleEvent.cs#L220",
+      "Location": "Line 220 Position 54-66"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Cause\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemotingLifecycleEvent.cs#L277",
+      "Location": "Line 277 Position 39-51"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Address\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemotingLifecycleEvent.cs#L317",
+      "Location": "Line 317 Position 39-51"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Uid\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemotingLifecycleEvent.cs#L322",
+      "Location": "Line 322 Position 31-43"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_LocalAddress\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemotingLifecycleEvent.cs#L366",
+      "Location": "Line 366 Position 44-56"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_RemoteAddress\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemotingLifecycleEvent.cs#L371",
+      "Location": "Line 371 Position 45-57"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_System\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemotingLifecycleEvent.cs#L402",
+      "Location": "Line 402 Position 42-54"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Log\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemotingLifecycleEvent.cs#L407",
+      "Location": "Line 407 Position 43-55"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Capacity\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L138",
+      "Location": "Line 138 Position 36-48"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_EvictAgeThreshold\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L140",
+      "Location": "Line 140 Position 45-57"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Seq\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L167",
+      "Location": "Line 167 Position 33-45"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Settings\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L105",
+      "Location": "Line 105 Position 53-65"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Origin\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L347",
+      "Location": "Line 347 Position 38-50"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Uid\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L352",
+      "Location": "Line 352 Position 31-43"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_ErrorMessage\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L710",
+      "Location": "Line 710 Position 43-55"
+    },
+    {
+      "Id": "S1144",
       "Message": "Remove the unused private method \u0027ResolveNameAsync\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L402",
       "Location": "Line 402 Position 40-56"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Mode\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L101",
+      "Location": "Line 101 Position 45-57"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_RemoteAddress\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L123",
+      "Location": "Line 123 Position 49-61"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Mode\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L128",
+      "Location": "Line 128 Position 45-57"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_OutboundDropP\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L173",
+      "Location": "Line 173 Position 48-60"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_InboundDropP\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L178",
+      "Location": "Line 178 Position 47-59"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Handle\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1025",
+      "Location": "Line 1025 Position 50-62"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_FailReason\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1045",
+      "Location": "Line 1045 Position 55-67"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Origin\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L233",
+      "Location": "Line 233 Position 42-54"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_ThrottlerHandle\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L238",
+      "Location": "Line 238 Position 59-71"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_AssociationHandle\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L260",
+      "Location": "Line 260 Position 63-75"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_StatusPromise\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L265",
+      "Location": "Line 265 Position 81-93"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Payload\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L135",
+      "Location": "Line 135 Position 42-54"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Actor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L312",
+      "Location": "Line 312 Position 39-51"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_OriginalLocalAddress\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L336",
+      "Location": "Line 336 Position 52-64"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_OriginalRemoteAddress\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L341",
+      "Location": "Line 341 Position 53-65"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_WrappedHandle\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L346",
+      "Location": "Line 346 Position 55-67"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_SchemeAugmenter\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L351",
+      "Location": "Line 351 Position 58-70"
     }
   ]
 }

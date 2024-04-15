@@ -2,6 +2,18 @@
   "Issues": [
     {
       "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Body\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserContextMultipartFormData.cs#L46",
+      "Location": "Line 46 Position 35-47"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Context\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserResponse.cs#L66",
+      "Location": "Line 66 Position 44-56"
+    },
+    {
+      "Id": "S1144",
       "Message": "Remove the unused private method \u0027GetSafePathExtension\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L189",
       "Location": "Line 189 Position 31-51"
