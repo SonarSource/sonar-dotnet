@@ -24,6 +24,8 @@ public class Sample
 
         _ = o is null;
         _ = o is not null;
+        _ = o == "null";
+        _ = o != "null";
         _ = o == this;
         _ = o != this;
         _ = o == another;
