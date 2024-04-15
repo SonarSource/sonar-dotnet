@@ -25,9 +25,38 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class UseAwaitableMethodTest
 {
+    private const string EntityFrameworkVersion = "7.0.18";
+
     private readonly VerifierBuilder builder = new VerifierBuilder<UseAwaitableMethod>();
 
     [TestMethod]
     public void UseAwaitableMethod_CS() =>
         builder.AddPaths("UseAwaitableMethod.cs").Verify();
+
+    [TestMethod]
+    public void UseAwaitableMethod_CSharp9() =>
+        builder
+        .WithTopLevelStatements()
+        .AddPaths("UseAwaitableMethod_CSharp9.cs")
+        .Verify();
+
+    [TestMethod]
+    public void UseAwaitableMethod_CSharp8() =>
+        builder
+        .WithOptions(ParseOptionsHelper.FromCSharp8)
+        .AddPaths("UseAwaitableMethod_CSharp8.cs")
+        .Verify();
+
+#if NET
+    [TestMethod]
+    public void UseAwaitableMethod_EF() =>
+        builder
+        .WithOptions(ParseOptionsHelper.FromCSharp11)
+        .AddReferences([CoreMetadataReference.SystemComponentModelTypeConverter, CoreMetadataReference.SystemLinqQueryable])
+        .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore(EntityFrameworkVersion))
+        .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(EntityFrameworkVersion))
+        .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqlServer(EntityFrameworkVersion))
+        .AddPaths("UseAwaitableMethod_EF.cs")
+        .Verify();
+#endif
 }
