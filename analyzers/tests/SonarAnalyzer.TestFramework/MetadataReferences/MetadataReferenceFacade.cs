@@ -289,13 +289,6 @@ public static class MetadataReferenceFacade
         new[] {CoreMetadataReference.SystemComponentModelPrimitives};
 #endif
 
-    public static References SystemComponentModelTypeConverter =>
-#if NETFRAMEWORK
-        Enumerable.Empty<MetadataReference>();
-#else
-        new[] { CoreMetadataReference.SystemComponentModelTypeConverter };
-#endif
-
     public static References SystemNetSockets =>
 #if NETFRAMEWORK
         Enumerable.Empty<MetadataReference>();
