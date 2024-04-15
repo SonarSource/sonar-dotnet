@@ -4,7 +4,9 @@
 
   <PropertyGroup>
     <!-- `BinariesFolder` - binary files folder used by ITs and java packaging -->
-    <BinariesFolder>$(MSBuildThisFileDirectory)\..\packaging\binaries\</BinariesFolder>
+    <BinariesFolder>$(MSBuildThisFileDirectory)..\packaging\binaries\</BinariesFolder>
+    <!-- Avoid SonarAnalyzer.CSharp.Styling to be picked up by Java ITs -->
+    <BinariesFolderInternal>$(BinariesFolder)internal\</BinariesFolderInternal>
   </PropertyGroup>
 
   <Target Name="CleanBinaries" AfterTargets="Clean">
