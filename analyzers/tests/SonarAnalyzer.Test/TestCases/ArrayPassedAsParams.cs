@@ -95,7 +95,7 @@ public class Repro6894
         MethodArray(new String[] { "1", "2" }, new String[] { "1", "2" }); // Noncompliant, FP. Elements in args: [System.String[], System.String[]]
         MethodArray(new int[] { 1, 2 }, new int[] { 1, 2 }); // Noncompliant, FP. Elements in args: [System.Int32[], System.Int32[]]
 
-        MethodJuggedArray(new int[] { 1, 2 }); // Compliant: Jagged array [System.Object[]]
+        MethodJuggedArray(new int[] { 1, 2 }); // Compliant: jagged array [System.Object[]]
     }
 }
 
