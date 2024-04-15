@@ -52,7 +52,7 @@ public class UseAwaitableMethodTest
     public void UseAwaitableMethod_EF() =>
         builder
         .WithOptions(ParseOptionsHelper.FromCSharp11)
-        .AddReferences([CoreMetadataReference.SystemComponentModelTypeConverter, CoreMetadataReference.SystemLinqQueryable])
+        .AddReferences([CoreMetadataReference.SystemComponentModelTypeConverter])
         .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore(EntityFrameworkVersion))
         .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(EntityFrameworkVersion))
         .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqlServer(EntityFrameworkVersion))
