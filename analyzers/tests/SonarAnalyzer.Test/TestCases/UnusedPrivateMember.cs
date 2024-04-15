@@ -241,9 +241,10 @@ public class PropertyAccess
 //                         ^^^
     private int NotAccessed { get; set; }                                           // Noncompliant {{Remove the unused private property 'NotAccessed'.}}
 //              ^^^^^^^^^^^
-    public int PrivateGetter { private get; set; }                                  // Noncompliant
-    public int PrivateSetter { get; private set; }                                  // Noncompliant
-
+    public int PrivateGetter { private get; set; }                                  // Noncompliant {{Remove the unused private getter 'get_PrivateGetter'.}}
+//                             ^^^^^^^^^^^^
+    public int PrivateSetter { get; private set; }                                  // Noncompliant {{Remove the unused private setter 'set_PrivateSetter'.}}
+//                                  ^^^^^^^^^^^^
     private int ExpressionBodiedProperty => 1;                                      // Noncompliant {{Remove the unused private property 'ExpressionBodiedProperty'.}}
 //              ^^^^^^^^^^^^^^^^^^^^^^^^
     private int ExpressionBodiedProperty2 { get => 1; }                             // Noncompliant
