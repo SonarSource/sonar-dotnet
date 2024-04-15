@@ -1,0 +1,23 @@
+{
+  "title": "Value type properties of a model class should be nullable or marked as \"Required\" to avoid under-posting",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "asp.net"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6964",
+  "sqKey": "S6964",
+  "scope": "Main",
+  "quickfix": "targeted",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "TRUSTWORTHY"
+  }
+}
