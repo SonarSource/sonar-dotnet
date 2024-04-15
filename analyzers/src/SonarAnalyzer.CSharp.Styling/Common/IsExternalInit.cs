@@ -18,15 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using SonarAnalyzer;
+using System.ComponentModel;
 
-[assembly: AssemblyTitle("SonarAnalyzer Common")]
-[assembly: AssemblyProduct("SonarAnalyzer")]
-[assembly: AssemblyDescription("")]
-
-[assembly: InternalsVisibleTo("SonarAnalyzer.CSharp" + Signing.InternalsVisibleToPublicKey)]
-[assembly: InternalsVisibleTo("SonarAnalyzer.VisualBasic" + Signing.InternalsVisibleToPublicKey)]
-[assembly: InternalsVisibleTo("SonarAnalyzer.Test" + Signing.InternalsVisibleToPublicKey)]
-[assembly: InternalsVisibleTo("SonarAnalyzer.TestFramework" + Signing.InternalsVisibleToPublicKey)]
+namespace System.Runtime.CompilerServices
+{
+    // This empty class needs to exist when C# 9 init-only setters are used in project targeting .NET Framework.
+    // https://docs.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.isexternalinit?view=net-6.0
+    // It is used only by compiler to track metadata. It does not affect MSIL, CLR nor runtime.
+    // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-9.0/init#metadata-encoding
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    internal static class IsExternalInit { }
+}

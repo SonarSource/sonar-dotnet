@@ -30,15 +30,15 @@ public sealed class TypeMemberOrdering : StylingAnalyzer
     private static readonly Dictionary<SyntaxKind, MemberKind> MemberKinds = new()
         {
             // Order 1: Constants are FieldDeclaration and are handled separately in the code
-            {SyntaxKind.EnumDeclaration, new(2, "Fields") },
+            {SyntaxKind.EnumDeclaration, new(2, "Enums") },
             {SyntaxKind.FieldDeclaration, new(3, "Fields") },
-            {SyntaxKind.EventFieldDeclaration, new(3, "Fields") },
             // Order 10: Abstract members are handled separately in the code
-            {SyntaxKind.EventDeclaration, new(20, "Events") },
-            {SyntaxKind.IndexerDeclaration, new(20, "Indexers") },
-            {SyntaxKind.PropertyDeclaration, new(20, "Properties") },
-            {SyntaxKind.ConstructorDeclaration, new(21, "Constructors") },
-            {SyntaxKind.DestructorDeclaration, new(22, "Destructors") },
+            {SyntaxKind.DelegateDeclaration, new(20, "Delegates") },
+            {SyntaxKind.EventFieldDeclaration, new(21, "Events") },
+            {SyntaxKind.PropertyDeclaration, new(22, "Properties") },
+            {SyntaxKind.IndexerDeclaration, new(23, "Indexers") },
+            {SyntaxKind.ConstructorDeclaration, new(24, "Constructors") },
+            {SyntaxKind.DestructorDeclaration, new(25, "Destructor") },
             {SyntaxKind.MethodDeclaration, new(30, "Methods") },
             {SyntaxKind.ConversionOperatorDeclaration, new(31, "Operators") },
             {SyntaxKind.OperatorDeclaration, new(31, "Operators") },
@@ -48,12 +48,13 @@ public sealed class TypeMemberOrdering : StylingAnalyzer
             {SyntaxKind.StructDeclaration, new(40, NestedTypes) },
         };
 
-    public TypeMemberOrdering() : base("T0008", "Move {0} {1}") { }
+    public TypeMemberOrdering() : base("T0008", "Move {0} {1}.") { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(
             ValidateMembers,
             SyntaxKind.ClassDeclaration,
+            SyntaxKind.InterfaceDeclaration,
             SyntaxKind.RecordDeclaration,
             SyntaxKind.RecordStructDeclaration,
             SyntaxKind.StructDeclaration);
@@ -70,9 +71,14 @@ public sealed class TypeMemberOrdering : StylingAnalyzer
             }
         }
         var maxOrder = 0;
+        var availableKinds = members.GroupBy(x => x.Order).OrderBy(x => x.Key).Select(x => new MemberKind(x.Key, x.First().Description)).ToArray();
         foreach (var member in members)
         {
-            context.ReportIssue(Rule, member.Location, member.Description, "FIXME: before/after/after and before");
+            if (member.Order < maxOrder)
+            {
+                context.ReportIssue(Rule, member.Location, member.Description, ExpectedLocation(availableKinds, member.Order));
+            }
+            maxOrder = Math.Max(maxOrder, member.Order);
         }
     }
 
@@ -103,6 +109,12 @@ public sealed class TypeMemberOrdering : StylingAnalyzer
             FieldDeclarationSyntax field => field.Declaration.GetLocation(),
             _ => node.GetIdentifier()?.GetLocation()
         };
+
+    private static string ExpectedLocation(MemberKind[] availableKinds, int order)
+    {
+        var after = availableKinds.LastOrDefault(x => x.Order < order) is { } previous ? $"after {previous.Description}, " : null;
+        return $"{after}before {availableKinds.First(x => x.Order > order).Description}";
+    }
 
     private sealed record MemberInfo(MemberDeclarationSyntax Member, Location Location, int Order, string Description);
 
