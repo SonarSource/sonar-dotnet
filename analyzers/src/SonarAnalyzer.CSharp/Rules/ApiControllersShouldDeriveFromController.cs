@@ -75,12 +75,20 @@ public sealed class ApiControllersShouldDeriveFromController : SonarDiagnosticAn
             }, SymbolKind.NamedType);
         });
 
-    private void ReportIssue(SonarSymbolReportingContext context, INamedTypeSymbol controllerSymbol, bool shouldReport)
+    private static void ReportIssue(SonarSymbolReportingContext context, INamedTypeSymbol controllerSymbol, bool shouldReport)
     {
-        var classDeclaration = (ClassDeclarationSyntax)controllerSymbol.DeclaringSyntaxReferences.First().GetSyntax();
-        if (shouldReport && classDeclaration.BaseList?.DescendantNodes().FirstOrDefault(x => x.GetName() is "Controller") is { } node)
+        if (shouldReport)
         {
-            context.ReportIssue(CSharpFacade.Instance.GeneratedCodeRecognizer, Diagnostic.Create(Rule, node.GetLocation()));
+            var reportLocations = controllerSymbol.DeclaringSyntaxReferences
+                .Select(x => x.GetSyntax())
+                .OfType<ClassDeclarationSyntax>()
+                .Select(x => x.BaseList?.DescendantNodes().FirstOrDefault(x => x.GetName() is "Controller")?.GetLocation())
+                .OfType<Location>();
+
+            foreach (var location in reportLocations)
+            {
+                context.ReportIssue(CSharpFacade.Instance.GeneratedCodeRecognizer, Diagnostic.Create(Rule, location));
+            }
         }
     }
 

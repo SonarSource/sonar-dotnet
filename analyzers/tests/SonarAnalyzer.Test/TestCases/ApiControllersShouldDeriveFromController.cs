@@ -97,16 +97,19 @@ namespace Partial
 {
     [ApiController]
     public partial class Partial { }
-    public partial class Partial : Controller { }       // FN, To be fixed in next PR
+    public partial class Partial : Controller { }                  // Noncompliant
+    //                             ^^^^^^^^^^
 
     [ApiController]
     public partial class PartialBase { }
-    public partial class PartialBase : ControllerBase { }   // FN, To be fixed in next PR
+    public partial class PartialBase : ControllerBase { }          // Compliant
 
     [ApiController]
     public partial class PartialDoubleInheritance : Controller { } // Noncompliant
+    //                                              ^^^^^^^^^^
 
     public partial class PartialDoubleInheritance : Controller { } // FN, To be fixed in next PR
+    //                                              ^^^^^^^^^^
 
 }
 
