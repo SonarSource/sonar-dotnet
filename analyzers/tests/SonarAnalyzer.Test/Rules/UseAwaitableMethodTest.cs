@@ -34,6 +34,41 @@ public class UseAwaitableMethodTest
         builder.AddPaths("UseAwaitableMethod.cs").Verify();
 
     [TestMethod]
+    public void UseAwaitableMethod_CS_Test() =>
+        builder.AddSnippet("""
+            using System.IO;
+            using System.Threading.Tasks;
+            using System;
+            
+            public class C
+            {
+                public C Child { get; }
+                void VoidMethod() { }
+                Task VoidMethodAsync() => Task.CompletedTask;
+
+                C ReturnMethod() => null;
+                Task<C> ReturnMethodAsync() => Task.FromResult<C>(null);
+
+                bool BoolMethod() => true;
+                Task<bool> BoolMethodAsync() => Task.FromResult(true);
+
+                C this[int i] => null;
+                public static C operator +(C c) => default(C);
+                public static C operator +(C c1, C c2) => default(C);
+                public static C operator -(C c) => default(C);
+                public static C operator -(C c1, C c2) => default(C);
+                public static C operator !(C c) => default(C);
+                public static C operator ~(C c) => default(C);
+                public static implicit operator int(C c) => default(C);
+
+                async Task MethodInvocations()
+                {
+                    VoidMethod(); // Noncompliant
+                }
+            }
+            """).Verify();
+
+    [TestMethod]
     public void UseAwaitableMethod_CSharp9() =>
         builder
         .WithTopLevelStatements()
