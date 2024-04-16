@@ -21,23 +21,70 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ApiControllersShouldDeriveFromControllerBase : SonarDiagnosticAnalyzer
+public sealed class ApiControllersShouldDeriveFromController : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6961";
-    private const string MessageFormat = "FIXME";
+    private const string MessageFormat = "Inherit from ControllerBase instead of Controller.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
+    private readonly HashSet<string> viewIdentifiers =
+        [
+           "View",
+           "PartialView",
+           "ViewComponent",
+           "Json",
+           "OnActionExecutionAsync",
+           "OnActionExecuted",
+           "ViewData",
+           "ViewBag",
+           "TempData",
+           "ViewResult"
+        ];
+
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
+        context.RegisterCompilationStartAction(compilationStartContext =>
+        {
+            if (!compilationStartContext.Compilation.ReferencesControllers())
             {
-                var node = c.Node;
-                if (true)
+                return;
+            }
+
+            compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
+            {
+                var symbol = (INamedTypeSymbol)symbolStartContext.Symbol;
+                if (symbol.IsControllerType()
+                    && symbol.IsPubliclyAccessible()
+                    && IsAnnotatedWithApiAttribute(symbol)
+                    && symbol.BaseType.Is(KnownType.Microsoft_AspNetCore_Mvc_Controller))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                    var shouldReportController = true;
+                    symbolStartContext.RegisterSyntaxNodeAction(nodeContext =>
+                    {
+                        if (viewIdentifiers.Contains(nodeContext.Node.GetName()))
+                        {
+                            shouldReportController = false;
+                        }
+                    }, SyntaxKind.IdentifierName);
+
+                    symbolStartContext.RegisterSymbolEndAction(symbolEndContext =>
+                        ReportIssue(symbolEndContext, symbol, shouldReportController));
                 }
-            },
-            SyntaxKind.InvocationExpression);
+            }, SymbolKind.NamedType);
+        });
+
+    private static void ReportIssue(SonarSymbolReportingContext context, INamedTypeSymbol controllerSymbol, bool shouldReport)
+    {
+        var classDeclaration = (ClassDeclarationSyntax)controllerSymbol.DeclaringSyntaxReferences.First().GetSyntax();
+        if (shouldReport && classDeclaration.BaseList?.DescendantNodes().FirstOrDefault(x => x.GetName() is "Controller") is { } node)
+        {
+            context.ReportIssue(CSharpFacade.Instance.GeneratedCodeRecognizer, Diagnostic.Create(Rule, node.GetLocation()));
+        }
+    }
+
+    private static bool IsAnnotatedWithApiAttribute(INamedTypeSymbol symbol) =>
+        symbol.GetAttributes().Any(x => x.AttributeClass.Is(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute)
+                                        || x.AttributeClass.BaseType.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute));
 }

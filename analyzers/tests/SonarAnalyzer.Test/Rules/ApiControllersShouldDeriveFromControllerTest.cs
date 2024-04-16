@@ -23,11 +23,21 @@ using SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]
-public class ApiControllersShouldDeriveFromControllerBaseTest
+public class ApiControllersShouldDeriveFromControllerTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<ApiControllersShouldDeriveFromControllerBase>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<ApiControllersShouldDeriveFromController>();
+
+#if NET
+    private static IEnumerable<MetadataReference> AspNetCoreReferences =>
+    [
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
+    ];
 
     [TestMethod]
-    public void ApiControllersShouldDeriveFromControllerBase_CS() =>
-        builder.AddPaths("ApiControllersShouldDeriveFromControllerBase.cs").Verify();
+    public void ApiControllersShouldDeriveFromController_CS() =>
+        builder.AddReferences(AspNetCoreReferences).AddPaths("ApiControllersShouldDeriveFromController.cs").Verify();
+#endif
+
 }
