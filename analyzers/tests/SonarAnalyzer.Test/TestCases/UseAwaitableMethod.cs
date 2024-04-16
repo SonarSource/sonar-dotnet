@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using System;
+using System.Threading;
 
 public class C
 {
@@ -128,21 +129,21 @@ public class Inheritance
 
 class AsynchronousLambdas
 {
-    async Task CallAsyncLambda(string path)
+    async Task CallAsyncLambda(Task task, CancellationToken cancellationToken)
     {
         await Task.Run(async () => {
             await Foo();
-            File.ReadAllLines(path); // Noncompliant
+            task.Wait(cancellationToken); // Noncompliant
         });
         Func<Task> a = async () =>
         {
             await Foo();
-            File.ReadAllLines(path); // Noncompliant  
+            task.Wait(cancellationToken); // Noncompliant  
         };
         Func<Task> b = async delegate ()
         {
             await Foo();
-            File.ReadAllLines(path); // Noncompliant
+            task.Wait(cancellationToken); // Noncompliant  
         };
     }
 
