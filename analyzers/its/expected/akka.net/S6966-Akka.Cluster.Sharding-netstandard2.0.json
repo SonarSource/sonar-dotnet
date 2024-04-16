@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6966",
+      "Message": "Await StartProxyAsync instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L742",
+      "Location": "Line 742 Position 24-92"
+    }
+  ]
+}
