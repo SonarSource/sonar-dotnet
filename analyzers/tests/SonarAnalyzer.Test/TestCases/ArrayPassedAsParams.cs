@@ -78,7 +78,7 @@ public class Repro6894
 
     public void Method(params object[] args) { }
     public void MethodArray(params Array[] args) { }
-    public void MethodJuggedArray(params int[][] args) { }
+    public void MethodJaggedArray(params int[][] args) { }
 
     public void CallMethod()
     {
@@ -95,7 +95,7 @@ public class Repro6894
         MethodArray(new String[] { "1", "2" }, new String[] { "1", "2" }); // Noncompliant, FP. Elements in args: [System.String[], System.String[]]
         MethodArray(new int[] { 1, 2 }, new int[] { 1, 2 }); // Noncompliant, FP. Elements in args: [System.Int32[], System.Int32[]]
 
-        MethodJuggedArray(new int[] { 1, 2 }); // Compliant: jagged array [System.Object[]]
+        MethodJaggedArray(new int[] { 1, 2 }); // Compliant: jagged array [System.Object[]]
     }
 }
 
