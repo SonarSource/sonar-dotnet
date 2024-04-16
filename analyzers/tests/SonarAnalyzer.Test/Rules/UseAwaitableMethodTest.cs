@@ -61,8 +61,6 @@ public class UseAwaitableMethodTest
             }            
             """).Verify();
 
-#endif
-
     [TestMethod]
     public void UseAwaitableMethod_CSharp9() =>
         builder
@@ -77,7 +75,6 @@ public class UseAwaitableMethodTest
         .AddPaths("UseAwaitableMethod_CSharp8.cs")
         .Verify();
 
-#if NET
     [TestMethod]
     public void UseAwaitableMethod_EF() =>
         builder

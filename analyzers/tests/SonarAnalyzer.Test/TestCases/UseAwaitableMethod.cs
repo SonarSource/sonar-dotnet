@@ -129,21 +129,21 @@ public class Inheritance
 
 class AsynchronousLambdas
 {
-    async Task CallAsyncLambda(Task task, CancellationToken cancellationToken)
+    async Task CallAsyncLambda(StreamReader reader)
     {
         await Task.Run(async () => {
             await Foo();
-            task.Wait(cancellationToken); // Noncompliant
+            reader.ReadLine(); // Noncompliant
         });
         Func<Task> a = async () =>
         {
             await Foo();
-            task.Wait(cancellationToken); // Noncompliant  
+            reader.ReadLine(); // Noncompliant  
         };
         Func<Task> b = async delegate ()
         {
             await Foo();
-            task.Wait(cancellationToken); // Noncompliant  
+            reader.ReadLine(); // Noncompliant  
         };
     }
 
