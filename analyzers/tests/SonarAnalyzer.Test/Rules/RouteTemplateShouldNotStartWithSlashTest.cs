@@ -93,6 +93,7 @@ public class RouteTemplateShouldNotStartWithSlashTest
     [DataRow("""[HttpPatch("/IndexPatch")]""")]
     [DataRow("""[HttpHead("/IndexHead")]""")]
     [DataRow("""[HttpOptions("/IndexOptions")]""")]
+    [DataTestMethod]
     public void RouteTemplateShouldNotStartWithSlash_HttpAttributes(string attribute)
     {
         var builder = builderCS.AddReferences(AspNetCoreReferences)
