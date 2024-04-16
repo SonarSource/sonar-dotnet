@@ -27,11 +27,13 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string S1144DiagnosticId = "S1144";
         private const string S1144MessageFormat = "Remove the unused {0} {1} '{2}'.";
+        private const string S1144MessageFormatForPublicCtor = "Remove unused constructor of {0} type '{1}'.";
 
         private const string S4487DiagnosticId = "S4487";
         private const string S4487MessageFormat = "Remove this unread {0} field '{1}' or refactor the code to use its value.";
 
         private static readonly DiagnosticDescriptor RuleS1144 = DescriptorFactory.Create(S1144DiagnosticId, S1144MessageFormat);
+        private static readonly DiagnosticDescriptor RuleS1144ForPublicCtor = DescriptorFactory.Create(S1144DiagnosticId, S1144MessageFormatForPublicCtor);
         private static readonly DiagnosticDescriptor RuleS4487 = DescriptorFactory.Create(S4487DiagnosticId, S4487MessageFormat);
 
         private static readonly ImmutableArray<KnownType> IgnoredTypes = ImmutableArray.Create(
@@ -223,7 +225,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 };
 
             Diagnostic CreateS1144Diagnostic(SyntaxNode syntaxNode, ISymbol symbol) =>
-                Diagnostic.Create(RuleS1144, GetIdentifierLocation(syntaxNode), accessibility, symbol.GetClassification(), GetMemberName(symbol));
+                symbol.IsConstructor() && !syntaxNode.GetModifiers().Any(SyntaxKind.PrivateKeyword)
+                    ? Diagnostic.Create(RuleS1144ForPublicCtor, syntaxNode.GetLocation(), accessibility, symbol.ContainingType.Name)
+                    : Diagnostic.Create(RuleS1144, GetIdentifierLocation(syntaxNode), accessibility, symbol.GetClassification(), GetMemberName(symbol));
 
             static Location GetIdentifierLocation(SyntaxNode syntaxNode) =>
                 syntaxNode.GetIdentifier() is { } identifier
