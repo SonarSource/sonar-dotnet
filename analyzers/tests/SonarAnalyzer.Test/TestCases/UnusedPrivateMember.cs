@@ -29,7 +29,7 @@ class UnusedPrivateMember
             Console.WriteLine();
         }
 
-        public Gen(int i) : this() // Noncompliant {{Remove the unused private constructor 'Gen'.}}
+        public Gen(int i) : this() // Noncompliant {{Remove unused constructor of private type 'Gen'.}}
         {
             Console.WriteLine();
         }
