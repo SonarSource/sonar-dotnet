@@ -2,13 +2,13 @@
   "Issues": [
     {
       "Id": "S1144",
-      "Message": "Remove the unused private constructor \u0027Parent\u0027.",
+      "Message": "Remove unused constructor of private type \u0027Parent\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/Actor/SpawnActorBenchmarks.cs#L72",
       "Location": "Line 72 Position 20-26"
     },
     {
       "Id": "S1144",
-      "Message": "Remove the unused private constructor \u0027Child\u0027.",
+      "Message": "Remove unused constructor of private type \u0027Child\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/Actor/SpawnActorBenchmarks.cs#L97",
       "Location": "Line 97 Position 20-25"
     },
@@ -20,7 +20,7 @@
     },
     {
       "Id": "S1144",
-      "Message": "Remove the unused private constructor \u0027Echo\u0027.",
+      "Message": "Remove unused constructor of private type \u0027Echo\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/Serialization/SerializationBenchmarks.cs#L54",
       "Location": "Line 54 Position 20-24"
     }
