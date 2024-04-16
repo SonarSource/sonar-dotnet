@@ -26,6 +26,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BranchPointTest {
   @Test
   public void givenBranchPointData_getUniqueKey_containsFilePathStartLineAndOffsets(){
-    assertThat(new BranchPoint("path", 1, 2, 3, 4, 5).getUniqueKey()).isEqualTo("path-1-2-3-4");
+    assertThat(new BranchPoint("path", 1, 2, 3, 4, 5, "coverageIdentifier").getUniqueKey()).isEqualTo("path-1-2-3-4");
   }
 }
