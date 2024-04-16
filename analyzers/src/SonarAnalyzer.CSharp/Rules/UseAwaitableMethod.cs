@@ -35,58 +35,62 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(compilationStart =>
         {
-            var wellKnownExtensionMethodContainer = new WellKnownExtensionMethodContainer();
-            var queryable = compilationStart.Compilation.GetTypeByMetadataName(KnownType.System_Linq_Queryable);
-            var enumerable = compilationStart.Compilation.GetTypeByMetadataName(KnownType.System_Linq_Enumerable);
-            if (compilationStart.Compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions) is { } entityFrameworkQueryableExtensions)
-            {
-                wellKnownExtensionMethodContainer.Add(queryable, entityFrameworkQueryableExtensions);
-                wellKnownExtensionMethodContainer.Add(enumerable, entityFrameworkQueryableExtensions);
-            }
-            if (compilationStart.Compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions) is { } relationalQueryableExtensions)
-            {
-                wellKnownExtensionMethodContainer.Add(queryable, relationalQueryableExtensions);
-                wellKnownExtensionMethodContainer.Add(enumerable, relationalQueryableExtensions);
-            }
+            var wellKnownExtensionMethodContainer = BuildWellKnownExtensionMethodContainers(compilationStart.Compilation);
             context.RegisterCodeBlockStartAction<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, codeBlockStart =>
+            {
+                if (IsAsyncCodeBlock(codeBlockStart.CodeBlock))
                 {
-                    if (IsAsyncCodeBlock(codeBlockStart.CodeBlock))
+                    var codeBlock = codeBlockStart.CodeBlock;
+                    codeBlockStart.RegisterNodeAction(nodeContext =>
                     {
-                        var codeBlock = codeBlockStart.CodeBlock;
-                        codeBlockStart.RegisterNodeAction(nodeContext =>
+                        var (invocationExpression, semanticModel) = ((InvocationExpressionSyntax)nodeContext.Node, nodeContext.SemanticModel);
+
+                        var awaitableRoot = GetAwaitableRootOfInvocation(invocationExpression);
+                        if (awaitableRoot is AwaitExpressionSyntax)
                         {
-                            var (invocationExpression, semanticModel) = ((InvocationExpressionSyntax)nodeContext.Node, nodeContext.SemanticModel);
-
-                            var awaitableRoot = GetAwaitableRootOfInvocation(invocationExpression);
-                            if (awaitableRoot is AwaitExpressionSyntax)
+                            return; // Invocation result is already awaited.
+                        }
+                        if (nodeContext.SemanticModel.GetSymbolInfo(invocationExpression, nodeContext.Cancel).Symbol is IMethodSymbol methodSymbol)
+                        {
+                            if (methodSymbol.IsAwaitableNonDynamic(semanticModel, invocationExpression.SpanStart))
                             {
-                                return; // Invocation result is already awaited.
+                                return; // The invoked method returns something awaitable (but it isn't awaited).
                             }
-                            if (nodeContext.SemanticModel.GetSymbolInfo(invocationExpression, nodeContext.Cancel).Symbol is IMethodSymbol methodSymbol)
+                            var members = GetMethodSymbolsInScope($"{methodSymbol.Name}Async", wellKnownExtensionMethodContainer, nodeContext.ContainingSymbol.ContainingType, methodSymbol);
+                            var asyncCandidates = members.Where(x => x.IsAwaitableNonDynamic(semanticModel, invocationExpression.SpanStart));
+                            var awaitableAlternatives = FindAwaitableAlternatives(nodeContext.SemanticModel, codeBlock, awaitableRoot, invocationExpression, asyncCandidates);
+                            if (awaitableAlternatives.Any())
                             {
-                                if (methodSymbol.IsAwaitableNonDynamic(semanticModel, invocationExpression.SpanStart))
-                                {
-                                    return; // The invoked method returns something awaitable (but it isn't awaited).
-                                }
-
-                                var members = GetMethodSymbolsInScope(wellKnownExtensionMethodContainer, nodeContext.ContainingSymbol?.ContainingType, methodSymbol);
-                                var asyncCandidates = members.Where(x =>
-                                    x.Name.Equals($"{methodSymbol.Name}Async", StringComparison.OrdinalIgnoreCase)
-                                    && x.IsAwaitableNonDynamic(semanticModel, invocationExpression.SpanStart));
-                                var awaitableAlternatives = FindAwaitableAlternatives(nodeContext.SemanticModel, codeBlock, awaitableRoot, invocationExpression, asyncCandidates);
-                                if (awaitableAlternatives.Any())
-                                {
-                                    nodeContext.ReportIssue(Rule, invocationExpression, awaitableAlternatives.First().Name);
-                                }
+                                nodeContext.ReportIssue(Rule, invocationExpression, awaitableAlternatives.First().Name);
                             }
-                        }, SyntaxKind.InvocationExpression);
-                    }
-                });
+                        }
+                    }, SyntaxKind.InvocationExpression);
+                }
+            });
         });
 
-    private static IEnumerable<IMethodSymbol> GetMethodSymbolsInScope(WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer, INamedTypeSymbol invocationContext, IMethodSymbol invokedMethod) =>
+    private static WellKnownExtensionMethodContainer BuildWellKnownExtensionMethodContainers(Compilation compilation)
+    {
+        var wellKnownExtensionMethodContainer = new WellKnownExtensionMethodContainer();
+        var queryable = compilation.GetTypeByMetadataName(KnownType.System_Linq_Queryable);
+        var enumerable = compilation.GetTypeByMetadataName(KnownType.System_Linq_Enumerable);
+        if (compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions) is { } entityFrameworkQueryableExtensions)
+        {
+            wellKnownExtensionMethodContainer.Add(queryable, entityFrameworkQueryableExtensions);
+            wellKnownExtensionMethodContainer.Add(enumerable, entityFrameworkQueryableExtensions);
+        }
+        if (compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions) is { } relationalQueryableExtensions)
+        {
+            wellKnownExtensionMethodContainer.Add(queryable, relationalQueryableExtensions);
+            wellKnownExtensionMethodContainer.Add(enumerable, relationalQueryableExtensions);
+        }
+
+        return wellKnownExtensionMethodContainer;
+    }
+
+    private static IEnumerable<IMethodSymbol> GetMethodSymbolsInScope(string methodName, WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer, INamedTypeSymbol invocationContext, IMethodSymbol invokedMethod) =>
     ((INamedTypeSymbol[])[.. invocationContext.GetSelfAndBaseTypes(), .. WellKnownExtensionMethodContainer(wellKnownExtensionMethodContainer, invokedMethod), invokedMethod.ContainingType])
-            .SelectMany(x => x.GetMembers())
+            .SelectMany(x => x.GetMembers(methodName))
             .OfType<IMethodSymbol>();
 
     private static IEnumerable<INamedTypeSymbol> WellKnownExtensionMethodContainer(WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer, IMethodSymbol invokedMethod) =>
