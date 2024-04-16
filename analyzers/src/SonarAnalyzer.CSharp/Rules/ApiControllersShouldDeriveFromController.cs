@@ -32,15 +32,16 @@ public sealed class ApiControllersShouldDeriveFromController : SonarDiagnosticAn
 
     private readonly HashSet<string> viewIdentifiers =
         [
-           "View",
-           "PartialView",
-           "ViewComponent",
            "Json",
-           "OnActionExecutionAsync",
            "OnActionExecuted",
-           "ViewData",
-           "ViewBag",
+           "OnActionExecuting",
+           "OnActionExecutionAsync",
+           "PartialView",
            "TempData",
+           "View",
+           "ViewBag",
+           "ViewComponent",
+           "ViewData",
            "ViewResult"
         ];
 
@@ -73,27 +74,24 @@ public sealed class ApiControllersShouldDeriveFromController : SonarDiagnosticAn
                     {
                         if (shouldReportController)
                         {
-                            ReportIssue(symbolEndContext, symbol, shouldReportController);
+                            ReportIssue(symbolEndContext, symbol);
                         }
                     });
                 }
             }, SymbolKind.NamedType);
         });
 
-    private static void ReportIssue(SonarSymbolReportingContext context, INamedTypeSymbol controllerSymbol, bool shouldReport)
+    private static void ReportIssue(SonarSymbolReportingContext context, INamedTypeSymbol controllerSymbol)
     {
-        if (shouldReport)
-        {
-            var reportLocations = controllerSymbol.DeclaringSyntaxReferences
-                .Select(x => x.GetSyntax())
-                .OfType<ClassDeclarationSyntax>()
-                .Select(x => x.BaseList?.DescendantNodes().FirstOrDefault(x => x.GetName() is "Controller")?.GetLocation())
-                .OfType<Location>();
+        var reportLocations = controllerSymbol.DeclaringSyntaxReferences
+            .Select(x => x.GetSyntax())
+            .OfType<ClassDeclarationSyntax>()
+            .Select(x => x.BaseList?.DescendantNodes().FirstOrDefault(x => x.GetName() is "Controller")?.GetLocation())
+            .OfType<Location>();
 
-            foreach (var location in reportLocations)
-            {
-                context.ReportIssue(CSharpFacade.Instance.GeneratedCodeRecognizer, Diagnostic.Create(Rule, location));
-            }
+        foreach (var location in reportLocations)
+        {
+            context.ReportIssue(CSharpFacade.Instance.GeneratedCodeRecognizer, Diagnostic.Create(Rule, location));
         }
     }
 }

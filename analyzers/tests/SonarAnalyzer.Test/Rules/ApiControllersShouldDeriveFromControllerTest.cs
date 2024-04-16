@@ -38,6 +38,79 @@ public class ApiControllersShouldDeriveFromControllerTest
     [TestMethod]
     public void ApiControllersShouldDeriveFromController_CS() =>
         builder.AddReferences(AspNetCoreReferences).AddPaths("ApiControllersShouldDeriveFromController.cs").Verify();
+
+    [DataRow("""View()""")]
+    [DataRow("""View("viewName")""")]
+    [DataRow("""View(model)""")]
+    [DataRow("""View("viewName", model)""")]
+    [DataRow("""PartialView()""")]
+    [DataRow("""PartialView("viewName")""")]
+    [DataRow("""PartialView(model)""")]
+    [DataRow("""PartialView("viewName", model)""")]
+    [DataRow("""ViewComponent("foo")""")]
+    [DataRow("""ViewComponent("foo", model)""")]
+    [DataRow("""ViewComponent(typeof(object))""")]
+    [DataRow("""ViewComponent(typeof(object), model)""")]
+    [DataRow("""Json(model)""")]
+    [DataRow("""Json(model, model)""")]
+    [DataRow("""OnActionExecutionAsync(default(ActionExecutingContext), default(ActionExecutionDelegate))""")]
+    [DataRow("""ViewData""")]
+    [DataRow("""ViewBag""")]
+    [DataRow("""TempData""")]
+    [DataRow("""ViewData["foo"]""")]
+    [DataRow("""ViewBag["foo"]""")]
+    [DataRow("""TempData["foo"]""")]
+    [DataTestMethod]
+    public void ApiControllersShouldDeriveFromController_DoesNotRaiseWithViewFunctionality(string assignment) =>
+        builder.AddReferences(AspNetCoreReferences)
+            .AddSnippet($$"""
+                using Microsoft.AspNetCore.Mvc;
+
+                [ApiController]
+                public class Invocations : Controller    // Compliant
+                {
+                    object model = null;
+                    public object Foo() => {{assignment}};
+                }
+                """)
+            .VerifyNoIssueReported();
+
+    [DataRow("""OnActionExecuted(default(ActionExecutedContext))""")]
+    [DataRow("""OnActionExecuting(default(ActionExecutingContext))""")]
+    [DataTestMethod]
+    public void ApiControllersShouldDeriveFromController_DoesNotRaiseWithVoidInvocations(string assignment) =>
+    builder.AddReferences(AspNetCoreReferences)
+        .AddSnippet($$"""
+                using Microsoft.AspNetCore.Mvc;
+                using Microsoft.AspNetCore.Mvc.Filters;
+
+                [ApiController]
+                public class VoidInvocations : Controller           // Compliant
+                {
+                    public void Foo() => {{assignment}};
+                }
+                """)
+        .VerifyNoIssueReported();
+
+    [DataRow("""Constructor""", "public InConstructor() => foo = View()")]
+    [DataRow("""Destructor""", "~InDestructor() => foo = View()")]
+    [DataRow("""PropertyGet""", "object prop => View();")]
+    [DataRow("""PropertySet""", "object prop { set => _ = View(); }")]
+    [DataRow("""Indexer""", "object this[int index] => View()")]
+    [DataTestMethod]
+    public void ApiControllersShouldDeriveFromController_DoesNotRaiseInDifferentConstructs(string construct, string code) =>
+        builder.AddReferences(AspNetCoreReferences)
+            .AddSnippet($$"""
+                using Microsoft.AspNetCore.Mvc;
+
+                [ApiController]
+                public class In{{construct}} : Controller  // Compliant
+                {
+                    object foo;
+                    {{code}};
+                }
+                """)
+        .VerifyNoIssueReported();
 #endif
 
 }
