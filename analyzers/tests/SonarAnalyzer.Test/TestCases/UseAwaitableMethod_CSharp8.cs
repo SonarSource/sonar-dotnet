@@ -8,6 +8,7 @@ public class C
     public static implicit operator int(C c) => default(C);
 
     C ReturnMethod() => null;
+    Task<C> ReturnMethodAsync() => null;
 
     async Task OperatorPrecedence() // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/#operator-precedence
     {

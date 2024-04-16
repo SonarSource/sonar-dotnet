@@ -33,40 +33,35 @@ public class UseAwaitableMethodTest
     public void UseAwaitableMethod_CS() =>
         builder.AddPaths("UseAwaitableMethod.cs").Verify();
 
+#if NET
+
     [TestMethod]
     public void UseAwaitableMethod_CS_Test() =>
-        builder.AddSnippet("""
+        builder
+        .WithOptions(ParseOptionsHelper.FromCSharp11)
+        .AddReferences([CoreMetadataReference.SystemComponentModelTypeConverter])
+        .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore(EntityFrameworkVersion))
+        .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(EntityFrameworkVersion))
+        .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqlServer(EntityFrameworkVersion))
+        .AddSnippet("""
+            using Microsoft.EntityFrameworkCore;
             using System.IO;
             using System.Threading.Tasks;
             using System;
-            
-            public class C
+            using System.Linq;
+
+            public class EnitityFramework
             {
-                public C Child { get; }
-                void VoidMethod() { }
-                Task VoidMethodAsync() => Task.CompletedTask;
-
-                C ReturnMethod() => null;
-                Task<C> ReturnMethodAsync() => Task.FromResult<C>(null);
-
-                bool BoolMethod() => true;
-                Task<bool> BoolMethodAsync() => Task.FromResult(true);
-
-                C this[int i] => null;
-                public static C operator +(C c) => default(C);
-                public static C operator +(C c1, C c2) => default(C);
-                public static C operator -(C c) => default(C);
-                public static C operator -(C c1, C c2) => default(C);
-                public static C operator !(C c) => default(C);
-                public static C operator ~(C c) => default(C);
-                public static implicit operator int(C c) => default(C);
-
-                async Task MethodInvocations()
+                public async Task Query()
                 {
-                    VoidMethod(); // Noncompliant
+                    // Note to implementers: Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions and RelationalQueryableExtensions might be needed to be added to some sort of whitelist for IQueryables
+                    DbSet<object> dbSet = default;
+                    dbSet.ToArray(); // Noncompliant
                 }
-            }
+            }            
             """).Verify();
+
+#endif
 
     [TestMethod]
     public void UseAwaitableMethod_CSharp9() =>

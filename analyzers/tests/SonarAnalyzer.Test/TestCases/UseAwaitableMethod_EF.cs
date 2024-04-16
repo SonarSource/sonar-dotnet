@@ -17,8 +17,8 @@ public class EnitityFramework
         dbSet.Average(x => 1); // Noncompliant
         dbSet.Contains(null); // Noncompliant
         dbSet.Count(); // Noncompliant
-        dbSet.ElementAt(1); // Noncompliant
-        dbSet.ElementAtOrDefault(1); // Noncompliant
+        dbSet.ElementAt(1); // Compliant: EF 8.0 only
+        dbSet.ElementAtOrDefault(1); // Compliant: EF 8.0 only
         dbSet.ExecuteDelete(); // Noncompliant
         dbSet.ExecuteUpdate(x => x.SetProperty(x => x.ToString(), x => string.Empty)); // Noncompliant
         dbSet.Find(null); // Noncompliant
@@ -36,6 +36,5 @@ public class EnitityFramework
         dbSet.ToArray(); // Noncompliant
         dbSet.ToDictionary(x => 0); // Noncompliant
         dbSet.ToList(); // Noncompliant
-        dbSet.ToListAsync(); // Noncompliant
     }
 }

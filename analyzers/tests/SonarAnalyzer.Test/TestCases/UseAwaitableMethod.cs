@@ -25,7 +25,7 @@ public class C
 
     async Task MethodInvocations()
     {
-        VoidMethod(); // Noncompliant
+        VoidMethod(); // Noncompliant {{Await VoidMethodAsync instead.}}
         await VoidMethodAsync(); // Compliant
         VoidMethodAsync(); // Compliant: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/cs4014
         this.VoidMethod(); // Noncompliant
@@ -35,12 +35,12 @@ public class C
         ReturnMethod(); // Noncompliant
         _ = ReturnMethod(); // Noncompliant
         this.ReturnMethod().ReturnMethod().ReturnMethod();
-        //   ^^^^^^^^^^^^                                  
-        //                  ^^^^^^^^^^^^                   @-1
-        //                                 ^^^^^^^^^^^^    @-2
+//      ^^^^^^^^^^^^^^^^^^^                                  
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                   @-1
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    @-2
         _ = true ? ReturnMethod() : ReturnMethod();
-        //         ^^^^^^^^^^^^
-        //                          ^^^^^^^^^^^^           @-1
+        //         ^^^^^^^^^^^^^^
+        //                          ^^^^^^^^^^^^^^           @-1
     }
 
     public void NonAsyncMethod_VoidReturning()
@@ -68,16 +68,16 @@ public class C
         _ = nameof(VoidMethod); // Compliant
         _ = !BoolMethod(); // Noncompliant
         _ = BoolMethod() ? ReturnMethod() : default(C);
-        //  ^^^^^^^^^^
-        //                 ^^^^^^^^^^^^
+        //  ^^^^^^^^^^^^
+        //                 ^^^^^^^^^^^^^^ @-1
         _ = +ReturnMethod(); // Noncompliant
         _ = -ReturnMethod(); // Noncompliant
         _ = !ReturnMethod(); // Noncompliant
         _ = ReturnMethod() + default(C); // Noncompliant
         _ = ReturnMethod() - default(C); // Noncompliant
         _ = ReturnMethod() - !ReturnMethod();
-        //  ^^^^^^^^^^^^
-        //                    ^^^^^^^^^^^^ @-1
+        //  ^^^^^^^^^^^^^^
+        //                    ^^^^^^^^^^^^^^ @-1
     }
 
     async Task ExtensionMethods()
@@ -95,13 +95,13 @@ public static class Extensions
 public class Overloads
 {
     public long ImplicitConversionsMethod(int i, IComparable j) => 0;
-    public Task<int> ImplicitConversionsMethodAsync(long otherName1, long otherName2) => Task.FromResult(0);
+    public Task<int> ImplicitConversionsMethodAsync(long otherName1, int otherName2) => Task.FromResult(0);
     public Task<byte> ImplicitConversionsMethodAsync(byte otherName1, byte otherName2) => Task.FromResult((byte)0);
 
     public void TypeParameter(C c) { }
     public Task TypeParameter<T>(T t) where T : C => Task.CompletedTask;
 
-    public async Task Test(int i, IComparable j)
+    public async Task Test(int i, byte j)
     {
         long l1 = ImplicitConversionsMethod(i, j); // Noncompliant (Can be resolved to first overload)
         TypeParameter(new C()); // Compliant: Adding "await" does never resolve to another overload
@@ -128,9 +128,9 @@ public class Inheritance
 
 class AsynchronousLambdas
 {
-    void CallAsyncLambda(string path)
+    async Task CallAsyncLambda(string path)
     {
-        Task.Run(async () => {
+        await Task.Run(async () => {
             await Foo();
             File.ReadAllLines(path); // Noncompliant
         });
