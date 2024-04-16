@@ -50,15 +50,20 @@ public class UseAwaitableMethodTest
             using System;
             using System.Linq;
 
-            public class EnitityFramework
+            public class C
             {
-                public async Task Query()
+                async Task ExtensionMethods()
                 {
-                    // Note to implementers: Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions and RelationalQueryableExtensions might be needed to be added to some sort of whitelist for IQueryables
-                    DbSet<object> dbSet = default;
-                    dbSet.ToArray(); // Noncompliant
+                    this.ExtVoidMethod(); // Noncompliant
                 }
-            }            
+            }
+
+            public static class Extensions
+            {
+                public static void ExtVoidMethod(this C c) { }
+                public static Task ExtVoidMethodAsync(this C c) => Task.CompletedTask;
+            }
+            
             """).Verify();
 
     [TestMethod]

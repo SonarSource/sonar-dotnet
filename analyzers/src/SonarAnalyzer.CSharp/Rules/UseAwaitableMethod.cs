@@ -19,7 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.Shared.Extensions;
-using WellKnownExtensionMethodContainer = SonarAnalyzer.Common.MultiValueDictionary<Microsoft.CodeAnalysis.INamedTypeSymbol, Microsoft.CodeAnalysis.INamedTypeSymbol>;
+using WellKnownExtensionMethodContainer = SonarAnalyzer.Common.MultiValueDictionary<Microsoft.CodeAnalysis.ITypeSymbol, Microsoft.CodeAnalysis.INamedTypeSymbol>;
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -50,13 +50,16 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
                         {
                             return; // Invocation result is already awaited.
                         }
-                        if (nodeContext.SemanticModel.GetSymbolInfo(invocationExpression, nodeContext.Cancel).Symbol is IMethodSymbol methodSymbol)
+                        if (semanticModel.GetSymbolInfo(invocationExpression, nodeContext.Cancel).Symbol is IMethodSymbol methodSymbol)
                         {
                             if (methodSymbol.IsAwaitableNonDynamic(semanticModel, invocationExpression.SpanStart))
                             {
                                 return; // The invoked method returns something awaitable (but it isn't awaited).
                             }
-                            var members = GetMethodSymbolsInScope($"{methodSymbol.Name}Async", wellKnownExtensionMethodContainer, nodeContext.ContainingSymbol.ContainingType, methodSymbol);
+                            var invokedType = invocationExpression.Expression.GetLeftOfDot() is { } expression && semanticModel.GetTypeInfo(expression) is { Type: { } type }
+                                ? type
+                                : nodeContext.ContainingSymbol.ContainingType;
+                            var members = GetMethodSymbolsInScope($"{methodSymbol.Name}Async", wellKnownExtensionMethodContainer, invokedType, methodSymbol.ContainingType);
                             var asyncCandidates = members.Where(x => x.IsAwaitableNonDynamic(semanticModel, invocationExpression.SpanStart));
                             var awaitableAlternatives = FindAwaitableAlternatives(nodeContext.SemanticModel, codeBlock, awaitableRoot, invocationExpression, asyncCandidates);
                             if (awaitableAlternatives.Any())
@@ -88,17 +91,20 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         return wellKnownExtensionMethodContainer;
     }
 
-    private static IEnumerable<IMethodSymbol> GetMethodSymbolsInScope(string methodName, WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer, INamedTypeSymbol invocationContext, IMethodSymbol invokedMethod) =>
-    ((INamedTypeSymbol[])[.. invocationContext.GetSelfAndBaseTypes(), .. WellKnownExtensionMethodContainer(wellKnownExtensionMethodContainer, invokedMethod), invokedMethod.ContainingType])
+    private static IEnumerable<IMethodSymbol> GetMethodSymbolsInScope(string methodName, WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer,
+        ITypeSymbol invokedType, ITypeSymbol methodContainer) =>
+        ((ITypeSymbol[])[.. invokedType.GetSelfAndBaseTypes(), .. WellKnownExtensionMethodContainer(wellKnownExtensionMethodContainer, methodContainer), methodContainer])
+            .Distinct()
             .SelectMany(x => x.GetMembers(methodName))
             .OfType<IMethodSymbol>();
 
-    private static IEnumerable<INamedTypeSymbol> WellKnownExtensionMethodContainer(WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer, IMethodSymbol invokedMethod) =>
-        wellKnownExtensionMethodContainer.TryGetValue(invokedMethod.ContainingType, out var extensionMethodContainer)
+    private static IEnumerable<INamedTypeSymbol> WellKnownExtensionMethodContainer(WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer, ITypeSymbol invokedType) =>
+        wellKnownExtensionMethodContainer.TryGetValue(invokedType, out var extensionMethodContainer)
         ? extensionMethodContainer
         : [];
 
-    private IEnumerable<ISymbol> FindAwaitableAlternatives(SemanticModel semanticModel, SyntaxNode codeBlock, SyntaxNode awaitableRoot, InvocationExpressionSyntax invocationExpression, IEnumerable<IMethodSymbol> members) =>
+    private IEnumerable<ISymbol> FindAwaitableAlternatives(SemanticModel semanticModel, SyntaxNode codeBlock, SyntaxNode awaitableRoot,
+        InvocationExpressionSyntax invocationExpression, IEnumerable<IMethodSymbol> members) =>
         members.Where(x => IsAwaitableAlternative(semanticModel, x, codeBlock, awaitableRoot, invocationExpression));
 
     private bool IsAwaitableAlternative(SemanticModel semanticModel, IMethodSymbol candidate, SyntaxNode codeBlock, SyntaxNode awaitableRoot, InvocationExpressionSyntax invocationExpression)

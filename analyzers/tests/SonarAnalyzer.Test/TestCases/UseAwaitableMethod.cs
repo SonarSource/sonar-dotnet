@@ -113,18 +113,43 @@ public class Inheritance
 {
     class Child : Inheritance
     {
-        public void VoidMethod() { }
+        public void OuterVoidMethod() { }
+        public void InnerVoidMethod() { }
     }
 
     class GrandChild : Child
     {
+        public GrandChild Chain { get; }
+
         public async Task Test()
         {
-            VoidMethod(); // Noncompliant
+            OuterVoidMethod();                    // Noncompliant
+            this.OuterVoidMethod();               // Noncompliant
+            (this as Child).OuterVoidMethod();    // Noncompliant
+            this.Chain?.OuterVoidMethod();        // Noncompliant
+            this.Chain?.Chain?.OuterVoidMethod(); // Noncompliant
+            InnerVoidMethod();                    // Noncompliant
+            this.InnerVoidMethod();               // Noncompliant
+            (this as Child).InnerVoidMethod();    // Compliant: InnerVoidMethodAsync is defined on GrandChild
+            this.Chain?.InnerVoidMethod();        // Noncompliant
+            this.Chain?.Chain?.InnerVoidMethod(); // Noncompliant
         }
+
+        public Task InnerVoidMethodAsync() => Task.CompletedTask;
     }
 
-    public Task VoidMethodAsync() => Task.CompletedTask;
+    public Task OuterVoidMethodAsync() => Task.CompletedTask;
+
+    async Task Test()
+    {
+        var grandChild = new GrandChild();
+        grandChild.OuterVoidMethod();         // Noncompliant
+        grandChild?.OuterVoidMethod();        // Noncompliant
+        grandChild?.Chain?.OuterVoidMethod(); // Noncompliant
+        grandChild.InnerVoidMethod();         // Noncompliant
+        grandChild?.InnerVoidMethod();        // Noncompliant
+        grandChild?.Chain?.InnerVoidMethod(); // Noncompliant
+    }
 }
 
 class AsynchronousLambdas
