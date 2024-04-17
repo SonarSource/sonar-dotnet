@@ -207,7 +207,7 @@ namespace Repro9106
 {
     public class MyClass
     {
-        private int _foo;
+        private int _foo; // Noncompliant FP
 
         public ref int Foo => ref _foo;
     }
