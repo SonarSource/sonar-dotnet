@@ -23,17 +23,6 @@ namespace SonarAnalyzer.Rules.CSharp.Styling;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class HelperInTypeName : StylingAnalyzer
 {
-    private static readonly SyntaxKind[] TypeNameSyntaxKinds = new[]
-    {
-        SyntaxKind.UsingDirective,
-        SyntaxKind.ClassDeclaration,
-        SyntaxKind.RecordStructDeclaration,
-        SyntaxKind.EnumDeclaration,
-        SyntaxKind.StructDeclaration,
-        SyntaxKind.RecordDeclaration,
-        SyntaxKind.InterfaceDeclaration
-    };
-
     public HelperInTypeName() : base("T0006", "Do not use 'Helper' in type names.") { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
@@ -44,5 +33,11 @@ public sealed class HelperInTypeName : StylingAnalyzer
                 c.ReportIssue(Rule, identifier);
             }
         },
-        TypeNameSyntaxKinds);
+        SyntaxKind.UsingDirective,
+        SyntaxKind.ClassDeclaration,
+        SyntaxKind.RecordStructDeclaration,
+        SyntaxKind.EnumDeclaration,
+        SyntaxKind.StructDeclaration,
+        SyntaxKind.RecordDeclaration,
+        SyntaxKind.InterfaceDeclaration);
 }
