@@ -66,6 +66,7 @@ public class C
         Child.Child?[0].VoidMethod(); // Noncompliant
         Child?.Child?[0]?.VoidMethod(); // Noncompliant
         _ = Child?.Child?[0]?.ReturnMethod()?.Child[0]; // Noncompliant
+        _ = (ReturnMethod()); // Noncompliant
         _ = nameof(VoidMethod); // Compliant
         _ = !BoolMethod(); // Noncompliant
         _ = BoolMethod() ? ReturnMethod() : default(C);

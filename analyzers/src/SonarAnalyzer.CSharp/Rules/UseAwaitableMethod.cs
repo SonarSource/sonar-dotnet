@@ -60,7 +60,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         InvocationExpressionSyntax invocationExpression, SemanticModel semanticModel, ISymbol containingSymbol, CancellationToken cancel)
     {
         var awaitableRoot = GetAwaitableRootOfInvocation(invocationExpression);
-        if (awaitableRoot is AwaitExpressionSyntax)
+        if (awaitableRoot.RemoveParentheses() is { Parent: AwaitExpressionSyntax })
         {
             return ImmutableArray<ISymbol>.Empty; // Invocation result is already awaited.
         }
@@ -150,6 +150,9 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         expression switch
         {
             { Parent: ConditionalAccessExpressionSyntax conditional } => conditional.GetRootConditionalAccessExpression(),
+            { Parent: MemberAccessExpressionSyntax memberAccess } => memberAccess.GetRootConditionalAccessExpression() ?? GetAwaitableRootOfInvocation(memberAccess),
+            { Parent: PostfixUnaryExpressionSyntax { RawKind: (int)SyntaxKindEx.SuppressNullableWarningExpression } parent } => GetAwaitableRootOfInvocation(parent),
+            { Parent: ParenthesizedExpressionSyntax parent } => GetAwaitableRootOfInvocation(parent),
             { } self => self,
         };
 
