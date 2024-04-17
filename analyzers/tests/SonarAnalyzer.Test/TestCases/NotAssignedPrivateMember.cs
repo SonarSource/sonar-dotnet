@@ -203,12 +203,9 @@ namespace Tests.Diagnostics
 }
 
 // Reproducer: https://github.com/SonarSource/sonar-dotnet/issues/9106
-namespace Repro9106
+public class Repro_9106
 {
-    public class MyClass
-    {
-        private int _foo; // Noncompliant FP
+    private int _foo; // Noncompliant FP
 
-        public ref int Foo => ref _foo;
-    }
+    public ref int Foo => ref _foo;
 }
