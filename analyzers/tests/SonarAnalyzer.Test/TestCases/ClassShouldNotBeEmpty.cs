@@ -145,35 +145,12 @@ namespace Ignore
 
 namespace ConstructorAccessibility
 {
-    public class PublicClassWithPublicConstructor
-    {
-        public PublicClassWithPublicConstructor() { }
-    }
-
-    public class PublicClassWithInternalConstructor
-    {
-        internal PublicClassWithInternalConstructor() { }
-    }
-
-    public class PublicClassWithProtectedConstructor
-    {
-        protected PublicClassWithProtectedConstructor() { }
-    }
-
-    internal class InternalClassWithPublicConstructor
-    {
-        public InternalClassWithPublicConstructor() { }
-    }
-
-    internal class InternalClassWithInternalConstructor
-    {
-        internal InternalClassWithInternalConstructor() { }
-    }
-
-    internal class InternalClassWithProtectedConstructor
-    {
-        protected InternalClassWithProtectedConstructor() { }
-    }
+    public class PublicClassWithPublicConstructor { public PublicClassWithPublicConstructor() { } }
+    public class PublicClassWithInternalConstructor { internal PublicClassWithInternalConstructor() { } }
+    public class PublicClassWithProtectedConstructor { protected PublicClassWithProtectedConstructor() { } }
+    internal class InternalClassWithPublicConstructor { public InternalClassWithPublicConstructor() { } }
+    internal class InternalClassWithInternalConstructor { internal InternalClassWithInternalConstructor() { } }
+    internal class InternalClassWithProtectedConstructor { protected InternalClassWithProtectedConstructor() { } }
 
     public class ConstructorIsPublicAlready1 : PublicClassWithPublicConstructor { }             // Noncompliant
     public class WidensConstructorAccessibility1 : PublicClassWithInternalConstructor { }       // Compliant
@@ -188,20 +165,12 @@ namespace ConstructorAccessibility
 
     public class ClassWithNestedClasses
     {
-        protected class ProtectedClassWithPublicConstructor
-        {
-            public ProtectedClassWithPublicConstructor() { }
-        }
-
-        protected class ProtectedClassWithInternalConstructor
-        {
-            internal ProtectedClassWithInternalConstructor() { }
-        }
-
-        protected class ProtectedClassWithProtectedConstructor
-        {
-            protected ProtectedClassWithProtectedConstructor() { }
-        }
+        protected class ProtectedClassWithPublicConstructor { public ProtectedClassWithPublicConstructor() { } }
+        protected class ProtectedClassWithInternalConstructor { internal ProtectedClassWithInternalConstructor() { } }
+        protected class ProtectedClassWithProtectedConstructor { protected ProtectedClassWithProtectedConstructor() { } }
+        private class PrivateClassWithPublicConstructor { public PrivateClassWithPublicConstructor() { } }
+        private class PrivateClassWithInternalConstructor { internal PrivateClassWithInternalConstructor() { } }
+        private class PrivateClassWithProtectedConstructor { protected PrivateClassWithProtectedConstructor() { } }
 
         protected class ConstructorIsPublicAlready3 : PublicClassWithPublicConstructor { }              // Noncompliant
         protected class WidensConstructorAccessibility5 : PublicClassWithInternalConstructor { }        // Compliant
@@ -219,5 +188,8 @@ namespace ConstructorAccessibility
         private class PrivateClass7 : ProtectedClassWithPublicConstructor { }                           // Noncompliant
         private class PrivateClass8 : ProtectedClassWithInternalConstructor { }                         // Noncompliant
         private class PrivateClass9 : ProtectedClassWithProtectedConstructor { }                        // Noncompliant
+        private class PrivateClass10 : ProtectedClassWithPublicConstructor { }                          // Noncompliant
+        private class PrivateClass11 : ProtectedClassWithInternalConstructor { }                        // Noncompliant
+        private class PrivateClass12 : ProtectedClassWithProtectedConstructor { }                       // Noncompliant
     }
 }
