@@ -79,5 +79,5 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind, TDeclarationSyntax>
 
     private static bool HasNonPublicDefaultConstructor(TDeclarationSyntax declaration, SemanticModel model) =>
         model.GetDeclaredSymbol(declaration) is INamedTypeSymbol classSymbol
-        && classSymbol.BaseType.Constructors.FirstOrDefault(x => x.Parameters.Length == 0) is { DeclaredAccessibility: not Accessibility.Public };
+        && classSymbol.BaseType.Constructors.FirstOrDefault(x => x.Parameters.Length == 0)?.GetEffectiveAccessibility() < classSymbol.DeclaredAccessibility;
 }

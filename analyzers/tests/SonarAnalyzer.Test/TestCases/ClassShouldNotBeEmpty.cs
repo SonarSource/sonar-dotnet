@@ -121,7 +121,7 @@ namespace Ignore
 
     interface IMarker { }                        // Compliant - this rule only deals with classes
 
-    class ImplementsMarker: IMarker { }          // Compliant - implements a marker interface
+    class ImplementsMarker : IMarker { }          // Compliant - implements a marker interface
 
     struct EmptyStruct { }                       // Compliant - this rule only deals with classes
 
@@ -141,7 +141,10 @@ namespace Ignore
 
     class AssemblyDoc { }                        // Compliant, used for DefaultDocumentation tool
     class NamespaceDoc { }                       // compliant, used for DefaultDocumentation tool
+}
 
+namespace ConstructorAccessibility
+{
     public class PublicClassWithPublicConstructor
     {
         public PublicClassWithPublicConstructor() { }
@@ -177,9 +180,9 @@ namespace Ignore
     public class WidensConstructorAccessibility2 : PublicClassWithProtectedConstructor { }      // Compliant
 
     internal class ConstructorIsPublicAlready2 : PublicClassWithPublicConstructor { }           // Noncompliant
-    internal class ConstructorIsInternalAlready1 : PublicClassWithInternalConstructor { }       // FN
+    internal class ConstructorIsInternalAlready1 : PublicClassWithInternalConstructor { }       // Noncompliant
     internal class WidensConstructorAccessibility3 : PublicClassWithProtectedConstructor { }    // Compliant
     internal class ConstructorIsInternalAlready2 : InternalClassWithPublicConstructor { }       // Noncompliant
-    internal class ConstructorIsInternalAlready3 : InternalClassWithInternalConstructor { }     // FN
-    internal class WidensConstructorAccessibility4 : InternalClassWithProtectedConstructor { }  // Compliant
+    internal class ConstructorIsInternalAlready3 : InternalClassWithInternalConstructor { }     // Noncompliant
+    internal class WidensConstructorAccessibility4 : InternalClassWithProtectedConstructor { }  // Noncompliant FP
 }
