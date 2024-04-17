@@ -142,28 +142,44 @@ namespace Ignore
     class AssemblyDoc { }                        // Compliant, used for DefaultDocumentation tool
     class NamespaceDoc { }                       // compliant, used for DefaultDocumentation tool
 
-    class BaseWithProtectedConstructor
+    public class PublicClassWithPublicConstructor
     {
-        protected BaseWithProtectedConstructor() { }
+        public PublicClassWithPublicConstructor() { }
     }
 
-    class WidensConstructorVisibility1 : BaseWithProtectedConstructor { }           // Compliant
-
-    class BaseWithInternalConstructor
+    public class PublicClassWithInternalConstructor
     {
-        internal BaseWithInternalConstructor() { }
+        internal PublicClassWithInternalConstructor() { }
     }
 
-    class WidensConstructorVisibility2 : BaseWithInternalConstructor { }            // Compliant
-
-    class BaseWithPublicConstructor
+    public class PublicClassWithProtectedConstructor
     {
-        public BaseWithPublicConstructor() { }
+        protected PublicClassWithProtectedConstructor() { }
     }
 
-    class ConstructorIsPublicAlready1 : BaseWithPublicConstructor { }               // Noncompliant
+    internal class InternalClassWithPublicConstructor
+    {
+        public InternalClassWithPublicConstructor() { }
+    }
 
-    class BaseWithDefaultConstructor { }                                            // Noncompliant
+    internal class InternalClassWithInternalConstructor
+    {
+        internal InternalClassWithInternalConstructor() { }
+    }
 
-    class ConstructorIsPublicAlready2 : BaseWithDefaultConstructor { }              // Noncompliant
+    internal class InternalClassWithProtectedConstructor
+    {
+        protected InternalClassWithProtectedConstructor() { }
+    }
+
+    public class ConstructorIsPublicAlready1 : PublicClassWithPublicConstructor { }             // Noncompliant
+    public class WidensConstructorAccessibility1 : PublicClassWithInternalConstructor { }       // Compliant
+    public class WidensConstructorAccessibility2 : PublicClassWithProtectedConstructor { }      // Compliant
+
+    internal class ConstructorIsPublicAlready2 : PublicClassWithPublicConstructor { }           // Noncompliant
+    internal class ConstructorIsInternalAlready1 : PublicClassWithInternalConstructor { }       // FN
+    internal class WidensConstructorAccessibility3 : PublicClassWithProtectedConstructor { }    // Compliant
+    internal class ConstructorIsInternalAlready2 : InternalClassWithPublicConstructor { }       // Noncompliant
+    internal class ConstructorIsInternalAlready3 : InternalClassWithInternalConstructor { }     // FN
+    internal class WidensConstructorAccessibility4 : InternalClassWithProtectedConstructor { }  // Compliant
 }
