@@ -12,7 +12,7 @@ _ = new MyClass(1, [a, .. array]);                  // Compliant
 _ = new MyClass2([1], [1, 2, 3]);                   // Noncompliant
 _ = new MyClass2([1, 2, 3], 1);
 
-_ = new MyClass3([1, 2, 3], [4, 5, 6]);             // Noncompliant FP
+_ = new MyClass3([1, 2, 3], [4, 5, 6]);             // Compliant: jagged array
 
 _ = new MyClass4(class1, new(1, [1, .. array]));    // Compliant
 _ = new MyClass4([class1, new(1, [1, .. array])]);  // Noncompliant, outer collection raises, despite the nested spread operator

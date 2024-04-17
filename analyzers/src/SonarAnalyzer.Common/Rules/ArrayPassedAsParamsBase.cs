@@ -39,14 +39,19 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TArgumentNode> : Sona
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
             if (LastArgumentIfArrayCreation(c.Node) is { } lastArgument
-                && IsParamParameter(c.SemanticModel, c.Node, lastArgument))
+                && ParameterSymbol(c.SemanticModel, c.Node, lastArgument) is { IsParams: true } param
+                && !IsJaggedArrayParam(param))
             {
-                c.ReportIssue(Diagnostic.Create(rule, lastArgument.GetLocation()));
+                c.ReportIssue(rule, lastArgument.GetLocation());
             }
         }, ExpressionKinds);
 
-    private bool IsParamParameter(SemanticModel model, SyntaxNode invocation, TArgumentNode argument) =>
+    private IParameterSymbol ParameterSymbol(SemanticModel model, SyntaxNode invocation, TArgumentNode argument) =>
         model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
         && Language.MethodParameterLookup(invocation, methodSymbol).TryGetSymbol(argument, out var param)
-        && param.IsParams;
+            ? param
+            : null;
+
+    private static bool IsJaggedArrayParam(IParameterSymbol param) =>
+        param.Type is IArrayTypeSymbol { ElementType: IArrayTypeSymbol };
 }
