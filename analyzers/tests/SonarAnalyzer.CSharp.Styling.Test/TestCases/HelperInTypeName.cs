@@ -38,6 +38,10 @@ record RecordHelper // Noncompliant
 {
 }
 
+record struct RecordStructHelper // Noncompliant
+{
+}
+
 class SatchelPerks
 {
 
