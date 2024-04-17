@@ -22,7 +22,7 @@ using SonarAnalyzer.CFG.Roslyn;
 
 namespace SonarAnalyzer.Extensions
 {
-    internal static partial class SyntaxNodeExtensions
+    public static partial class SyntaxNodeExtensions
     {
         private static readonly ControlFlowGraphCache CfgCache = new();
 
