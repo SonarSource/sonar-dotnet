@@ -57,7 +57,7 @@ public sealed class ApiControllersShouldDeriveFromController : SonarDiagnosticAn
                 var symbol = (INamedTypeSymbol)symbolStartContext.Symbol;
                 if (symbol.IsControllerType()
                     && symbol.IsPubliclyAccessible()
-                    && IsAnnotatedWithApiAttribute(symbol)
+                    && symbol.AnyAttributeDerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute)
                     && symbol.BaseType.Is(KnownType.Microsoft_AspNetCore_Mvc_Controller))
                 {
                     var shouldReportController = true;
@@ -70,21 +70,30 @@ public sealed class ApiControllersShouldDeriveFromController : SonarDiagnosticAn
                     }, SyntaxKind.IdentifierName);
 
                     symbolStartContext.RegisterSymbolEndAction(symbolEndContext =>
-                        ReportIssue(symbolEndContext, symbol, shouldReportController));
+                    {
+                        if (shouldReportController)
+                        {
+                            ReportIssue(symbolEndContext, symbol, shouldReportController);
+                        }
+                    });
                 }
             }, SymbolKind.NamedType);
         });
 
     private static void ReportIssue(SonarSymbolReportingContext context, INamedTypeSymbol controllerSymbol, bool shouldReport)
     {
-        var classDeclaration = (ClassDeclarationSyntax)controllerSymbol.DeclaringSyntaxReferences.First().GetSyntax();
-        if (shouldReport && classDeclaration.BaseList?.DescendantNodes().FirstOrDefault(x => x.GetName() is "Controller") is { } node)
+        if (shouldReport)
         {
-            context.ReportIssue(CSharpFacade.Instance.GeneratedCodeRecognizer, Diagnostic.Create(Rule, node.GetLocation()));
+            var reportLocations = controllerSymbol.DeclaringSyntaxReferences
+                .Select(x => x.GetSyntax())
+                .OfType<ClassDeclarationSyntax>()
+                .Select(x => x.BaseList?.DescendantNodes().FirstOrDefault(x => x.GetName() is "Controller")?.GetLocation())
+                .OfType<Location>();
+
+            foreach (var location in reportLocations)
+            {
+                context.ReportIssue(CSharpFacade.Instance.GeneratedCodeRecognizer, Diagnostic.Create(Rule, location));
+            }
         }
     }
-
-    private static bool IsAnnotatedWithApiAttribute(INamedTypeSymbol symbol) =>
-        symbol.GetAttributes().Any(x => x.AttributeClass.Is(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute)
-                                        || x.AttributeClass.BaseType.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute));
 }
