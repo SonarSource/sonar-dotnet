@@ -86,6 +86,10 @@ public class RouteTemplateShouldNotStartWithSlashTest
         }
     }
 
+    [DataRow("""[Route(template: @"/[action]", Name = "a", Order = 42)]""")]
+    [DataRow("""[RouteAttribute(@"/[action]")]""")]
+    [DataRow("""[Microsoft.AspNetCore.Mvc.RouteAttribute(@"/[action]")]""")]
+    [DataRow("""[method:Route(@"/[action]")]""")]
     [DataRow("""[HttpGet("/IndexGet")]""")]
     [DataRow("""[HttpPost("/IndexPost")]""")]
     [DataRow("""[HttpPut("/IndexPut")]""")]
@@ -93,28 +97,8 @@ public class RouteTemplateShouldNotStartWithSlashTest
     [DataRow("""[HttpPatch("/IndexPatch")]""")]
     [DataRow("""[HttpHead("/IndexHead")]""")]
     [DataRow("""[HttpOptions("/IndexOptions")]""")]
-    public void RouteTemplateShouldNotStartWithSlash_HttpAttributes(string attribute)
-    {
-        var builder = builderCS.AddReferences(AspNetCoreReferences)
-            .AddSnippet($$"""
-                using Microsoft.AspNetCore.Mvc;
-                using Microsoft.AspNetCore.Mvc.Routing;
-
-                public class BasicsController : Controller  // Noncompliant
-                {
-                    {{attribute}} // Secondary
-                    public ActionResult SomeAction() => View();
-                }
-                """);
-        builder.Verify();
-    }
-
-    [DataRow("""[Route(template: @"/[action]", Name = "a", Order = 42)]""")]
-    [DataRow("""[RouteAttribute(@"/[action]")]""")]
-    [DataRow("""[Microsoft.AspNetCore.Mvc.RouteAttribute(@"/[action]")]""")]
-    [DataRow("""[method:Route(@"/[action]")]""")]
     [DataTestMethod]
-    public void RouteTemplateShouldNotStartWithSlash_AttributeSyntaxVariations(string attribute)
+    public void RouteTemplateShouldNotStartWithSlash_Attributes(string attribute)
     {
         var builder = builderCS.AddReferences(AspNetCoreReferences)
             .AddSnippet($$"""
