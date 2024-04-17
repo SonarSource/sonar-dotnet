@@ -10,6 +10,6 @@
   </PropertyGroup>
 
   <Target Name="CleanBinaries" AfterTargets="Clean">
-    <RemoveDir Directories="$(BinariesFolder)" />
+    <RemoveDir Directories="$(BinariesFolder)" Condition="Exists('$(BinariesFolder)')" />
   </Target>
 </Project>

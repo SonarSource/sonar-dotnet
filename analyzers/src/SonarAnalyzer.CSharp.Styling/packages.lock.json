@@ -2,6 +2,21 @@
   "version": 1,
   "dependencies": {
     ".NETStandard,Version=v2.0": {
+      "Fody": {
+        "type": "Direct",
+        "requested": "[6.8.0, )",
+        "resolved": "6.8.0",
+        "contentHash": "hfZ/f8Mezt8aTkgv9nsvFdYoQ809/AqwsJlOGOPYIfBcG2aAIG3v3ex9d8ZqQuFYyMoucjRg4eKy3VleeGodKQ=="
+      },
+      "ILMerge.Fody": {
+        "type": "Direct",
+        "requested": "[1.24.0, )",
+        "resolved": "1.24.0",
+        "contentHash": "Jg13T22kxyVUCP1lAfjSDKkL01XzMIM+GWd5kv9Hohi/9L2dhHZK55KQe2Yu/sHoQsYvRToeCDuIBKrNOJza7A==",
+        "dependencies": {
+          "Fody": "6.6.4"
+        }
+      },
       "Microsoft.CodeAnalysis.CSharp.Workspaces": {
         "type": "Direct",
         "requested": "[4.9.2, )",

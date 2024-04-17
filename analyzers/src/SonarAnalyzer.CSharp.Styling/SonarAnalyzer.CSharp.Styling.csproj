@@ -10,7 +10,18 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.9.2" />
+    <!-- Fody with ILMerge are buggy. Consult SONARSEC-4584 if you see TypeInitializationException, TypeLoadException, or similar at ITs runtime locally -->
+    <PackageReference Include="Fody" Version="6.8.0" PrivateAssets="All" />
+    <PackageReference Include="ILMerge.Fody" Version="1.24.0" PrivateAssets="All" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <WeaverConfiguration>
+      <Weavers>
+        <ILMerge IncludeAssemblies="Google.Protobuf|SonarAnalyzer.*" />
+      </Weavers>
+    </WeaverConfiguration>
+  </PropertyGroup>
 
   <ItemGroup>
     <!-- We need to update NuGet packaging after changing references -->
@@ -32,18 +43,11 @@
   </ItemGroup>
 
   <Target Name="CopyBinaries" AfterTargets="Build">
-    <ItemGroup>
-      <BinariesToCopy Include="$(OutputPath)Google.Protobuf.dll" />
-      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.dll" />
-      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CSharp.dll" />
-      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CFG.dll" />
-      <BinariesToCopy Include="$(OutputPath)$(TargetFileName)" />
-    </ItemGroup>
-    <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolderInternal)" />
+    <Copy SourceFiles="$(OutputPath)$(TargetFileName)" DestinationFolder="$(BinariesFolderInternal)" />
   </Target>
 
   <Target Name="CleanInternal" AfterTargets="Clean">
-    <RemoveDir Directories="$(BinariesFolderInternal)" />
+    <RemoveDir Directories="$(BinariesFolderInternal)" Condition="Exists('$(BinariesFolderInternal)')" />
   </Target>
 
 </Project>
