@@ -186,13 +186,38 @@ namespace ConstructorAccessibility
     internal class ConstructorIsInternalAlready3 : InternalClassWithInternalConstructor { }     // Noncompliant
     internal class WidensConstructorAccessibility4 : InternalClassWithProtectedConstructor { }  // Compliant
 
-    class ClassWithNestedClasses
+    public class ClassWithNestedClasses
     {
-        private class PrivateClass1 : PublicClassWithPublicConstructor { }                      // Noncompliant
-        private class PrivateClass2 : PublicClassWithInternalConstructor { }                    // Noncompliant
-        private class PrivateClass3 : PublicClassWithProtectedConstructor { }                   // Noncompliant
-        private class PrivateClass4 : InternalClassWithPublicConstructor { }                    // Noncompliant
-        private class PrivateClass5 : InternalClassWithInternalConstructor { }                  // Noncompliant
-        private class PrivateClass6 : InternalClassWithProtectedConstructor { }                 // Noncompliant
+        protected class ProtectedClassWithPublicConstructor
+        {
+            public ProtectedClassWithPublicConstructor() { }
+        }
+
+        protected class ProtectedClassWithInternalConstructor
+        {
+            internal ProtectedClassWithInternalConstructor() { }
+        }
+
+        protected class ProtectedClassWithProtectedConstructor
+        {
+            protected ProtectedClassWithProtectedConstructor() { }
+        }
+
+        protected class ConstructorIsPublicAlready3 : PublicClassWithPublicConstructor { }              // Noncompliant
+        protected class WidensConstructorAccessibility5 : PublicClassWithInternalConstructor { }        // Noncompliant FP
+        protected class ConstructorIsProtectedAlready1 : PublicClassWithProtectedConstructor { }        // Noncompliant
+        protected class ConstructorIsProtectedAlready2 : ProtectedClassWithPublicConstructor { }        // Noncompliant
+        protected class WidensConstructorAccessibility6 : ProtectedClassWithInternalConstructor { }     // Noncompliant FP
+        protected class ConstructorIsProtectedAlready3 : ProtectedClassWithProtectedConstructor { }     // Noncompliant
+
+        private class PrivateClass1 : PublicClassWithPublicConstructor { }                              // Noncompliant
+        private class PrivateClass2 : PublicClassWithInternalConstructor { }                            // Noncompliant
+        private class PrivateClass3 : PublicClassWithProtectedConstructor { }                           // Noncompliant
+        private class PrivateClass4 : InternalClassWithPublicConstructor { }                            // Noncompliant
+        private class PrivateClass5 : InternalClassWithInternalConstructor { }                          // Noncompliant
+        private class PrivateClass6 : InternalClassWithProtectedConstructor { }                         // Noncompliant
+        private class PrivateClass7 : ProtectedClassWithPublicConstructor { }                           // Noncompliant
+        private class PrivateClass8 : ProtectedClassWithInternalConstructor { }                         // Noncompliant
+        private class PrivateClass9 : ProtectedClassWithProtectedConstructor { }                        // Noncompliant
     }
 }
