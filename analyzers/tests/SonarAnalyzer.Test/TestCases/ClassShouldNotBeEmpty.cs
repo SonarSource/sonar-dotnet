@@ -204,10 +204,10 @@ namespace ConstructorAccessibility
         }
 
         protected class ConstructorIsPublicAlready3 : PublicClassWithPublicConstructor { }              // Noncompliant
-        protected class WidensConstructorAccessibility5 : PublicClassWithInternalConstructor { }        // Noncompliant FP
+        protected class WidensConstructorAccessibility5 : PublicClassWithInternalConstructor { }        // Compliant
         protected class ConstructorIsProtectedAlready1 : PublicClassWithProtectedConstructor { }        // Noncompliant
         protected class ConstructorIsProtectedAlready2 : ProtectedClassWithPublicConstructor { }        // Noncompliant
-        protected class WidensConstructorAccessibility6 : ProtectedClassWithInternalConstructor { }     // Noncompliant FP
+        protected class WidensConstructorAccessibility6 : ProtectedClassWithInternalConstructor { }     // Compliant
         protected class ConstructorIsProtectedAlready3 : ProtectedClassWithProtectedConstructor { }     // Noncompliant
 
         private class PrivateClass1 : PublicClassWithPublicConstructor { }                              // Noncompliant

@@ -82,5 +82,6 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind, TDeclarationSyntax>
         && classSymbol.BaseType.Constructors.FirstOrDefault(x => x.Parameters.Length == 0) is { } constructor
         && (constructor.GetEffectiveAccessibility() < classSymbol.DeclaredAccessibility
             // GetEffectiveAccessibility is not handling Protected
-            || (constructor.DeclaredAccessibility == Accessibility.Protected && classSymbol.DeclaredAccessibility > Accessibility.Protected));
+            || (constructor.DeclaredAccessibility == Accessibility.Protected && classSymbol.DeclaredAccessibility > Accessibility.Protected)
+            || (constructor.GetEffectiveAccessibility() == Accessibility.Internal && classSymbol.DeclaredAccessibility == Accessibility.Protected));
 }
