@@ -123,19 +123,20 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         var invocationAnnotation = new SyntaxAnnotation();
         var replace = root.ReplaceNodes([awaitableRoot, invocationIdentifierName, invocationExpression], (original, newNode) =>
         {
+            var result = newNode;
             if (original == invocationIdentifierName)
             {
-                newNode = SyntaxFactory.IdentifierName(candidate.Name).WithTriviaFrom(invocationIdentifierName);
+                result = SyntaxFactory.IdentifierName(candidate.Name).WithTriviaFrom(invocationIdentifierName);
             }
             if (original == invocationExpression)
             {
-                newNode = newNode.WithAdditionalAnnotations(invocationAnnotation);
+                result = result.WithAdditionalAnnotations(invocationAnnotation);
             }
-            if (original == awaitableRoot && newNode is ExpressionSyntax newNodeExpression)
+            if (original == awaitableRoot && result is ExpressionSyntax resultExpression)
             {
-                newNode = SyntaxFactory.AwaitExpression(newNodeExpression);
+                result = SyntaxFactory.AwaitExpression(resultExpression);
             }
-            return newNode;
+            return result;
         });
         var invocationReplaced = replace.GetAnnotatedNodes(invocationAnnotation).First();
         var speculativeSymbolInfo = semanticModel.GetSpeculativeSymbolInfo(invocationReplaced.SpanStart, invocationReplaced, SpeculativeBindingOption.BindAsExpression);
