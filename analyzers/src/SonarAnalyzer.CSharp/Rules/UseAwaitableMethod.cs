@@ -60,7 +60,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         InvocationExpressionSyntax invocationExpression, SemanticModel semanticModel, ISymbol containingSymbol, CancellationToken cancel)
     {
         var awaitableRoot = GetAwaitableRootOfInvocation(invocationExpression);
-        if (awaitableRoot.RemoveParentheses() is { Parent: AwaitExpressionSyntax })
+        if (awaitableRoot is { Parent: AwaitExpressionSyntax })
         {
             return ImmutableArray<ISymbol>.Empty; // Invocation result is already awaited.
         }
@@ -84,6 +84,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         var wellKnownExtensionMethodContainer = new WellKnownExtensionMethodContainer();
         var queryable = compilation.GetTypeByMetadataName(KnownType.System_Linq_Queryable);
         var enumerable = compilation.GetTypeByMetadataName(KnownType.System_Linq_Enumerable);
+
         if (compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions) is { } entityFrameworkQueryableExtensions)
         {
             wellKnownExtensionMethodContainer.Add(queryable, entityFrameworkQueryableExtensions);
