@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Xml.Serialization;
+using System.Xml.Linq;
 
 namespace SonarAnalyzer.Helpers;
 
@@ -26,11 +26,20 @@ namespace SonarAnalyzer.Helpers;
 /// Data class to describe an analysis configuration.
 /// </summary>
 /// <remarks>
-/// This class is the counterpart of SonarScanner.MSBuild.Common.AnalysisConfig, and is used for easy deserialization.
-/// This class should not be used in this codebase. To get configuration properties, use <see cref="AnalysisConfigReader"/>.
+/// This class is the counterpart of SonarScanner.MSBuild.Common.AnalysisConfig.
+/// This class should not be used directly in this codebase. To get configuration properties, use <see cref="AnalysisConfigReader"/>.
 /// </remarks>
-[XmlRoot(Namespace = "http://www.sonarsource.com/msbuild/integration/2015/1")]
-public class AnalysisConfig
+internal sealed class AnalysisConfig
 {
-    public List<ConfigSetting> AdditionalConfig { get; set; }
+    public ConfigSetting[] AdditionalConfig { get; }
+
+    public AnalysisConfig(XDocument document)
+    {
+        var xmlns = XNamespace.Get("http://www.sonarsource.com/msbuild/integration/2015/1");
+        if (document.Root.Name != xmlns + "AnalysisConfig")
+        {
+            throw new InvalidOperationException("Unexpected Root node: " + document.Root.Name);
+        }
+        AdditionalConfig = document.Root.Element(xmlns + "AdditionalConfig")?.Elements(xmlns + "ConfigSetting").Select(x => new ConfigSetting(x)).ToArray() ?? [];
+    }
 }

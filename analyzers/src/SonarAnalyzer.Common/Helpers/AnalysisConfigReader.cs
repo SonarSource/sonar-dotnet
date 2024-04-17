@@ -19,7 +19,7 @@
  */
 
 using System.IO;
-using System.Xml.Serialization;
+using System.Xml.Linq;
 
 namespace SonarAnalyzer.Helpers;
 
@@ -34,9 +34,7 @@ public class AnalysisConfigReader
     {
         try
         {
-            var serializer = new XmlSerializer(typeof(AnalysisConfig));
-            using var stream = new FileStream(analysisConfigPath, FileMode.Open, FileAccess.Read);
-            analysisConfig = (AnalysisConfig)serializer.Deserialize(stream);
+            analysisConfig = new(XDocument.Load(analysisConfigPath));
         }
         catch (Exception e)
         {
