@@ -817,4 +817,12 @@ tag = ""End"";";
             "InTry3");
         validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "IOException"));
     }
+
+    [TestMethod]
+    public void Throw_Null_UnexpectedException()
+    {
+        const string code = "throw null;";
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
+    }
 }
