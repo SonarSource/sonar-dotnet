@@ -50,31 +50,21 @@ public class UseAwaitableMethodTest
             using System;
             using System.Linq;
 
-            public class C
+            public class Overloads
             {
-                public C Child { get; }
-                void VoidMethod() { }
-                Task VoidMethodAsync() => Task.CompletedTask;
+                public long ImplicitConversionsMethod(int i, IComparable j) => 0;
+                public Task<int> ImplicitConversionsMethodAsync(long otherName1, int otherName2) => Task.FromResult(0);
+                public Task<byte> ImplicitConversionsMethodAsync(byte otherName1, byte otherName2) => Task.FromResult((byte)0);
 
-                C ReturnMethod() => null;
-                Task<C> ReturnMethodAsync() => Task.FromResult<C>(null);
-
-                bool BoolMethod() => true;
-                Task<bool> BoolMethodAsync() => Task.FromResult(true);
-
-                C this[int i] => null;
-                public static C operator +(C c) => default(C);
-                public static C operator +(C c1, C c2) => default(C);
-                public static C operator -(C c) => default(C);
-                public static C operator -(C c1, C c2) => default(C);
-                public static C operator !(C c) => default(C);
-                public static C operator ~(C c) => default(C);
-                public static implicit operator int(C c) => default(C);
-
-                async Task MethodInvocations()
+                public async Task Test(int i, byte j)
                 {
+                    long l1 = ImplicitConversionsMethod(i, j); // Noncompliant Can be resolved to first overload
+                    long l2 = ImplicitConversionsMethod(i, (IComparable)j); // Compliant No fitting overload
+                    var l3 = ImplicitConversionsMethod((byte)i, j); // Noncompliant Can be resolved to second overload
+                    int l4 = (int)ImplicitConversionsMethod((byte)i, j); // Noncompliant Can be resolved to second overload
                 }
             }
+            
             """).Verify();
 
     [TestMethod]
