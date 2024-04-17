@@ -418,6 +418,13 @@ internal class MyClass
     }
 }
 
+internal class MyClass2
+{
+    private MyClass2() // Noncompliant {{Remove the unused private constructor 'MyClass2'.}}
+    {
+        var a = 1;
+    }
+}
 
 public interface IPublicInterface { }
 [Serializable]
