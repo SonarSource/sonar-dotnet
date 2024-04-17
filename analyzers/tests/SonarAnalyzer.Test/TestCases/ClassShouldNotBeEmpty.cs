@@ -184,7 +184,7 @@ namespace ConstructorAccessibility
     internal class WidensConstructorAccessibility3 : PublicClassWithProtectedConstructor { }    // Compliant
     internal class ConstructorIsInternalAlready2 : InternalClassWithPublicConstructor { }       // Noncompliant
     internal class ConstructorIsInternalAlready3 : InternalClassWithInternalConstructor { }     // Noncompliant
-    internal class WidensConstructorAccessibility4 : InternalClassWithProtectedConstructor { }  // Noncompliant FP
+    internal class WidensConstructorAccessibility4 : InternalClassWithProtectedConstructor { }  // Compliant
 
     class ClassWithNestedClasses
     {
