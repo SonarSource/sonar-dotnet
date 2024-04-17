@@ -31,13 +31,46 @@ public sealed class UseHttpClientFactory : SonarDiagnosticAnalyzer
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
+        context.RegisterCompilationStartAction(compilationStartContext =>
+        {
+            if (!compilationStartContext.Compilation.ReferencesControllers())
             {
-                var node = c.Node;
-                if (true)
+                return;
+            }
+            compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
+            {
+                var symbol = (INamedTypeSymbol)symbolStartContext.Symbol;
+                if (symbol.IsControllerType())
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                    symbolStartContext.RegisterSyntaxNodeAction(nodeContext =>
+                    {
+                        var node = nodeContext.Node;
+                        var objectCreation = ObjectCreationFactory.Create(node);
+                        if (objectCreation.IsKnownType(KnownType.System_Net_Http_HttpClient, nodeContext.SemanticModel)
+                            && !IsAssignedForReuse(nodeContext))
+                        {
+                            nodeContext.ReportIssue(Rule, node);
+                        }
+                    }, SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
+
+                    symbolStartContext.RegisterSymbolEndAction(symbolEndContext =>
+                    { });
                 }
-            },
-            SyntaxKind.InvocationExpression);
+            }, SymbolKind.NamedType);
+        });
+
+    private static bool IsAssignedForReuse(SonarSyntaxNodeReportingContext context) =>
+        !IsInVariableDeclaration(context.Node)
+        && (IsInFieldOrPropertyInitializer(context.Node) || IsAssignedToStaticFieldOrProperty(context));
+
+    private static bool IsInVariableDeclaration(SyntaxNode node) =>
+        node.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: LocalDeclarationStatementSyntax or UsingStatementSyntax } } };
+
+    private static bool IsInFieldOrPropertyInitializer(SyntaxNode node) =>
+        node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.FieldDeclaration, SyntaxKind.PropertyDeclaration));
+
+    private static bool IsAssignedToStaticFieldOrProperty(SonarSyntaxNodeReportingContext context) =>
+        context.Node.Parent.WalkUpParentheses() is AssignmentExpressionSyntax assignment
+            && context.SemanticModel.GetSymbolInfo(assignment.Left, context.Cancel).Symbol is { IsStatic: true, Kind: SymbolKind.Field or SymbolKind.Property };
+
 }

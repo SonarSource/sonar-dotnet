@@ -27,7 +27,23 @@ public class UseHttpClientFactoryTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<UseHttpClientFactory>();
 
+#if NET
+    private static IEnumerable<MetadataReference> AspNetCoreReferences =>
+    [
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
+    ];
+
     [TestMethod]
     public void UseHttpClientFactory_CS() =>
-        builder.AddPaths("UseHttpClientFactory.cs").Verify();
+        builder
+            .AddReferences(AspNetCoreReferences)
+            .AddReferences(NuGetMetadataReference.SystemNetHttp())
+            .AddReferences(MetadataReferenceFacade.SystemThreadingTasks)
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsHttp())
+            .AddPaths("UseHttpClientFactory.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
+#endif
 }
