@@ -14,4 +14,12 @@ public class C
     {
         _ = ^ReturnMethod(); // Noncompliant
     }
+
+    async Task LocalFunctions()
+    {
+        VoidMethod(); // FN
+
+        void VoidMethod() { }
+        Task VoidMethodAsync() => null;
+    }
 }
