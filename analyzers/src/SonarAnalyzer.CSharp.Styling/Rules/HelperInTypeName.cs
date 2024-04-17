@@ -31,7 +31,7 @@ public sealed class HelperInTypeName : StylingAnalyzer
             var typeNameIdentifier = c.Node.GetIdentifier();
             if (typeNameIdentifier?.ValueText.IndexOf("Helper", StringComparison.Ordinal) >= 0)
             {
-                c.ReportIssue(Rule, typeNameIdentifier.Value.GetLocation());
+                c.ReportIssue(Rule, typeNameIdentifier.Value);
             }
         }, SyntaxKind.UsingDirective, SyntaxKind.ClassDeclaration, SyntaxKind.EnumDeclaration, SyntaxKind.StructDeclaration, SyntaxKind.RecordDeclaration, SyntaxKind.InterfaceDeclaration);
 }
