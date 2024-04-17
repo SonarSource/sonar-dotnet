@@ -2,12 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace Microsoft.CodeAnalysis.VisualBasic.Extensions;
 
 internal static class ExpressionSyntaxExtensions
 {
     [CodeCopiedFrom(TrustedCodeSource.Roslyn,
         "https://github.com/dotnet/roslyn/blob/5a1cc5f83e4baba57f0355a685a5d1f487bfac66/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/VisualBasic/Extensions/ExpressionSyntaxExtensions.vb#L362")]
+    [ExcludeFromCodeCoverage]
     public static bool IsWrittenTo(this ExpressionSyntax expression, SemanticModel semanticModel, CancellationToken cancellationToken)
     {
         if (expression == null)
