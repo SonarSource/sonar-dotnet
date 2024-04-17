@@ -30,7 +30,7 @@ public sealed class ApiControllersShouldDeriveFromController : SonarDiagnosticAn
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-    private readonly HashSet<string> viewIdentifiers =
+    private static readonly HashSet<string> ViewIdentifiers =
         [
            "Json",
            "OnActionExecuted",
@@ -64,7 +64,7 @@ public sealed class ApiControllersShouldDeriveFromController : SonarDiagnosticAn
                     var shouldReportController = true;
                     symbolStartContext.RegisterSyntaxNodeAction(nodeContext =>
                     {
-                        if (viewIdentifiers.Contains(nodeContext.Node.GetName()))
+                        if (ViewIdentifiers.Contains(nodeContext.Node.GetName()))
                         {
                             shouldReportController = false;
                         }
@@ -86,7 +86,7 @@ public sealed class ApiControllersShouldDeriveFromController : SonarDiagnosticAn
         var reportLocations = controllerSymbol.DeclaringSyntaxReferences
             .Select(x => x.GetSyntax())
             .OfType<ClassDeclarationSyntax>()
-            .Select(x => x.BaseList?.DescendantNodes().FirstOrDefault(x => x.GetName() is "Controller")?.GetLocation())
+            .Select(x => x.BaseList?.DescendantNodes().FirstOrDefault(x => x is TypeSyntax baseType && x.NameIs("Controller"))?.GetLocation())
             .OfType<Location>();
 
         foreach (var location in reportLocations)

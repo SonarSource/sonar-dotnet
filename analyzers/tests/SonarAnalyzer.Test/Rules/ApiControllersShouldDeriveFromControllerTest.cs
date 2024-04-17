@@ -111,6 +111,7 @@ public class ApiControllersShouldDeriveFromControllerTest
                 }
                 """)
         .VerifyNoIssueReported();
+
 #endif
 
 }

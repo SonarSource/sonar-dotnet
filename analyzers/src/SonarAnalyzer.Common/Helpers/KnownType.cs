@@ -67,12 +67,12 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Http_IHeaderDictionary = new("Microsoft.AspNetCore.Http.IHeaderDictionary");
         public static readonly KnownType Microsoft_AspNetCore_Http_IRequestCookieCollection = new("Microsoft.AspNetCore.Http.IRequestCookieCollection");
         public static readonly KnownType Microsoft_AspNetCore_Http_IResponseCookies = new("Microsoft.AspNetCore.Http.IResponseCookies");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_ApiControllerAttribute = new("Microsoft.AspNetCore.Mvc.ApiControllerAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_Controller = new("Microsoft.AspNetCore.Mvc.Controller");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerBase = new("Microsoft.AspNetCore.Mvc.ControllerBase");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerAttribute = new("Microsoft.AspNetCore.Mvc.ControllerAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_DisableRequestSizeLimitAttribute = new("Microsoft.AspNetCore.Mvc.DisableRequestSizeLimitAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_FromServicesAttribute = new("Microsoft.AspNetCore.Mvc.FromServicesAttribute");
-        public static readonly KnownType Microsoft_AspNetCore_Mvc_ApiControllerAttribute = new("Microsoft.AspNetCore.Mvc.ApiControllerAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpDeleteAttribute = new("Microsoft.AspNetCore.Mvc.HttpDeleteAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpGetAttribute = new("Microsoft.AspNetCore.Mvc.HttpGetAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpHeadAttribute = new("Microsoft.AspNetCore.Mvc.HttpHeadAttribute");
