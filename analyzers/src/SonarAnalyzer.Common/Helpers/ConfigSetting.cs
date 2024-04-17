@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Xml.Serialization;
+using System.Xml.Linq;
 
 namespace SonarAnalyzer.Helpers;
 
@@ -26,13 +26,9 @@ namespace SonarAnalyzer.Helpers;
 /// Data class to describe an analysis setting.
 /// </summary>
 /// <remarks>
-/// This class is the counterpart of SonarScanner.MSBuild.Common.ConfigSetting, and is used for easy deserialization.
+/// This class is the counterpart of SonarScanner.MSBuild.Common.ConfigSetting.
 /// </remarks>
-public class ConfigSetting
+internal sealed record ConfigSetting(string Id, string Value)
 {
-    [XmlAttribute]
-    public string Id { get; set; }
-
-    [XmlAttribute]
-    public string Value { get; set; }
+    public ConfigSetting(XElement element) : this(element.Attribute("Id").Value, element.Attribute("Value")?.Value) { }
 }
