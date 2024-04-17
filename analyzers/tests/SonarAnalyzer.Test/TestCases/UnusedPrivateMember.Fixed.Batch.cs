@@ -327,6 +327,18 @@ public class OutAndRef
     }
 }
 
+internal class MyClass
+{
+    protected MyClass() // Compliant
+    {
+        var a = 1;
+    }
+}
+
+internal class MyClass2
+{
+}
+
 public interface IPublicInterface { }
 [Serializable]
 public sealed class PublicClass : IPublicInterface

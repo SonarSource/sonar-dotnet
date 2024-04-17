@@ -8,9 +8,9 @@
     },
     {
       "Id": "S1144",
-      "Message": "Remove the unused private constructor \u0027FactoryConsumer\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Props.cs#L687",
-      "Location": "Line 687 Position 20-35"
+      "Message": "Remove unused constructor of private type \u0027FactoryConsumer\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Props.cs#L687-L690",
+      "Location": "Lines 687-690 Position 13-14"
     },
     {
       "Id": "S1144",
@@ -68,15 +68,15 @@
     },
     {
       "Id": "S1144",
-      "Message": "Remove the unused private constructor \u0027UpdatePendingWriteAndThen\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/TcpConnection.cs#L892",
-      "Location": "Line 892 Position 20-45"
+      "Message": "Remove unused constructor of private type \u0027UpdatePendingWriteAndThen\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/TcpConnection.cs#L892-L896",
+      "Location": "Lines 892-896 Position 13-14"
     },
     {
       "Id": "S1144",
-      "Message": "Remove the unused private constructor \u0027WriteFileFailed\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/TcpConnection.cs#L903",
-      "Location": "Line 903 Position 20-35"
+      "Message": "Remove unused constructor of private type \u0027WriteFileFailed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/TcpConnection.cs#L903-L906",
+      "Location": "Lines 903-906 Position 13-14"
     },
     {
       "Id": "S1144",

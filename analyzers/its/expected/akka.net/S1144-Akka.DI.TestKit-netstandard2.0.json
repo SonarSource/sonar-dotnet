@@ -2,39 +2,39 @@
   "Issues": [
     {
       "Id": "S1144",
-      "Message": "Remove the unused private constructor \u0027UnboundedStashActor\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L170",
-      "Location": "Line 170 Position 20-39"
+      "Message": "Remove unused constructor of private type \u0027UnboundedStashActor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L170-L173",
+      "Location": "Lines 170-173 Position 13-14"
     },
     {
       "Id": "S1144",
-      "Message": "Remove the unused private constructor \u0027BoundedStashActor\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L182",
-      "Location": "Line 182 Position 20-37"
+      "Message": "Remove unused constructor of private type \u0027BoundedStashActor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L182-L185",
+      "Location": "Lines 182-185 Position 13-14"
     },
     {
       "Id": "S1144",
-      "Message": "Remove the unused private constructor \u0027DiPerRequestActor\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L34",
-      "Location": "Line 34 Position 20-37"
+      "Message": "Remove unused constructor of private type \u0027DiPerRequestActor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L34-L40",
+      "Location": "Lines 34-40 Position 13-14"
     },
     {
       "Id": "S1144",
-      "Message": "Remove the unused private constructor \u0027DiSingletonActor\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L47",
-      "Location": "Line 47 Position 20-36"
+      "Message": "Remove unused constructor of private type \u0027DiSingletonActor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L47-L53",
+      "Location": "Lines 47-53 Position 13-14"
     },
     {
       "Id": "S1144",
-      "Message": "Remove the unused private constructor \u0027DiParentActor\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L62",
-      "Location": "Line 62 Position 20-33"
+      "Message": "Remove unused constructor of private type \u0027DiParentActor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L62-L65",
+      "Location": "Lines 62-65 Position 13-14"
     },
     {
       "Id": "S1144",
-      "Message": "Remove the unused private constructor \u0027DisposableActor\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L82",
-      "Location": "Line 82 Position 20-35"
+      "Message": "Remove unused constructor of private type \u0027DisposableActor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L82-L88",
+      "Location": "Lines 82-88 Position 13-14"
     }
   ]
 }

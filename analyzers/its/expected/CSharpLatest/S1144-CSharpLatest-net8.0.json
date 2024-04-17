@@ -218,9 +218,9 @@
     },
     {
       "Id": "S1144",
-      "Message": "Remove the unused private constructor \u0027Record\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3603.cs#L7",
-      "Location": "Line 7 Position 5-11"
+      "Message": "Remove unused constructor of private type \u0027Record\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3603.cs#L7-L17",
+      "Location": "Lines 7-17 Position 5-6"
     },
     {
       "Id": "S1144",

@@ -141,6 +141,25 @@ public interface IInterface
 }
 ").Verify();
 
+        [DataTestMethod]
+        [DataRow("private", "Remove the unused private constructor 'Foo'.")]
+        [DataRow("protected", "Remove unused constructor of private type 'Foo'.")]
+        [DataRow("internal", "Remove unused constructor of private type 'Foo'.")]
+        [DataRow("public", "Remove unused constructor of private type 'Foo'.")]
+        public void UnusedPrivateMember_NonPrivateConstructorInPrivateClass(string accessModifier, string expectedMessage) =>
+            builder.AddSnippet($$$"""
+public class Some
+{
+    private class Foo // Noncompliant
+    {
+        {{{accessModifier}}} Foo() // Noncompliant {{{{{expectedMessage}}}}}
+        {
+            var a = 1;
+        }
+    }
+}
+""").Verify();
+
 #if NET
 
         [TestMethod]

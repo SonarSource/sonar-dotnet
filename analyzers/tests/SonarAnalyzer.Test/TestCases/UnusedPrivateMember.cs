@@ -29,7 +29,7 @@ class UnusedPrivateMember
             Console.WriteLine();
         }
 
-        public Gen(int i) : this() // Noncompliant {{Remove the unused private constructor 'Gen'.}}
+        public Gen(int i) : this() // Noncompliant {{Remove unused constructor of private type 'Gen'.}}
         {
             Console.WriteLine();
         }
@@ -407,6 +407,22 @@ public class OutAndRef
     {
         int.TryParse("1", out var x);
         int.TryParse("1", out var F39);
+    }
+}
+
+internal class MyClass
+{
+    protected MyClass() // Compliant
+    {
+        var a = 1;
+    }
+}
+
+internal class MyClass2
+{
+    private MyClass2() // Noncompliant {{Remove the unused private constructor 'MyClass2'.}}
+    {
+        var a = 1;
     }
 }
 
