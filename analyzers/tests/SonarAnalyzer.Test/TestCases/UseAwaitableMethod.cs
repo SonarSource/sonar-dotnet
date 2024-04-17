@@ -105,7 +105,11 @@ public class Overloads
 
     public async Task Test(int i, byte j)
     {
-        long l1 = ImplicitConversionsMethod(i, j); // Noncompliant (Can be resolved to first overload)
+        long l1 = ImplicitConversionsMethod(i, j);              // Noncompliant Can be resolved to first overload
+        long l2 = ImplicitConversionsMethod(i, (IComparable)j); // Compliant No fitting overload
+        var l3 = ImplicitConversionsMethod((byte)i, j);         // Noncompliant Can be resolved to second overload
+        int l4 = (int)ImplicitConversionsMethod((byte)i, j);    // Noncompliant Can be resolved to second overload
+
         TypeParameter(new C()); // Compliant: Adding "await" does never resolve to another overload
     }
 }
