@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class RouteTemplateShouldNotStartWithSlashTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.RouteTemplateShouldNotStartWithSlash>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.RouteTemplateShouldNotStartWithSlash>().WithBasePath("AspNet");
 
 #if NET
     private static IEnumerable<MetadataReference> AspNetCoreReferences =>
