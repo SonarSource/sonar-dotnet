@@ -86,7 +86,7 @@ public sealed class ApiControllersShouldDeriveFromController : SonarDiagnosticAn
         var reportLocations = controllerSymbol.DeclaringSyntaxReferences
             .Select(x => x.GetSyntax())
             .OfType<ClassDeclarationSyntax>()
-            .Select(x => x.BaseList?.DescendantNodes().FirstOrDefault(x => x is TypeSyntax baseType && x.NameIs("Controller"))?.GetLocation())
+            .Select(x => x.BaseList?.DescendantNodes().FirstOrDefault(x => x is TypeSyntax && x.NameIs("Controller"))?.GetLocation())
             .OfType<Location>();
 
         foreach (var location in reportLocations)
