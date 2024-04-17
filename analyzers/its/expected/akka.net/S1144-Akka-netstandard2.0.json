@@ -75,7 +75,7 @@
     {
       "Id": "S1144",
       "Message": "Remove unused constructor of private type \u0027WriteFileFailed\u0027.",
-      "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/TcpConnection.cs#L903-L906",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/TcpConnection.cs#L903-L906",
       "Location": "Lines 903-906 Position 13-14"
     },
     {
