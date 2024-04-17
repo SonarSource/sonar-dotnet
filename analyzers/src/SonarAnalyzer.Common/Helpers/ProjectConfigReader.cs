@@ -18,8 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.IO;
-using System.Xml.Serialization;
+using System.Xml.Linq;
 using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Helpers
@@ -58,9 +57,7 @@ namespace SonarAnalyzer.Helpers
         {
             try
             {
-                var serializer = new XmlSerializer(typeof(ProjectConfig));
-                using var sr = new StringReader(sonarProjectConfig.ToString());
-                return (ProjectConfig)serializer.Deserialize(sr);
+                return new(XDocument.Parse(sonarProjectConfig.ToString()));
             }
             catch (Exception e)
             {
