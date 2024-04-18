@@ -65,6 +65,7 @@ public class ApiControllersShouldNotDeriveDirectlyFromControllerTest
         builder.AddReferences(AspNetCoreReferences)
             .AddSnippet($$"""
                 using Microsoft.AspNetCore.Mvc;
+                using Microsoft.AspNetCore.Mvc.Filters;
 
                 [ApiController]
                 public class Invocations : Controller    // Compliant
@@ -92,11 +93,11 @@ public class ApiControllersShouldNotDeriveDirectlyFromControllerTest
                 """)
             .Verify();
 
-    [DataRow("public Test() => foo = View()", DisplayName = "Constructor")]
-    [DataRow("~Test() => foo = View()", DisplayName = "Destructor")]
-    [DataRow("object prop => View()", DisplayName = "PropertyGet")]
-    [DataRow("object prop { set => _ = View() }", DisplayName = "PropertySet")]
-    [DataRow("object this[int index] => View()", DisplayName = "Indexer")]
+    [DataRow("public Test() => foo = View();", DisplayName = "Constructor")]
+    [DataRow("~Test() => foo = View();", DisplayName = "Destructor")]
+    [DataRow("object prop => View();", DisplayName = "PropertyGet")]
+    [DataRow("object prop { set => _ = View(); }", DisplayName = "PropertySet")]
+    [DataRow("object this[int index] => View();", DisplayName = "Indexer")]
     [DataTestMethod]
     public void ApiControllersShouldNotDeriveDirectlyFromController_DoesNotRaiseInDifferentConstructs(string code) =>
         builder.AddReferences(AspNetCoreReferences)
@@ -107,7 +108,7 @@ public class ApiControllersShouldNotDeriveDirectlyFromControllerTest
                 public class Test : Controller  // Compliant
                 {
                     object foo;
-                    {{code}};
+                    {{code}}
                 }
                 """)
             .Verify();
