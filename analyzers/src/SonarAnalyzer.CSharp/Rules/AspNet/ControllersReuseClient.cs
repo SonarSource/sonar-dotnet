@@ -64,7 +64,8 @@ public sealed class ControllersReuseClient : ReuseClientBase
     public static bool IsInPublicMethod(SyntaxNode node) =>
         node.FirstAncestorOrSelf<MethodDeclarationSyntax>() is not { } method
         || (method.FirstAncestorOrSelf<PropertyDeclarationSyntax>() is null
-            && method.Modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword)));
+                    && method.Modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword)));
+    }
 
     private static bool IsInsideConstructor(SyntaxNode node) =>
         node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.ConstructorDeclaration, SyntaxKindEx.PrimaryConstructorBaseType));
