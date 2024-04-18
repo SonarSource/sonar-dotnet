@@ -35,6 +35,9 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(compilationStart =>
         {
+            // Not every async method is defined in the same class/interface as its non-async counterpart.
+            // For example the EntityFrameworkQueryableExtensions.AnyAsync() method provides an async version of the Enumerable.Any() method for IQueryable types.
+            // WellKnownExtensionMethodContainer stores where to look for the async versions of certain methods from a type, e.g. async versions of methods from System.Linq.Enumerable can be found in Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.
             var wellKnownExtensionMethodContainer = BuildWellKnownExtensionMethodContainers(compilationStart.Compilation);
             context.RegisterCodeBlockStartAction<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, codeBlockStart =>
             {
@@ -45,11 +48,11 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
                     {
                         var invocationExpression = (InvocationExpressionSyntax)nodeContext.Node;
 
-                        var awaitableAlternatives = FindAwaitableAlternatives(wellKnownExtensionMethodContainer, codeBlock, invocationExpression,
+                        var awaitableAlternatives = FindAwaitableAlternatives(wellKnownExtensionMethodContainer, codeBlockStart.CodeBlock, invocationExpression,
                             nodeContext.SemanticModel, nodeContext.ContainingSymbol, nodeContext.Cancel);
-                        if (awaitableAlternatives.Any())
+                        if (awaitableAlternatives.FirstOrDefault() is { } alternative)
                         {
-                            nodeContext.ReportIssue(Rule, invocationExpression, awaitableAlternatives.First().Name);
+                            nodeContext.ReportIssue(Rule, invocationExpression, alternative.Name);
                         }
                     }, SyntaxKind.InvocationExpression);
                 }
