@@ -73,14 +73,14 @@ public class ApiControllersShouldNotDeriveDirectlyFromControllerTest
                     public object Foo() => {{invocation}};
                 }
                 """)
-            .VerifyNoIssueReported();
+            .Verify();
 
     [DataRow("""OnActionExecuted(default(ActionExecutedContext))""")]
     [DataRow("""OnActionExecuting(default(ActionExecutingContext))""")]
     [DataTestMethod]
     public void ApiControllersShouldNotDeriveDirectlyFromController_DoesNotRaiseWithVoidInvocations(string assignment) =>
-    builder.AddReferences(AspNetCoreReferences)
-        .AddSnippet($$"""
+        builder.AddReferences(AspNetCoreReferences)
+            .AddSnippet($$"""
                 using Microsoft.AspNetCore.Mvc;
                 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -90,12 +90,12 @@ public class ApiControllersShouldNotDeriveDirectlyFromControllerTest
                     public void Foo() => {{assignment}};
                 }
                 """)
-        .VerifyNoIssueReported();
+            .Verify();
 
-    [DataRow("public InConstructor() => foo = View()", DisplayName = "Constructor")]
+    [DataRow("public Test() => foo = View()", DisplayName = "Constructor")]
     [DataRow("~Test() => foo = View()", DisplayName = "Destructor")]
-    [DataRow("object prop => View();", DisplayName = "PropertyGet")]
-    [DataRow("object prop { set => _ = View(); }", DisplayName = "PropertySet")]
+    [DataRow("object prop => View()", DisplayName = "PropertyGet")]
+    [DataRow("object prop { set => _ = View() }", DisplayName = "PropertySet")]
     [DataRow("object this[int index] => View()", DisplayName = "Indexer")]
     [DataTestMethod]
     public void ApiControllersShouldNotDeriveDirectlyFromController_DoesNotRaiseInDifferentConstructs(string code) =>
@@ -110,6 +110,6 @@ public class ApiControllersShouldNotDeriveDirectlyFromControllerTest
                     {{code}};
                 }
                 """)
-        .VerifyNoIssueReported();
+            .Verify();
 #endif
 }
