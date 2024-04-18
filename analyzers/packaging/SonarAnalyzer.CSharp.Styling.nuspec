@@ -13,7 +13,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>Internal Sonar styling analyzer for C#</summary>
     <description>This package contains a set of coding style rules to follow in Sonar code base. Coding style changes as well as breaking changes will appear between minor versions without prior notice. We do not provide support for this package.</description>
-    <releaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/9.23.2.0</releaseNotes>
+    <releaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/9.24.0.0</releaseNotes>
     <language>en-US</language>
     <copyright>Copyright © 2015-2024 SonarSource SA</copyright>
     <developmentDependency>true</developmentDependency>
@@ -22,10 +22,6 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="binaries\internal\Google.Protobuf.dll" target="analyzers" />
-    <file src="binaries\internal\SonarAnalyzer.dll" target="analyzers" />
-    <file src="binaries\internal\SonarAnalyzer.CFG.dll" target="analyzers" />
-    <file src="binaries\internal\SonarAnalyzer.CSharp.dll" target="analyzers" />
     <file src="binaries\internal\Internal.SonarAnalyzer.CSharp.Styling.dll" target="analyzers" />
     <file src="logos\sonarsource_64.png" target="images\" />
     <file src="..\..\THIRD-PARTY-NOTICES.txt" target="license\" />

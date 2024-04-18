@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Concurrent;
+using System.Reflection;
 using SonarAnalyzer.AnalysisContext;
 
 namespace SonarAnalyzer.TestFramework.Verification;
@@ -26,15 +27,24 @@ namespace SonarAnalyzer.TestFramework.Verification;
 public static class SuppressionHandler
 {
     private static readonly ConcurrentDictionary<string, int> Counters = new();
+    private static readonly PropertyInfo[] ShouldDiagnosticBeReportedProperties = LoadProperties();
 
-    public static void HookSuppression() =>
-        SonarAnalysisContext.ShouldDiagnosticBeReported = (_, d) =>
-            {
-                IncrementReportCount(d.Id);
-                return true;
-            };
+    public static void HookSuppression()
+    {
+        var handler = HandleShouldDiagnosticBeReported;
+        foreach (var property in ShouldDiagnosticBeReportedProperties)
+        {
+            property.SetValue(null, handler);
+        }
+    }
 
-    public static void UnHookSuppression() => SonarAnalysisContext.ShouldDiagnosticBeReported = null;
+    public static void UnHookSuppression()
+    {
+        foreach (var property in ShouldDiagnosticBeReportedProperties)
+        {
+            property.SetValue(null, null);
+        }
+    }
 
     public static void IncrementReportCount(string ruleId) =>
         Counters.AddOrUpdate(ruleId, _ => 1, (_, count) => count + 1);
@@ -45,4 +55,21 @@ public static class SuppressionHandler
         // words, we cannot distinguish between diagnostics reported from different tests. That's
         // why we require each diagnostic to be reported through the extension methods at least once.
         analyzers.SelectMany(x => x.SupportedDiagnostics).Any(x => Counters.TryGetValue(x.Id, out var count) && count > 0);
+
+    private static bool HandleShouldDiagnosticBeReported(SyntaxTree tree, Diagnostic diagnostic)
+    {
+        IncrementReportCount(diagnostic.Id);
+        return true;
+    }
+
+    // We need to do this dynamically, becuase during UT run for SonarAnalyzer.CSharp.Styling.Test, there are two separate static classes SonarAnalysisContext:
+    // - Public SonarAnalysisContext from TestFramework's dependency on SonarAnalyzer.Common, that is accessed by this supression class.
+    // - Internal SonarAnalysisContext from ILMerged Internal.SonarAnalyzer.CSharp.Styling.dll, that is accessed by ReportIssue logic and is actually invoked.
+    private static PropertyInfo[] LoadProperties() =>
+        AppDomain.CurrentDomain.GetAssemblies()
+            .Where(x => x.FullName.Contains(nameof(SonarAnalyzer)))
+            .SelectMany(x => x.GetTypes())
+            .Where(x => x.Name == nameof(SonarAnalysisContext))
+            .Select(x => x.GetProperty(nameof(SonarAnalysisContext.ShouldDiagnosticBeReported)))
+            .ToArray();
 }
