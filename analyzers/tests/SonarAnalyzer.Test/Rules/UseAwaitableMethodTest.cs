@@ -33,38 +33,31 @@ public class UseAwaitableMethodTest
     public void UseAwaitableMethod_CS() =>
         builder.AddPaths("UseAwaitableMethod.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void UseAwaitableMethod_CS_Test() =>
         builder
         .WithOptions(ParseOptionsHelper.FromCSharp11)
-        .AddReferences([CoreMetadataReference.SystemComponentModelTypeConverter])
-        .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore(EntityFrameworkVersion))
-        .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(EntityFrameworkVersion))
-        .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqlServer(EntityFrameworkVersion))
+        .AddReferences(MetadataReferenceFacade.SystemNetPrimitives)
+        .AddReferences(MetadataReferenceFacade.SystemNetSockets)
         .AddSnippet("""
-            using Microsoft.EntityFrameworkCore;
-            using System.IO;
-            using System.Threading.Tasks;
             using System;
-            using System.Linq;
+            using System.Text;
+            using System.IO;
+            using System.Net;
+            using System.Net.Sockets;
+            using System.Threading.Tasks;
+            using System.Collections.Generic;
 
-            public class Overloads
+            public class Sockets
             {
-                public long ImplicitConversionsMethod(int i, IComparable j) => 0;
-                public Task<int> ImplicitConversionsMethodAsync(long otherName1, int otherName2) => Task.FromResult(0);
-                public Task<byte> ImplicitConversionsMethodAsync(byte otherName1, byte otherName2) => Task.FromResult((byte)0);
-
-                public async Task Test(int i, byte j)
+                public async Task Connect()
                 {
-                    long l1 = ImplicitConversionsMethod(i, j); // Noncompliant Can be resolved to first overload
-                    long l2 = ImplicitConversionsMethod(i, (IComparable)j); // Compliant No fitting overload
-                    var l3 = ImplicitConversionsMethod((byte)i, j); // Noncompliant Can be resolved to second overload
-                    int l4 = (int)ImplicitConversionsMethod((byte)i, j); // Noncompliant Can be resolved to second overload
+                    var hostEndPoint = new IPEndPoint(new IPAddress(new byte[] { 127, 0, 0, 1 }), 80);
+                    var buffer = new List<ArraySegment<byte>>();
+                    var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 }
             }
-            
+                        
             """).Verify();
 
     [TestMethod]
@@ -81,6 +74,7 @@ public class UseAwaitableMethodTest
         .AddPaths("UseAwaitableMethod_CSharp8.cs")
         .Verify();
 
+#if NET
     [TestMethod]
     public void UseAwaitableMethod_EF() =>
         builder
@@ -92,4 +86,12 @@ public class UseAwaitableMethodTest
         .AddPaths("UseAwaitableMethod_EF.cs")
         .Verify();
 #endif
+
+    [TestMethod]
+    public void UseAwaitableMethod_Sockets() =>
+        builder
+        .AddReferences(MetadataReferenceFacade.SystemNetPrimitives)
+        .AddReferences(MetadataReferenceFacade.SystemNetSockets)
+        .AddPaths("UseAwaitableMethod_Sockets.cs")
+        .Verify();
 }

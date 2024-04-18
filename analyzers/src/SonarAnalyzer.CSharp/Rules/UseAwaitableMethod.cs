@@ -64,18 +64,24 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         var wellKnownExtensionMethodContainer = new WellKnownExtensionMethodContainer();
         var queryable = compilation.GetTypeByMetadataName(KnownType.System_Linq_Queryable);
         var enumerable = compilation.GetTypeByMetadataName(KnownType.System_Linq_Enumerable);
-
-        if (compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions) is { } entityFrameworkQueryableExtensions)
+        if (queryable is not null && enumerable is not null)
         {
-            wellKnownExtensionMethodContainer.Add(queryable, entityFrameworkQueryableExtensions);
-            wellKnownExtensionMethodContainer.Add(enumerable, entityFrameworkQueryableExtensions);
+            if (compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions) is { } entityFrameworkQueryableExtensions)
+            {
+                wellKnownExtensionMethodContainer.Add(queryable, entityFrameworkQueryableExtensions);
+                wellKnownExtensionMethodContainer.Add(enumerable, entityFrameworkQueryableExtensions);
+            }
+            if (compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions) is { } relationalQueryableExtensions)
+            {
+                wellKnownExtensionMethodContainer.Add(queryable, relationalQueryableExtensions);
+                wellKnownExtensionMethodContainer.Add(enumerable, relationalQueryableExtensions);
+            }
         }
-        if (compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions) is { } relationalQueryableExtensions)
+        if (compilation.GetTypeByMetadataName(KnownType.System_Net_Sockets_Socket) is { } socket
+            && compilation.GetTypeByMetadataName(KnownType.System_Net_Sockets_SocketTaskExtensions) is { } socketTaskExtensions)
         {
-            wellKnownExtensionMethodContainer.Add(queryable, relationalQueryableExtensions);
-            wellKnownExtensionMethodContainer.Add(enumerable, relationalQueryableExtensions);
+            wellKnownExtensionMethodContainer.Add(socket, socketTaskExtensions);
         }
-
         return wellKnownExtensionMethodContainer;
     }
 

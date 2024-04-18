@@ -392,6 +392,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Net_Security_SslPolicyErrors = new("System.Net.Security.SslPolicyErrors");
         public static readonly KnownType System_Net_SecurityProtocolType = new("System.Net.SecurityProtocolType");
         public static readonly KnownType System_Net_Sockets_Socket = new("System.Net.Sockets.Socket");
+        public static readonly KnownType System_Net_Sockets_SocketTaskExtensions = new("System.Net.Sockets.SocketTaskExtensions");
         public static readonly KnownType System_Net_Sockets_TcpClient = new("System.Net.Sockets.TcpClient");
         public static readonly KnownType System_Net_Sockets_UdpClient = new("System.Net.Sockets.UdpClient");
         public static readonly KnownType System_Net_WebClient = new("System.Net.WebClient");
