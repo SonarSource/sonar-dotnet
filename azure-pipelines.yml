@@ -41,7 +41,7 @@ variables:
   - name: UnitTestExclusionsPattern
     value: 'analyzers/tests/SonarAnalyzer.Test/TestCases/**/*'
   - name: isReleaseBranch
-    value: ${{ or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/branch-')) }}
+    value: True
   - name: vsVersion
     value: '17.0'
 
