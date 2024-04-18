@@ -2,14 +2,17 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace Microsoft.CodeAnalysis.CSharp.Extensions;
 
-[CodeCopiedFrom(TrustedCodeSource.Roslyn,
-    "https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs")]
+// Copied from Roslyn
+// https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs
+[ExcludeFromCodeCoverage]
 public static class ExpressionSyntaxExtensions
 {
-    [CodeCopiedFrom(TrustedCodeSource.Roslyn,
-        "https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L319")]
+    // Copy of
+    // "https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L319"
     public static bool IsWrittenTo(
         this ExpressionSyntax expression,
         SemanticModel semanticModel,
@@ -74,8 +77,8 @@ public static class ExpressionSyntaxExtensions
         return false;
     }
 
-    [CodeCopiedFrom(TrustedCodeSource.Roslyn,
-        "https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L221")]
+    // Copy of
+    // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L221
     private static ExpressionSyntax GetExpressionToAnalyzeForWrites(ExpressionSyntax? expression)
     {
         if (expression.IsRightSideOfDotOrArrow())
@@ -88,13 +91,13 @@ public static class ExpressionSyntaxExtensions
         return expression;
     }
 
-    [CodeCopiedFrom(TrustedCodeSource.Roslyn,
-        "https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L63")]
+    // Copy of
+    // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L63
     public static bool IsRightSideOfDotOrArrow(this ExpressionSyntax name)
         => IsAnyMemberAccessExpressionName(name) || IsRightSideOfQualifiedName(name);
 
-    [CodeCopiedFrom(TrustedCodeSource.Roslyn,
-        "https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L41")]
+    // Copy of
+    // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L41
     public static bool IsAnyMemberAccessExpressionName(this ExpressionSyntax expression)
     {
         if (expression == null)
@@ -104,19 +107,19 @@ public static class ExpressionSyntaxExtensions
             expression.IsMemberBindingExpressionName();
     }
 
-    [CodeCopiedFrom(TrustedCodeSource.Roslyn,
-        "https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L50")]
+    // Copy of
+    // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L50
     public static bool IsMemberBindingExpressionName(this ExpressionSyntax expression)
         => expression?.Parent is MemberBindingExpressionSyntax memberBinding &&
            memberBinding.Name == expression;
 
-    [CodeCopiedFrom(TrustedCodeSource.Roslyn,
-        "https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L54")]
+    // Copy of
+    // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L54
     public static bool IsRightSideOfQualifiedName(this ExpressionSyntax expression)
         => expression?.Parent is QualifiedNameSyntax qualifiedName && qualifiedName.Right == expression;
 
-    [CodeCopiedFrom(TrustedCodeSource.Roslyn,
-        "https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L233")]
+    // Copy of
+    // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L233
     public static bool IsOnlyWrittenTo(this ExpressionSyntax expression)
     {
         expression = GetExpressionToAnalyzeForWrites(expression);
@@ -157,8 +160,9 @@ public static class ExpressionSyntaxExtensions
     ///
     /// copied from SyntaxExtensions.GetContainingDeconstruction.
     /// </summary>
-    [CodeCopiedFrom(TrustedCodeSource.Roslyn,
-        "https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L273")]
+    /// <remarks>
+    /// Copied from <seealso href="https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L273"/>
+    /// </remarks>
     private static bool IsExpressionOfArgumentInDeconstruction(ExpressionSyntax expr)
     {
         if (!expr.IsParentKind(SyntaxKind.Argument))
@@ -205,22 +209,19 @@ public static class ExpressionSyntaxExtensions
         }
     }
 
-    [CodeCopiedFrom(TrustedCodeSource.Roslyn,
-        "https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L190")]
+    // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L190
     public static bool IsInOutContext(this ExpressionSyntax expression)
         => expression?.Parent is ArgumentSyntax { RefOrOutKeyword: SyntaxToken { RawKind: (int)SyntaxKind.OutKeyword } } argument &&
            argument.Expression == expression;
 
-    [CodeCopiedFrom(TrustedCodeSource.Roslyn,
-        "https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L383")]
+    // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L383
     public static bool IsAttributeNamedArgumentIdentifier(this ExpressionSyntax expression)
     {
         var nameEquals = expression?.Parent as NameEqualsSyntax;
         return nameEquals.IsParentKind(SyntaxKind.AttributeArgument);
     }
 
-    [CodeCopiedFrom(TrustedCodeSource.Roslyn,
-        "https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L194")]
+    // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L194
     public static bool IsInRefContext(this ExpressionSyntax expression)
         => IsInRefContext(expression, out _);
 
@@ -228,8 +229,7 @@ public static class ExpressionSyntaxExtensions
     /// Returns true if this expression is in some <c>ref</c> keyword context.  If <see langword="true"/> then
     /// <paramref name="refParent"/> will be the node containing the <see langword="ref"/> keyword.
     /// </summary>
-    [CodeCopiedFrom(TrustedCodeSource.Roslyn,
-        "https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L201")]
+    // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L201
     public static bool IsInRefContext(this ExpressionSyntax expression, out SyntaxNode refParent)
     {
         while (expression?.Parent is ParenthesizedExpressionSyntax or PostfixUnaryExpressionSyntax { RawKind: (int)SyntaxKindEx.SuppressNullableWarningExpression })
@@ -250,8 +250,7 @@ public static class ExpressionSyntaxExtensions
         return false;
     }
 
-    [CodeCopiedFrom(TrustedCodeSource.Roslyn,
-        "https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L389")]
+    // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L389
     public static bool IsOperandOfIncrementOrDecrementExpression(this ExpressionSyntax expression)
     {
         if (expression?.Parent is SyntaxNode parent)

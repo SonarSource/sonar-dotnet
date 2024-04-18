@@ -256,7 +256,7 @@ stages:
 
       - powershell: |
           cd analyzers
-          & dotnet test $(ProjectFilePath) -f $(FrameworkMoniker) -c $(BuildConfiguration) -l trx --results-directory $(UnitTestResultsPath) /p:AltCover=true,AltCoverForce=true,AltCoverVisibleBranches=true,AltCoverAssemblyFilter="testhost|Moq|Humanizer|AltCover|Microsoft.VisualStudio.TestPlatform.*|\.Test^",AltCoverPathFilter="SonarAnalyzer\.CFG\\ShimLayer|SonarAnalyzer\.ShimLayer\.CodeGeneration",AltCoverAttributeFilter="ExcludeFromCodeCoverage|CodeCopiedFrom",AltCoverReport="$(CoveragePath)/coverage.$(CoverageArtifactName).xml"
+          & dotnet test $(ProjectFilePath) -f $(FrameworkMoniker) -c $(BuildConfiguration) -l trx --results-directory $(UnitTestResultsPath) /p:AltCover=true,AltCoverForce=true,AltCoverVisibleBranches=true,AltCoverAssemblyFilter="testhost|Moq|Humanizer|AltCover|Microsoft.VisualStudio.TestPlatform.*|\.Test^",AltCoverPathFilter="SonarAnalyzer\.CFG\\ShimLayer|SonarAnalyzer\.ShimLayer\.CodeGeneration",AltCoverAttributeFilter="ExcludeFromCodeCoverage",AltCoverReport="$(CoveragePath)/coverage.$(CoverageArtifactName).xml"
         displayName: '.Net UTs'
         env:
           ARTIFACTORY_USER: $(ARTIFACTORY_PRIVATE_READER_USERNAME)

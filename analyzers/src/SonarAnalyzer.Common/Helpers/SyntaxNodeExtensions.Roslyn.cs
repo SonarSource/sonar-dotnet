@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using System.CodeDom.Compiler;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions;
 
-[GeneratedCode("Copied from Roslyn", "5a1cc5f83e4baba57f0355a685a5d1f487bfac66")]
+[ExcludeFromCodeCoverage]
 internal static class SyntaxNodeExtensions
 {
     /// <summary>
@@ -15,8 +15,9 @@ internal static class SyntaxNodeExtensions
     /// <typeparam name="TParent">The type of the parent node.</typeparam>
     /// <param name="node">The node that we are testing.</param>
     /// <param name="childGetter">A function that, when given the parent node, returns the child token we are interested in.</param>
-    // Copy of
-    // https://github.com/dotnet/roslyn/blob/5a1cc5f83e4baba57f0355a685a5d1f487bfac66/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/Core/Extensions/SyntaxNodeExtensions.cs#L142
+    /// <remarks>
+    /// Copied from <seealso href="https://github.com/dotnet/roslyn/blob/5a1cc5f83e4baba57f0355a685a5d1f487bfac66/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/Core/Extensions/SyntaxNodeExtensions.cs#L142"/>
+    /// </remarks>
     public static bool IsChildNode<TParent>(this SyntaxNode node, Func<TParent, SyntaxNode> childGetter) where TParent : SyntaxNode
     {
         var ancestor = node.GetAncestor<TParent>();

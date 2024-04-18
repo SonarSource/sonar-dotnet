@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using System.CodeDom.Compiler;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis.CSharp.Extensions;
 
-[GeneratedCode("Copied from Roslyn", "18f20b489")]
+[ExcludeFromCodeCoverage]
 internal static class SyntaxNodeExtensions
 {
     /// <summary>
