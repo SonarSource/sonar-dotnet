@@ -24,7 +24,9 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6968";
-    private const string MessageFormat = "FIXME";
+    private const string MessageFormat = "{0}";
+    private const string NoAttributeMessageFormat = "Annotate this method with ProducesResponseType containing the return type for successful responses.";
+    private const string NoTypeMessageFormat = "Use the ProducesResponseType overload containing the return type for successful responses.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -36,7 +38,6 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
                 var node = c.Node;
                 if (true)
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
                 }
             },
             SyntaxKind.InvocationExpression);

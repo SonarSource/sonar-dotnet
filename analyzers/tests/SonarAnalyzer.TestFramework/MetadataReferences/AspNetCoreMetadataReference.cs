@@ -33,6 +33,7 @@ public static class AspNetCoreMetadataReference
     public static MetadataReference MicrosoftAspNetCoreHostingAbstractions { get; } = CreateReference("Microsoft.AspNetCore.Hosting.Abstractions.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftAspNetCoreHttpAbstractions { get; } = CreateReference("Microsoft.AspNetCore.Http.Abstractions.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftAspNetCoreHttpFeatures { get; } = CreateReference("Microsoft.AspNetCore.Http.Features.dll", Sdk.AspNetCore);
+    public static MetadataReference MicrosoftAspNetCoreHttpResults { get; } = CreateReference("Microsoft.AspNetCore.Http.Results.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftAspNetCoreMvc { get; } = CreateReference("Microsoft.AspNetCore.Mvc.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftAspNetCoreMvcAbstractions { get; } = CreateReference("Microsoft.AspNetCore.Mvc.Abstractions.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftAspNetCoreMvcCore { get; } = CreateReference("Microsoft.AspNetCore.Mvc.Core.dll", Sdk.AspNetCore);

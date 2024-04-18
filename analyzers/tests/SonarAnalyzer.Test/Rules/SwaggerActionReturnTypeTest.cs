@@ -17,6 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
+#if NET
 
 using SonarAnalyzer.Rules.CSharp;
 
@@ -25,9 +26,20 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class SwaggerActionReturnTypeTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<SwaggerActionReturnType>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<SwaggerActionReturnType>()
+        .WithOptions(ParseOptionsHelper.FromCSharp11)
+        .AddReferences(NuGetMetadataReference.SwashbuckleAspNetCoreAnnotations())
+        .AddReferences([
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpResults,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
+        ]);
 
     [TestMethod]
     public void SwaggerActionReturnType_CS() =>
         builder.AddPaths("SwaggerActionReturnType.cs").Verify();
 }
+
+#endif
