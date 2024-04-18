@@ -50,14 +50,15 @@ public class UseAwaitableMethodTest
 
             public class Sockets
             {
-                public async Task Connect()
+                async Task<Action> CreateActionAsync(StreamReader reader)
                 {
-                    var hostEndPoint = new IPEndPoint(new IPAddress(new byte[] { 127, 0, 0, 1 }), 80);
-                    var buffer = new List<ArraySegment<byte>>();
-                    var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                    Action action = () =>
+                    {
+                        reader.ReadLine();      // Compliant
+                    };
+                    return action;
                 }
-            }
-                        
+            }                        
             """).Verify();
 
     [TestMethod]

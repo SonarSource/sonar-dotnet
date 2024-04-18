@@ -93,6 +93,10 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         {
             return ImmutableArray<ISymbol>.Empty; // Invocation result is already awaited.
         }
+        if (invocationExpression.EnclosingScope() is { } scope && !IsAsyncCodeBlock(scope))
+        {
+            return ImmutableArray<ISymbol>.Empty; // Not in an async scope
+        }
         if (semanticModel.GetSymbolInfo(invocationExpression, cancel).Symbol is IMethodSymbol methodSymbol
             && !methodSymbol.IsAwaitableNonDynamic(semanticModel, invocationExpression.SpanStart)) // The invoked method returns something awaitable (but it isn't awaited).
         {
@@ -167,7 +171,11 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         codeBlock switch
         {
             CompilationUnitSyntax => true,
-            MethodDeclarationSyntax { Modifiers: { } modifiers } => modifiers.AnyOfKind(SyntaxKind.AsyncKeyword),
+            BaseMethodDeclarationSyntax { Modifiers: { } modifiers } => modifiers.AnyOfKind(SyntaxKind.AsyncKeyword),
+            AnonymousFunctionExpressionSyntax { AsyncKeyword.RawKind: (int)SyntaxKind.AsyncKeyword } => true,
+            SimpleLambdaExpressionSyntax { AsyncKeyword.RawKind: (int)SyntaxKind.AsyncKeyword } => true,
+            ParenthesizedLambdaExpressionSyntax { AsyncKeyword.RawKind: (int)SyntaxKind.AsyncKeyword } => true,
+            var localFunction when LocalFunctionStatementSyntaxWrapper.IsInstance(localFunction) => ((LocalFunctionStatementSyntaxWrapper)localFunction).Modifiers.AnyOfKind(SyntaxKind.AsyncKeyword),
             _ => false,
         };
 }

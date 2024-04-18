@@ -42,6 +42,8 @@ public class C
         _ = true ? ReturnMethod() : ReturnMethod();
         //         ^^^^^^^^^^^^^^
         //                          ^^^^^^^^^^^^^^           @-1
+        await ReturnMethod().ReturnMethodAsync(); // Noncompliant
+        //    ^^^^^^^^^^^^^^
     }
 
     public void NonAsyncMethod_VoidReturning()
@@ -75,6 +77,7 @@ public class C
         _ = +ReturnMethod(); // Noncompliant
         _ = -ReturnMethod(); // Noncompliant
         _ = !ReturnMethod(); // Noncompliant
+        _ = ~ReturnMethod(); // Noncompliant
         _ = ReturnMethod() + default(C); // Noncompliant
         _ = ReturnMethod() - default(C); // Noncompliant
         _ = ReturnMethod() - !ReturnMethod();
@@ -175,6 +178,15 @@ class AsynchronousLambdas
             await Foo();
             reader.ReadLine(); // Noncompliant  
         };
+    }
+
+    async Task<Action> CreateActionAsync(StreamReader reader)
+    {
+        Action action = () =>
+        {
+            reader.ReadLine();      // Compliant
+        };
+        return action;
     }
 
     Task Foo() => null;
