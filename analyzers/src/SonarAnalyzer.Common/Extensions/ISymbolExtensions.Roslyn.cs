@@ -4,11 +4,12 @@
 
 #nullable enable
 
-using System.CodeDom.Compiler;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions;
 
-[GeneratedCode("Copied from Roslyn", "ca66296efa86bd8078508fe7b38b91b415364f78")]
+// Copied from https://github.com/dotnet/roslyn/blob/ca66296efa86bd8078508fe7b38b91b415364f78/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/Core/Extensions/ISymbolExtensions.cs
+[ExcludeFromCodeCoverage]
 public static class ISymbolExtensions
 {
     /// <summary>
@@ -17,7 +18,7 @@ public static class ISymbolExtensions
     /// An "awaitable" is any type that exposes a GetAwaiter method which returns a valid "awaiter". This GetAwaiter method may be an instance method or an extension method.
     /// </summary>
     /// <remarks>
-    /// Copied from https://github.com/dotnet/roslyn/blob/ca66296efa86bd8078508fe7b38b91b415364f78/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/Core/Extensions/ISymbolExtensions.cs#L572-L577.
+    /// Copied from <seealso href="https://github.com/dotnet/roslyn/blob/ca66296efa86bd8078508fe7b38b91b415364f78/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/Core/Extensions/ISymbolExtensions.cs#L572-L577"/>.
     /// </remarks>
     public static bool IsAwaitableNonDynamic(this ISymbol? symbol, SemanticModel semanticModel, int position)
     {
