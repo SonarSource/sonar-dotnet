@@ -98,7 +98,7 @@ public class ApiControllersShouldDeriveFromControllerTest
     [DataRow("object prop { set => _ = View(); }", DisplayName = "PropertySet")]
     [DataRow("object this[int index] => View()", DisplayName = "Indexer")]
     [DataTestMethod]
-    public void ApiControllersShouldDeriveFromController_DoesNotRaiseInDifferentConstructs(string construct, string code) =>
+    public void ApiControllersShouldDeriveFromController_DoesNotRaiseInDifferentConstructs(string code) =>
         builder.AddReferences(AspNetCoreReferences)
             .AddSnippet($$"""
                 using Microsoft.AspNetCore.Mvc;
