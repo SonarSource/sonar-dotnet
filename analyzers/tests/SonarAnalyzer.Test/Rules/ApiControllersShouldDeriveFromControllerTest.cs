@@ -61,7 +61,7 @@ public class ApiControllersShouldDeriveFromControllerTest
     [DataRow("""ViewBag["foo"]""")]
     [DataRow("""TempData["foo"]""")]
     [DataTestMethod]
-    public void ApiControllersShouldDeriveFromController_DoesNotRaiseWithViewFunctionality(string assignment) =>
+    public void ApiControllersShouldDeriveFromController_DoesNotRaiseWithViewFunctionality(string invocation) =>
         builder.AddReferences(AspNetCoreReferences)
             .AddSnippet($$"""
                 using Microsoft.AspNetCore.Mvc;
@@ -70,7 +70,7 @@ public class ApiControllersShouldDeriveFromControllerTest
                 public class Invocations : Controller    // Compliant
                 {
                     object model = null;
-                    public object Foo() => {{assignment}};
+                    public object Foo() => {{invocation}};
                 }
                 """)
             .VerifyNoIssueReported();
@@ -92,11 +92,11 @@ public class ApiControllersShouldDeriveFromControllerTest
                 """)
         .VerifyNoIssueReported();
 
-    [DataRow("""Constructor""", "public InConstructor() => foo = View()")]
-    [DataRow("""Destructor""", "~InDestructor() => foo = View()")]
-    [DataRow("""PropertyGet""", "object prop => View();")]
-    [DataRow("""PropertySet""", "object prop { set => _ = View(); }")]
-    [DataRow("""Indexer""", "object this[int index] => View()")]
+    [DataRow("public InConstructor() => foo = View()", DisplayName = "Contrustor")]
+    [DataRow("~InDestructor() => foo = View()", DisplayName = "Destructor")]
+    [DataRow("object prop => View();", DisplayName = "PropertyGet")]
+    [DataRow("object prop { set => _ = View(); }", DisplayName = "PropertySet")]
+    [DataRow("object this[int index] => View()", DisplayName = "Indexer")]
     [DataTestMethod]
     public void ApiControllersShouldDeriveFromController_DoesNotRaiseInDifferentConstructs(string construct, string code) =>
         builder.AddReferences(AspNetCoreReferences)
@@ -104,7 +104,7 @@ public class ApiControllersShouldDeriveFromControllerTest
                 using Microsoft.AspNetCore.Mvc;
 
                 [ApiController]
-                public class In{{construct}} : Controller  // Compliant
+                public class Test : Controller  // Compliant
                 {
                     object foo;
                     {{code}};
@@ -113,5 +113,4 @@ public class ApiControllersShouldDeriveFromControllerTest
         .VerifyNoIssueReported();
 
 #endif
-
 }

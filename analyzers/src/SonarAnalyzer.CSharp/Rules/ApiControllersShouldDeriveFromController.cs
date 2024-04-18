@@ -28,8 +28,6 @@ public sealed class ApiControllersShouldDeriveFromController : SonarDiagnosticAn
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-
     private static readonly HashSet<string> ViewIdentifiers =
         [
            "Json",
@@ -45,6 +43,8 @@ public sealed class ApiControllersShouldDeriveFromController : SonarDiagnosticAn
            "ViewResult"
         ];
 
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(compilationStartContext =>
         {
@@ -54,32 +54,36 @@ public sealed class ApiControllersShouldDeriveFromController : SonarDiagnosticAn
             }
 
             compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
-            {
-                var symbol = (INamedTypeSymbol)symbolStartContext.Symbol;
-                if (symbol.IsControllerType()
-                    && symbol.IsPubliclyAccessible()
-                    && symbol.AnyAttributeDerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute)
-                    && symbol.BaseType.Is(KnownType.Microsoft_AspNetCore_Mvc_Controller))
-                {
-                    var shouldReportController = true;
-                    symbolStartContext.RegisterSyntaxNodeAction(nodeContext =>
-                    {
-                        if (ViewIdentifiers.Contains(nodeContext.Node.GetName()))
-                        {
-                            shouldReportController = false;
-                        }
-                    }, SyntaxKind.IdentifierName);
-
-                    symbolStartContext.RegisterSymbolEndAction(symbolEndContext =>
-                    {
-                        if (shouldReportController)
-                        {
-                            ReportIssue(symbolEndContext, symbol);
-                        }
-                    });
-                }
-            }, SymbolKind.NamedType);
+                CheckController(symbolStartContext),
+                SymbolKind.NamedType);
         });
+
+    private void CheckController(SonarSymbolStartAnalysisContext context)
+    {
+        var controllerSymbol = (INamedTypeSymbol)context.Symbol;
+        if (controllerSymbol.IsControllerType()
+            && controllerSymbol.IsPubliclyAccessible()
+            && controllerSymbol.AnyAttributeDerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute)
+            && controllerSymbol.BaseType.Is(KnownType.Microsoft_AspNetCore_Mvc_Controller))
+        {
+            var shouldReportController = true;
+            context.RegisterSyntaxNodeAction(nodeContext =>
+            {
+                if (ViewIdentifiers.Contains(nodeContext.Node.GetName()))
+                {
+                    shouldReportController = false;
+                }
+            }, SyntaxKind.IdentifierName);
+
+            context.RegisterSymbolEndAction(symbolEndContext =>
+            {
+                if (shouldReportController)
+                {
+                    ReportIssue(symbolEndContext, controllerSymbol);
+                }
+            });
+        }
+    }
 
     private static void ReportIssue(SonarSymbolReportingContext context, INamedTypeSymbol controllerSymbol)
     {
