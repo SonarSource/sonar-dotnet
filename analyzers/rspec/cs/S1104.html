@@ -14,7 +14,9 @@ impacting the client code of the class.</p>
 <p>The code is harder to maintain.</p>
 <h3>Exceptions</h3>
 <p>Fields marked as <code>readonly</code> or <code>const</code> are ignored by this rule.</p>
-<p>Fields inside classes or structs annotated with the <code>StructLayoutAttribute</code> are ignored by this rule.</p>
+<p>Fields inside classes or structs annotated with <code>[StructLayout]</code> are ignored by this rule.</p>
+<p>Fields inside classes or structs annotated with <code>[Serializable]</code> are ignored by this rule unless they are annotated with
+<code>[NonSerialized]</code>.</p>
 <h2>How to fix it</h2>
 <p>Depending on your needs:</p>
 <ul>
