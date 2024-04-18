@@ -33,37 +33,37 @@ public class CoverageTest {
     assertThat(coverage.hits("foo.txt")).isEmpty();
 
     coverage.addHits("foo.txt", 42, 1);
-    assertThat(coverage.files()).containsOnly("foo.txt");
+    assertThat(coverage.files()).containsExactlyInAnyOrder("foo.txt");
     assertThat(coverage.hits("foo.txt")).isEqualTo(ImmutableMap.of(42, 1));
 
     coverage.addHits("foo.txt", 42, 3);
-    assertThat(coverage.files()).containsOnly("foo.txt");
+    assertThat(coverage.files()).containsExactlyInAnyOrder("foo.txt");
     assertThat(coverage.hits("foo.txt")).isEqualTo(ImmutableMap.of(42, 4));
 
     coverage.addHits("foo.txt", 1234, 11);
-    assertThat(coverage.files()).containsOnly("foo.txt");
+    assertThat(coverage.files()).containsExactlyInAnyOrder("foo.txt");
     assertThat(coverage.hits("foo.txt")).isEqualTo(ImmutableMap.of(42, 4, 1234, 11));
 
     coverage.addHits("bar.txt", 1, 2);
-    assertThat(coverage.files()).containsOnly("foo.txt", "bar.txt");
+    assertThat(coverage.files()).containsExactlyInAnyOrder("foo.txt", "bar.txt");
     assertThat(coverage.hits("foo.txt")).isEqualTo(ImmutableMap.of(42, 4, 1234, 11));
     assertThat(coverage.hits("bar.txt")).isEqualTo(ImmutableMap.of(1, 2));
 
     Coverage other = new Coverage();
 
     coverage.mergeWith(other);
-    assertThat(coverage.files()).containsOnly("foo.txt", "bar.txt");
+    assertThat(coverage.files()).containsExactlyInAnyOrder("foo.txt", "bar.txt");
     assertThat(coverage.hits("foo.txt")).isEqualTo(ImmutableMap.of(42, 4, 1234, 11));
     assertThat(coverage.hits("bar.txt")).isEqualTo(ImmutableMap.of(1, 2));
 
     other.addHits("baz.txt", 2, 7);
-    assertThat(other.files()).containsOnly("baz.txt");
+    assertThat(other.files()).containsExactlyInAnyOrder("baz.txt");
     assertThat(other.hits("baz.txt")).isEqualTo(ImmutableMap.of(2, 7));
 
     coverage.mergeWith(other);
-    assertThat(other.files()).containsOnly("baz.txt");
+    assertThat(other.files()).containsExactlyInAnyOrder("baz.txt");
     assertThat(other.hits("baz.txt")).isEqualTo(ImmutableMap.of(2, 7));
-    assertThat(coverage.files()).containsOnly("foo.txt", "bar.txt", "baz.txt");
+    assertThat(coverage.files()).containsExactlyInAnyOrder("foo.txt", "bar.txt", "baz.txt");
     assertThat(coverage.hits("foo.txt")).isEqualTo(ImmutableMap.of(42, 4, 1234, 11));
     assertThat(coverage.hits("bar.txt")).isEqualTo(ImmutableMap.of(1, 2));
     assertThat(coverage.hits("baz.txt")).isEqualTo(ImmutableMap.of(2, 7));
@@ -79,10 +79,9 @@ public class CoverageTest {
   @Test
   public void givenSingleBranchPoint_getBranchCoverage_returnsEmpty() {
     final String filePath = "filePath";
-    final String coverageIdentifier = "coverageIdentifier";
 
     Coverage sut = new Coverage();
-    sut.add(new BranchPoint(filePath, 1, 2, 3, 4, 5, coverageIdentifier));
+    sut.add(new BranchPoint(filePath, 1, 2, 3, 4, 5, "coverageIdentifier"));
 
     // Normally this case should not happen but if we have only one branch point
     // we should not report coverage as line coverage is already covering that.
@@ -145,7 +144,7 @@ public class CoverageTest {
     sut.add(new BranchPoint(filePath, 6, 1, 2, 1, 1, coverageIdentifier));
 
     assertThat(sut.getBranchCoverage(filePath))
-      .containsOnly(
+      .containsExactlyInAnyOrder(
         // For the first 3 lines we will not report branch coverage since they have only one branch point each.
         new BranchCoverage(4, 2, 2),
         new BranchCoverage(5, 2, 2),
@@ -192,7 +191,7 @@ public class CoverageTest {
     sut.add(new BranchPoint(filePath, 6, 4, 6, 1, 1, coverageIdentifier2));
 
     assertThat(sut.getBranchCoverage(filePath))
-      .containsOnly(
+      .containsExactlyInAnyOrder(
         new BranchCoverage(1, 2, 2),
         new BranchCoverage(2, 3, 2),
         new BranchCoverage(3, 2, 0),
@@ -216,8 +215,8 @@ public class CoverageTest {
     sut.add(new BranchPoint(secondPath, 1, 10, 12, 1, 0, coverageIdentifier));
     sut.add(new BranchPoint(secondPath, 1, 12, 14, 2, 0, coverageIdentifier));
 
-    assertThat(sut.getBranchCoverage(firstPath)).containsOnly(new BranchCoverage(1, 2, 2));
-    assertThat(sut.getBranchCoverage(secondPath)).containsOnly(new BranchCoverage(1, 3, 1));
+    assertThat(sut.getBranchCoverage(firstPath)).containsExactlyInAnyOrder(new BranchCoverage(1, 2, 2));
+    assertThat(sut.getBranchCoverage(secondPath)).containsExactlyInAnyOrder(new BranchCoverage(1, 3, 1));
   }
 
   @Test
@@ -261,7 +260,7 @@ public class CoverageTest {
     sut.add(new BranchPoint(filePath, 6, 0, 8, 1, 0, coverageIdentifier2));
 
     assertThat(sut.getBranchCoverage(filePath))
-      .containsOnly(
+      .containsExactlyInAnyOrder(
         new BranchCoverage(1, 2, 2),
         new BranchCoverage(2, 2, 1),
         new BranchCoverage(3, 2, 2),
