@@ -50,6 +50,12 @@ namespace SonarAnalyzer.Test.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 
+        [TestMethod]
+        public void TooManyParameters_CS_CustomValues_CSharp12() =>
+            builderCSMax3.AddPaths("TooManyParameters_CustomValues.CSharp12.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .Verify();
+
 #endif
 
         [TestMethod]
