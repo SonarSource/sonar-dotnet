@@ -18,12 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using static Google.Protobuf.WellKnownTypes.Field;
-
 namespace SonarAnalyzer.Helpers;
 
-internal static class TypeHelper
+public static class TypeHelper
 {
     #region TypeKind
 
