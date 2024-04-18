@@ -1,0 +1,23 @@
+{
+  "title": "Actions that return a value should be annotated with ProducesResponseTypeAttribute containing the return type",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "asp.net"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6968",
+  "sqKey": "S6968",
+  "scope": "Main",
+  "quickfix": "partial",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "HIGH"
+    },
+    "attribute": "CLEAR"
+  }
+}
