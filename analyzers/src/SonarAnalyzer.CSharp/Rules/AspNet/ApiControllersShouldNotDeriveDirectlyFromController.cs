@@ -54,8 +54,8 @@ public sealed class ApiControllersShouldNotDeriveDirectlyFromController : SonarD
             }
 
             compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
-                CheckController(symbolStartContext),
-                SymbolKind.NamedType);
+            CheckController(symbolStartContext),
+            SymbolKind.NamedType);
         });
 
     private static void CheckController(SonarSymbolStartAnalysisContext context)

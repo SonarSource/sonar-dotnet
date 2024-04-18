@@ -92,8 +92,8 @@ public class ApiControllersShouldNotDeriveDirectlyFromControllerTest
                 """)
         .VerifyNoIssueReported();
 
-    [DataRow("public InConstructor() => foo = View()", DisplayName = "Contrustor")]
-    [DataRow("~InDestructor() => foo = View()", DisplayName = "Destructor")]
+    [DataRow("public InConstructor() => foo = View()", DisplayName = "Constructor")]
+    [DataRow("~Test() => foo = View()", DisplayName = "Destructor")]
     [DataRow("object prop => View();", DisplayName = "PropertyGet")]
     [DataRow("object prop { set => _ = View(); }", DisplayName = "PropertySet")]
     [DataRow("object this[int index] => View()", DisplayName = "Indexer")]
@@ -111,6 +111,5 @@ public class ApiControllersShouldNotDeriveDirectlyFromControllerTest
                 }
                 """)
         .VerifyNoIssueReported();
-
 #endif
 }
