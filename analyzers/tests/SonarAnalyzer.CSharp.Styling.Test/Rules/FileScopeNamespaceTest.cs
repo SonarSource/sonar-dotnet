@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.TestFramework.Common;
+
 namespace SonarAnalyzer.CSharp.Styling.Test.Rules;
 
 [TestClass]
@@ -25,9 +27,17 @@ public class FileScopeNamespaceTest
 {
     private readonly VerifierBuilder builder = StylingVerifierBuilder.Create<FileScopeNamespace>().WithConcurrentAnalysis(false);
 
+    public TestContext TestContext { get; set; }
+
     [TestMethod]
     public void FileScopeNamespace() =>
         builder.AddPaths("FileScopeNamespace.cs").Verify();
+
+    [TestMethod]
+    public void FileScopeNamespace_TestCode() =>
+        builder.AddPaths("FileScopeNamespace.cs")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, Helpers.ProjectType.Test))
+            .Verify();
 
     [TestMethod]
     public void FileScopeNamespace_Compliant() =>
