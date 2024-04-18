@@ -43,6 +43,10 @@ namespace SonarAnalyzer.Test.Rules
         public void BypassingAccessibility_CSharp11() =>
             builderCS.AddPaths("BypassingAccessibility.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
+        [TestMethod]
+        public void BypassingAccessibility_CSharp12() =>
+            builderCS.AddPaths("BypassingAccessibility.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+
 #endif
 
         [TestMethod]
