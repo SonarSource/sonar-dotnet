@@ -161,6 +161,14 @@ public class RouteTemplateShouldNotStartWithSlashTest
             .AddReferences(AspNetCoreReferences)
             .Verify();
 
+    [TestMethod]
+    public void RouteTemplateShouldNotStartWithSlash_CSharp12() =>
+        builderCS
+            .AddPaths("RouteTemplateShouldNotStartWithSlash.AspNetCore.CSharp12.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .AddReferences(AspNetCoreReferences)
+            .Verify();
+
 #endif
 
 #if NETFRAMEWORK
