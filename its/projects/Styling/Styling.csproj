@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- This file is copied into the temp directory during the integration test -->
+    <Analyzer Include="Internal.SonarAnalyzer.CSharp.Styling.dll "/>
+  </ItemGroup>
+
+</Project>
