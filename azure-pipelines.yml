@@ -230,7 +230,7 @@ stages:
             CoverageArtifactName: 'DotNetCoverageNet7'
             TestResultsArtifactName: 'DotNetTestResultsNet7'
             ProjectFilePath: 'tests\SonarAnalyzer.Test\SonarAnalyzer.Test.csproj'
-            FrameworkMoniker: 'net7.0'
+            FrameworkMoniker: 'net8.0'
           Net80:
             CoverageArtifactName: 'DotNetCoverageNet8'
             TestResultsArtifactName: 'DotNetTestResultsNet8'
