@@ -137,5 +137,59 @@ public class PropertyUsages
     private int Property12 { get; set; } = 42; // FN
 }
 ").Verify();
+
+        [TestMethod]
+        public void UnusedPrivateMember_Properties_Accessors() =>
+            builder.AddSnippet(@"
+using System;
+public class PropertyUsages
+{
+    public int AProperty { private get; set; } // Noncompliant {{Remove the unused private getter 'get_AProperty'.}}
+    public int BProperty { get; private set; } // Noncompliant {{Remove the unused private setter 'set_BProperty'.}}
+    public int CProperty { internal get; set; } // Compliant
+    public int DProperty { get; internal set; } // Compliant
+    public int EProperty { protected get; set; } // Compliant
+    public int E2Property { get; protected set; } // Compliant
+    public int FProperty { get; private set; } // Compliant
+    public int GProperty { private get; set; } // Noncompliant {{Remove the unused private getter 'get_GProperty'.}}
+    public int HProperty { get; private set; } // Noncompliant {{Remove the unused private setter 'set_HProperty'.}}
+    public int IProperty { private get; set; } // Compliant
+    public int JProperty { get; private set; } // Compliant: both read and write
+    public int KProperty { private get; set; } // Compliant: both read and write
+    public int LProperty { get; private set; } // FN: private set is used in the constructor, not necessary
+    protected int MProperty { private get; set; } // Noncompliant {{Remove the unused private getter 'get_MProperty'.}}
+
+    public PropertyUsages()
+    {
+        LProperty = 42;
+    }
+
+    public void Method()
+    {
+        FProperty = HProperty;
+        GProperty = IProperty;
+
+        JProperty = KProperty;
+        KProperty = JProperty;
+    }
+
+    public interface ISomeInterface
+    {
+        string Something { get; }
+        string SomethingElse { get; }
+    }
+
+    public class SomeClass : ISomeInterface
+    {
+        public string Something { get; private set; } // Compliant
+        public string SomethingElse { get; private set; } // Noncompliant
+
+        public void Method(string str)
+        {
+            Something = str;
+        }
+    }
+}
+").Verify();
     }
 }

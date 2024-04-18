@@ -2,6 +2,12 @@
   "Issues": [
     {
       "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_Log\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/AutoDown.cs#L270",
+      "Location": "Line 270 Position 43-55"
+    },
+    {
+      "Id": "S1144",
       "Message": "Remove the unused private field \u0027_log\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L828",
       "Location": "Line 828 Position 9-69"

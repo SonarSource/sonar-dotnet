@@ -160,12 +160,12 @@ public class PropertyAccess
     private int OnlyRead { get; }                                              // Fixed
     private int OnlySet { get; set; }
     private int OnlySet2 { set { } }                             // Fixed
-    public int PrivateGetter { private get; set; }                                  // FN - unused private getter
-    public int PrivateSetter { get; private set; }                                  // FN - unused private setter
+    public int PrivateGetter { set; }                                  // Fixed
+    public int PrivateSetter { get; }                                  // Fixed
     private int ExpressionBodiedProperty5 { set => _ = value; }           // Fixed
     private int ExpressionBodiedProperty6 { get => 1; }           // Fixed
-    public int ExpressionBodiedProperty7 { private get => 1; set => _ = value; }    // FN - unused private getter
-    public int ExpressionBodiedProperty8 { get => 1; private set => _ = value; }    // FN - unused private setter
+    public int ExpressionBodiedProperty7 { set => _ = value; }    // Fixed
+    public int ExpressionBodiedProperty8 { get => 1; }    // Fixed
 
     private int BothAccessed { get; set; }
 

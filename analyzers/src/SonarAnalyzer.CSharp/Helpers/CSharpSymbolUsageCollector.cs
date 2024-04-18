@@ -51,8 +51,8 @@ namespace SonarAnalyzer.Helpers
 
         public ISet<ISymbol> UsedSymbols { get; } = new HashSet<ISymbol>();
         public IDictionary<ISymbol, SymbolUsage> FieldSymbolUsages { get; } = new Dictionary<ISymbol, SymbolUsage>();
-        public HashSet<string> DebuggerDisplayValues { get; } = new();
-        public Dictionary<IPropertySymbol, AccessorAccess> PropertyAccess { get; } = new();
+        public HashSet<string> DebuggerDisplayValues { get; } = [];
+        public Dictionary<IPropertySymbol, AccessorAccess> PropertyAccess { get; } = [];
 
         public CSharpSymbolUsageCollector(Compilation compilation, IEnumerable<ISymbol> knownSymbols)
         {
