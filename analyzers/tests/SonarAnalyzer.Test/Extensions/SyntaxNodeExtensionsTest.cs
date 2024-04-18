@@ -1220,6 +1220,8 @@ public class X
         [DataRow("""int Method() { Func<int, int> lambda = x => $$x + 1$$; return lambda(42); }""", SyntaxKind.SimpleLambdaExpression)]
         [DataRow("""event EventHandler SomeEvent { add { int x = 42; } remove { $$int x = 42;$$ } }""", SyntaxKind.RemoveAccessorDeclaration)]
         [DataRow("""Derived(int arg) : this($$arg.ToString()$$) { }""", SyntaxKind.ThisConstructorInitializer)]
+        [DataRow("""enum E { A = $$1$$ }""", SyntaxKind.EnumMemberDeclaration)]
+        [DataRow("""void M(int i = $$1$$) { }""", SyntaxKind.Parameter)]
 #if NET
         [DataRow("""int Property { init { $$_ = value;$$ } }""", SyntaxKindEx.InitAccessorDeclaration)]
         [DataRow("""record BaseRec(int I); record DerivedRec(int I): BaseRec($$I++$$);""", SyntaxKindEx.PrimaryConstructorBaseType)]
