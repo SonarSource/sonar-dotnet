@@ -26,7 +26,7 @@ namespace SonarAnalyzer.TestFramework.MetadataReferences;
 
 internal static class WindowsFormsMetadataReference
 {
-    internal static MetadataReference SystemWindowsForms { get; } = Create(typeof(System.Windows.Forms.Application));
+    internal static MetadataReference SystemWindowsForms { get; } = CreateReference("System.Windows.Forms.dll", Sdk.WindowsDesktop);
 }
 
 #endif

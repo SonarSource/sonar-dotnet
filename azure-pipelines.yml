@@ -230,22 +230,22 @@ stages:
             CoverageArtifactName: 'DotNetCoverageNet7'
             TestResultsArtifactName: 'DotNetTestResultsNet7'
             ProjectFilePath: 'tests\SonarAnalyzer.Test\SonarAnalyzer.Test.csproj'
-            FrameworkMoniker: 'net7.0-windows'
+            FrameworkMoniker: 'net7.0'
           Net80:
             CoverageArtifactName: 'DotNetCoverageNet8'
             TestResultsArtifactName: 'DotNetTestResultsNet8'
             ProjectFilePath: 'tests\SonarAnalyzer.Net8.Test\SonarAnalyzer.Net8.Test.csproj'
-            FrameworkMoniker: 'net8.0-windows'
+            FrameworkMoniker: 'net8.0'
           Styling:
             CoverageArtifactName: 'DotNetCoverageStyling'
             TestResultsArtifactName: 'DotNetTestResultsStyling'
             ProjectFilePath: 'tests\SonarAnalyzer.CSharp.Styling.Test\SonarAnalyzer.CSharp.Styling.Test.csproj'
-            FrameworkMoniker: 'net8.0-windows'
+            FrameworkMoniker: 'net8.0'
           TestFrameworkNet70:
             CoverageArtifactName: 'DotNetCoverageTestFrameworkNet70'
             TestResultsArtifactName: 'DotNetTestResultsTestFrameworkNet70'
             ProjectFilePath: 'tests\SonarAnalyzer.TestFramework.Test\SonarAnalyzer.TestFramework.Test.csproj'
-            FrameworkMoniker: 'net7.0-windows'
+            FrameworkMoniker: 'net7.0'
           TestFrameworkNet48:
             CoverageArtifactName: 'DotNetCoverageTestFrameworkNet48'
             TestResultsArtifactName: 'DotNetTestResultsTestFrameworkNet48'
@@ -255,7 +255,7 @@ stages:
             CoverageArtifactName: 'ITs.JsonParserCoverage'
             TestResultsArtifactName: 'ITs.JsonParserResults'
             ProjectFilePath: 'tests\ITs.JsonParser.Test\ITs.JsonParser.Test.csproj'
-            FrameworkMoniker: 'net8.0-windows'
+            FrameworkMoniker: 'net8.0'
 
       steps:
       - task: DownloadPipelineArtifact@2
