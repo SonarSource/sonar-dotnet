@@ -28,4 +28,16 @@ public class C
         void VoidMethod() { }
         Task VoidMethodAsync() => null;
     }
+
+    async Task InLocalFunction()
+    {
+        async Task AsyncLocalFunction(C c)
+        {
+            c.ReturnMethod(); // Noncompliant
+        }
+        void LocalFunction(C c)
+        {
+            c.ReturnMethod(); // Compliant
+        }
+    }
 }
