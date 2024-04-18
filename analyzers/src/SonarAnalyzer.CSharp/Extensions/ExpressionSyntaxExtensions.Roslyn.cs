@@ -229,7 +229,9 @@ public static class ExpressionSyntaxExtensions
     /// Returns true if this expression is in some <c>ref</c> keyword context.  If <see langword="true"/> then
     /// <paramref name="refParent"/> will be the node containing the <see langword="ref"/> keyword.
     /// </summary>
-    // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L201
+    /// <remarks>
+    /// Copied from <seealso href="https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L201"/>
+    /// </remarks>
     public static bool IsInRefContext(this ExpressionSyntax expression, out SyntaxNode refParent)
     {
         while (expression?.Parent is ParenthesizedExpressionSyntax or PostfixUnaryExpressionSyntax { RawKind: (int)SyntaxKindEx.SuppressNullableWarningExpression })
