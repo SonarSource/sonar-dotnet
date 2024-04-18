@@ -539,7 +539,7 @@
         }
       }
     },
-    "net7.0": {
+    "net8.0": {
       "FluentAssertions": {
         "type": "Direct",
         "requested": "[6.12.0, )",
