@@ -174,8 +174,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static HashSet<ISymbol> GetUnusedSymbols(CSharpSymbolUsageCollector usageCollector, IEnumerable<ISymbol> removableSymbols) =>
             removableSymbols
                 .Except(usageCollector.UsedSymbols)
-                .Where(symbol => !IsMentionedInDebuggerDisplay(symbol, usageCollector))
-                .Where(x => !IsAccessorUsed(x, usageCollector))
+                .Where(symbol => !IsMentionedInDebuggerDisplay(symbol, usageCollector) && !IsAccessorUsed(symbol, usageCollector))
                 .ToHashSet();
 
         private static IEnumerable<Diagnostic> GetDiagnosticsForUnreadFields(IEnumerable<SymbolUsage> unreadFields) =>
