@@ -138,9 +138,9 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     {
         // MMF-2297: Test Code as 1st Class Citizen is not ready on server side yet.
         // ScannerRun: Only utility rules and rules with TEST-ONLY scope are executed for test projects for now.
-        // SonarLint & Standalone NuGet: Respect the scope as before.
+        // SonarLint & Standalone NuGet & Internal styling rules Txxxx: Respect the scope as before.
         return IsTestProject()
-            ? ContainsTag(TestSourceScopeTag) && !(ProjectConfiguration().IsScannerRun && ContainsTag(MainSourceScopeTag) && !ContainsTag(UtilityTag))
+            ? ContainsTag(TestSourceScopeTag) && !(descriptor.Id.StartsWith("S") && ProjectConfiguration().IsScannerRun && ContainsTag(MainSourceScopeTag) && !ContainsTag(UtilityTag))
             : ContainsTag(MainSourceScopeTag);
 
         bool ContainsTag(string tag) =>

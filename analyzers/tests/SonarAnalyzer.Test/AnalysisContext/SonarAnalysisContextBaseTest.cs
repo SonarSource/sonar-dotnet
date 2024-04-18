@@ -29,6 +29,7 @@ public partial class SonarAnalysisContextBaseTest
     private const string TestTag = "TestSourceScope";
     private const string UtilityTag = "Utility";
     private const string DummyID = "Sxxx";
+    private const string StyleID = "Txxx";
 
     public TestContext TestContext { get; set; }
 
@@ -47,28 +48,37 @@ public partial class SonarAnalysisContextBaseTest
     [DataRow(false, ProjectType.Test, MainTag, MainTag)]
     public void HasMatchingScope_SingleDiagnostic_WithOneOrMoreScopes_SonarLint(bool expectedResult, ProjectType projectType, params string[] ruleTags)
     {
-        var diagnostic = AnalysisScaffolding.CreateDescriptor(DummyID, ruleTags);
-        CreateSut(projectType, false).HasMatchingScope(diagnostic).Should().Be(expectedResult);
+        var sut = CreateSut(projectType, false);
+        sut.HasMatchingScope(AnalysisScaffolding.CreateDescriptor(DummyID, ruleTags)).Should().Be(expectedResult);
+        sut.HasMatchingScope(AnalysisScaffolding.CreateDescriptor(StyleID, ruleTags)).Should().Be(expectedResult);
     }
 
     [DataTestMethod]
-    [DataRow(true, ProjectType.Product, MainTag)]
-    [DataRow(true, ProjectType.Product, MainTag, UtilityTag)]
-    [DataRow(true, ProjectType.Product, MainTag, TestTag)]
-    [DataRow(true, ProjectType.Product, MainTag, TestTag, UtilityTag)]
-    [DataRow(true, ProjectType.Test, TestTag)]
-    [DataRow(true, ProjectType.Test, TestTag, UtilityTag)]
-    [DataRow(true, ProjectType.Test, MainTag, TestTag, UtilityTag)]     // Utility rules with scope Test&Main do run on test code under scanner context.
-    [DataRow(false, ProjectType.Test, MainTag, TestTag)]                // Rules with scope Test&Main do not run on test code under scanner context for now.
-    [DataRow(false, ProjectType.Product, TestTag)]
-    [DataRow(false, ProjectType.Product, TestTag, UtilityTag)]
-    [DataRow(false, ProjectType.Product, TestTag, TestTag)]
-    [DataRow(false, ProjectType.Test, MainTag)]
-    [DataRow(false, ProjectType.Test, MainTag, UtilityTag)]
-    [DataRow(false, ProjectType.Test, MainTag, MainTag)]
-    public void HasMatchingScope_SingleDiagnostic_WithOneOrMoreScopes_Scanner(bool expectedResult, ProjectType projectType, params string[] ruleTags)
+    [DataRow(true, DummyID, ProjectType.Product, MainTag)]
+    [DataRow(true, StyleID, ProjectType.Product, MainTag)]
+    [DataRow(true, DummyID, ProjectType.Product, MainTag, UtilityTag)]
+    [DataRow(true, DummyID, ProjectType.Product, MainTag, TestTag)]
+    [DataRow(true, StyleID, ProjectType.Product, MainTag, TestTag)]
+    [DataRow(true, DummyID, ProjectType.Product, MainTag, TestTag, UtilityTag)]
+    [DataRow(true, DummyID, ProjectType.Test, TestTag)]
+    [DataRow(true, StyleID, ProjectType.Test, TestTag)]
+    [DataRow(true, DummyID, ProjectType.Test, TestTag, UtilityTag)]
+    [DataRow(true, DummyID, ProjectType.Test, MainTag, TestTag, UtilityTag)]    // Utility rules with scope Test&Main do run on test code under scanner context.
+    [DataRow(false, DummyID, ProjectType.Test, MainTag, TestTag)]               // Rules with scope Test&Main do not run on test code under scanner context for now.
+    [DataRow(true, StyleID, ProjectType.Test, MainTag, TestTag)]                // Style rules with Test&Main scope do run on test code under scanner context
+    [DataRow(false, DummyID, ProjectType.Product, TestTag)]
+    [DataRow(false, StyleID, ProjectType.Product, TestTag)]
+    [DataRow(false, DummyID, ProjectType.Product, TestTag, UtilityTag)]
+    [DataRow(false, DummyID, ProjectType.Product, TestTag, TestTag)]
+    [DataRow(false, StyleID, ProjectType.Product, TestTag, TestTag)]
+    [DataRow(false, DummyID, ProjectType.Test, MainTag)]
+    [DataRow(false, StyleID, ProjectType.Test, MainTag)]
+    [DataRow(false, DummyID, ProjectType.Test, MainTag, UtilityTag)]
+    [DataRow(false, DummyID, ProjectType.Test, MainTag, MainTag)]
+    [DataRow(false, StyleID, ProjectType.Test, MainTag, MainTag)]
+    public void HasMatchingScope_SingleDiagnostic_WithOneOrMoreScopes_Scanner(bool expectedResult, string id, ProjectType projectType, params string[] ruleTags)
     {
-        var diagnostic = AnalysisScaffolding.CreateDescriptor(DummyID, ruleTags);
+        var diagnostic = AnalysisScaffolding.CreateDescriptor(id, ruleTags);
         CreateSut(projectType, true).HasMatchingScope(diagnostic).Should().Be(expectedResult);
     }
 
