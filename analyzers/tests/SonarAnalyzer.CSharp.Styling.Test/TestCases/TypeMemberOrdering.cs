@@ -125,6 +125,19 @@ public class WhenLessMembersAreSwapped
     public class Nested { }
 }
 
+public class InterleavedViolations
+{
+    private int field1;
+    public int Property1 { get; set; }
+    private int field2;                 // Noncompliant {{Move Fields before Properties.}}
+    void Method1() { }
+    public int Property2 { get; set; }  // Noncompliant {{Move Properties after Fields, before Methods.}}
+    void Method2() { }
+    private int field3;                 // Noncompliant {{Move Fields before Properties.}}
+    void Method3() { }
+    public int Property3 { get; set; }  // Noncompliant {{Move Properties after Fields, before Methods.}}
+}
+
 public abstract class AllWrong
 {
     public class Nested { }
