@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ControllersReuseClient : SonarDiagnosticAnalyzer
+public sealed class ControllersReuseClient : ReuseClientBase
 {
     private const string DiagnosticId = "S6962";
     private const string MessageFormat = "FIXME";
@@ -30,14 +30,39 @@ public sealed class ControllersReuseClient : SonarDiagnosticAnalyzer
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
+    protected override ImmutableArray<KnownType> ReusableClients => ImmutableArray.Create(KnownType.System_Net_Http_HttpClient);
+
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
+        context.RegisterCompilationStartAction(compilationStartContext =>
+        {
+            if (!compilationStartContext.Compilation.ReferencesControllers())
             {
-                var node = c.Node;
-                if (true)
+                return;
+            }
+            compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
+            {
+                var symbol = (INamedTypeSymbol)symbolStartContext.Symbol;
+                if (symbol.IsControllerType())
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                    symbolStartContext.RegisterSyntaxNodeAction(nodeContext =>
+                    {
+                        if (IsInPublicMethod(nodeContext.Node)
+                            && !nodeContext.Node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.ConstructorDeclaration, SyntaxKindEx.PrimaryConstructorBaseType))
+                            && IsResuableClient(nodeContext)
+                            && !IsAssignedForReuse(nodeContext))
+                        {
+                            nodeContext.ReportIssue(Rule, nodeContext.Node);
+                        }
+                    }, SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
                 }
-            },
-            SyntaxKind.InvocationExpression);
+            }, SymbolKind.NamedType);
+        });
+
+    private static bool IsInPublicMethod(SyntaxNode node)
+    {
+        var method = node.Ancestors().OfType<MethodDeclarationSyntax>().FirstOrDefault();
+        return method == null
+                || (!method.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.PropertyDeclaration))
+                    && method.Modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword)));
+    }
 }

@@ -20,14 +20,13 @@
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public abstract class ReuseClientBase : SonarDiagnosticAnalyzer
     {
         protected abstract ImmutableArray<KnownType> ReusableClients { get; }
 
         protected static bool IsAssignedForReuse(SonarSyntaxNodeReportingContext context) =>
             !IsInVariableDeclaration(context.Node)
-            && (IsInFieldOrPropertyInitializer(context.Node) || IsAssignedToStaticFieldOrProperty(context));
+            && (IsInConditionalCode(context.Node) || IsInFieldOrPropertyInitializer(context.Node) || IsAssignedToStaticFieldOrProperty(context));
 
         protected bool IsResuableClient(SonarSyntaxNodeReportingContext context)
         {
@@ -39,7 +38,16 @@ namespace SonarAnalyzer.Rules.CSharp
             node.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: LocalDeclarationStatementSyntax or UsingStatementSyntax } } };
 
         private static bool IsInFieldOrPropertyInitializer(SyntaxNode node) =>
-            node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.FieldDeclaration, SyntaxKind.PropertyDeclaration));
+            node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.FieldDeclaration, SyntaxKind.PropertyDeclaration))
+            && !(node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.GetAccessorDeclaration, SyntaxKind.SetAccessorDeclaration))
+                || node.Parent.IsKind(SyntaxKind.ArrowExpressionClause));
+
+        private static bool IsInConditionalCode(SyntaxNode node) =>
+            node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.IfStatement,
+                SyntaxKind.SwitchStatement,
+                SyntaxKindEx.SwitchExpression,
+                SyntaxKind.ConditionalExpression,
+                SyntaxKindEx.CoalesceAssignmentExpression));
 
         private static bool IsAssignedToStaticFieldOrProperty(SonarSyntaxNodeReportingContext context) =>
             context.Node.Parent.WalkUpParentheses() is AssignmentExpressionSyntax assignment

@@ -27,7 +27,33 @@ public class ControllersReuseClientTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<ControllersReuseClient>();
 
+#if NET
+    private static IEnumerable<MetadataReference> AspNetCoreReferences =>
+    [
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
+    ];
+
     [TestMethod]
     public void ControllersReuseClient_CS() =>
-        builder.AddPaths("ControllersReuseClient.cs").Verify();
+        builder
+            .AddReferences(AspNetCoreReferences)
+            .AddReferences(NuGetMetadataReference.SystemNetHttp())
+            .AddReferences(MetadataReferenceFacade.SystemThreadingTasks)
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsHttp())
+            .AddPaths("ControllersReuseClient.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
+    [TestMethod]
+    public void ControllersReuseClient_CS12() =>
+    builder
+        .AddReferences(AspNetCoreReferences)
+        .AddReferences(NuGetMetadataReference.SystemNetHttp())
+        .AddReferences(MetadataReferenceFacade.SystemThreadingTasks)
+        .AddReferences(NuGetMetadataReference.MicrosoftExtensionsHttp())
+        .AddPaths("ControllerReuseClient.CSharp12.cs")
+        .WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+
+#endif
 }
