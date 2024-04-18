@@ -42,7 +42,12 @@
     <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
   </ItemGroup>
 
-  <Target Name="CopyBinaries" AfterTargets="Build">
+  <Target Name="SignDlls" Condition="'$(SignAssembly)' == 'true'">
+    <Message Importance="high" Text="Signing analyzer assembly from $(OutputPath)" />
+    <Exec WorkingDirectory="$(OutputPath)" Command="signtool sign /du https://www.sonarsource.com/ /d &quot;Internal Sonar styling analyzer for C#&quot; /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 /csp &quot;DigiCert Signing Manager KSP&quot; /kc &quot;$(SM_KP)&quot; /f &quot;$(SM_CLIENT_CRT_FILE)&quot; Internal.SonarAnalyzer.CSharp.Styling.dll" />
+  </Target>
+
+  <Target Name="CopyBinaries" AfterTargets="Build" DependsOnTargets="SignDlls">
     <Copy SourceFiles="$(OutputPath)$(TargetFileName)" DestinationFolder="$(BinariesFolderInternal)" />
   </Target>
 
