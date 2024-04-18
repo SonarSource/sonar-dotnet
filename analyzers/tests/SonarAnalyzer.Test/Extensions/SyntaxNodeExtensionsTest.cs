@@ -1207,8 +1207,8 @@ public class X
         [DataRow("""Derived() { $$var x = 42;$$ }""", SyntaxKind.ConstructorDeclaration)]
         [DataRow("""public static implicit operator int(Derived d) => $$42$$;""", SyntaxKind.ConversionOperatorDeclaration)]
         [DataRow("""~Derived() { $$var x = 42;$$ }""", SyntaxKind.DestructorDeclaration)]
-        [DataRow("""int field = $$int.Parse("42")$$;""", SyntaxKind.EqualsValueClause)]
-        [DataRow("""int Property { get; set; } = $$int.Parse("42")$$;""", SyntaxKind.EqualsValueClause)]
+        [DataRow("""int field = $$int.Parse("42")$$;""", SyntaxKind.FieldDeclaration)]
+        [DataRow("""int Property { get; set; } = $$int.Parse("42")$$;""", SyntaxKind.PropertyDeclaration)]
         [DataRow("""int Property { set { $$_ = value;$$ } }""", SyntaxKind.SetAccessorDeclaration)]
         [DataRow("""int Property { set { $$_ = value;$$ } }""", SyntaxKind.SetAccessorDeclaration)]
         [DataRow("""int Method() { return LocalFunction(); int LocalFunction() { $$return 42;$$ } }""", SyntaxKindEx.LocalFunctionStatement)]
@@ -1245,13 +1245,26 @@ public class X
             actual.Should().Be(expectedSyntaxKind);
         }
 
+        [TestMethod]
+        public void EnclosingScope_TopLevelStatements()
+        {
+            var node = NodeBetweenMarkers($$"""
+                using System;
+
+                $$Console.WriteLine("")$$;
+                
+                """, LanguageNames.CSharp);
+            var actual = ExtensionsCS.EnclosingScope(node)?.Kind() ?? SyntaxKind.None;
+            actual.Should().Be(SyntaxKind.CompilationUnit);
+        }
+
         private static SyntaxNode NodeBetweenMarkers(string code, string language, bool getInnermostNodeForTie = false)
         {
             var position = code.IndexOf("$$");
             var lastPosition = code.LastIndexOf("$$");
             var length = lastPosition == position ? 0 : lastPosition - position - "$$".Length;
             code = code.Replace("$$", string.Empty);
-            var (tree, _) = IsCSharp() ? TestHelper.CompileCS(code) : TestHelper.CompileVB(code);
+            var (tree, _) = IsCSharp() ? TestHelper.Compile(code, ignoreErrors: false, AnalyzerLanguage.CSharp, outputKind: OutputKind.ConsoleApplication) : TestHelper.CompileVB(code);
             var node = tree.GetRoot().FindNode(new TextSpan(position, length), getInnermostNodeForTie: getInnermostNodeForTie);
             return node;
 
