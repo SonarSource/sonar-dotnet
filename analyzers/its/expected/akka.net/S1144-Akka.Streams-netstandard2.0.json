@@ -8,63 +8,9 @@
     },
     {
       "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_IsActive\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorPublisher.cs#L386",
-      "Location": "Line 386 Position 37-49"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_Cursor\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorPublisher.cs#L391",
-      "Location": "Line 391 Position 35-47"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_TotalDemand\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorPublisher.cs#L402",
-      "Location": "Line 402 Position 40-52"
-    },
-    {
-      "Id": "S1144",
       "Message": "Remove the unused private method \u0027CreateSubscription\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L36",
       "Location": "Line 36 Position 38-56"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_Self\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L184",
-      "Location": "Line 184 Position 38-50"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_ActiveStage\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L475",
-      "Location": "Line 475 Position 53-65"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_Element\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2537",
-      "Location": "Line 2537 Position 49-61"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private getter \u0027get_FirstElement\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L732",
-      "Location": "Line 732 Position 49-61"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_Buffer\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L110",
-      "Location": "Line 110 Position 37-49"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_Length\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L115",
-      "Location": "Line 115 Position 35-47"
     },
     {
       "Id": "S1144",

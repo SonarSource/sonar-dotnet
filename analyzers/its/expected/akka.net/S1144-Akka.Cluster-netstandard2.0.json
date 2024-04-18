@@ -17,60 +17,6 @@
       "Message": "Remove the unused private method \u0027ClearState\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L1113",
       "Location": "Line 1113 Position 22-32"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_Nodes\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L659",
-      "Location": "Line 659 Position 57-69"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_Settings\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L819",
-      "Location": "Line 819 Position 63-75"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_UsedRouteePaths\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L824",
-      "Location": "Line 824 Position 94-106"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_Settings\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L931",
-      "Location": "Line 931 Position 62-74"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_Unreachable\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L151",
-      "Location": "Line 151 Position 67-79"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_AllMembers\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L162",
-      "Location": "Line 162 Position 61-73"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_Reachability\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L183",
-      "Location": "Line 183 Position 49-61"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_SeenBy\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L185",
-      "Location": "Line 185 Position 56-68"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_Leader\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L118",
-      "Location": "Line 118 Position 38-50"
     }
   ]
 }

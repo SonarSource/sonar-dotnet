@@ -11,30 +11,6 @@
       "Message": "Remove the unused private class \u0027QueueWithAddFirst\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/Internal/BlockingQueue.cs#L145",
       "Location": "Line 145 Position 23-40"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_HalfOpenLatch\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestBreaker.cs#L25",
-      "Location": "Line 25 Position 52-64"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_OpenLatch\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestBreaker.cs#L29",
-      "Location": "Line 29 Position 48-60"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_ClosedLatch\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestBreaker.cs#L33",
-      "Location": "Line 33 Position 50-62"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_Instance\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestBreaker.cs#L37",
-      "Location": "Line 37 Position 47-59"
     }
   ]
 }

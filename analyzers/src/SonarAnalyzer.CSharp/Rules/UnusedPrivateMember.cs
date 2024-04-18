@@ -184,8 +184,8 @@ namespace SonarAnalyzer.Rules.CSharp
             symbol is IMethodSymbol { } accessor
                 && accessor.AssociatedSymbol is IPropertySymbol { } property
                 && usageCollector.PropertyAccess.TryGetValue(property, out var access)
-                && ((access == AccessorAccess.Get && accessor.MethodKind == MethodKind.PropertyGet)
-                    || (access == AccessorAccess.Set && accessor.MethodKind == MethodKind.PropertySet));
+                && ((access is AccessorAccess.Get or AccessorAccess.Both && accessor.MethodKind == MethodKind.PropertyGet)
+                    || (access is AccessorAccess.Set or AccessorAccess.Both && accessor.MethodKind == MethodKind.PropertySet));
 
         private static string GetFieldAccessibilityForMessage(ISymbol symbol) =>
             symbol.DeclaredAccessibility == Accessibility.Private ? SyntaxConstants.Private : "private class";

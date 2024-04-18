@@ -2,12 +2,6 @@
   "Issues": [
     {
       "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_Finished\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L38",
-      "Location": "Line 38 Position 49-61"
-    },
-    {
-      "Id": "S1144",
       "Message": "Remove the unused private setter \u0027set_NextSink\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L39",
       "Location": "Line 39 Position 45-57"

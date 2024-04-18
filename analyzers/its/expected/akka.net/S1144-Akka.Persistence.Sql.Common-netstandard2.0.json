@@ -8,18 +8,6 @@
     },
     {
       "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_SchemaName\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Settings.cs#L105",
-      "Location": "Line 105 Position 41-53"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_TableName\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Settings.cs#L110",
-      "Location": "Line 110 Position 40-52"
-    },
-    {
-      "Id": "S1144",
       "Message": "Remove the unused private method \u0027ToSnapshotEntry\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/SqlSnapshotStore.cs#L224",
       "Location": "Line 224 Position 31-46"

@@ -2,18 +2,6 @@
   "Issues": [
     {
       "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_CallCount\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L105",
-      "Location": "Line 105 Position 41-53"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_WasDisposed\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L161",
-      "Location": "Line 161 Position 44-56"
-    },
-    {
-      "Id": "S1144",
       "Message": "Remove unused constructor of private type \u0027UnboundedStashActor\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L170-L173",
       "Location": "Lines 170-173 Position 13-14"

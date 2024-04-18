@@ -2,12 +2,6 @@
   "Issues": [
     {
       "Id": "S1144",
-      "Message": "Remove the unused private setter \u0027set_Pending\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams.TestKit/TestPublisher.cs#L182",
-      "Location": "Line 182 Position 40-52"
-    },
-    {
-      "Id": "S1144",
       "Message": "Remove the unused private method \u0027Assert\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L516",
       "Location": "Line 516 Position 26-32"
