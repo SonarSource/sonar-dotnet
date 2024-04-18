@@ -23,9 +23,9 @@ using SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]
-public class ApiControllersShouldDeriveFromControllerTest
+public class ApiControllersShouldNotDeriveDirectlyFromControllerTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<ApiControllersShouldDeriveFromController>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<ApiControllersShouldNotDeriveDirectlyFromController>();
 
 #if NET
     private static IEnumerable<MetadataReference> AspNetCoreReferences =>
@@ -36,8 +36,8 @@ public class ApiControllersShouldDeriveFromControllerTest
     ];
 
     [TestMethod]
-    public void ApiControllersShouldDeriveFromController_CS() =>
-        builder.AddReferences(AspNetCoreReferences).AddPaths("ApiControllersShouldDeriveFromController.cs").Verify();
+    public void ApiControllersShouldNotDeriveDirectlyFromController_CS() =>
+        builder.AddReferences(AspNetCoreReferences).AddPaths("ApiControllersShouldNotDeriveDirectlyFromController.cs").Verify();
 
     [DataRow("""View()""")]
     [DataRow("""View("viewName")""")]
@@ -61,7 +61,7 @@ public class ApiControllersShouldDeriveFromControllerTest
     [DataRow("""ViewBag["foo"]""")]
     [DataRow("""TempData["foo"]""")]
     [DataTestMethod]
-    public void ApiControllersShouldDeriveFromController_DoesNotRaiseWithViewFunctionality(string invocation) =>
+    public void ApiControllersShouldNotDeriveDirectlyFromController_DoesNotRaiseWithViewFunctionality(string invocation) =>
         builder.AddReferences(AspNetCoreReferences)
             .AddSnippet($$"""
                 using Microsoft.AspNetCore.Mvc;
@@ -78,7 +78,7 @@ public class ApiControllersShouldDeriveFromControllerTest
     [DataRow("""OnActionExecuted(default(ActionExecutedContext))""")]
     [DataRow("""OnActionExecuting(default(ActionExecutingContext))""")]
     [DataTestMethod]
-    public void ApiControllersShouldDeriveFromController_DoesNotRaiseWithVoidInvocations(string assignment) =>
+    public void ApiControllersShouldNotDeriveDirectlyFromController_DoesNotRaiseWithVoidInvocations(string assignment) =>
     builder.AddReferences(AspNetCoreReferences)
         .AddSnippet($$"""
                 using Microsoft.AspNetCore.Mvc;
@@ -98,7 +98,7 @@ public class ApiControllersShouldDeriveFromControllerTest
     [DataRow("object prop { set => _ = View(); }", DisplayName = "PropertySet")]
     [DataRow("object this[int index] => View()", DisplayName = "Indexer")]
     [DataTestMethod]
-    public void ApiControllersShouldDeriveFromController_DoesNotRaiseInDifferentConstructs(string code) =>
+    public void ApiControllersShouldNotDeriveDirectlyFromController_DoesNotRaiseInDifferentConstructs(string code) =>
         builder.AddReferences(AspNetCoreReferences)
             .AddSnippet($$"""
                 using Microsoft.AspNetCore.Mvc;

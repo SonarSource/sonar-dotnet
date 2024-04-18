@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ApiControllersShouldDeriveFromController : SonarDiagnosticAnalyzer
+public sealed class ApiControllersShouldNotDeriveDirectlyFromController : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6961";
     private const string MessageFormat = "Inherit from ControllerBase instead of Controller.";
@@ -58,7 +58,7 @@ public sealed class ApiControllersShouldDeriveFromController : SonarDiagnosticAn
                 SymbolKind.NamedType);
         });
 
-    private void CheckController(SonarSymbolStartAnalysisContext context)
+    private static void CheckController(SonarSymbolStartAnalysisContext context)
     {
         var controllerSymbol = (INamedTypeSymbol)context.Symbol;
         if (controllerSymbol.IsControllerType()
