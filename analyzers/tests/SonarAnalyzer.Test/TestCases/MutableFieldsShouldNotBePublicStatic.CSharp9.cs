@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Immutable;
@@ -41,5 +42,15 @@ namespace Tests.Diagnostics
         public static ISet<string> iSetInitializaedWithImmutableSet = ImmutableHashSet.Create("a", "b");   // Noncompliant
         public static IList<string> iListInitializaedWithImmutableArray = ImmutableArray.Create("a", "b"); // Noncompliant
         public static IList<string> iListInitializaedWithImmutableList = ImmutableList.Create("a", "b");   // Noncompliant
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8638
+namespace Repro_8638
+{
+    public class FrozenCollections
+    {
+        public static FrozenDictionary<string, string> FrozenDictionaryTest = new Dictionary<string, string>().ToFrozenDictionary(); // Compilant
+        public static FrozenSet<string> FrozenSetTest = new HashSet<string>().ToFrozenSet(); // Compilant
     }
 }

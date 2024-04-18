@@ -25,21 +25,21 @@ namespace SonarAnalyzer.Test.Rules
     [TestClass]
     public class MutableFieldsShouldNotBePublicStaticTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder<MutableFieldsShouldNotBePublicStatic>().AddReferences(NuGetMetadataReference.SystemCollectionsImmutable("1.3.0"));
+        private readonly VerifierBuilder builder = new VerifierBuilder<MutableFieldsShouldNotBePublicStatic>();
 
         [TestMethod]
         public void MutableFieldsShouldNotBePublicStatic() =>
-            builder.AddPaths("MutableFieldsShouldNotBePublicStatic.cs").Verify();
+            builder.AddPaths("MutableFieldsShouldNotBePublicStatic.cs").AddReferences(NuGetMetadataReference.SystemCollectionsImmutable("1.3.0")).Verify();
 
 #if NET
 
         [TestMethod]
         public void MutableFieldsShouldNotBePublicStatic_Csharp9() =>
-            builder.AddPaths("MutableFieldsShouldNotBePublicStatic.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builder.AddPaths("MutableFieldsShouldNotBePublicStatic.CSharp9.cs").AddReferences(MetadataReferenceFacade.SystemCollections).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void MutableFieldsShouldNotBePublicStatic_CSharp10() =>
-            builder.AddPaths("MutableFieldsShouldNotBePublicStatic.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("MutableFieldsShouldNotBePublicStatic.CSharp10.cs").AddReferences(MetadataReferenceFacade.SystemCollections).WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif
 
