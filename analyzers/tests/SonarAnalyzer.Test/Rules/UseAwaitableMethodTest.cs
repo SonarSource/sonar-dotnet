@@ -62,6 +62,15 @@ public class UseAwaitableMethodTest
             """).Verify();
 
     [TestMethod]
+    public void UseAwaitableMethod_Sockets() =>
+        builder
+        .AddReferences(MetadataReferenceFacade.SystemNetPrimitives)
+        .AddReferences(MetadataReferenceFacade.SystemNetSockets)
+        .AddPaths("UseAwaitableMethod_Sockets.cs")
+        .Verify();
+
+#if NET
+    [TestMethod]
     public void UseAwaitableMethod_CSharp9() =>
         builder
         .WithTopLevelStatements()
@@ -75,7 +84,6 @@ public class UseAwaitableMethodTest
         .AddPaths("UseAwaitableMethod_CSharp8.cs")
         .Verify();
 
-#if NET
     [TestMethod]
     public void UseAwaitableMethod_EF() =>
         builder
@@ -87,12 +95,4 @@ public class UseAwaitableMethodTest
         .AddPaths("UseAwaitableMethod_EF.cs")
         .Verify();
 #endif
-
-    [TestMethod]
-    public void UseAwaitableMethod_Sockets() =>
-        builder
-        .AddReferences(MetadataReferenceFacade.SystemNetPrimitives)
-        .AddReferences(MetadataReferenceFacade.SystemNetSockets)
-        .AddPaths("UseAwaitableMethod_Sockets.cs")
-        .Verify();
 }
