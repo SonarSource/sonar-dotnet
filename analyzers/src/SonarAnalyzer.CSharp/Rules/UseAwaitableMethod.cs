@@ -37,22 +37,22 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         {
             // Not every async method is defined in the same class/interface as its non-async counterpart.
             // For example the EntityFrameworkQueryableExtensions.AnyAsync() method provides an async version of the Enumerable.Any() method for IQueryable types.
-            // WellKnownExtensionMethodContainer stores where to look for the async versions of certain methods from a type, e.g. async versions of methods from System.Linq.Enumerable can be found in Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.
+            // WellKnownExtensionMethodContainer stores where to look for the async versions of certain methods from a type, e.g. async versions of methods from
+            // System.Linq.Enumerable can be found in Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.
             var wellKnownExtensionMethodContainer = BuildWellKnownExtensionMethodContainers(compilationStart.Compilation);
             context.RegisterCodeBlockStartAction<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, codeBlockStart =>
             {
                 if (IsAsyncCodeBlock(codeBlockStart.CodeBlock))
                 {
-                    var codeBlock = codeBlockStart.CodeBlock;
                     codeBlockStart.RegisterNodeAction(nodeContext =>
                     {
                         var invocationExpression = (InvocationExpressionSyntax)nodeContext.Node;
 
                         var awaitableAlternatives = FindAwaitableAlternatives(wellKnownExtensionMethodContainer, codeBlockStart.CodeBlock, invocationExpression,
                             nodeContext.SemanticModel, nodeContext.ContainingSymbol, nodeContext.Cancel);
-                        if (awaitableAlternatives.FirstOrDefault() is { } alternative)
+                        if (awaitableAlternatives.FirstOrDefault() is { Name: { } alternative })
                         {
-                            nodeContext.ReportIssue(Rule, invocationExpression, alternative.Name);
+                            nodeContext.ReportIssue(Rule, invocationExpression, alternative);
                         }
                     }, SyntaxKind.InvocationExpression);
                 }
@@ -79,18 +79,6 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         return wellKnownExtensionMethodContainer;
     }
 
-    private static IEnumerable<IMethodSymbol> GetMethodSymbolsInScope(string methodName, WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer,
-        ITypeSymbol invokedType, ITypeSymbol methodContainer) =>
-        ((ITypeSymbol[])[.. invokedType.GetSelfAndBaseTypes(), .. WellKnownExtensionMethodContainer(wellKnownExtensionMethodContainer, methodContainer), methodContainer])
-            .Distinct()
-            .SelectMany(x => x.GetMembers(methodName))
-            .OfType<IMethodSymbol>();
-
-    private static IEnumerable<INamedTypeSymbol> WellKnownExtensionMethodContainer(WellKnownExtensionMethodContainer lookup, ITypeSymbol invokedType) =>
-        lookup.TryGetValue(invokedType, out var extensionMethodContainer)
-        ? extensionMethodContainer
-        : [];
-
     private static ImmutableArray<ISymbol> FindAwaitableAlternatives(WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer, SyntaxNode codeBlock,
         InvocationExpressionSyntax invocationExpression, SemanticModel semanticModel, ISymbol containingSymbol, CancellationToken cancel)
     {
@@ -113,6 +101,18 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         }
         return ImmutableArray<ISymbol>.Empty;
     }
+
+    private static IEnumerable<IMethodSymbol> GetMethodSymbolsInScope(string methodName, WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer,
+        ITypeSymbol invokedType, ITypeSymbol methodContainer) =>
+        ((ITypeSymbol[])[.. invokedType.GetSelfAndBaseTypes(), .. WellKnownExtensionMethodContainer(wellKnownExtensionMethodContainer, methodContainer), methodContainer])
+            .Distinct()
+            .SelectMany(x => x.GetMembers(methodName))
+            .OfType<IMethodSymbol>();
+
+    private static IEnumerable<INamedTypeSymbol> WellKnownExtensionMethodContainer(WellKnownExtensionMethodContainer lookup, ITypeSymbol invokedType) =>
+        lookup.TryGetValue(invokedType, out var extensionMethodContainer)
+            ? extensionMethodContainer
+            : [];
 
     private static IEnumerable<ISymbol> SpeculativeBindCandidates(SemanticModel semanticModel, SyntaxNode codeBlock, SyntaxNode awaitableRoot,
         InvocationExpressionSyntax invocationExpression, IEnumerable<IMethodSymbol> awaitableCandidates) =>
