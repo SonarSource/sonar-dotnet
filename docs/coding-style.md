@@ -19,7 +19,7 @@ Ordering of class members should be the following:
 1. Properties
 1. Constructors
 1. Methods 
-1. Private nested classes
+1. Nested types
 
 Furthermore, each of these categories should be ordered from higher to lower accessibility level (public, internal, protected, private).
 
