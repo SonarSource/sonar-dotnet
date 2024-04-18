@@ -47,7 +47,7 @@ public class ClassShouldNotBeEmptyTest
     [
         AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
         AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
-        AspNetCoreMetadataReference.MicrosoftAspNetCoreRazorPages,
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcRazorPages
     ];
 
     [TestMethod]

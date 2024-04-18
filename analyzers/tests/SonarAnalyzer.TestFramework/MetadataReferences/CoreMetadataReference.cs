@@ -26,10 +26,6 @@ namespace SonarAnalyzer.TestFramework.MetadataReferences;
 
 public static class CoreMetadataReference
 {
-    public static MetadataReference MicrosoftExtensionsHostingAbstractions { get; } = Create(typeof(Microsoft.Extensions.Hosting.IHost));
-    public static MetadataReference MicrosoftExtensionsDependencyInjectionAbstractions { get; } = Create(typeof(Microsoft.Extensions.DependencyInjection.IServiceCollection));
-    public static MetadataReference MicrosoftExtensionsPrimitives { get; } = Create(typeof(Microsoft.Extensions.Primitives.StringValues));
-    public static MetadataReference MicrosoftNetHttpHeadersHeaderNames { get; } = Create(typeof(Microsoft.Net.Http.Headers.HeaderNames));
     public static MetadataReference MicrosoftVisualBasic { get; } = CreateReference("Microsoft.VisualBasic.dll");
     public static MetadataReference MicrosoftVisualBasicCore { get; } = CreateReference("Microsoft.VisualBasic.Core.dll");
     public static MetadataReference MicrosoftWin32Registry { get; } = CreateReference("Microsoft.Win32.Registry.dll");

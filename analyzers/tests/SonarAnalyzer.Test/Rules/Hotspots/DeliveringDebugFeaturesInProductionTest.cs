@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Test.Rules
                 .WithTopLevelStatements()
                 .AddReferences(new[]
                 {
-                    AspNetCoreMetadataReference.MicrosoftAspNetCoreWebHost,
+                    AspNetCoreMetadataReference.MicrosoftAspNetCore,
                     AspNetCoreMetadataReference.MicrosoftAspNetCoreRouting,
                     AspNetCoreMetadataReference.MicrosoftAspNetCoreDiagnostics,
                     AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Test.Rules
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreDiagnostics,
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions,
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
-                CoreMetadataReference.MicrosoftExtensionsHostingAbstractions
+                AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions
             };
 
 #endif

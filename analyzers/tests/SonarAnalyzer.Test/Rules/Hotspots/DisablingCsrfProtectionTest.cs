@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Test.Rules
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
-                CoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions
+                AspNetCoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions
             };
     }
 }

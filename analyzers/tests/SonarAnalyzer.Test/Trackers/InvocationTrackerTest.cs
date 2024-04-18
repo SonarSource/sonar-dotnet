@@ -222,7 +222,7 @@ namespace WebPoc
                                                                                  "MethodName",
                                                                                  AnalyzerLanguage.CSharp,
                                                                                  invocationsToSkip,
-                                                                                 new[] {CoreMetadataReference.MicrosoftExtensionsPrimitives});
+                                                                                 new[] { AspNetCoreMetadataReference.MicrosoftExtensionsPrimitives});
             var sut = new CSharpInvocationTracker();
             sut.IsIHeadersDictionary()(context).Should().Be(expectedValue);
         }
