@@ -49,16 +49,11 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
         [$$$""""[{{{AttributePlaceholder}}}($$"""{{ASlash}}/[action]""")]"""", true, "InterpolatedRawStringLiteralsNotIncludingABackslash"],
     ];
 
-    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.BackslashShouldBeAvoidedInAspNetRoutes>();
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.BackslashShouldBeAvoidedInAspNetRoutes>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.BackslashShouldBeAvoidedInAspNetRoutes>().WithBasePath("AspNet");
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.BackslashShouldBeAvoidedInAspNetRoutes>().WithBasePath("AspNet");
 
     private static IEnumerable<object[]> RouteAttributesWithAllTypesOfStrings =>
         AttributesWithAllTypesOfStrings.Select(x => new object[] { ((string)x[0]).Replace(AttributePlaceholder, "Route"), x[1], x[2] });
-
-    private static IEnumerable<object[]> HttpMethodAttributesWithAllTypesOfStrings =>
-        AttributesWithAllTypesOfStrings.Zip(
-            ["HttpGet", "HttpPost", "HttpPatch", "HttpHead", "HttpDelete", "HttpOptions", "HttpGet", "HttpPost", "HttpPatch", "HttpHead"],
-            (attribute, httpMethod) => new object[] { ((string)attribute[0]).Replace(AttributePlaceholder, httpMethod), attribute[1], attribute[2] });
 
     public static string AttributesWithAllTypesOfStringsDisplayNameProvider(MethodInfo methodInfo, object[] values) =>
         $"{methodInfo.Name}_{(string)values[2]}";
@@ -120,6 +115,11 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
 #endif
 
 #if NET
+    private static IEnumerable<object[]> HttpMethodAttributesWithAllTypesOfStrings =>
+        AttributesWithAllTypesOfStrings.Zip(
+            ["HttpGet", "HttpPost", "HttpPatch", "HttpHead", "HttpDelete", "HttpOptions", "HttpGet", "HttpPost", "HttpPatch", "HttpHead"],
+            (attribute, httpMethod) => new object[] { ((string)attribute[0]).Replace(AttributePlaceholder, httpMethod), attribute[1], attribute[2] });
+
     public static IEnumerable<object[]> AspNetCore2xVersionsUnderTest =>
         [["2.0.4"] /* Latest 2.0.x */, ["2.2.0"] /* 2nd most used */, [Constants.NuGetLatestVersion]];
 

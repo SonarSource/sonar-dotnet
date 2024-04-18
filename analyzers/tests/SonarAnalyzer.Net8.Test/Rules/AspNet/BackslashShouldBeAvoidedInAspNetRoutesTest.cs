@@ -26,8 +26,8 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class BackslashShouldBeAvoidedInAspNetRoutesTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.BackslashShouldBeAvoidedInAspNetRoutes>();
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.BackslashShouldBeAvoidedInAspNetRoutes>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.BackslashShouldBeAvoidedInAspNetRoutes>().WithBasePath("AspNet");
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.BackslashShouldBeAvoidedInAspNetRoutes>().WithBasePath("AspNet");
 
 #if NET
     private static IEnumerable<MetadataReference> AspNetCore8AndAboveReferences => [

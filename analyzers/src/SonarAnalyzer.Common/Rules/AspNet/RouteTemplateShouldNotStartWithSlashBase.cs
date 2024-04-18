@@ -29,11 +29,6 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind>() : 
     private const string MessageOnlyActions = "Change the paths of the actions of this controller to be relative and adapt the controller route accordingly.";
     private const string MessageActionsAndController = "Change the paths of the actions of this controller to be relative and add a controller route with the common prefix.";
 
-    private static readonly ImmutableArray<KnownType> RouteTemplateAttributes = ImmutableArray.Create(
-        KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute,
-        KnownType.Microsoft_AspNetCore_Mvc_RouteAttribute,
-        KnownType.System_Web_Mvc_RouteAttribute);
-
     protected override string MessageFormat => "{0}";
 
     protected override void Initialize(SonarAnalysisContext context) =>
@@ -93,7 +88,7 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind>() : 
         var templates = new Dictionary<Location, string>();
         foreach (var attribute in attributes)
         {
-            if (attribute.GetAttributeRouteTemplate(RouteTemplateAttributes) is { } templateParameter)
+            if (attribute.GetAttributeRouteTemplate(AspNetMvcHelper.RouteTemplateAttributes) is { } templateParameter)
             {
                 templates.Add(attribute.ApplicationSyntaxReference.GetSyntax().GetLocation(), templateParameter);
             }

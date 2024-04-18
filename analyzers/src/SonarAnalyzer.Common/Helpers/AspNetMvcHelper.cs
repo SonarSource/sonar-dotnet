@@ -22,6 +22,12 @@ namespace SonarAnalyzer.Helpers
 {
     public static class AspNetMvcHelper
     {
+        public static readonly ImmutableArray<KnownType> RouteTemplateAttributes =
+            ImmutableArray.Create(
+                KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute,
+                KnownType.Microsoft_AspNetCore_Mvc_RouteAttribute,
+                KnownType.System_Web_Mvc_RouteAttribute);
+
         private static readonly ImmutableArray<KnownType> ControllerTypes =
             ImmutableArray.Create(
                 KnownType.Microsoft_AspNetCore_Mvc_ControllerBase,

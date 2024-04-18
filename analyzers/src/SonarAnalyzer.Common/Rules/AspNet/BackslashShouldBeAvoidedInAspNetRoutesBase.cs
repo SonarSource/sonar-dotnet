@@ -47,7 +47,7 @@ public abstract class BackslashShouldBeAvoidedInAspNetRoutesBase<TSyntaxKind> : 
             && ContainsBackslash(constantRouteTemplate)
             && IsRouteTemplate(c.SemanticModel, c.Node))
         {
-            c.ReportIssue(Diagnostic.Create(Rule, expression.GetLocation()));
+            c.ReportIssue(Rule, expression);
         }
     }
 
