@@ -72,7 +72,7 @@ public static class ISymbolExtensions
         // NOTE: (rather than any OnCompleted method conforming to a certain pattern).
         // NOTE: Should this code be updated to match the spec?
 
-        // void OnCompleted(Action) 
+        // void OnCompleted(Action)
         // Actions are delegates, so we'll just check for delegates.
         if (!methods.Any(x => x.Name == WellKnownMemberNames.OnCompleted && x.ReturnsVoid && x.Parameters is { Length: 1 } parameter && parameter[0] is { Type.TypeKind: TypeKind.Delegate }))
             return false;
