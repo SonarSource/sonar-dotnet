@@ -121,7 +121,7 @@ namespace Ignore
 
     interface IMarker { }                        // Compliant - this rule only deals with classes
 
-    class ImplementsMarker: IMarker { }          // Compliant - implements a marker interface
+    class ImplementsMarker : IMarker { }          // Compliant - implements a marker interface
 
     struct EmptyStruct { }                       // Compliant - this rule only deals with classes
 
@@ -141,29 +141,55 @@ namespace Ignore
 
     class AssemblyDoc { }                        // Compliant, used for DefaultDocumentation tool
     class NamespaceDoc { }                       // compliant, used for DefaultDocumentation tool
+}
 
-    class BaseWithProtectedConstructor
+namespace ConstructorAccessibility
+{
+    public class PublicClassWithPublicConstructor { public PublicClassWithPublicConstructor() { } }
+    public class PublicClassWithInternalConstructor { internal PublicClassWithInternalConstructor() { } }
+    public class PublicClassWithProtectedConstructor { protected PublicClassWithProtectedConstructor() { } }
+    internal class InternalClassWithPublicConstructor { public InternalClassWithPublicConstructor() { } }
+    internal class InternalClassWithInternalConstructor { internal InternalClassWithInternalConstructor() { } }
+    internal class InternalClassWithProtectedConstructor { protected InternalClassWithProtectedConstructor() { } }
+
+    public class ConstructorIsPublicAlready1 : PublicClassWithPublicConstructor { }             // Noncompliant
+    public class WidensConstructorAccessibility1 : PublicClassWithInternalConstructor { }       // Compliant
+    public class WidensConstructorAccessibility2 : PublicClassWithProtectedConstructor { }      // Compliant
+
+    internal class ConstructorIsPublicAlready2 : PublicClassWithPublicConstructor { }           // Noncompliant
+    internal class ConstructorIsInternalAlready1 : PublicClassWithInternalConstructor { }       // Noncompliant
+    internal class WidensConstructorAccessibility3 : PublicClassWithProtectedConstructor { }    // Compliant
+    internal class ConstructorIsInternalAlready2 : InternalClassWithPublicConstructor { }       // Noncompliant
+    internal class ConstructorIsInternalAlready3 : InternalClassWithInternalConstructor { }     // Noncompliant
+    internal class WidensConstructorAccessibility4 : InternalClassWithProtectedConstructor { }  // Compliant
+
+    public class ClassWithNestedClasses
     {
-        protected BaseWithProtectedConstructor() { }
+        protected class ProtectedClassWithPublicConstructor { public ProtectedClassWithPublicConstructor() { } }
+        protected class ProtectedClassWithInternalConstructor { internal ProtectedClassWithInternalConstructor() { } }
+        protected class ProtectedClassWithProtectedConstructor { protected ProtectedClassWithProtectedConstructor() { } }
+        private class PrivateClassWithPublicConstructor { public PrivateClassWithPublicConstructor() { } }
+        private class PrivateClassWithInternalConstructor { internal PrivateClassWithInternalConstructor() { } }
+        private class PrivateClassWithProtectedConstructor { protected PrivateClassWithProtectedConstructor() { } }
+
+        protected class ConstructorIsPublicAlready3 : PublicClassWithPublicConstructor { }              // Noncompliant
+        protected class WidensConstructorAccessibility5 : PublicClassWithInternalConstructor { }        // Compliant
+        protected class ConstructorIsProtectedAlready1 : PublicClassWithProtectedConstructor { }        // Noncompliant
+        protected class ConstructorIsProtectedAlready2 : ProtectedClassWithPublicConstructor { }        // Noncompliant
+        protected class WidensConstructorAccessibility6 : ProtectedClassWithInternalConstructor { }     // Compliant
+        protected class ConstructorIsProtectedAlready3 : ProtectedClassWithProtectedConstructor { }     // Noncompliant
+
+        private class PrivateClass1 : PublicClassWithPublicConstructor { }                              // Noncompliant
+        private class PrivateClass2 : PublicClassWithInternalConstructor { }                            // Noncompliant
+        private class PrivateClass3 : PublicClassWithProtectedConstructor { }                           // Noncompliant
+        private class PrivateClass4 : InternalClassWithPublicConstructor { }                            // Noncompliant
+        private class PrivateClass5 : InternalClassWithInternalConstructor { }                          // Noncompliant
+        private class PrivateClass6 : InternalClassWithProtectedConstructor { }                         // Noncompliant
+        private class PrivateClass7 : ProtectedClassWithPublicConstructor { }                           // Noncompliant
+        private class PrivateClass8 : ProtectedClassWithInternalConstructor { }                         // Noncompliant
+        private class PrivateClass9 : ProtectedClassWithProtectedConstructor { }                        // Noncompliant
+        private class PrivateClass10 : ProtectedClassWithPublicConstructor { }                          // Noncompliant
+        private class PrivateClass11 : ProtectedClassWithInternalConstructor { }                        // Noncompliant
+        private class PrivateClass12 : ProtectedClassWithProtectedConstructor { }                       // Noncompliant
     }
-
-    class WidensConstructorVisibility1 : BaseWithProtectedConstructor { }           // Compliant
-
-    class BaseWithInternalConstructor
-    {
-        internal BaseWithInternalConstructor() { }
-    }
-
-    class WidensConstructorVisibility2 : BaseWithInternalConstructor { }            // Compliant
-
-    class BaseWithPublicConstructor
-    {
-        public BaseWithPublicConstructor() { }
-    }
-
-    class ConstructorIsPublicAlready1 : BaseWithPublicConstructor { }               // Noncompliant
-
-    class BaseWithDefaultConstructor { }                                            // Noncompliant
-
-    class ConstructorIsPublicAlready2 : BaseWithDefaultConstructor { }              // Noncompliant
 }
