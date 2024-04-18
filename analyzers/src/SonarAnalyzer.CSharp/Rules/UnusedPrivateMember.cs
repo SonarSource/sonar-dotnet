@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var fieldLikeSymbols = new BidirectionalDictionary<ISymbol, SyntaxNode>();
             if (GatherSymbols(namedType, context.Compilation, privateSymbols, removableInternalTypes, fieldLikeSymbols, context)
                 && privateSymbols.Any()
-                && new CSharpSymbolUsageCollector(context.Compilation, privateSymbols) is var usageCollector
+                && new CSharpSymbolUsageCollector(context.Compilation, AssociatedSymbols(privateSymbols)) is var usageCollector
                 && VisitDeclaringReferences(namedType, usageCollector, context, includeGeneratedFile: true))
             {
                 foreach (var diagnostic in DiagnosticsForUnusedPrivateMembers(usageCollector, privateSymbols, SyntaxConstants.Private, fieldLikeSymbols))
@@ -97,6 +97,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
         }
+
+        private static IEnumerable<ISymbol> AssociatedSymbols(IEnumerable<ISymbol> privateSymbols) =>
+            privateSymbols.Select(x => x is IMethodSymbol { AssociatedSymbol: IPropertySymbol property } ? property : x);
 
         private static bool GatherSymbols(INamedTypeSymbol namedType,
                                           Compilation compilation,
@@ -184,8 +187,8 @@ namespace SonarAnalyzer.Rules.CSharp
             symbol is IMethodSymbol { } accessor
                 && accessor.AssociatedSymbol is IPropertySymbol { } property
                 && usageCollector.PropertyAccess.TryGetValue(property, out var access)
-                && ((access is AccessorAccess.Get or AccessorAccess.Both && accessor.MethodKind == MethodKind.PropertyGet)
-                    || (access is AccessorAccess.Set or AccessorAccess.Both && accessor.MethodKind == MethodKind.PropertySet));
+                && ((access.HasFlag(AccessorAccess.Get) && accessor.MethodKind == MethodKind.PropertyGet)
+                    || (access.HasFlag(AccessorAccess.Set) && accessor.MethodKind == MethodKind.PropertySet));
 
         private static string GetFieldAccessibilityForMessage(ISymbol symbol) =>
             symbol.DeclaredAccessibility == Accessibility.Private ? SyntaxConstants.Private : "private class";
@@ -436,11 +439,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 base.VisitMethodDeclaration(node);
             }
+
             public override void VisitAccessorDeclaration(AccessorDeclarationSyntax node)
             {
                 if (node.Modifiers.Any(SyntaxKind.PrivateKeyword))
                 {
-                    ConditionalStore(GetDeclaredSymbol(node), IsRemovableMember);
+                    ConditionalStore(GetDeclaredSymbol(node), IsRemovable);
                 }
 
                 base.VisitAccessorDeclaration(node);

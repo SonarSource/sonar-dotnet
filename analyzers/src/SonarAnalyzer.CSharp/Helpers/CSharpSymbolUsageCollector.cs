@@ -159,9 +159,7 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitIdentifierName(IdentifierNameSyntax node)
         {
-            if (IsKnownIdentifier(node.Identifier)
-                || knownSymbolNames.Contains($"get_{node.Identifier.ValueText}")
-                || knownSymbolNames.Contains($"set_{node.Identifier.ValueText}"))
+            if (IsKnownIdentifier(node.Identifier))
             {
                 var symbols = GetSymbols(node);
                 TryStoreFieldAccess(node, symbols);
@@ -248,17 +246,6 @@ namespace SonarAnalyzer.Helpers
                 StorePropertyAccess(symbol, AccessorAccess.Set);
             }
             base.VisitPropertyDeclaration(node);
-        }
-
-        public override void VisitAccessorDeclaration(AccessorDeclarationSyntax node)
-        {
-            if (semanticModel.GetDeclaredSymbol(node) is { } symbol
-                && knownSymbolNames.Contains(symbol.Name))
-            {
-                var usage = GetFieldSymbolUsage(symbol);
-                usage.Declaration = node;
-            }
-            base.VisitAccessorDeclaration(node);
         }
 
         private SymbolAccess ParentAccessType(SyntaxNode node) =>
