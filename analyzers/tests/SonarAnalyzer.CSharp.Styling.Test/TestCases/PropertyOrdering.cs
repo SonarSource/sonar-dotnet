@@ -13,6 +13,9 @@
         get => 42;
     }
 
+    internal static int InternalS { get; }      // Compliant
+    internal int InternalI { get; }
+
     protected static int ProtectedS { get; }    // Compliant
     protected int ProtectedI { get; }
 
@@ -29,7 +32,12 @@ public class SomeValid
     //                ^^
     public int I3 => 42;
 
-    private static int PrivateS { get; }    // Compliant, there's no other private instance one
+    // Compliant, there're no other private/protected/internal instance fields above
+    internal static int InternalS { get; }
+    protected static int ProtectedS { get; }
+    protected internal static int ProtectedInternalS { get; }
+    protected private static int ProtectedPrivateS { get; }
+    private static int PrivateS { get; }
 }
 
 public class ProtectedInternal
@@ -52,6 +60,7 @@ public class AllWrong
     {
         get => 42;
     }
+    internal int InternalI { get; }
     protected int ProtectedI { get; }
     private int PrivateI { get; }
 
@@ -62,6 +71,7 @@ public class AllWrong
         get => 42;
     }
 
+    internal static int InternalS { get; }      // Noncompliant {{Move this static property above the internal instance ones.}}
     private static int PrivateS { get; }        // Noncompliant {{Move this static property above the private instance ones.}}
     protected static int ProtectedS { get; }    // Noncompliant {{Move this static property above the protected instance ones.}}
 }
