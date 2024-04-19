@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Concurrent;
+using static SonarAnalyzer.Helpers.DisjointSetsPrimitives;
 
 namespace SonarAnalyzer.Rules.CSharp;
 
