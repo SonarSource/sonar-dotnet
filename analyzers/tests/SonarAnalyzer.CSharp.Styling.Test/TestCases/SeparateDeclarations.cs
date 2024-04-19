@@ -172,6 +172,13 @@ public class Comments
     /// </summary>
     public class CompliantDocumentationInterrupted { }
 
+    /**
+      * <summary>
+      * There still should be an empty line before the documentation block
+      * </summary>
+      */
+    public class CompliantMultilineDocumentation { }
+
     public class ProblemsStartBelowThisLine { }
     // There still should be empty line before the comment
     public class SingleSingleLine { }       // Noncompliant@-1
@@ -196,6 +203,12 @@ public class Comments
 
     /// </summary>
     public class InterruptedDocumentation { }   // Noncompliant@-4
+    /**
+      * <summary>
+      * There still should be an empty line before the documentation block
+      * </summary>
+      */
+    public class MultilineDocumentation { } // Noncompliant@-5
 }
 
 public class MultiLines

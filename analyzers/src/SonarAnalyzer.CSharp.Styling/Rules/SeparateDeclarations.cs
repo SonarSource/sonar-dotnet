@@ -55,13 +55,13 @@ public sealed class SeparateDeclarations : StylingAnalyzer
         var firstToken = context.Node.GetFirstToken();
         if (firstToken.Line() != context.Node.GetLastToken().Line()
             || firstToken.GetPreviousToken().IsKind(SyntaxKind.CloseBraceToken)
-            || PreviousDeclarationKind(context.Node) != context.Node.Kind())
+            || PreviousDeclarationKind() != context.Node.Kind())
         {
             ValidateSeparatedMember(context);
         }
 
-        SyntaxKind PreviousDeclarationKind(SyntaxNode node) =>
-            context.Node.Parent.ChildNodes().TakeWhile(x => x != node).LastOrDefault() is { } preceding
+        SyntaxKind PreviousDeclarationKind() =>
+            context.Node.Parent.ChildNodes().TakeWhile(x => x != context.Node).LastOrDefault() is { } preceding
                 ? preceding.Kind()
                 : SyntaxKind.None;
     }
