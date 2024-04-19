@@ -29,6 +29,7 @@ public class SwaggerActionReturnTypeTest
     private readonly VerifierBuilder builder = new VerifierBuilder<SwaggerActionReturnType>()
         .WithOptions(ParseOptionsHelper.FromCSharp11)
         .AddReferences(NuGetMetadataReference.SwashbuckleAspNetCoreAnnotations())
+        .AddReferences(NuGetMetadataReference.SwashbuckleAspNetCoreSwagger())
         .AddReferences([
             AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
             AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpResults,

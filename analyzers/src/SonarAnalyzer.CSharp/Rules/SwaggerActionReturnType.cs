@@ -29,6 +29,12 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
     private const string NoTypeMessageFormat = "Use the ProducesResponseType overload containing the return type for successful responses.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    private static readonly ImmutableArray<KnownType> ReturnTypeAttributeTypes = ImmutableArray.Create(
+        KnownType.Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute,
+        KnownType.SwashbuckleAspNetCoreAnnotationsSwaggerResponseAttribute);
+    private static readonly ImmutableArray<KnownType> ControllerActionReturnTypes = ImmutableArray.Create(
+        KnownType.Microsoft_AspNetCore_Mvc_IActionResult,
+        KnownType.Microsoft_AspNetCore_Http_IResult);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -41,26 +47,53 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
                 {
                     if (IsValidCandidate(symbolStart.Symbol))
                     {
-                        return;
+                        symbolStart.RegisterSyntaxNodeAction(nodeContext =>
+                        {
+                            var methodDeclaration = (MethodDeclarationSyntax)nodeContext.Node;
+                            if (InvalidMethodSymbol(methodDeclaration, nodeContext) is { } method)
+                            {
+                                nodeContext.ReportIssue(Rule, methodDeclaration.Identifier.GetLocation(), GetMessage(method));
+                            }
+                        }, SyntaxKind.MethodDeclaration);
                     }
                 }, SymbolKind.NamedType);
             }
         });
 
+    private static IMethodSymbol InvalidMethodSymbol(MethodDeclarationSyntax methodDeclaration, SonarSyntaxNodeReportingContext nodeContext) =>
+        nodeContext.SemanticModel.GetDeclaredSymbol(methodDeclaration, nodeContext.Cancel) is not { } method
+        || !method.IsControllerMethod()
+        || !method.ReturnType.DerivesOrImplementsAny(ControllerActionReturnTypes)
+        || method.GetAttributesWithInherited().Any(x => HasSwaggerResponseAttributeWithReturnType(x) || HasProducesResponseTypeAttributeWithReturnType(x))
+            ? null
+            : method;
+
     private static bool IsValidCandidate(ISymbol symbol)
     {
         var hasApiControllerAttribute = false;
-        var hasProduceResponseTypeAttribute = false;
-        var hasSwaggerResponse = false;
+        var hasReturnTypeAttribute = false;
         foreach (var attribute in symbol.GetAttributesWithInherited())
         {
-            hasApiControllerAttribute |= attribute.AttributeClass.Is(KnownType.System_Web_Http_ApiController);
-            hasProduceResponseTypeAttribute |= attribute.AttributeClass.Is(KnownType.Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute_T);
-            hasProduceResponseTypeAttribute |= attribute.AttributeClass.Is(KnownType.Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute) && ContainsReturnType(attribute);
-            hasSwaggerResponse |= attribute.AttributeClass.Is(KnownType.SwashbuckleAspNetCoreAnnotationsSwaggerResponseAttribute) && ContainsReturnType(attribute);
+            hasApiControllerAttribute = hasApiControllerAttribute || attribute.AttributeClass.Is(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute);
+            hasReturnTypeAttribute = hasReturnTypeAttribute
+                                     || HasProducesResponseTypeAttributeWithReturnType(attribute)
+                                     || HasSwaggerResponseAttributeWithReturnType(attribute);
         }
-        return hasApiControllerAttribute && !hasProduceResponseTypeAttribute && !hasSwaggerResponse;
+        return hasApiControllerAttribute && !hasReturnTypeAttribute;
     }
+
+    private static string GetMessage(ISymbol symbol) =>
+        symbol.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFromAny(ReturnTypeAttributeTypes))
+            ? NoTypeMessageFormat
+            : NoAttributeMessageFormat;
+
+    private static bool HasProducesResponseTypeAttributeWithReturnType(AttributeData attribute) =>
+        attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute_T)
+        || (attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute) && ContainsReturnType(attribute));
+
+    private static bool HasSwaggerResponseAttributeWithReturnType(AttributeData attributeData) =>
+        attributeData.AttributeClass.DerivesFrom(KnownType.SwashbuckleAspNetCoreAnnotationsSwaggerResponseAttribute)
+        && ContainsReturnType(attributeData);
 
     private static bool ContainsReturnType(AttributeData attributeData) =>
         attributeData.ConstructorArguments.Any(x => x.Type.Is(KnownType.System_Type));
