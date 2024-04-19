@@ -23,7 +23,7 @@ namespace SonarAnalyzer.CSharp.Styling.Test.Rules;
 [TestClass]
 public class UseNullInsteadOfDefaultTest
 {
-    private readonly VerifierBuilder builder = StylingVerifierBuilder.Create<UseNullInsteadOfDefault>().WithConcurrentAnalysis(false);
+    private readonly VerifierBuilder builder = StylingVerifierBuilder.Create<UseNullInsteadOfDefault>();
 
     [TestMethod]
     public void UseNullInsteadOfDefault() =>

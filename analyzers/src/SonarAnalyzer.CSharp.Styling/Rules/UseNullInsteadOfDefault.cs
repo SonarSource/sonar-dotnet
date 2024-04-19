@@ -26,8 +26,7 @@ public sealed class UseNullInsteadOfDefault : StylingAnalyzer
     public UseNullInsteadOfDefault() : base("T0012", "Use 'null' instead of 'default' for reference types.") { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(
-            c =>
+        context.RegisterNodeAction(c =>
             {
                 if (IsReferenceType(c.Node, c.SemanticModel))
                 {
@@ -36,9 +35,9 @@ public sealed class UseNullInsteadOfDefault : StylingAnalyzer
             },
             SyntaxKind.DefaultLiteralExpression, SyntaxKind.DefaultExpression);
 
-    private static bool IsReferenceType(SyntaxNode expression, SemanticModel semanticModel)
+    private static bool IsReferenceType(SyntaxNode node, SemanticModel model)
     {
-        var typeInfo = semanticModel.GetTypeInfo(expression);
-        return typeInfo.Type is not IErrorTypeSymbol && ((typeInfo.Type?.IsReferenceType ?? false) || typeInfo.Type.Is(KnownType.System_Nullable_T));
+        var type = model.GetTypeInfo(node).Type;
+        return (type.IsReferenceType && type is not IErrorTypeSymbol) || type.Is(KnownType.System_Nullable_T);
     }
 }
