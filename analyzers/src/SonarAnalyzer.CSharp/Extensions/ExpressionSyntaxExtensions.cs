@@ -97,5 +97,20 @@ namespace SonarAnalyzer.Extensions
 
             return false;
         }
+
+        /// <summary>
+        /// Returns the expression, representing the left side of the dot. This is useful for finding the expression of an invoked expression. <br/>
+        /// For the expression of the invocation <c>M()</c> in the expression <c>this.A.B.M()</c> the member access <c>this.A.B</c> is returned and <br/>
+        /// for <c>this.A?.B?.M()</c> the member binding <c>.B</c> is returned.
+        /// </summary>
+        /// <param name="expression">The expression to start the search of. Should be an MemberAccess or a MemberBinding.</param>
+        /// <returns>The expression left of the dot or question mark dot.</returns>
+        public static ExpressionSyntax GetLeftOfDot(this ExpressionSyntax expression) =>
+            expression switch
+            {
+                MemberAccessExpressionSyntax memberAccessExpression => memberAccessExpression.Expression,
+                MemberBindingExpressionSyntax memberBindingExpression => memberBindingExpression.GetParentConditionalAccessExpression()?.Expression,
+                _ => null,
+            };
     }
 }
