@@ -8,30 +8,32 @@ class UseRegexSafeIsMatchNonCompliant
 
     void InstanceRegex(string content)
     {
-        regex.IsMatch(content); // Noncompliant {{Use the 'RegexExtensions.SafeIsMatch' extension method.}}
-        regex.IsMatch(content, 0); // Noncompliant
-        regex.Matches(content); // Noncompliant {{Use the 'RegexExtensions.SafeMatches' extension method.}}
-        regex.Matches(content, 0); // Noncompliant
-        regex.Match(content); // Noncompliant {{Use the 'RegexExtensions.SafeMatch' extension method.}}
-        regex.Match(content, 0); // Noncompliant
-        realRegex.IsMatch(content); // Noncompliant
-        realRegex.IsMatch(content, 0); // Noncompliant
-        realRegex.Matches(content); // Noncompliant
-        realRegex.Matches(content, 0); // Noncompliant
-        realRegex.Match(content); // Noncompliant
-        realRegex.Match(content, 0); // Noncompliant
-        Regex.IsMatch(content, "pattern"); // Noncompliant {{Use the 'SafeRegex.IsMatch' static method.}}
-        Regex.IsMatch(content, "pattern", RegexOptions.None); // Noncompliant
-        Regex.Matches(content, "pattern"); // Noncompliant {{Use the 'SafeRegex.Matches' static method.}}
-        Regex.Matches(content, "pattern", RegexOptions.None); // Noncompliant
-        Regex.Match(content, "pattern"); // Noncompliant {{Use the 'SafeRegex.Match' static method.}}
-        Regex.Match(content, "pattern", RegexOptions.None); // Noncompliant
-        RealRegex.IsMatch(content, "pattern"); // Noncompliant
-        RealRegex.IsMatch(content, "pattern", RegexOptions.None); // Noncompliant
-        RealRegex.Matches(content, "pattern"); // Noncompliant
-        RealRegex.Matches(content, "pattern", RegexOptions.None); // Noncompliant
-        RealRegex.Match(content, "pattern"); // Noncompliant
-        RealRegex.Match(content, "pattern", RegexOptions.None); // Noncompliant
+        regex.IsMatch(content);                                                // Noncompliant {{Use 'SafeIsMatch' instead.}}
+        //    ^^^^^^^
+        regex.IsMatch(content, 0);                                             // Noncompliant
+        regex.Matches(content);                                                // Noncompliant {{Use 'SafeMatches' instead.}}
+        regex.Matches(content, 0);                                             // Noncompliant
+        regex.Match(content);                                                  // Noncompliant {{Use 'SafeMatch' instead.}}
+        regex.Match(content, 0);                                               // Noncompliant
+        realRegex.IsMatch(content);                                            // Noncompliant
+        realRegex.IsMatch(content, 0);                                         // Noncompliant
+        realRegex.Matches(content);                                            // Noncompliant
+        realRegex.Matches(content, 0);                                         // Noncompliant
+        realRegex.Match(content);                                              // Noncompliant
+        realRegex.Match(content, 0);                                           // Noncompliant
+        Regex.IsMatch(content, "pattern");                          // Noncompliant {{Use 'SafeRegex.IsMatch' instead.}}
+//      ^^^^^^^^^^^^^
+        Regex.IsMatch(content, "pattern", RegexOptions.None);       // Noncompliant
+        Regex.Matches(content, "pattern");                          // Noncompliant {{Use 'SafeRegex.Matches' instead.}}
+        Regex.Matches(content, "pattern", RegexOptions.None);       // Noncompliant
+        Regex.Match(content, "pattern");                            // Noncompliant {{Use 'SafeRegex.Match' instead.}}
+        Regex.Match(content, "pattern", RegexOptions.None);         // Noncompliant
+        RealRegex.IsMatch(content, "pattern");                      // Noncompliant
+        RealRegex.IsMatch(content, "pattern", RegexOptions.None);   // Noncompliant
+        RealRegex.Matches(content, "pattern");                      // Noncompliant
+        RealRegex.Matches(content, "pattern", RegexOptions.None);   // Noncompliant
+        RealRegex.Match(content, "pattern");                        // Noncompliant
+        RealRegex.Match(content, "pattern", RegexOptions.None);     // Noncompliant
     }
 }
 

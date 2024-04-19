@@ -23,17 +23,17 @@ namespace SonarAnalyzer.Rules.CSharp.Styling;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class UseRegexSafeIsMatch : StylingAnalyzer
 {
-    public UseRegexSafeIsMatch() : base("T0004", "Use the '{0}{1}' {2} method.") { }
+    public UseRegexSafeIsMatch() : base("T0004", "Use '{0}{1}' instead.") { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(
-            c =>
+        context.RegisterNodeAction(c =>
             {
-                if (c.Node.NameIs("IsMatch", "Match", "Matches")
-                    && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol method
+                var memberAccess = (MemberAccessExpressionSyntax)c.Node;
+                if (memberAccess.NameIs("IsMatch", "Match", "Matches")
+                    && c.SemanticModel.GetSymbolInfo(memberAccess).Symbol is IMethodSymbol method
                     && method.ContainingType.Is(KnownType.System_Text_RegularExpressions_Regex))
                 {
-                    c.ReportIssue(Rule, c.Node, method.IsStatic ? "SafeRegex." : "RegexExtensions.Safe", c.Node.GetName(), method.IsStatic ? "static" : "extension");
+                    c.ReportIssue(Rule, method.IsStatic ? memberAccess : memberAccess.Name, method.IsStatic ? "SafeRegex." : "Safe", method.Name);
                 }
             },
             SyntaxKind.SimpleMemberAccessExpression);
