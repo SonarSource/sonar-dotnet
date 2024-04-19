@@ -223,6 +223,21 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
             .AddReferences(AspNetCore3AndAboveReferences)
             .Verify();
 
+    [TestMethod]
+    public void BackslashShouldBeAvoidedInAspNetRoutes_AspNetCore8AndAbove_CSharp11() =>
+        builderCS
+            .AddPaths("BackslashShouldBeAvoidedInAspNetRoutes.AspNetCore8AndAbove.CSharp11.cs")
+            .AddReferences(AspNetCore3AndAboveReferences)
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
+
+    [TestMethod]
+    public void BackslashShouldBeAvoidedInAspNetRoutes_AspNetCore8AndAbove_VB() =>
+        builderVB
+            .AddPaths("BackslashShouldBeAvoidedInAspNetRoutes.AspNetCore8AndAbove.vb")
+            .AddReferences(AspNetCore3AndAboveReferences)
+            .Verify();
+
     private static void TestAspNetCoreAttributeDeclaration(VerifierBuilder builder, string attributeDeclaration, bool compliant)
     {
         builder = builder.AddSnippet($$"""
