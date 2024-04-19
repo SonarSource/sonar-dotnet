@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Concurrent;
-using static SonarAnalyzer.Helpers.DisjointSetsPrimitives;
 
 namespace SonarAnalyzer.Rules.CSharp;
 
@@ -87,13 +86,13 @@ public sealed class ControllersHaveTooManyResponsibilities : SonarDiagnosticAnal
 
         symbolStartContext.RegisterSymbolEndAction(symbolEndContext =>
         {
-            var parents = memberNames.ToDictionary(x => x, x => x); // Start with singleton sets
+            var dependencySets = new DisjointSets(memberNames);
             foreach (var dependency in dependencies)
             {
-                Union(parents, dependency.From, dependency.To);
+                dependencySets.Union(dependency.From, dependency.To);
             }
 
-            var responsibilityGroups = DisjointSets(parents);
+            var responsibilityGroups = dependencySets.GetAllSets();
             if (responsibilityGroups.Count > 1)
             {
                 var secondaryLocations = SecondaryLocations(controllerSymbol, responsibilityGroups);
