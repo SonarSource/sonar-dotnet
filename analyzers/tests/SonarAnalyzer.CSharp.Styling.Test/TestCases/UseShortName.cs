@@ -6,7 +6,7 @@ public class Sample
     public void OtherNames(SyntaxNode song, SyntaxTree wood, SemanticModel sculpture, CancellationToken nuke) { }
 
     public void LongName1(SyntaxNode syntaxNode) { }     // Noncompliant {{Use short name 'node'.}}
-    //                              ^^^^^^^^^^
+    //                               ^^^^^^^^^^
     public void LongName2(SyntaxNode prefixedSyntaxNode) { }         // Noncompliant {{Use short name 'prefixedNode'.}}
     public void LongName3(SyntaxNode syntaxNodeCount) { }            // Noncompliant {{Use short name 'nodeCount'.}}
     public void LongName4(SyntaxTree syntaxTree) { }                 // Noncompliant {{Use short name 'tree'.}}
@@ -19,7 +19,7 @@ public class Sample
     private SyntaxTree syntaxTree;              // Noncompliant
     private SemanticModel semanticModel;        // Noncompliant
 
-    public SyntaxNode SyntaxNode { get; }       // Noncompliant {{Use short name 'Node'}}
+    public SyntaxNode SyntaxNode { get; }       // Noncompliant {{Use short name 'Node'.}}
     //                ^^^^^^^^^^
 
     public void TypedDeclarations()
@@ -102,6 +102,31 @@ public class Inherited : Base
 {
     protected override void DoSomething(SyntaxNode syntaxNode) // Compliant so we don't contradict S927
     {
+    }
+}
+
+public interface IInterface
+{
+    void DoSomething(SyntaxNode syntaxNode);    // Noncompliant
+}
+
+public class Implemented : IInterface
+{
+    public void DoSomething(SyntaxNode syntaxNode) // Compliant so we don't contradict S927
+    {
+    }
+}
+
+public partial class Partial
+{
+    public partial void DoSomething(SyntaxNode syntaxNode); // Noncompliant
+}
+
+public partial class Partial
+{
+    public partial void DoSomething(SyntaxNode syntaxNode) // Compliant so we don't contradict S927
+    {
+        // Implementation
     }
 }
 

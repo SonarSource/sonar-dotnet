@@ -23,15 +23,50 @@ namespace SonarAnalyzer.Rules.CSharp.Styling;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class UseShortName : StylingAnalyzer
 {
+    private static readonly RenameInfo[] RenameCandidates =
+        [
+            new("SyntaxNode", "syntaxNode", "node"),
+            new("SyntaxNode", "SyntaxNode", "Node"),
+            new("SyntaxTree", "syntaxTree", "tree"),
+            new("SyntaxTree", "SyntaxTree", "Tree"),
+            new("SemanticModel", "semanticModel", "model"),
+            new("SemanticModel", "SemanticModel", "Model"),
+            new("CancellationToken", "cancellationToken", "cancel"),
+            new("CancellationToken", "CancellationToken", "Cancel")
+        ];
+
     public UseShortName() : base("T0017", "Use short name '{0}'.") { }
 
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(
-            ValidateMembers,
-            SyntaxKind.DeclarationExpression);
-
-    private void ValidateMembers(SonarSyntaxNodeReportingContext context)
+    protected override void Initialize(SonarAnalysisContext context)
     {
-
+        context.RegisterNodeAction(c => ValidateDeclaration(c, ((VariableDeclaratorSyntax)c.Node).Identifier), SyntaxKind.VariableDeclarator);
+        context.RegisterNodeAction(c => ValidateDeclaration(c, ((PropertyDeclarationSyntax)c.Node).Identifier), SyntaxKind.PropertyDeclaration);
+        context.RegisterNodeAction(c =>
+            {
+                if (!FollowsPredefinedName(c.ContainingSymbol))
+                {
+                    ValidateDeclaration(c, ((ParameterSyntax)c.Node).Identifier);
+                }
+            }
+            , SyntaxKind.Parameter);
     }
+
+    private void ValidateDeclaration(SonarSyntaxNodeReportingContext context, SyntaxToken identifier)
+    {
+        if (FindRename(identifier.ValueText) is { } name
+            && context.SemanticModel.GetDeclaredSymbol(context.Node).GetSymbolType() is { } type
+            && type.Name == name.TypeName)
+        {
+            context.ReportIssue(Rule, identifier, identifier.ValueText.Replace(name.UsedName, name.SuggestedName));
+        }
+    }
+
+    private static RenameInfo FindRename(string name) =>
+        Array.Find(RenameCandidates, x => name.Contains(x.UsedName));
+
+    private static bool FollowsPredefinedName(ISymbol symbol) =>
+        symbol is IMethodSymbol method
+        && (symbol.IsOverride || symbol.GetInterfaceMember() is not null || method.PartialDefinitionPart is not null);
+
+    private record RenameInfo(string TypeName, string UsedName, string SuggestedName);
 }
