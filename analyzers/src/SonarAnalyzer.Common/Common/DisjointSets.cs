@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Common;
 
 /// <summary>
-/// Primitives for working with disjoint sets of strings, to perform union-find operations with equality semantics:
+/// Data structure for working with disjoint sets of strings, to perform union-find operations with equality semantics:
 /// i.e. reflexivity, symmetry and transitivity. See https://en.wikipedia.org/wiki/Disjoint-set_data_structure.
 ///
 /// An example of use is to build undirected connected components of dependencies, where each node is the identifier.
@@ -29,14 +29,19 @@ namespace SonarAnalyzer.Helpers;
 /// Uses a dictionary of strings as a backing store. The dictionary represents a forest of trees, where each node is
 /// a string and each tree is a set of nodes.
 /// </summary>
-public static class DisjointSetsPrimitives
+public class DisjointSets
 {
-    public static void Union(IDictionary<string, string> parents, string from, string to) =>
-        parents[FindRoot(parents, from)] = FindRoot(parents, to);
+    private readonly Dictionary<string, string> parents;
 
-    public static string FindRoot(IDictionary<string, string> parents, string element) =>
-        parents[element] is var root && root != element ? FindRoot(parents, root) : root;
+    public DisjointSets(IEnumerable<string> elements) =>
+        parents = elements.ToDictionary(x => x, x => x);
 
-    public static List<List<string>> DisjointSets(IDictionary<string, string> parents) =>
-        parents.GroupBy(x => FindRoot(parents, x.Key), x => x.Key).Select(x => x.OrderBy(x => x).ToList()).OrderBy(x => x[0]).ToList();
+    public void Union(string from, string to) =>
+        parents[FindRoot(from)] = FindRoot(to);
+
+    public string FindRoot(string element) =>
+        parents[element] is var root && root != element ? FindRoot(root) : root;
+
+    public List<List<string>> GetAllSets() =>
+        [.. parents.GroupBy(x => FindRoot(x.Key), x => x.Key).Select(x => x.OrderBy(x => x).ToList()).OrderBy(x => x[0])];
 }
