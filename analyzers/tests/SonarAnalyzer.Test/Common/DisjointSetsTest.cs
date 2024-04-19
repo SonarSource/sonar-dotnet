@@ -14,7 +14,7 @@ public class DisjointSetsTest
         }
 
         sets.Union("1", "1");
-        sets.FindRoot("1").Should().Be("1");                    // Reflexivity
+        sets.FindRoot("1").Should().Be("1");                // Reflexivity
         sets.Union("1", "2");
         sets.FindRoot("1").Should().Be(sets.FindRoot("2")); // Correctness
         sets.Union("1", "2");
