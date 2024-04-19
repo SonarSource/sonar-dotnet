@@ -86,6 +86,8 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute = new("Microsoft.AspNetCore.Mvc.IgnoreAntiforgeryTokenAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_NonActionAttribute = new("Microsoft.AspNetCore.Mvc.NonActionAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_NonControllerAttribute = new("Microsoft.AspNetCore.Mvc.NonControllerAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute = new("Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute_T = new("Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute", "T");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_RazorPages_PageModel = new("Microsoft.AspNetCore.Mvc.RazorPages.PageModel");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_RequestFormLimitsAttribute = new("Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute = new("Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute");
@@ -194,6 +196,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Org_BouncyCastle_Crypto_Generators_DHParametersGenerator = new("Org.BouncyCastle.Crypto.Generators.DHParametersGenerator");
         public static readonly KnownType Org_BouncyCastle_Crypto_Generators_DsaParametersGenerator = new("Org.BouncyCastle.Crypto.Generators.DsaParametersGenerator");
         public static readonly KnownType Org_BouncyCastle_Crypto_Parameters_RsaKeyGenerationParameters = new("Org.BouncyCastle.Crypto.Parameters.RsaKeyGenerationParameters");
+        public static readonly KnownType SwashbuckleAspNetCoreAnnotationsSwaggerResponseAttribute = new("Swashbuckle.AspNetCore.Annotations.SwaggerResponseAttribute");
         public static readonly KnownType Serilog_Events_LogEventLevel = new("Serilog.Events.LogEventLevel");
         public static readonly KnownType Serilog_ILogger = new("Serilog.ILogger");
         public static readonly KnownType Serilog_LoggerConfiguration = new("Serilog.LoggerConfiguration");

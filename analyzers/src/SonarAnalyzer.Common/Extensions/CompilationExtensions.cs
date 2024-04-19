@@ -38,6 +38,9 @@ internal static class CompilationExtensions
             ? Array.Exists(assemblies, x => compilation.References(x))
             : throw new ArgumentException("Assemblies argument needs to be non-empty");
 
+    public static bool ReferencesAll(this Compilation compilation, params KnownAssembly[] assemblies)
+        => Array.TrueForAll(assemblies, x => compilation.References(x));
+
     public static bool References(this Compilation compilation, KnownAssembly assembly)
         => assembly.IsReferencedBy(compilation);
 

@@ -33,12 +33,35 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
+        context.RegisterCompilationStartAction(compilationStart =>
+        {
+            if (compilationStart.Compilation.ReferencesAll(KnownAssembly.MicrosoftAspNetCoreMvcCore, KnownAssembly.SwashbuckleAspNetCoreSwagger))
             {
-                var node = c.Node;
-                if (true)
+                compilationStart.RegisterSymbolStartAction(symbolStart =>
                 {
-                }
-            },
-            SyntaxKind.InvocationExpression);
+                    if (IsValidCandidate(symbolStart.Symbol))
+                    {
+                        return;
+                    }
+                }, SymbolKind.NamedType);
+            }
+        });
+
+    private static bool IsValidCandidate(ISymbol symbol)
+    {
+        var hasApiControllerAttribute = false;
+        var hasProduceResponseTypeAttribute = false;
+        var hasSwaggerResponse = false;
+        foreach (var attribute in symbol.GetAttributesWithInherited())
+        {
+            hasApiControllerAttribute |= attribute.AttributeClass.Is(KnownType.System_Web_Http_ApiController);
+            hasProduceResponseTypeAttribute |= attribute.AttributeClass.Is(KnownType.Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute_T);
+            hasProduceResponseTypeAttribute |= attribute.AttributeClass.Is(KnownType.Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute) && ContainsReturnType(attribute);
+            hasSwaggerResponse |= attribute.AttributeClass.Is(KnownType.SwashbuckleAspNetCoreAnnotationsSwaggerResponseAttribute) && ContainsReturnType(attribute);
+        }
+        return hasApiControllerAttribute && !hasProduceResponseTypeAttribute && !hasSwaggerResponse;
+    }
+
+    private static bool ContainsReturnType(AttributeData attributeData) =>
+        attributeData.ConstructorArguments.Any(x => x.Type.Is(KnownType.System_Type));
 }

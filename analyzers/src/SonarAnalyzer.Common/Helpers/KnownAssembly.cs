@@ -45,6 +45,8 @@ public sealed partial class KnownAssembly
     // Logging assemblies
     public static KnownAssembly MicrosoftExtensionsLoggingAbstractions { get; } = new(NameAndPublicKeyIs("Microsoft.Extensions.Logging.Abstractions", "adb9793829ddae60"));
     public static KnownAssembly Serilog { get; } = new(NameAndPublicKeyIs("Serilog", "24c2f752a8e58a10"));
+    public static KnownAssembly MicrosoftAspNetCoreMvcCore { get; } = new(NameAndPublicKeyIs("Microsoft.AspNetCore.Mvc.Core", "adb9793829ddae60"));
+    public static KnownAssembly SwashbuckleAspNetCoreSwagger { get; } = new(NameAndPublicKeyIs("Swashbuckle.AspNetCore.Swagger", "62657d7474907593"));
     public static KnownAssembly NLog { get; } = new(NameAndPublicKeyIs("NLog", "5120e14c03d0593c"));
     public static KnownAssembly Log4Net { get; } = new(NameIs("log4net").And(PublicKeyTokenIsAny("669e0ddf0bb1aa2a", "1b44e1d426115821")));
     public static KnownAssembly CommonLoggingCore { get; } = new(NameAndPublicKeyIs("Common.Logging.Core", "af08829b84f0328e"));
