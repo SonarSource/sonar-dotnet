@@ -53,8 +53,8 @@ public sealed class UseShortName : StylingAnalyzer
                 {
                     ValidateDeclaration(c, ((ParameterSyntax)c.Node).Identifier);
                 }
-            }
-            , SyntaxKind.Parameter);
+            },
+            SyntaxKind.Parameter);
     }
 
     private void ValidateDeclaration(SonarSyntaxNodeReportingContext context, SyntaxToken identifier)
@@ -74,5 +74,5 @@ public sealed class UseShortName : StylingAnalyzer
         symbol is IMethodSymbol method
         && (symbol.IsOverride || symbol.GetInterfaceMember() is not null || method.PartialDefinitionPart is not null);
 
-    private record RenameInfo(string TypeName, string UsedName, string SuggestedName);
+    private sealed record RenameInfo(string TypeName, string UsedName, string SuggestedName);
 }
