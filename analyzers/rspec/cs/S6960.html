@@ -1,0 +1,237 @@
+<p><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/actions">ASP.NET controllers</a> should not have too many responsibilities.
+Following the <a href="https://en.wikipedia.org/wiki/Single_responsibility_principle">Single Responsibility Principle (SRP)</a>, they should be kept
+lean and <a href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles#separation-of-concerns">focused
+on a single, separate concern</a>. In short, they should have a <em>single reason to change</em>.</p>
+<p>The rule identifies different responsibilities by looking at groups of actions that use different sets of services defined in the controller.</p>
+<p>Basic services that are typically required by most controllers are not considered:</p>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/"><code>ILogger</code></a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Mediator_pattern"><code>IMediator</code></a> </li>
+  <li> <a href="https://medium.com/@sumit.kharche/how-to-integrate-automapper-in-asp-net-core-web-api-b765b5bed35c"><code>IMapper</code></a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/"><code>IConfiguration</code></a> </li>
+  <li> <a href="https://masstransit.io/documentation/configuration#configuration"><code>IBus</code></a> </li>
+  <li> <a href="https://wolverinefx.io/guide/messaging/message-bus.html"><code>IMessageBus</code></a> </li>
+</ul>
+<p>The rule currently applies to ASP.NET Core only, and doesn’t cover <a
+href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/choose-aspnet-framework">ASP.NET MVC 4.x</a>.</p>
+<p>It also only takes into account web APIs controllers, i.e. the ones marked with the <a
+href="https://learn.microsoft.com/en-us/aspnet/core/web-api/#apicontroller-attribute"><code>ApiController</code> attribute</a>. MVC controllers are
+not in scope.</p>
+<h2>Why is this an issue?</h2>
+<p>Multiple issues can appear when the Single Responsibility Principle (SRP) is violated.</p>
+<h3>Harder to read and understand</h3>
+<p>A controller violating SRP is <strong>harder to read and understand</strong> since its Cognitive Complexity is generally above average (see
+{rule:csharpsquid:S3776}).</p>
+<p><em>For example, a controller <code>MediaController</code> that is in charge of both the "movies" and "photos" APIs would need to define all the
+actions dealing with movies, alongside the ones dealing with photos, all defined in the same controller class.</em></p>
+<p><em>The alternative is to define two controllers: a <code>MovieController</code> and a <code>PhotoController</code>, each in charge of a smaller
+number of actions.</em></p>
+<h3>Harder to maintain and modify</h3>
+<p>Such complexity makes the controller <strong>harder to maintain and modify</strong>, slowing down new development and <a
+href="https://arxiv.org/ftp/arxiv/papers/1912/1912.01142.pdf">increasing the likelihood of bugs</a>.</p>
+<p><em>For example, a change in <code>MediaController</code> made for the movies APIs may inadvertently have an impact on the photos APIs as well.
+Because the change was made in the context of movies, tests on photos may be overlooked, resulting in bugs in production.</em></p>
+<p><em>That would not be likely to happen when two distinct controllers, <code>MovieController</code> and a <code>PhotoController</code>, are
+defined.</em></p>
+<h3>Harder to test</h3>
+<p>The controller also becomes <strong>harder to test</strong> since the test suite would need to define a set of tests for each of the
+responsibilities of the controller, resulting in a large and complex test suite.</p>
+<p><em>For example, the <code>MediaController</code> introduced above would need to be tested on all movies-related actions, as well as on all
+photos-related actions.</em></p>
+<p><em>All those tests would be defined in the same test suite for <code>MediaController</code>, which would be affected by the same issues of
+cognitive complexity as the controller under test by the suite.</em></p>
+<h3>Harder to reuse</h3>
+<p>A controller that has multiple responsibilities is <strong>less likely to be reusable</strong>. Lack of reuse can result in code duplication.</p>
+<p><em>For example, when a new controller wants to derive from an existing one, it’s less probable that the new controller requires all the behaviors
+exposed by the reused controller.</em></p>
+<p><em>Rather, it’s much more common that the new controller only needs to reuse a fraction of the existing one. When reuse is not possible, the only
+valid alternative is to duplicate part of the logic in the new controller.</em></p>
+<h3>Higher likelihood of performance issues</h3>
+<p>A controller that has multiple responsibilities may end up doing more than strictly necessary, resulting in a <strong>higher likelihood of
+performance issues</strong>.</p>
+<p>To understand why, it’s important to consider the difference between ASP.NET application vs non-ASP.NET applications.</p>
+<p>In a non-ASP.NET application, controllers may be defined as <a href="https://en.wikipedia.org/wiki/Singleton_pattern">Singletons</a> via a <a
+href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection">Dependency Injection</a> library.</p>
+<p>In such a scenario, they would typically be instantiated only once, lazily or eagerly, at application startup.</p>
+<p>In ASP.NET applications, however, the default is that controllers are instantiated <em>as many times as the number of requests that are served by
+the web server</em>. Each instance of the controller would need to resolve services independently.</p>
+<p>While <strong>service instantiation</strong> is typically handled at application startup, <strong>service resolution</strong> happens every time an
+instance of controller needs to be built, for each service declared in the controller.</p>
+<p>Whether the resolution is done via Dependency Injection, direct static access (in the case of a Singleton), or a <a
+href="https://en.wikipedia.org/wiki/Service_locator_pattern">Service Locator</a>, the cost of resolution needs to be paid at every single
+instantiation.</p>
+<p><em>For example, the movies-related APIs of the <code>MediaController</code> mentioned above may require the instantiation of an
+<code>IStreamingService</code>, typically done via <a
+href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection">dependency injection</a>. Such a service may not be relevant
+for photos-related APIs.</em></p>
+<p><em>Similarly, some of the photos-related APIs may require the instantiation of an <code>IRedEyeRemovalService</code>, which may not work at all
+with movies.</em></p>
+<p><em>Having a single controller would force the developer to deal with both instantiations, even though a given instance of the controller may be
+used only for photos, or only for movies.</em></p>
+<h3>More complex routing</h3>
+<p>A controller that deals with multiple concerns often has unnecessarily complex routing: the route template at controller level cannot factorize the
+route identifying the concern, so the full route template needs to be defined at the action level.</p>
+<p><em>For example, the <code>MediaController</code> would have an empty route (or equivalent, e.g. <code>/</code> or <code>~/</code>) and the actions
+would need to define themselves the <code>movie</code> or <code>photo</code> prefix, depending on the type of media they deal with.</em></p>
+<p><em>On the other hand, <code>MovieController</code> and <code>PhotoController</code> can factorize the <code>movie</code> and <code>photo</code>
+route respectively, so that the route on the action would only contain action-specific information.</em></p>
+<h3>What is the potential impact?</h3>
+<p>As the size and the responsibilities of the controller increase, the issues that come with such an increase will have a further impact on the
+code.</p>
+<ul>
+  <li> The increased complexity of reading and understanding the code may require the introduction of <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/preprocessor-directives#defining-regions">regions</a> or <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/partial-classes-and-methods">partial classes</a>, to be
+  able to visually separate the actions related to the different concerns. Those are patches, that don’t address the underlying issue. </li>
+  <li> The increased complexity to maintain and modify will not give incentives to keep the architecture clean, leading to a <strong>more tightly
+  coupled and less modular system</strong>. </li>
+  <li> The reduced reusability of the code may bring <strong>code duplication</strong>, which breaks the <a
+  href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles#dont-repeat-yourself-dry">Don’t repeat
+  yourself (DRY)</a> principle and which itself comes with a whole lot of issues, such as <strong>lack of maintainability and consistency</strong>.
+  </li>
+  <li> The performance penalty of conflating multiple responsibilities into a single controller may induce the use of techniques such as lazy service
+  resolution (you can find an example of this approach <a
+  href="https://medium.com/@jayeshtambe/lazy-t-in-dependency-injection-with-c-net-core-c418cc80cd13">here</a>). Those <strong>increase the
+  complexity</strong> of the code and make the <strong>runtime behavior less predictable</strong>. </li>
+</ul>
+<h3>Why MVC controllers are not in scope</h3>
+<p>Alongside <a href="https://learn.microsoft.com/en-us/aspnet/web-api/overview/web-api-routing-and-actions/attribute-routing-in-web-api-2">attribute
+routing</a>, which is typical of web APIs, MVC controllers also come with [conventional routing].</p>
+<p>In MVC, the file structure of controllers is important, since it drives <a
+href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/routing#conventional-routing">conventional routing</a>, which is specific to MVC,
+as well as <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/overview#how-controllers-specify-views">default view mapping</a>.</p>
+<p>For those reasons, splitting an MVC controller into smaller pieces may break core behaviors of the web application such as routing and views,
+triggering a large refactor of the whole project.</p>
+<h2>How to fix it in ASP.NET Core</h2>
+<p>Split the controller into multiple controllers, each dealing with a single responsibility.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+[Route("media")]
+public class MediaController( // Noncompliant: This controller has multiple responsibilities and could be split into 2 smaller units.
+    // Used by all actions
+    ILogger&lt;MediaController&gt; logger,
+    // Movie-specific dependencies
+    IStreamingService streamingService, ISubtitlesService subtitlesService,
+    // Photo-specific dependencies
+    IRedEyeRemovalService redEyeRemovalService, IPhotoEnhancementService photoEnhancementService) : Controller
+{
+    [Route("movie/stream")]
+    public IActionResult MovieStream([FromQuery] StreamRequest request) // Belongs to responsibility #1.
+    {
+        logger.LogInformation("Requesting movie stream for {MovieId}", request.MovieId);
+        return File(streamingService.GetStream(request.MovieId), "video/mp4");
+    }
+
+    [Route("movie/subtitles")]
+    public IActionResult MovieSubtitles([FromQuery] SubtitlesRequest request) // Belongs to responsibility #1.
+    {
+        logger.LogInformation("Requesting movie subtitles for {MovieId}", request.MovieId);
+        return File(subtitlesService.GetSubtitles(request.MovieId, request.Language), "text/vtt");
+    }
+
+    [Route("photo/remove-red-eye")]
+    public IActionResult RemoveRedEye([FromQuery] RedEyeRemovalRequest request) // Belongs to responsibility #2.
+    {
+        logger.LogInformation("Removing red-eye from photo {PhotoId}", request.PhotoId);
+        return File(redEyeRemovalService.RemoveRedEye(request.PhotoId, request.Sensitivity), "image/jpeg");
+    }
+
+    [Route("photo/enhance")]
+    public IActionResult EnhancePhoto([FromQuery] PhotoEnhancementRequest request) // Belongs to responsibility #2.
+    {
+        logger.LogInformation("Enhancing photo {PhotoId}", request.PhotoId);
+        return File(photoEnhancementService.EnhancePhoto(request.PhotoId, request.ColorGrading), "image/jpeg");
+    }
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+[Route("media/[controller]")]
+public class MovieController(
+    ILogger&lt;MovieController&gt; logger,
+    IStreamingService streamingService, ISubtitlesService subtitlesService) : Controller
+{
+    [Route("stream")]
+    public IActionResult MovieStream([FromQuery] StreamRequest request)
+    {
+        logger.LogInformation("Requesting movie stream for {MovieId}", request.MovieId);
+        return File(streamingService.GetStream(request.MovieId), "video/mp4");
+    }
+
+    [Route("subtitles")]
+    public IActionResult MovieSubtitles([FromQuery] SubtitlesRequest request)
+    {
+        logger.LogInformation("Requesting movie subtitles for {MovieId}", request.MovieId);
+        return File(subtitlesService.GetSubtitles(request.MovieId, request.Language), "text/vtt");
+    }
+}
+
+[Route("media/[controller]")]
+public class PhotoController(
+    ILogger&lt;PhotoController&gt; logger,
+    IRedEyeRemovalService redEyeRemovalService, IPhotoEnhancementService photoEnhancementService) : Controller
+{
+    [Route("remove-red-eye")]
+    public IActionResult RemoveRedEye([FromQuery] RedEyeRemovalRequest request)
+    {
+        logger.LogInformation("Removing red-eye from photo {PhotoId}", request.PhotoId);
+        return File(redEyeRemovalService.RemoveRedEye(request.PhotoId, request.Sensitivity), "image/jpeg");
+    }
+
+    [Route("enhance")]
+    public IActionResult EnhancePhoto([FromQuery] PhotoEnhancementRequest request)
+    {
+        logger.LogInformation("Enhancing photo {PhotoId}", request.PhotoId);
+        return File(photoEnhancementService.EnhancePhoto(request.PhotoId, request.ColorGrading), "image/jpeg");
+    }
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/#apicontroller-attribute">Create web APIs with ASP.NET Core:
+  <code>ApiController</code> attribute</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/web-api/overview/web-api-routing-and-actions/">Web API Routing</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles#separation-of-concerns">Architectural
+  principles: Separation of concerns</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles#single-responsibility">Architectural
+  principles: Single responsibility</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/actions">ASP.NET Core: Handle requests with
+  controllers in ASP.NET Core MVC</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/archive/msdn-magazine/2014/may/csharp-best-practices-dangers-of-violating-solid-principles-in-csharp#the-single-responsibility-principle">C# Best Practices: Dangers of Violating SOLID Principles in C#</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/choose-aspnet-framework">Choose between ASP.NET 4.x and
+  ASP.NET Core</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection">Dependency injection in ASP.NET
+  Core</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/microservice-application-layer-implementation-web-api#implement-the-command-process-pipeline-with-a-mediator-pattern-mediatr">Implement the command process pipeline with a mediator pattern (MediatR)</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.lazy-1">Lazy&lt;T&gt; Class</a> </li>
+  <li> MassTransit - <a href="https://masstransit.io/documentation/concepts">Concepts</a> </li>
+  <li> Sonar - <a href="https://www.sonarsource.com/docs/CognitiveComplexity.pdf">Cognitive Complexity</a> </li>
+  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Single_responsibility_principle">Single responsibility principle</a> </li>
+  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Mediator_pattern">Mediator pattern</a> </li>
+  <li> Wolverine - <a href="https://wolverinefx.io/tutorials/getting-started.html">Getting Started</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> Sonar Blog - <a href="https://www.sonarsource.com/blog/5-clean-code-tips-for-reducing-cognitive-complexity/">5 Clean Code Tips for Reducing
+  Cognitive Complexity</a> </li>
+  <li> Medium - <a href="https://medium.com/@jayeshtambe/lazy-t-in-dependency-injection-with-c-net-core-c418cc80cd13">Lazy&lt;T&gt; in Dependency
+  Injection with C# .Net Core</a> </li>
+  <li> Medium - <a href="https://medium.com/@sumit.kharche/how-to-integrate-automapper-in-asp-net-core-web-api-b765b5bed35c">How to integrate
+  AutoMapper in ASP.NET Core Web API</a> </li>
+</ul>
+<h3>Conference presentations</h3>
+<ul>
+  <li> Cornell University arxiv.org - <a href="https://arxiv.org/ftp/arxiv/papers/1912/1912.01142.pdf">Cgabgqi Chen: An Empirical Investigation of
+  Correlation between Code Complexity and Bugs</a> </li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li> {rule:csharpsquid:S3776} - Cognitive Complexity of functions should not be too high </li>
+</ul>
+
