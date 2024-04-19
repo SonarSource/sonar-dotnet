@@ -60,9 +60,9 @@ public sealed class ControllersHaveTooManyResponsibilities : SonarDiagnosticAnal
             }
         });
 
-    private static void CheckApiController(SonarSymbolStartAnalysisContext symbolStartContext, INamedTypeSymbol symbol)
+    private static void CheckApiController(SonarSymbolStartAnalysisContext symbolStartContext, INamedTypeSymbol controllerSymbol)
     {
-        var memberNames = RelevantMemberNames(symbol);
+        var memberNames = RelevantMemberNames(controllerSymbol);
 
         if (memberNames.Count < 2)
         {
@@ -93,14 +93,18 @@ public sealed class ControllersHaveTooManyResponsibilities : SonarDiagnosticAnal
                 Union(parents, dependency.From, dependency.To);
             }
 
-            var disjointSets = DisjointSets(parents);
-            if (disjointSets.Count > 1)
+            var responsibilityGroups = DisjointSets(parents);
+            if (responsibilityGroups.Count > 1)
             {
-                var secondaryLocations = SecondaryLocations(symbol, disjointSets);
-                foreach (var primaryLocation in LocationIdentifiers<ClassDeclarationSyntax>(symbol))
+                var secondaryLocations = SecondaryLocations(controllerSymbol, responsibilityGroups);
+                foreach (var primaryLocation in LocationIdentifiers<ClassDeclarationSyntax>(controllerSymbol))
                 {
-                    var diagnostic = Diagnostic.Create(Rule, primaryLocation, secondaryLocations.ToAdditionalLocations(), secondaryLocations.ToProperties(), disjointSets.Count);
-                    symbolEndContext.ReportIssue(CSharpFacade.Instance.GeneratedCodeRecognizer, diagnostic);
+                    symbolEndContext.ReportIssue(Diagnostic.Create(
+                        Rule,
+                        primaryLocation,
+                        secondaryLocations.ToAdditionalLocations(),
+                        secondaryLocations.ToProperties(),
+                        responsibilityGroups.Count));
                 }
             }
         });
@@ -133,6 +137,7 @@ public sealed class ControllersHaveTooManyResponsibilities : SonarDiagnosticAnal
                 case IMethodSymbol method when method.IsPrimaryConstructor():
                     builder.UnionWith(method.Parameters.Where(IsService).Select(x => x.Name));
                     break;
+                // Backing fields are excluded for auto-properties, since they are considered part of the property
                 case IFieldSymbol field when IsService(field) && !field.IsImplicitlyDeclared:
                     builder.Add(field.Name);
                     break;
@@ -150,14 +155,17 @@ public sealed class ControllersHaveTooManyResponsibilities : SonarDiagnosticAnal
 
     private static IEnumerable<SecondaryLocation> SecondaryLocations(INamedTypeSymbol controllerSymbol, List<List<string>> sets)
     {
-        var methods = controllerSymbol.GetMembers().OfType<IMethodSymbol>();
-        return
-            from set in sets.Zip(Enumerable.Range(1, sets.Count), (set, setIndex) => new { Set = set, SetIndex = setIndex })
-            let setIndex = set.SetIndex
-            from memberName in set.Set
-            from method in methods.Where(x => x.Name == memberName)
-            from location in LocationIdentifiers<MethodDeclarationSyntax>(method)
-            select new SecondaryLocation(location, $"Belongs to responsibility #{setIndex}.");
+        var methods = controllerSymbol.GetMembers().OfType<IMethodSymbol>().ToList();
+        for (var setIndex = 0; setIndex < sets.Count; setIndex++)
+        {
+            foreach (var memberLocation in sets[setIndex].SelectMany(MemberLocations))
+            {
+                yield return new SecondaryLocation(memberLocation, $"Belongs to responsibility #{setIndex + 1}.");
+            }
+        }
+
+        IEnumerable<Location> MemberLocations(string memberName) =>
+            methods.Where(x => x.Name == memberName).SelectMany(LocationIdentifiers<MethodDeclarationSyntax>);
     }
 
     private record struct Dependency(string From, string To);

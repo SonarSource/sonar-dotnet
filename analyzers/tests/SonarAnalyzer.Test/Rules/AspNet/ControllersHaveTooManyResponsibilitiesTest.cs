@@ -29,22 +29,20 @@ namespace SonarAnalyzer.Test.Rules;
 public class ControllersHaveTooManyResponsibilitiesTest
 {
     private readonly VerifierBuilder builder =
-        new VerifierBuilder<ControllersHaveTooManyResponsibilities>();
+        new VerifierBuilder<ControllersHaveTooManyResponsibilities>().AddReferences(References).WithBasePath("AspNet");
 
-    private static IEnumerable<MetadataReference> AspNetCoreReferences =>
+    private static IEnumerable<MetadataReference> References =>
     [
         AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
         AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
         AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
+        CoreMetadataReference.SystemComponentModel, // For IServiceProvider
+        .. NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions("8.0.1"), // For IServiceProvider extensions
     ];
 
     [TestMethod]
     public void ControllersHaveTooManyResponsibilities_CS() =>
         builder
-            .AddReferences(AspNetCoreReferences)
-            .AddReferences([CoreMetadataReference.SystemComponentModel]) // For IServiceProvider
-            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions("8.0.1")) // For IServiceProvider extensions
-            .WithBasePath("AspNet")
             .AddPaths("ControllersHaveTooManyResponsibilities.CSharp12.cs")
             .WithLanguageVersion(LanguageVersion.CSharp12)
             .Verify();
