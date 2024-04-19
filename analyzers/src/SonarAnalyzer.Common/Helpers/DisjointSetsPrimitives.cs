@@ -20,6 +20,15 @@
 
 namespace SonarAnalyzer.Helpers;
 
+/// <summary>
+/// Primitives for working with disjoint sets of strings, to perform union-find operations with equality semantics:
+/// i.e. reflexivity, symmetry and transitivity. See https://en.wikipedia.org/wiki/Disjoint-set_data_structure.
+///
+/// An example of use is to build undirected connected components of dependencies, where each node is the identifier.
+///
+/// Uses a dictionary of strings as a backing store. The dictionary represents a forest of trees, where each node is
+/// a string and each tree is a set of nodes.
+/// </summary>
 public static class DisjointSetsPrimitives
 {
     public static void Union(IDictionary<string, string> parents, string from, string to) =>

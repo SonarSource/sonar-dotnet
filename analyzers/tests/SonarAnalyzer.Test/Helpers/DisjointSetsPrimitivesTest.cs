@@ -37,21 +37,21 @@ public class DisjointSetsPrimitivesTest
     public void DisjointSetsAndUnion_AreConsistent()
     {
         var parents = Enumerable.Range(1, 5).ToDictionary(i => i.ToString(), i => i.ToString());
-        DisjointSets(parents).Should().BeEquivalentTo<List<string>>([["1"], ["2"], ["3"], ["4"], ["5"]]); // Initial state
+        DisjointSetShouldBe([["1"], ["2"], ["3"], ["4"], ["5"]], parents); // Initial state
         Union(parents, "1", "2");
-        DisjointSets(parents).Should().BeEquivalentTo<List<string>>([["1", "2"], ["3"], ["4"], ["5"]]);   // Correctness
+        DisjointSetShouldBe([["1", "2"], ["3"], ["4"], ["5"]], parents);   // Correctness
         Union(parents, "1", "2");
-        DisjointSets(parents).Should().BeEquivalentTo<List<string>>([["1", "2"], ["3"], ["4"], ["5"]]);   // Idempotency
+        DisjointSetShouldBe([["1", "2"], ["3"], ["4"], ["5"]], parents);   // Idempotency
 
         Union(parents, "2", "3");
-        DisjointSets(parents).Should().BeEquivalentTo<List<string>>([["1", "2", "3"], ["4"], ["5"]]);
+        DisjointSetShouldBe([["1", "2", "3"], ["4"], ["5"]], parents);     // Transitivity
         Union(parents, "1", "3");
-        DisjointSets(parents).Should().BeEquivalentTo<List<string>>([["1", "2", "3"], ["4"], ["5"]]);     // Idempotency after transitivity
+        DisjointSetShouldBe([["1", "2", "3"], ["4"], ["5"]], parents);     // Idempotency after transitivity
 
         Union(parents, "4", "5");
-        DisjointSets(parents).Should().BeEquivalentTo<List<string>>([["1", "2", "3"], ["4", "5"]]);       // Separated trees
+        DisjointSetShouldBe([["1", "2", "3"], ["4", "5"]], parents);       // Separated trees
         Union(parents, "3", "4");
-        DisjointSets(parents).Should().BeEquivalentTo<List<string>>([["1", "2", "3", "4", "5"]]);         // Merged trees
+        DisjointSetShouldBe([["1", "2", "3", "4", "5"]], parents);         // Merged trees
     }
 
     [TestMethod]
@@ -61,10 +61,13 @@ public class DisjointSetsPrimitivesTest
         Union(parents, "1", "2");
         Union(parents, "3", "4");
         Union(parents, "5", "6");
-        DisjointSets(parents).Should().BeEquivalentTo<List<string>>([["1", "2"], ["3", "4"], ["5", "6"]]); // Merge of 1-height trees
+        DisjointSetShouldBe([["1", "2"], ["3", "4"], ["5", "6"]], parents); // Merge of 1-height trees
         Union(parents, "2", "3");
-        DisjointSets(parents).Should().BeEquivalentTo<List<string>>([["1", "2", "3", "4"], ["5", "6"]]);   // Merge of 2-height trees
+        DisjointSetShouldBe([["1", "2", "3", "4"], ["5", "6"]], parents);   // Merge of 2-height trees
         Union(parents, "4", "5");
-        DisjointSets(parents).Should().BeEquivalentTo<List<string>>([["1", "2", "3", "4", "5", "6"]]);     // Merge of 1-height tree and 2-height tree
+        DisjointSetShouldBe([["1", "2", "3", "4", "5", "6"]], parents);     // Merge of 1-height tree and 2-height tree
     }
+
+    private static void DisjointSetShouldBe(List<List<string>> expected, Dictionary<string, string> parents) =>
+      DisjointSets(parents).Should().BeEquivalentTo(expected);
 }
