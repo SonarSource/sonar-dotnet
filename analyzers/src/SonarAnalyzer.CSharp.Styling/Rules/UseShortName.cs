@@ -25,14 +25,20 @@ public sealed class UseShortName : StylingAnalyzer
 {
     private static readonly RenameInfo[] RenameCandidates =
         [
+            new("CancellationToken", "cancellationToken", "cancel"),
+            new("CancellationToken", "CancellationToken", "Cancel"),
+            new("DiagnosticDescriptor", "diagnosticDescriptor", "descriptor"),
+            new("DiagnosticDescriptor", "DiagnosticDescriptor", "Descriptor"),
             new("SyntaxNode", "syntaxNode", "node"),
             new("SyntaxNode", "SyntaxNode", "Node"),
+            new("SyntaxToken", "syntaxToken", "token"),
+            new("SyntaxToken", "SyntaxToken", "Token"),
             new("SyntaxTree", "syntaxTree", "tree"),
             new("SyntaxTree", "SyntaxTree", "Tree"),
+            new("SyntaxTrivia", "syntaxTrivia", "trivia"),
+            new("SyntaxTrivia", "SyntaxTrivia", "Trivia"),
             new("SemanticModel", "semanticModel", "model"),
-            new("SemanticModel", "SemanticModel", "Model"),
-            new("CancellationToken", "cancellationToken", "cancel"),
-            new("CancellationToken", "CancellationToken", "Cancel")
+            new("SemanticModel", "SemanticModel", "Model")
         ];
 
     public UseShortName() : base("T0017", "Use short name '{0}'.") { }

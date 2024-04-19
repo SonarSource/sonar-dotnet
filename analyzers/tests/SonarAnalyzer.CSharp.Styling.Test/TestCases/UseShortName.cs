@@ -22,6 +22,15 @@ public class Sample
     public SyntaxNode SyntaxNode { get; }       // Noncompliant {{Use short name 'Node'.}}
     //                ^^^^^^^^^^
 
+    private SyntaxToken syntaxToken;            // Noncompliant {{Use short name 'token'.}}
+    private SyntaxToken SyntaxToken { get; }    // Noncompliant {{Use short name 'Token'.}}
+
+    private SyntaxTrivia syntaxTrivia;          // Noncompliant {{Use short name 'trivia'.}}
+    private SyntaxTrivia SyntaxTrivia{ get; }   // Noncompliant {{Use short name 'Trivia'.}}
+
+    private DiagnosticDescriptor diagnosticDescriptor;          // Noncompliant {{Use short name 'descriptor'.}}
+    private DiagnosticDescriptor DiagnosticDescriptor { get; }  // Noncompliant {{Use short name 'Descriptor'.}}
+
     public void TypedDeclarations()
     {
         SyntaxNode nodeNode;
@@ -131,5 +140,8 @@ public partial class Partial
 }
 
 public class SyntaxNode { }
+public class SyntaxToken { }
 public class SyntaxTree { }
+public class SyntaxTrivia { }
 public class SemanticModel { }
+public class DiagnosticDescriptor { }
