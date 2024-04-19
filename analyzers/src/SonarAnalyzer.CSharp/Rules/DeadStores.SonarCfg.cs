@@ -202,7 +202,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 private static Location GetFirstLineLocationFromToken(SyntaxToken issueStartToken, SyntaxNode wholeIssue)
                 {
-                    var line = wholeIssue.SyntaxTree.GetText().Lines[issueStartToken.GetLocation().GetLineSpan().StartLinePosition.Line];
+                    var line = wholeIssue.SyntaxTree.GetText().Lines[issueStartToken.GetLocation().StartLine()];
                     var rightSingleLine = line.Span.Intersection(TextSpan.FromBounds(issueStartToken.SpanStart, wholeIssue.Span.End));
                     return Location.Create(wholeIssue.SyntaxTree, TextSpan.FromBounds(issueStartToken.SpanStart, rightSingleLine.HasValue ? rightSingleLine.Value.End : issueStartToken.Span.End));
                 }

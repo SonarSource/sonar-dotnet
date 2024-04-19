@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 var invocationLocation = invocation.GetLocation();
                 var secondaryLocation = objectCreation.GetLocation();
 
-                var diagnostic = invocationLocation.GetLineSpan().StartLinePosition.Line == secondaryLocation.GetLineSpan().StartLinePosition.Line
+                var diagnostic = invocationLocation.StartLine() == secondaryLocation.StartLine()
                     ? Diagnostic.Create(Rule, invocationLocation)
                     : Rule.CreateDiagnostic(context.Compilation, invocationLocation, additionalLocations: new[] {secondaryLocation}, properties: null);
 

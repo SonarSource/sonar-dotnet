@@ -50,13 +50,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool StartsLine(SyntaxToken token)
         {
-            return token.GetPreviousToken().GetLocation().GetLineSpan().EndLinePosition.Line != token.GetLocation().GetLineSpan().StartLinePosition.Line;
+            return token.GetPreviousToken().GetLocation().EndLine() != token.GetLocation().StartLine();
         }
 
         private static bool IsOnSameLineAsOpenBrace(SyntaxToken closeBraceToken)
         {
             var openBraceToken = closeBraceToken.Parent.ChildTokens().Single(token => token.IsKind(SyntaxKind.OpenBraceToken));
-            return openBraceToken.GetLocation().GetLineSpan().StartLinePosition.Line == closeBraceToken.GetLocation().GetLineSpan().StartLinePosition.Line;
+            return openBraceToken.GetLocation().StartLine() == closeBraceToken.GetLocation().StartLine();
         }
 
         private static bool IsInitializer(SyntaxNode node)

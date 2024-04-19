@@ -51,10 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool TryGetPreviousTokenInSameLine(SyntaxToken token, out SyntaxToken previousToken)
         {
             previousToken = token.GetPreviousToken();
-            return GetFirstLineNumber(previousToken) == GetFirstLineNumber(token);
+            return previousToken.Line() == token.Line();
         }
-
-        private static int GetFirstLineNumber(SyntaxToken token)
-            => token.GetLocation().GetLineSpan().StartLinePosition.Line;
     }
 }

@@ -23,5 +23,5 @@ namespace SonarAnalyzer.Extensions;
 public static class SyntaxTokenExtensions
 {
     public static int Line(this SyntaxToken token) =>
-        token.GetLocation().GetLineSpan().StartLinePosition.Line;
+        token.GetLocation().StartLine();
 }

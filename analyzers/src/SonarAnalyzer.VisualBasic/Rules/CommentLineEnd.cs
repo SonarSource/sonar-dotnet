@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private void CheckTokenComments(SonarSyntaxTreeReportingContext context, SyntaxToken token)
         {
-            var tokenLine = token.GetLocation().GetLineSpan().StartLinePosition.Line;
+            var tokenLine = token.GetLocation().StartLine();
 
             var comments = token.TrailingTrivia
                 .Where(tr => tr.IsKind(SyntaxKind.CommentTrivia));
@@ -58,10 +58,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
             foreach (var comment in comments)
             {
                 var location = comment.GetLocation();
-                if (location.GetLineSpan().StartLinePosition.Line == tokenLine &&
-                    !SafeRegex.IsMatch(comment.ToString(), LegalCommentPattern))
+                if (location.StartLine() == tokenLine && !SafeRegex.IsMatch(comment.ToString(), LegalCommentPattern))
                 {
-                    context.ReportIssue(Diagnostic.Create(rule, location));
+                    context.ReportIssue(rule, location);
                 }
             }
         }

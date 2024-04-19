@@ -139,7 +139,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static Location GetFirstLineOfNode(SyntaxNode node)
         {
-            var lineNumber = node.GetLocation().GetLineSpan().StartLinePosition.Line;
+            var lineNumber = node.GetLocation().StartLine();
             var wholeLineSpan = node.SyntaxTree.GetText().Lines[lineNumber].Span;
             var secondaryLocationSpan = wholeLineSpan.Intersection(node.GetLocation().SourceSpan);
 
