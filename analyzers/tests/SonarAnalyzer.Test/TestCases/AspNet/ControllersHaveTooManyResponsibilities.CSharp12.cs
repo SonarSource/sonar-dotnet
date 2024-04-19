@@ -578,21 +578,6 @@ namespace WithInjectionViaNormalConstructor
         public void A2() { s2Provider(42).Use(); } // Secondary {{Belongs to responsibility #2.}}
     }
 
-    public class WithServiceWrappersInjection : ApiController // Noncompliant FP: no way to know whether s2Invoker wraps a service
-    {
-        private readonly Func<IS1> s1Provider;
-        private readonly Action s2Invoker;
-
-        public WithServiceWrappersInjection(Func<IS1> s1Provider, Action s2Invoker)
-        {
-            this.s1Provider = s1Provider;
-            this.s2Invoker = s2Invoker;
-        }
-
-        public void A1() { s1Provider().Use(); s2Invoker(); } // Secondary {{Belongs to responsibility #1.}}
-        public void A2() { s2Invoker(); }                     // Secondary {{Belongs to responsibility #2.}}
-    }
-
     public class WithNonPublicConstructor : ApiController // Noncompliant: ctor visibility is irrelevant
     {
         private readonly IS1 s1;
@@ -780,4 +765,80 @@ public class WithMethodsDependingOnEachOther : ApiController // Noncompliant
     void A20() { A22(); }              // Secondary {{Belongs to responsibility #6.}}
     void A21() { A22(); }              // Secondary {{Belongs to responsibility #6.}}
     void A22() { s6.Use(); s7.Use(); } // Secondary {{Belongs to responsibility #6.}}
+}
+
+public class WithServiceProvidersInjectionCoupled : ApiController // Compliant: s1Provider and s2Provider are known to provide services
+{
+    private readonly Func<IS1> s1Provider;
+    private readonly Func<int, IS2> s2Provider;
+
+    public WithServiceProvidersInjectionCoupled(Func<IS1> s1Provider, Func<int, IS2> s2Provider)
+    {
+        this.s1Provider = s1Provider;
+        this.s2Provider = s2Provider;
+    }
+
+    public void A1() { s1Provider().Use(); var s2 = s2Provider(42); s2.Use(); }
+    public void A2() { (s2Provider(42)).Use(); }
+}
+
+public class WithServiceProvidersInjectionUsedInGroups : ApiController // Noncompliant
+{
+    private IS1 _s1;
+    private Func<bool, uint, Func<double>, IS5> _s5Provider;
+
+    private Func<IS2> S2Provider { get; }
+    private Func<int, IS3> S3Provider => i => null;
+    private Func<string, char, IS4> S4Provider { get; set; } = (s, c) => null;
+    private Func<bool, uint, Func<double>, IS5> S5Provider => _s5Provider;
+
+    public void A1() { _s1.Use(); }                                                             // Secondary {{Belongs to responsibility #1.}}
+    public void A2() { S2Provider().Use(); S3Provider(42).Use(); }                              // Secondary {{Belongs to responsibility #3.}}
+    public void A3() { S3Provider(42).Use(); }                                                  // Secondary {{Belongs to responsibility #3.}}
+    public void A4() { S4Provider("42", '4').Use(); _s5Provider(false, 3u, () => 42.0).Use(); } // Secondary {{Belongs to responsibility #2.}}
+    public void A5() { _s5Provider(true, 3u, () => 42.0).Use(); }                               // Secondary {{Belongs to responsibility #2.}}
+    public void A6() { S5Provider(true, 3u, () => 42.0).Use(); }                                // Secondary {{Belongs to responsibility #2.}}
+}
+
+public class WithServiceWrappersInjection : ApiController // Noncompliant: FP, no way to know whether s2Invoker wraps a service
+{
+    private readonly Func<IS1> s1Provider;
+    private readonly Action s2Invoker;
+
+    public WithServiceWrappersInjection(Func<IS1> s1Provider, Action s2Invoker)
+    {
+        this.s1Provider = s1Provider;
+        this.s2Invoker = s2Invoker;
+    }
+
+    public void A1() { s1Provider().Use(); s2Invoker(); } // Secondary {{Belongs to responsibility #1.}}
+    public void A2() { s2Invoker(); }                     // Secondary {{Belongs to responsibility #2.}}
+}
+
+
+public class WithLazyServicesInjection : ApiController // Noncompliant
+{
+    private readonly Lazy<IS1> s1Lazy;
+    private readonly Lazy<IS2> s2Lazy;
+    private readonly Lazy<IS3> s3Lazy;
+    private readonly IS4 s4;
+
+    public void A1() { s1Lazy.Value.Use(); s2Lazy.Value.Use(); } // Secondary {{Belongs to responsibility #1.}}
+    public void A2() { s2Lazy.Value.Use(); s4.Use(); }           // Secondary {{Belongs to responsibility #1.}}
+    public void A3() { s3Lazy.Value.Use(); }                     // Secondary {{Belongs to responsibility #2.}}
+}
+
+public class WithMixOfLazyServicesAndServiceProviders : ApiController // Noncompliant
+{
+    private readonly Lazy<IS1> s1Lazy;
+    private readonly Lazy<IS2> s2Lazy;
+    private readonly IS3 s3;
+    private readonly IS4 s4;
+    private readonly Func<IS5> s5Provider;
+    private readonly Func<IS6> s6Provider;
+
+    public void A1() { s1Lazy.Value.Use(); s3.Use(); }                                                  // Secondary {{Belongs to responsibility #1.}}
+    public void A2() { s1Lazy.Value.Use(); s2Lazy.Value.Use(); }                                        // Secondary {{Belongs to responsibility #1.}}
+    public void A3() { s4.Use(); var s5 = s5Provider(); s5.Use(); }                                     // Secondary {{Belongs to responsibility #2.}}
+    public void A4() { s5Provider().Use(); var s6ProviderAlias = s6Provider(); s6ProviderAlias.Use(); } // Secondary {{Belongs to responsibility #2.}}
 }

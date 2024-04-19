@@ -112,8 +112,10 @@ public sealed class ControllersHaveTooManyResponsibilities : SonarDiagnosticAnal
     private static string BlockName(SyntaxNode block) =>
         block switch
         {
-            MethodDeclarationSyntax method => method.GetName(),
             AccessorDeclarationSyntax { Parent.Parent: PropertyDeclarationSyntax property } => property.GetName(),
+            ArrowExpressionClauseSyntax { Parent: PropertyDeclarationSyntax property } => property.GetName(),
+            MethodDeclarationSyntax method => method.GetName(),
+            PropertyDeclarationSyntax property => property.GetName(),
             _ => null
         };
 
@@ -150,7 +152,14 @@ public sealed class ControllersHaveTooManyResponsibilities : SonarDiagnosticAnal
     }
 
     private static bool IsService(ISymbol symbol) =>
-        symbol.GetSymbolType() is { TypeKind: TypeKind.Interface, Name: var name } && !ExcludedWellKnownServices.Contains(name);
+        symbol.GetSymbolType() switch
+        {
+            { TypeKind: TypeKind.Interface, Name: var name } =>
+                !ExcludedWellKnownServices.Contains(name),
+            INamedTypeSymbol { TypeKind: TypeKind.Delegate or TypeKind.Class } type =>
+                (type.IsAny(KnownType.SystemFuncVariants) || type.Is(KnownType.System_Lazy)) && IsService(type.TypeArguments.Last()),
+            _ => false,
+        };
 
     private static IEnumerable<SecondaryLocation> SecondaryLocations(INamedTypeSymbol controllerSymbol, List<List<string>> sets)
     {
