@@ -23,13 +23,14 @@ using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Test.Rules;
 
+#if NET
+
 [TestClass]
 public class ControllersHaveTooManyResponsibilitiesTest
 {
     private readonly VerifierBuilder builder =
         new VerifierBuilder<ControllersHaveTooManyResponsibilities>();
 
-#if NET
     private static IEnumerable<MetadataReference> AspNetCoreReferences =>
     [
         AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
@@ -47,5 +48,6 @@ public class ControllersHaveTooManyResponsibilitiesTest
             .AddPaths("ControllersHaveTooManyResponsibilities.CSharp12.cs")
             .WithLanguageVersion(LanguageVersion.CSharp12)
             .Verify();
-#endif
 }
+
+#endif
