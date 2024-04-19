@@ -8,21 +8,21 @@ class UseRegexSafeIsMatchNonCompliant
 
     void InstanceRegex(string content)
     {
-        regex.IsMatch(content);                                                // Noncompliant {{Use 'SafeIsMatch' instead.}}
+        regex.IsMatch(content);         // Noncompliant {{Use 'SafeIsMatch' instead.}}
         //    ^^^^^^^
-        regex.IsMatch(content, 0);                                             // Noncompliant
-        regex.Matches(content);                                                // Noncompliant {{Use 'SafeMatches' instead.}}
-        regex.Matches(content, 0);                                             // Noncompliant
-        regex.Match(content);                                                  // Noncompliant {{Use 'SafeMatch' instead.}}
-        regex.Match(content, 0);                                               // Noncompliant
-        realRegex.IsMatch(content);                                            // Noncompliant
-        realRegex.IsMatch(content, 0);                                         // Noncompliant
-        realRegex.Matches(content);                                            // Noncompliant
-        realRegex.Matches(content, 0);                                         // Noncompliant
-        realRegex.Match(content);                                              // Noncompliant
-        realRegex.Match(content, 0);                                           // Noncompliant
+        regex.IsMatch(content, 0);      // Noncompliant
+        regex.Matches(content);         // Noncompliant {{Use 'SafeMatches' instead.}}
+        regex.Matches(content, 0);      // Noncompliant
+        regex.Match(content);           // Noncompliant {{Use 'SafeMatch' instead.}}
+        regex.Match(content, 0);        // Noncompliant
+        realRegex.IsMatch(content);     // Noncompliant
+        realRegex.IsMatch(content, 0);  // Noncompliant
+        realRegex.Matches(content);     // Noncompliant
+        realRegex.Matches(content, 0);  // Noncompliant
+        realRegex.Match(content);       // Noncompliant
+        realRegex.Match(content, 0);    // Noncompliant
         Regex.IsMatch(content, "pattern");                          // Noncompliant {{Use 'SafeRegex.IsMatch' instead.}}
-//      ^^^^^^^^^^^^^
+//      ^^^^^
         Regex.IsMatch(content, "pattern", RegexOptions.None);       // Noncompliant
         Regex.Matches(content, "pattern");                          // Noncompliant {{Use 'SafeRegex.Matches' instead.}}
         Regex.Matches(content, "pattern", RegexOptions.None);       // Noncompliant

@@ -33,7 +33,7 @@ public sealed class UseRegexSafeIsMatch : StylingAnalyzer
                     && c.SemanticModel.GetSymbolInfo(memberAccess).Symbol is IMethodSymbol method
                     && method.ContainingType.Is(KnownType.System_Text_RegularExpressions_Regex))
                 {
-                    c.ReportIssue(Rule, method.IsStatic ? memberAccess : memberAccess.Name, method.IsStatic ? "SafeRegex." : "Safe", method.Name);
+                    c.ReportIssue(Rule, method.IsStatic ? memberAccess.Expression : memberAccess.Name, method.IsStatic ? "SafeRegex." : "Safe", method.Name);
                 }
             },
             SyntaxKind.SimpleMemberAccessExpression);
