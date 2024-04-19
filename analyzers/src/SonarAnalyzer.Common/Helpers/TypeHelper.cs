@@ -23,7 +23,7 @@ using static Google.Protobuf.WellKnownTypes.Field;
 
 namespace SonarAnalyzer.Helpers;
 
-internal static class TypeHelper
+public static class TypeHelper
 {
     #region TypeKind
 
