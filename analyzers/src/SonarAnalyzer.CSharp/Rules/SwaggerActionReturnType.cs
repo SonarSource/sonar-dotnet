@@ -29,7 +29,7 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
     private const string NoTypeMessageFormat = "Use the ProducesResponseType overload containing the return type for successful responses.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-    private static readonly ImmutableArray<KnownType> ReturnTypeAttributeTypes = ImmutableArray.Create(
+    private static readonly ImmutableArray<KnownType> ControllerActionAttributesNeedingTypeCheck = ImmutableArray.Create(
         KnownType.Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute,
         KnownType.SwashbuckleAspNetCoreAnnotationsSwaggerResponseAttribute);
     private static readonly ImmutableArray<KnownType> ControllerActionReturnTypes = ImmutableArray.Create(
@@ -45,12 +45,12 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
             {
                 compilationStart.RegisterSymbolStartAction(symbolStart =>
                 {
-                    if (IsValidCandidate(symbolStart.Symbol))
+                    if (IsControllerCandidate(symbolStart.Symbol))
                     {
                         symbolStart.RegisterSyntaxNodeAction(nodeContext =>
                         {
                             var methodDeclaration = (MethodDeclarationSyntax)nodeContext.Node;
-                            if (InvalidMethodSymbol(methodDeclaration, nodeContext) is { } method)
+                            if (InvalidMethod(methodDeclaration, nodeContext) is { } method)
                             {
                                 nodeContext.ReportIssue(Rule, methodDeclaration.Identifier.GetLocation(), GetMessage(method));
                             }
@@ -60,41 +60,49 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
             }
         });
 
-    private static IMethodSymbol InvalidMethodSymbol(MethodDeclarationSyntax methodDeclaration, SonarSyntaxNodeReportingContext nodeContext) =>
+    private static IMethodSymbol InvalidMethod(BaseMethodDeclarationSyntax methodDeclaration, SonarSyntaxNodeReportingContext nodeContext) =>
         nodeContext.SemanticModel.GetDeclaredSymbol(methodDeclaration, nodeContext.Cancel) is not { } method
         || !method.IsControllerMethod()
         || !method.ReturnType.DerivesOrImplementsAny(ControllerActionReturnTypes)
-        || method.GetAttributesWithInherited().Any(x => HasSwaggerResponseAttributeWithReturnType(x) || HasProducesResponseTypeAttributeWithReturnType(x))
+        || method.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiConventionMethodAttribute)
+                                                        || HasSwaggerResponseAttributeWithReturnType(x)
+                                                        || HasProducesResponseTypeAttributeWithReturnType(x))
             ? null
             : method;
 
-    private static bool IsValidCandidate(ISymbol symbol)
+    private static bool IsControllerCandidate(ISymbol symbol)
     {
         var hasApiControllerAttribute = false;
-        var hasReturnTypeAttribute = false;
+        var hasApiConventionTypeAttribute = false;
+        var hasProducesResponseTypeAttribute = false;
+
+        // ApiController attribute is required.
+        // ApiConventionType and ProducesResponseType<T> attributes will skip the analysis. For these, the type is always specified.
+        // If ProducesResponseTypeAttribute is present, we will have to do a check to see if the ctor overload with type is specified.
         foreach (var attribute in symbol.GetAttributesWithInherited())
         {
-            hasApiControllerAttribute = hasApiControllerAttribute || attribute.AttributeClass.Is(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute);
-            hasReturnTypeAttribute = hasReturnTypeAttribute
-                                     || HasProducesResponseTypeAttributeWithReturnType(attribute)
-                                     || HasSwaggerResponseAttributeWithReturnType(attribute);
+            hasApiControllerAttribute = hasApiControllerAttribute || attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute);
+            hasApiConventionTypeAttribute = hasApiConventionTypeAttribute || attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiConventionTypeAttribute);
+            hasProducesResponseTypeAttribute = hasProducesResponseTypeAttribute || HasProducesResponseTypeAttributeWithReturnType(attribute);
         }
-        return hasApiControllerAttribute && !hasReturnTypeAttribute;
+
+        return hasApiControllerAttribute && !hasApiConventionTypeAttribute && !hasProducesResponseTypeAttribute;
     }
 
     private static string GetMessage(ISymbol symbol) =>
-        symbol.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFromAny(ReturnTypeAttributeTypes))
+        symbol.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFromAny(ControllerActionAttributesNeedingTypeCheck))
             ? NoTypeMessageFormat
             : NoAttributeMessageFormat;
 
     private static bool HasProducesResponseTypeAttributeWithReturnType(AttributeData attribute) =>
         attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute_T)
-        || (attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute) && ContainsReturnType(attribute));
+        || (attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute)
+            && ContainsReturnType(attribute));
 
-    private static bool HasSwaggerResponseAttributeWithReturnType(AttributeData attributeData) =>
-        attributeData.AttributeClass.DerivesFrom(KnownType.SwashbuckleAspNetCoreAnnotationsSwaggerResponseAttribute)
-        && ContainsReturnType(attributeData);
+    private static bool HasSwaggerResponseAttributeWithReturnType(AttributeData attribute) =>
+        attribute.AttributeClass.DerivesFrom(KnownType.SwashbuckleAspNetCoreAnnotationsSwaggerResponseAttribute)
+        && ContainsReturnType(attribute);
 
-    private static bool ContainsReturnType(AttributeData attributeData) =>
-        attributeData.ConstructorArguments.Any(x => x.Type.Is(KnownType.System_Type));
+    private static bool ContainsReturnType(AttributeData attribute) =>
+        !attribute.ConstructorArguments.FirstOrDefault(x => x.Type.Is(KnownType.System_Type)).IsNull;
 }

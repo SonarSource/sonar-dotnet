@@ -208,6 +208,14 @@ public class AnnotatedAtControllerLevel : ControllerBase
 }
 
 [ApiController]
+[ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
+public class AnnotatedAtControllerLevelWithTypeOf : ControllerBase
+{
+    [HttpGet("foo")]
+    public IActionResult ReturnsOkWithValue() => Ok(42);
+}
+
+[ApiController]
 [ProducesResponseType(200)]
 public class AnnotatedAtControllerLevelWithNoType : ControllerBase
 {
