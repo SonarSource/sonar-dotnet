@@ -7,6 +7,7 @@
     <!-- .NET Standard target does not copy referenced DLLs into bin folder, so we need to enable it explicitly. -->
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <DefineConstants>TRACE;VB</DefineConstants>
+    <PackageTags>Roslyn;Analyzer;Analyzers;Refactoring;CodeAnalysis;CleanCode;Clean Code;Sonar;SonarAnalyzer;Sonar Anlyzer;Dotnet;Visual Basic;CodeQuality;CodeReview;StaticCodeAnalysis;SonarQube;SonarCloud;SonarLint</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
