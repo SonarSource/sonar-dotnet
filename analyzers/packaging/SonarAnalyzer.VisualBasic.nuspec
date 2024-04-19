@@ -16,7 +16,7 @@
     <releaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/9.24.0.0</releaseNotes>
     <language>en-US</language>
     <copyright>Copyright © 2015-2024 SonarSource SA</copyright>
-    <tags>Roslyn Analyzers Refactoring CodeAnalysis CleanCode Clean Code</tags>
+    <tags>Roslyn Analyzer Analyzers Refactoring CodeAnalysis CleanCode Clean Code Sonar SonarAnalyzer Dotnet VisualBasic CodeQuality CodeReview StaticCodeAnalysis SonarQube SonarCloud SonarLint</tags>
     <developmentDependency>true</developmentDependency>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System" targetFramework="" />
