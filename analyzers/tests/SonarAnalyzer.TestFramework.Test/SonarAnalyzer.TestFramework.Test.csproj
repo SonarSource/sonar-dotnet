@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <!-- 01/2024: Using net8.0 breaks Verifier.CompileRazor -->
     <TargetFrameworks>net48;net8.0</TargetFrameworks>
   </PropertyGroup>
 
