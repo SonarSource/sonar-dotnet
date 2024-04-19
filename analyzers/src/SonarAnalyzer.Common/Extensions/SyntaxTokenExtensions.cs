@@ -18,20 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions;
+
+public static class SyntaxTokenExtensions
 {
-    public static class LocationExtensions
-    {
-        public static Location EnsureMappedLocation(this Location location)
-        {
-            if (location is null || !GeneratedCodeRecognizer.IsRazorGeneratedFile(location.SourceTree))
-            {
-                return location;
-            }
-
-            var lineSpan = location.GetMappedLineSpan();
-
-            return Location.Create(lineSpan.Path, location.SourceSpan, lineSpan.Span);
-        }
-    }
+    public static int Line(this SyntaxToken token) =>
+        token.GetLocation().GetLineSpan().StartLinePosition.Line;
 }

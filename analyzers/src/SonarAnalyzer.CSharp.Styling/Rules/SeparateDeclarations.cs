@@ -27,6 +27,81 @@ public sealed class SeparateDeclarations : StylingAnalyzer
 
     protected override void Initialize(SonarAnalysisContext context)
     {
+        context.RegisterNodeAction(
+            ValidateSeparatedMember,
+            SyntaxKind.ClassDeclaration,
+            SyntaxKind.ConstructorDeclaration,
+            SyntaxKind.ConversionOperatorDeclaration,
+            SyntaxKind.DestructorDeclaration,
+            SyntaxKind.EnumDeclaration,
+            SyntaxKind.MethodDeclaration,
+            SyntaxKind.NamespaceDeclaration,
+            SyntaxKind.OperatorDeclaration,
+            SyntaxKind.RecordDeclaration,
+            SyntaxKind.RecordStructDeclaration,
+            SyntaxKind.StructDeclaration);
+        context.RegisterNodeAction(
+            ValidatePossibleSingleLineMember,
+            SyntaxKind.EventDeclaration,
+            SyntaxKind.EventFieldDeclaration,
+            SyntaxKind.DelegateDeclaration,
+            SyntaxKind.FieldDeclaration,
+            SyntaxKind.IndexerDeclaration,
+            SyntaxKind.PropertyDeclaration);
+    }
 
+    private void ValidatePossibleSingleLineMember(SonarSyntaxNodeReportingContext context)
+    {
+        var firstToken = context.Node.GetFirstToken();
+        if (firstToken.Line() != context.Node.GetLastToken().Line()
+            || firstToken.GetPreviousToken().IsKind(SyntaxKind.CloseBraceToken)
+            || PreviousDeclarationKind(context.Node) != context.Node.Kind())
+        {
+            ValidateSeparatedMember(context);
+        }
+
+        SyntaxKind PreviousDeclarationKind(SyntaxNode node) =>
+            context.Node.Parent.ChildNodes().TakeWhile(x => x != node).LastOrDefault() is { } preceding
+                ? preceding.Kind()
+                : SyntaxKind.None;
+    }
+
+    private void ValidateSeparatedMember(SonarSyntaxNodeReportingContext context)
+    {
+        var firstToken = context.Node.GetFirstToken();
+        if (!context.Node.GetModifiers().Any(SyntaxKind.AbstractKeyword)
+            && !firstToken.GetPreviousToken().IsKind(SyntaxKind.OpenBraceToken)
+            && !ContainsEmptyLine(firstToken.LeadingTrivia))
+        {
+            var firstComment = firstToken.LeadingTrivia.FirstOrDefault(IsComment);
+            context.ReportIssue(Rule, firstComment == default ? firstToken.GetLocation() : firstComment.GetLocation());
+        }
+    }
+
+    private static bool IsComment(SyntaxTrivia trivia) =>
+        trivia.IsAnyKind(
+            SyntaxKind.SingleLineCommentTrivia,
+            SyntaxKind.MultiLineCommentTrivia,
+            SyntaxKind.SingleLineDocumentationCommentTrivia,
+            SyntaxKind.MultiLineDocumentationCommentTrivia);
+
+    private static bool ContainsEmptyLine(SyntaxTriviaList trivia)
+    {
+        var previousLine = -1;
+        foreach (var trivium in trivia.Where(x => !x.IsKind(SyntaxKind.WhitespaceTrivia)))
+        {
+            if (trivium.IsKind(SyntaxKind.EndOfLineTrivia))
+            {
+                if (previousLine != trivium.GetLocation().StartLine())
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                previousLine = trivium.GetLocation().EndLine();
+            }
+        }
+        return false;
     }
 }

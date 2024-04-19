@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Helpers;
 
-internal static class CSharpSyntaxHelper
+public static class CSharpSyntaxHelper
 {
     public static readonly ExpressionSyntax NullLiteralExpression =
         SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression);

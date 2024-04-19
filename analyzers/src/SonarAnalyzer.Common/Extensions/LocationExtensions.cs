@@ -26,4 +26,22 @@ public static class LocationExtensions
         GeneratedCodeRecognizer.IsRazorGeneratedFile(location.SourceTree)
             ? location.GetMappedLineSpan()
             : location.GetLineSpan();
+
+    public static Location EnsureMappedLocation(this Location location)
+    {
+        if (location is null || !GeneratedCodeRecognizer.IsRazorGeneratedFile(location.SourceTree))
+        {
+            return location;
+        }
+
+        var lineSpan = location.GetMappedLineSpan();
+
+        return Location.Create(lineSpan.Path, location.SourceSpan, lineSpan.Span);
+    }
+
+    public static int StartLine(this Location location) =>
+        location.GetLineSpan().StartLinePosition.Line;
+
+    public static int EndLine(this Location location) =>
+        location.GetLineSpan().EndLinePosition.Line;
 }

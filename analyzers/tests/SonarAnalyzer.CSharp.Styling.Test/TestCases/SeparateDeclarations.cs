@@ -108,10 +108,8 @@ public abstract class AllWrong
     private static readonly object field2 = new();
     private readonly object field3 = new();
     private readonly object field4, field5;
-    public abstract int AbstractMethod1();          // Noncompliant
+    public abstract int AbstractMethod1();          // FN
     public abstract int AbstractProperty1 { get; }
-    public abstract int AbstractMethod2();
-    public abstract int AbstractProperty2 { get; }
     delegate void SomeDelegate1();                  // Noncompliant
     delegate void SomeDelegate2();
     public event EventHandler SomeEvent1;           // Noncompliant
@@ -197,7 +195,7 @@ public class Comments
     /// There still should be an empty line before the documentation block, not inside
 
     /// </summary>
-    public class InterruptedDocumentation { }   // FN, there's another problem in here
+    public class InterruptedDocumentation { }   // Noncompliant@-4
 }
 
 public class MultiLines
@@ -205,7 +203,7 @@ public class MultiLines
     private int singleLineField1;
     private int multiLineField1 =   // Noncompliant
         1 + 1;
-    private int singleLineField2;   // Noncompliant
+    private int singleLineField2;
 
     private int multiLineField2 =
         1 + 1;

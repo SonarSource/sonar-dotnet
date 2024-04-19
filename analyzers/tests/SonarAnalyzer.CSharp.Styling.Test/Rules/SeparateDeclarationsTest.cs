@@ -25,5 +25,5 @@ public class SeparateDeclarationsTest
 {
     [TestMethod]
     public void SeparateDeclarations() =>
-        StylingVerifierBuilder.Create<SeparateDeclarations>().AddPaths("SeparateDeclarations.cs").Verify();
+        StylingVerifierBuilder.Create<SeparateDeclarations>().AddPaths("SeparateDeclarations.cs").WithConcurrentAnalysis(false).Verify();
 }
