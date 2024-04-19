@@ -182,7 +182,7 @@ namespace SonarAnalyzer.Helpers
             symbol.Kind == SymbolKind.Method && symbol.Name == ".ctor";
 
         public static bool IsStaticConstructor(this ISymbol symbol) =>
-            symbol.Kind == SymbolKind.Method && symbol.Name == ".cctor";
+            symbol.Kind == SymbolKind.Method && ((IMethodSymbol)symbol).MethodKind == MethodKind.StaticConstructor;
 
         public static bool IsDestructor(this IMethodSymbol method) =>
             method.MethodKind == MethodKind.Destructor;

@@ -21,6 +21,7 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Moq;
 using CodeAnalysisAccessibility = Microsoft.CodeAnalysis.Accessibility; // This is needed because there is an Accessibility namespace in the windows forms binaries.
+using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Test.Helpers
 {
@@ -582,6 +583,81 @@ namespace NS
             // GetAttributesWithInherited should behave like MemberInfo.GetCustomAttributes from runtime reflection:
             var type = compiler.EmitAssembly().GetType(className.Replace("<int>", "`1"), throwOnError: true);
             type.GetCustomAttributes(inherit: true).Select(x => x.GetType().Name).Should().BeEquivalentTo(expectedAttributes);
+        }
+
+        [TestMethod]
+        public void IsStaticConstructor_CS()
+        {
+            var code = """
+                public class Program
+                {
+                    static Program() { _ = "static"; }
+                    public Program() { }
+                    ~Program() { }
+                    void AMethod() { }
+                    int AProperty { get; set; }
+                    int this[int i] => 42;
+
+                    enum AnEnum { A, B, C }
+                }
+                """;
+            var compiler = new SnippetCompiler(code);
+            var assignment = compiler.GetNodes<AssignmentExpressionSyntax>().Should().ContainSingle().Subject;
+
+            var staticConstructorDeclaration = compiler.GetNodes<ConstructorDeclarationSyntax>().Single(x => x.Contains(assignment));
+            compiler.SemanticModel.GetDeclaredSymbol(staticConstructorDeclaration).IsStaticConstructor().Should().BeTrue();
+            var instanceConstructorDeclaration = compiler.GetNodes<ConstructorDeclarationSyntax>().Single(x => !x.Contains(assignment));
+            compiler.SemanticModel.GetDeclaredSymbol(instanceConstructorDeclaration).IsStaticConstructor().Should().BeFalse();
+
+            AssertNotAStaticConstructor<DestructorDeclarationSyntax>();
+            AssertNotAStaticConstructor<MethodDeclarationSyntax>();
+            AssertNotAStaticConstructor<PropertyDeclarationSyntax>();
+            AssertNotAStaticConstructor<IndexerDeclarationSyntax>();
+            AssertNotAStaticConstructor<EnumDeclarationSyntax>();
+
+            void AssertNotAStaticConstructor<TSyntaxNodeType>() where TSyntaxNodeType : SyntaxNode =>
+                compiler.SemanticModel.GetDeclaredSymbol(compiler.GetNodes<TSyntaxNodeType>().Single()).IsStaticConstructor().Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void IsStaticConstructor_VB()
+        {
+            var code = """
+                Public Class Program
+                    Shared Sub New()
+                        Dim x
+                        x = "static"
+                    End Sub
+
+                    Public Sub New()
+                    End Sub
+
+                    Sub AMethod()
+                    End Sub
+
+                    Property AProperty As Integer
+
+                    Enum AnEnum
+                        A
+                        B
+                        C
+                    End Enum
+                End Class
+                """;
+            var compiler = new SnippetCompiler(code, false, AnalyzerLanguage.VisualBasic);
+            var assignment = compiler.GetNodes<VB.AssignmentStatementSyntax>().Should().ContainSingle().Subject;
+
+            var sharedConstructorBlock = compiler.GetNodes<VB.ConstructorBlockSyntax>().Single(x => x.Contains(assignment));
+            compiler.SemanticModel.GetDeclaredSymbol(sharedConstructorBlock).IsStaticConstructor().Should().BeTrue();
+            var instanceConstructorBlock = compiler.GetNodes<VB.ConstructorBlockSyntax>().Single(x => !x.Contains(assignment));
+            compiler.SemanticModel.GetDeclaredSymbol(instanceConstructorBlock).IsStaticConstructor().Should().BeFalse();
+
+            AssertNotAStaticConstructor<VB.MethodBlockSyntax>();
+            AssertNotAStaticConstructor<VB.PropertyStatementSyntax>();
+            AssertNotAStaticConstructor<VB.EnumBlockSyntax>();
+
+            void AssertNotAStaticConstructor<TSyntaxNodeType>() where TSyntaxNodeType : SyntaxNode =>
+                compiler.SemanticModel.GetDeclaredSymbol(compiler.GetNodes<TSyntaxNodeType>().Single()).IsStaticConstructor().Should().BeFalse();
         }
     }
 }
