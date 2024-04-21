@@ -65,6 +65,9 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Hosting_WebHostBuilderExtensions = new("Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions");
         public static readonly KnownType Microsoft_AspNetCore_Http_CookieOptions = new("Microsoft.AspNetCore.Http.CookieOptions");
         public static readonly KnownType Microsoft_AspNetCore_Http_HeaderDictionaryExtensions = new("Microsoft.AspNetCore.Http.HeaderDictionaryExtensions");
+        public static readonly KnownType Microsoft_AspNetCore_Http_IFormCollection = new("Microsoft.AspNetCore.Http.IFormCollection");
+        public static readonly KnownType Microsoft_AspNetCore_Http_IFormFile = new("Microsoft.AspNetCore.Http.IFormFile");
+        public static readonly KnownType Microsoft_AspNetCore_Http_IFormFileCollection = new("Microsoft.AspNetCore.Http.IFormFileCollection");
         public static readonly KnownType Microsoft_AspNetCore_Http_IHeaderDictionary = new("Microsoft.AspNetCore.Http.IHeaderDictionary");
         public static readonly KnownType Microsoft_AspNetCore_Http_IRequestCookieCollection = new("Microsoft.AspNetCore.Http.IRequestCookieCollection");
         public static readonly KnownType Microsoft_AspNetCore_Http_IResponseCookies = new("Microsoft.AspNetCore.Http.IResponseCookies");
@@ -92,6 +95,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute = new("Microsoft.AspNetCore.Mvc.IgnoreAntiforgeryTokenAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_Infrastructure_ActionResultObjectValueAttribute = new("Microsoft.AspNetCore.Mvc.Infrastructure.ActionResultObjectValueAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ModelBinding_ModelStateDictionary = new("Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_ModelBinding_Validation_ValidateNeverAttribute = new("Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidateNeverAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_NonActionAttribute = new("Microsoft.AspNetCore.Mvc.NonActionAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_NonControllerAttribute = new("Microsoft.AspNetCore.Mvc.NonControllerAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ObjectResult = new("Microsoft.AspNetCore.Mvc.ObjectResult");
@@ -296,8 +300,9 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_ComponentModel_Composition_PartCreationPolicyAttribute = new("System.ComponentModel.Composition.PartCreationPolicyAttribute");
         public static readonly KnownType System_ComponentModel_DataAnnotations_KeyAttribute = new("System.ComponentModel.DataAnnotations.KeyAttribute");
         public static readonly KnownType System_ComponentModel_DataAnnotations_RegularExpressionAttribute = new("System.ComponentModel.DataAnnotations.RegularExpressionAttribute");
-        public static readonly KnownType System_ComponentModel_DataAnnotations_ValidationAttribute = new("System.ComponentModel.DataAnnotations.ValidationAttribute");
         public static readonly KnownType System_ComponentModel_DataAnnotations_IValidatableObject = new("System.ComponentModel.DataAnnotations.IValidatableObject");
+        public static readonly KnownType System_ComponentModel_DataAnnotations_RequiredAttribute = new("System.ComponentModel.DataAnnotations.RequiredAttribute");
+        public static readonly KnownType System_ComponentModel_DataAnnotations_ValidationAttribute = new("System.ComponentModel.DataAnnotations.ValidationAttribute");                
         public static readonly KnownType System_ComponentModel_DefaultValueAttribute = new("System.ComponentModel.DefaultValueAttribute");
         public static readonly KnownType System_ComponentModel_EditorBrowsableAttribute = new("System.ComponentModel.EditorBrowsableAttribute");
         public static readonly KnownType System_ComponentModel_LocalizableAttribute = new("System.ComponentModel.LocalizableAttribute");
