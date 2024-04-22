@@ -90,6 +90,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute = new("Microsoft.AspNetCore.Mvc.IgnoreAntiforgeryTokenAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_NonActionAttribute = new("Microsoft.AspNetCore.Mvc.NonActionAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_NonControllerAttribute = new("Microsoft.AspNetCore.Mvc.NonControllerAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_ObjectResult = new("Microsoft.AspNetCore.Mvc.ObjectResult");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute = new("Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute_T = new("Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute", "T");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_RazorPages_PageModel = new("Microsoft.AspNetCore.Mvc.RazorPages.PageModel");

@@ -41,6 +41,52 @@ public class SwaggerActionReturnTypeTest
     [TestMethod]
     public void SwaggerActionReturnType_CS() =>
         builder.AddPaths("SwaggerActionReturnType.cs").Verify();
+
+    [DataTestMethod]
+    [DataRow("""Ok(bar)""")]
+    [DataRow("""Created("uri", bar)""")]
+    [DataRow("""Created(new Uri("uri"), bar)""")]
+
+    [DataRow("""CreatedAtAction("actionName", bar)""")]
+    [DataRow("""CreatedAtAction("actionName", null, bar)""")]
+    [DataRow("""CreatedAtAction("actionName", "controllerName", null, bar)""")]
+
+    [DataRow("""CreatedAtRoute("routeName", bar)""")]
+    [DataRow("""CreatedAtRoute("default(object)", bar)""")]
+    [DataRow("""CreatedAtRoute("routeName", null, bar)""")]
+
+    [DataRow("""Accepted(bar)""")]
+    [DataRow("""Accepted("uri", bar)""")]
+    [DataRow("""Accepted(new Uri("uri"), bar)""")]
+
+    [DataRow("""AcceptedAtAction("actionName", bar)""")]
+    [DataRow("""AcceptedAtAction("actionName", "controllerName", bar)""")]
+    [DataRow("""AcceptedAtAction("actionName", "controllerName", null, bar)""")]
+
+    [DataRow("""AcceptedAtRoute("routeName", null, foo)""")]
+    [DataRow("""AcceptedAtRoute(default(object), foo)""")]
+    public void RuleName_IActionResult(string invocation) =>
+        builder
+            .AddSnippet($$"""
+                using System;
+                using Microsoft.AspNetCore.Mvc;
+                using Microsoft.AspNetCore.Builder;
+                using Swashbuckle.AspNetCore.Annotations;
+                using Microsoft.AspNetCore.Http.HttpResults;
+
+                [ApiController]
+                public class Foo : Controller
+                {
+                    [HttpGet("a")]
+                    public IActionResult Method() =>    // Noncompliant
+                        {{invocation}};                 // Secondary
+
+                    private Bar bar = new();
+                }
+
+                public class Bar {}
+                """)
+            .Verify();
 }
 
 #endif

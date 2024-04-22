@@ -36,6 +36,17 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
         KnownType.Microsoft_AspNetCore_Mvc_IActionResult,
         KnownType.Microsoft_AspNetCore_Http_IResult);
 
+    private static HashSet<string> ActionResultMethods =>
+    [
+        "Ok",
+        "Created",
+        "CreatedAtAction",
+        "CreatedAtRoute",
+        "Accepted",
+        "AcceptedAtAction",
+        "AcceptedAtRoute"
+    ];
+
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
@@ -61,7 +72,8 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
         });
 
     private static IMethodSymbol InvalidMethod(BaseMethodDeclarationSyntax methodDeclaration, SonarSyntaxNodeReportingContext nodeContext) =>
-        nodeContext.SemanticModel.GetDeclaredSymbol(methodDeclaration, nodeContext.Cancel) is not { } method
+        !Builds200Response(methodDeclaration, nodeContext.SemanticModel)
+        || nodeContext.SemanticModel.GetDeclaredSymbol(methodDeclaration, nodeContext.Cancel) is not { } method
         || !method.IsControllerMethod()
         || !method.ReturnType.DerivesOrImplementsAny(ControllerActionReturnTypes)
         || method.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiConventionMethodAttribute)
@@ -70,6 +82,16 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
                                                         || HasSwaggerResponseAttributeWithReturnType(x))
             ? null
             : method;
+
+    private static bool Builds200Response(SyntaxNode node, SemanticModel model) =>
+        node.DescendantNodes().OfType<InvocationExpressionSyntax>()
+            .Any(x => ActionResultMethods.Contains(x.GetName())
+                      && x.ArgumentList.Arguments.Count > 0
+                      && model.GetSymbolInfo(x.Expression).Symbol.IsInType(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase))
+        || node.DescendantNodes().OfType<ObjectCreationExpressionSyntax>()
+               .Any(x => x.GetName() == "ObjectResult"
+                         && x.ArgumentList?.Arguments.Count > 0
+                         && model.GetSymbolInfo(x.Type).Symbol.GetSymbolType().Is(KnownType.Microsoft_AspNetCore_Mvc_ObjectResult));
 
     private static bool IsControllerCandidate(ISymbol symbol)
     {
