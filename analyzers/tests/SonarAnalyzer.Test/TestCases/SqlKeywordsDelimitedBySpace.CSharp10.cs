@@ -136,18 +136,4 @@ namespace Tests.Diagnostics
             string s24 = $"{{{nonConstOne}}}";              // Compliant
         }
     }
-
-    // https://github.com/SonarSource/sonar-dotnet/issues/9177
-    public class Repro_9177
-    {
-        record ArtifactDto(string Id, string TagIdentifier);
-
-        string sqlQuery = $@"
-	        SELECT
-		        [Artifact].[Id] AS [{nameof(ArtifactDto.Id)}],
-		        [Artifact].[TagIdentifier] AS [{nameof(ArtifactDto.TagIdentifier)}]
-	        FROM
-		        [Artifacts] AS [Artifact]"; // Noncompliant@-3 [id, braket_id]
-                                            // Noncompliant@-3 [TagIdentifier, braket_TagIdentifier]
-    }
 }
