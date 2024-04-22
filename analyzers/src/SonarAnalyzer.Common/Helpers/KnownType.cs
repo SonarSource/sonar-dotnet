@@ -72,6 +72,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ApiControllerAttribute = new("Microsoft.AspNetCore.Mvc.ApiControllerAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ApiConventionMethodAttribute = new("Microsoft.AspNetCore.Mvc.ApiConventionMethodAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ApiConventionTypeAttribute = new("Microsoft.AspNetCore.Mvc.ApiConventionTypeAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_ApiExplorerSettingsAttribute = new("Microsoft.AspNetCore.Mvc.ApiExplorerSettingsAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_Controller = new("Microsoft.AspNetCore.Mvc.Controller");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerBase = new("Microsoft.AspNetCore.Mvc.ControllerBase");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerAttribute = new("Microsoft.AspNetCore.Mvc.ControllerAttribute");

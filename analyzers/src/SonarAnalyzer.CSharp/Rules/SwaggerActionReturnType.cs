@@ -65,28 +65,27 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
         || !method.IsControllerMethod()
         || !method.ReturnType.DerivesOrImplementsAny(ControllerActionReturnTypes)
         || method.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiConventionMethodAttribute)
-                                                        || HasSwaggerResponseAttributeWithReturnType(x)
-                                                        || HasProducesResponseTypeAttributeWithReturnType(x))
+                                                        || HasApiExplorerSettingsWithIgnoreApiTrue(x)
+                                                        || HasProducesResponseTypeAttributeWithReturnType(x)
+                                                        || HasSwaggerResponseAttributeWithReturnType(x))
             ? null
             : method;
 
     private static bool IsControllerCandidate(ISymbol symbol)
     {
         var hasApiControllerAttribute = false;
-        var hasApiConventionTypeAttribute = false;
-        var hasProducesResponseTypeAttribute = false;
-
-        // ApiController attribute is required.
-        // ApiConventionType and ProducesResponseType<T> attributes will skip the analysis. For these, the type is always specified.
-        // If ProducesResponseTypeAttribute is present, we will have to do a check to see if the ctor overload with type is specified.
         foreach (var attribute in symbol.GetAttributesWithInherited())
         {
             hasApiControllerAttribute = hasApiControllerAttribute || attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute);
-            hasApiConventionTypeAttribute = hasApiConventionTypeAttribute || attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiConventionTypeAttribute);
-            hasProducesResponseTypeAttribute = hasProducesResponseTypeAttribute || HasProducesResponseTypeAttributeWithReturnType(attribute);
-        }
 
-        return hasApiControllerAttribute && !hasApiConventionTypeAttribute && !hasProducesResponseTypeAttribute;
+            if (attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiConventionTypeAttribute)
+                || HasProducesResponseTypeAttributeWithReturnType(attribute)
+                || HasApiExplorerSettingsWithIgnoreApiTrue(attribute))
+            {
+                return false;
+            }
+        }
+        return hasApiControllerAttribute;
     }
 
     private static string GetMessage(ISymbol symbol) =>
@@ -102,6 +101,10 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
     private static bool HasSwaggerResponseAttributeWithReturnType(AttributeData attribute) =>
         attribute.AttributeClass.DerivesFrom(KnownType.SwashbuckleAspNetCoreAnnotationsSwaggerResponseAttribute)
         && ContainsReturnType(attribute);
+
+    private static bool HasApiExplorerSettingsWithIgnoreApiTrue(AttributeData attribute) =>
+        attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiExplorerSettingsAttribute)
+        && attribute.NamedArguments.FirstOrDefault(x => x.Key == "IgnoreApi").Value.Value is true;
 
     private static bool ContainsReturnType(AttributeData attribute) =>
         !attribute.ConstructorArguments.FirstOrDefault(x => x.Type.Is(KnownType.System_Type)).IsNull

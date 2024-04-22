@@ -73,6 +73,10 @@ public class CompliantBaseline : Controller
     {
         return Ok(foo); // This raises API1000, so the user will find out that the status code in the attribute is wrong.
     }
+
+    [HttpGet("foo")]
+    [ApiExplorerSettings(IgnoreApi = true)]
+    public IActionResult IgnoreApiTrue() => Ok(42);
 }
 
 [ApiController]
@@ -164,6 +168,10 @@ public class NocompliantBaseline : ControllerBase
         return Ok(foo); // Secondary
         //     ^^^^^^^
     }
+
+    [HttpGet("foo")]
+    [ApiExplorerSettings(IgnoreApi = false)]
+    public IActionResult IgnoreApiFalse() => Ok(42); // Noncompliant
 }
 
 public class NotApiController : Controller
@@ -229,6 +237,25 @@ public class AnnotatedAtControllerLevelWithNoType : ControllerBase
         Ok(42); // Secondary
     //  ^^^^^^
 
+}
+
+[ApiController]
+[ApiExplorerSettings(IgnoreApi = true)]
+public class IgnoreApiTrueController : ControllerBase
+{
+    [HttpGet("foo")]
+    public IActionResult ReturnsOkWithValue() => Ok(42);
+}
+
+[ApiController]
+[ApiExplorerSettings(IgnoreApi = false)]
+public class IgnoreApiFalseController : ControllerBase
+{
+    [HttpGet("foo")]
+    public IActionResult ReturnsOkWithValue() => // Noncompliant {{Annotate this method with ProducesResponseType containing the return type for successful responses.}}
+    //                   ^^^^^^^^^^^^^^^^^^
+        Ok(42); // Secondary
+    //  ^^^^^^
 }
 
 public class Foo
