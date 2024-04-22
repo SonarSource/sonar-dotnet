@@ -108,6 +108,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_EntityFrameworkCore_DbContext = new("Microsoft.EntityFrameworkCore.DbContext");
         public static readonly KnownType Microsoft_EntityFrameworkCore_DbContextOptionsBuilder = new("Microsoft.EntityFrameworkCore.DbContextOptionsBuilder");
         public static readonly KnownType Microsoft_EntityFrameworkCore_DbSet_TEntity = new("Microsoft.EntityFrameworkCore.DbSet", "TEntity");
+        public static readonly KnownType Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions = new("Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions");
         public static readonly KnownType Microsoft_EntityFrameworkCore_Migrations_Migration = new("Microsoft.EntityFrameworkCore.Migrations.Migration");
         public static readonly KnownType Microsoft_EntityFrameworkCore_MySQLDbContextOptionsExtensions = new("Microsoft.EntityFrameworkCore.MySQLDbContextOptionsExtensions");
         public static readonly KnownType Microsoft_EntityFrameworkCore_NpgsqlDbContextOptionsExtensions = new("Microsoft.EntityFrameworkCore.NpgsqlDbContextOptionsExtensions");
@@ -393,6 +394,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Net_Security_SslPolicyErrors = new("System.Net.Security.SslPolicyErrors");
         public static readonly KnownType System_Net_SecurityProtocolType = new("System.Net.SecurityProtocolType");
         public static readonly KnownType System_Net_Sockets_Socket = new("System.Net.Sockets.Socket");
+        public static readonly KnownType System_Net_Sockets_SocketTaskExtensions = new("System.Net.Sockets.SocketTaskExtensions");
         public static readonly KnownType System_Net_Sockets_TcpClient = new("System.Net.Sockets.TcpClient");
         public static readonly KnownType System_Net_Sockets_UdpClient = new("System.Net.Sockets.UdpClient");
         public static readonly KnownType System_Net_WebClient = new("System.Net.WebClient");
