@@ -11,7 +11,7 @@
 
   <!-- The condition causes the target to only be executed once during the outer build step.
        Without it, it will be executed multiple times, which can introduce race conditions. -->
-  <Target Name="CleanBinaries" AfterTargets="Clean" Condition="'$(IsCrossTargetingBuild)' == 'true'">
-    <RemoveDir Directories="$(BinariesFolder)" Condition="Exists('$(BinariesFolder)')" />
+  <Target Name="CleanBinaries" AfterTargets="Clean" Condition="'$(IsCrossTargetingBuild)' == 'true' And Exists('$(BinariesFolder)')">
+    <RemoveDir Directories="$(BinariesFolder)" />
   </Target>
 </Project>
