@@ -78,6 +78,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerBase = new("Microsoft.AspNetCore.Mvc.ControllerBase");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerAttribute = new("Microsoft.AspNetCore.Mvc.ControllerAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_DisableRequestSizeLimitAttribute = new("Microsoft.AspNetCore.Mvc.DisableRequestSizeLimitAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_Filters_ActionFilterAttribute = new("Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_FromServicesAttribute = new("Microsoft.AspNetCore.Mvc.FromServicesAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpDeleteAttribute = new("Microsoft.AspNetCore.Mvc.HttpDeleteAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpGetAttribute = new("Microsoft.AspNetCore.Mvc.HttpGetAttribute");
@@ -291,6 +292,8 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_ComponentModel_Composition_PartCreationPolicyAttribute = new("System.ComponentModel.Composition.PartCreationPolicyAttribute");
         public static readonly KnownType System_ComponentModel_DataAnnotations_KeyAttribute = new("System.ComponentModel.DataAnnotations.KeyAttribute");
         public static readonly KnownType System_ComponentModel_DataAnnotations_RegularExpressionAttribute = new("System.ComponentModel.DataAnnotations.RegularExpressionAttribute");
+        public static readonly KnownType System_ComponentModel_DataAnnotations_ValidationAttribute = new("System.ComponentModel.DataAnnotations.ValidationAttribute");
+        public static readonly KnownType System_ComponentModel_DataAnnotations_IValidatableObject = new("System.ComponentModel.DataAnnotations.IValidatableObject");
         public static readonly KnownType System_ComponentModel_DefaultValueAttribute = new("System.ComponentModel.DefaultValueAttribute");
         public static readonly KnownType System_ComponentModel_EditorBrowsableAttribute = new("System.ComponentModel.EditorBrowsableAttribute");
         public static readonly KnownType System_ComponentModel_LocalizableAttribute = new("System.ComponentModel.LocalizableAttribute");
