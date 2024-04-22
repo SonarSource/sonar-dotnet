@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Http_IHeaderDictionary = new("Microsoft.AspNetCore.Http.IHeaderDictionary");
         public static readonly KnownType Microsoft_AspNetCore_Http_IRequestCookieCollection = new("Microsoft.AspNetCore.Http.IRequestCookieCollection");
         public static readonly KnownType Microsoft_AspNetCore_Http_IResponseCookies = new("Microsoft.AspNetCore.Http.IResponseCookies");
-        public static readonly KnownType Microsoft_AspNetCore_Http_IResult = new("Microsoft.AspNetCore.Mvc.IResult");
+        public static readonly KnownType Microsoft_AspNetCore_Http_IResult = new("Microsoft.AspNetCore.Http.IResult");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_AcceptVerbsAttribute = new("Microsoft.AspNetCore.Mvc.AcceptVerbsAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ApiControllerAttribute = new("Microsoft.AspNetCore.Mvc.ApiControllerAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ApiConventionMethodAttribute = new("Microsoft.AspNetCore.Mvc.ApiConventionMethodAttribute");

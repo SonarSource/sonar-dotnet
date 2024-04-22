@@ -35,7 +35,6 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
     private static readonly ImmutableArray<KnownType> ControllerActionReturnTypes = ImmutableArray.Create(
         KnownType.Microsoft_AspNetCore_Mvc_IActionResult,
         KnownType.Microsoft_AspNetCore_Http_IResult);
-
     private static HashSet<string> ActionResultMethods =>
     [
         "Ok",
@@ -44,6 +43,14 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
         "CreatedAtRoute",
         "Accepted",
         "AcceptedAtAction",
+        "AcceptedAtRoute"
+    ];
+    private static HashSet<string> ResultMethods =>
+    [
+        "Ok",
+        "Created",
+        "CreatedAtRoute",
+        "Accepted",
         "AcceptedAtRoute"
     ];
 
@@ -91,7 +98,11 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
         || node.DescendantNodes().OfType<ObjectCreationExpressionSyntax>()
                .Any(x => x.GetName() == "ObjectResult"
                          && x.ArgumentList?.Arguments.Count > 0
-                         && model.GetSymbolInfo(x.Type).Symbol.GetSymbolType().Is(KnownType.Microsoft_AspNetCore_Mvc_ObjectResult));
+                         && model.GetSymbolInfo(x.Type).Symbol.GetSymbolType().Is(KnownType.Microsoft_AspNetCore_Mvc_ObjectResult))
+        || node.DescendantNodes().OfType<InvocationExpressionSyntax>()
+               .Any(x => ResultMethods.Contains(x.GetName())
+                         && x.ArgumentList.Arguments.Count > 0
+                         && model.GetSymbolInfo(x).Symbol.IsInType(KnownType.Microsoft_AspNetCore_Http_Results));
 
     private static bool IsControllerCandidate(ISymbol symbol)
     {
