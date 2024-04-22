@@ -65,26 +65,28 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
                 var type = (INamedTypeSymbol)symbolStart.Symbol;
                 if (type.IsControllerType())
                 {
-                    symbolStart.RegisterSyntaxNodeAction(nodeContext =>
-                    {
-                        if (nodeContext.SemanticModel.GetDeclaredSymbol(nodeContext.Node) is IMethodSymbol method
-                            && method.IsControllerMethod())
-                        {
-                            var actionParameters = method.Parameters
-                                .Select(x => x.Type)
-                                .OfType<INamedTypeSymbol>()
-                                .Where(x => !IgnoreType(x))
-                                .SelectMany(x => RelatedTypesToExamine(x))
-                                .Distinct();
-                            foreach (var parameter in actionParameters)
-                            {
-                                CheckInvalidProperties(parameter, nodeContext, examinedTypes);
-                            }
-                        }
-                    }, SyntaxKind.MethodDeclaration);
+                    symbolStart.RegisterSyntaxNodeAction(nodeContext => ProcessControllerMethods(nodeContext, examinedTypes), SyntaxKind.MethodDeclaration);
                 }
             }, SymbolKind.NamedType);
         });
+
+    private static void ProcessControllerMethods(SonarSyntaxNodeReportingContext context, ConcurrentDictionary<ITypeSymbol, bool> examinedTypes)
+    {
+        if (context.SemanticModel.GetDeclaredSymbol(context.Node) is IMethodSymbol method
+            && method.IsControllerMethod())
+        {
+            var actionParameters = method.Parameters
+                .Select(x => x.Type)
+                .OfType<INamedTypeSymbol>()
+                .Where(x => !IgnoreType(x))
+                .SelectMany(x => RelatedTypesToExamine(x))
+                .Distinct();
+            foreach (var parameter in actionParameters)
+            {
+                CheckInvalidProperties(parameter, context, examinedTypes);
+            }
+        }
+    }
 
     private static void CheckInvalidProperties(INamedTypeSymbol parameterType, SonarSyntaxNodeReportingContext context, ConcurrentDictionary<ITypeSymbol, bool> examinedTypes)
     {
@@ -101,13 +103,13 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
 
     private static bool IgnoreType(ITypeSymbol type) =>
         type.IsAny(IgnoredTypes)
-        || !type.DeclaringSyntaxReferences.Any()
+        || (!type.DeclaringSyntaxReferences.Any()
             && !type.Is(KnownType.System_Collections_Generic_IEnumerable_T)
-            && !type.Implements(KnownType.System_Collections_Generic_IEnumerable_T);
+            && !type.Implements(KnownType.System_Collections_Generic_IEnumerable_T));
 
     private static bool CanBeNull(ITypeSymbol type) =>
         type is ITypeParameterSymbol { HasValueTypeConstraint: false }
-        || type.IsReferenceType && type.NullableAnnotation() != NullableAnnotation.NotAnnotated
+        || (type.IsReferenceType && type.NullableAnnotation() != NullableAnnotation.NotAnnotated)
         || type.IsNullableValueType();
 
     private static IEnumerable<IPropertySymbol> GetAllDeclaredProperties(ITypeSymbol type, ConcurrentDictionary<ITypeSymbol, bool> examinedTypes)
