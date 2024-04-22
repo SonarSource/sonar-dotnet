@@ -1290,7 +1290,7 @@ public class X
                 }
                 
                 """, AnalyzerLanguage.CSharp);
-            var actual = ExtensionsCS.EnclosingScope(node)?.Kind() ?? SyntaxKind.None;
+            var actual = ExtensionsCS.EnclosingScope(node)?.Kind();
             actual.Should().Be(expected);
         }
 
