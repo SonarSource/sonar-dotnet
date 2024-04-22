@@ -1,0 +1,25 @@
+{
+  "title": "ModelState.IsValid should be called in controller actions",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "asp.net"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6967",
+  "sqKey": "S6967",
+  "scope": "All",
+  "quickfix": "infeasible",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM",
+      "RELIABILITY": "HIGH",
+      "SECURITY": "HIGH"
+    },
+    "attribute": "TRUSTWORTHY"
+  }
+}
