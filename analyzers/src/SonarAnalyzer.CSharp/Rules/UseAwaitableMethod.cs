@@ -98,7 +98,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         {
             return ImmutableArray<ISymbol>.Empty; // Not in an async scope
         }
-        if (semanticModel.GetSymbolInfo(invocationExpression, cancel).Symbol is IMethodSymbol methodSymbol
+        if (semanticModel.GetSymbolInfo(invocationExpression, cancel).Symbol is IMethodSymbol { MethodKind: not MethodKind.DelegateInvoke } methodSymbol
             && !methodSymbol.IsAwaitableNonDynamic(semanticModel, invocationExpression.SpanStart)) // The invoked method returns something awaitable (but it isn't awaited).
         {
             // Perf: Before doing (expensive) speculative re-binding in SpeculativeBindCandidates, we check if there is an "..Async()" alternative in scope.
@@ -132,15 +132,25 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
     private static bool SpeculativeBindCandidate(SemanticModel semanticModel, IMethodSymbol candidate, SyntaxNode codeBlock, SyntaxNode awaitableRoot, InvocationExpressionSyntax invocationExpression)
     {
         var root = codeBlock.SyntaxTree.GetRoot();
-        var invocationIdentifierName = invocationExpression.GetMethodCallIdentifier()?.Parent as IdentifierNameSyntax;
-
+        var invocationIdentifierName = invocationExpression.GetMethodCallIdentifier()?.Parent;
+        if (invocationIdentifierName is null)
+        {
+            return false;
+        }
         var invocationAnnotation = new SyntaxAnnotation();
         var replace = root.ReplaceNodes([awaitableRoot, invocationIdentifierName, invocationExpression], (original, newNode) =>
         {
             var result = newNode;
             if (original == invocationIdentifierName)
             {
-                result = SyntaxFactory.IdentifierName(candidate.Name).WithTriviaFrom(invocationIdentifierName);
+                var newIdentifierToken = SyntaxFactory.Identifier(candidate.Name);
+                var simpleName = invocationIdentifierName switch
+                {
+                    IdentifierNameSyntax => (SimpleNameSyntax)SyntaxFactory.IdentifierName(newIdentifierToken),
+                    GenericNameSyntax { TypeArgumentList: { } typeArguments } => SyntaxFactory.GenericName(newIdentifierToken, typeArguments),
+                    _ => null,
+                };
+                result = simpleName is null ? newNode : simpleName.WithTriviaFrom(invocationIdentifierName);
             }
             if (original == invocationExpression)
             {
@@ -155,7 +165,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         var invocationReplaced = replace.GetAnnotatedNodes(invocationAnnotation).First();
         var speculativeSymbolInfo = semanticModel.GetSpeculativeSymbolInfo(invocationReplaced.SpanStart, invocationReplaced, SpeculativeBindingOption.BindAsExpression);
         var speculativeSymbol = speculativeSymbolInfo.Symbol as IMethodSymbol;
-        return candidate.Equals(speculativeSymbol) || candidate.Equals(speculativeSymbol?.ReducedFrom);
+        return candidate.Equals(speculativeSymbol) || candidate.Equals(speculativeSymbol?.ReducedFrom) || candidate.Equals(speculativeSymbol?.OriginalDefinition);
     }
 
     private static ExpressionSyntax GetAwaitableRootOfInvocation(ExpressionSyntax expression) =>

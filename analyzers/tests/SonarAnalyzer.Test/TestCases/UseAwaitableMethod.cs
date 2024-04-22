@@ -1,11 +1,13 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
-using System;
-using System.Threading;
 
 public class C
 {
     public C Child { get; }
+    public Action ActionProperty { get; }
+    public Func<Task> ActionPropertyAsync { get; }
+
     void VoidMethod() { }
     Task VoidMethodAsync() => Task.CompletedTask;
 
@@ -14,6 +16,9 @@ public class C
 
     bool BoolMethod() => true;
     Task<bool> BoolMethodAsync() => Task.FromResult(true);
+
+    T GenericMethod<T>() => default(T);
+    Task<T> GenericMethodAsync<T>() => Task.FromResult(default(T));
 
     C this[int i] => null;
     public static C operator +(C c) => default(C);
@@ -44,6 +49,13 @@ public class C
         //                          ^^^^^^^^^^^^^^           @-1
         await ReturnMethod().ReturnMethodAsync(); // Noncompliant
         //    ^^^^^^^^^^^^^^
+
+        GenericMethod<bool>(); // Noncompliant
+
+        // Delegate invokes. Do not report and crash
+        Func<Action> f = new Func<Action>(() => () => { });
+        f()(); // Compliant
+        ActionProperty(); // Compliant
     }
 
     public void NonAsyncMethod_VoidReturning()
@@ -164,7 +176,8 @@ class AsynchronousLambdas
 {
     async Task CallAsyncLambda(StreamReader reader)
     {
-        await Task.Run(async () => {
+        await Task.Run(async () =>
+        {
             await Foo();
             reader.ReadLine(); // Noncompliant
         });

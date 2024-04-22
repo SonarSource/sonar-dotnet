@@ -48,17 +48,16 @@ public class UseAwaitableMethodTest
             using System.Threading.Tasks;
             using System.Collections.Generic;
 
-            public class Sockets
+            public class C
             {
-                async Task<Action> CreateActionAsync(StreamReader reader)
+                public Action ActionProperty { get; }
+                public Func<Task> ActionPropertyAsync { get; }
+
+                async Task MethodInvocations()
                 {
-                    Action action = () =>
-                    {
-                        reader.ReadLine();      // Compliant
-                    };
-                    return action;
+                    ActionProperty(); // Compliant;
                 }
-            }                        
+            }            
             """).Verify();
 
     [TestMethod]
