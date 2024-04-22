@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 public class C
@@ -214,5 +215,20 @@ class ObsoletedMethod
     async Task Test()
     {
         VoidMethod(); // Compliant: The overload is deprecated
+    }
+}
+
+class ExpressionTrees
+{
+    public bool BoolMethod() => true;
+    public Task<bool> BoolMethodAsync() => Task.FromResult(true);
+
+    async Task Test()
+    {
+        var queryable = new ExpressionTrees[0].AsQueryable();
+        var qry1 = queryable.Where(x => x.BoolMethod());
+        var qry2 = from x in queryable
+                   where x.BoolMethod()
+                   select x;
     }
 }

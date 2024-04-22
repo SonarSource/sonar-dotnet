@@ -1260,6 +1260,40 @@ public class X
             actual.Should().Be(SyntaxKind.CompilationUnit);
         }
 
+        [DataTestMethod]
+        [DataRow("from $$x$$ in qry select x", SyntaxKind.MethodDeclaration)] // Wrong. Should be FromClause
+        [DataRow("from x in $$qry$$ select x", SyntaxKind.MethodDeclaration)]
+        [DataRow("from x in qry from y in $$qry$$ select x", SyntaxKind.MethodDeclaration)] // Wrong. Should be FromClause
+        [DataRow("from x in qry select $$x$$", SyntaxKind.SelectClause)]
+        [DataRow("from x in qry orderby $$x$$ select x", SyntaxKind.OrderByClause)]
+        [DataRow("from x in qry where x == $$string.Empty$$ select x", SyntaxKind.WhereClause)]
+        [DataRow("from x in qry let y = $$x$$ select y", SyntaxKind.LetClause)]
+        [DataRow("from x in qry join y in qry on $$x$$ equals y select x", SyntaxKind.JoinClause)]
+        [DataRow("from x in qry join y in qry on x equals $$y$$ select x", SyntaxKind.JoinClause)]
+        [DataRow("from x in qry join y in $$qry$$ on x equals y select x", SyntaxKind.JoinClause)] // Wrong. Should be MethodDeclaration
+        [DataRow("from x in qry group x by $$x$$ into g select g", SyntaxKind.GroupClause)]
+        [DataRow("from x in qry group $$x$$ by x into g select g", SyntaxKind.GroupClause)] // Wrong. Should be the FromClause
+        [DataRow("from x in qry group x by x into $$g$$ select g", SyntaxKind.QueryContinuation)]
+        [DataRow("from x in qry select x into $$y$$ select y", SyntaxKind.QueryContinuation)]
+        public void EnclosingScope_QueryExpressionSyntax(string qry, SyntaxKind expected)
+        {
+            var node = NodeBetweenMarkers($$"""
+                using System;
+                using System.Linq;
+
+                class Test
+                {
+                    public void Query(string[] qry)
+                    {
+                        _ = {{qry}};
+                    }
+                }
+                
+                """, AnalyzerLanguage.CSharp);
+            var actual = ExtensionsCS.EnclosingScope(node)?.Kind() ?? SyntaxKind.None;
+            actual.Should().Be(expected);
+        }
+
         private static SyntaxNode NodeBetweenMarkers(string code, AnalyzerLanguage language, bool getInnermostNodeForTie = false, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
         {
             var position = code.IndexOf("$$");

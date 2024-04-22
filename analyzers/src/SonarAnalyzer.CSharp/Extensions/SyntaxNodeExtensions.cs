@@ -38,18 +38,25 @@ namespace SonarAnalyzer.Extensions
             SyntaxKind.EnumMemberDeclaration,
             SyntaxKind.FieldDeclaration,
             SyntaxKind.GetAccessorDeclaration,
+            SyntaxKind.GroupClause,
             SyntaxKindEx.InitAccessorDeclaration,
+            SyntaxKind.JoinClause,
+            SyntaxKind.LetClause,
             SyntaxKindEx.LocalFunctionStatement,
             SyntaxKind.MethodDeclaration,
+            SyntaxKind.OrderByClause,
             SyntaxKind.OperatorDeclaration,
             SyntaxKind.Parameter,
             SyntaxKind.ParenthesizedLambdaExpression,
             SyntaxKindEx.PrimaryConstructorBaseType,
             SyntaxKind.PropertyDeclaration,
             SyntaxKind.RemoveAccessorDeclaration,
+            SyntaxKind.QueryContinuation,
+            SyntaxKind.SelectClause,
             SyntaxKind.SetAccessorDeclaration,
             SyntaxKind.SimpleLambdaExpression,
-            SyntaxKind.ThisConstructorInitializer];
+            SyntaxKind.ThisConstructorInitializer,
+            SyntaxKind.WhereClause];
 
         private static readonly SyntaxKind[] NegationOrConditionEnclosingSyntaxKinds = [
             SyntaxKind.AnonymousMethodExpression,
@@ -567,7 +574,7 @@ namespace SonarAnalyzer.Extensions
             };
 
         public static SyntaxNode EnclosingScope(this SyntaxNode node) =>
-            node.Ancestors().FirstOrDefault(x => x.IsAnyKind(EnclosingScopeSyntaxKinds));
+            node.AncestorsAndSelf().FirstOrDefault(x => x.IsAnyKind(EnclosingScopeSyntaxKinds));
 
         private readonly record struct PathPosition(int Index, int TupleLength);
 
