@@ -40,7 +40,6 @@ public static class CoreMetadataReference
     public static MetadataReference SystemCollectionsNonGeneric { get; } = CreateReference("System.Collections.NonGeneric.dll");
     public static MetadataReference SystemConsole { get; } = CreateReference("System.Console.dll");
     public static MetadataReference SystemComponentModelPrimitives { get; } = CreateReference("System.ComponentModel.Primitives.dll");
-    public static MetadataReference SystemComponentModelTypeConverter { get; } = CreateReference("System.ComponentModel.TypeConverter.dll");
     public static MetadataReference SystemDataCommon { get; } = CreateReference("System.Data.Common.dll");
     public static MetadataReference SystemDiagnosticsTraceSource { get; } = CreateReference("System.Diagnostics.TraceSource.dll");
     public static MetadataReference SystemDiagnosticsProcess { get; } = CreateReference("System.Diagnostics.Process.dll");
