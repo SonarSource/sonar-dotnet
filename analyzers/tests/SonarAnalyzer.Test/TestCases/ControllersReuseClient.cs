@@ -17,7 +17,7 @@ public class SomeController : ControllerBase
 
     public SomeController()
     {
-        clientField = new HttpClient();                            // Compliant
+        clientField = new HttpClient();                           // Compliant
     }
 
     [HttpGet("foo")]

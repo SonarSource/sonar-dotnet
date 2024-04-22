@@ -48,7 +48,7 @@ public sealed class ControllersReuseClient : ReuseClientBase
                     {
                         if (IsInPublicMethod(nodeContext.Node)
                             && !nodeContext.Node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.ConstructorDeclaration, SyntaxKindEx.PrimaryConstructorBaseType))
-                            && IsResuableClient(nodeContext)
+                            && IsReusableClient(nodeContext)
                             && !IsAssignedForReuse(nodeContext))
                         {
                             nodeContext.ReportIssue(Rule, nodeContext.Node);

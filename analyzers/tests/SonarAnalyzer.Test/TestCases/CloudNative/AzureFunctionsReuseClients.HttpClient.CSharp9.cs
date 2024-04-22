@@ -19,7 +19,7 @@
             field ??= new HttpClient();                       // Compliant
 
             var local = default(HttpClient);
-            local ??= new HttpClient();                       // Noncompliant
+            local ??= new HttpClient();                       // Compliant
 
             _ = new HttpClient();                             // Noncompliant
             using var localUsingStatement = new HttpClient(); // Noncompliant

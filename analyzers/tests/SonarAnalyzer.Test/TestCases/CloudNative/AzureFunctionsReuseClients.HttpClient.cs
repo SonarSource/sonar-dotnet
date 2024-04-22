@@ -38,6 +38,9 @@ namespace DifferentAssignments
         protected static HttpClient ClientProperty { get; set; } = new HttpClient(); // Compliant
         protected static Lazy<HttpClient> LazyClientProperty { get; set; } = new Lazy<HttpClient>(() => new HttpClient()); // Compliant
 
+        protected HttpClient ClientPropertyAccessor { get => new HttpClient(); } // FN
+        protected HttpClient ClientPropertyAccessorArrow => new HttpClient();    // FN
+
         static FunctionApp1()
         {
             ClientProperty = new HttpClient(); // Compliant
@@ -55,7 +58,7 @@ namespace DifferentAssignments
             someField = (new HttpClient() as object);            // Noncompliant FP
             client = PassThrough(new HttpClient());              // Noncompliant FP
             client = client ?? new HttpClient();                 // Noncompliant FP
-            client = client == null ? new HttpClient() : client; // Noncompliant FP
+            client = client == null ? new HttpClient() : client; // Compliant
             PassThrough(new HttpClient());                       // Noncompliant
             var local = new HttpClient();                        // Noncompliant
             local = new System.Net.Http.HttpClient();            // Noncompliant

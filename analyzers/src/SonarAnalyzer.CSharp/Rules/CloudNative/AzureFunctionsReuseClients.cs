@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(c =>
             {
                 if (c.AzureFunctionMethod() is not null
-                    && IsResuableClient(c)
+                    && IsReusableClient(c)
                     && !IsAssignedForReuse(c))
                 {
                     c.ReportIssue(Rule, c.Node);

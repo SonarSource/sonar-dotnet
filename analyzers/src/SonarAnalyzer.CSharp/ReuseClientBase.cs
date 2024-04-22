@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules.CSharp
             !IsInVariableDeclaration(context.Node)
             && (IsInConditionalCode(context.Node) || IsInFieldOrPropertyInitializer(context.Node) || IsAssignedToStaticFieldOrProperty(context));
 
-        protected bool IsResuableClient(SonarSyntaxNodeReportingContext context)
+        protected bool IsReusableClient(SonarSyntaxNodeReportingContext context)
         {
             var objectCreation = ObjectCreationFactory.Create(context.Node);
             return ReusableClients.Any(x => objectCreation.IsKnownType(x, context.SemanticModel));
