@@ -204,3 +204,15 @@ class AsynchronousLambdas
 
     Task Foo() => null;
 }
+
+class ObsoletedMethod
+{
+    public void VoidMethod() { }
+    [Obsolete]
+    public Task VoidMethodAsync() => Task.CompletedTask;
+
+    async Task Test()
+    {
+        VoidMethod(); // Compliant: The overload is deprecated
+    }
+}

@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using WellKnownExtensionMethodContainer = SonarAnalyzer.Common.MultiValueDictionary<Microsoft.CodeAnalysis.ITypeSymbol, Microsoft.CodeAnalysis.INamedTypeSymbol>;
 namespace SonarAnalyzer.Rules.CSharp;
@@ -118,7 +117,8 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         ((ITypeSymbol[])[.. invokedType.GetSelfAndBaseTypes(), .. WellKnownExtensionMethodContainer(wellKnownExtensionMethodContainer, methodContainer), methodContainer])
             .Distinct()
             .SelectMany(x => x.GetMembers(methodName))
-            .OfType<IMethodSymbol>();
+            .OfType<IMethodSymbol>()
+            .Where(x => !x.HasAttribute(KnownType.System_ObsoleteAttribute));
 
     private static IEnumerable<INamedTypeSymbol> WellKnownExtensionMethodContainer(WellKnownExtensionMethodContainer lookup, ITypeSymbol invokedType) =>
         lookup.TryGetValue(invokedType, out var extensionMethodContainer)
