@@ -104,5 +104,6 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
         && ContainsReturnType(attribute);
 
     private static bool ContainsReturnType(AttributeData attribute) =>
-        !attribute.ConstructorArguments.FirstOrDefault(x => x.Type.Is(KnownType.System_Type)).IsNull;
+        !attribute.ConstructorArguments.FirstOrDefault(x => x.Type.Is(KnownType.System_Type)).IsNull
+        || attribute.NamedArguments.FirstOrDefault(x => x.Key == "Type").Value.Value is not null;
 }

@@ -24,6 +24,10 @@ public class CompliantBaseline : Controller
     public IActionResult HasProducesResponseTypeTypeOf2() => Ok(foo);
 
     [HttpGet("foo")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
+    public IActionResult HasProducesResponseTypeAsParameter() => Ok(foo);
+
+    [HttpGet("foo")]
     [ProducesResponseType<Foo>(StatusCodes.Status200OK)]
     public IActionResult HasProducesResponseTypeGeneric() => Ok(foo);
 
