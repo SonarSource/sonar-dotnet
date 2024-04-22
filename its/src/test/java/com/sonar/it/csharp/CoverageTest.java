@@ -78,7 +78,6 @@ class CoverageTest {
   @Test
   void open_cover_on_MultipleProjects() throws Exception {
     BuildResult buildResult = analyzeMultipleProjectsTestProject("sonar.cs.opencover.reportsPaths", "opencover.xml");
-
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
       "Coverage Report Statistics: 5 files, 3 main files, 3 main files with coverage, 2 test files, 0 project excluded files, 0 other language files");
@@ -87,6 +86,22 @@ class CoverageTest {
     assertCoverageMetrics("CoverageTest.MultipleProjects:FirstProject/FirstClass.cs", 10, 0, 2, 1);
     assertLineCoverageMetrics("CoverageTest.MultipleProjects:FirstProject/SecondClass.cs", 4, 0);
     assertCoverageMetrics("CoverageTest.MultipleProjects:SecondProject/FirstClass.cs", 11, 3, 10, 4);
+  }
+
+  @Test
+  void open_cover_on_MultipleFrameworks() throws Exception {
+    BuildResult buildResult = analyzeMultipleFrameworksTestProject("sonar.cs.opencover.reportsPaths", "coverage.*.xml");
+    String s = buildResult.getLogs();
+    assertThat(buildResult.getLogs()).contains(
+      "Sensor C# Tests Coverage Report Import",
+      "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
+    /*
+    MatchingBranchpoints_FullyCovered:        2/2
+    MatchingBranchpoints_PartiallyCovered:    1/2
+    NotMatchingBranchpoints_FullyCovered:     2/2
+    NotMatchingBranchpoints_PartiallyCovered: 2/2 This over-reporting is expected.
+    */
+    assertCoverageMetrics("CoverageTest.MultipleFrameworks", 32, 4, 8, 1);
   }
 
   @Test
@@ -200,6 +215,10 @@ class CoverageTest {
 
   private BuildResult analyzeMultipleProjectsTestProject(String coverageProperty, String coverageFileName) throws IOException {
     return Tests.analyzeProject(temp, "CoverageTest.MultipleProjects", "no_rule", coverageProperty, coverageFileName);
+  }
+
+  private BuildResult analyzeMultipleFrameworksTestProject(String coverageProperty, String coverageFileNames) throws IOException {
+    return Tests.analyzeProject(temp, "CoverageTest.MultipleFrameworks", "no_rule", coverageProperty, coverageFileNames);
   }
 
   private void assertCoverageMetrics(String componentKey, int linesToCover, int uncoveredLines, int conditionsToCover, int uncoveredConditions) {
