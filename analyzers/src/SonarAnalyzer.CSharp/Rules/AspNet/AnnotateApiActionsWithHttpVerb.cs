@@ -31,13 +31,6 @@ public sealed class AnnotateApiActionsWithHttpVerb : SonarDiagnosticAnalyzer
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     private static readonly ImmutableArray<KnownType> HttpMethodAttributes = ImmutableArray.Create(
-        KnownType.Microsoft_AspNetCore_Mvc_HttpGetAttribute,
-        KnownType.Microsoft_AspNetCore_Mvc_HttpPutAttribute,
-        KnownType.Microsoft_AspNetCore_Mvc_HttpPostAttribute,
-        KnownType.Microsoft_AspNetCore_Mvc_HttpDeleteAttribute,
-        KnownType.Microsoft_AspNetCore_Mvc_HttpPatchAttribute,
-        KnownType.Microsoft_AspNetCore_Mvc_HttpHeadAttribute,
-        KnownType.Microsoft_AspNetCore_Mvc_HttpOptionsAttribute,
         KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute,
         KnownType.Microsoft_AspNetCore_Mvc_AcceptVerbsAttribute); // AcceptVerbs is treated as an exception
 
@@ -81,6 +74,6 @@ public sealed class AnnotateApiActionsWithHttpVerb : SonarDiagnosticAnalyzer
     // Tracks [ApiExplorerSettings(IgnoreApi = true)]
     private static bool IgnoresApiExplorer(IEnumerable<AttributeData> attributes) =>
         attributes.FirstOrDefault(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiExplorerSettingsAttribute)) is { } apiExplorerSettings
-        && apiExplorerSettings.NamedArguments.FirstOrDefault(x => x.Key == "IgnoreApi").Value.Value is { } ignoreApi
-        && ignoreApi.Equals(true);
+        && apiExplorerSettings.TryGetAttributeValue<bool>("IgnoreApi", out var ignoreApi)
+        && ignoreApi;
 }
