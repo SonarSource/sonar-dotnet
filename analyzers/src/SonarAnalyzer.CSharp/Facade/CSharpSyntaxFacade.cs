@@ -108,6 +108,7 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override bool IsStatic(SyntaxNode node) =>
         Cast<BaseMethodDeclarationSyntax>(node).IsStatic();
 
+    /// <inheritdoc cref="Microsoft.CodeAnalysis.CSharp.Extensions.ExpressionSyntaxExtensions.IsWrittenTo(ExpressionSyntax, SemanticModel, CancellationToken)"/>
     public override bool IsWrittenTo(SyntaxNode expression, SemanticModel semanticModel, CancellationToken cancellationToken) =>
         Cast<ExpressionSyntax>(expression).IsWrittenTo(semanticModel, cancellationToken);
 

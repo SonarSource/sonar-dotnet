@@ -9,9 +9,14 @@ namespace Microsoft.CodeAnalysis.VisualBasic.Extensions;
 [ExcludeFromCodeCoverage]
 internal static class ExpressionSyntaxExtensions
 {
-    // Copy of
-    // https://github.com/dotnet/roslyn/blob/5a1cc5f83e4baba57f0355a685a5d1f487bfac66/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/VisualBasic/Extensions/ExpressionSyntaxExtensions.vb#L362
-    [ExcludeFromCodeCoverage]
+    /// <summary>
+    /// Returns <see langword="true"/> if <paramref name="expression"/> represents a node where a value is written to, like on the left side of an assignment expression. This method
+    /// also returns <see langword="true"/> for potentially writeable expressions, like <see langword="ref"/> parameters.
+    /// See also <seealso cref="IsOnlyWrittenTo(ExpressionSyntax)"/>.
+    /// </summary>
+    /// <remarks>
+    /// Copied from <seealso href="https://github.com/dotnet/roslyn/blob/5a1cc5f83e4baba57f0355a685a5d1f487bfac66/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/VisualBasic/Extensions/ExpressionSyntaxExtensions.vb#L362"/>
+    /// </remarks>
     public static bool IsWrittenTo(this ExpressionSyntax expression, SemanticModel semanticModel, CancellationToken cancellationToken)
     {
         if (expression == null)

@@ -11,8 +11,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions;
 [ExcludeFromCodeCoverage]
 public static class ExpressionSyntaxExtensions
 {
-    // Copy of
-    // "https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L319"
+    /// <summary>
+    /// Returns <see langword="true"/> if <paramref name="expression"/> represents a node where a value is written to, like on the left side of an assignment expression. This method
+    /// also returns <see langword="true"/> for potentially writeable expressions, like <see langword="ref"/> parameters.
+    /// See also <seealso cref="IsOnlyWrittenTo(ExpressionSyntax)"/>.
+    /// </summary>
+    /// <remarks>
+    /// Copied from <seealso href="https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/ExpressionSyntaxExtensions.cs#L319"/>
+    /// </remarks>
     public static bool IsWrittenTo(
         this ExpressionSyntax expression,
         SemanticModel semanticModel,

@@ -18,11 +18,11 @@
 * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-using System.CodeDom.Compiler;
+using System.Diagnostics.CodeAnalysis;
 
-namespace SonarAnalyzer.Extensions;
+namespace Microsoft.CodeAnalysis.VisualBasic.Extensions;
 
-[GeneratedCode("Copied and converted from Roslyn", "5a1cc5f83e4baba57f0355a685a5d1f487bfac66")]
+[ExcludeFromCodeCoverage]
 internal static partial class SyntaxNodeExtensions
 {
     // Copied and converted from
