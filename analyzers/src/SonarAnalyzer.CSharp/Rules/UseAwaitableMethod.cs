@@ -127,15 +127,20 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
 
     private static IEnumerable<ISymbol> SpeculativeBindCandidates(SemanticModel semanticModel, SyntaxNode codeBlock, SyntaxNode awaitableRoot,
         InvocationExpressionSyntax invocationExpression, IEnumerable<IMethodSymbol> awaitableCandidates) =>
-        awaitableCandidates.Where(x => SpeculativeBindCandidate(semanticModel, x, codeBlock, awaitableRoot, invocationExpression));
+        awaitableCandidates
+            .Select(x => x.Name)
+            .Distinct()
+            .Select(x => SpeculativeBindCandidate(semanticModel, x, codeBlock, awaitableRoot, invocationExpression))
+            .WhereNotNull();
 
-    private static bool SpeculativeBindCandidate(SemanticModel semanticModel, IMethodSymbol candidate, SyntaxNode codeBlock, SyntaxNode awaitableRoot, InvocationExpressionSyntax invocationExpression)
+    private static IMethodSymbol SpeculativeBindCandidate(SemanticModel semanticModel, string candidateName, SyntaxNode codeBlock, SyntaxNode awaitableRoot,
+        InvocationExpressionSyntax invocationExpression)
     {
         var root = codeBlock.SyntaxTree.GetRoot();
         var invocationIdentifierName = invocationExpression.GetMethodCallIdentifier()?.Parent;
         if (invocationIdentifierName is null)
         {
-            return false;
+            return null;
         }
         var invocationAnnotation = new SyntaxAnnotation();
         var replace = root.ReplaceNodes([awaitableRoot, invocationIdentifierName, invocationExpression], (original, newNode) =>
@@ -143,7 +148,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
             var result = newNode;
             if (original == invocationIdentifierName)
             {
-                var newIdentifierToken = SyntaxFactory.Identifier(candidate.Name);
+                var newIdentifierToken = SyntaxFactory.Identifier(candidateName);
                 var simpleName = invocationIdentifierName switch
                 {
                     IdentifierNameSyntax => (SimpleNameSyntax)SyntaxFactory.IdentifierName(newIdentifierToken),
@@ -165,7 +170,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         var invocationReplaced = replace.GetAnnotatedNodes(invocationAnnotation).First();
         var speculativeSymbolInfo = semanticModel.GetSpeculativeSymbolInfo(invocationReplaced.SpanStart, invocationReplaced, SpeculativeBindingOption.BindAsExpression);
         var speculativeSymbol = speculativeSymbolInfo.Symbol as IMethodSymbol;
-        return candidate.Equals(speculativeSymbol) || candidate.Equals(speculativeSymbol?.ReducedFrom) || candidate.Equals(speculativeSymbol?.OriginalDefinition);
+        return speculativeSymbol;
     }
 
     private static ExpressionSyntax GetAwaitableRootOfInvocation(ExpressionSyntax expression) =>
