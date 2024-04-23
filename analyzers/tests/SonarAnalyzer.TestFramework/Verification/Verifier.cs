@@ -187,7 +187,9 @@ internal class Verifier
             .AddReferences(builder.References)
             .AddReferences(hasContentDocuments ? NuGetMetadataReference.MicrosoftAspNetCoreAppRef("7.0.17") : [])
             .AddReferences(hasContentDocuments ? NuGetMetadataReference.SystemTextEncodingsWeb("7.0.0") : [])
-            .AddAnalyzerConfigDocument(Path.Combine(Directory.GetCurrentDirectory(), ".editorconfig"), editorConfigGenerator.Generate(concurrentContentFiles.Concat(contentFilePaths).Concat(contentSnippets.Select(x => x.FileName))));
+            .AddAnalyzerConfigDocument(
+                Path.Combine(Directory.GetCurrentDirectory(), ".editorconfig"),
+                editorConfigGenerator.Generate(concurrentContentFiles.Concat(contentFilePaths).Concat(contentSnippets.Select(x => x.FileName))));
     }
 
     private IEnumerable<string> CreateConcurrencyTest(IEnumerable<string> paths)
