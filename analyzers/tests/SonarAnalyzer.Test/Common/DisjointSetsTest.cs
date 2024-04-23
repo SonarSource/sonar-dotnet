@@ -67,6 +67,15 @@ public class DisjointSetsTest
         AssertSets([["1", "2", "3", "4", "5", "6"]], sets);     // Merge of 1-height tree and 2-height tree
     }
 
+    [TestMethod]
+    public void GetAllSets_ReturnsSortedSets()
+    {
+        var sets = new DisjointSets(["3", "2", "1"]);
+        AssertSets([["1"], ["2"], ["3"]], sets);
+        sets.Union("3", "1");
+        AssertSets([["1", "3"], ["2"]], sets);
+    }
+
     private static void AssertSets(List<List<string>> expected, DisjointSets sets) =>
-      sets.GetAllSets().Should().BeEquivalentTo(expected);
+      sets.GetAllSets().Should().BeEquivalentTo(expected, options => options.WithStrictOrdering());
 }
