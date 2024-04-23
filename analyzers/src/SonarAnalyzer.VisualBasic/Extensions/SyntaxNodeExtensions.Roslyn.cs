@@ -23,7 +23,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace Microsoft.CodeAnalysis.VisualBasic.Extensions;
 
 [ExcludeFromCodeCoverage]
-internal static partial class SyntaxNodeExtensions
+internal static class SyntaxNodeExtensions
 {
     // Copied and converted from
     // https://github.com/dotnet/roslyn/blob/5a1cc5f83e4baba57f0355a685a5d1f487bfac66/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/VisualBasic/Extensions/SyntaxNodeExtensions.vb#L16
