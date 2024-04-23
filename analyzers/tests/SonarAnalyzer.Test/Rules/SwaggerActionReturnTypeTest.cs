@@ -58,11 +58,12 @@ public class SwaggerActionReturnTypeTest
     [DataRow("""AcceptedAtAction("actionName", bar)""")]
     [DataRow("""AcceptedAtAction("actionName", "controllerName", bar)""")]
     [DataRow("""AcceptedAtAction("actionName", "controllerName", null, bar)""")]
-    [DataRow("""AcceptedAtRoute("routeName", null, foo)""")]
-    [DataRow("""AcceptedAtRoute(default(object), foo)""")]
+    [DataRow("""AcceptedAtRoute("routeName", null, bar)""")]
+    [DataRow("""AcceptedAtRoute(default(object), bar)""")]
     public void RuleName_IActionResult(string invocation) =>
         builder
             .AddSnippet($$"""
+                using System;
                 using Microsoft.AspNetCore.Mvc;
 
                 [ApiController]
@@ -100,6 +101,7 @@ public class SwaggerActionReturnTypeTest
     public void RuleName_IResult(string invocation) =>
         builder
             .AddSnippet($$"""
+                using System;
                 using Microsoft.AspNetCore.Mvc;
                 using Microsoft.AspNetCore.Http;
 
