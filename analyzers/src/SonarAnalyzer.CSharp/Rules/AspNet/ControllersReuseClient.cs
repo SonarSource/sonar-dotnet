@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class ControllersReuseClient : ReuseClientBase
 {
     private const string DiagnosticId = "S6962";
-    private const string MessageFormat = "FIXME";
+    private const string MessageFormat = "Reuse Httpclient instances rather than create new ones with each controller action invocation.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -47,9 +47,9 @@ public sealed class ControllersReuseClient : ReuseClientBase
                     symbolStartContext.RegisterSyntaxNodeAction(nodeContext =>
                     {
                         if (IsInPublicMethod(nodeContext.Node)
-                            && !nodeContext.Node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.ConstructorDeclaration, SyntaxKindEx.PrimaryConstructorBaseType))
                             && IsReusableClient(nodeContext)
-                            && !IsAssignedForReuse(nodeContext))
+                            && !(nodeContext.Node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.ConstructorDeclaration, SyntaxKindEx.PrimaryConstructorBaseType))
+                                 || IsAssignedForReuse(nodeContext)))
                         {
                             nodeContext.ReportIssue(Rule, nodeContext.Node);
                         }

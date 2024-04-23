@@ -23,17 +23,13 @@ public class SomeController : ControllerBase
     [HttpGet("foo")]
     public async Task<string> Foo()
     {
-        using var clientA = new HttpClient();                     // Noncompliant
-        //                  ^^^^^^^^^^^^^^^^
-        await clientA.GetStringAsync("");
-
-        using (var clientB = new HttpClient())                    //Noncompliant
+        using (var clientB = new HttpClient())                    //Noncompliant {{Reuse Httpclient instances rather than create new ones with each controller action invocation.}}
+        //                   ^^^^^^^^^^^^^^^^
         {
             await clientB.GetStringAsync("");
         }
 
         var client = new HttpClient();                            // Noncompliant
-        client = new();                                           // Noncompliant
         clientField = new HttpClient();                           // Noncompliant
         ClientProperty = new HttpClient();                        // Noncompliant
         var local = new HttpClient();                             // Noncompliant
@@ -43,8 +39,6 @@ public class SomeController : ControllerBase
 
         local = ClientPropertyAccessorArrow;                      // Compliant
         local = ClientPropertyAccessorArrow;                      // Compliant
-        clientField ??= new HttpClient();                         // Compliant
-        using var pooledClient = _clientFactory.CreateClient();   // Compliant
 
         // Lambda
         _ = new Lazy<HttpClient>(() => new HttpClient());         // Noncompliant FP
@@ -58,7 +52,6 @@ public class SomeController : ControllerBase
                 _ = new HttpClient();                             // Compliant
                 break;
         }
-        _ = true switch { true => new HttpClient() };             // Compliant
         _ = true ? new HttpClient() : null;                       // Compliant
 
         return "bar";
