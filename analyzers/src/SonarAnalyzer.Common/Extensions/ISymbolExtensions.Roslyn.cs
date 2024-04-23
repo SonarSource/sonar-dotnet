@@ -42,10 +42,10 @@ public static class ISymbolExtensions
         }
 
         // otherwise: needs valid GetAwaiter
-        var potentialGetAwaiters = semanticModel.LookupSymbols(position,
-                                                               container: typeSymbol ?? methodSymbol!.ReturnType.OriginalDefinition,
-                                                               name: WellKnownMemberNames.GetAwaiter,
-                                                               includeReducedExtensionMethods: true);
+        // SONAR: Performance: LookupSymbols is slow. We use the less precise GetMembers instead:
+        // Misses extension methods and method from base classes
+        var container = typeSymbol ?? methodSymbol!.ReturnType.OriginalDefinition;
+        var potentialGetAwaiters = container.GetMembers(WellKnownMemberNames.GetAwaiter);
         var getAwaiters = potentialGetAwaiters.OfType<IMethodSymbol>().Where(x => !x.Parameters.Any());
         return getAwaiters.Any(VerifyGetAwaiter);
     }
