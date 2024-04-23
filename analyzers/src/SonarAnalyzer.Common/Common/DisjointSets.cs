@@ -46,6 +46,7 @@ public class DisjointSets
     public string FindRoot(string element) =>
         parents[element] is var root && root != element ? FindRoot(root) : root;
 
+    // Set elements are sorted in ascending order. Sets are sorted in ascending order by their first element.
     public List<List<string>> GetAllSets() =>
         [.. parents.GroupBy(x => FindRoot(x.Key), x => x.Key).Select(x => x.OrderBy(x => x).ToList()).OrderBy(x => x[0])];
 }
