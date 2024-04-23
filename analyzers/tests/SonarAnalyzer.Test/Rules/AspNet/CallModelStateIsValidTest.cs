@@ -63,6 +63,45 @@ public class CallModelStateIsValidTest
                 }
             }
             """).Verify();
+
+    [DataTestMethod]
+    [DataRow("!ModelState.IsValid")]
+    [DataRow("ModelState?.IsValid is false")]
+    [DataRow("!ModelState!.IsValid")]
+    [DataRow("ModelState!?.IsValid is false")]
+    [DataRow("ModelState?.IsValid! is false")]
+    [DataRow("ModelState is { IsValid: false }")]
+    [DataRow("this is { ModelState.IsValid: false }")]
+    [DataRow("this is { ModelState: { IsValid: false } }")]
+    [DataRow("this is { ModelState: { IsValid: not true } }")]
+    [DataRow("ModelState.ValidationState != ModelValidationState.Valid")]
+    [DataRow("ModelState.ValidationState == ModelValidationState.Invalid")]
+    [DataRow("ModelState is { ValidationState: ModelValidationState.Invalid }")]
+    public void CallModelStateIsValid_ValidatingState_CS(string condition) =>
+        builder.AddSnippet($$"""
+            using Microsoft.AspNetCore.Mvc;
+            using Microsoft.AspNetCore.Mvc.ModelBinding;
+            using System.ComponentModel.DataAnnotations;
+
+            public class Movie
+            {
+                [Required] public string Title { get; set; }
+                [Range(1900, 2200)] public int Year { get; set; }
+            }
+
+            public class MovieController : ControllerBase
+            {
+                [HttpPost("/[controller]")]
+                public IActionResult Add(Movie movie)  // Compliant
+                {
+                    if ({{condition}})
+                    {
+                        return BadRequest();
+                    }
+                    return Ok();
+                }
+            }
+            """).WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 }
 
 #endif

@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Common.Walkers;
-
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -29,6 +27,11 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
     private const string MessageFormat = "ModelState.IsValid should be checked in controller actions.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    private static readonly SyntaxKind[] SyntaxNodesToVisit = [
+        SyntaxKind.ConditionalAccessExpression,
+        SyntaxKind.SimpleMemberAccessExpression,
+        SyntaxKind.InvocationExpression,
+        SyntaxKindEx.Subpattern];
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -45,73 +48,63 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
                         && !type.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute)
                         && !HasActionFilterAttribute(type))
                     {
-                        symbolStart.RegisterSyntaxNodeAction(ProcessControllerMethods, SyntaxKind.MethodDeclaration);
+                        symbolStart.RegisterCodeBlockStartAction<SyntaxKind>(ProcessCodeBlock);
                     }
                 }, SymbolKind.NamedType);
             }
         });
 
-    private static void ProcessControllerMethods(SonarSyntaxNodeReportingContext context)
+    private static void ProcessCodeBlock(SonarCodeBlockStartAnalysisContext<SyntaxKind> codeBlockContext)
     {
-        var method = (MethodDeclarationSyntax)context.Node;
-        if (context.SemanticModel.GetDeclaredSymbol(context.Node) is IMethodSymbol methodSymbol
-            && methodSymbol.IsControllerMethod()
-            && !HasActionFilterAttribute(methodSymbol)
-            && methodSymbol.Parameters.Any(x => HasValidationAttribute(x) || IsValidatable(x.Type)))
+        if (codeBlockContext.CodeBlock is MethodDeclarationSyntax methodDeclaration
+            && IsControllerAction(methodDeclaration, codeBlockContext.SemanticModel))
         {
-            var walker = new ModelStateFinder(context.SemanticModel);
-            walker.Visit(method.Body);
-            if (!walker.ValidatesModel)
+            var isModelValidated = false;
+            codeBlockContext.RegisterNodeAction(nodeContext =>
             {
-                context.ReportIssue(Rule, method.Identifier);
-            }
+                if (IsCheckingValidityProperty(nodeContext.Node, nodeContext.SemanticModel)
+                    || IsTryValidateInvocation(nodeContext.Node, nodeContext.SemanticModel))
+                {
+                    isModelValidated = true;
+                }
+            }, SyntaxNodesToVisit);
+            codeBlockContext.RegisterCodeBlockEndAction(blockEnd =>
+            {
+                if (!isModelValidated)
+                {
+                    blockEnd.ReportIssue(Rule, methodDeclaration.Identifier);
+                }
+            });
         }
     }
 
-    private static bool IsValidatable(ITypeSymbol type) => type != null
-        && (type.Implements(KnownType.System_ComponentModel_DataAnnotations_IValidatableObject)
-            || type.GetMembers().OfType<IPropertySymbol>().Any(HasValidationAttribute)
-            || IsValidatable(type.BaseType));
-
-    private static bool HasValidationAttribute(ISymbol symbol) =>
-        symbol.GetAttributes().Any(x => x.AttributeClass.DerivesFrom(KnownType.System_ComponentModel_DataAnnotations_ValidationAttribute));
+    private static bool IsControllerAction(MethodDeclarationSyntax methodDeclaration, SemanticModel semanticModel) =>
+        semanticModel.GetDeclaredSymbol(methodDeclaration) is IMethodSymbol methodSymbol
+        && methodSymbol.Parameters.Length > 0
+        && methodSymbol.IsControllerMethod()
+        && !HasActionFilterAttribute(methodSymbol)
+        && methodSymbol.Parameters.Length > 0;
 
     private static bool HasActionFilterAttribute(ISymbol symbol) =>
         symbol.GetAttributes().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Filters_ActionFilterAttribute));
 
-    private sealed class ModelStateFinder : SafeCSharpSyntaxWalker
+    private static bool IsCheckingValidityProperty(SyntaxNode node, SemanticModel semanticModel)
     {
-        private readonly SemanticModel semanticModel;
-        public bool ValidatesModel { get; private set; }
-
-        public ModelStateFinder(SemanticModel semanticModel) => this.semanticModel = semanticModel;
-
-        public override void Visit(SyntaxNode node)
+        var propertyNode = node switch
         {
-            if (!ValidatesModel)
-            {
-                base.Visit(node);
-            }
-        }
-
-        public override void VisitInvocationExpression(InvocationExpressionSyntax node)
-        {
-            if (node.GetName() == "TryValidateModel"
-               && semanticModel.GetSymbolInfo(node.Expression).Symbol is IMethodSymbol method
-               && method.ContainingType.Is(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase))
-            {
-                ValidatesModel = true;
-            }
-        }
-
-        public override void VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
-        {
-            if (node.GetName() == "IsValid"
-                && semanticModel.GetSymbolInfo(node.Expression).Symbol is IPropertySymbol { Name: "ModelState" } callerType
-                && callerType.ContainingType.Is(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase))
-            {
-                ValidatesModel = true;
-            }
-        }
+            ConditionalAccessExpressionSyntax conditionalAccess => conditionalAccess.WhenNotNull,
+            MemberAccessExpressionSyntax memberAccess => memberAccess.Name,
+            { } when SubpatternSyntaxWrapper.IsInstance(node) => ((SubpatternSyntaxWrapper)node).ExpressionColon.Expression,
+            _ => null
+        };
+        return propertyNode?.GetName() is "IsValid" or "ValidationState"
+            && semanticModel.GetSymbolInfo(propertyNode).Symbol is IPropertySymbol propertySymbol
+            && propertySymbol.ContainingType.Is(KnownType.Microsoft_AspNetCore_Mvc_ModelBinding_ModelStateDictionary);
     }
+
+    private static bool IsTryValidateInvocation(SyntaxNode node, SemanticModel semanticModel) =>
+        node is InvocationExpressionSyntax invocation
+        && invocation.GetName() == "TryValidateModel"
+        && semanticModel.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol method
+        && method.ContainingType.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase);
 }

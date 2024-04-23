@@ -37,6 +37,10 @@ public class Foo : System.Web.Mvc.Controller
     protected void ProtectedFoo() { }
     internal void InternalFoo() { }
     private void PrivateFoo() { }
+    public static void StaticFoo() { }
+    public void OutFoo(out string arg) { arg = null; }
+    public void RefFoo(ref string arg) { }
+    public void GenericFoo<T>(T arg) { }
     private class Bar : System.Web.Mvc.Controller
     {
         public void InnerFoo() { }
@@ -49,6 +53,10 @@ public class Foo : System.Web.Mvc.Controller
             var protectedFoo = GetMethodSymbol(compilation, "ProtectedFoo");
             var internalFoo = GetMethodSymbol(compilation, "InternalFoo");
             var privateFoo = GetMethodSymbol(compilation, "PrivateFoo");
+            var staticFoo = GetMethodSymbol(compilation, "StaticFoo");
+            var outFoo = GetMethodSymbol(compilation, "OutFoo");
+            var refFoo = GetMethodSymbol(compilation, "RefFoo");
+            var genericFoo = GetMethodSymbol(compilation, "GenericFoo");
             var innerFoo = GetMethodSymbol(compilation, "InnerFoo");
             var publicNonAction = GetMethodSymbol(compilation, "PublicNonAction");
 
@@ -56,6 +64,11 @@ public class Foo : System.Web.Mvc.Controller
             AspNetMvcHelper.IsControllerMethod(protectedFoo).Should().Be(false);
             AspNetMvcHelper.IsControllerMethod(internalFoo).Should().Be(false);
             AspNetMvcHelper.IsControllerMethod(privateFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerMethod(staticFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerMethod(outFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerMethod(refFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerMethod(staticFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerMethod(genericFoo).Should().Be(false);
             AspNetMvcHelper.IsControllerMethod(innerFoo).Should().Be(false);
             AspNetMvcHelper.IsControllerMethod(publicNonAction).Should().Be(false);
         }

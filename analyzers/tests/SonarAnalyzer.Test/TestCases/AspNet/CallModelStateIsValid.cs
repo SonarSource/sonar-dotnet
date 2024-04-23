@@ -1,50 +1,6 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Net;
+﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-
-[ApiController]
-public class ControllerWithApiAttributeAtTheClassLevel : ControllerBase
-{
-    [HttpPost("/[controller]")]
-    public string Add(Movie movie)                                              // Compliant, ApiController attribute is applied at the class level.
-    {
-        return "Hello!";
-    }
-}
-
-[Controller]
-public class ControllerThatDoesNotInheritFromControllerBase
-{
-    [HttpPost("/[controller]")]
-    public string Add(Movie movie)                                              // Compliant, ModelState is not available in this context.
-    {
-        return "Hello!";
-    }
-}
-
-public class SimpleController
-{
-    [HttpPost("/[controller]")]
-    public string Add(Movie movie)                                              // Compliant, ModelState is not available in this context.
-    {
-        return "Hello!";
-    }
-}
-
-public class CompliantController: ControllerBase
-{
-    [HttpGet("/[controller]")]
-    public string Get([Required, FromQuery] string id)                           // Compliant
-    {
-        if (!ModelState.IsValid)
-        {
-            return null;
-        }
-        return "Hello";
-    }
-}
 
 public class NonCompliantController : ControllerBase
 {
@@ -132,36 +88,71 @@ public class NonCompliantController : ControllerBase
         return "Hello!";
     }
 
-    [HttpPost("/[controller]/without-validation")]
-    public string DtoWithoutValidation(DtoWithoutValidation dto)                // Compliant, DtoWithoutValidation does not have any validation attributes.
-    {
-        return "Hello!";
-    }
-
-    [HttpPost("/[controller]/custom-attribute-validation")]
-    public string DtoWithCustomAttribute([ClassicMovie] string title)           // Noncompliant
-    {
-        return "Hello!";
-    }
-
-    [HttpPost("/[controller]/custom-validation")]
-    public string DtoImplementingIValidatableObject(ValidatableMovie movie)     // Noncompliant
-    {
-        return "Hello!";
-    }
-
-    [HttpPost("/[controller]/try-validate-model")]
-    public string CallsTryValidateModel([Required] string email)                // Compliant, calls TryValidateModel
-    {
-        return TryValidateModel(email) ? "Hi!" : "Hello!";
-    }
-
     [HttpGet("/[controller]/list")]
     public string[] List() => null;                                             // Compliant
 }
 
+[ApiController]
+public class ControllerWithApiAttributeAtTheClassLevel : ControllerBase
+{
+    [HttpPost("/[controller]")]
+    public string Add(Movie movie)                                              // Compliant, ApiController attribute is applied at the class level.
+    {
+        return "Hello!";
+    }
+}
+
+[Controller]
+public class ControllerThatDoesNotInheritFromControllerBase
+{
+    [HttpPost("/[controller]")]
+    public string Add(Movie movie)                                              // Compliant, ModelState is not available in this context.
+    {
+        return "Hello!";
+    }
+}
+
+public class SimpleController
+{
+    [HttpPost("/[controller]")]
+    public string Add(Movie movie)                                              // Compliant, ModelState is not available in this context.
+    {
+        return "Hello!";
+    }
+}
+
+public class CompliantController : ControllerBase
+{
+    [HttpGet("/[controller]")]
+    public string Get([Required, FromQuery] string id)                          // Compliant
+    {
+        if (!ModelState.IsValid)
+        {
+            return null;
+        }
+        return "Hello";
+    }
+
+    [HttpGet("/[controller]/GetNoParam")]
+    public string GetNoParam()                                                  // Compliant
+    {
+        return "Hello";
+    }
+
+    [HttpPost("/[controller]")]
+    public string Post([Required, FromBody] string id)                          // Compliant
+    {
+        var state = ModelState;
+        if (!state.IsValid)
+        {
+            return null;
+        }
+        return "Hello";
+    }
+}
+
 [ValidateModel]
-public class ControllerClassWithActionFilter: ControllerBase
+public class ControllerClassWithActionFilter : ControllerBase
 {
     [HttpPost("/[controller]/create")]
     public string Create(Movie movie)                                           // Compliant, Controller class is decorated with an Action Filter
@@ -189,31 +180,6 @@ public class Movie
     public int Year { get; set; }
 }
 
-public class DtoWithoutValidation
-{
-    public int? Id { get; set; }
-    public string Name { get; set; }
-}
-
-public class ClassicMovieAttribute : ValidationAttribute
-{
-    protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-    {
-        return ValidationResult.Success;
-    }
-}
-
-public class ValidatableMovie : IValidatableObject
-{
-    public int Id { get; set; }
-    public string Title { get; set; } = null;
-
-    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-    {
-        yield return new ValidationResult("Title is required", new[] { nameof(Title) });
-    }
-}
-
 public class ValidateModelAttribute : ActionFilterAttribute
 {
     public override void OnActionExecuting(ActionExecutingContext context)
@@ -225,24 +191,35 @@ public class ValidateModelAttribute : ActionFilterAttribute
     }
 }
 
-namespace ModelInheritance
+public class ControllerCallsTryValidate : ControllerBase
 {
-    public abstract class ModelBase
+    [HttpPost]
+    public string CallsTryValidateModel1([Required] string email)               // Compliant, calls TryValidateModel
     {
-        [Required] public int Id { get; set; }
+        return TryValidateModel(email) ? "Hi!" : "Hello!";
     }
 
-    public class Model : ModelBase
+    [HttpPost]
+    public string CallsTryValidateModel([Required] string email)                // Compliant, calls TryValidateModel
     {
-    }
-
-    public class MyController : ControllerBase
-    {
-        [HttpPost("/[controller]/create")]
-        public string Create(Model model)           // Noncompliant
-        {
-            return "Hello!";
-        }
+        return TryValidateModel(email, "prefix") ? "Hi!" : "Hello!";
     }
 }
 
+public class ControllerCallsTryValidateOverride : ControllerBase
+{
+    public override bool TryValidateModel(object model) => true;
+    public override bool TryValidateModel(object model, string prefix) => true;
+
+    [HttpPost]
+    public string CallsTryValidateModel1([Required] string email)               // Compliant, calls TryValidateModel
+    {
+        return TryValidateModel(email) ? "Hi!" : "Hello!";
+    }
+
+    [HttpPost]
+    public string CallsTryValidateModel([Required] string email)                // Compliant, calls TryValidateModel
+    {
+        return TryValidateModel(email, "prefix") ? "Hi!" : "Hello!";
+    }
+}

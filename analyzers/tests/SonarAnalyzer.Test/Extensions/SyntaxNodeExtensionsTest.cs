@@ -1094,6 +1094,7 @@ public class X
         [DataRow("""record class $$T$$ { }""", "T")]                                  // BaseTypeDeclarationSyntax
         [DataRow("""record struct $$T$$ { }""", "T")]                                 // BaseTypeDeclarationSyntax
         [DataRow("""enum $$T$$ { }""", "T")]                                          // BaseTypeDeclarationSyntax
+        [DataRow("""void M(string s) { var length = $$s?.Length$$; }""", "Length")]   // ConditionalAccessExpressionSyntax
         [DataRow("""$$Test() { }$$""", "Test")]                                       // ConstructorDeclarationSyntax
         [DataRow("""Test() : $$this(1)$$ { }""", "this")]                             // ConstructorInitializerSyntax
         [DataRow("""Test() : $$base()$$ { }""", "base")]                              // ConstructorInitializerSyntax

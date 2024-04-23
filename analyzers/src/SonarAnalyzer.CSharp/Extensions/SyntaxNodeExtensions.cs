@@ -182,6 +182,7 @@ namespace SonarAnalyzer.Extensions
                 AttributeArgumentSyntax { NameEquals.Name.Identifier: var identifier } => identifier,
                 AttributeSyntax { Name: { } name } => GetIdentifier(name),
                 BaseTypeDeclarationSyntax { Identifier: var identifier } => identifier,
+                ConditionalAccessExpressionSyntax { WhenNotNull: var rightSide } => GetIdentifier(rightSide),
                 ConstructorDeclarationSyntax { Identifier: var identifier } => identifier,
                 ConstructorInitializerSyntax { ThisOrBaseKeyword: var keyword } => keyword,
                 ConversionOperatorDeclarationSyntax { Type: { } type } => GetIdentifier(type),
@@ -221,6 +222,7 @@ namespace SonarAnalyzer.Extensions
                 { } primary when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(primary)
                     && ((PrimaryConstructorBaseTypeSyntaxWrapper)primary).Type is { } type => GetIdentifier(type),
                 { } refType when RefTypeSyntaxWrapper.IsInstance(refType) => GetIdentifier(((RefTypeSyntaxWrapper)refType).Type),
+                { } subPattern when SubpatternSyntaxWrapper.IsInstance(subPattern) => GetIdentifier(((SubpatternSyntaxWrapper)subPattern).ExpressionColon.Expression),
                 _ => null
             };
 
