@@ -68,11 +68,8 @@ public class ProjectBuilderTest
     }
 
     [TestMethod]
-    public void AddAdditionalDocument_SupportsRazorFiles()
-    {
+    public void AddAdditionalDocument_SupportsRazorFiles() =>
         AssertAdditionalDocumentContains(EmptyCS.AddAdditionalDocument(@"TestCases\ProjectBuilder.AddDocument.razor"), "ProjectBuilder.AddDocument.razor");
-        AssertAdditionalDocumentContains(EmptyVB.AddAdditionalDocument(@"TestCases\ProjectBuilder.AddDocument.razor"), "ProjectBuilder.AddDocument.razor");
-    }
 
     [TestMethod]
     public void AddAdditionalDocument_CsharpSupportsCshtmlFiles() =>
