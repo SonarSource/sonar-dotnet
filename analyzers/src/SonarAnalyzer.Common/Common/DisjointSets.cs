@@ -22,7 +22,11 @@ namespace SonarAnalyzer.Common;
 
 /// <summary>
 /// Data structure for working with disjoint sets of strings, to perform union-find operations with equality semantics:
-/// i.e. reflexivity, symmetry and transitivity. See https://en.wikipedia.org/wiki/Disjoint-set_data_structure.
+/// i.e. reflexivity, symmetry and transitivity.
+///
+/// See https://en.wikipedia.org/wiki/Disjoint-set_data_structure for an introduction to the data structure and
+/// https://www.geeksforgeeks.org/introduction-to-disjoint-set-data-structure-or-union-find-algorithm/ for examples of
+/// its use.
 ///
 /// An example of use is to build undirected connected components of dependencies, where each node is the identifier.
 ///
