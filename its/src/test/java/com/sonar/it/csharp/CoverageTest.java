@@ -91,17 +91,16 @@ class CoverageTest {
   @Test
   void open_cover_on_MultipleFrameworks() throws Exception {
     BuildResult buildResult = analyzeMultipleFrameworksTestProject("sonar.cs.opencover.reportsPaths", "coverage.*.xml");
-    String s = buildResult.getLogs();
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
-      "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
-    /*
-    MatchingBranchpoints_FullyCovered:        2/2
-    MatchingBranchpoints_PartiallyCovered:    1/2
-    NotMatchingBranchpoints_FullyCovered:     2/2
-    NotMatchingBranchpoints_PartiallyCovered: 2/2 This over-reporting is expected.
-    */
+      "Coverage Report Statistics: 4 files, 4 main files, 4 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
+
     assertCoverageMetrics("CoverageTest.MultipleFrameworks", 32, 4, 8, 1);
+    assertCoverageMetrics("CoverageTest.MultipleFrameworks:ClassLibrary/MatchingBranchpoints_FullyCovered.cs", 8, 0, 2, 0);
+    assertCoverageMetrics("CoverageTest.MultipleFrameworks:ClassLibrary/MatchingBranchpoints_PartiallyCovered.cs", 8, 2, 2, 1);
+    assertCoverageMetrics("CoverageTest.MultipleFrameworks:ClassLibrary/NotMatchingBranchpoints_FullyCovered.cs", 8, 0, 2, 0);
+    // We are over-reporting covered conditions in NotMatchingBranchpoints_PartiallyCovered.cs. This is an expected trade-off to make coverage aggregation more consistent.
+    assertCoverageMetrics("CoverageTest.MultipleFrameworks:ClassLibrary/NotMatchingBranchpoints_PartiallyCovered.cs", 8, 2, 2, 0);
   }
 
   @Test

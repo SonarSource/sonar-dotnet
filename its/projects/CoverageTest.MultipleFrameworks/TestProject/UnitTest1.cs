@@ -10,20 +10,20 @@ namespace TestProject
         public void FullyCovered()
         {
 #if NET
-            Assert.AreEqual("True", Sample.MatchingBranchpoints_FullyCovered(true));
+            Assert.AreEqual("True", MatchingBranchpoints_FullyCovered.Method(true));
 #endif
-            Assert.AreEqual("No", Sample.MatchingBranchpoints_FullyCovered(false));
+            Assert.AreEqual("No", MatchingBranchpoints_FullyCovered.Method(false));
 #if NET
-            Assert.AreEqual("True", Sample.NotMatchingBranchpoints_FullyCovered(true));
+            Assert.AreEqual("True", NotMatchingBranchpoints_FullyCovered.Method(true));
 #endif
-            Assert.AreEqual("No", Sample.NotMatchingBranchpoints_FullyCovered(false));
+            Assert.AreEqual("No", NotMatchingBranchpoints_FullyCovered.Method(false));
         }
 
         [TestMethod]
         public void PartiallyCovered()
         {
-            Assert.AreEqual("True", Sample.MatchingBranchpoints_PartiallyCovered(true));
-            Assert.AreEqual("True", Sample.NotMatchingBranchpoints_PartiallyCovered(true));
+            Assert.AreEqual("True", MatchingBranchpoints_PartiallyCovered.Method(true));
+            Assert.AreEqual("True", NotMatchingBranchpoints_PartiallyCovered.Method(true));
         }
     }
 }
