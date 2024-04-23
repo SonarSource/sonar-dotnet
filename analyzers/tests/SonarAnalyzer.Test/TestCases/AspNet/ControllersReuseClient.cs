@@ -67,3 +67,8 @@ public class SomeController : ControllerBase
         return new HttpClient();                                  // Compliant, we raise only in actions
     }
 }
+
+public class NotAController
+{
+    private HttpClient ClientPropertyAccessorArrow => new HttpClient();    // Compliant, it's not in a controller.
+}
