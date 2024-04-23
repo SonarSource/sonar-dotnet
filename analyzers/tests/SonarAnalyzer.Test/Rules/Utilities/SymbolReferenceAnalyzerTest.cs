@@ -226,15 +226,16 @@ namespace SonarAnalyzer.Test.Rules
                         orderedSymbols.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo("Razor.razor", "Razor.razor.cs", "RazorComponent.razor", "ToDo.cs");
                         orderedSymbols[0].FilePath.Should().EndWith("Razor.razor");
 
-                        VerifyReferences(orderedSymbols[0].Reference, 9, 13, 4, 6, 20);     // currentCount
-                        VerifyReferences(orderedSymbols[0].Reference, 9, 16, 10, 20, 21);   // IncrementAmount
-                        // VerifyReferences(orderedSymbols[0].Reference, 9, 18, 8);         // IncrementCount - ToDo: Reintroduce it with https://trello.com/c/IGOMGx27/1316-investigate-symbol-reference-issue-with-razor-generated-code
-                        VerifyReferences(orderedSymbols[0].Reference, 9, 34, 34);           // x
-                        VerifyReferences(orderedSymbols[0].Reference, 9, 37, 28, 34);       // todos
-                        // VerifyReferences(orderedSymbols[0].Reference, 9, 39, 25);        // AddTodo - ToDo: Reintroduce it with https://trello.com/c/IGOMGx27/1316-investigate-symbol-reference-issue-with-razor-generated-code
-                        VerifyReferences(orderedSymbols[0].Reference, 9, 41);               // x
-                        VerifyReferences(orderedSymbols[0].Reference, 9, 42);               // y
-                        VerifyReferences(orderedSymbols[0].Reference, 9, 44, 41);           // LocalMethod
+                        VerifyReferences(orderedSymbols[0].Reference, 11, 14, 5, 7, 21);     // currentCount
+                        VerifyReferences(orderedSymbols[0].Reference, 11, 17, 11, 21, 22);   // IncrementAmount
+                        VerifyReferences(orderedSymbols[0].Reference, 11, 19, 9, 52);        // IncrementCount
+                        VerifyReferences(orderedSymbols[0].Reference, 11, 35, 35);           // x
+                        VerifyReferences(orderedSymbols[0].Reference, 11, 38, 29, 35);       // todos
+                        VerifyReferences(orderedSymbols[0].Reference, 11, 40, 26);           // AddTodo
+                        VerifyReferences(orderedSymbols[0].Reference, 11, 42);               // x
+                        VerifyReferences(orderedSymbols[0].Reference, 11, 43);               // y
+                        VerifyReferences(orderedSymbols[0].Reference, 11, 45, 42);           // LocalMethod
+                        VerifyReferences(orderedSymbols[0].Reference, 11, 57, 51);           // AdditionalAttributes
 
                         orderedSymbols[1].FilePath.Should().EndWith("RazorComponent.razor"); // RazorComponent.razor
                         // https://github.com/SonarSource/sonar-dotnet/issues/8417
