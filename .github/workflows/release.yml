@@ -12,7 +12,7 @@ jobs:
     permissions:
       id-token: write
       contents: write
-    uses: SonarSource/gh-action_release/.github/workflows/main.yaml@v6 #uses the latest v5.x.y version rather than a specific version
+    uses: SonarSource/gh-action_release/.github/workflows/main.yaml@v5 #uses the latest v5.x.y version rather than a specific version
     with:
       publishToBinaries: true
       mavenCentralSync: true
