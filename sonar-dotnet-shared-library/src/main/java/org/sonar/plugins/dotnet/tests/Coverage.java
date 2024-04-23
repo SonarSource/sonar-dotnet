@@ -21,6 +21,7 @@ package org.sonar.plugins.dotnet.tests;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -86,33 +87,12 @@ public class Coverage {
   }
 
   List<BranchCoverage> getBranchCoverage(String file) {
-    List<BranchCoverage> result = new ArrayList<>();
-
-    Map<Integer, List<BranchPoint>> branchPointsPerLine = branchPoints.stream()
+    return branchPoints.stream()
       .filter(point -> point.getFilePath().equals(file))
-      .collect(Collectors.groupingBy(BranchPoint::getStartLine));
-
-    for (Map.Entry<Integer, List<BranchPoint>> lineBranchPoints : branchPointsPerLine.entrySet()){
-      if (lineBranchPoints.getValue().size() > 1){
-        int line = lineBranchPoints.getKey();
-
-        List<BranchPoint> linePoints = lineBranchPoints.getValue();
-        Map<String, List<BranchPoint>> groupsByKey = linePoints.stream().collect(Collectors.groupingBy(BranchPoint::getUniqueKey));
-
-        int coveredBranchPoints = 0;
-        for (Map.Entry<String, List<BranchPoint>> group: groupsByKey.entrySet()){
-          if (group.getValue().stream().filter(point -> point.getHits() >0).count() > 0){
-            coveredBranchPoints++;
-          }
-        }
-
-        if(groupsByKey.size() > 1) {
-          result.add(new BranchCoverage(line, groupsByKey.size(), coveredBranchPoints));
-        }
-      }
-    }
-
-    return result;
+      .collect(Collectors.groupingBy(BranchPoint::getStartLine)).entrySet().stream()
+      .map(x -> getBranchCoverage(x.getKey(), x.getValue()))
+      .filter(x -> x.getConditions() > 1)
+      .toList();
   }
 
   void mergeWith(Coverage otherCoverage) {
@@ -131,5 +111,22 @@ public class Coverage {
         addHits(file, i + 1, otherHitsByLine[i]);
       }
     }
+  }
+
+  private static BranchCoverage getBranchCoverage(int lineNumber, List<BranchPoint> branchPoints) {
+    // Mapping BranchPoints from different coverage reports is fragile due to potential differences in compilation.
+    // Therefore, we use a forgiving approach: First, count the number of BranchPoints per report and take the maximum. Then, map
+    // BranchPoints and count the ones that are covered. If the mapping did not go well, we might find too many covered BranchPoints.
+    // In this case, we cap the amount to the previously calculated maximum and assume all branches are covered.
+    int maxBranchPoints = branchPoints.stream()
+      .collect(Collectors.groupingBy(BranchPoint::getCoverageIdentifier)).values().stream()
+      .map(x -> (int)x.stream().map(BranchPoint::getUniqueKey).distinct().count())
+      .max(Comparator.comparingInt(x -> x)).orElse(0);
+
+    int coveredBranchPoints = (int)branchPoints.stream()
+      .filter(x -> x.getHits() > 0)
+      .map(BranchPoint::getUniqueKey).distinct().count();
+
+    return new BranchCoverage(lineNumber, maxBranchPoints, Math.min(coveredBranchPoints, maxBranchPoints));
   }
 }

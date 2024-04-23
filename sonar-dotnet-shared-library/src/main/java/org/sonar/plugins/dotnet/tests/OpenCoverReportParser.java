@@ -158,7 +158,7 @@ public class OpenCoverReportParser implements CoverageParser {
         int visitCount = xmlParserHelper.getRequiredIntAttribute("vc");
 
         if (coveredFile.isIndexed()) {
-          coverage.add(new BranchPoint(coveredFile.indexedPath, line, offset, offsetEnd, path, visitCount));
+          coverage.add(new BranchPoint(coveredFile.indexedPath, line, offset, offsetEnd, path, visitCount, file.getPath()));
 
           LOG.trace("OpenCover parser: add branch hits for file {}, line '{}', offset '{}', visitCount '{}'.",
             coveredFile, line, offset, visitCount);

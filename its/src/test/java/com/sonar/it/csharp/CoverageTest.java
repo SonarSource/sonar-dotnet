@@ -78,7 +78,6 @@ class CoverageTest {
   @Test
   void open_cover_on_MultipleProjects() throws Exception {
     BuildResult buildResult = analyzeMultipleProjectsTestProject("sonar.cs.opencover.reportsPaths", "opencover.xml");
-
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
       "Coverage Report Statistics: 5 files, 3 main files, 3 main files with coverage, 2 test files, 0 project excluded files, 0 other language files");
@@ -87,6 +86,21 @@ class CoverageTest {
     assertCoverageMetrics("CoverageTest.MultipleProjects:FirstProject/FirstClass.cs", 10, 0, 2, 1);
     assertLineCoverageMetrics("CoverageTest.MultipleProjects:FirstProject/SecondClass.cs", 4, 0);
     assertCoverageMetrics("CoverageTest.MultipleProjects:SecondProject/FirstClass.cs", 11, 3, 10, 4);
+  }
+
+  @Test
+  void open_cover_on_MultipleFrameworks() throws Exception {
+    BuildResult buildResult = analyzeMultipleFrameworksTestProject("sonar.cs.opencover.reportsPaths", "coverage.*.xml");
+    assertThat(buildResult.getLogs()).contains(
+      "Sensor C# Tests Coverage Report Import",
+      "Coverage Report Statistics: 4 files, 4 main files, 4 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
+
+    assertCoverageMetrics("CoverageTest.MultipleFrameworks", 32, 4, 8, 1);
+    assertCoverageMetrics("CoverageTest.MultipleFrameworks:ClassLibrary/MatchingBranchpoints_FullyCovered.cs", 8, 0, 2, 0);
+    assertCoverageMetrics("CoverageTest.MultipleFrameworks:ClassLibrary/MatchingBranchpoints_PartiallyCovered.cs", 8, 2, 2, 1);
+    assertCoverageMetrics("CoverageTest.MultipleFrameworks:ClassLibrary/NotMatchingBranchpoints_FullyCovered.cs", 8, 0, 2, 0);
+    // We are over-reporting covered conditions in NotMatchingBranchpoints_PartiallyCovered.cs. This is an expected trade-off to make coverage aggregation more consistent.
+    assertCoverageMetrics("CoverageTest.MultipleFrameworks:ClassLibrary/NotMatchingBranchpoints_PartiallyCovered.cs", 8, 2, 2, 0);
   }
 
   @Test
@@ -200,6 +214,10 @@ class CoverageTest {
 
   private BuildResult analyzeMultipleProjectsTestProject(String coverageProperty, String coverageFileName) throws IOException {
     return Tests.analyzeProject(temp, "CoverageTest.MultipleProjects", "no_rule", coverageProperty, coverageFileName);
+  }
+
+  private BuildResult analyzeMultipleFrameworksTestProject(String coverageProperty, String coverageFileNames) throws IOException {
+    return Tests.analyzeProject(temp, "CoverageTest.MultipleFrameworks", "no_rule", coverageProperty, coverageFileNames);
   }
 
   private void assertCoverageMetrics(String componentKey, int linesToCover, int uncoveredLines, int conditionsToCover, int uncoveredConditions) {

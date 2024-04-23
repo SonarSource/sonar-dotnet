@@ -27,14 +27,16 @@ class BranchPoint {
   // identifier for code path
   private final int path;
   private final String filePath;
+  private final String coverageIdentifier;
 
-  public BranchPoint(String filePath, int startLine, int offset, int offsetEnd, int path, int hits) {
+  public BranchPoint(String filePath, int startLine, int offset, int offsetEnd, int path, int hits, String coverageIdentifier) {
     this.filePath = filePath;
     this.startLine = startLine;
     this.offset = offset;
     this.offsetEnd = offsetEnd;
     this.path = path;
     this.hits = hits;
+    this.coverageIdentifier = coverageIdentifier;
   }
 
   public int getStartLine() {
@@ -47,6 +49,10 @@ class BranchPoint {
 
   public String getFilePath() {
     return filePath;
+  }
+
+  public String getCoverageIdentifier() {
+    return coverageIdentifier;
   }
 
   public String getUniqueKey() {
