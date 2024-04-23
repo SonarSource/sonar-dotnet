@@ -71,7 +71,7 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
                             var methodDeclaration = (MethodDeclarationSyntax)nodeContext.Node;
                             if (InvalidMethod(methodDeclaration, nodeContext) is { } method)
                             {
-                                nodeContext.ReportIssue(Rule, methodDeclaration.Identifier.GetLocation(), GetMessage(method));
+                                nodeContext.ReportIssue(Rule, methodDeclaration.Identifier, additionalLocations: method.ResponseInvocations, GetMessage(method.Symbol));
                             }
                         }, SyntaxKind.MethodDeclaration);
                     }
@@ -79,31 +79,46 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
             }
         });
 
-    private static IMethodSymbol InvalidMethod(BaseMethodDeclarationSyntax methodDeclaration, SonarSyntaxNodeReportingContext nodeContext) =>
-        !Builds200Response(methodDeclaration, nodeContext.SemanticModel)
-        || nodeContext.SemanticModel.GetDeclaredSymbol(methodDeclaration, nodeContext.Cancel) is not { } method
-        || !method.IsControllerMethod()
-        || !method.ReturnType.DerivesOrImplementsAny(ControllerActionReturnTypes)
-        || method.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiConventionMethodAttribute)
-                                                        || HasApiExplorerSettingsWithIgnoreApiTrue(x)
-                                                        || HasProducesResponseTypeAttributeWithReturnType(x)
-                                                        || HasSwaggerResponseAttributeWithReturnType(x))
-            ? null
-            : method;
+    private static InvalidMethodResult InvalidMethod(BaseMethodDeclarationSyntax methodDeclaration, SonarSyntaxNodeReportingContext nodeContext)
+    {
+        var responseInvocations = Builds200Responses(methodDeclaration, nodeContext.SemanticModel);
+        return responseInvocations.Length == 0
+               || nodeContext.SemanticModel.GetDeclaredSymbol(methodDeclaration, nodeContext.Cancel) is not { } method
+               || !method.IsControllerMethod()
+               || !method.ReturnType.DerivesOrImplementsAny(ControllerActionReturnTypes)
+               || method.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiConventionMethodAttribute)
+                                                               || HasApiExplorerSettingsWithIgnoreApiTrue(x)
+                                                               || HasProducesResponseTypeAttributeWithReturnType(x)
+                                                               || HasSwaggerResponseAttributeWithReturnType(x))
+                   ? null
+                   : new InvalidMethodResult(method, responseInvocations);
+    }
 
-    private static bool Builds200Response(SyntaxNode node, SemanticModel model) =>
-        node.DescendantNodes().OfType<InvocationExpressionSyntax>()
-            .Any(x => ActionResultMethods.Contains(x.GetName())
-                      && x.ArgumentList.Arguments.Count > 0
-                      && model.GetSymbolInfo(x.Expression).Symbol.IsInType(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase))
-        || node.DescendantNodes().OfType<ObjectCreationExpressionSyntax>()
-               .Any(x => x.GetName() == "ObjectResult"
-                         && x.ArgumentList?.Arguments.Count > 0
-                         && model.GetSymbolInfo(x.Type).Symbol.GetSymbolType().Is(KnownType.Microsoft_AspNetCore_Mvc_ObjectResult))
-        || node.DescendantNodes().OfType<InvocationExpressionSyntax>()
-               .Any(x => ResultMethods.Contains(x.GetName())
-                         && x.ArgumentList.Arguments.Count > 0
-                         && model.GetSymbolInfo(x).Symbol.IsInType(KnownType.Microsoft_AspNetCore_Http_Results));
+    private static SyntaxNode[] Builds200Responses(SyntaxNode node, SemanticModel model)
+    {
+        return ActionResultInvocations().Concat(ObjectCreationInvocations()).Concat(ResultMethodsInvocations()).ToArray();
+
+        IEnumerable<SyntaxNode> ActionResultInvocations() =>
+            node.DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Where(x => ActionResultMethods.Contains(x.GetName())
+                            && x.ArgumentList.Arguments.Count > 0
+                            && model.GetSymbolInfo(x.Expression).Symbol.IsInType(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase));
+
+        IEnumerable<SyntaxNode> ObjectCreationInvocations() =>
+            node.DescendantNodes()
+                .OfType<ObjectCreationExpressionSyntax>()
+                .Where(x => x.GetName() == "ObjectResult"
+                            && x.ArgumentList?.Arguments.Count > 0
+                            && model.GetSymbolInfo(x.Type).Symbol.GetSymbolType().Is(KnownType.Microsoft_AspNetCore_Mvc_ObjectResult));
+
+        IEnumerable<SyntaxNode> ResultMethodsInvocations() =>
+            node.DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Where(x => ResultMethods.Contains(x.GetName())
+                            && x.ArgumentList.Arguments.Count > 0
+                            && model.GetSymbolInfo(x).Symbol.IsInType(KnownType.Microsoft_AspNetCore_Http_Results));
+    }
 
     private static bool IsControllerCandidate(ISymbol symbol)
     {
@@ -143,4 +158,6 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
     private static bool ContainsReturnType(AttributeData attribute) =>
         !attribute.ConstructorArguments.FirstOrDefault(x => x.Type.Is(KnownType.System_Type)).IsNull
         || attribute.NamedArguments.FirstOrDefault(x => x.Key == "Type").Value.Value is not null;
+
+    private sealed record InvalidMethodResult(IMethodSymbol Symbol, SyntaxNode[] ResponseInvocations);
 }

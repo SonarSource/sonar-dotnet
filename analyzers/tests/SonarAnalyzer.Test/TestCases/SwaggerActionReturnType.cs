@@ -171,7 +171,8 @@ public class NocompliantBaseline : ControllerBase
 
     [HttpGet("foo")]
     [ApiExplorerSettings(IgnoreApi = false)]
-    public IActionResult IgnoreApiFalse() => Ok(42); // Noncompliant
+    public IActionResult IgnoreApiFalse() => // Noncompliant
+        Ok(42);                              // Secondary
 }
 
 public class NotApiController : Controller
