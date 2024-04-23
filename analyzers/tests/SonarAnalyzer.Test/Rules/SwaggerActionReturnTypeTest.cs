@@ -100,21 +100,42 @@ public class SwaggerActionReturnTypeTest
     public void RuleName_IResult(string invocation) =>
         builder
             .AddSnippet($$"""
-                          using Microsoft.AspNetCore.Mvc;
-                          using Microsoft.AspNetCore.Http;
+                using Microsoft.AspNetCore.Mvc;
+                using Microsoft.AspNetCore.Http;
 
-                          [ApiController]
-                          public class Foo : Controller
-                          {
-                              [HttpGet("a")]
-                              public IResult Method() =>    // Noncompliant
-                                  {{invocation}};           // Secondary
+                [ApiController]
+                public class Foo : Controller
+                {
+                    [HttpGet("a")]
+                    public IResult Method() =>    // Noncompliant
+                        {{invocation}};           // Secondary
 
-                              private Bar bar = new();
-                          }
+                    private Bar bar = new();
+                }
 
-                          public class Bar {}
-                          """)
+                public class Bar {}
+                """)
+            .Verify();
+
+    [TestMethod]
+    public void ApiConventionType_AssemblyLevel() =>
+        builder
+            .AddSnippet("""
+                using Microsoft.AspNetCore.Mvc;
+
+                [assembly: ApiConventionType(typeof(DefaultApiConventions))]
+                namespace MyNameSpace;
+
+                [ApiController]
+                public class Foo : Controller
+                {
+                    [HttpGet("a")]
+                    public IActionResult Method() => Ok(bar); // Compliant
+                    private Bar bar = new();
+                }
+
+                public class Bar {}
+                """)
             .Verify();
 }
 
