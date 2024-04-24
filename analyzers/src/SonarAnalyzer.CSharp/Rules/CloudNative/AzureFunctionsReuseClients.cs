@@ -21,14 +21,16 @@
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class AzureFunctionsReuseClients : SonarDiagnosticAnalyzer
+    public sealed class AzureFunctionsReuseClients : ReuseClientBase
     {
         private const string DiagnosticId = "S6420";
         private const string MessageFormat = "Reuse client instances rather than creating new ones with each function invocation.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        private static readonly KnownType[] ReusableClients =
-            {
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+        protected override ImmutableArray<KnownType> ReusableClients => ImmutableArray.Create(
                 KnownType.System_Net_Http_HttpClient,
                 // ComosDb (DocumentClient is superseded by CosmosClient)
                 KnownType.Microsoft_Azure_Documents_Client_DocumentClient,
@@ -48,41 +50,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.Azure_Storage_Files_Shares_ShareServiceClient,
                 KnownType.Azure_Storage_Files_DataLake_DataLakeServiceClient,
                 // Resource manager
-                KnownType.Azure_ResourceManager_ArmClient
-            };
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+                KnownType.Azure_ResourceManager_ArmClient);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(c =>
             {
                 if (c.AzureFunctionMethod() is not null
-                    && IsResuableClient(c)
+                    && IsReusableClient(c)
                     && !IsAssignedForReuse(c))
                 {
                     c.ReportIssue(Rule, c.Node);
                 }
             },
             SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
-
-        private static bool IsAssignedForReuse(SonarSyntaxNodeReportingContext context) =>
-            !IsInVariableDeclaration(context.Node)
-            && (IsInFieldOrPropertyInitializer(context.Node) || IsAssignedToStaticFieldOrProperty(context));
-
-        private static bool IsInVariableDeclaration(SyntaxNode node) =>
-            node.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: LocalDeclarationStatementSyntax or UsingStatementSyntax } } };
-
-        private static bool IsInFieldOrPropertyInitializer(SyntaxNode node) =>
-            node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.FieldDeclaration, SyntaxKind.PropertyDeclaration));
-
-        private static bool IsAssignedToStaticFieldOrProperty(SonarSyntaxNodeReportingContext context) =>
-            context.Node.Parent.WalkUpParentheses() is AssignmentExpressionSyntax assignment
-                && context.SemanticModel.GetSymbolInfo(assignment.Left, context.Cancel).Symbol is { IsStatic: true, Kind: SymbolKind.Field or SymbolKind.Property };
-
-        private static bool IsResuableClient(SonarSyntaxNodeReportingContext context)
-        {
-            var objectCreation = ObjectCreationFactory.Create(context.Node);
-            return ReusableClients.Any(x => objectCreation.IsKnownType(x, context.SemanticModel));
-        }
     }
 }
