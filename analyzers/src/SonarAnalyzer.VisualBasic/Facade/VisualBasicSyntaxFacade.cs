@@ -108,6 +108,10 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override bool IsStatic(SyntaxNode node) =>
         Cast<MethodBlockSyntax>(node).IsShared();
 
+    /// <inheritdoc cref="ExpressionSyntaxExtensions.IsWrittenTo(ExpressionSyntax, SemanticModel, CancellationToken)"/>
+    public override bool IsWrittenTo(SyntaxNode expression, SemanticModel semanticModel, CancellationToken cancellationToken) =>
+        Cast<ExpressionSyntax>(expression).IsWrittenTo(semanticModel, cancellationToken);
+
     public override SyntaxKind Kind(SyntaxNode node) => node.Kind();
 
     public override string LiteralText(SyntaxNode literal) =>
