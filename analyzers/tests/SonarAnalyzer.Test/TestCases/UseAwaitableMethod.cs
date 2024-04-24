@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 public class C
@@ -230,5 +231,16 @@ class ExpressionTrees
         var qry2 = from x in queryable
                    where x.BoolMethod()
                    select x;
+    }
+}
+
+class WellKnownAsyncParameter
+{
+    void VoidMethod(int arg) { }
+    Task VoidMethodAsync(int arg, CancellationToken token) => Task.CompletedTask;
+
+    async Task Test()
+    {
+        VoidMethod(1); // FN. CancellationToken.None could be provided by the code fix
     }
 }
