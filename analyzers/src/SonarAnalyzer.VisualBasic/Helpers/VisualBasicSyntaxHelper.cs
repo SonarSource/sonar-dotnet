@@ -23,15 +23,14 @@ namespace SonarAnalyzer.Helpers;
 internal static class VisualBasicSyntaxHelper
 {
     private static readonly SyntaxKind[] LiteralSyntaxKinds =
-        new[]
-        {
+        [
             SyntaxKind.CharacterLiteralExpression,
             SyntaxKind.FalseLiteralExpression,
             SyntaxKind.NothingLiteralExpression,
             SyntaxKind.NumericLiteralExpression,
             SyntaxKind.StringLiteralExpression,
             SyntaxKind.TrueLiteralExpression,
-        };
+        ];
 
     public static SyntaxNode GetTopMostContainingMethod(this SyntaxNode node) =>
         node.AncestorsAndSelf().LastOrDefault(ancestor => ancestor is MethodBaseSyntax || ancestor is PropertyBlockSyntax);
@@ -82,6 +81,9 @@ internal static class VisualBasicSyntaxHelper
     }
 
     #endregion Statement
+
+    public static bool HasAncestorOfKind(this SyntaxNode syntaxNode, params SyntaxKind[] syntaxKinds) =>
+        syntaxNode.Ancestors().Any(ancestor => ancestor.IsAnyKind(syntaxKinds));
 
     public static bool IsNothingLiteral(this SyntaxNode syntaxNode) =>
         syntaxNode != null && syntaxNode.IsKind(SyntaxKind.NothingLiteralExpression);

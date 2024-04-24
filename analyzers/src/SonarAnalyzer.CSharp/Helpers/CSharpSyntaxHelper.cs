@@ -35,15 +35,14 @@ public static class CSharpSyntaxHelper
         SyntaxFacts.GetText(SyntaxKind.NameOfKeyword);
 
     private static readonly SyntaxKind[] LiteralSyntaxKinds =
-        new[]
-        {
+        [
             SyntaxKind.CharacterLiteralExpression,
             SyntaxKind.FalseLiteralExpression,
             SyntaxKind.NullLiteralExpression,
             SyntaxKind.NumericLiteralExpression,
             SyntaxKind.StringLiteralExpression,
-            SyntaxKind.TrueLiteralExpression,
-        };
+            SyntaxKind.TrueLiteralExpression
+        ];
 
     public static bool AnyOfKind(this IEnumerable<SyntaxNode> nodes, SyntaxKind kind) =>
         nodes.Any(n => n.RawKind == (int)kind);
@@ -70,37 +69,24 @@ public static class CSharpSyntaxHelper
     public static SyntaxNode GetFirstNonParenthesizedParent(this SyntaxNode node) =>
         node.GetSelfOrTopParenthesizedExpression().Parent;
 
+    public static bool HasAncestorOfKind(this SyntaxNode syntaxNode, params SyntaxKind[] syntaxKinds) =>
+        syntaxNode.Ancestors().Any(ancestor => ancestor.IsAnyKind(syntaxKinds));
+
     public static bool IsOnThis(this ExpressionSyntax expression) =>
         IsOn(expression, SyntaxKind.ThisExpression);
 
     public static bool IsOnBase(this ExpressionSyntax expression) =>
         IsOn(expression, SyntaxKind.BaseExpression);
 
-    private static bool IsOn(this ExpressionSyntax expression, SyntaxKind onKind)
-    {
-        switch (expression.Kind())
+    private static bool IsOn(this ExpressionSyntax expression, SyntaxKind onKind) =>
+        expression.Kind() switch
         {
-            case SyntaxKind.InvocationExpression:
-                return IsOn(((InvocationExpressionSyntax)expression).Expression, onKind);
-
-            case SyntaxKind.AliasQualifiedName:
-            case SyntaxKind.GenericName:
-            case SyntaxKind.IdentifierName:
-            case SyntaxKind.QualifiedName:
-                // This is a simplification as we don't check where the method is defined (so this could be this or base)
-                return true;
-
-            case SyntaxKind.PointerMemberAccessExpression:
-            case SyntaxKind.SimpleMemberAccessExpression:
-                return ((MemberAccessExpressionSyntax)expression).Expression.RemoveParentheses().IsKind(onKind);
-
-            case SyntaxKind.ConditionalAccessExpression:
-                return ((ConditionalAccessExpressionSyntax)expression).Expression.RemoveParentheses().IsKind(onKind);
-
-            default:
-                return false;
-        }
-    }
+            SyntaxKind.InvocationExpression => IsOn(((InvocationExpressionSyntax)expression).Expression, onKind),
+            SyntaxKind.AliasQualifiedName or SyntaxKind.GenericName or SyntaxKind.IdentifierName or SyntaxKind.QualifiedName => true,// This is a simplification as we don't check where the method is defined (so this could be this or base)
+            SyntaxKind.PointerMemberAccessExpression or SyntaxKind.SimpleMemberAccessExpression => ((MemberAccessExpressionSyntax)expression).Expression.RemoveParentheses().IsKind(onKind),
+            SyntaxKind.ConditionalAccessExpression => ((ConditionalAccessExpressionSyntax)expression).Expression.RemoveParentheses().IsKind(onKind),
+            _ => false,
+        };
 
     public static bool IsInNameOfArgument(this ExpressionSyntax expression, SemanticModel semanticModel)
     {

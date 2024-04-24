@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         public HardcodedIpAddress(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
 
         protected override bool HasAttributes(SyntaxNode literalExpression) =>
-            literalExpression.Ancestors().AnyOfKind(SyntaxKind.Attribute);
+            literalExpression.HasAncestorOfKind(SyntaxKind.Attribute);
 
         protected override string GetAssignedVariableName(SyntaxNode stringLiteral) =>
             stringLiteral.FirstAncestorOrSelf<SyntaxNode>(IsVariableIdentifier)?.ToString();

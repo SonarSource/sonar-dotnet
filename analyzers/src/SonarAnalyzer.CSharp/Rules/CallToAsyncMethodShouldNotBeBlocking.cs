@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 || IsResultInContinueWithCall(memberAccessNameName, simpleMemberAccess)
                 || IsChainedAfterThreadPoolCall(context.SemanticModel, simpleMemberAccess)
                 || simpleMemberAccess.IsInNameOfArgument(context.SemanticModel)
-                || simpleMemberAccess.Ancestors().Any(x => x is GlobalStatementSyntax))
+                || simpleMemberAccess.HasAncestorOfKind(SyntaxKind.GlobalStatement))
             {
                 return;
             }
