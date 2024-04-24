@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Helpers;
 
-internal static class CSharpSyntaxHelper
+public static class CSharpSyntaxHelper
 {
     public static readonly ExpressionSyntax NullLiteralExpression =
         SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression);
@@ -221,7 +221,7 @@ internal static class CSharpSyntaxHelper
     public static bool NameIs(this SyntaxNode node, string name, params string[] orNames) =>
         node.GetName() is { } nodeName
         && (nodeName.Equals(name, StringComparison.Ordinal)
-            || orNames.Any(x => nodeName.Equals(x, StringComparison.Ordinal)));
+            || Array.Exists(orNames, x => nodeName.Equals(x, StringComparison.Ordinal)));
 
     public static bool HasConstantValue(this ExpressionSyntax expression, SemanticModel semanticModel) =>
         expression.RemoveParentheses().IsAnyKind(LiteralSyntaxKinds) || expression.FindConstantValue(semanticModel) != null;
