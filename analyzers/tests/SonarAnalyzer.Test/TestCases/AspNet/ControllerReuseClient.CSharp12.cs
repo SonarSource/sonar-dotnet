@@ -12,12 +12,12 @@ public class C(HttpClient client) : ControllerBase;
 [Route("SomeRoute")]
 public class D(HttpClient client) : C(new HttpClient()) // Compliant
 {
-    public D() : this(new HttpClient()) { }            // Compliant
+    public D() : this(new HttpClient()) { }             // Compliant
 }
 
 [ApiController]
 [Route("SomeRoute")]
 public class E : C
 {
-    public E() : base(new HttpClient()) { }            // Compliant
+    public E() : base(new HttpClient()) { }             // Compliant
 }

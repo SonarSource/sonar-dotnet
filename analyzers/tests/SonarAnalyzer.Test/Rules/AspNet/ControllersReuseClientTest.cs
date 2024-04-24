@@ -22,11 +22,11 @@ using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Test.Rules;
 
+#if NET
+
 [TestClass]
 public class ControllersReuseClientTest
 {
-#if NET
-
     private readonly VerifierBuilder builder = new VerifierBuilder<ControllersReuseClient>()
         .WithBasePath("AspNet")
         .AddReferences(
@@ -61,9 +61,8 @@ public class ControllersReuseClientTest
 
     [TestMethod]
     public void ControllersReuseClient_CS12() =>
-    builder
-        .AddPaths("ControllerReuseClient.CSharp12.cs")
-        .WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
-
-#endif
+        builder
+            .AddPaths("ControllerReuseClient.CSharp12.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
 }
+#endif

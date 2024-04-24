@@ -23,7 +23,7 @@ public class SomeController : ControllerBase
     [HttpGet("foo")]
     public async Task<string> Foo()
     {
-        using (var clientB = new HttpClient())                    //Noncompliant {{Reuse Httpclient instances rather than create new ones with each controller action invocation.}}
+        using (var clientB = new HttpClient())                    //Noncompliant {{Reuse HttpClient instances rather than create new ones with each controller action invocation.}}
         //                   ^^^^^^^^^^^^^^^^
         {
             await clientB.GetStringAsync("");

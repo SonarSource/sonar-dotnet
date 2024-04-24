@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class ControllersReuseClient : ReuseClientBase
 {
     private const string DiagnosticId = "S6962";
-    private const string MessageFormat = "Reuse Httpclient instances rather than create new ones with each controller action invocation.";
+    private const string MessageFormat = "Reuse HttpClient instances rather than create new ones with each controller action invocation.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -46,23 +46,29 @@ public sealed class ControllersReuseClient : ReuseClientBase
                 {
                     symbolStartContext.RegisterSyntaxNodeAction(nodeContext =>
                     {
-                        if (IsInPublicMethod(nodeContext.Node)
+                        var node = nodeContext.Node;
+                        if (IsInPublicMethod(node)
                             && IsReusableClient(nodeContext)
-                            && !(nodeContext.Node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.ConstructorDeclaration, SyntaxKindEx.PrimaryConstructorBaseType))
-                                 || IsAssignedForReuse(nodeContext)))
+                            && !IsInsideConstructor(node)
+                            && !IsAssignedForReuse(nodeContext))
                         {
-                            nodeContext.ReportIssue(Rule, nodeContext.Node);
+                            nodeContext.ReportIssue(Rule, node);
                         }
-                    }, SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
+                    },
+                    SyntaxKind.ObjectCreationExpression,
+                    SyntaxKindEx.ImplicitObjectCreationExpression);
                 }
             }, SymbolKind.NamedType);
         });
 
     private static bool IsInPublicMethod(SyntaxNode node)
     {
-        var method = node.Ancestors().OfType<MethodDeclarationSyntax>().FirstOrDefault();
+        var method = node.FirstAncestorOrSelf<MethodDeclarationSyntax>();
         return method == null
                 || (!method.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.PropertyDeclaration))
                     && method.Modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword)));
     }
+
+    private static bool IsInsideConstructor(SyntaxNode node) =>
+        node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.ConstructorDeclaration, SyntaxKindEx.PrimaryConstructorBaseType));
 }

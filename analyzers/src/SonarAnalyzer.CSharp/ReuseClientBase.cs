@@ -39,8 +39,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsInFieldOrPropertyInitializer(SyntaxNode node) =>
             node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.FieldDeclaration, SyntaxKind.PropertyDeclaration))
-            && !(node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.GetAccessorDeclaration, SyntaxKind.SetAccessorDeclaration))
-                || node.Parent.IsKind(SyntaxKind.ArrowExpressionClause));
+            && !node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.GetAccessorDeclaration, SyntaxKind.SetAccessorDeclaration))
+            && !node.Parent.IsKind(SyntaxKind.ArrowExpressionClause);
 
         private static bool IsInConditionalCode(SyntaxNode node) =>
             node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.IfStatement,
