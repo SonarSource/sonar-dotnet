@@ -4194,3 +4194,32 @@ class Repro_8570
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9184
+class Repro_9184
+{
+    public static void UInt32S2589FalsePositive_Unchecked_Statement()
+    {
+        uint u = uint.MaxValue - 2;
+        while (u > 0)   // Noncompliant FP
+        {
+            unchecked
+            {
+                u += u; // The explicit unchecked context signals that overflows are expected/desired
+            }
+        }
+    }
+
+    static void IntOverflow_Unchecked_Expression()
+    {
+        int i = int.MaxValue - 2;
+        while (true)
+        {
+            i = unchecked(i + 1);
+            if (i < 0) // Noncompliant FP
+            {
+                return;
+            }
+        }
+    }
+}
