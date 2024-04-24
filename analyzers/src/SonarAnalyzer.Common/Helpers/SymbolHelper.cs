@@ -22,7 +22,7 @@ using System.Reflection;
 
 namespace SonarAnalyzer.Helpers
 {
-    internal static class SymbolHelper
+    public static class SymbolHelper
     {
         private static readonly PropertyInfo ITypeSymbolIsRecord = typeof(ITypeSymbol).GetProperty("IsRecord");
 
