@@ -61,13 +61,10 @@ public sealed class ControllersReuseClient : ReuseClientBase
             }, SymbolKind.NamedType);
         });
 
-    private static bool IsInPublicMethod(SyntaxNode node)
-    {
-        var method = node.FirstAncestorOrSelf<MethodDeclarationSyntax>();
-        return method == null
-                || (!method.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.PropertyDeclaration))
-                    && method.Modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword)));
-    }
+    public static bool IsInPublicMethod(SyntaxNode node) =>
+        node.FirstAncestorOrSelf<MethodDeclarationSyntax>() is not { } method
+        || (method.FirstAncestorOrSelf<PropertyDeclarationSyntax>() is null
+            && method.Modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword)));
 
     private static bool IsInsideConstructor(SyntaxNode node) =>
         node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.ConstructorDeclaration, SyntaxKindEx.PrimaryConstructorBaseType));
