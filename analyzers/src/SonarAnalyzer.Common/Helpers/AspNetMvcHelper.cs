@@ -67,6 +67,7 @@ namespace SonarAnalyzer.Helpers
 
         public static bool ReferencesControllers(this Compilation compilation) =>
             compilation.GetTypeByMetadataName(KnownType.System_Web_Mvc_Controller) is not null
-            || compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Mvc_Controller) is not null;
+            || compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Mvc_Controller) is not null
+            || compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase) is not null;
     }
 }
