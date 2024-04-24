@@ -35,6 +35,7 @@
     <Using Include="SonarAnalyzer.AnalysisContext" />
     <Using Include="SonarAnalyzer.Common" />
     <Using Include="SonarAnalyzer.CSharp.Styling.Common" />
+    <Using Include="SonarAnalyzer.CSharp.Styling.Extensions" />
     <Using Include="SonarAnalyzer.Extensions" />
     <Using Include="SonarAnalyzer.Helpers" />
     <Using Include="StyleCop.Analyzers.Lightup" />
