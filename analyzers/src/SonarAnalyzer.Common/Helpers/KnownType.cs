@@ -68,6 +68,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Http_IRequestCookieCollection = new("Microsoft.AspNetCore.Http.IRequestCookieCollection");
         public static readonly KnownType Microsoft_AspNetCore_Http_IResponseCookies = new("Microsoft.AspNetCore.Http.IResponseCookies");
         public static readonly KnownType Microsoft_AspNetCore_Http_IResult = new("Microsoft.AspNetCore.Http.IResult");
+        public static readonly KnownType Microsoft_AspNetCore_Http_Results = new("Microsoft.AspNetCore.Http.Results");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_AcceptVerbsAttribute = new("Microsoft.AspNetCore.Mvc.AcceptVerbsAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ApiControllerAttribute = new("Microsoft.AspNetCore.Mvc.ApiControllerAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ApiConventionMethodAttribute = new("Microsoft.AspNetCore.Mvc.ApiConventionMethodAttribute");
@@ -80,7 +81,6 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Mvc_FromServicesAttribute = new("Microsoft.AspNetCore.Mvc.FromServicesAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpDeleteAttribute = new("Microsoft.AspNetCore.Mvc.HttpDeleteAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpGetAttribute = new("Microsoft.AspNetCore.Mvc.HttpGetAttribute");
-        public static readonly KnownType Microsoft_AspNetCore_Mvc_ApiExplorerSettingsAttribute = new("Microsoft.AspNetCore.Mvc.ApiExplorerSettingsAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpHeadAttribute = new("Microsoft.AspNetCore.Mvc.HttpHeadAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpOptionsAttribute = new("Microsoft.AspNetCore.Mvc.HttpOptionsAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpPatchAttribute = new("Microsoft.AspNetCore.Mvc.HttpPatchAttribute");
