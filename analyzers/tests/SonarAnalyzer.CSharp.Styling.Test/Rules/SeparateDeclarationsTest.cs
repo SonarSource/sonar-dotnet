@@ -18,20 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.CSharp.Styling.Test.Rules;
+
+[TestClass]
+public class SeparateDeclarationsTest
 {
-    public static class LocationExtensions
-    {
-        public static Location EnsureMappedLocation(this Location location)
-        {
-            if (location is null || !GeneratedCodeRecognizer.IsRazorGeneratedFile(location.SourceTree))
-            {
-                return location;
-            }
-
-            var lineSpan = location.GetMappedLineSpan();
-
-            return Location.Create(lineSpan.Path, location.SourceSpan, lineSpan.Span);
-        }
-    }
+    [TestMethod]
+    public void SeparateDeclarations() =>
+        StylingVerifierBuilder.Create<SeparateDeclarations>().AddPaths("SeparateDeclarations.cs").WithConcurrentAnalysis(false).Verify();
 }
