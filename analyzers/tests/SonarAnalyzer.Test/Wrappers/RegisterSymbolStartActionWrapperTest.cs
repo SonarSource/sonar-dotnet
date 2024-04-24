@@ -317,7 +317,7 @@ public class RegisterSymbolStartActionWrapperTest
                 }, VB.SyntaxKind.InvocationExpression);
             }, SymbolKind.NamedType)));
         var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
-        visited.Should().BeEmpty();
+        visited.Should().BeEquivalentTo("ToString()");
         diagnostics.Should().BeEmpty();
     }
 

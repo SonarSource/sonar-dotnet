@@ -41,6 +41,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
     private static readonly Action<object, Action<OperationBlockStartAnalysisContext>> RegisterOperationBlockStartActionMethod;
     private static readonly Action<object, Action<SymbolAnalysisContext>> RegisterSymbolEndActionMethod;
     private static readonly Action<object, Action<SyntaxNodeAnalysisContext>, ImmutableArray<CS.SyntaxKind>> RegisterSyntaxNodeActionCS;
+    private static readonly Action<object, Action<SyntaxNodeAnalysisContext>, object> RegisterSyntaxNodeActionVB;
 
     public CancellationToken CancellationToken => CancellationTokenAccessor(RoslynSymbolStartAnalysisContext);
     public Compilation Compilation => CompilationAccessor(RoslynSymbolStartAnalysisContext);
@@ -70,6 +71,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
         RegisterSymbolEndActionMethod = CreateRegistrationMethod<SymbolAnalysisContext>(nameof(RegisterSymbolEndAction));
         RegisterSyntaxNodeActionCS = CreateRegistrationMethodWithAdditionalParameter<SyntaxNodeAnalysisContext, ImmutableArray<CS.SyntaxKind>>(
             nameof(RegisterSyntaxNodeAction), typeof(CS.SyntaxKind));
+        RegisterSyntaxNodeActionVB = CreateRegistrationMethodSyntaxNode(languageKindEnumVBType);
 
         // receiverParameter => ((symbolStartAnalysisContextType)receiverParameter)."propertyName"
         Func<object, TProperty> CreatePropertyAccessor<TProperty>(string propertyName)
@@ -139,6 +141,25 @@ public readonly struct SymbolStartAnalysisContextWrapper
                 registerActionParameter,
                 additionalParameter).Compile();
         }
+
+        // (object receiverParameter, Action<SyntaxNodeAnalysisContext> registerActionParameter, object syntaxKindArrayParameter) =>
+        //     ((symbolStartAnalysisContextType)receiverParameter).RegisterSyntaxNodeAction<languageKindEnumType>(contextParameter => registerActionParameter.Invoke(contextParameter), (languageKindEnumType[])syntaxKindArrayParameter)
+        Action<object, Action<SyntaxNodeAnalysisContext>, object> CreateRegistrationMethodSyntaxNode(Type languageKindEnumType)
+        {
+            if (symbolStartAnalysisContextType == null || languageKindEnumType == null)
+            {
+                return static (_, _, _) => { };
+            }
+            var receiverParameter = Parameter(typeof(object));
+            var registerActionParameter = Parameter(typeof(Action<SyntaxNodeAnalysisContext>));
+            var syntaxKindArrayParameter = Parameter(typeof(object));
+            var syntaxKindArrayType = languageKindEnumType.MakeArrayType();
+            return Lambda<Action<object, Action<SyntaxNodeAnalysisContext>, object>>(
+                Call(Convert(receiverParameter, symbolStartAnalysisContextType), nameof(RegisterSyntaxNodeAction), [languageKindEnumType], registerActionParameter, Convert(syntaxKindArrayParameter, syntaxKindArrayType)),
+                receiverParameter,
+                registerActionParameter,
+                syntaxKindArrayParameter).Compile();
+        }
     }
 
     public SymbolStartAnalysisContextWrapper(object roslynSymbolStartAnalysisContext) =>
@@ -187,7 +208,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
         }
         else if (languageKindType.FullName == VBSyntaxKind)
         {
-            // See RegisterCodeBlockStartAction for how to implement this
+            RegisterSyntaxNodeActionVB(RoslynSymbolStartAnalysisContext, action, syntaxKinds);
         }
         else
         {
