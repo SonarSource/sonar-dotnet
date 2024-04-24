@@ -11,8 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common Solution Items", "Co
 		..\README.md = ..\README.md
 		src\Signing.cs = src\Signing.cs
 		packaging\SonarAnalyzer.CSharp.nuspec = packaging\SonarAnalyzer.CSharp.nuspec
-		packaging\SonarAnalyzer.VisualBasic.nuspec = packaging\SonarAnalyzer.VisualBasic.nuspec
 		packaging\SonarAnalyzer.CSharp.Styling.nuspec = packaging\SonarAnalyzer.CSharp.Styling.nuspec
+		packaging\SonarAnalyzer.VisualBasic.nuspec = packaging\SonarAnalyzer.VisualBasic.nuspec
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B7233F78-E142-4882-B084-7C83BE472109}"
@@ -41,8 +41,6 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Orchestration", "its\Orches
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Config", "its\config\Config.shproj", "{17E060C5-5D0B-443D-B716-F76C2EAC0B19}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Sources", "its\sources\Sources.shproj", "{28067DB4-C098-4A15-9846-2978711733F3}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{C086048C-D183-4B4D-9D3C-A6E191F19680}"
 	ProjectSection(SolutionItems) = preProject
 		..\scripts\build\build-utils.ps1 = ..\scripts\build\build-utils.ps1
@@ -52,7 +50,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{C086
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AnalysisConfig", "AnalysisConfig", "{E044950A-098B-4090-B4FB-8D6BD086828B}"
 	ProjectSection(SolutionItems) = preProject
-		.sonarlint\sonaranalyzer-dotnetCSharp.ruleset = .sonarlint\sonaranalyzer-dotnetCSharp.ruleset
 		stylecop.json = stylecop.json
 		StyleCopAnalyzers.targets = StyleCopAnalyzers.targets
 	EndProjectSection
@@ -145,7 +142,6 @@ Global
 		{532AC70E-90CB-48AD-86F4-16767C22314D} = {0C3E0519-DB5C-47C0-ABB3-9D1FB23DFBAF}
 		{A64F1665-6EDB-4B69-B143-FEA6D0B24243} = {314A0C27-4768-4F15-B7FA-DC3C33C08180}
 		{17E060C5-5D0B-443D-B716-F76C2EAC0B19} = {314A0C27-4768-4F15-B7FA-DC3C33C08180}
-		{28067DB4-C098-4A15-9846-2978711733F3} = {314A0C27-4768-4F15-B7FA-DC3C33C08180}
 		{C086048C-D183-4B4D-9D3C-A6E191F19680} = {0C3E0519-DB5C-47C0-ABB3-9D1FB23DFBAF}
 		{E044950A-098B-4090-B4FB-8D6BD086828B} = {0C3E0519-DB5C-47C0-ABB3-9D1FB23DFBAF}
 		{ADBE6CFE-980F-4D4F-8E25-E391581D291E} = {B7233F78-E142-4882-B084-7C83BE472109}
