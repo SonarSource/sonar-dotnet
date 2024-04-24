@@ -19,8 +19,9 @@ public static class ISymbolExtensions
     /// </summary>
     /// <remarks>
     /// Copied from <seealso href="https://github.com/dotnet/roslyn/blob/ca66296efa86bd8078508fe7b38b91b415364f78/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/Core/Extensions/ISymbolExtensions.cs#L572-L577"/>.
+    /// SONAR: The code was simplified to improve performance at the cost of precision.
     /// </remarks>
-    public static bool IsAwaitableNonDynamic(this ISymbol? symbol, SemanticModel semanticModel, int position)
+    public static bool IsAwaitableNonDynamic(this ISymbol? symbol)
     {
         var methodSymbol = symbol as IMethodSymbol;
         ITypeSymbol? typeSymbol = null;
