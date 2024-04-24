@@ -82,7 +82,8 @@ public static class CSharpSyntaxHelper
         expression.Kind() switch
         {
             SyntaxKind.InvocationExpression => IsOn(((InvocationExpressionSyntax)expression).Expression, onKind),
-            SyntaxKind.AliasQualifiedName or SyntaxKind.GenericName or SyntaxKind.IdentifierName or SyntaxKind.QualifiedName => true,// This is a simplification as we don't check where the method is defined (so this could be this or base)
+            // Following statement is a simplification as we don't check where the method is defined (so this could be this or base)
+            SyntaxKind.AliasQualifiedName or SyntaxKind.GenericName or SyntaxKind.IdentifierName or SyntaxKind.QualifiedName => true,
             SyntaxKind.PointerMemberAccessExpression or SyntaxKind.SimpleMemberAccessExpression => ((MemberAccessExpressionSyntax)expression).Expression.RemoveParentheses().IsKind(onKind),
             SyntaxKind.ConditionalAccessExpression => ((ConditionalAccessExpressionSyntax)expression).Expression.RemoveParentheses().IsKind(onKind),
             _ => false,
