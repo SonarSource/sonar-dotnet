@@ -23,7 +23,7 @@ namespace SonarAnalyzer.Rules.CSharp.Styling;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class MemberVisibilityOrdering : StylingAnalyzer
 {
-    public MemberVisibilityOrdering() : base("T0008", "Move this {0} {1} above the {2} ones.") { }
+    public MemberVisibilityOrdering() : base("T0009", "Move this {0} {1} above the {2} ones.") { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(
