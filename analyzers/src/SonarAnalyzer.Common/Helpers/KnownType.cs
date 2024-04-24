@@ -67,8 +67,13 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Http_IHeaderDictionary = new("Microsoft.AspNetCore.Http.IHeaderDictionary");
         public static readonly KnownType Microsoft_AspNetCore_Http_IRequestCookieCollection = new("Microsoft.AspNetCore.Http.IRequestCookieCollection");
         public static readonly KnownType Microsoft_AspNetCore_Http_IResponseCookies = new("Microsoft.AspNetCore.Http.IResponseCookies");
+        public static readonly KnownType Microsoft_AspNetCore_Http_IResult = new("Microsoft.AspNetCore.Http.IResult");
+        public static readonly KnownType Microsoft_AspNetCore_Http_Results = new("Microsoft.AspNetCore.Http.Results");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_AcceptVerbsAttribute = new("Microsoft.AspNetCore.Mvc.AcceptVerbsAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ApiControllerAttribute = new("Microsoft.AspNetCore.Mvc.ApiControllerAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_ApiConventionMethodAttribute = new("Microsoft.AspNetCore.Mvc.ApiConventionMethodAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_ApiConventionTypeAttribute = new("Microsoft.AspNetCore.Mvc.ApiConventionTypeAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_ApiExplorerSettingsAttribute = new("Microsoft.AspNetCore.Mvc.ApiExplorerSettingsAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_Controller = new("Microsoft.AspNetCore.Mvc.Controller");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerBase = new("Microsoft.AspNetCore.Mvc.ControllerBase");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerAttribute = new("Microsoft.AspNetCore.Mvc.ControllerAttribute");
@@ -76,7 +81,6 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Mvc_FromServicesAttribute = new("Microsoft.AspNetCore.Mvc.FromServicesAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpDeleteAttribute = new("Microsoft.AspNetCore.Mvc.HttpDeleteAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpGetAttribute = new("Microsoft.AspNetCore.Mvc.HttpGetAttribute");
-        public static readonly KnownType Microsoft_AspNetCore_Mvc_ApiExplorerSettingsAttribute = new("Microsoft.AspNetCore.Mvc.ApiExplorerSettingsAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpHeadAttribute = new("Microsoft.AspNetCore.Mvc.HttpHeadAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpOptionsAttribute = new("Microsoft.AspNetCore.Mvc.HttpOptionsAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpPatchAttribute = new("Microsoft.AspNetCore.Mvc.HttpPatchAttribute");
@@ -84,8 +88,12 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpPutAttribute = new("Microsoft.AspNetCore.Mvc.HttpPutAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_IActionResult = new("Microsoft.AspNetCore.Mvc.IActionResult");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute = new("Microsoft.AspNetCore.Mvc.IgnoreAntiforgeryTokenAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_Infrastructure_ActionResultObjectValueAttribute = new("Microsoft.AspNetCore.Mvc.Infrastructure.ActionResultObjectValueAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_NonActionAttribute = new("Microsoft.AspNetCore.Mvc.NonActionAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_NonControllerAttribute = new("Microsoft.AspNetCore.Mvc.NonControllerAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_ObjectResult = new("Microsoft.AspNetCore.Mvc.ObjectResult");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute = new("Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute_T = new("Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute", "T");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_RazorPages_PageModel = new("Microsoft.AspNetCore.Mvc.RazorPages.PageModel");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_RequestFormLimitsAttribute = new("Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute = new("Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute");

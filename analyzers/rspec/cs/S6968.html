@@ -1,0 +1,98 @@
+<p>In an <a href="https://learn.microsoft.com/en-us/aspnet/core">ASP.NET Core</a> <a href="https://en.wikipedia.org/wiki/Web_API">Web API</a>,
+controller actions can optionally return a result value. If a controller action returns a value in the <a
+href="https://en.wikipedia.org/wiki/Happy_path">happy path</a>, for example <a
+href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.ok#microsoft-aspnetcore-mvc-controllerbase-ok(system-object)">ControllerBase.Ok(Object)</a>,
+annotating the action with one of the <a
+href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.producesresponsetypeattribute"><code>[ProducesResponseType]</code></a>
+overloads that describe the type is recommended.</p>
+<h2>Why is this an issue?</h2>
+<p>If an ASP.NET Core Web API uses <a href="https://swagger.io/">Swagger</a>, the API documentation will be generated based on the input/output types
+of the controller actions, as well as the attributes annotating the actions. If an action returns <a
+href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a> or <a
+href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.iresult">IResult</a>, Swagger cannot infer the type of the response. From
+the consumer’s perspective, this can be confusing and lead to unexpected results and bugs in the long run without the API provider’s awareness.</p>
+<p>This rule raises an issue on a controller action when:</p>
+<ul>
+  <li> The action returns a value in the happy path. This can be either:
+    <ul>
+      <li> <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200">200 OK</a> </li>
+      <li> <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201">201 Created</a> </li>
+      <li> <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/202">202 Accepted</a> </li>
+    </ul>  </li>
+  <li> There is no <code>[ProducesResponseType]</code> attribute containing the return type, either at controller or action level. </li>
+  <li> There is no <code>[SwaggerResponse]</code> attribute containing the return type, either at controller or action level. </li>
+  <li> The controller is annotated with the <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute"><code>[ApiController]</code></a> attribute.
+  </li>
+  <li> The controller action returns either <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.iactionresult">IActionResult</a> or <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.iresult">IResult</a>. </li>
+  <li> The application has enabled the <a
+  href="https://learn.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle#add-and-configure-swagger-middleware">Swagger
+  middleware</a>. </li>
+</ul>
+<h2>How to fix it</h2>
+<p>There are multiple ways to fix this issue:</p>
+<ul>
+  <li> Annotate the action with <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.producesresponsetypeattribute"><code>[ProducesResponseType]</code></a>
+  containing the return type. </li>
+  <li> Annotate the action with <a
+  href="https://github.com/domaindrivendev/Swashbuckle.AspNetCore/blob/master/README.md#enrich-response-metadata">SwaggerResponse Class</a> containing
+  the return type. </li>
+  <li> Return <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.actionresult-1">ActionResult&lt;TValue&gt;</a> instead of
+  <code>[IActionResult]</code> or <code>[IResult]</code>. </li>
+  <li> Return <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httpresults.results-2">Results&lt;TResult1,
+  TResult2&gt;</a> instead of <code>[IActionResult]</code> or <code>[IResult]</code>. </li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+[HttpGet("foo")]
+// Noncompliant: Annotate this method with ProducesResponseType containing the return type for succesful responses.
+public IActionResult MagicNumber() =&gt; Ok(42);
+</pre>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+[HttpGet("foo")]
+// Noncompliant: Use the ProducesResponseType overload containing the return type for succesful responses.
+[ProducesResponseType(StatusCodes.Status200OK)]
+public IActionResult MagicNumber() =&gt; Ok(42);
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+[HttpGet("foo")]
+[ProducesResponseType&lt;int&gt;(StatusCodes.Status200OK)]
+public IActionResult MagicNumber() =&gt; Ok(42);
+</pre>
+<pre data-diff-id="2" data-diff-type="compliant">
+[HttpGet("foo")]
+[ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
+public IActionResult MagicNumber() =&gt; Ok(42);
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Web_API">Web API</a> </li>
+  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Happy_path">Happy path</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core">ASP.NET Core</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle">Get started with
+  Swashbuckle and ASP.NET Core</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute">ApiControllerAttribute
+  Class</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.producesresponsetypeattribute">ProducesResponseTypeAttribute Class</a>
+  </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.producesresponsetypeattribute-1">ProducesResponseTypeAttribute&lt;T&gt;
+  Class</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.actionresult-1">ActionResult&lt;TValue&gt;
+  Class</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httpresults.results-2">Results&lt;TResult1,
+  TResult2&gt; Class</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/action-return-types#httpresults-type">HttpResults type</a>
+  </li>
+  <li> GitHub - <a href="https://github.com/domaindrivendev/Swashbuckle.AspNetCore/blob/master/README.md#enrich-response-metadata">SwaggerResponse
+  Class</a> </li>
+  <li> SmartBear - <a href="https://swagger.io/">Swagger</a> </li>
+</ul>
+

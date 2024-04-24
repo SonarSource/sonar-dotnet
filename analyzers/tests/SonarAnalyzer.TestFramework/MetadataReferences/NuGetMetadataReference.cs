@@ -162,6 +162,8 @@ public static class NuGetMetadataReference
     public static References SystemTextRegularExpressions(string packageVersion = "4.3.1") => Create("System.Text.RegularExpressions", packageVersion);
     public static References SystemThreadingTasksExtensions(string packageVersion) => Create("System.Threading.Tasks.Extensions", packageVersion);
     public static References SystemValueTuple(string packageVersion) => Create("System.ValueTuple", packageVersion);
+    public static References SwashbuckleAspNetCoreAnnotations(string packageVersion = Constants.NuGetLatestVersion) => Create("Swashbuckle.AspNetCore.Annotations", packageVersion);
+    public static References SwashbuckleAspNetCoreSwagger(string packageVersion = Constants.NuGetLatestVersion) => Create("Swashbuckle.AspNetCore.Swagger", packageVersion);
     public static References TimeZoneConverter(string packageVersion = Constants.NuGetLatestVersion) => Create("TimeZoneConverter", packageVersion);
     public static References XunitFramework(string packageVersion) =>
         Create("xunit.assert", packageVersion)
