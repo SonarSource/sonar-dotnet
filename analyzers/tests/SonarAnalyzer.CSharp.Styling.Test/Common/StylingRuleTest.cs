@@ -45,13 +45,14 @@ public class StylingRuleTest
     [TestMethod]
     public void RuleIDs_AreUnique()
     {
-        var ids = new HashSet<string>();
+        var ids = new Dictionary<string, Type>();
         foreach (var type in stylingAnalyzers)
         {
             var analyzer = (DiagnosticAnalyzer)Activator.CreateInstance(type);
             foreach (var descriptor in analyzer.SupportedDiagnostics)
             {
-                ids.Add(descriptor.Id).Should().BeTrue($"Each rule ID should be registered by a single analyzer. {descriptor.Id} is used multiple times.");
+                ids.TryAdd(descriptor.Id, type).Should().BeTrue("Each rule ID should be registered by a single analyzer but {0} is used by at least the two analyzers {1} and {2}.",
+                    descriptor.Id, type, ids[descriptor.Id]);
             }
         }
     }
