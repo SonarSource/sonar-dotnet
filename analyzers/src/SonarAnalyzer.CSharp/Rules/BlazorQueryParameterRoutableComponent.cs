@@ -20,6 +20,7 @@
 
 namespace SonarAnalyzer.Rules.CSharp;
 
+[Obsolete("This rule has been deprecated since 9.25")]
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class BlazorQueryParameterRoutableComponent : SonarDiagnosticAnalyzer
 {
