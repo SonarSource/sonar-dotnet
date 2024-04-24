@@ -62,10 +62,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
         RegisterCodeBlockActionMethod = CreateRegistrationMethod<CodeBlockAnalysisContext>(nameof(RegisterCodeBlockAction));
         RegisterCodeBlockStartActionCS =
             CreateRegistrationMethod<CodeBlockStartAnalysisContext<CS.SyntaxKind>>(nameof(RegisterCodeBlockStartAction), typeof(CS.SyntaxKind));
-        if (languageKindEnumVBType != null)
-        {
-            RegisterCodeBlockStartActionVB = CreateRegistrationMethodCodeBlockStart(languageKindEnumVBType);
-        }
+        RegisterCodeBlockStartActionVB = CreateRegistrationMethodCodeBlockStart(languageKindEnumVBType);
         RegisterOperationActionMethod =
             CreateRegistrationMethodWithAdditionalParameter<OperationAnalysisContext, ImmutableArray<OperationKind>>(nameof(RegisterOperationAction));
         RegisterOperationBlockActionMethod = CreateRegistrationMethod<OperationBlockAnalysisContext>(nameof(RegisterOperationBlockAction));
@@ -107,7 +104,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
         //     ((symbolStartAnalysisContextType)receiverParameter).RegisterCodeBlockStartAction<languageKindEnumType>(contextLanguageParameter => actionObjectParameter.Invoke(contextLanguageParameter))
         Action<object, Action<object>> CreateRegistrationMethodCodeBlockStart(Type languageKindEnumType)
         {
-            if (symbolStartAnalysisContextType == null)
+            if (symbolStartAnalysisContextType == null || languageKindEnumType == null)
             {
                 return static (_, _) => { };
             }
