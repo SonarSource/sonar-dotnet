@@ -28,9 +28,9 @@ public class SwaggerActionReturnTypeTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<SwaggerActionReturnType>()
         .WithOptions(ParseOptionsHelper.FromCSharp11)
-        .AddReferences(NuGetMetadataReference.SwashbuckleAspNetCoreAnnotations())
-        .AddReferences(NuGetMetadataReference.SwashbuckleAspNetCoreSwagger())
         .AddReferences([
+            ..NuGetMetadataReference.SwashbuckleAspNetCoreAnnotations(),
+            ..NuGetMetadataReference.SwashbuckleAspNetCoreSwagger(),
             AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
             AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpResults,
             AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
@@ -60,7 +60,7 @@ public class SwaggerActionReturnTypeTest
     [DataRow("""AcceptedAtAction("actionName", "controllerName", null, bar)""")]
     [DataRow("""AcceptedAtRoute("routeName", null, bar)""")]
     [DataRow("""AcceptedAtRoute(default(object), bar)""")]
-    public void RuleName_IActionResult(string invocation) =>
+    public void SwaggerActionReturnType_IActionResult(string invocation) =>
         builder
             .AddSnippet($$"""
                 using System;
@@ -74,6 +74,30 @@ public class SwaggerActionReturnTypeTest
                         {{invocation}};                 // Secondary
 
                     private Bar bar = new();
+                }
+
+                public class Bar {}
+                """)
+            .Verify();
+
+    [DataTestMethod]
+    [DataRow("""Accepted("uri")""")]
+    [DataRow("""Accepted(uri)""")]
+    public void SwaggerActionReturnType_IActionResult_Compliant(string invocation) =>
+        builder
+            .AddSnippet($$"""
+                using System;
+                using Microsoft.AspNetCore.Mvc;
+
+                [ApiController]
+                public class Foo : Controller
+                {
+                    [HttpGet("a")]
+                    public IActionResult Method() =>
+                        {{invocation}};
+
+                    private Bar bar = new();
+                    private Uri uri;
                 }
 
                 public class Bar {}
@@ -98,7 +122,7 @@ public class SwaggerActionReturnTypeTest
     [DataRow("""Results.AcceptedAtRoute("", null, (object) bar)""")]
     [DataRow("""Results.AcceptedAtRoute(value: bar)""")]
     [DataRow("""Results.AcceptedAtRoute("", null, bar)""")]
-    public void RuleName_IResult(string invocation) =>
+    public void SwaggerActionReturnType_IResult(string invocation) =>
         builder
             .AddSnippet($$"""
                 using System;

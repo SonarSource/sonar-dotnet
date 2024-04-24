@@ -173,6 +173,13 @@ public class NocompliantBaseline : ControllerBase
     [ApiExplorerSettings(IgnoreApi = false)]
     public IActionResult IgnoreApiFalse() => // Noncompliant
         Ok(42);                              // Secondary
+
+    [HttpGet("foo")]
+    public IActionResult UnusedSuccessResponse() // Noncompliant - FP, the created success response is not returned
+    {
+        var x = Ok(42);                          // Secondary
+        return null;
+    }
 }
 
 public class NotApiController : Controller
@@ -246,6 +253,14 @@ public class IgnoreApiTrueController : ControllerBase
 {
     [HttpGet("foo")]
     public IActionResult ReturnsOkWithValue() => Ok(42);
+}
+
+[ApiController]
+[SwaggerResponse(StatusCodes.Status200OK, type: typeof(Foo))]
+public class SwaggerResponseController : Controller
+{
+    [HttpGet("foo")]
+    public IActionResult Foo() => Ok(new Foo());
 }
 
 [ApiController]

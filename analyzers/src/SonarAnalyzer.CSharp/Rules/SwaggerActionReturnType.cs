@@ -29,9 +29,6 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
     private const string NoTypeMessageFormat = "Use the ProducesResponseType overload containing the return type for successful responses.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-    private static readonly ImmutableArray<KnownType> ControllerActionAttributesNeedingTypeCheck = ImmutableArray.Create(
-        KnownType.Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute,
-        KnownType.SwashbuckleAspNetCoreAnnotationsSwaggerResponseAttribute);
     private static readonly ImmutableArray<KnownType> ControllerActionReturnTypes = ImmutableArray.Create(
         KnownType.Microsoft_AspNetCore_Mvc_IActionResult,
         KnownType.Microsoft_AspNetCore_Http_IResult);
@@ -81,20 +78,19 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
 
     private static InvalidMethodResult InvalidMethod(BaseMethodDeclarationSyntax methodDeclaration, SonarSyntaxNodeReportingContext nodeContext)
     {
-        var responseInvocations = Builds200Responses(methodDeclaration, nodeContext.SemanticModel);
+        var responseInvocations = FindSuccessResponses(methodDeclaration, nodeContext.SemanticModel);
         return responseInvocations.Length == 0
                || nodeContext.SemanticModel.GetDeclaredSymbol(methodDeclaration, nodeContext.Cancel) is not { } method
                || !method.IsControllerMethod()
                || !method.ReturnType.DerivesOrImplementsAny(ControllerActionReturnTypes)
                || method.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiConventionMethodAttribute)
                                                                || HasApiExplorerSettingsWithIgnoreApiTrue(x)
-                                                               || HasProducesResponseTypeAttributeWithReturnType(x)
-                                                               || HasSwaggerResponseAttributeWithReturnType(x))
+                                                               || HasProducesResponseTypeAttributeWithReturnType(x))
                    ? null
                    : new InvalidMethodResult(method, responseInvocations);
     }
 
-    private static SyntaxNode[] Builds200Responses(SyntaxNode node, SemanticModel model)
+    private static SyntaxNode[] FindSuccessResponses(SyntaxNode node, SemanticModel model)
     {
         return ActionResultInvocations().Concat(ObjectCreationInvocations()).Concat(ResultMethodsInvocations()).ToArray();
 
@@ -103,7 +99,9 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
                 .OfType<InvocationExpressionSyntax>()
                 .Where(x => ActionResultMethods.Contains(x.GetName())
                             && x.ArgumentList.Arguments.Count > 0
-                            && model.GetSymbolInfo(x.Expression).Symbol.IsInType(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase));
+                            && model.GetSymbolInfo(x.Expression).Symbol is { } symbol
+                            && symbol.IsInType(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase)
+                            && symbol.GetParameters().Any(parameter => parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_Infrastructure_ActionResultObjectValueAttribute)));
 
         IEnumerable<SyntaxNode> ObjectCreationInvocations() =>
             node.DescendantNodes()
@@ -125,20 +123,19 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
         var hasApiControllerAttribute = false;
         foreach (var attribute in symbol.GetAttributesWithInherited())
         {
-            hasApiControllerAttribute = hasApiControllerAttribute || attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute);
-
             if (attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiConventionTypeAttribute)
                 || HasProducesResponseTypeAttributeWithReturnType(attribute)
                 || HasApiExplorerSettingsWithIgnoreApiTrue(attribute))
             {
                 return false;
             }
+            hasApiControllerAttribute = hasApiControllerAttribute || attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute);
         }
         return hasApiControllerAttribute;
     }
 
     private static string GetMessage(ISymbol symbol) =>
-        symbol.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFromAny(ControllerActionAttributesNeedingTypeCheck))
+        symbol.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute))
             ? NoTypeMessageFormat
             : NoAttributeMessageFormat;
 
@@ -146,10 +143,6 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
         attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute_T)
         || (attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute)
             && ContainsReturnType(attribute));
-
-    private static bool HasSwaggerResponseAttributeWithReturnType(AttributeData attribute) =>
-        attribute.AttributeClass.DerivesFrom(KnownType.SwashbuckleAspNetCoreAnnotationsSwaggerResponseAttribute)
-        && ContainsReturnType(attribute);
 
     private static bool HasApiExplorerSettingsWithIgnoreApiTrue(AttributeData attribute) =>
         attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiExplorerSettingsAttribute)

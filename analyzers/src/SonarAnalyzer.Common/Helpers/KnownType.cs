@@ -88,6 +88,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpPutAttribute = new("Microsoft.AspNetCore.Mvc.HttpPutAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_IActionResult = new("Microsoft.AspNetCore.Mvc.IActionResult");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute = new("Microsoft.AspNetCore.Mvc.IgnoreAntiforgeryTokenAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_Infrastructure_ActionResultObjectValueAttribute = new("Microsoft.AspNetCore.Mvc.Infrastructure.ActionResultObjectValueAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_NonActionAttribute = new("Microsoft.AspNetCore.Mvc.NonActionAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_NonControllerAttribute = new("Microsoft.AspNetCore.Mvc.NonControllerAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ObjectResult = new("Microsoft.AspNetCore.Mvc.ObjectResult");
@@ -201,7 +202,6 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Org_BouncyCastle_Crypto_Generators_DHParametersGenerator = new("Org.BouncyCastle.Crypto.Generators.DHParametersGenerator");
         public static readonly KnownType Org_BouncyCastle_Crypto_Generators_DsaParametersGenerator = new("Org.BouncyCastle.Crypto.Generators.DsaParametersGenerator");
         public static readonly KnownType Org_BouncyCastle_Crypto_Parameters_RsaKeyGenerationParameters = new("Org.BouncyCastle.Crypto.Parameters.RsaKeyGenerationParameters");
-        public static readonly KnownType SwashbuckleAspNetCoreAnnotationsSwaggerResponseAttribute = new("Swashbuckle.AspNetCore.Annotations.SwaggerResponseAttribute");
         public static readonly KnownType Serilog_Events_LogEventLevel = new("Serilog.Events.LogEventLevel");
         public static readonly KnownType Serilog_ILogger = new("Serilog.ILogger");
         public static readonly KnownType Serilog_LoggerConfiguration = new("Serilog.LoggerConfiguration");
