@@ -108,7 +108,7 @@ namespace Partial
     public partial class PartialDoubleInheritance : Controller { } // Noncompliant
     //                                              ^^^^^^^^^^
 
-    public partial class PartialDoubleInheritance : Controller { } // FN, To be fixed in next PR
+    public partial class PartialDoubleInheritance : Controller { } // Noncompliant
     //                                              ^^^^^^^^^^
 
 }

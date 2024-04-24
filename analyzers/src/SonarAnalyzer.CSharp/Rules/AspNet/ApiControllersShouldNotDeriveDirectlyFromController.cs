@@ -23,7 +23,7 @@ namespace SonarAnalyzer.Rules.CSharp;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class ApiControllersShouldNotDeriveDirectlyFromController : SonarDiagnosticAnalyzer
 {
-    private const string DiagnosticId = "S6961";
+    internal const string DiagnosticId = "S6961";
     private const string MessageFormat = "Inherit from ControllerBase instead of Controller.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);

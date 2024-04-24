@@ -25,9 +25,12 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class ApiControllersShouldNotDeriveDirectlyFromControllerTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<ApiControllersShouldNotDeriveDirectlyFromController>().WithBasePath("AspNet");
 
 #if NET
+    private readonly VerifierBuilder builder = new VerifierBuilder<ApiControllersShouldNotDeriveDirectlyFromController>()
+        .AddReferences(AspNetCoreReferences)
+        .WithBasePath("AspNet");
+
     private static IEnumerable<MetadataReference> AspNetCoreReferences =>
     [
         AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
@@ -37,7 +40,7 @@ public class ApiControllersShouldNotDeriveDirectlyFromControllerTest
 
     [TestMethod]
     public void ApiControllersShouldNotDeriveDirectlyFromController_CS() =>
-        builder.AddReferences(AspNetCoreReferences).AddPaths("ApiControllersShouldNotDeriveDirectlyFromController.cs").Verify();
+        builder.AddPaths("ApiControllersShouldNotDeriveDirectlyFromController.cs").Verify();
 
     [DataRow("""View()""")]
     [DataRow("""View("viewName")""")]
@@ -62,7 +65,7 @@ public class ApiControllersShouldNotDeriveDirectlyFromControllerTest
     [DataRow("""TempData["foo"]""")]
     [DataTestMethod]
     public void ApiControllersShouldNotDeriveDirectlyFromController_DoesNotRaiseWithViewFunctionality(string invocation) =>
-        builder.AddReferences(AspNetCoreReferences)
+        builder
             .AddSnippet($$"""
                 using Microsoft.AspNetCore.Mvc;
                 using Microsoft.AspNetCore.Mvc.Filters;
@@ -80,7 +83,7 @@ public class ApiControllersShouldNotDeriveDirectlyFromControllerTest
     [DataRow("""OnActionExecuting(default(ActionExecutingContext))""")]
     [DataTestMethod]
     public void ApiControllersShouldNotDeriveDirectlyFromController_DoesNotRaiseWithVoidInvocations(string assignment) =>
-        builder.AddReferences(AspNetCoreReferences)
+        builder
             .AddSnippet($$"""
                 using Microsoft.AspNetCore.Mvc;
                 using Microsoft.AspNetCore.Mvc.Filters;
@@ -100,7 +103,7 @@ public class ApiControllersShouldNotDeriveDirectlyFromControllerTest
     [DataRow("object this[int index] => View();", DisplayName = "Indexer")]
     [DataTestMethod]
     public void ApiControllersShouldNotDeriveDirectlyFromController_DoesNotRaiseInDifferentConstructs(string code) =>
-        builder.AddReferences(AspNetCoreReferences)
+        builder
             .AddSnippet($$"""
                 using Microsoft.AspNetCore.Mvc;
 
@@ -112,5 +115,13 @@ public class ApiControllersShouldNotDeriveDirectlyFromControllerTest
                 }
                 """)
             .Verify();
+
+    [TestMethod]
+    public void ApiControllersShouldNotDeriveDirectlyFromController_CodeFix() =>
+        builder
+            .AddPaths("ApiControllersShouldNotDeriveDirectlyFromControllerCodeFix.cs")
+            .WithCodeFix<ApiControllersShouldNotDeriveDirectlyFromControllerCodeFix>()
+            .WithCodeFixedPaths("ApiControllersShouldNotDeriveDirectlyFromControllerCodeFix.Fixed.cs")
+            .VerifyCodeFix();
 #endif
 }
