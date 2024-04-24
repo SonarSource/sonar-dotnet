@@ -2,10 +2,11 @@
 
 public class ValidOrder
 {
-    public int publicOrInternal1;
-    internal int publicOrInternal2;
-    public int publicOrInternal3;
-    internal int publicOrInternal4;
+    public int public1;
+    public int public2;
+
+    internal int internal1;
+    internal int internal2;
 
     protected int protectedVariant1;
     private protected int protectedVariant2;
@@ -26,34 +27,34 @@ public class AbovePrivate
     private protected int protectedVariant2;    // Noncompliant {{Move this protected Field above the private ones.}}
     protected internal int protectedVariant3;   // Noncompliant {{Move this protected Field above the private ones.}}
 
-    public int publicOrInternal1;               // Noncompliant {{Move this public Field above the private ones.}}
-    internal int publicOrInternal2;             // Noncompliant {{Move this internal Field above the private ones.}}
-    public int publicOrInternal3;               // Noncompliant {{Move this public Field above the private ones.}}
-    internal int publicOrInternal4;             // Noncompliant {{Move this internal Field above the private ones.}}
+    public int public1;                         // Noncompliant {{Move this public Field above the private ones.}}
+    internal int internal1;                     // Noncompliant {{Move this internal Field above the private ones.}}
+    public int public2;                         // Noncompliant {{Move this public Field above the private ones.}}
+    internal int internal2;                     // Noncompliant {{Move this internal Field above the private ones.}}
 }
 
 public class AboveProtected
 {
     protected int protectedVariant;
 
-    public int publicOrInternal1;               // Noncompliant {{Move this public Field above the protected ones.}}
-    internal int publicOrInternal2;             // Noncompliant {{Move this internal Field above the protected ones.}}
+    public int public1;                         // Noncompliant {{Move this public Field above the protected ones.}}
+    internal int internal1;                     // Noncompliant {{Move this internal Field above the protected ones.}}
 }
 
 public class AboveProtectedInternal
 {
     protected internal int protectedVariant;
 
-    public int publicOrInternal1;               // Noncompliant {{Move this public Field above the protected ones.}}
-    internal int publicOrInternal2;             // Noncompliant {{Move this internal Field above the protected ones.}}
+    public int public1;                         // Noncompliant {{Move this public Field above the protected ones.}}
+    internal int internal1;                     // Noncompliant {{Move this internal Field above the protected ones.}}
 }
 
 public class AboveProtectedPrivate
 {
     protected private int protectedVariant;
 
-    public int publicOrInternal1;               // Noncompliant {{Move this public Field above the protected ones.}}
-    internal int publicOrInternal2;             // Noncompliant {{Move this internal Field above the protected ones.}}
+    public int public1;                         // Noncompliant {{Move this public Field above the protected ones.}}
+    internal int internal1;                     // Noncompliant {{Move this internal Field above the protected ones.}}
 }
 
 public abstract class CompliantClassFull

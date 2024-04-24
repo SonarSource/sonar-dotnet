@@ -41,12 +41,12 @@ public sealed class MemberVisibilityOrdering : StylingAnalyzer
         {
             if (Category(member) is { } category && ReportingLocation(member) is { } location)
             {
-                members.GetOrAdd(category, x => []).Add(new(location, ComputeOrder(member)));
+                members.GetOrAdd(category, x => []).Add(new(location, member.ComputeOrder()));
             }
         }
         foreach (var category in members.Keys)
         {
-            OrderInfo maxOrder = null;
+            OrderDescriptor maxOrder = null;
             foreach (var member in members[category])
             {
                 if (member.Order.Value < maxOrder?.Value)
@@ -85,27 +85,5 @@ public sealed class MemberVisibilityOrdering : StylingAnalyzer
             _ => node.GetIdentifier()?.GetLocation()
         };
 
-    private static OrderInfo ComputeOrder(MemberDeclarationSyntax member)
-    {
-        if (member.Modifiers.Any(SyntaxKind.ProtectedKeyword))
-        {
-            return new(2, "protected");
-        }
-        else if (member.Modifiers.Any(SyntaxKind.PublicKeyword))
-        {
-            return new(1, "public");
-        }
-        else if (member.Modifiers.Any(SyntaxKind.InternalKeyword))
-        {
-            return new(1, "internal");
-        }
-        else // private or unspecified
-        {
-            return new(3, "private");
-        }
-    }
-
-    private sealed record MemberInfo(Location Location, OrderInfo Order);
-
-    private sealed record OrderInfo(int Value, string Description);
+    private sealed record MemberInfo(Location Location, OrderDescriptor Order);
 }
