@@ -89,23 +89,18 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         InvocationExpressionSyntax invocationExpression, SemanticModel semanticModel, ISymbol containingSymbol, CancellationToken cancel)
     {
         var awaitableRoot = GetAwaitableRootOfInvocation(invocationExpression);
-        if (awaitableRoot is { Parent: AwaitExpressionSyntax })
-        {
-            return ImmutableArray<ISymbol>.Empty; // Invocation result is already awaited.
-        }
-        if (invocationExpression.EnclosingScope() is { } scope && !IsAsyncCodeBlock(scope))
-        {
-            return ImmutableArray<ISymbol>.Empty; // Not in an async scope
-        }
-        if (semanticModel.GetSymbolInfo(invocationExpression, cancel).Symbol is IMethodSymbol { MethodKind: not MethodKind.DelegateInvoke } methodSymbol
-            && !methodSymbol.IsAwaitableNonDynamic(semanticModel, invocationExpression.SpanStart)) // The invoked method returns something awaitable (but it isn't awaited).
+        if (awaitableRoot is not { Parent: AwaitExpressionSyntax } // Invocation result is already awaited.
+            && invocationExpression.EnclosingScope() is { } scope
+            && IsAsyncCodeBlock(scope)
+            && semanticModel.GetSymbolInfo(invocationExpression, cancel).Symbol is IMethodSymbol { MethodKind: not MethodKind.DelegateInvoke } methodSymbol
+            && !methodSymbol.IsAwaitableNonDynamic()) // The invoked method returns something awaitable (but it isn't awaited).
         {
             // Perf: Before doing (expensive) speculative re-binding in SpeculativeBindCandidates, we check if there is an "..Async()" alternative in scope.
             var invokedType = invocationExpression.Expression.GetLeftOfDot() is { } expression && semanticModel.GetTypeInfo(expression) is { Type: { } type }
                 ? type // A dotted expression: Lookup the type, left of the dot (this may be different from methodSymbol.ContainingType)
                 : containingSymbol.ContainingType; // If not dotted, than the scope is the current type. Local function support is missing here.
             var members = GetMethodSymbolsInScope($"{methodSymbol.Name}Async", wellKnownExtensionMethodContainer, invokedType, methodSymbol.ContainingType);
-            var awaitableCandidates = members.Where(x => x.IsAwaitableNonDynamic(semanticModel, invocationExpression.SpanStart));
+            var awaitableCandidates = members.Where(x => x.IsAwaitableNonDynamic());
             var awaitableAlternatives = SpeculativeBindCandidates(semanticModel, codeBlock, awaitableRoot, invocationExpression, awaitableCandidates).ToImmutableArray();
             return awaitableAlternatives;
         }
