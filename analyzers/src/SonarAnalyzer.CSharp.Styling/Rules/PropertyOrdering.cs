@@ -35,13 +35,13 @@ public sealed class PropertyOrdering : StylingAnalyzer
 
     private void ValidateMembers(SonarSyntaxNodeReportingContext context)
     {
-        foreach (var visibilityGroup in ((TypeDeclarationSyntax)context.Node).Members.OfType<PropertyDeclarationSyntax>().GroupBy(ComputeOrder))
+        foreach (var visibilityGroup in ((TypeDeclarationSyntax)context.Node).Members.OfType<PropertyDeclarationSyntax>().GroupBy(x => x.ComputeOrder()))
         {
             ValidateMembers(context, visibilityGroup.Key, visibilityGroup);
         }
     }
 
-    private void ValidateMembers(SonarSyntaxNodeReportingContext context, OrderInfo order, IEnumerable<PropertyDeclarationSyntax> members)
+    private void ValidateMembers(SonarSyntaxNodeReportingContext context, OrderDescriptor order, IEnumerable<PropertyDeclarationSyntax> members)
     {
         bool hasInstance = false;
         foreach (var member in members)
@@ -59,26 +59,4 @@ public sealed class PropertyOrdering : StylingAnalyzer
             }
         }
     }
-
-    private static OrderInfo ComputeOrder(MemberDeclarationSyntax member)   // ToDo: Reuse logic from T0009
-    {
-        if (member.Modifiers.Any(SyntaxKind.ProtectedKeyword))
-        {
-            return new(3, "protected");
-        }
-        else if (member.Modifiers.Any(SyntaxKind.PublicKeyword))
-        {
-            return new(1, "public");
-        }
-        else if (member.Modifiers.Any(SyntaxKind.InternalKeyword))
-        {
-            return new(2, "internal");
-        }
-        else // private or unspecified
-        {
-            return new(4, "private");
-        }
-    }
-
-    private sealed record OrderInfo(int Value, string Description); // ToDo: Reuse logic from T0009
 }
