@@ -29,6 +29,8 @@ public abstract class BackslashShouldBeAvoidedInAspNetRoutesBase<TSyntaxKind> : 
 
     protected override string MessageFormat => @"Replace '\' with '/'.";
 
+    protected abstract bool IsNamedAttributeArgument(SyntaxNode node);
+
     protected BackslashShouldBeAvoidedInAspNetRoutesBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
@@ -42,7 +44,8 @@ public abstract class BackslashShouldBeAvoidedInAspNetRoutesBase<TSyntaxKind> : 
 
     protected void Check(SonarSyntaxNodeReportingContext c)
     {
-        if (Language.Syntax.NodeExpression(c.Node) is { } expression
+        if (!IsNamedAttributeArgument(c.Node)
+            && Language.Syntax.NodeExpression(c.Node) is { } expression
             && Language.FindConstantValue(c.SemanticModel, expression) is string constantRouteTemplate
             && ContainsBackslash(constantRouteTemplate)
             && IsRouteTemplate(c.SemanticModel, c.Node))

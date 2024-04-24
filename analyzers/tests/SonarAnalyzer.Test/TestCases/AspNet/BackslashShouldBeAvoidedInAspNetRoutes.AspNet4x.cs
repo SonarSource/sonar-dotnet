@@ -110,3 +110,19 @@ class WithTuples
         var tuple = (1, "A\\[controller]"); // Compliant: the argument is not in a method invocation
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9193
+namespace AttributeWithNamedArgument
+{
+    [AttributeUsage(AttributeTargets.All)]
+    public class MyAttribute : Attribute
+    {
+        public string Name { get; set; }
+    }
+
+    public class MyController: Controller
+    {
+        [MyAttribute(Name = "Display HR\\Recruitment report")]
+        public const string Text = "ABC";
+    }
+}
