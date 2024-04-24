@@ -32,12 +32,20 @@ public class SourceGeneratorProviderTest
     [TestMethod]
     public void RazorSourceGenerator_HasCorrectPath() =>
         RazorSourceGenerator.FullPath
-            .Should()
-            .Be(Path.Combine(Path.GetDirectoryName(typeof(SourceGeneratorProvider).Assembly.Location), "Dependencies", "Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators.dll"));
+            .Should().Be(Path.Combine(SourceGeneratorProvider.LatestSdkFolder(), "Sdks", "Microsoft.NET.Sdk.Razor", "source-generators", "Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators.dll"));
 
     [TestMethod]
     public void RazorSourceGenerator_LoadsCorrectAssembly() =>
         RazorSourceGenerator.GetAssembly().GetName().Name.Should().Be("Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators");
+
+    [TestMethod]
+    public void LatestSdkFolder_ReturnsCorrectPath()
+    {
+        var expectedPath = Directory.GetDirectories(Path.Combine(Directory.GetParent(typeof(object).Assembly.Location).Parent.Parent.Parent.FullName, "sdk"), $"{typeof(object).Assembly.GetName().Version.Major}.*", SearchOption.TopDirectoryOnly)
+                                    .OrderByDescending(dir => new DirectoryInfo(dir).Name)
+                                    .FirstOrDefault();
+        SourceGeneratorProvider.LatestSdkFolder().Should().Be(expectedPath);
+    }
 
     private static AnalyzerFileReference RazorSourceGenerator =>
         SourceGeneratorProvider.SourceGenerators.Single(x => x.FullPath.EndsWith("Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators.dll"));

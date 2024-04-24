@@ -26,12 +26,29 @@ namespace SonarAnalyzer.TestFramework.Common;
 public static class SourceGeneratorProvider
 {
     private static readonly string RazorSourceGeneratorPath =
-        Path.Combine(Path.GetDirectoryName(typeof(SourceGeneratorProvider).Assembly.Location), "Dependencies", "Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators.dll");
+        Path.Combine(LatestSdkFolder(), "Sdks", "Microsoft.NET.Sdk.Razor", "source-generators", "Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators.dll");
 
     public static AnalyzerFileReference[] SourceGenerators { get; } =
     [
-        new(RazorSourceGeneratorPath, new AssemblyLoader())
+        new(CheckRazorSourceGeneratorPath(), new AssemblyLoader())
     ];
+
+    public static string CheckRazorSourceGeneratorPath() =>
+        File.Exists(RazorSourceGeneratorPath) ? RazorSourceGeneratorPath : throw new FileNotFoundException($"Razor sourcegenerator not found: {RazorSourceGeneratorPath}");
+
+    public static string LatestSdkFolder()
+    {
+        var objectAssembly = typeof(object).Assembly;
+        var objectAssemblyDirectory = new FileInfo(objectAssembly.Location).Directory; // C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.16
+        var dotnetDirectory = objectAssemblyDirectory.Parent.Parent.Parent;            // C:\Program Files\dotnet
+        var sdkDirectory = Path.Combine(dotnetDirectory.FullName, "sdk");              // C:\Program Files\dotnet\sdk
+        if (!Directory.Exists(sdkDirectory))
+        {
+            throw new DirectoryNotFoundException($"Directory not found: {sdkDirectory}");
+        }
+        var latestSdkMajorDirectories = Directory.GetDirectories(sdkDirectory, $"{objectAssembly.GetName().Version.Major}.*", SearchOption.TopDirectoryOnly);
+        return latestSdkMajorDirectories.OrderByDescending(dir => new DirectoryInfo(dir).Name).FirstOrDefault();
+    }
 
     private sealed class AssemblyLoader : IAnalyzerAssemblyLoader
     {
