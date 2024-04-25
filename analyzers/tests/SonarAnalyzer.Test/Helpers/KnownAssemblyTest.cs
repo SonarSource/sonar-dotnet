@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Moq;
+using NSubstitute;
 using SonarAnalyzer.Extensions;
 using static SonarAnalyzer.Helpers.KnownAssembly;
 using static SonarAnalyzer.Helpers.KnownAssembly.Predicates;
@@ -63,7 +63,7 @@ public class KnownAssemblyTest
         var sut = new KnownAssembly(NameIs("Test"));
         var identity = new AssemblyIdentity(name);
         var compilation = CompilationWithReferenceTo(identity);
-        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation).Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -79,7 +79,7 @@ public class KnownAssemblyTest
     {
         var sut = new KnownAssembly(Contains("Test"));
         var compilation = CompilationWithReferenceTo(new AssemblyIdentity(name));
-        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation).Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -95,7 +95,7 @@ public class KnownAssemblyTest
     {
         var sut = new KnownAssembly(StartsWith("Test"));
         var compilation = CompilationWithReferenceTo(new AssemblyIdentity(name));
-        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation).Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -111,7 +111,7 @@ public class KnownAssemblyTest
     {
         var sut = new KnownAssembly(EndsWith("Test"));
         var compilation = CompilationWithReferenceTo(new AssemblyIdentity(name));
-        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation).Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -125,9 +125,9 @@ public class KnownAssemblyTest
     {
         var compilation = CompilationWithReferenceTo(new AssemblyIdentity("assemblyName", new Version(version)));
         var sut = new KnownAssembly(VersionGreaterOrEqual(new Version(2, 0)));
-        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation).Should().Be(expected);
         sut = new KnownAssembly(VersionGreaterOrEqual("2.0"));
-        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation).Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -141,9 +141,9 @@ public class KnownAssemblyTest
     {
         var compilation = CompilationWithReferenceTo(new AssemblyIdentity("assemblyName", new Version(version)));
         var sut = new KnownAssembly(VersionLowerThen(new Version(2, 0)));
-        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation).Should().Be(expected);
         sut = new KnownAssembly(VersionLowerThen("2.0"));
-        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation).Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -161,9 +161,9 @@ public class KnownAssemblyTest
     {
         var compilation = CompilationWithReferenceTo(new AssemblyIdentity("assemblyName", new Version(version)));
         var sut = new KnownAssembly(VersionBetween(new Version(2, 0, 0, 0), new Version(3, 5, 0, 0)));
-        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation).Should().Be(expected);
         sut = new KnownAssembly(VersionBetween("2.0.0.0", "3.5.0.0"));
-        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation).Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -186,9 +186,9 @@ public class KnownAssemblyTest
             0xec, 0xe2, 0x56, 0x35, 0x7b, 0xa7, 0x35, 0xe6, 0x7d, 0xc6), hasPublicKey: true);
         var compilation = CompilationWithReferenceTo(identity);
         var sut = new KnownAssembly(PublicKeyTokenIs(publicKeyToken));
-        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation).Should().Be(expected);
         sut = new KnownAssembly(OptionalPublicKeyTokenIs(publicKeyToken));
-        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation).Should().Be(expected);
     }
 
     [TestMethod]
@@ -196,7 +196,7 @@ public class KnownAssemblyTest
     {
         var compilation = CompilationWithReferenceTo(new AssemblyIdentity("assemblyName", hasPublicKey: false));
         var sut = new KnownAssembly(PublicKeyTokenIs("c5b62af9de6d7244"));
-        sut.IsReferencedBy(compilation.Object).Should().BeFalse();
+        sut.IsReferencedBy(compilation).Should().BeFalse();
     }
 
     [TestMethod]
@@ -204,7 +204,7 @@ public class KnownAssemblyTest
     {
         var compilation = CompilationWithReferenceTo(new AssemblyIdentity("assemblyName", hasPublicKey: false));
         var sut = new KnownAssembly(OptionalPublicKeyTokenIs("c5b62af9de6d7244"));
-        sut.IsReferencedBy(compilation.Object).Should().BeTrue();
+        sut.IsReferencedBy(compilation).Should().BeTrue();
     }
 
     [DataTestMethod]
@@ -219,7 +219,7 @@ public class KnownAssemblyTest
     {
         var compilation = CompilationWithReferenceTo(new AssemblyIdentity(name, new Version(version)));
         var sut = new KnownAssembly(StartsWith("Test").And(VersionBetween(new Version(2, 0, 0, 0), new Version(3, 5, 0, 0))));
-        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation).Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -235,7 +235,7 @@ public class KnownAssemblyTest
     {
         var compilation = CompilationWithReferenceTo(new AssemblyIdentity(name));
         var sut = new KnownAssembly(StartsWith("Start"), EndsWith("End"));
-        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation).Should().Be(expected);
     }
 
     [DataTestMethod]
@@ -251,7 +251,7 @@ public class KnownAssemblyTest
     {
         var compilation = CompilationWithReferenceTo(new AssemblyIdentity(name));
         var sut = new KnownAssembly(StartsWith("Start").Or(EndsWith("End")));
-        sut.IsReferencedBy(compilation.Object).Should().Be(expected);
+        sut.IsReferencedBy(compilation).Should().Be(expected);
     }
 
     [TestMethod]
@@ -263,7 +263,7 @@ public class KnownAssemblyTest
         compilation.References(MSTest).Should().BeFalse();
         compilation.References(NFluent).Should().BeFalse();
         compilation.References(KnownAssembly.FluentAssertions).Should().BeFalse();
-        compilation.References(NSubstitute).Should().BeFalse();
+        compilation.References(KnownAssembly.NSubstitute).Should().BeFalse();
         compilation.References(MicrosoftExtensionsLoggingAbstractions).Should().BeFalse();
         compilation.References(Serilog).Should().BeFalse();
         compilation.References(NLog).Should().BeFalse();
@@ -307,7 +307,7 @@ public class KnownAssemblyTest
 
     [TestMethod]
     public void NSubstitute_5_0() =>
-        CompilationShouldReference(NuGetMetadataReference.NSubstitute("5.0.0"), NSubstitute);
+        CompilationShouldReference(NuGetMetadataReference.NSubstitute("5.0.0"), KnownAssembly.NSubstitute);
 
     [TestMethod]
     public void MicrosoftExtensionsLoggingAbstractions_Latest() =>
@@ -340,10 +340,10 @@ public class KnownAssemblyTest
     private static void CompilationShouldReference(IEnumerable<MetadataReference> references, KnownAssembly expectedAssembly) =>
         TestHelper.CompileCS("// Empty file", references.ToArray()).Model.Compilation.References(expectedAssembly).Should().BeTrue();
 
-    private static Mock<Compilation> CompilationWithReferenceTo(AssemblyIdentity identity)
+    private static Compilation CompilationWithReferenceTo(AssemblyIdentity identity)
     {
-        var compilation = new Mock<Compilation>("compilationName", ImmutableArray<MetadataReference>.Empty, new Dictionary<string, string>(), false, null, null);
-        compilation.SetupGet(x => x.ReferencedAssemblyNames).Returns(new[] { identity });
+        var compilation = Substitute.For<Compilation>("compilationName", ImmutableArray<MetadataReference>.Empty, new Dictionary<string, string>(), false, null, null);
+        compilation.ReferencedAssemblyNames.Returns([identity]);
         return compilation;
     }
 }

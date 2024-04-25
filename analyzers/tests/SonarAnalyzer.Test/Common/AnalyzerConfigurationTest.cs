@@ -19,7 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.Text;
-using Moq;
+using NSubstitute;
 using static SonarAnalyzer.Common.AnalyzerConfiguration;
 
 namespace SonarAnalyzer.Test.Common
@@ -33,14 +33,14 @@ namespace SonarAnalyzer.Test.Common
         private const string SecondSonarLintFilePath = @"qix\SonarLint.xml";
         private const string SecondSonarLintFileContent = "fake SonarLintXml content 2";
         private const string SecondRuleId = "S9999";
-        private Mock<IRuleLoader> ruleLoaderMock;
+        private IRuleLoader ruleLoader;
 
         [TestInitialize]
         public void Initialize()
         {
-            ruleLoaderMock = new Mock<IRuleLoader>(MockBehavior.Strict);
-            ruleLoaderMock.Setup(r => r.GetEnabledRules(FirstSonarLintFileContent)).Returns(new HashSet<string> { FirstRuleId });
-            ruleLoaderMock.Setup(r => r.GetEnabledRules(SecondSonarLintFileContent)).Returns(new HashSet<string> { SecondRuleId });
+            ruleLoader = Substitute.For<IRuleLoader>();
+            ruleLoader.GetEnabledRules(FirstSonarLintFileContent).Returns(new HashSet<string> { FirstRuleId });
+            ruleLoader.GetEnabledRules(SecondSonarLintFileContent).Returns(new HashSet<string> { SecondRuleId });
         }
 
         [TestMethod]
@@ -59,14 +59,14 @@ namespace SonarAnalyzer.Test.Common
         public void ForceSonarCfg_DisabledByDefault()
         {
             AlwaysEnabled.ForceSonarCfg.Should().BeFalse();
-            new HotspotConfiguration(ruleLoaderMock.Object).ForceSonarCfg.Should().BeFalse();
+            new HotspotConfiguration(ruleLoader).ForceSonarCfg.Should().BeFalse();
         }
 
         [TestMethod]
         public void ForceSonarCfg_DisabledByDefault_ExistExceptionalConfig()
         {
             AlwaysEnabled.ForceSonarCfg.Should().BeFalse();
-            new HotspotConfiguration(ruleLoaderMock.Object).ForceSonarCfg.Should().BeFalse();
+            new HotspotConfiguration(ruleLoader).ForceSonarCfg.Should().BeFalse();
             AlwaysEnabledWithSonarCfg.ForceSonarCfg.Should().BeTrue();
         }
 
@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Test.Common
         [TestMethod]
         public void HotspotConfiguration_WhenInitializeIsCalledWithDifferentSonarLintPaths_UpdatesEnabledRules()
         {
-            var sut = new HotspotConfiguration(ruleLoaderMock.Object);
+            var sut = new HotspotConfiguration(ruleLoader);
 
             // act
             Initialize(sut, FirstSonarLintFilePath, FirstSonarLintFileContent);
@@ -98,60 +98,59 @@ namespace SonarAnalyzer.Test.Common
             sut.IsEnabled(FirstRuleId).Should().BeFalse();
             sut.IsEnabled(SecondRuleId).Should().BeTrue();
 
-            ruleLoaderMock.Verify(r => r.GetEnabledRules(FirstSonarLintFileContent), Times.Once);
-            ruleLoaderMock.Verify(r => r.GetEnabledRules(SecondSonarLintFileContent), Times.Once);
+            ruleLoader.Received(1).GetEnabledRules(FirstSonarLintFileContent);
+            ruleLoader.Received(1).GetEnabledRules(SecondSonarLintFileContent);
         }
 
         [TestMethod]
         public void HotspotConfiguration_WhenInitializedTwiceWithTheSameFile_DoesNotUpdateEnabledRules()
         {
-            var sut = new HotspotConfiguration(ruleLoaderMock.Object);
+            var sut = new HotspotConfiguration(ruleLoader);
 
             // act
             Initialize(sut, FirstSonarLintFilePath, FirstSonarLintFileContent);
             Initialize(sut, FirstSonarLintFilePath, FirstSonarLintFileContent);
 
             // assert
-            ruleLoaderMock.Verify(r => r.GetEnabledRules(It.IsAny<string>()), Times.Once);
-            ruleLoaderMock.Verify(r => r.GetEnabledRules(FirstSonarLintFileContent), Times.Once);
+            ruleLoader.Received(1).GetEnabledRules(Arg.Any<string>());
+            ruleLoader.Received(1).GetEnabledRules(FirstSonarLintFileContent);
         }
 
         [TestMethod]
         public void HotspotConfiguration_WhenInitializeIsSecondTimeWithNonSonarLint_DoesNotUpdateEnabledRules()
         {
-            var sut = new HotspotConfiguration(ruleLoaderMock.Object);
+            var sut = new HotspotConfiguration(ruleLoader);
 
             // act
             Initialize(sut, FirstSonarLintFilePath, FirstSonarLintFileContent);
             Initialize(sut, "Foo.xml", "fake SonarLintXml content");
 
             // assert
-            ruleLoaderMock.Verify(r => r.GetEnabledRules(It.IsAny<string>()), Times.Once);
-            ruleLoaderMock.Verify(r => r.GetEnabledRules(FirstSonarLintFileContent), Times.Once);
+            ruleLoader.Received(1).GetEnabledRules(Arg.Any<string>());
+            ruleLoader.Received(1).GetEnabledRules(FirstSonarLintFileContent);
         }
 
         [TestMethod]
         public void HotspotConfiguration_WhenIsEnabledWithoutInitialized_ThrowException()
         {
-            var sut = new HotspotConfiguration(ruleLoaderMock.Object);
+            var sut = new HotspotConfiguration(ruleLoader);
             sut.Invoking(x => x.IsEnabled("")).Should().Throw<InvalidOperationException>().WithMessage("Call Initialize() before calling IsEnabled().");
         }
 
         [TestMethod]
         public void HotspotConfiguration_WhenIsInitializedWithNull_ThrowsException()
         {
-            var sut = new HotspotConfiguration(ruleLoaderMock.Object);
+            var sut = new HotspotConfiguration(ruleLoader);
             sut.Invoking(x => x.Initialize(null)).Should().Throw<NullReferenceException>();
         }
 
         [TestMethod]
         public void HotspotConfiguration_GivenDifferentFileName_WillNotFinishInitialization()
         {
-            var sut = new HotspotConfiguration(ruleLoaderMock.Object);
-
+            var sut = new HotspotConfiguration(ruleLoader);
             Initialize(sut, "FooBarSonarLint.xml", "fake SonarLintXml content");
 
-            ruleLoaderMock.Verify(r => r.GetEnabledRules(It.IsAny<string>()), Times.Never);
+            ruleLoader.DidNotReceive().GetEnabledRules(Arg.Any<string>());
         }
 
         private static void Initialize(HotspotConfiguration sut, string path, string content) =>
@@ -159,13 +158,10 @@ namespace SonarAnalyzer.Test.Common
 
         private static ImmutableArray<AdditionalText> GetAdditionalFiles(string path, string content)
         {
-            var additionalText = new Mock<AdditionalText>();
-            additionalText.Setup(x => x.Path).Returns(path);
-            additionalText
-                .Setup(x => x.GetText(default))
-                .Returns(SourceText.From(content));
-
-            return ImmutableArray.Create(additionalText.Object);
+            var additionalText = Substitute.For<AdditionalText>();
+            additionalText.Path.Returns(path);
+            additionalText.GetText(default).Returns(SourceText.From(content));
+            return [additionalText];
         }
     }
 }

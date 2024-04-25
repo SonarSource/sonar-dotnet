@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Moq;
+using NSubstitute;
 using SonarAnalyzer.AnalysisContext;
 
 namespace SonarAnalyzer.Test.AnalysisContext;
@@ -32,7 +32,7 @@ public class SonarCompilationStartAnalysisContextTest
         var cancel = new CancellationToken(true);
         var compilation = TestHelper.CompileCS("// Nothing to see here").Model.Compilation;
         var options = AnalysisScaffolding.CreateOptions();
-        var context = new Mock<CompilationStartAnalysisContext>(compilation, options, cancel).Object;
+        var context = Substitute.For<CompilationStartAnalysisContext>(compilation, options, cancel);
         var sut = new SonarCompilationStartAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
         sut.Compilation.Should().BeSameAs(compilation);
