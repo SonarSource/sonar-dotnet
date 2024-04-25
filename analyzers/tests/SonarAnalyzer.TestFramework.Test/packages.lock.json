@@ -272,18 +272,18 @@
         "resolved": "6.0.0",
         "contentHash": "hqTM5628jSsQiv+HGpiq3WKBl2c8v1KZfby2J6Pr7pEPlK9waPdgEO6b8A/+/xn/yZ9ulv8HuqK71ONy2tg67A=="
       },
-      "Moq": {
-        "type": "Transitive",
-        "resolved": "4.18.4",
-        "contentHash": "IOo+W51+7Afnb0noltJrKxPBSfsgMzTKCw+Re5AMx8l/vBbAbMDOynLik4+lBYIWDJSO0uV7Zdqt7cNb6RZZ+A==",
-        "dependencies": {
-          "Castle.Core": "5.1.1"
-        }
-      },
       "Newtonsoft.Json": {
         "type": "Transitive",
         "resolved": "13.0.3",
         "contentHash": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ=="
+      },
+      "NSubstitute": {
+        "type": "Transitive",
+        "resolved": "5.1.0",
+        "contentHash": "ZCqOP3Kpp2ea7QcLyjMU4wzE+0wmrMN35PQMsdPOHYc2IrvjmusG9hICOiqiOTPKN0gJon6wyCn6ZuGHdNs9hQ==",
+        "dependencies": {
+          "Castle.Core": "5.1.1"
+        }
       },
       "NuGet.Common": {
         "type": "Transitive",
@@ -575,7 +575,7 @@
           "Microsoft.CodeAnalysis.VisualBasic.Workspaces": "[4.9.2, )",
           "Microsoft.CodeAnalysis.Workspaces.Common": "[4.9.2, )",
           "Microsoft.CodeAnalysis.Workspaces.MSBuild": "[4.9.2, )",
-          "Moq": "[4.18.4, )",
+          "NSubstitute": "[5.1.0, )",
           "NuGet.Protocol": "[6.9.1, )",
           "SonarAnalyzer": "[1.0.0, )"
         }

@@ -16,7 +16,7 @@
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="4.9.2" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.9.2" />
     <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces" Version="4.9.2" />
-    <PackageReference Include="Moq" Version="4.18.4" />
+    <PackageReference Include="NSubstitute" Version="5.1.0" />
     <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
     <PackageReference Include="NuGet.Protocol" Version="6.9.1" />
   </ItemGroup>
