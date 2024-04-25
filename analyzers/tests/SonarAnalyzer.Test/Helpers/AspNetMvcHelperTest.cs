@@ -31,15 +31,19 @@ namespace SonarAnalyzer.Test.Helpers
         public void Public_Controller_Methods_Are_EntryPoints(string aspNetMvcVersion)
         {
             const string code = @"
-public class Foo : System.Web.Mvc.Controller
+public abstract class Foo : System.Web.Mvc.Controller
 {
     public void PublicFoo() { }
     protected void ProtectedFoo() { }
     internal void InternalFoo() { }
     private void PrivateFoo() { }
     public static void StaticFoo() { }
+    public virtual void VirtualFoo() { }
+    public abstract void AbstractFoo();
+    public void InFoo(in string arg) { }
     public void OutFoo(out string arg) { arg = null; }
     public void RefFoo(ref string arg) { }
+    public void ReadonlyRefFoo(ref readonly string arg) { }
     public void GenericFoo<T>(T arg) { }
     private class Bar : System.Web.Mvc.Controller
     {
@@ -54,7 +58,11 @@ public class Foo : System.Web.Mvc.Controller
             var internalFoo = GetMethodSymbol(compilation, "InternalFoo");
             var privateFoo = GetMethodSymbol(compilation, "PrivateFoo");
             var staticFoo = GetMethodSymbol(compilation, "StaticFoo");
+            var virtualFoo = GetMethodSymbol(compilation, "VirtualFoo");
+            var abstractFoo = GetMethodSymbol(compilation, "AbstractFoo");
+            var inFoo = GetMethodSymbol(compilation, "InFoo");
             var outFoo = GetMethodSymbol(compilation, "OutFoo");
+            var readonlyRefFoo = GetMethodSymbol(compilation, "ReadonlyRefFoo");
             var refFoo = GetMethodSymbol(compilation, "RefFoo");
             var genericFoo = GetMethodSymbol(compilation, "GenericFoo");
             var innerFoo = GetMethodSymbol(compilation, "InnerFoo");
@@ -65,9 +73,13 @@ public class Foo : System.Web.Mvc.Controller
             AspNetMvcHelper.IsControllerActionMethod(internalFoo).Should().Be(false);
             AspNetMvcHelper.IsControllerActionMethod(privateFoo).Should().Be(false);
             AspNetMvcHelper.IsControllerActionMethod(staticFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(inFoo).Should().Be(false);
             AspNetMvcHelper.IsControllerActionMethod(outFoo).Should().Be(false);
             AspNetMvcHelper.IsControllerActionMethod(refFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(readonlyRefFoo).Should().Be(false);
             AspNetMvcHelper.IsControllerActionMethod(staticFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(virtualFoo).Should().Be(true);
+            AspNetMvcHelper.IsControllerActionMethod(abstractFoo).Should().Be(true);
             AspNetMvcHelper.IsControllerActionMethod(genericFoo).Should().Be(false);
             AspNetMvcHelper.IsControllerActionMethod(innerFoo).Should().Be(false);
             AspNetMvcHelper.IsControllerActionMethod(publicNonAction).Should().Be(false);

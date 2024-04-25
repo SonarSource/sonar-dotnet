@@ -104,6 +104,15 @@ public class CallModelStateIsValidTest
                     return "Hello!";
                 }
             }
+
+            public class NonValidatingMovieController : ControllerBase
+            {
+                [HttpPost("/[controller]")]
+                public string Add(Movie movie)  // FN - the project references FluentValidation, but doesn't use it
+                {
+                    return "Hello!";
+                }
+            }
             """).AddReferences(NuGetMetadataReference.FluentValidation()).Verify();
 
     [DataTestMethod]

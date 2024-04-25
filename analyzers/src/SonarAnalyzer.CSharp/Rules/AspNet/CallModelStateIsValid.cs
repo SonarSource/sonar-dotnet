@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp;
 
@@ -29,10 +30,9 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
     private const string MessageFormat = "ModelState.IsValid should be checked in controller actions.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-    private static readonly SyntaxKind[] SyntaxNodesToVisit = [
+    private static readonly SyntaxKind[] PropertyAccessSyntaxNodesToVisit = [
         SyntaxKind.ConditionalAccessExpression,
         SyntaxKind.SimpleMemberAccessExpression,
-        SyntaxKind.InvocationExpression,
         SyntaxKindEx.Subpattern];
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
@@ -69,7 +69,7 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
             codeBlockContext.RegisterNodeAction(nodeContext =>
             {
                 isModelValidated |= IsCheckingValidityProperty(nodeContext.Node, nodeContext.SemanticModel);
-            }, SyntaxNodesToVisit);
+            }, PropertyAccessSyntaxNodesToVisit);
             codeBlockContext.RegisterNodeAction(nodeContext =>
             {
                 isModelValidated |= IsTryValidateInvocation(nodeContext.Node, nodeContext.SemanticModel);
@@ -89,15 +89,9 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
 
     private static bool IsCheckingValidityProperty(SyntaxNode node, SemanticModel semanticModel)
     {
-        var propertyNode = node switch
-        {
-            ConditionalAccessExpressionSyntax conditionalAccess => conditionalAccess.WhenNotNull,
-            MemberAccessExpressionSyntax memberAccess => memberAccess.Name,
-            { } when SubpatternSyntaxWrapper.IsInstance(node) => ((SubpatternSyntaxWrapper)node).ExpressionColon.Expression,
-            _ => null
-        };
-        return propertyNode?.GetName() is "IsValid" or "ValidationState"
-            && semanticModel.GetSymbolInfo(propertyNode).Symbol is IPropertySymbol propertySymbol
+        var nodeIdentifier = node.GetIdentifier();
+        return nodeIdentifier?.ValueText is "IsValid" or "ValidationState"
+            && semanticModel.GetSymbolInfo(nodeIdentifier.Value.Parent).Symbol is IPropertySymbol propertySymbol
             && propertySymbol.ContainingType.Is(KnownType.Microsoft_AspNetCore_Mvc_ModelBinding_ModelStateDictionary);
     }
 

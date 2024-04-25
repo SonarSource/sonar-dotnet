@@ -1094,12 +1094,12 @@ public class X
         [DataRow("""record class $$T$$ { }""", "T")]                                  // BaseTypeDeclarationSyntax
         [DataRow("""record struct $$T$$ { }""", "T")]                                 // BaseTypeDeclarationSyntax
         [DataRow("""enum $$T$$ { }""", "T")]                                          // BaseTypeDeclarationSyntax
-        [DataRow("""void M(string s) { var length = $$s?.Length$$; }""", "Length")]                                     // ConditionalAccessExpressionSyntax
-        [DataRow("""void M(string s) { var length = $$s?.ToLower()?.ToUpper()$$; }""", "ToUpper")]                      // ConditionalAccessExpressionSyntax
-        [DataRow("""void M(string s) { var length = $$s.ToLower()?.ToUpper()$$; }""", "ToUpper")]                       // ConditionalAccessExpressionSyntax + MemberAccessExpressionSyntax
-        [DataRow("""void M(string s) { var length = $$s?.ToLower().ToUpper()$$; }""", "ToUpper")]                       // ConditionalAccessExpressionSyntax + MemberAccessExpressionSyntax
-        [DataRow("""void M(string s) { var length = $$s?.ToLower().ToUpper()?.ToLower().ToUpper()$$; }""", "ToUpper")]  // ConditionalAccessExpressionSyntax + MemberAccessExpressionSyntax
-        [DataRow("""void M(string s) { var length = $$s.ToLower().ToUpper().ToLower().ToUpper()$$; }""", "ToUpper")]    // MemberAccessExpressionSyntax
+        [DataRow("""void M(string s) { var x = $$s?.Length$$; }""", "Length")]                                              // ConditionalAccessExpressionSyntax
+        [DataRow("""void M(string s) { $$s?.ToLower()?.ToUpper()$$; }""", "ToUpper")]                               // ConditionalAccessExpressionSyntax
+        [DataRow("""void M(string s) { $$s.ToLower()?.ToUpper()$$; }""", "ToUpper")]                                // ConditionalAccessExpressionSyntax + MemberAccessExpressionSyntax
+        [DataRow("""void M(string s) { $$s?.ToLower().ToUpper()$$; }""", "ToUpper")]                                // ConditionalAccessExpressionSyntax + MemberAccessExpressionSyntax
+        [DataRow("""void M(string s) { $$s?.ToLower().ToUpper()?.PadLeft(42).Normalize()$$; }""", "Normalize")]     // ConditionalAccessExpressionSyntax + MemberAccessExpressionSyntax
+        [DataRow("""void M(string s) { $$s.ToLower().ToUpper().PadLeft(42).Normalize()$$; }""", "Normalize")]       // MemberAccessExpressionSyntax
         [DataRow("""$$Test() { }$$""", "Test")]                                       // ConstructorDeclarationSyntax
         [DataRow("""Test() : $$this(1)$$ { }""", "this")]                             // ConstructorInitializerSyntax
         [DataRow("""Test() : $$base()$$ { }""", "base")]                              // ConstructorInitializerSyntax
