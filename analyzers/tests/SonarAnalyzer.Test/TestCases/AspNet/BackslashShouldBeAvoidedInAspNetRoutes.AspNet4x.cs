@@ -120,7 +120,7 @@ namespace AttributeWithNamedArgument
         public string Name { get; set; }
     }
 
-    public class MyController: Controller
+    public class MyController : Controller
     {
         [MyAttribute(Name = "Display HR\\Recruitment report")]
         public const string Text = "ABC";
