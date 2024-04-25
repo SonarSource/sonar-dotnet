@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.IO;
 using System.Linq;
+using System.Timers;
 
 namespace Tests.Diagnostics
 {
@@ -4225,7 +4226,8 @@ class Repro_9184
 }
 
 // https://github.com/SonarSource/sonar-dotnet/issues/9204
-class Repro_9204
+// https://github.com/SonarSource/sonar-dotnet/issues/8885
+class Repro_9204_8885
 {
     public bool ForEachTest(List<string> licenseData)
     {
@@ -4272,5 +4274,26 @@ class Repro_9204
         return found;
 
         void Assign() => found = true; // Assignment in local function
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/8885
+    public void LocalFunctionEventHandler()
+    {
+        bool elapsed = false;
+        var timer = new System.Timers.Timer(2000);
+        timer.Elapsed += OnElapsed;
+        timer.Enabled = true;
+
+        while (!elapsed) // Noncompliant [elapsed] FP
+        {
+            System.Threading.Thread.Sleep(500);
+        }
+
+        Console.WriteLine("Timer elapsed!"); // Secondary [elapsed] FP
+
+        void OnElapsed(object source, System.Timers.ElapsedEventArgs e)
+        {
+            elapsed = true;
+        }
     }
 }
