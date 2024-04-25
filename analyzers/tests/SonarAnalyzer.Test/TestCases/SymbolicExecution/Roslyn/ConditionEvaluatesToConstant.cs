@@ -4223,3 +4223,54 @@ class Repro_9184
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9204
+class Repro_9204
+{
+    public bool ForEachTest(List<string> licenseData)
+    {
+        var found = false;
+        licenseData.ForEach(license => found = true); // Assignment in "ForEach"
+        if (!found) // Noncompliant FP
+        {
+            Console.WriteLine("No License for artifact type");
+        }
+        return found;
+    }
+
+    public bool SelectTest(List<string> licenseData)
+    {
+        var found = false;
+        licenseData.Select(license => found = true).Any(); // Assignment in "Select"
+        if (!found) // Noncompliant FP
+        {
+            Console.WriteLine("No License for artifact type");
+        }
+        return found;
+    }
+
+    public bool ActionTest()
+    {
+        var found = false;
+        Action assign = () => found = true; // Assignment in some delegate
+        assign();
+        if (!found) // Noncompliant FP
+        {
+            Console.WriteLine("No License for artifact type");
+        }
+        return found;
+    }
+
+    public bool LocalFunctionTest()
+    {
+        var found = false;
+        Assign();
+        if (!found) // Noncompliant FP
+        {
+            Console.WriteLine("No License for artifact type");
+        }
+        return found;
+
+        void Assign() => found = true; // Assignment in local function
+    }
+}
