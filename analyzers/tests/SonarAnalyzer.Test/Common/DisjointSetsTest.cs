@@ -1,4 +1,6 @@
-﻿namespace SonarAnalyzer.Test.Common;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace SonarAnalyzer.Test.Common;
 
 [TestClass]
 public class DisjointSetsTest
