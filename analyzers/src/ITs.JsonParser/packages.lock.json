@@ -8,6 +8,12 @@
         "resolved": "2.9.1",
         "contentHash": "OE0sl1/sQ37bjVsPKKtwQlWDgqaxWgtme3xZz7JssWUzg5JpMIyHgCTY9MVMxOg48fJ1AgGT3tgdH5m/kQ5xhA=="
       },
+      "SonarAnalyzer.CSharp.Styling": {
+        "type": "Direct",
+        "requested": "[9.24.0.89429, )",
+        "resolved": "9.24.0.89429",
+        "contentHash": "B4PG7b9UNPYYjHp/L3pOTW+8jLDEf+KSv5OD2BUY37PL7PKnfiM32oHNgjMrBcPCtQJxK5CsAxmP239id/66VQ=="
+      },
       "StyleCop.Analyzers": {
         "type": "Direct",
         "requested": "[1.2.0-beta.556, )",
