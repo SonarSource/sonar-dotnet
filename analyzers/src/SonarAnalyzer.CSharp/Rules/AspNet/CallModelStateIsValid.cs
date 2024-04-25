@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -39,6 +41,7 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
         context.RegisterCompilationStartAction(compilationStart =>
         {
             if (compilationStart.Compilation.ReferencesControllers()
+                && compilationStart.Compilation.GetTypeByMetadataName(KnownType.FluentValidation_IValidator) is null
                 && !compilationStart.Compilation.Assembly.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute))
             {
                 compilationStart.RegisterSymbolStartAction(symbolStart =>
@@ -57,17 +60,20 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
     private static void ProcessCodeBlock(SonarCodeBlockStartAnalysisContext<SyntaxKind> codeBlockContext)
     {
         if (codeBlockContext.CodeBlock is MethodDeclarationSyntax methodDeclaration
-            && IsControllerAction(methodDeclaration, codeBlockContext.SemanticModel))
+            && codeBlockContext.OwningSymbol is IMethodSymbol methodSymbol
+            && methodSymbol.Parameters.Length > 0
+            && methodSymbol.IsControllerActionMethod()
+            && !HasActionFilterAttribute(methodSymbol))
         {
             var isModelValidated = false;
             codeBlockContext.RegisterNodeAction(nodeContext =>
             {
-                if (IsCheckingValidityProperty(nodeContext.Node, nodeContext.SemanticModel)
-                    || IsTryValidateInvocation(nodeContext.Node, nodeContext.SemanticModel))
-                {
-                    isModelValidated = true;
-                }
+                isModelValidated |= IsCheckingValidityProperty(nodeContext.Node, nodeContext.SemanticModel);
             }, SyntaxNodesToVisit);
+            codeBlockContext.RegisterNodeAction(nodeContext =>
+            {
+                isModelValidated |= IsTryValidateInvocation(nodeContext.Node, nodeContext.SemanticModel);
+            }, SyntaxKind.InvocationExpression);
             codeBlockContext.RegisterCodeBlockEndAction(blockEnd =>
             {
                 if (!isModelValidated)
@@ -77,13 +83,6 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
             });
         }
     }
-
-    private static bool IsControllerAction(MethodDeclarationSyntax methodDeclaration, SemanticModel semanticModel) =>
-        semanticModel.GetDeclaredSymbol(methodDeclaration) is IMethodSymbol methodSymbol
-        && methodSymbol.Parameters.Length > 0
-        && methodSymbol.IsControllerMethod()
-        && !HasActionFilterAttribute(methodSymbol)
-        && methodSymbol.Parameters.Length > 0;
 
     private static bool HasActionFilterAttribute(ISymbol symbol) =>
         symbol.GetAttributes().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Filters_ActionFilterAttribute));

@@ -60,17 +60,17 @@ public class Foo : System.Web.Mvc.Controller
             var innerFoo = GetMethodSymbol(compilation, "InnerFoo");
             var publicNonAction = GetMethodSymbol(compilation, "PublicNonAction");
 
-            AspNetMvcHelper.IsControllerMethod(publicFoo).Should().Be(true);
-            AspNetMvcHelper.IsControllerMethod(protectedFoo).Should().Be(false);
-            AspNetMvcHelper.IsControllerMethod(internalFoo).Should().Be(false);
-            AspNetMvcHelper.IsControllerMethod(privateFoo).Should().Be(false);
-            AspNetMvcHelper.IsControllerMethod(staticFoo).Should().Be(false);
-            AspNetMvcHelper.IsControllerMethod(outFoo).Should().Be(false);
-            AspNetMvcHelper.IsControllerMethod(refFoo).Should().Be(false);
-            AspNetMvcHelper.IsControllerMethod(staticFoo).Should().Be(false);
-            AspNetMvcHelper.IsControllerMethod(genericFoo).Should().Be(false);
-            AspNetMvcHelper.IsControllerMethod(innerFoo).Should().Be(false);
-            AspNetMvcHelper.IsControllerMethod(publicNonAction).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(publicFoo).Should().Be(true);
+            AspNetMvcHelper.IsControllerActionMethod(protectedFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(internalFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(privateFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(staticFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(outFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(refFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(staticFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(genericFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(innerFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(publicNonAction).Should().Be(false);
         }
 
         [DataTestMethod]
@@ -99,10 +99,10 @@ public class MyController : Controller
             var publicDiz = GetMethodSymbol(compilation, "PublicDiz");
             var publicNonAction = GetMethodSymbol(compilation, "PublicNonAction");
 
-            AspNetMvcHelper.IsControllerMethod(publicFoo).Should().Be(true);
-            AspNetMvcHelper.IsControllerMethod(publicBar).Should().Be(false);
-            AspNetMvcHelper.IsControllerMethod(publicDiz).Should().Be(false);
-            AspNetMvcHelper.IsControllerMethod(publicNonAction).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(publicFoo).Should().Be(true);
+            AspNetMvcHelper.IsControllerActionMethod(publicBar).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(publicDiz).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(publicNonAction).Should().Be(false);
         }
 
         [DataTestMethod]
@@ -124,8 +124,8 @@ public class Foo
             var publicFoo = GetMethodSymbol(compilation, "PublicFoo");
             var publicNonAction = GetMethodSymbol(compilation, "PublicNonAction");
 
-            AspNetMvcHelper.IsControllerMethod(publicFoo).Should().Be(true);
-            AspNetMvcHelper.IsControllerMethod(publicNonAction).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(publicFoo).Should().Be(true);
+            AspNetMvcHelper.IsControllerActionMethod(publicNonAction).Should().Be(false);
         }
 
         [DataTestMethod]
@@ -144,7 +144,7 @@ public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
                 .Compilation;
             var publicFoo = GetMethodSymbol(compilation, "PublicFoo");
 
-            AspNetMvcHelper.IsControllerMethod(publicFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(publicFoo).Should().Be(false);
         }
 
         [DataTestMethod]
@@ -160,7 +160,7 @@ public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
 }";
             var (tree, semanticModel) = TestHelper.CompileCS(code, MetadataReferenceFacade.NetStandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)).ToArray());
             var methodSymbol = semanticModel.GetDeclaredSymbol(tree.Single<ConstructorDeclarationSyntax>()) as IMethodSymbol;
-            methodSymbol.IsControllerMethod().Should().Be(false);
+            methodSymbol.IsControllerActionMethod().Should().Be(false);
         }
 
         private static IMethodSymbol GetMethodSymbol(Compilation compilation, string name) =>

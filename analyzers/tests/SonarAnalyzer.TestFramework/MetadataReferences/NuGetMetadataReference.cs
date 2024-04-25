@@ -48,6 +48,7 @@ public static class NuGetMetadataReference
     public static References CommonLoggingCore(string packageVersion = Constants.NuGetLatestVersion) => Create("Common.Logging.Core", packageVersion);
     public static References EntityFramework(string packageVersion = "6.2.0") => Create("EntityFramework", packageVersion);
     public static References FluentAssertions(string packageVersion) => Create("FluentAssertions", packageVersion);
+    public static References FluentValidation(string packageVersion = Constants.NuGetLatestVersion) => Create("FluentValidation", packageVersion);
     public static References FakeItEasy(string packageVersion) => Create("FakeItEasy", packageVersion);
     public static References JetBrainsDotMemoryUnit(string packageVersion) => Create("JetBrains.DotMemoryUnit", packageVersion);
     public static References JustMock(string packageVersion) => Create("JustMock", packageVersion);

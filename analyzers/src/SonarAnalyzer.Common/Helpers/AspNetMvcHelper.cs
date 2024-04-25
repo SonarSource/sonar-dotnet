@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Helpers
         /// Returns a value indicating whether the provided method symbol is a ASP.NET MVC
         /// controller method.
         /// </summary>
-        public static bool IsControllerMethod(this IMethodSymbol methodSymbol) =>
+        public static bool IsControllerActionMethod(this IMethodSymbol methodSymbol) =>
             methodSymbol is { MethodKind: MethodKind.Ordinary, IsStatic: false }
             && (methodSymbol.OverriddenMethod == null || !methodSymbol.OverriddenMethod.ContainingType.Is(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase))
             && methodSymbol.GetEffectiveAccessibility() == Accessibility.Public

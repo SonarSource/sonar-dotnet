@@ -64,6 +64,48 @@ public class CallModelStateIsValidTest
             }
             """).Verify();
 
+    [TestMethod]
+    public void CallModelStateIsValid_FluentValidation_CS() =>
+        builder.AddSnippet("""
+            using Microsoft.AspNetCore.Mvc;
+            using FluentValidation;
+
+            public class Movie
+            {
+                public string Title { get; set; }
+                public int Year { get; set; }
+            }
+
+            public class MovieValidator : AbstractValidator<Movie>
+            {
+              public MovieValidator()
+              {
+                RuleFor(x => x.Title).NotNull();
+                RuleFor(x => x.Year).InclusiveBetween(1900, 2100);
+              }
+            }
+
+            public class MovieController : ControllerBase
+            {
+                private IValidator<Movie> _validator;
+
+                public MovieController(IValidator<Movie> validator)
+                {
+                    _validator = validator;
+                }
+
+                [HttpPost("/[controller]")]
+                public string Add(Movie movie)  // Compliant - uses FluentValidation
+                {
+                    if (!_validator.Validate(movie).IsValid)
+                    {
+                        return "";
+                    }
+                    return "Hello!";
+                }
+            }
+            """).AddReferences(NuGetMetadataReference.FluentValidation()).Verify();
+
     [DataTestMethod]
     [DataRow("!ModelState.IsValid")]
     [DataRow("ModelState?.IsValid is false")]
