@@ -4227,9 +4227,9 @@ class Repro_9184
 
 // https://github.com/SonarSource/sonar-dotnet/issues/9204
 // https://github.com/SonarSource/sonar-dotnet/issues/8885
-class Repro_9204_8885
+class Repro_9204_8885_AssignmentOfCaptures
 {
-    public bool ForEachTest(List<string> licenseData)
+    public void ForEachTest(List<string> licenseData)
     {
         var found = false;
         licenseData.ForEach(license => found = true); // Assignment in "ForEach"
@@ -4237,10 +4237,9 @@ class Repro_9204_8885
         {
             Console.WriteLine("No License for artifact type");
         }
-        return found;
     }
 
-    public bool SelectTest(List<string> licenseData)
+    public void SelectTest(List<string> licenseData)
     {
         var found = false;
         licenseData.Select(license => found = true).Any(); // Assignment in "Select"
@@ -4248,10 +4247,9 @@ class Repro_9204_8885
         {
             Console.WriteLine("No License for artifact type");
         }
-        return found;
     }
 
-    public bool ActionTest()
+    public void ActionTest()
     {
         var found = false;
         Action assign = () => found = true; // Assignment in some delegate
@@ -4260,10 +4258,9 @@ class Repro_9204_8885
         {
             Console.WriteLine("No License for artifact type");
         }
-        return found;
     }
 
-    public bool LocalFunctionTest()
+    public void LocalFunctionTest()
     {
         var found = false;
         Assign();
@@ -4271,7 +4268,6 @@ class Repro_9204_8885
         {
             Console.WriteLine("No License for artifact type");
         }
-        return found;
 
         void Assign() => found = true; // Assignment in local function
     }
