@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Moq;
+using NSubstitute;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using StyleCop.Analyzers.Lightup;
 
@@ -29,8 +29,8 @@ public partial class ProgramStateTest
     [TestMethod]
     public void SetCapture_ReturnsValues()
     {
-        var operation1 = new Mock<IOperation>().Object;
-        var operation2 = new Mock<IOperation>().Object;
+        var operation1 = Substitute.For<IOperation>();
+        var operation2 = Substitute.For<IOperation>();
         var captures = new[] { new CaptureId(0), new CaptureId(1), new CaptureId(2) };
         var sut = ProgramState.Empty;
 
@@ -53,15 +53,15 @@ public partial class ProgramStateTest
         var sut = ProgramState.Empty;
 
         sut[capture].Should().BeNull();
-        sut.SetCapture(capture, new Mock<IOperation>().Object);
+        sut.SetCapture(capture, Substitute.For<IOperation>());
         sut[capture].Should().BeNull(nameof(sut.SetCapture) + " returned new ProgramState instance.");
     }
 
     [TestMethod]
     public void SetCapture_Overwrites()
     {
-        var operation1 = new Mock<IOperation>().Object;
-        var operation2 = new Mock<IOperation>().Object;
+        var operation1 = Substitute.For<IOperation>();
+        var operation2 = Substitute.For<IOperation>();
         var capture = new CaptureId(42);
         var sut = ProgramState.Empty;
 
@@ -74,7 +74,7 @@ public partial class ProgramStateTest
     [TestMethod]
     public void RemoveCapture_RemovesOnlyRequested()
     {
-        var operation = new Mock<IOperation>().Object;
+        var operation = Substitute.For<IOperation>();
         var captures = new[] { new CaptureId(0), new CaptureId(1), new CaptureId(2) };
         var sut = ProgramState.Empty
             .SetCapture(captures[0], operation)

@@ -19,7 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.Operations;
-using Moq;
+using NSubstitute;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
@@ -37,7 +37,7 @@ public partial class RoslynSymbolicExecutionTest
     {
         var cfg = TestHelper.CompileCfgCS("public class Sample { public void Main() { } }");
         var syntax = CSharpSyntaxClassifier.Instance;
-        var check = new Mock<SymbolicCheck>().Object;
+        var check = Substitute.For<SymbolicCheck>();
         ((Action)(() => new RoslynSymbolicExecution(null, syntax, new[] { check }, default))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("cfg");
         ((Action)(() => new RoslynSymbolicExecution(cfg, null, new[] { check }, default))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("syntaxClassifier");
         ((Action)(() => new RoslynSymbolicExecution(cfg, syntax, null, default))).Should().Throw<ArgumentException>().WithMessage("At least one check is expected*");

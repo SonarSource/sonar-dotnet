@@ -493,12 +493,12 @@ public partial class SonarAnalysisContextTest
 
     private static CompilationStartAnalysisContext MockCompilationStartAnalysisContext(DummyAnalysisContext context)
     {
-        var mock = new Mock<CompilationStartAnalysisContext>(context.Model.Compilation, context.Options, CancellationToken.None);
-        mock.Setup(x => x.RegisterSyntaxNodeAction(It.IsAny<Action<SyntaxNodeAnalysisContext>>(), It.IsAny<ImmutableArray<SyntaxKind>>()))
-            .Callback<Action<SyntaxNodeAnalysisContext>, ImmutableArray<SyntaxKind>>((action, _) => action(context.CreateSyntaxNodeAnalysisContext())); // Invoke to call RegisterSyntaxTreeAction
-        mock.Setup(x => x.RegisterSyntaxTreeAction(It.IsAny<Action<SyntaxTreeAnalysisContext>>()))
-            .Callback<Action<SyntaxTreeAnalysisContext>>(x => x(new SyntaxTreeAnalysisContext(context.Tree, context.Options, _ => { }, _ => true, default)));
-        return mock.Object;
+        var mock = Substitute.For<CompilationStartAnalysisContext>(context.Model.Compilation, context.Options, CancellationToken.None);
+        mock.When(x => x.RegisterSyntaxNodeAction(Arg.Any<Action<SyntaxNodeAnalysisContext>>(), Arg.Any<ImmutableArray<SyntaxKind>>()))
+            .Do(x => x.Arg<Action<SyntaxNodeAnalysisContext>>()(context.CreateSyntaxNodeAnalysisContext()));    // Invoke to call RegisterSyntaxTreeAction
+        mock.When(x => x.RegisterSyntaxTreeAction(Arg.Any<Action<SyntaxTreeAnalysisContext>>()))
+            .Do(x => x.Arg<Action<SyntaxTreeAnalysisContext>>()(new SyntaxTreeAnalysisContext(context.Tree, context.Options, _ => { }, _ => true, default)));
+        return mock;
     }
 
     private sealed class DummyAnalysisContext : RoslynAnalysisContext

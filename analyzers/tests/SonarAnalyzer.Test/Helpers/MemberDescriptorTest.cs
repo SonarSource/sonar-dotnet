@@ -21,7 +21,7 @@
 extern alias csharp;
 extern alias vbnet;
 
-using Moq;
+using NSubstitute;
 using SonarAnalyzer.Extensions;
 using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using SyntaxVB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
@@ -58,7 +58,7 @@ namespace Test
         public void IsMatch_WhenMethodNameIsNull_ReturnsFalse()
         {
             var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
-            sut.IsMatch(null, new Mock<ITypeSymbol>().Object, StringComparison.OrdinalIgnoreCase).Should().BeFalse();
+            sut.IsMatch(null, Substitute.For<ITypeSymbol>(), StringComparison.OrdinalIgnoreCase).Should().BeFalse();
         }
 
         [TestMethod]
@@ -71,9 +71,9 @@ namespace Test
         [TestMethod]
         public void IsMatch_WhenContainingTypeIsNull_ReturnsFalse()
         {
-            var typeMock = new Mock<IMethodSymbol>();
-            typeMock.SetupGet(x => x.ContainingType).Returns((INamedTypeSymbol)null);
-            var lazySymbol = new Lazy<IMethodSymbol>(() => typeMock.Object);
+            var method = Substitute.For<IMethodSymbol>();
+            method.ContainingType.Returns((INamedTypeSymbol)null);
+            var lazySymbol = new Lazy<IMethodSymbol>(() => method);
 
             var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
             sut.IsMatch("CloneNode", lazySymbol, StringComparison.OrdinalIgnoreCase).Should().BeFalse();

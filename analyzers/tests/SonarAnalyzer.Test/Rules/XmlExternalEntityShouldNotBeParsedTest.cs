@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Moq;
+using NSubstitute;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Test.Rules
@@ -118,9 +118,9 @@ namespace SonarAnalyzer.Test.Rules
 
         private VerifierBuilder WithAnalyzer(NetFrameworkVersion version)
         {
-            var fxVersion = new Mock<INetFrameworkVersionProvider>();
-            fxVersion.Setup(vp => vp.GetDotNetFrameworkVersion(It.IsAny<Compilation>())).Returns(version);
-            return builder.AddAnalyzer(() => new XmlExternalEntityShouldNotBeParsed(fxVersion.Object));
+            var fxVersion = Substitute.For<INetFrameworkVersionProvider>();
+            fxVersion.GetDotNetFrameworkVersion(Arg.Any<Compilation>()).Returns(version);
+            return builder.AddAnalyzer(() => new XmlExternalEntityShouldNotBeParsed(fxVersion));
         }
     }
 }
