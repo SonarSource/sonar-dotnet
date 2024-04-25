@@ -4289,7 +4289,7 @@ class Repro_9204_8885_AssignmentOfCaptures
 
         void OnElapsed(object source, ElapsedEventArgs e)
         {
-            elapsed = true;
+            elapsed = true; // Assignment in event handler
         }
     }
 }
