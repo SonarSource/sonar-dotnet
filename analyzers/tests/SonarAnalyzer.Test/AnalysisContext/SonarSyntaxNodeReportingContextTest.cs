@@ -19,7 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp;
-using Moq;
+using NSubstitute;
 using SonarAnalyzer.AnalysisContext;
 using StyleCop.Analyzers.Lightup;
 
@@ -35,7 +35,7 @@ public class SonarSyntaxNodeReportingContextTest
         var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
         var node = tree.GetRoot();
         var options = AnalysisScaffolding.CreateOptions();
-        var containingSymbol = Mock.Of<ISymbol>();
+        var containingSymbol = Substitute.For<ISymbol>();
         var context = new SyntaxNodeAnalysisContext(node, containingSymbol, model, options, _ => { }, _ => true, cancel);
         var sut = new SonarSyntaxNodeReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 

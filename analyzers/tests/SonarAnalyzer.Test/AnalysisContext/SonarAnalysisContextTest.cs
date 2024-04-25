@@ -19,7 +19,7 @@
  */
 
 using System.IO;
-using Moq;
+using NSubstitute;
 using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Test.Rules;
@@ -275,10 +275,15 @@ public partial class SonarAnalysisContextTest
         var context = new DummyAnalysisContext(TestContext, unchangedFileName);
         var wasReported = false;
         var location = context.Tree.GetRoot().GetLocation();
-        var symbol = Mock.Of<ISymbol>(x => x.Locations == ImmutableArray.Create(location));
+        var symbol = Substitute.For<ISymbol>();
+        symbol.Locations.Returns([location]);
         var symbolContext = new SymbolAnalysisContext(symbol, context.Model.Compilation, context.Options, _ => wasReported = true, _ => true, default);
         var sut = new SonarSymbolReportingContext(new SonarAnalysisContext(context, DummyMainDescriptor), symbolContext);
-        sut.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, Mock.Of<Diagnostic>(x => x.Id == "Sxxx" && x.Location == location && x.Descriptor == DummyMainDescriptor[0]));
+        var diagnostic = Substitute.For<Diagnostic>();
+        diagnostic.Id.Returns("Sxxx");
+        diagnostic.Location.Returns(location);
+        diagnostic.Descriptor.Returns(DummyMainDescriptor[0]);
+        sut.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, diagnostic);
 
         wasReported.Should().Be(expected);
     }

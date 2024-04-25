@@ -23,7 +23,7 @@ extern alias vbnet;
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
-using Moq;
+using NSubstitute;
 using SonarAnalyzer.AnalysisContext;
 using CS = csharp::SonarAnalyzer.Extensions.SonarAnalysisContextExtensions;
 using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
@@ -592,20 +592,19 @@ public partial class SonarAnalysisContextTest
         public override void RegisterCompilationEndAction(Action<CompilationAnalysisContext> action)
         {
             compilationEndCount++;
-            action(new CompilationAnalysisContext(context.Model.Compilation, context.Options, reportDiagnostic: x => RaisedDiagnostic = x, isSupportedDiagnostic: _ => true, CancellationToken.None));
+            action(new CompilationAnalysisContext(context.Model.Compilation, context.Options, reportDiagnostic: x => RaisedDiagnostic = x, isSupportedDiagnostic: _ => true, default));
         }
 
         public override void RegisterSemanticModelAction(Action<SemanticModelAnalysisContext> action)
         {
             semanticModelCount++;
-            action(new SemanticModelAnalysisContext(context.Model, context.Options, reportDiagnostic: x => RaisedDiagnostic = x, isSupportedDiagnostic: _ => true, CancellationToken.None));
+            action(new SemanticModelAnalysisContext(context.Model, context.Options, reportDiagnostic: x => RaisedDiagnostic = x, isSupportedDiagnostic: _ => true, default));
         }
 
         public override void RegisterSymbolAction(Action<SymbolAnalysisContext> action, ImmutableArray<SymbolKind> symbolKinds)
         {
             symbolCount++;
-            action(new SymbolAnalysisContext(Mock.Of<ISymbol>(), context.Model.Compilation, context.Options,
-                reportDiagnostic: x => RaisedDiagnostic = x, isSupportedDiagnostic: _ => true, CancellationToken.None));
+            action(new SymbolAnalysisContext(Substitute.For<ISymbol>(), context.Model.Compilation, context.Options, x => RaisedDiagnostic = x, _ => true, default));
         }
 
         public override void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, ImmutableArray<TLanguageKindEnum> syntaxKinds) =>
@@ -616,8 +615,8 @@ public partial class SonarAnalysisContextTest
 
         public override void RegisterSymbolStartAction(Action<SymbolStartAnalysisContext> action, SymbolKind symbolKind)
         {
-            var symbolStartAnalysisContext = new Mock<SymbolStartAnalysisContext>(Mock.Of<ISymbol>(), context.Model.Compilation, context.Options, CancellationToken.None);
-            action(symbolStartAnalysisContext.Object);
+            var symbolStartAnalysisContext = Substitute.For<SymbolStartAnalysisContext>(Substitute.For<ISymbol>(), context.Model.Compilation, context.Options, default);
+            action(symbolStartAnalysisContext);
         }
     }
 
