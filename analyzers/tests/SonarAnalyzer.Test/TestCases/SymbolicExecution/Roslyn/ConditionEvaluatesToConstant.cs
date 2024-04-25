@@ -4280,7 +4280,7 @@ class Repro_9204_8885
     public void LocalFunctionEventHandler()
     {
         bool elapsed = false;
-        var timer = new System.Timers.Timer(2000);
+        var timer = new Timer(2000);
         timer.Elapsed += OnElapsed;
         timer.Enabled = true;
 
@@ -4291,7 +4291,7 @@ class Repro_9204_8885
 
         Console.WriteLine("Timer elapsed!"); // Secondary [elapsed] FP
 
-        void OnElapsed(object source, System.Timers.ElapsedEventArgs e)
+        void OnElapsed(object source, ElapsedEventArgs e)
         {
             elapsed = true;
         }
