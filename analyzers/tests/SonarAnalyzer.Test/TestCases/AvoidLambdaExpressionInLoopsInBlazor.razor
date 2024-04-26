@@ -1,6 +1,4 @@
-﻿@using Microsoft.AspNetCore.Components.Web
-
-@foreach (var button in Buttons)
+﻿@foreach (var button in Buttons)
 {
     <button @key="button.Id" @onclick="button.Action"> @* Compliant *@
         Button #@button.Id
@@ -54,13 +52,13 @@
 }
 
 @code {
-    private List<Button> Buttons { get; } = new List<Button>();
+    private List<Button> Buttons { get; } = new();
 
     private void DoAction(MouseEventArgs e, Button button) { }
 
     private class Button
     {
-        public string Id { get; } = Guid.NewGuid().ToString();
+        public string? Id { get; } = Guid.NewGuid().ToString();
         public Action<MouseEventArgs> Action { get; set; } = e => { };
     }
 

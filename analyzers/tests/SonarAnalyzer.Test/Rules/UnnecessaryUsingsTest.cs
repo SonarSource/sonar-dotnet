@@ -53,23 +53,30 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow("_viewimports.cshtml")]
         [DataRow("_viEwiMpoRts.cshtml")]
         public void UnnecessaryUsings_RazorViewImportsCshtmlFile_NoIssueReported(string fileName) =>
-            builder.AddSnippet(@"@using System.Text.Json;", fileName).VerifyNoIssueReported();
+            builder
+                .AddSnippet(@"@using System.Text.Json;", fileName)
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .VerifyNoIssueReported();
 
         [DataTestMethod]
         [DataRow("_Imports.razor")]
         [DataRow("_imports.razor")]
         [DataRow("_iMpoRts.razor")]
         public void UnnecessaryUsings_RazorImportsRazorFile_NoIssueReported(string fileName) =>
-            builder.AddSnippet(@"@using System.Text.Json;", fileName).VerifyNoIssueReported();
+            builder
+                .AddSnippet(@"@using System.Text.Json;", fileName)
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .VerifyNoIssueReported();
 
         [DataTestMethod]
         [DataRow("RandomFile_ViewImports.cshtml")]
         [DataRow("RandomFile_Imports.cshtml")]
         [DataRow("_Imports.cshtml")]
         public void UnnecessaryUsings_RazorViewImportsSimilarCshtmlFile_IssuesReported(string fileName) =>
-            builder.AddReferences(NuGetMetadataReference.SystemTextJson("7.0.4"))
+            builder
                 .AddSnippet("@using System.Linq;", "_ViewImports.cshtml")
                 .AddSnippet(@"@using System.Text.Json; @* Noncompliant *@", fileName)
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .Verify();
 
         [DataTestMethod]
@@ -77,10 +84,11 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow("RandomFile_Imports.razor")]
         [DataRow("_ViewImports.razor")]
         public void UnnecessaryUsings_RazorViewImportsSimilarRazorFile_IssuesReported(string fileName) =>
-            builder.AddReferences(NuGetMetadataReference.SystemTextJson("7.0.4"))
-                .AddSnippet("@using System.Linq;", "_Imports.razor")
-                .AddSnippet(@"@using System.Text.Json; @* Noncompliant *@", fileName)
-                .Verify();
+            builder
+            .AddSnippet("@using System.Linq;", "_Imports.razor")
+            .AddSnippet(@"@using System.Text.Json; @* Noncompliant *@", fileName)
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .Verify();
 
         [DataTestMethod]
         [DataRow("_ViewImports.cs")]

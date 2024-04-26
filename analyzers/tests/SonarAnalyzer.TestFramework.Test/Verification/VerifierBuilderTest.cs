@@ -60,6 +60,67 @@ public class VerifierBuilderTest
     }
 
     [TestMethod]
+    public void AddPaths_SetsIsRazorWithRazorFile()
+    {
+        Empty.IsRazor.Should().BeFalse();
+        Empty.ParseOptions.Should().BeEmpty();
+        var one = Empty.AddPaths("Source1.cs");
+        one.IsRazor.Should().BeFalse();
+        one.ParseOptions.Should().BeEmpty();
+        var two = one.AddPaths("Source1.razor");
+        two.IsRazor.Should().BeTrue();
+        two.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp10);
+        var three = two.AddPaths("Source2.cs");
+        three.IsRazor.Should().BeTrue();
+        three.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp10);
+        var four = three.AddPaths("Source2.razor");
+        four.IsRazor.Should().BeTrue();
+        four.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp10);
+    }
+
+    [TestMethod]
+    public void AddPaths_SetsIsRazorWithCshtmlFile()
+    {
+        Empty.IsRazor.Should().BeFalse();
+        Empty.ParseOptions.Should().BeEmpty();
+        var one = Empty.AddPaths("Source1.cs");
+        one.IsRazor.Should().BeFalse();
+        one.ParseOptions.Should().BeEmpty();
+        var two = one.AddPaths("Source1.cshtml");
+        two.IsRazor.Should().BeTrue();
+        two.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp10);
+        var three = two.AddPaths("Source2.cs");
+        three.IsRazor.Should().BeTrue();
+        three.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp10);
+        var four = three.AddPaths("Source2.cshtml");
+        four.IsRazor.Should().BeTrue();
+        four.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp10);
+    }
+
+    [TestMethod]
+    public void AddPaths_SetsIsRazorWithRazorAndCshtmlFiles()
+    {
+        Empty.IsRazor.Should().BeFalse();
+        Empty.ParseOptions.Should().BeEmpty();
+        var one = Empty.AddPaths("Source1.razor");
+        one.IsRazor.Should().BeTrue();
+        one.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp10);
+        var two = one.AddPaths("Source1.cshtml");
+        two.IsRazor.Should().BeTrue();
+        two.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp10);
+    }
+
+    [TestMethod]
+    public void AddPaths_SetsIsRazorWithRazorFile_PreservesOptions()
+    {
+        Empty.IsRazor.Should().BeFalse();
+        Empty.ParseOptions.Should().BeEmpty();
+        var one = Empty.WithOptions(ParseOptionsHelper.FromCSharp12).AddPaths("Source1.razor");
+        one.IsRazor.Should().BeTrue();
+        one.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp12, "it should not regress to automatically set version 10");
+    }
+
+    [TestMethod]
     public void AddReferences_Concatenates_IsImmutable()
     {
         var one = Empty.AddReferences(MetadataReferenceFacade.MsCorLib);
@@ -77,6 +138,19 @@ public class VerifierBuilderTest
         Empty.Snippets.Should().BeEmpty();
         one.Snippets.Should().Equal(new Snippet("First", null));
         two.Snippets.Should().Equal(new Snippet("First", null), new Snippet("Second", "WithFileName.cs"));
+    }
+
+    [TestMethod]
+    public void AddSnippet_SetsIsRazorWithRazorFile()
+    {
+        Empty.IsRazor.Should().BeFalse();
+        Empty.ParseOptions.Should().BeEmpty();
+        var one = Empty.AddSnippet("// Nothing to see here", "Source1.cs");
+        one.IsRazor.Should().BeFalse();
+        one.ParseOptions.Should().BeEmpty();
+        var two = one.AddPaths("<div></div>", "Source1.razor");
+        two.IsRazor.Should().BeTrue();
+        two.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp10);
     }
 
     [TestMethod]

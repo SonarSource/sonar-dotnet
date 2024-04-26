@@ -40,6 +40,7 @@ namespace SonarAnalyzer.Test.Rules
         [DataTestMethod]
         public void VerifyMetrics() =>
             CreateBuilder(false, AllMetricsFileName)
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
                     {
                         messages.Should().ContainSingle();
@@ -61,10 +62,11 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void VerifyMetrics_Razor() =>
             CreateBuilder(false, RazorFileName, "Component.razor")
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
                 {
                     var orderedMessages = messages.OrderBy(x => x.FilePath, StringComparer.InvariantCulture).ToArray();
-                    orderedMessages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo(RazorFileName, "Component.razor");
+                    orderedMessages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo("_Imports.razor", RazorFileName, "Component.razor");
 
                     var metrics = messages.Single(x => x.FilePath.EndsWith(RazorFileName));
 
@@ -82,13 +84,15 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void VerifyMetrics_CsHtml() =>
             CreateBuilder(false, CsHtmlFileName)
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
                         // There should be no metrics messages for the cshtml files.
-                        messages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEmpty());
+                        messages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo("_Imports.razor"));
 
         [TestMethod]
         public void VerifyMetrics_CSharp12() =>
             CreateBuilder(false, CSharp12FileName)
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
                 {
                     messages.Should().ContainSingle();
