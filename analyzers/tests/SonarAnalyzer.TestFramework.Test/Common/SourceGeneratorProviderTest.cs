@@ -27,18 +27,18 @@ public class SourceGeneratorProviderTest
 {
     [TestMethod]
     public void SourceGenerators_ContainsRazorSourceGenerator() =>
-        SourceGeneratorProvider.SourceGenerators.Should().ContainSingle().Which.FullPath.Should().EndWith("Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators.dll");
+        SourceGeneratorProvider.SourceGenerators.Should().ContainSingle().Which.FullPath.Should().EndWith("Microsoft.NET.Sdk.Razor.SourceGenerators.dll");
 
     [TestMethod]
     public void RazorSourceGenerator_HasCorrectPath() =>
         RazorSourceGenerator.FullPath
             .Should()
-            .Be(Path.Combine(Path.GetDirectoryName(typeof(SourceGeneratorProvider).Assembly.Location), "Dependencies", "Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators.dll"));
+            .Be(Path.Combine(Path.GetDirectoryName(typeof(SourceGeneratorProvider).Assembly.Location), "Dependencies", "Microsoft.NET.Sdk.Razor.SourceGenerators.dll"));
 
     [TestMethod]
     public void RazorSourceGenerator_LoadsCorrectAssembly() =>
-        RazorSourceGenerator.GetAssembly().GetName().Name.Should().Be("Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators");
+        RazorSourceGenerator.GetAssembly().GetName().Name.Should().Be("Microsoft.NET.Sdk.Razor.SourceGenerators");
 
     private static AnalyzerFileReference RazorSourceGenerator =>
-        SourceGeneratorProvider.SourceGenerators.Single(x => x.FullPath.EndsWith("Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators.dll"));
+        SourceGeneratorProvider.SourceGenerators.Single(x => x.FullPath.EndsWith("Microsoft.NET.Sdk.Razor.SourceGenerators.dll"));
 }

@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNetCore.Components.Web
-@* https://github.com/SonarSource/sonar-dotnet/issues/8394 *@
+﻿@* https://github.com/SonarSource/sonar-dotnet/issues/8394 *@
 
 @foreach (var item in Buttons.Where(x => x.Id == "idToFind"))
     if (item.Id == "idToFind")
@@ -83,13 +82,13 @@
 }
 
 @code {
-    private List<Button> Buttons { get; } = new List<Button>();
+    private List<Button> Buttons { get; } = new();
 
     private void DoAction(MouseEventArgs e, Button button) { }
 
     private class Button
     {
-        public string Id { get; } = Guid.NewGuid().ToString();
+        public string? Id { get; } = Guid.NewGuid().ToString();
         public Action<MouseEventArgs> Action { get; set; } = e => { };
     }
 

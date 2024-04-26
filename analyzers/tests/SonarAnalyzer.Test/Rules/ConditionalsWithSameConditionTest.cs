@@ -76,6 +76,7 @@ namespace SonarAnalyzer.Test.Rules
                 }
                 """,
                 "SomeRazorFile.razor")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
 #endif

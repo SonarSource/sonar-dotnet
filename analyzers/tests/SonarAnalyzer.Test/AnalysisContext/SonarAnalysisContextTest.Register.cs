@@ -428,6 +428,7 @@ public partial class SonarAnalysisContextTest
     public void DisabledRules_ForRazor_DoNotRaise(string ruleId, string extension) =>
         new VerifierBuilder()
             .AddAnalyzer(() => new DummyAnalyzerWithLocation(ruleId, DiagnosticDescriptorFactory.MainSourceScopeTag))
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .AddSnippet(Snippet(extension), $"SomeFile.{extension}")
             .VerifyNoIssueReported();
 
@@ -449,6 +450,7 @@ public partial class SonarAnalysisContextTest
         var keyword = extension == "razor" ? "code" : "functions";
         new VerifierBuilder()
             .AddAnalyzer(() => new DummyAnalyzerWithLocation("DummyId", DiagnosticDescriptorFactory.TestSourceScopeTag, DiagnosticDescriptorFactory.MainSourceScopeTag))
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .AddSnippet($$"""
                         @{{keyword}}
                         {

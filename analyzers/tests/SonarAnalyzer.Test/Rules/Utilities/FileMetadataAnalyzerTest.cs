@@ -106,12 +106,13 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
 
         [DataTestMethod]
-        [DataRow("Razor.razor")]
-        [DataRow("Razor.cshtml")]
-        public void Verify_RazorFilesAreIgnored(string fileName) =>
+        [DataRow("Razor.razor", "EmptyProject.GlobalUsings.g.cs", ".NETCoreApp,Version=v7.0.AssemblyAttributes.cs", "EmptyProject.AssemblyInfo.cs")]
+        [DataRow("Razor.cshtml", "EmptyProject.GlobalUsings.g.cs", ".NETCoreApp,Version=v7.0.AssemblyAttributes.cs", "EmptyProject.AssemblyInfo.cs", "EmptyProject.RazorAssemblyInfo.cs")]
+        public void Verify_RazorFilesAreIgnored(string fileName, params string[] expectedFiles) =>
             CreateBuilder(ProjectType.Product, fileName)
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<FileMetadataInfo>(messages =>
-                    messages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEmpty());    // There are more files on some PCs: JSExports.g.cs, LibraryImports.g.cs, JSImports.g.cs
+                    messages.Select(x => Path.GetFileName(x.FilePath)).Should().Contain(expectedFiles));    // There are more files on some PCs: JSExports.g.cs, LibraryImports.g.cs, JSImports.g.cs
 
 #endif
 

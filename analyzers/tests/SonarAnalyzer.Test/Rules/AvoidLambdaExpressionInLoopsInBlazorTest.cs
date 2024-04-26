@@ -33,15 +33,21 @@ public class AvoidLambdaExpressionInLoopsInBlazorTest
 
     [TestMethod]
     public void AvoidLambdaExpressionInLoopsInBlazor_Blazor() =>
-        builder.AddPaths("AvoidLambdaExpressionInLoopsInBlazor.razor").Verify();
+        builder.AddPaths("AvoidLambdaExpressionInLoopsInBlazor.razor")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .Verify();
 
     [TestMethod]
     public void AvoidLambdaExpressionInLoopsInBlazor_BlazorLoopsWithNoBody() =>
-        builder.AddPaths("AvoidLambdaExpressionInLoopsInBlazor.LoopsWithNoBody.razor").Verify();
+        builder.AddPaths("AvoidLambdaExpressionInLoopsInBlazor.LoopsWithNoBody.razor")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .Verify();
 
     [TestMethod]
     public void AvoidLambdaExpressionInLoopsInBlazor_UsingRenderFragment() =>
-        builder.AddPaths("AvoidLambdaExpressionInLoopsInBlazor.RenderFragment.razor", "AvoidLambdaExpressionInLoopsInBlazor.RenderFragmentConsumer.razor").Verify();
+        builder.AddPaths("AvoidLambdaExpressionInLoopsInBlazor.RenderFragment.razor", "AvoidLambdaExpressionInLoopsInBlazor.RenderFragmentConsumer.razor")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .Verify();
 
     [TestMethod]
     public void AvoidLambdaExpressionInLoopsInBlazor_CS() =>

@@ -126,6 +126,16 @@ public class VerifierTest
         DummyCS.AddSnippet("//Empty").WithProtobufPath("Proto.pb")
             .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("DummyAnalyzerCS does not inherit from UtilityAnalyzerBase.");
 
+    [TestMethod]
+    public void Constructor_IsRazor_NoOptions_Throws() =>
+        DummyCS.AddSnippet("//Empty", "File.razor").WithOptions(ImmutableArray<ParseOptions>.Empty)
+            .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("IsRazor was set. ParseOptions must be specified.");
+
+    [TestMethod]
+    public void Constructor_IsRazor_VB_Throws() =>
+        DummyVB.AddSnippet("//Empty", "File.razor")
+            .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("IsRazor was set for Visual Basic analyzer. Only C# is supported.");
+
 #if NET
 
     [TestMethod]
@@ -158,13 +168,19 @@ public class VerifierTest
     [DataRow("Dummy.SecondaryLocation.razor")]
     [DataRow("Dummy.SecondaryLocation.cshtml")]
     public void Verify_RazorWithAdditionalLocation(string path) =>
-        DummyWithLocation.AddPaths(path).Verify();
+        DummyWithLocation
+            .AddPaths(path)
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .Verify();
 
     [TestMethod]
     [DataRow("Dummy.razor")]
     [DataRow("Dummy.cshtml")]
     public void Verify_Razor(string path) =>
-        DummyWithLocation.AddPaths(path).Verify();
+        DummyWithLocation
+            .AddPaths(path)
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .Verify();
 
     [DataTestMethod]
     [DataRow("Dummy.razor")]
@@ -178,7 +194,8 @@ public class VerifierTest
     [DataRow("Dummy.razor")]
     [DataRow("Dummy.cshtml")]
     public void Verify_RazorAnalysisInSLAndNugetContext_DoesNotRaise(string path) =>
-        DummyWithLocation.AddPaths(path)
+        DummyWithLocation
+            .AddPaths(path)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Unknown))
             .VerifyNoIssueReported();
 
@@ -191,14 +208,35 @@ public class VerifierTest
             .Build()
             .Compile(false)
             .Single();
-        compilation.Compilation.GetSpecialType(SpecialType.System_Object).ContainingAssembly.Identity.Version.Major.Should().Be(8, "This version is the default framework for in-memory compilation");
+        compilation.Compilation.GetSpecialType(SpecialType.System_Object).ContainingAssembly.Identity.Version.Major.Should().Be(7, "This version is used in EmptyProject.csproj");
+    }
 
-        compilation.Compilation.ExternalReferences.Select(x => Path.GetFileName(x.Display)).Should().Contain([
-            "Microsoft.AspNetCore.dll",
-            "Microsoft.AspNetCore.Components.dll",
-            "Microsoft.AspNetCore.Components.Web.dll",
-            "System.Text.Encodings.Web.dll"
-        ]);
+    [TestMethod]
+    public void Compile_Razor_ParseOptions_OldVersion() =>
+        DummyWithLocation.AddPaths("Dummy.razor").WithOptions(ImmutableArray.Create<ParseOptions>(new CSharpParseOptions(LanguageVersion.CSharp6))).Build().Compile(false)
+            .Invoking(x => x.ToArray()) // Force evaluation of the collection
+            .Should()
+            .Throw<NotSupportedException>();
+
+    [TestMethod]
+    public void Compile_Razor_ParseOptions_DefaultLanguageVersion()
+    {
+        // Version below C# 10 are not compatible with our EmptyProject scaffolding due to nullable context and global using statements.
+        var expectedLanguageVersions = ParseOptionsHelper.FromCSharp10.Cast<CSharpParseOptions>().Select(x => x.LanguageVersion.ToString());
+        var compilations = DummyWithLocation.AddPaths("Dummy.razor").Build().Compile(false);
+        compilations.Select(c => c.Compilation.LanguageVersionString()).Should().BeEquivalentTo(expectedLanguageVersions);
+    }
+
+    [TestMethod]
+    public void Compile_Razor_ParseOptions_WithSpecificVersion()
+    {
+        var builder = DummyWithLocation.AddPaths("Dummy.razor");
+        // Version below C# 10 are not compatible with our EmptyProject scaffolding due to nullable context and global using statements.
+        foreach (var options in ParseOptionsHelper.FromCSharp10)
+        {
+            // Update Verifier.LanguageVersionReference() in case this breaks
+            builder.WithOptions(ImmutableArray.Create(options)).Build().Compile(false).Should().ContainSingle();
+        }
     }
 
     [TestMethod]
@@ -225,43 +263,6 @@ public class VerifierTest
     }
 
     [TestMethod]
-    public void Compile_Razor_Snippet()
-    {
-        var compilation = DummyWithLocation
-            .AddSnippet("""
-                <p>@Counter</p>
-
-                @code {
-                    int Counter = 0;
-                }
-                """, "snippet.razor")
-            .WithLanguageVersion(LanguageVersion.Latest)
-            .Build()
-            .Compile(false)
-            .Single();
-
-        compilation.Compilation.SyntaxTrees.Should().ContainSingle();
-        ContainsSyntaxTreeWithName(compilation, "snippet_razor.g.cs");
-    }
-
-    [TestMethod]
-    public void Compile_Cshtml_Snippet()
-    {
-        var compilation = DummyWithLocation
-            .AddSnippet("""
-                @{ var total = 7; }
-                <p>@total</p>
-                """, "snippet.cshtml")
-            .WithLanguageVersion(LanguageVersion.Latest)
-            .Build()
-            .Compile(false)
-            .Single();
-
-        compilation.Compilation.SyntaxTrees.Should().ContainSingle();
-        ContainsSyntaxTreeWithName(compilation, "snippet_cshtml.g.cs");
-    }
-
-    [TestMethod]
     public void Compile_Razor_Snippet_NoName()
     {
         var compilation = DummyWithLocation
@@ -272,8 +273,9 @@ public class VerifierTest
             .Compile(false)
             .Single();
 
-        ContainsSyntaxTreeWithName(compilation, "Dummy_cshtml.g.cs");
-        ContainsSyntaxTreeWithName(compilation, "snippet0.cs");
+        compilation.AdditionalSourceFiles.Should().ContainSingle();
+        ContainsAdditionalSourceFileWithName(compilation, "Dummy.cshtml");
+        ContainsSyntaxTreeWithName(compilation, "snippet.0.cs");
     }
 
     [TestMethod]
@@ -287,7 +289,8 @@ public class VerifierTest
             .Compile(false)
             .Single();
 
-        ContainsSyntaxTreeWithName(compilation, "Dummy_cshtml.g.cs");
+        compilation.AdditionalSourceFiles.Should().ContainSingle();
+        ContainsAdditionalSourceFileWithName(compilation, "Dummy.cshtml");
         ContainsSyntaxTreeWithName(compilation, "snippet.cs");
     }
 
@@ -302,7 +305,11 @@ public class VerifierTest
             .Compile(false)
             .Single();
 
-        ContainsSyntaxTreeWithName(compilation, "Dummy_cshtml.g.cs");
+        compilation.AdditionalSourceFiles.Should().HaveCount(2);
+
+        ContainsAdditionalSourceFileWithName(compilation, "Dummy.cshtml");
+        ContainsAdditionalSourceFileWithName(compilation, "snippet.cshtml");
+
         ContainsSyntaxTreeWithName(compilation, "snippet_cshtml.g.cs");
     }
 
@@ -320,11 +327,15 @@ public class VerifierTest
             .Compile(false)
             .Single();
 
-        ContainsSyntaxTreeWithName(compilation, "Dummy_cshtml.g.cs");
-        ContainsSyntaxTreeWithName(compilation, "snippet_cshtml.g.cs");
-        ContainsSyntaxTreeWithName(compilation, "snippet0.cs");
-        ContainsSyntaxTreeWithName(compilation, "snippet1.cs");
+        compilation.AdditionalSourceFiles.Should().HaveCount(2);
+
+        ContainsAdditionalSourceFileWithName(compilation, "Dummy.cshtml");
+        ContainsAdditionalSourceFileWithName(compilation, "snippet.cshtml");
+
+        ContainsSyntaxTreeWithName(compilation, "snippet.0.cs");
+        ContainsSyntaxTreeWithName(compilation, "snippet.1.cs");
         ContainsSyntaxTreeWithName(compilation, "snippet.cs");
+        ContainsSyntaxTreeWithName(compilation, "snippet_cshtml.g.cs");
     }
 
 #endif
@@ -823,6 +834,9 @@ public class VerifierTest
 
     private string WriteFile(string name, string content) =>
         TestHelper.WriteFile(TestContext, $@"TestCases\{name}", content);
+
+    private static void ContainsAdditionalSourceFileWithName(CompilationData compilation, string suffix) =>
+        compilation.AdditionalSourceFiles.Should().ContainSingle(x => x.EndsWith(suffix));
 
     private static void ContainsSyntaxTreeWithName(CompilationData compilation, string suffix) =>
         compilation.Compilation.SyntaxTrees.Select(x => x.FilePath).Should().Contain(x => x.EndsWith(suffix));
