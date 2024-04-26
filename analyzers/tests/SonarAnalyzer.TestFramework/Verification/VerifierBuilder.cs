@@ -49,7 +49,6 @@ public record VerifierBuilder
     public string CodeFixTitle { get; init; }
     public bool ConcurrentAnalysis { get; init; } = true;
     public CompilationErrorBehavior ErrorBehavior { get; init; } = CompilationErrorBehavior.Default;
-    public bool IsRazor { get; init; }
     public ImmutableArray<DiagnosticDescriptor> OnlyDiagnostics { get; init; } = ImmutableArray<DiagnosticDescriptor>.Empty;
     public OutputKind OutputKind { get; init; } = OutputKind.DynamicallyLinkedLibrary;
     public ImmutableArray<string> Paths { get; init; } = ImmutableArray<string>.Empty;
@@ -66,13 +65,13 @@ public record VerifierBuilder
         this with { Analyzers = Analyzers.Append(createConfiguredAnalyzer).ToImmutableArray() };
 
     public VerifierBuilder AddPaths(params string[] paths) =>
-        UpdateIsRazor(paths) with { Paths = Paths.Concat(paths).ToImmutableArray(), };
+        this with { Paths = Paths.Concat(paths).ToImmutableArray(), };
 
     public VerifierBuilder AddReferences(IEnumerable<MetadataReference> references) =>
         this with { References = References.Concat(references).ToImmutableArray() };
 
     public VerifierBuilder AddSnippet(string snippet, string fileName = null) =>
-        UpdateIsRazor(fileName) with { Snippets = Snippets.Add(new(snippet, fileName)) };
+        this with { Snippets = Snippets.Add(new(snippet, fileName)) };
 
     /// <summary>
     /// Add a test reference to change the project type to Test project.
@@ -108,10 +107,10 @@ public record VerifierBuilder
         this with { ErrorBehavior = errorBehavior };
 
     public VerifierBuilder WithLanguageVersion(CS.LanguageVersion languageVersion) =>
-        WithOptions(ImmutableArray.Create<ParseOptions>(new CS.CSharpParseOptions(languageVersion)));
+        WithOptions([new CS.CSharpParseOptions(languageVersion)]);
 
     public VerifierBuilder WithLanguageVersion(VB.LanguageVersion languageVersion) =>
-        WithOptions(ImmutableArray.Create<ParseOptions>(new VB.VisualBasicParseOptions(languageVersion)));
+        WithOptions([new VB.VisualBasicParseOptions(languageVersion)]);
 
     public VerifierBuilder WithOnlyDiagnostics(params DiagnosticDescriptor[] onlyDiagnostics) =>
         this with { OnlyDiagnostics = onlyDiagnostics.ToImmutableArray() };
@@ -164,23 +163,6 @@ public record VerifierBuilder
 
     internal Verifier Build() =>
         new(this);
-
-    private VerifierBuilder UpdateIsRazor(params string[] paths)
-    {
-        if (!IsRazor && Array.Exists(paths, IsRazorOrCshtmlFile))
-        {
-            return ParseOptions.IsEmpty
-                ? WithOptions(ParseOptionsHelper.FromCSharp10) with { IsRazor = true }
-                : this with { IsRazor = true };
-        }
-        else
-        {
-            return this;
-        }
-
-        static bool IsRazorOrCshtmlFile(string fileName) =>
-            !string.IsNullOrEmpty(fileName) && (fileName.EndsWith(".razor", StringComparison.OrdinalIgnoreCase) || fileName.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase));
-    }
 }
 
 public record VerifierBuilder<TAnalyzer> : VerifierBuilder

@@ -71,6 +71,7 @@ public static class NuGetMetadataReference
     public static References MicrosoftAspNetCoreMvcRazorRuntime(string packageVersion = "2.2.0") => Create("Microsoft.AspNetCore.Razor.Runtime", packageVersion);
     public static References MicrosoftAspNetCoreRoutingAbstractions(string packageVersion) => Create("Microsoft.AspNetCore.Routing.Abstractions", packageVersion);
     public static References MicrosoftAspNetMvc(string packageVersion) => Create("Microsoft.AspNet.Mvc", packageVersion);
+    public static References MicrosoftAspNetCoreAppRef(string packageVersion) => Create("Microsoft.AspNetCore.App.Ref", packageVersion);
     public static References MicrosoftAspNetSignalRCore(string packageVersion = "2.4.1") => Create("Microsoft.AspNet.SignalR.Core", packageVersion);
     public static References MicrosoftAspNetWebApiCors(string packageVersion) => Create("Microsoft.AspNet.WebApi.Cors", packageVersion);
     public static References MicrosoftAzureCosmos(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.Azure.Cosmos", packageVersion);
@@ -159,6 +160,8 @@ public static class NuGetMetadataReference
     public static References SystemSecurityPermissions(string packageVersion = "4.7.0") => Create("System.Security.Permissions", packageVersion);
     public static References SystemPrivateServiceModel(string packageVersion = "4.7.0") => Create("System.Private.ServiceModel", packageVersion);
     public static References SystemServiceModelPrimitives(string packageVersion = "4.7.0") => Create("System.ServiceModel.Primitives", packageVersion);
+    public static References SystemTextEncodingsWeb(string packageVersion) => Create("System.Text.Encodings.Web", packageVersion);
+    public static References SystemTextJson(string packageVersion) => Create("System.Text.Json", packageVersion);
     public static References SystemTextRegularExpressions(string packageVersion = "4.3.1") => Create("System.Text.RegularExpressions", packageVersion);
     public static References SystemThreadingTasksExtensions(string packageVersion) => Create("System.Threading.Tasks.Extensions", packageVersion);
     public static References SystemValueTuple(string packageVersion) => Create("System.ValueTuple", packageVersion);

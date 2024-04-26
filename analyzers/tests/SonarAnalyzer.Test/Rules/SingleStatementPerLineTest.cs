@@ -55,9 +55,7 @@ namespace SonarAnalyzer.Test.Rules
     void DoSomething(bool flag) { if (flag) Console.WriteLine("Test"); } // Noncompliant
 }
 """,
-"SomeRazorFile.razor")
-                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-                .Verify();
+"SomeRazorFile.razor").Verify();
 
 #endif
 

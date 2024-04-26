@@ -33,15 +33,11 @@ public class ParameterTypeShouldMatchRouteTypeConstraintTest
 
     [TestMethod]
     public void ParameterTypeShouldMatchRouteTypeConstraint_Blazor() =>
-        builder.AddPaths("ParameterTypeShouldMatchRouteTypeConstraint.razor")
-            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-            .Verify();
+        builder.AddPaths("ParameterTypeShouldMatchRouteTypeConstraint.razor").Verify();
 
     [TestMethod]
     public void ParameterTypeShouldMatchRouteTypeConstraint_Partial() =>
-        builder.AddPaths("ParameterTypeShouldMatchRouteTypeConstraint.Partial.razor", "ParameterTypeShouldMatchRouteTypeConstraint.Partial.razor.cs")
-            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-            .Verify();
+        builder.AddPaths("ParameterTypeShouldMatchRouteTypeConstraint.Partial.razor", "ParameterTypeShouldMatchRouteTypeConstraint.Partial.razor.cs").Verify();
 
     [TestMethod]
     public void ParameterTypeShouldMatchRouteTypeConstraint_CS() =>
@@ -52,9 +48,7 @@ public class ParameterTypeShouldMatchRouteTypeConstraintTest
 
     [TestMethod]
     public void ParameterTypeShouldMatchRouteTypeConstraint_Conversion() =>
-        builder.AddPaths("ParameterTypeShouldMatchRouteTypeConstraint.Conversion.razor")
-            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-            .Verify();
+        builder.AddPaths("ParameterTypeShouldMatchRouteTypeConstraint.Conversion.razor").Verify();
 }
 
 #endif
