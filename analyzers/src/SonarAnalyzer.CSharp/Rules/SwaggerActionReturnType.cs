@@ -17,12 +17,14 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
+using System;
 
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
 {
+    private const string UnusedField = "UnusedField";
     private const string DiagnosticId = "S6968";
     private const string MessageFormat = "{0}";
     private const string NoAttributeMessageFormat = "Annotate this method with ProducesResponseType containing the return type for successful responses.";

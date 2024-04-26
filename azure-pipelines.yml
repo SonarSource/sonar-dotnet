@@ -527,7 +527,9 @@ stages:
 
     - job: runJavaUnitTests
       displayName: 'Java UTs'
-      dependsOn: runJavaBuild
+      dependsOn: 
+        - runJavaBuild
+        - dotNetAnalysis
       workspace:
         clean: all
       steps:
