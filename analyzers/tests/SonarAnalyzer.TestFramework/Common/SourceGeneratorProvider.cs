@@ -42,16 +42,9 @@ public static class SourceGeneratorProvider
         var objectAssemblyDirectory = new FileInfo(objectAssembly.Location).Directory; // C:\Program Files\dotnet\shared\Microsoft.NETCore.App\8.0.4
         var dotnetDirectory = objectAssemblyDirectory.Parent.Parent.Parent;            // C:\Program Files\dotnet
         var sdkDirectory = Path.Combine(dotnetDirectory.FullName, "sdk");              // C:\Program Files\dotnet\sdk
-        if (!Directory.Exists(sdkDirectory)) // Either not installed locally or .Net Framework
+        if (!Directory.Exists(sdkDirectory))
         {
-            if (objectAssembly.FullName.Contains("mscorlib"))
-            {
-                throw new NotSupportedException($"Razor analysis is only available for .Net Core.");
-            }
-            else
-            {
-                throw new DirectoryNotFoundException($"Directory not found: {sdkDirectory}");
-            }
+            throw new NotSupportedException($"Razor analysis is only supported for .Net Core.");
         }
         // List of all sdk directories for the major version
         var latestSdkMajorDirectories = Directory.GetDirectories(sdkDirectory, $"{objectAssembly.GetName().Version.Major}.*", SearchOption.TopDirectoryOnly);
