@@ -1,4 +1,5 @@
-﻿Imports System.Web.Mvc
+﻿Imports System
+Imports System.Web.Mvc
 
 <Route("A\[controller]")>   ' Noncompliant ^8#16 {{Replace '\' with '/'.}}
 Public Class BackslashOnController
@@ -78,3 +79,17 @@ Public Class AController
     End Function
 End Class
 
+' https://github.com/SonarSource/sonar-dotnet/issues/9193
+Namespace AttributeWithNamedArgument
+    <AttributeUsage(AttributeTargets.All)>
+    Public Class MyAttribute
+        Inherits Attribute
+        Public Property Name As String
+    End Class
+
+    Public Class MyController
+        Inherits Controller
+        <MyAttribute(Name:="Display HR\Recruitment report")>
+        Public Const Text As String = "ABC"
+    End Class
+End Namespace
