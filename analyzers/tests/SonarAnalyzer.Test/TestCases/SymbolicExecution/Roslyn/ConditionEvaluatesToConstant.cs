@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.IO;
 using System.Linq;
+using System.Timers;
 
 namespace Tests.Diagnostics
 {
@@ -4220,6 +4221,75 @@ class Repro_9184
             {
                 return;
             }
+        }
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9204
+// https://github.com/SonarSource/sonar-dotnet/issues/8885
+class Repro_9204_8885_AssignmentOfCaptures
+{
+    public void ForEachTest(List<string> licenseData)
+    {
+        var found = false;
+        licenseData.ForEach(license => found = true); // Assignment in "ForEach"
+        if (!found) // Noncompliant FP
+        {
+            Console.WriteLine("No License for artifact type");
+        }
+    }
+
+    public void SelectTest(List<string> licenseData)
+    {
+        var found = false;
+        licenseData.Select(license => found = true).Any(); // Assignment in "Select"
+        if (!found) // Noncompliant FP
+        {
+            Console.WriteLine("No License for artifact type");
+        }
+    }
+
+    public void ActionTest()
+    {
+        var found = false;
+        Action assign = () => found = true; // Assignment in some delegate
+        assign();
+        if (!found) // Noncompliant FP
+        {
+            Console.WriteLine("No License for artifact type");
+        }
+    }
+
+    public void LocalFunctionTest()
+    {
+        var found = false;
+        Assign();
+        if (!found) // Noncompliant FP
+        {
+            Console.WriteLine("No License for artifact type");
+        }
+
+        void Assign() => found = true; // Assignment in local function
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/8885
+    public void LocalFunctionEventHandler()
+    {
+        bool elapsed = false;
+        var timer = new Timer(2000);
+        timer.Elapsed += OnElapsed;
+        timer.Enabled = true;
+
+        while (!elapsed) // Noncompliant [elapsed] FP
+        {
+            System.Threading.Thread.Sleep(500);
+        }
+
+        Console.WriteLine("Timer elapsed!"); // Secondary [elapsed] FP
+
+        void OnElapsed(object source, ElapsedEventArgs e)
+        {
+            elapsed = true; // Assignment in event handler
         }
     }
 }

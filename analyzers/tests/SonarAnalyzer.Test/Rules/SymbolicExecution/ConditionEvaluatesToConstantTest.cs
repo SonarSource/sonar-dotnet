@@ -57,7 +57,9 @@ public class ConditionEvaluatesToConstantTest
     [DataRow(ProjectType.Test)]
     public void ConditionEvaluatesToConstant_Roslyn_CS(ProjectType projectType) =>
         roslynCS.AddPaths("ConditionEvaluatesToConstant.cs")
-            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7").Concat(TestHelper.ProjectTypeReference(projectType)))
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7"))
+            .AddReferences(MetadataReferenceFacade.SystemComponentModelTypeConverter)
+            .AddReferences(TestHelper.ProjectTypeReference(projectType))
             .Verify();
 
     [TestMethod]
