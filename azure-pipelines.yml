@@ -292,6 +292,7 @@ stages:
       condition: eq(dependencies.runUnitTestsDotNet.result, 'Succeeded')
       dependsOn:
       - runUnitTestsDotNet
+      - runJavaUnitTests
       steps:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"

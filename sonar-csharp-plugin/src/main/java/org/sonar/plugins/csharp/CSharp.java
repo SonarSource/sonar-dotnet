@@ -32,6 +32,8 @@ public class CSharp extends AbstractLanguage {
     this.configuration = configuration;
   }
 
+  private void UnusedMethod(){}
+
   @Override
   public String[] getFileSuffixes() {
     return configuration.getStringArray(CSharpPlugin.FILE_SUFFIXES_KEY);
