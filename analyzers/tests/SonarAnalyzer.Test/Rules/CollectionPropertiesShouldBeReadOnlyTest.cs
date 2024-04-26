@@ -49,9 +49,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void CollectionPropertiesShouldBeReadOnly_Razor() =>
-            builder.AddPaths("CollectionPropertiesShouldBeReadOnly.razor", "CollectionPropertiesShouldBeReadOnly.razor.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+            builder.AddPaths("CollectionPropertiesShouldBeReadOnly.razor", "CollectionPropertiesShouldBeReadOnly.razor.cs").Verify();
 
 #endif
 

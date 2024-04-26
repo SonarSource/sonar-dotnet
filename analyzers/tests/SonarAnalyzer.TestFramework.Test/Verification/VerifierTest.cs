@@ -170,13 +170,17 @@ public class VerifierTest
     [DataRow("Dummy.razor")]
     [DataRow("Dummy.cshtml")]
     public void Verify_RazorAnalysisIsDisabled_DoesNotRaise(string path) =>
-        DummyWithLocation.AddPaths(path).VerifyNoIssueReported();
+        DummyWithLocation.AddPaths(path)
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarLintXml(TestContext, analyzeRazorCode: false))
+            .VerifyNoIssueReported();
 
     [DataTestMethod]
     [DataRow("Dummy.razor")]
     [DataRow("Dummy.cshtml")]
     public void Verify_RazorAnalysisInSLAndNugetContext_DoesNotRaise(string path) =>
-        DummyWithLocation.AddPaths(path).VerifyNoIssueReported();
+        DummyWithLocation.AddPaths(path)
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Unknown))
+            .VerifyNoIssueReported();
 
     [TestMethod]
     public void Compile_Razor_DefaultFramework()

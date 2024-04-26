@@ -54,13 +54,13 @@
 }
 
 @code {
-    private List<Button> Buttons { get; } = new();
+    private List<Button> Buttons { get; } = new List<Button>();
 
     private void DoAction(MouseEventArgs e, Button button) { }
 
     private class Button
     {
-        public string? Id { get; } = Guid.NewGuid().ToString();
+        public string Id { get; } = Guid.NewGuid().ToString();
         public Action<MouseEventArgs> Action { get; set; } = e => { };
     }
 

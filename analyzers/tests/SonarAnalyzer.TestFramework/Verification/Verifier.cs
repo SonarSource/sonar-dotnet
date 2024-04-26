@@ -162,7 +162,7 @@ internal class Verifier
         var contentFilePaths = paths.Where(IsRazorOrCshtml).ToArray();
         var sourceFilePaths = paths.Except(contentFilePaths).ToArray();
         var contentSnippets = builder.Snippets.Where(x => IsRazorOrCshtml(x.FileName)).ToArray();
-        var sourceSnippets = builder.Snippets.Where(x => !contentSnippets.Contains(x)).ToArray(); // Cannot use Except because it Distincts the elements
+        var sourceSnippets = builder.Snippets.Where(x => !IsRazorOrCshtml(x.FileName)).ToArray(); // Cannot use Except because it Distincts the elements
 
         contentSnippets = contentSnippets.Select(x =>
         {
@@ -177,16 +177,16 @@ internal class Verifier
         var concurrentContentFiles = concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(contentFilePaths) : [];
         return SolutionBuilder.Create()
             .AddProject(language, builder.OutputKind)
-            .AddDocuments(sourceFilePaths)
-            .AddAdditionalDocuments(contentFilePaths)
-            .AddDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(sourceFilePaths) : [])
-            .AddAdditionalDocuments(concurrentContentFiles)
-            .AddAnalyzerReferences(hasContentDocuments ? SourceGeneratorProvider.SourceGenerators : [])
             .AddSnippets(sourceSnippets)
+            .AddDocuments(sourceFilePaths)
+            .AddDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(sourceFilePaths) : [])
+            .AddAdditionalDocuments(contentFilePaths)
+            .AddAdditionalDocuments(concurrentContentFiles)
             .AddAdditionalDocuments(contentSnippets.Length > 0 ? contentSnippets.Select(x => x.FileName) : [])
             .AddReferences(builder.References)
             .AddReferences(hasContentDocuments ? NuGetMetadataReference.MicrosoftAspNetCoreAppRef("7.0.17") : [])
             .AddReferences(hasContentDocuments ? NuGetMetadataReference.SystemTextEncodingsWeb("7.0.0") : [])
+            .AddAnalyzerReferences(hasContentDocuments ? SourceGeneratorProvider.SourceGenerators : [])
             .AddAnalyzerConfigDocument(
                 Path.Combine(Directory.GetCurrentDirectory(), ".editorconfig"),
                 editorConfigGenerator.Generate(concurrentContentFiles.Concat(contentFilePaths).Concat(contentSnippets.Select(x => x.FileName))));

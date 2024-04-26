@@ -60,16 +60,16 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow("_imports.razor")]
         [DataRow("_iMpoRts.razor")]
         public void UnnecessaryUsings_RazorImportsRazorFile_NoIssueReported(string fileName) =>
-            builder.AddSnippet(@"@using System.Text.Json;", fileName).VerifyNoIssueReported(); // ToDo TAKE A LOOK
+            builder.AddSnippet(@"@using System.Text.Json;", fileName).VerifyNoIssueReported();
 
         [DataTestMethod]
         [DataRow("RandomFile_ViewImports.cshtml")]
         [DataRow("RandomFile_Imports.cshtml")]
         [DataRow("_Imports.cshtml")]
         public void UnnecessaryUsings_RazorViewImportsSimilarCshtmlFile_IssuesReported(string fileName) =>
-            builder.AddSnippet("@using System.Linq;", "_ViewImports.cshtml")
+            builder.AddReferences(NuGetMetadataReference.SystemTextJson("7.0.4"))
+                .AddSnippet("@using System.Linq;", "_ViewImports.cshtml")
                 .AddSnippet(@"@using System.Text.Json; @* Noncompliant *@", fileName)
-                .AddReferences(NuGetMetadataReference.SystemTextJson("7.0.4"))
                 .Verify();
 
         [DataTestMethod]
@@ -77,9 +77,9 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow("RandomFile_Imports.razor")]
         [DataRow("_ViewImports.razor")]
         public void UnnecessaryUsings_RazorViewImportsSimilarRazorFile_IssuesReported(string fileName) =>
-            builder.AddSnippet("@using System.Linq;", "_Imports.razor")
+            builder.AddReferences(NuGetMetadataReference.SystemTextJson("7.0.4"))
+                .AddSnippet("@using System.Linq;", "_Imports.razor")
                 .AddSnippet(@"@using System.Text.Json; @* Noncompliant *@", fileName)
-                .AddReferences(NuGetMetadataReference.SystemTextJson("7.0.4"))
                 .Verify();
 
         [DataTestMethod]
