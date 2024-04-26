@@ -9,7 +9,13 @@ namespace CodeFixCases
 
 
     [ApiController]
-    public class SimpleController: Controller { } // Noncompliant
+    public class SimpleController : Controller { } // Noncompliant
+
+    [ApiController]
+    public class CodeFixRespectsCommentsController : Controller /* I'm a small comment and I wish to be respected */ { } // Noncompliant
+
+    [ApiController]
+    public class CodeFixRespectsCommentsAlsoHasInterfaceController : Controller /* Ditto */, ITestInterface { } // Noncompliant
 
     [ApiController]
     public class ControllerWithInterface : Controller, ITestInterface { } // Noncompliant

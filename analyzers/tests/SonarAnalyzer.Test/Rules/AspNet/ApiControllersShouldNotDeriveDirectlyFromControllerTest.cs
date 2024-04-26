@@ -119,8 +119,8 @@ public class ApiControllersShouldNotDeriveDirectlyFromControllerTest
     [TestMethod]
     public void ApiControllersShouldNotDeriveDirectlyFromController_CodeFix() =>
         builder
-            .AddPaths("ApiControllersShouldNotDeriveDirectlyFromControllerCodeFix.cs")
             .WithCodeFix<ApiControllersShouldNotDeriveDirectlyFromControllerCodeFix>()
+            .AddPaths("ApiControllersShouldNotDeriveDirectlyFromControllerCodeFix.cs")
             .WithCodeFixedPaths("ApiControllersShouldNotDeriveDirectlyFromControllerCodeFix.Fixed.cs")
             .VerifyCodeFix();
 #endif

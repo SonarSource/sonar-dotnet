@@ -33,13 +33,12 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var toReplace = root.FindNode(context.Diagnostics.First().Location.SourceSpan) as BaseTypeSyntax;
-            var replacement = root.ReplaceNode(toReplace, SyntaxFactory.SimpleBaseType(SyntaxFactory.IdentifierName("ControllerBase")))
+            var replacement = root.ReplaceNode(toReplace, SyntaxFactory.SimpleBaseType(SyntaxFactory.IdentifierName("ControllerBase").WithTriviaFrom(toReplace)))
                 .WithAdditionalAnnotations(Formatter.Annotation);
 
             context.RegisterCodeFix(
                Title,
-               token => Task.FromResult(context.Document.WithSyntaxRoot(replacement)),
-               context.Diagnostics);
+               token => Task.FromResult(context.Document.WithSyntaxRoot(replacement)), context.Diagnostics);
             return Task.CompletedTask;
         }
   }
