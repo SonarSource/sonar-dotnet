@@ -14,7 +14,7 @@
   <version>9.25-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>.NET Analyzers parent</name>
+  <name>Sonar .NET Java Plugin</name>
   <description>Code Analyzers for .NET</description>
   <url>https://github.com/SonarSource/sonar-dotnet</url>
   <inceptionYear>2014</inceptionYear>
