@@ -1,4 +1,6 @@
-﻿<AvoidLambdaExpressionInLoopsInBlazor_RenderFragment>
+﻿@using Microsoft.AspNetCore.Components.Web
+
+<AvoidLambdaExpressionInLoopsInBlazor_RenderFragment>
     @foreach (var button in Buttons)
     {
         <button @key="button.Id" @onclick="(e) => button.Action(e)"> @* Noncompliant *@
@@ -15,13 +17,13 @@
 </AvoidLambdaExpressionInLoopsInBlazor_RenderFragment>
 
 @code {
-    private List<Button> Buttons { get; } = new();
+    private List<Button> Buttons { get; } = new List<Button>();
 
     private void DoAction(MouseEventArgs e, Button button) { }
 
     private class Button
     {
-        public string? Id { get; } = Guid.NewGuid().ToString();
+        public string Id { get; } = Guid.NewGuid().ToString();
         public Action<MouseEventArgs> Action { get; set; } = e => { };
     }
 

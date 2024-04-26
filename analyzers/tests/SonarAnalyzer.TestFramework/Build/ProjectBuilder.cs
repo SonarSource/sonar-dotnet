@@ -85,6 +85,9 @@ public readonly struct ProjectBuilder
     public ProjectBuilder AddSnippets(IEnumerable<Snippet> snippets) =>
         snippets.Aggregate(this, (current, snippet) => current.AddSnippet(snippet.Content, snippet.FileName));
 
+    private static ProjectBuilder AddAdditionalDocument(Project project, string fileName, string fileContent) =>
+        FromProject(project.AddAdditionalDocument(Path.Combine(Directory.GetCurrentDirectory(), "TestCases", fileName), fileContent).Project);
+
     public ProjectBuilder AddSnippet(string code, string fileName = null)
     {
         _ = code ?? throw new ArgumentNullException(nameof(code));
@@ -121,14 +124,11 @@ public readonly struct ProjectBuilder
 
     private bool IsExtensionOfSupportedType(FileInfo fileInfo) =>
         fileInfo.Extension.Equals(fileExtension, StringComparison.OrdinalIgnoreCase)
-        || fileInfo.Extension.Equals(".razor", StringComparison.OrdinalIgnoreCase)
+        || (fileInfo.Extension.Equals(".razor", StringComparison.OrdinalIgnoreCase) && project.Language == LanguageNames.CSharp)
         || (fileInfo.Extension.Equals(".cshtml", StringComparison.OrdinalIgnoreCase) && project.Language == LanguageNames.CSharp);
 
     private static ProjectBuilder AddDocument(Project project, string fileName, string fileContent) =>
         FromProject(project.AddDocument(fileName, fileContent).Project);
-
-    private static ProjectBuilder AddAdditionalDocument(Project project, string fileName, string fileContent) =>
-        FromProject(project.AddAdditionalDocument(fileName, fileContent).Project);
 
     public ProjectBuilder AddAnalyzerConfigDocument(string editorConfigPath, string content) =>
         FromProject(project.AddAnalyzerConfigDocument(editorConfigPath, SourceText.From(content), filePath: editorConfigPath).Project);

@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
+
 namespace SonarAnalyzer.Test.TestFramework.Tests.Build;
 
 [TestClass]
@@ -66,19 +68,18 @@ public class ProjectBuilderTest
     }
 
     [TestMethod]
-    public void AddAdditionalDocument_SupportsRazorFiles()
-    {
+    public void AddAdditionalDocument_SupportsRazorFiles() =>
         AssertAdditionalDocumentContains(EmptyCS.AddAdditionalDocument(@"TestCases\ProjectBuilder.AddDocument.razor"), "ProjectBuilder.AddDocument.razor");
-        AssertAdditionalDocumentContains(EmptyVB.AddAdditionalDocument(@"TestCases\ProjectBuilder.AddDocument.razor"), "ProjectBuilder.AddDocument.razor");
-    }
 
     [TestMethod]
     public void AddAdditionalDocument_CsharpSupportsCshtmlFiles() =>
         AssertAdditionalDocumentContains(EmptyCS.AddAdditionalDocument(@"TestCases\ProjectBuilder.AddDocument.cshtml"), "ProjectBuilder.AddDocument.cshtml");
 
-    [TestMethod]
-    public void AddAdditionalDocument_VbnetDoesntSupportCshtmlFiles() =>
-        EmptyVB.Invoking(x => x.AddAdditionalDocument(@"TestCases\ProjectBuilder.AddDocument.cshtml")).Should().Throw<ArgumentException>();
+    [DataTestMethod]
+    [DataRow("cshtml")]
+    [DataRow("razor")]
+    public void AddAdditionalDocument_VbnetDoesntSupportRazorFiles(string extension) =>
+        EmptyVB.Invoking(x => x.AddAdditionalDocument(@$"TestCases\ProjectBuilder.AddDocument.{extension}")).Should().Throw<ArgumentException>();
 
     [TestMethod]
     public void AddAdditionalDocument_CsharpDoesntSupportVbhtmlFiles() =>
@@ -105,7 +106,7 @@ public class ProjectBuilderTest
         EmptyCS.AddAnalyzerReferences(SourceGeneratorProvider.SourceGenerators).Project.AnalyzerReferences.Should().BeEquivalentTo(SourceGeneratorProvider.SourceGenerators);
 
     private static void AssertAdditionalDocumentContains(ProjectBuilder builder, string fileName) =>
-        builder.Project.AdditionalDocuments.Should().ContainSingle(x => x.Name == fileName);
+        builder.Project.AdditionalDocuments.Should().ContainSingle(x => x.Name == Path.Combine(Directory.GetCurrentDirectory(), "TestCases", fileName));
 
     [TestMethod]
     public void AddAnalyzerConfigDocument_ShouldAddDocumentToProject() =>
