@@ -306,7 +306,7 @@ stages:
           organization: 'sonarsource'
           scannerMode: 'MSBuild'
           projectKey: 'sonaranalyzer-dotnet'
-          projectName: 'SonarAnalyzer for .NET'
+          projectName: 'Sonar .NET Analyzer'
           projectVersion: '$(SONAR_PROJECT_VERSION)'
           extraProperties: |
             sonar.verbose=true
