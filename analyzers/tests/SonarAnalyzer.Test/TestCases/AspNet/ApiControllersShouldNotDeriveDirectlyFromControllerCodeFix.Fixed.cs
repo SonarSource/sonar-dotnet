@@ -15,7 +15,7 @@ namespace CodeFixCases
     public class CodeFixRespectsCommentsController : ControllerBase /* I'm a small comment and I wish to be respected */ { } // Fixed
 
     [ApiController]
-    public class CodeFixRespectsCommentsAlsoHasInterfaceController : ControllerBase /* I'm a small comment and I wish to be respected */, ITestInterface { } // Fixed
+    public class CodeFixRespectsCommentsAlsoHasInterfaceController : ControllerBase /* Ditto */, ITestInterface { } // Fixed
 
     [ApiController]
     public class ControllerWithInterface : ControllerBase, ITestInterface { } // Fixed
