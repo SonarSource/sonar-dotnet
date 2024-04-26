@@ -95,6 +95,7 @@ namespace ModelHierarchy
     public class ControllerClass : Controller
     {
         [HttpPost] public IActionResult Create(GrandChild model) => View(model);
+        [HttpPost] public IActionResult Update(Parent model) => View(model);
     }
 }
 
@@ -131,5 +132,50 @@ namespace GenericCollections
         [HttpPost] public IActionResult CreateEnumerable(IEnumerable<EnumerableItem> model) => View(model);
         [HttpPost] public IActionResult CreateList(List<ListItem> model) => View(model);
         [HttpPost] public IActionResult CreateDictionary(Dictionary<DictionaryKeyItem, DictionaryValueItem> model) => View(model);
+    }
+}
+
+namespace GenericModelWithTypeConstraint
+{
+    public class MyController : ControllerBase
+    {
+        public void Create(Model<Developer> model)
+        {
+        }
+    }
+
+    public class Model<T> where T : Person
+    {
+        public T Person { get; set; }
+    }
+
+    public abstract class Person
+    {
+        public int Age { get; set; }            // Noncompliant
+    }
+
+    public class Developer : Person
+    {
+        public string ProgramingLanguage { get; set; }
+    }
+}
+
+namespace RecursiveTypeConstraint
+{
+    public class MyController : ControllerBase
+    {
+        public void Create(MyModel model)
+        {
+        }
+    }
+
+    public class Model<T> where T : Model<T>
+    {
+        public Model<T> SubModel { get; set; }
+        public int ValueProperty { get; set; }  // Noncompliant
+    }
+
+    public class MyModel : Model<MyModel>
+    {
     }
 }

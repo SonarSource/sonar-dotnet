@@ -75,25 +75,26 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
         if (context.SemanticModel.GetDeclaredSymbol(context.Node) is IMethodSymbol method
             && method.IsControllerMethod())
         {
-            var actionParameters = method.Parameters
+            var modelParameterTypes = method.Parameters
                 .Select(x => x.Type)
                 .OfType<INamedTypeSymbol>()
                 .Where(x => !IgnoreType(x))
                 .SelectMany(x => RelatedTypesToExamine(x))
                 .Distinct();
-            foreach (var parameter in actionParameters)
+            foreach (var modelParameterType in modelParameterTypes)
             {
-                CheckInvalidProperties(parameter, context, examinedTypes);
+                CheckInvalidProperties(modelParameterType, context, examinedTypes);
             }
         }
     }
 
     private static void CheckInvalidProperties(INamedTypeSymbol parameterType, SonarSyntaxNodeReportingContext context, ConcurrentDictionary<ITypeSymbol, bool> examinedTypes)
     {
-        var invalidProperties = GetAllDeclaredProperties(parameterType, examinedTypes)
-                .Where(x => !CanBeNull(x.Type)
-                    && !x.HasAttribute(KnownType.System_ComponentModel_DataAnnotations_RequiredAttribute)
-                    && !x.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_ModelBinding_Validation_ValidateNeverAttribute));
+        var declaredProperties = new List<IPropertySymbol>();
+        GetAllDeclaredProperties(parameterType, examinedTypes, declaredProperties);
+        var invalidProperties = declaredProperties.Where(x => !CanBeNull(x.Type)
+            && !x.HasAttribute(KnownType.System_ComponentModel_DataAnnotations_RequiredAttribute)
+            && !x.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_ModelBinding_Validation_ValidateNeverAttribute));
         foreach (var property in invalidProperties)
         {
             var propertySyntax = property.DeclaringSyntaxReferences[0].GetSyntax();
@@ -112,32 +113,32 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
         || (type.IsReferenceType && type.NullableAnnotation() != NullableAnnotation.NotAnnotated)
         || type.IsNullableValueType();
 
-    private static IEnumerable<IPropertySymbol> GetAllDeclaredProperties(ITypeSymbol type, ConcurrentDictionary<ITypeSymbol, bool> examinedTypes)
+    private static void GetAllDeclaredProperties(ITypeSymbol type, ConcurrentDictionary<ITypeSymbol, bool> examinedTypes, List<IPropertySymbol> declaredProperties)
     {
-        var allProperties = Enumerable.Empty<IPropertySymbol>();
         if (type is INamedTypeSymbol namedType && examinedTypes.TryAdd(namedType, true))
         {
             var properties = namedType.GetMembers()
                 .OfType<IPropertySymbol>()
                 .Where(x => x.GetEffectiveAccessibility() == Accessibility.Public
                     && x.SetMethod?.DeclaredAccessibility is Accessibility.Public);
-            foreach (var property in properties)
+            foreach (var property in properties.Where(x => x.DeclaringSyntaxReferences.Length > 0))
             {
-                allProperties = allProperties.Append(property);
+                declaredProperties.Add(property);
                 if (property.Type.DeclaringSyntaxReferences.Length > 0)
                 {
-                    allProperties = allProperties.Concat(GetAllDeclaredProperties(property.Type, examinedTypes));
+                    GetAllDeclaredProperties(property.Type, examinedTypes, declaredProperties);
                 }
             }
-            ITypeSymbol[] types = [namedType.BaseType, .. namedType.TypeArguments];
-            allProperties = allProperties.Concat(types.SelectMany(x => GetAllDeclaredProperties(x, examinedTypes)));
+            ITypeSymbol[] relatedTypes = [namedType.BaseType, .. namedType.TypeArguments];
+            foreach (var relatedType in relatedTypes)
+            {
+                GetAllDeclaredProperties(relatedType, examinedTypes, declaredProperties);
+            }
         }
-        return allProperties;
     }
 
     private static IEnumerable<INamedTypeSymbol> RelatedTypesToExamine(INamedTypeSymbol type) =>
-        type.Implements(KnownType.System_Collections_Generic_IEnumerable_T)
-        || type.Is(KnownType.System_Collections_Generic_IEnumerable_T)
+        type.DerivesOrImplements(KnownType.System_Collections_Generic_IEnumerable_T)
             ? type.TypeArguments.OfType<INamedTypeSymbol>()
             : [type];
 }
