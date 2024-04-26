@@ -101,9 +101,13 @@ public class ProjectBuilderTest
     public void AddAnalyzerReferences_NullAnalyzer_Throws() =>
         EmptyCS.Invoking(x => x.AddAnalyzerReferences([null])).Should().Throw<ArgumentNullException>();
 
+#if NET
+
     [TestMethod]
     public void AddAnalyzerReferences_AddAnalyzer() =>
         EmptyCS.AddAnalyzerReferences(SourceGeneratorProvider.SourceGenerators).Project.AnalyzerReferences.Should().BeEquivalentTo(SourceGeneratorProvider.SourceGenerators);
+
+#endif
 
     private static void AssertAdditionalDocumentContains(ProjectBuilder builder, string fileName) =>
         builder.Project.AdditionalDocuments.Should().ContainSingle(x => x.Name == Path.Combine(Directory.GetCurrentDirectory(), "TestCases", fileName));

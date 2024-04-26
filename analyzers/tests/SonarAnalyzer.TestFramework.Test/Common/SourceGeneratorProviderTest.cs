@@ -25,6 +25,9 @@ namespace SonarAnalyzer.TestFramework.Test.Common;
 [TestClass]
 public class SourceGeneratorProviderTest
 {
+
+#if NET
+
     [TestMethod]
     public void SourceGenerators_ContainsRazorSourceGenerator() =>
         SourceGeneratorProvider.SourceGenerators.Should().ContainSingle().Which.FullPath.Should().EndWith("Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators.dll");
@@ -49,4 +52,16 @@ public class SourceGeneratorProviderTest
 
     private static AnalyzerFileReference RazorSourceGenerator =>
         SourceGeneratorProvider.SourceGenerators.Single(x => x.FullPath.EndsWith("Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators.dll"));
+
+#else
+
+    [TestMethod]
+    public void SourceGenerators_NetFramework_Throws()
+    {
+        Action action = () => { SourceGeneratorProvider.LatestSdkFolder(); };
+        action.Should().Throw<TypeInitializationException>();
+    }
+
+#endif
+
 }

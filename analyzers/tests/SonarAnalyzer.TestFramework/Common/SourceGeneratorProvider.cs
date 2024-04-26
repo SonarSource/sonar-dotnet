@@ -39,15 +39,22 @@ public static class SourceGeneratorProvider
     public static string LatestSdkFolder()
     {
         var objectAssembly = typeof(object).Assembly;
-        var objectAssemblyDirectory = new FileInfo(objectAssembly.Location).Directory; // C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.16
+        var objectAssemblyDirectory = new FileInfo(objectAssembly.Location).Directory; // C:\Program Files\dotnet\shared\Microsoft.NETCore.App\8.0.4
         var dotnetDirectory = objectAssemblyDirectory.Parent.Parent.Parent;            // C:\Program Files\dotnet
         var sdkDirectory = Path.Combine(dotnetDirectory.FullName, "sdk");              // C:\Program Files\dotnet\sdk
-        if (!Directory.Exists(sdkDirectory))
+        if (!Directory.Exists(sdkDirectory)) // Either not installed locally or .Net Framework
         {
-            throw new DirectoryNotFoundException($"Directory not found: {sdkDirectory}");
+            if (objectAssembly.FullName.Contains("mscorlib"))
+            {
+                throw new NotSupportedException($"Razor analysis is only available for .Net Core.");
+            }
+            else
+            {
+                throw new DirectoryNotFoundException($"Directory not found: {sdkDirectory}");
+            }
         }
-        var latestSdkMajorDirectories = Directory.GetDirectories(sdkDirectory, $"{objectAssembly.GetName().Version.Major}.*", SearchOption.TopDirectoryOnly);
-        return latestSdkMajorDirectories.OrderByDescending(dir => new DirectoryInfo(dir).Name).FirstOrDefault();
+        var latestSdkMajorDirectories = Directory.GetDirectories(sdkDirectory, $"{objectAssembly.GetName().Version.Major}.*", SearchOption.TopDirectoryOnly); // List of all sdk directories for the major version
+        return latestSdkMajorDirectories.OrderByDescending(dir => new DirectoryInfo(dir).Name).FirstOrDefault(); // Get the latest sdk directory
     }
 
     private sealed class AssemblyLoader : IAnalyzerAssemblyLoader
