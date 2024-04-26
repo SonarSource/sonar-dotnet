@@ -32,6 +32,9 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
     private static readonly ImmutableArray<KnownType> ControllerActionReturnTypes = ImmutableArray.Create(
         KnownType.Microsoft_AspNetCore_Mvc_IActionResult,
         KnownType.Microsoft_AspNetCore_Http_IResult);
+    private static readonly ImmutableArray<KnownType> ProducesAttributes = ImmutableArray.Create(
+        KnownType.Microsoft_AspNetCore_Mvc_ProducesAttribute,
+        KnownType.Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute);
     private static HashSet<string> ActionResultMethods =>
     [
         "Ok",
@@ -85,7 +88,7 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
                || !method.ReturnType.DerivesOrImplementsAny(ControllerActionReturnTypes)
                || method.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiConventionMethodAttribute)
                                                                || HasApiExplorerSettingsWithIgnoreApiTrue(x)
-                                                               || HasProducesResponseTypeAttributeWithReturnType(x))
+                                                               || HasProducesAttributesWithReturnType(x))
                    ? null
                    : new InvalidMethodResult(method, responseInvocations);
     }
@@ -124,7 +127,7 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
         foreach (var attribute in symbol.GetAttributesWithInherited())
         {
             if (attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiConventionTypeAttribute)
-                || HasProducesResponseTypeAttributeWithReturnType(attribute)
+                || HasProducesAttributesWithReturnType(attribute)
                 || HasApiExplorerSettingsWithIgnoreApiTrue(attribute))
             {
                 return false;
@@ -139,10 +142,10 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
             ? NoTypeMessageFormat
             : NoAttributeMessageFormat;
 
-    private static bool HasProducesResponseTypeAttributeWithReturnType(AttributeData attribute) =>
+    private static bool HasProducesAttributesWithReturnType(AttributeData attribute) =>
         attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute_T)
-        || (attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute)
-            && ContainsReturnType(attribute));
+        || attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ProducesAttribute_T)
+        || (attribute.AttributeClass.DerivesFromAny(ProducesAttributes) && ContainsReturnType(attribute));
 
     private static bool HasApiExplorerSettingsWithIgnoreApiTrue(AttributeData attribute) =>
         attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiExplorerSettingsAttribute)
