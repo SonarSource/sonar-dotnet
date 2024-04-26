@@ -53,7 +53,8 @@ public static class SourceGeneratorProvider
                 throw new DirectoryNotFoundException($"Directory not found: {sdkDirectory}");
             }
         }
-        var latestSdkMajorDirectories = Directory.GetDirectories(sdkDirectory, $"{objectAssembly.GetName().Version.Major}.*", SearchOption.TopDirectoryOnly); // List of all sdk directories for the major version
+        // List of all sdk directories for the major version
+        var latestSdkMajorDirectories = Directory.GetDirectories(sdkDirectory, $"{objectAssembly.GetName().Version.Major}.*", SearchOption.TopDirectoryOnly);
         return latestSdkMajorDirectories.OrderByDescending(dir => new DirectoryInfo(dir).Name).FirstOrDefault(); // Get the latest sdk directory
     }
 
