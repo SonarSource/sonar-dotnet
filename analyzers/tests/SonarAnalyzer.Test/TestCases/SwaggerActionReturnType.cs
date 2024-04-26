@@ -16,6 +16,14 @@ public class CompliantBaseline : Controller
     public IActionResult NotSuccessfulResult() => BadRequest(foo);
 
     [HttpGet("foo")]
+    [Produces(typeof(Foo))]
+    public IActionResult HasProducesTypeOf() => Ok(foo);
+
+    [HttpGet("foo")]
+    [Produces<Foo>()]
+    public IActionResult HasProducesGeneric() => Ok(foo);
+
+    [HttpGet("foo")]
     [ProducesResponseType(typeof(Foo), StatusCodes.Status200OK)]
     public IActionResult HasProducesResponseTypeTypeOf() => Ok(foo);
 
@@ -150,6 +158,11 @@ public class NocompliantBaseline : ControllerBase
         return Ok(foo); // Secondary
     //         ^^^^^^^
     }
+
+    [HttpGet("foo")]
+    [Produces("text/plain")]
+    public IActionResult HasProducesTypeOf() => // Noncompliant
+        Ok(foo);                                // Secondary
 
     [Route("foo")]
     [ProducesResponseType(StatusCodes.Status200OK)]
