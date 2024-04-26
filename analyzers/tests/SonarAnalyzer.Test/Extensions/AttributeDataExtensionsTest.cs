@@ -225,7 +225,7 @@ namespace SonarAnalyzer.Test.Extensions
         private static AttributeData CompileAttribute(string code, bool ignoreErrors = false) =>
             new SnippetCompiler(code, ignoreErrors, AnalyzerLanguage.CSharp).GetTypeSymbol("Program").GetAttributes().Single(x => x.HasName("MyAttribute"));
 
-        private static AttributeData AttributeDataWithName(string attributeClassName)
+        private static AttributeDataMock AttributeDataWithName(string attributeClassName)
         {
             var namedType = Substitute.For<INamedTypeSymbol>();
             namedType.Name.Returns(attributeClassName);
