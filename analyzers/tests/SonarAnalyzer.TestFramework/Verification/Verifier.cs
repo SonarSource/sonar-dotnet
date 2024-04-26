@@ -123,7 +123,7 @@ internal class Verifier
     public void VerifyCodeFix()     // This should never have any arguments
     {
         _ = codeFix ?? throw new InvalidOperationException($"{nameof(builder.CodeFix)} was not set.");
-        var document = CreateProject(false).FindDocument(Path.GetFileName(builder.Paths.Single()));
+        var document = CreateProject(false).FindDocument(Path.Combine(builder.BasePath ?? string.Empty, Path.GetFileName(builder.Paths.Single())));
         var codeFixVerifier = new CodeFixVerifier(analyzers.Single(), codeFix, document, builder.CodeFixTitle);
         var fixAllProvider = codeFix.GetFixAllProvider();
         foreach (var parseOptions in builder.ParseOptions.OrDefault(language.LanguageName))
