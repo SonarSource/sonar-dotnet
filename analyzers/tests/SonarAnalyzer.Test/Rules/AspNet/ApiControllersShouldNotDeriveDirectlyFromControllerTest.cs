@@ -25,7 +25,6 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class ApiControllersShouldNotDeriveDirectlyFromControllerTest
 {
-
 #if NET
     private readonly VerifierBuilder builder = new VerifierBuilder<ApiControllersShouldNotDeriveDirectlyFromController>()
         .AddReferences(AspNetCoreReferences)
