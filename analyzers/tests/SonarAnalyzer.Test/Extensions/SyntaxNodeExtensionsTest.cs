@@ -1094,6 +1094,15 @@ public class X
         [DataRow("""record class $$T$$ { }""", "T")]                                  // BaseTypeDeclarationSyntax
         [DataRow("""record struct $$T$$ { }""", "T")]                                 // BaseTypeDeclarationSyntax
         [DataRow("""enum $$T$$ { }""", "T")]                                          // BaseTypeDeclarationSyntax
+        [DataRow("""void M(string s) { var x = $$s?.Length$$; }""", "Length")]                                      // ConditionalAccessExpressionSyntax
+        [DataRow("""void M(string s) { $$s?.ToLower()?.ToUpper()$$; }""", "ToUpper")]                               // ConditionalAccessExpressionSyntax
+        [DataRow("""void M(string s) { $$s.ToLower()?.ToUpper()$$; }""", "ToUpper")]                                // ConditionalAccessExpressionSyntax + MemberAccessExpressionSyntax
+        [DataRow("""void M(string s) { $$s?.ToLower().ToUpper()$$; }""", "ToUpper")]                                // ConditionalAccessExpressionSyntax + MemberAccessExpressionSyntax
+        [DataRow("""void M(string s) { $$s?.ToLower().ToUpper()?.PadLeft(42).Normalize()$$; }""", "Normalize")]     // ConditionalAccessExpressionSyntax + MemberAccessExpressionSyntax
+        [DataRow("""void M(string s) { $$s.ToLower().ToUpper().PadLeft(42).Normalize()$$; }""", "Normalize")]       // MemberAccessExpressionSyntax
+        [DataRow("""void M(string s) { $$s.ToLower().ToUpper()$$.PadLeft(42).Normalize(); }""", "ToUpper")]         // MemberAccessExpressionSyntax
+        [DataRow("""void M(string s) { $$s.ToLower().ToUpper()$$?.PadLeft(42).Normalize(); }""", "ToUpper")]        // ConditionalAccessExpressionSyntax + MemberAccessExpressionSyntax
+        [DataRow("""void M(string s) { s.ToLower()?.$$ToUpper()?.PadLeft(42).Normalize()$$; }""", "Normalize")]     // MemberAccessExpressionSyntax
         [DataRow("""$$Test() { }$$""", "Test")]                                       // ConstructorDeclarationSyntax
         [DataRow("""Test() : $$this(1)$$ { }""", "this")]                             // ConstructorInitializerSyntax
         [DataRow("""Test() : $$base()$$ { }""", "base")]                              // ConstructorInitializerSyntax
@@ -1254,7 +1263,7 @@ public class X
                 using System;
 
                 $$Console.WriteLine("")$$;
-                
+
                 """, AnalyzerLanguage.CSharp, outputKind: OutputKind.ConsoleApplication);
             var actual = ExtensionsCS.EnclosingScope(node)?.Kind() ?? SyntaxKind.None;
             actual.Should().Be(SyntaxKind.CompilationUnit);
@@ -1288,7 +1297,7 @@ public class X
                         _ = {{qry}};
                     }
                 }
-                
+
                 """, AnalyzerLanguage.CSharp);
             var actual = ExtensionsCS.EnclosingScope(node)?.Kind();
             actual.Should().Be(expected);

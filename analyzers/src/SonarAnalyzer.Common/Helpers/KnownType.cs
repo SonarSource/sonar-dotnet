@@ -42,6 +42,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType FluentAssertions_AssertionExtensions = new("FluentAssertions.AssertionExtensions");
         public static readonly KnownType FluentAssertions_Execution_AssertionScope = new("FluentAssertions.Execution.AssertionScope");
         public static readonly KnownType FluentAssertions_Primitives_ReferenceTypeAssertions = new("FluentAssertions.Primitives.ReferenceTypeAssertions", "TSubject", "TAssertions");
+        public static readonly KnownType FluentValidation_IValidator = new("FluentValidation.IValidator");
         public static readonly KnownType JWT_Builder_JwtBuilder = new("JWT.Builder.JwtBuilder");
         public static readonly KnownType JWT_IJwtDecoder = new("JWT.IJwtDecoder");
         public static readonly KnownType JWT_JwtDecoderExtensions = new("JWT.JwtDecoderExtensions");
@@ -78,6 +79,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerBase = new("Microsoft.AspNetCore.Mvc.ControllerBase");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerAttribute = new("Microsoft.AspNetCore.Mvc.ControllerAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_DisableRequestSizeLimitAttribute = new("Microsoft.AspNetCore.Mvc.DisableRequestSizeLimitAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_Filters_ActionFilterAttribute = new("Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_FromServicesAttribute = new("Microsoft.AspNetCore.Mvc.FromServicesAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpDeleteAttribute = new("Microsoft.AspNetCore.Mvc.HttpDeleteAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpGetAttribute = new("Microsoft.AspNetCore.Mvc.HttpGetAttribute");
@@ -89,6 +91,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Mvc_IActionResult = new("Microsoft.AspNetCore.Mvc.IActionResult");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute = new("Microsoft.AspNetCore.Mvc.IgnoreAntiforgeryTokenAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_Infrastructure_ActionResultObjectValueAttribute = new("Microsoft.AspNetCore.Mvc.Infrastructure.ActionResultObjectValueAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_ModelBinding_ModelStateDictionary = new("Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_NonActionAttribute = new("Microsoft.AspNetCore.Mvc.NonActionAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_NonControllerAttribute = new("Microsoft.AspNetCore.Mvc.NonControllerAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ObjectResult = new("Microsoft.AspNetCore.Mvc.ObjectResult");
@@ -293,6 +296,8 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_ComponentModel_Composition_PartCreationPolicyAttribute = new("System.ComponentModel.Composition.PartCreationPolicyAttribute");
         public static readonly KnownType System_ComponentModel_DataAnnotations_KeyAttribute = new("System.ComponentModel.DataAnnotations.KeyAttribute");
         public static readonly KnownType System_ComponentModel_DataAnnotations_RegularExpressionAttribute = new("System.ComponentModel.DataAnnotations.RegularExpressionAttribute");
+        public static readonly KnownType System_ComponentModel_DataAnnotations_ValidationAttribute = new("System.ComponentModel.DataAnnotations.ValidationAttribute");
+        public static readonly KnownType System_ComponentModel_DataAnnotations_IValidatableObject = new("System.ComponentModel.DataAnnotations.IValidatableObject");
         public static readonly KnownType System_ComponentModel_DefaultValueAttribute = new("System.ComponentModel.DefaultValueAttribute");
         public static readonly KnownType System_ComponentModel_EditorBrowsableAttribute = new("System.ComponentModel.EditorBrowsableAttribute");
         public static readonly KnownType System_ComponentModel_LocalizableAttribute = new("System.ComponentModel.LocalizableAttribute");

@@ -31,12 +31,21 @@ namespace SonarAnalyzer.Test.Helpers
         public void Public_Controller_Methods_Are_EntryPoints(string aspNetMvcVersion)
         {
             const string code = @"
-public class Foo : System.Web.Mvc.Controller
+public abstract class Foo : System.Web.Mvc.Controller
 {
+    public Foo() { }
     public void PublicFoo() { }
     protected void ProtectedFoo() { }
     internal void InternalFoo() { }
     private void PrivateFoo() { }
+    public static void StaticFoo() { }
+    public virtual void VirtualFoo() { }
+    public abstract void AbstractFoo();
+    public void InFoo(in string arg) { }
+    public void OutFoo(out string arg) { arg = null; }
+    public void RefFoo(ref string arg) { }
+    public void ReadonlyRefFoo(ref readonly string arg) { }
+    public void GenericFoo<T>(T arg) { }
     private class Bar : System.Web.Mvc.Controller
     {
         public void InnerFoo() { }
@@ -45,19 +54,38 @@ public class Foo : System.Web.Mvc.Controller
     public void PublicNonAction() { }
 }";
             var compilation = TestHelper.CompileCS(code, NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion).ToArray()).Model.Compilation;
+            var constructorFoo = compilation.GetTypeByMetadataName("Foo").Constructors[0];
             var publicFoo = GetMethodSymbol(compilation, "PublicFoo");
             var protectedFoo = GetMethodSymbol(compilation, "ProtectedFoo");
             var internalFoo = GetMethodSymbol(compilation, "InternalFoo");
             var privateFoo = GetMethodSymbol(compilation, "PrivateFoo");
+            var staticFoo = GetMethodSymbol(compilation, "StaticFoo");
+            var virtualFoo = GetMethodSymbol(compilation, "VirtualFoo");
+            var abstractFoo = GetMethodSymbol(compilation, "AbstractFoo");
+            var inFoo = GetMethodSymbol(compilation, "InFoo");
+            var outFoo = GetMethodSymbol(compilation, "OutFoo");
+            var readonlyRefFoo = GetMethodSymbol(compilation, "ReadonlyRefFoo");
+            var refFoo = GetMethodSymbol(compilation, "RefFoo");
+            var genericFoo = GetMethodSymbol(compilation, "GenericFoo");
             var innerFoo = GetMethodSymbol(compilation, "InnerFoo");
             var publicNonAction = GetMethodSymbol(compilation, "PublicNonAction");
 
-            AspNetMvcHelper.IsControllerMethod(publicFoo).Should().Be(true);
-            AspNetMvcHelper.IsControllerMethod(protectedFoo).Should().Be(false);
-            AspNetMvcHelper.IsControllerMethod(internalFoo).Should().Be(false);
-            AspNetMvcHelper.IsControllerMethod(privateFoo).Should().Be(false);
-            AspNetMvcHelper.IsControllerMethod(innerFoo).Should().Be(false);
-            AspNetMvcHelper.IsControllerMethod(publicNonAction).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(constructorFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(publicFoo).Should().Be(true);
+            AspNetMvcHelper.IsControllerActionMethod(protectedFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(internalFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(privateFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(staticFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(inFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(outFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(refFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(readonlyRefFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(staticFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(virtualFoo).Should().Be(true);
+            AspNetMvcHelper.IsControllerActionMethod(abstractFoo).Should().Be(true);
+            AspNetMvcHelper.IsControllerActionMethod(genericFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(innerFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(publicNonAction).Should().Be(false);
         }
 
         [DataTestMethod]
@@ -86,10 +114,10 @@ public class MyController : Controller
             var publicDiz = GetMethodSymbol(compilation, "PublicDiz");
             var publicNonAction = GetMethodSymbol(compilation, "PublicNonAction");
 
-            AspNetMvcHelper.IsControllerMethod(publicFoo).Should().Be(true);
-            AspNetMvcHelper.IsControllerMethod(publicBar).Should().Be(false);
-            AspNetMvcHelper.IsControllerMethod(publicDiz).Should().Be(false);
-            AspNetMvcHelper.IsControllerMethod(publicNonAction).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(publicFoo).Should().Be(true);
+            AspNetMvcHelper.IsControllerActionMethod(publicBar).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(publicDiz).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(publicNonAction).Should().Be(false);
         }
 
         [DataTestMethod]
@@ -111,8 +139,8 @@ public class Foo
             var publicFoo = GetMethodSymbol(compilation, "PublicFoo");
             var publicNonAction = GetMethodSymbol(compilation, "PublicNonAction");
 
-            AspNetMvcHelper.IsControllerMethod(publicFoo).Should().Be(true);
-            AspNetMvcHelper.IsControllerMethod(publicNonAction).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(publicFoo).Should().Be(true);
+            AspNetMvcHelper.IsControllerActionMethod(publicNonAction).Should().Be(false);
         }
 
         [DataTestMethod]
@@ -131,7 +159,7 @@ public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
                 .Compilation;
             var publicFoo = GetMethodSymbol(compilation, "PublicFoo");
 
-            AspNetMvcHelper.IsControllerMethod(publicFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerActionMethod(publicFoo).Should().Be(false);
         }
 
         [DataTestMethod]
@@ -147,7 +175,7 @@ public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
 }";
             var (tree, semanticModel) = TestHelper.CompileCS(code, MetadataReferenceFacade.NetStandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)).ToArray());
             var methodSymbol = semanticModel.GetDeclaredSymbol(tree.Single<ConstructorDeclarationSyntax>()) as IMethodSymbol;
-            methodSymbol.IsControllerMethod().Should().Be(false);
+            methodSymbol.IsControllerActionMethod().Should().Be(false);
         }
 
         private static IMethodSymbol GetMethodSymbol(Compilation compilation, string name) =>

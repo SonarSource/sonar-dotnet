@@ -84,7 +84,7 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
         var responseInvocations = FindSuccessResponses(methodDeclaration, nodeContext.SemanticModel);
         return responseInvocations.Length == 0
                || nodeContext.SemanticModel.GetDeclaredSymbol(methodDeclaration, nodeContext.Cancel) is not { } method
-               || !method.IsControllerMethod()
+               || !method.IsControllerActionMethod()
                || !method.ReturnType.DerivesOrImplementsAny(ControllerActionReturnTypes)
                || method.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiConventionMethodAttribute)
                                                                || HasApiExplorerSettingsWithIgnoreApiTrue(x)

@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         || methodSymbol.GetInterfaceMember() != null
                         || methodSymbol.GetOverriddenMember() != null
                         || methodSymbol.IsTestMethod()
-                        || methodSymbol.IsControllerMethod()
+                        || methodSymbol.IsControllerActionMethod()
                         || IsSignalRHubMethod(methodSymbol))
                     {
                         return;

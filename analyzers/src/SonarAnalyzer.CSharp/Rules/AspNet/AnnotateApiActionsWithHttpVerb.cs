@@ -57,7 +57,7 @@ public sealed class AnnotateApiActionsWithHttpVerb : SonarDiagnosticAnalyzer
                         var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodNode);
                         var methodAttributes = methodSymbol.GetAttributesWithInherited();
 
-                        if (methodSymbol.IsControllerMethod()
+                        if (methodSymbol.IsControllerActionMethod()
                             && !methodSymbol.IsAbstract
                             && !methodAttributes.Any(x => x.AttributeClass.DerivesFromAny(HttpMethodAttributes))
                             && !IgnoresApiExplorer(methodAttributes))
