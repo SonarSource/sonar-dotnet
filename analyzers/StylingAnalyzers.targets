@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <ItemGroup>
+    <PackageReference Include="SonarAnalyzer.CSharp.Styling" Version="9.24.0.89429">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
