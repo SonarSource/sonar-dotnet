@@ -119,6 +119,11 @@ public static class NuGetMetadataReference
     public static References MicrosoftNetWebApiCore(string packageVersion) => Create("Microsoft.AspNet.WebApi.Core", packageVersion);
     public static References MicrosoftSqlServerCompact(string packageVersion = "4.0.8876.1") => Create("Microsoft.SqlServer.Compact", packageVersion);
     public static References MicrosoftWebXdt(string packageVersion = "3.0.0") => Create("Microsoft.Web.Xdt", packageVersion);
+    public static References MongoDBDriver(string packageVersion = Constants.NuGetLatestVersion) =>
+        Create("MongoDB.Driver", packageVersion)
+        .Concat(MongoDBDriverCore(packageVersion));
+    public static References MongoDBDriverCore(string packageVersion = Constants.NuGetLatestVersion) =>
+        Create("MongoDB.Driver.Core", packageVersion);
     public static References MonoPosixNetStandard(string packageVersion = "1.0.0") => Create("Mono.Posix.NETStandard", packageVersion, "linux-x64");
     public static References MonoDataSqlite(string packageVersion = Constants.NuGetLatestVersion) => Create("Mono.Data.Sqlite", packageVersion);
     public static References Moq(string packageVersion) => Create("Moq", packageVersion);

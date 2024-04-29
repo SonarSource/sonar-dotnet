@@ -158,7 +158,8 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
             }
             if (original == awaitableRoot && result is ExpressionSyntax resultExpression)
             {
-                result = SyntaxFactory.AwaitExpression(resultExpression);
+                result = SyntaxFactory.ParenthesizedExpression(
+                    SyntaxFactory.AwaitExpression(resultExpression.WithoutTrivia().WithLeadingTrivia(SyntaxFactory.ElasticSpace))).WithTriviaFrom(resultExpression);
             }
             return result;
         });
