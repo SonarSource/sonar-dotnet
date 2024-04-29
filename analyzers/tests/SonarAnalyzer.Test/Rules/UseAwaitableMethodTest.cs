@@ -98,7 +98,6 @@ public class UseAwaitableMethodTest
     public void UseAwaitableMethod_MongoDb() =>
         builder
         .WithOptions(ParseOptionsHelper.FromCSharp11)
-        .AddReferences([CoreMetadataReference.SystemComponentModelTypeConverter])
         .AddReferences(NuGetMetadataReference.MongoDBDriver())
         .AddPaths("UseAwaitableMethod_MongoDBDriver.cs")
         .Verify();
