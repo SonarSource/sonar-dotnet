@@ -75,9 +75,6 @@ public static class CSharpSyntaxHelper
     public static bool IsOnThis(this ExpressionSyntax expression) =>
         IsOn(expression, SyntaxKind.ThisExpression);
 
-    public static bool IsOnBase(this ExpressionSyntax expression) =>
-        IsOn(expression, SyntaxKind.BaseExpression);
-
     private static bool IsOn(this ExpressionSyntax expression, SyntaxKind onKind) =>
         expression.Kind() switch
         {
