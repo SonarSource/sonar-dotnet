@@ -78,5 +78,5 @@ public class DisjointSetsTest
     }
 
     private static void AssertSets(List<List<string>> expected, DisjointSets sets) =>
-        sets.GetAllSets().Should().BeEquivalentTo(expected, options => options.WithStrictOrdering());
+        sets.GetAllSets().Should().BeEquivalentTo(expected, x => x.WithStrictOrdering());
 }

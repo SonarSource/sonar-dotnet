@@ -26,10 +26,9 @@ public abstract class BackslashShouldBeAvoidedInAspNetRoutesBase<TSyntaxKind> : 
     private const string DiagnosticId = "S6930";
 
     protected abstract TSyntaxKind[] SyntaxKinds { get; }
+    protected abstract bool IsNamedAttributeArgument(SyntaxNode node);
 
     protected override string MessageFormat => @"Replace '\' with '/'.";
-
-    protected abstract bool IsNamedAttributeArgument(SyntaxNode node);
 
     protected BackslashShouldBeAvoidedInAspNetRoutesBase() : base(DiagnosticId) { }
 

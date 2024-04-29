@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Helpers
         /// </summary>
         public static bool IsControllerActionMethod(this IMethodSymbol methodSymbol) =>
             methodSymbol is { MethodKind: MethodKind.Ordinary, IsStatic: false }
-            && (methodSymbol.OverriddenMethod == null
+            && (methodSymbol.OverriddenMethod is null
                 || !methodSymbol.OverriddenMethod.ContainingType.IsAny(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase, KnownType.Microsoft_AspNetCore_Mvc_Controller))
             && methodSymbol.GetEffectiveAccessibility() == Accessibility.Public
             && !methodSymbol.GetAttributes().Any(d => d.AttributeClass.IsAny(NonActionTypes))
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Helpers
         /// controller.
         /// </summary>
         public static bool IsControllerType(this INamedTypeSymbol namedType) =>
-            namedType != null
+            namedType is not null
             && namedType.ContainingSymbol is not INamedTypeSymbol
             && (namedType.DerivesFromAny(ControllerTypes)
                 || namedType.GetAttributes(ControllerAttributeTypes).Any())

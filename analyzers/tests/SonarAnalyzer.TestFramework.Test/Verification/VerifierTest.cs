@@ -224,7 +224,7 @@ public class VerifierTest
         // Version below C# 10 are not compatible with our EmptyProject scaffolding due to nullable context and global using statements.
         var expectedLanguageVersions = ParseOptionsHelper.FromCSharp10.Cast<CSharpParseOptions>().Select(x => x.LanguageVersion.ToString());
         var compilations = DummyWithLocation.AddPaths("Dummy.razor").Build().Compile(false);
-        compilations.Select(c => c.Compilation.LanguageVersionString()).Should().BeEquivalentTo(expectedLanguageVersions);
+        compilations.Select(x => x.Compilation.LanguageVersionString()).Should().BeEquivalentTo(expectedLanguageVersions);
     }
 
     [TestMethod]
