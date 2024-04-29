@@ -105,6 +105,27 @@ public class CallModelStateIsValidTest
                 }
             }
 
+            [Controller]
+            public class PocoMovieController
+            {
+                private IValidator<Movie> _validator;
+
+                public PocoMovieController(IValidator<Movie> validator)
+                {
+                    _validator = validator;
+                }
+
+                [HttpPost("/[controller]")]
+                public string Add(Movie movie)  // Compliant - uses FluentValidation
+                {
+                    if (!_validator.Validate(movie).IsValid)
+                    {
+                        return "";
+                    }
+                    return "Hello!";
+                }
+            }
+
             public class NonValidatingMovieController : ControllerBase
             {
                 [HttpPost("/[controller]")]

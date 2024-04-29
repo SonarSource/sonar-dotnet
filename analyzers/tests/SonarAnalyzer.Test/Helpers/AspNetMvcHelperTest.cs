@@ -33,6 +33,7 @@ namespace SonarAnalyzer.Test.Helpers
             const string code = @"
 public abstract class Foo : System.Web.Mvc.Controller
 {
+    public Foo() { }
     public void PublicFoo() { }
     protected void ProtectedFoo() { }
     internal void InternalFoo() { }
@@ -53,6 +54,7 @@ public abstract class Foo : System.Web.Mvc.Controller
     public void PublicNonAction() { }
 }";
             var compilation = TestHelper.CompileCS(code, NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion).ToArray()).Model.Compilation;
+            var constructorFoo = compilation.GetTypeByMetadataName("Foo").Constructors[0];
             var publicFoo = GetMethodSymbol(compilation, "PublicFoo");
             var protectedFoo = GetMethodSymbol(compilation, "ProtectedFoo");
             var internalFoo = GetMethodSymbol(compilation, "InternalFoo");
@@ -68,6 +70,7 @@ public abstract class Foo : System.Web.Mvc.Controller
             var innerFoo = GetMethodSymbol(compilation, "InnerFoo");
             var publicNonAction = GetMethodSymbol(compilation, "PublicNonAction");
 
+            AspNetMvcHelper.IsControllerActionMethod(constructorFoo).Should().Be(false);
             AspNetMvcHelper.IsControllerActionMethod(publicFoo).Should().Be(true);
             AspNetMvcHelper.IsControllerActionMethod(protectedFoo).Should().Be(false);
             AspNetMvcHelper.IsControllerActionMethod(internalFoo).Should().Be(false);

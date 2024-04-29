@@ -40,6 +40,12 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(compilationStart =>
         {
+            // The rule ignores the project completely if any of these conditions are met:
+            // - the project doesn't reference ASP.NET MVC
+            // - the project references the FluentValidation library:
+            //      - as an alternative to using ModelState.IsValid
+            //      - this can made more accurate: check if those validation methods are used in the controller actions rather than just checking whether the library is referenced
+            // - the [ApiController] attribute is applied on the assembly level: this results in the attribute being applied to every Controller class in the project
             if (compilationStart.Compilation.ReferencesControllers()
                 && compilationStart.Compilation.GetTypeByMetadataName(KnownType.FluentValidation_IValidator) is null
                 && !compilationStart.Compilation.Assembly.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute))
@@ -87,13 +93,10 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
     private static bool HasActionFilterAttribute(ISymbol symbol) =>
         symbol.GetAttributes().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Filters_ActionFilterAttribute));
 
-    private static bool IsCheckingValidityProperty(SyntaxNode node, SemanticModel semanticModel)
-    {
-        var nodeIdentifier = node.GetIdentifier();
-        return nodeIdentifier?.ValueText is "IsValid" or "ValidationState"
-            && semanticModel.GetSymbolInfo(nodeIdentifier.Value.Parent).Symbol is IPropertySymbol propertySymbol
-            && propertySymbol.ContainingType.Is(KnownType.Microsoft_AspNetCore_Mvc_ModelBinding_ModelStateDictionary);
-    }
+    private static bool IsCheckingValidityProperty(SyntaxNode node, SemanticModel semanticModel) =>
+        node.GetIdentifier() is { ValueText: "IsValid" or "ValidationState" } nodeIdentifier
+        && semanticModel.GetSymbolInfo(nodeIdentifier.Parent).Symbol is IPropertySymbol propertySymbol
+        && propertySymbol.ContainingType.Is(KnownType.Microsoft_AspNetCore_Mvc_ModelBinding_ModelStateDictionary);
 
     private static bool IsTryValidateInvocation(SyntaxNode node, SemanticModel semanticModel) =>
         node is InvocationExpressionSyntax invocation
