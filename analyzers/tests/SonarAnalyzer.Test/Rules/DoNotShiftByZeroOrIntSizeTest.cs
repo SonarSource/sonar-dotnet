@@ -55,27 +55,29 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void DoNotShiftByZeroOrIntSize_RazorFile_CorrectMessage() =>
-            builder.AddSnippet(
-                """
-                @code
-                {
-                    public void Method()
+            builder
+                .AddSnippet(
+                    """
+                    @code
                     {
-                        byte b = 1;
-                        b = (byte)(b << 10);
-                        b = (byte)(b << 10);
-                        b = 1 << 0;
+                        public void Method()
+                        {
+                            byte b = 1;
+                            b = (byte)(b << 10);
+                            b = (byte)(b << 10);
+                            b = 1 << 0;
 
-                        sbyte sb = 1;
-                        sb = (sbyte)(sb << 10);
+                            sbyte sb = 1;
+                            sb = (sbyte)(sb << 10);
 
-                        int i = 1 << 10;
-                        i = i << 32;  // Noncompliant
+                            int i = 1 << 10;
+                            i = i << 32;  // Noncompliant
+                        }
                     }
-                }
-                """,
-                "SomeRazorFile.razor")
-            .Verify();
+                    """,
+                    "SomeRazorFile.razor")
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .Verify();
 
 #endif
 

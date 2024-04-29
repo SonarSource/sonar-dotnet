@@ -55,28 +55,30 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void ConditionalsWithSameCondition_RazorFile_CorrectMessage() =>
-            builder.AddSnippet(
-                """
-                @code
-                {
-                    public void doTheThing(object o) { }
-
-                    public void Method(int a, int b)
+            builder
+                .AddSnippet(
+                    """
+                    @code
                     {
-                        if (a == b)
+                        public void doTheThing(object o) { }
+
+                        public void Method(int a, int b)
                         {
-                            doTheThing(b);
-                        }
-                        if (a == b) // Noncompliant {{This condition was just checked on line 7.}}
-                        //  ^^^^^^
-                        {
-                            doTheThing(b);
+                            if (a == b)
+                            {
+                                doTheThing(b);
+                            }
+                            if (a == b) // Noncompliant {{This condition was just checked on line 7.}}
+                            //  ^^^^^^
+                            {
+                                doTheThing(b);
+                            }
                         }
                     }
-                }
-                """,
-                "SomeRazorFile.razor")
-            .Verify();
+                    """,
+                    "SomeRazorFile.razor")
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .Verify();
 
 #endif
 

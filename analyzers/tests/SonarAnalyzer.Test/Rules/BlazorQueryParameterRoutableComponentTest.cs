@@ -32,17 +32,21 @@ public class BlazorQueryParameterRoutableComponentTest
 
     [TestMethod]
     public void BlazorQueryParameterRoutableComponent_Blazor() =>
-        builder.AddPaths("BlazorQueryParameterRoutableComponent.razor")
+        builder.WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+        .AddPaths("BlazorQueryParameterRoutableComponent.razor")
+        .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
     [TestMethod]
     public void BlazorQueryParameterRoutableComponent_BlazorNoRoute() =>
-        builder.AddPaths("BlazorQueryParameterRoutableComponent_NoRoute.razor")
+        builder.WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+        .AddPaths("BlazorQueryParameterRoutableComponent_NoRoute.razor")
             .Verify();
 
     [TestMethod]
     public void BlazorQueryParameterRoutableComponent_Partial() =>
-        builder.AddPaths("BlazorQueryParameterRoutableComponent_Partial.razor.cs",
+        builder.WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+        .AddPaths("BlazorQueryParameterRoutableComponent_Partial.razor.cs",
                          "BlazorQueryParameterRoutableComponent_Partial.razor")
                .Verify();
 

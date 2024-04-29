@@ -37,29 +37,31 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void TryStatementsWithIdenticalCatchShouldBeMerged_RazorFile_CorrectMessage() =>
-            builder.AddSnippet(
-                """
-                @using System;
-                @code
-                {
-                    public void Method()
+            builder
+                .AddSnippet(
+                    """
+                    @using System;
+                    @code
                     {
-                        try { }
-                        catch (Exception)
+                        public void Method()
                         {
-                        }
-                        finally { }
+                            try { }
+                            catch (Exception)
+                            {
+                            }
+                            finally { }
 
-                        try { } // Noncompliant {{Combine this 'try' with the one starting on line 6.}}
-                        catch (Exception)
-                        {
+                            try { } // Noncompliant {{Combine this 'try' with the one starting on line 6.}}
+                            catch (Exception)
+                            {
+                            }
+                            finally { }
                         }
-                        finally { }
                     }
-                }
-                """,
-                "SomeRazorFile.razor")
-            .Verify();
+                    """,
+                    "SomeRazorFile.razor")
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .Verify();
 
 #endif
 

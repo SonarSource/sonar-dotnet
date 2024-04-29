@@ -53,17 +53,19 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void MethodOverloadOptionalParameter_Razor() =>
-            builder.AddSnippet(
-                       """
-                       @code
-                       {
-                           void Print2(string[] messages) { }
-                           void Print2(string[] messages, string delimiter = "\n") { } // Noncompliant {{This method signature overlaps the one defined on line 3, the default parameter value can't be used.}};
-                           //                             ^^^^^^^^^^^^^^^^^^^^^^^
-                       }
-                       """,
-                       "SomeRazorFile.razor")
-                   .Verify();
+            builder
+                .AddSnippet(
+                    """
+                    @code
+                    {
+                        void Print2(string[] messages) { }
+                        void Print2(string[] messages, string delimiter = "\n") { } // Noncompliant {{This method signature overlaps the one defined on line 3, the default parameter value can't be used.}};
+                        //                             ^^^^^^^^^^^^^^^^^^^^^^^
+                    }
+                    """,
+                    "SomeRazorFile.razor")
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .Verify();
 
 #endif
 

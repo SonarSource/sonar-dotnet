@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -88,9 +89,18 @@ internal class Verifier
         {
             throw new InvalidOperationException($"Cannot use {nameof(Verify)} with {nameof(builder.CodeFix)} set.");
         }
+        var paths = builder.Paths.Select(TestCasePath).ToList();
+        var contentFilePaths = paths.Where(IsRazorOrCshtml).ToArray();
+        var contentSnippets = builder.Snippets.Where(x => IsRazorOrCshtml(x.FileName)).ToArray();
+        contentSnippets = contentSnippets.Select(x =>
+        {
+            var tempFilePath = Path.Combine(Directory.GetCurrentDirectory(), "TestCases", x.FileName);
+            File.WriteAllText(tempFilePath, x.Content);
+            return x with { FileName = tempFilePath };
+        }).ToArray();
         foreach (var compilation in Compile(builder.ConcurrentAnalysis))
         {
-            DiagnosticVerifier.Verify(compilation.Compilation, analyzers, builder.ErrorBehavior, builder.AdditionalFilePath, onlyDiagnosticIds, compilation.AdditionalSourceFiles);
+            DiagnosticVerifier.Verify(compilation.Compilation, analyzers, builder.ErrorBehavior, builder.AdditionalFilePath, onlyDiagnosticIds, contentFilePaths.Concat(contentSnippets.Select(x => x.FileName)).Concat(compilation.AdditionalSourceFiles ?? []).ToArray());
         }
     }
 

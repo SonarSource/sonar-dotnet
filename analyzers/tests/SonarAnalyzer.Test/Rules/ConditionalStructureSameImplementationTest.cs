@@ -51,30 +51,32 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void ConditionalStructureSameImplementation_RazorFile_CorrectMessage() =>
-            builderCS.AddSnippet(
-                """
-                @code
-                {
-                    public bool someCondition1 { get; set; }
-                    public void DoSomething1() { }
-
-                    public void Method()
+            builderCS
+                .AddSnippet(
+                    """
+                    @code
                     {
-                        if (someCondition1)
-                        { // Secondary
-                            DoSomething1();
-                            DoSomething1();
-                        }
-                        else
-                        { // Noncompliant {{Either merge this branch with the identical one on line 9 or change one of the implementations.}}
-                            DoSomething1();
-                            DoSomething1();
+                        public bool someCondition1 { get; set; }
+                        public void DoSomething1() { }
+
+                        public void Method()
+                        {
+                            if (someCondition1)
+                            { // Secondary
+                                DoSomething1();
+                                DoSomething1();
+                            }
+                            else
+                            { // Noncompliant {{Either merge this branch with the identical one on line 9 or change one of the implementations.}}
+                                DoSomething1();
+                                DoSomething1();
+                            }
                         }
                     }
-                }
-                """,
-                "SomeRazorFile.razor")
-            .Verify();
+                    """,
+                    "SomeRazorFile.razor")
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .Verify();
 
 #endif
 
