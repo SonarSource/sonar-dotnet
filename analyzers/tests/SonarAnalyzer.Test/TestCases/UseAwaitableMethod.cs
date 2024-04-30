@@ -253,4 +253,11 @@ class ResolvesToSelf
     {
         Synchronous(); // Compliant. The fix would cause an endless loop
     }
+
+    public void Generic<T>() { }
+
+    public async Task GenericAsync<T>()
+    {
+        Generic<T>(); // Compliant. The fix would cause an endless loop
+    }
 }
