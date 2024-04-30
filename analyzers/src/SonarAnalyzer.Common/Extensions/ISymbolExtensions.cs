@@ -20,7 +20,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions // FIXME: file-scoped namespace
 {
     internal static class ISymbolExtensions
     {
@@ -73,5 +73,14 @@ namespace SonarAnalyzer.Helpers
             checkDerivedTypes
                 ? method.ContainingType.DerivesOrImplements(containingType)
                 : method.ContainingType.Is(containingType);
+
+        public static bool IsInType(this ISymbol symbol, KnownType type) =>
+            symbol is not null && symbol.ContainingType.Is(type);
+
+        public static bool IsInType(this ISymbol symbol, ITypeSymbol type) =>
+            symbol?.ContainingType is not null && symbol.ContainingType.Equals(type);
+
+        public static bool IsInType(this ISymbol symbol, ImmutableArray<KnownType> types) =>
+            symbol is not null && symbol.ContainingType.IsAny(types);
     }
 }
