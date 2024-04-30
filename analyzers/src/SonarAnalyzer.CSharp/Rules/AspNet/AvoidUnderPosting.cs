@@ -87,14 +87,17 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
     }
 
     private static bool IgnoreType(ITypeSymbol type) =>
-        type is not INamedTypeSymbol namedType
+        type is not INamedTypeSymbol namedType      // e.g. dynamic type
         || namedType.IsAny(IgnoredTypes)
-        || namedType.IsTupleType()
-        || (!namedType.IsRecord()
-            && !namedType.IsValueType
-            && !namedType.IsInterface()
-            && !namedType.Is(KnownType.System_String)
-            && !namedType.Constructors.Any(x => x.Parameters.Length == 0));
+        || !CanBeUsedInModelBinding(namedType);
+
+    private static bool CanBeUsedInModelBinding(INamedTypeSymbol type) =>
+        !type.IsTupleType()                                             // Tuples are not supported (unless a custom Model Binder is used)
+        && (type.Constructors.Any(x => x.Parameters.Length == 0)        // The type must have a parameterless constructor, unless
+            || type.IsValueType                                         // - it's a value type
+            || type.IsRecord()                                          // - it's a record type
+            || type.IsInterface()                                       // - it's an interface (although the type that implements will be actually used)
+            || type.Is(KnownType.System_String));                       // - it has a custom Model Binder (e.g. System.String has one)
 
     private static bool CanBeNull(ITypeSymbol type) =>
         type is ITypeParameterSymbol { HasValueTypeConstraint: false }

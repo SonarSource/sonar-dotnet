@@ -5,7 +5,7 @@ namespace CSharp12
 {
     public class ModelWithPrimaryConstructor(int vp, int rvp, int nvp)
     {
-        public int ValueProperty { get; set; } = vp;                        // Compliant - no default constructor
+        public int ValueProperty { get; set; } = vp;                        // Compliant - no parameterless constructor, type cannot be used for Model Binding
     }
 
     public class DerivedFromController : Controller

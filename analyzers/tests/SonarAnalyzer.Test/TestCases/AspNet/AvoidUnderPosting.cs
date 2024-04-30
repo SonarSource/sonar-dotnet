@@ -1,6 +1,7 @@
 ﻿using Basics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using MutlipleModelsInSameAction;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -248,5 +249,23 @@ namespace MutlipleModelsInSameAction
     public class CustomController : Controller
     {
         [HttpPost] public IActionResult Post(Model1 model1, int other, Model2 model2) => View(model1);
+    }
+}
+
+namespace Interfaces
+{
+    public interface IPerson
+    {
+        int Age { get; set; }                                                   // Noncompliant
+    }
+
+    public class Model
+    {
+        public IPerson Person { get; set; }
+    }
+
+    public class CustomController : Controller
+    {
+        [HttpPost] public IActionResult Post(Model model) => View(model);
     }
 }
