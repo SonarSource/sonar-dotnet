@@ -19,11 +19,12 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Test.Helpers;
 
-namespace SonarAnalyzer.Test.Helpers
+namespace SonarAnalyzer.Test.Extensions
 {
     [TestClass]
-    public class TypeHelperTest
+    public class ITypeSymbolExtensionsTest
     {
         private ClassDeclarationSyntax baseClassDeclaration;
         private ClassDeclarationSyntax derivedClassDeclaration1;
