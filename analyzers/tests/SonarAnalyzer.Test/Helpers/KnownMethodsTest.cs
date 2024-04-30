@@ -145,6 +145,8 @@ namespace SonarAnalyzer.Test.Helpers    // FIXME: File scoped NS
         public void Symbol_IsProbablyEventHandler_ResolveEventHandler()
         {
             var snippet = new SnippetCompiler("""
+                using System;
+                using System.Reflection;
                 public class AssemblyLoad
                 {
                     public AssemblyLoad()

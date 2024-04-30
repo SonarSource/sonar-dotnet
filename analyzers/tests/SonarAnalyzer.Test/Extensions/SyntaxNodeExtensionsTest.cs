@@ -1310,10 +1310,11 @@ public class X
         public void Symbol_IsKnownType()
         {
             var snippet = new SnippetCompiler("""
-                  public class Sample
-                  {
-                    public void Method<T, V>(List<T> param1, List<int> param2, List<V> param3, IList<int> param4);
-                  }
+                using System.Collections.Generic;
+                public class Sample
+                {
+                    public void Method<T, V>(List<T> param1, List<int> param2, List<V> param3, IList<int> param4) { }
+                }
                 """);
             var method = (MethodDeclarationSyntax)snippet.GetMethodDeclaration("Sample.Method");
             ExtensionsCommon.IsKnownType(method.ParameterList.Parameters[0].Type, KnownType.System_Collections_Generic_List_T, snippet.SemanticModel).Should().BeTrue();

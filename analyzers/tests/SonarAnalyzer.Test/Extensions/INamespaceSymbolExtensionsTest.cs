@@ -125,10 +125,10 @@ public class INamespaceSymbolExtensionsTest
         baseTypes.Should().ContainSingle();
         baseTypes.First().Should().Be(objectType);
 
-        var derived1Type = snippet.GetTypeSymbol("Derived1") as INamedTypeSymbol;
-        baseTypes = derived1Type.GetSelfAndBaseTypes().ToList();
+        var derivedType = snippet.GetTypeSymbol("Derived") as INamedTypeSymbol;
+        baseTypes = derivedType.GetSelfAndBaseTypes().ToList();
         baseTypes.Should().HaveCount(3);
-        baseTypes.Should().HaveElementAt(0, derived1Type);
+        baseTypes.Should().HaveElementAt(0, derivedType);
         baseTypes.Should().HaveElementAt(1, snippet.GetTypeSymbol("Base").Should().BeAssignableTo<INamedTypeSymbol>().Subject);
         baseTypes.Should().HaveElementAt(2, objectType);
     }
