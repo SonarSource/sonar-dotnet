@@ -122,8 +122,7 @@ public static class NuGetMetadataReference
     public static References MongoDBDriver(string packageVersion = Constants.NuGetLatestVersion) =>
         Create("MongoDB.Driver", packageVersion)
         .Concat(MongoDBDriverCore(packageVersion));
-    public static References MongoDBDriverCore(string packageVersion = Constants.NuGetLatestVersion) =>
-        Create("MongoDB.Driver.Core", packageVersion);
+    public static References MongoDBDriverCore(string packageVersion = Constants.NuGetLatestVersion) => Create("MongoDB.Driver.Core", packageVersion);
     public static References MonoPosixNetStandard(string packageVersion = "1.0.0") => Create("Mono.Posix.NETStandard", packageVersion, "linux-x64");
     public static References MonoDataSqlite(string packageVersion = Constants.NuGetLatestVersion) => Create("Mono.Data.Sqlite", packageVersion);
     public static References Moq(string packageVersion) => Create("Moq", packageVersion);
