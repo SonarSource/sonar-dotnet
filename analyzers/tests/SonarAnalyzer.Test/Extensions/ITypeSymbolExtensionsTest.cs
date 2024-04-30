@@ -49,6 +49,14 @@ public class ITypeSymbolExtensionsTest
     }
 
     [TestMethod]
+    public void IsAny_Null() =>
+        ((ITypeSymbol)null).IsAny(KnownType.System_Boolean).Should().BeFalse();
+
+    [TestMethod]
+    public void ImplementsAny_Null() =>
+        ((ITypeSymbol)null).ImplementsAny([KnownType.System_Boolean]).Should().BeFalse();
+
+    [TestMethod]
     public void Type_DerivesOrImplementsAny()
     {
         var baseType = new KnownType("NS.Base");

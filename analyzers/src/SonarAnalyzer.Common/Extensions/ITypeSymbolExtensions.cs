@@ -110,15 +110,15 @@ public static class ITypeSymbolExtensions
         type.IsNullableOf(KnownType.System_Boolean);
 
     public static bool Implements(this ITypeSymbol typeSymbol, KnownType type) =>
-        typeSymbol is { }
+        typeSymbol is not null
         && typeSymbol.AllInterfaces.Any(x => x.ConstructedFrom.Is(type));
 
     private static bool Implements(this ITypeSymbol typeSymbol, ISymbol type) =>
-        typeSymbol is { }
+        typeSymbol is not null
         && typeSymbol.AllInterfaces.Any(x => type.IsDefinition ? x.OriginalDefinition.Equals(type) : x.Equals(type));
 
     public static bool ImplementsAny(this ITypeSymbol typeSymbol, ImmutableArray<KnownType> types) =>
-        typeSymbol is { }
+        typeSymbol is not null
         && typeSymbol.AllInterfaces.Any(x => x.ConstructedFrom.IsAny(types));
 
     public static bool DerivesFrom(this ITypeSymbol typeSymbol, KnownType type)

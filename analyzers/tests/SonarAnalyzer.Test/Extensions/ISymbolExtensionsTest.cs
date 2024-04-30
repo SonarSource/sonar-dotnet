@@ -55,6 +55,18 @@ public class ISymbolExtensionsTest
         ISymbolExtensionsVB.GetDescendantNodes(tree.GetRoot().GetLocation(), tree.GetRoot()).Should().BeEmpty();
     }
 
+    [TestMethod]
+    public void IsInType_Null_KnownType() =>
+        ISymbolExtensionsCommon.IsInType(null, KnownType.System_Boolean).Should().BeFalse();
+
+    [TestMethod]
+    public void IsInType_Null_TypeSymbol() =>
+        ISymbolExtensionsCommon.IsInType(null, (ITypeSymbol)null).Should().BeFalse();
+
+    [TestMethod]
+    public void IsInType_Null_ArrayOfTypeSymbols() =>
+        ISymbolExtensionsCommon.IsInType(null, []).Should().BeFalse();
+
     [DataTestMethod]
     [DataRow("{ get; set; }")]
     [DataRow("{ get; }")]
