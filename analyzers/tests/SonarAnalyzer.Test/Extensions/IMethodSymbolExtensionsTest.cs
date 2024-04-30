@@ -22,232 +22,230 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Moq;
 using SonarAnalyzer.Extensions;
 
-// FIXME: File scoped NS
-namespace SonarAnalyzer.Test.Extensions
+namespace SonarAnalyzer.Test.Extensions;
+
+[TestClass]
+public class IMethodSymbolExtensionsTest
 {
-    [TestClass]
-    public class IMethodSymbolExtensionsTest
+    internal const string TestInput = """
+        using System.Linq;
+
+        namespace NS
+        {
+          public static class Helper
+          {
+            public static void ToVoid(this int self){}
+          }
+          public class Class
+          {
+            public static void TestMethod()
+            {
+              new int[] { 0, 1, 2 }.Any();
+              Enumerable.Any(new int[] { 0, 1, 2 });
+
+              new int[] { 0, 1, 2 }.Clone();
+
+              new int[] { 0, 1, 2 }.Cast<object>();
+
+              1.ToVoid();
+            }
+          }
+        }
+        """;
+
+    private SemanticModel semanticModel;
+    private List<StatementSyntax> statements;
+
+    [TestInitialize]
+    public void Compile()
     {
-        internal const string TestInput = @"
-using System.Linq;
+        var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(TestInput).GetCompilation();
 
-namespace NS
-{
-  public static class Helper
-  {
-    public static void ToVoid(this int self){}
-  }
-  public class Class
-  {
-    public static void TestMethod()
-    {
-      new int[] { 0, 1, 2 }.Any();
-      Enumerable.Any(new int[] { 0, 1, 2 });
-
-      new int[] { 0, 1, 2 }.Clone();
-
-      new int[] { 0, 1, 2 }.Cast<object>();
-
-      1.ToVoid();
+        var tree = compilation.SyntaxTrees.First();
+        semanticModel = compilation.GetSemanticModel(tree);
+        statements = tree.GetRoot().DescendantNodes()
+            .OfType<MethodDeclarationSyntax>()
+            .First(m => m.Identifier.ValueText == "TestMethod").Body
+            .DescendantNodes()
+            .OfType<StatementSyntax>().ToList();
     }
-  }
-}
-";
 
-        private SemanticModel semanticModel;
-        private List<StatementSyntax> statements;
+    [TestMethod]
+    public void Symbol_IsExtensionOnIEnumerable()
+    {
+        GetMethodSymbolForIndex(3).IsExtensionOn(KnownType.System_Collections_IEnumerable)
+            .Should().BeTrue();
 
-        [TestInitialize]
-        public void Compile()
-        {
-            var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(TestInput).GetCompilation();
+        GetMethodSymbolForIndex(2).IsExtensionOn(KnownType.System_Collections_IEnumerable)
+            .Should().BeFalse();
+        GetMethodSymbolForIndex(1).IsExtensionOn(KnownType.System_Collections_IEnumerable)
+            .Should().BeFalse();
+    }
 
-            var tree = compilation.SyntaxTrees.First();
-            semanticModel = compilation.GetSemanticModel(tree);
-            statements = tree.GetRoot().DescendantNodes()
-                .OfType<MethodDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "TestMethod").Body
-                .DescendantNodes()
-                .OfType<StatementSyntax>().ToList();
-        }
+    [TestMethod]
+    public void Symbol_IsExtensionOnGenericIEnumerable()
+    {
+        GetMethodSymbolForIndex(0).IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
+            .Should().BeTrue();
+        GetMethodSymbolForIndex(1).IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
+            .Should().BeTrue();
 
-        [TestMethod]
-        public void Symbol_IsExtensionOnIEnumerable()
-        {
-            GetMethodSymbolForIndex(3).IsExtensionOn(KnownType.System_Collections_IEnumerable)
-                .Should().BeTrue();
+        GetMethodSymbolForIndex(2).IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
+            .Should().BeFalse();
+        GetMethodSymbolForIndex(3).IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
+            .Should().BeFalse();
+    }
 
-            GetMethodSymbolForIndex(2).IsExtensionOn(KnownType.System_Collections_IEnumerable)
-                .Should().BeFalse();
-            GetMethodSymbolForIndex(1).IsExtensionOn(KnownType.System_Collections_IEnumerable)
-                .Should().BeFalse();
-        }
+    [TestMethod]
+    public void Symbol_IsExtensionOnInt()
+    {
+        GetMethodSymbolForIndex(4).IsExtensionOn(KnownType.System_Int32)
+            .Should().BeTrue();
+        GetMethodSymbolForIndex(2).IsExtensionOn(KnownType.System_Int32)
+            .Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void Symbol_IsExtensionOnGenericIEnumerable()
-        {
-            GetMethodSymbolForIndex(0).IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
-                .Should().BeTrue();
-            GetMethodSymbolForIndex(1).IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
-                .Should().BeTrue();
+    [TestMethod]
+    public void IsAnyAttributeInOverridingChain_WhenMethodSymbolIsNull_ReturnsFalse() =>
+        ((IMethodSymbol)null).IsAnyAttributeInOverridingChain().Should().BeFalse();
 
-            GetMethodSymbolForIndex(2).IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
-                .Should().BeFalse();
-            GetMethodSymbolForIndex(3).IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
-                .Should().BeFalse();
-        }
+    [DataTestMethod]
+    [DataRow(MethodKind.AnonymousFunction, "method")]
+    [DataRow(MethodKind.BuiltinOperator, "operator")]
+    [DataRow(MethodKind.Constructor, "constructor")]
+    [DataRow(MethodKind.Conversion, "operator")]
+    [DataRow(MethodKind.DeclareMethod, "method")]
+    [DataRow(MethodKind.DelegateInvoke, "method")]
+    [DataRow(MethodKind.Destructor, "destructor")]
+    [DataRow(MethodKind.EventAdd, "method")]
+    [DataRow(MethodKind.EventRaise, "method")]
+    [DataRow(MethodKind.EventRemove, "method")]
+    [DataRow(MethodKind.ExplicitInterfaceImplementation, "method")]
+    [DataRow(MethodKind.FunctionPointerSignature, "method")]
+    [DataRow(MethodKind.LambdaMethod, "method")]
+    [DataRow(MethodKind.LocalFunction, "local function")]
+    [DataRow(MethodKind.Ordinary, "method")]
+    [DataRow(MethodKind.PropertyGet, "getter")]
+    [DataRow(MethodKind.PropertySet, "setter")]
+    [DataRow(MethodKind.ReducedExtension, "method")]
+    [DataRow(MethodKind.SharedConstructor, "constructor")]
+    [DataRow(MethodKind.StaticConstructor, "constructor")]
+    [DataRow(MethodKind.UserDefinedOperator, "operator")]
+    public void GetClassification_Method(MethodKind methodKind, string expected)
+    {
+        var symbol = new Mock<IMethodSymbol>();
+        symbol.Setup(x => x.Kind).Returns(SymbolKind.Method);
+        symbol.Setup(x => x.MethodKind).Returns(methodKind);
 
-        [TestMethod]
-        public void Symbol_IsExtensionOnInt()
-        {
-            GetMethodSymbolForIndex(4).IsExtensionOn(KnownType.System_Int32)
-                .Should().BeTrue();
-            GetMethodSymbolForIndex(2).IsExtensionOn(KnownType.System_Int32)
-                .Should().BeFalse();
-        }
+        symbol.Object.GetClassification().Should().Be(expected);
+    }
 
-        [TestMethod]
-        public void IsAnyAttributeInOverridingChain_WhenMethodSymbolIsNull_ReturnsFalse() =>
-            ((IMethodSymbol)null).IsAnyAttributeInOverridingChain().Should().BeFalse();
+    [DataTestMethod]
+    [DataRow("BaseClass<int>         ", "VirtualMethod               ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute", "NotInheritedAttribute")]
+    [DataRow("DerivedOpenGeneric<int>", "VirtualMethod               ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute")]
+    [DataRow("DerivedClosedGeneric   ", "VirtualMethod               ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute")]
+    [DataRow("DerivedNoOverrides<int>", "VirtualMethod               ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute", "NotInheritedAttribute")]
+    [DataRow("DerivedOpenGeneric<int>", "GenericVirtualMethod<int>   ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute")]
+    [DataRow("DerivedClosedGeneric   ", "GenericVirtualMethod<int>   ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute")]
+    [DataRow("DerivedNoOverrides<int>", "GenericVirtualMethod<int>   ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute", "NotInheritedAttribute")]
+    [DataRow("DerivedOpenGeneric<int>", "NonVirtualMethod            ")]
+    [DataRow("DerivedClosedGeneric   ", "NonVirtualMethod            ")]
+    [DataRow("DerivedNoOverrides<int>", "NonVirtualMethod            ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute", "NotInheritedAttribute")]
+    [DataRow("DerivedOpenGeneric<int>", "GenericNonVirtualMethod<int>")]
+    [DataRow("DerivedClosedGeneric   ", "GenericNonVirtualMethod<int>")]
+    [DataRow("DerivedNoOverrides<int>", "GenericNonVirtualMethod<int>", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute", "NotInheritedAttribute")]
+    public void GetAttributesWithInherited_MethodSymbol(string className, string methodName, params string[] expectedAttributes)
+    {
+        className = className.TrimEnd();
+        methodName = methodName.TrimEnd();
+        var code = $$"""
+            using System;
 
-        [DataTestMethod]
-        [DataRow(MethodKind.AnonymousFunction, "method")]
-        [DataRow(MethodKind.BuiltinOperator, "operator")]
-        [DataRow(MethodKind.Constructor, "constructor")]
-        [DataRow(MethodKind.Conversion, "operator")]
-        [DataRow(MethodKind.DeclareMethod, "method")]
-        [DataRow(MethodKind.DelegateInvoke, "method")]
-        [DataRow(MethodKind.Destructor, "destructor")]
-        [DataRow(MethodKind.EventAdd, "method")]
-        [DataRow(MethodKind.EventRaise, "method")]
-        [DataRow(MethodKind.EventRemove, "method")]
-        [DataRow(MethodKind.ExplicitInterfaceImplementation, "method")]
-        [DataRow(MethodKind.FunctionPointerSignature, "method")]
-        [DataRow(MethodKind.LambdaMethod, "method")]
-        [DataRow(MethodKind.LocalFunction, "local function")]
-        [DataRow(MethodKind.Ordinary, "method")]
-        [DataRow(MethodKind.PropertyGet, "getter")]
-        [DataRow(MethodKind.PropertySet, "setter")]
-        [DataRow(MethodKind.ReducedExtension, "method")]
-        [DataRow(MethodKind.SharedConstructor, "constructor")]
-        [DataRow(MethodKind.StaticConstructor, "constructor")]
-        [DataRow(MethodKind.UserDefinedOperator, "operator")]
-        public void GetClassification_Method(MethodKind methodKind, string expected)
-        {
-            var symbol = new Mock<IMethodSymbol>();
-            symbol.Setup(x => x.Kind).Returns(SymbolKind.Method);
-            symbol.Setup(x => x.MethodKind).Returns(methodKind);
+            [AttributeUsage(AttributeTargets.All, Inherited = true)]
+            public class InheritedAttribute : Attribute { }
 
-            symbol.Object.GetClassification().Should().Be(expected);
-        }
+            [AttributeUsage(AttributeTargets.All, Inherited = false)]
+            public class NotInheritedAttribute : Attribute { }
 
-        [DataTestMethod]
-        [DataRow("BaseClass<int>         ", "VirtualMethod               ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute", "NotInheritedAttribute")]
-        [DataRow("DerivedOpenGeneric<int>", "VirtualMethod               ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute")]
-        [DataRow("DerivedClosedGeneric   ", "VirtualMethod               ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute")]
-        [DataRow("DerivedNoOverrides<int>", "VirtualMethod               ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute", "NotInheritedAttribute")]
-        [DataRow("DerivedOpenGeneric<int>", "GenericVirtualMethod<int>   ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute")]
-        [DataRow("DerivedClosedGeneric   ", "GenericVirtualMethod<int>   ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute")]
-        [DataRow("DerivedNoOverrides<int>", "GenericVirtualMethod<int>   ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute", "NotInheritedAttribute")]
-        [DataRow("DerivedOpenGeneric<int>", "NonVirtualMethod            ")]
-        [DataRow("DerivedClosedGeneric   ", "NonVirtualMethod            ")]
-        [DataRow("DerivedNoOverrides<int>", "NonVirtualMethod            ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute", "NotInheritedAttribute")]
-        [DataRow("DerivedOpenGeneric<int>", "GenericNonVirtualMethod<int>")]
-        [DataRow("DerivedClosedGeneric   ", "GenericNonVirtualMethod<int>")]
-        [DataRow("DerivedNoOverrides<int>", "GenericNonVirtualMethod<int>", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute", "NotInheritedAttribute")]
-        public void GetAttributesWithInherited_MethodSymbol(string className, string methodName, params string[] expectedAttributes)
-        {
-            className = className.TrimEnd();
-            methodName = methodName.TrimEnd();
-            var code = $$"""
-                using System;
+            public class DerivedInheritedAttribute: InheritedAttribute { }
 
-                [AttributeUsage(AttributeTargets.All, Inherited = true)]
-                public class InheritedAttribute : Attribute { }
+            public class DerivedNotInheritedAttribute: NotInheritedAttribute { }
 
-                [AttributeUsage(AttributeTargets.All, Inherited = false)]
-                public class NotInheritedAttribute : Attribute { }
+            public class UnannotatedAttribute : Attribute { }
 
-                public class DerivedInheritedAttribute: InheritedAttribute { }
+            public class BaseClass<T1>
+            {
+                [Inherited]
+                [DerivedInherited]
+                [NotInherited]
+                [DerivedNotInherited]
+                [Unannotated]
+                public virtual void VirtualMethod() { }
 
-                public class DerivedNotInheritedAttribute: NotInheritedAttribute { }
+                [Inherited]
+                [DerivedInherited]
+                [NotInherited]
+                [DerivedNotInherited]
+                [Unannotated]
+                public void NonVirtualMethod() { }
 
-                public class UnannotatedAttribute : Attribute { }
+                [Inherited]
+                [DerivedInherited]
+                [NotInherited]
+                [DerivedNotInherited]
+                [Unannotated]
+                public void GenericNonVirtualMethod<T2>() { }
 
-                public class BaseClass<T1>
+                [Inherited]
+                [DerivedInherited]
+                [NotInherited]
+                [DerivedNotInherited]
+                [Unannotated]
+                public virtual void GenericVirtualMethod<T2>() { }
+            }
+
+            public class DerivedOpenGeneric<T1>: BaseClass<T1>
+            {
+                public override void VirtualMethod() { }
+                public new void NonVirtualMethod() { }
+                public new void GenericNonVirtualMethod<T2>() { }
+                public override void GenericVirtualMethod<T2>() { }
+            }
+
+            public class DerivedClosedGeneric: BaseClass<int>
+            {
+                public override void VirtualMethod() { }
+                public new void NonVirtualMethod() { }
+                public new void GenericNonVirtualMethod<T2>() { }
+                public override void GenericVirtualMethod<T2>() { }
+            }
+
+            public class DerivedNoOverrides<T>: BaseClass<T> { }
+
+            public class Program
+            {
+                public static void Main()
                 {
-                    [Inherited]
-                    [DerivedInherited]
-                    [NotInherited]
-                    [DerivedNotInherited]
-                    [Unannotated]
-                    public virtual void VirtualMethod() { }
-
-                    [Inherited]
-                    [DerivedInherited]
-                    [NotInherited]
-                    [DerivedNotInherited]
-                    [Unannotated]
-                    public void NonVirtualMethod() { }
-
-                    [Inherited]
-                    [DerivedInherited]
-                    [NotInherited]
-                    [DerivedNotInherited]
-                    [Unannotated]
-                    public void GenericNonVirtualMethod<T2>() { }
-
-                    [Inherited]
-                    [DerivedInherited]
-                    [NotInherited]
-                    [DerivedNotInherited]
-                    [Unannotated]
-                    public virtual void GenericVirtualMethod<T2>() { }
+                    new {{className}}().{{methodName}}();
                 }
+            }
+            """;
+        var compiler = new SnippetCompiler(code);
+        var invocationExpression = compiler.GetNodes<InvocationExpressionSyntax>().Should().ContainSingle().Subject;
+        var method = compiler.GetSymbol<IMethodSymbol>(invocationExpression);
+        var actual = method.GetAttributesWithInherited().Select(x => x.AttributeClass.Name).ToList();
+        actual.Should().BeEquivalentTo(expectedAttributes);
 
-                public class DerivedOpenGeneric<T1>: BaseClass<T1>
-                {
-                    public override void VirtualMethod() { }
-                    public new void NonVirtualMethod() { }
-                    public new void GenericNonVirtualMethod<T2>() { }
-                    public override void GenericVirtualMethod<T2>() { }
-                }
+        // GetAttributesWithInherited should behave like MemberInfo.GetCustomAttributes from runtime reflection:
+        var type = compiler.EmitAssembly().GetType(className.Replace("<int>", "`1"), throwOnError: true);
+        var methodInfo = type.GetMethod(methodName.Replace("<int>", string.Empty));
+        methodInfo.GetCustomAttributes(inherit: true).Select(x => x.GetType().Name).Should().BeEquivalentTo(expectedAttributes);
+    }
 
-                public class DerivedClosedGeneric: BaseClass<int>
-                {
-                    public override void VirtualMethod() { }
-                    public new void NonVirtualMethod() { }
-                    public new void GenericNonVirtualMethod<T2>() { }
-                    public override void GenericVirtualMethod<T2>() { }
-                }
-
-                public class DerivedNoOverrides<T>: BaseClass<T> { }
-
-                public class Program
-                {
-                    public static void Main()
-                    {
-                        new {{className}}().{{methodName}}();
-                    }
-                }
-                """;
-            var compiler = new SnippetCompiler(code);
-            var invocationExpression = compiler.GetNodes<InvocationExpressionSyntax>().Should().ContainSingle().Subject;
-            var method = compiler.GetSymbol<IMethodSymbol>(invocationExpression);
-            var actual = method.GetAttributesWithInherited().Select(x => x.AttributeClass.Name).ToList();
-            actual.Should().BeEquivalentTo(expectedAttributes);
-
-            // GetAttributesWithInherited should behave like MemberInfo.GetCustomAttributes from runtime reflection:
-            var type = compiler.EmitAssembly().GetType(className.Replace("<int>", "`1"), throwOnError: true);
-            var methodInfo = type.GetMethod(methodName.Replace("<int>", string.Empty));
-            methodInfo.GetCustomAttributes(inherit: true).Select(x => x.GetType().Name).Should().BeEquivalentTo(expectedAttributes);
-        }
-
-        private IMethodSymbol GetMethodSymbolForIndex(int index)
-        {
-            var statement = (ExpressionStatementSyntax)statements[index];
-            var methodSymbol = semanticModel.GetSymbolInfo(statement.Expression).Symbol as IMethodSymbol;
-            return methodSymbol;
-        }
+    private IMethodSymbol GetMethodSymbolForIndex(int index)
+    {
+        var statement = (ExpressionStatementSyntax)statements[index];
+        var methodSymbol = semanticModel.GetSymbolInfo(statement.Expression).Symbol as IMethodSymbol;
+        return methodSymbol;
     }
 }
