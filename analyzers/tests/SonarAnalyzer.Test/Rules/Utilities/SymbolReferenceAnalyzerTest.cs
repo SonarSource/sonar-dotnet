@@ -237,7 +237,7 @@ namespace SonarAnalyzer.Test.Rules
                         VerifyReferences(orderedSymbols[1].Reference, 9, 42);               // y
                         VerifyReferences(orderedSymbols[1].Reference, 9, 44, 41);           // LocalMethod
 
-                        VerifyReferencesColumns(orderedSymbols[1].Reference, 13, 4, 4, 19, 33);   // currentCount: line 4
+                        VerifyReferencesColumns(orderedSymbols[1].Reference, 13, 4, 4, 19, 31);   // currentCount: line 4
                         VerifyReferencesColumns(orderedSymbols[1].Reference, 13, 6, 6, 1, 13);    // currentCount: line 6
                         VerifyReferencesColumns(orderedSymbols[1].Reference, 13, 20, 20, 8, 20);  // currentCount: line 20
                         VerifyReferencesColumns(orderedSymbols[1].Reference, 13, 48, 48, 26, 38); // currentCount: line 48
