@@ -36,14 +36,15 @@ public class RoslynControlFlowGraphTest
     [TestMethod]
     public void Create_ReturnsCfg_CS()
     {
-        const string code = @"
-public class Sample
-{
-    public int Method()
-    {
-        return 42;
-    }
-}";
+        const string code = """
+            public class Sample
+            {
+                public int Method()
+                {
+                    return 42;
+                }
+            }
+            """;
         TestHelper.CompileCfgCS(code).Should().NotBeNull();
     }
 
@@ -63,29 +64,31 @@ public class Sample
     [TestMethod]
     public void Create_ReturnsCfg_VB()
     {
-        const string code = @"
-Public Class Sample
-    Public Function Method() As Integer
-        Return 42
-    End Function
-End Class";
+        const string code = """
+            Public Class Sample
+                Public Function Method() As Integer
+                    Return 42
+                End Function
+            End Class
+            """;
         TestHelper.CompileCfg(code, AnalyzerLanguage.VisualBasic).Should().NotBeNull();
     }
 
     [TestMethod]
     public void ValidateReflection()
     {
-        const string code = @"
-public class Sample
-{
-    public int Method()
-    {
-        System.Action a = () => { };
-        return LocalMethod();
+        const string code = """
+            public class Sample
+            {
+                public int Method()
+                {
+                    System.Action a = () => { };
+                    return LocalMethod();
 
-        int LocalMethod() => 42;
-    }
-}";
+                    int LocalMethod() => 42;
+                }
+            }
+            """;
         var cfg = TestHelper.CompileCfgCS(code);
         cfg.Should().NotBeNull();
         cfg.Root.Should().NotBeNull();
@@ -105,18 +108,19 @@ public class Sample
     [TestMethod]
     public void FlowAnonymousFunctionOperations_FindsAll()
     {
-        const string code = @"
-public class Sample {
-    private System.Action<int> Simple(int a)
-    {
-        var x = 42;
-        if (a == 42)
-        {
-            return (x) => {  };
-        }
-        return x => {  };
-    }
-}";
+        const string code = """
+            public class Sample {
+                private System.Action<int> Simple(int a)
+                {
+                    var x = 42;
+                    if (a == 42)
+                    {
+                        return (x) => {  };
+                    }
+                    return x => {  };
+                }
+            }
+            """;
         var cfg = TestHelper.CompileCfgCS(code);
         var anonymousFunctionOperations = SonarAnalyzer.Extensions.ControlFlowGraphExtensions.FlowAnonymousFunctionOperations(cfg).ToList();
         anonymousFunctionOperations.Should().HaveCount(2);
