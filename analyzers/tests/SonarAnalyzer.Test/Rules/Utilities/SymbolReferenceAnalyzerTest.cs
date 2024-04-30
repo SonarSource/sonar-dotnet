@@ -237,6 +237,10 @@ namespace SonarAnalyzer.Test.Rules
                         VerifyReferences(orderedSymbols[1].Reference, 9, 42);               // y
                         VerifyReferences(orderedSymbols[1].Reference, 9, 44, 41);           // LocalMethod
 
+                        VerifyReferencesColumns(orderedSymbols[1].Reference, 13, 4, 4, 19, 33);  // currentCount: line 4
+                        VerifyReferencesColumns(orderedSymbols[1].Reference, 13, 6, 6, 1, 13);   // currentCount: line 6
+                        VerifyReferencesColumns(orderedSymbols[1].Reference, 13, 20, 20, 8, 20); // currentCount: line 20
+
                         orderedSymbols[3].FilePath.Should().EndWith("RazorComponent.razor"); // RazorComponent.razor
                         // https://github.com/SonarSource/sonar-dotnet/issues/8417
                         // Net8 SDK: Declaration (1,0) - (1,17) Reference (1,6) - (1,23) <- Overlapping
@@ -350,6 +354,16 @@ namespace SonarAnalyzer.Test.Rules
             references.Where(x => x.Declaration is not null).Should().HaveCount(expectedDeclarationCount);
             references.Single(x => x.Declaration.StartLine == assertedDeclarationLine).Reference.Select(x => x.StartLine)
                       .Should().BeEquivalentTo(assertedDeclarationLineReferences);
+        }
+
+        private static void VerifyReferencesColumns(IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference> symbolReference, int declarationLine, int startLine, int endLine, int startOffset, int endOffset)
+        {
+            var orderedSym = symbolReference
+                .Single(x => x.Declaration.StartLine == declarationLine).Reference
+                .Select(x => (x.StartLine, x.EndLine, x.StartOffset, x.EndOffset))
+                .ToArray();
+            var reference = orderedSym.SingleOrDefault(x => x.StartLine == startLine && x.EndLine == endLine && x.StartOffset == startOffset && x.EndOffset == endOffset);
+            reference.Should().NotBeNull();
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
