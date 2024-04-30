@@ -18,28 +18,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Extensions;
+
+internal static class SyntaxNodeExtensions
 {
-    public static class SymbolHelper
+    public static bool IsKnownType(this SyntaxNode syntaxNode, KnownType knownType, SemanticModel semanticModel)
     {
+        var symbolType = semanticModel.GetSymbolInfo(syntaxNode).Symbol.GetSymbolType();
 
-
-
-
-
-        internal static bool IsKnownType(this SyntaxNode syntaxNode, KnownType knownType, SemanticModel semanticModel)
-        {
-            var symbolType = semanticModel.GetSymbolInfo(syntaxNode).Symbol.GetSymbolType();
-
-            return symbolType.Is(knownType) || symbolType?.OriginalDefinition?.Is(knownType) == true;
-        }
-
-        internal static bool IsDeclarationKnownType(this SyntaxNode syntaxNode, KnownType knownType, SemanticModel semanticModel)
-        {
-            var symbolType = semanticModel.GetDeclaredSymbol(syntaxNode)?.GetSymbolType();
-            return symbolType.Is(knownType);
-        }
-
-
+        return symbolType.Is(knownType) || symbolType?.OriginalDefinition?.Is(knownType) == true;
     }
+
+    public static bool IsDeclarationKnownType(this SyntaxNode syntaxNode, KnownType knownType, SemanticModel semanticModel)
+    {
+        var symbolType = semanticModel.GetDeclaredSymbol(syntaxNode)?.GetSymbolType();
+        return symbolType.Is(knownType);
+    }
+
 }
