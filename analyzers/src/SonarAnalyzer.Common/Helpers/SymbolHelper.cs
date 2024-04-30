@@ -18,28 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Reflection;
-
 namespace SonarAnalyzer.Helpers
 {
     public static class SymbolHelper
     {
-        private static readonly PropertyInfo ITypeSymbolIsRecord = typeof(ITypeSymbol).GetProperty("IsRecord");
-
-        public static IEnumerable<INamedTypeSymbol> GetSelfAndBaseTypes(this ITypeSymbol type)
-        {
-            if (type == null)
-            {
-                yield break;
-            }
-
-            var currentType = type;
-            while (currentType?.Kind == SymbolKind.NamedType)
-            {
-                yield return (INamedTypeSymbol)currentType;
-                currentType = currentType.BaseType;
-            }
-        }
 
         public static bool IsExtensionOn(this IMethodSymbol methodSymbol, KnownType type)
         {
@@ -104,10 +86,6 @@ namespace SonarAnalyzer.Helpers
 
             return false;
         }
-
-
-        public static bool IsRecord(this ITypeSymbol typeSymbol)
-            => ITypeSymbolIsRecord?.GetValue(typeSymbol) is true;
 
     }
 }
