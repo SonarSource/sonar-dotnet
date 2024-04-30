@@ -65,7 +65,7 @@ public class INamedTypeSymbolExtensionsTest
 #if DEBUG
         new Action(() => symbol.Object.GetClassification()).Should().Throw<NotSupportedException>();
 #else
-            fakeSymbol.Object.GetClassification().Should().Be("type");
+        symbol.Object.GetClassification().Should().Be("type");
 #endif
     }
 
