@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Helpers
         protected abstract TContext CreateContext(SonarSyntaxNodeReportingContext context);
 
         public void Track(TrackerInput input, params Condition[] conditions) =>
-            Track(input, Array.Empty<object>(), conditions);
+            Track(input, [], conditions);
 
         public void Track(TrackerInput input, object[] diagnosticMessageArgs, params Condition[] conditions)
         {
@@ -36,40 +36,36 @@ namespace SonarAnalyzer.Helpers
               {
                   if (input.IsEnabled(c.Options))
                   {
-                      c.RegisterNodeAction(
-                          Language.GeneratedCodeRecognizer,
-                          TrackAndReportIfNecessary,
-                          TrackedSyntaxKinds);
+                      c.RegisterNodeAction(Language.GeneratedCodeRecognizer, TrackAndReportIfNecessary, TrackedSyntaxKinds);
                   }
               });
 
             void TrackAndReportIfNecessary(SonarSyntaxNodeReportingContext c)
             {
                 if (CreateContext(c) is { } trackingContext
-                    && conditions.All(c => c(trackingContext))
-                    && trackingContext.PrimaryLocation != null
+                    && Array.TrueForAll(conditions, x => x(trackingContext))
+                    && trackingContext.PrimaryLocation is not null
                     && trackingContext.PrimaryLocation != Location.None)
                 {
-                    c.ReportIssue(
-                        Diagnostic.Create(input.Rule,
-                                          trackingContext.PrimaryLocation,
-                                          trackingContext.SecondaryLocations.ToAdditionalLocations(),
-                                          trackingContext.SecondaryLocations.ToProperties(),
-                                          diagnosticMessageArgs));
+                    c.ReportIssue(input.Rule,
+                        trackingContext.PrimaryLocation,
+                        trackingContext.SecondaryLocations.ToAdditionalLocations(),
+                        trackingContext.SecondaryLocations.ToProperties(),
+                        diagnosticMessageArgs);
                 }
             }
         }
 
         public Condition ExceptWhen(Condition condition) =>
-            value => !condition(value);
+            x => !condition(x);
 
         public Condition And(Condition condition1, Condition condition2) =>
-            value => condition1(value) && condition2(value);
+            x => condition1(x) && condition2(x);
 
         public Condition Or(Condition condition1, Condition condition2) =>
-            value => condition1(value) || condition2(value);
+            x => condition1(x) || condition2(x);
 
         public Condition Or(Condition condition1, Condition condition2, Condition condition3) =>
-            value => condition1(value) || condition2(value) || condition3(value);
+            x => condition1(x) || condition2(x) || condition3(x);
     }
 }

@@ -103,6 +103,9 @@ public abstract class SonarTreeReportingContextBase<TContext> : SonarReportingCo
     public void ReportIssue(DiagnosticDescriptor rule, SyntaxToken locationToken, IEnumerable<SyntaxNode> additionalLocations, params object[] messageArgs) =>
         ReportIssueCore(Diagnostic.Create(rule, locationToken.GetLocation(), additionalLocations.Select(x => x.GetLocation()), messageArgs));
 
+    public void ReportIssue(DiagnosticDescriptor rule, Location location, IEnumerable<Location> additionalLocations, ImmutableDictionary<string, string> properties, params object[] messageArgs) =>
+        ReportIssueCore(Diagnostic.Create(rule, location, additionalLocations, properties, messageArgs));
+
     public void ReportIssue(DiagnosticDescriptor rule, Location location, params object[] messageArgs) =>
         ReportIssueCore(Diagnostic.Create(rule, location, messageArgs));
 }
