@@ -357,15 +357,9 @@ namespace SonarAnalyzer.Test.Rules
                       .Should().BeEquivalentTo(assertedDeclarationLineReferences);
         }
 
-        private static void VerifyReferencesColumns(IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference> symbolReference, int declarationLine, int startLine, int endLine, int startOffset, int endOffset)
-        {
-            var orderedSym = symbolReference
-                .Single(x => x.Declaration.StartLine == declarationLine).Reference
-                .Select(x => (x.StartLine, x.EndLine, x.StartOffset, x.EndOffset))
-                .ToArray();
-            var reference = orderedSym.SingleOrDefault(x => x.StartLine == startLine && x.EndLine == endLine && x.StartOffset == startOffset && x.EndOffset == endOffset);
-            reference.Should().NotBeNull();
-        }
+        private static void VerifyReferencesColumns(IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference> symbolReference, int declarationLine, int startLine, int endLine, int startOffset, int endOffset) =>
+            symbolReference.Single(x => x.Declaration.StartLine == declarationLine).Reference
+                .Should().ContainSingle(x => x.StartLine == startLine && x.EndLine == endLine && x.StartOffset == startOffset && x.EndOffset == endOffset);
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
         private sealed class TestSymbolReferenceAnalyzer_CS : CS.SymbolReferenceAnalyzer
