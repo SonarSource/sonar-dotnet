@@ -23,9 +23,9 @@ extern alias vbnet;
 
 using Moq;
 using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
-using CSharpSyntaxNodeExtensions = csharp::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
+using CSharpSyntaxNodeExtensions = csharp::SonarAnalyzer.Extensions.SyntaxNodeExtensionsCSharp;
 using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using VBSyntaxNodeExtensions = vbnet::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
+using VBSyntaxNodeExtensions = vbnet::SonarAnalyzer.Extensions.SyntaxNodeExtensionsCSharp;
 
 namespace SonarAnalyzer.Test.Helpers
 {

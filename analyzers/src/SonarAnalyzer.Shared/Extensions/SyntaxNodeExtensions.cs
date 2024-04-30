@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Extensions
 {
-    public static partial class SyntaxNodeExtensions
+    public static partial class SyntaxNodeExtensionsCSharp
     {
         public static bool ContainsGetOrSetOnDependencyProperty(this SyntaxNode syntaxNode, Compilation compilation)
         {

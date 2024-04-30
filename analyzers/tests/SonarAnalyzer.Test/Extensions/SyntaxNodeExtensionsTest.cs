@@ -31,8 +31,8 @@ using SonarAnalyzer.CFG.Roslyn;
 using StyleCop.Analyzers.Lightup;
 using static csharp::SonarAnalyzer.Extensions.SyntaxTokenExtensions;
 using ExtensionsCommon = common::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
-using ExtensionsCS = csharp::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
-using ExtensionsVB = vbnet::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
+using ExtensionsCS = csharp::SonarAnalyzer.Extensions.SyntaxNodeExtensionsCSharp;
+using ExtensionsVB = vbnet::SonarAnalyzer.Extensions.SyntaxNodeExtensionsCSharp;
 using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using SyntaxVB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 

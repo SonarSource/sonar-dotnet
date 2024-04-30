@@ -22,7 +22,7 @@ using SonarAnalyzer.CFG.Roslyn;
 
 namespace SonarAnalyzer.Extensions
 {
-    public static partial class SyntaxNodeExtensions
+    public static partial class SyntaxNodeExtensionsCSharp
     {
         private static readonly ControlFlowGraphCache CfgCache = new();
         private static readonly SyntaxKind[] ParenthesizedNodeKinds = [SyntaxKind.ParenthesizedExpression, SyntaxKindEx.ParenthesizedPattern];

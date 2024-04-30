@@ -22,7 +22,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace SonarAnalyzer.Extensions;
 
-internal static class ISymbolExtensions
+public static class ISymbolExtensions
 {
     public static bool HasAttribute(this ISymbol symbol, KnownType type) =>
         symbol.GetAttributes(type).Any();
