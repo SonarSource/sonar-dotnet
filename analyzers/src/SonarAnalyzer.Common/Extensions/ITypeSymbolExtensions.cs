@@ -39,9 +39,6 @@ public static class ITypeSymbolExtensions
     public static bool IsClassOrStruct(this ITypeSymbol self) =>
         self.IsStruct() || self.IsClass();
 
-    public static bool Is(this ITypeSymbol self, TypeKind typeKind) =>
-        self?.TypeKind == typeKind;
-
     public static bool IsNullableValueType(this ITypeSymbol self) =>
         self.IsStruct() && self is { SpecialType: SpecialType.System_Nullable_T } or { OriginalDefinition.SpecialType: SpecialType.System_Nullable_T };
 
@@ -58,6 +55,9 @@ public static class ITypeSymbolExtensions
 
     public static bool CanBeNull(this ITypeSymbol self) =>
         self is { IsReferenceType: true } || self.IsNullableValueType();
+
+    public static bool Is(this ITypeSymbol self, TypeKind typeKind) =>
+        self?.TypeKind == typeKind;
 
     public static bool Is(this ITypeSymbol typeSymbol, KnownType type) =>
         typeSymbol is not null && type.Matches(typeSymbol);
