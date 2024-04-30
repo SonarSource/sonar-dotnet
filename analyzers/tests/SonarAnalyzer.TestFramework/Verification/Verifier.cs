@@ -40,8 +40,7 @@ internal class Verifier
     private readonly SonarCodeFix codeFix;
     private readonly AnalyzerLanguage language;
     private readonly string[] onlyDiagnosticIds;
-    private readonly string[] contentFilePaths;
-    private readonly string[] contentSnippets;
+    private readonly string[] razorFilePaths;
 
     public Verifier(VerifierBuilder builder)
     {
@@ -83,13 +82,13 @@ internal class Verifier
             codeFix = builder.CodeFix();
             ValidateCodeFix();
         }
-        contentFilePaths = builder.Paths.Select(TestCasePath).Where(IsRazorOrCshtml).ToArray();
-        contentSnippets = builder.Snippets.Where(x => IsRazorOrCshtml(x.FileName)).Select(x =>
-        {
-            var tempFilePath = Path.Combine(Directory.GetCurrentDirectory(), "TestCases", x.FileName);
-            File.WriteAllText(tempFilePath, x.Content);
-            return tempFilePath;
-        }).ToArray();
+        razorFilePaths = builder.Paths.Select(TestCasePath).Where(IsRazorOrCshtml)
+            .Concat(builder.Snippets.Where(x => IsRazorOrCshtml(x.FileName)).Select(x =>
+            {
+                var tempFilePath = Path.Combine(Directory.GetCurrentDirectory(), "TestCases", x.FileName);
+                File.WriteAllText(tempFilePath, x.Content);
+                return tempFilePath;
+            })).ToArray();
     }
 
     public void Verify()    // This should never have any arguments
@@ -100,7 +99,7 @@ internal class Verifier
         }
         foreach (var compilation in Compile(builder.ConcurrentAnalysis))
         {
-            var additionalSourceFiles = contentFilePaths.Concat(contentSnippets).Concat(compilation.AdditionalSourceFiles ?? []).ToArray();
+            var additionalSourceFiles = razorFilePaths.Concat(compilation.AdditionalSourceFiles ?? []).ToArray();
             DiagnosticVerifier.Verify(compilation.Compilation, analyzers, builder.ErrorBehavior, builder.AdditionalFilePath, onlyDiagnosticIds, additionalSourceFiles);
         }
     }
@@ -170,27 +169,32 @@ internal class Verifier
     private ProjectBuilder CreateProject(bool concurrentAnalysis)
     {
         var paths = builder.Paths.Select(TestCasePath).ToList();
-        var sourceFilePaths = paths.Except(contentFilePaths).ToArray();
-        var sourceSnippets = builder.Snippets.Where(x => !IsRazorOrCshtml(x.FileName)).ToArray(); // Cannot use Except because it Distincts the elements
+        var sourceFilePaths = paths.Except(razorFilePaths).ToArray();
+        var sourceSnippets = builder.Snippets.Where(x => !IsRazorOrCshtml(x.FileName)).ToArray();
         var editorConfigGenerator = new EditorConfigGenerator(Directory.GetCurrentDirectory());
-        var hasContentDocuments = contentFilePaths.Length > 0 || contentSnippets.Length > 0;
-        concurrentAnalysis = !hasContentDocuments && concurrentAnalysis; // Concurrent analysis is not supported for Razor or cshtml files due to namespace issues
-        var concurrentContentFiles = concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(contentFilePaths) : [];
-        return SolutionBuilder.Create()
+        var hasRazorFiles = razorFilePaths.Length > 0;
+        concurrentAnalysis = !hasRazorFiles && concurrentAnalysis; // Concurrent analysis is not supported for Razor or cshtml files due to namespace issues
+        var concurrentSourceFiles = concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(sourceFilePaths) : [];
+        var concurrentContentFiles = concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(razorFilePaths) : [];
+        var projectBuilder = SolutionBuilder.Create()
             .AddProject(language, builder.OutputKind)
             .AddSnippets(sourceSnippets)
             .AddDocuments(sourceFilePaths)
-            .AddDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(sourceFilePaths) : [])
-            .AddAdditionalDocuments(contentFilePaths)
+            .AddDocuments(concurrentSourceFiles)
             .AddAdditionalDocuments(concurrentContentFiles)
-            .AddAdditionalDocuments(contentSnippets.Length > 0 ? contentSnippets : [])
-            .AddReferences(builder.References)
-            .AddReferences(hasContentDocuments ? NuGetMetadataReference.MicrosoftAspNetCoreAppRef("7.0.17") : [])
-            .AddReferences(hasContentDocuments ? NuGetMetadataReference.SystemTextEncodingsWeb("7.0.0") : [])
-            .AddAnalyzerReferences(hasContentDocuments ? SourceGeneratorProvider.SourceGenerators : [])
-            .AddAnalyzerConfigDocument(
-                Path.Combine(Directory.GetCurrentDirectory(), ".editorconfig"),
-                editorConfigGenerator.Generate(concurrentContentFiles.Concat(contentFilePaths).Concat(contentSnippets)));
+            .AddReferences(builder.References);
+        if (hasRazorFiles)
+        {
+            projectBuilder = projectBuilder
+                .AddAdditionalDocuments(razorFilePaths)
+                .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreAppRef("7.0.17"))
+                .AddReferences(NuGetMetadataReference.SystemTextEncodingsWeb("7.0.0"))
+                .AddAnalyzerReferences(SourceGeneratorProvider.SourceGenerators)
+                .AddAnalyzerConfigDocument(
+                    Path.Combine(Directory.GetCurrentDirectory(), ".editorconfig"),
+                    editorConfigGenerator.Generate(concurrentContentFiles.Concat(razorFilePaths)));
+        }
+        return projectBuilder;
     }
 
     private IEnumerable<string> CreateConcurrencyTest(IEnumerable<string> paths)
