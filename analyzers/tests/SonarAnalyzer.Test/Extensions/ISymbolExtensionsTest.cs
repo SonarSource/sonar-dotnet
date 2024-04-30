@@ -18,13 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias vbnet;
+extern alias common;
 extern alias csharp;
+extern alias vbnet;
 
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using CodeAnalysisCS = Microsoft.CodeAnalysis.CSharp;
 using CodeAnalysisVB = Microsoft.CodeAnalysis.VisualBasic;
-using ISymbolExtensionsCommon = SonarAnalyzer.Helpers.ISymbolExtensions;
+using ISymbolExtensionsCommon = common::SonarAnalyzer.Extensions.ISymbolExtensions;
 using ISymbolExtensionsCS = csharp::SonarAnalyzer.Extensions.ISymbolExtensions;
 using ISymbolExtensionsVB = vbnet::SonarAnalyzer.Extensions.ISymbolExtensions;
 
@@ -54,18 +55,26 @@ public class ISymbolExtensionsTest
         ISymbolExtensionsVB.GetDescendantNodes(tree.GetRoot().GetLocation(), tree.GetRoot()).Should().BeEmpty();
     }
 
+    [TestMethod]
+    public void IsInType_Null_KnownType() =>
+        ISymbolExtensionsCommon.IsInType(null, KnownType.System_Boolean).Should().BeFalse();
+
+    [TestMethod]
+    public void IsInType_Null_TypeSymbol() =>
+        ISymbolExtensionsCommon.IsInType(null, (ITypeSymbol)null).Should().BeFalse();
+
+    [TestMethod]
+    public void IsInType_Null_ArrayOfTypeSymbols() =>
+        ISymbolExtensionsCommon.IsInType(null, []).Should().BeFalse();
+
     [DataTestMethod]
     [DataRow("{ get; set; }")]
     [DataRow("{ get; }")]
     [DataRow("{ get; } = string.Empty;")]
     [DataRow("{ get; set; } = string.Empty;")]
-
 #if NET
-
     [DataRow("{ get; init; }")]
-
 #endif
-
     public void IsAutoProperty_AutoProperty_CS(string getterSetter)
     {
         var code = $$"""
@@ -80,74 +89,79 @@ public class ISymbolExtensionsTest
     [TestMethod]
     public void IsAutoProperty_AutoProperty_VB()
     {
-        const string code = @"
-Public Class Sample
+        const string code = """
+            Public Class Sample
 
-    Public Property SymbolMember As String
+                Public Property SymbolMember As String
 
-End Class";
+            End Class
+            """;
         ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.VisualBasic)).Should().BeTrue();
     }
 
     [TestMethod]
     public void IsAutoProperty_ExplicitProperty_CS()
     {
-        const string code = @"
-public class Sample
-{
-    private string _SymbolMember; // Try to confuse the method with auto-like implementation
+        const string code = """
+            public class Sample
+            {
+                private string _SymbolMember; // Try to confuse the method with auto-like implementation
 
-    public string SymbolMember
-    {
-        get => _SymbolMember;
-        set { _SymbolMember = value; }
-    }
-}";
+                public string SymbolMember
+                {
+                    get => _SymbolMember;
+                    set { _SymbolMember = value; }
+                }
+            }
+            """;
         ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.CSharp)).Should().BeFalse();
     }
 
     [TestMethod]
     public void IsAutoProperty_ExplicitProperty_VB()
     {
-        const string code = @"
-Public Class Sample
+        const string code = """
+            Public Class Sample
 
-    Private _SymbolMember As String ' Try to confuse the method with auto-like implementation
+                Private _SymbolMember As String ' Try to confuse the method with auto-like implementation
 
-    Public Property SymbolMember As String
-        Get
-            Return _SymbolMember
-        End Get
-        Set(value As String)
-            _SymbolMember = value
-        End Set
-    End Property
+                Public Property SymbolMember As String
+                    Get
+                        Return _SymbolMember
+                    End Get
+                    Set(value As String)
+                        _SymbolMember = value
+                    End Set
+                End Property
 
-End Class";
+            End Class
+            """;
         ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.VisualBasic)).Should().BeFalse();
     }
 
     [TestMethod]
     public void IsAutoProperty_NonpropertySymbol_CS()
     {
-        const string code = @"
-public class Sample
-{
-    public void SymbolMember() { }
-}";
+        const string code = """
+            public class Sample
+            {
+                public void SymbolMember() { }
+            }
+            """;
         ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.CSharp)).Should().BeFalse();
     }
 
     [TestMethod]
     public void IsAutoProperty_NonpropertySymbol_VB()
     {
-        const string code = @"
-Public Class Sample
+        const string code = """
+            Public Class Sample
 
-    Public Sub SymbolMember()
-    End Sub
+                Public Sub SymbolMember()
+                End Sub
 
-End Class";
+            End Class
+            """;
         ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.VisualBasic)).Should().BeFalse();
     }
 
@@ -162,12 +176,12 @@ End Class";
     [DataRow("class SymbolMember { SymbolMember() { } };", false)]
     [DataRow("class Base(int i); class SymbolMember() : Base(1);", true)]
     [DataRow("""
-    class Base(int i);
-    class SymbolMember : Base
-    {
-        @SymbolMember() : base(1) { }
-    }
-    """, false)]
+        class Base(int i);
+        class SymbolMember : Base
+        {
+            @SymbolMember() : base(1) { }
+        }
+        """, false)]
     [DataRow("struct SymbolMember();", true)]
     [DataRow("struct SymbolMember() { }", true)]
     [DataRow("struct SymbolMember(int a) { }", true)]

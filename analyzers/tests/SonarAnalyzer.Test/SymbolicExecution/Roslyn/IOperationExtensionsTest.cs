@@ -19,9 +19,10 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Operations;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using StyleCop.Analyzers.Lightup;
+using Operations = Microsoft.CodeAnalysis.Operations;
 
 namespace SonarAnalyzer.Test.SymbolicExecution.Roslyn;
 
@@ -31,7 +32,7 @@ public class IOperationExtensionsTest
     [TestMethod]
     public void TrackedSymbol_LocalReference_IsVariableSymbol()
     {
-        var localReference = ((ISimpleAssignmentOperation)TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0]).Target;
+        var localReference = ((Operations.ISimpleAssignmentOperation)TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0]).Target;
         var symbol = localReference.ToLocalReference().Local;
         localReference.TrackedSymbol(ProgramState.Empty).Should().Be(symbol);
     }
@@ -39,8 +40,8 @@ public class IOperationExtensionsTest
     [TestMethod]
     public void TrackedSymbol_ParameterReference_IsParameterSymbol()
     {
-        var expressionStatement = (IExpressionStatementOperation)TestHelper.CompileCfgBodyCS("parameter = true;", "bool parameter").Blocks[1].Operations[0];
-        var parameterReference = ((ISimpleAssignmentOperation)expressionStatement.Operation).Target;
+        var expressionStatement = (Operations.IExpressionStatementOperation)TestHelper.CompileCfgBodyCS("parameter = true;", "bool parameter").Blocks[1].Operations[0];
+        var parameterReference = ((Operations.ISimpleAssignmentOperation)expressionStatement.Operation).Target;
         var symbol = IParameterReferenceOperationWrapper.FromOperation(parameterReference).Parameter;
         parameterReference.TrackedSymbol(ProgramState.Empty).Should().Be(symbol);
     }
@@ -54,8 +55,8 @@ public class IOperationExtensionsTest
     {
         var code = $"public class C {{ int field; static int StaticField; void Method() {{ {assignment}; }} }}";
         var graph = TestHelper.CompileCfgCS(code);
-        var expressionStatement = (IExpressionStatementOperation)graph.Blocks[1].Operations[0];
-        var assignmentTarget = ((ISimpleAssignmentOperation)expressionStatement.Operation).Target;
+        var expressionStatement = (Operations.IExpressionStatementOperation)graph.Blocks[1].Operations[0];
+        var assignmentTarget = ((Operations.ISimpleAssignmentOperation)expressionStatement.Operation).Target;
         var fieldReferenceSymbol = IFieldReferenceOperationWrapper.FromOperation(assignmentTarget).Field;
         assignmentTarget.TrackedSymbol(ProgramState.Empty).Should().Be(fieldReferenceSymbol);
     }
@@ -78,8 +79,8 @@ public class IOperationExtensionsTest
             }
             """;
         var cfg = TestHelper.CompileCfgCS(code);
-        var assignment = (ISimpleAssignmentOperation)cfg.Blocks[1].Operations.Single();
-        var enumReference = (IFieldReferenceOperation)assignment.Value;
+        var assignment = (Operations.ISimpleAssignmentOperation)cfg.Blocks[1].Operations.Single();
+        var enumReference = (Operations.IFieldReferenceOperation)assignment.Value;
         enumReference.TrackedSymbol(ProgramState.Empty).Should().BeNull();
     }
 
@@ -136,8 +137,8 @@ public class IOperationExtensionsTest
                 }
             """;
         var graph = TestHelper.CompileCfgCS(code);
-        var expressionStatement = (IExpressionStatementOperation)graph.Blocks[1].Operations[0];
-        var assignmentTarget = ((ISimpleAssignmentOperation)expressionStatement.Operation).Target;
+        var expressionStatement = (Operations.IExpressionStatementOperation)graph.Blocks[1].Operations[0];
+        var assignmentTarget = ((Operations.ISimpleAssignmentOperation)expressionStatement.Operation).Target;
         var propertyReferenceSymbol = IPropertyReferenceOperationWrapper.FromOperation(assignmentTarget).Property;
         assignmentTarget.TrackedSymbol(ProgramState.Empty).Should().Be(tracked ? propertyReferenceSymbol : null);
     }
@@ -191,7 +192,7 @@ public class IOperationExtensionsTest
 
     [TestMethod]
     public void TrackedSymbol_NullSafe() =>
-        IOperationExtensions.TrackedSymbol(null, ProgramState.Empty).Should().BeNull();
+        SonarAnalyzer.SymbolicExecution.Roslyn.IOperationExtensions.TrackedSymbol(null, ProgramState.Empty).Should().BeNull();
 
     [TestMethod]
     public void TrackedSymbol_DeclarationExpression_Tuple()

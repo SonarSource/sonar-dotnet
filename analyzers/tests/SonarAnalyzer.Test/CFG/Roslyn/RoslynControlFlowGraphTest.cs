@@ -24,115 +24,118 @@ using SonarAnalyzer.CFG.Roslyn;
 using StyleCop.Analyzers.Lightup;
 using FlowAnalysis = Microsoft.CodeAnalysis.FlowAnalysis;
 
-namespace SonarAnalyzer.Test.CFG.Roslyn
+namespace SonarAnalyzer.Test.CFG.Roslyn;
+
+[TestClass]
+public class RoslynControlFlowGraphTest
 {
-    [TestClass]
-    public class RoslynControlFlowGraphTest
-    {
-        [TestMethod]
-        public void IsAvailable_IsTrue() =>
-            ControlFlowGraph.IsAvailable.Should().BeTrue();
+    [TestMethod]
+    public void IsAvailable_IsTrue() =>
+        ControlFlowGraph.IsAvailable.Should().BeTrue();
 
-        [TestMethod]
-        public void Create_ReturnsCfg_CS()
-        {
-            const string code = @"
-public class Sample
-{
-    public int Method()
+    [TestMethod]
+    public void Create_ReturnsCfg_CS()
     {
-        return 42;
+        const string code = """
+            public class Sample
+            {
+                public int Method()
+                {
+                    return 42;
+                }
+            }
+            """;
+        TestHelper.CompileCfgCS(code).Should().NotBeNull();
     }
-}";
-            TestHelper.CompileCfgCS(code).Should().NotBeNull();
-        }
 
-        [TestMethod]
-        public void Create_ReturnsCfg_TopLevelStatements()
-        {
-            const string code = """
-                MethodA();
-                MethodB();
-
-                void MethodA() { }
-                void MethodB() { }
-                """;
-            TestHelper.CompileCfg(code, AnalyzerLanguage.CSharp, outputKind: OutputKind.ConsoleApplication).Should().NotBeNull();
-        }
-
-        [TestMethod]
-        public void Create_ReturnsCfg_VB()
-        {
-            const string code = @"
-Public Class Sample
-    Public Function Method() As Integer
-        Return 42
-    End Function
-End Class";
-            TestHelper.CompileCfg(code, AnalyzerLanguage.VisualBasic).Should().NotBeNull();
-        }
-
-        [TestMethod]
-        public void ValidateReflection()
-        {
-            const string code = @"
-public class Sample
-{
-    public int Method()
+    [TestMethod]
+    public void Create_ReturnsCfg_TopLevelStatements()
     {
-        System.Action a = () => { };
-        return LocalMethod();
+        const string code = """
+            MethodA();
+            MethodB();
 
-        int LocalMethod() => 42;
+            void MethodA() { }
+            void MethodB() { }
+            """;
+        TestHelper.CompileCfg(code, AnalyzerLanguage.CSharp, outputKind: OutputKind.ConsoleApplication).Should().NotBeNull();
     }
-}";
-            var cfg = TestHelper.CompileCfgCS(code);
-            cfg.Should().NotBeNull();
-            cfg.Root.Should().NotBeNull();
-            cfg.Blocks.Should().NotBeNull().And.HaveCount(3); // Enter, Instructions, Exit
-            cfg.OriginalOperation.Should().NotBeNull().And.BeAssignableTo<IMethodBodyOperation>();
-            cfg.Parent.Should().BeNull();
-            cfg.LocalFunctions.Should().HaveCount(1);
 
-            var localFunctionCfg = cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single(), default);
-            localFunctionCfg.Should().NotBeNull();
-            localFunctionCfg.Parent.Should().Be(cfg);
-
-            var anonymousFunction = cfg.Blocks.SelectMany(x => x.Operations).SelectMany(x => x.DescendantsAndSelf()).OfType<FlowAnalysis.IFlowAnonymousFunctionOperation>().Single();
-            cfg.GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper.FromOperation(anonymousFunction), default).Should().NotBeNull();
-        }
-
-        [TestMethod]
-        public void FlowAnonymousFunctionOperations_FindsAll()
-        {
-            const string code = @"
-public class Sample {
-    private System.Action<int> Simple(int a)
+    [TestMethod]
+    public void Create_ReturnsCfg_VB()
     {
-        var x = 42;
-        if (a == 42)
-        {
-            return (x) => {  };
-        }
-        return x => {  };
+        const string code = """
+            Public Class Sample
+                Public Function Method() As Integer
+                    Return 42
+                End Function
+            End Class
+            """;
+        TestHelper.CompileCfg(code, AnalyzerLanguage.VisualBasic).Should().NotBeNull();
     }
-}";
-            var cfg = TestHelper.CompileCfgCS(code);
-            var anonymousFunctionOperations = SonarAnalyzer.Extensions.ControlFlowGraphExtensions.FlowAnonymousFunctionOperations(cfg).ToList();
-            anonymousFunctionOperations.Should().HaveCount(2);
-            cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunctionOperations[0], default).Should().NotBeNull();
-            cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunctionOperations[1], default).Should().NotBeNull();
-        }
 
-        [TestMethod]
-        public void RoslynCfgSupportedVersions()
-        {
-            // We are running on 3 rd major version - it is the minimum requirement
-            RoslynHelper.IsRoslynCfgSupported().Should().BeTrue();
-            // If we set minimum requirement to 2 - we will able to pass the check even with old MsBuild
-            RoslynHelper.IsRoslynCfgSupported(2).Should().BeTrue();
-            // If we set minimum requirement to 100 - we won't be able to pass the check
-            RoslynHelper.IsRoslynCfgSupported(100).Should().BeFalse();
-        }
+    [TestMethod]
+    public void ValidateReflection()
+    {
+        const string code = """
+            public class Sample
+            {
+                public int Method()
+                {
+                    System.Action a = () => { };
+                    return LocalMethod();
+
+                    int LocalMethod() => 42;
+                }
+            }
+            """;
+        var cfg = TestHelper.CompileCfgCS(code);
+        cfg.Should().NotBeNull();
+        cfg.Root.Should().NotBeNull();
+        cfg.Blocks.Should().NotBeNull().And.HaveCount(3); // Enter, Instructions, Exit
+        cfg.OriginalOperation.Should().NotBeNull().And.BeAssignableTo<IMethodBodyOperation>();
+        cfg.Parent.Should().BeNull();
+        cfg.LocalFunctions.Should().HaveCount(1);
+
+        var localFunctionCfg = cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single(), default);
+        localFunctionCfg.Should().NotBeNull();
+        localFunctionCfg.Parent.Should().Be(cfg);
+
+        var anonymousFunction = cfg.Blocks.SelectMany(x => x.Operations).SelectMany(x => x.DescendantsAndSelf()).OfType<FlowAnalysis.IFlowAnonymousFunctionOperation>().Single();
+        cfg.GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper.FromOperation(anonymousFunction), default).Should().NotBeNull();
+    }
+
+    [TestMethod]
+    public void FlowAnonymousFunctionOperations_FindsAll()
+    {
+        const string code = """
+            public class Sample {
+                private System.Action<int> Simple(int a)
+                {
+                    var x = 42;
+                    if (a == 42)
+                    {
+                        return (x) => {  };
+                    }
+                    return x => {  };
+                }
+            }
+            """;
+        var cfg = TestHelper.CompileCfgCS(code);
+        var anonymousFunctionOperations = SonarAnalyzer.Extensions.ControlFlowGraphExtensions.FlowAnonymousFunctionOperations(cfg).ToList();
+        anonymousFunctionOperations.Should().HaveCount(2);
+        cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunctionOperations[0], default).Should().NotBeNull();
+        cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunctionOperations[1], default).Should().NotBeNull();
+    }
+
+    [TestMethod]
+    public void RoslynCfgSupportedVersions()
+    {
+        // We are running on 3 rd major version - it is the minimum requirement
+        RoslynHelper.IsRoslynCfgSupported().Should().BeTrue();
+        // If we set minimum requirement to 2 - we will able to pass the check even with old MsBuild
+        RoslynHelper.IsRoslynCfgSupported(2).Should().BeTrue();
+        // If we set minimum requirement to 100 - we won't be able to pass the check
+        RoslynHelper.IsRoslynCfgSupported(100).Should().BeFalse();
     }
 }

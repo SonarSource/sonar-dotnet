@@ -18,12 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Extensions;
 
-public static class TypeHelper
+public static class ITypeSymbolExtensions
 {
-    #region TypeKind
-
     public static bool IsInterface(this ITypeSymbol self) =>
         self is { TypeKind: TypeKind.Interface };
 
@@ -40,9 +38,6 @@ public static class TypeHelper
 
     public static bool IsClassOrStruct(this ITypeSymbol self) =>
         self.IsStruct() || self.IsClass();
-
-    public static bool Is(this ITypeSymbol self, TypeKind typeKind) =>
-        self?.TypeKind == typeKind;
 
     public static bool IsNullableValueType(this ITypeSymbol self) =>
         self.IsStruct() && self is { SpecialType: SpecialType.System_Nullable_T } or { OriginalDefinition.SpecialType: SpecialType.System_Nullable_T };
@@ -61,16 +56,15 @@ public static class TypeHelper
     public static bool CanBeNull(this ITypeSymbol self) =>
         self is { IsReferenceType: true } || self.IsNullableValueType();
 
-    #endregion TypeKind
-
-    #region TypeName
+    public static bool Is(this ITypeSymbol self, TypeKind typeKind) =>
+        self?.TypeKind == typeKind;
 
     public static bool Is(this ITypeSymbol typeSymbol, KnownType type) =>
-        typeSymbol != null && type.Matches(typeSymbol);
+        typeSymbol is not null && type.Matches(typeSymbol);
 
     public static bool IsAny(this ITypeSymbol typeSymbol, params KnownType[] types)
     {
-        if (typeSymbol == null)
+        if (typeSymbol is null)
         {
             return false;
         }
@@ -89,7 +83,7 @@ public static class TypeHelper
 
     public static bool IsAny(this ITypeSymbol typeSymbol, ImmutableArray<KnownType> types)
     {
-        if (typeSymbol == null)
+        if (typeSymbol is null)
         {
             return false;
         }
@@ -112,39 +106,25 @@ public static class TypeHelper
     public static bool IsNullableOf(this ITypeSymbol type, KnownType typeArgument) =>
         NullableTypeArgument(type).Is(typeArgument);
 
-    public static bool IsType(this IParameterSymbol parameter, KnownType type) =>
-        parameter != null && parameter.Type.Is(type);
-
-    public static bool IsInType(this ISymbol symbol, KnownType type) =>
-        symbol != null && symbol.ContainingType.Is(type);
-
-    public static bool IsInType(this ISymbol symbol, ITypeSymbol type) =>
-        symbol?.ContainingType != null && symbol.ContainingType.Equals(type);
-
-    public static bool IsInType(this ISymbol symbol, ImmutableArray<KnownType> types) =>
-        symbol != null && symbol.ContainingType.IsAny(types);
-
-    #endregion TypeName
-
     public static bool IsNullableBoolean(this ITypeSymbol type) =>
         type.IsNullableOf(KnownType.System_Boolean);
 
     public static bool Implements(this ITypeSymbol typeSymbol, KnownType type) =>
-        typeSymbol is { }
+        typeSymbol is not null
         && typeSymbol.AllInterfaces.Any(x => x.ConstructedFrom.Is(type));
 
     private static bool Implements(this ITypeSymbol typeSymbol, ISymbol type) =>
-        typeSymbol is { }
+        typeSymbol is not null
         && typeSymbol.AllInterfaces.Any(x => type.IsDefinition ? x.OriginalDefinition.Equals(type) : x.Equals(type));
 
     public static bool ImplementsAny(this ITypeSymbol typeSymbol, ImmutableArray<KnownType> types) =>
-        typeSymbol is { }
-        && typeSymbol.AllInterfaces.Any(symbol => symbol.ConstructedFrom.IsAny(types));
+        typeSymbol is not null
+        && typeSymbol.AllInterfaces.Any(x => x.ConstructedFrom.IsAny(types));
 
     public static bool DerivesFrom(this ITypeSymbol typeSymbol, KnownType type)
     {
         var currentType = typeSymbol;
-        while (currentType != null)
+        while (currentType is not null)
         {
             if (currentType.Is(type))
             {
@@ -159,7 +139,7 @@ public static class TypeHelper
     public static bool DerivesFrom(this ITypeSymbol typeSymbol, ITypeSymbol type)
     {
         var currentType = typeSymbol;
-        while (currentType != null)
+        while (currentType is not null)
         {
             if (currentType.Equals(type))
             {
@@ -174,7 +154,7 @@ public static class TypeHelper
     public static bool DerivesFromAny(this ITypeSymbol typeSymbol, ImmutableArray<KnownType> baseTypes)
     {
         var currentType = typeSymbol;
-        while (currentType != null)
+        while (currentType is not null)
         {
             if (currentType.IsAny(baseTypes))
             {
