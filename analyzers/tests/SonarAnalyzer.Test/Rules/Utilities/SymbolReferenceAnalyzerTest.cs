@@ -220,9 +220,9 @@ namespace SonarAnalyzer.Test.Rules
         public void Verify_Razor() =>
             CreateBuilder(ProjectType.Product, "Razor.razor", "Razor.razor.cs", "RazorComponent.razor", "ToDo.cs", "Razor.cshtml")
                 .WithConcurrentAnalysis(false)
-                .VerifyUtilityAnalyzer<SymbolReferenceInfo>(symbols =>
+                .VerifyUtilityAnalyzer<SymbolReferenceInfo>(x =>
                     {
-                        var orderedSymbols = symbols.OrderBy(x => x.FilePath, StringComparer.InvariantCulture).ToArray();
+                        var orderedSymbols = x.OrderBy(x => x.FilePath, StringComparer.InvariantCulture).ToArray();
                         orderedSymbols.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo("_Imports.razor", "Razor.razor", "Razor.razor.cs", "RazorComponent.razor", "ToDo.cs");
                         orderedSymbols[0].FilePath.Should().EndWith("_Imports.razor");
                         orderedSymbols[1].FilePath.Should().EndWith("Razor.razor");
@@ -357,7 +357,12 @@ namespace SonarAnalyzer.Test.Rules
                       .Should().BeEquivalentTo(assertedDeclarationLineReferences);
         }
 
-        private static void VerifyReferencesColumns(IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference> symbolReference, int declarationLine, int startLine, int endLine, int startOffset, int endOffset) =>
+        private static void VerifyReferencesColumns(IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference> symbolReference,
+                                                    int declarationLine,
+                                                    int startLine,
+                                                    int endLine,
+                                                    int startOffset,
+                                                    int endOffset) =>
             symbolReference.Single(x => x.Declaration.StartLine == declarationLine).Reference
                 .Should().ContainSingle(x => x.StartLine == startLine && x.EndLine == endLine && x.StartOffset == startOffset && x.EndOffset == endOffset);
 
