@@ -23,24 +23,6 @@ namespace SonarAnalyzer.Helpers
     public static class SymbolHelper
     {
 
-        public static bool IsExtensionOn(this IMethodSymbol methodSymbol, KnownType type)
-        {
-            if (!(methodSymbol is { IsExtensionMethod: true }))
-            {
-                return false;
-            }
-
-            var receiverType = methodSymbol.ReceiverType as INamedTypeSymbol;
-
-            if (methodSymbol.MethodKind == MethodKind.Ordinary)
-            {
-                receiverType = methodSymbol.Parameters.First().Type as INamedTypeSymbol;
-            }
-
-            var constructedFrom = receiverType?.ConstructedFrom;
-            return constructedFrom.Is(type);
-        }
-
         public static bool IsAnyAttributeInOverridingChain(IPropertySymbol propertySymbol) =>
             IsAnyAttributeInOverridingChain(propertySymbol, property => property.OverriddenProperty);
 
@@ -48,8 +30,6 @@ namespace SonarAnalyzer.Helpers
             IsAnyAttributeInOverridingChain(methodSymbol, method => method.OverriddenMethod);
 
 
-        public static bool IsDestructor(this IMethodSymbol method) =>
-            method.MethodKind == MethodKind.Destructor;
 
 
         internal static bool IsKnownType(this SyntaxNode syntaxNode, KnownType knownType, SemanticModel semanticModel)
