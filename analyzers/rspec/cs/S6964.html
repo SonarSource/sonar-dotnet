@@ -1,0 +1,112 @@
+<p><a
+href="https://learn.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/model-validation-in-aspnet-web-api#data-annotations">"Under-posting"</a>
+refers to a situation where a client sends less data than expected to the server during an HTTP request, for example when the client omits some
+properties from the request body that the server expects to receive.</p>
+<h2>Why is this an issue?</h2>
+<p>One of the main issues that under-posting can cause is data inconsistency. If the client sends less data than expected, the application might fill
+any value type properties with their default values, leading to inaccurate or inconsistent data in your database. Additionally, there might be
+unexpected behavior if there are certain data expected that are not provided and even security issues; for example, if a user omits a role or
+permission field from a POST request, and the server fills in a default value, it could inadvertently grant more access than intended.</p>
+<p>A <a href="https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-model">model class</a> (in this case the
+<code>Product</code> class) can be an input of an HTTP handler method:</p>
+<pre>
+public class ProductsController : Controller
+{
+    [HttpPost]
+    public IActionResult Create([FromBody]Product product)
+    {
+        // Process product data...
+    }
+}
+</pre>
+<h3>Exceptions</h3>
+<ul>
+  <li> This rule does not raise an issue for properties decorated with the <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.validation.validateneverattribute">ValidateNever</a>
+  attribute. </li>
+</ul>
+<h2>How to fix it</h2>
+<p>You should mark any model value-type property as <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types">nullable</a> or annotate it with the <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.requiredattribute">Required attribute</a>. Thus, when a
+client underposts, you ensure that the missing properties can be detected on the server side rather than being auto-filled, and therefore, incoming
+data meets the application’s expectations.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int NumberOfItems { get; set; }  // Noncompliant
+    public decimal Price { get; set; }      // Noncompliant
+}
+</pre>
+<p>If the client sends a request without setting the <code>NumberOfItems</code> or <code>Price</code> properties, they will default to <code>0</code>.
+In the request handler method there’s no way to determine whether they were intentionally set to <code>0</code> or omitted by mistake.</p>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int? NumberOfItems { get; set; }         // Compliant - property is optional
+    [Required] public decimal Price { get; set; }  // Compliant - property must have a value
+}
+</pre>
+<p>In this example the request handler method can</p>
+<ul>
+  <li> manually check whether <code>NumberOfItems</code> was filled out through the <code>HasValue</code> property </li>
+  <li> rely on Model Validation to make sure <code>Price</code> is not missing </li>
+</ul>
+<pre>
+public class ProductsController : Controller
+{
+    [HttpPost]
+    public IActionResult Create(Product product)
+    {
+        if (!ModelState.IsValid)    // if product.Price is missing then the model state will not be valid
+        {
+            return View(product);
+        }
+
+        if (product.NumberOfItems.HasValue)
+        {
+            // ...
+        }
+        // Process input...
+    }
+}
+</pre>
+<h2>Recommended Secure Coding Practices</h2>
+<ul>
+  <li> Client-Side Validation: While server-side validation is crucial, implementing client-side validation can provide immediate feedback to the user
+  when certain fields are not filled out, which helps to avoid under-posting. </li>
+  <li> Comprehensive Testing: Include testing scenarios that specifically check for under-posting vulnerabilities to ensure that all required data is
+  correctly validated and processed. </li>
+</ul>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/overview">Overview of ASP.NET Core MVC</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/getting-started">Overview of
+  ASP.NET MVC 5</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/razor-pages">Overview of ASP.NET Razor Pages</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-model">Model Classes in ASP.NET MVC</a>
+  </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/model-binding">Model Binding in ASP.NET Core</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/model-validation-in-aspnet-web-api">Model Validation in
+  ASP.NET Web API</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types">Nullable
+  Value Types in .NET</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/model-validation-in-aspnet-web-api#data-annotations">Data
+  Annotations</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.routing.httpmethodattribute">RequiredAttribute
+  Class</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.validation.validateneverattribute">ValidateNeverAttribute
+  Class</a> </li>
+</ul>
+
