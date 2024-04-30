@@ -39,4 +39,7 @@ internal static class IMethodSymbolExtensions
 
     public static bool IsDestructor(this IMethodSymbol method) =>
         method.MethodKind == MethodKind.Destructor;
+
+    public static bool IsAnyAttributeInOverridingChain(this IMethodSymbol method) =>
+        method.IsAnyAttributeInOverridingChain(x => x.OverriddenMethod);
 }

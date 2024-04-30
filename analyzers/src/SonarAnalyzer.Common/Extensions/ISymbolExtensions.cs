@@ -266,6 +266,25 @@ internal static class ISymbolExtensions
         && symbol.ContainingType.GetAttributes().Any(x => x.AttributeClass.Is(KnownType.System_SerializableAttribute))
         && !symbol.GetAttributes().Any(x => x.AttributeClass.Is(KnownType.System_NonSerializedAttribute));
 
+    public static bool IsAnyAttributeInOverridingChain<TSymbol>(this TSymbol symbol, Func<TSymbol, TSymbol> overriddenMember)
+        where TSymbol : class, ISymbol
+    {
+        var currentSymbol = symbol;
+        while (currentSymbol is not null)
+        {
+            if (currentSymbol.GetAttributes().Any())
+            {
+                return true;
+            }
+            if (!currentSymbol.IsOverride)
+            {
+                return false;
+            }
+            currentSymbol = overriddenMember(currentSymbol);
+        }
+        return false;
+    }
+
     private static bool CanBeInterfaceMember(ISymbol symbol) =>
         symbol.Kind == SymbolKind.Method
         || symbol.Kind == SymbolKind.Property

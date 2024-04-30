@@ -22,28 +22,6 @@ namespace SonarAnalyzer.Extensions;
 
 internal static class IPropertySymbolExtensions
 {
-    public static bool IsAnyAttributeInOverridingChain(IPropertySymbol propertySymbol) =>
-        IsAnyAttributeInOverridingChain(propertySymbol, x => x.OverriddenProperty);
-
-    public static bool IsAnyAttributeInOverridingChain(IMethodSymbol methodSymbol) =>
-        IsAnyAttributeInOverridingChain(methodSymbol, x => x.OverriddenMethod);
-
-    private static bool IsAnyAttributeInOverridingChain<TSymbol>(TSymbol symbol, Func<TSymbol, TSymbol> overriddenMember)
-        where TSymbol : class, ISymbol
-    {
-        var currentSymbol = symbol;
-        while (currentSymbol is not null)
-        {
-            if (currentSymbol.GetAttributes().Any())
-            {
-                return true;
-            }
-            if (!currentSymbol.IsOverride)
-            {
-                return false;
-            }
-            currentSymbol = overriddenMember(currentSymbol);
-        }
-        return false;
-    }
+    public static bool IsAnyAttributeInOverridingChain(this IPropertySymbol property) =>
+        property.IsAnyAttributeInOverridingChain(x => x.OverriddenProperty);
 }
