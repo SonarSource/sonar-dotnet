@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Test.Helpers;
 
 namespace SonarAnalyzer.Test.Extensions;
@@ -35,22 +36,16 @@ public class ITypeSymbolExtensionsTest
     [TestInitialize]
     public void Compile()
     {
-        using (var workspace = new AdhocWorkspace())
-        {
-            var document = workspace.CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
-                .AddDocument("test", SymbolHelperTest.TestInput);
-            var compilation = document.Project.GetCompilationAsync().Result;
-            var tree = compilation.SyntaxTrees.First();
-            semanticModel = compilation.GetSemanticModel(tree);
+        using var workspace = new AdhocWorkspace();
+        var document = workspace.CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp).AddDocument("test", SymbolHelperTest.TestInput);
+        var compilation = document.Project.GetCompilationAsync().Result;
+        var tree = compilation.SyntaxTrees.First();
+        semanticModel = compilation.GetSemanticModel(tree);
 
-            root = tree.GetRoot();
-            baseClassDeclaration = root.DescendantNodes().OfType<ClassDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Base");
-            derivedClassDeclaration1 = root.DescendantNodes().OfType<ClassDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Derived1");
-            derivedClassDeclaration2 = root.DescendantNodes().OfType<ClassDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Derived2");
-        }
+        root = tree.GetRoot();
+        baseClassDeclaration = root.DescendantNodes().OfType<ClassDeclarationSyntax>().First(x => x.Identifier.ValueText == "Base");
+        derivedClassDeclaration1 = root.DescendantNodes().OfType<ClassDeclarationSyntax>().First(x => x.Identifier.ValueText == "Derived1");
+        derivedClassDeclaration2 = root.DescendantNodes().OfType<ClassDeclarationSyntax>().First(x => x.Identifier.ValueText == "Derived2");
     }
 
     [TestMethod]
@@ -134,14 +129,14 @@ public class ITypeSymbolExtensionsTest
     {
         var fieldSymbol = FirstFieldSymbolFromCode($$"""
             struct CustomStruct { }
-                record struct RecordStruct { }
-                ref struct CustomRefStruct { }
+            record struct RecordStruct { }
+            ref struct CustomRefStruct { }
 
-                ref struct Test
-                {
-                    {{type}} field;
-                }
-                """);
+            ref struct Test
+            {
+                {{type}} field;
+            }
+            """);
         fieldSymbol.Type.IsStruct().Should().BeTrue();
     }
 
@@ -152,10 +147,10 @@ public class ITypeSymbolExtensionsTest
     {
         var fieldSymbol = FirstFieldSymbolFromCode($$"""
             class Test
-                {
-                    {{type}} field;
-                }
-                """);
+            {
+                {{type}} field;
+            }
+            """);
         fieldSymbol.Type.IsStruct().Should().BeFalse();
     }
 
@@ -166,11 +161,11 @@ public class ITypeSymbolExtensionsTest
     {
         var fieldSymbol = FirstFieldSymbolFromCode($$"""
             using System;
-                class Test<T> where T: {{typeConstraint}}
-                {
-                    T field;
-                }
-                """);
+            class Test<T> where T: {{typeConstraint}}
+            {
+                T field;
+            }
+            """);
         fieldSymbol.Type.IsStruct().Should().BeTrue();
     }
 
@@ -182,11 +177,11 @@ public class ITypeSymbolExtensionsTest
     {
         var fieldSymbol = FirstFieldSymbolFromCode($$"""
             using System;
-                class Test<T> where T: struct
-                {
-                    {{type}} field;
-                }
-                """);
+            class Test<T> where T: struct
+            {
+                {{type}} field;
+            }
+            """);
         fieldSymbol.Type.IsStruct().Should().BeTrue();
     }
 
@@ -205,11 +200,11 @@ public class ITypeSymbolExtensionsTest
     {
         var fieldSymbol = FirstFieldSymbolFromCode($$"""
             using System;
-                class Test<T> {{typeConstraint}}
-                {
-                    T field;
-                }
-                """);
+            class Test<T> {{typeConstraint}}
+            {
+                T field;
+            }
+            """);
         fieldSymbol.Type.IsStruct().Should().BeFalse();
     }
 
@@ -230,12 +225,12 @@ public class ITypeSymbolExtensionsTest
     {
         var fieldSymbol = FirstFieldSymbolFromCode($$"""
             #nullable enable
-                using System;
-                class Test<T> {{typeConstraint}}
-                {
-                    T? field;
-                }
-                """);
+            using System;
+            class Test<T> {{typeConstraint}}
+            {
+                T? field;
+            }
+            """);
         fieldSymbol.Type.IsStruct().Should().BeFalse();
     }
 
@@ -244,11 +239,11 @@ public class ITypeSymbolExtensionsTest
     {
         var fieldSymbol = FirstFieldSymbolFromCode($$"""
             using System;
-                class Test<T, U> where U: T
-                {
-                    U field;
-                }
-                """);
+            class Test<T, U> where U: T
+            {
+                U field;
+            }
+            """);
         fieldSymbol.Type.IsStruct().Should().BeFalse();
     }
 
@@ -281,14 +276,14 @@ public class ITypeSymbolExtensionsTest
     {
         var fieldSymbol = FirstFieldSymbolFromCode($$"""
             struct CustomStruct { }
-                record struct RecordStruct { }
-                ref struct CustomRefStruct { }
+            record struct RecordStruct { }
+            ref struct CustomRefStruct { }
 
-                ref struct Test
-                {
-                    {{type}} field;
-                }
-                """);
+            ref struct Test
+            {
+                {{type}} field;
+            }
+            """);
         fieldSymbol.Type.IsNonNullableValueType().Should().BeTrue();
     }
 
@@ -301,10 +296,10 @@ public class ITypeSymbolExtensionsTest
     {
         var fieldSymbol = FirstFieldSymbolFromCode($$"""
             class Test
-                {
-                    {{type}} field;
-                }
-                """);
+            {
+                {{type}} field;
+            }
+            """);
         fieldSymbol.Type.IsNonNullableValueType().Should().BeFalse();
     }
 
@@ -315,11 +310,11 @@ public class ITypeSymbolExtensionsTest
     {
         var fieldSymbol = FirstFieldSymbolFromCode($$"""
             using System;
-                class Test<T> where T: {{typeConstraint}}
-                {
-                    T field;
-                }
-                """);
+            class Test<T> where T: {{typeConstraint}}
+            {
+                T field;
+            }
+            """);
         fieldSymbol.Type.IsNonNullableValueType().Should().BeTrue();
     }
 
@@ -330,11 +325,11 @@ public class ITypeSymbolExtensionsTest
     {
         var fieldSymbol = FirstFieldSymbolFromCode($$"""
             using System;
-                class Test<T> where T: struct
-                {
-                    {{type}} field;
-                }
-                """);
+            class Test<T> where T: struct
+            {
+                {{type}} field;
+            }
+            """);
         fieldSymbol.Type.IsNonNullableValueType().Should().BeFalse();
     }
 
@@ -360,12 +355,12 @@ public class ITypeSymbolExtensionsTest
     {
         var fieldSymbol = FirstFieldSymbolFromCode($$"""
             #nullable enable
-                using System;
-                class Test<T> {{constraint}}
-                {
-                    T? field;
-                }
-                """);
+            using System;
+            class Test<T> {{constraint}}
+            {
+                T? field;
+            }
+            """);
         fieldSymbol.Type.IsNonNullableValueType().Should().BeFalse();
     }
 
@@ -376,10 +371,10 @@ public class ITypeSymbolExtensionsTest
     {
         var fieldSymbol = FirstFieldSymbolFromCode($$"""
             class Test
-                {
-                    {{type}} field;
-                }
-                """);
+            {
+                {{type}} field;
+            }
+            """);
         fieldSymbol.Type.IsNullableValueType().Should().BeTrue();
     }
 
@@ -395,14 +390,14 @@ public class ITypeSymbolExtensionsTest
     {
         var fieldSymbol = FirstFieldSymbolFromCode($$"""
             struct CustomStruct { }
-                record struct RecordStruct { }
-                ref struct CustomRefStruct { }
+            record struct RecordStruct { }
+            ref struct CustomRefStruct { }
 
-                ref struct Test
-                {
-                    {{type}} field;
-                }
-                """);
+            ref struct Test
+            {
+                {{type}} field;
+            }
+            """);
         fieldSymbol.Type.IsNullableValueType().Should().BeFalse();
     }
 
@@ -415,13 +410,13 @@ public class ITypeSymbolExtensionsTest
     {
         var fieldSymbol = FirstFieldSymbolFromCode($$"""
             using System;
-                struct CustomStruct { }
-                record struct RecordStruct { }
-                class Test<T> where T: struct
-                {
-                    {{type}} field;
-                }
-                """);
+            struct CustomStruct { }
+            record struct RecordStruct { }
+            class Test<T> where T: struct
+            {
+                {{type}} field;
+            }
+            """);
         fieldSymbol.Type.IsNullableValueType().Should().BeTrue();
     }
 
@@ -434,11 +429,11 @@ public class ITypeSymbolExtensionsTest
     {
         var fieldSymbol = FirstFieldSymbolFromCode($$"""
             using System;
-                class Test<T> where T: {{constraint}}
-                {
-                    T? field;
-                }
-                """);
+            class Test<T> where T: {{constraint}}
+            {
+                T? field;
+            }
+            """);
         fieldSymbol.Type.IsNullableValueType().Should().BeTrue();
     }
 
@@ -449,11 +444,11 @@ public class ITypeSymbolExtensionsTest
     {
         var fieldSymbol = FirstFieldSymbolFromCode($$"""
             using System;
-                class Test<T> where T: {{typeConstraint}}
-                {
-                    T field;
-                }
-                """);
+            class Test<T> where T: {{typeConstraint}}
+            {
+                T field;
+            }
+            """);
         fieldSymbol.Type.IsNullableValueType().Should().BeFalse();
     }
 
@@ -475,12 +470,12 @@ public class ITypeSymbolExtensionsTest
     {
         var fieldSymbol = FirstFieldSymbolFromCode($$"""
             #nullable enable
-                using System;
-                class Test<T> {{typeConstraint}}
-                {
-                    T? field;
-                }
-                """);
+            using System;
+            class Test<T> {{typeConstraint}}
+            {
+                T? field;
+            }
+            """);
         fieldSymbol.Type.IsNullableValueType().Should().BeFalse();
     }
 
@@ -493,12 +488,12 @@ public class ITypeSymbolExtensionsTest
     {
         var fieldSymbol = FirstFieldSymbolFromCode($$"""
             #nullable enable
-                using System;
-                class Test<T> {{typeConstraint}}
-                {
-                    {{fieldType}} field;
-                }
-                """);
+            using System;
+            class Test<T> {{typeConstraint}}
+            {
+                {{fieldType}} field;
+            }
+            """);
         fieldSymbol.Type.IsEnum().Should().BeTrue();
     }
 
@@ -512,12 +507,12 @@ public class ITypeSymbolExtensionsTest
     {
         var fieldSymbol = FirstFieldSymbolFromCode($$"""
             #nullable enable
-                using System;
-                class Test<T> {{typeConstraint}}
-                {
-                    {{fieldType}} field;
-                }
-                """);
+            using System;
+            class Test<T> {{typeConstraint}}
+            {
+                {{fieldType}} field;
+            }
+            """);
         fieldSymbol.Type.IsEnum().Should().BeFalse();
     }
 

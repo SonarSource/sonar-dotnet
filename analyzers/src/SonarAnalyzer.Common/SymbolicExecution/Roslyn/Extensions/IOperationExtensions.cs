@@ -34,8 +34,7 @@ internal static class IOperationExtensions
             OperationKindEx.DeclarationExpression => IDeclarationExpressionOperationWrapper.FromOperation(operation).Expression.TrackedSymbol(state),
             OperationKindEx.PropertyReference when operation.ToPropertyReference() is { Property: { IsVirtual: false } property } propertyReference
                 && IsStaticOrThis(propertyReference, state)
-                && property.IsAutoProperty()
-                => property,
+                && property.IsAutoProperty() => property,
             _ => null
         };
 
@@ -160,7 +159,7 @@ internal static class IOperationExtensions
         IUnaryOperationWrapper.FromOperation(operation);
 
     public static bool IsStaticOrThis(this IMemberReferenceOperationWrapper reference, ProgramState state) =>
-        reference.Instance == null // static fields
+        reference.Instance is null // static fields
         || state.ResolveCaptureAndUnwrapConversion(reference.Instance).Kind == OperationKindEx.InstanceReference;
 
     public static IOperation UnwrapConversion(this IOperation operation)
