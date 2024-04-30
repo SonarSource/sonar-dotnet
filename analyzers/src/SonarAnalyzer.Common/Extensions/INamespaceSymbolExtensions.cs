@@ -52,28 +52,13 @@ internal static class INamespaceSymbolExtensions
         {
             yield break;
         }
-        foreach (var typeMember in @namespace.GetTypeMembers().SelectMany(GetAllNamedTypes))
+        foreach (var typeMember in @namespace.GetTypeMembers().SelectMany(x => x.GetAllNamedTypes()))
         {
             yield return typeMember;
         }
         foreach (var typeMember in @namespace.GetNamespaceMembers().SelectMany(GetAllNamedTypes))
         {
             yield return typeMember;
-        }
-    }
-
-    public static IEnumerable<INamedTypeSymbol> GetAllNamedTypes(this INamedTypeSymbol type)
-    {
-        if (type is null)
-        {
-            yield break;
-        }
-
-        yield return type;
-
-        foreach (var nestedType in type.GetTypeMembers().SelectMany(GetAllNamedTypes))
-        {
-            yield return nestedType;
         }
     }
 

@@ -18,13 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Extensions;
+
+public static class INamedTypeSymbolExtensions
 {
-    public static class INamedTypeSymbolExtensions
+    public static bool IsTopLevelProgram(this INamedTypeSymbol symbol) =>
+        TopLevelStatements.ProgramClassImplicitName.Contains(symbol.Name)
+        && symbol.ContainingNamespace.IsGlobalNamespace
+        && symbol.GetMembers(TopLevelStatements.MainMethodImplicitName).Any();
+
+    public static IEnumerable<INamedTypeSymbol> GetAllNamedTypes(this INamedTypeSymbol type)
     {
-        public static bool IsTopLevelProgram(this INamedTypeSymbol symbol) =>
-            TopLevelStatements.ProgramClassImplicitName.Contains(symbol.Name)
-            && symbol.ContainingNamespace.IsGlobalNamespace
-            && symbol.GetMembers(TopLevelStatements.MainMethodImplicitName).Any();
+        if (type is null)
+        {
+            yield break;
+        }
+
+        yield return type;
+
+        foreach (var nestedType in type.GetTypeMembers().SelectMany(GetAllNamedTypes))
+        {
+            yield return nestedType;
+        }
     }
 }
