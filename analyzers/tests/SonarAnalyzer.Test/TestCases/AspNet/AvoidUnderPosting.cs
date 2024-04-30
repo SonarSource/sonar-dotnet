@@ -173,12 +173,13 @@ namespace GenericModelWithTypeConstraint
 
     public abstract class Person
     {
-        public int Age { get; set; }            // Noncompliant
+        public int Age { get; set; }                    // Noncompliant
     }
 
     public class Developer : Person
     {
         public string ProgramingLanguage { get; set; }
+        public int WorkExperienceInYears { get; set; }  // Noncompliant
     }
 }
 
@@ -194,7 +195,7 @@ namespace RecursiveTypeConstraint
     public class Model<T> where T : Model<T>
     {
         public Model<T> SubModel { get; set; }
-        public int ValueProperty { get; set; }  // Noncompliant
+        public int ValueProperty { get; set; }          // Noncompliant
     }
 
     public class MyModel : Model<MyModel>

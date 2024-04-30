@@ -1,5 +1,5 @@
 {
-  "title": "Value type properties of a model class should be nullable or marked as \"Required\" to avoid under-posting",
+  "title": "Property used as input in a controller action should be nullable or annotated with the Required attribute to avoid under-posting.",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
