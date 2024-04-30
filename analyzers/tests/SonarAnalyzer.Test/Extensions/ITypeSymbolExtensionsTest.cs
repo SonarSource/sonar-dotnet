@@ -27,22 +27,37 @@ namespace SonarAnalyzer.Test.Extensions;
 [TestClass]
 public class ITypeSymbolExtensionsTest
 {
+    private const string TestInput = """
+        namespace NS
+        {
+            using System;
+            using PropertyBag = System.Collections.Generic.Dictionary<string, object>;
+
+            public abstract class Base
+            {
+                public class Nested
+                {
+                    public class NestedMore { }
+                }
+            }
+            public class Derived1 : Base { }
+            public class Derived2 : Base, IInterface { }
+            public interface IInterface { }
+        }
+        """;
+
     private ClassDeclarationSyntax baseClassDeclaration;
     private ClassDeclarationSyntax derivedClassDeclaration1;
     private ClassDeclarationSyntax derivedClassDeclaration2;
     private SyntaxNode root;
-    private SemanticModel semanticModel;
+    private SemanticModel model;
 
     [TestInitialize]
     public void Compile()
     {
-        using var workspace = new AdhocWorkspace();
-        var document = workspace.CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp).AddDocument("test", ISymbolExtensionsTest.TestInput);
-        var compilation = document.Project.GetCompilationAsync().Result;
-        var tree = compilation.SyntaxTrees.First();
-        semanticModel = compilation.GetSemanticModel(tree);
-
-        root = tree.GetRoot();
+        var snippet = new SnippetCompiler(TestInput);
+        root = snippet.SyntaxTree.GetRoot();
+        model = snippet.SemanticModel;
         baseClassDeclaration = root.DescendantNodes().OfType<ClassDeclarationSyntax>().First(x => x.Identifier.ValueText == "Base");
         derivedClassDeclaration1 = root.DescendantNodes().OfType<ClassDeclarationSyntax>().First(x => x.Identifier.ValueText == "Derived1");
         derivedClassDeclaration2 = root.DescendantNodes().OfType<ClassDeclarationSyntax>().First(x => x.Identifier.ValueText == "Derived2");
@@ -62,8 +77,8 @@ public class ITypeSymbolExtensionsTest
         var baseType = new KnownType("NS.Base");
         var interfaceType = new KnownType("NS.IInterface");
 
-        var derived1Type = semanticModel.GetDeclaredSymbol(derivedClassDeclaration1) as INamedTypeSymbol;
-        var derived2Type = semanticModel.GetDeclaredSymbol(derivedClassDeclaration2) as INamedTypeSymbol;
+        var derived1Type = model.GetDeclaredSymbol(derivedClassDeclaration1) as INamedTypeSymbol;
+        var derived2Type = model.GetDeclaredSymbol(derivedClassDeclaration2) as INamedTypeSymbol;
 
         derived2Type.DerivesOrImplements(interfaceType).Should().BeTrue();
         derived1Type.DerivesOrImplements(interfaceType).Should().BeFalse();
@@ -78,7 +93,7 @@ public class ITypeSymbolExtensionsTest
         var baseKnownType = new KnownType("NS.Base");
         var baseKnownTypes = ImmutableArray.Create(new[] { baseKnownType });
 
-        var baseType = semanticModel.GetDeclaredSymbol(baseClassDeclaration) as INamedTypeSymbol;
+        var baseType = model.GetDeclaredSymbol(baseClassDeclaration) as INamedTypeSymbol;
 
         baseType.Is(baseKnownType).Should().BeTrue();
         baseType.IsAny(baseKnownTypes).Should().BeTrue();
@@ -88,7 +103,7 @@ public class ITypeSymbolExtensionsTest
     public void Type_GetSymbolType_Alias()
     {
         var aliasUsing = root.DescendantNodesAndSelf().OfType<UsingDirectiveSyntax>().FirstOrDefault(x => x.Alias is not null);
-        var symbol = semanticModel.GetDeclaredSymbol(aliasUsing);
+        var symbol = model.GetDeclaredSymbol(aliasUsing);
         var type = symbol.GetSymbolType();
         symbol.ToString().Should().Be("PropertyBag");
         type.ToString().Should().Be("System.Collections.Generic.Dictionary<string, object>");

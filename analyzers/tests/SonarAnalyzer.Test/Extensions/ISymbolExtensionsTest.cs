@@ -35,63 +35,47 @@ namespace SonarAnalyzer.Test.Extensions;
 [TestClass]
 public class ISymbolExtensionsTest
 {
-    internal const string TestInput = """
-        namespace NS
+    private const string TestInput = """
+        public interface IInterface
         {
-          using System;
-          using System.Collections.Generic;
-          using System.Reflection;
-          using PropertyBag = System.Collections.Generic.Dictionary<string, object>;
+            int Property2 { get; set; }
+            void Method3();
+        }
 
-          public class Base
-          {
-            public class Nested
-            {
-              public class NestedMore
-              {}
-            }
-
+        public abstract class Base
+        {
             public virtual void Method1() { }
             protected virtual void Method2() { }
             public abstract int Property { get; set; }
 
             public void Method4(){}
-          }
-          private class Derived1 : Base
-          {
+        }
+
+        public class Derived1 : Base
+        {
             public override int Property { get; set; }
-          }
-          public class Derived2 : Base, IInterface
-          {
+            private int PrivateProperty { get; set; }
+            private protected int PrivateProtectedProperty { get; set; }
+            protected int ProtectedProperty { get; set; }
+            protected internal int ProtectedInternalProperty { get; set; }
+            internal int InternalProperty { get; set; }
+        }
+
+        public abstract class Derived2 : Base, IInterface
+        {
             public override int Property { get; set; }
             public int Property2 { get; set; }
             public void Method3(){}
 
             public abstract void Method5();
-            public void EventHandler(object o, System.EventArgs args){}
-          }
-          public interface IInterface
-          {
-            int Property2 { get; set; }
-            void Method3();
-            void Method4<T, V>(List<T> param1, List<int> param2, List<V> param3, IList<int> param4);
-          }
-          public class AssemblyLoad
-          {
-            public AssemblyLoad()
-            {
-              AppDomain.CurrentDomain.AssemblyResolve += LoadAnyVersion;
-            }
-            Assembly LoadAnyVersion(object sender, ResolveEventArgs args) => null;
-          }
         }
         """;
 
-    private SnippetCompiler testCode;
+    private SnippetCompiler testSnippet;
 
     [TestInitialize]
     public void Compile() =>
-        testCode = new SnippetCompiler(TestInput, ignoreErrors: true, language: AnalyzerLanguage.CSharp);   // FIXME: Why ignore errors?
+        testSnippet = new SnippetCompiler(TestInput);
 
     [TestMethod]
     public void GetDescendantNodes_ForNullSourceTree_ReturnsEmpty_VB() =>
@@ -284,38 +268,42 @@ public class ISymbolExtensionsTest
     [TestMethod]
     public void Symbol_IsPublicApi()
     {
-        ISymbolExtensionsCommon.IsPubliclyAccessible(testCode.GetMethodSymbol("Base.Method1")).Should().BeTrue();
-        ISymbolExtensionsCommon.IsPubliclyAccessible(testCode.GetMethodSymbol("Base.Method2")).Should().BeTrue();
-        ISymbolExtensionsCommon.IsPubliclyAccessible(testCode.GetPropertySymbol("Base.Property")).Should().BeTrue();
-        ISymbolExtensionsCommon.IsPubliclyAccessible(testCode.GetPropertySymbol("IInterface.Property2")).Should().BeTrue();
-        ISymbolExtensionsCommon.IsPubliclyAccessible(testCode.GetPropertySymbol("Derived1.Property")).Should().BeFalse();
+        ISymbolExtensionsCommon.IsPubliclyAccessible(testSnippet.GetMethodSymbol("Base.Method1")).Should().BeTrue();
+        ISymbolExtensionsCommon.IsPubliclyAccessible(testSnippet.GetMethodSymbol("Base.Method2")).Should().BeTrue();
+        ISymbolExtensionsCommon.IsPubliclyAccessible(testSnippet.GetPropertySymbol("Base.Property")).Should().BeTrue();
+        ISymbolExtensionsCommon.IsPubliclyAccessible(testSnippet.GetPropertySymbol("IInterface.Property2")).Should().BeTrue();
+        ISymbolExtensionsCommon.IsPubliclyAccessible(testSnippet.GetPropertySymbol("Derived1.PrivateProperty")).Should().BeFalse();
+        ISymbolExtensionsCommon.IsPubliclyAccessible(testSnippet.GetPropertySymbol("Derived1.PrivateProtectedProperty")).Should().BeFalse();
+        ISymbolExtensionsCommon.IsPubliclyAccessible(testSnippet.GetPropertySymbol("Derived1.ProtectedProperty")).Should().BeTrue();
+        ISymbolExtensionsCommon.IsPubliclyAccessible(testSnippet.GetPropertySymbol("Derived1.ProtectedInternalProperty")).Should().BeTrue();
+        ISymbolExtensionsCommon.IsPubliclyAccessible(testSnippet.GetPropertySymbol("Derived1.InternalProperty")).Should().BeFalse();
     }
 
     [TestMethod]
     public void Symbol_IsInterfaceImplementationOrMemberOverride()
     {
-        ISymbolExtensionsCommon.GetInterfaceMember(testCode.GetMethodSymbol("Base.Method1")).Should().BeNull();
-        ISymbolExtensionsCommon.GetOverriddenMember(testCode.GetMethodSymbol("Base.Method1")).Should().BeNull();
-        ISymbolExtensionsCommon.GetOverriddenMember(testCode.GetPropertySymbol("Derived2.Property")).Should().NotBeNull();
-        ISymbolExtensionsCommon.GetInterfaceMember(testCode.GetPropertySymbol("Derived2.Property2")).Should().NotBeNull();
-        ISymbolExtensionsCommon.GetInterfaceMember(testCode.GetMethodSymbol("Derived2.Method3")).Should().NotBeNull();
+        ISymbolExtensionsCommon.GetInterfaceMember(testSnippet.GetMethodSymbol("Base.Method1")).Should().BeNull();
+        ISymbolExtensionsCommon.GetOverriddenMember(testSnippet.GetMethodSymbol("Base.Method1")).Should().BeNull();
+        ISymbolExtensionsCommon.GetOverriddenMember(testSnippet.GetPropertySymbol("Derived2.Property")).Should().NotBeNull();
+        ISymbolExtensionsCommon.GetInterfaceMember(testSnippet.GetPropertySymbol("Derived2.Property2")).Should().NotBeNull();
+        ISymbolExtensionsCommon.GetInterfaceMember(testSnippet.GetMethodSymbol("Derived2.Method3")).Should().NotBeNull();
     }
 
     [TestMethod]
     public void Symbol_TryGetOverriddenOrInterfaceMember()
     {
-        var actualOverriddenMethod = ISymbolExtensionsCommon.GetOverriddenMember(testCode.GetMethodSymbol("Base.Method1"));
+        var actualOverriddenMethod = ISymbolExtensionsCommon.GetOverriddenMember(testSnippet.GetMethodSymbol("Base.Method1"));
         actualOverriddenMethod.Should().BeNull();
 
-        var expectedOverriddenProperty = testCode.GetPropertySymbol("Base.Property");
-        var propertySymbol = testCode.GetPropertySymbol("Derived2.Property");
+        var expectedOverriddenProperty = testSnippet.GetPropertySymbol("Base.Property");
+        var propertySymbol = testSnippet.GetPropertySymbol("Derived2.Property");
 
         var actualOverriddenProperty = ISymbolExtensionsCommon.GetOverriddenMember(propertySymbol);
         actualOverriddenProperty.Should().NotBeNull();
         actualOverriddenProperty.Should().Be(expectedOverriddenProperty);
 
-        var expectedOverriddenMethod = testCode.GetMethodSymbol("IInterface.Method3");
-        actualOverriddenMethod = ISymbolExtensionsCommon.GetInterfaceMember(testCode.GetMethodSymbol("Derived2.Method3"));
+        var expectedOverriddenMethod = testSnippet.GetMethodSymbol("IInterface.Method3");
+        actualOverriddenMethod = ISymbolExtensionsCommon.GetInterfaceMember(testSnippet.GetMethodSymbol("Derived2.Method3"));
         actualOverriddenMethod.Should().NotBeNull();
         actualOverriddenMethod.Should().Be(expectedOverriddenMethod);
     }
@@ -323,10 +311,10 @@ public class ISymbolExtensionsTest
     [TestMethod]
     public void Symbol_IsChangeable()
     {
-        ISymbolExtensionsCommon.IsChangeable(testCode.GetMethodSymbol("Base.Method1")).Should().BeFalse();
-        ISymbolExtensionsCommon.IsChangeable(testCode.GetMethodSymbol("Base.Method4")).Should().BeTrue();
-        ISymbolExtensionsCommon.IsChangeable(testCode.GetMethodSymbol("Derived2.Method5")).Should().BeFalse();
-        ISymbolExtensionsCommon.IsChangeable(testCode.GetMethodSymbol("Derived2.Method3")).Should().BeFalse();
+        ISymbolExtensionsCommon.IsChangeable(testSnippet.GetMethodSymbol("Base.Method1")).Should().BeFalse();
+        ISymbolExtensionsCommon.IsChangeable(testSnippet.GetMethodSymbol("Base.Method4")).Should().BeTrue();
+        ISymbolExtensionsCommon.IsChangeable(testSnippet.GetMethodSymbol("Derived2.Method5")).Should().BeFalse();
+        ISymbolExtensionsCommon.IsChangeable(testSnippet.GetMethodSymbol("Derived2.Method3")).Should().BeFalse();
     }
 
     [TestMethod]
