@@ -82,4 +82,210 @@ internal static class ISymbolExtensions
 
     public static bool IsInType(this ISymbol symbol, ImmutableArray<KnownType> types) =>
         symbol is not null && symbol.ContainingType.IsAny(types);
+
+    public static T GetInterfaceMember<T>(this T symbol)
+        where T : class, ISymbol
+    {
+        if (symbol == null
+            || symbol.IsOverride
+            || !CanBeInterfaceMember(symbol))
+        {
+            return null;
+        }
+
+        return symbol.ContainingType
+                     .AllInterfaces
+                     .SelectMany(@interface => @interface.GetMembers())
+                     .OfType<T>()
+                     .FirstOrDefault(member => symbol.Equals(symbol.ContainingType.FindImplementationForInterfaceMember(member)));
+    }
+
+    public static T GetOverriddenMember<T>(this T symbol)
+        where T : class, ISymbol
+    {
+        if (!(symbol is { IsOverride: true }))
+        {
+            return null;
+        }
+
+        return symbol.Kind switch
+        {
+            SymbolKind.Method => (T)((IMethodSymbol)symbol).OverriddenMethod,
+            SymbolKind.Property => (T)((IPropertySymbol)symbol).OverriddenProperty,
+            SymbolKind.Event => (T)((IEventSymbol)symbol).OverriddenEvent,
+            _ => throw new ArgumentException($"Only methods, properties and events can be overridden. {typeof(T).Name} was provided", nameof(symbol))
+        };
+    }
+
+    public static bool IsChangeable(this ISymbol symbol) =>
+        !symbol.IsAbstract
+        && !symbol.IsVirtual
+        && symbol.GetInterfaceMember() == null
+        && symbol.GetOverriddenMember() == null;
+
+    public static IEnumerable<IParameterSymbol> GetParameters(this ISymbol symbol) =>
+        symbol.Kind switch
+        {
+            SymbolKind.Method => ((IMethodSymbol)symbol).Parameters,
+            SymbolKind.Property => ((IPropertySymbol)symbol).Parameters,
+            _ => Enumerable.Empty<IParameterSymbol>()
+        };
+
+    public static Accessibility GetEffectiveAccessibility(this ISymbol symbol)
+    {
+        if (symbol == null)
+        {
+            return Accessibility.NotApplicable;
+        }
+
+        var result = symbol.DeclaredAccessibility;
+        if (result == Accessibility.Private)
+        {
+            return Accessibility.Private;
+        }
+
+        for (var container = symbol.ContainingType; container != null; container = container.ContainingType)
+        {
+            if (container.DeclaredAccessibility == Accessibility.Private)
+            {
+                return Accessibility.Private;
+            }
+
+            if (container.DeclaredAccessibility == Accessibility.Internal)
+            {
+                result = Accessibility.Internal;
+            }
+        }
+
+        return result;
+    }
+
+    public static bool IsPubliclyAccessible(this ISymbol symbol) =>
+        GetEffectiveAccessibility(symbol) is Accessibility.Public or Accessibility.Protected or Accessibility.ProtectedOrInternal;
+
+    public static bool IsConstructor(this ISymbol symbol) =>
+        symbol.Kind == SymbolKind.Method && symbol.Name == ".ctor";
+
+    public static IEnumerable<AttributeData> GetAttributes(this ISymbol symbol, KnownType attributeType) =>
+        symbol?.GetAttributes().Where(a => a.AttributeClass.Is(attributeType))
+        ?? Enumerable.Empty<AttributeData>();
+
+    public static IEnumerable<AttributeData> GetAttributes(this ISymbol symbol, ImmutableArray<KnownType> attributeTypes) =>
+        symbol?.GetAttributes().Where(a => a.AttributeClass.IsAny(attributeTypes))
+        ?? Enumerable.Empty<AttributeData>();
+
+    /// <summary>
+    /// Returns attributes for the symbol by also respecting <see cref="AttributeUsageAttribute.Inherited"/>.
+    /// The returned <see cref="AttributeData"/> is consistent with the results from <see cref="MemberInfo.GetCustomAttributes(bool)"/>.
+    /// </summary>
+    public static IEnumerable<AttributeData> GetAttributesWithInherited(this ISymbol symbol)
+    {
+        foreach (var attribute in symbol.GetAttributes())
+        {
+            yield return attribute;
+        }
+
+        var baseSymbol = BaseSymbol(symbol);
+        while (baseSymbol is not null)
+        {
+            foreach (var attribute in baseSymbol.GetAttributes().Where(x => x.HasAttributeUsageInherited()))
+            {
+                yield return attribute;
+            }
+
+            baseSymbol = BaseSymbol(baseSymbol);
+        }
+
+        static ISymbol BaseSymbol(ISymbol symbol) =>
+            symbol switch
+            {
+                INamedTypeSymbol namedType => namedType.BaseType,
+                IMethodSymbol { OriginalDefinition: { } originalDefinition } method when !method.Equals(originalDefinition) => BaseSymbol(originalDefinition),
+                IMethodSymbol { OverriddenMethod: { } overridenMethod } => overridenMethod,
+                // Support for other kinds of symbols needs to be implemented/tested as needed. A full list can be found here:
+                // https://learn.microsoft.com/dotnet/api/system.attributetargets
+                _ => null,
+            };
+    }
+
+    public static bool AnyAttributeDerivesFrom(this ISymbol symbol, KnownType attributeType) =>
+        symbol?.GetAttributes().Any(a => a.AttributeClass.DerivesFrom(attributeType)) ?? false;
+
+    public static bool AnyAttributeDerivesFromAny(this ISymbol symbol, ImmutableArray<KnownType> attributeTypes) =>
+        symbol?.GetAttributes().Any(a => a.AttributeClass.DerivesFromAny(attributeTypes)) ?? false;
+
+    public static bool AnyAttributeDerivesFromOrImplementsAny(this ISymbol symbol, ImmutableArray<KnownType> attributeTypesOrInterfaces) =>
+        symbol?.GetAttributes().Any(a => a.AttributeClass.DerivesOrImplementsAny(attributeTypesOrInterfaces)) ?? false;
+
+
+    public static string GetClassification(this ISymbol symbol) =>
+        symbol switch
+        {
+            { Kind: SymbolKind.Alias } => "alias",
+            { Kind: SymbolKind.ArrayType } => "array",
+            { Kind: SymbolKind.Assembly } => "assembly",
+            { Kind: SymbolKindEx.Discard } => "discard",
+            { Kind: SymbolKind.DynamicType } => "dynamic",
+            { Kind: SymbolKind.ErrorType } => "error",
+            { Kind: SymbolKind.Event } => "event",
+            { Kind: SymbolKindEx.FunctionPointerType } => "function pointer",
+            { Kind: SymbolKind.Field } => "field",
+            { Kind: SymbolKind.Label } => "label",
+            { Kind: SymbolKind.Local } => "local",
+            { Kind: SymbolKind.Namespace } => "namespace",
+            { Kind: SymbolKind.NetModule } => "netmodule",
+            { Kind: SymbolKind.PointerType } => "pointer",
+            { Kind: SymbolKind.Preprocessing } => "preprocessing",
+            { Kind: SymbolKind.Parameter } => "parameter",
+            { Kind: SymbolKind.RangeVariable } => "range variable",
+            { Kind: SymbolKind.Property } => "property",
+            { Kind: SymbolKind.TypeParameter } => "type parameter",
+            IMethodSymbol methodSymbol => methodSymbol switch
+            {
+                { MethodKind: MethodKind.BuiltinOperator or MethodKind.UserDefinedOperator or MethodKind.Conversion } => "operator",
+                { MethodKind: MethodKind.Constructor or MethodKind.StaticConstructor or MethodKind.SharedConstructor } => "constructor",
+                { MethodKind: MethodKind.Destructor } => "destructor",
+                { MethodKind: MethodKind.PropertyGet } => "getter",
+                { MethodKind: MethodKind.PropertySet } => "setter",
+                { MethodKind: MethodKindEx.LocalFunction } => "local function",
+                _ => "method",
+            },
+            INamedTypeSymbol namedTypeSymbol => namedTypeSymbol switch
+            {
+                { TypeKind: TypeKind.Array } => "array",
+                { TypeKind: TypeKind.Class } namedType => namedType.IsRecord() ? "record" : "class",
+                { TypeKind: TypeKind.Dynamic } => "dynamic",
+                { TypeKind: TypeKind.Delegate } => "delegate",
+                { TypeKind: TypeKind.Enum } => "enum",
+                { TypeKind: TypeKind.Error } => "error",
+                { TypeKind: TypeKindEx.FunctionPointer } => "function pointer",
+                { TypeKind: TypeKind.Interface } => "interface",
+                { TypeKind: TypeKind.Module } => "module",
+                { TypeKind: TypeKind.Pointer } => "pointer",
+                { TypeKind: TypeKind.Struct or TypeKind.Structure } namedType => namedType.IsRecord() ? "record struct" : "struct",
+                { TypeKind: TypeKind.Submission } => "submission",
+                { TypeKind: TypeKind.TypeParameter } => "type parameter",
+                { TypeKind: TypeKind.Unknown } => "unknown",
+#if DEBUG
+                _ => throw new NotSupportedException($"symbol is of a not yet supported kind."),
+#else
+                _ => "type",
+#endif
+            },
+#if DEBUG
+                _ => throw new NotSupportedException($"symbol is of a not yet supported kind."),
+#else
+                _ => "symbol",
+#endif
+        };
+
+    public static bool IsSerializableMember(this ISymbol symbol) =>
+        symbol is IFieldSymbol or IPropertySymbol { SetMethod: not null }
+        && symbol.ContainingType.GetAttributes().Any(x => x.AttributeClass.Is(KnownType.System_SerializableAttribute))
+        && !symbol.GetAttributes().Any(x => x.AttributeClass.Is(KnownType.System_NonSerializedAttribute));
+
+    private static bool CanBeInterfaceMember(ISymbol symbol) =>
+        symbol.Kind == SymbolKind.Method
+        || symbol.Kind == SymbolKind.Property
+        || symbol.Kind == SymbolKind.Event;
 }
