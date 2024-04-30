@@ -1,49 +1,59 @@
 @page "/razor"
+@using Microsoft.AspNetCore.Components.Web
 @namespace TestCases
 
-<p>Current count: @currentCount</p>                                  <!-- field reference -->
+<p>Current count: @currentCount</p>                     <!-- field reference -->
 
-@currentCount                                                        <!-- field reference -->
+@currentCount                                           <!-- field reference -->
 
-<button @onclick="IncrementCount">Increment</button>                 <!-- method reference -->
+<button @onclick="IncrementCount">Increment</button>    <!-- method reference -->
 
-@IncrementAmount                                                     <!-- property reference -->
+@IncrementAmount                                        <!-- property reference -->
 
 @code {
-    private int currentCount = 0;                                    // Field declaration
+    private int currentCount = 0;                       // Field declaration
 
     [Parameter]
-    public int IncrementAmount { get; set; } = 1;                    // Property declaration
+    public int IncrementAmount { get; set; } = 1;       // Property declaration
 
-    private void IncrementCount()                                    // Method declatation
+    private void IncrementCount()                       // Method declaration
     {
-        currentCount += IncrementAmount;                             // Property and field reference
-        IncrementAmount += 1;                                        // Propery reference
+        currentCount += IncrementAmount;                // Property and field reference
+        IncrementAmount += 1;                           // Property reference
     }
 }
 
-<button @onclick="AddTodo">Add todo</button>                         // FN: method reference not found
+<button @onclick="AddTodo">Add todo</button>            <!-- Method reference -->
 
 <ul>
-    @foreach (var todo in todos)                                     // FN: `todo` declaration not found
+    @foreach (var todo in todos)                        // FN: `todo` declaration not found
     {
-        <li>@todo.Title</li>                                         // FN: local var reference not found
+        <li>@todo.Title</li>                            // FN: local var reference not found
     }
 </ul>
 
-<h3>Todo (@todos.Count(x => !x.IsDone))</h3>                         // lambda parameter declaration
+<h3>Todo (@todos.Count(x => !x.IsDone))</h3>            // lambda parameter declaration
 
 @code {
-    private List<ToDo> todos = new();                                // Field declaration
+    private List<ToDo> todos = new();                   // Field declaration
 
-    public void AddTodo()                                            // Method declaration
+    public void AddTodo()                               // Method declaration
     {
-        var x = LocalMethod();                                       // variable declaration (x) and method reference
-        var y = new DateTime();                                      // variable declaration (y)
+        var x = LocalMethod();                          // variable declaration (x) and method reference
+        var y = new DateTime();                         // variable declaration (y)
 
-        int LocalMethod() => 42;                                     // Local method declaration
+        int LocalMethod() => 42;                        // Local method declaration
     }
 }
 
-<p>Explicit expression: @(currentCount)</p>                          <!-- Field reference: explicit expression -->
-<p class="@Property"></p>                                            <!-- The symbol is not resolved in this case because it's declared in another file (syntax tree) -->
+<p>Explicit expression: @(currentCount)</p>             <!-- Field reference: explicit expression -->
+<p class="@Property"></p>                               <!-- The symbol is not resolved in this case because it's declared in another file (syntax tree) -->
+
+<div @attributes="AdditionalAttributes">
+    <button @onclick="(()=>IncrementCount())">Button with lambda</button>
+</div>
+
+@code {
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IDictionary<string, object>? AdditionalAttributes { get; set; }
+}

@@ -227,22 +227,23 @@ namespace SonarAnalyzer.Test.Rules
                         orderedSymbols[0].FilePath.Should().EndWith("_Imports.razor");
                         orderedSymbols[1].FilePath.Should().EndWith("Razor.razor");
 
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 13, 4, 6, 20, 48); // currentCount
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 16, 10, 20, 21);   // IncrementAmount
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 18, 8);            // IncrementCount
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 34, 34);           // x
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 37, 28, 34);       // todos
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 39, 25);           // AddTodo
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 41);               // x
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 42);               // y
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 44, 41);           // LocalMethod
+                        VerifyReferences(orderedSymbols[1].Reference, 10, 14, 5, 7, 21, 49);        // currentCount
+                        VerifyReferences(orderedSymbols[1].Reference, 10, 17, 11, 21, 22);          // IncrementAmount
+                        VerifyReferences(orderedSymbols[1].Reference, 10, 19, 9, 53);               // IncrementCount
+                        VerifyReferences(orderedSymbols[1].Reference, 10, 35, 35);                  // x
+                        VerifyReferences(orderedSymbols[1].Reference, 10, 38, 29, 35);              // todos
+                        VerifyReferences(orderedSymbols[1].Reference, 10, 40, 26);                  // AddTodo
+                        VerifyReferences(orderedSymbols[1].Reference, 10, 42);                      // x
+                        VerifyReferences(orderedSymbols[1].Reference, 10, 43);                      // y
+                        VerifyReferences(orderedSymbols[1].Reference, 10, 45, 42);                  // LocalMethod
+                        VerifyReferences(orderedSymbols[1].Reference, 10, 58, 52);                  // AdditionalAttributes
 
-                        VerifyReferencesColumns(orderedSymbols[1].Reference, 13, 4, 4, 19, 31);   // currentCount: line 4
-                        VerifyReferencesColumns(orderedSymbols[1].Reference, 13, 6, 6, 1, 13);    // currentCount: line 6
-                        VerifyReferencesColumns(orderedSymbols[1].Reference, 13, 20, 20, 8, 20);  // currentCount: line 20
-                        VerifyReferencesColumns(orderedSymbols[1].Reference, 13, 48, 48, 26, 38); // currentCount: line 48
+                        VerifyReferencesColumns(orderedSymbols[1].Reference, 14, 5, 5, 19, 31);     // currentCount: line 5
+                        VerifyReferencesColumns(orderedSymbols[1].Reference, 14, 7, 7, 1, 13);      // currentCount: line 7
+                        VerifyReferencesColumns(orderedSymbols[1].Reference, 14, 21, 21, 8, 20);    // currentCount: line 21
+                        VerifyReferencesColumns(orderedSymbols[1].Reference, 14, 49, 49, 26, 38);   // currentCount: line 49
 
-                        orderedSymbols[3].FilePath.Should().EndWith("RazorComponent.razor"); // RazorComponent.razor
+                        orderedSymbols[3].FilePath.Should().EndWith("RazorComponent.razor");        // RazorComponent.razor
                         // https://github.com/SonarSource/sonar-dotnet/issues/8417
                         // Net8 SDK: Declaration (1,0) - (1,17) Reference (1,6) - (1,23) <- Overlapping
                         // Declaration of TSomeVeryLongName is placed starting at index 0 (ignoring "@typeparam ")
@@ -353,7 +354,7 @@ namespace SonarAnalyzer.Test.Rules
                                              params int[] assertedDeclarationLineReferences)
         {
             references.Where(x => x.Declaration is not null).Should().HaveCount(expectedDeclarationCount);
-            references.Single(x => x.Declaration.StartLine == assertedDeclarationLine).Reference.Select(x => x.StartLine)
+            references.Should().ContainSingle(x => x.Declaration.StartLine == assertedDeclarationLine).Subject.Reference.Select(x => x.StartLine)
                       .Should().BeEquivalentTo(assertedDeclarationLineReferences);
         }
 
@@ -363,7 +364,7 @@ namespace SonarAnalyzer.Test.Rules
                                                     int endLine,
                                                     int startOffset,
                                                     int endOffset) =>
-            symbolReference.Single(x => x.Declaration.StartLine == declarationLine).Reference
+            symbolReference.Should().ContainSingle(x => x.Declaration.StartLine == declarationLine).Subject.Reference
                 .Should().ContainSingle(x => x.StartLine == startLine && x.EndLine == endLine && x.StartOffset == startOffset && x.EndOffset == endOffset);
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
