@@ -23,6 +23,7 @@ extern alias csharp;
 extern alias vbnet;
 
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using Moq;
 using CodeAnalysisCS = Microsoft.CodeAnalysis.CSharp;
 using CodeAnalysisVB = Microsoft.CodeAnalysis.VisualBasic;
 using ISymbolExtensionsCommon = common::SonarAnalyzer.Extensions.ISymbolExtensions;
@@ -34,6 +35,64 @@ namespace SonarAnalyzer.Test.Extensions;
 [TestClass]
 public class ISymbolExtensionsTest
 {
+    internal const string TestInput = """
+        namespace NS
+        {
+          using System;
+          using System.Collections.Generic;
+          using System.Reflection;
+          using PropertyBag = System.Collections.Generic.Dictionary<string, object>;
+
+          public class Base
+          {
+            public class Nested
+            {
+              public class NestedMore
+              {}
+            }
+
+            public virtual void Method1() { }
+            protected virtual void Method2() { }
+            public abstract int Property { get; set; }
+
+            public void Method4(){}
+          }
+          private class Derived1 : Base
+          {
+            public override int Property { get; set; }
+          }
+          public class Derived2 : Base, IInterface
+          {
+            public override int Property { get; set; }
+            public int Property2 { get; set; }
+            public void Method3(){}
+
+            public abstract void Method5();
+            public void EventHandler(object o, System.EventArgs args){}
+          }
+          public interface IInterface
+          {
+            int Property2 { get; set; }
+            void Method3();
+            void Method4<T, V>(List<T> param1, List<int> param2, List<V> param3, IList<int> param4);
+          }
+          public class AssemblyLoad
+          {
+            public AssemblyLoad()
+            {
+              AppDomain.CurrentDomain.AssemblyResolve += LoadAnyVersion;
+            }
+            Assembly LoadAnyVersion(object sender, ResolveEventArgs args) => null;
+          }
+        }
+        """;
+
+    private SnippetCompiler testCode;
+
+    [TestInitialize]
+    public void Compile() =>
+        testCode = new SnippetCompiler(TestInput, ignoreErrors: true, language: AnalyzerLanguage.CSharp);   // FIXME: Why ignore errors?
+
     [TestMethod]
     public void GetDescendantNodes_ForNullSourceTree_ReturnsEmpty_VB() =>
         ISymbolExtensionsVB.GetDescendantNodes(Location.None, CodeAnalysisVB.SyntaxFactory.ModifiedIdentifier("a")).Should().BeEmpty();
@@ -221,6 +280,125 @@ public class ISymbolExtensionsTest
     }
 
 #endif
+
+    [TestMethod]
+    public void Symbol_IsPublicApi()
+    {
+        ISymbolExtensionsCommon.IsPubliclyAccessible(testCode.GetMethodSymbol("Base.Method1")).Should().BeTrue();
+        ISymbolExtensionsCommon.IsPubliclyAccessible(testCode.GetMethodSymbol("Base.Method2")).Should().BeTrue();
+        ISymbolExtensionsCommon.IsPubliclyAccessible(testCode.GetPropertySymbol("Base.Property")).Should().BeTrue();
+        ISymbolExtensionsCommon.IsPubliclyAccessible(testCode.GetPropertySymbol("IInterface.Property2")).Should().BeTrue();
+        ISymbolExtensionsCommon.IsPubliclyAccessible(testCode.GetPropertySymbol("Derived1.Property")).Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void Symbol_IsInterfaceImplementationOrMemberOverride()
+    {
+        ISymbolExtensionsCommon.GetInterfaceMember(testCode.GetMethodSymbol("Base.Method1")).Should().BeNull();
+        ISymbolExtensionsCommon.GetOverriddenMember(testCode.GetMethodSymbol("Base.Method1")).Should().BeNull();
+        ISymbolExtensionsCommon.GetOverriddenMember(testCode.GetPropertySymbol("Derived2.Property")).Should().NotBeNull();
+        ISymbolExtensionsCommon.GetInterfaceMember(testCode.GetPropertySymbol("Derived2.Property2")).Should().NotBeNull();
+        ISymbolExtensionsCommon.GetInterfaceMember(testCode.GetMethodSymbol("Derived2.Method3")).Should().NotBeNull();
+    }
+
+    [TestMethod]
+    public void Symbol_TryGetOverriddenOrInterfaceMember()
+    {
+        var actualOverriddenMethod = ISymbolExtensionsCommon.GetOverriddenMember(testCode.GetMethodSymbol("Base.Method1"));
+        actualOverriddenMethod.Should().BeNull();
+
+        var expectedOverriddenProperty = testCode.GetPropertySymbol("Base.Property");
+        var propertySymbol = testCode.GetPropertySymbol("Derived2.Property");
+
+        var actualOverriddenProperty = ISymbolExtensionsCommon.GetOverriddenMember(propertySymbol);
+        actualOverriddenProperty.Should().NotBeNull();
+        actualOverriddenProperty.Should().Be(expectedOverriddenProperty);
+
+        var expectedOverriddenMethod = testCode.GetMethodSymbol("IInterface.Method3");
+        actualOverriddenMethod = ISymbolExtensionsCommon.GetInterfaceMember(testCode.GetMethodSymbol("Derived2.Method3"));
+        actualOverriddenMethod.Should().NotBeNull();
+        actualOverriddenMethod.Should().Be(expectedOverriddenMethod);
+    }
+
+    [TestMethod]
+    public void Symbol_IsChangeable()
+    {
+        ISymbolExtensionsCommon.IsChangeable(testCode.GetMethodSymbol("Base.Method1")).Should().BeFalse();
+        ISymbolExtensionsCommon.IsChangeable(testCode.GetMethodSymbol("Base.Method4")).Should().BeTrue();
+        ISymbolExtensionsCommon.IsChangeable(testCode.GetMethodSymbol("Derived2.Method5")).Should().BeFalse();
+        ISymbolExtensionsCommon.IsChangeable(testCode.GetMethodSymbol("Derived2.Method3")).Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void AnyAttributeDerivesFrom_WhenSymbolIsNull_ReturnsFalse() =>
+        ISymbolExtensionsCommon.AnyAttributeDerivesFrom(null, KnownType.Void).Should().BeFalse();
+
+    [TestMethod]
+    public void AnyAttributeDerivesFromAny_WhenSymbolIsNull_ReturnsFalse() =>
+        ISymbolExtensionsCommon.AnyAttributeDerivesFromAny(null, []).Should().BeFalse();
+
+    [TestMethod]
+    public void GetAttributesForKnownType_WhenSymbolIsNull_ReturnsEmpty() =>
+        ISymbolExtensionsCommon.GetAttributes(null, KnownType.Void).Should().BeEmpty();
+
+    [TestMethod]
+    public void GetAttributesForKnownTypes_WhenSymbolIsNull_ReturnsEmpty() =>
+        ISymbolExtensionsCommon.GetAttributes(null, ImmutableArray.Create(KnownType.Void)).Should().BeEmpty();
+
+    [TestMethod]
+    public void GetParameters_WhenSymbolIsNotMethodOrProperty_ReturnsEmpty() =>
+        ISymbolExtensionsCommon.GetParameters(Mock.Of<ISymbol>(x => x.Kind == SymbolKind.Alias)).Should().BeEmpty();
+
+    [TestMethod]
+    public void GetInterfaceMember_WhenSymbolIsNull_ReturnsEmpty() =>
+        ISymbolExtensionsCommon.GetInterfaceMember((ISymbol)null).Should().BeNull();
+
+    [TestMethod]
+    public void GetOverriddenMember_WhenSymbolIsNull_ReturnsEmpty() =>
+        ISymbolExtensionsCommon.GetOverriddenMember((ISymbol)null).Should().BeNull();
+
+    [TestMethod]
+    public void GetEffectiveAccessibility_WhenSymbolIsNull_ReturnsNotApplicable() =>
+        ISymbolExtensionsCommon.GetEffectiveAccessibility(null).Should().Be(Accessibility.NotApplicable);
+
+    [DataTestMethod]
+    [DataRow(SymbolKind.Alias, "alias")]
+    [DataRow(SymbolKind.ArrayType, "array")]
+    [DataRow(SymbolKind.Assembly, "assembly")]
+    [DataRow(SymbolKind.Discard, "discard")]
+    [DataRow(SymbolKind.DynamicType, "dynamic")]
+    [DataRow(SymbolKind.ErrorType, "error")]
+    [DataRow(SymbolKind.Event, "event")]
+    [DataRow(SymbolKind.Field, "field")]
+    [DataRow(SymbolKind.FunctionPointerType, "function pointer")]
+    [DataRow(SymbolKind.Label, "label")]
+    [DataRow(SymbolKind.Local, "local")]
+    [DataRow(SymbolKind.Namespace, "namespace")]
+    [DataRow(SymbolKind.NetModule, "netmodule")]
+    [DataRow(SymbolKind.Parameter, "parameter")]
+    [DataRow(SymbolKind.PointerType, "pointer")]
+    [DataRow(SymbolKind.Preprocessing, "preprocessing")]
+    [DataRow(SymbolKind.Property, "property")]
+    [DataRow(SymbolKind.RangeVariable, "range variable")]
+    [DataRow(SymbolKind.TypeParameter, "type parameter")]
+    public void GetClassification_SimpleKinds(SymbolKind symbolKind, string expected)
+    {
+        var fakeSymbol = new Mock<ISymbol>();
+        fakeSymbol.Setup(x => x.Kind).Returns(symbolKind);
+        ISymbolExtensionsCommon.GetClassification(fakeSymbol.Object).Should().Be(expected);
+    }
+
+    [TestMethod]
+    public void GetClassification_UnknowKind()
+    {
+        var fakeSymbol = new Mock<ISymbol>();
+        fakeSymbol.Setup(x => x.Kind).Returns((SymbolKind)999);
+#if DEBUG
+        new Action(() => ISymbolExtensionsCommon.GetClassification(fakeSymbol.Object)).Should().Throw<NotSupportedException>();
+#else
+        ISymbolExtensionsCommon.GetClassification(fakeSymbol.Object).Should().Be("symbol");
+#endif
+    }
 
     private static ISymbol CreateSymbol(string snippet, AnalyzerLanguage language, ParseOptions parseOptions = null)
     {

@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Test.Helpers
+namespace SonarAnalyzer.Test.Helpers    // FIXME: File scoped NS
 {
     [TestClass]
     public class KnownMethodsTest
@@ -126,5 +126,35 @@ namespace SonarAnalyzer.Test.Helpers
         [TestMethod]
         public void IsEnumerableConcat_Null_ShouldBeFalse() =>
             KnownMethods.IsEnumerableConcat(null).Should().BeFalse();
+
+        [TestMethod]
+        public void Symbol_IsProbablyEventHandler()
+        {
+            var snippet = new SnippetCompiler("""
+                public class Sample
+                {
+                    public void Method() { }
+                    public void EventHandler(object o, System.EventArgs args){}
+                }
+                """);
+            snippet.GetMethodSymbol("Sample.Method").IsEventHandler().Should().BeFalse();
+            snippet.GetMethodSymbol("Sample.EventHandler").IsEventHandler().Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void Symbol_IsProbablyEventHandler_ResolveEventHandler()
+        {
+            var snippet = new SnippetCompiler("""
+                public class AssemblyLoad
+                {
+                    public AssemblyLoad()
+                    {
+                        AppDomain.CurrentDomain.AssemblyResolve += LoadAnyVersion;
+                    }
+                    Assembly LoadAnyVersion(object sender, ResolveEventArgs args) => null;
+                }
+                """);
+            snippet.GetMethodSymbol("AssemblyLoad.LoadAnyVersion").IsEventHandler().Should().BeTrue();
+        }
     }
 }

@@ -18,22 +18,25 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+extern alias common;
 extern alias csharp;
 extern alias vbnet;
 
 using FluentAssertions.Extensions;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Operations;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.CFG.Roslyn;
 using StyleCop.Analyzers.Lightup;
 using static csharp::SonarAnalyzer.Extensions.SyntaxTokenExtensions;
+using ExtensionsCommon = common::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
 using ExtensionsCS = csharp::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
 using ExtensionsVB = vbnet::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
 using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using SyntaxVB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace SonarAnalyzer.Test.Extensions
+namespace SonarAnalyzer.Test.Extensions // FIXME: FileScoped NS
 {
     [TestClass]
     public class SyntaxNodeExtensionsTest
@@ -1301,6 +1304,22 @@ public class X
                 """, AnalyzerLanguage.CSharp);
             var actual = ExtensionsCS.EnclosingScope(node)?.Kind();
             actual.Should().Be(expected);
+        }
+
+        [TestMethod]
+        public void Symbol_IsKnownType()
+        {
+            var snippet = new SnippetCompiler("""
+                  public class Sample
+                  {
+                    public void Method<T, V>(List<T> param1, List<int> param2, List<V> param3, IList<int> param4);
+                  }
+                """);
+            var method = (MethodDeclarationSyntax)snippet.GetMethodDeclaration("Sample.Method");
+            ExtensionsCommon.IsKnownType(method.ParameterList.Parameters[0].Type, KnownType.System_Collections_Generic_List_T, snippet.SemanticModel).Should().BeTrue();
+            ExtensionsCommon.IsKnownType(method.ParameterList.Parameters[1].Type, KnownType.System_Collections_Generic_List_T, snippet.SemanticModel).Should().BeTrue();
+            ExtensionsCommon.IsKnownType(method.ParameterList.Parameters[2].Type, KnownType.System_Collections_Generic_List_T, snippet.SemanticModel).Should().BeTrue();
+            ExtensionsCommon.IsKnownType(method.ParameterList.Parameters[3].Type, KnownType.System_Collections_Generic_List_T, snippet.SemanticModel).Should().BeFalse();
         }
 
         private static SyntaxNode NodeBetweenMarkers(string code, AnalyzerLanguage language, bool getInnermostNodeForTie = false, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)

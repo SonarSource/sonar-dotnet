@@ -108,4 +108,66 @@ public class INamespaceSymbolExtensionsTest
         INamespaceSymbol ns = null;
         ns.Is(nameSpace).Should().BeFalse();
     }
+
+    [TestMethod]
+    public void GetAllNamedTypesForNamespace_WhenSymbolIsNull_ReturnsEmpty() =>
+        ((INamespaceSymbol)null).GetAllNamedTypes().Should().BeEmpty();
+
+    [TestMethod]
+    public void Symbol_GetSelfAndBaseTypes()
+    {
+        var snippet = new SnippetCompiler("""
+            public class Base { }
+            public class Derived : Base { }
+            """);
+        var objectType = snippet.GetTypeByMetadataName("System.Object");
+        var baseTypes = objectType.GetSelfAndBaseTypes().ToList();
+        baseTypes.Should().ContainSingle();
+        baseTypes.First().Should().Be(objectType);
+
+        var derived1Type = snippet.GetTypeSymbol("Derived1") as INamedTypeSymbol;
+        baseTypes = derived1Type.GetSelfAndBaseTypes().ToList();
+        baseTypes.Should().HaveCount(3);
+        baseTypes.Should().HaveElementAt(0, derived1Type);
+        baseTypes.Should().HaveElementAt(1, snippet.GetTypeSymbol("Base").Should().BeAssignableTo<INamedTypeSymbol>().Subject);
+        baseTypes.Should().HaveElementAt(2, objectType);
+    }
+
+    [TestMethod]
+    public void Symbol_GetAllNamedTypes_Type()
+    {
+        var snippet = new SnippetCompiler("""
+            public class Outer
+            {
+                public class Nested
+                {
+                  public class NestedMore { }
+                }
+            }
+            """);
+        var typeSymbol = snippet.GetTypeSymbol("Outer") as INamedTypeSymbol;
+        typeSymbol.GetAllNamedTypes().Should().HaveCount(3);
+    }
+
+    [TestMethod]
+    public void Symbol_GetAllNamedTypes_Namespace()
+    {
+        var snippet = new SnippetCompiler("""
+            namespace NS
+            {
+              public class Base
+              {
+                public class Nested
+                {
+                  public class NestedMore { }
+                }
+              }
+              public class Derived : Base { }
+              public interface IInterface { }
+            }
+            """);
+        var nsSymbol = snippet.GetNamespaceSymbol("NS");
+
+        nsSymbol.GetAllNamedTypes().Should().HaveCount(5);
+    }
 }
