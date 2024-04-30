@@ -1,7 +1,7 @@
-<p>Explicit expression: @(RaiseHere())</p>
+<p>Explicit expression: @(RaiseHere())</p> @* Noncompliant *@
 @*                        ^^^^^^^^^ *@
 
-<p>Implicit expression: @RaiseHere()</p> 
+<p>Implicit expression: @RaiseHere()</p> @* Noncompliant *@
 @*                       ^^^^^^^^^ *@
 
 <p>Multi-statement block: @{ var result = RaiseHere(); }</p>
@@ -19,21 +19,13 @@
 <p>Lambda expression: @((Func<int>)(() => RaiseHere()))()</p>
 @*                                        ^^^^^^^^^ *@
 
-<p>Nested explicit expression: @(RaiseHere() + @(RaiseHere() * 2))</p>
-@*                               ^^^^^^^^^ *@
-@*                                               ^^^^^^^^^@-1 *@
-
-<p>Nested multi-statement block: @{ var result = RaiseHere(); var result2 = RaiseHere(); }</p>
-@*                                               ^^^^^^^^^ *@
-@*                                                                          ^^^^^^^^^@-1 *@
+<p>Nested multi-statement block: @{ var result2 = RaiseHere(); var result3 = RaiseHere(); }</p>
+@*                                                ^^^^^^^^^ *@
+@*                                                                           ^^^^^^^^^@-1 *@
 
 <p>Nested control structures: @if(RaiseHere() == 42) { <text>@(RaiseHere() + 1)</text> }</p>
 @*                                ^^^^^^^^^ *@
 @*                                                             ^^^^^^^^^@-1 *@
-
-<p>Nested code blocks: @{ RaiseHere(); @{ RaiseHere(); } }</p>
-@*                        ^^^^^^^^^ *@
-@*                                        ^^^^^^^^^@-1 *@
 
 @functions
 {
