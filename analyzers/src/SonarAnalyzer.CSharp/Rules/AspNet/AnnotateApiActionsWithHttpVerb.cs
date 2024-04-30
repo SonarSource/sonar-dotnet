@@ -27,12 +27,11 @@ public sealed class AnnotateApiActionsWithHttpVerb : SonarDiagnosticAnalyzer
     private const string MessageFormat = "REST API controller actions should be annotated with the appropriate HTTP verb attribute.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-
     private static readonly ImmutableArray<KnownType> HttpMethodAttributes = ImmutableArray.Create(
         KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute,
         KnownType.Microsoft_AspNetCore_Mvc_AcceptVerbsAttribute); // AcceptVerbs is treated as an exception
+
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(compilationStartContext =>

@@ -33,16 +33,16 @@ internal static class CompilationExtensions
         // See https://github.com/dotnet/roslyn/issues/3798
         compilation.ObjectType.ContainingAssembly.Name == "mscorlib";
 
-    public static bool ReferencesAny(this Compilation compilation, params KnownAssembly[] assemblies)
-        => assemblies.Any()
+    public static bool ReferencesAny(this Compilation compilation, params KnownAssembly[] assemblies) =>
+        assemblies.Any()
             ? Array.Exists(assemblies, x => compilation.References(x))
             : throw new ArgumentException("Assemblies argument needs to be non-empty");
 
-    public static bool ReferencesAll(this Compilation compilation, params KnownAssembly[] assemblies)
-        => Array.TrueForAll(assemblies, x => compilation.References(x));
+    public static bool ReferencesAll(this Compilation compilation, params KnownAssembly[] assemblies) =>
+        Array.TrueForAll(assemblies, x => compilation.References(x));
 
-    public static bool References(this Compilation compilation, KnownAssembly assembly)
-        => assembly.IsReferencedBy(compilation);
+    public static bool References(this Compilation compilation, KnownAssembly assembly) =>
+        assembly.IsReferencedBy(compilation);
 
     public static bool IsMemberAvailable<TMemberType>(this Compilation compilation, KnownType type, string memberName, Func<TMemberType, bool> memberCheck = null)
         where TMemberType : ISymbol
@@ -53,7 +53,7 @@ internal static class CompilationExtensions
             return false;
         }
         var memberSymbols = containingType.GetMembers(memberName).OfType<TMemberType>();
-        return memberCheck == null
+        return memberCheck is null
             ? memberSymbols.Any()
             : memberSymbols.Any(memberCheck);
     }

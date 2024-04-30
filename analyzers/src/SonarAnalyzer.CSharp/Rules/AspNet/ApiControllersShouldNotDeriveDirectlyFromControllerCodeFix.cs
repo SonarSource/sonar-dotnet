@@ -21,25 +21,24 @@
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Formatting;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[ExportCodeFixProvider(LanguageNames.CSharp)]
+public sealed class ApiControllersShouldNotDeriveDirectlyFromControllerCodeFix : SonarCodeFix
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public sealed class ApiControllersShouldNotDeriveDirectlyFromControllerCodeFix : SonarCodeFix
+    internal const string Title = "Inherit from ControllerBase instead of Controller.";
+
+    public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(ApiControllersShouldNotDeriveDirectlyFromController.DiagnosticId);
+
+    protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
     {
-        internal const string Title = "Inherit from ControllerBase instead of Controller.";
+        var toReplace = root.FindNode(context.Diagnostics.First().Location.SourceSpan) as BaseTypeSyntax;
+        var replacement = root.ReplaceNode(toReplace, SyntaxFactory.SimpleBaseType(SyntaxFactory.IdentifierName("ControllerBase").WithTriviaFrom(toReplace)))
+            .WithAdditionalAnnotations(Formatter.Annotation);
 
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(ApiControllersShouldNotDeriveDirectlyFromController.DiagnosticId);
-
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
-        {
-            var toReplace = root.FindNode(context.Diagnostics.First().Location.SourceSpan) as BaseTypeSyntax;
-            var replacement = root.ReplaceNode(toReplace, SyntaxFactory.SimpleBaseType(SyntaxFactory.IdentifierName("ControllerBase").WithTriviaFrom(toReplace)))
-                .WithAdditionalAnnotations(Formatter.Annotation);
-
-            context.RegisterCodeFix(
-               Title,
-               token => Task.FromResult(context.Document.WithSyntaxRoot(replacement)), context.Diagnostics);
-            return Task.CompletedTask;
-        }
-  }
+        context.RegisterCodeFix(
+           Title,
+           x => Task.FromResult(context.Document.WithSyntaxRoot(replacement)), context.Diagnostics);
+        return Task.CompletedTask;
+    }
 }

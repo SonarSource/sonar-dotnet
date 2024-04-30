@@ -18,39 +18,39 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+public abstract class ReuseClientBase : SonarDiagnosticAnalyzer
 {
-    public abstract class ReuseClientBase : SonarDiagnosticAnalyzer
+    protected abstract ImmutableArray<KnownType> ReusableClients { get; }
+
+    protected static bool IsAssignedForReuse(SonarSyntaxNodeReportingContext context) =>
+        !IsInVariableDeclaration(context.Node)
+        && (IsInConditionalCode(context.Node) || IsInFieldOrPropertyInitializer(context.Node) || IsAssignedToStaticFieldOrProperty(context));
+
+    protected bool IsReusableClient(SonarSyntaxNodeReportingContext context)
     {
-        protected abstract ImmutableArray<KnownType> ReusableClients { get; }
-
-        protected static bool IsAssignedForReuse(SonarSyntaxNodeReportingContext context) =>
-            !IsInVariableDeclaration(context.Node)
-            && (IsInConditionalCode(context.Node) || IsInFieldOrPropertyInitializer(context.Node) || IsAssignedToStaticFieldOrProperty(context));
-
-        protected bool IsReusableClient(SonarSyntaxNodeReportingContext context)
-        {
-            var objectCreation = ObjectCreationFactory.Create(context.Node);
-            return ReusableClients.Any(x => objectCreation.IsKnownType(x, context.SemanticModel));
-        }
-
-        private static bool IsInVariableDeclaration(SyntaxNode node) =>
-            node.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: LocalDeclarationStatementSyntax or UsingStatementSyntax } } };
-
-        private static bool IsInFieldOrPropertyInitializer(SyntaxNode node) =>
-            node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.FieldDeclaration, SyntaxKind.PropertyDeclaration))
-            && !node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.GetAccessorDeclaration, SyntaxKind.SetAccessorDeclaration))
-            && !node.Parent.IsKind(SyntaxKind.ArrowExpressionClause);
-
-        private static bool IsInConditionalCode(SyntaxNode node) =>
-            node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.IfStatement,
-                SyntaxKind.SwitchStatement,
-                SyntaxKindEx.SwitchExpression,
-                SyntaxKind.ConditionalExpression,
-                SyntaxKindEx.CoalesceAssignmentExpression));
-
-        private static bool IsAssignedToStaticFieldOrProperty(SonarSyntaxNodeReportingContext context) =>
-            context.Node.Parent.WalkUpParentheses() is AssignmentExpressionSyntax assignment
-                && context.SemanticModel.GetSymbolInfo(assignment.Left, context.Cancel).Symbol is { IsStatic: true, Kind: SymbolKind.Field or SymbolKind.Property };
+        var objectCreation = ObjectCreationFactory.Create(context.Node);
+        return ReusableClients.Any(x => objectCreation.IsKnownType(x, context.SemanticModel));
     }
+
+    private static bool IsInVariableDeclaration(SyntaxNode node) =>
+        node.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: LocalDeclarationStatementSyntax or UsingStatementSyntax } } };
+
+    private static bool IsInFieldOrPropertyInitializer(SyntaxNode node) =>
+        node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.FieldDeclaration, SyntaxKind.PropertyDeclaration))
+        && !node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.GetAccessorDeclaration, SyntaxKind.SetAccessorDeclaration))
+        && !node.Parent.IsKind(SyntaxKind.ArrowExpressionClause);
+
+    private static bool IsInConditionalCode(SyntaxNode node) =>
+        node.Ancestors().Any(x => x.IsAnyKind(
+            SyntaxKind.IfStatement,
+            SyntaxKind.SwitchStatement,
+            SyntaxKindEx.SwitchExpression,
+            SyntaxKind.ConditionalExpression,
+            SyntaxKindEx.CoalesceAssignmentExpression));
+
+    private static bool IsAssignedToStaticFieldOrProperty(SonarSyntaxNodeReportingContext context) =>
+        context.Node.Parent.WalkUpParentheses() is AssignmentExpressionSyntax assignment
+        && context.SemanticModel.GetSymbolInfo(assignment.Left, context.Cancel).Symbol is { IsStatic: true, Kind: SymbolKind.Field or SymbolKind.Property };
 }

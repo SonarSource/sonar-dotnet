@@ -30,7 +30,7 @@ public static class MetadataReferenceFacade
 #if NETFRAMEWORK
         FrameworkMetadataReference.Mscorlib;
 #else
-        new[] {CoreMetadataReference.MsCorLib};
+        new[] { CoreMetadataReference.MsCorLib };
 #endif
 
     public static References MicrosoftExtensionsDependencyInjectionAbstractions =>
@@ -55,14 +55,14 @@ public static class MetadataReferenceFacade
 #if NETFRAMEWORK
         Enumerable.Empty<MetadataReference>();
 #else
-        new[] {CoreMetadataReference.MicrosoftWin32Registry};
+        new[] { CoreMetadataReference.MicrosoftWin32Registry };
 #endif
 
     public static References MicrosoftWin32Primitives =>
 #if NETFRAMEWORK
         Enumerable.Empty<MetadataReference>();
 #else
-        new[] {CoreMetadataReference.MicrosoftWin32Primitives};
+        new[] { CoreMetadataReference.MicrosoftWin32Primitives };
 #endif
 
     public static References NetStandard21 =>
@@ -189,7 +189,7 @@ public static class MetadataReferenceFacade
 #if NETFRAMEWORK
         Enumerable.Empty<MetadataReference>();
 #else
-        new[] {CoreMetadataReference.SystemThreading};
+        new[] { CoreMetadataReference.SystemThreading };
 #endif
 
     public static References SystemThreadingTasks =>
@@ -197,14 +197,7 @@ public static class MetadataReferenceFacade
         FrameworkMetadataReference.SystemThreadingTasks
             .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions("4.0.0"));
 #else
-        new[] {CoreMetadataReference.SystemThreadingTasks};
-#endif
-
-    public static References SystemThreadingTasksExtensions(string version) =>
-#if NETFRAMEWORK
-        NuGetMetadataReference.SystemThreadingTasksExtensions(version);
-#else
-        new[] {CoreMetadataReference.SystemThreadingTasks};
+        new[] { CoreMetadataReference.SystemThreadingTasks };
 #endif
 
     public static References RegularExpressions =>
@@ -255,21 +248,21 @@ public static class MetadataReferenceFacade
 #if NETFRAMEWORK
         FrameworkMetadataReference.SystemXmlLinq;
 #else
-        new[] {CoreMetadataReference.SystemXmlLinq};
+        new[] { CoreMetadataReference.SystemXmlLinq };
 #endif
 
     public static References SystemWeb =>
 #if NETFRAMEWORK
         FrameworkMetadataReference.SystemWeb;
 #else
-        new[] {CoreMetadataReference.SystemWeb};
+        new[] { CoreMetadataReference.SystemWeb };
 #endif
 
     public static References SystemWindowsForms =>
 #if NETFRAMEWORK
         FrameworkMetadataReference.SystemWindowsForms;
 #else
-        new[] {WindowsFormsMetadataReference.SystemWindowsForms};
+        new[] { WindowsFormsMetadataReference.SystemWindowsForms };
 #endif
 
     public static References SystemComponentModelComposition =>
@@ -286,7 +279,7 @@ public static class MetadataReferenceFacade
 #if NETFRAMEWORK
         Enumerable.Empty<MetadataReference>();
 #else
-        new[] {CoreMetadataReference.SystemComponentModelPrimitives};
+        new[] { CoreMetadataReference.SystemComponentModelPrimitives };
 #endif
 
     public static References SystemComponentModelTypeConverter =>
@@ -300,13 +293,13 @@ public static class MetadataReferenceFacade
 #if NETFRAMEWORK
         Enumerable.Empty<MetadataReference>();
 #else
-        new[] {CoreMetadataReference.SystemNetSockets};
+        new[] { CoreMetadataReference.SystemNetSockets };
 #endif
     public static References SystemNetPrimitives =>
 #if NETFRAMEWORK
         Enumerable.Empty<MetadataReference>();
 #else
-        new[] {CoreMetadataReference.SystemNetPrimitives};
+        new[] { CoreMetadataReference.SystemNetPrimitives };
 #endif
 
     public static References WindowsBase =>
@@ -350,5 +343,12 @@ public static class MetadataReferenceFacade
                 CoreMetadataReference.SystemSecurityPrincipalWindows
             }
             .Concat(MetadataReferenceFacade.NetStandard);
+#endif
+
+    public static References SystemThreadingTasksExtensions(string version) =>
+#if NETFRAMEWORK
+        NuGetMetadataReference.SystemThreadingTasksExtensions(version);
+#else
+        [CoreMetadataReference.SystemThreadingTasks];
 #endif
 }

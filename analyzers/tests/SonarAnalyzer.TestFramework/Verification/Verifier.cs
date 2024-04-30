@@ -369,8 +369,6 @@ internal class Verifier
         Path.GetExtension(path) is { } extension
         && (extension.Equals(".razor", StringComparison.OrdinalIgnoreCase) || extension.Equals(".cshtml", StringComparison.OrdinalIgnoreCase));
 
-    public sealed record CompilationData(Compilation Compilation, string[] AdditionalSourceFiles);
-
     private static bool RestorePackages(string path, string workingDirectory)
     {
         using var process = new Process();
@@ -385,4 +383,6 @@ internal class Verifier
         process.WaitForExit();
         return process.ExitCode == 0;
     }
+
+    public sealed record CompilationData(Compilation Compilation, string[] AdditionalSourceFiles);
 }
