@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Extensions;
 
-public static class TypeHelper
+public static class ITypeSymbolExtensions
 {
     #region TypeKind
 
