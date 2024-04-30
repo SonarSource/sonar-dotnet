@@ -21,119 +21,119 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Test.Helpers;
 
-namespace SonarAnalyzer.Test.Extensions
+namespace SonarAnalyzer.Test.Extensions;
+
+[TestClass]
+public class ITypeSymbolExtensionsTest
 {
-    [TestClass]
-    public class ITypeSymbolExtensionsTest
+    private ClassDeclarationSyntax baseClassDeclaration;
+    private ClassDeclarationSyntax derivedClassDeclaration1;
+    private ClassDeclarationSyntax derivedClassDeclaration2;
+    private SyntaxNode root;
+    private SemanticModel semanticModel;
+
+    [TestInitialize]
+    public void Compile()
     {
-        private ClassDeclarationSyntax baseClassDeclaration;
-        private ClassDeclarationSyntax derivedClassDeclaration1;
-        private ClassDeclarationSyntax derivedClassDeclaration2;
-        private SyntaxNode root;
-        private SemanticModel semanticModel;
-
-        [TestInitialize]
-        public void Compile()
+        using (var workspace = new AdhocWorkspace())
         {
-            using (var workspace = new AdhocWorkspace())
+            var document = workspace.CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
+                .AddDocument("test", SymbolHelperTest.TestInput);
+            var compilation = document.Project.GetCompilationAsync().Result;
+            var tree = compilation.SyntaxTrees.First();
+            semanticModel = compilation.GetSemanticModel(tree);
+
+            root = tree.GetRoot();
+            baseClassDeclaration = root.DescendantNodes().OfType<ClassDeclarationSyntax>()
+                .First(m => m.Identifier.ValueText == "Base");
+            derivedClassDeclaration1 = root.DescendantNodes().OfType<ClassDeclarationSyntax>()
+                .First(m => m.Identifier.ValueText == "Derived1");
+            derivedClassDeclaration2 = root.DescendantNodes().OfType<ClassDeclarationSyntax>()
+                .First(m => m.Identifier.ValueText == "Derived2");
+        }
+    }
+
+    [TestMethod]
+    public void Type_DerivesOrImplementsAny()
+    {
+        var baseType = new KnownType("NS.Base");
+        var interfaceType = new KnownType("NS.IInterface");
+
+        var derived1Type = semanticModel.GetDeclaredSymbol(derivedClassDeclaration1) as INamedTypeSymbol;
+        var derived2Type = semanticModel.GetDeclaredSymbol(derivedClassDeclaration2) as INamedTypeSymbol;
+
+        derived2Type.DerivesOrImplements(interfaceType).Should().BeTrue();
+        derived1Type.DerivesOrImplements(interfaceType).Should().BeFalse();
+
+        var baseTypes = ImmutableArray.Create(new[] { interfaceType, baseType });
+        derived1Type.DerivesOrImplementsAny(baseTypes).Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void Type_Is()
+    {
+        var baseKnownType = new KnownType("NS.Base");
+        var baseKnownTypes = ImmutableArray.Create(new[] { baseKnownType });
+
+        var baseType = semanticModel.GetDeclaredSymbol(baseClassDeclaration) as INamedTypeSymbol;
+
+        baseType.Is(baseKnownType).Should().BeTrue();
+        baseType.IsAny(baseKnownTypes).Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void Type_GetSymbolType_Alias()
+    {
+        var aliasUsing = root.DescendantNodesAndSelf().OfType<UsingDirectiveSyntax>().FirstOrDefault(x => x.Alias is not null);
+        var symbol = semanticModel.GetDeclaredSymbol(aliasUsing);
+        var type = symbol.GetSymbolType();
+        symbol.ToString().Should().Be("PropertyBag");
+        type.ToString().Should().Be("System.Collections.Generic.Dictionary<string, object>");
+    }
+
+    [DataTestMethod]
+    [DataRow("System.Collections.Generic.IEnumerable<T>", "System.Collections.Generic.IEnumerable<T>", true)]
+    [DataRow("System.Collections.Generic.IEnumerable<T>", "System.IDisposable", false)]
+    [DataRow("System.Collections.Generic.IEnumerable<int>", "System.Collections.Generic.IEnumerable<T>", false)]    // Because it doesn't implement itself
+    [DataRow("System.Collections.Generic.IEnumerable<int>", "System.Collections.Generic.IEnumerable<string>", false)]
+    [DataRow("System.Collections.Generic.IEnumerable<int>", "System.IDisposable", false)]
+    [DataRow("System.Collections.Generic.List<T>", "System.Collections.Generic.IEnumerable<T>", true)]
+    [DataRow("System.Collections.Generic.List<T>", "System.Collections.Generic.IEnumerable<int>", false)]
+    [DataRow("System.Collections.Generic.List<T>", "System.IDisposable", false)]
+    [DataRow("System.Collections.Generic.List<int>", "System.Collections.Generic.IEnumerable<T>", true)]
+    [DataRow("System.Collections.Generic.List<int>", "System.Collections.Generic.IEnumerable<int>", true)]
+    [DataRow("System.Collections.Generic.List<int>", "System.IDisposable", false)]
+    public void Type_DerivesOrImplements_Type(string typeSymbolName, string typeName, bool expected)
+    {
+        var compilation = TestHelper.CompileCS("""
+            using System.Collections.Generic;
+            public class IntList : List<int>, IEnumerable<string>
             {
-                var document = workspace.CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
-                    .AddDocument("test", SymbolHelperTest.TestInput);
-                var compilation = document.Project.GetCompilationAsync().Result;
-                var tree = compilation.SyntaxTrees.First();
-                semanticModel = compilation.GetSemanticModel(tree);
-
-                root = tree.GetRoot();
-                baseClassDeclaration = root.DescendantNodes().OfType<ClassDeclarationSyntax>()
-                    .First(m => m.Identifier.ValueText == "Base");
-                derivedClassDeclaration1 = root.DescendantNodes().OfType<ClassDeclarationSyntax>()
-                    .First(m => m.Identifier.ValueText == "Derived1");
-                derivedClassDeclaration2 = root.DescendantNodes().OfType<ClassDeclarationSyntax>()
-                    .First(m => m.Identifier.ValueText == "Derived2");
+                IEnumerator<string> IEnumerable<string>.GetEnumerator() => null;
             }
-        }
+            """).Model.Compilation;
+        var allTypes = compilation.GlobalNamespace.GetAllNamedTypes().ToList();
+        var intList = allTypes.Single(x => x.Name == "IntList");
+        allTypes.Add(intList.BaseType);
+        allTypes.AddRange(intList.AllInterfaces);
+        var typeSymbol = allTypes.Single(x => x.ToString() == typeSymbolName);
+        var type = allTypes.Single(x => x.ToString() == typeName);
 
-        [TestMethod]
-        public void Type_DerivesOrImplementsAny()
-        {
-            var baseType = new KnownType("NS.Base");
-            var interfaceType = new KnownType("NS.IInterface");
+        typeSymbol.DerivesOrImplements(type).Should().Be(expected);
+    }
 
-            var derived1Type = semanticModel.GetDeclaredSymbol(derivedClassDeclaration1) as INamedTypeSymbol;
-            var derived2Type = semanticModel.GetDeclaredSymbol(derivedClassDeclaration2) as INamedTypeSymbol;
-
-            derived2Type.DerivesOrImplements(interfaceType).Should().BeTrue();
-            derived1Type.DerivesOrImplements(interfaceType).Should().BeFalse();
-
-            var baseTypes = ImmutableArray.Create(new[] { interfaceType, baseType });
-            derived1Type.DerivesOrImplementsAny(baseTypes).Should().BeTrue();
-        }
-
-        [TestMethod]
-        public void Type_Is()
-        {
-            var baseKnownType = new KnownType("NS.Base");
-            var baseKnownTypes = ImmutableArray.Create(new[] { baseKnownType });
-
-            var baseType = semanticModel.GetDeclaredSymbol(baseClassDeclaration) as INamedTypeSymbol;
-
-            baseType.Is(baseKnownType).Should().BeTrue();
-            baseType.IsAny(baseKnownTypes).Should().BeTrue();
-        }
-
-        [TestMethod]
-        public void Type_GetSymbolType_Alias()
-        {
-            var aliasUsing = root.DescendantNodesAndSelf().OfType<UsingDirectiveSyntax>().FirstOrDefault(x => x.Alias is not null);
-            var symbol = semanticModel.GetDeclaredSymbol(aliasUsing);
-            var type = symbol.GetSymbolType();
-            symbol.ToString().Should().Be("PropertyBag");
-            type.ToString().Should().Be("System.Collections.Generic.Dictionary<string, object>");
-        }
-
-        [DataTestMethod]
-        [DataRow("System.Collections.Generic.IEnumerable<T>", "System.Collections.Generic.IEnumerable<T>", true)]
-        [DataRow("System.Collections.Generic.IEnumerable<T>", "System.IDisposable", false)]
-        [DataRow("System.Collections.Generic.IEnumerable<int>", "System.Collections.Generic.IEnumerable<T>", false)]    // Because it doesn't implement itself
-        [DataRow("System.Collections.Generic.IEnumerable<int>", "System.Collections.Generic.IEnumerable<string>", false)]
-        [DataRow("System.Collections.Generic.IEnumerable<int>", "System.IDisposable", false)]
-        [DataRow("System.Collections.Generic.List<T>", "System.Collections.Generic.IEnumerable<T>", true)]
-        [DataRow("System.Collections.Generic.List<T>", "System.Collections.Generic.IEnumerable<int>", false)]
-        [DataRow("System.Collections.Generic.List<T>", "System.IDisposable", false)]
-        [DataRow("System.Collections.Generic.List<int>", "System.Collections.Generic.IEnumerable<T>", true)]
-        [DataRow("System.Collections.Generic.List<int>", "System.Collections.Generic.IEnumerable<int>", true)]
-        [DataRow("System.Collections.Generic.List<int>", "System.IDisposable", false)]
-        public void Type_DerivesOrImplements_Type(string typeSymbolName, string typeName, bool expected)
-        {
-            var compilation = TestHelper.CompileCS("""
-                using System.Collections.Generic;
-                public class IntList : List<int>, IEnumerable<string>
-                {
-                    IEnumerator<string> IEnumerable<string>.GetEnumerator() => null;
-                }
-                """).Model.Compilation;
-            var allTypes = compilation.GlobalNamespace.GetAllNamedTypes().ToList();
-            var intList = allTypes.Single(x => x.Name == "IntList");
-            allTypes.Add(intList.BaseType);
-            allTypes.AddRange(intList.AllInterfaces);
-            var typeSymbol = allTypes.Single(x => x.ToString() == typeSymbolName);
-            var type = allTypes.Single(x => x.ToString() == typeName);
-
-            typeSymbol.DerivesOrImplements(type).Should().Be(expected);
-        }
-
-        [DataTestMethod]
-        [DataRow("int")]
-        [DataRow("System.Int32")]
-        [DataRow("int?")]
-        [DataRow("System.Nullable<int>")]
-        [DataRow("CustomStruct")]
-        [DataRow("CustomRefStruct")]
-        [DataRow("RecordStruct")]
-        public void IsStruct_Simple_True(string type)
-        {
-            var fieldSymbol = FirstFieldSymbolFromCode($$"""
-                struct CustomStruct { }
+    [DataTestMethod]
+    [DataRow("int")]
+    [DataRow("System.Int32")]
+    [DataRow("int?")]
+    [DataRow("System.Nullable<int>")]
+    [DataRow("CustomStruct")]
+    [DataRow("CustomRefStruct")]
+    [DataRow("RecordStruct")]
+    public void IsStruct_Simple_True(string type)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            struct CustomStruct { }
                 record struct RecordStruct { }
                 ref struct CustomRefStruct { }
 
@@ -142,145 +142,145 @@ namespace SonarAnalyzer.Test.Extensions
                     {{type}} field;
                 }
                 """);
-            fieldSymbol.Type.IsStruct().Should().BeTrue();
-        }
+        fieldSymbol.Type.IsStruct().Should().BeTrue();
+    }
 
-        [DataTestMethod]
-        [DataRow("object")]
-        [DataRow("System.IComparable")]
-        public void IsStruct_Simple_False(string type)
-        {
-            var fieldSymbol = FirstFieldSymbolFromCode($$"""
-                class Test
+    [DataTestMethod]
+    [DataRow("object")]
+    [DataRow("System.IComparable")]
+    public void IsStruct_Simple_False(string type)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            class Test
                 {
                     {{type}} field;
                 }
                 """);
-            fieldSymbol.Type.IsStruct().Should().BeFalse();
-        }
+        fieldSymbol.Type.IsStruct().Should().BeFalse();
+    }
 
-        [DataTestMethod]
-        [DataRow("struct")]
-        [DataRow("unmanaged")]
-        public void IsStruct_Generic(string typeConstraint)
-        {
-            var fieldSymbol = FirstFieldSymbolFromCode($$"""
-                using System;
+    [DataTestMethod]
+    [DataRow("struct")]
+    [DataRow("unmanaged")]
+    public void IsStruct_Generic(string typeConstraint)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            using System;
                 class Test<T> where T: {{typeConstraint}}
                 {
                     T field;
                 }
                 """);
-            fieldSymbol.Type.IsStruct().Should().BeTrue();
-        }
+        fieldSymbol.Type.IsStruct().Should().BeTrue();
+    }
 
-        [DataTestMethod]
-        [DataRow("T")]
-        [DataRow("T?")]
-        [DataRow("Nullable<T>")]
-        public void IsStruct_Generic_Nullable(string type)
-        {
-            var fieldSymbol = FirstFieldSymbolFromCode($$"""
-                using System;
+    [DataTestMethod]
+    [DataRow("T")]
+    [DataRow("T?")]
+    [DataRow("Nullable<T>")]
+    public void IsStruct_Generic_Nullable(string type)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            using System;
                 class Test<T> where T: struct
                 {
                     {{type}} field;
                 }
                 """);
-            fieldSymbol.Type.IsStruct().Should().BeTrue();
-        }
+        fieldSymbol.Type.IsStruct().Should().BeTrue();
+    }
 
-        [DataTestMethod]
-        [DataRow("")]
-        [DataRow("where T: new()")]
-        [DataRow("where T: class")]
-        [DataRow("where T: class, new()")]
-        [DataRow("where T: Exception")]
-        [DataRow("where T: Enum")]
-        [DataRow("where T: Enum, IComparable")]
-        [DataRow("where T: Enum, new()")]
-        [DataRow("where T: Enum, IComparable, new()")]
-        [DataRow("where T: notnull")]
-        public void IsStruct_False_Generic(string typeConstraint)
-        {
-            var fieldSymbol = FirstFieldSymbolFromCode($$"""
-                using System;
+    [DataTestMethod]
+    [DataRow("")]
+    [DataRow("where T: new()")]
+    [DataRow("where T: class")]
+    [DataRow("where T: class, new()")]
+    [DataRow("where T: Exception")]
+    [DataRow("where T: Enum")]
+    [DataRow("where T: Enum, IComparable")]
+    [DataRow("where T: Enum, new()")]
+    [DataRow("where T: Enum, IComparable, new()")]
+    [DataRow("where T: notnull")]
+    public void IsStruct_False_Generic(string typeConstraint)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            using System;
                 class Test<T> {{typeConstraint}}
                 {
                     T field;
                 }
                 """);
-            fieldSymbol.Type.IsStruct().Should().BeFalse();
-        }
+        fieldSymbol.Type.IsStruct().Should().BeFalse();
+    }
 
-        [DataTestMethod]
-        [DataRow("")]                      // Unbounded (can be reference type or value type)
-        [DataRow("where T: new()")]        // Unbounded
-        [DataRow("where T: notnull")]      // Unbounded
-        [DataRow("where T: class")]
-        [DataRow("where T: class?")]
-        [DataRow("where T: class, new()")]
-        [DataRow("where T: Exception")]
-        [DataRow("where T: Exception?")]
-        [DataRow("where T: IComparable")]
-        [DataRow("where T: IComparable?")]
-        [DataRow("where T: Delegate")]
-        [DataRow("where T: Delegate?")]
-        public void IsStruct_False_Generic_NullableReferenceType(string typeConstraint)
-        {
-            var fieldSymbol = FirstFieldSymbolFromCode($$"""
-                #nullable enable
+    [DataTestMethod]
+    [DataRow("")]                      // Unbounded (can be reference type or value type)
+    [DataRow("where T: new()")]        // Unbounded
+    [DataRow("where T: notnull")]      // Unbounded
+    [DataRow("where T: class")]
+    [DataRow("where T: class?")]
+    [DataRow("where T: class, new()")]
+    [DataRow("where T: Exception")]
+    [DataRow("where T: Exception?")]
+    [DataRow("where T: IComparable")]
+    [DataRow("where T: IComparable?")]
+    [DataRow("where T: Delegate")]
+    [DataRow("where T: Delegate?")]
+    public void IsStruct_False_Generic_NullableReferenceType(string typeConstraint)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            #nullable enable
                 using System;
                 class Test<T> {{typeConstraint}}
                 {
                     T? field;
                 }
                 """);
-            fieldSymbol.Type.IsStruct().Should().BeFalse();
-        }
+        fieldSymbol.Type.IsStruct().Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void IsStruct_False_Generic_Derived()
-        {
-            var fieldSymbol = FirstFieldSymbolFromCode($$"""
-                using System;
+    [TestMethod]
+    public void IsStruct_False_Generic_Derived()
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            using System;
                 class Test<T, U> where U: T
                 {
                     U field;
                 }
                 """);
-            fieldSymbol.Type.IsStruct().Should().BeFalse();
-        }
+        fieldSymbol.Type.IsStruct().Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void IsStruct_SelfRefrencingStruct()
-        {
-            var (tree, model) = TestHelper.CompileCS("""
-                interface Interface<T> where T: struct, Interface<T> { }
-                struct Impl: Interface<Impl> { } // For demonstration how an implementation can look like
+    [TestMethod]
+    public void IsStruct_SelfRefrencingStruct()
+    {
+        var (tree, model) = TestHelper.CompileCS("""
+            interface Interface<T> where T: struct, Interface<T> { }
+            struct Impl: Interface<Impl> { } // For demonstration how an implementation can look like
 
-                class Test
+            class Test
+            {
+                static void Method<T>(Interface<T> parameter) where T: struct, Interface<T>
                 {
-                    static void Method<T>(Interface<T> parameter) where T: struct, Interface<T>
-                    {
-                    }
                 }
-                """);
-            var parameter = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().First();
-            var parameterSymbol = (IParameterSymbol)model.GetDeclaredSymbol(parameter);
-            parameterSymbol.Type.IsStruct().Should().BeFalse(); // parameter must be a struct, but even the compiler doesn't recognizes this
-        }
+            }
+            """);
+        var parameter = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().First();
+        var parameterSymbol = (IParameterSymbol)model.GetDeclaredSymbol(parameter);
+        parameterSymbol.Type.IsStruct().Should().BeFalse(); // parameter must be a struct, but even the compiler doesn't recognizes this
+    }
 
-        [DataTestMethod]
-        [DataRow("int")]
-        [DataRow("System.Int32")]
-        [DataRow("CustomStruct")]
-        [DataRow("CustomRefStruct")]
-        [DataRow("RecordStruct")]
-        public void IsNonNullableValueType_Simple_True(string type)
-        {
-            var fieldSymbol = FirstFieldSymbolFromCode($$"""
-                struct CustomStruct { }
+    [DataTestMethod]
+    [DataRow("int")]
+    [DataRow("System.Int32")]
+    [DataRow("CustomStruct")]
+    [DataRow("CustomRefStruct")]
+    [DataRow("RecordStruct")]
+    public void IsNonNullableValueType_Simple_True(string type)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            struct CustomStruct { }
                 record struct RecordStruct { }
                 ref struct CustomRefStruct { }
 
@@ -289,112 +289,112 @@ namespace SonarAnalyzer.Test.Extensions
                     {{type}} field;
                 }
                 """);
-            fieldSymbol.Type.IsNonNullableValueType().Should().BeTrue();
-        }
+        fieldSymbol.Type.IsNonNullableValueType().Should().BeTrue();
+    }
 
-        [DataTestMethod]
-        [DataRow("object")]
-        [DataRow("System.IComparable")]
-        [DataRow("int?")]
-        [DataRow("System.Nullable<int>")]
-        public void IsNonNullableValueType_Simple_False(string type)
-        {
-            var fieldSymbol = FirstFieldSymbolFromCode($$"""
-                class Test
+    [DataTestMethod]
+    [DataRow("object")]
+    [DataRow("System.IComparable")]
+    [DataRow("int?")]
+    [DataRow("System.Nullable<int>")]
+    public void IsNonNullableValueType_Simple_False(string type)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            class Test
                 {
                     {{type}} field;
                 }
                 """);
-            fieldSymbol.Type.IsNonNullableValueType().Should().BeFalse();
-        }
+        fieldSymbol.Type.IsNonNullableValueType().Should().BeFalse();
+    }
 
-        [DataTestMethod]
-        [DataRow("struct")]
-        [DataRow("unmanaged")]
-        public void IsNonNullableValueType_Generic(string typeConstraint)
-        {
-            var fieldSymbol = FirstFieldSymbolFromCode($$"""
-                using System;
+    [DataTestMethod]
+    [DataRow("struct")]
+    [DataRow("unmanaged")]
+    public void IsNonNullableValueType_Generic(string typeConstraint)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            using System;
                 class Test<T> where T: {{typeConstraint}}
                 {
                     T field;
                 }
                 """);
-            fieldSymbol.Type.IsNonNullableValueType().Should().BeTrue();
-        }
+        fieldSymbol.Type.IsNonNullableValueType().Should().BeTrue();
+    }
 
-        [DataTestMethod]
-        [DataRow("T?")]
-        [DataRow("Nullable<T>")]
-        public void IsNonNullableValueType_Generic_ConstraintStruct_Nullable(string type)
-        {
-            var fieldSymbol = FirstFieldSymbolFromCode($$"""
-                using System;
+    [DataTestMethod]
+    [DataRow("T?")]
+    [DataRow("Nullable<T>")]
+    public void IsNonNullableValueType_Generic_ConstraintStruct_Nullable(string type)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            using System;
                 class Test<T> where T: struct
                 {
                     {{type}} field;
                 }
                 """);
-            fieldSymbol.Type.IsNonNullableValueType().Should().BeFalse();
-        }
+        fieldSymbol.Type.IsNonNullableValueType().Should().BeFalse();
+    }
 
-        [DataTestMethod]
-        [DataRow("")]                      // Unbounded (can be reference type or value type)
-        [DataRow("where T: new()")]        // Unbounded
-        [DataRow("where T: notnull")]      // Unbounded
-        [DataRow("where T: struct")]
-        [DataRow("where T: unmanaged")]
-        [DataRow("where T: Enum")]
-        [DataRow("where T: struct, Enum")]
-        [DataRow("where T: struct, Enum, IComparable")]
-        [DataRow("where T: class")]
-        [DataRow("where T: class?")]
-        [DataRow("where T: class, new()")]
-        [DataRow("where T: Exception")]
-        [DataRow("where T: Exception?")]
-        [DataRow("where T: IComparable")]
-        [DataRow("where T: IComparable?")]
-        [DataRow("where T: Delegate")]
-        [DataRow("where T: Delegate?")]
-        public void IsNonNullableValueType_Generic_Constraint_Nullable(string constraint)
-        {
-            var fieldSymbol = FirstFieldSymbolFromCode($$"""
-                #nullable enable
+    [DataTestMethod]
+    [DataRow("")]                      // Unbounded (can be reference type or value type)
+    [DataRow("where T: new()")]        // Unbounded
+    [DataRow("where T: notnull")]      // Unbounded
+    [DataRow("where T: struct")]
+    [DataRow("where T: unmanaged")]
+    [DataRow("where T: Enum")]
+    [DataRow("where T: struct, Enum")]
+    [DataRow("where T: struct, Enum, IComparable")]
+    [DataRow("where T: class")]
+    [DataRow("where T: class?")]
+    [DataRow("where T: class, new()")]
+    [DataRow("where T: Exception")]
+    [DataRow("where T: Exception?")]
+    [DataRow("where T: IComparable")]
+    [DataRow("where T: IComparable?")]
+    [DataRow("where T: Delegate")]
+    [DataRow("where T: Delegate?")]
+    public void IsNonNullableValueType_Generic_Constraint_Nullable(string constraint)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            #nullable enable
                 using System;
                 class Test<T> {{constraint}}
                 {
                     T? field;
                 }
                 """);
-            fieldSymbol.Type.IsNonNullableValueType().Should().BeFalse();
-        }
+        fieldSymbol.Type.IsNonNullableValueType().Should().BeFalse();
+    }
 
-        [DataTestMethod]
-        [DataRow("int?")]
-        [DataRow("System.Nullable<int>")]
-        public void IsNullableValueType_Simple_True(string type)
-        {
-            var fieldSymbol = FirstFieldSymbolFromCode($$"""
-                class Test
+    [DataTestMethod]
+    [DataRow("int?")]
+    [DataRow("System.Nullable<int>")]
+    public void IsNullableValueType_Simple_True(string type)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            class Test
                 {
                     {{type}} field;
                 }
                 """);
-            fieldSymbol.Type.IsNullableValueType().Should().BeTrue();
-        }
+        fieldSymbol.Type.IsNullableValueType().Should().BeTrue();
+    }
 
-        [DataTestMethod]
-        [DataRow("int")]
-        [DataRow("System.Int32")]
-        [DataRow("CustomStruct")]
-        [DataRow("CustomRefStruct")]
-        [DataRow("RecordStruct")]
-        [DataRow("object")]
-        [DataRow("System.IComparable")]
-        public void IsNullableValueType_Simple_False(string type)
-        {
-            var fieldSymbol = FirstFieldSymbolFromCode($$"""
-                struct CustomStruct { }
+    [DataTestMethod]
+    [DataRow("int")]
+    [DataRow("System.Int32")]
+    [DataRow("CustomStruct")]
+    [DataRow("CustomRefStruct")]
+    [DataRow("RecordStruct")]
+    [DataRow("object")]
+    [DataRow("System.IComparable")]
+    public void IsNullableValueType_Simple_False(string type)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            struct CustomStruct { }
                 record struct RecordStruct { }
                 ref struct CustomRefStruct { }
 
@@ -403,18 +403,18 @@ namespace SonarAnalyzer.Test.Extensions
                     {{type}} field;
                 }
                 """);
-            fieldSymbol.Type.IsNullableValueType().Should().BeFalse();
-        }
+        fieldSymbol.Type.IsNullableValueType().Should().BeFalse();
+    }
 
-        [DataTestMethod]
-        [DataRow("T?")]
-        [DataRow("Nullable<T>")]
-        [DataRow("CustomStruct?")]
-        [DataRow("RecordStruct?")]
-        public void IsNullableValueType_Generic_ConstraintStruct_Nullable(string type)
-        {
-            var fieldSymbol = FirstFieldSymbolFromCode($$"""
-                using System;
+    [DataTestMethod]
+    [DataRow("T?")]
+    [DataRow("Nullable<T>")]
+    [DataRow("CustomStruct?")]
+    [DataRow("RecordStruct?")]
+    public void IsNullableValueType_Generic_ConstraintStruct_Nullable(string type)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            using System;
                 struct CustomStruct { }
                 record struct RecordStruct { }
                 class Test<T> where T: struct
@@ -422,111 +422,110 @@ namespace SonarAnalyzer.Test.Extensions
                     {{type}} field;
                 }
                 """);
-            fieldSymbol.Type.IsNullableValueType().Should().BeTrue();
-        }
+        fieldSymbol.Type.IsNullableValueType().Should().BeTrue();
+    }
 
-        [DataTestMethod]
-        [DataRow("struct")]
-        [DataRow("unmanaged")]
-        [DataRow("struct, Enum")]
-        [DataRow("struct, Enum, IComparable")]
-        public void IsNullableValueType_Generic_Constraint_Nullable(string constraint)
-        {
-            var fieldSymbol = FirstFieldSymbolFromCode($$"""
-                using System;
+    [DataTestMethod]
+    [DataRow("struct")]
+    [DataRow("unmanaged")]
+    [DataRow("struct, Enum")]
+    [DataRow("struct, Enum, IComparable")]
+    public void IsNullableValueType_Generic_Constraint_Nullable(string constraint)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            using System;
                 class Test<T> where T: {{constraint}}
                 {
                     T? field;
                 }
                 """);
-            fieldSymbol.Type.IsNullableValueType().Should().BeTrue();
-        }
+        fieldSymbol.Type.IsNullableValueType().Should().BeTrue();
+    }
 
-        [DataTestMethod]
-        [DataRow("struct")]
-        [DataRow("unmanaged")]
-        public void IsNullableValueType_Generic_ConstraintStruct_NonNullable(string typeConstraint)
-        {
-            var fieldSymbol = FirstFieldSymbolFromCode($$"""
-                using System;
+    [DataTestMethod]
+    [DataRow("struct")]
+    [DataRow("unmanaged")]
+    public void IsNullableValueType_Generic_ConstraintStruct_NonNullable(string typeConstraint)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            using System;
                 class Test<T> where T: {{typeConstraint}}
                 {
                     T field;
                 }
                 """);
-            fieldSymbol.Type.IsNullableValueType().Should().BeFalse();
-        }
+        fieldSymbol.Type.IsNullableValueType().Should().BeFalse();
+    }
 
-        [DataTestMethod]
-        [DataRow("")]                      // Unbounded (can be reference type or value type)
-        [DataRow("where T: new()")]        // Unbounded
-        [DataRow("where T: notnull")]      // Unbounded
-        [DataRow("where T: class")]
-        [DataRow("where T: class?")]
-        [DataRow("where T: class, new()")]
-        [DataRow("where T: Enum")]
-        [DataRow("where T: Exception")]
-        [DataRow("where T: Exception?")]
-        [DataRow("where T: IComparable")]
-        [DataRow("where T: IComparable?")]
-        [DataRow("where T: Delegate")]
-        [DataRow("where T: Delegate?")]
-        public void IsNullableValueType_False_Generic_NullableReferenceType(string typeConstraint)
-        {
-            var fieldSymbol = FirstFieldSymbolFromCode($$"""
-                #nullable enable
+    [DataTestMethod]
+    [DataRow("")]                      // Unbounded (can be reference type or value type)
+    [DataRow("where T: new()")]        // Unbounded
+    [DataRow("where T: notnull")]      // Unbounded
+    [DataRow("where T: class")]
+    [DataRow("where T: class?")]
+    [DataRow("where T: class, new()")]
+    [DataRow("where T: Enum")]
+    [DataRow("where T: Exception")]
+    [DataRow("where T: Exception?")]
+    [DataRow("where T: IComparable")]
+    [DataRow("where T: IComparable?")]
+    [DataRow("where T: Delegate")]
+    [DataRow("where T: Delegate?")]
+    public void IsNullableValueType_False_Generic_NullableReferenceType(string typeConstraint)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            #nullable enable
                 using System;
                 class Test<T> {{typeConstraint}}
                 {
                     T? field;
                 }
                 """);
-            fieldSymbol.Type.IsNullableValueType().Should().BeFalse();
-        }
+        fieldSymbol.Type.IsNullableValueType().Should().BeFalse();
+    }
 
-        [DataTestMethod]
-        [DataRow("", "AttributeTargets")]
-        [DataRow("where T: Enum", "T")]
-        [DataRow("where T: struct, Enum", "T")]
-        [DataRow("where T: Enum", "T?")] // With "#nullable enable" "?" means either nullable value type or nullable reference type (unbound generic) and T? is an Enum
-        public void IsEnum_True(string typeConstraint, string fieldType)
-        {
-            var fieldSymbol = FirstFieldSymbolFromCode($$"""
-                #nullable enable
+    [DataTestMethod]
+    [DataRow("", "AttributeTargets")]
+    [DataRow("where T: Enum", "T")]
+    [DataRow("where T: struct, Enum", "T")]
+    [DataRow("where T: Enum", "T?")] // With "#nullable enable" "?" means either nullable value type or nullable reference type (unbound generic) and T? is an Enum
+    public void IsEnum_True(string typeConstraint, string fieldType)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            #nullable enable
                 using System;
                 class Test<T> {{typeConstraint}}
                 {
                     {{fieldType}} field;
                 }
                 """);
-            fieldSymbol.Type.IsEnum().Should().BeTrue();
-        }
+        fieldSymbol.Type.IsEnum().Should().BeTrue();
+    }
 
-        [DataTestMethod]
-        [DataRow("", "int")]
-        [DataRow("", "object")]
-        [DataRow("", "IComparable")]
-        [DataRow("where T: struct, Enum", "T?")] // Here ? means nullable value type because of the additional struct constraint and T? is an Nullable<Enum>
-        [DataRow("where T: struct, Enum", "Nullable<T>")]
-        public void IsEnum_False(string typeConstraint, string fieldType)
-        {
-            var fieldSymbol = FirstFieldSymbolFromCode($$"""
-                #nullable enable
+    [DataTestMethod]
+    [DataRow("", "int")]
+    [DataRow("", "object")]
+    [DataRow("", "IComparable")]
+    [DataRow("where T: struct, Enum", "T?")] // Here ? means nullable value type because of the additional struct constraint and T? is an Nullable<Enum>
+    [DataRow("where T: struct, Enum", "Nullable<T>")]
+    public void IsEnum_False(string typeConstraint, string fieldType)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            #nullable enable
                 using System;
                 class Test<T> {{typeConstraint}}
                 {
                     {{fieldType}} field;
                 }
                 """);
-            fieldSymbol.Type.IsEnum().Should().BeFalse();
-        }
+        fieldSymbol.Type.IsEnum().Should().BeFalse();
+    }
 
-        private static IFieldSymbol FirstFieldSymbolFromCode(string code)
-        {
-            var (tree, model) = TestHelper.CompileCS(code);
-            var field = tree.GetRoot().DescendantNodes().OfType<FieldDeclarationSyntax>().First();
-            var fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(field.Declaration.Variables[0]);
-            return fieldSymbol;
-        }
+    private static IFieldSymbol FirstFieldSymbolFromCode(string code)
+    {
+        var (tree, model) = TestHelper.CompileCS(code);
+        var field = tree.GetRoot().DescendantNodes().OfType<FieldDeclarationSyntax>().First();
+        var fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(field.Declaration.Variables[0]);
+        return fieldSymbol;
     }
 }
