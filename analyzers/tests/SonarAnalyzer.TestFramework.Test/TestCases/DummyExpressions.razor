@@ -1,0 +1,33 @@
+﻿<p>Explicit expression: @(RaiseHere())</p> @* Noncompliant *@
+@*                        ^^^^^^^^^ *@
+
+<p>Implicit expression: @RaiseHere()</p> @* Noncompliant *@
+@*                       ^^^^^^^^^ *@
+
+<p>Multi-statement block: @{ var result = RaiseHere(); }</p>
+@*                                        ^^^^^^^^^ *@
+
+<p>Control structures: @if(RaiseHere() == 42) { <text>42</text> }</p>
+@*                         ^^^^^^^^^ *@
+
+<p>Loops: @for(var i = 0; i < RaiseHere(); i++) { <text>@i</text> }</p>
+@*                            ^^^^^^^^^ *@
+
+<p>Code blocks: @{ RaiseHere(); }</p>
+@*                 ^^^^^^^^^ *@
+
+<p>Lambda expression: @((Func<int>)(() => RaiseHere()))()</p>
+@*                                        ^^^^^^^^^ *@
+
+<p>Nested multi-statement block: @{ var result2 = RaiseHere(); var result3 = RaiseHere(); }</p>
+@*                                                ^^^^^^^^^ *@
+@*                                                                           ^^^^^^^^^@-1 *@
+
+<p>Nested control structures: @if(RaiseHere() == 42) { <text>@(RaiseHere() + 1)</text> }</p>
+@*                                ^^^^^^^^^ *@
+@*                                                             ^^^^^^^^^@-1 *@
+
+@code
+{
+    private static int RaiseHere() => 42;
+}

@@ -182,6 +182,15 @@ public class VerifierTest
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
+    [TestMethod]
+    [DataRow("DummyExpressions.razor")]
+    [DataRow("DummyExpressions.cshtml")]
+    public void Verify_RazorExpressions_Locations(string path) =>
+        DummyWithLocation
+            .AddPaths(path)
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .Verify();
+
     [DataTestMethod]
     [DataRow("Dummy.razor")]
     [DataRow("Dummy.cshtml")]

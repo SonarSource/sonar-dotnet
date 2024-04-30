@@ -220,14 +220,14 @@ namespace SonarAnalyzer.Test.Rules
         public void Verify_Razor() =>
             CreateBuilder(ProjectType.Product, "Razor.razor", "Razor.razor.cs", "RazorComponent.razor", "ToDo.cs", "Razor.cshtml")
                 .WithConcurrentAnalysis(false)
-                .VerifyUtilityAnalyzer<SymbolReferenceInfo>(symbols =>
+                .VerifyUtilityAnalyzer<SymbolReferenceInfo>(x =>
                     {
-                        var orderedSymbols = symbols.OrderBy(x => x.FilePath, StringComparer.InvariantCulture).ToArray();
+                        var orderedSymbols = x.OrderBy(x => x.FilePath, StringComparer.InvariantCulture).ToArray();
                         orderedSymbols.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo("_Imports.razor", "Razor.razor", "Razor.razor.cs", "RazorComponent.razor", "ToDo.cs");
                         orderedSymbols[0].FilePath.Should().EndWith("_Imports.razor");
                         orderedSymbols[1].FilePath.Should().EndWith("Razor.razor");
 
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 13, 4, 6, 20);     // currentCount
+                        VerifyReferences(orderedSymbols[1].Reference, 9, 13, 4, 6, 20, 48); // currentCount
                         VerifyReferences(orderedSymbols[1].Reference, 9, 16, 10, 20, 21);   // IncrementAmount
                         VerifyReferences(orderedSymbols[1].Reference, 9, 18, 8);            // IncrementCount
                         VerifyReferences(orderedSymbols[1].Reference, 9, 34, 34);           // x
@@ -236,6 +236,11 @@ namespace SonarAnalyzer.Test.Rules
                         VerifyReferences(orderedSymbols[1].Reference, 9, 41);               // x
                         VerifyReferences(orderedSymbols[1].Reference, 9, 42);               // y
                         VerifyReferences(orderedSymbols[1].Reference, 9, 44, 41);           // LocalMethod
+
+                        VerifyReferencesColumns(orderedSymbols[1].Reference, 13, 4, 4, 19, 31);   // currentCount: line 4
+                        VerifyReferencesColumns(orderedSymbols[1].Reference, 13, 6, 6, 1, 13);    // currentCount: line 6
+                        VerifyReferencesColumns(orderedSymbols[1].Reference, 13, 20, 20, 8, 20);  // currentCount: line 20
+                        VerifyReferencesColumns(orderedSymbols[1].Reference, 13, 48, 48, 26, 38); // currentCount: line 48
 
                         orderedSymbols[3].FilePath.Should().EndWith("RazorComponent.razor"); // RazorComponent.razor
                         // https://github.com/SonarSource/sonar-dotnet/issues/8417
@@ -351,6 +356,15 @@ namespace SonarAnalyzer.Test.Rules
             references.Single(x => x.Declaration.StartLine == assertedDeclarationLine).Reference.Select(x => x.StartLine)
                       .Should().BeEquivalentTo(assertedDeclarationLineReferences);
         }
+
+        private static void VerifyReferencesColumns(IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference> symbolReference,
+                                                    int declarationLine,
+                                                    int startLine,
+                                                    int endLine,
+                                                    int startOffset,
+                                                    int endOffset) =>
+            symbolReference.Single(x => x.Declaration.StartLine == declarationLine).Reference
+                .Should().ContainSingle(x => x.StartLine == startLine && x.EndLine == endLine && x.StartOffset == startOffset && x.EndOffset == endOffset);
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
         private sealed class TestSymbolReferenceAnalyzer_CS : CS.SymbolReferenceAnalyzer
