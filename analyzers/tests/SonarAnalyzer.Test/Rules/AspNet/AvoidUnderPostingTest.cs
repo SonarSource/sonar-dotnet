@@ -52,6 +52,12 @@ public class AvoidUnderPostingTest
             .WithOptions(ParseOptionsHelper.FromCSharp9)
             .Verify();
 
+    [TestMethod]
+    public void AvoidUnderPosting_CSharp12() =>
+        builder.AddPaths("AvoidUnderPosting.CSharp12.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .Verify();
+
     [DataTestMethod]
     [DataRow("class")]
     [DataRow("struct")]

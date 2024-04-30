@@ -30,21 +30,6 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
     private static readonly ImmutableArray<KnownType> IgnoredTypes = ImmutableArray.Create(
-        KnownType.System_Boolean,
-        KnownType.System_Byte,
-        KnownType.System_SByte,
-        KnownType.System_Int16,
-        KnownType.System_UInt16,
-        KnownType.System_Int32,
-        KnownType.System_UInt32,
-        KnownType.System_Int64,
-        KnownType.System_UInt64,
-        KnownType.System_Char,
-        KnownType.System_Single,
-        KnownType.System_Double,
-        KnownType.System_Decimal,
-        KnownType.System_String,
-        KnownType.System_Object,
         KnownType.Microsoft_AspNetCore_Http_IFormCollection,
         KnownType.Microsoft_AspNetCore_Http_IFormFile,
         KnownType.Microsoft_AspNetCore_Http_IFormFileCollection);
@@ -76,10 +61,10 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
             && method.IsControllerMethod())
         {
             var modelParameterTypes = method.Parameters
+                .Where(x => !HasValidateNeverAttribute(x))
                 .Select(x => x.Type)
                 .OfType<INamedTypeSymbol>()
-                .Where(x => !IgnoreType(x))
-                .SelectMany(x => RelatedTypesToExamine(x))
+                .SelectMany(RelatedTypesToExamine)
                 .Distinct();
             foreach (var modelParameterType in modelParameterTypes)
             {
@@ -93,8 +78,7 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
         var declaredProperties = new List<IPropertySymbol>();
         GetAllDeclaredProperties(parameterType, examinedTypes, declaredProperties);
         var invalidProperties = declaredProperties.Where(x => !CanBeNull(x.Type)
-            && !x.HasAttribute(KnownType.System_ComponentModel_DataAnnotations_RequiredAttribute)
-            && !x.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_ModelBinding_Validation_ValidateNeverAttribute));
+            && !x.HasAttribute(KnownType.System_ComponentModel_DataAnnotations_RequiredAttribute));
         foreach (var property in invalidProperties)
         {
             var propertySyntax = property.DeclaringSyntaxReferences[0].GetSyntax();
@@ -103,10 +87,14 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
     }
 
     private static bool IgnoreType(ITypeSymbol type) =>
-        type.IsAny(IgnoredTypes)
-        || (!type.DeclaringSyntaxReferences.Any()
-            && !type.Is(KnownType.System_Collections_Generic_IEnumerable_T)
-            && !type.Implements(KnownType.System_Collections_Generic_IEnumerable_T));
+        type is not INamedTypeSymbol namedType
+        || namedType.IsAny(IgnoredTypes)
+        || namedType.IsTupleType()
+        || (!namedType.IsRecord()
+            && !namedType.IsValueType
+            && !namedType.IsInterface()
+            && !namedType.Is(KnownType.System_String)
+            && !namedType.Constructors.Any(x => x.Parameters.Length == 0));
 
     private static bool CanBeNull(ITypeSymbol type) =>
         type is ITypeParameterSymbol { HasValueTypeConstraint: false }
@@ -115,13 +103,19 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
 
     private static void GetAllDeclaredProperties(ITypeSymbol type, ConcurrentDictionary<ITypeSymbol, bool> examinedTypes, List<IPropertySymbol> declaredProperties)
     {
-        if (type is INamedTypeSymbol namedType && examinedTypes.TryAdd(namedType, true))
+        if (type is INamedTypeSymbol namedType
+            && examinedTypes.TryAdd(namedType, true)
+            && !IgnoreType(namedType)
+            && !HasValidateNeverAttribute(type))
         {
             var properties = namedType.GetMembers()
                 .OfType<IPropertySymbol>()
                 .Where(x => x.GetEffectiveAccessibility() == Accessibility.Public
-                    && x.SetMethod?.DeclaredAccessibility is Accessibility.Public);
-            foreach (var property in properties.Where(x => x.DeclaringSyntaxReferences.Length > 0))
+                    && x.SetMethod?.DeclaredAccessibility is Accessibility.Public
+                    && !HasValidateNeverAttribute(x)
+                    && x.DeclaringSyntaxReferences.Length > 0
+                    && !IgnoreType(x.Type));
+            foreach (var property in properties)
             {
                 declaredProperties.Add(property);
                 if (property.Type.DeclaringSyntaxReferences.Length > 0)
@@ -141,4 +135,7 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
         type.DerivesOrImplements(KnownType.System_Collections_Generic_IEnumerable_T)
             ? type.TypeArguments.OfType<INamedTypeSymbol>()
             : [type];
+
+    private static bool HasValidateNeverAttribute(ISymbol symbol) =>
+        symbol.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_ModelBinding_Validation_ValidateNeverAttribute);
 }
