@@ -227,7 +227,7 @@ namespace SonarAnalyzer.Test.Rules
                         orderedSymbols[0].FilePath.Should().EndWith("_Imports.razor");
                         orderedSymbols[1].FilePath.Should().EndWith("Razor.razor");
 
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 13, 4, 6, 20);     // currentCount
+                        VerifyReferences(orderedSymbols[1].Reference, 9, 13, 4, 6, 20, 48); // currentCount
                         VerifyReferences(orderedSymbols[1].Reference, 9, 16, 10, 20, 21);   // IncrementAmount
                         VerifyReferences(orderedSymbols[1].Reference, 9, 18, 8);            // IncrementCount
                         VerifyReferences(orderedSymbols[1].Reference, 9, 34, 34);           // x
