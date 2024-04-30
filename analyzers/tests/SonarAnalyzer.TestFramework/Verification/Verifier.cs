@@ -175,13 +175,11 @@ internal class Verifier
         var hasRazorFiles = razorFilePaths.Length > 0;
         concurrentAnalysis = !hasRazorFiles && concurrentAnalysis; // Concurrent analysis is not supported for Razor or cshtml files due to namespace issues
         var concurrentSourceFiles = concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(sourceFilePaths) : [];
-        var concurrentContentFiles = concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(razorFilePaths) : [];
         var projectBuilder = SolutionBuilder.Create()
             .AddProject(language, builder.OutputKind)
             .AddSnippets(sourceSnippets)
             .AddDocuments(sourceFilePaths)
             .AddDocuments(concurrentSourceFiles)
-            .AddAdditionalDocuments(concurrentContentFiles)
             .AddReferences(builder.References);
         if (hasRazorFiles)
         {
@@ -192,7 +190,7 @@ internal class Verifier
                 .AddAnalyzerReferences(SourceGeneratorProvider.SourceGenerators)
                 .AddAnalyzerConfigDocument(
                     Path.Combine(Directory.GetCurrentDirectory(), ".editorconfig"),
-                    editorConfigGenerator.Generate(concurrentContentFiles.Concat(razorFilePaths)));
+                    editorConfigGenerator.Generate(razorFilePaths));
         }
         return projectBuilder;
     }
