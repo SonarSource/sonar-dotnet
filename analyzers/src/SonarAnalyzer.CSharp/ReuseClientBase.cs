@@ -43,7 +43,8 @@ public abstract class ReuseClientBase : SonarDiagnosticAnalyzer
         && !node.Parent.IsKind(SyntaxKind.ArrowExpressionClause);
 
     private static bool IsInConditionalCode(SyntaxNode node) =>
-        node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.IfStatement,
+        node.Ancestors().Any(x => x.IsAnyKind(
+            SyntaxKind.IfStatement,
             SyntaxKind.SwitchStatement,
             SyntaxKindEx.SwitchExpression,
             SyntaxKind.ConditionalExpression,
@@ -51,5 +52,5 @@ public abstract class ReuseClientBase : SonarDiagnosticAnalyzer
 
     private static bool IsAssignedToStaticFieldOrProperty(SonarSyntaxNodeReportingContext context) =>
         context.Node.Parent.WalkUpParentheses() is AssignmentExpressionSyntax assignment
-            && context.SemanticModel.GetSymbolInfo(assignment.Left, context.Cancel).Symbol is { IsStatic: true, Kind: SymbolKind.Field or SymbolKind.Property };
+        && context.SemanticModel.GetSymbolInfo(assignment.Left, context.Cancel).Symbol is { IsStatic: true, Kind: SymbolKind.Field or SymbolKind.Property };
 }
