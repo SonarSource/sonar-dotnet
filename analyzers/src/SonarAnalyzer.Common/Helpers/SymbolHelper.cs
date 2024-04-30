@@ -26,39 +26,6 @@ namespace SonarAnalyzer.Helpers
     {
         private static readonly PropertyInfo ITypeSymbolIsRecord = typeof(ITypeSymbol).GetProperty("IsRecord");
 
-        public static IEnumerable<INamedTypeSymbol> GetAllNamedTypes(this INamespaceSymbol @namespace)
-        {
-            if (@namespace == null)
-            {
-                yield break;
-            }
-
-            foreach (var typeMember in @namespace.GetTypeMembers().SelectMany(GetAllNamedTypes))
-            {
-                yield return typeMember;
-            }
-
-            foreach (var typeMember in @namespace.GetNamespaceMembers().SelectMany(GetAllNamedTypes))
-            {
-                yield return typeMember;
-            }
-        }
-
-        public static IEnumerable<INamedTypeSymbol> GetAllNamedTypes(this INamedTypeSymbol type)
-        {
-            if (type == null)
-            {
-                yield break;
-            }
-
-            yield return type;
-
-            foreach (var nestedType in type.GetTypeMembers().SelectMany(GetAllNamedTypes))
-            {
-                yield return nestedType;
-            }
-        }
-
         public static T GetInterfaceMember<T>(this T symbol)
             where T : class, ISymbol
         {
@@ -183,17 +150,6 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsDestructor(this IMethodSymbol method) =>
             method.MethodKind == MethodKind.Destructor;
-
-        public static bool IsSameNamespace(this INamespaceSymbol namespace1, INamespaceSymbol namespace2) =>
-            (namespace1.IsGlobalNamespace && namespace2.IsGlobalNamespace)
-            || (namespace1.Name.Equals(namespace2.Name)
-                && namespace1.ContainingNamespace != null
-                && namespace2.ContainingNamespace != null
-                && IsSameNamespace(namespace1.ContainingNamespace, namespace2.ContainingNamespace));
-
-        public static bool IsSameOrAncestorOf(this INamespaceSymbol thisNamespace, INamespaceSymbol namespaceToCheck) =>
-            IsSameNamespace(thisNamespace, namespaceToCheck)
-            || (namespaceToCheck.ContainingNamespace != null && IsSameOrAncestorOf(thisNamespace, namespaceToCheck.ContainingNamespace));
 
         internal static IEnumerable<AttributeData> GetAttributes(this ISymbol symbol, KnownType attributeType) =>
             symbol?.GetAttributes().Where(a => a.AttributeClass.Is(attributeType))
