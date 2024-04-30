@@ -101,8 +101,9 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
                 : containingSymbol.ContainingType; // If not dotted, than the scope is the current type. Local function support is missing here.
             var members = GetMethodSymbolsInScope($"{methodSymbol.Name}Async", wellKnownExtensionMethodContainer, invokedType, methodSymbol.ContainingType);
             var awaitableCandidates = members.Where(x => x.IsAwaitableNonDynamic());
-            var awaitableAlternatives = SpeculativeBindCandidates(semanticModel, codeBlock, awaitableRoot, invocationExpression, awaitableCandidates).ToImmutableArray();
-            return awaitableAlternatives;
+            var awaitableAlternatives = SpeculativeBindCandidates(semanticModel, codeBlock, awaitableRoot, invocationExpression, awaitableCandidates);
+            var withoutContainer = awaitableAlternatives.Where(x => !containingSymbol.Equals(x)).ToImmutableArray(); // Exclude candidates that would resolve to the containing method (endless loop)
+            return withoutContainer;
         }
         return ImmutableArray<ISymbol>.Empty;
     }

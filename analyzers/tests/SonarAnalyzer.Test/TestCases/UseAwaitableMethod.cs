@@ -244,3 +244,13 @@ class WellKnownAsyncParameter
         VoidMethod(1); // FN. CancellationToken.None could be provided by the code fix
     }
 }
+
+class ResolvesToSelf
+{
+    public void Synchronous() { }
+
+    public async Task SynchronousAsync()
+    {
+        Synchronous(); // Compliant. The fix would cause an endless loop
+    }
+}
