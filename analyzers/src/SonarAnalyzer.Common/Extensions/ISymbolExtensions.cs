@@ -83,45 +83,31 @@ internal static class ISymbolExtensions
     public static bool IsInType(this ISymbol symbol, ImmutableArray<KnownType> types) =>
         symbol is not null && symbol.ContainingType.IsAny(types);
 
-    public static T GetInterfaceMember<T>(this T symbol)
-        where T : class, ISymbol
-    {
-        if (symbol == null
-            || symbol.IsOverride
-            || !CanBeInterfaceMember(symbol))
-        {
-            return null;
-        }
+    public static T GetInterfaceMember<T>(this T symbol) where T : class, ISymbol =>
+        symbol is null || symbol.IsOverride || !CanBeInterfaceMember(symbol)
+            ? null
+            : symbol.ContainingType
+                .AllInterfaces
+                .SelectMany(x => x.GetMembers())
+                .OfType<T>()
+                .FirstOrDefault(x => symbol.Equals(symbol.ContainingType.FindImplementationForInterfaceMember(x)));
 
-        return symbol.ContainingType
-                     .AllInterfaces
-                     .SelectMany(@interface => @interface.GetMembers())
-                     .OfType<T>()
-                     .FirstOrDefault(member => symbol.Equals(symbol.ContainingType.FindImplementationForInterfaceMember(member)));
-    }
-
-    public static T GetOverriddenMember<T>(this T symbol)
-        where T : class, ISymbol
-    {
-        if (!(symbol is { IsOverride: true }))
-        {
-            return null;
-        }
-
-        return symbol.Kind switch
-        {
-            SymbolKind.Method => (T)((IMethodSymbol)symbol).OverriddenMethod,
-            SymbolKind.Property => (T)((IPropertySymbol)symbol).OverriddenProperty,
-            SymbolKind.Event => (T)((IEventSymbol)symbol).OverriddenEvent,
-            _ => throw new ArgumentException($"Only methods, properties and events can be overridden. {typeof(T).Name} was provided", nameof(symbol))
-        };
-    }
+    public static T GetOverriddenMember<T>(this T symbol) where T : class, ISymbol =>
+        (symbol is { IsOverride: true })
+            ? symbol.Kind switch
+                {
+                    SymbolKind.Method => (T)((IMethodSymbol)symbol).OverriddenMethod,
+                    SymbolKind.Property => (T)((IPropertySymbol)symbol).OverriddenProperty,
+                    SymbolKind.Event => (T)((IEventSymbol)symbol).OverriddenEvent,
+                    _ => throw new ArgumentException($"Only methods, properties and events can be overridden. {typeof(T).Name} was provided", nameof(symbol))
+                }
+            : null;
 
     public static bool IsChangeable(this ISymbol symbol) =>
         !symbol.IsAbstract
         && !symbol.IsVirtual
-        && symbol.GetInterfaceMember() == null
-        && symbol.GetOverriddenMember() == null;
+        && symbol.GetInterfaceMember() is null
+        && symbol.GetOverriddenMember() is null;
 
     public static IEnumerable<IParameterSymbol> GetParameters(this ISymbol symbol) =>
         symbol.Kind switch
@@ -133,7 +119,7 @@ internal static class ISymbolExtensions
 
     public static Accessibility GetEffectiveAccessibility(this ISymbol symbol)
     {
-        if (symbol == null)
+        if (symbol is null)
         {
             return Accessibility.NotApplicable;
         }
@@ -144,13 +130,12 @@ internal static class ISymbolExtensions
             return Accessibility.Private;
         }
 
-        for (var container = symbol.ContainingType; container != null; container = container.ContainingType)
+        for (var container = symbol.ContainingType; container is not null; container = container.ContainingType)
         {
             if (container.DeclaredAccessibility == Accessibility.Private)
             {
                 return Accessibility.Private;
             }
-
             if (container.DeclaredAccessibility == Accessibility.Internal)
             {
                 result = Accessibility.Internal;
@@ -167,12 +152,10 @@ internal static class ISymbolExtensions
         symbol.Kind == SymbolKind.Method && symbol.Name == ".ctor";
 
     public static IEnumerable<AttributeData> GetAttributes(this ISymbol symbol, KnownType attributeType) =>
-        symbol?.GetAttributes().Where(a => a.AttributeClass.Is(attributeType))
-        ?? Enumerable.Empty<AttributeData>();
+        symbol?.GetAttributes().Where(x => x.AttributeClass.Is(attributeType)) ?? [];
 
     public static IEnumerable<AttributeData> GetAttributes(this ISymbol symbol, ImmutableArray<KnownType> attributeTypes) =>
-        symbol?.GetAttributes().Where(a => a.AttributeClass.IsAny(attributeTypes))
-        ?? Enumerable.Empty<AttributeData>();
+        symbol?.GetAttributes().Where(x => x.AttributeClass.IsAny(attributeTypes)) ?? [];
 
     /// <summary>
     /// Returns attributes for the symbol by also respecting <see cref="AttributeUsageAttribute.Inherited"/>.
@@ -209,14 +192,13 @@ internal static class ISymbolExtensions
     }
 
     public static bool AnyAttributeDerivesFrom(this ISymbol symbol, KnownType attributeType) =>
-        symbol?.GetAttributes().Any(a => a.AttributeClass.DerivesFrom(attributeType)) ?? false;
+        symbol?.GetAttributes().Any(x => x.AttributeClass.DerivesFrom(attributeType)) ?? false;
 
     public static bool AnyAttributeDerivesFromAny(this ISymbol symbol, ImmutableArray<KnownType> attributeTypes) =>
-        symbol?.GetAttributes().Any(a => a.AttributeClass.DerivesFromAny(attributeTypes)) ?? false;
+        symbol?.GetAttributes().Any(x => x.AttributeClass.DerivesFromAny(attributeTypes)) ?? false;
 
     public static bool AnyAttributeDerivesFromOrImplementsAny(this ISymbol symbol, ImmutableArray<KnownType> attributeTypesOrInterfaces) =>
-        symbol?.GetAttributes().Any(a => a.AttributeClass.DerivesOrImplementsAny(attributeTypesOrInterfaces)) ?? false;
-
+        symbol?.GetAttributes().Any(x => x.AttributeClass.DerivesOrImplementsAny(attributeTypesOrInterfaces)) ?? false;
 
     public static string GetClassification(this ISymbol symbol) =>
         symbol switch
@@ -273,7 +255,7 @@ internal static class ISymbolExtensions
 #endif
             },
 #if DEBUG
-                _ => throw new NotSupportedException($"symbol is of a not yet supported kind."),
+            _ => throw new NotSupportedException($"symbol is of a not yet supported kind."),
 #else
                 _ => "symbol",
 #endif

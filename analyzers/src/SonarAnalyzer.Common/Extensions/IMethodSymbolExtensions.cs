@@ -24,20 +24,17 @@ internal static class IMethodSymbolExtensions
 {
     public static bool IsExtensionOn(this IMethodSymbol methodSymbol, KnownType type)
     {
-        if (!(methodSymbol is { IsExtensionMethod: true }))
+        if (methodSymbol is { IsExtensionMethod: true })
+        {
+            var receiverType = methodSymbol.MethodKind == MethodKind.Ordinary
+                ? methodSymbol.Parameters.First().Type as INamedTypeSymbol
+                : methodSymbol.ReceiverType as INamedTypeSymbol;
+            return receiverType?.ConstructedFrom.Is(type) ?? false;
+        }
+        else
         {
             return false;
         }
-        // FIXME: Cleanup
-        var receiverType = methodSymbol.ReceiverType as INamedTypeSymbol;
-
-        if (methodSymbol.MethodKind == MethodKind.Ordinary)
-        {
-            receiverType = methodSymbol.Parameters.First().Type as INamedTypeSymbol;
-        }
-
-        var constructedFrom = receiverType?.ConstructedFrom;
-        return constructedFrom.Is(type);
     }
 
     public static bool IsDestructor(this IMethodSymbol method) =>

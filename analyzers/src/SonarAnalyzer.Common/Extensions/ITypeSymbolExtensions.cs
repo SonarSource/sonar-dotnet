@@ -195,7 +195,7 @@ public static class ITypeSymbolExtensions
 
     public static IEnumerable<INamedTypeSymbol> GetSelfAndBaseTypes(this ITypeSymbol type)
     {
-        if (type == null)
+        if (type is null)
         {
             yield break;
         }
@@ -208,8 +208,8 @@ public static class ITypeSymbolExtensions
         }
     }
 
-    public static bool IsRecord(this ITypeSymbol typeSymbol)
-        => ITypeSymbolIsRecord?.GetValue(typeSymbol) is true;
+    public static bool IsRecord(this ITypeSymbol typeSymbol) =>
+        ITypeSymbolIsRecord?.GetValue(typeSymbol) is true;
 
     private static ITypeSymbol NullableTypeArgument(ITypeSymbol type) =>
         type is INamedTypeSymbol namedType && namedType.OriginalDefinition.Is(KnownType.System_Nullable_T)

@@ -24,15 +24,10 @@ internal static class SyntaxNodeExtensions
 {
     public static bool IsKnownType(this SyntaxNode syntaxNode, KnownType knownType, SemanticModel semanticModel)
     {
-        var symbolType = semanticModel.GetSymbolInfo(syntaxNode).Symbol.GetSymbolType();
-
-        return symbolType.Is(knownType) || symbolType?.OriginalDefinition?.Is(knownType) == true;
+        var type = semanticModel.GetSymbolInfo(syntaxNode).Symbol.GetSymbolType();
+        return type.Is(knownType) || type?.OriginalDefinition?.Is(knownType) == true;
     }
 
-    public static bool IsDeclarationKnownType(this SyntaxNode syntaxNode, KnownType knownType, SemanticModel semanticModel)
-    {
-        var symbolType = semanticModel.GetDeclaredSymbol(syntaxNode)?.GetSymbolType();
-        return symbolType.Is(knownType);
-    }
-
+    public static bool IsDeclarationKnownType(this SyntaxNode syntaxNode, KnownType knownType, SemanticModel semanticModel) =>
+        semanticModel.GetDeclaredSymbol(syntaxNode)?.GetSymbolType().Is(knownType) ?? false;
 }
