@@ -19,11 +19,13 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Extensions;
 
-namespace SonarAnalyzer.Test.Helpers
+// FIXME: File scoped NS
+namespace SonarAnalyzer.Test.Extensions
 {
     [TestClass]
-    public class SymbolHelper_IsExtensionOn
+    public class IMethodSymbolExtensionsTest
     {
         internal const string TestInput = @"
 using System.Linq;
@@ -105,8 +107,8 @@ namespace NS
 
         private IMethodSymbol GetMethodSymbolForIndex(int index)
         {
-            var statement = (ExpressionStatementSyntax)this.statements[index];
-            var methodSymbol = this.semanticModel.GetSymbolInfo(statement.Expression).Symbol as IMethodSymbol;
+            var statement = (ExpressionStatementSyntax)statements[index];
+            var methodSymbol = semanticModel.GetSymbolInfo(statement.Expression).Symbol as IMethodSymbol;
             return methodSymbol;
         }
     }
