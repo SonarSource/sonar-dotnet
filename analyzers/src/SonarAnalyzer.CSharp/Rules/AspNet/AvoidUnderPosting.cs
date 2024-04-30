@@ -58,7 +58,7 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
     private static void ProcessControllerMethods(SonarSyntaxNodeReportingContext context, ConcurrentDictionary<ITypeSymbol, bool> examinedTypes)
     {
         if (context.SemanticModel.GetDeclaredSymbol(context.Node) is IMethodSymbol method
-            && method.IsControllerMethod())
+            && method.IsControllerActionMethod())
         {
             var modelParameterTypes = method.Parameters
                 .Where(x => !HasValidateNeverAttribute(x))
