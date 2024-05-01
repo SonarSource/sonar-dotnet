@@ -32,8 +32,8 @@ using SonarAnalyzer.Extensions;
 using StyleCop.Analyzers.Lightup;
 using ExtensionsCommon = common::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
 using ExtensionsShared = csharp::SonarAnalyzer.Extensions.SyntaxNodeExtensionsShared;
-using SyntaxTokenExtensions = csharp::SonarAnalyzer.Extensions.SyntaxTokenExtensions;
 using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
+using SyntaxTokenExtensions = csharp::SonarAnalyzer.Extensions.SyntaxTokenExtensions;
 using SyntaxVB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Test.Extensions;

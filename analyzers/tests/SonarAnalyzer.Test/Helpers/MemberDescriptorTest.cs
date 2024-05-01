@@ -72,7 +72,7 @@ namespace Test
         public void IsMatch_WhenContainingTypeIsNull_ReturnsFalse()
         {
             var typeMock = new Mock<IMethodSymbol>();
-            typeMock.SetupGet(t => t.ContainingType).Returns((INamedTypeSymbol)null);
+            typeMock.SetupGet(x => x.ContainingType).Returns((INamedTypeSymbol)null);
             var lazySymbol = new Lazy<IMethodSymbol>(() => typeMock.Object);
 
             var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
@@ -410,13 +410,13 @@ End Namespace
             Assert.Fail($"Test setup error: could not find method call in test code snippet: {typeAndMethodName}");
             return null;
 
-            IEnumerable<(SyntaxNode node, string name)> GetCSharpNodes() =>
+            IEnumerable<(SyntaxNode Node, string Name)> GetCSharpNodes() =>
                 snippet.GetNodes<SyntaxCS.InvocationExpressionSyntax>()
-                    .Select(n => ((SyntaxNode)n, SyntaxNodeExtensionsCSharp.GetIdentifier(n.Expression)?.ValueText));
+                    .Select(x => ((SyntaxNode)x, SyntaxNodeExtensionsCSharp.GetIdentifier(x.Expression)?.ValueText));
 
-            IEnumerable<(SyntaxNode node, string name)> GetVbNodes() =>
+            IEnumerable<(SyntaxNode Node, string Name)> GetVbNodes() =>
                 snippet.GetNodes<SyntaxVB.InvocationExpressionSyntax>()
-                    .Select(n => ((SyntaxNode)n, SyntaxNodeExtensionsVisualBasic.GetIdentifier(n.Expression)?.ValueText));
+                    .Select(x => ((SyntaxNode)x, SyntaxNodeExtensionsVisualBasic.GetIdentifier(x.Expression)?.ValueText));
         }
 
         private static void CheckExactMatchOnly_OverridesAreNotMatched(SnippetCompiler snippet)
