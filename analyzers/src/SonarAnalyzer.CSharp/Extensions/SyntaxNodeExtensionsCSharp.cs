@@ -72,9 +72,7 @@ public static partial class SyntaxNodeExtensionsCSharp
         CfgCache.FindOrCreate(node, model, cancel);
 
     public static bool ContainsConditionalConstructs(this SyntaxNode node) =>
-        node != null &&
-        node.DescendantNodes()
-            .Any(descendant => descendant.Kind() is SyntaxKind.IfStatement
+        node is not null && node.DescendantNodes().Any(x => x.Kind() is SyntaxKind.IfStatement
                 or SyntaxKind.ConditionalExpression
                 or SyntaxKind.CoalesceExpression
                 or SyntaxKind.SwitchStatement
@@ -101,8 +99,7 @@ public static partial class SyntaxNodeExtensionsCSharp
         }
 
         var current = topNode;
-        while (current.Parent != null
-                && !NegationOrConditionEnclosingSyntaxKinds.Contains(current.Parent.Kind()))
+        while (current.Parent is not null && !NegationOrConditionEnclosingSyntaxKinds.Contains(current.Parent.Kind()))
         {
             current = current.Parent;
         }
@@ -136,7 +133,11 @@ public static partial class SyntaxNodeExtensionsCSharp
             SyntaxKindEx.RecordClassDeclaration => "record",
             SyntaxKindEx.RecordStructDeclaration => "record struct",
             SyntaxKind.StructDeclaration => "struct",
-            _ => GetUnknownType(node.Kind())
+#if DEBUG
+            _ => throw new UnexpectedValueException("node.Kind()", node.Kind().ToString())
+#else
+            _ => "type"
+#endif
         };
 
     // Extracts the expression body from an arrow-bodied syntax node.
@@ -513,18 +514,6 @@ public static partial class SyntaxNodeExtensionsCSharp
 
         return current;
     }
-
-    private static string GetUnknownType(SyntaxKind kind) =>
-
-#if DEBUG
-
-        throw new System.ArgumentException($"Unexpected type {kind}", nameof(kind));
-
-#else
-
-        "type";
-
-#endif
 
     public static BlockSyntax GetBody(this SyntaxNode node) =>
         node switch

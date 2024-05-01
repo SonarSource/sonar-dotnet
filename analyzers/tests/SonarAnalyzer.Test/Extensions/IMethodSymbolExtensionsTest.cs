@@ -65,7 +65,7 @@ public class IMethodSymbolExtensionsTest
         semanticModel = compilation.GetSemanticModel(tree);
         statements = tree.GetRoot().DescendantNodes()
             .OfType<MethodDeclarationSyntax>()
-            .First(m => m.Identifier.ValueText == "TestMethod").Body
+            .First(x => x.Identifier.ValueText == "TestMethod").Body
             .DescendantNodes()
             .OfType<StatementSyntax>().ToList();
     }
