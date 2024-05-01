@@ -28,11 +28,11 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Operations;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.Extensions;
 using StyleCop.Analyzers.Lightup;
-using static csharp::SonarAnalyzer.Extensions.SyntaxTokenExtensions;
 using ExtensionsCommon = common::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
-using ExtensionsCS = csharp::SonarAnalyzer.Extensions.SyntaxNodeExtensionsCSharp;
-using ExtensionsVB = vbnet::SonarAnalyzer.Extensions.SyntaxNodeExtensionsCSharp;
+using ExtensionsShared = csharp::SonarAnalyzer.Extensions.SyntaxNodeExtensionsShared;
+using SyntaxTokenExtensions = csharp::SonarAnalyzer.Extensions.SyntaxTokenExtensions;
 using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using SyntaxVB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
@@ -51,7 +51,7 @@ public class SyntaxNodeExtensionsTest
         var syntaxTree = CSharpSyntaxTree.ParseText(code);
         var compilationUnit = syntaxTree.GetCompilationUnitRoot();
 
-        ExtensionsCS.GetPreviousStatementsCurrentBlock(compilationUnit).Should().BeEmpty();
+        ExtensionsShared.GetPreviousStatementsCurrentBlock(compilationUnit).Should().BeEmpty();
     }
 
     [TestMethod]
@@ -61,9 +61,8 @@ public class SyntaxNodeExtensionsTest
 
         var syntaxTree = CSharpSyntaxTree.ParseText(code);
         var aToken = GetFirstTokenOfKind(syntaxTree, SyntaxKind.NumericLiteralToken);
-
-        var parent = aToken.GetBindableParent();
-        ExtensionsCS.GetPreviousStatementsCurrentBlock(parent).Should().BeEmpty();
+        var parent = SyntaxTokenExtensions.GetBindableParent(aToken);
+        ExtensionsShared.GetPreviousStatementsCurrentBlock(parent).Should().BeEmpty();
     }
 
     [TestMethod]
@@ -73,9 +72,8 @@ public class SyntaxNodeExtensionsTest
 
         var syntaxTree = CSharpSyntaxTree.ParseText(code);
         var aToken = GetFirstTokenOfKind(syntaxTree, SyntaxKind.NumericLiteralToken);
-
-        var parent = aToken.GetBindableParent();
-        ExtensionsCS.GetPreviousStatementsCurrentBlock(parent).Should().HaveCount(1);
+        var parent = SyntaxTokenExtensions.GetBindableParent(aToken);
+        ExtensionsShared.GetPreviousStatementsCurrentBlock(parent).Should().HaveCount(1);
     }
 
     [TestMethod]
@@ -85,9 +83,8 @@ public class SyntaxNodeExtensionsTest
 
         var syntaxTree = CSharpSyntaxTree.ParseText(code);
         var aToken = GetFirstTokenOfKind(syntaxTree, SyntaxKind.NumericLiteralToken);
-
-        var parent = aToken.GetBindableParent();
-        ExtensionsCS.GetPreviousStatementsCurrentBlock(parent).Should().BeEmpty();
+        var parent = SyntaxTokenExtensions.GetBindableParent(aToken);
+        ExtensionsShared.GetPreviousStatementsCurrentBlock(parent).Should().BeEmpty();
     }
 
     [TestMethod]
@@ -95,85 +92,85 @@ public class SyntaxNodeExtensionsTest
     {
         const string code = "var x = 1;";
         var syntaxTree = CSharpSyntaxTree.ParseText(code);
-        ExtensionsCS.ArrowExpressionBody(syntaxTree.GetRoot()).Should().BeNull();
+        SyntaxNodeExtensionsCSharp.ArrowExpressionBody(syntaxTree.GetRoot()).Should().BeNull();
     }
 
     [TestMethod]
     public void GetDeclarationTypeName_UnknownType() =>
 #if DEBUG
-        Assert.ThrowsException<System.ArgumentException>(() => ExtensionsCS.GetDeclarationTypeName(SyntaxFactory.Block()), "Unexpected type Block\r\nParameter name: kind");
+        Assert.ThrowsException<System.ArgumentException>(() => SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.Block()), "Unexpected type Block\r\nParameter name: kind");
 #else
-        ExtensionsCS.GetDeclarationTypeName(SyntaxFactory.Block()).Should().Be("type");
+        SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.Block()).Should().Be("type");
 #endif
 
     [TestMethod]
     public void GetDeclarationTypeName_Class() =>
-        ExtensionsCS.GetDeclarationTypeName(SyntaxFactory.ClassDeclaration("MyClass")).Should().Be("class");
+        SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.ClassDeclaration("MyClass")).Should().Be("class");
 
     [TestMethod]
     public void GetDeclarationTypeName_Constructor() =>
-        ExtensionsCS.GetDeclarationTypeName(SyntaxFactory.ConstructorDeclaration("MyConstructor")).Should().Be("constructor");
+        SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.ConstructorDeclaration("MyConstructor")).Should().Be("constructor");
 
     [TestMethod]
     public void GetDeclarationTypeName_Delegate() =>
-        ExtensionsCS.GetDeclarationTypeName(SyntaxFactory.DelegateDeclaration(SyntaxFactory.ParseTypeName("void"), "MyDelegate")).Should().Be("delegate");
+        SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.DelegateDeclaration(SyntaxFactory.ParseTypeName("void"), "MyDelegate")).Should().Be("delegate");
 
     [TestMethod]
     public void GetDeclarationTypeName_Destructor() =>
-        ExtensionsCS.GetDeclarationTypeName(SyntaxFactory.DestructorDeclaration("~")).Should().Be("destructor");
+        SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.DestructorDeclaration("~")).Should().Be("destructor");
 
     [TestMethod]
     public void GetDeclarationTypeName_Enum() =>
-        ExtensionsCS.GetDeclarationTypeName(SyntaxFactory.EnumDeclaration("MyEnum")).Should().Be("enum");
+        SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.EnumDeclaration("MyEnum")).Should().Be("enum");
 
     [TestMethod]
     public void GetDeclarationTypeName_EnumMember() =>
-        ExtensionsCS.GetDeclarationTypeName(SyntaxFactory.EnumMemberDeclaration("EnumValue1")).Should().Be("enum");
+        SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.EnumMemberDeclaration("EnumValue1")).Should().Be("enum");
 
     [TestMethod]
     public void GetDeclarationTypeName_Event() =>
-        ExtensionsCS.GetDeclarationTypeName(SyntaxFactory.EventDeclaration(SyntaxFactory.ParseTypeName("void"), "MyEvent")).Should().Be("event");
+        SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.EventDeclaration(SyntaxFactory.ParseTypeName("void"), "MyEvent")).Should().Be("event");
 
     [TestMethod]
     public void GetDeclarationTypeName_EventField() =>
-        ExtensionsCS.GetDeclarationTypeName(SyntaxFactory.EventFieldDeclaration(SyntaxFactory.VariableDeclaration(SyntaxFactory.ParseTypeName("MyEvent")))).Should().Be("event");
+        SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.EventFieldDeclaration(SyntaxFactory.VariableDeclaration(SyntaxFactory.ParseTypeName("MyEvent")))).Should().Be("event");
 
     [TestMethod]
     public void GetDeclarationTypeName_Field() =>
-        ExtensionsCS.GetDeclarationTypeName(SyntaxFactory.FieldDeclaration(SyntaxFactory.VariableDeclaration(SyntaxFactory.ParseTypeName("int")))).Should().Be("field");
+        SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.FieldDeclaration(SyntaxFactory.VariableDeclaration(SyntaxFactory.ParseTypeName("int")))).Should().Be("field");
 
     [TestMethod]
     public void GetDeclarationTypeName_Indexer() =>
-        ExtensionsCS.GetDeclarationTypeName(SyntaxFactory.IndexerDeclaration(SyntaxFactory.ParseTypeName("int"))).Should().Be("indexer");
+        SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.IndexerDeclaration(SyntaxFactory.ParseTypeName("int"))).Should().Be("indexer");
 
     [TestMethod]
     public void GetDeclarationTypeName_Interface() =>
-        ExtensionsCS.GetDeclarationTypeName(SyntaxFactory.InterfaceDeclaration("MyInterface")).Should().Be("interface");
+        SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.InterfaceDeclaration("MyInterface")).Should().Be("interface");
 
     [TestMethod]
     public void GetDeclarationTypeName_LocalFunction() =>
-        ExtensionsCS.GetDeclarationTypeName(SyntaxFactory.LocalFunctionStatement(SyntaxFactory.ParseTypeName("void"), "MyLocalFunction")).Should().Be("local function");
+        SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.LocalFunctionStatement(SyntaxFactory.ParseTypeName("void"), "MyLocalFunction")).Should().Be("local function");
 
     [TestMethod]
     public void GetDeclarationTypeName_Method() =>
-        ExtensionsCS.GetDeclarationTypeName(SyntaxFactory.MethodDeclaration(SyntaxFactory.ParseTypeName("void"), "MyMethod")).Should().Be("method");
+        SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.MethodDeclaration(SyntaxFactory.ParseTypeName("void"), "MyMethod")).Should().Be("method");
 
     [TestMethod]
     public void GetDeclarationTypeName_Property() =>
-        ExtensionsCS.GetDeclarationTypeName(SyntaxFactory.PropertyDeclaration(SyntaxFactory.ParseTypeName("void"), "MyProperty")).Should().Be("property");
+        SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.PropertyDeclaration(SyntaxFactory.ParseTypeName("void"), "MyProperty")).Should().Be("property");
 
     [TestMethod]
     public void GetDeclarationTypeName_Record() =>
-        ExtensionsCS.GetDeclarationTypeName(SyntaxFactory.RecordDeclaration(SyntaxFactory.Token(SyntaxKind.RecordKeyword), "MyRecord")).Should().Be("record");
+        SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.RecordDeclaration(SyntaxFactory.Token(SyntaxKind.RecordKeyword), "MyRecord")).Should().Be("record");
 
     [TestMethod]
     public void GetDeclarationTypeName_RecordStruct() =>
-        ExtensionsCS.GetDeclarationTypeName(SyntaxFactory.RecordDeclaration(SyntaxKind.RecordStructDeclaration, SyntaxFactory.Token(SyntaxKind.RecordKeyword), "MyRecord"))
+        SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.RecordDeclaration(SyntaxKind.RecordStructDeclaration, SyntaxFactory.Token(SyntaxKind.RecordKeyword), "MyRecord"))
             .Should().Be("record struct");
 
     [TestMethod]
     public void GetDeclarationTypeName_Struct() =>
-        ExtensionsCS.GetDeclarationTypeName(SyntaxFactory.StructDeclaration("MyStruct")).Should().Be("struct");
+        SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.StructDeclaration("MyStruct")).Should().Be("struct");
 
     [TestMethod]
     public void CreateCfg_MethodDeclaration_ReturnsCfg_CS()
@@ -351,7 +348,7 @@ public class SyntaxNodeExtensionsTest
         var innerLambda = tree.Single<SyntaxCS.SimpleLambdaExpressionSyntax>();
         innerLambda.Parent.Parent.Should().BeOfType<SyntaxCS.VariableDeclaratorSyntax>().Subject.Identifier.ValueText.Should().Be("innerLambda");
 
-        var cfg = ExtensionsCS.CreateCfg(innerLambda, semanticModel, default);
+        var cfg = SyntaxNodeExtensionsCSharp.CreateCfg(innerLambda, semanticModel, default);
         cfg.Should().NotBeNull("It's innerLambda");
         cfg.Parent.Should().NotBeNull("It's InnerLocalFunction");
         cfg.Parent.Parent.Should().NotBeNull("Lambda iniside Lazy<int> constructor");
@@ -388,7 +385,7 @@ public class SyntaxNodeExtensionsTest
         var innerSub = tree.Single<SyntaxVB.InvocationExpressionSyntax>().FirstAncestorOrSelf<SyntaxVB.SingleLineLambdaExpressionSyntax>();
         innerSub.Parent.Parent.Should().BeOfType<SyntaxVB.VariableDeclaratorSyntax>().Subject.Names.Single().Identifier.ValueText.Should().Be("InnerSingleLineSub");
 
-        var cfg = ExtensionsVB.CreateCfg(innerSub, semanticModel, default);
+        var cfg = SyntaxNodeExtensionsVisualBasic.CreateCfg(innerSub, semanticModel, default);
         cfg.Should().NotBeNull("It's InnerSingleLineSub");
         cfg.Parent.Should().NotBeNull("It's multiline function inside Lazy(Of Integer)");
         cfg.Parent.Parent.Should().NotBeNull("Lambda iniside Lazy<int> constructor");
@@ -414,7 +411,7 @@ public class SyntaxNodeExtensionsTest
             """;
         var (tree, model) = TestHelper.CompileIgnoreErrorsCS(code);
         var lambda = tree.Single<SyntaxCS.ParenthesizedLambdaExpressionSyntax>();
-        ExtensionsCS.CreateCfg(lambda, model, default).Should().NotBeNull();
+        SyntaxNodeExtensionsCSharp.CreateCfg(lambda, model, default).Should().NotBeNull();
     }
 
     [TestMethod]
@@ -429,7 +426,7 @@ public class SyntaxNodeExtensionsTest
             """;
         var (tree, model) = TestHelper.CompileIgnoreErrorsVB(code);
         var lambda = tree.Single<SyntaxVB.SingleLineLambdaExpressionSyntax>();
-        ExtensionsVB.CreateCfg(lambda, model, default).Should().BeNull();
+        SyntaxNodeExtensionsVisualBasic.CreateCfg(lambda, model, default).Should().BeNull();
     }
 
     [DataTestMethod]
@@ -441,7 +438,7 @@ public class SyntaxNodeExtensionsTest
     {
         var (tree, model) = TestHelper.CompileIgnoreErrorsCS(code);
         var lambda = tree.Single<SyntaxCS.ParenthesizedLambdaExpressionSyntax>();
-        ExtensionsCS.CreateCfg(lambda, model, default).Should().NotBeNull();
+        SyntaxNodeExtensionsCSharp.CreateCfg(lambda, model, default).Should().NotBeNull();
     }
 
     [TestMethod]
@@ -472,7 +469,7 @@ public class SyntaxNodeExtensionsTest
             {
                 for (var i = 0; i < 10000; i++)
                 {
-                    ExtensionsCS.CreateCfg(lambda, model, default);
+                    SyntaxNodeExtensionsCSharp.CreateCfg(lambda, model, default);
                 }
             };
         a.ExecutionTime().Should().BeLessThan(1.Seconds());     // Takes roughly 0.2 sec on CI
@@ -502,7 +499,7 @@ public class SyntaxNodeExtensionsTest
         {
             for (var i = 0; i < 10000; i++)
             {
-                ExtensionsCS.CreateCfg(lambda, model, default);
+                SyntaxNodeExtensionsCSharp.CreateCfg(lambda, model, default);
             }
         };
         a.ExecutionTime().Should().BeLessThan(1.Seconds());     // Takes roughly 0.4 sec on CI
@@ -523,8 +520,8 @@ public class SyntaxNodeExtensionsTest
         var compilation2 = compilation1.WithAssemblyName("Different-Compilation-Reusing-Same-Nodes");
         var method1 = compilation1.SyntaxTrees.Single().Single<SyntaxCS.MethodDeclarationSyntax>();
         var method2 = compilation2.SyntaxTrees.Single().Single<SyntaxCS.MethodDeclarationSyntax>();
-        var cfg1 = ExtensionsCS.CreateCfg(method1, compilation1.GetSemanticModel(method1.SyntaxTree), default);
-        var cfg2 = ExtensionsCS.CreateCfg(method2, compilation2.GetSemanticModel(method2.SyntaxTree), default);
+        var cfg1 = SyntaxNodeExtensionsCSharp.CreateCfg(method1, compilation1.GetSemanticModel(method1.SyntaxTree), default);
+        var cfg2 = SyntaxNodeExtensionsCSharp.CreateCfg(method2, compilation2.GetSemanticModel(method2.SyntaxTree), default);
 
         ReferenceEquals(cfg1, cfg2).Should().BeFalse("Different compilations should not reuse cache. They do not share semantic model and symbols.");
     }
@@ -614,7 +611,7 @@ public class C
                                              SyntaxKindEx.ParenthesizedVariableDesignation,
                                              SyntaxKindEx.TupleExpression)) ?? argument;
         syntaxTree.GetDiagnostics().Should().BeEmpty();
-        var target = ExtensionsCS.FindAssignmentComplement(argument);
+        var target = SyntaxNodeExtensionsCSharp.FindAssignmentComplement(argument);
         if (expectedNode is null)
         {
             target.Should().BeNull();
@@ -644,8 +641,8 @@ public class Sample
 }";
         var (tree, model) = TestHelper.CompileCS(code);
         var allIdentifiers = tree.GetRoot().DescendantNodes().OfType<SyntaxCS.IdentifierNameSyntax>().ToArray();
-        allIdentifiers.Where(x => x.Identifier.ValueText == "xNormal").Should().HaveCount(6).And.OnlyContain(x => !ExtensionsCS.IsInExpressionTree(x, model));
-        allIdentifiers.Where(x => x.Identifier.ValueText == "xExpres").Should().HaveCount(6).And.OnlyContain(x => ExtensionsCS.IsInExpressionTree(x, model));
+        allIdentifiers.Where(x => x.Identifier.ValueText == "xNormal").Should().HaveCount(6).And.OnlyContain(x => !SyntaxNodeExtensionsCSharp.IsInExpressionTree(x, model));
+        allIdentifiers.Where(x => x.Identifier.ValueText == "xExpres").Should().HaveCount(6).And.OnlyContain(x => SyntaxNodeExtensionsCSharp.IsInExpressionTree(x, model));
     }
 
     [TestMethod]
@@ -663,8 +660,8 @@ Public Class Sample
 End Class";
         var (tree, model) = TestHelper.CompileVB(code);
         var allIdentifiers = tree.GetRoot().DescendantNodes().OfType<SyntaxVB.IdentifierNameSyntax>().ToArray();
-        allIdentifiers.Where(x => x.Identifier.ValueText == "xNormal").Should().HaveCount(6).And.OnlyContain(x => !ExtensionsVB.IsInExpressionTree(x, model));
-        allIdentifiers.Where(x => x.Identifier.ValueText == "xExpres").Should().HaveCount(6).And.OnlyContain(x => ExtensionsVB.IsInExpressionTree(x, model));
+        allIdentifiers.Where(x => x.Identifier.ValueText == "xNormal").Should().HaveCount(6).And.OnlyContain(x => !SyntaxNodeExtensionsVisualBasic.IsInExpressionTree(x, model));
+        allIdentifiers.Where(x => x.Identifier.ValueText == "xExpres").Should().HaveCount(6).And.OnlyContain(x => SyntaxNodeExtensionsVisualBasic.IsInExpressionTree(x, model));
     }
 
     [DataTestMethod]
@@ -694,7 +691,7 @@ End Class";
             }
             """;
         var node = NodeBetweenMarkers(code, AnalyzerLanguage.CSharp);
-        var parentConditional = ExtensionsCS.GetParentConditionalAccessExpression(node);
+        var parentConditional = SyntaxNodeExtensionsCSharp.GetParentConditionalAccessExpression(node);
         parentConditional.ToString().Should().Be(parent);
         parentConditional.Expression.ToString().Should().Be(parentExpression);
     }
@@ -730,7 +727,7 @@ End Class";
             End Class
             """;
         var node = NodeBetweenMarkers(code, AnalyzerLanguage.VisualBasic);
-        var parentConditional = ExtensionsVB.GetParentConditionalAccessExpression(node);
+        var parentConditional = SyntaxNodeExtensionsVisualBasic.GetParentConditionalAccessExpression(node);
         parentConditional.ToString().Should().Be(parent);
         parentConditional.Expression.ToString().Should().Be(parentExpression);
     }
@@ -762,7 +759,7 @@ End Class";
             }
             """;
         var node = NodeBetweenMarkers(code, AnalyzerLanguage.CSharp);
-        var parentConditional = ExtensionsCS.GetRootConditionalAccessExpression(node);
+        var parentConditional = SyntaxNodeExtensionsCSharp.GetRootConditionalAccessExpression(node);
         parentConditional.ToString().Should().Be(expression.Replace("$$", string.Empty));
     }
 
@@ -793,7 +790,7 @@ End Class";
             }
             """;
         var node = NodeBetweenMarkers(code, AnalyzerLanguage.CSharp);
-        var argumentList = ExtensionsCS.ArgumentList(node).Arguments;
+        var argumentList = SyntaxNodeExtensionsCSharp.ArgumentList(node).Arguments;
         var argument = argumentList.Should().ContainSingle().Which;
         (argument is { Expression: SyntaxCS.LiteralExpressionSyntax { Token.ValueText: "1" } }).Should().BeTrue();
     }
@@ -814,7 +811,7 @@ End Class";
 
             """;
         var node = NodeBetweenMarkers(code, AnalyzerLanguage.CSharp);
-        var argumentList = ExtensionsCS.ArgumentList(node).Arguments;
+        var argumentList = SyntaxNodeExtensionsCSharp.ArgumentList(node).Arguments;
         var argument = argumentList.Should().ContainSingle().Which;
         (argument is { Expression: SyntaxCS.LiteralExpressionSyntax { Token.ValueText: "1" } }).Should().BeTrue();
     }
@@ -827,7 +824,7 @@ End Class";
             public class Derived(int p): $$Base(1)$$;
             """;
         var node = NodeBetweenMarkers(code, AnalyzerLanguage.CSharp);
-        var argumentList = ExtensionsCS.ArgumentList(node).Arguments;
+        var argumentList = SyntaxNodeExtensionsCSharp.ArgumentList(node).Arguments;
         var argument = argumentList.Should().ContainSingle().Which;
         (argument is { Expression: SyntaxCS.LiteralExpressionSyntax { Token.ValueText: "1" } }).Should().BeTrue();
     }
@@ -844,12 +841,12 @@ End Class";
             }
             """;
         var node = NodeBetweenMarkers(code, AnalyzerLanguage.CSharp);
-        ExtensionsCS.ArgumentList(node).Should().BeNull();
+        SyntaxNodeExtensionsCSharp.ArgumentList(node).Should().BeNull();
     }
 
     [TestMethod]
     public void ArgumentList_CS_Null() =>
-        ExtensionsCS.ArgumentList(null).Should().BeNull();
+        SyntaxNodeExtensionsCSharp.ArgumentList(null).Should().BeNull();
 
     [DataTestMethod]
     [DataRow("_ = $$new int[] { 1 }$$;")]
@@ -864,7 +861,7 @@ End Class";
             }
             """;
         var node = NodeBetweenMarkers(code, AnalyzerLanguage.CSharp);
-        var sut = () => ExtensionsCS.ArgumentList(node);
+        var sut = () => SyntaxNodeExtensionsCSharp.ArgumentList(node);
         sut.Should().Throw<InvalidOperationException>();
     }
 
@@ -891,7 +888,7 @@ End Class";
             End Class
             """;
         var node = NodeBetweenMarkers(code, AnalyzerLanguage.VisualBasic, getInnermostNodeForTie: true);
-        var argumentList = ExtensionsVB.ArgumentList(node);
+        var argumentList = SyntaxNodeExtensionsVisualBasic.ArgumentList(node);
         var argument = argumentList.Arguments.Should().ContainSingle().Which;
         (argument.GetExpression() is SyntaxVB.LiteralExpressionSyntax { Token.ValueText: "1" }).Should().BeTrue();
     }
@@ -908,7 +905,7 @@ End Class";
             End Class
             """;
         var node = NodeBetweenMarkers(code, AnalyzerLanguage.VisualBasic, getInnermostNodeForTie: true);
-        var argumentList = ExtensionsVB.ArgumentList(node);
+        var argumentList = SyntaxNodeExtensionsVisualBasic.ArgumentList(node);
         argumentList.Arguments.Should().SatisfyRespectively(
             a => (a.GetExpression() is SyntaxVB.IdentifierNameSyntax { Identifier.ValueText: "s" }).Should().BeTrue(),
             a => (a.GetExpression() is SyntaxVB.LiteralExpressionSyntax { Token.ValueText: "1" }).Should().BeTrue());
@@ -923,7 +920,7 @@ End Class";
             End Class
             """;
         var node = NodeBetweenMarkers(code, AnalyzerLanguage.VisualBasic, getInnermostNodeForTie: true);
-        var argumentList = ExtensionsVB.ArgumentList(node);
+        var argumentList = SyntaxNodeExtensionsVisualBasic.ArgumentList(node);
         var argument = argumentList.Arguments.Should().ContainSingle().Which;
         (argument.GetExpression() is SyntaxVB.LiteralExpressionSyntax { Token.ValueText: "1" }).Should().BeTrue();
     }
@@ -943,7 +940,7 @@ End Class";
             End Class
             """;
         var node = NodeBetweenMarkers(code, AnalyzerLanguage.VisualBasic, getInnermostNodeForTie: true);
-        var argumentList = ExtensionsVB.ArgumentList(node);
+        var argumentList = SyntaxNodeExtensionsVisualBasic.ArgumentList(node);
         var argument = argumentList.Arguments.Should().ContainSingle().Which;
         (argument.GetExpression() is SyntaxVB.LiteralExpressionSyntax { Token.ValueText: "1" }).Should().BeTrue();
     }
@@ -959,12 +956,12 @@ End Class";
             End Class
             """;
         var node = NodeBetweenMarkers(code, AnalyzerLanguage.VisualBasic, getInnermostNodeForTie: false);
-        ExtensionsVB.ArgumentList(node).Should().BeNull();
+        SyntaxNodeExtensionsVisualBasic.ArgumentList(node).Should().BeNull();
     }
 
     [TestMethod]
     public void ArgumentList_VB_Null() =>
-        ExtensionsVB.ArgumentList(null).Should().BeNull();
+        SyntaxNodeExtensionsVisualBasic.ArgumentList(null).Should().BeNull();
 
     [DataTestMethod]
     [DataRow("$$Dim a = 1$$")]
@@ -978,7 +975,7 @@ End Class";
             End Class
             """;
         var node = NodeBetweenMarkers(code, AnalyzerLanguage.VisualBasic, getInnermostNodeForTie: true);
-        var sut = () => ExtensionsVB.ArgumentList(node);
+        var sut = () => SyntaxNodeExtensionsVisualBasic.ArgumentList(node);
         sut.Should().Throw<InvalidOperationException>();
     }
 
@@ -996,7 +993,7 @@ End Class";
                 $${{declarations}}$$
             }
             """, AnalyzerLanguage.CSharp);
-        var actual = ExtensionsCS.ParameterList(node);
+        var actual = SyntaxNodeExtensionsCSharp.ParameterList(node);
         actual.Should().NotBeNull();
         var entry = actual.Parameters.Should().ContainSingle().Which;
         entry.Identifier.ValueText.Should().Be("p");
@@ -1020,7 +1017,7 @@ End Class";
                 }
             }
             """, AnalyzerLanguage.CSharp);
-        var actual = ExtensionsCS.ParameterList(node);
+        var actual = SyntaxNodeExtensionsCSharp.ParameterList(node);
         actual.Should().NotBeNull();
         var entry = actual.Parameters.Should().ContainSingle().Which;
         entry.Identifier.ValueText.Should().Be("p");
@@ -1035,7 +1032,7 @@ End Class";
                 $$~C() { }$$
             }
             """, AnalyzerLanguage.CSharp);
-        var actual = ExtensionsCS.ParameterList(node);
+        var actual = SyntaxNodeExtensionsCSharp.ParameterList(node);
         actual.Should().NotBeNull();
         actual.Parameters.Should().BeEmpty();
     }
@@ -1058,7 +1055,7 @@ End Class";
 
             }$$
             """, AnalyzerLanguage.CSharp);
-        var actual = ExtensionsCS.ParameterList(node);
+        var actual = SyntaxNodeExtensionsCSharp.ParameterList(node);
         actual.Should().NotBeNull();
         var entry = actual.Parameters.Should().ContainSingle().Which;
         entry.Identifier.ValueText.Should().Be("p");
@@ -1076,7 +1073,7 @@ End Class";
                 {{declaration}}
             }
             """, AnalyzerLanguage.CSharp);
-        var actual = ExtensionsCS.ParameterList(node);
+        var actual = SyntaxNodeExtensionsCSharp.ParameterList(node);
         actual.Should().BeNull();
     }
 
@@ -1154,7 +1151,7 @@ End Class";
                 {{member}}
             }
             """, AnalyzerLanguage.CSharp);
-        var actual = ExtensionsCS.GetIdentifier(node);
+        var actual = SyntaxNodeExtensionsCSharp.GetIdentifier(node);
         if (expected is null)
         {
             actual.Should().BeNull();
@@ -1176,7 +1173,7 @@ End Class";
         var node = NodeBetweenMarkers($$"""
             {{member}}
             """, AnalyzerLanguage.CSharp);
-        var actual = ExtensionsCS.GetIdentifier(node);
+        var actual = SyntaxNodeExtensionsCSharp.GetIdentifier(node);
         if (expected is null)
         {
             actual.Should().BeNull();
@@ -1200,7 +1197,7 @@ End Class";
             }
             public class Derived(int i) {{baseType}} { }
             """, AnalyzerLanguage.CSharp);
-        var actual = ExtensionsCS.GetIdentifier(node);
+        var actual = SyntaxNodeExtensionsCSharp.GetIdentifier(node);
         if (expected is null)
         {
             actual.Should().BeNull();
@@ -1255,7 +1252,7 @@ End Class";
                 {{member}}
             }
             """, AnalyzerLanguage.CSharp);
-        var actual = ExtensionsCS.EnclosingScope(node)?.Kind() ?? SyntaxKind.None;
+        var actual = SyntaxNodeExtensionsCSharp.EnclosingScope(node)?.Kind() ?? SyntaxKind.None;
         actual.Should().Be(expectedSyntaxKind);
     }
 
@@ -1267,7 +1264,7 @@ End Class";
 
             $$Console.WriteLine("")$$;
             """, AnalyzerLanguage.CSharp, outputKind: OutputKind.ConsoleApplication);
-        var actual = ExtensionsCS.EnclosingScope(node)?.Kind() ?? SyntaxKind.None;
+        var actual = SyntaxNodeExtensionsCSharp.EnclosingScope(node)?.Kind() ?? SyntaxKind.None;
         actual.Should().Be(SyntaxKind.CompilationUnit);
     }
 
@@ -1300,7 +1297,7 @@ End Class";
                 }
             }
             """, AnalyzerLanguage.CSharp);
-        var actual = ExtensionsCS.EnclosingScope(node)?.Kind();
+        var actual = SyntaxNodeExtensionsCSharp.EnclosingScope(node)?.Kind();
         actual.Should().Be(expected);
     }
 
@@ -1347,12 +1344,12 @@ End Class";
     private static ControlFlowGraph CreateCfgCS<T>(string code) where T : CSharpSyntaxNode
     {
         var (tree, model) = TestHelper.CompileCS(code);
-        return ExtensionsCS.CreateCfg(tree.Single<T>(), model, default);
+        return SyntaxNodeExtensionsCSharp.CreateCfg(tree.Single<T>(), model, default);
     }
 
     private static ControlFlowGraph CreateCfgVB<T>(string code) where T : Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxNode
     {
         var (tree, model) = TestHelper.CompileVB(code);
-        return ExtensionsVB.CreateCfg(tree.Single<T>(), model, default);
+        return SyntaxNodeExtensionsVisualBasic.CreateCfg(tree.Single<T>(), model, default);
     }
 }

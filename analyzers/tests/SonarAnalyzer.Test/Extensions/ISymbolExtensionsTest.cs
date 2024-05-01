@@ -323,7 +323,7 @@ public class ISymbolExtensionsTest
 
     [TestMethod]
     public void AnyAttributeDerivesFromAny_WhenSymbolIsNull_ReturnsFalse() =>
-        ISymbolExtensionsCommon.AnyAttributeDerivesFromAny(null, []).Should().BeFalse();
+        ISymbolExtensionsCommon.AnyAttributeDerivesFromAny(null, ImmutableArray.Create(KnownType.Void)).Should().BeFalse();
 
     [TestMethod]
     public void GetAttributesForKnownType_WhenSymbolIsNull_ReturnsEmpty() =>

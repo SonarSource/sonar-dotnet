@@ -27,5 +27,5 @@ public class IPropertySymbolExtensionsTest
 {
     [TestMethod]
     public void IsAnyAttributeInOverridingChain_WhenPropertySymbolIsNull_ReturnsFalse() =>
-        ((IPropertySymbol)null).IsAnyAttributeInOverridingChain().Should().BeFalse();
+        IPropertySymbolExtensions.IsAnyAttributeInOverridingChain(null).Should().BeFalse();
 }

@@ -21,12 +21,11 @@
 extern alias csharp;
 extern alias vbnet;
 
+using SonarAnalyzer.Extensions;
 using BuilderPatternDescriptorCS = SonarAnalyzer.Helpers.BuilderPatternDescriptor<Microsoft.CodeAnalysis.CSharp.SyntaxKind, Microsoft.CodeAnalysis.CSharp.Syntax.InvocationExpressionSyntax>;
 using BuilderPatternDescriptorVB = SonarAnalyzer.Helpers.BuilderPatternDescriptor<Microsoft.CodeAnalysis.VisualBasic.SyntaxKind, Microsoft.CodeAnalysis.VisualBasic.Syntax.InvocationExpressionSyntax>;
 using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
-using CSharpSyntaxNodeExtensions = csharp::SonarAnalyzer.Extensions.SyntaxNodeExtensionsCSharp;
 using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using VBSyntaxNodeExtensions = vbnet::SonarAnalyzer.Extensions.SyntaxNodeExtensionsCSharp;
 
 namespace SonarAnalyzer.Test.Helpers
 {
@@ -208,11 +207,11 @@ End Class";
         private static SyntaxNode FindMethodInvocation_CS(SyntaxTree tree, string name) =>
             tree.GetRoot().DescendantNodes()
                 .OfType<CSharpSyntax.InvocationExpressionSyntax>()
-                .Single(x => CSharpSyntaxNodeExtensions.GetIdentifier(x.Expression)?.ValueText == name);
+                .Single(x => SyntaxNodeExtensionsCSharp.GetIdentifier(x.Expression)?.ValueText == name);
 
         private static SyntaxNode FindMethodInvocation_VB(SyntaxTree tree, string name) =>
             tree.GetRoot().DescendantNodes()
                 .OfType<VBSyntax.InvocationExpressionSyntax>()
-                .Single(x => VBSyntaxNodeExtensions.GetIdentifier(x.Expression)?.ValueText == name);
+                .Single(x => SyntaxNodeExtensionsVisualBasic.GetIdentifier(x.Expression)?.ValueText == name);
     }
 }

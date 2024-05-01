@@ -22,10 +22,9 @@ extern alias csharp;
 extern alias vbnet;
 
 using Moq;
-using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
-using CSharpSyntaxNodeExtensions = csharp::SonarAnalyzer.Extensions.SyntaxNodeExtensionsCSharp;
-using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using VBSyntaxNodeExtensions = vbnet::SonarAnalyzer.Extensions.SyntaxNodeExtensionsCSharp;
+using SonarAnalyzer.Extensions;
+using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
+using SyntaxVB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Test.Helpers
 {
@@ -412,12 +411,12 @@ End Namespace
             return null;
 
             IEnumerable<(SyntaxNode node, string name)> GetCSharpNodes() =>
-                snippet.GetNodes<CSharpSyntax.InvocationExpressionSyntax>()
-                    .Select(n => ((SyntaxNode)n, CSharpSyntaxNodeExtensions.GetIdentifier(n.Expression)?.ValueText));
+                snippet.GetNodes<SyntaxCS.InvocationExpressionSyntax>()
+                    .Select(n => ((SyntaxNode)n, SyntaxNodeExtensionsCSharp.GetIdentifier(n.Expression)?.ValueText));
 
             IEnumerable<(SyntaxNode node, string name)> GetVbNodes() =>
-                snippet.GetNodes<VBSyntax.InvocationExpressionSyntax>()
-                    .Select(n => ((SyntaxNode)n, VBSyntaxNodeExtensions.GetIdentifier(n.Expression)?.ValueText));
+                snippet.GetNodes<SyntaxVB.InvocationExpressionSyntax>()
+                    .Select(n => ((SyntaxNode)n, SyntaxNodeExtensionsVisualBasic.GetIdentifier(n.Expression)?.ValueText));
         }
 
         private static void CheckExactMatchOnly_OverridesAreNotMatched(SnippetCompiler snippet)

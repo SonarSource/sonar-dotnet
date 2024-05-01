@@ -552,48 +552,48 @@ public class ITypeSymbolExtensionsTest
     {
         className = className.TrimEnd();
         var code = $$"""
-                using System;
+            using System;
 
-                [AttributeUsage(AttributeTargets.All, Inherited = true)]
-                public class InheritedAttribute : Attribute { }
+            [AttributeUsage(AttributeTargets.All, Inherited = true)]
+            public class InheritedAttribute : Attribute { }
 
-                [AttributeUsage(AttributeTargets.All, Inherited = false)]
-                public class NotInheritedAttribute : Attribute { }
+            [AttributeUsage(AttributeTargets.All, Inherited = false)]
+            public class NotInheritedAttribute : Attribute { }
 
-                public class DerivedInheritedAttribute: InheritedAttribute { }
+            public class DerivedInheritedAttribute: InheritedAttribute { }
 
-                public class DerivedNotInheritedAttribute: NotInheritedAttribute { }
+            public class DerivedNotInheritedAttribute: NotInheritedAttribute { }
 
-                public class UnannotatedAttribute : Attribute { }
+            public class UnannotatedAttribute : Attribute { }
 
-                [Inherited]
-                [DerivedInherited]
-                [NotInherited]
-                [DerivedNotInherited]
-                [Unannotated]
-                public class BaseClass<T1> { }
+            [Inherited]
+            [DerivedInherited]
+            [NotInherited]
+            [DerivedNotInherited]
+            [Unannotated]
+            public class BaseClass<T1> { }
 
-                [Inherited]
-                [DerivedInherited]
-                [NotInherited]
-                [DerivedNotInherited]
-                [Unannotated]
-                public interface IInterface { }
+            [Inherited]
+            [DerivedInherited]
+            [NotInherited]
+            [DerivedNotInherited]
+            [Unannotated]
+            public interface IInterface { }
 
-                public class DerivedOpenGeneric<T1>: BaseClass<T1> { }
+            public class DerivedOpenGeneric<T1>: BaseClass<T1> { }
 
-                public class DerivedClosedGeneric: BaseClass<int> { }
+            public class DerivedClosedGeneric: BaseClass<int> { }
 
-                public class Implement: IInterface { }
+            public class Implement: IInterface { }
 
-                public class Program
+            public class Program
+            {
+                public static void Main()
                 {
-                    public static void Main()
-                    {
-                        new {{className}}();
-                    }
+                    new {{className}}();
                 }
-                """;
+            }
+            """;
         var compiler = new SnippetCompiler(code);
         var objectCreation = compiler.GetNodes<ObjectCreationExpressionSyntax>().Should().ContainSingle().Subject;
         if (compiler.GetSymbol<IMethodSymbol>(objectCreation) is { MethodKind: MethodKind.Constructor, ReceiverType: { } receiver })
