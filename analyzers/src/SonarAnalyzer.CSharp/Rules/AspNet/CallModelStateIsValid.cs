@@ -66,7 +66,7 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
     {
         if (codeBlockContext.CodeBlock is MethodDeclarationSyntax methodDeclaration
             && codeBlockContext.OwningSymbol is IMethodSymbol methodSymbol
-            && methodSymbol.Parameters.Length > 0
+            && methodSymbol.Parameters.Any(x => !x.Type.Is(KnownType.System_Threading_CancellationToken))
             && methodSymbol.IsControllerActionMethod()
             && !HasActionFilterAttribute(methodSymbol))
         {

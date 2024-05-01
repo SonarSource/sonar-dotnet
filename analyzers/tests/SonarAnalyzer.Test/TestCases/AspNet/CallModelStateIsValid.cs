@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -90,6 +92,9 @@ public class NonCompliantController : ControllerBase
 
     [HttpGet("/[controller]/list")]
     public string[] List() => null;                                             // Compliant
+
+    [HttpGet("/[controller]/listasync")]
+    public Task<string[]> ListAsync(CancellationToken token) => null;           // Compliant
 }
 
 [ApiController]
