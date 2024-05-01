@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Helpers;
+
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -88,12 +90,10 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
     }
 
     private static bool HasApiControllerAttribute(ITypeSymbol type) =>
-        type is not null
-        && (type.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute)
-            || HasApiControllerAttribute(type.BaseType));
+        type.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute));
 
     private static bool HasActionFilterAttribute(ISymbol symbol) =>
-        symbol.GetAttributes().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Filters_ActionFilterAttribute));
+        symbol.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Filters_ActionFilterAttribute));
 
     private static bool IsCheckingValidityProperty(SyntaxNode node, SemanticModel semanticModel) =>
         node.GetIdentifier() is { ValueText: "IsValid" or "ValidationState" } nodeIdentifier
