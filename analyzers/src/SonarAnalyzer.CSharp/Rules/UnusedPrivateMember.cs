@@ -531,8 +531,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 && symbol.GetInterfaceMember() == null
                 && symbol.GetOverriddenMember() == null;
 
-            private static bool HasAttributes(ISymbol symbol) =>
-                symbol.GetAttributes().Any(x => !x.AttributeClass.Is(KnownType.System_NonSerializedAttribute));
+            private static bool HasAttributes(ISymbol symbol)
+            {
+                IEnumerable<AttributeData> attributes = symbol.GetAttributes();
+                if (symbol is IMethodSymbol { MethodKind: MethodKind.PropertyGet or MethodKind.PropertySet} method
+                    && method.AssociatedSymbol is { } property)
+                {
+                    attributes = attributes.Union(property.GetAttributes());
+                }
+                return attributes.Any(x => !x.AttributeClass.Is(KnownType.System_NonSerializedAttribute));
+            }
 
             private static bool IsRemovableMember(ISymbol symbol) =>
                 symbol.GetEffectiveAccessibility() == Accessibility.Private
