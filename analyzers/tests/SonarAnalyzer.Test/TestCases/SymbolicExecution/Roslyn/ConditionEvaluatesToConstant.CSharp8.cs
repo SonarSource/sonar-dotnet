@@ -676,7 +676,10 @@ class Repro_9203
     void RecursivePattern(string s)
     {
         s.GetHashCode();
-        if (s is { }) // Compliant FN: Recursive pattern null check is not supported
+        if (s is { }) // FN: Recursive pattern null check is not supported
+        { }
+
+        if (s is { }) // Compliant: not just null-check, the property value is also checked
         { }
     }
 }
