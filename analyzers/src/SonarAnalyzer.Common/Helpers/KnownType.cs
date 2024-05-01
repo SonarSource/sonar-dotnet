@@ -542,6 +542,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Text_RegularExpressions_Regex = new("System.Text.RegularExpressions.Regex");
         public static readonly KnownType System_Text_RegularExpressions_RegexOptions = new("System.Text.RegularExpressions.RegexOptions");
         public static readonly KnownType System_Text_StringBuilder = new("System.Text.StringBuilder");
+        public static readonly KnownType System_Threading_CancellationToken = new("System.Threading.CancellationToken");
         public static readonly KnownType System_Threading_CancellationTokenSource = new("System.Threading.CancellationTokenSource");
         public static readonly KnownType System_Threading_Monitor = new("System.Threading.Monitor");
         public static readonly KnownType System_Threading_Mutex = new("System.Threading.Mutex");
