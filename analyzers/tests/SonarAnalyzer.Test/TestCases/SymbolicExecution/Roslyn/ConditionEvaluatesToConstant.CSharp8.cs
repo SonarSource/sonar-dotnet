@@ -669,3 +669,14 @@ public class Repro_8486
     private string SomeString() => "";
     private bool SomeBool() => true;
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9203
+class Repro_9203
+{
+    void RecursivePattern(string s)
+    {
+        s.GetHashCode();
+        if (s is { }) // Compliant FN: Recursive pattern null check is not supported
+        { }
+    }
+}
