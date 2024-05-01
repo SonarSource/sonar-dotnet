@@ -102,6 +102,15 @@ public class ControllerWithApiAttributeAtTheClassLevel : ControllerBase
     }
 }
 
+public class BaseClassHasApiControllerAttribute : ControllerWithApiAttributeAtTheClassLevel
+{
+    [HttpDelete("/[controller]")]
+    public string Remove(Movie movie)                                           // Compliant, base class is decorated with the ApiController attribute
+    {
+        return "Hello!";
+    }
+}
+
 [Controller]
 public class ControllerThatDoesNotInheritFromControllerBase
 {

@@ -18,8 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp;
 
@@ -54,7 +53,7 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
                 {
                     var type = (INamedTypeSymbol)symbolStart.Symbol;
                     if (type.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase)
-                        && !type.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute)
+                        && !HasApiControllerAttribute(type)
                         && !HasActionFilterAttribute(type))
                     {
                         symbolStart.RegisterCodeBlockStartAction<SyntaxKind>(ProcessCodeBlock);
@@ -90,8 +89,11 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
         }
     }
 
+    private static bool HasApiControllerAttribute(ITypeSymbol type) =>
+        type.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute));
+
     private static bool HasActionFilterAttribute(ISymbol symbol) =>
-        symbol.GetAttributes().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Filters_ActionFilterAttribute));
+        symbol.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Filters_ActionFilterAttribute));
 
     private static bool IsCheckingValidityProperty(SyntaxNode node, SemanticModel semanticModel) =>
         node.GetIdentifier() is { ValueText: "IsValid" or "ValidationState" } nodeIdentifier
