@@ -372,3 +372,34 @@ public class Repro_8532
     private string serializedField;                             // Compliant
     private string serializedReadWriteProperty { get; set; }    // Compliant
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9219
+class Repro_9219
+{
+    [MyAttribute]
+    public bool AttributeOnProperty
+    {
+        get;
+        private set; // Compliant
+    }
+
+    public bool AttributeOnPropertyGetter
+    {
+        [MyAttribute]
+        private get; // Compliant
+        set;
+    }
+
+    public bool AttributeOnPropertySetter
+    {
+        get;
+        [MyAttribute]
+        private set; // Compliant
+    }
+
+    public bool AttributeOnPropertyNoncompliant
+    {
+        [MyAttribute]
+        get;
+    }
+}
