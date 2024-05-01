@@ -53,26 +53,28 @@ public sealed class ControllersHaveMixedResponsibilities : SonarDiagnosticAnalyz
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(compilationStartContext =>
         {
-            if (compilationStartContext.Compilation.ReferencesControllers())
+            if (!compilationStartContext.Compilation.ReferencesControllers())
             {
-                compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
-                {
-                    var symbol = (INamedTypeSymbol)symbolStartContext.Symbol;
-                    if (symbol.IsCoreApiController())
-                    {
-                        var relevantMembers = RelevantMembers(symbol);
-
-                        if (relevantMembers.Count < 2)
-                        {
-                            return;
-                        }
-
-                        var dependencies = new ConcurrentStack<Dependency>();
-                        symbolStartContext.RegisterCodeBlockStartAction(PopulateDependencies(relevantMembers, dependencies));
-                        symbolStartContext.RegisterSymbolEndAction(CalculateAndReportOnResponsibilities(symbol, relevantMembers, dependencies));
-                    }
-                }, SymbolKind.NamedType);
+                return;
             }
+
+            compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
+            {
+                var symbol = (INamedTypeSymbol)symbolStartContext.Symbol;
+                if (symbol.IsCoreApiController() && symbol.BaseType.Is(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase))
+                {
+                    var relevantMembers = RelevantMembers(symbol);
+
+                    if (relevantMembers.Count < 2)
+                    {
+                        return;
+                    }
+
+                    var dependencies = new ConcurrentStack<Dependency>();
+                    symbolStartContext.RegisterCodeBlockStartAction(PopulateDependencies(relevantMembers, dependencies));
+                    symbolStartContext.RegisterSymbolEndAction(CalculateAndReportOnResponsibilities(symbol, relevantMembers, dependencies));
+                }
+                }, SymbolKind.NamedType);
         });
 
     private static Action<SonarCodeBlockStartAnalysisContext<SyntaxKind>> PopulateDependencies(
@@ -145,7 +147,7 @@ public sealed class ControllersHaveMixedResponsibilities : SonarDiagnosticAnalyz
     private static ImmutableDictionary<string, MemberType> RelevantMembers(INamedTypeSymbol symbol)
     {
         var builder = ImmutableDictionary.CreateBuilder<string, MemberType>();
-        foreach (var member in symbol.GetMembers())
+        foreach (var member in symbol.GetMembers().Where(x => !x.IsStatic))
         {
             switch (member)
             {

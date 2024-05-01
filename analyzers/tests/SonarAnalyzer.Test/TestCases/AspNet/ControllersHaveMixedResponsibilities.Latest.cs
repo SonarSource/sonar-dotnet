@@ -6,6 +6,7 @@ using TestInstrumentation.WellKnownInterfacesExcluded;
 using TestInstrumentation;
 using WithInjectionViaNormalConstructor;
 using System.Runtime.CompilerServices;
+using WithInjectionViaPrimaryConstructors.TwoActions;
 
 // Remark: secondary messages are asserted extensively, to ensure that grouping is done correctly and deterministically.
 
@@ -14,9 +15,6 @@ namespace TestInstrumentation
     public interface IServiceWithAnAPI { void Use(); }
 
     public abstract class ServiceWithAnApi : IServiceWithAnAPI { public void Use() { } }
-
-    [ApiController]
-    public class ApiController : ControllerBase { } // To shorten test cases declaration
 
     // These interfaces have been kept to simulate the actual ones, from MediatR, AutoMapper, etc.
     // For performance reasons, the analyzer ignores namespace and assembly, and only consider the name.
@@ -71,14 +69,16 @@ namespace WithInjectionViaPrimaryConstructors
 
     namespace AssertIssueLocationsAndMessage
     {
-        // Noncompliant@+1 {{This controller has multiple responsibilities and could be split into 2 smaller controllers.}}
-        public class TwoResponsibilities(IS1 s1, IS2 s2) : ApiController
+        // Noncompliant@+2 {{This controller has multiple responsibilities and could be split into 2 smaller controllers.}}
+        [ApiController]
+        public class TwoResponsibilities(IS1 s1, IS2 s2) : ControllerBase
         {
             public IActionResult A1() { s1.Use(); return Ok(); } // Secondary {{May belong to responsibility #1.}}
             public IActionResult A2() { s2.Use(); return Ok(); } // Secondary {{May belong to responsibility #2.}}
         }
 
-        public class WithGenerics<T>(IS1 s1, IS2 s2) : ApiController // Noncompliant
+        [ApiController]
+        public class WithGenerics<T>(IS1 s1, IS2 s2) : ControllerBase // Noncompliant
         //           ^^^^^^^^^^^^
         {
             public IActionResult GenericAction<U>() { s2.Use(); return Ok(); } // Secondary {{May belong to responsibility #1.}}
@@ -87,7 +87,8 @@ namespace WithInjectionViaPrimaryConstructors
             //                   ^^^^^^^^^^^^^^^^
         }
 
-        public class @event<T>(IS1 s1, IS2 s2) : ApiController // Noncompliant
+        [ApiController]
+        public class @event<T>(IS1 s1, IS2 s2) : ControllerBase // Noncompliant
         //           ^^^^^^
         {
             public IActionResult @private() { s2.Use(); return Ok(); } // Secondary {{May belong to responsibility #1.}}
@@ -96,7 +97,8 @@ namespace WithInjectionViaPrimaryConstructors
             //                   ^^^^^^^
         }
 
-        public class ThreeResponsibilities(IS1 s1, IS2 s2, IS3 s3) : ApiController // Noncompliant
+        [ApiController]
+        public class ThreeResponsibilities(IS1 s1, IS2 s2, IS3 s3) : ControllerBase // Noncompliant
         //           ^^^^^^^^^^^^^^^^^^^^^
         {
             public IActionResult A1() { s1.Use(); return Ok(); } // Secondary {{May belong to responsibility #1.}}
@@ -107,9 +109,10 @@ namespace WithInjectionViaPrimaryConstructors
 
     namespace WithIOptions
     {
-        // Compliant@+1: 4 deps injected, all well-known => 4 singletons sets, merged into one
+        // Compliant@+2: 4 deps injected, all well-known => 4 singletons sets, merged into one
+        [ApiController]
         public class WellKnownDepsController(
-            ILogger<WellKnownDepsController> logger, IMediator mediator, IMapper mapper, IConfiguration configuration) : ApiController
+            ILogger<WellKnownDepsController> logger, IMediator mediator, IMapper mapper, IConfiguration configuration) : ControllerBase
         {
             public IActionResult A1() { logger.Use(); return Ok(); }
             public IActionResult A2() { mediator.Use(); return Ok(); }
@@ -117,9 +120,10 @@ namespace WithInjectionViaPrimaryConstructors
             public IActionResult A4() { configuration.Use(); return Ok(); }
         }
 
-        // Noncompliant@+1: 4 different Option<T> injected, that are not excluded
+        // Noncompliant@+2: 4 different Option<T> injected, that are not excluded
+        [ApiController]
         public class FourDifferentOptionDepsController(
-            IOption<int> o1, IOption<string> o2, IOption<bool> o3, IOption<double> o4) : ApiController
+            IOption<int> o1, IOption<string> o2, IOption<bool> o3, IOption<double> o4) : ControllerBase
         {
             public IActionResult A1() { o1.Use(); return Ok(); } // Secondary {{May belong to responsibility #1.}}
             public IActionResult A2() { o2.Use(); return Ok(); } // Secondary {{May belong to responsibility #2.}}
@@ -127,9 +131,10 @@ namespace WithInjectionViaPrimaryConstructors
             public IActionResult A4() { o4.Use(); return Ok(); } // Secondary {{May belong to responsibility #4.}}
         }
 
-        // Compliant@+1: 5 different Option<T> injected, used in couples to form a single responsibility
+        // Compliant@+2: 5 different Option<T> injected, used in couples to form a single responsibility
+        [ApiController]
         public class FourDifferentOptionDepsUsedInCouplesController(
-                   IOption<int> o1, IOption<string> o2, IOption<bool> o3, IOption<double> o4, IOption<int> o5) : ApiController
+                   IOption<int> o1, IOption<string> o2, IOption<bool> o3, IOption<double> o4, IOption<int> o5) : ControllerBase
         {
             public IActionResult A1() { o1.Use(); o2.Use(); return Ok(); }
             public IActionResult A2() { o2.Use(); o3.Use(); return Ok(); }
@@ -137,10 +142,11 @@ namespace WithInjectionViaPrimaryConstructors
             public IActionResult A4() { o4.Use(); o5.Use(); return Ok(); }
         }
 
-        // Noncompliant@+1: 3 Option<T> deps injected, the rest are well-known dependencies (used as well as unused)
+        // Noncompliant@+2: 3 Option<T> deps injected, the rest are well-known dependencies (used as well as unused)
+        [ApiController]
         public class ThreeOptionDepsController(
             ILogger<ThreeOptionDepsController> logger, IMediator mediator, IMapper mapper, IConfiguration configuration,
-            IOption<int> o1, IOption<string> o2, IOption<bool> o3) : ApiController
+            IOption<int> o1, IOption<string> o2, IOption<bool> o3) : ControllerBase
         {
             public IActionResult A1() { o1.Use(); logger.Use(); return Ok(); }        // Secondary {{May belong to responsibility #1.}}
             public IActionResult A2() { o2.Use(); mediator.Use(); return Ok(); }      // Secondary {{May belong to responsibility #2.}}
@@ -151,19 +157,21 @@ namespace WithInjectionViaPrimaryConstructors
 
     namespace TwoActions
     {
-        // Noncompliant@+1: 2 specific deps injected, each used in a separate responsibility, plus well-known dependencies
+        // Noncompliant@+2: 2 specific deps injected, each used in a separate responsibility, plus well-known dependencies
+        [ApiController]
         public class TwoSeparateResponsibilitiesPlusSharedWellKnown(
             ILogger<TwoSeparateResponsibilitiesPlusSharedWellKnown> logger, IMediator mediator, IMapper mapper, IConfiguration configuration, IBus bus, IMessageBus messageBus,
-            IS1 s1, IS2 s2) : ApiController
+            IS1 s1, IS2 s2) : ControllerBase
         {
             public IActionResult A1() { logger.Use(); mediator.Use(); bus.Use(); configuration.Use(); s1.Use(); return Ok(); } // Secondary {{May belong to responsibility #1.}}
             public IActionResult A2() { mediator.Use(); mapper.Use(); bus.Use(); configuration.Use(); s2.Use(); return Ok(); } // Secondary {{May belong to responsibility #2.}}
         }
 
-        // Noncompliant@+1: 4 specific deps injected, two for A1 and two for A2
+        // Noncompliant@+2: 4 specific deps injected, two for A1 and two for A2
+        [ApiController]
         public class FourSpecificDepsTwoForA1AndTwoForA2(
             ILogger<FourSpecificDepsTwoForA1AndTwoForA2> logger, IMediator mediator, IMapper mapper,
-            IS1 s1, IS2 s2, IS3 s3, IS4 s4) : ApiController
+            IS1 s1, IS2 s2, IS3 s3, IS4 s4) : ControllerBase
         {
             public IActionResult A1() { logger.Use(); s1.Use(); s2.Use(); return Ok(); }                 // Secondary {{May belong to responsibility #1.}}
             public IActionResult A2() { mediator.Use(); mapper.Use(); s3.Use(); s4.Use(); return Ok(); } // Secondary {{May belong to responsibility #2.}}
@@ -187,19 +195,21 @@ namespace WithInjectionViaPrimaryConstructors
             public void A2() { mediator.Use(); mapper.Use(); s3.Use(); s4.Use(); } // Secondary {{May belong to responsibility #2.}}
         }
 
-        // Compliant@+1: 4 specific deps injected, two for A1 and two for A2, in an API controller marked as NonController
+        // Compliant@+2: 4 specific deps injected, two for A1 and two for A2, in an API controller marked as NonController
+        [ApiController]
         [NonController] public class FourSpecificDepsTwoForA1AndTwoForA2NoController(
             ILogger<FourSpecificDepsTwoForA1AndTwoForA2NoController> logger, IMediator mediator, IMapper mapper,
-            IS1 s1, IS2 s2, IS3 s3, IS4 s4) : ApiController
+            IS1 s1, IS2 s2, IS3 s3, IS4 s4) : ControllerBase
         {
             public IActionResult A1() { logger.Use(); s1.Use(); s2.Use(); return Ok(); }
             public IActionResult A2() { mediator.Use(); mapper.Use(); s3.Use(); s4.Use(); return Ok(); }
         }
 
-        // Noncompliant@+1: 4 specific deps injected, two for A1 and two for A2, in a PoCo controller with controller suffix
+        // Noncompliant@+2: 4 specific deps injected, two for A1 and two for A2, in a PoCo controller with controller suffix
+        [ApiController]
         public class FourSpecificDepsTwoForA1AndTwoForA2PoCoController(
             ILogger<FourSpecificDepsTwoForA1AndTwoForA2PoCoController> logger, IMediator mediator, IMapper mapper,
-            IS1 s1, IS2 s2, IS3 s3, IS4 s4) : ApiController
+            IS1 s1, IS2 s2, IS3 s3, IS4 s4) : ControllerBase
         {
             public string A1() { logger.Use(); s1.Use(); s2.Use(); return "Ok"; }                 // Secondary {{May belong to responsibility #1.}}
             public string A2() { mediator.Use(); mapper.Use(); s3.Use(); s4.Use(); return "Ok"; } // Secondary {{May belong to responsibility #2.}}
@@ -214,55 +224,62 @@ namespace WithInjectionViaPrimaryConstructors
             public string A2() { mediator.Use(); mapper.Use(); s3.Use(); s4.Use(); return "Ok"; }
         }
 
-        // Noncompliant@+1: 4 specific deps injected, two for A1 and two for A2, in a PoCo controller without controller suffix but with [Controller] attribute
-        [Controller] public class PoCoControllerWithoutControllerSuffixWithControllerAttribute(
+        // Noncompliant@+3: 4 specific deps injected, two for A1 and two for A2, in a PoCo controller without controller suffix but with [Controller] attribute
+        [ApiController]
+        [Controller]
+        public class PoCoControllerWithoutControllerSuffixWithControllerAttribute(
             ILogger<PoCoControllerWithoutControllerSuffixWithControllerAttribute> logger, IMediator mediator, IMapper mapper,
-            IS1 s1, IS2 s2, IS3 s3, IS4 s4) : ApiController
+            IS1 s1, IS2 s2, IS3 s3, IS4 s4) : ControllerBase
         {
             public string A1() { logger.Use(); s1.Use(); s2.Use(); return "Ok"; }                 // Secondary {{May belong to responsibility #1.}}
             public string A2() { mediator.Use(); mapper.Use(); s3.Use(); s4.Use(); return "Ok"; } // Secondary {{May belong to responsibility #2.}}
         }
 
-        // Noncompliant@+1: 4 specific deps injected, two for A1 and two for A2, with responsibilities in a different order
+        // Noncompliant@+2: 4 specific deps injected, two for A1 and two for A2, with responsibilities in a different order
+        [ApiController]
         public class FourSpecificDepsTwoForA1AndTwoForA2DifferentOrderOfResponsibilities(
             ILogger<FourSpecificDepsTwoForA1AndTwoForA2DifferentOrderOfResponsibilities> logger, IMediator mediator, IMapper mapper,
-            IS1 s1, IS2 s2, IS3 s3, IS4 s4) : ApiController
+            IS1 s1, IS2 s2, IS3 s3, IS4 s4) : ControllerBase
         {
             public IActionResult A2() { logger.Use(); s1.Use(); s2.Use(); return Ok(); }                 // Secondary {{May belong to responsibility #2.}}
             public IActionResult A1() { mediator.Use(); mapper.Use(); s3.Use(); s4.Use(); return Ok(); } // Secondary {{May belong to responsibility #1.}}
         }
 
-        // Noncompliant@+1: 4 specific deps injected, two for A1 and two for A2, with dependencies used in a different order
+        // Noncompliant@+2: 4 specific deps injected, two for A1 and two for A2, with dependencies used in a different order
+        [ApiController]
         public class FourSpecificDepsTwoForA1AndTwoForA2DifferentOrderOfDependencies(
             ILogger<FourSpecificDepsTwoForA1AndTwoForA2DifferentOrderOfDependencies> logger, IMediator mediator, IMapper mapper,
-            IS1 s1, IS2 s2, IS3 s3, IS4 s4) : ApiController
+            IS1 s1, IS2 s2, IS3 s3, IS4 s4) : ControllerBase
         {
             public IActionResult A1() { logger.Use(); s2.Use(); s1.Use(); return Ok(); }                 // Secondary {{May belong to responsibility #1.}}
             public IActionResult A2() { mediator.Use(); mapper.Use(); s3.Use(); s4.Use(); return Ok(); } // Secondary {{May belong to responsibility #2.}}
         }
 
-        // Noncompliant@+1: 4 specific deps injected, three for A1 and one for A2
+        // Noncompliant@+2: 4 specific deps injected, three for A1 and one for A2
+        [ApiController]
         public class FourSpecificDepsThreeForA1AndOneForA2(
             ILogger<FourSpecificDepsThreeForA1AndOneForA2> logger, IMediator mediator, IMapper mapper,
-            IS1 s1, IS2 s2, IS3 s3, IS3 s4) : ApiController
+            IS1 s1, IS2 s2, IS3 s3, IS3 s4) : ControllerBase
         {
             public IActionResult A1() { logger.Use(); s1.Use(); s2.Use(); s3.Use(); return Ok(); } // Secondary {{May belong to responsibility #1.}}
             public IActionResult A2() { mediator.Use(); mapper.Use(); s4.Use(); return Ok(); }     // Secondary {{May belong to responsibility #2.}}
         }
 
-        // Compliant@+1: 4 specific deps injected, all for A1 and none for A2
+        // Compliant@+2: 4 specific deps injected, all for A1 and none for A2
+        [ApiController]
         public class FourSpecificDepsFourForA1AndNoneForA2(
             ILogger<FourSpecificDepsFourForA1AndNoneForA2> logger, IMediator mediator, IMapper mapper,
-            IS1 s1, IS2 s2, IS3 s3, IS3 s4) : ApiController
+            IS1 s1, IS2 s2, IS3 s3, IS3 s4) : ControllerBase
         {
             public IActionResult A1() { logger.Use(); mediator.Use(); s1.Use(); s2.Use(); s3.Use(); s4.Use(); return Ok(); }
             public IActionResult A2() { mediator.Use(); mapper.Use(); return Ok(); }
         }
 
-        // Compliant@+1: 4 specific deps injected, one in common between responsibility 1 and 2
+        // Compliant@+2: 4 specific deps injected, one in common between responsibility 1 and 2
+        [ApiController]
         public class ThreeSpecificDepsOneInCommonBetweenA1AndA2(
             ILogger<ThreeSpecificDepsOneInCommonBetweenA1AndA2> logger, IMediator mediator, IMapper mapper,
-            IS1 s1, IS2 s2, IS3 s3) : ApiController
+            IS1 s1, IS2 s2, IS3 s3) : ControllerBase
         {
             public IActionResult A1() { logger.Use(); mediator.Use(); s1.Use(); s2.Use(); return Ok(); }
             public IActionResult A2() { mediator.Use(); mapper.Use(); s2.Use(); s3.Use(); return Ok(); }
@@ -271,40 +288,44 @@ namespace WithInjectionViaPrimaryConstructors
 
     namespace ThreeActions
     {
-        // Noncompliant@+1: 2 specific deps injected, each used in a separate responsibility
+        // Noncompliant@+2: 2 specific deps injected, each used in a separate responsibility
+        [ApiController]
         public class ThreeResponsibilities(
             ILogger<ThreeResponsibilities> logger, IMediator mediator, IMapper mapper,
-            IS1 s1, IS2 s2) : ApiController
+            IS1 s1, IS2 s2) : ControllerBase
         {
             public IActionResult A1() { logger.Use(); mediator.Use(); s1.Use(); return Ok(); } // Secondary {{May belong to responsibility #1.}}
             public IActionResult A2() { mediator.Use(); mapper.Use(); s2.Use(); return Ok(); } // Secondary {{May belong to responsibility #2.}}
             public IActionResult A3() { mapper.Use(); return Ok(); }
         }
 
-        // Noncompliant@+1: 3 specific deps injected, each used in a separate responsibility, possibly multiple times
+        // Noncompliant@+2: 3 specific deps injected, each used in a separate responsibility, possibly multiple times
+        [ApiController]
         public class UpToThreeSpecificDepsController(
             ILogger<UpToThreeSpecificDepsController> logger, IMediator mediator, IMapper mapper,
-            IS1 s1, IS2 s2, IS3 s3) : ApiController
+            IS1 s1, IS2 s2, IS3 s3) : ControllerBase
         {
             public IActionResult A1() { logger.Use(); s1.Use(); s1.Use(); return Ok(); }                           // Secondary {{May belong to responsibility #1.}}
             public IActionResult A2() { logger.Use(); mapper.Use(); s2.Use(); s2.Use(); return Ok(); }             // Secondary {{May belong to responsibility #2.}}
             public IActionResult A3() { mediator.Use(); mapper.Use(); s3.Use(); s3.Use(); s3.Use(); return Ok(); } // Secondary {{May belong to responsibility #3.}}
         }
 
-        // Noncompliant@+1: 3 specific deps injected, each used in a separate responsibility
+        // Noncompliant@+2: 3 specific deps injected, each used in a separate responsibility
+        [ApiController]
         public class ThreeResponsibilities2(
             ILogger<ThreeResponsibilities2> logger, IMediator mediator, IMapper mapper,
-            IS1 s1, IS2 s2, IS3 s3) : ApiController
+            IS1 s1, IS2 s2, IS3 s3) : ControllerBase
         {
             public IActionResult A1() { logger.Use(); mediator.Use(); s1.Use(); return Ok(); } // Secondary {{May belong to responsibility #1.}}
             public IActionResult A2() { mediator.Use(); mapper.Use(); s2.Use(); return Ok(); } // Secondary {{May belong to responsibility #2.}}
             public IActionResult A3() { s3.Use(); return Ok(); }                               // Secondary {{May belong to responsibility #3.}}
         }
 
-        // Noncompliant@+1: 3 specific deps injected, forming a chain and an isolated action
+        // Noncompliant@+2: 3 specific deps injected, forming a chain and an isolated action
+        [ApiController]
         public class ThreeSpecificDepsFormingAChainAndAnIsolatedAction(
             ILogger<ThreeSpecificDepsFormingAChainAndAnIsolatedAction> logger, IMediator mediator, IMapper mapper,
-            IS1 s1, IS2 s2, IS3 s3) : ApiController
+            IS1 s1, IS2 s2, IS3 s3) : ControllerBase
         {
             // Chain: A1, A2 with s1 and s2
             public IActionResult A1() { logger.Use(); mediator.Use(); s1.Use(); s2.Use(); return Ok(); } // Secondary {{May belong to responsibility #1.}}
@@ -313,30 +334,33 @@ namespace WithInjectionViaPrimaryConstructors
             public IActionResult A3() { s3.Use(); return Ok(); }                                         // Secondary {{May belong to responsibility #2.}}
         }
 
-        // Noncompliant@+1: 4 specific deps injected, two for A1, one for A2, and one for A3
+        // Noncompliant@+2: 4 specific deps injected, two for A1, one for A2, and one for A3
+        [ApiController]
         public class FourSpecificDepsTwoForA1OneForA2AndOneForA3(
             ILogger<FourSpecificDepsTwoForA1OneForA2AndOneForA3> logger, IMediator mediator, IMapper mapper,
-            IS1 s1, IS2 s2, IS3 s3, IS4 s4) : ApiController
+            IS1 s1, IS2 s2, IS3 s3, IS4 s4) : ControllerBase
         {
             public IActionResult A1() { logger.Use(); mediator.Use(); s1.Use(); s2.Use(); return Ok(); } // Secondary {{May belong to responsibility #1.}}
             public IActionResult A2() { mediator.Use(); mapper.Use(); s3.Use(); return Ok(); }           // Secondary {{May belong to responsibility #2.}}
             public IActionResult A3() { s4.Use(); return Ok(); }                                         // Secondary {{May belong to responsibility #3.}}
         }
 
-        // Noncompliant@+1: 4 specific deps injected, one for A1, one for A2, one for A3, one unused
+        // Noncompliant@+2: 4 specific deps injected, one for A1, one for A2, one for A3, one unused
+        [ApiController]
         public class FourSpecificDepsOneForA1OneForA2OneForA3OneUnused(
             ILogger<FourSpecificDepsOneForA1OneForA2OneForA3OneUnused> logger, IMediator mediator, IMapper mapper,
-            IS1 s1, IS2 s2, IS3 s3, IS4 s4) : ApiController
+            IS1 s1, IS2 s2, IS3 s3, IS4 s4) : ControllerBase
         {
             public IActionResult A1() { logger.Use(); mediator.Use(); s1.Use(); return Ok(); } // Secondary {{May belong to responsibility #1.}}
             public IActionResult A2() { mediator.Use(); mapper.Use(); s2.Use(); return Ok(); } // Secondary {{May belong to responsibility #2.}}
             public IActionResult A3() { s3.Use(); return Ok(); }                               // Secondary {{May belong to responsibility #3.}}
         }
 
-        // Compliant@+1: 4 specific deps injected, forming a single 3-cycle
+        // Compliant@+2: 4 specific deps injected, forming a single 3-cycle
+        [ApiController]
         public class FourSpecificDepsFormingACycle(
             ILogger<FourSpecificDepsFormingACycle> logger, IMediator mediator, IMapper mapper,
-            IS1 s1, IS2 s2, IS3 s3, IS4 s4) : ApiController
+            IS1 s1, IS2 s2, IS3 s3, IS4 s4) : ControllerBase
         {
             // Cycle: A1, A2, A3
             public IActionResult A1() { logger.Use(); mediator.Use(); s1.Use(); s2.Use(); return Ok(); }
@@ -347,9 +371,10 @@ namespace WithInjectionViaPrimaryConstructors
 
     namespace SixActions
     {
-        // Noncompliant@+1: 6 specific deps injected, forming 2 disconnected 3-cycles
+        // Noncompliant@+2: 6 specific deps injected, forming 2 disconnected 3-cycles
+        [ApiController]
         public class FourSpecificDepsFormingTwoDisconnectedCycles(
-            IS1 s1, IS2 s2, IS3 s3, IS4 s4, IS5 s5, IS6 s6) : ApiController
+            IS1 s1, IS2 s2, IS3 s3, IS4 s4, IS5 s5, IS6 s6) : ControllerBase
         {
             // Cycle 1: A1, A2, A3
             public IActionResult A1() { s1.Use(); s2.Use(); return Ok(); } // Secondary {{May belong to responsibility #1.}}
@@ -361,9 +386,10 @@ namespace WithInjectionViaPrimaryConstructors
             public IActionResult A6() { s6.Use(); s4.Use(); return Ok(); } // Secondary {{May belong to responsibility #2.}}
         }
 
-        // Compliant@+1: 5 specific deps injected, forming 2 connected 3-cycles
+        // Compliant@+2: 5 specific deps injected, forming 2 connected 3-cycles
+        [ApiController]
         public class FourSpecificDepsFormingTwoConnectedCycles(
-            IS1 s1, IS2 s2, IS3 s3, IS4 s4, IS5 s5) : ApiController
+            IS1 s1, IS2 s2, IS3 s3, IS4 s4, IS5 s5) : ControllerBase
         {
             // Cycle 1: A1, A2, A3
             public IActionResult A1() { s1.Use(); s2.Use(); return Ok(); }
@@ -375,9 +401,10 @@ namespace WithInjectionViaPrimaryConstructors
             public IActionResult A6() { s5.Use(); s1.Use(); return Ok(); }
         }
 
-        // Compliant@+1: 4 specific deps injected, forming 2 3-cycles, connected by two dependencies (s1 and s2)
+        // Compliant@+2: 4 specific deps injected, forming 2 3-cycles, connected by two dependencies (s1 and s2)
+        [ApiController]
         public class FourSpecificDepsFormingTwoConnectedCycles2(
-            IS1 s1, IS2 s2, IS3 s3, IS4 s4) : ApiController
+            IS1 s1, IS2 s2, IS3 s3, IS4 s4) : ControllerBase
         {
             // Cycle 1: A1, A2, A3
             public IActionResult A1() { s1.Use(); s2.Use(); return Ok(); }
@@ -389,9 +416,10 @@ namespace WithInjectionViaPrimaryConstructors
             public IActionResult A6() { s4.Use(); s1.Use(); return Ok(); }
         }
 
-        // Compliant@+1: 4 specific deps injected, forming 2 3-cycles, connected by action invocations
+        // Compliant@+2: 4 specific deps injected, forming 2 3-cycles, connected by action invocations
+        [ApiController]
         public class FourSpecificDepsFormingTwoConnectedCycles3(
-            IS1 s1, IS2 s2, IS3 s3, IS4 s4, IS5 s5, IS6 s6) : ApiController
+            IS1 s1, IS2 s2, IS3 s3, IS4 s4, IS5 s5, IS6 s6) : ControllerBase
         {
             // Cycle 1: A1, A2, A3
             public IActionResult A1() { s1.Use(); s2.Use(); return Ok(); }
@@ -403,9 +431,10 @@ namespace WithInjectionViaPrimaryConstructors
             public IActionResult A6() { s6.Use(); s4.Use(); return Ok(); }
         }
 
-        // Noncompliant@+1: 6 specific deps injected, forming 3 disconnected 2-cycles
+        // Noncompliant@+2: 6 specific deps injected, forming 3 disconnected 2-cycles
+        [ApiController]
         public class FourSpecificDepsFormingThreeDisconnectedCycles(
-            IS1 s1, IS2 s2, IS3 s3, IS4 s4, IS5 s5, IS6 s6) : ApiController
+            IS1 s1, IS2 s2, IS3 s3, IS4 s4, IS5 s5, IS6 s6) : ControllerBase
         {
             // Cycle 1: A1, A2
             public IActionResult A1() { s1.Use(); s2.Use(); return Ok(); } // Secondary {{May belong to responsibility #1.}}
@@ -418,9 +447,10 @@ namespace WithInjectionViaPrimaryConstructors
             public IActionResult A6() { s6.Use(); s5.Use(); return Ok(); } // Secondary {{May belong to responsibility #3.}}
         }
 
-        // Noncompliant@+1: 6 specific deps injected, forming 2 connected 2-cycles and 1 disconnected 2-cycle
+        // Noncompliant@+2: 6 specific deps injected, forming 2 connected 2-cycles and 1 disconnected 2-cycle
+        [ApiController]
         public class FourSpecificDepsFormingTwoConnectedCyclesAndOneDisconnectedCycle(
-            IS1 s1, IS2 s2, IS3 s3, IS4 s4, IS5 s5, IS6 s6) : ApiController
+            IS1 s1, IS2 s2, IS3 s3, IS4 s4, IS5 s5, IS6 s6) : ControllerBase
         {
             // Cycle 1: A1, A2
             public IActionResult A1() { s1.Use(); s2.Use(); return Ok(); }       // Secondary {{May belong to responsibility #1.}}
@@ -433,9 +463,10 @@ namespace WithInjectionViaPrimaryConstructors
             public IActionResult A6() { s6.Use(); s5.Use(); return Ok(); }       // Secondary {{May belong to responsibility #2.}}
         }
 
-        // Compliant@+1: 6 specific deps injected, forming 3 connected 2-cycles
+        // Compliant@+2: 6 specific deps injected, forming 3 connected 2-cycles
+        [ApiController]
         public class FourSpecificDepsFormingThreeConnectedCycles(
-            IS1 s1, IS2 s2, IS3 s3, IS4 s4, IS5 s5, IS6 s6) : ApiController
+            IS1 s1, IS2 s2, IS3 s3, IS4 s4, IS5 s5, IS6 s6) : ControllerBase
         {
             // Cycle 1: A1, A2
             public IActionResult A1() { s1.Use(); s2.Use(); return Ok(); }
@@ -448,9 +479,10 @@ namespace WithInjectionViaPrimaryConstructors
             public IActionResult A6() { s6.Use(); s5.Use(); return Ok(); }
         }
 
-        // Compliant@+1: 6 specific deps injected, forming 3 connected 2-cycles - transitivity of connection
+        // Compliant@+2: 6 specific deps injected, forming 3 connected 2-cycles - transitivity of connection
+        [ApiController]
         public class FourSpecificDepsFormingThreeConnectedCyclesTransitivity(
-                       IS1 s1, IS2 s2, IS3 s3, IS4 s4, IS5 s5, IS6 s6) : ApiController
+                       IS1 s1, IS2 s2, IS3 s3, IS4 s4, IS5 s5, IS6 s6) : ControllerBase
         {
             // Cycle 1: A1, A2
             public IActionResult A1() { s1.Use(); s2.Use(); return Ok(); }
@@ -472,7 +504,8 @@ namespace WithInjectionViaNormalConstructor
     using TestInstrumentation.WellKnownInterfacesNotExcluded;
     using TestInstrumentation;
 
-    public class WithFields : ApiController // Noncompliant
+    [ApiController]
+    public class WithFields : ControllerBase // Noncompliant
     {
         private readonly IS1 s1;
         private IS2 s2;
@@ -483,7 +516,8 @@ namespace WithInjectionViaNormalConstructor
         public void A2() { s2.Use(); } // Secondary {{May belong to responsibility #2.}}
     }
 
-    public class WithDifferentVisibilities : ApiController // Noncompliant
+    [ApiController]
+    public class WithDifferentVisibilities : ControllerBase // Noncompliant
     {
         private IS1 s1;
         protected IS2 s2;
@@ -505,7 +539,8 @@ namespace WithInjectionViaNormalConstructor
         public void A6() { s6.Use(); s5.Use(); }             // Secondary {{May belong to responsibility #3.}}
     }
 
-    public class WithStaticFields : ApiController // Noncompliant: static storage is irrelevant
+    [ApiController]
+    public class WithStaticFields : ControllerBase // Compliant, we don't take into account static fields and methods.
     {
         private static IS1 s1;
         private static IS2 s2 = null;
@@ -514,13 +549,14 @@ namespace WithInjectionViaNormalConstructor
 
         static WithStaticFields() { s1 = S1.Instance; }
 
-        public void A1() { s1.Use(); } // Secondary {{May belong to responsibility #1.}}
-        public void A2() { s2.Use(); } // Secondary {{May belong to responsibility #2.}}
+        public void A1() { s1.Use(); }
+        public void A2() { s2.Use(); }
 
         class S1 : IS1 { public void Use() { } public static IS1 Instance => new S1(); }
     }
 
-    public class WithAutoProperties : ApiController // Noncompliant
+    [ApiController]
+    public class WithAutoProperties : ControllerBase // Noncompliant
     {
         public IS1 S1 { get; }
         public IS2 S2 { get; set; }
@@ -535,7 +571,8 @@ namespace WithInjectionViaNormalConstructor
         public void A4() { S4.Use(); }           // Only well-known service used => Ignored
     }
 
-    public class WithFieldBackedProperties : ApiController // Noncompliant
+    [ApiController]
+    public class WithFieldBackedProperties : ControllerBase // Noncompliant
     {
         private IS1 _s1;
         private IS2 _s2;
@@ -549,7 +586,8 @@ namespace WithInjectionViaNormalConstructor
         public void A2() { S2.Use(); } // Secondary {{May belong to responsibility #2.}}
     }
 
-    public class WithMixedStorageMechanismsAndPropertyDependency : ApiController // Compliant: single responsibility
+    [ApiController]
+    public class WithMixedStorageMechanismsAndPropertyDependency : ControllerBase // Compliant: single responsibility
     {
         // Property dependency: A3 -> S3 -> { _s3, _s1 }
         private IS1 _s1;
@@ -565,7 +603,8 @@ namespace WithInjectionViaNormalConstructor
         public void A3() { S3.Use(); }
     }
 
-    public class WithMixedStorageMechanismsAndPropertyDependencyTransitivity : ApiController
+    [ApiController]
+    public class WithMixedStorageMechanismsAndPropertyDependencyTransitivity : ControllerBase
     {
         // Property dependency transitivity: A4 -> S4 -> { _s4, S3 } -> { _s4, _s3, S2 }
         private IS1 _s1;
@@ -585,7 +624,8 @@ namespace WithInjectionViaNormalConstructor
         public void A4() { S4.Use(); }
     }
 
-    public class WithLambdaCapturingService : ApiController // Noncompliant: s1Provider and s2Provider explicitly wrap services
+    [ApiController]
+    public class WithLambdaCapturingService : ControllerBase // Noncompliant: s1Provider and s2Provider explicitly wrap services
     {
         private readonly Func<IS1> s1Provider;
         private readonly Func<int, IS2> s2Provider;
@@ -596,7 +636,8 @@ namespace WithInjectionViaNormalConstructor
         public void A2() { s2Provider(42).Use(); } // Secondary {{May belong to responsibility #2.}}
     }
 
-    public class WithNonPublicConstructor : ApiController // Noncompliant: ctor visibility is irrelevant
+    [ApiController]
+    public class WithNonPublicConstructor : ControllerBase // Noncompliant: ctor visibility is irrelevant
     {
         private readonly IS1 s1;
         protected IS2 S2 { get; init; }
@@ -607,7 +648,8 @@ namespace WithInjectionViaNormalConstructor
         public void A2() { S2.Use(); }           // Secondary {{May belong to responsibility #2.}}
     }
 
-    public class WithCtorNotInitializingInjectedServices : ApiController // Noncompliant: initialization is irrelevant
+    [ApiController]
+    public class WithCtorNotInitializingInjectedServices : ControllerBase // Noncompliant: initialization is irrelevant
     {
         private readonly IS1 s1;
         internal IS2 s2;
@@ -618,7 +660,8 @@ namespace WithInjectionViaNormalConstructor
         public void A2() { s2.Use(); } // Secondary {{May belong to responsibility #2.}}
     }
 
-    public class WithServicesNotInjectedAtAll : ApiController // Noncompliant: ctor injection is irrelevant
+    [ApiController]
+    public class WithServicesNotInjectedAtAll : ControllerBase // Noncompliant: ctor injection is irrelevant
     {
         private IS1 s1;
         private IS2 s2;
@@ -629,7 +672,8 @@ namespace WithInjectionViaNormalConstructor
         public void A2() { s2.Use(); } // Secondary {{May belong to responsibility #2.}}
     }
 
-    public class WithServicesInitializedWithServiceProvider : ApiController // Noncompliant: service locator pattern is irrelevant
+    [ApiController]
+    public class WithServicesInitializedWithServiceProvider : ControllerBase // Noncompliant: service locator pattern is irrelevant
     {
         private readonly IS1 s1;
         private readonly IS2 s2;
@@ -644,7 +688,8 @@ namespace WithInjectionViaNormalConstructor
         public void A2() { s2.Use(); } // Secondary {{May belong to responsibility #2.}}
     }
 
-    public class WithServicesInitializedWithSingletons : ApiController // Noncompliant: singleton pattern is irrelevant
+    [ApiController]
+    public class WithServicesInitializedWithSingletons : ControllerBase // Noncompliant: singleton pattern is irrelevant
     {
         private readonly IS1 s1 = S1.Instance;
         private readonly IS2 s2 = S2.Instance;
@@ -656,7 +701,8 @@ namespace WithInjectionViaNormalConstructor
         class S2 : IS2 { public void Use() { } public static IS2 Instance => new S2(); }
     }
 
-    public class WithServicesInitializedWithMixedStrategies : ApiController // Noncompliant
+    [ApiController]
+    public class WithServicesInitializedWithMixedStrategies : ControllerBase // Noncompliant
     {
         private readonly IS1 s1;
         private readonly IS2 s2 = S2.Instance;
@@ -675,7 +721,8 @@ namespace WithInjectionViaNormalConstructor
         class S2 : IS2 { public void Use() { } public static IS2 Instance => new S2(); }
     }
 
-    public class WithAWellKnownInterfaceIncluded : ApiController // Noncompliant
+    [ApiController]
+    public class WithAWellKnownInterfaceIncluded : ControllerBase // Noncompliant
     {
         private ILogger<WithAWellKnownInterfaceIncluded> Logger { get; }
         private readonly IS1 s1;
@@ -697,7 +744,8 @@ namespace WithInjectionViaNormalConstructor
     }
 }
 
-public class WithHttpClientFactory : ApiController // Noncompliant
+[ApiController]
+public class WithHttpClientFactory : ControllerBase // Noncompliant
 {
     private readonly IHttpClientFactory _httpClientFactory; // Well-known
     private readonly IS1 s1;
@@ -708,7 +756,8 @@ public class WithHttpClientFactory : ApiController // Noncompliant
     public void A3() { _httpClientFactory.Use(); }
 }
 
-public class WithUseInComplexBlocks : ApiController // Noncompliant
+[ApiController]
+public class WithUseInComplexBlocks : ControllerBase // Noncompliant
 {
     IS1 s1; IS2 s2; IS3 s3; IS4 s4; IS5 s5; IS6 s6; IS7 s7; IS8 s8; IS9 s9; IS10 s10;
 
@@ -759,7 +808,8 @@ public class WithUseInComplexBlocks : ApiController // Noncompliant
     class ADisposable : IDisposable { public void Dispose() { } }
 }
 
-public class WithMethodsDependingOnEachOther : ApiController // Noncompliant
+[ApiController]
+public class WithMethodsDependingOnEachOther : ControllerBase // Noncompliant
 {
     IS1 s1; IS2 s2; IS3 s3; IS4 s4; IS5 s5; IS6 s6; IS7 s7;
 
@@ -796,7 +846,8 @@ public class WithMethodsDependingOnEachOther : ApiController // Noncompliant
     void A22() { s6.Use(); s7.Use(); } // Secondary {{May belong to responsibility #5.}}
 }
 
-public class WithServiceProvidersInjectionCoupled : ApiController // Compliant: s1Provider and s2Provider are known to provide services
+[ApiController]
+public class WithServiceProvidersInjectionCoupled : ControllerBase // Compliant: s1Provider and s2Provider are known to provide services
 {
     private readonly Func<IS1> s1Provider;
     private readonly Func<int, IS2> s2Provider;
@@ -811,7 +862,18 @@ public class WithServiceProvidersInjectionCoupled : ApiController // Compliant: 
     public void A2() { (s2Provider(42)).Use(); }
 }
 
-public class WithServiceProvidersInjectionUsedInGroups : ApiController // Noncompliant
+[ApiController]
+public class ApiController : ControllerBase { }
+
+public class DoesNotInheritDirectlyFromControllerBase(IS1 s1, IS2 s2) : ApiController // Compliant, we report only in classes that inherit directly from ControllerBase
+{
+    public IActionResult A1() { s1.Use(); return Ok(); }
+    public IActionResult A2() { s2.Use(); return Ok(); }
+}
+
+
+[ApiController]
+public class WithServiceProvidersInjectionUsedInGroups : ControllerBase // Noncompliant
 {
     private IS1 _s1;
     private Func<bool, uint, Func<double>, IS5> _s5Provider;
@@ -829,7 +891,8 @@ public class WithServiceProvidersInjectionUsedInGroups : ApiController // Noncom
     public void A6() { S5Provider(true, 3u, () => 42.0).Use(); }                                // Secondary {{May belong to responsibility #2.}}
 }
 
-public class WithServiceWrappersInjection : ApiController // Compliant: no way to know whether s2Invoker wraps a service
+[ApiController]
+public class WithServiceWrappersInjection : ControllerBase // Compliant: no way to know whether s2Invoker wraps a service
 {
     private readonly Func<IS1> s1Provider;
     private readonly Action s2Invoker;
@@ -844,7 +907,8 @@ public class WithServiceWrappersInjection : ApiController // Compliant: no way t
     public void A2() { s2Invoker(); }
 }
 
-public class WithLazyServicesInjection : ApiController // Noncompliant
+[ApiController]
+public class WithLazyServicesInjection : ControllerBase // Noncompliant
 {
     private readonly Lazy<IS1> s1Lazy;
     private readonly Lazy<IS2> s2Lazy;
@@ -856,7 +920,8 @@ public class WithLazyServicesInjection : ApiController // Noncompliant
     public void A3() { s3Lazy.Value.Use(); }                     // Secondary {{May belong to responsibility #2.}}
 }
 
-public class WithMixOfLazyServicesAndServiceProviders : ApiController // Noncompliant
+[ApiController]
+public class WithMixOfLazyServicesAndServiceProviders : ControllerBase // Noncompliant
 {
     private readonly Lazy<IS1> s1Lazy;
     private readonly Lazy<IS2> s2Lazy;
@@ -871,7 +936,8 @@ public class WithMixOfLazyServicesAndServiceProviders : ApiController // Noncomp
     public void A4() { s5Provider().Use(); var s6ProviderAlias = s6Provider(); s6ProviderAlias.Use(); } // Secondary {{May belong to responsibility #2.}}
 }
 
-public class WithIApi : ApiController // Compliant
+[ApiController]
+public class WithIApi : ControllerBase // Compliant
 {
     private readonly IApi _api;
 
@@ -883,7 +949,8 @@ public class WithIApi : ApiController // Compliant
     public interface IApi : IServiceWithAnAPI { }
 }
 
-public class WithUnusedServices : ApiController // Compliant
+[ApiController]
+public class WithUnusedServices : ControllerBase // Compliant
 {
     private readonly IS1 s1;
     private readonly IS2 s2;
@@ -896,7 +963,8 @@ public class WithUnusedServices : ApiController // Compliant
     public void A4() { }
 }
 
-public class WithUnusedAndUsedServicesFormingTwoGroups : ApiController // Compliant
+[ApiController]
+public class WithUnusedAndUsedServicesFormingTwoGroups : ControllerBase // Compliant
 {
     // s2, s3 and s4 form a non-singleton, but no action use any of them => the set is filtered out
     private readonly IS1 s1;
@@ -907,7 +975,8 @@ public class WithUnusedAndUsedServicesFormingTwoGroups : ApiController // Compli
     public void A1() { s1.Use(); }
 }
 
-public class WithUnusedAndUsedServicesFormingThreeGroups : ApiController // Noncompliant {{This controller has multiple responsibilities and could be split into 3 smaller controllers.}}
+[ApiController]
+public class WithUnusedAndUsedServicesFormingThreeGroups : ControllerBase // Noncompliant {{This controller has multiple responsibilities and could be split into 3 smaller controllers.}}
 {
     private readonly IS1 s1;
     private readonly IS2 s2;
@@ -919,7 +988,8 @@ public class WithUnusedAndUsedServicesFormingThreeGroups : ApiController // Nonc
     public void A4() { s4.Use(); } // Secondary {{May belong to responsibility #3.}}
 }
 
-public class WithMethodOverloads : ApiController // Noncompliant
+[ApiController]
+public class WithMethodOverloads : ControllerBase // Noncompliant
 {
     private readonly IS1 s1;
     private readonly IS2 s2;
@@ -936,7 +1006,8 @@ public class WithMethodOverloads : ApiController // Noncompliant
     public void A2(int i) { s6.Use(); }           // Secondary {{May belong to responsibility #2.}}
 }
 
-public class WithIndexer : ApiController // Noncompliant
+[ApiController]
+public class WithIndexer : ControllerBase // Noncompliant
 {
     private readonly IS1 s1;
     private readonly IS2 s2;
@@ -949,7 +1020,8 @@ public class WithIndexer : ApiController // Noncompliant
     public void A3() { s3.Use(); } // Secondary {{May belong to responsibility #2.}}
 }
 
-public class WithIndexerOverloads : ApiController // Noncompliant
+[ApiController]
+public class WithIndexerOverloads : ControllerBase // Noncompliant
 {
     private readonly IS1 s1;
     private readonly IS2 s2;
@@ -967,7 +1039,8 @@ public class WithIndexerOverloads : ApiController // Noncompliant
     public void A5() { s5.Use(); } // Secondary {{May belong to responsibility #2.}}
 }
 
-public class WithIndexerArrow : ApiController // Noncompliant
+[ApiController]
+public class WithIndexerArrow : ControllerBase // Noncompliant
 {
     private readonly IS1ReturningInt s1;
     private readonly IS2ReturningInt s2;
@@ -984,7 +1057,8 @@ public class WithIndexerArrow : ApiController // Noncompliant
     public interface IS3ReturningInt { int GetValue(); }
 }
 
-public class WithClassInjection : ApiController // Noncompliant
+[ApiController]
+public class WithClassInjection : ControllerBase // Noncompliant
 {
     private readonly Class1 s1;
     private readonly Class2 s2;
@@ -997,7 +1071,8 @@ public class WithClassInjection : ApiController // Noncompliant
     public void A5() { }                      // No service used => ignore
 }
 
-public class WithStructInjection : ApiController // Noncompliant
+[ApiController]
+public class WithStructInjection : ControllerBase // Noncompliant
 {
     private readonly Struct1 s1;
     private readonly Struct2 s2;
@@ -1010,7 +1085,8 @@ public class WithStructInjection : ApiController // Noncompliant
     public void A5() { }                      // No service used => ignore
 }
 
-public class WithMixOfInjectionTypes : ApiController // Noncompliant
+[ApiController]
+public class WithMixOfInjectionTypes : ControllerBase // Noncompliant
 {
     private readonly IS1 interface1;
     private readonly IS2 interface2;
@@ -1050,7 +1126,8 @@ public class WithMixOfInjectionTypes : ApiController // Noncompliant
     public void A13() { }                                               // No service used => ignored
 }
 
-public class WithDestructor : ApiController // Noncompliant
+[ApiController]
+public class WithDestructor : ControllerBase // Noncompliant
 {
     private readonly IS1 s1;
     private readonly IS2 s2;
