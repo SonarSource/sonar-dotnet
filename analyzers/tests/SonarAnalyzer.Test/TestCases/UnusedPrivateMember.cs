@@ -491,4 +491,11 @@ class Repro_9219
         [MyAttribute]
         private set; // Compliant
     }
+
+    public bool AttributeOnPropertyNoncompliant
+    {
+        [MyAttribute]
+        get;
+        private set; // Noncompliant
+    }
 }
