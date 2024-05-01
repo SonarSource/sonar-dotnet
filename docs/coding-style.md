@@ -225,3 +225,13 @@ Do not use `ValueTuples` in production code. The usage in test projects is fine.
 
 Empty lines should be used between blocks, `Namespace`/`End Namespace` statements, `Class`/`End Class` statements
 and regions to improve readability.
+
+## Test scenarios files
+
+For any C# rule `TheRule`, there should be at least two test scenarios files:
+* `TheRule.cs`, targeting both .NET Framework and .NET Core and using the default version of C#
+* `TheRule.Latest.cs`, targeting .NET Core only (via `# if NET`) and using the latest version of C#
+
+More test scenarios files can be created as needed, for code fixes, top-level statements etc.
+
+Test scenarios created in the past may still be split by language (e.g. `TheRule.CSharpX.cs`) and should be migrated following a Clean as You Code approach.
