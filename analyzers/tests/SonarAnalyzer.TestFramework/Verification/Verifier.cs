@@ -87,7 +87,8 @@ internal class Verifier
             .Concat(builder.Snippets.Where(x => IsRazorOrCshtml(x.FileName)).Select(x =>
             {
                 var tempFilePath = Path.Combine(Directory.GetCurrentDirectory(), "TestCases", x.FileName);
-                // Source snippets need to be on disk for DiagnosticVerifier.Verify to work. If this becomes unnecessary, adding source snippets should be reworked to align it with adding content snippets.
+                // Source snippets need to be on disk for DiagnosticVerifier.Verify to work.
+                // If this becomes unnecessary, adding source snippets should be reworked to align it with adding content snippets.
                 File.WriteAllText(tempFilePath, x.Content);
                 return tempFilePath;
             }))
