@@ -159,6 +159,16 @@ public class VerifierTest
     [DataRow("Dummy.SecondaryLocation.cshtml")]
     public void Verify_RazorWithAdditionalLocation(string path) =>
         DummyWithLocation.AddPaths(path)
+            .WithOptions(ParseOptionsHelper.BeforeCSharp10)
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .Verify();
+
+    [DataTestMethod]
+    [DataRow("Dummy.SecondaryLocation.CSharp10.razor")]
+    [DataRow("Dummy.SecondaryLocation.cshtml")]
+    public void Verify_RazorWithAdditionalLocation_CSharp10(string path) =>
+        DummyWithLocation.AddPaths(path)
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
@@ -176,6 +186,17 @@ public class VerifierTest
     public void Verify_RazorExpressions_Locations(string path) =>
         DummyWithLocation
             .AddPaths(path)
+            .WithOptions(ParseOptionsHelper.BeforeCSharp10)
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .Verify();
+
+    [TestMethod]
+    [DataRow("DummyExpressions.CSharp10.razor")]
+    [DataRow("DummyExpressions.cshtml")]
+    public void Verify_RazorExpressions_Locations_CSharp10(string path) =>
+        DummyWithLocation
+            .AddPaths(path)
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 

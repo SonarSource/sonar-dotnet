@@ -1,4 +1,4 @@
-<p>Explicit expression: @(RaiseHere())</p> @* Noncompliant *@
+﻿<p>Explicit expression: @(RaiseHere())</p> @* Noncompliant *@
 @*                        ^^^^^^^^^ *@
 
 <p>Implicit expression: @RaiseHere()</p> @* Noncompliant *@
@@ -16,7 +16,7 @@
 <p>Code blocks: @{ RaiseHere(); }</p>
 @*                 ^^^^^^^^^ *@
 
-<p>Lambda expression: @((Func<int>)(() => RaiseHere()))()</p>
+<p>Lambda expression: @((Func<int>)(() => RaiseHere()))()</p> @* Noncompliant *@
 @*                                        ^^^^^^^^^ *@
 
 <p>Nested multi-statement block: @{ var result2 = RaiseHere(); var result3 = RaiseHere(); }</p>
@@ -27,7 +27,7 @@
 @*                                ^^^^^^^^^ *@
 @*                                                             ^^^^^^^^^@-1 *@
 
-@functions
+@code
 {
     private static int RaiseHere() { return 42; }
 }
