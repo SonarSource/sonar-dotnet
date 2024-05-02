@@ -176,6 +176,7 @@ public class VerifierTest
     public void Verify_RazorExpressions_Locations(string path) =>
         DummyWithLocation
             .AddPaths(path)
+            .WithOptions(ParseOptionsHelper.BeforeCSharp10)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
