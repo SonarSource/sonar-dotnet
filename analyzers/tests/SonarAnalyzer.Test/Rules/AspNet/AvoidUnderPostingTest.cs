@@ -27,14 +27,15 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class AvoidUnderPostingTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<AvoidUnderPosting>()
-            .WithBasePath("AspNet")
-            .AddReferences([
+    private static readonly IEnumerable<MetadataReference> AspNetReferences = [
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
-                ..NuGetMetadataReference.SystemComponentModelAnnotations(Constants.NuGetLatestVersion)
-            ]);
+                ..NuGetMetadataReference.SystemComponentModelAnnotations(Constants.NuGetLatestVersion)];
+
+    private readonly VerifierBuilder builder = new VerifierBuilder<AvoidUnderPosting>()
+            .WithBasePath("AspNet")
+            .AddReferences(AspNetReferences);
 
     [TestMethod]
     public void AvoidUnderPosting_CSharp() =>
@@ -103,6 +104,43 @@ public class AvoidUnderPostingTest
                 [{{attribute}}] public IActionResult Create(Model model) => View(model);
             }
             """).Verify();
+
+    [TestMethod]
+    public void AvoidUnderPosting_ModelInDifferentProject_CSharp()
+    {
+        const string modelCode = """
+            namespace Models
+            {
+                public class Person
+                {
+                    public int Age { get; set; }    // FN - Roslyn can't raise an issue when the location is in different project than the one being analyzed
+                }
+            }
+            """;
+        const string controllerCode = """
+            using Microsoft.AspNetCore.Mvc;
+            using Models;
+
+            namespace Controllers
+            {
+                public class PersonController : Controller
+                {
+                    [HttpPost] public IActionResult Post(Person person) => View(person);
+                }
+            }
+            """;
+        var solution = SolutionBuilder.Create()
+            .AddProject(AnalyzerLanguage.CSharp)
+            .AddSnippet(modelCode)
+            .Solution
+            .AddProject(AnalyzerLanguage.CSharp)
+            .AddProjectReference(x => x.ProjectIds[0])
+            .AddReferences(AspNetReferences)
+            .AddSnippet(controllerCode)
+            .Solution;
+        var compiledAspNetProject = solution.Compile()[1];
+        DiagnosticVerifier.Verify(compiledAspNetProject, new AvoidUnderPosting());
+    }
 }
 
 #endif
