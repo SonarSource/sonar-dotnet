@@ -234,4 +234,4 @@ For any C# rule `TheRule`, there should be at least two test scenarios files:
 
 More test scenarios files can be created as needed, for code fixes, top-level statements etc.
 
-Test scenarios created in the past may still be split by language (e.g. `TheRule.CSharpX.cs`) and should be migrated following a Clean as You Code approach.
+In the past, test scenarios were split by language (e.g. `TheRule.CSharpX.cs`). These files should be migrated, following a Clean as You Code approach.
