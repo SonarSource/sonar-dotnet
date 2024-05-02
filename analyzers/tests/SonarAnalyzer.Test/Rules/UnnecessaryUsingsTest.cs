@@ -73,9 +73,10 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow("RandomFile_Imports.cshtml")]
         [DataRow("_Imports.cshtml")]
         public void UnnecessaryUsings_RazorViewImportsSimilarCshtmlFile_IssuesReported(string fileName) =>
-            builder.AddReferences(NuGetMetadataReference.SystemTextJson("7.0.4"))
+            builder
                 .AddSnippet("@using System.Linq;", "_ViewImports.cshtml")
                 .AddSnippet(@"@using System.Text.Json; @* Noncompliant *@", fileName)
+                .AddReferences(NuGetMetadataReference.SystemTextJson("7.0.4"))
                 .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .Verify();
 
@@ -84,9 +85,10 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow("RandomFile_Imports.razor")]
         [DataRow("_ViewImports.razor")]
         public void UnnecessaryUsings_RazorViewImportsSimilarRazorFile_IssuesReported(string fileName) =>
-            builder.AddReferences(NuGetMetadataReference.SystemTextJson("7.0.4"))
+            builder
                 .AddSnippet("@using System.Linq;", "_Imports.razor")
                 .AddSnippet(@"@using System.Text.Json; @* Noncompliant *@", fileName)
+                .AddReferences(NuGetMetadataReference.SystemTextJson("7.0.4"))
                 .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .Verify();
 
