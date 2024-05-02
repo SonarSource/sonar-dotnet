@@ -48,7 +48,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
                     {
                         var invocationExpression = (InvocationExpressionSyntax)nodeContext.Node;
 
-                        var awaitableAlternatives = FindAwaitableAlternatives(wellKnownExtensionMethodContainer, codeBlockStart.CodeBlock, invocationExpression,
+                        var awaitableAlternatives = FindAwaitableAlternatives(wellKnownExtensionMethodContainer, invocationExpression,
                             nodeContext.SemanticModel, nodeContext.ContainingSymbol, nodeContext.Cancel);
                         if (awaitableAlternatives.FirstOrDefault() is { Name: { } alternative })
                         {
@@ -85,7 +85,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         return wellKnownExtensionMethodContainer;
     }
 
-    private static ImmutableArray<ISymbol> FindAwaitableAlternatives(WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer, SyntaxNode codeBlock,
+    private static ImmutableArray<ISymbol> FindAwaitableAlternatives(WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer,
         InvocationExpressionSyntax invocationExpression, SemanticModel semanticModel, ISymbol containingSymbol, CancellationToken cancel)
     {
         var awaitableRoot = GetAwaitableRootOfInvocation(invocationExpression);
@@ -174,8 +174,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
             }
             return result;
         });
-        var invocationReplaced = replace.GetAnnotatedNodes(invocationAnnotation).First();
-        return invocationReplaced;
+        return replace.GetAnnotatedNodes(invocationAnnotation).First();
     }
 
     private static ExpressionSyntax GetAwaitableRootOfInvocation(ExpressionSyntax expression) =>
