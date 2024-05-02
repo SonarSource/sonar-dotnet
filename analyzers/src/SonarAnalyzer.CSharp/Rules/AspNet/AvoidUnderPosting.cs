@@ -62,7 +62,7 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
         {
             var modelParameterTypes = method.Parameters
                 .Where(x => !HasValidateNeverAttribute(x))
-                .SelectMany(x => RelatedTypesToExamine(x.Type))
+                .SelectMany(x => RelatedTypesToExamine(x.Type, method.ContainingType))
                 .Distinct();
             foreach (var modelParameterType in modelParameterTypes)
             {
@@ -132,13 +132,14 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
         }
     }
 
-    private static IEnumerable<INamedTypeSymbol> RelatedTypesToExamine(ITypeSymbol type) =>
+    // We only consider Model types that are in the same assembly as the Controller, because Roslyn can't raise an issue when the location is in a different assembly than the one being analyzed.
+    private static IEnumerable<INamedTypeSymbol> RelatedTypesToExamine(ITypeSymbol type, ITypeSymbol controllerType) =>
         type switch
         {
-            IArrayTypeSymbol array => RelatedTypesToExamine(array.ElementType),
+            IArrayTypeSymbol array => RelatedTypesToExamine(array.ElementType, controllerType),
             INamedTypeSymbol collection when collection.DerivesOrImplements(KnownType.System_Collections_Generic_IEnumerable_T) =>
-                collection.TypeArguments.SelectMany(RelatedTypesToExamine),
-            INamedTypeSymbol namedType => [namedType],
+                collection.TypeArguments.SelectMany(x => RelatedTypesToExamine(x, controllerType)),
+            INamedTypeSymbol namedType when type.IsInSameAssembly(controllerType) => [namedType],
             _ => []
         };
 
