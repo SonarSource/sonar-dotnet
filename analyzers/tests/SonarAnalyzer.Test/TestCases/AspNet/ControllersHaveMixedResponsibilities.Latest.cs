@@ -871,7 +871,7 @@ public class DoesNotInheritDirectlyFromControllerBase(IS1 s1, IS2 s2) : ApiContr
     public IActionResult A2() { s2.Use(); return Ok(); }
 }
 
-public class InheritsFromController(IS1 s1, IS2 s2) : ControllerBase // Compliant, we report only in classes that inherit directly from ControllerBase
+public class InheritsFromController(IS1 s1, IS2 s2) : Controller // Compliant, we report only in classes that inherit directly from ControllerBase
 {
     public IActionResult A1() { s1.Use(); return Ok(); }
     public IActionResult A2() { s2.Use(); return Ok(); }
@@ -1142,4 +1142,10 @@ public class WithDestructor : ControllerBase // Noncompliant
 
     public void A1() { s1.Use(); } // Secondary {{May belong to responsibility #1.}}
     public void A2() { s2.Use(); } // Secondary {{May belong to responsibility #2.}}
+}
+
+public class NotAControllerForCoverage
+{
+    private readonly IS1 s1;
+    private readonly IS2 s2;
 }
