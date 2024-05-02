@@ -45,13 +45,13 @@ public static class CSharpSyntaxHelper
         ];
 
     public static bool AnyOfKind(this IEnumerable<SyntaxNode> nodes, SyntaxKind kind) =>
-        nodes.Any(n => n.RawKind == (int)kind);
+        nodes.Any(x => x.RawKind == (int)kind);
 
     public static bool AnyOfKind(this IEnumerable<SyntaxToken> tokens, SyntaxKind kind) =>
-        tokens.Any(n => n.RawKind == (int)kind);
+        tokens.Any(x => x.RawKind == (int)kind);
 
     public static SyntaxNode GetTopMostContainingMethod(this SyntaxNode node) =>
-        node.AncestorsAndSelf().LastOrDefault(ancestor => ancestor is BaseMethodDeclarationSyntax || ancestor is PropertyDeclarationSyntax);
+        node.AncestorsAndSelf().LastOrDefault(x => x is BaseMethodDeclarationSyntax || x is PropertyDeclarationSyntax);
 
     public static SyntaxNode GetSelfOrTopParenthesizedExpression(this SyntaxNode node)
     {
@@ -89,11 +89,11 @@ public static class CSharpSyntaxHelper
     public static bool IsInNameOfArgument(this ExpressionSyntax expression, SemanticModel semanticModel)
     {
         var parentInvocation = expression.FirstAncestorOrSelf<InvocationExpressionSyntax>();
-        return parentInvocation != null && parentInvocation.IsNameof(semanticModel);
+        return parentInvocation is not null && parentInvocation.IsNameof(semanticModel);
     }
 
     public static bool IsNameof(this InvocationExpressionSyntax expression, SemanticModel semanticModel) =>
-        expression != null &&
+        expression is not null &&
         expression.Expression is IdentifierNameSyntax identifierNameSyntax &&
         identifierNameSyntax.Identifier.ValueText == NameOfKeywordText &&
         semanticModel.GetSymbolInfo(expression).Symbol?.Kind != SymbolKind.Method;
@@ -108,19 +108,19 @@ public static class CSharpSyntaxHelper
 
         var nameSymbolInfo = semanticModel.GetSymbolInfo(((MemberAccessExpressionSyntax)expression).Name);
 
-        return nameSymbolInfo.Symbol != null &&
+        return nameSymbolInfo.Symbol is not null &&
                nameSymbolInfo.Symbol.IsInType(KnownType.System_String) &&
                nameSymbolInfo.Symbol.Name == nameof(string.Empty);
     }
 
     public static bool IsNullLiteral(this SyntaxNode syntaxNode) =>
-        syntaxNode != null && syntaxNode.IsKind(SyntaxKind.NullLiteralExpression);
+        syntaxNode is not null && syntaxNode.IsKind(SyntaxKind.NullLiteralExpression);
 
     public static bool IsAnyKind(this SyntaxNode syntaxNode, params SyntaxKind[] syntaxKinds) =>
-        syntaxNode != null && syntaxKinds.Contains((SyntaxKind)syntaxNode.RawKind);
+        syntaxNode is not null && syntaxKinds.Contains((SyntaxKind)syntaxNode.RawKind);
 
     public static bool IsAnyKind(this SyntaxNode syntaxNode, ISet<SyntaxKind> syntaxKinds) =>
-        syntaxNode != null && syntaxKinds.Contains((SyntaxKind)syntaxNode.RawKind);
+        syntaxNode is not null && syntaxKinds.Contains((SyntaxKind)syntaxNode.RawKind);
 
     public static bool IsAnyKind(this SyntaxToken syntaxToken, params SyntaxKind[] syntaxKinds) =>
         syntaxKinds.Contains((SyntaxKind)syntaxToken.RawKind);
@@ -146,28 +146,19 @@ public static class CSharpSyntaxHelper
         return childNodes
             .OfType<InvocationExpressionSyntax>()
             .Where(syntaxPredicate)
-            .Select(e => e.Expression.SyntaxTree.GetSemanticModelOrDefault(semanticModel)?.GetSymbolInfo(e.Expression).Symbol)
+            .Select(x => x.Expression.SyntaxTree.GetSemanticModelOrDefault(semanticModel)?.GetSymbolInfo(x.Expression).Symbol)
             .OfType<IMethodSymbol>()
             .Any(symbolPredicate);
     }
 
-    public static SyntaxToken? GetIdentifierOrDefault(this BaseMethodDeclarationSyntax methodDeclaration)
-    {
-        switch (methodDeclaration?.Kind())
+    public static SyntaxToken? GetIdentifierOrDefault(this BaseMethodDeclarationSyntax methodDeclaration) =>
+        methodDeclaration switch
         {
-            case SyntaxKind.ConstructorDeclaration:
-                return ((ConstructorDeclarationSyntax)methodDeclaration).Identifier;
-
-            case SyntaxKind.DestructorDeclaration:
-                return ((DestructorDeclarationSyntax)methodDeclaration).Identifier;
-
-            case SyntaxKind.MethodDeclaration:
-                return ((MethodDeclarationSyntax)methodDeclaration).Identifier;
-
-            default:
-                return null;
-        }
-    }
+            ConstructorDeclarationSyntax constructor => (SyntaxToken?)constructor.Identifier,
+            DestructorDeclarationSyntax destructor => (SyntaxToken?)destructor.Identifier,
+            MethodDeclarationSyntax method => (SyntaxToken?)method.Identifier,
+            _ => null,
+        };
 
     public static bool IsMethodInvocation(this InvocationExpressionSyntax invocation, KnownType type, string methodName, SemanticModel semanticModel) =>
         invocation.Expression.NameIs(methodName) &&
@@ -194,7 +185,7 @@ public static class CSharpSyntaxHelper
         node.Sections.IndexOf(section => section.Labels.AnyOfKind(SyntaxKind.DefaultSwitchLabel));
 
     public static bool HasBodyOrExpressionBody(this AccessorDeclarationSyntax node) =>
-        node.Body != null || node.ExpressionBody() != null;
+        node.Body is not null || node.ExpressionBody() is not null;
 
     public static string GetName(this SyntaxNode node) =>
         node.GetIdentifier()?.ValueText ?? string.Empty;
@@ -208,7 +199,7 @@ public static class CSharpSyntaxHelper
             || Array.Exists(orNames, x => nodeName.Equals(x, StringComparison.Ordinal)));
 
     public static bool HasConstantValue(this ExpressionSyntax expression, SemanticModel semanticModel) =>
-        expression.RemoveParentheses().IsAnyKind(LiteralSyntaxKinds) || expression.FindConstantValue(semanticModel) != null;
+        expression.RemoveParentheses().IsAnyKind(LiteralSyntaxKinds) || expression.FindConstantValue(semanticModel) is not null;
 
     public static string StringValue(this SyntaxNode node, SemanticModel semanticModel) =>
         node switch
@@ -226,20 +217,12 @@ public static class CSharpSyntaxHelper
                && assignment.Left == topParenthesizedExpression;
     }
 
-    public static bool IsComment(this SyntaxTrivia trivia)
-    {
-        switch (trivia.Kind())
-        {
-            case SyntaxKind.SingleLineCommentTrivia:
-            case SyntaxKind.MultiLineCommentTrivia:
-            case SyntaxKind.SingleLineDocumentationCommentTrivia:
-            case SyntaxKind.MultiLineDocumentationCommentTrivia:
-                return true;
-
-            default:
-                return false;
-        }
-    }
+    public static bool IsComment(this SyntaxTrivia trivia) =>
+        trivia.IsAnyKind(
+            SyntaxKind.SingleLineCommentTrivia,
+            SyntaxKind.MultiLineCommentTrivia,
+            SyntaxKind.SingleLineDocumentationCommentTrivia,
+            SyntaxKind.MultiLineDocumentationCommentTrivia);
 
     // creates a QualifiedNameSyntax "a.b"
     public static QualifiedNameSyntax BuildQualifiedNameSyntax(string a, string b) =>
@@ -261,7 +244,7 @@ public static class CSharpSyntaxHelper
     /// There can be zero, one or more results based on parameter type (Optional or ParamArray/params).
     /// </summary>
     public static ImmutableArray<SyntaxNode> ArgumentValuesForParameter(SemanticModel semanticModel, ArgumentListSyntax argumentList, string parameterName) =>
-        argumentList != null
+        argumentList is not null
             && new CSharpMethodParameterLookup(argumentList, semanticModel).TryGetSyntax(parameterName, out var expressions)
                 ? expressions
                 : ImmutableArray<SyntaxNode>.Empty;
