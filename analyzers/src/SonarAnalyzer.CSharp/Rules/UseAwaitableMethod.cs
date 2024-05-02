@@ -101,7 +101,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
                 : containingSymbol.ContainingType; // If not dotted, than the scope is the current type. Local function support is missing here.
             var members = GetMethodSymbolsInScope($"{methodSymbol.Name}Async", wellKnownExtensionMethodContainer, invokedType, methodSymbol.ContainingType);
             var awaitableCandidates = members.Where(x => x.IsAwaitableNonDynamic());
-            var awaitableAlternatives = SpeculativeBindCandidates(semanticModel, codeBlock, awaitableRoot, invocationExpression, awaitableCandidates);
+            var awaitableAlternatives = SpeculativeBindCandidates(semanticModel, awaitableRoot, invocationExpression, awaitableCandidates);
             var withoutContainer = awaitableAlternatives.Where(x => !containingSymbol.Equals(x)).ToImmutableArray(); // Exclude candidates that would resolve to the containing method (endless loop)
             return withoutContainer;
         }
@@ -121,23 +121,31 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
             ? extensionMethodContainer
             : [];
 
-    private static IEnumerable<ISymbol> SpeculativeBindCandidates(SemanticModel semanticModel, SyntaxNode codeBlock, SyntaxNode awaitableRoot,
+    private static IEnumerable<ISymbol> SpeculativeBindCandidates(SemanticModel semanticModel, SyntaxNode awaitableRoot,
         InvocationExpressionSyntax invocationExpression, IEnumerable<IMethodSymbol> awaitableCandidates) =>
         awaitableCandidates
             .Select(x => x.Name)
             .Distinct()
-            .Select(x => SpeculativeBindCandidate(semanticModel, x, codeBlock, awaitableRoot, invocationExpression))
+            .Select(x => SpeculativeBindCandidate(semanticModel, x, awaitableRoot, invocationExpression))
             .WhereNotNull();
 
-    private static IMethodSymbol SpeculativeBindCandidate(SemanticModel semanticModel, string candidateName, SyntaxNode codeBlock, SyntaxNode awaitableRoot,
+    private static IMethodSymbol SpeculativeBindCandidate(SemanticModel semanticModel, string candidateName, SyntaxNode awaitableRoot,
         InvocationExpressionSyntax invocationExpression)
     {
-        var root = codeBlock.SyntaxTree.GetRoot();
         var invocationIdentifierName = invocationExpression.GetMethodCallIdentifier()?.Parent;
         if (invocationIdentifierName is null)
         {
             return null;
         }
+        var invocationReplaced = ReplaceInvocation(awaitableRoot, invocationExpression, invocationIdentifierName, candidateName);
+        var speculativeSymbolInfo = semanticModel.GetSpeculativeSymbolInfo(invocationReplaced.SpanStart, invocationReplaced, SpeculativeBindingOption.BindAsExpression);
+        var speculativeSymbol = speculativeSymbolInfo.Symbol as IMethodSymbol;
+        return speculativeSymbol;
+    }
+
+    private static SyntaxNode ReplaceInvocation(SyntaxNode awaitableRoot, InvocationExpressionSyntax invocationExpression, SyntaxNode invocationIdentifierName, string candidateName)
+    {
+        var root = invocationExpression.SyntaxTree.GetRoot();
         var invocationAnnotation = new SyntaxAnnotation();
         var replace = root.ReplaceNodes([awaitableRoot, invocationIdentifierName, invocationExpression], (original, newNode) =>
         {
@@ -165,9 +173,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
             return result;
         });
         var invocationReplaced = replace.GetAnnotatedNodes(invocationAnnotation).First();
-        var speculativeSymbolInfo = semanticModel.GetSpeculativeSymbolInfo(invocationReplaced.SpanStart, invocationReplaced, SpeculativeBindingOption.BindAsExpression);
-        var speculativeSymbol = speculativeSymbolInfo.Symbol as IMethodSymbol;
-        return speculativeSymbol;
+        return invocationReplaced;
     }
 
     private static ExpressionSyntax GetAwaitableRootOfInvocation(ExpressionSyntax expression) =>
