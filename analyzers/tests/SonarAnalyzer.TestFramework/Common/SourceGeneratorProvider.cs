@@ -48,7 +48,7 @@ public static class SourceGeneratorProvider
         }
         // List of all sdk directories for the major version
         var latestSdkMajorDirectories = Directory.GetDirectories(sdkDirectory, $"{objectAssembly.GetName().Version.Major}.*", SearchOption.TopDirectoryOnly);
-        return latestSdkMajorDirectories.OrderByDescending(dir => new DirectoryInfo(dir).Name).FirstOrDefault(); // Get the latest sdk directory
+        return latestSdkMajorDirectories.OrderByDescending(x => new DirectoryInfo(x).Name).FirstOrDefault(); // Get the latest sdk directory
     }
 
     private sealed class AssemblyLoader : IAnalyzerAssemblyLoader

@@ -22,11 +22,13 @@ using System.IO;
 
 namespace SonarAnalyzer.TestFramework.Test.Common;
 
+#if NET
+
 [TestClass]
 public class SourceGeneratorProviderTest
 {
-
-#if NET
+    private static AnalyzerFileReference RazorSourceGenerator =>
+        SourceGeneratorProvider.SourceGenerators.Single(x => x.FullPath.EndsWith("Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators.dll"));
 
     [TestMethod]
     public void SourceGenerators_ContainsRazorSourceGenerator() =>
@@ -45,14 +47,10 @@ public class SourceGeneratorProviderTest
     public void LatestSdkFolder_ReturnsCorrectPath()
     {
         var expectedPath = Directory.GetDirectories(Path.Combine(Directory.GetParent(typeof(object).Assembly.Location).Parent.Parent.Parent.FullName, "sdk"), $"{typeof(object).Assembly.GetName().Version.Major}.*", SearchOption.TopDirectoryOnly)
-                                    .OrderByDescending(dir => new DirectoryInfo(dir).Name)
+                                    .OrderByDescending(x => new DirectoryInfo(x).Name)
                                     .FirstOrDefault();
         SourceGeneratorProvider.LatestSdkFolder().Should().Be(expectedPath);
     }
-
-    private static AnalyzerFileReference RazorSourceGenerator =>
-        SourceGeneratorProvider.SourceGenerators.Single(x => x.FullPath.EndsWith("Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators.dll"));
+}
 
 #endif
-
-}
