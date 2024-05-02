@@ -871,6 +871,12 @@ public class DoesNotInheritDirectlyFromControllerBase(IS1 s1, IS2 s2) : ApiContr
     public IActionResult A2() { s2.Use(); return Ok(); }
 }
 
+public class InheritsFromController(IS1 s1, IS2 s2) : ControllerBase // Compliant, we report only in classes that inherit directly from ControllerBase
+{
+    public IActionResult A1() { s1.Use(); return Ok(); }
+    public IActionResult A2() { s2.Use(); return Ok(); }
+}
+
 
 [ApiController]
 public class WithServiceProvidersInjectionUsedInGroups : ControllerBase // Noncompliant
