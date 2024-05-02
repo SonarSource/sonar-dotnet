@@ -880,7 +880,8 @@ public class InheritsFromController(IS1 s1, IS2 s2) : Controller // Compliant, w
 public abstract class AbstractController (IS1 s1, IS2 s2) : ControllerBase // Compliant, we don't report on abstract controllers
 {
     public IActionResult A1() { s1.Use(); return Ok(); }
-    public abstract IActionResult A2();
+    public IActionResult A2() { s2.Use(); return Ok(); }
+    public abstract IActionResult A3();
 }
 
 
