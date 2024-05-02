@@ -1,0 +1,24 @@
+{
+  "title": "Controllers should not have mixed responsibilities",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Linear",
+    "linearDesc": "responsibilities",
+    "linearFactor": "15min"
+  },
+  "tags": [
+    "asp.net"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6960",
+  "sqKey": "S6960",
+  "scope": "Main",
+  "quickfix": "partial",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "HIGH"
+    },
+    "attribute": "MODULAR"
+  }
+}

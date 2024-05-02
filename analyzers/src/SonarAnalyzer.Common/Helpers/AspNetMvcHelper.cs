@@ -59,8 +59,7 @@ namespace SonarAnalyzer.Helpers
             && IsControllerType(methodSymbol.ContainingType);
 
         /// <summary>
-        /// Returns a value indicating whether the provided type symbol is a ASP.NET MVC
-        /// controller.
+        /// Whether the provided type symbol is a ASP.NET MVC controller.
         /// </summary>
         public static bool IsControllerType(this INamedTypeSymbol namedType) =>
             namedType is not null
@@ -68,6 +67,15 @@ namespace SonarAnalyzer.Helpers
             && (namedType.DerivesFromAny(ControllerTypes)
                 || namedType.GetAttributes(ControllerAttributeTypes).Any())
             && !namedType.GetAttributes(NonControllerAttributeTypes).Any();
+
+        /// <summary>
+        /// Whether the provided type symbol is an ASP.NET Core API controller.
+        /// Considers as API controllers also controllers deriving from ControllerBase but not Controller.
+        /// </summary>
+        public static bool IsCoreApiController(this INamedTypeSymbol namedType) =>
+            namedType.IsControllerType()
+            && (namedType.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute))
+                || (namedType.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase) && !namedType.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Controller)));
 
         public static bool ReferencesControllers(this Compilation compilation) =>
             compilation.GetTypeByMetadataName(KnownType.System_Web_Mvc_Controller) is not null
