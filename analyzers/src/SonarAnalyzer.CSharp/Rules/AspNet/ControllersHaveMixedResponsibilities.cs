@@ -61,7 +61,9 @@ public sealed class ControllersHaveMixedResponsibilities : SonarDiagnosticAnalyz
             compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
             {
                 var symbol = (INamedTypeSymbol)symbolStartContext.Symbol;
-                if (symbol.IsCoreApiController() && symbol.BaseType.Is(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase))
+                if (symbol.IsCoreApiController()
+                    && symbol.BaseType.Is(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase)
+                    && !symbol.IsAbstract)
                 {
                     var relevantMembers = RelevantMembers(symbol);
 
@@ -153,7 +155,7 @@ public sealed class ControllersHaveMixedResponsibilities : SonarDiagnosticAnalyz
             {
                 // Constructors are not considered because they have to be split anyway
                 // Accessors are not considered because they are part of properties, that are considered as a whole
-                case IMethodSymbol method when !method.IsConstructor() && !method.IsStaticConstructor() && method.AssociatedSymbol is not IPropertySymbol:
+                case IMethodSymbol method when !method.IsConstructor() && method.MethodKind != MethodKind.StaticConstructor && method.AssociatedSymbol is not IPropertySymbol:
                     builder.Add(method.Name, MemberType.Action);
                     break;
                 // Indexers are treated as methods with an unspeakable name

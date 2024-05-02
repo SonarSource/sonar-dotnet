@@ -151,9 +151,6 @@ public static class ISymbolExtensions
     public static bool IsConstructor(this ISymbol symbol) =>
         symbol.Kind == SymbolKind.Method && symbol.Name == ".ctor";
 
-    public static bool IsStaticConstructor(this ISymbol symbol) =>
-            symbol.Kind == SymbolKind.Method && ((IMethodSymbol)symbol).MethodKind == MethodKind.StaticConstructor;
-
     public static IEnumerable<AttributeData> GetAttributes(this ISymbol symbol, KnownType attributeType) =>
         symbol?.GetAttributes().Where(x => x.AttributeClass.Is(attributeType)) ?? [];
 
