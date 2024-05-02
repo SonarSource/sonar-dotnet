@@ -62,9 +62,7 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
         {
             var modelParameterTypes = method.Parameters
                 .Where(x => !HasValidateNeverAttribute(x))
-                .Select(x => x.Type)
-                .OfType<INamedTypeSymbol>()
-                .SelectMany(RelatedTypesToExamine)
+                .SelectMany(x => RelatedTypesToExamine(x.Type, method.ContainingType))
                 .Distinct();
             foreach (var modelParameterType in modelParameterTypes)
             {
@@ -134,10 +132,16 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
         }
     }
 
-    private static IEnumerable<INamedTypeSymbol> RelatedTypesToExamine(INamedTypeSymbol type) =>
-        type.DerivesOrImplements(KnownType.System_Collections_Generic_IEnumerable_T)
-            ? type.TypeArguments.OfType<INamedTypeSymbol>()
-            : [type];
+    // We only consider Model types that are in the same assembly as the Controller, because Roslyn can't raise an issue when the location is in a different assembly than the one being analyzed.
+    private static IEnumerable<INamedTypeSymbol> RelatedTypesToExamine(ITypeSymbol type, ITypeSymbol controllerType) =>
+        type switch
+        {
+            IArrayTypeSymbol array => RelatedTypesToExamine(array.ElementType, controllerType),
+            INamedTypeSymbol collection when collection.DerivesOrImplements(KnownType.System_Collections_Generic_IEnumerable_T) =>
+                collection.TypeArguments.SelectMany(x => RelatedTypesToExamine(x, controllerType)),
+            INamedTypeSymbol namedType when type.IsInSameAssembly(controllerType) => [namedType],
+            _ => []
+        };
 
     private static bool HasValidateNeverAttribute(ISymbol symbol) =>
         symbol.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_ModelBinding_Validation_ValidateNeverAttribute);
