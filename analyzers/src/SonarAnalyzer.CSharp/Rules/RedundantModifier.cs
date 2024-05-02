@@ -307,7 +307,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             public static bool IsTopLevel(SyntaxNode node) =>
-                !node.Ancestors().Any(x => x is CheckedStatementSyntax || x is CheckedExpressionSyntax);
+                !node.HasAncestor(SyntaxKind.CheckedStatement, SyntaxKind.CheckedExpression);
 
             private void VisitChecked<T>(T node, SyntaxKind checkedKind, SyntaxToken tokenToReport, Action<T> baseCall)
                 where T : SyntaxNode

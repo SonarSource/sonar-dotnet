@@ -38,17 +38,16 @@ public abstract class ReuseClientBase : SonarDiagnosticAnalyzer
         node.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: LocalDeclarationStatementSyntax or UsingStatementSyntax } } };
 
     private static bool IsInFieldOrPropertyInitializer(SyntaxNode node) =>
-        node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.FieldDeclaration, SyntaxKind.PropertyDeclaration))
-        && !node.Ancestors().Any(x => x.IsAnyKind(SyntaxKind.GetAccessorDeclaration, SyntaxKind.SetAccessorDeclaration))
+        node.HasAncestor(SyntaxKind.FieldDeclaration, SyntaxKind.PropertyDeclaration)
+        && !node.HasAncestor(SyntaxKind.GetAccessorDeclaration, SyntaxKind.SetAccessorDeclaration)
         && !node.Parent.IsKind(SyntaxKind.ArrowExpressionClause);
 
     private static bool IsInConditionalCode(SyntaxNode node) =>
-        node.Ancestors().Any(x => x.IsAnyKind(
-            SyntaxKind.IfStatement,
+        node.HasAncestor(SyntaxKind.IfStatement,
             SyntaxKind.SwitchStatement,
             SyntaxKindEx.SwitchExpression,
             SyntaxKind.ConditionalExpression,
-            SyntaxKindEx.CoalesceAssignmentExpression));
+            SyntaxKindEx.CoalesceAssignmentExpression);
 
     private static bool IsAssignedToStaticFieldOrProperty(SonarSyntaxNodeReportingContext context) =>
         context.Node.Parent.WalkUpParentheses() is AssignmentExpressionSyntax assignment

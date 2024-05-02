@@ -23,18 +23,17 @@ namespace SonarAnalyzer.Helpers;
 internal static class VisualBasicSyntaxHelper
 {
     private static readonly SyntaxKind[] LiteralSyntaxKinds =
-        new[]
-        {
+        [
             SyntaxKind.CharacterLiteralExpression,
             SyntaxKind.FalseLiteralExpression,
             SyntaxKind.NothingLiteralExpression,
             SyntaxKind.NumericLiteralExpression,
             SyntaxKind.StringLiteralExpression,
             SyntaxKind.TrueLiteralExpression,
-        };
+        ];
 
     public static SyntaxNode GetTopMostContainingMethod(this SyntaxNode node) =>
-        node.AncestorsAndSelf().LastOrDefault(ancestor => ancestor is MethodBaseSyntax || ancestor is PropertyBlockSyntax);
+        node.AncestorsAndSelf().LastOrDefault(x => x is MethodBaseSyntax || x is PropertyBlockSyntax);
 
     public static SyntaxNode RemoveParentheses(this SyntaxNode expression)
     {
@@ -83,17 +82,20 @@ internal static class VisualBasicSyntaxHelper
 
     #endregion Statement
 
+    public static bool HasAncestor(this SyntaxNode syntaxNode, params SyntaxKind[] syntaxKinds) =>
+        syntaxNode.Ancestors().Any(x => x.IsAnyKind(syntaxKinds));
+
     public static bool IsNothingLiteral(this SyntaxNode syntaxNode) =>
-        syntaxNode != null && syntaxNode.IsKind(SyntaxKind.NothingLiteralExpression);
+        syntaxNode is not null && syntaxNode.IsKind(SyntaxKind.NothingLiteralExpression);
 
     public static bool IsAnyKind(this SyntaxNode syntaxNode, params SyntaxKind[] syntaxKinds) =>
-       syntaxNode != null && syntaxKinds.Contains((SyntaxKind)syntaxNode.RawKind);
+       syntaxNode is not null && syntaxKinds.Contains((SyntaxKind)syntaxNode.RawKind);
 
     public static bool IsAnyKind(this SyntaxToken syntaxToken, ISet<SyntaxKind> collection) =>
         collection.Contains((SyntaxKind)syntaxToken.RawKind);
 
     public static bool IsAnyKind(this SyntaxNode syntaxNode, ISet<SyntaxKind> collection) =>
-        syntaxNode != null && collection.Contains((SyntaxKind)syntaxNode.RawKind);
+        syntaxNode is not null && collection.Contains((SyntaxKind)syntaxNode.RawKind);
 
     public static bool IsAnyKind(this SyntaxToken syntaxToken, params SyntaxKind[] syntaxKinds) =>
         syntaxKinds.Contains((SyntaxKind)syntaxToken.RawKind);
@@ -102,7 +104,7 @@ internal static class VisualBasicSyntaxHelper
         syntaxKinds.Contains((SyntaxKind)syntaxTrivia.RawKind);
 
     public static bool AnyOfKind(this IEnumerable<SyntaxNode> nodes, SyntaxKind kind) =>
-        nodes.Any(n => n.RawKind == (int)kind);
+        nodes.Any(x => x.RawKind == (int)kind);
 
     public static bool IsMethodInvocation(this InvocationExpressionSyntax expression, KnownType type, string methodName, SemanticModel semanticModel) =>
         semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol methodSymbol &&
@@ -113,30 +115,17 @@ internal static class VisualBasicSyntaxHelper
     public static bool IsOnBase(this ExpressionSyntax expression) =>
         IsOn(expression, SyntaxKind.MyBaseExpression);
 
-    private static bool IsOn(this ExpressionSyntax expression, SyntaxKind onKind)
-    {
-        switch (expression?.Kind())
+    private static bool IsOn(this ExpressionSyntax expression, SyntaxKind onKind) =>
+        expression switch
         {
-            case SyntaxKind.InvocationExpression:
-                return IsOn(((InvocationExpressionSyntax)expression).Expression, onKind);
-
-            case SyntaxKind.GlobalName:
-            case SyntaxKind.GenericName:
-            case SyntaxKind.IdentifierName:
-            case SyntaxKind.QualifiedName:
-                // This is a simplification as we don't check where the method is defined (so this could be this or base)
-                return true;
-
-            case SyntaxKind.SimpleMemberAccessExpression:
-                return ((MemberAccessExpressionSyntax)expression).Expression.RemoveParentheses().IsKind(onKind);
-
-            case SyntaxKind.ConditionalAccessExpression:
-                return ((ConditionalAccessExpressionSyntax)expression).Expression.RemoveParentheses().IsKind(onKind);
-
-            default:
-                return false;
-        }
-    }
+            InvocationExpressionSyntax invocation => IsOn(invocation.Expression, onKind),
+            // This is a simplification as we don't check where the method is defined (so this could be this or base)
+            GlobalNameSyntax or GenericNameSyntax or IdentifierNameSyntax or QualifiedNameSyntax => true,
+            MemberAccessExpressionSyntax memberAccessExpression when memberAccessExpression.IsKind(SyntaxKind.SimpleMemberAccessExpression) =>
+                memberAccessExpression.Expression.RemoveParentheses().IsKind(onKind),
+            ConditionalAccessExpressionSyntax conditionalAccess => conditionalAccess.Expression.RemoveParentheses().IsKind(onKind),
+            _ => false,
+        };
 
     public static string GetName(this SyntaxNode expression) =>
         expression.GetIdentifier()?.ValueText ?? string.Empty;
@@ -145,7 +134,7 @@ internal static class VisualBasicSyntaxHelper
         expression.GetName().Equals(name, StringComparison.InvariantCultureIgnoreCase);
 
     public static bool HasConstantValue(this ExpressionSyntax expression, SemanticModel semanticModel) =>
-        expression.RemoveParentheses().IsAnyKind(LiteralSyntaxKinds) || expression.FindConstantValue(semanticModel) != null;
+        expression.RemoveParentheses().IsAnyKind(LiteralSyntaxKinds) || expression.FindConstantValue(semanticModel) is not null;
 
     public static string StringValue(this SyntaxNode node, SemanticModel semanticModel) =>
         node switch
@@ -163,49 +152,31 @@ internal static class VisualBasicSyntaxHelper
             assignment.Left == topParenthesizedExpression;
     }
 
-    public static bool IsComment(this SyntaxTrivia trivia)
-    {
-        switch (trivia.Kind())
-        {
-            case SyntaxKind.CommentTrivia:
-            case SyntaxKind.DocumentationCommentExteriorTrivia:
-            case SyntaxKind.DocumentationCommentTrivia:
-                return true;
-
-            default:
-                return false;
-        }
-    }
+    public static bool IsComment(this SyntaxTrivia trivia) =>
+        trivia.IsAnyKind(
+            SyntaxKind.CommentTrivia,
+            SyntaxKind.DocumentationCommentExteriorTrivia,
+            SyntaxKind.DocumentationCommentTrivia);
 
     public static Location FindIdentifierLocation(this MethodBlockBaseSyntax methodBlockBase) =>
         GetIdentifierOrDefault(methodBlockBase)?.GetLocation();
 
-    public static SyntaxToken? GetIdentifierOrDefault(this MethodBlockBaseSyntax methodBlockBase)
-    {
-        var blockStatement = methodBlockBase?.BlockStatement;
-
-        switch (blockStatement?.Kind())
+    public static SyntaxToken? GetIdentifierOrDefault(this MethodBlockBaseSyntax methodBlockBase) =>
+        methodBlockBase?.BlockStatement switch
         {
-            case SyntaxKind.SubNewStatement:
-                return (blockStatement as SubNewStatementSyntax)?.NewKeyword;
+            SubNewStatementSyntax subNewStatement => subNewStatement.NewKeyword,
+            MethodStatementSyntax methodStatement => methodStatement.Identifier,
+            _ => null,
+        };
 
-            case SyntaxKind.FunctionStatement:
-            case SyntaxKind.SubStatement:
-                return (blockStatement as MethodStatementSyntax)?.Identifier;
+    public static string GetIdentifierText(this MethodBlockSyntax method) =>
+        method.SubOrFunctionStatement.Identifier.ValueText;
 
-            default:
-                return null;
-        }
-    }
-
-    public static string GetIdentifierText(this MethodBlockSyntax method)
-        => method.SubOrFunctionStatement.Identifier.ValueText;
-
-    public static SeparatedSyntaxList<ParameterSyntax>? GetParameters(this MethodBlockSyntax method)
-        => method.BlockStatement?.ParameterList?.Parameters;
+    public static SeparatedSyntaxList<ParameterSyntax>? GetParameters(this MethodBlockSyntax method) =>
+        method.BlockStatement?.ParameterList?.Parameters;
 
     public static ExpressionSyntax Get(this ArgumentListSyntax argumentList, int index) =>
-        argumentList != null && argumentList.Arguments.Count > index
+        argumentList is not null && argumentList.Arguments.Count > index
             ? argumentList.Arguments[index].GetExpression().RemoveParentheses()
             : null;
 
@@ -215,7 +186,7 @@ internal static class VisualBasicSyntaxHelper
     /// There can be zero, one or more results based on parameter type (Optional or ParamArray/params).
     /// </summary>
     public static ImmutableArray<SyntaxNode> ArgumentValuesForParameter(SemanticModel semanticModel, ArgumentListSyntax argumentList, string parameterName) =>
-        argumentList != null
+        argumentList is not null
             && new VisualBasicMethodParameterLookup(argumentList, semanticModel).TryGetSyntax(parameterName, out var expressions)
                 ? expressions
                 : ImmutableArray<SyntaxNode>.Empty;

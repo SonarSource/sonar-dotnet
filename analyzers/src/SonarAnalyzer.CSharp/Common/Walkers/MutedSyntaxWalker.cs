@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Common.Walkers
             bool IsUsedInLocalFunction(ISymbol symbol) =>
                 // We don't mute it if it's declared and used in local function
                 !(symbol.ContainingSymbol is IMethodSymbol containingSymbol && containingSymbol.MethodKind == MethodKindEx.LocalFunction)
-                && HasAncestor(node, SyntaxKindEx.LocalFunctionStatement);
+                && node.HasAncestor(SyntaxKindEx.LocalFunctionStatement);
 
             bool IsInUnsupportedExpression() =>
                 node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsAnyKind(SyntaxKindEx.IndexExpression, SyntaxKindEx.RangeExpression)) != null;
@@ -113,18 +113,15 @@ namespace SonarAnalyzer.Common.Walkers
 
         private void InspectTryCatch(SyntaxNode node)
         {
-            if (HasAncestor(node, SyntaxKind.TryStatement))
+            if (node.HasAncestor(SyntaxKind.TryStatement))
             {
                 // We're only interested in "try" and "catch" blocks. Don't count "finally" block
-                isInTryOrCatch = isInTryOrCatch || !HasAncestor(node, SyntaxKind.FinallyClause);
+                isInTryOrCatch = isInTryOrCatch || !node.HasAncestor(SyntaxKind.FinallyClause);
             }
             else
             {
                 isOutsideTryCatch = true;
             }
         }
-
-        private static bool HasAncestor(SyntaxNode node, SyntaxKind kind) =>
-            node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsKind(kind)) != null;
     }
 }
