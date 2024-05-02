@@ -1,5 +1,5 @@
 {
-  "title": "Controllers should not have too many responsibilities",
+  "title": "Controllers should not have mixed responsibilities",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
