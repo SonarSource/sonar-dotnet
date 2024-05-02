@@ -82,7 +82,7 @@ internal static class VisualBasicSyntaxHelper
 
     #endregion Statement
 
-    public static bool HasAncestorOfKind(this SyntaxNode syntaxNode, params SyntaxKind[] syntaxKinds) =>
+    public static bool HasAncestor(this SyntaxNode syntaxNode, params SyntaxKind[] syntaxKinds) =>
         syntaxNode.Ancestors().Any(x => x.IsAnyKind(syntaxKinds));
 
     public static bool IsNothingLiteral(this SyntaxNode syntaxNode) =>

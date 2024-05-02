@@ -38,12 +38,12 @@ public abstract class ReuseClientBase : SonarDiagnosticAnalyzer
         node.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: LocalDeclarationStatementSyntax or UsingStatementSyntax } } };
 
     private static bool IsInFieldOrPropertyInitializer(SyntaxNode node) =>
-        node.HasAncestorOfKind(SyntaxKind.FieldDeclaration, SyntaxKind.PropertyDeclaration)
-        && !node.HasAncestorOfKind(SyntaxKind.GetAccessorDeclaration, SyntaxKind.SetAccessorDeclaration)
+        node.HasAncestor(SyntaxKind.FieldDeclaration, SyntaxKind.PropertyDeclaration)
+        && !node.HasAncestor(SyntaxKind.GetAccessorDeclaration, SyntaxKind.SetAccessorDeclaration)
         && !node.Parent.IsKind(SyntaxKind.ArrowExpressionClause);
 
     private static bool IsInConditionalCode(SyntaxNode node) =>
-        node.HasAncestorOfKind(SyntaxKind.IfStatement,
+        node.HasAncestor(SyntaxKind.IfStatement,
             SyntaxKind.SwitchStatement,
             SyntaxKindEx.SwitchExpression,
             SyntaxKind.ConditionalExpression,

@@ -69,20 +69,20 @@ public static class CSharpSyntaxHelper
     public static SyntaxNode GetFirstNonParenthesizedParent(this SyntaxNode node) =>
         node.GetSelfOrTopParenthesizedExpression().Parent;
 
-    public static bool HasAncestorOfKind(this SyntaxNode syntaxNode, params SyntaxKind[] syntaxKinds) =>
+    public static bool HasAncestor(this SyntaxNode syntaxNode, params SyntaxKind[] syntaxKinds) =>
         syntaxNode.Ancestors().Any(x => x.IsAnyKind(syntaxKinds));
 
     public static bool IsOnThis(this ExpressionSyntax expression) =>
         IsOn(expression, SyntaxKind.ThisExpression);
 
     private static bool IsOn(this ExpressionSyntax expression, SyntaxKind onKind) =>
-        expression.Kind() switch
+        expression switch
         {
-            SyntaxKind.InvocationExpression => IsOn(((InvocationExpressionSyntax)expression).Expression, onKind),
+            InvocationExpressionSyntax invocation => IsOn(invocation.Expression, onKind),
             // Following statement is a simplification as we don't check where the method is defined (so this could be this or base)
-            SyntaxKind.AliasQualifiedName or SyntaxKind.GenericName or SyntaxKind.IdentifierName or SyntaxKind.QualifiedName => true,
-            SyntaxKind.PointerMemberAccessExpression or SyntaxKind.SimpleMemberAccessExpression => ((MemberAccessExpressionSyntax)expression).Expression.RemoveParentheses().IsKind(onKind),
-            SyntaxKind.ConditionalAccessExpression => ((ConditionalAccessExpressionSyntax)expression).Expression.RemoveParentheses().IsKind(onKind),
+            AliasQualifiedNameSyntax or GenericNameSyntax or IdentifierNameSyntax or QualifiedNameSyntax => true,
+            MemberAccessExpressionSyntax memberAccess => memberAccess.Expression.RemoveParentheses().IsKind(onKind),
+            ConditionalAccessExpressionSyntax conditionalAccess => conditionalAccess.Expression.RemoveParentheses().IsKind(onKind),
             _ => false,
         };
 

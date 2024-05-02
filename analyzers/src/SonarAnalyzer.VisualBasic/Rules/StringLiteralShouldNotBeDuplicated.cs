@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 ?? false;
 
         protected override bool IsInnerInstance(SonarSyntaxNodeReportingContext context) =>
-            context.Node.HasAncestorOfKind(SyntaxKind.ClassBlock, SyntaxKind.StructureBlock);
+            context.Node.HasAncestor(SyntaxKind.ClassBlock, SyntaxKind.StructureBlock);
 
         protected override IEnumerable<LiteralExpressionSyntax> FindLiteralExpressions(SyntaxNode node) =>
             node.DescendantNodes(n => !n.IsKind(SyntaxKind.AttributeList))

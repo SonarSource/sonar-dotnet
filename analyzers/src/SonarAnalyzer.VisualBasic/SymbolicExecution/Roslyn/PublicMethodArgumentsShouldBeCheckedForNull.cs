@@ -85,7 +85,7 @@ public class PublicMethodArgumentsShouldBeCheckedForNull : PublicMethodArguments
         public override void VisitIdentifierName(IdentifierNameSyntax node) =>
             DereferencesMethodArguments |=
                 argumentNames.Contains(node.GetName())
-                && node.HasAncestorOfKind(AwaitExpression,
+                && node.HasAncestor(AwaitExpression,
                     InvocationExpression,   // For array access
                     ForEachStatement,
                     ThrowStatement,

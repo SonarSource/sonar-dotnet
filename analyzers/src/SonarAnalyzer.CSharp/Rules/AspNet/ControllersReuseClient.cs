@@ -67,5 +67,5 @@ public sealed class ControllersReuseClient : ReuseClientBase
             && method.Modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword)));
 
     private static bool IsInsideConstructor(SyntaxNode node) =>
-        node.HasAncestorOfKind(SyntaxKind.ConstructorDeclaration, SyntaxKindEx.PrimaryConstructorBaseType);
+        node.HasAncestor(SyntaxKind.ConstructorDeclaration, SyntaxKindEx.PrimaryConstructorBaseType);
 }
