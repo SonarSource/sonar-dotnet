@@ -63,7 +63,7 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
     public static IEnumerable<object[]> AspNet4xMvcVersionsUnderTest =>
         [["5.2.7"] /* Most used */, [Constants.NuGetLatestVersion]];
 
-    private static IEnumerable<MetadataReference> AspNet4xReferences(string aspNetMvcVersion) =>
+    public static IEnumerable<MetadataReference> AspNet4xReferences(string aspNetMvcVersion) =>
         MetadataReferenceFacade.SystemWeb                                          // For HttpAttributeMethod and derived attributes
             .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));  // For Controller
 

@@ -30,6 +30,9 @@ namespace SonarAnalyzer.Helpers
         public FilesToAnalyzeProvider(string filePath) =>
             allFiles = ReadLines(filePath);
 
+        public FilesToAnalyzeProvider(IEnumerable<string> fileList) =>
+            allFiles = fileList;
+
         public IEnumerable<string> FindFiles(string fileName, bool onlyExistingFiles = true) =>
             allFiles.Where(x => FilterByFileName(x, fileName) && (!onlyExistingFiles || File.Exists(x)));
 

@@ -79,6 +79,11 @@
         "resolved": "2.14.1",
         "contentHash": "lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw=="
       },
+      "Microsoft.AspNetCore.Razor.Language": {
+        "type": "Transitive",
+        "resolved": "6.0.29",
+        "contentHash": "GqbAfFQEv9XKi+QRlhzoYJvbi9EkFo0rkzvaP1xGvn2Hjn1DrhGK93UuJ8zLw8FQ9jmW1GOMLXLSPJoID4lLbg=="
+      },
       "Microsoft.Build": {
         "type": "Transitive",
         "resolved": "17.3.2",
@@ -568,6 +573,7 @@
       "sonaranalyzer.csharp": {
         "type": "Project",
         "dependencies": {
+          "Microsoft.AspNetCore.Razor.Language": "[6.0.29, )",
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
           "SonarAnalyzer": "[1.0.0, )",
           "System.Collections.Immutable": "[1.1.37, )"

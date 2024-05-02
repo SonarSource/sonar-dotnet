@@ -26,6 +26,37 @@ namespace SonarAnalyzer.Test.Rules
     [TestClass]
     public class IfCollapsibleTest
     {
+
+#if NETFRAMEWORK
+
+        public static IEnumerable<MetadataReference> AspNet4xReferences(string aspNetMvcVersion) =>
+            MetadataReferenceFacade.SystemWeb                                          // For HttpAttributeMethod and derived attributes
+            .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));      // For Controller
+
+        [TestMethod]
+        public void FrameworkViewCompiler_CS() =>
+            new VerifierBuilder<CS.FrameworkViewCompiler>()
+            .AddReferences(AspNet4xReferences("5.2.7"))
+            .AddSnippet("""
+                @{
+                    var uselessInView = 42;
+                }
+                <main> </main>
+                """,
+                "Contact.cshtml")
+            .AddSnippet("""
+                public class Thingy
+                {
+                    void DoWork()
+                    {
+                        var uselessInNormalFile = 42;
+                    }
+                }
+                """,
+                "Thingy.cs")
+            .Verify();
+#endif
+
         [TestMethod]
         public void IfCollapsible_CS() =>
             new VerifierBuilder<CS.IfCollapsible>().AddPaths("IfCollapsible.cs").Verify();

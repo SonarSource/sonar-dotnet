@@ -231,12 +231,12 @@ internal class Verifier
         }
         var csProjPath = Path.Combine(projectRoot, "EmptyProject.csproj");
         var xml = XElement.Load(csProjPath);
-        xml.Descendants("LangVersion").Single().Value = langVersion;
-        var references = xml.Descendants("ItemGroup").Single();
-        foreach (var reference in builder.References)
-        {
-            references.Add(new XElement("Reference", new XAttribute("Include", reference.Display)));
-        }
+        //xml.Descendants("LangVersion").Single().Value = langVersion;
+        //var references = xml.Descendants("ItemGroup").Single();
+        //foreach (var reference in builder.References)
+        //{
+        //    references.Add(new XElement("Reference", new XAttribute("Include", reference.Display)));
+        //}
         xml.Save(csProjPath);
         return csProjPath;
     }

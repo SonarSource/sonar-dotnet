@@ -2,6 +2,12 @@
   "version": 1,
   "dependencies": {
     ".NETStandard,Version=v2.0": {
+      "Microsoft.AspNetCore.Razor.Language": {
+        "type": "Direct",
+        "requested": "[6.0.29, )",
+        "resolved": "6.0.29",
+        "contentHash": "GqbAfFQEv9XKi+QRlhzoYJvbi9EkFo0rkzvaP1xGvn2Hjn1DrhGK93UuJ8zLw8FQ9jmW1GOMLXLSPJoID4lLbg=="
+      },
       "Microsoft.CodeAnalysis.CSharp.Workspaces": {
         "type": "Direct",
         "requested": "[1.3.2, )",
