@@ -32,22 +32,21 @@ public class BlazorQueryParameterRoutableComponentTest
 
     [TestMethod]
     public void BlazorQueryParameterRoutableComponent_Blazor() =>
-        builder.WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-        .AddPaths("BlazorQueryParameterRoutableComponent.razor")
-        .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+        builder.AddPaths("BlazorQueryParameterRoutableComponent.razor")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
     [TestMethod]
     public void BlazorQueryParameterRoutableComponent_BlazorNoRoute() =>
-        builder.WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-        .AddPaths("BlazorQueryParameterRoutableComponent_NoRoute.razor")
+        builder.AddPaths("BlazorQueryParameterRoutableComponent_NoRoute.razor")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
     [TestMethod]
     public void BlazorQueryParameterRoutableComponent_Partial() =>
-        builder.WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-        .AddPaths("BlazorQueryParameterRoutableComponent_Partial.razor.cs",
+        builder.AddPaths("BlazorQueryParameterRoutableComponent_Partial.razor.cs",
                          "BlazorQueryParameterRoutableComponent_Partial.razor")
+               .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                .Verify();
 
     [TestMethod]

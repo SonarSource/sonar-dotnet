@@ -113,8 +113,8 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void PublicMethodArgumentsShouldBeCheckedForNull_Roslyn_Razor() =>
             roslynCS.AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.razor", "PublicMethodArgumentsShouldBeCheckedForNull_component.razor")
-                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-                .Verify();
+                    .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                    .Verify();
 
 #endif
 

@@ -44,19 +44,18 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void SingleStatementPerLine_Razor() =>
-            builderCS
-                .AddSnippet(
-                    """
-                    @if (true) { @currentCount } <!-- FN -->
-                    @if (true) { <p>Test</p> } <!-- FN -->
+            builderCS.AddSnippet(
+"""
+@if (true) { @currentCount } <!-- FN -->
+@if (true) { <p>Test</p> } <!-- FN -->
 
-                    @code
-                    {
-                        private int currentCount = 0;
-                        void DoSomething(bool flag) { if (flag) Console.WriteLine("Test"); } // Noncompliant
-                    }
-                    """,
-                    "SomeRazorFile.razor")
+@code
+{
+    private int currentCount = 0;
+    void DoSomething(bool flag) { if (flag) Console.WriteLine("Test"); } // Noncompliant
+}
+""",
+"SomeRazorFile.razor")
                 .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .Verify();
 

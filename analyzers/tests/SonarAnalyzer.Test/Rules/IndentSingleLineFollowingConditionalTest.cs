@@ -49,33 +49,32 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void IndentSingleLineFollowingConditional_RazorFile_CorrectMessage() =>
-            builder
-                .AddSnippet(
-                    """
-                    @code
+            builder.AddSnippet(
+                """
+                @code
+                {
+                    public int Method(int j)
                     {
-                        public int Method(int j)
-                        {
-                            var total = 0;
-                            for(int i = 0; i < 10; i++) // Noncompliant {{Use curly braces or indentation to denote the code conditionally executed by this 'for'}}
-                    //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-                            total = total + i;               // trivia not included in secondary location for single line statements...
-                    //      ^^^^^^^^^^^^^^^^^^ Secondary
+                        var total = 0;
+                        for(int i = 0; i < 10; i++) // Noncompliant {{Use curly braces or indentation to denote the code conditionally executed by this 'for'}}
+                //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        total = total + i;               // trivia not included in secondary location for single line statements...
+                //      ^^^^^^^^^^^^^^^^^^ Secondary
 
-                            if (j > 400)
-                                return 4;
-                            else if (j > 500) // Noncompliant {{Use curly braces or indentation to denote the code conditionally executed by this 'else if'}}
-                    //      ^^^^^^^^^^^^^^^^^
-                        return 5;
-                    //  ^^^^^^^^^ Secondary
+                        if (j > 400)
+                            return 4;
+                        else if (j > 500) // Noncompliant {{Use curly braces or indentation to denote the code conditionally executed by this 'else if'}}
+                //      ^^^^^^^^^^^^^^^^^
+                    return 5;
+                //  ^^^^^^^^^ Secondary
 
-                            return 1623;
-                        }
+                        return 1623;
                     }
-                    """,
-                    "SomeRazorFile.razor")
-                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-                .Verify();
+                }
+                """,
+                "SomeRazorFile.razor")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .Verify();
 
 #endif
 

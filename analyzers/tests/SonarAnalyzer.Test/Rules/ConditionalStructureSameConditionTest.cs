@@ -50,30 +50,29 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void ConditionalStructureSameCondition_RazorFile_CorrectMessage() =>
-            builderCS
-                .AddSnippet(
-                    """
-                    @code
+            builderCS.AddSnippet(
+                """
+                @code
+                {
+                    public bool condition { get; set; }
+
+                    public void Method()
                     {
-                        public bool condition { get; set; }
-
-                        public void Method()
+                        var b = true;
+                        if (b && condition)
+                        //  ^^^^^^^^^^^^^^ Secondary
                         {
-                            var b = true;
-                            if (b && condition)
-                            //  ^^^^^^^^^^^^^^ Secondary
-                            {
 
-                            }
-                            else if (b && condition) // Noncompliant {{This branch duplicates the one on line 8.}}
-                            //       ^^^^^^^^^^^^^^
-                            {
+                        }
+                        else if (b && condition) // Noncompliant {{This branch duplicates the one on line 8.}}
+                        //       ^^^^^^^^^^^^^^
+                        {
 
-                            }
                         }
                     }
-                    """,
-                    "SomeRazorFile.razor")
+                }
+                """,
+                "SomeRazorFile.razor")
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 

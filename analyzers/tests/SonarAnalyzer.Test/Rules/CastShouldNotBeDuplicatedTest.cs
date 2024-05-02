@@ -68,8 +68,8 @@ namespace SonarAnalyzer.Test.Rules
                     public int Prop { get; set; }
                 }
                 """)
-            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .AddPaths("CastShouldNotBeDuplicated.cshtml")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
 #endif

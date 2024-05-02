@@ -19,7 +19,6 @@
  */
 
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -82,13 +81,17 @@ internal class Verifier
             codeFix = builder.CodeFix();
             ValidateCodeFix();
         }
-        razorFilePaths = builder.Paths.Select(TestCasePath).Where(IsRazorOrCshtml)
+        razorFilePaths = builder.Paths
+            .Select(TestCasePath)
+            .Where(IsRazorOrCshtml)
             .Concat(builder.Snippets.Where(x => IsRazorOrCshtml(x.FileName)).Select(x =>
             {
                 var tempFilePath = Path.Combine(Directory.GetCurrentDirectory(), "TestCases", x.FileName);
+                // Source snippets need to be on disk for DiagnosticVerifier.Verify to work. If this becomes unnecessary, adding source snippets should be reworked to align it with adding content snippets.
                 File.WriteAllText(tempFilePath, x.Content);
                 return tempFilePath;
-            })).ToArray();
+            }))
+            .ToArray();
     }
 
     public void Verify()    // This should never have any arguments
