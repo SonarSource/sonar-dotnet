@@ -18,10 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Reflection;
+
 namespace SonarAnalyzer.Extensions;
 
 public static class ITypeSymbolExtensions
 {
+    private static readonly PropertyInfo ITypeSymbolIsRecord = typeof(ITypeSymbol).GetProperty("IsRecord");
+
     public static bool IsInterface(this ITypeSymbol self) =>
         self is { TypeKind: TypeKind.Interface };
 
@@ -188,6 +192,24 @@ public static class ITypeSymbolExtensions
             ITypeSymbol x => x,
             _ => null,
         };
+
+    public static IEnumerable<INamedTypeSymbol> GetSelfAndBaseTypes(this ITypeSymbol type)
+    {
+        if (type is null)
+        {
+            yield break;
+        }
+
+        var currentType = type;
+        while (currentType?.Kind == SymbolKind.NamedType)
+        {
+            yield return (INamedTypeSymbol)currentType;
+            currentType = currentType.BaseType;
+        }
+    }
+
+    public static bool IsRecord(this ITypeSymbol typeSymbol) =>
+        ITypeSymbolIsRecord?.GetValue(typeSymbol) is true;
 
     private static ITypeSymbol NullableTypeArgument(ITypeSymbol type) =>
         type is INamedTypeSymbol namedType && namedType.OriginalDefinition.Is(KnownType.System_Nullable_T)

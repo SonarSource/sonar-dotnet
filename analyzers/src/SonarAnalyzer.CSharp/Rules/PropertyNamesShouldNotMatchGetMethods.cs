@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         return;
                     }
-                    var typeMembers = typeSymbol.GetMembers().Where(SymbolHelper.IsPubliclyAccessible);
+                    var typeMembers = typeSymbol.GetMembers().Where(x => x.IsPubliclyAccessible());
                     var properties = typeMembers.OfType<IPropertySymbol>().Where(property => !property.IsOverride).ToArray();
                     var methods = typeMembers.OfType<IMethodSymbol>().ToArray();
 

@@ -31,8 +31,7 @@ internal static class INamespaceSymbolExtensions
     public static bool Is(this INamespaceSymbol symbol, string name)
     {
         _ = name ?? throw new ArgumentNullException(nameof(name));
-
-        var ns = name.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+        var ns = name.Split(['.'], StringSplitOptions.RemoveEmptyEntries);
         for (var i = ns.Length - 1; i >= 0; i--)
         {
             if (symbol is null || symbol.Name != ns[i])
@@ -46,4 +45,31 @@ internal static class INamespaceSymbolExtensions
         }
         return symbol?.IsGlobalNamespace is true;
     }
+
+    public static IEnumerable<INamedTypeSymbol> GetAllNamedTypes(this INamespaceSymbol @namespace)
+    {
+        if (@namespace is null)
+        {
+            yield break;
+        }
+        foreach (var typeMember in @namespace.GetTypeMembers().SelectMany(x => x.GetAllNamedTypes()))
+        {
+            yield return typeMember;
+        }
+        foreach (var typeMember in @namespace.GetNamespaceMembers().SelectMany(GetAllNamedTypes))
+        {
+            yield return typeMember;
+        }
+    }
+
+    public static bool IsSameNamespace(this INamespaceSymbol namespace1, INamespaceSymbol namespace2) =>
+        (namespace1.IsGlobalNamespace && namespace2.IsGlobalNamespace)
+        || (namespace1.Name.Equals(namespace2.Name)
+            && namespace1.ContainingNamespace is not null
+            && namespace2.ContainingNamespace is not null
+            && IsSameNamespace(namespace1.ContainingNamespace, namespace2.ContainingNamespace));
+
+    public static bool IsSameOrAncestorOf(this INamespaceSymbol thisNamespace, INamespaceSymbol namespaceToCheck) =>
+        IsSameNamespace(thisNamespace, namespaceToCheck)
+        || (namespaceToCheck.ContainingNamespace is not null && IsSameOrAncestorOf(thisNamespace, namespaceToCheck.ContainingNamespace));
 }

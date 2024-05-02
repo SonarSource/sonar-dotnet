@@ -18,18 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions;
+using SonarAnalyzer.Extensions;
 
-internal static class AttributeSyntaxExtensions
+namespace SonarAnalyzer.Test.Extensions;
+
+[TestClass]
+public class IPropertySymbolExtensionsTest
 {
-    private const int AttributeLength = 9;
-
-    public static bool IsKnownType(this AttributeSyntax attribute, KnownType knownType, SemanticModel semanticModel) =>
-        attribute.Name.GetName().Contains(GetShortNameWithoutAttributeSuffix(knownType))
-        && ((SyntaxNode)attribute).IsKnownType(knownType, semanticModel);
-
-    private static string GetShortNameWithoutAttributeSuffix(KnownType knownType) =>
-        knownType.TypeName == nameof(Attribute) || !knownType.TypeName.EndsWith(nameof(Attribute))
-            ? knownType.TypeName
-            : knownType.TypeName.Remove(knownType.TypeName.Length - AttributeLength);
+    [TestMethod]
+    public void IsAnyAttributeInOverridingChain_WhenPropertySymbolIsNull_ReturnsFalse() =>
+        IPropertySymbolExtensions.IsAnyAttributeInOverridingChain(null).Should().BeFalse();
 }

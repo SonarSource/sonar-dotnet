@@ -22,10 +22,9 @@ extern alias csharp;
 extern alias vbnet;
 
 using Moq;
-using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
-using CSharpSyntaxNodeExtensions = csharp::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
-using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using VBSyntaxNodeExtensions = vbnet::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
+using SonarAnalyzer.Extensions;
+using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
+using SyntaxVB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Test.Helpers
 {
@@ -73,7 +72,7 @@ namespace Test
         public void IsMatch_WhenContainingTypeIsNull_ReturnsFalse()
         {
             var typeMock = new Mock<IMethodSymbol>();
-            typeMock.SetupGet(t => t.ContainingType).Returns((INamedTypeSymbol)null);
+            typeMock.SetupGet(x => x.ContainingType).Returns((INamedTypeSymbol)null);
             var lazySymbol = new Lazy<IMethodSymbol>(() => typeMock.Object);
 
             var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
@@ -411,13 +410,13 @@ End Namespace
             Assert.Fail($"Test setup error: could not find method call in test code snippet: {typeAndMethodName}");
             return null;
 
-            IEnumerable<(SyntaxNode node, string name)> GetCSharpNodes() =>
-                snippet.GetNodes<CSharpSyntax.InvocationExpressionSyntax>()
-                    .Select(n => ((SyntaxNode)n, CSharpSyntaxNodeExtensions.GetIdentifier(n.Expression)?.ValueText));
+            IEnumerable<(SyntaxNode Node, string Name)> GetCSharpNodes() =>
+                snippet.GetNodes<SyntaxCS.InvocationExpressionSyntax>()
+                    .Select(x => ((SyntaxNode)x, SyntaxNodeExtensionsCSharp.GetIdentifier(x.Expression)?.ValueText));
 
-            IEnumerable<(SyntaxNode node, string name)> GetVbNodes() =>
-                snippet.GetNodes<VBSyntax.InvocationExpressionSyntax>()
-                    .Select(n => ((SyntaxNode)n, VBSyntaxNodeExtensions.GetIdentifier(n.Expression)?.ValueText));
+            IEnumerable<(SyntaxNode Node, string Name)> GetVbNodes() =>
+                snippet.GetNodes<SyntaxVB.InvocationExpressionSyntax>()
+                    .Select(x => ((SyntaxNode)x, SyntaxNodeExtensionsVisualBasic.GetIdentifier(x.Expression)?.ValueText));
         }
 
         private static void CheckExactMatchOnly_OverridesAreNotMatched(SnippetCompiler snippet)

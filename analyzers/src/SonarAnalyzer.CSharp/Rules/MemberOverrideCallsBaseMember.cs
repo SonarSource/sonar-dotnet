@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 || propertySymbol.OverriddenProperty == null
                 || (propertySymbol.GetMethod != null && propertySymbol.OverriddenProperty.GetMethod == null)
                 || (propertySymbol.SetMethod != null && propertySymbol.OverriddenProperty.SetMethod == null)
-                || SymbolHelper.IsAnyAttributeInOverridingChain(propertySymbol))
+                || propertySymbol.IsAnyAttributeInOverridingChain())
             {
                 return false;
             }
@@ -153,7 +153,7 @@ namespace SonarAnalyzer.Rules.CSharp
             || IgnoredMethodNames.Contains(methodSymbol.Name)
             || methodSymbol.Parameters.Any(p => p.HasExplicitDefaultValue)
             || methodSymbol.OverriddenMethod.Parameters.Any(p => p.HasExplicitDefaultValue)
-            || SymbolHelper.IsAnyAttributeInOverridingChain(methodSymbol)
+            || methodSymbol.IsAnyAttributeInOverridingChain()
             || IsRecordCompilerGenerated(methodSymbol);
 
         private static bool IsRecordCompilerGenerated(IMethodSymbol methodSymbol) =>

@@ -27,22 +27,37 @@ namespace SonarAnalyzer.Test.Extensions;
 [TestClass]
 public class ITypeSymbolExtensionsTest
 {
+    private const string TestInput = """
+        namespace NS
+        {
+            using System;
+            using PropertyBag = System.Collections.Generic.Dictionary<string, object>;
+
+            public abstract class Base
+            {
+                public class Nested
+                {
+                    public class NestedMore { }
+                }
+            }
+            public class Derived1 : Base { }
+            public class Derived2 : Base, IInterface { }
+            public interface IInterface { }
+        }
+        """;
+
     private ClassDeclarationSyntax baseClassDeclaration;
     private ClassDeclarationSyntax derivedClassDeclaration1;
     private ClassDeclarationSyntax derivedClassDeclaration2;
     private SyntaxNode root;
-    private SemanticModel semanticModel;
+    private SemanticModel model;
 
     [TestInitialize]
     public void Compile()
     {
-        using var workspace = new AdhocWorkspace();
-        var document = workspace.CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp).AddDocument("test", SymbolHelperTest.TestInput);
-        var compilation = document.Project.GetCompilationAsync().Result;
-        var tree = compilation.SyntaxTrees.First();
-        semanticModel = compilation.GetSemanticModel(tree);
-
-        root = tree.GetRoot();
+        var snippet = new SnippetCompiler(TestInput);
+        root = snippet.SyntaxTree.GetRoot();
+        model = snippet.SemanticModel;
         baseClassDeclaration = root.DescendantNodes().OfType<ClassDeclarationSyntax>().First(x => x.Identifier.ValueText == "Base");
         derivedClassDeclaration1 = root.DescendantNodes().OfType<ClassDeclarationSyntax>().First(x => x.Identifier.ValueText == "Derived1");
         derivedClassDeclaration2 = root.DescendantNodes().OfType<ClassDeclarationSyntax>().First(x => x.Identifier.ValueText == "Derived2");
@@ -62,8 +77,8 @@ public class ITypeSymbolExtensionsTest
         var baseType = new KnownType("NS.Base");
         var interfaceType = new KnownType("NS.IInterface");
 
-        var derived1Type = semanticModel.GetDeclaredSymbol(derivedClassDeclaration1) as INamedTypeSymbol;
-        var derived2Type = semanticModel.GetDeclaredSymbol(derivedClassDeclaration2) as INamedTypeSymbol;
+        var derived1Type = model.GetDeclaredSymbol(derivedClassDeclaration1) as INamedTypeSymbol;
+        var derived2Type = model.GetDeclaredSymbol(derivedClassDeclaration2) as INamedTypeSymbol;
 
         derived2Type.DerivesOrImplements(interfaceType).Should().BeTrue();
         derived1Type.DerivesOrImplements(interfaceType).Should().BeFalse();
@@ -78,7 +93,7 @@ public class ITypeSymbolExtensionsTest
         var baseKnownType = new KnownType("NS.Base");
         var baseKnownTypes = ImmutableArray.Create(new[] { baseKnownType });
 
-        var baseType = semanticModel.GetDeclaredSymbol(baseClassDeclaration) as INamedTypeSymbol;
+        var baseType = model.GetDeclaredSymbol(baseClassDeclaration) as INamedTypeSymbol;
 
         baseType.Is(baseKnownType).Should().BeTrue();
         baseType.IsAny(baseKnownTypes).Should().BeTrue();
@@ -88,7 +103,7 @@ public class ITypeSymbolExtensionsTest
     public void Type_GetSymbolType_Alias()
     {
         var aliasUsing = root.DescendantNodesAndSelf().OfType<UsingDirectiveSyntax>().FirstOrDefault(x => x.Alias is not null);
-        var symbol = semanticModel.GetDeclaredSymbol(aliasUsing);
+        var symbol = model.GetDeclaredSymbol(aliasUsing);
         var type = symbol.GetSymbolType();
         symbol.ToString().Should().Be("PropertyBag");
         type.ToString().Should().Be("System.Collections.Generic.Dictionary<string, object>");
@@ -522,6 +537,77 @@ public class ITypeSymbolExtensionsTest
             }
             """);
         fieldSymbol.Type.IsEnum().Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void GetSelfAndBaseTypes_WhenSymbolIsNull_ReturnsEmpty() =>
+        ((ITypeSymbol)null).GetSelfAndBaseTypes().Should().BeEmpty();
+
+    [DataTestMethod]
+    [DataRow("BaseClass<int>         ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute", "NotInheritedAttribute")]
+    [DataRow("DerivedOpenGeneric<int>", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute")]
+    [DataRow("DerivedClosedGeneric   ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute")]
+    [DataRow("Implement              ")]
+    public void GetAttributesWithInherited_TypeSymbol(string className, params string[] expectedAttributes)
+    {
+        className = className.TrimEnd();
+        var code = $$"""
+            using System;
+
+            [AttributeUsage(AttributeTargets.All, Inherited = true)]
+            public class InheritedAttribute : Attribute { }
+
+            [AttributeUsage(AttributeTargets.All, Inherited = false)]
+            public class NotInheritedAttribute : Attribute { }
+
+            public class DerivedInheritedAttribute: InheritedAttribute { }
+
+            public class DerivedNotInheritedAttribute: NotInheritedAttribute { }
+
+            public class UnannotatedAttribute : Attribute { }
+
+            [Inherited]
+            [DerivedInherited]
+            [NotInherited]
+            [DerivedNotInherited]
+            [Unannotated]
+            public class BaseClass<T1> { }
+
+            [Inherited]
+            [DerivedInherited]
+            [NotInherited]
+            [DerivedNotInherited]
+            [Unannotated]
+            public interface IInterface { }
+
+            public class DerivedOpenGeneric<T1>: BaseClass<T1> { }
+
+            public class DerivedClosedGeneric: BaseClass<int> { }
+
+            public class Implement: IInterface { }
+
+            public class Program
+            {
+                public static void Main()
+                {
+                    new {{className}}();
+                }
+            }
+            """;
+        var compiler = new SnippetCompiler(code);
+        var objectCreation = compiler.GetNodes<ObjectCreationExpressionSyntax>().Should().ContainSingle().Subject;
+        if (compiler.GetSymbol<IMethodSymbol>(objectCreation) is { MethodKind: MethodKind.Constructor, ReceiverType: { } receiver })
+        {
+            var actual = receiver.GetAttributesWithInherited().Select(x => x.AttributeClass.Name).ToList();
+            actual.Should().BeEquivalentTo(expectedAttributes);
+        }
+        else
+        {
+            Assert.Fail("Constructor could not be found.");
+        }
+        // GetAttributesWithInherited should behave like MemberInfo.GetCustomAttributes from runtime reflection:
+        var type = compiler.EmitAssembly().GetType(className.Replace("<int>", "`1"), throwOnError: true);
+        type.GetCustomAttributes(inherit: true).Select(x => x.GetType().Name).Should().BeEquivalentTo(expectedAttributes);
     }
 
     private static IFieldSymbol FirstFieldSymbolFromCode(string code)

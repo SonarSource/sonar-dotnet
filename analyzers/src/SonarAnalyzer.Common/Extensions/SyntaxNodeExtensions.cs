@@ -20,16 +20,14 @@
 
 namespace SonarAnalyzer.Extensions;
 
-internal static class AttributeSyntaxExtensions
+internal static class SyntaxNodeExtensions
 {
-    private const int AttributeLength = 9;
+    public static bool IsKnownType(this SyntaxNode syntaxNode, KnownType knownType, SemanticModel semanticModel)
+    {
+        var type = semanticModel.GetSymbolInfo(syntaxNode).Symbol.GetSymbolType();
+        return type.Is(knownType) || type?.OriginalDefinition?.Is(knownType) == true;
+    }
 
-    public static bool IsKnownType(this AttributeSyntax attribute, KnownType knownType, SemanticModel semanticModel) =>
-        attribute.Name.GetName().Contains(GetShortNameWithoutAttributeSuffix(knownType))
-        && ((SyntaxNode)attribute).IsKnownType(knownType, semanticModel);
-
-    private static string GetShortNameWithoutAttributeSuffix(KnownType knownType) =>
-        knownType.TypeName == nameof(Attribute) || !knownType.TypeName.EndsWith(nameof(Attribute))
-            ? knownType.TypeName
-            : knownType.TypeName.Remove(knownType.TypeName.Length - AttributeLength);
+    public static bool IsDeclarationKnownType(this SyntaxNode syntaxNode, KnownType knownType, SemanticModel semanticModel) =>
+        semanticModel.GetDeclaredSymbol(syntaxNode)?.GetSymbolType().Is(knownType) ?? false;
 }

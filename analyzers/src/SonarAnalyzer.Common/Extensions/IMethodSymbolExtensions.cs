@@ -20,16 +20,26 @@
 
 namespace SonarAnalyzer.Extensions;
 
-internal static class AttributeSyntaxExtensions
+internal static class IMethodSymbolExtensions
 {
-    private const int AttributeLength = 9;
+    public static bool IsExtensionOn(this IMethodSymbol methodSymbol, KnownType type)
+    {
+        if (methodSymbol is { IsExtensionMethod: true })
+        {
+            var receiverType = methodSymbol.MethodKind == MethodKind.Ordinary
+                ? methodSymbol.Parameters.First().Type as INamedTypeSymbol
+                : methodSymbol.ReceiverType as INamedTypeSymbol;
+            return receiverType?.ConstructedFrom.Is(type) ?? false;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
-    public static bool IsKnownType(this AttributeSyntax attribute, KnownType knownType, SemanticModel semanticModel) =>
-        attribute.Name.GetName().Contains(GetShortNameWithoutAttributeSuffix(knownType))
-        && ((SyntaxNode)attribute).IsKnownType(knownType, semanticModel);
+    public static bool IsDestructor(this IMethodSymbol method) =>
+        method.MethodKind == MethodKind.Destructor;
 
-    private static string GetShortNameWithoutAttributeSuffix(KnownType knownType) =>
-        knownType.TypeName == nameof(Attribute) || !knownType.TypeName.EndsWith(nameof(Attribute))
-            ? knownType.TypeName
-            : knownType.TypeName.Remove(knownType.TypeName.Length - AttributeLength);
+    public static bool IsAnyAttributeInOverridingChain(this IMethodSymbol method) =>
+        method.IsAnyAttributeInOverridingChain(x => x.OverriddenMethod);
 }

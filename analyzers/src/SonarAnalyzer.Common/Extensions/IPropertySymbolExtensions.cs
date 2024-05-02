@@ -20,16 +20,8 @@
 
 namespace SonarAnalyzer.Extensions;
 
-internal static class AttributeSyntaxExtensions
+internal static class IPropertySymbolExtensions
 {
-    private const int AttributeLength = 9;
-
-    public static bool IsKnownType(this AttributeSyntax attribute, KnownType knownType, SemanticModel semanticModel) =>
-        attribute.Name.GetName().Contains(GetShortNameWithoutAttributeSuffix(knownType))
-        && ((SyntaxNode)attribute).IsKnownType(knownType, semanticModel);
-
-    private static string GetShortNameWithoutAttributeSuffix(KnownType knownType) =>
-        knownType.TypeName == nameof(Attribute) || !knownType.TypeName.EndsWith(nameof(Attribute))
-            ? knownType.TypeName
-            : knownType.TypeName.Remove(knownType.TypeName.Length - AttributeLength);
+    public static bool IsAnyAttributeInOverridingChain(this IPropertySymbol property) =>
+        property.IsAnyAttributeInOverridingChain(x => x.OverriddenProperty);
 }
