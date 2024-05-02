@@ -62,9 +62,7 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
         {
             var modelParameterTypes = method.Parameters
                 .Where(x => !HasValidateNeverAttribute(x))
-                .Select(x => x.Type)
-                .OfType<INamedTypeSymbol>()
-                .SelectMany(RelatedTypesToExamine)
+                .SelectMany(x => RelatedTypesToExamine(x.Type))
                 .Distinct();
             foreach (var modelParameterType in modelParameterTypes)
             {
@@ -134,10 +132,15 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
         }
     }
 
-    private static IEnumerable<INamedTypeSymbol> RelatedTypesToExamine(INamedTypeSymbol type) =>
-        type.DerivesOrImplements(KnownType.System_Collections_Generic_IEnumerable_T)
-            ? type.TypeArguments.OfType<INamedTypeSymbol>()
-            : [type];
+    private static IEnumerable<INamedTypeSymbol> RelatedTypesToExamine(ITypeSymbol type) =>
+        type switch
+        {
+            IArrayTypeSymbol array => RelatedTypesToExamine(array.ElementType),
+            INamedTypeSymbol collection when collection.DerivesOrImplements(KnownType.System_Collections_Generic_IEnumerable_T) =>
+                collection.TypeArguments.SelectMany(RelatedTypesToExamine),
+            INamedTypeSymbol namedType => [namedType],
+            _ => []
+        };
 
     private static bool HasValidateNeverAttribute(ISymbol symbol) =>
         symbol.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_ModelBinding_Validation_ValidateNeverAttribute);

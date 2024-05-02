@@ -142,18 +142,24 @@ namespace CompositeModels
     }
 }
 
-namespace GenericCollections
+namespace Collections
 {
+    public class ArrayItem { public int Property { get; set; } }                // Noncompliant
+    public class NestedArrayItem { public int Property { get; set; } }          // Noncompliant
     public class EnumerableItem { public int Property { get; set; } }           // Noncompliant
     public class ListItem { public int Property { get; set; } }                 // Noncompliant
     public class DictionaryKeyItem { public int Property { get; set; } }        // Noncompliant
     public class DictionaryValueItem { public int Property { get; set; } }      // Noncompliant
+    public class NestedCollectionItem { public int Property { get; set; } }     // Noncompliant
 
     public class ControllerClass : Controller
     {
+        [HttpPost] public IActionResult CreateArray(ArrayItem[] model) => View(model);
+        [HttpPost] public IActionResult CreateNestedArray(NestedArrayItem[] model) => View(model);
         [HttpPost] public IActionResult CreateEnumerable(IEnumerable<EnumerableItem> model) => View(model);
         [HttpPost] public IActionResult CreateList(List<ListItem> model) => View(model);
         [HttpPost] public IActionResult CreateDictionary(Dictionary<DictionaryKeyItem, DictionaryValueItem> model) => View(model);
+        [HttpPost] public IActionResult CreateNestedCollection(Dictionary<string, IEnumerable<NestedCollectionItem[]>> model) => View(model);
     }
 }
 
@@ -268,5 +274,15 @@ namespace Interfaces
     public class CustomController : Controller
     {
         [HttpPost] public IActionResult Post(Model model) => View(model);
+    }
+}
+
+namespace GeneralTypes
+{
+    public class CustomController : Controller
+    {
+        [HttpPost] public IActionResult PostObject(object model) => View(model);
+        [HttpPost] public IActionResult PostString(string model) => View(model);
+        [HttpPost] public IActionResult PostDynamic(dynamic model) => View(model);
     }
 }
