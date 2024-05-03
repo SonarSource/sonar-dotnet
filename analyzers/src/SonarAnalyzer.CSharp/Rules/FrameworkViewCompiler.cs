@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -50,8 +51,8 @@ public sealed class FrameworkViewCompiler : SonarDiagnosticAnalyzer
         context.RegisterCompilationAction(
             c =>
             {
-                var mightBeUseful = c.ProjectConfiguration();
-                var root = Path.GetDirectoryName(mightBeUseful.ProjectPath);
+                var projectConfiguration = c.ProjectConfiguration();
+                var root = Path.GetDirectoryName(projectConfiguration.ProjectPath);
                 var supportedDiagnostics = SupportedDiagnostics.ToImmutableDictionary(x => x.Id, x => ReportDiagnostic.Warn);
 
                 var dummy = CompileViews(c.Compilation, root)
@@ -59,10 +60,11 @@ public sealed class FrameworkViewCompiler : SonarDiagnosticAnalyzer
                     .WithAnalyzers(Rules);
 
                 var diagnostics = dummy.GetAllDiagnosticsAsync().Result;
+                using var fs = new FileStream(Path.Combine(projectConfiguration.OutPath, "razor-issues.json"), FileMode.Create);
+                using var sarifLogger = new SarifV1ErrorLogger(fs, "AutoScan.NET", "1.0.0.0", typeof(FrameworkViewCompiler).Assembly.GetName().Version, CultureInfo.InvariantCulture);
                 foreach (var diagnostic in diagnostics.Where(x => supportedDiagnostics.Keys.Contains(x.Id)))
                 {
-                    // TODO: This breaks when raising on out-of-compilation files. Find a replacement, maybe writing directly to the SARIF.
-                    c.ReportIssue(diagnostic);
+                    sarifLogger.LogDiagnostic(diagnostic);
                 }
             });
 
@@ -331,4 +333,45 @@ internal sealed class RazorCompiler
             """);
     }
 }
+#endregion
+
+#region sarif export
+
+public sealed class SarifV1ErrorLogger : IDisposable
+{
+    private static readonly ConstructorInfo SarifV1ErrorLoggerConstructor;
+    private static readonly MethodInfo LogDiagnosticMethod;
+    private static readonly MethodInfo DisposeMethod;
+
+    private readonly object instance;
+
+    static SarifV1ErrorLogger()
+    {
+        if (typeof(SemanticModel).Assembly.GetType("Microsoft.CodeAnalysis.SarifV1ErrorLogger") is { } type)
+        {
+            SarifV1ErrorLoggerConstructor = type.GetConstructor([typeof(Stream), typeof(string), typeof(string), typeof(Version), typeof(CultureInfo)]);
+            LogDiagnosticMethod = type.GetMethod(nameof(LogDiagnostic));
+            DisposeMethod = type.GetMethod(nameof(Dispose));
+        }
+        else
+        {
+            throw new InvalidOperationException("SarifV1ErrorLogger is not available under this version of Roslyn compiler.");
+        }
+    }
+
+    public SarifV1ErrorLogger(Stream stream, string toolName, string toolFileVersion, Version toolAssemblyVersion, CultureInfo culture) =>
+        instance = SarifV1ErrorLoggerConstructor.Invoke([stream, toolName, toolFileVersion, toolAssemblyVersion, culture]);
+
+    public void LogDiagnostic(Diagnostic diagnostic)
+    {
+        if (!diagnostic.Descriptor.Category.Equals("Compiler"))
+        {
+            LogDiagnosticMethod.Invoke(instance, [diagnostic, null /* SuppressionInfo suppressionInfo */]);
+        }
+    }
+
+    public void Dispose() =>
+        DisposeMethod.Invoke(instance, []);
+}
+
 #endregion
