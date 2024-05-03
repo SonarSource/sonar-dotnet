@@ -46,9 +46,12 @@ public static class SourceGeneratorProvider
         {
             throw new NotSupportedException($"Razor analysis is only supported for .Net Core.");
         }
-        // List of all sdk directories for the major version
-        var latestSdkMajorDirectories = Directory.GetDirectories(sdkDirectory, $"{objectAssembly.GetName().Version.Major}.*", SearchOption.TopDirectoryOnly);
-        return latestSdkMajorDirectories.OrderByDescending(x => new DirectoryInfo(x).Name).FirstOrDefault(); // Get the latest sdk directory
+        var specificMajorVersionSdkDirectories = Directory.GetDirectories(sdkDirectory, $"{objectAssembly.GetName().Version.Major}.*", SearchOption.TopDirectoryOnly);
+        if (specificMajorVersionSdkDirectories.Length == 0)
+        {
+            throw new DirectoryNotFoundException($"SDK directory not found for version {objectAssembly.GetName().Version.Major}");
+        }
+        return specificMajorVersionSdkDirectories.OrderByDescending(x => Version.Parse(new DirectoryInfo(x).Name)).FirstOrDefault();
     }
 
     private sealed class AssemblyLoader : IAnalyzerAssemblyLoader
