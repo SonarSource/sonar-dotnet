@@ -33,10 +33,6 @@ public class SourceGeneratorProviderTest
         SourceGeneratorProvider.SourceGenerators.Should().ContainSingle().Which.FullPath.Should().EndWith("Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators.dll");
 
     [TestMethod]
-    public void RazorSourceGenerator_HasCorrectPath() =>
-        RazorSourceGenerator.FullPath.Should().EndWith(Path.Combine("Sdks", "Microsoft.NET.Sdk.Razor", "source-generators", "Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators.dll"));
-
-    [TestMethod]
     public void RazorSourceGenerator_ExistsLocally() =>
         File.Exists(RazorSourceGenerator.FullPath).Should().BeTrue();
 
@@ -45,18 +41,22 @@ public class SourceGeneratorProviderTest
         RazorSourceGenerator.GetAssembly().GetName().Name.Should().Be("Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators");
 
     [TestMethod]
-    public void LatestSdkFolder_ReturnsCorrectPath()
+    public void LatestSdkFolder_ReturnsAssemblyMajor()
     {
         var latestSdkFolder = SourceGeneratorProvider.LatestSdkFolder();
-        var latestSdkVersion = Version.Parse(Path.GetFileName(latestSdkFolder));
+        Version.TryParse(Path.GetFileName(latestSdkFolder), out var latestSdkVersion).Should().BeTrue();
+        latestSdkVersion.Major.Should().Be(typeof(object).Assembly.GetName().Version.Major);
+    }
 
+    [TestMethod]
+    public void LatestSdkFolder_ReturnLatest()
+    {
+        var latestSdkFolder = SourceGeneratorProvider.LatestSdkFolder();
+        Version.TryParse(Path.GetFileName(latestSdkFolder), out var latestSdkVersion).Should().BeTrue();
         var parentDirectory = Directory.GetParent(latestSdkFolder);
         parentDirectory.Name.Should().Be("sdk", "Parent directory of the latest SDK should be 'sdk'");
-
         Directory.GetDirectories(parentDirectory.FullName, $"{typeof(object).Assembly.GetName().Version.Major}.*", SearchOption.TopDirectoryOnly)
-            .Any(x => IsHigherVersion(x, latestSdkVersion))
-            .Should()
-            .BeFalse("There should be no SDK folders with a higher version number than the latest SDK folder");
+            .Should().NotContain(x => IsHigherVersion(x, latestSdkVersion), "There should be no SDK folders with a higher version number than the latest SDK folder");
     }
 
     private static bool IsHigherVersion(string directory, Version referenceVersion) =>

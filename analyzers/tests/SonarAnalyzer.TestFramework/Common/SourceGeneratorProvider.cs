@@ -49,8 +49,10 @@ public static class SourceGeneratorProvider
                 $"This may be because you are not using .NET Core. " +
                 $"Please note that Razor analysis is only supported when using .NET Core.");
         }
-        return Directory.GetDirectories(sdkDirectory, $"{objectAssembly.GetName().Version.Major}.*", SearchOption.TopDirectoryOnly) is { Length: > 0 } specificMajorVersionSdkDirectories
-            ? specificMajorVersionSdkDirectories.OrderByDescending(x => Version.Parse(new DirectoryInfo(x).Name)).First()
+        return Directory.GetDirectories(sdkDirectory, $"{objectAssembly.GetName().Version.Major}.*", SearchOption.TopDirectoryOnly)
+            .OrderByDescending(x => Version.Parse(new DirectoryInfo(x).Name))
+            .FirstOrDefault() is { } latestSdkDirectory
+            ? latestSdkDirectory
             : throw new DirectoryNotFoundException($"SDK directory not found for version {objectAssembly.GetName().Version.Major}");
     }
 
