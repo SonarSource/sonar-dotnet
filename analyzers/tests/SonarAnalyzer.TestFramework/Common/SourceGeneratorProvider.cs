@@ -45,7 +45,9 @@ public static class SourceGeneratorProvider
 
         if (!Directory.Exists(sdkDirectory))
         {
-            throw new NotSupportedException($"The directory '{sdkDirectory}' does not exist. This may be because you are not using .NET Core. Please note that Razor analysis is only supported when using .NET Core.");
+            throw new NotSupportedException($"The directory '{sdkDirectory}' does not exist. " +
+                $"This may be because you are not using .NET Core. " +
+                $"Please note that Razor analysis is only supported when using .NET Core.");
         }
         return Directory.GetDirectories(sdkDirectory, $"{objectAssembly.GetName().Version.Major}.*", SearchOption.TopDirectoryOnly) is { Length: > 0 } specificMajorVersionSdkDirectories
             ? specificMajorVersionSdkDirectories.OrderByDescending(x => Version.Parse(new DirectoryInfo(x).Name)).First()
