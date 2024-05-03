@@ -30,7 +30,8 @@ public class SourceGeneratorProviderTest
 
     [TestMethod]
     public void SourceGenerators_ContainsRazorSourceGenerator() =>
-        SourceGeneratorProvider.SourceGenerators.Should().ContainSingle().Which.FullPath.Should().EndWith("Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators.dll");
+        SourceGeneratorProvider.SourceGenerators.Should()
+            .Contain(x => x.FullPath.EndsWith(Path.Combine("Sdks", "Microsoft.NET.Sdk.Razor", "source-generators", "Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators.dll")));
 
     [TestMethod]
     public void RazorSourceGenerator_ExistsLocally() =>
@@ -44,7 +45,7 @@ public class SourceGeneratorProviderTest
     public void LatestSdkFolder_ReturnsAssemblyMajor()
     {
         var latestSdkFolder = SourceGeneratorProvider.LatestSdkFolder();
-        Version.TryParse(Path.GetFileName(latestSdkFolder), out var latestSdkVersion).Should().BeTrue();
+        Version.TryParse(Path.GetFileName(latestSdkFolder), out var latestSdkVersion).Should().BeTrue($"'{latestSdkFolder}' cannot be parsed to a version number");
         latestSdkVersion.Major.Should().Be(typeof(object).Assembly.GetName().Version.Major);
     }
 
@@ -52,7 +53,7 @@ public class SourceGeneratorProviderTest
     public void LatestSdkFolder_ReturnLatest()
     {
         var latestSdkFolder = SourceGeneratorProvider.LatestSdkFolder();
-        Version.TryParse(Path.GetFileName(latestSdkFolder), out var latestSdkVersion).Should().BeTrue();
+        Version.TryParse(Path.GetFileName(latestSdkFolder), out var latestSdkVersion).Should().BeTrue($"'{latestSdkFolder}' cannot be parsed to a version number");
         var parentDirectory = Directory.GetParent(latestSdkFolder);
         parentDirectory.Name.Should().Be("sdk", "Parent directory of the latest SDK should be 'sdk'");
         Directory.GetDirectories(parentDirectory.FullName, $"{typeof(object).Assembly.GetName().Version.Major}.*", SearchOption.TopDirectoryOnly)
