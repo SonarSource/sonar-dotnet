@@ -121,7 +121,7 @@ namespace Ignore
 
     interface IMarker { }                        // Compliant - this rule only deals with classes
 
-    class ImplementsMarker : IMarker { }          // Compliant - implements a marker interface
+    class ImplementsMarker : IMarker { }         // Compliant - implements a marker interface
 
     struct EmptyStruct { }                       // Compliant - this rule only deals with classes
 
@@ -131,6 +131,7 @@ namespace Ignore
     class SomeEvent { }                          // Compliant, ignored because of the suffix
     class SomeMessage { }                        // Compliant, ignored because of the suffix
     class Some_Command { }                       // Compliant, ignored because of the suffix
+    class SomeQuery { }                          // Noncompliant FP, should be ignored because of the suffix, Repro for https://github.com/SonarSource/sonar-dotnet/issues/9241
     class Someevent { }                          // Noncompliant
     class SOMEMESSAGE { }                        // Noncompliant
     class SomeCommandHandler { }                 // Noncompliant
@@ -138,6 +139,8 @@ namespace Ignore
     class Command { }                            // Compliant, ignored because of the suffix
     class Event { }                              // Compliant, ignored because of the suffix
     class Message { }                            // Compliant, ignored because of the suffix
+    class Query { }                              // Noncompliant FP, should be ignored because of the suffix
+
 
     class AssemblyDoc { }                        // Compliant, used for DefaultDocumentation tool
     class NamespaceDoc { }                       // compliant, used for DefaultDocumentation tool
