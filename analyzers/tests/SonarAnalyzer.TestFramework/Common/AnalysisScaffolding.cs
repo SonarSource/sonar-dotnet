@@ -75,6 +75,9 @@ public static class AnalysisScaffolding
         return CreateSonarProjectConfig(context, "FilesToAnalyzePath", filesToAnalyzePath, true);
     }
 
+    public static string CreateSonarProjectConfig(TestContext context, string analysisConfigPath) =>
+        CreateSonarProjectConfig(context, "NotImportant", null, true, analysisConfigPath);
+
     public static string CreateSonarProjectConfigWithUnchangedFiles(TestContext context, params string[] unchangedFiles) =>
         CreateSonarProjectConfig(context, "NotImportant", null, true, CreateAnalysisConfig(context, unchangedFiles));
 
@@ -150,7 +153,7 @@ public static class AnalysisScaffolding
     private static string ConcatenateStringArray(string[] array) =>
         string.Join(",", array ?? Array.Empty<string>());
 
-    private static string CreateSonarProjectConfig(TestContext context, string element, string value, bool isScannerRun, string analysisConfigPath = null)
+    public static string CreateSonarProjectConfig(TestContext context, string element, string value, bool isScannerRun, string analysisConfigPath = null)
     {
         var sonarProjectConfigPath = TestHelper.TestPath(context, "SonarProjectConfig.xml");
         var outPath = isScannerRun ? Path.GetDirectoryName(sonarProjectConfigPath) : null;

@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -28,33 +29,33 @@ namespace SonarAnalyzer.Test.Rules
     {
 
 #if NETFRAMEWORK
+        public TestContext TestContext { get; set; }
 
         public static IEnumerable<MetadataReference> AspNet4xReferences(string aspNetMvcVersion) =>
             MetadataReferenceFacade.SystemWeb                                          // For HttpAttributeMethod and derived attributes
             .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));      // For Controller
 
         [TestMethod]
-        public void FrameworkViewCompiler_CS() =>
+        public void FrameworkViewCompiler_CS()
+        {
+            var rootProjectPath = Path.Combine(Paths.CurrentTestCases(), "Razor", "CSHTMLFiles", "Project.csproj");
+            var analysisConfigPath = AnalysisScaffolding.CreateAnalysisConfig(TestContext, "SonarScannerWorkingDirectory", Path.Combine(Paths.CurrentTestCases(), "Razor", "CSHTMLFiles"));
+
             new VerifierBuilder<CS.FrameworkViewCompiler>()
-            .AddReferences(AspNet4xReferences("5.2.7"))
-            .AddSnippet("""
-                @{
-                    var uselessInView = 42;
-                }
-                <main> </main>
-                """,
-                "Contact.cshtml")
-            .AddSnippet("""
-                public class Thingy
-                {
-                    void DoWork()
-                    {
-                        var uselessInNormalFile = 42;
-                    }
-                }
-                """,
-                "Thingy.cs")
-            .Verify();
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, "ProjectPath", rootProjectPath, true, analysisConfigPath))
+                .AddReferences(AspNet4xReferences("5.2.7"))
+                .AddSnippet("""
+                            public class Thingy
+                            {
+                                void DoWork()
+                                {
+                                    var uselessInNormalFile = 42;   // Noncompliant
+                                }
+                            }
+                            """,
+                    "Thingy.cs")
+                .Verify();
+        }
 #endif
 
         [TestMethod]

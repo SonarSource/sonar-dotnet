@@ -45,7 +45,10 @@ public class AnalysisConfigReader
     public string[] UnchangedFiles() =>
         ConfigValue("UnchangedFilesPath") is { } unchangedFilesPath
             ? File.ReadAllLines(unchangedFilesPath)
-            : Array.Empty<string>();
+            : [];
+
+    public string SonarScannerWorkingDirectory() =>
+        ConfigValue("SonarScannerWorkingDirectory");
 
     private string ConfigValue(string id) =>
         analysisConfig.AdditionalConfig.FirstOrDefault(x => x.Id == id)?.Value;

@@ -33,10 +33,6 @@ namespace SonarAnalyzer.Rules.CSharp;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class FrameworkViewCompiler : SonarDiagnosticAnalyzer
 {
-    // TODO: Read this from context.ProjectConfiguration().ProjectPath.
-    // Not sure how to set it up in the UTs.
-    private const string ROOT_DIR = """C:\dev\personal\aspnet\Lol""";
-
     private ImmutableArray<DiagnosticAnalyzer> Rules;
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
@@ -55,9 +51,10 @@ public sealed class FrameworkViewCompiler : SonarDiagnosticAnalyzer
             c =>
             {
                 var mightBeUseful = c.ProjectConfiguration();
+                var root = Path.GetDirectoryName(mightBeUseful.ProjectPath);
                 var supportedDiagnostics = SupportedDiagnostics.ToImmutableDictionary(x => x.Id, x => ReportDiagnostic.Warn);
 
-                var dummy = CompileViews(c.Compilation)
+                var dummy = CompileViews(c.Compilation, root)
                     .WithOptions(c.Compilation.Options.WithSpecificDiagnosticOptions(supportedDiagnostics))
                     .WithAnalyzers(Rules);
 
@@ -69,20 +66,18 @@ public sealed class FrameworkViewCompiler : SonarDiagnosticAnalyzer
                 }
             });
 
-    Compilation CompileViews(Compilation compilation)
+    Compilation CompileViews(Compilation compilation, string rootDir)
     {
-        FilesToAnalyzeProvider filesProvider = new(Directory.GetFiles(ROOT_DIR, "*.*", SearchOption.AllDirectories));
-        var razorCompiler = new RazorCompiler(ROOT_DIR, filesProvider);
+        FilesToAnalyzeProvider filesProvider = new(Directory.GetFiles(rootDir, "*.*", SearchOption.AllDirectories));
+        var razorCompiler = new RazorCompiler(rootDir, filesProvider);
         var dummyCompilation = compilation;
 
-        foreach (var razorDocument in razorCompiler.CompileAll().Where(x => x.Source.FilePath.Contains("Contact")))
+        var documents = razorCompiler.CompileAll();
+        foreach (var razorDocument in documents.Where(x => x.Source.FilePath.Contains("Contact")))
         {
             if (razorDocument.GetCSharpDocument()?.GeneratedCode is { } csharpCode)
             {
-                var fp = dummyCompilation.SyntaxTrees.FirstOrDefault(x => x.FilePath.Contains("Contact")).FilePath;
-
-                var razorTree = CSharpSyntaxTree.ParseText(csharpCode, new CSharpParseOptions(compilation.GetLanguageVersion()))
-                    .WithFilePath(fp);
+                var razorTree = CSharpSyntaxTree.ParseText(csharpCode, new CSharpParseOptions(compilation.GetLanguageVersion()));
                 dummyCompilation = dummyCompilation.AddSyntaxTrees(razorTree);
             }
         }
