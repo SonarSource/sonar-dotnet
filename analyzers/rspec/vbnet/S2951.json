@@ -1,5 +1,5 @@
 {
-  "title": "VB.Net: \"Exit Select\" statements should not be used redundantly",
+  "title": "\"Exit Select\" statements should not be used redundantly",
   "type": "CODE_SMELL",
   "code": {
     "impacts": {
