@@ -52,8 +52,8 @@ public static class SourceGeneratorProvider
         return Directory.GetDirectories(sdkDirectory, $"{objectAssembly.GetName().Version.Major}.*", SearchOption.TopDirectoryOnly)
             .OrderByDescending(x => Version.Parse(new DirectoryInfo(x).Name))
             .FirstOrDefault() is { } latestSdkDirectory
-            ? latestSdkDirectory
-            : throw new DirectoryNotFoundException($"SDK directory not found for version {objectAssembly.GetName().Version.Major}");
+                ? latestSdkDirectory
+                : throw new DirectoryNotFoundException($"SDK directory not found for version {objectAssembly.GetName().Version.Major}");
     }
 
     private sealed class AssemblyLoader : IAnalyzerAssemblyLoader
