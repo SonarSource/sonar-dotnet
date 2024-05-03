@@ -93,5 +93,13 @@ public class UseAwaitableMethodTest
         .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqlServer(EntityFrameworkVersion))
         .AddPaths("UseAwaitableMethod_EF.cs")
         .Verify();
+
+    [TestMethod]
+    public void UseAwaitableMethod_MongoDb() =>
+        builder
+        .WithOptions(ParseOptionsHelper.FromCSharp11)
+        .AddReferences(NuGetMetadataReference.MongoDBDriver())
+        .AddPaths("UseAwaitableMethod_MongoDBDriver.cs")
+        .Verify();
 #endif
 }
