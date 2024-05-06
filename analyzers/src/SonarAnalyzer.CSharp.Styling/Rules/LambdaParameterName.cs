@@ -44,7 +44,7 @@ public sealed class LambdaParameterName : StylingAnalyzer
             TypeKind: TypeKind.Delegate,
             DelegateInvokeMethod.Parameters: { Length: 1 } parameters
         } delegateType
-    && !IsFuncOrAction(delegateType)
+        && !IsFuncOrAction(delegateType)
         && parameters[0] is { Name: { } parameterName }
         && parameterName == lambda.Parameter.Identifier.ValueText;
 
