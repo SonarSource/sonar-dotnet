@@ -42,6 +42,7 @@ public class Program
         logger.Log(LogLevel.Warning, "First " + "Second " + "Third");           // Compliant - all strings in the concatenation are constants, the compiler can optimize it
         logger.Log(LogLevel.Warning, FieldConstant + localConstant);            // Compliant
         logger.Log(LogLevel.Warning, FieldConstant + "Second");                 // Compliant
+        logger.Log(LogLevel.Warning, $"Constant: {FieldConstant}");             // Noncompliant FP Repro https://github.com/SonarSource/sonar-dotnet/issues/9247
         logger.Log(LogLevel.Warning, "First " + arg + "Third");                 // Noncompliant
         logger.Log(LogLevel.Warning, ("First " + "Second").ToLower());          // FN
 
