@@ -45,13 +45,7 @@ namespace SonarAnalyzer.Test.Rules
                 .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, "ProjectPath", rootProjectPath, true, analysisConfigPath))
                 .AddReferences(AspNet4xReferences("5.2.7"))
                 .AddSnippet("""
-                            public class Thingy
-                            {
-                                void DoWork()
-                                {
-                                    var uselessInNormalFile = 42;   // Noncompliant
-                                }
-                            }
+                            public class Thingy {}
                             """,
                     "Thingy.cs")
                 .Verify();

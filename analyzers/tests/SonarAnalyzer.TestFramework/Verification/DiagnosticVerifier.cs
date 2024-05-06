@@ -46,10 +46,21 @@ public static class DiagnosticVerifier
         SuppressionHandler.HookSuppression();
         try
         {
+            var diagnostics = DiagnosticsAndErrors(compilation, analyzers, checkMode, additionalFilePath, onlyDiagnostics).ToArray();
+
+            var externalFilePaths = diagnostics
+                .Where(x => x.Location.Kind == LocationKind.ExternalFile)
+                .Select(x => x.Location.GetLineSpan().Path)
+                .Where(x => !string.IsNullOrWhiteSpace(x))
+                .Distinct()
+                .Select(x => new FileContent(x))
+                .ToList();
+
             var sources = compilation.SyntaxTrees.ExceptRazorGeneratedFiles()
                 .Select(x => new FileContent(x))
-                .Concat((additionalSourceFiles ?? Array.Empty<string>()).Select(x => new FileContent(x)));
-            var diagnostics = DiagnosticsAndErrors(compilation, analyzers, checkMode, additionalFilePath, onlyDiagnostics).ToArray();
+                .Concat((additionalSourceFiles ?? Array.Empty<string>()).Select(x => new FileContent(x)))
+                .Concat(externalFilePaths);
+
             var expected = new CompilationIssues(sources);
             VerifyNoExceptionThrown(diagnostics);
             Compare(compilation.LanguageVersionString(), new(diagnostics), expected);

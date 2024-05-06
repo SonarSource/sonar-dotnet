@@ -120,8 +120,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contact.cshtml" />
-    <!--OR-->
     <Content Include="Contact.cshtml" />
   </ItemGroup>
   <PropertyGroup>

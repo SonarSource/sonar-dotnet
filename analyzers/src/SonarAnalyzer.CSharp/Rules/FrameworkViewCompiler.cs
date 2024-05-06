@@ -57,14 +57,12 @@ public sealed class FrameworkViewCompiler : SonarDiagnosticAnalyzer
 
                 var dummy = CompileViews(c.Compilation, root)
                     .WithOptions(c.Compilation.Options.WithSpecificDiagnosticOptions(supportedDiagnostics))
-                    .WithAnalyzers(Rules);
+                    .WithAnalyzers(Rules, c.Options);
 
-                var diagnostics = dummy.GetAllDiagnosticsAsync().Result;
-                using var fs = new FileStream(Path.Combine(projectConfiguration.OutPath, "razor-issues.json"), FileMode.Create);
-                using var sarifLogger = new SarifV1ErrorLogger(fs, "AutoScan.NET", "1.0.0.0", typeof(FrameworkViewCompiler).Assembly.GetName().Version, CultureInfo.InvariantCulture);
-                foreach (var diagnostic in diagnostics.Where(x => supportedDiagnostics.Keys.Contains(x.Id)))
+                var diagnostics = dummy.GetAnalyzerDiagnosticsAsync().Result;
+                foreach (var diagnostic in diagnostics)
                 {
-                    sarifLogger.LogDiagnostic(diagnostic);
+                    c.ReportIssue(diagnostic);
                 }
             });
 
@@ -75,15 +73,17 @@ public sealed class FrameworkViewCompiler : SonarDiagnosticAnalyzer
         var dummyCompilation = compilation;
 
         var documents = razorCompiler.CompileAll();
-        foreach (var razorDocument in documents.Where(x => x.Source.FilePath.Contains("Contact")))
+        foreach (var razorDocument in documents)
         {
             if (razorDocument.GetCSharpDocument()?.GeneratedCode is { } csharpCode)
             {
-                var razorTree = CSharpSyntaxTree.ParseText(csharpCode, new CSharpParseOptions(compilation.GetLanguageVersion()));
+                var razorTree = CSharpSyntaxTree.ParseText(
+                    csharpCode,
+                    new CSharpParseOptions(compilation.GetLanguageVersion()),
+                    path: "x.cshtml.g.cs"); // TODO: Give unique names to all the files, e.g. 0.cshtml.g.cs, 1.cshtml.g.cs, etc.
                 dummyCompilation = dummyCompilation.AddSyntaxTrees(razorTree);
             }
         }
-
         return dummyCompilation;
     }
 }
@@ -123,9 +123,12 @@ internal static class RuleFinder2
         {
             types = types.Concat(UtilityAnalyzerTypes.Where(x => TargetLanguage(x) == language));
         }
-        foreach (var type in types.Where(x => x == typeof(VariableUnused))) // TODO: Remove ".Where(x => x == typeof(VariableUnused))" and see error. Locally it breaks for me with StackOverflow, at a compiled Regex.
+
+        // EXCLUDE ourselves, or FrameworkViewCompiler will try to instantiate itself indefinitely, until StackOverflowException.
+        types = types.Where(x => x != typeof(FrameworkViewCompiler));
+        foreach (var type in types.Where(x => !IsParameterized(x)))
         {
-            yield return typeof(HotspotDiagnosticAnalyzer).IsAssignableFrom(type) && type.GetConstructor(new[] { typeof(IAnalyzerConfiguration) }) != null
+            yield return typeof(HotspotDiagnosticAnalyzer).IsAssignableFrom(type) && type.GetConstructor([typeof(IAnalyzerConfiguration)]) is not null
                 ? (DiagnosticAnalyzer)Activator.CreateInstance(type, AnalyzerConfiguration.AlwaysEnabled)
                 : (DiagnosticAnalyzer)Activator.CreateInstance(type);
         }
@@ -335,43 +338,3 @@ internal sealed class RazorCompiler
 }
 #endregion
 
-#region sarif export
-
-public sealed class SarifV1ErrorLogger : IDisposable
-{
-    private static readonly ConstructorInfo SarifV1ErrorLoggerConstructor;
-    private static readonly MethodInfo LogDiagnosticMethod;
-    private static readonly MethodInfo DisposeMethod;
-
-    private readonly object instance;
-
-    static SarifV1ErrorLogger()
-    {
-        if (typeof(SemanticModel).Assembly.GetType("Microsoft.CodeAnalysis.SarifV1ErrorLogger") is { } type)
-        {
-            SarifV1ErrorLoggerConstructor = type.GetConstructor([typeof(Stream), typeof(string), typeof(string), typeof(Version), typeof(CultureInfo)]);
-            LogDiagnosticMethod = type.GetMethod(nameof(LogDiagnostic));
-            DisposeMethod = type.GetMethod(nameof(Dispose));
-        }
-        else
-        {
-            throw new InvalidOperationException("SarifV1ErrorLogger is not available under this version of Roslyn compiler.");
-        }
-    }
-
-    public SarifV1ErrorLogger(Stream stream, string toolName, string toolFileVersion, Version toolAssemblyVersion, CultureInfo culture) =>
-        instance = SarifV1ErrorLoggerConstructor.Invoke([stream, toolName, toolFileVersion, toolAssemblyVersion, culture]);
-
-    public void LogDiagnostic(Diagnostic diagnostic)
-    {
-        if (!diagnostic.Descriptor.Category.Equals("Compiler"))
-        {
-            LogDiagnosticMethod.Invoke(instance, [diagnostic, null /* SuppressionInfo suppressionInfo */]);
-        }
-    }
-
-    public void Dispose() =>
-        DisposeMethod.Invoke(instance, []);
-}
-
-#endregion

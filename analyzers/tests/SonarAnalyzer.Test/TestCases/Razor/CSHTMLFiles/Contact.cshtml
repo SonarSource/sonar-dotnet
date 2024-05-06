@@ -1,6 +1,11 @@
 ﻿@{
-    var uselessInView = 42;
+    var uselessInView = 42; // Noncompliant
+
+    void DoWorkView() // Noncompliant
+    {
+        DoWorkView();
+    }
 }
 
-<main> 
+<main>
 </main>
