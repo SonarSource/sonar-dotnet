@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 public class Sample
@@ -94,4 +95,30 @@ public class RuleRegistration
     public class SometingAnalysisContext { }
     public class SometingReportingContext { }
     public class SonarSometingContext { }
+}
+
+public class CustomDelegates
+{
+    public delegate void ParameterNamedI(int i);
+    public delegate void ParameterNamedTest(int test);
+    public delegate void ParameterNamedRegistrationContext(int registrationContext);
+
+    public void Test()
+    {
+        ParameterNamedI delegate1 = i => { }; // Compliant "i" matches the parameter name of the delegate
+        ParameterNamedI delegate2 = j => { }; // Noncompliant
+
+        ParameterNamedTest delegate3 = test => { };     // Compliant
+        ParameterNamedTest delegate4 = someTest => { }; // Noncompliant
+        ParameterNamedTest delegate5 = testSome => { }; // Noncompliant
+
+        ParameterNamedRegistrationContext delegate6 = registrationContext => { }; // Compliant
+        ParameterNamedRegistrationContext delegate7 = registrationcontext => { }; // Noncompliant
+        ParameterNamedRegistrationContext delegate8 = registration => { };        // Noncompliant
+        ParameterNamedRegistrationContext delegate9 = context => { };             // Noncompliant
+
+        Func<int, int> function = arg => 0;  // Noncompliant, the delegate parameter is named "arg" (https://learn.microsoft.com/en-us/dotnet/api/system.func-2) but we do not allow that for Func<T, TResult>
+        Action<int> action = obj => { };     // Noncompliant, the delegate parameter is named "obj" (https://learn.microsoft.com/en-us/dotnet/api/system.action-1) but we do not allow that for Func<T, TResult>
+        new List<int>().Exists(obj => true); // Compliant. List.Exists uses System.Predicate<T> instead of System.Func<T, bool>
+    }
 }
