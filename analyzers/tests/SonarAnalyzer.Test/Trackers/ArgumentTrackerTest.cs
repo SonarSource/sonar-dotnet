@@ -79,7 +79,7 @@ public class ArgumentTrackerTest
             """;
         var context = ArgumentContextVB(snippet);
 
-        var descriptor = ArgumentDescriptor.MethodInvocation(m => m.Name == "M", (s, c) => s.Equals("M", c), p => p.Name == parameterName, _ => true, null);
+        var descriptor = ArgumentDescriptor.MethodInvocation(x => x.Name == "M", (s, c) => s.Equals("M", c), x => x.Name == parameterName, _ => true, null);
         var result = MatchArgumentVB(context, descriptor);
         result.Should().Be(expected);
     }
@@ -295,7 +295,7 @@ public class ArgumentTrackerTest
             """;
         var context = ArgumentContextCS(snippet);
 
-        var descriptor = ArgumentDescriptor.MethodInvocation(m => true, (m, c) => m.Equals("M", c), p => p.Name == "parameter", _ => true, null);
+        var descriptor = ArgumentDescriptor.MethodInvocation(_ => true, (m, c) => m.Equals("M", c), x => x.Name == "parameter", _ => true, null);
         var result = MatchArgumentCS(context, descriptor);
         result.Should().Be(expected);
     }
@@ -354,7 +354,7 @@ public class ArgumentTrackerTest
             """;
         var context = ArgumentContextVB(snippet);
 
-        var descriptor = ArgumentDescriptor.MethodInvocation(m => true, (m, c) => m.Equals("M", c), p => p.Name == "parameter", _ => true, null);
+        var descriptor = ArgumentDescriptor.MethodInvocation(_ => true, (m, c) => m.Equals("M", c), x => x.Name == "parameter", _ => true, null);
         var result = MatchArgumentVB(context, descriptor);
         result.Should().Be(expected);
     }
@@ -485,7 +485,7 @@ public class ArgumentTrackerTest
             """;
         var context = ArgumentContextCS(WrapInMethodCS(snippet));
 
-        var descriptor = ArgumentDescriptor.MethodInvocation(KnownType.System_String, "Format", parameterName, i => i >= 1);
+        var descriptor = ArgumentDescriptor.MethodInvocation(KnownType.System_String, "Format", parameterName, x => x >= 1);
         var result = MatchArgumentCS(context, descriptor);
         result.Should().BeTrue();
     }
@@ -505,7 +505,7 @@ public class ArgumentTrackerTest
             """;
         var context = ArgumentContextVB(WrapInMethodVB(snippet));
 
-        var descriptor = ArgumentDescriptor.MethodInvocation(KnownType.System_String, "Format", parameterName, i => i >= 1);
+        var descriptor = ArgumentDescriptor.MethodInvocation(KnownType.System_String, "Format", parameterName, x => x >= 1);
         var result = MatchArgumentVB(context, descriptor);
         result.Should().BeTrue();
     }
@@ -815,7 +815,7 @@ public class ArgumentTrackerTest
         var descriptor = ArgumentDescriptor.ConstructorInvocation(invokedMethodSymbol: x => x is { MethodKind: MethodKind.Constructor, ContainingSymbol.Name: "C" },
                                                                   invokedMemberNameConstraint: (c, n) => c.Equals("C", n) || c.Equals("CAlias"),
                                                                   invokedMemberNodeConstraint: (_, _, _) => true,
-                                                                  parameterConstraint: p => p.Name is "i" or "j",
+                                                                  parameterConstraint: x => x.Name is "i" or "j",
                                                                   argumentListConstraint: (n, i) => i is null or 0 or 1 && n.Count > 1,
                                                                   refKind: null);
         var result = MatchArgumentCS(context, descriptor);
@@ -837,7 +837,7 @@ public class ArgumentTrackerTest
         var descriptor = ArgumentDescriptor.ConstructorInvocation(invokedMethodSymbol: x => x is { MethodKind: MethodKind.Constructor, ContainingSymbol.Name: "Base" },
                                                                   invokedMemberNameConstraint: (c, n) => c.Equals("Base", n),
                                                                   invokedMemberNodeConstraint: (_, _, _) => true,
-                                                                  parameterConstraint: p => p.Name is "i",
+                                                                  parameterConstraint: x => x.Name is "i",
                                                                   argumentListConstraint: (_, _) => true,
                                                                   refKind: null);
         var result = MatchArgumentCS(context, descriptor);
@@ -862,7 +862,7 @@ public class ArgumentTrackerTest
         var descriptor = ArgumentDescriptor.ConstructorInvocation(invokedMethodSymbol: x => x is { MethodKind: MethodKind.Constructor, ContainingSymbol.Name: "Base" },
                                                                   invokedMemberNameConstraint: (c, n) => c.Equals("Base", n),
                                                                   invokedMemberNodeConstraint: (_, _, _) => true,
-                                                                  parameterConstraint: p => p.Name is "i",
+                                                                  parameterConstraint: x => x.Name is "i",
                                                                   argumentListConstraint: (_, _) => true,
                                                                   refKind: null);
         var result = MatchArgumentCS(context, descriptor);
@@ -919,7 +919,7 @@ public class ArgumentTrackerTest
         var context = ArgumentContextCS(WrapInMethodCS(snippet));
 
         var descriptor = ArgumentDescriptor.ElementAccess(KnownType.System_Collections_Generic_List_T, "list",
-            p => p is { Name: "index", Type.SpecialType: SpecialType.System_Int32, ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.PropertyGet } }, 0);
+            x => x is { Name: "index", Type.SpecialType: SpecialType.System_Int32, ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.PropertyGet } }, 0);
         var result = MatchArgumentCS(context, descriptor);
         result.Should().BeTrue();
         context.Parameter.Name.Should().Be("index");
@@ -938,7 +938,7 @@ public class ArgumentTrackerTest
         var context = ArgumentContextVB(WrapInMethodVB(snippet));
 
         var descriptor = ArgumentDescriptor.ElementAccess(KnownType.System_Collections_Generic_List_T, "list",
-            p => p is { Name: "index", Type.SpecialType: SpecialType.System_Int32, ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.PropertyGet } }, 0);
+            x => x is { Name: "index", Type.SpecialType: SpecialType.System_Int32, ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.PropertyGet } }, 0);
         var result = MatchArgumentVB(context, descriptor);
         result.Should().BeTrue();
         context.Parameter.Name.Should().Be("index");
@@ -961,7 +961,7 @@ public class ArgumentTrackerTest
         var context = ArgumentContextCS(WrapInMethodCS(snippet));
 
         var descriptor = ArgumentDescriptor.ElementAccess(KnownType.System_Collections_Generic_List_T,
-            p => p is { Name: "index", ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.PropertySet } }, 0);
+            x => x is { Name: "index", ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.PropertySet } }, 0);
         var result = MatchArgumentCS(context, descriptor);
         result.Should().BeTrue();
         context.Parameter.ContainingSymbol.Should().BeAssignableTo<IMethodSymbol>().Which.MethodKind.Should().Be(MethodKind.PropertySet);
@@ -980,7 +980,7 @@ public class ArgumentTrackerTest
         var context = ArgumentContextVB(WrapInMethodVB(snippet));
 
         var descriptor = ArgumentDescriptor.ElementAccess(KnownType.System_Collections_Generic_List_T,
-            p => p is { Name: "index", ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.PropertySet } }, 0);
+            x => x is { Name: "index", ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.PropertySet } }, 0);
         var result = MatchArgumentVB(context, descriptor);
         result.Should().BeTrue();
         context.Parameter.ContainingSymbol.Should().BeAssignableTo<IMethodSymbol>().Which.MethodKind.Should().Be(MethodKind.PropertySet);
@@ -996,8 +996,8 @@ public class ArgumentTrackerTest
             """;
         var context = ArgumentContextCS(WrapInMethodCS(snippet));
 
-        var descriptor = ArgumentDescriptor.ElementAccess(m => m is { MethodKind: MethodKind.PropertyGet, ContainingType.Name: "IDictionary" },
-            (n, c) => n.Equals("GetEnvironmentVariables", c), (_, _, _) => true, p => p.Name == "key", (_, p) => p is null or 0);
+        var descriptor = ArgumentDescriptor.ElementAccess(x => x is { MethodKind: MethodKind.PropertyGet, ContainingType.Name: "IDictionary" },
+            (n, c) => n.Equals("GetEnvironmentVariables", c), (_, _, _) => true, x => x.Name == "key", (_, p) => p is null or 0);
         var result = MatchArgumentCS(context, descriptor);
         result.Should().BeTrue();
     }
@@ -1010,8 +1010,8 @@ public class ArgumentTrackerTest
             """;
         var context = ArgumentContextVB(WrapInMethodVB(snippet));
 
-        var descriptor = ArgumentDescriptor.ElementAccess(m => m is { MethodKind: MethodKind.PropertyGet, ContainingType.Name: "IDictionary" },
-            (n, c) => n.Equals("GetEnvironmentVariables", c), (_, _, _) => true, p => p.Name == "key", (_, p) => p is null or 0);
+        var descriptor = ArgumentDescriptor.ElementAccess(x => x is { MethodKind: MethodKind.PropertyGet, ContainingType.Name: "IDictionary" },
+            (n, c) => n.Equals("GetEnvironmentVariables", c), (_, _, _) => true, x => x.Name == "key", (_, p) => p is null or 0);
         var result = MatchArgumentVB(context, descriptor);
         result.Should().BeTrue();
     }
@@ -1043,10 +1043,10 @@ public class ArgumentTrackerTest
         var context = ArgumentContextCS(snippet);
 
         var descriptor = ArgumentDescriptor.ElementAccess(
-            m => m is { MethodKind: var kind, ContainingType.Name: "C" } && (isGetter ? kind == MethodKind.PropertyGet : kind == MethodKind.PropertySet),
+            x => x is { MethodKind: var kind, ContainingType.Name: "C" } && (isGetter ? kind == MethodKind.PropertyGet : kind == MethodKind.PropertySet),
             (_, _) => true,
             (_, _, _) => true,
-            p => p.Name == parameterName,
+            x => x.Name == parameterName,
             (_, _) => true);
         var result = MatchArgumentCS(context, descriptor);
         result.Should().BeTrue();
@@ -1081,10 +1081,10 @@ public class ArgumentTrackerTest
         var context = ArgumentContextVB(snippet);
 
         var descriptor = ArgumentDescriptor.ElementAccess(
-            m => m is { MethodKind: var kind, ContainingType.Name: "C" } && (isGetter ? kind == MethodKind.PropertyGet : kind == MethodKind.PropertySet),
+            x => x is { MethodKind: var kind, ContainingType.Name: "C" } && (isGetter ? kind == MethodKind.PropertyGet : kind == MethodKind.PropertySet),
             (_, _) => true,
             (_, _, _) => true,
-            p => p.Name == parameterName,
+            x => x.Name == parameterName,
             (_, _) => true);
         var result = MatchArgumentVB(context, descriptor);
         result.Should().BeTrue();
@@ -1110,10 +1110,10 @@ public class ArgumentTrackerTest
             """;
         var context = ArgumentContextCS(snippet);
 
-        var descriptor = ArgumentDescriptor.ElementAccess(m => m is { MethodKind: MethodKind.PropertyGet, ContainingType.Name: "ProcessModuleCollection" },
+        var descriptor = ArgumentDescriptor.ElementAccess(x => x is { MethodKind: MethodKind.PropertyGet, ContainingType.Name: "ProcessModuleCollection" },
             (n, c) => n.Equals("Modules", c),
             (_, _, _) => true,
-            p => p.Name == "index",
+            x => x.Name == "index",
             (_, p) => p is null or 0);
         var result = MatchArgumentCS(context, descriptor);
         result.Should().BeTrue();
@@ -1139,7 +1139,7 @@ public class ArgumentTrackerTest
             """;
         var context = ArgumentContextCS(snippet);
 
-        var descriptor = ArgumentDescriptor.ElementAccess(KnownType.System_Collections_Generic_IDictionary_TKey_TValue, "Environment", p => p.Name == "key", 0);
+        var descriptor = ArgumentDescriptor.ElementAccess(KnownType.System_Collections_Generic_IDictionary_TKey_TValue, "Environment", x => x.Name == "key", 0);
         var result = MatchArgumentCS(context, descriptor);
         result.Should().BeTrue();
     }
@@ -1164,7 +1164,7 @@ public class ArgumentTrackerTest
         var descriptor = ArgumentDescriptor.AttributeArgument(x => x is { MethodKind: MethodKind.Constructor, ContainingType.Name: "ObsoleteAttribute" },
             (s, c) => s.StartsWith("Obsolete", c),
             (_, _, _) => true,
-            p => p.Name == "message",
+            x => x.Name == "message",
             (_, i) => i is 0);
         var result = MatchArgumentCS(context, descriptor);
         result.Should().BeTrue();
@@ -1187,7 +1187,7 @@ public class ArgumentTrackerTest
         var descriptor = ArgumentDescriptor.AttributeArgument(x => x is { MethodKind: MethodKind.Constructor, ContainingType.Name: "ObsoleteAttribute" },
             (s, c) => s.StartsWith("Obsolete", c),
             (_, _, _) => true,
-            p => p.Name == "message",
+            x => x.Name == "message",
             (_, i) => i is 0);
         var result = MatchArgumentVB(context, descriptor);
         result.Should().BeTrue();

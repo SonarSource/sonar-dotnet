@@ -18,14 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
-{
-    public abstract class TrackerBase<TSyntaxKind, TContext>
-        where TSyntaxKind : struct
-        where TContext : BaseContext
-    {
-        public delegate bool Condition(TContext trackingContext);
+namespace SonarAnalyzer.Helpers;
 
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-    }
+public abstract class TrackerBase<TSyntaxKind, TContext>
+    where TSyntaxKind : struct
+    where TContext : BaseContext
+{
+    protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+
+    public delegate bool Condition(TContext trackingContext);
 }

@@ -59,17 +59,17 @@ public class ArgumentDescriptor
         MethodInvocation(invokedType, methodName, parameterName, x => x == argumentPosition);
 
     public static ArgumentDescriptor MethodInvocation(KnownType invokedType, string methodName, string parameterName, Func<int, bool> argumentPosition) =>
-        MethodInvocation(invokedType, methodName, p => p.Name == parameterName, argumentPosition, null);
+        MethodInvocation(invokedType, methodName, x => x.Name == parameterName, argumentPosition, null);
 
     public static ArgumentDescriptor MethodInvocation(KnownType invokedType, string methodName, string parameterName, Func<int, bool> argumentPosition, RefKind refKind) =>
-        MethodInvocation(invokedType, methodName, p => p.Name == parameterName, argumentPosition, refKind);
+        MethodInvocation(invokedType, methodName, x => x.Name == parameterName, argumentPosition, refKind);
 
     public static ArgumentDescriptor MethodInvocation(KnownType invokedType,
                                                       Func<string, StringComparison, bool> invokedMemberNameConstraint,
                                                       Func<IParameterSymbol, bool> parameterConstraint,
                                                       Func<int, bool> argumentPosition,
                                                       RefKind? refKind) =>
-        MethodInvocation(s => invokedType.Matches(s.ContainingType), invokedMemberNameConstraint, parameterConstraint, argumentPosition, refKind);
+        MethodInvocation(x => invokedType.Matches(x.ContainingType), invokedMemberNameConstraint, parameterConstraint, argumentPosition, refKind);
 
     public static ArgumentDescriptor MethodInvocation(Func<IMethodSymbol, bool> invokedMemberConstraint,
                                                       Func<string, StringComparison, bool> invokedMemberNameConstraint,
@@ -153,7 +153,7 @@ public class ArgumentDescriptor
             x => x is { MethodKind: MethodKind.Constructor, ContainingType.Name: { } name } && AttributeClassNameConstraint(attributeName, name, StringComparison.Ordinal),
             (x, c) => AttributeClassNameConstraint(attributeName, x, c),
             (_, _, _) => true,
-            p => p.Name == parameterName,
+            x => x.Name == parameterName,
             (_, i) => i is null || i.Value == argumentPosition);
 
     public static ArgumentDescriptor AttributeArgument(Func<IMethodSymbol, bool> attributeConstructorConstraint,

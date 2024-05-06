@@ -33,17 +33,17 @@ public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKi
         new(context);
 
     public Condition MatchArgument(ArgumentDescriptor descriptor) =>
-        context =>
+        trackingContext =>
         {
-            if (context.Node is { } argumentNode
+            if (trackingContext.Node is { } argumentNode
                 && argumentNode is { Parent.Parent: { } invoked }
-                && SyntacticChecks(context.SemanticModel, descriptor, argumentNode, invoked)
-                && (descriptor.InvokedMemberNodeConstraint?.Invoke(context.SemanticModel, Language, invoked) ?? true)
-                && MethodSymbol(context.SemanticModel, invoked) is { } methodSymbol
+                && SyntacticChecks(trackingContext.SemanticModel, descriptor, argumentNode, invoked)
+                && (descriptor.InvokedMemberNodeConstraint?.Invoke(trackingContext.SemanticModel, Language, invoked) ?? true)
+                && MethodSymbol(trackingContext.SemanticModel, invoked) is { } methodSymbol
                 && Language.MethodParameterLookup(invoked, methodSymbol).TryGetSymbol(argumentNode, out var parameter)
                 && ParameterMatches(parameter, descriptor.ParameterConstraint, descriptor.InvokedMemberConstraint))
             {
-                context.Parameter = parameter;
+                trackingContext.Parameter = parameter;
                 return true;
             }
             return false;
@@ -63,9 +63,9 @@ public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKi
     private bool SyntacticChecks(SemanticModel model, ArgumentDescriptor descriptor, SyntaxNode argumentNode, SyntaxNode invokedExpression) =>
         InvocationMatchesMemberKind(invokedExpression, descriptor.MemberKind)
         && RefKindMatches(descriptor, argumentNode)
-        && (descriptor.ArgumentListConstraint == null
+        && (descriptor.ArgumentListConstraint is null
             || (ArgumentList(argumentNode) is { } argList && descriptor.ArgumentListConstraint(argList, Position(argumentNode))))
-        && (descriptor.InvokedMemberNameConstraint == null
+        && (descriptor.InvokedMemberNameConstraint is null
             || InvokedMemberMatches(model, invokedExpression, descriptor.MemberKind, x => descriptor.InvokedMemberNameConstraint(x, Language.NameComparison)));
 
     private bool RefKindMatches(ArgumentDescriptor descriptor, SyntaxNode argumentNode) =>
@@ -89,7 +89,7 @@ public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKi
                     return true;
                 }
             }
-            while ((method = method.OverriddenMethod) != null);
+            while ((method = method.OverriddenMethod) is not null);
         }
         return false;
     }

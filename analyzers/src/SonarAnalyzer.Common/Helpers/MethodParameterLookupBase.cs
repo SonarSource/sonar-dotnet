@@ -22,11 +22,11 @@ namespace SonarAnalyzer.Helpers;
 
 public interface IMethodParameterLookup
 {
+    IMethodSymbol MethodSymbol { get; }
     bool TryGetSymbol(SyntaxNode argument, out IParameterSymbol parameter);
     bool TryGetSyntax(IParameterSymbol parameter, out ImmutableArray<SyntaxNode> expressions);
     bool TryGetSyntax(string parameterName, out ImmutableArray<SyntaxNode> expressions);
     bool TryGetNonParamsSyntax(IParameterSymbol parameter, out SyntaxNode expression);
-    IMethodSymbol MethodSymbol { get; }
 }
 
 // This should come from the Roslyn API (https://github.com/dotnet/roslyn/issues/9)
@@ -64,7 +64,7 @@ internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodPara
         var arg = argument as TArgumentSyntax ?? throw new ArgumentException($"{nameof(argument)} must be of type {typeof(TArgumentSyntax)}", nameof(argument));
 
         if (!argumentList.Contains(arg)
-            || methodSymbol == null
+            || methodSymbol is null
             || methodSymbol.IsVararg)
         {
             return false;
@@ -72,8 +72,8 @@ internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodPara
 
         if (GetNameColonIdentifier(arg) is { } nameColonIdentifier)
         {
-            parameter = methodSymbol.Parameters.FirstOrDefault(symbol => symbol.Name == nameColonIdentifier.ValueText);
-            return parameter != null;
+            parameter = methodSymbol.Parameters.FirstOrDefault(x => x.Name == nameColonIdentifier.ValueText);
+            return parameter is not null;
         }
 
         if (GetNameEqualsIdentifier(arg) is { } nameEqualsIdentifier
@@ -83,7 +83,7 @@ internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodPara
             && setter.Parameters is { Length: 1 } parameters)
         {
             parameter = parameters[0];
-            return parameter != null;
+            return parameter is not null;
         }
 
         var index = argumentList.IndexOf(arg);
@@ -91,7 +91,7 @@ internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodPara
         {
             var lastParameter = methodSymbol.Parameters.Last();
             parameter = lastParameter.IsParams ? lastParameter : null;
-            return parameter != null;
+            return parameter is not null;
         }
         parameter = methodSymbol.Parameters[index];
         return true;
