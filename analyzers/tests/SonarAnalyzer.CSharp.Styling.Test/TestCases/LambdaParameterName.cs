@@ -107,15 +107,16 @@ public class CustomDelegates
     {
         ParameterNamedI delegate1 = i => { }; // Compliant "i" matches the parameter name of the delegate
         ParameterNamedI delegate2 = j => { }; // Noncompliant
+        ParameterNamedI delegate3 = x => { }; // Compliant
 
-        ParameterNamedTest delegate3 = test => { };     // Compliant
-        ParameterNamedTest delegate4 = someTest => { }; // Noncompliant
-        ParameterNamedTest delegate5 = testSome => { }; // Noncompliant
+        ParameterNamedTest delegate4 = test => { };     // Compliant
+        ParameterNamedTest delegate5 = someTest => { }; // Noncompliant
+        ParameterNamedTest delegate6 = testSome => { }; // Noncompliant
 
-        ParameterNamedRegistrationContext delegate6 = registrationContext => { }; // Compliant
-        ParameterNamedRegistrationContext delegate7 = registrationcontext => { }; // Noncompliant
-        ParameterNamedRegistrationContext delegate8 = registration => { };        // Noncompliant
-        ParameterNamedRegistrationContext delegate9 = context => { };             // Noncompliant
+        ParameterNamedRegistrationContext delegate7 = registrationContext => { }; // Compliant
+        ParameterNamedRegistrationContext delegate8 = registrationcontext => { }; // Noncompliant
+        ParameterNamedRegistrationContext delegate9 = registration => { };        // Noncompliant
+        ParameterNamedRegistrationContext delegate10 = context => { };             // Noncompliant
 
         Func<int, int> function = arg => 0;  // Noncompliant, the delegate parameter is named "arg" (https://learn.microsoft.com/en-us/dotnet/api/system.func-2) but we do not allow that for Func<T, TResult>
         Action<int> action = obj => { };     // Noncompliant, the delegate parameter is named "obj" (https://learn.microsoft.com/en-us/dotnet/api/system.action-1) but we do not allow that for Func<T, TResult>
