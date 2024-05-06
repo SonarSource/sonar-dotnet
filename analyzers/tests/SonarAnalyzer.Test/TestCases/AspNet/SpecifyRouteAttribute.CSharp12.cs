@@ -227,3 +227,24 @@ public class SomeController : ControllerBase // Noncompliant, FP the route attri
     [HttpGet("foo")]
     public string Foo() => "Hi";            // Secondary
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9252
+namespace AbstractControllerClass
+{
+    public abstract class BaseController : Controller   // Compliant - class is abstract
+    {
+        [HttpGet]
+        [Route("list")]
+        public IActionResult List()
+        {
+            // ... load and return items
+            return View();
+        }
+    }
+
+    [Route("/api/user")]
+    public sealed class UserController : BaseController
+    {
+        // other controller code
+    }
+}
