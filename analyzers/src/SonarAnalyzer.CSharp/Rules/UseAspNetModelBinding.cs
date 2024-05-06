@@ -158,14 +158,14 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
                 parameterConstraint: IsGetterParameter, // Headers are read/write
                 argumentPosition: 0),
             ArgumentDescriptor.MethodInvocation(// Request.Headers.TryGetValue("id", out _)
-                invokedMethodSymbol: x => IsIDictionaryStringStringValuesInvocation(x, "TryGetValue"), // TryGetValue is from IDictionary<TKey, TValue> here. We check the type arguments.
+                invokedMemberConstraint: x => IsIDictionaryStringStringValuesInvocation(x, "TryGetValue"), // TryGetValue is from IDictionary<TKey, TValue> here. We check the type arguments.
                 invokedMemberNameConstraint: (name, comparison) => string.Equals(name, "TryGetValue", comparison),
                 invokedMemberNodeConstraint: IsAccessedViaHeaderDictionary,
                 parameterConstraint: x => string.Equals(x.Name, "key", StringComparison.Ordinal),
                 argumentListConstraint: (list, position) => list.Count == 2 && position is 0 or null,
                 refKind: RefKind.None),
             ArgumentDescriptor.MethodInvocation(// Request.Headers.ContainsKey("id")
-                invokedMethodSymbol: x => IsIDictionaryStringStringValuesInvocation(x, "ContainsKey"),
+                invokedMemberConstraint: x => IsIDictionaryStringStringValuesInvocation(x, "ContainsKey"),
                 invokedMemberNameConstraint: (name, comparison) => string.Equals(name, "ContainsKey", comparison),
                 invokedMemberNodeConstraint: IsAccessedViaHeaderDictionary,
                 parameterConstraint: x => string.Equals(x.Name, "key", StringComparison.Ordinal),
