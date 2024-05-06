@@ -89,6 +89,7 @@ public static class SyntaxNodeExtensionsVisualBasic
             EnumMemberDeclarationSyntax x => x.Identifier,
             InvocationExpressionSyntax x => x.Expression?.GetIdentifier(),
             ModifiedIdentifierSyntax x => x.Identifier,
+            ObjectCreationExpressionSyntax x => x.Type?.GetIdentifier(),
             PredefinedTypeSyntax x => x.Keyword,
             ParameterSyntax x => x.Identifier?.GetIdentifier(),
             PropertyStatementSyntax x => x.Identifier,
@@ -104,6 +105,7 @@ public static class SyntaxNodeExtensionsVisualBasic
     public static ArgumentListSyntax ArgumentList(this SyntaxNode node) =>
         node switch
         {
+            ArgumentListSyntax argumentList => argumentList,
             ArrayCreationExpressionSyntax arrayCreation => arrayCreation.ArrayBounds,
             AttributeSyntax attribute => attribute.ArgumentList,
             InvocationExpressionSyntax invocation => invocation.ArgumentList,
