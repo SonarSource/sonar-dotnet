@@ -74,34 +74,34 @@ public class RuleRegistration
         RegisterSonarWhateverAnalysisContext(context => { });
         RegisterSonarWhateverAnalysisContext(whateverContext => { });
         RegisterSonarWhateverReportingContext(c => { });
-        RegisterSonarSometing(c => { });                // Noncompliant, wrong suffix
-        RegisterSometingAnalysisContext(c => { });      // Noncompliant, wrong prefix
-        RegisterSometingReportingContext(c => { });     // Noncompliant, wrong prefix
-        RegisterSonarSometingContext(c => { });         // Noncompliant, wrong suffix
+        RegisterSonarSomething(c => { });                // Noncompliant, wrong suffix
+        RegisterSomethingAnalysisContext(c => { });      // Noncompliant, wrong prefix
+        RegisterSomethingReportingContext(c => { });     // Noncompliant, wrong prefix
+        RegisterSonarSomethingContext(c => { });         // Noncompliant, wrong suffix
     }
 
     protected void RegisterSonarWhateverAnalysisContext(Action<SonarWhateverAnalysisContext> action) { }
     protected void RegisterSonarWhateverReportingContext(Action<SonarWhateverReportingContext> action) { }
-    protected void RegisterSonarSometing(Action<SonarSometing> action) { }
-    protected void RegisterSometingAnalysisContext(Action<SometingAnalysisContext> action) { }
-    protected void RegisterSometingReportingContext(Action<SometingReportingContext> action) { }
-    protected void RegisterSonarSometingContext(Action<SonarSometingContext> action) { }
+    protected void RegisterSonarSomething(Action<SonarSomething> action) { }
+    protected void RegisterSomethingAnalysisContext(Action<SomethingAnalysisContext> action) { }
+    protected void RegisterSomethingReportingContext(Action<SomethingReportingContext> action) { }
+    protected void RegisterSonarSomethingContext(Action<SonarSomethingContext> action) { }
 
     // Well-known expected classes patterns
     public class SonarWhateverAnalysisContext { }
     public class SonarWhateverReportingContext { }
     // Unexpected types
-    public class SonarSometing { }
-    public class SometingAnalysisContext { }
-    public class SometingReportingContext { }
-    public class SonarSometingContext { }
+    public class SonarSomething { }
+    public class SomethingAnalysisContext { }
+    public class SomethingReportingContext { }
+    public class SonarSomethingContext { }
 }
 
 public class CustomDelegates
 {
     public delegate void ParameterNamedI(int i);
     public delegate void ParameterNamedTest(int test);
-    public delegate void ParameterNamedRegistrationContext(int registrationContext);
+    public delegate void ParameterNamedCamelCasing(int camelCasing);
 
     public void Test()
     {
@@ -113,13 +113,13 @@ public class CustomDelegates
         ParameterNamedTest delegate5 = someTest => { }; // Noncompliant
         ParameterNamedTest delegate6 = testSome => { }; // Noncompliant
 
-        ParameterNamedRegistrationContext delegate7 = registrationContext => { }; // Compliant
-        ParameterNamedRegistrationContext delegate8 = registrationcontext => { }; // Noncompliant
-        ParameterNamedRegistrationContext delegate9 = registration => { };        // Noncompliant
-        ParameterNamedRegistrationContext delegate10 = context => { };             // Noncompliant
+        ParameterNamedCamelCasing delegate7 = camelCasing => { }; // Compliant
+        ParameterNamedCamelCasing delegate8 = camelcasing => { }; // Noncompliant
+        ParameterNamedCamelCasing delegate9 = camel => { };     // Noncompliant
+        ParameterNamedCamelCasing delegate10 = casing => { };    // Noncompliant
 
         Func<int, int> function = arg => 0;  // Noncompliant, the delegate parameter is named "arg" (https://learn.microsoft.com/en-us/dotnet/api/system.func-2) but we do not allow that for Func<T, TResult>
-        Action<int> action = obj => { };     // Noncompliant, the delegate parameter is named "obj" (https://learn.microsoft.com/en-us/dotnet/api/system.action-1) but we do not allow that for Func<T, TResult>
+        Action<int> action = obj => { };     // Noncompliant, the delegate parameter is named "obj" (https://learn.microsoft.com/en-us/dotnet/api/system.action-1) but we do not allow that for Action<T>
         new List<int>().Exists(obj => true); // Compliant. List.Exists uses System.Predicate<T> instead of System.Func<T, bool>
     }
 }
