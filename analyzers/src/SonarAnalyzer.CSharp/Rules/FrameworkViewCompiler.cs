@@ -38,6 +38,7 @@ public sealed class FrameworkViewCompiler : SonarDiagnosticAnalyzer
         "S3904",    // AssemblyVersion attribute
         "S3990",    // CLSCompliant attribute
         "S3992",    // ComVisible attribute
+        "S1451",     // Add or update the header
 
         // TODO: Check these as they are disabled for razor already
         //"S103",
@@ -144,7 +145,7 @@ internal static class RuleFinder2
 
         // EXCLUDE ourselves, or FrameworkViewCompiler will try to instantiate itself indefinitely, until StackOverflowException.
         types = types.Where(x => x != typeof(FrameworkViewCompiler));
-        foreach (var type in types.Where(x => !IsParameterized(x)))
+        foreach (var type in types)
         {
             yield return typeof(HotspotDiagnosticAnalyzer).IsAssignableFrom(type) && type.GetConstructor([typeof(IAnalyzerConfiguration)]) is not null
                 ? (DiagnosticAnalyzer)Activator.CreateInstance(type, AnalyzerConfiguration.AlwaysEnabled)
