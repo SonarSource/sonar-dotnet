@@ -1,0 +1,16 @@
+﻿@{
+    var uselessInView2 = 42; // Noncompliant
+    // Noncompliant @-1
+
+    int Factorial(int n, int uselessInView3 = 0) // Noncompliant
+    {
+        if (n == 0)
+        {
+            return 1;
+        }
+        return n * Factorial(n - 1);
+    }
+}
+
+<main>
+</main>

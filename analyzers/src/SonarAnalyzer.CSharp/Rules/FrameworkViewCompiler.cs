@@ -92,6 +92,9 @@ public sealed class FrameworkViewCompiler : SonarDiagnosticAnalyzer
         var dummyCompilation = compilation;
 
         var documents = razorCompiler.CompileAll();
+        var razorTrees = new List<SyntaxTree>();
+
+        var i = 0;
         foreach (var razorDocument in documents)
         {
             if (razorDocument.GetCSharpDocument()?.GeneratedCode is { } csharpCode)
@@ -99,10 +102,11 @@ public sealed class FrameworkViewCompiler : SonarDiagnosticAnalyzer
                 var razorTree = CSharpSyntaxTree.ParseText(
                     csharpCode,
                     new CSharpParseOptions(compilation.GetLanguageVersion()),
-                    path: "x.cshtml.g.cs"); // TODO: Give unique names to all the files, e.g. 0.cshtml.g.cs, 1.cshtml.g.cs, etc.
-                dummyCompilation = dummyCompilation.AddSyntaxTrees(razorTree);
+                    path: $"x_{i++}.cshtml.g.cs");
+                razorTrees.Add(razorTree);
             }
         }
+        dummyCompilation = dummyCompilation.AddSyntaxTrees(razorTrees);
         return dummyCompilation;
     }
 }
