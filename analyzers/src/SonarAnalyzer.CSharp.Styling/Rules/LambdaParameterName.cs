@@ -23,7 +23,7 @@ namespace SonarAnalyzer.Rules.CSharp.Styling;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class LambdaParameterName : StylingAnalyzer
 {
-    public LambdaParameterName() : base("T0010", "Use 'x' for the lambda parameter name.") { }
+    public LambdaParameterName() : base("T0010", "Use 'x' or '_' for the lambda parameter name.") { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
