@@ -30,11 +30,8 @@ public static class SourceGeneratorProvider
 
     public static AnalyzerFileReference[] SourceGenerators { get; } =
     [
-        new(CheckAndReturnRazorSourceGeneratorPath(), new AssemblyLoader())
+        new(RazorSourceGeneratorPath, new AssemblyLoader())
     ];
-
-    public static string CheckAndReturnRazorSourceGeneratorPath() =>
-        File.Exists(RazorSourceGeneratorPath) ? RazorSourceGeneratorPath : throw new FileNotFoundException($"Razor sourcegenerator not found: {RazorSourceGeneratorPath}");
 
     public static string LatestSdkFolder()
     {
