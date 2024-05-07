@@ -430,7 +430,7 @@ public partial class SonarAnalysisContextTest
             .AddAnalyzer(() => new DummyAnalyzerWithLocation(ruleId, DiagnosticDescriptorFactory.MainSourceScopeTag))
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .AddSnippet(Snippet(extension), $"SomeFile.{extension}")
-            .VerifyNoIssueReported();
+            .VerifyNoIssues();
 
     [DataTestMethod]
     [DataRow("razor")]
@@ -440,7 +440,7 @@ public partial class SonarAnalysisContextTest
             .AddAnalyzer(() => new DummyAnalyzerWithLocation("DummyId", DiagnosticDescriptorFactory.TestSourceScopeTag))
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Test))
             .AddSnippet(Snippet(extension), $"SomeFile.{extension}")
-            .VerifyNoIssueReported();
+            .VerifyNoIssues();
 
     [DataTestMethod]
     [DataRow("razor")]
@@ -472,7 +472,7 @@ public partial class SonarAnalysisContextTest
         new VerifierBuilder()
             .AddAnalyzer(() => new DummyAnalyzerCS())
             .AddSnippet(@"<p>Some Html</p>", $"SomeFile.{extension}")
-            .VerifyNoIssueReported();
+            .VerifyNoIssues();
 
     private static string Snippet(string extension)
     {

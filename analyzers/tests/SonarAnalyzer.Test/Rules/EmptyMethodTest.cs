@@ -111,7 +111,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_CS() =>
-            builderCS.AddPaths("EmptyMethod.OverrideVirtual.cs").AddTestReference().VerifyNoIssueReported();
+            builderCS.AddPaths("EmptyMethod.OverrideVirtual.cs").AddTestReference().VerifyNoIssues();
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_RaisesIssueForMainProject_VB() =>
@@ -119,6 +119,6 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void EmptyMethod_WithVirtualOverride_DoesNotRaiseIssuesForTestProject_VB() =>
-            builderVB.AddPaths("EmptyMethod.OverrideVirtual.vb").AddTestReference().VerifyNoIssueReported();
+            builderVB.AddPaths("EmptyMethod.OverrideVirtual.vb").AddTestReference().VerifyNoIssues();
     }
 }

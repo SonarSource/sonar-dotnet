@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void MemberInitializerRedundant_RoslynCfg_FlowCaptureOperationNotSupported() =>
-            builder.AddPaths(@"MemberInitializerRedundant.RoslynCfg.FlowCaptureBug.cs").WithOptions(ParseOptionsHelper.FromCSharp8).VerifyNoIssueReported();
+            builder.AddPaths(@"MemberInitializerRedundant.RoslynCfg.FlowCaptureBug.cs").WithOptions(ParseOptionsHelper.FromCSharp8).VerifyNoIssues();
 
         [TestMethod]
         public void MemberInitializerRedundant_SonarCfg() =>

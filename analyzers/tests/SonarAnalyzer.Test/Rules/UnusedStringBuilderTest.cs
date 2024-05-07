@@ -72,7 +72,7 @@ public class UnusedStringBuilderTest
         var builder = builderCS.AddSnippet(code).WithTopLevelStatements();
         if (compliant)
         {
-            builder.VerifyNoIssueReported();
+            builder.VerifyNoIssues();
         }
         else
         {
@@ -121,7 +121,7 @@ public class UnusedStringBuilderTest
         var builder = builderCS.AddSnippet(code);
         if (compliant)
         {
-            builder.VerifyNoIssueReported();
+            builder.VerifyNoIssues();
         }
         else
         {
@@ -169,7 +169,7 @@ public class UnusedStringBuilderTest
         var builder = builderVB.AddSnippet(code);
         if (compliant)
         {
-            builder.VerifyNoIssueReported();
+            builder.VerifyNoIssues();
         }
         else
         {

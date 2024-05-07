@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void MethodParameterUnused_CSharp7_CS() =>
-            roslynCS.AddPaths("MethodParameterUnused.CSharp7.cs").WithOptions(ParseOptionsHelper.FromCSharp7).AddReferences(NuGetMetadataReference.SystemValueTuple("4.5.0")).VerifyNoIssueReported();
+            roslynCS.AddPaths("MethodParameterUnused.CSharp7.cs").WithOptions(ParseOptionsHelper.FromCSharp7).AddReferences(NuGetMetadataReference.SystemValueTuple("4.5.0")).VerifyNoIssues();
 
         [TestMethod]
         public void MethodParameterUnused_CSharp8_CS() =>

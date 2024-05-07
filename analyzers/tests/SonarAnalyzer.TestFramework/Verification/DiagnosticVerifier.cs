@@ -65,12 +65,19 @@ public static class DiagnosticVerifier
         }
     }
 
-    public static void VerifyNoIssueReported(Compilation compilation,
-                                             DiagnosticAnalyzer analyzer,
-                                             CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-                                             string additionalFilePath = null,
-                                             string[] onlyDiagnostics = null) =>
-        AnalyzerDiagnostics(compilation, analyzer, checkMode, additionalFilePath, onlyDiagnostics).Should().NotContain(x => x.Id == AD0001 || x.Severity != DiagnosticSeverity.Error);
+    public static void VerifyNoIssues(Compilation compilation,
+                                      DiagnosticAnalyzer analyzer,
+                                      CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+                                      string additionalFilePath = null,
+                                      string[] onlyDiagnostics = null) =>
+        AnalyzerDiagnostics(compilation, analyzer, checkMode, additionalFilePath, onlyDiagnostics).Should().BeEmpty();
+
+    public static void VerifyNoIssuesIgnoreErrors(Compilation compilation,
+                                                  DiagnosticAnalyzer analyzer,
+                                                  CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+                                                  string additionalFilePath = null,
+                                                  string[] onlyDiagnostics = null) =>
+        AnalyzerDiagnostics(compilation, analyzer, checkMode, additionalFilePath, onlyDiagnostics).Should().NotContain(x => x.Severity != DiagnosticSeverity.Error);
 
     public static IEnumerable<Diagnostic> AnalyzerDiagnostics(Compilation compilation, DiagnosticAnalyzer analyzer, CompilationErrorBehavior checkMode, string additionalFilePath = null, string[] onlyDiagnostics = null) =>
         AnalyzerDiagnostics(compilation, new[] { analyzer }, checkMode, additionalFilePath, onlyDiagnostics);

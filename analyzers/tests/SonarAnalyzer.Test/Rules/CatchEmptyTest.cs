@@ -33,6 +33,6 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void CatchEmpty_InTest() =>
-            builder.AddPaths("CatchEmpty.cs").AddTestReference().VerifyNoIssueReported();
+            builder.AddPaths("CatchEmpty.cs").AddTestReference().VerifyNoIssues();
     }
 }

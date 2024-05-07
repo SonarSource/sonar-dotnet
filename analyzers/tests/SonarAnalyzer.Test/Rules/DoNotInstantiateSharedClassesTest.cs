@@ -21,32 +21,31 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class DoNotInstantiateSharedClassesTest
 {
-    [TestClass]
-    public class DoNotInstantiateSharedClassesTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.DoNotInstantiateSharedClasses>().AddReferences(MetadataReferenceFacade.SystemComponentModelComposition);
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.DoNotInstantiateSharedClasses>().AddReferences(MetadataReferenceFacade.SystemComponentModelComposition);
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.DoNotInstantiateSharedClasses>().AddReferences(MetadataReferenceFacade.SystemComponentModelComposition);
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.DoNotInstantiateSharedClasses>().AddReferences(MetadataReferenceFacade.SystemComponentModelComposition);
 
-        [TestMethod]
-        public void DoNotInstantiateSharedClasses_CS() =>
-            builderCS.AddPaths("DoNotInstantiateSharedClasses.cs").Verify();
+    [TestMethod]
+    public void DoNotInstantiateSharedClasses_CS() =>
+        builderCS.AddPaths("DoNotInstantiateSharedClasses.cs").Verify();
 
-        [TestMethod]
-        public void DoNotInstantiateSharedClasses_CS_InTest() =>
-            builderCS.AddPaths("DoNotInstantiateSharedClasses.cs")
-                .AddTestReference()
-                .VerifyNoIssueReported();
+    [TestMethod]
+    public void DoNotInstantiateSharedClasses_CS_InTest() =>
+        builderCS.AddPaths("DoNotInstantiateSharedClasses.cs")
+            .AddTestReference()
+            .VerifyNoIssuesIgnoreErrors();
 
-        [TestMethod]
-        public void DoNotInstantiateSharedClasses_VB() =>
-            builderVB.AddPaths("DoNotInstantiateSharedClasses.vb").Verify();
+    [TestMethod]
+    public void DoNotInstantiateSharedClasses_VB() =>
+        builderVB.AddPaths("DoNotInstantiateSharedClasses.vb").Verify();
 
-        [TestMethod]
-        public void DoNotInstantiateSharedClasses_VB_InTest() =>
-            builderVB.AddPaths("DoNotInstantiateSharedClasses.vb")
-                .AddTestReference()
-                .VerifyNoIssueReported();
-    }
+    [TestMethod]
+    public void DoNotInstantiateSharedClasses_VB_InTest() =>
+        builderVB.AddPaths("DoNotInstantiateSharedClasses.vb")
+            .AddTestReference()
+            .VerifyNoIssuesIgnoreErrors();
 }

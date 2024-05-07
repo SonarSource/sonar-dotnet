@@ -79,19 +79,19 @@ public class RestrictDeserializedTypesTest
         sonar.AddPaths("RestrictDeserializedTypes.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .AddTestReference()
-            .VerifyNoIssueReported();
+            .VerifyNoIssues();
 
     [TestMethod]
     public void RestrictDeserializedTypes_DoesNotRaiseIssuesForTestProject_Roslyn_CS() =>
         roslynCS.AddPaths("RestrictDeserializedTypes.cs")
             .AddTestReference()
-            .VerifyNoIssueReported();
+            .VerifyNoIssues();
 
     [TestMethod]
     public void RestrictDeserializedTypes_DoesNotRaiseIssuesForTestProject_Roslyn_VB() =>
         roslynVB.AddPaths("RestrictDeserializedTypes.vb")
             .AddTestReference()
-            .VerifyNoIssueReported();
+            .VerifyNoIssues();
 
     [TestMethod]
     public void RestrictDeserializedTypesJavaScriptSerializer_Sonar() =>

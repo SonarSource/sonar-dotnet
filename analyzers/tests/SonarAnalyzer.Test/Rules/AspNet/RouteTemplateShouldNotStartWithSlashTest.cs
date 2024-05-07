@@ -78,7 +78,7 @@ public class RouteTemplateShouldNotStartWithSlashTest
 
         if (compliant)
         {
-            builder.VerifyNoIssueReported();
+            builder.VerifyNoIssues();
         }
         else
         {
@@ -146,7 +146,7 @@ public class RouteTemplateShouldNotStartWithSlashTest
 
         if (compliant)
         {
-            builder.VerifyNoIssueReported();
+            builder.VerifyNoIssues();
         }
         else
         {
@@ -197,7 +197,7 @@ public class RouteTemplateShouldNotStartWithSlashTest
             .Verify();
 
     [DataRow("/Index2", false)]
-    [DataRow("\\Index2", true)]
+    [DataRow(@"\Index2", true)]
     [DataRow("Index1/SubPath", true)]
     [DataTestMethod]
     public void RouteTemplateShouldNotStartWithSlash_WithHttpAttribute(string attributeParameter, bool compliant)
@@ -209,14 +209,14 @@ public class RouteTemplateShouldNotStartWithSlashTest
             public class BasicsController : Controller {{(compliant ? string.Empty : " // Noncompliant")}}
             {
                 [HttpGet]
-                [Route("{{attributeParameter}}")] {{(compliant ? string.Empty : " // Secondary")}}
+                [Route(@"{{attributeParameter}}")] {{(compliant ? string.Empty : " // Secondary")}}
                 public ActionResult SomeAction() => View();
             }
             """);
 
         if (compliant)
         {
-            builder.VerifyNoIssueReported();
+            builder.VerifyNoIssues();
         }
         else
         {
@@ -278,7 +278,7 @@ public class RouteTemplateShouldNotStartWithSlashTest
 
         if (compliant)
         {
-            builder.VerifyNoIssueReported();
+            builder.VerifyNoIssues();
         }
         else
         {

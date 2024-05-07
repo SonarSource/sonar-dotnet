@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Test.Rules
         public void SqlKeywordsDelimitedBySpace_DefaultNamespace() =>
             Builder.AddPaths("SqlKeywordsDelimitedBySpace_DefaultNamespace.cs")
                 .AddTestReference()
-                .VerifyNoIssueReported();
+                .VerifyNoIssues();
 
 #if NET
 

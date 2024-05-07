@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Test.Rules
             builderCS.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs")
                 .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
                 .WithErrorBehavior(CompilationErrorBehavior.Ignore)
-                .VerifyNoIssueReported();
+                .VerifyNoIssues();
 
         [DataTestMethod]
         [DataRow("1.1.11")]
@@ -79,6 +79,6 @@ namespace SonarAnalyzer.Test.Rules
             builderVB.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.NUnit.vb")
                 .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
                 .WithErrorBehavior(CompilationErrorBehavior.Ignore)
-                .VerifyNoIssueReported();
+                .VerifyNoIssues();
     }
 }

@@ -99,7 +99,7 @@ public class AnalysisWarningAnalyzerTest
             LanguageNames.VisualBasic => new TestAnalysisWarningAnalyzer_VB(isAnalyzerEnabled, vs2017MajorVersion, minimalSupportedRoslynVersion, projectOutPath),
             _ => throw new UnexpectedLanguageException(language)
         };
-        new VerifierBuilder().AddAnalyzer(() => analyzer).AddSnippet(string.Empty).VerifyNoIssueReported(); // Nothing to analyze, just make it run
+        new VerifierBuilder().AddAnalyzer(() => analyzer).AddSnippet(string.Empty).VerifyNoIssues(); // Nothing to analyze, just make it run
         return Path.Combine(analysisOutPath, "AnalysisWarnings.MsBuild.json");
     }
 

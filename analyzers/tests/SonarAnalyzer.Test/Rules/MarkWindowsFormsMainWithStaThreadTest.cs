@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_CS() =>
             builderCS
-                .AddPaths(@"MarkWindowsFormsMainWithStaThread.cs")
+                .AddPaths("MarkWindowsFormsMainWithStaThread.cs")
                 .WithOutputKind(OutputKind.WindowsApplication)
                 .AddReferences(MetadataReferenceFacade.SystemWindowsForms)
                 .Verify();
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_VB() =>
             builderVB
-                .AddPaths(@"MarkWindowsFormsMainWithStaThread.vb")
+                .AddPaths("MarkWindowsFormsMainWithStaThread.vb")
                 .WithOutputKind(OutputKind.WindowsApplication)
                 .AddReferences(MetadataReferenceFacade.SystemWindowsForms)
                 .Verify();
@@ -48,31 +48,31 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_ClassLibrary_CS() =>
             builderCS
-                .AddPaths(@"MarkWindowsFormsMainWithStaThread.cs")
+                .AddPaths("MarkWindowsFormsMainWithStaThread.cs")
                 .WithErrorBehavior(CompilationErrorBehavior.Ignore)
                 .WithOutputKind(OutputKind.DynamicallyLinkedLibrary)
                 .AddReferences(MetadataReferenceFacade.SystemWindowsForms)
-                .VerifyNoIssueReported();
+                .VerifyNoIssues();
 
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_ClassLibrary_VB() =>
             builderVB
-                .AddPaths(@"MarkWindowsFormsMainWithStaThread.vb")
+                .AddPaths("MarkWindowsFormsMainWithStaThread.vb")
                 .WithOutputKind(OutputKind.DynamicallyLinkedLibrary)
                 .AddReferences(MetadataReferenceFacade.SystemWindowsForms)
-                .VerifyNoIssueReported();
+                .VerifyNoIssuesIgnoreErrors();
 
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_CS_NoWindowsForms() =>
             builderCS
-                .AddPaths(@"MarkWindowsFormsMainWithStaThread_NoWindowsForms.cs")
+                .AddPaths("MarkWindowsFormsMainWithStaThread_NoWindowsForms.cs")
                 .WithOutputKind(OutputKind.WindowsApplication)
                 .Verify();
 
         [TestMethod]
         public void MarkWindowsFormsMainWithStaThread_VB_NoWindowsForms() =>
             builderVB
-                .AddPaths(@"MarkWindowsFormsMainWithStaThread_NoWindowsForms.vb")
+                .AddPaths("MarkWindowsFormsMainWithStaThread_NoWindowsForms.vb")
                 .WithErrorBehavior(CompilationErrorBehavior.Ignore)
                 .WithOutputKind(OutputKind.WindowsApplication)
                 .Verify();

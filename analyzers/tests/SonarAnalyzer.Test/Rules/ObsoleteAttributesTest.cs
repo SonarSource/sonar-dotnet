@@ -97,9 +97,9 @@ public class ObsoleteAttributesTest
     [DataRow("int this[int i] => 1;")]         // Indexer
     public void RemoveObsoleteCode_AttributeTargetTest_CS(string attributeTargetDeclaration)
     {
-        removeCS.AddSnippet(WrapInTestCode(string.Empty)).VerifyNoIssueReported();
+        removeCS.AddSnippet(WrapInTestCode(string.Empty)).VerifyNoIssues();
         removeCS.AddSnippet(WrapInTestCode("[Obsolete] // Noncompliant")).Verify();
-        removeCS.AddSnippet(WrapInTestCode("[Custom]")).VerifyNoIssueReported();
+        removeCS.AddSnippet(WrapInTestCode("[Custom]")).VerifyNoIssues();
         removeCS.AddSnippet(WrapInTestCode("""
             [Obsolete] // Noncompliant
             [Custom]
@@ -162,9 +162,9 @@ public class ObsoleteAttributesTest
         """)]                                    // Indexer
     public void RemoveObsoleteCode_AttributeTargetTest_VB(string attributeTargetDeclaration)
     {
-        removeVB.AddSnippet(WrapInTestCode(string.Empty)).VerifyNoIssueReported();
+        removeVB.AddSnippet(WrapInTestCode(string.Empty)).VerifyNoIssues();
         removeVB.AddSnippet(WrapInTestCode("<Obsolete> ' Noncompliant")).Verify();
-        removeVB.AddSnippet(WrapInTestCode("<Custom>")).VerifyNoIssueReported();
+        removeVB.AddSnippet(WrapInTestCode("<Custom>")).VerifyNoIssues();
         removeVB.AddSnippet(WrapInTestCode("""
             <Obsolete> ' Noncompliant
             <Custom>

@@ -66,13 +66,13 @@ namespace SonarAnalyzer.Test.Rules
             sonar.AddPaths("InitializationVectorShouldBeRandom.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .AddTestReference()
-                .VerifyNoIssueReported();
+                .VerifyNoIssuesIgnoreErrors();
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_DoesNotRaiseIssuesForTestProject_Roslyn_CS() =>
             roslynCS.AddPaths("InitializationVectorShouldBeRandom.cs")
                 .AddTestReference()
-                .VerifyNoIssueReported();
+                .VerifyNoIssuesIgnoreErrors();
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_Roslyn_CSharp8() =>

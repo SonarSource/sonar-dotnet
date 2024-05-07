@@ -473,7 +473,7 @@ public partial class SonarAnalysisContextBaseTest
             LanguageNames.VisualBasic => builder.WithLanguageVersion(Microsoft.CodeAnalysis.VisualBasic.LanguageVersion.Latest),
             _ => throw new UnexpectedLanguageException(language)
         };
-        builder.VerifyNoIssueReported();
+        builder.VerifyNoIssues();
     }
 
     private sealed class DummySourceText : SourceText

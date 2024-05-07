@@ -83,7 +83,7 @@ i++;")
     public void MethodsShouldNotHaveTooManyLines_DoesntReportInTest_CS() =>
         new VerifierBuilder<CS.MethodsShouldNotHaveTooManyLines>().AddPaths("MethodsShouldNotHaveTooManyLines_DefaultValues.cs")
         .AddTestReference()
-        .VerifyNoIssueReported();
+        .VerifyNoIssues();
 
     [TestMethod]
     public void MethodsShouldNotHaveTooManyLines_InvalidSyntax_CS() =>
@@ -124,7 +124,7 @@ public class Foo
     public void MethodsShouldNotHaveTooManyLines_DoesntReportInTest_VB() =>
         new VerifierBuilder<VB.MethodsShouldNotHaveTooManyLines>().AddPaths("MethodsShouldNotHaveTooManyLines_DefaultValues.vb")
         .AddTestReference()
-        .VerifyNoIssueReported();
+        .VerifyNoIssues();
 
     [DataTestMethod]
     [DataRow(1)]

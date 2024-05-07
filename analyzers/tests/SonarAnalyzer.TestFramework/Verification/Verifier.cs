@@ -108,13 +108,24 @@ internal class Verifier
         }
     }
 
-    public void VerifyNoIssueReported()    // This should never have any arguments
+    public void VerifyNoIssues()    // This should never have any arguments
     {
         foreach (var compilation in Compile(builder.ConcurrentAnalysis))
         {
             foreach (var analyzer in analyzers)
             {
-                DiagnosticVerifier.VerifyNoIssueReported(compilation.Compilation, analyzer, builder.ErrorBehavior, builder.AdditionalFilePath, onlyDiagnosticIds);
+                DiagnosticVerifier.VerifyNoIssues(compilation.Compilation, analyzer, builder.ErrorBehavior, builder.AdditionalFilePath, onlyDiagnosticIds);
+            }
+        }
+    }
+
+    public void VerifyNoIssuesIgnoreErrors()    // This should never have any arguments
+    {
+        foreach (var compilation in Compile(builder.ConcurrentAnalysis))
+        {
+            foreach (var analyzer in analyzers)
+            {
+                DiagnosticVerifier.VerifyNoIssuesIgnoreErrors(compilation.Compilation, analyzer, builder.ErrorBehavior, builder.AdditionalFilePath, onlyDiagnosticIds);
             }
         }
     }

@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Test.Rules
         public void BinaryOperationWithIdenticalExpressions_TestProject_CS() =>
             builderCS.AddPaths("BinaryOperationWithIdenticalExpressions.cs")
                 .AddTestReference()
-                .VerifyNoIssueReported();
+                .VerifyNoIssues();
 
         [TestMethod]
         public void BinaryOperationWithIdenticalExpressions_VB() =>
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Test.Rules
         public void BinaryOperationWithIdenticalExpressions_TestProject_VB() =>
             builderVB.AddPaths("BinaryOperationWithIdenticalExpressions.vb")
                 .AddTestReference()
-                .VerifyNoIssueReported();
+                .VerifyNoIssues();
 
 #if NET
 
