@@ -44,9 +44,7 @@ namespace SonarAnalyzer.Test.Rules
             new VerifierBuilder<CS.FrameworkViewCompiler>()
                 .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, "ProjectPath", rootProjectPath, true, analysisConfigPath))
                 .AddReferences(AspNet4xReferences("5.2.7"))
-                .AddSnippet("""
-                            public class Thingy {}
-                            """,
+                .AddSnippet(string.Empty,
                     "Thingy.cs")
                 .Verify();
         }

@@ -41,7 +41,7 @@ internal static class SyntaxTreeExtensions
         (bool)GeneratedCodeCache.GetValue(tree, tree => generatedCodeRecognizer.IsGenerated(tree));
 
     public static bool IsConsideredGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, bool isRazorAnalysisEnabled) =>
-        true // TODO: Find a way to enable razor analysis for the framework cshtml views
+        isRazorAnalysisEnabled
             ? IsGenerated(tree, generatedCodeRecognizer) && !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
             : IsGenerated(tree, generatedCodeRecognizer);
 

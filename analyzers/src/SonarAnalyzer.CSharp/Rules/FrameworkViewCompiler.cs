@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -34,6 +33,22 @@ namespace SonarAnalyzer.Rules.CSharp;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class FrameworkViewCompiler : SonarDiagnosticAnalyzer
 {
+    private readonly HashSet<string> BadBoys = new HashSet<string>()
+    {
+        "S3904",    // AssemblyVersion attribute
+        "S3990",    // CLSCompliant attribute
+        "S3992",    // ComVisible attribute
+
+        // TODO: Check these as they are disabled for razor already
+        //"S103",
+        //"S104",
+        //"S109",
+        //"S113",
+        //"S1147",
+        //"S1192",
+        //"S1451",
+    };
+
     private ImmutableArray<DiagnosticAnalyzer> Rules;
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
@@ -42,7 +57,10 @@ public sealed class FrameworkViewCompiler : SonarDiagnosticAnalyzer
 
     public FrameworkViewCompiler()
     {
-        Rules = RuleFinder2.CreateAnalyzers(AnalyzerLanguage.CSharp, false).ToImmutableArray();
+        Rules = RuleFinder2.CreateAnalyzers(AnalyzerLanguage.CSharp, false)
+            .Where(x => x.SupportedDiagnostics.All(d => !BadBoys.Contains(d.Id)))
+            .ToImmutableArray();
+
         SupportedDiagnostics = Rules.SelectMany(x => x.SupportedDiagnostics).ToImmutableArray();
     }
 
