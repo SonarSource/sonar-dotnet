@@ -68,13 +68,13 @@ public class HashesShouldHaveUnpredictableSaltTest
         sonar.AddPaths("HashesShouldHaveUnpredictableSalt.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .AddTestReference()
-            .VerifyNoIssueReported();
+            .VerifyNoIssues();
 
     [TestMethod]
     public void HashesShouldHaveUnpredictableSalt_Roslyn_DoesNotRaiseIssuesForTestProject() =>
         roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.cs")
             .AddTestReference()
-            .VerifyNoIssueReported();
+            .VerifyNoIssues();
 
     [TestMethod]
     public void HashesShouldHaveUnpredictableSalt_Roslyn_CSharp8() =>

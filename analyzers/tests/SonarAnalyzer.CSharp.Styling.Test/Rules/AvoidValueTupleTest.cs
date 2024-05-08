@@ -31,5 +31,5 @@ public class AvoidValueTupleTest
 
     [TestMethod]
     public void AvoidValueTuple_TestCode() =>
-        builder.AddTestReference().VerifyNoIssueReported();
+        builder.AddTestReference().VerifyNoIssues();
 }

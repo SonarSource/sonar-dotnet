@@ -206,7 +206,7 @@ public class VerifierTest
     public void Verify_RazorAnalysisIsDisabled_DoesNotRaise(string path) =>
         DummyWithLocation.AddPaths(path)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarLintXml(TestContext, analyzeRazorCode: false))
-            .VerifyNoIssueReported();
+            .VerifyNoIssues();
 
     [DataTestMethod]
     [DataRow("Dummy.razor")]
@@ -214,7 +214,7 @@ public class VerifierTest
     public void Verify_RazorAnalysisInSLAndNugetContext_DoesNotRaise(string path) =>
         DummyWithLocation.AddPaths(path)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Unknown))
-            .VerifyNoIssueReported();
+            .VerifyNoIssues();
 
     [TestMethod]
     public void Compile_Razor_DefaultFramework()
@@ -763,7 +763,7 @@ public class VerifierTest
 
     [TestMethod]
     public void VerifyNoIssueReported_NoIssues_Succeeds() =>
-        WithSnippetCS("// Noncompliant - this comment is ignored").Invoking(x => x.VerifyNoIssueReported()).Should().NotThrow();
+        WithSnippetCS("// Noncompliant - this comment is ignored").Invoking(x => x.VerifyNoIssues()).Should().NotThrow();
 
     [TestMethod]
     public void VerifyNoIssueReported_WithIssues_Throws() =>
@@ -772,7 +772,7 @@ public class VerifierTest
             {
                 private int a = 42;     // This will raise an issue
             }
-            """).Invoking(x => x.VerifyNoIssueReported()).Should().Throw<AssertFailedException>();
+            """).Invoking(x => x.VerifyNoIssues()).Should().Throw<AssertFailedException>();
 
     [TestMethod]
     public void Verify_ConcurrentAnalysis_FileEndingWithComment_CS() =>

@@ -42,5 +42,5 @@ public class ObjectCreatedDroppedTest
     public void ObjectCreatedDropped_InTest() =>
        builder.AddPaths("ObjectCreatedDropped.cs")
        .AddTestReference()
-       .VerifyNoIssueReported();
+       .VerifyNoIssues();
 }

@@ -23,106 +23,105 @@ using SonarAnalyzer.Test.PackagingTests;
 using SonarAnalyzer.Test.Rules;
 using SonarAnalyzer.Test.TestFramework;
 
-namespace SonarAnalyzer.Test.Common
+namespace SonarAnalyzer.Test.Common;
+
+[TestClass]
+public class SecurityHotspotTest
 {
-    [TestClass]
-    public class SecurityHotspotTest
+    [TestMethod]
+    public void SecurityHotspotRules_DoNotRaiseIssues_CS() =>
+        VerifyNoIssues(AnalyzerLanguage.CSharp, ParseOptionsHelper.FromCSharp9);
+
+    [TestMethod]
+    public void SecurityHotspotRules_DoNotRaiseIssues_VB() =>
+        VerifyNoIssues(AnalyzerLanguage.VisualBasic, ParseOptionsHelper.FromVisualBasic12);
+
+    private static void VerifyNoIssues(AnalyzerLanguage language, ImmutableArray<ParseOptions> parseOptions)
     {
-        [TestMethod]
-        public void SecurityHotspotRules_DoNotRaiseIssues_CS() =>
-            VerifyNoIssueReported(AnalyzerLanguage.CSharp, ParseOptionsHelper.FromCSharp9);
-
-        [TestMethod]
-        public void SecurityHotspotRules_DoNotRaiseIssues_VB() =>
-            VerifyNoIssueReported(AnalyzerLanguage.VisualBasic, ParseOptionsHelper.FromVisualBasic12);
-
-        private static void VerifyNoIssueReported(AnalyzerLanguage language, ImmutableArray<ParseOptions> parseOptions)
+        foreach (var analyzer in GetHotspotAnalyzers(language))
         {
-            foreach (var analyzer in GetHotspotAnalyzers(language))
-            {
-                var analyzerName = analyzer.GetType().Name;
+            var analyzerName = analyzer.GetType().Name;
 
 #if NETFRAMEWORK
 
-                if (analyzerName is nameof(DisablingCsrfProtection) || analyzerName is nameof(PermissiveCors))
-                {
-                    continue;
-                }
-#endif
-
-                new VerifierBuilder()
-                    .AddPaths(@$"Hotspots\{GetTestCaseFileName(analyzerName)}{language.FileExtension}")
-                    .AddAnalyzer(() => analyzer)
-                    .WithOptions(parseOptions)
-                    .AddReferences(GetAdditionalReferences(analyzerName))
-                    .WithConcurrentAnalysis(analyzerName is not nameof(ClearTextProtocolsAreSensitive))
-                    .VerifyNoIssueReported();
+            if (analyzerName is nameof(DisablingCsrfProtection) || analyzerName is nameof(PermissiveCors))
+            {
+                continue;
             }
-        }
-
-        private static IEnumerable<SonarDiagnosticAnalyzer> GetHotspotAnalyzers(AnalyzerLanguage language) =>
-            RuleFinder.GetAnalyzerTypes(language)
-                .Where(type => typeof(SonarDiagnosticAnalyzer).IsAssignableFrom(type))   // Avoid IRuleFactory and SE rules
-                .Select(type => (SonarDiagnosticAnalyzer)Activator.CreateInstance(type))
-                .Where(IsSecurityHotspot);
-
-        private static bool IsSecurityHotspot(DiagnosticAnalyzer analyzer) =>
-            analyzer.SupportedDiagnostics.Any(IsSecurityHotspot);
-
-        private static bool IsSecurityHotspot(DiagnosticDescriptor diagnostic)
-        {
-            var type = RuleTypeMappingCS.Rules.GetValueOrDefault(diagnostic.Id) ?? RuleTypeMappingVB.Rules.GetValueOrDefault(diagnostic.Id);
-            return type == "SECURITY_HOTSPOT";
-        }
-
-        private static string GetTestCaseFileName(string analyzerName) =>
-            analyzerName switch
-            {
-                "ConfiguringLoggers" => "ConfiguringLoggers_Log4Net",
-                "CookieShouldBeHttpOnly" => "CookieShouldBeHttpOnly_Nancy",
-                "CookieShouldBeSecure" => "CookieShouldBeSecure_Nancy",
-                "DoNotHardcodeCredentials" => "DoNotHardcodeCredentials.DefaultValues",
-                "DeliveringDebugFeaturesInProduction" => "DeliveringDebugFeaturesInProduction.NetCore2",
-#if NETFRAMEWORK
-                "ExecutingSqlQueries" => "ExecutingSqlQueries.Net46",
-                "UsingCookies" => "UsingCookies_Net46",
-                "LooseFilePermissions" => "LooseFilePermissions.Windows",
-#else
-                "ExecutingSqlQueries" => "ExecutingSqlQueries.EntityFrameworkCoreLatest",
-                "UsingCookies" => "UsingCookies_NetCore",
-                "LooseFilePermissions" => "LooseFilePermissions.Unix",
-                "PermissiveCors" => "PermissiveCors.Net",
 #endif
-                _ => analyzerName
-            };
 
-        private static IEnumerable<MetadataReference> GetAdditionalReferences(string analyzerName) =>
-            analyzerName switch
-            {
-                nameof(ClearTextProtocolsAreSensitive) => ClearTextProtocolsAreSensitiveTest.AdditionalReferences,
-                nameof(CookieShouldBeHttpOnly) => CookieShouldBeHttpOnlyTest.AdditionalReferences,
-                nameof(CookieShouldBeSecure) => CookieShouldBeSecureTest.AdditionalReferences,
-                nameof(ConfiguringLoggers) => ConfiguringLoggersTest.Log4NetReferences,
-                nameof(DeliveringDebugFeaturesInProduction) => DeliveringDebugFeaturesInProductionTest.AdditionalReferencesForAspNetCore2,
-                nameof(DisablingRequestValidation) => NuGetMetadataReference.MicrosoftAspNetMvc(Constants.NuGetLatestVersion),
-                nameof(DoNotHardcodeCredentials) => DoNotHardcodeCredentialsTest.AdditionalReferences,
-                nameof(DoNotUseRandom) => MetadataReferenceFacade.SystemSecurityCryptography,
-                nameof(ExpandingArchives) => ExpandingArchivesTest.AdditionalReferences,
-                nameof(RequestsWithExcessiveLength) => RequestsWithExcessiveLengthTest.GetAdditionalReferences(),
-                nameof(SpecifyTimeoutOnRegex) => MetadataReferenceFacade.RegularExpressions
-                    .Concat(NuGetMetadataReference.SystemComponentModelAnnotations()),
+            new VerifierBuilder()
+                .AddPaths(@$"Hotspots\{GetTestCaseFileName(analyzerName)}{language.FileExtension}")
+                .AddAnalyzer(() => analyzer)
+                .WithOptions(parseOptions)
+                .AddReferences(GetAdditionalReferences(analyzerName))
+                .WithConcurrentAnalysis(analyzerName is not nameof(ClearTextProtocolsAreSensitive))
+                .VerifyNoIssuesIgnoreErrors();
+        }
+    }
+
+    private static IEnumerable<SonarDiagnosticAnalyzer> GetHotspotAnalyzers(AnalyzerLanguage language) =>
+        RuleFinder.GetAnalyzerTypes(language)
+            .Where(type => typeof(SonarDiagnosticAnalyzer).IsAssignableFrom(type))   // Avoid IRuleFactory and SE rules
+            .Select(type => (SonarDiagnosticAnalyzer)Activator.CreateInstance(type))
+            .Where(IsSecurityHotspot);
+
+    private static bool IsSecurityHotspot(DiagnosticAnalyzer analyzer) =>
+        analyzer.SupportedDiagnostics.Any(IsSecurityHotspot);
+
+    private static bool IsSecurityHotspot(DiagnosticDescriptor diagnostic)
+    {
+        var type = RuleTypeMappingCS.Rules.GetValueOrDefault(diagnostic.Id) ?? RuleTypeMappingVB.Rules.GetValueOrDefault(diagnostic.Id);
+        return type == "SECURITY_HOTSPOT";
+    }
+
+    private static string GetTestCaseFileName(string analyzerName) =>
+        analyzerName switch
+        {
+            "ConfiguringLoggers" => "ConfiguringLoggers_Log4Net",
+            "CookieShouldBeHttpOnly" => "CookieShouldBeHttpOnly_Nancy",
+            "CookieShouldBeSecure" => "CookieShouldBeSecure_Nancy",
+            "DoNotHardcodeCredentials" => "DoNotHardcodeCredentials.DefaultValues",
+            "DeliveringDebugFeaturesInProduction" => "DeliveringDebugFeaturesInProduction.NetCore2",
+#if NETFRAMEWORK
+            "ExecutingSqlQueries" => "ExecutingSqlQueries.Net46",
+            "UsingCookies" => "UsingCookies_Net46",
+            "LooseFilePermissions" => "LooseFilePermissions.Windows",
+#else
+            "ExecutingSqlQueries" => "ExecutingSqlQueries.EntityFrameworkCoreLatest",
+            "UsingCookies" => "UsingCookies_NetCore",
+            "LooseFilePermissions" => "LooseFilePermissions.Unix",
+            "PermissiveCors" => "PermissiveCors.Net",
+#endif
+            _ => analyzerName
+        };
+
+    private static IEnumerable<MetadataReference> GetAdditionalReferences(string analyzerName) =>
+        analyzerName switch
+        {
+            nameof(ClearTextProtocolsAreSensitive) => ClearTextProtocolsAreSensitiveTest.AdditionalReferences,
+            nameof(CookieShouldBeHttpOnly) => CookieShouldBeHttpOnlyTest.AdditionalReferences,
+            nameof(CookieShouldBeSecure) => CookieShouldBeSecureTest.AdditionalReferences,
+            nameof(ConfiguringLoggers) => ConfiguringLoggersTest.Log4NetReferences,
+            nameof(DeliveringDebugFeaturesInProduction) => DeliveringDebugFeaturesInProductionTest.AdditionalReferencesForAspNetCore2,
+            nameof(DisablingRequestValidation) => NuGetMetadataReference.MicrosoftAspNetMvc(Constants.NuGetLatestVersion),
+            nameof(DoNotHardcodeCredentials) => DoNotHardcodeCredentialsTest.AdditionalReferences,
+            nameof(DoNotUseRandom) => MetadataReferenceFacade.SystemSecurityCryptography,
+            nameof(ExpandingArchives) => ExpandingArchivesTest.AdditionalReferences,
+            nameof(RequestsWithExcessiveLength) => RequestsWithExcessiveLengthTest.GetAdditionalReferences(),
+            nameof(SpecifyTimeoutOnRegex) => MetadataReferenceFacade.RegularExpressions
+                .Concat(NuGetMetadataReference.SystemComponentModelAnnotations()),
 
 #if NET
-                nameof(DisablingCsrfProtection) => DisablingCsrfProtectionTest.AdditionalReferences(),
-                nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesEntityFrameworkNetCore("7.0.14"),
-                nameof(LooseFilePermissions) => NuGetMetadataReference.MonoPosixNetStandard(),
-                nameof(PermissiveCors) => PermissiveCorsTest.AdditionalReferences,
+            nameof(DisablingCsrfProtection) => DisablingCsrfProtectionTest.AdditionalReferences(),
+            nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesEntityFrameworkNetCore("7.0.14"),
+            nameof(LooseFilePermissions) => NuGetMetadataReference.MonoPosixNetStandard(),
+            nameof(PermissiveCors) => PermissiveCorsTest.AdditionalReferences,
 #else
-                nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesNet46(Constants.NuGetLatestVersion),
+            nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesNet46(Constants.NuGetLatestVersion),
 #endif
-                _ => MetadataReferenceFacade.SystemNetHttp
-                                            .Concat(MetadataReferenceFacade.SystemDiagnosticsProcess)
-                                            .Concat(MetadataReferenceFacade.SystemSecurityCryptography)
-            };
-    }
+            _ => MetadataReferenceFacade.SystemNetHttp
+                                        .Concat(MetadataReferenceFacade.SystemDiagnosticsProcess)
+                                        .Concat(MetadataReferenceFacade.SystemSecurityCryptography)
+        };
 }

@@ -41,13 +41,13 @@ namespace SonarAnalyzer.Test.Rules
         public void FieldShadowsParentField_DoesNotRaiseIssuesForTestProject_CS() =>
             builderCS.AddPaths("FieldShadowsParentField.cs")
                 .AddTestReference()
-                .VerifyNoIssueReported();
+                .VerifyNoIssues();
 
         [TestMethod]
         public void FieldShadowsParentField_DoesNotRaiseIssuesForTestProject_VB() =>
             builderVB.AddPaths("FieldShadowsParentField.vb")
                 .AddTestReference()
-                .VerifyNoIssueReported();
+                .VerifyNoIssues();
 
 #if NET
 

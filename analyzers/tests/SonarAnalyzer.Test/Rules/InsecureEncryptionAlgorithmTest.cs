@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Test.Rules
             builderCS.AddPaths("InsecureEncryptionAlgorithm.cs")
                 .AddTestReference()
                 .AddReferences(GetAdditionalReferences())
-                .VerifyNoIssueReported();
+                .VerifyNoIssuesIgnoreErrors();
 
 #if NET
 

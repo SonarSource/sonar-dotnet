@@ -41,5 +41,5 @@ public class FileScopeNamespaceTest
 
     [TestMethod]
     public void FileScopeNamespace_Compliant() =>
-        builder.AddPaths("FileScopeNamespace.Compliant.cs").VerifyNoIssueReported();
+        builder.AddPaths("FileScopeNamespace.Compliant.cs").VerifyNoIssues();
 }

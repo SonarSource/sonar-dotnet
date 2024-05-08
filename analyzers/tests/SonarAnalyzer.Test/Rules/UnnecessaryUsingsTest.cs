@@ -55,8 +55,9 @@ namespace SonarAnalyzer.Test.Rules
         public void UnnecessaryUsings_RazorViewImportsCshtmlFile_NoIssueReported(string fileName) =>
             builder
                 .AddSnippet(@"@using System.Text.Json;", fileName)
+                .AddReferences(NuGetMetadataReference.SystemTextJson("7.0.4"))
                 .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-                .VerifyNoIssueReported();
+                .VerifyNoIssues();
 
         [DataTestMethod]
         [DataRow("_Imports.razor")]
@@ -65,8 +66,9 @@ namespace SonarAnalyzer.Test.Rules
         public void UnnecessaryUsings_RazorImportsRazorFile_NoIssueReported(string fileName) =>
             builder
                 .AddSnippet(@"@using System.Text.Json;", fileName)
+                .AddReferences(NuGetMetadataReference.SystemTextJson("7.0.4"))
                 .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-                .VerifyNoIssueReported();
+                .VerifyNoIssues();
 
         [DataTestMethod]
         [DataRow("RandomFile_ViewImports.cshtml")]

@@ -353,7 +353,7 @@ namespace SonarAnalyzer.Test.Common
             builder = builder.WithConcurrentAnalysis(false).WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithUnchangedFiles(TestContext, unchangedFileName));
             if (expectEmptyResults)
             {
-                builder.VerifyNoIssueReported();
+                builder.VerifyNoIssuesIgnoreErrors();
             }
             else
             {

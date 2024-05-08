@@ -22,9 +22,7 @@ using System.IO;
 using Moq;
 using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.Test.Helpers;
 using SonarAnalyzer.Test.Rules;
-using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 
 namespace SonarAnalyzer.Test.AnalysisContext;
 
@@ -32,26 +30,6 @@ namespace SonarAnalyzer.Test.AnalysisContext;
 public partial class SonarAnalysisContextTest
 {
     public TestContext TestContext { get; set; }
-
-    private sealed class TestSetup
-    {
-        public string Path { get; }
-        public DiagnosticAnalyzer Analyzer { get; }
-        public VerifierBuilder Builder { get; }
-
-        public TestSetup(string testCase, SonarDiagnosticAnalyzer analyzer) : this(testCase, analyzer, Enumerable.Empty<MetadataReference>()) { }
-
-        public TestSetup(string testCase, SonarDiagnosticAnalyzer analyzer, IEnumerable<MetadataReference> additionalReferences)
-        {
-            Path = testCase;
-            Analyzer = analyzer;
-            additionalReferences = additionalReferences
-                .Concat(MetadataReferenceFacade.SystemComponentModelPrimitives)
-                .Concat(MetadataReferenceFacade.NetStandard)
-                .Concat(MetadataReferenceFacade.SystemData);
-            Builder = new VerifierBuilder().AddAnalyzer(() => analyzer).AddPaths(Path).AddReferences(additionalReferences);
-        }
-    }
 
     // Various classes that invoke all the `ReportIssue` methods in AnalysisContextExtensions
     // We mention in comments the type of Context that is used to invoke (directly or indirectly) the `ReportIssue` method
@@ -105,7 +83,7 @@ public partial class SonarAnalysisContextTest
                 // ToDo: We should find a way to ack the fact the action was not run
                 testCase.Builder
                     .WithOptions(ParseOptionsHelper.FromCSharp8)
-                    .VerifyNoIssueReported();
+                    .VerifyNoIssuesIgnoreErrors();
             }
         }
         finally
@@ -132,7 +110,7 @@ public partial class SonarAnalysisContextTest
         var sonarProjectConfig = AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Test, false);
         foreach (var testCase in testCases)
         {
-            var hasTestScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorFactory.TestSourceScopeTag));
+            var hasTestScope = testCase.Analyzer.SupportedDiagnostics.Any(x => x.CustomTags.Contains(DiagnosticDescriptorFactory.TestSourceScopeTag));
             if (hasTestScope)
             {
                 testCase.Builder
@@ -146,7 +124,7 @@ public partial class SonarAnalysisContextTest
                 testCase.Builder
                     .WithOptions(ParseOptionsHelper.FromCSharp8)
                     .WithAdditionalFilePath(sonarProjectConfig)
-                    .VerifyNoIssueReported();
+                    .VerifyNoIssuesIgnoreErrors();
             }
         }
     }
@@ -157,14 +135,14 @@ public partial class SonarAnalysisContextTest
         var sonarProjectConfig = AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Test);
         foreach (var testCase in testCases)
         {
-            var hasProductScope = testCase.Analyzer.SupportedDiagnostics.Any(d => d.CustomTags.Contains(DiagnosticDescriptorFactory.MainSourceScopeTag));
+            var hasProductScope = testCase.Analyzer.SupportedDiagnostics.Any(x => x.CustomTags.Contains(DiagnosticDescriptorFactory.MainSourceScopeTag));
             if (hasProductScope)
             {
                 // MAIN-only and MAIN & TEST rules
                 testCase.Builder
                     .WithOptions(ParseOptionsHelper.FromCSharp8)
                     .WithAdditionalFilePath(sonarProjectConfig)
-                    .VerifyNoIssueReported();
+                    .VerifyNoIssuesIgnoreErrors();
             }
             else
             {
@@ -196,7 +174,7 @@ public partial class SonarAnalysisContextTest
                 testCase.Builder
                     .WithOptions(ParseOptionsHelper.FromCSharp8)
                     .WithAdditionalFilePath(sonarProjectConfig)
-                    .VerifyNoIssueReported();
+                    .VerifyNoIssues();
             }
         }
     }
@@ -212,7 +190,7 @@ public partial class SonarAnalysisContextTest
             var testCase2 = testCases[2];
             SonarAnalysisContext.ShouldExecuteRegisteredAction = (diags, tree) => tree.FilePath.EndsWith(new FileInfo(testCase.Path).Name, StringComparison.OrdinalIgnoreCase);
             testCase.Builder.WithConcurrentAnalysis(false).Verify();
-            testCase2.Builder.VerifyNoIssueReported();
+            testCase2.Builder.VerifyNoIssues();
         }
         finally
         {
@@ -248,7 +226,7 @@ public partial class SonarAnalysisContextTest
                     {
                         testCase.Builder
                             .WithOptions(ParseOptionsHelper.FromCSharp8)
-                            .VerifyNoIssueReported();
+                            .VerifyNoIssues();
                     }
                     else
                     {
@@ -303,5 +281,25 @@ public partial class SonarAnalysisContextTest
         sut.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, Mock.Of<Diagnostic>(x => x.Id == "Sxxx" && x.Location == location && x.Descriptor == DummyMainDescriptor[0]));
 
         wasReported.Should().Be(expected);
+    }
+
+    private sealed class TestSetup
+    {
+        public string Path { get; }
+        public DiagnosticAnalyzer Analyzer { get; }
+        public VerifierBuilder Builder { get; }
+
+        public TestSetup(string testCase, SonarDiagnosticAnalyzer analyzer) : this(testCase, analyzer, Enumerable.Empty<MetadataReference>()) { }
+
+        public TestSetup(string testCase, SonarDiagnosticAnalyzer analyzer, IEnumerable<MetadataReference> additionalReferences)
+        {
+            Path = testCase;
+            Analyzer = analyzer;
+            additionalReferences = additionalReferences
+                .Concat(MetadataReferenceFacade.SystemComponentModelPrimitives)
+                .Concat(MetadataReferenceFacade.NetStandard)
+                .Concat(MetadataReferenceFacade.SystemData);
+            Builder = new VerifierBuilder().AddAnalyzer(() => analyzer).AddPaths(Path).AddReferences(additionalReferences);
+        }
     }
 }

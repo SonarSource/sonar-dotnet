@@ -148,8 +148,11 @@ public record VerifierBuilder
     public void Verify() =>
         Build().Verify();
 
-    public void VerifyNoIssueReported() =>
-        Build().VerifyNoIssueReported();
+    public void VerifyNoIssues() =>
+        Build().VerifyNoIssues();
+
+    public void VerifyNoIssuesIgnoreErrors() =>
+        Build().VerifyNoIssuesIgnoreErrors();
 
     public void VerifyCodeFix() =>
         Build().VerifyCodeFix();

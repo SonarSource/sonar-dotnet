@@ -47,13 +47,13 @@ public class UseFindSystemTimeZoneByIdTest
     public void UseFindSystemTimeZoneById_Net_WithoutReference_DoesNotRaise_CS() =>
         builderCS.AddPaths("UseFindSystemTimeZoneById.Net.cs")
             .WithErrorBehavior(CompilationErrorBehavior.Ignore)
-            .VerifyNoIssueReported();
+            .VerifyNoIssues();
 
     [TestMethod]
     public void UseFindSystemTimeZoneById_Net_WithoutReference_DoesNotRaise_VB() =>
         builderVB.AddPaths("UseFindSystemTimeZoneById.Net.vb")
             .WithErrorBehavior(CompilationErrorBehavior.Ignore)
-            .VerifyNoIssueReported();
+            .VerifyNoIssues();
 
 #else
 

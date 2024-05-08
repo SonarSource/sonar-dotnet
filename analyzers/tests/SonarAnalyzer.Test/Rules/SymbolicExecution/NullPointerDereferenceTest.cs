@@ -56,11 +56,11 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void NullPointerDereference_Sonar_DoesNotRaiseIssuesForTestProject() =>
-            sonar.AddTestReference().AddPaths("NullPointerDereference.cs").WithConcurrentAnalysis(false).VerifyNoIssueReported();
+            sonar.AddTestReference().AddPaths("NullPointerDereference.cs").WithConcurrentAnalysis(false).VerifyNoIssues();
 
         [TestMethod]
         public void NullPointerDereference_Roslyn_DoesNotRaiseIssuesForTestProject() =>
-            roslynCS.AddTestReference().AddPaths("NullPointerDereference.cs").WithConcurrentAnalysis(false).VerifyNoIssueReported();
+            roslynCS.AddTestReference().AddPaths("NullPointerDereference.cs").WithConcurrentAnalysis(false).VerifyNoIssues();
 
         [TestMethod]
         public void NullPointerDereference_Sonar_CSharp6() =>

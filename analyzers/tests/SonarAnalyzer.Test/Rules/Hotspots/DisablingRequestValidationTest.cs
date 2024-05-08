@@ -20,136 +20,134 @@
 
 using System.Globalization;
 using System.IO;
-using SonarAnalyzer.Test.Helpers;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class DisablingRequestValidationTest
 {
-    [TestClass]
-    public class DisablingRequestValidationTest
+    private const string AspNetMvcVersion = "5.2.7";
+    private const string WebConfig = "Web.config";
+
+    public TestContext TestContext { get; set; }
+
+    [TestMethod]
+    public void DisablingRequestValidation_CS() =>
+        new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled))
+            .AddPaths("DisablingRequestValidation.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion))
+            .Verify();
+
+    [TestMethod]
+    public void DisablingRequestValidation_CS_Disabled() =>
+         new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.DisablingRequestValidation(AnalyzerConfiguration.Hotspot))
+            .AddPaths("DisablingRequestValidation.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion))
+            .VerifyNoIssuesIgnoreErrors();
+
+    [DataTestMethod]
+    [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\Values")]
+    [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\Formatting")]
+    [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\UnexpectedContent")]
+    public void DisablingRequestValidation_CS_WebConfig(string root)
     {
-        private const string AspNetMvcVersion = "5.2.7";
-        private const string WebConfig = "Web.config";
+        var webConfigPath = Path.Combine(root, WebConfig);
+        DiagnosticVerifier.Verify(
+            SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
+            new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
+            AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
+            null,
+            [webConfigPath]);
+    }
 
-        public TestContext TestContext { get; set; }
+    [TestMethod]
+    public void DisablingRequestValidation_CS_CorruptAndNonExistingWebConfigs()
+    {
+        var root = @"TestCases\WebConfig\DisablingRequestValidation\Corrupt";
+        var nonexisting = @"TestCases\WebConfig\DisablingRequestValidation\NonExsitingDirectory";
+        var corruptFilePath = Path.Combine(root, WebConfig);
+        var nonExistingFilePath = Path.Combine(nonexisting, WebConfig);
+        DiagnosticVerifier.Verify(
+            SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
+            new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
+            AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath),
+            null,
+            [corruptFilePath]);
+    }
 
-        [TestMethod]
-        public void DisablingRequestValidation_CS() =>
-            new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled))
-                .AddPaths("DisablingRequestValidation.cs")
-                .AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion))
-                .Verify();
-
-        [TestMethod]
-        public void DisablingRequestValidation_CS_Disabled() =>
-             new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.DisablingRequestValidation(AnalyzerConfiguration.Hotspot))
-                .AddPaths("DisablingRequestValidation.cs")
-                .AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion))
-                .VerifyNoIssueReported();
-
-        [DataTestMethod]
-        [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\Values")]
-        [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\Formatting")]
-        [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\UnexpectedContent")]
-        public void DisablingRequestValidation_CS_WebConfig(string root)
+    [DataTestMethod]
+    [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\MultipleFiles", "SubFolder")]
+    [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\EdgeValues", "3.9", "5.6")]
+    public void DisablingRequestValidation_CS_WebConfig_SubFolders(string rootDirectory, params string[] subFolders)
+    {
+        var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation();
+        var newCulture = (CultureInfo)Thread.CurrentThread.CurrentCulture.Clone();
+        // decimal.TryParse() from the implementation might not recognize "1.2" under different culture
+        newCulture.NumberFormat.NumberDecimalSeparator = ",";
+        using var scope = new CurrentCultureScope(newCulture);
+        var rootFile = Path.Combine(rootDirectory, WebConfig);
+        var filesToAnalyze = new List<string> { rootFile };
+        foreach (var subFolder in subFolders)
         {
-            var webConfigPath = Path.Combine(root, WebConfig);
-            DiagnosticVerifier.Verify(
-                SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
-                new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
-                null,
-                [webConfigPath]);
+            filesToAnalyze.Add(Path.Combine(rootDirectory, subFolder, WebConfig));
         }
+        var analyzer = new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled);
+        var additionalFilePath = AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, filesToAnalyze.ToArray());
+        DiagnosticVerifier.Verify(compilation, analyzer, additionalFilePath, null, filesToAnalyze.ToArray());
+    }
 
-        [TestMethod]
-        public void DisablingRequestValidation_CS_CorruptAndNonExistingWebConfigs()
-        {
-            var root = @"TestCases\WebConfig\DisablingRequestValidation\Corrupt";
-            var nonexisting = @"TestCases\WebConfig\DisablingRequestValidation\NonExsitingDirectory";
-            var corruptFilePath = Path.Combine(root, WebConfig);
-            var nonExistingFilePath = Path.Combine(nonexisting, WebConfig);
-            DiagnosticVerifier.Verify(
-                SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
-                new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath),
-                null,
-                [corruptFilePath]);
-        }
+    [TestMethod]
+    public void DisablingRequestValidation_CS_WebConfig_LowerCase()
+    {
+        var root = @"TestCases\WebConfig\DisablingRequestValidation\LowerCase";
+        var webConfigPath = Path.Combine(root, "web.config");
+        DiagnosticVerifier.Verify(
+            SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
+            new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
+            AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
+            null,
+            [webConfigPath]);
+    }
 
-        [DataTestMethod]
-        [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\MultipleFiles", "SubFolder")]
-        [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\EdgeValues", "3.9", "5.6")]
-        public void DisablingRequestValidation_CS_WebConfig_SubFolders(string rootDirectory, params string[] subFolders)
-        {
-            var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation();
-            var newCulture = (CultureInfo)Thread.CurrentThread.CurrentCulture.Clone();
-            // decimal.TryParse() from the implementation might not recognize "1.2" under different culture
-            newCulture.NumberFormat.NumberDecimalSeparator = ",";
-            using var scope = new CurrentCultureScope(newCulture);
-            var rootFile = Path.Combine(rootDirectory, WebConfig);
-            var filesToAnalyze = new List<string> { rootFile };
-            foreach (var subFolder in subFolders)
-            {
-                filesToAnalyze.Add(Path.Combine(rootDirectory, subFolder, WebConfig));
-            }
-            var analyzer = new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled);
-            var additionalFilePath = AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, filesToAnalyze.ToArray());
-            DiagnosticVerifier.Verify(compilation, analyzer, additionalFilePath, null, filesToAnalyze.ToArray());
-        }
+    [DataTestMethod]
+    [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\TransformCustom\Web.Custom.config")]
+    [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\TransformDebug\Web.Debug.config")]
+    [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\TransformRelease\Web.Release.config")]
+    public void DisablingRequestValidation_CS_WebConfig_Transformation(string configPath) =>
+        DiagnosticVerifier.Verify(
+            SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
+            new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
+            AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, configPath),
+            null,
+            [configPath]);
 
-        [TestMethod]
-        public void DisablingRequestValidation_CS_WebConfig_LowerCase()
-        {
-            var root = @"TestCases\WebConfig\DisablingRequestValidation\LowerCase";
-            var webConfigPath = Path.Combine(root, "web.config");
-            DiagnosticVerifier.Verify(
-                SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
-                new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
-                null,
-                [webConfigPath]);
-        }
+    [TestMethod]
+    public void DisablingRequestValidation_VB() =>
+        new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled))
+            .AddPaths("DisablingRequestValidation.vb")
+            .AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion))
+            .WithOptions(ParseOptionsHelper.FromVisualBasic14)
+            .Verify();
 
-        [DataTestMethod]
-        [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\TransformCustom\Web.Custom.config")]
-        [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\TransformDebug\Web.Debug.config")]
-        [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\TransformRelease\Web.Release.config")]
-        public void DisablingRequestValidation_CS_WebConfig_Transformation(string configPath) =>
-            DiagnosticVerifier.Verify(
-                SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
-                new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, configPath),
-                null,
-                [configPath]);
+    [TestMethod]
+    public void DisablingRequestValidation_VB_Disabled() =>
+        new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.DisablingRequestValidation(AnalyzerConfiguration.Hotspot))
+            .AddPaths("DisablingRequestValidation.vb")
+            .AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion))
+            .VerifyNoIssuesIgnoreErrors();
 
-        [TestMethod]
-        public void DisablingRequestValidation_VB() =>
-            new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled))
-                .AddPaths("DisablingRequestValidation.vb")
-                .AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion))
-                .WithOptions(ParseOptionsHelper.FromVisualBasic14)
-                .Verify();
-
-        [TestMethod]
-        public void DisablingRequestValidation_VB_Disabled() =>
-            new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.DisablingRequestValidation(AnalyzerConfiguration.Hotspot))
-                .AddPaths("DisablingRequestValidation.vb")
-                .AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion))
-                .VerifyNoIssueReported();
-
-        [TestMethod]
-        public void DisablingRequestValidation_VB_WebConfig()
-        {
-            var root = @"TestCases\WebConfig\DisablingRequestValidation\Values";
-            var webConfigPath = Path.Combine(root, WebConfig);
-            DiagnosticVerifier.Verify(
-                SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).GetCompilation(),
-                new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
-                null,
-                [webConfigPath]);
-        }
+    [TestMethod]
+    public void DisablingRequestValidation_VB_WebConfig()
+    {
+        var root = @"TestCases\WebConfig\DisablingRequestValidation\Values";
+        var webConfigPath = Path.Combine(root, WebConfig);
+        DiagnosticVerifier.Verify(
+            SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).GetCompilation(),
+            new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
+            AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
+            null,
+            [webConfigPath]);
     }
 }

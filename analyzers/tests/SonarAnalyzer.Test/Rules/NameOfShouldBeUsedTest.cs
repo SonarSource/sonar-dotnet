@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Test.Rules
             builderCS.AddPaths("NameOfShouldBeUsed.cs")
             .WithLanguageVersion(RoslynCS.LanguageVersion.CSharp5)
             .WithErrorBehavior(CompilationErrorBehavior.Ignore)
-            .VerifyNoIssueReported();
+            .VerifyNoIssues();
 
 #if NET
 
@@ -59,6 +59,6 @@ namespace SonarAnalyzer.Test.Rules
             builderVB.AddPaths("NameOfShouldBeUsed.vb")
             .WithLanguageVersion(RoslynVB.LanguageVersion.VisualBasic12)
             .WithErrorBehavior(CompilationErrorBehavior.Ignore)
-            .VerifyNoIssueReported();
+            .VerifyNoIssues();
     }
 }

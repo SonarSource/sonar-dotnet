@@ -97,7 +97,7 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
 
         if (compliant)
         {
-            builder.VerifyNoIssueReported();
+            builder.VerifyNoIssues();
         }
         else
         {
@@ -254,7 +254,7 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
 
         if (compliant)
         {
-            builder.VerifyNoIssueReported();
+            builder.VerifyNoIssues();
         }
         else
         {

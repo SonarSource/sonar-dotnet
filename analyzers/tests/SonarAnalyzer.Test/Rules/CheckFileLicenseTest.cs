@@ -274,7 +274,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void CheckFileLicense_NullHeader_NoIssueReported_CS() =>
-            Builder(null).AddPaths("CheckFileLicense_NoLicenseStartWithNamespace.cs").VerifyNoIssueReported();
+            Builder(null).AddPaths("CheckFileLicense_NoLicenseStartWithNamespace.cs").VerifyNoIssues();
 
         // No need to duplicate all test cases from C#, because we are sharing the implementation
         [TestMethod]

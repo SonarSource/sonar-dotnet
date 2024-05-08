@@ -76,7 +76,7 @@ public class ArrayPassedAsParamsTest
         var builder = builderVB.AddSnippet(code);
         if (compliant)
         {
-            builder.VerifyNoIssueReported();
+            builder.VerifyNoIssues();
         }
         else
         {
