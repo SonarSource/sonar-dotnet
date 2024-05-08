@@ -29,7 +29,7 @@ public sealed class LambdaParameterName : StylingAnalyzer
         context.RegisterNodeAction(c =>
             {
                 var parameter = ((SimpleLambdaExpressionSyntax)c.Node).Parameter;
-                if (parameter.Identifier.ValueText != "x"
+                if (parameter.Identifier.ValueText is not ("x" or "_")
                     && c.Node.Parent.FirstAncestorOrSelf<LambdaExpressionSyntax>() is null
                     && !IsSonarContextAction(c))
                 {

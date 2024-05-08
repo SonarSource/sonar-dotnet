@@ -16,7 +16,7 @@ public class Sample
         Method(b => 42);        // Noncompliant
         Method(y => 42);        // Noncompliant
         Method(z => 42);        // Noncompliant
-        Method(_ => 42);        // Noncompliant, it's not a discard, it's a parameter named "_"
+        Method(_ => 42);        // Compliant
         Method(node => 42);     // Noncompliant
         Method(dataGridViewCellContextMenuStripNeededEventArgs => 42);     // Noncompliant
 
@@ -31,6 +31,7 @@ public class Sample
         Method(() => 42);
         Method(() => { });
         Method((a, b) => 42);
+        Method((_, _) => 42);
         Method((a, b) => { });
     }
 
