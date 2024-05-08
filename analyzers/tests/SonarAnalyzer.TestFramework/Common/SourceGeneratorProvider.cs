@@ -47,8 +47,8 @@ public static class SourceGeneratorProvider
                 $"Please note that Razor analysis is only supported when using .NET Core.");
         }
         return Directory.GetDirectories(sdkDirectory, $"{objectAssembly.GetName().Version.Major}.*")
-            .OrderByDescending(x => Version.Parse(new DirectoryInfo(x).Name))
-            .First();
+            .OrderBy(x => Version.Parse(new DirectoryInfo(x).Name))
+            .Last();
     }
 
     private sealed class AssemblyLoader : IAnalyzerAssemblyLoader
