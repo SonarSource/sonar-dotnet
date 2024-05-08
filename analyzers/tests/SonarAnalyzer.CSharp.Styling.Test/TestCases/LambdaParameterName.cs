@@ -8,7 +8,7 @@ public class Sample
         Method(x => 42);
         Method(x => { });
 
-        Method(item => 42);     // Noncompliant {{Use 'x' or '_' for the lambda parameter name.}}
+        Method(item => 42);     // Noncompliant {{Use 'x' for the lambda parameter name.}}
         Method(item => { });    // Noncompliant
         //     ^^^^
 
