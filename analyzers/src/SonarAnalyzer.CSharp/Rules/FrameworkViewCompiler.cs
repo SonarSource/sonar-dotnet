@@ -26,7 +26,6 @@ using System.Xml.XPath;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
-using Microsoft.CodeAnalysis.CodeFixes;
 
 namespace SonarAnalyzer.Rules.CSharp;
 
@@ -38,16 +37,16 @@ public sealed class FrameworkViewCompiler : SonarDiagnosticAnalyzer
         "S3904",    // AssemblyVersion attribute
         "S3990",    // CLSCompliant attribute
         "S3992",    // ComVisible attribute
-        "S1451",     // Add or update the header
-
-        // TODO: Check these as they are disabled for razor already
-        //"S103",
-        //"S104",
-        //"S109",
-        //"S113",
-        //"S1147",
-        //"S1192",
-        //"S1451",
+        "S1451",    // License header
+        "S103",     // Lines too long
+        "S104",     // Files too many lines
+        "S109",     // Magic number
+        "S113",     // Files without newline
+        "S1147",    // Exit methods
+        "S1192",    // String literals duplicated
+        "S1944",    // Invalid cast
+        "S1905",    // Redundant cast
+        "S1116",    // Empty statements
     };
 
     private ImmutableArray<DiagnosticAnalyzer> Rules;
@@ -68,8 +67,14 @@ public sealed class FrameworkViewCompiler : SonarDiagnosticAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
 
         context.RegisterCompilationAction(
-            c =>
+            async c =>
             {
+                // TODO: Maybe there is a better check, maybe use References(KnownAssembly for System.Web.Mvc)
+                if (c.Compilation.GetTypeByMetadataName(KnownType.System_Web_Mvc_Controller) is null)
+                {
+                    return;
+                }
+
                 var projectConfiguration = c.ProjectConfiguration();
                 var root = Path.GetDirectoryName(projectConfiguration.ProjectPath);
                 var supportedDiagnostics = SupportedDiagnostics.ToImmutableDictionary(x => x.Id, x => ReportDiagnostic.Warn);
@@ -78,7 +83,7 @@ public sealed class FrameworkViewCompiler : SonarDiagnosticAnalyzer
                     .WithOptions(c.Compilation.Options.WithSpecificDiagnosticOptions(supportedDiagnostics))
                     .WithAnalyzers(Rules, c.Options);
 
-                var diagnostics = dummy.GetAnalyzerDiagnosticsAsync().Result;
+                var diagnostics = await dummy.GetAnalyzerDiagnosticsAsync();
                 foreach (var diagnostic in diagnostics)
                 {
                     c.ReportIssue(diagnostic);
@@ -95,6 +100,7 @@ public sealed class FrameworkViewCompiler : SonarDiagnosticAnalyzer
         var razorTrees = new List<SyntaxTree>();
 
         var i = 0;
+
         foreach (var razorDocument in documents)
         {
             if (razorDocument.GetCSharpDocument()?.GeneratedCode is { } csharpCode)
@@ -115,23 +121,14 @@ public sealed class FrameworkViewCompiler : SonarDiagnosticAnalyzer
 internal static class RuleFinder2
 {
     public static IEnumerable<Type> AllAnalyzerTypes { get; }       // Rules and Utility analyzers
-    public static IEnumerable<Type> AllTypesWithDiagnosticAnalyzerAttribute { get; }
     public static IEnumerable<Type> RuleAnalyzerTypes { get; }      // Rules-only, without Utility analyzers
     public static IEnumerable<Type> UtilityAnalyzerTypes { get; }
-    public static IEnumerable<Type> CodeFixTypes { get; }
 
     static RuleFinder2()
     {
-        var allTypes = new[]
-        {
-            typeof(FlagsEnumZeroMember),
-            typeof(FlagsEnumZeroMemberBase<int>)
-        }
-            .SelectMany(x => x.Assembly.GetExportedTypes())
-            .ToArray();
-        CodeFixTypes = allTypes.Where(x => typeof(CodeFixProvider).IsAssignableFrom(x) && x.GetCustomAttributes<ExportCodeFixProviderAttribute>().Any()).ToArray();
+        var allTypes = Assembly.GetExecutingAssembly().GetExportedTypes();
+
         AllAnalyzerTypes = allTypes.Where(x => x.IsSubclassOf(typeof(DiagnosticAnalyzer)) && x.GetCustomAttributes<DiagnosticAnalyzerAttribute>().Any()).ToArray();
-        AllTypesWithDiagnosticAnalyzerAttribute = allTypes.Where(x => x.GetCustomAttributes<DiagnosticAnalyzerAttribute>().Any()).ToArray();
         UtilityAnalyzerTypes = AllAnalyzerTypes.Where(x => typeof(UtilityAnalyzerBase).IsAssignableFrom(x)).ToList();
         RuleAnalyzerTypes = AllAnalyzerTypes.Except(UtilityAnalyzerTypes).ToList();
     }
