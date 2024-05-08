@@ -43,11 +43,13 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void FinalizerShouldNotBeEmpty_InvalidCode() =>
-            builder.AddSnippet(@"class Program4
-    {
-        ~Program4() =>
-    }")
-                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+            builder.AddSnippet("""
+                class Program4
+                {
+                    ~Program4() =>  // Error [CS1002] ; expected
+                                    // Error@-1 [CS1525] Invalid expression term
+                }
+                """)
                 .Verify();
     }
 }

@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Test.Rules
         public void CommandPath_CSharp12() =>
             builderCS.AddPaths("CommandPath.CSharp12.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp12)
-                .Verify();
+                .VerifyNoIssues();   // primary constructors are not supported yet
 
 #endif
 

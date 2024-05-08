@@ -20,24 +20,23 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class UseGenericWithRefParametersTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<UseGenericWithRefParameters>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void UseGenericWithRefParameters() =>
-            builder.AddPaths("UseGenericWithRefParameters.cs").Verify();
-
-        [TestMethod]
-        public void UseGenericWithRefParameters_InvalidCode() =>
-            builder.AddSnippet(@"
-public void (ref object o1)
+[TestClass]
+public class UseGenericWithRefParametersTest
 {
-}")
-                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
-                .Verify();
-    }
+    private readonly VerifierBuilder builder = new VerifierBuilder<UseGenericWithRefParameters>();
+
+    [TestMethod]
+    public void UseGenericWithRefParameters() =>
+        builder.AddPaths("UseGenericWithRefParameters.cs").Verify();
+
+    [TestMethod]
+    public void UseGenericWithRefParameters_InvalidCode() =>
+        builder.AddSnippet("""
+            public void (ref object o1)
+            {
+            }
+            """)
+            .VerifyNoIssuesIgnoreErrors();
 }

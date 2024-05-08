@@ -20,38 +20,38 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class PropertyNamesShouldNotMatchGetMethodsTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<PropertyNamesShouldNotMatchGetMethods>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void PropertyNamesShouldNotMatchGetMethods() =>
-            builder.AddPaths("PropertyNamesShouldNotMatchGetMethods.cs").Verify();
-
-        [TestMethod]
-        public void PropertyNamesShouldNotMatchGetMethods_InvalidCode() =>
-            builder.AddSnippet(@"
-public class Sample
+[TestClass]
+public class PropertyNamesShouldNotMatchGetMethodsTest
 {
-    // Missing identifier on purpose
-    public int { get; }
-    public int () { return 42; }
-}").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
+    private readonly VerifierBuilder builder = new VerifierBuilder<PropertyNamesShouldNotMatchGetMethods>();
+
+    [TestMethod]
+    public void PropertyNamesShouldNotMatchGetMethods() =>
+        builder.AddPaths("PropertyNamesShouldNotMatchGetMethods.cs").Verify();
+
+    [TestMethod]
+    public void PropertyNamesShouldNotMatchGetMethods_InvalidCode() =>
+        builder.AddSnippet("""
+            public class Sample
+            {
+                // Missing identifier on purpose
+                public int { get; }
+                public int () { return 42; }
+            }
+            """).VerifyNoIssuesIgnoreErrors();
 
 #if NET
 
-        [TestMethod]
-        public void PropertyNamesShouldNotMatchGetMethods_CSharp9() =>
-            builder.AddPaths("PropertyNamesShouldNotMatchGetMethods.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+    [TestMethod]
+    public void PropertyNamesShouldNotMatchGetMethods_CSharp9() =>
+        builder.AddPaths("PropertyNamesShouldNotMatchGetMethods.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
-        public void PropertyNamesShouldNotMatchGetMethods_CSharp10() =>
-            builder.AddPaths("PropertyNamesShouldNotMatchGetMethods.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+    [TestMethod]
+    public void PropertyNamesShouldNotMatchGetMethods_CSharp10() =>
+        builder.AddPaths("PropertyNamesShouldNotMatchGetMethods.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif
 
-    }
 }

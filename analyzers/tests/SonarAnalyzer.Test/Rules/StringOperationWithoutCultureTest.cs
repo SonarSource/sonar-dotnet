@@ -20,32 +20,31 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class StringOperationWithoutCultureTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<StringOperationWithoutCulture>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void StringOperationWithoutCulture() =>
-            builder.AddPaths("StringOperationWithoutCulture.cs").Verify();
+[TestClass]
+public class StringOperationWithoutCultureTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<StringOperationWithoutCulture>();
+
+    [TestMethod]
+    public void StringOperationWithoutCulture() =>
+        builder.AddPaths("StringOperationWithoutCulture.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void StringOperationWithoutCulture_CSharp10() =>
-            builder.AddPaths("StringOperationWithoutCulture.CSharp10.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
-            .Verify();
+    [TestMethod]
+    public void StringOperationWithoutCulture_CSharp10() =>
+        builder.AddPaths("StringOperationWithoutCulture.CSharp10.cs")
+        .WithOptions(ParseOptionsHelper.FromCSharp10)
+        .VerifyNoIssues();  // FN, TimeOnly and DateOnly are not supported
 
-        [TestMethod]
-        public void StringOperationWithoutCulture_CSharp11() =>
-            builder.AddPaths("StringOperationWithoutCulture.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
-            .Verify();
+    [TestMethod]
+    public void StringOperationWithoutCulture_CSharp11() =>
+        builder.AddPaths("StringOperationWithoutCulture.CSharp11.cs")
+        .WithOptions(ParseOptionsHelper.FromCSharp11)
+        .Verify();
 
 #endif
 
-    }
 }

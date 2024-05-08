@@ -50,7 +50,7 @@ public class LoggersShouldBeNamedForEnclosingTypeTest
                 """)
             .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
             .WithTopLevelStatements()
-            .Verify();
+            .VerifyNoIssues();
 
     [TestMethod]
     public void LoggersShouldBeNamedForEnclosingType_NLog_CS() =>

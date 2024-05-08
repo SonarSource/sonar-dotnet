@@ -67,25 +67,32 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow(false, "log.IsEnabled(LogLevel.Warning);")]
         public void AzureFunctionsLogFailures_VerifyLoggerCalls(bool isCompliant, string loggerInvocation)
         {
-            var code = @$"
-using Microsoft.Azure.WebJobs;
-using Microsoft.Extensions.Logging;
-using System;
+            var x = builder.AddSnippet($$"""
+                using Microsoft.Azure.WebJobs;
+                using Microsoft.Extensions.Logging;
+                using System;
 
-    public static class Function1
-    {{
-        [FunctionName(""Function1"")]
-        public static void Run(ILogger log)
-        {{
-            try {{ }}
-            catch(Exception ex) // {(isCompliant ? "Compliant" : "Noncompliant")}
-            {{
-                {loggerInvocation} // {(isCompliant ? string.Empty : "Secondary")}
-            }}
-        }}
-    }}
-";
-            builder.AddSnippet(code).Verify();
+                    public static class Function1
+                    {
+                        [FunctionName("Function1")]
+                        public static void Run(ILogger log)
+                        {
+                            try { }
+                            catch(Exception ex) // {{(isCompliant ? "Compliant" : "Noncompliant")}}
+                            {
+                                {{loggerInvocation}} // {{(isCompliant ? string.Empty : "Secondary")}}
+                            }
+                        }
+                    }
+                """);
+            if (isCompliant)
+            {
+                x.VerifyNoIssues();
+            }
+            else
+            {
+                x.Verify();
+            }
         }
     }
 }

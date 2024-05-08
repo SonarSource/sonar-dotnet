@@ -21,72 +21,69 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class DeliveringDebugFeaturesInProductionTest
 {
-    [TestClass]
-    public class DeliveringDebugFeaturesInProductionTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled));
-        private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled));
+    private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled));
+    private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled));
 
-        [TestMethod]
-        public void DeliveringDebugFeaturesInProduction_NetCore2_CS() =>
-            builderCS.AddPaths("DeliveringDebugFeaturesInProduction.NetCore2.cs")
-                .AddReferences(AdditionalReferencesForAspNetCore2)
-                .Verify();
+    [TestMethod]
+    public void DeliveringDebugFeaturesInProduction_NetCore2_CS() =>
+        builderCS.AddPaths("DeliveringDebugFeaturesInProduction.NetCore2.cs")
+            .AddReferences(AdditionalReferencesForAspNetCore2)
+            .Verify();
 
-        [TestMethod]
-        public void DeliveringDebugFeaturesInProduction_NetCore2_VB() =>
-            builderVB.AddPaths("DeliveringDebugFeaturesInProduction.NetCore2.vb")
-                .AddReferences(AdditionalReferencesForAspNetCore2)
-                .Verify();
+    [TestMethod]
+    public void DeliveringDebugFeaturesInProduction_NetCore2_VB() =>
+        builderVB.AddPaths("DeliveringDebugFeaturesInProduction.NetCore2.vb")
+            .AddReferences(AdditionalReferencesForAspNetCore2)
+            .Verify();
 
 #if NET
 
-        [TestMethod]
-        public void DeliveringDebugFeaturesInProduction_NetCore3_CS() =>
-            builderCS.AddPaths("DeliveringDebugFeaturesInProduction.NetCore3.cs")
-                .AddReferences(AdditionalReferencesForAspNetCore3AndLater)
-                .Verify();
+    [TestMethod]
+    public void DeliveringDebugFeaturesInProduction_NetCore3_CS() =>
+        builderCS.AddPaths("DeliveringDebugFeaturesInProduction.NetCore3.cs")
+            .AddReferences(AdditionalReferencesForAspNetCore3AndLater)
+            .Verify();
 
-        [TestMethod]
-        public void DeliveringDebugFeaturesInProduction_NetCore3_VB() =>
-            builderVB.AddPaths("DeliveringDebugFeaturesInProduction.NetCore3.vb")
-                .AddReferences(AdditionalReferencesForAspNetCore3AndLater)
-                .Verify();
+    [TestMethod]
+    public void DeliveringDebugFeaturesInProduction_NetCore3_VB() =>
+        builderVB.AddPaths("DeliveringDebugFeaturesInProduction.NetCore3.vb")
+            .AddReferences(AdditionalReferencesForAspNetCore3AndLater)
+            .Verify();
 
-        [TestMethod]
-        public void DeliveringDebugFeaturesInProduction_Net7_CS() =>
-            builderCS.AddPaths("DeliveringDebugFeaturesInProduction.Net7.cs")
-                .WithTopLevelStatements()
-                .AddReferences(new[]
-                {
-                    AspNetCoreMetadataReference.MicrosoftAspNetCore,
-                    AspNetCoreMetadataReference.MicrosoftAspNetCoreRouting,
-                    AspNetCoreMetadataReference.MicrosoftAspNetCoreDiagnostics,
-                    AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
-                    AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions,
-                    AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions,
-                })
-                .Verify();
-
-        private static IEnumerable<MetadataReference> AdditionalReferencesForAspNetCore3AndLater =>
-            new[]
-            {
+    [TestMethod]
+    public void DeliveringDebugFeaturesInProduction_Net7_CS() =>
+        builderCS.AddPaths("DeliveringDebugFeaturesInProduction.Net7.cs")
+            .WithTopLevelStatements()
+            .AddReferences([
+                AspNetCoreMetadataReference.MicrosoftAspNetCore,
+                AspNetCoreMetadataReference.MicrosoftAspNetCoreRouting,
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreDiagnostics,
-                AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions,
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
-                AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions
-            };
+                AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions,
+                AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions])
+            .VerifyNoIssues();  // No issues in test code
+
+    private static IEnumerable<MetadataReference> AdditionalReferencesForAspNetCore3AndLater =>
+        new[]
+        {
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreDiagnostics,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
+            AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions
+        };
 
 #endif
 
-        internal static IEnumerable<MetadataReference> AdditionalReferencesForAspNetCore2 =>
-            Enumerable.Empty<MetadataReference>()
-                      .Concat(MetadataReferenceFacade.NetStandard)
-                      .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnostics(Constants.DotNetCore220Version))
-                      .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore(Constants.DotNetCore220Version))
-                      .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(Constants.DotNetCore220Version))
-                      .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(Constants.DotNetCore220Version));
-    }
+    internal static IEnumerable<MetadataReference> AdditionalReferencesForAspNetCore2 =>
+        Enumerable.Empty<MetadataReference>()
+                  .Concat(MetadataReferenceFacade.NetStandard)
+                  .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnostics(Constants.DotNetCore220Version))
+                  .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore(Constants.DotNetCore220Version))
+                  .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(Constants.DotNetCore220Version))
+                  .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(Constants.DotNetCore220Version));
 }

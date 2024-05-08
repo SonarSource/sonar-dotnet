@@ -51,19 +51,18 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void DoNotExposeListT_InvalidCode() =>
-            builder.AddSnippet(
-                @"
-public class InvalidCode
-{
-    public List<int> () => null;
+            builder.AddSnippet("""
+                public class InvalidCode
+                {
+                    public List<int> () => null;
 
-    public List<T> { get; set; }
+                    public List<T> { get; set; }
 
-    public List<InvalidType> Method() => null;
+                    public List<InvalidType> Method() => null;
 
-    public InvalidType Method2() => null;
-}")
-                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
-                .Verify();
+                    public InvalidType Method2() => null;
+                }
+                """)
+                .VerifyNoIssuesIgnoreErrors();
     }
 }

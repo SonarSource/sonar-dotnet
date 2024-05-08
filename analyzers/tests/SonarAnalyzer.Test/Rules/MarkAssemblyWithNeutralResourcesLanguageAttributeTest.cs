@@ -29,11 +29,11 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_HasResx_HasAttribute_Compliant() =>
-            builder.AddPaths("MarkAssemblyWithNeutralResourcesLanguageAttribute.cs", @"Resources\SomeResources.Designer.cs", @"Resources\AnotherResources.Designer.cs").Verify();
+            builder.AddPaths("MarkAssemblyWithNeutralResourcesLanguageAttribute.cs", @"Resources\SomeResources.Designer.cs", @"Resources\AnotherResources.Designer.cs").VerifyNoIssues();
 
         [TestMethod]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_NoResx_HasAttribute_Compliant() =>
-            builder.AddPaths("MarkAssemblyWithNeutralResourcesLanguageAttribute.cs").Verify();
+            builder.AddPaths("MarkAssemblyWithNeutralResourcesLanguageAttribute.cs").VerifyNoIssues();
 
         [TestMethod]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_HasResx_HasInvalidAttribute_Noncompliant() =>

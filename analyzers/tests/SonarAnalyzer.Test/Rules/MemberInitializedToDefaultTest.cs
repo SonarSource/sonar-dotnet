@@ -43,7 +43,8 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void MemberInitializedToDefault_CSharp8() =>
-            builder.AddPaths("MemberInitializedToDefault.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builder.AddPaths("MemberInitializedToDefault.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8)
+                .VerifyNoIssues();  // FN, rule does not raise in nullable context, despite a lack of a bang operator
 
         [TestMethod]
         public void MemberInitializedToDefault_CSharp9() =>

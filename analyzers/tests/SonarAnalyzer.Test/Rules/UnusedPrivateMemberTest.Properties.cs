@@ -82,61 +82,62 @@ public class InterfaceImpl : IInterface
 
         [TestMethod]
         public void UnusedPrivateMember_Properties_DirectReferences() =>
-            builder.AddSnippet(@"
-using System;
-public class PropertyUsages
-{
-    private int Property1 { get; set; }
-    private int Property2 { get; set; }
-    private int Property4 { get; set; }
-    private int Property5 { get; set; }
-    private int Property6 { get; set; }
-    public int Method1(PropertyUsages other)
-    {
-        Property1 = 0;
-        this.Property2 = 0;
-        ((Property4)) = 0;
-        Console.Write(Property4);
-        new PropertyUsages().Property5 = 0;
-        Func<int> x = () => Property5;
-        other.Property6 = 0;
-        return Property6;
-    }
+            builder.AddSnippet("""
+                using System;
+                public class PropertyUsages
+                {
+                    private int Property1 { get; set; }
+                    private int Property2 { get; set; }
+                    private int Property4 { get; set; }
+                    private int Property5 { get; set; }
+                    private int Property6 { get; set; }
+                    public int Method1(PropertyUsages other)
+                    {
+                        Property1 = 0;
+                        this.Property2 = 0;
+                        ((Property4)) = 0;
+                        Console.Write(Property4);
+                        new PropertyUsages().Property5 = 0;
+                        Func<int> x = () => Property5;
+                        other.Property6 = 0;
+                        return Property6;
+                    }
 
-    private int Property7 { get; set; } = 0;
-    public int ExpressionBodyMethod() => Property7;
+                    private int Property7 { get; set; } = 0;
+                    public int ExpressionBodyMethod() => Property7;
 
-    private static int Property8 { get; set; } = 0;
-    public int SomeProperty { get; set; } = Property8;
+                    private static int Property8 { get; set; } = 0;
+                    public int SomeProperty { get; set; } = Property8;
 
-    private static int Property9 { get; set; }
-    static PropertyUsages()
-    {
-        Property9 = 0;
-    }
-    public PropertyUsages(int number) { }
-    public PropertyUsages() : this(Property9) { }
+                    private static int Property9 { get; set; }
+                    static PropertyUsages()
+                    {
+                        Property9 = 0;
+                    }
+                    public PropertyUsages(int number) { }
+                    public PropertyUsages() : this(Property9) { }
 
-    private int Property10 { get; set; }
-    private int Property11 { get; set; }
-    public object Method2()
-    {
-        if ((Property10 = 0) == 0) { }
-        var x = new[] { Property10 };
-        var name = nameof(Property11);
-        return null;
-    }
+                    private int Property10 { get; set; }
+                    private int Property11 { get; set; }
+                    public object Method2()
+                    {
+                        if ((Property10 = 0) == 0) { }
+                        var x = new[] { Property10 };
+                        var name = nameof(Property11);
+                        return null;
+                    }
 
-    private int this[string i] { get { return 5; } set { } }
-    public void Method3()
-    {
-        var x = this[""5""];
-        this[""5""] = 10;
-    }
+                    private int this[string i] { get { return 5; } set { } }
+                    public void Method3()
+                    {
+                        var x = this["5"];
+                        this["5"] = 10;
+                    }
 
-    private int Property12 { get; set; } = 42; // FN
-}
-").Verify();
+                    private int Property12 { get; set; } = 42; // FN
+                }
+
+                """).VerifyNoIssues();
 
         [TestMethod]
         public void UnusedPrivateMember_Properties_Accessors() =>

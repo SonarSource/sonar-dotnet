@@ -53,7 +53,7 @@ public class LoggerMembersNamesShouldComplyTest
             }
             """)
            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
-           .Verify();
+           .VerifyNoIssues();
 
     [TestMethod]
     public void LoggerMembersNamesShouldComply_MicrosoftExtensionsLogging_CS() =>

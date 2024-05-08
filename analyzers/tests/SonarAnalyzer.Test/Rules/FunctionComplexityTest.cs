@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Test.Rules
         {
             if (!TestContextHelper.IsAzureDevOpsContext) // ToDo: Test doesn't work on Azure DevOps
             {
-                CreateCSBuilder(3).AddPaths("SyntaxWalker_InsufficientExecutionStackException.cs").Verify();
+                CreateCSBuilder(3).AddPaths("SyntaxWalker_InsufficientExecutionStackException.cs").VerifyNoIssues();
             }
         }
 

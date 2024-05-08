@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Test.Rules
             Builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsing.cs", "SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsingConsumer.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .WithConcurrentAnalysis(false)
-                .Verify();
+                .VerifyNoIssues();  // FN, global usings are not supported
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_CSharp10_FileScopesNamespace() =>

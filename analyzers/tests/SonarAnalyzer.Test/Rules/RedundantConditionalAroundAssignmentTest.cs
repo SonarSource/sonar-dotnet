@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Test.Rules
         public void RedundantConditionalAroundAssignment_CSharp11() =>
              builder.AddPaths("RedundantConditionalAroundAssignment.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+                .VerifyNoIssues();  // FN, list pattern is not supported
 
 #endif
 

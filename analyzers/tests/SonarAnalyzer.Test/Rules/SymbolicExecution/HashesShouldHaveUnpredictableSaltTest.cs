@@ -107,7 +107,7 @@ public class HashesShouldHaveUnpredictableSaltTest
     public void HashesShouldHaveUnpredictableSalt_Sonar_CSharp10() =>
         sonar.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp10.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp10)
-            .Verify();
+            .VerifyNoIssues();  // FN mixed declarations and expressions in deconstruction are not supported
 
     [TestMethod]
     public void HashesShouldHaveUnpredictableSalt_Roslyn_CSharp10() =>
@@ -119,13 +119,13 @@ public class HashesShouldHaveUnpredictableSaltTest
     public void HashesShouldHaveUnpredictableSalt_Sonar_CSharp11() =>
         sonar.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp11.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp11)
-            .Verify();
+            .VerifyNoIssues();  // FN, UTF-8 string literals are not supported
 
     [TestMethod]
     public void HashesShouldHaveUnpredictableSalt_Roslyn_CSharp11() =>
         roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp11.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp11)
-            .Verify();
+            .VerifyNoIssues();  // FN, UTF-8 string literals are not supported
 
 #endif
 

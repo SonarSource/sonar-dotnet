@@ -37,7 +37,7 @@ public class UseCharOverloadOfStringMethodsTest
 
     [TestMethod]
     public void UseCharOverloadOfStringMethods_VB() =>
-        builderVB.AddPaths("UseCharOverloadOfStringMethods.Framework.vb").Verify();
+        builderVB.AddPaths("UseCharOverloadOfStringMethods.Framework.vb").VerifyNoIssues(); // "char" overloads do not exist on .NET Framework
 
 #else
 

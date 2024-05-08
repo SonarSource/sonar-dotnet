@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void CreatingHashAlgorithms_CSharp12() =>
-            builderCS.AddPaths("CreatingHashAlgorithms.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+            builderCS.AddPaths("CreatingHashAlgorithms.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).VerifyNoIssues();  // primary constructors are not supported yet
 
 #endif
 

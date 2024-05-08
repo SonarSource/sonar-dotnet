@@ -45,17 +45,17 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void PropertiesAccessCorrectField_CSharp12() =>
-            builderCS.AddPaths("PropertiesAccessCorrectField.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+            builderCS.AddPaths("PropertiesAccessCorrectField.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).VerifyNoIssues();   // FN, primary constructors are not supported
 
 #else
 
         [TestMethod]
         public void PropertiesAccessCorrectField_CS_NetFramework() =>
-            builderCS.AddPaths("PropertiesAccessCorrectField.NetFramework.cs").AddReferences(AdditionalReferences).Verify();
+            builderCS.AddPaths("PropertiesAccessCorrectField.NetFramework.cs").AddReferences(AdditionalReferences).VerifyNoIssues();    // WPF is compliant
 
         [TestMethod]
         public void PropertiesAccessCorrectField_VB_NetFramework() =>
-            builderVB.AddPaths("PropertiesAccessCorrectField.NetFramework.vb").AddReferences(AdditionalReferences).Verify();
+            builderVB.AddPaths("PropertiesAccessCorrectField.NetFramework.vb").AddReferences(AdditionalReferences).VerifyNoIssues();    // WPF is compliant
 
 #endif
 

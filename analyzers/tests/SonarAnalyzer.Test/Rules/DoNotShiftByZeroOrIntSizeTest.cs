@@ -20,65 +20,64 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class DoNotShiftByZeroOrIntSizeTest
 {
-    [TestClass]
-    public class DoNotShiftByZeroOrIntSizeTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotShiftByZeroOrIntSize>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<DoNotShiftByZeroOrIntSize>();
 
-        public TestContext TestContext { get; set; }
+    public TestContext TestContext { get; set; }
 
-        [TestMethod]
-        public void DoNotShiftByZeroOrIntSize() =>
-            builder.AddPaths("DoNotShiftByZeroOrIntSize.cs").Verify();
+    [TestMethod]
+    public void DoNotShiftByZeroOrIntSize() =>
+        builder.AddPaths("DoNotShiftByZeroOrIntSize.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void DoNotShiftByZeroOrIntSize_CSharp9() =>
-            builder.AddPaths("DoNotShiftByZeroOrIntSize.CSharp9.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void DoNotShiftByZeroOrIntSize_CSharp9() =>
+        builder.AddPaths("DoNotShiftByZeroOrIntSize.CSharp9.cs")
+            .WithTopLevelStatements()
+            .VerifyNoIssues();  // FN, native ints are not supported
 
-        [TestMethod]
-        public void DoNotShiftByZeroOrIntSize_CSharp10() =>
-            builder.AddPaths("DoNotShiftByZeroOrIntSize.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
-
-        [TestMethod]
-        public void DoNotShiftByZeroOrIntSize_CSharp11() =>
-            builder.AddPaths("DoNotShiftByZeroOrIntSize.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
-
-        [TestMethod]
-        public void DoNotShiftByZeroOrIntSize_RazorFile_CorrectMessage() =>
-            builder.AddSnippet(
-                """
-                @code
-                {
-                    public void Method()
-                    {
-                        byte b = 1;
-                        b = (byte)(b << 10);
-                        b = (byte)(b << 10);
-                        b = 1 << 0;
-
-                        sbyte sb = 1;
-                        sb = (sbyte)(sb << 10);
-
-                        int i = 1 << 10;
-                        i = i << 32;  // Noncompliant
-                    }
-                }
-                """,
-                "SomeRazorFile.razor")
-            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+    [TestMethod]
+    public void DoNotShiftByZeroOrIntSize_CSharp10() =>
+        builder.AddPaths("DoNotShiftByZeroOrIntSize.CSharp10.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
             .Verify();
+
+    [TestMethod]
+    public void DoNotShiftByZeroOrIntSize_CSharp11() =>
+        builder.AddPaths("DoNotShiftByZeroOrIntSize.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
+
+    [TestMethod]
+    public void DoNotShiftByZeroOrIntSize_RazorFile_CorrectMessage() =>
+        builder.AddSnippet(
+            """
+            @code
+            {
+                public void Method()
+                {
+                    byte b = 1;
+                    b = (byte)(b << 10);
+                    b = (byte)(b << 10);
+                    b = 1 << 0;
+
+                    sbyte sb = 1;
+                    sb = (sbyte)(sb << 10);
+
+                    int i = 1 << 10;
+                    i = i << 32;  // Noncompliant
+                }
+            }
+            """,
+            "SomeRazorFile.razor")
+        .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+        .Verify();
 
 #endif
 
-    }
 }

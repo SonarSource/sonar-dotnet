@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void OverrideGetHashCodeOnOverridingEquals_CSharp9() =>
-            builder.AddPaths("OverrideGetHashCodeOnOverridingEquals.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builder.AddPaths("OverrideGetHashCodeOnOverridingEquals.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).VerifyNoIssues();  // records are compliant
 
 #endif
 

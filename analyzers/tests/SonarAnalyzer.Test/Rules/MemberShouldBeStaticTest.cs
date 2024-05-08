@@ -20,73 +20,74 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class MemberShouldBeStaticTest
 {
-    [TestClass]
-    public class MemberShouldBeStaticTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<MemberShouldBeStatic>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<MemberShouldBeStatic>();
 
-        [DataTestMethod]
-        [DataRow("1.0.0", "3.0.20105.1")]
-        [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
-        public void MemberShouldBeStatic(string aspnetCoreVersion, string aspnetVersion) =>
-            builder.AddPaths("MemberShouldBeStatic.cs")
-                .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreMvcWebApiCompatShim(aspnetCoreVersion)
-                                        .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspnetVersion))
-                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspnetCoreVersion))
-                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspnetCoreVersion))
-                                        .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspnetCoreVersion)))
-                .Verify();
+    [DataTestMethod]
+    [DataRow("1.0.0", "3.0.20105.1")]
+    [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
+    public void MemberShouldBeStatic(string aspnetCoreVersion, string aspnetVersion) =>
+        builder.AddPaths("MemberShouldBeStatic.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreMvcWebApiCompatShim(aspnetCoreVersion)
+                                    .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspnetVersion))
+                                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspnetCoreVersion))
+                                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspnetCoreVersion))
+                                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspnetCoreVersion)))
+            .Verify();
 
-        [TestMethod]
-        public void MemberShouldBeStatic_WinForms() =>
-            builder.AddPaths("MemberShouldBeStatic.WinForms.cs")
-                .AddReferences(MetadataReferenceFacade.SystemWindowsForms)
-                .Verify();
+    [TestMethod]
+    public void MemberShouldBeStatic_WinForms() =>
+        builder.AddPaths("MemberShouldBeStatic.WinForms.cs")
+            .AddReferences(MetadataReferenceFacade.SystemWindowsForms)
+            .Verify();
 
 #if NET
-        [TestMethod]
-        public void MemberShouldBeStatic_CSharp9() =>
-            builder.AddPaths("MemberShouldBeStatic.CSharp9.cs").WithTopLevelStatements().Verify();
+    [TestMethod]
+    public void MemberShouldBeStatic_CSharp9() =>
+        builder.AddPaths("MemberShouldBeStatic.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
-        public void MemberShouldBeStatic_CSharp12() =>
-            builder.AddPaths("MemberShouldBeStatic.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+    [TestMethod]
+    public void MemberShouldBeStatic_CSharp12() =>
+        builder.AddPaths("MemberShouldBeStatic.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
 #endif
 
-        [TestMethod]
-        public void MemberShouldBeStatic_CSharp8() =>
-            builder.AddPaths("MemberShouldBeStatic.CSharp8.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .AddReferences(MetadataReferenceFacade.NetStandard21)
-                .Verify();
+    [TestMethod]
+    public void MemberShouldBeStatic_CSharp8() =>
+        builder.AddPaths("MemberShouldBeStatic.CSharp8.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .AddReferences(MetadataReferenceFacade.NetStandard21)
+            .Verify();
 
 #if NETFRAMEWORK // HttpApplication is available only on .Net Framework
-        [TestMethod]
-        public void MemberShouldBeStatic_HttpApplication() =>
-            builder.AddSnippet(@"
+    [TestMethod]
+    public void MemberShouldBeStatic_HttpApplication() =>
+        builder.AddSnippet(@"
 public class HttpApplication1 : System.Web.HttpApplication
 {
-    public int Foo() => 0;
+public int Foo() => 0;
 
-    protected int FooFoo() => 0; // Noncompliant
+protected int FooFoo() => 0; // Noncompliant
 }").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
 
 #endif
 
-        [TestMethod]
-        public void MemberShouldBeStatic_InvalidCode() =>
+    [TestMethod]
+    public void MemberShouldBeStatic_InvalidCode() =>
         // Handle invalid code causing NullReferenceException: https://github.com/SonarSource/sonar-dotnet/issues/819
-            builder.AddSnippet(@"
-public class Class7
-{
-    public async Task<Result<T> Function<T>(Func<Task<Result<T>>> f)
-    {
-        Result<T> result;
-        result = await f();
-        return result;
-    }
-}").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
-    }
+        builder.AddSnippet("""
+
+            public class Class7
+            {
+                public async Task<Result<T> Function<T>(Func<Task<Result<T>>> f)
+                {
+                    Result<T> result;
+                    result = await f();
+                    return result;
+                }
+            }
+            """).VerifyNoIssuesIgnoreErrors();
 }

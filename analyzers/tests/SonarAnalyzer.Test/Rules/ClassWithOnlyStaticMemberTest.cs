@@ -37,13 +37,13 @@ namespace SonarAnalyzer.Test.Rules
         public void ClassWithOnlyStaticMember_CSharp9() =>
             builder.AddPaths("ClassWithOnlyStaticMember.CSharp9.cs")
                 .WithTopLevelStatements()
-                .Verify();
+                .VerifyNoIssues();   // records are compliant
 
         [TestMethod]
         public void ClassWithOnlyStaticMember_CSharp11() =>
             builder.AddPaths("ClassWithOnlyStaticMember.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+                .VerifyNoIssues();   // inheriting from interfaces with default members is compliant
 
         [TestMethod]
         public void ClassWithOnlyStaticMember_CSharp12() =>

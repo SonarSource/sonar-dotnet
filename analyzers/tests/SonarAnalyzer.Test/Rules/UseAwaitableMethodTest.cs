@@ -58,7 +58,7 @@ public class UseAwaitableMethodTest
                     ActionProperty(); // Compliant;
                 }
             }            
-            """).Verify();
+            """).VerifyNoIssues();
 
     [TestMethod]
     public void UseAwaitableMethod_Sockets() =>

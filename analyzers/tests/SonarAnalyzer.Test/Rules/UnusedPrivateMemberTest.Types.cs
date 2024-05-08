@@ -67,25 +67,26 @@ public class PrivateTypes
 
         [TestMethod]
         public void UnusedPrivateMember_Types_Internals() =>
-            builder.AddSnippet(@"
-// https://github.com/SonarSource/sonar-dotnet/issues/1225
-// https://github.com/SonarSource/sonar-dotnet/issues/904
-using System;
-public class Class1
-{
-    public void Method1()
-    {
-        var x = Sample.Constants.X;
-    }
-}
+            builder.AddSnippet("""
+                // https://github.com/SonarSource/sonar-dotnet/issues/1225
+                // https://github.com/SonarSource/sonar-dotnet/issues/904
+                using System;
+                public class Class1
+                {
+                    public void Method1()
+                    {
+                        var x = Sample.Constants.X;
+                    }
+                }
 
-public class Sample
-{
-    internal class Constants
-    {
-        public const int X = 5;
-    }
-}").Verify();
+                public class Sample
+                {
+                    internal class Constants
+                    {
+                        public const int X = 5;
+                    }
+                }
+                """).VerifyNoIssues();
 
         [TestMethod]
         public void UnusedPrivateMember_Types_DirectReferences() =>

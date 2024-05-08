@@ -87,53 +87,57 @@ public class Generics1 // Noncompliant {{Split this class into smaller and more 
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Task_Not_Counted() =>
-            withThreshold0.AddSnippet(@"
-using System.Threading.Tasks;
-public class Tasks // Compliant, Task types are not counted
-{
-    public void Foo<T>(Task task1, Task<T> task2) { }
-}
-").Verify();
+            withThreshold0.AddSnippet("""
+                using System.Threading.Tasks;
+                public class Tasks // Compliant, Task types are not counted
+                {
+                    public void Foo<T>(Task task1, Task<T> task2) { }
+                }
+                """).VerifyNoIssues();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Action_Not_Counted() =>
-            withThreshold0.AddSnippet(@"
-using System;
-public class Actions // Compliant, Action types are not counted
-{
-    public void Foo<T>(Action action1, Action<T> action2, Action<T, T> action3, Action<T, T, T> action4, Action<T, T, T, T> action5) { }
-}
-").Verify();
+            withThreshold0.AddSnippet("""
+                using System;
+                public class Actions // Compliant, Action types are not counted
+                {
+                    public void Foo<T>(Action action1, Action<T> action2, Action<T, T> action3, Action<T, T, T> action4, Action<T, T, T, T> action5) { }
+                }
+
+                """).VerifyNoIssues();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Func_Not_Counted() =>
-            withThreshold0.AddSnippet(@"
-using System;
-public class Functions // Compliant, Func types are not counted
-{
-    public void Foo<T>(Func<T> func1, Func<T, T> func2, Func<T, T, T> func3, Func<T, T, T, T> func4) { }
-}
-").Verify();
+            withThreshold0.AddSnippet("""
+                using System;
+                public class Functions // Compliant, Func types are not counted
+                {
+                    public void Foo<T>(Func<T> func1, Func<T, T> func2, Func<T, T, T> func3, Func<T, T, T, T> func4) { }
+                }
+
+                """).VerifyNoIssues();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Pointers_Not_Counted() =>
-            withThreshold0.AddSnippet(@"
-using System;
-public class Pointers // Compliant, pointers are not counted
-{
-    public void Foo(int* pointer) { } // Error [CS0214]
-}
-").Verify();
+            withThreshold0.AddSnippet("""
+                using System;
+                public class Pointers // Compliant, pointers are not counted
+                {
+                    public void Foo(int* pointer) { } // Error [CS0214]
+                }
+
+                """).Verify();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Enums_Not_Counted() =>
-            withThreshold0.AddSnippet(@"
-using System;
-public class Pointers // Compliant, enums are not counted
-{
-    public ConsoleColor Foo(ConsoleColor c) { return ConsoleColor.Black; }
-}
-").Verify();
+            withThreshold0.AddSnippet("""
+                using System;
+                public class Pointers // Compliant, enums are not counted
+                {
+                    public ConsoleColor Foo(ConsoleColor c) { return ConsoleColor.Black; }
+                }
+
+                """).VerifyNoIssues();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Lazy_Not_Counted() =>
@@ -306,14 +310,14 @@ public interface I // Noncompliant {{Split this interface into smaller and more 
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Self_Reference() =>
-            withThreshold0.AddSnippet(@"
-using System;
-using System.Collections.Generic;
-public class Self // Compliant, self references are not counted
-{
-    void M1(Self other) { }
-}
-").Verify();
+            withThreshold0.AddSnippet("""
+                using System;
+                using System.Collections.Generic;
+                public class Self // Compliant, self references are not counted
+                {
+                    void M1(Self other) { }
+                }
+                """).VerifyNoIssues();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Base_Classes_Interfaces_NotCounted() =>
@@ -345,30 +349,32 @@ public class Self // Noncompliant {{Split this class into smaller and more speci
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Attributes() =>
-            withThreshold0.AddSnippet(@"
-using System;
-[Serializable]
-public class Self // Compliant, attributes are not counted
-{
-    [Obsolete]
-    void M1()
-    {
-    }
-}
-").Verify();
+            withThreshold0.AddSnippet("""
+                using System;
+                [Serializable]
+                public class Self // Compliant, attributes are not counted
+                {
+                    [Obsolete]
+                    void M1()
+                    {
+                    }
+                }
+
+                """).VerifyNoIssues();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Nameof() =>
-            withThreshold0.AddSnippet(@"
-public class A // Compliant, types referenced by the nameof expression are not counted
-{
-    public A()
-    {
-        var s1 = nameof(System.Type);
-        var s2 = nameof(System.Action);
-    }
-}
-").Verify();
+            withThreshold0.AddSnippet("""
+                public class A // Compliant, types referenced by the nameof expression are not counted
+                {
+                    public A()
+                    {
+                        var s1 = nameof(System.Type);
+                        var s2 = nameof(System.Action);
+                    }
+                }
+
+                """).VerifyNoIssues();
 
 #if NET
 
@@ -378,13 +384,14 @@ public class A // Compliant, types referenced by the nameof expression are not c
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_InRecord_Enums_Not_Counted() =>
-            withThreshold0.AddSnippet(@"
-using System;
-public record Pointers // Compliant, enums are not counted
-{
-    public ConsoleColor Foo(ConsoleColor c) { return ConsoleColor.Black; }
-}
-").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            withThreshold0.AddSnippet("""
+                using System;
+                public record Pointers // Compliant, enums are not counted
+                {
+                    public ConsoleColor Foo(ConsoleColor c) { return ConsoleColor.Black; }
+                }
+
+                """).WithOptions(ParseOptionsHelper.FromCSharp9).VerifyNoIssues();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Base_Records_Interfaces_NotCounted() =>
@@ -403,19 +410,19 @@ public record Self // Noncompliant
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_Primitive_Types_Not_Counted() =>
-            withThreshold0.AddSnippet(@"
-using System;
-public class Types // Compliant, pointers are not counted
-{
-    public void Foo(bool b1,
-        byte b2, sbyte b3, int i1, uint i2, long i3, ulong i4,
-        nint ni1, nuint ni2,
-        IntPtr p1, UIntPtr p2,
-        char c1, float d1,
-        double d2, string s1,
-        object o1) { }
-}
-").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            withThreshold0.AddSnippet("""
+                using System;
+                public class Types // Compliant, pointers are not counted
+                {
+                    public void Foo(bool b1,
+                        byte b2, sbyte b3, int i1, uint i2, long i3, ulong i4,
+                        nint ni1, nuint ni2,
+                        IntPtr p1, UIntPtr p2,
+                        char c1, float d1,
+                        double d2, string s1,
+                        object o1) { }
+                }
+                """).WithOptions(ParseOptionsHelper.FromCSharp9).VerifyNoIssues();
 
         [TestMethod]
         public void AvoidExcessiveClassCoupling_CSharp10() =>

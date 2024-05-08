@@ -73,8 +73,7 @@ namespace SonarAnalyzer.Test.Rules
         public void MarkWindowsFormsMainWithStaThread_VB_NoWindowsForms() =>
             builderVB
                 .AddPaths("MarkWindowsFormsMainWithStaThread_NoWindowsForms.vb")
-                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
                 .WithOutputKind(OutputKind.WindowsApplication)
-                .Verify();
+                .VerifyNoIssuesIgnoreErrors();
     }
 }

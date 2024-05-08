@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void BypassingAccessibility_CSharp12() =>
-            builderCS.AddPaths("BypassingAccessibility.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+            builderCS.AddPaths("BypassingAccessibility.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).VerifyNoIssues();  // zero-overhead member access is not supported yet
 
 #endif
 

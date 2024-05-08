@@ -48,7 +48,7 @@ public class ToStringShouldNotReturnNullTest
         builderCS
             .WithOptions(ParseOptionsHelper.FromCSharp11)
             .AddPaths("ToStringShouldNotReturnNull.CSharp11.cs")
-            .Verify();
+            .VerifyNoIssues();  // static virtual interface methods are compliant
 
 #endif
 

@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Test.Rules
         public void EmptyNestedBlock_CSharp10() =>
             builderCS.AddPaths("EmptyNestedBlock.CSharp10.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
+                .VerifyNoIssues();  // FN, parameterless struct constructors are not supported
 
 #endif
 

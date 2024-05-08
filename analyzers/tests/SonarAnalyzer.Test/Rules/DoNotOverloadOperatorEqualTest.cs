@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Test.Rules
         public void DoNotOverloadOperatorEqual_CSharp11() =>
             builder.AddPaths("DoNotOverloadOperatorEqual.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+                .VerifyNoIssues();  // overloading as a static interface method is compliant
 
 #endif
 

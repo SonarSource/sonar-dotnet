@@ -20,31 +20,30 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class ImplementIDisposableCorrectlyTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<ImplementIDisposableCorrectly>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void ImplementIDisposableCorrectly() =>
-            builder.AddPaths("ImplementIDisposableCorrectly.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+[TestClass]
+public class ImplementIDisposableCorrectlyTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<ImplementIDisposableCorrectly>();
+
+    [TestMethod]
+    public void ImplementIDisposableCorrectly() =>
+        builder.AddPaths("ImplementIDisposableCorrectly.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
-        [TestMethod]
-        public void ImplementIDisposableCorrectly_FromCSharp9() =>
-            builder.AddPaths("ImplementIDisposableCorrectly.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+    [TestMethod]
+    public void ImplementIDisposableCorrectly_FromCSharp9() =>
+        builder.AddPaths("ImplementIDisposableCorrectly.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
 #endif
 
-        [TestMethod]
-        public void ImplementIDisposableCorrectly_AbstractClass() =>
-            builder.AddPaths("ImplementIDisposableCorrectly.AbstractClass.cs").Verify();
+    [TestMethod]
+    public void ImplementIDisposableCorrectly_AbstractClass() =>
+        builder.AddPaths("ImplementIDisposableCorrectly.AbstractClass.cs").Verify();
 
-        [TestMethod]
-        public void ImplementIDisposableCorrectly_PartialClassesInDifferentFiles() =>
-            builder.AddPaths("ImplementIDisposableCorrectlyPartial1.cs", "ImplementIDisposableCorrectlyPartial2.cs").Verify();
-    }
+    [TestMethod]
+    public void ImplementIDisposableCorrectly_PartialClassesInDifferentFiles() =>
+        builder.AddPaths("ImplementIDisposableCorrectlyPartial1.cs", "ImplementIDisposableCorrectlyPartial2.cs").VerifyNoIssues();
 }

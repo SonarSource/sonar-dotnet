@@ -157,6 +157,6 @@ namespace SonarAnalyzer.Test.Rules
                         WNetAddConnection2(netResource, "password", "username", 0);
                     }
                 }
-                """).Verify();
+                """).VerifyNoIssues();
     }
 }

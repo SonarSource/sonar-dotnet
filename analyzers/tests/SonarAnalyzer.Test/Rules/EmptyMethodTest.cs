@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Test.Rules
         public void EmptyMethod_CSharp10() =>
             builderCS.AddPaths("EmptyMethod.CSharp10.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
+                .VerifyNoIssues();  // FN, parameterless struct constructors are not supported
 
         [TestMethod]
         public void EmptyMethod_CSharp11() =>

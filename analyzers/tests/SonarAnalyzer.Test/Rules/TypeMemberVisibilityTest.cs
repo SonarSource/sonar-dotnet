@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void TypeMemberVisibility_CSharp11() =>
-            builder.AddPaths("TypeMemberVisibility.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+            builder.AddPaths("TypeMemberVisibility.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).VerifyNoIssues(); // file-scoped types are compliant
 
 #endif
 

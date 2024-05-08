@@ -88,7 +88,8 @@ public class EmptyCollectionsShouldNotBeEnumeratedTest
 
     [TestMethod]
     public void EmptyCollectionsShouldNotBeEnumerated_Sonar_CSharp10() =>
-        sonar.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+        sonar.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10)
+            .VerifyNoIssues();  // FN, mixed declarations and expressions in deconstruction are not supported
 
     [TestMethod]
     public void EmptyCollectionsShouldNotBeEnumerated_Roslyn_CSharp10() =>
@@ -96,15 +97,18 @@ public class EmptyCollectionsShouldNotBeEnumeratedTest
 
     [TestMethod]
     public void EmptyCollectionsShouldNotBeEnumerated_Sonar_CSharp11() =>
-        sonar.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+        sonar.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11)
+            .VerifyNoIssues();  // FN, pattern matching span on string and list patterns are not supported
 
     [TestMethod]
     public void EmptyCollectionsShouldNotBeEnumerated_Roslyn_CSharp11() =>
-        roslynCS.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+        roslynCS.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11)
+            .VerifyNoIssues();  // FN, pattern matching span on string and list patterns are not supported
 
     [TestMethod]
     public void EmptyCollectionsShouldNotBeEnumerated_Roslyn_CSharp12() =>
-        roslynCS.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+        roslynCS.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12)
+            .VerifyNoIssues();  // FN, collection initializers are not supported
 
 #endif
 

@@ -32,3 +32,9 @@ namespace TestsFromDeprecatedS4214
         public static extern bool RemoveDirectory(string name);  // Noncompliant
     }
 }
+
+interface Foo
+{
+    [DllImport("mynativelib")]
+    extern public static void Bar(string s, int x);     // FN
+}

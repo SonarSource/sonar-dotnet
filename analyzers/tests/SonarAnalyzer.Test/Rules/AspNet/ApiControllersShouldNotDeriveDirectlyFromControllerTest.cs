@@ -64,36 +64,32 @@ public class ApiControllersShouldNotDeriveDirectlyFromControllerTest
     [DataRow("""TempData["foo"]""")]
     [DataTestMethod]
     public void ApiControllersShouldNotDeriveDirectlyFromController_DoesNotRaiseWithViewFunctionality(string invocation) =>
-        builder
-            .AddSnippet($$"""
-                using Microsoft.AspNetCore.Mvc;
-                using Microsoft.AspNetCore.Mvc.Filters;
+        builder.AddSnippet($$"""
+            using Microsoft.AspNetCore.Mvc;
+            using Microsoft.AspNetCore.Mvc.Filters;
 
-                [ApiController]
-                public class Invocations : Controller    // Compliant
-                {
-                    object model = null;
-                    public object Foo() => {{invocation}};
-                }
-                """)
-            .Verify();
+            [ApiController]
+            public class Invocations : Controller    // Compliant
+            {
+                object model = null;
+                public object Foo() => {{invocation}};
+            }
+            """).VerifyNoIssues();
 
     [DataRow("""OnActionExecuted(default(ActionExecutedContext))""")]
     [DataRow("""OnActionExecuting(default(ActionExecutingContext))""")]
     [DataTestMethod]
     public void ApiControllersShouldNotDeriveDirectlyFromController_DoesNotRaiseWithVoidInvocations(string assignment) =>
-        builder
-            .AddSnippet($$"""
-                using Microsoft.AspNetCore.Mvc;
-                using Microsoft.AspNetCore.Mvc.Filters;
+        builder.AddSnippet($$"""
+            using Microsoft.AspNetCore.Mvc;
+            using Microsoft.AspNetCore.Mvc.Filters;
 
-                [ApiController]
-                public class VoidInvocations : Controller           // Compliant
-                {
-                    public void Foo() => {{assignment}};
-                }
-                """)
-            .Verify();
+            [ApiController]
+            public class VoidInvocations : Controller           // Compliant
+            {
+                public void Foo() => {{assignment}};
+            }
+            """).VerifyNoIssues();
 
     [DataRow("public Test() => foo = View();", DisplayName = "Constructor")]
     [DataRow("~Test() => foo = View();", DisplayName = "Destructor")]
@@ -102,18 +98,16 @@ public class ApiControllersShouldNotDeriveDirectlyFromControllerTest
     [DataRow("object this[int index] => View();", DisplayName = "Indexer")]
     [DataTestMethod]
     public void ApiControllersShouldNotDeriveDirectlyFromController_DoesNotRaiseInDifferentConstructs(string code) =>
-        builder
-            .AddSnippet($$"""
-                using Microsoft.AspNetCore.Mvc;
+        builder.AddSnippet($$"""
+            using Microsoft.AspNetCore.Mvc;
 
-                [ApiController]
-                public class Test : Controller  // Compliant
-                {
-                    object foo;
-                    {{code}}
-                }
-                """)
-            .Verify();
+            [ApiController]
+            public class Test : Controller  // Compliant
+            {
+                object foo;
+                {{code}}
+            }
+            """).VerifyNoIssues();
 
     [TestMethod]
     public void ApiControllersShouldNotDeriveDirectlyFromController_CodeFix() =>

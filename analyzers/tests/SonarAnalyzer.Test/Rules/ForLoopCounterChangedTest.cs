@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Test.Rules
         public void ForLoopCounterChanged_CSharp11() =>
             builder.AddPaths("ForLoopCounterChanged.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+                .VerifyNoIssues();  // FN, compound assignments are not supported
 
 #endif
 

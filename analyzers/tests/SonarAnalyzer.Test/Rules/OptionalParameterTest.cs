@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void OptionalParameter_CSharp10() =>
-            builderCS.AddPaths("OptionalParameter.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builderCS.AddPaths("OptionalParameter.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).VerifyNoIssues();  // CallerArgumentExpression is compliant
 
         [TestMethod]
         public void OptionalParameter_CSharp11() =>

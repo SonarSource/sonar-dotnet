@@ -54,7 +54,7 @@ public class JSInvokableMethodsShouldBePublicTest
     public void JSInvokableMethodsShouldBePublic_CSharp9() =>
         builder.AddPaths("JSInvokableMethodsShouldBePublic.CSharp9.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp9)
-            .Verify();
+            .VerifyNoIssues();  // local functions are compliant
 }
 
 #endif

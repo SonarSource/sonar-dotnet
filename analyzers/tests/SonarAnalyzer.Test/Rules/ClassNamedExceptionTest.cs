@@ -40,14 +40,14 @@ public class ClassNamedExceptionTest
         builderCS
             .AddPaths("ClassNamedException.CSharp9.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp9)
-            .Verify();
+            .VerifyNoIssues();   // records are compliant
 
     [TestMethod]
     public void ClassNamedException_FromCSharp10() =>
         builderCS
             .AddPaths("ClassNamedException.CSharp10.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp10)
-            .Verify();
+            .VerifyNoIssues();   // records are compliant
 
     [TestMethod]
     public void ClassNamedException_VB() =>
@@ -61,13 +61,13 @@ public class ClassNamedExceptionTest
     public void ClassNamedException_Interop_CS() =>
         builderCS
             .AddPaths("ClassNamedException.Interop.cs")
-            .Verify();
+            .VerifyNoIssues();
 
     [TestMethod]
     public void ClassNamedException_Interop_VB() =>
         builderVB
             .AddPaths("ClassNamedException.Interop.vb")
-            .Verify();
+            .VerifyNoIssues();
 
 #endif
 }

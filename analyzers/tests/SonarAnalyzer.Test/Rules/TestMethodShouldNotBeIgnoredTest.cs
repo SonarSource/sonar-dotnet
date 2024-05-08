@@ -55,8 +55,7 @@ namespace SonarAnalyzer.Test.Rules
                     [Ignore]
                 }
                 """)
-                .WithErrorBehavior(CompilationErrorBehavior.Ignore)    // IgnoreAttribute doesn't contain any reason param
-                .Verify();
+                .VerifyNoIssuesIgnoreErrors();
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
@@ -76,11 +75,11 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow("2.0.0")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void TestMethodShouldNotBeIgnored_Xunit(string testFwkVersion) =>
-            builder.AddPaths("TestMethodShouldNotBeIgnored.Xunit.cs").AddReferences(NuGetMetadataReference.XunitFramework(testFwkVersion)).Verify();
+            builder.AddPaths("TestMethodShouldNotBeIgnored.Xunit.cs").AddReferences(NuGetMetadataReference.XunitFramework(testFwkVersion)).VerifyNoIssues();    // rule does not apply to Xunit
 
         [TestMethod]
         public void TestMethodShouldNotBeIgnored_Xunit_v1() =>
-            builder.AddPaths("TestMethodShouldNotBeIgnored.Xunit.v1.cs").AddReferences(NuGetMetadataReference.XunitFrameworkV1).Verify();
+            builder.AddPaths("TestMethodShouldNotBeIgnored.Xunit.v1.cs").AddReferences(NuGetMetadataReference.XunitFrameworkV1).VerifyNoIssues();    // rule does not apply to Xunit
 
 #if NET
 

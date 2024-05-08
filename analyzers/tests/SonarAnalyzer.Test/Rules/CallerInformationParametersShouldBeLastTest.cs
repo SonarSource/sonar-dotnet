@@ -44,7 +44,8 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void CallerInformationParametersShouldBeLast_CSharp11() =>
-            builder.AddPaths("CallerInformationParametersShouldBeLast.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+            builder.AddPaths("CallerInformationParametersShouldBeLast.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11)
+                .VerifyNoIssues();   // overriding an abstract default implementation is compliant
 
 #endif
 

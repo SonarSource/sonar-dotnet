@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Test.Rules
         {
             if (!TestContextHelper.IsAzureDevOpsContext) // ToDo: Test throws OOM on Azure DevOps
             {
-                builderCS.AddPaths("SyntaxWalker_InsufficientExecutionStackException.cs").Verify();
+                builderCS.AddPaths("SyntaxWalker_InsufficientExecutionStackException.cs").VerifyNoIssues();
             }
         }
 
@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Test.Rules
         {
             if (!TestContextHelper.IsAzureDevOpsContext) // ToDO: Test throws OOM on Azure DevOps
             {
-                builderVB.AddPaths("SyntaxWalker_InsufficientExecutionStackException.vb").Verify();
+                builderVB.AddPaths("SyntaxWalker_InsufficientExecutionStackException.vb").VerifyNoIssues();
             }
         }
     }

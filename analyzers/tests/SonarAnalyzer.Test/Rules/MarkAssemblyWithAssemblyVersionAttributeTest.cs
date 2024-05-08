@@ -21,83 +21,82 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class MarkAssemblyWithAssemblyVersionAttributeTest
 {
-    [TestClass]
-    public class MarkAssemblyWithAssemblyVersionAttributeTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.MarkAssemblyWithAssemblyVersionAttribute>();
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.MarkAssemblyWithAssemblyVersionAttribute>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.MarkAssemblyWithAssemblyVersionAttribute>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.MarkAssemblyWithAssemblyVersionAttribute>();
 
-        [TestMethod]
-        public void MarkAssemblyWithAssemblyVersionAttribute_CS() =>
-            builderCS.AddPaths("MarkAssemblyWithAssemblyVersionAttribute.cs").WithConcurrentAnalysis(false).Verify();
+    [TestMethod]
+    public void MarkAssemblyWithAssemblyVersionAttribute_CS() =>
+        builderCS.AddPaths("MarkAssemblyWithAssemblyVersionAttribute.cs").WithConcurrentAnalysis(false).VerifyNoIssues();
 
-        [TestMethod]
-        public void MarkAssemblyWithAssemblyVersionAttributeRazor_CS() =>
-            builderCS
-                .AddPaths("MarkAssemblyWithAssemblyVersionAttributeRazor.cs")
-                .WithConcurrentAnalysis(false)
-                .AddReferences(GetAspNetCoreRazorReferences())
-                .Verify();
+    [TestMethod]
+    public void MarkAssemblyWithAssemblyVersionAttributeRazor_CS() =>
+        builderCS
+            .AddPaths("MarkAssemblyWithAssemblyVersionAttributeRazor.cs")
+            .WithConcurrentAnalysis(false)
+            .AddReferences(GetAspNetCoreRazorReferences())
+            .VerifyNoIssues();
 
-        [TestMethod]
-        public void MarkAssemblyWithAssemblyVersionAttribute_CS_Concurrent() =>
-            builderCS
-                .AddPaths("MarkAssemblyWithAssemblyVersionAttribute.cs", "MarkAssemblyWithAssemblyVersionAttributeRazor.cs")
-                .AddReferences(GetAspNetCoreRazorReferences())
-                .WithAutogenerateConcurrentFiles(false)
-                .Verify();
+    [TestMethod]
+    public void MarkAssemblyWithAssemblyVersionAttribute_CS_Concurrent() =>
+        builderCS
+            .AddPaths("MarkAssemblyWithAssemblyVersionAttribute.cs", "MarkAssemblyWithAssemblyVersionAttributeRazor.cs")
+            .AddReferences(GetAspNetCoreRazorReferences())
+            .WithAutogenerateConcurrentFiles(false)
+            .VerifyNoIssues();
 
-        [TestMethod]
-        public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_CS() =>
-            builderCS.AddPaths("MarkAssemblyWithAssemblyVersionAttributeNoncompliant.cs")
-                .WithConcurrentAnalysis(false)
-                .Verify();
+    [TestMethod]
+    public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_CS() =>
+        builderCS.AddPaths("MarkAssemblyWithAssemblyVersionAttributeNoncompliant.cs")
+            .WithConcurrentAnalysis(false)
+            .Verify();
 
-        [TestMethod]
-        public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_NoTargets_ShouldNotRaise_CS() =>
-            // False positive. No assembly gets generated when Microsoft.Build.NoTargets is referenced.
-            builderCS.AddSnippet("// Noncompliant ^1#0 {{Provide an 'AssemblyVersion' attribute for assembly 'project0'.}}")
-                .AddReferences(NuGetMetadataReference.MicrosoftBuildNoTargets())
-                .WithConcurrentAnalysis(false)
-                .Verify();
+    [TestMethod]
+    public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_NoTargets_ShouldNotRaise_CS() =>
+        // False positive. No assembly gets generated when Microsoft.Build.NoTargets is referenced.
+        builderCS.AddSnippet("// Noncompliant ^1#0 {{Provide an 'AssemblyVersion' attribute for assembly 'project0'.}}")
+            .AddReferences(NuGetMetadataReference.MicrosoftBuildNoTargets())
+            .WithConcurrentAnalysis(false)
+            .Verify();
 
-        [TestMethod]
-        public void MarkAssemblyWithAssemblyVersionAttribute_VB() =>
-            builderVB.AddPaths("MarkAssemblyWithAssemblyVersionAttribute.vb").WithConcurrentAnalysis(false).Verify();
+    [TestMethod]
+    public void MarkAssemblyWithAssemblyVersionAttribute_VB() =>
+        builderVB.AddPaths("MarkAssemblyWithAssemblyVersionAttribute.vb").WithConcurrentAnalysis(false).VerifyNoIssues();
 
-        [TestMethod]
-        public void MarkAssemblyWithAssemblyVersionAttributeRazor_VB() =>
-            builderVB
-                .AddPaths("MarkAssemblyWithAssemblyVersionAttributeRazor.vb")
-                .WithConcurrentAnalysis(false)
-                .AddReferences(GetAspNetCoreRazorReferences())
-                .Verify();
+    [TestMethod]
+    public void MarkAssemblyWithAssemblyVersionAttributeRazor_VB() =>
+        builderVB
+            .AddPaths("MarkAssemblyWithAssemblyVersionAttributeRazor.vb")
+            .WithConcurrentAnalysis(false)
+            .AddReferences(GetAspNetCoreRazorReferences())
+            .VerifyNoIssues();
 
-        [TestMethod]
-        public void MarkAssemblyWithAssemblyVersionAttribute_VB_Concurrent() =>
-            builderVB
-                .AddPaths("MarkAssemblyWithAssemblyVersionAttribute.vb", "MarkAssemblyWithAssemblyVersionAttributeRazor.vb")
-                .AddReferences(GetAspNetCoreRazorReferences())
-                .WithAutogenerateConcurrentFiles(false)
-                .Verify();
+    [TestMethod]
+    public void MarkAssemblyWithAssemblyVersionAttribute_VB_Concurrent() =>
+        builderVB
+            .AddPaths("MarkAssemblyWithAssemblyVersionAttribute.vb", "MarkAssemblyWithAssemblyVersionAttributeRazor.vb")
+            .AddReferences(GetAspNetCoreRazorReferences())
+            .WithAutogenerateConcurrentFiles(false)
+            .VerifyNoIssues();
 
-        [TestMethod]
-        public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_VB() =>
-            builderVB.AddPaths("MarkAssemblyWithAssemblyVersionAttributeNoncompliant.vb")
-                .WithConcurrentAnalysis(false)
-                .Verify();
+    [TestMethod]
+    public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_VB() =>
+        builderVB.AddPaths("MarkAssemblyWithAssemblyVersionAttributeNoncompliant.vb")
+            .WithConcurrentAnalysis(false)
+            .Verify();
 
-        [TestMethod]
-        public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_NoTargets_ShouldNotRaise_VB() =>
-            // False positive. No assembly gets generated when Microsoft.Build.NoTargets is referenced.
-            builderVB.AddSnippet("' Noncompliant ^1#0 {{Provide an 'AssemblyVersion' attribute for assembly 'project0'.}}")
-                .AddReferences(NuGetMetadataReference.MicrosoftBuildNoTargets())
-                .WithConcurrentAnalysis(false)
-                .Verify();
+    [TestMethod]
+    public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_NoTargets_ShouldNotRaise_VB() =>
+        // False positive. No assembly gets generated when Microsoft.Build.NoTargets is referenced.
+        builderVB.AddSnippet("' Noncompliant ^1#0 {{Provide an 'AssemblyVersion' attribute for assembly 'project0'.}}")
+            .AddReferences(NuGetMetadataReference.MicrosoftBuildNoTargets())
+            .WithConcurrentAnalysis(false)
+            .Verify();
 
-        private static IEnumerable<MetadataReference> GetAspNetCoreRazorReferences() =>
-            NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime(Constants.NuGetLatestVersion);
-    }
+    private static IEnumerable<MetadataReference> GetAspNetCoreRazorReferences() =>
+        NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime(Constants.NuGetLatestVersion);
 }

@@ -20,46 +20,46 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class SerializationConstructorsShouldBeSecuredTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<SerializationConstructorsShouldBeSecured>().AddReferences(MetadataReferenceFacade.SystemSecurityPermissions);
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void SerializationConstructorsShouldBeSecured() =>
-            builder.AddPaths("SerializationConstructorsShouldBeSecured.cs").WithConcurrentAnalysis(false).Verify();
+[TestClass]
+public class SerializationConstructorsShouldBeSecuredTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<SerializationConstructorsShouldBeSecured>().AddReferences(MetadataReferenceFacade.SystemSecurityPermissions);
+
+    [TestMethod]
+    public void SerializationConstructorsShouldBeSecured() =>
+        builder.AddPaths("SerializationConstructorsShouldBeSecured.cs").WithConcurrentAnalysis(false).Verify();
 
 #if NET
 
-        [TestMethod]
-        public void SerializationConstructorsShouldBeSecured_CSharp9() =>
-            builder.AddPaths("SerializationConstructorsShouldBeSecured.CSharp9.cs").WithConcurrentAnalysis(false).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+    [TestMethod]
+    public void SerializationConstructorsShouldBeSecured_CSharp9() =>
+        builder.AddPaths("SerializationConstructorsShouldBeSecured.CSharp9.cs").WithConcurrentAnalysis(false).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
 #endif
 
-        [TestMethod]
-        public void SerializationConstructorsShouldBeSecured_InvalidCode() =>
-            builder.AddSnippet(@"
-[Serializable]
-    public partial class InvalidCode : ISerializable
-    {
-        [FileIOPermissionAttribute(SecurityAction.Demand, Unrestricted = true)]
-        [ZoneIdentityPermission(SecurityAction.Demand, Unrestricted = true)]
-        public InvalidCode() { }
+    [TestMethod]
+    public void SerializationConstructorsShouldBeSecured_InvalidCode() =>
+        builder.AddSnippet("""
+            [Serializable]
+                public partial class InvalidCode : ISerializable
+                {
+                    [FileIOPermissionAttribute(SecurityAction.Demand, Unrestricted = true)]
+                    [ZoneIdentityPermission(SecurityAction.Demand, Unrestricted = true)]
+                    public InvalidCode() { }
 
-        protected (SerializationInfo info, StreamingContext context) { }
+                    protected (SerializationInfo info, StreamingContext context) { }
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context) { }
-    }").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
+                    public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+                }
+            """).VerifyNoIssuesIgnoreErrors();
 
-        [TestMethod]
-        public void SerializationConstructorsShouldBeSecured_NoAssemblyAttribute() =>
-            builder.AddPaths("SerializationConstructorsShouldBeSecured_NoAssemblyAttribute.cs").Verify();
+    [TestMethod]
+    public void SerializationConstructorsShouldBeSecured_NoAssemblyAttribute() =>
+        builder.AddPaths("SerializationConstructorsShouldBeSecured_NoAssemblyAttribute.cs").VerifyNoIssues();
 
-        [TestMethod]
-        public void SerializationConstructorsShouldBeSecured_PartialClasses() =>
-            builder.AddPaths("SerializationConstructorsShouldBeSecured_Part1.cs", "SerializationConstructorsShouldBeSecured_Part2.cs").WithConcurrentAnalysis(false).Verify();
-    }
+    [TestMethod]
+    public void SerializationConstructorsShouldBeSecured_PartialClasses() =>
+        builder.AddPaths("SerializationConstructorsShouldBeSecured_Part1.cs", "SerializationConstructorsShouldBeSecured_Part2.cs").WithConcurrentAnalysis(false).Verify();
 }

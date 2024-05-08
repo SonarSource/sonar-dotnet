@@ -20,28 +20,27 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class OperatorsShouldBeOverloadedConsistentlyTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<OperatorsShouldBeOverloadedConsistently>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void OperatorsShouldBeOverloadedConsistently() =>
-            builder.AddPaths("OperatorsShouldBeOverloadedConsistently.cs").Verify();
+[TestClass]
+public class OperatorsShouldBeOverloadedConsistentlyTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<OperatorsShouldBeOverloadedConsistently>();
+
+    [TestMethod]
+    public void OperatorsShouldBeOverloadedConsistently() =>
+        builder.AddPaths("OperatorsShouldBeOverloadedConsistently.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void OperatorsShouldBeOverloadedConsistently_CSharp9() =>
-            builder.AddPaths("OperatorsShouldBeOverloadedConsistently.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+    [TestMethod]
+    public void OperatorsShouldBeOverloadedConsistently_CSharp9() =>
+        builder.AddPaths("OperatorsShouldBeOverloadedConsistently.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).VerifyNoIssues();    // records are compliant
 
-        [TestMethod]
-        public void OperatorsShouldBeOverloadedConsistently_CSharp11() =>
-            builder.AddPaths("OperatorsShouldBeOverloadedConsistently.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+    [TestMethod]
+    public void OperatorsShouldBeOverloadedConsistently_CSharp11() =>
+        builder.AddPaths("OperatorsShouldBeOverloadedConsistently.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).VerifyNoIssues();  // static virtual interface methods are compliant
 
 #endif
 
-    }
 }

@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Test.Rules
         public void DoNotCopyArraysInProperties_CSharp12() =>
             builder.AddPaths("DoNotCopyArraysInProperties.CSharp12.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp12)
-                .Verify();
+                .VerifyNoIssues();  // FN, collection initializers are not supported
 
 #endif
 

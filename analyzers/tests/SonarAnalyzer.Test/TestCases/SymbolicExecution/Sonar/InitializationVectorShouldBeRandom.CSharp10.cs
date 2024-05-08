@@ -8,7 +8,8 @@ public class Sample
     {
         AesCng aes = new AesCng();
         aes.CreateEncryptor();
-        (var rgb, int a) = (new byte[16], 42);
+        int a;
+        (var rgb, a) = (new byte[16], 42);
         aes.CreateEncryptor(aes.Key, rgb); // FN
     }
 }

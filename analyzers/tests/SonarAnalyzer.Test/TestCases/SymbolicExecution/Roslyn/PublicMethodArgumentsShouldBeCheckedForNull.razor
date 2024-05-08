@@ -6,4 +6,6 @@
 
 @code {
     public RenderFragment Render => base.BuildRenderTree;
+
+    public int Method(string arg1) => arg1.Length;  // Noncompliant
 }

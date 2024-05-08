@@ -56,7 +56,7 @@ public class ExceptionsShouldBeLoggedOrThrownTest
                 """)
             .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
             .WithOptions(ParseOptionsHelper.FromCSharp8)
-            .Verify();
+            .VerifyNoIssues();
 
     [TestMethod]
     public void ExceptionsShouldBeLoggedOrThrown_Log4net_CS() =>

@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Test.Rules
         public void AbstractTypesShouldNotHaveConstructors_CSharp12() =>
             builder.AddPaths("AbstractTypesShouldNotHaveConstructors.CSharp12.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp12)
-                .Verify();
+                .VerifyNoIssues();   // primary constructors are compliant
 
 #endif
 

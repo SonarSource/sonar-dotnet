@@ -57,18 +57,19 @@ public class UnchangedLocalVariablesShouldBeConstTest
 
     [TestMethod]
     public void UnchangedLocalVariablesShouldBeConst_InvalidCode() =>
-        verifier.AddSnippet(@"
-// invalid code
-public void Test_TypeThatCannotBeConst(int arg)
-{
-    System.Random random = 1;
-}
+        verifier.AddSnippet("""
+            // invalid code
+            public void Test_TypeThatCannotBeConst(int arg)
+            {
+                System.Random random = 1;
+            }
 
-// invalid code
-public void (int arg)
-{
-    int intVar = 1;
-}").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
+            // invalid code
+            public void (int arg)
+            {
+                int intVar = 1;
+            }
+            """).VerifyNoIssuesIgnoreErrors();
 
     [TestMethod]
     public void UnchangedLocalVariablesShouldBeConst_Fix() =>

@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Test.Rules
         public void DoNotHideBaseClassMethods_CSharp11() =>
             builder.AddPaths("DoNotHideBaseClassMethods.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+                .VerifyNoIssues();  // hiding static interface methods is compliant
 
 #endif
 

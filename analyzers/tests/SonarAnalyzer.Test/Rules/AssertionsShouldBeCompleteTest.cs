@@ -60,18 +60,18 @@ public class AssertionsShouldBeCompleteTest
     [TestMethod]
     public void AssertionsShouldBeComplete_FluentAssertions_MissingParen() =>
         fluentAssertions
-        .AddSnippet("""
-            using FluentAssertions;
-            public class Test
-            {
-                public void MissingParen()
+            .AddSnippet("""
+                using FluentAssertions;
+                public class Test
                 {
-                    var s = "Test";
-                    s.Should(;  // Error [CS1026]
+                    public void MissingParen()
+                    {
+                        var s = "Test";
+                        s.Should(;  // Error [CS1026]
+                    }
                 }
-            }
-            """)
-        .Verify();
+                """)
+            .Verify();
 
     [TestMethod]
     public void AssertionsShouldBeComplete_FluentAssertions_CSharp8() =>

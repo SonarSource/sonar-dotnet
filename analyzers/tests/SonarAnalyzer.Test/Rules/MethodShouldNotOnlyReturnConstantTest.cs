@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void MethodShouldNotOnlyReturnConstant_CSharp8() =>
-            builder.AddPaths("MethodShouldNotOnlyReturnConstant.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builder.AddPaths("MethodShouldNotOnlyReturnConstant.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).VerifyNoIssues();  // default interface methods are compliant
 
         [TestMethod]
         public void MethodShouldNotOnlyReturnConstant_CSharp11() =>

@@ -7,9 +7,10 @@ const string part1 = "SELECT * FROM";
 const string part2 = " mytable WHERE mycol=";
 const string querry = $"{part1}{part2}";
 
-void Foo(DbContext context, SqliteConnection connection, params object[] parameters)
+void Foo(DbContext context, SqliteConnection connection, string notConstant, params object[] parameters)
 {
-    context.Query<User>().FromSql("" + querry, parameters); // Compliant
+    context.Query<User>().FromSql("" + querry, parameters);         // Compliant
+    context.Query<User>().FromSql("" + notConstant, parameters);    // Noncompliant
 }
 
 
