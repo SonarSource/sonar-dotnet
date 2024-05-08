@@ -26,12 +26,30 @@ namespace SonarAnalyzer.TestFramework.Common;
 public static class SourceGeneratorProvider
 {
     private static readonly string RazorSourceGeneratorPath =
-        Path.Combine(Path.GetDirectoryName(typeof(SourceGeneratorProvider).Assembly.Location), "Dependencies", "Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators.dll");
+        Path.Combine(LatestSdkFolder(), "Sdks", "Microsoft.NET.Sdk.Razor", "source-generators", "Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators.dll");
 
     public static AnalyzerFileReference[] SourceGenerators { get; } =
     [
         new(RazorSourceGeneratorPath, new AssemblyLoader())
     ];
+
+    public static string LatestSdkFolder()
+    {
+        var objectAssembly = typeof(object).Assembly;
+        var objectAssemblyDirectory = Directory.GetParent(objectAssembly.Location);    // C:\Program Files\dotnet\shared\Microsoft.NETCore.App\8.0.4
+        var dotnetDirectory = objectAssemblyDirectory.Parent.Parent.Parent;            // C:\Program Files\dotnet
+        var sdkDirectory = Path.Combine(dotnetDirectory.FullName, "sdk");              // C:\Program Files\dotnet\sdk
+
+        if (!Directory.Exists(sdkDirectory))
+        {
+            throw new NotSupportedException($"The directory '{sdkDirectory}' does not exist. " +
+                $"This may be because you are not using .NET Core. " +
+                $"Please note that Razor analysis is only supported when using .NET Core.");
+        }
+        return Directory.GetDirectories(sdkDirectory, $"{objectAssembly.GetName().Version.Major}.*")
+            .OrderBy(x => Version.Parse(new DirectoryInfo(x).Name))
+            .Last();
+    }
 
     private sealed class AssemblyLoader : IAnalyzerAssemblyLoader
     {
