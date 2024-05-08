@@ -56,6 +56,7 @@
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CFG.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CSharp.dll" />
+      <BinariesToCopy Include="$(OutputPath)Microsoft.AspNetCore.Razor.Language.dll" />
     </ItemGroup>
     <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)" />
   </Target>
