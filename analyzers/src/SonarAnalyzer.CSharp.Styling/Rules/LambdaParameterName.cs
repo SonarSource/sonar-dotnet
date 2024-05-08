@@ -28,15 +28,28 @@ public sealed class LambdaParameterName : StylingAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
             {
-                var parameter = ((SimpleLambdaExpressionSyntax)c.Node).Parameter;
-                if (parameter.Identifier.ValueText is not ("x" or "_")
-                    && c.Node.Parent.FirstAncestorOrSelf<LambdaExpressionSyntax>() is null
-                    && !IsSonarContextAction(c))
+                if (c.Node is SimpleLambdaExpressionSyntax { Parameter: { Identifier.ValueText: not ("x" or "_") } parameter, Parent: { } parent } lambda
+                    && parent.FirstAncestorOrSelf<LambdaExpressionSyntax>() is null
+                    && !IsSonarContextAction(c)
+                    && !MatchesDelegateParameterName(c.SemanticModel, lambda))
                 {
                     c.ReportIssue(Rule, parameter);
                 }
             },
             SyntaxKind.SimpleLambdaExpression);
+
+    private static bool MatchesDelegateParameterName(SemanticModel model, SimpleLambdaExpressionSyntax lambda) =>
+        model.GetTypeInfo(lambda).ConvertedType is INamedTypeSymbol
+        {
+            TypeKind: TypeKind.Delegate,
+            DelegateInvokeMethod.Parameters: { Length: 1 } parameters
+        } delegateType
+        && !IsFuncOrAction(delegateType)
+        && parameters[0] is { Name: { } parameterName }
+        && parameterName == lambda.Parameter.Identifier.ValueText;
+
+    private static bool IsFuncOrAction(INamedTypeSymbol delegateType) =>
+        delegateType.IsAny(KnownType.System_Func_T_TResult, KnownType.System_Action_T);
 
     private static bool IsSonarContextAction(SonarSyntaxNodeReportingContext context) =>
         context.SemanticModel.GetSymbolInfo(context.Node).Symbol is IMethodSymbol lambda
