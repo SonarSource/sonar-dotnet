@@ -97,15 +97,19 @@ internal class Verifier
 
     public void Verify()    // This should never have any arguments
     {
-        if (codeFix != null)
+        if (codeFix is not null)
         {
             throw new InvalidOperationException($"Cannot use {nameof(Verify)} with {nameof(builder.CodeFix)} set.");
         }
-        foreach (var compilation in Compile(builder.ConcurrentAnalysis))
-        {
-            var additionalSourceFiles = razorFilePaths.Concat(compilation.AdditionalSourceFiles ?? []).ToArray();
-            DiagnosticVerifier.Verify(compilation.Compilation, analyzers, builder.ErrorBehavior, builder.AdditionalFilePath, onlyDiagnosticIds, additionalSourceFiles);
-        }
+        var numberOfIssues = Compile(builder.ConcurrentAnalysis)
+            .Sum(x => DiagnosticVerifier.Verify(
+                x.Compilation,
+                analyzers,
+                builder.ErrorBehavior,
+                builder.AdditionalFilePath,
+                onlyDiagnosticIds,
+                razorFilePaths.Concat(x.AdditionalSourceFiles ?? []).ToArray()));
+        numberOfIssues.Should().BeGreaterThan(0, $"otherwise you should use '{nameof(VerifyNoIssues)}' instead");
     }
 
     public void VerifyNoIssues()    // This should never have any arguments
