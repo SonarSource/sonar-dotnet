@@ -194,7 +194,7 @@ public class RouteTemplateShouldNotStartWithSlashTest
         builderVB
             .AddPaths("RouteTemplateShouldNotStartWithSlash.AspNet4x.vb")
             .AddReferences(AspNet4xReferences(aspNetMvcVersion))
-            .VerifyNoIssues();  // FN VB is not supported
+            .VerifyNoIssues();  // FN, VB is not supported
 
     [DataRow("/Index2", false)]
     [DataRow(@"\Index2", true)]

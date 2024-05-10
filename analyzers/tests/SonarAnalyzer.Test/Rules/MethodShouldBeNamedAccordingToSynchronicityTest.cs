@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         public void MethodShouldBeNamedAccordingToSynchronicity_MVC(string mvcVersion) =>
             builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.MVC.cs").AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(mvcVersion))
-                .VerifyNoIssues();   // rule does not apply to MVC
+                .VerifyNoIssues();
 
         [TestMethod]
         [DataRow("2.0.4", "2.0.3")]
@@ -59,21 +59,21 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow(Constants.NuGetLatestVersion)]
         public void MethodShouldBeNamedAccordingToSynchronicity_MsTest(string testFwkVersion) =>
             builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.MsTest.cs").AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
-                .VerifyNoIssues();   // rule does not apply to MsTest
+                .VerifyNoIssues();
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void MethodShouldBeNamedAccordingToSynchronicity_NUnit(string testFwkVersion) =>
             builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.NUnit.cs").AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
-                .VerifyNoIssues();   // rule does not apply to NUnit
+                .VerifyNoIssues();
 
         [DataTestMethod]
         [DataRow("2.0.0")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void MethodShouldBeNamedAccordingToSynchronicity_Xunit(string testFwkVersion) =>
             builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.Xunit.cs").AddReferences(NuGetMetadataReference.XunitFramework(testFwkVersion))
-                .VerifyNoIssues();   // rule does not apply to Xunit
+                .VerifyNoIssues();
 
         [TestMethod]
         public void MethodShouldBeNamedAccordingToSynchronicity_CSharp8() =>

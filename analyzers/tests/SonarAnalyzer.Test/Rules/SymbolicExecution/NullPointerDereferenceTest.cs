@@ -102,8 +102,7 @@ public class NullPointerDereferenceTest
 
     [TestMethod]
     public void NullPointerDereference_Sonar_CSharp10() =>
-        sonar.AddPaths("NullPointerDereference.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10)
-            .VerifyNoIssues(); // FN, mixed declarations and expressions in deconstruction is not supported
+        sonar.AddPaths("NullPointerDereference.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).VerifyNoIssues();
 
     [TestMethod]
     public void NullPointerDereference_Roslyn_CSharp10() =>

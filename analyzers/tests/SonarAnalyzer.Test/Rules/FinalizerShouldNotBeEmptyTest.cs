@@ -46,10 +46,9 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddSnippet("""
                 class Program4
                 {
-                    ~Program4() =>  // Error [CS1002] ; expected
-                                    // Error@-1 [CS1525] Invalid expression term
+                    ~Program4() =>
                 }
                 """)
-                .Verify();
+                .VerifyNoIssuesIgnoreErrors();
     }
 }

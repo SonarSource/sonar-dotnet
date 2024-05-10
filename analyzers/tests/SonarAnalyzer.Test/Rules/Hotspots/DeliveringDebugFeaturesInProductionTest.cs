@@ -66,7 +66,7 @@ public class DeliveringDebugFeaturesInProductionTest
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions,
                 AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions])
-            .VerifyNoIssues();  // No issues in test code
+            .VerifyNoIssues();
 
     private static IEnumerable<MetadataReference> AdditionalReferencesForAspNetCore3AndLater =>
         new[]

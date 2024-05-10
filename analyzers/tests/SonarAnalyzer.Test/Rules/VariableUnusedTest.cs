@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void VariableUnused_CSharp12() =>
-            builderCS.AddPaths("VariableUnused.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).VerifyNoIssues(); // primary constructors are compliant
+            builderCS.AddPaths("VariableUnused.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).VerifyNoIssues();
 
 #endif
 

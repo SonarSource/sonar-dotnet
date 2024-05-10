@@ -27,12 +27,11 @@ public static class DiagnosticVerifier
     private const string AD0001 = nameof(AD0001);
     private const string LineContinuationVB12 = "BC36716";  // Visual Basic 12.0 does not support line continuation comments.
 
-    public static int Verify(
-            Compilation compilation,
-            DiagnosticAnalyzer analyzer,
-            string additionalFilePath = null,
-            string[] onlyDiagnostics = null,
-            string[] additionalSourceFiles = null) =>
+    public static int Verify(Compilation compilation,
+                             DiagnosticAnalyzer analyzer,
+                             string additionalFilePath = null,
+                             string[] onlyDiagnostics = null,
+                             string[] additionalSourceFiles = null) =>
         Verify(compilation, [analyzer], CompilationErrorBehavior.FailTest, additionalFilePath, onlyDiagnostics, additionalSourceFiles);
 
     public static int Verify(Compilation compilation,

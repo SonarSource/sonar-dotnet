@@ -37,7 +37,7 @@ public class StringOperationWithoutCultureTest
     public void StringOperationWithoutCulture_CSharp10() =>
         builder.AddPaths("StringOperationWithoutCulture.CSharp10.cs")
         .WithOptions(ParseOptionsHelper.FromCSharp10)
-        .VerifyNoIssues();  // FN, TimeOnly and DateOnly are not supported
+        .VerifyNoIssues();
 
     [TestMethod]
     public void StringOperationWithoutCulture_CSharp11() =>

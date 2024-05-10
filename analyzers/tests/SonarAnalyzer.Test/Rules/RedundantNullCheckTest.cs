@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Test.Rules
         public void RedundantNullCheck_CSharp11() =>
             builderCS.AddPaths("RedundantNullCheck.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .VerifyNoIssues();  // FN, list pattern is not supported
+                .VerifyNoIssues();
 
         [TestMethod]
         public void RedundantNullCheck_CSharp9_CodeFix() =>

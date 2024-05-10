@@ -46,11 +46,10 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void DisposableTypesNeedFinalizers_InvalidCode() =>
             builder.AddSnippet("""
-                public class Foo_05 : IDisposable   // Error [CS0246] The type or namespace name 'IDisposable' could not be found (are you missing a using directive or an assembly reference?)
+                public class Foo_05 : IDisposable
                 {
-                    private HandleRef;              // Error [CS1519] Invalid token ';' in class, record, struct, or interface member declaration
-                                                    // Error@-1 [CS1519] Invalid token ';' in class, record, struct, or interface member declaration
+                    private HandleRef;
                 }
-                """).Verify();
+                """).VerifyNoIssuesIgnoreErrors();
     }
 }

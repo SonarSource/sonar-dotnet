@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow(false, "log.IsEnabled(LogLevel.Warning);")]
         public void AzureFunctionsLogFailures_VerifyLoggerCalls(bool isCompliant, string loggerInvocation)
         {
-            var x = builder.AddSnippet($$"""
+            var snippet = builder.AddSnippet($$"""
                 using Microsoft.Azure.WebJobs;
                 using Microsoft.Extensions.Logging;
                 using System;
@@ -87,11 +87,11 @@ namespace SonarAnalyzer.Test.Rules
                 """);
             if (isCompliant)
             {
-                x.VerifyNoIssues();
+                snippet.VerifyNoIssues();
             }
             else
             {
-                x.Verify();
+                snippet.Verify();
             }
         }
     }

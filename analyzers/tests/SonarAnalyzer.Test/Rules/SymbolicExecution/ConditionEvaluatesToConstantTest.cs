@@ -116,7 +116,7 @@ public class ConditionEvaluatesToConstantTest
     public void ConditionEvaluatesToConstant_Sonar_CSharp9_TopLevelStatements() =>
         sonar.AddPaths("ConditionEvaluatesToConstant.CSharp9.TopLevelStatements.cs")
             .WithTopLevelStatements()
-            .VerifyNoIssues();   // top level statements are not supported
+            .VerifyNoIssues();
 
     [TestMethod]
     public void ConditionEvaluatesToConstant_Roslyn_CSharp9_TopLevelStatements() =>
@@ -129,7 +129,7 @@ public class ConditionEvaluatesToConstantTest
         sonar.AddPaths("ConditionEvaluatesToConstant.CSharp10.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp10)
             .WithConcurrentAnalysis(false)
-            .VerifyNoIssues();   // parameterless constructors for structs are not supported
+            .VerifyNoIssues();
 
     [TestMethod]
     public void ConditionEvaluatesToConstant_Roslyn_CSharp10() =>
@@ -142,13 +142,13 @@ public class ConditionEvaluatesToConstantTest
     public void ConditionEvaluatesToConstant_Sonar_CSharp11() =>
         sonar.AddPaths("ConditionEvaluatesToConstant.CSharp11.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp11)
-            .VerifyNoIssues();   // list patterns and array sensitivity are not supported yet
+            .VerifyNoIssues();
 
     [TestMethod]
     public void ConditionEvaluatesToConstant_Roslyn_CSharp11() =>
         roslynCS.AddPaths("ConditionEvaluatesToConstant.CSharp11.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp11)
-            .VerifyNoIssues();   // list patterns and array sensitivity are not supported yet
+            .VerifyNoIssues();
 
     [TestMethod]
     public void ConditionEvaluatesToConstant_Roslyn_CSharp12() =>

@@ -39,7 +39,7 @@ public class ImplementSerializationMethodsCorrectlyTest
     public void ImplementSerializationMethodsCorrectly_CSharp8() =>
         builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp8.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
-            .VerifyNoIssues();  // default interface methods are compliant
+            .VerifyNoIssues();
 
     [TestMethod]
     public void ImplementSerializationMethodsCorrectly_CSharp9() =>

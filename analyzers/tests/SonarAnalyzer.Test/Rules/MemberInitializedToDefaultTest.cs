@@ -20,54 +20,52 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class MemberInitializedToDefaultTest
 {
-    [TestClass]
-    public class MemberInitializedToDefaultTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<MemberInitializedToDefault>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<MemberInitializedToDefault>();
 
-        [TestMethod]
-        public void MemberInitializedToDefault() =>
-            builder.AddPaths("MemberInitializedToDefault.cs").Verify();
+    [TestMethod]
+    public void MemberInitializedToDefault() =>
+        builder.AddPaths("MemberInitializedToDefault.cs").Verify();
 
-        [TestMethod]
-        public void MemberInitializedToDefault_CodeFix() =>
-            builder
-            .WithCodeFix<MemberInitializedToDefaultCodeFix>()
-            .AddPaths("MemberInitializedToDefault.cs")
-            .WithCodeFixedPaths("MemberInitializedToDefault.Fixed.cs")
-            .VerifyCodeFix();
+    [TestMethod]
+    public void MemberInitializedToDefault_CodeFix() =>
+        builder
+        .WithCodeFix<MemberInitializedToDefaultCodeFix>()
+        .AddPaths("MemberInitializedToDefault.cs")
+        .WithCodeFixedPaths("MemberInitializedToDefault.Fixed.cs")
+        .VerifyCodeFix();
 
 #if NET
 
-        [TestMethod]
-        public void MemberInitializedToDefault_CSharp8() =>
-            builder.AddPaths("MemberInitializedToDefault.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8)
-                .VerifyNoIssues();  // FN, rule does not raise in nullable context, despite a lack of a bang operator
+    [TestMethod]
+    public void MemberInitializedToDefault_CSharp8() =>
+        builder.AddPaths("MemberInitializedToDefault.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).VerifyNoIssues();
 
-        [TestMethod]
-        public void MemberInitializedToDefault_CSharp9() =>
-            builder.AddPaths("MemberInitializedToDefault.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+    [TestMethod]
+    public void MemberInitializedToDefault_CSharp9() =>
+        builder.AddPaths("MemberInitializedToDefault.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
-        public void MemberInitializedToDefault_CSharp10() =>
-            builder.AddPaths("MemberInitializedToDefault.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+    [TestMethod]
+    public void MemberInitializedToDefault_CSharp10() =>
+        builder.AddPaths("MemberInitializedToDefault.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
-        [TestMethod]
-        public void MemberInitializedToDefault_CSharp11() =>
-            builder.AddPaths("MemberInitializedToDefault.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+    [TestMethod]
+    public void MemberInitializedToDefault_CSharp11() =>
+        builder.AddPaths("MemberInitializedToDefault.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
-        [TestMethod]
-        public void MemberInitializedToDefault_CSharp11_CodeFix() =>
-            builder
-            .WithCodeFix<MemberInitializedToDefaultCodeFix>()
-            .AddPaths("MemberInitializedToDefault.CSharp11.cs")
-            .WithCodeFixedPaths("MemberInitializedToDefault.CSharp11.Fixed.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
-            .VerifyCodeFix();
+    [TestMethod]
+    public void MemberInitializedToDefault_CSharp11_CodeFix() =>
+        builder
+        .WithCodeFix<MemberInitializedToDefaultCodeFix>()
+        .AddPaths("MemberInitializedToDefault.CSharp11.cs")
+        .WithCodeFixedPaths("MemberInitializedToDefault.CSharp11.Fixed.cs")
+        .WithOptions(ParseOptionsHelper.FromCSharp11)
+        .VerifyCodeFix();
 
 #endif
 
-    }
 }

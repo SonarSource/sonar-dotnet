@@ -98,7 +98,7 @@ namespace SonarAnalyzer.Test.Rules
         public void InitializationVectorShouldBeRandom_Sonar_CSharp10() =>
             sonar.AddPaths("InitializationVectorShouldBeRandom.CSharp10.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .VerifyNoIssues();  // FN, mixed declarations and expressions in deconstruction are not supported
+                .VerifyNoIssues();
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_Roslyn_CSharp10() =>
@@ -110,13 +110,13 @@ namespace SonarAnalyzer.Test.Rules
         public void InitializationVectorShouldBeRandom_Sonar_CSharp11() =>
             sonar.AddPaths("InitializationVectorShouldBeRandom.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .VerifyNoIssues();  // FN, UTF-8 string literals are not supported
+                .VerifyNoIssues();
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_Roslyn_CSharp11() =>
             roslynCS.AddPaths("InitializationVectorShouldBeRandom.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .VerifyNoIssues();  // FN, UTF-8 string literals are not supported
+                .VerifyNoIssues();
 
 #endif
 

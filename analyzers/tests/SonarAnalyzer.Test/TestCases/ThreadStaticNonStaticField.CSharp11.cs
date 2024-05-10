@@ -4,7 +4,7 @@ namespace Tests.Diagnostics
 {
     public class ThreadStaticNonStaticField
     {
-        [ThreadStaticAttribute<int>]    // FN for performance reasons we decided not to handle derived classes
+        [ThreadStaticAttribute<int>]    // FN: for performance reasons we decided not to handle derived classes
         private int count1 = 0, count11 = 0;
 
         [ThreadStaticAttribute]         // Noncompliant

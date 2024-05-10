@@ -60,12 +60,12 @@ public class UseFindSystemTimeZoneByIdTest
     [TestMethod]
     public void UseFindSystemTimeZoneById_CS() =>
         builderCS.AddReferences(NuGetMetadataReference.TimeZoneConverter())
-            .AddPaths("UseFindSystemTimeZoneById.cs").VerifyNoIssues(); // TimeZoneConverter is compliant
+            .AddPaths("UseFindSystemTimeZoneById.cs").VerifyNoIssues();
 
     [TestMethod]
     public void UseFindSystemTimeZoneById_VB() =>
         builderVB.AddReferences(NuGetMetadataReference.TimeZoneConverter())
-            .AddPaths("UseFindSystemTimeZoneById.vb").VerifyNoIssues(); // TimeZoneConverter is compliant
+            .AddPaths("UseFindSystemTimeZoneById.vb").VerifyNoIssues();
 
 #endif
 

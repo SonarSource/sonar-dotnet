@@ -68,11 +68,11 @@ public class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKeyTest
 
     [TestMethod]
     public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_FluentApi_CS() =>
-        verifierCS.AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.FluentApi.cs").VerifyNoIssues();  // Fluent API is not supported
+        verifierCS.AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.FluentApi.cs").VerifyNoIssues();  // FN, Fluent API is not supported
 
     [TestMethod]
     public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_FluentApi_VB() =>
-        verifierVB.AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.FluentApi.vb").VerifyNoIssues();  // Fluent API is not supported
+        verifierVB.AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.FluentApi.vb").VerifyNoIssues();  // FN, Fluent API is not supported
 
 #endif
 

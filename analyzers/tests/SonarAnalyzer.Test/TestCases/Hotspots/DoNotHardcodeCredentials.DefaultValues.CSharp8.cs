@@ -8,7 +8,7 @@
 
         // Reassigned
         secret ??= "hardcoded";
-        var a = "Server = localhost; Database = Test; User = SA; Password = " + secret;         // Compliant, this is not symbolic execution rule and ConstantValueFinder cannot detect that.
+        var a = "Server = localhost; Database = Test; User = SA; Password = " + secret;         // Compliant: this is not symbolic execution rule and ConstantValueFinder cannot detect that.
         var b = "Server = localhost; Database = Test; User = SA; Password = secret";            // Noncompliant
     }
 }

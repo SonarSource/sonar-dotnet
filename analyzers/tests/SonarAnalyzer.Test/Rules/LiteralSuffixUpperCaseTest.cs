@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Test.Rules
         public void LiteralSuffixUpperCase_CSharp11() =>
             builder.AddPaths("LiteralSuffixUpperCase.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .VerifyNoIssues();  // UTF-8 string literals are compliant
+                .VerifyNoIssues();
 
 #endif
 

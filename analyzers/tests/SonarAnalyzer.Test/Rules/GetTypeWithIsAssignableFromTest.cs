@@ -67,7 +67,7 @@ public class GetTypeWithIsAssignableFromTest
     public void GetTypeWithIsAssignableFrom_CSharp11() =>
         builder.AddPaths("GetTypeWithIsAssignableFrom.CSharp11.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp11)
-            .VerifyNoIssues();  // list pattern is compliant
+            .VerifyNoIssues();
 
 #endif
 

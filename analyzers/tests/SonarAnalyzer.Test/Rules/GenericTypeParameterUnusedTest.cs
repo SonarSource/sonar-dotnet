@@ -47,7 +47,7 @@ public class GenericTypeParameterUnusedTest
 
     [TestMethod]
     public void GenericTypeParameterUnused_CSharp12() =>
-        builder.AddPaths("GenericTypeParameterUnused.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).VerifyNoIssues();   // parameter used in primary constructor is compliant
+        builder.AddPaths("GenericTypeParameterUnused.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).VerifyNoIssues();
 
 #endif
 
