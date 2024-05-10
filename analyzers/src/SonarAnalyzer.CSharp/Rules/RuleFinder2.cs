@@ -17,11 +17,15 @@ internal static class RuleFinder2
     static RuleFinder2()
     {
         var executingAssembly = Assembly.GetExecutingAssembly();
-        using var assemblyMetadata = AssemblyMetadata.CreateFromFile(executingAssembly.Location);
-        var allTypes = assemblyMetadata
+        List<Type> allTypes;
+        using (var assemblyMetadata = AssemblyMetadata.CreateFromFile(executingAssembly.Location))
+        {
+            allTypes = assemblyMetadata
                        .GetModules()
                        .SelectMany(GetFullyQualifiedNames)
-                       .Select(executingAssembly.GetType);
+                       .Select(executingAssembly.GetType)
+                       .ToList();
+        }
 
         AllAnalyzerTypes = allTypes.Where(x => x.IsSubclassOf(typeof(DiagnosticAnalyzer)) && x.GetCustomAttributes<DiagnosticAnalyzerAttribute>().Any()).ToArray();
         UtilityAnalyzerTypes = AllAnalyzerTypes.Where(x => typeof(UtilityAnalyzerBase).IsAssignableFrom(x)).ToList();
