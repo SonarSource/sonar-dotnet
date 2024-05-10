@@ -775,17 +775,38 @@ public class VerifierTest
     }
 
     [TestMethod]
-    public void VerifyNoIssueReported_NoIssues_Succeeds() =>
+    public void VerifyNoIssues_NoIssues_Succeeds() =>
         WithSnippetCS("// Noncompliant - this comment is ignored").Invoking(x => x.VerifyNoIssues()).Should().NotThrow();
 
     [TestMethod]
-    public void VerifyNoIssueReported_WithIssues_Throws() =>
+    public void VerifyNoIssues_WithIssues_Throws() =>
         WithSnippetCS("""
             public class Sample
             {
-                private int a = 42;     // This will raise an issue
+                private int a = 42;     // Noncompliant
             }
             """).Invoking(x => x.VerifyNoIssues()).Should().Throw<AssertFailedException>();
+
+    [TestMethod]
+    public void VerifyNoIssues_InvalidCode_Throws() =>
+        WithSnippetCS("Nonsense").Invoking(x => x.VerifyNoIssues()).Should().Throw<AssertFailedException>();
+
+    [TestMethod]
+    public void VerifyNoIssuesIgnoreErrors_NoIssues_Succeeds() =>
+        WithSnippetCS("// Noncompliant - this comment is ignored").Invoking(x => x.VerifyNoIssuesIgnoreErrors()).Should().NotThrow();
+
+    [TestMethod]
+    public void VerifyNoIssuesIgnoreErrors_WithIssues_Throws() =>
+        WithSnippetCS("""
+            public class Sample
+            {
+                private int a = 42;     // Noncompliant
+            }
+            """).Invoking(x => x.VerifyNoIssuesIgnoreErrors()).Should().Throw<AssertFailedException>();
+
+    [TestMethod]
+    public void VerifyNoIssuesIgnoreErrors_InvalidCode_Throws() =>
+        WithSnippetCS("Nonsense").Invoking(x => x.VerifyNoIssuesIgnoreErrors()).Should().NotThrow();
 
     [TestMethod]
     public void Verify_ConcurrentAnalysis_FileEndingWithComment_CS() =>
