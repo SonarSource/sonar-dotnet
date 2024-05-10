@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules.CSharp;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class FrameworkViewCompiler : SonarDiagnosticAnalyzer
 {
-    private readonly HashSet<string> BadBoys = new HashSet<string>()
+    private readonly HashSet<string> BadBoys = new()
     {
         "S3904",    // AssemblyVersion attribute
         "S3990",    // CLSCompliant attribute
@@ -71,12 +71,7 @@ public sealed class FrameworkViewCompiler : SonarDiagnosticAnalyzer
 
                 var projectConfiguration = c.ProjectConfiguration();
                 var root = Path.GetDirectoryName(projectConfiguration.ProjectPath);
-                var supportedDiagnostics = SupportedDiagnostics.ToImmutableDictionary(x => x.Id, x => ReportDiagnostic.Warn);
-
-                var dummy = CompileViews(c.Compilation, root)
-                    .WithOptions(c.Compilation.Options.WithSpecificDiagnosticOptions(supportedDiagnostics))
-                    .WithAnalyzers(Rules, c.Options);
-
+                var dummy = CompileViews(c.Compilation, root).WithAnalyzers(Rules, c.Options);
                 var diagnostics = dummy.GetAnalyzerDiagnosticsAsync().Result;
                 foreach (var diagnostic in diagnostics)
                 {
