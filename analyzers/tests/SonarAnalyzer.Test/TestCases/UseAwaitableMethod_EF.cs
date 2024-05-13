@@ -11,7 +11,7 @@ public class EnitityFramework
     {
         // Note to implementers: Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions and RelationalQueryableExtensions might be needed to be added to some sort of whitelist for IQueryables
         DbSet<object> dbSet = default;
-        dbSet.Add(null); // Noncompliant      FP https://github.com/SonarSource/sonar-dotnet/issues/9269
+        dbSet.Add(null);      // Noncompliant FP https://github.com/SonarSource/sonar-dotnet/issues/9269
         dbSet.AddRange(null); // Noncompliant FP https://github.com/SonarSource/sonar-dotnet/issues/9269
         dbSet.All(x => true); // Noncompliant
         dbSet.Any(x => true); // Noncompliant
@@ -71,6 +71,5 @@ public class EnitityFramework
         databaseFacade.Migrate();                                                                    // Noncompliant
         databaseFacade.OpenConnection();                                                             // Noncompliant
         databaseFacade.UseTransaction(null);                                                         // Noncompliant
-        
     }
 }
