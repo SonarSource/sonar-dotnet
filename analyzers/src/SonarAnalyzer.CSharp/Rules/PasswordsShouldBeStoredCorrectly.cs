@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Helpers.Trackers;
-
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -37,15 +35,23 @@ public sealed class PasswordsShouldBeStoredCorrectly : TrackerHotspotDiagnosticA
 
     protected override void Initialize(TrackerInput input)
     {
-        var tracker = Language.Tracker.Invocation;
+        var tracker = Language.Tracker.Argument;
+
+        var descriptor = ArgumentDescriptor.MethodInvocation(
+            KnownType.Microsoft_AspNetCore_Cryptography_KeyDerivation_KeyDerivation,
+            "Pbkdf2",
+            "iterationCount",
+            3);
 
         tracker.Track(
             input,
-            tracker.MatchMethod(new MemberDescriptor(KnownType.Microsoft_AspNetCore_Cryptography_KeyDerivation_KeyDerivation, "Pbkdf2")),
-            x => HasFewIterations(x, tracker));
+            tracker.MatchArgument(descriptor),
+            HasFewIterations());
     }
 
-    private static bool HasFewIterations(InvocationContext context, InvocationTracker<SyntaxKind> tracker) =>
-        tracker.ConstArgumentForParameter(context, "iterationCount") is int iterationCount
-        && iterationCount < IterationCountThreshold;
+    private static TrackerBase<SyntaxKind, ArgumentContext>.Condition HasFewIterations() =>
+        x =>
+            x.Node is ArgumentSyntax argument
+            && x.SemanticModel.GetConstantValue(argument.Expression) is { HasValue: true, Value: int iterationCount }
+            && iterationCount < IterationCountThreshold;
 }
