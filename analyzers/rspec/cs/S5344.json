@@ -1,0 +1,54 @@
+{
+  "title": "Passwords should not be stored in plaintext or with a fast hashing algorithm",
+  "type": "VULNERABILITY",
+  "code": {
+    "impacts": {
+      "SECURITY": "HIGH"
+    },
+    "attribute": "TRUSTWORTHY"
+  },
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "30min"
+  },
+  "tags": [
+    "cwe",
+    "spring"
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-5344",
+  "sqKey": "S5344",
+  "scope": "Main",
+  "securityStandards": {
+    "CWE": [
+      256,
+      916
+    ],
+    "OWASP": [
+      "A3"
+    ],
+    "OWASP Top 10 2021": [
+      "A2",
+      "A4"
+    ],
+    "PCI DSS 3.2": [
+      "6.5.3"
+    ],
+    "PCI DSS 4.0": [
+      "6.2.4"
+    ],
+    "ASVS 4.0": [
+      "2.10.3",
+      "2.4.1",
+      "2.4.2",
+      "2.4.3",
+      "2.4.4",
+      "2.4.5"
+    ],
+    "STIG ASD 2023-06-08": [
+      "V-222542"
+    ]
+  },
+  "quickfix": "unknown"
+}

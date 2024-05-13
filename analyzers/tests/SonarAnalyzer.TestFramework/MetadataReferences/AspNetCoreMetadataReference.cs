@@ -41,6 +41,8 @@ public static class AspNetCoreMetadataReference
     public static MetadataReference MicrosoftAspNetCoreMvcViewFeatures { get; } = CreateReference("Microsoft.AspNetCore.Mvc.ViewFeatures.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftAspNetCoreRouting { get; } = CreateReference("Microsoft.AspNetCore.Routing.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftExtensionsHostingAbstractions { get; } = CreateReference("Microsoft.Extensions.Hosting.Abstractions.dll", Sdk.AspNetCore);
+    public static MetadataReference MicrosoftExtensionsIdentityCore { get; } = CreateReference("Microsoft.Extensions.Identity.Core.dll", Sdk.AspNetCore);
+    public static MetadataReference MicrosoftAspNetCoreCryptographyKeyDerivation { get; } = CreateReference("Microsoft.AspNetCore.Cryptography.KeyDerivation.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftExtensionsDependencyInjectionAbstractions { get; } = CreateReference("Microsoft.Extensions.DependencyInjection.Abstractions.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftExtensionsLoggingEventSource { get; } = CreateReference("Microsoft.Extensions.Logging.EventSource.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftExtensionsPrimitives { get; } = CreateReference("Microsoft.Extensions.Primitives.dll", Sdk.AspNetCore);
