@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -63,6 +64,40 @@ namespace Tests.TestCases
             else
             {
             }
+        }
+    }
+
+    // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/9221
+    public class Repro_9221
+    {
+        public DateTime? ThisWorks()
+        {
+            dynamic anything = "2024-05-13";
+            string notDynamic = "2024-05-13";
+
+            if (anything is string) // Secondary
+                if (DateTime.TryParseExact(anything, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dt)) // Noncompliant FP
+                    return dt;
+
+            if (notDynamic != null) // Secondary
+                if (notDynamic == "something" && anything is string) // Noncompliant FP
+                    return null;
+
+            if (notDynamic != null) // Secondary
+                if (notDynamic == "something") // Noncompliant
+                    return null;
+
+            return null;
+        }
+
+        public DateTime? ThisWontWork()
+        {
+            dynamic anything = "2024-04-29";
+
+            if (anything is string && DateTime.TryParseExact(anything, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dt))
+                return dt; // Error [CS0165]
+
+            return null;
         }
     }
 }

@@ -21,17 +21,16 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class IfCollapsibleTest
-    {
-        [TestMethod]
-        public void IfCollapsible_CS() =>
-            new VerifierBuilder<CS.IfCollapsible>().AddPaths("IfCollapsible.cs").Verify();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void IfCollapsible_VB() =>
-            new VerifierBuilder<VB.IfCollapsible>().AddPaths("IfCollapsible.vb").Verify();
-    }
+[TestClass]
+public class IfCollapsibleTest
+{
+    [TestMethod]
+    public void IfCollapsible_CS() =>
+        new VerifierBuilder<CS.IfCollapsible>().AddPaths("IfCollapsible.cs").Verify();
+
+    [TestMethod]
+    public void IfCollapsible_VB() =>
+        new VerifierBuilder<VB.IfCollapsible>().AddPaths("IfCollapsible.vb").Verify();
 }
