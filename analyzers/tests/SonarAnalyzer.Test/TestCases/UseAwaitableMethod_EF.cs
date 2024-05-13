@@ -47,7 +47,6 @@ public class EnitityFramework
         dbContext.Find<object>();       // Noncompliant
         dbContext.Find(typeof(object)); // Noncompliant
         dbContext.SaveChanges();        // Noncompliant
-
     }
 
     public async Task DatabaseFacade(DatabaseFacade databaseFacade)
