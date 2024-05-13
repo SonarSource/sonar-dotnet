@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 public class EnitityFramework
 {
@@ -37,6 +38,13 @@ public class EnitityFramework
         dbSet.ToArray(); // Noncompliant
         dbSet.ToDictionary(x => 0); // Noncompliant
         dbSet.ToList(); // Noncompliant
+    }
+
+    public async Task NotIQueryable(IEnumerable<object> enumerable)
+    {
+        enumerable.All(X => true); // Compliant. Not an IQueryable and 
+        enumerable.ToArray();      // Compliant
+        enumerable.ToList();       // Compliant
     }
 
     public async Task Context(DbContext dbContext)
