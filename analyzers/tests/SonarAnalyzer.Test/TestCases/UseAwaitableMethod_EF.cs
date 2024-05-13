@@ -42,7 +42,7 @@ public class EnitityFramework
 
     public async Task NotIQueryable(IEnumerable<object> enumerable)
     {
-        enumerable.All(X => true); // Compliant not an IQueryable
+        enumerable.All(x => true); // Compliant not an IQueryable
         enumerable.ToArray();      // Compliant
         enumerable.ToList();       // Compliant
     }
