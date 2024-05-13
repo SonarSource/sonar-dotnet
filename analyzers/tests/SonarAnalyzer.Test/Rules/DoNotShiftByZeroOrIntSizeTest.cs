@@ -39,7 +39,7 @@ public class DoNotShiftByZeroOrIntSizeTest
     public void DoNotShiftByZeroOrIntSize_CSharp9() =>
         builder.AddPaths("DoNotShiftByZeroOrIntSize.CSharp9.cs")
             .WithTopLevelStatements()
-            .VerifyNoIssues();  // FN, native ints are not supported
+            .VerifyNoIssues();
 
     [TestMethod]
     public void DoNotShiftByZeroOrIntSize_CSharp10() =>

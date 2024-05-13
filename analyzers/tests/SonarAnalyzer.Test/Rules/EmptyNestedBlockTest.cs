@@ -21,31 +21,30 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class EmptyNestedBlockTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.EmptyNestedBlock>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void EmptyNestedBlock_CS() =>
-            builderCS.AddPaths("EmptyNestedBlock.cs", "EmptyNestedBlock2.cs")
-                .WithAutogenerateConcurrentFiles(false)
-                .Verify();
+[TestClass]
+public class EmptyNestedBlockTest
+{
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.EmptyNestedBlock>();
+
+    [TestMethod]
+    public void EmptyNestedBlock_CS() =>
+        builderCS.AddPaths("EmptyNestedBlock.cs", "EmptyNestedBlock2.cs")
+            .WithAutogenerateConcurrentFiles(false)
+            .Verify();
 
 #if NET
 
-        [TestMethod]
-        public void EmptyNestedBlock_CSharp10() =>
-            builderCS.AddPaths("EmptyNestedBlock.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .VerifyNoIssues();  // FN, parameterless struct constructors are not supported
+    [TestMethod]
+    public void EmptyNestedBlock_CSharp10() =>
+        builderCS.AddPaths("EmptyNestedBlock.CSharp10.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .VerifyNoIssues();
 
 #endif
 
-        [TestMethod]
-        public void EmptyNestedBlock_VB() =>
-            new VerifierBuilder<VB.EmptyNestedBlock>().AddPaths("EmptyNestedBlock.vb").Verify();
-    }
+    [TestMethod]
+    public void EmptyNestedBlock_VB() =>
+        new VerifierBuilder<VB.EmptyNestedBlock>().AddPaths("EmptyNestedBlock.vb").Verify();
 }

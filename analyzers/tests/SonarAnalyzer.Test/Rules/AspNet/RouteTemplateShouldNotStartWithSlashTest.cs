@@ -159,7 +159,7 @@ public class RouteTemplateShouldNotStartWithSlashTest
         builderVB
             .AddPaths("RouteTemplateShouldNotStartWithSlash.AspNetCore.vb")
             .AddReferences(AspNetCoreReferences)
-            .VerifyNoIssues();  // FN
+            .VerifyNoIssues();
 
     [TestMethod]
     public void RouteTemplateShouldNotStartWithSlash_CSharp12() =>
@@ -194,7 +194,7 @@ public class RouteTemplateShouldNotStartWithSlashTest
         builderVB
             .AddPaths("RouteTemplateShouldNotStartWithSlash.AspNet4x.vb")
             .AddReferences(AspNet4xReferences(aspNetMvcVersion))
-            .VerifyNoIssues();  // FN, VB is not supported
+            .VerifyNoIssues();
 
     [DataRow("/Index2", false)]
     [DataRow(@"\Index2", true)]

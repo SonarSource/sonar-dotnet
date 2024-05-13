@@ -20,32 +20,31 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class ForLoopCounterChangedTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<ForLoopCounterChanged>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void ForLoopCounterChanged() =>
-            builder.AddPaths("ForLoopCounterChanged.cs").Verify();
+[TestClass]
+public class ForLoopCounterChangedTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<ForLoopCounterChanged>();
+
+    [TestMethod]
+    public void ForLoopCounterChanged() =>
+        builder.AddPaths("ForLoopCounterChanged.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void ForLoopCounterChanged_CSharp10() =>
-            builder.AddPaths("ForLoopCounterChanged.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
+    [TestMethod]
+    public void ForLoopCounterChanged_CSharp10() =>
+        builder.AddPaths("ForLoopCounterChanged.CSharp10.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .Verify();
 
-        [TestMethod]
-        public void ForLoopCounterChanged_CSharp11() =>
-            builder.AddPaths("ForLoopCounterChanged.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .VerifyNoIssues();  // FN, compound assignments are not supported
+    [TestMethod]
+    public void ForLoopCounterChanged_CSharp11() =>
+        builder.AddPaths("ForLoopCounterChanged.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .VerifyNoIssues();
 
 #endif
 
-    }
 }

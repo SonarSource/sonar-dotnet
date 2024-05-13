@@ -21,36 +21,35 @@
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class CallerInformationParametersShouldBeLastTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<CallerInformationParametersShouldBeLast>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void CallerInformationParametersShouldBeLast() =>
-            builder.AddPaths("CallerInformationParametersShouldBeLast.cs").Verify();
+[TestClass]
+public class CallerInformationParametersShouldBeLastTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<CallerInformationParametersShouldBeLast>();
+
+    [TestMethod]
+    public void CallerInformationParametersShouldBeLast() =>
+        builder.AddPaths("CallerInformationParametersShouldBeLast.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void CallerInformationParametersShouldBeLast_CSharp9() =>
-            builder.AddPaths("CallerInformationParametersShouldBeLast.CSharp9.cs").WithTopLevelStatements().Verify();
+    [TestMethod]
+    public void CallerInformationParametersShouldBeLast_CSharp9() =>
+        builder.AddPaths("CallerInformationParametersShouldBeLast.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
-        public void CallerInformationParametersShouldBeLast_CSharp10() =>
-            builder.AddPaths("CallerInformationParametersShouldBeLast.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+    [TestMethod]
+    public void CallerInformationParametersShouldBeLast_CSharp10() =>
+        builder.AddPaths("CallerInformationParametersShouldBeLast.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
-        [TestMethod]
-        public void CallerInformationParametersShouldBeLast_CSharp11() =>
-            builder.AddPaths("CallerInformationParametersShouldBeLast.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11)
-                .VerifyNoIssues();   // overriding an abstract default implementation is compliant
+    [TestMethod]
+    public void CallerInformationParametersShouldBeLast_CSharp11() =>
+        builder.AddPaths("CallerInformationParametersShouldBeLast.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11)
+            .VerifyNoIssues();
 
 #endif
 
-        [TestMethod]
-        public void CallerInformationParametersShouldBeLastInvalidSyntax() =>
-            builder.AddPaths("CallerInformationParametersShouldBeLastInvalidSyntax.cs").WithLanguageVersion(LanguageVersion.CSharp7).WithConcurrentAnalysis(false).Verify();
-    }
+    [TestMethod]
+    public void CallerInformationParametersShouldBeLastInvalidSyntax() =>
+        builder.AddPaths("CallerInformationParametersShouldBeLastInvalidSyntax.cs").WithLanguageVersion(LanguageVersion.CSharp7).WithConcurrentAnalysis(false).Verify();
 }

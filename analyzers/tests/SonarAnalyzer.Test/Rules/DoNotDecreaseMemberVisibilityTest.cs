@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Test.Rules
         public void DoNotDecreaseMemberVisibility_CSharp11() =>
             builder.AddPaths("DoNotDecreaseMemberVisibility.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .VerifyNoIssues();  // static interface methods are compliant
+                .VerifyNoIssues();
 
 #endif
 

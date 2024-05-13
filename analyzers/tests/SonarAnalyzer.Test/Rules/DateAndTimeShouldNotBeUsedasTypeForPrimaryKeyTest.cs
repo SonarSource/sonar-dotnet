@@ -54,7 +54,7 @@ public class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKeyTest
         verifierCS
             .AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.CSharp9.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp9)
-            .VerifyNoIssues();   // records are compliant
+            .VerifyNoIssues();
 
 #if NET
 
@@ -68,11 +68,11 @@ public class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKeyTest
 
     [TestMethod]
     public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_FluentApi_CS() =>
-        verifierCS.AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.FluentApi.cs").VerifyNoIssues();  // FN, Fluent API is not supported
+        verifierCS.AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.FluentApi.cs").VerifyNoIssues();
 
     [TestMethod]
     public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_FluentApi_VB() =>
-        verifierVB.AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.FluentApi.vb").VerifyNoIssues();  // FN, Fluent API is not supported
+        verifierVB.AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.FluentApi.vb").VerifyNoIssues();
 
 #endif
 

@@ -20,32 +20,31 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class DoNotCopyArraysInPropertiesTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotCopyArraysInProperties>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void DoNotCopyArraysInProperties() =>
-            builder.AddPaths("DoNotCopyArraysInProperties.cs").Verify();
+[TestClass]
+public class DoNotCopyArraysInPropertiesTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<DoNotCopyArraysInProperties>();
+
+    [TestMethod]
+    public void DoNotCopyArraysInProperties() =>
+        builder.AddPaths("DoNotCopyArraysInProperties.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void DoNotCopyArraysInProperties_CSharp9() =>
-            builder.AddPaths("DoNotCopyArraysInProperties.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
+    [TestMethod]
+    public void DoNotCopyArraysInProperties_CSharp9() =>
+        builder.AddPaths("DoNotCopyArraysInProperties.CSharp9.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .Verify();
 
-        [TestMethod]
-        public void DoNotCopyArraysInProperties_CSharp12() =>
-            builder.AddPaths("DoNotCopyArraysInProperties.CSharp12.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp12)
-                .VerifyNoIssues();  // FN, collection initializers are not supported
+    [TestMethod]
+    public void DoNotCopyArraysInProperties_CSharp12() =>
+        builder.AddPaths("DoNotCopyArraysInProperties.CSharp12.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .VerifyNoIssues();
 
 #endif
 
-    }
 }

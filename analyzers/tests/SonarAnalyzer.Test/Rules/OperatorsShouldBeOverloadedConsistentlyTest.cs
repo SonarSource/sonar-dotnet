@@ -35,11 +35,11 @@ public class OperatorsShouldBeOverloadedConsistentlyTest
 
     [TestMethod]
     public void OperatorsShouldBeOverloadedConsistently_CSharp9() =>
-        builder.AddPaths("OperatorsShouldBeOverloadedConsistently.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).VerifyNoIssues();    // records are compliant
+        builder.AddPaths("OperatorsShouldBeOverloadedConsistently.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).VerifyNoIssues();
 
     [TestMethod]
     public void OperatorsShouldBeOverloadedConsistently_CSharp11() =>
-        builder.AddPaths("OperatorsShouldBeOverloadedConsistently.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).VerifyNoIssues();  // static virtual interface methods are compliant
+        builder.AddPaths("OperatorsShouldBeOverloadedConsistently.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).VerifyNoIssues();
 
 #endif
 

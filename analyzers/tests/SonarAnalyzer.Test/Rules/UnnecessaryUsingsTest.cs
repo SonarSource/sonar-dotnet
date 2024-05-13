@@ -122,7 +122,7 @@ public class UnnecessaryUsingsTest
 
     [TestMethod]
     public void UnnecessaryUsings_CSharp12() =>
-        builder.AddPaths("UnnecessaryUsings.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).VerifyNoIssues();    // FN, C#12 features are not supported
+        builder.AddPaths("UnnecessaryUsings.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).VerifyNoIssues();
 
 #elif NETFRAMEWORK
 

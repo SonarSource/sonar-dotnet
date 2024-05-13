@@ -20,28 +20,27 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class MethodShouldNotOnlyReturnConstantTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<MethodShouldNotOnlyReturnConstant>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void MethodShouldNotOnlyReturnConstant() =>
-            builder.AddPaths("MethodShouldNotOnlyReturnConstant.cs").Verify();
+[TestClass]
+public class MethodShouldNotOnlyReturnConstantTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<MethodShouldNotOnlyReturnConstant>();
+
+    [TestMethod]
+    public void MethodShouldNotOnlyReturnConstant() =>
+        builder.AddPaths("MethodShouldNotOnlyReturnConstant.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void MethodShouldNotOnlyReturnConstant_CSharp8() =>
-            builder.AddPaths("MethodShouldNotOnlyReturnConstant.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).VerifyNoIssues();  // default interface methods are compliant
+    [TestMethod]
+    public void MethodShouldNotOnlyReturnConstant_CSharp8() =>
+        builder.AddPaths("MethodShouldNotOnlyReturnConstant.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).VerifyNoIssues();
 
-        [TestMethod]
-        public void MethodShouldNotOnlyReturnConstant_CSharp11() =>
-            builder.AddPaths("MethodShouldNotOnlyReturnConstant.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+    [TestMethod]
+    public void MethodShouldNotOnlyReturnConstant_CSharp11() =>
+        builder.AddPaths("MethodShouldNotOnlyReturnConstant.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 
-    }
 }

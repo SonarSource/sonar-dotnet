@@ -38,7 +38,7 @@ public class DisposableNotDisposedTest
     public void DisposableNotDisposed_ILogger() =>
         builder.AddPaths("DisposableNotDisposed.ILogger.cs")
             .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.NuGetLatestVersion).ToArray())
-            .VerifyNoIssues();   // FN, ILogger is not supported
+            .VerifyNoIssues();
 
 #if NET
 
