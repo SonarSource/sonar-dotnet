@@ -10,7 +10,6 @@ public class EnitityFramework
 {
     public async Task Query()
     {
-        // Note to implementers: Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions and RelationalQueryableExtensions might be needed to be added to some sort of whitelist for IQueryables
         DbSet<object> dbSet = default;
         dbSet.Add(null);      // Noncompliant FP https://github.com/SonarSource/sonar-dotnet/issues/9269
         dbSet.AddRange(null); // Noncompliant FP https://github.com/SonarSource/sonar-dotnet/issues/9269
