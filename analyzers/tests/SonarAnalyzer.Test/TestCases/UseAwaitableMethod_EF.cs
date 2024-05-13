@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.IO;
 using System.Threading.Tasks;
 using System;
@@ -10,8 +11,8 @@ public class EnitityFramework
     {
         // Note to implementers: Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions and RelationalQueryableExtensions might be needed to be added to some sort of whitelist for IQueryables
         DbSet<object> dbSet = default;
-        dbSet.Add(null); // Noncompliant
-        dbSet.AddRange(null); // Noncompliant
+        dbSet.Add(null); // Noncompliant      FP https://github.com/SonarSource/sonar-dotnet/issues/9269
+        dbSet.AddRange(null); // Noncompliant FP https://github.com/SonarSource/sonar-dotnet/issues/9269
         dbSet.All(x => true); // Noncompliant
         dbSet.Any(x => true); // Noncompliant
         dbSet.Average(x => 1); // Noncompliant
@@ -36,5 +37,40 @@ public class EnitityFramework
         dbSet.ToArray(); // Noncompliant
         dbSet.ToDictionary(x => 0); // Noncompliant
         dbSet.ToList(); // Noncompliant
+    }
+
+    public async Task Context(DbContext dbContext)
+    {
+        dbContext.Add(null);            // Noncompliant FP https://github.com/SonarSource/sonar-dotnet/issues/9269
+        dbContext.AddRange(null);       // Noncompliant FP https://github.com/SonarSource/sonar-dotnet/issues/9269
+        dbContext.Dispose();            // Noncompliant
+        dbContext.Find<object>();       // Noncompliant
+        dbContext.Find(typeof(object)); // Noncompliant
+        dbContext.SaveChanges();        // Noncompliant
+
+    }
+
+    public async Task DatabaseFacade(DatabaseFacade databaseFacade)
+    {
+        databaseFacade.BeginTransaction();     // Noncompliant
+        databaseFacade.CanConnect();           // Noncompliant
+        databaseFacade.CommitTransaction();    // Noncompliant
+        databaseFacade.EnsureCreated();        // Noncompliant
+        databaseFacade.EnsureDeleted();        // Noncompliant
+        databaseFacade.RollbackTransaction();  // Noncompliant
+
+        // Extension methods
+        bool isEnabled = true;
+        databaseFacade.BeginTransaction(System.Data.IsolationLevel.Chaos);                           // Noncompliant
+        databaseFacade.CloseConnection();                                                            // Noncompliant
+        databaseFacade.ExecuteSql($"Select * From Table Where IsEnabled = {isEnabled}");             // Noncompliant
+        databaseFacade.ExecuteSqlInterpolated($"Select * From Table Where IsEnabled = {isEnabled}"); // Noncompliant
+        databaseFacade.ExecuteSqlRaw("Select * From Table Where IsEnabled = @isEnabled", isEnabled); // Noncompliant
+        databaseFacade.GetAppliedMigrations();                                                       // Noncompliant
+        databaseFacade.GetPendingMigrations();                                                       // Noncompliant
+        databaseFacade.Migrate();                                                                    // Noncompliant
+        databaseFacade.OpenConnection();                                                             // Noncompliant
+        databaseFacade.UseTransaction(null);                                                         // Noncompliant
+        
     }
 }
