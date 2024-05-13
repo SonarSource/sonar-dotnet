@@ -1,0 +1,4 @@
+{
+    "sonarCloudOrganization": "sonarsource",
+    "projectKey": "org.sonarsource.dotnet:sonar-csharp"
+}
