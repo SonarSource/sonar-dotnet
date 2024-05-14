@@ -34,8 +34,11 @@ internal class VisualBasicMethodParameterLookup : MethodParameterLookupBase<Argu
     public VisualBasicMethodParameterLookup(ArgumentListSyntax argumentList, IMethodSymbol methodSymbol)
         : base(argumentList.Arguments, methodSymbol) { }
 
-    protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
+    protected override SyntaxToken? GetNameColonIdentifier(ArgumentSyntax argument) =>
         (argument as SimpleArgumentSyntax)?.NameColonEquals?.Name.Identifier;
+
+    protected override SyntaxToken? GetNameEqualsIdentifier(ArgumentSyntax argument) =>
+       null;
 
     protected override SyntaxNode Expression(ArgumentSyntax argument) =>
         argument.GetExpression();

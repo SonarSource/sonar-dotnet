@@ -24,6 +24,7 @@ namespace SonarAnalyzer.Helpers.Facade
 {
     internal sealed class CSharpTrackerFacade : ITrackerFacade<SyntaxKind>
     {
+        public ArgumentTracker<SyntaxKind> Argument => new CSharpArgumentTracker();
         public BaseTypeTracker<SyntaxKind> BaseType { get; } = new CSharpBaseTypeTracker();
         public ElementAccessTracker<SyntaxKind> ElementAccess { get; } = new CSharpElementAccessTracker();
         public FieldAccessTracker<SyntaxKind> FieldAccess { get; } = new CSharpFieldAccessTracker();
