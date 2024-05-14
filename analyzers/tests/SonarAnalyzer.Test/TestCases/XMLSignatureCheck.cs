@@ -16,7 +16,9 @@ public class XMLSignatures
         _ = signedXml.CheckSignatureReturningKey("other");             // Custom defined extension method.
 
         _ = signedXml.CheckSignature();                                // Noncompliant {{Change this code to only accept signatures computed from a trusted party.}}
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^
         _ = signedXml.CheckSignatureReturningKey(out var signingKey);  // Noncompliant {{Change this code to only accept signatures computed from a trusted party.}}
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     }
 }
 

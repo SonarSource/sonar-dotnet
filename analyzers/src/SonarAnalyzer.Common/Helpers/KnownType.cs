@@ -517,6 +517,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Security_Cryptography_TripleDES = new("System.Security.Cryptography.TripleDES");
         public static readonly KnownType System_Security_Cryptography_X509Certificates_X509Certificate2 = new("System.Security.Cryptography.X509Certificates.X509Certificate2");
         public static readonly KnownType System_Security_Cryptography_X509Certificates_X509Chain = new("System.Security.Cryptography.X509Certificates.X509Chain");
+        public static readonly KnownType System_Security_Cryptography_Xml_SignedXml = new("System.Security.Cryptography.Xml.SignedXml");
         public static readonly KnownType System_Security_Permissions_CodeAccessSecurityAttribute = new("System.Security.Permissions.CodeAccessSecurityAttribute");
         public static readonly KnownType System_Security_Permissions_PrincipalPermission = new("System.Security.Permissions.PrincipalPermission");
         public static readonly KnownType System_Security_Permissions_PrincipalPermissionAttribute = new("System.Security.Permissions.PrincipalPermissionAttribute");

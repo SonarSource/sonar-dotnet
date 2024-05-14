@@ -30,14 +30,15 @@ public sealed class XmlSignatureCheck : SonarDiagnosticAnalyzer
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
-            {
-                var node = c.Node;
-                if (true)
-                {
-                    c.ReportIssue(Rule, node.GetLocation());
-                }
-            },
-            SyntaxKind.InvocationExpression);
+    protected override void Initialize(SonarAnalysisContext context)
+    {
+        var tracker = CSharpFacade.Instance.Tracker.Invocation;
+        tracker.Track(
+            new TrackerInput(context, AnalyzerConfiguration.AlwaysEnabled, Rule),
+            tracker.Or(
+                tracker.And(
+                    tracker.MethodHasParameters(0),
+                    tracker.MatchMethod(new MemberDescriptor(KnownType.System_Security_Cryptography_Xml_SignedXml, "CheckSignature"))),
+                tracker.MatchMethod(new MemberDescriptor(KnownType.System_Security_Cryptography_Xml_SignedXml, "CheckSignatureReturningKey"))));
+    }
 }
