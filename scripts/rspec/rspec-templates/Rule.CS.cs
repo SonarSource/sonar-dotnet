@@ -36,7 +36,7 @@ public sealed class $DiagnosticClassName$ : SonarDiagnosticAnalyzer
                 var node = c.Node;
                 if (true)
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                    c.ReportIssue(Rule, node.GetLocation());
                 }
             },
             SyntaxKind.InvocationExpression);
