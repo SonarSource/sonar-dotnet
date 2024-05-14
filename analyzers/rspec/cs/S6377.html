@@ -1,0 +1,80 @@
+<p>XML signatures are a method used to ensure the integrity and authenticity of XML documents. However, if XML signatures are not validated securely,
+it can lead to potential vulnerabilities.</p>
+<h2>Why is this an issue?</h2>
+<p>XML can be used for a wide variety of purposes. Using a signature on an XML message generally indicates this message requires authenticity and
+integrity. However, if the signature validation is not properly implemented this authenticity can not be guaranteed.</p>
+<h3>What is the potential impact?</h3>
+<p>By not enforcing secure validation, the XML Digital Signature API is more susceptible to attacks such as signature spoofing and injections.</p>
+<h3>Increased Vulnerability to Signature Spoofing</h3>
+<p>By disabling secure validation, the application becomes more susceptible to signature spoofing attacks. Attackers can potentially manipulate the
+XML signature in a way that bypasses the validation process, allowing them to forge or tamper with the signature. This can lead to the acceptance of
+invalid or maliciously modified signatures, compromising the integrity and authenticity of the XML documents.</p>
+<h3>Risk of Injection Attacks</h3>
+<p>Disabling secure validation can expose the application to injection attacks. Attackers can inject malicious code or entities into the XML document,
+taking advantage of the weakened validation process. In some cases, it can also expose the application to denial-of-service attacks. Attackers can
+exploit vulnerabilities in the validation process to cause excessive resource consumption or system crashes, leading to service unavailability or
+disruption.</p>
+<h2>How to fix it in ASP.NET Core</h2>
+<h3>Code examples</h3>
+<p>The following noncompliant code example verifies an XML signature without providing a trusted public key. This code will validate the signature
+against the embedded public key, accepting any forged signature.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+XmlDocument xmlDoc = new()
+{
+    PreserveWhitespace = true
+};
+xmlDoc.Load("/data/login.xml");
+SignedXml signedXml = new(xmlDoc);
+XmlNodeList nodeList = xmlDoc.GetElementsByTagName("Signature");
+signedXml.LoadXml((XmlElement?)nodeList[0]);
+if (signedXml.CheckSignature()) {
+    // Process the XML content
+} else {
+    // Raise an error
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+CspParameters cspParams = new()
+{
+    KeyContainerName = "MY_RSA_KEY"
+};
+RSACryptoServiceProvider rsaKey = new(cspParams);
+
+XmlDocument xmlDoc = new()
+{
+    PreserveWhitespace = true
+};
+xmlDoc.Load("/data/login.xml");
+SignedXml signedXml = new(xmlDoc);
+XmlNodeList nodeList = xmlDoc.GetElementsByTagName("Signature");
+signedXml.LoadXml((XmlElement?)nodeList[0]);
+if (signedXml.CheckSignature(rsaKey)) {
+    // Process the XML content
+} else {
+    // Raise an error
+}
+</pre>
+<h3>How does this work?</h3>
+<p>Here, the compliant solution provides an RSA public key to the signature validation function. This will ensure only signatures computed with the
+associated private key will be accepted. This prevents signature forgery attacks.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.xml">System.Security.Cryptography.Xml
+  Namespace</a> </li>
+  <li> Microsfot Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/standard/security/how-to-verify-the-digital-signatures-of-xml-documents">How to: Verify the Digital
+  Signatures of XML Documents</a> </li>
+</ul>
+<h3>Standards</h3>
+<ul>
+  <li> OWASP - <a href="https://owasp.org/Top10/A02_2021-Cryptographic_Failures/">Top 10:2021 A02:2021 - Cryptographic Failures</a> </li>
+  <li> OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure">Top 10 2017 Category A3 - Sensitive Data
+  Exposure</a> </li>
+  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/347">CWE-347 - Improper Verification of Cryptographic Signature</a> </li>
+  <li> STIG Viewer - <a href="https://stigviewer.com/stig/application_security_and_development/2023-06-08/finding/V-222608">Application Security and
+  Development: V-222608</a> - The application must not be vulnerable to XML-oriented attacks. </li>
+</ul>
+
