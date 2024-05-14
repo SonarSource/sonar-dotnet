@@ -22,11 +22,11 @@ namespace SonarAnalyzer.Helpers;
 
 public interface IMethodParameterLookup
 {
+    IMethodSymbol MethodSymbol { get; }
     bool TryGetSymbol(SyntaxNode argument, out IParameterSymbol parameter);
     bool TryGetSyntax(IParameterSymbol parameter, out ImmutableArray<SyntaxNode> expressions);
     bool TryGetSyntax(string parameterName, out ImmutableArray<SyntaxNode> expressions);
     bool TryGetNonParamsSyntax(IParameterSymbol parameter, out SyntaxNode expression);
-    IMethodSymbol MethodSymbol { get; }
 }
 
 // This should come from the Roslyn API (https://github.com/dotnet/roslyn/issues/9)
@@ -35,7 +35,8 @@ internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodPara
 {
     private readonly SeparatedSyntaxList<TArgumentSyntax> argumentList;
 
-    protected abstract SyntaxToken? GetNameColonArgumentIdentifier(TArgumentSyntax argument);
+    protected abstract SyntaxToken? GetNameColonIdentifier(TArgumentSyntax argument);
+    protected abstract SyntaxToken? GetNameEqualsIdentifier(TArgumentSyntax argument);
     protected abstract SyntaxNode Expression(TArgumentSyntax argument);
 
     public IMethodSymbol MethodSymbol { get; }
@@ -63,16 +64,26 @@ internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodPara
         var arg = argument as TArgumentSyntax ?? throw new ArgumentException($"{nameof(argument)} must be of type {typeof(TArgumentSyntax)}", nameof(argument));
 
         if (!argumentList.Contains(arg)
-            || methodSymbol == null
+            || methodSymbol is null
             || methodSymbol.IsVararg)
         {
             return false;
         }
 
-        if (GetNameColonArgumentIdentifier(arg) is { } nameColonArgumentIdentifier)
+        if (GetNameColonIdentifier(arg) is { } nameColonIdentifier)
         {
-            parameter = methodSymbol.Parameters.FirstOrDefault(symbol => symbol.Name == nameColonArgumentIdentifier.ValueText);
-            return parameter != null;
+            parameter = methodSymbol.Parameters.FirstOrDefault(x => x.Name == nameColonIdentifier.ValueText);
+            return parameter is not null;
+        }
+
+        if (GetNameEqualsIdentifier(arg) is { } nameEqualsIdentifier
+            && methodSymbol.ContainingType.GetMembers(nameEqualsIdentifier.ValueText) is { Length: 1 } properties
+            && properties[0] is IPropertySymbol { SetMethod: { } setter } property
+            && property.Name == nameEqualsIdentifier.ValueText
+            && setter.Parameters is { Length: 1 } parameters)
+        {
+            parameter = parameters[0];
+            return parameter is not null;
         }
 
         var index = argumentList.IndexOf(arg);
@@ -80,7 +91,7 @@ internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodPara
         {
             var lastParameter = methodSymbol.Parameters.Last();
             parameter = lastParameter.IsParams ? lastParameter : null;
-            return parameter != null;
+            return parameter is not null;
         }
         parameter = methodSymbol.Parameters[index];
         return true;
