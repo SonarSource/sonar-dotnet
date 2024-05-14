@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.ComponentModel;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.Helpers.Trackers;
@@ -1144,6 +1145,58 @@ public class ArgumentTrackerTest
         result.Should().BeTrue();
     }
 
+    [DataTestMethod]
+    [DataRow("""this[$$"TEMP"]""", true)]
+    [DataRow("""this[42, $$"TEMP"]""", false)]
+    [DataRow("""this[42, 43, $$"TEMP"]""", true)]
+    public void Indexer_ConditionalPosition(string expression, bool expectedResult)
+    {
+        var snippet = $$"""
+            public class Test
+            {
+                public int this[string key] => 0;
+                public int this[int a, string key] => 0;
+                public int this[int a, int b, string key] => 0;
+
+                public void M()
+                {
+                    _ = {{expression}};
+                }
+            }
+            """;
+        var context = ArgumentContextCS(snippet);
+        var descriptor = ArgumentDescriptor.ElementAccess(
+            new KnownType("Test"),
+            x => x.Name == "key",
+            x => x is 0 or 2);
+        var result = MatchArgumentCS(context, descriptor);
+        result.Should().Be(expectedResult);
+    }
+
+    [DataTestMethod]
+    [DataRow("System.Int32", false)]
+    [DataRow("System.Collections.Generic.IDictionary", true)]
+    public void Indexer_WrongKnownType(string type, bool expectedResult)
+    {
+        var snippet = $$"""
+            public class Test
+            {
+                public void M(System.Diagnostics.ProcessStartInfo psi)
+                {
+                    _ = psi.Environment?[key: $$"TEMP"];
+                }
+            }
+            """;
+        var context = ArgumentContextCS(snippet);
+        var descriptor = ArgumentDescriptor.ElementAccess(
+            new(type, "TKey", "TValue"),
+            "Environment",
+            x => x.Name == "key",
+            0);
+        var result = MatchArgumentCS(context, descriptor);
+        result.Should().Be(expectedResult);
+    }
+
 #if NET
 
     [TestMethod]
@@ -1205,7 +1258,7 @@ public class ArgumentTrackerTest
     [DataRow("""[Designer(designerBaseTypeName: "designerBaseTypeName", $$designerTypeName: "designerTypeName")]""", "designerTypeName", 1)]
     [DataRow("""[Designer($$"designerTypeName"$$, "designerBaseTypeName"), DesignerCategory("Form")]""", "designerTypeName", 0)]
     [DataRow("""[DesignerCategory("Form"), Designer($$"designerTypeName"$$, "designerBaseTypeName")]""", "designerTypeName", 0)]
-    public void Attribute_Attribute_ConstructorParameters(string attribute, string parameterName, int descriptorPosition)
+    public void Attribute_ConstructorParameters(string attribute, string parameterName, int descriptorPosition)
     {
         var snippet = $$"""
             using System.ComponentModel;
@@ -1223,6 +1276,43 @@ public class ArgumentTrackerTest
         var descriptor = ArgumentDescriptor.AttributeArgument("Designer", parameterName, descriptorPosition);
         var result = MatchArgumentCS(context, descriptor);
         result.Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void Attribute_PropertySetter_WrongMethod()
+    {
+        var snippet = $$"""
+            [Designer($$designerTypeName = "hey")]
+            public class Test { }
+
+            public class Designer : System.Attribute
+            {
+                public string designerTypeName { get; set; }
+            }
+            """;
+        var context = ArgumentContextCS(snippet);
+
+        // This should call AttributeProperty, not AttributeArgument.
+        var descriptor = ArgumentDescriptor.AttributeArgument("Designer", "designerTypeName", 0);
+        var result = MatchArgumentCS(context, descriptor);
+        result.Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void Attribute_ConstructorParameters_WrongMethod()
+    {
+        var snippet = $$"""
+            [Designer($$"value")]
+            public class Test { }
+
+            public class Designer(string designerTypeName) : System.Attribute { }
+            """;
+        var context = ArgumentContextCS(snippet);
+
+        // This should call AttributeArgument, no AttributeProperty.
+        var descriptor = ArgumentDescriptor.AttributeProperty("Designer", "designerTypeName");
+        var result = MatchArgumentCS(context, descriptor);
+        result.Should().BeFalse();
     }
 
     [DataTestMethod]
@@ -1328,6 +1418,12 @@ public class ArgumentTrackerTest
         End Class
         """;
 
+    private static ArgumentContext ArgumentContextCS(string snippet) =>
+        ArgumentContext(snippet, TestHelper.CompileCS, typeof(CS.ArgumentSyntax), typeof(CS.AttributeArgumentSyntax));
+
+    private static ArgumentContext ArgumentContextVB(string snippet) =>
+        ArgumentContext(snippet, TestHelper.CompileVB, typeof(VB.ArgumentSyntax));
+
     private static ArgumentContext ArgumentContext(string snippet,
         Func<string, MetadataReference[], (SyntaxTree Tree, SemanticModel Model)> compile, params Type[] descriptorNodeTypes)
     {
@@ -1344,12 +1440,6 @@ public class ArgumentTrackerTest
             .First(x => Array.Exists(descriptorNodeTypes, t => t.IsInstanceOfType(x)));
         return new(node, model);
     }
-
-    private static ArgumentContext ArgumentContextCS(string snippet) =>
-        ArgumentContext(snippet, TestHelper.CompileCS, typeof(CS.ArgumentSyntax), typeof(CS.AttributeArgumentSyntax));
-
-    private static ArgumentContext ArgumentContextVB(string snippet) =>
-        ArgumentContext(snippet, TestHelper.CompileVB, typeof(VB.ArgumentSyntax));
 
     private static bool MatchArgumentCS(ArgumentContext context, ArgumentDescriptor descriptor) =>
         MatchArgument<CSharpArgumentTracker, Microsoft.CodeAnalysis.CSharp.SyntaxKind>(context, descriptor);
