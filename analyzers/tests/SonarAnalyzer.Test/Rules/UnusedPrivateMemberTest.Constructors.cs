@@ -64,33 +64,34 @@ public class NonPrivateMembers
 
         [TestMethod]
         public void UnusedPrivateMember_Constructor_DirectReferences() =>
-            builder.AddSnippet(@"
-public abstract class PrivateConstructors
-{
-    public class Constructor1
-    {
-        public static readonly Constructor1 Instance = new Constructor1();
-        private Constructor1() { var x = 5; }
-    }
+            builder.AddSnippet("""
+                public abstract class PrivateConstructors
+                {
+                    public class Constructor1
+                    {
+                        public static readonly Constructor1 Instance = new Constructor1();
+                        private Constructor1() { var x = 5; }
+                    }
 
-    public class Constructor2
-    {
-        public Constructor2(int a) { }
-        private Constructor2() { var x = 5; } // Compliant - FN
-    }
+                    public class Constructor2
+                    {
+                        public Constructor2(int a) { }
+                        private Constructor2() { var x = 5; } // Compliant - FN
+                    }
 
-    public class Constructor3
-    {
-        public Constructor3(int a) : this() { }
-        private Constructor3() { var x = 5; }
-    }
+                    public class Constructor3
+                    {
+                        public Constructor3(int a) : this() { }
+                        private Constructor3() { var x = 5; }
+                    }
 
-    public class Constructor4
-    {
-        static Constructor4() { var x = 5; }
-    }
-}
-").Verify();
+                    public class Constructor4
+                    {
+                        static Constructor4() { var x = 5; }
+                    }
+                }
+
+                """).VerifyNoIssues();
 
         [TestMethod]
         public void UnusedPrivateMember_Constructor_Inheritance() =>
@@ -122,12 +123,13 @@ public class Inheritance
 
         [TestMethod]
         public void UnusedPrivateMember_Empty_Constructors() =>
-            builder.AddSnippet(@"
-public class PrivateConstructors
-{
-    private PrivateConstructors(int i) { } // Compliant, empty ctors are reported from another rule
-}
-").Verify();
+            builder.AddSnippet("""
+                public class PrivateConstructors
+                {
+                    private PrivateConstructors(int i) { } // Compliant, empty ctors are reported from another rule
+                }
+
+                """).VerifyNoIssues();
 
         [TestMethod]
         public void UnusedPrivateMember_Illegal_Interface_Constructor() =>
@@ -164,19 +166,20 @@ public class Some
 
         [TestMethod]
         public void UnusedPrivateMember_RecordPositionalConstructor() =>
-            builder.AddSnippet(@"
-// https://github.com/SonarSource/sonar-dotnet/issues/5381
-public abstract record Foo
-{
-    Foo(string value)
-    {
-        Value = value;
-    }
+            builder.AddSnippet("""
+                // https://github.com/SonarSource/sonar-dotnet/issues/5381
+                public abstract record Foo
+                {
+                    Foo(string value)
+                    {
+                        Value = value;
+                    }
 
-    public string Value { get; }
+                    public string Value { get; }
 
-    public sealed record Bar(string Value) : Foo(Value);
-}").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+                    public sealed record Bar(string Value) : Foo(Value);
+                }
+                """).WithOptions(ParseOptionsHelper.FromCSharp9).VerifyNoIssues();
 
         [TestMethod]
         public void UnusedPrivateMember_NonExistentRecordPositionalConstructor() =>

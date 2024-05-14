@@ -20,28 +20,27 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class StreamReadStatementTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<StreamReadStatement>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void StreamReadStatement() =>
-            builder.AddPaths("StreamReadStatement.cs").Verify();
+[TestClass]
+public class StreamReadStatementTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<StreamReadStatement>();
+
+    [TestMethod]
+    public void StreamReadStatement() =>
+        builder.AddPaths("StreamReadStatement.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void StreamReadStatement_CSharp10() =>
-            builder.AddPaths("StreamReadStatement.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+    [TestMethod]
+    public void StreamReadStatement_CSharp10() =>
+        builder.AddPaths("StreamReadStatement.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).VerifyNoIssues();
 
-        [TestMethod]
-        public void StreamReadStatement_CSharp11() =>
-            builder.AddPaths("StreamReadStatement.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+    [TestMethod]
+    public void StreamReadStatement_CSharp11() =>
+        builder.AddPaths("StreamReadStatement.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 
-    }
 }

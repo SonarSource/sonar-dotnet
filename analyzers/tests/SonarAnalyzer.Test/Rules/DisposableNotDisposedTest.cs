@@ -20,49 +20,48 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class DisposableNotDisposedTest
 {
-    [TestClass]
-    public class DisposableNotDisposedTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<DisposableNotDisposed>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<DisposableNotDisposed>();
 
-        [TestMethod]
-        public void DisposableNotDisposed() =>
-            builder.AddPaths("DisposableNotDisposed.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp7)
-                .AddReferences(MetadataReferenceFacade.SystemNetHttp)
-                .Verify();
+    [TestMethod]
+    public void DisposableNotDisposed() =>
+        builder.AddPaths("DisposableNotDisposed.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp7)
+            .AddReferences(MetadataReferenceFacade.SystemNetHttp)
+            .Verify();
 
-        [TestMethod]
-        public void DisposableNotDisposed_ILogger() =>
-            builder.AddPaths("DisposableNotDisposed.ILogger.cs")
-                .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.NuGetLatestVersion).ToArray())
-                .Verify();
+    [TestMethod]
+    public void DisposableNotDisposed_ILogger() =>
+        builder.AddPaths("DisposableNotDisposed.ILogger.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.NuGetLatestVersion).ToArray())
+            .VerifyNoIssues();
 
 #if NET
 
-        [TestMethod]
-        public void DisposableNotDisposed_CSharp8() =>
-            builder.AddPaths("DisposableNotDisposed.CSharp8.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .AddReferences(NuGetMetadataReference.FluentAssertions("5.9.0"))
-                .Verify();
+    [TestMethod]
+    public void DisposableNotDisposed_CSharp8() =>
+        builder.AddPaths("DisposableNotDisposed.CSharp8.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .AddReferences(NuGetMetadataReference.FluentAssertions("5.9.0"))
+            .Verify();
 
-        [TestMethod]
-        public void DisposableNotDisposed_CSharp9() =>
-            builder.AddPaths("DisposableNotDisposed.CSharp9.cs")
-                .WithTopLevelStatements()
-                .AddReferences(MetadataReferenceFacade.SystemNetHttp)
-                .Verify();
+    [TestMethod]
+    public void DisposableNotDisposed_CSharp9() =>
+        builder.AddPaths("DisposableNotDisposed.CSharp9.cs")
+            .WithTopLevelStatements()
+            .AddReferences(MetadataReferenceFacade.SystemNetHttp)
+            .Verify();
 
-        [TestMethod]
-        public void DisposableNotDisposed_CSharp10() =>
-            builder.AddPaths("DisposableNotDisposed.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
+    [TestMethod]
+    public void DisposableNotDisposed_CSharp10() =>
+        builder.AddPaths("DisposableNotDisposed.CSharp10.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .Verify();
 
 #endif
 
-    }
 }

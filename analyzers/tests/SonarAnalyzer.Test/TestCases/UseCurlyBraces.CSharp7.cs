@@ -12,6 +12,8 @@ namespace Tests.Diagnostics
             {
                 Console.WriteLine(str);
             }
+            if (obj is string str2) // Noncompliant
+                Console.WriteLine(str2);
         }
     }
 }

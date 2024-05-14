@@ -159,7 +159,7 @@ public class RouteTemplateShouldNotStartWithSlashTest
         builderVB
             .AddPaths("RouteTemplateShouldNotStartWithSlash.AspNetCore.vb")
             .AddReferences(AspNetCoreReferences)
-            .Verify();
+            .VerifyNoIssues();
 
     [TestMethod]
     public void RouteTemplateShouldNotStartWithSlash_CSharp12() =>
@@ -194,7 +194,7 @@ public class RouteTemplateShouldNotStartWithSlashTest
         builderVB
             .AddPaths("RouteTemplateShouldNotStartWithSlash.AspNet4x.vb")
             .AddReferences(AspNet4xReferences(aspNetMvcVersion))
-            .Verify();
+            .VerifyNoIssues();
 
     [DataRow("/Index2", false)]
     [DataRow(@"\Index2", true)]
@@ -231,8 +231,9 @@ public class RouteTemplateShouldNotStartWithSlashTest
     [DataRow("""[System.Web.Mvc.RouteAttribute(@"/[action]")]""", false)]
     [DataRow("""[method:Route(@"/[action]")]""", false)]
     [DataTestMethod]
-    public void RouteTemplateShouldNotStartWithSlash_WithAttributeSyntaxVariations(string attribute, bool compliant) =>
-        builderCS.AddReferences(AspNet4xReferences("5.2.7"))
+    public void RouteTemplateShouldNotStartWithSlash_WithAttributeSyntaxVariations(string attribute, bool compliant)
+    {
+        var builder = builderCS.AddReferences(AspNet4xReferences("5.2.7"))
             .WithOptions(ParseOptionsHelper.FromCSharp11)
             .AddSnippet($$"""
                 using System.Web.Mvc;
@@ -243,8 +244,16 @@ public class RouteTemplateShouldNotStartWithSlashTest
                     {{attribute}} {{(compliant ? string.Empty : " // Secondary")}}
                     public ActionResult SomeAction() => View();
                 }
-                """)
-            .Verify();
+                """);
+        if (compliant)
+        {
+            builder.VerifyNoIssues();
+        }
+        else
+        {
+            builder.Verify();
+        }
+    }
 
     [DataRow("""(@"/[action]")""", false)]
     [DataRow("""("/[action]")""", false)]

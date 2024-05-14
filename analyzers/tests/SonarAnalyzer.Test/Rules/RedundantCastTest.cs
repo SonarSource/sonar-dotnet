@@ -28,6 +28,32 @@ public class RedundantCastTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<RedundantCast>();
 
+    private static IEnumerable<(string Snippet, bool CompliantWithFlowState, bool CompliantWithoutFlowState)> NullableTestData => new[]
+    {
+        ("""_ = (string)"Test";""", false, false),
+        ("""_ = (string?)"Test";""", true, false),
+        ("""_ = (string)null;""", true, true),
+        ("""_ = (string?)null;""", true, true),
+        ("""_ = (string)nullable;""", true, false),
+        ("""_ = (string?)nullable;""", false, false),
+        ("""_ = (string)nonNullable;""", false, false),
+        ("""_ = (string?)nonNullable;""", true, false),
+        ("""_ = nullable as string;""", true, false),
+        ("""_ = nonNullable as string;""", false, false),
+        ("""if (nullable != null) _ = (string)nullable;""", false, false),
+        ("""if (nullable != null) _ = (string?)nullable;""", true, false),
+        ("""if (nullable != null) _ = nullable as string;""", false, false),
+        ("""if (nonNullable == null) _ = (string)nonNullable;""", true, false),
+        ("""if (nonNullable == null) _ = (string?)nonNullable;""", false, false),
+        ("""if (nonNullable == null) _ = nonNullable as string;""", true, false),
+    };
+
+    private static IEnumerable<object[]> NullableTestDataWithFlowState =>
+        NullableTestData.Select(x => new object[] { x.Snippet, x.CompliantWithFlowState });
+
+    private static IEnumerable<object[]> NullableTestDataWithoutFlowState =>
+        NullableTestData.Select(x => new object[] { x.Snippet, x.CompliantWithoutFlowState });
+
     [TestMethod]
     public void RedundantCast() =>
         builder.AddPaths("RedundantCast.cs").Verify();
@@ -61,27 +87,27 @@ public class RedundantCastTest
 
                  public static T RunFunc<T>(Func<T> func, T returnValue = default) => returnValue;
             }
-            """).WithLanguageVersion(LanguageVersion.CSharp7_1).Verify();
+            """).WithLanguageVersion(LanguageVersion.CSharp7_1).VerifyNoIssues();
 
     [TestMethod]
     [DynamicData(nameof(NullableTestDataWithFlowState))]
-    public void RedundantCast_NullableEnabled(string snippet, bool compliant)
-        => VerifyNullableTests(snippet, "enable", compliant);
+    public void RedundantCast_NullableEnabled(string snippet, bool compliant) =>
+        VerifyNullableTests(snippet, "enable", compliant);
 
     [TestMethod]
     [DynamicData(nameof(NullableTestDataWithFlowState))]
-    public void RedundantCast_NullableWarnings(string snippet, bool compliant)
-        => VerifyNullableTests(snippet, "enable warnings", compliant);
+    public void RedundantCast_NullableWarnings(string snippet, bool compliant) =>
+        VerifyNullableTests(snippet, "enable warnings", compliant);
 
     [TestMethod]
     [DynamicData(nameof(NullableTestDataWithoutFlowState))]
-    public void RedundantCast_NullableDisabled(string snippet, bool compliant)
-        => VerifyNullableTests(snippet, "disable", compliant);
+    public void RedundantCast_NullableDisabled(string snippet, bool compliant) =>
+        VerifyNullableTests(snippet, "disable", compliant);
 
     [TestMethod]
     [DynamicData(nameof(NullableTestDataWithoutFlowState))]
-    public void RedundantCast_NullableAnnotations(string snippet, bool compliant)
-        => VerifyNullableTests(snippet, "enable annotations", compliant);
+    public void RedundantCast_NullableAnnotations(string snippet, bool compliant) =>
+        VerifyNullableTests(snippet, "enable annotations", compliant);
 
     private void VerifyNullableTests(string snippet, string nullableContext, bool compliant)
     {
@@ -92,32 +118,14 @@ public class RedundantCastTest
                 {{snippet}} // {{compliant switch { true => "Compliant", false => "Noncompliant" }}}
             }
             """;
-        builder.AddSnippet(code).WithTopLevelStatements().Verify();
+        var snippetVerifier = builder.AddSnippet(code).WithTopLevelStatements();
+        if (compliant)
+        {
+            snippetVerifier.VerifyNoIssues();
+        }
+        else
+        {
+            snippetVerifier.Verify();
+        }
     }
-
-    private static IEnumerable<(string Snippet, bool CompliantWithFlowState, bool CompliantWithoutFlowState)> NullableTestData => new[]
-    {
-        ("""_ = (string)"Test";""", false, false),
-        ("""_ = (string?)"Test";""", true, false),
-        ("""_ = (string)null;""", true, true),
-        ("""_ = (string?)null;""", true, true),
-        ("""_ = (string)nullable;""", true, false),
-        ("""_ = (string?)nullable;""", false, false),
-        ("""_ = (string)nonNullable;""", false, false),
-        ("""_ = (string?)nonNullable;""", true, false),
-        ("""_ = nullable as string;""", true, false),
-        ("""_ = nonNullable as string;""", false, false),
-        ("""if (nullable != null) _ = (string)nullable;""", false, false),
-        ("""if (nullable != null) _ = (string?)nullable;""", true, false),
-        ("""if (nullable != null) _ = nullable as string;""", false, false),
-        ("""if (nonNullable == null) _ = (string)nonNullable;""", true, false),
-        ("""if (nonNullable == null) _ = (string?)nonNullable;""", false, false),
-        ("""if (nonNullable == null) _ = nonNullable as string;""", true, false),
-    };
-
-    private static IEnumerable<object[]> NullableTestDataWithFlowState =>
-        NullableTestData.Select(x => new object[] { x.Snippet, x.CompliantWithFlowState });
-
-    private static IEnumerable<object[]> NullableTestDataWithoutFlowState =>
-        NullableTestData.Select(x => new object[] { x.Snippet, x.CompliantWithoutFlowState });
 }

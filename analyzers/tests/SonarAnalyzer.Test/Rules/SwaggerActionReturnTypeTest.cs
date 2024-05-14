@@ -102,7 +102,7 @@ public class SwaggerActionReturnTypeTest
 
                 public class Bar {}
                 """)
-            .Verify();
+            .VerifyNoIssues();
 
     [DataTestMethod]
     [DataRow("""Results.Ok(bar)""")]
@@ -162,7 +162,7 @@ public class SwaggerActionReturnTypeTest
 
                 public class Bar {}
                 """)
-            .Verify();
+            .VerifyNoIssues();
 }
 
 #endif

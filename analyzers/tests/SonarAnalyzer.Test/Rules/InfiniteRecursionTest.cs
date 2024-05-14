@@ -21,53 +21,53 @@
 using System.Text;
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class InfiniteRecursionTest
 {
-    [TestClass]
-    public class InfiniteRecursionTest
-    {
-        private readonly VerifierBuilder sonarCfg = new VerifierBuilder()
-            .AddAnalyzer(() => new InfiniteRecursion(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg))
-            .AddReferences(MetadataReferenceFacade.NetStandard21);
+    private readonly VerifierBuilder sonarCfg = new VerifierBuilder()
+        .AddAnalyzer(() => new InfiniteRecursion(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg))
+        .AddReferences(MetadataReferenceFacade.NetStandard21);
 
-        private readonly VerifierBuilder roslynCfg = new VerifierBuilder<InfiniteRecursion>()
-            .AddReferences(MetadataReferenceFacade.NetStandard21);
+    private readonly VerifierBuilder roslynCfg = new VerifierBuilder<InfiniteRecursion>()
+        .AddReferences(MetadataReferenceFacade.NetStandard21);
 
-        [TestMethod]
-        public void InfiniteRecursion_SonarCfg() =>
-            sonarCfg.AddPaths("InfiniteRecursion.SonarCfg.cs")
-                .WithOptions(ParseOptionsHelper.OnlyCSharp7)
-                .Verify();
+    [TestMethod]
+    public void InfiniteRecursion_SonarCfg() =>
+        sonarCfg.AddPaths("InfiniteRecursion.SonarCfg.cs")
+            .WithOptions(ParseOptionsHelper.OnlyCSharp7)
+            .Verify();
 
-        [TestMethod]
-        public void InfiniteRecursion_RoslynCfg() =>
-            roslynCfg.AddPaths("InfiniteRecursion.RoslynCfg.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .Verify();
+    [TestMethod]
+    public void InfiniteRecursion_RoslynCfg() =>
+        roslynCfg.AddPaths("InfiniteRecursion.RoslynCfg.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
 
 #if NET
 
-        [TestMethod]
-        public void InfiniteRecursion_RoslynCfg_CSharp9() =>
-            roslynCfg.AddPaths("InfiniteRecursion.RoslynCfg.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
+    [TestMethod]
+    public void InfiniteRecursion_RoslynCfg_CSharp9() =>
+        roslynCfg.AddPaths("InfiniteRecursion.RoslynCfg.CSharp9.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .Verify();
 
-        [TestMethod]
-        public void InfiniteRecursion_CSharp11() =>
-            roslynCfg.AddPaths("InfiniteRecursion.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void InfiniteRecursion_CSharp11() =>
+        roslynCfg.AddPaths("InfiniteRecursion.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
 
 #endif
 
-        // https://github.com/SonarSource/sonar-dotnet/issues/8977
-        [TestMethod]
-        public void InfiniteRecursion_RoslynCfg_8977()
-        {
-            const int rows = 4_000;
-            var code = new StringBuilder();
-            code.Append("""
+    // https://github.com/SonarSource/sonar-dotnet/issues/8977
+    [TestMethod]
+    public void InfiniteRecursion_RoslynCfg_8977()
+    {
+        const int rows = 4_000;
+        var code = new StringBuilder();
+        code.Append("""
             using UInt32Value = System.UInt32;
             using StringValue = System.String;
 
@@ -127,34 +127,33 @@ namespace SonarAnalyzer.Test.Rules
 
                     SheetData sheetData1 = new SheetData();
             """);
-            for (var i = 1; i <= rows; i++)
-            {
-                code.Append($$"""
-                    Row row{{i}} = new Row() { RowIndex = (UInt32Value)1U, Spans = new ListValue<StringValue>() { InnerText = "1:1" }, DyDescent = 0.25D };
+        for (var i = 1; i <= rows; i++)
+        {
+            code.Append($$"""
+                Row row{{i}} = new Row() { RowIndex = (UInt32Value)1U, Spans = new ListValue<StringValue>() { InnerText = "1:1" }, DyDescent = 0.25D };
 
-                    Cell cell{{i}} = new Cell() { CellReference = "A{{i}}", StyleIndex = (UInt32Value)1U };
-                    CellValue cellValue{{i}} = new CellValue();
-                    cellValue{{i}}.Text = "{{i}}";
+                Cell cell{{i}} = new Cell() { CellReference = "A{{i}}", StyleIndex = (UInt32Value)1U };
+                CellValue cellValue{{i}} = new CellValue();
+                cellValue{{i}}.Text = "{{i}}";
 
-                    cell{{i}}.Append(cellValue{{i}});
+                cell{{i}}.Append(cellValue{{i}});
 
-                    row{{i}}.Append(cell{{i}});
-            """);
-            }
-            for (var i = 1; i <= rows; i++)
-            {
-                code.AppendLine($$"""        sheetData1.Append(row{{i}});""");
-            }
-            code.Append(""""
-                    worksheet1.Append(sheetData1);
-                    worksheetPart1.Worksheet = worksheet1;
-                }
-            }
-            """");
-
-            roslynCfg.AddSnippet(code.ToString())
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .Verify();
+                row{{i}}.Append(cell{{i}});
+                """);
         }
+        for (var i = 1; i <= rows; i++)
+        {
+            code.AppendLine($$"""        sheetData1.Append(row{{i}});""");
+        }
+        code.Append(""""
+                worksheet1.Append(sheetData1);
+                worksheetPart1.Worksheet = worksheet1;
+            }
+        }
+        """");
+
+        roslynCfg.AddSnippet(code.ToString())
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .VerifyNoIssues();
     }
 }

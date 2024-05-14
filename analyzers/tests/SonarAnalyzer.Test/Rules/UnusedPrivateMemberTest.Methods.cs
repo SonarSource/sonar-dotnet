@@ -81,53 +81,54 @@ public class InterfaceImpl : IInterface
 
         [TestMethod]
         public void UnusedPrivateMember_Methods_DirectReferences() =>
-            builder.AddSnippet(@"
-using System;
-using System.Linq;
-public class MethodUsages
-{
-    private int Method1() { return 0; }
-    private int Method2() { return 0; }
-    private int Method3() { return 0; }
-    private int Method4() { return 0; }
-    private int Method5() { return 0; }
-    private int Method6() { return 0; }
-    private int Method7() { return 0; }
-    public int Test1(MethodUsages other)
-    {
-        int i;
-        i = Method1();
-        i = this.Method2();
-        Console.Write(Method3());
-        new MethodUsages().Method4();
-        Func<int> x = () => Method5();
-        other.Method6();
-        return Method7();
-    }
+            builder.AddSnippet("""
+                using System;
+                using System.Linq;
+                public class MethodUsages
+                {
+                    private int Method1() { return 0; }
+                    private int Method2() { return 0; }
+                    private int Method3() { return 0; }
+                    private int Method4() { return 0; }
+                    private int Method5() { return 0; }
+                    private int Method6() { return 0; }
+                    private int Method7() { return 0; }
+                    public int Test1(MethodUsages other)
+                    {
+                        int i;
+                        i = Method1();
+                        i = this.Method2();
+                        Console.Write(Method3());
+                        new MethodUsages().Method4();
+                        Func<int> x = () => Method5();
+                        other.Method6();
+                        return Method7();
+                    }
 
-    private int Method8() { return 0; }
-    public int ExpressionBodyMethod() => Method8();
+                    private int Method8() { return 0; }
+                    public int ExpressionBodyMethod() => Method8();
 
-    private static int Method9() { return 0; }
-    public MethodUsages(int number) { }
-    public MethodUsages() : this(Method9()) { }
+                    private static int Method9() { return 0; }
+                    public MethodUsages(int number) { }
+                    public MethodUsages() : this(Method9()) { }
 
-    private int Method10() { return 0; }
-    private int Method11() { return 0; }
-    public object Test2()
-    {
-        var x = new[] { Method10() };
-        var name = nameof(Method11);
-        return null;
-    }
+                    private int Method10() { return 0; }
+                    private int Method11() { return 0; }
+                    public object Test2()
+                    {
+                        var x = new[] { Method10() };
+                        var name = nameof(Method11);
+                        return null;
+                    }
 
-    private int Method12(int i) { return 0; }
-    public void Test3()
-    {
-        new[] { 1, 2, 3 }.Select(Method12);
-    }
-}
-").Verify();
+                    private int Method12(int i) { return 0; }
+                    public void Test3()
+                    {
+                        new[] { 1, 2, 3 }.Select(Method12);
+                    }
+                }
+
+                """).VerifyNoIssues();
 
         [TestMethod]
         public void UnusedPrivateMember_Methods_Main() =>

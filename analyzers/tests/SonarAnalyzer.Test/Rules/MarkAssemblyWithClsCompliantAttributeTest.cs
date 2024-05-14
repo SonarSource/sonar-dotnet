@@ -21,28 +21,27 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class MarkAssemblyWithClsCompliantAttributeTest
 {
-    [TestClass]
-    public class MarkAssemblyWithClsCompliantAttributeTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.MarkAssemblyWithClsCompliantAttribute>().WithConcurrentAnalysis(false);
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.MarkAssemblyWithClsCompliantAttribute>().WithConcurrentAnalysis(false);
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.MarkAssemblyWithClsCompliantAttribute>().WithConcurrentAnalysis(false);
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.MarkAssemblyWithClsCompliantAttribute>().WithConcurrentAnalysis(false);
 
-        [TestMethod]
-        public void MarkAssemblyWithClsCompliantAttribute_CS() =>
-            builderCS.AddPaths(@"MarkAssemblyWithClsCompliantAttribute.cs").Verify();
+    [TestMethod]
+    public void MarkAssemblyWithClsCompliantAttribute_CS() =>
+        builderCS.AddPaths(@"MarkAssemblyWithClsCompliantAttribute.cs").VerifyNoIssues();
 
-        [TestMethod]
-        public void MarkAssemblyWithClsCompliantAttribute_VB() =>
-            builderVB.AddPaths(@"MarkAssemblyWithClsCompliantAttribute.vb").Verify();
+    [TestMethod]
+    public void MarkAssemblyWithClsCompliantAttribute_VB() =>
+        builderVB.AddPaths(@"MarkAssemblyWithClsCompliantAttribute.vb").VerifyNoIssues();
 
-        [TestMethod]
-        public void MarkAssemblyWithClsCompliantAttributeNoncompliant_CS() =>
-            builderCS.AddPaths(@"MarkAssemblyWithClsCompliantAttributeNoncompliant.cs").Verify();
+    [TestMethod]
+    public void MarkAssemblyWithClsCompliantAttributeNoncompliant_CS() =>
+        builderCS.AddPaths(@"MarkAssemblyWithClsCompliantAttributeNoncompliant.cs").Verify();
 
-        [TestMethod]
-        public void MarkAssemblyWithClsCompliantAttributeNoncompliant_VB() =>
-            builderVB.AddPaths(@"MarkAssemblyWithClsCompliantAttributeNoncompliant.vb").Verify();
-    }
+    [TestMethod]
+    public void MarkAssemblyWithClsCompliantAttributeNoncompliant_VB() =>
+        builderVB.AddPaths(@"MarkAssemblyWithClsCompliantAttributeNoncompliant.vb").Verify();
 }

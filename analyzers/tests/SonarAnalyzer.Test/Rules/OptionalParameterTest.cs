@@ -21,33 +21,32 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class OptionalParameterTest
 {
-    [TestClass]
-    public class OptionalParameterTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.OptionalParameter>();
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.OptionalParameter>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.OptionalParameter>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.OptionalParameter>();
 
-        [TestMethod]
-        public void OptionalParameter_CS() =>
-            builderCS.AddPaths("OptionalParameter.cs").Verify();
+    [TestMethod]
+    public void OptionalParameter_CS() =>
+        builderCS.AddPaths("OptionalParameter.cs").Verify();
 
-        [TestMethod]
-        public void OptionalParameter_VB() =>
-            builderVB.AddPaths("OptionalParameter.vb").Verify();
+    [TestMethod]
+    public void OptionalParameter_VB() =>
+        builderVB.AddPaths("OptionalParameter.vb").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void OptionalParameter_CSharp10() =>
-            builderCS.AddPaths("OptionalParameter.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+    [TestMethod]
+    public void OptionalParameter_CSharp10() =>
+        builderCS.AddPaths("OptionalParameter.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).VerifyNoIssues();
 
-        [TestMethod]
-        public void OptionalParameter_CSharp11() =>
-            builderCS.AddPaths("OptionalParameter.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+    [TestMethod]
+    public void OptionalParameter_CSharp11() =>
+        builderCS.AddPaths("OptionalParameter.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 
-    }
 }

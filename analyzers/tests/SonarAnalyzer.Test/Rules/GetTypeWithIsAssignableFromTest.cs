@@ -20,62 +20,61 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class GetTypeWithIsAssignableFromTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<GetTypeWithIsAssignableFrom>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void GetTypeWithIsAssignableFrom() =>
-            builder.AddPaths("GetTypeWithIsAssignableFrom.cs").Verify();
+[TestClass]
+public class GetTypeWithIsAssignableFromTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<GetTypeWithIsAssignableFrom>();
+
+    [TestMethod]
+    public void GetTypeWithIsAssignableFrom() =>
+        builder.AddPaths("GetTypeWithIsAssignableFrom.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void GetTypeWithIsAssignableFrom_CSharp9() =>
-            builder.AddPaths("GetTypeWithIsAssignableFrom.CSharp9.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void GetTypeWithIsAssignableFrom_CSharp9() =>
+        builder.AddPaths("GetTypeWithIsAssignableFrom.CSharp9.cs")
+            .WithTopLevelStatements()
+            .Verify();
 
-        [TestMethod]
-        public void GetTypeWithIsAssignableFrom_CSharp9_CodeFix() =>
-            builder.AddPaths("GetTypeWithIsAssignableFrom.CSharp9.cs")
-                .WithCodeFix<GetTypeWithIsAssignableFromCodeFix>()
-                .WithCodeFixedPaths("GetTypeWithIsAssignableFrom.CSharp9.Fixed.cs")
-                .WithTopLevelStatements()
-                .VerifyCodeFix();
+    [TestMethod]
+    public void GetTypeWithIsAssignableFrom_CSharp9_CodeFix() =>
+        builder.AddPaths("GetTypeWithIsAssignableFrom.CSharp9.cs")
+            .WithCodeFix<GetTypeWithIsAssignableFromCodeFix>()
+            .WithCodeFixedPaths("GetTypeWithIsAssignableFrom.CSharp9.Fixed.cs")
+            .WithTopLevelStatements()
+            .VerifyCodeFix();
 
-        [TestMethod]
-        public void GetTypeWithIsAssignableFrom_CSharp10() =>
-            builder.AddPaths("GetTypeWithIsAssignableFrom.CSharp10.cs")
-                .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
+    [TestMethod]
+    public void GetTypeWithIsAssignableFrom_CSharp10() =>
+        builder.AddPaths("GetTypeWithIsAssignableFrom.CSharp10.cs")
+            .WithTopLevelStatements()
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .Verify();
 
-        [TestMethod]
-        public void GetTypeWithIsAssignableFrom_CSharp10_CodeFix() =>
-            builder.AddPaths("GetTypeWithIsAssignableFrom.CSharp10.cs")
-                .WithCodeFix<GetTypeWithIsAssignableFromCodeFix>()
-                .WithCodeFixedPaths("GetTypeWithIsAssignableFrom.CSharp10.Fixed.cs")
-                .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .VerifyCodeFix();
+    [TestMethod]
+    public void GetTypeWithIsAssignableFrom_CSharp10_CodeFix() =>
+        builder.AddPaths("GetTypeWithIsAssignableFrom.CSharp10.cs")
+            .WithCodeFix<GetTypeWithIsAssignableFromCodeFix>()
+            .WithCodeFixedPaths("GetTypeWithIsAssignableFrom.CSharp10.Fixed.cs")
+            .WithTopLevelStatements()
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .VerifyCodeFix();
 
-        [TestMethod]
-        public void GetTypeWithIsAssignableFrom_CSharp11() =>
-            builder.AddPaths("GetTypeWithIsAssignableFrom.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void GetTypeWithIsAssignableFrom_CSharp11() =>
+        builder.AddPaths("GetTypeWithIsAssignableFrom.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .VerifyNoIssues();
 
 #endif
 
-        [TestMethod]
-        public void GetTypeWithIsAssignableFrom_CodeFix() =>
-            builder.AddPaths("GetTypeWithIsAssignableFrom.cs")
-                .WithCodeFix<GetTypeWithIsAssignableFromCodeFix>()
-                .WithCodeFixedPaths("GetTypeWithIsAssignableFrom.Fixed.cs", "GetTypeWithIsAssignableFrom.Fixed.Batch.cs")
-                .VerifyCodeFix();
-    }
+    [TestMethod]
+    public void GetTypeWithIsAssignableFrom_CodeFix() =>
+        builder.AddPaths("GetTypeWithIsAssignableFrom.cs")
+            .WithCodeFix<GetTypeWithIsAssignableFromCodeFix>()
+            .WithCodeFixedPaths("GetTypeWithIsAssignableFrom.Fixed.cs", "GetTypeWithIsAssignableFrom.Fixed.Batch.cs")
+            .VerifyCodeFix();
 }

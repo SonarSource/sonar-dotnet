@@ -20,38 +20,37 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class ClassWithOnlyStaticMemberTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<ClassWithOnlyStaticMember>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void ClassWithOnlyStaticMember() =>
-            builder.AddPaths("ClassWithOnlyStaticMember.cs").Verify();
+[TestClass]
+public class ClassWithOnlyStaticMemberTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<ClassWithOnlyStaticMember>();
+
+    [TestMethod]
+    public void ClassWithOnlyStaticMember() =>
+        builder.AddPaths("ClassWithOnlyStaticMember.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void ClassWithOnlyStaticMember_CSharp9() =>
-            builder.AddPaths("ClassWithOnlyStaticMember.CSharp9.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void ClassWithOnlyStaticMember_CSharp9() =>
+        builder.AddPaths("ClassWithOnlyStaticMember.CSharp9.cs")
+            .WithTopLevelStatements()
+            .VerifyNoIssues();
 
-        [TestMethod]
-        public void ClassWithOnlyStaticMember_CSharp11() =>
-            builder.AddPaths("ClassWithOnlyStaticMember.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void ClassWithOnlyStaticMember_CSharp11() =>
+        builder.AddPaths("ClassWithOnlyStaticMember.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .VerifyNoIssues();
 
-        [TestMethod]
-        public void ClassWithOnlyStaticMember_CSharp12() =>
-            builder.AddPaths("ClassWithOnlyStaticMember.CSharp12.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp12)
-                .Verify();
+    [TestMethod]
+    public void ClassWithOnlyStaticMember_CSharp12() =>
+        builder.AddPaths("ClassWithOnlyStaticMember.CSharp12.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .Verify();
 
 #endif
 
-    }
 }

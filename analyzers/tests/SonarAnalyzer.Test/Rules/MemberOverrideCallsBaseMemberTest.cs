@@ -67,7 +67,12 @@ namespace SonarAnalyzer.Test.Rules
                 {{
                     {toString}
                 }}
-                ").Verify();
+                ")
+#if NET
+                .Verify();
+#elif NETFRAMEWORK
+                .VerifyNoIssues();
+#endif
         }
     }
 }

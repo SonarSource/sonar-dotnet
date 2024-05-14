@@ -75,7 +75,7 @@ public class CollectionConstraintTests
                 }
             }
             """)
-            .Verify();
+            .VerifyNoIssues();
 
     [TestMethod]
     public void CollectionConstraint_ShouldNotLearnConstraintForNonCollectionProperties() =>
@@ -96,7 +96,7 @@ public class CollectionConstraintTests
                 }
             }
             """)
-        .Verify();
+        .VerifyNoIssues();
 
     [TestMethod]
     public void CollectionConstraint_ShouldNotLearnConstraintFromBinariesForNonTrackedTypes() =>
@@ -123,5 +123,5 @@ public class CollectionConstraintTests
                 }
             }
             """)
-        .Verify();
+        .VerifyNoIssues();
 }

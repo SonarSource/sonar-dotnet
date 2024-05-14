@@ -21,61 +21,60 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class ImplementSerializationMethodsCorrectlyTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ImplementSerializationMethodsCorrectly>();
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ImplementSerializationMethodsCorrectly>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void ImplementSerializationMethodsCorrectly_CS() =>
-            builderCS.AddPaths("ImplementSerializationMethodsCorrectly.cs").Verify();
+[TestClass]
+public class ImplementSerializationMethodsCorrectlyTest
+{
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ImplementSerializationMethodsCorrectly>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ImplementSerializationMethodsCorrectly>();
+
+    [TestMethod]
+    public void ImplementSerializationMethodsCorrectly_CS() =>
+        builderCS.AddPaths("ImplementSerializationMethodsCorrectly.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void ImplementSerializationMethodsCorrectly_CSharp8() =>
-            builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp8.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .Verify();
+    [TestMethod]
+    public void ImplementSerializationMethodsCorrectly_CSharp8() =>
+        builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp8.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .VerifyNoIssues();
 
-        [TestMethod]
-        public void ImplementSerializationMethodsCorrectly_CSharp9() =>
-            builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp9.cs")
-                .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
+    [TestMethod]
+    public void ImplementSerializationMethodsCorrectly_CSharp9() =>
+        builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp9.cs")
+            .WithTopLevelStatements()
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .Verify();
 
-        [TestMethod]
-        public void ImplementSerializationMethodsCorrectly_CSharp10() =>
-            builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
+    [TestMethod]
+    public void ImplementSerializationMethodsCorrectly_CSharp10() =>
+        builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp10.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .Verify();
 
-        [TestMethod]
-        public void ImplementSerializationMethodsCorrectly_CSharp11() =>
-            builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void ImplementSerializationMethodsCorrectly_CSharp11() =>
+        builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
 
 #endif
 
-        [TestMethod]
-        public void ImplementSerializationMethodsCorrectly_CS_InvalidCode() =>
-            builderCS.AddSnippet(@"
-[Serializable]
-public class Foo
-{
-    [OnDeserializing]
-    public int  { throw new NotImplementedException(); }
-}")
-                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
-                .Verify();
+    [TestMethod]
+    public void ImplementSerializationMethodsCorrectly_CS_InvalidCode() =>
+        builderCS.AddSnippet("""
+            [Serializable]
+            public class Foo
+            {
+                [OnDeserializing]
+                public int  { throw new NotImplementedException(); }
+            }
+            """)
+            .VerifyNoIssuesIgnoreErrors();
 
-        [TestMethod]
-        public void ImplementSerializationMethodsCorrectly_VB() =>
-            builderVB.AddPaths("ImplementSerializationMethodsCorrectly.vb").Verify();
-    }
+    [TestMethod]
+    public void ImplementSerializationMethodsCorrectly_VB() =>
+        builderVB.AddPaths("ImplementSerializationMethodsCorrectly.vb").Verify();
 }

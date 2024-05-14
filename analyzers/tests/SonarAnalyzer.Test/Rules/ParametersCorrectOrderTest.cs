@@ -21,55 +21,56 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class ParametersCorrectOrderTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ParametersCorrectOrder>();
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ParametersCorrectOrder>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void ParametersCorrectOrder_CSharp8() =>
-            builderCS.AddPaths("ParametersCorrectOrder.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+[TestClass]
+public class ParametersCorrectOrderTest
+{
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ParametersCorrectOrder>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ParametersCorrectOrder>();
+
+    [TestMethod]
+    public void ParametersCorrectOrder_CSharp8() =>
+        builderCS.AddPaths("ParametersCorrectOrder.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
-        [TestMethod]
-        public void ParametersCorrectOrder_CSharp11() =>
-            builderCS.AddPaths("ParametersCorrectOrder.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+    [TestMethod]
+    public void ParametersCorrectOrder_CSharp11() =>
+        builderCS.AddPaths("ParametersCorrectOrder.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
-        [TestMethod]
-        public void ParametersCorrectOrder_CSharp12() =>
-            builderCS.AddPaths("ParametersCorrectOrder.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+    [TestMethod]
+    public void ParametersCorrectOrder_CSharp12() =>
+        builderCS.AddPaths("ParametersCorrectOrder.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
 
 #endif
 
-        [TestMethod]
-        public void ParametersCorrectOrder_InvalidCode_CS() =>
-            builderCS.AddSnippet(@"
-public class Foo
-{
-    public void Bar()
-    {
-        new Foo
-        new ()
-        new System. ()
-    }
-}").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
+    [TestMethod]
+    public void ParametersCorrectOrder_InvalidCode_CS() =>
+        builderCS.AddSnippet("""
+            public class Foo
+            {
+                public void Bar()
+                {
+                    new Foo
+                    new ()
+                    new System. ()
+                }
+            }
+            """).VerifyNoIssuesIgnoreErrors();
 
-        [TestMethod]
-        public void ParametersCorrectOrder_VB() =>
-            builderVB.AddPaths("ParametersCorrectOrder.vb").Verify();
+    [TestMethod]
+    public void ParametersCorrectOrder_VB() =>
+        builderVB.AddPaths("ParametersCorrectOrder.vb").Verify();
 
-        [TestMethod]
-        public void ParametersCorrectOrder_InvalidCode_VB() =>
-            builderVB.AddSnippet(@"
-Public Class Foo
-    Public Sub Bar()
-        Dim x = New ()
-        Dim y = New System. ()
-    End Sub
-End Class").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
-    }
+    [TestMethod]
+    public void ParametersCorrectOrder_InvalidCode_VB() =>
+        builderVB.AddSnippet("""
+            Public Class Foo
+                Public Sub Bar()
+                    Dim x = New ()
+                    Dim y = New System. ()
+                End Sub
+            End Class
+            """).VerifyNoIssuesIgnoreErrors();
 }

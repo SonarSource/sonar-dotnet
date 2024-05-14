@@ -403,22 +403,31 @@ if (condition)
 
     [TestMethod]
     public void Analyze_Severity_ExecutesWhenMore() =>
-        Verify(@"string s = null;   // Noncompliant    {{Message for SAll}}
-                                        // Noncompliant@-1 {{Message for SMain}}
-                    s.ToString();       // Compliant, should not raise S2259",
+        Verify("""
+            string s = null;    // Noncompliant    {{Message for SAll}}
+                                // Noncompliant@-1 {{Message for SMain}}
+            s.ToString();       // Compliant, should not raise S2259
+            """,
+            expectingIssues: true,
             AllScopeAssignmentRuleCheck.SAll,
             MainScopeAssignmentRuleCheck.SMain);
 
     [TestMethod]
     public void Analyze_Severity_ExecutesWhenOne() =>
-        Verify(@"string s = null; // Noncompliant {{Message for SMain}}
-                     s.ToString();    // Compliant, should not raise S2259",
+        Verify("""
+            string s = null; // Noncompliant {{Message for SMain}}
+            s.ToString();    // Compliant, should not raise S2259
+            """,
+            expectingIssues: true,
             MainScopeAssignmentRuleCheck.SMain);
 
     [TestMethod]
     public void Analyze_Severity_DoesNotExecutesWhenNone() =>
-        Verify(@"string s = null;   // Compliant, SMain and SAll are suppressed by test framework, because only 'SAnother' is active
-                     s.ToString();      // Compliant, should not raise S2259",
+        Verify("""
+            string s = null;   // Compliant, SMain and SAll are suppressed by test framework, because only 'SAnother' is active
+            s.ToString();      // Compliant, should not raise S2259
+            """,
+            expectingIssues: false,
             AnalysisScaffolding.CreateDescriptorMain("SAnother"));
 
     [TestMethod]
@@ -427,23 +436,25 @@ if (condition)
         var sut = new ConfigurableSERunnerCS();
         sut.RegisterRule<InvocationAssignmentRuleCheck>(InvocationAssignmentRuleCheck.SInvocation);
         var builder = new VerifierBuilder().AddAnalyzer(() => sut);
-        builder.AddSnippet(@"
-public class Sample
-{
-    public void Method()
-    {
-        string s = null;    // Nothing is raised because InvocationAssignmentRuleCheck.ShouldExecute returns false
-    }
-}").Verify();
-        builder.AddSnippet(@"
-public class Sample
-{
-    public void Method()
-    {
-        string s = null;    // Noncompliant {{Message for SInvocation}} - because invocation is present in the method body
-        Method();
-    }
-}").Verify();
+        builder.AddSnippet("""
+            public class Sample
+            {
+                public void Method()
+                {
+                    string s = null;    // Nothing is raised because InvocationAssignmentRuleCheck.ShouldExecute returns false
+                }
+            }
+            """).VerifyNoIssues();
+        builder.AddSnippet("""
+            public class Sample
+            {
+                public void Method()
+                {
+                    string s = null;    // Noncompliant {{Message for SInvocation}} - because invocation is present in the method body
+                    Method();
+                }
+            }
+            """).Verify();
     }
 
     [TestMethod]
@@ -511,34 +522,36 @@ public class Sample
         diagnostic.Descriptor.IsEnabledByDefault.Should().BeFalse("we're explicitly activating non-SonarWay rule that is not active by default");
     }
 
-    private static void Verify(string body, params DiagnosticDescriptor[] onlyRules) =>
-        Verify(body, ProjectType.Product, null, onlyRules);
+    private static void Verify(string body, bool expectingIssues = true, params DiagnosticDescriptor[] onlyRules) =>
+        Verify(body, ProjectType.Product, null, expectingIssues, onlyRules);
 
-    private static void Verify(string body, ProjectType projectType, string sonarProjectConfigPath, params DiagnosticDescriptor[] onlyRules)
+    private static void Verify(string body, ProjectType projectType, string sonarProjectConfigPath, bool expectingIssues = true, params DiagnosticDescriptor[] onlyRules)
     {
-        var code = $@"
-using System;
-using System.Threading;
-public class Sample
-{{
-    public void Main(bool condition)
-    {{
-        {body}
-    }}
-}}";
-        VerifyCode<TestSERunnerCS>(code, projectType, ParseOptionsHelper.FromCSharp9, sonarProjectConfigPath, OutputKind.DynamicallyLinkedLibrary, onlyRules);
+        var code = $$"""
+            using System;
+            using System.Threading;
+            public class Sample
+            {
+                public void Main(bool condition)
+                {
+                    {{body}}
+                }
+            }
+            """;
+        VerifyCode<TestSERunnerCS>(code, projectType, ParseOptionsHelper.FromCSharp9, sonarProjectConfigPath, OutputKind.DynamicallyLinkedLibrary, expectingIssues, onlyRules);
     }
 
     private static void VerifyClassMainCS(string members)
     {
-        var code =
-$@"using System;
-using System.Linq;
-public class Sample
-{{
-    {members}
-}}";
-        VerifyCode<TestSERunnerCS>(code, ProjectType.Product, ParseOptionsHelper.FromCSharp9, null, OutputKind.DynamicallyLinkedLibrary, MainScopeAssignmentRuleCheck.SMain, BinaryRuleCheck.SBinary);
+        var code = $$"""
+            using System;
+            using System.Linq;
+            public class Sample
+            {
+                {{members}}
+            }
+            """;
+        VerifyCode<TestSERunnerCS>(code, ProjectType.Product, ParseOptionsHelper.FromCSharp9, null, OutputKind.DynamicallyLinkedLibrary, true, MainScopeAssignmentRuleCheck.SMain, BinaryRuleCheck.SBinary);
     }
 
     private static void VerifyTopLevelStatements(string members)
@@ -547,16 +560,17 @@ public class Sample
             using System;
             {members}
             """;
-        VerifyCode<TestSERunnerCS>(code, ProjectType.Product, ParseOptionsHelper.FromCSharp9, null, OutputKind.ConsoleApplication, MainScopeAssignmentRuleCheck.SMain, BinaryRuleCheck.SBinary);
+        VerifyCode<TestSERunnerCS>(code, ProjectType.Product, ParseOptionsHelper.FromCSharp9, null, OutputKind.ConsoleApplication, true, MainScopeAssignmentRuleCheck.SMain, BinaryRuleCheck.SBinary);
     }
 
     private static void VerifyClassMainVB(string members)
     {
-        var code =
-$@"Public Class Sample
-    {members}
-End Class";
-        VerifyCode<TestSERunnerVB>(code, ProjectType.Product, ImmutableArray<ParseOptions>.Empty, null, OutputKind.DynamicallyLinkedLibrary, MainScopeAssignmentRuleCheck.SMain, BinaryRuleCheck.SBinary);
+        var code = $"""
+            Public Class Sample
+            {members}
+            End Class
+            """;
+        VerifyCode<TestSERunnerVB>(code, ProjectType.Product, [], null, OutputKind.DynamicallyLinkedLibrary, true, MainScopeAssignmentRuleCheck.SMain, BinaryRuleCheck.SBinary);
     }
 
     private static void VerifyCode<TRunner>(string code,
@@ -564,16 +578,26 @@ End Class";
                                             ImmutableArray<ParseOptions> parseOptions,
                                             string sonarProjectConfigPath,
                                             OutputKind kind,
-                                            params DiagnosticDescriptor[] onlyRules) where TRunner : SymbolicExecutionRunnerBase, new() =>
-        new VerifierBuilder<TRunner>()
+                                            bool expectingIssues,
+                                            params DiagnosticDescriptor[] onlyRules) where TRunner : SymbolicExecutionRunnerBase, new()
+    {
+        var builder = new VerifierBuilder<TRunner>()
             .AddReferences(TestHelper.ProjectTypeReference(projectType))
             .AddSnippet(code)
             .WithAdditionalFilePath(sonarProjectConfigPath)
             .WithOptions(parseOptions)
             .WithOnlyDiagnostics(onlyRules)
             .WithConcurrentAnalysis(false)
-            .WithOutputKind(kind)
-            .Verify();
+            .WithOutputKind(kind);
+        if (expectingIssues)
+        {
+            builder.Verify();
+        }
+        else
+        {
+            builder.VerifyNoIssues();
+        }
+    }
 
     private class TestSERunnerCS : CS.SymbolicExecutionRunner
     {

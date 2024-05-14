@@ -62,7 +62,7 @@ public class CallModelStateIsValidTest
                     return "Hello!";
                 }
             }
-            """).Verify();
+            """).VerifyNoIssues();
 
     [TestMethod]
     public void CallModelStateIsValid_FluentValidation_CS() =>
@@ -134,7 +134,7 @@ public class CallModelStateIsValidTest
                     return "Hello!";
                 }
             }
-            """).AddReferences(NuGetMetadataReference.FluentValidation()).Verify();
+            """).AddReferences(NuGetMetadataReference.FluentValidation()).VerifyNoIssues();
 
     [DataTestMethod]
     [DataRow("!ModelState.IsValid")]
@@ -173,7 +173,7 @@ public class CallModelStateIsValidTest
                     return Ok();
                 }
             }
-            """).WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            """).WithOptions(ParseOptionsHelper.FromCSharp10).VerifyNoIssues();
 }
 
 #endif

@@ -20,32 +20,31 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class DoNotOverloadOperatorEqualTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotOverloadOperatorEqual>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void DoNotOverloadOperatorEqual() =>
-            builder.AddPaths("DoNotOverloadOperatorEqual.cs").Verify();
+[TestClass]
+public class DoNotOverloadOperatorEqualTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<DoNotOverloadOperatorEqual>();
+
+    [TestMethod]
+    public void DoNotOverloadOperatorEqual() =>
+        builder.AddPaths("DoNotOverloadOperatorEqual.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void DoNotOverloadOperatorEqual_CSharp9() =>
-            builder.AddPaths("DoNotOverloadOperatorEqual.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
+    [TestMethod]
+    public void DoNotOverloadOperatorEqual_CSharp9() =>
+        builder.AddPaths("DoNotOverloadOperatorEqual.CSharp9.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .Verify();
 
-        [TestMethod]
-        public void DoNotOverloadOperatorEqual_CSharp11() =>
-            builder.AddPaths("DoNotOverloadOperatorEqual.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void DoNotOverloadOperatorEqual_CSharp11() =>
+        builder.AddPaths("DoNotOverloadOperatorEqual.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .VerifyNoIssues();
 
 #endif
 
-    }
 }

@@ -39,18 +39,22 @@ public class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKeyTest
 
     [TestMethod]
     public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_NoReferenceToEntityFramework_CS() =>
-        new VerifierBuilder<CS.DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey>().AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.NoReferenceToEntityFramework.cs").Verify();
+        new VerifierBuilder<CS.DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey>()
+            .AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.NoReferenceToEntityFramework.cs")
+            .VerifyNoIssues();
 
     [TestMethod]
     public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_NoReferenceToEntityFramework_VB() =>
-        new VerifierBuilder<VB.DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey>().AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.NoReferenceToEntityFramework.vb").Verify();
+        new VerifierBuilder<VB.DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey>()
+            .AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.NoReferenceToEntityFramework.vb")
+            .VerifyNoIssues();
 
     [TestMethod]
     public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_CSharp9() =>
         verifierCS
             .AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.CSharp9.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp9)
-            .Verify();
+            .VerifyNoIssues();
 
 #if NET
 
@@ -64,11 +68,11 @@ public class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKeyTest
 
     [TestMethod]
     public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_FluentApi_CS() =>
-        verifierCS.AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.FluentApi.cs").Verify();
+        verifierCS.AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.FluentApi.cs").VerifyNoIssues();
 
     [TestMethod]
     public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_FluentApi_VB() =>
-        verifierVB.AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.FluentApi.vb").Verify();
+        verifierVB.AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.FluentApi.vb").VerifyNoIssues();
 
 #endif
 

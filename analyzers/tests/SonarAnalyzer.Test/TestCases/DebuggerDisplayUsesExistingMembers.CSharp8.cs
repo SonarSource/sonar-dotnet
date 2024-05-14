@@ -7,13 +7,16 @@ public class AccessModifiers
     {
         private protected int PrivateProtectedProperty => 1;
 
-        [DebuggerDisplay("{PrivateProtectedProperty}")]
+        [DebuggerDisplay("{PrivateProtectedProperty}")] // Compliant
         public int SomeProperty => 1;
+
+        [DebuggerDisplay("{Nonexistent}")]              // Noncompliant
+        public int OtherProperty => 1;
     }
 
     public class SubClass : BaseClass
     {
-        [DebuggerDisplay("{PrivateProtectedProperty}")]
+        [DebuggerDisplay("{PrivateProtectedProperty}")] // Compliant
         public int OtherProperty => 1;
     }
 }

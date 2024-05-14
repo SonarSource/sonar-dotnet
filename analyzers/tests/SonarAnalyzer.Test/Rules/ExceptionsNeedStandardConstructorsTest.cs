@@ -33,18 +33,18 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void ExceptionsNeedStandardConstructors_InvalidCode() =>
-            builder.AddSnippet(@"
-public class  : Exception
-{
-    My_07_Exception() {}
+            builder.AddSnippet("""
+                public class  : Exception
+                {
+                    My_07_Exception() {}
 
-    My_07_Exception(string message) { }
+                    My_07_Exception(string message) { }
 
-    My_07_Exception(string message, Exception innerException) {}
+                    My_07_Exception(string message, Exception innerException) {}
 
-    My_07_Exception(SerializationInfo info, StreamingContext context) {}
-}")
-                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
-                .Verify();
+                    My_07_Exception(SerializationInfo info, StreamingContext context) {}
+                }
+                """)
+                .VerifyNoIssuesIgnoreErrors();
     }
 }

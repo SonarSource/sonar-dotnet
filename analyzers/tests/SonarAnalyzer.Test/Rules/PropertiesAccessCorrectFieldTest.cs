@@ -21,51 +21,50 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class PropertiesAccessCorrectFieldTest
 {
-    [TestClass]
-    public class PropertiesAccessCorrectFieldTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.PropertiesAccessCorrectField>();
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.PropertiesAccessCorrectField>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.PropertiesAccessCorrectField>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.PropertiesAccessCorrectField>();
 
-        [TestMethod]
-        public void PropertiesAccessCorrectField_CS() =>
-            builderCS.AddPaths("PropertiesAccessCorrectField.cs").AddReferences(AdditionalReferences).Verify();
+    private static IEnumerable<MetadataReference> AdditionalReferences =>
+        NuGetMetadataReference.MvvmLightLibs("5.4.1.1")
+            .Concat(MetadataReferenceFacade.WindowsBase)
+            .Concat(MetadataReferenceFacade.PresentationFramework);
 
-        [TestMethod]
-        public void PropertiesAccessCorrectField_CSharp8() =>
-            builderCS.AddPaths("PropertiesAccessCorrectField.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+    [TestMethod]
+    public void PropertiesAccessCorrectField_CS() =>
+        builderCS.AddPaths("PropertiesAccessCorrectField.cs").AddReferences(AdditionalReferences).Verify();
+
+    [TestMethod]
+    public void PropertiesAccessCorrectField_CSharp8() =>
+        builderCS.AddPaths("PropertiesAccessCorrectField.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
-        [TestMethod]
-        public void PropertiesAccessCorrectField_CSharp9() =>
-            builderCS.AddPaths("PropertiesAccessCorrectField.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+    [TestMethod]
+    public void PropertiesAccessCorrectField_CSharp9() =>
+        builderCS.AddPaths("PropertiesAccessCorrectField.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
-        public void PropertiesAccessCorrectField_CSharp12() =>
-            builderCS.AddPaths("PropertiesAccessCorrectField.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+    [TestMethod]
+    public void PropertiesAccessCorrectField_CSharp12() =>
+        builderCS.AddPaths("PropertiesAccessCorrectField.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).VerifyNoIssues();
 
 #else
 
-        [TestMethod]
-        public void PropertiesAccessCorrectField_CS_NetFramework() =>
-            builderCS.AddPaths("PropertiesAccessCorrectField.NetFramework.cs").AddReferences(AdditionalReferences).Verify();
+    [TestMethod]
+    public void PropertiesAccessCorrectField_CS_NetFramework() =>
+        builderCS.AddPaths("PropertiesAccessCorrectField.NetFramework.cs").AddReferences(AdditionalReferences).VerifyNoIssues();
 
-        [TestMethod]
-        public void PropertiesAccessCorrectField_VB_NetFramework() =>
-            builderVB.AddPaths("PropertiesAccessCorrectField.NetFramework.vb").AddReferences(AdditionalReferences).Verify();
+    [TestMethod]
+    public void PropertiesAccessCorrectField_VB_NetFramework() =>
+        builderVB.AddPaths("PropertiesAccessCorrectField.NetFramework.vb").AddReferences(AdditionalReferences).VerifyNoIssues();
 
 #endif
 
-        [TestMethod]
-        public void PropertiesAccessCorrectField_VB() =>
-            builderVB.AddPaths("PropertiesAccessCorrectField.vb").AddReferences(AdditionalReferences).WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
-
-        private static IEnumerable<MetadataReference> AdditionalReferences =>
-            NuGetMetadataReference.MvvmLightLibs("5.4.1.1")
-                                  .Concat(MetadataReferenceFacade.WindowsBase)
-                                  .Concat(MetadataReferenceFacade.PresentationFramework);
-    }
+    [TestMethod]
+    public void PropertiesAccessCorrectField_VB() =>
+        builderVB.AddPaths("PropertiesAccessCorrectField.vb").AddReferences(AdditionalReferences).WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
 }

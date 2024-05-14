@@ -21,57 +21,56 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class CreatingHashAlgorithmsTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots")
-            .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography)
-            .AddAnalyzer(() => new CS.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled));
-        private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots")
-            .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography)
-            .AddAnalyzer(() => new VB.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled));
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void CreatingHashAlgorithms_CSharp8() =>
-            builderCS.AddPaths("CreatingHashAlgorithms.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .Verify();
+[TestClass]
+public class CreatingHashAlgorithmsTest
+{
+    private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots")
+        .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography)
+        .AddAnalyzer(() => new CS.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled));
+    private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots")
+        .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography)
+        .AddAnalyzer(() => new VB.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled));
+
+    [TestMethod]
+    public void CreatingHashAlgorithms_CSharp8() =>
+        builderCS.AddPaths("CreatingHashAlgorithms.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
 
 #if NETFRAMEWORK // HMACRIPEMD160, MD5Cng, RIPEMD160Managed and RIPEMD160 are available only for .Net Framework
 
-        [TestMethod]
-        public void CreatingHashAlgorithms_CS_NetFx() =>
-            builderCS.AddPaths("CreatingHashAlgorithms.NetFramework.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .Verify();
+    [TestMethod]
+    public void CreatingHashAlgorithms_CS_NetFx() =>
+        builderCS.AddPaths("CreatingHashAlgorithms.NetFramework.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
 
 #endif
 
-        [TestMethod]
-        public void CreatingHashAlgorithms_VB() =>
-            builderVB.AddPaths("CreatingHashAlgorithms.vb").Verify();
+    [TestMethod]
+    public void CreatingHashAlgorithms_VB() =>
+        builderVB.AddPaths("CreatingHashAlgorithms.vb").Verify();
 
 #if NETFRAMEWORK // HMACRIPEMD160, MD5Cng, RIPEMD160Managed and RIPEMD160 are available only for .Net Framework
 
-        [TestMethod]
-        public void CreatingHashAlgorithms_VB_NetFx() =>
-            builderVB.AddPaths("CreatingHashAlgorithms.NetFramework.vb").Verify();
+    [TestMethod]
+    public void CreatingHashAlgorithms_VB_NetFx() =>
+        builderVB.AddPaths("CreatingHashAlgorithms.NetFramework.vb").Verify();
 
 #endif
 
 #if NET
 
-        [TestMethod]
-        public void CreatingHashAlgorithms_CSharp11() =>
-            builderCS.AddPaths("CreatingHashAlgorithms.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+    [TestMethod]
+    public void CreatingHashAlgorithms_CSharp11() =>
+        builderCS.AddPaths("CreatingHashAlgorithms.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
-        [TestMethod]
-        public void CreatingHashAlgorithms_CSharp12() =>
-            builderCS.AddPaths("CreatingHashAlgorithms.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+    [TestMethod]
+    public void CreatingHashAlgorithms_CSharp12() =>
+        builderCS.AddPaths("CreatingHashAlgorithms.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).VerifyNoIssues();
 
 #endif
 
-    }
 }

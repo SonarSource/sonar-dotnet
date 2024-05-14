@@ -86,25 +86,25 @@ namespace SonarAnalyzer.Test.Rules
         public void CheckFileLicense_WhenLicensedFileStartingWithUsing_ShouldBeCompliant_CS() =>
             Builder(SingleLineHeader).AddPaths("CheckFileLicense_SingleLineLicenseStartWithUsing.cs")
                 .WithConcurrentAnalysis(false)
-                .Verify();
+                .VerifyNoIssues();
 
         [TestMethod]
         public void CheckFileLicense_WhenLicensedFileStartingWithUsingAndUsingCustomValues_ShouldBeCompliant_CS() =>
             Builder(SingleLineRegexHeader, true).AddPaths("CheckFileLicense_SingleLineLicenseStartWithUsing.cs")
                 .WithConcurrentAnalysis(false)
-                .Verify();
+                .VerifyNoIssues();
 
         [TestMethod]
         public void CheckFileLicense_WhenLicensedWithMultilineCommentStartingWithUsing_ShouldBeCompliant_CS() =>
             Builder(MultiLineHeader).AddPaths("CheckFileLicense_MultiLineLicenseStartWithUsing.cs")
                 .WithConcurrentAnalysis(false)
-                .Verify();
+                .VerifyNoIssues();
 
         [TestMethod]
         public void CheckFileLicense_WhenLicensedWithMultilineCommentStartingWithUsingWithCustomValues_ShouldBeCompliant_CS() =>
             Builder(MultiLineRegexHeader, true).AddPaths("CheckFileLicense_MultiLineLicenseStartWithUsing.cs")
                 .WithConcurrentAnalysis(false)
-                .Verify();
+                .VerifyNoIssues();
 
         [TestMethod]
         public void CheckFileLicense_WhenNoLicenseStartingWithNamespace_ShouldBeNonCompliant_CS() =>
@@ -114,37 +114,37 @@ namespace SonarAnalyzer.Test.Rules
         public void CheckFileLicense_WhenLicensedWithSingleLineCommentStartingWithNamespace_ShouldBeCompliant_CS() =>
             Builder(SingleLineHeader).AddPaths("CheckFileLicense_SingleLineLicenseStartWithNamespace.cs")
                 .WithConcurrentAnalysis(false)
-                .Verify();
+                .VerifyNoIssues();
 
         [TestMethod]
         public void CheckFileLicense_WhenLicensedWithSingleLineCommentStartingWithNamespaceAndUsingCustomValues_ShouldBeCompliant_CS() =>
             Builder(SingleLineRegexHeader, true).AddPaths("CheckFileLicense_SingleLineLicenseStartWithNamespace.cs")
                 .WithConcurrentAnalysis(false)
-                .Verify();
+                .VerifyNoIssues();
 
         [TestMethod]
         public void CheckFileLicense_WhenLicensedWithMultilineCommentStartingWithNamespace_ShouldBeCompliant_CS() =>
             Builder(MultiLineHeader).AddPaths("CheckFileLicense_MultiLineLicenseStartWithNamespace.cs")
                 .WithConcurrentAnalysis(false)
-                .Verify();
+                .VerifyNoIssues();
 
         [TestMethod]
         public void CheckFileLicense_WhenLicensedWithMultilineCommentStartingWithNamespaceAndUsingCustomValues_ShouldBeCompliant_CS() =>
             Builder(MultiLineRegexHeader, true).AddPaths("CheckFileLicense_MultiLineLicenseStartWithNamespace.cs")
                 .WithConcurrentAnalysis(false)
-                .Verify();
+                .VerifyNoIssues();
 
         [TestMethod]
         public void CheckFileLicense_WhenLicensedWithMultiSingleLineCommentStartingWithNamespaceAndNoRegex_ShouldBeCompliant_CS() =>
             Builder(MultiSingleLineCommentHeader).AddPaths("CheckFileLicense_MultiSingleLineLicenseStartWithNamespace.cs")
                 .WithConcurrentAnalysis(false)
-                .Verify();
+                .VerifyNoIssues();
 
         [TestMethod]
         public void CheckFileLicense_WhenLicensedWithMultiSingleLineCommentStartingWithAdditionalComments_ShouldBeCompliant_CS() =>
             Builder(MultiSingleLineCommentHeader).AddPaths("CheckFileLicense_MultiSingleLineLicenseStartWithAdditionalComment.cs")
                 .WithConcurrentAnalysis(false)
-                .Verify();
+                .VerifyNoIssues();
 
         [TestMethod]
         public void CheckFileLicense_WhenLicensedWithMultiSingleLineCommentStartingWithAdditionalCommentOnSameLine_ShouldBeNonCompliant_CS() =>
@@ -158,19 +158,19 @@ namespace SonarAnalyzer.Test.Rules
         public void CheckFileLicense_WithForcingEmptyLines_ShouldBeCompliant_CS() =>
             Builder(HeaderForcingLineBreak).AddPaths("CheckFileLicense_ForcingEmptyLinesOk.cs")
                 .WithConcurrentAnalysis(false)
-                .Verify();
+                .VerifyNoIssues();
 
         [TestMethod]
         public void CheckFileLicense_WhenLicensedWithMultiSingleLineCommentStartingWithNamespaceAndMultiLineRegexWithNewLine_ShouldBeCompliant_CS() =>
             Builder(MultiLineRegexWithNewLine, true).AddPaths("CheckFileLicense_MultiSingleLineLicenseStartWithNamespace.cs")
                 .WithConcurrentAnalysis(false)
-                .Verify();
+                .VerifyNoIssues();
 
         [TestMethod]
         public void CheckFileLicense_WhenLicensedWithMultiSingleLineCommentStartingWithNamespaceAndMultiLineRegexWithDot_ShouldBeCompliant_CS() =>
             Builder(MultiLineRegexWithDot, true).AddPaths("CheckFileLicense_MultiSingleLineLicenseStartWithNamespace.cs")
                 .WithConcurrentAnalysis(false)
-                .Verify();
+                .VerifyNoIssues();
 
         [TestMethod]
         public void CheckFileLicense_WhenEmptyFile_ShouldBeNonCompliant_CS() =>
@@ -202,14 +202,14 @@ namespace SonarAnalyzer.Test.Rules
             Builder(@"// <copyright file="".*\.cs"" company="".*"">\r\n// Copyright \(c\) 2012 All Rights Reserved\r\n// </copyright>\r\n// <author>.*</author>\r\n// <date>.*</date>\r\n// <summary>.*</summary>\r\n", true)
                 .AddPaths("CheckFileLicense_ComplexRegex.cs")
                 .WithConcurrentAnalysis(false)
-                .Verify();
+                .VerifyNoIssues();
 
         [TestMethod]
         public void CheckFileLicense_WhenUsingMultilinesHeaderAsSingleLineString_ShouldBeCompliant_CS() =>
             Builder(@"// <copyright file=""ProgramHeader2.cs"" company=""My Company Name"">\r\n// Copyright (c) 2012 All Rights Reserved\r\n// </copyright>\r\n// <author>Name of the Author</author>\r\n// <date>08/22/2017 12:39:58 AM </date>\r\n// <summary>Class representing a Sample entity</summary>\r\n", false)
                 .AddPaths("CheckFileLicense_ComplexRegex.cs")
                 .WithConcurrentAnalysis(false)
-                .Verify();
+                .VerifyNoIssues();
 
         [TestMethod]
         public void CheckFileLicenseCodeFix_WhenNoLicenseStartWithNamespaceAndUsesDefaultValues_ShouldBeNoncompliant_CS() =>
@@ -290,7 +290,7 @@ namespace SonarAnalyzer.Test.Rules
                 IsRegularExpression = true
             })
                 .AddPaths("CheckFileLicense_Compliant.vb")
-                .Verify();
+                .VerifyNoIssues();
 
         private static VerifierBuilder Builder(string headerFormat, bool isRegularExpression = false) =>
             new VerifierBuilder().AddAnalyzer(() => new CS.CheckFileLicense { HeaderFormat = headerFormat, IsRegularExpression = isRegularExpression });

@@ -145,12 +145,21 @@ public record VerifierBuilder
     public IEnumerable<Compilation> Compile() =>
         Build().Compile(false).Select(x => x.Compilation);
 
+    /// <summary>
+    /// Verifies that the diagnostics match the expected diagnostics and at least one diagnostic is found.
+    /// </summary>
     public void Verify() =>
         Build().Verify();
 
+    /// <summary>
+    /// Verifies that no diagnostics are found.
+    /// </summary>
     public void VerifyNoIssues() =>
         Build().VerifyNoIssues();
 
+    /// <summary>
+    /// Verifies that no diagnostics, except errors, are found.
+    /// </summary>
     public void VerifyNoIssuesIgnoreErrors() =>
         Build().VerifyNoIssuesIgnoreErrors();
 

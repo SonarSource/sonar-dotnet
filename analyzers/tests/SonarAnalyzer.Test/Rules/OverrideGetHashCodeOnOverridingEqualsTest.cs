@@ -20,24 +20,23 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class OverrideGetHashCodeOnOverridingEqualsTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<OverrideGetHashCodeOnOverridingEquals>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void OverrideGetHashCodeOnOverridingEquals() =>
-            builder.AddPaths("OverrideGetHashCodeOnOverridingEquals.cs").Verify();
+[TestClass]
+public class OverrideGetHashCodeOnOverridingEqualsTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<OverrideGetHashCodeOnOverridingEquals>();
+
+    [TestMethod]
+    public void OverrideGetHashCodeOnOverridingEquals() =>
+        builder.AddPaths("OverrideGetHashCodeOnOverridingEquals.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void OverrideGetHashCodeOnOverridingEquals_CSharp9() =>
-            builder.AddPaths("OverrideGetHashCodeOnOverridingEquals.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+    [TestMethod]
+    public void OverrideGetHashCodeOnOverridingEquals_CSharp9() =>
+        builder.AddPaths("OverrideGetHashCodeOnOverridingEquals.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).VerifyNoIssues();
 
 #endif
 
-    }
 }

@@ -69,14 +69,16 @@ i++;
 
     [TestMethod]
     public void MethodsShouldNotHaveTooManyLines_CSharp9_Valid() =>
-                    CreateCSBuilder(4).AddSnippet(@"
-int i = 1; i++;
-i++;
-i++;
-i++;")
-        .WithOptions(ParseOptionsHelper.FromCSharp9)
-        .WithOutputKind(OutputKind.ConsoleApplication)
-        .Verify();
+        CreateCSBuilder(4)
+            .AddSnippet("""
+                int i = 1; i++;
+                i++;
+                i++;
+                i++;
+                """)
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithOutputKind(OutputKind.ConsoleApplication)
+            .VerifyNoIssues();
 #endif
 
     [TestMethod]
@@ -87,16 +89,17 @@ i++;")
 
     [TestMethod]
     public void MethodsShouldNotHaveTooManyLines_InvalidSyntax_CS() =>
-        CreateCSBuilder(2).AddSnippet(@"
-public class Foo
-{
-    public string ()
-    {
-        return ""f"";
-    }
-}")
-        .WithErrorBehavior(CompilationErrorBehavior.Ignore)
-        .Verify();
+        CreateCSBuilder(2)
+            .AddSnippet("""
+                public class Foo
+                {
+                    public string ()
+                    {
+                        return "f";
+                    }
+                }
+                """)
+            .VerifyNoIssuesIgnoreErrors();
 
     [DataTestMethod]
     [DataRow(1)]

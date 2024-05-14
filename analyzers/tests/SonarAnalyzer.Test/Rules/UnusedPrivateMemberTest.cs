@@ -51,34 +51,36 @@ public class MethodUsages
 
     [TestMethod]
     public void UnusedPrivateMember_Members_With_Attributes_Are_Not_Removable() =>
-        builder.AddSnippet(@"
-using System;
-public class FieldUsages
-{
-    [Obsolete]
-    private int field1;
+        builder.AddSnippet("""
+            using System;
+            public class FieldUsages
+            {
+                [Obsolete]
+                private int field1;
 
-    [Obsolete]
-    private int Property1 { get; set; }
+                [Obsolete]
+                private int Property1 { get; set; }
 
-    [Obsolete]
-    private int Method1() { return 0; }
+                [Obsolete]
+                private int Method1() { return 0; }
 
-    [Obsolete]
-    private class Class1 { }
-}").Verify();
+                [Obsolete]
+                private class Class1 { }
+            }
+            """).VerifyNoIssues();
 
     [TestMethod]
     public void UnusedPrivateMember_Assembly_Level_Attributes() =>
-        builder.AddSnippet(@"
-[assembly: System.Reflection.AssemblyCompany(Foo.Constants.AppCompany)]
-public static class Foo
-{
-    internal static class Constants // Compliant, detect usages from assembly level attributes.
-    {
-        public const string AppCompany = ""foo"";
-    }
-}").Verify();
+        builder.AddSnippet("""
+            [assembly: System.Reflection.AssemblyCompany(Foo.Constants.AppCompany)]
+            public static class Foo
+            {
+                internal static class Constants // Compliant, detect usages from assembly level attributes.
+                {
+                    public const string AppCompany = "foo";
+                }
+            }
+            """).VerifyNoIssues();
 
     [TestMethod]
     public void UnusedPrivateMemberWithPartialClasses() =>
@@ -103,54 +105,56 @@ public partial class PartialClass
 
     [TestMethod]
     public void UnusedPrivateMember_Unity3D_Ignored() =>
-        builder.AddSnippet(@"
-// https://github.com/SonarSource/sonar-dotnet/issues/159
-public class UnityMessages1 : UnityEngine.MonoBehaviour
-{
-    private void SomeMethod(bool hasFocus) { } // Compliant
-}
+        builder.AddSnippet("""
+            // https://github.com/SonarSource/sonar-dotnet/issues/159
+            public class UnityMessages1 : UnityEngine.MonoBehaviour
+            {
+                private void SomeMethod(bool hasFocus) { } // Compliant
+            }
 
-public class UnityMessages2 : UnityEngine.ScriptableObject
-{
-    private void SomeMethod(bool hasFocus) { } // Compliant
-}
+            public class UnityMessages2 : UnityEngine.ScriptableObject
+            {
+                private void SomeMethod(bool hasFocus) { } // Compliant
+            }
 
-public class UnityMessages3 : UnityEditor.AssetPostprocessor
-{
-    private void SomeMethod(bool hasFocus) { } // Compliant
-}
+            public class UnityMessages3 : UnityEditor.AssetPostprocessor
+            {
+                private void SomeMethod(bool hasFocus) { } // Compliant
+            }
 
-public class UnityMessages4 : UnityEditor.AssetModificationProcessor
-{
-    private void SomeMethod(bool hasFocus) { } // Compliant
-}
+            public class UnityMessages4 : UnityEditor.AssetModificationProcessor
+            {
+                private void SomeMethod(bool hasFocus) { } // Compliant
+            }
 
-// Unity3D does not seem to be available as a nuget package and we cannot use the original classes
-namespace UnityEngine
-{
-    public class MonoBehaviour { }
-    public class ScriptableObject { }
-}
-namespace UnityEditor
-{
-    public class AssetPostprocessor { }
-    public class AssetModificationProcessor { }
-}").Verify();
+            // Unity3D does not seem to be available as a nuget package and we cannot use the original classes
+            namespace UnityEngine
+            {
+                public class MonoBehaviour { }
+                public class ScriptableObject { }
+            }
+            namespace UnityEditor
+            {
+                public class AssetPostprocessor { }
+                public class AssetModificationProcessor { }
+            }
+            """).VerifyNoIssues();
 
     [TestMethod]
     public void EntityFrameworkMigration_Ignored() =>
-        builder.AddSnippet(@"
-namespace EntityFrameworkMigrations
-{
-    using Microsoft.EntityFrameworkCore.Migrations;
+        builder.AddSnippet("""
+            namespace EntityFrameworkMigrations
+            {
+                using Microsoft.EntityFrameworkCore.Migrations;
 
-    public class SkipMigration : Migration
-    {
-        private void SomeMethod(bool condition) { } // Compliant
+                public class SkipMigration : Migration
+                {
+                    private void SomeMethod(bool condition) { } // Compliant
 
-        protected override void Up(MigrationBuilder migrationBuilder) { }
-    }
-}").AddReferences(EntityFrameworkCoreReferences("7.0.14")).Verify();
+                    protected override void Up(MigrationBuilder migrationBuilder) { }
+                }
+            }
+            """).AddReferences(EntityFrameworkCoreReferences("7.0.14")).VerifyNoIssues();
 
     [DataTestMethod]
     [DataRow(ProjectType.Product)]
@@ -197,7 +201,7 @@ namespace EntityFrameworkMigrations
     public void UnusedPrivateMember_FromCSharp12() =>
         builder.AddPaths("UnusedPrivateMember.CSharp12.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp12)
-            .Verify();
+            .VerifyNoIssues();
 
 #endif
 
@@ -210,7 +214,7 @@ namespace EntityFrameworkMigrations
 
     [TestMethod]
     public void UnusedPrivateMember_UsedInGeneratedFile() =>
-        builder.AddPaths("UnusedPrivateMember.CalledFromGenerated.cs", "UnusedPrivateMember.Generated.cs").Verify();
+        builder.AddPaths("UnusedPrivateMember.CalledFromGenerated.cs", "UnusedPrivateMember.Generated.cs").VerifyNoIssues();
 
     [TestMethod]
     public void UnusedPrivateMember_Performance() =>
@@ -219,7 +223,7 @@ namespace EntityFrameworkMigrations
         // The threshold is set here to 30 seconds to avoid flaky builds due to slow build agents or network connections.
         builder.AddPaths("UnusedPrivateMember.Performance.cs")
             .AddReferences(EntityFrameworkCoreReferences("5.0.12"))   // The latest before 6.0.0 for .NET 6 that has Linq versioning collision issue
-            .Invoking(x => x.Verify())
+            .Invoking(x => x.VerifyNoIssues())
             .ExecutionTime().Should().BeLessOrEqualTo(30.Seconds());
 
     private static ImmutableArray<MetadataReference> EntityFrameworkCoreReferences(string entityFrameworkVersion) =>

@@ -56,7 +56,7 @@ public class InsteadOfAnyTest
     public void InsteadOfAny_EntityFramework_Framework() =>
         builderCS.AddPaths("InsteadOfAny.EntityFramework.Framework.cs")
                  .AddReferences(GetReferencesEntityFrameworkNetFramework())
-                 .Verify();
+                 .VerifyNoIssues();
 
 #endif
 

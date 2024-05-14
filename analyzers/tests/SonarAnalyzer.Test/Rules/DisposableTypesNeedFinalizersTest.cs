@@ -45,10 +45,11 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void DisposableTypesNeedFinalizers_InvalidCode() =>
-            builder.AddSnippet(@"
-public class Foo_05 : IDisposable
-{
-    private HandleRef;
-}").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
+            builder.AddSnippet("""
+                public class Foo_05 : IDisposable
+                {
+                    private HandleRef;
+                }
+                """).VerifyNoIssuesIgnoreErrors();
     }
 }

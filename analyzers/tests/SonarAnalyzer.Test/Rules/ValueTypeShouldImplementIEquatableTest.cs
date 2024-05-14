@@ -37,7 +37,7 @@ public class ValueTypeShouldImplementIEquatableTest
 
     [TestMethod]
     public void ValueTypeShouldImplementIEquatable_CSharp10() =>
-        builderCS.AddPaths("ValueTypeShouldImplementIEquatable.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+        builderCS.AddPaths("ValueTypeShouldImplementIEquatable.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).VerifyNoIssues();
 
 #endif
 

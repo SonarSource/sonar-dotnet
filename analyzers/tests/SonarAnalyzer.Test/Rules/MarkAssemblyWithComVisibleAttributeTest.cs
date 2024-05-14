@@ -21,28 +21,27 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class MarkAssemblyWithComVisibleAttributeTest
 {
-    [TestClass]
-    public class MarkAssemblyWithComVisibleAttributeTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.MarkAssemblyWithComVisibleAttribute>().WithConcurrentAnalysis(false);
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.MarkAssemblyWithComVisibleAttribute>().WithConcurrentAnalysis(false);
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.MarkAssemblyWithComVisibleAttribute>().WithConcurrentAnalysis(false);
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.MarkAssemblyWithComVisibleAttribute>().WithConcurrentAnalysis(false);
 
-        [TestMethod]
-        public void MarkAssemblyWithComVisibleAttribute_CS() =>
-            builderCS.AddPaths(@"MarkAssemblyWithComVisibleAttribute.cs").Verify();
+    [TestMethod]
+    public void MarkAssemblyWithComVisibleAttribute_CS() =>
+        builderCS.AddPaths(@"MarkAssemblyWithComVisibleAttribute.cs").VerifyNoIssues();
 
-        [TestMethod]
-        public void MarkAssemblyWithComVisibleAttribute_VB() =>
-            builderVB.AddPaths(@"MarkAssemblyWithComVisibleAttribute.vb").Verify();
+    [TestMethod]
+    public void MarkAssemblyWithComVisibleAttribute_VB() =>
+        builderVB.AddPaths(@"MarkAssemblyWithComVisibleAttribute.vb").VerifyNoIssues();
 
-        [TestMethod]
-        public void MarkAssemblyWithComVisibleAttributeNoncompliant_CS() =>
-            builderCS.AddPaths(@"MarkAssemblyWithComVisibleAttributeNoncompliant.cs").Verify();
+    [TestMethod]
+    public void MarkAssemblyWithComVisibleAttributeNoncompliant_CS() =>
+        builderCS.AddPaths(@"MarkAssemblyWithComVisibleAttributeNoncompliant.cs").Verify();
 
-        [TestMethod]
-        public void MarkAssemblyWithComVisibleAttributeNoncompliant_VB() =>
-            builderVB.AddPaths(@"MarkAssemblyWithComVisibleAttributeNoncompliant.vb").Verify();
-    }
+    [TestMethod]
+    public void MarkAssemblyWithComVisibleAttributeNoncompliant_VB() =>
+        builderVB.AddPaths(@"MarkAssemblyWithComVisibleAttributeNoncompliant.vb").Verify();
 }
