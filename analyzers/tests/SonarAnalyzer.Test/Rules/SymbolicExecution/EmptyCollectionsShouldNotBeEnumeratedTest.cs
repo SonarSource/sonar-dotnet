@@ -88,8 +88,7 @@ public class EmptyCollectionsShouldNotBeEnumeratedTest
 
     [TestMethod]
     public void EmptyCollectionsShouldNotBeEnumerated_Sonar_CSharp10() =>
-        sonar.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10)
-            .VerifyNoIssues();
+        sonar.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).VerifyNoIssues();
 
     [TestMethod]
     public void EmptyCollectionsShouldNotBeEnumerated_Roslyn_CSharp10() =>
@@ -97,18 +96,15 @@ public class EmptyCollectionsShouldNotBeEnumeratedTest
 
     [TestMethod]
     public void EmptyCollectionsShouldNotBeEnumerated_Sonar_CSharp11() =>
-        sonar.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11)
-            .VerifyNoIssues();
+        sonar.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).VerifyNoIssues();
 
     [TestMethod]
     public void EmptyCollectionsShouldNotBeEnumerated_Roslyn_CSharp11() =>
-        roslynCS.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11)
-            .VerifyNoIssues();
+        roslynCS.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).VerifyNoIssues();
 
     [TestMethod]
     public void EmptyCollectionsShouldNotBeEnumerated_Roslyn_CSharp12() =>
-        roslynCS.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12)
-            .VerifyNoIssues();
+        roslynCS.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).VerifyNoIssues();
 
 #endif
 

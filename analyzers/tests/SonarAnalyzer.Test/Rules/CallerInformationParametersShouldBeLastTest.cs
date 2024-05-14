@@ -44,8 +44,7 @@ public class CallerInformationParametersShouldBeLastTest
 
     [TestMethod]
     public void CallerInformationParametersShouldBeLast_CSharp11() =>
-        builder.AddPaths("CallerInformationParametersShouldBeLast.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11)
-            .VerifyNoIssues();
+        builder.AddPaths("CallerInformationParametersShouldBeLast.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).VerifyNoIssues();
 
 #endif
 
