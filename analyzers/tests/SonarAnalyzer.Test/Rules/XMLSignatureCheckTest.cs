@@ -23,11 +23,14 @@ using SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]
-public class XMLSignatureCheckTest
+public class XmlSignatureCheckTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<XMLSignatureCheck>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<XmlSignatureCheck>()
+        .AddReferences(MetadataReferenceFacade.SystemXml)
+        .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography)
+        .AddReferences(NuGetMetadataReference.SystemSecurityCryptographyXml());
 
     [TestMethod]
-    public void XMLSignatureCheck_CS() =>
+    public void XmlSignatureCheck_CS() =>
         builder.AddPaths("XMLSignatureCheck.cs").Verify();
 }

@@ -162,6 +162,7 @@ public static class NuGetMetadataReference
     public static References SystemDrawingCommon(string packageVersion = "4.7.0") => Create("System.Drawing.Common", packageVersion);
     public static References SystemNetHttp(string packageVersion = Constants.NuGetLatestVersion) => Create("System.Net.Http", packageVersion);
     public static References SystemSecurityCryptographyOpenSsl(string packageVersion = "4.7.0") => Create("System.Security.Cryptography.OpenSsl", packageVersion);
+    public static References SystemSecurityCryptographyXml(string packageVersion = Constants.NuGetLatestVersion) => Create("System.Security.Cryptography.Xml", packageVersion);
     public static References SystemSecurityPermissions(string packageVersion = "4.7.0") => Create("System.Security.Permissions", packageVersion);
     public static References SystemPrivateServiceModel(string packageVersion = "4.7.0") => Create("System.Private.ServiceModel", packageVersion);
     public static References SystemServiceModelPrimitives(string packageVersion = "4.7.0") => Create("System.ServiceModel.Primitives", packageVersion);

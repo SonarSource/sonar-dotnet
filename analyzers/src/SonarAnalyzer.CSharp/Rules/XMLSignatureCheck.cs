@@ -21,10 +21,10 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class XMLSignatureCheck : SonarDiagnosticAnalyzer
+public sealed class XmlSignatureCheck : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6377";
-    private const string MessageFormat = "FIXME";
+    private const string MessageFormat = "Change this code to only accept signatures computed from a trusted party.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -36,7 +36,7 @@ public sealed class XMLSignatureCheck : SonarDiagnosticAnalyzer
                 var node = c.Node;
                 if (true)
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                    c.ReportIssue(Rule, node.GetLocation());
                 }
             },
             SyntaxKind.InvocationExpression);
