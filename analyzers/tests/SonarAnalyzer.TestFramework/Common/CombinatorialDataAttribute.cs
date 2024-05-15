@@ -80,5 +80,5 @@ public sealed class CombinatorialDataAttribute : Attribute, ITestDataSource
     }
 
     public string GetDisplayName(MethodInfo methodInfo, object[] data) =>
-        $"{methodInfo.Name} ({(data != null ? string.Join(",", data) : null)})";
+        $"{methodInfo.Name} ({(data is not null ? string.Join(",", data) : null)})";
 }
