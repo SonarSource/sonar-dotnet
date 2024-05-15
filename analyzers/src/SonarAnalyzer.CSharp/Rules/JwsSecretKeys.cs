@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class JwsSecretKeys : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6781";
-    private const string MessageFormat = "FIXME";
+    private const string MessageFormat = "JWT secret keys should not be disclosed.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 

@@ -27,7 +27,32 @@ public class JwsSecretKeysTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<JwsSecretKeys>();
 
+#if NET
+
     [TestMethod]
-    public void JwsSecretKeys_CS() =>
-        builder.AddPaths("JwsSecretKeys.cs").Verify();
+    public void JwsSecretKeys_CS_AspNetCore() =>
+        builder
+            .WithOptions(ParseOptionsHelper.FromCSharp8) // Recursive pattern requires C#8 or later.
+            .AddPaths("JwsSecretKeys.AspNet.Core.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.NuGetLatestVersion))
+            .AddReferences(NuGetMetadataReference.MicrosoftIdentityModelTokens())
+            .AddReferences(NuGetMetadataReference.SystemIdentityModelTokensJwt())
+            .AddReferences(new[] { CoreMetadataReference.SystemSecurityClaims })
+            .Verify();
+
+#else
+
+    [TestMethod]
+    public void JwsSecretKeys_CS_AspNet() =>
+        builder
+            .WithOptions(ParseOptionsHelper.FromCSharp8) // Recursive pattern requires C#8 or later.
+            .AddPaths("JwsSecretKeys.AspNet.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.NuGetLatestVersion))
+            .AddReferences(NuGetMetadataReference.MicrosoftIdentityModelTokens())
+            .AddReferences(NuGetMetadataReference.SystemConfigurationConfigurationManager())
+            .AddReferences(NuGetMetadataReference.SystemIdentityModelTokensJwt())
+            .Verify();
+
+#endif
+
 }
