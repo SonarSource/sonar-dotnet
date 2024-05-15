@@ -54,6 +54,13 @@ public class AvoidUnderPostingTest
             .Verify();
 
     [TestMethod]
+    public void AvoidUnderPosting_CSharp11() =>
+    builder.AddPaths("AvoidUnderPosting.CSharp11.cs")
+        .AddReferences(NuGetMetadataReference.SystemTextJson("7.0.4"))
+        .WithOptions(ParseOptionsHelper.FromCSharp11)
+        .Verify();
+
+    [TestMethod]
     public void AvoidUnderPosting_CSharp12() =>
         builder.AddPaths("AvoidUnderPosting.CSharp12.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp12)
