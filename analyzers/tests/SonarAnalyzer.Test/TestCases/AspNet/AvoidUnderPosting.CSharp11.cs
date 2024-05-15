@@ -9,7 +9,7 @@ namespace CSharp11
     {
         public int ValueProperty { get; set; }        // Noncompliant
 
-        [Custom]                                      // Noncompliant
+        [Custom]                                      // Noncompliant repro for https://github.com/SonarSource/sonar-dotnet/issues/9282
         public int ValuePropertyAnnotatedWithCustomAttribute { get; set; }
 
         [JsonRequired]                                // Noncompliant - FP because the attribute is annotated with JsonRequiredAttribute
