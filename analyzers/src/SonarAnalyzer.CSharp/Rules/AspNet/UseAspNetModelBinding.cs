@@ -115,7 +115,8 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
         }
         codeBlockStart.RegisterCodeBlockEndAction(codeBlockEnd =>
         {
-            if (allConstantAccesses)
+            if (allConstantAccesses
+                && codeBlockCandidates.Any()) // Net core 2.2: PushRange throws for empty arrays https://stackoverflow.com/questions/7487097/strange-exception-when-using-concurrentstack-in-c-sharp
             {
                 controllerCandidates.PushRange([.. codeBlockCandidates]);
             }
