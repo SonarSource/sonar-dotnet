@@ -39,7 +39,7 @@ public sealed class CombinatorialDataAttribute : Attribute, ITestDataSource
 {
     public IEnumerable<object[]> GetData(MethodInfo methodInfo)
     {
-        var valuesPerParameter = methodInfo.GetParameters().Select(p => p.GetCustomAttribute<DataValuesAttribute>()?.Values
+        var valuesPerParameter = methodInfo.GetParameters().Select(x => x.GetCustomAttribute<DataValuesAttribute>()?.Values
             ?? throw new InvalidOperationException("Combinatorial test requires all parameters to have the [DataValues] attribute set")).ToArray();
         var parameterIndices = new int[valuesPerParameter.Length];
 
