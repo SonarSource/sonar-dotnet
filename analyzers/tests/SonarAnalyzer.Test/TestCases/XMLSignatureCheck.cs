@@ -1,6 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Security.Cryptography.Xml;
 using System.Xml;
+using System.Linq;
 
 public class XMLSignatures
 {
@@ -11,14 +12,16 @@ public class XMLSignatures
         SignedXml signedXml = new SignedXml(xmlDoc);
         signedXml.LoadXml((XmlElement)xmlDoc.GetElementsByTagName("Signature").Item(0));
 
-        _ = signedXml.CheckSignature(rsaCryptoServiceProvider);        // A key is provided.
-        _ = signedXml.CheckSignature("other");                         // Custom defined extension method.
-        _ = signedXml.CheckSignatureReturningKey("other");             // Custom defined extension method.
+        _ = signedXml.CheckSignature(rsaCryptoServiceProvider);                     // A key is provided.
+        _ = signedXml.CheckSignature("other");                                      // Custom defined extension method.
+        _ = signedXml.CheckSignatureReturningKey("other");                          // Custom defined extension method.
+        _ = new[] { rsaCryptoServiceProvider }.Select(signedXml.CheckSignature);    // Used as an Func<T, bool>, parameter is provided.
 
-        _ = signedXml.CheckSignature();                                // Noncompliant {{Change this code to only accept signatures computed from a trusted party.}}
+        _ = signedXml.CheckSignature();                                             // Noncompliant {{Change this code to only accept signatures computed from a trusted party.}}
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^
-        _ = signedXml.CheckSignatureReturningKey(out var signingKey);  // Noncompliant {{Change this code to only accept signatures computed from a trusted party.}}
+        _ = signedXml.CheckSignatureReturningKey(out var signingKey);               // Noncompliant {{Change this code to only accept signatures computed from a trusted party.}}
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
     }
 }
 
