@@ -67,7 +67,6 @@ public sealed class SeparateDeclarations : StylingAnalyzer
 
         static bool IsStandaloneCloseBrace(SyntaxToken token) =>
             token.IsKind(SyntaxKind.CloseBraceToken) && token.Line() != token.GetPreviousToken().Line();
-
     }
 
     private void ValidateSeparatedMember(SonarSyntaxNodeReportingContext context)
