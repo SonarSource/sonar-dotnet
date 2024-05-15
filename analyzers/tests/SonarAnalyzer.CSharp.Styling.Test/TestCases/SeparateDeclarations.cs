@@ -47,8 +47,8 @@ public abstract class CompliantClassFull
     public object Property2 => 42;
     public object Property3 => 43;
     public object Property4 { get => 42; }
-    public object Property5 { get; set; }   // Noncompliant FP
-    public object Property6 { get; set; }   // Noncompliant FP
+    public object Property5 { get; set; }
+    public object Property6 { get; set; }
 
     public object this[int index] => 42;
     public object this[bool value] => 42;
