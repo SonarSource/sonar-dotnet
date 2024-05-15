@@ -28,6 +28,7 @@ public class UseAspNetModelBindingTest
 {
 #if NET
     private readonly VerifierBuilder builderAspNetCore = new VerifierBuilder<UseAspNetModelBinding>()
+        .WithBasePath("AspNet")
         .WithOptions(ParseOptionsHelper.FromCSharp12)
         .AddReferences([
             AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
@@ -40,7 +41,7 @@ public class UseAspNetModelBindingTest
 
     [TestMethod]
     public void UseAspNetModelBinding_NoRegistrationIfNotAspNet() =>
-        new VerifierBuilder<UseAspNetModelBinding>().AddSnippet(string.Empty).Verify();
+        new VerifierBuilder<UseAspNetModelBinding>().AddSnippet(string.Empty).VerifyNoIssues();
 
     [TestMethod]
     public void UseAspNetModelBinding_AspNetCore_CSharp12() =>
@@ -220,7 +221,7 @@ public class UseAspNetModelBindingTest
                     _ = httpContextAccessor.HttpContext.Request.Form["id"]; // Compliant
                 }
             }
-            """").Verify();
+            """").VerifyNoIssues();
 
     [DataTestMethod]
     [DataRow("Form")]
@@ -254,7 +255,7 @@ public class UseAspNetModelBindingTest
                     _ = request.{{property}}["id"]; // Compliant: Not in a controller
                 }
             }            
-            """").Verify();
+            """").VerifyNoIssues();
 
     /*
      * Depends on https://github.com/SonarSource/sonar-dotnet/pull/8949
