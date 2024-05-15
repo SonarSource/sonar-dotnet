@@ -6301,7 +6301,7 @@ internal static class RuleTypeMappingCS
         // ["S6374"],
         // ["S6375"],
         // ["S6376"],
-        // ["S6377"],
+        ["S6377"] = "VULNERABILITY",
         // ["S6378"],
         // ["S6379"],
         // ["S6380"],
