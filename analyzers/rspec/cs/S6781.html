@@ -1,0 +1,252 @@
+<p>Secret leaks often occur when a sensitive piece of authentication data is stored with the source code of an application. Considering the source
+code is intended to be deployed across multiple assets, including source code repositories or application hosting servers, the secrets might get
+exposed to an unintended audience.</p>
+<h2>Why is this an issue?</h2>
+<p>In most cases, trust boundaries are violated when a secret is exposed in a source code repository or an uncontrolled deployment environment.
+Unintended people who don’t need to know the secret might get access to it. They might then be able to use it to gain unwanted access to associated
+services or resources.</p>
+<p>The trust issue can be more or less severe depending on the people’s role and entitlement.</p>
+<h3>What is the potential impact?</h3>
+<p>If a JWT secret key leaks to an unintended audience, it can have serious security implications for the corresponding application. The secret key is
+used to encode and decode JWTs when using a symmetric signing algorithm, and an attacker could potentially use it to perform malicious actions.</p>
+<p>For example, an attacker could use the secret key to create their own authentication tokens that appear to be legitimate, allowing them to bypass
+authentication and gain access to sensitive data or functionality.</p>
+<p>In the worst-case scenario, an attacker could be able to execute arbitrary code on the application by abusing administrative features, and take
+over its hosting server.</p>
+<h2>How to fix it in ASP.NET Core</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p>Secrets stored in <code>appsettings.json</code> can be read by anyone with access to the file.</p>
+<pre data-diff-id="101" data-diff-type="noncompliant">
+[ApiController]
+[Route("login-example")]
+public class LoginExampleController : ControllerBase
+{
+    private readonly IConfiguration _config;
+    public LoginExampleController(IConfiguration config)
+    {
+        _config = config;
+    }
+
+    [HttpPost]
+    public IActionResult Post([FromBody] LoginModel login)
+    {
+        // Code to validate the login information is omitted
+
+        var key = _config["Jwt:Key"] ??
+            throw new ApplicationException("JWT key is not configured.");
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)); // Noncompliant
+        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+        var Sectoken = new JwtSecurityToken(
+            "example.com",
+            "example.com",
+            null,
+            expires: DateTime.Now.AddMinutes(120),
+            signingCredentials: credentials);
+
+        var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
+        return Ok(token);
+    }
+}
+</pre>
+<p>Secrets that are hard-coded into the application can be read by anyone with access to the source code or can be decompiled from the application
+binaries.</p>
+<pre>
+[ApiController]
+[Route("login-example")]
+public class LoginExampleController : ControllerBase
+{
+    private const string key = "SecretSecretSecretSecretSecretSecretSecretSecret";
+
+    [HttpPost]
+    public IActionResult Post([FromBody] LoginModel login)
+    {
+        // Code to validate the login information is omitted
+
+        var key = _config["Jwt:Key"] ??
+            throw new ApplicationException("JWT key is not configured.");
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)); // Noncompliant
+        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+        var Sectoken = new JwtSecurityToken(
+            "example.com",
+            "example.com",
+            null,
+            expires: DateTime.Now.AddMinutes(120),
+            signingCredentials: credentials);
+
+        var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
+        return Ok(token);
+    }
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="101" data-diff-type="compliant">
+[ApiController]
+[Route("login-example")]
+public class LoginExampleController : ControllerBase
+{
+    [HttpPost]
+    public IActionResult Post([FromBody] LoginModel login)
+    {
+        // Code to validate the login information is omitted
+
+        var key = Environment.GetEnvironmentVariable("JWT_KEY") ??
+            throw new ApplicationException("JWT key is not configured.");
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+        var Sectoken = new JwtSecurityToken(
+            "example.com",
+            "example.com",
+            null,
+            expires: DateTime.Now.AddMinutes(120),
+            signingCredentials: credentials);
+
+        var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
+        return Ok(token);
+    }
+}
+</pre>
+<h3>How does this work?</h3>
+<p>Here, the compliant solution uses an environment variable to hold the secret. Environment variables are easy to change and are not easily
+accessible outside of the application.</p>
+<h3>Going the extra mile</h3>
+<h4>Use a secret vault</h4>
+<p>Secret vaults provide secure methods for storing and accessing secrets. They protect against the unexpected disclosure of the secrets they
+store.</p>
+<p>Microsoft recommends using Azure Key Vault with .NET Core applications.</p>
+<pre>
+var builder = WebApplication.CreateBuilder(args);
+
+// Get the name of the key vault
+var keyVaultName = Environment.GetEnvironmentVariable("AZURE_KEYVAULT") ??
+    throw new ApplicationException("Azure Key Vault location is not configured.");
+// Add Azure Key Vault in the configuration
+builder.Configuration.AddAzureKeyVault(new Uri($"https://{keyVaultName}.vault.azure.net/"), new EnvironmentCredential());
+// Get the JWT secret from Azure Key Vault
+var jwtKey = builder.Configuration.GetSection("JWT-KEY").Get&lt;string&gt;() ??
+    throw new ApplicationException("JWT key is not configured.");
+
+builder.Services
+  .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+  .AddJwtBearer(options =&gt; {
+      options.TokenValidationParameters = new TokenValidationParameters{
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey!)),
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = "example.com",
+        ValidateIssuer = true,
+        ValidAudience = "example.com",
+        ValidateAudience = true,
+        ValidateLifetime = true,
+      };
+  });
+</pre>
+<h2>How to fix it in ASP.NET</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p>Secrets stored in <code>web.config</code> can be read by anyone with access to the file.</p>
+<pre data-diff-id="201" data-diff-type="noncompliant">
+public class LoginExampleController : ApiController
+{
+    public IHttpActionResult Post([FromBody] LoginModel login)
+    {
+        // Code to validate the login information is omitted
+
+        var key = ConfigurationManager.AppSettings["key"] ??
+            throw new ApplicationException("JWT key is not configured.");
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+        var secToken = new JwtSecurityToken(
+            "example.com",
+            "example.com",
+            null,
+            expires: DateTime.Now.AddMinutes(120),
+            signingCredentials: credentials
+        );
+
+        var token = new JwtSecurityTokenHandler().WriteToken(secToken);
+        return Ok(token);
+    }
+}
+</pre>
+<p>Secrets that are hard-coded into the application can be read by anyone with access to the source code or can be decompiled from the application
+binaries.</p>
+<pre>
+public class LoginExampleController : ApiController
+{
+    private const string key = "SecretSecretSecretSecretSecretSecretSecretSecret";
+
+    public IHttpActionResult Post([FromBody] LoginModel login)
+    {
+        // Code to validate the login information is omitted
+
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+        var secToken = new JwtSecurityToken(
+            "example.com",
+            "example.com",
+            null,
+            expires: DateTime.Now.AddMinutes(120),
+            signingCredentials: credentials
+        );
+
+        var token = new JwtSecurityTokenHandler().WriteToken(secToken);
+        return Ok(token);
+    }
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="201" data-diff-type="compliant">
+public class LoginExampleController : ApiController
+{
+    public IHttpActionResult Post([FromBody] LoginModel login)
+    {
+        // Code to validate the login information is omitted
+
+        var key = Environment.GetEnvironmentVariable("JWT_KEY") ??
+            throw new ApplicationException("JWT key is not configured.");
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+        var secToken = new JwtSecurityToken(
+            "example.com",
+            "example.com",
+            null,
+            expires: DateTime.Now.AddMinutes(120),
+            signingCredentials: credentials
+        );
+
+        var token = new JwtSecurityTokenHandler().WriteToken(secToken);
+        return Ok(token);
+    }
+}
+</pre>
+<h3>How does this work?</h3>
+<p>Here, the compliant solution uses an environment variable to hold the secret. Environment variables are easy to change and are not easily
+accessible outside of the application.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.identitymodel.tokens.jwt.jwtsecuritytoken?view=msal-web-dotnet-latest">JwtSecurityToken
+  Class Class</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.identitymodel.tokens.symmetricsecuritykey?view=dotnet-plat-ext-8.0">SymmetricSecurityKey
+  Class</a> </li>
+</ul>
+<h3>Standards</h3>
+<ul>
+  <li> OWASP - <a href="https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/">Top 10 2021 Category A7 - Identification and
+  Authentication Failures</a> </li>
+  <li> OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure">Top 10 2017 Category A3 - Sensitive Data
+  Exposure</a> </li>
+  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/798">CWE-798 - Use of Hard-coded Credentials</a> </li>
+  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/259">CWE-259 - Use of Hard-coded Password</a> </li>
+  <li> STIG Viewer - <a href="https://stigviewer.com/stig/application_security_and_development/2023-06-08/finding/V-222642">Application Security and
+  Development: V-222642</a> - The application must not contain embedded authentication data. </li>
+</ul>
+
