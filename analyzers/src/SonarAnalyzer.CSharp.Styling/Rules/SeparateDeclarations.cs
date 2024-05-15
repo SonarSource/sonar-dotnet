@@ -54,7 +54,7 @@ public sealed class SeparateDeclarations : StylingAnalyzer
     {
         var firstToken = context.Node.GetFirstToken();
         if (firstToken.Line() != context.Node.GetLastToken().Line()
-            || firstToken.GetPreviousToken().IsKind(SyntaxKind.CloseBraceToken)
+            || IsStandaloneCloseBrace(firstToken.GetPreviousToken())
             || PreviousDeclarationKind() != context.Node.Kind())
         {
             ValidateSeparatedMember(context);
@@ -64,6 +64,9 @@ public sealed class SeparateDeclarations : StylingAnalyzer
             context.Node.Parent.ChildNodes().TakeWhile(x => x != context.Node).LastOrDefault() is { } preceding
                 ? preceding.Kind()
                 : SyntaxKind.None;
+
+        static bool IsStandaloneCloseBrace(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.CloseBraceToken) && token.Line() != token.GetPreviousToken().Line();
     }
 
     private void ValidateSeparatedMember(SonarSyntaxNodeReportingContext context)
