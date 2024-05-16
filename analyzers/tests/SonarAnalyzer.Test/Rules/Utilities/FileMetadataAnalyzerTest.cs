@@ -81,19 +81,19 @@ public class FileMetadataAnalyzerTest
                 })));
     }
 
-        [DataTestMethod]
-        [DataRow(true)]
-        [DataRow(false)]
-        public void CreateMessage_NoEncoding_SetsEmptyString(bool isTestProject)
-        {
-            var tree = Substitute.For<SyntaxTree>();
-            tree.FilePath.Returns("File.Generated.cs");    // Generated to simplify mocking for GeneratedCodeRecognizer
-            tree.Encoding.Returns(x => null);
-            var model = TestHelper.CompileCS(string.Empty).Model;
-            var sut = new TestFileMetadataAnalyzer(null, isTestProject);
+    [DataTestMethod]
+    [DataRow(true)]
+    [DataRow(false)]
+    public void CreateMessage_NoEncoding_SetsEmptyString(bool isTestProject)
+    {
+        var tree = Substitute.For<SyntaxTree>();
+        tree.FilePath.Returns("File.Generated.cs");    // Generated to simplify mocking for GeneratedCodeRecognizer
+        tree.Encoding.Returns(x => null);
+        var model = TestHelper.CompileCS(string.Empty).Model;
+        var sut = new TestFileMetadataAnalyzer(null, isTestProject);
 
-            sut.TestCreateMessage(UtilityAnalyzerParameters.Default, tree, model).Encoding.Should().BeEmpty();
-        }
+        sut.TestCreateMessage(UtilityAnalyzerParameters.Default, tree, model).Encoding.Should().BeEmpty();
+    }
 
     [DataTestMethod]
     [DataRow("class.generated.cs", 0)]
