@@ -61,6 +61,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Components_RouteAttribute = new("Microsoft.AspNetCore.Components.RouteAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Components_SupplyParameterFromQueryAttribute = new("Microsoft.AspNetCore.Components.SupplyParameterFromQueryAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Cors_Infrastructure_CorsPolicyBuilder = new("Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder");
+        public static readonly KnownType Microsoft_AspNetCore_Cryptography_KeyDerivation_KeyDerivation = new("Microsoft.AspNetCore.Cryptography.KeyDerivation.KeyDerivation");
         public static readonly KnownType Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions = new("Microsoft.AspNetCore.Hosting.HostingEnvironmentExtensions");
         public static readonly KnownType Microsoft_AspNetCore_Hosting_WebHostBuilderExtensions = new("Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions");
         public static readonly KnownType Microsoft_AspNetCore_Http_CookieOptions = new("Microsoft.AspNetCore.Http.CookieOptions");
@@ -73,6 +74,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Http_IResponseCookies = new("Microsoft.AspNetCore.Http.IResponseCookies");
         public static readonly KnownType Microsoft_AspNetCore_Http_IResult = new("Microsoft.AspNetCore.Http.IResult");
         public static readonly KnownType Microsoft_AspNetCore_Http_Results = new("Microsoft.AspNetCore.Http.Results");
+        public static readonly KnownType Microsoft_AspNetCore_Identity_PasswordsHasherOptions = new("Microsoft.AspNetCore.Identity.PasswordHasherOptions");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_AcceptVerbsAttribute = new("Microsoft.AspNetCore.Mvc.AcceptVerbsAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ApiControllerAttribute = new("Microsoft.AspNetCore.Mvc.ApiControllerAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ApiConventionMethodAttribute = new("Microsoft.AspNetCore.Mvc.ApiConventionMethodAttribute");
@@ -208,9 +210,12 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Org_BouncyCastle_Asn1_X9_ECNamedCurveTable = new("Org.BouncyCastle.Asn1.X9.ECNamedCurveTable");
         public static readonly KnownType Org_BouncyCastle_Asn1_X9_X962NamedCurves = new("Org.BouncyCastle.Asn1.X9.X962NamedCurves");
         public static readonly KnownType Org_BouncyCastle_Crypto_Engines_AesFastEngine = new("Org.BouncyCastle.Crypto.Engines.AesFastEngine");
+        public static readonly KnownType Org_BouncyCastle_Crypto_Generators_BCrypt = new("Org.BouncyCastle.Crypto.Generators.BCrypt");
         public static readonly KnownType Org_BouncyCastle_Crypto_Generators_DHParametersGenerator = new("Org.BouncyCastle.Crypto.Generators.DHParametersGenerator");
+        public static readonly KnownType Org_BouncyCastle_Crypto_Generators_OpenBsdBCrypt = new("Org.BouncyCastle.Crypto.Generators.OpenBsdBCrypt");
         public static readonly KnownType Org_BouncyCastle_Crypto_Generators_DsaParametersGenerator = new("Org.BouncyCastle.Crypto.Generators.DsaParametersGenerator");
         public static readonly KnownType Org_BouncyCastle_Crypto_Parameters_RsaKeyGenerationParameters = new("Org.BouncyCastle.Crypto.Parameters.RsaKeyGenerationParameters");
+        public static readonly KnownType Org_BouncyCastle_Crypto_PbeParametersGenerator = new("Org.BouncyCastle.Crypto.PbeParametersGenerator");
         public static readonly KnownType Serilog_Events_LogEventLevel = new("Serilog.Events.LogEventLevel");
         public static readonly KnownType Serilog_ILogger = new("Serilog.ILogger");
         public static readonly KnownType Serilog_LoggerConfiguration = new("Serilog.LoggerConfiguration");
