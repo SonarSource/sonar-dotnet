@@ -48,12 +48,14 @@ End Class").Should().BeEquivalentTo(new[] { 1, 2, 3, 4, 5, 6, 7, 8 });
         }
 
         [TestMethod]
+        // https://github.com/SonarSource/sonar-dotnet/issues/9288
         public void LinesOfCode_Razor()
         {
             /* File.razor:
             @using System.Net.Http
             @using static Microsoft.AspNetCore.Components.Web.RenderMode
             */
+            // In the .Net 9 SDK the generated code misses #line default and #line hidden for all @using except the last one
             var generated = """
                 #pragma checksum "File.razor" "{8829d00f-11b8-4213-878b-770e8597ac16}" "751c4a07609c64113e523665ea31f1888133ad09656f3360c19ac90145e14e6b"
                 #line (1,2)-(2,1) "File.razor"
@@ -80,6 +82,45 @@ End Class").Should().BeEquivalentTo(new[] { 1, 2, 3, 4, 5, 6, 7, 8 });
             var semanticModel = compilation.GetSemanticModel(tree);
             var lineNumbers = new Metrics.CSharp.CSharpMetrics(tree, semanticModel).CodeLines;
             lineNumbers.Should().BeEquivalentTo([1, 4, 2]); // Line number for is outside the range of the file
+        }
+
+        [TestMethod]
+        // https://github.com/SonarSource/sonar-dotnet/issues/9288
+        public void LinesOfCode_Razor_Expected()
+        {
+            /* File.razor:
+            @using System.Net.Http
+            @using static Microsoft.AspNetCore.Components.Web.RenderMode
+            */
+            // This is how the generated code should look like
+            var generated = """
+                #pragma checksum "File.razor" "{8829d00f-11b8-4213-878b-770e8597ac16}" "751c4a07609c64113e523665ea31f1888133ad09656f3360c19ac90145e14e6b"
+                #line (1,2)-(2,1) "File.razor"
+                using System.Net.Http
+
+                #line default
+                #line hidden
+                #nullable disable
+                    ;
+                #nullable restore
+                #line (2,2)-(2,61) "File.razor"
+                using static Microsoft.AspNetCore.Components.Web.RenderMode
+
+                #line default
+                #line hidden
+                #nullable disable
+                    ;
+                    #nullable restore                
+                """;
+            const string FileName = "File.razor.g.cs";
+            var compilation = SolutionBuilder.Create()
+                .AddProject(AnalyzerLanguage.CSharp)
+                .AddSnippet(generated, FileName)
+                .GetCompilation();
+            var tree = compilation.SyntaxTrees.SingleOrDefault(x => x.FilePath == "File.razor.g.cs");
+            var semanticModel = compilation.GetSemanticModel(tree);
+            var lineNumbers = new Metrics.CSharp.CSharpMetrics(tree, semanticModel).CodeLines;
+            lineNumbers.Should().BeEquivalentTo([1, 2]);
         }
 
         [TestMethod]
