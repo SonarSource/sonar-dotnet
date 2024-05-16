@@ -23,7 +23,7 @@ extern alias csharp;
 extern alias vbnet;
 
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using Moq;
+using NSubstitute;
 using CodeAnalysisCS = Microsoft.CodeAnalysis.CSharp;
 using CodeAnalysisVB = Microsoft.CodeAnalysis.VisualBasic;
 using ISymbolExtensionsCommon = common::SonarAnalyzer.Extensions.ISymbolExtensions;
@@ -334,8 +334,12 @@ public class ISymbolExtensionsTest
         ISymbolExtensionsCommon.GetAttributes(null, ImmutableArray.Create(KnownType.Void)).Should().BeEmpty();
 
     [TestMethod]
-    public void GetParameters_WhenSymbolIsNotMethodOrProperty_ReturnsEmpty() =>
-        ISymbolExtensionsCommon.GetParameters(Mock.Of<ISymbol>(x => x.Kind == SymbolKind.Alias)).Should().BeEmpty();
+    public void GetParameters_WhenSymbolIsNotMethodOrProperty_ReturnsEmpty()
+    {
+        var symbol = Substitute.For<ISymbol>();
+        symbol.Kind.Returns(SymbolKind.Alias);
+        ISymbolExtensionsCommon.GetParameters(symbol).Should().BeEmpty();
+    }
 
     [TestMethod]
     public void GetInterfaceMember_WhenSymbolIsNull_ReturnsEmpty() =>
@@ -371,20 +375,20 @@ public class ISymbolExtensionsTest
     [DataRow(SymbolKind.TypeParameter, "type parameter")]
     public void GetClassification_SimpleKinds(SymbolKind symbolKind, string expected)
     {
-        var fakeSymbol = new Mock<ISymbol>();
-        fakeSymbol.Setup(x => x.Kind).Returns(symbolKind);
-        ISymbolExtensionsCommon.GetClassification(fakeSymbol.Object).Should().Be(expected);
+        var symbol = Substitute.For<ISymbol>();
+        symbol.Kind.Returns(symbolKind);
+        ISymbolExtensionsCommon.GetClassification(symbol).Should().Be(expected);
     }
 
     [TestMethod]
     public void GetClassification_UnknowKind()
     {
-        var fakeSymbol = new Mock<ISymbol>();
-        fakeSymbol.Setup(x => x.Kind).Returns((SymbolKind)999);
+        var symbol = Substitute.For<ISymbol>();
+        symbol.Kind.Returns((SymbolKind)999);
 #if DEBUG
-        new Action(() => ISymbolExtensionsCommon.GetClassification(fakeSymbol.Object)).Should().Throw<NotSupportedException>();
+        new Action(() => ISymbolExtensionsCommon.GetClassification(symbol)).Should().Throw<NotSupportedException>();
 #else
-        ISymbolExtensionsCommon.GetClassification(fakeSymbol.Object).Should().Be("symbol");
+        ISymbolExtensionsCommon.GetClassification(symbol).Should().Be("symbol");
 #endif
     }
 
