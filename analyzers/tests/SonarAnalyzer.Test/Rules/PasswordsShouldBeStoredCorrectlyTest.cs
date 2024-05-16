@@ -36,14 +36,44 @@ public class PasswordsShouldBeStoredCorrectlyTest
             .AddReferences([
                 AspNetCoreMetadataReference.MicrosoftExtensionsIdentityCore,
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreCryptographyKeyDerivation,
-                CoreMetadataReference.SystemSecurityCryptography,
+                ..MetadataReferenceFacade.SystemSecurityCryptography,
             ])
             .Verify();
 #endif
 
     [TestMethod]
+    public void PasswordsShouldBeStoredCorrectly_CS_PasswordHasherOptions() =>
+        Builder
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .AddReferences(NuGetMetadataReference.MicrosoftAspNetIdentity())
+            .AddSnippet("""
+                using Microsoft.AspNet.Identity;
+
+                class Testcases
+                {
+                   void Method()
+                   {
+                        var _ = new PasswordHasherOptions();                    // Noncompliant {{PasswordHasher does not support state-of-the-art parameters. Use Rfc2898DeriveBytes instead.}}
+                        //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        PasswordHasherOptions x = new();                        // Noncompliant
+                        //                        ^^^^^
+                        _ = new PasswordHasherOptions() {};                     // Noncompliant
+                        //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        _ = new PasswordHasherOptions { IterationCount = 42 };  // Noncompliant
+                        //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        _ = new Derived();                                      // Noncompliant
+                        //  ^^^^^^^^^^^^^
+                   }
+                }
+
+                public class Derived: PasswordHasherOptions { }
+                """)
+            .Verify();
+
+    [TestMethod]
     public void PasswordsShouldBeStoredCorrectly_CS_Rfc2898DeriveBytes() =>
         Builder
+            .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography)
             .AddSnippet("""
                 using System.Security.Cryptography;
                 class Testcases
@@ -76,12 +106,12 @@ public class PasswordsShouldBeStoredCorrectlyTest
                     }
                 }
                 """)
-            .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography)
             .Verify();
 
     [TestMethod]
     public void PasswordsShouldBeStoredCorrectly_CS_BouncyCastle_Generate() =>
         Builder
+            .AddReferences(NuGetMetadataReference.BouncyCastle())
             .AddSnippet("""
             using Org.BouncyCastle.Crypto.Generators;
 
@@ -118,12 +148,12 @@ public class PasswordsShouldBeStoredCorrectlyTest
                 }
             }
             """)
-            .AddReferences(NuGetMetadataReference.BouncyCastle())
             .Verify();
 
     [TestMethod]
     public void PasswordsShouldBeStoredCorrectly_CS_BouncyCastle_Init() =>
         Builder
+            .AddReferences(NuGetMetadataReference.BouncyCastle())
             .AddSnippet("""
             using Org.BouncyCastle.Crypto;
             using Org.BouncyCastle.Crypto.Generators;
@@ -144,6 +174,34 @@ public class PasswordsShouldBeStoredCorrectlyTest
                 }
             }
             """)
+            .Verify();
+
+    [TestMethod]
+    public void PasswordsShouldBeStoredCorrectly_CS_BouncyCastle_Generate_SCrypt() =>
+        Builder
             .AddReferences(NuGetMetadataReference.BouncyCastle())
+            .AddSnippet("""
+            using Org.BouncyCastle.Crypto.Generators;
+
+            class Testcases
+            {
+                void Method(byte[] bs, int p)
+                {
+                    SCrypt.Generate(bs, bs, 1 << 12, 8, p, 32);         // Compliant
+
+                    SCrypt.Generate(bs, bs, 1 << 11, 42, p, 42);        // Noncompliant {{Use a cost factor of at least 2 ^ 12 for N here.}}
+                    //                      ^^^^^^^
+                    SCrypt.Generate(bs, bs, 1 << 12, 7, p, 42);         // Noncompliant {{Use a memory factor of at least 8 for r here.}}
+                    //                               ^
+                    SCrypt.Generate(bs, bs, 1 << 12, 42, p, 31);        // Noncompliant {{Use an output length of at least 32 for dkLen here.}}
+                    //                                      ^^
+
+                    SCrypt.Generate(bs, bs, 1 << 11, 7, p, 31);
+                    //                      ^^^^^^^ {{Use a cost factor of at least 2 ^ 12 for N here.}}
+                    //                               ^ @-1 {{Use a memory factor of at least 8 for r here.}}
+                    //                                     ^^ @-2 {{Use an output length of at least 32 for dkLen here.}}
+                }
+            }
+            """)
             .Verify();
 }
