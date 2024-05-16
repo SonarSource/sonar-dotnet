@@ -81,7 +81,7 @@ End Class").Should().BeEquivalentTo(new[] { 1, 2, 3, 4, 5, 6, 7, 8 });
             var tree = compilation.SyntaxTrees.SingleOrDefault(x => x.FilePath == "File.razor.g.cs");
             var semanticModel = compilation.GetSemanticModel(tree);
             var lineNumbers = new Metrics.CSharp.CSharpMetrics(tree, semanticModel).CodeLines;
-            lineNumbers.Should().BeEquivalentTo([1, 4, 2]); // Line number for is outside the range of the file
+            lineNumbers.Should().BeEquivalentTo([1, 4, 2]); // Line number 4 is outside the range of the file
         }
 
         [TestMethod]
