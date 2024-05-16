@@ -21,7 +21,7 @@
 using System.IO;
 using System.Xml.Linq;
 using Microsoft.CodeAnalysis.Text;
-using Moq;
+using NSubstitute;
 using SonarAnalyzer.AnalysisContext;
 using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 
@@ -30,7 +30,7 @@ namespace SonarAnalyzer.TestFramework.Common;
 public static class AnalysisScaffolding
 {
     public static SonarAnalysisContext CreateSonarAnalysisContext() =>
-        new(Mock.Of<RoslynAnalysisContext>(), ImmutableArray<DiagnosticDescriptor>.Empty);
+        new(Substitute.For<RoslynAnalysisContext>(), ImmutableArray<DiagnosticDescriptor>.Empty);
 
     public static AnalyzerOptions CreateOptions() =>
         new(ImmutableArray<AdditionalText>.Empty);
@@ -43,10 +43,10 @@ public static class AnalysisScaffolding
 
     public static AnalyzerOptions CreateOptions(string relativePath, SourceText text)
     {
-        var additionalText = new Mock<AdditionalText>();
-        additionalText.Setup(x => x.Path).Returns(relativePath);
-        additionalText.Setup(x => x.GetText(default)).Returns(text);
-        return new AnalyzerOptions(ImmutableArray.Create(additionalText.Object));
+        var additionalText = Substitute.For<AdditionalText>();
+        additionalText.Path.Returns(relativePath);
+        additionalText.GetText(default).Returns(text);
+        return new AnalyzerOptions(ImmutableArray.Create(additionalText));
     }
 
     public static DiagnosticDescriptor CreateDescriptorMain(string id = "Sxxxx") =>

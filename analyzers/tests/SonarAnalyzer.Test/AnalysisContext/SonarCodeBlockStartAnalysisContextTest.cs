@@ -19,7 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp;
-using Moq;
+using NSubstitute;
 using SonarAnalyzer.AnalysisContext;
 
 namespace SonarAnalyzer.Test.AnalysisContext;
@@ -32,10 +32,10 @@ public class SonarCodeBlockStartAnalysisContextTest
     {
         var cancel = new CancellationToken(true);
         var codeBlock = SyntaxFactory.Block();
-        var owningSymbol = Mock.Of<ISymbol>();
-        var model = Mock.Of<SemanticModel>();
+        var owningSymbol = Substitute.For<ISymbol>();
+        var model = Substitute.For<SemanticModel>();
         var options = AnalysisScaffolding.CreateOptions();
-        var context = new Mock<CodeBlockStartAnalysisContext<SyntaxKind>>(codeBlock, owningSymbol, model, options, cancel).Object;
+        var context = Substitute.For<CodeBlockStartAnalysisContext<SyntaxKind>>(codeBlock, owningSymbol, model, options, cancel);
         var sut = new SonarCodeBlockStartAnalysisContext<SyntaxKind>(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
         sut.Compilation.Should().BeSameAs(model.Compilation);

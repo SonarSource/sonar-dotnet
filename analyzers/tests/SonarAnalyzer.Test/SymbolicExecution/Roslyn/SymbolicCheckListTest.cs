@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Moq;
+using NSubstitute;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.Test.TestFramework.SymbolicExecution;
 
@@ -34,36 +34,36 @@ public class SymbolicCheckListTest
     [TestMethod]
     public void Notifications_ExecutedForAll()
     {
-        var a = new Mock<SymbolicCheck>();
-        var b = new Mock<SymbolicCheck>();
-        var context = new SymbolicContext(null, default, ProgramState.Empty, false, Array.Empty<ISymbol>());
-        a.Setup(x => x.PreProcess(context)).Returns(new[] { context.State });
-        a.Setup(x => x.PostProcess(context)).Returns(new[] { context.State });
-        var sut = new SymbolicCheckList(new[] { a.Object, b.Object });
+        var a = Substitute.For<SymbolicCheck>();
+        var b = Substitute.For<SymbolicCheck>();
+        var context = new SymbolicContext(null, default, ProgramState.Empty, false, []);
+        a.PreProcess(context).Returns([context.State]);
+        a.PostProcess(context).Returns([context.State]);
+        var sut = new SymbolicCheckList([a, b]);
 
-        a.Verify(x => x.ExitReached(context), Times.Never);
-        b.Verify(x => x.ExitReached(context), Times.Never);
+        a.DidNotReceive().ExitReached(context);
+        b.DidNotReceive().ExitReached(context);
         sut.ExitReached(context);
-        a.Verify(x => x.ExitReached(context), Times.Once);
-        b.Verify(x => x.ExitReached(context), Times.Once);
+        a.Received(1).ExitReached(context);
+        b.Received(1).ExitReached(context);
 
-        a.Verify(x => x.ExecutionCompleted(), Times.Never);
-        b.Verify(x => x.ExecutionCompleted(), Times.Never);
+        a.DidNotReceive().ExecutionCompleted();
+        b.DidNotReceive().ExecutionCompleted();
         sut.ExecutionCompleted();
-        a.Verify(x => x.ExecutionCompleted(), Times.Once);
-        b.Verify(x => x.ExecutionCompleted(), Times.Once);
+        a.Received(1).ExecutionCompleted();
+        b.Received(1).ExecutionCompleted();
 
-        a.Verify(x => x.PreProcess(context), Times.Never);
-        b.Verify(x => x.PreProcess(context), Times.Never);
+        a.DidNotReceive().PreProcess(context);
+        b.DidNotReceive().PreProcess(context);
         sut.PreProcess(context);
-        a.Verify(x => x.PreProcess(context), Times.Once);
-        b.Verify(x => x.PreProcess(context), Times.Once);
+        a.Received(1).PreProcess(context);
+        b.Received(1).PreProcess(context);
 
-        a.Verify(x => x.PostProcess(context), Times.Never);
-        b.Verify(x => x.PostProcess(context), Times.Never);
+        a.DidNotReceive().PostProcess(context);
+        b.DidNotReceive().PostProcess(context);
         sut.PostProcess(context);
-        a.Verify(x => x.PostProcess(context), Times.Once);
-        b.Verify(x => x.PostProcess(context), Times.Once);
+        a.Received(1).PostProcess(context);
+        b.Received(1).PostProcess(context);
     }
 
     [TestMethod]

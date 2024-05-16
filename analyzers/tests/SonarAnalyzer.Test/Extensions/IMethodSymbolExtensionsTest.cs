@@ -19,7 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Moq;
+using NSubstitute;
 using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.Test.Extensions;
@@ -133,11 +133,11 @@ public class IMethodSymbolExtensionsTest
     [DataRow(MethodKind.UserDefinedOperator, "operator")]
     public void GetClassification_Method(MethodKind methodKind, string expected)
     {
-        var symbol = new Mock<IMethodSymbol>();
-        symbol.Setup(x => x.Kind).Returns(SymbolKind.Method);
-        symbol.Setup(x => x.MethodKind).Returns(methodKind);
+        var symbol = Substitute.For<IMethodSymbol>();
+        symbol.Kind.Returns(SymbolKind.Method);
+        symbol.MethodKind.Returns(methodKind);
 
-        symbol.Object.GetClassification().Should().Be(expected);
+        symbol.GetClassification().Should().Be(expected);
     }
 
     [DataTestMethod]

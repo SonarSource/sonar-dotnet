@@ -23,7 +23,7 @@ extern alias vbnet;
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
-using Moq;
+using NSubstitute;
 using SonarAnalyzer.AnalysisContext;
 using CS = csharp::SonarAnalyzer.Extensions.SonarAnalysisContextExtensions;
 using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
@@ -493,12 +493,12 @@ public partial class SonarAnalysisContextTest
 
     private static CompilationStartAnalysisContext MockCompilationStartAnalysisContext(DummyAnalysisContext context)
     {
-        var mock = new Mock<CompilationStartAnalysisContext>(context.Model.Compilation, context.Options, CancellationToken.None);
-        mock.Setup(x => x.RegisterSyntaxNodeAction(It.IsAny<Action<SyntaxNodeAnalysisContext>>(), It.IsAny<ImmutableArray<SyntaxKind>>()))
-            .Callback<Action<SyntaxNodeAnalysisContext>, ImmutableArray<SyntaxKind>>((action, _) => action(context.CreateSyntaxNodeAnalysisContext())); // Invoke to call RegisterSyntaxTreeAction
-        mock.Setup(x => x.RegisterSyntaxTreeAction(It.IsAny<Action<SyntaxTreeAnalysisContext>>()))
-            .Callback<Action<SyntaxTreeAnalysisContext>>(x => x(new SyntaxTreeAnalysisContext(context.Tree, context.Options, _ => { }, _ => true, default)));
-        return mock.Object;
+        var mock = Substitute.For<CompilationStartAnalysisContext>(context.Model.Compilation, context.Options, CancellationToken.None);
+        mock.When(x => x.RegisterSyntaxNodeAction(Arg.Any<Action<SyntaxNodeAnalysisContext>>(), Arg.Any<ImmutableArray<SyntaxKind>>()))
+            .Do(x => x.Arg<Action<SyntaxNodeAnalysisContext>>()(context.CreateSyntaxNodeAnalysisContext()));    // Invoke to call RegisterSyntaxTreeAction
+        mock.When(x => x.RegisterSyntaxTreeAction(Arg.Any<Action<SyntaxTreeAnalysisContext>>()))
+            .Do(x => x.Arg<Action<SyntaxTreeAnalysisContext>>()(new SyntaxTreeAnalysisContext(context.Tree, context.Options, _ => { }, _ => true, default)));
+        return mock;
     }
 
     private sealed class DummyAnalysisContext : RoslynAnalysisContext
@@ -592,20 +592,19 @@ public partial class SonarAnalysisContextTest
         public override void RegisterCompilationEndAction(Action<CompilationAnalysisContext> action)
         {
             compilationEndCount++;
-            action(new CompilationAnalysisContext(context.Model.Compilation, context.Options, reportDiagnostic: x => RaisedDiagnostic = x, isSupportedDiagnostic: _ => true, CancellationToken.None));
+            action(new CompilationAnalysisContext(context.Model.Compilation, context.Options, reportDiagnostic: x => RaisedDiagnostic = x, isSupportedDiagnostic: _ => true, default));
         }
 
         public override void RegisterSemanticModelAction(Action<SemanticModelAnalysisContext> action)
         {
             semanticModelCount++;
-            action(new SemanticModelAnalysisContext(context.Model, context.Options, reportDiagnostic: x => RaisedDiagnostic = x, isSupportedDiagnostic: _ => true, CancellationToken.None));
+            action(new SemanticModelAnalysisContext(context.Model, context.Options, reportDiagnostic: x => RaisedDiagnostic = x, isSupportedDiagnostic: _ => true, default));
         }
 
         public override void RegisterSymbolAction(Action<SymbolAnalysisContext> action, ImmutableArray<SymbolKind> symbolKinds)
         {
             symbolCount++;
-            action(new SymbolAnalysisContext(Mock.Of<ISymbol>(), context.Model.Compilation, context.Options,
-                reportDiagnostic: x => RaisedDiagnostic = x, isSupportedDiagnostic: _ => true, CancellationToken.None));
+            action(new SymbolAnalysisContext(Substitute.For<ISymbol>(), context.Model.Compilation, context.Options, x => RaisedDiagnostic = x, _ => true, default));
         }
 
         public override void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, ImmutableArray<TLanguageKindEnum> syntaxKinds) =>
@@ -616,8 +615,8 @@ public partial class SonarAnalysisContextTest
 
         public override void RegisterSymbolStartAction(Action<SymbolStartAnalysisContext> action, SymbolKind symbolKind)
         {
-            var symbolStartAnalysisContext = new Mock<SymbolStartAnalysisContext>(Mock.Of<ISymbol>(), context.Model.Compilation, context.Options, CancellationToken.None);
-            action(symbolStartAnalysisContext.Object);
+            var symbolStartAnalysisContext = Substitute.For<SymbolStartAnalysisContext>(Substitute.For<ISymbol>(), context.Model.Compilation, context.Options, default);
+            action(symbolStartAnalysisContext);
         }
     }
 

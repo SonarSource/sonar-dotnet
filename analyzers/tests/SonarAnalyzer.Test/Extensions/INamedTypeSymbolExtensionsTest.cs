@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Moq;
+using NSubstitute;
 using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.Test.Extensions;
@@ -48,24 +48,24 @@ public class INamedTypeSymbolExtensionsTest
     [DataRow(TypeKind.Unknown, "unknown")]
     public void GetClassification_NamedTypes(TypeKind typeKind, string expected)
     {
-        var symbol = new Mock<INamedTypeSymbol>();
-        symbol.Setup(x => x.Kind).Returns(SymbolKind.NamedType);
-        symbol.Setup(x => x.TypeKind).Returns(typeKind);
-        symbol.Setup(x => x.IsRecord).Returns(false);
+        var symbol = Substitute.For<INamedTypeSymbol>();
+        symbol.Kind.Returns(SymbolKind.NamedType);
+        symbol.TypeKind.Returns(typeKind);
+        symbol.IsRecord.Returns(false);
 
-        symbol.Object.GetClassification().Should().Be(expected);
+        symbol.GetClassification().Should().Be(expected);
     }
 
     [TestMethod]
     public void GetClassification_NamedType_Unknown()
     {
-        var symbol = new Mock<INamedTypeSymbol>();
-        symbol.Setup(x => x.Kind).Returns(SymbolKind.NamedType);
-        symbol.Setup(x => x.TypeKind).Returns((TypeKind)255);
+        var symbol = Substitute.For<INamedTypeSymbol>();
+        symbol.Kind.Returns(SymbolKind.NamedType);
+        symbol.TypeKind.Returns((TypeKind)255);
 #if DEBUG
-        new Action(() => symbol.Object.GetClassification()).Should().Throw<NotSupportedException>();
+        new Action(() => symbol.GetClassification()).Should().Throw<NotSupportedException>();
 #else
-        symbol.Object.GetClassification().Should().Be("type");
+        symbol.GetClassification().Should().Be("type");
 #endif
     }
 
@@ -74,11 +74,11 @@ public class INamedTypeSymbolExtensionsTest
     [DataRow(TypeKind.Struct, "record struct")]
     public void GetClassification_Record(TypeKind typeKind, string expected)
     {
-        var symbol = new Mock<INamedTypeSymbol>();
-        symbol.Setup(x => x.Kind).Returns(SymbolKind.NamedType);
-        symbol.Setup(x => x.TypeKind).Returns(typeKind);
-        symbol.Setup(x => x.IsRecord).Returns(true);
+        var symbol = Substitute.For<INamedTypeSymbol>();
+        symbol.Kind.Returns(SymbolKind.NamedType);
+        symbol.TypeKind.Returns(typeKind);
+        symbol.IsRecord.Returns(true);
 
-        symbol.Object.GetClassification().Should().Be(expected);
+        symbol.GetClassification().Should().Be(expected);
     }
 }

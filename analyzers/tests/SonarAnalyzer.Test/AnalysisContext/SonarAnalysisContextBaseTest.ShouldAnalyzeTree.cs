@@ -20,7 +20,7 @@
 
 using System.Text;
 using Microsoft.CodeAnalysis.Text;
-using Moq;
+using NSubstitute;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -103,11 +103,11 @@ public partial class SonarAnalysisContextBaseTest
     public void ShouldAnalyzeTree_GeneratedFile_ShouldAnalyzeGeneratedProvider_IsCached()
     {
         var sonarLintXml = new DummySourceText(AnalysisScaffolding.GenerateSonarLintXmlContent(analyzeGeneratedCode: true));
-        var additionalText = new Mock<AdditionalText>();
-        additionalText.Setup(x => x.Path).Returns("SonarLint.xml");
-        additionalText.Setup(x => x.GetText(default)).Returns(sonarLintXml);
+        var additionalText = Substitute.For<AdditionalText>();
+        additionalText.Path.Returns("SonarLint.xml");
+        additionalText.GetText(default).Returns(sonarLintXml);
         var tree = CreateDummyCompilation(AnalyzerLanguage.CSharp, OtherFileName).Tree;
-        var sut = CreateSut(new AnalyzerOptions(ImmutableArray.Create(additionalText.Object)));
+        var sut = CreateSut(new AnalyzerOptions(ImmutableArray.Create(additionalText)));
 
         // Call ShouldAnalyzeGenerated multiple times...
         sut.ShouldAnalyzeTree(tree, CSharpGeneratedCodeRecognizer.Instance).Should().BeTrue();
@@ -115,7 +115,7 @@ public partial class SonarAnalysisContextBaseTest
         sut.ShouldAnalyzeTree(tree, CSharpGeneratedCodeRecognizer.Instance).Should().BeTrue();
 
         // GetText should be called every time ShouldAnalyzeGenerated is called...
-        additionalText.Verify(x => x.GetText(It.IsAny<CancellationToken>()), Times.Exactly(3));
+        additionalText.Received(3).GetText(Arg.Any<CancellationToken>());
         sonarLintXml.ToStringCallCount.Should().Be(1); // ... but we should only try to read the file once
     }
 

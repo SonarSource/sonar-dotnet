@@ -21,7 +21,7 @@
 extern alias csharp;
 extern alias vbnet;
 
-using Moq;
+using NSubstitute;
 using SonarAnalyzer.AnalysisContext;
 using ExtensionsCS = csharp::SonarAnalyzer.Extensions.SonarAnalysisContextExtensions;
 using ExtensionsVB = vbnet::SonarAnalyzer.Extensions.SonarAnalysisContextExtensions;
@@ -43,7 +43,7 @@ public class SonarAnalysisContextExtensions
                 public class Sample {}
                 """);
         var wasReported = false;
-        var symbolContext = new SymbolAnalysisContext(Mock.Of<ISymbol>(), model.Compilation, AnalysisScaffolding.CreateOptions(), _ => wasReported = true, _ => true, default);
+        var symbolContext = new SymbolAnalysisContext(Substitute.For<ISymbol>(), model.Compilation, AnalysisScaffolding.CreateOptions(), _ => wasReported = true, _ => true, default);
         var context = new SonarSymbolReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), symbolContext);
         ExtensionsCS.ReportIssue(context, Diagnostic.Create(DummyMainDescriptor, tree.GetRoot().GetLocation()));
 
@@ -61,7 +61,7 @@ public class SonarAnalysisContextExtensions
                 End Class
                 """);
         var wasReported = false;
-        var symbolContext = new SymbolAnalysisContext(Mock.Of<ISymbol>(), model.Compilation, AnalysisScaffolding.CreateOptions(), _ => wasReported = true, _ => true, default);
+        var symbolContext = new SymbolAnalysisContext(Substitute.For<ISymbol>(), model.Compilation, AnalysisScaffolding.CreateOptions(), _ => wasReported = true, _ => true, default);
         var context = new SonarSymbolReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), symbolContext);
         ExtensionsVB.ReportIssue(context, Diagnostic.Create(DummyMainDescriptor, tree.GetRoot().GetLocation()));
 

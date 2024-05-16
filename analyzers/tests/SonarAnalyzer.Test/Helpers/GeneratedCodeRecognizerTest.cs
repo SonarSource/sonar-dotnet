@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Moq;
+using NSubstitute;
 
 namespace SonarAnalyzer.Test.Helpers
 {
@@ -30,61 +30,61 @@ namespace SonarAnalyzer.Test.Helpers
         [DataRow("")]
         public void IsGenerated_WithNullOrEmptyPathAndNullRoot_ReturnsFalse(string path)
         {
-            var syntaxTree = new Mock<SyntaxTree>(MockBehavior.Loose);
-            syntaxTree.Setup(x => x.FilePath).Returns(path);
+            var tree = Substitute.For<SyntaxTree>();
+            tree.FilePath.Returns(path);
 
-            new TestRecognizer().IsGenerated(syntaxTree.Object).Should().BeFalse();
+            new TestRecognizer().IsGenerated(tree).Should().BeFalse();
         }
 
         [DataTestMethod]
-        [DataRow("C:\\SonarSource\\SomeFile.g.cs")]
-        [DataRow("C:\\SonarSource\\SomeFile_razor.g.cs")]
-        [DataRow("C:\\SonarSource\\SomeFile_cshtml.g.cs")]
-        [DataRow("C:\\SonarSource\\SomeFile_razor.ide.g.cs")]
-        [DataRow("C:\\SonarSource\\SomeFile_cshtml.ide.g.cs")]
-        [DataRow("C:\\SonarSource\\SomeFile_RAZOR.g.cS")]
+        [DataRow(@"C:\SonarSource\SomeFile.g.cs")]
+        [DataRow(@"C:\SonarSource\SomeFile_razor.g.cs")]
+        [DataRow(@"C:\SonarSource\SomeFile_cshtml.g.cs")]
+        [DataRow(@"C:\SonarSource\SomeFile_razor.ide.g.cs")]
+        [DataRow(@"C:\SonarSource\SomeFile_cshtml.ide.g.cs")]
+        [DataRow(@"C:\SonarSource\SomeFile_RAZOR.g.cS")]
         public void IsGenerated_GeneratedFiles_ReturnsTrue(string path)
         {
             // GetRoot() cannot be mocked - not virtual, so we use Loose behaviour to return null Root
-            var syntaxTree = new Mock<SyntaxTree>(MockBehavior.Loose);
-            syntaxTree.Setup(x => x.FilePath).Returns(path);
-            new TestRecognizer().IsGenerated(syntaxTree.Object).Should().BeTrue();
+            var tree = Substitute.For<SyntaxTree>();
+            tree.FilePath.Returns(path);
+            new TestRecognizer().IsGenerated(tree).Should().BeTrue();
         }
 
         [TestMethod]
         public void IsGenerated_NonGeneratedPath_ReturnsTrue()
         {
-            var syntaxTree = new Mock<SyntaxTree>(MockBehavior.Loose);
-            syntaxTree.Setup(x => x.FilePath).Returns("C:\\SonarSource\\SomeFile.cs");
-            new TestRecognizer().IsGenerated(syntaxTree.Object).Should().BeFalse();
+            var tree = Substitute.For<SyntaxTree>();
+            tree.FilePath.Returns(@"C:\SonarSource\SomeFile.cs");
+            new TestRecognizer().IsGenerated(tree).Should().BeFalse();
         }
 
         [DataTestMethod]
-        [DataRow("C:\\SonarSource\\SomeFile_razor.g.cs")]
-        [DataRow("C:\\SonarSource\\SomeFile_cshtml.g.cs")]
-        [DataRow("C:\\SonarSource\\SomeFile_RAZOR.g.cS")]
+        [DataRow(@"C:\SonarSource\SomeFile_razor.g.cs")]
+        [DataRow(@"C:\SonarSource\SomeFile_cshtml.g.cs")]
+        [DataRow(@"C:\SonarSource\SomeFile_RAZOR.g.cS")]
         public void IsRazorGeneratedFile_RazorGeneratedFiles_ReturnsTrue(string path)
         {
             // GetRoot() cannot be mocked - not virtual, so we use Loose behaviour to return null Root
-            var syntaxTree = new Mock<SyntaxTree>(MockBehavior.Loose);
-            syntaxTree.Setup(x => x.FilePath).Returns(path);
+            var tree = Substitute.For<SyntaxTree>();
+            tree.FilePath.Returns(path);
 
-            GeneratedCodeRecognizer.IsRazorGeneratedFile(syntaxTree.Object).Should().BeTrue();
+            GeneratedCodeRecognizer.IsRazorGeneratedFile(tree).Should().BeTrue();
         }
 
         [DataTestMethod]
-        [DataRow("C:\\SonarSource\\SomeFile.g.cs")]
-        [DataRow("C:\\SonarSource\\SomeFile_razor.g.cs.randomEnding")]
-        [DataRow("C:\\SonarSource\\SomeFile_cshtml.g.cs.randomEnding")]
-        [DataRow("C:\\SonarSource\\SomeFile_razor.g.ß")]
-        [DataRow("C:\\SonarSource\\SomeFile_razor.ide.g.cs")] // Not considered razor file because of https://github.com/dotnet/razor/issues/9108
-        [DataRow("C:\\SonarSource\\SomeFile_cshtml.ide.g.cs")] // Not considered razor file because of https://github.com/dotnet/razor/issues/9108
+        [DataRow(@"C:\SonarSource\SomeFile.g.cs")]
+        [DataRow(@"C:\SonarSource\SomeFile_razor.g.cs.randomEnding")]
+        [DataRow(@"C:\SonarSource\SomeFile_cshtml.g.cs.randomEnding")]
+        [DataRow(@"C:\SonarSource\SomeFile_razor.g.ß")]
+        [DataRow(@"C:\SonarSource\SomeFile_razor.ide.g.cs")] // Not considered razor file because of https://github.com/dotnet/razor/issues/9108
+        [DataRow(@"C:\SonarSource\SomeFile_cshtml.ide.g.cs")] // Not considered razor file because of https://github.com/dotnet/razor/issues/9108
         public void IsRazorGeneratedFile_NonRazorGeneratedFiles_ReturnsFalse(string path)
         {
-            var syntaxTree = new Mock<SyntaxTree>(MockBehavior.Loose);
-            syntaxTree.Setup(x => x.FilePath).Returns(path);
+            var tree = Substitute.For<SyntaxTree>();
+            tree.FilePath.Returns(path);
 
-            GeneratedCodeRecognizer.IsRazorGeneratedFile(syntaxTree.Object).Should().BeFalse();
+            GeneratedCodeRecognizer.IsRazorGeneratedFile(tree).Should().BeFalse();
         }
 
         [TestMethod]

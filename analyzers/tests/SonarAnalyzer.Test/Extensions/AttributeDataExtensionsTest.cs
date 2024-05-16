@@ -19,8 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Moq;
-using Moq.Protected;
+using NSubstitute;
 using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.Test.Extensions
@@ -226,13 +225,11 @@ namespace SonarAnalyzer.Test.Extensions
         private static AttributeData CompileAttribute(string code, bool ignoreErrors = false) =>
             new SnippetCompiler(code, ignoreErrors, AnalyzerLanguage.CSharp).GetTypeSymbol("Program").GetAttributes().Single(x => x.HasName("MyAttribute"));
 
-        private static AttributeData AttributeDataWithName(string attributeClassName)
+        private static AttributeDataMock AttributeDataWithName(string attributeClassName)
         {
-            var namedType = new Mock<INamedTypeSymbol>();
-            namedType.Setup(x => x.Name).Returns(attributeClassName);
-            var attributeData = new Mock<AttributeData>();
-            attributeData.Protected().Setup<INamedTypeSymbol>("CommonAttributeClass").Returns(namedType.Object);
-            return attributeData.Object;
+            var namedType = Substitute.For<INamedTypeSymbol>();
+            namedType.Name.Returns(attributeClassName);
+            return new AttributeDataMock(namedType);
         }
 
         private static AttributeData AttributeDataWithArguments(Dictionary<string, object> namedArguments = null, Dictionary<string, object> constructorArguments = null)
@@ -271,6 +268,18 @@ namespace SonarAnalyzer.Test.Extensions
                     null => "null",
                     var v => v.ToString(),
                 };
+        }
+
+        private class AttributeDataMock : AttributeData
+        {
+            protected override INamedTypeSymbol CommonAttributeClass { get; }
+            protected override IMethodSymbol CommonAttributeConstructor => throw new NotSupportedException();
+            protected override SyntaxReference CommonApplicationSyntaxReference => throw new NotSupportedException();
+            protected override ImmutableArray<TypedConstant> CommonConstructorArguments => throw new NotSupportedException();
+            protected override ImmutableArray<KeyValuePair<string, TypedConstant>> CommonNamedArguments => throw new NotSupportedException();
+
+            public AttributeDataMock(INamedTypeSymbol commonAttributeClass) =>
+                CommonAttributeClass = commonAttributeClass;
         }
     }
 }
