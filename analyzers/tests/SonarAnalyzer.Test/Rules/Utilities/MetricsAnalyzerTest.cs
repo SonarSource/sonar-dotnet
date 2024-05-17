@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Test.Rules
                     var metrics = messages.Single(x => x.FilePath.EndsWith(RazorFileName));
 
                     metrics.ClassCount.Should().Be(1);
-                    metrics.CodeLine.Should().BeEquivalentTo(new[] { 2, 1, 3, 5, 8, 10, 13, 15, 16, 17, 19, 22, 23, 24, 26, 28, 29, 32, 33, 34, 36, 37, 39, 40, 43 });
+                    metrics.CodeLine.Should().BeEquivalentTo(new[] { 1, 2, 3, 5, 8, 10, 13, 15, 16, 17, 19, 22, 23, 24, 26, 28, 29, 32, 33, 34, 36, 37, 39, 40, 43 });
                     metrics.CognitiveComplexity.Should().Be(3);
                     metrics.Complexity.Should().Be(4);
                     metrics.ExecutableLines.Should().BeEquivalentTo(new[] { 13, 15, 28, 29, 32, 36 });
