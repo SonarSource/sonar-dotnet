@@ -77,5 +77,12 @@ namespace SonarAnalyzer.Test.Common
             AnalyzerLanguage.CSharp.HelpLink("S2222").Should().Be("https://rules.sonarsource.com/csharp/RSPEC-2222");
             AnalyzerLanguage.VisualBasic.HelpLink("S2222").Should().Be("https://rules.sonarsource.com/vbnet/RSPEC-2222");
         }
+
+        [TestMethod]
+        public void HelpLink_StylingRules_IsEmpty()
+        {
+            AnalyzerLanguage.CSharp.HelpLink("T2222").Should().BeNull();
+            AnalyzerLanguage.VisualBasic.HelpLink("T2222").Should().BeNull();
+        }
     }
 }
