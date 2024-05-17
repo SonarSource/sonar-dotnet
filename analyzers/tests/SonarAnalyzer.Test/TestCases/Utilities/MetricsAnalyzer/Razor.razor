@@ -1,8 +1,8 @@
-@page "/razor"                                     // FN: line of code, comment (location mapping issue)
-@namespace RazorNamespace                          // FN: line of code, comment (location mapping issue)
-<p>Current count: @currentCount</p>                <!-- code line, FN: comment -->
+@page "/razor"
+@namespace RazorNamespace
+<p>Current count: @currentCount</p>                <!-- FN: comment -->
 
-@currentCount                                      <!-- code line, FN: comment -->
+@currentCount                                      <!-- FN: comment -->
 
 @code {                                            // FN: line of code (location mapping issue)
     private int currentCount = 0;                  // code line
@@ -14,14 +14,14 @@
 
 @for (var i = 0; i < 5; i++)                       // code line
 {                                                  <!-- code line, FN: comment -->
-    <text>Value: @i</text>                         <!-- code line, FN: comment -->
+    <text>Value: @i</text>                         <!-- FN: comment -->
     <text>test</text>
 }                                                  <!-- code line, FN: comment -->
 
 @{                                                 // FN: code line (location mapping issue)
     void RenderName(string name)                   // code line
     {                                              // code line
-        <p>Name: <strong>@name</strong></p>        <!-- code line, FN: comment -->
+        <p>Name: <strong>@name</strong></p>        <!-- FN: comment -->
         <p>Name: <strong>Hardcoded</strong></p>
     }                                              <!-- code line, FN: comment -->
 
@@ -37,10 +37,10 @@
 {                                                  // code line
     // comment
     @:Name: @i                                     // code line, FN: comment 
-}                                                  <!-- code line, FN: comment -->
+}                                                  <!-- FN: comment,code line -->
 
 <Component>
-    @currentCount                                  <!-- code line, FN: comment -->
+    @currentCount                                  <!-- FN: comment -->
 </Component>
 
 <!-- FN: comment -->
