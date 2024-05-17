@@ -248,6 +248,12 @@ stages:
             FrameworkMoniker: 'net8.0'
 
       steps:
+      - task: UseDotNet@2
+        displayName: Use .NET
+        inputs:
+          packageType: 'sdk'
+          version: 8.0.300
+
       - task: DownloadPipelineArtifact@2
         displayName: 'Download binaries to test'
         inputs:
