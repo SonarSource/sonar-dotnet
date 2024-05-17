@@ -20,13 +20,12 @@
 
 namespace SonarAnalyzer.Analyzers;
 
-public abstract class TrackerHotspotDiagnosticAnalyzer<TSyntaxKind> : HotspotDiagnosticAnalyzer
-    where TSyntaxKind : struct
+public abstract class TrackerHotspotDiagnosticAnalyzer<TSyntaxKind> : HotspotDiagnosticAnalyzer where TSyntaxKind : struct
 {
-    protected DiagnosticDescriptor Rule { get; }
-
     protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
     protected abstract void Initialize(TrackerInput input);
+
+    protected DiagnosticDescriptor Rule { get; }
 
     public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 

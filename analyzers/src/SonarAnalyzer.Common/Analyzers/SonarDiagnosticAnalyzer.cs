@@ -26,9 +26,9 @@ public abstract class SonarDiagnosticAnalyzer : DiagnosticAnalyzer
 {
     public static readonly string EnableConcurrentExecutionVariable = "SONAR_DOTNET_ENABLE_CONCURRENT_EXECUTION";
 
-    protected virtual bool EnableConcurrentExecution => IsConcurrentExecutionEnabled();
-
     protected abstract void Initialize(SonarAnalysisContext context);
+
+    protected virtual bool EnableConcurrentExecution => IsConcurrentExecutionEnabled();
 
     public sealed override void Initialize(RoslynAnalysisContext context)
     {
@@ -44,12 +44,7 @@ public abstract class SonarDiagnosticAnalyzer : DiagnosticAnalyzer
     protected static bool IsConcurrentExecutionEnabled()
     {
         var value = Environment.GetEnvironmentVariable(EnableConcurrentExecutionVariable);
-
-        if (value != null && bool.TryParse(value, out var result))
-        {
-            return result;
-        }
-        return true;
+        return value is null || !bool.TryParse(value, out var result) || result;
     }
 }
 

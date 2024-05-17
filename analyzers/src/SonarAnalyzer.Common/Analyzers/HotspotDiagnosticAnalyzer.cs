@@ -30,6 +30,6 @@ public abstract class HotspotDiagnosticAnalyzer : SonarDiagnosticAnalyzer
     protected bool IsEnabled(AnalyzerOptions options)
     {
         Configuration.Initialize(options);
-        return SupportedDiagnostics.Any(d => Configuration.IsEnabled(d.Id));
+        return SupportedDiagnostics.Any(x => Configuration.IsEnabled(x.Id));
     }
 }
