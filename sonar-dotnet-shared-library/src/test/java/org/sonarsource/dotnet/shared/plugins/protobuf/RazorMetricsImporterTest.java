@@ -25,6 +25,7 @@ import java.util.Collections;
 import org.assertj.core.groups.Tuple;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.event.Level;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
@@ -82,6 +83,7 @@ public class RazorMetricsImporterTest extends RazorImporterTestBase {
     verify(fileLinesContext, times(2)).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 3, 1);
     verify(fileLinesContext, times(2)).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 5, 1);
     verify(fileLinesContext, times(2)).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 5, 1);
+
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 8, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 9, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 13, 1);
@@ -93,5 +95,7 @@ public class RazorMetricsImporterTest extends RazorImporterTestBase {
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 23, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 24, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 25, 1);
+
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly("The code line number was out of the range. File Page.razor, Line 4");
   }
 }

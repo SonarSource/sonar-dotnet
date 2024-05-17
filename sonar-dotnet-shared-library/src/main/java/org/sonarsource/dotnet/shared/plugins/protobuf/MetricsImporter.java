@@ -23,6 +23,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 
 import java.util.function.UnaryOperator;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.measure.Metric;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -40,6 +43,7 @@ public class MetricsImporter extends ProtobufImporter<MetricsInfo> {
   private final SensorContext context;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
+  private static final Logger LOG = LoggerFactory.getLogger(MetricsImporter.class);
 
   public MetricsImporter(SensorContext context, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter,
     UnaryOperator<String> toRealPath) {
@@ -62,8 +66,13 @@ public class MetricsImporter extends ProtobufImporter<MetricsInfo> {
 
     saveMetric(context, inputFile, CoreMetrics.COMMENT_LINES, message.getNonBlankCommentCount());
 
+    int lineCount = inputFile.lines();
     for (int line : message.getCodeLineList()) {
-      fileLinesContext.setIntValue(CoreMetrics.NCLOC_DATA_KEY, line, 1);
+      if (line <= lineCount) {
+        fileLinesContext.setIntValue(CoreMetrics.NCLOC_DATA_KEY, line, 1);
+      } else if (LOG.isDebugEnabled()) {
+        LOG.debug("The code line number was out of the range. File {}, Line {}", inputFile.filename(), line);
+      }
     }
     saveMetric(context, inputFile, CoreMetrics.NCLOC, message.getCodeLineCount());
 
