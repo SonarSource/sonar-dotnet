@@ -1,0 +1,135 @@
+<p>When using <code>SecureRandom</code>, it is important not to use predictable seeds. This class is used to generate cryptographically strong random
+numbers. Using a predictable seed will make its output predictable as well, which counteracts the use case of <code>SecureRandom</code>.</p>
+<h2>Why is this an issue?</h2>
+<p><code>java.security.SecureRandom</code> is often used to generate random values for cryptographic algorithms. When a random number generator is
+used for cryptographic purposes, the generated numbers must be as random and unpredictable as possible. When <code>SecureRandom</code> is improperly
+seeded with a constant or a predictable value, its output will also be predictable.</p>
+<p>This can have severe security implications for cryptographic operations that rely on the randomness of the generated numbers. By using a
+predictable seed, an attacker can potentially guess or deduce the generated numbers, compromising the security of whatever cryptographic algorithm
+relies on <code>SecureRandom</code>.</p>
+<h3>What is the potential impact?</h3>
+<p>It is crucial to understand that the strength of cryptographic algorithms heavily relies on the quality of the random numbers used. By improperly
+seeding the <code>SecureRandom</code> class, we introduce a significant weakness that can be exploited by attackers.</p>
+<h4>Insecure cryptographic keys</h4>
+<p>One of the primary use cases for the <code>SecureRandom</code> class is generating cryptographic keys. If an attacker can predict the seed used to
+initialize the SecureRandom instance, they may be able to derive the same keys. Depending on the use case, this can lead to multiple severe outcomes,
+such as:</p>
+<ul>
+  <li> Being able to decrypt sensitive documents, leading to privacy breaches or identity theft. </li>
+  <li> Gaining access to a private key used for signing, allowing an attacker to forge digital signatures and impersonate legitimate entities. </li>
+  <li> Bypassing authentication mechanisms that rely on public-key infrastructure (PKI), which can be abused to gain unauthorized access to systems or
+  networks. </li>
+</ul>
+<h4>Session hijacking and man-in-the-middle attack</h4>
+<p>Another scenario where this vulnerability can be exploited is in the generation of session tokens or nonces for secure communication protocols. If
+an attacker can predict the seed used to generate these tokens, they can impersonate legitimate users or intercept sensitive information.</p>
+<h2>How to fix it in BouncyCastle</h2>
+<p>BouncyCastle provides several random number generators implementations. Most of these will automatically create unpredictable output.</p>
+<p>The remaining random number generators require seeding with an unpredictable value before they will produce unpredictable outputs. These should be
+seeded with at least 16 bytes of random data to ensure unpredictable output and that the random seed cannot be guessed using a brute-force attack.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p><code>SecureRandom</code> instances created with <code>GetInstance()</code> are seeded by default. Disabling seeding results in predictable
+output.</p>
+<pre data-diff-id="101" data-diff-type="noncompliant">
+using Org.BouncyCastle.Security;
+
+byte[] random = new byte[8];
+
+SecureRandom sr = SecureRandom.GetInstance("SHA256PRNG", false);
+sr.NextBytes(random); // Noncompliant
+</pre>
+<p><code>DigestRandomGenerator</code> and <code>VmpcRandomGenerator</code> instances require seeding before use. Predictable seed values will result
+in predictable outputs.</p>
+<pre data-diff-id="102" data-diff-type="noncompliant">
+using Org.BouncyCastle.Crypto.Digest;
+using Org.BouncyCastle.Crypto.Prng;
+
+byte[] random = new byte[8];
+
+IRandomGenerator digest = new DigestRandomGenerator(new Sha256Digest());
+digest.AddSeedMaterial(Encoding.UTF8.GetBytes("predictable seed value"));
+digest.NextBytes(random); // Noncompliant
+
+IRandomGenerator vmpc = new VmpcRandomGenerator();
+vmpc.AddSeedMaterial(Convert.FromBase64String("2hq9pkyqLQJkrYTrEv1eNw=="));
+vmpc.NextBytes(random); // Noncompliant
+</pre>
+<p>When a <code>SecureRandom</code> is created using an unseeded <code>DigestRandomGenerator</code> and <code>VmpcRandomGenerator</code> instance, the
+<code>SecureRandom</code> will create predictable outputs.</p>
+<pre data-diff-id="103" data-diff-type="noncompliant">
+using Org.BouncyCastle.Crypto.Digest;
+using Org.BouncyCastle.Crypto.Prng;
+using Org.BouncyCastle.Security;
+
+byte[] random = new byte[8];
+
+IRandomGenerator digest = new DigestRandomGenerator(new Sha256Digest());
+SecureRandom sr = new SecureRandom(digest);
+sr.NextBytes(random); // Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<p>Allow <code>SecureRandom.GetInstance()</code> to automatically seed new <code>SecureRandom</code> instances.</p>
+<pre data-diff-id="101" data-diff-type="compliant">
+using Org.BouncyCastle.Security;
+
+byte[] random = new byte[8];
+
+SecureRandom sr = SecureRandom.GetInstance("SHA256PRNG");
+sr.NextBytes(random);
+</pre>
+<p>Use unpredictable values to seed <code>DigestRandomGenerator</code> and <code>VmpcRandomGenerator</code> instances. The
+<code>SecureRandom.GenerateSeed()</code> method is designed for this purpose.</p>
+<pre data-diff-id="102" data-diff-type="compliant">
+using Org.BouncyCastle.Crypto.Digest;
+using Org.BouncyCastle.Crypto.Prng;
+using Org.BouncyCastle.Security;
+
+byte[] random = new byte[8];
+
+IRandomGenerator digest = new DigestRandomGenerator(new Sha256Digest());
+digest.AddSeedMaterial(SecureRandom.GenerateSeed(16));
+digest.NextBytes(random);
+
+IRandomGenerator vmpc = new VmpcRandomGenerator();
+vmpc.AddSeedMaterial(SecureRandom.GenerateSeed(16));
+vmpc.NextBytes(random);
+</pre>
+<p>An overload of the <code>SecureRandom</code> constructor will automatically seed the underlying <code>IRandomGenerator</code> with an unpredictable
+value.</p>
+<pre data-diff-id="103" data-diff-type="compliant">
+using Org.BouncyCastle.Crypto.Digest;
+using Org.BouncyCastle.Crypto.Prng;
+using Org.BouncyCastle.Security;
+
+byte[] random = new byte[8];
+
+IRandomGenerator digest = new DigestRandomGenerator(new Sha256Digest());
+SecureRandom sr = new SecureRandom(digest, 16);
+sr.NextBytes(random);
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Java Documentation - <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/security/SecureRandom.html">Class
+  <code>java.security.SecureRandom</code></a> </li>
+</ul>
+<h3>Standards</h3>
+<ul>
+  <li> OWASP - <a href="https://owasp.org/Top10/A02_2021-Cryptographic_Failures/">Top 10 2021 Category A2 - Cryptographic Failures</a> </li>
+  <li> OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration">Top 10 2017 Category A6 - Security
+  Misconfiguration</a> </li>
+  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/330">CWE-330 - Use of Insufficiently Random Values</a> </li>
+  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/332">CWE-332 - Insufficient Entropy in PRNG</a> </li>
+  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/336">CWE-336 - Same Seed in Pseudo-Random Number Generator (PRNG)</a> </li>
+  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/337">CWE-337 - Predictable Seed in Pseudo-Random Number Generator (PRNG)</a> </li>
+  <li> <a href="https://wiki.sei.cmu.edu/confluence/display/java/MSC63-J.+Ensure+that+SecureRandom+is+properly+seeded">CERT, MSC63J.</a> - Ensure that
+  SecureRandom is properly seeded </li>
+</ul>
+<h2>Implementation Specification</h2>
+<p>(visible only on this page)</p>
+<h3>Message</h3>
+<p>Change this seed value to something unpredictable, or remove the seed.</p>
+<h3>Highlighting</h3>
+<p>The call to SecureRandom.setSeed() or the SecureRandom(byte[]) constructor call</p>
+

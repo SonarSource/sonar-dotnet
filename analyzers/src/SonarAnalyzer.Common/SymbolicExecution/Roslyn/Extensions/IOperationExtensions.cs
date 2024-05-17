@@ -74,6 +74,9 @@ internal static class IOperationExtensions
     internal static IRecursivePatternOperationWrapper? AsRecursivePattern(this IOperation operation) =>
         operation.As(OperationKindEx.RecursivePattern, IRecursivePatternOperationWrapper.FromOperation);
 
+    internal static IArrayElementReferenceOperationWrapper? AsArrayElementReference(this IOperation operation) =>
+        operation.As(OperationKindEx.ArrayElementReference, IArrayElementReferenceOperationWrapper.FromOperation);
+
     internal static ITupleOperationWrapper? AsTuple(this IOperation operation) =>
         operation.As(OperationKindEx.Tuple, ITupleOperationWrapper.FromOperation);
 

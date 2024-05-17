@@ -1,0 +1,43 @@
+{
+  "title": "\"SecureRandom\" seeds should not be predictable",
+  "type": "VULNERABILITY",
+  "code": {
+    "impacts": {
+      "SECURITY": "HIGH"
+    },
+    "attribute": "LOGICAL"
+  },
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "cwe",
+    "pitfall"
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-4347",
+  "sqKey": "S4347",
+  "scope": "Main",
+  "securityStandards": {
+    "CWE": [
+      330,
+      332,
+      336,
+      337
+    ],
+    "OWASP": [
+      "A6"
+    ],
+    "OWASP Top 10 2021": [
+      "A2"
+    ],
+    "ASVS 4.0": [
+      "2.3.1",
+      "2.6.2",
+      "2.9.2"
+    ]
+  },
+  "quickfix": "unknown"
+}
