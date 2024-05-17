@@ -58,7 +58,7 @@ public sealed class PasswordsShouldBeStoredCorrectly : SonarDiagnosticAnalyzer
             "Identity v2 uses only 1000 iterations. Consider changing to identity V3.",
             propertyTracker.MatchSetter(),
             propertyTracker.MatchProperty(new MemberDescriptor(KnownType.Microsoft_AspNetCore_Identity_PasswordHasherOptions, "CompatibilityMode")),
-            x => propertyTracker.AssignedValue(x) is int mode && mode == 0); // PasswordHasherCompatibilityMode.IdentityV2 results to 0
+            x => propertyTracker.AssignedValue(x) is 0); // PasswordHasherCompatibilityMode.IdentityV2 results to 0
 
         var argumentTracker = CSharpFacade.Instance.Tracker.Argument;
         Track(
@@ -109,6 +109,15 @@ public sealed class PasswordsShouldBeStoredCorrectly : SonarDiagnosticAnalyzer
             "Use at least 100,000 iterations and a state-of-the-art digest algorithm here.",
             objectCreationTracker.MatchConstructor(KnownType.System_Security_Cryptography_Rfc2898DeriveBytes),
             x => x.InvokedConstructorSymbol.Value.Parameters.All(x => x.Name != "hashAlgorithm"));
+
+        var propertyTracker = CSharpFacade.Instance.Tracker.PropertyAccess;
+        Track(
+            propertyTracker,
+            context,
+            UseMoreIterationsMessageFormat,
+            propertyTracker.MatchSetter(),
+            propertyTracker.MatchProperty(new MemberDescriptor(KnownType.System_Security_Cryptography_Rfc2898DeriveBytes, "IterationCount")),
+            x => HasFewIterations(x, propertyTracker));
     }
 
     private static void BouncyCastle(SonarAnalysisContext context)
@@ -149,8 +158,7 @@ public sealed class PasswordsShouldBeStoredCorrectly : SonarDiagnosticAnalyzer
     }
 
     private static bool HasFewIterations(PropertyAccessContext context, PropertyAccessTracker<SyntaxKind> tracker) =>
-        tracker.AssignedValue(context) is int iterationCount
-        && iterationCount < IterationCountThreshold;
+        tracker.AssignedValue(context) is < IterationCountThreshold;
 
     private static bool ArgumentLessThan(ArgumentContext context, int threshold) =>
         context.SemanticModel.GetConstantValue(((ArgumentSyntax)context.Node).Expression) is { HasValue: true, Value: int value }

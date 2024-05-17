@@ -80,7 +80,7 @@ public class PasswordsShouldBeStoredCorrectlyTest
                 {
                     const int ITERATIONS = 100_000;
 
-                    void Method(int iterations, byte[] bs)
+                    void Method(int iterations, byte[] bs, HashAlgorithmName han)
                     {
                         new Rfc2898DeriveBytes("password", bs);                             // Noncompliant
                         new Rfc2898DeriveBytes("password", 42);                             // Noncompliant
@@ -90,19 +90,35 @@ public class PasswordsShouldBeStoredCorrectlyTest
                     //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                         new Rfc2898DeriveBytes("password", bs, 42);                         // Noncompliant
                         new Rfc2898DeriveBytes("password", 42, 42);                         // Noncompliant
-                        new Rfc2898DeriveBytes(bs, bs, 42, HashAlgorithmName.MD5);          // Noncompliant {{Use at least 100,000 iterations here.}}
+                        new Rfc2898DeriveBytes(bs, bs, 42, han);                            // Noncompliant {{Use at least 100,000 iterations here.}}
                     //                                 ^^
-                        new Rfc2898DeriveBytes("password", bs, 42, HashAlgorithmName.MD5);  // Noncompliant
-                        new Rfc2898DeriveBytes("password", 42, 42, HashAlgorithmName.MD5);  // Noncompliant
+                        new Rfc2898DeriveBytes("password", bs, 42, han);                    // Noncompliant
+                        new Rfc2898DeriveBytes("password", 42, 42, han);                    // Noncompliant
                         new Rfc2898DeriveBytes(bs, bs, ITERATIONS);                         // Noncompliant
                         new Rfc2898DeriveBytes("", bs, ITERATIONS);                         // Noncompliant
                         new Rfc2898DeriveBytes("", 42, ITERATIONS);                         // Noncompliant
                     //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-                        new Rfc2898DeriveBytes(bs, bs, iterations, HashAlgorithmName.SHA1); // Compliant
-                        new Rfc2898DeriveBytes(bs, bs, ITERATIONS, HashAlgorithmName.SHA1); // Compliant
-                        new Rfc2898DeriveBytes("", bs, ITERATIONS, HashAlgorithmName.SHA1); // Compliant
-                        new Rfc2898DeriveBytes("", 42, ITERATIONS, HashAlgorithmName.SHA1); // Compliant
+                        new Rfc2898DeriveBytes(bs, bs, iterations, han);                    // Compliant
+                        new Rfc2898DeriveBytes(bs, bs, ITERATIONS, han);                    // Compliant
+                        new Rfc2898DeriveBytes("", bs, ITERATIONS, han);                    // Compliant
+                        new Rfc2898DeriveBytes("", 42, ITERATIONS, han);                    // Compliant
+
+                        var x = new Rfc2898DeriveBytes(bs, bs, ITERATIONS, han);
+                        x.IterationCount = 1;                                               // Noncompliant {{Use at least 100,000 iterations here.}}
+                    //  ^^^^^^^^^^^^^^^^
+
+                        new Rfc2898DeriveBytes(bs, bs, ITERATIONS, han)
+                        {
+                            IterationCount = 42                                             // Noncompliant {{Use at least 100,000 iterations here.}}
+                    //      ^^^^^^^^^^^^^^
+                        };
+                    }
+
+                    void MakeItUnsafe(Rfc2898DeriveBytes password)
+                    {
+                        password.IterationCount = 1;                                        // Noncompliant {{Use at least 100,000 iterations here.}}
+                    //  ^^^^^^^^^^^^^^^^^^^^^^^
                     }
                 }
                 """)
