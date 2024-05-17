@@ -40,6 +40,7 @@
 
   <ItemGroup>
     <Using Include="SonarAnalyzer.AnalysisContext" />
+    <Using Include="SonarAnalyzer.Analyzers" />
     <Using Include="SonarAnalyzer.Common" />
     <Using Include="SonarAnalyzer.Extensions" />
     <Using Include="SonarAnalyzer.Helpers" />
@@ -47,7 +48,7 @@
     <Using Include="Microsoft.CodeAnalysis" />
     <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <Protobuf Include="Protobuf/AnalyzerReport.proto" />
   </ItemGroup>

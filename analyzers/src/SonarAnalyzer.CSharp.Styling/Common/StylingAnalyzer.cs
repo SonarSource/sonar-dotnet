@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Analyzers;
+
 namespace SonarAnalyzer.CSharp.Styling.Common;
 
 public abstract class StylingAnalyzer : SonarDiagnosticAnalyzer

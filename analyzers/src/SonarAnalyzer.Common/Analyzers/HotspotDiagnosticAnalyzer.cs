@@ -18,12 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer
+namespace SonarAnalyzer.Analyzers
 {
-    internal static class DescriptorFactory
+    public abstract class HotspotDiagnosticAnalyzer : SonarDiagnosticAnalyzer
     {
-        public static DiagnosticDescriptor Create(string id, string messageFormat, bool? isEnabledByDefault = null, bool fadeOutCode = false) =>
-            // RuleCatalog class is created from SonarAnalyzer.SourceGenerator
-            DiagnosticDescriptorFactory.Create(AnalyzerLanguage.VisualBasic, RuleCatalog.Rules[id], messageFormat, isEnabledByDefault, fadeOutCode);
+        protected IAnalyzerConfiguration Configuration { get; }
+
+        protected HotspotDiagnosticAnalyzer(IAnalyzerConfiguration configuration) =>
+            Configuration = configuration;
+
+        protected bool IsEnabled(AnalyzerOptions options)
+        {
+            Configuration.Initialize(options);
+            return SupportedDiagnostics.Any(d => Configuration.IsEnabled(d.Id));
+        }
     }
 }

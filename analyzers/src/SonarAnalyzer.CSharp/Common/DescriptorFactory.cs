@@ -18,22 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Common
 {
-    public abstract class TrackerHotspotDiagnosticAnalyzer<TSyntaxKind> : HotspotDiagnosticAnalyzer
-        where TSyntaxKind : struct
+    internal static class DescriptorFactory
     {
-        protected DiagnosticDescriptor Rule { get; }
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-        protected abstract void Initialize(TrackerInput input);
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-
-        protected TrackerHotspotDiagnosticAnalyzer(IAnalyzerConfiguration configuration, string diagnosticId, string messageFormat) : base(configuration) =>
-            Rule = Language.CreateDescriptor(diagnosticId, messageFormat);
-
-        protected override void Initialize(SonarAnalysisContext context) =>
-            Initialize(new TrackerInput(context, Configuration, Rule));
+        public static DiagnosticDescriptor Create(string id, string messageFormat, bool? isEnabledByDefault = null, bool fadeOutCode = false) =>
+            // RuleCatalog class is created from SonarAnalyzer.SourceGenerator
+            DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp, RuleCatalog.Rules[id], messageFormat, isEnabledByDefault, fadeOutCode);
     }
 }

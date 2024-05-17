@@ -20,7 +20,7 @@
 
 using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Analyzers
 {
     public abstract class SonarDiagnosticAnalyzer : DiagnosticAnalyzer
     {
