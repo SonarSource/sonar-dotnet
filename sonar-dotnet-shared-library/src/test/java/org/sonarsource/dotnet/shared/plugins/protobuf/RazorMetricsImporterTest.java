@@ -69,19 +69,18 @@ public class RazorMetricsImporterTest extends RazorImporterTestBase {
         Tuple.tuple(CoreMetrics.COMMENT_LINES, 0),
         Tuple.tuple(CoreMetrics.COGNITIVE_COMPLEXITY, 1),
         Tuple.tuple(CoreMetrics.CLASSES, 0),
-        Tuple.tuple(CoreMetrics.NCLOC, 13),
-        Tuple.tuple(CoreMetrics.STATEMENTS, 6));
+        Tuple.tuple(CoreMetrics.NCLOC, 14),
+        Tuple.tuple(CoreMetrics.STATEMENTS, 3));
 
     verify(noSonarFilter).noSonarInFile(inputFile, Collections.emptySet());
 
-    verify(fileLinesContext).setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, 3, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, 5, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, 8, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, 13, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, 23, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, 24, 1);
 
+    verify(fileLinesContext, times(4)).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 1, 1);
     verify(fileLinesContext, times(2)).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 3, 1);
+    verify(fileLinesContext, times(2)).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 5, 1);
     verify(fileLinesContext, times(2)).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 5, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 8, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 9, 1);

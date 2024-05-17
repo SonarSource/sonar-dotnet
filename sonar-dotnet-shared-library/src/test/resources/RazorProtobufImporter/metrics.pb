@@ -1,4 +1,5 @@
-L
-EC:\Users\martin.strecker\Desktop\WebAss\OverlapSymbolReferences.razor8rU
-3C:\Users\martin.strecker\Desktop\WebAss\Cases.razor 8r	x‚A
-2C:\Users\martin.strecker\Desktop\WebAss\Program.cs 8r
+q
+hC:\src\work\sonar-dotnet\sonar-dotnet-shared-library\src\test\resources\RazorProtobufImporter\Page.razor8r‚
+{C:\src\work\sonar-dotnet\sonar-dotnet-shared-library\src\test\resources\RazorProtobufImporter\OverlapSymbolReferences.razor8r‰
+iC:\src\work\sonar-dotnet\sonar-dotnet-shared-library\src\test\resources\RazorProtobufImporter\Cases.razor 8r	x‚w
+hC:\src\work\sonar-dotnet\sonar-dotnet-shared-library\src\test\resources\RazorProtobufImporter\Program.cs 8r

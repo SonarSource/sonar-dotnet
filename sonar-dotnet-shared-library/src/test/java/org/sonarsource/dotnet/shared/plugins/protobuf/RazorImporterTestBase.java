@@ -44,6 +44,7 @@ public class RazorImporterTestBase {
   protected DefaultInputFile CasesInputFile;
   protected DefaultInputFile OverlapSymbolReferencesInputFile;
   protected DefaultInputFile ProgramInputFile;
+  protected DefaultInputFile PageRazorFile;
 
   protected static String fileName(String filePath) {
     return Paths.get(filePath).getFileName().toString();
@@ -53,6 +54,7 @@ public class RazorImporterTestBase {
   public void setUp() throws FileNotFoundException {
     logTester.setLevel(Level.TRACE);
     CasesInputFile = addTestFileToContext("Cases.razor");
+    PageRazorFile = addTestFileToContext("Page.razor");
     OverlapSymbolReferencesInputFile = addTestFileToContext("OverlapSymbolReferences.razor");
     ProgramInputFile = addTestFileToContext("Program.cs");
   }

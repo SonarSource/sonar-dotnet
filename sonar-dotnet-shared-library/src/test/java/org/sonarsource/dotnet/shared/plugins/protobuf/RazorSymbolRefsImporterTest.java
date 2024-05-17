@@ -55,24 +55,18 @@ public class RazorSymbolRefsImporterTest extends RazorImporterTestBase {
     assertThat(sensorContext.referencesForSymbolAt(inputFile.key(), 19, 15)).hasSize(3);
     assertThat(sensorContext.referencesForSymbolAt(inputFile.key(), 21, 17)).isEmpty();
 
-    assertThat(logTester.logs(Level.DEBUG)).containsExactly(
-      "The declaration token at Range[from [line=1, lineOffset=0] to [line=1, lineOffset=17]] overlaps with the referencing token Range[from [line=1, lineOffset=6] to [line=1, lineOffset=23]] in file OverlapSymbolReferences.razor");
+    assertThat(logTester.logs(Level.DEBUG)).isEmpty();
   }
 
   @Test
   public void test_symbol_refs_get_imported_overlapSymbolReferences() {
-
     var inputFile = OverlapSymbolReferencesInputFile;
     var sut = new SymbolRefsImporter(sensorContext, s -> Paths.get(s).getFileName().toString());
     sut.accept(protobuf.toPath());
     sut.save();
 
-    var references = sensorContext.referencesForSymbolAt(inputFile.key(), 1, 1);
-    assertThat(references)
-      .isNotNull() // The symbol declaration can be found,
-      .isEmpty();  // but there are no references, due to the overlap.
-
-    assertThat(logTester.logs(Level.DEBUG)).containsExactly(
-      "The declaration token at Range[from [line=1, lineOffset=0] to [line=1, lineOffset=17]] overlaps with the referencing token Range[from [line=1, lineOffset=6] to [line=1, lineOffset=23]] in file OverlapSymbolReferences.razor");
+    // the issue with overlapping symbols has been fixed in dotnet 8.0.5
+    assertThat(sensorContext.referencesForSymbolAt(inputFile.key(), 1, 11)).hasSize(1);
+    assertThat(logTester.logs(Level.DEBUG)).isEmpty();
   }
 }
