@@ -34,6 +34,7 @@ namespace SonarAnalyzer.Test.Rules
         private const string RazorFileName = "Razor.razor";
         private const string CsHtmlFileName = "Razor.cshtml";
         private const string CSharp12FileName = "Metrics.CSharp12.cs";
+        private const string ImportsRazorFileName = "_Imports.razor";
 
         public TestContext TestContext { get; set; }
 
@@ -77,6 +78,27 @@ namespace SonarAnalyzer.Test.Rules
                     metrics.NoSonarComment.Should().BeEmpty();
                     metrics.NonBlankComment.Should().BeEquivalentTo(new[] { 7, 8, 10, 15, 21, 22, 23, 28, 29, 32, 33, 36, 37, 38 });
                     metrics.StatementCount.Should().Be(6);
+                });
+
+        [TestMethod]
+        public void VerifyMetrics_Razor_Usings() =>
+            CreateBuilder(false, ImportsRazorFileName)
+                .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
+                {
+                    var orderedMessages = messages.OrderBy(x => x.FilePath, StringComparer.InvariantCulture).ToArray();
+                    orderedMessages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo(ImportsRazorFileName);
+
+                    var metrics = messages.Single(x => x.FilePath.EndsWith(ImportsRazorFileName));
+
+                    metrics.ClassCount.Should().Be(0);
+                    metrics.CodeLine.Should().BeEquivalentTo(new[] { 1, 2, 4 });  // FN: this file has only 3 lines. See: https://github.com/SonarSource/sonar-dotnet/issues/9288
+                    metrics.CognitiveComplexity.Should().Be(0);
+                    metrics.Complexity.Should().Be(1);
+                    metrics.ExecutableLines.Should().BeEquivalentTo(Array.Empty<int>());
+                    metrics.FunctionCount.Should().Be(0);
+                    metrics.NoSonarComment.Should().BeEmpty();
+                    metrics.NonBlankComment.Should().BeEquivalentTo(Array.Empty<int>());
+                    metrics.StatementCount.Should().Be(0);
                 });
 
         [TestMethod]
