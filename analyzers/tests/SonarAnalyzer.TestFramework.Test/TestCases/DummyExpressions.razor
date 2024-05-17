@@ -1,8 +1,8 @@
 ﻿<p>Explicit expression: @(RaiseHere())</p> @* Noncompliant, wrong location*@
-@*                      ^^^^^^^^^ *@
+@*                        ^^^^^^^^^ *@
 
 <p>Implicit expression: @RaiseHere()</p> @* Noncompliant, wrong location *@
-@*                      ^^^^^^^^^ *@
+@*                       ^^^^^^^^^ *@
 
 <p>Multi-statement block: @{ var result = RaiseHere(); }</p>
 @*                                        ^^^^^^^^^ *@
@@ -17,7 +17,7 @@
 @*                 ^^^^^^^^^ *@
 
 <p>Lambda expression: @((Func<int>)(() => RaiseHere()))()</p> @* Noncompliant, wrong location *@
-@*                                         ^^^^^^^^^ *@
+@*                                        ^^^^^^^^^ *@
 
 <p>Nested multi-statement block: @{ var result2 = RaiseHere(); var result3 = RaiseHere(); }</p>
 @*                                                ^^^^^^^^^ *@
@@ -25,7 +25,7 @@
 
 <p>Nested control structures: @if(RaiseHere() == 42) { <text>@(RaiseHere() + 1)</text> }</p> @* second issue has wrong location *@
 @*                                ^^^^^^^^^ *@
-@*                       ^^^^^^^^^@-1 *@
+@*                                                             ^^^^^^^^^@-1 *@
 
 @code
 {

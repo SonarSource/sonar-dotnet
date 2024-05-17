@@ -893,14 +893,14 @@ class Program
 @page "/razor"
 @using TestCases
 
-<p>Current count: @currentCount</p>     <!-- +1 -->
+<p>Current count: @currentCount</p>     <!-- Not counted -->
 
-@currentCount                           <!-- +1 -->
+@currentCount                           <!-- Not counted -->
 
 @code {
     private int currentCount = 0;
 }
-""", RazorFile, 4, 6);
+""", RazorFile);
 
         [TestMethod]
         public void GetLineNumbers_Razor_MethodReferenceAndCall() =>
@@ -927,13 +927,13 @@ class Program
         [TestMethod]
         public void GetLineNumbers_Razor_PropertyReference() =>
             AssertLineNumbersOfExecutableLinesRazor("""
-@IncrementAmount <!-- +1 -->
+@IncrementAmount <!-- Not counted -->
 
 @code {
     [Parameter]
     public int IncrementAmount { get; set; } = 1;
 }
-""", RazorFile, 1);
+""", RazorFile);
 
         [TestMethod]
         public void GetLineNumbers_Razor_Html() =>

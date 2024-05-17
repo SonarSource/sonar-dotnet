@@ -26,7 +26,7 @@ namespace SonarAnalyzer.TestFramework.Common;
 public static class SourceGeneratorProvider
 {
     private static readonly string RazorSourceGeneratorPath =
-        Path.Combine(LatestSdkFolder(), "Sdks", "Microsoft.NET.Sdk.Razor", "source-generators", "Microsoft.CodeAnalysis.Razor.Compiler.SourceGenerators.dll");
+        Path.Combine(LatestSdkFolder(), "Sdks", "Microsoft.NET.Sdk.Razor", "source-generators", "Microsoft.CodeAnalysis.Razor.Compiler.dll");
 
     public static AnalyzerFileReference[] SourceGenerators { get; } =
     [
