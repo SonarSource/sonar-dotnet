@@ -33,8 +33,10 @@ namespace Repro9275
         [Custom]                                      // Noncompliant repro for https://github.com/SonarSource/sonar-dotnet/issues/9282
         public int ValuePropertyAnnotatedWithCustomAttribute { get; set; }
 
-        [JsonRequired]                                // Noncompliant - FP because the attribute is annotated with JsonRequiredAttribute
+        [JsonRequired]                                // Noncompliant - FP because the property is annotated with JsonRequiredAttribute
         public int AnotherValueProperty { get; set; }
+
+        public required int RequiredProperty { get; set; } // Noncompliant - FP because the property has the required modifier
     }
 
     public class DerivedFromController : Controller
