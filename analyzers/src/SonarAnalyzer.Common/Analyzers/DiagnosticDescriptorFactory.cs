@@ -18,67 +18,66 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Analyzers
+namespace SonarAnalyzer.Analyzers;
+
+public static class DiagnosticDescriptorFactory
 {
-    public static class DiagnosticDescriptorFactory
+    public static readonly string SonarWayTag = "SonarWay";
+    public static readonly string UtilityTag = "Utility";
+    public static readonly string MainSourceScopeTag = "MainSourceScope";
+    public static readonly string TestSourceScopeTag = "TestSourceScope";
+
+    public static DiagnosticDescriptor CreateUtility(string diagnosticId, string title) =>
+        new(diagnosticId,
+            title,
+            string.Empty,
+            string.Empty,
+            DiagnosticSeverity.Warning,
+            isEnabledByDefault: true,
+            customTags: BuildUtilityTags());
+
+    public static DiagnosticDescriptor Create(AnalyzerLanguage language, RuleDescriptor rule, string messageFormat, bool? isEnabledByDefault, bool fadeOutCode) =>
+        new(rule.Id,
+            rule.Title,
+            messageFormat,
+            rule.Category,
+            fadeOutCode ? DiagnosticSeverity.Info : DiagnosticSeverity.Warning,
+            rule.IsHotspot || (isEnabledByDefault ?? rule.SonarWay),
+            rule.Description,
+            language.HelpLink(rule.Id),
+            BuildTags(language, rule, fadeOutCode));
+
+    private static string[] BuildTags(AnalyzerLanguage language, RuleDescriptor rule, bool fadeOutCode)
     {
-        public static readonly string SonarWayTag = "SonarWay";
-        public static readonly string UtilityTag = "Utility";
-        public static readonly string MainSourceScopeTag = "MainSourceScope";
-        public static readonly string TestSourceScopeTag = "TestSourceScope";
+        var tags = new List<string> { language.LanguageName };
+        tags.AddRange(rule.Scope.ToTags());
+        Add(rule.SonarWay, SonarWayTag);
+        Add(fadeOutCode, WellKnownDiagnosticTags.Unnecessary);
+        return tags.ToArray();
 
-        public static DiagnosticDescriptor CreateUtility(string diagnosticId, string title) =>
-            new(diagnosticId,
-                title,
-                string.Empty,
-                string.Empty,
-                DiagnosticSeverity.Warning,
-                isEnabledByDefault: true,
-                customTags: BuildUtilityTags());
-
-        public static DiagnosticDescriptor Create(AnalyzerLanguage language, RuleDescriptor rule, string messageFormat, bool? isEnabledByDefault, bool fadeOutCode) =>
-            new(rule.Id,
-                rule.Title,
-                messageFormat,
-                rule.Category,
-                fadeOutCode ? DiagnosticSeverity.Info : DiagnosticSeverity.Warning,
-                rule.IsHotspot || (isEnabledByDefault ?? rule.SonarWay),
-                rule.Description,
-                language.HelpLink(rule.Id),
-                BuildTags(language, rule, fadeOutCode));
-
-        private static string[] BuildTags(AnalyzerLanguage language, RuleDescriptor rule, bool fadeOutCode)
+        void Add(bool condition, string tag)
         {
-            var tags = new List<string> { language.LanguageName };
-            tags.AddRange(rule.Scope.ToTags());
-            Add(rule.SonarWay, SonarWayTag);
-            Add(fadeOutCode, WellKnownDiagnosticTags.Unnecessary);
-            return tags.ToArray();
-
-            void Add(bool condition, string tag)
+            if (condition)
             {
-                if (condition)
-                {
-                    tags.Add(tag);
-                }
+                tags.Add(tag);
             }
         }
-
-        private static IEnumerable<string> ToTags(this SourceScope sourceScope) =>
-            sourceScope switch
-            {
-                SourceScope.Main => new[] { MainSourceScopeTag },
-                SourceScope.Tests => new[] { TestSourceScopeTag },
-                SourceScope.All => new[] { MainSourceScopeTag, TestSourceScopeTag },
-                _ => throw new NotSupportedException($"{sourceScope} is not supported 'SourceScope' value."),
-            };
-
-        private static string[] BuildUtilityTags() =>
-            SourceScope.All.ToTags().Concat(new[] { UtilityTag })
-#if !DEBUG
-                // Allow to configure the analyzers in debug mode only. This allows to run test selectively (for example to test only one rule)
-                .Union(new[] { WellKnownDiagnosticTags.NotConfigurable })
-#endif
-                .ToArray();
     }
+
+    private static IEnumerable<string> ToTags(this SourceScope sourceScope) =>
+        sourceScope switch
+        {
+            SourceScope.Main => new[] { MainSourceScopeTag },
+            SourceScope.Tests => new[] { TestSourceScopeTag },
+            SourceScope.All => new[] { MainSourceScopeTag, TestSourceScopeTag },
+            _ => throw new NotSupportedException($"{sourceScope} is not supported 'SourceScope' value."),
+        };
+
+    private static string[] BuildUtilityTags() =>
+        SourceScope.All.ToTags().Concat(new[] { UtilityTag })
+#if !DEBUG
+            // Allow to configure the analyzers in debug mode only. This allows to run test selectively (for example to test only one rule)
+            .Union(new[] { WellKnownDiagnosticTags.NotConfigurable })
+#endif
+            .ToArray();
 }

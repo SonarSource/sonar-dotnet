@@ -18,19 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Analyzers
+namespace SonarAnalyzer.Analyzers;
+
+public abstract class HotspotDiagnosticAnalyzer : SonarDiagnosticAnalyzer
 {
-    public abstract class HotspotDiagnosticAnalyzer : SonarDiagnosticAnalyzer
+    protected IAnalyzerConfiguration Configuration { get; }
+
+    protected HotspotDiagnosticAnalyzer(IAnalyzerConfiguration configuration) =>
+        Configuration = configuration;
+
+    protected bool IsEnabled(AnalyzerOptions options)
     {
-        protected IAnalyzerConfiguration Configuration { get; }
-
-        protected HotspotDiagnosticAnalyzer(IAnalyzerConfiguration configuration) =>
-            Configuration = configuration;
-
-        protected bool IsEnabled(AnalyzerOptions options)
-        {
-            Configuration.Initialize(options);
-            return SupportedDiagnostics.Any(d => Configuration.IsEnabled(d.Id));
-        }
+        Configuration.Initialize(options);
+        return SupportedDiagnostics.Any(d => Configuration.IsEnabled(d.Id));
     }
 }

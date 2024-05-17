@@ -18,23 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Analyzers
+namespace SonarAnalyzer.Analyzers;
+
+public abstract class ParametrizedDiagnosticAnalyzer : SonarDiagnosticAnalyzer
 {
-    public abstract class ParametrizedDiagnosticAnalyzer : SonarDiagnosticAnalyzer
+    protected abstract void Initialize(SonarParametrizedAnalysisContext context);
+
+    protected sealed override void Initialize(SonarAnalysisContext context)
     {
-        protected abstract void Initialize(SonarParametrizedAnalysisContext context);
+        var parameterContext = new SonarParametrizedAnalysisContext(context);
+        Initialize(parameterContext);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
-            var parameterContext = new SonarParametrizedAnalysisContext(context);
-            Initialize(parameterContext);
-
-            context.RegisterCompilationStartAction(
-                c =>
-                {
-                    ParameterLoader.SetParameterValues(this, c.SonarLintXml());
-                    parameterContext.ExecutePostponedActions(c);
-                });
-        }
+        context.RegisterCompilationStartAction(
+            c =>
+            {
+                ParameterLoader.SetParameterValues(this, c.SonarLintXml());
+                parameterContext.ExecutePostponedActions(c);
+            });
     }
 }

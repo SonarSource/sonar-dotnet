@@ -20,48 +20,47 @@
 
 using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 
-namespace SonarAnalyzer.Analyzers
+namespace SonarAnalyzer.Analyzers;
+
+public abstract class SonarDiagnosticAnalyzer : DiagnosticAnalyzer
 {
-    public abstract class SonarDiagnosticAnalyzer : DiagnosticAnalyzer
+    public static readonly string EnableConcurrentExecutionVariable = "SONAR_DOTNET_ENABLE_CONCURRENT_EXECUTION";
+
+    protected virtual bool EnableConcurrentExecution => IsConcurrentExecutionEnabled();
+
+    protected abstract void Initialize(SonarAnalysisContext context);
+
+    public sealed override void Initialize(RoslynAnalysisContext context)
     {
-        public static readonly string EnableConcurrentExecutionVariable = "SONAR_DOTNET_ENABLE_CONCURRENT_EXECUTION";
-
-        protected virtual bool EnableConcurrentExecution => IsConcurrentExecutionEnabled();
-
-        protected abstract void Initialize(SonarAnalysisContext context);
-
-        public sealed override void Initialize(RoslynAnalysisContext context)
+        // The default values are Analyze | ReportDiagnostics. We do this call to make sure it will be still enabled even if the default values changed. (Needed for the razor analysis)
+        context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics);
+        if (EnableConcurrentExecution)
         {
-            // The default values are Analyze | ReportDiagnostics. We do this call to make sure it will be still enabled even if the default values changed. (Needed for the razor analysis)
-            context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics);
-            if (EnableConcurrentExecution)
-            {
-                context.EnableConcurrentExecution();
-            }
-            Initialize(new SonarAnalysisContext(context, SupportedDiagnostics));
+            context.EnableConcurrentExecution();
         }
-
-        protected static bool IsConcurrentExecutionEnabled()
-        {
-            var value = Environment.GetEnvironmentVariable(EnableConcurrentExecutionVariable);
-
-            if (value != null && bool.TryParse(value, out var result))
-            {
-                return result;
-            }
-            return true;
-        }
+        Initialize(new SonarAnalysisContext(context, SupportedDiagnostics));
     }
 
-    public abstract class SonarDiagnosticAnalyzer<TSyntaxKind> : SonarDiagnosticAnalyzer
-        where TSyntaxKind : struct
+    protected static bool IsConcurrentExecutionEnabled()
     {
-        protected abstract string MessageFormat { get; }
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-        protected DiagnosticDescriptor Rule { get; }
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        var value = Environment.GetEnvironmentVariable(EnableConcurrentExecutionVariable);
 
-        protected SonarDiagnosticAnalyzer(string diagnosticId) =>
-           Rule = Language.CreateDescriptor(diagnosticId, MessageFormat);
+        if (value != null && bool.TryParse(value, out var result))
+        {
+            return result;
+        }
+        return true;
     }
+}
+
+public abstract class SonarDiagnosticAnalyzer<TSyntaxKind> : SonarDiagnosticAnalyzer
+    where TSyntaxKind : struct
+{
+    protected abstract string MessageFormat { get; }
+    protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+    protected DiagnosticDescriptor Rule { get; }
+    public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+    protected SonarDiagnosticAnalyzer(string diagnosticId) =>
+       Rule = Language.CreateDescriptor(diagnosticId, MessageFormat);
 }
