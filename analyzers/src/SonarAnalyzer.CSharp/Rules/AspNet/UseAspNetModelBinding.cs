@@ -79,7 +79,8 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
             });
         }, SymbolKind.NamedType);
 
-    private void RegisterCodeBlockActions(SonarCodeBlockStartAnalysisContext<SyntaxKind> codeBlockStart,
+    private void RegisterCodeBlockActions(
+        SonarCodeBlockStartAnalysisContext<SyntaxKind> codeBlockStart,
         Descriptors descriptors,
         ConcurrentStack<ReportCandidate> controllerCandidates)
     {
@@ -96,7 +97,10 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
                 var context = new ArgumentContext(argument, nodeContext.SemanticModel);
                 if (allConstantAccesses && Array.Exists(argumentDescriptors, x => Language.Tracker.Argument.MatchArgument(x)(context)))
                 {
-                    allConstantAccesses &= nodeContext.SemanticModel.GetConstantValue(argument.Expression) is { HasValue: true, Value: string };
+                    if (!(nodeContext.SemanticModel.GetConstantValue(argument.Expression) is { HasValue: true, Value: string }))
+                    {
+                        allConstantAccesses = false;
+                    }
                     codeBlockCandidates.Push(new(UseAspNetModelBindingMessage, GetPrimaryLocation(argument), IsOriginatingFromParameter(nodeContext.SemanticModel, argument)));
                 }
             }, SyntaxKind.Argument);
