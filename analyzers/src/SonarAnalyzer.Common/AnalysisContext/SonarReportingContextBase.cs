@@ -126,11 +126,26 @@ public abstract class SonarCompilationReportingContextBase<TContext> : SonarRepo
 {
     protected SonarCompilationReportingContextBase(SonarAnalysisContext analysisContext, TContext context) : base(analysisContext, context) { }
 
+    [Obsolete("Use overload without Diagnostic.Create, or add one")]
     public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
     {
         if (ShouldAnalyzeTree(diagnostic.Location.SourceTree, generatedCodeRecognizer))
         {
             ReportIssueCore(diagnostic);
+        }
+    }
+
+    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, DiagnosticDescriptor rule, SyntaxNode locationSyntax, params object[] messageArgs) =>
+        ReportIssue(generatedCodeRecognizer, rule, locationSyntax.GetLocation(), messageArgs);
+
+    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, DiagnosticDescriptor rule, SyntaxToken locationToken, params object[] messageArgs) =>
+        ReportIssue(generatedCodeRecognizer, rule, locationToken.GetLocation(), messageArgs);
+
+    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, DiagnosticDescriptor rule, Location location, params object[] messageArgs)
+    {
+        if (ShouldAnalyzeTree(location.SourceTree, generatedCodeRecognizer))
+        {
+            ReportIssueCore(Diagnostic.Create(rule, location, messageArgs));
         }
     }
 }
