@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 var statement = (OptionStatementSyntax)c.Node;
                 if (statement.NameKeyword.IsKind(SyntaxKind.StrictKeyword) && !statement.ValueKeyword.IsKind(SyntaxKind.OnKeyword))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, statement.GetLocation(), StatementMessage));
+                    c.ReportIssue(Rule, statement, StatementMessage);
                 }
             },
             SyntaxKind.OptionStatement);
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 {
                     if (c.Compilation.VB().Options.OptionStrict != OptionStrict.On)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, null, string.Format(AssemblyMessageFormat, c.Compilation.AssemblyName)));
+                        c.ReportIssue(Rule, null, string.Format(AssemblyMessageFormat, c.Compilation.AssemblyName));
                     }
                 }));
         }
