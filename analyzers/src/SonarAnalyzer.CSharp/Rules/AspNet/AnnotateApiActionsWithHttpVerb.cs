@@ -36,7 +36,7 @@ public sealed class AnnotateApiActionsWithHttpVerb : SonarDiagnosticAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(compilationStartContext =>
         {
-            if (!compilationStartContext.Compilation.ReferencesControllers())
+            if (!compilationStartContext.Compilation.ReferencesNetCoreControllers())
             {
                 return;
             }

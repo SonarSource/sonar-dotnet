@@ -48,7 +48,7 @@ public sealed class ApiControllersShouldNotDeriveDirectlyFromController : SonarD
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(compilationStartContext =>
         {
-            if (!compilationStartContext.Compilation.ReferencesControllers())
+            if (!compilationStartContext.Compilation.ReferencesNetCoreControllers())
             {
                 return;
             }

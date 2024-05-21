@@ -45,7 +45,7 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
             //      - as an alternative to using ModelState.IsValid
             //      - this can made more accurate: check if those validation methods are used in the controller actions rather than just checking whether the library is referenced
             // - the [ApiController] attribute is applied on the assembly level: this results in the attribute being applied to every Controller class in the project
-            if (compilationStart.Compilation.ReferencesControllers()
+            if (compilationStart.Compilation.ReferencesNetCoreControllers()
                 && compilationStart.Compilation.GetTypeByMetadataName(KnownType.FluentValidation_IValidator) is null
                 && !compilationStart.Compilation.Assembly.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute))
             {

@@ -39,7 +39,7 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(compilationStart =>
         {
-            if (!compilationStart.Compilation.ReferencesControllers())
+            if (!compilationStart.Compilation.ReferencesNetCoreControllers())
             {
                 return;
             }
