@@ -57,4 +57,7 @@ internal static class CompilationExtensions
             ? memberSymbols.Any()
             : memberSymbols.Any(memberCheck);
     }
+
+    public static bool IsValidLocation(this Compilation compilation, Location location) =>
+        location.Kind != LocationKind.SourceFile || compilation.ContainsSyntaxTree(location.SourceTree);
 }

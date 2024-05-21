@@ -44,4 +44,7 @@ public static class LocationExtensions
 
     public static int EndLine(this Location location) =>
         location.GetLineSpan().EndLinePosition.Line;
+
+    public static SecondaryLocation ToSecondary(this Location location, string message = null) =>
+        new(location, message);
 }

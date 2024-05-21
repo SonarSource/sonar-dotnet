@@ -34,7 +34,7 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
             && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(diagnostic.Descriptor, diagnostic.Location?.SourceTree))
         {
             var reportingContext = CreateReportingContext(diagnostic);
-            if (reportingContext is { Compilation: { } compilation, Diagnostic.Location: { Kind: LocationKind.SourceFile, SourceTree: { } tree } } && !compilation.ContainsSyntaxTree(tree))
+            if (!reportingContext.Compilation.IsValidLocation(diagnostic.Location))
             {
                 Debug.Fail("Primary location should be part of the compilation. An AD0001 is raised if this is not the case.");
                 return;
@@ -42,7 +42,7 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
             // This is the current way SonarLint will handle how and what to report.
             if (SonarAnalysisContext.ReportDiagnostic is not null)
             {
-                Debug.Assert(SonarAnalysisContext.ShouldDiagnosticBeReported == null, "Not expecting SonarLint to set both the old and the new delegates.");
+                Debug.Assert(SonarAnalysisContext.ShouldDiagnosticBeReported is null, "Not expecting SonarLint to set both the old and the new delegates.");
                 SonarAnalysisContext.ReportDiagnostic(reportingContext);
                 return;
             }
@@ -76,7 +76,7 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
 
         return Diagnostic.Create(descriptor,
             mappedLocation,
-            diagnostic.AdditionalLocations.Select(l => l.EnsureMappedLocation()).ToImmutableList(),
+            diagnostic.AdditionalLocations.Select(x => x.EnsureMappedLocation()).ToImmutableList(),
             diagnostic.Properties);
     }
 }
@@ -97,17 +97,32 @@ public abstract class SonarTreeReportingContextBase<TContext> : SonarReportingCo
     public void ReportIssue(DiagnosticDescriptor rule, SyntaxNode locationSyntax, params object[] messageArgs) =>
         ReportIssue(rule, locationSyntax.GetLocation(), messageArgs);
 
+    public void ReportIssue(DiagnosticDescriptor rule, SyntaxNode primaryLocationSyntax, IEnumerable<SecondaryLocation> secondaryLocations, params object[] messageArgs) =>
+        ReportIssue(rule, primaryLocationSyntax.GetLocation(), secondaryLocations, messageArgs);
+
     public void ReportIssue(DiagnosticDescriptor rule, SyntaxToken locationToken, params object[] messageArgs) =>
         ReportIssue(rule, locationToken.GetLocation(), messageArgs);
 
+    [Obsolete("Use overload with IEnumrable<SecondaryLocation> instead")]
     public void ReportIssue(DiagnosticDescriptor rule, SyntaxToken locationToken, IEnumerable<SyntaxNode> additionalLocations, params object[] messageArgs) =>
         ReportIssueCore(Diagnostic.Create(rule, locationToken.GetLocation(), additionalLocations.Select(x => x.GetLocation()), messageArgs));
 
+    [Obsolete("Use overload with IEnumrable<SecondaryLocation> instead")]
     public void ReportIssue(DiagnosticDescriptor rule, Location location, IEnumerable<Location> additionalLocations, ImmutableDictionary<string, string> properties, params object[] messageArgs) =>
         ReportIssueCore(Diagnostic.Create(rule, location, additionalLocations, properties, messageArgs));
 
+    public void ReportIssue(DiagnosticDescriptor rule, SyntaxToken primaryLocationToken, IEnumerable<SecondaryLocation> secondaryLocations, params object[] messageArgs) =>
+        ReportIssue(rule, primaryLocationToken.GetLocation(), secondaryLocations, messageArgs);
+
     public void ReportIssue(DiagnosticDescriptor rule, Location location, params object[] messageArgs) =>
         ReportIssueCore(Diagnostic.Create(rule, location, messageArgs));
+
+    public void ReportIssue(DiagnosticDescriptor rule, Location primaryLocation, IEnumerable<SecondaryLocation> secondaryLocations, params object[] messageArgs)
+    {
+        secondaryLocations = secondaryLocations.Where(x => Compilation.IsValidLocation(x.Location)).ToArray();
+        var properties = secondaryLocations.Select((x, index) => new { x.Message, Index = index }).ToImmutableDictionary(x => x.Index.ToString(), x => x.Message);
+        ReportIssueCore(Diagnostic.Create(rule, primaryLocation, secondaryLocations.Select(x => x.Location), properties, messageArgs));
+    }
 }
 
 /// <summary>

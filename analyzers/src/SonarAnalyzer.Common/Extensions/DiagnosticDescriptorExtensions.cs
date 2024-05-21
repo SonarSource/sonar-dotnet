@@ -47,14 +47,12 @@ public static class DiagnosticDescriptorExtensions
         }
     }
 
+    [Obsolete("Use ReportIssue overload with DiagnosticDescriptor and IEnumerable<SecondaryLocations> parameters instead.")]
     public static Diagnostic CreateDiagnostic(this DiagnosticDescriptor descriptor,
                                               Compilation compilation,
                                               Location location,
                                               IEnumerable<Location> additionalLocations,
                                               ImmutableDictionary<string, string> properties,
                                               params object[] messageArgs) =>
-        Diagnostic.Create(descriptor, location, additionalLocations?.Where(x => IsLocationValid(x, compilation)), properties, messageArgs);
-
-    private static bool IsLocationValid(Location location, Compilation compilation) =>
-        location.Kind != LocationKind.SourceFile || compilation.ContainsSyntaxTree(location.SourceTree);
+        Diagnostic.Create(descriptor, location, additionalLocations?.Where(x => compilation.IsValidLocation(x)), properties, messageArgs);
 }
