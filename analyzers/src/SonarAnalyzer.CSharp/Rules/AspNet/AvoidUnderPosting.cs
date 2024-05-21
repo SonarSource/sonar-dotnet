@@ -33,6 +33,9 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
         KnownType.Microsoft_AspNetCore_Http_IFormCollection,
         KnownType.Microsoft_AspNetCore_Http_IFormFile,
         KnownType.Microsoft_AspNetCore_Http_IFormFileCollection);
+    private static readonly ImmutableArray<KnownType> ValidationAttributes = ImmutableArray.Create(
+        KnownType.System_ComponentModel_DataAnnotations_RequiredAttribute,
+        KnownType.System_Text_Json_Serialization_JsonRequiredAttribute);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -76,8 +79,9 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
         var declaredProperties = new List<IPropertySymbol>();
         GetAllDeclaredProperties(parameterType, examinedTypes, declaredProperties);
         var invalidProperties = declaredProperties
-            .Where(x => !CanBeNull(x.Type) && !x.HasAnyAttribute(KnownType.System_ComponentModel_DataAnnotations_RequiredAttribute, KnownType.System_Text_Json_Serialization_JsonRequiredAttribute))
-            .Select(x => x.DeclaringSyntaxReferences[0].GetSyntax()).Where(x => !x.GetModifiers().Any(x => x.IsKind(SyntaxKindEx.RequiredKeyword)));
+            .Where(x => !CanBeNull(x.Type) && !x.HasAnyAttribute(ValidationAttributes))
+            .Select(x => x.DeclaringSyntaxReferences[0].GetSyntax())
+            .Where(x => !x.GetModifiers().Any(x => x.IsKind(SyntaxKindEx.RequiredKeyword))); // ToDo: Check with IProperty.IsRequired once available
         foreach (var property in invalidProperties)
         {
             context.ReportIssue(Rule, property.GetLocation());
