@@ -27,6 +27,9 @@ public static class ISymbolExtensions
     public static bool HasAttribute(this ISymbol symbol, KnownType type) =>
         symbol.GetAttributes(type).Any();
 
+    public static bool HasAnyAttribute(this ISymbol symbol, params KnownType[] types) =>
+        symbol.GetAttributes(ImmutableArray.Create(types)).Any();
+
     public static SyntaxNode GetFirstSyntaxRef(this ISymbol symbol) =>
         symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
 

@@ -36,7 +36,7 @@ namespace Repro9275
         [JsonRequired]                                      // Compliant - the property is annotated with JsonRequiredAttribute
         public int AnotherValueProperty { get; set; }
 
-        public required int RequiredProperty { get; set; }  // Noncompliant - FP because the property has the required modifier
+        public required int RequiredProperty { get; set; }  // Compliant - because the property has the required modifier
     }
 
     public class DerivedFromController : Controller
