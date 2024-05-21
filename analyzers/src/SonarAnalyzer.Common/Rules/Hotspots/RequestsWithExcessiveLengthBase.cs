@@ -160,7 +160,7 @@ namespace SonarAnalyzer.Rules
                     && IsVulnerable(maxRequestLength.Value, FileUploadSizeLimit / OneKilobyte)
                     && maxRequestLength.CreateLocation(webConfigPath) is { } location)
                 {
-                    c.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(rule, location));
+                    c.ReportIssue(Language.GeneratedCodeRecognizer, rule, location);
                 }
             }
             foreach (var requestLimit in doc.XPathSelectElements("configuration/system.webServer/security/requestFiltering/requestLimits"))
@@ -169,7 +169,7 @@ namespace SonarAnalyzer.Rules
                     && IsVulnerable(maxAllowedContentLength.Value, FileUploadSizeLimit)
                     && maxAllowedContentLength.CreateLocation(webConfigPath) is { } location)
                 {
-                    c.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(rule, location));
+                    c.ReportIssue(Language.GeneratedCodeRecognizer, rule, location);
                 }
             }
         }
