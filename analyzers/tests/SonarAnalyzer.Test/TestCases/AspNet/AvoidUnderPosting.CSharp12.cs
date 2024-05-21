@@ -28,15 +28,15 @@ namespace Repro9275
     // Repro https://github.com/SonarSource/sonar-dotnet/issues/9275
     public class Model
     {
-        public int ValueProperty { get; set; }        // Noncompliant
+        public int ValueProperty { get; set; }              // Noncompliant
 
-        [Custom]                                      // Noncompliant repro for https://github.com/SonarSource/sonar-dotnet/issues/9282
+        [Custom]                                            // Noncompliant repro for https://github.com/SonarSource/sonar-dotnet/issues/9282
         public int ValuePropertyAnnotatedWithCustomAttribute { get; set; }
 
-        [JsonRequired]                                // Noncompliant - FP because the property is annotated with JsonRequiredAttribute
+        [JsonRequired]                                      // Compliant - the property is annotated with JsonRequiredAttribute
         public int AnotherValueProperty { get; set; }
 
-        public required int RequiredProperty { get; set; } // Noncompliant - FP because the property has the required modifier
+        public required int RequiredProperty { get; set; }  // Noncompliant - FP because the property has the required modifier
     }
 
     public class DerivedFromController : Controller
