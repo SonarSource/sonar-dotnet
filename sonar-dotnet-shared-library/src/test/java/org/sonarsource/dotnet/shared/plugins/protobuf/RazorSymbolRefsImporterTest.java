@@ -30,19 +30,57 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.SYMBOLREFS_FILENAME;
 
 public class RazorSymbolRefsImporterTest extends RazorImporterTestBase {
-  private final File protobuf = new File(TEST_DATA_DIR, SYMBOLREFS_FILENAME);
+  private static final File PROTOBUF_4_9_FILE = new File(ROSLYN_4_9_DIR, SYMBOLREFS_FILENAME);
+  private static final File PROTOBUF_4_10_FILE = new File(ROSLYN_4_10_DIR, SYMBOLREFS_FILENAME);
 
   @Override
   @Before
-  public void setUp() throws FileNotFoundException {
+  public void setUp() {
     super.setUp();
-    assertThat(protobuf).withFailMessage("no such file: " + protobuf).isFile();
+    assertThat(PROTOBUF_4_9_FILE).withFailMessage("no such file: " + PROTOBUF_4_9_FILE).isFile();
   }
 
   @Test
-  public void test_symbol_refs_get_imported_cases() {
+  public void test_symbol_refs_get_imported_cases_before_4_10() throws FileNotFoundException {
 
-    var inputFile = CasesInputFile;
+    verifySymbolRef(PROTOBUF_4_9_FILE);
+  }
+
+  @Test
+  public void test_symbol_refs_get_imported_cases_after_4_10() throws FileNotFoundException {
+    verifySymbolRef(PROTOBUF_4_10_FILE);
+  }
+
+  @Test
+  public void test_symbol_refs_get_imported_overlapSymbolReferences_before_4_10() throws FileNotFoundException {
+    var inputFile = addTestFileToContext("OverlapSymbolReferences.razor");
+    var sut = new SymbolRefsImporter(sensorContext, s -> Paths.get(s).getFileName().toString());
+    sut.accept(PROTOBUF_4_9_FILE.toPath());
+    sut.save();
+
+    var references = sensorContext.referencesForSymbolAt(inputFile.key(), 1, 1);
+    assertThat(references)
+      .isNotNull() // The symbol declaration can be found,
+      .isEmpty();  // but there are no references, due to the overlap.
+
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly(
+      "The declaration token at Range[from [line=1, lineOffset=0] to [line=1, lineOffset=17]] overlaps with the referencing token Range[from [line=1, lineOffset=6] to [line=1, lineOffset=23]] in file OverlapSymbolReferences.razor");
+  }
+
+  @Test
+  public void test_symbol_refs_get_imported_overlapSymbolReferences_after_4_10() throws FileNotFoundException {
+    var inputFile = addTestFileToContext("OverlapSymbolReferences.razor");
+    var sut = new SymbolRefsImporter(sensorContext, s -> Paths.get(s).getFileName().toString());
+    sut.accept(PROTOBUF_4_10_FILE.toPath());
+    sut.save();
+
+    // the issue with overlapping symbols has been fixed in dotnet 8.0.5
+    assertThat(sensorContext.referencesForSymbolAt(inputFile.key(), 1, 11)).hasSize(1);
+    assertThat(logTester.logs(Level.DEBUG)).isEmpty();
+  }
+
+  private void verifySymbolRef(File protobuf) throws FileNotFoundException {
+    var inputFile = addTestFileToContext("Cases.razor");;
     var sut = new SymbolRefsImporter(sensorContext, RazorImporterTestBase::fileName);
     sut.accept(protobuf.toPath());
     sut.save();
@@ -55,18 +93,6 @@ public class RazorSymbolRefsImporterTest extends RazorImporterTestBase {
     assertThat(sensorContext.referencesForSymbolAt(inputFile.key(), 19, 15)).hasSize(3);
     assertThat(sensorContext.referencesForSymbolAt(inputFile.key(), 21, 17)).isEmpty();
 
-    assertThat(logTester.logs(Level.DEBUG)).isEmpty();
-  }
-
-  @Test
-  public void test_symbol_refs_get_imported_overlapSymbolReferences() {
-    var inputFile = OverlapSymbolReferencesInputFile;
-    var sut = new SymbolRefsImporter(sensorContext, s -> Paths.get(s).getFileName().toString());
-    sut.accept(protobuf.toPath());
-    sut.save();
-
-    // the issue with overlapping symbols has been fixed in dotnet 8.0.5
-    assertThat(sensorContext.referencesForSymbolAt(inputFile.key(), 1, 11)).hasSize(1);
     assertThat(logTester.logs(Level.DEBUG)).isEmpty();
   }
 }
