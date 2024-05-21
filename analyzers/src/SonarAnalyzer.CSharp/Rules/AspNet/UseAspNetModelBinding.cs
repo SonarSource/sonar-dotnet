@@ -94,14 +94,12 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
             codeBlockStart.RegisterNodeAction(nodeContext =>
             {
                 var argument = (ArgumentSyntax)nodeContext.Node;
-                var context = new ArgumentContext(argument, nodeContext.SemanticModel);
-                if (allConstantAccesses && Array.Exists(argumentDescriptors, x => Language.Tracker.Argument.MatchArgument(x)(context)))
+                var model = nodeContext.SemanticModel;
+                if (allConstantAccesses
+                    && AddMatchingArgumentToCandidates(model, codeBlockCandidates, argument, argumentDescriptors)
+                    && model.GetConstantValue(argument.Expression) is not { HasValue: true, Value: string })
                 {
-                    if (!(nodeContext.SemanticModel.GetConstantValue(argument.Expression) is { HasValue: true, Value: string }))
-                    {
-                        allConstantAccesses = false;
-                    }
-                    codeBlockCandidates.Push(new(UseAspNetModelBindingMessage, GetPrimaryLocation(argument), IsOriginatingFromParameter(nodeContext.SemanticModel, argument)));
+                    allConstantAccesses = false;
                 }
             }, SyntaxKind.Argument);
         }
@@ -127,6 +125,21 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
                 controllerCandidates.PushRange(candidates);
             }
         });
+    }
+
+    private bool AddMatchingArgumentToCandidates(
+        SemanticModel model,
+        ConcurrentStack<ReportCandidate> codeBlockCandidates,
+        ArgumentSyntax argument,
+        ArgumentDescriptor[] argumentDescriptors)
+    {
+        var context = new ArgumentContext(argument, model);
+        if (Array.Exists(argumentDescriptors, x => Language.Tracker.Argument.MatchArgument(x)(context)))
+        {
+            codeBlockCandidates.Push(new(UseAspNetModelBindingMessage, GetPrimaryLocation(argument), IsOriginatingFromParameter(model, argument)));
+            return true;
+        }
+        return false;
     }
 
     private static Descriptors GetDescriptors(Compilation compilation)
