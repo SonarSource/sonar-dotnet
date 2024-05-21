@@ -42,14 +42,13 @@ namespace SonarAnalyzer.Common
         public ISet<int> CodeLines =>
             tree.GetRoot()
                 .DescendantTokens()
-                .Where(x => !IsEndOfFile(x))
-                .Select(x => x.GetLocation().GetMappedLineSpan())
-                .Where(IsInSameFile)
+                .Select(GetMappedLineSpan)
+                .Where(x => x is not null)
                 .SelectMany(
                     x =>
                     {
-                        var start = x.StartLinePosition.GetLineNumberToReport();
-                        var end = x.EndLinePosition.GetLineNumberToReport();
+                        var start = x.Value.StartLinePosition.GetLineNumberToReport();
+                        var end = x.Value.EndLinePosition.GetLineNumberToReport();
                         return Enumerable.Range(start, end - start + 1);
                     })
                 .ToHashSet();
@@ -118,6 +117,14 @@ namespace SonarAnalyzer.Common
 
         private IEnumerable<SyntaxNode> FunctionNodes =>
             tree.GetRoot().DescendantNodes().Where(IsFunction);
+
+        private FileLinePositionSpan? GetMappedLineSpan(SyntaxToken token) =>
+            !IsEndOfFile(token)
+            && token.GetLocation().GetMappedLineSpan() is { IsValid: true } mappedLineSpan
+            && (!GeneratedCodeRecognizer.IsRazor(token.SyntaxTree) || mappedLineSpan.HasMappedPath)
+            && IsInSameFile(mappedLineSpan)
+                ? mappedLineSpan
+                : null;
 
         private static void CategorizeLines(string line, int lineNumber, ISet<int> noSonar, ISet<int> nonBlank)
         {
