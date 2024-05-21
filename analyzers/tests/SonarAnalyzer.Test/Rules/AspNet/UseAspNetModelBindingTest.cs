@@ -18,15 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Test.Rules;
 
+#if NET
+
 [TestClass]
 public class UseAspNetModelBindingTest
 {
-#if NET
     private readonly VerifierBuilder builderAspNetCore = new VerifierBuilder<UseAspNetModelBinding>()
         .WithBasePath("AspNet")
         .WithOptions(ParseOptionsHelper.FromCSharp12)
@@ -293,5 +293,5 @@ public class UseAspNetModelBindingTest
             }
             """").Verify();
     */
-#endif
 }
+#endif
