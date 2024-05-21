@@ -67,14 +67,14 @@ public sealed class BlazorQueryParameterRoutableComponent : SonarDiagnosticAnaly
             {
                 foreach (var location in property.Locations)
                 {
-                    c.ReportIssue(Diagnostic.Create(S6803Rule, location));
+                    c.ReportIssue(S6803Rule, location);
                 }
             }
             else if (!SupportedQueryTypes.Any(x => IsSupportedType(property.Type, x)))
             {
                 foreach (var propertyType in property.DeclaringSyntaxReferences.Select(x => ((PropertyDeclarationSyntax)x.GetSyntax()).Type))
                 {
-                    c.ReportIssue(Diagnostic.Create(S6797Rule, propertyType.GetLocation(), GetTypeName(propertyType)));
+                    c.ReportIssue(S6797Rule, propertyType.GetLocation(), GetTypeName(propertyType));
                 }
             }
         }

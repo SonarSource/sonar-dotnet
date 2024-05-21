@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Select(x => x.GetSyntax())
                     .OfType<MethodDeclarationSyntax>())
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation(), MakeThisMethodPrivateMessage));
+                    c.ReportIssue(Rule, methodDeclaration.Identifier, MakeThisMethodPrivateMessage);
                 }
             }
         }

@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             ? property.Identifier.GetLocation()
                             : field.Identifier.GetLocation();
 
-                        c.ReportIssue(Diagnostic.Create(Rule, location, memberType, candidateMember.Symbol.Name));
+                        c.ReportIssue(Rule, location, memberType, candidateMember.Symbol.Name);
                     }
                 },
                 SymbolKind.NamedType);

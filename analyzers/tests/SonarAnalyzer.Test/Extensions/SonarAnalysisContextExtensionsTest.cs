@@ -45,7 +45,7 @@ public class SonarAnalysisContextExtensions
         var wasReported = false;
         var symbolContext = new SymbolAnalysisContext(Substitute.For<ISymbol>(), model.Compilation, AnalysisScaffolding.CreateOptions(), _ => wasReported = true, _ => true, default);
         var context = new SonarSymbolReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), symbolContext);
-        ExtensionsCS.ReportIssue(context, Diagnostic.Create(DummyMainDescriptor, tree.GetRoot().GetLocation()));
+        ExtensionsCS.ReportIssue(context, DummyMainDescriptor, tree.GetRoot());
 
         wasReported.Should().Be(expected);
     }
