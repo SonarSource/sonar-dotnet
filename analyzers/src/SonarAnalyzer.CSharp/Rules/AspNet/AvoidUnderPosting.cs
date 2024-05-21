@@ -76,7 +76,8 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
         var declaredProperties = new List<IPropertySymbol>();
         GetAllDeclaredProperties(parameterType, examinedTypes, declaredProperties);
         var invalidProperties = declaredProperties.Where(x => !CanBeNull(x.Type)
-            && !x.HasAttribute(KnownType.System_ComponentModel_DataAnnotations_RequiredAttribute));
+            && !x.HasAttribute(KnownType.System_ComponentModel_DataAnnotations_RequiredAttribute)
+            && !x.HasAttribute(KnownType.System_Text_Json_Serialization_JsonRequiredAttribute));
         foreach (var property in invalidProperties)
         {
             var propertySyntax = property.DeclaringSyntaxReferences[0].GetSyntax();
