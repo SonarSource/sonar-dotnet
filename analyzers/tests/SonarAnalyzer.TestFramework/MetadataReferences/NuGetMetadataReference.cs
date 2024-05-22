@@ -71,6 +71,7 @@ public static class NuGetMetadataReference
     public static References MicrosoftAspNetCoreRouting(string packageVersion) => Create("Microsoft.AspNetCore.Routing", packageVersion);
     public static References MicrosoftAspNetCoreMvcRazorRuntime(string packageVersion = "2.2.0") => Create("Microsoft.AspNetCore.Razor.Runtime", packageVersion);
     public static References MicrosoftAspNetCoreRoutingAbstractions(string packageVersion) => Create("Microsoft.AspNetCore.Routing.Abstractions", packageVersion);
+    // There is no package version of Microsoft.AspNet.Identity that is NOT a pre-release.
     public static References MicrosoftAspNetIdentity(string packageVersion = "3.0.0-rc1-final") => Create("Microsoft.AspNet.Identity", packageVersion);
     public static References MicrosoftAspNetMvc(string packageVersion) => Create("Microsoft.AspNet.Mvc", packageVersion);
     public static References MicrosoftAspNetCoreAppRef(string packageVersion) => Create("Microsoft.AspNetCore.App.Ref", packageVersion);

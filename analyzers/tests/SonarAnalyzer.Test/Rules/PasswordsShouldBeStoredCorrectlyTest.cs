@@ -108,6 +108,8 @@ public class PasswordsShouldBeStoredCorrectlyTest
                         x.IterationCount = 1;                                               // Noncompliant {{Use at least 100,000 iterations here.}}
                     //  ^^^^^^^^^^^^^^^^
 
+                        x.IterationCount = 100_042;                                         // Compliant
+
                         new Rfc2898DeriveBytes(bs, bs, ITERATIONS, han)
                         {
                             IterationCount = 42                                             // Noncompliant {{Use at least 100,000 iterations here.}}
