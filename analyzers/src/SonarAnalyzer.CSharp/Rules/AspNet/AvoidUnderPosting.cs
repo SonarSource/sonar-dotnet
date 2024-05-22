@@ -103,7 +103,7 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
 
     private static bool CanBeNull(ITypeSymbol type) =>
         type is ITypeParameterSymbol { HasValueTypeConstraint: false }
-        || (type.IsReferenceType && type.NullableAnnotation() != NullableAnnotation.NotAnnotated)
+        || type.IsReferenceType
         || type.IsNullableValueType();
 
     private static void GetAllDeclaredProperties(ITypeSymbol type, ConcurrentDictionary<ITypeSymbol, bool> examinedTypes, List<IPropertySymbol> declaredProperties)

@@ -7,11 +7,16 @@ namespace NullableReferences
     public class ModelUsedInController
     {
 #nullable enable
-        public string NonNullableReferenceProperty { get; set; }                    // Noncompliant
+        public string NonNullableReferenceProperty { get; set; }  // Compliant - ASP.NET Core treats non-nullable reference types as if they were decorated with the [Required] attribute
+        public object AnotherNonNullableReferenceProperty { get; set; }
         [Required] public string RequiredNonNullableReferenceProperty { get; set; }
         public string? NullableReferenceProperty { get; set; }
+        public int ValueProperty { get; set; }                // Noncompliant
+        public int? NullableValueProperty { get; set; }
 #nullable disable
         public string ReferenceProperty { get; set; }
+        public object AnotherReferenceProperty { get; set; }
+        public int? AnotherNullableValueProperty { get; set; }
     }
 
     public class DerivedFromController : Controller
