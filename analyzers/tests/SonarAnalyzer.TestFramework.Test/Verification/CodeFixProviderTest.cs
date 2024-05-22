@@ -21,6 +21,7 @@
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.Analyzers;
 using SonarAnalyzer.TestFramework.Verification;
 
 namespace SonarAnalyzer.Test.TestFramework.Tests.Verification;

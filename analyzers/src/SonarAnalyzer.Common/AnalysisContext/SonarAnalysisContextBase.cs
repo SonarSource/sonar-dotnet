@@ -22,7 +22,7 @@ using System.Collections.Concurrent;
 using System.IO;
 using System.Runtime.CompilerServices;
 using Roslyn.Utilities;
-using static SonarAnalyzer.Helpers.DiagnosticDescriptorFactory;
+using static SonarAnalyzer.Analyzers.DiagnosticDescriptorFactory;
 
 namespace SonarAnalyzer.AnalysisContext;
 

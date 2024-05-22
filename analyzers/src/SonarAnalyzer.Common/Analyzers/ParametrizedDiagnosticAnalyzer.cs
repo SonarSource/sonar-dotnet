@@ -18,12 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer
+namespace SonarAnalyzer.Analyzers;
+
+public abstract class ParametrizedDiagnosticAnalyzer : SonarDiagnosticAnalyzer
 {
-    internal static class DescriptorFactory
+    protected abstract void Initialize(SonarParametrizedAnalysisContext context);
+
+    protected sealed override void Initialize(SonarAnalysisContext context)
     {
-        public static DiagnosticDescriptor Create(string id, string messageFormat, bool? isEnabledByDefault = null, bool fadeOutCode = false) =>
-            // RuleCatalog class is created from SonarAnalyzer.SourceGenerator
-            DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp, RuleCatalog.Rules[id], messageFormat, isEnabledByDefault, fadeOutCode);
+        var parameterContext = new SonarParametrizedAnalysisContext(context);
+        Initialize(parameterContext);
+
+        context.RegisterCompilationStartAction(
+            c =>
+            {
+                ParameterLoader.SetParameterValues(this, c.SonarLintXml());
+                parameterContext.ExecutePostponedActions(c);
+            });
     }
 }
