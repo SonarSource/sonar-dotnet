@@ -1,5 +1,5 @@
-È
-2C:\Users\martin.strecker\Desktop\WebAss\Program.cs
+‰
+sC:\src\work\sonar-dotnet\sonar-dotnet-shared-library\src\test\resources\RazorProtobufImporter\WebProject\Program.cs
 	namespace 	
 WebAss
  
