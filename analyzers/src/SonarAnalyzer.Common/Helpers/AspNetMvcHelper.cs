@@ -77,9 +77,11 @@ namespace SonarAnalyzer.Helpers
             && (namedType.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute))
                 || (namedType.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase) && !namedType.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Controller)));
 
-        public static bool ReferencesControllers(this Compilation compilation) =>
-            compilation.GetTypeByMetadataName(KnownType.System_Web_Mvc_Controller) is not null
-            || compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Mvc_Controller) is not null
+        public static bool ReferencesNetCoreControllers(this Compilation compilation) =>
+            compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Mvc_Controller) is not null
             || compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase) is not null;
+
+        public static bool ReferencesNetFrameworkControllers(this Compilation compilation) =>
+            compilation.GetTypeByMetadataName(KnownType.System_Web_Mvc_Controller) is not null;
     }
 }

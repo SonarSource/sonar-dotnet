@@ -35,7 +35,8 @@ public abstract class BackslashShouldBeAvoidedInAspNetRoutesBase<TSyntaxKind> : 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(compilationStartContext =>
         {
-            if (compilationStartContext.Compilation.ReferencesControllers())
+            if (compilationStartContext.Compilation.ReferencesNetCoreControllers()
+                || compilationStartContext.Compilation.ReferencesNetFrameworkControllers())
             {
                 compilationStartContext.RegisterNodeAction(Language.GeneratedCodeRecognizer, Check, SyntaxKinds);
             }
