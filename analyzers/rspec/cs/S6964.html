@@ -27,16 +27,17 @@ public class ProductsController : Controller
 </ul>
 <h2>How to fix it</h2>
 <p>You should mark any model value-type property as <a
-href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types">nullable</a> or annotate it with the <a
-href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.requiredattribute">Required attribute</a>. Thus, when a
-client underposts, you ensure that the missing properties can be detected on the server side rather than being auto-filled, and therefore, incoming
-data meets the application’s expectations.</p>
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types">nullable</a>, <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/required">required</a> or <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.text.json.serialization.jsonrequiredattribute">JsonRequired</a>. Thus when a client
+underposts, you ensure that the missing properties can be detected on the server side rather than being auto-filled, and therefore, incoming data
+meets the application’s expectations.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 public class Product
 {
-    public int Id { get; set; }
+    public int Id { get; set; }             // Noncompliant
     public string Name { get; set; }
     public int NumberOfItems { get; set; }  // Noncompliant
     public decimal Price { get; set; }      // Noncompliant
@@ -48,10 +49,10 @@ In the request handler method there’s no way to determine whether they were in
 <pre data-diff-id="1" data-diff-type="compliant">
 public class Product
 {
-    public int Id { get; set; }
+    public required int Id { get; set; }
     public string Name { get; set; }
-    public int? NumberOfItems { get; set; }         // Compliant - property is optional
-    [Required] public decimal Price { get; set; }  // Compliant - property must have a value
+    public int? NumberOfItems { get; set; }            // Compliant - property is optional
+    [JsonRequired] public decimal Price { get; set; }  // Compliant - property must have a value
 }
 </pre>
 <p>In this example the request handler method can</p>

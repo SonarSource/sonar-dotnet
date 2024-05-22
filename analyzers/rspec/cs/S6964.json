@@ -1,5 +1,5 @@
 {
-  "title": "Property used as input in a controller action should be nullable or annotated with the Required attribute to avoid under-posting.",
+  "title": "Value type property used as input in a controller action should be nullable, required or annotated with the JsonRequiredAttribute to avoid under-posting.",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
