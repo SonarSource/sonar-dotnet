@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace NullableReferences
 {
@@ -39,7 +40,7 @@ namespace CustomGenerics
         public TNoContstraint NoConstraintProperty { get; set; }
         public TClass ClassProperty { get; set; }
         public TStruct StructProperty { get; set; }                             // Noncompliant
-        [Required] public TStruct RequiredStructProperty { get; set; }
+        [JsonRequired] public TStruct RequiredStructProperty { get; set; }
         public TStruct? NullableStructProperty { get; set; }
         public TNotNull NotNullProperty { get; set; }                           // Noncompliant
     }

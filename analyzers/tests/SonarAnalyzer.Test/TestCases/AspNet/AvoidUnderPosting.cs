@@ -16,7 +16,7 @@ namespace Basics
         public int ValueProperty { get; set; }                                      // Noncompliant {{Property used as input in a controller action should be nullable or annotated with the Required attribute to avoid under-posting.}}
 //                 ^^^^^^^^^^^^^
         public int? NullableValueProperty { get; set; }
-        [Required] public int RequiredValueProperty { get; set; }
+        [Required] public int RequiredValueProperty { get; set; }                   // Noncompliant, RequiredAttribute has no effect on value types
         [Range(0, 10)] public int ValuePropertyWithRangeValidation { get; set; }    // Noncompliant
         [Required] public int? RequiredNullableValueProperty { get; set; }
         public int PropertyWithPrivateSetter { get; private set; }
