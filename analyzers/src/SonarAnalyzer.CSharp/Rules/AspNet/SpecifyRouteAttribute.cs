@@ -27,10 +27,6 @@ public sealed class SpecifyRouteAttribute() : SonarDiagnosticAnalyzer<SyntaxKind
 {
     private const string DiagnosticId = "S6934";
 
-    private static readonly ImmutableArray<KnownType> RouteTemplateAttributes = ImmutableArray.Create(
-        KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute,
-        KnownType.Microsoft_AspNetCore_Mvc_RouteAttribute);
-
     protected override string MessageFormat => "Specify the RouteAttribute when an HttpMethodAttribute or RouteAttribute is specified at an action level.";
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
@@ -43,7 +39,7 @@ public sealed class SpecifyRouteAttribute() : SonarDiagnosticAnalyzer<SyntaxKind
             }
             compilationStart.RegisterSymbolStartAction(symbolStart =>
             {
-                if (symbolStart.Symbol.GetAttributesWithInherited().Any(x => x.AttributeClass.Is(KnownType.Microsoft_AspNetCore_Mvc_RouteAttribute)))
+                if (symbolStart.Symbol.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesOrImplements(KnownType.Microsoft_AspNetCore_Mvc_Routing_IRouteTemplateProvider)))
                 {
                     return;
                 }
@@ -54,7 +50,7 @@ public sealed class SpecifyRouteAttribute() : SonarDiagnosticAnalyzer<SyntaxKind
                     if (nodeContext.SemanticModel.GetDeclaredSymbol(methodDeclaration, nodeContext.Cancel) is { } method
                         && !method.ContainingType.IsAbstract
                         && method.IsControllerActionMethod()
-                        && method.GetAttributesWithInherited().Any(x => !CanBeIgnored(x.GetAttributeRouteTemplate(RouteTemplateAttributes))))
+                        && method.GetAttributesWithInherited().Any(x => !CanBeIgnored(x.GetAttributeRouteTemplate())))
                     {
                         secondaryLocations.Push(methodDeclaration.Identifier.GetLocation());
                     }

@@ -222,10 +222,10 @@ public class ControllerOverridesActionWithRoute : BaseControllerWithActionWithRo
 public sealed class ExtendedRouteAttribute() : RouteAttribute("[controller]/[action]");
 
 [ExtendedRoute]
-public class SomeController : ControllerBase // Noncompliant, FP the route attribute template is set in the base class of ExtendedRouteAttribute
+public class SomeController : ControllerBase    // Compliant - the route attribute template is set in the base class of ExtendedRouteAttribute
 {
     [HttpGet("foo")]
-    public string Foo() => "Hi";            // Secondary
+    public string Foo() => "Hi";
 }
 
 // https://github.com/SonarSource/sonar-dotnet/issues/9252
