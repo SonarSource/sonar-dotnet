@@ -6,8 +6,6 @@ namespace NullableReferences
 {
     public class ModelUsedInController
     {
-        // if a string property is not set, and nullable context is disabled there's a validation error.
-        // Otherwise, strings behave always as nullable reference types.
 #nullable enable
         public string NonNullableReferenceProperty { get; set; }
         public object AnotherNonNullableReferenceProperty { get; set; }
