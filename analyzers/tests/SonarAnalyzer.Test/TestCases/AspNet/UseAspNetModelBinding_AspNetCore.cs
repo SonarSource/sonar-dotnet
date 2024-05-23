@@ -134,6 +134,9 @@ public class CodeBlocksController : Controller
         _ = Request.Form?["id"][0];     // Noncompliant
         _ = Request?.Form?["id"][0];    // Noncompliant
         _ = Request.Form?["id"][0];     // Noncompliant
+        _ = Request.Form!["id"][0];     // Noncompliant
+        _ = Request.Form!?["id"][0];    // Noncompliant
+        _ = Request.Form["id"]![0];     // Noncompliant
 
         _ = Request.Form?["id"][0][0];  // Noncompliant
         _ = Request.Form?["id"][0]?[0]; // Noncompliant
