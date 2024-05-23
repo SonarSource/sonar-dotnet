@@ -96,8 +96,7 @@ public class UseAspNetModelBindingTest
                 }
             }
             """").Verify();
-    /*
-     * Depends on https://github.com/SonarSource/sonar-dotnet/pull/8949
+
     [TestMethod]
     [CombinatorialData]
     public void UseAspNetModelBinding_CompliantAccess(
@@ -125,8 +124,7 @@ public class UseAspNetModelBindingTest
                     {{string.Format(statementFormat, $"{request}.{property}")}};
                 }
             }
-            """).Verify();
-    */
+            """).VerifyNoIssues();
 
     [DataTestMethod]
     [DataRow("Form")]
@@ -257,8 +255,6 @@ public class UseAspNetModelBindingTest
             }            
             """").VerifyNoIssues();
 
-    /*
-     * Depends on https://github.com/SonarSource/sonar-dotnet/pull/8949
     [TestMethod]
     [CombinatorialData]
     public void UseAspNetModelBinding_InheritanceAccess(
@@ -292,6 +288,5 @@ public class UseAspNetModelBindingTest
                 }
             }
             """").Verify();
-    */
 }
 #endif
