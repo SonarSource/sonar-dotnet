@@ -19,7 +19,7 @@
  */
 
 using System.Reflection;
-using Moq;
+using NSubstitute;
 
 namespace SonarAnalyzer.Test.TestFramework.Tests.Common;
 
@@ -150,9 +150,9 @@ public class CombinatorialDataAttributeTest_AttributeTest
     public void GetDisplayName_Test(string expected, params object[] arguments)
     {
         var attribute = new CombinatorialDataAttribute();
-        var methodInfo = new Mock<MethodInfo>();
-        methodInfo.SetupGet(x => x.Name).Returns("Test");
-        var actual = attribute.GetDisplayName(methodInfo.Object, arguments);
+        var methodInfo = Substitute.For<MethodInfo>();
+        methodInfo.Name.Returns("Test");
+        var actual = attribute.GetDisplayName(methodInfo, arguments);
         actual.Should().Be(expected);
     }
 
@@ -160,9 +160,9 @@ public class CombinatorialDataAttributeTest_AttributeTest
     public void GetDisplayName_Null()
     {
         var attribute = new CombinatorialDataAttribute();
-        var methodInfo = new Mock<MethodInfo>();
-        methodInfo.SetupGet(x => x.Name).Returns("Test");
-        var actual = attribute.GetDisplayName(methodInfo.Object, null);
+        var methodInfo = Substitute.For<MethodInfo>();
+        methodInfo.Name.Returns("Test");
+        var actual = attribute.GetDisplayName(methodInfo, null);
         actual.Should().Be("Test ()");
     }
 
@@ -172,6 +172,11 @@ public class CombinatorialDataAttributeTest_AttributeTest
     }
 
     public static void MissingAttribute([DataValues(1, 2, 3)] int x, string y, [DataValues(true, false)] bool z)
+    {
+        // Used for reflection only.
+    }
+
+    public static void EmptyDataValuesAttribute([DataValues] int x)
     {
         // Used for reflection only.
     }
