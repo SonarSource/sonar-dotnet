@@ -4,25 +4,25 @@ Imports MyRoute = Microsoft.AspNetCore.Mvc.RouteAttribute
 Imports ASP = Microsoft.AspNetCore
 
 <Route("[controller]")>
-Public Class NoncompliantController     ' FN Non-compliant {{Change the paths of the actions of this controller to be relative and adapt the controller route accordingly.}}
+Public Class NoncompliantController     ' Noncompliant {{Change the paths of the actions of this controller to be relative and adapt the controller route accordingly.}}
     Inherits Controller
-    <Route("/Index1")>                  ' FN Second-ary
+    <Route("/Index1")>                  ' Secondary
     Public Function Index1() As IActionResult
         Return View()
     End Function
 
-    <Route("/SubPath/Index2")>          ' FN Second-ary
+    <Route("/SubPath/Index2")>          ' Secondary
     Public Function Index2() As IActionResult
         Return View()
     End Function
 
-    <HttpGet("/[action]")>              ' FN Second-ary
+    <HttpGet("/[action]")>              ' Secondary
     Public Function Index3() As IActionResult
         Return View()
     End Function
 
-    <HttpGet("/SubPath/Index4_1")>      ' FN Second-ary
-    <HttpGet("/[controller]/Index4_2")> ' FN Second-ary
+    <HttpGet("/SubPath/Index4_1")>      ' Secondary
+    <HttpGet("/[controller]/Index4_2")> ' Secondary
     Public Function Index4() As IActionResult
         Return View()
     End Function
@@ -30,25 +30,25 @@ End Class
 
 <Route("[controller]")>
 <Route("[controller]/[action]")>
-Public Class NoncompliantMultiRouteController ' FN Non-compliant {{Change the paths of the actions of this controller to be relative and adapt the controller route accordingly.}}
+Public Class NoncompliantMultiRouteController ' Noncompliant {{Change the paths of the actions of this controller to be relative and adapt the controller route accordingly.}}
     Inherits Controller
-    <Route("/Index1")>                         ' FN Second-ary
+    <Route("/Index1")>                         ' Secondary
     Public Function Index1() As IActionResult
         Return View()
     End Function
 
-    <Route("/SubPath/Index2")>                  ' FN Second-ary
+    <Route("/SubPath/Index2")>                  ' Secondary
     Public Function Index2() As IActionResult
         Return View()
     End Function
 
-    <HttpGet("/[action]")>                      ' FN Second-ary
+    <HttpGet("/[action]")>                      ' Secondary
     Public Function Index3() As IActionResult
         Return View()
     End Function
 
-    <HttpGet("/SubPath/Index4_1")>             ' FN Second-ary
-    <HttpGet("/[controller]/Index4_2")>        ' FN Second-ary
+    <HttpGet("/SubPath/Index4_1")>             ' Secondary
+    <HttpGet("/[controller]/Index4_2")>        ' Secondary
     Public Function Index4() As IActionResult
         Return View()
     End Function
@@ -79,25 +79,25 @@ Public Class CompliantController ' Compliant: at least one action has at least a
     End Function
 End Class
 
-Public Class NoncompliantNoControllerRouteController ' FN Non-compliant {{Change the paths of the actions of this controller to be relative and add a controller route with the common prefix.}}
+Public Class NoncompliantNoControllerRouteController ' Noncompliant {{Change the paths of the actions of this controller to be relative and add a controller route with the common prefix.}}
     Inherits Controller
-    <Route("/Index1")>                               ' FN Second-ary
+    <Route("/Index1")>                               ' Secondary
     Public Function Index1() As IActionResult
         Return View()
     End Function
 
-    <Route("/SubPath/Index2")>                       ' FN Second-ary
+    <Route("/SubPath/Index2")>                       ' Secondary
     Public Function Index2() As IActionResult
         Return View()
     End Function
 
-    <HttpGet("/[action]")>                           ' FN Second-ary
+    <HttpGet("/[action]")>                           ' Secondary
     Public Function Index3() As IActionResult
         Return View()
     End Function
 
-    <HttpGet("/SubPath/Index4_1")>                  ' FN Second-ary
-    <HttpGet("/[controller]/Index4_2")>             ' FN Second-ary
+    <HttpGet("/SubPath/Index4_1")>                  ' Secondary
+    <HttpGet("/[controller]/Index4_2")>             ' Secondary
     Public Function Index4() As IActionResult
         Return View()
     End Function
@@ -152,64 +152,64 @@ End Class
 
 Namespace WithAliases
 
-    Public Class WithAliasedRouteAttributeController  ' FN Non-compliant
+    Public Class WithAliasedRouteAttributeController  ' Noncompliant
         Inherits Controller
-        <MyRoute("/[controller]")>                    ' FN Second-ary
+        <MyRoute("/[controller]")>                    ' Secondary
         Public Function Index() As IActionResult
             Return View()
         End Function
     End Class
 
-    Public Class WithFullQualifiedPartiallyAliasedNameController ' FN Non-compliant
+    Public Class WithFullQualifiedPartiallyAliasedNameController ' Noncompliant
         Inherits Controller
-        <ASP.Mvc.RouteAttribute("/[action]")>   ' FN Second-ary
+        <ASP.Mvc.RouteAttribute("/[action]")>   ' Secondary
         Public Function Index() As IActionResult
             Return View()
         End Function
     End Class
 End Namespace
 
-Public Class MultipleActionsAllRoutesStartingWithSlash1Controller ' FN Non-compliant
+Public Class MultipleActionsAllRoutesStartingWithSlash1Controller ' Noncompliant
     Inherits Controller
-    <HttpGet("/Index1")>                                          ' FN Second-ary
+    <HttpGet("/Index1")>                                          ' Secondary
     Public Function WithHttpAttribute() As IActionResult
         Return View()
     End Function
 
-    <Route("/Index2")>                                            ' FN Second-ary
+    <Route("/Index2")>                                            ' Secondary
     Public Function WithRouteAttribute() As IActionResult
         Return View()
     End Function
 End Class
 
-Public Class MultipleActionsAllRoutesStartingWithSlash2Controller ' FN Non-compliant
+Public Class MultipleActionsAllRoutesStartingWithSlash2Controller ' Noncompliant
     Inherits Controller
-    <HttpGet("/Index1")>                                          ' FN Second-ary
-    <HttpGet("/Index3")>                                          ' FN Second-ary
+    <HttpGet("/Index1")>                                          ' Secondary
+    <HttpGet("/Index3")>                                          ' Secondary
     Public Function WithHttpAttributes() As IActionResult
         Return View()
     End Function
 
-    <Route("/Index2")>                                            ' FN Second-ary
-    <Route("/Index4")>                                            ' FN Second-ary
-    <HttpGet("/Index5")>                                          ' FN Second-ary
+    <Route("/Index2")>                                            ' Secondary
+    <Route("/Index4")>                                            ' Secondary
+    <HttpGet("/Index5")>                                          ' Secondary
     Public Function WithRouteAndHttpAttributes() As IActionResult
         Return View()
     End Function
 End Class
 
 <Route("[controller]")>
-Public Class MultipleActionsAllRoutesStartingWithSlash3Controller ' FN Non-compliant
+Public Class MultipleActionsAllRoutesStartingWithSlash3Controller ' Noncompliant
     Inherits Controller
-    <HttpGet("/Index1")>                                          ' FN Second-ary
-    <HttpGet("/Index3")>                                          ' FN Second-ary
+    <HttpGet("/Index1")>                                          ' Secondary
+    <HttpGet("/Index3")>                                          ' Secondary
     Public Function WithHttpAttributes() As IActionResult
         Return View()
     End Function
 
-    <Route("/Index2")>                                            ' FN Second-ary
-    <Route("/Index4")>                                            ' FN Second-ary
-    <HttpGet("/Index5")>                                          ' FN Second-ary
+    <Route("/Index2")>                                            ' Secondary
+    <Route("/Index4")>                                            ' Secondary
+    <HttpGet("/Index5")>                                          ' Secondary
     Public Function WithRouteAndHttpAttributes() As IActionResult
         Return View()
     End Function
@@ -265,29 +265,29 @@ Public Class NotAController                     ' Compliant, not a controller
     End Function
 End Class
 
-Public Class ControllerWithoutControllerSuffix  ' FN Non-compliant
+Public Class ControllerWithoutControllerSuffix  ' Noncompliant
     Inherits Controller
-    <Route("/Index1")>                          ' FN Second-ary
+    <Route("/Index1")>                          ' Secondary
     Public Function Index() As IActionResult
         Return View()
     End Function
 End Class
 
 <Controller>
-Public Class ControllerWithControllerAttribute  ' FN Non-compliant
+Public Class ControllerWithControllerAttribute  ' Noncompliant
     Inherits Controller
-    <Route("/Index1")>                          ' FN Second-ary
+    <Route("/Index1")>                          ' Secondary
     Public Function Index() As IActionResult
         Return View()
     End Function
 End Class
 
-Public Class ControllerWithoutParameterlessConstructor  ' FN Non-compliant
+Public Class ControllerWithoutParameterlessConstructor  ' Noncompliant
     Inherits Controller
     Public Sub New(i As Integer)
     End Sub
 
-    <Route("/Index1")>                                  ' FN Second-ary
+    <Route("/Index1")>                                  ' Secondary
     Public Function Index() As IActionResult
         Return View()
     End Function
