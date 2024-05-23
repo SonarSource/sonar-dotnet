@@ -224,10 +224,12 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
     private static bool IsAccessedViaHeaderDictionary(SemanticModel model, ILanguageFacade language, SyntaxNode invocation) =>
         invocation is InvocationExpressionSyntax { Expression: { } expression }
             && GetLeftOfDot(expression) is { } left
-            && model.GetTypeInfo(left) is { Type: { } typeSymbol } && typeSymbol.Is(KnownType.Microsoft_AspNetCore_Http_IHeaderDictionary);
+            && model.GetTypeInfo(left) is { Type: { } typeSymbol }
+            && typeSymbol.Is(KnownType.Microsoft_AspNetCore_Http_IHeaderDictionary);
 
     private static bool IsOverridingFilterMethods(ISymbol owningSymbol) =>
-        (owningSymbol.GetOverriddenMember() ?? owningSymbol).ExplicitOrImplicitInterfaceImplementations().Any(x => x is IMethodSymbol { ContainingType: { } container }
+        (owningSymbol.GetOverriddenMember() ?? owningSymbol).ExplicitOrImplicitInterfaceImplementations().Any(x =>
+            x is IMethodSymbol { ContainingType: { } container }
             && container.IsAny(ActionFilterTypes));
 
     private static bool IsOriginatingFromParameter(SemanticModel semanticModel, ArgumentSyntax argument) =>
