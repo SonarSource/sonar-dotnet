@@ -29,7 +29,7 @@ public class UseAspNetModelBindingTest
 {
     private readonly VerifierBuilder builderAspNetCore = new VerifierBuilder<UseAspNetModelBinding>()
         .WithBasePath("AspNet")
-        .WithOptions(ParseOptionsHelper.FromCSharp12)
+        .WithOptions(ParseOptionsHelper.CSharpLatest)
         .AddReferences([
             AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
             AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
@@ -45,7 +45,7 @@ public class UseAspNetModelBindingTest
 
     [TestMethod]
     public void UseAspNetModelBinding_AspNetCore_CSharp12() =>
-        builderAspNetCore.AddPaths("UseAspNetModelBinding_AspNetCore.cs").Verify();
+        builderAspNetCore.AddPaths("UseAspNetModelBinding_AspNetCore_Latest.cs").Verify();
 
     [DataTestMethod]
     [DataRow("Form")]
