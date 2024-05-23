@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .ToList();
 
                     var invalidMembers = membersWithValues.Where(tuple => !IsValidFlagValue(tuple.Value, allValues))
-                        .Select(tuple => tuple.Member.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().ToSecondaryLocation())
+                        .Select(tuple => tuple.Member.GetFirstSyntaxRef()?.ToSecondaryLocation())
                         .WhereNotNull()
                         .ToList();
 

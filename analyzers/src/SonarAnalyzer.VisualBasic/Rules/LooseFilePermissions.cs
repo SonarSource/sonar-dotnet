@@ -48,15 +48,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 var invocationLocation = invocation.GetLocation();
                 var secondaryLocation = objectCreation.GetLocation();
-
-                if (invocationLocation.StartLine() == secondaryLocation.StartLine())
-                {
-                    context.ReportIssue(Rule, invocationLocation);
-                }
-                else
-                {
-                    context.ReportIssue(Rule, invocationLocation, [secondaryLocation.ToSecondary()]);
-                }
+                context.ReportIssue(Rule, invocationLocation, invocationLocation.StartLine() == secondaryLocation.StartLine() ? [] : [secondaryLocation.ToSecondary()]);
             }
         }
 

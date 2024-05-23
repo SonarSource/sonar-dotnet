@@ -49,14 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var invocationLocation = invocation.GetLocation();
                 var secondaryLocation = objectCreation.Expression.GetLocation();
-                if (invocationLocation.StartLine() == secondaryLocation.StartLine())
-                {
-                    context.ReportIssue(Rule, invocationLocation);
-                }
-                else
-                {
-                    context.ReportIssue(Rule, invocationLocation, [secondaryLocation.ToSecondary()]);
-                }
+                context.ReportIssue(Rule, invocationLocation, invocationLocation.StartLine() == secondaryLocation.StartLine() ? [] : [secondaryLocation.ToSecondary()]);
             }
         }
 
