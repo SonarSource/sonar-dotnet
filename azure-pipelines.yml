@@ -5,10 +5,12 @@ schedules:
   branches:
     include:
     - master
+    - branch-*
   always: true
 
 trigger:
 - master
+- branch-*
 
 pool: .net-bubble-aws-re-team-prod
 
