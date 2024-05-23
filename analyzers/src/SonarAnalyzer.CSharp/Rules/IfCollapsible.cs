@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var ifStatement = (IfStatementSyntax)c.Node;
 
-                    if (ifStatement.Else != null)
+                    if (ifStatement.Else is not null)
                     {
                         return;
                     }
@@ -41,10 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var parentIfStatement = GetParentIfStatement(ifStatement);
                     if (parentIfStatement is { Else: null })
                     {
-                        c.ReportIssue(Rule.CreateDiagnostic(c.Compilation,
-                            ifStatement.IfKeyword.GetLocation(),
-                            additionalLocations: new[] { parentIfStatement.IfKeyword.GetLocation() },
-                            properties: null));
+                        c.ReportIssue(Rule, ifStatement.IfKeyword, [parentIfStatement.IfKeyword.ToSecondaryLocation()]);
                     }
                 },
                 SyntaxKind.IfStatement);

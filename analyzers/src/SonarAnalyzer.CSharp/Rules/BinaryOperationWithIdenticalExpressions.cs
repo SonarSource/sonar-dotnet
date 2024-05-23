@@ -73,16 +73,10 @@ namespace SonarAnalyzer.Rules.CSharp
             var methodSymbol = context.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
 
             var operands = GetOperands(invocation, methodSymbol);
-            if (operands != null &&
-                CSharpEquivalenceChecker.AreEquivalent(RemoveParentheses(operands.Item1), RemoveParentheses(operands.Item2)))
+            if (operands is not null && CSharpEquivalenceChecker.AreEquivalent(RemoveParentheses(operands.Item1), RemoveParentheses(operands.Item2)))
             {
                 var message = string.Format(EqualsMessage, operands.Item2);
-                var diagnostic = Rule.CreateDiagnostic(context.Compilation,
-                    operands.Item1.GetLocation(),
-                    additionalLocations: new[] { operands.Item2.GetLocation() },
-                    properties: null,
-                    messageArgs: message);
-                context.ReportIssue(diagnostic);
+                context.ReportIssue(Rule, operands.Item1.GetLocation(), [operands.Item2.ToSecondaryLocation()], message);
             }
         }
 
@@ -118,12 +112,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (CSharpEquivalenceChecker.AreEquivalent(left.RemoveParentheses(), right.RemoveParentheses()))
             {
                 var message = string.Format(OperatorMessageFormat, operatorToken);
-                context.ReportIssue(Rule.CreateDiagnostic(context.Compilation,
-                    right.GetLocation(),
-                    additionalLocations:
-                    new[] { left.GetLocation() },
-                    properties: null,
-                    messageArgs: message));
+                context.ReportIssue(Rule, right, [left.ToSecondaryLocation()], message);
             }
         }
     }

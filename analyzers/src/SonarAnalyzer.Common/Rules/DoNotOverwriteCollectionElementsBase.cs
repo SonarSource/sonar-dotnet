@@ -68,9 +68,9 @@ namespace SonarAnalyzer.Rules
                 .TakeWhile(IsSameCollection(collectionIdentifier))
                 .FirstOrDefault(IsSameIndexOrKey(indexOrKey));
 
-            if (previousSet != null)
+            if (previousSet is not null)
             {
-                context.ReportIssue(Rule.CreateDiagnostic(context.Compilation, context.Node.GetLocation(), additionalLocations: new[] { previousSet.GetLocation() }, properties: null));
+                context.ReportIssue(Rule, context.Node, [previousSet.ToSecondaryLocation()]);
             }
         }
 

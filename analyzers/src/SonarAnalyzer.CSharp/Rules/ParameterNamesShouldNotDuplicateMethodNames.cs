@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var parameterName = parameter.ToString();
                 if (string.Equals(parameterName, methodName, StringComparison.OrdinalIgnoreCase))
                 {
-                    context.ReportIssue(rule.CreateDiagnostic(context.Compilation, parameter.GetLocation(), new[] { identifier.GetLocation() }, properties: null, parameterName));
+                    context.ReportIssue(rule, parameter, [identifier.ToSecondaryLocation()], parameterName);
                 }
             }
         }

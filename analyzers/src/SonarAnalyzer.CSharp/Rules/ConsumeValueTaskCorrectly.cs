@@ -55,17 +55,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         if (syntaxNodes.Count > 1)
                         {
-                            c.ReportIssue(rule.CreateDiagnostic(c.Compilation,
-                                syntaxNodes.First().GetLocation(),
-                                additionalLocations: syntaxNodes.Skip(1).Select(node => node.GetLocation()).ToArray(),
-                                properties: null,
-                                messageArgs: ConsumeOnlyOnceMessage));
+                            c.ReportIssue(rule, syntaxNodes.First(), syntaxNodes.Skip(1).Select(x => x.ToSecondaryLocation()), ConsumeOnlyOnceMessage);
                         }
                     }
 
                     foreach (var node in walker.ConsumedButNotCompleted)
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, node.GetLocation(), messageArgs: ConsumeOnlyIfCompletedMessage   ));
+                        c.ReportIssue(rule, node, ConsumeOnlyIfCompletedMessage);
                     }
                 },
                 // when visiting a method or another member with logic inside, lambdas and local functions will be visited as well

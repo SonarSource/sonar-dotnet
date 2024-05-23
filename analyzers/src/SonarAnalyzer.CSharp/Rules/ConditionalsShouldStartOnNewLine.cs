@@ -39,10 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (TryGetPreviousTokenInSameLine(ifKeyword, out var previousTokenInSameLine) &&
                     previousTokenInSameLine.IsKind(SyntaxKind.CloseBraceToken))
                 {
-                    c.ReportIssue(rule.CreateDiagnostic(c.Compilation,
-                        ifKeyword.GetLocation(),
-                        additionalLocations: new[] { previousTokenInSameLine.GetLocation() },
-                        properties: null));
+                    c.ReportIssue(rule, ifKeyword, [previousTokenInSameLine.GetLocation().ToSecondary()]);
                 }
             },
             SyntaxKind.IfStatement);

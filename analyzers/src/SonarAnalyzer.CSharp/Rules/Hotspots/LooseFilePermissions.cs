@@ -18,6 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Extensions;
+
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -34,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var node = context.Node;
             if (IsFileAccessPermissions(node, context.SemanticModel) && !node.IsPartOfBinaryNegationOrCondition())
             {
-                context.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                context.ReportIssue(Rule, node);
             }
         }
 
@@ -46,12 +49,14 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var invocationLocation = invocation.GetLocation();
                 var secondaryLocation = objectCreation.Expression.GetLocation();
-
-                var diagnostic = invocationLocation.StartLine() == secondaryLocation.StartLine()
-                    ? Diagnostic.Create(Rule, invocationLocation)
-                    : Rule.CreateDiagnostic(context.Compilation, invocationLocation, additionalLocations: new[] {secondaryLocation}, properties: null);
-
-                context.ReportIssue(diagnostic);
+                if (invocationLocation.StartLine() == secondaryLocation.StartLine())
+                {
+                    context.ReportIssue(Rule, invocationLocation);
+                }
+                else
+                {
+                    context.ReportIssue(Rule, invocationLocation, [secondaryLocation.ToSecondary()]);
+                }
             }
         }
 
@@ -63,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static IObjectCreation GetObjectCreation(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
         {
-            if (GetVulnerableFileSystemAccessRule(invocation.DescendantNodes()) is { }  accessRuleSyntaxNode)
+            if (GetVulnerableFileSystemAccessRule(invocation.DescendantNodes()) is { } accessRuleSyntaxNode)
             {
                 return accessRuleSyntaxNode;
             }
@@ -85,21 +90,21 @@ namespace SonarAnalyzer.Rules.CSharp
             objectCreation.IsKnownType(KnownType.System_Security_AccessControl_FileSystemAccessRule, semanticModel)
             && objectCreation.ArgumentList is { } argumentList
             && IsEveryone(argumentList.Arguments.First().Expression, semanticModel)
-            && semanticModel.GetConstantValue(argumentList.Arguments.Last().Expression) is {HasValue: true, Value: 0};
+            && semanticModel.GetConstantValue(argumentList.Arguments.Last().Expression) is { HasValue: true, Value: 0 };
 
         private static bool IsEveryone(SyntaxNode syntaxNode, SemanticModel semanticModel) =>
-            semanticModel.GetConstantValue(syntaxNode) is {HasValue: true, Value: Everyone}
+            semanticModel.GetConstantValue(syntaxNode) is { HasValue: true, Value: Everyone }
             || FilterObjectCreations(syntaxNode.DescendantNodesAndSelf()).Any(x => IsNTAccountWithEveryone(x, semanticModel) || IsSecurityIdentifierWithEveryone(x, semanticModel));
 
         private static bool IsNTAccountWithEveryone(IObjectCreation objectCreation, SemanticModel semanticModel) =>
             objectCreation.IsKnownType(KnownType.System_Security_Principal_NTAccount, semanticModel)
             && objectCreation.ArgumentList is { } argumentList
-            && semanticModel.GetConstantValue(argumentList.Arguments.Last().Expression) is { HasValue: true, Value: Everyone};
+            && semanticModel.GetConstantValue(argumentList.Arguments.Last().Expression) is { HasValue: true, Value: Everyone };
 
         private static bool IsSecurityIdentifierWithEveryone(IObjectCreation objectCreation, SemanticModel semanticModel) =>
             objectCreation.IsKnownType(KnownType.System_Security_Principal_SecurityIdentifier, semanticModel)
             && objectCreation.ArgumentList is { } argumentList
-            && semanticModel.GetConstantValue(argumentList.Arguments.First().Expression) is { HasValue: true, Value: 1};
+            && semanticModel.GetConstantValue(argumentList.Arguments.First().Expression) is { HasValue: true, Value: 1 };
 
         private static IEnumerable<IObjectCreation> FilterObjectCreations(IEnumerable<SyntaxNode> nodes) =>
             nodes.Where(x => x.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression))

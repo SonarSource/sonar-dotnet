@@ -54,15 +54,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var operands = GetOperandsToCheckIfTrackedMethod(invocation, c.SemanticModel);
-                    if (operands != null &&
-                        CSharpEquivalenceChecker.AreEquivalent(operands.Left, operands.Right))
+                    if (operands is not null && CSharpEquivalenceChecker.AreEquivalent(operands.Left, operands.Right))
                     {
-                        c.ReportIssue(rule.CreateDiagnostic(c.Compilation,
-                            operands.Left.GetLocation(),
-                            new[] { operands.Right.GetLocation() },
-                            properties: null,
-                            operands.Right.ToString(),
-                            operands.ErrorMessage));
+                        c.ReportIssue(rule, operands.Left, [operands.Right.ToSecondaryLocation()], operands.Right.ToString(), operands.ErrorMessage);
                     }
                 }, SyntaxKind.InvocationExpression);
         }

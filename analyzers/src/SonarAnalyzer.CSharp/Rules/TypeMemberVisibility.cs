@@ -49,12 +49,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     var secondaryLocations = GetInvalidMemberLocations(c.SemanticModel, typeDeclaration);
                     if (secondaryLocations.Any())
                     {
-                        c.ReportIssue(Rule.CreateDiagnostic(c.Compilation, typeDeclaration.Identifier.GetLocation(), additionalLocations: secondaryLocations, properties: null));
+                        c.ReportIssue(Rule, typeDeclaration.Identifier, secondaryLocations);
                     }
                 },
                 TypeKinds);
 
-        private static Location[] GetInvalidMemberLocations(SemanticModel semanticModel, BaseTypeDeclarationSyntax type)
+        private static SecondaryLocation[] GetInvalidMemberLocations(SemanticModel semanticModel, BaseTypeDeclarationSyntax type)
         {
             var parentType = GetParentType(type);
             if (parentType is null && type.Modifiers.AnyOfKind(SyntaxKind.InternalKeyword))
@@ -65,11 +65,11 @@ namespace SonarAnalyzer.Rules.CSharp
                                        && !x.Modifiers().AnyOfKind(SyntaxKind.OverrideKeyword) // Overridden member need to keep the visibility of the base declaration
                                        && !x.IsAnyKind(SyntaxKind.OperatorDeclaration, SyntaxKind.ConversionOperatorDeclaration) // Operators must be public
                                        && !IsInterfaceImplementation(semanticModel, x))
-                           .Select(x => x.Modifiers().Single(modifier => modifier.IsKind(SyntaxKind.PublicKeyword)).GetLocation())
+                           .Select(x => x.Modifiers().Single(modifier => modifier.IsKind(SyntaxKind.PublicKeyword)).ToSecondaryLocation())
                            .ToArray();
             }
 
-            return Array.Empty<Location>();
+            return [];
         }
 
         private static bool IsInterfaceImplementation(SemanticModel semanticModel, MemberDeclarationSyntax declaration) =>
