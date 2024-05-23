@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules
                                 && Language.Syntax.ArgumentList(c.Node).FirstOrDefault(x => MatchingNames(parameterSymbol, ArgumentName(x))) is { })
                             {
                                 var secondaryLocations = methodParameterLookup.MethodSymbol.DeclaringSyntaxReferences
-                                    .Select(s => Language.Syntax.NodeIdentifier(s.GetSyntax())?.GetLocation()?.ToSecondary())
+                                    .Select(x => Language.Syntax.NodeIdentifier(x.GetSyntax())?.ToSecondaryLocation())
                                     .WhereNotNull();
                                 c.ReportIssue(Rule, PrimaryLocation(c.Node), secondaryLocations, methodParameterLookup.MethodSymbol.Name);
                                 return;

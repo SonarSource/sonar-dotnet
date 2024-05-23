@@ -75,7 +75,7 @@ public class ParametersCorrectOrderTest
             """).VerifyNoIssuesIgnoreErrors();
 
     [TestMethod]
-    public void ParametersCorrectOrder_SecondaryLocationsOutsideCurrentCompilation()
+    public async Task ParametersCorrectOrder_SecondaryLocationsOutsideCurrentCompilation()
     {
         var library = TestHelper.CompileCS("""
             public static class Library
@@ -93,6 +93,7 @@ public class ParametersCorrectOrderTest
                 }
             }
             """, library.ToMetadataReference()).Model.Compilation;
-        usage.WithAnalyzers([new CS.ParametersCorrectOrder()]).GetAnalyzerDiagnosticsAsync().Result.Should().ContainSingle().Which.Id.Should().Be("S2234", "we don't want AD0001 here");
+        var diagnostics = await usage.WithAnalyzers([new CS.ParametersCorrectOrder()]).GetAnalyzerDiagnosticsAsync();
+        diagnostics.Should().ContainSingle().Which.Id.Should().Be("S2234", "we don't want AD0001 here");
     }
 }
