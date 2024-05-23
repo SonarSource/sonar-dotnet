@@ -19,6 +19,8 @@
  */
 
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
+using System.Reflection;
 using static System.Linq.Expressions.Expression;
 using CS = Microsoft.CodeAnalysis.CSharp;
 
@@ -54,8 +56,8 @@ public readonly struct SymbolStartAnalysisContextWrapper
     [ExcludeFromCodeCoverage]
     static SymbolStartAnalysisContextWrapper()
     {
-        var symbolStartAnalysisContextType = typeof(CompilationStartAnalysisContext).Assembly.GetType("Microsoft.CodeAnalysis.Diagnostics.SymbolStartAnalysisContext");
-        var languageKindEnumVBType = Type.GetType("Microsoft.CodeAnalysis.VisualBasic.SyntaxKind, Microsoft.CodeAnalysis.VisualBasic, Culture=neutral, PublicKeyToken=31bf3856ad364e35");
+        var symbolStartAnalysisContextType = TryLoadSymbolStartAnalysisContextType();
+        var languageKindEnumVBType = TryLoadLanguageKindEnumVBType();
         CancellationTokenAccessor = CreatePropertyAccessor<CancellationToken>(nameof(CancellationToken));
         CompilationAccessor = CreatePropertyAccessor<Compilation>(nameof(Compilation));
         OptionsAccessor = CreatePropertyAccessor<AnalyzerOptions>(nameof(Options));
@@ -159,6 +161,32 @@ public readonly struct SymbolStartAnalysisContextWrapper
                 receiverParameter,
                 registerActionParameter,
                 syntaxKindArrayParameter).Compile();
+        }
+
+        static Type TryLoadSymbolStartAnalysisContextType()
+        {
+            try
+            {
+                return typeof(CompilationStartAnalysisContext).Assembly.GetType("Microsoft.CodeAnalysis.Diagnostics.SymbolStartAnalysisContext", throwOnError: false);
+            }
+            // https://learn.microsoft.com/en-us/dotnet/api/system.reflection.assembly.gettype?view=net-8.0#system-reflection-assembly-gettype(system-string-system-boolean)
+            catch (Exception ex) when (ex is FileNotFoundException or FileLoadException or BadImageFormatException)
+            {
+                return null;
+            }
+        }
+
+        static Type TryLoadLanguageKindEnumVBType()
+        {
+            try
+            {
+                return Type.GetType("Microsoft.CodeAnalysis.VisualBasic.SyntaxKind, Microsoft.CodeAnalysis.VisualBasic, Culture=neutral, PublicKeyToken=31bf3856ad364e35", throwOnError: false);
+            }
+            // https://learn.microsoft.com/en-us/dotnet/api/system.type.gettype?view=net-8.0#system-type-gettype(system-string-system-boolean)
+            catch (Exception ex) when (ex is TargetInvocationException or FileLoadException or BadImageFormatException)
+            {
+                return null;
+            }
         }
     }
 
