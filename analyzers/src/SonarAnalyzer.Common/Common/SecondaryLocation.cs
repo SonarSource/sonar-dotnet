@@ -44,11 +44,4 @@ public static class SecondaryLocationExtensions
             .Select((item, index) => new { message, Index = index.ToString() })
             .ToDictionary(x => x.Index, x => message)
             .ToImmutableDictionary();
-
-    // FIXME: This does not belong in here
-    public static SecondaryLocation GetSecondaryLocation(this Diagnostic diagnostic, int index) =>
-        diagnostic.AdditionalLocations.Count <= index
-                ? throw new ArgumentOutOfRangeException(nameof(index))
-                : new SecondaryLocation(diagnostic.AdditionalLocations[index],
-                                        ((IDictionary<string, string>)diagnostic.Properties).GetValueOrDefault(index.ToString()));
 }
