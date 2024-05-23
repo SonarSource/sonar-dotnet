@@ -93,6 +93,6 @@ public class ParametersCorrectOrderTest
                 }
             }
             """, library.ToMetadataReference()).Model.Compilation;
-        usage.WithAnalyzers([new CS.ParametersCorrectOrder()]).GetAnalyzerDiagnosticsAsync().Result.Should().ContainSingle().Which.Id.Should().Be("AD0001");    // FIXME: No, it shouldn't be AD0001
+        usage.WithAnalyzers([new CS.ParametersCorrectOrder()]).GetAnalyzerDiagnosticsAsync().Result.Should().ContainSingle().Which.Id.Should().Be("S2234", "we don't want AD0001 here");
     }
 }
