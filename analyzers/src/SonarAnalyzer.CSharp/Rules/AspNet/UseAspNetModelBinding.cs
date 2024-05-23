@@ -44,11 +44,11 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
             var descriptors = GetDescriptors(compilationStartContext.Compilation);
             if (descriptors.ArgumentDescriptors.Any() || descriptors.PropertyAccessDescriptors.Any())
             {
-                SymbolRegistrations(compilationStartContext, descriptors);
+                RegisterForSymbols(compilationStartContext, descriptors);
             }
         });
 
-    private void SymbolRegistrations(SonarCompilationStartAnalysisContext compilationStartContext, Descriptors descriptors) =>
+    private void RegisterForSymbols(SonarCompilationStartAnalysisContext compilationStartContext, Descriptors descriptors) =>
         compilationStartContext.RegisterSymbolStartAction(symbolStart =>
         {
             // If the user overrides any action filters, model binding may not be working as expected.
