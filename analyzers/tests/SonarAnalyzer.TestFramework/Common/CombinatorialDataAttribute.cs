@@ -41,30 +41,25 @@ public sealed class CombinatorialDataAttribute : Attribute, ITestDataSource
     {
         var valuesPerParameter = methodInfo.GetParameters().Select(x => x.GetCustomAttribute<DataValuesAttribute>()?.Values
             ?? throw new InvalidOperationException("Combinatorial test requires all parameters to have the [DataValues] attribute set")).ToArray();
-        var parameterIndices = new int[valuesPerParameter.Length];
-
-        while (true)
+        if (valuesPerParameter.Length == 0)
         {
-            yield return CreateArguments(valuesPerParameter, parameterIndices);
+            throw new InvalidOperationException("Combinatorial test must specify parameters with [DataValues] attributes");
+        }
+        var arrayLengths = valuesPerParameter.Select(x => x.Length == 0
+            ? throw new InvalidOperationException($"[DataValues] attribute must have values set for all parameters")
+            : x.Length).ToArray();
+        var totalCombinations = arrayLengths.Aggregate(1, (x, y) => x * y);
+        var parameterIndices = new int[arrayLengths.Length];
 
-            // Increment indices
-            for (int i = parameterIndices.Length - 1; i >= 0; i--)
+        for (var i = 0; i < totalCombinations; i++)
+        {
+            var temp = i;
+            for (var j = arrayLengths.Length - 1; j >= 0; j--)
             {
-                parameterIndices[i]++;
-                if (parameterIndices[i] >= valuesPerParameter[i].Length)
-                {
-                    parameterIndices[i] = 0;
-
-                    if (i == 0)
-                    {
-                        yield break;
-                    }
-                }
-                else
-                {
-                    break;
-                }
+                parameterIndices[j] = temp % arrayLengths[j];
+                temp /= arrayLengths[j];
             }
+            yield return CreateArguments(valuesPerParameter, parameterIndices);
         }
     }
 
