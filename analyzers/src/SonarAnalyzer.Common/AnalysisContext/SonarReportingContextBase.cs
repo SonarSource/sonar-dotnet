@@ -103,14 +103,6 @@ public abstract class SonarTreeReportingContextBase<TContext> : SonarReportingCo
     public void ReportIssue(DiagnosticDescriptor rule, SyntaxToken locationToken, params string[] messageArgs) =>
         ReportIssue(rule, locationToken.GetLocation(), messageArgs);
 
-    [Obsolete("Use overload with IEnumrable<SecondaryLocation> instead")]
-    public void ReportIssue(DiagnosticDescriptor rule, SyntaxToken locationToken, IEnumerable<SyntaxNode> additionalLocations, params string[] messageArgs) =>
-        ReportIssueCore(Diagnostic.Create(rule, locationToken.GetLocation(), additionalLocations.Select(x => x.GetLocation()), messageArgs));
-
-    [Obsolete("Use overload with IEnumrable<SecondaryLocation> instead")]
-    public void ReportIssue(DiagnosticDescriptor rule, Location location, IEnumerable<Location> additionalLocations, ImmutableDictionary<string, string> properties, params string[] messageArgs) =>
-        ReportIssueCore(Diagnostic.Create(rule, location, additionalLocations, properties, messageArgs));
-
     public void ReportIssue(DiagnosticDescriptor rule, SyntaxToken primaryLocationToken, IEnumerable<SecondaryLocation> secondaryLocations, params string[] messageArgs) =>
         ReportIssue(rule, primaryLocationToken.GetLocation(), secondaryLocations, messageArgs);
 
