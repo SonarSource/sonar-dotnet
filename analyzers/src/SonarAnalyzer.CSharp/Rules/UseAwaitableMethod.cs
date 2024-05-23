@@ -27,6 +27,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6966";
     private const string MessageFormat = "Await {0} instead.";
+    private static readonly string[] MethodNamesAddAddRange = ["Add", "AddRange"];
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -112,7 +113,8 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
     }
 
     private static bool IsExcluded(IMethodSymbol methodSymbol) =>
-        methodSymbol.IsAny(KnownType.Microsoft_EntityFrameworkCore_DbSet_TEntity, "Add", "AddRange");
+        methodSymbol.IsAny(KnownType.Microsoft_EntityFrameworkCore_DbSet_TEntity, MethodNamesAddAddRange) // https://github.com/SonarSource/sonar-dotnet/issues/9269
+        || methodSymbol.IsAny(KnownType.Microsoft_EntityFrameworkCore_DbContext, MethodNamesAddAddRange); // https://github.com/SonarSource/sonar-dotnet/issues/9269
 
     private static IEnumerable<IMethodSymbol> GetMethodSymbolsInScope(string methodName, WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer,
         ITypeSymbol invokedType, ITypeSymbol methodContainer) =>

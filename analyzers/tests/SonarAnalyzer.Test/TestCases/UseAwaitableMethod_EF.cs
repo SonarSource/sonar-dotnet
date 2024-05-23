@@ -48,8 +48,8 @@ public class EnitityFramework
 
     public async Task Context(DbContext dbContext)
     {
-        dbContext.Add(null);            // Noncompliant FP https://github.com/SonarSource/sonar-dotnet/issues/9269
-        dbContext.AddRange(null);       // Noncompliant FP https://github.com/SonarSource/sonar-dotnet/issues/9269
+        dbContext.Add(null);            // Compliant https://github.com/SonarSource/sonar-dotnet/issues/9269
+        dbContext.AddRange(null);       // Compliant https://github.com/SonarSource/sonar-dotnet/issues/9269
         dbContext.Dispose();            // Noncompliant
         dbContext.Find<object>();       // Noncompliant
         dbContext.Find(typeof(object)); // Noncompliant
