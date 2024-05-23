@@ -53,7 +53,7 @@ internal static class SyntaxNodeExtensions
         return root.SyntaxTree.FilePath;
     }
 
-    public static TSyntaxKind Kind<TSyntaxKind>(this SyntaxNode node) where TSyntaxKind : struct, Enum => // internal to not be confused with e.g. CSharp.SyntaxNode.Kind()
+    public static TSyntaxKind Kind<TSyntaxKind>(this SyntaxNode node) where TSyntaxKind : struct, Enum =>
         node is null ? default : (TSyntaxKind)Enum.ToObject(typeof(TSyntaxKind), node.RawKind);
 
     public static SecondaryLocation ToSecondaryLocation(this SyntaxNode node, string message = null) =>

@@ -34,7 +34,7 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
             && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(diagnostic.Descriptor, diagnostic.Location?.SourceTree))
         {
             var reportingContext = CreateReportingContext(diagnostic);
-            if (!reportingContext.Compilation.IsValidLocation(diagnostic.Location))
+            if (!diagnostic.Location.IsValid(reportingContext.Compilation))
             {
                 Debug.Fail("Primary location should be part of the compilation. An AD0001 is raised if this is not the case.");
                 return;
@@ -111,8 +111,8 @@ public abstract class SonarTreeReportingContextBase<TContext> : SonarReportingCo
 
     public void ReportIssue(DiagnosticDescriptor rule, Location primaryLocation, IEnumerable<SecondaryLocation> secondaryLocations, params string[] messageArgs)
     {
-        secondaryLocations = secondaryLocations.Where(x => Compilation.IsValidLocation(x.Location)).ToArray();
-        var properties = secondaryLocations.Select((x, index) => new { x.Message, Index = index }).ToImmutableDictionary(x => x.Index.ToString(), x => x.Message);
+        secondaryLocations = secondaryLocations.Where(x => x.Location.IsValid(Compilation)).ToArray();
+        var properties = secondaryLocations.Select((x, index) => new KeyValuePair<string, string>(index.ToString(), x.Message)).ToImmutableDictionary();
         ReportIssueCore(Diagnostic.Create(rule, primaryLocation, secondaryLocations.Select(x => x.Location), properties, messageArgs));
     }
 }
