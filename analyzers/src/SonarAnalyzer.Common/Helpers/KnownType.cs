@@ -180,6 +180,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_TestInitializeAttribute = new("Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute");
         public static readonly KnownType Microsoft_Web_XmlTransform_XmlFileInfoDocument = new("Microsoft.Web.XmlTransform.XmlFileInfoDocument");
         public static readonly KnownType Microsoft_Web_XmlTransform_XmlTransformableDocument = new("Microsoft.Web.XmlTransform.XmlTransformableDocument");
+        public static readonly KnownType MongoDB_Driver_IMongoCollectionExtensions = new("MongoDB.Driver.IMongoCollectionExtensions");
         public static readonly KnownType Mono_Data_Sqlite_SqliteCommand = new("Mono.Data.Sqlite.SqliteCommand");
         public static readonly KnownType Mono_Data_Sqlite_SqliteDataAdapter = new("Mono.Data.Sqlite.SqliteDataAdapter");
         public static readonly KnownType Mono_Unix_FileAccessPermissions = new("Mono.Unix.FileAccessPermissions");
