@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Threading.Channels;
 using SonarAnalyzer.AnalysisContext;
 
 namespace SonarAnalyzer.Test.AnalysisContext;
@@ -49,5 +50,26 @@ public class SonarSyntaxTreeReportingContextTest
         sut.Compilation.Should().BeSameAs(model.Compilation);
         sut.Options.Should().BeSameAs(options);
         sut.Cancel.Should().Be(cancel);
+    }
+
+    [TestMethod]
+    public void ReportIssue_IgnoreSecondaryLocationOutsideCompilation()
+    {
+        Diagnostic lastDiagnostic = null;
+        var (tree, model) = TestHelper.CompileCS("using System;");
+        var secondaryTree = TestHelper.CompileCS("namespace Nothing;").Tree; // This tree is not in the analyzed compilation
+        var context = new SyntaxTreeAnalysisContext(tree, AnalysisScaffolding.CreateOptions(), x => lastDiagnostic = x, _ => true, default);
+        var sut = new SonarSyntaxTreeReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context, model.Compilation);
+        var rule = AnalysisScaffolding.CreateDescriptor("Sxxxx", DiagnosticDescriptorFactory.MainSourceScopeTag);
+
+        sut.ReportIssue(rule, tree.GetRoot(), [new SecondaryLocation(tree.GetRoot().GetLocation(), null)]);
+        lastDiagnostic.Should().NotBeNull();
+        lastDiagnostic.Id.Should().Be("Sxxxx");
+        lastDiagnostic.AdditionalLocations.Should().ContainSingle("This secondary location is in compilation");
+
+        sut.ReportIssue(rule, tree.GetRoot(), [new SecondaryLocation(secondaryTree.GetRoot().GetLocation(), null)]);
+        lastDiagnostic.Should().NotBeNull();
+        lastDiagnostic.Id.Should().Be("Sxxxx");
+        lastDiagnostic.AdditionalLocations.Should().BeEmpty("This secondary location is outside the compilation");
     }
 }
