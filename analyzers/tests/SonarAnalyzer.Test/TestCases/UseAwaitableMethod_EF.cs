@@ -11,8 +11,8 @@ public class EnitityFramework
     public async Task Query()
     {
         DbSet<object> dbSet = default;
-        dbSet.Add(null);      // Noncompliant FP https://github.com/SonarSource/sonar-dotnet/issues/9269
-        dbSet.AddRange(null); // Noncompliant FP https://github.com/SonarSource/sonar-dotnet/issues/9269
+        dbSet.Add(null);      // Compliant https://github.com/SonarSource/sonar-dotnet/issues/9269
+        dbSet.AddRange(null); // Compliant https://github.com/SonarSource/sonar-dotnet/issues/9269
         dbSet.All(x => true); // Noncompliant
         dbSet.Any(x => true); // Noncompliant
         dbSet.Average(x => 1); // Noncompliant

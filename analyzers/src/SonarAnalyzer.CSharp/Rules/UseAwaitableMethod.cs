@@ -93,7 +93,8 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
             && invocationExpression.EnclosingScope() is { } scope
             && IsAsyncCodeBlock(scope)
             && semanticModel.GetSymbolInfo(invocationExpression, cancel).Symbol is IMethodSymbol { MethodKind: not MethodKind.DelegateInvoke } methodSymbol
-            && !methodSymbol.IsAwaitableNonDynamic()) // The invoked method returns something awaitable (but it isn't awaited).
+            && !methodSymbol.IsAwaitableNonDynamic() // The invoked method returns something awaitable (but it isn't awaited).
+            && !IsExcluded(methodSymbol))
         {
             // Perf: Before doing (expensive) speculative re-binding in SpeculativeBindCandidates, we check if there is an "..Async()" alternative in scope.
             var invokedType = invocationExpression.Expression.GetLeftOfDot() is { } expression && semanticModel.GetTypeInfo(expression) is { Type: { } type }
@@ -109,6 +110,9 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         }
         return ImmutableArray<ISymbol>.Empty;
     }
+
+    private static bool IsExcluded(IMethodSymbol methodSymbol) =>
+        methodSymbol.IsAny(KnownType.Microsoft_EntityFrameworkCore_DbSet_TEntity, "Add", "AddRange");
 
     private static IEnumerable<IMethodSymbol> GetMethodSymbolsInScope(string methodName, WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer,
         ITypeSymbol invokedType, ITypeSymbol methodContainer) =>
