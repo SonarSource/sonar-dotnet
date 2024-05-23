@@ -20,10 +20,7 @@
 
 namespace SonarAnalyzer.Common;
 
-public record SecondaryLocation(Location Location, string Message)
-{
-    public SecondaryLocation(Location location) : this(location, null) { }
-}
+public record SecondaryLocation(Location Location, string Message);
 
 public static class SecondaryLocationExtensions
 {
