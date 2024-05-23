@@ -11,32 +11,32 @@ public class EntityFramework
     public async Task Query()
     {
         DbSet<object> dbSet = default;
-        dbSet.Add(null);      // Compliant https://github.com/SonarSource/sonar-dotnet/issues/9269
-        dbSet.AddRange(null); // Compliant https://github.com/SonarSource/sonar-dotnet/issues/9269
-        dbSet.All(x => true); // Noncompliant
-        dbSet.Any(x => true); // Noncompliant
-        dbSet.Average(x => 1); // Noncompliant
-        dbSet.Contains(null); // Noncompliant
-        dbSet.Count(); // Noncompliant
-        dbSet.ElementAt(1); // Compliant: EF 8.0 only
+        dbSet.Add(null);             // Compliant https://github.com/SonarSource/sonar-dotnet/issues/9269
+        dbSet.AddRange(null);        // Compliant https://github.com/SonarSource/sonar-dotnet/issues/9269
+        dbSet.All(x => true);        // Noncompliant
+        dbSet.Any(x => true);        // Noncompliant
+        dbSet.Average(x => 1);       // Noncompliant
+        dbSet.Contains(null);        // Noncompliant
+        dbSet.Count();               // Noncompliant
+        dbSet.ElementAt(1);          // Compliant: EF 8.0 only
         dbSet.ElementAtOrDefault(1); // Compliant: EF 8.0 only
-        dbSet.ExecuteDelete(); // Noncompliant
+        dbSet.ExecuteDelete();       // Noncompliant
         dbSet.ExecuteUpdate(x => x.SetProperty(x => x.ToString(), x => string.Empty)); // Noncompliant
-        dbSet.Find(null); // Noncompliant
-        dbSet.First(); // Noncompliant
-        dbSet.FirstOrDefault(); // Noncompliant
-        dbSet.Last(); // Noncompliant
-        dbSet.LastOrDefault(); // Noncompliant
-        dbSet.Load(); // Noncompliant
-        dbSet.LongCount(); // Noncompliant
-        dbSet.Max(); // Noncompliant
-        dbSet.Min(); // Noncompliant
-        dbSet.Single(); // Noncompliant
-        dbSet.SingleOrDefault(); // Noncompliant
-        dbSet.Sum(x => 0); // Noncompliant
-        dbSet.ToArray(); // Noncompliant
-        dbSet.ToDictionary(x => 0); // Noncompliant
-        dbSet.ToList(); // Noncompliant
+        dbSet.Find(null);            // Noncompliant
+        dbSet.First();               // Noncompliant
+        dbSet.FirstOrDefault();      // Noncompliant
+        dbSet.Last();                // Noncompliant
+        dbSet.LastOrDefault();       // Noncompliant
+        dbSet.Load();                // Noncompliant
+        dbSet.LongCount();           // Noncompliant
+        dbSet.Max();                 // Noncompliant
+        dbSet.Min();                 // Noncompliant
+        dbSet.Single();              // Noncompliant
+        dbSet.SingleOrDefault();     // Noncompliant
+        dbSet.Sum(x => 0);           // Noncompliant
+        dbSet.ToArray();             // Noncompliant
+        dbSet.ToDictionary(x => 0);  // Noncompliant
+        dbSet.ToList();              // Noncompliant
     }
 
     public async Task NotIQueryable(IEnumerable<object> enumerable)
