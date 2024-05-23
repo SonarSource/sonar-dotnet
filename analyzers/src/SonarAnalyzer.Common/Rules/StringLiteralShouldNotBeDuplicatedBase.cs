@@ -79,12 +79,7 @@ namespace SonarAnalyzer.Rules
             {
                 var duplicates = item.ToList();
                 var firstToken = duplicates[0];
-                context.ReportIssue(rule.CreateDiagnostic(context.Compilation,
-                    firstToken.GetLocation(),
-                    duplicates.Skip(1).Select(x => x.GetLocation()),
-                    properties: null,
-                    ExtractStringContent(firstToken),
-                    duplicates.Count));
+                context.ReportIssue(rule, firstToken, duplicates.Skip(1).Select(x => x.ToSecondaryLocation()), ExtractStringContent(firstToken), duplicates.Count.ToString());
             }
         }
 
