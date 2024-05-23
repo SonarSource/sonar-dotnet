@@ -6,7 +6,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-public class EnitityFramework
+public class EntityFramework
 {
     public async Task Query()
     {
