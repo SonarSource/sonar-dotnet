@@ -76,7 +76,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
         // receiverParameter => ((symbolStartAnalysisContextType)receiverParameter)."propertyName"
         Func<object, TProperty> CreatePropertyAccessor<TProperty>(string propertyName)
         {
-            if (symbolStartAnalysisContextType == null)
+            if (symbolStartAnalysisContextType is null)
             {
                 return static _ => default;
             }
@@ -90,7 +90,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
         //     ((symbolStartAnalysisContextType)receiverParameter)."registrationMethodName"<typeArguments>(registerActionParameter)
         Action<object, Action<TContext>> CreateRegistrationMethod<TContext>(string registrationMethodName, params Type[] typeArguments)
         {
-            if (symbolStartAnalysisContextType == null)
+            if (symbolStartAnalysisContextType is null)
             {
                 return static (_, _) => { };
             }
@@ -106,7 +106,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
         //     ((symbolStartAnalysisContextType)receiverParameter).RegisterCodeBlockStartAction<languageKindEnumType>(contextLanguageParameter => actionObjectParameter.Invoke(contextLanguageParameter))
         Action<object, Action<object>> CreateRegistrationMethodCodeBlockStart(Type languageKindEnumType)
         {
-            if (symbolStartAnalysisContextType == null || languageKindEnumType == null)
+            if (symbolStartAnalysisContextType is null || languageKindEnumType is null)
             {
                 return static (_, _) => { };
             }
@@ -128,7 +128,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
         //     ((symbolStartAnalysisContextType)receiverParameter)."registrationMethodName"<typeArguments>(registerActionParameter, additionalParameter)
         Action<object, Action<TContext>, TParameter> CreateRegistrationMethodWithAdditionalParameter<TContext, TParameter>(string registrationMethodName, params Type[] typeArguments)
         {
-            if (symbolStartAnalysisContextType == null)
+            if (symbolStartAnalysisContextType is null)
             {
                 return static (_, _, _) => { };
             }
@@ -146,7 +146,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
         //     ((symbolStartAnalysisContextType)receiverParameter).RegisterSyntaxNodeAction<languageKindEnumType>(contextParameter => registerActionParameter.Invoke(contextParameter), (languageKindEnumType[])syntaxKindArrayParameter)
         Action<object, Action<SyntaxNodeAnalysisContext>, object> CreateRegistrationMethodSyntaxNode(Type languageKindEnumType)
         {
-            if (symbolStartAnalysisContextType == null || languageKindEnumType == null)
+            if (symbolStartAnalysisContextType is null || languageKindEnumType is null)
             {
                 return static (_, _, _) => { };
             }
