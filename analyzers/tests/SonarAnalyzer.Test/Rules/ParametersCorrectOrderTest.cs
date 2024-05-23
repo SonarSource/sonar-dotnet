@@ -73,4 +73,26 @@ public class ParametersCorrectOrderTest
                 End Sub
             End Class
             """).VerifyNoIssuesIgnoreErrors();
+
+    [TestMethod]
+    public void ParametersCorrectOrder_SecondaryLocationsOutsideCurrentCompilation()
+    {
+        var library = TestHelper.CompileCS("""
+            public static class Library
+            {
+                public static void Method(int a, int b) { }
+            }
+            """).Model.Compilation;
+        var usage = TestHelper.CompileCS("""
+            public class Usage
+            {
+                public void Method()
+                {
+                    int a = 4, b = 2;
+                    Library.Method(b, a);
+                }
+            }
+            """, library.ToMetadataReference()).Model.Compilation;
+        usage.WithAnalyzers([new CS.ParametersCorrectOrder()]).GetAnalyzerDiagnosticsAsync().Result.Should().ContainSingle().Which.Id.Should().Be("AD0001");    // FIXME: No, it shouldn't be AD0001
+    }
 }
