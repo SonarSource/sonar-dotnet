@@ -133,6 +133,14 @@ public class CombinatorialDataAttributeTest_AttributeTest
         data.Should().Throw<InvalidOperationException>().WithMessage("Combinatorial test requires all parameters to have the [DataValues] attribute set");
     }
 
+    [TestMethod]
+    public void EmptyDataValuesAttribute_Test()
+    {
+        var attribute = new CombinatorialDataAttribute();
+        var data = () => attribute.GetData(typeof(CombinatorialDataAttributeTest_AttributeTest).GetMethod(nameof(EmptyDataValuesAttribute))).ToList();
+        data.Should().Throw<InvalidOperationException>().WithMessage("Combinatorial test requires all parameters to have the [DataValues] attribute set");
+    }
+
     [DataTestMethod]
     [DataRow("Test ()")]
     [DataRow("Test ()", null)]
