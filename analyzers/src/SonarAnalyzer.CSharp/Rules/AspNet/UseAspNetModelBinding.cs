@@ -28,6 +28,9 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
     private const string DiagnosticId = "S6932";
     private const string UseAspNetModelBindingMessage = "Use model binding instead of accessing the raw request data";
     private const string UseIFormFileBindingMessage = "Use IFormFile or IFormFileCollection binding instead";
+    private static readonly KnownType[] ActionFilterTypes = [
+        KnownType.Microsoft_AspNetCore_Mvc_Filters_IActionFilter,
+        KnownType.Microsoft_AspNetCore_Mvc_Filters_IAsyncActionFilter];
 
     protected override string MessageFormat => "{0}";
 
@@ -225,9 +228,7 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
 
     private static bool IsOverridingFilterMethods(ISymbol owningSymbol) =>
         (owningSymbol.GetOverriddenMember() ?? owningSymbol).ExplicitOrImplicitInterfaceImplementations().Any(x => x is IMethodSymbol { ContainingType: { } container }
-            && container.IsAny(
-                KnownType.Microsoft_AspNetCore_Mvc_Filters_IActionFilter,
-                KnownType.Microsoft_AspNetCore_Mvc_Filters_IAsyncActionFilter));
+            && container.IsAny(ActionFilterTypes));
 
     private static bool IsOriginatingFromParameter(SemanticModel semanticModel, ArgumentSyntax argument) =>
         GetExpressionOfArgumentParent(argument) is { } parentExpression && IsOriginatingFromParameter(semanticModel, parentExpression);
