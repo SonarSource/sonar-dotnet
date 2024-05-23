@@ -46,7 +46,7 @@ internal sealed class RestrictDeserializedTypes : ISymbolicExecutionAnalyzer
         public bool SupportsPartialResults => true;
 
         public IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation) =>
-            locations.Select(location => S5773.CreateDiagnostic(compilation, location.Primary, location.SecondaryLocations, properties: null, location.Message));
+            locations.Select(location => Diagnostic.Create(S5773, location.Primary, location.SecondaryLocations, properties: null, location.Message));
 
         public void Dispose()
         {
