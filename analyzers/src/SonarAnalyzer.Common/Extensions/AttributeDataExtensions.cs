@@ -28,8 +28,8 @@ namespace SonarAnalyzer.Extensions
         public static bool HasAnyName(this AttributeData attribute, params string[] names) =>
             names.Any(x => attribute.HasName(x));
 
-        public static string GetAttributeRouteTemplate(this AttributeData attribute, ImmutableArray<KnownType> attributeTypes) =>
-            attribute.AttributeClass.DerivesFromAny(attributeTypes)
+        public static string GetAttributeRouteTemplate(this AttributeData attribute) =>
+            attribute.AttributeClass.DerivesOrImplementsAny(AspNetMvcHelper.RouteTemplateProviders)
             && attribute.TryGetAttributeValue<string>("template", out var template)
                 ? template
                 : null;

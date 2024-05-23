@@ -114,6 +114,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute = new("Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_RouteAttribute = new("Microsoft.AspNetCore.Mvc.RouteAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute = new("Microsoft.AspNetCore.Mvc.Routing.HttpMethodAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_Routing_IRouteTemplateProvider = new("Microsoft.AspNetCore.Mvc.Routing.IRouteTemplateProvider");
         public static readonly KnownType Microsoft_AspNetCore_Razor_Hosting_RazorCompiledItemAttribute = new("Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Routing_RouteValueDictionary = new("Microsoft.AspNetCore.Routing.RouteValueDictionary");
         public static readonly KnownType Microsoft_Azure_Cosmos_CosmosClient = new("Microsoft.Azure.Cosmos.CosmosClient");
@@ -592,6 +593,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Web_Mvc_HttpPostAttribute = new("System.Web.Mvc.HttpPostAttribute");
         public static readonly KnownType System_Web_Mvc_NonActionAttribute = new("System.Web.Mvc.NonActionAttribute");
         public static readonly KnownType System_Web_Mvc_RouteAttribute = new("System.Web.Mvc.RouteAttribute");
+        public static readonly KnownType System_Web_Mvc_Routing_IRouteInfoProvider = new("System.Web.Mvc.Routing.IRouteInfoProvider");
         public static readonly KnownType System_Web_Mvc_RoutePrefixAttribute = new("System.Web.Mvc.RoutePrefixAttribute");
         public static readonly KnownType System_Web_Mvc_ValidateInputAttribute = new("System.Web.Mvc.ValidateInputAttribute");
         public static readonly KnownType System_Web_Script_Serialization_JavaScriptSerializer = new("System.Web.Script.Serialization.JavaScriptSerializer");
