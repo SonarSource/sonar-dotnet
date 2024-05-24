@@ -18,25 +18,28 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Rules.CSharp;
+using ChecksCS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
+using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]
 public class JwsSecretKeysTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<JwsSecretKeys>();
+    private readonly VerifierBuilder builder = new VerifierBuilder()
+                                               .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))
+                                               .WithOnlyDiagnostics(ChecksCS.JwsSecretKeys.S6781)
+                                               .AddReferences(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.NuGetLatestVersion))
+                                               .AddReferences(NuGetMetadataReference.MicrosoftIdentityModelTokens())
+                                               .AddReferences(NuGetMetadataReference.SystemIdentityModelTokensJwt());
 
 #if NET
 
     [TestMethod]
     public void JwsSecretKeys_CS_AspNetCore() =>
         builder
-            .WithOptions(ParseOptionsHelper.FromCSharp8) // Recursive pattern requires C#8 or later.
+            .WithOptions(ParseOptionsHelper.FromCSharp8) // Recursive pattern requires C# 8 or later.
             .AddPaths("JwsSecretKeys.AspNet.Core.cs")
-            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.NuGetLatestVersion))
-            .AddReferences(NuGetMetadataReference.MicrosoftIdentityModelTokens())
-            .AddReferences(NuGetMetadataReference.SystemIdentityModelTokensJwt())
             .AddReferences(new[] { CoreMetadataReference.SystemSecurityClaims })
             .Verify();
 
@@ -45,12 +48,8 @@ public class JwsSecretKeysTest
     [TestMethod]
     public void JwsSecretKeys_CS_AspNet() =>
         builder
-            .WithOptions(ParseOptionsHelper.FromCSharp8) // Recursive pattern requires C#8 or later.
             .AddPaths("JwsSecretKeys.AspNet.cs")
-            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.NuGetLatestVersion))
-            .AddReferences(NuGetMetadataReference.MicrosoftIdentityModelTokens())
             .AddReferences(NuGetMetadataReference.SystemConfigurationConfigurationManager())
-            .AddReferences(NuGetMetadataReference.SystemIdentityModelTokensJwt())
             .Verify();
 
 #endif

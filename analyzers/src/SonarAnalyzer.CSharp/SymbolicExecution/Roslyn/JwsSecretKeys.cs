@@ -18,26 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp;
+namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class JwsSecretKeys : SonarDiagnosticAnalyzer
+public sealed class JwsSecretKeys : SymbolicRuleCheck
 {
     private const string DiagnosticId = "S6781";
     private const string MessageFormat = "JWT secret keys should not be disclosed.";
 
-    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    public static readonly DiagnosticDescriptor S6781 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+    protected override DiagnosticDescriptor Rule => S6781;
 
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
-            {
-                var node = c.Node;
-                if (true)
-                {
-                    c.ReportIssue(Rule, node.GetLocation());
-                }
-            },
-            SyntaxKind.InvocationExpression);
+    public override bool ShouldExecute() => true;
+
+
 }
