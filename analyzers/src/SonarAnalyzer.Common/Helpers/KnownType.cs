@@ -159,6 +159,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_Extensions_Logging_LoggerFactoryExtensions = new("Microsoft.Extensions.Logging.LoggerFactoryExtensions");
         public static readonly KnownType Microsoft_Extensions_Logging_LogLevel = new("Microsoft.Extensions.Logging.LogLevel");
         public static readonly KnownType Microsoft_Extensions_Primitives_StringValues = new("Microsoft.Extensions.Primitives.StringValues");
+        public static readonly KnownType Microsoft_IdentityModel_Tokens_SymmetricSecurityKey = new("Microsoft.IdentityModel.Tokens.SymmetricSecurityKey");
         public static readonly KnownType Microsoft_Net_Http_Headers_HeaderNames = new("Microsoft.Net.Http.Headers.HeaderNames");
         public static readonly KnownType Microsoft_JSInterop_JSInvokable = new("Microsoft.JSInterop.JSInvokableAttribute");
         public static readonly KnownType Microsoft_VisualBasic_Information = new("Microsoft.VisualBasic.Information");
@@ -396,6 +397,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_IComparable = new("System.IComparable");
         public static readonly KnownType System_IComparable_T = new("System.IComparable", "T");
         public static readonly KnownType System_IdentityModel_Tokens_SecurityTokenHandler = new("System.IdentityModel.Tokens.SecurityTokenHandler");
+        public static readonly KnownType System_IdentityModel_Tokens_SymmetricSecurityKey = new("System.IdentityModel.Tokens.SymmetricSecurityKey");
         public static readonly KnownType System_IDisposable = new("System.IDisposable");
         public static readonly KnownType System_IEquatable_T = new("System.IEquatable", "T");
         public static readonly KnownType System_IFormatProvider = new("System.IFormatProvider");

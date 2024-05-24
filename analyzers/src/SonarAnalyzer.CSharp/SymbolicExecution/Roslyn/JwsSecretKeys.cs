@@ -35,4 +35,45 @@ public sealed class JwsSecretKeys : HardcodedBytesRuleBase
     protected override SymbolicConstraint NotHardcoded => CryptographicKeyConstraint.StoredSafe;
 
     public override bool ShouldExecute() => true;
+
+    protected override ProgramState PreProcessSimple(SymbolicContext context)
+    {
+        var state = context.State;
+        var operation = context.Operation.Instance;
+
+        if (operation.AsArrayCreation() is { } arrayCreation)
+        {
+            return ProcessArrayCreation(state, arrayCreation);
+        }
+        else if (operation.AsArrayElementReference() is { } arrayElementReference)
+        {
+            return ProcessArrayElementReference(state, arrayElementReference);
+        }
+        else if (operation.AsObjectCreation() is { } objectCreation)
+        {
+            return ProcessSymmetricSecurityKeyConstructor(state, objectCreation);
+        }
+        else if (operation.AsInvocation() is { } invocation)
+        {
+            return ProcessArraySetValue(state, invocation)
+                   ?? ProcessArrayInitialize(state, invocation)
+                   ?? ProcessStringToBytes(state, invocation)
+                   ?? state;
+        }
+
+        return state;
+    }
+
+    private ProgramState ProcessSymmetricSecurityKeyConstructor(ProgramState state, IObjectCreationOperationWrapper objectCreation)
+    {
+        // SymmetricSecurityKey is defined in both System.IdentityModel.Tokens and Microsoft.IdentityModel.Tokens.
+        if (objectCreation.Type.IsAny(KnownType.System_IdentityModel_Tokens_SymmetricSecurityKey, KnownType.Microsoft_IdentityModel_Tokens_SymmetricSecurityKey)
+            && objectCreation.Arguments.Length == 1
+            && objectCreation.Arguments[0] is { } argument
+            && state[argument]?.HasConstraint(CryptographicKeyConstraint.StoredUnsafe) is true)
+        {
+            ReportIssue(objectCreation.WrappedOperation);
+        }
+        return state;
+    }
 }
