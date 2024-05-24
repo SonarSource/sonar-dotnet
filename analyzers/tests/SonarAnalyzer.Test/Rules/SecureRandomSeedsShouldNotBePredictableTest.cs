@@ -204,7 +204,7 @@ public class SecureRandomSeedsShouldNotBePredictableTest
 
 #if NET
     [TestMethod]
-    public void SecureRandomSeedsShouldNotBePredictable_CS_IRandomGenerator_CustomImplementation() =>
+    public void SecureRandomSeedsShouldNotBePredictable_CS_IRandomGenerator_Inheritance() =>
         builder
             .AddSnippet($$$"""
                 using System;

@@ -69,11 +69,15 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : SymbolicRuleCheck
         return state;
     }
 
+    // new VmpcRandomGenerator()
+    // new DigestRandomGenerator(digest)
     private static ProgramState ProcessObjectCreation(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
         objectCreation.Type.IsAny(KnownType.Org_BouncyCastle_Crypto_Prng_DigestRandomGenerator, KnownType.Org_BouncyCastle_Crypto_Prng_VmpcRandomGenerator)
             ? state.SetOperationConstraint(objectCreation, CryptographicSeedConstraint.Predictable)
             : state;
 
+    // new byte/char[] { ... }
+    // new byte/char[42]
     private static ProgramState ProcessArrayCreation(ProgramState state, IArrayCreationOperationWrapper arrayCreation)
     {
         if (arrayCreation.Type.IsAny(KnownType.System_Byte_Array, KnownType.System_Char_Array))
@@ -86,12 +90,14 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : SymbolicRuleCheck
         return state;
     }
 
+    // array[42] = ...
     private static ProgramState ProcessArrayElementReference(ProgramState state, IArrayElementReferenceOperationWrapper arrayElementReference) =>
         (arrayElementReference.IsAssignmentTarget() || arrayElementReference.IsCompoundAssignmentTarget())
         && arrayElementReference.ArrayReference.TrackedSymbol(state) is { } array
             ? state.SetSymbolConstraint(array, CryptographicSeedConstraint.Unpredictable)
             : state;
 
+    // array.SetValue(value, index)
     private static ProgramState ProcessArraySetValue(ProgramState state, IInvocationOperationWrapper invocation)
     {
         if (invocation.TargetMethod.Name == nameof(Array.SetValue)
@@ -105,6 +111,7 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : SymbolicRuleCheck
         return null;
     }
 
+    // array.Initialize()
     private static ProgramState ProcessArrayInitialize(ProgramState state, IInvocationOperationWrapper invocation) =>
         invocation.TargetMethod.Name == nameof(Array.Initialize)
         && invocation.TargetMethod.ContainingType.Is(KnownType.System_Array)
@@ -112,6 +119,7 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : SymbolicRuleCheck
             ? state.SetSymbolConstraint(array, CryptographicSeedConstraint.Predictable)
             : null;
 
+    // SecureRandom.GetInstance("algorithm", false)
     private static ProgramState ProcessSecureRandomGetInstance(ProgramState state, IInvocationOperationWrapper invocation) =>
         invocation.TargetMethod.Name == "GetInstance"
         && IsSecureRandom(invocation)
@@ -120,7 +128,10 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : SymbolicRuleCheck
             ? state.SetOperationConstraint(invocation, CryptographicSeedConstraint.Predictable)
             : null;
 
-    private ProgramState ProcessStringToBytes(ProgramState state, IInvocationOperationWrapper invocation)
+    // Encoding.UTF8.GetBytes(s)
+    // Convert.FromBase64CharArray(chars, ...)
+    // Convert.FromBase64String(s)
+    private static ProgramState ProcessStringToBytes(ProgramState state, IInvocationOperationWrapper invocation)
     {
         return (IsEncodingGetBytes() || IsConvertFromBase64String() || IsConvertFromBase64CharArray())
             ? state.SetOperationConstraint(invocation, CryptographicSeedConstraint.Predictable)
@@ -146,6 +157,8 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : SymbolicRuleCheck
             && state[value]?.HasConstraint(CryptographicSeedConstraint.Predictable) is true;
     }
 
+    // secureRandom.SetSeed(bytes/number)
+    // randomGenerator.AddSeedMaterial(bytes/number)
     private static ProgramState ProcessSeedingMethods(ProgramState state, IInvocationOperationWrapper invocation)
     {
         if ((IsSetSeed() || IsAddSeedMaterial())
@@ -175,10 +188,11 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : SymbolicRuleCheck
 
         bool IsAddSeedMaterial() =>
             invocation.TargetMethod.Name == "AddSeedMaterial"
-            && invocation.Instance is { } instance
-            && instance.Type.Is(KnownType.Org_BouncyCastle_Crypto_Prng_IRandomGenerator);
+            && IsIRandomGenerator(invocation);
     }
 
+    // secureRandom.NextXXX()
+    // randomGenerator.NextBytes()
     private ProgramState ProcessNextMethods(ProgramState state, IInvocationOperationWrapper invocation)
     {
         if ((IsSecureRandomMethod() || IsRandomGeneratorMethod())
@@ -195,10 +209,13 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : SymbolicRuleCheck
 
         bool IsRandomGeneratorMethod() =>
             invocation.TargetMethod.Name == "NextBytes"
-            && invocation.Instance is { } instance
-            && instance.Type.Is(KnownType.Org_BouncyCastle_Crypto_Prng_IRandomGenerator);
+            && IsIRandomGenerator(invocation);
     }
 
     private static bool IsSecureRandom(IInvocationOperationWrapper invocation) =>
         invocation.TargetMethod.ContainingType.Is(KnownType.Org_BouncyCastle_Security_SecureRandom);
+
+    private static bool IsIRandomGenerator(IInvocationOperationWrapper invocation) =>
+        invocation.Instance is { } instance
+        && instance.Type.Is(KnownType.Org_BouncyCastle_Crypto_Prng_IRandomGenerator);
 }
