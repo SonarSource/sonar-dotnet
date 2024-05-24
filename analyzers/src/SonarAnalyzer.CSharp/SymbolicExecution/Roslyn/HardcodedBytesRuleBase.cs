@@ -80,19 +80,21 @@ public abstract class HardcodedBytesRuleBase : SymbolicRuleCheck
         bool IsEncodingGetBytes() =>
             invocation.TargetMethod.Name == nameof(Encoding.UTF8.GetBytes)
             && invocation.TargetMethod.ContainingType.DerivesFrom(KnownType.System_Text_Encoding)
-            && (invocation.ArgumentValue("s") is { ConstantValue.HasValue: true } || ArgumentIsPredictable("chars"));
+            && (invocation.ArgumentValue("s") is { ConstantValue.HasValue: true }
+                || ArgumentIsHardcoded("s")
+                || ArgumentIsHardcoded("chars"));
 
         bool IsConvertFromBase64CharArray() =>
             invocation.TargetMethod.Name == nameof(Convert.FromBase64CharArray)
             && invocation.TargetMethod.ContainingType.Is(KnownType.System_Convert)
-            && ArgumentIsPredictable("inArray");
+            && ArgumentIsHardcoded("inArray");
 
         bool IsConvertFromBase64String() =>
             invocation.TargetMethod.Name == nameof(Convert.FromBase64String)
             && invocation.TargetMethod.ContainingType.Is(KnownType.System_Convert)
             && invocation.ArgumentValue("s") is { ConstantValue.HasValue: true };
 
-        bool ArgumentIsPredictable(string parameterName) =>
+        bool ArgumentIsHardcoded(string parameterName) =>
             invocation.ArgumentValue(parameterName) is { } value
             && state[value]?.HasConstraint(Hardcoded) is true;
     }

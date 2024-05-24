@@ -15,12 +15,8 @@ public class LoginExampleController
         _ = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));                                                              // Noncompliant
         _ = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(HardCodedKey));                                                     // Noncompliant
         _ = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Constants.ConstantKey));                                            // Noncompliant
-        _ = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Constants.PropertyKey));                                            // Noncompliant
-        _ = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(string.Empty));                                                     // Noncompliant
         _ = new SymmetricSecurityKey(HardCodedKeyBytes);                                                                        // Noncompliant
         _ = new SymmetricSecurityKey(Convert.FromBase64String(HardCodedKeyBase64));                                             // Noncompliant
-        _ = new SymmetricSecurityKey(UnknownProcessing(key));                                                                   // Noncompliant
-        _ = new SymmetricSecurityKey(Array.Empty<byte>());                                                                      // Noncompliant
         _ = new SymmetricSecurityKey(null);                                                                                     // Noncompliant
     }
 
@@ -32,12 +28,16 @@ public class LoginExampleController
         _ = new SymmetricSecurityKey(Convert.FromBase64String(key));
         _ = new SymmetricSecurityKey(Convert.FromBase64String(parameterKey));
         _ = new SymmetricSecurityKey(parameterKeyBytes);
+        _ = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Constants.PropertyKey));                                            // Static property, cannot be evaluated to constant
+        _ = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(string.Empty));                                                     // Field, cannot be evaluated to constant
+        _ = new SymmetricSecurityKey(UnknownProcessing(key));                                                                   // Unknown processing, cannot be evaluated to constant
+        _ = new SymmetricSecurityKey(Array.Empty<byte>());                                                                      // Unknown method, it's not evaluated to constant
     }
 
     public void SymmetricSecurityKey_ControlFlow()
     {
         var key = ConfigurationManager.AppSettings["key"] ?? throw new InvalidOperationException("JWT key is not configured.");
-        _ = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));                                                                  // Compliant
+        _ = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));                                                                  // Noncompliant
 
         key = HardCodedKey;
         var a = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));                                                              // Noncompliant
@@ -45,7 +45,7 @@ public class LoginExampleController
 
         if (DateTime.Now.Ticks % 2 == 0)
         {
-            key = ConfigurationManager.AppSettings["key"] ?? throw new InvalidOperationException("JWT key is not configured.");
+            key = Environment.GetEnvironmentVariable("JWT_KEY");
             _ = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));                                                              // Compliant
         }
         else

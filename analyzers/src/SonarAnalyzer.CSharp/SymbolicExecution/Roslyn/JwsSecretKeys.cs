@@ -49,6 +49,10 @@ public sealed class JwsSecretKeys : HardcodedBytesRuleBase
         {
             return ProcessArrayElementReference(state, arrayElementReference);
         }
+        else if (operation.AsPropertyReference() is { } propertyReference)
+        {
+            return ProcessPropertyReference(state, propertyReference);
+        }
         else if (operation.AsObjectCreation() is { } objectCreation)
         {
             return ProcessSymmetricSecurityKeyConstructor(state, objectCreation);
@@ -61,6 +65,17 @@ public sealed class JwsSecretKeys : HardcodedBytesRuleBase
                    ?? state;
         }
 
+        return state;
+    }
+
+    private ProgramState ProcessPropertyReference(ProgramState state, IPropertyReferenceOperationWrapper propertyReference)
+    {
+        if (propertyReference.Property.Name == "this[]"
+            // This needs to be narrowed down to the specific type, as NameValueCollection is a base class for other collections.
+            && propertyReference.Property.ContainingType.IsAny(KnownType.System_Collections_Specialized_NameValueCollection, KnownType.Microsoft_Extensions_Configuration_IConfiguration))
+        {
+            return state.SetOperationConstraint(propertyReference, CryptographicKeyConstraint.StoredUnsafe);
+        }
         return state;
     }
 

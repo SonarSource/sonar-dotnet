@@ -146,6 +146,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_EntityFrameworkCore_SqlServerDbContextOptionsExtensions = new("Microsoft.EntityFrameworkCore.SqlServerDbContextOptionsExtensions");
         public static readonly KnownType Microsoft_Extensions_DependencyInjection_LoggingServiceCollectionExtensions = new("Microsoft.Extensions.DependencyInjection.LoggingServiceCollectionExtensions");
         public static readonly KnownType Microsoft_Extensions_Hosting_HostEnvironmentEnvExtensions = new("Microsoft.Extensions.Hosting.HostEnvironmentEnvExtensions");
+        public static readonly KnownType Microsoft_Extensions_Configuration_IConfiguration = new("Microsoft.Extensions.Configuration.IConfiguration");
         public static readonly KnownType Microsoft_Extensions_Logging_AzureAppServicesLoggerFactoryExtensions = new("Microsoft.Extensions.Logging.AzureAppServicesLoggerFactoryExtensions");
         public static readonly KnownType Microsoft_Extensions_Logging_ConsoleLoggerExtensions = new("Microsoft.Extensions.Logging.ConsoleLoggerExtensions");
         public static readonly KnownType Microsoft_Extensions_Logging_DebugLoggerFactoryExtensions = new("Microsoft.Extensions.Logging.DebugLoggerFactoryExtensions");
@@ -327,6 +328,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_ComponentModel_EditorBrowsableAttribute = new("System.ComponentModel.EditorBrowsableAttribute");
         public static readonly KnownType System_ComponentModel_LocalizableAttribute = new("System.ComponentModel.LocalizableAttribute");
         public static readonly KnownType System_Configuration_ConfigXmlDocument = new("System.Configuration.ConfigXmlDocument");
+        public static readonly KnownType System_Configuration_ConfigurationManager = new("System.Configuration.ConfigurationManager");
         public static readonly KnownType System_Console = new("System.Console");
         public static readonly KnownType System_Data_Common_CommandTrees_DbExpression = new("System.Data.Common.CommandTrees.DbExpression");
         public static readonly KnownType System_Data_DataSet = new("System.Data.DataSet");

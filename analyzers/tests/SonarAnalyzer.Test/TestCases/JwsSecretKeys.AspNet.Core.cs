@@ -9,7 +9,7 @@ public class LoginExampleController
     {
         var key = config["Jwt:Key"] ?? "";                                  // Unsecure configuration
         _ = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));          // Noncompliant
-        _ = new SymmetricSecurityKey(UnknownProcessing(key));               // Noncompliant
+        _ = new SymmetricSecurityKey(UnknownProcessing(key));               // Compliant
     }
 
     public void SymmetricSecurityKey_Compliant()
