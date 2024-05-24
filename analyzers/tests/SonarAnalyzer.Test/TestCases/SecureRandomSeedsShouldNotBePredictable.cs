@@ -256,6 +256,14 @@ class Testcases
 
         sr = SecureRandom.GetInstance("SHA256PRNG", false);
         sr.Next(); // Noncompliant
+        var ss = new byte[3];
+        ss[0] = b;
+        ss.Initialize();
+        sr.SetSeed(ss);
+        sr.Next(); // Noncompliant, Initialize is predictable
+
+        sr = SecureRandom.GetInstance("SHA256PRNG", false);
+        sr.Next(); // Noncompliant
         sr.SetSeed(xs.Cast<byte>().ToArray());
         sr.Next(); // Compliant FN, array is predictable
     }

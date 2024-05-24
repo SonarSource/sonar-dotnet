@@ -52,18 +52,32 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : SymbolicRuleCheck
         {
             return ProcessArrayElementReference(state, arrayElementReference);
         }
+        else if (operation.AsObjectCreation() is { } objectCreation)
+        {
+            return ProcessObjectCreation(state, objectCreation);
+        }
         else if (operation.AsInvocation() is { } invocation)
         {
             return ProcessArraySetValue(state, invocation)
+                ?? ProcessArrayInitialize(state, invocation)
                 ?? ProcessStringToBytes(state, invocation)
                 ?? ProcessSecureRandomGetInstance(state, invocation)
-                ?? ProcessSecureRandomSetSeed(state, invocation)
-                ?? ProcessSecureRandomNext(state, invocation)
+                ?? ProcessSeedingMethods(state, invocation)
+                ?? ProcessNextMethods(state, invocation)
                 ?? state;
         }
         return state;
     }
 
+    // new VmpcRandomGenerator()
+    // new DigestRandomGenerator(digest)
+    private static ProgramState ProcessObjectCreation(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
+        objectCreation.Type.IsAny(KnownType.Org_BouncyCastle_Crypto_Prng_DigestRandomGenerator, KnownType.Org_BouncyCastle_Crypto_Prng_VmpcRandomGenerator)
+            ? state.SetOperationConstraint(objectCreation, CryptographicSeedConstraint.Predictable)
+            : state;
+
+    // new byte/char[] { ... }
+    // new byte/char[42]
     private static ProgramState ProcessArrayCreation(ProgramState state, IArrayCreationOperationWrapper arrayCreation)
     {
         if (arrayCreation.Type.IsAny(KnownType.System_Byte_Array, KnownType.System_Char_Array))
@@ -76,33 +90,48 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : SymbolicRuleCheck
         return state;
     }
 
+    // array[42] = ...
     private static ProgramState ProcessArrayElementReference(ProgramState state, IArrayElementReferenceOperationWrapper arrayElementReference) =>
         (arrayElementReference.IsAssignmentTarget() || arrayElementReference.IsCompoundAssignmentTarget())
         && arrayElementReference.ArrayReference.TrackedSymbol(state) is { } array
             ? state.SetSymbolConstraint(array, CryptographicSeedConstraint.Unpredictable)
             : state;
 
+    // array.SetValue(value, index)
     private static ProgramState ProcessArraySetValue(ProgramState state, IInvocationOperationWrapper invocation)
     {
         if (invocation.TargetMethod.Name == nameof(Array.SetValue)
-            && invocation.TargetMethod.ContainingType.Is(KnownType.System_Array))
+            && invocation.TargetMethod.ContainingType.Is(KnownType.System_Array)
+            && invocation.Instance.TrackedSymbol(state) is { } array)
         {
             return invocation.ArgumentValue("value") is { ConstantValue.HasValue: true }
                 ? state
-                : state.SetSymbolConstraint(invocation.Instance.TrackedSymbol(state), CryptographicSeedConstraint.Unpredictable);
+                : state.SetSymbolConstraint(array, CryptographicSeedConstraint.Unpredictable);
         }
         return null;
     }
 
+    // array.Initialize()
+    private static ProgramState ProcessArrayInitialize(ProgramState state, IInvocationOperationWrapper invocation) =>
+        invocation.TargetMethod.Name == nameof(Array.Initialize)
+        && invocation.TargetMethod.ContainingType.Is(KnownType.System_Array)
+        && invocation.Instance.TrackedSymbol(state) is { } array
+            ? state.SetSymbolConstraint(array, CryptographicSeedConstraint.Predictable)
+            : null;
+
+    // SecureRandom.GetInstance("algorithm", false)
     private static ProgramState ProcessSecureRandomGetInstance(ProgramState state, IInvocationOperationWrapper invocation) =>
         invocation.TargetMethod.Name == "GetInstance"
-        && invocation.TargetMethod.ContainingType.DerivesFrom(KnownType.Org_BouncyCastle_Security_SecureRandom)
+        && IsSecureRandom(invocation)
         && invocation.Arguments.Length == 2
         && invocation.ArgumentValue("autoSeed") is { ConstantValue: { HasValue: true, Value: false } }
             ? state.SetOperationConstraint(invocation, CryptographicSeedConstraint.Predictable)
             : null;
 
-    private ProgramState ProcessStringToBytes(ProgramState state, IInvocationOperationWrapper invocation)
+    // Encoding.UTF8.GetBytes(s)
+    // Convert.FromBase64CharArray(chars, ...)
+    // Convert.FromBase64String(s)
+    private static ProgramState ProcessStringToBytes(ProgramState state, IInvocationOperationWrapper invocation)
     {
         return (IsEncodingGetBytes() || IsConvertFromBase64String() || IsConvertFromBase64CharArray())
             ? state.SetOperationConstraint(invocation, CryptographicSeedConstraint.Predictable)
@@ -128,13 +157,17 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : SymbolicRuleCheck
             && state[value]?.HasConstraint(CryptographicSeedConstraint.Predictable) is true;
     }
 
-    private static ProgramState ProcessSecureRandomSetSeed(ProgramState state, IInvocationOperationWrapper invocation)
+    // secureRandom.SetSeed(bytes/number)
+    // randomGenerator.AddSeedMaterial(bytes/number)
+    private static ProgramState ProcessSeedingMethods(ProgramState state, IInvocationOperationWrapper invocation)
     {
-        if (invocation.TargetMethod.Name == "SetSeed"
-        && invocation.TargetMethod.ContainingType.DerivesFrom(KnownType.Org_BouncyCastle_Security_SecureRandom)
-        // If it is already unpredictable, do nothing. SecureRandom.SetSeed() does not overwrite the state, but _mixes_ it with the new value.
-        && state[invocation.Instance]?.HasConstraint(CryptographicSeedConstraint.Unpredictable) is false
-        && invocation.ArgumentValue("seed") is { } argumentValue)
+        if ((IsSetSeed() || IsAddSeedMaterial())
+            && invocation.Instance is { } instance
+            // If it is already unpredictable, do nothing.
+            // Seeding methods do not overwrite the state, but _mix_ it with the new value.
+            && state[instance]?.HasConstraint(CryptographicSeedConstraint.Unpredictable) is false
+            && invocation.ArgumentValue("seed") is { } argumentValue
+            && invocation.Instance.TrackedSymbol(state) is { } instanceSymbol)
         {
             var constraint = CryptographicSeedConstraint.Unpredictable;
             if (argumentValue.ConstantValue.HasValue)
@@ -145,19 +178,44 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : SymbolicRuleCheck
             {
                 constraint = value;
             }
-            return state.SetSymbolConstraint(invocation.Instance.TrackedSymbol(state), constraint);
+            return state.SetSymbolConstraint(instanceSymbol, constraint);
         }
         return null;
+
+        bool IsSetSeed() =>
+            invocation.TargetMethod.Name == "SetSeed"
+            && IsSecureRandom(invocation);
+
+        bool IsAddSeedMaterial() =>
+            invocation.TargetMethod.Name == "AddSeedMaterial"
+            && IsIRandomGenerator(invocation);
     }
 
-    private ProgramState ProcessSecureRandomNext(ProgramState state, IInvocationOperationWrapper invocation)
+    // secureRandom.NextXXX()
+    // randomGenerator.NextBytes()
+    private ProgramState ProcessNextMethods(ProgramState state, IInvocationOperationWrapper invocation)
     {
-        if (SecureRandomNextMethods.Contains(invocation.TargetMethod.Name)
-            && invocation.TargetMethod.ContainingType.DerivesFrom(KnownType.Org_BouncyCastle_Security_SecureRandom)
-            && state[invocation.Instance]?.HasConstraint(CryptographicSeedConstraint.Predictable) is true)
+        if ((IsSecureRandomMethod() || IsRandomGeneratorMethod())
+            && invocation.Instance is { } instance
+            && state[instance]?.HasConstraint(CryptographicSeedConstraint.Predictable) is true)
         {
             ReportIssue(invocation.WrappedOperation);
         }
-        return state;
+        return null;
+
+        bool IsSecureRandomMethod() =>
+            SecureRandomNextMethods.Contains(invocation.TargetMethod.Name)
+            && IsSecureRandom(invocation);
+
+        bool IsRandomGeneratorMethod() =>
+            invocation.TargetMethod.Name == "NextBytes"
+            && IsIRandomGenerator(invocation);
     }
+
+    private static bool IsSecureRandom(IInvocationOperationWrapper invocation) =>
+        invocation.TargetMethod.ContainingType.Is(KnownType.Org_BouncyCastle_Security_SecureRandom);
+
+    private static bool IsIRandomGenerator(IInvocationOperationWrapper invocation) =>
+        invocation.Instance is { } instance
+        && instance.Type.Is(KnownType.Org_BouncyCastle_Crypto_Prng_IRandomGenerator);
 }

@@ -223,6 +223,9 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Org_BouncyCastle_Crypto_Generators_DsaParametersGenerator = new("Org.BouncyCastle.Crypto.Generators.DsaParametersGenerator");
         public static readonly KnownType Org_BouncyCastle_Crypto_Parameters_RsaKeyGenerationParameters = new("Org.BouncyCastle.Crypto.Parameters.RsaKeyGenerationParameters");
         public static readonly KnownType Org_BouncyCastle_Crypto_PbeParametersGenerator = new("Org.BouncyCastle.Crypto.PbeParametersGenerator");
+        public static readonly KnownType Org_BouncyCastle_Crypto_Prng_DigestRandomGenerator = new("Org.BouncyCastle.Crypto.Prng.DigestRandomGenerator");
+        public static readonly KnownType Org_BouncyCastle_Crypto_Prng_IRandomGenerator = new("Org.BouncyCastle.Crypto.Prng.IRandomGenerator");
+        public static readonly KnownType Org_BouncyCastle_Crypto_Prng_VmpcRandomGenerator = new("Org.BouncyCastle.Crypto.Prng.VmpcRandomGenerator");
         public static readonly KnownType Org_BouncyCastle_Security_SecureRandom = new("Org.BouncyCastle.Security.SecureRandom");
         public static readonly KnownType Serilog_Events_LogEventLevel = new("Serilog.Events.LogEventLevel");
         public static readonly KnownType Serilog_ILogger = new("Serilog.ILogger");

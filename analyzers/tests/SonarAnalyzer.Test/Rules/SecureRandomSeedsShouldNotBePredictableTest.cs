@@ -129,26 +129,109 @@ public class SecureRandomSeedsShouldNotBePredictableTest
     [DataRow("bs[42] *= b")]
     [DataTestMethod]
     public void SecureRandomSeedsShouldNotBePredictable_CS_ArrayEdited(string messWithArray) =>
-    builder
-        .AddSnippet($$$"""
-            using System;
-            using System.Text;
-            using Org.BouncyCastle.Security;
-            class Testcases
-            {
-                void Method(byte b)
+        builder
+            .AddSnippet($$$"""
+                using System;
+                using System.Text;
+                using Org.BouncyCastle.Security;
+                class Testcases
                 {
-                    var bs = new byte[42];
+                    void Method(byte b)
+                    {
+                        var bs = new byte[42];
 
-                    var sr = SecureRandom.GetInstance("SHA256PRNG", false);
-                    sr.SetSeed(bs);
-                    sr.Next();                  // Noncompliant
+                        var sr = SecureRandom.GetInstance("SHA256PRNG", false);
+                        sr.SetSeed(bs);
+                        sr.Next();                  // Noncompliant
 
-                    {{{messWithArray}}};
-                    sr.SetSeed(bs);
-                    sr.Next();                  // Compliant
+                        {{{messWithArray}}};
+                        sr.SetSeed(bs);
+                        sr.Next();                  // Compliant
+                    }
                 }
-            }
-            """)
-        .Verify();
+                """)
+            .Verify();
+
+    [DataRow("DigestRandomGenerator(digest)")]
+    [DataRow("VmpcRandomGenerator()")]
+    [DataTestMethod]
+    public void SecureRandomSeedsShouldNotBePredictable_CS_IRandomGenerator(string generator) =>
+        builder
+            .AddSnippet($$$"""
+                using System.Text;
+                using Org.BouncyCastle.Security;
+                using Org.BouncyCastle.Crypto.Prng;
+                using Org.BouncyCastle.Crypto.Digests;
+
+                class Testcases
+                {
+                    const int SEED = 42;
+
+                    void Method(byte[] bs, Sha256Digest digest, long seed)
+                    {
+                        IRandomGenerator rng = new {{{generator}}};
+                        rng.NextBytes(bs);    // Noncompliant {{Set an unpredictable seed before generating random values.}}
+                    //  ^^^^^^^^^^^^^^^^^
+
+                        rng.AddSeedMaterial(SEED);
+                        rng.NextBytes(bs, 0, 42); // Noncompliant
+                    //  ^^^^^^^^^^^^^^^^^^^^^^^^
+
+                        rng.AddSeedMaterial(new byte[3]);
+                        rng.NextBytes(bs);  // Noncompliant
+
+                        rng.AddSeedMaterial(Encoding.UTF8.GetBytes("exploding whale"));
+                        rng.NextBytes(bs);  // Noncompliant
+
+                        rng.AddSeedMaterial(42);
+                        rng.NextBytes(bs);  // Noncompliant
+
+                        rng.AddSeedMaterial(bs);
+                        rng.NextBytes(bs);  // Compliant, bs is unknown
+
+                        rng.AddSeedMaterial(42);
+                        rng.NextBytes(bs);  // Compliant, seed is already unpredictable
+
+                        rng = new {{{generator}}};
+                        rng.NextBytes(bs); // Noncompliant
+
+                        rng.AddSeedMaterial(seed);
+                        rng.NextBytes(bs); // Compliant
+                    }
+                }
+                """)
+            .Verify();
+
+#if NET
+    [TestMethod]
+    public void SecureRandomSeedsShouldNotBePredictable_CS_IRandomGenerator_Inheritance() =>
+        builder
+            .AddSnippet($$$"""
+                using System;
+                using Org.BouncyCastle.Security;
+                using Org.BouncyCastle.Crypto.Prng;
+                using Org.BouncyCastle.Crypto.Digests;
+
+                class Testcases
+                {
+                    void IRandomGenerator(byte[] bs)
+                    {
+                        var notRelevant = new MyGen();
+                        notRelevant.NextBytes(bs); // Compliant, we only track "Digest" and "Vmpc".
+                    }
+                }
+
+                class MyGen : IRandomGenerator
+                {
+                    public void AddSeedMaterial(byte[] seed) { }
+                    public void AddSeedMaterial(ReadOnlySpan<byte> seed) { }
+                    public void AddSeedMaterial(long seed) { }
+                    public void NextBytes(byte[] bytes) { }
+                    public void NextBytes(byte[] bytes, int start, int len) { }
+                    public void NextBytes(Span<byte> bytes) { }
+                }
+
+                """)
+            .VerifyNoIssues();
+#endif
 }
