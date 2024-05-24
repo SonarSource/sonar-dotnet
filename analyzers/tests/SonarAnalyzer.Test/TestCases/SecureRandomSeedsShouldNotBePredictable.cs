@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Text;
 using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Crypto.Prng;
+using Org.BouncyCastle.Crypto.Digests;
 
 class Testcases
 {
@@ -266,5 +268,99 @@ class Testcases
         sr.Next(); // Noncompliant
         sr.SetSeed(xs.Cast<byte>().ToArray());
         sr.Next(); // Compliant FN, array is predictable
+    }
+
+    void FromArguments(SecureRandom sr, VmpcRandomGenerator rng1, DigestRandomGenerator rng2, int seed, byte[] bs)
+    {
+        sr.Next(); // Compliant
+        sr.SetSeed(SEED);
+        sr.Next(); // Compliant
+        sr.SetSeed(seed);
+        sr.Next(); // Compliant
+
+        rng1.NextBytes(bs); // Compliant
+        rng1.AddSeedMaterial(SEED);
+        rng1.NextBytes(bs); // Compliant
+
+        rng2.NextBytes(bs); // Compliant
+        rng2.AddSeedMaterial(seed);
+        rng2.NextBytes(bs); // Compliant
+
+        var sr2 = new SecureRandom(rng1);
+        sr2.Next(); // Compliant
+
+        sr2 = new SecureRandom(rng1, 5);
+        sr2.Next(); // Compliant
+
+        sr2 = new SecureRandom(rng1, 20);
+        sr2.Next(); // Compliant
+
+        sr2 = new SecureRandom(rng2);
+        sr2.Next(); // Compliant
+
+        sr2 = new SecureRandom(rng2, 5);
+        sr2.Next(); // Compliant
+
+        sr2 = new SecureRandom(rng2, 20);
+        sr2.Next(); // Compliant
+    }
+
+    void RandomGenerator_Inside_SecureRandom(byte[] bs, string s)
+    {
+        var notHardcoded = Encoding.UTF8.GetBytes(s);
+        var hardcoded = Convert.FromBase64String("exploding whale");
+
+        var generator = new DigestRandomGenerator(new Sha256Digest());
+        var rng = new SecureRandom(generator);
+        rng.NextBytes(bs); // Noncompliant
+
+        generator = new DigestRandomGenerator(new Sha256Digest());
+        rng = new SecureRandom(generator, 11);
+        rng.NextBytes(bs); // Noncompliant
+
+        generator = new DigestRandomGenerator(new Sha256Digest());
+        generator.AddSeedMaterial(hardcoded);
+        rng = new SecureRandom(generator);
+        rng.NextBytes(bs); // Noncompliant
+
+        generator = new DigestRandomGenerator(new Sha256Digest());
+        rng = new SecureRandom(generator);
+        rng.SetSeed(hardcoded);
+        rng.NextBytes(bs); // Noncompliant
+
+        generator = new DigestRandomGenerator(new Sha256Digest());
+        generator.AddSeedMaterial(hardcoded);
+        rng = new SecureRandom(generator);
+        rng.SetSeed(hardcoded);
+        rng.NextBytes(bs); // Noncompliant
+
+        generator = new DigestRandomGenerator(new Sha256Digest());
+        rng = new SecureRandom(generator, 16);
+        rng.NextBytes(bs); // Compliant
+
+        generator = new DigestRandomGenerator(new Sha256Digest());
+        generator.AddSeedMaterial(notHardcoded);
+        rng = new SecureRandom(generator);
+        rng.SetSeed(hardcoded);
+        rng.NextBytes(bs); // Compliant
+
+        generator = new DigestRandomGenerator(new Sha256Digest());
+        generator.AddSeedMaterial(hardcoded);
+        rng = new SecureRandom(generator);
+        rng.SetSeed(notHardcoded);
+        rng.NextBytes(bs); // Compliant
+
+        rng = new SecureRandom();
+        rng.NextBytes(bs); // Compliant
+
+        generator = new DigestRandomGenerator(new Sha256Digest());
+        rng = new SecureRandom(generator);
+        generator.AddSeedMaterial(notHardcoded);
+        rng.Next(); // Noncompliant FP, we cannot infer that "rng" is safe after the constructor
+
+        generator = new DigestRandomGenerator(new Sha256Digest());
+        rng = new SecureRandom(generator);
+        rng.SetSeed(notHardcoded);
+        generator.NextBytes(bs); // Noncompliant FP, we cannot infer that "generator" is safe after the constructor
     }
 }

@@ -55,7 +55,9 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : HardcodedBytesRule
         }
         else if (operation.AsObjectCreation() is { } objectCreation)
         {
-            return ProcessObjectCreation(state, objectCreation);
+            return ProcessRandomGeneratorCreation(state, objectCreation)
+                ?? ProcessSecureRandomCreation(state, objectCreation)
+                ?? state;
         }
         else if (operation.AsInvocation() is { } invocation)
         {
@@ -72,10 +74,29 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : HardcodedBytesRule
 
     // new VmpcRandomGenerator()
     // new DigestRandomGenerator(digest)
-    private static ProgramState ProcessObjectCreation(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
+    private static ProgramState ProcessRandomGeneratorCreation(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
         objectCreation.Type.IsAny(KnownType.Org_BouncyCastle_Crypto_Prng_DigestRandomGenerator, KnownType.Org_BouncyCastle_Crypto_Prng_VmpcRandomGenerator)
             ? state.SetOperationConstraint(objectCreation, CryptographicSeedConstraint.Predictable)
-            : state;
+            : null;
+
+    // new SecureRandom(generator)
+    // new SecureRandom(generator, autoSeedLength)
+    private static ProgramState ProcessSecureRandomCreation(ProgramState state, IObjectCreationOperationWrapper objectCreation)
+    {
+        return objectCreation.Type.Is(KnownType.Org_BouncyCastle_Security_SecureRandom)
+            && GeneratorConstraint() is { } constraint
+            && HasSmallAutoseed()
+                ? state.SetOperationConstraint(objectCreation, constraint)
+                : null;
+
+        CryptographicSeedConstraint GeneratorConstraint() =>
+            objectCreation.ArgumentValue("generator") is { } generator
+                ? state[generator].Constraint<CryptographicSeedConstraint>()
+                : null;
+
+        bool HasSmallAutoseed() =>
+            objectCreation.ArgumentValue("autoSeedLengthInBytes") is null or { ConstantValue.HasValue: true, ConstantValue.Value: < 16 };
+    }
 
     // SecureRandom.GetInstance("algorithm", false)
     private static ProgramState ProcessSecureRandomGetInstance(ProgramState state, IInvocationOperationWrapper invocation) =>
@@ -94,16 +115,16 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : HardcodedBytesRule
             && invocation.Instance is { } instance
             // If it is already unpredictable, do nothing.
             // Seeding methods do not overwrite the state, but _mix_ it with the new value.
-            && state[instance]?.HasConstraint(CryptographicSeedConstraint.Unpredictable) is false
-            && invocation.ArgumentValue("seed") is { } argumentValue
+            && state[instance]?.HasConstraint(CryptographicSeedConstraint.Predictable) is true
+            && SeedValue() is { } seedValue
             && invocation.Instance.TrackedSymbol(state) is { } instanceSymbol)
         {
             var constraint = CryptographicSeedConstraint.Unpredictable;
-            if (argumentValue.ConstantValue.HasValue)
+            if (seedValue.ConstantValue.HasValue)
             {
                 constraint = CryptographicSeedConstraint.Predictable;
             }
-            else if (state[argumentValue]?.Constraint<CryptographicSeedConstraint>() is { } value)
+            else if (state[seedValue]?.Constraint<CryptographicSeedConstraint>() is { } value)
             {
                 constraint = value;
             }
@@ -118,6 +139,11 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : HardcodedBytesRule
         bool IsAddSeedMaterial() =>
             invocation.TargetMethod.Name == "AddSeedMaterial"
             && IsIRandomGenerator(invocation);
+
+        IOperation SeedValue() =>
+            invocation.ArgumentValue("seed")
+            ?? invocation.ArgumentValue("inSeed") // DigestRandomGenerator renamed the interface arguments
+            ?? invocation.ArgumentValue("rSeed"); // Same as above
     }
 
     // secureRandom.NextXXX()
@@ -145,6 +171,5 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : HardcodedBytesRule
         invocation.TargetMethod.ContainingType.Is(KnownType.Org_BouncyCastle_Security_SecureRandom);
 
     private static bool IsIRandomGenerator(IInvocationOperationWrapper invocation) =>
-        invocation.Instance is { } instance
-        && instance.Type.Is(KnownType.Org_BouncyCastle_Crypto_Prng_IRandomGenerator);
+        invocation.TargetMethod.ContainingType.DerivesOrImplements(KnownType.Org_BouncyCastle_Crypto_Prng_IRandomGenerator);
 }
