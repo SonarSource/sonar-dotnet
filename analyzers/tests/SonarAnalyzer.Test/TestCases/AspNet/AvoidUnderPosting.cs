@@ -14,7 +14,7 @@ namespace Basics
     public class ModelUsedInController
     {
         public int ValueProperty { get; set; }                                      // Noncompliant {{Property used as input in a controller action should be nullable or annotated with the Required attribute to avoid under-posting.}}
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//                 ^^^^^^^^^^^^^
         public int? NullableValueProperty { get; set; }
         [Required] public int RequiredValueProperty { get; set; }
         [Range(0, 10)] public int ValuePropertyWithRangeValidation { get; set; }    // Noncompliant
