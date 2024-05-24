@@ -223,6 +223,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Org_BouncyCastle_Crypto_Generators_DsaParametersGenerator = new("Org.BouncyCastle.Crypto.Generators.DsaParametersGenerator");
         public static readonly KnownType Org_BouncyCastle_Crypto_Parameters_RsaKeyGenerationParameters = new("Org.BouncyCastle.Crypto.Parameters.RsaKeyGenerationParameters");
         public static readonly KnownType Org_BouncyCastle_Crypto_PbeParametersGenerator = new("Org.BouncyCastle.Crypto.PbeParametersGenerator");
+        public static readonly KnownType Org_BouncyCastle_Security_SecureRandom = new("Org.BouncyCastle.Security.SecureRandom");
         public static readonly KnownType Serilog_Events_LogEventLevel = new("Serilog.Events.LogEventLevel");
         public static readonly KnownType Serilog_ILogger = new("Serilog.ILogger");
         public static readonly KnownType Serilog_LoggerConfiguration = new("Serilog.LoggerConfiguration");
@@ -247,6 +248,8 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Byte = new("System.Byte");
         public static readonly KnownType System_Byte_Array = new("System.Byte") { IsArray = true };
         public static readonly KnownType System_Char = new("System.Char");
+        public static readonly KnownType System_Char_Array = new("System.Char") { IsArray = true };
+        public static readonly KnownType System_Convert = new("System.Convert");
         public static readonly KnownType System_CLSCompliantAttribute = new("System.CLSCompliantAttribute");
         public static readonly KnownType System_CodeDom_Compiler_GeneratedCodeAttribute = new("System.CodeDom.Compiler.GeneratedCodeAttribute");
         public static readonly KnownType System_Collections_CollectionBase = new("System.Collections.CollectionBase");

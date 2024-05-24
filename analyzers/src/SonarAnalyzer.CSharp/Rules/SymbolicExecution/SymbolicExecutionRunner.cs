@@ -34,10 +34,6 @@ namespace SonarAnalyzer.Rules.CSharp;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
 {
-    public SymbolicExecutionRunner() : this(AnalyzerConfiguration.AlwaysEnabled) { }
-
-    internal /* for testing */ SymbolicExecutionRunner(IAnalyzerConfiguration configuration) : base(configuration) { }
-
     protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; } = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
         .Add(InvalidCastToInterface.S1944, CreateFactory<EmptyRuleCheck, SonarRules.InvalidCastToInterfaceSymbolicExecution>()) // This old SE rule is part of S3655.
         .Add(HashesShouldHaveUnpredictableSalt.S2053, CreateFactory<HashesShouldHaveUnpredictableSalt, SonarRules.HashesShouldHaveUnpredictableSalt>())
@@ -51,11 +47,14 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
         .Add(CalculationsShouldNotOverflow.S3949, CreateFactory<CalculationsShouldNotOverflow>())
         .Add(ObjectsShouldNotBeDisposedMoreThanOnce.S3966, CreateFactory<ObjectsShouldNotBeDisposedMoreThanOnce, SonarRules.ObjectsShouldNotBeDisposedMoreThanOnce>())
         .Add(EmptyCollectionsShouldNotBeEnumerated.S4158, CreateFactory<EmptyCollectionsShouldNotBeEnumerated, SonarRules.EmptyCollectionsShouldNotBeEnumerated>())
-        .Add(RestrictDeserializedTypes.S5773, CreateFactory<RestrictDeserializedTypes, SonarRules.RestrictDeserializedTypes>());
-
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.ToImmutableArray();
+        .Add(RestrictDeserializedTypes.S5773, CreateFactory<RestrictDeserializedTypes, SonarRules.RestrictDeserializedTypes>())
+        .Add(SecureRandomSeedsShouldNotBePredictable.S4347, CreateFactory<SecureRandomSeedsShouldNotBePredictable>());
 
     protected override SyntaxClassifierBase SyntaxClassifier => CSharpSyntaxClassifier.Instance;
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.ToImmutableArray();
+
+    public SymbolicExecutionRunner() : this(AnalyzerConfiguration.AlwaysEnabled) { }
+    internal /* for testing */ SymbolicExecutionRunner(IAnalyzerConfiguration configuration) : base(configuration) { }
 
     protected override void Initialize(SonarAnalysisContext context)
     {

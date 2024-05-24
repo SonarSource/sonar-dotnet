@@ -32,6 +32,8 @@ public enum ConstraintKind
     CollectionNotEmpty,
     CryptographicallyStrong,
     CryptographicallyWeak,
+    CryptographicallyPredictable,
+    CryptographicallyUnpredictable,
     DisposableDisposed,
     InitializationVectorInitialized,
     InitializationVectorNotInitialized,
