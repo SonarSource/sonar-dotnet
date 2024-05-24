@@ -18,21 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.SymbolicExecution.Constraints;
+namespace SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
-
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class JwsSecretKeys : HardcodedBytesRuleBase
+public class CryptographicKeyConstraint : SymbolicConstraint
 {
-    private const string DiagnosticId = "S6781";
-    private const string MessageFormat = "JWT secret keys should not be disclosed.";
+    public static readonly CryptographicKeyConstraint StoredSafe = new(ConstraintKind.CryptographicKeyStoredSafe);
+    public static readonly CryptographicKeyConstraint StoredUnsafe = new(ConstraintKind.CryptographicKeyStoredUnsafe);
 
-    public static readonly DiagnosticDescriptor S6781 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    public override SymbolicConstraint Opposite => null;
 
-    protected override DiagnosticDescriptor Rule => S6781;
-    protected override SymbolicConstraint Hardcoded => CryptographicKeyConstraint.StoredUnsafe;
-    protected override SymbolicConstraint NotHardcoded => CryptographicKeyConstraint.StoredSafe;
-
-    public override bool ShouldExecute() => true;
+    private CryptographicKeyConstraint(ConstraintKind kind) : base(kind) { }
 }

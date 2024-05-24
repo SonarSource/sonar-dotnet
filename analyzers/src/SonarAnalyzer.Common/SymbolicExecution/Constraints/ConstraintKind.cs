@@ -34,6 +34,8 @@ public enum ConstraintKind
     CryptographicallyWeak,
     CryptographicallyPredictable,
     CryptographicallyUnpredictable,
+    CryptographicKeyStoredSafe,
+    CryptographicKeyStoredUnsafe,
     DisposableDisposed,
     InitializationVectorInitialized,
     InitializationVectorNotInitialized,
