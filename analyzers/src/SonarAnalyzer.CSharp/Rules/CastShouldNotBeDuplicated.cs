@@ -219,10 +219,9 @@ namespace SonarAnalyzer.Rules.CSharp
                                                         string message)
         {
             var duplicatedCastLocations = GetDuplicatedCastLocations(context, parentStatement, castType, variableExpression);
-
             if (duplicatedCastLocations.Any())
             {
-                context.ReportIssue(Rule.CreateDiagnostic(context.Compilation, mainLocation, duplicatedCastLocations, properties: null, message));
+                context.ReportIssue(Rule, mainLocation, duplicatedCastLocations.Select(x => x.ToSecondary()), message);
             }
         }
 
@@ -239,7 +238,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var duplicatedCastLocations = GetDuplicatedCastLocations(context, parentStatement, castType, variableExpression);
                 foreach (var castLocation in duplicatedCastLocations)
                 {
-                    context.ReportIssue(Rule.CreateDiagnostic(context.Compilation, castLocation, new[] { patternLocation }, properties: null, message));
+                    context.ReportIssue(Rule, castLocation, [patternLocation.ToSecondary()], message);
                 }
             }
         }

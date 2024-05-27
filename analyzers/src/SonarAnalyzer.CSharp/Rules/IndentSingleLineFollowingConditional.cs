@@ -129,13 +129,8 @@ namespace SonarAnalyzer.Rules.CSharp
             conditionallyExecutedNode is BlockSyntax ||
             VisualIndentComparer.IsSecondIndentLonger(controlNode, conditionallyExecutedNode);
 
-        private static void ReportIssue(SonarSyntaxNodeReportingContext context, Location primaryLocation,
-            SyntaxNode secondaryLocationNode, string conditionLabelText) =>
-               context.ReportIssue(Rule.CreateDiagnostic(context.Compilation,
-                   primaryLocation,
-                   new[] { GetFirstLineOfNode(secondaryLocationNode) },
-                   properties: null,
-                   conditionLabelText));
+        private static void ReportIssue(SonarSyntaxNodeReportingContext context, Location primaryLocation, SyntaxNode secondaryLocationNode, string conditionLabelText) =>
+               context.ReportIssue(Rule, primaryLocation, [GetFirstLineOfNode(secondaryLocationNode).ToSecondary()], conditionLabelText);
 
         private static Location GetFirstLineOfNode(SyntaxNode node)
         {

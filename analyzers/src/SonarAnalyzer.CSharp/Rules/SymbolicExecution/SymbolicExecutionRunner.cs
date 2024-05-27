@@ -149,7 +149,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
     {
         foreach (var analyzerContext in analyzerContexts.Where(x => x.SupportsPartialResults == supportsPartialResults))
         {
-            foreach (var diagnostic in analyzerContext.GetDiagnostics(context.Compilation))
+            foreach (var diagnostic in analyzerContext.GetDiagnostics())
             {
                 context.ReportIssue(diagnostic);
             }

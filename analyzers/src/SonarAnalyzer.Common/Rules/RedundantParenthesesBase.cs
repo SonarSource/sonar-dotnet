@@ -50,12 +50,9 @@ namespace SonarAnalyzer.Rules
                             .Reverse()
                             .Skip(1)
                             .First(); // There are always at least two parenthesized expressions
-
                         var location = GetOpenParenToken(expression).CreateLocation(GetOpenParenToken(innermostExpression));
-
-                        var secondaryLocation = GetCloseParenToken(innermostExpression).CreateLocation(GetCloseParenToken(expression));
-
-                        c.ReportIssue(SupportedDiagnostics[0].CreateDiagnostic(c.Compilation, location, additionalLocations: new[] { secondaryLocation }, properties: null));
+                        var secondaryLocation = GetCloseParenToken(innermostExpression).CreateLocation(GetCloseParenToken(expression)).ToSecondary();
+                        c.ReportIssue(SupportedDiagnostics[0], location, [secondaryLocation]);
                     }
                 },
                 ParenthesizedExpressionSyntaxKind);

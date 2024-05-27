@@ -31,11 +31,11 @@ namespace SonarAnalyzer.Common.Walkers
             };
 
         private readonly SemanticModel semanticModel;
-        private readonly List<Location> argumentExceptionLocations = new();
+        private readonly List<SecondaryLocation> argumentExceptionLocations = new();
 
         protected bool keepWalking = true;
 
-        public IEnumerable<Location> ArgumentExceptionLocations => argumentExceptionLocations;
+        public IEnumerable<SecondaryLocation> ArgumentExceptionLocations => argumentExceptionLocations;
 
         public ParameterValidationInMethodWalker(SemanticModel semanticModel) =>
             this.semanticModel = semanticModel;
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Common.Walkers
                 && semanticModel.GetTypeInfo(node.Expression) is var typeInfo
                 && typeInfo.Type.DerivesFrom(KnownType.System_ArgumentException))
             {
-                argumentExceptionLocations.Add(node.Expression.GetLocation());
+                argumentExceptionLocations.Add(node.Expression.ToSecondaryLocation());
             }
 
             // there is no need to visit children
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Common.Walkers
             if (node.IsMemberAccessOnKnownType("ThrowIfNull", KnownType.System_ArgumentNullException, semanticModel))
             {
                 // "ThrowIfNull" returns void so it cannot be an argument. We can stop.
-                argumentExceptionLocations.Add(node.GetLocation());
+                argumentExceptionLocations.Add(node.ToSecondaryLocation());
             }
             else
             {

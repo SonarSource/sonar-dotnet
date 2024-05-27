@@ -45,12 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var propertyIdentifier = collidingMembers.Item1;
                         var methodIdentifier = collidingMembers.Item2;
-                        c.ReportIssue(Rule.CreateDiagnostic(c.Compilation,
-                            propertyIdentifier.GetLocation(),
-                            new[] { methodIdentifier.GetLocation() },
-                            properties: null,
-                            propertyIdentifier.ValueText,
-                            methodIdentifier.ValueText));
+                        c.ReportIssue(Rule, propertyIdentifier, [methodIdentifier.ToSecondaryLocation()], propertyIdentifier.ValueText, methodIdentifier.ValueText);
                     }
                 },
                 SyntaxKind.ClassDeclaration,

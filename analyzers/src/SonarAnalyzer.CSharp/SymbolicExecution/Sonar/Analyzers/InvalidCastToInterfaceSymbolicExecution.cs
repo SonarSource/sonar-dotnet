@@ -97,7 +97,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
             }
 
             // Nothing to return since the issues are raised during analysis.
-            public IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation) => Enumerable.Empty<Diagnostic>();
+            public IEnumerable<Diagnostic> GetDiagnostics() => Enumerable.Empty<Diagnostic>();
         }
     }
 }

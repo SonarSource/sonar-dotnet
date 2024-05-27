@@ -67,7 +67,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
                 nullPointerCheck.MemberAccessing += MemberAccessingHandler;
             }
 
-            public IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation) =>
+            public IEnumerable<Diagnostic> GetDiagnostics() =>
                 identifiers.Select(identifier => Diagnostic.Create(S3900, identifier.GetLocation(), GetMessage(identifier)));
 
             public void Dispose()

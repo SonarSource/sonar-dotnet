@@ -28,7 +28,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar
 
         public bool SupportsPartialResults => false;
 
-        public IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation) =>
+        public IEnumerable<Diagnostic> GetDiagnostics() =>
             locations.Distinct().Select(CreateDiagnostic);
 
         public void AddLocation(T location) =>

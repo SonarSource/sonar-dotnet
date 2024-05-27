@@ -117,7 +117,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 
             public bool SupportsPartialResults => false;
 
-            public IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation)
+            public IEnumerable<Diagnostic> GetDiagnostics()
             {
                 // Do not raise issue in generator functions (See #1295)
                 if (hasYieldStatement)
@@ -129,11 +129,11 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
                     .Union(conditionTrue
                         .Except(conditionFalse)
                         .Where(x => !IsMuted(x) && !IsInsideCatchOrFinallyBlock(x) && !IsConditionOfLoopWithBreak(x))
-                        .Select(x => GetNodeDiagnostics(compilation, x, true)))
+                        .Select(x => GetNodeDiagnostics(x, true)))
                     .Union(conditionFalse
                         .Except(conditionTrue)
                         .Where(x => !IsMuted(x) && !IsInsideCatchOrFinallyBlock(x))
-                        .Select(x => GetNodeDiagnostics(compilation, x, false)))
+                        .Select(x => GetNodeDiagnostics(x, false)))
                     .Union(isNull
                         .Except(isUnknown)
                         .Except(isNotNull)
@@ -198,12 +198,12 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
             private static bool IsLoopBreakingStatement(SyntaxNode syntaxNode) =>
                 syntaxNode.IsAnyKind(LoopBreakingStatements);
 
-            private static Diagnostic GetNodeDiagnostics(Compilation compilation, SyntaxNode constantNode, bool constantValue)
+            private static Diagnostic GetNodeDiagnostics(SyntaxNode constantNode, bool constantValue)
             {
                 var unreachableLocations = GetUnreachableLocations(constantNode, constantValue).ToList();
                 var constantText = constantValue.ToString().ToLowerInvariant();
                 return unreachableLocations.Count > 0
-                    ? S2583.CreateDiagnostic(compilation, constantNode.GetLocation(), unreachableLocations, properties: null, string.Format(S2583MessageFormatBool, constantText))
+                    ? Diagnostic.Create(S2583, constantNode.GetLocation(), unreachableLocations, properties: null, string.Format(S2583MessageFormatBool, constantText))
                     : Diagnostic.Create(S2589, constantNode.GetLocation(), messageArgs: string.Format(S2589MessageFormatBool, constantText));
             }
 

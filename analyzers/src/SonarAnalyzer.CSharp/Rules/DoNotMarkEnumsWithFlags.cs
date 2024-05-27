@@ -58,16 +58,13 @@ namespace SonarAnalyzer.Rules.CSharp
                         .ToList();
 
                     var invalidMembers = membersWithValues.Where(tuple => !IsValidFlagValue(tuple.Value, allValues))
-                        .Select(tuple => tuple.Member.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation())
+                        .Select(tuple => tuple.Member.GetFirstSyntaxRef()?.ToSecondaryLocation())
                         .WhereNotNull()
                         .ToList();
 
                     if (invalidMembers.Count > 0)
                     {
-                        c.ReportIssue(Rule.CreateDiagnostic(c.Compilation,
-                            enumDeclaration.Identifier.GetLocation(),
-                            additionalLocations: invalidMembers,
-                            properties: null));
+                        c.ReportIssue(Rule, enumDeclaration.Identifier, invalidMembers);
                     }
                 }, SyntaxKind.EnumDeclaration);
 

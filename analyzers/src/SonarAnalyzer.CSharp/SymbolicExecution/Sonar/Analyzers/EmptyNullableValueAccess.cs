@@ -50,7 +50,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
                 nullableValueCheck.ValuePropertyAccessed += AddIdentifier;
             }
 
-            public IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation) =>
+            public IEnumerable<Diagnostic> GetDiagnostics() =>
                 nullIdentifiers.Select(x => Diagnostic.Create(S3655, x.Parent.GetLocation(), x.Identifier.ValueText));
 
             private void AddIdentifier(object sender, MemberAccessedEventArgs args) =>

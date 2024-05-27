@@ -91,20 +91,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (incrementorData.Operation == ArithmeticOperation.Addition &&
                         condition == Condition.Greater)
                     {
-                        c.ReportIssue(rule.CreateDiagnostic(c.Compilation,
-                            forNode.Incrementors.First().GetLocation(),
-                            new[] { forNode.Condition.GetLocation() },
-                            properties: null,
-                            incrementorData.IdentifierName, "inc"));
+                        c.ReportIssue(rule, forNode.Incrementors.First(), [forNode.Condition.ToSecondaryLocation()], incrementorData.IdentifierName, "inc");
                     }
                     else if (incrementorData.Operation == ArithmeticOperation.Substraction &&
                              condition == Condition.Less)
                     {
-                        c.ReportIssue(rule.CreateDiagnostic(c.Compilation,
-                            forNode.Incrementors.First().GetLocation(),
-                            new[] { forNode.Condition.GetLocation() },
-                            properties: null,
-                            incrementorData.IdentifierName, "dec"));
+                        c.ReportIssue(rule, forNode.Incrementors.First(), [forNode.Condition.ToSecondaryLocation()], incrementorData.IdentifierName, "dec");
                     }
                 },
                 SyntaxKind.ForStatement);

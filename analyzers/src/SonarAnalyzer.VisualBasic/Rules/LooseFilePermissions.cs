@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
@@ -34,7 +36,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             var node = context.Node;
             if (IsFileAccessPermissions(node, context.SemanticModel) && !node.IsPartOfBinaryNegationOrCondition())
             {
-                context.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                context.ReportIssue(Rule, node);
             }
         }
 
@@ -46,12 +48,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 var invocationLocation = invocation.GetLocation();
                 var secondaryLocation = objectCreation.GetLocation();
-
-                var diagnostic = invocationLocation.StartLine() == secondaryLocation.StartLine()
-                    ? Diagnostic.Create(Rule, invocationLocation)
-                    : Rule.CreateDiagnostic(context.Compilation, invocationLocation, additionalLocations: new[] {secondaryLocation}, properties: null);
-
-                context.ReportIssue(diagnostic);
+                context.ReportIssue(Rule, invocationLocation, invocationLocation.StartLine() == secondaryLocation.StartLine() ? [] : [secondaryLocation.ToSecondary()]);
             }
         }
 
