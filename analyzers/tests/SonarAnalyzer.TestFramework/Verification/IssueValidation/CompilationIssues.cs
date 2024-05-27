@@ -70,7 +70,8 @@ internal sealed class CompilationIssues : IEnumerable<IssueLocation>
             ret.Add(primary);
             for (var i = 0; i < diagnostic.AdditionalLocations.Count; i++)
             {
-                ret.Add(new IssueLocation(primary, diagnostic.GetSecondaryLocation(i)));
+                var secondaryMessage = diagnostic.Properties.TryGetValue(i.ToString(), out var message) ? message : null;
+                ret.Add(new IssueLocation(primary, new SecondaryLocation(diagnostic.AdditionalLocations[i], secondaryMessage)));
             }
         }
         return ret;

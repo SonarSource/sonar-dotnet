@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Count();
                     if (baseTypesCount > MaximumDepth)
                     {
-                        c.ReportIssue(Rule, objectTypeInfo.Identifier, objectTypeInfo.Name, baseTypesCount, MaximumDepth);
+                        c.ReportIssue(Rule, objectTypeInfo.Identifier, objectTypeInfo.Name, baseTypesCount.ToString(), MaximumDepth.ToString());
                     }
                 },
                 SyntaxKind.ClassDeclaration,

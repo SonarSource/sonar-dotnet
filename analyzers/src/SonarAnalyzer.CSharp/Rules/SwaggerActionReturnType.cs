@@ -71,7 +71,7 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
                             var methodDeclaration = (MethodDeclarationSyntax)nodeContext.Node;
                             if (InvalidMethod(methodDeclaration, nodeContext) is { } method)
                             {
-                                nodeContext.ReportIssue(Rule, methodDeclaration.Identifier, additionalLocations: method.ResponseInvocations, GetMessage(method.Symbol));
+                                nodeContext.ReportIssue(Rule, methodDeclaration.Identifier, method.ResponseInvocations.Select(x => x.ToSecondaryLocation()), GetMessage(method.Symbol));
                             }
                         }, SyntaxKind.MethodDeclaration);
                     }

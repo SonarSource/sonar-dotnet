@@ -18,41 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Common
+namespace SonarAnalyzer.Common;
+
+public record SecondaryLocation(Location Location, string Message);
+
+public static class SecondaryLocationExtensions
 {
-    public class SecondaryLocation
-    {
-        public SecondaryLocation(Location location, string message)
-        {
-            Location = location;
-            Message = message;
-        }
+    [Obsolete("Use ReportIssue overload with IEnumerable<SecondaryLocation> parameter instead.")]
+    public static IEnumerable<Location> ToAdditionalLocations(this IEnumerable<SecondaryLocation> secondaryLocations) =>
+        secondaryLocations.Select(x => x.Location);
 
-        public Location Location { get; }
-        public string Message { get; }
-    }
+    [Obsolete("Use ReportIssue overload with IEnumerable<SecondaryLocation> parameter instead.")]
+    public static ImmutableDictionary<string, string> ToProperties(this IEnumerable<SecondaryLocation> secondaryLocations) =>
+        secondaryLocations
+            .Select((item, index) => new { item.Message, Index = index.ToString() })
+            .ToDictionary(x => x.Index, x => x.Message)
+            .ToImmutableDictionary();
 
-    public static class SecondaryLocationHelper
-    {
-        public static IEnumerable<Location> ToAdditionalLocations(this IEnumerable<SecondaryLocation> secondaryLocations) =>
-            secondaryLocations.Select(x => x.Location);
-
-        public static ImmutableDictionary<string, string> ToProperties(this IEnumerable<SecondaryLocation> secondaryLocations) =>
-            secondaryLocations
-                .Select((item, index) => new { item.Message, Index = index.ToString() })
-                .ToDictionary(i => i.Index, i => i.Message)
-                .ToImmutableDictionary();
-
-        public static ImmutableDictionary<string, string> ToProperties(this IEnumerable<Location> secondaryLocations, string message) =>
-              secondaryLocations
-                .Select((item, index) => new { message, Index = index.ToString() })
-                .ToDictionary(i => i.Index, i => message)
-                .ToImmutableDictionary();
-
-        public static SecondaryLocation GetSecondaryLocation(this Diagnostic diagnostic, int index) =>
-            diagnostic.AdditionalLocations.Count <= index
-                    ? throw new ArgumentOutOfRangeException(nameof(index))
-                    : new SecondaryLocation(diagnostic.AdditionalLocations[index],
-                                            ((IDictionary<string, string>)diagnostic.Properties).GetValueOrDefault(index.ToString()));
-    }
+    [Obsolete("Use ReportIssue overload with IEnumerable<SecondaryLocation> parameter instead.")]
+    public static ImmutableDictionary<string, string> ToProperties(this IEnumerable<Location> secondaryLocations, string message) =>
+          secondaryLocations
+            .Select((item, index) => new { message, Index = index.ToString() })
+            .ToDictionary(x => x.Index, x => message)
+            .ToImmutableDictionary();
 }

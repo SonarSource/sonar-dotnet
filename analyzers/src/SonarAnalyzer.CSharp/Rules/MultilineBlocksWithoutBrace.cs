@@ -96,8 +96,7 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
             var lineSpan = context.Node.SyntaxTree.GetText().Lines[secondLine].Span;
             var location = Location.Create(context.Node.SyntaxTree, TextSpan.FromBounds(second.SpanStart, lineSpan.End));
             var blockSize = secondLine - StartPosition(first).Line + 1;
-            var additional = new[] { first.GetLocation() };
-            context.ReportIssue(Rule.CreateDiagnostic(context.Compilation, location, additional, properties: null, executed, execute, blockSize));
+            context.ReportIssue(Rule, location, [first.ToSecondaryLocation()], executed, execute, blockSize.ToString());
         }
     }
 

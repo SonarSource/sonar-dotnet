@@ -44,4 +44,10 @@ public static class LocationExtensions
 
     public static int EndLine(this Location location) =>
         location.GetLineSpan().EndLinePosition.Line;
+
+    public static bool IsValid(this Location location, Compilation compilation) =>
+        location.Kind != LocationKind.SourceFile || compilation.ContainsSyntaxTree(location.SourceTree);
+
+    public static SecondaryLocation ToSecondary(this Location location, string message = null) =>
+        new(location, message);
 }

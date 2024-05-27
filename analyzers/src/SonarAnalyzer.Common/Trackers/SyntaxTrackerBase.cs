@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Helpers
         public void Track(TrackerInput input, params Condition[] conditions) =>
             Track(input, [], conditions);
 
-        public void Track(TrackerInput input, object[] diagnosticMessageArgs, params Condition[] conditions)
+        public void Track(TrackerInput input, string[] diagnosticMessageArgs, params Condition[] conditions)
         {
             input.Context.RegisterCompilationStartAction(c =>
               {
@@ -47,11 +47,7 @@ namespace SonarAnalyzer.Helpers
                     && trackingContext.PrimaryLocation is not null
                     && trackingContext.PrimaryLocation != Location.None)
                 {
-                    c.ReportIssue(input.Rule,
-                        trackingContext.PrimaryLocation,
-                        trackingContext.SecondaryLocations.ToAdditionalLocations(),
-                        trackingContext.SecondaryLocations.ToProperties(),
-                        diagnosticMessageArgs);
+                    c.ReportIssue(input.Rule, trackingContext.PrimaryLocation, trackingContext.SecondaryLocations, diagnosticMessageArgs);
                 }
             }
         }

@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (dependentTypes.Count > Threshold)
                     {
-                        c.ReportIssue(Rule, typeDeclaration.Identifier, typeDeclaration.Keyword.ValueText, dependentTypes.Count, Threshold);
+                        c.ReportIssue(Rule, typeDeclaration.Identifier, typeDeclaration.Keyword.ValueText, dependentTypes.Count.ToString(), Threshold.ToString());
                     }
                 },
                 SyntaxKind.ClassDeclaration,

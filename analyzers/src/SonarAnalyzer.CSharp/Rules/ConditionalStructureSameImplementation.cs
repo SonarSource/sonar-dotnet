@@ -100,11 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static void ReportSyntaxNode(SonarSyntaxNodeReportingContext context, SyntaxNode node, SyntaxNode precedingNode, string errorMessageDiscriminator) =>
-            context.ReportIssue(Rule.CreateDiagnostic(context.Compilation,
-                node.GetLocation(),
-                additionalLocations: new[] { precedingNode.GetLocation() },
-                properties: null,
-                messageArgs: new object[] { precedingNode.GetLineNumberToReport(), errorMessageDiscriminator }));
+            context.ReportIssue(Rule, node, [precedingNode.ToSecondaryLocation()], precedingNode.GetLineNumberToReport().ToString(), errorMessageDiscriminator);
 
         private static bool IsApprovedStatement(StatementSyntax statement) =>
             !statement.IsAnyKind(IgnoredStatementsInSwitch);

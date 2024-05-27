@@ -103,24 +103,24 @@ namespace SonarAnalyzer.Rules
             var input = new TrackerInput(context, configuration, rule);
 
             var oc = Language.Tracker.ObjectCreation;
-            oc.Track(input, new object[] { MessageHardcodedPassword },
+            oc.Track(input, [MessageHardcodedPassword],
                 oc.MatchConstructor(KnownType.System_Net_NetworkCredential),
                 oc.ArgumentAtIndexIs(1, KnownType.System_String),
                 oc.ArgumentAtIndexIsConst(1));
 
-            oc.Track(input, new object[] { MessageHardcodedPassword },
+            oc.Track(input, [MessageHardcodedPassword],
                oc.MatchConstructor(KnownType.System_Security_Cryptography_PasswordDeriveBytes),
                oc.ArgumentAtIndexIs(0, KnownType.System_String),
                oc.ArgumentAtIndexIsConst(0));
 
             var pa = Language.Tracker.PropertyAccess;
-            pa.Track(input, new object[] { MessageHardcodedPassword },
+            pa.Track(input, [MessageHardcodedPassword],
                pa.MatchSetter(),
                pa.AssignedValueIsConstant(),
                pa.MatchProperty(new MemberDescriptor(KnownType.System_Net_NetworkCredential, "Password")));
 
             var inv = Language.Tracker.Invocation;
-            inv.Track(input, new object[] { MessageHardcodedPassword },
+            inv.Track(input, [MessageHardcodedPassword],
                 inv.MatchMethod(new MemberDescriptor(KnownType.System_Security_SecureString, nameof(SecureString.AppendChar))),
                 inv.ArgumentAtIndexIs(0, IsSecureStringAppendCharFromConstant));
 
