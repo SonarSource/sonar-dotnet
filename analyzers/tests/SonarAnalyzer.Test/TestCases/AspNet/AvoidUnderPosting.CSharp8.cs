@@ -8,7 +8,7 @@ namespace NullableReferences
     public class ModelUsedInController
     {
 #nullable enable
-        public string NonNullableReferenceProperty { get; set; }  // Compliant - ASP.NET Core treats non-nullable reference types as if they were decorated with the [Required] attribute
+        public string NonNullableReferenceProperty { get; set; }  // Compliant - the JSON serializer will throw an exception if the value is missing from the request
         public object AnotherNonNullableReferenceProperty { get; set; }
         [Required] public string RequiredNonNullableReferenceProperty { get; set; }
         public string? NullableReferenceProperty { get; set; }
