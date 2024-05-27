@@ -22,7 +22,6 @@ using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class JwsSecretKeys : HardcodedBytesRuleBase
 {
     private const string DiagnosticId = "S6781";
