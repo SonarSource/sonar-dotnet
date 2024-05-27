@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Common.Walkers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
@@ -38,7 +39,12 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : HardcodedBytesRule
     protected override SymbolicConstraint Hardcoded => CryptographicSeedConstraint.Predictable;
     protected override SymbolicConstraint NotHardcoded => CryptographicSeedConstraint.Unpredictable;
 
-    public override bool ShouldExecute() => true;
+    public override bool ShouldExecute()
+    {
+        var walker = new Walker();
+        walker.SafeVisit(Node);
+        return walker.Result;
+    }
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
@@ -158,4 +164,23 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : HardcodedBytesRule
 
     private static bool IsIRandomGenerator(IInvocationOperationWrapper invocation) =>
         invocation.TargetMethod.ContainingType.DerivesOrImplements(KnownType.Org_BouncyCastle_Crypto_Prng_IRandomGenerator);
+
+    private sealed class Walker : SafeCSharpSyntaxWalker
+    {
+        public bool Result { get; private set; }
+
+        public override void Visit(SyntaxNode node)
+        {
+            if (!Result)
+            {
+                base.Visit(node);
+            }
+        }
+
+        public override void VisitMemberAccessExpression(MemberAccessExpressionSyntax node) =>
+            Result |= node.Expression.NameIs("SecureRandom") && node.Name.NameIs("GetInstance");
+
+        public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node) =>
+            Result |= node.Type.GetName() is "DigestRandomGenerator" or "VmpcRandomGenerator";
+    }
 }
