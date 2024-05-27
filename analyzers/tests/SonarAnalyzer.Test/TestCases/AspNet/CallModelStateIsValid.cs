@@ -237,3 +237,22 @@ public class ControllerCallsTryValidateOverride : ControllerBase
         return TryValidateModel(email, "prefix") ? "Hi!" : "Hello!";
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9325
+namespace Repro_9325
+{
+    public class MyController : ControllerBase
+    {
+        [HttpGet("/[controller]")]
+        public string Get([Required, FromQuery] string id)                      // Noncompliant - FP: the Model State is checked in a method that's called from the Controller Action
+        {
+            if (!CheckModelState())
+            {
+                return "Error!";
+            }
+            return "Hello!";
+        }
+
+        private bool CheckModelState() => ModelState.IsValid;
+    }
+}
