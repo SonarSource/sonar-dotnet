@@ -19,6 +19,7 @@
  */
 
 using System.Threading.Channels;
+using NSubstitute;
 using SonarAnalyzer.AnalysisContext;
 
 namespace SonarAnalyzer.Test.AnalysisContext;
@@ -71,5 +72,16 @@ public class SonarSyntaxTreeReportingContextTest
         lastDiagnostic.Should().NotBeNull();
         lastDiagnostic.Id.Should().Be("Sxxxx");
         lastDiagnostic.AdditionalLocations.Should().BeEmpty("This secondary location is outside the compilation");
+    }
+
+    [TestMethod]
+    public void ReportIssue_NullArguments_Throws()
+    {
+        var compilation = TestHelper.CompileCS("// Nothing to see here").Model.Compilation;
+        var sut = new SonarSyntaxTreeReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), default, compilation);
+        var rule = AnalysisScaffolding.CreateDescriptor("Sxxxx", DiagnosticDescriptorFactory.MainSourceScopeTag);
+
+        sut.Invoking(x => x.ReportIssue(null, primaryLocation: null,  secondaryLocations: [])).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("rule");
+        sut.Invoking(x => x.ReportIssue(rule, primaryLocation: null,  secondaryLocations: null)).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("secondaryLocations");
     }
 }

@@ -111,6 +111,8 @@ public abstract class SonarTreeReportingContextBase<TContext> : SonarReportingCo
 
     public void ReportIssue(DiagnosticDescriptor rule, Location primaryLocation, IEnumerable<SecondaryLocation> secondaryLocations, params string[] messageArgs)
     {
+        _ = rule ?? throw new ArgumentNullException(nameof(rule));
+        _ = secondaryLocations ?? throw new ArgumentNullException(nameof(secondaryLocations));
         secondaryLocations = secondaryLocations.Where(x => x.Location.IsValid(Compilation)).ToArray();
         var properties = secondaryLocations.Select((x, index) => new KeyValuePair<string, string>(index.ToString(), x.Message)).ToImmutableDictionary();
         ReportIssueCore(Diagnostic.Create(rule, primaryLocation, secondaryLocations.Select(x => x.Location), properties, messageArgs));

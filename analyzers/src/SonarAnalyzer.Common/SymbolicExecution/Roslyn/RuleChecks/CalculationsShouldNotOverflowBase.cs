@@ -38,19 +38,19 @@ public abstract class CalculationsShouldNotOverflowBase : SymbolicRuleCheck
         {
             if (number.Max < bounds.Min)
             {
-                ReportIssue(operation, MessageGuaranteed, MessageUnderflow, bounds.Min);
+                ReportIssue(operation, MessageGuaranteed, MessageUnderflow, bounds.Min.ToString());
             }
             else if (number.Min > bounds.Max)
             {
-                ReportIssue(operation, MessageGuaranteed, MessageOverflow, bounds.Max);
+                ReportIssue(operation, MessageGuaranteed, MessageOverflow, bounds.Max.ToString());
             }
             else if (number.Max > bounds.Max)
             {
-                ReportIssue(operation, MessageLikely, MessageOverflow, bounds.Max);
+                ReportIssue(operation, MessageLikely, MessageOverflow, bounds.Max.ToString());
             }
             else if (number.Min < bounds.Min)
             {
-                ReportIssue(operation, MessageLikely, MessageUnderflow, bounds.Min);
+                ReportIssue(operation, MessageLikely, MessageUnderflow, bounds.Min.ToString());
             }
         }
         return context.State;

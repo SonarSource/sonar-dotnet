@@ -43,7 +43,7 @@ public abstract class PublicMethodArgumentsShouldBeCheckedForNullBase : Symbolic
             var message = IsInConstructorInitializer(candidate.Syntax)
                 ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be {1}."
                 : "Refactor this method to add validation of parameter '{0}' before using it.";
-            ReportIssue(candidate, string.Format(message, candidate.Syntax, NullName), context);
+            ReportIssue(candidate, string.Format(message, candidate.Syntax, NullName));
         }
 
         return context.State;
