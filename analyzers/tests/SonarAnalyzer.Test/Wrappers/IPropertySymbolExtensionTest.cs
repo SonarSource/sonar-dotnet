@@ -31,7 +31,18 @@ public class IPropertySymbolExtensionTest
     [DataRow("")]
     public void IsRequired(string required)
     {
+        var net48Attributes = // Compiler attributes to simulate "this compiler/framework combination supports requires members
+#if NETFRAMEWORK
+            $$"""
+            namespace System.Runtime.CompilerServices;
+            public class RequiredMemberAttribute : Attribute { }
+            public class CompilerFeatureRequiredAttribute(string featureName) : Attribute { }
+            """;
+#else
+            string.Empty;
+#endif
         var code = $$"""
+            {{net48Attributes}}
             public class Test
             {
                 public {{required}} int Prop { get; set; }
