@@ -81,7 +81,7 @@ public sealed class JwsSecretKeys : HardcodedBytesRuleBase
 
     // IConfiguration _config["key"]
     // ConfigurationManager.AppSettings["key"]
-    private ProgramState ProcessPropertyReference(ProgramState state, IPropertyReferenceOperationWrapper propertyReference)
+    private static ProgramState ProcessPropertyReference(ProgramState state, IPropertyReferenceOperationWrapper propertyReference)
     {
         if (propertyReference.Property.Name == "this[]"
             // This needs to be narrowed down to the specific type, as NameValueCollection is a base class for other collections.
