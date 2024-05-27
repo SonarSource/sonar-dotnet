@@ -48,7 +48,6 @@ public class FluentValidationTests_IValidatorT
 
 public class FluentValidationTests_IValidator
 {
-
     public class Validator : IValidator
     {
         public ValidationResult Validate(IValidationContext context) => null;
@@ -79,7 +78,6 @@ public class FluentValidationTests_IValidator
 
 public class FluentValidationTests_NotFluentValidation
 {
-
     public ValidationResult Validate(IValidationContext context) => null;
     public Task<ValidationResult> ValidateAsync(IValidationContext context, CancellationToken cancellation = new CancellationToken()) => null;
 
