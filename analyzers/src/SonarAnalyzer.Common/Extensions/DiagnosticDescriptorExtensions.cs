@@ -54,5 +54,5 @@ public static class DiagnosticDescriptorExtensions
                                               IEnumerable<Location> additionalLocations,
                                               ImmutableDictionary<string, string> properties,
                                               params object[] messageArgs) =>
-        Diagnostic.Create(descriptor, location, additionalLocations?.Where(x => x.IsValid(compilation)), properties, messageArgs);
+        Diagnostic.Create(descriptor, location, additionalLocations?.Where(y => y.IsValid(compilation)), properties, messageArgs);
 }
