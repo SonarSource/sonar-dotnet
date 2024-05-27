@@ -35,7 +35,7 @@ public class AvoidUnderPostingTest
 
     private readonly VerifierBuilder builder = new VerifierBuilder<AvoidUnderPosting>()
             .WithBasePath("AspNet")
-            .AddReferences(AspNetReferences);
+            .AddReferences([..AspNetReferences, .. NuGetMetadataReference.SystemTextJson("7.0.4")]);
 
     [TestMethod]
     public void AvoidUnderPosting_CSharp() =>
@@ -56,7 +56,6 @@ public class AvoidUnderPostingTest
     [TestMethod]
     public void AvoidUnderPosting_CSharp12() =>
         builder.AddPaths("AvoidUnderPosting.CSharp12.cs")
-            .AddReferences(NuGetMetadataReference.SystemTextJson("7.0.4"))
             .WithOptions(ParseOptionsHelper.FromCSharp12)
             .Verify();
 
@@ -74,7 +73,7 @@ public class AvoidUnderPostingTest
             {
                 public int ValueProperty { get; set; }                      // Noncompliant
                 public int? NullableValueProperty { get; set; }             // Compliant
-                [Required] public int RequiredValueProperty { get; set; }   // Compliant
+                public required int RequiredValueProperty { get; set; }     // Compliant
             }
 
             public class ControllerClass : Controller
@@ -82,7 +81,7 @@ public class AvoidUnderPostingTest
                 [HttpPost] public IActionResult Create(Model model) => View(model);
             }
             """)
-        .WithOptions(ParseOptionsHelper.FromCSharp10)
+        .WithOptions(ParseOptionsHelper.FromCSharp11)
         .Verify();
 
     [DataTestMethod]

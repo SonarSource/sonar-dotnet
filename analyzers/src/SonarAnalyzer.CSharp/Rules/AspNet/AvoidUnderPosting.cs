@@ -26,16 +26,13 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6964";
-    private const string MessageFormat = "Property used as input in a controller action should be nullable or annotated with the Required attribute to avoid under-posting.";
+    private const string MessageFormat = "Value type property used as input in a controller action should be nullable, required or annotated with the JsonRequiredAttribute to avoid under-posting.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
     private static readonly ImmutableArray<KnownType> IgnoredTypes = ImmutableArray.Create(
         KnownType.Microsoft_AspNetCore_Http_IFormCollection,
         KnownType.Microsoft_AspNetCore_Http_IFormFile,
         KnownType.Microsoft_AspNetCore_Http_IFormFileCollection);
-    private static readonly ImmutableArray<KnownType> ValidationAttributes = ImmutableArray.Create(
-        KnownType.System_ComponentModel_DataAnnotations_RequiredAttribute,
-        KnownType.System_Text_Json_Serialization_JsonRequiredAttribute);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -79,7 +76,7 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
         var declaredProperties = new List<IPropertySymbol>();
         GetAllDeclaredProperties(parameterType, examinedTypes, declaredProperties);
         var invalidProperties = declaredProperties
-            .Where(x => !CanBeNull(x.Type) && !x.HasAnyAttribute(ValidationAttributes) && !x.IsRequired());
+            .Where(x => !CanBeNull(x.Type) && !x.HasAttribute(KnownType.System_Text_Json_Serialization_JsonRequiredAttribute) && !x.IsRequired());
         foreach (var property in invalidProperties)
         {
             context.ReportIssue(Rule, property.GetFirstSyntaxRef().GetIdentifier()?.GetLocation());
