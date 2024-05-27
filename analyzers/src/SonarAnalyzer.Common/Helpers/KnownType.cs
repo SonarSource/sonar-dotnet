@@ -43,6 +43,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType FluentAssertions_Execution_AssertionScope = new("FluentAssertions.Execution.AssertionScope");
         public static readonly KnownType FluentAssertions_Primitives_ReferenceTypeAssertions = new("FluentAssertions.Primitives.ReferenceTypeAssertions", "TSubject", "TAssertions");
         public static readonly KnownType FluentValidation_IValidator = new("FluentValidation.IValidator");
+        public static readonly KnownType FluentValidation_IValidator_T = new("FluentValidation.IValidator", "T");
         public static readonly KnownType JWT_Builder_JwtBuilder = new("JWT.Builder.JwtBuilder");
         public static readonly KnownType JWT_IJwtDecoder = new("JWT.IJwtDecoder");
         public static readonly KnownType JWT_JwtDecoderExtensions = new("JWT.JwtDecoderExtensions");
