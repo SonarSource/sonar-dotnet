@@ -68,6 +68,20 @@ public sealed class JwsSecretKeys : HardcodedBytesRuleBase
         return state;
     }
 
+    // This has to happen after Assignment Processor, as it gets cleared
+    protected override ProgramState PostProcessSimple(SymbolicContext context) =>
+        context.Operation.Instance.AsAssignment() is { } assignment
+            ? ProcessAssignment(context.State, assignment)
+            : context.State;
+
+    private ProgramState ProcessAssignment(ProgramState state, IAssignmentOperationWrapper assignment) =>
+        assignment.Value.ConstantValue.HasValue
+        && assignment.Target.TrackedSymbol(state) is { } target
+            ? state.SetSymbolConstraint(target, Hardcoded)
+            : state;
+
+    // IConfiguration _config["key"]
+    // ConfigurationManager.AppSettings["key"]
     private ProgramState ProcessPropertyReference(ProgramState state, IPropertyReferenceOperationWrapper propertyReference)
     {
         if (propertyReference.Property.Name == "this[]"
@@ -79,16 +93,21 @@ public sealed class JwsSecretKeys : HardcodedBytesRuleBase
         return state;
     }
 
+    // new SymmetricSecurityKey(bytes)
     private ProgramState ProcessSymmetricSecurityKeyConstructor(ProgramState state, IObjectCreationOperationWrapper objectCreation)
     {
         // SymmetricSecurityKey is defined in both System.IdentityModel.Tokens and Microsoft.IdentityModel.Tokens.
         if (objectCreation.Type.IsAny(KnownType.System_IdentityModel_Tokens_SymmetricSecurityKey, KnownType.Microsoft_IdentityModel_Tokens_SymmetricSecurityKey)
             && objectCreation.Arguments.Length == 1
             && objectCreation.Arguments[0] is { } argument
-            && state[argument]?.HasConstraint(CryptographicKeyConstraint.StoredUnsafe) is true)
+            && HasUnsafeValue())
         {
             ReportIssue(objectCreation.WrappedOperation);
         }
         return state;
+
+        bool HasUnsafeValue() =>
+            argument.AsArgument() is { Value.ConstantValue.HasValue: true } // new ...(null)
+            || state[argument]?.HasConstraint(CryptographicKeyConstraint.StoredUnsafe) is true;
     }
 }

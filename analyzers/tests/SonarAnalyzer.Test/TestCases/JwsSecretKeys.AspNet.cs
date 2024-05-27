@@ -12,10 +12,10 @@ public class LoginExampleController
     public void SymmetricSecurityKey_UnsecureKey()
     {
         var key = ConfigurationManager.AppSettings["key"] ?? throw new InvalidOperationException("JWT key is not configured."); // Unsecure configuration
-        _ = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));                                                              // Noncompliant
+        _ = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));                                                              // Noncompliant {{JWT secret keys should not be disclosed.}}
+        //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         _ = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(HardCodedKey));                                                     // Noncompliant
         _ = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Constants.ConstantKey));                                            // Noncompliant
-        _ = new SymmetricSecurityKey(HardCodedKeyBytes);                                                                        // Noncompliant
         _ = new SymmetricSecurityKey(Convert.FromBase64String(HardCodedKeyBase64));                                             // Noncompliant
         _ = new SymmetricSecurityKey(null);                                                                                     // Noncompliant
     }
@@ -28,6 +28,7 @@ public class LoginExampleController
         _ = new SymmetricSecurityKey(Convert.FromBase64String(key));
         _ = new SymmetricSecurityKey(Convert.FromBase64String(parameterKey));
         _ = new SymmetricSecurityKey(parameterKeyBytes);
+        _ = new SymmetricSecurityKey(HardCodedKeyBytes);                                                                        // Compliant FN, GetBytes is called outside the method
         _ = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Constants.PropertyKey));                                            // Static property, cannot be evaluated to constant
         _ = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(string.Empty));                                                     // Field, cannot be evaluated to constant
         _ = new SymmetricSecurityKey(UnknownProcessing(key));                                                                   // Unknown processing, cannot be evaluated to constant
