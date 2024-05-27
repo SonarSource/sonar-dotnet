@@ -68,6 +68,13 @@ public class UseAwaitableMethodTest
         .AddPaths("UseAwaitableMethod_Sockets.cs")
         .Verify();
 
+    [TestMethod]
+    public void UseAwaitableMethod_FluentValidation() =>
+        builder
+        .AddReferences(NuGetMetadataReference.FluentValidation())
+        .AddPaths("UseAwaitableMethod_FluentValidation.cs")
+        .Verify();
+
 #if NET
     [TestMethod]
     public void UseAwaitableMethod_CSharp9() =>
