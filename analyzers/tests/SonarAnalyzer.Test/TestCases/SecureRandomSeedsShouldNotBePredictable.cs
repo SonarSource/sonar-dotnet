@@ -307,7 +307,7 @@ class Testcases
         mySr.Next(); // Compliant
     }
 
-    void RandomGenerator_Inside_SecureRandom(byte[] bs, string s)
+    void RandomGenerator_Inside_SecureRandom(byte[] bs, string s, int seedLength)
     {
         var notHardcoded = Encoding.UTF8.GetBytes(s);
         var hardcoded = Convert.FromBase64String("exploding whale");
@@ -335,6 +335,10 @@ class Testcases
         rng = new SecureRandom(generator);
         rng.SetSeed(hardcoded);
         rng.NextBytes(bs); // Noncompliant
+
+        generator = new DigestRandomGenerator(new Sha256Digest());
+        rng = new SecureRandom(generator, seedLength);
+        rng.NextBytes(bs); // Compliant
 
         generator = new DigestRandomGenerator(new Sha256Digest());
         rng = new SecureRandom(generator, 16);
