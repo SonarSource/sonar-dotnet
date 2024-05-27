@@ -30,8 +30,8 @@ namespace Repro9275
     {
         public int ValueProperty { get; set; }              // Noncompliant
 
-        [Custom]                                            // Noncompliant repro for https://github.com/SonarSource/sonar-dotnet/issues/9282
-        public int ValuePropertyAnnotatedWithCustomAttribute { get; set; }
+        [Custom]
+        public int ValuePropertyAnnotatedWithCustomAttribute { get; set; } // Noncompliant
 
         [JsonRequired]                                      // Compliant - the property is annotated with JsonRequiredAttribute
         public int AnotherValueProperty { get; set; }

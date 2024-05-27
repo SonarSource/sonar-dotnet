@@ -82,7 +82,7 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
             .Where(x => !CanBeNull(x.Type) && !x.HasAnyAttribute(ValidationAttributes) && !x.IsRequired());
         foreach (var property in invalidProperties)
         {
-            context.ReportIssue(Rule, property.GetFirstSyntaxRef().GetLocation());
+            context.ReportIssue(Rule, property.GetFirstSyntaxRef().GetIdentifier()?.GetLocation());
         }
     }
 

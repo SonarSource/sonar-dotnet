@@ -4,7 +4,7 @@
       "Id": "S6964",
       "Message": "Property used as input in a controller action should be nullable or annotated with the Required attribute to avoid under-posting.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6964.cs#L9",
-      "Location": "Line 9 Position 13-51"
+      "Location": "Line 9 Position 24-37"
     }
   ]
 }
