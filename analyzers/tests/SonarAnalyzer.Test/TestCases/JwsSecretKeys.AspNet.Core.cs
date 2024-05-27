@@ -33,11 +33,12 @@ public class LoginExampleController
         _ = new SymmetricSecurityKey(bs);                                           // Noncompliant - true-branch is unsecure
     }
 
-    public void SymmetricSecurityKey_Compliant()
+    public void SymmetricSecurityKey_Compliant(byte b)
     {
         var key = Environment.GetEnvironmentVariable("JWT_KEY") ?? "";              // Environment variable is considered secure
         _ = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));                  // Compliant
         _ = new SymmetricSecurityKey(UnknownProcessing("key"));                     // Compliant
+        _ = new SymmetricSecurityKey(new byte[] { (byte)1, b });                    // Compliant
     }
 
     private static byte[] UnknownProcessing(string key) =>
