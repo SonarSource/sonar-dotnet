@@ -206,7 +206,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 
             public bool SupportsPartialResults => true;
 
-            public IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation) =>
+            public IEnumerable<Diagnostic> GetDiagnostics() =>
                 nullIdentifiers.Select(nullIdentifier => Diagnostic.Create(S2259, nullIdentifier.GetLocation(), nullIdentifier.Identifier.ValueText));
 
             public void Dispose() => nullPointerCheck.MemberAccessed -= MemberAccessedHandler;
