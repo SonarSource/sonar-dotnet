@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using WellKnownExtensionMethodContainer = SonarAnalyzer.Common.MultiValueDictionary<Microsoft.CodeAnalysis.ITypeSymbol, Microsoft.CodeAnalysis.INamedTypeSymbol>;
 namespace SonarAnalyzer.Rules.CSharp;
@@ -99,6 +100,10 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         {
             exclusions.Add(x => x.IsImplementingInterfaceMember(KnownType.FluentValidation_IValidator, "Validate"));   // https://github.com/SonarSource/sonar-dotnet/issues/9339
             exclusions.Add(x => x.IsImplementingInterfaceMember(KnownType.FluentValidation_IValidator_T, "Validate")); // https://github.com/SonarSource/sonar-dotnet/issues/9339
+        }
+        if (compilation.GetTypeByMetadataName(KnownType.MongoDB_Driver_IMongoCollectionExtensions) is not null)
+        {
+            exclusions.Add(x => x.Is(KnownType.MongoDB_Driver_IMongoCollectionExtensions, "Find")); // https://github.com/SonarSource/sonar-dotnet/issues/9265
         }
         return exclusions.ToImmutableArray();
     }
