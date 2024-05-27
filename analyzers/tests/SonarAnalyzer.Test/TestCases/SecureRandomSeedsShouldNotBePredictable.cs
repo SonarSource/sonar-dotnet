@@ -270,13 +270,15 @@ class Testcases
         sr.Next(); // Compliant FN, array is predictable
     }
 
-    void FromArguments(SecureRandom sr, VmpcRandomGenerator rng1, DigestRandomGenerator rng2, int seed, byte[] bs)
+    void FromArguments(SecureRandom sr1, SecureRandom sr2, SecureRandom sr3, VmpcRandomGenerator rng1, DigestRandomGenerator rng2, int seed, byte[] bs)
     {
-        sr.Next(); // Compliant
-        sr.SetSeed(SEED);
-        sr.Next(); // Compliant
-        sr.SetSeed(seed);
-        sr.Next(); // Compliant
+        sr1.Next(); // Compliant
+
+        sr2.SetSeed(SEED);
+        sr2.Next(); // Compliant
+
+        sr3.SetSeed(seed);
+        sr3.Next(); // Compliant
 
         rng1.NextBytes(bs); // Compliant
         rng1.AddSeedMaterial(SEED);
@@ -286,23 +288,23 @@ class Testcases
         rng2.AddSeedMaterial(seed);
         rng2.NextBytes(bs); // Compliant
 
-        var sr2 = new SecureRandom(rng1);
-        sr2.Next(); // Compliant
+        var mySr = new SecureRandom(rng1);
+        mySr.Next(); // Compliant
 
-        sr2 = new SecureRandom(rng1, 5);
-        sr2.Next(); // Compliant
+        mySr = new SecureRandom(rng1, 5);
+        mySr.Next(); // Compliant
 
-        sr2 = new SecureRandom(rng1, 20);
-        sr2.Next(); // Compliant
+        mySr = new SecureRandom(rng1, 20);
+        mySr.Next(); // Compliant
 
-        sr2 = new SecureRandom(rng2);
-        sr2.Next(); // Compliant
+        mySr = new SecureRandom(rng2);
+        mySr.Next(); // Compliant
 
-        sr2 = new SecureRandom(rng2, 5);
-        sr2.Next(); // Compliant
+        mySr = new SecureRandom(rng2, 5);
+        mySr.Next(); // Compliant
 
-        sr2 = new SecureRandom(rng2, 20);
-        sr2.Next(); // Compliant
+        mySr = new SecureRandom(rng2, 20);
+        mySr.Next(); // Compliant
     }
 
     void RandomGenerator_Inside_SecureRandom(byte[] bs, string s)

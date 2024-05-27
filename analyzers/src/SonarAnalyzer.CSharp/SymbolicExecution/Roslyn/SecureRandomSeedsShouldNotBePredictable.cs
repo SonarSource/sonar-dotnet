@@ -91,11 +91,12 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : HardcodedBytesRule
 
         CryptographicSeedConstraint GeneratorConstraint() =>
             objectCreation.ArgumentValue("generator") is { } generator
-                ? state[generator].Constraint<CryptographicSeedConstraint>()
+                ? state[generator]?.Constraint<CryptographicSeedConstraint>()
                 : null;
 
         bool HasSmallAutoseed() =>
-            objectCreation.ArgumentValue("autoSeedLengthInBytes") is null or { ConstantValue.HasValue: true, ConstantValue.Value: < 16 };
+            objectCreation.ArgumentValue("autoSeedLengthInBytes") is not { } value
+            || (state[value]?.Constraint<NumberConstraint>() is { } numberConstraint && numberConstraint.Min < 16);
     }
 
     // SecureRandom.GetInstance("algorithm", false)
@@ -111,26 +112,17 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : HardcodedBytesRule
     // randomGenerator.AddSeedMaterial(bytes/number)
     private static ProgramState ProcessSeedingMethods(ProgramState state, IInvocationOperationWrapper invocation)
     {
-        if ((IsSetSeed() || IsAddSeedMaterial())
-            && invocation.Instance is { } instance
+        return (IsSetSeed() || IsAddSeedMaterial())
+            && invocation.Instance.TrackedSymbol(state) is { } instance
             // If it is already unpredictable, do nothing.
             // Seeding methods do not overwrite the state, but _mix_ it with the new value.
             && state[instance]?.HasConstraint(CryptographicSeedConstraint.Predictable) is true
-            && SeedValue() is { } seedValue
-            && invocation.Instance.TrackedSymbol(state) is { } instanceSymbol)
-        {
-            var constraint = CryptographicSeedConstraint.Unpredictable;
-            if (seedValue.ConstantValue.HasValue)
-            {
-                constraint = CryptographicSeedConstraint.Predictable;
-            }
-            else if (state[seedValue]?.Constraint<CryptographicSeedConstraint>() is { } value)
-            {
-                constraint = value;
-            }
-            return state.SetSymbolConstraint(instanceSymbol, constraint);
-        }
-        return null;
+            && invocation.Arguments.Length == 1
+            && invocation.Arguments[0].AsArgument() is { Value: var seedValue }
+            && !seedValue.ConstantValue.HasValue
+            && state[seedValue]?.HasConstraint(CryptographicSeedConstraint.Predictable) is null or false
+                ? state.SetSymbolConstraint(instance, CryptographicSeedConstraint.Unpredictable)
+                : null;
 
         bool IsSetSeed() =>
             invocation.TargetMethod.Name == "SetSeed"
@@ -139,11 +131,6 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : HardcodedBytesRule
         bool IsAddSeedMaterial() =>
             invocation.TargetMethod.Name == "AddSeedMaterial"
             && IsIRandomGenerator(invocation);
-
-        IOperation SeedValue() =>
-            invocation.ArgumentValue("seed")
-            ?? invocation.ArgumentValue("inSeed") // DigestRandomGenerator renamed the interface arguments
-            ?? invocation.ArgumentValue("rSeed"); // Same as above
     }
 
     // secureRandom.NextXXX()
