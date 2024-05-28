@@ -509,6 +509,8 @@ stages:
         inputs:
           secureFile: 'sign-key.asc'
 
+        # Template below is in https://dev.azure.com/sonarsource/DotNetTeam%20Project/_git/pipelines-yaml-templates?path=/update-maven-version-steps.yml&version=GBmaster
+        # For more info see scripts/version/README.md
       - template: update-maven-version-steps.yml
         parameters:
           mavenSettingsFilePath: $(mavenSettings.secureFilePath)

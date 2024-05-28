@@ -3,6 +3,8 @@
 .SYNOPSIS
 This script allows to set the specified version in all required files.
 
+See in .\scripts\version\README.md how version is set during the pipeline run
+
 #>
 
 [CmdletBinding()]
