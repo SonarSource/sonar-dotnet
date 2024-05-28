@@ -23,7 +23,7 @@ using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
-public sealed class JwsSecretKeys : HardcodedBytesRuleBase
+public sealed class JwtSecretKeys : HardcodedBytesRuleBase
 {
     private const string DiagnosticId = "S6781";
     private const string MessageFormat = "JWT secret keys should not be disclosed.";
