@@ -34,11 +34,4 @@ public static class SecondaryLocationExtensions
             .Select((item, index) => new { item.Message, Index = index.ToString() })
             .ToDictionary(x => x.Index, x => x.Message)
             .ToImmutableDictionary();
-
-    [Obsolete("Use ReportIssue overload with IEnumerable<SecondaryLocation> parameter instead.")]
-    public static ImmutableDictionary<string, string> ToProperties(this IEnumerable<Location> secondaryLocations, string message) =>
-          secondaryLocations
-            .Select((item, index) => new { message, Index = index.ToString() })
-            .ToDictionary(x => x.Index, x => message)
-            .ToImmutableDictionary();
 }

@@ -109,14 +109,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var complexityMetric = CSharpCyclomaticComplexityMetric.GetComplexity(nodeToCheck, onlyGlobalStatements);
             if (complexityMetric.Complexity > Maximum)
             {
-                context.ReportIssue(
-                    Diagnostic.Create(Rule,
-                                      getLocation(node),
-                                      complexityMetric.Locations.ToAdditionalLocations(),
-                                      complexityMetric.Locations.ToProperties(),
-                                      Maximum,
-                                      complexityMetric.Complexity,
-                                      declarationType));
+                context.ReportIssue(Rule, getLocation(node), complexityMetric.Locations, Maximum.ToString(), complexityMetric.Complexity.ToString(), declarationType);
             }
         }
     }

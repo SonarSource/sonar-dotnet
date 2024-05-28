@@ -19,7 +19,6 @@
  */
 
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -56,9 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     implementationErrors.AddRange(CheckGetObjectData(typeDeclarationSyntax, typeSymbol, getObjectData));
                     if (implementationErrors.Any())
                     {
-                        var details = implementationErrors.Aggregate(new StringBuilder(), (sb, error) => sb.Append($"{error.Message} "), sb => sb.ToString().TrimEnd());
-                        var rule = Diagnostic.Create(Rule, typeDeclarationSyntax.Identifier.GetLocation(), implementationErrors.ToAdditionalLocations(), implementationErrors.ToProperties(), details);
-                        c.ReportIssue(rule);
+                        c.ReportIssue(Rule, typeDeclarationSyntax.Identifier, implementationErrors, implementationErrors.JoinStr(" ", x => x.Message));
                     }
                 },
                 SyntaxKind.ClassDeclaration,

@@ -78,10 +78,8 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
         else if (UnsafeDeserialization(state, operation) is { } invocation)
         {
             var methodDeclaration = UnsafeMethodDeclaration(state, invocation.Instance);
-            var additionalLocations = methodDeclaration is not null
-                ? new[] { GetIdentifier(methodDeclaration).GetLocation() }
-                : Array.Empty<Location>();
-            ReportIssue(operation, additionalLocations, additionalLocations.ToProperties(SecondaryMessage), RestrictTypesMessage);
+            var additionalLocations = methodDeclaration is null ? [] : new[] { GetIdentifier(methodDeclaration).GetLocation().ToSecondary(SecondaryMessage) };
+            ReportIssue(operation, additionalLocations, RestrictTypesMessage);
         }
         return state;
     }

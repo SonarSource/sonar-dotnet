@@ -61,7 +61,7 @@ public sealed class ExceptionsShouldBeLoggedOrThrown : SonarDiagnosticAnalyzer
                                      new(walker.LoggingInvocationWithException.GetLocation(), LoggingStatementMessage),
                                      new(throwStatement.GetLocation(), ThrownExceptionMessage)
                                  };
-                                 c.ReportIssue(Diagnostic.Create(Rule, exceptionIdentifier.GetLocation(), secondaryLocations.ToAdditionalLocations(), secondaryLocations.ToProperties()));
+                                 c.ReportIssue(Rule, exceptionIdentifier, secondaryLocations);
                              }
                          },
                          SyntaxKind.CatchClause);

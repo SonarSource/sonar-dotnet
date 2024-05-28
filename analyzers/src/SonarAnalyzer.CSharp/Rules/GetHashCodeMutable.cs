@@ -62,17 +62,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var identifiers = methodSyntax.DescendantNodes().OfType<IdentifierNameSyntax>();
 
-                    var secondaryLocations = GetAllFirstMutableFieldsUsed(c, fieldsOfClass, identifiers).Select(CreateSecondaryLocation).ToList();
-                    if (secondaryLocations.Count == 0)
+                    var secondaryLocations = GetAllFirstMutableFieldsUsed(c, fieldsOfClass, identifiers).Select(CreateSecondaryLocation).ToArray();
+                    if (secondaryLocations.Any())
                     {
-                        return;
+                        c.ReportIssue(Rule, methodSyntax.Identifier, secondaryLocations);
                     }
-
-                    c.ReportIssue(Diagnostic.Create(
-                        Rule,
-                        methodSyntax.Identifier.GetLocation(),
-                        secondaryLocations.ToAdditionalLocations(),
-                        secondaryLocations.ToProperties()));
                 },
                 SyntaxKind.MethodDeclaration);
 
