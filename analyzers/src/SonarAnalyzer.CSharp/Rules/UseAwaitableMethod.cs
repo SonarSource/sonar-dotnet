@@ -41,6 +41,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
             // WellKnownExtensionMethodContainer stores where to look for the async versions of certain methods from a type, e.g. async versions of methods from
             // System.Linq.Enumerable can be found in Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.
             var wellKnownExtensionMethodContainer = BuildWellKnownExtensionMethodContainers(compilationStart.Compilation);
+            var exclusions = BuildExclusions(compilationStart.Compilation);
             context.RegisterCodeBlockStartAction<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, codeBlockStart =>
             {
                 if (IsAsyncCodeBlock(codeBlockStart.CodeBlock))
@@ -49,7 +50,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
                     {
                         var invocationExpression = (InvocationExpressionSyntax)nodeContext.Node;
 
-                        var awaitableAlternatives = FindAwaitableAlternatives(wellKnownExtensionMethodContainer, invocationExpression,
+                        var awaitableAlternatives = FindAwaitableAlternatives(wellKnownExtensionMethodContainer, exclusions, invocationExpression,
                             nodeContext.SemanticModel, nodeContext.ContainingSymbol, nodeContext.Cancel);
                         if (awaitableAlternatives.FirstOrDefault() is { Name: { } alternative })
                         {
@@ -86,7 +87,27 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         return wellKnownExtensionMethodContainer;
     }
 
-    private static ImmutableArray<ISymbol> FindAwaitableAlternatives(WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer,
+    private static ImmutableArray<Func<IMethodSymbol, bool>> BuildExclusions(Compilation compilation)
+    {
+        var exclusions = ImmutableArray.CreateBuilder<Func<IMethodSymbol, bool>>();
+        if (compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFrameworkCore_DbSet_TEntity) is not null)
+        {
+            exclusions.Add(x => x.IsAny(KnownType.Microsoft_EntityFrameworkCore_DbSet_TEntity, ExcludedMethodNamesAddAddRange)); // https://github.com/SonarSource/sonar-dotnet/issues/9269
+            exclusions.Add(x => x.IsAny(KnownType.Microsoft_EntityFrameworkCore_DbContext, ExcludedMethodNamesAddAddRange));     // https://github.com/SonarSource/sonar-dotnet/issues/9269
+        }
+        if (compilation.GetTypeByMetadataName(KnownType.FluentValidation_IValidator) is not null)
+        {
+            exclusions.Add(x => x.IsImplementingInterfaceMember(KnownType.FluentValidation_IValidator, "Validate"));   // https://github.com/SonarSource/sonar-dotnet/issues/9339
+            exclusions.Add(x => x.IsImplementingInterfaceMember(KnownType.FluentValidation_IValidator_T, "Validate")); // https://github.com/SonarSource/sonar-dotnet/issues/9339
+        }
+        if (compilation.GetTypeByMetadataName(KnownType.MongoDB_Driver_IMongoCollectionExtensions) is not null)
+        {
+            exclusions.Add(x => x.Is(KnownType.MongoDB_Driver_IMongoCollectionExtensions, "Find")); // https://github.com/SonarSource/sonar-dotnet/issues/9265
+        }
+        return exclusions.ToImmutableArray();
+    }
+
+    private static ImmutableArray<ISymbol> FindAwaitableAlternatives(WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer, ImmutableArray<Func<IMethodSymbol, bool>> exclusions,
         InvocationExpressionSyntax invocationExpression, SemanticModel semanticModel, ISymbol containingSymbol, CancellationToken cancel)
     {
         var awaitableRoot = GetAwaitableRootOfInvocation(invocationExpression);
@@ -95,7 +116,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
             && IsAsyncCodeBlock(scope)
             && semanticModel.GetSymbolInfo(invocationExpression, cancel).Symbol is IMethodSymbol { MethodKind: not MethodKind.DelegateInvoke } methodSymbol
             && !methodSymbol.IsAwaitableNonDynamic() // The invoked method returns something awaitable (but it isn't awaited).
-            && !IsExcluded(methodSymbol))
+            && !exclusions.Any(x => x(methodSymbol)))
         {
             // Perf: Before doing (expensive) speculative re-binding in SpeculativeBindCandidates, we check if there is an "..Async()" alternative in scope.
             var invokedType = invocationExpression.Expression.GetLeftOfDot() is { } expression && semanticModel.GetTypeInfo(expression) is { Type: { } type }
@@ -111,11 +132,6 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         }
         return ImmutableArray<ISymbol>.Empty;
     }
-
-    private static bool IsExcluded(IMethodSymbol methodSymbol) =>
-        methodSymbol.IsAny(KnownType.Microsoft_EntityFrameworkCore_DbSet_TEntity, ExcludedMethodNamesAddAddRange) // https://github.com/SonarSource/sonar-dotnet/issues/9269
-        || methodSymbol.IsAny(KnownType.Microsoft_EntityFrameworkCore_DbContext, ExcludedMethodNamesAddAddRange)  // https://github.com/SonarSource/sonar-dotnet/issues/9269
-        || methodSymbol.Is(KnownType.MongoDB_Driver_IMongoCollectionExtensions, "Find"); // https://github.com/SonarSource/sonar-dotnet/issues/9265
 
     private static IEnumerable<IMethodSymbol> GetMethodSymbolsInScope(string methodName, WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer,
         ITypeSymbol invokedType, ITypeSymbol methodContainer) =>

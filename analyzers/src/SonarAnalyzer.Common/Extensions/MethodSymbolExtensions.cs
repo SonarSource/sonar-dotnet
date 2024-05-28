@@ -30,6 +30,11 @@ public static class MethodSymbolExtensions
     public static bool IsAny(this IMethodSymbol methodSymbol, KnownType knownType, params string[] names) =>
         methodSymbol.ContainingType.Is(knownType) && names.Contains(methodSymbol.Name);
 
+    public static bool IsImplementingInterfaceMember(this IMethodSymbol methodSymbol, KnownType knownInterfaceType, string name) =>
+        methodSymbol.Name == name
+        && (methodSymbol.Is(knownInterfaceType, name)
+            || (methodSymbol.GetInterfaceMember() is { } implementedInterfaceMember && implementedInterfaceMember.Is(knownInterfaceType, name)));
+
     public static Comparison ComparisonKind(this IMethodSymbol method) =>
         method?.MethodKind == MethodKind.UserDefinedOperator
             ? ComparisonKind(method.Name)

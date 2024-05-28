@@ -31,6 +31,8 @@ namespace SonarAnalyzer.Helpers
         public string TypeName { get; }
         public string FullName { get; }
         public bool IsArray { get; init; }
+        public IReadOnlyList<string> GenericParameters => genericParameters;
+        public string MetadataName => $"{FullName}{(GenericParameters.Any() ? $"`{GenericParameters.Count}" : string.Empty)}";
 
         internal string DebuggerDisplay
         {
