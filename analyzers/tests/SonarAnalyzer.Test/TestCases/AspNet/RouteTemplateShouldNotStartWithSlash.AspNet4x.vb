@@ -1,35 +1,35 @@
 ﻿Imports System.Web.Mvc
 
 <Route("[controller]")>
-Public Class NoncompliantController     ' FN Non-compliant {{Change the paths of the actions of this controller to be relative and adapt the controller route accordingly.}}
+Public Class NoncompliantController     ' Noncompliant {{Change the paths of the actions of this controller to be relative and adapt the controller route accordingly.}}
     Inherits Controller
-    <Route("/Index1")>                  ' FN Second-ary
+    <Route("/Index1")>                  ' Secondary
     Public Function Index1() As ActionResult
         Return View()
     End Function
 
-    <Route("/SubPath/Index2_1")>        ' FN Second-ary
-    <Route("/[controller]/Index2_2")>   ' FN Second-ary
+    <Route("/SubPath/Index2_1")>        ' Secondary
+    <Route("/[controller]/Index2_2")>   ' Secondary
     Public Function Index2() As ActionResult
         Return View()
     End Function
 
-    <Route("/[action]")>                ' FN Second-ary
+    <Route("/[action]")>                ' Secondary
     Public Function Index3() As ActionResult
         Return View()
     End Function
 
-    <Route("/SubPath/Index4_1")>        ' FN Second-ary
-    <Route("/[controller]/Index4_2")>   ' FN Second-ary
+    <Route("/SubPath/Index4_1")>        ' Secondary
+    <Route("/[controller]/Index4_2")>   ' Secondary
     Public Function Index4() As ActionResult
         Return View()
     End Function
 End Class
 
 <RoutePrefix("[controller]")>
-Public Class NoncompliantWithRoutePrefixController ' FN Non-compliant {{Change the paths of the actions of this controller to be relative and adapt the controller route accordingly.}}
+Public Class NoncompliantWithRoutePrefixController ' Noncompliant {{Change the paths of the actions of this controller to be relative and adapt the controller route accordingly.}}
     Inherits Controller
-    <Route("/Index1")>                             ' FN Second-ary
+    <Route("/Index1")>                             ' Secondary
     Public Function Index1() As ActionResult
         Return View()
     End Function
@@ -37,20 +37,20 @@ End Class
 
 <Route("[controller]")>
 <Route("[controller]/[action]")>
-Public Class NoncompliantMultiRouteController ' FN Non-compliant {{Change the paths of the actions of this controller to be relative and adapt the controller route accordingly.}}
+Public Class NoncompliantMultiRouteController ' Noncompliant {{Change the paths of the actions of this controller to be relative and adapt the controller route accordingly.}}
     Inherits Controller
-    <Route("/Index1")>                        ' FN Second-ary
+    <Route("/Index1")>                        ' Secondary
     Public Function Index1() As ActionResult
         Return View()
     End Function
 
-    <Route("/SubPath/Index2_1")>              ' FN Second-ary
-    <Route("/[controller]/Index2_2")>         ' FN Second-ary
+    <Route("/SubPath/Index2_1")>              ' Secondary
+    <Route("/[controller]/Index2_2")>         ' Secondary
     Public Function Index2() As ActionResult
         Return View()
     End Function
 
-    <Route("/[action]")>                      ' FN Second-ary
+    <Route("/[action]")>                      ' Secondary
     Public Function Index3() As ActionResult
         Return View()
     End Function
@@ -81,20 +81,20 @@ Public Class CompliantController ' Compliant: at least one action has at least a
     End Function
 End Class
 
-Public Class NoncompliantNoControllerRouteController ' FN Non-compliant {{Change the paths of the actions of this controller to be relative and add a controller route with the common prefix.}}
+Public Class NoncompliantNoControllerRouteController ' Noncompliant {{Change the paths of the actions of this controller to be relative and add a controller route with the common prefix.}}
     Inherits Controller
-    <Route("/Index1")>                               ' FN Second-ary
+    <Route("/Index1")>                               ' Secondary
     Public Function Index1() As ActionResult
         Return View()
     End Function
 
-    <Route("/SubPath/Index2_1")>                     ' FN Second-ary
-    <Route("/[controller]/Index2_2")>                ' FN Second-ary
+    <Route("/SubPath/Index2_1")>                     ' Secondary
+    <Route("/[controller]/Index2_2")>                ' Secondary
     Public Function Index2() As ActionResult
         Return View()
     End Function
 
-    <Route("/[action]")>                             ' FN Second-ary
+    <Route("/[action]")>                             ' Secondary
     Public Function Index3() As ActionResult
         Return View()
     End Function

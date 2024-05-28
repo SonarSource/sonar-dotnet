@@ -38,15 +38,14 @@ public class RegisterSymbolStartActionWrapperTest
             }
             """);
         var symbolStartWasCalled = false;
-        var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
-            new TestDiagnosticAnalyzer(symbolStart =>
+        var compilation = snippet.Compilation.WithAnalyzers([new TestDiagnosticAnalyzer(symbolStart =>
             {
                 symbolStart.CancellationToken.IsCancellationRequested.Should().BeFalse();
                 symbolStart.Compilation.SyntaxTrees.Should().ContainSingle();
                 symbolStart.Options.Should().NotBeNull();
                 symbolStart.Symbol.Should().BeAssignableTo<INamedTypeSymbol>().Which.Name.Should().Be("C");
                 symbolStartWasCalled = true;
-            }, SymbolKind.NamedType)));
+            }, SymbolKind.NamedType)]);
         var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
         symbolStartWasCalled.Should().BeTrue();
         diagnostics.Should().BeEmpty();
@@ -63,16 +62,16 @@ public class RegisterSymbolStartActionWrapperTest
             }
             """);
         var visitedCodeBlocks = new List<string>();
-        var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
-            new TestDiagnosticAnalyzer(symbolStart =>
+        var compilation = snippet.Compilation.WithAnalyzers([new TestDiagnosticAnalyzer(symbolStart =>
             {
                 symbolStart.RegisterCodeBlockAction(block =>
                 {
                     var node = block.CodeBlock.ToString();
                     visitedCodeBlocks.Add(node);
                 });
-            }, SymbolKind.NamedType)));
-        await compilation.GetAnalyzerDiagnosticsAsync();
+            }, SymbolKind.NamedType)]);
+        var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
+        diagnostics.Should().BeEmpty();
         visitedCodeBlocks.Should().BeEquivalentTo("int i = 0;", "public void M() => ToString();");
     }
 
@@ -92,8 +91,7 @@ public class RegisterSymbolStartActionWrapperTest
             }
             """);
         var visitedCodeBlocks = new List<string>();
-        var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
-            new TestDiagnosticAnalyzer(symbolStart =>
+        var compilation = snippet.Compilation.WithAnalyzers([new TestDiagnosticAnalyzer(symbolStart =>
             {
                 if (symbolStart.Symbol.Name == "C")
                 {
@@ -105,8 +103,9 @@ public class RegisterSymbolStartActionWrapperTest
                     var node = block.CodeBlock.ToString();
                     visitedCodeBlocks.Add(node);
                 });
-            }, SymbolKind.NamedType)));
-        await compilation.GetAnalyzerDiagnosticsAsync();
+            }, SymbolKind.NamedType)]);
+        var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
+        diagnostics.Should().BeEmpty();
         visitedCodeBlocks.Should().BeEquivalentTo("int j = 0;", "public void N() => ToString();");
     }
 
@@ -121,8 +120,7 @@ public class RegisterSymbolStartActionWrapperTest
             }
             """);
         var visited = new List<string>();
-        var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
-            new TestDiagnosticAnalyzer(symbolStart =>
+        var compilation = snippet.Compilation.WithAnalyzers([new TestDiagnosticAnalyzer(symbolStart =>
             {
                 symbolStart.RegisterCodeBlockStartAction<CS.SyntaxKind>(blockStart =>
                 {
@@ -130,8 +128,9 @@ public class RegisterSymbolStartActionWrapperTest
                     visited.Add(node);
                     blockStart.RegisterSyntaxNodeAction(nodeContext => visited.Add(nodeContext.Node.ToString()), CS.SyntaxKind.InvocationExpression);
                 });
-            }, SymbolKind.NamedType)));
-        await compilation.GetAnalyzerDiagnosticsAsync();
+            }, SymbolKind.NamedType)]);
+        var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
+        diagnostics.Should().BeEmpty();
         visited.Should().BeEquivalentTo("int i = 0;", "public void M() => ToString();", "ToString()");
     }
 
@@ -148,8 +147,7 @@ public class RegisterSymbolStartActionWrapperTest
             End Class
             """, ignoreErrors: false, AnalyzerLanguage.VisualBasic);
         var visited = new List<string>();
-        var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
-            new TestDiagnosticAnalyzer(symbolStart =>
+        var compilation = snippet.Compilation.WithAnalyzers([new TestDiagnosticAnalyzer(symbolStart =>
             {
                 symbolStart.RegisterCodeBlockStartAction<VB.SyntaxKind>(blockStart =>
                 {
@@ -157,10 +155,17 @@ public class RegisterSymbolStartActionWrapperTest
                     visited.Add(node);
                     blockStart.RegisterSyntaxNodeAction(nodeContext => visited.Add(nodeContext.Node.ToString()), VB.SyntaxKind.InvocationExpression);
                 });
-            }, SymbolKind.NamedType)));
+            }, SymbolKind.NamedType)]);
         var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
-        visited.Should().BeEmpty();
         diagnostics.Should().BeEmpty();
+        visited.Should().BeEquivalentTo([
+            "Private i As Integer = 0",
+            """
+            Public Sub M()
+                    Call ToString()
+                End Sub
+            """,
+            "ToString()"]);
     }
 
     [TestMethod]
@@ -177,16 +182,16 @@ public class RegisterSymbolStartActionWrapperTest
             }
             """);
         var visited = new List<string>();
-        var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
-            new TestDiagnosticAnalyzer(symbolStart =>
+        var compilation = snippet.Compilation.WithAnalyzers([new TestDiagnosticAnalyzer(symbolStart =>
             {
                 symbolStart.RegisterOperationAction(operationContext =>
                 {
                     var operation = operationContext.Operation.Syntax.ToString();
                     visited.Add(operation);
-                }, ImmutableArray.Create(OperationKind.Invocation));
-            }, SymbolKind.NamedType)));
-        await compilation.GetAnalyzerDiagnosticsAsync();
+                }, [OperationKind.Invocation]);
+            }, SymbolKind.NamedType)]);
+        var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
+        diagnostics.Should().BeEmpty();
         visited.Should().BeEquivalentTo("ToString()");
     }
 
@@ -201,16 +206,16 @@ public class RegisterSymbolStartActionWrapperTest
             }
             """);
         var visited = new List<string>();
-        var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
-            new TestDiagnosticAnalyzer(symbolStart =>
+        var compilation = snippet.Compilation.WithAnalyzers([new TestDiagnosticAnalyzer(symbolStart =>
             {
                 symbolStart.RegisterOperationBlockAction(operationBlockContext =>
                 {
                     var operation = operationBlockContext.OperationBlocks.First().Syntax.ToString();
                     visited.Add(operation);
                 });
-            }, SymbolKind.NamedType)));
-        await compilation.GetAnalyzerDiagnosticsAsync();
+            }, SymbolKind.NamedType)]);
+        var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
+        diagnostics.Should().BeEmpty();
         visited.Should().BeEquivalentTo("= 0", "=> ToString()");
     }
 
@@ -225,8 +230,7 @@ public class RegisterSymbolStartActionWrapperTest
             }
             """);
         var visited = new List<string>();
-        var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
-            new TestDiagnosticAnalyzer(symbolStart =>
+        var compilation = snippet.Compilation.WithAnalyzers([new TestDiagnosticAnalyzer(symbolStart =>
             {
                 symbolStart.RegisterOperationBlockStartAction(operationBlockStartContext =>
                 {
@@ -234,8 +238,9 @@ public class RegisterSymbolStartActionWrapperTest
                     visited.Add(operation);
                     operationBlockStartContext.RegisterOperationAction(operationContext => visited.Add(operationContext.Operation.Syntax.ToString()), OperationKind.Invocation);
                 });
-            }, SymbolKind.NamedType)));
-        var diag = await compilation.GetAnalyzerDiagnosticsAsync();
+            }, SymbolKind.NamedType)]);
+        var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
+        diagnostics.Should().BeEmpty();
         visited.Should().BeEquivalentTo("= 0", "=> ToString()", "ToString()");
     }
 
@@ -250,16 +255,16 @@ public class RegisterSymbolStartActionWrapperTest
             }
             """);
         var visited = new List<string>();
-        var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
-            new TestDiagnosticAnalyzer(symbolStart =>
+        var compilation = snippet.Compilation.WithAnalyzers([new TestDiagnosticAnalyzer(symbolStart =>
             {
                 symbolStart.RegisterSymbolEndAction(symbolContext =>
                 {
                     var symbolName = symbolContext.Symbol.Name;
                     visited.Add(symbolName);
                 });
-            }, SymbolKind.NamedType)));
-        await compilation.GetAnalyzerDiagnosticsAsync();
+            }, SymbolKind.NamedType)]);
+        var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
+        diagnostics.Should().BeEmpty();
         visited.Should().BeEquivalentTo("C");
     }
 
@@ -274,16 +279,16 @@ public class RegisterSymbolStartActionWrapperTest
             }
             """);
         var visited = new List<string>();
-        var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
-            new TestDiagnosticAnalyzer(symbolStart =>
+        var compilation = snippet.Compilation.WithAnalyzers([new TestDiagnosticAnalyzer(symbolStart =>
             {
                 symbolStart.RegisterSyntaxNodeAction(syntaxNodeContext =>
                 {
                     var nodeName = syntaxNodeContext.Node.ToString();
                     visited.Add(nodeName);
                 }, CS.SyntaxKind.InvocationExpression, CS.SyntaxKind.EqualsValueClause);
-            }, SymbolKind.NamedType)));
-        await compilation.GetAnalyzerDiagnosticsAsync();
+            }, SymbolKind.NamedType)]);
+        var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
+        diagnostics.Should().BeEmpty();
         visited.Should().BeEquivalentTo("= 0", "ToString()");
     }
 
@@ -300,38 +305,37 @@ public class RegisterSymbolStartActionWrapperTest
             End Class
             """, ignoreErrors: false, AnalyzerLanguage.VisualBasic);
         var visited = new List<string>();
-        var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
-            new TestDiagnosticAnalyzer(symbolStart =>
+        var compilation = snippet.Compilation.WithAnalyzers([new TestDiagnosticAnalyzer(symbolStart =>
             {
                 symbolStart.RegisterSyntaxNodeAction(syntaxNodeContext =>
                 {
                     var nodeName = syntaxNodeContext.Node.ToString();
                     visited.Add(nodeName);
                 }, VB.SyntaxKind.InvocationExpression);
-            }, SymbolKind.NamedType)));
+            }, SymbolKind.NamedType)]);
         var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
-        visited.Should().BeEmpty();
         diagnostics.Should().BeEmpty();
+        visited.Should().BeEquivalentTo("ToString()");
     }
 
 #pragma warning disable RS1001 // Missing diagnostic analyzer attribute
 #pragma warning disable RS1025 // Configure generated code analysis
 #pragma warning disable RS1026 // Enable concurrent execution
-    private class TestDiagnosticAnalyzer : DiagnosticAnalyzer
+    private sealed class TestDiagnosticAnalyzer : DiagnosticAnalyzer
     {
+        public Action<SymbolStartAnalysisContextWrapper> Action { get; }
+        public SymbolKind SymbolKind { get; }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            [AnalysisScaffolding.CreateDescriptor("TEST")];
+
         public TestDiagnosticAnalyzer(Action<SymbolStartAnalysisContextWrapper> action, SymbolKind symbolKind)
         {
             Action = action;
             SymbolKind = symbolKind;
         }
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
-            ImmutableArray.Create(new DiagnosticDescriptor("TEST", "Test", "Test", "Test", DiagnosticSeverity.Warning, true));
-
-        public Action<SymbolStartAnalysisContextWrapper> Action { get; }
-        public SymbolKind SymbolKind { get; }
 
         public override void Initialize(Microsoft.CodeAnalysis.Diagnostics.AnalysisContext context) =>
-            context.RegisterCompilationStartAction(start =>
-                CompilationStartAnalysisContextExtensions.RegisterSymbolStartAction(start, Action, SymbolKind));
+            context.RegisterCompilationStartAction(x =>
+                CompilationStartAnalysisContextExtensions.RegisterSymbolStartAction(x, Action, SymbolKind));
     }
 }
