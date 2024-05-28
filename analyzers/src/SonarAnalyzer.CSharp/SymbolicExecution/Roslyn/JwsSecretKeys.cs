@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Common.Walkers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
@@ -33,7 +34,12 @@ public sealed class JwsSecretKeys : HardcodedBytesRuleBase
     protected override SymbolicConstraint Hardcoded => CryptographicKeyConstraint.StoredUnsafe;
     protected override SymbolicConstraint NotHardcoded => CryptographicKeyConstraint.StoredSafe;
 
-    public override bool ShouldExecute() => true;
+    public override bool ShouldExecute()
+    {
+        var walker = new Walker();
+        walker.SafeVisit(Node);
+        return walker.Result;
+    }
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
@@ -108,5 +114,21 @@ public sealed class JwsSecretKeys : HardcodedBytesRuleBase
         bool HasUnsafeValue() =>
             argument.AsArgument() is { Value.ConstantValue.HasValue: true } // new ...(null)
             || state[argument]?.HasConstraint(CryptographicKeyConstraint.StoredUnsafe) is true;
+    }
+
+    private sealed class Walker : SafeCSharpSyntaxWalker
+    {
+        public bool Result { get; private set; }
+
+        public override void Visit(SyntaxNode node)
+        {
+            if (!Result)
+            {
+                base.Visit(node);
+            }
+        }
+
+        public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node) =>
+            Result = node.Type.NameIs("SymmetricSecurityKey");
     }
 }
