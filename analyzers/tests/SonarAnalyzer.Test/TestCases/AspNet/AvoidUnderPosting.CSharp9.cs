@@ -7,8 +7,9 @@ namespace CSharp9
     // https://learn.microsoft.com/en-us/aspnet/core/mvc/models/model-binding#constructor-binding-and-record-types
     public record RecordModel(
         int ValueProperty,                                                          // Noncompliant
-        [property: JsonRequired] int RequiredValueProperty,                             // without the property prefix the attribute would have been applied to the constructor parameter instead
-        int? NullableValueProperty);
+        [property: JsonRequired] int RequiredValueProperty,                         // without the property prefix the attribute would have been applied to the constructor parameter instead
+        int? NullableValueProperty,
+        int PropertyWithDefaultValue = 42);
 
     public class ModelUsedInController
     {
