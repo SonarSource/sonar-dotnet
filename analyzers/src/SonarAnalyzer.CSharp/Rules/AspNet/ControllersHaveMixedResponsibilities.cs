@@ -107,12 +107,7 @@ public sealed class ControllersHaveMixedResponsibilities : SonarDiagnosticAnalyz
                 var secondaryLocations = SecondaryLocations(controllerSymbol, responsibilityGroups).ToList();
                 foreach (var primaryLocation in IdentifierLocations<ClassDeclarationSyntax>(controllerSymbol))
                 {
-                    symbolEndContext.ReportIssue(Diagnostic.Create(
-                        Rule,
-                        primaryLocation,
-                        secondaryLocations.ToAdditionalLocations(),
-                        secondaryLocations.ToProperties(),
-                        responsibilityGroups.Count));
+                    symbolEndContext.ReportIssue(Rule, primaryLocation, secondaryLocations, responsibilityGroups.Count.ToString());
                 }
             }
         };

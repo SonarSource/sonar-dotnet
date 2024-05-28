@@ -67,11 +67,7 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
                 {
                     foreach (var property in GetPropertyTypeMismatches((INamedTypeSymbol)c.Symbol, cc.Compilation))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule,
-                            property.Type.GetLocation(),
-                            property.ToAdditionalLocation(),
-                            property.ToAdditionalProperties(),
-                            property.ToPrimaryMessage()));
+                        c.ReportIssue(Rule, property.Type.GetLocation(), property.ToSecondaryLocations(), property.ToPrimaryMessage());
                     }
                 },
                 SymbolKind.NamedType);
@@ -205,13 +201,8 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
                 _ => type.GetName()
             };
 
-        public IEnumerable<Location> ToAdditionalLocation() =>
-            CanReportSecondaryLocation ? new[] { RouteParamLocation } : Array.Empty<Location>();
-
-        public ImmutableDictionary<string, string> ToAdditionalProperties() => CanReportSecondaryLocation
-            ? new Dictionary<string, string> { { "0", ToSecondaryMessage() } }
-                .ToImmutableDictionary()
-            : ImmutableDictionary<string, string>.Empty;
+        public IEnumerable<SecondaryLocation> ToSecondaryLocations() =>
+            CanReportSecondaryLocation ? [new(RouteParamLocation, ToSecondaryMessage())] : [];
 
         private string ToSecondaryMessage() =>
             IsImplicitStringConstraint ? ImplicitStringSecondaryMessage : string.Format(SecondaryMessageFormat, ConstraintType.ToLower());

@@ -21,17 +21,3 @@
 namespace SonarAnalyzer.Common;
 
 public record SecondaryLocation(Location Location, string Message);
-
-public static class SecondaryLocationExtensions
-{
-    [Obsolete("Use ReportIssue overload with IEnumerable<SecondaryLocation> parameter instead.")]
-    public static IEnumerable<Location> ToAdditionalLocations(this IEnumerable<SecondaryLocation> secondaryLocations) =>
-        secondaryLocations.Select(x => x.Location);
-
-    [Obsolete("Use ReportIssue overload with IEnumerable<SecondaryLocation> parameter instead.")]
-    public static ImmutableDictionary<string, string> ToProperties(this IEnumerable<SecondaryLocation> secondaryLocations) =>
-        secondaryLocations
-            .Select((item, index) => new { item.Message, Index = index.ToString() })
-            .ToDictionary(x => x.Index, x => x.Message)
-            .ToImmutableDictionary();
-}
