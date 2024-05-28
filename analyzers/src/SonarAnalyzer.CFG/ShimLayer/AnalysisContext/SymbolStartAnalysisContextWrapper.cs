@@ -56,23 +56,20 @@ public readonly struct SymbolStartAnalysisContextWrapper
     [ExcludeFromCodeCoverage]
     static SymbolStartAnalysisContextWrapper()
     {
-        var symbolStartAnalysisContextType = TryLoadSymbolStartAnalysisContextType();
-        var languageKindEnumVBType = TryLoadLanguageKindEnumVBType();
+        var symbolStartAnalysisContextType = LoadSymbolStartAnalysisContextType();
+        var languageKindEnumVBType = LoadLanguageKindEnumVBType();
         CancellationTokenAccessor = CreatePropertyAccessor<CancellationToken>(nameof(CancellationToken));
         CompilationAccessor = CreatePropertyAccessor<Compilation>(nameof(Compilation));
         OptionsAccessor = CreatePropertyAccessor<AnalyzerOptions>(nameof(Options));
         SymbolAccessor = CreatePropertyAccessor<ISymbol>(nameof(Symbol));
         RegisterCodeBlockActionMethod = CreateRegistrationMethod<CodeBlockAnalysisContext>(nameof(RegisterCodeBlockAction));
-        RegisterCodeBlockStartActionCS =
-            CreateRegistrationMethod<CodeBlockStartAnalysisContext<CS.SyntaxKind>>(nameof(RegisterCodeBlockStartAction), typeof(CS.SyntaxKind));
+        RegisterCodeBlockStartActionCS = CreateRegistrationMethod<CodeBlockStartAnalysisContext<CS.SyntaxKind>>(nameof(RegisterCodeBlockStartAction), typeof(CS.SyntaxKind));
         RegisterCodeBlockStartActionVB = CreateRegistrationMethodCodeBlockStart(languageKindEnumVBType);
-        RegisterOperationActionMethod =
-            CreateRegistrationMethodWithAdditionalParameter<OperationAnalysisContext, ImmutableArray<OperationKind>>(nameof(RegisterOperationAction));
+        RegisterOperationActionMethod = CreateRegistrationMethodWithAdditionalParameter<OperationAnalysisContext, ImmutableArray<OperationKind>>(nameof(RegisterOperationAction));
         RegisterOperationBlockActionMethod = CreateRegistrationMethod<OperationBlockAnalysisContext>(nameof(RegisterOperationBlockAction));
         RegisterOperationBlockStartActionMethod = CreateRegistrationMethod<OperationBlockStartAnalysisContext>(nameof(RegisterOperationBlockStartAction));
         RegisterSymbolEndActionMethod = CreateRegistrationMethod<SymbolAnalysisContext>(nameof(RegisterSymbolEndAction));
-        RegisterSyntaxNodeActionCS = CreateRegistrationMethodWithAdditionalParameter<SyntaxNodeAnalysisContext, ImmutableArray<CS.SyntaxKind>>(
-            nameof(RegisterSyntaxNodeAction), typeof(CS.SyntaxKind));
+        RegisterSyntaxNodeActionCS = CreateRegistrationMethodWithAdditionalParameter<SyntaxNodeAnalysisContext, ImmutableArray<CS.SyntaxKind>>(nameof(RegisterSyntaxNodeAction), typeof(CS.SyntaxKind));
         RegisterSyntaxNodeActionVB = CreateRegistrationMethodSyntaxNode(languageKindEnumVBType);
 
         // receiverParameter => ((symbolStartAnalysisContextType)receiverParameter)."propertyName"
@@ -163,27 +160,27 @@ public readonly struct SymbolStartAnalysisContextWrapper
                 syntaxKindArrayParameter).Compile();
         }
 
-        static Type TryLoadSymbolStartAnalysisContextType()
+        static Type LoadSymbolStartAnalysisContextType()
         {
             try
             {
                 return typeof(CompilationStartAnalysisContext).Assembly.GetType("Microsoft.CodeAnalysis.Diagnostics.SymbolStartAnalysisContext", throwOnError: false);
             }
             // https://learn.microsoft.com/en-us/dotnet/api/system.reflection.assembly.gettype?view=net-8.0#system-reflection-assembly-gettype(system-string-system-boolean)
-            catch (Exception ex) when (ex is FileNotFoundException or FileLoadException or BadImageFormatException)
+            catch
             {
                 return null;
             }
         }
 
-        static Type TryLoadLanguageKindEnumVBType()
+        static Type LoadLanguageKindEnumVBType()
         {
             try
             {
-                return Type.GetType("Microsoft.CodeAnalysis.VisualBasic.SyntaxKind, Microsoft.CodeAnalysis.VisualBasic, Culture=neutral, PublicKeyToken=31bf3856ad364e35", throwOnError: false);
+                return Type.GetType($"{VBSyntaxKind}, Microsoft.CodeAnalysis.VisualBasic, Culture=neutral, PublicKeyToken=31bf3856ad364e35", throwOnError: false);
             }
             // https://learn.microsoft.com/en-us/dotnet/api/system.type.gettype?view=net-8.0#system-type-gettype(system-string-system-boolean)
-            catch (Exception ex) when (ex is TargetInvocationException or FileLoadException or BadImageFormatException)
+            catch
             {
                 return null;
             }
@@ -201,13 +198,11 @@ public readonly struct SymbolStartAnalysisContextWrapper
         var languageKindType = typeof(TLanguageKindEnum);
         if (languageKindType == typeof(CS.SyntaxKind))
         {
-            var cast = (Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>>)action;
-            RegisterCodeBlockStartActionCS(RoslynSymbolStartAnalysisContext, cast);
+            RegisterCodeBlockStartActionCS(RoslynSymbolStartAnalysisContext, (Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>>)action);
         }
         else if (languageKindType.FullName == VBSyntaxKind)
         {
-            Action<object> wrapper = x => action((CodeBlockStartAnalysisContext<TLanguageKindEnum>)x);
-            RegisterCodeBlockStartActionVB(RoslynSymbolStartAnalysisContext, wrapper);
+            RegisterCodeBlockStartActionVB(RoslynSymbolStartAnalysisContext, x => action((CodeBlockStartAnalysisContext<TLanguageKindEnum>)x));
         }
         else
         {

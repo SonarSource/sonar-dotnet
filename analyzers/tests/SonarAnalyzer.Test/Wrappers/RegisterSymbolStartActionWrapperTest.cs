@@ -159,13 +159,13 @@ public class RegisterSymbolStartActionWrapperTest
         var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
         diagnostics.Should().BeEmpty();
         visited.Should().BeEquivalentTo([
-            """Private i As Integer = 0""",
+            "Private i As Integer = 0",
             """
             Public Sub M()
                     Call ToString()
                 End Sub
             """,
-            """ToString()"""]);
+            "ToString()"]);
     }
 
     [TestMethod]
@@ -326,7 +326,7 @@ public class RegisterSymbolStartActionWrapperTest
         public Action<SymbolStartAnalysisContextWrapper> Action { get; }
         public SymbolKind SymbolKind { get; }
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
-            [new DiagnosticDescriptor("TEST", "Test", "Test", "Test", DiagnosticSeverity.Warning, true)];
+            [AnalysisScaffolding.CreateDescriptor("TEST")];
 
         public TestDiagnosticAnalyzer(Action<SymbolStartAnalysisContextWrapper> action, SymbolKind symbolKind)
         {
