@@ -273,6 +273,25 @@ public partial class SonarAnalysisContextBaseTest
         sut.Invoking(x => x.ReportIssue(recognizer, rule, primaryLocation: null, secondaryLocations: null)).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("secondaryLocations");
     }
 
+    [TestMethod]
+    public void ReportIssue_NullLocation_UsesEmpty()
+    {
+        Diagnostic lastDiagnostic = null;
+        var compilation = TestHelper.CompileCS("// Nothing to see here").Model.Compilation;
+        var compilationContext = new CompilationAnalysisContext(compilation, AnalysisScaffolding.CreateOptions(), x => lastDiagnostic = x, _ => true, default);
+        var sut = new SonarCompilationReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), compilationContext);
+        var rule = AnalysisScaffolding.CreateDescriptor("Sxxxx", DiagnosticDescriptorFactory.MainSourceScopeTag);
+        var recognizer = CSharpGeneratedCodeRecognizer.Instance;
+
+        sut.ReportIssue(recognizer, rule, location: null);
+        lastDiagnostic.Should().NotBeNull();
+        lastDiagnostic.Location.Should().Be(Location.None);
+
+        sut.ReportIssue(recognizer, rule, primaryLocation: null, secondaryLocations: []);
+        lastDiagnostic.Should().NotBeNull();
+        lastDiagnostic.Location.Should().Be(Location.None);
+    }
+
     private static void CheckSonarLintXmlDefaultValues(SonarLintXmlReader sut)
     {
         sut.AnalyzeRazorCode(LanguageNames.CSharp).Should().BeTrue();

@@ -122,7 +122,7 @@ namespace SonarAnalyzer.Rules
                 context.ReportIssue(
                     Language.GeneratedCodeRecognizer,
                     rule,
-                    invalidAttributes.MainAttribute,
+                    invalidAttributes.MainAttribute.GetLocation(),
                     invalidAttributes.SecondaryAttribute is null ? [] : [invalidAttributes.SecondaryAttribute.ToSecondaryLocation()]);
             }
         }

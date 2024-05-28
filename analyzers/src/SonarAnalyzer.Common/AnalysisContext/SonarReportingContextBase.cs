@@ -135,15 +135,15 @@ public abstract class SonarCompilationReportingContextBase<TContext> : SonarRepo
         }
     }
 
-    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, DiagnosticDescriptor rule, SyntaxNode locationSyntax, params object[] messageArgs) =>
+    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, DiagnosticDescriptor rule, SyntaxNode locationSyntax, params string[] messageArgs) =>
         ReportIssue(generatedCodeRecognizer, rule, locationSyntax.GetLocation(), messageArgs);
 
-    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, DiagnosticDescriptor rule, SyntaxToken locationToken, params object[] messageArgs) =>
+    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, DiagnosticDescriptor rule, SyntaxToken locationToken, params string[] messageArgs) =>
         ReportIssue(generatedCodeRecognizer, rule, locationToken.GetLocation(), messageArgs);
 
-    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, DiagnosticDescriptor rule, Location location, params object[] messageArgs)
+    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, DiagnosticDescriptor rule, Location location, params string[] messageArgs)
     {
-        if (ShouldAnalyzeTree(location.SourceTree, generatedCodeRecognizer))
+        if (ShouldAnalyzeTree(location?.SourceTree, generatedCodeRecognizer))
         {
             ReportIssueCore(Diagnostic.Create(rule, location, messageArgs));
         }
@@ -157,7 +157,7 @@ public abstract class SonarCompilationReportingContextBase<TContext> : SonarRepo
     {
         _ = rule ?? throw new ArgumentNullException(nameof(rule));
         _ = secondaryLocations ?? throw new ArgumentNullException(nameof(secondaryLocations));
-        if (ShouldAnalyzeTree(primaryLocation.SourceTree, generatedCodeRecognizer))
+        if (ShouldAnalyzeTree(primaryLocation?.SourceTree, generatedCodeRecognizer))
         {
             secondaryLocations = secondaryLocations.Where(x => x.Location.IsValid(Compilation)).ToArray();
             var properties = secondaryLocations.Select((x, index) => new KeyValuePair<string, string>(index.ToString(), x.Message)).ToImmutableDictionary();
