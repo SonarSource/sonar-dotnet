@@ -61,9 +61,10 @@ namespace SonarAnalyzer.Rules.CSharp
             var defaultCanBeUsed = IsMoreParameterAvailableInConflicting(hidingInfo) || !MethodsUsingSameParameterNames(hidingInfo);
             var isOtherFile = syntax.SyntaxTree.FilePath != hidingMethodSyntax.SyntaxTree.FilePath;
 
-            c.ReportIssue(Rule,
+            c.ReportIssue(
+                Rule,
                 syntax,
-                hidingMethodSyntax.GetLocation().GetMappedLineSpan().StartLinePosition.Line + 1,
+                (hidingMethodSyntax.GetLocation().GetMappedLineSpan().StartLinePosition.Line + 1).ToString(),
                 isOtherFile
                     ? $" in file '{new FileInfo(hidingMethodSyntax.SyntaxTree.FilePath).Name}'"
                     : string.Empty,

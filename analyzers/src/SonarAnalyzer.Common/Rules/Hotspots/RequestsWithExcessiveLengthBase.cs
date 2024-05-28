@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Rules
             if (IsDisableRequestSizeLimit(AttributeName(attribute))
                 && attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_DisableRequestSizeLimitAttribute, context.SemanticModel))
             {
-                context.ReportIssue(Diagnostic.Create(rule, attribute.GetLocation()));
+                context.ReportIssue(rule, attribute);
                 return;
             }
 
@@ -121,12 +121,9 @@ namespace SonarAnalyzer.Rules
             {
                 context.ReportIssue(
                     Language.GeneratedCodeRecognizer,
-                    invalidAttributes.SecondaryAttribute != null
-                        ? rule.CreateDiagnostic(context.Compilation,
-                            invalidAttributes.MainAttribute.GetLocation(),
-                            new List<Location> { invalidAttributes.SecondaryAttribute.GetLocation() },
-                            properties: null)
-                        : Diagnostic.Create(rule, invalidAttributes.MainAttribute.GetLocation()));
+                    rule,
+                    invalidAttributes.MainAttribute,
+                    invalidAttributes.SecondaryAttribute is null ? [] : [invalidAttributes.SecondaryAttribute.ToSecondaryLocation()]);
             }
         }
 

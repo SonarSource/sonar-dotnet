@@ -46,13 +46,4 @@ public static class DiagnosticDescriptorExtensions
             return false;
         }
     }
-
-    [Obsolete("Use ReportIssue overload with DiagnosticDescriptor and IEnumerable<SecondaryLocations> parameters instead.")]
-    public static Diagnostic CreateDiagnostic(this DiagnosticDescriptor descriptor,
-                                              Compilation compilation,
-                                              Location location,
-                                              IEnumerable<Location> additionalLocations,
-                                              ImmutableDictionary<string, string> properties,
-                                              params object[] messageArgs) =>
-        Diagnostic.Create(descriptor, location, additionalLocations?.Where(x => x.IsValid(compilation)), properties, messageArgs);
 }

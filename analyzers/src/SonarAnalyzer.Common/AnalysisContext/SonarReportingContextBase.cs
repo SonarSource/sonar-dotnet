@@ -148,4 +148,20 @@ public abstract class SonarCompilationReportingContextBase<TContext> : SonarRepo
             ReportIssueCore(Diagnostic.Create(rule, location, messageArgs));
         }
     }
+
+    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer,
+                            DiagnosticDescriptor rule,
+                            Location primaryLocation,
+                            IEnumerable<SecondaryLocation> secondaryLocations,
+                            params string[] messageArgs)
+    {
+        _ = rule ?? throw new ArgumentNullException(nameof(rule));
+        _ = secondaryLocations ?? throw new ArgumentNullException(nameof(secondaryLocations));
+        if (ShouldAnalyzeTree(primaryLocation.SourceTree, generatedCodeRecognizer))
+        {
+            secondaryLocations = secondaryLocations.Where(x => x.Location.IsValid(Compilation)).ToArray();
+            var properties = secondaryLocations.Select((x, index) => new KeyValuePair<string, string>(index.ToString(), x.Message)).ToImmutableDictionary();
+            ReportIssueCore(Diagnostic.Create(rule, primaryLocation, secondaryLocations.Select(x => x.Location), properties, messageArgs));
+        }
+    }
 }

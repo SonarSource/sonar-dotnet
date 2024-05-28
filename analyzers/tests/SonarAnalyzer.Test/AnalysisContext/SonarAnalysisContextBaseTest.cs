@@ -261,6 +261,18 @@ public partial class SonarAnalysisContextBaseTest
            .WithMessage("File 'SonarLint.xml' has been added as an AdditionalFile but could not be read and parsed.");
     }
 
+    [TestMethod]
+    public void ReportIssue_Null_Throws()
+    {
+        var compilation = TestHelper.CompileCS("// Nothing to see here").Model.Compilation;
+        var sut = CreateSut(ProjectType.Product, false);
+        var rule = AnalysisScaffolding.CreateDescriptor("Sxxxx", DiagnosticDescriptorFactory.MainSourceScopeTag);
+        var recognizer = CSharpGeneratedCodeRecognizer.Instance;
+
+        sut.Invoking(x => x.ReportIssue(recognizer, null, primaryLocation: null, secondaryLocations: [])).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("rule");
+        sut.Invoking(x => x.ReportIssue(recognizer, rule, primaryLocation: null, secondaryLocations: null)).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("secondaryLocations");
+    }
+
     private static void CheckSonarLintXmlDefaultValues(SonarLintXmlReader sut)
     {
         sut.AnalyzeRazorCode(LanguageNames.CSharp).Should().BeTrue();
