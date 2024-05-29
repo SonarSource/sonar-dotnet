@@ -110,7 +110,7 @@ public sealed class TooManyLoggingCalls : ParametrizedDiagnosticAnalyzer
                 if (invocations.Count > threshold)
                 {
                     var primaryLocation = invocations[0].GetLocation();
-                    var secondaryLocations = invocations.Skip(1).Select(x => x.ToSecondaryLocation());
+                    var secondaryLocations = invocations.Skip(1).ToSecondaryLocations();
                     context.ReportIssue(Rule, primaryLocation, secondaryLocations, group.Key, invocations.Count.ToString(), threshold.ToString());
                 }
             }

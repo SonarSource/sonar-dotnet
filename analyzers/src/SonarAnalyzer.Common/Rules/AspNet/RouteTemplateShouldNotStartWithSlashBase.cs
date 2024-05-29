@@ -75,7 +75,7 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind>() : 
             ? MessageOnlyActions
             : MessageActionsAndController;
 
-        var secondaryLocations = actions.SelectMany(x => x.RouteParameters.Keys).Select(x => x.ToSecondary());
+        var secondaryLocations = actions.SelectMany(x => x.RouteParameters.Keys.ToSecondary());
         foreach (var identifier in controllerSymbol.DeclaringSyntaxReferences.Select(x => Language.Syntax.NodeIdentifier(x.GetSyntax())).WhereNotNull())
         {
             context.ReportIssue(Language.GeneratedCodeRecognizer, Rule, identifier.GetLocation(), secondaryLocations, issueMessage);

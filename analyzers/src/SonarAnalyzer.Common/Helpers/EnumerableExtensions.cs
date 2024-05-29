@@ -164,5 +164,14 @@ namespace SonarAnalyzer.Helpers
                 { Count: 1 } single => single[0],
                 _ => string.Empty,
             };
+
+        public static IEnumerable<SecondaryLocation> ToSecondary(this IEnumerable<Location> locations, string message = null) =>
+            locations.Select(x => x.ToSecondary(message));
+
+        public static IEnumerable<SecondaryLocation> ToSecondaryLocations(this IEnumerable<SyntaxNode> nodes, string message = null) =>
+            nodes.Select(x => x.ToSecondaryLocation(message));
+
+        public static IEnumerable<SecondaryLocation> ToSecondaryLocations(this IEnumerable<SyntaxToken> nodes, string message = null) =>
+            nodes.Select(x => x.ToSecondaryLocation(message));
     }
 }

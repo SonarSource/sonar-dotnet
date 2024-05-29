@@ -151,7 +151,7 @@ namespace SonarAnalyzer.Rules
             if (!locations.IsEmpty)
             {
                 // Report both, assignment as well as all implementation occurrences
-                c.Context.ReportIssue(Rule, primaryLocation, locations.Select(x => x.ToSecondary(SecondaryMessage)));
+                c.Context.ReportIssue(Rule, primaryLocation, locations.ToSecondary(SecondaryMessage));
             }
         }
 

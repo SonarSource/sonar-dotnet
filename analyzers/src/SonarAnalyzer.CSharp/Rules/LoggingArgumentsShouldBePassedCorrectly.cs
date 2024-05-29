@@ -82,7 +82,7 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
         var paramsIndex = invocationSymbol.Parameters.IndexOf(paramsParameter);
         var invalidArguments = invocation.ArgumentList.Arguments
             .Where(x => x.GetArgumentIndex() >= paramsIndex && IsInvalidArgument(x, c.SemanticModel, knownTypes))
-            .Select(x => x.ToSecondaryLocation())
+            .ToSecondaryLocations()
             .ToArray();
         if (invalidArguments.Length > 0)
         {
@@ -96,7 +96,7 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
         {
             var typeParameterNames = methodSymbol.TypeParameters.Select(x => x.MetadataName).ToArray();
             var positions = methodSymbol.ConstructedFrom.Parameters.Where(x => typeParameterNames.Contains(x.Type.MetadataName)).Select(x => methodSymbol.ConstructedFrom.Parameters.IndexOf(x));
-            var invalidArguments = InvalidArguments(invocation, c.SemanticModel, positions, knownTypes).Select(x => x.ToSecondaryLocation());
+            var invalidArguments = InvalidArguments(invocation, c.SemanticModel, positions, knownTypes).ToSecondaryLocations();
             c.ReportIssue(Rule, invocation.Expression, invalidArguments);
         }
     }

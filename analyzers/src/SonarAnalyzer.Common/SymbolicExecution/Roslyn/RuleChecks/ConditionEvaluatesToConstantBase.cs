@@ -112,7 +112,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         var secondaryLocations = SecondaryLocations(block, conditionValue, syntax.Span.End);
         if (secondaryLocations.Any())
         {
-            ReportIssue(Rule2583, syntax, secondaryLocations.Select(x => x.ToSecondary()), issueMessage, S2583MessageSuffix);
+            ReportIssue(Rule2583, syntax, secondaryLocations, issueMessage, S2583MessageSuffix);
         }
         else
         {
@@ -120,9 +120,9 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         }
     }
 
-    private List<Location> SecondaryLocations(BasicBlock block, bool conditionValue, int spanStart)
+    private List<SecondaryLocation> SecondaryLocations(BasicBlock block, bool conditionValue, int spanStart)
     {
-        List<Location> locations = new();
+        List<SecondaryLocation> locations = new();
         var unreachable = UnreachableOperations(block, conditionValue);
         var currentStart = spanStart;
 
@@ -143,7 +143,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
             {
                 var firstNode = nodes.OrderBy(x => x.SpanStart).First();
                 var lastNode = nodes.OrderBy(x => x.Span.End).Last();
-                locations.Add(firstNode.CreateLocation(lastNode));
+                locations.Add(firstNode.CreateLocation(lastNode).ToSecondary());
                 return true;
             }
             return false;

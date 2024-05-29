@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private const string DiagnosticId = "S2755";
         private const string MessageFormat = "Disable access to external entities in XML parsing.";
-        private const string SecondaryMessageFormat = "This value enables external entities in XML parsing.";
+        private const string SecondaryMessage = "This value enables external entities in XML parsing.";
 
         private static readonly DiagnosticDescriptor Rule =
             DescriptorFactory.Create(DiagnosticId, MessageFormat);
@@ -99,9 +99,9 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var xmlReaderSettingsValidator = new XmlReaderSettingsValidator(context.SemanticModel, versionProvider.GetDotNetFrameworkVersion(context.Compilation));
-            if (xmlReaderSettingsValidator.GetUnsafeAssignmentLocations(invocation, settings) is { } secondaryLocations && secondaryLocations.Any())
+            if (xmlReaderSettingsValidator.GetUnsafeAssignmentLocations(invocation, settings, SecondaryMessage) is { } secondaryLocations && secondaryLocations.Any())
             {
-                context.ReportIssue(Rule, invocation, secondaryLocations.Select(x => x.ToSecondary(SecondaryMessageFormat)));
+                context.ReportIssue(Rule, invocation, secondaryLocations);
             }
         }
 
