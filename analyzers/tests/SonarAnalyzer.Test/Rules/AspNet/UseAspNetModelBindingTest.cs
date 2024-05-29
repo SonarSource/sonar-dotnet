@@ -44,8 +44,46 @@ public class UseAspNetModelBindingTest
         new VerifierBuilder<UseAspNetModelBinding>().AddSnippet(string.Empty).VerifyNoIssues();
 
     [TestMethod]
-    public void UseAspNetModelBinding_AspNetCore_CSharp12() =>
+    public void UseAspNetModelBinding_AspNetCore_CSharpLatest() =>
         builderAspNetCore.AddPaths("UseAspNetModelBinding_AspNetCore_Latest.cs").Verify();
+
+    [DataTestMethod]
+    [DataRow("form.Files", true)] // "form" is a parameter and as such IFormCollection binding was (probably) used which is an alternative to direct IFormFileCollection binding
+    [DataRow("form?.Files", true)]
+    [DataRow("form!.Files", true)]
+    [DataRow("request.Form.Files", false)]
+    [DataRow("request.Form?.Files", true)] // FN
+    [DataRow("request.Form!.Files", false)]
+    [DataRow("Request.Form.Files", false)]
+    [DataRow("Request.Form!.Files", false)]
+    [DataRow("Request.Form?.Files", true)] // FN
+    public void UseAspNetModelBinding_AspNetCore_FormFileAccess(string filesAccess, bool compliant)
+    {
+        var builder = builderAspNetCore.AddSnippet($$""""
+            using Microsoft.AspNetCore.Http;
+            using Microsoft.AspNetCore.Mvc;
+            using Microsoft.AspNetCore.Mvc.Filters;
+            using System;
+            using System.Linq;
+            using System.Threading.Tasks;
+            
+            public class TestController : Controller
+            {
+                async Task NoncompliantKeyVariations(IFormCollection form, HttpRequest request)
+                {
+                    _ = {{filesAccess}}; // {{(compliant ? string.Empty : "//Noncompliant")}} 
+                }
+            }
+            """");
+        if (compliant)
+        {
+            builder.VerifyNoIssues();
+        }
+        else
+        {
+            builder.Verify();
+        }
+    }
 
     [DataTestMethod]
     [DataRow("Form")]
