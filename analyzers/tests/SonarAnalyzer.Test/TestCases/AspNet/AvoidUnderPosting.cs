@@ -20,7 +20,8 @@ namespace Basics
         [Required] public int RequiredValueProperty { get; set; }                   // Noncompliant, RequiredAttribute has no effect on value types
         [Range(0, 10)] public int ValuePropertyWithRangeValidation { get; set; }    // Compliant
         [Required] public int? RequiredNullableValueProperty { get; set; }
-        [JsonProperty(Required = Required.Always)] public int JsonRequiredValueProperty { get; set; }
+        [JsonProperty(Required = Required.Always)] public int JsonRequiredValuePropertyAlways { get; set; }         // Compliant
+        [JsonProperty(Required = Required.AllowNull)] public int JsonRequiredValuePropertyAllowNull { get; set; }   // Compliant
         public int PropertyWithPrivateSetter { get; private set; }
         protected int ProtectedProperty { get; set; }
         internal int InternalProperty { get; set; }

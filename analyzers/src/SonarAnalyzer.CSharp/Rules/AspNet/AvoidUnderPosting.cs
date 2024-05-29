@@ -96,7 +96,7 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
         static bool IsNewtonsoftJsonPropertyRequired(IPropertySymbol property) =>
             property.GetAttributes(KnownType.Newtonsoft_Json_JsonPropertyAttribute).FirstOrDefault() is { } attribute
             && attribute.TryGetAttributeValue("Required", out string valueType)
-            && valueType == "2"; // "2" stand for Enum value: Required.Always
+            && (valueType is "1" or "2"); // "1" stands for Required.AllowNull and "2" for Required.Always
     }
 
     private static bool IgnoreType(ITypeSymbol type) =>
