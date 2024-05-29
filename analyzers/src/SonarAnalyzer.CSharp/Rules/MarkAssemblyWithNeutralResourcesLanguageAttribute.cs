@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             if (hasResx && !HasNeutralResourcesLanguageAttribute(cc.Compilation.Assembly))
                             {
-                                cc.ReportIssue(Rule, null, cc.Compilation.AssemblyName);
+                                cc.ReportIssue(Rule, (Location)null, cc.Compilation.AssemblyName);
                             }
                         });
                 });

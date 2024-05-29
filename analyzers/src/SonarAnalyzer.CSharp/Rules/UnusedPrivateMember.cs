@@ -70,10 +70,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
                         {
                             usageCollector.SafeVisit(syntaxTree.GetRoot());
                         }
-                        foreach (var diagnostic in DiagnosticsForUnusedPrivateMembers(usageCollector, removableInternalTypes, SyntaxConstants.Internal, new()))
-                        {
-                            cc.ReportIssue(diagnostic);
-                        }
+                        ReportUnusedPrivateMembers(cc, usageCollector, removableInternalTypes, SyntaxConstants.Internal, new());
                     });
             });
 
@@ -87,14 +84,8 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             && new CSharpSymbolUsageCollector(context.Compilation, AssociatedSymbols(privateSymbols)) is var usageCollector
             && VisitDeclaringReferences(namedType, usageCollector, context, includeGeneratedFile: true))
         {
-            foreach (var diagnostic in DiagnosticsForUnusedPrivateMembers(usageCollector, privateSymbols, SyntaxConstants.Private, fieldLikeSymbols))
-            {
-                context.ReportIssue(diagnostic);
-            }
-            foreach (var diagnostic in DiagnosticsForUsedButUnreadFields(usageCollector, privateSymbols))
-            {
-                context.ReportIssue(diagnostic);
-            }
+            ReportUnusedPrivateMembers(context, usageCollector, privateSymbols, SyntaxConstants.Private, fieldLikeSymbols);
+            ReportUsedButUnreadFields(context, usageCollector, privateSymbols);
         }
     }
 
@@ -140,10 +131,11 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
                 .SelectMany(x => x.GetSyntax().ChildNodes().OfType<BaseTypeDeclarationSyntax>());
     }
 
-    private static IEnumerable<Diagnostic> DiagnosticsForUnusedPrivateMembers(CSharpSymbolUsageCollector usageCollector,
-                                                                                 ISet<ISymbol> removableSymbols,
-                                                                                 string accessibility,
-                                                                                 BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
+    private static void ReportUnusedPrivateMembers<TContext>(SonarCompilationReportingContextBase<TContext> context,
+                                                             CSharpSymbolUsageCollector usageCollector,
+                                                             ISet<ISymbol> removableSymbols,
+                                                             string accessibility,
+                                                             BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
     {
         var unusedSymbols = GetUnusedSymbols(usageCollector, removableSymbols);
 
@@ -151,17 +143,18 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             .Intersect(usageCollector.UsedSymbols)
             .OfType<IPropertySymbol>()
             .Where(usageCollector.PropertyAccess.ContainsKey)
-            .Where(x => !IsMentionedInDebuggerDisplay(x, usageCollector))
-            .Select(x => GetDiagnosticsForProperty(x, usageCollector.PropertyAccess))
-            .WhereNotNull();
-
-        return GetDiagnosticsForMembers(unusedSymbols, accessibility, fieldLikeSymbols).Concat(propertiesWithUnusedAccessor);
+            .Where(x => !IsMentionedInDebuggerDisplay(x, usageCollector));
+        foreach (var property in propertiesWithUnusedAccessor)
+        {
+            ReportProperty(context, property, usageCollector.PropertyAccess);
+        }
+        ReportDiagnosticsForMembers(context, unusedSymbols, accessibility, fieldLikeSymbols);
     }
 
     private static bool IsMentionedInDebuggerDisplay(ISymbol symbol, CSharpSymbolUsageCollector usageCollector) =>
             usageCollector.DebuggerDisplayValues.Any(x => x.Contains(symbol.Name));
 
-    private static IEnumerable<Diagnostic> DiagnosticsForUsedButUnreadFields(CSharpSymbolUsageCollector usageCollector, IEnumerable<ISymbol> removableSymbols)
+    private static void ReportUsedButUnreadFields(SonarSymbolReportingContext context, CSharpSymbolUsageCollector usageCollector, IEnumerable<ISymbol> removableSymbols)
     {
         var unusedSymbols = GetUnusedSymbols(usageCollector, removableSymbols);
 
@@ -171,7 +164,10 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             .Where(x => !unusedSymbols.Contains(x.Symbol) && !IsMentionedInDebuggerDisplay(x.Symbol, usageCollector))
             .Where(x => x.Declaration is not null && !x.Readings.Any());
 
-        return GetDiagnosticsForUnreadFields(usedButUnreadFields);
+        foreach (var usage in usedButUnreadFields)
+        {
+            context.ReportIssue(RuleS4487, usage.Declaration.GetLocation(), GetFieldAccessibilityForMessage(usage.Symbol), usage.Symbol.Name);
+        }
     }
 
     private static HashSet<ISymbol> GetUnusedSymbols(CSharpSymbolUsageCollector usageCollector, IEnumerable<ISymbol> removableSymbols) =>
@@ -179,9 +175,6 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             .Except(usageCollector.UsedSymbols)
             .Where(x => !IsMentionedInDebuggerDisplay(x, usageCollector) && !IsAccessorUsed(x, usageCollector))
             .ToHashSet();
-
-    private static IEnumerable<Diagnostic> GetDiagnosticsForUnreadFields(IEnumerable<SymbolUsage> unreadFields) =>
-        unreadFields.Select(x => Diagnostic.Create(RuleS4487, x.Declaration.GetLocation(), GetFieldAccessibilityForMessage(x.Symbol), x.Symbol.Name));
 
     private static bool IsAccessorUsed(ISymbol symbol, CSharpSymbolUsageCollector usageCollector) =>
         symbol is IMethodSymbol { } accessor
@@ -193,11 +186,11 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
     private static string GetFieldAccessibilityForMessage(ISymbol symbol) =>
         symbol.DeclaredAccessibility == Accessibility.Private ? SyntaxConstants.Private : "private class";
 
-    private static IEnumerable<Diagnostic> GetDiagnosticsForMembers(ICollection<ISymbol> unusedSymbols,
-                                                                    string accessibility,
-                                                                    BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
+    private static void ReportDiagnosticsForMembers<TContext>(SonarCompilationReportingContextBase<TContext> context,
+                                                              ICollection<ISymbol> unusedSymbols,
+                                                              string accessibility,
+                                                              BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
     {
-        var diagnostics = new List<Diagnostic>();
         var alreadyReportedFieldLikeSymbols = new HashSet<ISymbol>();
         var unusedSymbolSyntaxPairs = unusedSymbols.SelectMany(x => x.DeclaringSyntaxReferences.Select(syntax => new NodeAndSymbol(syntax.GetSyntax(), x)));
 
@@ -221,10 +214,15 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
                 }
             }
 
-            diagnostics.Add(CreateS1144Diagnostic(syntaxForLocation, unused.Symbol));
+            if (unused.Symbol.IsConstructor() && !syntaxForLocation.GetModifiers().Any(SyntaxKind.PrivateKeyword))
+            {
+                context.ReportIssue(RuleS1144ForPublicCtor, syntaxForLocation, accessibility, unused.Symbol.ContainingType.Name);
+            }
+            else
+            {
+                context.ReportIssue(RuleS1144, GetIdentifierLocation(syntaxForLocation), accessibility, unused.Symbol.GetClassification(), GetMemberName(unused.Symbol));
+            }
         }
-
-        return diagnostics;
 
         static IEnumerable<VariableDeclaratorSyntax> GetSiblingDeclarators(SyntaxNode variableDeclarator) =>
             variableDeclarator.Parent.Parent switch
@@ -234,38 +232,30 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
                 _ => Enumerable.Empty<VariableDeclaratorSyntax>(),
             };
 
-        Diagnostic CreateS1144Diagnostic(SyntaxNode syntaxNode, ISymbol symbol) =>
-            symbol.IsConstructor() && !syntaxNode.GetModifiers().Any(SyntaxKind.PrivateKeyword)
-                ? Diagnostic.Create(RuleS1144ForPublicCtor, syntaxNode.GetLocation(), accessibility, symbol.ContainingType.Name)
-                : Diagnostic.Create(RuleS1144, GetIdentifierLocation(syntaxNode), accessibility, symbol.GetClassification(), GetMemberName(symbol));
-
         static Location GetIdentifierLocation(SyntaxNode syntaxNode) =>
             syntaxNode.GetIdentifier() is { } identifier
                 ? identifier.GetLocation()
                 : syntaxNode.GetLocation();
     }
 
-    private static Diagnostic GetDiagnosticsForProperty(IPropertySymbol property, IReadOnlyDictionary<IPropertySymbol, AccessorAccess> propertyAccessorAccess)
+    private static void ReportProperty<TContext>(SonarCompilationReportingContextBase<TContext> context,
+                                                 IPropertySymbol property,
+                                                 IReadOnlyDictionary<IPropertySymbol, AccessorAccess> propertyAccessorAccess)
     {
         var access = propertyAccessorAccess[property];
         if (access == AccessorAccess.Get
-            && property.SetMethod is { }
+            && property.SetMethod is not null
             && GetAccessorSyntax(property.SetMethod) is { } setter)
         {
-            return Diagnostic.Create(RuleS1144, setter.Keyword.GetLocation(), SyntaxConstants.Private, "set accessor in property", property.Name);
+            context.ReportIssue(RuleS1144, setter.Keyword.GetLocation(), SyntaxConstants.Private, "set accessor in property", property.Name);
         }
         else if (access == AccessorAccess.Set
-                 && property.GetMethod is { }
-                 && GetAccessorSyntax(property.GetMethod) is { } getter
-                 && getter.HasBodyOrExpressionBody())
+            && property.GetMethod is not null
+            && GetAccessorSyntax(property.GetMethod) is { } getter
+            && getter.HasBodyOrExpressionBody())
         {
-            return Diagnostic.Create(RuleS1144, getter.Keyword.GetLocation(), SyntaxConstants.Private, "get accessor in property", property.Name);
+            context.ReportIssue(RuleS1144, getter.Keyword.GetLocation(), SyntaxConstants.Private, "get accessor in property", property.Name);
         }
-        else
-        {
-            return null;
-        }
-
         static AccessorDeclarationSyntax GetAccessorSyntax(ISymbol symbol) =>
             symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as AccessorDeclarationSyntax;
     }
@@ -534,7 +524,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         private static bool HasAttributes(ISymbol symbol)
         {
             IEnumerable<AttributeData> attributes = symbol.GetAttributes();
-            if (symbol is IMethodSymbol { MethodKind: MethodKind.PropertyGet or MethodKind.PropertySet} method
+            if (symbol is IMethodSymbol { MethodKind: MethodKind.PropertyGet or MethodKind.PropertySet } method
                 && method.AssociatedSymbol is { } property)
             {
                 attributes = attributes.Union(property.GetAttributes());

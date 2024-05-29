@@ -77,7 +77,7 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
             {
                 foreach (var candidate in candidates.Where(x => !(hasActionFiltersOverrides && x.OriginatesFromParameter)))
                 {
-                    symbolEnd.ReportIssue(Diagnostic.Create(Rule, candidate.Location, candidate.Message));
+                    symbolEnd.ReportIssue(Rule, candidate.Location, candidate.Message);
                 }
             });
         }, SymbolKind.NamedType);

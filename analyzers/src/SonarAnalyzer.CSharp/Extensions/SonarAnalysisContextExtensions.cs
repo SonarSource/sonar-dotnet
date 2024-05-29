@@ -46,37 +46,19 @@ public static class SonarAnalysisContextExtensions
     public static void RegisterCodeBlockStartAction(this SonarAnalysisContext context, Action<SonarCodeBlockStartAnalysisContext<SyntaxKind>> action) =>
         context.RegisterCodeBlockStartAction(CSharpGeneratedCodeRecognizer.Instance, action);
 
-    [Obsolete("Use another overload of ReportIssue, without calling Diagnostic.Create")]
-    public static void ReportIssue(this SonarCompilationReportingContext context, Diagnostic diagnostic) =>
-        context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, diagnostic);
-
-    public static void ReportIssue(this SonarCompilationReportingContext context,
-                                   DiagnosticDescriptor rule,
-                                   Location primaryLocation,
-                                   IEnumerable<SecondaryLocation> secondaryLocations,
-                                   params string[] messageArgs) =>
-        context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, rule, primaryLocation, secondaryLocations, messageArgs);
-
-    public static void ReportIssue(this SonarCompilationReportingContext context, DiagnosticDescriptor rule, Location location, params string[] messageArgs) =>
-        context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, rule, location, messageArgs);
-
-    [Obsolete("Use another overload of ReportIssue, without calling Diagnostic.Create")]
-    public static void ReportIssue(this SonarSymbolReportingContext context, Diagnostic diagnostic) =>
-        context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, diagnostic);
-
-    public static void ReportIssue(this SonarSymbolReportingContext context, DiagnosticDescriptor rule, SyntaxNode locationSyntax, params string[] messageArgs) =>
+    public static void ReportIssue<TContext>(this SonarCompilationReportingContextBase<TContext> context, DiagnosticDescriptor rule, SyntaxNode locationSyntax, params string[] messageArgs) =>
         context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, rule, locationSyntax, messageArgs);
 
-    public static void ReportIssue(this SonarSymbolReportingContext context, DiagnosticDescriptor rule, SyntaxToken locationToken, params string[] messageArgs) =>
+    public static void ReportIssue<TContext>(this SonarCompilationReportingContextBase<TContext> context, DiagnosticDescriptor rule, SyntaxToken locationToken, params string[] messageArgs) =>
         context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, rule, locationToken, messageArgs);
 
-    public static void ReportIssue(this SonarSymbolReportingContext context, DiagnosticDescriptor rule, Location location, params string[] messageArgs) =>
+    public static void ReportIssue<TContext>(this SonarCompilationReportingContextBase<TContext> context, DiagnosticDescriptor rule, Location location, params string[] messageArgs) =>
         context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, rule, location, messageArgs);
 
-    public static void ReportIssue(this SonarSymbolReportingContext context,
-                                   DiagnosticDescriptor rule,
-                                   Location primaryLocation,
-                                   IEnumerable<SecondaryLocation> secondaryLocations,
-                                   params string[] messageArgs) =>
+    public static void ReportIssue<TContext>(this SonarCompilationReportingContextBase<TContext> context,
+                                             DiagnosticDescriptor rule,
+                                             Location primaryLocation,
+                                             IEnumerable<SecondaryLocation> secondaryLocations,
+                                             params string[] messageArgs) =>
         context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, rule, primaryLocation, secondaryLocations, messageArgs);
 }
