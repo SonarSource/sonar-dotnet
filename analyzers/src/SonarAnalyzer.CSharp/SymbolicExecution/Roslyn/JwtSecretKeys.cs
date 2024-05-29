@@ -34,9 +34,12 @@ public sealed class JwtSecretKeys : HardcodedBytesRuleBase
     protected override SymbolicConstraint Hardcoded => CryptographicKeyConstraint.StoredUnsafe;
     protected override SymbolicConstraint NotHardcoded => CryptographicKeyConstraint.StoredSafe;
 
-    public override bool ShouldExecute() =>
-        Node.DescendantTokens()
-            .Any(x => x.ValueText.Contains("SymmetricSecurityKey"));
+    public override bool ShouldExecute()
+    {
+        var walker = new Walker();
+        walker.SafeVisit(Node);
+        return walker.Result;
+    }
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
@@ -111,5 +114,21 @@ public sealed class JwtSecretKeys : HardcodedBytesRuleBase
         bool HasUnsafeValue() =>
             argument.AsArgument() is { Value.ConstantValue.HasValue: true } // new ...(null)
             || state[argument]?.HasConstraint(CryptographicKeyConstraint.StoredUnsafe) is true;
+    }
+
+    private sealed class Walker : SafeCSharpSyntaxWalker
+    {
+        public bool Result { get; private set; }
+
+        public override void Visit(SyntaxNode node)
+        {
+            if (!Result)
+            {
+                base.Visit(node);
+            }
+        }
+
+        public override void VisitIdentifierName(IdentifierNameSyntax node) =>
+            Result = node.NameIs("SymmetricSecurityKey");
     }
 }
