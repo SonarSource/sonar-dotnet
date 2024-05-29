@@ -33,6 +33,9 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
         KnownType.Microsoft_AspNetCore_Http_IFormCollection,
         KnownType.Microsoft_AspNetCore_Http_IFormFile,
         KnownType.Microsoft_AspNetCore_Http_IFormFileCollection);
+    private static readonly ImmutableArray<KnownType> IgnoredAttributes = ImmutableArray.Create(
+        KnownType.System_Text_Json_Serialization_JsonRequiredAttribute,
+        KnownType.System_ComponentModel_DataAnnotations_RangeAttribute);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -57,7 +60,8 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
 
     private static void ProcessControllerMethods(SonarSyntaxNodeReportingContext context, ConcurrentDictionary<ITypeSymbol, bool> examinedTypes)
     {
-        if (context.SemanticModel.GetDeclaredSymbol(context.Node) is IMethodSymbol method && method.IsControllerActionMethod())
+        if (context.SemanticModel.GetDeclaredSymbol(context.Node) is IMethodSymbol method
+            && method.IsControllerActionMethod())
         {
             var modelParameterTypes = method.Parameters
                 .Where(x => !HasValidateNeverAttribute(x))
@@ -75,13 +79,24 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
         var declaredProperties = new List<IPropertySymbol>();
         GetAllDeclaredProperties(parameterType, examinedTypes, declaredProperties);
         var invalidProperties = declaredProperties
-            .Where(x => !CanBeNull(x.Type) && !x.HasAttribute(KnownType.System_Text_Json_Serialization_JsonRequiredAttribute) && !x.IsRequired())
+            .Where(x => !IsExcluded(x))
             .Select(x => x.GetFirstSyntaxRef())
             .Where(x => !IsInitialized(x));
         foreach (var property in invalidProperties)
         {
             context.ReportIssue(Rule, property.GetIdentifier()?.GetLocation());
         }
+
+        static bool IsExcluded(IPropertySymbol property) =>
+            CanBeNull(property.Type)
+            || property.HasAnyAttribute(IgnoredAttributes)
+            || IsNewtonsoftJsonPropertyRequired(property)
+            || property.IsRequired();
+
+        static bool IsNewtonsoftJsonPropertyRequired(IPropertySymbol property) =>
+            property.GetAttributes(KnownType.Newtonsoft_Json_JsonPropertyAttribute).FirstOrDefault() is { } attribute
+            && attribute.TryGetAttributeValue("Required", out string valueType)
+            && valueType == "2"; // "2" stand for Enum value: Required.Always
     }
 
     private static bool IgnoreType(ITypeSymbol type) =>

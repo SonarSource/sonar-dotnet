@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,8 +18,9 @@ namespace Basics
 //                 ^^^^^^^^^^^^^
         public int? NullableValueProperty { get; set; }
         [Required] public int RequiredValueProperty { get; set; }                   // Noncompliant, RequiredAttribute has no effect on value types
-        [Range(0, 10)] public int ValuePropertyWithRangeValidation { get; set; }    // Noncompliant
+        [Range(0, 10)] public int ValuePropertyWithRangeValidation { get; set; }    // Compliant
         [Required] public int? RequiredNullableValueProperty { get; set; }
+        [JsonProperty(Required = Required.Always)] public int JsonRequiredValueProperty { get; set; }
         public int PropertyWithPrivateSetter { get; private set; }
         protected int ProtectedProperty { get; set; }
         internal int InternalProperty { get; set; }

@@ -212,6 +212,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType NUnit_Framework_TestCaseSourceAttribute = new("NUnit.Framework.TestCaseSourceAttribute");
         public static readonly KnownType NUnit_Framework_TestFixtureAttribute = new("NUnit.Framework.TestFixtureAttribute");
         public static readonly KnownType NUnit_Framework_TheoryAttribute = new("NUnit.Framework.TheoryAttribute");
+        public static readonly KnownType Newtonsoft_Json_JsonPropertyAttribute = new("Newtonsoft.Json.JsonPropertyAttribute");
         public static readonly KnownType Org_BouncyCastle_Asn1_Nist_NistNamedCurves = new("Org.BouncyCastle.Asn1.Nist.NistNamedCurves");
         public static readonly KnownType Org_BouncyCastle_Asn1_Sec_SecNamedCurves = new("Org.BouncyCastle.Asn1.Sec.SecNamedCurves");
         public static readonly KnownType Org_BouncyCastle_Asn1_TeleTrust_TeleTrusTNamedCurves = new("Org.BouncyCastle.Asn1.TeleTrust.TeleTrusTNamedCurves");
@@ -321,6 +322,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_ComponentModel_Composition_PartCreationPolicyAttribute = new("System.ComponentModel.Composition.PartCreationPolicyAttribute");
         public static readonly KnownType System_ComponentModel_DataAnnotations_KeyAttribute = new("System.ComponentModel.DataAnnotations.KeyAttribute");
         public static readonly KnownType System_ComponentModel_DataAnnotations_RegularExpressionAttribute = new("System.ComponentModel.DataAnnotations.RegularExpressionAttribute");
+        public static readonly KnownType System_ComponentModel_DataAnnotations_RangeAttribute = new("System.ComponentModel.DataAnnotations.RangeAttribute");
         public static readonly KnownType System_ComponentModel_DataAnnotations_IValidatableObject = new("System.ComponentModel.DataAnnotations.IValidatableObject");
         public static readonly KnownType System_ComponentModel_DataAnnotations_RequiredAttribute = new("System.ComponentModel.DataAnnotations.RequiredAttribute");
         public static readonly KnownType System_ComponentModel_DataAnnotations_ValidationAttribute = new("System.ComponentModel.DataAnnotations.ValidationAttribute");
@@ -561,7 +563,6 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_StringComparison = new("System.StringComparison");
         public static readonly KnownType System_SystemException = new("System.SystemException");
         public static readonly KnownType System_Text_Encoding = new("System.Text.Encoding");
-        public static readonly KnownType System_Text_Json_Serialization_JsonPropertyAttribute = new("System.Text.Json.Serialization.JsonPropertyAttribute");
         public static readonly KnownType System_Text_Json_Serialization_JsonRequiredAttribute = new("System.Text.Json.Serialization.JsonRequiredAttribute");
         public static readonly KnownType System_Text_RegularExpressions_Regex = new("System.Text.RegularExpressions.Regex");
         public static readonly KnownType System_Text_RegularExpressions_RegexOptions = new("System.Text.RegularExpressions.RegexOptions");

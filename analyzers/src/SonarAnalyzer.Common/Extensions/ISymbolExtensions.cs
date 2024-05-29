@@ -24,6 +24,9 @@ namespace SonarAnalyzer.Extensions;
 
 public static class ISymbolExtensions
 {
+    public static bool HasAnyAttribute(this ISymbol symbol, ImmutableArray<KnownType> types) =>
+        symbol.GetAttributes(types).Any();
+
     public static bool HasAttribute(this ISymbol symbol, KnownType type) =>
         symbol.GetAttributes(type).Any();
 
