@@ -279,11 +279,7 @@ public partial class SonarAnalysisContextTest
         symbol.Locations.Returns([location]);
         var symbolContext = new SymbolAnalysisContext(symbol, context.Model.Compilation, context.Options, _ => wasReported = true, _ => true, default);
         var sut = new SonarSymbolReportingContext(new SonarAnalysisContext(context, DummyMainDescriptor), symbolContext);
-        var diagnostic = Substitute.For<Diagnostic>();
-        diagnostic.Id.Returns("Sxxx");
-        diagnostic.Location.Returns(location);
-        diagnostic.Descriptor.Returns(DummyMainDescriptor[0]);
-        sut.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, diagnostic);
+        sut.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, DummyMainDescriptor[0], location);
 
         wasReported.Should().Be(expected);
     }

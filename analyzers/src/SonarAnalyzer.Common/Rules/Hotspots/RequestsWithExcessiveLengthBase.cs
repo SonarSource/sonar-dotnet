@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Rules
             if (IsDisableRequestSizeLimit(AttributeName(attribute))
                 && attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_DisableRequestSizeLimitAttribute, context.SemanticModel))
             {
-                context.ReportIssue(Diagnostic.Create(rule, attribute.GetLocation()));
+                context.ReportIssue(rule, attribute);
                 return;
             }
 
@@ -121,12 +121,9 @@ namespace SonarAnalyzer.Rules
             {
                 context.ReportIssue(
                     Language.GeneratedCodeRecognizer,
-                    invalidAttributes.SecondaryAttribute != null
-                        ? rule.CreateDiagnostic(context.Compilation,
-                            invalidAttributes.MainAttribute.GetLocation(),
-                            new List<Location> { invalidAttributes.SecondaryAttribute.GetLocation() },
-                            properties: null)
-                        : Diagnostic.Create(rule, invalidAttributes.MainAttribute.GetLocation()));
+                    rule,
+                    invalidAttributes.MainAttribute.GetLocation(),
+                    invalidAttributes.SecondaryAttribute is null ? [] : [invalidAttributes.SecondaryAttribute.ToSecondaryLocation()]);
             }
         }
 
@@ -160,7 +157,7 @@ namespace SonarAnalyzer.Rules
                     && IsVulnerable(maxRequestLength.Value, FileUploadSizeLimit / OneKilobyte)
                     && maxRequestLength.CreateLocation(webConfigPath) is { } location)
                 {
-                    c.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(rule, location));
+                    c.ReportIssue(Language.GeneratedCodeRecognizer, rule, location);
                 }
             }
             foreach (var requestLimit in doc.XPathSelectElements("configuration/system.webServer/security/requestFiltering/requestLimits"))
@@ -169,7 +166,7 @@ namespace SonarAnalyzer.Rules
                     && IsVulnerable(maxAllowedContentLength.Value, FileUploadSizeLimit)
                     && maxAllowedContentLength.CreateLocation(webConfigPath) is { } location)
                 {
-                    c.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(rule, location));
+                    c.ReportIssue(Language.GeneratedCodeRecognizer, rule, location);
                 }
             }
         }

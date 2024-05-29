@@ -119,9 +119,9 @@ namespace SonarAnalyzer.Rules
             if (!expectedFieldIsUsed || !actualFields.Any())
             {
                 var locationAndAccessorType = GetLocationAndAccessor(actualFields, methodSymbol);
-                if (locationAndAccessorType.Item1 != null)
+                if (locationAndAccessorType.Item1 is not null)
                 {
-                    context.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(Rule, locationAndAccessorType.Item1, locationAndAccessorType.Item2, expectedField.Name));
+                    context.ReportIssue(Language.GeneratedCodeRecognizer, Rule, locationAndAccessorType.Item1, locationAndAccessorType.Item2, expectedField.Name);
                 }
             }
 

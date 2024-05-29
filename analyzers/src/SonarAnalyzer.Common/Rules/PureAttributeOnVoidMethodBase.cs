@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules
                 {
                     if (InvalidPureDataAttributeUsage((IMethodSymbol)c.Symbol) is { } pureAttribute)
                     {
-                        c.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(Rule, pureAttribute.ApplicationSyntaxReference.GetSyntax().GetLocation()));
+                        c.ReportIssue(Language.GeneratedCodeRecognizer, Rule, pureAttribute.ApplicationSyntaxReference.GetSyntax());
                     }
                 },
                 SymbolKind.Method);

@@ -75,18 +75,15 @@ namespace SonarAnalyzer.Rules.CSharp
                                                                       .GetAttributes(KnownType.System_Security_SecurityCriticalAttribute)
                                                                       .FirstOrDefault();
 
-            if (assemblySecurityCriticalAttribute != null)
+            if (assemblySecurityCriticalAttribute is not null)
             {
-                var assemblySecurityLocation = assemblySecurityCriticalAttribute.ApplicationSyntaxReference.GetSyntax().GetLocation();
+                var assemblySecurityLocation = assemblySecurityCriticalAttribute.ApplicationSyntaxReference.GetSyntax().ToSecondaryLocation();
 
                 // All parts declaring the 'SecuritySafeCriticalAttribute' are incorrect since the assembly
                 // itself is marked as 'SecurityCritical'.
                 foreach (var item in nodesWithSecuritySafeCritical)
                 {
-                    compilationContext.ReportIssue(Rule.CreateDiagnostic(compilationContext.Compilation,
-                        item.Value.GetLocation(),
-                        additionalLocations: new[] { assemblySecurityLocation },
-                        properties: null));
+                    compilationContext.ReportIssue(Rule, item.Value.GetLocation(), [assemblySecurityLocation]);
                 }
             }
             else
@@ -94,14 +91,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 foreach (var item in nodesWithSecuritySafeCritical)
                 {
                     var current = item.Key.Parent;
-                    while (current != null)
+                    while (current is not null)
                     {
                         if (nodesWithSecurityCritical.ContainsKey(current))
                         {
-                            compilationContext.ReportIssue(Rule.CreateDiagnostic(compilationContext.Compilation,
-                                item.Value.GetLocation(),
-                                additionalLocations: new[] { nodesWithSecurityCritical[current].GetLocation() },
-                                properties: null));
+                            compilationContext.ReportIssue(Rule, item.Value.GetLocation(), [nodesWithSecurityCritical[current].ToSecondaryLocation()]);
                             break;
                         }
 

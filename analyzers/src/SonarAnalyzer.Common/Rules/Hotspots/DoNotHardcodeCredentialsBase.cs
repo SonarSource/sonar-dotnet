@@ -152,13 +152,13 @@ namespace SonarAnalyzer.Rules
             {
                 if (!element.HasElements && IssueMessage(element.Name.LocalName, element.Value) is { } elementMessage && element.CreateLocation(path) is { } elementLocation)
                 {
-                    context.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(rule, elementLocation, elementMessage));
+                    context.ReportIssue(Language.GeneratedCodeRecognizer, rule, elementLocation, elementMessage);
                 }
                 foreach (var attribute in element.Attributes())
                 {
                     if (IssueMessage(attribute.Name.LocalName, attribute.Value) is { } attributeMessage && attribute.CreateLocation(path) is { } attributeLocation)
                     {
-                        context.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(rule, attributeLocation, attributeMessage));
+                        context.ReportIssue(Language.GeneratedCodeRecognizer, rule, attributeLocation, attributeMessage);
                     }
                 }
             }
@@ -292,7 +292,7 @@ namespace SonarAnalyzer.Rules
             {
                 if (value.Value is string str && analyzer.IssueMessage(key, str) is { } valueMessage)
                 {
-                    context.ReportIssue(analyzer.Language.GeneratedCodeRecognizer, Diagnostic.Create(analyzer.rule, value.ToLocation(path), valueMessage));
+                    context.ReportIssue(analyzer.Language.GeneratedCodeRecognizer, analyzer.rule, value.ToLocation(path), valueMessage);
                 }
             }
         }

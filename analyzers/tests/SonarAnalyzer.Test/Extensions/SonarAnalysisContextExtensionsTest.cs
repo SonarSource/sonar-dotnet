@@ -45,7 +45,7 @@ public class SonarAnalysisContextExtensions
         var wasReported = false;
         var symbolContext = new SymbolAnalysisContext(Substitute.For<ISymbol>(), model.Compilation, AnalysisScaffolding.CreateOptions(), _ => wasReported = true, _ => true, default);
         var context = new SonarSymbolReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), symbolContext);
-        ExtensionsCS.ReportIssue(context, Diagnostic.Create(DummyMainDescriptor, tree.GetRoot().GetLocation()));
+        ExtensionsCS.ReportIssue(context, DummyMainDescriptor, tree.GetRoot());
 
         wasReported.Should().Be(expected);
     }
@@ -63,8 +63,16 @@ public class SonarAnalysisContextExtensions
         var wasReported = false;
         var symbolContext = new SymbolAnalysisContext(Substitute.For<ISymbol>(), model.Compilation, AnalysisScaffolding.CreateOptions(), _ => wasReported = true, _ => true, default);
         var context = new SonarSymbolReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), symbolContext);
-        ExtensionsVB.ReportIssue(context, Diagnostic.Create(DummyMainDescriptor, tree.GetRoot().GetLocation()));
 
+        ExtensionsVB.ReportIssue(context, DummyMainDescriptor, tree.GetRoot());
+        wasReported.Should().Be(expected);
+
+        wasReported = false;
+        ExtensionsVB.ReportIssue(context, DummyMainDescriptor, tree.GetRoot().GetFirstToken());
+        wasReported.Should().Be(expected);
+
+        wasReported = false;
+        ExtensionsVB.ReportIssue(context, DummyMainDescriptor, tree.GetRoot().GetLocation());
         wasReported.Should().Be(expected);
     }
 }

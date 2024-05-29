@@ -103,7 +103,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                         foreach (var disposable in disposableObjects.Where(x => !possiblyDisposed.Contains(x.Symbol)))
                         {
-                            c.ReportIssue(Diagnostic.Create(Rule, disposable.Node.GetLocation(), disposable.Symbol.Name));
+                            c.ReportIssue(Rule, disposable.Node, disposable.Symbol.Name);
                         }
                     }
                 },
