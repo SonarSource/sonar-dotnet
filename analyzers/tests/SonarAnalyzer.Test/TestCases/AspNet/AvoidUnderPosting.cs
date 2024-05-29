@@ -24,6 +24,7 @@ namespace Basics
         internal int InternalProperty { get; set; }
         protected internal int ProtectedInternalProperty { get; set; }
         private int PrivateProperty { get; set; }
+        public int PropertyWithDefaultValue { get; set; } = 42;
         public int ReadOnlyProperty => 42;
         public int field = 42;
 

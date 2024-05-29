@@ -13,7 +13,7 @@ namespace CSharp12
     public class ModelWithPrimaryAndParameterlessConstructor(int vp, int rvp, int nvp)
     {
         public ModelWithPrimaryAndParameterlessConstructor() : this(0, 0, 0) { }
-        public int ValueProperty { get; set; } = vp;                        // Noncompliant
+        public int ValueProperty { get; set; } = vp;                        // Compliant - the property has default value
     }
 
     public class DerivedFromController : Controller
