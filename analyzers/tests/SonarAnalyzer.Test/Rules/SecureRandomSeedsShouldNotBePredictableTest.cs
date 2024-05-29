@@ -29,7 +29,7 @@ public class SecureRandomSeedsShouldNotBePredictableTest
     private readonly VerifierBuilder builder = new VerifierBuilder()
         .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))
         .WithOnlyDiagnostics(ChecksCS.SecureRandomSeedsShouldNotBePredictable.S4347)
-        .AddReferences(NuGetMetadataReference.BouncyCastle());
+        .AddReferences(NuGetMetadataReference.BouncyCastleCryptography());
 
     [TestMethod]
     public void SecureRandomSeedsShouldNotBePredictable_CS() =>
@@ -152,10 +152,55 @@ public class SecureRandomSeedsShouldNotBePredictableTest
                 """)
             .Verify();
 
-    [DataRow("DigestRandomGenerator(digest)")]
-    [DataRow("VmpcRandomGenerator()")]
+    [DataRow("")]
+    [DataRow("null")]
+    [DataRow("new VmpcRandomGenerator()")]
+    [DataRow("new VmpcRandomGenerator(), 5")]
+    [DataRow("new VmpcRandomGenerator(), 20")]
+    [DataRow("new DigestRandomGenerator(null)")]
+    [DataRow("new DigestRandomGenerator(null), 5")]
+    [DataRow("new DigestRandomGenerator(null), 20")]
     [DataTestMethod]
-    public void SecureRandomSeedsShouldNotBePredictable_CS_IRandomGenerator(string generator) =>
+    public void SecureRandomSeedsShouldNotBePredictable_CS_SecureRandom_Inheritance(string arguments) =>
+        builder
+            .AddSnippet($$$"""
+                using Org.BouncyCastle.Crypto.Prng;
+                using Org.BouncyCastle.Security;
+
+                class Testcases
+                {
+                    const int SEED = 42;
+
+                    void Method(int seed)
+                    {
+                        SecureRandom.GetInstance("", false).Next(); // Noncompliant, baseline
+
+                        SecureRandom sr = new MySecureRandom({{{arguments}}});
+                        sr.Next(); // Compliant
+
+                        sr.SetSeed(SEED);
+                        sr.Next(); // Compliant
+
+                        sr.SetSeed(seed);
+                        sr.Next(); // Compliant
+                    }
+                }
+
+                class MySecureRandom : SecureRandom
+                {
+                    public MySecureRandom() { }
+                    public MySecureRandom(IRandomGenerator generator) { }
+                    public MySecureRandom(IRandomGenerator generator, int autoSeedLengthInBytes) { }
+                }
+                """)
+            .Verify();
+
+    [DataRow("DigestRandomGenerator(digest)", "DigestRandomGenerator")]
+    [DataRow("DigestRandomGenerator(digest)", "IRandomGenerator")]
+    [DataRow("VmpcRandomGenerator()", "VmpcRandomGenerator")]
+    [DataRow("VmpcRandomGenerator()", "IRandomGenerator")]
+    [DataTestMethod]
+    public void SecureRandomSeedsShouldNotBePredictable_CS_IRandomGenerator(string generator, string type) =>
         builder
             .AddSnippet($$$"""
                 using System.Text;
@@ -169,7 +214,7 @@ public class SecureRandomSeedsShouldNotBePredictableTest
 
                     void Method(byte[] bs, Sha256Digest digest, long seed)
                     {
-                        IRandomGenerator rng = new {{{generator}}};
+                        {{{type}}} rng = new {{{generator}}};
                         rng.NextBytes(bs);    // Noncompliant {{Set an unpredictable seed before generating random values.}}
                     //  ^^^^^^^^^^^^^^^^^
 
@@ -208,14 +253,14 @@ public class SecureRandomSeedsShouldNotBePredictableTest
         builder
             .AddSnippet($$$"""
                 using System;
-                using Org.BouncyCastle.Security;
                 using Org.BouncyCastle.Crypto.Prng;
-                using Org.BouncyCastle.Crypto.Digests;
 
                 class Testcases
                 {
-                    void IRandomGenerator(byte[] bs)
+                    void Method(byte[] bs)
                     {
+                        new VmpcRandomGenerator().NextBytes(bs); // Noncompliant, baseline
+
                         var notRelevant = new MyGen();
                         notRelevant.NextBytes(bs); // Compliant, we only track "Digest" and "Vmpc".
                     }
@@ -230,8 +275,7 @@ public class SecureRandomSeedsShouldNotBePredictableTest
                     public void NextBytes(byte[] bytes, int start, int len) { }
                     public void NextBytes(Span<byte> bytes) { }
                 }
-
                 """)
-            .VerifyNoIssues();
+            .Verify();
 #endif
 }
