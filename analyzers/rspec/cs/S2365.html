@@ -12,22 +12,21 @@ so that callers are not surprised by the unexpectedly poor performance.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-private List&lt;string&gt; _foo = new List&lt;string&gt; { "a", "b", "c" };
-public IEnumerable&lt;string&gt; Foo  // Noncompliant: expensive ToList call
-{
-    get
-    {
-        return (string[])_foo.Clone();
-    }
-}
+private List&lt;string&gt; foo = new List&lt;string&gt; { "a", "b", "c" };
+private string[] bar = new string[] { "a", "b", "c" };
+
+public IEnumerable&lt;string&gt; Foo =&gt; foo.ToList(); // Noncompliant: collection foo is copied
+
+public IEnumerable&lt;string&gt; Bar =&gt; (string[])bar.Clone(); // Noncompliant: array bar is copied
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
-private List&lt;string&gt; _foo = new List&lt;string&gt; { "a", "b", "c" };
-public IEnumerable&lt;string&gt; GetFoo()
-{
-    return (string[])_foo.Clone();
-}
+private List&lt;string&gt; foo = new List&lt;string&gt; { "a", "b", "c" };
+private string[] bar = new string[] { "a", "b", "c" };
+
+public IEnumerable&lt;string&gt; GetFoo() =&gt; foo.ToList();
+
+public IEnumerable&lt;string&gt; GetBar() =&gt; (string[])bar.Clone();
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>

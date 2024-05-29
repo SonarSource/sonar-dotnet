@@ -229,7 +229,7 @@ string hashed = Convert.ToBase64String(keyParam.GetKey());
 <p>When bcrypt’s hashing function is used, it is important to select a round count that is high enough to make the function slow enough to prevent
 brute force: More than 12 rounds.</p>
 <p>For bcrypt’s key derivation function, the number of rounds should likewise be high enough to make the function slow enough to prevent brute force:
-More than 4096 rounds <code>(2**12)</code>.<br> This number is not the same coefficient as the first one because it uses a different algorithm.</p>
+More than 4096 rounds <code>(2^12)</code>.<br> This number is not the same coefficient as the first one because it uses a different algorithm.</p>
 <h4>Select the correct Scrypt parameters</h4>
 <p>If scrypt must be used, the default values of scrypt are considered secure.</p>
 <p>Like Argon2id, scrypt has three different parameters that can be configured. N is the CPU/memory cost parameter and must be a power of two. r is

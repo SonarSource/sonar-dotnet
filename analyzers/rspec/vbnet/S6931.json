@@ -1,7 +1,7 @@
 {
   "title": "ASP.NET controller actions should not have a route template starting with \"\/\"",
   "type": "CODE_SMELL",
-  "status": "deprecated",
+  "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "5min"

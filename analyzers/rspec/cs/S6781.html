@@ -64,8 +64,6 @@ public class LoginExampleController : ControllerBase
     {
         // Code to validate the login information is omitted
 
-        var key = _config["Jwt:Key"] ??
-            throw new ApplicationException("JWT key is not configured.");
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)); // Noncompliant
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 

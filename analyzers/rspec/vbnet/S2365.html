@@ -12,20 +12,32 @@ so that callers are not surprised by the unexpectedly poor performance.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-Dim foo = {"a", "b", "c" }
-Property Foo() As String() ' Noncompliant
+Private fFoo As New List(Of String) From {"a", "b", "c"}
+Private fBar As String() = {"a", "b", "c"}
+
+Public ReadOnly Property Foo() As IEnumerable(Of String) ' Noncompliant: collection fFoo is copied
     Get
-        Dim copy = foo.Clone      ' Expensive call
-        Return copy
+        Return fFoo.ToList()
+    End Get
+End Property
+
+Public ReadOnly Property Bar() As IEnumerable(Of String) ' Noncompliant: array fBar is copied
+    Get
+        Return DirectCast(fBar.Clone(), String())
     End Get
 End Property
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
-Dim foo = {"a", "b", "c" }
-Function GetFoo() As String()
-    Dim copy = foo.Clone
-    Return copy
+Private fFoo As New List(Of String) From {"a", "b", "c"}
+Private fBar As String() = {"a", "b", "c"}
+
+Public Function GetFoo() As IEnumerable(Of String)
+    Return fFoo.ToList()
+End Function
+
+Public Function GetBar() As IEnumerable(Of String)
+    Return DirectCast(fBar.Clone(), String())
 End Function
 </pre>
 <h2>Resources</h2>
