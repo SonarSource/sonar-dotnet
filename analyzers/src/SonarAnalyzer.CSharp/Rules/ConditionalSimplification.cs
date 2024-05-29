@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && GetNegationRoot(context.Node) is var negationRoot
                 && negationRoot == context.Node)
             {
-                context.ReportIssue(Diagnostic.Create(RuleMultipleNegation, negationRoot.GetLocation()));
+                context.ReportIssue(RuleMultipleNegation, negationRoot);
             }
 
             static SyntaxNode GetNegationRoot(SyntaxNode node)
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var left = ((BinaryExpressionSyntax)context.Node).Left.RemoveParentheses();
                 if (CSharpEquivalenceChecker.AreEquivalent(assignment.Left.RemoveParentheses(), left))
                 {
-                    context.ReportIssue(Diagnostic.Create(Rule, assignment.GetLocation(), BuildCodeFixProperties(context), CoalesceAssignmentOp));
+                    context.ReportIssue(Rule, assignment.GetLocation(), BuildCodeFixProperties(context), CoalesceAssignmentOp);
                 }
             }
         }
@@ -115,10 +115,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (CanBeSimplified(context, whenTrue, whenFalse, possiblyCoalescing ? comparedToNull : null, context.SemanticModel, comparedIsNullInTrue, out var simplifiedOperator))
             {
-                context.ReportIssue(Diagnostic.Create(Rule,
-                                                                     ifStatement.IfKeyword.GetLocation(),
-                                                                     BuildCodeFixProperties(context, simplifiedOperator),
-                                                                     simplifiedOperator));
+                context.ReportIssue(Rule, ifStatement.IfKeyword, BuildCodeFixProperties(context, simplifiedOperator), simplifiedOperator);
             }
         }
 
@@ -139,11 +136,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 && comparedToNull.CanBeNull(context.SemanticModel)
                 && CanExpressionBeCoalescing(whenTrue, whenFalse, comparedToNull, context.SemanticModel, comparedIsNullInTrue))
             {
-                var diagnostic = context.Compilation.IsCoalesceAssignmentSupported() && IsCoalesceAssignmentCandidate(conditional, comparedToNull)
-                    ? Diagnostic.Create(Rule, conditional.GetFirstNonParenthesizedParent().GetLocation(), BuildCodeFixProperties(context), CoalesceAssignmentOp)
-                    : Diagnostic.Create(Rule, conditional.GetLocation(), BuildCodeFixProperties(context), CoalesceOp);
-
-                context.ReportIssue(diagnostic);
+                if (context.Compilation.IsCoalesceAssignmentSupported() && IsCoalesceAssignmentCandidate(conditional, comparedToNull))
+                {
+                    context.ReportIssue(Rule, conditional.GetFirstNonParenthesizedParent(), BuildCodeFixProperties(context), CoalesceAssignmentOp);
+                }
+                else
+                {
+                    context.ReportIssue(Rule, conditional, BuildCodeFixProperties(context), CoalesceOp);
+                }
             }
         }
 
@@ -181,7 +181,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsNullAndValueType(ITypeSymbol typeNull, ITypeSymbol typeValue) =>
-            typeNull == null && typeValue is {IsValueType: true};
+            typeNull == null && typeValue is { IsValueType: true };
 
         private static bool CanBeSimplified(SonarSyntaxNodeReportingContext context,
                                             StatementSyntax statement1,
@@ -345,7 +345,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static ImmutableDictionary<string, string> BuildCodeFixProperties(SonarSyntaxNodeReportingContext c, string simplifiedOperator = null)
         {
-            var ret = new Dictionary<string, string> { {IsCoalesceAssignmentSupportedKey, c.Compilation.IsCoalesceAssignmentSupported().ToString() }};
+            var ret = new Dictionary<string, string> { { IsCoalesceAssignmentSupportedKey, c.Compilation.IsCoalesceAssignmentSupported().ToString() } };
             if (simplifiedOperator != null)
             {
                 ret.Add(SimplifiedOperatorKey, simplifiedOperator);
