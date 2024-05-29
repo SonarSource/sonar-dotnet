@@ -78,7 +78,7 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
         var invalidProperties = declaredProperties
             .Where(x => !CanBeNull(x.Type) && !x.HasAttribute(KnownType.System_Text_Json_Serialization_JsonRequiredAttribute) && !x.IsRequired())
             .Select(x => x.GetFirstSyntaxRef())
-            .Where(x => !HasDefaultValue(x));
+            .Where(x => !IsInitialized(x));
         foreach (var property in invalidProperties)
         {
             context.ReportIssue(Rule, property.GetIdentifier()?.GetLocation());
@@ -147,10 +147,6 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
     private static bool HasValidateNeverAttribute(ISymbol symbol) =>
         symbol.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_ModelBinding_Validation_ValidateNeverAttribute);
 
-    private static bool HasDefaultValue(SyntaxNode node) => node switch
-    {
-        ParameterSyntax { Default: not null } => true,
-        PropertyDeclarationSyntax { Initializer: not null } property => property.Parent.ParameterList() is null,
-        _ => false
-    };
+    private static bool IsInitialized(SyntaxNode node) =>
+        node is ParameterSyntax { Default: not null } or PropertyDeclarationSyntax { Initializer: not null };
 }
