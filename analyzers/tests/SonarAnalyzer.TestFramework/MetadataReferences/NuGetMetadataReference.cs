@@ -109,6 +109,7 @@ public static class NuGetMetadataReference
     public static References MicrosoftExtensionsLoggingAbstractions(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.Extensions.Logging.Abstractions", packageVersion);
     public static References MicrosoftExtensionsOptions(string packageVersion) => Create("Microsoft.Extensions.Options", packageVersion);
     public static References MicrosoftExtensionsPrimitives(string packageVersion) => Create("Microsoft.Extensions.Primitives", packageVersion);
+    public static References MicrosoftIdentityModelTokens(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.IdentityModel.Tokens", packageVersion);
     public static References MicrosoftJSInterop(string packageVersion) => Create("Microsoft.JSInterop", packageVersion);
     public static References MicrosoftNetHttpHeaders(string packageVersion) => Create("Microsoft.Net.Http.Headers", packageVersion);
     public static References MicrosoftNetSdkFunctions(string packageVersion = Constants.NuGetLatestVersion) =>
@@ -163,6 +164,7 @@ public static class NuGetMetadataReference
     public static References SystemDataOracleClient(string packageVersion = "1.0.8") => Create("System.Data.OracleClient", packageVersion);
     public static References SystemDDirectoryServices(string packageVersion = "4.7.0") => Create("System.DirectoryServices", packageVersion);
     public static References SystemDrawingCommon(string packageVersion = "4.7.0") => Create("System.Drawing.Common", packageVersion);
+    public static References SystemIdentityModelTokensJwt(string packageVersion = Constants.NuGetLatestVersion) => Create("System.IdentityModel.Tokens.Jwt", packageVersion);
     public static References SystemNetHttp(string packageVersion = Constants.NuGetLatestVersion) => Create("System.Net.Http", packageVersion);
     public static References SystemSecurityCryptographyOpenSsl(string packageVersion = "4.7.0") => Create("System.Security.Cryptography.OpenSsl", packageVersion);
     public static References SystemSecurityCryptographyXml(string packageVersion = Constants.NuGetLatestVersion) => Create("System.Security.Cryptography.Xml", packageVersion);

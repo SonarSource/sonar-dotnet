@@ -1,0 +1,48 @@
+{
+  "title": "JWT secret keys should not be disclosed",
+  "type": "VULNERABILITY",
+  "code": {
+    "impacts": {
+      "SECURITY": "HIGH"
+    },
+    "attribute": "TRUSTWORTHY"
+  },
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "30min"
+  },
+  "tags": [
+    "cwe"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-6781",
+  "sqKey": "S6781",
+  "scope": "All",
+  "securityStandards": {
+    "CWE": [
+      798,
+      259
+    ],
+    "OWASP": [
+      "A3"
+    ],
+    "CERT": [
+      "MSC03-J."
+    ],
+    "OWASP Top 10 2021": [
+      "A7"
+    ],
+    "PCI DSS 3.2": [
+      "6.5.10"
+    ],
+    "PCI DSS 4.0": [
+      "6.2.4"
+    ],
+    "ASVS 4.0": [
+      "2.10.4",
+      "6.4.1"
+    ]
+  },
+  "quickfix": "unknown"
+}

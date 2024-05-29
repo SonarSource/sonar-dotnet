@@ -40,11 +40,21 @@ public abstract class HardcodedBytesRuleBase : SymbolicRuleCheck
     }
 
     // array[42] = ...
-    protected ProgramState ProcessArrayElementReference(ProgramState state, IArrayElementReferenceOperationWrapper arrayElementReference) =>
-        (arrayElementReference.IsAssignmentTarget() || arrayElementReference.IsCompoundAssignmentTarget())
+    protected ProgramState ProcessArrayElementReference(ProgramState state, IArrayElementReferenceOperationWrapper arrayElementReference)
+    {
+        return (IsAssignedToNonConstant() || IsCompoundAssignedToNonConstant())
         && arrayElementReference.ArrayReference.TrackedSymbol(state) is { } array
             ? state.SetSymbolConstraint(array, NotHardcoded)
             : state;
+
+        bool IsAssignedToNonConstant() =>
+            arrayElementReference.IsAssignmentTarget()
+            && !ISimpleAssignmentOperationWrapper.FromOperation(arrayElementReference.ToSonar().Parent).Value.ConstantValue.HasValue;
+
+        bool IsCompoundAssignedToNonConstant() =>
+            arrayElementReference.IsCompoundAssignmentTarget()
+            && !ICompoundAssignmentOperationWrapper.FromOperation(arrayElementReference.ToSonar().Parent).Value.ConstantValue.HasValue;
+    }
 
     // array.SetValue(value, index)
     protected ProgramState ProcessArraySetValue(ProgramState state, IInvocationOperationWrapper invocation)
@@ -80,20 +90,20 @@ public abstract class HardcodedBytesRuleBase : SymbolicRuleCheck
         bool IsEncodingGetBytes() =>
             invocation.TargetMethod.Name == nameof(Encoding.UTF8.GetBytes)
             && invocation.TargetMethod.ContainingType.DerivesFrom(KnownType.System_Text_Encoding)
-            && (invocation.ArgumentValue("s") is { ConstantValue.HasValue: true } || ArgumentIsPredictable("chars"));
+            && (ArgumentIsHardcoded("s") || ArgumentIsHardcoded("chars"));
 
         bool IsConvertFromBase64CharArray() =>
             invocation.TargetMethod.Name == nameof(Convert.FromBase64CharArray)
             && invocation.TargetMethod.ContainingType.Is(KnownType.System_Convert)
-            && ArgumentIsPredictable("inArray");
+            && ArgumentIsHardcoded("inArray");
 
         bool IsConvertFromBase64String() =>
             invocation.TargetMethod.Name == nameof(Convert.FromBase64String)
             && invocation.TargetMethod.ContainingType.Is(KnownType.System_Convert)
-            && invocation.ArgumentValue("s") is { ConstantValue.HasValue: true };
+            && ArgumentIsHardcoded("s");
 
-        bool ArgumentIsPredictable(string parameterName) =>
+        bool ArgumentIsHardcoded(string parameterName) =>
             invocation.ArgumentValue(parameterName) is { } value
-            && state[value]?.HasConstraint(Hardcoded) is true;
+            && (value.ConstantValue.HasValue || state[value]?.HasConstraint(Hardcoded) is true);
     }
 }

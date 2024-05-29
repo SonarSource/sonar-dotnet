@@ -244,7 +244,7 @@ class Testcases
 
         cs[42] = 'W';
         sr.SetSeed(Convert.FromBase64CharArray(cs, 0, 42));
-        sr.Next(); // Compliant FN, array is still constant
+        sr.Next(); // Noncompliant
 
         sr = SecureRandom.GetInstance("SHA256PRNG", false);
         sr.Next(); // Noncompliant
