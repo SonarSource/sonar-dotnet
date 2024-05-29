@@ -114,7 +114,9 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
                 // Any access to a "Files" property is therefore noncompliant. This is different from the Argument handling above.
                 var memberAccess = (MemberAccessExpressionSyntax)nodeContext.Node;
                 var context = new PropertyAccessContext(memberAccess, nodeContext.SemanticModel, memberAccess.Name.Identifier.ValueText);
-                if (Language.Tracker.PropertyAccess.MatchProperty(propertyAccessDescriptors)(context))
+                if (Language.Tracker.PropertyAccess.MatchProperty(propertyAccessDescriptors)(context)
+                    // form.Files is okay, if "form" is a parameter, because IFormCollection binding is considered appropriate for binding as well
+                    && nodeContext.SemanticModel.GetSymbolInfo(memberAccess.Expression).Symbol is not IParameterSymbol)
                 {
                     codeBlockCandidates.Push(new(UseIFormFileBindingMessage, memberAccess.GetLocation(), IsOriginatingFromParameter(nodeContext.SemanticModel, memberAccess)));
                 }
