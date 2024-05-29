@@ -51,4 +51,9 @@
   <Target Name="CopyBinaries" AfterTargets="Build" DependsOnTargets="SignDlls">
     <Copy SourceFiles="$(OutputPath)$(TargetFileName)" DestinationFolder="$(BinariesFolderInternal)" />
   </Target>
+
+  <Target Name="CleanBinaries" AfterTargets="Clean" Condition="Exists('$(BinariesFolderInternal)')">
+    <RemoveDir Directories="$(BinariesFolderInternal)" />
+  </Target>
+  
 </Project>

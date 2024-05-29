@@ -30,4 +30,8 @@
     <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)\RuleDescriptorGenerator" />
   </Target>
 
+  <Target Name="CleanBinaries" AfterTargets="Clean" Condition="Exists('$(BinariesFolder)\RuleDescriptorGenerator')">
+    <RemoveDir Directories="$(BinariesFolder)\RuleDescriptorGenerator" />
+  </Target>
+
 </Project>

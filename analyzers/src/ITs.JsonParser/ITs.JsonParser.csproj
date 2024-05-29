@@ -22,5 +22,9 @@
     </ItemGroup>
     <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)\ITs.JsonParser" />
   </Target>
+  
+  <Target Name="CleanBinaries" AfterTargets="Clean" Condition="Exists('$(BinariesFolder)\ITs.JsonParser')">
+    <RemoveDir Directories="$(BinariesFolder)\ITs.JsonParser" />
+  </Target>
 
 </Project>

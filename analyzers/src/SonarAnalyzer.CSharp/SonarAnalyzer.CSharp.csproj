@@ -61,6 +61,17 @@
     </ItemGroup>
     <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)" />
   </Target>
-  <Import Project="..\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems" Label="Shared" />
 
+  <Target Name="CleanBinaries" AfterTargets="Clean">
+    <ItemGroup>
+      <BinariesToDelete Include="$(BinariesFolder)\Google.Protobuf.dll" />
+      <BinariesToDelete Include="$(BinariesFolder)\SonarAnalyzer.dll" />
+      <BinariesToDelete Include="$(BinariesFolder)\SonarAnalyzer.CFG.dll" />
+      <BinariesToDelete Include="$(BinariesFolder)\SonarAnalyzer.CSharp.dll" />
+    </ItemGroup>
+    <Delete Files="$(BinariesToDelete)" />
+  </Target>
+
+  <Import Project="..\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems" Label="Shared" />
+  
 </Project>
