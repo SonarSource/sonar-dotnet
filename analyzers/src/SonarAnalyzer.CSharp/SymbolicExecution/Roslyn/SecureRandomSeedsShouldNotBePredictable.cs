@@ -96,7 +96,7 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : HardcodedBytesRule
 
         bool HasSmallAutoseed() =>
             objectCreation.ArgumentValue("autoSeedLengthInBytes") is not { } value
-            || (state[value]?.Constraint<NumberConstraint>() is { } numberConstraint && numberConstraint.Min < 16);
+            || (state[value]?.Constraint<NumberConstraint>() is { } numberConstraint && numberConstraint.Max < 16);
     }
 
     // SecureRandom.GetInstance("algorithm", false)
@@ -118,9 +118,8 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : HardcodedBytesRule
             // Seeding methods do not overwrite the state, but _mix_ it with the new value.
             && state[instance]?.HasConstraint(CryptographicSeedConstraint.Predictable) is true
             && invocation.Arguments.Length == 1
-            && invocation.Arguments[0].AsArgument() is { Value: var seedValue }
-            && !seedValue.ConstantValue.HasValue
-            && state[seedValue]?.HasConstraint(CryptographicSeedConstraint.Predictable) is null or false
+            && invocation.Arguments[0].AsArgument() is { Value.ConstantValue.HasValue: false } seed
+            && state[seed.Value]?.HasConstraint(CryptographicSeedConstraint.Predictable) is null or false
                 ? state.SetSymbolConstraint(instance, CryptographicSeedConstraint.Unpredictable)
                 : null;
 
