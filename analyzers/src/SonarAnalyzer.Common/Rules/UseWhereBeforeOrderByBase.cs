@@ -38,14 +38,11 @@ public abstract class UseWhereBeforeOrderByBase<TSyntaxKind, TInvocation> : Sona
                 && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
                 && LeftHasCorrectName(left, out var orderByMethodDescription)
                 && MethodIsLinqExtension(left, c.SemanticModel)
-                && MethodIsLinqExtension(right, c.SemanticModel))
+                && MethodIsLinqExtension(right, c.SemanticModel)
+                && Language.Syntax.NodeIdentifier(right) is { } rightIdentifier
+                && Language.Syntax.NodeIdentifier(left) is { } leftIdentifier)
             {
-                var diagnostic = Diagnostic.Create(
-                    Rule,
-                    Language.Syntax.NodeIdentifier(right)?.GetLocation(),
-                    new[] { Language.Syntax.NodeIdentifier(left)?.GetLocation() },
-                    orderByMethodDescription);
-                c.ReportIssue(diagnostic);
+                c.ReportIssue(Rule, rightIdentifier.GetLocation(), [leftIdentifier.ToSecondaryLocation()], orderByMethodDescription);
             }
         },
         Language.SyntaxKind.InvocationExpression);

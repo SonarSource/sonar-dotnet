@@ -45,8 +45,7 @@ public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplat
             {
                 var templateStart = templateArgument.Expression.GetLocation().SourceSpan.Start;
                 var primaryLocation = Location.Create(context.Tree, new(templateStart + placeholder.Start, placeholder.Length));
-                var secondaryLocation = outOfOrderArgument.GetLocation();
-                context.ReportIssue(Diagnostic.Create(Rule, primaryLocation, [secondaryLocation], placeholder.Name, outOfOrderArgument.ToString()));
+                context.ReportIssue(Rule, primaryLocation, [outOfOrderArgument.ToSecondaryLocation()], placeholder.Name, outOfOrderArgument.ToString());
                 return; // only raise on the first out-of-order placeholder to make the rule less noisy
             }
         }
