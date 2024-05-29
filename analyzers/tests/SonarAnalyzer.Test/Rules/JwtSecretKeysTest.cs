@@ -49,6 +49,7 @@ public class JwtSecretKeysTest
     [TestMethod]
     public void JwtSecretKeys_CS_AspNet() =>
         builder
+            .WithOptions(ParseOptionsHelper.FromCSharp9) // target-typed new requires C# 9 or later.
             .AddPaths("JwtSecretKeys.AspNet.cs")
             .AddReferences(NuGetMetadataReference.SystemConfigurationConfigurationManager())
             .Verify();
