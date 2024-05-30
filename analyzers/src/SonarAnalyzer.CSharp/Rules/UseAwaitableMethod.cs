@@ -27,7 +27,8 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6966";
     private const string MessageFormat = "Await {0} instead.";
-    private static readonly string[] ExcludedMethodNamesAddAddRange = ["Add", "AddRange"];
+    private static readonly string[] ExcludedMethodNames = ["Add", "AddRange"];
+    private static readonly ImmutableArray<KnownType> ExcludedTypes = ImmutableArray.Create(KnownType.System_Xml_XmlWriter, KnownType.System_Xml_XmlReader);
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -92,8 +93,8 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         var exclusions = ImmutableArray.CreateBuilder<Func<IMethodSymbol, bool>>();
         if (compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFrameworkCore_DbSet_TEntity) is not null)
         {
-            exclusions.Add(x => x.IsAny(KnownType.Microsoft_EntityFrameworkCore_DbSet_TEntity, ExcludedMethodNamesAddAddRange)); // https://github.com/SonarSource/sonar-dotnet/issues/9269
-            exclusions.Add(x => x.IsAny(KnownType.Microsoft_EntityFrameworkCore_DbContext, ExcludedMethodNamesAddAddRange));     // https://github.com/SonarSource/sonar-dotnet/issues/9269
+            exclusions.Add(x => x.IsAny(KnownType.Microsoft_EntityFrameworkCore_DbSet_TEntity, ExcludedMethodNames)); // https://github.com/SonarSource/sonar-dotnet/issues/9269
+            exclusions.Add(x => x.IsAny(KnownType.Microsoft_EntityFrameworkCore_DbContext, ExcludedMethodNames));     // https://github.com/SonarSource/sonar-dotnet/issues/9269
         }
         if (compilation.GetTypeByMetadataName(KnownType.FluentValidation_IValidator) is not null)
         {
@@ -101,6 +102,10 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
             exclusions.Add(x => x.IsImplementingInterfaceMember(KnownType.FluentValidation_IValidator_T, "Validate")); // https://github.com/SonarSource/sonar-dotnet/issues/9339
         }
         if (compilation.GetTypeByMetadataName(KnownType.MongoDB_Driver_IMongoCollectionExtensions) is not null)
+        {
+            exclusions.Add(x => x.Is(KnownType.MongoDB_Driver_IMongoCollectionExtensions, "Find")); // https://github.com/SonarSource/sonar-dotnet/issues/9265
+        }
+        if (compilation.GetTypeByMetadataName(KnownType.System_Xml_XmlReader) is not null || compilation.GetTypeByMetadataName(KnownType.System_Xml_XmlWriter) is not null)
         {
             exclusions.Add(x => x.Is(KnownType.MongoDB_Driver_IMongoCollectionExtensions, "Find")); // https://github.com/SonarSource/sonar-dotnet/issues/9265
         }
@@ -115,7 +120,8 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
             && invocationExpression.EnclosingScope() is { } scope
             && IsAsyncCodeBlock(scope)
             && semanticModel.GetSymbolInfo(invocationExpression, cancel).Symbol is IMethodSymbol { MethodKind: not MethodKind.DelegateInvoke } methodSymbol
-            && !methodSymbol.IsAwaitableNonDynamic() // The invoked method returns something awaitable (but it isn't awaited).
+            && !(methodSymbol.IsAwaitableNonDynamic()  // The invoked method returns something awaitable (but it isn't awaited).
+                || methodSymbol.ContainingType.DerivesFromAny(ExcludedTypes))
             && !exclusions.Any(x => x(methodSymbol)))
         {
             // Perf: Before doing (expensive) speculative re-binding in SpeculativeBindCandidates, we check if there is an "..Async()" alternative in scope.

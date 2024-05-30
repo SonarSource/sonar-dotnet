@@ -629,6 +629,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Xml_XmlUrlResolver = new("System.Xml.XmlUrlResolver");
         public static readonly KnownType System_Xml_XmlTextReader = new("System.Xml.XmlTextReader");
         public static readonly KnownType System_Xml_Resolvers_XmlPreloadedResolver = new("System.Xml.Resolvers.XmlPreloadedResolver");
+        public static readonly KnownType System_Xml_XmlWriter = new("System.Xml.XmlWriter");
         public static readonly KnownType Void = new("System.Void");
         public static readonly KnownType NSubstitute_SubstituteExtensions = new("NSubstitute.SubstituteExtensions");
         public static readonly KnownType NSubstitute_Received = new("NSubstitute.Received");
