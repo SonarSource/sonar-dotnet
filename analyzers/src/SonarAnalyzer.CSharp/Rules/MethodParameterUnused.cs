@@ -175,9 +175,10 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var parameter in parameters.Where(x => parametersToReportOn.Contains(x.Symbol)))
             {
                 declaration.Context.ReportIssue(
-                    Diagnostic.Create(Rule, parameter.Node.GetLocation(),
+                    Rule,
+                    parameter.Node,
                     ImmutableDictionary<string, string>.Empty.Add(IsRemovableKey, isRemovable.ToString()),
-                    string.Format(messagePattern, parameter.Symbol.Name)));
+                    string.Format(messagePattern, parameter.Symbol.Name));
             }
         }
 

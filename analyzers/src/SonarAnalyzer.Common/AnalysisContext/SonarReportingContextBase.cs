@@ -90,12 +90,15 @@ public abstract class SonarTreeReportingContextBase<TContext> : SonarReportingCo
 
     protected SonarTreeReportingContextBase(SonarAnalysisContext analysisContext, TContext context) : base(analysisContext, context) { }
 
-    [Obsolete("Use overload without Diagnostic.Create, or add one")]
+    [Obsolete("Use another overload of ReportIssue, without calling Diagnostic.Create")]
     public void ReportIssue(Diagnostic diagnostic) =>
         ReportIssueCore(diagnostic);
 
     public void ReportIssue(DiagnosticDescriptor rule, SyntaxNode locationSyntax, params string[] messageArgs) =>
         ReportIssue(rule, locationSyntax.GetLocation(), messageArgs);
+
+    public void ReportIssue(DiagnosticDescriptor rule, SyntaxNode locationSyntax, ImmutableDictionary<string, string> properties, params string[] messageArgs) =>
+        ReportIssue(rule, locationSyntax.GetLocation(), properties, messageArgs);
 
     public void ReportIssue(DiagnosticDescriptor rule, SyntaxNode primaryLocationSyntax, IEnumerable<SecondaryLocation> secondaryLocations, params string[] messageArgs) =>
         ReportIssue(rule, primaryLocationSyntax.GetLocation(), secondaryLocations, messageArgs);
@@ -103,11 +106,17 @@ public abstract class SonarTreeReportingContextBase<TContext> : SonarReportingCo
     public void ReportIssue(DiagnosticDescriptor rule, SyntaxToken locationToken, params string[] messageArgs) =>
         ReportIssue(rule, locationToken.GetLocation(), messageArgs);
 
+    public void ReportIssue(DiagnosticDescriptor rule, SyntaxToken locationToken, ImmutableDictionary<string, string> properties, params string[] messageArgs) =>
+        ReportIssue(rule, locationToken.GetLocation(), properties, messageArgs);
+
     public void ReportIssue(DiagnosticDescriptor rule, SyntaxToken primaryLocationToken, IEnumerable<SecondaryLocation> secondaryLocations, params string[] messageArgs) =>
         ReportIssue(rule, primaryLocationToken.GetLocation(), secondaryLocations, messageArgs);
 
     public void ReportIssue(DiagnosticDescriptor rule, Location location, params string[] messageArgs) =>
         ReportIssueCore(Diagnostic.Create(rule, location, messageArgs));
+
+    public void ReportIssue(DiagnosticDescriptor rule, Location location, ImmutableDictionary<string, string> properties, params string[] messageArgs) =>
+        ReportIssueCore(Diagnostic.Create(rule, location, properties, messageArgs));
 
     public void ReportIssue(DiagnosticDescriptor rule, Location primaryLocation, IEnumerable<SecondaryLocation> secondaryLocations, params string[] messageArgs)
     {
@@ -126,7 +135,7 @@ public abstract class SonarCompilationReportingContextBase<TContext> : SonarRepo
 {
     protected SonarCompilationReportingContextBase(SonarAnalysisContext analysisContext, TContext context) : base(analysisContext, context) { }
 
-    [Obsolete("Use overload without Diagnostic.Create, or add one")]
+    [Obsolete("Use another overload of ReportIssue, without calling Diagnostic.Create")]
     public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
     {
         if (ShouldAnalyzeTree(diagnostic.Location.SourceTree, generatedCodeRecognizer))

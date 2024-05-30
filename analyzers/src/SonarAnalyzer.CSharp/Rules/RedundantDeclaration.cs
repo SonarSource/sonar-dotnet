@@ -104,11 +104,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var parameter in lambda.ParameterList.Parameters)
             {
-                context.ReportIssue(Diagnostic.Create(
+                context.ReportIssue(
                     Rule,
-                    parameter.Type.GetLocation(),
+                    parameter.Type,
                     ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.LambdaParameterType.ToString()),
-                    "type specification"));
+                    "type specification");
             }
         }
 
@@ -123,11 +123,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (parameterName != SyntaxConstants.Discard && !usedIdentifiers.Contains(parameterName))
                     {
-                        context.ReportIssue(Diagnostic.Create(DiscardRule,
-                                                                             parameter.GetLocation(),
-                                                                             ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.LambdaParameterType.ToString())
-                                                                                                                      .Add(ParameterNameKey, parameterName),
-                                                                             parameterName));
+                        context.ReportIssue(
+                            DiscardRule,
+                            parameter,
+                            ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.LambdaParameterType.ToString()).Add(ParameterNameKey, parameterName),
+                            parameterName);
                     }
                 }
             }
@@ -172,7 +172,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsNullableCreation(IObjectCreation objectCreation, SemanticModel semanticModel) =>
-            objectCreation.ArgumentList is {Arguments: {Count: 1}} && objectCreation.TypeSymbol(semanticModel).OriginalDefinition.Is(KnownType.System_Nullable_T);
+            objectCreation.ArgumentList is { Arguments: { Count: 1 } } && objectCreation.TypeSymbol(semanticModel).OriginalDefinition.Is(KnownType.System_Nullable_T);
 
         private static bool IsInAssignmentOrReturnValue(SyntaxNode objectCreation) =>
             objectCreation.GetFirstNonParenthesizedParent() switch
@@ -216,9 +216,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var size in rankSpecifier.Sizes)
             {
-                context.ReportIssue(Diagnostic.Create(Rule, size.GetLocation(),
+                context.ReportIssue(
+                    Rule,
+                    size,
                     ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.ArraySize.ToString()),
-                    "array size specification"));
+                    "array size specification");
             }
         }
 
@@ -250,12 +252,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (canBeSimplified)
             {
-                var location = Location.Create(array.SyntaxTree, TextSpan.FromBounds(
-                    array.Type.ElementType.SpanStart, array.Type.RankSpecifiers.Last().SpanStart));
-
-                context.ReportIssue(Diagnostic.Create(Rule, location,
-                    ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.ArrayType.ToString()),
-                    "array type"));
+                var location = Location.Create(array.SyntaxTree, TextSpan.FromBounds(array.Type.ElementType.SpanStart, array.Type.RankSpecifiers.Last().SpanStart));
+                context.ReportIssue(Rule, location, ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.ArrayType.ToString()), "array type");
             }
         }
 
@@ -267,11 +265,9 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var objectCreation = ObjectCreationFactory.Create(context.Node);
 
-            if (objectCreation.ArgumentList != null && objectCreation.Initializer != null && !objectCreation.Initializer.Expressions.Any())
+            if (objectCreation.ArgumentList is not null && objectCreation.Initializer is not null && !objectCreation.Initializer.Expressions.Any())
             {
-                context.ReportIssue(Diagnostic.Create(Rule, objectCreation.Initializer.GetLocation(),
-                    ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.ObjectInitializer.ToString()),
-                    "initializer"));
+                context.ReportIssue(Rule, objectCreation.Initializer, ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.ObjectInitializer.ToString()), "initializer");
             }
         }
 
@@ -324,7 +320,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsDelegateCreation(IObjectCreation objectCreation, SemanticModel semanticModel) =>
-            objectCreation.TypeSymbol(semanticModel) is INamedTypeSymbol {TypeKind: TypeKind.Delegate};
+            objectCreation.TypeSymbol(semanticModel) is INamedTypeSymbol { TypeKind: TypeKind.Delegate };
 
         private static bool IsReturnValueNotDelegate(SyntaxNode objectCreation, SemanticModel semanticModel)
         {
@@ -384,9 +380,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (!usedParameters.Intersect(methodSymbol.Parameters).Any())
             {
-                context.ReportIssue(Diagnostic.Create(Rule, anonymousMethod.ParameterList.GetLocation(),
-                    ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.DelegateParameterList.ToString()),
-                    "parameter list"));
+                context.ReportIssue(Rule, anonymousMethod.ParameterList, ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.DelegateParameterList.ToString()), "parameter list");
             }
         }
 
@@ -430,9 +424,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var location = node is ObjectCreationExpressionSyntax objectCreation
                 ? objectCreation.CreateLocation(objectCreation.Type)
                 : node.GetLocation();
-            context.ReportIssue(Diagnostic.Create(Rule, location,
-                ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, redundancyType.ToString()),
-                message));
+            context.ReportIssue(Rule, location, ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, redundancyType.ToString()), message);
         }
 
         private static T ChangeSyntaxElement<T>(T originalNode, T newNode, SemanticModel originalSemanticModel,
