@@ -35,7 +35,7 @@ public class AvoidUnderPostingTest
 
     private readonly VerifierBuilder builder = new VerifierBuilder<AvoidUnderPosting>()
             .WithBasePath("AspNet")
-            .AddReferences([..AspNetReferences, .. NuGetMetadataReference.SystemTextJson("7.0.4")]);
+            .AddReferences([..AspNetReferences, .. NuGetMetadataReference.SystemTextJson("7.0.4"), ..NuGetMetadataReference.NewtonsoftJson("13.0.3")]);
 
     [TestMethod]
     public void AvoidUnderPosting_CSharp() =>
