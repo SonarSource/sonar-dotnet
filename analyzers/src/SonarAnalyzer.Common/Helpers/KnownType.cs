@@ -202,6 +202,9 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType NLog_LogFactory = new("NLog.LogFactory");
         public static readonly KnownType NLog_LogManager = new("NLog.LogManager");
         public static readonly KnownType NLog_Logger = new("NLog.Logger");
+        public static readonly KnownType Newtonsoft_Json_JsonPropertyAttribute = new("Newtonsoft.Json.JsonPropertyAttribute");
+        public static readonly KnownType Newtonsoft_Json_JsonRequiredAttribute = new("Newtonsoft.Json.JsonRequiredAttribute");
+        public static readonly KnownType Newtonsoft_Json_JsonIgnoreAttribute = new("Newtonsoft.Json.JsonIgnoreAttribute");
         public static readonly KnownType NUnit_Framework_Assert = new("NUnit.Framework.Assert");
         public static readonly KnownType NUnit_Framework_AssertionException = new("NUnit.Framework.AssertionException");
         public static readonly KnownType NUnit_Framework_ExpectedExceptionAttribute = new("NUnit.Framework.ExpectedExceptionAttribute");
@@ -212,7 +215,6 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType NUnit_Framework_TestCaseSourceAttribute = new("NUnit.Framework.TestCaseSourceAttribute");
         public static readonly KnownType NUnit_Framework_TestFixtureAttribute = new("NUnit.Framework.TestFixtureAttribute");
         public static readonly KnownType NUnit_Framework_TheoryAttribute = new("NUnit.Framework.TheoryAttribute");
-        public static readonly KnownType Newtonsoft_Json_JsonPropertyAttribute = new("Newtonsoft.Json.JsonPropertyAttribute");
         public static readonly KnownType Org_BouncyCastle_Asn1_Nist_NistNamedCurves = new("Org.BouncyCastle.Asn1.Nist.NistNamedCurves");
         public static readonly KnownType Org_BouncyCastle_Asn1_Sec_SecNamedCurves = new("Org.BouncyCastle.Asn1.Sec.SecNamedCurves");
         public static readonly KnownType Org_BouncyCastle_Asn1_TeleTrust_TeleTrusTNamedCurves = new("Org.BouncyCastle.Asn1.TeleTrust.TeleTrusTNamedCurves");
@@ -563,6 +565,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_StringComparison = new("System.StringComparison");
         public static readonly KnownType System_SystemException = new("System.SystemException");
         public static readonly KnownType System_Text_Encoding = new("System.Text.Encoding");
+        public static readonly KnownType System_Text_Json_Serialization_JsonIgnoreAttribute = new("System.Text.Json.Serialization.JsonIgnoreAttribute");
         public static readonly KnownType System_Text_Json_Serialization_JsonRequiredAttribute = new("System.Text.Json.Serialization.JsonRequiredAttribute");
         public static readonly KnownType System_Text_RegularExpressions_Regex = new("System.Text.RegularExpressions.Regex");
         public static readonly KnownType System_Text_RegularExpressions_RegexOptions = new("System.Text.RegularExpressions.RegexOptions");

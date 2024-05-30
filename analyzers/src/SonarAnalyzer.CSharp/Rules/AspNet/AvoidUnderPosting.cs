@@ -34,7 +34,10 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
         KnownType.Microsoft_AspNetCore_Http_IFormFile,
         KnownType.Microsoft_AspNetCore_Http_IFormFileCollection);
     private static readonly ImmutableArray<KnownType> IgnoredAttributes = ImmutableArray.Create(
+        KnownType.System_Text_Json_Serialization_JsonIgnoreAttribute,
         KnownType.System_Text_Json_Serialization_JsonRequiredAttribute,
+        KnownType.Newtonsoft_Json_JsonIgnoreAttribute,
+        KnownType.Newtonsoft_Json_JsonRequiredAttribute,
         KnownType.System_ComponentModel_DataAnnotations_RangeAttribute);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
@@ -95,8 +98,8 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
 
         static bool IsNewtonsoftJsonPropertyRequired(IPropertySymbol property) =>
             property.GetAttributes(KnownType.Newtonsoft_Json_JsonPropertyAttribute).FirstOrDefault() is { } attribute
-            && attribute.TryGetAttributeValue("Required", out string valueType)
-            && (valueType is "1" or "2"); // "1" stands for Required.AllowNull and "2" for Required.Always
+            && attribute.TryGetAttributeValue("Required", out int required)
+            && (required is 1 or 2); // Required.AllowNull = 1,   Required.Always = 2, https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_Required.htm
     }
 
     private static bool IgnoreType(ITypeSymbol type) =>

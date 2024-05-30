@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,8 +21,16 @@ namespace Basics
         [Required] public int RequiredValueProperty { get; set; }                   // Noncompliant, RequiredAttribute has no effect on value types
         [Range(0, 10)] public int ValuePropertyWithRangeValidation { get; set; }    // Compliant
         [Required] public int? RequiredNullableValueProperty { get; set; }
-        [JsonProperty(Required = Required.Always)] public int JsonRequiredValuePropertyAlways { get; set; }         // Compliant
-        [JsonProperty(Required = Required.AllowNull)] public int JsonRequiredValuePropertyAllowNull { get; set; }   // Compliant
+        [JsonProperty(Required = Required.Always)] public int JsonRequiredValuePropertyAlways { get; set; }              // Compliant
+        [JsonProperty(Required = Required.AllowNull)] public int JsonRequiredValuePropertyAllowNull { get; set; }        // Compliant
+        [JsonProperty(Required = Required.DisallowNull)] public int JsonRequiredValuePropertyDisallowNull { get; set; }  // Noncompliant
+        [JsonProperty] public int JsonRequiredValuePropertyDefault { get; set; }                                         // Noncompliant
+        [Newtonsoft.Json.JsonIgnore] public int JsonIgnoredProperty { get; set; }                                        // Compliant
+        [Newtonsoft.Json.JsonRequired] public int JsonRequiredNewtonsoftValueProperty { get; set; }                      // Compliant
+        [System.Text.Json.Serialization.JsonRequired] public int JsonRequiredValueProperty { get; set; }                 // Compliant
+        [System.Text.Json.Serialization.JsonIgnore] public int JsonIgnoreValueProperty { get; set; }                     // Compliant
+        [JsonProperty(Required = Required.AllowNull)] [FromQuery] public int PropertyWithMultipleAttributesCompliant { get; set; }   // Compliant
+        [Required] [FromQuery] public int PropertyWithMultipleAttributesNonCompliant { get; set; }   // Noncompliant
         public int PropertyWithPrivateSetter { get; private set; }
         protected int ProtectedProperty { get; set; }
         internal int InternalProperty { get; set; }

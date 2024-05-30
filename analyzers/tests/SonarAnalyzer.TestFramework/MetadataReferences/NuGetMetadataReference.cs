@@ -139,9 +139,9 @@ public static class NuGetMetadataReference
     public static References NHibernate(string packageVersion = "5.2.2") => Create("NHibernate", packageVersion);
     public static References NpgsqlEntityFrameworkCorePostgreSQL(string packageVersion) => Create("Npgsql.EntityFrameworkCore.PostgreSQL", packageVersion);
     public static References NSubstitute(string packageVersion) => Create("NSubstitute", packageVersion);
+    public static References NewtonsoftJson(string packageVersion) => Create("Newtonsoft.Json", packageVersion);
     public static References NUnit(string packageVersion) => Create("NUnit", packageVersion);
     public static References NUnitLite(string packageVersion) => Create("NUnitLite", packageVersion);
-    public static References NewtonsoftJson(string packageVersion) => Create("Newtonsoft.Json", packageVersion);
     public static References OracleEntityFrameworkCore(string packageVersion) => Create("Oracle.EntityFrameworkCore", packageVersion);
     public static References PetaPocoCompiled(string packageVersion = "6.0.353") => Create("PetaPoco.Compiled", packageVersion);
     public static References RhinoMocks(string packageVersion) => Create("RhinoMocks", packageVersion);
