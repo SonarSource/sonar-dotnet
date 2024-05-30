@@ -60,11 +60,10 @@ namespace SonarAnalyzer.Rules.CSharp
             var usedSymbols = GetInvokedEventSymbols(removableDeclarationCollector)
                 .Concat(GetPossiblyCopiedSymbols(removableDeclarationCollector))
                 .ToHashSet();
-
-            removableEventFields
-                .Where(x => !usedSymbols.Contains(x.Symbol))
-                .ToList()
-                .ForEach(x => context.ReportIssue(Diagnostic.Create(Rule, GetLocation(x.Node), x.Symbol.Name)));
+            foreach (var field in removableEventFields.Where(x => !usedSymbols.Contains(x.Symbol)))
+            {
+                context.ReportIssue(Rule, GetLocation(field.Node), field.Symbol.Name);
+            }
 
             Location GetLocation(SyntaxNode node) =>
                 node is VariableDeclaratorSyntax variableDeclarator

@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 {
                     if (c.Compilation.VB().Options.OptionStrict != OptionStrict.On)
                     {
-                        c.ReportIssue(Rule, null, string.Format(AssemblyMessageFormat, c.Compilation.AssemblyName));
+                        c.ReportIssue(Rule, (Location)null, string.Format(AssemblyMessageFormat, c.Compilation.AssemblyName));
                     }
                 }));
         }
