@@ -20,14 +20,24 @@ public class ProductsController : Controller
 }
 </pre>
 <h3>Exceptions</h3>
-<p>This rule does not raise an issue when:</p>
+<p>This rule does not raise an issue when properties are decorated with the following attributes:</p>
 <ul>
-  <li> properties are decorated with the <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.validation.validateneverattribute">ValidateNever</a>
-  attribute. </li>
-  <li> properties are in model classes which are not in the same project as the Controller class that references them. This is due to a limitation of
-  Roslyn (see <a href="https://github.com/SonarSource/sonar-dotnet/issues/9243">here</a>). </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.validation.validateneverattribute">ValidateNever</a> </li>
+  <li> <a href="https://www.newtonsoft.com/json/help/html/JsonPropertyRequired.htm">JsonProperty(Required = Required.Always)</a> </li>
+  <li> <a href="https://www.newtonsoft.com/json/help/html/JsonPropertyRequired.htm">JsonProperty(Required = Required.AllowNull)</a> </li>
+  <li> <a href="https://www.newtonsoft.com/json/help/html/PropertyJsonIgnore.htm">Newtonsoft.Json.JsonIgnore</a> </li>
+  <li> <a href="https://www.newtonsoft.com/json/help/html/t_newtonsoft_json_jsonrequiredattribute.htm">Newtonsoft.Json.JsonRequired</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.text.json.serialization.jsonrequiredattribute">System.Text.Json.Serialization.JsonRequired</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.text.json.serialization.jsonignoreattribute">System.Text.Json.Serialization.JsonIgnore</a>
+  </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.rangeattribute">Range</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.bindneverattribute">BindNever</a> </li>
 </ul>
+<p>Additionally, this rule does not raise for properties in model classes that are not in the same project as the Controller class that references
+them. This is due to a limitation of Roslyn (see <a href="https://github.com/SonarSource/sonar-dotnet/issues/9243">here</a>).</p>
 <h2>How to fix it</h2>
 <p>You should mark any model value-type property as <a
 href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types">nullable</a>, <a
