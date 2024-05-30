@@ -80,7 +80,6 @@ public class UseAwaitableMethodTest
         builder
             .AddReferences(MetadataReferenceFacade.SystemXml)
             .AddSnippet("""
-                using System;
                 using System.IO;
                 using System.Threading.Tasks;
                 using System.Xml;

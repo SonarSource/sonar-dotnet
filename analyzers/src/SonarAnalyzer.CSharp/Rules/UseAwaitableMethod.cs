@@ -105,10 +105,6 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         {
             exclusions.Add(x => x.Is(KnownType.MongoDB_Driver_IMongoCollectionExtensions, "Find")); // https://github.com/SonarSource/sonar-dotnet/issues/9265
         }
-        if (compilation.GetTypeByMetadataName(KnownType.System_Xml_XmlReader) is not null || compilation.GetTypeByMetadataName(KnownType.System_Xml_XmlWriter) is not null)
-        {
-            exclusions.Add(x => x.Is(KnownType.MongoDB_Driver_IMongoCollectionExtensions, "Find")); // https://github.com/SonarSource/sonar-dotnet/issues/9265
-        }
         return exclusions.ToImmutableArray();
     }
 
