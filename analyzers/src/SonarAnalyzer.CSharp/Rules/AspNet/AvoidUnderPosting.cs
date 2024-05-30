@@ -132,6 +132,7 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
                 .Where(x => x.GetEffectiveAccessibility() == Accessibility.Public
                     && x.SetMethod?.DeclaredAccessibility is Accessibility.Public
                     && !HasValidateNeverAttribute(x)
+                    && !x.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_ModelBinding_BindNeverAttribute)
                     && x.DeclaringSyntaxReferences.Length > 0
                     && !IgnoreType(x.Type));
             foreach (var property in properties)
@@ -157,7 +158,8 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
             IArrayTypeSymbol array => RelatedTypesToExamine(array.ElementType, controllerType),
             INamedTypeSymbol collection when collection.DerivesOrImplements(KnownType.System_Collections_Generic_IEnumerable_T) =>
                 collection.TypeArguments.SelectMany(x => RelatedTypesToExamine(x, controllerType)),
-            INamedTypeSymbol namedType when type.IsInSameAssembly(controllerType) => [namedType],
+            INamedTypeSymbol namedType when type.IsInSameAssembly(controllerType)
+                && !type.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_ModelBinding_BindNeverAttribute) => [namedType],
             _ => []
         };
 
