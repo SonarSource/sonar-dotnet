@@ -177,10 +177,18 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : HardcodedBytesRule
             }
         }
 
-        public override void VisitMemberAccessExpression(MemberAccessExpressionSyntax node) =>
+        public override void VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
+        {
             Result |= node.Expression.NameIs("SecureRandom") && node.Name.NameIs("GetInstance");
 
-        public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node) =>
+            base.VisitMemberAccessExpression(node);
+        }
+
+        public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
+        {
             Result |= node.Type.GetName() is "DigestRandomGenerator" or "VmpcRandomGenerator";
+
+            base.VisitObjectCreationExpression(node);
+        }
     }
 }
