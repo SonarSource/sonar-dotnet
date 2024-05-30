@@ -49,7 +49,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
         .Add(EmptyCollectionsShouldNotBeEnumerated.S4158, CreateFactory<EmptyCollectionsShouldNotBeEnumerated, SonarRules.EmptyCollectionsShouldNotBeEnumerated>())
         .Add(RestrictDeserializedTypes.S5773, CreateFactory<RestrictDeserializedTypes, SonarRules.RestrictDeserializedTypes>())
         .Add(SecureRandomSeedsShouldNotBePredictable.S4347, CreateFactory<SecureRandomSeedsShouldNotBePredictable>())
-        .Add(JwsSecretKeys.S6781, CreateFactory<JwsSecretKeys>());
+        .Add(JwtSecretKeys.S6781, CreateFactory<JwtSecretKeys>());
 
     protected override SyntaxClassifierBase SyntaxClassifier => CSharpSyntaxClassifier.Instance;
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.ToImmutableArray();

@@ -18,6 +18,7 @@ public class LoginExampleController
         _ = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Constants.ConstantKey));                                            // Noncompliant
         _ = new SymmetricSecurityKey(Convert.FromBase64String(HardCodedKeyBase64));                                             // Noncompliant
         _ = new SymmetricSecurityKey(null);                                                                                     // Noncompliant
+        SymmetricSecurityKey x = new(null);                                                                                     // Noncompliant
     }
 
     public void SymmetricSecurityKey_Compliant(string parameterKey, byte[] parameterKeyBytes)

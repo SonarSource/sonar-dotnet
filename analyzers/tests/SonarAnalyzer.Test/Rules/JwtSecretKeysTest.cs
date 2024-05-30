@@ -24,11 +24,11 @@ using CS = SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]
-public class JwsSecretKeysTest
+public class JwtSecretKeysTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder()
                                                .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))
-                                               .WithOnlyDiagnostics(ChecksCS.JwsSecretKeys.S6781)
+                                               .WithOnlyDiagnostics(ChecksCS.JwtSecretKeys.S6781)
                                                .AddReferences([
                                                    ..NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.NuGetLatestVersion),
                                                    ..NuGetMetadataReference.MicrosoftIdentityModelTokens(),
@@ -37,19 +37,20 @@ public class JwsSecretKeysTest
 #if NET
 
     [TestMethod]
-    public void JwsSecretKeys_CS_AspNetCore() =>
+    public void JwtSecretKeys_CS_AspNetCore() =>
         builder
             .WithOptions(ParseOptionsHelper.FromCSharp8) // Recursive pattern requires C# 8 or later.
-            .AddPaths("JwsSecretKeys.AspNet.Core.cs")
+            .AddPaths("JwtSecretKeys.AspNet.Core.cs")
             .AddReferences([CoreMetadataReference.SystemSecurityClaims])
             .Verify();
 
 #else
 
     [TestMethod]
-    public void JwsSecretKeys_CS_AspNet() =>
+    public void JwtSecretKeys_CS_AspNet() =>
         builder
-            .AddPaths("JwsSecretKeys.AspNet.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp9) // target-typed new requires C# 9 or later.
+            .AddPaths("JwtSecretKeys.AspNet.cs")
             .AddReferences(NuGetMetadataReference.SystemConfigurationConfigurationManager())
             .Verify();
 
