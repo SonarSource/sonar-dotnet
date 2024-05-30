@@ -624,6 +624,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Windows_Markup_XmlnsPrefixAttribute = new("System.Windows.Markup.XmlnsPrefixAttribute");
         public static readonly KnownType System_Windows_Markup_XmlnsDefinitionAttribute = new("System.Windows.Markup.XmlnsDefinitionAttribute");
         public static readonly KnownType System_Windows_Markup_XmlnsCompatibleWithAttribute = new("System.Windows.Markup.XmlnsCompatibleWithAttribute");
+        public static readonly KnownType System_Xml_Resolvers_XmlPreloadedResolver = new("System.Xml.Resolvers.XmlPreloadedResolver");
         public static readonly KnownType System_Xml_Serialization_XmlElementAttribute = new("System.Xml.Serialization.XmlElementAttribute");
         public static readonly KnownType System_Xml_XmlDocument = new("System.Xml.XmlDocument");
         public static readonly KnownType System_Xml_XmlDataDocument = new("System.Xml.XmlDataDocument");
@@ -633,7 +634,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Xml_XmlReaderSettings = new("System.Xml.XmlReaderSettings");
         public static readonly KnownType System_Xml_XmlUrlResolver = new("System.Xml.XmlUrlResolver");
         public static readonly KnownType System_Xml_XmlTextReader = new("System.Xml.XmlTextReader");
-        public static readonly KnownType System_Xml_Resolvers_XmlPreloadedResolver = new("System.Xml.Resolvers.XmlPreloadedResolver");
+        public static readonly KnownType System_Xml_XmlWriter = new("System.Xml.XmlWriter");
         public static readonly KnownType Void = new("System.Void");
         public static readonly KnownType NSubstitute_SubstituteExtensions = new("NSubstitute.SubstituteExtensions");
         public static readonly KnownType NSubstitute_Received = new("NSubstitute.Received");
