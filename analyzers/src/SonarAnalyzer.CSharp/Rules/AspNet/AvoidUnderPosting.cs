@@ -34,11 +34,12 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
         KnownType.Microsoft_AspNetCore_Http_IFormFile,
         KnownType.Microsoft_AspNetCore_Http_IFormFileCollection);
     private static readonly ImmutableArray<KnownType> IgnoredAttributes = ImmutableArray.Create(
-        KnownType.System_Text_Json_Serialization_JsonIgnoreAttribute,
-        KnownType.System_Text_Json_Serialization_JsonRequiredAttribute,
+        KnownType.Microsoft_AspNetCore_Mvc_ModelBinding_BindNeverAttribute,
         KnownType.Newtonsoft_Json_JsonIgnoreAttribute,
         KnownType.Newtonsoft_Json_JsonRequiredAttribute,
-        KnownType.System_ComponentModel_DataAnnotations_RangeAttribute);
+        KnownType.System_ComponentModel_DataAnnotations_RangeAttribute,
+        KnownType.System_Text_Json_Serialization_JsonIgnoreAttribute,
+        KnownType.System_Text_Json_Serialization_JsonRequiredAttribute);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -132,7 +133,6 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
                 .Where(x => x.GetEffectiveAccessibility() == Accessibility.Public
                     && x.SetMethod?.DeclaredAccessibility is Accessibility.Public
                     && !HasValidateNeverAttribute(x)
-                    && !x.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_ModelBinding_BindNeverAttribute)
                     && x.DeclaringSyntaxReferences.Length > 0
                     && !IgnoreType(x.Type));
             foreach (var property in properties)
