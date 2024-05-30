@@ -47,15 +47,17 @@ public sealed class MemberVisibilityOrdering : StylingAnalyzer
         foreach (var category in members.Keys)
         {
             OrderDescriptor maxOrder = null;
+            SecondaryLocation secondary = null;
             foreach (var member in members[category])
             {
                 if (member.Order.Value < maxOrder?.Value)
                 {
-                    context.ReportIssue(Rule, member.Location, member.Order.Description, category, maxOrder.Description);
+                    context.ReportIssue(Rule, member.Location, [secondary], member.Order.Description, category, maxOrder.Description);
                 }
                 if (maxOrder is null || member.Order.Value > maxOrder.Value)
                 {
                     maxOrder = member.Order;
+                    secondary = member.Location.ToSecondary();
                 }
             }
         }
