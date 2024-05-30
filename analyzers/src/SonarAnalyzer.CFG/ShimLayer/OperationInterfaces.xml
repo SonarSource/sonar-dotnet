@@ -30,9 +30,9 @@
       <summary>
         Represents an invalid operation with one or more child operations.
         <para>
-        Current usage:
-         (1) C# invalid expression or invalid statement.
-         (2) VB invalid expression or invalid statement.
+          Current usage:
+          (1) C# invalid expression or invalid statement.
+          (2) VB invalid expression or invalid statement.
         </para>
       </summary>
     </Comments>
@@ -42,9 +42,9 @@
       <summary>
         Represents a block containing a sequence of operations and local declarations.
         <para>
-        Current usage:
-         (1) C# "{ ... }" block statement.
-         (2) VB implicit block statement for method bodies and other block scoped statements.
+          Current usage:
+          (1) C# "{ ... }" block statement.
+          (2) VB implicit block statement for method bodies and other block scoped statements.
         </para>
       </summary>
     </Comments>
@@ -64,12 +64,12 @@
       <summary>Represents a variable declaration statement.</summary>
       <para>
         Current Usage:
-          (1) C# local declaration statement
-          (2) C# fixed statement
-          (3) C# using statement
-          (4) C# using declaration
-          (5) VB Dim statement
-          (6) VB Using statement
+        (1) C# local declaration statement
+        (2) C# fixed statement
+        (3) C# using statement
+        (4) C# using declaration
+        (5) VB Dim statement
+        (6) VB Using statement
       </para>
     </Comments>
     <Property Name="Declarations" Type="ImmutableArray&lt;IVariableDeclarationOperation&gt;">
@@ -86,9 +86,9 @@
       <summary>
         Represents a switch operation with a value to be switched upon and switch cases.
         <para>
-        Current usage:
-         (1) C# switch statement.
-         (2) VB Select Case statement.
+          Current usage:
+          (1) C# switch statement.
+          (2) VB Select Case statement.
         </para>
       </summary>
     </Comments>
@@ -121,7 +121,7 @@
       <summary>
         Represents a loop operation.
         <para>
-        Current usage:
+          Current usage:
           (1) C# 'while', 'for', 'foreach' and 'do' loop statements
           (2) VB 'While', 'ForTo', 'ForEach', 'Do While' and 'Do Until' loop statements
         </para>
@@ -159,9 +159,9 @@
       <summary>
         Represents a for each loop.
         <para>
-        Current usage:
-         (1) C# 'foreach' loop statement
-         (2) VB 'For Each' loop statement
+          Current usage:
+          (1) C# 'foreach' loop statement
+          (2) VB 'For Each' loop statement
         </para>
       </summary>
     </Comments>
@@ -199,8 +199,8 @@
       <summary>
         Represents a for loop.
         <para>
-        Current usage:
-         (1) C# 'for' loop statement
+          Current usage:
+          (1) C# 'for' loop statement
         </para>
       </summary>
     </Comments>
@@ -235,8 +235,8 @@
       <summary>
         Represents a for to loop with loop control variable and initial, limit and step values for the control variable.
         <para>
-        Current usage:
-         (1) VB 'For ... To ... Step' loop statement
+          Current usage:
+          (1) VB 'For ... To ... Step' loop statement
         </para>
       </summary>
     </Comments>
@@ -266,7 +266,8 @@
     <Property Name="IsChecked" Type="bool">
       <Comments>
         <summary>
-          <code>true</code> if arithmetic operations behind this loop are 'checked'.</summary>
+          <code>true</code> if arithmetic operations behind this loop are 'checked'.
+        </summary>
       </Comments>
     </Property>
     <Property Name="NextVariables" Type="ImmutableArray&lt;IOperation&gt;">
@@ -282,9 +283,9 @@
       <summary>
         Represents a while or do while loop.
         <para>
-        Current usage:
-         (1) C# 'while' and 'do while' loop statements.
-         (2) VB 'While', 'Do While' and 'Do Until' loop statements.
+          Current usage:
+          (1) C# 'while' and 'do while' loop statements.
+          (2) VB 'While', 'Do While' and 'Do Until' loop statements.
         </para>
       </summary>
     </Comments>
@@ -303,7 +304,9 @@
     </Property>
     <Property Name="ConditionIsUntil" Type="bool">
       <Comments>
-        <summary>True if the loop has 'Until' loop semantics and the loop is executed while <see cref="Condition" /> is false.</summary>
+        <summary>
+          True if the loop has 'Until' loop semantics and the loop is executed while <see cref="Condition" /> is false.
+        </summary>
       </Comments>
     </Property>
     <Property Name="IgnoredCondition" Type="IOperation">
@@ -322,9 +325,9 @@
       <summary>
         Represents an operation with a label.
         <para>
-        Current usage:
-         (1) C# labeled statement.
-         (2) VB label statement.
+          Current usage:
+          (1) C# labeled statement.
+          (2) VB label statement.
         </para>
       </summary>
     </Comments>
@@ -344,9 +347,9 @@
       <summary>
         Represents a branch operation.
         <para>
-        Current usage:
-         (1) C# goto, break, or continue statement.
-         (2) VB GoTo, Exit ***, or Continue *** statement.
+          Current usage:
+          (1) C# goto, break, or continue statement.
+          (2) VB GoTo, Exit ***, or Continue *** statement.
         </para>
       </summary>
     </Comments>
@@ -366,8 +369,8 @@
       <summary>
         Represents an empty or no-op operation.
         <para>
-        Current usage:
-         (1) C# empty statement.
+          Current usage:
+          (1) C# empty statement.
         </para>
       </summary>
     </Comments>
@@ -382,9 +385,9 @@
       <summary>
         Represents a return from the method with an optional return value.
         <para>
-        Current usage:
-         (1) C# return statement and yield statement.
-         (2) VB Return statement.
+          Current usage:
+          (1) C# return statement and yield statement.
+          (2) VB Return statement.
         </para>
       </summary>
     </Comments>
@@ -399,9 +402,9 @@
       <summary>
         Represents a <see cref="Body" /> of operations that are executed while holding a lock onto the <see cref="LockedValue" />.
         <para>
-        Current usage:
-         (1) C# lock statement.
-         (2) VB SyncLock statement.
+          Current usage:
+          (1) C# lock statement.
+          (2) VB SyncLock statement.
         </para>
       </summary>
     </Comments>
@@ -422,9 +425,9 @@
       <summary>
         Represents a try operation for exception handling code with a body, catch clauses and a finally handler.
         <para>
-        Current usage:
-         (1) C# try statement.
-         (2) VB Try statement.
+          Current usage:
+          (1) C# try statement.
+          (2) VB Try statement.
         </para>
       </summary>
     </Comments>
@@ -454,9 +457,9 @@
       <summary>
         Represents a <see cref="Body" /> of operations that are executed while using disposable <see cref="Resources" />.
         <para>
-        Current usage:
-         (1) C# using statement.
-         (2) VB Using statement.
+          Current usage:
+          (1) C# using statement.
+          (2) VB Using statement.
         </para>
       </summary>
     </Comments>
@@ -487,7 +490,9 @@
     </Property>
     <Property Name="DisposeInfo" Type="DisposeOperationInfo" Internal="true">
       <Comments>
-        <summary>Information about the method that will be invoked to dispose the <see cref="Resources" /> when pattern based disposal is used.</summary>
+        <summary>
+          Information about the method that will be invoked to dispose the <see cref="Resources" /> when pattern based disposal is used.
+        </summary>
       </Comments>
     </Property>
   </Node>
@@ -496,9 +501,9 @@
       <summary>
         Represents an operation that drops the resulting value and the type of the underlying wrapped <see cref="Operation" />.
         <para>
-        Current usage:
-         (1) C# expression statement.
-         (2) VB expression statement.
+          Current usage:
+          (1) C# expression statement.
+          (2) VB expression statement.
         </para>
       </summary>
     </Comments>
@@ -513,8 +518,8 @@
       <summary>
         Represents a local function defined within a method.
         <para>
-        Current usage:
-         (1) C# local function statement.
+          Current usage:
+          (1) C# local function statement.
         </para>
       </summary>
     </Comments>
@@ -541,8 +546,8 @@
       <summary>
         Represents an operation to stop or suspend execution of code.
         <para>
-        Current usage:
-         (1) VB Stop statement.
+          Current usage:
+          (1) VB Stop statement.
         </para>
       </summary>
     </Comments>
@@ -552,8 +557,8 @@
       <summary>
         Represents an operation that stops the execution of code abruptly.
         <para>
-        Current usage:
-         (1) VB End Statement.
+          Current usage:
+          (1) VB End Statement.
         </para>
       </summary>
     </Comments>
@@ -563,8 +568,8 @@
       <summary>
         Represents an operation for raising an event.
         <para>
-        Current usage:
-         (1) VB raise event statement.
+          Current usage:
+          (1) VB raise event statement.
         </para>
       </summary>
     </Comments>
@@ -588,9 +593,9 @@
       <summary>
         Represents a textual literal numeric, string, etc.
         <para>
-        Current usage:
-         (1) C# literal expression.
-         (2) VB literal expression.
+          Current usage:
+          (1) C# literal expression.
+          (2) VB literal expression.
         </para>
       </summary>
     </Comments>
@@ -600,9 +605,9 @@
       <summary>
         Represents a type conversion.
         <para>
-        Current usage:
-         (1) C# conversion expression.
-         (2) VB conversion expression.
+          Current usage:
+          (1) C# conversion expression.
+          (2) VB conversion expression.
         </para>
       </summary>
     </Comments>
@@ -653,16 +658,16 @@
       <summary>
         Represents an invocation of a method.
         <para>
-        Current usage:
-         (1) C# method invocation expression.
-         (2) C# collection element initializer.
-             For example, in the following collection initializer: <code>new C() { 1, 2, 3 }</code>, we will have
-             3 <see cref="IInvocationOperation" /> nodes, each of which will be a call to the corresponding Add method
-             with either 1, 2, 3 as the argument.
-         (3) VB method invocation expression.
-         (4) VB collection element initializer.
-             Similar to the C# example, <code>New C() From {1, 2, 3}</code> will have 3 <see cref="IInvocationOperation" />
-             nodes with 1, 2, and 3 as their arguments, respectively.
+          Current usage:
+          (1) C# method invocation expression.
+          (2) C# collection element initializer.
+          For example, in the following collection initializer: <code>new C() { 1, 2, 3 }</code>, we will have
+          3 <see cref="IInvocationOperation" /> nodes, each of which will be a call to the corresponding Add method
+          with either 1, 2, 3 as the argument.
+          (3) VB method invocation expression.
+          (4) VB collection element initializer.
+          Similar to the C# example, <code>New C() From {1, 2, 3}</code> will have 3 <see cref="IInvocationOperation" />
+          nodes with 1, 2, and 3 as their arguments, respectively.
         </para>
       </summary>
     </Comments>
@@ -704,9 +709,9 @@
       <summary>
         Represents a reference to an array element.
         <para>
-        Current usage:
-         (1) C# array element reference expression.
-         (2) VB array element reference expression.
+          Current usage:
+          (1) C# array element reference expression.
+          (2) VB array element reference expression.
         </para>
       </summary>
     </Comments>
@@ -726,9 +731,9 @@
       <summary>
         Represents a reference to a declared local variable.
         <para>
-        Current usage:
-         (1) C# local reference expression.
-         (2) VB local reference expression.
+          Current usage:
+          (1) C# local reference expression.
+          (2) VB local reference expression.
         </para>
       </summary>
     </Comments>
@@ -751,9 +756,9 @@
       <summary>
         Represents a reference to a parameter.
         <para>
-        Current usage:
-         (1) C# parameter reference expression.
-         (2) VB parameter reference expression.
+          Current usage:
+          (1) C# parameter reference expression.
+          (2) VB parameter reference expression.
         </para>
       </summary>
     </Comments>
@@ -768,9 +773,9 @@
       <summary>
         Represents a reference to a member of a class, struct, or interface.
         <para>
-        Current usage:
-         (1) C# member reference expression.
-         (2) VB member reference expression.
+          Current usage:
+          (1) C# member reference expression.
+          (2) VB member reference expression.
         </para>
       </summary>
     </Comments>
@@ -798,9 +803,9 @@
       <summary>
         Represents a reference to a field.
         <para>
-        Current usage:
-         (1) C# field reference expression.
-         (2) VB field reference expression.
+          Current usage:
+          (1) C# field reference expression.
+          (2) VB field reference expression.
         </para>
       </summary>
     </Comments>
@@ -824,9 +829,9 @@
       <summary>
         Represents a reference to a method other than as the target of an invocation.
         <para>
-        Current usage:
-         (1) C# method reference expression.
-         (2) VB method reference expression.
+          Current usage:
+          (1) C# method reference expression.
+          (2) VB method reference expression.
         </para>
       </summary>
     </Comments>
@@ -847,9 +852,9 @@
       <summary>
         Represents a reference to a property.
         <para>
-        Current usage:
-         (1) C# property reference expression.
-         (2) VB property reference expression.
+          Current usage:
+          (1) C# property reference expression.
+          (2) VB property reference expression.
         </para>
       </summary>
     </Comments>
@@ -874,9 +879,9 @@
       <summary>
         Represents a reference to an event.
         <para>
-        Current usage:
-         (1) C# event reference expression.
-         (2) VB event reference expression.
+          Current usage:
+          (1) C# event reference expression.
+          (2) VB event reference expression.
         </para>
       </summary>
     </Comments>
@@ -896,9 +901,9 @@
       <summary>
         Represents an operation with one operand and a unary operator.
         <para>
-        Current usage:
-         (1) C# unary operation expression.
-         (2) VB unary operation expression.
+          Current usage:
+          (1) C# unary operation expression.
+          (2) VB unary operation expression.
         </para>
       </summary>
     </Comments>
@@ -952,9 +957,9 @@
       <summary>
         Represents an operation with two operands and a binary operator that produces a result with a non-null type.
         <para>
-        Current usage:
-         (1) C# binary operator expression.
-         (2) VB binary operator expression.
+          Current usage:
+          (1) C# binary operator expression.
+          (2) VB binary operator expression.
         </para>
       </summary>
     </Comments>
@@ -1028,9 +1033,9 @@
         (2) <see cref="WhenTrue" /> operation to be executed when <see cref="Condition" /> is true and
         (3) <see cref="WhenFalse" /> operation to be executed when the <see cref="Condition" /> is false.
         <para>
-        Current usage:
-         (1) C# ternary expression "a ? b : c" and if statement.
-         (2) VB ternary expression "If(a, b, c)" and If Else statement.
+          Current usage:
+          (1) C# ternary expression "a ? b : c" and if statement.
+          (2) VB ternary expression "If(a, b, c)" and If Else statement.
         </para>
       </summary>
     </Comments>
@@ -1066,9 +1071,9 @@
         (1) <see cref="Value" />, which is the first operand that is unconditionally evaluated and is the result of the operation if non null.
         (2) <see cref="WhenNull" />, which is the second operand that is conditionally evaluated and is the result of the operation if <see cref="Value" /> is null.
         <para>
-        Current usage:
-         (1) C# null-coalescing expression "Value ?? WhenNull".
-         (2) VB binary conditional expression "If(Value, WhenNull)".
+          Current usage:
+          (1) C# null-coalescing expression "Value ?? WhenNull".
+          (2) VB binary conditional expression "If(Value, WhenNull)".
         </para>
       </summary>
     </Comments>
@@ -1105,9 +1110,9 @@
       <summary>
         Represents an anonymous function operation.
         <para>
-        Current usage:
-         (1) C# lambda expression.
-         (2) VB anonymous delegate expression.
+          Current usage:
+          (1) C# lambda expression.
+          (2) VB anonymous delegate expression.
         </para>
       </summary>
     </Comments>
@@ -1127,9 +1132,9 @@
       <summary>
         Represents creation of an object instance.
         <para>
-        Current usage:
-         (1) C# new expression.
-         (2) VB New expression.
+          Current usage:
+          (1) C# new expression.
+          (2) VB New expression.
         </para>
       </summary>
     </Comments>
@@ -1158,9 +1163,9 @@
       <summary>
         Represents a creation of a type parameter object, i.e. new T(), where T is a type parameter with new constraint.
         <para>
-        Current usage:
-         (1) C# type parameter object creation expression.
-         (2) VB type parameter object creation expression.
+          Current usage:
+          (1) C# type parameter object creation expression.
+          (2) VB type parameter object creation expression.
         </para>
       </summary>
     </Comments>
@@ -1175,9 +1180,9 @@
       <summary>
         Represents the creation of an array instance.
         <para>
-        Current usage:
-         (1) C# array creation expression.
-         (2) VB array creation expression.
+          Current usage:
+          (1) C# array creation expression.
+          (2) VB array creation expression.
         </para>
       </summary>
     </Comments>
@@ -1197,11 +1202,11 @@
       <summary>
         Represents an implicit/explicit reference to an instance.
         <para>
-        Current usage:
-         (1) C# this or base expression.
-         (2) VB Me, MyClass, or MyBase expression.
-         (3) C# object or collection or 'with' expression initializers.
-         (4) VB With statements, object or collection initializers.
+          Current usage:
+          (1) C# this or base expression.
+          (2) VB Me, MyClass, or MyBase expression.
+          (3) C# object or collection or 'with' expression initializers.
+          (4) VB With statements, object or collection initializers.
         </para>
       </summary>
     </Comments>
@@ -1216,9 +1221,9 @@
       <summary>
         Represents an operation that tests if a value is of a specific type.
         <para>
-        Current usage:
-         (1) C# "is" operator expression.
-         (2) VB "TypeOf" and "TypeOf IsNot" expression.
+          Current usage:
+          (1) C# "is" operator expression.
+          (2) VB "TypeOf" and "TypeOf IsNot" expression.
         </para>
       </summary>
     </Comments>
@@ -1247,9 +1252,9 @@
       <summary>
         Represents an await operation.
         <para>
-        Current usage:
-         (1) C# await expression.
-         (2) VB await expression.
+          Current usage:
+          (1) C# await expression.
+          (2) VB await expression.
         </para>
       </summary>
     </Comments>
@@ -1264,9 +1269,9 @@
       <summary>
         Represents a base interface for assignments.
         <para>
-        Current usage:
-         (1) C# simple, compound and deconstruction assignment expressions.
-         (2) VB simple and compound assignment expressions.
+          Current usage:
+          (1) C# simple, compound and deconstruction assignment expressions.
+          (2) VB simple and compound assignment expressions.
         </para>
       </summary>
     </Comments>
@@ -1286,9 +1291,9 @@
       <summary>
         Represents a simple assignment operation.
         <para>
-        Current usage:
-         (1) C# simple assignment expression.
-         (2) VB simple assignment expression.
+          Current usage:
+          (1) C# simple assignment expression.
+          (2) VB simple assignment expression.
         </para>
       </summary>
     </Comments>
@@ -1303,9 +1308,9 @@
       <summary>
         Represents a compound assignment that mutates the target with the result of a binary operation.
         <para>
-        Current usage:
-         (1) C# compound assignment expression.
-         (2) VB compound assignment expression.
+          Current usage:
+          (1) C# compound assignment expression.
+          (2) VB compound assignment expression.
         </para>
       </summary>
     </Comments>
@@ -1362,8 +1367,8 @@
       <summary>
         Represents a parenthesized operation.
         <para>
-        Current usage:
-         (1) VB parenthesized expression.
+          Current usage:
+          (1) VB parenthesized expression.
         </para>
       </summary>
     </Comments>
@@ -1378,9 +1383,9 @@
       <summary>
         Represents a binding of an event.
         <para>
-        Current usage:
-         (1) C# event assignment expression.
-         (2) VB Add/Remove handler statement.
+          Current usage:
+          (1) C# event assignment expression.
+          (2) VB Add/Remove handler statement.
         </para>
       </summary>
     </Comments>
@@ -1406,9 +1411,9 @@
         Represents a conditionally accessed operation. Note that <see cref="IConditionalAccessInstanceOperation" /> is used to refer to the value
         of <see cref="Operation" /> within <see cref="WhenNotNull" />.
         <para>
-        Current usage:
-         (1) C# conditional access expression (? or ?. operator).
-         (2) VB conditional access expression (? or ?. operator).
+          Current usage:
+          (1) C# conditional access expression (? or ?. operator).
+          (2) VB conditional access expression (? or ?. operator).
         </para>
       </summary>
     </Comments>
@@ -1432,9 +1437,9 @@
         For a conditional access operation of the form <c>someExpr?.Member</c>, this operation is used as the InstanceReceiver for the right operation <c>Member</c>.
         See https://github.com/dotnet/roslyn/issues/21279#issuecomment-323153041 for more details.
         <para>
-        Current usage:
-         (1) C# conditional access instance expression.
-         (2) VB conditional access instance expression.
+          Current usage:
+          (1) C# conditional access instance expression.
+          (2) VB conditional access instance expression.
         </para>
       </summary>
     </Comments>
@@ -1444,9 +1449,9 @@
       <summary>
         Represents an interpolated string.
         <para>
-        Current usage:
-         (1) C# interpolated string expression.
-         (2) VB interpolated string expression.
+          Current usage:
+          (1) C# interpolated string expression.
+          (2) VB interpolated string expression.
         </para>
       </summary>
     </Comments>
@@ -1463,9 +1468,9 @@
       <summary>
         Represents a creation of anonymous object.
         <para>
-        Current usage:
-         (1) C# "new { ... }" expression
-         (2) VB "New With { ... }" expression
+          Current usage:
+          (1) C# "new { ... }" expression
+          (2) VB "New With { ... }" expression
         </para>
       </summary>
     </Comments>
@@ -1484,11 +1489,11 @@
       <summary>
         Represents an initialization for an object or collection creation.
         <para>
-        Current usage:
-         (1) C# object or collection initializer expression.
-         (2) VB object or collection initializer expression.
-        For example, object initializer "{ X = x }" within object creation "new Class() { X = x }" and
-        collection initializer "{ x, y, 3 }" within collection creation "new MyList() { x, y, 3 }".
+          Current usage:
+          (1) C# object or collection initializer expression.
+          (2) VB object or collection initializer expression.
+          For example, object initializer "{ X = x }" within object creation "new Class() { X = x }" and
+          collection initializer "{ x, y, 3 }" within collection creation "new MyList() { x, y, 3 }".
         </para>
       </summary>
     </Comments>
@@ -1503,8 +1508,8 @@
       <summary>
         Represents an initialization of member within an object initializer with a nested object or collection initializer.
         <para>
-        Current usage:
-         (1) C# nested member initializer expression.
+          Current usage:
+          (1) C# nested member initializer expression.
           For example, given an object creation with initializer "new Class() { X = x, Y = { x, y, 3 }, Z = { X = z } }",
           member initializers for Y and Z, i.e. "Y = { x, y, 3 }", and "Z = { X = z }" are nested member initializers represented by this operation.
         </para>
@@ -1530,7 +1535,7 @@
         Obsolete interface that used to represent a collection element initializer. It has been replaced by
         <see cref="IInvocationOperation" /> and <see cref="IDynamicInvocationOperation" />, as appropriate.
         <para>
-        Current usage:
+          Current usage:
           None. This API has been obsoleted in favor of <see cref="IInvocationOperation" /> and <see cref="IDynamicInvocationOperation" />.
         </para>
       </summary>
@@ -1544,9 +1549,9 @@
       <summary>
         Represents an operation that gets a string value for the <see cref="Argument" /> name.
         <para>
-        Current usage:
-         (1) C# nameof expression.
-         (2) VB NameOf expression.
+          Current usage:
+          (1) C# nameof expression.
+          (2) VB NameOf expression.
         </para>
       </summary>
     </Comments>
@@ -1561,9 +1566,9 @@
       <summary>
         Represents a tuple with one or more elements.
         <para>
-        Current usage:
-         (1) C# tuple expression.
-         (2) VB tuple expression.
+          Current usage:
+          (1) C# tuple expression.
+          (2) VB tuple expression.
         </para>
       </summary>
     </Comments>
@@ -1587,9 +1592,9 @@
       <summary>
         Represents an object creation with a dynamically bound constructor.
         <para>
-        Current usage:
-         (1) C# "new" expression with dynamic argument(s).
-         (2) VB late bound "New" expression.
+          Current usage:
+          (1) C# "new" expression with dynamic argument(s).
+          (2) VB late bound "New" expression.
         </para>
       </summary>
     </Comments>
@@ -1609,9 +1614,9 @@
       <summary>
         Represents a reference to a member of a class, struct, or module that is dynamically bound.
         <para>
-        Current usage:
-         (1) C# dynamic member reference expression.
-         (2) VB late bound member reference expression.
+          Current usage:
+          (1) C# dynamic member reference expression.
+          (2) VB late bound member reference expression.
         </para>
       </summary>
     </Comments>
@@ -1643,16 +1648,16 @@
       <summary>
         Represents a invocation that is dynamically bound.
         <para>
-        Current usage:
-         (1) C# dynamic invocation expression.
-         (2) C# dynamic collection element initializer.
-             For example, in the following collection initializer: <code>new C() { do1, do2, do3 }</code> where
-             the doX objects are of type dynamic, we'll have 3 <see cref="IDynamicInvocationOperation" /> with do1, do2, and
-             do3 as their arguments.
-         (3) VB late bound invocation expression.
-         (4) VB dynamic collection element initializer.
-             Similar to the C# example, <code>New C() From {do1, do2, do3}</code> will generate 3 <see cref="IDynamicInvocationOperation" />
-             nodes with do1, do2, and do3 as their arguments, respectively.
+          Current usage:
+          (1) C# dynamic invocation expression.
+          (2) C# dynamic collection element initializer.
+          For example, in the following collection initializer: <code>new C() { do1, do2, do3 }</code> where
+          the doX objects are of type dynamic, we'll have 3 <see cref="IDynamicInvocationOperation" /> with do1, do2, and
+          do3 as their arguments.
+          (3) VB late bound invocation expression.
+          (4) VB dynamic collection element initializer.
+          Similar to the C# example, <code>New C() From {do1, do2, do3}</code> will generate 3 <see cref="IDynamicInvocationOperation" />
+          nodes with do1, do2, and do3 as their arguments, respectively.
         </para>
       </summary>
     </Comments>
@@ -1672,8 +1677,8 @@
       <summary>
         Represents an indexer access that is dynamically bound.
         <para>
-        Current usage:
-         (1) C# dynamic indexer access expression.
+          Current usage:
+          (1) C# dynamic indexer access expression.
         </para>
       </summary>
     </Comments>
@@ -1693,14 +1698,14 @@
       <summary>
         Represents an unrolled/lowered query operation.
         For example, for a C# query expression "from x in set where x.Name != null select x.Name", the Operation tree has the following shape:
-          ITranslatedQueryExpression
-            IInvocationExpression ('Select' invocation for "select x.Name")
-              IInvocationExpression ('Where' invocation for "where x.Name != null")
-                IInvocationExpression ('From' invocation for "from x in set")
+        ITranslatedQueryExpression
+        IInvocationExpression ('Select' invocation for "select x.Name")
+        IInvocationExpression ('Where' invocation for "where x.Name != null")
+        IInvocationExpression ('From' invocation for "from x in set")
         <para>
-        Current usage:
-         (1) C# query expression.
-         (2) VB query expression.
+          Current usage:
+          (1) C# query expression.
+          (2) VB query expression.
         </para>
       </summary>
     </Comments>
@@ -1715,9 +1720,9 @@
       <summary>
         Represents a delegate creation. This is created whenever a new delegate is created.
         <para>
-        Current usage:
-         (1) C# delegate creation expression.
-         (2) VB delegate creation expression.
+          Current usage:
+          (1) C# delegate creation expression.
+          (2) VB delegate creation expression.
         </para>
       </summary>
     </Comments>
@@ -1732,8 +1737,8 @@
       <summary>
         Represents a default value operation.
         <para>
-        Current usage:
-         (1) C# default value expression.
+          Current usage:
+          (1) C# default value expression.
         </para>
       </summary>
     </Comments>
@@ -1743,9 +1748,9 @@
       <summary>
         Represents an operation that gets <see cref="System.Type" /> for the given <see cref="TypeOperand" />.
         <para>
-        Current usage:
-         (1) C# typeof expression.
-         (2) VB GetType expression.
+          Current usage:
+          (1) C# typeof expression.
+          (2) VB GetType expression.
         </para>
       </summary>
     </Comments>
@@ -1760,8 +1765,8 @@
       <summary>
         Represents an operation to compute the size of a given type.
         <para>
-        Current usage:
-         (1) C# sizeof expression.
+          Current usage:
+          (1) C# sizeof expression.
         </para>
       </summary>
     </Comments>
@@ -1776,8 +1781,8 @@
       <summary>
         Represents an operation that creates a pointer value by taking the address of a reference.
         <para>
-        Current usage:
-         (1) C# address of expression
+          Current usage:
+          (1) C# address of expression
         </para>
       </summary>
     </Comments>
@@ -1792,8 +1797,8 @@
       <summary>
         Represents an operation that tests if a value matches a specific pattern.
         <para>
-        Current usage:
-         (1) C# is pattern expression. For example, "x is int i".
+          Current usage:
+          (1) C# is pattern expression. For example, "x is int i".
         </para>
       </summary>
     </Comments>
@@ -1819,8 +1824,8 @@
         Note that this operation is different from an <see cref="IUnaryOperation" /> as it mutates the <see cref="Target" />,
         while unary operator expression does not mutate it's operand.
         <para>
-        Current usage:
-         (1) C# increment expression or decrement expression.
+          Current usage:
+          (1) C# increment expression or decrement expression.
         </para>
       </summary>
     </Comments>
@@ -1872,10 +1877,10 @@
       <summary>
         Represents an operation to throw an exception.
         <para>
-        Current usage:
-         (1) C# throw expression.
-         (2) C# throw statement.
-         (2) VB Throw statement.
+          Current usage:
+          (1) C# throw expression.
+          (2) C# throw statement.
+          (2) VB Throw statement.
         </para>
       </summary>
     </Comments>
@@ -1890,8 +1895,8 @@
       <summary>
         Represents a assignment with a deconstruction.
         <para>
-        Current usage:
-         (1) C# deconstruction assignment expression.
+          Current usage:
+          (1) C# deconstruction assignment expression.
         </para>
       </summary>
     </Comments>
@@ -1901,11 +1906,11 @@
       <summary>
         Represents a declaration expression operation. Unlike a regular variable declaration <see cref="IVariableDeclaratorOperation" /> and <see cref="IVariableDeclarationOperation" />, this operation represents an "expression" declaring a variable.
         <para>
-        Current usage:
-         (1) C# declaration expression. For example,
-         (a) "var (x, y)" is a deconstruction declaration expression with variables x and y.
-         (b) "(var x, var y)" is a tuple expression with two declaration expressions.
-         (c) "M(out var x);" is an invocation expression with an out "var x" declaration expression.
+          Current usage:
+          (1) C# declaration expression. For example,
+          (a) "var (x, y)" is a deconstruction declaration expression with variables x and y.
+          (b) "(var x, var y)" is a tuple expression with two declaration expressions.
+          (c) "M(out var x);" is an invocation expression with an out "var x" declaration expression.
         </para>
       </summary>
     </Comments>
@@ -1920,8 +1925,8 @@
       <summary>
         Represents an argument value that has been omitted in an invocation.
         <para>
-        Current usage:
-         (1) VB omitted argument in an invocation expression.
+          Current usage:
+          (1) VB omitted argument in an invocation expression.
         </para>
       </summary>
     </Comments>
@@ -1931,9 +1936,9 @@
       <summary>
         Represents an initializer for a field, property, parameter or a local variable declaration.
         <para>
-        Current usage:
-         (1) C# field, property, parameter or local variable initializer.
-         (2) VB field(s), property, parameter or local variable initializer.
+          Current usage:
+          (1) C# field, property, parameter or local variable initializer.
+          (2) VB field(s), property, parameter or local variable initializer.
         </para>
       </summary>
     </Comments>
@@ -1955,9 +1960,9 @@
       <summary>
         Represents an initialization of a field.
         <para>
-        Current usage:
-         (1) C# field initializer with equals value clause.
-         (2) VB field(s) initializer with equals value clause or AsNew clause. Multiple fields can be initialized with AsNew clause in VB.
+          Current usage:
+          (1) C# field initializer with equals value clause.
+          (2) VB field(s) initializer with equals value clause or AsNew clause. Multiple fields can be initialized with AsNew clause in VB.
         </para>
       </summary>
     </Comments>
@@ -1972,9 +1977,9 @@
       <summary>
         Represents an initialization of a local variable.
         <para>
-        Current usage:
-         (1) C# local variable initializer with equals value clause.
-         (2) VB local variable initializer with equals value clause or AsNew clause.
+          Current usage:
+          (1) C# local variable initializer with equals value clause.
+          (2) VB local variable initializer with equals value clause or AsNew clause.
         </para>
       </summary>
     </Comments>
@@ -1984,9 +1989,9 @@
       <summary>
         Represents an initialization of a property.
         <para>
-        Current usage:
-         (1) C# property initializer with equals value clause.
-         (2) VB property initializer with equals value clause or AsNew clause. Multiple properties can be initialized with 'WithEvents' declaration with AsNew clause in VB.
+          Current usage:
+          (1) C# property initializer with equals value clause.
+          (2) VB property initializer with equals value clause or AsNew clause. Multiple properties can be initialized with 'WithEvents' declaration with AsNew clause in VB.
         </para>
       </summary>
     </Comments>
@@ -2001,9 +2006,9 @@
       <summary>
         Represents an initialization of a parameter at the point of declaration.
         <para>
-        Current usage:
-         (1) C# parameter initializer with equals value clause.
-         (2) VB parameter initializer with equals value clause.
+          Current usage:
+          (1) C# parameter initializer with equals value clause.
+          (2) VB parameter initializer with equals value clause.
         </para>
       </summary>
     </Comments>
@@ -2018,9 +2023,9 @@
       <summary>
         Represents the initialization of an array instance.
         <para>
-        Current usage:
-         (1) C# array initializer.
-         (2) VB array initializer.
+          Current usage:
+          (1) C# array initializer.
+          (2) VB array initializer.
         </para>
       </summary>
     </Comments>
@@ -2035,10 +2040,10 @@
       <summary>Represents a single variable declarator and initializer.</summary>
       <para>
         Current Usage:
-          (1) C# variable declarator
-          (2) C# catch variable declaration
-          (3) VB single variable declaration
-          (4) VB catch variable declaration
+        (1) C# variable declarator
+        (2) C# catch variable declaration
+        (3) VB single variable declaration
+        (4) VB catch variable declaration
       </para>
       <remarks>
         In VB, the initializer for this node is only ever used for explicit array bounds initializers. This node corresponds to
@@ -2074,10 +2079,10 @@
       <summary>Represents a declarator that declares multiple individual variables.</summary>
       <para>
         Current Usage:
-          (1) C# VariableDeclaration
-          (2) C# fixed declarations
-          (3) VB Dim statement declaration groups
-          (4) VB Using statement variable declarations
+        (1) C# VariableDeclaration
+        (2) C# fixed declarations
+        (3) VB Dim statement declaration groups
+        (4) VB Using statement variable declarations
       </para>
       <remarks>
         The initializer of this node is applied to all individual declarations in <see cref="Declarators" />. There cannot
@@ -2115,9 +2120,9 @@
       <summary>
         Represents an argument to a method invocation.
         <para>
-        Current usage:
-         (1) C# argument to an invocation expression, object creation expression, etc.
-         (2) VB argument to an invocation expression, object creation expression, etc.
+          Current usage:
+          (1) C# argument to an invocation expression, object creation expression, etc.
+          (2) VB argument to an invocation expression, object creation expression, etc.
         </para>
       </summary>
     </Comments>
@@ -2152,9 +2157,9 @@
       <summary>
         Represents a catch clause.
         <para>
-        Current usage:
-         (1) C# catch clause.
-         (2) VB Catch clause.
+          Current usage:
+          (1) C# catch clause.
+          (2) VB Catch clause.
         </para>
       </summary>
     </Comments>
@@ -2197,9 +2202,9 @@
       <summary>
         Represents a switch case section with one or more case clauses to match and one or more operations to execute within the section.
         <para>
-        Current usage:
-         (1) C# switch section for one or more case clause and set of statements to execute.
-         (2) VB case block with a case statement for one or more case clause and set of statements to execute.
+          Current usage:
+          (1) C# switch section for one or more case clause and set of statements to execute.
+          (2) VB case block with a case statement for one or more case clause and set of statements to execute.
         </para>
       </summary>
     </Comments>
@@ -2238,9 +2243,9 @@
       <summary>
         Represents a case clause.
         <para>
-        Current usage:
-         (1) C# case clause.
-         (2) VB Case clause.
+          Current usage:
+          (1) C# case clause.
+          (2) VB Case clause.
         </para>
       </summary>
     </Comments>
@@ -2261,9 +2266,9 @@
       <summary>
         Represents a default case clause.
         <para>
-        Current usage:
-         (1) C# default clause.
-         (2) VB Case Else clause.
+          Current usage:
+          (1) C# default clause.
+          (2) VB Case Else clause.
         </para>
       </summary>
     </Comments>
@@ -2274,8 +2279,8 @@
       <summary>
         Represents a case clause with a pattern and an optional guard operation.
         <para>
-        Current usage:
-         (1) C# pattern case clause.
+          Current usage:
+          (1) C# pattern case clause.
         </para>
       </summary>
     </Comments>
@@ -2304,8 +2309,8 @@
       <summary>
         Represents a case clause with range of values for comparison.
         <para>
-        Current usage:
-         (1) VB range case clause of the form "Case x To y".
+          Current usage:
+          (1) VB range case clause of the form "Case x To y".
         </para>
       </summary>
     </Comments>
@@ -2326,8 +2331,8 @@
       <summary>
         Represents a case clause with custom relational operator for comparison.
         <para>
-        Current usage:
-         (1) VB relational case clause of the form "Case Is op x".
+          Current usage:
+          (1) VB relational case clause of the form "Case Is op x".
         </para>
       </summary>
     </Comments>
@@ -2348,9 +2353,9 @@
       <summary>
         Represents a case clause with a single value for comparison.
         <para>
-        Current usage:
-         (1) C# case clause of the form "case x"
-         (2) VB case clause of the form "Case x".
+          Current usage:
+          (1) C# case clause of the form "case x"
+          (2) VB case clause of the form "Case x".
         </para>
       </summary>
     </Comments>
@@ -2365,9 +2370,9 @@
       <summary>
         Represents a constituent part of an interpolated string.
         <para>
-        Current usage:
-         (1) C# interpolated string content.
-         (2) VB interpolated string content.
+          Current usage:
+          (1) C# interpolated string content.
+          (2) VB interpolated string content.
         </para>
       </summary>
     </Comments>
@@ -2377,9 +2382,9 @@
       <summary>
         Represents a constituent string literal part of an interpolated string operation.
         <para>
-        Current usage:
-         (1) C# interpolated string text.
-         (2) VB interpolated string text.
+          Current usage:
+          (1) C# interpolated string text.
+          (2) VB interpolated string text.
         </para>
       </summary>
     </Comments>
@@ -2394,9 +2399,9 @@
       <summary>
         Represents a constituent interpolation part of an interpolated string operation.
         <para>
-        Current usage:
-         (1) C# interpolation part.
-         (2) VB interpolation part.
+          Current usage:
+          (1) C# interpolation part.
+          (2) VB interpolation part.
         </para>
       </summary>
     </Comments>
@@ -2421,8 +2426,8 @@
       <summary>
         Represents a pattern matching operation.
         <para>
-        Current usage:
-         (1) C# pattern.
+          Current usage:
+          (1) C# pattern.
         </para>
       </summary>
     </Comments>
@@ -2442,8 +2447,8 @@
       <summary>
         Represents a pattern with a constant value.
         <para>
-        Current usage:
-         (1) C# constant pattern.
+          Current usage:
+          (1) C# constant pattern.
         </para>
       </summary>
     </Comments>
@@ -2458,8 +2463,8 @@
       <summary>
         Represents a pattern that declares a symbol.
         <para>
-        Current usage:
-         (1) C# declaration pattern.
+          Current usage:
+          (1) C# declaration pattern.
         </para>
       </summary>
     </Comments>
@@ -2494,8 +2499,8 @@
       <summary>
         Represents a comparison of two operands that returns a bool type.
         <para>
-        Current usage:
-         (1) C# tuple binary operator expression.
+          Current usage:
+          (1) C# tuple binary operator expression.
         </para>
       </summary>
     </Comments>
@@ -2520,8 +2525,8 @@
       <summary>
         Represents a method body operation.
         <para>
-        Current usage:
-         (1) C# method body
+          Current usage:
+          (1) C# method body
         </para>
       </summary>
     </Comments>
@@ -2545,8 +2550,8 @@
       <summary>
         Represents a method body operation.
         <para>
-        Current usage:
-         (1) C# method body for non-constructor
+          Current usage:
+          (1) C# method body for non-constructor
         </para>
       </summary>
     </Comments>
@@ -2560,14 +2565,16 @@
       <summary>
         Represents a constructor method body operation.
         <para>
-        Current usage:
-         (1) C# method body for constructor declaration
+          Current usage:
+          (1) C# method body for constructor declaration
         </para>
       </summary>
     </Comments>
     <Property Name="Locals" Type="ImmutableArray&lt;ILocalSymbol&gt;">
       <Comments>
-        <summary>Local declarations contained within the <see cref="Initializer" />.</summary>
+        <summary>
+          Local declarations contained within the <see cref="Initializer" />.
+        </summary>
       </Comments>
     </Property>
     <Property Name="Initializer" Type="IOperation">
@@ -2581,7 +2588,7 @@
       <summary>
         Represents a discard operation.
         <para>
-        Current usage: C# discard expressions
+          Current usage: C# discard expressions
         </para>
       </summary>
     </Comments>
@@ -2624,7 +2631,9 @@
     </Property>
     <Property Name="IsInitialization" Type="bool">
       <Comments>
-        <summary>True if this reference to the capture initializes the capture. Used when the capture is being initialized by being passed as an <code>out</code> parameter.</summary>
+        <summary>
+          True if this reference to the capture initializes the capture. Used when the capture is being initialized by being passed as an <code>out</code> parameter.
+        </summary>
       </Comments>
     </Property>
   </Node>
@@ -2672,9 +2681,9 @@
       <summary>
         Represents an anonymous function operation in context of a <see cref="ControlFlowGraph" />.
         <para>
-        Current usage:
-         (1) C# lambda expression.
-         (2) VB anonymous delegate expression.
+          Current usage:
+          (1) C# lambda expression.
+          (2) VB anonymous delegate expression.
         </para>
         A <see cref="ControlFlowGraph" /> for the body of the anonymous function is available from
         the enclosing <see cref="ControlFlowGraph" />.
@@ -2694,8 +2703,8 @@
         (2) <see cref="IAssignmentOperation.Value" /> is conditionally evaluated if <see cref="IAssignmentOperation.Target" /> is null, and the result is assigned into <see cref="IAssignmentOperation.Target" />.
         The result of the entire expression is<see cref="IAssignmentOperation.Target" />, which is only evaluated once.
         <para>
-        Current usage:
-         (1) C# null-coalescing assignment operation <code>Target ??= Value</code>.
+          Current usage:
+          (1) C# null-coalescing assignment operation <code>Target ??= Value</code>.
         </para>
       </summary>
     </Comments>
@@ -2705,8 +2714,8 @@
       <summary>
         Represents a range operation.
         <para>
-        Current usage:
-         (1) C# range expressions
+          Current usage:
+          (1) C# range expressions
         </para>
       </summary>
     </Comments>
@@ -2744,8 +2753,8 @@
       <summary>
         Represents the ReDim operation to re-allocate storage space for array variables.
         <para>
-        Current usage:
-         (1) VB ReDim statement.
+          Current usage:
+          (1) VB ReDim statement.
         </para>
       </summary>
     </Comments>
@@ -2765,8 +2774,8 @@
       <summary>
         Represents an individual clause of an <see cref="IReDimOperation" /> to re-allocate storage space for a single array variable.
         <para>
-        Current usage:
-         (1) VB ReDim clause.
+          Current usage:
+          (1) VB ReDim clause.
         </para>
       </summary>
     </Comments>
@@ -2820,7 +2829,7 @@
       <summary>
         Represents a discard pattern.
         <para>
-        Current usage: C# discard pattern
+          Current usage: C# discard pattern
         </para>
       </summary>
     </Comments>
@@ -2830,8 +2839,8 @@
       <summary>
         Represents a switch expression.
         <para>
-        Current usage:
-         (1) C# switch expression.
+          Current usage:
+          (1) C# switch expression.
         </para>
       </summary>
     </Comments>
@@ -2846,9 +2855,9 @@
       </Comments>
     </Property>
     <Property Name="IsExhaustive" Type="bool">
-        <Comments>
-          <summary>True if the switch expressions arms cover every possible input value.</summary>
-        </Comments>
+      <Comments>
+        <summary>True if the switch expressions arms cover every possible input value.</summary>
+      </Comments>
     </Property>
   </Node>
   <Node Name="ISwitchExpressionArmOperation" Base="IOperation" ChildrenOrder="Pattern,Guard,Value">
@@ -2930,9 +2939,9 @@
       <summary>
         Represents a creation of an instance of a NoPia interface, i.e. new I(), where I is an embedded NoPia interface.
         <para>
-        Current usage:
-         (1) C# NoPia interface instance creation expression.
-         (2) VB NoPia interface instance creation expression.
+          Current usage:
+          (1) C# NoPia interface instance creation expression.
+          (2) VB NoPia interface instance creation expression.
         </para>
       </summary>
     </Comments>
@@ -2956,8 +2965,8 @@
       <summary>
         Represents a reference through a pointer.
         <para>
-        Current usage:
-         (1) C# pointer indirection reference expression.
+          Current usage:
+          (1) C# pointer indirection reference expression.
         </para>
       </summary>
     </Comments>
@@ -2972,8 +2981,8 @@
       <summary>
         Represents a <see cref="Body" /> of operations that are executed with implicit reference to the <see cref="Value" /> for member references.
         <para>
-        Current usage:
-         (1) VB With statement.
+          Current usage:
+          (1) VB With statement.
         </para>
       </summary>
     </Comments>
@@ -2993,9 +3002,9 @@
       <summary>
         Represents using variable declaration, with scope spanning across the parent <see cref="IBlockOperation"/>.
         <para>
-        Current Usage:
-         (1) C# using declaration
-         (1) C# asynchronous using declaration
+          Current Usage:
+          (1) C# using declaration
+          (1) C# asynchronous using declaration
         </para>
       </summary>
     </Comments>
@@ -3043,7 +3052,9 @@
     </Comments>
     <Property Name="OperatorKind" Type="BinaryOperatorKind">
       <Comments>
-        <summary>Kind of binary pattern; either <see cref="BinaryOperatorKind.And"/> or <see cref="BinaryOperatorKind.Or"/>.</summary>
+        <summary>
+          Kind of binary pattern; either <see cref="BinaryOperatorKind.And"/> or <see cref="BinaryOperatorKind.Or"/>.
+        </summary>
       </Comments>
     </Property>
     <Property Name="LeftPattern" Type="IPatternOperation">
@@ -3080,8 +3091,8 @@
       <summary>
         Represents a pattern comparing the input with a constant value using a relational operator.
         <para>
-        Current usage:
-         (1) C# relational pattern.
+          Current usage:
+          (1) C# relational pattern.
         </para>
       </summary>
     </Comments>
@@ -3209,7 +3220,9 @@
   </Node>
   <Node Name="IInterpolatedStringHandlerArgumentPlaceholderOperation" Base="IOperation">
     <Comments>
-      <summary>Represents an argument from the method call, indexer access, or constructor invocation that is creating the containing <see cref="IInterpolatedStringHandlerCreationOperation"/></summary>
+      <summary>
+        Represents an argument from the method call, indexer access, or constructor invocation that is creating the containing <see cref="IInterpolatedStringHandlerCreationOperation"/>
+      </summary>
     </Comments>
     <Property Name="ArgumentIndex" Type="int">
       <Comments>
@@ -3362,7 +3375,9 @@
     </Comments>
     <Property Name="Operation" Type="IOperation">
       <Comments>
-        <summary>The operation representing the attribute. This can be a <see cref="IObjectCreationOperation" /> in non-error cases, or an <see cref="IInvalidOperation" /> in error cases.</summary>
+        <summary>
+          The operation representing the attribute. This can be a <see cref="IObjectCreationOperation" /> in non-error cases, or an <see cref="IInvalidOperation" /> in error cases.
+        </summary>
       </Comments>
     </Property>
   </Node>
@@ -3384,6 +3399,72 @@
     <Property Name="Argument" Type="IOperation">
       <Comments>
         <summary>System.Int32, System.Index or System.Range value.</summary>
+      </Comments>
+    </Property>
+  </Node>
+  <Node Name="ICollectionExpressionOperation" Base="IOperation"  HasType="true">
+    <Comments>
+      <summary>
+        Represents a collection expression.
+        <para>
+          Current usage:
+          (1) C# collection expression.
+        </para>
+      </summary>
+    </Comments>
+    <Property Name="ConstructMethod" Type="IMethodSymbol">
+      <Comments>
+        <summary>
+          Method used to construct the collection.
+          <para>
+            If the collection type is an array, span, array interface, or type parameter, the method is null;
+            if the collection type has a [CollectionBuilder] attribute, the method is the builder method;
+            otherwise, the method is the collection type constructor.
+          </para>
+        </summary>
+      </Comments>
+    </Property>
+    <Property Name="Elements" Type="ImmutableArray&lt;IOperation&gt;">
+      <Comments>
+        <summary>
+          Collection expression elements.
+          <para>
+            If the element is an expression, the entry is the expression, with a conversion to
+            the target element type if necessary;
+            otherwise, the entry is an ISpreadOperation.
+          </para>
+        </summary>
+      </Comments>
+    </Property>
+  </Node>
+  <Node Name="ISpreadOperation" Base="IOperation" HasType="false">
+    <Comments>
+      <summary>
+        Represents a collection expression spread element.
+        <para>
+          Current usage:
+          (1) C# spread element.
+        </para>
+      </summary>
+    </Comments>
+    <Property Name="Operand" Type="IOperation">
+      <Comments>
+        <summary>Collection being spread.</summary>
+      </Comments>
+    </Property>
+    <Property Name="ElementType" Type="ITypeSymbol">
+      <Comments>
+        <summary>
+          Type of the elements in the collection.
+        </summary>
+      </Comments>
+    </Property>
+    <Property Name="ElementConversion" Type="CommonConversion">
+      <Comments>
+        <summary>
+          Conversion from the type of the collection element to the target element type
+          of the containing collection expression.
+        </summary>
       </Comments>
     </Property>
   </Node>
