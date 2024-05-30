@@ -20,5 +20,10 @@
   "ruleSpecification": "RSPEC-6423",
   "sqKey": "S6423",
   "scope": "Main",
+  "securityStandards": {
+    "STIG ASD 2023-06-08": [
+      "V-222610"
+    ]
+  },
   "quickfix": "unknown"
 }

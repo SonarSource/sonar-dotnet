@@ -1,7 +1,7 @@
 <h2>Why is this an issue?</h2>
 <p>Catching <code>System.Exception</code> seems like an efficient way to handle multiple possible exceptions. Unfortunately, it traps all exception
-types, including the ones that were not intended to be caught. To prevent any misunderstandings, the exception filters should be used. Alternatively
-each exception type should be in a separate <code>catch</code> block.</p>
+types, including the ones that were not intended to be caught. To prevent any misunderstandings, exception filters should be used. Alternatively, each
+exception type should be in a separate <code>catch</code> block.</p>
 <h3>Noncompliant code example</h3>
 <pre>
 try
@@ -19,14 +19,14 @@ try
 {
   // do something
 }
-catch (Exception e) when (e is FileNotFoundException || e is IOException)
+catch (Exception e) when (e is FileNotFoundException or IOException)
 {
   // do something
 }
 </pre>
 <h3>Exceptions</h3>
 <p>The final option is to catch <code>System.Exception</code> and <code>throw</code> it in the last statement in the <code>catch</code> block. This is
-the least-preferred option, as it is an old-style code, which also suffers from performance penalty compared to exception filters.</p>
+the least-preferred option, as it is an old-style code, which also suffers from performance penalties compared to exception filters.</p>
 <pre>
 try
 {
@@ -34,7 +34,7 @@ try
 }
 catch (Exception e)
 {
-  if (e is FileNotFoundException || e is IOException)
+  if (e is FileNotFoundException or IOException)
   {
     // do something
   }
