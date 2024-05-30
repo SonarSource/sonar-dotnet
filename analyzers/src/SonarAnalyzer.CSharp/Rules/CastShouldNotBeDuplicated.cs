@@ -221,7 +221,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var duplicatedCastLocations = GetDuplicatedCastLocations(context, parentStatement, castType, variableExpression);
             if (duplicatedCastLocations.Any())
             {
-                context.ReportIssue(Rule, mainLocation, duplicatedCastLocations.Select(x => x.ToSecondary()), message);
+                context.ReportIssue(Rule, mainLocation, duplicatedCastLocations.ToSecondary(), message);
             }
         }
 

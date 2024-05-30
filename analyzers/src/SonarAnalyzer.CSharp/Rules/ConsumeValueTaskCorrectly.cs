@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         if (syntaxNodes.Count > 1)
                         {
-                            c.ReportIssue(rule, syntaxNodes.First(), syntaxNodes.Skip(1).Select(x => x.ToSecondaryLocation()), ConsumeOnlyOnceMessage);
+                            c.ReportIssue(rule, syntaxNodes.First(), syntaxNodes.Skip(1).ToSecondaryLocations(), ConsumeOnlyOnceMessage);
                         }
                     }
 

@@ -36,11 +36,10 @@ public sealed class UsePascalCaseForNamedPlaceHolders : IMessageTemplateCheck
         var nonPascalCasePlaceholders = placeholders.Where(x => char.IsLower(x.Name[0])).ToArray();
         if (nonPascalCasePlaceholders.Length > 0)
         {
-            var secondaryLocations = nonPascalCasePlaceholders.Select(GetLocation);
-            context.ReportIssue(Diagnostic.Create(Rule, templateArgument.GetLocation(), secondaryLocations));
+            context.ReportIssue(Rule, templateArgument, nonPascalCasePlaceholders.Select(CreateLocation));
         }
 
-        Location GetLocation(Placeholder placeholder) =>
-            Location.Create(context.Tree, new(templateArgument.Expression.GetLocation().SourceSpan.Start + placeholder.Start, placeholder.Length));
+        SecondaryLocation CreateLocation(Placeholder placeholder) =>
+            Location.Create(context.Tree, new(templateArgument.Expression.GetLocation().SourceSpan.Start + placeholder.Start, placeholder.Length)).ToSecondary();
     }
 }

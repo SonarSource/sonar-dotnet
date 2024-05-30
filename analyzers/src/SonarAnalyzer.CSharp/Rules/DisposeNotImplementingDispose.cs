@@ -113,7 +113,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 foreach (var location in disposeMethod.Locations)
                 {
-                    context.ReportIssue(Rule, location, disposeMethod.PartialImplementationPart?.Locations.Select(x => x.ToSecondary()) ?? []);
+                    context.ReportIssue(Rule, location, disposeMethod.PartialImplementationPart?.Locations.ToSecondary() ?? []);
                 }
             }
         }

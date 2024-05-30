@@ -43,7 +43,7 @@ public sealed class SpecifyRouteAttribute() : SonarDiagnosticAnalyzer<SyntaxKind
                 {
                     return;
                 }
-                var secondaryLocations = new ConcurrentStack<Location>();
+                var secondaryLocations = new ConcurrentStack<SecondaryLocation>();
                 symbolStart.RegisterSyntaxNodeAction(nodeContext =>
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)nodeContext.Node;
@@ -52,14 +52,14 @@ public sealed class SpecifyRouteAttribute() : SonarDiagnosticAnalyzer<SyntaxKind
                         && method.IsControllerActionMethod()
                         && method.GetAttributesWithInherited().Any(x => !CanBeIgnored(x.GetAttributeRouteTemplate())))
                     {
-                        secondaryLocations.Push(methodDeclaration.Identifier.GetLocation());
+                        secondaryLocations.Push(methodDeclaration.Identifier.ToSecondaryLocation());
                     }
                 }, SyntaxKind.MethodDeclaration);
                 symbolStart.RegisterSymbolEndAction(symbolEnd => ReportIssues(symbolEnd, symbolStart.Symbol, secondaryLocations));
             }, SymbolKind.NamedType);
         });
 
-    private void ReportIssues(SonarSymbolReportingContext context, ISymbol symbol, ConcurrentStack<Location> secondaryLocations)
+    private void ReportIssues(SonarSymbolReportingContext context, ISymbol symbol, ConcurrentStack<SecondaryLocation> secondaryLocations)
     {
         if (secondaryLocations.IsEmpty)
         {
@@ -70,7 +70,7 @@ public sealed class SpecifyRouteAttribute() : SonarDiagnosticAnalyzer<SyntaxKind
         {
             if (declaration.GetIdentifier() is { } identifier)
             {
-                context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, Diagnostic.Create(Rule, identifier.GetLocation(), secondaryLocations));
+                context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, Rule, identifier.GetLocation(), secondaryLocations);
             }
         }
     }

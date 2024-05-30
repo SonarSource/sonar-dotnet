@@ -44,7 +44,7 @@ public class DummyAnalyzerWithLocation : SonarDiagnosticAnalyzer
         if (context.Node is InvocationExpressionSyntax invocation
             && invocation.Expression is IdentifierNameSyntax { Identifier.ValueText: "RaiseHere" } identifier)
         {
-            context.ReportIssue(Diagnostic.Create(rule, identifier.GetLocation(), invocation.ArgumentList.Arguments.Select(arg => arg.GetLocation())));
+            context.ReportIssue(rule, identifier.GetLocation(), invocation.ArgumentList.Arguments.Select(arg => arg.ToSecondaryLocation()));
         }
     }
 }

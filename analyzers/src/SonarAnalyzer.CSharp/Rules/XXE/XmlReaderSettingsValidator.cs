@@ -50,9 +50,9 @@ namespace SonarAnalyzer.Rules.XXE
         /// <param name="settings">The symbol of the XmlReaderSettings node received as parameter. This is used to check
         /// if certain properties (ProhibitDtd, DtdProcessing or XmlUrlResolver) were modified for the given symbol.</param>
         /// <returns>The list of unsafe assignment locations.</returns>
-        public IList<Location> GetUnsafeAssignmentLocations(InvocationExpressionSyntax invocation, ISymbol settings)
+        public IList<SecondaryLocation> GetUnsafeAssignmentLocations(InvocationExpressionSyntax invocation, ISymbol settings, string message)
         {
-            var unsafeAssignmentLocations = new List<Location>();
+            var unsafeAssignmentLocations = new List<SecondaryLocation>();
             // By default ProhibitDtd is 'true' and DtdProcessing is 'ignore'
             var unsafeDtdProcessing = false;
             var unsafeResolver = isXmlResolverSafeByDefault;
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.XXE
                     unsafeDtdProcessing = IsXmlResolverDtdProcessingUnsafe(assignment, semanticModel);
                     if (unsafeDtdProcessing)
                     {
-                        unsafeAssignmentLocations.Add(assignment.GetLocation());
+                        unsafeAssignmentLocations.Add(assignment.ToSecondaryLocation(message));
                     }
                 }
                 else if (name == "XmlResolver")
@@ -81,12 +81,12 @@ namespace SonarAnalyzer.Rules.XXE
                     unsafeResolver = IsXmlResolverAssignmentUnsafe(assignment, semanticModel);
                     if (unsafeResolver)
                     {
-                        unsafeAssignmentLocations.Add(assignment.GetLocation());
+                        unsafeAssignmentLocations.Add(assignment.ToSecondaryLocation(message));
                     }
                 }
             }
 
-            return unsafeDtdProcessing && unsafeResolver ? unsafeAssignmentLocations : new List<Location>();
+            return unsafeDtdProcessing && unsafeResolver ? unsafeAssignmentLocations : [];
         }
 
         private static bool IsMemberAccessOnSymbol(ExpressionSyntax expression, ISymbol symbol, SemanticModel semanticModel) =>
