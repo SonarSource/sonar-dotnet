@@ -1,8 +1,8 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <MainVersion>9.26.0</MainVersion>
+    <MainVersion>9.27.0</MainVersion>
     <BuildNumber>0</BuildNumber>
-    <MilestoneVersion>9.26</MilestoneVersion>
+    <MilestoneVersion>9.27</MilestoneVersion>
     <Sha1>$(Sha1)</Sha1>
     <BranchName>$(BranchName)</BranchName>
     <FullVersion>$(MainVersion).$(BuildNumber)</FullVersion>
