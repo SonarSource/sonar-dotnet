@@ -137,15 +137,32 @@ internal class Verifier
     public void VerifyCodeFix()     // This should never have any arguments
     {
         _ = codeFix ?? throw new InvalidOperationException($"{nameof(builder.CodeFix)} was not set.");
-        var document = CreateProject(false).FindDocument(Path.Combine(builder.BasePath ?? string.Empty, Path.GetFileName(builder.Paths.Single())));
+        var project = CreateProject(false);
+        var document = builder.Paths.Any()
+            ? project.FindDocument(Path.Combine(builder.BasePath ?? string.Empty, Path.GetFileName(builder.Paths.Single())))
+            : project.Project.Documents.Single();
         var codeFixVerifier = new CodeFixVerifier(analyzers.Single(), codeFix, document, builder.CodeFixTitle);
         var fixAllProvider = codeFix.GetFixAllProvider();
         foreach (var parseOptions in builder.ParseOptions.OrDefault(language.LanguageName))
         {
-            codeFixVerifier.VerifyWhileDocumentChanges(parseOptions, TestCasePath(builder.CodeFixedPath));
-            if (fixAllProvider is not null)
+            switch (builder)
             {
-                codeFixVerifier.VerifyFixAllProvider(fixAllProvider, parseOptions, TestCasePath(builder.CodeFixedPathBatch ?? builder.CodeFixedPath));
+                case { CodeFixedPath: { } path }:
+                    codeFixVerifier.VerifyWhileDocumentChanges(parseOptions, new FileInfo(TestCasePath(path)));
+                    if (fixAllProvider is not null)
+                    {
+                        codeFixVerifier.VerifyFixAllProvider(fixAllProvider, parseOptions, new FileInfo(TestCasePath(builder.CodeFixedPathBatch ?? builder.CodeFixedPath)));
+                    }
+                    break;
+                case { CodeFixed: { } fixedCode }:
+                    codeFixVerifier.VerifyWhileDocumentChanges(parseOptions, fixedCode);
+                    if (fixAllProvider is not null)
+                    {
+                        codeFixVerifier.VerifyFixAllProvider(fixAllProvider, parseOptions, fixedCode);
+                    }
+                    break;
+                default:
+                    throw new InvalidOperationException($"No fixed code found. Specify {nameof(builder.CodeFixedPath)} or {nameof(builder.CodeFixed)}.");
             }
         }
     }
