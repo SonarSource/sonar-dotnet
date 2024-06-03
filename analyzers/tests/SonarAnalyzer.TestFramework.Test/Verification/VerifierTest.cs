@@ -19,7 +19,6 @@
  */
 
 using System.IO;
-using System.Reflection;
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules.CSharp;
@@ -120,6 +119,11 @@ public class VerifierTest
     public void Constructor_CodeFix_SnippetAndPath_Throws() =>
         DummyCodeFixCS.AddSnippet("Wrong")
             .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Either Paths or Snippets must be specified, but not both.");
+
+    [TestMethod]
+    public void Constructor_CodeFix_NoSnippetAndPath_Throws() =>
+        new VerifierBuilder<DummyAnalyzerCS>().WithCodeFix<DummyCodeFixCS>().WithCodeFixedSnippet("OK")
+            .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("Paths cannot be empty. Add at least one file using builder.AddPaths() or AddSnippet().");
 
     [TestMethod]
     public void Constructor_CodeFix_WithSinglePath_DoesNotThrow() =>
