@@ -62,7 +62,7 @@ public sealed class CommentedOutCode : SonarDiagnosticAnalyzer
                 && !trivium.ToFullString().TrimStart().StartsWith("///", StringComparison.Ordinal)
                 && IsCode(trivium.ToString().Substring(CommentMarkLength)))
             {
-                context.ReportIssue(Rule, trivium);
+                context.ReportIssue(Rule, trivium.GetLocation());
                 shouldReport = false;
             }
         }
