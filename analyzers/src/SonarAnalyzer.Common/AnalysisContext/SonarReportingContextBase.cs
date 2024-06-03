@@ -90,6 +90,10 @@ public abstract class SonarTreeReportingContextBase<TContext> : SonarReportingCo
 
     protected SonarTreeReportingContextBase(SonarAnalysisContext analysisContext, TContext context) : base(analysisContext, context) { }
 
+    [Obsolete("Use another overload of ReportIssue, without calling Diagnostic.Create")]
+    public void ReportIssue(Diagnostic diagnostic) =>
+        ReportIssueCore(diagnostic);
+
     public void ReportIssue(DiagnosticDescriptor rule, SyntaxNode locationSyntax, params string[] messageArgs) =>
         ReportIssue(rule, locationSyntax.GetLocation(), messageArgs);
 
