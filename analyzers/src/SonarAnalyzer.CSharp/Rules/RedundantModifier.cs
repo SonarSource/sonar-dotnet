@@ -199,7 +199,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && context.SemanticModel.GetDeclaredSymbol(typeDeclaration) is { DeclaringSyntaxReferences.Length: <= 1 })
             {
                 var keyword = typeDeclaration.Modifiers.First(m => m.IsKind(SyntaxKind.PartialKeyword));
-                context.ReportIssue(Rule, keyword.GetLocation(), "partial", "gratuitous");
+                context.ReportIssue(Rule, keyword, "partial", "gratuitous");
             }
         }
 

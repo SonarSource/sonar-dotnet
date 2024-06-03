@@ -105,7 +105,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else if (IsNotNullPattern(right) && IsAffirmativePatternMatch(left))
             {
-                context.ReportIssue(RuleForPatternSyntax, right.GetLocation());
+                context.ReportIssue(RuleForPatternSyntax, right);
             }
 
             static bool IsNotNullPattern(SyntaxNode node) =>

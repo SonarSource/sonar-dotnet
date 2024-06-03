@@ -81,7 +81,7 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : HotspotDiagnostic
                 if (IsRegexMatchMethod(Language.Syntax.NodeIdentifier(c.Node).GetValueOrDefault().Text)
                     && RegexMethodLacksTimeout(c.Node, c.SemanticModel))
                 {
-                    c.ReportIssue(Rule, c.Node.GetLocation());
+                    c.ReportIssue(Rule, c.Node);
                 }
             },
             Language.SyntaxKind.InvocationExpression);

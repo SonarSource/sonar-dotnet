@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Rules
 
             foreach (var stringTokenAndParam in GetStringTokenAndParamNamePairs(stringTokensInsideThrowExpressions, parameterNames))
             {
-                context.ReportIssue(Rule, stringTokenAndParam.Key.GetLocation(), stringTokenAndParam.Value, NameOf);
+                context.ReportIssue(Rule, stringTokenAndParam.Key, stringTokenAndParam.Value, NameOf);
             }
         }
 

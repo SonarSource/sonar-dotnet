@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Rules
                     && (expectedParameter.Type.Kind != SymbolKind.TypeParameter
                         || actualParameters[i].Type.Kind == SymbolKind.TypeParameter))
                 {
-                    context.ReportIssue(Rule, parameter.GetLocation(), parameter.ValueText, expectedParameter.Name, expectedLocation);
+                    context.ReportIssue(Rule, parameter, parameter.ValueText, expectedParameter.Name, expectedLocation);
                 }
             }
         }
