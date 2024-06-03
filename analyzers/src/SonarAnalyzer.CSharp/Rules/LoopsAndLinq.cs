@@ -128,10 +128,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 && accessedProperties.First().Value is var stats
                 && (stats.IsInVarDeclarator || stats.Count > 1))
             {
-                var diagnostic = Diagnostic.Create(Rule,
-                                                   forEachStatementSyntax.Expression.GetLocation(),
-                                                   string.Format(SelectMessageFormat, forEachStatementSyntax.Identifier.ValueText, accessedProperties.Single().Key.Name));
-                c.ReportIssue(diagnostic);
+                c.ReportIssue(Rule,
+                              forEachStatementSyntax.Expression,
+                              string.Format(SelectMessageFormat, forEachStatementSyntax.Identifier.ValueText, accessedProperties.Single().Key.Name));
             }
 
             static IEnumerable<IdentifierNameSyntax> GetStatementIdentifiers(ForEachStatementSyntax forEachStatementSyntax) =>

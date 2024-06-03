@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && !IsSpecializedGeneric(interfaceSymbol)
                         && !HasEnhancingAttribute(interfaceSymbol))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, interfaceDeclaration.Identifier.GetLocation()));
+                        c.ReportIssue(Rule, interfaceDeclaration.Identifier);
                     }
                 },
                 SyntaxKind.InterfaceDeclaration);

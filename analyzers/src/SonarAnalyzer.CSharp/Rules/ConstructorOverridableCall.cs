@@ -60,8 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 IsMethodOverridable(methodSymbol) &&
                 enclosingSymbol.IsInType(methodSymbol.ContainingType))
             {
-                context.ReportIssue(Diagnostic.Create(rule, invocationExpression.Expression.GetLocation(),
-                    methodSymbol.Name));
+                context.ReportIssue(rule, invocationExpression.Expression, methodSymbol.Name);
             }
         }
 

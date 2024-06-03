@@ -88,7 +88,7 @@ public sealed class LoggerMembersNamesShouldComply : ParametrizedDiagnosticAnaly
                             && c.SemanticModel.GetDeclaredSymbol(memberData.Member).GetSymbolType() is { } type
                             && type.DerivesOrImplementsAny(Loggers))
                         {
-                            c.ReportIssue(Diagnostic.Create(Rule, memberData.Location, memberData.MemberType, memberData.Name, Format));
+                            c.ReportIssue(Rule, memberData.Location, memberData.MemberType, memberData.Name, Format);
                         }
                     }
                 },

@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .OfType<ConditionalExpressionSyntax>()
                         .Any())
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                        c.ReportIssue(Rule, c.Node);
                     }
                 },
                 SyntaxKind.ConditionalExpression);

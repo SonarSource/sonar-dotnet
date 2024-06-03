@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (c.Node.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>() is DestructorDeclarationSyntax)
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation()));
+                        c.ReportIssue(rule, c.Node);
                     }
                 },
                 SyntaxKind.ThrowStatement,

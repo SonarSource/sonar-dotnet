@@ -135,7 +135,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 protected void ReportIssue(Location location, ISymbol symbol) =>
-                    owner.context.ReportIssue(Diagnostic.Create(Rule, location, symbol.Name));
+                    owner.context.ReportIssue(Rule, location, symbol.Name);
 
                 protected bool IsSymbolRelevant(ISymbol symbol) =>
                     symbol != null && !owner.capturedVariables.Contains(symbol);

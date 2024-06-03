@@ -95,7 +95,7 @@ public sealed class ApiControllersShouldNotDeriveDirectlyFromController : SonarD
 
         foreach (var location in reportLocations)
         {
-            context.ReportIssue(CSharpFacade.Instance.GeneratedCodeRecognizer, Diagnostic.Create(Rule, location));
+            context.ReportIssue(CSharpFacade.Instance.GeneratedCodeRecognizer, Rule, location);
         }
     }
 }

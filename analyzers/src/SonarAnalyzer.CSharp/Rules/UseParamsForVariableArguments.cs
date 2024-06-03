@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && methodSymbol.IsPubliclyAccessible()
                         && methodSymbol.GetInterfaceMember() == null)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation()));
+                        c.ReportIssue(Rule, identifier);
                     }
                 },
                 SyntaxKind.MethodDeclaration,

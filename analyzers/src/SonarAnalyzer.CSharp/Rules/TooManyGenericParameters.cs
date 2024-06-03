@@ -52,11 +52,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(Rule,
-                                                    typeDeclaration.Identifier.GetLocation(),
-                                                    typeDeclaration.Identifier.ValueText,
-                                                    typeDeclaration.GetDeclarationTypeName(),
-                                                    MaxNumberOfGenericParametersInClass));
+                    c.ReportIssue(Rule,
+                                  typeDeclaration.Identifier,
+                                  typeDeclaration.Identifier.ValueText,
+                                  typeDeclaration.GetDeclarationTypeName(),
+                                  MaxNumberOfGenericParametersInClass.ToString());
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration,
@@ -74,11 +74,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(Rule,
-                                                    methodDeclaration.Identifier.GetLocation(),
-                                                    new[] { EnclosingTypeName(c.Node), methodDeclaration.Identifier.ValueText }.JoinNonEmpty("."),
-                                                    "method",
-                                                    MaxNumberOfGenericParametersInMethod));
+                    c.ReportIssue(Rule,
+                                  methodDeclaration.Identifier,
+                                  new[] { EnclosingTypeName(c.Node), methodDeclaration.Identifier.ValueText }.JoinNonEmpty("."),
+                                  "method",
+                                  MaxNumberOfGenericParametersInMethod.ToString());
                 },
                 SyntaxKind.MethodDeclaration,
                 SyntaxKindEx.LocalFunctionStatement);

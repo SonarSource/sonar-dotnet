@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && !classDeclaration.Identifier.IsMissing
                         && HasAnyInvalidIEquatableEqualsMethod(classSymbol))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(), classDeclaration.Identifier));
+                        c.ReportIssue(Rule, classDeclaration.Identifier, classDeclaration.Identifier.ValueText);
                     }
                 },
                 SyntaxKind.ClassDeclaration);

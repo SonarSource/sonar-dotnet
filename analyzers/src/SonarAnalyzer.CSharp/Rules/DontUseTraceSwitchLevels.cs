@@ -47,7 +47,7 @@ public sealed class DontUseTraceSwitchLevels : SonarDiagnosticAnalyzer
                     && methodSymbol.ContainingType.Is(KnownType.System_Diagnostics_Trace)
                     && UsesTraceSwitchAsCondition(c.SemanticModel, methodSymbol, invocation) is { } traceSwitchProperty)
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, traceSwitchProperty.GetLocation(), invocation.GetName()));
+                    c.ReportIssue(Rule, traceSwitchProperty, invocation.GetName());
                 }
             },
             SyntaxKind.InvocationExpression);

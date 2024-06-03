@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         foreach (var argumentMapping in methodParameterLookup.GetAllArgumentParameterMappings().Reverse().Where(x => ArgumentHasDefaultValue(x, c.SemanticModel)))
                         {
-                            c.ReportIssue(Diagnostic.Create(Rule, argumentMapping.Node.GetLocation(), argumentMapping.Symbol.Name));
+                            c.ReportIssue(Rule, argumentMapping.Node, argumentMapping.Symbol.Name);
                         }
                     }
                 },

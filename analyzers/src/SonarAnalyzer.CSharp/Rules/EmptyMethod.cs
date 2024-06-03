@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && body.IsEmpty()
                 && !ShouldBeExcluded(context, context.Node, context.Node.GetModifiers()))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, ReportingToken(context.Node).GetLocation()));
+                context.ReportIssue(Rule, ReportingToken(context.Node));
             }
         }
 

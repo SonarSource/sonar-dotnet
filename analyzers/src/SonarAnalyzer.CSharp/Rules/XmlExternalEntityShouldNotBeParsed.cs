@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             if (trackers.XmlDocumentTracker.ShouldBeReported(objectCreation, c.SemanticModel, constructorIsSafe)
                                || trackers.XmlTextReaderTracker.ShouldBeReported(objectCreation, c.SemanticModel, constructorIsSafe))
                             {
-                                c.ReportIssue(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation()));
+                                c.ReportIssue(Rule, objectCreation.Expression);
                             }
 
                             VerifyXPathDocumentConstructor(c, objectCreation);
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             if (trackers.XmlDocumentTracker.ShouldBeReported(assignment, c.SemanticModel)
                                || trackers.XmlTextReaderTracker.ShouldBeReported(assignment, c.SemanticModel))
                             {
-                                c.ReportIssue(Diagnostic.Create(Rule, assignment.GetLocation()));
+                                c.ReportIssue(Rule, assignment);
                             }
                         },
                         SyntaxKind.SimpleAssignmentExpression);
@@ -117,7 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (!IsXPathDocumentSecureByDefault(versionProvider.GetDotNetFrameworkVersion(context.Compilation)))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation()));
+                context.ReportIssue(Rule, objectCreation.Expression);
             }
         }
 

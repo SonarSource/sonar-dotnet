@@ -57,7 +57,7 @@ public sealed class UseStringCreate : SonarDiagnosticAnalyzer
                     && node.ArgumentList.Arguments[0].Expression is InterpolatedStringExpressionSyntax
                     && c.SemanticModel.GetTypeInfo(left).Type.Is(KnownType.System_FormattableString))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetIdentifier()?.GetLocation()));
+                    c.ReportIssue(Rule, node.GetIdentifier()?.GetLocation());
                 }
             },
             SyntaxKind.InvocationExpression);

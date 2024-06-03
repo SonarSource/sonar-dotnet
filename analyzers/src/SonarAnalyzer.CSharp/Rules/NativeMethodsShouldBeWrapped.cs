@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .ForEach(Report);
 
             void Report(IMethodSymbol externMethod) =>
-                c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation(), string.Format(MakeThisWrapperLessTrivialMessage, externMethod.Name)));
+                c.ReportIssue(Rule, methodDeclaration.Identifier, string.Format(MakeThisWrapperLessTrivialMessage, externMethod.Name));
 
             bool ParametersMatchContainingMethodDeclaration(InvocationExpressionSyntax invocation) =>
                 invocation.ArgumentList.Arguments.All(IsDeclaredParameterOrLiteral);

@@ -108,7 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var lastJumpLocation = reportOnOptions.Max(b => b.JumpNode.SpanStart);
                     var reportOn = reportOnOptions.First(b => b.JumpNode.SpanStart == lastJumpLocation);
 
-                    context.ReportIssue(Diagnostic.Create(Rule, reportOn.JumpNode.GetLocation(), declarationType));
+                    context.ReportIssue(Rule, reportOn.JumpNode, declarationType);
                 }
             }
 

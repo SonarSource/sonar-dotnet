@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (!HasGenericType(context, root, typeParameterNames))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, location));
+                context.ReportIssue(Rule, location);
             }
         }
 

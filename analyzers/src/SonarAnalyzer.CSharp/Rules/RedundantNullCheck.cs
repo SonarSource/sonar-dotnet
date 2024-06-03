@@ -101,11 +101,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (IsNotNullPattern(left) && IsAffirmativePatternMatch(right))
             {
-                context.ReportIssue(Diagnostic.Create(RuleForPatternSyntax, left.GetLocation()));
+                context.ReportIssue(RuleForPatternSyntax, left);
             }
             else if (IsNotNullPattern(right) && IsAffirmativePatternMatch(left))
             {
-                context.ReportIssue(Diagnostic.Create(RuleForPatternSyntax, right.GetLocation()));
+                context.ReportIssue(RuleForPatternSyntax, right.GetLocation());
             }
 
             static bool IsNotNullPattern(SyntaxNode node) =>
@@ -133,11 +133,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 var rightPattern = (PatternSyntaxWrapper)right;
                 if (leftPattern.IsNull() && IsNegativePatternMatch(rightPattern))
                 {
-                    context.ReportIssue(Diagnostic.Create(RuleForPatternSyntax, left.GetLocation()));
+                    context.ReportIssue(RuleForPatternSyntax, left);
                 }
                 else if (rightPattern.IsNull() && IsNegativePatternMatch(leftPattern))
                 {
-                    context.ReportIssue(Diagnostic.Create(RuleForPatternSyntax, right.GetLocation()));
+                    context.ReportIssue(RuleForPatternSyntax, right);
                 }
             }
 

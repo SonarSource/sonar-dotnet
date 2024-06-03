@@ -164,7 +164,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && IsInvalidCombination(firstStringText.Last(), secondStringText.First()))
                     {
                         var word = secondStringText.Split(' ').FirstOrDefault();
-                        context.ReportIssue(Diagnostic.Create(Rule, secondString.Node.GetLocation(), word));
+                        context.ReportIssue(Rule, secondString.Node, word);
                     }
                 }
             }

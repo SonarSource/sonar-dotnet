@@ -56,13 +56,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (conditionSymbols.Any())
                     {
                         var conditionVariables = conditionSymbols.Select(s => $"'{s.Name}'").OrderBy(s => s).JoinAnd();
-                        c.ReportIssue(Diagnostic.Create(Rule, forNode.Condition.GetLocation(),
-                            string.Format(CultureInfo.InvariantCulture, MessageFormatNotEmpty, conditionVariables, incrementedVariables)));
+                        c.ReportIssue(Rule, forNode.Condition,
+                            string.Format(CultureInfo.InvariantCulture, MessageFormatNotEmpty, conditionVariables, incrementedVariables));
                     }
                     else
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, forNode.ForKeyword.GetLocation(),
-                            string.Format(CultureInfo.InvariantCulture, MessageFormatEmpty, incrementedVariables)));
+                        c.ReportIssue(Rule, forNode.ForKeyword,
+                            string.Format(CultureInfo.InvariantCulture, MessageFormatEmpty, incrementedVariables));
                     }
                 },
                 SyntaxKind.ForStatement);

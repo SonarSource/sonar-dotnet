@@ -40,7 +40,7 @@ public sealed class GenericLoggerInjectionShouldMatchEnclosingType : SonarDiagno
                     var constructor = (ConstructorDeclarationSyntax)c.Node;
                     foreach (var invalidType in InvalidTypeParameters(constructor, c.SemanticModel))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, invalidType.GetLocation()));
+                        c.ReportIssue(Rule, invalidType);
                     }
                 },
                 SyntaxKind.ConstructorDeclaration);

@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && methodSymbol.GetInterfaceMember() == null
                         && methodSymbol.GetOverriddenMember() == null)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
+                        c.ReportIssue(Rule, methodDeclaration.Identifier);
                     }
                 },
                 SyntaxKind.MethodDeclaration);

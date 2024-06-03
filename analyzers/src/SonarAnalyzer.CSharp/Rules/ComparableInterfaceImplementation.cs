@@ -76,11 +76,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (membersToOverride.Any())
                     {
-                        c.ReportIssue(Diagnostic.Create(
+                        c.ReportIssue(
                             Rule,
-                            classDeclaration.Identifier.GetLocation(),
+                            classDeclaration.Identifier,
                             string.Join(" or ", implementedComparableInterfaces),
-                            membersToOverride.JoinAnd()));
+                            membersToOverride.JoinAnd());
                     }
                 },
                 SyntaxKind.ClassDeclaration,

@@ -65,7 +65,7 @@ public sealed class LoggersShouldBeNamedForEnclosingType : SonarDiagnosticAnalyz
             && IsValidMethod(method)
             && !MatchesEnclosingType(argument, enclosingType, context.SemanticModel))
         {
-            context.ReportIssue(Diagnostic.Create(Rule, argument.GetLocation()));
+            context.ReportIssue(Rule, argument);
         }
     }
 
