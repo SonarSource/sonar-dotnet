@@ -14,6 +14,12 @@
     },
     {
       "Id": "S2325",
+      "Message": "Make \u0027TestCases\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S4347.cs#L7",
+      "Location": "Line 7 Position 10-19"
+    },
+    {
+      "Id": "S2325",
       "Message": "Make \u0027CheckSignature\u0027 a static method.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6377.cs#L10",
       "Location": "Line 10 Position 17-31"
@@ -47,6 +53,12 @@
       "Message": "Make \u0027Method\u0027 a static method.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6675.cs#L8",
       "Location": "Line 8 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027TestCases\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6781.cs#L10",
+      "Location": "Line 10 Position 17-26"
     }
   ]
 }
