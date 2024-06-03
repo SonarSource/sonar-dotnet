@@ -21,145 +21,137 @@
 using SonarAnalyzer.CFG.Roslyn;
 using CfgAllPathValidator = SonarAnalyzer.CFG.Roslyn.CfgAllPathValidator;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+public partial class InfiniteRecursion
 {
-    public partial class InfiniteRecursion
+    private sealed class RoslynChecker : IChecker
     {
-        private sealed class RoslynChecker : IChecker
+        public void CheckForNoExitProperty(SonarSyntaxNodeReportingContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol) =>
+            CheckForNoExit(c,
+                propertySymbol,
+                property.ExpressionBody,
+                property.AccessorList,
+                property.Identifier.GetLocation(),
+                "property's recursion",
+                "property accessor's recursion");
+
+        public void CheckForNoExitIndexer(SonarSyntaxNodeReportingContext c, IndexerDeclarationSyntax indexer, IPropertySymbol propertySymbol) =>
+            CheckForNoExit(c,
+                propertySymbol,
+                indexer.ExpressionBody,
+                indexer.AccessorList,
+                indexer.ThisKeyword.GetLocation(),
+                "indexer's recursion",
+                "indexer accessor's recursion");
+
+        public void CheckForNoExitEvent(SonarSyntaxNodeReportingContext c, EventDeclarationSyntax eventDeclaration, IEventSymbol eventSymbol)
         {
-            public void CheckForNoExitProperty(SonarSyntaxNodeReportingContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol) =>
-                CheckForNoExit(c,
-                    propertySymbol,
-                    property.ExpressionBody,
-                    property.AccessorList,
-                    property.Identifier.GetLocation(),
-                    "property's recursion",
-                    "property accessor's recursion");
-
-            public void CheckForNoExitIndexer(SonarSyntaxNodeReportingContext c, IndexerDeclarationSyntax indexer, IPropertySymbol propertySymbol) =>
-                CheckForNoExit(c,
-                    propertySymbol,
-                    indexer.ExpressionBody,
-                    indexer.AccessorList,
-                    indexer.ThisKeyword.GetLocation(),
-                    "indexer's recursion",
-                    "indexer accessor's recursion");
-
-            public void CheckForNoExitEvent(SonarSyntaxNodeReportingContext c, EventDeclarationSyntax eventDeclaration, IEventSymbol eventSymbol)
+            if (eventDeclaration.AccessorList is not null)
             {
-                if (eventDeclaration.AccessorList != null)
+                foreach (var accessor in eventDeclaration.AccessorList.Accessors.Where(x => x.HasBodyOrExpressionBody()))
                 {
-                    foreach (var accessor in eventDeclaration.AccessorList.Accessors.Where(a => a.HasBodyOrExpressionBody()))
-                    {
-                        var cfg = ControlFlowGraph.Create(accessor, c.SemanticModel, c.Cancel);
-                        var context = new RecursionContext<ControlFlowGraph>(c, cfg, eventSymbol, accessor.Keyword.GetLocation(), "event accessor's recursion");
-                        var walker = new RecursionSearcher(context);
-                        walker.CheckPaths();
-                    }
-                }
-            }
-
-            public void CheckForNoExitMethod(SonarSyntaxNodeReportingContext c, SyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol)
-            {
-                if (body.CreateCfg(c.SemanticModel, c.Cancel) is { } cfg)
-                {
-                    var context = new RecursionContext<ControlFlowGraph>(c, cfg, symbol, identifier.GetLocation(), "method's recursion");
+                    var cfg = ControlFlowGraph.Create(accessor, c.SemanticModel, c.Cancel);
+                    var context = new RecursionContext<ControlFlowGraph>(c, cfg, eventSymbol, accessor.Keyword.GetLocation(), "event accessor's recursion");
                     var walker = new RecursionSearcher(context);
                     walker.CheckPaths();
                 }
             }
+        }
 
-            private static void CheckForNoExit(SonarSyntaxNodeReportingContext c,
-                                       IPropertySymbol propertySymbol,
-                                       ArrowExpressionClauseSyntax expressionBody,
-                                       AccessorListSyntax accessorList,
-                                       Location location,
-                                       string arrowExpressionMessageArg,
-                                       string accessorMessageArg)
+        public void CheckForNoExitMethod(SonarSyntaxNodeReportingContext c, SyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol)
+        {
+            if (body.CreateCfg(c.SemanticModel, c.Cancel) is { } cfg)
             {
-                if (expressionBody?.Expression != null)
+                var context = new RecursionContext<ControlFlowGraph>(c, cfg, symbol, identifier.GetLocation(), "method's recursion");
+                var walker = new RecursionSearcher(context);
+                walker.CheckPaths();
+            }
+        }
+
+        private static void CheckForNoExit(SonarSyntaxNodeReportingContext c,
+                                   IPropertySymbol propertySymbol,
+                                   ArrowExpressionClauseSyntax expressionBody,
+                                   AccessorListSyntax accessorList,
+                                   Location location,
+                                   string arrowExpressionMessageArg,
+                                   string accessorMessageArg)
+        {
+            if (expressionBody?.Expression is not null)
+            {
+                var cfg = ControlFlowGraph.Create(expressionBody, c.SemanticModel, c.Cancel);
+                var walker = new RecursionSearcher(new RecursionContext<ControlFlowGraph>(c, cfg, propertySymbol, location, arrowExpressionMessageArg));
+                walker.CheckPaths();
+            }
+            else if (accessorList is not null)
+            {
+                foreach (var accessor in accessorList.Accessors.Where(a => a.HasBodyOrExpressionBody()))
                 {
-                    var cfg = ControlFlowGraph.Create(expressionBody, c.SemanticModel, c.Cancel);
-                    var walker = new RecursionSearcher(new RecursionContext<ControlFlowGraph>(c, cfg, propertySymbol, location, arrowExpressionMessageArg));
+                    var cfg = ControlFlowGraph.Create(accessor, c.SemanticModel, c.Cancel);
+                    var context = new RecursionContext<ControlFlowGraph>(c, cfg, propertySymbol, accessor.Keyword.GetLocation(), accessorMessageArg);
+                    var walker = new RecursionSearcher(context, !accessor.Keyword.IsAnyKind(SyntaxKind.SetKeyword, SyntaxKindEx.InitKeyword));
                     walker.CheckPaths();
                 }
-                else if (accessorList != null)
-                {
-                    foreach (var accessor in accessorList.Accessors.Where(a => a.HasBodyOrExpressionBody()))
-                    {
-                        var cfg = ControlFlowGraph.Create(accessor, c.SemanticModel, c.Cancel);
-                        var context = new RecursionContext<ControlFlowGraph>(c, cfg, propertySymbol, accessor.Keyword.GetLocation(), accessorMessageArg);
-                        var walker = new RecursionSearcher(context, !accessor.Keyword.IsAnyKind(SyntaxKind.SetKeyword, SyntaxKindEx.InitKeyword));
-                        walker.CheckPaths();
-                    }
-                }
             }
+        }
 
-            private sealed class RecursionSearcher : CfgAllPathValidator
+        private sealed class RecursionSearcher : CfgAllPathValidator
+        {
+            private readonly RecursionContext<ControlFlowGraph> context;
+            private readonly bool isGetAccesor;
+
+            public RecursionSearcher(RecursionContext<ControlFlowGraph> context, bool isGetAccesor = true)
+                : base(context.ControlFlowGraph)
             {
-                private readonly RecursionContext<ControlFlowGraph> context;
-                private readonly bool isGetAccesor;
-
-                public RecursionSearcher(RecursionContext<ControlFlowGraph> context, bool isGetAccesor = true)
-                    : base(context.ControlFlowGraph)
-                {
-                    this.context = context;
-                    this.isGetAccesor = isGetAccesor;
-                }
-
-                public void CheckPaths()
-                {
-                    if (!CfgCanExit() || CheckAllPaths())
-                    {
-                        context.ReportIssue();
-                    }
-                }
-
-                protected override bool IsValid(BasicBlock block)
-                {
-                    if (block.OperationsAndBranchValue.ToReversedExecutionOrder().FirstOrDefault(x => context.AnalyzedSymbol.Equals(MemberSymbol(x.Instance))) is { Instance: { } } operation)
-                    {
-                        var isWrite = operation.Parent is { Kind: OperationKindEx.SimpleAssignment } parent
-                                      && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == operation.Instance;
-                        return isGetAccesor ^ isWrite;
-                    }
-
-                    return false;
-
-                    static ISymbol MemberSymbol(IOperation operation) =>
-                        operation.Kind switch
-                        {
-                            OperationKindEx.PropertyReference
-                                when IPropertyReferenceOperationWrapper.FromOperation(operation) is var propertyReference && InstanceReferencesThis(propertyReference.Instance) =>
-                                propertyReference.Property,
-                            OperationKindEx.Invocation
-                                when IInvocationOperationWrapper.FromOperation(operation) is var invocation && (!invocation.IsVirtual || InstanceReferencesThis(invocation.Instance)) =>
-                                invocation.TargetMethod,
-                            OperationKindEx.Binary =>
-                                IBinaryOperationWrapper.FromOperation(operation).OperatorMethod,
-                            OperationKindEx.Decrement =>
-                                IIncrementOrDecrementOperationWrapper.FromOperation(operation).OperatorMethod,
-                            OperationKindEx.Increment =>
-                                IIncrementOrDecrementOperationWrapper.FromOperation(operation).OperatorMethod,
-                            OperationKindEx.Unary =>
-                                IUnaryOperationWrapper.FromOperation(operation).OperatorMethod,
-                            OperationKindEx.Conversion=>
-                                IConversionOperationWrapper.FromOperation(operation).OperatorMethod,
-                            OperationKindEx.EventReference =>
-                                IEventReferenceOperationWrapper.FromOperation(operation).Member,
-                            _ => null
-                        };
-
-                    static bool InstanceReferencesThis(IOperation instance) =>
-                        instance == null || instance.IsAnyKind(OperationKindEx.FlowCaptureReference, OperationKindEx.InstanceReference);
-                }
-
-                protected override bool IsInvalid(BasicBlock block) => false;
-
-                private bool CfgCanExit() =>
-                    context.ControlFlowGraph.ExitBlock.IsReachable
-                    || context.ControlFlowGraph.Blocks.Any(x => x.FallThroughSuccessor?.Semantics == ControlFlowBranchSemantics.Throw && x.IsReachable);
+                this.context = context;
+                this.isGetAccesor = isGetAccesor;
             }
+
+            public void CheckPaths()
+            {
+                if (!CfgCanExit() || CheckAllPaths())
+                {
+                    context.ReportIssue();
+                }
+            }
+
+            protected override bool IsValid(BasicBlock block)
+            {
+                if (block.OperationsAndBranchValue.ToReversedExecutionOrder().FirstOrDefault(x => context.AnalyzedSymbol.Equals(MemberSymbol(x.Instance))) is { Instance: { } } operation)
+                {
+                    var isWrite = operation.Parent is { Kind: OperationKindEx.SimpleAssignment } parent && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == operation.Instance;
+                    return isGetAccesor ^ isWrite;
+                }
+
+                return false;
+
+                static ISymbol MemberSymbol(IOperation operation) =>
+                    operation.Kind switch
+                    {
+                        OperationKindEx.PropertyReference
+                            when IPropertyReferenceOperationWrapper.FromOperation(operation) is var propertyReference && InstanceReferencesThis(propertyReference.Instance) =>
+                            propertyReference.Property,
+                        OperationKindEx.Invocation
+                            when IInvocationOperationWrapper.FromOperation(operation) is var invocation && (!invocation.IsVirtual || InstanceReferencesThis(invocation.Instance)) =>
+                            invocation.TargetMethod,
+                        OperationKindEx.Binary => IBinaryOperationWrapper.FromOperation(operation).OperatorMethod,
+                        OperationKindEx.Decrement => IIncrementOrDecrementOperationWrapper.FromOperation(operation).OperatorMethod,
+                        OperationKindEx.Increment => IIncrementOrDecrementOperationWrapper.FromOperation(operation).OperatorMethod,
+                        OperationKindEx.Unary => IUnaryOperationWrapper.FromOperation(operation).OperatorMethod,
+                        OperationKindEx.Conversion => IConversionOperationWrapper.FromOperation(operation).OperatorMethod,
+                        OperationKindEx.EventReference => IEventReferenceOperationWrapper.FromOperation(operation).Member,
+                        _ => null
+                    };
+
+                static bool InstanceReferencesThis(IOperation instance) =>
+                    instance is null || instance.IsAnyKind(OperationKindEx.FlowCaptureReference, OperationKindEx.InstanceReference);
+            }
+
+            protected override bool IsInvalid(BasicBlock block) => false;
+
+            private bool CfgCanExit() =>
+                context.ControlFlowGraph.ExitBlock.IsReachable
+                || context.ControlFlowGraph.Blocks.Any(x => x.FallThroughSuccessor?.Semantics == ControlFlowBranchSemantics.Throw && x.IsReachable);
         }
     }
 }

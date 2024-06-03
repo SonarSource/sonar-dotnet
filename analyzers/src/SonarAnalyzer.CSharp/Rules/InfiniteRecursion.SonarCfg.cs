@@ -132,7 +132,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 protected override bool HasReferenceToDeclaringSymbol(Block block) =>
                     block.Instructions.Any(x =>
                         x is InvocationExpressionSyntax invocation
-                        && IsInstructionOnThisAndMatchesDeclaringSymbol(invocation.Expression, context.AnalyzedSymbol, context.SemanticModel));
+                        && IsInstructionOnThisAndMatchesDeclaringSymbol(invocation.Expression, context.AnalyzedSymbol, context.Model));
             }
 
             private class RecursionSearcherForProperty : RecursionSearcher
@@ -149,7 +149,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     block.Instructions.Any(x =>
                         TypesForReference.Contains(x.GetType())
                         && MatchesAccessor(x)
-                        && IsInstructionOnThisAndMatchesDeclaringSymbol(x, context.AnalyzedSymbol, context.SemanticModel));
+                        && IsInstructionOnThisAndMatchesDeclaringSymbol(x, context.AnalyzedSymbol, context.Model));
 
                 private bool MatchesAccessor(SyntaxNode node)
                 {
