@@ -279,17 +279,25 @@ internal class Verifier
 
     private void ValidateCodeFix()
     {
-        _ = builder.CodeFixedPath ?? throw new ArgumentException($"{nameof(builder.CodeFixedPath)} was not set.");
         ValidateSingleAnalyzer(nameof(builder.CodeFix));
-        if (builder.Paths.Length != 1)
+        switch (builder)
         {
-            throw new ArgumentException($"{nameof(builder.Paths)} must contain only 1 file, but {builder.Paths.Length} were found.");
+            case { Paths.Length: > 1 }:
+                throw new ArgumentException($"{nameof(builder.Paths)} must contain only 1 file, but {builder.Paths.Length} were found.");
+            case { Snippets.Length: > 1 }:
+                throw new ArgumentException($"{nameof(builder.Snippets)} must contain only 1 snippet, but {builder.Snippets.Length} were found.");
+            case { Paths.Length: 1, Snippets.Length: 1 }:
+                throw new ArgumentException($"Either {nameof(builder.Paths)} or {nameof(builder.Snippets)} must be specified, but not both.");
+            case { Paths.Length: 0, Snippets.Length: 0 }:
+                throw new ArgumentException($"Either {nameof(builder.Paths)} or {nameof(builder.Snippets)} must contain a single item, but both were empty.");
+            case { CodeFixedPath: null, CodeFixed: null }:
+                throw new ArgumentException($"Either {nameof(builder.CodeFixedPath)} or {nameof(builder.CodeFixed)} must be specified.");
+            case { CodeFixedPath: not null, CodeFixed: not null }:
+                throw new ArgumentException($"Either {nameof(builder.CodeFixedPath)} or {nameof(builder.CodeFixed)} must be specified, but not both.");
+            case { CodeFixedPath: { } codeFixPath}:
+                ValidateExtension(codeFixPath);
+                break;
         }
-        if (builder.Snippets.Any())
-        {
-            throw new ArgumentException($"{nameof(builder.Snippets)} must be empty when {nameof(builder.CodeFix)} is set.");
-        }
-        ValidateExtension(builder.CodeFixedPath);
         if (builder.CodeFixedPathBatch is not null)
         {
             ValidateExtension(builder.CodeFixedPathBatch);

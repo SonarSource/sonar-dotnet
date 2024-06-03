@@ -33,7 +33,7 @@ public class CodeFixProviderSnippetTest
     [TestMethod]
     public void VerifyCodeFix_Snippet()
     {
-        var verifier = new VerifierBuilder()
+        var verifier = new VerifierBuilder
         {
             Analyzers = [() => new TestRule([SyntaxKind.ClassDeclaration])],
             CodeFix = () => new TestRuleCodeFix(async (document, node) =>
