@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules
                         && CanBeChanged(parent, c.SemanticModel))
                     {
                         var valueText = baseCount == 0 ? parametersCount.ToString() : $"{parametersCount - baseCount} new";
-                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], c.Node.GetLocation(), UserFriendlyNameForNode(c.Node.Parent), valueText, Maximum));
+                        c.ReportIssue(SupportedDiagnostics[0], c.Node, UserFriendlyNameForNode(c.Node.Parent), valueText, Maximum.ToString());
                     }
                 },
                 Language.SyntaxKind.ParameterList);

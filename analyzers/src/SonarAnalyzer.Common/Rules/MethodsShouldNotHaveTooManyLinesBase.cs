@@ -61,13 +61,13 @@ namespace SonarAnalyzer.Rules
 
                         if (!string.IsNullOrEmpty(identifierToken?.ValueText))
                         {
-                            c.ReportIssue(Diagnostic.Create(
+                            c.ReportIssue(
                                 SupportedDiagnostics[0],
-                                identifierToken.Value.GetLocation(),
+                                identifierToken.Value,
                                 GetMethodKindAndName(identifierToken.Value),
-                                linesCount,
-                                Max,
-                                MethodKeyword));
+                                linesCount.ToString(),
+                                Max.ToString(),
+                                MethodKeyword);
                         }
                     }
                 },

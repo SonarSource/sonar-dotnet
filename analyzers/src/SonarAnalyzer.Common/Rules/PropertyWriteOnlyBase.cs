@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules
                     var prop = (TPropertyDeclaration)c.Node;
                     if (IsWriteOnlyProperty(prop) && Language.Syntax.NodeIdentifier(prop) is { }  identifier)
                     {
-                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], identifier.GetLocation(), identifier.ValueText));
+                        c.ReportIssue(SupportedDiagnostics[0], identifier, identifier.ValueText);
                     }
                 },
                 SyntaxKind);

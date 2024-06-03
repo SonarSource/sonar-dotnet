@@ -255,7 +255,7 @@ namespace SonarAnalyzer.Rules
                         && GetAssignedValue(declarator, context.SemanticModel) is { } variableValue
                         && analyzer.IssueMessage(GetVariableName(declarator), variableValue) is { } message)
                     {
-                        context.ReportIssue(Diagnostic.Create(analyzer.rule, declarator.GetLocation(), message));
+                        context.ReportIssue(analyzer.rule, declarator, message);
                     }
                 };
         }

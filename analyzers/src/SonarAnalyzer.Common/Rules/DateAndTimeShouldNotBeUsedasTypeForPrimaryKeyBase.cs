@@ -50,7 +50,7 @@ public abstract class DateAndTimeShouldNotBeUsedasTypeForPrimaryKeyBase<TSyntaxK
                 {
                     foreach (var propertyType in TypeNodesOfTemporalKeyProperties(nodeContext))
                     {
-                        nodeContext.ReportIssue(Diagnostic.Create(Rule, propertyType.GetLocation(), Language.Syntax.NodeIdentifier(propertyType)));
+                        nodeContext.ReportIssue(Rule, propertyType, Language.Syntax.NodeIdentifier(propertyType)?.ValueText);
                     }
                 }, Language.SyntaxKind.ClassDeclaration);
             }
