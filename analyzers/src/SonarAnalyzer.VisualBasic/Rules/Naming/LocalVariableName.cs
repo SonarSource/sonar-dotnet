@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 return;
             }
 
-            context.ReportIssue(rule, controlVar, Pattern.ToString());
+            context.ReportIssue(rule, controlVar, Pattern);
         }
 
         private void ProcessVariableDeclarator(SonarSyntaxNodeReportingContext context)
