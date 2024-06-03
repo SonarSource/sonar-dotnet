@@ -54,10 +54,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 if (IsImplicitReturnValue(node))
                 {
-                    context.ReportIssue(Diagnostic.Create(Rule, node.GetLocation(),
+                    context.ReportIssue(Rule, node,
                         IsAssignmentStatement(node)
                         ? UseReturnStatementMessage
-                        : DontUseImplicitMessage));
+                        : DontUseImplicitMessage);
                 }
             }
 

@@ -43,8 +43,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var statementsCount = caseBlock.Statements.SelectMany(GetInnerStatements).Count();
                     if (statementsCount > Threshold)
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, caseBlock.CaseStatement.GetLocation(),
-                            "'Case' block", statementsCount, Threshold, "procedure"));
+                        c.ReportIssue(rule, caseBlock.CaseStatement,
+                            "'Case' block", statementsCount.ToString(), Threshold.ToString(), "procedure");
                     }
                 },
                 SyntaxKind.CaseBlock,

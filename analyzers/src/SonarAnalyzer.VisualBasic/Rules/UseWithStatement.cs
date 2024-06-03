@@ -107,8 +107,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
             if (matchCount >= MinimumSeriesLength)
             {
                 var nextStatementCount = matchCount - 1;
-                context.ReportIssue(Diagnostic.Create(rule, executableStatement.GetLocation(),
-                    nextStatementCount, expression.ToString(), nextStatementCount == 1 ? string.Empty : "s"));
+                context.ReportIssue(rule, executableStatement,
+                    nextStatementCount.ToString(), expression.ToString(), nextStatementCount == 1 ? string.Empty : "s");
                 return true;
             }
 

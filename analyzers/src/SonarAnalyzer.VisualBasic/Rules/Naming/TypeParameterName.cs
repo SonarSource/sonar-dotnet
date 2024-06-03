@@ -47,8 +47,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     if (!NamingHelper.IsRegexMatch(typeParameter.Identifier.ValueText, Pattern))
                     {
                         var location = typeParameter.Identifier.GetLocation();
-                        c.ReportIssue(Diagnostic.Create(S119, location, typeParameter.Identifier.ValueText, Pattern));
-                        c.ReportIssue(Diagnostic.Create(S2373, location, typeParameter.Identifier.ValueText, Pattern));
+                        c.ReportIssue(S119, location, typeParameter.Identifier.ValueText, Pattern);
+                        c.ReportIssue(S2373, location, typeParameter.Identifier.ValueText, Pattern);
                     }
                 },
                 SyntaxKind.TypeParameter);
