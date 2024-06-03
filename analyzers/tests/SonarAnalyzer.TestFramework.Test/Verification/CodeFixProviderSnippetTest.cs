@@ -92,11 +92,12 @@ public class CodeFixProviderSnippetTest
         {
             CreateChangedDocument = createChangedDocument;
         }
+
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
-            context.RegisterCodeFix("TestTitle", async c => await CreateChangedDocument(
+            context.RegisterCodeFix("TestTitle", async x => await CreateChangedDocument(
                 context.Document,
-                (await context.Document.GetSyntaxRootAsync(c)).FindNode(context.Span)),
+                (await context.Document.GetSyntaxRootAsync(x)).FindNode(context.Span)),
                 context.Diagnostics);
             return Task.CompletedTask;
         }
