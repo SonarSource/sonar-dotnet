@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            context.ReportIssue(Rule, memberCall.OperatorToken, MessageGetType);
+            context.ReportIssue(Rule, memberCall.OperatorToken.CreateLocation(invocation), MessageGetType);
         }
 
         private static bool IsException(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel) =>
