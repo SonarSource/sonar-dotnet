@@ -73,7 +73,7 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
                             || (Language.FindConstantValue(cc.SemanticModel, arguments.First()) is long ticks && ticks == EpochTicks))
                         && CheckAndGetTypeName(cc.Node, cc.SemanticModel) is { } typeName)
                     {
-                        cc.ReportIssue(Rule, cc.Node.GetLocation(), typeName);
+                        cc.ReportIssue(Rule, cc.Node, typeName);
                     }
                 },
                 Language.SyntaxKind.ObjectCreationExpressions);
