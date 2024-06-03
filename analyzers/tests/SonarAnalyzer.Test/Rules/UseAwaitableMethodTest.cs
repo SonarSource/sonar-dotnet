@@ -152,13 +152,5 @@ public class UseAwaitableMethodTest
         .AddReferences(NuGetMetadataReference.MongoDBDriver())
         .AddPaths("UseAwaitableMethod_MongoDBDriver.cs")
         .VerifyNoIssues();
-
-    [TestMethod]
-    public void UseAwaitableMethod_Fix() =>
-        builder
-        .WithOptions(ParseOptionsHelper.FromCSharp11)
-        .AddReferences(NuGetMetadataReference.MongoDBDriver())
-        .AddPaths("UseAwaitableMethod_MongoDBDriver.cs")
-        .VerifyNoIssues();
 #endif
 }
