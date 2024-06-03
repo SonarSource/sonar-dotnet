@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules
 
                     if (ifBlocksStatements.All(ifStatements => AreEquivalent(ifStatements, elseStatements)))
                     {
-                        context.ReportIssue(rule, topLevelIf, StatementsMessage);
+                        context.ReportIssue(rule, GetLocation(topLevelIf), StatementsMessage);
                     }
                 };
 
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.Rules
                         HasDefaultLabel(switchStatement) &&
                         sections.Skip(1).All(section => AreEquivalent(section, sections[0])))
                     {
-                        context.ReportIssue(rule, switchStatement, StatementsMessage);
+                        context.ReportIssue(rule, GetLocation(switchStatement), StatementsMessage);
                     }
                 };
         }
