@@ -30,18 +30,12 @@ public partial class InfiniteRecursion
         public void CheckForNoExitProperty(SonarSyntaxNodeReportingContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol) =>
             CheckForNoExit(c,
                 propertySymbol,
-                property.ExpressionBody,
-                property.AccessorList,
-                property.Identifier.GetLocation(),
                 "property's recursion",
                 "property accessor's recursion");
 
         public void CheckForNoExitIndexer(SonarSyntaxNodeReportingContext c, IndexerDeclarationSyntax indexer, IPropertySymbol propertySymbol) =>
             CheckForNoExit(c,
                 propertySymbol,
-                indexer.ExpressionBody,
-                indexer.AccessorList,
-                indexer.ThisKeyword.GetLocation(),
                 "indexer's recursion",
                 "indexer accessor's recursion");
 
@@ -71,12 +65,26 @@ public partial class InfiniteRecursion
 
         private static void CheckForNoExit(SonarSyntaxNodeReportingContext c,
                                    IPropertySymbol propertySymbol,
-                                   ArrowExpressionClauseSyntax expressionBody,
-                                   AccessorListSyntax accessorList,
-                                   Location location,
                                    string arrowExpressionMessageArg,
                                    string accessorMessageArg)
         {
+            ArrowExpressionClauseSyntax expressionBody = null;
+            AccessorListSyntax accessorList = null;
+            Location location = null;
+
+            if (c.Node is PropertyDeclarationSyntax propertyDeclaration)
+            {
+                expressionBody = propertyDeclaration.ExpressionBody;
+                accessorList = propertyDeclaration.AccessorList;
+                location = propertyDeclaration.Identifier.GetLocation();
+            }
+            else if (c.Node is IndexerDeclarationSyntax indexerDeclaration)
+            {
+                expressionBody = indexerDeclaration.ExpressionBody;
+                accessorList = indexerDeclaration.AccessorList;
+                location = indexerDeclaration.ThisKeyword.GetLocation();
+            }
+
             if (expressionBody?.Expression is not null)
             {
                 var cfg = ControlFlowGraph.Create(expressionBody, c.SemanticModel, c.Cancel);

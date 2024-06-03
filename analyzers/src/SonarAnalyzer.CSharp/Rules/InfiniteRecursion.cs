@@ -74,10 +74,7 @@ public partial class InfiniteRecursion : SonarDiagnosticAnalyzer
             c =>
             {
                 var property = (PropertyDeclarationSyntax)c.Node;
-                if (c.SemanticModel.GetDeclaredSymbol(property) is { } propertySymbol)
-                {
-                    checker.CheckForNoExitProperty(c, property, propertySymbol);
-                }
+                checker.CheckForNoExitProperty(c, property, c.SemanticModel.GetDeclaredSymbol(property));
             },
             SyntaxKind.PropertyDeclaration);
 
@@ -85,10 +82,7 @@ public partial class InfiniteRecursion : SonarDiagnosticAnalyzer
             c =>
             {
                 var indexer = (IndexerDeclarationSyntax)c.Node;
-                if (c.SemanticModel.GetDeclaredSymbol(indexer) is { } indexerSymbol)
-                {
-                    checker.CheckForNoExitIndexer(c, indexer, indexerSymbol);
-                }
+                checker.CheckForNoExitIndexer(c, indexer, c.SemanticModel.GetDeclaredSymbol(indexer));
             },
             SyntaxKind.IndexerDeclaration);
 
@@ -96,10 +90,7 @@ public partial class InfiniteRecursion : SonarDiagnosticAnalyzer
             c =>
             {
                 var eventDeclaration = (EventDeclarationSyntax)c.Node;
-                if (c.SemanticModel.GetDeclaredSymbol(eventDeclaration) is { } eventSymbol)
-                {
-                    checker.CheckForNoExitEvent(c, eventDeclaration, eventSymbol);
-                }
+                checker.CheckForNoExitEvent(c, eventDeclaration, c.SemanticModel.GetDeclaredSymbol(eventDeclaration));
             },
             SyntaxKind.EventDeclaration);
     }
