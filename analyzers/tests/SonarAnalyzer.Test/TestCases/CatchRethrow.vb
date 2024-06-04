@@ -58,7 +58,7 @@ Namespace Tests.TestCases
 
             Try
                 doSomething()
-            Catch exc As ArgumentException When True 'Noncompliant
+            Catch exc As ArgumentException When True
                 Throw
             End Try
 
@@ -110,7 +110,7 @@ Namespace Tests.TestCases
         Public Sub CatchWithFilter()
             Try
                 SomeMethod()
-            Catch ex As Exception When LogException(ex)  ' Noncompliant - FP
+            Catch ex As Exception When LogException(ex)
                 Throw
             End Try
         End Sub

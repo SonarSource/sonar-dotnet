@@ -56,7 +56,7 @@ public abstract class CatchRethrowBase<TSyntaxKind, TCatchClause> : SonarDiagnos
                         redundantCatches.Add(currentCatch);
                     }
                 }
-                else
+                else if (!HasFilter(currentCatch))
                 {
                     redundantCatches.Add(currentCatch);
                 }
