@@ -114,7 +114,7 @@ public sealed class UseConstantLoggingTemplate : SonarDiagnosticAnalyzer
 
     private static SyntaxNode InvalidSyntaxNode(SyntaxNode messageArgument, SemanticModel model) =>
         messageArgument.DescendantNodesAndSelf().FirstOrDefault(x =>
-            x.Kind() == SyntaxKind.InterpolatedStringExpression
+            (x as InterpolatedStringExpressionSyntax is { } interpolatedString && !interpolatedString.HasConstantValue(model))
             || (x is BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AddExpression } concatenation && !AllMembersAreConstantStrings(concatenation, model))
             || IsStringFormatInvocation(x, model));
 
