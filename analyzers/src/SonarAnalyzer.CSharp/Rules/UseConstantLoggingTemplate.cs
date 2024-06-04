@@ -94,7 +94,7 @@ public sealed class UseConstantLoggingTemplate : SonarDiagnosticAnalyzer
                 && ArgumentValue(invocation, method, messageParameter) is { } argumentValue
                 && InvalidSyntaxNode(argumentValue, c.SemanticModel) is { } invalidNode)
             {
-                c.ReportIssue(Diagnostic.Create(Rule, invalidNode.GetLocation(), Messages[invalidNode.Kind()]));
+                c.ReportIssue(Rule, invalidNode.GetLocation(), Messages[invalidNode.Kind()]);
             }
         },
         SyntaxKind.InvocationExpression);
