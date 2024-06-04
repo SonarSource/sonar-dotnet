@@ -124,3 +124,22 @@ class Other
         o = generic is Bar;
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9374
+namespace Repro_9374
+{
+    public abstract class Result<TData> { }
+
+    public interface IFailure { }
+
+    public class Error<TData> : Result<TData>, IFailure { }
+
+    public class Test
+    {
+        public void TestMethod()
+        {
+            Result<string> error = new Error<string>();
+            var castedError = (IFailure)error;              // Noncompliant - FP
+        }
+    }
+}
