@@ -128,12 +128,6 @@
     },
     {
       "Id": "S2325",
-      "Message": "Make \u0027TryParse\u0027 a static method.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/ExtendingPartial.cs#L25",
-      "Location": "Line 25 Position 27-35"
-    },
-    {
-      "Id": "S2325",
       "Message": "Make \u0027Method\u0027 a static method.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/ExtensionGetEnumerator.cs#L20",
       "Location": "Line 20 Position 17-23"
@@ -287,18 +281,6 @@
       "Message": "Make \u0027Foo\u0027 a static method.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3247.cs#L10",
       "Location": "Line 10 Position 17-20"
-    },
-    {
-      "Id": "S2325",
-      "Message": "Make \u0027M11\u0027 a static method.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3251.Part2.cs#L22",
-      "Location": "Line 22 Position 24-27"
-    },
-    {
-      "Id": "S2325",
-      "Message": "Make \u0027M12\u0027 a static method.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3251.Part2.cs#L27",
-      "Location": "Line 27 Position 25-28"
     },
     {
       "Id": "S2325",

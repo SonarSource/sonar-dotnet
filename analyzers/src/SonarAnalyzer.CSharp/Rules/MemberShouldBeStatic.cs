@@ -81,7 +81,8 @@ namespace SonarAnalyzer.Rules.CSharp
             where TDeclarationSyntax : MemberDeclarationSyntax
         {
             var declaration = (TDeclarationSyntax)context.Node;
-            if (IsEmptyMethod(declaration))
+            if (IsEmptyMethod(declaration)
+                || CSharpFacade.Instance.Syntax.ModifierKinds(declaration).Contains(SyntaxKind.PartialKeyword))
             {
                 return;
             }
@@ -200,7 +201,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             // Checking for primary constructor parameters
             static bool IsConstructorParameter(ISymbol symbol) =>
-                symbol is IParameterSymbol {  ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.Constructor } };
+                symbol is IParameterSymbol { ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.Constructor } };
         }
     }
 }
