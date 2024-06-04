@@ -21,24 +21,23 @@
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class CatchRethrow : CatchRethrowBase<CatchBlockSyntax>
+    public sealed class CatchRethrow : CatchRethrowBase<SyntaxKind, CatchBlockSyntax>
     {
-        private static readonly SyntaxList<StatementSyntax> ThrowBlock = new SyntaxList<StatementSyntax>().Add(SyntaxFactory.ThrowStatement());
+        private static readonly SyntaxList<ThrowStatementSyntax> ThrowBlock = SyntaxFactory.List([SyntaxFactory.ThrowStatement()]);
 
-        protected override DiagnosticDescriptor Rule { get; } =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         protected override bool ContainsOnlyThrow(CatchBlockSyntax currentCatch) =>
             VisualBasicEquivalenceChecker.AreEquivalent(currentCatch.Statements, ThrowBlock);
 
-        protected override IReadOnlyList<CatchBlockSyntax> GetCatches(SyntaxNode syntaxNode) =>
-            ((TryBlockSyntax)syntaxNode).CatchBlocks;
+        protected override CatchBlockSyntax[] AllCatches(SyntaxNode node) =>
+            ((TryBlockSyntax)node).CatchBlocks.ToArray();
 
-        protected override SyntaxNode GetDeclarationType(CatchBlockSyntax catchClause) =>
+        protected override SyntaxNode DeclarationType(CatchBlockSyntax catchClause) =>
             catchClause.CatchStatement?.AsClause?.Type;
 
         protected override bool HasFilter(CatchBlockSyntax catchClause) =>
-            catchClause.CatchStatement?.WhenClause != null;
+            catchClause.CatchStatement?.WhenClause is not null;
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(RaiseOnInvalidCatch, SyntaxKind.TryBlock);

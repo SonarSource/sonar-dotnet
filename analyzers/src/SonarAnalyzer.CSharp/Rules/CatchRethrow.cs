@@ -21,24 +21,23 @@
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class CatchRethrow : CatchRethrowBase<CatchClauseSyntax>
+    public sealed class CatchRethrow : CatchRethrowBase<SyntaxKind, CatchClauseSyntax>
     {
         private static readonly BlockSyntax ThrowBlock = SyntaxFactory.Block(SyntaxFactory.ThrowStatement());
 
-        protected override DiagnosticDescriptor Rule { get; } =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override bool ContainsOnlyThrow(CatchClauseSyntax currentCatch) =>
             CSharpEquivalenceChecker.AreEquivalent(currentCatch.Block, ThrowBlock);
 
-        protected override IReadOnlyList<CatchClauseSyntax> GetCatches(SyntaxNode syntaxNode) =>
-            ((TryStatementSyntax)syntaxNode).Catches;
+        protected override CatchClauseSyntax[] AllCatches(SyntaxNode node) =>
+            ((TryStatementSyntax)node).Catches.ToArray();
 
-        protected override SyntaxNode GetDeclarationType(CatchClauseSyntax catchClause) =>
+        protected override SyntaxNode DeclarationType(CatchClauseSyntax catchClause) =>
             catchClause.Declaration?.Type;
 
         protected override bool HasFilter(CatchClauseSyntax catchClause) =>
-            catchClause.Filter != null;
+            catchClause.Filter is not null;
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(RaiseOnInvalidCatch, SyntaxKind.TryStatement);
