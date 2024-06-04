@@ -307,4 +307,25 @@ namespace Tests.Diagnostics
             return new PropertyInitialization { Prop = 42 };
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/8025
+    partial class PartialClass
+    {
+        public void WriteEverything()
+        {
+            Console.WriteLine("Something");
+
+            WriteMore();
+        }
+
+        partial void WriteMore();
+    }
+
+    partial class PartialClass
+    {
+        partial void WriteMore() // Noncompliant - FP
+        {
+            Console.WriteLine("More");
+        }
+    }
 }
