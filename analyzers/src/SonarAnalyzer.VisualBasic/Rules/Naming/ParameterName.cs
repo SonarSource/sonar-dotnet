@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Reflection;
+
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
@@ -37,11 +39,33 @@ public sealed class ParameterName : ParametrizedDiagnosticAnalyzer
         context.RegisterNodeAction(
             c =>
             {
-                var parameterDeclaration = (ParameterSyntax)c.Node;
-                if (parameterDeclaration.Identifier is not null && !NamingHelper.IsRegexMatch(parameterDeclaration.Identifier.Identifier.ValueText, Pattern))
+                var parameter = (ParameterSyntax)c.Node;
+                if (parameter.Identifier is not null
+                    && !HasPredefinedName(parameter)
+                    && !NamingHelper.IsRegexMatch(parameter.Identifier.Identifier.ValueText, Pattern))
                 {
-                    c.ReportIssue(Rule, parameterDeclaration.Identifier.Identifier, Pattern);
+                    c.ReportIssue(Rule, parameter.Identifier.Identifier, Pattern);
                 }
             },
             SyntaxKind.Parameter);
+
+    private static bool HasPredefinedName(SyntaxNode node)
+    {
+        while (node is not null)
+        {
+            if (node is MethodStatementSyntax method)
+            {
+                return method.Modifiers.Any(SyntaxKind.OverridesKeyword) || method.ImplementsClause is not null || method.HandlesClause is not null;
+            }
+            else if (node is PropertyStatementSyntax property)
+            {
+                return property.Modifiers.Any(SyntaxKind.OverridesKeyword) || property.ImplementsClause is not null;
+            }
+            else
+            {
+                node = node.Parent;
+            }
+        }
+        return false;
+    }
 }
