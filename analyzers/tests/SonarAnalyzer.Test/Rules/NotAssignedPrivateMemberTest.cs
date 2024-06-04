@@ -21,37 +21,37 @@
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class NotAssignedPrivateMemberTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<NotAssignedPrivateMember>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void NotAssignedPrivateMember() =>
-            builder.AddPaths("NotAssignedPrivateMember.cs").Verify();
+[TestClass]
+public class NotAssignedPrivateMemberTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<NotAssignedPrivateMember>();
+
+    [TestMethod]
+    public void NotAssignedPrivateMember() =>
+        builder.AddPaths("NotAssignedPrivateMember.cs").Verify();
 
 #if NET
-        [TestMethod]
-        public void NotAssignedPrivateMember_CSharp9() =>
-            builder.AddPaths("NotAssignedPrivateMember.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+    [TestMethod]
+    public void NotAssignedPrivateMember_CSharp9() =>
+        builder.AddPaths("NotAssignedPrivateMember.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 #endif
 
-        [TestMethod]
-        public void NotAssignedPrivateMember_IndexingMovableFixedBuffer() =>
-            builder.AddSnippet(@"
-unsafe struct FixedArray
-{
-    private fixed int a[42]; // Compliant, because of the fixed modifier
+    [TestMethod]
+    public void NotAssignedPrivateMember_IndexingMovableFixedBuffer() =>
+        builder.AddSnippet("""
+            unsafe struct FixedArray
+            {
+                private fixed int a[42]; // Compliant, because of the fixed modifier
 
-    private int[] b; // Noncompliant
+                private int[] b; // Noncompliant
 
-    void M()
-    {
-        a[0] = 42;
-        b[0] = 42;
-    }
-}").WithLanguageVersion(LanguageVersion.CSharp7_3).Verify();
-    }
+                void M()
+                {
+                    a[0] = 42;
+                    b[0] = 42;
+                }
+            }
+            """).WithLanguageVersion(LanguageVersion.CSharp7_3).Verify();
 }
