@@ -184,7 +184,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (PreOrPostfixOpSyntaxKinds.Contains(parentNode.Kind())
                     || (parentNode is AssignmentExpressionSyntax assignment && assignment.Left == node)
-                    || (parentNode is ArgumentSyntax argument && (!argument.RefOrOutKeyword.IsKind(SyntaxKind.None) || TupleExpressionSyntaxWrapper.IsInstance(argument.Parent))))
+                    || (parentNode is ArgumentSyntax argument && (!argument.RefOrOutKeyword.IsKind(SyntaxKind.None) || TupleExpressionSyntaxWrapper.IsInstance(argument.Parent)))
+                    || RefExpressionSyntaxWrapper.IsInstance(parentNode))
                 {
                     assignedMembers.Add(memberSymbol);
                     assignedMembers.Add(memberSymbol.OriginalDefinition);
