@@ -40,10 +40,10 @@ namespace SonarAnalyzer.Rules.CSharp
             ? ((CompilationUnitSyntax)node).GetMethodDeclarations()
             : ((TypeDeclarationSyntax)node).GetMethodDeclarations();
 
-        protected override bool AreDuplicates(IMethodDeclaration firstMethod, IMethodDeclaration secondMethod) =>
+        protected override bool AreDuplicates(SemanticModel model, IMethodDeclaration firstMethod, IMethodDeclaration secondMethod) =>
             firstMethod is { Body: { Statements: { Count: > 1 } } }
             && firstMethod.Identifier.ValueText != secondMethod.Identifier.ValueText
-            && HaveSameParameters<ParameterSyntax>(firstMethod.ParameterList.Parameters, secondMethod.ParameterList.Parameters)
+            && HaveSameParameters<ParameterSyntax>(model, firstMethod.ParameterList.Parameters, secondMethod.ParameterList.Parameters)
             && firstMethod.Body.IsEquivalentTo(secondMethod.Body, false);
 
         protected override SyntaxToken GetMethodIdentifier(IMethodDeclaration method) =>

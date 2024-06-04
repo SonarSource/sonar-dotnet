@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract IEnumerable<TMethodDeclarationSyntax> GetMethodDeclarations(SyntaxNode node);
         protected abstract SyntaxToken GetMethodIdentifier(TMethodDeclarationSyntax method);
-        protected abstract bool AreDuplicates(TMethodDeclarationSyntax firstMethod, TMethodDeclarationSyntax secondMethod);
+        protected abstract bool AreDuplicates(SemanticModel model, TMethodDeclarationSyntax firstMethod, TMethodDeclarationSyntax secondMethod);
 
         protected override string MessageFormat => "Update this method so that its implementation is not identical to '{0}'.";
 
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules
                     {
                         var method = methodsToHandle.First.Value;
                         methodsToHandle.RemoveFirst();
-                        var duplicates = methodsToHandle.Where(x => AreDuplicates(method, x)).ToList();
+                        var duplicates = methodsToHandle.Where(x => AreDuplicates(c.SemanticModel, method, x)).ToList();
 
                         foreach (var duplicate in duplicates)
                         {
@@ -64,12 +64,19 @@ namespace SonarAnalyzer.Rules
         protected virtual bool IsExcludedFromBeingExamined(SonarSyntaxNodeReportingContext context) =>
             context.ContainingSymbol.Kind != SymbolKind.NamedType;
 
-        protected static bool HaveSameParameters<TSyntax>(SeparatedSyntaxList<TSyntax>? leftParameters, SeparatedSyntaxList<TSyntax>? rightParameters)
+        protected static bool HaveSameParameters<TSyntax>(SemanticModel model, SeparatedSyntaxList<TSyntax>? leftParameters, SeparatedSyntaxList<TSyntax>? rightParameters)
             where TSyntax : SyntaxNode =>
-            (leftParameters == null && rightParameters == null)
-            || (leftParameters != null
-                && rightParameters != null
+            (leftParameters is null && rightParameters is null)
+            || (leftParameters is not null
+                && rightParameters is not null
                 && leftParameters.Value.Count == rightParameters.Value.Count
-                && leftParameters.Value.Select((left, index) => left.IsEquivalentTo(rightParameters.Value[index])).All(x => x));
+                && (leftParameters.Value.Count == 0
+                    || (leftParameters.Value.Zip(rightParameters.Value, (left, right) => left.IsEquivalentTo(right)).All(x => x)
+                        && leftParameters.Value.Zip(rightParameters.Value, (left, right) => HaveSameParameterType(model, left, right)).Any(x => x))));
+
+        private static bool HaveSameParameterType(SemanticModel model, SyntaxNode left, SyntaxNode right) =>
+            model.GetDeclaredSymbol(left) is IParameterSymbol { Type: { } leftParameterType }
+            && model.GetDeclaredSymbol(right) is IParameterSymbol { Type: { } rightParameterType }
+            && leftParameterType.Equals(rightParameterType);
     }
 }

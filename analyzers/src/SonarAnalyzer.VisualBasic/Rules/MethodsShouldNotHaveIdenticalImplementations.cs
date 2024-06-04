@@ -30,10 +30,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override IEnumerable<MethodBlockSyntax> GetMethodDeclarations(SyntaxNode node) =>
             ((TypeBlockSyntax)node).Members.OfType<MethodBlockSyntax>();
 
-        protected override bool AreDuplicates(MethodBlockSyntax firstMethod, MethodBlockSyntax secondMethod) =>
+        protected override bool AreDuplicates(SemanticModel model, MethodBlockSyntax firstMethod, MethodBlockSyntax secondMethod) =>
             firstMethod.Statements.Count > 1
             && firstMethod.GetIdentifierText() != secondMethod.GetIdentifierText()
-            && HaveSameParameters(firstMethod.GetParameters(), secondMethod.GetParameters())
+            && HaveSameParameters(model, firstMethod.GetParameters(), secondMethod.GetParameters())
             && VisualBasicEquivalenceChecker.AreEquivalent(firstMethod.Statements, secondMethod.Statements);
 
         protected override SyntaxToken GetMethodIdentifier(MethodBlockSyntax method) =>
