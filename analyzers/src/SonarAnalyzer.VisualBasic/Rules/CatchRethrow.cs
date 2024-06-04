@@ -18,28 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.VisualBasic
+namespace SonarAnalyzer.Rules.VisualBasic;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class CatchRethrow : CatchRethrowBase<SyntaxKind, CatchBlockSyntax>
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class CatchRethrow : CatchRethrowBase<SyntaxKind, CatchBlockSyntax>
-    {
-        private static readonly SyntaxList<ThrowStatementSyntax> ThrowBlock = SyntaxFactory.List([SyntaxFactory.ThrowStatement()]);
+    private static readonly SyntaxList<ThrowStatementSyntax> ThrowBlock = SyntaxFactory.List([SyntaxFactory.ThrowStatement()]);
 
-        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override bool ContainsOnlyThrow(CatchBlockSyntax currentCatch) =>
-            VisualBasicEquivalenceChecker.AreEquivalent(currentCatch.Statements, ThrowBlock);
+    protected override bool ContainsOnlyThrow(CatchBlockSyntax currentCatch) =>
+        VisualBasicEquivalenceChecker.AreEquivalent(currentCatch.Statements, ThrowBlock);
 
-        protected override CatchBlockSyntax[] AllCatches(SyntaxNode node) =>
-            ((TryBlockSyntax)node).CatchBlocks.ToArray();
+    protected override CatchBlockSyntax[] AllCatches(SyntaxNode node) =>
+        ((TryBlockSyntax)node).CatchBlocks.ToArray();
 
-        protected override SyntaxNode DeclarationType(CatchBlockSyntax catchClause) =>
-            catchClause.CatchStatement?.AsClause?.Type;
+    protected override SyntaxNode DeclarationType(CatchBlockSyntax catchClause) =>
+        catchClause.CatchStatement?.AsClause?.Type;
 
-        protected override bool HasFilter(CatchBlockSyntax catchClause) =>
-            catchClause.CatchStatement?.WhenClause is not null;
+    protected override bool HasFilter(CatchBlockSyntax catchClause) =>
+        catchClause.CatchStatement?.WhenClause is not null;
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(RaiseOnInvalidCatch, SyntaxKind.TryBlock);
-    }
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(RaiseOnInvalidCatch, SyntaxKind.TryBlock);
 }

@@ -21,26 +21,25 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class CatchRethrowTest
 {
-    [TestClass]
-    public class CatchRethrowTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.CatchRethrow>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.CatchRethrow>();
 
-        [TestMethod]
-        public void CatchRethrow() =>
-            builderCS.AddPaths("CatchRethrow.cs").Verify();
+    [TestMethod]
+    public void CatchRethrow() =>
+        builderCS.AddPaths("CatchRethrow.cs").Verify();
 
-        [TestMethod]
-        public void CatchRethrow_CodeFix() =>
-            builderCS.AddPaths("CatchRethrow.cs")
-                .WithCodeFix<CS.CatchRethrowCodeFix>()
-                .WithCodeFixedPaths("CatchRethrow.Fixed.cs")
-                .VerifyCodeFix();
+    [TestMethod]
+    public void CatchRethrow_CodeFix() =>
+        builderCS.AddPaths("CatchRethrow.cs")
+            .WithCodeFix<CS.CatchRethrowCodeFix>()
+            .WithCodeFixedPaths("CatchRethrow.Fixed.cs")
+            .VerifyCodeFix();
 
-        [TestMethod]
-        public void CatchRethrow_VB() =>
-            new VerifierBuilder<VB.CatchRethrow>().AddPaths("CatchRethrow.vb").Verify();
-    }
+    [TestMethod]
+    public void CatchRethrow_VB() =>
+        new VerifierBuilder<VB.CatchRethrow>().AddPaths("CatchRethrow.vb").Verify();
 }
