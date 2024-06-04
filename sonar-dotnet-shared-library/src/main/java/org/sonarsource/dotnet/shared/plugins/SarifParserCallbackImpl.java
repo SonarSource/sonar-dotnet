@@ -155,8 +155,8 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
       return;
     }
 
-    InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates()
-      .hasAbsolutePath(primaryLocation.getAbsolutePath()));
+    var predicate = context.fileSystem().predicates().hasAbsolutePath(primaryLocation.getAbsolutePath());
+    var inputFile = context.fileSystem().inputFile(predicate);
     if (inputFile == null) {
       logMissingInputFile(ruleId, primaryLocation.getAbsolutePath());
       return;
