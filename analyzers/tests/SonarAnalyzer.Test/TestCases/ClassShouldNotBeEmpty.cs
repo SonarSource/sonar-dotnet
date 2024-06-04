@@ -131,7 +131,7 @@ namespace Ignore
     class SomeEvent { }                          // Compliant, ignored because of the suffix
     class SomeMessage { }                        // Compliant, ignored because of the suffix
     class Some_Command { }                       // Compliant, ignored because of the suffix
-    class SomeQuery { }                          // Noncompliant FP, should be ignored because of the suffix, Repro for https://github.com/SonarSource/sonar-dotnet/issues/9241
+    class SomeQuery { }                          // Compliant, ignored because of the suffix, https://github.com/SonarSource/sonar-dotnet/issues/9241
     class Someevent { }                          // Noncompliant
     class SOMEMESSAGE { }                        // Noncompliant
     class SomeCommandHandler { }                 // Noncompliant
@@ -139,7 +139,7 @@ namespace Ignore
     class Command { }                            // Compliant, ignored because of the suffix
     class Event { }                              // Compliant, ignored because of the suffix
     class Message { }                            // Compliant, ignored because of the suffix
-    class Query { }                              // Noncompliant FP, should be ignored because of the suffix
+    class Query { }                              // Compliant, ignored because of the suffix
 
 
     class AssemblyDoc { }                        // Compliant, used for DefaultDocumentation tool
