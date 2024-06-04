@@ -83,10 +83,10 @@ public class Tests implements BeforeAllCallback, AfterAllCallback {
   public static BuildResult analyzeProject(String projectKey, Path temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
     Path projectFullPath = TestUtils.projectDir(temp, projectDir);
 
-    return analyzeExitingProject(projectKey, projectFullPath, profileKey, keyValues);
+    return analyzeProjectPath(projectKey, projectFullPath, profileKey, keyValues);
   }
 
-  public static BuildResult analyzeExitingProject(String projectKey, Path projectFullPath, @Nullable String profileKey, String... keyValues) {
+  public static BuildResult analyzeProjectPath(String projectKey, Path projectFullPath, @Nullable String profileKey, String... keyValues) {
     ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectKey, projectFullPath)
       .setProfile(profileKey)
       .setProperties(keyValues);

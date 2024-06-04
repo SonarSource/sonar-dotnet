@@ -51,7 +51,7 @@ class SymbolicLinksTest {
     try {
       Files.createSymbolicLink(link, target);
 
-      var buildResult = Tests.analyzeExitingProject("SymbolicLinks", projectFullPath, null, "sonar.verbose", "true");
+      var buildResult = Tests.analyzeProjectPath("SymbolicLinks", projectFullPath, null, "sonar.verbose", "true");
 
       assertThat(buildResult.isSuccess()).isTrue();
 
