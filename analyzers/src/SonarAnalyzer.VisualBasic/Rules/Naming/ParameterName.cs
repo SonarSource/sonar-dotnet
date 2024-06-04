@@ -23,31 +23,25 @@ namespace SonarAnalyzer.Rules.VisualBasic;
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public sealed class ParameterName : ParametrizedDiagnosticAnalyzer
 {
-    internal const string DiagnosticId = "S1654";
+    private const string DiagnosticId = "S1654";
     private const string MessageFormat = "Rename this parameter to match the regular expression: '{0}'.";
 
-    private static readonly DiagnosticDescriptor rule =
-        DescriptorFactory.Create(DiagnosticId, MessageFormat,
-            isEnabledByDefault: false);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-    [RuleParameter("format", PropertyType.String,
-        "Regular expression used to check the parameter names against.", NamingHelper.CamelCasingPattern)]
+    [RuleParameter("format", PropertyType.String, "Regular expression used to check the parameter names against.", NamingHelper.CamelCasingPattern)]
     public string Pattern { get; set; } = NamingHelper.CamelCasingPattern;
 
-    protected override void Initialize(SonarParametrizedAnalysisContext context)
-    {
+    protected override void Initialize(SonarParametrizedAnalysisContext context) =>
         context.RegisterNodeAction(
             c =>
             {
                 var parameterDeclaration = (ParameterSyntax)c.Node;
-                if (parameterDeclaration.Identifier != null &&
-                    !NamingHelper.IsRegexMatch(parameterDeclaration.Identifier.Identifier.ValueText, Pattern))
+                if (parameterDeclaration.Identifier is not null && !NamingHelper.IsRegexMatch(parameterDeclaration.Identifier.Identifier.ValueText, Pattern))
                 {
-                    c.ReportIssue(Diagnostic.Create(rule, parameterDeclaration.Identifier.Identifier.GetLocation(), Pattern));
+                    c.ReportIssue(Rule, parameterDeclaration.Identifier.Identifier, Pattern);
                 }
             },
             SyntaxKind.Parameter);
-    }
 }

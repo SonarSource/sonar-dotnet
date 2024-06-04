@@ -28,4 +28,8 @@ public class ParameterNameTest
     [TestMethod]
     public void ParameterName() =>
         new VerifierBuilder<ParameterName>().AddPaths("ParameterName.vb").Verify();
+
+    [TestMethod]
+    public void ParameterName_CustomPattern() =>
+        new VerifierBuilder().AddAnalyzer(() => new ParameterName { Pattern = "^Prefix[A-Z].*" }).AddPaths("ParameterName.CustomPattern.vb").Verify();
 }
