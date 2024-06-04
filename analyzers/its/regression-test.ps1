@@ -180,40 +180,36 @@ function Show-DiffResults() {
     {
         Write-Host "Will find differences for all projects, all rules."
 
-        Write-Debug "Running 'git diff' between 'actual' and 'expected'."
-
-        Exec { & git diff --no-index --exit-code ./expected ./actual `
-        } -errorMessage $DifferencesMsg
-
-        return
+        Exec { & git diff --no-index --exit-code ./expected ./actual } -errorMessage $DifferencesMsg
     }
+    else
+    {
+        # do a partial diff
+        New-Item ".\diff" -Type Directory | out-null
+        New-Item ".\diff\actual" -Type Directory | out-null
+        New-Item ".\diff\expected" -Type Directory | out-null
 
-    # do a partial diff
-    New-Item ".\diff" -Type Directory | out-null
-    New-Item ".\diff\actual" -Type Directory | out-null
-    New-Item ".\diff\expected" -Type Directory | out-null
+        if (!$ruleId -And $project) {
+            Write-Host "Will find differences for '${project}', all rules."
 
-    if (!$ruleId -And $project) {
-        Write-Host "Will find differences for '${project}', all rules."
+            Copy-FolderRecursively -From ".\expected\${project}" -To .\diff\expected
+            Copy-FolderRecursively -From ".\actual\${project}"   -To .\diff\actual
 
-        Copy-FolderRecursively -From ".\expected\${project}" -To .\diff\expected
-        Copy-FolderRecursively -From ".\actual\${project}"   -To .\diff\actual
+        } elseif ($ruleId -And !$project) {
+            Write-Host "Will find differences for all projects, rule ${ruleId}."
 
-    } elseif ($ruleId -And !$project) {
-        Write-Host "Will find differences for all projects, rule ${ruleId}."
+            Copy-FolderRecursively -From .\expected -To .\diff\expected -Include "$*{ruleId}.json"
+            Copy-FolderRecursively -From .\actual   -To .\diff\actual   -Include "$*{ruleId}.json"
 
-        Copy-FolderRecursively -From .\expected -To .\diff\expected -Include "*${ruleId}.json"
-        Copy-FolderRecursively -From .\actual   -To .\diff\actual   -Include "*${ruleId}.json"
+        } else {
+            Write-Host "Will find differences for '${project}', rule ${ruleId}."
 
-    } else {
-        Write-Host "Will find differences for '${project}', rule ${ruleId}."
+            Copy-FolderRecursively -From ".\expected\${project}" -To .\diff\expected -Include "*${ruleId}.json"
+            Copy-FolderRecursively -From ".\actual\${project}"   -To .\diff\actual   -Include "*${ruleId}.json"
+        }
 
-        Copy-FolderRecursively -From ".\expected\${project}" -To .\diff\expected -Include "*${ruleId}.json"
-        Copy-FolderRecursively -From ".\actual\${project}"   -To .\diff\actual   -Include "*${ruleId}.json"
+        Exec { & git diff --no-index --exit-code .\diff\expected .\diff\actual } -errorMessage $DifferencesMsg
     }
-
-    Exec { & git diff --no-index --exit-code .\diff\expected .\diff\actual `
-    } -errorMessage $DifferencesMsg
 }
 
 function Invoke-JsonParser()
