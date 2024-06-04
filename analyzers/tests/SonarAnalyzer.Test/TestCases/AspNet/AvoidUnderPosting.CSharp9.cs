@@ -8,7 +8,7 @@ namespace CSharp9
     public record RecordModel(
         int ValueProperty,                                                         // Noncompliant
         [property: JsonRequired] int RequiredValueProperty,                        // Without the property prefix the attribute would have been applied to the constructor parameter instead
-        [Range(0, 2)] int RequiredValuePropertyWithoutPropertyPrefix,              // Noncompliant, FP see: https://github.com/SonarSource/sonar-dotnet/issues/9363
+        [Range(0, 2)] int RequiredValuePropertyWithoutPropertyPrefix,              // Noncompliant, FP the attribute is applied on the parameter and still works for the property see: https://github.com/SonarSource/sonar-dotnet/issues/9363
         int? NullableValueProperty,
         int PropertyWithDefaultValue = 42);
 
