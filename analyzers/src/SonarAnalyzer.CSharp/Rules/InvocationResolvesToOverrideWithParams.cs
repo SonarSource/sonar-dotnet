@@ -25,28 +25,21 @@ public sealed class InvocationResolvesToOverrideWithParams : SonarDiagnosticAnal
 {
     private const string DiagnosticId = "S3220";
     private const string MessageFormat = "Review this call, which partially matches an overload without 'params'. The partial match is '{0}'.";
-
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-    protected override void Initialize(SonarAnalysisContext context)
-    {
+    protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(
             c =>
             {
-                var invocation = (InvocationExpressionSyntax)c.Node;
-                CheckCall(c, invocation, invocation.ArgumentList);
+                var node = c.Node;
+                var argumentList = (node as InvocationExpressionSyntax)?.ArgumentList
+                                    ?? ((ObjectCreationExpressionSyntax)node).ArgumentList;
+                CheckCall(c, node, argumentList);
             },
-            SyntaxKind.InvocationExpression);
-
-        context.RegisterNodeAction(
-            c =>
-            {
-                var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
-                CheckCall(c, objectCreation, objectCreation.ArgumentList);
-            },
+            SyntaxKind.InvocationExpression,
             SyntaxKind.ObjectCreationExpression);
-    }
 
     private static void CheckCall(SonarSyntaxNodeReportingContext context, SyntaxNode node, ArgumentListSyntax argumentList)
     {
@@ -55,7 +48,7 @@ public sealed class InvocationResolvesToOverrideWithParams : SonarDiagnosticAnal
             && method.Parameters.LastOrDefault() is { IsParams: true }
             && !IsInvocationWithExplicitArray(argumentList, method, context.SemanticModel)
             && ArgumentTypes(context, argumentList) is var argumentTypes
-            && argumentTypes.All(x => x is not IErrorTypeSymbol)
+            && Array.TrueForAll(argumentTypes, x => x is not IErrorTypeSymbol)
             && OtherOverloadsOf(method).FirstOrDefault(IsPossibleMatch) is { } otherMethod
             && method.IsGenericMethod == otherMethod.IsGenericMethod)
         {
@@ -83,7 +76,7 @@ public sealed class InvocationResolvesToOverrideWithParams : SonarDiagnosticAnal
     {
         var lookup = new CSharpMethodParameterLookup(argumentList, invokedMethodSymbol);
         var parameters = argumentList.Arguments.Select(Valid).ToArray();
-        return parameters.All(x => x is not null) && parameters.Count(x => x.IsParams) == 1;
+        return Array.TrueForAll(parameters, x => x is not null) && parameters.Count(x => x.IsParams) == 1;
 
         IParameterSymbol Valid(ArgumentSyntax argument) =>
             lookup.TryGetSymbol(argument, out var parameter)
@@ -96,7 +89,7 @@ public sealed class InvocationResolvesToOverrideWithParams : SonarDiagnosticAnal
     {
         var lookup = new CSharpMethodParameterLookup(argumentList, possibleOtherMethod);
         var parameters = argumentList.Arguments.Select((argument, index) => Valid(argument, argumentTypes[index])).ToArray();
-        return parameters.All(x => x is not null) && possibleOtherMethod.Parameters.Except(parameters).All(x => x.HasExplicitDefaultValue);
+        return Array.TrueForAll(parameters, x => x is not null) && possibleOtherMethod.Parameters.Except(parameters).All(x => x.HasExplicitDefaultValue);
 
         IParameterSymbol Valid(ArgumentSyntax argument, ITypeSymbol type) =>
             lookup.TryGetSymbol(argument, out var parameter)
@@ -107,19 +100,18 @@ public sealed class InvocationResolvesToOverrideWithParams : SonarDiagnosticAnal
     }
 
     private static bool MethodAccessibleWithinType(IMethodSymbol method, ITypeSymbol type) =>
-        IsInTypeOrNested(method, type)
-        || method.DeclaredAccessibility switch
-            {
-                Accessibility.Private => false,
-                // ProtectedAndInternal corresponds to `private protected`.
-                Accessibility.ProtectedAndInternal => type.DerivesFrom(method.ContainingType) && method.IsInSameAssembly(type),
-                // ProtectedOrInternal corresponds to `protected internal`.
-                Accessibility.ProtectedOrInternal => type.DerivesFrom(method.ContainingType) || method.IsInSameAssembly(type),
-                Accessibility.Protected => type.DerivesFrom(method.ContainingType),
-                Accessibility.Internal => method.IsInSameAssembly(type),
-                Accessibility.Public => true,
-                _ => false,
-            };
+        IsInTypeOrNested(method, type) || method.DeclaredAccessibility switch
+        {
+            Accessibility.Private => false,
+            // ProtectedAndInternal corresponds to `private protected`.
+            Accessibility.ProtectedAndInternal => type.DerivesFrom(method.ContainingType) && method.IsInSameAssembly(type),
+            // ProtectedOrInternal corresponds to `protected internal`.
+            Accessibility.ProtectedOrInternal => type.DerivesFrom(method.ContainingType) || method.IsInSameAssembly(type),
+            Accessibility.Protected => type.DerivesFrom(method.ContainingType),
+            Accessibility.Internal => method.IsInSameAssembly(type),
+            Accessibility.Public => true,
+            _ => false,
+        };
 
     private static bool IsInTypeOrNested(IMethodSymbol method, ITypeSymbol type) =>
         type is not null && (method.IsInType(type) || IsInTypeOrNested(method, type.ContainingType));
