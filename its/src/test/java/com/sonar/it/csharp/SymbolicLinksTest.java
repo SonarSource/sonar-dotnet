@@ -22,10 +22,10 @@ package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
 import kotlin.io.FileSystemException;
-import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
+import org.opentest4j.TestAbortedException;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -42,11 +42,11 @@ class SymbolicLinksTest {
 
   @Test
   void should_supportS_symbolic_links() throws Exception {
-    var sampleComponent = "SymbolicLinks:SymbolicLinks/Sample.cs";
-    var linkedComponent = "SymbolicLinks:SymbolicLinks/Links/LinkedSample.cs";
+    var sampleComponent = "SymbolicLinks:Project/Sample.cs";
+    var linkedComponent = "SymbolicLinks:Project/LinkedFiles/LinkedSample.cs";
     var projectFullPath = TestUtils.projectDir(temp, "SymbolicLinks");
-    var link = projectFullPath.resolve("SymbolicLinks/Links").toAbsolutePath();
-    var target = projectFullPath.resolve("Links").toAbsolutePath();;
+    var link = projectFullPath.resolve("Project/LinkedFiles").toAbsolutePath();
+    var target = projectFullPath.resolve("LinkedFiles").toAbsolutePath();;
 
     try {
       Files.createSymbolicLink(link, target);
@@ -64,7 +64,7 @@ class SymbolicLinksTest {
       assertThat(buildResult.getLogs()).contains("Skipping issue S1135, input file not found or excluded: " + target.resolve("LinkedSample.cs").toAbsolutePath());
     }
     catch (FileSystemException exception) {
-      Assumptions.assumeTrue(false, "Symbolic links can be created only when running with administrator privileges.");
+      throw new TestAbortedException("Symbolic links can be created only when running with administrator privileges.");
     }
   }
 }

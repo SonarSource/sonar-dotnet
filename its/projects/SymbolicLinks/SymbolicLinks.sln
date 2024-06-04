@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SymbolicLinks", "SymbolicLinks\SymbolicLinks.csproj", "{0B0450F8-CC50-4101-AB14-11AFE5B71950}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project", "Project\Project.csproj", "{0B0450F8-CC50-4101-AB14-11AFE5B71950}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
