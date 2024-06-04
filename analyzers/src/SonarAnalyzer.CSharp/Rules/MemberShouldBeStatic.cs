@@ -56,11 +56,11 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterNodeAction(
-                c => CheckIssue<PropertyDeclarationSyntax>(c, GetPropertyDescendants, d => d.Identifier, x => false, "property"),
+                c => CheckIssue<PropertyDeclarationSyntax>(c, GetPropertyDescendants, d => d.Identifier, "property"),
                 SyntaxKind.PropertyDeclaration);
 
             context.RegisterNodeAction(
-                c => CheckIssue<MethodDeclarationSyntax>(c, GetMethodDescendants, d => d.Identifier, x => x.Modifiers.Any(x => x.Kind() is SyntaxKind.PartialKeyword), "method"),
+                c => CheckIssue<MethodDeclarationSyntax>(c, GetMethodDescendants, d => d.Identifier, "method"),
                 SyntaxKind.MethodDeclaration);
         }
 
@@ -77,13 +77,12 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckIssue<TDeclarationSyntax>(SonarSyntaxNodeReportingContext context,
                                                            Func<TDeclarationSyntax, IEnumerable<SyntaxNode>> getDescendants,
                                                            Func<TDeclarationSyntax, SyntaxToken> getIdentifier,
-                                                           Func<TDeclarationSyntax, bool> isPartial,
                                                            string memberKind)
             where TDeclarationSyntax : MemberDeclarationSyntax
         {
             var declaration = (TDeclarationSyntax)context.Node;
             if (IsEmptyMethod(declaration)
-                || isPartial(declaration))
+                || CSharpFacade.Instance.Syntax.ModifierKinds(declaration).Contains(SyntaxKind.PartialKeyword))
             {
                 return;
             }

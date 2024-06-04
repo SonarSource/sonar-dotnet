@@ -323,7 +323,7 @@ namespace Tests.Diagnostics
 
     partial class PartialClass
     {
-        partial void WriteMore() // Noncompliant - FP
+        partial void WriteMore() // Compliant
         {
             Console.WriteLine("More");
         }

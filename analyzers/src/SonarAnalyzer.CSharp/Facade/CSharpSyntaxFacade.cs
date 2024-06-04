@@ -121,9 +121,12 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
         Cast<LocalDeclarationStatementSyntax>(node).Declaration.Variables.Select(x => x.Identifier).ToImmutableArray();
 
     public override SyntaxKind[] ModifierKinds(SyntaxNode node) =>
-        node is TypeDeclarationSyntax typeDeclaration
-            ? typeDeclaration.Modifiers.Select(x => x.Kind()).ToArray()
-            : Array.Empty<SyntaxKind>();
+        (node switch
+        {
+            TypeDeclarationSyntax x => x.Modifiers,
+            BaseMethodDeclarationSyntax x => x.Modifiers,
+            _ => [],
+        }).Select(x => x.Kind()).ToArray();
 
     public override SyntaxNode NodeExpression(SyntaxNode node) =>
         node switch
