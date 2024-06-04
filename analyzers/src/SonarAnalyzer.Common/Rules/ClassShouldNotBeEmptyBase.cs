@@ -33,7 +33,7 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind, TDeclarationSyntax>
 
     private static readonly IEnumerable<string> IgnoredNames = ["AssemblyDoc", "NamespaceDoc"]; // https://github.com/Doraku/DefaultDocumentation
 
-    private static readonly IEnumerable<string> IgnoredSuffixes = ["Command", "Event", "Message"];
+    private static readonly IEnumerable<string> IgnoredSuffixes = ["Command", "Event", "Message", "Query"];
 
     protected abstract bool IsEmptyAndNotPartial(SyntaxNode node);
     protected abstract TDeclarationSyntax GetIfHasDeclaredBaseClassOrInterface(SyntaxNode node);
