@@ -98,7 +98,14 @@ namespace Tests.TestCases
 
         public void CatchWithFilter()
         {
-            SomeMethod();
+            try
+            {
+                SomeMethod();
+            }
+            catch (Exception ex) when (LogException(ex))
+            {
+                throw;
+            }
         }
     }
 }

@@ -156,7 +156,7 @@ namespace Tests.TestCases
             {
                 SomeMethod();
             }
-            catch (Exception ex) when (LogException(ex))  // Noncompliant - FP
+            catch (Exception ex) when (LogException(ex))
             {
                 throw;
             }

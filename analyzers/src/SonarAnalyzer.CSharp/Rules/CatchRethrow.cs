@@ -18,29 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class CatchRethrow : CatchRethrowBase<SyntaxKind, CatchClauseSyntax>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class CatchRethrow : CatchRethrowBase<CatchClauseSyntax>
-    {
-        private static readonly BlockSyntax ThrowBlock = SyntaxFactory.Block(SyntaxFactory.ThrowStatement());
+    private static readonly BlockSyntax ThrowBlock = SyntaxFactory.Block(SyntaxFactory.ThrowStatement());
 
-        protected override DiagnosticDescriptor Rule { get; } =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override bool ContainsOnlyThrow(CatchClauseSyntax currentCatch) =>
-            CSharpEquivalenceChecker.AreEquivalent(currentCatch.Block, ThrowBlock);
+    protected override bool ContainsOnlyThrow(CatchClauseSyntax currentCatch) =>
+        CSharpEquivalenceChecker.AreEquivalent(currentCatch.Block, ThrowBlock);
 
-        protected override IReadOnlyList<CatchClauseSyntax> GetCatches(SyntaxNode syntaxNode) =>
-            ((TryStatementSyntax)syntaxNode).Catches;
+    protected override CatchClauseSyntax[] AllCatches(SyntaxNode node) =>
+        ((TryStatementSyntax)node).Catches.ToArray();
 
-        protected override SyntaxNode GetDeclarationType(CatchClauseSyntax catchClause) =>
-            catchClause.Declaration?.Type;
+    protected override SyntaxNode DeclarationType(CatchClauseSyntax catchClause) =>
+        catchClause.Declaration?.Type;
 
-        protected override bool HasFilter(CatchClauseSyntax catchClause) =>
-            catchClause.Filter != null;
+    protected override bool HasFilter(CatchClauseSyntax catchClause) =>
+        catchClause.Filter is not null;
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(RaiseOnInvalidCatch, SyntaxKind.TryStatement);
-    }
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(RaiseOnInvalidCatch, SyntaxKind.TryStatement);
 }
