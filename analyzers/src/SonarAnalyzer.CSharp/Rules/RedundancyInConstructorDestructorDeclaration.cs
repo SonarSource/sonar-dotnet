@@ -48,11 +48,17 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckTypesWithPrimaryConstructor(SonarSyntaxNodeReportingContext context)
         {
             var typeDeclaration = (TypeDeclarationSyntax)context.Node;
-            if (typeDeclaration.ParameterList() is { Parameters.Count: 0 } parameterList
+            if (!Excluded(typeDeclaration)
+                && typeDeclaration.ParameterList() is { Parameters.Count: 0 } parameterList
                 && !IsStructWithInitializedFieldOrProperty(typeDeclaration, context.SemanticModel))
             {
                 context.ReportIssue(Rule, parameterList, "primary constructor");
             }
+
+            static bool Excluded(TypeDeclarationSyntax node) =>
+                RecordDeclarationSyntaxWrapper.IsInstance(node)
+                && ((RecordDeclarationSyntaxWrapper)node).BaseList is { } baseList
+                && baseList.DescendantNodes().OfType<ArgumentSyntax>().Any();
         }
 
         private static void CheckDestructorDeclaration(SonarSyntaxNodeReportingContext context)
