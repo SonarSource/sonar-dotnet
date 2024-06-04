@@ -61,6 +61,7 @@ public sealed class TypeMemberOrdering : StylingAnalyzer
 
     private void ValidateMembers(SonarSyntaxNodeReportingContext context)
     {
+        var secondaries = new Dictionary<MemberKind, SecondaryLocation>();
         var type = (TypeDeclarationSyntax)context.Node;
         var members = new List<MemberInfo>();
         foreach (var member in type.Members)
@@ -68,6 +69,10 @@ public sealed class TypeMemberOrdering : StylingAnalyzer
             if (ReportingLocation(member) is { } location && Kind(member) is { } kind)
             {
                 members.Add(new(member, location, kind.Order, kind.Description));
+                if (!secondaries.ContainsKey(kind))
+                {
+                    secondaries.Add(kind, location.ToSecondary("Move the declaration before this one."));
+                }
             }
         }
         var maxOrder = 0;
@@ -76,7 +81,8 @@ public sealed class TypeMemberOrdering : StylingAnalyzer
         {
             if (member.Order < maxOrder)
             {
-                context.ReportIssue(Rule, member.Location, member.Description, ExpectedLocation(availableKinds, member.Order));
+                var before = availableKinds.First(x => x.Order > member.Order);
+                context.ReportIssue(Rule, member.Location, [secondaries[before]], member.Description, ExpectedLocation(availableKinds, member.Order, before));
             }
             maxOrder = Math.Max(maxOrder, member.Order);
         }
@@ -110,10 +116,10 @@ public sealed class TypeMemberOrdering : StylingAnalyzer
             _ => node.GetIdentifier()?.GetLocation()
         };
 
-    private static string ExpectedLocation(MemberKind[] availableKinds, int order)
+    private static string ExpectedLocation(MemberKind[] availableKinds, int order, MemberKind before)
     {
         var after = availableKinds.LastOrDefault(x => x.Order < order) is { } previous ? $"after {previous.Description}, " : null;
-        return $"{after}before {availableKinds.First(x => x.Order > order).Description}";
+        return $"{after}before {before.Description}";
     }
 
     private sealed record MemberInfo(MemberDeclarationSyntax Member, Location Location, int Order, string Description);
