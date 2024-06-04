@@ -337,7 +337,7 @@ public sealed class PublicClass : IPublicInterface
 // https://github.com/SonarSource/sonar-dotnet/issues/8348
 class Repro_8348
 {
-    [MyAttribute] void PrivateMethodWithAttribute() { } // FN: due to the attribute
+    [MyAttribute] void PrivateMethodWithAttribute() { } // Compliant: due to the attribute
 }
 
 // https://github.com/SonarSource/sonar-dotnet/issues/8342
