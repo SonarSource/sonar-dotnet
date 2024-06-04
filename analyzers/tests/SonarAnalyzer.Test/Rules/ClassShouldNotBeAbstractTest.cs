@@ -20,32 +20,31 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class ClassShouldNotBeAbstractTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<ClassShouldNotBeAbstract>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void ClassShouldNotBeAbstract() =>
-            builder.AddPaths("ClassShouldNotBeAbstract.cs").Verify();
+[TestClass]
+public class ClassShouldNotBeAbstractTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<ClassShouldNotBeAbstract>();
+
+    [TestMethod]
+    public void ClassShouldNotBeAbstract() =>
+        builder.AddPaths("ClassShouldNotBeAbstract.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void ClassShouldNotBeAbstract_CSharp9() =>
-            builder.AddPaths("ClassShouldNotBeAbstract.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
+    [TestMethod]
+    public void ClassShouldNotBeAbstract_CSharp9() =>
+        builder.AddPaths("ClassShouldNotBeAbstract.CSharp9.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .Verify();
 
-        [TestMethod]
-        public void ClassShouldNotBeAbstract_CSharp11() =>
-            builder.AddPaths("ClassShouldNotBeAbstract.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void ClassShouldNotBeAbstract_CSharp11() =>
+        builder.AddPaths("ClassShouldNotBeAbstract.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
 
 #endif
 
-    }
 }
