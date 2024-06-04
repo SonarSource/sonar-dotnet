@@ -56,13 +56,15 @@ public sealed class InvocationResolvesToOverrideWithParams : SonarDiagnosticAnal
             && !IsInvocationWithExplicitArray(argumentList, method, context.SemanticModel)
             && ArgumentTypes(context, argumentList) is var argumentTypes
             && argumentTypes.All(x => x is not IErrorTypeSymbol)
-            && OtherOverloadsOf(method).FirstOrDefault(IsPossibleMatch) is { } otherMethod)
+            && OtherOverloadsOf(method).FirstOrDefault(IsPossibleMatch) is { } otherMethod
+            && method.IsGenericMethod == otherMethod.IsGenericMethod)
         {
             context.ReportIssue(Rule, node, otherMethod.ToMinimalDisplayString(context.SemanticModel, node.SpanStart));
         }
 
         bool IsPossibleMatch(IMethodSymbol method) =>
-            ArgumentsMatchParameters(argumentList, argumentTypes, method, context.SemanticModel) && MethodAccessibleWithinType(method, context.ContainingSymbol.ContainingType);
+            ArgumentsMatchParameters(argumentList, argumentTypes, method, context.SemanticModel)
+            && MethodAccessibleWithinType(method, context.ContainingSymbol.ContainingType);
     }
 
     private static ITypeSymbol[] ArgumentTypes(SonarSyntaxNodeReportingContext context, ArgumentListSyntax argumentList) =>

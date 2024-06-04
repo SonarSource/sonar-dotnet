@@ -417,8 +417,13 @@ class Repro_8522
 
     string Get(string key) => default;
 
+    T GetBothHaveGenerics<T>(params int[] ints) => default;
+
+    T GetBothHaveGenerics<T>(int anInt) => default;
+
     void Test()
     {
-        Get<string>("text");    // Noncompliant FP
+        Get<string>("text");            // Compliant
+        GetBothHaveGenerics<string>(1); // Compliant, when both methods are generic it seems to resolving correctly to the T GetBothHaveGenerics<T>(int anInt).
     }
 }
