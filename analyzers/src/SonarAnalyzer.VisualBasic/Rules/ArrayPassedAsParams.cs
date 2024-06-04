@@ -26,10 +26,10 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
     protected override SyntaxKind[] ExpressionKinds { get; } =
-        {
+        [
             SyntaxKind.ObjectCreationExpression,
             SyntaxKind.InvocationExpression
-        };
+        ];
 
     protected override ArgumentSyntax LastArgumentIfArrayCreation(SyntaxNode expression) =>
         GetLastArgumentIfArrayCreation(GetArgumentListFromExpression(expression));
@@ -50,8 +50,11 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
             : null;
 
     private static bool IsArrayCreation(ExpressionSyntax expression) =>
-        expression
-            is ArrayCreationExpressionSyntax { Initializer.Initializers.Count: > 0 }
-            or ArrayCreationExpressionSyntax { ArrayBounds: null }
-            or CollectionInitializerSyntax;
+        expression switch
+        {
+            ArrayCreationExpressionSyntax { Initializer.Initializers.Count: > 0 } => true,
+            ArrayCreationExpressionSyntax { ArrayBounds: null } => true,
+            CollectionInitializerSyntax => true,
+            _ => false
+        };
 }

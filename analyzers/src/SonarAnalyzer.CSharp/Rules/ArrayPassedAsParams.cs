@@ -26,11 +26,11 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
     protected override SyntaxKind[] ExpressionKinds { get; } =
-        {
+        [
             SyntaxKind.ObjectCreationExpression,
             SyntaxKind.InvocationExpression,
             SyntaxKindEx.ImplicitObjectCreationExpression
-        };
+        ];
 
     protected override ArgumentSyntax LastArgumentIfArrayCreation(SyntaxNode expression) =>
         LastArgumentIfArrayCreation(ArgumentList(expression));
@@ -47,8 +47,7 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
         {
             ObjectCreationExpressionSyntax { } creation => creation.ArgumentList,
             InvocationExpressionSyntax { } invocation => invocation.ArgumentList,
-            _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(expression) =>
-                ((ImplicitObjectCreationExpressionSyntaxWrapper)expression).ArgumentList,
+            _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(expression) => ((ImplicitObjectCreationExpressionSyntaxWrapper)expression).ArgumentList,
             _ => null
         };
 
