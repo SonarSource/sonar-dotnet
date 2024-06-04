@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Google.Protobuf.WellKnownTypes;
+
 namespace SonarAnalyzer.Rules
 {
     public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TSyntaxKind, TMethodDeclarationSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
@@ -66,13 +68,17 @@ namespace SonarAnalyzer.Rules
 
         protected static bool HaveSameParameters<TSyntax>(SemanticModel model, SeparatedSyntaxList<TSyntax>? leftParameters, SeparatedSyntaxList<TSyntax>? rightParameters)
             where TSyntax : SyntaxNode =>
-            (leftParameters is null && rightParameters is null)
-            || (leftParameters is not null
-                && rightParameters is not null
-                && leftParameters.Value.Count == rightParameters.Value.Count
-                && (leftParameters.Value.Count == 0
-                    || (leftParameters.Value.Zip(rightParameters.Value, (left, right) => left.IsEquivalentTo(right)).All(x => x)
-                        && leftParameters.Value.Zip(rightParameters.Value, (left, right) => HaveSameParameterType(model, left, right)).Any(x => x))));
+            (leftParameters is null && rightParameters is null) // VB.Net
+            || (leftParameters is { Count: { } leftCount } leftParams
+                && rightParameters is { Count: { } rightCount } rightParams
+                && leftCount == rightCount
+                && (leftCount == 0 || HaveSameParameterLists(model, leftParams, rightParams)));
+
+        private static bool HaveSameParameterLists<TSyntax>(SemanticModel model,
+                                                            SeparatedSyntaxList<TSyntax> leftParameters,
+                                                            SeparatedSyntaxList<TSyntax> rightParameters) where TSyntax : SyntaxNode =>
+            leftParameters.Zip(rightParameters, (left, right) => left.IsEquivalentTo(right)).All(x => x)                    // Perf: Syntactic equivalence for all parameters first
+            && leftParameters.Zip(rightParameters, (left, right) => HaveSameParameterType(model, left, right)).Any(x => x); // Also make sure the parameter types are same
 
         private static bool HaveSameParameterType(SemanticModel model, SyntaxNode left, SyntaxNode right) =>
             model.GetDeclaredSymbol(left) is IParameterSymbol { Type: { } leftParameterType }
