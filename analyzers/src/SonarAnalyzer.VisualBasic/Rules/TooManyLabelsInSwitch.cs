@@ -18,31 +18,29 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.VisualBasic
+namespace SonarAnalyzer.Rules.VisualBasic;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind, SelectStatementSyntax>
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind, SelectStatementSyntax>
-    {
-        protected override DiagnosticDescriptor Rule { get; } =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat,
-                isEnabledByDefault: false);
+    protected override DiagnosticDescriptor Rule { get; } =
+        DescriptorFactory.Create(DiagnosticId, string.Format(MessageFormat, "Select Case", "Case"),
+            isEnabledByDefault: false);
 
-        private const string MessageFormat = "Consider reworking this 'Select Case' to reduce the number of 'Case's" +
-            " from {1} to at most {0}.";
+    protected override SyntaxKind[] SyntaxKinds { get; } = [SyntaxKind.SelectStatement];
 
-        protected override SyntaxKind[] SyntaxKinds { get; } =
-            new[] { SyntaxKind.SelectStatement };
+    protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
+        VisualBasicGeneratedCodeRecognizer.Instance;
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            VisualBasicGeneratedCodeRecognizer.Instance;
+    protected override SyntaxNode GetExpression(SelectStatementSyntax statement) =>
+        statement.Expression;
 
-        protected override SyntaxNode GetExpression(SelectStatementSyntax statement) =>
-            statement.Expression;
+    protected override int GetSectionsCount(SelectStatementSyntax statement) =>
+        ((SelectBlockSyntax)statement.Parent).CaseBlocks.Count;
 
-        protected override int GetSectionsCount(SelectStatementSyntax statement) =>
-            ((SelectBlockSyntax)statement.Parent).CaseBlocks.Count;
+    protected override bool AllSectionsAreOneLiner(SelectStatementSyntax statement) =>
+        !((SelectBlockSyntax)statement.Parent).CaseBlocks.Any(x => x.Statements.Count > 1);
 
-        protected override Location GetKeywordLocation(SelectStatementSyntax statement) =>
-            statement.SelectKeyword.GetLocation();
-    }
+    protected override Location GetKeywordLocation(SelectStatementSyntax statement) =>
+        statement.SelectKeyword.GetLocation();
 }

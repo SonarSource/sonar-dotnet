@@ -18,31 +18,29 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind, SwitchStatementSyntax>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind, SwitchStatementSyntax>
-    {
-        protected override DiagnosticDescriptor Rule { get; } =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat,
-                isEnabledByDefault: false);
+    protected override DiagnosticDescriptor Rule { get; } =
+        DescriptorFactory.Create(DiagnosticId, string.Format(MessageFormat, "switch", "case"),
+            isEnabledByDefault: false);
 
-        private const string MessageFormat = "Consider reworking this 'switch' to reduce the number of 'case's" +
-            " from {1} to at most {0}.";
+    protected override SyntaxKind[] SyntaxKinds { get; } = [SyntaxKind.SwitchStatement];
 
-        protected override SyntaxKind[] SyntaxKinds { get; } =
-            new[] { SyntaxKind.SwitchStatement };
+    protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
+        CSharpGeneratedCodeRecognizer.Instance;
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            CSharpGeneratedCodeRecognizer.Instance;
+    protected override SyntaxNode GetExpression(SwitchStatementSyntax statement) =>
+        statement.Expression;
 
-        protected override SyntaxNode GetExpression(SwitchStatementSyntax statement) =>
-            statement.Expression;
+    protected override int GetSectionsCount(SwitchStatementSyntax statement) =>
+        statement.Sections.Count;
 
-        protected override int GetSectionsCount(SwitchStatementSyntax statement) =>
-            statement.Sections.Count;
+    protected override bool AllSectionsAreOneLiner(SwitchStatementSyntax statement) =>
+        !statement.Sections.Any(x => x.Statements.Count > 1);
 
-        protected override Location GetKeywordLocation(SwitchStatementSyntax statement) =>
-            statement.SwitchKeyword.GetLocation();
-    }
+    protected override Location GetKeywordLocation(SwitchStatementSyntax statement) =>
+        statement.SwitchKeyword.GetLocation();
 }
