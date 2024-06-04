@@ -198,14 +198,14 @@ function Show-DiffResults() {
         } elseif ($ruleId -And !$project) {
             Write-Host "Will find differences for all projects, rule ${ruleId}."
 
-            Copy-FolderRecursively -From .\expected -To .\diff\expected -Include "$*{ruleId}.json"
-            Copy-FolderRecursively -From .\actual   -To .\diff\actual   -Include "$*{ruleId}.json"
+            Copy-FolderRecursively -From .\expected -To .\diff\expected -Include "${ruleId}-*.json"
+            Copy-FolderRecursively -From .\actual   -To .\diff\actual   -Include "${ruleId}-*.json"
 
         } else {
             Write-Host "Will find differences for '${project}', rule ${ruleId}."
 
-            Copy-FolderRecursively -From ".\expected\${project}" -To .\diff\expected -Include "*${ruleId}.json"
-            Copy-FolderRecursively -From ".\actual\${project}"   -To .\diff\actual   -Include "*${ruleId}.json"
+            Copy-FolderRecursively -From ".\expected\${project}" -To .\diff\expected -Include "${ruleId}-*.json"
+            Copy-FolderRecursively -From ".\actual\${project}"   -To .\diff\actual   -Include "${ruleId}-*.json"
         }
 
         Exec { & git diff --no-index --exit-code .\diff\expected .\diff\actual } -errorMessage $DifferencesMsg
