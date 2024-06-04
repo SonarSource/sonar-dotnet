@@ -52,11 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    c.ReportIssue(Rule,
-                                  typeDeclaration.Identifier,
-                                  typeDeclaration.Identifier.ValueText,
-                                  typeDeclaration.GetDeclarationTypeName(),
-                                  MaxNumberOfGenericParametersInClass.ToString());
+                    c.ReportIssue(Rule, typeDeclaration.Identifier, typeDeclaration.Identifier.ValueText, typeDeclaration.GetDeclarationTypeName(), MaxNumberOfGenericParametersInClass.ToString());
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration,
@@ -74,11 +70,12 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    c.ReportIssue(Rule,
-                                  methodDeclaration.Identifier,
-                                  new[] { EnclosingTypeName(c.Node), methodDeclaration.Identifier.ValueText }.JoinNonEmpty("."),
-                                  "method",
-                                  MaxNumberOfGenericParametersInMethod.ToString());
+                    c.ReportIssue(
+                        Rule,
+                        methodDeclaration.Identifier,
+                        new[] { EnclosingTypeName(c.Node), methodDeclaration.Identifier.ValueText }.JoinNonEmpty("."),
+                        "method",
+                        MaxNumberOfGenericParametersInMethod.ToString());
                 },
                 SyntaxKind.MethodDeclaration,
                 SyntaxKindEx.LocalFunctionStatement);

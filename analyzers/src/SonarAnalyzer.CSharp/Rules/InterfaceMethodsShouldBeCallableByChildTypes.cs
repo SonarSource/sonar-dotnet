@@ -75,10 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var identifierName = getIdentifierName(memberDeclaration);
 
-                analysisContext.ReportIssue(Rule,
-                                            identifierName,
-                                            declaration.Identifier.ValueText,
-                                            string.Concat(explicitInterfaceSpecifier.Name, ".", identifierName.ValueText));
+                analysisContext.ReportIssue(Rule, identifierName, declaration.Identifier.ValueText, string.Concat(explicitInterfaceSpecifier.Name, ".", identifierName.ValueText));
             }
         }
 
@@ -86,7 +83,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var symbol = semanticModel.GetDeclaredSymbol(declaration);
 
-            return symbol is {IsSealed: false}
+            return symbol is { IsSealed: false }
                    && symbol.IsPubliclyAccessible();
         }
 

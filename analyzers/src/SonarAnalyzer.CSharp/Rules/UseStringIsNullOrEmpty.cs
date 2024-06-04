@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         if (IsStringIdentifier(memberAccessExpression.Expression, c.SemanticModel)
                             && IsConstantEmptyString(firstArgument.Expression, c.SemanticModel))
                         {
-                            c.ReportIssue(rule, invocationExpression.GetLocation(), MessageFormat);
+                            c.ReportIssue(rule, invocationExpression, MessageFormat);
                         }
                     }
                 },

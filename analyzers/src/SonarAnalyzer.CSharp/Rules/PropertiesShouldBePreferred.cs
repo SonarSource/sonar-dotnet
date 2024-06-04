@@ -48,10 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var candidate in propertyCandidates)
                     {
-                        c.ReportIssue(
-                            Rule,
-                            candidate.Locations.FirstOrDefault(),
-                            messageArgs: candidate.Name);
+                        c.ReportIssue(Rule, candidate.Locations.FirstOrDefault(), candidate.Name);
                     }
                 },
                 SyntaxKind.ClassDeclaration,

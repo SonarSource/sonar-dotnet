@@ -54,10 +54,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 if (IsImplicitReturnValue(node))
                 {
-                    context.ReportIssue(Rule, node,
-                        IsAssignmentStatement(node)
-                        ? UseReturnStatementMessage
-                        : DontUseImplicitMessage);
+                    context.ReportIssue(Rule, node, IsAssignmentStatement(node) ? UseReturnStatementMessage : DontUseImplicitMessage);
                 }
             }
 

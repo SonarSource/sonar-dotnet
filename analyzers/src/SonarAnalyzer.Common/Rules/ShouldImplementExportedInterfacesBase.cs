@@ -69,11 +69,12 @@ namespace SonarAnalyzer.Rules
                                      ? ActionForInterface
                                      : ActionForClass;
 
-                    c.ReportIssue(Rule,
-                                  attributeSyntax,
-                                  action,
-                                  exportedType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
-                                  attributeTargetType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat));
+                    c.ReportIssue(
+                        Rule,
+                        attributeSyntax,
+                        action,
+                        exportedType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
+                        attributeTargetType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat));
                 },
                 Language.SyntaxKind.Attribute);
 
