@@ -56,11 +56,11 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterNodeAction(
-                c => CheckIssue<PropertyDeclarationSyntax>(c, GetPropertyDescendants, d => d.Identifier, "property"),
+                c => CheckIssue<PropertyDeclarationSyntax>(c, GetPropertyDescendants, d => d.Identifier, x => false, "property"),
                 SyntaxKind.PropertyDeclaration);
 
             context.RegisterNodeAction(
-                c => CheckIssue<MethodDeclarationSyntax>(c, GetMethodDescendants, d => d.Identifier, "method"),
+                c => CheckIssue<MethodDeclarationSyntax>(c, GetMethodDescendants, d => d.Identifier, x => x.Modifiers.Any(x => x.Kind() is SyntaxKind.PartialKeyword), "method"),
                 SyntaxKind.MethodDeclaration);
         }
 
@@ -77,11 +77,13 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckIssue<TDeclarationSyntax>(SonarSyntaxNodeReportingContext context,
                                                            Func<TDeclarationSyntax, IEnumerable<SyntaxNode>> getDescendants,
                                                            Func<TDeclarationSyntax, SyntaxToken> getIdentifier,
+                                                           Func<TDeclarationSyntax, bool> isPartial,
                                                            string memberKind)
             where TDeclarationSyntax : MemberDeclarationSyntax
         {
             var declaration = (TDeclarationSyntax)context.Node;
-            if (IsEmptyMethod(declaration))
+            if (IsEmptyMethod(declaration)
+                || isPartial(declaration))
             {
                 return;
             }
@@ -200,7 +202,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             // Checking for primary constructor parameters
             static bool IsConstructorParameter(ISymbol symbol) =>
-                symbol is IParameterSymbol {  ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.Constructor } };
+                symbol is IParameterSymbol { ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.Constructor } };
         }
     }
 }
