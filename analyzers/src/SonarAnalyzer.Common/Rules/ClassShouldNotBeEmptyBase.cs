@@ -58,7 +58,7 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind, TDeclarationSyntax>
                     && !ShouldIgnoreBecauseOfName(identifier)
                     && !ShouldIgnoreBecauseOfBaseClassOrInterface(c.Node, c.SemanticModel))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), DeclarationTypeKeyword(c.Node)));
+                    c.ReportIssue(Rule, identifier, DeclarationTypeKeyword(c.Node));
                 }
             },
             Language.SyntaxKind.ClassAndRecordClassDeclarations);

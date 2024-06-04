@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(Rule, modifier.GetLocation(), modifier.ValueText));
+                    c.ReportIssue(Rule, modifier, modifier.ValueText);
                 },
                 SyntaxKind.Parameter);
 

@@ -44,8 +44,7 @@ public sealed class RequireAttributeUsageAttribute : SonarDiagnosticAnalyzer
                     ? " to improve readability, even though it inherits it from its base type"
                     : string.Empty;
 
-                c.ReportIssue(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(),
-                    classSymbol.Name, additionalText));
+                c.ReportIssue(Rule, classDeclaration.Identifier, classSymbol.Name, additionalText);
             }
         },
         SyntaxKind.ClassDeclaration);

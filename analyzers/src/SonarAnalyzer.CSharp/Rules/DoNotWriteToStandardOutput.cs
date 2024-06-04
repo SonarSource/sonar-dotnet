@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         !c.Node.IsInDebugBlock() &&
                         !CSharpDebugOnlyCodeHelper.IsCallerInConditionalDebug(methodCall, c.SemanticModel))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, methodCall.Expression.GetLocation()));
+                        c.ReportIssue(Rule, methodCall.Expression);
                     }
                 },
                 SyntaxKind.InvocationExpression);

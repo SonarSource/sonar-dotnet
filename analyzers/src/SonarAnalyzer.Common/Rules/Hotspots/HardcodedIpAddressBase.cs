@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules
                 && Language.Syntax.LiteralText(stringLiteral) is var literalValue
                 && IsHardcodedIp(literalValue, stringLiteral))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, stringLiteral.GetLocation(), literalValue));
+                context.ReportIssue(Rule, stringLiteral, literalValue);
             }
         }
 
@@ -95,7 +95,7 @@ namespace SonarAnalyzer.Rules
                 && Language.Syntax.TryGetInterpolatedTextValue(context.Node, context.SemanticModel, out var stringContent)
                 && IsHardcodedIp(stringContent, context.Node))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, context.Node.GetLocation(), stringContent));
+                context.ReportIssue(Rule, context.Node, stringContent);
             }
         }
 

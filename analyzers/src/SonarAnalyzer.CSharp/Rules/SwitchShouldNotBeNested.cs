@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var switchStatement = (SwitchStatementSyntax)c.Node;
                     if (switchStatement.Parent?.FirstAncestorOrSelf<SwitchStatementSyntax>() != null)
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, switchStatement.SwitchKeyword.GetLocation()));
+                        c.ReportIssue(rule, switchStatement.SwitchKeyword);
                     }
                 },
                 SyntaxKind.SwitchStatement);

@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (members.FirstOrDefault(x => x.Name == identifier.ValueText
                 && (x.IsStatic || !identifier.Parent.EnclosingScope().GetModifiers().Any(x => x.Kind() == SyntaxKind.StaticKeyword))) is { } matchingMember)
             {
-                context.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.Text, GetSymbolName(matchingMember)));
+                context.ReportIssue(Rule, identifier, identifier.Text, GetSymbolName(matchingMember));
             }
         }
 

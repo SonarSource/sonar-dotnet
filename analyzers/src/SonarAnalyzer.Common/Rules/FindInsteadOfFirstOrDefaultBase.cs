@@ -49,7 +49,7 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationEx
                     && IsCorrectType(left, c.SemanticModel, out var isArray)
                     && !Language.Syntax.IsInExpressionTree(c.SemanticModel, invocation))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), isArray ? ArrayMessage : GenericMessage));
+                    c.ReportIssue(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), isArray ? ArrayMessage : GenericMessage);
                 }
             },
             Language.SyntaxKind.InvocationExpression);

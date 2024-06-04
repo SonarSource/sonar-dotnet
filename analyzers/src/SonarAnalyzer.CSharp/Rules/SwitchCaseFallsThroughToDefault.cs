@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var label in section.Labels.Where(label => !label.IsKind(SyntaxKind.DefaultSwitchLabel)))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, label.GetLocation()));
+                        c.ReportIssue(rule, label);
                     }
                 },
                 SyntaxKind.SwitchSection);

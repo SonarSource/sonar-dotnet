@@ -70,11 +70,11 @@ namespace SonarAnalyzer.Rules
                                      : ActionForClass;
 
                     c.ReportIssue(
-                        Diagnostic.Create(Rule,
-                            attributeSyntax.GetLocation(),
-                            action,
-                            exportedType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
-                            attributeTargetType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)));
+                        Rule,
+                        attributeSyntax,
+                        action,
+                        exportedType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
+                        attributeTargetType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat));
                 },
                 Language.SyntaxKind.Attribute);
 

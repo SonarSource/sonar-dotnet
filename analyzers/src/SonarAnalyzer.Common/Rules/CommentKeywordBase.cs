@@ -59,12 +59,12 @@ namespace SonarAnalyzer.Rules
                     {
                         foreach (var location in GetKeywordLocations(c.Tree, comment, ToDoKeyword))
                         {
-                            c.ReportIssue(Diagnostic.Create(toDoRule, location));
+                            c.ReportIssue(toDoRule, location);
                         }
 
                         foreach (var location in GetKeywordLocations(c.Tree, comment, FixMeKeyword))
                         {
-                            c.ReportIssue(Diagnostic.Create(fixMeRule, location));
+                            c.ReportIssue(fixMeRule, location);
                         }
                     }
                 });

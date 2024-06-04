@@ -51,9 +51,9 @@ namespace SonarAnalyzer.Rules.CSharp
                             : MessageFormatComparison;
 
                         c.ReportIssue(
-                            Diagnostic.Create(Rule,
-                            binaryExpressionSyntax.GetLocation(),
-                            string.Format(messageFormat, KnownTypeAliasMap[floatingPointType])));
+                            Rule,
+                            binaryExpressionSyntax,
+                            string.Format(messageFormat, KnownTypeAliasMap[floatingPointType]));
                     }
                 },
                 SyntaxKind.GreaterThanExpression,

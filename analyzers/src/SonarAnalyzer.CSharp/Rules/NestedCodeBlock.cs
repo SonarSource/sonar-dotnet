@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var block = (BlockSyntax)c.Node;
                     if (block.Parent.IsAnyKind(SyntaxKind.Block, SyntaxKind.GlobalStatement))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, block.OpenBraceToken.GetLocation()));
+                        c.ReportIssue(Rule, block.OpenBraceToken);
                     }
                 },
                 SyntaxKind.Block);

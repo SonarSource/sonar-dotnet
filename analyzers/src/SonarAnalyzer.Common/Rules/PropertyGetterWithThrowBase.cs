@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules
                                 return;
                             }
 
-                            c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], c.Node.GetLocation()));
+                            c.ReportIssue(SupportedDiagnostics[0], c.Node);
                         },
                         ThrowSyntaxKind);
                 });

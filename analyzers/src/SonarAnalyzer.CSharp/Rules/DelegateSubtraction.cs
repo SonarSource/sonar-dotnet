@@ -39,7 +39,7 @@ public sealed class DelegateSubtraction : SonarDiagnosticAnalyzer
                 var assignment = (AssignmentExpressionSyntax)c.Node;
                 if (!ExpressionIsSimple(assignment.Right) && IsDelegateSubtraction(assignment, c.SemanticModel))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, assignment.GetLocation()));
+                    c.ReportIssue(Rule, assignment);
                 }
             },
             SyntaxKind.SubtractAssignmentExpression);
@@ -52,7 +52,7 @@ public sealed class DelegateSubtraction : SonarDiagnosticAnalyzer
                     && !BinaryIsValidSubstraction(binary)
                     && IsDelegateSubtraction(binary, c.SemanticModel))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, binary.GetLocation()));
+                    c.ReportIssue(Rule, binary);
                 }
             },
             SyntaxKind.SubtractExpression);

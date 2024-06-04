@@ -45,7 +45,7 @@ public abstract class ThrowReservedExceptionsBase<TSyntaxKind> : SonarDiagnostic
             var expressionType = context.SemanticModel.GetTypeInfo(thrownExpression).Type;
             if (expressionType.IsAny(reservedExceptions))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, thrownExpression.GetLocation(), expressionType.ToDisplayString()));
+                context.ReportIssue(Rule, thrownExpression, expressionType.ToDisplayString());
             }
         }
     }

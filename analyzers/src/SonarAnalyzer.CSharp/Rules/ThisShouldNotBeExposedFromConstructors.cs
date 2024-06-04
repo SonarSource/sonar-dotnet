@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                 !IsClassMember(invocation.Expression) &&
                                 c.SemanticModel.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol)
                             {
-                                c.ReportIssue(Diagnostic.Create(rule, thisExpression.GetLocation()));
+                                c.ReportIssue(rule, thisExpression);
                             }
                         },
                         SyntaxKind.InvocationExpression);
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                 !IsClassMember(assignment.Left) &&
                                 c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol is IPropertySymbol)
                             {
-                                c.ReportIssue(Diagnostic.Create(rule, right.GetLocation()));
+                                c.ReportIssue(rule, right);
                             }
                         },
                         SyntaxKind.SimpleAssignmentExpression);

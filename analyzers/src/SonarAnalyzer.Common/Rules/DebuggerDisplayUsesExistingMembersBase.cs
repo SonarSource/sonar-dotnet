@@ -48,7 +48,7 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeSyntax, T
                     && Language.Syntax.StringValue(formatString, c.SemanticModel) is { } formatStringText
                     && FirstInvalidMemberName(c, formatStringText, attribute) is { } firstInvalidMember)
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, formatString.GetLocation(), firstInvalidMember));
+                    c.ReportIssue(Rule, formatString, firstInvalidMember);
                 }
             },
             Language.SyntaxKind.Attribute);

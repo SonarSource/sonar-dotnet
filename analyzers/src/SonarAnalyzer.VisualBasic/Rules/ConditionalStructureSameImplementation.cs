@@ -108,8 +108,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             var lastStatement = statementsToReport.Last();
 
-            context.ReportIssue(Diagnostic.Create(rule, firstStatement.CreateLocation(lastStatement),
-                locationProvider.First().GetLineNumberToReport(), constructType));
+            context.ReportIssue(rule, firstStatement.CreateLocation(lastStatement),
+                locationProvider.First().GetLineNumberToReport().ToString(), constructType);
         }
 
         private static bool IsApprovedStatement(StatementSyntax statement)

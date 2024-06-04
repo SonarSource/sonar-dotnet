@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(rule, eventStatement.Identifier.GetLocation(), matched, part));
+                    c.ReportIssue(rule, eventStatement.Identifier, matched, part);
                 },
                 SyntaxKind.EventStatement);
         }

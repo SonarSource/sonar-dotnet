@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var argumentList = (AttributeArgumentListSyntax)c.Node;
                     if (!argumentList.Arguments.Any())
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, argumentList.GetLocation()));
+                        c.ReportIssue(rule, argumentList);
                     }
                 },
                 SyntaxKind.AttributeArgumentList);
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         objectCreation.Initializer != null &&
                         !argumentList.Arguments.Any())
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, argumentList.GetLocation()));
+                        c.ReportIssue(rule, argumentList);
                     }
                 },
                 SyntaxKind.ObjectCreationExpression);

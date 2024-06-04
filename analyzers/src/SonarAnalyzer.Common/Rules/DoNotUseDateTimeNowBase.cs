@@ -43,7 +43,7 @@ public abstract class DoNotUseDateTimeNowBase<TSyntaxKind> : SonarDiagnosticAnal
             if ((IsDateTimeNowOrToday(c.Node, c.SemanticModel) || IsDateTimeOffsetNowDateTime(c.Node, c.SemanticModel))
                 && !IsInsideNameOf(c.Node))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                    c.ReportIssue(Rule, c.Node);
                 }
         }, Language.SyntaxKind.SimpleMemberAccessExpression);
 

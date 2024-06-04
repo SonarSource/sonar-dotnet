@@ -69,11 +69,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (hasAsyncSuffix && !hasAsyncReturnType)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation(), RemoveAsyncSuffixMessage));
+                        c.ReportIssue(Rule, methodDeclaration.Identifier, RemoveAsyncSuffixMessage);
                     }
                     else if (!hasAsyncSuffix && hasAsyncReturnType)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation(), AddAsyncSuffixMessage));
+                        c.ReportIssue(Rule, methodDeclaration.Identifier, AddAsyncSuffixMessage);
                     }
                 },
                 SyntaxKind.MethodDeclaration);

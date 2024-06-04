@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override void Initialize(SonarParametrizedAnalysisContext context) =>
             context.RegisterNodeAction(c =>
             {
-                var walker = new NestingDepthWalker(Maximum, token => c.ReportIssue(Diagnostic.Create(rule, token.GetLocation(), Maximum)));
+                var walker = new NestingDepthWalker(Maximum, token => c.ReportIssue(rule, token, Maximum.ToString()));
                 walker.SafeVisit(c.Node);
             },
             SyntaxKind.SubBlock,

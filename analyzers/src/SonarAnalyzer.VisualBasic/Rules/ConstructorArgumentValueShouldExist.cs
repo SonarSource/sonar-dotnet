@@ -53,8 +53,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             var attributeSyntax =
                 (AttributeSyntax)constructorArgumentAttribute.ApplicationSyntaxReference.GetSyntax();
-            c.ReportIssue(Diagnostic.Create(rule,
-                attributeSyntax.ArgumentList.Arguments[0].GetLocation()));
+            c.ReportIssue(rule, attributeSyntax.ArgumentList.Arguments[0]);
         }
     }
 }

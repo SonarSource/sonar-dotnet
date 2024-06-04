@@ -51,8 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (operatorToken != null &&
                         c.Node.Ancestors().FirstOrDefault(node => node.IsAnyKind(arithmeticOperator)) is BinaryExpressionSyntax)
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, operatorToken.Value.GetLocation(),
-                            operatorToken.Value.IsKind(SyntaxKind.PlusPlusToken) ? "increment" : "decrement"));
+                        c.ReportIssue(rule, operatorToken.Value, operatorToken.Value.IsKind(SyntaxKind.PlusPlusToken) ? "increment" : "decrement");
                     }
                 },
                 SyntaxKind.PreDecrementExpression,

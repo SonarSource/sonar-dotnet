@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     x is { Node.Initializer.ThisOrBaseKeyword.RawKind: (int)SyntaxKind.ThisKeyword }
                     || IsSymbolFirstSetInCfg(kvp.Key, x.Node, x.Model, c.Cancel)))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, kvp.Value.GetLocation(), InstanceMemberMessage));
+                    c.ReportIssue(Rule, kvp.Value, InstanceMemberMessage);
                 }
             }
         }
@@ -118,7 +118,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 // all module initializers are executed when the type is created, so it is enough if ANY initializes the member
                 if (initializerDeclarations.Any(x => IsSymbolFirstSetInCfg(memberSymbol, x.Node, x.Model, c.Cancel)))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, initializedMembers[memberSymbol].GetLocation(), StaticMemberMessage));
+                    c.ReportIssue(Rule, initializedMembers[memberSymbol], StaticMemberMessage);
                 }
             }
         }

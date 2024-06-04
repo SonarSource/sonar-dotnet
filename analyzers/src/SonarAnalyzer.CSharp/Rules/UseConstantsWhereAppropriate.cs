@@ -75,8 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(rule,
-                        firstVariableWithInitialization.Identifier.GetLocation()));
+                    c.ReportIssue(rule, firstVariableWithInitialization.Identifier);
                 },
                 SyntaxKind.FieldDeclaration);
         }

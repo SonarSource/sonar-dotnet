@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules
             var pluralize = difference > 1
                 ? "s"
                 : string.Empty;
-            c.ReportIssue(Diagnostic.Create(Rule, invocation.GetLocation(), pluralize));
+            c.ReportIssue(Rule, invocation, pluralize);
         }
 
         protected abstract int GetArgumentCount(TInvocationExpressionSyntax invocation);

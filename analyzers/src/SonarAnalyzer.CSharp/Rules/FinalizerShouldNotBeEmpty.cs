@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (destructorDeclaration.Body?.Statements.Count == 0
                         && destructorDeclaration.ExpressionBody() == null)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, destructorDeclaration.GetLocation()));
+                        c.ReportIssue(Rule, destructorDeclaration);
                     }
                 },
                 SyntaxKind.DestructorDeclaration);

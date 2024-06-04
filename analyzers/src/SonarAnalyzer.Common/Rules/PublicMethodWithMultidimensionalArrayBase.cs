@@ -42,7 +42,7 @@ public abstract class PublicMethodWithMultidimensionalArrayBase<TSyntaxKind> : S
                     && methodSymbol.IsPubliclyAccessible()
                     && MethodHasMultidimensionalArrayParameters(methodSymbol))
                 {
-                    c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], GetIssueLocation(c.Node), GetType(c.Node)));
+                    c.ReportIssue(SupportedDiagnostics[0], GetIssueLocation(c.Node), GetType(c.Node));
                 }
             },
             SyntaxKindsOfInterest.ToArray());

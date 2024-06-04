@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules
                 && methodSymbol.IsStatic
                 && IsImportFromInteropDll(methodSymbol, analysisContext.SemanticModel))
             {
-                analysisContext.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(directMethodCall).Value.GetLocation(), GetMethodName(methodSymbol, analysisContext.SemanticModel)));
+                analysisContext.ReportIssue(Rule, Language.Syntax.NodeIdentifier(directMethodCall).Value, GetMethodName(methodSymbol, analysisContext.SemanticModel));
             }
         }
     }

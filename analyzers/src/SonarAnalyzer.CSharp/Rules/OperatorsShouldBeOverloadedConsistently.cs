@@ -59,8 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var missingMethods = FindMissingMethods(classSymbol).ToList();
                 if (missingMethods.Count > 0)
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(),
-                        missingMethods.ToSentence(quoteWords: true)));
+                    c.ReportIssue(Rule, classDeclaration.Identifier, missingMethods.ToSentence(quoteWords: true));
                 }
             },
             // This rule is not applicable for records, as for records it is not possible to override the == operator.

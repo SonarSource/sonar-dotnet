@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         methodSymbol.Name == ReferenceEqualsName &&
                         AnyArgumentIsValueType(invocation.ArgumentList, c.SemanticModel))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, invocation.Expression.GetLocation()));
+                        c.ReportIssue(rule, invocation.Expression);
                     }
                 },
                 SyntaxKind.InvocationExpression);

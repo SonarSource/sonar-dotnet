@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         && !symbol.IsAutoProperty()
                         && symbol.Type is IArrayTypeSymbol)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, property.Identifier.GetLocation(), symbol.Name));
+                        c.ReportIssue(Rule, property.Identifier, symbol.Name);
                     }
                 },
                 SyntaxKind.PropertyStatement);

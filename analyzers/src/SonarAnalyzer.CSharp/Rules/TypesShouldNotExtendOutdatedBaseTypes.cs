@@ -51,8 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (!classDeclaration.Identifier.IsMissing
                     && classSymbol.BaseType.IsAny(OutdatedTypes))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(),
-                        messageArgs: classSymbol.BaseType.ToDisplayString()));
+                    c.ReportIssue(Rule, classDeclaration.Identifier, messageArgs: classSymbol.BaseType.ToDisplayString());
                 }
             },
             // The rule is not applicable for records as at the current moment all the outdated types are classes and records cannot inherit classes.

@@ -48,8 +48,7 @@ namespace SonarAnalyzer.Rules
                             || c.SemanticModel.GetSymbolInfo(right).Symbol is ILocalSymbol or IFieldSymbol or IPropertySymbol or IParameterSymbol
                                 ? string.Empty
                                 : " and extract the right operand to a variable if it should always be evaluated";
-                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], GetOperator(node).GetLocation(),
-                            GetCurrentOpName(node), GetSuggestedOpName(node), extractText));
+                        c.ReportIssue(SupportedDiagnostics[0], GetOperator(node), GetCurrentOpName(node), GetSuggestedOpName(node), extractText);
                     }
                 },
                 SyntaxKindsOfInterest.ToArray());

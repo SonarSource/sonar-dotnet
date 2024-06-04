@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 && !ContainsComments(methodBlock.EndSubOrFunctionStatement.GetLeadingTrivia())
                 && !ShouldMethodBeExcluded(context, methodBlock.SubOrFunctionStatement))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, methodBlock.SubOrFunctionStatement.Identifier.GetLocation()));
+                context.ReportIssue(Rule, methodBlock.SubOrFunctionStatement.Identifier);
             }
         }
 

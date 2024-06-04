@@ -59,7 +59,7 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
                         if (typeToMoveInto != outerType)
                         {
                             var nestedTypeName = typeToMoveInto.Identifier.ValueText;
-                            c.ReportIssue(Diagnostic.Create(Rule, reference.Method.Identifier.GetLocation(), nestedTypeName));
+                            c.ReportIssue(Rule, reference.Method.Identifier, nestedTypeName);
                         }
                     }
                 }

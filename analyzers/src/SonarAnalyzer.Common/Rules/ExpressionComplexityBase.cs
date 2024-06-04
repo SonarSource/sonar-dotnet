@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules
                         var complexity = CalculateComplexity(c.Node);
                         if (complexity > Maximum)
                         {
-                            c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation(), Maximum, complexity));
+                            c.ReportIssue(rule, c.Node, Maximum.ToString(), complexity.ToString());
                         }
                     }
                 }, ComplexityIncreasingKinds.Concat(TransparentKinds).ToArray());

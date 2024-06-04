@@ -49,7 +49,7 @@ public sealed class MessageTemplatesShouldBeCorrect : SonarDiagnosticAnalyzer
                         foreach (var error in errors)
                         {
                             var location = Location.Create(c.Tree, new(templateStart + error.Start, error.Length));
-                            c.ReportIssue(Diagnostic.Create(Rule, location, error.Message));
+                            c.ReportIssue(Rule, location, error.Message);
                         }
                     }
                 },

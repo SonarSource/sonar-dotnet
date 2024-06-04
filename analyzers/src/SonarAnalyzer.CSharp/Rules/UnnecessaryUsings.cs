@@ -94,7 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol
                     && !necessaryNamespaces.Any(usedNamespace => usedNamespace.IsSameNamespace(namespaceSymbol)))
                 {
-                    context.ReportIssue(Diagnostic.Create(Rule, usingDirective.GetLocation()));
+                    context.ReportIssue(Rule, usingDirective);
                 }
             }
         }
