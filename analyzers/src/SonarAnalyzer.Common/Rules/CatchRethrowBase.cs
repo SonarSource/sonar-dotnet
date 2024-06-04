@@ -38,32 +38,26 @@ public abstract class CatchRethrowBase<TSyntaxKind, TCatchClause> : SonarDiagnos
     protected void RaiseOnInvalidCatch(SonarSyntaxNodeReportingContext context)
     {
         var catches = AllCatches(context.Node);
-        var caughtExceptionTypes = new Lazy<INamedTypeSymbol[]>(() => ComputeExceptionTypesIfNeeded(catches, context.SemanticModel));
+        var caughtExceptionTypes = new Lazy<INamedTypeSymbol[]>(() => ComputeExceptionTypes(catches, context.SemanticModel));
         var redundantCatches = new HashSet<TCatchClause>();
         // We handle differently redundant catch clauses (just throw inside) that are followed by a non-redundant catch clause, because if they are removed, the method behavior will change.
-        var foundNotRedundantCatch = false;
+        var followingCatchesOnlyThrow = true;
 
         for (var i = catches.Length - 1; i >= 0; i--)
         {
             var currentCatch = catches[i];
             if (ContainsOnlyThrow(currentCatch))
             {
-                if (foundNotRedundantCatch)
-                {
+                if (!HasFilter(currentCatch)
                     // Make sure we report only catch clauses that will not change the method behavior if removed.
-                    if (!HasFilter(currentCatch) && !IsMoreSpecificTypeThanANotRedundantCatch(i, catches, caughtExceptionTypes.Value, redundantCatches))
-                    {
-                        redundantCatches.Add(currentCatch);
-                    }
-                }
-                else if (!HasFilter(currentCatch))
+                    && (followingCatchesOnlyThrow || IsRedundantToFollowingCatches(i, catches, caughtExceptionTypes.Value, redundantCatches)))
                 {
                     redundantCatches.Add(currentCatch);
                 }
             }
             else
             {
-                foundNotRedundantCatch = true;
+                followingCatchesOnlyThrow = false;
             }
         }
 
@@ -73,7 +67,7 @@ public abstract class CatchRethrowBase<TSyntaxKind, TCatchClause> : SonarDiagnos
         }
     }
 
-    private static bool IsMoreSpecificTypeThanANotRedundantCatch(int catchIndex, TCatchClause[] catches, INamedTypeSymbol[] caughtExceptionTypes, ISet<TCatchClause> redundantCatches)
+    private static bool IsRedundantToFollowingCatches(int catchIndex, TCatchClause[] catches, INamedTypeSymbol[] caughtExceptionTypes, ISet<TCatchClause> redundantCatches)
     {
         var currentType = caughtExceptionTypes[catchIndex];
         for (var i = catchIndex + 1; i < caughtExceptionTypes.Length; i++)
@@ -81,12 +75,12 @@ public abstract class CatchRethrowBase<TSyntaxKind, TCatchClause> : SonarDiagnos
             var nextCatchType = caughtExceptionTypes[i];
             if (nextCatchType is null || currentType.DerivesOrImplements(nextCatchType))
             {
-                return !redundantCatches.Contains(catches[i]);
+                return redundantCatches.Contains(catches[i]);
             }
         }
-        return false;
+        return true;
     }
 
-    private INamedTypeSymbol[] ComputeExceptionTypesIfNeeded(IEnumerable<TCatchClause> catches, SemanticModel model) =>
+    private INamedTypeSymbol[] ComputeExceptionTypes(IEnumerable<TCatchClause> catches, SemanticModel model) =>
         catches.Select(x => DeclarationType(x) is { } declarationType ? model.GetTypeInfo(declarationType).Type as INamedTypeSymbol : null).ToArray();
 }
