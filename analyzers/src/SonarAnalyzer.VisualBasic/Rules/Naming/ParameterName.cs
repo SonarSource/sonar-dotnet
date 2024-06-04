@@ -18,37 +18,36 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.VisualBasic
+namespace SonarAnalyzer.Rules.VisualBasic;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class ParameterName : ParametrizedDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class ParameterName : ParametrizedDiagnosticAnalyzer
+    internal const string DiagnosticId = "S1654";
+    private const string MessageFormat = "Rename this parameter to match the regular expression: '{0}'.";
+
+    private static readonly DiagnosticDescriptor rule =
+        DescriptorFactory.Create(DiagnosticId, MessageFormat,
+            isEnabledByDefault: false);
+
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+
+    [RuleParameter("format", PropertyType.String,
+        "Regular expression used to check the parameter names against.", NamingHelper.CamelCasingPattern)]
+    public string Pattern { get; set; } = NamingHelper.CamelCasingPattern;
+
+    protected override void Initialize(SonarParametrizedAnalysisContext context)
     {
-        internal const string DiagnosticId = "S1654";
-        private const string MessageFormat = "Rename this parameter to match the regular expression: '{0}'.";
-
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat,
-                isEnabledByDefault: false);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        [RuleParameter("format", PropertyType.String,
-            "Regular expression used to check the parameter names against.", NamingHelper.CamelCasingPattern)]
-        public string Pattern { get; set; } = NamingHelper.CamelCasingPattern;
-
-        protected override void Initialize(SonarParametrizedAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                c =>
+        context.RegisterNodeAction(
+            c =>
+            {
+                var parameterDeclaration = (ParameterSyntax)c.Node;
+                if (parameterDeclaration.Identifier != null &&
+                    !NamingHelper.IsRegexMatch(parameterDeclaration.Identifier.Identifier.ValueText, Pattern))
                 {
-                    var parameterDeclaration = (ParameterSyntax)c.Node;
-                    if (parameterDeclaration.Identifier != null &&
-                        !NamingHelper.IsRegexMatch(parameterDeclaration.Identifier.Identifier.ValueText, Pattern))
-                    {
-                        c.ReportIssue(rule, parameterDeclaration.Identifier.Identifier, Pattern);
-                    }
-                },
-                SyntaxKind.Parameter);
-        }
+                    c.ReportIssue(Diagnostic.Create(rule, parameterDeclaration.Identifier.Identifier.GetLocation(), Pattern));
+                }
+            },
+            SyntaxKind.Parameter);
     }
 }

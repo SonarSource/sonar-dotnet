@@ -20,13 +20,12 @@
 
 using SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class ParameterNameTest
 {
-    [TestClass]
-    public class ParameterNameTest
-    {
-        [TestMethod]
-        public void ParameterName() =>
-            new VerifierBuilder<ParameterName>().AddPaths("ParameterName.vb").Verify();
-    }
+    [TestMethod]
+    public void ParameterName() =>
+        new VerifierBuilder<ParameterName>().AddPaths("ParameterName.vb").Verify();
 }
