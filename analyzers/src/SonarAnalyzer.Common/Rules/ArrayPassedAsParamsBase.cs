@@ -40,18 +40,26 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TArgumentNode> : Sona
         {
             if (LastArgumentIfArrayCreation(c.Node) is { } lastArgument
                 && ParameterSymbol(c.SemanticModel, c.Node, lastArgument) is { IsParams: true } param
-                && !IsJaggedArrayParam(param))
+                && !Exluded(param))
             {
                 c.ReportIssue(rule, lastArgument.GetLocation());
             }
         }, ExpressionKinds);
 
     private IParameterSymbol ParameterSymbol(SemanticModel model, SyntaxNode invocation, TArgumentNode argument) =>
-        model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
-        && Language.MethodParameterLookup(invocation, methodSymbol).TryGetSymbol(argument, out var param)
+        model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol && Language.MethodParameterLookup(invocation, methodSymbol).TryGetSymbol(argument, out var param)
             ? param
             : null;
 
-    private static bool IsJaggedArrayParam(IParameterSymbol param) =>
-        param.Type is IArrayTypeSymbol { ElementType: IArrayTypeSymbol };
+    private static bool Exluded(IParameterSymbol param)
+    {
+        return IsJaggedArrayParam(param) || IsObjectOrArrayType(param);
+
+        static bool IsJaggedArrayParam(IParameterSymbol param) =>
+            param.Type is IArrayTypeSymbol { ElementType: IArrayTypeSymbol };
+
+        static bool IsObjectOrArrayType(IParameterSymbol param) =>
+            param.Type is IArrayTypeSymbol array && array.ElementType.IsAny(KnownType.System_Object, KnownType.System_Array);
+    }
+
 }
