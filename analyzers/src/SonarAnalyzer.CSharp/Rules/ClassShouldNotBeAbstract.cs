@@ -21,17 +21,18 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ClassShouldNotBeAbstract : SonarDiagnosticAnalyzer
+public sealed class ClassShouldNotBeAbstract : SonarDiagnosticAnalyzer<SyntaxKind>
 {
     private const string DiagnosticId = "S1694";
-    private const string MessageFormat = "Convert this 'abstract' {0} to {1}.";
     private const string MessageToInterface = "an interface";
     private const string MessageToConcreteImplementation = "a concrete type with a protected constructor";
 
-    private static readonly DiagnosticDescriptor Rule =
-        DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    private static readonly MethodKind[] ConstructorKinds = [MethodKind.Constructor, MethodKind.SharedConstructor];
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+    protected override string MessageFormat => "Convert this 'abstract' {0} to {1}.";
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    public ClassShouldNotBeAbstract() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterSymbolAction(
@@ -64,19 +65,19 @@ public sealed class ClassShouldNotBeAbstract : SonarDiagnosticAnalyzer
         var abstractMethods = baseTypes.SelectMany(GetAllAbstractMethods);
         var baseTypesAndSelf = baseTypes.Concat(new[] { symbol }).ToList();
         var overrideMethods = baseTypesAndSelf.SelectMany(GetAllOverrideMethods);
-        var overriddenMethods = overrideMethods.Select(m => m.OverriddenMethod);
+        var overriddenMethods = overrideMethods.Select(x => x.OverriddenMethod);
         var stillAbstractMethods = abstractMethods.Except(overriddenMethods);
 
         return stillAbstractMethods.Any();
     }
 
     private static IEnumerable<IMethodSymbol> GetAllAbstractMethods(INamedTypeSymbol symbol) =>
-        GetAllMethods(symbol).Where(m => m.IsAbstract);
+        GetAllMethods(symbol).Where(x => x.IsAbstract);
 
     private static IEnumerable<IMethodSymbol> GetAllOverrideMethods(INamedTypeSymbol symbol) =>
-        GetAllMethods(symbol).Where(m => m.IsOverride);
+        GetAllMethods(symbol).Where(x => x.IsOverride);
 
-    private static void Report(SonarSymbolReportingContext context, INamedTypeSymbol symbol, string message)
+    private void Report(SonarSymbolReportingContext context, INamedTypeSymbol symbol, string message)
     {
         foreach (var declaringSyntaxReference in symbol.DeclaringSyntaxReferences)
         {
@@ -95,35 +96,23 @@ public sealed class ClassShouldNotBeAbstract : SonarDiagnosticAnalyzer
     }
 
     private static bool IsRecordWithParameters(ISymbol symbol) =>
-        symbol.DeclaringSyntaxReferences.Any(reference => reference.GetSyntax() is { } node
-                                                          && RecordDeclarationSyntaxWrapper.IsInstance(node)
-                                                          && ((RecordDeclarationSyntaxWrapper)node).ParameterList is { } parameterList
-                                                          && parameterList.Parameters.Count > 0);
+        symbol.DeclaringSyntaxReferences.Any(x => x.GetSyntax() is { } node
+                                                  && RecordDeclarationSyntaxWrapper.IsInstance(node)
+                                                  && ((RecordDeclarationSyntaxWrapper)node).ParameterList is { } parameterList
+                                                  && parameterList.Parameters.Count > 0);
 
     private static bool AbstractTypeShouldBeInterface(INamedTypeSymbol symbol)
     {
         var methods = GetAllMethods(symbol);
-        return symbol.BaseType.Is(KnownType.System_Object)
-               && methods.Any()
-               && methods.All(method => method.IsAbstract);
+        return symbol.BaseType.Is(KnownType.System_Object) && methods.Any() && methods.All(x => x.IsAbstract);
     }
 
     private static bool AbstractTypeShouldBeConcrete(INamedTypeSymbol symbol)
     {
         var methods = GetAllMethods(symbol);
-        return !methods.Any()
-               || methods.All(method => !method.IsAbstract);
+        return !methods.Any() || methods.All(x => !x.IsAbstract);
     }
 
     private static IList<IMethodSymbol> GetAllMethods(INamedTypeSymbol symbol) =>
-        symbol.GetMembers()
-              .OfType<IMethodSymbol>()
-              .Where(method => !method.IsImplicitlyDeclared && !ConstructorKinds.Contains(method.MethodKind))
-              .ToList();
-
-    private static readonly ISet<MethodKind> ConstructorKinds = new HashSet<MethodKind>
-    {
-        MethodKind.Constructor,
-        MethodKind.SharedConstructor
-    };
+        symbol.GetMembers().OfType<IMethodSymbol>().Where(x => !x.IsImplicitlyDeclared && !ConstructorKinds.Contains(x.MethodKind)).ToList();
 }
