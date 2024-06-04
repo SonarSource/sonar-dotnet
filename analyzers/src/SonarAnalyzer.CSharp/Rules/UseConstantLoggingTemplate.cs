@@ -94,7 +94,7 @@ public sealed class UseConstantLoggingTemplate : SonarDiagnosticAnalyzer
                 && ArgumentValue(invocation, method, messageParameter) is { } argumentValue
                 && InvalidSyntaxNode(argumentValue, c.SemanticModel) is { } invalidNode)
             {
-                c.ReportIssue(Diagnostic.Create(Rule, invalidNode.GetLocation(), Messages[invalidNode.Kind()]));
+                c.ReportIssue(Rule, invalidNode.GetLocation(), Messages[invalidNode.Kind()]);
             }
         },
         SyntaxKind.InvocationExpression);
@@ -114,7 +114,7 @@ public sealed class UseConstantLoggingTemplate : SonarDiagnosticAnalyzer
 
     private static SyntaxNode InvalidSyntaxNode(SyntaxNode messageArgument, SemanticModel model) =>
         messageArgument.DescendantNodesAndSelf().FirstOrDefault(x =>
-            x.Kind() == SyntaxKind.InterpolatedStringExpression
+            (x as InterpolatedStringExpressionSyntax is { } interpolatedString && !interpolatedString.HasConstantValue(model))
             || (x is BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AddExpression } concatenation && !AllMembersAreConstantStrings(concatenation, model))
             || IsStringFormatInvocation(x, model));
 
