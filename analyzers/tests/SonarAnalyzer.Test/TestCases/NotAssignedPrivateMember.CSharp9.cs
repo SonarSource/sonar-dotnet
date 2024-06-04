@@ -50,3 +50,10 @@ public record PositionalRecord(string Value)
         field2 = field;
     }
 }
+
+public class Repro_9106
+{
+    private int _foo; // Compliant
+
+    public ref int Foo => ref _foo;
+}

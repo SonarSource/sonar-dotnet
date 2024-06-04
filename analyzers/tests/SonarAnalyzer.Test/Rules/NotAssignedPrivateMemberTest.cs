@@ -19,7 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp;
-using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Rules;
 
 namespace SonarAnalyzer.Test.Rules
 {
