@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules
                                                             SeparatedSyntaxList<TSyntax> leftParameters,
                                                             SeparatedSyntaxList<TSyntax> rightParameters) where TSyntax : SyntaxNode =>
             leftParameters.Zip(rightParameters, (left, right) => left.IsEquivalentTo(right)).All(x => x)                    // Perf: Syntactic equivalence for all parameters first
-            && leftParameters.Zip(rightParameters, (left, right) => HaveSameParameterType(model, left, right)).Any(x => x); // Also make sure the parameter types are same
+            && leftParameters.Zip(rightParameters, (left, right) => HaveSameParameterType(model, left, right)).All(x => x); // Also make sure the parameter types are same
 
         private static bool HaveSameParameterType(SemanticModel model, SyntaxNode left, SyntaxNode right) =>
             model.GetDeclaredSymbol(left) is IParameterSymbol { Type: { } leftParameterType }
