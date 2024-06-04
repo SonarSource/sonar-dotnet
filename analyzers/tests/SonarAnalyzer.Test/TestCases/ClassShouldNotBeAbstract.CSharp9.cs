@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
-    public abstract record Empty { } // Noncompliant {{Convert this 'abstract' record to a concrete type with a protected constructor.}}
+    public abstract record Empty { }
 
     public abstract record Animal // Noncompliant {{Convert this 'abstract' record to an interface.}}
     {
@@ -19,7 +19,7 @@ namespace Tests.Diagnostics
         protected abstract void feed();
     }
 
-    public abstract record Color // Noncompliant {{Convert this 'abstract' record to a concrete type with a protected constructor.}}
+    public abstract record Color
     {
         private int red = 0;
         public int getRed() => red;
@@ -70,7 +70,7 @@ namespace Tests.Diagnostics
         public string Content2 { get; }
     }
 
-    public abstract record Record(string X); // Noncompliant {{Convert this 'abstract' record to a concrete type with a protected constructor.}}
+    public abstract record Record(string X);
 
     public abstract record Record2(string X) // Compliant, this record has a propery X which is concrete
     {

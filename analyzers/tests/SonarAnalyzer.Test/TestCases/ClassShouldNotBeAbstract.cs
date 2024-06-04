@@ -12,17 +12,14 @@ namespace Tests.Diagnostics
         public void Y() { }
     }
 
-    public abstract class Empty // Noncompliant {{Convert this 'abstract' class to a concrete type with a protected constructor.}}
-//                        ^^^^^
+    public abstract class Empty
     {
-
     }
 
-    public abstract class Animal //Noncompliant {{Convert this 'abstract' class to an interface.}}
+    public abstract class Animal // Noncompliant {{Convert this 'abstract' class to an interface.}}
     {
         protected abstract void move();
         protected abstract void feed();
-
     }
 
     public class SomeBaseClass { }
@@ -34,7 +31,7 @@ namespace Tests.Diagnostics
 
     }
 
-    public abstract class Color //Noncompliant {{Convert this 'abstract' class to a concrete type with a protected constructor.}}
+    public abstract class Color
     {
         private int red = 0;
         private int green = 0;
@@ -104,8 +101,7 @@ namespace Tests.Diagnostics
         public override string Content1 { get { return ""; } }
     }
 
-    public abstract class View3Derived : SomeUnknownType // Noncompliant
-                                                         // Error@-1 [CS0246]
+    public abstract class View3Derived : SomeUnknownType // Error [CS0246]
     {
         public string Content3 { get; }
         public override int Content1 { get { return 1; } }
