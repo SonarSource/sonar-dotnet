@@ -151,6 +151,20 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         ReportDiagnosticsForMembers(context, unusedSymbols, accessibility, fieldLikeSymbols);
     }
 
+    private static bool IsUsedWithReflection(ISymbol symbol, HashSet<ISymbol> symbolsUsedWithReflection)
+    {
+        var currentSymbol = symbol;
+        while (currentSymbol is not null)
+        {
+            if (symbolsUsedWithReflection.Contains(currentSymbol))
+            {
+                return true;
+            }
+            currentSymbol = currentSymbol.ContainingSymbol;
+        }
+        return false;
+    }
+
     private static bool IsMentionedInDebuggerDisplay(ISymbol symbol, CSharpSymbolUsageCollector usageCollector) =>
             usageCollector.DebuggerDisplayValues.Any(x => x.Contains(symbol.Name));
 
@@ -161,7 +175,9 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         var usedButUnreadFields = usageCollector.FieldSymbolUsages.Values
             .Where(x => x.Symbol.DeclaredAccessibility == Accessibility.Private || x.Symbol.ContainingType?.DeclaredAccessibility == Accessibility.Private)
             .Where(x => x.Symbol.Kind == SymbolKind.Field || x.Symbol.Kind == SymbolKind.Event)
-            .Where(x => !unusedSymbols.Contains(x.Symbol) && !IsMentionedInDebuggerDisplay(x.Symbol, usageCollector))
+            .Where(x => !unusedSymbols.Contains(x.Symbol)
+                && !IsMentionedInDebuggerDisplay(x.Symbol, usageCollector)
+                && !IsUsedWithReflection(x.Symbol, usageCollector.TypesUsedWithReflection))
             .Where(x => x.Declaration is not null && !x.Readings.Any());
 
         foreach (var usage in usedButUnreadFields)
@@ -173,7 +189,9 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
     private static HashSet<ISymbol> GetUnusedSymbols(CSharpSymbolUsageCollector usageCollector, IEnumerable<ISymbol> removableSymbols) =>
         removableSymbols
             .Except(usageCollector.UsedSymbols)
-            .Where(x => !IsMentionedInDebuggerDisplay(x, usageCollector) && !IsAccessorUsed(x, usageCollector))
+            .Where(x => !IsMentionedInDebuggerDisplay(x, usageCollector)
+                && !IsAccessorUsed(x, usageCollector)
+                && !IsUsedWithReflection(x, usageCollector.TypesUsedWithReflection))
             .ToHashSet();
 
     private static bool IsAccessorUsed(ISymbol symbol, CSharpSymbolUsageCollector usageCollector) =>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
 namespace Tests.Diagnostics
@@ -165,6 +166,103 @@ namespace Tests.Diagnostics
         public class ClassWithPrintMembers
         {
             private bool PrintMembers(StringBuilder builder) => true;   // Noncompliant - not a record
+        }
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9379
+namespace Repro_9379
+{
+    public static class Program
+    {
+        public static void Method()
+        {
+            var instance = CreateInstance<ClassInstantiatedThroughReflection>();
+        }
+
+        public static T CreateInstance<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>() =>
+            (T)Activator.CreateInstance(typeof(T), 42);
+
+        private class ClassInstantiatedThroughReflection
+        {
+            private const int PrivateConst = 42;                // Compliant - we assume all members are used through reflection
+            private int privateField;
+            private int PrivateProperty { get; set; }
+            private void PrivateMethod() { }
+            private ClassInstantiatedThroughReflection() { }
+            private event EventHandler PrivateEvent;
+
+            public ClassInstantiatedThroughReflection(int arg)  // Compliant - the constructor used in CreateInstance through Reflection
+            {
+            }
+
+            private class NestedType
+            {
+                private int privateField;
+            }
+        }
+
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
+        private class TypeDecoratedWithDynamicallyAccessedMembers
+        {
+            private const int PrivateConst = 42;
+            private int privateField;
+            private int PrivateProperty { get; set; }
+            private void PrivateMethod() { }
+            public TypeDecoratedWithDynamicallyAccessedMembers() { }
+            private event EventHandler PrivateEvent;
+
+            private class NestedType
+            {
+                private const int PrivateConst = 42;
+                private int privateField;
+                private int PrivateProperty { get; set; }
+                private void PrivateMethod() { }
+                private NestedType() { }
+                private event EventHandler PrivateEvent;
+            }
+        }
+
+        private class MembersDecoratedWithAttribute                             // Noncompliant
+        {
+            private const int PrivateConst = 42;                                // Noncompliant
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicFields)] private const int PrivateConstWithAttribute = 42;
+
+            private int privateField;                                           // Noncompliant
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicFields)] private int privateFieldWithAttribute;
+
+            private int PrivateProperty { get; set; }                           // Noncompliant
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicProperties)] private int PrivatePropertyWithAttribute { get; set; }
+
+            private void PrivateMethod() { }                                    // Noncompliant
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)] private void PrivateMethodWithAttribute() { }
+
+            private class NestedType { }                                        // Noncompliant
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicNestedTypes)] private class NestedTypeWithAttribute { }
+        }
+
+        private class ArgumentsDecoratedWithAttribute   // Noncompliant
+        {
+            public void PublicMethod() => Method(null); // Noncompliant
+
+            private void Method([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] NestedType arg) { }
+
+            private class NestedType
+            {
+                private NestedType(int arg) { }
+            }
+        }
+
+        private class DerivedFromTypeDecoratedWithDynamicallyAccessedMembers : TypeDecoratedWithDynamicallyAccessedMembers  // Noncompliant
+        {
+            private int privateField;                                                                                       // Noncompliant - [DynamicallyAccessedMembers] attribute is not inherited
+        }
+
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+        private class DynamicallyAccessedMembersOnlyForConstructors
+        {
+            private int privateField;   // FN - only public constructors are used are indicated to be used through reflection, not fields
+                                        // The analyzer assumens when the [DynamicallyAccessedMembers] attribute is used, then all members are used through reflection
         }
     }
 }

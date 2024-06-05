@@ -53,6 +53,7 @@ namespace SonarAnalyzer.Helpers
         public IDictionary<ISymbol, SymbolUsage> FieldSymbolUsages { get; } = new Dictionary<ISymbol, SymbolUsage>();
         public HashSet<string> DebuggerDisplayValues { get; } = [];
         public Dictionary<IPropertySymbol, AccessorAccess> PropertyAccess { get; } = [];
+        public HashSet<ISymbol> TypesUsedWithReflection { get; } = [];
 
         public CSharpSymbolUsageCollector(Compilation compilation, IEnumerable<ISymbol> knownSymbols)
         {
@@ -134,19 +135,26 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitAttribute(AttributeSyntax node)
         {
-            var symbol = semanticModel.GetSymbolInfo(node).Symbol;
-            if (symbol != null
-                && symbol.ContainingType.Is(KnownType.System_Diagnostics_DebuggerDisplayAttribute)
-                && node.ArgumentList != null)
+            if (semanticModel.GetSymbolInfo(node).Symbol is { } symbol)
             {
-                var arguments = node.ArgumentList.Arguments
-                    .Where(IsValueNameOrType)
-                    .Select(a => semanticModel.GetConstantValue(a.Expression))
-                    .Where(o => o.HasValue)
-                    .Select(o => o.Value)
-                    .OfType<string>();
+                if (symbol.ContainingType.Is(KnownType.System_Diagnostics_DebuggerDisplayAttribute)
+                    && node.ArgumentList != null)
+                {
+                    var arguments = node.ArgumentList.Arguments
+                        .Where(IsValueNameOrType)
+                        .Select(a => semanticModel.GetConstantValue(a.Expression))
+                        .Where(o => o.HasValue)
+                        .Select(o => o.Value)
+                        .OfType<string>();
 
-                DebuggerDisplayValues.UnionWith(arguments);
+                    DebuggerDisplayValues.UnionWith(arguments);
+                }
+                else if (symbol.ContainingType.Is(KnownType.System_Diagnostics_CodeAnalysis_DynamicallyAccessedMembersAttribute)
+                    && node.Parent.Parent is BaseTypeDeclarationSyntax typeDeclaration
+                    && semanticModel.GetDeclaredSymbol(typeDeclaration) is { } typeSymbol)
+                {
+                    TypesUsedWithReflection.Add(typeSymbol);
+                }
             }
             base.VisitAttribute(node);
 
@@ -167,6 +175,22 @@ namespace SonarAnalyzer.Helpers
                 TryStorePropertyAccess(node, symbols);
             }
             base.VisitIdentifierName(node);
+        }
+
+        public override void VisitTypeArgumentList(TypeArgumentListSyntax node)
+        {
+            if (semanticModel.GetSymbolInfo(node.Parent).Symbol is { } symbol)
+            {
+                var typeArgumentSymbols = symbol is IMethodSymbol method
+                    ? method.TypeParameters
+                    : ((INamedTypeSymbol)symbol).TypeParameters;
+                var typesWithDynamicallyAccessedMembers = typeArgumentSymbols.Zip(node.Arguments, (symbol, argument) => (symbol, argument))
+                    .Where(x => x.symbol.HasAttribute(KnownType.System_Diagnostics_CodeAnalysis_DynamicallyAccessedMembersAttribute))
+                    .Select(x => semanticModel.GetSymbolInfo(x.argument).Symbol)
+                    .Where(x => x is INamedTypeSymbol { IsUnboundGenericType: false });
+                TypesUsedWithReflection.UnionWith(typesWithDynamicallyAccessedMembers);
+            }
+            base.VisitTypeArgumentList(node);
         }
 
         public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
