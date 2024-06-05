@@ -10,10 +10,10 @@ namespace Tests.TestCases
     {
         public int prop { get; set; }
         private void doTheRest() { throw new NotSupportedException(); }
-        private void doSomething() { throw new NotSupportedException(); }
-        private void doSomething(int i) { throw new NotSupportedException(); }
-        private void doSomethingDifferent() { throw new NotSupportedException(); }
-        private void doSomething2() { throw new NotSupportedException(); }
+        private void DoSomething() { throw new NotSupportedException(); }
+        private void DoSomething(int i) { throw new NotSupportedException(); }
+        private void DoSomethingDifferent() { throw new NotSupportedException(); }
+        private void DoSomething2() { throw new NotSupportedException(); }
 
         public void Test_SingleLine()
         {
@@ -21,27 +21,27 @@ namespace Tests.TestCases
             switch (i)
             {
                 case 1:
-                    doSomething(prop);
+                    DoSomething(prop);
                     break;
                 case 2:
-                    doSomethingDifferent();
+                    DoSomethingDifferent();
                     break;
                 case 3:
-                    doSomething(prop);
+                    DoSomething(prop);
                     break;
                 case 4:
                     {
-                        doSomething2();
+                        DoSomething2();
                     }
                     break;
                 case 5:
                     {
-                        doSomething2();
+                        DoSomething2();
                         break;
                     }
 
                 default:
-                    doSomething(prop);
+                    DoSomething(prop);
                     break;
             }
 
@@ -49,10 +49,10 @@ namespace Tests.TestCases
             {
                 case 1:
                 case 3:
-                    doSomething();
+                    DoSomething();
                     break;
                 case 2:
-                    doSomethingDifferent();
+                    DoSomethingDifferent();
                     break;
                 default:
                     doTheRest();
@@ -67,51 +67,51 @@ namespace Tests.TestCases
             {
                 case 1: // Secondary
                     // Secondary@-1
-                    doSomething(prop);
-                    doSomething(prop);
+                    DoSomething(prop);
+                    DoSomething(prop);
                     break;
                 case 2:
-                    doSomethingDifferent();
+                    DoSomethingDifferent();
                     break;
                 case 3:  // Noncompliant
-                    doSomething(prop);
-                    doSomething(prop);
+                    DoSomething(prop);
+                    DoSomething(prop);
                     break;
                 case 4: // Secondary
                     {
-                        doSomething2();
-                        doSomething2();
+                        DoSomething2();
+                        DoSomething2();
 
                         break;
                     }
                 case 5: // Noncompliant
                     {
-                        doSomething2();
-                        doSomething2();
+                        DoSomething2();
+                        DoSomething2();
 
                         break;
                     }
                 case 6: // Secondary;
                     {
-                        doSomething2();
+                        DoSomething2();
                     }
                     {
-                        doSomething2();
+                        DoSomething2();
                     }
                     break;
 
                 case 7: // Noncompliant
                     {
-                        doSomething2();
+                        DoSomething2();
                     }
                     {
-                        doSomething2();
+                        DoSomething2();
                     }
                     break;
 
                 default: // Noncompliant
-                    doSomething(prop);
-                    doSomething(prop);
+                    DoSomething(prop);
+                    DoSomething(prop);
                     break;
             }
 
@@ -120,22 +120,22 @@ namespace Tests.TestCases
             {
                 case 1:
                 case 3:
-                    doSomething();
-                    doSomething();
+                    DoSomething();
+                    DoSomething();
                     break;
                 case 2:
-                    doSomethingDifferent();
-                    doSomethingDifferent();
+                    DoSomethingDifferent();
+                    DoSomethingDifferent();
                     break;
                 case 4:
                     k++;
-                    doSomething();
-                    doSomethingDifferent();
+                    DoSomething();
+                    DoSomethingDifferent();
                     break;
                 case 5:
                     k++;
-                    doSomethingDifferent();
-                    doSomething();
+                    DoSomethingDifferent();
+                    DoSomething();
                     break;
                 default:
                     doTheRest();
@@ -223,6 +223,35 @@ namespace Tests.TestCases
                     throw new InvalidOperationException("Unsupported array type");
             }
             return result;
+        }
+
+        public void ExceptionOfException(int a)
+        {
+            switch (a)
+            {
+                case 1:  // Secondary [Exception]
+                    DoSomething();
+                    break;
+                case 2: // Noncompliant [Exception]
+                    DoSomething();
+                    break;
+            }
+        }
+
+        public void Exception(int a)
+        {
+            switch (a)
+            {
+                case 10:
+                    DoSomething();
+                    break;
+                case 20:
+                    DoSomething2();
+                    break;
+                case 50:
+                    DoSomething();
+                    break;
+            }
         }
 
     }

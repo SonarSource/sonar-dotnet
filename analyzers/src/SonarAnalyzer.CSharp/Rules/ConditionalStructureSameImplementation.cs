@@ -45,7 +45,7 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
                     .GetPrecedingStatementsInConditionChain()
                     .ToList();
 
-                CheckStatement(c, ifStatement.Statement, precedingStatements);
+                CheckStatement(c, ifStatement.Statement, precedingStatements, ifStatement.Else is not null);
 
                 if (ifStatement.Else is null)
                 {
@@ -53,7 +53,7 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
                 }
 
                 precedingStatements.Add(ifStatement.Statement);
-                CheckStatement(c, ifStatement.Else.Statement, precedingStatements);
+                CheckStatement(c, ifStatement.Else.Statement, precedingStatements, true);
             },
             SyntaxKind.IfStatement);
 
@@ -62,20 +62,31 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
             {
                 var switchSection = (SwitchSectionSyntax)c.Node;
 
-                if (GetStatements(switchSection).Count(IsApprovedStatement) < 2)
-                {
-                    return;
-                }
-
-                var precedingSection = switchSection
+                var precedingSections = switchSection
                     .GetPrecedingSections()
-                    .FirstOrDefault(preceding => CSharpEquivalenceChecker.AreEquivalent(switchSection.Statements, preceding.Statements)
-                                                 && HaveTheSameInvocations(switchSection.Statements, preceding.Statements, c.SemanticModel));
+                    .ToList();
+                var numberOfStatements = GetStatements(switchSection).Count(IsApprovedStatement);
 
-                if (precedingSection is not null)
+                if (!HasDefaultClause((SwitchStatementSyntax)switchSection.Parent) && numberOfStatements == 1)
                 {
-                    ReportSyntaxNode(c, switchSection, precedingSection, "case");
+                    var equivalentStatements = precedingSections.Where(x => EquivalentStatements(x.Statements)).ToList();
+
+                    if (equivalentStatements.Count > 0 && equivalentStatements.Count == precedingSections.Count)
+                    {
+                        ReportSyntaxNode(c, switchSection, equivalentStatements[0], "case");
+                    }
                 }
+                else if (numberOfStatements > 1)
+                {
+                    var precedingSection = precedingSections.Find(x => EquivalentStatements(x.Statements));
+                    if (precedingSection is not null)
+                    {
+                        ReportSyntaxNode(c, switchSection, precedingSection, "case");
+                    }
+                }
+
+                bool EquivalentStatements(SyntaxList<SyntaxNode> statements) =>
+                    CSharpEquivalenceChecker.AreEquivalent(switchSection.Statements, statements) && HaveTheSameInvocations(switchSection.Statements, statements, c.SemanticModel);
             },
             SyntaxKind.SwitchSection);
     }
@@ -85,17 +96,27 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
             .Union(switchSection.Statements.OfType<BlockSyntax>().SelectMany(x => x.Statements))
             .Union(switchSection.Statements.Where(x => !x.IsKind(SyntaxKind.Block)));
 
-    private static void CheckStatement(SonarSyntaxNodeReportingContext context, SyntaxNode statement, IEnumerable<StatementSyntax> precedingStatements)
-    {
-        if (statement.ChildNodes().Count() < 2)
-        {
-            return;
-        }
+    private static bool HasDefaultClause(SwitchStatementSyntax switchStatement) =>
+        switchStatement.Sections.Any(x => x.Labels.Any(l => l.IsKind(SyntaxKind.DefaultSwitchLabel)));
 
-        var precedingStatement = precedingStatements.FirstOrDefault(x => CSharpEquivalenceChecker.AreEquivalent(statement, x));
-        if (precedingStatement is not null)
+    private static void CheckStatement(SonarSyntaxNodeReportingContext context, SyntaxNode statement, IList<StatementSyntax> precedingStatements, bool hasElse)
+    {
+        var numberOfStatements = statement.ChildNodes().Count();
+        if (!hasElse && numberOfStatements == 1)
         {
-            ReportSyntaxNode(context, statement, precedingStatement, "branch");
+            var precedingStatement = precedingStatements.Where(x => CSharpEquivalenceChecker.AreEquivalent(statement, x)).ToList();
+            if (precedingStatement.Count > 0 && precedingStatement.Count == precedingStatements.Count)
+            {
+                ReportSyntaxNode(context, statement, precedingStatement[0], "branch");
+            }
+        }
+        else if (numberOfStatements > 1)
+        {
+            var precedingStatement = precedingStatements.FirstOrDefault(x => CSharpEquivalenceChecker.AreEquivalent(statement, x));
+            if (precedingStatement is not null)
+            {
+                ReportSyntaxNode(context, statement, precedingStatement, "branch");
+            }
         }
     }
 

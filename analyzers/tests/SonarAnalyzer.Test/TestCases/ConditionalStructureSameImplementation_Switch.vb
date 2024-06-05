@@ -37,5 +37,25 @@
         Private Function doSomething2()
             Return Nothing
         End Function
+
+        Private Function ExceptionOfException(a As Integer)
+            Select Case a
+                Case 1
+                    doSomething2()
+                Case 2
+                    doSomething2() ' Noncompliant
+            End Select
+        End Function
+
+        Public Sub Exception(a As Integer)
+            Select Case True
+                Case a >= 0 AndAlso a < 10
+                    doSomething2()
+                Case a >= 10 AndAlso a < 20
+                    doSomethingDifferent()
+                Case a >= 20 AndAlso a < 50
+                    doSomething2()
+            End Select
+        End Sub
     End Class
 End Namespace

@@ -62,5 +62,22 @@ Namespace Tests.TestCases
             Return Nothing
         End Function
 
+        Public Sub ExceptionOfException(a As Integer)
+            If a = 1 Then
+                DoSomething1()
+            ElseIf a = 2 Then
+                DoSomething1() ' Noncompliant
+            End If
+        End Sub
+
+        Public Sub Exception(a As Integer)
+            If a >= 0 AndAlso a < 10 Then
+                DoSomething1()
+            ElseIf a >= 10 AndAlso a < 20 Then
+                DoSomething2()
+            ElseIf a >= 20 AndAlso a < 50 ' Compliant
+                DoSomething1()
+            End If
+        End Sub
     End Class
 End Namespace

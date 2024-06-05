@@ -93,6 +93,35 @@ namespace Tests.TestCases
                 foo = IntExtension.FooInt(foo);
             }
         }
+
+        // https://github.com/SonarSource/sonar-dotnet/issues/1255
+        public void ExceptionOfException(int a)
+        {
+            if (a == 1)
+            { // Secondary [Exception]
+                DoSomething1();
+            }
+            else if (a == 2)
+            { // Noncompliant [Exception]
+                DoSomething1();
+            }
+        }
+
+        public void Exception(int a)
+        {
+            if (a >= 0 && a < 10)
+            {
+                DoSomething1();
+            }
+            else if (a >= 10 && a < 20)
+            {
+                DoSomething2();
+            }
+            else if (a >= 20 && a < 50)
+            {
+                DoSomething1();
+            }
+        }
     }
 
     public static class IntExtension

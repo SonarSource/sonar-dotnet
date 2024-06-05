@@ -62,7 +62,7 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
 
                 for (var i = 1; i < statements.Count; i++)
                 {
-                    CheckStatementsAt(c, statements, i, "branch");
+                    CheckStatementsAt(c, statements, i, ifBlock.ElseBlock is not null, "branch");
                 }
             },
             SyntaxKind.MultiLineIfBlock);
@@ -72,28 +72,35 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
             {
                 var select = (SelectBlockSyntax)c.Node;
                 var statements = select.CaseBlocks.Select(b => b.Statements).ToList();
+                var hasCaseElse = select.CaseBlocks.Any(b => b.IsKind(SyntaxKind.CaseElseBlock));
                 for (var i = 1; i < statements.Count; i++)
                 {
-                    CheckStatementsAt(c, statements, i, "case");
+                    CheckStatementsAt(c, statements, i, hasCaseElse, "case");
                 }
             },
             SyntaxKind.SelectBlock);
     }
 
-    private static void CheckStatementsAt(SonarSyntaxNodeReportingContext context, List<SyntaxList<StatementSyntax>> statements, int currentIndex, string constructType)
+    private static void CheckStatementsAt(SonarSyntaxNodeReportingContext context, List<SyntaxList<StatementSyntax>> statements, int currentIndex, bool hasElse, string constructType)
     {
         var currentBlockStatements = statements[currentIndex];
-        if (currentBlockStatements.Count(IsApprovedStatement) < 2)
+        var numberOfStatements = currentBlockStatements.Count(IsApprovedStatement);
+        if (!hasElse && numberOfStatements == 1)
         {
-            return;
-        }
-
-        for (var j = 0; j < currentIndex; j++)
-        {
-            if (VisualBasicEquivalenceChecker.AreEquivalent(currentBlockStatements, statements[j]))
+            if (statements.Count > 1 && statements.TrueForAll(x => VisualBasicEquivalenceChecker.AreEquivalent(currentBlockStatements, x)))
             {
-                ReportIssue(context, currentBlockStatements, statements[j], constructType);
-                return;
+                ReportIssue(context, currentBlockStatements, statements[0], constructType);
+            }
+        }
+        else if (numberOfStatements > 1)
+        {
+            for (var j = 0; j < currentIndex; j++)
+            {
+                if (VisualBasicEquivalenceChecker.AreEquivalent(currentBlockStatements, statements[j]))
+                {
+                    ReportIssue(context, currentBlockStatements, statements[j], constructType);
+                    return;
+                }
             }
         }
     }
