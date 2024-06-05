@@ -35,7 +35,7 @@ public sealed class StaticFieldInGenericClass : SonarDiagnosticAnalyzer
             {
                 var typeDeclaration = (TypeDeclarationSyntax)c.Node;
                 if (c.IsRedundantPositionalRecordContext()
-                    || typeDeclaration.TypeParameterList == null
+                    || typeDeclaration.TypeParameterList is null
                     || typeDeclaration.TypeParameterList.Parameters.Count < 1)
                 {
                     return;
