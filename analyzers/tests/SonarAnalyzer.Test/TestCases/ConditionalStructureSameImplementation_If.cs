@@ -25,6 +25,11 @@ namespace Tests.TestCases
             {
                 DoSomething1();
             }
+
+            if (someCondition1)
+                DoSomething1(); // Compliant, ignore single line blocks
+            else
+                DoSomething1();
         }
 
         public void Test_MultilineBlocks()

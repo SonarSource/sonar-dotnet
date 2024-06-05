@@ -236,6 +236,19 @@ namespace Tests.TestCases
                     DoSomething();
                     break;
             }
+
+            switch (a)
+            {
+                case 1:
+                    DoSomething();
+                    break;
+                case 2:
+                    DoSomething();
+                    break;
+                default:
+                    DoSomething();
+                    break;
+            }
         }
 
         public void Exception(int a)
@@ -252,6 +265,32 @@ namespace Tests.TestCases
                     DoSomething();
                     break;
             }
+
+            switch (a)
+            {
+                case 10:
+                    DoSomething();
+                    break;
+                case 20:
+                    DoSomething2();
+                    break;
+                case 50:
+                    DoSomething();
+                    break;
+                default:
+                    DoSomething2();
+                    break;
+            }
+        }
+
+        public int SwitchExpression(int a)
+        {
+            return a switch
+            {
+                10 => a * 2,
+                20 => a * 2,
+                50 => a * 2,
+            };
         }
 
     }

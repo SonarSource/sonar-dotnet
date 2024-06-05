@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Rules;
+
+public abstract class ConditionalStructureSameImplementationBase : SonarDiagnosticAnalyzer
 {
-    public abstract class ConditionalStructureSameImplementationBase : SonarDiagnosticAnalyzer
-    {
-        internal const string DiagnosticId = "S1871";
-        internal const string MessageFormat = "Either merge this {1} with the identical one on line {0} or change one of the implementations.";
-    }
+    internal const string DiagnosticId = "S1871";
+    internal const string MessageFormat = "Either merge this {1} with the identical one on line {0} or change one of the implementations.";
 }
