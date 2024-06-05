@@ -110,4 +110,18 @@ namespace Repro_7521
     {
         private static readonly string[] field = new[] { "a", "b", "c" }; // Noncompliant
     }
+
+    public class Outer<T>
+    {
+        public class Inner
+        {
+            private static readonly string[] field = new[] { "a", "b", "c" }; // FN
+        }
+
+        public class InnerGeneric : GenericBase<T>
+        {
+            private static readonly string[] field = new[] { "a", "b", "c" }; // Compliant, we might not be able to change the base class, or want the field there
+        }
+    }
 }
+
