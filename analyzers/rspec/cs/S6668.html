@@ -9,6 +9,9 @@ mistake. This rule is going to raise in that scenario.</p>
   <li> Nuget package - <a href="https://www.nuget.org/packages/NLog">NLog</a> </li>
   <li> Nuget package - <a href="https://www.nuget.org/packages/Microsoft.Extensions.Logging">Microsoft.Extensions.Logging</a> </li>
 </ul>
+<h2>How to fix it</h2>
+<p>Use the dedicated overload that takes the log level, event id, and/or exception as arguments.</p>
+<h3>Noncompliant code example</h3>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 try { }
 catch (Exception ex)
@@ -16,6 +19,7 @@ catch (Exception ex)
     logger.LogDebug("An exception occured {Exception} with {EventId}.", ex, eventId); // Noncompliant
 }
 </pre>
+<h3>Compliant solution</h3>
 <pre data-diff-id="1" data-diff-type="compliant">
 try { }
 catch (Exception ex)

@@ -1,15 +1,6 @@
 <h2>Why is this an issue?</h2>
 <p>Sharing some naming conventions is a key point to make it possible for a team to efficiently collaborate. This rule checks that the logger field or
 property name matches a provided regular expression.</p>
-<p>The default regex will consider compliant the followings:</p>
-<ul>
-  <li> <code>logger</code> </li>
-  <li> <code>_logger</code> </li>
-  <li> <code>Logger</code> </li>
-  <li> <code>_Logger</code> </li>
-  <li> <code>log</code> </li>
-  <li> <code>_log</code> </li>
-</ul>
 <p>The rule supports the most popular logging frameworks:</p>
 <ul>
   <li> Nuget package - <a href="https://www.nuget.org/packages/Microsoft.Extensions.Logging">Microsoft.Extensions.Logging</a> </li>
@@ -18,11 +9,23 @@ property name matches a provided regular expression.</p>
   <li> Nuget package - <a href="https://www.nuget.org/packages/NLog">NLog</a> </li>
   <li> Nuget package - <a href="https://www.nuget.org/packages/log4net">log4net</a> </li>
 </ul>
+<h2>How to fix it</h2>
+<p>Update the name of the field or property to follow the configured naming convention. By default, the following names are considered compliant:</p>
+<ul>
+  <li> <code>{logger}</code> </li>
+  <li> <code>{_logger}</code> </li>
+  <li> <code>{Logger}</code> </li>
+  <li> <code>{_Logger}</code> </li>
+  <li> <code>{log}</code> </li>
+  <li> <code>{_log}</code> </li>
+</ul>
+<h3>Noncompliant code example</h3>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 private readonly ILogger myLogger; // Noncompliant
 
 public ILogger MyLogger { get; set; } // Noncompliant
 </pre>
+<h3>Compliant solution</h3>
 <pre data-diff-id="1" data-diff-type="compliant">
 private readonly ILogger logger; // Compliant
 
