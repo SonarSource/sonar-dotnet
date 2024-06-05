@@ -57,7 +57,7 @@ public class SarifParserCallbackImplTest {
   public LogTester logTester = new LogTester();
 
   private SensorContextTester ctx;
-  private Map<String, String> repositoryKeyByRoslynRuleKey = new HashMap<>();
+  private final Map<String, String> repositoryKeyByRoslynRuleKey = new HashMap<>();
 
   private SarifParserCallbackImpl callback;
 
@@ -426,6 +426,18 @@ public class SarifParserCallbackImplTest {
   @Test
   public void issue_with_invalid_precise_location_forCshtml_reports_on_line() {
     assertIssueReportedOnLine("Dummy.cshtml");
+  }
+
+  @Test
+  public void project_level_issues_for_different_projects() {
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
+    repositoryKeyByRoslynRuleKey.put("S3990", "S3990");
+
+    callback.onProjectIssue("S3990", "level", ctx.project(), "Provide a 'CLSCompliant' attribute for assembly 'First'.");
+    callback.onProjectIssue("S3990", "level", ctx.project(), "Provide a 'CLSCompliant' attribute for assembly 'Second'.");
+
+    // Project level issues with the same id are being reported only once.
+    assertThat(ctx.allIssues()).hasSize(1);
   }
 
   private void assertIssueReportedOnLine(String fileName) {
