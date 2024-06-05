@@ -14,7 +14,7 @@ namespace Tests.TestCases
     {
         private static readonly ConditionalWeakTable<T, Task<T>>.CreateValueCallback s_taskCreationCallback = Task.FromResult<T>;
 
-        private static Dictionary<string, List<T>> Dict, Dict4 = new Dictionary<string,List<T>>();
+        private static Dictionary<string, List<T>> Dict, Dict4 = new Dictionary<string, List<T>>();
         private static Dictionary<string, T[]> Dict2;
 
         public static string sProp1 { get; set; } // Noncompliant
@@ -82,15 +82,18 @@ namespace Tests.TestCases
 
         private static T CreateEmpty() => null;
     }
+}
 
-    // https://github.com/SonarSource/sonar-dotnet/issues/7521
+// https://github.com/SonarSource/sonar-dotnet/issues/7521
+namespace Repro_7521
+{
     public class GenericBase<T> { } // Might be out of our control
     public interface IGeneric<T> { }
     public interface IBoring { }
 
     public class GenericDerived<T> : GenericBase<T>, IBoring
     {
-        private static readonly string[] field = new[] { "a", "b", "c" }; // Noncompliant FP
+        private static readonly string[] field = new[] { "a", "b", "c" }; // Compliant, we might not be able to change the base class, or want the field there
     }
 
     public class ImplementsInterface : IBoring, IGeneric<int>
@@ -100,7 +103,7 @@ namespace Tests.TestCases
 
     public class ImplementsInterfaceGeneric<T> : IBoring, IGeneric<T>
     {
-        private static readonly string[] field = new[] { "a", "b", "c" }; // Noncompliant FP
+        private static readonly string[] field = new[] { "a", "b", "c" }; // Compliant, we might not be able to change the base class, or want the field there
     }
 
     public class ImplementsInterfaceGenericIrrelevantForBase<T> : IBoring, IGeneric<int>

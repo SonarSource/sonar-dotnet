@@ -41,6 +41,10 @@ public sealed class StaticFieldInGenericClass : SonarDiagnosticAnalyzer
                     return;
                 }
                 var typeParameterNames = typeDeclaration.TypeParameterList.Parameters.Select(x => x.Identifier.ToString()).ToArray();
+                if (typeDeclaration.BaseList is not null && typeDeclaration.BaseList.Types.Any(x => x.Type is GenericNameSyntax genericType && HasGenericTypeArgument(genericType, typeParameterNames)))
+                {
+                    return;
+                }
                 var variables = typeDeclaration.Members
                     .OfType<FieldDeclarationSyntax>()
                     .Where(x => x.Modifiers.Any(SyntaxKind.StaticKeyword) && !HasGenericType(c, x.Declaration.Type, typeParameterNames))
@@ -72,4 +76,7 @@ public sealed class StaticFieldInGenericClass : SonarDiagnosticAnalyzer
         root.DescendantNodesAndSelf()
             .OfType<IdentifierNameSyntax>()
             .Any(x => typeParameterNames.Contains(x.Identifier.Value) && context.SemanticModel.GetSymbolInfo(x).Symbol is { Kind: SymbolKind.TypeParameter });
+
+    private static bool HasGenericTypeArgument(GenericNameSyntax genericType, string[] typeParameterNames) =>
+        genericType.TypeArgumentList.Arguments.OfType<SimpleNameSyntax>().Any(x => typeParameterNames.Contains(x.Identifier.ValueText));
 }
