@@ -71,12 +71,12 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
 
     private static bool FlowStateEquals(TypeInfo expressionTypeInfo, ExpressionSyntax type)
     {
-        var castingToNullable = type.IsKind(SyntaxKind.NullableType);
+        var castingToNullable = type.IsKind(SyntaxKind.NullableType); // The Nullability() annotation of the cast target type can not be found on the symbol
         return expressionTypeInfo.Nullability().FlowState switch
         {
             NullableFlowState.None => true,
-            NullableFlowState.MaybeNull => castingToNullable,
-            NullableFlowState.NotNull => !castingToNullable,
+            NullableFlowState.MaybeNull => castingToNullable, // false when (string)maybeNull which is a narrowing cast and therefore not redundant
+            NullableFlowState.NotNull => !castingToNullable,  // false when (string?)nonNull which is a widening cast but not redundant in cases like tuples (a: (string?)"", b: "")
             _ => true,
         };
     }
