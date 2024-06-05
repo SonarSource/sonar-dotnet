@@ -34,14 +34,10 @@ public sealed class StaticFieldInGenericClass : SonarDiagnosticAnalyzer
         context.RegisterNodeAction(c =>
             {
                 var typeDeclaration = (TypeDeclarationSyntax)c.Node;
+                var typeParameterNames = CollectTypeParameterNames(typeDeclaration);
                 if (c.IsRedundantPositionalRecordContext()
-                    || typeDeclaration.TypeParameterList is null
-                    || typeDeclaration.TypeParameterList.Parameters.Count < 1)
-                {
-                    return;
-                }
-                var typeParameterNames = typeDeclaration.TypeParameterList.Parameters.Select(x => x.Identifier.ToString()).ToArray();
-                if (typeDeclaration.BaseList is not null && typeDeclaration.BaseList.Types.Any(x => x.Type is GenericNameSyntax genericType && HasGenericTypeArgument(genericType, typeParameterNames)))
+                    || typeParameterNames.Length == 0
+                    || BaseTypeHasGenericTypeArgument(typeDeclaration, typeParameterNames))
                 {
                     return;
                 }
@@ -72,10 +68,27 @@ public sealed class StaticFieldInGenericClass : SonarDiagnosticAnalyzer
         }
     }
 
+    private static string[] CollectTypeParameterNames(SyntaxNode current)
+    {
+        var names = new HashSet<string>();
+        while (current is not null)
+        {
+            if (current is TypeDeclarationSyntax { TypeParameterList: not null } typeDeclaration)
+            {
+                names.AddRange(typeDeclaration.TypeParameterList.Parameters.Select(x => x.Identifier.ValueText));
+            }
+            current = current.Parent;
+        }
+        return names.ToArray();
+    }
+
     private static bool HasGenericType(SonarSyntaxNodeReportingContext context, SyntaxNode root, string[] typeParameterNames) =>
         root.DescendantNodesAndSelf()
             .OfType<IdentifierNameSyntax>()
             .Any(x => typeParameterNames.Contains(x.Identifier.Value) && context.SemanticModel.GetSymbolInfo(x).Symbol is { Kind: SymbolKind.TypeParameter });
+
+    private static bool BaseTypeHasGenericTypeArgument(TypeDeclarationSyntax typeDeclaration, string[] typeParameterNames) =>
+        typeDeclaration.BaseList is not null && typeDeclaration.BaseList.Types.Any(x => x.Type is GenericNameSyntax genericType && HasGenericTypeArgument(genericType, typeParameterNames));
 
     private static bool HasGenericTypeArgument(GenericNameSyntax genericType, string[] typeParameterNames) =>
         genericType.TypeArgumentList.Arguments.OfType<SimpleNameSyntax>().Any(x => typeParameterNames.Contains(x.Identifier.ValueText));
