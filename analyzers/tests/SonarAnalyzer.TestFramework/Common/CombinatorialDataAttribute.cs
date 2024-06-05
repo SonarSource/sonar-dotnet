@@ -35,7 +35,7 @@ public sealed class DataValuesAttribute : Attribute
 }
 
 [AttributeUsage(AttributeTargets.Method)]
-public sealed class CombinatorialDataAttribute : Attribute, ITestDataSource
+public sealed class CombinatorialDataAttribute : TestMethodAttribute, ITestDataSource
 {
     public IEnumerable<object[]> GetData(MethodInfo methodInfo)
     {
