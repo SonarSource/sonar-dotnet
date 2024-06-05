@@ -20,34 +20,33 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class ExceptionShouldNotBeThrownFromUnexpectedMethodsTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<ExceptionShouldNotBeThrownFromUnexpectedMethods>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void ExceptionShouldNotBeThrownFromUnexpectedMethods() =>
-            builder.AddPaths("ExceptionShouldNotBeThrownFromUnexpectedMethods.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .Verify();
+[TestClass]
+public class ExceptionShouldNotBeThrownFromUnexpectedMethodsTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<ExceptionShouldNotBeThrownFromUnexpectedMethods>();
+
+    [TestMethod]
+    public void ExceptionShouldNotBeThrownFromUnexpectedMethods() =>
+        builder.AddPaths("ExceptionShouldNotBeThrownFromUnexpectedMethods.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
 
 #if NET
 
-        [TestMethod]
-        public void ExceptionShouldNotBeThrownFromUnexpectedMethods_CSharp9() =>
-            builder.AddPaths("ExceptionShouldNotBeThrownFromUnexpectedMethods.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
+    [TestMethod]
+    public void ExceptionShouldNotBeThrownFromUnexpectedMethods_CSharp9() =>
+        builder.AddPaths("ExceptionShouldNotBeThrownFromUnexpectedMethods.CSharp9.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .Verify();
 
-        [TestMethod]
-        public void ExceptionShouldNotBeThrownFromUnexpectedMethods_CSharp11() =>
-            builder.AddPaths("ExceptionShouldNotBeThrownFromUnexpectedMethods.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void ExceptionShouldNotBeThrownFromUnexpectedMethods_CSharp11() =>
+        builder.AddPaths("ExceptionShouldNotBeThrownFromUnexpectedMethods.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
 
 #endif
 
-    }
 }
