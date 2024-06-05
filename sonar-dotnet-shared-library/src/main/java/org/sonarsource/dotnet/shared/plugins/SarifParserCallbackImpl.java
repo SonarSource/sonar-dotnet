@@ -19,7 +19,6 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -27,7 +26,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -341,17 +339,17 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
   private record ProjectIssue(String ruleId, String message) { }
 
   private record Issue(String ruleId, String absolutePath, int startLine, int startColumn, int endLine, int endColumn) {
-     Issue(String ruleId, String path) {
-       this(ruleId, path, 0, 0, 0, 0);
-     }
+    Issue(String ruleId, String path) {
+      this(ruleId, path, 0, 0, 0, 0);
+    }
 
-     Issue(String ruleId, Location location) {
-       this(ruleId,
-         location.getAbsolutePath(),
-         location.getStartLine(),
-         location.getStartColumn(),
-         location.getEndLine(),
-         location.getEndColumn());
+    Issue(String ruleId, Location location) {
+      this(ruleId,
+        location.getAbsolutePath(),
+        location.getStartLine(),
+        location.getStartColumn(),
+        location.getEndLine(),
+        location.getEndColumn());
     }
   }
 }
