@@ -66,7 +66,7 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind>() : 
         // 1. The controller does not have any actions defined
         // 2. At least one action is not annotated with a route attribute or is annotated with a parameterless attribute
         // 3. There is at least one action with a route template that does not start with '/'
-        if (!actions.Any() || actions.Any(x => !x.RouteParameters.Any() || x.RouteParameters.Values.Any(x => !x.StartsWith("/"))))
+        if (!actions.Any() || actions.Any(x => !x.RouteParameters.Any() || x.RouteParameters.Values.Any(x => !x.StartsWith("/") && !x.StartsWith("~/"))))
         {
             return;
         }

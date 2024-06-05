@@ -193,3 +193,10 @@ public partial class PartialCompliantController : Controller // Compliant - its 
     [Route("/[action]")]
     public ActionResult Index3() => View();
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9002
+public class Repro_9002 : Controller        // Noncompliant
+{
+    [Route("~/B")]                          // Secondary
+    public ActionResult Index() => View();
+}
