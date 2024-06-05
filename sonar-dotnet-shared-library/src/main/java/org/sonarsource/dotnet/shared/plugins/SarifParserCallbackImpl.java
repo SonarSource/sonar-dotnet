@@ -59,6 +59,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
   private final SensorContext context;
   private final Map<String, String> repositoryKeyByRoslynRuleKey;
   private final Set<Issue> savedIssues = new HashSet<>();
+  private final Set<ProjectIssue> projectIssues = new HashSet<>();
   private final boolean ignoreThirdPartyIssues;
   private final Set<String> bugCategories;
   private final Set<String> codeSmellCategories;
@@ -78,9 +79,10 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
 
   @Override
   public void onProjectIssue(String ruleId, @Nullable String level, InputProject inputProject, String message) {
-    // De-duplicate issues
-    Issue issue = new Issue(ruleId, inputProject.toString(), true);
-    if (!savedIssues.add(issue)) {
+    // Remove duplicate issues.
+    // We do not have enough information (other than the message) to distinguish between different dotnet projects.
+    // Due to this, project level issues should always mention the assembly in their message (see: S3990, S3992, or S3904)
+    if (!projectIssues.add(new ProjectIssue(ruleId, message))) {
       return;
     }
 
@@ -104,7 +106,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
   @Override
   public void onFileIssue(String ruleId, @Nullable String level, String absolutePath, Collection<Location> secondaryLocations, String message) {
     // De-duplicate issues
-    Issue issue = new Issue(ruleId, absolutePath, false);
+    Issue issue = new Issue(ruleId, absolutePath);
     if (!savedIssues.add(issue)) {
       return;
     }
@@ -336,23 +338,42 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     LOG.debug("Skipping issue {}, input file not found or excluded: {}", ruleId, filePath);
   }
 
+  private static class ProjectIssue {
+    private final String ruleId;
+    private final String message;
+
+    ProjectIssue(String ruleId, String message) {
+      this.ruleId = ruleId;
+      this.message = message;
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(ruleId, message);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+      if (!(other instanceof ProjectIssue o)) {
+        return false;
+      }
+
+      return Objects.equals(ruleId, o.ruleId)
+        && Objects.equals(message, o.message);
+    }
+  }
+
   private static class Issue {
-    private String ruleId;
-    private String moduleId;
-    private String absolutePath;
+    private final String ruleId;
+    private final String absolutePath;
     private int startLine;
     private int startColumn;
     private int endLine;
     private int endColumn;
 
-    Issue(String ruleId, String moduleOrPath, boolean isModuleId) {
+    Issue(String ruleId, String absolutePath) {
       this.ruleId = ruleId;
-      if (isModuleId) {
-        this.moduleId = moduleOrPath;
-        this.absolutePath = "";
-      } else {
-        this.absolutePath = moduleOrPath;
-      }
+      this.absolutePath = absolutePath;
     }
 
     Issue(String ruleId, Location location) {
@@ -366,19 +387,17 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
 
     @Override
     public int hashCode() {
-      return Objects.hash(ruleId, moduleId, absolutePath, startLine, startColumn, endLine, endColumn);
+      return Objects.hash(ruleId, absolutePath, startLine, startColumn, endLine, endColumn);
     }
 
     @Override
     public boolean equals(Object other) {
-      if (!(other instanceof Issue)) {
+      if (!(other instanceof Issue o)) {
         return false;
       }
-      Issue o = (Issue) other;
 
       // note that comparison of absolute path is done using Path.
       return Objects.equals(ruleId, o.ruleId)
-        && Objects.equals(moduleId, o.moduleId)
         && Objects.equals(startLine, o.startLine)
         && Objects.equals(startColumn, o.startColumn)
         && Objects.equals(endLine, o.endLine)

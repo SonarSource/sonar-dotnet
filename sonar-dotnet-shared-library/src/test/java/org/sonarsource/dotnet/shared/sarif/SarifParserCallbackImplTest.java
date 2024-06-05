@@ -434,10 +434,11 @@ public class SarifParserCallbackImplTest {
     repositoryKeyByRoslynRuleKey.put("S3990", "S3990");
 
     callback.onProjectIssue("S3990", "level", ctx.project(), "Provide a 'CLSCompliant' attribute for assembly 'First'.");
-    callback.onProjectIssue("S3990", "level", ctx.project(), "Provide a 'CLSCompliant' attribute for assembly 'Second'.");
+    callback.onProjectIssue("S3990", "level", ctx.project(), "Provide a 'CLSCompliant' attribute for assembly 'First'.");
+    assertThat(ctx.allIssues()).hasSize(1); // Issues with the same id and message are considered duplicates.
 
-    // Project level issues with the same id are being reported only once.
-    assertThat(ctx.allIssues()).hasSize(1);
+    callback.onProjectIssue("S3990", "level", ctx.project(), "Provide a 'CLSCompliant' attribute for assembly 'Second'.");
+    assertThat(ctx.allIssues()).hasSize(2); // A different message leads to a different issue
   }
 
   private void assertIssueReportedOnLine(String fileName) {
