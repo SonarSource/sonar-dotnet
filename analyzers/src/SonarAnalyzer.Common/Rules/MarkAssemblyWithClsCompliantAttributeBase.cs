@@ -20,13 +20,11 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class MarkAssemblyWithClsCompliantAttributeBase : MarkAssemblyWithAttributeBase
+    public abstract class MarkAssemblyWithClsCompliantAttributeBase() : MarkAssemblyWithAttributeBase(DiagnosticId, MessageFormat)
     {
-        protected const string DiagnosticId = "S3990";
+        private const string DiagnosticId = "S3990";
         private const string MessageFormat = "Provide a 'CLSCompliant' attribute for assembly '{0}'.";
 
         private protected override KnownType AttributeToFind => KnownType.System_CLSCompliantAttribute;
-
-        protected MarkAssemblyWithClsCompliantAttributeBase() : base(DiagnosticId, MessageFormat) { }
     }
 }

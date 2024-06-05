@@ -20,13 +20,11 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class MarkAssemblyWithComVisibleAttributeBase : MarkAssemblyWithAttributeBase
+    public abstract class MarkAssemblyWithComVisibleAttributeBase() : MarkAssemblyWithAttributeBase(DiagnosticId, MessageFormat)
     {
         private const string DiagnosticId = "S3992";
         private const string MessageFormat = "Provide a 'ComVisible' attribute for assembly '{0}'.";
 
         private protected override KnownType AttributeToFind => KnownType.System_Runtime_InteropServices_ComVisibleAttribute;
-
-        protected MarkAssemblyWithComVisibleAttributeBase() : base(DiagnosticId, MessageFormat) { }
     }
 }
