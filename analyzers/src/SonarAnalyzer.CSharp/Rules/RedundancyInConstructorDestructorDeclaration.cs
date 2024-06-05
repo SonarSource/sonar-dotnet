@@ -48,16 +48,15 @@ public sealed class RedundancyInConstructorDestructorDeclaration : SonarDiagnost
     private static void CheckTypesWithPrimaryConstructor(SonarSyntaxNodeReportingContext context)
     {
         var typeDeclaration = (TypeDeclarationSyntax)context.Node;
-        if (!IsRecordInheritingFromRecordWithParameters(typeDeclaration)
+        if (!IsInheritingFromTypeWithValueInPrimaryConstructor(typeDeclaration)
             && typeDeclaration.ParameterList() is { Parameters.Count: 0 } parameterList
             && !IsStructWithInitializedFieldOrProperty(typeDeclaration, context.SemanticModel))
         {
             context.ReportIssue(Rule, parameterList, "primary constructor");
         }
 
-        static bool IsRecordInheritingFromRecordWithParameters(TypeDeclarationSyntax node) =>
-            RecordDeclarationSyntaxWrapper.IsInstance(node)
-            && ((RecordDeclarationSyntaxWrapper)node).BaseList is { } baseList
+        static bool IsInheritingFromTypeWithValueInPrimaryConstructor(TypeDeclarationSyntax node) =>
+            node.BaseList is { } baseList
             && baseList.DescendantNodes().OfType<ArgumentSyntax>().Any();
     }
 

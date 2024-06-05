@@ -3,9 +3,30 @@ namespace Repro_8092
 {
     namespace PrimaryParameterlessConstructor
     {
-        class AClassWithBody() { }                // Noncompliant {{Remove this redundant primary constructor.}}
+        class AClassWithBody() { }                                              // Noncompliant {{Remove this redundant primary constructor.}}
 //                          ^^
-        class AClassWithoutBody();                // Noncompliant
+        class AClassWithoutBody();                                              // Noncompliant
+
+        public abstract class BaseClass(string value);
+
+        public class SomeClass() : BaseClass("SomeValue");                      // Compliant, Foo is calling Base constructor with primary constructor syntax, it's not redundant
+
+        public class DefaultStyle : BaseClass
+        {
+            public DefaultStyle() : base("SomeValue")                           // Compliant, "default" way of calling Base constructor
+            { }
+        }
+
+        public abstract record class BaseRecordClass(string value);
+
+        public record class SomeRecordClass() : BaseRecordClass("SomeValue");  // Compliant, Foo is calling Base constructor with primary constructor syntax, it's not redundant
+
+        public record class DefaultStyleRecordClass : BaseRecordClass
+        {
+            public DefaultStyleRecordClass() : base("SomeValue")               // Compliant, "default" way of calling Base constructor
+            { }
+        }
+
         struct AStructWithBody() { }              // Noncompliant
         struct AStructWithoutBody();              // Noncompliant
         record ARecordWithBody() { }              // Noncompliant
