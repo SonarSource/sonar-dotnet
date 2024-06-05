@@ -82,4 +82,29 @@ namespace Tests.TestCases
 
         private static T CreateEmpty() => null;
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/7521
+    public class GenericBase<T> { } // Might be out of our control
+    public interface IGeneric<T> { }
+    public interface IBoring { }
+
+    public class GenericDerived<T> : GenericBase<T>, IBoring
+    {
+        private static readonly string[] field = new[] { "a", "b", "c" }; // Noncompliant FP
+    }
+
+    public class ImplementsInterface : IBoring, IGeneric<int>
+    {
+        private static readonly string[] field = new[] { "a", "b", "c" }; // Compliant
+    }
+
+    public class ImplementsInterfaceGeneric<T> : IBoring, IGeneric<T>
+    {
+        private static readonly string[] field = new[] { "a", "b", "c" }; // Noncompliant FP
+    }
+
+    public class ImplementsInterfaceGenericIrrelevantForBase<T> : IBoring, IGeneric<int>
+    {
+        private static readonly string[] field = new[] { "a", "b", "c" }; // Noncompliant
+    }
 }
