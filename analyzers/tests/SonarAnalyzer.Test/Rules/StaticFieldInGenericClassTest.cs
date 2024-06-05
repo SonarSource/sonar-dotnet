@@ -20,28 +20,27 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class StaticFieldInGenericClassTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<StaticFieldInGenericClass>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void StaticFieldInGenericClass() =>
-            builder.AddPaths("StaticFieldInGenericClass.cs").Verify();
+[TestClass]
+public class StaticFieldInGenericClassTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<StaticFieldInGenericClass>();
+
+    [TestMethod]
+    public void StaticFieldInGenericClass() =>
+        builder.AddPaths("StaticFieldInGenericClass.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void StaticFieldInGenericClass_CSharp9() =>
-            builder.AddPaths("StaticFieldInGenericClass.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+    [TestMethod]
+    public void StaticFieldInGenericClass_CSharp9() =>
+        builder.AddPaths("StaticFieldInGenericClass.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
-        public void StaticFieldInGenericClass_CSharp10() =>
-            builder.AddPaths("StaticFieldInGenericClass.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+    [TestMethod]
+    public void StaticFieldInGenericClass_CSharp10() =>
+        builder.AddPaths("StaticFieldInGenericClass.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif
 
-    }
 }
