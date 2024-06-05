@@ -110,7 +110,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
                     return true;
                 }
 
-                public static bool Test2<TKey, TValue>(IDictionary<TKey, TValue> dict) {{constraint1}} // Noncompliant
+                public static bool Test2<TValue, TKey>(IDictionary<TKey, TValue> dict) {{constraint1}} // Noncompliant
                 {
                     Console.WriteLine(dict);
                     Console.WriteLine(dict);

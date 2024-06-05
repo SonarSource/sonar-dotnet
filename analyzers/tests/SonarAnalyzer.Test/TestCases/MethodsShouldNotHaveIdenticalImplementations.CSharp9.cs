@@ -101,7 +101,7 @@ public static class TypeConstraints
         Console.WriteLine(x);
     }
 
-    public static void Second<T>(T? value) where T : class  // Compliant, method looks the same but different overloads are called due to the type constraints used. See: https://github.com/SonarSource/sonar-dotnet/issues/7068
+    public static void Second<T>(T? value) where T : class  // Compliant, method looks the same but different overloads are called due to the type constraints used.
     {
         var x = Use(value);
         Console.WriteLine(x);
