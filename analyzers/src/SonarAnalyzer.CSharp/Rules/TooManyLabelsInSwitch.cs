@@ -39,7 +39,7 @@ public class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind, Switc
         statement.Sections.Count;
 
     protected override bool AllSectionsAreOneLiner(SwitchStatementSyntax statement) =>
-        !statement.Sections.Any(x => x.Statements.Count > 1 || (x.Statements.Count == 1 && x.Statements[0] is BlockSyntax));
+        statement.Sections.All(x => x.Statements.Count is 0 or 1 && x.Statements.All(y => y is not BlockSyntax));
 
     protected override Location GetKeywordLocation(SwitchStatementSyntax statement) =>
         statement.SwitchKeyword.GetLocation();
