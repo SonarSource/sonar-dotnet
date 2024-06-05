@@ -88,7 +88,7 @@ public sealed class StaticFieldInGenericClass : SonarDiagnosticAnalyzer
             .Any(x => typeParameterNames.Contains(x.Identifier.Value) && context.SemanticModel.GetSymbolInfo(x).Symbol is { Kind: SymbolKind.TypeParameter });
 
     private static bool BaseTypeHasGenericTypeArgument(TypeDeclarationSyntax typeDeclaration, string[] typeParameterNames) =>
-        typeDeclaration.BaseList is not null && typeDeclaration.BaseList.Types.Any(x => x.Type is GenericNameSyntax genericType && HasGenericTypeArgument(genericType, typeParameterNames));
+        typeDeclaration.BaseList is { } baseList && baseList.Types.Any(x => x.Type is GenericNameSyntax genericType && HasGenericTypeArgument(genericType, typeParameterNames));
 
     private static bool HasGenericTypeArgument(GenericNameSyntax genericType, string[] typeParameterNames) =>
         genericType.TypeArgumentList.Arguments.OfType<SimpleNameSyntax>().Any(x => typeParameterNames.Contains(x.Identifier.ValueText));
