@@ -39,7 +39,7 @@ class ProjectLevelDuplicationTest {
   private static Path temp;
 
   @Test
-  void containsOnlyOneProjectLevelIssue() throws IOException {
+  void projectLevelIssuesAreRaiseOncePerProject() throws IOException {
     Tests.analyzeProject(temp, "ProjectLevelIssue");
 
     assertThat(getComponent("ProjectLevelIssue")).isNotNull();
@@ -47,6 +47,6 @@ class ProjectLevelDuplicationTest {
       .stream()
       .filter(x -> x.getRule().equals("csharpsquid:S3904"))
       .collect(Collectors.toList());
-    assertThat(projectLevelIssues).hasSize(1);
+    assertThat(projectLevelIssues).hasSize(2);
   }
 }
