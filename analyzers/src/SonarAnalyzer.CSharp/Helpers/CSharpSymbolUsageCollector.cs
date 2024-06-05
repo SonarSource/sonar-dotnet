@@ -53,6 +53,7 @@ internal class CSharpSymbolUsageCollector : SafeCSharpSyntaxWalker
     public IDictionary<ISymbol, SymbolUsage> FieldSymbolUsages { get; } = new Dictionary<ISymbol, SymbolUsage>();
     public HashSet<string> DebuggerDisplayValues { get; } = [];
     public Dictionary<IPropertySymbol, AccessorAccess> PropertyAccess { get; } = [];
+    public HashSet<ISymbol> PrivateAttributes { get; } = [];
     public HashSet<ISymbol> TypesUsedWithReflection { get; } = [];
 
     public CSharpSymbolUsageCollector(Compilation compilation, IEnumerable<ISymbol> knownSymbols)

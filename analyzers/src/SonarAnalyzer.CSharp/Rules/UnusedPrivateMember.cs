@@ -191,6 +191,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             .Except(usageCollector.UsedSymbols)
             .Where(x => !IsMentionedInDebuggerDisplay(x, usageCollector)
                 && !IsAccessorUsed(x, usageCollector)
+                && !usageCollector.PrivateAttributes.Contains(x)
                 && !IsUsedWithReflection(x, usageCollector.TypesUsedWithReflection))
             .ToHashSet();
 

@@ -448,10 +448,10 @@ class Repro_8342
     [Private3] protected void AProtectedMethod() { }
     [Private4] private void APrivateMethodCalledByAPublicMethod() { }
 
-    private class Private1Attribute : Attribute { } // Noncompliant: FP: attribute used on a public method
-    private class Private2Attribute : Attribute { } // Noncompliant: FP: attribute used on an internal method
-    private class Private3Attribute : Attribute { } // Noncompliant: FP: attribute used on a protected method
-    private class Private4Attribute : Attribute { } // Noncompliant: FP: attribute used on a private method used by a public method
+    private class Private1Attribute : Attribute { }
+    private class Private2Attribute : Attribute { }
+    private class Private3Attribute : Attribute { }
+    private class Private4Attribute : Attribute { }
 }
 
 // https://github.com/SonarSource/sonar-dotnet/issues/8532
