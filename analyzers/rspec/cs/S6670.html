@@ -4,11 +4,16 @@ href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.writ
 output stream directly, bypassing the trace formatting and filtering performed by <a
 href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.tracelistener.traceevent">TraceListener.TraceEvent</a> implementations. It is
 preferred to use <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.traceerror">Trace.TraceError</a>, <a
-href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.tracewarning">Trace.TraceWarning</a> and <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.tracewarning">Trace.TraceWarning</a>, and <a
 href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.traceinformation">Trace.TraceInformation</a> methods instead because they
 call the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.tracelistener.traceevent">TraceEvent method</a> which filters the
 trace output according to the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.traceeventtype">TraceEventType</a> (Error,
 Warning or Information) and enhance the output with additional information.</p>
+<h2>How to fix it</h2>
+<p>Use the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.traceerror">Trace.TraceError</a>, <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.tracewarning">Trace.TraceWarning</a>, or <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.traceinformation">Trace.TraceInformation</a> methods.</p>
+<h3>Noncompliant code example</h3>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 try
 {
@@ -20,6 +25,7 @@ catch (Exception ex)
     Trace.WriteLine(ex); // Noncompliant
 }
 </pre>
+<h3>Compliant solution</h3>
 <pre data-diff-id="1" data-diff-type="compliant">
 try
 {

@@ -13,6 +13,12 @@ href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.logging.
   from entries logged in the type <code>B</code> </li>
 </ul>
 <p>Further details and examples are provided in {rule:csharpsquid:S3416}.</p>
+<p>This rule specifically targets the generic logging interface <a
+href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.logging.ilogger-1"><code>ILogger&lt;TCategoryName&gt;</code> Interface</a>
+defined by <a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/logging">Microsoft Extensions Logging</a>.</p>
+<h2>How to fix it</h2>
+<p>Change the generic type parameter of the <code>ILogger</code> interface to match the enclosing type.</p>
+<h3>Noncompliant code example</h3>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 class EnclosingType
 {
@@ -22,7 +28,7 @@ class EnclosingType
     }
 }
 </pre>
-<p>To fix that, the generic type parameter of the <code>ILogger</code> interface should match the enclosing type.</p>
+<h3>Compliant solution</h3>
 <pre data-diff-id="1" data-diff-type="compliant">
 class EnclosingType
 {
@@ -32,9 +38,6 @@ class EnclosingType
     }
 }
 </pre>
-<p>This rule specifically targets the generic logging interface <a
-href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.logging.ilogger-1"><code>ILogger&lt;TCategoryName&gt;</code> Interface</a>
-defined by <a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/logging">Microsoft Extensions Logging</a>.</p>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
