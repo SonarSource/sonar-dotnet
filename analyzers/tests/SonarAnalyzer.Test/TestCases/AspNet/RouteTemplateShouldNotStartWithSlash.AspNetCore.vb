@@ -312,3 +312,12 @@ Public Class ControllerRequirementsInfluenceActionsCheck
     End Class
 
 End Class
+
+' https://github.com/SonarSource/sonar-dotnet/issues/9002
+Public Class Repro_9002                     ' Noncompliant
+    Inherits Controller
+    <Route("~/B")>                          ' Secondary
+    Public Function Index() As ActionResult
+        Return View()
+    End Function
+End Class
