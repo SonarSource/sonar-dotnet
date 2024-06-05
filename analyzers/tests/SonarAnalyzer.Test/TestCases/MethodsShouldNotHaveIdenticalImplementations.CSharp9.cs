@@ -106,4 +106,25 @@ public static class TypeConstraints
         var x = Use(value);
         Console.WriteLine(x);
     }
+
+    public static bool Compare1<T>(T? value1, T value2) // Secondary
+    {
+        Console.WriteLine(value1);
+        Console.WriteLine(value2);
+        return true;
+    }
+
+    public static bool Compare2<T>(T? value1, T value2)  // Noncompliant
+    {
+        Console.WriteLine(value1);
+        Console.WriteLine(value2);
+        return true;
+    }
+
+    public static bool Compare3<T>(T? value1, T value2) where T : System.IComparable // Compliant. Parameter type constraints don't match
+    {
+        Console.WriteLine(value1);
+        Console.WriteLine(value2);
+        return true;
+    }
 }
