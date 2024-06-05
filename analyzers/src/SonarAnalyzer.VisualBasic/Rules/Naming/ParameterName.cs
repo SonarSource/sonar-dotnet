@@ -18,37 +18,52 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.VisualBasic
+namespace SonarAnalyzer.Rules.VisualBasic;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class ParameterName : ParametrizedDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class ParameterName : ParametrizedDiagnosticAnalyzer
-    {
-        internal const string DiagnosticId = "S1654";
-        private const string MessageFormat = "Rename this parameter to match the regular expression: '{0}'.";
+    private const string DiagnosticId = "S1654";
+    private const string MessageFormat = "Rename this parameter to match the regular expression: '{0}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat,
-                isEnabledByDefault: false);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        [RuleParameter("format", PropertyType.String,
-            "Regular expression used to check the parameter names against.", NamingHelper.CamelCasingPattern)]
-        public string Pattern { get; set; } = NamingHelper.CamelCasingPattern;
+    [RuleParameter("format", PropertyType.String, "Regular expression used to check the parameter names against.", NamingHelper.CamelCasingPattern)]
+    public string Pattern { get; set; } = NamingHelper.CamelCasingPattern;
 
-        protected override void Initialize(SonarParametrizedAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                c =>
+    protected override void Initialize(SonarParametrizedAnalysisContext context) =>
+        context.RegisterNodeAction(
+            c =>
+            {
+                var parameter = (ParameterSyntax)c.Node;
+                if (parameter.Identifier is not null
+                    && !HasPredefinedName(parameter)
+                    && !NamingHelper.IsRegexMatch(parameter.Identifier.Identifier.ValueText, Pattern))
                 {
-                    var parameterDeclaration = (ParameterSyntax)c.Node;
-                    if (parameterDeclaration.Identifier != null &&
-                        !NamingHelper.IsRegexMatch(parameterDeclaration.Identifier.Identifier.ValueText, Pattern))
-                    {
-                        c.ReportIssue(rule, parameterDeclaration.Identifier.Identifier, Pattern);
-                    }
-                },
-                SyntaxKind.Parameter);
+                    c.ReportIssue(Rule, parameter.Identifier.Identifier, Pattern);
+                }
+            },
+            SyntaxKind.Parameter);
+
+    private static bool HasPredefinedName(SyntaxNode node)
+    {
+        while (node is not null)
+        {
+            if (node is MethodStatementSyntax method)
+            {
+                return method.Modifiers.Any(SyntaxKind.OverridesKeyword) || method.ImplementsClause is not null || method.HandlesClause is not null;
+            }
+            else if (node is PropertyStatementSyntax property)
+            {
+                return property.Modifiers.Any(SyntaxKind.OverridesKeyword) || property.ImplementsClause is not null;
+            }
+            else
+            {
+                node = node.Parent;
+            }
         }
+        return false;
     }
 }
