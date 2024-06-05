@@ -184,9 +184,9 @@ namespace SonarAnalyzer.Helpers
                 var typeArgumentSymbols = symbol is IMethodSymbol method
                     ? method.TypeParameters
                     : ((INamedTypeSymbol)symbol).TypeParameters;
-                var typesWithDynamicallyAccessedMembers = typeArgumentSymbols.Zip(node.Arguments, (symbol, argument) => (symbol, argument))
-                    .Where(x => x.symbol.HasAttribute(KnownType.System_Diagnostics_CodeAnalysis_DynamicallyAccessedMembersAttribute))
-                    .Select(x => semanticModel.GetSymbolInfo(x.argument).Symbol)
+                var typesWithDynamicallyAccessedMembers = typeArgumentSymbols.Zip(node.Arguments, (symbol, argument) => new Tuple<ISymbol, SyntaxNode>(symbol, argument))
+                    .Where(x => x.Item1.HasAttribute(KnownType.System_Diagnostics_CodeAnalysis_DynamicallyAccessedMembersAttribute))
+                    .Select(x => semanticModel.GetSymbolInfo(x.Item2).Symbol)
                     .Where(x => x is INamedTypeSymbol { IsUnboundGenericType: false });
                 TypesUsedWithReflection.UnionWith(typesWithDynamicallyAccessedMembers);
             }
