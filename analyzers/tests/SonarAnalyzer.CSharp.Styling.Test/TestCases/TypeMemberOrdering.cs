@@ -80,11 +80,11 @@ public abstract class CompliantClassFull
 
 public class WhenMemberShouldBeFirst
 {
-    public WhenMemberShouldBeFirst() { }
+    public WhenMemberShouldBeFirst() { }    // Secondary [First] {{Move the declaration before this one.}}
 
     public void Method() { }
 
-    private readonly object field;  // Noncompliant {{Move Fields before Constructors.}}
+    private readonly object field;          // Noncompliant [First] {{Move Fields before Constructors.}}
 
     public class Nested { }
 }
@@ -93,20 +93,21 @@ public class WhenMemberShouldBeLast
 {
     private readonly object field;
 
-    public class Nested { }
+    public class Nested { }                 // Secondary [Last2] {{Move the declaration before this one.}}
 
-    public WhenMemberShouldBeLast() { }     // Noncompliant {{Move Constructors after Fields, before Methods.}}
+    public WhenMemberShouldBeLast() { }     // Noncompliant [Last1] {{Move Constructors after Fields, before Methods.}}
 
-    public void Method() { }                // Noncompliant {{Move Methods after Constructors, before Nested Types.}}
+                                            // Secondary@+1 [Last1]
+    public void Method() { }                // Noncompliant [Last2] {{Move Methods after Constructors, before Nested Types.}}
 }
 
 public class WhenMembersAreSwapped
 {
     private readonly object field;
 
-    public void Method() { }
+    public void Method() { }            // Secondary [Swapped1] {{Move the declaration before this one.}}
 
-    public WhenMembersAreSwapped() { }  // Noncompliant {{Move Constructors after Fields, before Methods.}}
+    public WhenMembersAreSwapped() { }  // Noncompliant [Swapped1] {{Move Constructors after Fields, before Methods.}}
 
     public class Nested { }
 }
@@ -115,11 +116,11 @@ public class WhenLessMembersAreSwapped
 {
     private const string constant = "C";
 
-    public void Method1() { }
+    public void Method1() { }               // Secondary [Swapped2] {{Move the declaration before this one.}}
     public void Method2() { }
 
     // Only this one is out of place
-    public WhenLessMembersAreSwapped() { } // Noncompliant {{Move Constructors after Constants, before Methods.}}
+    public WhenLessMembersAreSwapped() { }  // Noncompliant [Swapped2] {{Move Constructors after Constants, before Methods.}}
     //     ^^^^^^^^^^^^^^^^^^^^^^^^^
 
     public class Nested { }
@@ -128,78 +129,87 @@ public class WhenLessMembersAreSwapped
 public class InterleavedViolations
 {
     private int field1;
-    public int Property1 { get; set; }
-    private int field2;                 // Noncompliant {{Move Fields before Properties.}}
-    void Method1() { }
-    public int Property2 { get; set; }  // Noncompliant {{Move Properties after Fields, before Methods.}}
+    public int Property1 { get; set; }  // Secondary    [Interleaved1, Interleaved3]
+    private int field2;                 // Noncompliant [Interleaved1] {{Move Fields before Properties.}}
+    void Method1() { }                  // Secondary    [Interleaved2, Interleaved4]
+    public int Property2 { get; set; }  // Noncompliant [Interleaved2] {{Move Properties after Fields, before Methods.}}
     void Method2() { }
-    private int field3;                 // Noncompliant {{Move Fields before Properties.}}
+    private int field3;                 // Noncompliant [Interleaved3] {{Move Fields before Properties.}}
     void Method3() { }
-    public int Property3 { get; set; }  // Noncompliant {{Move Properties after Fields, before Methods.}}
+    public int Property3 { get; set; }  // Noncompliant [Interleaved4] {{Move Properties after Fields, before Methods.}}
 }
 
 public abstract class AllWrong
 {
-    public class Nested { }
+    public class Nested { }     // Secondary [AllWrongOperator1, AllWrongOperator2, AllWrongOperator3, AllWrongOperator4]
 
-    public void Method() { }    // Noncompliant {{Move Methods after Destructor, before Operators.}}
+                                // Secondary@+1 [AllWrongDestructor]
+    public void Method() { }    // Noncompliant [AllWrongMethod1] {{Move Methods after Destructor, before Operators.}}
     //          ^^^^^^
 
-    public static int operator +(AllWrong a, AllWrong b) => 42; // Noncompliant {{Move Operators after Methods, before Nested Types.}}
+    public void Method2() { }   // Noncompliant [AllWrongMethod2] {{Move Methods after Destructor, before Operators.}}
+                                                                // Secondary@+1 [AllWrongMethod1, AllWrongMethod2] This secondary is not very useful, because it's already where it should be. "After" part would be more helpful.
+    public static int operator +(AllWrong a, AllWrong b) => 42; // Noncompliant [AllWrongOperator1] {{Move Operators after Methods, before Nested Types.}}
     //                         ^
-    public static int operator -(AllWrong a, AllWrong b) => 42; // Noncompliant {{Move Operators after Methods, before Nested Types.}}
-    public static implicit operator int(AllWrong a) => 42;      // Noncompliant {{Move Operators after Methods, before Nested Types.}}
-    public static explicit operator AllWrong(int a) => null;    // Noncompliant {{Move Operators after Methods, before Nested Types.}}
+    public static int operator -(AllWrong a, AllWrong b) => 42; // Noncompliant [AllWrongOperator2] {{Move Operators after Methods, before Nested Types.}}
+    public static implicit operator int(AllWrong a) => 42;      // Noncompliant [AllWrongOperator3] {{Move Operators after Methods, before Nested Types.}}
+    public static explicit operator AllWrong(int a) => null;    // Noncompliant [AllWrongOperator4] {{Move Operators after Methods, before Nested Types.}}
     //                              ^^^^^^^^
 
-    ~AllWrong() { }                   // Noncompliant {{Move Destructor after Constructors, before Methods.}}
+                                                // Secondary@+1 [AllWrongConstructor]
+    ~AllWrong() { }                             // Noncompliant [AllWrongDestructor]    {{Move Destructor after Constructors, before Methods.}}
 //   ^^^^^^^^
 
-    public AllWrong() { }                       // Noncompliant {{Move Constructors after Indexers, before Destructor.}}
+    // Secondary@+1 [AllWrongIndexer]
+    public AllWrong() { }                       // Noncompliant [AllWrongConstructor]   {{Move Constructors after Indexers, before Destructor.}}
     //     ^^^^^^^^
 
-    public abstract int Abstract();             // Noncompliant {{Move Abstract Members after Fields, before Properties.}}
+                                                // Secondary@+1 [AllWrongField1, AllWrongField2]
+    public abstract int Abstract();             // Noncompliant [AllWrongAbstract]      {{Move Abstract Members after Fields, before Properties.}}
     //                  ^^^^^^^^
-
-    public object this[int index] => 42;        // Noncomplinat {{Move Indexers after Properties, before Constructors.}}
+                                                // Secondary@+1 [AllWrongProperty]
+    public object this[int index] => 42;        // Noncompliant [AllWrongIndexer]       {{Move Indexers after Properties, before Constructors.}}
     //            ^^^^
 
-    public object Property { get; }             // Noncompliant {{Move Properties after Abstract Members, before Indexers.}}
+                                                // Secondary@+1 [AllWrongAbstract]
+    public object Property { get; }             // Noncompliant [AllWrongProperty]      {{Move Properties after Abstract Members, before Indexers.}}
     //            ^^^^^^^^
 
-    private readonly object field1 = new();     // Noncompliant {{Move Fields after Enums, before Abstract Members.}}
+                                                // Secondary@+1 [AllWrongEnum]
+    private readonly object field1 = new();     // Noncompliant [AllWrongField1]        {{Move Fields after Enums, before Abstract Members.}}
     //               ^^^^^^^^^^^^^^^^^^^^^
 
-    private readonly object field2, field3;     // Noncompliant {{Move Fields after Enums, before Abstract Members.}}
+    private readonly object field2, field3;     // Noncompliant [AllWrongField2]        {{Move Fields after Enums, before Abstract Members.}}
     //               ^^^^^^^^^^^^^^^^^^^^^
 
-    public enum Enum { None, All }              // Noncompliant {{Move Enums after Constants, before Fields.}}
+                                                // Secondary@+1 [AllWrongConst]
+    public enum Enum { None, All }              // Noncompliant [AllWrongEnum]          {{Move Enums after Constants, before Fields.}}
     //          ^^^^
 
-    private const string Constant = "C", Answer = "42";   // Noncompliant {{Move Constants before Enums.}}
+    private const string Constant = "C", Answer = "42";   // Noncompliant [AllWrongConst] {{Move Constants before Enums.}}
     //            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 }
 
 public record R (string Name)
 {
-    public void DoNothing() { }
-    public int field;       // Noncompliant {{Move Fields before Methods.}}
+    public void DoNothing() { } // Secondary [R]
+    public int field;           // Noncompliant [R] {{Move Fields before Methods.}}
 }
 
 public struct S
 {
-    public void DoNothing() { }
-    public int field;       // Noncompliant {{Move Fields before Methods.}}
+    public void DoNothing() { } // Secondary [S]
+    public int field;           // Noncompliant [S] {{Move Fields before Methods.}}
 }
 
 public record struct RS
 {
-    public void DoNothing() { }
-    public int field;       // Noncompliant {{Move Fields before Methods.}}
+    public void DoNothing() { } // Secondary [RS]
+    public int field;           // Noncompliant [RS] {{Move Fields before Methods.}}
 }
 
 public interface ISomething
 {
-    public void DoNothing();
-    public int Value { get; }   // Noncompliant {{Move Properties before Methods.}}
+    public void DoNothing();    // Secondary [ISomething]
+    public int Value { get; }   // Noncompliant [ISomething] {{Move Properties before Methods.}}
 }
