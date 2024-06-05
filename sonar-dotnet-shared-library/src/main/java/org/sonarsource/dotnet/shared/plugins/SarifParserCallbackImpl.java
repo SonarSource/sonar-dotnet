@@ -338,71 +338,20 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     LOG.debug("Skipping issue {}, input file not found or excluded: {}", ruleId, filePath);
   }
 
-  private static class ProjectIssue {
-    private final String ruleId;
-    private final String message;
+  private record ProjectIssue(String ruleId, String message) { }
 
-    ProjectIssue(String ruleId, String message) {
-      this.ruleId = ruleId;
-      this.message = message;
-    }
+  private record Issue(String ruleId, String absolutePath, int startLine, int startColumn, int endLine, int endColumn) {
+     Issue(String ruleId, String path) {
+       this(ruleId, path, 0, 0, 0, 0);
+     }
 
-    @Override
-    public int hashCode() {
-      return Objects.hash(ruleId, message);
-    }
-
-    @Override
-    public boolean equals(Object other) {
-      if (!(other instanceof ProjectIssue o)) {
-        return false;
-      }
-
-      return Objects.equals(ruleId, o.ruleId)
-        && Objects.equals(message, o.message);
-    }
-  }
-
-  private static class Issue {
-    private final String ruleId;
-    private final String absolutePath;
-    private int startLine;
-    private int startColumn;
-    private int endLine;
-    private int endColumn;
-
-    Issue(String ruleId, String absolutePath) {
-      this.ruleId = ruleId;
-      this.absolutePath = absolutePath;
-    }
-
-    Issue(String ruleId, Location location) {
-      this.ruleId = ruleId;
-      this.absolutePath = location.getAbsolutePath();
-      this.startLine = location.getStartLine();
-      this.startColumn = location.getStartColumn();
-      this.endLine = location.getEndLine();
-      this.endColumn = location.getEndColumn();
-    }
-
-    @Override
-    public int hashCode() {
-      return Objects.hash(ruleId, absolutePath, startLine, startColumn, endLine, endColumn);
-    }
-
-    @Override
-    public boolean equals(Object other) {
-      if (!(other instanceof Issue o)) {
-        return false;
-      }
-
-      // note that comparison of absolute path is done using Path.
-      return Objects.equals(ruleId, o.ruleId)
-        && Objects.equals(startLine, o.startLine)
-        && Objects.equals(startColumn, o.startColumn)
-        && Objects.equals(endLine, o.endLine)
-        && Objects.equals(endColumn, o.endColumn)
-        && Paths.get(absolutePath).equals(Paths.get(o.absolutePath));
+     Issue(String ruleId, Location location) {
+       this(ruleId,
+         location.getAbsolutePath(),
+         location.getStartLine(),
+         location.getStartColumn(),
+         location.getEndLine(),
+         location.getEndColumn());
     }
   }
 }
