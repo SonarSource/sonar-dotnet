@@ -29,12 +29,11 @@ namespace SonarAnalyzer.Test.SymbolicExecution.Roslyn;
 public partial class RoslynSymbolicExecutionTest
 {
     private static IEnumerable<object[]> ThrowHelperCalls =>
-        new object[][]
-        {
+        [
             new[] { @"System.Diagnostics.Debug.Fail(""Fail"");" },
             new[] { @"Environment.FailFast(""Fail"");" },
             new[] { @"Environment.Exit(-1);" },
-        };
+        ];
 
     [TestMethod]
     public void InstanceReference_SetsNotNull_VB()
@@ -45,6 +44,313 @@ Tag(""Me"", FromMe)";
         var validator = SETestContext.CreateVB(code).Validator;
         validator.ValidateContainsOperation(OperationKind.InstanceReference);
         validator.TagValue("Me").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    }
+
+    [DataTestMethod]
+    [DataRow("Where", "x => true")]
+    [DataRow("Select", "x => x")]
+    [DataRow("SelectMany", "x => new[] {1}")]
+    [DataRow("Take", "1")]
+    [DataRow("TakeWhile", "x => true")]
+    [DataRow("Skip", "1")]
+    [DataRow("SkipWhile", "x => true")]
+    [DataRow("Join", "[1], x => x, x => x, (x, y) => x")]
+    [DataRow("GroupJoin", "[1], x => x, x => x, (x, y) => x")]
+    [DataRow("Concat", "[]")]
+    [DataRow("Zip", "[1], (x, y) => x")]
+    [DataRow("Distinct")]
+    [DataRow("Union", "[]")]
+    [DataRow("Intersect", "[]")]
+    [DataRow("Except", "[]")]
+    [DataRow("Reverse")]
+    [DataRow("SequenceEqual", "[]")]
+    [DataRow("ToArray")]
+    [DataRow("ToList")]
+    [DataRow("ToDictionary", "x => x, x => x")]
+    [DataRow("ToHashSet")]
+    [DataRow("DefaultIfEmpty")]
+    [DataRow("First")]
+    [DataRow("FirstOrDefault")]
+    [DataRow("Last")]
+    [DataRow("LastOrDefault")]
+    [DataRow("Single")]
+    [DataRow("SingleOrDefault")]
+    [DataRow("ElementAt", "1")]
+    [DataRow("ElementAtOrDefault", "1")]
+    [DataRow("Any")]
+    [DataRow("Count")]
+    [DataRow("LongCount")]
+    [DataRow("Contains", "1")]
+    [DataRow("Aggregate", "(x, y) => x")]
+    [DataRow("Sum")]
+    [DataRow("Min")]
+    [DataRow("Max")]
+    [DataRow("Average")]
+    [DataRow("Append", "1")]
+    [DataRow("Prepend", "1")]
+    public void Invocation_SetsNotNull_OnLinqMethodsNullChecking(string method, string args = null)
+    {
+        var code = $$"""
+            using System;
+            using System.Linq;
+            using System.Collections.Generic;
+            public class Sample
+            {
+                public void Main(IEnumerable<int> collection)
+                {
+                    Tag("Before1", collection);
+                    _ = collection.{{method}}({{args}});                                                 // Call as extension
+                    Tag("After1", collection);
+
+                    collection = Untracked();
+                    Tag("Before2", collection);
+                    _ = Enumerable.{{method}}(collection{{(args is null ? string.Empty : "," + args)}}); // Call as normal static method
+                    Tag("After2", collection);
+                }
+
+                private IEnumerable<int> Untracked() => [ 1, 2, 3 ];
+
+                private static void Tag(string name, object arg) { }
+            }
+            """;
+        var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+        validator.ValidateContainsOperation(OperationKind.Invocation);
+        validator.TagValue("Before1").Should().BeNull();
+        validator.TagValue("After1").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Before2").Should().BeNull();
+        validator.TagValue("After2").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    }
+
+    [DataTestMethod]
+    [DataRow("collection.Cast<short>()")]
+    [DataRow("collection.OfType<short>()")]
+    [DataRow("collection.ThenBy(x => x)")]
+    [DataRow("collection.ThenByDescending(x => x)")]
+    public void Invocation_SetsNotNull_OnLinqMethodsWithGenericParamNullChecking(string invocation)
+    {
+        var code = $$"""
+            using System;
+            using System.Linq;
+            using System.Collections.Generic;
+            public class Sample
+            {
+                public void Main(IOrderedEnumerable<int> collection)
+                {
+                    Tag("Before1", collection);
+                    _ = {{invocation}};
+                    Tag("After1", collection);
+                }
+
+                private static void Tag(string name, object arg) { }
+            }
+            """;
+        var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+        validator.ValidateContainsOperation(OperationKind.Invocation);
+        validator.TagValue("Before1").Should().BeNull();
+        validator.TagValue("After1").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    }
+
+    [DataTestMethod]
+    [DataRow("OrderBy", "x => x")]
+    [DataRow("OrderByDescending", "x => x")]
+    [DataRow("GroupBy", "x => x")]
+    [DataRow("AsEnumerable")]
+    [DataRow("ToLookup", "x => x, x => x")]
+    public void Invocation_DoesNotSetNotNull_OnLinqMethodNonNullChecking(string method, string args = null)
+    {
+        var code = $$"""
+            using System;
+            using System.Linq;
+            using System.Collections.Generic;
+            public class Sample
+            {
+                public void Main(IEnumerable<int> collection)
+                {
+                    Tag("Before1", collection);
+                    _ = collection.{{method}}({{args}});                                                 // Call as extension
+                    Tag("After1", collection);
+
+                    collection = Untracked();
+                    Tag("Before2", collection);
+                    _ = Enumerable.{{method}}(collection{{(args is null ? string.Empty : "," + args)}}); // Call as normal static method
+                    Tag("After2", collection);
+                }
+
+                private IEnumerable<int> Untracked() => [ 1, 2, 3 ];
+
+                private static void Tag(string name, object arg) { }
+            }
+            """;
+        var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+        validator.ValidateContainsOperation(OperationKind.Invocation);
+        validator.TagValue("Before1").Should().BeNull();
+        validator.TagValue("After1").Should().BeNull();
+        validator.TagValue("Before2").Should().BeNull();
+        validator.TagValue("After2").Should().BeNull();
+    }
+
+    [TestMethod]
+    public void Invocation_DoesntSetNotNull_OnExtensionsNonLinq()
+    {
+        var code = $$"""
+            using System;
+            using System.Linq;
+            using System.Collections.Generic;
+            public class Sample
+            {
+                public void Main(IEnumerable<int> collection)
+                {
+                    Tag("Before1", collection);
+                    _ = collection.NonLinqExtensionNonNullChecking();
+                    Tag("After1", collection);
+
+                    collection = Untracked();
+                    Tag("Before2", collection);
+                    _ = collection.NonLinqExtensionNullChecking();
+                    Tag("After2", collection);
+                }
+
+                private IEnumerable<int> Untracked() => [ 1, 2, 3 ];
+
+                private static void Tag(string name, object arg) { }
+            }
+
+            public static class MyExtensions
+            {
+                public static int NonLinqExtensionNonNullChecking(this IEnumerable<int> source) => 42;
+                public static int NonLinqExtensionNullChecking(this IEnumerable<int> source)
+                {
+                    _ = source ?? throw new ArgumentNullException(nameof(source));
+                    return 42;
+                }
+            }
+            """;
+        var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+        validator.ValidateContainsOperation(OperationKind.Invocation);
+        validator.TagValue("Before1").Should().BeNull();
+        validator.TagValue("After1").Should().BeNull();
+        validator.TagValue("Before2").Should().BeNull();
+        validator.TagValue("After2").Should().BeNull();
+    }
+
+    [DataTestMethod]
+    [DataRow("Count")]
+    [DataRow("Any")]
+    [DataRow("ToArray")]
+    [DataRow("ToList")]
+    public void Invocation_SetsNotNull_OnSourceOfLinqExtension_VB(string method)
+    {
+        var code = $$"""
+            Imports System
+            Imports System.Linq
+            Imports System.Collections.Generic
+
+            Public Class Sample
+                Public Sub Main(collection As IEnumerable(Of Integer))
+                    Tag("Before1", collection)
+                    Dim i1 = collection.{{method}}()                     ' Call as extension
+                    Tag("After1", collection)
+
+                    collection = Untracked()
+                    Tag("Before2", collection)
+                    Dim i2 = collection.{{method.ToLower()}}()           ' Call as extension case insensitive
+                    Tag("After2", collection)
+
+                    collection = Untracked()
+                    Tag("Before3", collection)
+                    Dim i3 = Enumerable.{{method}}(collection)           ' Call as normal static method
+                    Tag("After3", collection)
+
+                    collection = Untracked()
+                    Tag("Before4", collection)
+                    Dim i4 = Enumerable.{{method.ToLower()}}(collection) ' Call as normal static method case insensitive
+                    Tag("After4", collection)
+
+                    collection = Untracked()
+                    Tag("Before5", collection)
+                    Dim i5 = collection.NonLinqExtensionNonNullChecking()
+                    Tag("After5", collection)
+
+                    collection = Untracked()
+                    Tag("Before6", collection)
+                    Dim i6 = collection.NonLinqExtensionNullChecking()
+                    Tag("After6", collection)
+                End Sub
+
+                Private Function Untracked() As IEnumerable(Of Integer)
+                    Return New List(Of Integer) From {1, 2, 3}
+                End Function
+
+                Private Shared Sub Tag(name As String, arg As Object)
+                End Sub
+            End Class
+
+            Public Module MyExtensions
+                <Runtime.CompilerServices.Extension>
+                Public Function NonLinqExtensionNonNullChecking(source As IEnumerable(Of Integer)) As Integer
+                    Return 42
+                End Function
+                <Runtime.CompilerServices.Extension>
+                Public Function NonLinqExtensionNullChecking(source As IEnumerable(Of Integer)) As Integer
+                    If source Is Nothing Then Throw New ArgumentNullException(NameOf(source))
+                    Return 42
+                End Function
+            End Module
+            """;
+        var validator = new SETestContext(code, AnalyzerLanguage.VisualBasic, Array.Empty<SymbolicCheck>()).Validator;
+        validator.ValidateContainsOperation(OperationKind.Invocation);
+        validator.TagValue("Before1").Should().BeNull();
+        validator.TagValue("After1").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Before2").Should().BeNull();
+        validator.TagValue("After2").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Before3").Should().BeNull();
+        validator.TagValue("After3").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Before4").Should().BeNull();
+        validator.TagValue("After4").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Before5").Should().BeNull();
+        validator.TagValue("After5").Should().BeNull();
+        validator.TagValue("Before6").Should().BeNull();
+        validator.TagValue("After6").Should().BeNull();
+    }
+
+    [DataTestMethod]
+    [DataRow("Count")]
+    [DataRow("AsEnumerable")]
+    public void Invocation_DoesntSetNotNull_OnSourceOfLinqLikeExtension(string method)
+    {
+        var code = $$"""
+            using System.Linq;
+            using System.Collections.Generic;
+            public class Sample
+            {
+                public void Main(IEnumerable<int> collection)
+                {
+                    Tag("Before1", collection);
+                    _ = collection.{{method}}();           // Call as extension
+                    Tag("After1", collection);
+
+                    collection = Untracked();
+                    Tag("Before2", collection);
+                    _ = Enumerable.{{method}}(collection); // Call as normal static method
+                    Tag("After2", collection);
+                }
+
+                private IEnumerable<int> Untracked() => [ 1, 2, 3 ];
+
+                private static void Tag(string name, object arg) { }
+            }
+
+            public static class Enumerable
+            {
+                public static int {{method}}(this IEnumerable<int> source) => 42;
+            }
+            """;
+        var validator = new SETestContext(code, AnalyzerLanguage.CSharp, []).Validator;
+        validator.ValidateContainsOperation(OperationKind.Invocation);
+        validator.TagValue("Before1").Should().BeNull();
+        validator.TagValue("After1").Should().BeNull();
+        validator.TagValue("Before2").Should().BeNull();
+        validator.TagValue("After2").Should().BeNull();
     }
 
     [TestMethod]
@@ -84,7 +390,7 @@ public static class Extensions
     public static void ExtensionMethod(this Sample s) { }
     public static void ExtensionMethod(this bool b) { }
 }";
-        var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+        var validator = new SETestContext(code, AnalyzerLanguage.CSharp, []).Validator;
         validator.ValidateContainsOperation(OperationKind.Invocation);
         validator.TagValue("BeforeInstance").Should().BeNull();
         validator.TagValue("BeforeExtensionArg").Should().BeNull();
@@ -134,7 +440,7 @@ Public Module Extensions
     End Sub
 
 End Module";
-        var validator = new SETestContext(code, AnalyzerLanguage.VisualBasic, Array.Empty<SymbolicCheck>()).Validator;
+        var validator = new SETestContext(code, AnalyzerLanguage.VisualBasic, []).Validator;
         validator.ValidateContainsOperation(OperationKind.ObjectCreation);
         validator.TagValue("BeforeInstance").Should().BeNull();
         validator.TagValue("BeforeStatic").Should().BeNull();
@@ -190,7 +496,7 @@ public static class Extensions
     public static void SomeExtensionOnObject(this object obj) {{ }}
     public static void Tag(string name, object arg) {{ }}
 }}";
-        var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+        var validator = new SETestContext(code, AnalyzerLanguage.CSharp, []).Validator;
         validator.ValidateContainsOperation(OperationKind.Invocation);
         validator.TagValue("BeforeField").HasConstraint(ObjectConstraint.Null).Should().BeTrue();
         validator.TagValue("BeforeStaticField").HasConstraint(ObjectConstraint.Null).Should().BeTrue();
