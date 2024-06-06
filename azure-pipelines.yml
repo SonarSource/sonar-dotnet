@@ -12,9 +12,7 @@ trigger:
 - master
 - branch-*
 
-pool:
-  name: .net-bubble-aws-re-team-dev
-  demands: ImageName -equals pr-7-dotnet-bubble-ci-v*
+pool: .net-bubble-aws-re-team-prod
 
 variables:
   - group: sonar-dotnet-variables
