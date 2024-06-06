@@ -22,5 +22,7 @@ namespace StyleCop.Analyzers.Lightup
         public static ImmutableArray<IFieldSymbol> TupleElements(this INamedTypeSymbol symbol) => TupleElementsAccessor(symbol);
 
         public static bool IsSerializable(this INamedTypeSymbol symbol) => IsSerializableAccessor(symbol);
+
+        public static ImmutableArray<NullableAnnotation> TypeArgumentNullableAnnotations(this INamedTypeSymbol symbol) => ImmutableArray<NullableAnnotation>.Empty;
     }
 }
