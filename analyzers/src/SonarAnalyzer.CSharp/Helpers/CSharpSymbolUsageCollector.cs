@@ -135,9 +135,9 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitAttribute(AttributeSyntax node)
         {
-            if (semanticModel.GetSymbolInfo(node).Symbol is { } symbol)
+            if (semanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol { MethodKind: MethodKind.Constructor, ContainingType: ITypeSymbol attribute })
             {
-                if (symbol.ContainingType.Is(KnownType.System_Diagnostics_DebuggerDisplayAttribute)
+                if (attribute.Is(KnownType.System_Diagnostics_DebuggerDisplayAttribute)
                     && node.ArgumentList != null)
                 {
                     var arguments = node.ArgumentList.Arguments
@@ -149,7 +149,7 @@ namespace SonarAnalyzer.Helpers
 
                     DebuggerDisplayValues.UnionWith(arguments);
                 }
-                else if (symbol.ContainingType.Is(KnownType.System_Diagnostics_CodeAnalysis_DynamicallyAccessedMembersAttribute)
+                else if (attribute.Is(KnownType.System_Diagnostics_CodeAnalysis_DynamicallyAccessedMembersAttribute)
                     && node.Parent.Parent is BaseTypeDeclarationSyntax typeDeclaration
                     && semanticModel.GetDeclaredSymbol(typeDeclaration) is { } typeSymbol)
                 {
@@ -181,7 +181,7 @@ namespace SonarAnalyzer.Helpers
         {
             if (semanticModel.GetSymbolInfo(node.Parent).Symbol is { } symbol) // symbol that the attribute is applied to
             {
-                var typesWithDynamicallyAccessedMembers = GetMethodTypeParameters(symbol)
+                var typesWithDynamicallyAccessedMembers = GetTypeParameters(symbol)
                     .Zip(node.Arguments, (symbol, argument) => new Tuple<ITypeParameterSymbol, SyntaxNode>(symbol, argument)) // map T to Person in void M<T>() { } .. M<Person>();
                     .Where(x => x.Item1.HasAttribute(KnownType.System_Diagnostics_CodeAnalysis_DynamicallyAccessedMembersAttribute))
                     .Select(x => semanticModel.GetSymbolInfo(x.Item2).Symbol);
@@ -189,7 +189,7 @@ namespace SonarAnalyzer.Helpers
             }
             base.VisitTypeArgumentList(node);
 
-            static ImmutableArray<ITypeParameterSymbol> GetMethodTypeParameters(ISymbol symbol) =>
+            static ImmutableArray<ITypeParameterSymbol> GetTypeParameters(ISymbol symbol) =>
                 symbol switch
                 {
                     IMethodSymbol method => method.TypeParameters,
