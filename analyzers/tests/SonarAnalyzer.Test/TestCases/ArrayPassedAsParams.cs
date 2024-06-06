@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 public class Program
 {
@@ -82,11 +83,11 @@ public class Repro6894
 
     public void CallMethod()
     {
-        Method(new String[] { "1", "2" });                                  // FN. Elements in args: ["1", "2"]
+        Method(new String[] { "1", "2" });                                  // Noncompliant, elements in args: ["1", "2"]
                                                                             // The argument given for a parameter array can be a single expression that is implicitly convertible (§10.2) to the parameter array type.
                                                                             // In this case, the parameter array acts precisely like a value parameter.
                                                                             // see: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/classes#14625-parameter-arrays
-        Method(new object[] { new int[] { 1, 2} });                         // FN, Elements in args: [System.Int32[]]
+        Method(new object[] { new int[] { 1, 2} });                         // FN, elements in args: [System.Int32[]]
         Method(new int[] { 1, 2, 3, });                                     // Compliant, Elements in args: [System.Int32[]]
         Method(new String[] { "1", "2" }, new String[] { "1", "2"});        // Compliant, elements in args: [System.String[], System.String[]]
         Method(new String[] { "1", "2"}, new int[] { 1, 2});                // Compliant, elements in args: pSystem.String[], System.Int32[]]
@@ -94,6 +95,8 @@ public class Repro6894
         MethodArray(new int[] { 1, 2 }, new int[] { 1, 2 });                // Compliant, elements in args: [System.Int32[], System.Int32[]]
 
         MethodJaggedArray(new int[] { 1, 2 });                              // Compliant: jagged array [System.Object[]]
+
+        string.Format(CultureInfo.InvariantCulture, "{0}.{1}", new object[] { "", new object() });
     }
 }
 
