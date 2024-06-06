@@ -27,17 +27,21 @@ namespace SonarAnalyzer.Test.Wrappers;
 [TestClass]
 public class INamedTypeSymbolExtensionsTests
 {
-    [TestMethod]
-    public void NullabilityInfoFromShimEqualsOriginal()
+    [DataTestMethod]
+    [DataRow("#nullable enable", "?", NullableAnnotation.Annotated)]
+    [DataRow("#nullable enable", "", NullableAnnotation.NotAnnotated)]
+    [DataRow("", "?", NullableAnnotation.Annotated)]
+    [DataRow("", "", NullableAnnotation.None)]
+    public void TypeArgumentNullableAnnotationsFromShimEqualsOriginal(string nullable, string questionMark, NullableAnnotation expected)
     {
-        var code = """
-            #nullable enable
+        var code = $$"""
+            {{nullable}}
             using System.Collections.Generic;
             public class C
             {
                 public void M()
                 {
-                    IEnumerable<object?> o = new object[0];
+                    IEnumerable<object{{questionMark}}> o = new object[0];
                     o.ToString();
                 }
             }
@@ -49,6 +53,33 @@ public class INamedTypeSymbolExtensionsTests
         var namedType = typeInfo.Type.Should().BeAssignableTo<INamedTypeSymbol>().Which;
         var typeArgumentNullabilityShim = namedType.TypeArgumentNullableAnnotations();
         var typeArgumentNullability = namedType.TypeArgumentNullableAnnotations;
-        typeArgumentNullabilityShim.Should().BeEquivalentTo(typeArgumentNullability.Select(x => (NullableAnnotation)x));
+        typeArgumentNullabilityShim.Should().BeEquivalentTo([expected]).And.BeEquivalentTo(typeArgumentNullability.Select(x => (NullableAnnotation)x));
+    }
+
+    [TestMethod]
+    public void TypeArgumentNullableAnnotationsFromShimEqualsOriginal_MultipleTypeArguments()
+    {
+        var code = """
+            #nullable enable
+            using System;
+            public class C
+            {
+                public void M()
+                {
+                    Func<object, object?, object?, object, object?> o = null;
+                    o.ToString();
+                }
+            }
+
+            """;
+        var (tree, semanticModel) = TestHelper.CompileCS(code);
+        var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("o")); // o in o.ToString()
+        var typeInfo = semanticModel.GetTypeInfo(identifier);
+        var namedType = typeInfo.Type.Should().BeAssignableTo<INamedTypeSymbol>().Which;
+        var typeArgumentNullabilityShim = namedType.TypeArgumentNullableAnnotations();
+        var typeArgumentNullability = namedType.TypeArgumentNullableAnnotations;
+        typeArgumentNullabilityShim.Should().BeEquivalentTo(
+            [NullableAnnotation.NotAnnotated, NullableAnnotation.Annotated, NullableAnnotation.Annotated, NullableAnnotation.NotAnnotated, NullableAnnotation.Annotated])
+            .And.BeEquivalentTo(typeArgumentNullability.Select(x => (NullableAnnotation)x));
     }
 }
