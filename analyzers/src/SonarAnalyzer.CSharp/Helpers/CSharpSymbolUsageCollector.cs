@@ -142,9 +142,9 @@ internal class CSharpSymbolUsageCollector : SafeCSharpSyntaxWalker
             {
                 var arguments = node.ArgumentList.Arguments
                     .Where(IsValueNameOrType)
-                    .Select(a => model.GetConstantValue(a.Expression))
-                    .Where(o => o.HasValue)
-                    .Select(o => o.Value)
+                    .Select(x => model.GetConstantValue(x.Expression))
+                    .Where(x => x.HasValue)
+                    .Select(x => x.Value)
                     .OfType<string>();
 
                 DebuggerDisplayValues.UnionWith(arguments);
