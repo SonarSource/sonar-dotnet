@@ -31,10 +31,10 @@ namespace Tests.TestCases
 
         internal string NestedClassUsage => NestedClass.StringField;
 
-        //https://github.com/SonarSource/sonar-dotnet/issues/4081
+        // https://github.com/SonarSource/sonar-dotnet/issues/4081
         private static class NestedClass
         {
-            public static readonly string StringField = "String"; // FN
+            public static readonly string StringField = "String"; // Noncompliant
         }
 
         private static Dictionary<string, string> _attributes = new Dictionary<string, string>(); // Noncompliant
@@ -110,4 +110,18 @@ namespace Repro_7521
     {
         private static readonly string[] field = new[] { "a", "b", "c" }; // Noncompliant
     }
+
+    public class Outer<T>
+    {
+        public class Inner
+        {
+            private static readonly string[] field = new[] { "a", "b", "c" }; // Noncompliant
+        }
+
+        public class InnerGeneric : GenericBase<T>
+        {
+            private static readonly string[] field = new[] { "a", "b", "c" }; // Compliant, we might not be able to change the base class, or want the field there
+        }
+    }
 }
+
