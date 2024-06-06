@@ -18,6 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Xml.Linq;
+using SonarAnalyzer.Json.Parsing;
+using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
+
 namespace SonarAnalyzer.Rules;
 
 public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TArgumentNode> : SonarDiagnosticAnalyzer<TSyntaxKind>
@@ -39,18 +43,14 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TArgumentNode> : Sona
         {
             if (LastArgumentIfArrayCreation(c.Node) is { } lastArgument
                 && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol methodSymbol
-                && ParameterSymbol(methodSymbol, c.Node, lastArgument) is { IsParams: true } param
+                && Language.MethodParameterLookup(c.Node, methodSymbol).TryGetSymbol(lastArgument, out var param)
+                && param is { IsParams: true }
                 && !IsObjectOrArrayType(c.Node, methodSymbol, param, c.SemanticModel)
                 && !IsJaggedArrayParam(param))
             {
                 c.ReportIssue(Rule, lastArgument.GetLocation());
             }
         }, ExpressionKinds);
-
-    private IParameterSymbol ParameterSymbol(IMethodSymbol symbol, SyntaxNode invocation, TArgumentNode argument) =>
-        Language.MethodParameterLookup(invocation, symbol).TryGetSymbol(argument, out var param)
-            ? param
-            : null;
 
     private static bool IsJaggedArrayParam(IParameterSymbol param) =>
         param.Type is IArrayTypeSymbol { ElementType: IArrayTypeSymbol };
@@ -68,6 +68,5 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TArgumentNode> : Sona
             && ArrayElementType(arguments.First(), model) is { } elementType
             && elementType.IsReferenceType
             && !elementType.Is(KnownType.System_Object);
-
     }
 }

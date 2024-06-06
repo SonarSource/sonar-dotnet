@@ -36,8 +36,7 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
         LastArgumentIfArrayCreation(ArgumentList(expression));
 
     protected override ITypeSymbol ArrayElementType(SyntaxNode expression, SemanticModel model) =>
-        expression as ArrayCreationExpressionSyntax is { } argument
-        && model.GetTypeInfo(argument.Type.ElementType).Type is { } elementType
+        model.GetTypeInfo(((ArrayCreationExpressionSyntax)expression).Type.ElementType).Type is var elementType
             ? elementType
             : null;
 
