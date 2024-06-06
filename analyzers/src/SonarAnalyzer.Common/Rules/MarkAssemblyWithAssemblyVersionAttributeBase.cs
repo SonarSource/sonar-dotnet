@@ -20,13 +20,11 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class MarkAssemblyWithAssemblyVersionAttributeBase : MarkAssemblyWithAttributeBase
+    public abstract class MarkAssemblyWithAssemblyVersionAttributeBase() : MarkAssemblyWithAttributeBase(DiagnosticId, MessageFormat)
     {
         private const string DiagnosticId = "S3904";
         private const string MessageFormat = "Provide an 'AssemblyVersion' attribute for assembly '{0}'.";
 
         private protected override KnownType AttributeToFind => KnownType.System_Reflection_AssemblyVersionAttribute;
-
-        protected MarkAssemblyWithAssemblyVersionAttributeBase() : base(DiagnosticId, MessageFormat) { }
     }
 }

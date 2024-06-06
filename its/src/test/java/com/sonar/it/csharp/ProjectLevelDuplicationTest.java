@@ -22,7 +22,6 @@ package com.sonar.it.csharp;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
@@ -39,14 +38,14 @@ class ProjectLevelDuplicationTest {
   private static Path temp;
 
   @Test
-  void containsOnlyOneProjectLevelIssue() throws IOException {
-    Tests.analyzeProject(temp, "ProjectLevelIssue");
+  void projectLevelIssuesAreRaisedOncePerProject() throws IOException {
+    Tests.analyzeProject(temp, "ProjectLevelIssue"); // A Solution with 2 projects
 
     assertThat(getComponent("ProjectLevelIssue")).isNotNull();
     List<Issues.Issue> projectLevelIssues = getIssues("ProjectLevelIssue")
       .stream()
       .filter(x -> x.getRule().equals("csharpsquid:S3904"))
-      .collect(Collectors.toList());
-    assertThat(projectLevelIssues).hasSize(1);
+      .toList();
+    assertThat(projectLevelIssues).hasSize(2);
   }
 }
