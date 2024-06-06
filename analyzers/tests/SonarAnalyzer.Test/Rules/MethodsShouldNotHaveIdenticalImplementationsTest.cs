@@ -119,6 +119,39 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
             """).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
     [DataTestMethod]
+    [DataRow("", "where TKey: struct")]
+    [DataRow("where TKey: struct", "")]
+    [DataRow("where TKey: struct", "where TKey: class")]
+    [DataRow("where TKey: struct where TValue: class", "where TKey: class where TValue: class")]
+    [DataRow("where TValue: class where TKey: struct", "where TKey: class where TValue: struct")]
+    [DataRow("where TKey: class", "where TKey: class, new()")]
+    [DataRow("where TKey: unmanaged", "where TKey: struct")]
+    [DataRow("where TKey: new()", "where TKey: IComparable, new()")]
+    [DataRow("where TKey: IEquatable<TKey>, IComparable", "where TKey: System.IComparable")]
+    [DataRow("where TKey: IEquatable<TKey>, IComparable where TValue: IComparable", " where TKey: System.IComparable where TValue: System.IComparable, IEquatable<TKey>")]
+    public void MethodsShouldNotHaveIdenticalImplementations_MethodTypeParameters_Dictionary_Compliant(string constraint1, string constraint2) =>
+        builderCS.AddSnippet($$"""
+            using System;
+            using System.Collections.Generic;
+            public static class TypeConstraints
+            {
+                public static bool Test1<TKey, TValue>(IDictionary<TKey, TValue> dict) {{constraint1}}
+                {
+                    Console.WriteLine(dict);
+                    Console.WriteLine(dict);
+                    return true;
+                }
+
+                public static bool Test2<TValue, TKey>(IDictionary<TKey, TValue> dict) {{constraint2}}
+                {
+                    Console.WriteLine(dict);
+                    Console.WriteLine(dict);
+                    return true;
+                }
+            }
+            """).WithOptions(ParseOptionsHelper.FromCSharp9).VerifyNoIssues();
+
+    [DataTestMethod]
     [DataRow("")]
     [DataRow("where TKey: struct")]
     [DataRow("where TKey: struct where TValue: class")]
