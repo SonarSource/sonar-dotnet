@@ -74,29 +74,29 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
     private static bool HasDefaultClause(SwitchStatementSyntax switchStatement) =>
         switchStatement.Sections.Any(x => x.Labels.Any(l => l.IsKind(SyntaxKind.DefaultSwitchLabel)));
 
-    private static void CheckStatement(SonarSyntaxNodeReportingContext context, SyntaxNode statement, IEnumerable<SyntaxNode> precedingStatements, SemanticModel model, bool hasElse, string discriminator)
+    private static void CheckStatement(SonarSyntaxNodeReportingContext context, SyntaxNode node, IEnumerable<SyntaxNode> precedingStatements, SemanticModel model, bool hasElse, string discriminator)
     {
-        var numberOfStatements = GetStatementsCount(statement);
+        var numberOfStatements = GetStatementsCount(node);
         if (!hasElse && numberOfStatements == 1)
         {
-            var equivalentStatements = precedingStatements.Where(x => AreEquivalentStatements(statement, x, model)).ToList();
+            var equivalentStatements = precedingStatements.Where(x => AreEquivalentStatements(node, x, model)).ToList();
             if (equivalentStatements.Count > 0 && equivalentStatements.Count == precedingStatements.Count())
             {
-                ReportSyntaxNode(context, statement, equivalentStatements[0], discriminator);
+                ReportSyntaxNode(context, node, equivalentStatements[0], discriminator);
             }
         }
         else if (numberOfStatements > 1)
         {
-            var equivalentStatement = precedingStatements.FirstOrDefault(x => AreEquivalentStatements(statement, x, model));
+            var equivalentStatement = precedingStatements.FirstOrDefault(x => AreEquivalentStatements(node, x, model));
             if (equivalentStatement is not null)
             {
-                ReportSyntaxNode(context, statement, equivalentStatement, discriminator);
+                ReportSyntaxNode(context, node, equivalentStatement, discriminator);
             }
         }
     }
 
-    private static bool AreEquivalentStatements(SyntaxNode statement, SyntaxNode otherStatement, SemanticModel model) =>
-        new EquivalentNodeCompare(statement, otherStatement) switch
+    private static bool AreEquivalentStatements(SyntaxNode node, SyntaxNode otherNode, SemanticModel model) =>
+        new EquivalentNodeCompare(node, otherNode) switch
         {
             (SwitchSectionSyntax { Statements: var statements }, SwitchSectionSyntax { Statements: var otherStatements }) =>
                 CSharpEquivalenceChecker.AreEquivalent(statements, otherStatements) && HaveTheSameInvocations(statements, otherStatements, model),
@@ -107,13 +107,11 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
 
     private static int GetStatementsCount(SyntaxNode node)
     {
-        var statements = node switch
-        {
-            SwitchSectionSyntax switchSection => Enumerable.Empty<SyntaxNode>()
+        var statements = node is SwitchSectionSyntax switchSection
+            ? Enumerable.Empty<SyntaxNode>()
                 .Union(switchSection.Statements.OfType<BlockSyntax>().SelectMany(x => x.Statements))
-                .Union(switchSection.Statements.Where(x => !x.IsKind(SyntaxKind.Block))),
-            _ => node.ChildNodes(),
-        };
+                .Union(switchSection.Statements.Where(x => !x.IsKind(SyntaxKind.Block)))
+            : node.ChildNodes();
 
         return statements.Count(IsApprovedStatement);
     }
