@@ -72,17 +72,17 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
     }
 
     private static bool HasDefaultClause(SwitchStatementSyntax switchStatement) =>
-        switchStatement.Sections.Any(x => x.Labels.Any(l => l.IsKind(SyntaxKind.DefaultSwitchLabel)));
+        switchStatement.Sections.SelectMany(x => x.Labels).Any(x => x.IsKind(SyntaxKind.DefaultSwitchLabel));
 
-    private static void CheckStatement(SonarSyntaxNodeReportingContext context, SyntaxNode node, IEnumerable<SyntaxNode> precedingStatements, SemanticModel model, bool hasElse, string discriminator)
+    private static void CheckStatement(SonarSyntaxNodeReportingContext context, SyntaxNode node, IReadOnlyList<SyntaxNode> precedingStatements, SemanticModel model, bool hasElse, string discriminator)
     {
         var numberOfStatements = GetStatementsCount(node);
         if (!hasElse && numberOfStatements == 1)
         {
-            var equivalentStatements = precedingStatements.Where(x => AreEquivalentStatements(node, x, model)).ToList();
-            if (equivalentStatements.Count > 0 && equivalentStatements.Count == precedingStatements.Count())
+            var equivalentStatements = precedingStatements.Where(x => AreEquivalentStatements(node, x, model));
+            if (equivalentStatements.Any() && equivalentStatements.Count() == precedingStatements.Count)
             {
-                ReportSyntaxNode(context, node, equivalentStatements[0], discriminator);
+                ReportSyntaxNode(context, node, equivalentStatements.First(), discriminator);
             }
         }
         else if (numberOfStatements > 1)
@@ -108,8 +108,7 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
     private static int GetStatementsCount(SyntaxNode node)
     {
         var statements = node is SwitchSectionSyntax switchSection
-            ? Enumerable.Empty<SyntaxNode>()
-                .Union(switchSection.Statements.OfType<BlockSyntax>().SelectMany(x => x.Statements))
+            ? switchSection.Statements.OfType<BlockSyntax>().SelectMany(x => x.Statements)
                 .Union(switchSection.Statements.Where(x => !x.IsKind(SyntaxKind.Block)))
             : node.ChildNodes();
 
@@ -153,5 +152,5 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
         return true;
     }
 
-    private sealed record EquivalentNodeCompare(SyntaxNode RefNode, SyntaxNode OtherNode);
+    private readonly record struct EquivalentNodeCompare(SyntaxNode RefNode, SyntaxNode OtherNode);
 }

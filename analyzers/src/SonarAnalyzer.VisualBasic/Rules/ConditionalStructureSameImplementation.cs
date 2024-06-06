@@ -26,11 +26,7 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
     private static readonly DiagnosticDescriptor Rule =
         DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-    private static readonly ISet<SyntaxKind> IgnoredStatementsInSwitch = new HashSet<SyntaxKind>
-    {
-        SyntaxKind.ReturnStatement,
-        SyntaxKind.ThrowStatement,
-    };
+    private static readonly ISet<SyntaxKind> IgnoredStatementsInSwitch = new HashSet<SyntaxKind> { SyntaxKind.ReturnStatement, SyntaxKind.ThrowStatement };
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
