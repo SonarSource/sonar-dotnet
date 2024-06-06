@@ -18,13 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+public partial class UnusedPrivateMemberTest
 {
-    public partial class UnusedPrivateMemberTest
-    {
-        [TestMethod]
-        public void UnusedPrivateMember_Types_Accessibility() =>
-            builder.AddSnippet(@"
+    [TestMethod]
+    public void UnusedPrivateMember_Types_Accessibility() =>
+        builder.AddSnippet(@"
 public class PrivateTypes
 {
     private class InnerPrivateClass // Noncompliant {{Remove the unused private class 'InnerPrivateClass'.}}
@@ -54,9 +54,9 @@ public class NonPrivateTypes
 }
 ").Verify();
 
-        [TestMethod]
-        public void UnusedPrivateMember_Types_InternalsVisibleTo() =>
-            builder.AddSnippet(@"
+    [TestMethod]
+    public void UnusedPrivateMember_Types_InternalsVisibleTo() =>
+        builder.AddSnippet(@"
 [assembly:System.Runtime.CompilerServices.InternalsVisibleTo("""")]
 public class PrivateTypes
 {
@@ -65,32 +65,32 @@ public class PrivateTypes
 }
 ").Verify();
 
-        [TestMethod]
-        public void UnusedPrivateMember_Types_Internals() =>
-            builder.AddSnippet("""
-                // https://github.com/SonarSource/sonar-dotnet/issues/1225
-                // https://github.com/SonarSource/sonar-dotnet/issues/904
-                using System;
-                public class Class1
+    [TestMethod]
+    public void UnusedPrivateMember_Types_Internals() =>
+        builder.AddSnippet("""
+            // https://github.com/SonarSource/sonar-dotnet/issues/1225
+            // https://github.com/SonarSource/sonar-dotnet/issues/904
+            using System;
+            public class Class1
+            {
+                public void Method1()
                 {
-                    public void Method1()
-                    {
-                        var x = Sample.Constants.X;
-                    }
+                    var x = Sample.Constants.X;
                 }
+            }
 
-                public class Sample
+            public class Sample
+            {
+                internal class Constants
                 {
-                    internal class Constants
-                    {
-                        public const int X = 5;
-                    }
+                    public const int X = 5;
                 }
-                """).VerifyNoIssues();
+            }
+            """).VerifyNoIssues();
 
-        [TestMethod]
-        public void UnusedPrivateMember_Types_DirectReferences() =>
-            builder.AddSnippet(@"
+    [TestMethod]
+    public void UnusedPrivateMember_Types_DirectReferences() =>
+        builder.AddSnippet(@"
 using System.Linq;
 public class PrivateTypes
 {
@@ -117,9 +117,9 @@ public class PrivateTypes
 }
 ").Verify();
 
-        [TestMethod]
-        public void UnusedPrivateMember_SupportTypeKinds() =>
-            builder.AddSnippet(@"
+    [TestMethod]
+    public void UnusedPrivateMember_SupportTypeKinds() =>
+        builder.AddSnippet(@"
 public class PrivateTypes
 {
     private class MyPrivateClass { } // Noncompliant
@@ -149,5 +149,4 @@ public class PrivateTypes
     public static int PerformCalculation(int x, int y) => x + y;
 }
 ").Verify();
-    }
 }

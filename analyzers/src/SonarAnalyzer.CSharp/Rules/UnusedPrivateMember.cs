@@ -250,10 +250,10 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
                 _ => Enumerable.Empty<VariableDeclaratorSyntax>(),
             };
 
-        static Location GetIdentifierLocation(SyntaxNode syntaxNode) =>
-            syntaxNode.GetIdentifier() is { } identifier
+        static Location GetIdentifierLocation(SyntaxNode node) =>
+            node.GetIdentifier() is { } identifier
                 ? identifier.GetLocation()
-                : syntaxNode.GetLocation();
+                : node.GetLocation();
     }
 
     private static void ReportProperty<TContext>(SonarCompilationReportingContextBase<TContext> context,
@@ -296,12 +296,9 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
     private static CSharpRemovableSymbolWalker RetrieveRemovableSymbols(INamedTypeSymbol namedType, Compilation compilation, SonarSymbolReportingContext context)
     {
         var removableSymbolsCollector = new CSharpRemovableSymbolWalker(compilation.GetSemanticModel, namedType.DeclaredAccessibility);
-        if (!VisitDeclaringReferences(namedType, removableSymbolsCollector, context, includeGeneratedFile: false))
-        {
-            return null;
-        }
-
-        return removableSymbolsCollector;
+        return VisitDeclaringReferences(namedType, removableSymbolsCollector, context, includeGeneratedFile: false)
+            ? removableSymbolsCollector
+            : null;
     }
 
     private static void CopyRetrievedSymbols(CSharpRemovableSymbolWalker removableSymbolCollector,
