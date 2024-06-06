@@ -239,6 +239,9 @@ namespace Repro_9379
 
             private class NestedType { }                                        // Noncompliant
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicNestedTypes)] private class NestedTypeWithAttribute { }
+
+            [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)]
+            private int PrivateMethodWithReturn() { return 0; } // Noncompliant
         }
 
         private class ArgumentsDecoratedWithAttribute   // Noncompliant
@@ -251,6 +254,8 @@ namespace Repro_9379
             {
                 private NestedType(int arg) { }
             }
+
+            public record RecordWithAttribute([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicFields)] string NotUnused); // Noncompliant
         }
 
         private class DerivedFromTypeDecoratedWithDynamicallyAccessedMembers : TypeDecoratedWithDynamicallyAccessedMembers  // Noncompliant
@@ -261,8 +266,8 @@ namespace Repro_9379
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         private class DynamicallyAccessedMembersOnlyForConstructors
         {
-            private int privateField;   // FN - only public constructors are used are indicated to be used through reflection, not fields
-                                        // The analyzer assumens when the [DynamicallyAccessedMembers] attribute is used, then all members are used through reflection
+            private int privateField; // FN - only public constructors are used are indicated to be used through reflection, not fields
+                                      // The analyzer assumens when the [DynamicallyAccessedMembers] attribute is used, then all members are used through reflection
         }
     }
 }

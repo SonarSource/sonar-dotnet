@@ -179,18 +179,23 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitTypeArgumentList(TypeArgumentListSyntax node)
         {
-            if (semanticModel.GetSymbolInfo(node.Parent).Symbol is { } symbol)
+            if (semanticModel.GetSymbolInfo(node.Parent).Symbol is { } symbol) // symbol that the attribute is applied to
             {
-                var typeArgumentSymbols = symbol is IMethodSymbol method
-                    ? method.TypeParameters
-                    : ((INamedTypeSymbol)symbol).TypeParameters;
-                var typesWithDynamicallyAccessedMembers = typeArgumentSymbols.Zip(node.Arguments, (symbol, argument) => new Tuple<ISymbol, SyntaxNode>(symbol, argument))
+                var typesWithDynamicallyAccessedMembers = GetMethodTypeParameters(symbol)
+                    .Zip(node.Arguments, (symbol, argument) => new Tuple<ITypeParameterSymbol, SyntaxNode>(symbol, argument)) // map T to Person in void M<T>() { } .. M<Person>();
                     .Where(x => x.Item1.HasAttribute(KnownType.System_Diagnostics_CodeAnalysis_DynamicallyAccessedMembersAttribute))
-                    .Select(x => semanticModel.GetSymbolInfo(x.Item2).Symbol)
-                    .Where(x => x is INamedTypeSymbol { IsUnboundGenericType: false });
+                    .Select(x => semanticModel.GetSymbolInfo(x.Item2).Symbol);
                 TypesUsedWithReflection.UnionWith(typesWithDynamicallyAccessedMembers);
             }
             base.VisitTypeArgumentList(node);
+
+            static ImmutableArray<ITypeParameterSymbol> GetMethodTypeParameters(ISymbol symbol) =>
+                symbol switch
+                {
+                    IMethodSymbol method => method.TypeParameters,
+                    INamedTypeSymbol namedType => namedType.TypeParameters,
+                    _ => ImmutableArray<ITypeParameterSymbol>.Empty
+                };
         }
 
         public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
