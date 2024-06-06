@@ -5,60 +5,6 @@
       "Message": "Convert this \u0027abstract\u0027 class to an interface.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/MessageEnvelope.cs#L15",
       "Location": "Line 15 Position 27-42"
-    },
-    {
-      "Id": "S1694",
-      "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L22",
-      "Location": "Line 22 Position 27-43"
-    },
-    {
-      "Id": "S1694",
-      "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L18",
-      "Location": "Line 18 Position 26-37"
-    },
-    {
-      "Id": "S1694",
-      "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitAssert.cs#L18",
-      "Location": "Line 18 Position 35-46"
-    },
-    {
-      "Id": "S1694",
-      "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L19",
-      "Location": "Line 19 Position 35-46"
-    },
-    {
-      "Id": "S1694",
-      "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L21",
-      "Location": "Line 21 Position 35-46"
-    },
-    {
-      "Id": "S1694",
-      "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L16",
-      "Location": "Line 16 Position 35-46"
-    },
-    {
-      "Id": "S1694",
-      "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestKitBase_Receive.cs#L19",
-      "Location": "Line 19 Position 35-46"
-    },
-    {
-      "Id": "S1694",
-      "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L18",
-      "Location": "Line 18 Position 35-46"
-    },
-    {
-      "Id": "S1694",
-      "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L26",
-      "Location": "Line 26 Position 35-46"
     }
   ]
 }
