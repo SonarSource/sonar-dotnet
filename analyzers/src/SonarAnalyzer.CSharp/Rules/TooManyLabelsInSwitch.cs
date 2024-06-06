@@ -23,6 +23,8 @@ namespace SonarAnalyzer.Rules.CSharp;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind, SwitchStatementSyntax>
 {
+    private static readonly ISet<SyntaxKind> ignoredStatementsInSwitch = new HashSet<SyntaxKind> { SyntaxKind.BreakStatement, SyntaxKind.ReturnStatement, SyntaxKind.ThrowStatement };
+
     protected override DiagnosticDescriptor Rule { get; } =
         DescriptorFactory.Create(DiagnosticId, string.Format(MessageFormat, "switch", "case"),
             isEnabledByDefault: false);
@@ -39,8 +41,16 @@ public class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind, Switc
         statement.Sections.Count;
 
     protected override bool AllSectionsAreOneLiner(SwitchStatementSyntax statement) =>
-        statement.Sections.All(x => x.Statements.Count is 0 or 1 && x.Statements.All(y => y is not BlockSyntax));
+        statement.Sections.All(HasOneLine);
 
     protected override Location GetKeywordLocation(SwitchStatementSyntax statement) =>
         statement.SwitchKeyword.GetLocation();
+
+    private static bool HasOneLine(SwitchSectionSyntax switchSection)
+    {
+        var statements = switchSection.Statements.Where(s => !s.IsAnyKind(ignoredStatementsInSwitch));
+
+        return statements.Count() is 0
+               || (statements.Count() is 1 && statements.First().GetLocation().GetLineSpan().StartLinePosition.Line == statements.Last().GetLocation().GetLineSpan().EndLinePosition.Line);
+    }
 }

@@ -18,6 +18,46 @@
                 Case Else
             End Select
 
+            Select Case n ' Compliant
+                Case 0
+                    Console.WriteLine("0")
+                Case 1
+                    Console.WriteLine("1")
+                Case 2
+                    Console.WriteLine("2")
+                Case 3
+                    Console.WriteLine("3")
+                    Throw New InvalidOperationException()
+                Case 4
+                    Console.WriteLine("4")
+                    Return
+                Case Else
+            End Select
+
+            Select Case n ' Noncompliant
+                Case 0
+                    Console.WriteLine("0")
+                    Console.WriteLine("0+0")
+                    Return
+                Case 1
+                    Console.WriteLine("1")
+                Case 2
+                    Console.WriteLine("2")
+                Case Else
+            End Select
+
+            Select Case n ' Noncompliant
+                Case 0
+                    Console.WriteLine("0")
+                    Console.WriteLine("0+0")
+                    Throw New InvalidOperationException()
+                Case 1
+                    Console.WriteLine("1")
+                Case 2
+                    Console.WriteLine("2")
+                Case Else
+            End Select
+
             Select Case en
                 Case MyEnum.A
                 Case MyEnum.B
@@ -53,6 +93,25 @@
                     Return 1000
             End Select
         End Function
+
+        Public Function FalseNegatives(a As Integer) As Integer
+            Select Case a ' FN
+                Case 1
+                    Return 1
+                Case 2
+                    Throw New NotImplementedException()
+                Case 3
+                    Return 3
+                Case 4
+                    If a > 42 Then Return 21 ' This is one statement
+                    Return 42
+                Case 5
+                    If a > 42 Then Return 21 Else If a < 21 Then Return 3 ' This is one statement
+                    Return 42
+                Case Else
+                    Return 0
+            End Select
+                           End Function
 
         Public Function SwitchCaseFallThrough(ch As Char, value As Integer) As Integer
             Select Case ch

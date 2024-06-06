@@ -45,6 +45,67 @@ namespace Tests.Diagnostics
                     }
             }
 
+            switch(n) // Noncompliant
+            {
+                case 0:
+                    Console.WriteLine("0");
+                    Console.WriteLine("0+0");
+                    break;
+                case 1:
+                    Console.WriteLine("1");
+                    break;
+                case 2:
+                    Console.WriteLine("2");
+                    break;
+            }
+
+            switch(n) // Noncompliant
+            {
+                case 0:
+                    Console.WriteLine("0");
+                    Console.WriteLine("0+0");
+                    return;
+                case 1:
+                    Console.WriteLine("1");
+                    break;
+                case 2:
+                    Console.WriteLine("2");
+                    break;
+            }
+
+            switch(n) // Noncompliant
+            {
+                case 0:
+                    Console.WriteLine("0");
+                    Console.WriteLine("0+0");
+                    throw new InvalidOperationException();
+                case 1:
+                    Console.WriteLine("1");
+                    break;
+                case 2:
+                    Console.WriteLine("2");
+                    break;
+            }
+
+            switch(n) // Compliant
+            {
+                case 0:
+                    Console.WriteLine("0");
+                    break;
+                case 1:
+                    Console.WriteLine("1");
+                    break;
+                case 2:
+                    Console.WriteLine("2");
+                    break;
+                case 3:
+                    Console.WriteLine("3");
+                    throw new InvalidOperationException();
+                case 4:
+                    Console.WriteLine("4");
+                    return;
+            }
+
             switch (n)
             {
                 case 0:
@@ -158,6 +219,27 @@ namespace Tests.Diagnostics
                 default:
                     return 1000;
             }
+        }
+
+        public int FalseNegatives(int a)
+        {
+            switch (a) // FN
+            {
+                case 1:
+                    return 1;
+                case 2:
+                    throw new NotImplementedException();
+                case 3:
+                    return 3;
+                case 4:
+                    if (a > 42) return 21; // This is one statement
+                    return 42;
+                case 5:
+                    if (a > 42) return 21; else if (a < 21) return 3; // This is one statement
+                    return 42;
+            }
+
+            return 0;
         }
 
         public int Test(string type)
