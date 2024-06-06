@@ -45,7 +45,6 @@ public class INamedTypeSymbolExtensionsTests
                     o.ToString();
                 }
             }
-
             """;
         var (tree, semanticModel) = TestHelper.CompileCS(code);
         var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("o")); // o in o.ToString()
@@ -70,7 +69,6 @@ public class INamedTypeSymbolExtensionsTests
                     o.ToString();
                 }
             }
-
             """;
         var (tree, semanticModel) = TestHelper.CompileCS(code);
         var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("o")); // o in o.ToString()

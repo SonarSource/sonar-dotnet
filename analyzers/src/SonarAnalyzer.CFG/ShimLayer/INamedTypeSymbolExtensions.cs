@@ -55,16 +55,17 @@ namespace StyleCop.Analyzers.Lightup
 
             var exit = Label(immutableArrayTypeT);
             var body = Block([builder, original, i],
-                Assign(original, Property(symbol, nameof(TypeArgumentNullableAnnotations))), // original = symbol.TypeArgumentNullableAnnotations;
-                Assign(builder, Call(builderCreate, Property(original, nameof(ImmutableArray<int>.Length)))), // builder = ImmutableArray.CreateBuilder<NullableAnnotation>(original.Length);
-                Assign(i, Constant(0)), // i = 0;
+                Assign(original, Property(symbol, nameof(TypeArgumentNullableAnnotations))),                               // original = symbol.TypeArgumentNullableAnnotations;
+                Assign(builder, Call(builderCreate, Property(original, nameof(ImmutableArray<int>.Length)))),              // builder = ImmutableArray.CreateBuilder<NullableAnnotation>(original.Length);
+                Assign(i, Constant(0)),                                                                                    // i = 0;
+                                                                                                                           // Endless loop:
                 Loop(
                     IfThenElse(
-                        LessThan(i, Property(original, "Length")), // if (i < original.Length)
+                        LessThan(i, Property(original, "Length")),                                                         // if (i < original.Length)
                         ifTrue: Block(
                             Call(builder, builderAdd, Convert(Property(original, "Item", i), typeof(NullableAnnotation))), // builder.Add((NullableAnnotation)original[i]);
-                            AddAssign(i, Constant(1))), // i += 1;
-                        ifFalse: Return(exit, Call(builder, builderToImmutable))), // return builder.ToImmutable();
+                            AddAssign(i, Constant(1))),                                                                    // i += 1;
+                        ifFalse: Return(exit, Call(builder, builderToImmutable))),                                         // return builder.ToImmutable();
                     exit));
             return Lambda<Func<INamedTypeSymbol, ImmutableArray<NullableAnnotation>>>(body, symbol).Compile();
         }
