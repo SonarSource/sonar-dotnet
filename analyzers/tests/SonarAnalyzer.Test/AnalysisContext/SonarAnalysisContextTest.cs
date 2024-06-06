@@ -29,13 +29,10 @@ namespace SonarAnalyzer.Test.AnalysisContext;
 [TestClass]
 public partial class SonarAnalysisContextTest
 {
-    public TestContext TestContext { get; set; }
-
     // Various classes that invoke all the `ReportIssue` methods in AnalysisContextExtensions
     // We mention in comments the type of Context that is used to invoke (directly or indirectly) the `ReportIssue` method
-    private readonly List<TestSetup> testCases = new(
-        new[]
-        {
+    private readonly List<TestSetup> testCases =
+        [
             // SyntaxNodeAnalysisContext
             // S3244 - MAIN and TEST
             new TestSetup("AnonymousDelegateEventUnsubscribe.cs", new AnonymousDelegateEventUnsubscribe()),
@@ -65,8 +62,10 @@ public partial class SonarAnalysisContextTest
             // S2953 - MAIN only
             new TestSetup("DisposeNotImplementingDispose.cs", new DisposeNotImplementingDispose()),
             // S1694 - MAIN only
-            new TestSetup("ClassShouldNotBeAbstract.cs", new ClassShouldNotBeAbstract()),
-        });
+            new TestSetup("AbstractClassToInterface.cs", new AbstractClassToInterface()),
+        ];
+
+    public TestContext TestContext { get; set; }
 
     [TestMethod]
     public void Constructor_Null() =>

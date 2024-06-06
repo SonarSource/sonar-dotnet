@@ -1,13 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public abstract partial class A
+public abstract partial class PartialMixed
 {
     public abstract void X();
 }
-public abstract partial class A
+public abstract partial class PartialMixed
 {
     public void Y() { }
+}
+
+public abstract partial class PartialAbstract // Noncompliant
+{
+    public abstract void X();
+}
+public abstract partial class PartialAbstract // Noncompliant
+{
+    public abstract void Y();
 }
 
 public abstract class Empty
@@ -67,7 +76,6 @@ public class ColorCompliant
 
 public abstract class LampCompliant
 {
-
     private bool switchLamp = false;
 
     public abstract void glow();
@@ -104,4 +112,19 @@ public abstract class View3Derived : SomeUnknownType // Error [CS0246]
 {
     public string Content3 { get; }
     public override int Content1 { get { return 1; } }
+}
+
+public abstract class WithConstructor   // Noncompliant
+{
+    public abstract void ToOverride();
+
+    static WithConstructor()
+    {
+        // Do something here
+    }
+
+    public WithConstructor()
+    {
+        // Do something here
+    }
 }

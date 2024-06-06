@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ClassShouldNotBeAbstract : SonarDiagnosticAnalyzer<SyntaxKind>
+public sealed class AbstractClassToInterface : SonarDiagnosticAnalyzer<SyntaxKind>
 {
     private const string DiagnosticId = "S1694";
 
@@ -30,7 +30,7 @@ public sealed class ClassShouldNotBeAbstract : SonarDiagnosticAnalyzer<SyntaxKin
     protected override string MessageFormat => "Convert this 'abstract' {0} to an interface.";
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    public ClassShouldNotBeAbstract() : base(DiagnosticId) { }
+    public AbstractClassToInterface() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterSymbolAction(
@@ -39,9 +39,9 @@ public sealed class ClassShouldNotBeAbstract : SonarDiagnosticAnalyzer<SyntaxKin
                 var symbol = (INamedTypeSymbol)c.Symbol;
                 if (symbol.IsClass()
                     && symbol.IsAbstract
-                    && !HasInheritedAbstractMembers(symbol)
+                    && symbol.BaseType.Is(KnownType.System_Object)
                     && !IsRecordWithParameters(symbol)
-                    && AbstractTypeShouldBeInterface(symbol))
+                    && AllMethodsAreAbstract(symbol))
                 {
                     foreach (var declaringSyntaxReference in symbol.DeclaringSyntaxReferences)
                     {
@@ -61,36 +61,18 @@ public sealed class ClassShouldNotBeAbstract : SonarDiagnosticAnalyzer<SyntaxKin
             },
             SymbolKind.NamedType);
 
-    private static bool HasInheritedAbstractMembers(INamedTypeSymbol symbol)
-    {
-        var baseTypes = symbol.BaseType.GetSelfAndBaseTypes().ToList();
-        var abstractMethods = baseTypes.SelectMany(GetAllAbstractMethods);
-        var baseTypesAndSelf = baseTypes.Concat(new[] { symbol }).ToList();
-        var overrideMethods = baseTypesAndSelf.SelectMany(GetAllOverrideMethods);
-        var overriddenMethods = overrideMethods.Select(x => x.OverriddenMethod);
-        var stillAbstractMethods = abstractMethods.Except(overriddenMethods);
-
-        return stillAbstractMethods.Any();
-    }
-
-    private static IEnumerable<IMethodSymbol> GetAllAbstractMethods(INamedTypeSymbol symbol) =>
-        GetAllMethods(symbol).Where(x => x.IsAbstract);
-
-    private static IEnumerable<IMethodSymbol> GetAllOverrideMethods(INamedTypeSymbol symbol) =>
-        GetAllMethods(symbol).Where(x => x.IsOverride);
-
     private static bool IsRecordWithParameters(ISymbol symbol) =>
         symbol.DeclaringSyntaxReferences.Any(x => x.GetSyntax() is { } node
                                                   && RecordDeclarationSyntaxWrapper.IsInstance(node)
                                                   && ((RecordDeclarationSyntaxWrapper)node).ParameterList is { } parameterList
                                                   && parameterList.Parameters.Count > 0);
 
-    private static bool AbstractTypeShouldBeInterface(INamedTypeSymbol symbol)
+    private static bool AllMethodsAreAbstract(INamedTypeSymbol symbol)
     {
         var methods = GetAllMethods(symbol);
-        return symbol.BaseType.Is(KnownType.System_Object) && methods.Any() && methods.All(x => x.IsAbstract);
+        return methods.Any() && methods.All(x => x.IsAbstract);
     }
 
-    private static IList<IMethodSymbol> GetAllMethods(INamedTypeSymbol symbol) =>
-        symbol.GetMembers().OfType<IMethodSymbol>().Where(x => !x.IsImplicitlyDeclared && !ConstructorKinds.Contains(x.MethodKind)).ToList();
+    private static IMethodSymbol[] GetAllMethods(INamedTypeSymbol symbol) =>
+        symbol.GetMembers().OfType<IMethodSymbol>().Where(x => !x.IsImplicitlyDeclared && !ConstructorKinds.Contains(x.MethodKind)).ToArray();
 }
