@@ -8,6 +8,7 @@ namespace Repro_8092
         class AClassWithoutBody();                                              // Noncompliant
 
         public abstract class BaseClass(string value);
+        public abstract class BaseClassNoValue{ };
 
         public class SomeClass() : BaseClass("SomeValue");                      // Compliant, Foo is calling Base constructor with primary constructor syntax, it's not redundant
 
@@ -16,6 +17,8 @@ namespace Repro_8092
             public DefaultStyle() : base("SomeValue")                           // Compliant, "default" way of calling Base constructor
             { }
         }
+
+        public class AClass() : BaseClassNoValue;                              // Noncompliant
 
         public abstract record class BaseRecordClass(string value);
 
