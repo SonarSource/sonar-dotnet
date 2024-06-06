@@ -55,6 +55,8 @@ class UnusedPrivateMember
     private int[][] array = new int[0][];
     private Dictionary<int, int> used = new Dictionary<int, int>();
 
+    [MyAttribute] void PrivateMethodWithAttribute() { } // Compliant: due to the attribute
+
     public int GetValue(int x, int y) => array[x][y];
 
     public int GetItem(int i) => used[i];
@@ -332,12 +334,6 @@ public sealed class PublicClass : IPublicInterface
     private PublicClass()
     {
     }
-}
-
-// https://github.com/SonarSource/sonar-dotnet/issues/8348
-class Repro_8348
-{
-    [MyAttribute] void PrivateMethodWithAttribute() { } // FN: due to the attribute
 }
 
 // https://github.com/SonarSource/sonar-dotnet/issues/8342
