@@ -178,10 +178,26 @@ namespace Repro_9379
         public static void Method()
         {
             var instance = CreateInstance<ClassInstantiatedThroughReflection>();
+
+            A classViaReflection = new();
+            InitValue(classViaReflection); 
         }
 
         public static T CreateInstance<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>() =>
             (T)Activator.CreateInstance(typeof(T), 42);
+
+        public static void InitValue<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>(T value) { }
+
+        private class A
+        {
+            private bool a = true; // Noncompliant FP: type argument is inferred and ArgumentList is not present on syntax level
+        }
+
+        class C<T>
+        {
+            private int usedByReflection;
+            C<T> Create() => Program.CreateInstance<C<T>>();
+        }
 
         private class ClassInstantiatedThroughReflection
         {
