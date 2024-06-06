@@ -61,7 +61,7 @@ namespace StyleCop.Analyzers.Lightup
                                                                                                                            // Endless loop:
                 Loop(
                     IfThenElse(
-                        LessThan(i, Property(original, "Length")),                                                         // if (i < original.Length)
+                        LessThan(i, Property(original, nameof(ImmutableArray<int>.Length))),                               // if (i < original.Length)
                         ifTrue: Block(
                             Call(builder, builderAdd, Convert(Property(original, "Item", i), typeof(NullableAnnotation))), // builder.Add((NullableAnnotation)original[i]);
                             AddAssign(i, Constant(1))),                                                                    // i += 1;
