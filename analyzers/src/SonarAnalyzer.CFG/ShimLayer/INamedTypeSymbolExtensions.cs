@@ -34,14 +34,15 @@ namespace StyleCop.Analyzers.Lightup
         {
             // INamedTypeSymbol.TypeArgumentNullableAnnotations is ImmutableArray<Roslyn.NullableAnnotation>
             // The generated code
-            // * retrieves the original ImmutableArray
-            // * create a new ImmutableArrayBuilder for the Sonar.NullableAnnotation with the capacity of original
+            // * Retrieves the original ImmutableArray
+            // * Creates a new ImmutableArrayBuilder of Sonar.NullableAnnotation with the capacity of original
             // * Copies over the converted NullableAnnotation into the builder in a loop
             // * Skips the builder creation and the loop if the original is empty
-            var originalNullableAnnotationType = Type.GetType("Microsoft.CodeAnalysis.NullableAnnotation, Microsoft.CodeAnalysis, Version=4.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35");
+            var originalNullableAnnotationType = OriginalNullableAnnotationType();
             if (originalNullableAnnotationType is null)
             {
-                return static _ => ImmutableArray<NullableAnnotation>.Empty;
+                // Callers may rely on the fact that symbol.TypeArgumentNullableAnnotations is supposed to have the same length as symbol.TypeArguments
+                return static x => Enumerable.Repeat(NullableAnnotation.None, x.TypeArguments.Length).ToImmutableArray();
             }
 
             var immutableArrayType = typeof(ImmutableArray);
@@ -76,6 +77,18 @@ namespace StyleCop.Analyzers.Lightup
                         ifFalse: Return(exit, Call(builder, builderToImmutable)))),                                        // goto exit (builder.ToImmutable());
                 Label(exit, empty));
             return Lambda<Func<INamedTypeSymbol, ImmutableArray<NullableAnnotation>>>(body, symbol).Compile();
+        }
+
+        private static Type OriginalNullableAnnotationType()
+        {
+            try
+            {
+                return Type.GetType("Microsoft.CodeAnalysis.NullableAnnotation, Microsoft.CodeAnalysis");
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }
