@@ -197,4 +197,40 @@ namespace Tests.Diagnostics
             return FixIt(a);
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/6642
+    // this is added here for coverage purposes
+    public class Repro_6642
+    {
+        public int this[int i]
+        {
+            get { return this[i]; } // FN
+            set { this[i] = value; } // FN
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/6643
+    public class Repro_6643
+    {
+        public static implicit operator byte(Repro_6643 d) => d; // FN
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/6644
+    public delegate bool SomeDelegate();
+
+    public class Repro_6644
+    {
+        public event SomeDelegate SomeEvent
+        {
+            add
+            {
+                SomeEvent += value; // FN
+            }
+
+            remove
+            {
+                SomeEvent -= value; // FN
+            }
+        }
+    }
 }
