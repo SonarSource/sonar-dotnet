@@ -60,6 +60,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
+            public void CheckForNoExitIndexer(SonarSyntaxNodeReportingContext c, IndexerDeclarationSyntax indexer, IPropertySymbol propertySymbol)
+            {
+                // SonarCFG is out of support
+            }
+
+            public void CheckForNoExitEvent(SonarSyntaxNodeReportingContext c, EventDeclarationSyntax eventDeclaration, IEventSymbol eventSymbol)
+            {
+                // SonarCFG is out of support
+            }
+
             public void CheckForNoExitMethod(SonarSyntaxNodeReportingContext c, SyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol)
             {
                 if (CSharpControlFlowGraph.TryGet(body, c.SemanticModel, out var cfg))
@@ -122,7 +132,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 protected override bool HasReferenceToDeclaringSymbol(Block block) =>
                     block.Instructions.Any(x =>
                         x is InvocationExpressionSyntax invocation
-                        && IsInstructionOnThisAndMatchesDeclaringSymbol(invocation.Expression, context.AnalyzedSymbol, context.SemanticModel));
+                        && IsInstructionOnThisAndMatchesDeclaringSymbol(invocation.Expression, context.AnalyzedSymbol, context.Model));
             }
 
             private class RecursionSearcherForProperty : RecursionSearcher
@@ -139,7 +149,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     block.Instructions.Any(x =>
                         TypesForReference.Contains(x.GetType())
                         && MatchesAccessor(x)
-                        && IsInstructionOnThisAndMatchesDeclaringSymbol(x, context.AnalyzedSymbol, context.SemanticModel));
+                        && IsInstructionOnThisAndMatchesDeclaringSymbol(x, context.AnalyzedSymbol, context.Model));
 
                 private bool MatchesAccessor(SyntaxNode node)
                 {
