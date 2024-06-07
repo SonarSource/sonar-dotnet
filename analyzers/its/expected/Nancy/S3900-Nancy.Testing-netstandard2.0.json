@@ -62,12 +62,6 @@
     },
     {
       "Id": "S3900",
-      "Message": "Refactor this method to add validation of parameter \u0027cookies\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L119",
-      "Location": "Line 119 Position 36-43"
-    },
-    {
-      "Id": "S3900",
       "Message": "Refactor this method to add validation of parameter \u0027browserContext\u0027 before using it.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L152",
       "Location": "Line 152 Position 13-27"

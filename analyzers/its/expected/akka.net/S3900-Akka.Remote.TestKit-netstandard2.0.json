@@ -44,21 +44,9 @@
     },
     {
       "Id": "S3900",
-      "Message": "Refactor this method to add validation of parameter \u0027messageClasses\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L552",
-      "Location": "Line 552 Position 44-58"
-    },
-    {
-      "Id": "S3900",
       "Message": "Refactor this method to add validation of parameter \u0027tc\u0027 before using it.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L565",
       "Location": "Line 565 Position 27-29"
-    },
-    {
-      "Id": "S3900",
-      "Message": "Refactor this method to add validation of parameter \u0027names\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L127",
-      "Location": "Line 127 Position 34-39"
     }
   ]
 }

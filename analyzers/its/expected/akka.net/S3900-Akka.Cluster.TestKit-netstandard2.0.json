@@ -2,12 +2,6 @@
   "Issues": [
     {
       "Id": "S3900",
-      "Message": "Refactor this method to add validation of parameter \u0027roles\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L269",
-      "Location": "Line 269 Position 32-37"
-    },
-    {
-      "Id": "S3900",
       "Message": "Refactor this method to add validation of parameter \u0027expectedAddresses\u0027 before using it.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L306",
       "Location": "Line 306 Position 37-54"
