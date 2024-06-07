@@ -88,6 +88,9 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
 
     [DataTestMethod]
     [DataRow("", "")]
+    [DataRow("where TKey: TValue", "where TKey: TValue")]
+    [DataRow("where TKey: TValue where TValue: IComparable", "where TKey: TValue where TValue: IComparable")]
+    [DataRow("where TKey: IEquatable<TValue> where TValue: IComparable", "where TKey: IEquatable<TValue> where TValue: IComparable")]
     [DataRow("where TKey: struct", "where TKey: struct")]
     [DataRow("where TKey: struct where TValue: class", "where TKey: struct where TValue: class")]
     [DataRow("where TValue: class where TKey: struct", "where TKey: struct where TValue: class")]
@@ -158,9 +161,6 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
     [DataRow("where TKey: new()", "where TKey: IComparable, new()")]
     [DataRow("where TKey: IEquatable<TKey>, IComparable", "where TKey: System.IComparable")]
     [DataRow("where TKey: IEquatable<TKey>, IComparable where TValue: IComparable", " where TKey: System.IComparable where TValue: System.IComparable, IEquatable<TKey>")]
-    [DataRow("where TKey: TValue")]
-    [DataRow("where TKey: TValue where TValue: IComparable")]
-    [DataRow("where TKey: IEquatable<TValue> where TValue: IComparable")]
     public void MethodsShouldNotHaveIdenticalImplementations_MethodTypeParameters_Dictionary_Compliant(string constraint1, string constraint2) =>
         builderCS.AddSnippet($$"""
             using System;
