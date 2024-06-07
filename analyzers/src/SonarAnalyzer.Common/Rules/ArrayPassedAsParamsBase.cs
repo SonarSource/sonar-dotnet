@@ -18,10 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Xml.Linq;
-using SonarAnalyzer.Json.Parsing;
-using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
-
 namespace SonarAnalyzer.Rules;
 
 public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TArgumentNode> : SonarDiagnosticAnalyzer<TSyntaxKind>
