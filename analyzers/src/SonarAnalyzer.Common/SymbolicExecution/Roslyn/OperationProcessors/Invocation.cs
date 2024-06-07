@@ -26,52 +26,56 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWrapper>
 {
     private static readonly string[] LinqMethodsNullCheckingSource =
-        [   // Order as in the merged Enumerable class
-            nameof(Enumerable.Where),
-            nameof(Enumerable.Select),
-            nameof(Enumerable.SelectMany),
-            nameof(Enumerable.Take),
-            nameof(Enumerable.TakeWhile),
-            nameof(Enumerable.Skip),
-            nameof(Enumerable.SkipWhile),
-            nameof(Enumerable.Join),
-            nameof(Enumerable.GroupJoin),
-            nameof(Enumerable.ThenBy),
-            nameof(Enumerable.ThenByDescending),
-            nameof(Enumerable.Concat),
-            nameof(Enumerable.Zip),
-            nameof(Enumerable.Distinct),
-            nameof(Enumerable.Union),
-            nameof(Enumerable.Intersect),
-            nameof(Enumerable.Except),
-            nameof(Enumerable.Reverse),
-            nameof(Enumerable.SequenceEqual),
-            nameof(Enumerable.ToArray),
-            nameof(Enumerable.ToList),
-            nameof(Enumerable.ToDictionary),
-            "ToHashSet", // Not in .NET Standard 2.0
-            nameof(Enumerable.DefaultIfEmpty),
-            nameof(Enumerable.OfType),
+        [
+            nameof(Enumerable.Aggregate),
+            nameof(Enumerable.Any),
+            nameof(Enumerable.Append),
+            nameof(Enumerable.Average),
             nameof(Enumerable.Cast),
-            nameof(Enumerable.First),
-            nameof(Enumerable.FirstOrDefault),
-            nameof(Enumerable.Last),
-            nameof(Enumerable.LastOrDefault),
-            nameof(Enumerable.Single),
-            nameof(Enumerable.SingleOrDefault),
+            nameof(Enumerable.Concat),
+            nameof(Enumerable.Contains),
+            nameof(Enumerable.Count),
+            nameof(Enumerable.DefaultIfEmpty),
+            nameof(Enumerable.Distinct),
             nameof(Enumerable.ElementAt),
             nameof(Enumerable.ElementAtOrDefault),
-            nameof(Enumerable.Any),
-            nameof(Enumerable.Count),
+            nameof(Enumerable.Except),
+            nameof(Enumerable.First),
+            nameof(Enumerable.FirstOrDefault),
+            nameof(Enumerable.GroupBy),
+            nameof(Enumerable.GroupJoin),
+            nameof(Enumerable.Intersect),
+            nameof(Enumerable.Join),
+            nameof(Enumerable.Last),
+            nameof(Enumerable.LastOrDefault),
             nameof(Enumerable.LongCount),
-            nameof(Enumerable.Contains),
-            nameof(Enumerable.Aggregate),
-            nameof(Enumerable.Sum),
-            nameof(Enumerable.Min),
             nameof(Enumerable.Max),
-            nameof(Enumerable.Average),
-            nameof(Enumerable.Append),
-            nameof(Enumerable.Prepend)
+            nameof(Enumerable.Min),
+            nameof(Enumerable.OfType),
+            nameof(Enumerable.OrderBy),
+            nameof(Enumerable.OrderByDescending),
+            nameof(Enumerable.Prepend),
+            nameof(Enumerable.Reverse),
+            nameof(Enumerable.Select),
+            nameof(Enumerable.SelectMany),
+            nameof(Enumerable.SequenceEqual),
+            nameof(Enumerable.Single),
+            nameof(Enumerable.SingleOrDefault),
+            nameof(Enumerable.Skip),
+            nameof(Enumerable.SkipWhile),
+            nameof(Enumerable.Sum),
+            nameof(Enumerable.Take),
+            nameof(Enumerable.TakeWhile),
+            nameof(Enumerable.ThenBy),
+            nameof(Enumerable.ThenByDescending),
+            nameof(Enumerable.ToArray),
+            nameof(Enumerable.ToDictionary),
+            "ToHashSet", // Not in .NET Standard 2.0
+            nameof(Enumerable.ToList),
+            nameof(Enumerable.ToLookup),
+            nameof(Enumerable.Union),
+            nameof(Enumerable.Where),
+            nameof(Enumerable.Zip),
         ];
 
     protected override IInvocationOperationWrapper Convert(IOperation operation) =>
@@ -89,7 +93,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         {
             state = state.ResetStaticFieldConstraints(invocation.TargetMethod.ContainingType);
         }
-        if (CanLearnNotNull(invocation) is { } operation && operation.TrackedSymbol(state) is { } symbol)
+        if (LearnNotNullCandidate(invocation) is { } operation && operation.TrackedSymbol(state) is { } symbol)
         {
             state = state.SetOperationConstraint(operation, ObjectConstraint.NotNull).SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
         }
@@ -120,14 +124,13 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         };
     }
 
-    private static IOperation CanLearnNotNull(IInvocationOperationWrapper invocation)
+    private static IOperation LearnNotNullCandidate(IInvocationOperationWrapper invocation)
     {
         if (invocation.Instance is not null && !invocation.TargetMethod.IsExtensionMethod && !IsNullableGetValueOrDefault(invocation))
         {
             return invocation.Instance;
         }
-        else if (invocation.TargetMethod.ContainingType.Is(KnownType.System_Linq_Enumerable)
-            && LinqMethodsNullCheckingSource.Contains(invocation.TargetMethod.Name)) // The name comes from the symbol, so no need to be case-insensitive for VB.NET
+        else if (invocation.TargetMethod.IsAny(KnownType.System_Linq_Enumerable, LinqMethodsNullCheckingSource))
         {
             // In VB.NET extension methods, the Instance contains the target of the extension, so the source
             return invocation.Instance ?? invocation.ArgumentValue("source") ?? invocation.ArgumentValue("first") ?? invocation.ArgumentValue("outer");

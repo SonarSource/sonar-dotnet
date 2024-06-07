@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using NSubstitute;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
@@ -47,47 +48,51 @@ Tag(""Me"", FromMe)";
     }
 
     [DataTestMethod]
-    [DataRow("Where", "x => true")]
-    [DataRow("Select", "x => x")]
-    [DataRow("SelectMany", "x => new[] {1}")]
-    [DataRow("Take", "1")]
-    [DataRow("TakeWhile", "x => true")]
-    [DataRow("Skip", "1")]
-    [DataRow("SkipWhile", "x => true")]
-    [DataRow("Join", "[1], x => x, x => x, (x, y) => x")]
-    [DataRow("GroupJoin", "[1], x => x, x => x, (x, y) => x")]
+    [DataRow("Aggregate", "(x, y) => x")]
+    [DataRow("Any")]
+    [DataRow("Append", "1")]
+    [DataRow("Average")]
     [DataRow("Concat", "[]")]
-    [DataRow("Zip", "[1], (x, y) => x")]
-    [DataRow("Distinct")]
-    [DataRow("Union", "[]")]
-    [DataRow("Intersect", "[]")]
-    [DataRow("Except", "[]")]
-    [DataRow("Reverse")]
-    [DataRow("SequenceEqual", "[]")]
-    [DataRow("ToArray")]
-    [DataRow("ToList")]
-    [DataRow("ToDictionary", "x => x, x => x")]
-    [DataRow("ToHashSet")]
-    [DataRow("DefaultIfEmpty")]
-    [DataRow("First")]
-    [DataRow("FirstOrDefault")]
-    [DataRow("Last")]
-    [DataRow("LastOrDefault")]
-    [DataRow("Single")]
-    [DataRow("SingleOrDefault")]
+    [DataRow("Contains", "1")]
+    [DataRow("Count")]
     [DataRow("ElementAt", "1")]
     [DataRow("ElementAtOrDefault", "1")]
-    [DataRow("Any")]
-    [DataRow("Count")]
+    [DataRow("Except", "[]")]
+    [DataRow("DefaultIfEmpty")]
+    [DataRow("Distinct")]
+    [DataRow("First")]
+    [DataRow("FirstOrDefault")]
+    [DataRow("GroupBy", "x => x")]
+    [DataRow("GroupJoin", "[1], x => x, x => x, (x, y) => x")]
+    [DataRow("Intersect", "[]")]
+    [DataRow("Join", "[1], x => x, x => x, (x, y) => x")]
+    [DataRow("Last")]
+    [DataRow("LastOrDefault")]
     [DataRow("LongCount")]
-    [DataRow("Contains", "1")]
-    [DataRow("Aggregate", "(x, y) => x")]
-    [DataRow("Sum")]
-    [DataRow("Min")]
     [DataRow("Max")]
-    [DataRow("Average")]
-    [DataRow("Append", "1")]
+    [DataRow("Min")]
+    [DataRow("OrderBy", "x => x")]
+    [DataRow("OrderByDescending", "x => x")]
     [DataRow("Prepend", "1")]
+    [DataRow("Reverse")]
+    [DataRow("Select", "x => x")]
+    [DataRow("SelectMany", "x => new[] {1}")]
+    [DataRow("SequenceEqual", "[]")]
+    [DataRow("Single")]
+    [DataRow("SingleOrDefault")]
+    [DataRow("Skip", "1")]
+    [DataRow("SkipWhile", "x => true")]
+    [DataRow("Sum")]
+    [DataRow("Take", "1")]
+    [DataRow("TakeWhile", "x => true")]
+    [DataRow("ToArray")]
+    [DataRow("ToDictionary", "x => x, x => x")]
+    [DataRow("ToList")]
+    [DataRow("ToLookup", "x => x, x => x")]
+    [DataRow("ToHashSet")]
+    [DataRow("Union", "[]")]
+    [DataRow("Where", "x => true")]
+    [DataRow("Zip", "[1], (x, y) => x")]
     public void Invocation_SetsNotNull_OnLinqMethodsNullChecking(string method, string args = null)
     {
         var code = $$"""
@@ -122,10 +127,10 @@ Tag(""Me"", FromMe)";
     }
 
     [DataTestMethod]
-    [DataRow("collection.Cast<short>()")]
-    [DataRow("collection.OfType<short>()")]
-    [DataRow("collection.ThenBy(x => x)")]
-    [DataRow("collection.ThenByDescending(x => x)")]
+    [DataRow("Cast<short>()")]
+    [DataRow("OfType<short>()")]
+    [DataRow("ThenBy(x => x)")]
+    [DataRow("ThenByDescending(x => x)")]
     public void Invocation_SetsNotNull_OnLinqMethodsWithGenericParamNullChecking(string invocation)
     {
         var code = $$"""
@@ -136,9 +141,9 @@ Tag(""Me"", FromMe)";
             {
                 public void Main(IOrderedEnumerable<int> collection)
                 {
-                    Tag("Before1", collection);
-                    _ = {{invocation}};
-                    Tag("After1", collection);
+                    Tag("Before", collection);
+                    _ = collection.{{invocation}};
+                    Tag("After", collection);
                 }
 
                 private static void Tag(string name, object arg) { }
@@ -146,16 +151,12 @@ Tag(""Me"", FromMe)";
             """;
         var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
         validator.ValidateContainsOperation(OperationKind.Invocation);
-        validator.TagValue("Before1").Should().BeNull();
-        validator.TagValue("After1").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Before").Should().BeNull();
+        validator.TagValue("After").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]
-    [DataRow("OrderBy", "x => x")]
-    [DataRow("OrderByDescending", "x => x")]
-    [DataRow("GroupBy", "x => x")]
     [DataRow("AsEnumerable")]
-    [DataRow("ToLookup", "x => x, x => x")]
     public void Invocation_DoesNotSetNotNull_OnLinqMethodNonNullChecking(string method, string args = null)
     {
         var code = $$"""
@@ -258,23 +259,28 @@ Tag(""Me"", FromMe)";
 
                     collection = Untracked()
                     Tag("Before3", collection)
-                    Dim i3 = Enumerable.{{method}}(collection)           ' Call as normal static method
+                    Dim i3 = collection.{{method}}                       ' Call as extension without parentheses
                     Tag("After3", collection)
 
                     collection = Untracked()
                     Tag("Before4", collection)
-                    Dim i4 = Enumerable.{{method.ToLower()}}(collection) ' Call as normal static method case insensitive
+                    Dim i4 = Enumerable.{{method}}(collection)           ' Call as normal static method
                     Tag("After4", collection)
 
                     collection = Untracked()
                     Tag("Before5", collection)
-                    Dim i5 = collection.NonLinqExtensionNonNullChecking()
+                    Dim i5 = Enumerable.{{method.ToLower()}}(collection) ' Call as normal static method case insensitive
                     Tag("After5", collection)
 
                     collection = Untracked()
                     Tag("Before6", collection)
-                    Dim i6 = collection.NonLinqExtensionNullChecking()
+                    Dim i6 = collection.NonLinqExtensionNonNullChecking()
                     Tag("After6", collection)
+
+                    collection = Untracked()
+                    Tag("Before7", collection)
+                    Dim i7 = collection.NonLinqExtensionNullChecking()
+                    Tag("After7", collection)
                 End Sub
 
                 Private Function Untracked() As IEnumerable(Of Integer)
@@ -308,9 +314,47 @@ Tag(""Me"", FromMe)";
         validator.TagValue("Before4").Should().BeNull();
         validator.TagValue("After4").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         validator.TagValue("Before5").Should().BeNull();
-        validator.TagValue("After5").Should().BeNull();
+        validator.TagValue("After5").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         validator.TagValue("Before6").Should().BeNull();
         validator.TagValue("After6").Should().BeNull();
+        validator.TagValue("Before7").Should().BeNull();
+        validator.TagValue("After7").Should().BeNull();
+    }
+
+    [TestMethod]
+    public void Invocation_SetNotNull_OnCountOfList_VB()
+    {
+        var code = $$"""
+            Imports System
+            Imports System.Linq
+            Imports System.Collections.Generic
+
+            Public Class Sample
+                Public Sub Main(list As List(Of integer))
+                    Tag("Before1", list)
+                    Dim i1 = list.Count
+                    Tag("After1", list)
+
+                    list = Untracked()
+                    Tag("Before2", list)
+                    Dim i2 = list.Count()
+                    Tag("After2", list)
+                End Sub
+
+                Private Function Untracked() As List(Of Integer)
+                    Return New List(Of Integer) From {1, 2, 3}
+                End Function
+
+                Private Shared Sub Tag(name As String, arg As Object)
+                End Sub
+            End Class
+            """;
+        var validator = new SETestContext(code, AnalyzerLanguage.VisualBasic, []).Validator;
+        validator.ValidateContainsOperation(OperationKind.Invocation);
+        validator.TagValue("Before1").Should().BeNull();
+        validator.TagValue("After1").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Before2").Should().BeNull();
+        validator.TagValue("After2").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]
