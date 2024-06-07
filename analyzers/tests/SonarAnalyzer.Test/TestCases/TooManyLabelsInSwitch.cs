@@ -200,14 +200,8 @@ namespace Tests.Diagnostics
                 case 'b':
                 case 'c':
                 case '-':
-                    if (value > 10)
-                    {
-                        return 42;
-                    }
-                    else if (value < 5 && value > 1)
-                    {
-                        return 21;
-                    }
+                    Console.WriteLine("This compliant");
+                    Console.WriteLine("Because there is only fall through cases and less than 3 cases");
                     return 99;
                 default:
                     return 1000;
