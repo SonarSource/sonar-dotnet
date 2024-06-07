@@ -23,7 +23,7 @@ namespace SonarAnalyzer.Rules.CSharp;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind, SwitchStatementSyntax>
 {
-    private static readonly ISet<SyntaxKind> ignoredStatementsInSwitch = new HashSet<SyntaxKind> { SyntaxKind.BreakStatement, SyntaxKind.ReturnStatement, SyntaxKind.ThrowStatement };
+    private static readonly ISet<SyntaxKind> IgnoredStatementsInSwitch = new HashSet<SyntaxKind> { SyntaxKind.BreakStatement, SyntaxKind.ReturnStatement, SyntaxKind.ThrowStatement };
 
     protected override DiagnosticDescriptor Rule { get; } =
         DescriptorFactory.Create(DiagnosticId, string.Format(MessageFormat, "switch", "case"),
@@ -48,7 +48,7 @@ public class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind, Switc
 
     private static bool HasOneLine(SwitchSectionSyntax switchSection)
     {
-        var statements = switchSection.Statements.Where(s => !s.IsAnyKind(ignoredStatementsInSwitch));
+        var statements = switchSection.Statements.Where(x => !x.IsAnyKind(IgnoredStatementsInSwitch));
 
         return statements.Count() is 0
                || (statements.Count() is 1 && statements.First().GetLocation().GetLineSpan().StartLinePosition.Line == statements.Last().GetLocation().GetLineSpan().EndLinePosition.Line);
