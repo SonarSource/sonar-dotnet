@@ -67,7 +67,6 @@ namespace StyleCop.Analyzers.Lightup
                 IfThen(Equal(Property(original, nameof(ImmutableArray<int>.Length)), Constant(0)), Goto(exit, empty)),     // if (original.Length == 0) goto exit(ImmutableArray<Sonar.NullableAnnotation>.Empty)
                 Assign(builder, Call(builderCreate, Property(original, nameof(ImmutableArray<int>.Length)))),              // builder = ImmutableArray.CreateBuilder<NullableAnnotation>(original.Length);
                 Assign(i, Constant(0)),                                                                                    // i = 0;
-                                                                                                                           // Endless loop:
                 Loop(
                     IfThenElse(
                         LessThan(i, Property(original, nameof(ImmutableArray<int>.Length))),                               // if (i < original.Length)
