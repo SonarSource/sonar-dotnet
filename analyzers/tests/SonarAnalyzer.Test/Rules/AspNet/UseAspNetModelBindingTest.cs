@@ -135,8 +135,7 @@ public class UseAspNetModelBindingTest
             }
             """").Verify();
 
-    [TestMethod]
-    [CombinatorialData]
+    [CombinatorialDataTestMethod]
     public void UseAspNetModelBinding_CompliantAccess(
         [DataValues(
             "_ = {0}.Keys",
@@ -293,8 +292,7 @@ public class UseAspNetModelBindingTest
             }            
             """").VerifyNoIssues();
 
-    [TestMethod]
-    [CombinatorialData]
+    [CombinatorialDataTestMethod]
     public void UseAspNetModelBinding_InheritanceAccess(
         [DataValues(
             ": Controller",

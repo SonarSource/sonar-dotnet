@@ -62,7 +62,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
             }
             """).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-    [CombinatorialData]
+    [CombinatorialDataTestMethod]
     public void MethodsShouldNotHaveIdenticalImplementations_MethodTypeParameters_Compliant(
         [DataValues("where T: struct", "where T: class")] string constraint1,
         [DataValues("", "where T: unmanaged", "where T: new()")] string constraint2) =>
