@@ -38,8 +38,7 @@ namespace StyleCop.Analyzers.Lightup
             // * Creates a new ImmutableArrayBuilder of Sonar.NullableAnnotation with the capacity of original
             // * Copies over the converted NullableAnnotation into the builder in a loop
             // * Skips the builder creation and the loop if the original is empty
-            var originalNullableAnnotationType = OriginalNullableAnnotationType();
-            if (originalNullableAnnotationType is null)
+            if (OriginalNullableAnnotationType() is not { } originalNullableAnnotationType)
             {
                 // Callers may rely on the fact that symbol.TypeArgumentNullableAnnotations is supposed to have the same length as symbol.TypeArguments
                 return static x => Enumerable.Repeat(NullableAnnotation.None, x.TypeArguments.Length).ToImmutableArray();
