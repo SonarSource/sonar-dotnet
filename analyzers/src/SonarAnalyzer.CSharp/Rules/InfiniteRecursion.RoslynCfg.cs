@@ -78,8 +78,9 @@ public partial class InfiniteRecursion
                 accessorList = propertyDeclaration.AccessorList;
                 location = propertyDeclaration.Identifier.GetLocation();
             }
-            else if (c.Node is IndexerDeclarationSyntax indexerDeclaration)
+            else
             {
+                var indexerDeclaration = (IndexerDeclarationSyntax)c.Node;
                 expressionBody = indexerDeclaration.ExpressionBody;
                 accessorList = indexerDeclaration.AccessorList;
                 location = indexerDeclaration.ThisKeyword.GetLocation();
