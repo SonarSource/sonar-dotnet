@@ -64,63 +64,47 @@ public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TSyntaxKi
     protected virtual bool IsExcludedFromBeingExamined(SonarSyntaxNodeReportingContext context) =>
         context.ContainingSymbol.Kind != SymbolKind.NamedType;
 
-    protected static bool HaveSameParameters<TSyntax>(SemanticModel model, SeparatedSyntaxList<TSyntax>? leftParameters, SeparatedSyntaxList<TSyntax>? rightParameters)
+    protected static bool HaveSameParameters<TSyntax>(SeparatedSyntaxList<TSyntax>? leftParameters, SeparatedSyntaxList<TSyntax>? rightParameters)
         where TSyntax : SyntaxNode =>
         (leftParameters is null && rightParameters is null) // In VB.Net the parameter list can be omitted
-        || (leftParameters?.Count == rightParameters?.Count && HaveSameParameterLists(model, leftParameters.Value, rightParameters.Value));
-
-    private static bool HaveSameParameterLists<TSyntax>(SemanticModel model,
-                                                        SeparatedSyntaxList<TSyntax> leftParameters,
-                                                        SeparatedSyntaxList<TSyntax> rightParameters) where TSyntax : SyntaxNode =>
-        leftParameters.Equals(rightParameters, (left, right) => left.IsEquivalentTo(right)); // Perf: Syntactic equivalence for all parameters
+        || (leftParameters?.Count == rightParameters?.Count && HaveSameParameterLists(leftParameters.Value, rightParameters.Value));
 
     protected static bool HaveSameTypeParameters<TSyntax>(SemanticModel model, SeparatedSyntaxList<TSyntax>? firstTypeParameterList, SeparatedSyntaxList<TSyntax>? secondTypeParameterList)
         where TSyntax : SyntaxNode
     {
-        HashSet<ISymbol> visited = [];
         var firstSymbols = firstTypeParameterList?.Select(x => model.GetDeclaredSymbol(x)).OfType<ITypeParameterSymbol>() ?? [];
         var secondSymbols = secondTypeParameterList?.Select(x => model.GetDeclaredSymbol(x)).OfType<ITypeParameterSymbol>().ToArray() ?? [];
-        return firstSymbols.All(x => secondSymbols.Any(secondSymbol => TypesAreSame(visited, x, secondSymbol)));
+        return firstSymbols.All(x => secondSymbols.Any(secondSymbol => TypesAreSame(x, secondSymbol)));
     }
 
-    private static bool TypesAreSame(HashSet<ISymbol> visited, ITypeSymbol leftParameterType, ITypeSymbol rightParameterType) =>
-        leftParameterType.Equals(rightParameterType) // M1(int x) <-> M2(int x)
-        || TypesAreSameTypeParameters(visited, leftParameterType, rightParameterType) // M1<T>(T x) where T: class <-> M2<T>(T x) where T: class
-                                                                                      // T of M1 is a different symbol than T of M2, but if they have the same constraints, they can be interchanged
-        || TypesAreSameGenericType(visited, leftParameterType, rightParameterType); // M1<T>(IEnumerable<T> x) where T: class <-> M2<T>(IEnumerable<T> x) where T: class
+    private static bool HaveSameParameterLists<TSyntax>(SeparatedSyntaxList<TSyntax> leftParameters,
+                                                        SeparatedSyntaxList<TSyntax> rightParameters) where TSyntax : SyntaxNode =>
+        leftParameters.Equals(rightParameters, (left, right) => left.IsEquivalentTo(right)); // Perf: Syntactic equivalence for all parameters
 
-    private static bool TypesAreSameGenericType(HashSet<ISymbol> visited, ITypeSymbol leftParameterType, ITypeSymbol rightParameterType) =>
+    private static bool TypesAreSame(ITypeSymbol leftParameterType, ITypeSymbol rightParameterType) =>
+        leftParameterType.Equals(rightParameterType) // M1(int x) <-> M2(int x)
+        || TypesAreSameTypeParameters(leftParameterType, rightParameterType) // M1<T>(T x) where T: class <-> M2<T>(T x) where T: class
+                                                                             // T of M1 is a different symbol than T of M2, but if they have the same constraints, they can be interchanged
+        || TypesAreSameGenericType(leftParameterType, rightParameterType); // M1<T>(IEnumerable<T> x) where T: class <-> M2<T>(IEnumerable<T> x) where T: class
+
+    private static bool TypesAreSameGenericType(ITypeSymbol leftParameterType, ITypeSymbol rightParameterType) =>
         leftParameterType is INamedTypeSymbol { IsGenericType: true } namedTypeLeft
         && rightParameterType is INamedTypeSymbol { IsGenericType: true } namedTypeRight
         && namedTypeLeft.TypeArguments.Length == namedTypeRight.TypeArguments.Length
-        && namedTypeLeft.TypeArguments.Equals(namedTypeRight.TypeArguments, (x, y) => TypesAreSameTypeParameters(visited, x, y));
+        && namedTypeLeft.TypeArguments.Equals(namedTypeRight.TypeArguments, (x, y) =>
+            x is ITypeParameterSymbol a ?
+                y is ITypeParameterSymbol b && a.Name == b.Name
+                : TypesAreSame(x, y));
 
-    private static bool TypesAreSameTypeParameters(HashSet<ISymbol> visited, ITypeSymbol leftParameterType, ITypeSymbol rightParameterType)
-    {
-        if (leftParameterType.Equals(rightParameterType))
-        {
-            return true;
-        }
-        var leftNew = visited.Add(leftParameterType);
-        var rightNew = visited.Add(rightParameterType);
-        if (leftNew != rightNew)
-        {
-            return false;
-        }
-        else if (leftNew)
-        {
-            return leftParameterType is ITypeParameterSymbol left
-                && rightParameterType is ITypeParameterSymbol right
-                && left.HasConstructorConstraint == right.HasConstructorConstraint
-                && left.HasReferenceTypeConstraint == right.HasReferenceTypeConstraint
-                && left.HasValueTypeConstraint == right.HasValueTypeConstraint
-                && left.HasUnmanagedTypeConstraint() == right.HasUnmanagedTypeConstraint()
-                && left.ConstraintTypes.Length == right.ConstraintTypes.Length
-                && left.ConstraintTypes.All(x => right.ConstraintTypes.Any(y => TypesAreSame(visited, x, y)));
-        }
-        else
-        {
-            return true;
-        }
-    }
+    private static bool TypesAreSameTypeParameters(ITypeSymbol leftParameterType, ITypeSymbol rightParameterType) =>
+        leftParameterType.Equals(rightParameterType)
+            || (leftParameterType is ITypeParameterSymbol left
+            && rightParameterType is ITypeParameterSymbol right
+            && left.Name == right.Name
+            && left.HasConstructorConstraint == right.HasConstructorConstraint
+            && left.HasReferenceTypeConstraint == right.HasReferenceTypeConstraint
+            && left.HasValueTypeConstraint == right.HasValueTypeConstraint
+            && left.HasUnmanagedTypeConstraint() == right.HasUnmanagedTypeConstraint()
+            && left.ConstraintTypes.Length == right.ConstraintTypes.Length
+            && left.ConstraintTypes.All(x => right.ConstraintTypes.Any(y => TypesAreSame(x, y))));
 }
