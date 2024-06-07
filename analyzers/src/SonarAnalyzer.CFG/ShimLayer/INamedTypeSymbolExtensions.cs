@@ -32,6 +32,12 @@ namespace StyleCop.Analyzers.Lightup
 
         private static Func<INamedTypeSymbol, ImmutableArray<NullableAnnotation>> CreateTypeArgumentNullableAnnotationsAccessor()
         {
+            // INamedTypeSymbol.TypeArgumentNullableAnnotations is ImmutableArray<Roslyn.NullableAnnotation>
+            // The generated code
+            // * retrieves the original ImmutableArray
+            // * create a new ImmutableArrayBuilder for the Sonar.NullableAnnotation with the capacity of original
+            // * Copies over the converted NullableAnnotation into the builder in a loop
+            // * Skips the builder creation and the loop if the original is empty
             var originalNullableAnnotationType = Type.GetType("Microsoft.CodeAnalysis.NullableAnnotation, Microsoft.CodeAnalysis, Version=4.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35");
             if (originalNullableAnnotationType is null)
             {
@@ -57,7 +63,7 @@ namespace StyleCop.Analyzers.Lightup
             var empty = Field(null, immutableArrayTypeT, nameof(ImmutableArray<int>.Empty));
             var body = Block([builder, original, i],
                 Assign(original, Property(symbol, nameof(TypeArgumentNullableAnnotations))),                               // original = symbol.TypeArgumentNullableAnnotations;
-                IfThen(Equal(Property(original, nameof(ImmutableArray<int>.Length)), Constant(0)), Goto(exit, empty)),     // if (original.Length == 0) goto exit(empty)
+                IfThen(Equal(Property(original, nameof(ImmutableArray<int>.Length)), Constant(0)), Goto(exit, empty)),     // if (original.Length == 0) goto exit(ImmutableArray<Sonar.NullableAnnotation>.Empty)
                 Assign(builder, Call(builderCreate, Property(original, nameof(ImmutableArray<int>.Length)))),              // builder = ImmutableArray.CreateBuilder<NullableAnnotation>(original.Length);
                 Assign(i, Constant(0)),                                                                                    // i = 0;
                                                                                                                            // Endless loop:
