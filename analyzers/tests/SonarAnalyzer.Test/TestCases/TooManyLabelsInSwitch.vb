@@ -74,7 +74,7 @@
         End Sub
 
         Public Function SwitchCase(ch As Char, value As Integer) As Integer
-            Select Case ch ' Noncompliant {{Consider reworking this 'Select Case' to reduce the number of 'Case' clause to at most 2 or have only one statement per 'Case'.}}
+            Select Case ch ' Noncompliant {{Consider reworking this 'Select Case' to reduce the number of 'Case' clauses to at most 2 or have only one statement per 'Case'.}}
 '           ^^^^^^
                 Case "a"c
                     Return 1

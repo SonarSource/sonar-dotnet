@@ -24,7 +24,7 @@ public abstract class TooManyLabelsInSwitchBase<TSyntaxKind, TSwitchStatementSyn
     where TSyntaxKind : struct
     where TSwitchStatementSyntax : SyntaxNode
 {
-    protected const string MessageFormat = "Consider reworking this '{0}' to reduce the number of '{1}' clause to at most {{0}} or have only one statement per '{1}'.";
+    protected const string MessageFormat = "Consider reworking this '{0}' to reduce the number of '{1}' clauses to at most {{0}} or have only one statement per '{1}'.";
 
     protected const string DiagnosticId = "S1479";
     private const int DefaultValueMaximum = 30;
@@ -39,7 +39,7 @@ public abstract class TooManyLabelsInSwitchBase<TSyntaxKind, TSwitchStatementSyn
 
     protected abstract int GetSectionsCount(TSwitchStatementSyntax statement);
 
-    protected abstract bool AllSectionsAreOneLiner(TSwitchStatementSyntax statement);
+    protected abstract bool AllSectionsAreOneLiners(TSwitchStatementSyntax statement);
 
     protected abstract Location GetKeywordLocation(TSwitchStatementSyntax statement);
 
@@ -56,14 +56,9 @@ public abstract class TooManyLabelsInSwitchBase<TSyntaxKind, TSwitchStatementSyn
             {
                 var switchNode = (TSwitchStatementSyntax)c.Node;
 
-                if (switchNode.GetLineNumberToReport() == 29)
-                {
-                    _ = switchNode;
-                }
-
                 if (c.SemanticModel.GetTypeInfo(GetExpression(switchNode)).Type is { TypeKind: not TypeKind.Enum }
                     && GetSectionsCount(switchNode) > Maximum
-                    && !AllSectionsAreOneLiner(switchNode))
+                    && !AllSectionsAreOneLiners(switchNode))
                 {
                     c.ReportIssue(Rule, GetKeywordLocation(switchNode), Maximum.ToString());
                 }

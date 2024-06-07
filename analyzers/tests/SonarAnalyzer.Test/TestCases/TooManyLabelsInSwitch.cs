@@ -49,7 +49,7 @@ namespace Tests.Diagnostics
             {
                 case 0:
                     Console.WriteLine("0");
-                    Console.WriteLine("0+0");
+                    Console.WriteLine("With break");
                     break;
                 case 1:
                     Console.WriteLine("1");
@@ -63,7 +63,7 @@ namespace Tests.Diagnostics
             {
                 case 0:
                     Console.WriteLine("0");
-                    Console.WriteLine("0+0");
+                    Console.WriteLine("Some return");
                     return;
                 case 1:
                     Console.WriteLine("1");
@@ -145,7 +145,7 @@ namespace Tests.Diagnostics
 
         public int SwitchCase(char ch, int value)
         {
-            switch(ch)  // Noncompliant {{Consider reworking this 'switch' to reduce the number of 'case' clause to at most 2 or have only one statement per 'case'.}}
+            switch(ch)  // Noncompliant {{Consider reworking this 'switch' to reduce the number of 'case' clauses to at most 2 or have only one statement per 'case'.}}
 //          ^^^^^^
             {
                 case 'a':
@@ -172,7 +172,7 @@ namespace Tests.Diagnostics
 
         public int SwitchCaseWithCodeBlock(char ch, int value)
         {
-            switch(ch)  // Noncompliant {{Consider reworking this 'switch' to reduce the number of 'case' clause to at most 2 or have only one statement per 'case'.}}
+            switch(ch)  // Noncompliant {{Consider reworking this 'switch' to reduce the number of 'case' clauses to at most 2 or have only one statement per 'case'.}}
 //          ^^^^^^
             {
                 case 'a':
@@ -184,16 +184,9 @@ namespace Tests.Diagnostics
                 // ...
                 case '-':
                     {
-                        if (value > 10)
-                        {
-                            return 42;
-                        }
-                        else if (value < 5 && value > 1)
-                        {
-                            return 21;
-                        }
+                        Console.WriteLine("Block");
+                        return 99;
                     }
-                    return 99;
                 default:
                     return 1000;
             }

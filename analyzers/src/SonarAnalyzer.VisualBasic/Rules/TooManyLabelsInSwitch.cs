@@ -40,7 +40,7 @@ public sealed class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind
     protected override int GetSectionsCount(SelectStatementSyntax statement) =>
         ((SelectBlockSyntax)statement.Parent).CaseBlocks.Count;
 
-    protected override bool AllSectionsAreOneLiner(SelectStatementSyntax statement) =>
+    protected override bool AllSectionsAreOneLiners(SelectStatementSyntax statement) =>
         ((SelectBlockSyntax)statement.Parent).CaseBlocks.All(HasOneLine);
 
     protected override Location GetKeywordLocation(SelectStatementSyntax statement) =>
@@ -48,9 +48,9 @@ public sealed class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind
 
     private static bool HasOneLine(CaseBlockSyntax switchSection)
     {
-        var statements = switchSection.Statements.Where(x => !x.IsAnyKind(IgnoredStatementsInSwitch));
+        var statements = switchSection.Statements.Where(x => !x.IsAnyKind(IgnoredStatementsInSwitch)).ToArray();
 
-        return statements.Count() is 0
-               || (statements.Count() is 1 && statements.First().GetLocation().GetLineSpan().StartLinePosition.Line == statements.Last().GetLocation().GetLineSpan().EndLinePosition.Line);
+        return statements.Length is 0
+               || (statements.Length is 1 && statements[0].GetLocation().GetLineSpan() is var lineSpan && lineSpan.StartLinePosition.Line == lineSpan.EndLinePosition.Line);
     }
 }
