@@ -4,7 +4,7 @@
       "Id": "S6966",
       "Message": "Await RenderSectionAsync instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/NetCore31WithConfigurableRules/Views/Shared/_Layout.cshtml#L46",
-      "Location": "Line 46 Position 7-48"
+      "Location": "Line 46 Position 6-47"
     }
   ]
 }
