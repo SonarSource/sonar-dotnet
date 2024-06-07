@@ -185,14 +185,9 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
 
     [DataTestMethod]
     [DataRow("Of TKey, TValue", "Of TKey, TValue As Structure")]
-
-    //[DataRow("Of TKey As Structure, TValue", "Of TKey As Structure, TValue")]
-    //[DataRow("Of TKey As Structure, TValue As Class", "Of TKey As Structure, TValue As Class")]
-    //[DataRow("Of TValue As Class, TKey As Structure", "Of TKey As Structure, TValue As Class")]
-    //[DataRow("Of TKey As {Class}, TValue", "Of TKey As Class, TValue")]
-    //[DataRow("Of TKey As {New}, TValue", "Of TKey As New, TValue")]
-    //[DataRow("Of TKey As {IEquatable(Of TKey), IComparable}, TValue", "Of TKey As {System.IComparable, IEquatable(Of TKey)}, TValue")]
-    //[DataRow("Of TKey As {IEquatable(Of TKey), IComparable}, TValue As IComparable", "Of TValue As IComparable, TKey As {System.IComparable, IEquatable(Of TKey)}")]
+    [DataRow("Of TKey, TValue As Class", "Of TKey, TValue As Structure")]
+    [DataRow("Of TKey As Structure, TValue", "Of TKey, TValue As Structure")]
+    [DataRow("Of TKey As {New, IComparable}, TValue", "Of TKey As New, TValue")]
     public void MethodsShouldNotHaveIdenticalImplementations_MethodTypeParameters_Dictionary_VB_Compliant(string constraint1, string constraint2) =>
         builderVB.AddSnippet($$"""
             Imports System
