@@ -54,8 +54,10 @@ namespace StyleCop.Analyzers.Lightup
             var i = Parameter(typeof(int), "i");
 
             var exit = Label(immutableArrayTypeT);
+            var empty = Field(null, immutableArrayTypeT, nameof(ImmutableArray<int>.Empty));
             var body = Block([builder, original, i],
                 Assign(original, Property(symbol, nameof(TypeArgumentNullableAnnotations))),                               // original = symbol.TypeArgumentNullableAnnotations;
+                IfThen(Equal(Property(original, nameof(ImmutableArray<int>.Length)), Constant(0)), Goto(exit, empty)),     // if (original.Length == 0) goto exit(empty)
                 Assign(builder, Call(builderCreate, Property(original, nameof(ImmutableArray<int>.Length)))),              // builder = ImmutableArray.CreateBuilder<NullableAnnotation>(original.Length);
                 Assign(i, Constant(0)),                                                                                    // i = 0;
                                                                                                                            // Endless loop:
@@ -65,8 +67,8 @@ namespace StyleCop.Analyzers.Lightup
                         ifTrue: Block(
                             Call(builder, builderAdd, Convert(Property(original, "Item", i), typeof(NullableAnnotation))), // builder.Add((NullableAnnotation)original[i]);
                             AddAssign(i, Constant(1))),                                                                    // i += 1;
-                        ifFalse: Return(exit, Call(builder, builderToImmutable))),                                         // return builder.ToImmutable();
-                    exit));
+                        ifFalse: Return(exit, Call(builder, builderToImmutable)))),                                        // goto exit (builder.ToImmutable());
+                Label(exit, empty));
             return Lambda<Func<INamedTypeSymbol, ImmutableArray<NullableAnnotation>>>(body, symbol).Compile();
         }
     }
