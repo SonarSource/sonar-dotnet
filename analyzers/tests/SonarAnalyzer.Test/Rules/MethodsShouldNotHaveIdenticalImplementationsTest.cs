@@ -40,7 +40,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
     [DataRow("where T: class", "where T: class")]
     [DataRow("where T: unmanaged", "where T: unmanaged")]
     [DataRow("where T: new()", "where T: new()")]
-    [DataRow("where T: IEquatable<T>, IComparable",  "where T: System.IComparable, IEquatable<T>")]
+    [DataRow("where T: IEquatable<T>, IComparable", "where T: System.IComparable, IEquatable<T>")]
     public void MethodsShouldNotHaveIdenticalImplementations_MethodTypeParameters_NonCompliant(string constraint1, string constraint2) =>
         builderCS.AddSnippet($$"""
             using System;
@@ -119,6 +119,35 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
             """).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
     [DataTestMethod]
+    [DataRow("Of TKey, TValue", "Of TKey, TValue")]
+    [DataRow("Of TKey As Structure, TValue", "Of TKey As Structure, TValue")]
+    [DataRow("Of TKey As Structure, TValue As Class", "Of TKey As Structure, TValue As Class")]
+    [DataRow("Of TValue As Class, TKey As Structure", "Of TKey As Structure, TValue As Class")]
+    [DataRow("Of TKey As {Class}, TValue", "Of TKey As Class, TValue")]
+    [DataRow("Of TKey As {New}, TValue", "Of TKey As New, TValue")]
+    [DataRow("Of TKey As {IEquatable(Of TKey), IComparable}, TValue", "Of TKey As {System.IComparable, IEquatable(Of TKey)}, TValue")]
+    [DataRow("Of TKey As {IEquatable(Of TKey), IComparable}, TValue As IComparable", "Of TValue As IComparable, TKey As {System.IComparable, IEquatable(Of TKey)}")]
+    public void MethodsShouldNotHaveIdenticalImplementations_MethodTypeParameters_Dictionary_VB_NonCompliant(string constraint1, string constraint2) =>
+        builderVB.AddSnippet($$"""
+            Imports System
+            Imports System.Collections.Generic
+
+            Class TypeConstraints
+                Function Test1({{constraint1}})(dict As IDictionary(Of TKey, TValue)) As Boolean ' Secondary
+                    Console.WriteLine(dict)
+                    Console.WriteLine(dict)
+                    Return True
+                End Function
+
+                Function Test2({{constraint2}})(dict As IDictionary(Of TKey, TValue)) As Boolean ' Noncompliant
+                    Console.WriteLine(dict)
+                    Console.WriteLine(dict)
+                    Return True
+                End Function
+            End Class
+            """).Verify();
+
+    [DataTestMethod]
     [DataRow("", "where TKey: struct")]
     [DataRow("where TKey: struct", "")]
     [DataRow("where TKey: struct", "where TKey: class")]
@@ -129,6 +158,9 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
     [DataRow("where TKey: new()", "where TKey: IComparable, new()")]
     [DataRow("where TKey: IEquatable<TKey>, IComparable", "where TKey: System.IComparable")]
     [DataRow("where TKey: IEquatable<TKey>, IComparable where TValue: IComparable", " where TKey: System.IComparable where TValue: System.IComparable, IEquatable<TKey>")]
+    [DataRow("where TKey: TValue")]
+    [DataRow("where TKey: TValue where TValue: IComparable")]
+    [DataRow("where TKey: IEquatable<TValue> where TValue: IComparable")]
     public void MethodsShouldNotHaveIdenticalImplementations_MethodTypeParameters_Dictionary_Compliant(string constraint1, string constraint2) =>
         builderCS.AddSnippet($$"""
             using System;
@@ -152,6 +184,36 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
             """).WithOptions(ParseOptionsHelper.FromCSharp9).VerifyNoIssues();
 
     [DataTestMethod]
+    [DataRow("Of TKey, TValue", "Of TKey, TValue As Structure")]
+
+    //[DataRow("Of TKey As Structure, TValue", "Of TKey As Structure, TValue")]
+    //[DataRow("Of TKey As Structure, TValue As Class", "Of TKey As Structure, TValue As Class")]
+    //[DataRow("Of TValue As Class, TKey As Structure", "Of TKey As Structure, TValue As Class")]
+    //[DataRow("Of TKey As {Class}, TValue", "Of TKey As Class, TValue")]
+    //[DataRow("Of TKey As {New}, TValue", "Of TKey As New, TValue")]
+    //[DataRow("Of TKey As {IEquatable(Of TKey), IComparable}, TValue", "Of TKey As {System.IComparable, IEquatable(Of TKey)}, TValue")]
+    //[DataRow("Of TKey As {IEquatable(Of TKey), IComparable}, TValue As IComparable", "Of TValue As IComparable, TKey As {System.IComparable, IEquatable(Of TKey)}")]
+    public void MethodsShouldNotHaveIdenticalImplementations_MethodTypeParameters_Dictionary_VB_Compliant(string constraint1, string constraint2) =>
+        builderVB.AddSnippet($$"""
+            Imports System
+            Imports System.Collections.Generic
+
+            Class TypeConstraints
+                Function Test1({{constraint1}})(dict As IDictionary(Of TKey, TValue)) As Boolean
+                    Console.WriteLine(dict)
+                    Console.WriteLine(dict)
+                    Return True
+                End Function
+
+                Function Test2({{constraint2}})(dict As IDictionary(Of TKey, TValue)) As Boolean
+                    Console.WriteLine(dict)
+                    Console.WriteLine(dict)
+                    Return True
+                End Function
+            End Class
+            """).VerifyNoIssues();
+
+    [DataTestMethod]
     [DataRow("")]
     [DataRow("where TKey: struct")]
     [DataRow("where TKey: struct where TValue: class")]
@@ -161,6 +223,9 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
     [DataRow("where TKey: new()")]
     [DataRow("where TKey: IEquatable<TKey>, IComparable")]
     [DataRow("where TKey: IEquatable<TKey>, IComparable where TValue: IComparable")]
+    [DataRow("where TKey: TValue")]
+    [DataRow("where TKey: TValue where TValue: IComparable")]
+    [DataRow("where TKey: IEquatable<TValue> where TValue: IComparable")]
     public void MethodsShouldNotHaveIdenticalImplementations_ClassTypeParameters_Dictionary_NonCompliant(string constraint) =>
         builderCS.AddSnippet($$"""
             using System;
@@ -178,6 +243,34 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
                 {
                     Console.WriteLine(dict);
                     Console.WriteLine(dict);
+                    return true;
+                }
+            }
+            """).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
+    [DataTestMethod]
+    [DataRow("where TSelf: IEqualityOperators<TSelf, TSelf, TResult>")]
+    [DataRow("where TSelf: IEqualityOperators<TSelf, TSelf, TResult>, TResult")]
+    [DataRow("where TSelf: IEqualityOperators<TSelf, TSelf, TResult> where TResult: IEqualityOperators<TSelf, TSelf, TResult>")]
+    [DataRow("where TSelf: IComparisonOperators<TSelf, TSelf, TResult>")]
+    [DataRow("where TSelf: IComparisonOperators<TSelf, TSelf, TResult>, TResult")]
+    public void MethodsShouldNotHaveIdenticalImplementations_SelfTypes_NonCompliant(string constraint) =>
+        builderCS.AddSnippet($$"""
+            using System;
+            using System.Numerics;
+            public class TypeConstraints
+            {
+                public static bool Test1<TSelf, TResult>(IEqualityOperators<TSelf, TSelf, TResult> x) {{constraint}} // Secondary
+                {
+                    Console.WriteLine(x);
+                    Console.WriteLine(x);
+                    return true;
+                }
+
+                public static bool Test2<TSelf, TResult>(IEqualityOperators<TSelf, TSelf, TResult> x) {{constraint}}  // Noncompliant
+                {
+                    Console.WriteLine(x);
+                    Console.WriteLine(x);
                     return true;
                 }
             }
