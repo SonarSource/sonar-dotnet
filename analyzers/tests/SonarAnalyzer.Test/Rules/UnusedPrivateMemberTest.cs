@@ -154,7 +154,9 @@ public partial class PartialClass
                     protected override void Up(MigrationBuilder migrationBuilder) { }
                 }
             }
-            """).AddReferences(EntityFrameworkCoreReferences("7.0.14")).VerifyNoIssues();
+            """)
+        .AddReferences(EntityFrameworkCoreReferences("7.0.14"))
+        .VerifyNoIssues();
 
     [DataTestMethod]
     [DataRow(ProjectType.Product)]
@@ -203,6 +205,30 @@ public partial class PartialClass
             .WithOptions(ParseOptionsHelper.FromCSharp12)
             .VerifyNoIssues();
 
+    [TestMethod]
+    public void UnusedPrivateMemeber_EntityFramework_DontRaiseOnUnusedEntityPropertiesPrivateSetters() =>
+        builder.AddSnippet("""
+                // Repro https://github.com/SonarSource/sonar-dotnet/issues/9416
+                using Microsoft.EntityFrameworkCore;
+
+                internal class MyContext : DbContext
+                {
+                    public DbSet<Blog> Blogs { get; set; }
+                }
+
+                public class Blog
+                {
+                    public Blog(int id, string name)
+                    {
+                        Name = name;
+                    }
+
+                    public int Id { get; private set; }         // Noncompliant FP
+                    public string Name { get; private set; }
+                }
+                """)
+        .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("8.0.6"))
+        .Verify();
 #endif
 
     [TestMethod]

@@ -36,6 +36,7 @@ internal static partial class NuGetMetadataFactory
         "netstandard2.0",
         "net7.0",
         "net6.0",
+        "net8.0",
         "net47",
         "net461",
         "netstandard1.6",
