@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.Common.Walkers;
+using SonarAnalyzer.Json.Parsing;
 
 namespace SonarAnalyzer.Helpers;
 
