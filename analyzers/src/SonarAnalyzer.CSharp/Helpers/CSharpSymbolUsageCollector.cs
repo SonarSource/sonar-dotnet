@@ -177,27 +177,6 @@ internal class CSharpSymbolUsageCollector : SafeCSharpSyntaxWalker
         base.VisitIdentifierName(node);
     }
 
-    public override void VisitTypeArgumentList(TypeArgumentListSyntax node)
-    {
-        if (model.GetSymbolInfo(node.Parent).Symbol is { } symbol) // symbol that the attribute is applied to
-        {
-            var typesWithDynamicallyAccessedMembers = GetTypeParameters(symbol)
-                .Zip(node.Arguments, (symbol, argument) => new Tuple<ITypeParameterSymbol, SyntaxNode>(symbol, argument)) // map T to Person in void M<T>() { } .. M<Person>();
-                .Where(x => x.Item1.HasAttribute(KnownType.System_Diagnostics_CodeAnalysis_DynamicallyAccessedMembersAttribute))
-                .Select(x => model.GetSymbolInfo(x.Item2).Symbol);
-            TypesUsedWithReflection.UnionWith(typesWithDynamicallyAccessedMembers);
-        }
-        base.VisitTypeArgumentList(node);
-
-        static ImmutableArray<ITypeParameterSymbol> GetTypeParameters(ISymbol symbol) =>
-            symbol switch
-            {
-                IMethodSymbol method => method.TypeParameters,
-                INamedTypeSymbol namedType => namedType.TypeParameters,
-                _ => ImmutableArray<ITypeParameterSymbol>.Empty
-            };
-    }
-
     public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
     {
         if (knownSymbolNames.Contains(node.Type.GetName()))

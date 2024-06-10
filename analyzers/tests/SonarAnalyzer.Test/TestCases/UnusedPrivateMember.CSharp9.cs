@@ -181,7 +181,7 @@ namespace Repro_9379
             var instance2 = CreateInstance(typeof(ClassInstantiatedThroughReflection));
 
             A classViaReflection = new();
-            InitValue(classViaReflection); 
+            InitValue(classViaReflection);
         }
 
         public static T CreateInstance<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>() =>
@@ -199,26 +199,26 @@ namespace Repro_9379
 
         class C<T>
         {
-            private int usedByReflection;
-            C<T> Create() => Program.CreateInstance<C<T>>();
+            private int usedByReflection;                       // Noncompliant - FP
+            C<T> Create() => Program.CreateInstance<C<T>>();    // Noncompliant - FP
         }
 
         private class ClassInstantiatedThroughReflection
         {
-            private const int PrivateConst = 42;                // Compliant - we assume all members are used through reflection
-            private int privateField;
-            private int PrivateProperty { get; set; }
-            private void PrivateMethod() { }
+            private const int PrivateConst = 42;                // Noncompliant - FP
+            private int privateField;                           // Noncompliant - FP
+            private int PrivateProperty { get; set; }           // Noncompliant - FP
+            private void PrivateMethod() { }                    // Noncompliant - FP
             private ClassInstantiatedThroughReflection() { }
-            private event EventHandler PrivateEvent;
+            private event EventHandler PrivateEvent;            // Noncompliant - FP
 
             public ClassInstantiatedThroughReflection(int arg)  // Compliant - the constructor used in CreateInstance through Reflection
             {
             }
 
-            private class NestedType
+            private class NestedType                            // Noncompliant - FP
             {
-                private int privateField;
+                private int privateField;                       // Noncompliant - FP
             }
         }
 
