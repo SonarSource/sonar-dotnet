@@ -243,6 +243,8 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
             }
             """).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
+#if NET
+
     [DataTestMethod]
     [DataRow("where TSelf: IEqualityOperators<TSelf, TSelf, TResult>")]
     [DataRow("where TSelf: IEqualityOperators<TSelf, TSelf, TResult>, TResult")]
@@ -270,8 +272,6 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
                 }
             }
             """).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
-
-#if NET
 
     [TestMethod]
     public void MethodsShouldNotHaveIdenticalImplementations_CSharp9() =>
