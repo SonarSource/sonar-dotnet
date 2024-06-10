@@ -35,10 +35,11 @@ namespace StyleCop.Analyzers.Lightup
         {
             // INamedTypeSymbol.TypeArgumentNullableAnnotations is ImmutableArray<Roslyn.NullableAnnotation>
             // The generated code is symbol => ImmutableArray.CreateRange(symbol.TypeArgumentNullableAnnotations, x => (Sonar.NullableAnnotationType)x);
+
+            // Callers may rely on the fact that symbol.TypeArgumentNullableAnnotations is supposed to have the same length as symbol.TypeArguments
             var fallback = static (INamedTypeSymbol x) => Enumerable.Repeat(NullableAnnotation.None, x.TypeArguments.Length).ToImmutableArray();
             if (OriginalNullableAnnotationType() is not { } originalNullableAnnotationType)
             {
-                // Callers may rely on the fact that symbol.TypeArgumentNullableAnnotations is supposed to have the same length as symbol.TypeArguments
                 return fallback;
             }
 
