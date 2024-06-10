@@ -63,6 +63,9 @@ public sealed class CombinatorialDataTestMethodAttribute : TestMethodAttribute, 
         }
     }
 
+    public string GetDisplayName(MethodInfo methodInfo, object[] data) =>
+        $"{methodInfo.Name} ({(data is not null ? string.Join(",", data) : null)})";
+
     private static object[] CreateArguments(object[][] valuesPerParameter, int[] parameterIndices)
     {
         var arg = new object[parameterIndices.Length];
@@ -74,6 +77,4 @@ public sealed class CombinatorialDataTestMethodAttribute : TestMethodAttribute, 
         return arg;
     }
 
-    public string GetDisplayName(MethodInfo methodInfo, object[] data) =>
-        $"{methodInfo.Name} ({(data is not null ? string.Join(",", data) : null)})";
 }

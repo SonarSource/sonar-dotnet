@@ -74,7 +74,7 @@ public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TSyntaxKi
     {
         var firstSymbols = firstTypeParameterList?.Select(x => model.GetDeclaredSymbol(x)).OfType<ITypeParameterSymbol>() ?? [];
         var secondSymbols = secondTypeParameterList?.Select(x => model.GetDeclaredSymbol(x)).OfType<ITypeParameterSymbol>().ToArray() ?? [];
-        return firstSymbols.All(x => secondSymbols.Any(secondSymbol => TypesAreSame(x, secondSymbol)));
+        return firstSymbols.All(x => Array.Exists(secondSymbols, secondSymbol => TypesAreSame(x, secondSymbol)));
     }
 
     private static bool HaveSameParameterLists<TSyntax>(SeparatedSyntaxList<TSyntax> leftParameters,
@@ -92,19 +92,21 @@ public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TSyntaxKi
         && rightParameterType is INamedTypeSymbol { IsGenericType: true } namedTypeRight
         && namedTypeLeft.TypeArguments.Length == namedTypeRight.TypeArguments.Length
         && namedTypeLeft.TypeArguments.Equals(namedTypeRight.TypeArguments, (x, y) =>
-            x is ITypeParameterSymbol a ?
-                y is ITypeParameterSymbol b && a.Name == b.Name
+            x is ITypeParameterSymbol a
+                ? y is ITypeParameterSymbol b && a.Name == b.Name
                 : TypesAreSame(x, y));
 
     private static bool TypesAreSameTypeParameters(ITypeSymbol leftParameterType, ITypeSymbol rightParameterType) =>
-        leftParameterType.Equals(rightParameterType)
-            || (leftParameterType is ITypeParameterSymbol left
-            && rightParameterType is ITypeParameterSymbol right
-            && left.Name == right.Name
-            && left.HasConstructorConstraint == right.HasConstructorConstraint
-            && left.HasReferenceTypeConstraint == right.HasReferenceTypeConstraint
-            && left.HasValueTypeConstraint == right.HasValueTypeConstraint
-            && left.HasUnmanagedTypeConstraint() == right.HasUnmanagedTypeConstraint()
-            && left.ConstraintTypes.Length == right.ConstraintTypes.Length
-            && left.ConstraintTypes.All(x => right.ConstraintTypes.Any(y => TypesAreSame(x, y))));
+        leftParameterType.Equals(rightParameterType) || TypeParametersHaveSameNameAndConstraints(leftParameterType, rightParameterType);
+
+    private static bool TypeParametersHaveSameNameAndConstraints(ITypeSymbol leftParameterType, ITypeSymbol rightParameterType) =>
+        leftParameterType is ITypeParameterSymbol left
+        && rightParameterType is ITypeParameterSymbol right
+        && left.Name == right.Name
+        && left.HasConstructorConstraint == right.HasConstructorConstraint
+        && left.HasReferenceTypeConstraint == right.HasReferenceTypeConstraint
+        && left.HasValueTypeConstraint == right.HasValueTypeConstraint
+        && left.HasUnmanagedTypeConstraint() == right.HasUnmanagedTypeConstraint()
+        && left.ConstraintTypes.Length == right.ConstraintTypes.Length
+        && left.ConstraintTypes.All(x => right.ConstraintTypes.Any(y => TypesAreSame(x, y)));
 }
