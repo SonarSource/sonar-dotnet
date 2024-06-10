@@ -5,6 +5,7 @@
 namespace StyleCop.Analyzers.Lightup
 {
     using System.Reflection;
+    using Microsoft.CodeAnalysis.CSharp.Syntax;
     using static System.Linq.Expressions.Expression;
 
     public static class INamedTypeSymbolExtensions
@@ -33,48 +34,36 @@ namespace StyleCop.Analyzers.Lightup
         private static Func<INamedTypeSymbol, ImmutableArray<NullableAnnotation>> CreateTypeArgumentNullableAnnotationsAccessor()
         {
             // INamedTypeSymbol.TypeArgumentNullableAnnotations is ImmutableArray<Roslyn.NullableAnnotation>
-            // The generated code
-            // * Retrieves the original ImmutableArray
-            // * Creates a new ImmutableArrayBuilder of Sonar.NullableAnnotation with the capacity of original
-            // * Copies over the converted NullableAnnotation into the builder in a loop
-            // * Skips the builder creation and the loop if the original is empty
+            // The generated code is symbol => ImmutableArray.CreateRange(symbol.TypeArgumentNullableAnnotations, x => (Sonar.NullableAnnotationType)x);
+            var fallback = static (INamedTypeSymbol x) => Enumerable.Repeat(NullableAnnotation.None, x.TypeArguments.Length).ToImmutableArray();
             if (OriginalNullableAnnotationType() is not { } originalNullableAnnotationType)
             {
                 // Callers may rely on the fact that symbol.TypeArgumentNullableAnnotations is supposed to have the same length as symbol.TypeArguments
-                return static x => Enumerable.Repeat(NullableAnnotation.None, x.TypeArguments.Length).ToImmutableArray();
+                return fallback;
             }
 
-            var immutableArrayType = typeof(ImmutableArray);
-            var immutableArrayTypeT = typeof(ImmutableArray<NullableAnnotation>);
-            var builderType = typeof(ImmutableArray<NullableAnnotation>.Builder);
-            var originalType = typeof(ImmutableArray<>).MakeGenericType(originalNullableAnnotationType);
+            if (typeof(ImmutableArray).GetMethods(BindingFlags.Public | BindingFlags.Static).FirstOrDefault(x =>
+                x.Name == nameof(ImmutableArray.CreateRange)     // https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablearray.createrange
+                && x.GetParameters() is { Length: 2 } parameters // CreateRange<TSource,TResult>(ImmutableArray<TSource> items, Func<TSource,TResult> selector)
+                && parameters[0].Name == "items"                 // see also https://stackoverflow.com/a/4036187
+                && parameters[1].Name == "selector"
+                && x.GetGenericArguments() is { Length: 2 } typeArguments
+                && typeArguments[0].Name == "TSource"
+                && typeArguments[1].Name == "TResult") is not { } createRange)
+            {
+                return fallback;
+            }
+            var sonarNullableAnnotationType = typeof(NullableAnnotation);
+            var createRangeT = createRange.MakeGenericMethod(originalNullableAnnotationType, sonarNullableAnnotationType);
+            var delegateType = typeof(Func<,>).MakeGenericType(originalNullableAnnotationType, sonarNullableAnnotationType);
 
-            var builderCreateT = immutableArrayType.GetMethod(nameof(ImmutableArray.CreateBuilder), BindingFlags.Static | BindingFlags.Public, null, [typeof(int)], null); // CreateBuilder with int capacity
-            var builderCreate = builderCreateT.MakeGenericMethod(typeof(NullableAnnotation));
-            var builderAdd = builderType.GetMethod(nameof(ImmutableArray<int>.Builder.Add));
-            var builderToImmutable = builderType.GetMethod(nameof(ImmutableArray<int>.Builder.ToImmutable));
+            var originalNullableAnnotationParameter = Parameter(originalNullableAnnotationType, "x");
+            var conversion = Lambda(delegateType, Convert(originalNullableAnnotationParameter, sonarNullableAnnotationType), originalNullableAnnotationParameter); // (originalNullableAnnotationType x) => (sonarNullableAnnotationType)x;
 
-            var symbol = Parameter(typeof(INamedTypeSymbol), "symbol");
-            var original = Parameter(originalType, "original");
-            var builder = Parameter(builderType, "builder");
-            var i = Parameter(typeof(int), "i");
-
-            var exit = Label(immutableArrayTypeT);
-            var empty = Field(null, immutableArrayTypeT, nameof(ImmutableArray<int>.Empty));
-            var body = Block([builder, original, i],
-                Assign(original, Property(symbol, nameof(TypeArgumentNullableAnnotations))),                               // original = symbol.TypeArgumentNullableAnnotations;
-                IfThen(Equal(Property(original, nameof(ImmutableArray<int>.Length)), Constant(0)), Goto(exit, empty)),     // if (original.Length == 0) goto exit(ImmutableArray<Sonar.NullableAnnotation>.Empty)
-                Assign(builder, Call(builderCreate, Property(original, nameof(ImmutableArray<int>.Length)))),              // builder = ImmutableArray.CreateBuilder<NullableAnnotation>(original.Length);
-                Assign(i, Constant(0)),                                                                                    // i = 0;
-                Loop(
-                    IfThenElse(
-                        LessThan(i, Property(original, nameof(ImmutableArray<int>.Length))),                               // if (i < original.Length)
-                        ifTrue: Block(
-                            Call(builder, builderAdd, Convert(Property(original, "Item", i), typeof(NullableAnnotation))), // builder.Add((NullableAnnotation)original[i]);
-                            AddAssign(i, Constant(1))),                                                                    // i += 1;
-                        ifFalse: Return(exit, Call(builder, builderToImmutable)))),                                        // goto exit (builder.ToImmutable());
-                Label(exit, empty));
-            return Lambda<Func<INamedTypeSymbol, ImmutableArray<NullableAnnotation>>>(body, symbol).Compile();
+            var symbolParameter = Parameter(typeof(INamedTypeSymbol), "symbol");
+            return Lambda<Func<INamedTypeSymbol, ImmutableArray<NullableAnnotation>>>(
+                Call(createRangeT, Property(symbolParameter, nameof(TypeArgumentNullableAnnotations)), conversion), // ImmutableArray.CreateRange(symbol.TypeArgumentNullableAnnotations, conversion)
+                symbolParameter).Compile();
         }
 
         private static Type OriginalNullableAnnotationType()
