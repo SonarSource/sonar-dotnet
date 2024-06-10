@@ -63,28 +63,39 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
             """).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
     [CombinatorialDataTestMethod]
-    public void MethodsShouldNotHaveIdenticalImplementations_MethodTypeParameters_Compliant(
-        [DataValues("where T: struct", "where T: class")] string constraint1,
-        [DataValues("", "where T: unmanaged", "where T: new()")] string constraint2) =>
-        builderCS.AddSnippet($$"""
+    public void MethodsShouldNotHaveIdenticalImplementations_MethodTypeParameters(
+        [DataValues("", "where T: struct", "where T: class", "where T: unmanaged", "where T: new()", "where T: class, new()")] string constraint1,
+        [DataValues("", "where T: struct", "where T: class", "where T: unmanaged", "where T: new()", "where T: class, new()")] string constraint2)
+    {
+        var nonCompliant = constraint1 == constraint2;
+        var builder = builderCS.AddSnippet($$"""
             using System;
             public static class TypeConstraints
             {
-                public static bool Compare1<T>(T? value1, T value2) {{constraint1}}
+                public static bool Compare1<T>(T? value1, T value2) {{constraint1}} {{(nonCompliant ? "// Secondary" : string.Empty)}}
                 {
                     Console.WriteLine(value1);
                     Console.WriteLine(value2);
                     return true;
                 }
 
-                public static bool Compare2<T>(T? value1, T value2) {{constraint2}}
+                public static bool Compare2<T>(T? value1, T value2) {{constraint2}} {{(nonCompliant ? "// Noncompliant" : string.Empty)}}
                 {
                     Console.WriteLine(value1);
                     Console.WriteLine(value2);
                     return true;
                 }
             }
-            """).WithOptions(ParseOptionsHelper.FromCSharp9).VerifyNoIssues();
+            """).WithOptions(ParseOptionsHelper.FromCSharp9);
+        if (nonCompliant)
+        {
+            builder.Verify();
+        }
+        else
+        {
+            builder.VerifyNoIssues();
+        }
+    }
 
     [DataTestMethod]
     [DataRow("", "")]

@@ -76,5 +76,4 @@ public sealed class CombinatorialDataTestMethodAttribute : TestMethodAttribute, 
 
         return arg;
     }
-
 }
