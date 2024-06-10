@@ -1,23 +1,31 @@
+<p>A <code>class</code> with only <code>abstract</code> methods and no inheritable behavior should be converted to an <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/"><code>interface</code></a>.</p>
 <h2>Why is this an issue?</h2>
-<p>The purpose of an abstract class is to provide some heritable behaviors while also defining methods which must be implemented by sub-classes.</p>
-<p>A <code>class</code> with only <code>abstract</code> methods and no inheritable behavior should be converted to an <code>interface</code>.</p>
-<h3>Noncompliant code example</h3>
+<p>The purpose of an <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/abstract-and-sealed-classes-and-class-members"><code>abstract</code>
+class</a> is to provide some overridable behaviors while also defining methods that are required to be implemented by sub-classes.</p>
+<p>A class that contains only <code>abstract</code> methods, often called pure abstract class, is effectively an interface, but with the disadvantage
+of not being able to be implemented by multiple classes.</p>
+<p>Using interfaces over pure abstract classes presents multiple advantages:</p>
+<ul>
+  <li> <a href="https://en.wikipedia.org/wiki/Multiple_inheritance"><strong>Multiple Inheritance</strong></a>: Unlike classes, an interface doesn’t
+  count towards the single inheritance limit in C#. This means a class can implement multiple interfaces, which can be useful when you need to define
+  behavior that can be shared across multiple classes. </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Loose_coupling#In_programming"><strong>Loose Coupling</strong></a>: Interfaces provide a way to achieve
+  loose coupling between classes. This is because an interface only specifies what methods a class must have, but not how they are implemented. This
+  makes it easier to swap out implementations without changing the code that uses them. </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Polymorphism_(computer_science)"><strong>Polymorphism</strong></a>: Interfaces allow you to use
+  polymorphism, which means you can use an interface type to refer to any object that implements that interface. This can be useful when you want to
+  write code that can work with any class that implements a certain interface, <em>without knowing what the actual class is</em>. </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Design_by_contract"><strong>Design by contract</strong></a>: Interfaces provide a clear contract of what
+  a class should do, without specifying how it should do it. This makes it easier to understand the intended behavior of a class, and to ensure that
+  different implementations of an interface are consistent with each other. </li>
+</ul>
+<h3>Exceptions</h3>
+<p><code>abstract</code> classes that contain non-abstract methods, in addition to <code>abstract</code> ones, cannot easily be converted to
+interfaces, and are not the subject of this rule:</p>
 <pre>
-public abstract class Animal // Noncompliant; should be an interface
-{
-  abstract void Move();
-  abstract void Feed();
-}
-</pre>
-<h3>Compliant solution</h3>
-<pre>
-public interface Animal
-{
-  void Move();
-  void Feed();
-}
-
-public abstract class Lamp
+public abstract class Lamp // Compliant: Glow is abstract, but FlipSwitch is not
 {
   private bool switchLamp = false;
 
@@ -33,4 +41,49 @@ public abstract class Lamp
   }
 }
 </pre>
+<p>Notice that, since C# 8.0, you can also define <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-8.0/default-interface-methods">default implementations for
+interface methods</a>, which is yet another reason to prefer interfaces over abstract classes when you don’t need to provide any inheritable
+behavior.</p>
+<p>However, interfaces cannot have fields (such as <code>switchLamp</code> in the example above), and that remains true even in C# 8.0 and upwards.
+This can be a valid reason to still prefer an abstract class over an interface.</p>
+<h2>How to fix it</h2>
+<p>Convert the <code>abstract</code> class to an <code>interface</code> with the same methods.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public abstract class Animal // Noncompliant: should be an interface
+{
+  public abstract void Move();
+  public abstract void Feed();
+}
+</pre>
+<h3>Compliant solution</h3>
+<pre data-diff-id="1" data-diff-type="compliant">
+public interface Animal
+{
+  void Move();
+  void Feed();
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/abstract-and-sealed-classes-and-class-members">Abstract
+  and Sealed Classes and Class Members (C# Programming Guide)</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/">Interfaces - define behavior for
+  multiple types</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/default-interface-methods">Default
+  Interface Methods</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/interface-implementation/default-interface-methods-versions">Tutorial: Update
+  interfaces with default interface methods</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/object-oriented/inheritance">Inheritance - derive types
+  to create more specialized behavior</a> </li>
+  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Multiple_inheritance">Multiple Inheritance</a> </li>
+  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Loose_coupling#In_programming">Loose Coupling - In programming</a> </li>
+  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Polymorphism_(computer_science)">Polymorphism (computer science)</a> </li>
+  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Design_by_contract">Design by contract</a> </li>
+</ul>
 

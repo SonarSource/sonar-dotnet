@@ -39,7 +39,7 @@ public class FooController : Controller
     [HttpGet]
     public async Task&lt;string&gt; Foo()
     {
-        using var client = new HttpClient();  //Noncompliant
+        using var client = new HttpClient();  // Noncompliant
         return await client.GetStringAsync(_url);
     }
 }

@@ -17,8 +17,8 @@ public interface IEmpty
 <h3>Exceptions</h3>
 <ul>
   <li> Partial classes are ignored entirely, as source generators often use them. </li>
-  <li> Classes with names ending in <code>Command</code>, <code>Message</code>, or <code>Event</code> are ignored as messaging libraries often use
-  them. </li>
+  <li> Classes with names ending in <code>Command</code>, <code>Message</code>, <code>Event</code>, or <code>Query</code> are ignored as messaging
+  libraries often use them. </li>
   <li> Subclasses of <code>System.Exception</code> are ignored; even an empty Exception class can provide helpful information by its type name alone.
   </li>
   <li> Subclasses of <code>System.Attribute</code> and classes annotated with attributes are ignored. </li>

@@ -6,7 +6,9 @@
     "func": "Constant\/Issue",
     "constantCost": "1h"
   },
-  "tags": [],
+  "tags": [
+    "asp.net"
+  ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-6962",
   "sqKey": "S6962",

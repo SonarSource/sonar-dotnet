@@ -75,75 +75,39 @@ End Function
   <tbody>
     <tr>
       <td><p>ElementAt</p></td>
-      <td><p>.NET 7.0</p></td>
-      <td><p>15,193.1 ns</p></td>
-      <td><p>233.47 ns</p></td>
+      <td><p>3,403.4 ns</p></td>
+      <td><p>28.52 ns</p></td>
+      <td><p>26.67 ns</p></td>
     </tr>
     <tr>
       <td><p>Index</p></td>
-      <td><p>.NET 7.0</p></td>
-      <td><p>9,465.6 ns</p></td>
-      <td><p>148.16 ns</p></td>
+      <td><p>478.0 ns</p></td>
+      <td><p>6.93 ns</p></td>
+      <td><p>6.48 ns</p></td>
     </tr>
     <tr>
       <td><p>First</p></td>
-      <td><p>.NET 7.0</p></td>
-      <td><p>7,790.2 ns</p></td>
-      <td><p>165.70 ns</p></td>
+      <td><p>6,160.0 ns</p></td>
+      <td><p>57.66 ns</p></td>
+      <td><p>53.93 ns</p></td>
     </tr>
     <tr>
       <td><p>First_Index</p></td>
-      <td><p>.NET 7.0</p></td>
-      <td><p>398.5 ns</p></td>
-      <td><p>5.36 ns</p></td>
+      <td><p>485.7 ns</p></td>
+      <td><p>5.81 ns</p></td>
+      <td><p>5.15 ns</p></td>
     </tr>
     <tr>
       <td><p>Last</p></td>
-      <td><p>.NET 7.0</p></td>
-      <td><p>7,398.2 ns</p></td>
-      <td><p>152.48 ns</p></td>
+      <td><p>6,034.3 ns</p></td>
+      <td><p>20.34 ns</p></td>
+      <td><p>16.98 ns</p></td>
     </tr>
     <tr>
       <td><p>Last_Index</p></td>
-      <td><p>.NET 7.0</p></td>
-      <td><p>347.3 ns</p></td>
-      <td><p>5.47 ns</p></td>
-    </tr>
-    <tr>
-      <td><p>ElementAt</p></td>
-      <td><p>.NET Framework 4.6.2</p></td>
-      <td><p>12,205.7 ns</p></td>
-      <td><p>298.49 ns</p></td>
-    </tr>
-    <tr>
-      <td><p>Index</p></td>
-      <td><p>.NET Framework 4.6.2</p></td>
-      <td><p>8,917.8 ns</p></td>
-      <td><p>51.55 ns</p></td>
-    </tr>
-    <tr>
-      <td><p>First</p></td>
-      <td><p>.NET Framework 4.6.2</p></td>
-      <td><p>5,109.1 ns</p></td>
-      <td><p>100.13 ns</p></td>
-    </tr>
-    <tr>
-      <td><p>First_Index</p></td>
-      <td><p>.NET Framework 4.6.2</p></td>
-      <td><p>566.0 ns</p></td>
-      <td><p>6.56 ns</p></td>
-    </tr>
-    <tr>
-      <td><p>Last</p></td>
-      <td><p>.NET Framework 4.6.2</p></td>
-      <td><p>5,052.7 ns</p></td>
-      <td><p>76.02 ns</p></td>
-    </tr>
-    <tr>
-      <td><p>Last_Index</p></td>
-      <td><p>.NET Framework 4.6.2</p></td>
-      <td><p>680.7 ns</p></td>
-      <td><p>9.56 ns</p></td>
+      <td><p>408.3 ns</p></td>
+      <td><p>2.54 ns</p></td>
+      <td><p>2.38 ns</p></td>
     </tr>
   </tbody>
 </table>
@@ -167,74 +131,96 @@ public int LoopSize;
 public void Setup()
 {
     random = new Random(42);
+
     var bytes = new byte[SampleSize];
     random.NextBytes(bytes);
     data = bytes.ToList();
 }
 
 [Benchmark]
-public void ElementAt()
+public int ElementAt()
 {
-    for (int i = 0; i &lt; LoopSize; i++)
+    int result = default;
+
+    for (var i = 0; i &lt; LoopSize; i++)
     {
-        var index = random.Next(0, SampleSize);
-        _ = data.ElementAt(index);
+        result = data.ElementAt(i);
     }
+
+    return result;
 }
 
 [Benchmark]
-public void Index()
+public int Index()
 {
-    for (int i = 0; i &lt; LoopSize; i++)
+    int result = default;
+
+    for (var i = 0; i &lt; LoopSize; i++)
     {
-        var index = random.Next(0, SampleSize);
-        _ = data[index];
+        result = data[i];
     }
+
+    return result;
 }
 
 [Benchmark]
-public void First()
+public int First()
 {
-    for (int i = 0; i &lt; LoopSize; i++)
+    int result = default;
+
+    for (var i = 0; i &lt; LoopSize; i++)
     {
-        _ = data.First();
+        result = data.First();
     }
+
+    return result;
 }
 
 [Benchmark]
-public void First_Index()
+public int First_Index()
 {
-    for (int i = 0; i &lt; LoopSize; i++)
+    int result = default;
+
+    for (var i = 0; i &lt; LoopSize; i++)
     {
-        _ = data[0];
+        result = data[0];
     }
+
+    return result;
 }
 
 [Benchmark]
-public void Last()
+public int Last()
 {
-    for (int i = 0; i &lt; LoopSize; i++)
+    int result = default;
+
+    for (var i = 0; i &lt; LoopSize; i++)
     {
-        _ = data.Last();
+        result = data.Last();
     }
+
+    return result;
 }
 
 [Benchmark]
-public void Last_Index()
+public int Last_Index()
 {
-    for (int i = 0; i &lt; LoopSize; i++)
+    int result = default;
+
+    for (var i = 0; i &lt; LoopSize; i++)
     {
-        _ = data[data.Count - 1];
+        result = data[data.Count - 1];
     }
+
+    return result;
 }
 </pre>
 <p>Hardware configuration:</p>
 <pre>
-BenchmarkDotNet=v0.13.5, OS=Windows 10 (10.0.19045.2846/22H2/2022Update)
+BenchmarkDotNet=v0.13.5, OS=Windows 10 (10.0.19045.4412/22H2/2022Update)
 11th Gen Intel Core i7-11850H 2.50GHz, 1 CPU, 16 logical and 8 physical cores
-.NET SDK=7.0.203
-  [Host]               : .NET 7.0.5 (7.0.523.17405), X64 RyuJIT AVX2
-  .NET 7.0             : .NET 7.0.5 (7.0.523.17405), X64 RyuJIT AVX2
-  .NET Framework 4.6.2 : .NET Framework 4.8.1 (4.8.9139.0), X64 RyuJIT VectorSize=256
+.NET SDK=8.0.301
+  [Host]   : .NET 8.0.6 (8.0.624.26715), X64 RyuJIT AVX2
+  .NET 8.0 : .NET 8.0.6 (8.0.624.26715), X64 RyuJIT AVX2
 </pre>
 
