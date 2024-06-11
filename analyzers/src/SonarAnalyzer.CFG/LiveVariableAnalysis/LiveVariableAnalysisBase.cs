@@ -28,7 +28,7 @@ public abstract class LiveVariableAnalysisBase<TCfg, TBlock>
     protected readonly CancellationToken Cancel;
     private readonly IDictionary<TBlock, HashSet<ISymbol>> blockLiveOut = new Dictionary<TBlock, HashSet<ISymbol>>();
     private readonly IDictionary<TBlock, HashSet<ISymbol>> blockLiveIn = new Dictionary<TBlock, HashSet<ISymbol>>();
-    private readonly HashSet<ISymbol> captured = new();
+    private readonly HashSet<ISymbol> captured = [];
 
     public abstract bool IsLocal(ISymbol symbol);
     protected abstract TBlock ExitBlock { get; }

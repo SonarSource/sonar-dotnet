@@ -25,21 +25,21 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp;
 
 public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<IControlFlowGraph, Block>
 {
-    private readonly SemanticModel semanticModel;
+    private readonly SemanticModel model;
 
     protected override Block ExitBlock => Cfg.ExitBlock;
 
-    public SonarCSharpLiveVariableAnalysis(IControlFlowGraph controlFlowGraph, ISymbol originalDeclaration, SemanticModel semanticModel, CancellationToken cancel)
+    public SonarCSharpLiveVariableAnalysis(IControlFlowGraph controlFlowGraph, ISymbol originalDeclaration, SemanticModel model, CancellationToken cancel)
         : base(controlFlowGraph, originalDeclaration, cancel)
     {
-        this.semanticModel = semanticModel;
+        this.model = model;
         Analyze();
     }
 
     public override bool IsLocal(ISymbol symbol)
     {
         return IsLocalOrParameterSymbol()
-            && symbol.ContainingSymbol != null
+            && symbol.ContainingSymbol is not null
             && symbol.ContainingSymbol.Equals(originalDeclaration);
 
         bool IsLocalOrParameterSymbol() =>
@@ -61,7 +61,7 @@ public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<I
 
     protected override State ProcessBlock(Block block)
     {
-        var ret = new SonarState(this, semanticModel);
+        var ret = new SonarState(this, model);
         ret.ProcessBlock(block);
         return ret;
     }
@@ -69,14 +69,14 @@ public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<I
     private sealed class SonarState : State
     {
         private readonly SonarCSharpLiveVariableAnalysis owner;
-        private readonly SemanticModel semanticModel;
+        private readonly SemanticModel model;
 
         public ISet<SyntaxNode> AssignmentLhs { get; } = new HashSet<SyntaxNode>();
 
         public SonarState(SonarCSharpLiveVariableAnalysis owner, SemanticModel semanticModel)
         {
             this.owner = owner;
-            this.semanticModel = semanticModel;
+            this.model = semanticModel;
         }
 
         public void ProcessBlock(Block block)
@@ -126,7 +126,7 @@ public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<I
             if (block is UsingEndBlock usingFinalizerBlock)
             {
                 var disposableSymbols = usingFinalizerBlock.Identifiers
-                    .Select(x => semanticModel.GetDeclaredSymbol(x.Parent) ?? semanticModel.GetSymbolInfo(x.Parent).Symbol)
+                    .Select(x => model.GetDeclaredSymbol(x.Parent) ?? model.GetSymbolInfo(x.Parent).Symbol)
                     .WhereNotNull();
                 foreach (var disposableSymbol in disposableSymbols)
                 {
@@ -137,7 +137,7 @@ public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<I
 
         private void ProcessVariableInForeach(ForEachStatementSyntax foreachNode)
         {
-            if (semanticModel.GetDeclaredSymbol(foreachNode) is { } symbol)
+            if (model.GetDeclaredSymbol(foreachNode) is { } symbol)
             {
                 Assigned.Add(symbol);
                 UsedBeforeAssigned.Remove(symbol);
@@ -146,7 +146,7 @@ public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<I
 
         private void ProcessVariableDeclarator(VariableDeclaratorSyntax instruction)
         {
-            if (semanticModel.GetDeclaredSymbol(instruction) is { } symbol)
+            if (model.GetDeclaredSymbol(instruction) is { } symbol)
             {
                 Assigned.Add(symbol);
                 UsedBeforeAssigned.Remove(symbol);
@@ -157,7 +157,7 @@ public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<I
         {
             var left = assignment.Left.RemoveParentheses();
             if (left.IsKind(SyntaxKind.IdentifierName)
-                && semanticModel.GetSymbolInfo(left).Symbol is { } symbol
+                && model.GetSymbolInfo(left).Symbol is { } symbol
                 && owner.IsLocal(symbol))
             {
                 AssignmentLhs.Add(left);
@@ -168,8 +168,8 @@ public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<I
 
         private void ProcessIdentifier(IdentifierNameSyntax identifier)
         {
-            if (!identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(semanticModel)
-                && semanticModel.GetSymbolInfo(identifier).Symbol is { } symbol)
+            if (!identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(model)
+                && model.GetSymbolInfo(identifier).Symbol is { } symbol)
             {
                 if (owner.IsLocal(symbol))
                 {
@@ -193,8 +193,8 @@ public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<I
 
         private void ProcessGenericName(GenericNameSyntax genericName)
         {
-            if (!genericName.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(semanticModel)
-                && semanticModel.GetSymbolInfo(genericName).Symbol is IMethodSymbol { MethodKind: MethodKindEx.LocalFunction } method)
+            if (!genericName.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(model)
+                && model.GetSymbolInfo(genericName).Symbol is IMethodSymbol { MethodKind: MethodKindEx.LocalFunction } method)
             {
                 ProcessLocalFunction(method);
             }
@@ -206,7 +206,7 @@ public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<I
                 && symbol.DeclaringSyntaxReferences.Length == 1
                 && symbol.DeclaringSyntaxReferences.Single().GetSyntax() is { } node
                 && (LocalFunctionStatementSyntaxWrapper)node is LocalFunctionStatementSyntaxWrapper function
-                && CSharpControlFlowGraph.TryGet(function, semanticModel, out var cfg))
+                && CSharpControlFlowGraph.TryGet(function, model, out var cfg))
             {
                 ProcessedLocalFunctions.Add(symbol);
                 foreach (var block in cfg.Blocks.Reverse())
@@ -220,7 +220,7 @@ public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<I
         {
             var allCapturedSymbols = instruction.DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
-                .Select(i => semanticModel.GetSymbolInfo(i).Symbol)
+                .Select(x => model.GetSymbolInfo(x).Symbol)
                 .Where(owner.IsLocal);
 
             // Collect captured locals

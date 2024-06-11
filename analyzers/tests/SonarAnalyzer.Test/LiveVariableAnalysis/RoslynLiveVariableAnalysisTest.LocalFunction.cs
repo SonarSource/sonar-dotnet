@@ -25,9 +25,10 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void StaticLocalFunction_Expression_LiveIn()
     {
-        var code = @"
+        var code = """
 outParameter = LocalFunction(intParameter);
-static int LocalFunction(int a) => a + 1;";
+static int LocalFunction(int a) => a + 1;
+""";
         var context = CreateContextCS(code, "LocalFunction", "out int outParameter");
         context.ValidateEntry(LiveIn("a"), LiveOut("a"));
         context.Validate("a + 1", LiveIn("a"));
@@ -37,9 +38,10 @@ static int LocalFunction(int a) => a + 1;";
     [TestMethod]
     public void StaticLocalFunction_Expression_NotLiveIn_NotLiveOut()
     {
-        var code = @"
-outParameter = LocalFunction(0);
-static int LocalFunction(int a) => 42;";
+        var code = """
+            outParameter = LocalFunction(0);
+            static int LocalFunction(int a) => 42;
+            """;
         var context = CreateContextCS(code, "LocalFunction", "out int outParameter");
         context.ValidateEntry();
         context.Validate("42");
@@ -49,12 +51,13 @@ static int LocalFunction(int a) => 42;";
     [TestMethod]
     public void StaticLocalFunction_LiveIn()
     {
-        var code = @"
-outParameter = LocalFunction(intParameter);
-static int LocalFunction(int a)
-{
-    return a + 1;
-}";
+        var code = """
+            outParameter = LocalFunction(intParameter);
+            static int LocalFunction(int a)
+            {
+                return a + 1;
+            }
+            """;
         var context = CreateContextCS(code, "LocalFunction", "out int outParameter");
         context.ValidateEntry(LiveIn("a"), LiveOut("a"));
         context.Validate("a + 1", LiveIn("a"));
@@ -64,12 +67,13 @@ static int LocalFunction(int a)
     [TestMethod]
     public void StaticLocalFunction_NotLiveIn_NotLivOut()
     {
-        var code = @"
-outParameter = LocalFunction(0);
-static int LocalFunction(int a)
-{
-    return 42;
-}";
+        var code = """
+            outParameter = LocalFunction(0);
+            static int LocalFunction(int a)
+            {
+                return 42;
+            }
+            """;
         var context = CreateContextCS(code, "LocalFunction", "out int outParameter");
         context.ValidateEntry();
         context.Validate("42");
@@ -79,15 +83,16 @@ static int LocalFunction(int a)
     [TestMethod]
     public void StaticLocalFunction_Recursive()
     {
-        var code = @"
-outParameter = LocalFunction(intParameter);
-static int LocalFunction(int a)
-{
-    if(a <= 0)
-        return 0;
-    else
-        return LocalFunction(a - 1);
-};";
+        var code = """
+            outParameter = LocalFunction(intParameter);
+            static int LocalFunction(int a)
+            {
+                if(a <= 0)
+                    return 0;
+                else
+                    return LocalFunction(a - 1);
+            };
+            """;
         var context = CreateContextCS(code, "LocalFunction", "out int outParameter");
         context.ValidateEntry(LiveIn("a"), LiveOut("a"));
         context.Validate("0");
@@ -98,13 +103,14 @@ static int LocalFunction(int a)
     [TestMethod]
     public void LocalFunctionInvocation_LiveIn()
     {
-        var code = @"
-var variable = 42;
-if (boolParameter)
-    return;
-LocalFunction();
+        var code = """
+            var variable = 42;
+            if (boolParameter)
+                return;
+            LocalFunction();
 
-int LocalFunction() => variable;";
+            int LocalFunction() => variable;
+            """;
         var context = CreateContextCS(code);
         context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
         context.Validate("boolParameter", LiveIn("boolParameter"), LiveOut("variable"));
@@ -114,13 +120,14 @@ int LocalFunction() => variable;";
     [TestMethod]
     public void LocalFunctionInvocation_FunctionDeclaredBeforeCode_LiveIn()
     {
-        var code = @"
-var variable = 42;
-int LocalFunction() => variable;
+        var code = """
+            var variable = 42;
+            int LocalFunction() => variable;
 
-if (boolParameter)
-    return;
-LocalFunction();";
+            if (boolParameter)
+                return;
+            LocalFunction();
+            """;
         var context = CreateContextCS(code);
         context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
         context.Validate("boolParameter", LiveIn("boolParameter"), LiveOut("variable"));
@@ -130,13 +137,14 @@ LocalFunction();";
     [TestMethod]
     public void LocalFunctionInvocation_Generic_LiveIn()
     {
-        var code = @"
-var variable = 42;
-if (boolParameter)
-    return;
-LocalFunction<int>();
+        var code = """
+            var variable = 42;
+            if (boolParameter)
+                return;
+            LocalFunction<int>();
 
-int LocalFunction<T>() => variable;";
+            int LocalFunction<T>() => variable;
+            """;
         var context = CreateContextCS(code);
         context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
         context.Validate("boolParameter", LiveIn("boolParameter"), LiveOut("variable"));
@@ -146,18 +154,19 @@ int LocalFunction<T>() => variable;";
     [TestMethod]
     public void LocalFunctionInvocation_NestedGeneric_LiveIn()
     {
-        var code = @"
-var variable = 42;
-if (boolParameter)
-    return;
-LocalFunction<int>();
+        var code = """
+            var variable = 42;
+            if (boolParameter)
+                return;
+            LocalFunction<int>();
 
-int LocalFunction<T>()
-{
-    return Nested<string>();
+            int LocalFunction<T>()
+            {
+                return Nested<string>();
 
-    int Nested<TT>() => variable;
-}";
+                int Nested<TT>() => variable;
+            }
+            """;
         var context = CreateContextCS(code);
         context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
         context.Validate("boolParameter", LiveIn("boolParameter"), LiveOut("variable"));
@@ -167,17 +176,18 @@ int LocalFunction<T>()
     [TestMethod]
     public void LocalFunctionInvocation_NotLiveIn()
     {
-        var code = @"
-var variable = 42;
-if (boolParameter)
-    return;
-LocalFunction();
-Method(variable);
+        var code = """
+            var variable = 42;
+            if (boolParameter)
+                return;
+            LocalFunction();
+            Method(variable);
 
-void LocalFunction()
-{
-    variable = 0;
-}";
+            void LocalFunction()
+            {
+                variable = 0;
+            }
+            """;
         var context = CreateContextCS(code);
         context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
         context.Validate("boolParameter", LiveIn("boolParameter"));
@@ -187,10 +197,11 @@ void LocalFunction()
     [TestMethod]
     public void LocalFunctionInvocation_NestedArgument_NotLiveIn()
     {
-        var code = @"
-LocalFunction(40);
+        var code = """
+            LocalFunction(40);
 
-int LocalFunction(int cnt) => cnt + 2;";
+            int LocalFunction(int cnt) => cnt + 2;
+            """;
         var context = CreateContextCS(code);
         context.ValidateEntry();
         context.Validate("LocalFunction(40);");
@@ -199,14 +210,15 @@ int LocalFunction(int cnt) => cnt + 2;";
     [TestMethod]
     public void LocalFunctionInvocation_NestedVariable_NotLiveIn_NotCaptured()
     {
-        var code = @"
-LocalFunction();
+        var code = """
+            LocalFunction();
 
-void LocalFunction()
-{
-    var nested = 42;
-    Func<int> f = () => nested;
-}";
+            void LocalFunction()
+            {
+                var nested = 42;
+                Func<int> f = () => nested;
+            }
+            """;
         var context = CreateContextCS(code);
         context.ValidateEntry();
         context.Validate("LocalFunction();");
@@ -215,13 +227,14 @@ void LocalFunction()
     [TestMethod]
     public void LocalFunctionInvocation_Recursive_LiveIn()
     {
-        var code = @"
-var variable = 42;
-if (boolParameter)
-    return;
-LocalFunction(10);
+        var code = """
+            var variable = 42;
+            if (boolParameter)
+                return;
+            LocalFunction(10);
 
-int LocalFunction(int cnt) => variable + (cnt == 0 ? 0 : LocalFunction(cnt - 1));";
+            int LocalFunction(int cnt) => variable + (cnt == 0 ? 0 : LocalFunction(cnt - 1));
+            """;
         var context = CreateContextCS(code);
         context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
         context.Validate("boolParameter", LiveIn("boolParameter"), LiveOut("variable"));
@@ -231,13 +244,14 @@ int LocalFunction(int cnt) => variable + (cnt == 0 ? 0 : LocalFunction(cnt - 1))
     [TestMethod]
     public void LocalFunctionInvocation_Recursive_WhenAnalyzingLocalFunctionItself_LiveIn()
     {
-        var code = @"
-var variable = 42;
+        var code = """
+            var variable = 42;
 
-int LocalFunction(int arg)
-{
-    return variable + (arg == 0 ? 0 : LocalFunction(arg - 1));
-}";
+            int LocalFunction(int arg)
+            {
+                return variable + (arg == 0 ? 0 : LocalFunction(arg - 1));
+            }
+            """;
         // variable is not local, it's defined above the LocalFunction scope
         var context = CreateContextCS(code, "LocalFunction");
         context.ValidateEntry(LiveIn("arg"), LiveOut("arg"));
@@ -249,18 +263,19 @@ int LocalFunction(int arg)
     [TestMethod]
     public void LocalFunctionInvocation_CrossReference_LiveIn()
     {
-        var code = @"
-var variable = 42;
-if (boolParameter)
-    return;
-LocalFunction();
+        var code = """
+            var variable = 42;
+            if (boolParameter)
+                return;
+            LocalFunction();
 
-int LocalFunction()
-{
-    int First() => Second();
-    int Second() => variable;
-    return First();
-}";
+            int LocalFunction()
+            {
+                int First() => Second();
+                int Second() => variable;
+                return First();
+            }
+            """;
         var context = CreateContextCS(code);
         context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
         context.Validate("LocalFunction();", LiveIn("variable"));
@@ -269,16 +284,17 @@ int LocalFunction()
     [TestMethod]
     public void LocalFunctionInvocation_CrossReference_WhenAnalyzingLocalFunctionItself_LiveIn()
     {
-        var code = @"
-int LocalFunction()
-{
-    var variable = 42;
-    if (boolParameter)
-        return 0;
-    int First() => Second();
-    int Second() => variable;
-    return First();
-}";
+        var code = """
+            int LocalFunction()
+            {
+                var variable = 42;
+                if (boolParameter)
+                    return 0;
+                int First() => Second();
+                int Second() => variable;
+                return First();
+            }
+            """;
         var context = CreateContextCS(code, "LocalFunction");
         context.ValidateEntry();
         context.Validate("boolParameter", LiveOut("variable"));
@@ -288,18 +304,19 @@ int LocalFunction()
     [TestMethod]
     public void LocalFunctionInvocation_Nested_LiveIn()
     {
-        var code = @"
-var variable = 42;
-if (boolParameter)
-    return;
-LocalFunction();
+        var code = """
+            var variable = 42;
+            if (boolParameter)
+                return;
+            LocalFunction();
 
-int LocalFunction()
-{
-    return Nested();
+            int LocalFunction()
+            {
+                return Nested();
 
-    int Nested() => variable;
-}";
+                int Nested() => variable;
+            }
+            """;
         var context = CreateContextCS(code);
         context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
         context.Validate("boolParameter", LiveIn("boolParameter"), LiveOut("variable"));
@@ -309,32 +326,33 @@ int LocalFunction()
     [TestMethod]
     public void LocalFunctionInvocation_TryCatchFinally_LiveIn()
     {
-        var code = @"
-var usedInTry = 42;
-var usedInCatch = 42;
-var usedInFinally = 42;
-var usedInUnreachable = 42;
-if (boolParameter)
-    return;
-LocalFunction();
+        var code = """
+            var usedInTry = 42;
+            var usedInCatch = 42;
+            var usedInFinally = 42;
+            var usedInUnreachable = 42;
+            if (boolParameter)
+                return;
+            LocalFunction();
 
-int LocalFunction()
-{
-    try
-    {
-        Method(usedInTry);
-    }
-    catch
-    {
-        Method(usedInCatch);
-    }
-    finally
-    {
-        Method(usedInFinally);
-    }
-    return 42;
-    Method(usedInUnreachable);
-}";
+            int LocalFunction()
+            {
+                try
+                {
+                    Method(usedInTry);
+                }
+                catch
+                {
+                    Method(usedInCatch);
+                }
+                finally
+                {
+                    Method(usedInFinally);
+                }
+                return 42;
+                Method(usedInUnreachable);
+            }
+            """;
 
         var context = CreateContextCS(code);
         context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
@@ -346,13 +364,14 @@ int LocalFunction()
     [TestMethod]
     public void LocalFunctionReference_LiveIn()
     {
-        var code = @"
-var variable = 42;
-if (boolParameter)
-    return;
-Capturing(LocalFunction);
+        var code = """
+            var variable = 42;
+            if (boolParameter)
+                return;
+            Capturing(LocalFunction);
 
-int LocalFunction(int arg) => arg + variable;";
+            int LocalFunction(int arg) => arg + variable;
+            """;
 
         var context = CreateContextCS(code);
         context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
@@ -363,22 +382,23 @@ int LocalFunction(int arg) => arg + variable;";
     [TestMethod]
     public void LocalFunctionReference_Recursive_LiveIn()
     {
-        var code = @"
-var variable = 42;
-if (boolParameter)
-    return;
-LocalFunction(42);
+        var code = """
+            var variable = 42;
+            if (boolParameter)
+                return;
+            LocalFunction(42);
 
-void LocalFunction(int arg)
-{
-    Enumerable.Empty<object>().Where(IsTrue);
+            void LocalFunction(int arg)
+            {
+                Enumerable.Empty<object>().Where(IsTrue);
 
-    bool IsTrue(object x)
-    {
-        arg--;
-        return arg <= variable || new[] { x }.Any(IsTrue);
-    }
-}";
+                bool IsTrue(object x)
+                {
+                    arg--;
+                    return arg <= variable || new[] { x }.Any(IsTrue);
+                }
+            }
+            """;
         var context = CreateContextCS(code);
         context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
         context.Validate("boolParameter", LiveIn("boolParameter"), LiveOut("variable"));
@@ -388,14 +408,15 @@ void LocalFunction(int arg)
     [TestMethod]
     public void LocalFunctionReference_Recursive_WhenAnalyzingLocalFunctionItself_LiveIn()
     {
-        var code = @"
-var variable = 42;
+        var code = """
+            var variable = 42;
 
-int LocalFunction(int arg)
-{
-    Capturing(LocalFunction);
-    return variable + arg;
-}";
+            int LocalFunction(int arg)
+            {
+                Capturing(LocalFunction);
+                return variable + arg;
+            }
+            """;
         // variable is not local, it's defined above the LocalFunction scope
         var context = CreateContextCS(code, "LocalFunction");
         context.ValidateEntry(LiveIn("arg"), LiveOut("arg"));
