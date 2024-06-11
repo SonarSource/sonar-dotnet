@@ -213,7 +213,8 @@ namespace Tests.Diagnostics
 
         public int FalseNegatives(int a)
         {
-            switch (a) // FN
+            // Single line if statements
+            switch (a) // Noncompliant
             {
                 case 1:
                     return 1;
@@ -222,10 +223,10 @@ namespace Tests.Diagnostics
                 case 3:
                     return 3;
                 case 4:
-                    if (a > 42) return 21; // This is one statement
+                    if (a > 42) return 21;
                     return 42;
                 case 5:
-                    if (a > 42) return 21; else if (a < 21) return 3; // This is one statement
+                    if (a > 42) return 21; else if (a < 21) return 3;
                     return 42;
             }
 

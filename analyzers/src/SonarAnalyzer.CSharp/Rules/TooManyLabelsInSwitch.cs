@@ -25,6 +25,22 @@ public class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind, Switc
 {
     private static readonly ISet<SyntaxKind> IgnoredStatementsInSwitch = new HashSet<SyntaxKind> { SyntaxKind.BreakStatement, SyntaxKind.ReturnStatement, SyntaxKind.ThrowStatement };
 
+    private static readonly ISet<SyntaxKind> TransparentSyntax = new HashSet<SyntaxKind>
+    {
+        SyntaxKind.Block,
+        SyntaxKind.IfStatement,
+        SyntaxKind.SwitchStatement,
+        SyntaxKind.TryStatement,
+        SyntaxKind.WhileStatement,
+        SyntaxKind.DoStatement,
+        SyntaxKind.ForStatement,
+        SyntaxKind.ForEachStatement,
+        SyntaxKindEx.ForEachVariableStatement,
+        SyntaxKind.UsingStatement,
+        SyntaxKind.LockStatement,
+        SyntaxKind.CatchClause
+    };
+
     protected override DiagnosticDescriptor Rule { get; } =
         DescriptorFactory.Create(DiagnosticId, string.Format(MessageFormat, "switch", "case"),
             isEnabledByDefault: false);
@@ -46,12 +62,8 @@ public class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind, Switc
     protected override Location GetKeywordLocation(SwitchStatementSyntax statement) =>
         statement.SwitchKeyword.GetLocation();
 
-    private static bool HasOneLine(SwitchSectionSyntax switchSection)
-    {
-        var statements = switchSection.Statements.Where(x => !x.IsAnyKind(IgnoredStatementsInSwitch)).ToArray();
-
-        return statements.Length is 0
-               // Statements can be multiline, we make sure the statement is on a single line.
-               || (statements.Length is 1 && statements[0].GetLocation().GetLineSpan() is var lineSpan && lineSpan.StartLinePosition.Line == lineSpan.EndLinePosition.Line);
-    }
+    private static bool HasOneLine(SwitchSectionSyntax switchSection) =>
+        switchSection.Statements
+            .SelectMany(x => x.DescendantNodesAndSelf(descendIntoChildren: c => c.IsAnyKind(TransparentSyntax)))
+            .Count(x => !x.IsAnyKind(IgnoredStatementsInSwitch)) is 0 or 1;
 }
