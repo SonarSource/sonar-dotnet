@@ -41,13 +41,15 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var issueFinder = new IssueFinder(classSymbol, c.SemanticModel);
-                    foreach (var diagnostic in classDeclaration.Members.Select(issueFinder.FindIssue).WhereNotNull())
+                    foreach (var issue in classDeclaration.Members.Select(issueFinder.FindIssue).WhereNotNull())
                     {
-                        c.ReportIssue(diagnostic);
+                        c.ReportIssue(Rule, issue.Location, issue.Symbol.ToDisplayString());
                     }
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKindEx.RecordClassDeclaration);
+
+        private record struct Issue(Location Location, ISymbol Symbol);
 
         private sealed class IssueFinder
         {
@@ -68,19 +70,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 allBaseClassProperties = allBaseClassMembers.OfType<IPropertySymbol>().ToList();
             }
 
-            public Diagnostic FindIssue(MemberDeclarationSyntax memberDeclaration)
-            {
-                var memberSymbol = semanticModel.GetDeclaredSymbol(memberDeclaration);
-
-                if (memberSymbol is IMethodSymbol methodSymbol)
+            public Issue? FindIssue(MemberDeclarationSyntax memberDeclaration) =>
+                semanticModel.GetDeclaredSymbol(memberDeclaration) switch
                 {
-                    return FindMethodIssue(memberDeclaration, methodSymbol);
-                }
+                    IMethodSymbol methodSymbol => FindMethodIssue(memberDeclaration, methodSymbol),
+                    IPropertySymbol propertySymbol => FindPropertyIssue(memberDeclaration, propertySymbol),
+                    _ => null,
+                };
 
-                return memberSymbol is IPropertySymbol propertySymbol ? FindPropertyIssue(memberDeclaration, propertySymbol) : null;
-            }
-
-            private Diagnostic FindMethodIssue(MemberDeclarationSyntax memberDeclaration, IMethodSymbol methodSymbol)
+            private Issue? FindMethodIssue(MemberDeclarationSyntax memberDeclaration, IMethodSymbol methodSymbol)
             {
                 if (memberDeclaration is not MethodDeclarationSyntax methodDeclaration
                     || methodDeclaration.Modifiers.Any(SyntaxKind.NewKeyword))
@@ -96,14 +94,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     var location = methodDeclaration.Identifier.GetLocation();
                     if (location != null)
                     {
-                        return Diagnostic.Create(Rule, location, hidingMethod);
+                        return new(location, hidingMethod);
                     }
                 }
 
                 return null;
             }
 
-            private Diagnostic FindPropertyIssue(MemberDeclarationSyntax memberDeclaration, IPropertySymbol propertySymbol)
+            private Issue? FindPropertyIssue(MemberDeclarationSyntax memberDeclaration, IPropertySymbol propertySymbol)
             {
                 if (memberDeclaration is not PropertyDeclarationSyntax propertyDeclaration
                     || propertyDeclaration.Modifiers.Any(SyntaxKind.NewKeyword))
@@ -115,7 +113,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (hidingProperty != null)
                 {
                     var location = propertyDeclaration.Identifier.GetLocation();
-                    return Diagnostic.Create(Rule, location, hidingProperty);
+                    return new(location, hidingProperty);
                 }
 
                 return null;
