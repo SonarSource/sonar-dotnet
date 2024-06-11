@@ -25,7 +25,6 @@ public abstract class TooManyLabelsInSwitchBase<TSyntaxKind, TSwitchStatementSyn
     where TSwitchStatementSyntax : SyntaxNode
 {
     protected const string MessageFormat = "Consider reworking this '{0}' to reduce the number of '{1}' clauses to at most {{0}} or have only one statement per '{1}'.";
-
     protected const string DiagnosticId = "S1479";
     private const int DefaultValueMaximum = 30;
 

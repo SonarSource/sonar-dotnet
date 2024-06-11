@@ -26,7 +26,7 @@ namespace Tests.Diagnostics
                     break;
             }
 
-            switch(n) // Noncompliant
+            switch(n) // Noncompliant - Blocks are multiline statements
             {
                 case 0:
                     {
@@ -45,6 +45,7 @@ namespace Tests.Diagnostics
                     }
             }
 
+            // Testing mutli-line statements ending with a break
             switch(n) // Noncompliant
             {
                 case 0:
@@ -59,6 +60,7 @@ namespace Tests.Diagnostics
                     break;
             }
 
+            // Testing mutli-line statements ending with a return
             switch(n) // Noncompliant
             {
                 case 0:
@@ -73,6 +75,7 @@ namespace Tests.Diagnostics
                     break;
             }
 
+            // Testing mutli-line statements ending with a throw
             switch(n) // Noncompliant
             {
                 case 0:

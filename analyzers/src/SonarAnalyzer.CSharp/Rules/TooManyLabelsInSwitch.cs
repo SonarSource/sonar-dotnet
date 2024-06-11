@@ -51,6 +51,7 @@ public class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind, Switc
         var statements = switchSection.Statements.Where(x => !x.IsAnyKind(IgnoredStatementsInSwitch)).ToArray();
 
         return statements.Length is 0
+               // Statements can be multiline, we make sure the statement is on a single line.
                || (statements.Length is 1 && statements[0].GetLocation().GetLineSpan() is var lineSpan && lineSpan.StartLinePosition.Line == lineSpan.EndLinePosition.Line);
     }
 }
