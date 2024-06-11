@@ -49,14 +49,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var typeDeclaration = (BaseTypeDeclarationSyntax)c.Node;
                     var implementedTypes = typeDeclaration.BaseList?.Types;
-                    if (implementedTypes == null || c.IsRedundantPositionalRecordContext())
+                    if (implementedTypes is null || c.IsRedundantPositionalRecordContext())
                     {
                         return;
                     }
 
-                    List<Diagnostic> issues = null;
+                    List<Issue> issues = null;
                     var containingType = (INamedTypeSymbol)c.ContainingSymbol;
-                    foreach (var typeSymbol in containingType.Interfaces.Concat(new[] { containingType.BaseType }).WhereNotNull())
+                    foreach (var typeSymbol in containingType.Interfaces.Concat([containingType.BaseType]).WhereNotNull())
                     {
                         if (typeSymbol.OriginalDefinition.IsAny(GenericTypes))
                         {
@@ -65,12 +65,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
                         if (SuggestGenericCollectionType(typeSymbol) is { } suggestedGenericType)
                         {
-                            issues ??= new();
-                            issues.Add(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(), suggestedGenericType));
+                            issues ??= [];
+                            issues.Add(new(typeDeclaration.Identifier, suggestedGenericType));
                         }
                     }
 
-                    issues?.ForEach(d => c.ReportIssue(d));
+                    issues?.ForEach(x => c.ReportIssue(Rule, x.Identifier, x.SuggestedGenericType));
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration,
@@ -79,5 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static string SuggestGenericCollectionType(ITypeSymbol typeSymbol) =>
             NonGenericToGenericMapping.FirstOrDefault(pair => pair.Key.Matches(typeSymbol)).Value;
+
+        private readonly record struct Issue(SyntaxToken Identifier, string SuggestedGenericType);
     }
 }
