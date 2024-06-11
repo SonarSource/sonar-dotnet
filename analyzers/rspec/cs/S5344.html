@@ -135,7 +135,7 @@ using System.Security.Cryptography;
 RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider();
 byte[] salt = new byte[32];
 rngCsp.GetBytes(salt);
-Rfc2898DeriveBytes kdf = new Rfc2898DeriveBytes(password, salt, 100_000, HashAlgorithmName.SHA256); // Noncompliant
+Rfc2898DeriveBytes kdf = new Rfc2898DeriveBytes(password, salt, 100_000, HashAlgorithmName.SHA256); // Compliant
 string hashed = Convert.ToBase64String(kdf.GetBytes(256 / 8));
 </pre>
 <h3>How does this work?</h3>

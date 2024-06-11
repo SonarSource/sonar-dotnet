@@ -4,11 +4,11 @@
 <pre>
 class UninvokedEventSample
 {
-    private event Action&lt;object, EventArgs&gt; Happened; //Noncompliant
+    private event Action&lt;object, EventArgs&gt; Happened; // Noncompliant
 
     public void RegisterEventHandler(Action&lt;object, EventArgs&gt; handler)
     {
-        Happened += handler; //we register some event handlers
+        Happened += handler; // we register some event handlers
     }
 
     public void RaiseEvent()
