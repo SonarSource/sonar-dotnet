@@ -74,24 +74,19 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
     private static bool HasDefaultClause(SwitchStatementSyntax switchStatement) =>
         switchStatement.Sections.SelectMany(x => x.Labels).Any(x => x.IsKind(SyntaxKind.DefaultSwitchLabel));
 
-    private static void CheckStatement(SonarSyntaxNodeReportingContext context, SyntaxNode node, IReadOnlyList<SyntaxNode> precedingStatements, SemanticModel model, bool hasElse, string discriminator)
+    private static void CheckStatement(SonarSyntaxNodeReportingContext context, SyntaxNode node, IReadOnlyList<SyntaxNode> precedingBranches, SemanticModel model, bool hasElse, string discriminator)
     {
         var numberOfStatements = GetStatementsCount(node);
         if (!hasElse && numberOfStatements == 1)
         {
-            var equivalentStatements = precedingStatements.Where(x => AreEquivalentStatements(node, x, model));
-            if (equivalentStatements.Any() && equivalentStatements.Count() == precedingStatements.Count)
+            if (precedingBranches.Any() && precedingBranches.All(x => AreEquivalentStatements(node, x, model)))
             {
-                ReportSyntaxNode(context, node, equivalentStatements.First(), discriminator);
+                ReportSyntaxNode(context, node, precedingBranches[0], discriminator);
             }
         }
-        else if (numberOfStatements > 1)
+        else if (numberOfStatements > 1 && precedingBranches.FirstOrDefault(x => AreEquivalentStatements(node, x, model)) is { } equivalentStatement)
         {
-            var equivalentStatement = precedingStatements.FirstOrDefault(x => AreEquivalentStatements(node, x, model));
-            if (equivalentStatement is not null)
-            {
-                ReportSyntaxNode(context, node, equivalentStatement, discriminator);
-            }
+            ReportSyntaxNode(context, node, equivalentStatement, discriminator);
         }
     }
 
@@ -107,6 +102,7 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
 
     private static int GetStatementsCount(SyntaxNode node)
     {
+        // Get all child statements from the node, in case of a switch section, we need to handle the case where the statements are wrapped in a block
         var statements = node is SwitchSectionSyntax switchSection
             ? switchSection.Statements.OfType<BlockSyntax>().SelectMany(x => x.Statements)
                 .Union(switchSection.Statements.Where(x => !x.IsKind(SyntaxKind.Block)))

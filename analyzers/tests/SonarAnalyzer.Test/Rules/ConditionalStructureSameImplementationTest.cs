@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -38,7 +37,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void ConditionalStructureSameImplementation_Switch_CSharp() =>
-            builderCS.AddPaths("ConditionalStructureSameImplementation_Switch.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builderCS.AddPaths("ConditionalStructureSameImplementation_Switch.cs").Verify();
 
         [TestMethod]
         public void ConditionalStructureSameImplementation_If_VisualBasic() =>
@@ -49,6 +48,9 @@ namespace SonarAnalyzer.Test.Rules
             builderVB.AddPaths("ConditionalStructureSameImplementation_Switch.vb").Verify();
 
 #if NET
+        [TestMethod]
+        public void ConditionalStructureSameImplementation_Switch_CSharp_Latest() =>
+            builderCS.AddPaths("ConditionalStructureSameImplementation_Switch.Latest.cs").WithOptions(ParseOptionsHelper.CSharpLatest).VerifyNoIssues();
 
         [TestMethod]
         public void ConditionalStructureSameImplementation_RazorFile_CorrectMessage() =>

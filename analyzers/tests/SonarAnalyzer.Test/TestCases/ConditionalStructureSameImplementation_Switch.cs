@@ -283,16 +283,6 @@ namespace Tests.TestCases
             }
         }
 
-        public int SwitchExpression(int a)
-        {
-            return a switch
-            {
-                10 => a * 2,
-                20 => a * 2,
-                50 => a * 2,
-            };
-        }
-
     }
 
     public static class IntExtension
