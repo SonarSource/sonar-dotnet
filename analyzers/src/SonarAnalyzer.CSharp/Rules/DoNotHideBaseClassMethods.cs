@@ -41,13 +41,15 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var issueFinder = new IssueFinder(declaredSymbol, c.SemanticModel);
-                    foreach (var diagnostic in declarationSyntax.Members.Select(issueFinder.FindIssue).WhereNotNull())
+                    foreach (var issue in declarationSyntax.Members.Select(issueFinder.FindIssue).WhereNotNull())
                     {
-                        c.ReportIssue(diagnostic);
+                        c.ReportIssue(Rule, issue.Location, issue.HiddenBaseMethod.ToDisplayString());
                     }
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKindEx.RecordClassDeclaration);
+
+        private readonly record struct Issue(Location Location, IMethodSymbol HiddenBaseMethod);
 
         private sealed class IssueFinder
         {
@@ -67,17 +69,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 allBaseTypeMethods = GetAllBaseMethods(typeSymbol);
             }
 
-            public Diagnostic FindIssue(MemberDeclarationSyntax memberDeclaration)
+            public Issue? FindIssue(MemberDeclarationSyntax memberDeclaration)
             {
                 var issueLocation = (memberDeclaration as MethodDeclarationSyntax)?.Identifier.GetLocation();
 
-                if (semanticModel.GetDeclaredSymbol(memberDeclaration) is not IMethodSymbol methodSymbol || issueLocation == null)
+                if (issueLocation is null || semanticModel.GetDeclaredSymbol(memberDeclaration) is not IMethodSymbol methodSymbol)
                 {
                     return null;
                 }
 
                 var baseMethodHidden = FindBaseMethodHiddenByMethod(methodSymbol);
-                return baseMethodHidden != null ? Diagnostic.Create(Rule, issueLocation, baseMethodHidden) : null;
+                return baseMethodHidden is not null ? new(issueLocation, baseMethodHidden) : null;
             }
 
             private static List<IMethodSymbol> GetAllBaseMethods(ITypeSymbol typeSymbol) =>
