@@ -337,18 +337,18 @@ public partial class SonarAnalysisContextTest
                 compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
                 {
                     symbolStartContext.RegisterCodeBlockAction(codeBlockContext =>
-                        codeBlockContext.ReportIssue(CreateDiagnostic("CodeBlock")));
+                        codeBlockContext.ReportIssue(diagnosticDescriptor, LocationInTree(), "CodeBlock"));
                     symbolStartContext.RegisterCodeBlockStartAction<SyntaxKind>(codeBlockStartContext =>
                     {
                         codeBlockStartContext.RegisterNodeAction(nodeContext =>
-                            nodeContext.ReportIssue(CreateDiagnostic("CodeBlockStart_Node")), SyntaxKind.InvocationExpression);
+                            nodeContext.ReportIssue(diagnosticDescriptor, LocationInTree(), "CodeBlockStart_Node"), SyntaxKind.InvocationExpression);
                         codeBlockStartContext.RegisterCodeBlockEndAction(codeBlockEndContext =>
-                            codeBlockEndContext.ReportIssue(CreateDiagnostic("CodeBlockStart_End")));
+                            codeBlockEndContext.ReportIssue(diagnosticDescriptor, LocationInTree(), "CodeBlockStart_End"));
                     });
                     symbolStartContext.RegisterSymbolEndAction(symbolEndContext =>
-                        symbolEndContext.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, CreateDiagnostic("SymbolEnd")));
+                        symbolEndContext.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, diagnosticDescriptor, LocationInTree(), "SymbolEnd"));
                     symbolStartContext.RegisterSyntaxNodeAction(nodeContext =>
-                        nodeContext.ReportIssue(CreateDiagnostic("Node")), SyntaxKind.InvocationExpression);
+                        nodeContext.ReportIssue(diagnosticDescriptor, LocationInTree(), "Node"), SyntaxKind.InvocationExpression);
                 },
             SymbolKind.NamedType)));
         var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(analyzer));
@@ -357,7 +357,7 @@ public partial class SonarAnalysisContextTest
         // Ordering is only partially guaranteed and therefore we use BeEquivalentTo https://github.com/dotnet/roslyn/blob/main/docs/analyzers/Analyzer%20Actions%20Semantics.md
         diagnostics.Select(x => x.GetMessage()).Should().BeEquivalentTo(expectedDiagnostics);
 
-        Diagnostic CreateDiagnostic(string message) => Diagnostic.Create(diagnosticDescriptor, Location.Create(snippet.SyntaxTree, TextSpan.FromBounds(0, 0)), message);
+        Location LocationInTree() => Location.Create(snippet.SyntaxTree, TextSpan.FromBounds(0, 0));
     }
 
     [TestMethod]

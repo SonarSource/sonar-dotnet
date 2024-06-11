@@ -46,5 +46,5 @@ public abstract class DummyAnalyzer<TSyntaxKind> : SonarDiagnosticAnalyzer where
     protected abstract TSyntaxKind NumericLiteralExpression { get; }
 
     protected sealed override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(TestGeneratedCodeRecognizer.Instance, c => c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation())), NumericLiteralExpression);
+        context.RegisterNodeAction(TestGeneratedCodeRecognizer.Instance, c => c.ReportIssue(rule, c.Node), NumericLiteralExpression);
 }
