@@ -352,7 +352,7 @@ public partial class SonarAnalysisContextTest
                         nodeContext.ReportIssue(diagnosticDescriptor, location, "Node"), SyntaxKind.InvocationExpression);
                 },
             SymbolKind.NamedType)));
-        var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(analyzer));
+        var compilation = snippet.Compilation.WithAnalyzers([analyzer]);
         var diagnostics = await compilation.GetAllDiagnosticsAsync();
         diagnostics.Should().HaveCount(expectedDiagnostics.Length);
         // Ordering is only partially guaranteed and therefore we use BeEquivalentTo https://github.com/dotnet/roslyn/blob/main/docs/analyzers/Analyzer%20Actions%20Semantics.md
