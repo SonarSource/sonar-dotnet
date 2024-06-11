@@ -20,95 +20,94 @@
 
 using SonarAnalyzer.CFG.Helpers;
 
-namespace SonarAnalyzer.CFG.LiveVariableAnalysis
+namespace SonarAnalyzer.CFG.LiveVariableAnalysis;
+
+public abstract class LiveVariableAnalysisBase<TCfg, TBlock>
 {
-    public abstract class LiveVariableAnalysisBase<TCfg, TBlock>
+    protected readonly ISymbol originalDeclaration;
+    protected readonly CancellationToken Cancel;
+    private readonly IDictionary<TBlock, HashSet<ISymbol>> blockLiveOut = new Dictionary<TBlock, HashSet<ISymbol>>();
+    private readonly IDictionary<TBlock, HashSet<ISymbol>> blockLiveIn = new Dictionary<TBlock, HashSet<ISymbol>>();
+    private readonly HashSet<ISymbol> captured = new();
+
+    public abstract bool IsLocal(ISymbol symbol);
+    protected abstract TBlock ExitBlock { get; }
+    protected abstract State ProcessBlock(TBlock block);
+    protected abstract IEnumerable<TBlock> ReversedBlocks();
+    protected abstract IEnumerable<TBlock> Successors(TBlock block);
+    protected abstract IEnumerable<TBlock> Predecessors(TBlock block);
+
+    public TCfg Cfg { get; }
+    public IReadOnlyCollection<ISymbol> CapturedVariables => captured;
+
+    protected LiveVariableAnalysisBase(TCfg cfg, ISymbol originalDeclaration, CancellationToken cancel)
     {
-        protected readonly ISymbol originalDeclaration;
-        protected readonly CancellationToken Cancel;
-        private readonly IDictionary<TBlock, HashSet<ISymbol>> blockLiveOut = new Dictionary<TBlock, HashSet<ISymbol>>();
-        private readonly IDictionary<TBlock, HashSet<ISymbol>> blockLiveIn = new Dictionary<TBlock, HashSet<ISymbol>>();
-        private readonly HashSet<ISymbol> captured = new();
+        Cfg = cfg;
+        this.originalDeclaration = originalDeclaration;
+        this.Cancel = cancel;
+    }
 
-        public abstract bool IsLocal(ISymbol symbol);
-        protected abstract TBlock ExitBlock { get; }
-        protected abstract State ProcessBlock(TBlock block);
-        protected abstract IEnumerable<TBlock> ReversedBlocks();
-        protected abstract IEnumerable<TBlock> Successors(TBlock block);
-        protected abstract IEnumerable<TBlock> Predecessors(TBlock block);
+    /// <summary>
+    /// LiveIn variables are alive when entering block. They are read inside the block or any of it's successors.
+    /// </summary>
+    public IReadOnlyCollection<ISymbol> LiveIn(TBlock block) =>
+        blockLiveIn[block].Except(captured).ToImmutableArray();
 
-        public TCfg Cfg { get; }
-        public IReadOnlyCollection<ISymbol> CapturedVariables => captured;
+    /// <summary>
+    /// LiveOut variables are alive when exiting block. They are read in any of it's successors.
+    /// </summary>
+    public IReadOnlyCollection<ISymbol> LiveOut(TBlock block) =>
+        blockLiveOut[block].Except(captured).ToImmutableArray();
 
-        protected LiveVariableAnalysisBase(TCfg cfg, ISymbol originalDeclaration, CancellationToken cancel)
+    protected void Analyze()
+    {
+        var states = new Dictionary<TBlock, State>();
+        var queue = new UniqueQueue<TBlock>();
+        foreach (var block in ReversedBlocks())
         {
-            Cfg = cfg;
-            this.originalDeclaration = originalDeclaration;
-            this.Cancel = cancel;
+            var state = ProcessBlock(block);
+            captured.UnionWith(state.Captured);
+            states.Add(block, state);
+            blockLiveIn.Add(block, new HashSet<ISymbol>());
+            blockLiveOut.Add(block, new HashSet<ISymbol>());
+            queue.Enqueue(block);
         }
-
-        /// <summary>
-        /// LiveIn variables are alive when entering block. They are read inside the block or any of it's successors.
-        /// </summary>
-        public IReadOnlyCollection<ISymbol> LiveIn(TBlock block) =>
-            blockLiveIn[block].Except(captured).ToImmutableArray();
-
-        /// <summary>
-        /// LiveOut variables are alive when exiting block. They are read in any of it's successors.
-        /// </summary>
-        public IReadOnlyCollection<ISymbol> LiveOut(TBlock block) =>
-            blockLiveOut[block].Except(captured).ToImmutableArray();
-
-        protected void Analyze()
+        while (queue.Any())
         {
-            var states = new Dictionary<TBlock, State>();
-            var queue = new UniqueQueue<TBlock>();
-            foreach (var block in ReversedBlocks())
-            {
-                var state = ProcessBlock(block);
-                captured.UnionWith(state.Captured);
-                states.Add(block, state);
-                blockLiveIn.Add(block, new HashSet<ISymbol>());
-                blockLiveOut.Add(block, new HashSet<ISymbol>());
-                queue.Enqueue(block);
-            }
-            while (queue.Any())
-            {
-                Cancel.ThrowIfCancellationRequested();
+            Cancel.ThrowIfCancellationRequested();
 
-                var block = queue.Dequeue();
-                var liveOut = blockLiveOut[block];
-                // note that on the PHP LVA impl, the `liveOut` gets cleared before being updated
-                foreach (var successorLiveIn in Successors(block).Select(x => blockLiveIn[x]).Where(x => x.Any()))
+            var block = queue.Dequeue();
+            var liveOut = blockLiveOut[block];
+            // note that on the PHP LVA impl, the `liveOut` gets cleared before being updated
+            foreach (var successorLiveIn in Successors(block).Select(x => blockLiveIn[x]).Where(x => x.Any()))
+            {
+                liveOut.UnionWith(successorLiveIn);
+            }
+            // liveIn = UsedBeforeAssigned + (LiveOut - Assigned)
+            var liveIn = states[block].UsedBeforeAssigned.Concat(liveOut.Except(states[block].Assigned)).ToHashSet();
+            // Don't enqueue predecessors if nothing changed.
+            if (!liveIn.SetEquals(blockLiveIn[block]))
+            {
+                blockLiveIn[block] = liveIn;
+                foreach (var predecessor in Predecessors(block))
                 {
-                    liveOut.UnionWith(successorLiveIn);
-                }
-                // liveIn = UsedBeforeAssigned + (LiveOut - Assigned)
-                var liveIn = states[block].UsedBeforeAssigned.Concat(liveOut.Except(states[block].Assigned)).ToHashSet();
-                // Don't enqueue predecessors if nothing changed.
-                if (!liveIn.SetEquals(blockLiveIn[block]))
-                {
-                    blockLiveIn[block] = liveIn;
-                    foreach (var predecessor in Predecessors(block))
-                    {
-                        queue.Enqueue(predecessor);
-                    }
+                    queue.Enqueue(predecessor);
                 }
             }
-            if (blockLiveOut[ExitBlock].Any())
-            {
-                throw new InvalidOperationException("Out of exit block should be empty");
-            }
         }
-
-        protected class State
+        if (blockLiveOut[ExitBlock].Any())
         {
-            public ISet<ISymbol> Assigned { get; } = new HashSet<ISymbol>();            // Kill: The set of variables that are assigned a value.
-            public ISet<ISymbol> UsedBeforeAssigned { get; } = new HashSet<ISymbol>();  // Gen:  The set of variables that are used before any assignment.
-            public ISet<ISymbol> ProcessedLocalFunctions { get; } = new HashSet<ISymbol>();
-            public ISet<ISymbol> Captured { get; } = new HashSet<ISymbol>();
-
-            protected State() { }
+            throw new InvalidOperationException("Out of exit block should be empty");
         }
+    }
+
+    protected class State
+    {
+        public ISet<ISymbol> Assigned { get; } = new HashSet<ISymbol>();            // Kill: The set of variables that are assigned a value.
+        public ISet<ISymbol> UsedBeforeAssigned { get; } = new HashSet<ISymbol>();  // Gen:  The set of variables that are used before any assignment.
+        public ISet<ISymbol> ProcessedLocalFunctions { get; } = new HashSet<ISymbol>();
+        public ISet<ISymbol> Captured { get; } = new HashSet<ISymbol>();
+
+        protected State() { }
     }
 }
