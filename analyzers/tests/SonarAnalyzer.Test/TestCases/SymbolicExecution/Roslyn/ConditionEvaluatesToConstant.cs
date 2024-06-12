@@ -4292,4 +4292,21 @@ class Repro_9204_8885_AssignmentOfCaptures
             elapsed = true; // Assignment in event handler
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/9425
+    class Repro9425
+    {
+        int Id { get; set; }
+        bool Flag { get; set; }
+
+        void Test(List<Repro9425> aList)
+        {
+            List<int> collectionOfIds = new List<int>();
+            aList.FindAll(x => x.Flag).ForEach(x => collectionOfIds.Add(x.Id));
+
+            // FP@+1
+            if (collectionOfIds.Count > 0) // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
+            { }
+        }
+    }
 }

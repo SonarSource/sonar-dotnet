@@ -1204,3 +1204,17 @@ static class Repro_8041
         IEnumerable<T> Successors { get; }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9425
+class Repro9425
+{
+    int Id { get; set; }
+    bool Flag { get; set; }
+
+    void Test(List<Repro9425> aList)
+    {
+        List<int> collectionOfIds = new List<int>();
+        aList.FindAll(x => x.Flag).ForEach(x => collectionOfIds.Add(x.Id));
+        collectionOfIds.Clear();  // Noncompliant FP
+    }
+}
