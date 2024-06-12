@@ -26,9 +26,9 @@ public partial class RoslynLiveVariableAnalysisTest
     public void StaticLocalFunction_Expression_LiveIn()
     {
         var code = """
-outParameter = LocalFunction(intParameter);
-static int LocalFunction(int a) => a + 1;
-""";
+            outParameter = LocalFunction(intParameter);
+            static int LocalFunction(int a) => a + 1;
+            """;
         var context = CreateContextCS(code, "LocalFunction", "out int outParameter");
         context.ValidateEntry(LiveIn("a"), LiveOut("a"));
         context.Validate("a + 1", LiveIn("a"));

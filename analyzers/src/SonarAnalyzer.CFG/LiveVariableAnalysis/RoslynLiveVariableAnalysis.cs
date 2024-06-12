@@ -24,8 +24,8 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis;
 
 public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<ControlFlowGraph, BasicBlock>
 {
-    private readonly Dictionary<int, List<BasicBlock>> blockPredecessors = new();
-    private readonly Dictionary<int, List<BasicBlock>> blockSuccessors = new();
+    private readonly Dictionary<int, List<BasicBlock>> blockPredecessors = [];
+    private readonly Dictionary<int, List<BasicBlock>> blockSuccessors = [];
 
     protected override BasicBlock ExitBlock => Cfg.ExitBlock;
 
@@ -34,8 +34,8 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
     {
         foreach (var ordinal in cfg.Blocks.Select(x => x.Ordinal))
         {
-            blockPredecessors.Add(ordinal, new());
-            blockSuccessors.Add(ordinal, new());
+            blockPredecessors.Add(ordinal, []);
+            blockSuccessors.Add(ordinal, []);
         }
         foreach (var block in cfg.Blocks)
         {
@@ -78,7 +78,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
     {
         foreach (var successor in block.Successors)
         {
-            if (successor.Destination != null)
+            if (successor.Destination is null)
             {
                 // When exiting finally region, redirect to finally instead of the normal destination
                 AddBranch(successor.Source, successor.FinallyRegions.Any() ? Cfg.Blocks[successor.FinallyRegions.First().FirstBlockOrdinal] : successor.Destination);
