@@ -95,7 +95,7 @@
         End Function
 
         Public Function FalseNegatives(a As Integer) As Integer
-            Select Case a ' FN
+            Select Case a ' Noncompliant
                 Case 1
                     Return 1
                 Case 2
@@ -103,10 +103,10 @@
                 Case 3
                     Return 3
                 Case 4
-                    If a > 42 Then Return 21 ' This is one statement
+                    If a > 42 Then Return 21
                     Return 42
                 Case 5
-                    If a > 42 Then Return 21 Else If a < 21 Then Return 3 ' This is one statement
+                    If a > 42 Then Return 21 Else If a < 21 Then Return 3
                     Return 42
                 Case Else
                     Return 0

@@ -28,17 +28,22 @@ public class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind, Switc
     private static readonly ISet<SyntaxKind> TransparentSyntax = new HashSet<SyntaxKind>
     {
         SyntaxKind.Block,
-        SyntaxKind.IfStatement,
-        SyntaxKind.SwitchStatement,
-        SyntaxKind.TryStatement,
-        SyntaxKind.WhileStatement,
+        SyntaxKind.CatchClause,
+        SyntaxKind.CheckedStatement,
         SyntaxKind.DoStatement,
-        SyntaxKind.ForStatement,
+        SyntaxKind.FinallyClause,
+        SyntaxKind.FixedStatement,
         SyntaxKind.ForEachStatement,
         SyntaxKindEx.ForEachVariableStatement,
-        SyntaxKind.UsingStatement,
+        SyntaxKind.ForStatement,
+        SyntaxKind.IfStatement,
         SyntaxKind.LockStatement,
-        SyntaxKind.CatchClause
+        SyntaxKind.SwitchStatement,
+        SyntaxKind.TryStatement,
+        SyntaxKind.UncheckedStatement,
+        SyntaxKind.UnsafeStatement,
+        SyntaxKind.UsingStatement,
+        SyntaxKind.WhileStatement
     };
 
     protected override DiagnosticDescriptor Rule { get; } =

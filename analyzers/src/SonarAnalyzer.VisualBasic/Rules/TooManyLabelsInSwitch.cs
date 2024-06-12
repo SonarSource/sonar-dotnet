@@ -25,6 +25,36 @@ public sealed class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind
 {
     private static readonly ISet<SyntaxKind> IgnoredStatementsInSwitch = new HashSet<SyntaxKind> { SyntaxKind.ReturnStatement, SyntaxKind.ThrowStatement };
 
+    private static readonly ISet<SyntaxKind> TransparentSyntax = new HashSet<SyntaxKind>
+    {
+        SyntaxKind.CatchBlock,
+        SyntaxKind.CaseBlock,
+        SyntaxKind.DoWhileStatement,
+        SyntaxKind.DoLoopUntilBlock,
+        SyntaxKind.DoWhileLoopBlock,
+        SyntaxKind.DoLoopWhileBlock,
+        SyntaxKind.ElseIfBlock,
+        SyntaxKind.ElseIfStatement,
+        SyntaxKind.FinallyBlock,
+        SyntaxKind.FinallyStatement,
+        SyntaxKind.ForEachBlock,
+        SyntaxKind.ForEachStatement,
+        SyntaxKind.ForBlock,
+        SyntaxKind.ForStatement,
+        SyntaxKind.IfStatement,
+        SyntaxKind.MultiLineIfBlock,
+        SyntaxKind.SelectBlock,
+        SyntaxKind.SelectStatement,
+        SyntaxKind.SingleLineIfStatement,
+        SyntaxKind.SingleLineElseClause,
+        SyntaxKind.TryBlock,
+        SyntaxKind.TryStatement,
+        SyntaxKind.UsingBlock,
+        SyntaxKind.UsingStatement,
+        SyntaxKind.WhileBlock,
+        SyntaxKind.WhileStatement
+    };
+
     protected override DiagnosticDescriptor Rule { get; } =
         DescriptorFactory.Create(DiagnosticId, string.Format(MessageFormat, "Select Case", "Case"),
             isEnabledByDefault: false);
@@ -46,12 +76,8 @@ public sealed class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind
     protected override Location GetKeywordLocation(SelectStatementSyntax statement) =>
         statement.SelectKeyword.GetLocation();
 
-    private static bool HasOneLine(CaseBlockSyntax switchSection)
-    {
-        var statements = switchSection.Statements.Where(x => !x.IsAnyKind(IgnoredStatementsInSwitch)).ToArray();
-
-        return statements.Length is 0
-               // Statements can be multiline, we make sure the statement is on a single line.
-               || (statements.Length is 1 && statements[0].GetLocation().GetLineSpan() is var lineSpan && lineSpan.StartLinePosition.Line == lineSpan.EndLinePosition.Line);
-    }
+    private static bool HasOneLine(CaseBlockSyntax switchSection) =>
+        switchSection.Statements
+            .SelectMany(x => x.DescendantNodesAndSelf(descendIntoChildren: c => c.IsAnyKind(TransparentSyntax)))
+            .Count(x => !x.IsAnyKind(IgnoredStatementsInSwitch)) is 0 or 1;
 }
