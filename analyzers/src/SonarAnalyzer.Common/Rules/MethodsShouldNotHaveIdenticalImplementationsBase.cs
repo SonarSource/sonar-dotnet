@@ -92,8 +92,8 @@ public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TSyntaxKi
         && rightParameterType is INamedTypeSymbol { IsGenericType: true } namedTypeRight
         && namedTypeLeft.TypeArguments.Length == namedTypeRight.TypeArguments.Length
         && namedTypeLeft.TypeArguments.Equals(namedTypeRight.TypeArguments, (x, y) =>
-            x is ITypeParameterSymbol a
-                ? y is ITypeParameterSymbol b && a.Name == b.Name
+            x is ITypeParameterSymbol || y is ITypeParameterSymbol
+                ? x is  ITypeParameterSymbol a && y is ITypeParameterSymbol b && a.Name == b.Name
                 : TypesAreSame(x, y));
 
     private static bool TypeParametersHaveSameNameAndConstraints(ITypeSymbol leftParameterType, ITypeSymbol rightParameterType) =>
