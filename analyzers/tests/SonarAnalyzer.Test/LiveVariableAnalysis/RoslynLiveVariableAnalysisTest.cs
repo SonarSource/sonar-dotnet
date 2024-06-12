@@ -63,7 +63,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void ProcessParameterReference_UsedAsOutArgument_NotLiveIn_NotLiveOut()
     {
-        var code = """Main(true, 0, out outParameter, ref refParameter);""";
+        var code = "Main(true, 0, out outParameter, ref refParameter);";
         var context = CreateContextCS(code, additionalParameters: "out int outParameter, ref int refParameter");
         context.ValidateEntry(LiveIn("refParameter"), LiveOut("refParameter"));
         context.Validate(code, LiveIn("refParameter"));
@@ -72,7 +72,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void ProcessParameterReference_InNameOf_NotLiveIn_NotLiveOut()
     {
-        var code = """Method(nameof(intParameter));""";
+        var code = "Method(nameof(intParameter));";
         CreateContextCS(code).ValidateAllEmpty();
     }
 
@@ -93,7 +93,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void ProcessParameterReference_MemberBinding_LiveIn()
     {
-        var code = """Method(intParameter.ToString());""";
+        var code = "Method(intParameter.ToString());";
         var context = CreateContextCS(code);
         context.ValidateEntry(LiveIn("intParameter"), LiveOut("intParameter"));
         context.Validate("Method(intParameter.ToString());", LiveIn("intParameter"));
@@ -102,7 +102,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void ProcessParameterReference_MemberBindingByReference_LiveIn()
     {
-        var code = """Capturing(intParameter.CompareTo);""";
+        var code = "Capturing(intParameter.CompareTo);";
         var context = CreateContextCS(code);
         context.ValidateEntry(LiveIn("intParameter"), LiveOut("intParameter"));
         context.Validate("Capturing(intParameter.CompareTo);", LiveIn("intParameter"));
@@ -891,7 +891,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void InvokedDelegate_LiveIn()
     {
-        var code = """action();""";
+        var code = "action();";
         var context = CreateContextCS(code, additionalParameters: "Action action");
         context.ValidateEntry(LiveIn("action"), LiveOut("action"));
         context.Validate("action();", LiveIn("action"));
@@ -1102,7 +1102,7 @@ public partial class RoslynLiveVariableAnalysisTest
 
         public void ValidateExit(params Expected[] expected)
         {
-            Array.TrueForAll(expected, x => x.Kind == ExpectedKind.Captured).Should().BeTrue("Exit block should expect only Captured variables.");
+            expected.Should().AllSatisfy(x => x.Kind.Should().Be(ExpectedKind.Captured), "Exit block should expect only Captured variables.");
             Validate(Cfg.ExitBlock, null, expected);
         }
 

@@ -66,7 +66,7 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void ShouldAnalyzeTree_Scanner_UnchangedFiles_ContainsOtherFile()
     {
-        var options = CreateOptions(["ThisIsNotInCompilation.cs", "SomethingElse.cs"]);
+        var options = CreateOptions(new[] { "ThisIsNotInCompilation.cs", "SomethingElse.cs" });
 
         ShouldAnalyzeTree(options).Should().BeTrue();
     }
@@ -76,7 +76,8 @@ public partial class SonarAnalysisContextBaseTest
     {
         // The generated files have a different root that is not absolute and might not exist on disk.
         const string generatedFileName = "Microsoft.NET.Sdk.Razor.SourceGenerators\\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\\Pages_Component_razor.g";
-        const string content = """
+        const string content =
+            """
             #pragma checksum "C:\Component.razor" "{8829d00f-11b8-4213-878b-770e8597ac16}" "35c3e85c77eb4f50f311a96f96be44f36c36b570ce2579ec311010076f7ac44d"
             """;
 
@@ -106,7 +107,7 @@ public partial class SonarAnalysisContextBaseTest
         additionalText.Path.Returns("SonarLint.xml");
         additionalText.GetText(default).Returns(sonarLintXml);
         var tree = CreateDummyCompilation(AnalyzerLanguage.CSharp, OtherFileName).Tree;
-        var sut = CreateSut(new AnalyzerOptions([additionalText]));
+        var sut = CreateSut(new AnalyzerOptions(ImmutableArray.Create(additionalText)));
 
         // Call ShouldAnalyzeGenerated multiple times...
         sut.ShouldAnalyzeTree(tree, CSharpGeneratedCodeRecognizer.Instance).Should().BeTrue();
@@ -325,8 +326,8 @@ public partial class SonarAnalysisContextBaseTest
                     Action a = [CompilerGenerated] () => { ;;; };
 
                     Action x = true
-                        ? ([DebuggerNonUserCodeAttribute] () => { ;;; })
-                        : [GenericAttribute<int>] () => { ;;; }; // FN? Empty statement in lambda
+                                    ? ([DebuggerNonUserCodeAttribute] () => { ;;; })
+                                    : [GenericAttribute<int>] () => { ;;; }; // FN? Empty statement in lambda
 
                     Call([DebuggerNonUserCodeAttribute] (x) => { ;;; });
                 }
@@ -480,10 +481,9 @@ public partial class SonarAnalysisContextBaseTest
         private readonly string textToReturn;
 
         public int ToStringCallCount { get; private set; }
+        public override char this[int position] => throw new NotImplementedException();
         public override Encoding Encoding => throw new NotImplementedException();
         public override int Length => throw new NotImplementedException();
-
-        public override char this[int position] => throw new NotImplementedException();
 
         public DummySourceText(string textToReturn) =>
             this.textToReturn = textToReturn;

@@ -100,11 +100,10 @@ public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<I
                     case SyntaxKind.VariableDeclarator:
                         ProcessVariableDeclarator((VariableDeclaratorSyntax)instruction);
                         break;
-
-                    case SyntaxKind.AnonymousMethodExpression
-                    or SyntaxKind.ParenthesizedLambdaExpression
-                    or SyntaxKind.SimpleLambdaExpression
-                    or SyntaxKind.QueryExpression:
+                    case SyntaxKind.AnonymousMethodExpression:
+                    case SyntaxKind.ParenthesizedLambdaExpression:
+                    case SyntaxKind.SimpleLambdaExpression:
+                    case SyntaxKind.QueryExpression:
                         CollectAllCapturedLocal(instruction);
                         break;
                 }

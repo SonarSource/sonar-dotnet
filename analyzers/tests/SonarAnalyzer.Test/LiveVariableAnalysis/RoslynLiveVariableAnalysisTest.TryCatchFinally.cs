@@ -65,7 +65,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Using_Nested_Block_LiveInUntilTheEnd()
     {
-        var code = $$"""
+        var code = """
             using (var msOuter = new MemoryStream())
             {
                 if (boolParameter)
@@ -95,7 +95,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Using_Nested_Declaration_LiveInUntilTheEnd()
     {
-        var code = $$"""
+        var code = """
             using var msOuter = new MemoryStream();
             if (boolParameter)
             {

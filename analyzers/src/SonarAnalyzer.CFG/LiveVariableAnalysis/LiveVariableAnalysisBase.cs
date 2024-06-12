@@ -26,8 +26,8 @@ public abstract class LiveVariableAnalysisBase<TCfg, TBlock>
 {
     protected readonly ISymbol originalDeclaration;
     protected readonly CancellationToken Cancel;
-    private readonly IDictionary<TBlock, HashSet<ISymbol>> blockLiveOut = new Dictionary<TBlock, HashSet<ISymbol>>();
-    private readonly IDictionary<TBlock, HashSet<ISymbol>> blockLiveIn = new Dictionary<TBlock, HashSet<ISymbol>>();
+    private readonly Dictionary<TBlock, HashSet<ISymbol>> blockLiveOut = new();
+    private readonly Dictionary<TBlock, HashSet<ISymbol>> blockLiveIn = new();
     private readonly HashSet<ISymbol> captured = [];
 
     public abstract bool IsLocal(ISymbol symbol);
@@ -50,14 +50,14 @@ public abstract class LiveVariableAnalysisBase<TCfg, TBlock>
     /// <summary>
     /// LiveIn variables are alive when entering block. They are read inside the block or any of it's successors.
     /// </summary>
-    public IReadOnlyCollection<ISymbol> LiveIn(TBlock block) =>
-        blockLiveIn[block].Except(captured).ToImmutableArray();
+    public IEnumerable<ISymbol> LiveIn(TBlock block) =>
+        blockLiveIn[block].Except(captured);
 
     /// <summary>
     /// LiveOut variables are alive when exiting block. They are read in any of it's successors.
     /// </summary>
-    public IReadOnlyCollection<ISymbol> LiveOut(TBlock block) =>
-        blockLiveOut[block].Except(captured).ToImmutableArray();
+    public IEnumerable<ISymbol> LiveOut(TBlock block) =>
+        blockLiveOut[block].Except(captured);
 
     protected void Analyze()
     {
@@ -103,9 +103,9 @@ public abstract class LiveVariableAnalysisBase<TCfg, TBlock>
 
     protected abstract class State
     {
-        public ISet<ISymbol> Assigned { get; } = new HashSet<ISymbol>();            // Kill: The set of variables that are assigned a value.
-        public ISet<ISymbol> UsedBeforeAssigned { get; } = new HashSet<ISymbol>();  // Gen:  The set of variables that are used before any assignment.
-        public ISet<ISymbol> ProcessedLocalFunctions { get; } = new HashSet<ISymbol>();
-        public ISet<ISymbol> Captured { get; } = new HashSet<ISymbol>();
+        public HashSet<ISymbol> Assigned { get; } = [];            // Kill: The set of variables that are assigned a value.
+        public HashSet<ISymbol> UsedBeforeAssigned { get; } = [];  // Gen:  The set of variables that are used before any assignment.
+        public HashSet<ISymbol> ProcessedLocalFunctions { get; } = [];
+        public HashSet<ISymbol> Captured { get; } = [];
     }
 }
