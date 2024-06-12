@@ -78,7 +78,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
     {
         foreach (var successor in block.Successors)
         {
-            if (successor.Destination is null)
+            if (successor.Destination is not null)
             {
                 // When exiting finally region, redirect to finally instead of the normal destination
                 AddBranch(successor.Source, successor.FinallyRegions.Any() ? Cfg.Blocks[successor.FinallyRegions.First().FirstBlockOrdinal] : successor.Destination);
