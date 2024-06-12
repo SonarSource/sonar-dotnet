@@ -101,13 +101,11 @@ public abstract class LiveVariableAnalysisBase<TCfg, TBlock>
         }
     }
 
-    protected class State
+    protected abstract class State
     {
         public ISet<ISymbol> Assigned { get; } = new HashSet<ISymbol>();            // Kill: The set of variables that are assigned a value.
         public ISet<ISymbol> UsedBeforeAssigned { get; } = new HashSet<ISymbol>();  // Gen:  The set of variables that are used before any assignment.
         public ISet<ISymbol> ProcessedLocalFunctions { get; } = new HashSet<ISymbol>();
         public ISet<ISymbol> Captured { get; } = new HashSet<ISymbol>();
-
-        protected State() { }
     }
 }
