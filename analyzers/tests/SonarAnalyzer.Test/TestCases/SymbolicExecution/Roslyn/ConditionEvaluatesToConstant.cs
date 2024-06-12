@@ -4299,7 +4299,7 @@ class Repro_9204_8885_AssignmentOfCaptures
         public int Id { get; set; }
         public bool Flag { get; set; }
 
-        public static void Test(List<Repro> aList)
+        public static void Test(List<Repro9425> aList)
         {
             List<int> collectionOfIds = new List<int>();
             aList.FindAll(x => x.Flag).ForEach(x => collectionOfIds.Add(x.Id));
