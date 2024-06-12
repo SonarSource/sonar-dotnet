@@ -29,5 +29,9 @@ namespace SonarAnalyzer.Helpers
         /// </summary>
         public static bool IsAccessibleOutsideTheType(this Accessibility accessibility) =>
             accessibility == Accessibility.Public || accessibility == Accessibility.Internal || accessibility == Accessibility.ProtectedOrInternal;
+
+        private static void UnusedMethod()
+        {
+        }
     }
 }

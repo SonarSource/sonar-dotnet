@@ -318,6 +318,7 @@ stages:
           projectVersion: '$(SONAR_PROJECT_VERSION)'
           extraProperties: |
             sonar.verbose=true
+            sonar.projectBaseDir="$(Build.SourcesDirectory)"
             sonar.cs.opencover.reportsPaths="$(CoveragePath)/*.xml"
             sonar.cs.vstest.reportsPaths="$(UnitTestResultsPath)/*.trx"
             sonar.test.exclusions="$(UnitTestExclusionsPattern)"
