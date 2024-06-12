@@ -668,7 +668,8 @@ public class SonarLiveVariableAnalysisTest
             }
             else
             {
-                var function = (LocalFunctionStatementSyntaxWrapper)method.DescendantNodes()
+                var function = (LocalFunctionStatementSyntaxWrapper)method
+                    .DescendantNodes()
                     .Single(x => x.IsKind(SyntaxKindEx.LocalFunctionStatement) && ((LocalFunctionStatementSyntaxWrapper)x).Identifier.Text == localFunctionName);
                 symbol = model.GetDeclaredSymbol(function) as IMethodSymbol;
                 body = (CSharpSyntaxNode)function.Body ?? function.ExpressionBody;

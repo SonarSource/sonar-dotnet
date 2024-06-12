@@ -73,10 +73,10 @@ public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<I
 
         public ISet<SyntaxNode> AssignmentLhs { get; } = new HashSet<SyntaxNode>();
 
-        public SonarState(SonarCSharpLiveVariableAnalysis owner, SemanticModel semanticModel)
+        public SonarState(SonarCSharpLiveVariableAnalysis owner, SemanticModel model)
         {
             this.owner = owner;
-            this.model = semanticModel;
+            this.model = model;
         }
 
         public void ProcessBlock(Block block)
@@ -184,7 +184,7 @@ public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<I
                     }
                 }
 
-                if (symbol is IMethodSymbol { MethodKind: MethodKindEx.LocalFunction } method)
+                if (symbol is IMethodSymbol { MethodKind: MethodKindEx.LocalFunction })
                 {
                     ProcessLocalFunction(symbol);
                 }
@@ -205,8 +205,8 @@ public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<I
             if (!ProcessedLocalFunctions.Contains(symbol)
                 && symbol.DeclaringSyntaxReferences.Length == 1
                 && symbol.DeclaringSyntaxReferences.Single().GetSyntax() is { } node
-                && (LocalFunctionStatementSyntaxWrapper)node is LocalFunctionStatementSyntaxWrapper function
-                && CSharpControlFlowGraph.TryGet(function, model, out var cfg))
+                && LocalFunctionStatementSyntaxWrapper.IsInstance(node)
+                && CSharpControlFlowGraph.TryGet((LocalFunctionStatementSyntaxWrapper)node, model, out var cfg))
             {
                 ProcessedLocalFunctions.Add(symbol);
                 foreach (var block in cfg.Blocks.Reverse())
