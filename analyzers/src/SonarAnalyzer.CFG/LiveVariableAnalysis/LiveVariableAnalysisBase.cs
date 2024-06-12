@@ -44,7 +44,7 @@ public abstract class LiveVariableAnalysisBase<TCfg, TBlock>
     {
         Cfg = cfg;
         this.originalDeclaration = originalDeclaration;
-        this.Cancel = cancel;
+        Cancel = cancel;
     }
 
     /// <summary>
