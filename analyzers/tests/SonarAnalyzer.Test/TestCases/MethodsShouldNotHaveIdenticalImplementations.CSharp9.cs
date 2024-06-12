@@ -107,14 +107,14 @@ public static class TypeConstraints
         Console.WriteLine(x);
     }
 
-    public static bool Compare1<T>(T? value1, T value2) // Secondary
+    public static bool Compare1<T>(T? value1, T value2) // Secondary [Compare]
     {
         Console.WriteLine(value1);
         Console.WriteLine(value2);
         return true;
     }
 
-    public static bool Compare2<T>(T? value1, T value2)  // Noncompliant
+    public static bool Compare2<T>(T? value1, T value2)  // Noncompliant [Compare]
     {
         Console.WriteLine(value1);
         Console.WriteLine(value2);
@@ -126,5 +126,64 @@ public static class TypeConstraints
         Console.WriteLine(value1);
         Console.WriteLine(value2);
         return true;
+    }
+
+    public static bool Equal1<T>(T t1, T t2) where T : System.IEquatable<T>  // Secondary [Equal]
+    {
+        Console.WriteLine(t1);
+        Console.WriteLine(t2);
+        return true;
+    }
+
+    public static bool Equal2<T>(T t1, T t2) where T : System.IEquatable<T> // Noncompliant [Equal]
+    {
+        Console.WriteLine(t1);
+        Console.WriteLine(t2);
+        return true;
+    }
+
+    public static bool Equal3<T>(T t1, T t2) where T : System.IEquatable<int> // Compliant. The type constraint is different
+    {
+        Console.WriteLine(t1);
+        Console.WriteLine(t2);
+        return true;
+    }
+}
+
+public class TypeConstraintsOnGenericClass<TClass>
+{
+    public void ConstraintByTClass1<TMethod>() where TMethod : TClass // Secondary [ConstraintByTClass]
+    {
+        Console.WriteLine("a");
+        Console.WriteLine("b");
+        Console.WriteLine("c");
+    }
+
+    public void ConstraintByTClass2<TMethod>() where TMethod : TClass // Noncompliant [ConstraintByTClass]
+    {
+        Console.WriteLine("a");
+        Console.WriteLine("b");
+        Console.WriteLine("c");
+    }
+
+    public void ConstraintByTClass3<TMethod>() // Compliant
+    {
+        Console.WriteLine("a");
+        Console.WriteLine("b");
+        Console.WriteLine("c");
+    }
+
+    public void ConstraintByTClass4<TMethod>() where TMethod : IEquatable<TClass> // Compliant
+    {
+        Console.WriteLine("a");
+        Console.WriteLine("b");
+        Console.WriteLine("c");
+    }
+
+    public void ConstraintByTClass5<TMethod>() where TMethod : struct, TClass // Compliant
+    {
+        Console.WriteLine("a");
+        Console.WriteLine("b");
+        Console.WriteLine("c");
     }
 }
