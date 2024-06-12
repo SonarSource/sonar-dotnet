@@ -21,22 +21,21 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class TooManyLabelsInSwitchTest
-    {
-        [TestMethod]
-        public void TooManyLabelsInSwitch_CSharp8() =>
-            new VerifierBuilder().AddAnalyzer(() => new CS.TooManyLabelsInSwitch() { Maximum = 2 })
-                .AddPaths("TooManyLabelsInSwitch.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .Verify();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void TooManyLabelsInSwitch_VB() =>
-            new VerifierBuilder().AddAnalyzer(() => new VB.TooManyLabelsInSwitch() { Maximum = 2 })
-                .AddPaths("TooManyLabelsInSwitch.vb")
-                .Verify();
-    }
+[TestClass]
+public class TooManyLabelsInSwitchTest
+{
+    [TestMethod]
+    public void TooManyLabelsInSwitch_CSharp8() =>
+        new VerifierBuilder().AddAnalyzer(() => new CS.TooManyLabelsInSwitch() { Maximum = 2 })
+            .AddPaths("TooManyLabelsInSwitch.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
+
+    [TestMethod]
+    public void TooManyLabelsInSwitch_VB() =>
+        new VerifierBuilder().AddAnalyzer(() => new VB.TooManyLabelsInSwitch() { Maximum = 2 })
+            .AddPaths("TooManyLabelsInSwitch.vb")
+            .Verify();
 }

@@ -18,31 +18,57 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind, SwitchStatementSyntax>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind, SwitchStatementSyntax>
+    private static readonly ISet<SyntaxKind> IgnoredStatementsInSwitch = new HashSet<SyntaxKind> { SyntaxKind.BreakStatement, SyntaxKind.ReturnStatement, SyntaxKind.ThrowStatement };
+
+    private static readonly ISet<SyntaxKind> TransparentSyntax = new HashSet<SyntaxKind>
     {
-        protected override DiagnosticDescriptor Rule { get; } =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat,
-                isEnabledByDefault: false);
+        SyntaxKind.Block,
+        SyntaxKind.CatchClause,
+        SyntaxKind.CheckedStatement,
+        SyntaxKind.DoStatement,
+        SyntaxKind.FinallyClause,
+        SyntaxKind.FixedStatement,
+        SyntaxKind.ForEachStatement,
+        SyntaxKindEx.ForEachVariableStatement,
+        SyntaxKind.ForStatement,
+        SyntaxKind.IfStatement,
+        SyntaxKind.LockStatement,
+        SyntaxKind.SwitchStatement,
+        SyntaxKind.TryStatement,
+        SyntaxKind.UncheckedStatement,
+        SyntaxKind.UnsafeStatement,
+        SyntaxKind.UsingStatement,
+        SyntaxKind.WhileStatement
+    };
 
-        private const string MessageFormat = "Consider reworking this 'switch' to reduce the number of 'case's" +
-            " from {1} to at most {0}.";
+    protected override DiagnosticDescriptor Rule { get; } =
+        DescriptorFactory.Create(DiagnosticId, string.Format(MessageFormat, "switch", "case"),
+            isEnabledByDefault: false);
 
-        protected override SyntaxKind[] SyntaxKinds { get; } =
-            new[] { SyntaxKind.SwitchStatement };
+    protected override SyntaxKind[] SyntaxKinds { get; } = [SyntaxKind.SwitchStatement];
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            CSharpGeneratedCodeRecognizer.Instance;
+    protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
+        CSharpGeneratedCodeRecognizer.Instance;
 
-        protected override SyntaxNode GetExpression(SwitchStatementSyntax statement) =>
-            statement.Expression;
+    protected override SyntaxNode GetExpression(SwitchStatementSyntax statement) =>
+        statement.Expression;
 
-        protected override int GetSectionsCount(SwitchStatementSyntax statement) =>
-            statement.Sections.Count;
+    protected override int GetSectionsCount(SwitchStatementSyntax statement) =>
+        statement.Sections.Count;
 
-        protected override Location GetKeywordLocation(SwitchStatementSyntax statement) =>
-            statement.SwitchKeyword.GetLocation();
-    }
+    protected override bool AllSectionsAreOneLiners(SwitchStatementSyntax statement) =>
+        statement.Sections.All(HasOneLine);
+
+    protected override Location GetKeywordLocation(SwitchStatementSyntax statement) =>
+        statement.SwitchKeyword.GetLocation();
+
+    private static bool HasOneLine(SwitchSectionSyntax switchSection) =>
+        switchSection.Statements
+            .SelectMany(x => x.DescendantNodesAndSelf(descendIntoChildren: c => c.IsAnyKind(TransparentSyntax)))
+            .Count(x => !x.IsAnyKind(IgnoredStatementsInSwitch)) is 0 or 1;
 }
