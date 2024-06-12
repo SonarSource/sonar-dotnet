@@ -18,110 +18,135 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class ConditionalStructureSameImplementation : ConditionalStructureSameImplementationBase
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ConditionalStructureSameImplementation : ConditionalStructureSameImplementationBase
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+    private static readonly ISet<SyntaxKind> IgnoredStatementsInSwitch = new HashSet<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        SyntaxKind.BreakStatement,
+        SyntaxKind.ReturnStatement,
+        SyntaxKind.ThrowStatement,
+    };
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        private static readonly ISet<SyntaxKind> IgnoredStatementsInSwitch = new HashSet<SyntaxKind>
+    protected override void Initialize(SonarAnalysisContext context)
+    {
+        context.RegisterNodeAction(
+            c =>
+            {
+                var ifStatement = (IfStatementSyntax)c.Node;
+
+                var precedingStatements = ifStatement
+                    .GetPrecedingStatementsInConditionChain()
+                    .ToList();
+
+                CheckStatement(c, ifStatement.Statement, precedingStatements, c.SemanticModel, ifStatement.Else is not null, "branch");
+
+                if (ifStatement.Else is null)
+                {
+                    return;
+                }
+
+                precedingStatements.Add(ifStatement.Statement);
+                CheckStatement(c, ifStatement.Else.Statement, precedingStatements, c.SemanticModel, true, "branch");
+            },
+            SyntaxKind.IfStatement);
+
+        context.RegisterNodeAction(
+            c =>
+            {
+                var switchSection = (SwitchSectionSyntax)c.Node;
+
+                var precedingSections = switchSection
+                    .GetPrecedingSections()
+                    .ToList();
+
+                CheckStatement(c, switchSection, precedingSections, c.SemanticModel, HasDefaultClause((SwitchStatementSyntax)switchSection.Parent), "case");
+            },
+            SyntaxKind.SwitchSection);
+    }
+
+    private static bool HasDefaultClause(SwitchStatementSyntax switchStatement) =>
+        switchStatement.Sections.SelectMany(x => x.Labels).Any(x => x.IsKind(SyntaxKind.DefaultSwitchLabel));
+
+    private static void CheckStatement(SonarSyntaxNodeReportingContext context, SyntaxNode node, IReadOnlyList<SyntaxNode> precedingBranches, SemanticModel model, bool hasElse, string discriminator)
+    {
+        var numberOfStatements = GetStatementsCount(node);
+        if (!hasElse && numberOfStatements == 1)
         {
-            SyntaxKind.BreakStatement,
-            SyntaxKind.ReturnStatement,
-            SyntaxKind.ThrowStatement,
+            if (precedingBranches.Any() && precedingBranches.All(x => AreEquivalentStatements(node, x, model)))
+            {
+                ReportSyntaxNode(context, node, precedingBranches[0], discriminator);
+            }
+        }
+        else if (numberOfStatements > 1 && precedingBranches.FirstOrDefault(x => AreEquivalentStatements(node, x, model)) is { } equivalentStatement)
+        {
+            ReportSyntaxNode(context, node, equivalentStatement, discriminator);
+        }
+    }
+
+    private static bool AreEquivalentStatements(SyntaxNode node, SyntaxNode otherNode, SemanticModel model) =>
+        new EquivalentNodeCompare(node, otherNode) switch
+        {
+            (SwitchSectionSyntax { Statements: var statements }, SwitchSectionSyntax { Statements: var otherStatements }) =>
+                CSharpEquivalenceChecker.AreEquivalent(statements, otherStatements) && HaveTheSameInvocations(statements, otherStatements, model),
+            (BlockSyntax refBlock, BlockSyntax otherBlock) =>
+                CSharpEquivalenceChecker.AreEquivalent(refBlock, otherBlock) && HaveTheSameInvocations(refBlock, otherBlock, model),
+            _ => false, // Should not happen
         };
 
-        protected override void Initialize(SonarAnalysisContext context)
+    private static int GetStatementsCount(SyntaxNode node)
+    {
+        // Get all child statements from the node, in case of a switch section, we need to handle the case where the statements are wrapped in a block
+        var statements = node is SwitchSectionSyntax switchSection
+            ? switchSection.Statements.OfType<BlockSyntax>().SelectMany(x => x.Statements)
+                .Union(switchSection.Statements.Where(x => !x.IsKind(SyntaxKind.Block)))
+            : node.ChildNodes();
+
+        return statements.Count(IsApprovedStatement);
+    }
+
+    private static void ReportSyntaxNode(SonarSyntaxNodeReportingContext context, SyntaxNode node, SyntaxNode precedingNode, string errorMessageDiscriminator) =>
+        context.ReportIssue(Rule, node, [precedingNode.ToSecondaryLocation()], precedingNode.GetLineNumberToReport().ToString(), errorMessageDiscriminator);
+
+    private static bool IsApprovedStatement(SyntaxNode statement) =>
+        !statement.IsAnyKind(IgnoredStatementsInSwitch);
+
+    private static bool HaveTheSameInvocations(SyntaxList<SyntaxNode> first, SyntaxList<SyntaxNode> second, SemanticModel model)
+    {
+        var referenceInvocations = first.SelectMany(x => x.DescendantNodes().OfType<InvocationExpressionSyntax>()).ToArray();
+        var candidateInvocations = second.SelectMany(x => x.DescendantNodes().OfType<InvocationExpressionSyntax>()).ToArray();
+        return HaveTheSameInvocations(referenceInvocations, candidateInvocations, model);
+    }
+
+    private static bool HaveTheSameInvocations(SyntaxNode first, SyntaxNode second, SemanticModel model)
+    {
+        var referenceInvocations = first.DescendantNodes().OfType<InvocationExpressionSyntax>().ToArray();
+        var candidateInvocations = second.DescendantNodes().OfType<InvocationExpressionSyntax>().ToArray();
+        return HaveTheSameInvocations(referenceInvocations, candidateInvocations, model);
+    }
+
+    private static bool HaveTheSameInvocations(InvocationExpressionSyntax[] referenceInvocations, InvocationExpressionSyntax[] candidateInvocations, SemanticModel model)
+    {
+        if (referenceInvocations.Length != candidateInvocations.Length)
         {
-            context.RegisterNodeAction(
-                c =>
-                {
-                    var ifStatement = (IfStatementSyntax)c.Node;
-
-                    var precedingStatements = ifStatement
-                        .GetPrecedingStatementsInConditionChain()
-                        .ToList();
-
-                    CheckStatement(c, ifStatement.Statement, precedingStatements);
-
-                    if (ifStatement.Else == null)
-                    {
-                        return;
-                    }
-
-                    precedingStatements.Add(ifStatement.Statement);
-                    CheckStatement(c, ifStatement.Else.Statement, precedingStatements);
-                },
-                SyntaxKind.IfStatement);
-
-            context.RegisterNodeAction(
-                c =>
-                {
-                    var switchSection = (SwitchSectionSyntax)c.Node;
-
-                    if (GetStatements(switchSection).Count(IsApprovedStatement) < 2)
-                    {
-                        return;
-                    }
-
-                    var precedingSection = switchSection
-                        .GetPrecedingSections()
-                        .FirstOrDefault(preceding => CSharpEquivalenceChecker.AreEquivalent(switchSection.Statements, preceding.Statements)
-                                                     && HaveTheSameInvocations(switchSection.Statements, preceding.Statements, c.SemanticModel));
-
-                    if (precedingSection != null)
-                    {
-                        ReportSyntaxNode(c, switchSection, precedingSection, "case");
-                    }
-                },
-                SyntaxKind.SwitchSection);
+            return false;
         }
 
-        private static IEnumerable<StatementSyntax> GetStatements(SwitchSectionSyntax switchSection) =>
-            Enumerable.Empty<StatementSyntax>()
-                      .Union(switchSection.Statements.OfType<BlockSyntax>().SelectMany(block => block.Statements))
-                      .Union(switchSection.Statements.Where(s => !s.IsKind(SyntaxKind.Block)));
-
-        private static void CheckStatement(SonarSyntaxNodeReportingContext context, SyntaxNode statement, IEnumerable<StatementSyntax> precedingStatements)
+        for (var i = 0; i < referenceInvocations.Length; i++)
         {
-            if (statement.ChildNodes().Count() < 2)
-            {
-                return;
-            }
-
-            var precedingStatement = precedingStatements.FirstOrDefault(preceding => CSharpEquivalenceChecker.AreEquivalent(statement, preceding));
-            if (precedingStatement != null)
-            {
-                ReportSyntaxNode(context, statement, precedingStatement, "branch");
-            }
-        }
-
-        private static void ReportSyntaxNode(SonarSyntaxNodeReportingContext context, SyntaxNode node, SyntaxNode precedingNode, string errorMessageDiscriminator) =>
-            context.ReportIssue(Rule, node, [precedingNode.ToSecondaryLocation()], precedingNode.GetLineNumberToReport().ToString(), errorMessageDiscriminator);
-
-        private static bool IsApprovedStatement(StatementSyntax statement) =>
-            !statement.IsAnyKind(IgnoredStatementsInSwitch);
-
-        public static bool HaveTheSameInvocations(SyntaxList<SyntaxNode> first, SyntaxList<SyntaxNode> second, SemanticModel model)
-        {
-            var referenceInvocations = first.SelectMany(x => x.DescendantNodes().OfType<InvocationExpressionSyntax>()).ToArray();
-            var candidateInvocations = second.SelectMany(x => x.DescendantNodes().OfType<InvocationExpressionSyntax>()).ToArray();
-            if (referenceInvocations.Length != candidateInvocations.Length)
+            if (!referenceInvocations[i].IsEqualTo(candidateInvocations[i], model))
             {
                 return false;
             }
-
-            for (var i = 0; i < referenceInvocations.Length; i++)
-            {
-                if (!referenceInvocations[i].IsEqualTo(candidateInvocations[i], model))
-                {
-                    return false;
-                }
-            }
-            return true;
         }
+        return true;
     }
+
+    private readonly record struct EquivalentNodeCompare(SyntaxNode RefNode, SyntaxNode OtherNode);
 }

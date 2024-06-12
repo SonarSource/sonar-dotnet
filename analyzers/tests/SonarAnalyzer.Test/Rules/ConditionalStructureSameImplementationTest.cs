@@ -48,6 +48,9 @@ namespace SonarAnalyzer.Test.Rules
             builderVB.AddPaths("ConditionalStructureSameImplementation_Switch.vb").Verify();
 
 #if NET
+        [TestMethod]
+        public void ConditionalStructureSameImplementation_Switch_CSharp_Latest() =>
+            builderCS.AddPaths("ConditionalStructureSameImplementation_Switch.Latest.cs").WithOptions(ParseOptionsHelper.CSharpLatest).VerifyNoIssues();
 
         [TestMethod]
         public void ConditionalStructureSameImplementation_RazorFile_CorrectMessage() =>
