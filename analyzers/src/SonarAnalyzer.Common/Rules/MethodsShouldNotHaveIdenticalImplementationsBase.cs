@@ -74,7 +74,7 @@ public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TSyntaxKi
     {
         var firstSymbols = firstTypeParameterList?.Select(x => model.GetDeclaredSymbol(x)).OfType<ITypeParameterSymbol>() ?? [];
         var secondSymbols = secondTypeParameterList?.Select(x => model.GetDeclaredSymbol(x)).OfType<ITypeParameterSymbol>().ToArray() ?? [];
-        return firstSymbols.All(x => Array.Exists(secondSymbols, secondSymbol => TypesAreEquivalentTypeParameters(x, secondSymbol)));
+        return firstSymbols.All(x => Array.Exists(secondSymbols, secondSymbol => TypeParametersHaveSameNameAndConstraints(x, secondSymbol)));
     }
 
     private static bool HaveSameParameterLists<TSyntax>(SeparatedSyntaxList<TSyntax> leftParameters,
@@ -83,7 +83,7 @@ public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TSyntaxKi
 
     private static bool TypesAreSame(ITypeSymbol leftParameterType, ITypeSymbol rightParameterType) =>
         leftParameterType.Equals(rightParameterType) // M1(int x) <-> M2(int x)
-        || TypesAreEquivalentTypeParameters(leftParameterType, rightParameterType) // M1<T>(T x) where T: class <-> M2<T>(T x) where T: class
+        || TypeParametersHaveSameNameAndConstraints(leftParameterType, rightParameterType) // M1<T>(T x) where T: class <-> M2<T>(T x) where T: class
                                                                                    // T of M1 is a different symbol than T of M2, but if they have the same constraints, they can be interchanged
         || TypesAreSameGenericType(leftParameterType, rightParameterType); // M1<T>(IEnumerable<T> x) where T: class <-> M2<T>(IEnumerable<T> x) where T: class
 
@@ -95,9 +95,6 @@ public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TSyntaxKi
             x is ITypeParameterSymbol a
                 ? y is ITypeParameterSymbol b && a.Name == b.Name
                 : TypesAreSame(x, y));
-
-    private static bool TypesAreEquivalentTypeParameters(ITypeSymbol leftParameterType, ITypeSymbol rightParameterType) =>
-        leftParameterType.Equals(rightParameterType) || TypeParametersHaveSameNameAndConstraints(leftParameterType, rightParameterType);
 
     private static bool TypeParametersHaveSameNameAndConstraints(ITypeSymbol leftParameterType, ITypeSymbol rightParameterType) =>
         leftParameterType is ITypeParameterSymbol left
