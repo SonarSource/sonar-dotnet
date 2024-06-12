@@ -34,34 +34,6 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
     public void MethodsShouldNotHaveIdenticalImplementations() =>
         builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
-    [DataTestMethod]
-    [DataRow("", "")]
-    [DataRow("where T: struct", "where T: struct")]
-    [DataRow("where T: class", "where T: class")]
-    [DataRow("where T: unmanaged", "where T: unmanaged")]
-    [DataRow("where T: new()", "where T: new()")]
-    [DataRow("where T: IEquatable<T>, IComparable", "where T: System.IComparable, IEquatable<T>")]
-    public void MethodsShouldNotHaveIdenticalImplementations_MethodTypeParameters_NonCompliant(string constraint1, string constraint2) =>
-        builderCS.AddSnippet($$"""
-            using System;
-            public static class TypeConstraints
-            {
-                public static bool Compare1<T>(T? value1, T value2) {{constraint1}} // Secondary
-                {
-                    Console.WriteLine(value1);
-                    Console.WriteLine(value2);
-                    return true;
-                }
-
-                public static bool Compare2<T>(T? value1, T value2) {{constraint2}} // Noncompliant
-                {
-                    Console.WriteLine(value1);
-                    Console.WriteLine(value2);
-                    return true;
-                }
-            }
-            """).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
-
     [CombinatorialDataTestMethod]
     public void MethodsShouldNotHaveIdenticalImplementations_MethodTypeParameters(
         [DataValues("", "where T: struct", "where T: class", "where T: unmanaged", "where T: new()", "where T: class, new()")] string constraint1,
@@ -96,6 +68,31 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
             builder.VerifyNoIssues();
         }
     }
+
+    [DataTestMethod]
+    [DataRow("where T: IEquatable<T>, IComparable", "where T: System.IComparable, IEquatable<T>")]
+    [DataRow("where T: List<IEquatable<T>>, IList<T>, IComparable", "where T: List<IEquatable<T>>, IComparable, IList<T>")]
+    public void MethodsShouldNotHaveIdenticalImplementations_MethodTypeParameters_NonCompliant(string constraint1, string constraint2) =>
+        builderCS.AddSnippet($$"""
+            using System;
+            using System.Collections.Generic;
+            public static class TypeConstraints
+            {
+                public static bool Compare1<T>(T? value1, T value2) {{constraint1}} // Secondary
+                {
+                    Console.WriteLine(value1);
+                    Console.WriteLine(value2);
+                    return true;
+                }
+
+                public static bool Compare2<T>(T? value1, T value2) {{constraint2}} // Noncompliant
+                {
+                    Console.WriteLine(value1);
+                    Console.WriteLine(value2);
+                    return true;
+                }
+            }
+            """).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
     [DataTestMethod]
     [DataRow("", "")]
