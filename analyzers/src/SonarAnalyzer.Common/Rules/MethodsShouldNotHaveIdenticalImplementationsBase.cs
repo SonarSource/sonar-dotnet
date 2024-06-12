@@ -84,7 +84,7 @@ public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TSyntaxKi
     private static bool TypesAreSame(ITypeSymbol leftParameterType, ITypeSymbol rightParameterType) =>
         leftParameterType.Equals(rightParameterType) // M1(int x) <-> M2(int x)
         || TypeParametersHaveSameNameAndConstraints(leftParameterType, rightParameterType) // M1<T>(T x) where T: class <-> M2<T>(T x) where T: class
-                                                                                   // T of M1 is a different symbol than T of M2, but if they have the same constraints, they can be interchanged
+                                                                                           // T of M1 is a different symbol than T of M2, but if they have the same constraints, they can be traded
         || TypesAreSameGenericType(leftParameterType, rightParameterType); // M1<T>(IEnumerable<T> x) where T: class <-> M2<T>(IEnumerable<T> x) where T: class
 
     private static bool TypesAreSameGenericType(ITypeSymbol leftParameterType, ITypeSymbol rightParameterType) =>
