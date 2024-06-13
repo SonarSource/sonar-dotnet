@@ -178,7 +178,7 @@ namespace Repro_9379
         public static void Method()
         {
             var instance = CreateInstance<ClassInstantiatedThroughReflection>();
-            var instance2 = CreateInstance(typeof(ClassInstantiatedThroughReflection));
+            var instance2 = CreateInstance(typeof(AnotherClassInstantiatedThroughReflection));
 
             A classViaReflection = new();
             InitValue(classViaReflection);
@@ -212,7 +212,7 @@ namespace Repro_9379
             private ClassInstantiatedThroughReflection() { }
             private event EventHandler PrivateEvent;            // Noncompliant - FP
 
-            public ClassInstantiatedThroughReflection(int arg)  // Compliant - the constructor used in CreateInstance through Reflection
+            public ClassInstantiatedThroughReflection(int arg)
             {
             }
 
@@ -220,6 +220,11 @@ namespace Repro_9379
             {
                 private int privateField;                       // Noncompliant - FP
             }
+        }
+
+        private class AnotherClassInstantiatedThroughReflection
+        {
+            private int privateField;                           // Noncompliant - FP
         }
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]

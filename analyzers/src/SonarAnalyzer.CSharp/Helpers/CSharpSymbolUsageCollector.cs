@@ -150,7 +150,7 @@ internal class CSharpSymbolUsageCollector : SafeCSharpSyntaxWalker
                 DebuggerDisplayValues.UnionWith(arguments);
             }
             else if (attribute.Is(KnownType.System_Diagnostics_CodeAnalysis_DynamicallyAccessedMembersAttribute)
-                && node.Parent.Parent is BaseTypeDeclarationSyntax typeDeclaration
+                && node is { Parent: AttributeListSyntax { Parent: BaseTypeDeclarationSyntax typeDeclaration } }
                 && model.GetDeclaredSymbol(typeDeclaration) is { } typeSymbol)
             {
                 TypesUsedWithReflection.Add(typeSymbol);
