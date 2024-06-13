@@ -44,8 +44,9 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
                 var precedingStatements = ifStatement
                     .GetPrecedingStatementsInConditionChain()
                     .ToList();
+                var hasElse = HasElseClause(ifStatement);
 
-                CheckStatement(c, ifStatement.Statement, precedingStatements, c.SemanticModel, ifStatement.Else is not null, "branch");
+                CheckStatement(c, ifStatement.Statement, precedingStatements, c.SemanticModel, hasElse, "branch");
 
                 if (ifStatement.Else is null)
                 {
@@ -53,7 +54,7 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
                 }
 
                 precedingStatements.Add(ifStatement.Statement);
-                CheckStatement(c, ifStatement.Else.Statement, precedingStatements, c.SemanticModel, true, "branch");
+                CheckStatement(c, ifStatement.Else.Statement, precedingStatements, c.SemanticModel, hasElse, "branch");
             },
             SyntaxKind.IfStatement);
 
@@ -74,6 +75,20 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
     private static bool HasDefaultClause(SwitchStatementSyntax switchStatement) =>
         switchStatement.Sections.SelectMany(x => x.Labels).Any(x => x.IsKind(SyntaxKind.DefaultSwitchLabel));
 
+    private static bool HasElseClause(IfStatementSyntax ifStatement)
+    {
+        while (true)
+        {
+            if (ifStatement.Else?.Statement is IfStatementSyntax elseIfStatement)
+            {
+                ifStatement = elseIfStatement;
+                continue;
+            }
+
+            return ifStatement.Else is not null;
+        }
+    }
+
     private static void CheckStatement(SonarSyntaxNodeReportingContext context, SyntaxNode node, IReadOnlyList<SyntaxNode> precedingBranches, SemanticModel model, bool hasElse, string discriminator)
     {
         var numberOfStatements = GetStatementsCount(node);
@@ -81,7 +96,7 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
         {
             if (precedingBranches.Any() && precedingBranches.All(x => AreEquivalentStatements(node, x, model)))
             {
-                ReportSyntaxNode(context, node, precedingBranches[0], discriminator);
+                ReportSyntaxNode(context, node, precedingBranches[precedingBranches.Count - 1], discriminator);
             }
         }
         else if (numberOfStatements > 1 && precedingBranches.FirstOrDefault(x => AreEquivalentStatements(node, x, model)) is { } equivalentStatement)

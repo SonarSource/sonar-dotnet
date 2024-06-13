@@ -127,6 +127,45 @@ namespace Tests.TestCases
                 DoSomething1();
             }
         }
+
+        public bool FalseNegative(string s, out int kind)
+        {
+            kind = 0;
+            if (s.StartsWith("__Iterator", StringComparison.Ordinal))
+            { // Secondary [Following]
+                kind = 42;
+                return true;
+            }
+            else if (s.StartsWith("__async", StringComparison.Ordinal))
+            { // Noncompliant [Following]
+                kind = 42;
+                return true;
+            }
+            else if (s.StartsWith("__AnonStorey", StringComparison.Ordinal))
+            {
+                kind = 21;
+                return true;
+            }
+
+            while (true)
+            {
+                if (s == string.Empty)
+                { // Secondary [FN3]
+                    kind = 42;
+                }
+                else if (s.StartsWith("__async", StringComparison.Ordinal))
+                { // Noncompliant [FN3]
+                // Secondary@-1 [TP4]
+                    kind = 42;
+                }
+                else if (s.StartsWith("__AnonStorey", StringComparison.Ordinal))
+                { // Noncompliant [TP4]
+                    kind = 42;
+                }
+            }
+
+            return false;
+        }
     }
 
     public static class IntExtension
