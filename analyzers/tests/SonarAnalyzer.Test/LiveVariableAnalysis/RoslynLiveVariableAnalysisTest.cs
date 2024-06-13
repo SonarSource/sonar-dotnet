@@ -1102,7 +1102,7 @@ public partial class RoslynLiveVariableAnalysisTest
 
         public void ValidateExit(params Expected[] expected)
         {
-            expected.Should().AllSatisfy(x => x.Kind.Should().Be(ExpectedKind.Captured), "Exit block should expect only Captured variables.");
+            Array.TrueForAll(expected, x => x.Kind == ExpectedKind.Captured).Should().BeTrue("Exit block should expect only Captured variables.");
             Validate(Cfg.ExitBlock, null, expected);
         }
 
