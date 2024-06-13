@@ -86,8 +86,9 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (memberDeclaration is MethodDeclarationSyntax methodDeclaration
                     && !methodDeclaration.Modifiers.Any(SyntaxKind.NewKeyword)
-                    && allBaseClassMethods.FirstOrDefault(x => IsDecreasingAccess(x.DeclaredAccessibility, methodSymbol.DeclaredAccessibility, false)
-                    && IsMatchingSignature(x, methodSymbol)) is { } hidingMethod)
+                    && allBaseClassMethods.FirstOrDefault(x =>
+                        IsDecreasingAccess(x.DeclaredAccessibility, methodSymbol.DeclaredAccessibility, false)
+                        && IsMatchingSignature(x, methodSymbol)) is { } hidingMethod)
                 {
                     context.ReportIssue(Rule, methodDeclaration.Identifier, hidingMethod.ToDisplayString());
                 }
