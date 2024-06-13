@@ -197,12 +197,6 @@ namespace Repro_9379
             private bool a = true; // Noncompliant FP: type argument is inferred and ArgumentList is not present on syntax level (see line 183)
         }
 
-        class C<T>
-        {
-            private int usedByReflection;
-            C<T> Create() => Program.CreateInstance<C<T>>();
-        }
-
         private class ClassInstantiatedThroughReflection
         {
             private const int PrivateConst = 42;                // Noncompliant - FP

@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.Common.Walkers;
+using SonarAnalyzer.Json.Parsing;
 
 namespace SonarAnalyzer.Helpers;
 
@@ -148,19 +149,26 @@ internal class CSharpSymbolUsageCollector : SafeCSharpSyntaxWalker
         {
             TypesUsedWithReflection.Add(typeSymbol);
         }
-        else if (model.GetSymbolInfo(node).Symbol is IMethodSymbol { MethodKind: MethodKind.Constructor, ContainingType: ITypeSymbol attribute }
-                && attribute.Is(KnownType.System_Diagnostics_DebuggerDisplayAttribute)
-                && node.ArgumentList is not null)
+        else if (model.GetSymbolInfo(node).Symbol is IMethodSymbol { MethodKind: MethodKind.Constructor, ContainingType: ITypeSymbol attribute })
         {
-            var arguments = node.ArgumentList.Arguments
-                .Where(IsValueNameOrType)
-                .Select(x => model.GetConstantValue(x.Expression))
-                .Where(x => x.HasValue)
-                .Select(x => x.Value)
-                .OfType<string>();
+            if (attribute.Is(KnownType.System_Diagnostics_DebuggerDisplayAttribute)
+            && node.ArgumentList is not null)
+            {
+                var arguments = node.ArgumentList.Arguments
+                    .Where(IsValueNameOrType)
+                    .Select(x => model.GetConstantValue(x.Expression))
+                    .Where(x => x.HasValue)
+                    .Select(x => x.Value)
+                    .OfType<string>();
 
-            DebuggerDisplayValues.UnionWith(arguments);
+                DebuggerDisplayValues.UnionWith(arguments);
+            }
+            else if (attribute.GetEffectiveAccessibility() == Accessibility.Private)
+            {
+                PrivateAttributes.Add(attribute);
+            }
         }
+
         base.VisitAttribute(node);
 
         static bool IsValueNameOrType(AttributeArgumentSyntax a) =>
