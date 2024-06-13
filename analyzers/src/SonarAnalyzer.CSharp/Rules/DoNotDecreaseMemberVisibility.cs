@@ -86,8 +86,8 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (memberDeclaration is MethodDeclarationSyntax methodDeclaration
                     && !methodDeclaration.Modifiers.Any(SyntaxKind.NewKeyword)
-                    && allBaseClassMethods.FirstOrDefault(m => IsDecreasingAccess(m.DeclaredAccessibility, methodSymbol.DeclaredAccessibility, false)
-                    && IsMatchingSignature(m, methodSymbol)) is { } hidingMethod)
+                    && allBaseClassMethods.FirstOrDefault(x => IsDecreasingAccess(x.DeclaredAccessibility, methodSymbol.DeclaredAccessibility, false)
+                    && IsMatchingSignature(x, methodSymbol)) is { } hidingMethod)
                 {
                     context.ReportIssue(Rule, methodDeclaration.Identifier, hidingMethod.ToDisplayString());
                 }
@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (memberDeclaration is PropertyDeclarationSyntax propertyDeclaration
                     && !propertyDeclaration.Modifiers.Any(SyntaxKind.NewKeyword)
-                    && allBaseClassProperties.FirstOrDefault(p => IsDecreasingPropertyAccess(p, propertySymbol, propertySymbol.IsOverride)) is { } hidingProperty)
+                    && allBaseClassProperties.FirstOrDefault(x => IsDecreasingPropertyAccess(x, propertySymbol, propertySymbol.IsOverride)) is { } hidingProperty)
                 {
                     context.ReportIssue(Rule, propertyDeclaration.Identifier, hidingProperty.ToDisplayString());
                 }
