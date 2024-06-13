@@ -54,23 +54,19 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    List<Issue> issues = null;
                     var containingType = (INamedTypeSymbol)c.ContainingSymbol;
-                    foreach (var typeSymbol in containingType.Interfaces.Concat([containingType.BaseType]).WhereNotNull())
+                    var typeSymbols = containingType.Interfaces.Concat([containingType.BaseType]).WhereNotNull().ToImmutableArray();
+                    if (typeSymbols.Any(x => x.OriginalDefinition.IsAny(GenericTypes)))
                     {
-                        if (typeSymbol.OriginalDefinition.IsAny(GenericTypes))
-                        {
-                            return;
-                        }
-
+                        return;
+                    }
+                    foreach (var typeSymbol in typeSymbols)
+                    {
                         if (SuggestGenericCollectionType(typeSymbol) is { } suggestedGenericType)
                         {
-                            issues ??= [];
-                            issues.Add(new(typeDeclaration.Identifier, suggestedGenericType));
+                            c.ReportIssue(Rule, typeDeclaration.Identifier, suggestedGenericType);
                         }
                     }
-
-                    issues?.ForEach(x => c.ReportIssue(Rule, x.Identifier, x.SuggestedGenericType));
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration,
@@ -79,7 +75,5 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static string SuggestGenericCollectionType(ITypeSymbol typeSymbol) =>
             NonGenericToGenericMapping.FirstOrDefault(pair => pair.Key.Matches(typeSymbol)).Value;
-
-        private readonly record struct Issue(SyntaxToken Identifier, string SuggestedGenericType);
     }
 }
