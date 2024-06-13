@@ -42,9 +42,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var issueReporter = new IssueReporter(classSymbol, c);
-                    foreach (var issue in classDeclaration.Members)
+                    foreach (var member in classDeclaration.Members)
                     {
-                        issueReporter.ReportIssue(issue);
+                        issueReporter.ReportIssue(member);
                     }
                 },
                 SyntaxKind.ClassDeclaration,
