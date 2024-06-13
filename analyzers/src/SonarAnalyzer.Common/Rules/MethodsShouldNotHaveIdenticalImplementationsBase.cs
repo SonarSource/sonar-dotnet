@@ -97,10 +97,11 @@ public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TSyntaxKi
         || TypesAreSameGenericType(first, second); // M1<T>(IEnumerable<T> x) where T: class <-> M2<T>(IEnumerable<T> x) where T: class
 
     private static bool TypesAreSameGenericType(ITypeSymbol firstParameterType, ITypeSymbol secondParameterType) =>
-        firstParameterType is INamedTypeSymbol { IsGenericType: true } namedTypeLeft
-        && secondParameterType is INamedTypeSymbol { IsGenericType: true } namedTypeRight
-        && namedTypeLeft.TypeArguments.Length == namedTypeRight.TypeArguments.Length
-        && namedTypeLeft.TypeArguments.Equals(namedTypeRight.TypeArguments, TypeConstraintsAreSame);
+        firstParameterType is INamedTypeSymbol { IsGenericType: true } namedTypeFirst
+        && secondParameterType is INamedTypeSymbol { IsGenericType: true } namedTypeSecond
+        && namedTypeFirst.OriginalDefinition.Equals(namedTypeSecond.OriginalDefinition)
+        && namedTypeFirst.TypeArguments.Length == namedTypeSecond.TypeArguments.Length
+        && namedTypeFirst.TypeArguments.Equals(namedTypeSecond.TypeArguments, TypeConstraintsAreSame);
 
     private static bool AreSameNamedTypeParameters(ITypeSymbol first, ITypeSymbol second) =>
         first is ITypeParameterSymbol x && second is ITypeParameterSymbol y && x.Name == y.Name;

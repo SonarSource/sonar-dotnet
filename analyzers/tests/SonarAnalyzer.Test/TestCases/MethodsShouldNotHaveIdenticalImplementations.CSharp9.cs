@@ -148,6 +148,13 @@ public static class TypeConstraints
         Console.WriteLine(t2);
         return true;
     }
+
+    public static bool Equal4<T>(T t1, T t2) where T : System.IComparable<T> // Compliant. The type constraint is different
+    {
+        Console.WriteLine(t1);
+        Console.WriteLine(t2);
+        return true;
+    }
 }
 
 public class TypeConstraintsOnGenericClass<TClass>
