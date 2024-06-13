@@ -301,3 +301,14 @@ namespace Repro_9379
         }
     }
 }
+
+namespace CustomDynamicallyAccessedMembersAttribute
+{
+    public class DynamicallyAccessedMembersAttribute : Attribute { }
+
+    [DynamicallyAccessedMembers]
+    public class UnusedClassMarkedWithCustomAttribute
+    {
+        private int privateField;
+    }
+}

@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common.Walkers;
 
 namespace SonarAnalyzer.Helpers;
@@ -135,26 +136,24 @@ internal class CSharpSymbolUsageCollector : SafeCSharpSyntaxWalker
 
     public override void VisitAttribute(AttributeSyntax node)
     {
-        if (model.GetSymbolInfo(node).Symbol is IMethodSymbol { MethodKind: MethodKind.Constructor, ContainingType: ITypeSymbol attribute })
+        if (node.GetName() is "DynamicallyAccessedMembersAttribute" or "DynamicallyAccessedMembers"
+            && node is { Parent: AttributeListSyntax { Parent: BaseTypeDeclarationSyntax typeDeclaration } }
+            && model.GetDeclaredSymbol(typeDeclaration) is { } typeSymbol)
         {
-            if (attribute.Is(KnownType.System_Diagnostics_DebuggerDisplayAttribute)
+            TypesUsedWithReflection.Add(typeSymbol);
+        }
+        else if (model.GetSymbolInfo(node).Symbol is IMethodSymbol { MethodKind: MethodKind.Constructor, ContainingType: ITypeSymbol attribute }
+                && attribute.Is(KnownType.System_Diagnostics_DebuggerDisplayAttribute)
                 && node.ArgumentList is not null)
-            {
-                var arguments = node.ArgumentList.Arguments
-                    .Where(IsValueNameOrType)
-                    .Select(x => model.GetConstantValue(x.Expression))
-                    .Where(x => x.HasValue)
-                    .Select(x => x.Value)
-                    .OfType<string>();
+        {
+            var arguments = node.ArgumentList.Arguments
+                .Where(IsValueNameOrType)
+                .Select(x => model.GetConstantValue(x.Expression))
+                .Where(x => x.HasValue)
+                .Select(x => x.Value)
+                .OfType<string>();
 
-                DebuggerDisplayValues.UnionWith(arguments);
-            }
-            else if (attribute.Is(KnownType.System_Diagnostics_CodeAnalysis_DynamicallyAccessedMembersAttribute)
-                && node is { Parent: AttributeListSyntax { Parent: BaseTypeDeclarationSyntax typeDeclaration } }
-                && model.GetDeclaredSymbol(typeDeclaration) is { } typeSymbol)
-            {
-                TypesUsedWithReflection.Add(typeSymbol);
-            }
+            DebuggerDisplayValues.UnionWith(arguments);
         }
         base.VisitAttribute(node);
 
