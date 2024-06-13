@@ -18,13 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+public partial class UnusedPrivateMemberTest
 {
-    public partial class UnusedPrivateMemberTest
-    {
-        [TestMethod]
-        public void UnusedPrivateMember_Constructor_Accessibility() =>
-            builder.AddSnippet(@"
+    [TestMethod]
+    public void UnusedPrivateMember_Constructor_Accessibility() =>
+        builder.AddSnippet(@"
 public class PrivateConstructors
 {
     private PrivateConstructors(int i) { var x = 5; } // Noncompliant {{Remove the unused private constructor 'PrivateConstructors'.}}
@@ -62,40 +62,40 @@ public class NonPrivateMembers
 }
 ").Verify();
 
-        [TestMethod]
-        public void UnusedPrivateMember_Constructor_DirectReferences() =>
-            builder.AddSnippet("""
-                public abstract class PrivateConstructors
+    [TestMethod]
+    public void UnusedPrivateMember_Constructor_DirectReferences() =>
+        builder.AddSnippet("""
+            public abstract class PrivateConstructors
+            {
+                public class Constructor1
                 {
-                    public class Constructor1
-                    {
-                        public static readonly Constructor1 Instance = new Constructor1();
-                        private Constructor1() { var x = 5; }
-                    }
-
-                    public class Constructor2
-                    {
-                        public Constructor2(int a) { }
-                        private Constructor2() { var x = 5; } // Compliant - FN
-                    }
-
-                    public class Constructor3
-                    {
-                        public Constructor3(int a) : this() { }
-                        private Constructor3() { var x = 5; }
-                    }
-
-                    public class Constructor4
-                    {
-                        static Constructor4() { var x = 5; }
-                    }
+                    public static readonly Constructor1 Instance = new Constructor1();
+                    private Constructor1() { var x = 5; }
                 }
 
-                """).VerifyNoIssues();
+                public class Constructor2
+                {
+                    public Constructor2(int a) { }
+                    private Constructor2() { var x = 5; } // Compliant - FN
+                }
 
-        [TestMethod]
-        public void UnusedPrivateMember_Constructor_Inheritance() =>
-            builder.AddSnippet(@"
+                public class Constructor3
+                {
+                    public Constructor3(int a) : this() { }
+                    private Constructor3() { var x = 5; }
+                }
+
+                public class Constructor4
+                {
+                    static Constructor4() { var x = 5; }
+                }
+            }
+
+            """).VerifyNoIssues();
+
+    [TestMethod]
+    public void UnusedPrivateMember_Constructor_Inheritance() =>
+        builder.AddSnippet(@"
 public class Inheritance
 {
     private abstract class BaseClass1
@@ -121,21 +121,21 @@ public class Inheritance
 }
 ").Verify();
 
-        [TestMethod]
-        public void UnusedPrivateMember_Empty_Constructors() =>
-            builder.AddSnippet("""
-                public class PrivateConstructors
-                {
-                    private PrivateConstructors(int i) { } // Compliant, empty ctors are reported from another rule
-                }
+    [TestMethod]
+    public void UnusedPrivateMember_Empty_Constructors() =>
+        builder.AddSnippet("""
+            public class PrivateConstructors
+            {
+                private PrivateConstructors(int i) { } // Compliant, empty ctors are reported from another rule
+            }
 
-                """).VerifyNoIssues();
+            """).VerifyNoIssues();
 
-        [TestMethod]
-        public void UnusedPrivateMember_Illegal_Interface_Constructor() =>
-            // While typing code in IDE, we can end up in a state where an interface has a constructor defined.
-            // Even though this results in a compiler error (CS0526), IDE will still trigger rules on the interface.
-            builder.AddSnippet(@"
+    [TestMethod]
+    public void UnusedPrivateMember_Illegal_Interface_Constructor() =>
+        // While typing code in IDE, we can end up in a state where an interface has a constructor defined.
+        // Even though this results in a compiler error (CS0526), IDE will still trigger rules on the interface.
+        builder.AddSnippet(@"
 public interface IInterface
 {
     // UnusedPrivateMember rule does not trigger AD0001 error from NullReferenceException
@@ -143,13 +143,13 @@ public interface IInterface
 }
 ").Verify();
 
-        [DataTestMethod]
-        [DataRow("private", "Remove the unused private constructor 'Foo'.")]
-        [DataRow("protected", "Remove unused constructor of private type 'Foo'.")]
-        [DataRow("internal", "Remove unused constructor of private type 'Foo'.")]
-        [DataRow("public", "Remove unused constructor of private type 'Foo'.")]
-        public void UnusedPrivateMember_NonPrivateConstructorInPrivateClass(string accessModifier, string expectedMessage) =>
-            builder.AddSnippet($$$"""
+    [DataTestMethod]
+    [DataRow("private", "Remove the unused private constructor 'Foo'.")]
+    [DataRow("protected", "Remove unused constructor of private type 'Foo'.")]
+    [DataRow("internal", "Remove unused constructor of private type 'Foo'.")]
+    [DataRow("public", "Remove unused constructor of private type 'Foo'.")]
+    public void UnusedPrivateMember_NonPrivateConstructorInPrivateClass(string accessModifier, string expectedMessage) =>
+        builder.AddSnippet($$$"""
 public class Some
 {
     private class Foo // Noncompliant
@@ -164,26 +164,26 @@ public class Some
 
 #if NET
 
-        [TestMethod]
-        public void UnusedPrivateMember_RecordPositionalConstructor() =>
-            builder.AddSnippet("""
-                // https://github.com/SonarSource/sonar-dotnet/issues/5381
-                public abstract record Foo
+    [TestMethod]
+    public void UnusedPrivateMember_RecordPositionalConstructor() =>
+        builder.AddSnippet("""
+            // https://github.com/SonarSource/sonar-dotnet/issues/5381
+            public abstract record Foo
+            {
+                Foo(string value)
                 {
-                    Foo(string value)
-                    {
-                        Value = value;
-                    }
-
-                    public string Value { get; }
-
-                    public sealed record Bar(string Value) : Foo(Value);
+                    Value = value;
                 }
-                """).WithOptions(ParseOptionsHelper.FromCSharp9).VerifyNoIssues();
 
-        [TestMethod]
-        public void UnusedPrivateMember_NonExistentRecordPositionalConstructor() =>
-        builder.AddSnippet(@"
+                public string Value { get; }
+
+                public sealed record Bar(string Value) : Foo(Value);
+            }
+            """).WithOptions(ParseOptionsHelper.FromCSharp9).VerifyNoIssues();
+
+    [TestMethod]
+    public void UnusedPrivateMember_NonExistentRecordPositionalConstructor() =>
+    builder.AddSnippet(@"
 public abstract record Foo
 {
     public sealed record Bar(string Value) : RandomRecord(Value); // Error [CS0246, CS1729] no suitable method found to override
@@ -191,5 +191,4 @@ public abstract record Foo
 
 #endif
 
-    }
 }

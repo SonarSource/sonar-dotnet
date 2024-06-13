@@ -151,6 +151,20 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         ReportDiagnosticsForMembers(context, unusedSymbols, accessibility, fieldLikeSymbols);
     }
 
+    private static bool IsUsedWithReflection(ISymbol symbol, HashSet<ISymbol> symbolsUsedWithReflection)
+    {
+        var currentSymbol = symbol;
+        while (currentSymbol is not null)
+        {
+            if (symbolsUsedWithReflection.Contains(currentSymbol))
+            {
+                return true;
+            }
+            currentSymbol = currentSymbol.ContainingSymbol;
+        }
+        return false;
+    }
+
     private static bool IsMentionedInDebuggerDisplay(ISymbol symbol, CSharpSymbolUsageCollector usageCollector) =>
             usageCollector.DebuggerDisplayValues.Any(x => x.Contains(symbol.Name));
 
@@ -161,7 +175,9 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         var usedButUnreadFields = usageCollector.FieldSymbolUsages.Values
             .Where(x => x.Symbol.DeclaredAccessibility == Accessibility.Private || x.Symbol.ContainingType?.DeclaredAccessibility == Accessibility.Private)
             .Where(x => x.Symbol.Kind == SymbolKind.Field || x.Symbol.Kind == SymbolKind.Event)
-            .Where(x => !unusedSymbols.Contains(x.Symbol) && !IsMentionedInDebuggerDisplay(x.Symbol, usageCollector))
+            .Where(x => !unusedSymbols.Contains(x.Symbol)
+                && !IsMentionedInDebuggerDisplay(x.Symbol, usageCollector)
+                && !IsUsedWithReflection(x.Symbol, usageCollector.TypesUsedWithReflection))
             .Where(x => x.Declaration is not null && !x.Readings.Any());
 
         foreach (var usage in usedButUnreadFields)
@@ -173,7 +189,9 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
     private static HashSet<ISymbol> GetUnusedSymbols(CSharpSymbolUsageCollector usageCollector, IEnumerable<ISymbol> removableSymbols) =>
         removableSymbols
             .Except(usageCollector.UsedSymbols)
-            .Where(x => !IsMentionedInDebuggerDisplay(x, usageCollector) && !IsAccessorUsed(x, usageCollector))
+            .Where(x => !IsMentionedInDebuggerDisplay(x, usageCollector)
+                && !IsAccessorUsed(x, usageCollector)
+                && !IsUsedWithReflection(x, usageCollector.TypesUsedWithReflection))
             .ToHashSet();
 
     private static bool IsAccessorUsed(ISymbol symbol, CSharpSymbolUsageCollector usageCollector) =>
@@ -232,10 +250,10 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
                 _ => Enumerable.Empty<VariableDeclaratorSyntax>(),
             };
 
-        static Location GetIdentifierLocation(SyntaxNode syntaxNode) =>
-            syntaxNode.GetIdentifier() is { } identifier
+        static Location GetIdentifierLocation(SyntaxNode node) =>
+            node.GetIdentifier() is { } identifier
                 ? identifier.GetLocation()
-                : syntaxNode.GetLocation();
+                : node.GetLocation();
     }
 
     private static void ReportProperty<TContext>(SonarCompilationReportingContextBase<TContext> context,
@@ -278,12 +296,9 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
     private static CSharpRemovableSymbolWalker RetrieveRemovableSymbols(INamedTypeSymbol namedType, Compilation compilation, SonarSymbolReportingContext context)
     {
         var removableSymbolsCollector = new CSharpRemovableSymbolWalker(compilation.GetSemanticModel, namedType.DeclaredAccessibility);
-        if (!VisitDeclaringReferences(namedType, removableSymbolsCollector, context, includeGeneratedFile: false))
-        {
-            return null;
-        }
-
-        return removableSymbolsCollector;
+        return VisitDeclaringReferences(namedType, removableSymbolsCollector, context, includeGeneratedFile: false)
+            ? removableSymbolsCollector
+            : null;
     }
 
     private static void CopyRetrievedSymbols(CSharpRemovableSymbolWalker removableSymbolCollector,
