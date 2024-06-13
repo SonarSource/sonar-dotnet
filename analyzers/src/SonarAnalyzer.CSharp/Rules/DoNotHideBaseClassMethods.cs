@@ -35,23 +35,21 @@ namespace SonarAnalyzer.Rules.CSharp
                     var declarationSyntax = (TypeDeclarationSyntax)c.Node;
                     if (declarationSyntax.Identifier.IsMissing
                         || c.IsRedundantPositionalRecordContext()
-                        || !(c.SemanticModel.GetDeclaredSymbol(declarationSyntax) is {} declaredSymbol))
+                        || !(c.SemanticModel.GetDeclaredSymbol(declarationSyntax) is { } declaredSymbol))
                     {
                         return;
                     }
 
-                    var issueFinder = new IssueFinder(declaredSymbol, c.SemanticModel);
-                    foreach (var issue in declarationSyntax.Members.Select(issueFinder.FindIssue).WhereNotNull())
+                    var issueReporter = new IssueReporter(declaredSymbol, c);
+                    foreach (var member in declarationSyntax.Members)
                     {
-                        c.ReportIssue(Rule, issue.Location, issue.HiddenBaseMethod.ToDisplayString());
+                        issueReporter.ReportIssue(member);
                     }
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKindEx.RecordClassDeclaration);
 
-        private readonly record struct Issue(Location Location, IMethodSymbol HiddenBaseMethod);
-
-        private sealed class IssueFinder
+        private sealed class IssueReporter
         {
             private enum Match
             {
@@ -61,25 +59,22 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             private readonly IList<IMethodSymbol> allBaseTypeMethods;
-            private readonly SemanticModel semanticModel;
+            private readonly SonarSyntaxNodeReportingContext context;
 
-            public IssueFinder(ITypeSymbol typeSymbol, SemanticModel semanticModel)
+            public IssueReporter(ITypeSymbol typeSymbol, SonarSyntaxNodeReportingContext context)
             {
-                this.semanticModel = semanticModel;
+                this.context = context;
                 allBaseTypeMethods = GetAllBaseMethods(typeSymbol);
             }
 
-            public Issue? FindIssue(MemberDeclarationSyntax memberDeclaration)
+            public void ReportIssue(MemberDeclarationSyntax memberDeclaration)
             {
-                var issueLocation = (memberDeclaration as MethodDeclarationSyntax)?.Identifier.GetLocation();
-
-                if (issueLocation is null || semanticModel.GetDeclaredSymbol(memberDeclaration) is not IMethodSymbol methodSymbol)
+                if (memberDeclaration is MethodDeclarationSyntax { Identifier: { } identifier }
+                    && context.SemanticModel.GetDeclaredSymbol(memberDeclaration) is IMethodSymbol methodSymbol
+                    && FindBaseMethodHiddenByMethod(methodSymbol) is { } baseMethodHidden)
                 {
-                    return null;
+                    context.ReportIssue(Rule, identifier, baseMethodHidden.ToDisplayString());
                 }
-
-                var baseMethodHidden = FindBaseMethodHiddenByMethod(methodSymbol);
-                return baseMethodHidden is not null ? new(issueLocation, baseMethodHidden) : null;
             }
 
             private static List<IMethodSymbol> GetAllBaseMethods(ITypeSymbol typeSymbol) =>
