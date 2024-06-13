@@ -136,7 +136,13 @@ internal class CSharpSymbolUsageCollector : SafeCSharpSyntaxWalker
 
     public override void VisitAttribute(AttributeSyntax node)
     {
-        if (node.GetName() is "DynamicallyAccessedMembersAttribute" or "DynamicallyAccessedMembers"
+        // Some members that seem unused might be dynamically accessed through reflection.
+        // The DynamicallyAccessedMembersAttribute was introduced to inform tools about such uses.
+        // The attribute is not available on NetFramework and we want to enable this mechanism for these users.
+        // Therefore, we only check the name, but not the namespace and let the users define their own custom version.
+        // https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.dynamicallyaccessedmembersattribute
+        const string DynamicallyAccessedMembers = "DynamicallyAccessedMembers";
+        if (node.GetName() is DynamicallyAccessedMembers or $"{DynamicallyAccessedMembers}Attribute"
             && node is { Parent: AttributeListSyntax { Parent: BaseTypeDeclarationSyntax typeDeclaration } }
             && model.GetDeclaredSymbol(typeDeclaration) is { } typeSymbol)
         {
