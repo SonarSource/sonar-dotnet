@@ -359,6 +359,11 @@ class Repro_8342
     [Private2] internal void AnInternalMethod() { }
     [Private3] protected void AProtectedMethod() { }
     [Private4] private void APrivateMethodCalledByAPublicMethod() { }
+
+    private class Private1Attribute : Attribute { }
+    private class Private2Attribute : Attribute { }
+    private class Private3Attribute : Attribute { }
+    private class Private4Attribute : Attribute { }
 }
 
 // https://github.com/SonarSource/sonar-dotnet/issues/8532
