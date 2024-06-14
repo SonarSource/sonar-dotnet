@@ -127,6 +127,64 @@ namespace Tests.TestCases
                 DoSomething1();
             }
         }
+
+        public bool ElseIfChain(int s)
+        {
+            if (s == 0)
+            { // Secondary [IfChain1]
+                DoSomething1();
+                return true;
+            }
+            else if (s > 0 && s < 11)
+            { // Noncompliant [IfChain1]
+                DoSomething1();
+                return true;
+            }
+            else if (s > 11 && s < 20)
+            {
+                DoSomething2();
+                return true;
+            }
+
+            if (s == 0)
+            { // Secondary [IfChain2]
+                DoSomething1();
+            }
+            else if (s > 0 && s < 11)
+            { // Noncompliant [IfChain2]
+                // Secondary@-1 [IfChain3]
+                DoSomething1();
+            }
+            else if (s > 11 && s < 20)
+            { // Noncompliant [IfChain3]
+                DoSomething1();
+            }
+
+            if (s == 0)
+            {
+                DoSomething1();
+            }
+            else
+            {
+                if (s > 0 && s < 11)
+                { // FN [NestedIfChain]
+                    DoSomething1();
+                }
+                else
+                {
+                    if (s > 11 && s < 20)
+                    { // FN [NestedIfChain2]
+                        DoSomething1();
+                    }
+                    else
+                    {
+                        DoSomething2();
+                    }
+                }
+            }
+
+            return false;
+        }
     }
 
     public static class IntExtension
