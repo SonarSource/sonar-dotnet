@@ -40,21 +40,15 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
             c =>
             {
                 var ifStatement = (IfStatementSyntax)c.Node;
-
-                var precedingStatements = ifStatement
-                    .GetPrecedingStatementsInConditionChain()
-                    .ToList();
-                var hasElse = HasElseClause(ifStatement);
+                var precedingStatements = ifStatement.GetPrecedingStatementsInConditionChain().ToList();
+                var hasElse = HasLeafElseClause(ifStatement);
 
                 CheckStatement(c, ifStatement.Statement, precedingStatements, c.SemanticModel, hasElse, "branch");
 
-                if (ifStatement.Else is null)
+                if (ifStatement.Else is not null)
                 {
-                    return;
+                    CheckStatement(c, ifStatement.Else.Statement, [..precedingStatements, ifStatement.Statement], c.SemanticModel, hasElse, "branch");
                 }
-
-                precedingStatements.Add(ifStatement.Statement);
-                CheckStatement(c, ifStatement.Else.Statement, precedingStatements, c.SemanticModel, hasElse, "branch");
             },
             SyntaxKind.IfStatement);
 
@@ -62,10 +56,7 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
             c =>
             {
                 var switchSection = (SwitchSectionSyntax)c.Node;
-
-                var precedingSections = switchSection
-                    .GetPrecedingSections()
-                    .ToList();
+                var precedingSections = switchSection.GetPrecedingSections().ToList();
 
                 CheckStatement(c, switchSection, precedingSections, c.SemanticModel, HasDefaultClause((SwitchStatementSyntax)switchSection.Parent), "case");
             },
@@ -75,18 +66,13 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
     private static bool HasDefaultClause(SwitchStatementSyntax switchStatement) =>
         switchStatement.Sections.SelectMany(x => x.Labels).Any(x => x.IsKind(SyntaxKind.DefaultSwitchLabel));
 
-    private static bool HasElseClause(IfStatementSyntax ifStatement)
+    private static bool HasLeafElseClause(IfStatementSyntax ifStatement)
     {
-        while (true)
+        while (ifStatement.Else?.Statement is IfStatementSyntax elseIfStatement)
         {
-            if (ifStatement.Else?.Statement is IfStatementSyntax elseIfStatement)
-            {
-                ifStatement = elseIfStatement;
-                continue;
-            }
-
-            return ifStatement.Else is not null;
+            ifStatement = elseIfStatement;
         }
+        return ifStatement.Else is not null;
     }
 
     private static void CheckStatement(SonarSyntaxNodeReportingContext context, SyntaxNode node, IReadOnlyList<SyntaxNode> precedingBranches, SemanticModel model, bool hasElse, string discriminator)

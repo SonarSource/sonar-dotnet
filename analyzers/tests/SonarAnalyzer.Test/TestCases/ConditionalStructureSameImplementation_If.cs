@@ -128,39 +128,58 @@ namespace Tests.TestCases
             }
         }
 
-        public bool FalseNegative(string s, out int kind)
+        public bool ElseIfChain(int s)
         {
-            kind = 0;
-            if (s.StartsWith("__Iterator", StringComparison.Ordinal))
-            { // Secondary [Following]
-                kind = 42;
+            if (s == 0)
+            { // Secondary [IfChain1]
+                DoSomething1();
                 return true;
             }
-            else if (s.StartsWith("__async", StringComparison.Ordinal))
-            { // Noncompliant [Following]
-                kind = 42;
+            else if (s > 0 && s < 11)
+            { // Noncompliant [IfChain1]
+                DoSomething1();
                 return true;
             }
-            else if (s.StartsWith("__AnonStorey", StringComparison.Ordinal))
+            else if (s > 11 && s < 20)
             {
-                kind = 21;
+                DoSomething2();
                 return true;
             }
 
-            while (true)
+            if (s == 0)
+            { // Secondary [IfChain2]
+                DoSomething1();
+            }
+            else if (s > 0 && s < 11)
+            { // Noncompliant [IfChain2]
+                // Secondary@-1 [IfChain3]
+                DoSomething1();
+            }
+            else if (s > 11 && s < 20)
+            { // Noncompliant [IfChain3]
+                DoSomething1();
+            }
+
+            if (s == 0)
             {
-                if (s == string.Empty)
-                { // Secondary [FN3]
-                    kind = 42;
+                DoSomething1();
+            }
+            else
+            {
+                if (s > 0 && s < 11)
+                { // FN [NestedIfChain]
+                    DoSomething1();
                 }
-                else if (s.StartsWith("__async", StringComparison.Ordinal))
-                { // Noncompliant [FN3]
-                // Secondary@-1 [TP4]
-                    kind = 42;
-                }
-                else if (s.StartsWith("__AnonStorey", StringComparison.Ordinal))
-                { // Noncompliant [TP4]
-                    kind = 42;
+                else
+                {
+                    if (s > 11 && s < 20)
+                    { // FN [NestedIfChain2]
+                        DoSomething1();
+                    }
+                    else
+                    {
+                        DoSomething2();
+                    }
                 }
             }
 
