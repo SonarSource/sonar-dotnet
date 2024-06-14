@@ -66,7 +66,7 @@ public class SonarSyntaxNodeReportingContextTest
         var sut = new SonarSyntaxNodeReportingContext(analysisContext, context);
         try
         {
-            sut.ReportIssue(Diagnostic.Create(rule, (reportOnCorrectTree ? nodeFromCorrectCompilation : nodeFromAnotherCompilation).GetLocation()));
+            sut.ReportIssue(rule, reportOnCorrectTree ? nodeFromCorrectCompilation : nodeFromAnotherCompilation);
         }
         catch (Exception ex)    // Can't catch internal DebugAssertException
         {

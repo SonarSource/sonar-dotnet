@@ -54,8 +54,8 @@ public class CodeFixProviderTest
             context.RegisterNodeAction(TestGeneratedCodeRecognizer.Instance, c =>
             {
                 // Duplicate issues from different analyzer versions, see https://github.com/SonarSource/sonar-dotnet/issues/1109
-                c.ReportIssue(Diagnostic.Create(rule, c.Context.Node.GetLocation()));
-                c.ReportIssue(Diagnostic.Create(rule, c.Context.Node.GetLocation()));
+                c.ReportIssue(rule, c.Context.Node);
+                c.ReportIssue(rule, c.Context.Node);
             }, SyntaxKind.NamespaceDeclaration);
     }
 

@@ -48,7 +48,7 @@ public class SonarSemanticModelReportingContextTest
     public void RegistrationIsExecuted_SonarAnalysisContext_CS() =>
         new VerifierBuilder().AddAnalyzer(() => new TestAnalyzerCS((context, g) =>
             context.RegisterSemanticModelAction(g, c =>
-                c.ReportIssue(Diagnostic.Create(TestAnalyzer.Rule, c.Tree.GetRoot().GetFirstToken().GetLocation())))))
+                c.ReportIssue(TestAnalyzer.Rule, c.Tree.GetRoot().GetFirstToken()))))
         .AddSnippet("""
         using System; // Noncompliant
         """)
@@ -58,7 +58,7 @@ public class SonarSemanticModelReportingContextTest
     public void RegistrationIsExecuted_SonarAnalysisContext_VB() =>
         new VerifierBuilder().AddAnalyzer(() => new TestAnalyzerVB((context, g) =>
             context.RegisterSemanticModelAction(g, c =>
-                c.ReportIssue(Diagnostic.Create(TestAnalyzer.Rule, c.Tree.GetRoot().GetFirstToken().GetLocation())))))
+                c.ReportIssue(TestAnalyzer.Rule, c.Tree.GetRoot().GetFirstToken()))))
         .AddSnippet("""
         Imports System ' Noncompliant
         """)
@@ -72,7 +72,7 @@ public class SonarSemanticModelReportingContextTest
                 {
                     if (c.Tree.GetRoot().GetFirstToken() is { RawKind: not (int)CS.SyntaxKind.None } token)
                     {
-                        c.ReportIssue(Diagnostic.Create(TestAnalyzer.Rule, token.GetLocation()));
+                        c.ReportIssue(TestAnalyzer.Rule, token);
                     }
                 }))))
             .AddSnippet("""
@@ -88,7 +88,7 @@ public class SonarSemanticModelReportingContextTest
                 {
                     if (c.Tree.GetRoot().GetFirstToken() is { RawKind: not (int)VB.SyntaxKind.None } token)
                     {
-                        c.ReportIssue(Diagnostic.Create(TestAnalyzer.Rule, token.GetLocation()));
+                        c.ReportIssue(TestAnalyzer.Rule, token);
                     }
                 }))))
             .AddSnippet("""

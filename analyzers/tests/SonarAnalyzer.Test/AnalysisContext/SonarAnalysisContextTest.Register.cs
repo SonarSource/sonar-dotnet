@@ -332,32 +332,31 @@ public partial class SonarAnalysisContextTest
             }
             """);
         var diagnosticDescriptor = new DiagnosticDescriptor("TEST", "Title", "{0}", "Category", DiagnosticSeverity.Warning, true, customTags: [scope]);
+        var location = Location.Create(snippet.SyntaxTree, TextSpan.FromBounds(0, 0));
         var analyzer = new TestAnalyzerCS(diagnosticDescriptor, analysisContext =>
             analysisContext.RegisterCompilationStartAction(compilationStartContext =>
                 compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
                 {
                     symbolStartContext.RegisterCodeBlockAction(codeBlockContext =>
-                        codeBlockContext.ReportIssue(CreateDiagnostic("CodeBlock")));
+                        codeBlockContext.ReportIssue(diagnosticDescriptor, location, "CodeBlock"));
                     symbolStartContext.RegisterCodeBlockStartAction<SyntaxKind>(codeBlockStartContext =>
                     {
                         codeBlockStartContext.RegisterNodeAction(nodeContext =>
-                            nodeContext.ReportIssue(CreateDiagnostic("CodeBlockStart_Node")), SyntaxKind.InvocationExpression);
+                            nodeContext.ReportIssue(diagnosticDescriptor, location, "CodeBlockStart_Node"), SyntaxKind.InvocationExpression);
                         codeBlockStartContext.RegisterCodeBlockEndAction(codeBlockEndContext =>
-                            codeBlockEndContext.ReportIssue(CreateDiagnostic("CodeBlockStart_End")));
+                            codeBlockEndContext.ReportIssue(diagnosticDescriptor, location, "CodeBlockStart_End"));
                     });
                     symbolStartContext.RegisterSymbolEndAction(symbolEndContext =>
-                        symbolEndContext.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, CreateDiagnostic("SymbolEnd")));
+                        symbolEndContext.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, diagnosticDescriptor, location, "SymbolEnd"));
                     symbolStartContext.RegisterSyntaxNodeAction(nodeContext =>
-                        nodeContext.ReportIssue(CreateDiagnostic("Node")), SyntaxKind.InvocationExpression);
+                        nodeContext.ReportIssue(diagnosticDescriptor, location, "Node"), SyntaxKind.InvocationExpression);
                 },
             SymbolKind.NamedType)));
-        var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(analyzer));
+        var compilation = snippet.Compilation.WithAnalyzers([analyzer]);
         var diagnostics = await compilation.GetAllDiagnosticsAsync();
         diagnostics.Should().HaveCount(expectedDiagnostics.Length);
         // Ordering is only partially guaranteed and therefore we use BeEquivalentTo https://github.com/dotnet/roslyn/blob/main/docs/analyzers/Analyzer%20Actions%20Semantics.md
         diagnostics.Select(x => x.GetMessage()).Should().BeEquivalentTo(expectedDiagnostics);
-
-        Diagnostic CreateDiagnostic(string message) => Diagnostic.Create(diagnosticDescriptor, Location.Create(snippet.SyntaxTree, TextSpan.FromBounds(0, 0)), message);
     }
 
     [TestMethod]
