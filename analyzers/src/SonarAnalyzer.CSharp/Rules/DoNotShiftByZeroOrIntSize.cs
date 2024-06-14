@@ -76,16 +76,16 @@ namespace SonarAnalyzer.Rules.CSharp
                         }
 
                         linesWithShiftOperations.Add(shift.Line);
-                        if (shift.Diagnostic != null)
+                        if (shift.Node is not null)
                         {
-                            c.ReportIssue(shift.Diagnostic);
+                            c.ReportIssue(Rule, shift.Node, shift.Description);
                         }
                     }
 
-                    zeroShiftIssues
-                        .Where(sh => !ContainsShiftExpressionWithinTwoLines(linesWithShiftOperations, sh.Line))
-                        .ToList()
-                        .ForEach(sh => c.ReportIssue(sh.Diagnostic));
+                    foreach (var shift in zeroShiftIssues.Where(x => !ContainsShiftExpressionWithinTwoLines(linesWithShiftOperations, x.Line)))
+                    {
+                        c.ReportIssue(Rule, shift.Node, shift.Description);
+                    }
                 },
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.PropertyDeclaration);
@@ -196,18 +196,20 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class ShiftInstance
         {
-            public Diagnostic Diagnostic { get; }
+            public string Description { get; }
+            public SyntaxNode Node { get; }
             public bool IsLiteralZero { get; }
             public int Line { get; }
 
             public ShiftInstance(SyntaxNode node) =>
                 Line = node.GetLineNumberToReport();
 
-            public ShiftInstance(string description, bool isLieralZero, SyntaxNode node)
+            public ShiftInstance(string description, bool isLiteralZero, SyntaxNode node)
                 : this(node)
             {
-                Diagnostic = Diagnostic.Create(Rule, node.GetLocation(), description);
-                IsLiteralZero = isLieralZero;
+                Description = description;
+                IsLiteralZero = isLiteralZero;
+                Node = node;
             }
         }
     }

@@ -27,6 +27,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "This member hides '{0}'. Make it non-private or seal the class.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
@@ -40,24 +41,24 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var issueFinder = new IssueFinder(classSymbol, c.SemanticModel);
-                    foreach (var diagnostic in classDeclaration.Members.Select(issueFinder.FindIssue).WhereNotNull())
+                    var issueReporter = new IssueReporter(classSymbol, c);
+                    foreach (var member in classDeclaration.Members)
                     {
-                        c.ReportIssue(diagnostic);
+                        issueReporter.ReportIssue(member);
                     }
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKindEx.RecordClassDeclaration);
 
-        private sealed class IssueFinder
+        private sealed class IssueReporter
         {
             private readonly IList<IMethodSymbol> allBaseClassMethods;
             private readonly IList<IPropertySymbol> allBaseClassProperties;
-            private readonly SemanticModel semanticModel;
+            private readonly SonarSyntaxNodeReportingContext context;
 
-            public IssueFinder(ITypeSymbol classSymbol, SemanticModel semanticModel)
+            public IssueReporter(ITypeSymbol classSymbol, SonarSyntaxNodeReportingContext context)
             {
-                this.semanticModel = semanticModel;
+                this.context = context;
                 var allBaseClassMembers = classSymbol.BaseType
                         .GetSelfAndBaseTypes()
                         .SelectMany(t => t.GetMembers())
@@ -68,57 +69,39 @@ namespace SonarAnalyzer.Rules.CSharp
                 allBaseClassProperties = allBaseClassMembers.OfType<IPropertySymbol>().ToList();
             }
 
-            public Diagnostic FindIssue(MemberDeclarationSyntax memberDeclaration)
+            public void ReportIssue(MemberDeclarationSyntax memberDeclaration)
             {
-                var memberSymbol = semanticModel.GetDeclaredSymbol(memberDeclaration);
-
-                if (memberSymbol is IMethodSymbol methodSymbol)
+                switch (context.SemanticModel.GetDeclaredSymbol(memberDeclaration))
                 {
-                    return FindMethodIssue(memberDeclaration, methodSymbol);
+                    case IMethodSymbol methodSymbol:
+                        ReportMethodIssue(memberDeclaration, methodSymbol);
+                        break;
+                    case IPropertySymbol propertySymbol:
+                        ReportPropertyIssue(memberDeclaration, propertySymbol);
+                        break;
                 }
-
-                return memberSymbol is IPropertySymbol propertySymbol ? FindPropertyIssue(memberDeclaration, propertySymbol) : null;
             }
 
-            private Diagnostic FindMethodIssue(MemberDeclarationSyntax memberDeclaration, IMethodSymbol methodSymbol)
+            private void ReportMethodIssue(MemberDeclarationSyntax memberDeclaration, IMethodSymbol methodSymbol)
             {
-                if (memberDeclaration is not MethodDeclarationSyntax methodDeclaration
-                    || methodDeclaration.Modifiers.Any(SyntaxKind.NewKeyword))
+                if (memberDeclaration is MethodDeclarationSyntax methodDeclaration
+                    && !methodDeclaration.Modifiers.Any(SyntaxKind.NewKeyword)
+                    && allBaseClassMethods.FirstOrDefault(x =>
+                        IsDecreasingAccess(x.DeclaredAccessibility, methodSymbol.DeclaredAccessibility, false)
+                        && IsMatchingSignature(x, methodSymbol)) is { } hidingMethod)
                 {
-                    return null;
+                    context.ReportIssue(Rule, methodDeclaration.Identifier, hidingMethod.ToDisplayString());
                 }
-
-                var hidingMethod = allBaseClassMethods.FirstOrDefault(m => IsDecreasingAccess(m.DeclaredAccessibility, methodSymbol.DeclaredAccessibility, false)
-                                                                           && IsMatchingSignature(m, methodSymbol));
-
-                if (hidingMethod != null)
-                {
-                    var location = methodDeclaration.Identifier.GetLocation();
-                    if (location != null)
-                    {
-                        return Diagnostic.Create(Rule, location, hidingMethod);
-                    }
-                }
-
-                return null;
             }
 
-            private Diagnostic FindPropertyIssue(MemberDeclarationSyntax memberDeclaration, IPropertySymbol propertySymbol)
+            private void ReportPropertyIssue(MemberDeclarationSyntax memberDeclaration, IPropertySymbol propertySymbol)
             {
-                if (memberDeclaration is not PropertyDeclarationSyntax propertyDeclaration
-                    || propertyDeclaration.Modifiers.Any(SyntaxKind.NewKeyword))
+                if (memberDeclaration is PropertyDeclarationSyntax propertyDeclaration
+                    && !propertyDeclaration.Modifiers.Any(SyntaxKind.NewKeyword)
+                    && allBaseClassProperties.FirstOrDefault(x => IsDecreasingPropertyAccess(x, propertySymbol, propertySymbol.IsOverride)) is { } hidingProperty)
                 {
-                    return null;
+                    context.ReportIssue(Rule, propertyDeclaration.Identifier, hidingProperty.ToDisplayString());
                 }
-
-                var hidingProperty = allBaseClassProperties.FirstOrDefault(p => IsDecreasingPropertyAccess(p, propertySymbol, propertySymbol.IsOverride));
-                if (hidingProperty != null)
-                {
-                    var location = propertyDeclaration.Identifier.GetLocation();
-                    return Diagnostic.Create(Rule, location, hidingProperty);
-                }
-
-                return null;
             }
 
             private static bool IsSymbolVisibleFromNamespace(ISymbol symbol, INamespaceSymbol ns) =>

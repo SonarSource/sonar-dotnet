@@ -49,28 +49,24 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var typeDeclaration = (BaseTypeDeclarationSyntax)c.Node;
                     var implementedTypes = typeDeclaration.BaseList?.Types;
-                    if (implementedTypes == null || c.IsRedundantPositionalRecordContext())
+                    if (implementedTypes is null || c.IsRedundantPositionalRecordContext())
                     {
                         return;
                     }
 
-                    List<Diagnostic> issues = null;
                     var containingType = (INamedTypeSymbol)c.ContainingSymbol;
-                    foreach (var typeSymbol in containingType.Interfaces.Concat(new[] { containingType.BaseType }).WhereNotNull())
+                    var typeSymbols = containingType.Interfaces.Concat([containingType.BaseType]).WhereNotNull().ToImmutableArray();
+                    if (typeSymbols.Any(x => x.OriginalDefinition.IsAny(GenericTypes)))
                     {
-                        if (typeSymbol.OriginalDefinition.IsAny(GenericTypes))
-                        {
-                            return;
-                        }
-
+                        return;
+                    }
+                    foreach (var typeSymbol in typeSymbols)
+                    {
                         if (SuggestGenericCollectionType(typeSymbol) is { } suggestedGenericType)
                         {
-                            issues ??= new();
-                            issues.Add(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(), suggestedGenericType));
+                            c.ReportIssue(Rule, typeDeclaration.Identifier, suggestedGenericType);
                         }
                     }
-
-                    issues?.ForEach(d => c.ReportIssue(d));
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration,
