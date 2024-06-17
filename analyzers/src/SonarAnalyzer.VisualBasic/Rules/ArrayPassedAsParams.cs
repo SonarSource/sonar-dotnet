@@ -32,27 +32,22 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
         ];
 
     protected override ArgumentSyntax LastArgumentIfArrayCreation(SyntaxNode expression) =>
-        GetLastArgumentIfArrayCreation(GetArgumentListFromExpression(expression));
-
-    protected override ITypeSymbol ArrayElementType(SyntaxNode expression, SemanticModel model) =>
-        model.GetTypeInfo(((ArrayCreationExpressionSyntax)expression).Type).Type is var elementType
-            ? elementType
+        ArgumentList(expression) is { Arguments: { Count: > 0 } arguments }
+        && arguments.Last() is var lastArgument
+        && IsArrayCreation(lastArgument.GetExpression())
+            ? lastArgument
             : null;
 
-    private static ArgumentListSyntax GetArgumentListFromExpression(SyntaxNode expression) =>
+    protected override ITypeSymbol ArrayElementType(ArgumentSyntax argument, SemanticModel model) =>
+        model.GetTypeInfo(((ArrayCreationExpressionSyntax)argument.GetExpression()).Type).Type;
+
+    private static ArgumentListSyntax ArgumentList(SyntaxNode expression) =>
         expression switch
         {
             ObjectCreationExpressionSyntax { } creation => creation.ArgumentList,
             InvocationExpressionSyntax { } invocation => invocation.ArgumentList,
             _ => null
         };
-
-    private static ArgumentSyntax GetLastArgumentIfArrayCreation(ArgumentListSyntax argumentList) =>
-        argumentList is { Arguments: { Count: > 0 } arguments }
-        && arguments.Last() is var lastArgument
-        && IsArrayCreation(lastArgument.GetExpression())
-            ? lastArgument
-            : null;
 
     private static bool IsArrayCreation(ExpressionSyntax expression) =>
         expression switch

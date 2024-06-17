@@ -28,7 +28,7 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TArgumentNode> : Sona
 
     protected abstract TSyntaxKind[] ExpressionKinds { get; }
     protected abstract TArgumentNode LastArgumentIfArrayCreation(SyntaxNode expression);
-    protected abstract ITypeSymbol ArrayElementType(SyntaxNode expression, SemanticModel model);
+    protected abstract ITypeSymbol ArrayElementType(TArgumentNode argument, SemanticModel model);
 
     protected override string MessageFormat => "Remove this array creation and simply pass the elements.";
 
@@ -39,9 +39,10 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TArgumentNode> : Sona
         {
             if (LastArgumentIfArrayCreation(c.Node) is { } lastArgument
                 && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol methodSymbol
-                && Language.MethodParameterLookup(c.Node, methodSymbol).TryGetSymbol(lastArgument, out var param)
+                && Language.MethodParameterLookup(c.Node, methodSymbol) is { } parameterLookup
+                && parameterLookup.TryGetSymbol(lastArgument, out var param)
                 && param is { IsParams: true }
-                && !IsObjectOrArrayType(c.Node, methodSymbol, param, c.SemanticModel)
+                && !IsArrayOfCandidateTypes(lastArgument, parameterLookup, param, c.SemanticModel)
                 && !IsJaggedArrayParam(param))
             {
                 c.ReportIssue(Rule, lastArgument.GetLocation());
@@ -51,18 +52,16 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TArgumentNode> : Sona
     private static bool IsJaggedArrayParam(IParameterSymbol param) =>
         param.Type is IArrayTypeSymbol { ElementType: IArrayTypeSymbol };
 
-    private bool IsObjectOrArrayType(SyntaxNode node, IMethodSymbol symbol, IParameterSymbol param, SemanticModel model)
+    private bool IsArrayOfCandidateTypes(TArgumentNode lastArgument, IMethodParameterLookup parameterLookup, IParameterSymbol param, SemanticModel model)
     {
         return param.Type is IArrayTypeSymbol array
             && (array.ElementType.Is(KnownType.System_Array)
-               || (array.ElementType.Is(KnownType.System_Object) && !ParamArgumentsAreReferenceTypeArrays(node, symbol, param, model)));
+               || (array.ElementType.Is(KnownType.System_Object) && !ParamArgumentsAreReferenceTypeArrays(lastArgument, parameterLookup, model)));
 
-        bool ParamArgumentsAreReferenceTypeArrays(SyntaxNode node, IMethodSymbol symbol, IParameterSymbol param, SemanticModel model) =>
-            Language.MethodParameterLookup(node, symbol) is { } parameterLookup
+        bool ParamArgumentsAreReferenceTypeArrays(TArgumentNode lastArgument, IMethodParameterLookup parameterLookup, SemanticModel model) =>
+            ArrayElementType(lastArgument, model) is { IsReferenceType: true } elementType
+            && !elementType.Is(KnownType.System_Object)
             && parameterLookup.TryGetSyntax(param, out var arguments)
-            && arguments.Count() is 1
-            && ArrayElementType(arguments.First(), model) is { } elementType
-            && elementType.IsReferenceType
-            && !elementType.Is(KnownType.System_Object);
+            && arguments.Count() is 1;
     }
 }

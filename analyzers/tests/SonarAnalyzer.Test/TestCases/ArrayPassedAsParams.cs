@@ -78,6 +78,7 @@ public class Repro6894
     //Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/6894
 
     public void Method(params object[] args) { }
+    public void MethodMixed(int i, params object[] args) { }
     public void MethodArray(params Array[] args) { }
     public void MethodJaggedArray(params int[][] args) { }
 
@@ -90,7 +91,8 @@ public class Repro6894
         Method(new object[] { new int[] { 1, 2 } });                        // FN, elements in args: [System.Int32[]]
         Method(new int[] { 1, 2, 3, });                                     // Compliant, Elements in args: [System.Int32[]]
         Method(new String[] { "1", "2" }, new String[] { "1", "2" });       // Compliant, elements in args: [System.String[], System.String[]]
-        Method(new String[] { "1", "2"}, new int[] { 1, 2});                // Compliant, elements in args: pSystem.String[], System.Int32[]]
+        Method(new String[] { "1", "2"}, new int[] { 1, 2});                // Compliant, elements in args: [System.String[], System.Int32[]]
+        MethodMixed(1, new String[] { "1", "2" });                          // Noncompliant
         MethodArray(new String[] { "1", "2" }, new String[] { "1", "2" });  // Compliant, elements in args: [System.String[], System.String[]]
         MethodArray(new int[] { 1, 2 }, new int[] { 1, 2 });                // Compliant, elements in args: [System.Int32[], System.Int32[]]
 

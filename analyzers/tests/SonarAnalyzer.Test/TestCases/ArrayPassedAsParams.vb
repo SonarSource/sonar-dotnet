@@ -85,7 +85,7 @@ Public Class Repro6894
         Method(New Object() {New Integer() {1, 2}})                     ' FN, elements in args: [System.Int32[]]
         Method(New Integer() {1, 2, 3})                                 ' Compliant, Elements in args: [System.Int32[]]
         Method(New String() {"1", "2"}, New String() {"1", "2"})        ' Compliant, elements in args: [System.String[], System.String[]]
-        Method(New String() {"1", "2"}, New Integer() {1, 2})           ' Compliant, elements in args: pSystem.String[], System.Int32[]]
+        Method(New String() {"1", "2"}, New Integer() {1, 2})           ' Compliant, elements in args: [System.String[], System.Int32[]]
         MethodArray(New String() {"1", "2"}, New String() {"1", "2"})   ' Compliant, elements in args: [System.String[], System.String[]]
         MethodArray(New Integer() {1, 2}, New Integer() {1, 2})         ' Compliant, elements in args: [System.Int32[], System.Int32[]]
 
