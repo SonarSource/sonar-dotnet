@@ -1398,6 +1398,8 @@ namespace Tests.Diagnostics
     // https://github.com/SonarSource/sonar-dotnet/issues/4948
     public class Repro_4948
     {
+        private bool condition;
+
         public void UsedInFinally()
         {
             int value = 42; // Compliant, Muted
@@ -1437,10 +1439,48 @@ namespace Tests.Diagnostics
 
         public void UsedInFinally_Throw()
         {
-            var value = 42; // Noncompliant FP related to LVA
+            var value = 42; // Compliant 
             try
             {
                 throw new Exception();
+            }
+            finally
+            {
+                Use(value);
+            }
+        }
+
+        public void UsedInFinally_Throw_FilteredCatch()
+        {
+            var value = 42; // Compliant 
+            try
+            {
+                throw new Exception();
+            }
+            catch (FormatException)
+            {
+                value = 42;
+            }
+            catch when (condition)
+            {
+                value = 42;
+            }
+            finally
+            {
+                Use(value);
+            }
+        }
+        
+        public void UsedInFinally_Throw_CatchAll()
+        {
+            var value = 42; // FN
+            try
+            {
+                throw new Exception();
+            }
+            catch
+            {
+                value = 0;
             }
             finally
             {
