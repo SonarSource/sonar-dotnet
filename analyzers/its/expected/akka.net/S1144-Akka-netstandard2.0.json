@@ -56,18 +56,6 @@
     },
     {
       "Id": "S1144",
-      "Message": "Remove the unused private field \u0027m_padding1\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L567",
-      "Location": "Line 567 Position 13-58"
-    },
-    {
-      "Id": "S1144",
-      "Message": "Remove the unused private field \u0027m_padding2\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L569",
-      "Location": "Line 569 Position 13-58"
-    },
-    {
-      "Id": "S1144",
       "Message": "Remove the unused private setter \u0027set_ExceptionHandler\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L88",
       "Location": "Line 88 Position 58-70"
