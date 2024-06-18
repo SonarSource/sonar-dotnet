@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
@@ -493,5 +494,31 @@ class Repro_9219
         [MyAttribute]
         get;
         private set; // Noncompliant
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9432
+namespace Repro_9432
+{
+    partial class OuterClass
+    {
+        public void MethodUsesNestedStruct()
+        {
+            NestedClass.NestedStruct x;
+        }
+
+        private static class NestedClass
+        {
+            // https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.structlayoutattribute
+            [StructLayout(LayoutKind.Sequential)]
+            internal struct NestedStruct
+            {
+                public int Field;                       // Compliant: the unused field can be used to control the physical layout of struct in the memory
+                public int Property { get; set; }       // Noncompliant: https://stackoverflow.com/questions/28488057/what-is-the-structlayoutattribute-effect-on-properties-in-c
+                public int CalculatedProperty => 42;    // Noncompliant
+                public void Method() { }                // Noncompliant
+                public struct UnusedNestedType { }      // Noncompliant
+            }
+        }
     }
 }
