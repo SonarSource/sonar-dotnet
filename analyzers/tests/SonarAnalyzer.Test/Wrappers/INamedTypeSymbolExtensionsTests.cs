@@ -46,12 +46,7 @@ public class INamedTypeSymbolExtensionsTests
                 }
             }
             """;
-        var (tree, semanticModel) = TestHelper.CompileCS(code);
-        var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("o")); // o in o.ToString()
-        var namedType = semanticModel.GetTypeInfo(identifier).Type.Should().BeAssignableTo<INamedTypeSymbol>().Which;
-        var typeArgumentNullabilityShim = namedType.TypeArgumentNullableAnnotations();
-        var typeArgumentNullability = namedType.TypeArgumentNullableAnnotations;
-        typeArgumentNullabilityShim.Should().BeEquivalentTo([expected]).And.BeEquivalentTo(typeArgumentNullability.Select(x => (NullableAnnotation)x));
+        ValidateTypeArgumentNullableAnnotations(code, expected);
     }
 
     [TestMethod]
@@ -69,14 +64,8 @@ public class INamedTypeSymbolExtensionsTests
                 }
             }
             """;
-        var (tree, semanticModel) = TestHelper.CompileCS(code);
-        var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("o")); // o in o.ToString()
-        var namedType = semanticModel.GetTypeInfo(identifier).Type.Should().BeAssignableTo<INamedTypeSymbol>().Which;
-        var typeArgumentNullabilityShim = namedType.TypeArgumentNullableAnnotations();
-        var typeArgumentNullability = namedType.TypeArgumentNullableAnnotations;
-        typeArgumentNullabilityShim.Should().BeEquivalentTo(
-            [NullableAnnotation.NotAnnotated, NullableAnnotation.Annotated, NullableAnnotation.Annotated, NullableAnnotation.NotAnnotated, NullableAnnotation.Annotated])
-            .And.BeEquivalentTo(typeArgumentNullability.Select(x => (NullableAnnotation)x));
+        ValidateTypeArgumentNullableAnnotations(code,
+            NullableAnnotation.NotAnnotated, NullableAnnotation.Annotated, NullableAnnotation.Annotated, NullableAnnotation.NotAnnotated, NullableAnnotation.Annotated);
     }
 
     [TestMethod]
@@ -94,12 +83,16 @@ public class INamedTypeSymbolExtensionsTests
                 }
             }
             """;
+        ValidateTypeArgumentNullableAnnotations(code);
+    }
+
+    private static void ValidateTypeArgumentNullableAnnotations(string code, params NullableAnnotation[] expected)
+    {
         var (tree, semanticModel) = TestHelper.CompileCS(code);
         var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("o")); // o in o.ToString()
         var namedType = semanticModel.GetTypeInfo(identifier).Type.Should().BeAssignableTo<INamedTypeSymbol>().Which;
         var typeArgumentNullabilityShim = namedType.TypeArgumentNullableAnnotations();
         var typeArgumentNullability = namedType.TypeArgumentNullableAnnotations;
-        typeArgumentNullabilityShim.Should().BeEmpty()
-            .And.BeEquivalentTo(typeArgumentNullability.Select(x => (NullableAnnotation)x));
+        typeArgumentNullabilityShim.Should().BeEquivalentTo(expected).And.BeEquivalentTo(typeArgumentNullability.Select(x => (NullableAnnotation)x));
     }
 }
