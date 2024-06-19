@@ -94,7 +94,7 @@ public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TSyntaxKi
         first.Equals(second) // M1<T>(T x) where T: IComparable <-> M2<T>(T x) where T: IComparable
         || AreSameNamedTypeParameters(first, second) // M1<T1, T2>() where T1: T2 <-> M2<T1, T2>() where T1: T2
                                                      // T2 of M1 is a different symbol than T2 of M2, but if they have the same name they can be interchanged.
-                                                     // T2 equivalency is checked as well in HaveSameTypeParameters
+                                                     // T2 equivalency is checked as well in TypeConstraintsAreSame
         || TypesAreSameGenericType(first, second); // M1<T>(T x) where T: IEquatable<T> <-> M2<T>(T x) where T: IEquatable<T>
 
     private static bool TypesAreSameGenericType(ITypeSymbol firstParameterType, ITypeSymbol secondParameterType) =>
