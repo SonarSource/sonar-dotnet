@@ -90,9 +90,15 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         }
         if (block.IsEnclosedIn(ControlFlowRegionKind.Try))
         {
+            var catchesAll = false;
             foreach (var catchOrFilterRegion in block.Successors.SelectMany(CatchOrFilterRegions))
             {
                 AddBranch(block, Cfg.Blocks[catchOrFilterRegion.FirstBlockOrdinal]);
+                catchesAll = catchesAll || (catchOrFilterRegion.Kind == ControlFlowRegionKind.Catch && IsCatchAllType(catchOrFilterRegion.ExceptionType));
+            }
+            if (!catchesAll && block.EnclosingRegion(ControlFlowRegionKind.TryAndFinally)?.NestedRegion(ControlFlowRegionKind.Finally) is { } finallyRegion)
+            {
+                AddBranch(block, Cfg.Blocks[finallyRegion.FirstBlockOrdinal]);
             }
         }
     }
@@ -140,6 +146,10 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
             }
         }
     }
+
+    private static bool IsCatchAllType(ITypeSymbol exceptionType) =>
+        exceptionType.SpecialType == SpecialType.System_Object  // catch { ... }
+        || exceptionType is { ContainingNamespace: { Name: nameof(System), ContainingNamespace.IsGlobalNamespace: true }, Name: nameof(Exception) };  // catch(Exception) { ... }
 
     private static ISymbol OriginalDeclaration(IOperation originalOperation)
     {

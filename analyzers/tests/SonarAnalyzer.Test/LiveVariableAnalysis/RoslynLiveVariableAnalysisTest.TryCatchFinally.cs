@@ -742,10 +742,72 @@ public partial class RoslynLiveVariableAnalysisTest
             """;
         var context = CreateContextCS(code);
         context.ValidateEntry();
-        context.Validate("Method(0);"/*Should be:, LiveOut("variable")*/);
-        context.Validate("Method(1);"/*Should be:, LiveIn("variable"), LiveOut("variable")*/);
+        context.Validate("Method(0);", LiveOut("variable"));
+        context.Validate("Method(1);", LiveIn("variable"), LiveOut("variable"));
         context.Validate("Method(variable);", LiveIn("variable"));
         context.Validate("Method(2);");
+    }
+
+    [TestMethod]
+    public void Finally_WithThrowStatementInTry_LiveOut_FilteredCatch()
+    {
+        var code = """
+            int variable = 42;
+            Method(0);
+            try
+            {
+                Method(1);
+                throw new Exception();
+            }
+            catch when (Property == 42) { }     // FilterAndHandlerRegion
+            catch (FormatException) { }
+            catch (ArgumentException ex) { }
+            finally
+            {
+                Method(variable);
+            }
+            Method(2);
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("Method(0);", LiveOut("variable"));
+        context.Validate("Method(1);", LiveIn("variable"), LiveOut("variable"));
+        context.Validate("Method(variable);", LiveIn("variable"));
+        context.Validate("Method(2);");
+    }
+
+    [DataTestMethod]
+    [DataRow("catch")]
+    [DataRow("catch (Exception)")]
+    [DataRow("catch (Exception ex)")]
+    public void Finally_WithThrowStatementInTry_LiveOut_CatchAll(string catchAll)
+    {
+        var code = $$"""
+            int variable = 42;
+            Method(0);
+            try
+            {
+                Method(1);
+                throw new Exception();
+            }
+            {{catchAll}}
+            {
+                Method(2);
+                variable = 0; 
+            }
+            finally
+            {
+                Method(variable);
+            }
+            Method(3);
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("Method(0);");
+        context.Validate("Method(1);");
+        context.Validate("Method(2);", LiveOut("variable"));
+        context.Validate("Method(variable);", LiveIn("variable"));
+        context.Validate("Method(3);");
     }
 
     [TestMethod]
