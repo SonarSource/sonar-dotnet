@@ -18,12 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.ComponentModel.Design;
 using SonarAnalyzer.CFG.Roslyn;
 
 namespace SonarAnalyzer.CFG.LiveVariableAnalysis;
 
 public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<ControlFlowGraph, BasicBlock>
 {
+    private readonly Dictionary<CaptureId, List<IOperation>> flowCaptureOperations = [];
     private readonly Dictionary<int, List<BasicBlock>> blockPredecessors = [];
     private readonly Dictionary<int, List<BasicBlock>> blockSuccessors = [];
 
@@ -41,6 +43,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         {
             BuildBranches(block);
         }
+        LiveCaptureAnalysis(cfg);
         Analyze();
     }
 
@@ -70,8 +73,41 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
     protected override State ProcessBlock(BasicBlock block)
     {
         var ret = new RoslynState(this);
-        ret.ProcessBlock(Cfg, block);
+        ret.ProcessBlock(Cfg, block, flowCaptureOperations);
         return ret;
+    }
+
+    private void LiveCaptureAnalysis(ControlFlowGraph cfg)
+    {
+        foreach (var operation in cfg.Blocks.Where(x => x.IsEnclosedIn(ControlFlowRegionKind.LocalLifetime)).SelectMany(x => x.Operations).ToExecutionOrder())
+        {
+            if (IFlowCaptureOperationWrapper.IsInstance(operation.Instance))
+            {
+                var flowCapture = IFlowCaptureOperationWrapper.FromOperation(operation.Instance);
+
+                if (IFlowCaptureReferenceOperationWrapper.IsInstance(flowCapture.Value)
+                    && IFlowCaptureReferenceOperationWrapper.FromOperation(flowCapture.Value) is var capture
+                    && flowCaptureOperations.TryGetValue(capture.Id, out var capturedOperations))
+                {
+                    if (flowCaptureOperations.ContainsKey(flowCapture.Id))
+                    {
+                        flowCaptureOperations[flowCapture.Id].AddRange(capturedOperations);
+                    }
+                    else
+                    {
+                        flowCaptureOperations.Add(flowCapture.Id, capturedOperations);
+                    }
+                }
+                else if (flowCaptureOperations.TryGetValue(flowCapture.Id, out capturedOperations))
+                {
+                    flowCaptureOperations[flowCapture.Id] = [.. capturedOperations, flowCapture.Value];
+                }
+                else
+                {
+                    flowCaptureOperations.Add(flowCapture.Id, [flowCapture.Value]);
+                }
+            }
+        }
     }
 
     private void BuildBranches(BasicBlock block)
@@ -190,32 +226,53 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         public RoslynState(RoslynLiveVariableAnalysis owner) =>
             this.owner = owner;
 
-        public void ProcessBlock(ControlFlowGraph cfg, BasicBlock block)
+        public void ProcessBlock(ControlFlowGraph cfg, BasicBlock block, Dictionary<CaptureId, List<IOperation>> flowCaptureOperations = null)
         {
-            foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder())
+            flowCaptureOperations ??= [];
+
+            foreach (var op in block.OperationsAndBranchValue.ToReversedExecutionOrder())
             {
-                // Everything that is added to this switch needs to be considered inside ProcessCaptured as well
-                switch (operation.Instance.Kind)
+                var operation = op.Instance;
+                if ((IFlowCaptureOperationWrapper.IsInstance(operation)
+                        && flowCaptureOperations.TryGetValue(IFlowCaptureOperationWrapper.FromOperation(operation).Id, out var capturedOps))
+                    || (IFlowCaptureReferenceOperationWrapper.IsInstance(operation)
+                        && flowCaptureOperations.TryGetValue(IFlowCaptureReferenceOperationWrapper.FromOperation(operation).Id, out capturedOps)))
                 {
-                    case OperationKindEx.LocalReference:
-                        ProcessParameterOrLocalReference(ILocalReferenceOperationWrapper.FromOperation(operation.Instance));
-                        break;
-                    case OperationKindEx.ParameterReference:
-                        ProcessParameterOrLocalReference(IParameterReferenceOperationWrapper.FromOperation(operation.Instance));
-                        break;
-                    case OperationKindEx.SimpleAssignment:
-                        ProcessSimpleAssignment(ISimpleAssignmentOperationWrapper.FromOperation(operation.Instance));
-                        break;
-                    case OperationKindEx.FlowAnonymousFunction:
-                        ProcessFlowAnonymousFunction(cfg, IFlowAnonymousFunctionOperationWrapper.FromOperation(operation.Instance));
-                        break;
-                    case OperationKindEx.Invocation:
-                        ProcessLocalFunction(cfg, IInvocationOperationWrapper.FromOperation(operation.Instance).TargetMethod);
-                        break;
-                    case OperationKindEx.MethodReference:
-                        ProcessLocalFunction(cfg, IMethodReferenceOperationWrapper.FromOperation(operation.Instance).Method);
-                        break;
+                    foreach (var capturedOperation in capturedOps)
+                    {
+                        ProcessOperation(cfg, capturedOperation);
+                    }
                 }
+                else
+                {
+                    ProcessOperation(cfg, operation);
+                }
+            }
+        }
+
+        private void ProcessOperation(ControlFlowGraph cfg, IOperation operation)
+        {
+            // Everything that is added to this switch needs to be considered inside ProcessCaptured as well
+            switch (operation.Kind)
+            {
+                case OperationKindEx.LocalReference:
+                    ProcessParameterOrLocalReference(ILocalReferenceOperationWrapper.FromOperation(operation));
+                    break;
+                case OperationKindEx.ParameterReference:
+                    ProcessParameterOrLocalReference(IParameterReferenceOperationWrapper.FromOperation(operation));
+                    break;
+                case OperationKindEx.SimpleAssignment:
+                    ProcessSimpleAssignment(ISimpleAssignmentOperationWrapper.FromOperation(operation));
+                    break;
+                case OperationKindEx.FlowAnonymousFunction:
+                    ProcessFlowAnonymousFunction(cfg, IFlowAnonymousFunctionOperationWrapper.FromOperation(operation));
+                    break;
+                case OperationKindEx.Invocation:
+                    ProcessLocalFunction(cfg, IInvocationOperationWrapper.FromOperation(operation).TargetMethod);
+                    break;
+                case OperationKindEx.MethodReference:
+                    ProcessLocalFunction(cfg, IMethodReferenceOperationWrapper.FromOperation(operation).Method);
+                    break;
             }
         }
 
