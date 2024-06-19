@@ -1218,3 +1218,26 @@ class Repro9425
         collectionOfIds.Clear();  // Noncompliant FP
     }
 }
+
+//https://github.com/SonarSource/sonar-dotnet/issues/9444
+class Repro9444
+{
+    List<int> Numbers { get; set; }
+
+    void Initialize()
+    {
+        Numbers = new List<int>();
+        InitializeNumbers();
+        foreach (var number in Numbers) // Noncompliant FP
+        {
+            System.Console.WriteLine(number);
+        }
+    }
+
+    void InitializeNumbers()
+    {
+        Numbers.Add(1);
+        Numbers.Add(2);
+        Numbers.Add(3);
+    }
+}
