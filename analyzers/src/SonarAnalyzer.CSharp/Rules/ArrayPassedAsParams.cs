@@ -26,21 +26,21 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
     protected override SyntaxKind[] ExpressionKinds { get; } =
-        {
+        [
             SyntaxKind.ObjectCreationExpression,
             SyntaxKind.InvocationExpression,
             SyntaxKindEx.ImplicitObjectCreationExpression
-        };
+        ];
 
     protected override ArgumentSyntax LastArgumentIfArrayCreation(SyntaxNode expression) =>
-        LastArgumentIfArrayCreation(ArgumentList(expression));
-
-    private static ArgumentSyntax LastArgumentIfArrayCreation(BaseArgumentListSyntax argumentList) =>
-        argumentList is { Arguments: { Count: > 0 } arguments }
+        ArgumentList(expression) is { Arguments: { Count: > 0 } arguments }
         && arguments.Last() is var lastArgument
         && IsArrayCreation(lastArgument.Expression)
             ? lastArgument
             : null;
+
+    protected override ITypeSymbol ArrayElementType(ArgumentSyntax argument, SemanticModel model) =>
+        model.GetTypeInfo(((ArrayCreationExpressionSyntax)argument.Expression).Type.ElementType).Type;
 
     private static BaseArgumentListSyntax ArgumentList(SyntaxNode expression) =>
         expression switch

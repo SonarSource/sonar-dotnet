@@ -64,3 +64,31 @@ Public Class MyOtherClass
     Public Sub New(ByVal a As Integer(), ParamArray args As Integer())
     End Sub
 End Class
+
+Public Class Repro6894
+    'Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/6894
+
+    Public Sub Method(ParamArray args As Object())
+    End Sub
+
+    Public Sub MethodArray(ParamArray args As Array())
+    End Sub
+
+    Public Sub MethodJaggedArray(ParamArray args As Integer()())
+    End Sub
+
+    Public Sub CallMethod()
+        Method(New String() {"1", "2"})                                 ' Noncompliant, elements in args: ["1", "2"]
+                                                                        ' The argument given for a parameter array can be a single expression that is implicitly convertible (§10.2) to the parameter array type.
+                                                                        ' In this case, the parameter array acts precisely like a value parameter.
+                                                                        ' see: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/classes#14625-parameter-arrays
+        Method(New Object() {New Integer() {1, 2}})                     ' FN, elements in args: [System.Int32[]]
+        Method(New Integer() {1, 2, 3})                                 ' Compliant, Elements in args: [System.Int32[]]
+        Method(New String() {"1", "2"}, New String() {"1", "2"})        ' Compliant, elements in args: [System.String[], System.String[]]
+        Method(New String() {"1", "2"}, New Integer() {1, 2})           ' Compliant, elements in args: [System.String[], System.Int32[]]
+        MethodArray(New String() {"1", "2"}, New String() {"1", "2"})   ' Compliant, elements in args: [System.String[], System.String[]]
+        MethodArray(New Integer() {1, 2}, New Integer() {1, 2})         ' Compliant, elements in args: [System.Int32[], System.Int32[]]
+
+        MethodJaggedArray(New Integer() {1, 2})                         ' Compliant: jagged array [System.Object[]]
+    End Sub
+End Class

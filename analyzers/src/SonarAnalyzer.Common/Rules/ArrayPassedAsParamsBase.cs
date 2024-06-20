@@ -25,33 +25,43 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TArgumentNode> : Sona
     where TArgumentNode : SyntaxNode
 {
     private const string DiagnosticId = "S3878";
-    protected override string MessageFormat => "Remove this array creation and simply pass the elements.";
-
-    private readonly DiagnosticDescriptor rule;
 
     protected abstract TSyntaxKind[] ExpressionKinds { get; }
     protected abstract TArgumentNode LastArgumentIfArrayCreation(SyntaxNode expression);
+    protected abstract ITypeSymbol ArrayElementType(TArgumentNode argument, SemanticModel model);
 
-    protected ArrayPassedAsParamsBase() : base(DiagnosticId) =>
-        rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
+    protected override string MessageFormat => "Remove this array creation and simply pass the elements.";
+
+    protected ArrayPassedAsParamsBase() : base(DiagnosticId) {}
 
     protected sealed override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
             if (LastArgumentIfArrayCreation(c.Node) is { } lastArgument
-                && ParameterSymbol(c.SemanticModel, c.Node, lastArgument) is { IsParams: true } param
+                && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol methodSymbol
+                && Language.MethodParameterLookup(c.Node, methodSymbol) is { } parameterLookup
+                && parameterLookup.TryGetSymbol(lastArgument, out var param)
+                && param is { IsParams: true }
+                && !IsArrayOfCandidateTypes(lastArgument, parameterLookup, param, c.SemanticModel)
                 && !IsJaggedArrayParam(param))
             {
-                c.ReportIssue(rule, lastArgument.GetLocation());
+                c.ReportIssue(Rule, lastArgument.GetLocation());
             }
         }, ExpressionKinds);
 
-    private IParameterSymbol ParameterSymbol(SemanticModel model, SyntaxNode invocation, TArgumentNode argument) =>
-        model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
-        && Language.MethodParameterLookup(invocation, methodSymbol).TryGetSymbol(argument, out var param)
-            ? param
-            : null;
-
     private static bool IsJaggedArrayParam(IParameterSymbol param) =>
         param.Type is IArrayTypeSymbol { ElementType: IArrayTypeSymbol };
+
+    private bool IsArrayOfCandidateTypes(TArgumentNode lastArgument, IMethodParameterLookup parameterLookup, IParameterSymbol param, SemanticModel model)
+    {
+        return param.Type is IArrayTypeSymbol array
+            && (array.ElementType.Is(KnownType.System_Array)
+               || (array.ElementType.Is(KnownType.System_Object) && !ParamArgumentsAreReferenceTypeArrays(lastArgument, parameterLookup, model)));
+
+        bool ParamArgumentsAreReferenceTypeArrays(TArgumentNode lastArgument, IMethodParameterLookup parameterLookup, SemanticModel model) =>
+            ArrayElementType(lastArgument, model) is { IsReferenceType: true } elementType
+            && !elementType.Is(KnownType.System_Object)
+            && parameterLookup.TryGetSyntax(param, out var arguments)
+            && arguments.Length is 1;
+    }
 }

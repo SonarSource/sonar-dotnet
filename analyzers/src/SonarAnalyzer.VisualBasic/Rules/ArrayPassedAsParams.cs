@@ -26,15 +26,22 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
     protected override SyntaxKind[] ExpressionKinds { get; } =
-        {
+        [
             SyntaxKind.ObjectCreationExpression,
             SyntaxKind.InvocationExpression
-        };
+        ];
 
     protected override ArgumentSyntax LastArgumentIfArrayCreation(SyntaxNode expression) =>
-        GetLastArgumentIfArrayCreation(GetArgumentListFromExpression(expression));
+        ArgumentList(expression) is { Arguments: { Count: > 0 } arguments }
+        && arguments.Last() is var lastArgument
+        && IsArrayCreation(lastArgument.GetExpression())
+            ? lastArgument
+            : null;
 
-    private static ArgumentListSyntax GetArgumentListFromExpression(SyntaxNode expression) =>
+    protected override ITypeSymbol ArrayElementType(ArgumentSyntax argument, SemanticModel model) =>
+        model.GetTypeInfo(((ArrayCreationExpressionSyntax)argument.GetExpression()).Type).Type;
+
+    private static ArgumentListSyntax ArgumentList(SyntaxNode expression) =>
         expression switch
         {
             ObjectCreationExpressionSyntax { } creation => creation.ArgumentList,
@@ -42,16 +49,12 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
             _ => null
         };
 
-    private static ArgumentSyntax GetLastArgumentIfArrayCreation(ArgumentListSyntax argumentList) =>
-        argumentList is { Arguments: { Count: > 0 } arguments }
-        && arguments.Last() is var lastArgument
-        && IsArrayCreation(lastArgument.GetExpression())
-            ? lastArgument
-            : null;
-
     private static bool IsArrayCreation(ExpressionSyntax expression) =>
-        expression
-            is ArrayCreationExpressionSyntax { Initializer.Initializers.Count: > 0 }
-            or ArrayCreationExpressionSyntax { ArrayBounds: null }
-            or CollectionInitializerSyntax;
+        expression switch
+        {
+            ArrayCreationExpressionSyntax { Initializer.Initializers.Count: > 0 } => true,
+            ArrayCreationExpressionSyntax { ArrayBounds: null } => true,
+            CollectionInitializerSyntax => true,
+            _ => false
+        };
 }
