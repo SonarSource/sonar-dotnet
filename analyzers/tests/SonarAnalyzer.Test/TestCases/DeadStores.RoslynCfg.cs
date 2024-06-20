@@ -192,7 +192,7 @@ namespace Tests.Diagnostics
                 x = 11; // FN, muted due to try/catch
                 x = 12;
                 Console.Write(x);
-                x = 13; // Compliant, Console.Write could throw and value is read fater try/catch
+                x = 13; // FN, muted due to try/catch
             }
             catch (Exception)
             {
@@ -1186,7 +1186,7 @@ namespace Tests.Diagnostics
                 x = 11;     // FN, muted due to try/catch
                 x = 12;
                 Console.Write(x);
-                x = 13;     // Compliant, Console.Write can throw
+                x = 13;     // FN, muted due to try/catch
             }
             catch (Exception)
             {
@@ -1420,7 +1420,7 @@ namespace Tests.Diagnostics
             {
                 Action a = () =>
                 {
-                    int value = 42; // Noncompliant FP
+                    int value = 42; // Compliant
                     try
                     {
                         SomethingThatCanThrow();
@@ -1436,7 +1436,7 @@ namespace Tests.Diagnostics
             {
             }
         }
-
+        
         public void UsedInFinally_Throw()
         {
             var value = 42; // Compliant 
