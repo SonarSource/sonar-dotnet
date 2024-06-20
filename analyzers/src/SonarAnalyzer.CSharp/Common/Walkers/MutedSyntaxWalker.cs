@@ -83,7 +83,6 @@ namespace SonarAnalyzer.Common.Walkers
             if (Array.Find(symbols, x => node.NameIs(x.Name) && x.Equals(semanticModel.GetSymbolInfo(node).Symbol)) is { } symbol)
             {
                 isMuted = IsInTupleAssignmentTarget() || IsUsedInLocalFunction(symbol) || IsInUnsupportedExpression();
-                InspectTryCatch(node);
             }
             base.VisitIdentifierName(node);
 
@@ -99,29 +98,7 @@ namespace SonarAnalyzer.Common.Walkers
                 node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsAnyKind(SyntaxKindEx.IndexExpression, SyntaxKindEx.RangeExpression)) != null;
         }
 
-        public override void VisitVariableDeclarator(VariableDeclaratorSyntax node)
-        {
-            if (Array.Find(symbols, x => node.Identifier.ValueText == x.Name && x.Equals(semanticModel.GetDeclaredSymbol(node))) is not null)
-            {
-                InspectTryCatch(node);
-            }
-            base.VisitVariableDeclarator(node);
-        }
-
         private bool IsMutedState() =>
             isMuted || (isInTryOrCatch && isOutsideTryCatch);
-
-        private void InspectTryCatch(SyntaxNode node)
-        {
-            if (node.HasAncestor(SyntaxKind.TryStatement))
-            {
-                // We're only interested in "try" and "catch" blocks. Don't count "finally" block
-                isInTryOrCatch = isInTryOrCatch || !node.HasAncestor(SyntaxKind.FinallyClause);
-            }
-            else
-            {
-                isOutsideTryCatch = true;
-            }
-        }
     }
 }

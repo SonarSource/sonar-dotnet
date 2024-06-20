@@ -186,22 +186,22 @@ namespace Tests.Diagnostics
         void calculateRate2(int a, int b)
         {
             var x = 0;  // Compliant, ignored value
-            x = 1;      // FN, muted due to try/catch
+            x = 1;      // Noncompliant
             try
             {
-                x = 11; // FN, muted due to try/catch
+                x = 11; // Noncompliant
                 x = 12;
                 Console.Write(x);
-                x = 13; // FN, muted due to try/catch
+                x = 13; // Noncompliant
             }
             catch (Exception)
             {
-                x = 21; // FN, muted due to try/catch
+                x = 21; // Noncompliant
                 x = 22;
                 Console.Write(x);
-                x = 23; // FN, muted due to try/catch
+                x = 23; // Noncompliant
             }
-            x = 31; // FN, muted due to try/catch
+            x = 31; // Noncompliant
         }
 
         void storeI(int i) { }
@@ -824,9 +824,9 @@ namespace Tests.Diagnostics
             }
             finally
             {
-                actor = null;   // FN, muted due to try/catch
+                actor = null;   // Noncompliant
             }
-            actor = null;       // FN, muted due to try/catch
+            actor = null;       // Noncompliant
         }
 
         internal void SnippetTwo(object actor)
@@ -1149,7 +1149,7 @@ namespace Tests.Diagnostics
             }
             catch (SystemException e)
             {
-                exception = e; // FN, muted by try/catch
+                exception = e; // Noncompliant
             }
 
             return exitCode;
@@ -1180,22 +1180,22 @@ namespace Tests.Diagnostics
         public static void DeadStore(int[] array)
         {
             var x = 0;      // Compliant, ignored value
-            x = array[^1];  // FN, muted due to try/catch
+            x = array[^1];  // Noncompliant
             try
             {
-                x = 11;     // FN, muted due to try/catch
+                x = 11;     // Noncompliant
                 x = 12;
                 Console.Write(x);
-                x = 13;     // FN, muted due to try/catch
+                x = 13;     // Noncompliant
             }
             catch (Exception)
             {
-                x = 21;     // FN, muted due to try/catch
+                x = 21;     // Noncompliant
                 x = 22;
                 Console.Write(x);
-                x = 23;     // FN, muted due to try/catch
+                x = 23;     // Noncompliant
             }
-            x = 31;         // FN, muted due to try/catch
+            x = 31;         // Noncompliant
         }
     }
 
@@ -1473,7 +1473,7 @@ namespace Tests.Diagnostics
         
         public void UsedInFinally_Throw_CatchAll()
         {
-            var value = 42; // FN
+            var value = 42; // Noncompliant
             try
             {
                 throw new Exception();
