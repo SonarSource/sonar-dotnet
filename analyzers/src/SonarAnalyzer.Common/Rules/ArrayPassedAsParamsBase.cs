@@ -62,6 +62,6 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TArgumentNode> : Sona
             ArrayElementType(lastArgument, model) is { IsReferenceType: true } elementType
             && !elementType.Is(KnownType.System_Object)
             && parameterLookup.TryGetSyntax(param, out var arguments)
-            && arguments.Count() is 1;
+            && arguments.Length is 1;
     }
 }
