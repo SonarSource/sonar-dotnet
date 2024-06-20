@@ -100,6 +100,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
             {
                 var finallyBlock = Cfg.Blocks[finallyRegion.FirstBlockOrdinal];
                 AddBranch(block, finallyBlock);
+                // We assume that this block can throw in its first operation. Therefore predecessors outside this tryRegion need to be redirected to finally
                 foreach (var predecessor in block.Predecessors.Where(x => x.Source.Ordinal < tryRegion.FirstBlockOrdinal || x.Source.Ordinal > tryRegion.LastBlockOrdinal))
                 {
                     AddBranch(predecessor.Source, finallyBlock);
