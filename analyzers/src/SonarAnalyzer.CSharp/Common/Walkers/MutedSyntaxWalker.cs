@@ -44,35 +44,33 @@ internal class MutedSyntaxWalker : CSharpSyntaxWalker
         SyntaxKind.ParenthesizedLambdaExpression
     ];
 
-    private readonly SemanticModel semanticModel;
+    private readonly SemanticModel model;
     private readonly SyntaxNode root;
     private readonly ISymbol[] symbols;
     private bool isMuted;
-    private bool isInTryOrCatch;
-    private bool isOutsideTryCatch;
 
-    public MutedSyntaxWalker(SemanticModel semanticModel, SyntaxNode node)
-        : this(semanticModel, node, node.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Select(x => semanticModel.GetSymbolInfo(x).Symbol).WhereNotNull().ToArray()) { }
+    public MutedSyntaxWalker(SemanticModel model, SyntaxNode node)
+        : this(model, node, node.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Select(x => model.GetSymbolInfo(x).Symbol).WhereNotNull().ToArray()) { }
 
-    public MutedSyntaxWalker(SemanticModel semanticModel, SyntaxNode node, params ISymbol[] symbols)
+    public MutedSyntaxWalker(SemanticModel model, SyntaxNode node, params ISymbol[] symbols)
     {
-        this.semanticModel = semanticModel;
+        this.model = model;
         this.symbols = symbols;
         root = node.Ancestors().FirstOrDefault(x => x.IsAnyKind(RootKinds));
     }
 
     public bool IsMuted()
     {
-        if (symbols.Any() && root != null)
+        if (symbols.Any() && root is not null)
         {
             Visit(root);
         }
-        return IsMutedState();
+        return isMuted;
     }
 
     public override void Visit(SyntaxNode node)
     {
-        if (!IsMutedState())   // Performance optimization, we can stop visiting once we know the answer
+        if (!isMuted)   // Performance optimization, we can stop visiting once we know the answer
         {
             base.Visit(node);
         }
@@ -80,7 +78,7 @@ internal class MutedSyntaxWalker : CSharpSyntaxWalker
 
     public override void VisitIdentifierName(IdentifierNameSyntax node)
     {
-        if (Array.Find(symbols, x => node.NameIs(x.Name) && x.Equals(semanticModel.GetSymbolInfo(node).Symbol)) is { } symbol)
+        if (Array.Find(symbols, x => node.NameIs(x.Name) && x.Equals(model.GetSymbolInfo(node).Symbol)) is { } symbol)
         {
             isMuted = IsInTupleAssignmentTarget() || IsUsedInLocalFunction(symbol) || IsInUnsupportedExpression();
         }
@@ -95,9 +93,6 @@ internal class MutedSyntaxWalker : CSharpSyntaxWalker
             && node.HasAncestor(SyntaxKindEx.LocalFunctionStatement);
 
         bool IsInUnsupportedExpression() =>
-            node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsAnyKind(SyntaxKindEx.IndexExpression, SyntaxKindEx.RangeExpression)) != null;
+            node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsAnyKind(SyntaxKindEx.IndexExpression, SyntaxKindEx.RangeExpression)) is not null;
     }
-
-    private bool IsMutedState() =>
-        isMuted || (isInTryOrCatch && isOutsideTryCatch);
 }
