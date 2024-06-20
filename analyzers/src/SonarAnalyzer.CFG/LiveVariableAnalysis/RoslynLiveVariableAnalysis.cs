@@ -88,7 +88,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
                 BuildBranchesFinally(successor.Source, finallyRegion);
             }
         }
-        if (block.IsEnclosedIn(ControlFlowRegionKind.Try))
+        if (block.EnclosingNonLocalLifetimeRegion() is { Kind: ControlFlowRegionKind.Try } tryRegion)
         {
             var catchesAll = false;
             foreach (var catchOrFilterRegion in block.Successors.SelectMany(CatchOrFilterRegions))
@@ -98,7 +98,12 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
             }
             if (!catchesAll && block.EnclosingRegion(ControlFlowRegionKind.TryAndFinally)?.NestedRegion(ControlFlowRegionKind.Finally) is { } finallyRegion)
             {
-                AddBranch(block, Cfg.Blocks[finallyRegion.FirstBlockOrdinal]);
+                var finallyBlock = Cfg.Blocks[finallyRegion.FirstBlockOrdinal];
+                AddBranch(block, finallyBlock);
+                foreach (var predecessor in block.Predecessors.Where(x => x.Source.Ordinal < tryRegion.FirstBlockOrdinal || x.Source.Ordinal > tryRegion.LastBlockOrdinal))
+                {
+                    AddBranch(predecessor.Source, finallyBlock);
+                }
             }
         }
     }

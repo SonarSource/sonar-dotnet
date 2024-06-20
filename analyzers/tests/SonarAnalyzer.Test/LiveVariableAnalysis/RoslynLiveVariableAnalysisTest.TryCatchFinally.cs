@@ -1031,7 +1031,7 @@ public partial class RoslynLiveVariableAnalysisTest
             """;
         var context = CreateContextCS(code);
         context.ValidateEntry();
-        context.Validate("Method(0);"/*Should be:, LiveOut("variable")*/);
+        context.Validate("Method(0);", LiveOut("variable"));
         context.Validate("Method(1);", LiveOut("variable"));
         context.Validate("Method(variable);", LiveIn("variable"));
         context.Validate("Method(2);");
