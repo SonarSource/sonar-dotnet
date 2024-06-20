@@ -42,7 +42,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         {
             BuildBranches(block);
         }
-        LiveCaptureAnalysis(cfg);
+        ResolveCaptures(cfg);
         Analyze();
     }
 
@@ -76,7 +76,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         return ret;
     }
 
-    private void LiveCaptureAnalysis(ControlFlowGraph cfg)
+    private void ResolveCaptures(ControlFlowGraph cfg)
     {
         foreach (var operation in cfg.Blocks.Where(x => x.IsEnclosedIn(ControlFlowRegionKind.LocalLifetime)).SelectMany(x => x.Operations).ToExecutionOrder())
         {
@@ -85,17 +85,10 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
                 var flowCapture = IFlowCaptureOperationWrapper.FromOperation(operation.Instance);
 
                 if (IFlowCaptureReferenceOperationWrapper.IsInstance(flowCapture.Value)
-                    && IFlowCaptureReferenceOperationWrapper.FromOperation(flowCapture.Value) is var capture
-                    && flowCaptureOperations.TryGetValue(capture.Id, out var capturedOperations))
+                    && IFlowCaptureReferenceOperationWrapper.FromOperation(flowCapture.Value) is var captureReference
+                    && flowCaptureOperations.TryGetValue(captureReference.Id, out var capturedOperations))
                 {
-                    if (flowCaptureOperations.ContainsKey(flowCapture.Id))
-                    {
-                        flowCaptureOperations[flowCapture.Id].AddRange(capturedOperations);
-                    }
-                    else
-                    {
-                        flowCaptureOperations.Add(flowCapture.Id, capturedOperations);
-                    }
+                    ProcessFlowCaptureReference(flowCapture.Id, capturedOperations);
                 }
                 else if (flowCaptureOperations.TryGetValue(flowCapture.Id, out capturedOperations))
                 {
@@ -105,6 +98,18 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
                 {
                     flowCaptureOperations.Add(flowCapture.Id, [flowCapture.Value]);
                 }
+            }
+        }
+
+        void ProcessFlowCaptureReference(CaptureId id, List<IOperation> capturedOperations)
+        {
+            if (flowCaptureOperations.ContainsKey(id))
+            {
+                flowCaptureOperations[id].AddRange(capturedOperations);
+            }
+            else
+            {
+                flowCaptureOperations.Add(id, capturedOperations);
             }
         }
     }
