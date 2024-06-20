@@ -18,87 +18,86 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Common.Walkers
+namespace SonarAnalyzer.Common.Walkers;
+
+/// <summary>
+/// This class find syntax cases that are not properly supported by current CFG/SE/LVA and we mute all issues related to these scenarios.
+/// </summary>
+internal class MutedSyntaxWalker : CSharpSyntaxWalker
 {
-    /// <summary>
-    /// This class find syntax cases that are not properly supported by current CFG/SE/LVA and we mute all issues related to these scenarios.
-    /// </summary>
-    internal class MutedSyntaxWalker : CSharpSyntaxWalker
+    // All kinds that SonarAnalysisContextExtensions.RegisterExplodedGraphBasedAnalysis registers for
+    private static readonly SyntaxKind[] RootKinds =
+    [
+        SyntaxKind.ConstructorDeclaration,
+        SyntaxKind.DestructorDeclaration,
+        SyntaxKind.ConversionOperatorDeclaration,
+        SyntaxKind.OperatorDeclaration,
+        SyntaxKind.MethodDeclaration,
+        SyntaxKind.PropertyDeclaration,
+        SyntaxKind.GetAccessorDeclaration,
+        SyntaxKind.SetAccessorDeclaration,
+        SyntaxKindEx.InitAccessorDeclaration,
+        SyntaxKind.AddAccessorDeclaration,
+        SyntaxKind.RemoveAccessorDeclaration,
+        SyntaxKind.AnonymousMethodExpression,
+        SyntaxKind.SimpleLambdaExpression,
+        SyntaxKind.ParenthesizedLambdaExpression
+    ];
+
+    private readonly SemanticModel semanticModel;
+    private readonly SyntaxNode root;
+    private readonly ISymbol[] symbols;
+    private bool isMuted;
+    private bool isInTryOrCatch;
+    private bool isOutsideTryCatch;
+
+    public MutedSyntaxWalker(SemanticModel semanticModel, SyntaxNode node)
+        : this(semanticModel, node, node.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Select(x => semanticModel.GetSymbolInfo(x).Symbol).WhereNotNull().ToArray()) { }
+
+    public MutedSyntaxWalker(SemanticModel semanticModel, SyntaxNode node, params ISymbol[] symbols)
     {
-        // All kinds that SonarAnalysisContextExtensions.RegisterExplodedGraphBasedAnalysis registers for
-        private static readonly SyntaxKind[] RootKinds =
-        [
-            SyntaxKind.ConstructorDeclaration,
-            SyntaxKind.DestructorDeclaration,
-            SyntaxKind.ConversionOperatorDeclaration,
-            SyntaxKind.OperatorDeclaration,
-            SyntaxKind.MethodDeclaration,
-            SyntaxKind.PropertyDeclaration,
-            SyntaxKind.GetAccessorDeclaration,
-            SyntaxKind.SetAccessorDeclaration,
-            SyntaxKindEx.InitAccessorDeclaration,
-            SyntaxKind.AddAccessorDeclaration,
-            SyntaxKind.RemoveAccessorDeclaration,
-            SyntaxKind.AnonymousMethodExpression,
-            SyntaxKind.SimpleLambdaExpression,
-            SyntaxKind.ParenthesizedLambdaExpression
-        ];
-
-        private readonly SemanticModel semanticModel;
-        private readonly SyntaxNode root;
-        private readonly ISymbol[] symbols;
-        private bool isMuted;
-        private bool isInTryOrCatch;
-        private bool isOutsideTryCatch;
-
-        public MutedSyntaxWalker(SemanticModel semanticModel, SyntaxNode node)
-            : this(semanticModel, node, node.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Select(x => semanticModel.GetSymbolInfo(x).Symbol).WhereNotNull().ToArray()) { }
-
-        public MutedSyntaxWalker(SemanticModel semanticModel, SyntaxNode node, params ISymbol[] symbols)
-        {
-            this.semanticModel = semanticModel;
-            this.symbols = symbols;
-            root = node.Ancestors().FirstOrDefault(x => x.IsAnyKind(RootKinds));
-        }
-
-        public bool IsMuted()
-        {
-            if (symbols.Any() && root != null)
-            {
-                Visit(root);
-            }
-            return IsMutedState();
-        }
-
-        public override void Visit(SyntaxNode node)
-        {
-            if (!IsMutedState())   // Performance optimization, we can stop visiting once we know the answer
-            {
-                base.Visit(node);
-            }
-        }
-
-        public override void VisitIdentifierName(IdentifierNameSyntax node)
-        {
-            if (Array.Find(symbols, x => node.NameIs(x.Name) && x.Equals(semanticModel.GetSymbolInfo(node).Symbol)) is { } symbol)
-            {
-                isMuted = IsInTupleAssignmentTarget() || IsUsedInLocalFunction(symbol) || IsInUnsupportedExpression();
-            }
-            base.VisitIdentifierName(node);
-
-            bool IsInTupleAssignmentTarget() =>
-                node.Parent is ArgumentSyntax argument && argument.IsInTupleAssignmentTarget();
-
-            bool IsUsedInLocalFunction(ISymbol symbol) =>
-                // We don't mute it if it's declared and used in local function
-                !(symbol.ContainingSymbol is IMethodSymbol containingSymbol && containingSymbol.MethodKind == MethodKindEx.LocalFunction)
-                && node.HasAncestor(SyntaxKindEx.LocalFunctionStatement);
-
-            bool IsInUnsupportedExpression() =>
-                node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsAnyKind(SyntaxKindEx.IndexExpression, SyntaxKindEx.RangeExpression)) != null;
-        }
-
-        private bool IsMutedState() =>
-            isMuted || (isInTryOrCatch && isOutsideTryCatch);
+        this.semanticModel = semanticModel;
+        this.symbols = symbols;
+        root = node.Ancestors().FirstOrDefault(x => x.IsAnyKind(RootKinds));
     }
+
+    public bool IsMuted()
+    {
+        if (symbols.Any() && root != null)
+        {
+            Visit(root);
+        }
+        return IsMutedState();
+    }
+
+    public override void Visit(SyntaxNode node)
+    {
+        if (!IsMutedState())   // Performance optimization, we can stop visiting once we know the answer
+        {
+            base.Visit(node);
+        }
+    }
+
+    public override void VisitIdentifierName(IdentifierNameSyntax node)
+    {
+        if (Array.Find(symbols, x => node.NameIs(x.Name) && x.Equals(semanticModel.GetSymbolInfo(node).Symbol)) is { } symbol)
+        {
+            isMuted = IsInTupleAssignmentTarget() || IsUsedInLocalFunction(symbol) || IsInUnsupportedExpression();
+        }
+        base.VisitIdentifierName(node);
+
+        bool IsInTupleAssignmentTarget() =>
+            node.Parent is ArgumentSyntax argument && argument.IsInTupleAssignmentTarget();
+
+        bool IsUsedInLocalFunction(ISymbol symbol) =>
+            // We don't mute it if it's declared and used in local function
+            !(symbol.ContainingSymbol is IMethodSymbol containingSymbol && containingSymbol.MethodKind == MethodKindEx.LocalFunction)
+            && node.HasAncestor(SyntaxKindEx.LocalFunctionStatement);
+
+        bool IsInUnsupportedExpression() =>
+            node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsAnyKind(SyntaxKindEx.IndexExpression, SyntaxKindEx.RangeExpression)) != null;
+    }
+
+    private bool IsMutedState() =>
+        isMuted || (isInTryOrCatch && isOutsideTryCatch);
 }
