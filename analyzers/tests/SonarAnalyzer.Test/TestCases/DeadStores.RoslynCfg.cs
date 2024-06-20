@@ -1436,7 +1436,7 @@ namespace Tests.Diagnostics
             {
             }
         }
-        
+
         public void UsedInFinally_Throw()
         {
             var value = 42; // Compliant 

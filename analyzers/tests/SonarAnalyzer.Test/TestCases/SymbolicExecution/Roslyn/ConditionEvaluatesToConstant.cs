@@ -4166,9 +4166,9 @@ class Repro_8719
                 exception = e;
             }
         }
-        if (exception != null)  // FN!
+        if (exception != null)              // Noncompliant
         {
-            Console.WriteLine(exception);
+            Console.WriteLine(exception);   // Secondary
         }
         Console.WriteLine(success);
     }

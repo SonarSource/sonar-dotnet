@@ -538,10 +538,36 @@ public partial class RoslynLiveVariableAnalysisTest
             """;
         var context = CreateContextCS(code);
         context.ValidateEntry();
-        context.Validate("Method(0);"/*Should be:, LiveOut("variable")*/);
+        context.Validate("Method(0);", LiveOut("variable"));
         context.Validate("Method(1);", LiveOut("variable"));
         context.Validate("Method(variable);", LiveIn("variable"));
         context.Validate("Method(2);");
+    }
+
+    [TestMethod]
+    public void Catch_When_AssignedInTry_LiveOut()
+    {
+        var code = """
+            int variable = 42;
+            Method(0);
+            try
+            {
+                Method(1);  // Can throw
+                variable = 0;
+            }
+            catch when(variable == 0)
+            {
+                Method(2);
+            }
+            Method(3);
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("Method(0);", LiveOut("variable"));
+        context.Validate("Method(1);", LiveOut("variable"));
+        context.Validate("variable == 0", LiveIn("variable"));
+        context.Validate("Method(2);");
+        context.Validate("Method(3);");
     }
 
     [TestMethod]
