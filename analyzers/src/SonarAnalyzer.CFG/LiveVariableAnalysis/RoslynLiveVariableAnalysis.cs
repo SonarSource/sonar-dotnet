@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Runtime.CompilerServices;
 using SonarAnalyzer.CFG.Roslyn;
 
 namespace SonarAnalyzer.CFG.LiveVariableAnalysis;
@@ -93,18 +94,25 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
             var catchesAll = false;
             foreach (var catchOrFilterRegion in block.Successors.SelectMany(CatchOrFilterRegions))
             {
-                AddBranch(block, Cfg.Blocks[catchOrFilterRegion.FirstBlockOrdinal]);
+                var catchOrFilterBlock = Cfg.Blocks[catchOrFilterRegion.FirstBlockOrdinal];
+                AddBranch(block, catchOrFilterBlock);
+                AddPredecessorsOutsideRegion(catchOrFilterBlock);
                 catchesAll = catchesAll || (catchOrFilterRegion.Kind == ControlFlowRegionKind.Catch && IsCatchAllType(catchOrFilterRegion.ExceptionType));
             }
             if (!catchesAll && block.EnclosingRegion(ControlFlowRegionKind.TryAndFinally)?.NestedRegion(ControlFlowRegionKind.Finally) is { } finallyRegion)
             {
                 var finallyBlock = Cfg.Blocks[finallyRegion.FirstBlockOrdinal];
                 AddBranch(block, finallyBlock);
-                // We assume that this block can throw in its first operation. Therefore predecessors outside this tryRegion need to be redirected to finally
-                foreach (var predecessor in block.Predecessors.Where(x => x.Source.Ordinal < tryRegion.FirstBlockOrdinal || x.Source.Ordinal > tryRegion.LastBlockOrdinal))
-                {
-                    AddBranch(predecessor.Source, finallyBlock);
-                }
+                AddPredecessorsOutsideRegion(finallyBlock);
+            }
+        }
+
+        void AddPredecessorsOutsideRegion(BasicBlock destination)
+        {
+            // We assume that current block can throw in its first operation. Therefore predecessors outside this tryRegion need to be redirected to catch/filter/finally
+            foreach (var predecessor in block.Predecessors.Where(x => x.Source.Ordinal < tryRegion.FirstBlockOrdinal || x.Source.Ordinal > tryRegion.LastBlockOrdinal))
+            {
+                AddBranch(predecessor.Source, destination);
             }
         }
     }
