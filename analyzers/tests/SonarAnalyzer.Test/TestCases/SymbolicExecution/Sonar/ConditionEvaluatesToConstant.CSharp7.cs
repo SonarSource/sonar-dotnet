@@ -187,7 +187,7 @@ namespace Tests.Diagnostics
         {
             bool deletesuccess = false;
             do
-            {
+            {           // Secondary
                 try
                 {
                     deletesuccess = true;
@@ -196,7 +196,7 @@ namespace Tests.Diagnostics
                 {
                     System.Threading.Thread.Sleep(timeoutmilliseconds);
                 }
-            } while (!deletesuccess); // Compliant
+            } while (!deletesuccess); // Noncompliant
         }
 
     }
@@ -218,12 +218,12 @@ namespace Tests.Diagnostics
                 // Do nothing
             }
 
-            if (foo == null) // Compliant
-            {
+            if (foo == null)    // Noncompliant FP
+            {                   // Secondary
                 Console.WriteLine("Foo is null");
             }
 
-            if (foo != null) // Compliant
+            if (foo != null)    // Noncompliant FP
             {
                 Console.WriteLine("Foo is not null");
             }

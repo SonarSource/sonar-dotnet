@@ -149,22 +149,22 @@ namespace Tests.Diagnostics
         void calculateRate2(int a, int b)
         {
             var x = 0;
-            x = 1; // FN, muted due to try/catch
+            x = 1; // Noncompliant
             try
             {
-                x = 11; // FN, muted due to try/catch
+                x = 11; // Noncompliant
                 x = 12;
                 Console.Write(x);
-                x = 13; // Compliant, Console.Write could throw and value is read fater try/catch
+                x = 13; // Noncompliant
             }
             catch (Exception)
             {
-                x = 21; // FN, muted due to try/catch
+                x = 21; // Noncompliant
                 x = 22;
                 Console.Write(x);
-                x = 23; // FN, muted due to try/catch
+                x = 23; // Noncompliant
             }
-            x = 31; // FN, muted due to try/catch
+            x = 31; // Noncompliant
         }
 
         void storeI(int i) { }
@@ -628,9 +628,9 @@ namespace Tests.Diagnostics
             }
             finally
             {
-                actor = null;   // FN, muted due to try/catch
+                actor = null;   // Noncompliant
             }
-            actor = null;       // FN, muted due to try/catch
+            actor = null;       // Noncompliant
         }
 
         internal void SnippetTwo(object actor)
@@ -834,7 +834,7 @@ namespace Tests.Diagnostics
         public static long WithConstantValue(string path)
         {
             const int unknownfilelength = -1;
-            long length = unknownfilelength; // Compliant
+            long length = unknownfilelength; // Noncompliant FP
             try
             {
                 length = new System.IO.FileInfo(path).Length;
@@ -863,7 +863,7 @@ namespace Tests.Diagnostics
         const int UNKNOWN = -1;
         public static long WithClassConstant(string path)
         {
-            long length = UNKNOWN; // Compliant
+            long length = UNKNOWN; // Noncompliant FP
             try
             {
                 length = new System.IO.FileInfo(path).Length;
@@ -878,7 +878,7 @@ namespace Tests.Diagnostics
         // https://github.com/SonarSource/sonar-dotnet/issues/2598
         public static string WithCastedNull(string path)
         {
-            var length = (string)null; // Compliant
+            var length = (string)null; // Noncompliant FP
             try
             {
                 length = new System.IO.FileInfo(path).Length.ToString();
@@ -911,7 +911,7 @@ namespace Tests.Diagnostics
         public int Start()
         {
             const int x = -1;
-            int exitCode = x; // Compliant
+            int exitCode = x; // Noncompliant FP
             Exception exception = null;
 
             try
@@ -922,7 +922,7 @@ namespace Tests.Diagnostics
             }
             catch (SystemException e)
             {
-                exception = e; // FN, muted by try/catch
+                exception = e; // Noncompliant
             }
 
             return exitCode;
@@ -953,22 +953,22 @@ namespace Tests.Diagnostics
         public static void DeadStore(int[] array)
         {
             var x = 0;
-            x = array[^1]; // FN, muted due to try/catch
+            x = array[^1]; // Noncompliant
             try
             {
-                x = 11; // FN, muted due to try/catch
+                x = 11; // Noncompliant
                 x = 12;
                 Console.Write(x);
-                x = 13; // Compliant, Console.Write can throw
+                x = 13; // Noncompliant
             }
             catch (Exception)
             {
-                x = 21; // FN, muted due to try/catch
+                x = 21; // Noncompliant
                 x = 22;
                 Console.Write(x);
-                x = 23; // FN, muted due to try/catch
+                x = 23; // Noncompliant
             }
-            x = 31; // FN, muted due to try/catch
+            x = 31; // Noncompliant
         }
     }
 
@@ -1110,7 +1110,7 @@ namespace Tests.Diagnostics
             try
             {
                 var values = GetValues();
-                name = values.name; // Compliant, DoWork can throw
+                name = values.name; // Noncompliant FP, DoWork can throw
 
                 DoWork();
                 return 5;
