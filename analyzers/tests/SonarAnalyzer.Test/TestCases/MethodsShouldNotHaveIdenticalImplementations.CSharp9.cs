@@ -95,15 +95,102 @@ public static class TypeConstraints
 
     public static int Use<T>(T? value) where T : class => 2;
 
-    public static void First<T>(T? value) where T : struct // Secondary
+    public static void First<T>(T? value) where T : struct
     {
         var x = Use(value);
         Console.WriteLine(x);
     }
 
-    public static void Second<T>(T? value) where T : class  // Noncompliant - FP, method looks the same but different overloads are called due to the type constraints used. See: https://github.com/SonarSource/sonar-dotnet/issues/7068
+    public static void Second<T>(T? value) where T : class  // Compliant, method looks the same but different overloads are called due to the type constraints used.
     {
         var x = Use(value);
         Console.WriteLine(x);
+    }
+
+    public static bool Compare1<T>(T? value1, T value2) // Secondary [Compare]
+    {
+        Console.WriteLine(value1);
+        Console.WriteLine(value2);
+        return true;
+    }
+
+    public static bool Compare2<T>(T? value1, T value2)  // Noncompliant [Compare]
+    {
+        Console.WriteLine(value1);
+        Console.WriteLine(value2);
+        return true;
+    }
+
+    public static bool Compare3<T>(T? value1, T value2) where T : System.IComparable // Compliant. Parameter type constraints don't match
+    {
+        Console.WriteLine(value1);
+        Console.WriteLine(value2);
+        return true;
+    }
+
+    public static bool Equal1<T>(T t1, T t2) where T : System.IEquatable<T>  // Secondary [Equal]
+    {
+        Console.WriteLine(t1);
+        Console.WriteLine(t2);
+        return true;
+    }
+
+    public static bool Equal2<T>(T t1, T t2) where T : System.IEquatable<T> // Noncompliant [Equal]
+    {
+        Console.WriteLine(t1);
+        Console.WriteLine(t2);
+        return true;
+    }
+
+    public static bool Equal3<T>(T t1, T t2) where T : System.IEquatable<int> // Compliant. The type constraint is different
+    {
+        Console.WriteLine(t1);
+        Console.WriteLine(t2);
+        return true;
+    }
+
+    public static bool Equal4<T>(T t1, T t2) where T : System.IComparable<T> // Compliant. The type constraint is different
+    {
+        Console.WriteLine(t1);
+        Console.WriteLine(t2);
+        return true;
+    }
+}
+
+public class TypeConstraintsOnGenericClass<TClass>
+{
+    public void ConstraintByTClass1<TMethod>() where TMethod : TClass // Secondary [ConstraintByTClass]
+    {
+        Console.WriteLine("a");
+        Console.WriteLine("b");
+        Console.WriteLine("c");
+    }
+
+    public void ConstraintByTClass2<TMethod>() where TMethod : TClass // Noncompliant [ConstraintByTClass]
+    {
+        Console.WriteLine("a");
+        Console.WriteLine("b");
+        Console.WriteLine("c");
+    }
+
+    public void ConstraintByTClass3<TMethod>() // Compliant
+    {
+        Console.WriteLine("a");
+        Console.WriteLine("b");
+        Console.WriteLine("c");
+    }
+
+    public void ConstraintByTClass4<TMethod>() where TMethod : IEquatable<TClass> // Compliant
+    {
+        Console.WriteLine("a");
+        Console.WriteLine("b");
+        Console.WriteLine("c");
+    }
+
+    public void ConstraintByTClass5<TMethod>() where TMethod : struct, TClass // Compliant
+    {
+        Console.WriteLine("a");
+        Console.WriteLine("b");
+        Console.WriteLine("c");
     }
 }

@@ -35,7 +35,7 @@ public sealed class DataValuesAttribute : Attribute
 }
 
 [AttributeUsage(AttributeTargets.Method)]
-public sealed class CombinatorialDataAttribute : Attribute, ITestDataSource
+public sealed class CombinatorialDataTestMethodAttribute : TestMethodAttribute, ITestDataSource
 {
     public IEnumerable<object[]> GetData(MethodInfo methodInfo)
     {
@@ -63,6 +63,9 @@ public sealed class CombinatorialDataAttribute : Attribute, ITestDataSource
         }
     }
 
+    public string GetDisplayName(MethodInfo methodInfo, object[] data) =>
+        $"{methodInfo.Name} ({(data is not null ? string.Join(",", data) : null)})";
+
     private static object[] CreateArguments(object[][] valuesPerParameter, int[] parameterIndices)
     {
         var arg = new object[parameterIndices.Length];
@@ -73,7 +76,4 @@ public sealed class CombinatorialDataAttribute : Attribute, ITestDataSource
 
         return arg;
     }
-
-    public string GetDisplayName(MethodInfo methodInfo, object[] data) =>
-        $"{methodInfo.Name} ({(data is not null ? string.Join(",", data) : null)})";
 }
