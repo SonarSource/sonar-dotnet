@@ -220,17 +220,17 @@ public partial class RoslynLiveVariableAnalysisTest
         var context = CreateContextCS(code, additionalParameters: "string s1, string s2, string s3, string s4");
         context.ValidateEntry(LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));
         context.Validate(context.Cfg.Blocks[1], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 1: #0=s1
-        context.Validate(context.Cfg.Blocks[2], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 2: #1=#0; #1 is null
-        context.Validate(context.Cfg.Blocks[3], LiveIn("s1"), LiveOut("s1"));                                      // 3: #1!=null; #2=#1
-        context.Validate(context.Cfg.Blocks[4], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 4: #1==null; #3=s2
+        context.Validate(context.Cfg.Blocks[2], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 2: #1=#0; if #1 is null
+        context.Validate(context.Cfg.Blocks[3], LiveIn("s1"), LiveOut("s1"));                                      // 3: F: #2=#1
+        context.Validate(context.Cfg.Blocks[4], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 4: T: #3=s2
         context.Validate(context.Cfg.Blocks[5], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 5: #4=s3
-        context.Validate(context.Cfg.Blocks[6], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 6: #5=#4; #5 is null
-        context.Validate(context.Cfg.Blocks[7], LiveIn("s1", "s2", "s3"), LiveOut("s1", "s2", "s3"));              // 7: #5!=null; #6=#5
-        context.Validate(context.Cfg.Blocks[9], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 8: #5==null; #7=s4; #7 is null
-        context.Validate(context.Cfg.Blocks[9], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 9: #7 != null; #8=#7
+        context.Validate(context.Cfg.Blocks[6], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 6: #5=#4; if #5 is null
+        context.Validate(context.Cfg.Blocks[7], LiveIn("s1", "s2", "s3"), LiveOut("s1", "s2", "s3"));              // 7: F: #6=#5
+        context.Validate(context.Cfg.Blocks[8], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 8: T: #7=s4; if #7 is null
+        context.Validate(context.Cfg.Blocks[9], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 9: F: #8=#7
         context.Validate(context.Cfg.Blocks[10], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4")); // 10: #7=null; #8="End"
-        context.Validate(context.Cfg.Blocks[11], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3"));       // 11: #6=#4??=#8
-        context.Validate(context.Cfg.Blocks[12], LiveIn("s1", "s2", "s3"), LiveOut("s1"));                         // 12: #2=#0??=#3=#6
+        context.Validate(context.Cfg.Blocks[11], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3"));       // 11: #6= (#4=#8)
+        context.Validate(context.Cfg.Blocks[12], LiveIn("s1", "s2", "s3"), LiveOut("s1"));                         // 12: #2= (#0 = (#3=#6) )
         context.Validate(context.Cfg.Blocks[13], LiveIn("s1"));                                                    // 13: result=#2
         context.ValidateExit();
     }
@@ -310,9 +310,9 @@ public partial class RoslynLiveVariableAnalysisTest
         var context = CreateContextCS(code, additionalParameters: "string s1");
         context.ValidateEntry(LiveIn("s1"), LiveOut("s1"));
         context.Validate(context.Cfg.Blocks[1], LiveIn("s1"));
-        context.Validate(context.Cfg.Blocks[2]);  // This should have LiveIn("s1") and LiveOut("s1") but #1 gets as value all the assignment operation.
-        context.Validate(context.Cfg.Blocks[3], LiveOut("s1"));
-        context.Validate(context.Cfg.Blocks[4], LiveOut("s1"));
+        context.Validate(context.Cfg.Blocks[2]);                // This should have LiveIn("s1") and LiveOut("s1") but #1 gets as value all the assignment operation.
+        context.Validate(context.Cfg.Blocks[3], LiveOut("s1")); // This should have LiveIn("s1")
+        context.Validate(context.Cfg.Blocks[4], LiveOut("s1")); // This should have LiveIn("s1")
         context.Validate(context.Cfg.Blocks[5], LiveIn("s1"));
         context.ValidateExit();
     }
@@ -355,11 +355,11 @@ public partial class RoslynLiveVariableAnalysisTest
         context.ValidateEntry(LiveIn("array"), LiveOut("array"));
         context.Validate(context.Cfg.Blocks[1], LiveIn("array"), LiveOut("array", "sum")); // sum = 0
         context.Validate(context.Cfg.Blocks[2], LiveIn("array", "sum"), LiveOut("sum"));   // #0 = array
-        context.Validate(context.Cfg.Blocks[3], LiveIn("sum"), LiveOut("sum"));            // IEnumerator.MoveNext
+        context.Validate(context.Cfg.Blocks[3], LiveIn("sum"), LiveOut("sum"));            // If IEnumerator.MoveNext
         context.Validate(context.Cfg.Blocks[4], LiveIn("sum"), LiveOut("sum"));            // sum += i
-        context.Validate(context.Cfg.Blocks[5]);                                           // Finally Region: #1=#0; #1 is null
-        context.Validate(context.Cfg.Blocks[6]);                                           // Finally Region: #1 is null == true; Dispose(#1)
-        context.Validate(context.Cfg.Blocks[7]);                                           // Finally Region: #1 is null == false; Exception Handling block
+        context.Validate(context.Cfg.Blocks[5]);                                           // Finally Region: #1=#0; if #1 is null, should have LiveIn/Liveout: array
+        context.Validate(context.Cfg.Blocks[6]);                                           // Finally Region: #1 is null == true; #1.Dispose, should have LiveIn: array
+        context.Validate(context.Cfg.Blocks[7]);                                           // Finally Region: Empty end of finally
         context.ValidateExit();
     }
 

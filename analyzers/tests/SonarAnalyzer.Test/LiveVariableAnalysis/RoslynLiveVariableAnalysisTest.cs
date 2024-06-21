@@ -1119,6 +1119,9 @@ public partial class RoslynLiveVariableAnalysisTest
             Validate(block, withSyntax, expected);
         }
 
+        public void Validate(BasicBlock block, params Expected[] expected) =>
+            Validate(block, null, expected);
+
         public void Validate(BasicBlock block, string blockSuffix, params Expected[] expected)
         {
             var empty = new Expected([], ExpectedKind.None);
@@ -1129,8 +1132,5 @@ public partial class RoslynLiveVariableAnalysisTest
             Lva.LiveOut(block).Select(x => x.Name).Should().BeEquivalentTo(expectedLiveOut.Names, $"{block.Kind} #{block.Ordinal} {blockSuffix}");
             Lva.CapturedVariables.Select(x => x.Name).Should().BeEquivalentTo(expectedCaptured.Names, $"{block.Kind} #{block.Ordinal} {blockSuffix}");
         }
-
-        public void Validate(BasicBlock block, params Expected[] expected) =>
-             Validate(block, null, expected);
     }
 }
