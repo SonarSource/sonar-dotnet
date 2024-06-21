@@ -79,9 +79,10 @@ public partial class RoslynLiveVariableAnalysisTest
         /*       Block 1
          *      #1=param
          *     #1 is null
-         *        /   \
-         *       F     T
-         *      /       \
+         *        |   |
+         *       F|   |T
+         *      +-+   +-+
+         *      |       |
          *  Block 2    Block 3
          * #0=Length  #0=default // FIXME: This and all the other trees im the next commit
          *      \        /
@@ -105,15 +106,17 @@ public partial class RoslynLiveVariableAnalysisTest
     {
         /*       Block 1
          *     boolParameter
-         *        /   \
-         *       /     \
-         *   Block 2  Block 3
-         * #0=StringParam  #0="Hello" // FIXME: This and all the other trees im the next commit
-         *       \     /
-         *       Block 4
-         *      result=#0
-         *          |
-         *        Exit
+         *        |   |
+         *       F|   |T
+         *     +--+   +----------+
+         *     |                 |
+         *   Block 2          Block 3
+         * #0=StringParam    #0="Hello"
+         *         |             |
+         *      Block 4 <--------+
+         *     result=#0
+         *         |
+         *       Exit
          */
         const string code = """var result = boolParameter ? stringParam : "Hello";""";
         var context = CreateContextCS(code, additionalParameters: "string stringParam");
@@ -130,9 +133,10 @@ public partial class RoslynLiveVariableAnalysisTest
     {
         /*       Block 1
          *     boolParameter
-         *        /   \
-         *       T     F
-         *      /       \
+         *        |   |
+         *       F|   |T
+         *      +-+   +-+
+         *      |       |
          *   Block 2  Block 3
          *   #0=st   #0="Hello"
          *       \     /
@@ -141,10 +145,11 @@ public partial class RoslynLiveVariableAnalysisTest
          *          |
          *        Block5
          *     boolParameter
-         *        /   \
-         *       T     F
-         *      /       \
-         *   Block 6  Block 7
+         *        |   |
+         *       F|   |T
+         *     +--+   +--+
+         *     |         |
+         *  Block 6    Block 7
          *   #1=st2   #1="Hello"
          *       \     /
          *       Block 8
@@ -175,17 +180,26 @@ public partial class RoslynLiveVariableAnalysisTest
         /*       Block 1
          *       #0=s1
          *     #0 is null
-         *        /   \
-         *       F     T
-         *       /     \
-         *    Block 2  Block 3 -+---F--> Block 4 --------+
-         *    #1=#0    #2=s2    |       #1=#2            |
-         *       \  #2 is null  |                        |
-         *        \     /       |                        |
-         *         Block 6 <-+  +--T--> Block 5--------->|
-         *         result=#1    |      #1="Hello"        |
-         *           |          +------------------------+
-         *         Exit
+         *       |   |
+         *      F|   |T
+         *  +----+   +----+
+         *  |             |
+         * Block 2     Block 3
+         * #1=#0        #2=s2
+         *   |       #2 is null
+         *   |          |   |
+         *   |        F|   |T
+         *   |      +--+   +--+
+         *   |      |         |
+         *   |     Block 4    Block 5
+         *   |    #1=#2     #1="Hello"
+         *   |      |___________|
+         *   |            |
+         *   |            |
+         *   +-------->Block 6
+         *            result=#1
+         *               |
+         *              Exit
          */
         const string code = """var result = s1 ?? s2 ?? "Hello";""";
         var context = CreateContextCS(code, additionalParameters: "string s1, string s2");
@@ -227,27 +241,35 @@ public partial class RoslynLiveVariableAnalysisTest
         /*       Block 1
          *       #0=s1
          *     #0 is null
-         *        /   \
-         *      F/     \T
-         *      /       \
-         *   Block 2  Block 3---+------F----> Block 4 --------+
-         *   #1=#0   s2 is null |             #2=s3           |
-         *       \     /        |                             |
-         *        Block 6       +------T----> Block 5-------->|
-         *         s=#1                   #2="NestedFalse"    |
-         *          |                                         |
-         *          |                                Block6<--+
-         *          |                              #2 is null
-         *          |                               /   \
-         *          |                             T/     \F
-         *          |                             /       \
-         *          |                           Block8   Block7
-         *          |                         #1="Hello"  #1=#2"
-         *          |                             |         |
-         *          +------------>Block9<---------+---------+
-         *                      result=#1
-         *                          |
-         *                         Exit
+         *       |   |
+         *      F|   |T
+         *  +----+   +----+
+         *  |             |
+         * Block 2     Block 3
+         * #1=#0     s2 is null
+         *   |         |   |
+         *   |        T|   |F
+         *   |      +--+   +--+
+         *   |      |         |
+         *   |   Block 4    Block 5
+         *   |    #2=s3    #2="NestedFalse"
+         *   |      |___________|
+         *   |            |
+         *   |            |
+         *   |        Block 6
+         *   |        #2 is null
+         *   |          |   |
+         *   |         F|   |T
+         *   |       +--+   +--+
+         *   |       |         |
+         *   |      Block7    Block 8
+         *   |      #1=#2    #1="Hello"
+         *   |        |___________|
+         *   |              |
+         *   +----------->Block 9
+         *               result=#1
+         *                  |
+         *                 Exit
          */
         const string code = """var result = s1 ?? (s2 is null ? s3 : "NestedFalse") ?? "Hello";""";
         var context = CreateContextCS(code, additionalParameters: "string s1, string s2, string s3");
@@ -273,15 +295,16 @@ public partial class RoslynLiveVariableAnalysisTest
          *       Block 2
          *   #1=(s1="overwrite")
          *     #1 is null
-         *        /   \
-         *       F     T
-         *      /       \
-         *    Block3   Block4
-         *    #2=#1   #2="value"
-         *      \         /
-         *       \       /
-         *        Block5
-         *        s1=#2
+         *        |   |
+         *       F|   |T
+         *     +--+   +--+
+         *     |         |
+         *   Block3   Block4
+         *   #2=#1   #2="value"
+         *    |___________|
+         *          |
+         *       Block5
+         *       s1=#2
          */
         const string code = """s1 = (s1 = "overwrite") ?? "value";""";
         var context = CreateContextCS(code, additionalParameters: "string s1");
