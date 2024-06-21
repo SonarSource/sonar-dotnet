@@ -79,12 +79,11 @@ public partial class RoslynLiveVariableAnalysisTest
         /*       Block 1
          *      #1=param
          *     #1 is null
-         *        |   |
-         *       F|   |T
-         *      +-+   +-+
-         *      |       |
+         *        /   \
+         *       F     T
+         *      /       \
          *  Block 2    Block 3
-         * #0=Length  #0=default // FIXME: This and all the other trees im the next commit
+         * #0=Length  #0=default
          *      \        /
          *        Block 4
          *       result=#1
@@ -104,14 +103,14 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void FlowCaptrure_Ternary()
     {
-        /*       Block 1
-         *     boolParameter
-         *        |   |
-         *       F|   |T
-         *     +--+   +----------+
-         *     |                 |
-         *   Block 2          Block 3
-         * #0=StringParam    #0="Hello"
+        /*         Block 1
+         *       boolParameter
+         *        /       \
+         *       F         T
+         *      /           \
+         *     /             \
+         *   Block 2        Block 3
+         * #0=StringParam   #0="Hello"
          *         |             |
          *      Block 4 <--------+
          *     result=#0
@@ -133,27 +132,25 @@ public partial class RoslynLiveVariableAnalysisTest
     {
         /*       Block 1
          *     boolParameter
-         *        |   |
-         *       F|   |T
-         *      +-+   +-+
-         *      |       |
-         *   Block 2  Block 3
-         *   #0=st   #0="Hello"
+         *       /       \
+         *      F         T
+         *     /           \
+         *   Block 2     Block 3
+         *   #0=st     #0="Hello"
          *       \     /
-         *       Block 4
-         *        s=#0
+         *        Block 4
+         *       result1=#0
          *          |
          *        Block5
          *     boolParameter
-         *        |   |
-         *       F|   |T
-         *     +--+   +--+
-         *     |         |
+         *        /    \
+         *       F      T
+         *      /        \
          *  Block 6    Block 7
          *   #1=st2   #1="Hello"
          *       \     /
          *       Block 8
-         *        q=#1
+         *      result2=#1
          *         |
          *        Exit
          */
@@ -180,26 +177,25 @@ public partial class RoslynLiveVariableAnalysisTest
         /*       Block 1
          *       #0=s1
          *     #0 is null
-         *       |   |
-         *      F|   |T
-         *  +----+   +----+
-         *  |             |
-         * Block 2     Block 3
-         * #1=#0        #2=s2
-         *   |       #2 is null
-         *   |          |   |
-         *   |        F|   |T
-         *   |      +--+   +--+
-         *   |      |         |
-         *   |     Block 4    Block 5
-         *   |    #1=#2     #1="Hello"
-         *   |      |___________|
-         *   |            |
-         *   |            |
-         *   +-------->Block 6
-         *            result=#1
-         *               |
-         *              Exit
+         *      /       \
+         *     F         T
+         *    /           \
+         *   /             \
+         * Block 2      Block 3
+         * #1=#0         #2=s2
+         *   |        #2 is null
+         *   |          /     \
+         *   |         F       T
+         *   |        /         \
+         *   |      Block 4    Block 5
+         *   |     #1=#2     #1="Hello"
+         *   |       |___________|
+         *   |             |
+         *   |             |
+         *   +--------->Block 6
+         *             result=#1
+         *                |
+         *               Exit
          */
         const string code = """var result = s1 ?? s2 ?? "Hello";""";
         var context = CreateContextCS(code, additionalParameters: "string s1, string s2");
@@ -241,16 +237,15 @@ public partial class RoslynLiveVariableAnalysisTest
         /*       Block 1
          *       #0=s1
          *     #0 is null
-         *       |   |
-         *      F|   |T
-         *  +----+   +----+
-         *  |             |
+         *      /       \
+         *     F         T
+         *    /           \
+         *   /             \
          * Block 2     Block 3
          * #1=#0     s2 is null
-         *   |         |   |
-         *   |        T|   |F
-         *   |      +--+   +--+
-         *   |      |         |
+         *   |         /   \
+         *   |        T     F
+         *   |       /       \
          *   |   Block 4    Block 5
          *   |    #2=s3    #2="NestedFalse"
          *   |      |___________|
@@ -258,12 +253,11 @@ public partial class RoslynLiveVariableAnalysisTest
          *   |            |
          *   |        Block 6
          *   |        #2 is null
-         *   |          |   |
-         *   |         F|   |T
-         *   |       +--+   +--+
-         *   |       |         |
-         *   |      Block7    Block 8
-         *   |      #1=#2    #1="Hello"
+         *   |          /   \
+         *   |         F     T
+         *   |        /       \
+         *   |     Block7   Block 8
+         *   |     #1=#2    #1="Hello"
          *   |        |___________|
          *   |              |
          *   +----------->Block 9
@@ -295,10 +289,9 @@ public partial class RoslynLiveVariableAnalysisTest
          *       Block 2
          *   #1=(s1="overwrite")
          *     #1 is null
-         *        |   |
-         *       F|   |T
-         *     +--+   +--+
-         *     |         |
+         *        /    \
+         *       F      T
+         *      /        \
          *   Block3   Block4
          *   #2=#1   #2="value"
          *    |___________|
