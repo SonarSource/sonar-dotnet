@@ -28,20 +28,20 @@ internal class MutedSyntaxWalker : CSharpSyntaxWalker
     // All kinds that SonarAnalysisContextExtensions.RegisterExplodedGraphBasedAnalysis registers for
     private static readonly SyntaxKind[] RootKinds =
     [
-        SyntaxKind.ConstructorDeclaration,
-        SyntaxKind.DestructorDeclaration,
-        SyntaxKind.ConversionOperatorDeclaration,
-        SyntaxKind.OperatorDeclaration,
-        SyntaxKind.MethodDeclaration,
-        SyntaxKind.PropertyDeclaration,
-        SyntaxKind.GetAccessorDeclaration,
-        SyntaxKind.SetAccessorDeclaration,
-        SyntaxKindEx.InitAccessorDeclaration,
         SyntaxKind.AddAccessorDeclaration,
-        SyntaxKind.RemoveAccessorDeclaration,
         SyntaxKind.AnonymousMethodExpression,
-        SyntaxKind.SimpleLambdaExpression,
-        SyntaxKind.ParenthesizedLambdaExpression
+        SyntaxKind.ConstructorDeclaration,
+        SyntaxKind.ConversionOperatorDeclaration,
+        SyntaxKind.DestructorDeclaration,
+        SyntaxKind.GetAccessorDeclaration,
+        SyntaxKindEx.InitAccessorDeclaration,
+        SyntaxKind.MethodDeclaration,
+        SyntaxKind.OperatorDeclaration,
+        SyntaxKind.ParenthesizedLambdaExpression,
+        SyntaxKind.PropertyDeclaration,
+        SyntaxKind.RemoveAccessorDeclaration,
+        SyntaxKind.SetAccessorDeclaration,
+        SyntaxKind.SimpleLambdaExpression
     ];
 
     private readonly SemanticModel model;
