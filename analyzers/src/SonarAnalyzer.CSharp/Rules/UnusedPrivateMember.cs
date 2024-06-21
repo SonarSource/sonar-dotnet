@@ -115,8 +115,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         foreach (var declaration in PrivateNestedMembersFromNonGeneratedCode(namedType, context))
         {
             if (compilation.GetSemanticModel(declaration.SyntaxTree) is { } semanticModel
-                && semanticModel.GetDeclaredSymbol(declaration) is { } declarationSymbol
-                && !declarationSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_StructLayoutAttribute))
+                && semanticModel.GetDeclaredSymbol(declaration) is { } declarationSymbol)
             {
                 var symbolsCollector = RetrieveRemovableSymbols(declarationSymbol, compilation, context);
                 CopyRetrievedSymbols(symbolsCollector, privateSymbols, internalSymbols, fieldLikeSymbols);
@@ -534,6 +533,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             && !HasAttributes(symbol)
             && !symbol.IsSerializableMember()
             && !symbol.ContainingType.IsInterface()
+            && !(symbol.Kind is SymbolKind.Field && symbol.ContainingType.HasAttribute(KnownType.System_Runtime_InteropServices_StructLayoutAttribute))
             && symbol.GetInterfaceMember() is null
             && symbol.GetOverriddenMember() is null;
 
