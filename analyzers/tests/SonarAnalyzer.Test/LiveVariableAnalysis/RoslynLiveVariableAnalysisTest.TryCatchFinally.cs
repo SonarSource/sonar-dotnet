@@ -59,7 +59,7 @@ public partial class RoslynLiveVariableAnalysisTest
         // Finally region
         context.Validate<IIsNullOperation>("ms = new MemoryStream()", LiveIn("ms"), LiveOut("ms"));     // Null check
         context.Validate<IInvocationOperation>("ms = new MemoryStream()", LiveIn("ms"));                // Actual Dispose
-        context.Validate(context.Cfg.Blocks[6], null);
+        context.Validate(context.Cfg.Blocks[6]);
     }
 
     [TestMethod]
@@ -819,7 +819,7 @@ public partial class RoslynLiveVariableAnalysisTest
             {{catchAll}}
             {
                 Method(2);
-                variable = 0; 
+                variable = 0;
             }
             finally
             {

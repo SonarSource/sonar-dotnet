@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 namespace SonarAnalyzer.Test.LiveVariableAnalysis;
 
 public partial class RoslynLiveVariableAnalysisTest
@@ -27,7 +26,7 @@ public partial class RoslynLiveVariableAnalysisTest
     public void FlowCaptrure_NullCoalescingAssignment()
     {
         /*      Block 1
-        *     #0=stringParam
+        *      #0=param
         *          |
         *       Block 2
         *        #1=#0
@@ -38,12 +37,12 @@ public partial class RoslynLiveVariableAnalysisTest
         *          |        |
         *        Exit <-----+
         */
-        const string code = """stringParam ??= "Hello";""";
-        var context = CreateContextCS(code, additionalParameters: "string stringParam");
-        context.ValidateEntry(LiveIn("stringParam"), LiveOut("stringParam"));
-        context.Validate(context.Cfg.Blocks[1], null, LiveIn("stringParam"), LiveOut("stringParam"));
-        context.Validate(context.Cfg.Blocks[2], null, LiveIn("stringParam"), LiveOut("stringParam"));
-        context.Validate(context.Cfg.Blocks[3], null, LiveIn("stringParam"));
+        const string code = """param ??= "Hello";""";
+        var context = CreateContextCS(code, additionalParameters: "string param");
+        context.ValidateEntry(LiveIn("param"), LiveOut("param"));
+        context.Validate(context.Cfg.Blocks[1], LiveIn("param"), LiveOut("param"));
+        context.Validate(context.Cfg.Blocks[2], LiveIn("param"), LiveOut("param"));
+        context.Validate(context.Cfg.Blocks[3], LiveIn("param"));
         context.ValidateExit();
     }
 
@@ -51,82 +50,83 @@ public partial class RoslynLiveVariableAnalysisTest
     public void FlowCaptrure_NullCoalescingOperator()
     {
         /*       Block 1
-         *    #0=stringParam
+         *      #0=param
          *     #0 is null
          *        /   \
-         *       /     \
-         *   Block 2  Block 3
-         *   #1=#0  #1="Hello"
-         *       \     /
-         *       Block 4
-         *         s=#1
-         *          |
-         *        Exit
-         */
-        const string code = """string s = stringParam ?? "Hello";""";
-        var context = CreateContextCS(code, additionalParameters: "string stringParam");
-        context.ValidateEntry(LiveIn("stringParam"), LiveOut("stringParam"));
-        context.Validate(context.Cfg.Blocks[1], null, LiveIn("stringParam"), LiveOut("stringParam"));
-        context.Validate(context.Cfg.Blocks[2], null, LiveIn("stringParam"), LiveOut("stringParam"));
-        context.Validate(context.Cfg.Blocks[3], null, LiveIn("stringParam"), LiveOut("stringParam"));
-        context.Validate(context.Cfg.Blocks[4], null, LiveIn("stringParam"));
-        context.ValidateExit();
-    }
-
-    [TestMethod]
-    public void FlowCaptrure_NullConditionalOperators()
-    {
-        /*       Block 1
-         *    #1=stringParam
-         *     #1 is null
-         *        /   \
          *       F     T
-         *       /     \
-         *   Block 2  Block 3
-         *  #0=Length #0=stringParam (DefaultValueOperation)
+         *      /       \
+         *  Block 2    Block 3
+         *  #1=#0     #1="Hello"
          *       \     /
          *       Block 4
          *      result=#1
-         *          |
+         *         |
          *        Exit
          */
-        const string code = """int? anInt =  stringParam?.Length;""";
-        var context = CreateContextCS(code, additionalParameters: "string stringParam");
-        context.ValidateEntry(LiveIn("stringParam"), LiveOut("stringParam"));
-        context.Validate(context.Cfg.Blocks[1], null, LiveIn("stringParam"), LiveOut("stringParam"));
-        context.Validate(context.Cfg.Blocks[2], null, LiveIn("stringParam"));
-        context.Validate(context.Cfg.Blocks[3], null); // FIXME: LiveIn("stringParam") and LiveOut("StringParam") do not appear here due to DefaultValueOperation
-        context.Validate(context.Cfg.Blocks[4], null);
+        const string code = """var result = param ?? "Hello";""";
+        var context = CreateContextCS(code, additionalParameters: "string param");
+        context.ValidateEntry(LiveIn("param"), LiveOut("param"));
+        context.Validate(context.Cfg.Blocks[1], LiveIn("param"), LiveOut("param"));
+        context.Validate(context.Cfg.Blocks[2], LiveIn("param"), LiveOut("param"));
+        context.Validate(context.Cfg.Blocks[3], LiveIn("param"), LiveOut("param"));
+        context.Validate(context.Cfg.Blocks[4], LiveIn("param"));
         context.ValidateExit();
     }
 
     [TestMethod]
-    public void FlowCaptrure_TernaryConditionalOperator()
+    public void FlowCaptrure_ConditionalAccess()
+    {
+        /*       Block 1
+         *      #1=param
+         *     #1 is null
+         *        /   \
+         *       F     T
+         *      /       \
+         *  Block 2    Block 3
+         * #0=Length  #0=default // FIXME: This and all the other trees im the next commit
+         *      \        /
+         *        Block 4
+         *       result=#1
+         *          |
+         *         Exit
+         */
+        const string code = """var result = param?.Length;""";
+        var context = CreateContextCS(code, additionalParameters: "string param");
+        context.ValidateEntry(LiveIn("param"), LiveOut("param"));
+        context.Validate(context.Cfg.Blocks[1], LiveIn("param"), LiveOut("param"));
+        context.Validate(context.Cfg.Blocks[2], LiveIn("param"));
+        context.Validate(context.Cfg.Blocks[3]);
+        context.Validate(context.Cfg.Blocks[4]);
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void FlowCaptrure_Ternary()
     {
         /*       Block 1
          *     boolParameter
          *        /   \
          *       /     \
          *   Block 2  Block 3
-         *   #0=test  #0="Hello"
+         * #0=StringParam  #0="Hello" // FIXME: This and all the other trees im the next commit
          *       \     /
          *       Block 4
          *      result=#0
          *          |
          *        Exit
          */
-        const string code = """string s = boolParameter ? stringParam : "Hello";""";
+        const string code = """var result = boolParameter ? stringParam : "Hello";""";
         var context = CreateContextCS(code, additionalParameters: "string stringParam");
         context.ValidateEntry(LiveIn("boolParameter", "stringParam"), LiveOut("boolParameter", "stringParam"));
-        context.Validate(context.Cfg.Blocks[1], null, LiveIn("boolParameter", "stringParam"), LiveOut("stringParam"));
-        context.Validate(context.Cfg.Blocks[2], null, LiveIn("stringParam"), LiveOut("stringParam"));
-        context.Validate(context.Cfg.Blocks[3], null, LiveIn("stringParam"), LiveOut("stringParam"));
-        context.Validate(context.Cfg.Blocks[4], null, LiveIn("stringParam"));
+        context.Validate(context.Cfg.Blocks[1], LiveIn("boolParameter", "stringParam"), LiveOut("stringParam"));
+        context.Validate(context.Cfg.Blocks[2], LiveIn("stringParam"), LiveOut("stringParam"));
+        context.Validate(context.Cfg.Blocks[3], LiveIn("stringParam"), LiveOut("stringParam"));
+        context.Validate(context.Cfg.Blocks[4], LiveIn("stringParam"));
         context.ValidateExit();
     }
 
     [TestMethod]
-    public void FlowCaptrure_TernaryOperatorReuseCaptures()
+    public void FlowCaptrure_ReuseCaptures()
     {
         /*       Block 1
          *     boolParameter
@@ -153,19 +153,19 @@ public partial class RoslynLiveVariableAnalysisTest
          *        Exit
          */
         const string code = """
-            string s = boolParameter ? st : "Hello";
-            string q = boolParameter ? st2 : "Hello";
+            var result1 = boolParameter ? s1 : "Hello";
+            var result2 = boolParameter ? s2 : "Hi";
             """;
-        var context = CreateContextCS(code, additionalParameters: "string st, string st2");
-        context.ValidateEntry(LiveIn("boolParameter", "st", "st2"), LiveOut("boolParameter", "st", "st2"));
-        context.Validate(context.Cfg.Blocks[1], null, LiveIn("boolParameter", "st", "st2"), LiveOut("boolParameter", "st", "st2"));
-        context.Validate(context.Cfg.Blocks[2], null, LiveIn("boolParameter", "st", "st2"), LiveOut("boolParameter", "st", "st2"));
-        context.Validate(context.Cfg.Blocks[3], null, LiveIn("boolParameter", "st", "st2"), LiveOut("boolParameter", "st", "st2"));
-        context.Validate(context.Cfg.Blocks[4], null, LiveIn("boolParameter", "st", "st2"), LiveOut("boolParameter", "st2"));
-        context.Validate(context.Cfg.Blocks[5], null, LiveIn("boolParameter", "st2"), LiveOut("st2"));
-        context.Validate(context.Cfg.Blocks[6], null, LiveIn("st2"), LiveOut("st2"));
-        context.Validate(context.Cfg.Blocks[7], null, LiveIn("st2"), LiveOut("st2"));
-        context.Validate(context.Cfg.Blocks[8], null, LiveIn("st2"));
+        var context = CreateContextCS(code, additionalParameters: "string s1, string s2");
+        context.ValidateEntry(LiveIn("boolParameter", "s1", "s2"), LiveOut("boolParameter", "s1", "s2"));
+        context.Validate(context.Cfg.Blocks[1], LiveIn("boolParameter", "s1", "s2"), LiveOut("boolParameter", "s1", "s2"));
+        context.Validate(context.Cfg.Blocks[2], LiveIn("boolParameter", "s1", "s2"), LiveOut("boolParameter", "s1", "s2"));
+        context.Validate(context.Cfg.Blocks[3], LiveIn("boolParameter", "s1", "s2"), LiveOut("boolParameter", "s1", "s2"));
+        context.Validate(context.Cfg.Blocks[4], LiveIn("boolParameter", "s1", "s2"), LiveOut("boolParameter", "s2"));
+        context.Validate(context.Cfg.Blocks[5], LiveIn("boolParameter", "s2"), LiveOut("s2"));
+        context.Validate(context.Cfg.Blocks[6], LiveIn("s2"), LiveOut("s2"));
+        context.Validate(context.Cfg.Blocks[7], LiveIn("s2"), LiveOut("s2"));
+        context.Validate(context.Cfg.Blocks[8], LiveIn("s2"));
         context.ValidateExit();
     }
 
@@ -183,41 +183,41 @@ public partial class RoslynLiveVariableAnalysisTest
          *       \  #2 is null  |                        |
          *        \     /       |                        |
          *         Block 6 <-+  +--T--> Block 5--------->|
-         *          s=#1     |         #1="Hello"        |
-         *           |       +---------------------------+
+         *         result=#1    |      #1="Hello"        |
+         *           |          +------------------------+
          *         Exit
          */
-        const string code = """string s = s1 ?? s2 ?? "Hello";""";
+        const string code = """var result = s1 ?? s2 ?? "Hello";""";
         var context = CreateContextCS(code, additionalParameters: "string s1, string s2");
         context.ValidateEntry(LiveIn("s1", "s2"), LiveOut("s1", "s2"));
-        context.Validate(context.Cfg.Blocks[1], null, LiveIn("s1", "s2"), LiveOut("s1", "s2"));
-        context.Validate(context.Cfg.Blocks[2], null, LiveIn("s1", "s2"), LiveOut("s1", "s2"));
-        context.Validate(context.Cfg.Blocks[3], null, LiveIn("s1", "s2"), LiveOut("s1", "s2"));
-        context.Validate(context.Cfg.Blocks[4], null, LiveIn("s1", "s2"), LiveOut("s1", "s2"));
-        context.Validate(context.Cfg.Blocks[5], null, LiveIn("s1", "s2"), LiveOut("s1", "s2"));
-        context.Validate(context.Cfg.Blocks[6], null, LiveIn("s1", "s2"));
+        context.Validate(context.Cfg.Blocks[1], LiveIn("s1", "s2"), LiveOut("s1", "s2"));
+        context.Validate(context.Cfg.Blocks[2], LiveIn("s1", "s2"), LiveOut("s1", "s2"));
+        context.Validate(context.Cfg.Blocks[3], LiveIn("s1", "s2"), LiveOut("s1", "s2"));
+        context.Validate(context.Cfg.Blocks[4], LiveIn("s1", "s2"), LiveOut("s1", "s2"));
+        context.Validate(context.Cfg.Blocks[5], LiveIn("s1", "s2"), LiveOut("s1", "s2"));
+        context.Validate(context.Cfg.Blocks[6], LiveIn("s1", "s2"));
         context.ValidateExit();
     }
 
     [TestMethod]
     public void FlowCaptrure_NullCoalescingOperator_ConsequentCalls_Assignment()
     {
-        const string code = """string s = s1 ??= s2 = s3 ??= s4 ?? "End";""";
+        const string code = """var result = s1 ??= s2 = s3 ??= s4 ?? "End";""";
         var context = CreateContextCS(code, additionalParameters: "string s1, string s2, string s3, string s4");
         context.ValidateEntry(LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));
-        context.Validate(context.Cfg.Blocks[1], null, LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 1: Parents: Entry, Children: 2
-        context.Validate(context.Cfg.Blocks[2], null, LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 2: Parents: 1, Children: 2
-        context.Validate(context.Cfg.Blocks[3], null, LiveIn("s1"), LiveOut("s1"));                                      // 3: Parents: 2, Children: 13
-        context.Validate(context.Cfg.Blocks[4], null, LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 4: Parents: 2, Children: 5
-        context.Validate(context.Cfg.Blocks[5], null, LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 5: Parents: 4, Children: 6
-        context.Validate(context.Cfg.Blocks[6], null, LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 6: Parents: 5, Children: 7, 8
-        context.Validate(context.Cfg.Blocks[7], null, LiveIn("s1", "s2", "s3"), LiveOut("s1", "s2", "s3"));              // 7: Parents: 6, Children: 12
-        context.Validate(context.Cfg.Blocks[9], null, LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 8: Parents: 6, Children: 9, 10
-        context.Validate(context.Cfg.Blocks[9], null, LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 9: Parents: 8, Children: 11
-        context.Validate(context.Cfg.Blocks[10], null, LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4")); // 10: Parents: 8, Children: 11
-        context.Validate(context.Cfg.Blocks[11], null, LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3"));       // 11: Parents: 9, 10, Children: 12
-        context.Validate(context.Cfg.Blocks[12], null, LiveIn("s1", "s2", "s3"), LiveOut("s1"));                         // 12: Parents: 7, 11, Children:  13
-        context.Validate(context.Cfg.Blocks[13], null, LiveIn("s1"));                                                    // 13: Parents: 3, 12, Children: Exit
+        context.Validate(context.Cfg.Blocks[1], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 1: #0=s1
+        context.Validate(context.Cfg.Blocks[2], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 2: #1=#0; #1 is null
+        context.Validate(context.Cfg.Blocks[3], LiveIn("s1"), LiveOut("s1"));                                      // 3: #1!=null; #2=#1
+        context.Validate(context.Cfg.Blocks[4], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 4: #1==null; #3=s2
+        context.Validate(context.Cfg.Blocks[5], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 5: #4=s3
+        context.Validate(context.Cfg.Blocks[6], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 6: #5=#4; #5 is null
+        context.Validate(context.Cfg.Blocks[7], LiveIn("s1", "s2", "s3"), LiveOut("s1", "s2", "s3"));              // 7: #5!=null; #6=#5
+        context.Validate(context.Cfg.Blocks[9], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 8: #5==null; #7=s4; #7 is null
+        context.Validate(context.Cfg.Blocks[9], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4"));  // 9: #7 != null; #8=#7
+        context.Validate(context.Cfg.Blocks[10], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3", "s4")); // 10: #7=null; #8="End"
+        context.Validate(context.Cfg.Blocks[11], LiveIn("s1", "s2", "s3", "s4"), LiveOut("s1", "s2", "s3"));       // 11: #6=#4??=#8
+        context.Validate(context.Cfg.Blocks[12], LiveIn("s1", "s2", "s3"), LiveOut("s1"));                         // 12: #2=#0??=#3=#6
+        context.Validate(context.Cfg.Blocks[13], LiveIn("s1"));                                                    // 13: result=#2
         context.ValidateExit();
     }
 
@@ -245,22 +245,22 @@ public partial class RoslynLiveVariableAnalysisTest
          *          |                         #1="Hello"  #1=#2"
          *          |                             |         |
          *          +------------>Block9<---------+---------+
-         *                         s=#1
+         *                      result=#1
          *                          |
          *                         Exit
          */
-        const string code = """string s = s1 ?? (s2 is null ? s3 : "NestedFalse") ?? "Hello";""";
+        const string code = """var result = s1 ?? (s2 is null ? s3 : "NestedFalse") ?? "Hello";""";
         var context = CreateContextCS(code, additionalParameters: "string s1, string s2, string s3");
         context.ValidateEntry(LiveIn("s1", "s2", "s3"), LiveOut("s1", "s2", "s3"));
-        context.Validate(context.Cfg.Blocks[1], null, LiveIn("s1", "s2", "s3"), LiveOut("s1", "s2", "s3"));
-        context.Validate(context.Cfg.Blocks[2], null, LiveIn("s1", "s3"), LiveOut("s1", "s3"));
-        context.Validate(context.Cfg.Blocks[3], null, LiveIn("s1", "s2", "s3"), LiveOut("s1", "s3"));
-        context.Validate(context.Cfg.Blocks[4], null, LiveIn("s1", "s3"), LiveOut("s1", "s3"));
-        context.Validate(context.Cfg.Blocks[5], null, LiveIn("s1", "s3"), LiveOut("s1", "s3"));
-        context.Validate(context.Cfg.Blocks[6], null, LiveIn("s1", "s3"), LiveOut("s1", "s3"));
-        context.Validate(context.Cfg.Blocks[7], null, LiveIn("s1", "s3"), LiveOut("s1", "s3"));
-        context.Validate(context.Cfg.Blocks[8], null, LiveIn("s1", "s3"), LiveOut("s1", "s3"));
-        context.Validate(context.Cfg.Blocks[9], null, LiveIn("s1", "s3"));
+        context.Validate(context.Cfg.Blocks[1], LiveIn("s1", "s2", "s3"), LiveOut("s1", "s2", "s3"));
+        context.Validate(context.Cfg.Blocks[2], LiveIn("s1", "s3"), LiveOut("s1", "s3"));
+        context.Validate(context.Cfg.Blocks[3], LiveIn("s1", "s2", "s3"), LiveOut("s1", "s3"));
+        context.Validate(context.Cfg.Blocks[4], LiveIn("s1", "s3"), LiveOut("s1", "s3"));
+        context.Validate(context.Cfg.Blocks[5], LiveIn("s1", "s3"), LiveOut("s1", "s3"));
+        context.Validate(context.Cfg.Blocks[6], LiveIn("s1", "s3"), LiveOut("s1", "s3"));
+        context.Validate(context.Cfg.Blocks[7], LiveIn("s1", "s3"), LiveOut("s1", "s3"));
+        context.Validate(context.Cfg.Blocks[8], LiveIn("s1", "s3"), LiveOut("s1", "s3"));
+        context.Validate(context.Cfg.Blocks[9], LiveIn("s1", "s3"));
         context.ValidateExit();
     }
 
@@ -274,8 +274,8 @@ public partial class RoslynLiveVariableAnalysisTest
          *   #1=(s1="overwrite")
          *     #1 is null
          *        /   \
-         *       T     F
-         *       /     \
+         *       F     T
+         *      /       \
          *    Block3   Block4
          *    #2=#1   #2="value"
          *      \         /
@@ -283,14 +283,14 @@ public partial class RoslynLiveVariableAnalysisTest
          *        Block5
          *        s1=#2
          */
-        const string code = """s1 = (s1 = "overwrite")  ?? "value";""";
+        const string code = """s1 = (s1 = "overwrite") ?? "value";""";
         var context = CreateContextCS(code, additionalParameters: "string s1");
         context.ValidateEntry(LiveIn("s1"), LiveOut("s1"));
-        context.Validate(context.Cfg.Blocks[1], null, LiveIn("s1"));
-        context.Validate(context.Cfg.Blocks[2], null);
-        context.Validate(context.Cfg.Blocks[3], null, LiveOut("s1"));
-        context.Validate(context.Cfg.Blocks[4], null, LiveOut("s1"));
-        context.Validate(context.Cfg.Blocks[5], null, LiveIn("s1"));
+        context.Validate(context.Cfg.Blocks[1], LiveIn("s1"));
+        context.Validate(context.Cfg.Blocks[2]);  // This should have LiveIn("s1") and LiveOut("s1") but #1 gets as value all the assignment operation.
+        context.Validate(context.Cfg.Blocks[3], LiveOut("s1"));
+        context.Validate(context.Cfg.Blocks[4], LiveOut("s1"));
+        context.Validate(context.Cfg.Blocks[5], LiveIn("s1"));
         context.ValidateExit();
     }
 
@@ -298,23 +298,23 @@ public partial class RoslynLiveVariableAnalysisTest
     public void FlowCaptrure_SwitchStatement()
     {
         const string code = """
-            string result = i switch
+            var result = i switch
             {
-                0 =>  stringParam,
+                0 =>  param,
                 1 => "Something",
                 _ => "Everything"
             };
             """;
-        var context = CreateContextCS(code, additionalParameters: "int i, string stringParam");
-        context.ValidateEntry(LiveIn("i", "stringParam"), LiveOut("i", "stringParam"));
-        context.Validate(context.Cfg.Blocks[1], null, LiveIn("i", "stringParam"), LiveOut("i", "stringParam")); // if i == 0
-        context.Validate(context.Cfg.Blocks[2], null, LiveIn("stringParam"), LiveOut("stringParam"));           // #0 = stringParam
-        context.Validate(context.Cfg.Blocks[3], null, LiveIn("i", "stringParam"), LiveOut("i", "stringParam")); // if i == 1
-        context.Validate(context.Cfg.Blocks[4], null, LiveIn("stringParam"), LiveOut("stringParam"));           // #0 = "Something"
-        context.Validate(context.Cfg.Blocks[5], null, LiveIn("i", "stringParam"), LiveOut("stringParam"));      // if i != 0 && i != 1
-        context.Validate(context.Cfg.Blocks[6], null, LiveIn("stringParam"), LiveOut("stringParam"));           // #0 = "Everything"
-        context.Validate(context.Cfg.Blocks[7], null);                                                          // to no destination block
-        context.Validate(context.Cfg.Blocks[8], null, LiveIn("stringParam"));                                   // result = #0
+        var context = CreateContextCS(code, additionalParameters: "int i, string param");
+        context.ValidateEntry(LiveIn("i", "param"), LiveOut("i", "param"));
+        context.Validate(context.Cfg.Blocks[1], LiveIn("i", "param"), LiveOut("i", "param")); // #1 = i; if #1 == 0
+        context.Validate(context.Cfg.Blocks[2], LiveIn("param"), LiveOut("param"));           // #0 = param
+        context.Validate(context.Cfg.Blocks[3], LiveIn("i", "param"), LiveOut("i", "param")); // if #1 == 1
+        context.Validate(context.Cfg.Blocks[4], LiveIn("param"), LiveOut("param"));           // #0 = "Something"
+        context.Validate(context.Cfg.Blocks[5], LiveIn("i", "param"), LiveOut("param"));      // if discard
+        context.Validate(context.Cfg.Blocks[6], LiveIn("param"), LiveOut("param"));           // #0 = "Everything"
+        context.Validate(context.Cfg.Blocks[7]);                                              // else, unreachable, throws
+        context.Validate(context.Cfg.Blocks[8], LiveIn("param"));                             // result = #0
         context.ValidateExit();
     }
 
@@ -323,32 +323,34 @@ public partial class RoslynLiveVariableAnalysisTest
     {
         const string code = """
             int sum = 0;
-            foreach (var i in list)
+            foreach (var i in array)
             {
                 sum += i;
             }
             """;
-        var context = CreateContextCS(code, additionalParameters: "System.Collections.Generic.List<int> list");
-        context.ValidateEntry(LiveIn("list"), LiveOut("list"));
-        context.Validate(context.Cfg.Blocks[1], null, LiveIn("list"), LiveOut("list", "sum"));
-        context.Validate(context.Cfg.Blocks[2], null, LiveIn("list", "sum"), LiveOut("sum"));
-        context.Validate(context.Cfg.Blocks[3], null, LiveIn("sum"), LiveOut("sum"));
-        context.Validate(context.Cfg.Blocks[4], null, LiveIn("sum"), LiveOut("sum"));
-        context.Validate(context.Cfg.Blocks[5], null);
+        var context = CreateContextCS(code, additionalParameters: "int[] array");
+        context.ValidateEntry(LiveIn("array"), LiveOut("array"));
+        context.Validate(context.Cfg.Blocks[1], LiveIn("array"), LiveOut("array", "sum")); // sum = 0
+        context.Validate(context.Cfg.Blocks[2], LiveIn("array", "sum"), LiveOut("sum"));   // #0 = array
+        context.Validate(context.Cfg.Blocks[3], LiveIn("sum"), LiveOut("sum"));            // IEnumerator.MoveNext
+        context.Validate(context.Cfg.Blocks[4], LiveIn("sum"), LiveOut("sum"));            // sum += i
+        context.Validate(context.Cfg.Blocks[5]);                                           // Finally Region: #1=#0; #1 is null
+        context.Validate(context.Cfg.Blocks[6]);                                           // Finally Region: #1 is null == true; Dispose(#1)
+        context.Validate(context.Cfg.Blocks[7]);                                           // Finally Region: #1 is null == false; Exception Handling block
         context.ValidateExit();
     }
 
     [TestMethod]
     public void FlowCaptrure_ImplicDictionaryCreation()
     {
-        const string code = """System.Collections.Generic.Dictionary<string, int> dict =  new() { ["Key"] = 0, ["Lorem"] = 1, [key] = value }; """;
+        const string code = """Dictionary<string, int> dict =  new() { ["Key"] = 0, ["Lorem"] = 1, [key] = value }; """;
         var context = CreateContextCS(code, additionalParameters: "string key, int value");
         context.ValidateEntry(LiveIn("key", "value"), LiveOut("key", "value"));
-        context.Validate(context.Cfg.Blocks[1], null, LiveIn("key", "value"), LiveOut("key", "value"));
-        context.Validate(context.Cfg.Blocks[2], null, LiveIn("key", "value"), LiveOut("key", "value"));
-        context.Validate(context.Cfg.Blocks[3], null, LiveIn("key", "value"), LiveOut("key", "value"));
-        context.Validate(context.Cfg.Blocks[4], null, LiveIn("key", "value"));
-        context.Validate(context.Cfg.Blocks[5], null);
+        context.Validate(context.Cfg.Blocks[1], LiveIn("key", "value"), LiveOut("key", "value"));
+        context.Validate(context.Cfg.Blocks[2], LiveIn("key", "value"), LiveOut("key", "value"));
+        context.Validate(context.Cfg.Blocks[3], LiveIn("key", "value"), LiveOut("key", "value"));
+        context.Validate(context.Cfg.Blocks[4], LiveIn("key", "value"));
+        context.Validate(context.Cfg.Blocks[5]);
         context.ValidateExit();
     }
 }
