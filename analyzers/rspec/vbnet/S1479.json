@@ -1,5 +1,5 @@
 {
-  "title": "\"Select Case\" statements should not have too many \"Case\" clauses",
+  "title": "\"Select Case\" statement with many \"Case\" clauses should have only one statement",
   "type": "CODE_SMELL",
   "code": {
     "impacts": {
