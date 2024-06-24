@@ -42,7 +42,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         {
             BuildBranches(block);
         }
-        ResolveCaptures(cfg);
+        ResolveCaptures();
         Analyze();
     }
 
@@ -76,9 +76,12 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         return ret;
     }
 
-    private void ResolveCaptures(ControlFlowGraph cfg)
+    private void ResolveCaptures()
     {
-        foreach (var operation in cfg.Blocks.Where(x => x.IsEnclosedIn(ControlFlowRegionKind.LocalLifetime)).SelectMany(x => x.Operations).ToExecutionOrder())
+        foreach (var operation in Cfg.Blocks
+                                    .Where(x => x.EnclosingRegion.EnclosingRegionOrSelf(ControlFlowRegionKind.LocalLifetime) is not null)
+                                    .SelectMany(x => x.OperationsAndBranchValue)
+                                    .ToExecutionOrder())
         {
             if (IFlowCaptureOperationWrapper.IsInstance(operation.Instance))
             {
@@ -88,29 +91,28 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
                     && IFlowCaptureReferenceOperationWrapper.FromOperation(flowCapture.Value) is var captureReference
                     && flowCaptureOperations.TryGetValue(captureReference.Id, out var capturedOperations))
                 {
-                    ProcessFlowCaptureReference(flowCapture.Id, capturedOperations);
-                }
-                else if (flowCaptureOperations.TryGetValue(flowCapture.Id, out capturedOperations))
-                {
-                    flowCaptureOperations[flowCapture.Id] = [.. capturedOperations, flowCapture.Value];
+                    AddOrUpdateFlowCaptures(flowCapture.Id, capturedOperations.ToArray());
                 }
                 else
                 {
-                    flowCaptureOperations.Add(flowCapture.Id, [flowCapture.Value]);
+                    AddOrUpdateFlowCaptures(flowCapture.Id, flowCapture.Value);
                 }
             }
         }
 
-        void ProcessFlowCaptureReference(CaptureId id, List<IOperation> capturedOperations)
+        void AddOrUpdateFlowCaptures(CaptureId id, params IOperation[] operations)
         {
+            var capturedOperations = flowCaptureOperations.TryGetValue(id, out var existing) ? existing : [];
+            capturedOperations.AddRange(operations);
             if (flowCaptureOperations.ContainsKey(id))
             {
-                flowCaptureOperations[id].AddRange(capturedOperations);
+                flowCaptureOperations[id] = capturedOperations;
             }
             else
             {
                 flowCaptureOperations.Add(id, capturedOperations);
             }
+
         }
     }
 
@@ -230,19 +232,16 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         public RoslynState(RoslynLiveVariableAnalysis owner) =>
             this.owner = owner;
 
-        public void ProcessBlock(ControlFlowGraph cfg, BasicBlock block, Dictionary<CaptureId, List<IOperation>> flowCaptureOperations = null)
+        public void ProcessBlock(ControlFlowGraph cfg, BasicBlock block, Dictionary<CaptureId, List<IOperation>> flowCaptureOperations)
         {
-            flowCaptureOperations ??= [];
-
-            foreach (var op in block.OperationsAndBranchValue.ToReversedExecutionOrder())
+            foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder().Select(x => x.Instance))
             {
-                var operation = op.Instance;
                 if ((IFlowCaptureOperationWrapper.IsInstance(operation)
-                        && flowCaptureOperations.TryGetValue(IFlowCaptureOperationWrapper.FromOperation(operation).Id, out var capturedOps))
+                        && flowCaptureOperations.TryGetValue(IFlowCaptureOperationWrapper.FromOperation(operation).Id, out var captured))
                     || (IFlowCaptureReferenceOperationWrapper.IsInstance(operation)
-                        && flowCaptureOperations.TryGetValue(IFlowCaptureReferenceOperationWrapper.FromOperation(operation).Id, out capturedOps)))
+                        && flowCaptureOperations.TryGetValue(IFlowCaptureReferenceOperationWrapper.FromOperation(operation).Id, out captured)))
                 {
-                    foreach (var capturedOperation in capturedOps)
+                    foreach (var capturedOperation in captured)
                     {
                         ProcessOperation(cfg, capturedOperation);
                     }
@@ -356,7 +355,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
                 var localFunctionCfg = cfg.FindLocalFunctionCfgInScope(localFunction, owner.Cancel);
                 foreach (var block in localFunctionCfg.Blocks.Reverse())    // Simplified approach, ignoring branching and try/catch/finally flows
                 {
-                    ProcessBlock(localFunctionCfg, block);
+                    ProcessBlock(localFunctionCfg, block, []);
                 }
             }
         }

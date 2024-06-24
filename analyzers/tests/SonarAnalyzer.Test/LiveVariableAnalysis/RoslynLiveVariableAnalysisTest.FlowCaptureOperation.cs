@@ -83,7 +83,7 @@ public partial class RoslynLiveVariableAnalysisTest
          *       F     T
          *      /       \
          *  Block 2    Block 3
-         * #0=Length  #0=default
+         * #0=#1.Length  #0=default
          *      \        /
          *        Block 4
          *       result=#1
@@ -258,12 +258,12 @@ public partial class RoslynLiveVariableAnalysisTest
          *   |        /       \
          *   |     Block7   Block 8
          *   |     #1=#2    #1="Hello"
-         *   |        |___________|
-         *   |              |
-         *   +----------->Block 9
-         *               result=#1
-         *                  |
-         *                 Exit
+         *   |       |___________|
+         *   |             |
+         *   +---------->Block 9
+         *              result=#1
+         *                 |
+         *                Exit
          */
         const string code = """var result = s1 ?? (s2 is null ? s3 : "NestedFalse") ?? "Hello";""";
         var context = CreateContextCS(code, additionalParameters: "string s1, string s2, string s3");
@@ -351,7 +351,7 @@ public partial class RoslynLiveVariableAnalysisTest
         context.Validate(context.Cfg.Blocks[3], LiveIn("sum"), LiveOut("sum"));            // If IEnumerator.MoveNext
         context.Validate(context.Cfg.Blocks[4], LiveIn("sum"), LiveOut("sum"));            // sum += i
         context.Validate(context.Cfg.Blocks[5]);                                           // Finally Region: #1=#0; if #1 is null, should have LiveIn/Liveout: array
-        context.Validate(context.Cfg.Blocks[6]);                                           // Finally Region: #1 is null == true; #1.Dispose, should have LiveIn: array
+        context.Validate(context.Cfg.Blocks[6]);                                           // Finally Region: #1.Dispose, should have LiveIn: array
         context.Validate(context.Cfg.Blocks[7]);                                           // Finally Region: Empty end of finally
         context.ValidateExit();
     }
