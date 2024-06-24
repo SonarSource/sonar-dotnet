@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
@@ -183,6 +184,32 @@ namespace Tests.Diagnostics
         {
             string s = "test";
             Console.WriteLine("Result: {0}", s);
+        }
+    }
+
+    public abstract class InheritedConstraints
+    {
+        public class Item { }
+        public class Mobile { }
+        
+        public abstract void WriteItemList<T>(List<T> list) where T : Item;
+        public abstract void WriteMobileList<T>(List<T> list) where T : Mobile;
+
+        public class Derived: InheritedConstraints
+        {
+            public override void WriteItemList<T>(List<T> list) // Compliant. The methods have different constraints
+            {
+                Console.WriteLine("One");
+                Console.WriteLine("Two");
+                Console.WriteLine("Three");
+            }
+
+            public override void WriteMobileList<T>(List<T> list)
+            {
+                Console.WriteLine("One");
+                Console.WriteLine("Two");
+                Console.WriteLine("Three");
+            }
         }
     }
 }
