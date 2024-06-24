@@ -18,6 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq.Expressions;
+using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
+
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -40,7 +43,12 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
             : null;
 
     protected override ITypeSymbol ArrayElementType(ArgumentSyntax argument, SemanticModel model) =>
-        model.GetTypeInfo(((ArrayCreationExpressionSyntax)argument.Expression).Type.ElementType).Type;
+        argument switch
+        {
+            _ when argument.Expression as ArrayCreationExpressionSyntax is { } arrayCreation => model.GetTypeInfo(arrayCreation.Type.ElementType).Type,
+            _ when argument.Expression as ImplicitArrayCreationExpressionSyntax is { } implicitArrayCreation => model.GetTypeInfo(implicitArrayCreation).Type,
+            _ => null
+        };
 
     private static BaseArgumentListSyntax ArgumentList(SyntaxNode expression) =>
         expression switch
