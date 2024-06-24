@@ -43,7 +43,7 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
         argument.Expression switch
         {
             ArrayCreationExpressionSyntax arrayCreation => model.GetTypeInfo(arrayCreation.Type.ElementType).Type,
-            ImplicitArrayCreationExpressionSyntax implicitArrayCreation => model.GetTypeInfo(implicitArrayCreation).Type,
+            ImplicitArrayCreationExpressionSyntax implicitArrayCreation => (model.GetTypeInfo(implicitArrayCreation).Type as IArrayTypeSymbol)?.ElementType,
             _ => null
         };
 
