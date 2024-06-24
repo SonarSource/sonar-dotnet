@@ -1,5 +1,5 @@
 {
-  "title": "Null checks should not be used with \"is\"",
+  "title": "Null checks should not be combined with \"is\" operator checks",
   "type": "CODE_SMELL",
   "code": {
     "impacts": {
