@@ -1,5 +1,5 @@
 {
-  "title": "\"switch\" statements should not have too many \"case\" clauses",
+  "title": "\"switch\" statements with many \"case\" clauses should have only one statement",
   "type": "CODE_SMELL",
   "code": {
     "impacts": {
