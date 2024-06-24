@@ -81,6 +81,7 @@ public class Repro6894
     public void MethodMixed(int i, params object[] args) { }
     public void MethodArray(params Array[] args) { }
     public void MethodJaggedArray(params int[][] args) { }
+    public void MethodImplicitArray(params string[] args) { }
 
     public void CallMethod(dynamic d)
     {
@@ -100,6 +101,7 @@ public class Repro6894
         Method(d);                                                          // Compliant
         Method("Hello", 2);                                                 // Compliant
         string.Format(CultureInfo.InvariantCulture, "{0}.{1}", new object[] { "", new object() });
+        Method(new[] { "Hello", "Hi" });                                    // Noncompliant , Implicit array creation
     }
 }
 
