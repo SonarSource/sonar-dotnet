@@ -809,8 +809,8 @@ public partial class RoslynLiveVariableAnalysisTest
             }
             """;
         var context = CreateContextCS(code);
-        context.Validate(context.Cfg.Blocks[1], null, LiveIn("boolParameter", "intParameter"), LiveOut("boolParameter", "intParameter"));
-        context.Validate(context.Cfg.Blocks[2], null, LiveIn("boolParameter", "intParameter"), LiveOut("boolParameter", "intParameter"));
+        context.Validate(context.Cfg.Blocks[1], LiveIn("boolParameter", "intParameter"), LiveOut("boolParameter", "intParameter"));
+        context.Validate(context.Cfg.Blocks[2], LiveIn("boolParameter", "intParameter"), LiveOut("boolParameter", "intParameter"));
         context.Validate("Method(i, intParameter);", LiveIn("boolParameter", "intParameter"), LiveOut("boolParameter", "intParameter", "i"));
         context.Validate("Method(i);", LiveIn("boolParameter", "intParameter", "i"), LiveOut("boolParameter", "intParameter"));
         context.ValidateExit();
@@ -1005,6 +1005,7 @@ public partial class RoslynLiveVariableAnalysisTest
         additionalParameters = additionalParameters is null ? null : ", " + additionalParameters;
         var code = $$"""
             using System;
+            using System.Collections.Generic;
             using System.IO;
             using System.Linq;
             public class Sample
@@ -1117,6 +1118,9 @@ public partial class RoslynLiveVariableAnalysisTest
             var block = Cfg.Blocks.Single(x => x.Kind == BasicBlockKind.Block && x.OperationsAndBranchValue.OfType<TOperation>().Any(operation => operation.Syntax.ToString() == withSyntax));
             Validate(block, withSyntax, expected);
         }
+
+        public void Validate(BasicBlock block, params Expected[] expected) =>
+            Validate(block, null, expected);
 
         public void Validate(BasicBlock block, string blockSuffix, params Expected[] expected)
         {

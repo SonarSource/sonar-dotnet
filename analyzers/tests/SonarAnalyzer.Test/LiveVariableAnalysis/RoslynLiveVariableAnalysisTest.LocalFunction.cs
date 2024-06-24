@@ -256,8 +256,8 @@ public partial class RoslynLiveVariableAnalysisTest
         var context = CreateContextCS(code, "LocalFunction");
         context.ValidateEntry(LiveIn("arg"), LiveOut("arg"));
         context.Validate("variable", LiveIn("arg"), LiveOut("arg"));
-        context.Validate("LocalFunction(arg - 1)", LiveIn("arg"));
-        context.Validate("0");
+        context.Validate("LocalFunction(arg - 1)", LiveIn("arg"), LiveOut("arg"));
+        context.Validate("0", LiveIn("arg"), LiveOut("arg"));
     }
 
     [TestMethod]
