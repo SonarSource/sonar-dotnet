@@ -190,32 +190,34 @@ namespace Tests.Diagnostics
 
     public abstract class InheritedConstraints
     {
-        public class Item { public bool Flag { get; } }
-        public class Mobile { public bool Flag { get; } }
-        
+        public class Item { public void Action() { } }
+        public class Mobile { public void Action() { } }
+
         public abstract void WriteItemList<T>(List<T> list) where T : Item;
+        public abstract void WriteItemList2<T>(List<T> list) where T : Item;
         public abstract void WriteMobileList<T>(List<T> list) where T : Mobile;
 
-        public class Derived: InheritedConstraints
+        public class Derived : InheritedConstraints
         {
-            public override void WriteItemList<T>(List<T> list) // Compliant. The methods have different constraints
+            public override void WriteItemList<T>(List<T> list) // Secondary
             {
-                if (list.First().Flag)
-                {
-                    Console.WriteLine("One");
-                    Console.WriteLine("Two");
-                    Console.WriteLine("Three");
-                }
+                list.First().Action();
+                Console.WriteLine("One");
+                Console.WriteLine("Two");
             }
 
-            public override void WriteMobileList<T>(List<T> list)
+            public override void WriteItemList2<T>(List<T> list) // Noncompliant. The methods have the same inherited constraints.
             {
-                if (list.First().Flag)
-                {
-                    Console.WriteLine("One");
-                    Console.WriteLine("Two");
-                    Console.WriteLine("Three");
-                }
+                list.First().Action();
+                Console.WriteLine("One");
+                Console.WriteLine("Two");
+            }
+
+            public override void WriteMobileList<T>(List<T> list) // Compliant. This method has a different inherited constraint.
+            {
+                list.First().Action();
+                Console.WriteLine("One");
+                Console.WriteLine("Two");
             }
         }
     }
