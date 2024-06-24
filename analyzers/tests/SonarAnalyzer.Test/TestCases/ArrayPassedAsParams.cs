@@ -101,7 +101,8 @@ public class Repro6894
         Method("Hello", 2);                                                     // Compliant
         string.Format(CultureInfo.InvariantCulture, "{0}.{1}", new object[] { "", new object() });
         MethodImplicitArray(new[] { "Hello", "Hi" });                           // Noncompliant , Implicit array creation
-        Method(new [] { 1, 2, 3, });                                            // Compliant, Elements in args: [System.Int32[]]
+        Method(new[] { 1, 2, 3, });                                            // Compliant, Elements in args: [System.Int32[]]
+        Method(new[,] { { 1, 2 } });                                            // Compliant, Elements in args: [System.Int32[,]]
     }
 }
 
