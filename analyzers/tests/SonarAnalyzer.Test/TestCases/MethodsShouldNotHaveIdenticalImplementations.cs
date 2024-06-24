@@ -193,29 +193,29 @@ namespace Tests.Diagnostics
         public class Item { public void Action() { } }
         public class Mobile { public void Action() { } }
 
-        public abstract void WriteItemList<T>(List<T> list) where T : Item;
-        public abstract void WriteItemList2<T>(List<T> list) where T : Item;
-        public abstract void WriteMobileList<T>(List<T> list) where T : Mobile;
+        public abstract void WriteItem<T>(T item) where T : Item;
+        public abstract void WriteItem2<T>(T item) where T : Item;
+        public abstract void WriteMobile<T>(T item) where T : Mobile;
 
         public class Derived : InheritedConstraints
         {
-            public override void WriteItemList<T>(List<T> list) // Secondary
+            public override void WriteItem<T>(T item) // Secondary
             {
-                list.First().Action();
+                item.Action();
                 Console.WriteLine("One");
                 Console.WriteLine("Two");
             }
 
-            public override void WriteItemList2<T>(List<T> list) // Noncompliant. The methods have the same inherited constraints.
+            public override void WriteItem2<T>(T item) // Noncompliant. The WriteItem methods have the same inherited constraints.
             {
-                list.First().Action();
+                item.Action();
                 Console.WriteLine("One");
                 Console.WriteLine("Two");
             }
 
-            public override void WriteMobileList<T>(List<T> list) // Compliant. This method has a different inherited constraint.
+            public override void WriteMobile<T>(T item) // Compliant. The WriteMobile method has a different inherited constraint.
             {
-                list.First().Action();
+                item.Action();
                 Console.WriteLine("One");
                 Console.WriteLine("Two");
             }
