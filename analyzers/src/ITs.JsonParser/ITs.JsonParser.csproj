@@ -20,7 +20,7 @@
       <BinariesToCopy Include="$(OutputPath)\*.dll" />
       <BinariesToCopy Include="$(OutputPath)\*.json" />
     </ItemGroup>
-    <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)\ITs.JsonParser" />
+    <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)" />
   </Target>
 
 </Project>

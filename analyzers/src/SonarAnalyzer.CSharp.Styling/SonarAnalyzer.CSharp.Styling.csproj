@@ -49,6 +49,6 @@
   </Target>
 
   <Target Name="CopyBinaries" AfterTargets="Build" DependsOnTargets="SignDlls">
-    <Copy SourceFiles="$(OutputPath)$(TargetFileName)" DestinationFolder="$(BinariesFolderInternal)" />
+    <Copy SourceFiles="$(OutputPath)$(TargetFileName)" DestinationFolder="$(BinariesFolder)" />
   </Target>
 </Project>
