@@ -10,6 +10,8 @@ jobs:
   permissions:
    id-token: write  # to authenticate via OIDC
   uses: SonarSource/gh-action_build-notify/.github/workflows/main.yaml@v1
-  if: github.event.check_run.name == 'Sonar.Net'
+  if: >-
+    github.event.check_run.name == 'Sonar.Net'
+    || endsWith(github.event.check_run.name, 'SonarCloud Code Analysis')
   with:
     slackChannel: squad-dotnet
