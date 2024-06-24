@@ -73,6 +73,23 @@ namespace SonarAnalyzer.Extensions
         // This method is taken from Roslyn implementation
         public static IEnumerable<IOperation> DescendantsAndSelf(this IOperation operation) =>
             Descendants(operation, true);
+        public static IAnonymousFunctionOperationWrapper? AsAnonymousFunction(this IOperation operation) =>
+            operation.As(OperationKindEx.AnonymousFunction, IAnonymousFunctionOperationWrapper.FromOperation);
+
+        public static IFlowCaptureOperationWrapper? AsFlowCapture(this IOperation operation) =>
+            operation.As(OperationKindEx.FlowCapture, IFlowCaptureOperationWrapper.FromOperation);
+
+        public static IFlowCaptureReferenceOperationWrapper? AsFlowCaptureReference(this IOperation operation) =>
+            operation.As(OperationKindEx.FlowCaptureReference, IFlowCaptureReferenceOperationWrapper.FromOperation);
+
+        public static ILocalFunctionOperationWrapper? AsLocalFunction(this IOperation operation) =>
+            operation.As(OperationKindEx.LocalFunction, ILocalFunctionOperationWrapper.FromOperation);
+
+        public static ILocalReferenceOperationWrapper? AsLocalReference(this IOperation operation) =>
+            operation.As(OperationKindEx.LocalReference, ILocalReferenceOperationWrapper.FromOperation);
+
+        public static IParameterReferenceOperationWrapper? AsParameterReference(this IOperation operation) =>
+            operation.As(OperationKindEx.ParameterReference, IParameterReferenceOperationWrapper.FromOperation);
 
         // This method is taken from Roslyn implementation
         private static IEnumerable<IOperation> Descendants(IOperation operation, bool includeSelf)
@@ -115,5 +132,8 @@ namespace SonarAnalyzer.Extensions
                 var _ when IFlowCaptureReferenceOperationWrapper.IsInstance(op) => ": " + IFlowCaptureReferenceOperationWrapper.FromOperation(op).Id.Serialize(),
                 _ => null
             };
+
+        private static T? As<T>(this IOperation operation, OperationKind kind, Func<IOperation, T> fromOperation) where T : struct =>
+            operation.Kind == kind ? fromOperation(operation) : null;
     }
 }

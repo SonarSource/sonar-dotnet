@@ -50,8 +50,8 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
     {
         ISymbol candidate = operation switch
         {
-            _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
-            _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
+            _ when operation.AsParameterReference() is { } parameter => parameter.Parameter,
+            _ when operation.AsLocalReference() is { } local => local.Local,
             _ => null
         };
         return IsLocal(candidate) ? candidate : null;
@@ -83,12 +83,9 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
                                     .SelectMany(x => x.OperationsAndBranchValue)
                                     .ToExecutionOrder())
         {
-            if (IFlowCaptureOperationWrapper.IsInstance(operation.Instance))
+            if (operation.Instance.AsFlowCapture() is { } flowCapture)
             {
-                var flowCapture = IFlowCaptureOperationWrapper.FromOperation(operation.Instance);
-
-                if (IFlowCaptureReferenceOperationWrapper.IsInstance(flowCapture.Value)
-                    && IFlowCaptureReferenceOperationWrapper.FromOperation(flowCapture.Value) is var captureReference
+                if (flowCapture.Value.AsFlowCaptureReference() is { } captureReference
                     && flowCaptureOperations.TryGetValue(captureReference.Id, out var capturedOperations))
                 {
                     AddOrUpdateFlowCaptures(flowCapture.Id, capturedOperations.ToArray());
@@ -217,8 +214,8 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         {
             return originalOperation switch
             {
-                var _ when IAnonymousFunctionOperationWrapper.IsInstance(originalOperation) => IAnonymousFunctionOperationWrapper.FromOperation(originalOperation).Symbol,
-                var _ when ILocalFunctionOperationWrapper.IsInstance(originalOperation) => ILocalFunctionOperationWrapper.FromOperation(originalOperation).Symbol,
+                var _ when originalOperation.AsAnonymousFunction() is { } anonymousFunction => anonymousFunction.Symbol,
+                var _ when originalOperation.AsLocalFunction() is { } localFunction => localFunction.Symbol,
                 _ => throw new NotSupportedException($"Operations of kind: {originalOperation.Kind} are not supported.")
             };
         }
@@ -236,10 +233,8 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         {
             foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder().Select(x => x.Instance))
             {
-                if ((IFlowCaptureOperationWrapper.IsInstance(operation)
-                        && flowCaptureOperations.TryGetValue(IFlowCaptureOperationWrapper.FromOperation(operation).Id, out var captured))
-                    || (IFlowCaptureReferenceOperationWrapper.IsInstance(operation)
-                        && flowCaptureOperations.TryGetValue(IFlowCaptureReferenceOperationWrapper.FromOperation(operation).Id, out captured)))
+                if ((operation.AsFlowCapture() is { } flowCapture && flowCaptureOperations.TryGetValue(flowCapture.Id, out var captured))
+                    || (operation.AsFlowCaptureReference() is { } flowCaptureReference  && flowCaptureOperations.TryGetValue(flowCaptureReference.Id, out captured)))
                 {
                     foreach (var capturedOperation in captured)
                     {
