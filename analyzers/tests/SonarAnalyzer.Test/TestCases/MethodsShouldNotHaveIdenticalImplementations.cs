@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Tests.Diagnostics
 {
@@ -189,8 +190,8 @@ namespace Tests.Diagnostics
 
     public abstract class InheritedConstraints
     {
-        public class Item { }
-        public class Mobile { }
+        public class Item { public bool Flag { get; } }
+        public class Mobile { public bool Flag { get; } }
         
         public abstract void WriteItemList<T>(List<T> list) where T : Item;
         public abstract void WriteMobileList<T>(List<T> list) where T : Mobile;
@@ -199,16 +200,22 @@ namespace Tests.Diagnostics
         {
             public override void WriteItemList<T>(List<T> list) // Compliant. The methods have different constraints
             {
-                Console.WriteLine("One");
-                Console.WriteLine("Two");
-                Console.WriteLine("Three");
+                if (list.First().Flag)
+                {
+                    Console.WriteLine("One");
+                    Console.WriteLine("Two");
+                    Console.WriteLine("Three");
+                }
             }
 
             public override void WriteMobileList<T>(List<T> list)
             {
-                Console.WriteLine("One");
-                Console.WriteLine("Two");
-                Console.WriteLine("Three");
+                if (list.First().Flag)
+                {
+                    Console.WriteLine("One");
+                    Console.WriteLine("Two");
+                    Console.WriteLine("Three");
+                }
             }
         }
     }
