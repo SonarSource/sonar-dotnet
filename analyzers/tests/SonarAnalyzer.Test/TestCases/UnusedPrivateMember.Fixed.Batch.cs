@@ -167,6 +167,7 @@ public class NonExactMatch
 
 public class EventHandlerSample
 {
+    private void MyOnClick(object sender, EventArgs args) { } // Compliant
 }
 
 public partial class EventHandlerSample1
@@ -424,6 +425,43 @@ namespace Repro_9432
             {
                 public int Field;                       // Compliant: the unused field can be used to control the physical layout of struct in the memory
             }
+        }
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/6990
+namespace Repro_6990
+{
+    public class ChildEventArgs : EventArgs
+    {
+        // Some properties
+    }
+
+    public class InheritedEvent : EventArgs
+    {
+        // Some properties
+    }
+
+    public class SenderObject
+    {
+        // Some things
+    }
+
+    public class Consumer
+    {
+        static void SenderObject_WithChildEvent(SenderObject senderObject, ChildEventArgs e) // Compliant
+        {
+            // Logic
+        }
+
+        static void SenderObject_WithChildEvent(SenderObject senderObject, InheritedEvent e) // Compliant
+        {
+            // Logic
+        }
+
+        static void Comsumer_WithChildEvent(object sender, ChildEventArgs e) // Compliant
+        {
+            // Logic
         }
     }
 }

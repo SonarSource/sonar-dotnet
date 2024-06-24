@@ -195,11 +195,10 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             .ToHashSet();
 
     private static bool IsAccessorUsed(ISymbol symbol, CSharpSymbolUsageCollector usageCollector) =>
-        symbol is IMethodSymbol { } accessor
-            && accessor.AssociatedSymbol is IPropertySymbol { } property
-            && usageCollector.PropertyAccess.TryGetValue(property, out var access)
-            && ((access.HasFlag(AccessorAccess.Get) && accessor.MethodKind == MethodKind.PropertyGet)
-                || (access.HasFlag(AccessorAccess.Set) && accessor.MethodKind == MethodKind.PropertySet));
+        symbol is IMethodSymbol { AssociatedSymbol: IPropertySymbol property } accessor
+        && usageCollector.PropertyAccess.TryGetValue(property, out var access)
+        && ((access.HasFlag(AccessorAccess.Get) && accessor.MethodKind == MethodKind.PropertyGet)
+            || (access.HasFlag(AccessorAccess.Set) && accessor.MethodKind == MethodKind.PropertySet));
 
     private static string GetFieldAccessibilityForMessage(ISymbol symbol) =>
         symbol.DeclaredAccessibility == Accessibility.Private ? SyntaxConstants.Private : "private class";
@@ -274,6 +273,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         {
             context.ReportIssue(RuleS1144, getter.Keyword.GetLocation(), SyntaxConstants.Private, "get accessor in property", property.Name);
         }
+
         static AccessorDeclarationSyntax GetAccessorSyntax(ISymbol symbol) =>
             symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as AccessorDeclarationSyntax;
     }
@@ -487,8 +487,8 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             }
         }
 
-        private ISymbol GetDeclaredSymbol(SyntaxNode syntaxNode) =>
-            getSemanticModel(syntaxNode).GetDeclaredSymbol(syntaxNode);
+        private ISymbol GetDeclaredSymbol(SyntaxNode node) =>
+            getSemanticModel(node).GetDeclaredSymbol(node);
 
         private void StoreRemovableVariableDeclarations(BaseFieldDeclarationSyntax node)
         {
@@ -505,26 +505,13 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
 
         private static bool IsEmptyConstructor(BaseMethodDeclarationSyntax constructorDeclaration) =>
             !constructorDeclaration.HasBodyOrExpressionBody()
-            || (constructorDeclaration.Body is { } && constructorDeclaration.Body.Statements.Count == 0);
-
-        private static bool IsDeclaredInPartialClass(ISymbol methodSymbol)
-        {
-            return methodSymbol.DeclaringSyntaxReferences
-                .Select(GetContainingTypeDeclaration)
-                .Any(IsPartial);
-
-            static TypeDeclarationSyntax GetContainingTypeDeclaration(SyntaxReference syntaxReference) =>
-                syntaxReference.GetSyntax().FirstAncestorOrSelf<TypeDeclarationSyntax>();
-
-            static bool IsPartial(TypeDeclarationSyntax typeDeclaration) =>
-                typeDeclaration.Modifiers.AnyOfKind(SyntaxKind.PartialKeyword);
-        }
+            || constructorDeclaration.Body is { Statements.Count: 0 };
 
         private static bool IsRemovableMethod(IMethodSymbol methodSymbol) =>
             IsRemovableMember(methodSymbol)
             && (methodSymbol.MethodKind is MethodKind.Ordinary or MethodKind.Constructor or MethodKindEx.LocalFunction)
             && !methodSymbol.IsMainMethod()
-            && (!methodSymbol.IsEventHandler() || !IsDeclaredInPartialClass(methodSymbol)) // Event handlers could be added in XAML and no method reference will be generated in the .g.cs file.
+            && !methodSymbol.IsEventHandler() // Event handlers could be added in XAML and no method reference will be generated in the .g.cs file.
             && !methodSymbol.IsSerializationConstructor()
             && !methodSymbol.IsRecordPrintMembers();
 
@@ -540,8 +527,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         private static bool HasAttributes(ISymbol symbol)
         {
             IEnumerable<AttributeData> attributes = symbol.GetAttributes();
-            if (symbol is IMethodSymbol { MethodKind: MethodKind.PropertyGet or MethodKind.PropertySet } method
-                && method.AssociatedSymbol is { } property)
+            if (symbol is IMethodSymbol { MethodKind: MethodKind.PropertyGet or MethodKind.PropertySet, AssociatedSymbol: { } property })
             {
                 attributes = attributes.Union(property.GetAttributes());
             }
@@ -554,7 +540,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
 
         private static bool IsRemovableType(ISymbol typeSymbol) =>
             typeSymbol.GetEffectiveAccessibility() is var accessibility
-            && typeSymbol.ContainingType is { }
+            && typeSymbol.ContainingType is not null
             && (accessibility is Accessibility.Private or Accessibility.Internal)
             && IsRemovable(typeSymbol);
 

@@ -30,24 +30,25 @@ public partial class UnusedPrivateMemberTest
 
     [TestMethod]
     public void UnusedPrivateMember_DebuggerDisplay_Attribute() =>
-        builder.AddSnippet(@"
-// https://github.com/SonarSource/sonar-dotnet/issues/1195
-[System.Diagnostics.DebuggerDisplay(""{field1}"", Name = ""{Property1} {Property3}"", Type = ""{Method1()}"")]
-public class MethodUsages
-{
-    private int field1;
-    private int field2; // Noncompliant
-    private int Property1 { get; set; }
-    private int Property2 { get; set; } // Noncompliant
-    private int Property3 { get; set; }
-    private int Method1() { return 0; }
-    private int Method2() { return 0; } // Noncompliant
+        builder.AddSnippet("""
+            // https://github.com/SonarSource/sonar-dotnet/issues/1195
+            [System.Diagnostics.DebuggerDisplay("{field1}", Name = "{Property1} {Property3}", Type = "{Method1()}")]
+            public class MethodUsages
+            {
+               private int field1;
+               private int field2; // Noncompliant
+               private int Property1 { get; set; }
+               private int Property2 { get; set; } // Noncompliant
+               private int Property3 { get; set; }
+               private int Method1() { return 0; }
+               private int Method2() { return 0; } // Noncompliant
 
-    public void Method()
-    {
-        var x = Property3;
-    }
-}").Verify();
+               public void Method()
+               {
+                   var x = Property3;
+               }
+            }
+            """).Verify();
 
     [TestMethod]
     public void UnusedPrivateMember_Members_With_Attributes_Are_Not_Removable() =>
@@ -92,16 +93,17 @@ public class MethodUsages
         // could be added through XAML and no warning will be generated if the
         // method is removed, which could lead to serious problems that are hard
         // to diagnose.
-        builder.AddSnippet(@"
-using System;
-public class NewClass
-{
-    private void Handler(object sender, EventArgs e) { } // Noncompliant
-}
-public partial class PartialClass
-{
-    private void Handler(object sender, EventArgs e) { } // intentional False Negative
-}").Verify();
+        builder.AddSnippet("""
+            using System;
+            public class NewClass
+            {
+               private void Handler(object sender, EventArgs e) { } // Compliant
+            }
+            public partial class PartialClass
+            {
+               private void Handler(object sender, EventArgs e) { } // intentional False Negative
+            }
+            """).VerifyNoIssues();
 
     [TestMethod]
     public void UnusedPrivateMember_Unity3D_Ignored() =>
@@ -208,25 +210,25 @@ public partial class PartialClass
     [TestMethod]
     public void UnusedPrivateMemeber_EntityFramework_DontRaiseOnUnusedEntityPropertiesPrivateSetters() =>
         builder.AddSnippet("""
-                // Repro https://github.com/SonarSource/sonar-dotnet/issues/9416
-                using Microsoft.EntityFrameworkCore;
+            // Repro https://github.com/SonarSource/sonar-dotnet/issues/9416
+            using Microsoft.EntityFrameworkCore;
 
-                internal class MyContext : DbContext
+            internal class MyContext : DbContext
+            {
+                public DbSet<Blog> Blogs { get; set; }
+            }
+
+            public class Blog
+            {
+                public Blog(int id, string name)
                 {
-                    public DbSet<Blog> Blogs { get; set; }
+                    Name = name;
                 }
 
-                public class Blog
-                {
-                    public Blog(int id, string name)
-                    {
-                        Name = name;
-                    }
-
-                    public int Id { get; private set; }         // Noncompliant FP
-                    public string Name { get; private set; }
-                }
-                """)
+                public int Id { get; private set; }         // Noncompliant FP
+                public string Name { get; private set; }
+            }
+            """)
         .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("8.0.6"))
         .Verify();
 #endif
