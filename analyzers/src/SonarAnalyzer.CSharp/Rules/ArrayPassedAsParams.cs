@@ -40,10 +40,10 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
             : null;
 
     protected override ITypeSymbol ArrayElementType(ArgumentSyntax argument, SemanticModel model) =>
-        argument switch
+        argument.Expression switch
         {
-            _ when argument.Expression as ArrayCreationExpressionSyntax is { } arrayCreation => model.GetTypeInfo(arrayCreation.Type.ElementType).Type,
-            _ when argument.Expression as ImplicitArrayCreationExpressionSyntax is { } implicitArrayCreation => model.GetTypeInfo(implicitArrayCreation).Type,
+            ArrayCreationExpressionSyntax arrayCreation => model.GetTypeInfo(arrayCreation.Type.ElementType).Type,
+            ImplicitArrayCreationExpressionSyntax implicitArrayCreation => model.GetTypeInfo(implicitArrayCreation).Type,
             _ => null
         };
 
