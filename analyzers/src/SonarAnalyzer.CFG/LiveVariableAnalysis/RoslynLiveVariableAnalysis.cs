@@ -91,16 +91,16 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
                     && IFlowCaptureReferenceOperationWrapper.FromOperation(flowCapture.Value) is var captureReference
                     && flowCaptureOperations.TryGetValue(captureReference.Id, out var capturedOperations))
                 {
-                    AddOrUpdateFlowCaptures(flowCapture.Id, capturedOperations.ToArray());
+                    AppendFlowCaptureReference(flowCapture.Id, capturedOperations.ToArray());
                 }
                 else
                 {
-                    AddOrUpdateFlowCaptures(flowCapture.Id, flowCapture.Value);
+                    AppendFlowCaptureReference(flowCapture.Id, flowCapture.Value);
                 }
             }
         }
 
-        void AddOrUpdateFlowCaptures(CaptureId id, params IOperation[] operations)
+        void AppendFlowCaptureReference(CaptureId id, params IOperation[] operations)
         {
             if (!flowCaptureOperations.TryGetValue(id, out var list))
             {
