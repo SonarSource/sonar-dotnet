@@ -102,17 +102,12 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
 
         void AddOrUpdateFlowCaptures(CaptureId id, params IOperation[] operations)
         {
-            var capturedOperations = flowCaptureOperations.TryGetValue(id, out var existing) ? existing : [];
-            capturedOperations.AddRange(operations);
-            if (flowCaptureOperations.ContainsKey(id))
+            if (!flowCaptureOperations.TryGetValue(id, out var list))
             {
-                flowCaptureOperations[id] = capturedOperations;
+                list = [];
+                flowCaptureOperations.Add(id, list);
             }
-            else
-            {
-                flowCaptureOperations.Add(id, capturedOperations);
-            }
-
+            list.AddRange(operations);
         }
     }
 
