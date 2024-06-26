@@ -185,4 +185,38 @@ namespace Tests.Diagnostics
             Console.WriteLine("Result: {0}", s);
         }
     }
+
+    public abstract class InheritedConstraints
+    {
+        public class Item { public void Action() { } }
+        public class Mobile { public void Action() { } }
+
+        public abstract void WriteItem<T>(T item) where T : Item;
+        public abstract void WriteItem2<T>(T item) where T : Item;
+        public abstract void WriteMobile<T>(T item) where T : Mobile;
+
+        public class Derived : InheritedConstraints
+        {
+            public override void WriteItem<T>(T item) // Secondary
+            {
+                item.Action();
+                Console.WriteLine("One");
+                Console.WriteLine("Two");
+            }
+
+            public override void WriteItem2<T>(T item) // Noncompliant. The WriteItem methods have the same inherited constraints.
+            {
+                item.Action();
+                Console.WriteLine("One");
+                Console.WriteLine("Two");
+            }
+
+            public override void WriteMobile<T>(T item) // Compliant. The WriteMobile method has a different inherited constraint.
+            {
+                item.Action();
+                Console.WriteLine("One");
+                Console.WriteLine("Two");
+            }
+        }
+    }
 }
