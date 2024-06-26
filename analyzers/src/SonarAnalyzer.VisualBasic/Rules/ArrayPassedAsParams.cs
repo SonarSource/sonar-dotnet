@@ -39,7 +39,12 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
             : null;
 
     protected override ITypeSymbol ArrayElementType(ArgumentSyntax argument, SemanticModel model) =>
-        model.GetTypeInfo(((ArrayCreationExpressionSyntax)argument.GetExpression()).Type).Type;
+        argument.GetExpression() switch
+        {
+            ArrayCreationExpressionSyntax arrayCreation => model.GetTypeInfo(arrayCreation.Type).Type,
+            CollectionInitializerSyntax collectionInitializer => (model.GetTypeInfo(collectionInitializer).Type as IArrayTypeSymbol)?.ElementType,
+            _ => null
+        };
 
     private static ArgumentListSyntax ArgumentList(SyntaxNode expression) =>
         expression switch
