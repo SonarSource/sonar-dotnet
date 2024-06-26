@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>SonarAnalyzer.CSharp.Styling</id>
-    <version>9.28.0.0</version>
+    <version>9.29.0.0</version>
     <title>Internal Sonar styling analyzer for C#</title>
     <authors>SonarSource</authors>
     <owners>SonarSource</owners>
@@ -13,7 +13,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>Internal Sonar styling analyzer for C#</summary>
     <description>This package contains a set of coding style rules to follow in Sonar code base. Coding style changes as well as breaking changes will appear between minor versions without prior notice. We do not provide support for this package.</description>
-    <releaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/9.28.0.0</releaseNotes>
+    <releaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/9.29.0.0</releaseNotes>
     <language>en-US</language>
     <copyright>Copyright © 2015-2024 SonarSource SA</copyright>
     <developmentDependency>true</developmentDependency>
