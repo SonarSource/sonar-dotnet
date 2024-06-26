@@ -15,7 +15,7 @@
   <description>Share code between C# and VB.NET plugins</description>
 
   <properties>
-    <protobuf.version>4.27.0</protobuf.version>
+    <protobuf.version>4.27.2</protobuf.version>
     <protobuf.compiler>${settings.localRepository}/com/google/protobuf/protoc/${protobuf.version}/protoc-${protobuf.version}-${os.detected.classifier}.exe</protobuf.compiler>
     <!-- used for deployment to SonarSource Artifactory -->
     <gitRepositoryName>sonar-dotnet-shared-library</gitRepositoryName>
