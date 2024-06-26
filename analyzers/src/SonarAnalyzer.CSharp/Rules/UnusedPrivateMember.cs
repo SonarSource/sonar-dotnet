@@ -190,9 +190,14 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             .Except(usageCollector.UsedSymbols)
             .Where(x => !IsMentionedInDebuggerDisplay(x, usageCollector)
                 && !IsAccessorUsed(x, usageCollector)
+                && !IsDeconstructMethod(x)
                 && !usageCollector.PrivateAttributes.Contains(x)
                 && !IsUsedWithReflection(x, usageCollector.TypesUsedWithReflection))
             .ToHashSet();
+
+    private static bool IsDeconstructMethod(ISymbol symbol) =>
+        symbol is IMethodSymbol { Name: "Deconstruct", Parameters.Length: > 0 } method
+        && method.Parameters.All(x => x.RefKind == RefKind.Out);
 
     private static bool IsAccessorUsed(ISymbol symbol, CSharpSymbolUsageCollector usageCollector) =>
         symbol is IMethodSymbol { AssociatedSymbol: IPropertySymbol property } accessor
