@@ -113,6 +113,18 @@ public class ReproIssue2478
         private void Deconstruct(out string a, out string b) { a = b = null; } // Compliant, Deconstruct methods are ignored
     }
 
+    public class InvalidDeconstruct
+    {
+        private void Deconstruct(object a, out object b, out object c) { b = c = a; } // Noncompliant
+        private void Deconstruct() { } // Noncompliant
+
+        private int Deconstruct(out object a, out object b, out object c) // Noncompliant
+        {
+            a = b = c = null;
+            return 42;
+        }
+    }
+
     private ForMethod ReturnFromMethod() => null;
     private sealed class ForMethod
     {

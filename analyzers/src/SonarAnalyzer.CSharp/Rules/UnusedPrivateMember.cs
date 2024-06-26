@@ -197,6 +197,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
 
     private static bool IsDeconstructMethod(ISymbol symbol) =>
         symbol is IMethodSymbol { Name: "Deconstruct", Parameters.Length: > 0 } method
+        && method.ReturnType.Is(KnownType.Void)
         && method.Parameters.All(x => x.RefKind == RefKind.Out);
 
     private static bool IsAccessorUsed(ISymbol symbol, CSharpSymbolUsageCollector usageCollector) =>
