@@ -82,12 +82,14 @@ Public Class Repro6894
                                                                         ' The argument given for a parameter array can be a single expression that is implicitly convertible (§10.2) to the parameter array type.
                                                                         ' In this case, the parameter array acts precisely like a value parameter.
                                                                         ' see: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/classes#14625-parameter-arrays
+        Method({"1", "2"})                                              ' FN
         Method(New Object() {New Integer() {1, 2}})                     ' FN, elements in args: [System.Int32[]]
         Method(New Integer() {1, 2, 3})                                 ' Compliant, Elements in args: [System.Int32[]]
         Method(New String() {"1", "2"}, New String() {"1", "2"})        ' Compliant, elements in args: [System.String[], System.String[]]
         Method(New String() {"1", "2"}, New Integer() {1, 2})           ' Compliant, elements in args: [System.String[], System.Int32[]]
         MethodArray(New String() {"1", "2"}, New String() {"1", "2"})   ' Compliant, elements in args: [System.String[], System.String[]]
         MethodArray(New Integer() {1, 2}, New Integer() {1, 2})         ' Compliant, elements in args: [System.Int32[], System.Int32[]]
+        MethodArray({1, 2}, {1, 2})                                     ' Compliant, elements in args: [System.Int32[], System.Int32[]]
 
         MethodJaggedArray(New Integer() {1, 2})                         ' Compliant: jagged array [System.Object[]]
     End Sub
