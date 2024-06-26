@@ -1519,14 +1519,12 @@ namespace Tests.Diagnostics
     public class PeachValidation
     {
         // https://github.com/SonarSource/sonar-dotnet/issues/9471
-        void Repro9471(bool condition)
+        void Repro9471(bool condition, string[] tempArray)
         {
-            byte[]? tempArray = null;
-            byte[] anArray = condition ? tempArray = new byte[42] : null; // Noncompliant FP
-            if (tempArray != null)
-            {
-                Console.WriteLine(tempArray);
-            }
+            string[] anArray = condition ? tempArray = new string[42] : new string[2]; // Noncompliant FP
+            //                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+            Console.WriteLine(anArray);
+            Console.WriteLine(tempArray);
         }
 
         // https://github.com/SonarSource/sonar-dotnet/issues/9472
@@ -1554,11 +1552,8 @@ namespace Tests.Diagnostics
             {
                 data = Something();    // Noncompliant FP
             }
+            Console.WriteLine(data);
 
-            if (data != null)
-            {
-                Console.WriteLine("Hello");
-            }
             IDisposable Something() => null;
         }
     }
