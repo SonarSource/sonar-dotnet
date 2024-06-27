@@ -37,10 +37,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class RazorImporterTestBase {
-  protected final static String TEST_DATA_DIR = "src/test/resources/RazorProtobufImporter";
-  protected final static String WEB_PROJECT_PATH = Paths.get(TEST_DATA_DIR, "WebProject").toString();
-  protected final static String ROSLYN_4_9_DIR = Paths.get(TEST_DATA_DIR, "Roslyn 4.9").toString();
-  protected final static String ROSLYN_4_10_DIR = Paths.get(TEST_DATA_DIR, "Roslyn 4.10").toString();
+  protected static final String TEST_DATA_DIR = "src/test/resources/RazorProtobufImporter";
+  protected static final String WEB_PROJECT_PATH = Paths.get(TEST_DATA_DIR, "WebProject").toString();
+  protected static final String ROSLYN_4_9_DIR = Paths.get(TEST_DATA_DIR, "Roslyn 4.9").toString();
+  protected static final String ROSLYN_4_10_DIR = Paths.get(TEST_DATA_DIR, "Roslyn 4.10").toString();
   protected final SensorContextTester sensorContext = SensorContextTester.create(new File(TEST_DATA_DIR));
 
   @Rule

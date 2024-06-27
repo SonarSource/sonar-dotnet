@@ -80,7 +80,7 @@ public class RazorSymbolRefsImporterTest extends RazorImporterTestBase {
   }
 
   private void verifySymbolRef(File protobuf) throws FileNotFoundException {
-    var inputFile = addTestFileToContext("Cases.razor");;
+    var inputFile = addTestFileToContext("Cases.razor");
     var sut = new SymbolRefsImporter(sensorContext, RazorImporterTestBase::fileName);
     sut.accept(protobuf.toPath());
     sut.save();

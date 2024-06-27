@@ -35,7 +35,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.notNull;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -189,7 +188,7 @@ public class UnitTestResultsAggregatorTest {
     public final VisualStudioTestResultsFileParser visualStudio = mock(VisualStudioTestResultsFileParser.class);
     public final NUnitTestResultsFileParser nunit = mock(NUnitTestResultsFileParser.class);
     public final XUnitTestResultsFileParser xunit = mock(XUnitTestResultsFileParser.class);
-    public final UnitTestConfiguration config = new UnitTestConfiguration("visualStudioTestResultsFile", "nunitTestResultsFile", "xunitTestResultsFile");;
+    public final UnitTestConfiguration config = new UnitTestConfiguration("visualStudioTestResultsFile", "nunitTestResultsFile", "xunitTestResultsFile");
 
     public AggregateTestContext() {
     }
