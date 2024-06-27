@@ -69,6 +69,19 @@ class Program
         }
     }
 
+    public void IsFollowedByIs(object x) {
+        if (x is Fruit)         // Noncompliant
+        {
+            _ = x is Fruit;     // Secondary
+        }
+
+
+        if (x is SomeStruct?)       // Noncompliant
+        {
+            _ = x is SomeStruct?;   // Secondary
+        }
+    }
+
     // See https://github.com/SonarSource/sonar-dotnet/issues/2314
     public void TakeIdentifierIntoAccount(object x)
     {

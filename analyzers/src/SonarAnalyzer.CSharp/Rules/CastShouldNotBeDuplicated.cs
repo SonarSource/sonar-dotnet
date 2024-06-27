@@ -91,7 +91,7 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
             {
                 return IsDuplicatedCastOnSameSymbol(cast.Expression, cast.Type);
             }
-            else if (node is BinaryExpressionSyntax binary && binary.IsKind(SyntaxKind.AsExpression))
+            else if (node is BinaryExpressionSyntax binary && binary.IsAnyKind(SyntaxKind.AsExpression, SyntaxKind.IsExpression))
             {
                 return IsDuplicatedCastOnSameSymbol(binary.Left, binary.Right);
             }
