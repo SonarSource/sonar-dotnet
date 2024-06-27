@@ -98,7 +98,7 @@ public class ReproIssue2478
     private class Ambiguous
     {
         public void Deconstruct(out string a, out string b, out string c) { a = b = c = null; }
-        public void Deconstruct(out object a, out object b, out object c) { a = b = c = null; } // Compliant, Deconstruct methods are ignored FP, actually the one above is not used
+        public void Deconstruct(out object a, out object b, out object c) { a = b = c = null; } // Compliant, Deconstruct methods are ignored
     }
 
     private class NotUsedDifferentArgumentCount
