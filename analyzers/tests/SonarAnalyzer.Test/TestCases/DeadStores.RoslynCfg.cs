@@ -1030,7 +1030,7 @@ namespace Tests.Diagnostics
         // https://github.com/SonarSource/sonar-dotnet/issues/2760
         public static long WithNonIgnored_Declaration(string path)
         {
-            long length = 42; // Muted FP, FileInfo can throw and function can return this value
+            long length = 42; // Compliant, FileInfo can throw and function can return this value
             try
             {
                 length = new System.IO.FileInfo(path).Length;
@@ -1045,7 +1045,7 @@ namespace Tests.Diagnostics
         public static long WithNonIgnored_Assignment(string path)
         {
             long length;
-            length = 42; // Muted FP, FileInfo can throw and function can return this value
+            length = 42; // Compliant, FileInfo can throw and function can return this value
             try
             {
                 length = new System.IO.FileInfo(path).Length;
@@ -1402,7 +1402,7 @@ namespace Tests.Diagnostics
 
         public void UsedInFinally()
         {
-            int value = 42; // Compliant, Muted
+            int value = 42; // Compliant
             try
             {
                 SomethingThatCanThrow();
@@ -1439,7 +1439,7 @@ namespace Tests.Diagnostics
 
         public void UsedInFinally_Throw()
         {
-            var value = 42; // Compliant 
+            var value = 42; // Compliant
             try
             {
                 throw new Exception();
@@ -1452,7 +1452,7 @@ namespace Tests.Diagnostics
 
         public void UsedInFinally_Throw_FilteredCatch()
         {
-            var value = 42; // Compliant 
+            var value = 42; // Compliant
             try
             {
                 throw new Exception();
@@ -1470,7 +1470,7 @@ namespace Tests.Diagnostics
                 Use(value);
             }
         }
-        
+
         public void UsedInFinally_Throw_CatchAll()
         {
             var value = 42; // Noncompliant
@@ -1515,4 +1515,115 @@ namespace Tests.Diagnostics
 
         private void SomethingThatCanThrow() { }
     }
+}
+
+public class PeachValidation
+{
+    // https://github.com/SonarSource/sonar-dotnet/issues/9466
+    public int ReadInFinallyAfterCatch()
+    {
+        var value = 0;
+        try
+        {
+            CanThrow();
+            value = 42;
+        }
+        catch
+        {
+            value = 1;  // Noncompliant FP, used in finally after the throw
+            throw;
+        }
+        finally
+        {
+            Log(value);
+        }
+        return value;
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/9467
+    public int ReadAfterCatchAll_WithType(bool condition)
+    {
+        var value = 100;    // Noncompliant FP, used after catch all
+        try
+        {
+            CanThrow();
+            if (condition)
+            {
+                CanThrow();
+            }
+            value = 200;
+        }
+        catch (Exception exc)
+        {
+        }
+        return value;
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/9467
+    public int ReadAfterCatchAll_NoType(bool condition)
+    {
+        var value = 100;    // Noncompliant FP, used after catch all
+        try
+        {
+            CanThrow();
+            if (condition)
+            {
+                CanThrow();
+            }
+            value = 200;
+        }
+        catch (Exception exc)
+        {
+        }
+        return value;
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/9467
+    public void ReadInCatch_WithBranching(bool condition)
+    {
+        var value = 100;    // Noncompliant FP, used in catch
+        try
+        {
+            value = CanThrow();
+            if (condition)
+            {
+                CanThrow();
+            }
+            else
+            {
+                CanThrow();
+            }
+        }
+        catch
+        {
+            Log(value);
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/9468
+    public void NestedCatchAndRethrow()
+    {
+        var value = 100;
+        try
+        {
+            try
+            {
+                CanThrow();
+            }
+            catch
+            {
+                value = 200;    // Noncompliant FP
+                throw;
+            }
+        }
+        catch
+        {
+            Log(value);
+        }
+    }
+
+    private int CanThrow() =>
+        throw new Exception();
+
+    private void Log(int value) { }
 }
