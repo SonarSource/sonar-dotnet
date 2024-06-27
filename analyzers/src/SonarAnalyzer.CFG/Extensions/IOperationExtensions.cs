@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Extensions
 {
-    public static class IOperationExtensions
+    public static partial class IOperationExtensions
     {
         public static IOperationWrapperSonar ToSonar(this IOperation operation) =>
             new(operation);
@@ -54,12 +54,28 @@ namespace SonarAnalyzer.Extensions
         public static IOperation RootOperation(this IOperation operation)
         {
             var wrapper = operation.ToSonar();
-            while (wrapper.Parent != null)
+            while (wrapper.Parent is not null)
             {
                 wrapper = wrapper.Parent.ToSonar();
             }
             return wrapper.Instance;
         }
+
+        /// <inheritdoc cref="ArgumentValue(ImmutableArray{IOperation}, string)"/>
+        public static IOperation ArgumentValue(this IInvocationOperationWrapper invocation, string parameterName) =>
+            ArgumentValue(invocation.Arguments, parameterName);
+
+        /// <inheritdoc cref="ArgumentValue(ImmutableArray{IOperation}, string)"/>
+        public static IOperation ArgumentValue(this IObjectCreationOperationWrapper objectCreation, string parameterName) =>
+            ArgumentValue(objectCreation.Arguments, parameterName);
+
+        /// <inheritdoc cref="ArgumentValue(ImmutableArray{IOperation}, string)"/>
+        public static IOperation ArgumentValue(this IPropertyReferenceOperationWrapper propertyReference, string parameterName) =>
+            ArgumentValue(propertyReference.Arguments, parameterName);
+
+        /// <inheritdoc cref="ArgumentValue(ImmutableArray{IOperation}, string)"/>
+        public static IOperation ArgumentValue(this IRaiseEventOperationWrapper raiseEvent, string parameterName) =>
+            ArgumentValue(raiseEvent.Arguments, parameterName);
 
         public static OperationExecutionOrder ToExecutionOrder(this IEnumerable<IOperation> operations) =>
             new(operations, false);
@@ -77,7 +93,7 @@ namespace SonarAnalyzer.Extensions
         // This method is taken from Roslyn implementation
         private static IEnumerable<IOperation> Descendants(IOperation operation, bool includeSelf)
         {
-            if (operation == null)
+            if (operation is null)
             {
                 yield break;
             }
@@ -102,6 +118,22 @@ namespace SonarAnalyzer.Extensions
                     stack.Push(current.ToSonar().Children.GetEnumerator());
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns the argument value corresponding to <paramref name="parameterName"/>. For <see langword="params"/> parameter an IArrayCreationOperation is returned.
+        /// </summary>
+        private static IOperation ArgumentValue(ImmutableArray<IOperation> arguments, string parameterName)
+        {
+            foreach (var operation in arguments)
+            {
+                var argument = operation.ToArgument();
+                if (argument.Parameter.Name == parameterName)
+                {
+                    return argument.Value;
+                }
+            }
+            return null;
         }
 
         private static string OperationPrefix(IOperation op) =>
