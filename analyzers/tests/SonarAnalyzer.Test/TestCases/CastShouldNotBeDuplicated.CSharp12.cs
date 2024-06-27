@@ -135,9 +135,9 @@ class Repro_223
             _ = (ARecordStruct)obj;     // Secondary
         }
 
-        if (obj is AReadonlyRefStruct)  // FN
-        {
-            _ = (AStruct)obj;
+        if (obj is AReadonlyRefStruct)      // Noncompliant, but irrelevant, because ref structs cannot be casted
+        {                                   // Error@+1 [CS0030] Cannot convert type 'object' to 'Repro_223.AReadonlyRefStruct'
+            _ = (AReadonlyRefStruct)obj;    // Secondary
         }
     }
 
