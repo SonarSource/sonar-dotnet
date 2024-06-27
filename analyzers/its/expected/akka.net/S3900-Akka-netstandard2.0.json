@@ -188,12 +188,6 @@
     },
     {
       "Id": "S3900",
-      "Message": "Refactor this method to add validation of parameter \u0027elements\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorSelection.cs#L82",
-      "Location": "Line 82 Position 31-39"
-    },
-    {
-      "Id": "S3900",
       "Message": "Refactor this method to add validation of parameter \u0027setup\u0027 before using it.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorSystem.cs#L261",
       "Location": "Line 261 Position 34-39"

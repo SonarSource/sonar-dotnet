@@ -1263,12 +1263,6 @@
     {
       "Id": "S3900",
       "Message": "Refactor this method to add validation of parameter \u0027constraint\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/Constraints/ParameterizedRouteSegmentConstraintBase.cs#L21",
-      "Location": "Line 21 Position 113-123"
-    },
-    {
-      "Id": "S3900",
-      "Message": "Refactor this method to add validation of parameter \u0027constraint\u0027 before using it.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/Constraints/ParameterizedRouteSegmentConstraintBase.cs#L35",
       "Location": "Line 35 Position 51-61"
     },
@@ -1379,18 +1373,6 @@
       "Message": "Refactor this method to add validation of parameter \u0027segments\u0027 before using it.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/Trie/Nodes/TrieNode.cs#L192",
       "Location": "Line 192 Position 36-44"
-    },
-    {
-      "Id": "S3900",
-      "Message": "Refactor this method to add validation of parameter \u0027localCaptures\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/Trie/Nodes/TrieNode.cs#L224",
-      "Location": "Line 224 Position 46-59"
-    },
-    {
-      "Id": "S3900",
-      "Message": "Refactor this method to add validation of parameter \u0027localCaptures\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/Trie/Nodes/TrieNode.cs#L249",
-      "Location": "Line 249 Position 48-61"
     },
     {
       "Id": "S3900",

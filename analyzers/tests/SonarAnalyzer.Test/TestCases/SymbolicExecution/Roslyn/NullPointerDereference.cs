@@ -2140,7 +2140,7 @@ class Repro_8907_8908
         }
         if (5 < values.Count())         // FN, will throw when values is null
         {
-            _ = values[5].ToString();   // Noncompliant FP, we do not learn NotNull from LINQ methods
+            _ = values[5].ToString();   // Compliant, we learn NotNull from LINQ methods
         }
     }
 }

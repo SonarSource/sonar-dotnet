@@ -25,6 +25,59 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWrapper>
 {
+    private static readonly string[] LinqMethodsNullCheckingSource =
+        [
+            nameof(Enumerable.Aggregate),
+            nameof(Enumerable.Any),
+            nameof(Enumerable.Append),
+            nameof(Enumerable.Average),
+            nameof(Enumerable.Cast),
+            nameof(Enumerable.Concat),
+            nameof(Enumerable.Contains),
+            nameof(Enumerable.Count),
+            nameof(Enumerable.DefaultIfEmpty),
+            nameof(Enumerable.Distinct),
+            nameof(Enumerable.ElementAt),
+            nameof(Enumerable.ElementAtOrDefault),
+            nameof(Enumerable.Except),
+            nameof(Enumerable.First),
+            nameof(Enumerable.FirstOrDefault),
+            nameof(Enumerable.GroupBy),
+            nameof(Enumerable.GroupJoin),
+            nameof(Enumerable.Intersect),
+            nameof(Enumerable.Join),
+            nameof(Enumerable.Last),
+            nameof(Enumerable.LastOrDefault),
+            nameof(Enumerable.LongCount),
+            nameof(Enumerable.Max),
+            nameof(Enumerable.Min),
+            nameof(Enumerable.OfType),
+            nameof(Enumerable.OrderBy),
+            nameof(Enumerable.OrderByDescending),
+            nameof(Enumerable.Prepend),
+            nameof(Enumerable.Reverse),
+            nameof(Enumerable.Select),
+            nameof(Enumerable.SelectMany),
+            nameof(Enumerable.SequenceEqual),
+            nameof(Enumerable.Single),
+            nameof(Enumerable.SingleOrDefault),
+            nameof(Enumerable.Skip),
+            nameof(Enumerable.SkipWhile),
+            nameof(Enumerable.Sum),
+            nameof(Enumerable.Take),
+            nameof(Enumerable.TakeWhile),
+            nameof(Enumerable.ThenBy),
+            nameof(Enumerable.ThenByDescending),
+            nameof(Enumerable.ToArray),
+            nameof(Enumerable.ToDictionary),
+            "ToHashSet", // Not in .NET Standard 2.0
+            nameof(Enumerable.ToList),
+            nameof(Enumerable.ToLookup),
+            nameof(Enumerable.Union),
+            nameof(Enumerable.Where),
+            nameof(Enumerable.Zip),
+        ];
+
     protected override IInvocationOperationWrapper Convert(IOperation operation) =>
         IInvocationOperationWrapper.FromOperation(operation);
 
@@ -40,10 +93,9 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         {
             state = state.ResetStaticFieldConstraints(invocation.TargetMethod.ContainingType);
         }
-        else if (invocation.Instance.TrackedSymbol(state) is { } symbol && !IsNullableGetValueOrDefault(invocation))
+        if (LearnNotNullCandidate(invocation) is { } operation && operation.TrackedSymbol(state) is { } symbol)
         {
-            state = state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
-                .SetOperationConstraint(invocation.Instance, ObjectConstraint.NotNull);
+            state = state.SetOperationConstraint(operation, ObjectConstraint.NotNull).SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
         }
         if (invocation.HasThisReceiver(state))
         {
@@ -70,6 +122,23 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             _ when invocation.TargetMethod.ContainingType.Is(KnownType.System_String) => ProcessSystemStringInvocation(state, invocation),
             _ => ProcessArgumentAttributes(state, invocation),
         };
+    }
+
+    private static IOperation LearnNotNullCandidate(IInvocationOperationWrapper invocation)
+    {
+        if (invocation.Instance is not null && !invocation.TargetMethod.IsExtensionMethod && !IsNullableGetValueOrDefault(invocation))
+        {
+            return invocation.Instance;
+        }
+        else if (invocation.TargetMethod.IsAny(KnownType.System_Linq_Enumerable, LinqMethodsNullCheckingSource))
+        {
+            // In VB.NET extension methods, the Instance contains the target of the extension, so the source
+            return invocation.Instance ?? invocation.ArgumentValue("source") ?? invocation.ArgumentValue("first") ?? invocation.ArgumentValue("outer");
+        }
+        else
+        {
+            return null;
+        }
     }
 
     private static ProgramState[] ProcessArgumentAttributes(ProgramState state, IInvocationOperationWrapper invocation)
