@@ -6,32 +6,32 @@ class WithAliasAnyType
 {
     void ValidCases(Person person)
     {
-        _ = (Person)person;           // Compliant: not a duplicated cast
+        _ = (Person)person;             // Compliant: not a duplicated cast
     }
 
     void InvalidCases(object obj)
     {
-        if (obj is Person)            // FN: Person is alias for a struct
+        if (obj is Person)              // Noncompliant
+        {
+            _ = (Person)obj;            // Secondary
+        }
+
+        if (obj is (string, string))    // FN: (string, string) and Person are equivalent
         {
             _ = (Person)obj;
         }
 
-        if (obj is (string, string))  // FN: (string, string) and Person are equivalent
-        {
-            _ = (Person)obj;
-        }
-
-        if (obj is Person)            // FN: Person and (string, string) are equivalent
+        if (obj is Person)              // FN: Person and (string, string) are equivalent
         {
             _ = ((string, string))obj;
         }
 
-        if (obj is Person)            // FN: Person and (string ..., string) are equivalent
+        if (obj is Person)              // FN: Person and (string ..., string) are equivalent
         {
             _ = ((string differentName1, string))obj;
         }
 
-        if (obj is Person)            // FN: Person and (string, string ...) are equivalent
+        if (obj is Person)              // FN: Person and (string, string ...) are equivalent
         {
             _ = ((string, string differentName2))obj;
         }
@@ -53,32 +53,32 @@ class Repro_223
 {
     void NumericTypes(object obj)
     {
-        if (obj is int)             // FN
+        if (obj is int)             // Noncompliant
         {
-            _ = (int)obj;
+            _ = (int)obj;           // Secondary
         }
 
-        if (obj is double)          // FN
+        if (obj is double)          // Noncompliant
         {
-            _ = (double)obj;
+            _ = (double)obj;        // Secondary
         }
 
-        if (obj is ushort)          // FN
+        if (obj is ushort)          // Noncompliant
         {
-            _ = (ushort)obj;
+            _ = (ushort)obj;        // Secondary
         }
     }
 
     void NullableValueTypes(object obj)
     {
-        if (obj is int?)             // FN
+        if (obj is int?)            // Noncompliant
         {
-            _ = (int?)obj;
+            _ = (int?)obj;          // Secondary
         }
 
-        if (obj is byte?)            // FN
+        if (obj is byte?)           // Noncompliant
         {
-            _ = (byte?)obj;
+            _ = (byte?)obj;         // Secondary
         }
     }
 
@@ -112,30 +112,30 @@ class Repro_223
 
     void Enums(object obj)
     {
-        if (obj is AnEnum)    // Noncompliant
+        if (obj is AnEnum)      // Noncompliant
         {
-            _ = (AnEnum)obj;  // Secondary
+            _ = (AnEnum)obj;    // Secondary
         }
 
-        if (obj is AnEnum?)   // FN
+        if (obj is AnEnum?)     // Noncompliant
         {
-            _ = (AnEnum?)obj;
+            _ = (AnEnum?)obj;   // Secondary
         }
     }
 
     void UserDefinedStructs(object obj)
     {
-        if (obj is AStruct)            // FN
+        if (obj is AStruct)             // Noncompliant
         {
-            _ = (AStruct)obj;
+            _ = (AStruct)obj;           // Secondary
         }
 
-        if (obj is ARecordStruct)      // FN
+        if (obj is ARecordStruct)       // Noncompliant
         {
-            _ = (ARecordStruct)obj;
+            _ = (ARecordStruct)obj;     // Secondary
         }
 
-        if (obj is AReadonlyRefStruct) // FN
+        if (obj is AReadonlyRefStruct)  // FN
         {
             _ = (AStruct)obj;
         }

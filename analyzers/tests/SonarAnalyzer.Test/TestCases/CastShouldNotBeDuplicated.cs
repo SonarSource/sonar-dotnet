@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 class Fruit { }
+struct SomeStruct { }
 
 class Program
 {
@@ -37,11 +38,16 @@ class Program
 
     }
 
-    public void FooBar(object x)
+    public void WithStructs(object x)
     {
-        if (x is int)
+        if (x is int)           // Noncompliant
         {
-            var res = (int)x; // Compliant because we are casting to a ValueType
+            var res = (int)x;   // Secondary
+        }
+
+        if (x is SomeStruct)            // Noncompliant
+        {
+            var res = (SomeStruct)x;    // Secondary
         }
     }
 

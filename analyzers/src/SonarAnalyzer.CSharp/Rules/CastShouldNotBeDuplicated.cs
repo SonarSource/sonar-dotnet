@@ -75,8 +75,7 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
         var isExpression = (BinaryExpressionSyntax)analysisContext.Node;
         if (isExpression.Right is TypeSyntax castType
             && isExpression.GetFirstNonParenthesizedParent() is IfStatementSyntax parentIfStatement
-            && analysisContext.SemanticModel.GetSymbolInfo(castType).Symbol is INamedTypeSymbol castTypeSymbol
-            && castTypeSymbol.TypeKind != TypeKind.Struct)
+            && analysisContext.SemanticModel.GetSymbolInfo(castType).Symbol is INamedTypeSymbol castTypeSymbol)
         {
             ReportPatternAtMainVariable(analysisContext, isExpression.Left, isExpression.GetLocation(), parentIfStatement.Statement, castType, ReplaceWithAsAndNullCheckMessage);
         }
