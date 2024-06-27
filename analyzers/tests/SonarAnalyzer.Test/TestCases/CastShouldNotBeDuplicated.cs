@@ -14,8 +14,6 @@ class Program
         {
             var f1 = (Fruit)x;
 //                   ^^^^^^^^ Secondary
-            var f2 = (Fruit)x;
-//                   ^^^^^^^^ Secondary
         }
 
         var f = x as Fruit;
@@ -108,47 +106,49 @@ class Program
 
     public void MultipleCasts_RootBlock(object arg)
     {
-        _ = (Fruit)arg; // FN
-        _ = (Fruit)arg; // Sec-ondary
-        _ = (Fruit)arg; // Sec-ondary
+        _ = (Fruit)arg; // Noncompliant {{Extract this repetitive cast into a variable.}}
+        //  ^^^^^^^^^^
+        _ = (Fruit)arg;             // Secondary
+        _ = (Fruit/*Comment*/)arg;  // Secondary
+        _ = (  Fruit   )arg;        // Secondary with extra whitespace
     }
 
     public void MultipleCasts_SameBlock(object arg)
     {
         if (true)
         {
-            _ = (Fruit)arg; // FN
-            _ = (Fruit)arg; // Sec-ondary
-            _ = (Fruit)arg; // Sec-ondary
+            _ = (Fruit)arg; // Noncompliant {{Extract this repetitive cast into a variable.}}
+            _ = (Fruit)arg; // Secondary
+            _ = (Fruit)arg; // Secondary
         }
     }
 
     public void MultipleCasts_NestedBlock(object arg)
     {
-        _ = (Fruit)arg;         // FN
+        _ = (Fruit)arg;         // Compliant, not in the same block
         if (true)
         {
-            _ = (Fruit)arg;     // Sec-ondary
-            foreach(var ch in "Lorem ipsum")
+            _ = (Fruit)arg;     // Noncompliant [Outer] {{Extract this repetitive cast into a variable.}}
+            foreach (var ch in "Lorem ipsum")
             {
-                _ = (Fruit)arg; // Sec-ondary
-                _ = (Fruit)arg; // Sec-ondary
+                _ = (Fruit)arg; // Noncompliant [Inner]
+                _ = (Fruit)arg; // Secondary    [Inner]
             }
-            _ = (Fruit)arg;     // Sec-ondary
+            _ = (Fruit)arg;     // Secondary    [Outer]
         }
     }
 
     public void MultipleCasts_Lambda(object arg)
     {
-        _ = (Fruit)arg; // FN
+        _ = (Fruit)arg; // Compliant, not in the same block
         Action a = () =>
         {
-            _ = (Fruit)arg; // Sec-ondary
-            _ = (Fruit)arg; // Sec-ondary
+            _ = (Fruit)arg; // Noncompliant [Action]
+            _ = (Fruit)arg; // Secondary    [Action]
         };
         Func<object, int> f = x =>
         {
-            _ = (Fruit)arg; // Sec-ondary
+            _ = (Fruit)arg;
             _ = (Fruit)x;
             return 0;
         };
@@ -164,6 +164,18 @@ class Program
         while(false)
         {
             _ = (Fruit)arg;
+        }
+
+        _ = (Fruit)arg;
+
+        switch (42)
+        {
+            case 1:
+                _ = (Fruit)arg; // Compliant, not the same block
+                break;
+            case 2:
+                _ = (Fruit)arg;
+                break;
         }
     }
 }
