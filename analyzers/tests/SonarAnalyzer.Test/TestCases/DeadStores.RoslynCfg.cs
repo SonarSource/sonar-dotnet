@@ -1622,6 +1622,45 @@ public class PeachValidation
         }
     }
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/9471
+    void AssignmentInTernary(bool condition, string st)
+    {
+        string st2 = condition ? st = "Hi" : "Hello"; // Noncompliant FP
+        //                       ^^^^^^^^^
+        Console.WriteLine(st);
+        Console.WriteLine(st2);
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/9472
+    void AssignmentInSwitch()
+    {
+        char ch;
+        switch (ch = GetAChar())   // Noncompliant FP
+        {
+            case 'A':
+                break;
+            case 'B':
+                Console.WriteLine(ch);
+                break;
+            default:
+                Console.WriteLine("Something");
+                break;
+        }
+        char GetAChar() => 'c';
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/9473
+    void ReassignAfterUsing(IDisposable data)
+    {
+        using (data = Something()) // Noncompliant
+        {
+            data = Something();    // Noncompliant FP
+        }
+        Console.WriteLine(data);
+
+        IDisposable Something() => null;
+    }
+
     private int CanThrow() =>
         throw new Exception();
 
