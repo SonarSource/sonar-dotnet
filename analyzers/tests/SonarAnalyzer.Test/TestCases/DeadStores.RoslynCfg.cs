@@ -1623,12 +1623,12 @@ public class PeachValidation
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/9471
-    void AssignmentInTernary(bool condition, string[] tempArray)
+    void AssignmentInTernary(bool condition, string st)
     {
-        string[] anArray = condition ? tempArray = new string[42] : new string[2]; // Noncompliant FP
-        //                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
-        Console.WriteLine(anArray);
-        Console.WriteLine(tempArray);
+        string st2 = condition ? st = "Hi" : "Hello"; // Noncompliant FP
+        //                       ^^^^^^^^^
+        Console.WriteLine(st);
+        Console.WriteLine(st2);
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/9472
