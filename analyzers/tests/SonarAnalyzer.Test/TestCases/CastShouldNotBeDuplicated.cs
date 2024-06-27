@@ -105,6 +105,67 @@ class Program
             var c = (UndefinedType)x;   // Secondary
         }
     }
+
+    public void MultipleCasts_RootBlock(object arg)
+    {
+        _ = (Fruit)arg; // FN
+        _ = (Fruit)arg; // Sec-ondary
+        _ = (Fruit)arg; // Sec-ondary
+    }
+
+    public void MultipleCasts_SameBlock(object arg)
+    {
+        if (true)
+        {
+            _ = (Fruit)arg; // FN
+            _ = (Fruit)arg; // Sec-ondary
+            _ = (Fruit)arg; // Sec-ondary
+        }
+    }
+
+    public void MultipleCasts_NestedBlock(object arg)
+    {
+        _ = (Fruit)arg;         // FN
+        if (true)
+        {
+            _ = (Fruit)arg;     // Sec-ondary
+            foreach(var ch in "Lorem ipsum")
+            {
+                _ = (Fruit)arg; // Sec-ondary
+                _ = (Fruit)arg; // Sec-ondary
+            }
+            _ = (Fruit)arg;     // Sec-ondary
+        }
+    }
+
+    public void MultipleCasts_Lambda(object arg)
+    {
+        _ = (Fruit)arg; // FN
+        Action a = () =>
+        {
+            _ = (Fruit)arg; // Sec-ondary
+            _ = (Fruit)arg; // Sec-ondary
+        };
+        Func<object, int> f = x =>
+        {
+            _ = (Fruit)arg; // Sec-ondary
+            _ = (Fruit)x;
+            return 0;
+        };
+    }
+
+    public void MultipleCastsDifferentBlocks(object arg)
+    {
+        if (true)
+        {
+            _ = (Fruit)arg; // Compliant, we only look into the current and nested blocks
+        }
+
+        while(false)
+        {
+            _ = (Fruit)arg;
+        }
+    }
 }
 
 public class Bar<T> { }
