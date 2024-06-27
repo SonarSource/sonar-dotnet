@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.Semantics;
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.CFG.LiveVariableAnalysis;
 
