@@ -1515,48 +1515,6 @@ namespace Tests.Diagnostics
 
         private void SomethingThatCanThrow() { }
     }
-
-    public class PeachValidation
-    {
-        // https://github.com/SonarSource/sonar-dotnet/issues/9471
-        void Repro9471(bool condition, string[] tempArray)
-        {
-            string[] anArray = condition ? tempArray = new string[42] : new string[2]; // Noncompliant FP
-            //                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
-            Console.WriteLine(anArray);
-            Console.WriteLine(tempArray);
-        }
-
-        // https://github.com/SonarSource/sonar-dotnet/issues/9472
-        void Repro9472()
-        {
-            char ch;
-            switch (ch = GetAChar())   // Noncompliant FP
-            {
-                case 'A':
-                    break;
-                case 'B':
-                    Console.WriteLine(ch);
-                    break;
-                default:
-                    Console.WriteLine("Something");
-                    break;
-            }
-            char GetAChar() => 'c';
-        }
-
-        // https://github.com/SonarSource/sonar-dotnet/issues/9473
-        void Repro9473(IDisposable data)
-        {
-            using (data = Something()) // Noncompliant
-            {
-                data = Something();    // Noncompliant FP
-            }
-            Console.WriteLine(data);
-
-            IDisposable Something() => null;
-        }
-    }
 }
 
 public class PeachValidation
@@ -1662,6 +1620,45 @@ public class PeachValidation
         {
             Log(value);
         }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/9471
+    void AssignmentInTernary(bool condition, string[] tempArray)
+    {
+        string[] anArray = condition ? tempArray = new string[42] : new string[2]; // Noncompliant FP
+        //                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        Console.WriteLine(anArray);
+        Console.WriteLine(tempArray);
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/9472
+    void AssignmentInSwitch()
+    {
+        char ch;
+        switch (ch = GetAChar())   // Noncompliant FP
+        {
+            case 'A':
+                break;
+            case 'B':
+                Console.WriteLine(ch);
+                break;
+            default:
+                Console.WriteLine("Something");
+                break;
+        }
+        char GetAChar() => 'c';
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/9473
+    void ReassignAfterUsing(IDisposable data)
+    {
+        using (data = Something()) // Noncompliant
+        {
+            data = Something();    // Noncompliant FP
+        }
+        Console.WriteLine(data);
+
+        IDisposable Something() => null;
     }
 
     private int CanThrow() =>
