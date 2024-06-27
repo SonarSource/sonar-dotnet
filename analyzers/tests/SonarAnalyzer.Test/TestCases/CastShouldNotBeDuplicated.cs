@@ -51,6 +51,18 @@ class Program
         }
     }
 
+    public void IsFollowedByAs(object x) {
+        if (x is Fruit)         // FN
+        {
+            _ = x as Fruit;     //
+        }
+
+        if (x is SomeStruct?)       // FN
+        {
+            _ = x as SomeStruct?;   //
+        }
+    }
+
     // See https://github.com/SonarSource/sonar-dotnet/issues/2314
     public void TakeIdentifierIntoAccount(object x)
     {
