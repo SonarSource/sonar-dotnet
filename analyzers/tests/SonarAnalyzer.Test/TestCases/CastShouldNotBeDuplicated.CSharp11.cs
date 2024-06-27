@@ -7,20 +7,20 @@ class MyClass
     {
         object[] numbers = { 1, 2, 3 };
 
-        if (numbers is [Fruit fruit, 3, 3])    // Secondary
+        if (numbers is [Fruit fruit, 3, 3])     // Secondary
 //                      ^^^^^^^^^^^
         {
-            var ff1 = (Fruit)fruit;            // Noncompliant
+            var ff1 = (Fruit)fruit;             // Noncompliant
         }
 
-        if (numbers is [double number, 3, 3])
+        if (numbers is [double number, 3, 3])   // Secondary
         {
-            var ff2 = (double)number;          // Compliant (casting to a ValueType)
+            var ff2 = (double)number;           // Noncompliant
         }
 
         if (numbers is [1, 2, 3] anotherNumber)
         {
-            var ff3 = (object[])anotherNumber; // FN it will probably require a rule redesign
+            var ff3 = (object[])anotherNumber;  // FN it will probably require a rule redesign
         }
     }
 }
@@ -47,7 +47,7 @@ class SomeClass
     }
 
     public void SwitchExpression(object[] array) =>
-        obj = array switch 
+        obj = array switch
         {
             [Fruit m, 2, 2] => // Secondary
 //           ^^^^^^^
