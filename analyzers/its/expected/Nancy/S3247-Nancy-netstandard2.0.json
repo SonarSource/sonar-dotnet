@@ -3,6 +3,24 @@
     {
       "Id": "S3247",
       "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/DynamicDictionaryValue.cs#L498",
+      "Location": "Line 498 Position 17-43"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/DynamicDictionaryValue.cs#L541",
+      "Location": "Line 541 Position 17-47"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/DynamicDictionaryValue.cs#L583",
+      "Location": "Line 583 Position 17-47"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L187",
       "Location": "Line 187 Position 17-36"
     },
@@ -53,6 +71,30 @@
       "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L329",
       "Location": "Line 329 Position 22-44"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Json/Converters/TimeSpanConverter.cs#L73",
+      "Location": "Line 73 Position 17-29"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Json/Converters/TimeSpanConverter.cs#L78",
+      "Location": "Line 78 Position 17-30"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Json/Simple/NancySerializationStrategy.cs#L188",
+      "Location": "Line 188 Position 17-34"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Json/Simple/NancySerializationStrategy.cs#L193",
+      "Location": "Line 193 Position 17-40"
     },
     {
       "Id": "S3247",

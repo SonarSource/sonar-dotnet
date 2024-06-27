@@ -135,6 +135,12 @@
     {
       "Id": "S3247",
       "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L408",
+      "Location": "Line 408 Position 20-30"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1270",
       "Location": "Line 1270 Position 26-43"
     },
@@ -161,6 +167,18 @@
       "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L143",
       "Location": "Line 143 Position 26-46"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L463",
+      "Location": "Line 463 Position 21-37"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L485",
+      "Location": "Line 485 Position 21-38"
     },
     {
       "Id": "S3247",

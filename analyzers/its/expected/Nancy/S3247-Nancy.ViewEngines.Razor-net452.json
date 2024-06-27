@@ -11,6 +11,12 @@
       "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L254",
       "Location": "Line 254 Position 17-60"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L270",
+      "Location": "Line 270 Position 17-30"
     }
   ]
 }
