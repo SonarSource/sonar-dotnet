@@ -68,10 +68,10 @@ class Program
     }
 
     public void UnknownFoo(object x)
-    {
-        if (x is Car)  // Compliant because we ignore what the type is // Error [CS0246]
-        {
-            var c = (Car)x; // Error [CS0246]
+    {                                   // Error@+1 [CS0246]
+        if (x is UndefinedType)         // Noncompliant
+        {                               // Error@+1 [CS0246]
+            var c = (UndefinedType)x;   // Secondary
         }
     }
 }
