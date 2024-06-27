@@ -20,59 +20,59 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class CastShouldNotBeDuplicatedTest
-    {
-        private static readonly VerifierBuilder Builder = new VerifierBuilder<CastShouldNotBeDuplicated>();
-        public TestContext TestContext { get; set; }
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void CastShouldNotBeDuplicated() =>
-            Builder.AddPaths("CastShouldNotBeDuplicated.cs").Verify();
+[TestClass]
+public class CastShouldNotBeDuplicatedTest
+{
+    private static readonly VerifierBuilder Builder = new VerifierBuilder<CastShouldNotBeDuplicated>();
+
+    public TestContext TestContext { get; set; }
+
+    [TestMethod]
+    public void CastShouldNotBeDuplicated() =>
+        Builder.AddPaths("CastShouldNotBeDuplicated.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void CastShouldNotBeDuplicated_CSharp9() =>
-            Builder.AddPaths("CastShouldNotBeDuplicated.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
+    [TestMethod]
+    public void CastShouldNotBeDuplicated_CSharp9() =>
+        Builder.AddPaths("CastShouldNotBeDuplicated.CSharp9.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .Verify();
 
-        [TestMethod]
-        public void CastShouldNotBeDuplicated_CSharp10() =>
-            Builder.AddPaths("CastShouldNotBeDuplicated.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
+    [TestMethod]
+    public void CastShouldNotBeDuplicated_CSharp10() =>
+        Builder.AddPaths("CastShouldNotBeDuplicated.CSharp10.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .Verify();
 
-        [TestMethod]
-        public void CastShouldNotBeDuplicated_CSharp11() =>
-            Builder.AddPaths("CastShouldNotBeDuplicated.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void CastShouldNotBeDuplicated_CSharp11() =>
+        Builder.AddPaths("CastShouldNotBeDuplicated.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
 
-        [TestMethod]
-        public void CastShouldNotBeDuplicated_CSharp12() =>
-            Builder.AddPaths("CastShouldNotBeDuplicated.CSharp12.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp12)
-                .Verify();
+    [TestMethod]
+    public void CastShouldNotBeDuplicated_CSharp12() =>
+        Builder.AddPaths("CastShouldNotBeDuplicated.CSharp12.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .Verify();
 
-        [TestMethod]
-        public void CastShouldNotBeDuplicated_MvcView() =>
-            Builder
-            .AddSnippet("""
-                public class Base {}
-                public class Derived: Base
-                {
-                    public int Prop { get; set; }
-                }
-                """)
-            .AddPaths("CastShouldNotBeDuplicated.cshtml")
-            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-            .VerifyNoIssues();
+    [TestMethod]
+    public void CastShouldNotBeDuplicated_MvcView() =>
+        Builder
+        .AddSnippet("""
+            public class Base {}
+            public class Derived: Base
+            {
+                public int Prop { get; set; }
+            }
+            """)
+        .AddPaths("CastShouldNotBeDuplicated.cshtml")
+        .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+        .VerifyNoIssues();
 
 #endif
 
-    }
 }
