@@ -28,7 +28,7 @@ public static class KnownMethods
     {
         // Based on Microsoft definition: https://msdn.microsoft.com/en-us/library/1y814bzs.aspx
         // Adding support for new async main: https://blogs.msdn.microsoft.com/mazhou/2017/05/30/c-7-series-part-2-async-main
-        return methodSymbol != null
+        return methodSymbol is not null
             && methodSymbol.IsStatic
             && methodSymbol.Name.Equals("Main", StringComparison.OrdinalIgnoreCase) // VB.NET is case insensitive
             && HasMainParameters()
@@ -46,7 +46,7 @@ public static class KnownMethods
     }
 
     public static bool IsObjectEquals(this IMethodSymbol methodSymbol) =>
-        methodSymbol != null
+        methodSymbol is not null
             && methodSymbol.MethodKind == MethodKind.Ordinary
             && methodSymbol.Name == nameof(object.Equals)
             && (methodSymbol.IsOverride || methodSymbol.IsInType(KnownType.System_Object))
@@ -56,7 +56,7 @@ public static class KnownMethods
 
     public static bool IsStaticObjectEquals(this IMethodSymbol methodSymbol)
     {
-        return methodSymbol != null
+        return methodSymbol is not null
             && !methodSymbol.IsOverride
             && methodSymbol.IsStatic
             && methodSymbol.MethodKind == MethodKind.Ordinary
@@ -72,17 +72,17 @@ public static class KnownMethods
     }
 
     public static bool IsObjectGetHashCode(this IMethodSymbol methodSymbol) =>
-        methodSymbol != null
+        methodSymbol is not null
         && methodSymbol.MethodKind == MethodKind.Ordinary
-        && methodSymbol.Name == nameof(object.GetHashCode)
+        && methodSymbol.Name == nameof(GetHashCode)
         && (methodSymbol.IsOverride || methodSymbol.IsInType(KnownType.System_Object))
         && methodSymbol.Parameters.Length == 0
         && methodSymbol.ReturnType.Is(KnownType.System_Int32);
 
     public static bool IsObjectToString(this IMethodSymbol methodSymbol) =>
-        methodSymbol != null
+        methodSymbol is not null
         && methodSymbol.MethodKind == MethodKind.Ordinary
-        && methodSymbol.Name == nameof(object.ToString)
+        && methodSymbol.Name == nameof(ToString)
         && (methodSymbol.IsOverride || methodSymbol.IsInType(KnownType.System_Object))
         && methodSymbol.Parameters.Length == 0
         && methodSymbol.ReturnType.Is(KnownType.System_String);
@@ -116,7 +116,7 @@ public static class KnownMethods
     public static bool IsIEquatableEquals(this IMethodSymbol methodSymbol)
     {
         const string explicitName = "System.IEquatable.Equals";
-        return methodSymbol != null
+        return methodSymbol is not null
             && (methodSymbol.Name == nameof(object.Equals) || methodSymbol.Name == explicitName)
             && methodSymbol.Parameters.Length == 1
             && methodSymbol.ReturnType.Is(KnownType.System_Boolean);
@@ -125,7 +125,7 @@ public static class KnownMethods
     public static bool IsGetObjectData(this IMethodSymbol methodSymbol)
     {
         const string explicitName = "System.Runtime.Serialization.ISerializable.GetObjectData";
-        return methodSymbol != null
+        return methodSymbol is not null
             && (methodSymbol.Name == "GetObjectData" || methodSymbol.Name == explicitName)
             && methodSymbol.Parameters.Length == 2
             && methodSymbol.Parameters[0].Type.Is(KnownType.System_Runtime_Serialization_SerializationInfo)
@@ -134,14 +134,14 @@ public static class KnownMethods
     }
 
     public static bool IsSerializationConstructor(this IMethodSymbol methodSymbol) =>
-        methodSymbol != null
+        methodSymbol is not null
         && methodSymbol.MethodKind == MethodKind.Constructor
         && methodSymbol.Parameters.Length == 2
         && methodSymbol.Parameters[0].Type.Is(KnownType.System_Runtime_Serialization_SerializationInfo)
         && methodSymbol.Parameters[1].Type.Is(KnownType.System_Runtime_Serialization_StreamingContext);
 
     public static bool IsArrayClone(this IMethodSymbol methodSymbol) =>
-        methodSymbol != null
+        methodSymbol is not null
         && methodSymbol.MethodKind == MethodKind.Ordinary
         && methodSymbol.Name == nameof(Array.Clone)
         && methodSymbol.Parameters.Length == 0
@@ -159,18 +159,18 @@ public static class KnownMethods
         && methodSymbol.ContainingType.IsRecord();
 
     public static bool IsGcSuppressFinalize(this IMethodSymbol methodSymbol) =>
-        methodSymbol != null
+        methodSymbol is not null
         && methodSymbol.Name == nameof(GC.SuppressFinalize)
         && methodSymbol.Parameters.Length == 1
         && methodSymbol.ContainingType.Is(KnownType.System_GC);
 
     public static bool IsDebugAssert(this IMethodSymbol methodSymbol) =>
-        methodSymbol != null
+        methodSymbol is not null
         && methodSymbol.Name == nameof(Debug.Assert)
         && methodSymbol.ContainingType.Is(KnownType.System_Diagnostics_Debug);
 
     public static bool IsDiagnosticDebugMethod(this IMethodSymbol methodSymbol) =>
-        methodSymbol != null && methodSymbol.ContainingType.Is(KnownType.System_Diagnostics_Debug);
+        methodSymbol is not null && methodSymbol.ContainingType.Is(KnownType.System_Diagnostics_Debug);
 
     public static bool IsOperatorBinaryPlus(this IMethodSymbol methodSymbol) =>
         methodSymbol is { MethodKind: MethodKind.BuiltinOperator or MethodKind.UserDefinedOperator, Name: "op_Addition", Parameters.Length: NumberOfParamsForBinaryOperator };
@@ -194,12 +194,12 @@ public static class KnownMethods
         methodSymbol is { MethodKind: MethodKind.BuiltinOperator or MethodKind.UserDefinedOperator, Name: "op_Inequality", Parameters.Length: NumberOfParamsForBinaryOperator };
 
     public static bool IsConsoleWriteLine(this IMethodSymbol methodSymbol) =>
-        methodSymbol != null
+        methodSymbol is not null
         && methodSymbol.Name == nameof(Console.WriteLine)
         && methodSymbol.IsInType(KnownType.System_Console);
 
     public static bool IsConsoleWrite(this IMethodSymbol methodSymbol) =>
-        methodSymbol != null
+        methodSymbol is not null
         && methodSymbol.Name == nameof(Console.Write)
         && methodSymbol.IsInType(KnownType.System_Console);
 
@@ -228,7 +228,7 @@ public static class KnownMethods
         methodSymbol.IsEnumerableMethod(nameof(Enumerable.Union), 2, 3);
 
     public static bool IsListAddRange(this IMethodSymbol methodSymbol) =>
-        methodSymbol != null
+        methodSymbol is not null
         && methodSymbol.Name == "AddRange"
         && methodSymbol.MethodKind == MethodKind.Ordinary
         && methodSymbol.Parameters.Length == 1
@@ -236,7 +236,6 @@ public static class KnownMethods
 
     public static bool IsEventHandler(this IMethodSymbol methodSymbol) =>
         methodSymbol is { Parameters.Length: 2 }
-        && (methodSymbol.Parameters[0].Name.Equals("sender", StringComparison.OrdinalIgnoreCase) || methodSymbol.Parameters[0].Type.Is(KnownType.System_Object))
         && (// Inheritance from EventArgs is not enough for UWP or Xamarin as it uses other kind of event args (e.g. ILeavingBackgroundEventArgs)
             methodSymbol.Parameters[1].Type.Name.EndsWith("EventArgs", StringComparison.Ordinal)
             || methodSymbol.Parameters[1].Type.DerivesFrom(KnownType.System_EventArgs))
@@ -248,9 +247,9 @@ public static class KnownMethods
             || methodSymbol.ReturnType.Is(KnownType.System_Reflection_Assembly));
 
     private static bool IsEnumerableMethod(this IMethodSymbol methodSymbol, string methodName, params int[] parametersCount) =>
-        methodSymbol != null
+        methodSymbol is not null
         && methodSymbol.Name == methodName
-        && parametersCount.Any(count => methodSymbol.HasExactlyNParameters(count))
+        && Array.Exists(parametersCount, methodSymbol.HasExactlyNParameters)
         && methodSymbol.ContainingType.Is(KnownType.System_Linq_Enumerable);
 
     private static bool HasExactlyNParameters(this IMethodSymbol methodSymbol, int parametersCount) =>
