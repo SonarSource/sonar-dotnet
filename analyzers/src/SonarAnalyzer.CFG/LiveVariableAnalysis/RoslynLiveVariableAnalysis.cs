@@ -18,9 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.Semantics;
 using SonarAnalyzer.CFG.Roslyn;
-using SonarAnalyzer.Extensions;
 
 namespace SonarAnalyzer.CFG.LiveVariableAnalysis;
 
@@ -52,8 +50,8 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
     {
         ISymbol candidate = operation switch
         {
-            _ when IParameterReferenceOperationWrapper.IsInstance(operation) => IParameterReferenceOperationWrapper.FromOperation(operation).Parameter,
-            _ when ILocalReferenceOperationWrapper.IsInstance(operation) => ILocalReferenceOperationWrapper.FromOperation(operation).Local,
+            _ when operation.AsParameterReference() is { } parameterReference => parameterReference.Parameter,
+            _ when operation.AsLocalReference() is { } localReference => localReference.Local,
             _ => null
         };
         return IsLocal(candidate) ? candidate : null;
@@ -80,25 +78,21 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
 
     private void ResolveCaptures()
     {
-        foreach (var operation in Cfg.Blocks
+        foreach (var flowCapture in Cfg.Blocks
                                     .Where(x => x.EnclosingRegion.EnclosingRegionOrSelf(ControlFlowRegionKind.LocalLifetime) is not null)
                                     .SelectMany(x => x.OperationsAndBranchValue)
-                                    .ToExecutionOrder())
+                                    .ToExecutionOrder()
+                                    .Select(x => x.Instance.AsFlowCapture())
+                                    .OfType<IFlowCaptureOperationWrapper>())
         {
-            if (IFlowCaptureOperationWrapper.IsInstance(operation.Instance))
+            if (flowCapture.Value.AsFlowCaptureReference() is { } captureReference
+                && flowCaptureOperations.TryGetValue(captureReference.Id, out var capturedOperations))
             {
-                var flowCapture = IFlowCaptureOperationWrapper.FromOperation(operation.Instance);
-
-                if (IFlowCaptureReferenceOperationWrapper.IsInstance(flowCapture.Value)
-                    && IFlowCaptureReferenceOperationWrapper.FromOperation(flowCapture.Value) is var captureReference
-                    && flowCaptureOperations.TryGetValue(captureReference.Id, out var capturedOperations))
-                {
-                    AppendFlowCaptureReference(flowCapture.Id, capturedOperations.ToArray());
-                }
-                else
-                {
-                    AppendFlowCaptureReference(flowCapture.Id, flowCapture.Value);
-                }
+                AppendFlowCaptureReference(flowCapture.Id, capturedOperations.ToArray());
+            }
+            else
+            {
+                AppendFlowCaptureReference(flowCapture.Id, flowCapture.Value);
             }
         }
 
@@ -214,8 +208,8 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         {
             return originalOperation switch
             {
-                var _ when IAnonymousFunctionOperationWrapper.IsInstance(originalOperation) => IAnonymousFunctionOperationWrapper.FromOperation(originalOperation).Symbol,
-                var _ when ILocalFunctionOperationWrapper.IsInstance(originalOperation) => ILocalFunctionOperationWrapper.FromOperation(originalOperation).Symbol,
+                var _ when originalOperation.AsAnonymousFunction() is { } anonymousFunction => anonymousFunction.Symbol,
+                var _ when originalOperation.AsLocalFunction() is { } localFunction => localFunction.Symbol,
                 _ => throw new NotSupportedException($"Operations of kind: {originalOperation.Kind} are not supported.")
             };
         }
@@ -233,10 +227,8 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         {
             foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder().Select(x => x.Instance))
             {
-                if ((IFlowCaptureOperationWrapper.IsInstance(operation)
-                        && flowCaptureOperations.TryGetValue(IFlowCaptureOperationWrapper.FromOperation(operation).Id, out var captured))
-                    || (IFlowCaptureReferenceOperationWrapper.IsInstance(operation)
-                        && flowCaptureOperations.TryGetValue(IFlowCaptureReferenceOperationWrapper.FromOperation(operation).Id, out captured)))
+                if ((operation.AsFlowCapture() is { } flowCapture && flowCaptureOperations.TryGetValue(flowCapture.Id, out var captured))
+                    || (operation.AsFlowCaptureReference() is { } flowCaptureReference  && flowCaptureOperations.TryGetValue(flowCaptureReference.Id, out captured)))
                 {
                     foreach (var capturedOperation in captured)
                     {

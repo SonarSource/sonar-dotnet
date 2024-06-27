@@ -90,8 +90,11 @@ public static class IOperationExtensions
     public static IEnumerable<IOperation> DescendantsAndSelf(this IOperation operation) =>
         Descendants(operation, true);
 
+    public static IAnonymousFunctionOperationWrapper? AsAnonymousFunction(this IOperation operation) =>
+        operation.As(OperationKindEx.AnonymousFunction, IAnonymousFunctionOperationWrapper.FromOperation);
+
     public static IArgumentOperationWrapper? AsArgument(this IOperation operation) =>
-   operation.As(OperationKindEx.Argument, IArgumentOperationWrapper.FromOperation);
+        operation.As(OperationKindEx.Argument, IArgumentOperationWrapper.FromOperation);
 
     public static IAssignmentOperationWrapper? AsAssignment(this IOperation operation) =>
         operation.As(OperationKindEx.SimpleAssignment, IAssignmentOperationWrapper.FromOperation);
@@ -108,11 +111,26 @@ public static class IOperationExtensions
     public static IDeclarationPatternOperationWrapper? AsDeclarationPattern(this IOperation operation) =>
         operation.As(OperationKindEx.DeclarationPattern, IDeclarationPatternOperationWrapper.FromOperation);
 
+    public static IFlowCaptureOperationWrapper? AsFlowCapture(this IOperation operation) =>
+        operation.As(OperationKindEx.FlowCapture, IFlowCaptureOperationWrapper.FromOperation);
+
+    public static IFlowCaptureReferenceOperationWrapper? AsFlowCaptureReference(this IOperation operation) =>
+        operation.As(OperationKindEx.FlowCaptureReference, IFlowCaptureReferenceOperationWrapper.FromOperation);
+
     public static IInvocationOperationWrapper? AsInvocation(this IOperation operation) =>
         operation.As(OperationKindEx.Invocation, IInvocationOperationWrapper.FromOperation);
 
+    public static ILocalFunctionOperationWrapper? AsLocalFunction(this IOperation operation) =>
+        operation.As(OperationKindEx.LocalFunction, ILocalFunctionOperationWrapper.FromOperation);
+
+    public static ILocalReferenceOperationWrapper? AsLocalReference(this IOperation operation) =>
+        operation.As(OperationKindEx.LocalReference, ILocalReferenceOperationWrapper.FromOperation);
+
     public static IIsPatternOperationWrapper? AsIsPattern(this IOperation operation) =>
         operation.As(OperationKindEx.IsPattern, IIsPatternOperationWrapper.FromOperation);
+
+    public static IParameterReferenceOperationWrapper? AsParameterReference(this IOperation operation) =>
+        operation.As(OperationKindEx.ParameterReference, IParameterReferenceOperationWrapper.FromOperation);
 
     public static IMethodReferenceOperationWrapper? AsMethodReference(this IOperation operation) =>
         operation.As(OperationKindEx.MethodReference, IMethodReferenceOperationWrapper.FromOperation);
@@ -167,6 +185,9 @@ public static class IOperationExtensions
 
     public static IFieldReferenceOperationWrapper ToFieldReference(this IOperation operation) =>
         IFieldReferenceOperationWrapper.FromOperation(operation);
+
+    public static IFlowCaptureOperationWrapper ToFlowCapture(this IOperation operation) =>
+        IFlowCaptureOperationWrapper.FromOperation(operation);
 
     public static IFlowCaptureReferenceOperationWrapper ToFlowCaptureReference(this IOperation operation) =>
         IFlowCaptureReferenceOperationWrapper.FromOperation(operation);
