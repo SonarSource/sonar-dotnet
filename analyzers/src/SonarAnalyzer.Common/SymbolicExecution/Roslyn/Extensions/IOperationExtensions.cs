@@ -45,5 +45,4 @@ internal static class IOperationExtensions
                 && property.IsAutoProperty() => property,
             _ => null
         };
-
 }
