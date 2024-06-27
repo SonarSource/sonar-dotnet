@@ -45,6 +45,12 @@
     {
       "Id": "S3247",
       "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L145",
+      "Location": "Line 145 Position 26-52"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L159",
       "Location": "Line 159 Position 26-47"
     },
@@ -213,6 +219,12 @@
     {
       "Id": "S3247",
       "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2364",
+      "Location": "Line 2364 Position 26-51"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2423",
       "Location": "Line 2423 Position 17-44"
     },
@@ -293,6 +305,12 @@
       "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/UntypedVirtualPublisher.cs#L81",
       "Location": "Line 81 Position 17-60"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L421",
+      "Location": "Line 421 Position 34-76"
     }
   ]
 }

@@ -101,6 +101,12 @@
       "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Responses/Negotiation/DefaultResponseNegotiator.cs#L83",
       "Location": "Line 83 Position 17-40"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L182",
+      "Location": "Line 182 Position 17-48"
     }
   ]
 }
