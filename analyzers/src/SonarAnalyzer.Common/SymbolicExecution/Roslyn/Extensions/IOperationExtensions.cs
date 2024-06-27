@@ -22,6 +22,14 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn;
 
 internal static class IOperationExtensions
 {
+    public static bool IsStaticOrThis(this IMemberReferenceOperationWrapper reference, ProgramState state) =>
+        reference.Instance is null // static fields
+        || state.ResolveCaptureAndUnwrapConversion(reference.Instance).Kind == OperationKindEx.InstanceReference;
+
+    public static bool IsUpcast(this IConversionOperationWrapper conversion) =>
+        conversion.Operand.Type.DerivesOrImplements(conversion.Type)
+        || (conversion.Operand.Type.IsNonNullableValueType() && conversion.Type.IsNullableValueType());
+
     internal static ISymbol TrackedSymbol(this IOperation operation, ProgramState state) =>
         operation?.Kind switch
         {
@@ -38,11 +46,4 @@ internal static class IOperationExtensions
             _ => null
         };
 
-    public static bool IsStaticOrThis(this IMemberReferenceOperationWrapper reference, ProgramState state) =>
-        reference.Instance is null // static fields
-        || state.ResolveCaptureAndUnwrapConversion(reference.Instance).Kind == OperationKindEx.InstanceReference;
-
-    public static bool IsUpcast(this IConversionOperationWrapper conversion) =>
-        conversion.Operand.Type.DerivesOrImplements(conversion.Type)
-        || (conversion.Operand.Type.IsNonNullableValueType() && conversion.Type.IsNullableValueType());
 }
