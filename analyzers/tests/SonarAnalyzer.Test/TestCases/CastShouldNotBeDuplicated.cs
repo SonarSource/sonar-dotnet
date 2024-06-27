@@ -52,14 +52,20 @@ class Program
     }
 
     public void IsFollowedByAs(object x) {
-        if (x is Fruit)         // FN
+        if (x is Fruit)         // Noncompliant
         {
-            _ = x as Fruit;     //
+            _ = x as Fruit;     // Secondary
         }
 
-        if (x is SomeStruct?)       // FN
+        if (x is Fruit)         // Compliant, "==" binary operator doesn't raise
         {
-            _ = x as SomeStruct?;   //
+            _ = x == null;
+        }
+
+
+        if (x is SomeStruct?)       // Noncompliant
+        {
+            _ = x as SomeStruct?;   // Secondary
         }
     }
 
