@@ -26,6 +26,7 @@ namespace SonarAnalyzer.Test.Rules;
 public class CastShouldNotBeDuplicatedTest
 {
     private static readonly VerifierBuilder Builder = new VerifierBuilder<CastShouldNotBeDuplicated>();
+
     public TestContext TestContext { get; set; }
 
     [TestMethod]

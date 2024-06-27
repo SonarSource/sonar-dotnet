@@ -44,65 +44,47 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
     private static void CasePatternSwitchLabel(SonarSyntaxNodeReportingContext analysisContext)
     {
         var casePatternSwitch = (CasePatternSwitchLabelSyntaxWrapper)analysisContext.Node;
-        if (casePatternSwitch.SyntaxNode.GetFirstNonParenthesizedParent().GetFirstNonParenthesizedParent() is not SwitchStatementSyntax parentSwitchStatement)
+        if (casePatternSwitch.SyntaxNode.GetFirstNonParenthesizedParent().GetFirstNonParenthesizedParent() is SwitchStatementSyntax parentSwitchStatement)
         {
-            return;
+            ProcessPatternExpression(analysisContext, casePatternSwitch.Pattern, parentSwitchStatement.Expression, parentSwitchStatement);
         }
-        ProcessPatternExpression(analysisContext,
-                                 casePatternSwitch.Pattern,
-                                 parentSwitchStatement.Expression,
-                                 parentSwitchStatement);
     }
 
     private static void SwitchExpressionArm(SonarSyntaxNodeReportingContext analysisContext)
     {
         var isSwitchExpression = (SwitchExpressionArmSyntaxWrapper)analysisContext.Node;
         var parent = isSwitchExpression.SyntaxNode.GetFirstNonParenthesizedParent();
-
-        if (!parent.IsKind(SyntaxKindEx.SwitchExpression))
+        if (parent.IsKind(SyntaxKindEx.SwitchExpression))
         {
-            return;
+            var switchExpression = (SwitchExpressionSyntaxWrapper)parent;
+            ProcessPatternExpression(analysisContext, isSwitchExpression.Pattern, switchExpression.GoverningExpression, isSwitchExpression);
         }
-        var switchExpression = (SwitchExpressionSyntaxWrapper)parent;
-        ProcessPatternExpression(analysisContext,
-                                 isSwitchExpression.Pattern,
-                                 switchExpression.GoverningExpression,
-                                 isSwitchExpression);
     }
 
     private static void IsPatternExpression(SonarSyntaxNodeReportingContext analysisContext)
     {
         var isPatternExpression = (IsPatternExpressionSyntaxWrapper)analysisContext.Node;
-        if (isPatternExpression.SyntaxNode.GetFirstNonParenthesizedParent() is not IfStatementSyntax parentIfStatement)
+        if (isPatternExpression.SyntaxNode.GetFirstNonParenthesizedParent() is IfStatementSyntax parentIfStatement)
         {
-            return;
+            ProcessPatternExpression(analysisContext, isPatternExpression.Pattern, isPatternExpression.Expression, parentIfStatement.Statement);
         }
-        ProcessPatternExpression(analysisContext,
-                                 isPatternExpression.Pattern,
-                                 isPatternExpression.Expression,
-                                 parentIfStatement.Statement);
     }
 
     private static void IsExpression(SonarSyntaxNodeReportingContext analysisContext)
     {
         var isExpression = (BinaryExpressionSyntax)analysisContext.Node;
-
-        if (isExpression.Right is not TypeSyntax castType
-            || isExpression.GetFirstNonParenthesizedParent() is not IfStatementSyntax parentIfStatement
-            || analysisContext.SemanticModel.GetSymbolInfo(castType).Symbol is not INamedTypeSymbol castTypeSymbol
-            || castTypeSymbol.TypeKind == TypeKind.Struct)
+        if (isExpression.Right is TypeSyntax castType
+            && isExpression.GetFirstNonParenthesizedParent() is IfStatementSyntax parentIfStatement
+            && analysisContext.SemanticModel.GetSymbolInfo(castType).Symbol is INamedTypeSymbol castTypeSymbol
+            && castTypeSymbol.TypeKind != TypeKind.Struct)
         {
-            return;
+            ReportPatternAtMainVariable(analysisContext, isExpression.Left, isExpression.GetLocation(), parentIfStatement.Statement, castType, ReplaceWithAsAndNullCheckMessage);
         }
-
-        ReportPatternAtMainVariable(analysisContext, isExpression.Left, isExpression.GetLocation(), parentIfStatement.Statement, castType, ReplaceWithAsAndNullCheckMessage);
     }
 
     private static List<Location> GetDuplicatedCastLocations(SonarSyntaxNodeReportingContext context, SyntaxNode parentStatement, TypeSyntax castType, SyntaxNode typedVariable)
     {
-        var typeExpressionSymbol = context.SemanticModel.GetSymbolInfo(typedVariable).Symbol
-                                   ?? context.SemanticModel.GetDeclaredSymbol(typedVariable);
-
+        var typeExpressionSymbol = context.SemanticModel.GetSymbolInfo(typedVariable).Symbol ?? context.SemanticModel.GetDeclaredSymbol(typedVariable);
         return typeExpressionSymbol is null
             ? []
             : parentStatement
@@ -117,10 +99,7 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
             Equals(context.SemanticModel.GetSymbolInfo(castExpression.Expression).Symbol, typeExpressionSymbol);
     }
 
-    private static void ProcessPatternExpression(SonarSyntaxNodeReportingContext analysisContext,
-                                                 SyntaxNode isPattern,
-                                                 SyntaxNode mainVariableExpression,
-                                                 SyntaxNode parentStatement)
+    private static void ProcessPatternExpression(SonarSyntaxNodeReportingContext analysisContext, SyntaxNode isPattern, SyntaxNode mainVariableExpression, SyntaxNode parentStatement)
     {
         var objectToPattern = new Dictionary<ExpressionSyntax, SyntaxNode>();
         PatternExpressionObjectToPatternMapping.MapObjectToPattern((ExpressionSyntax)mainVariableExpression.RemoveParentheses(), isPattern.RemoveParentheses(), objectToPattern);
@@ -136,15 +115,15 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
                 {
                     rightPartsToCheck.Add(declarationPattern.Designation.SyntaxNode, new Tuple<TypeSyntax, Location>(declarationPattern.Type, subPattern.GetLocation()));
                 }
-                else if ((RecursivePatternSyntaxWrapper)subPattern is { Designation.SyntaxNode: { }, Type: { }} recursivePattern)
+                else if ((RecursivePatternSyntaxWrapper)subPattern is { Designation.SyntaxNode: { }, Type: { } } recursivePattern)
                 {
                     rightPartsToCheck.Add(recursivePattern.Designation.SyntaxNode, new Tuple<TypeSyntax, Location>(recursivePattern.Type, subPattern.GetLocation()));
                 }
             }
 
             var mainVarMsg = rightPartsToCheck.Any()
-                             ? RemoveRedundantCastAnotherVariableMessage
-                             : RemoveRedundantCastMessage;
+                ? RemoveRedundantCastAnotherVariableMessage
+                : RemoveRedundantCastMessage;
             foreach (var targetType in targetTypes)
             {
                 ReportPatternAtMainVariable(analysisContext, leftVariable, leftVariable.GetLocation(), parentStatement, targetType, mainVarMsg);
@@ -232,8 +211,7 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
                                                     TypeSyntax castType,
                                                     string message)
     {
-        if (context.SemanticModel.GetSymbolInfo(castType).Symbol is INamedTypeSymbol castTypeSymbol
-            && castTypeSymbol.TypeKind != TypeKind.Struct)
+        if (context.SemanticModel.GetSymbolInfo(castType).Symbol is INamedTypeSymbol castTypeSymbol && castTypeSymbol.TypeKind != TypeKind.Struct)
         {
             var duplicatedCastLocations = GetDuplicatedCastLocations(context, parentStatement, castType, variableExpression);
             foreach (var castLocation in duplicatedCastLocations)
