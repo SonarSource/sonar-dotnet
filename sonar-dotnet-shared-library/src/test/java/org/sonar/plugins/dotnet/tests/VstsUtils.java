@@ -22,8 +22,8 @@ package org.sonar.plugins.dotnet.tests;
 // This class has been taken from SonarSource/sonar-scanner-msbuild
 public class VstsUtils {
 
-  final static String ENV_BUILD_DIRECTORY = "AGENT_BUILDDIRECTORY";
-  final static String ENV_SOURCES_DIRECTORY = "BUILD_SOURCESDIRECTORY";
+  static final String ENV_BUILD_DIRECTORY = "AGENT_BUILDDIRECTORY";
+  static final String ENV_SOURCES_DIRECTORY = "BUILD_SOURCESDIRECTORY";
 
   static Boolean isRunningUnderVsts(){
     return System.getenv(ENV_BUILD_DIRECTORY) != null;

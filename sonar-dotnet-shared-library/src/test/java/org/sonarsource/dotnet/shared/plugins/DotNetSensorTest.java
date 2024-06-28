@@ -60,7 +60,7 @@ public class DotNetSensorTest {
   private static final String LANG_KEY = "LANG_KEY";
   private static final String A_DIFFERENT_LANG_KEY = "another language than the tested plugin";
   private static final String SHORT_LANG_NAME = "SHORT_LANG_NAME";
-  private static String READ_MORE_LOG = "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects";
+  private static final String READ_MORE_LOG = "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects";
 
   @Rule
   public LogTester logTester = new LogTester();

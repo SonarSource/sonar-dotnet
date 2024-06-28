@@ -54,7 +54,6 @@ public class ProtobufDataImporterTest {
   private FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
   private NoSonarFilter noSonarFilter = mock(NoSonarFilter.class);
   private FileLinesContext fileLinesContext = mock(FileLinesContext.class);
-  ;
 
   private SensorContextTester tester;
   private ProtobufDataImporter dataImporter = new ProtobufDataImporter(fileLinesContextFactory, noSonarFilter);
@@ -125,7 +124,7 @@ public class ProtobufDataImporterTest {
   }
 
   @Test
-  public void do_not_warn_about_unique_files() throws Exception {
+  public void do_not_warn_about_unique_files() {
     dataImporter.importResults(tester, Collections.singletonList(workDir), String::toString);
 
     assertThat(logTester.logs(Level.DEBUG)).isEmpty();
