@@ -67,7 +67,7 @@
     <plugin.api.min.version>9.14.0.375</plugin.api.min.version>
 
     <!-- Test dependencies -->
-    <junit.version>5.10.2</junit.version>
+    <junit.version>5.10.3</junit.version>
   </properties>
 
   <dependencyManagement>
