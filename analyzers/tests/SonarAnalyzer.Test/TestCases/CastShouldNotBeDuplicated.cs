@@ -51,6 +51,37 @@ class Program
         }
     }
 
+    public void IsFollowedByAs(object x) {
+        if (x is Fruit)         // Noncompliant
+        {
+            _ = x as Fruit;     // Secondary
+        }
+
+        if (x is Fruit)         // Compliant, "==" binary operator doesn't raise
+        {
+            _ = x == null;
+        }
+
+
+        if (x is SomeStruct?)       // Noncompliant
+        {
+            _ = x as SomeStruct?;   // Secondary
+        }
+    }
+
+    public void IsFollowedByIs(object x) {
+        if (x is Fruit)         // Noncompliant
+        {
+            _ = x is Fruit;     // Secondary
+        }
+
+
+        if (x is SomeStruct?)       // Noncompliant
+        {
+            _ = x is SomeStruct?;   // Secondary
+        }
+    }
+
     // See https://github.com/SonarSource/sonar-dotnet/issues/2314
     public void TakeIdentifierIntoAccount(object x)
     {

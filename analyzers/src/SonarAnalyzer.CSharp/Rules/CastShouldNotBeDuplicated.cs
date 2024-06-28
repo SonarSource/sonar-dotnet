@@ -80,21 +80,34 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
         }
     }
 
-    private static List<Location> GetDuplicatedCastLocations(SonarSyntaxNodeReportingContext context, SyntaxNode parentStatement, TypeSyntax castType, SyntaxNode typedVariable)
+    private static Location[] DuplicatedCastLocations(SonarSyntaxNodeReportingContext context, SyntaxNode parentStatement, TypeSyntax castType, SyntaxNode typedVariable)
     {
         var typeExpressionSymbol = context.SemanticModel.GetSymbolInfo(typedVariable).Symbol ?? context.SemanticModel.GetDeclaredSymbol(typedVariable);
-        return typeExpressionSymbol is null
-            ? []
-            : parentStatement
-                .DescendantNodes()
-                .OfType<CastExpressionSyntax>()
-                .Where(x => x.Type.WithoutTrivia().IsEquivalentTo(castType.WithoutTrivia())
-                            && IsCastOnSameSymbol(x)
-                            && !CSharpFacade.Instance.Syntax.IsInExpressionTree(context.SemanticModel, x)) // see https://github.com/SonarSource/sonar-dotnet/issues/8735#issuecomment-1943419398
-                .Select(x => x.GetLocation()).ToList();
+        return typeExpressionSymbol is null ? [] : parentStatement.DescendantNodes().Where(IsDuplicatedCast).Select(x => x.GetLocation()).ToArray();
 
-        bool IsCastOnSameSymbol(CastExpressionSyntax castExpression) =>
-            Equals(context.SemanticModel.GetSymbolInfo(castExpression.Expression).Symbol, typeExpressionSymbol);
+        bool IsDuplicatedCast(SyntaxNode node)
+        {
+            if (node is CastExpressionSyntax cast)
+            {
+                return IsDuplicatedCastOnSameSymbol(cast.Expression, cast.Type);
+            }
+            else if (node is BinaryExpressionSyntax binary && binary.IsAnyKind(SyntaxKind.AsExpression, SyntaxKind.IsExpression))
+            {
+                return IsDuplicatedCastOnSameSymbol(binary.Left, binary.Right);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        bool IsDuplicatedCastOnSameSymbol(ExpressionSyntax expression, SyntaxNode type) =>
+            type.WithoutTrivia().IsEquivalentTo(castType.WithoutTrivia())
+            && IsCastOnSameSymbol(expression)
+            && !CSharpFacade.Instance.Syntax.IsInExpressionTree(context.SemanticModel, expression); // see https://github.com/SonarSource/sonar-dotnet/issues/8735#issuecomment-1943419398
+
+        bool IsCastOnSameSymbol(ExpressionSyntax expression) =>
+            Equals(context.SemanticModel.GetSymbolInfo(expression).Symbol, typeExpressionSymbol);
     }
 
     private static void ProcessPatternExpression(SonarSyntaxNodeReportingContext analysisContext, SyntaxNode isPattern, SyntaxNode mainVariableExpression, SyntaxNode parentStatement)
@@ -195,7 +208,7 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
                                                     TypeSyntax castType,
                                                     string message)
     {
-        var duplicatedCastLocations = GetDuplicatedCastLocations(context, parentStatement, castType, variableExpression);
+        var duplicatedCastLocations = DuplicatedCastLocations(context, parentStatement, castType, variableExpression);
         if (duplicatedCastLocations.Any())
         {
             context.ReportIssue(Rule, mainLocation, duplicatedCastLocations.ToSecondary(), message);
@@ -209,7 +222,7 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
                                                     TypeSyntax castType,
                                                     string message)
     {
-        var duplicatedCastLocations = GetDuplicatedCastLocations(context, parentStatement, castType, variableExpression);
+        var duplicatedCastLocations = DuplicatedCastLocations(context, parentStatement, castType, variableExpression);
         foreach (var castLocation in duplicatedCastLocations)
         {
             context.ReportIssue(Rule, castLocation, [patternLocation.ToSecondary()], message);
