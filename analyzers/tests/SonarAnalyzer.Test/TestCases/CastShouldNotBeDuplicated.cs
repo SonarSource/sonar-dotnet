@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-class Fruit { }
+class Fruit
+{
+    public object Property => null;
+}
+
 struct SomeStruct { }
 
 class Program
 {
     private object someField;
+
+    private object LocalProperty => null;
 
     public void Foo(Object x)
     {
@@ -22,6 +28,32 @@ class Program
         if (x != null) // Compliant
         {
 
+        }
+    }
+
+    public void IgnoreMemberAccess(Fruit arg)
+    {
+        var differentInstance = new Fruit();
+        var f = new Fruit();
+
+        if (arg.Property is Fruit)                  // Compliant, the cast is on a different instance
+        {
+            _ = (Fruit)differentInstance.Property;
+        }
+
+        if (f.Property is Fruit)                    // Compliant, the cast is on a different instance
+        {
+            _ = (Fruit)differentInstance.Property;
+        }
+
+        if (f.Property is Fruit)        // Noncompliant
+        {
+            _ = (Fruit)f.Property;      // Secondary
+        }
+
+        if (LocalProperty is Fruit)     // Noncompliant
+        {
+            _ = (Fruit)LocalProperty;   // Secondary
         }
     }
 
