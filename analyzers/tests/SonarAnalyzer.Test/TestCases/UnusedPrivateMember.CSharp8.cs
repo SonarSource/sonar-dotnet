@@ -33,12 +33,12 @@ namespace Tests.Diagnostics
 
         private sealed class ForSwitchArm
         {
-            public void Deconstruct(out object a, out object b) { a = b = null; } // Noncompliant FP
+            public void Deconstruct(out object a, out object b) { a = b = null; } // Compliant, Deconstruct methods are ignored
         }
 
         private sealed class ForIsPattern
         {
-            public void Deconstruct(out string a, out string b) { a = b = null; } // Noncompliant FP
+            public void Deconstruct(out string a, out string b) { a = b = null; } // Compliant
         }
     }
 }

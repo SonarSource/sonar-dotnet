@@ -60,32 +60,29 @@ public class ReproIssue2478
     {
         public void Deconstruct(out object a, out InternalDeconstruct b) { a = b = null; }
 
-        // deconstructors must be public, internal or protected internal
-        private void Deconstruct(out object a, out object b) { a = b = null; } // Noncompliant
+        private void Deconstruct(out object a, out object b) { a = b = null; } // Compliant, Deconstruct methods are ignored
     }
 
     internal sealed class InternalDeconstruct
     {
         internal void Deconstruct(out object a, out object b) { a = b = null; }
 
-        // deconstructors must be public, internal or protected internal
-        private void Deconstruct(out object a, out string b, out string c) { a = b = c = null; } // Noncompliant
+        private void Deconstruct(out object a, out string b, out string c) { a = b = c = null; } // Compliant, Deconstruct methods are ignored
     }
 
     private class PublicDeconstruct
     {
         public void Deconstruct(out object a, out object b, out object c) { a = b = c = null; }
 
-        // deconstructors must be public, internal or protected internal
-        protected void Deconstruct(out string a, out string b, out string c) { a = b = c = null; } // Noncompliant
-        private void Deconstruct(out object a, out string b, out string c) { a = b = c = null; } // Noncompliant
+        protected void Deconstruct(out string a, out string b, out string c) { a = b = c = null; } // Compliant, Deconstruct methods are ignored
+        private void Deconstruct(out object a, out string b, out string c) { a = b = c = null; } // Compliant, Deconstruct methods are ignored
     }
 
     private sealed class MultipleDeconstructors
     {
         public void Deconstruct(out object a, out object b, out object c) { a = b = c = null; }
 
-        public void Deconstruct(out object a, out object b) // Noncompliant
+        public void Deconstruct(out object a, out object b) // Compliant, Deconstruct methods are ignored
         {
             a = b = null;
         }
@@ -95,25 +92,37 @@ public class ReproIssue2478
     {
         protected internal void Deconstruct(out object a, out object b) { a = b = null; }
 
-        protected internal void Deconstruct(out object a, out object b, out object c) { a = b = c = null; } // Noncompliant
+        protected internal void Deconstruct(out object a, out object b, out object c) { a = b = c = null; } // Compliant, Deconstruct methods are ignored
     }
 
     private class Ambiguous
     {
         public void Deconstruct(out string a, out string b, out string c) { a = b = c = null; }
-        public void Deconstruct(out object a, out object b, out object c) { a = b = c = null; } // Noncompliant FP, actually the one above is not used
+        public void Deconstruct(out object a, out object b, out object c) { a = b = c = null; } // Compliant, Deconstruct methods are ignored
     }
 
     private class NotUsedDifferentArgumentCount
     {
-        public void Deconstruct(out string a, out string b, out string c) { a = b = c = null; } // Noncompliant
-        public void Deconstruct(out string a, out string b, out string c, out string d) { a = b = c = d = null; } // Noncompliant
+        public void Deconstruct(out string a, out string b, out string c) { a = b = c = null; } // Compliant, Deconstruct methods are ignored
+        public void Deconstruct(out string a, out string b, out string c, out string d) { a = b = c = d = null; } // Compliant, Deconstruct methods are ignored
     }
 
     private class NotUsedNotVisible
     {
-        protected void Deconstruct(out object a, out object b) { a = b = null; } // Noncompliant
-        private void Deconstruct(out string a, out string b) { a = b = null; } // Noncompliant
+        protected void Deconstruct(out object a, out object b) { a = b = null; } // Compliant, Deconstruct methods are ignored
+        private void Deconstruct(out string a, out string b) { a = b = null; } // Compliant, Deconstruct methods are ignored
+    }
+
+    public class InvalidDeconstruct
+    {
+        private void Deconstruct(object a, out object b, out object c) { b = c = a; } // Noncompliant
+        private void Deconstruct() { } // Noncompliant
+
+        private int Deconstruct(out object a, out object b, out object c) // Noncompliant
+        {
+            a = b = c = null;
+            return 42;
+        }
     }
 
     private ForMethod ReturnFromMethod() => null;
