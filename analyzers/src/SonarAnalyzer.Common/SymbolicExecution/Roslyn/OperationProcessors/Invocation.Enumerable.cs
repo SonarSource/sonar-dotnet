@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Runtime.CompilerServices;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
@@ -71,23 +72,60 @@ internal sealed partial class Invocation
         nameof(Enumerable.Zip),
     };
 
+    private static readonly HashSet<string> BoolCollectionMethods =
+    [
+        nameof(Enumerable.Contains),
+        nameof(Enumerable.Any),
+        nameof(List<int>.Exists)
+    ];
+
     private static ProgramState[] ProcessLinqEnumerableAndQueryable(ProgramState state, IInvocationOperationWrapper invocation)
     {
         var name = invocation.TargetMethod.Name;
+        var states = ProcessBoolCollectionMethods(state, invocation);
         if (ReturningNotNull.Contains(name))
         {
-            return state.SetOperationConstraint(invocation, ObjectConstraint.NotNull).ToArray();
+            return states.Select(x => x.SetOperationConstraint(invocation, ObjectConstraint.NotNull)).ToArray();
         }
         // ElementAtOrDefault is intentionally not supported. It's causing many FPs
-        else if (name is nameof(Enumerable.FirstOrDefault) or nameof(Enumerable.LastOrDefault) or nameof(Enumerable.SingleOrDefault))
+        else if (name is nameof(Enumerable.FirstOrDefault) or nameof(Enumerable.LastOrDefault) or nameof(Enumerable.SingleOrDefault) && invocation.TargetMethod.ReturnType.IsReferenceType)
         {
-            return invocation.TargetMethod.ReturnType.IsReferenceType
-                ? [state.SetOperationConstraint(invocation, ObjectConstraint.Null), state.SetOperationConstraint(invocation, ObjectConstraint.NotNull)]
-                : state.ToArray();
+            return states.SelectMany(x => new List<ProgramState>
+            {
+                x.SetOperationConstraint(invocation, ObjectConstraint.Null),
+                x.SetOperationConstraint(invocation, ObjectConstraint.NotNull)
+            }).ToArray();
         }
         else
         {
-            return state.ToArray();
+            return states;
         }
+    }
+
+    private static ProgramState[] ProcessBoolCollectionMethods(ProgramState state, IInvocationOperationWrapper invocation)
+    {
+        if (invocation.Instance(state) is { } instance && BoolCollectionMethods.Contains(invocation.TargetMethod.Name) && instance.TrackedSymbol(state) is { } instanceSymbol)
+        {
+            return state[instanceSymbol]?.Constraint<CollectionConstraint>() switch
+            {
+                CollectionConstraint constraint when constraint == CollectionConstraint.Empty => state.SetOperationConstraint(invocation, BoolConstraint.False).ToArray(),
+                CollectionConstraint constraint when constraint == CollectionConstraint.NotEmpty => state.SetOperationConstraint(invocation, BoolConstraint.True).ToArray(),
+                _ when HasNoParameters(invocation.TargetMethod) =>
+                [
+                    state.SetOperationConstraint(invocation, BoolConstraint.True).SetSymbolConstraint(instanceSymbol, CollectionConstraint.NotEmpty),
+                    state.SetOperationConstraint(invocation, BoolConstraint.False).SetSymbolConstraint(instanceSymbol, CollectionConstraint.Empty)
+                ],
+                _  =>
+                [
+                    state.SetOperationConstraint(invocation, BoolConstraint.True).SetSymbolConstraint(instanceSymbol, CollectionConstraint.NotEmpty),
+                    state
+                ]
+            };
+        }
+        return state.ToArray();
+
+        static bool HasNoParameters(IMethodSymbol symbol) =>
+            (symbol.IsExtensionMethod && symbol.Parameters.Length == 1)
+            || symbol.Parameters.IsEmpty;
     }
 }

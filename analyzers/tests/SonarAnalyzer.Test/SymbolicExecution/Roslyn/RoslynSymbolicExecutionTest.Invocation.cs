@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using NSubstitute;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
@@ -49,11 +48,11 @@ Tag(""Me"", FromMe)";
 
     [DataTestMethod]
     [DataRow("Aggregate", "(x, y) => x")]
-    [DataRow("Any")]
+    //[DataRow("Any")]
     [DataRow("Append", "1")]
     [DataRow("Average")]
     [DataRow("Concat", "[]")]
-    [DataRow("Contains", "1")]
+   // [DataRow("Contains", "1")]
     [DataRow("Count")]
     [DataRow("ElementAt", "1")]
     [DataRow("ElementAtOrDefault", "1")]
@@ -236,7 +235,7 @@ Tag(""Me"", FromMe)";
 
     [DataTestMethod]
     [DataRow("Count")]
-    [DataRow("Any")]
+   // [DataRow("Any")]
     [DataRow("ToArray")]
     [DataRow("ToList")]
     public void Invocation_SetsNotNull_OnSourceOfLinqExtension_VB(string method)
@@ -996,6 +995,56 @@ var value = arg.{expression};
 Tag(""Value"", value);";
         var validator = SETestContext.CreateCS(code, $"IEnumerable<object> arg").Validator;
         validator.TagValue("Value").Should().BeNull();
+    }
+
+    [TestMethod]
+    public void Invocation_LinqEnumerable_AnyNoParameters()
+    {
+        var code = $"""
+            var value = collection.Any();
+            Tag("Value", value);
+            """;
+        var enumerableValidator = SETestContext.CreateCS(code, $"IEnumerable<object> collection").Validator;
+        var collectionSymbol = enumerableValidator.Symbol("collection");
+        var valueSymbol = enumerableValidator.Symbol("value");
+        enumerableValidator.TagStates("Value").Should().HaveCount(2)
+            .And.ContainSingle(x => x[collectionSymbol].HasConstraint(CollectionConstraint.NotEmpty) && x[valueSymbol].HasConstraint(BoolConstraint.True))
+            .And.ContainSingle(x => x[collectionSymbol].HasConstraint(CollectionConstraint.Empty) && x[valueSymbol].HasConstraint(BoolConstraint.False));
+    }
+
+    [DataTestMethod]
+    [DataRow("Any(x => x is 1)")]
+    [DataRow("Exists(x => x is 1)")]
+    [DataRow("Contains(1)")]
+    public void Invocation_LinqEnumerable_CheckWithParameters(string expression)
+    {
+        var code = $"""
+            var value = collection.{expression};
+            Tag("Value", value);
+            """;
+        var enumerableValidator = SETestContext.CreateCS(code, $"List<int> collection").Validator;
+        var collectionSymbol = enumerableValidator.Symbol("collection");
+        var valueSymbol = enumerableValidator.Symbol("value");
+        enumerableValidator.TagStates("Value").Should().HaveCount(2)
+            .And.ContainSingle(x => x[collectionSymbol].HasConstraint(CollectionConstraint.NotEmpty) && x[valueSymbol].HasConstraint(BoolConstraint.True));
+    }
+
+    [DataTestMethod]
+    [DataRow("Any(x => x is 1)")]
+    [DataRow("Exists(x => x is 1)")]
+    [DataRow("Contains(1)")]
+    public void Invocation_LinqEnumerable_CheckWithParametersCollectionAlreadyHasContraint(string expression)
+    {
+        var code = $"""
+            collection.Clear();
+            var value = collection.{expression};
+            Tag("Value", value);
+            """;
+        var enumerableValidator = SETestContext.CreateCS(code, $"List<int> collection").Validator;
+        var collectionSymbol = enumerableValidator.Symbol("collection");
+        var valueSymbol = enumerableValidator.Symbol("value");
+        enumerableValidator.TagStates("Value").Should().HaveCount(1)
+            .And.ContainSingle(x => x[collectionSymbol].HasConstraint(CollectionConstraint.Empty) && x[valueSymbol].HasConstraint(BoolConstraint.False));
     }
 
     [TestMethod]

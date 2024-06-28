@@ -78,6 +78,11 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             nameof(Enumerable.Zip),
         ];
 
+    private static readonly ImmutableArray<KnownType> CollectionTypes = ImmutableArray.Create(
+        KnownType.System_Linq_Enumerable,
+        KnownType.System_Linq_Queryable,
+        KnownType.System_Collections_Generic_IList_T);
+
     protected override IInvocationOperationWrapper Convert(IOperation operation) =>
         IInvocationOperationWrapper.FromOperation(operation);
 
@@ -117,7 +122,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             _ when invocation.TargetMethod.Is(KnownType.System_Diagnostics_Debug, nameof(Debug.Assert)) => ProcessDebugAssert(context, invocation),
             _ when invocation.TargetMethod.Is(KnownType.System_Object, nameof(ReferenceEquals)) => ProcessReferenceEquals(context, invocation),
             _ when invocation.TargetMethod.Is(KnownType.System_Nullable_T, "get_HasValue") => ProcessNullableHasValue(state, invocation),
-            _ when invocation.TargetMethod.ContainingType.IsAny(KnownType.System_Linq_Enumerable, KnownType.System_Linq_Queryable) => ProcessLinqEnumerableAndQueryable(state, invocation),
+            _ when invocation.TargetMethod.ContainingType.DerivesOrImplementsAny(CollectionTypes) => ProcessLinqEnumerableAndQueryable(state, invocation),
             _ when invocation.TargetMethod.Name == nameof(Equals) => ProcessEquals(context, invocation),
             _ when invocation.TargetMethod.ContainingType.Is(KnownType.System_String) => ProcessSystemStringInvocation(state, invocation),
             _ => ProcessArgumentAttributes(state, invocation),
