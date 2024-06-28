@@ -225,7 +225,7 @@
               <target>
                 <!-- ITs requires the SonarAnalyzer-VERSION.zip to be present so don't remove these lines -->
                 <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp">
-                  <fileset dir="${analyzers.directory}/packaging/binaries/">
+                  <fileset dir="${analyzers.directory}/packaging/binaries/SonarAnalyzer.CSharp/">
                     <include name="Google.Protobuf.dll"/>
                     <include name="SonarAnalyzer.dll"/>
                     <include name="SonarAnalyzer.CFG.dll"/>
@@ -247,7 +247,7 @@
                       failonerror="true"
                       dir="${analyzers.directory}/packaging/binaries/RuleDescriptorGenerator">
                   <arg value="RuleDescriptorGenerator.dll"/>
-                  <arg value="${analyzers.directory}/packaging/binaries/SonarAnalyzer.CSharp.dll"/>
+                  <arg value="${analyzers.directory}/packaging/binaries/SonarAnalyzer.CSharp/SonarAnalyzer.CSharp.dll"/>
                   <arg value="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp/Rules.json"/>
                 </exec>
                 <copy todir="${sonarAnalyzer.workDirectory}/static">
