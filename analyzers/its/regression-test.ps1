@@ -230,8 +230,10 @@ function Invoke-JsonParser()
 try {
     . (Join-Path $PSScriptRoot "..\..\scripts\build\build-utils.ps1")
     Push-Location $PSScriptRoot
-    Test-FileExists "..\packaging\binaries\SonarAnalyzer.dll"
-    Test-FileExists "..\packaging\binaries\SonarAnalyzer.CFG.dll"
+    Test-FileExists "..\packaging\binaries\SonarAnalyzer.CSharp\SonarAnalyzer.dll"
+    Test-FileExists "..\packaging\binaries\SonarAnalyzer.CSharp\SonarAnalyzer.CFG.dll"
+    Test-FileExists "..\packaging\binaries\SonarAnalyzer.VisualBasic\SonarAnalyzer.dll"
+    Test-FileExists "..\packaging\binaries\SonarAnalyzer.VisualBasic\SonarAnalyzer.CFG.dll"
     Test-FileExists "..\packaging\binaries\ITs.JsonParser\ITs.JsonParser.exe"
 
     Write-Header "Initializing the environment"
