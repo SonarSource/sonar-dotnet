@@ -107,7 +107,11 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
             && !CSharpFacade.Instance.Syntax.IsInExpressionTree(context.SemanticModel, expression); // see https://github.com/SonarSource/sonar-dotnet/issues/8735#issuecomment-1943419398
 
         bool IsCastOnSameSymbol(ExpressionSyntax expression) =>
-            Equals(context.SemanticModel.GetSymbolInfo(expression).Symbol, typeExpressionSymbol);
+            RemoveThisExpression(typedVariable).WithoutTrivia().IsEquivalentTo(RemoveThisExpression(expression).WithoutTrivia())
+            && Equals(context.SemanticModel.GetSymbolInfo(expression).Symbol, typeExpressionSymbol);
+
+        static SyntaxNode RemoveThisExpression(SyntaxNode node) =>
+            node is MemberAccessExpressionSyntax { Expression: ThisExpressionSyntax } memberAccess ? memberAccess.Name : node;
     }
 
     private static void ProcessPatternExpression(SonarSyntaxNodeReportingContext analysisContext, SyntaxNode isPattern, SyntaxNode mainVariableExpression, SyntaxNode parentStatement)

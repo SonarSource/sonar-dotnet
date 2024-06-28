@@ -36,14 +36,14 @@ class Program
         var differentInstance = new Fruit();
         var f = new Fruit();
 
-        if (arg.Property is Fruit)                  // Noncompliant FP
+        if (arg.Property is Fruit)                  // Compliant, the cast is on a different instance
         {
-            _ = (Fruit)differentInstance.Property;  // Secondary
+            _ = (Fruit)differentInstance.Property;
         }
 
-        if (f.Property is Fruit)                    // Noncompliant FP
+        if (f.Property is Fruit)                    // Compliant, the cast is on a different instance
         {
-            _ = (Fruit)differentInstance.Property;  // Secondary
+            _ = (Fruit)differentInstance.Property;
         }
 
         if (f.Property is Fruit)        // Noncompliant
