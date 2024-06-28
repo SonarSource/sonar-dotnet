@@ -169,9 +169,9 @@ namespace Tests.Diagnostics
 
         public void FooBar(object x)
         {
-            if (x is nuint)
+            if (x is nuint)         // Noncompliant
             {
-                var res = (nuint)x; // Compliant because we are casting to a ValueType
+                var res = (nuint)x; // Secondary
             }
         }
 

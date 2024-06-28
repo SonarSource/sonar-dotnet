@@ -9,6 +9,12 @@
     {
       "Id": "S3247",
       "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L88",
+      "Location": "Line 88 Position 26-40"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L93",
       "Location": "Line 93 Position 26-47"
     }

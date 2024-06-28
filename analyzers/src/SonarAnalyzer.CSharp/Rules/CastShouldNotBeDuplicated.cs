@@ -74,9 +74,7 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
     {
         var isExpression = (BinaryExpressionSyntax)analysisContext.Node;
         if (isExpression.Right is TypeSyntax castType
-            && isExpression.GetFirstNonParenthesizedParent() is IfStatementSyntax parentIfStatement
-            && analysisContext.SemanticModel.GetSymbolInfo(castType).Symbol is INamedTypeSymbol castTypeSymbol
-            && castTypeSymbol.TypeKind != TypeKind.Struct)
+            && isExpression.GetFirstNonParenthesizedParent() is IfStatementSyntax parentIfStatement)
         {
             ReportPatternAtMainVariable(analysisContext, isExpression.Left, isExpression.GetLocation(), parentIfStatement.Statement, castType, ReplaceWithAsAndNullCheckMessage);
         }
@@ -211,13 +209,10 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
                                                     TypeSyntax castType,
                                                     string message)
     {
-        if (context.SemanticModel.GetSymbolInfo(castType).Symbol is INamedTypeSymbol castTypeSymbol && castTypeSymbol.TypeKind != TypeKind.Struct)
+        var duplicatedCastLocations = GetDuplicatedCastLocations(context, parentStatement, castType, variableExpression);
+        foreach (var castLocation in duplicatedCastLocations)
         {
-            var duplicatedCastLocations = GetDuplicatedCastLocations(context, parentStatement, castType, variableExpression);
-            foreach (var castLocation in duplicatedCastLocations)
-            {
-                context.ReportIssue(Rule, castLocation, [patternLocation.ToSecondary()], message);
-            }
+            context.ReportIssue(Rule, castLocation, [patternLocation.ToSecondary()], message);
         }
     }
 }
