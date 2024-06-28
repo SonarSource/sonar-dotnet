@@ -23,10 +23,10 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="binaries\Google.Protobuf.dll" target="analyzers" />
-    <file src="binaries\SonarAnalyzer.dll" target="analyzers" />
-    <file src="binaries\SonarAnalyzer.CFG.dll" target="analyzers" />
-    <file src="binaries\SonarAnalyzer.VisualBasic.dll" target="analyzers" />
+    <file src="binaries\SonarAnalyzer.VisualBasic\Google.Protobuf.dll" target="analyzers" />
+    <file src="binaries\SonarAnalyzer.VisualBasic\SonarAnalyzer.dll" target="analyzers" />
+    <file src="binaries\SonarAnalyzer.VisualBasic\SonarAnalyzer.CFG.dll" target="analyzers" />
+    <file src="binaries\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.dll" target="analyzers" />
     <file src="tools-vbnet\*.ps1" target="tools\" />
     <file src="logos\sonarsource_64.png" target="images\" />
     <file src="..\..\THIRD-PARTY-NOTICES.txt" target="license\" />
