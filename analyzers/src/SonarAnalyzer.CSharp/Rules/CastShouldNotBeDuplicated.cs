@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq.Expressions;
+
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -107,11 +109,8 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
             && !CSharpFacade.Instance.Syntax.IsInExpressionTree(context.SemanticModel, expression); // see https://github.com/SonarSource/sonar-dotnet/issues/8735#issuecomment-1943419398
 
         bool IsCastOnSameSymbol(ExpressionSyntax expression) =>
-            RemoveThisExpression(typedVariable).WithoutTrivia().IsEquivalentTo(RemoveThisExpression(expression).WithoutTrivia())
+            IsEquivalentVariable(expression, typedVariable)
             && Equals(context.SemanticModel.GetSymbolInfo(expression).Symbol, typeExpressionSymbol);
-
-        static SyntaxNode RemoveThisExpression(SyntaxNode node) =>
-            node is MemberAccessExpressionSyntax { Expression: ThisExpressionSyntax } memberAccess ? memberAccess.Name : node;
     }
 
     private static void ProcessPatternExpression(SonarSyntaxNodeReportingContext analysisContext, SyntaxNode isPattern, SyntaxNode mainVariableExpression, SyntaxNode parentStatement)
@@ -231,5 +230,25 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
         {
             context.ReportIssue(Rule, castLocation, [patternLocation.ToSecondary()], message);
         }
+    }
+
+    private static bool IsEquivalentVariable(ExpressionSyntax expression, SyntaxNode typedVariable)
+    {
+        var left = RemoveThisExpression(typedVariable).WithoutTrivia();
+        var right = RemoveThisExpression(expression).WithoutTrivia();
+
+        return left.IsEquivalentTo(right)
+            || (StandaloneIdentifier(left) is { } leftIdentifier && leftIdentifier == StandaloneIdentifier(right));
+
+        static string StandaloneIdentifier(SyntaxNode node) =>
+            node switch
+            {
+                IdentifierNameSyntax name => name.Identifier.ValueText,
+                _ when node.IsKind(SyntaxKindEx.SingleVariableDesignation) => ((SingleVariableDesignationSyntaxWrapper)node).Identifier.ValueText,
+                _ => null
+            };
+
+        static SyntaxNode RemoveThisExpression(SyntaxNode node) =>
+            node is MemberAccessExpressionSyntax { Expression: ThisExpressionSyntax } memberAccess ? memberAccess.Name : node;
     }
 }
