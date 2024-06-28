@@ -39,6 +39,8 @@ int CallerTwo() => Leaf() + PublicMethod();
 int Leaf() =>  42;
 ```
 
+Do not use auto-implemented private properties. Use fields instead.
+
 ### Local functions
 
 There are no strict rules on when to use local functions. It should be decided on a case-by-case basis.
@@ -97,17 +99,41 @@ public void MethodB()
 
 ## Naming conventions
 
-Generic words in class names that don't convey meaning (e.g. `Helper`) should be avoided. Overwordy and complex names should be avoided as well.
+### Principles
+
+Keep it minimal and suggestive.
+- Generic words that don't convey meaning (e.g. `Helper`) should be avoided.
+- Overwordy and complex names should be avoided as well.
+- Use positive naming when possible.
+
+### Casing
+
+Protected fields should start with lowercase letter.
+
+### Parameters and variables
 
 Single variable lambdas should use `x` as the variable name (based on lambda calculus λx). Multi variable lambdas should use descriptive names, where `x` can be used for the main iterated item like `(x, index) => ...`. Name `c` can be used for context of Roslyn callback.
 
 Short names can be used as parameter and variable names, namely `SyntaxTree tree`, `SemanticModel model`, `SyntaxNode node` and `CancellationToken cancel`.
+
+### Method names
+
+FIXME Avoid Get prefixes for method names. Save three characters when it only gets x.Foo.Bar.
+
+### Unit tests
 
 Unit tests for common C# and VB.NET rules should use two aliases `using CS = SonarAnalyzer.Rules.CSharp` and `using VB = SonarAnalyzer.Rules.VisualBasic`. Test method names should have `_CS` and `_VB` suffixes.
 
 Unit tests for single language rule should not use alias nor language method suffix.
 
 Variable name `sut` (System Under Test) is recommended in unit tests that really tests a single unit (contrary to our usual rule integration unit tests).
+
+FIXME - Avoid names without meaning like `foo`, `bar`, `baz`. OR KISS?
+
+Unit test method names:
+- Underscore in UT names separates logical groups, not individual words.
+- FIXME: what should the name pattern be? NEEDS DISCUSSION ([many patterns](https://dzone.com/articles/7-popular-unit-test-naming) and also [Microsoft convention](https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices#naming-your-tests) - I'd go for MS convention)
+
 
 ## Multi-line statements
 
@@ -179,6 +205,14 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
 
 ## Code structure
 
+### Principles
+
+* When to factorize: two is a group, three is a crowd.
+* Less is more.
+* Rely on Roslyn Type inference to reduce used characters.
+
+### Style
+
 * Field and property initializations are done directly in the member declaration instead of in a constructor.
 * `if`/`else if` and explicit `else` is used
   * when it helps to understand overall structure of the method,
@@ -193,6 +227,35 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
 * Var pattern `is var o` can be used only where variable declarations would require additional nesting.
 * Var pattern `o is { P: var p }` can be used only where `o` can be `null` and `p` is used at least 3 times.
 * Do not use `nullable`.
+* Avoid single-use variables, unless they really bring readability value.
+* Use file-scoped namespaces.
+* Tested variable is on the left, like `iterated == searchParameter` (where `iterated` is the tested variable)
+* If a string is multiline, use raw string literals, indented one tab-in from the declaration:
+```
+var raw = """
+    hello
+    my friend
+	""";
+```
+* Always use multi-line initializers for collection and objects, e.g.:
+```
+var thingy = new Thingy
+{
+	x = "hello",
+	y = 42,
+}
+
+var collection = new Dictionary<string, int>
+{
+	{ "hey" : 1 },
+	{ "there": 42 },
+}
+```
+* FIXME - align on how to use collection initializers int[] x = [ 1, 2, 3 ] or old style (see [slack discussion](https://sonarsource.slack.com/archives/C01H2B58DE1/p1697103918957899?thread_ts=1696951023.295859&cid=C01H2B58DE1))
+
+### Unit Tests
+* VerifierBuilder.AddSnippet should not be used to assert compliant/noncomplaint test cases. Move it to a TestCases file.
+
 
 ## Comments
 
@@ -200,6 +263,10 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
 * Comments should generally be on separate lines.
 * Comments on the same line with code are acceptable for short lines of code and short comments.
 * Documentation comments for abstract methods and their implementations should be placed only on the abstract method, to avoid duplication. _When reading the implementation, the IDE offers the tooling to peek in the base class and read the method comment._
+* Avoid using comments for "Arrange, Act, Assert" in UTs, unless the test is complex.
+* Use single-line comments. Exception: `Internal /* for testing */ void Something()`.
+* Prefer well-named members instead of documentation.
+* When writing [xmldoc](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/xmldoc/recommended-tags) for methods, avoid adding superflous tags (e.g. members that have self-explanatory names).
 
 ## FIXME and ToDo
 
@@ -216,6 +283,15 @@ Generally, as we do not want to have classes that are too long, regions are not 
 It can still be used when and where it makes sense. For instance, when a class having a specific purpose is
 implementing generic interfaces (such as `IComparable`, `IDisposable`), it can make sense to have regions 
 for the implementation of these interfaces.
+
+## Spacing
+
+* Avoid spaces unless they bring clarity and help the reader understand logical groups. Prefer spaces over comments.
+
+## Type definition
+
+* If a class is a POCO data-container, use a record.
+* Do not use primary constructors on normal classes and structs, use standard constructor + field/properties.
 
 ## ValueTuples
 
