@@ -44,7 +44,7 @@ public class StylingTest {
   @Test
   public void hasIssues() throws IOException {
     Path projectFullPath = TestUtils.projectDir(temp, PROJECT);
-    FileUtils.copyFile(new File("..\\analyzers\\packaging\\binaries\\internal\\" + STYLING_DLL),
+    FileUtils.copyFile(new File("..\\analyzers\\packaging\\binaries\\SonarAnalyzer.CSharp.Styling\\" + STYLING_DLL),
       projectFullPath.resolve(STYLING_DLL).toFile());
     Tests.ORCHESTRATOR.executeBuild(TestUtils.createBeginStep(PROJECT, projectFullPath));
     TestUtils.runBuild(projectFullPath);
