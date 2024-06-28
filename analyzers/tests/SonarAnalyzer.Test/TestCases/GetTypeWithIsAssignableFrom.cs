@@ -88,7 +88,7 @@ namespace Tests.Diagnostics
 
         public void Go(Repro_3605 value)
         {
-            bool result = value.StringProperty is Example; // Noncompliant FP for pattern matching
+            bool result = value.StringProperty is Example; // Compliant, for pattern matching
         }
     }
 
