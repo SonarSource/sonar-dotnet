@@ -72,6 +72,13 @@ internal static class CollectionTracker
         nameof(Stack<int>.Pop)
     ];
 
+    private static readonly HashSet<string> ElementExistenceMethods =
+    [
+        nameof(Enumerable.Contains),
+        nameof(Enumerable.Any),
+        nameof(List<int>.Exists)
+    ];
+
     private static readonly HashSet<string> AddOrRemoveMethods = [.. AddMethods, .. RemoveMethods];
 
     public static ProgramState LearnFrom(ProgramState state, IObjectCreationOperationWrapper operation)
@@ -149,7 +156,11 @@ internal static class CollectionTracker
         {
             return state.SetOperationConstraint(invocation, constraint);
         }
-        if (invocation.Instance is { } instance && instance.Type.DerivesOrImplementsAny(CollectionTypes))
+
+        var instance = invocation.TargetMethod.IsExtensionMethod && !invocation.Arguments.IsEmpty
+            ? state.ResolveCaptureAndUnwrapConversion(invocation.Arguments[0].ToArgument().Value)
+            : invocation.Instance;
+        if (instance is { } && instance.Type.DerivesOrImplementsAny(CollectionTypes))
         {
             var targetMethod = invocation.TargetMethod;
             var symbolValue = state[instance] ?? SymbolicValue.Empty;
@@ -157,7 +168,7 @@ internal static class CollectionTracker
             {
                 return SetOperationAndSymbolValue(symbolValue.WithConstraint(CollectionConstraint.NotEmpty));
             }
-            else if (RemoveMethods.Contains(targetMethod.Name))
+            else if (RemoveMethods.Contains(targetMethod.Name) || ElementExistenceMethods.Contains(targetMethod.Name))
             {
                 return SetOperationAndSymbolValue(symbolValue.WithoutConstraint(CollectionConstraint.NotEmpty));
             }
