@@ -19,6 +19,7 @@
  */
 
 using NSubstitute;
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using StyleCop.Analyzers.Lightup;
 

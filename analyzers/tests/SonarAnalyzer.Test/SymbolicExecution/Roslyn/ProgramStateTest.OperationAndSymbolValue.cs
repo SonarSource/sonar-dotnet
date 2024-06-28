@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using SonarAnalyzer.Test.TestFramework.SymbolicExecution;
 
 namespace SonarAnalyzer.Test.SymbolicExecution.Roslyn;
 
