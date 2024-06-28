@@ -51,7 +51,7 @@ class Program
             _ = (Fruit)f.Property;      // Secondary
         }
 
-        if(LocalProperty is Fruit)      // Noncompliant
+        if (LocalProperty is Fruit)     // Noncompliant
         {
             _ = (Fruit)LocalProperty;   // Secondary
         }
