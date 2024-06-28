@@ -82,8 +82,8 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
                                     .Where(x => x.EnclosingRegion.EnclosingRegionOrSelf(ControlFlowRegionKind.LocalLifetime) is not null)
                                     .SelectMany(x => x.OperationsAndBranchValue)
                                     .ToExecutionOrder()
-                                    .Select(x => x.Instance.AsFlowCapture())
-                                    .OfType<IFlowCaptureOperationWrapper>())
+                                    .Where(x => x.Instance.Kind == OperationKindEx.FlowCapture)
+                                    .Select(x => x.Instance.ToFlowCapture()))
         {
             if (flowCapture.Value.AsFlowCaptureReference() is { } captureReference
                 && flowCaptureOperations.TryGetValue(captureReference.Id, out var capturedOperations))
