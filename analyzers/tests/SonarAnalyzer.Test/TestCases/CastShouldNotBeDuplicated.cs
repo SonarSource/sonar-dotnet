@@ -16,7 +16,7 @@ class Program
 
     public void Foo(Object x)
     {
-        if (x is Fruit)  // Noncompliant
+        if (x is Fruit)  // Noncompliant {{Replace this type-check-and-cast sequence to use pattern matching.}}
         {
             var f1 = (Fruit)x;
 //                   ^^^^^^^^ Secondary
@@ -46,12 +46,12 @@ class Program
             _ = (Fruit)differentInstance.Property;
         }
 
-        if (f.Property is Fruit)        // Noncompliant
+        if (f.Property is Fruit)        // Noncompliant {{Replace this type-check-and-cast sequence to use pattern matching.}}
         {
             _ = (Fruit)f.Property;      // Secondary
         }
 
-        if (LocalProperty is Fruit)     // Noncompliant
+        if (LocalProperty is Fruit)     // Noncompliant {{Replace this type-check-and-cast sequence to use pattern matching.}}
         {
             _ = (Fruit)LocalProperty;   // Secondary
         }
@@ -65,26 +65,26 @@ class Program
         }
         else
         {
-            var f2 = (Fruit)x; // Compliant - should be non compliant
+            var f2 = (Fruit)x; // Compliant - FN
         }
 
     }
 
     public void WithStructs(object x)
     {
-        if (x is int)           // Noncompliant
+        if (x is int)           // Noncompliant {{Replace this type-check-and-cast sequence to use pattern matching.}}
         {
             var res = (int)x;   // Secondary
         }
 
-        if (x is SomeStruct)            // Noncompliant
+        if (x is SomeStruct)            // Noncompliant {{Replace this type-check-and-cast sequence to use pattern matching.}}
         {
             var res = (SomeStruct)x;    // Secondary
         }
     }
 
     public void IsFollowedByAs(object x) {
-        if (x is Fruit)         // Noncompliant
+        if (x is Fruit)         // Noncompliant {{Replace this type-check-and-cast sequence to use pattern matching.}}
         {
             _ = x as Fruit;     // Secondary
         }
@@ -95,20 +95,20 @@ class Program
         }
 
 
-        if (x is SomeStruct?)       // Noncompliant
+        if (x is SomeStruct?)       // Noncompliant {{Replace this type-check-and-cast sequence to use pattern matching.}}
         {
             _ = x as SomeStruct?;   // Secondary
         }
     }
 
     public void IsFollowedByIs(object x) {
-        if (x is Fruit)         // Noncompliant
+        if (x is Fruit)         // Noncompliant {{Replace this type-check-and-cast sequence to use pattern matching.}}
         {
             _ = x is Fruit;     // Secondary
         }
 
 
-        if (x is SomeStruct?)       // Noncompliant
+        if (x is SomeStruct?)       // Noncompliant {{Replace this type-check-and-cast sequence to use pattern matching.}}
         {
             _ = x is SomeStruct?;   // Secondary
         }
@@ -123,7 +123,7 @@ class Program
             var c = (Fruit)f;
         }
 
-        if (someField is Fruit) // Noncompliant
+        if (someField is Fruit) // Noncompliant {{Replace this type-check-and-cast sequence to use pattern matching.}}
         {
             var fruit = (Fruit)this.someField;
 //                      ^^^^^^^^^^^^^^^^^^^^^ Secondary
@@ -145,7 +145,7 @@ public class Foo<T>
 {
     public void Process(object message)
     {
-        if (message is Bar<T>/*comment*/)     // Noncompliant
+        if (message is Bar<T>/*comment*/)     // Noncompliant {{Replace this type-check-and-cast sequence to use pattern matching.}}
         {
             var sub = (Bar<T>/**/) message;   // Secondary
         }

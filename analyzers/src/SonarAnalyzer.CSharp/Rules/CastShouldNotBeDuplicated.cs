@@ -25,7 +25,7 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S3247";
     private const string MessageFormat = "{0}";
-    private const string ReplaceWithAsAndNullCheckMessage = "Replace this type-check-and-cast sequence with an 'as' and a null check.";
+    private const string UsePatternMatchingCheckMessage = "Replace this type-check-and-cast sequence to use pattern matching.";
     private const string RemoveRedundantCastAnotherVariableMessage = "Remove this cast and use the appropriate variable.";
     private const string RemoveRedundantCastMessage = "Remove this redundant cast.";
 
@@ -76,7 +76,7 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
         if (isExpression.Right is TypeSyntax castType
             && isExpression.GetFirstNonParenthesizedParent() is IfStatementSyntax parentIfStatement)
         {
-            ReportPatternAtMainVariable(analysisContext, isExpression.Left, isExpression.GetLocation(), parentIfStatement.Statement, castType, ReplaceWithAsAndNullCheckMessage);
+            ReportPatternAtMainVariable(analysisContext, isExpression.Left, isExpression.GetLocation(), parentIfStatement.Statement, castType, UsePatternMatchingCheckMessage);
         }
     }
 
