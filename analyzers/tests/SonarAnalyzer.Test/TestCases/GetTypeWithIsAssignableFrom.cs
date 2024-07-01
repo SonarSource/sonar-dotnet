@@ -84,12 +84,23 @@ namespace Tests.Diagnostics
     public class Repro_3605
     {
         public string StringProperty { get; set; }
-        public const string Example = "Lorem Ipsum";
+        public int IntProperty { get; set; }
+        public AnEnum EnumProperty { get; set; }
+
+        public const string stringField = "Lorem Ipsum";
+        public const int intField = 1;
 
         public void Go(Repro_3605 value)
         {
-            bool result = value.StringProperty is Example; // Noncompliant FP for pattern matching
+            bool result = value.StringProperty is stringField; // Compliant, for pattern matching
+            result = value.IntProperty is intField;            // Compliant, for pattern matching
+            result = value.EnumProperty is AnEnum.Zero;        // Compliant, for pattern matching
         }
+    }
+
+    public enum AnEnum
+    {
+        Zero = 0
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/6616
