@@ -83,6 +83,7 @@ namespace Tests.Diagnostics
     {
         public string StringProperty { get; set; }
         public int IntProperty { get; set; }
+        public AnEnum EnumProperty { get; set; }
 
         public const string stringField = "Lorem Ipsum";
         public const int intField = 1;
@@ -91,10 +92,14 @@ namespace Tests.Diagnostics
         {
             bool result = value.StringProperty is stringField; // Compliant, for pattern matching
             result = value.IntProperty is intField;            // Compliant, for pattern matching
+            result = value.EnumProperty is AnEnum.Zero;        // Compliant, for pattern matching
         }
     }
 
-    public class SomeType { }
+    public enum AnEnum
+    {
+        Zero = 0
+    }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/6616
     public class Repro_6616
