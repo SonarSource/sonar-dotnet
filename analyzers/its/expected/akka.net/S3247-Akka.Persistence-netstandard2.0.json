@@ -2,145 +2,145 @@
   "Issues": [
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L631",
       "Location": "Line 631 Position 26-53"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Eventsourced.Lifecycle.cs#L101",
       "Location": "Line 101 Position 17-47"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Eventsourced.Lifecycle.cs#L107",
       "Location": "Line 107 Position 17-49"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Eventsourced.Lifecycle.cs#L113",
       "Location": "Line 113 Position 17-50"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Eventsourced.Lifecycle.cs#L119",
       "Location": "Line 119 Position 17-49"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Eventsourced.Lifecycle.cs#L66",
       "Location": "Line 66 Position 21-51"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Eventsourced.Lifecycle.cs#L67",
       "Location": "Line 67 Position 26-55"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Eventsourced.Lifecycle.cs#L68",
       "Location": "Line 68 Position 26-52"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteJournal.cs#L363",
       "Location": "Line 363 Position 25-53"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L304",
       "Location": "Line 304 Position 22-41"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L468",
       "Location": "Line 468 Position 17-53"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L474",
       "Location": "Line 474 Position 22-63"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L195",
       "Location": "Line 195 Position 17-42"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L236",
       "Location": "Line 236 Position 21-45"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L268",
       "Location": "Line 268 Position 21-46"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L274",
       "Location": "Line 274 Position 26-47"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L319",
       "Location": "Line 319 Position 30-55"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L324",
       "Location": "Line 324 Position 30-57"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L333",
       "Location": "Line 333 Position 25-48"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L338",
       "Location": "Line 338 Position 30-53"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L343",
       "Location": "Line 343 Position 30-55"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L348",
       "Location": "Line 348 Position 30-56"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L354",
       "Location": "Line 354 Position 26-51"
     },
     {
       "Id": "S3247",
-      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/ReplayFilter.cs#L134",
       "Location": "Line 134 Position 17-43"
     }
