@@ -27,7 +27,7 @@
       <BinariesToCopy Include="$(OutputPath)\*.dll" />
       <BinariesToCopy Include="$(OutputPath)\*.json" />
     </ItemGroup>
-    <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)\RuleDescriptorGenerator" />
+    <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)" />
   </Target>
 
 </Project>

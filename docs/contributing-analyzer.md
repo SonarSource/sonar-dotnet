@@ -133,7 +133,7 @@ You can visualize the differences using:
 If you want to debug the analysis of a project, you can add a [`Debugger.Launch()`](https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.debugger.launch) breakpoint in the class you want to debug. Rebuild `SonarAnalyzer.sln` and link the analyzer debug binaries to the project you want to debug the analysis for.
 
 - If you are analyzing the project with the Scanner for .NET, after the begin step you can replace the binaries in the local cache (`%TEMP%\.sonarqube\resources\` - the `0` folder for the C# Analyzer, the `1` folder for the VB .NET analyzer), and then run the build.
-- If you don't want to use the Scanner for .NET, you can manually reference the binaries in `analyzers/packaging/binaries/` in the {cs,vb}proj file with `<Analyzer Include=... />` items (see [Directory.Build.targets](../analyzers/its/Directory.Build.targets#L46) as an example)
+- If you don't want to use the Scanner for .NET, you can manually reference the binaries in `analyzers/packaging/binaries/` in the {cs,vb}proj file with `<Analyzer Include=... />` items (see [Directory.Build.targets](../analyzers/its/Directory.Build.targets#L55) as an example)
 
 Please note that if the rule is not in SonarWay, you will also need to enable it in a RuleSet file and link it in the {cs,vb}proj file with the `<CodeAnalysisRuleSet>` property (see [example](../analyzers/src/Directory.Build.targets#L8)).
 
