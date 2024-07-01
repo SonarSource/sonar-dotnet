@@ -71,8 +71,8 @@ public sealed class GetTypeWithIsAssignableFrom : SonarDiagnosticAnalyzer
                 var isExpression = (BinaryExpressionSyntax)c.Node;
                 if (c.SemanticModel.GetTypeInfo(isExpression.Left).Type is var objectToCast
                     && objectToCast.IsClass()
-                    && c.SemanticModel.GetSymbolInfo(isExpression.Right).Symbol is INamedTypeSymbol
-                    && c.SemanticModel.GetTypeInfo(isExpression.Right).Type is var typeCastTo
+                    && c.SemanticModel.GetSymbolInfo(isExpression.Right).Symbol is INamedTypeSymbol namedSymbol
+                    && namedSymbol.GetSymbolType() is var typeCastTo
                     && typeCastTo.IsClass()
                     && !typeCastTo.Is(KnownType.System_Object)
                     && objectToCast.DerivesOrImplements(typeCastTo))
