@@ -232,8 +232,8 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
 
     private static bool IsEquivalentVariable(ExpressionSyntax expression, SyntaxNode typedVariable)
     {
-        var left = RemoveThisExpression(typedVariable).WithoutTrivia();
-        var right = RemoveThisExpression(expression).WithoutTrivia();
+        var left = CleanupExpression(typedVariable).WithoutTrivia();
+        var right = CleanupExpression(expression).WithoutTrivia();
 
         return left.IsEquivalentTo(right)
             || (StandaloneIdentifier(left) is { } leftIdentifier && leftIdentifier == StandaloneIdentifier(right));
@@ -245,8 +245,17 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
                 _ when node.IsKind(SyntaxKindEx.SingleVariableDesignation) => ((SingleVariableDesignationSyntaxWrapper)node).Identifier.ValueText,
                 _ => null
             };
+    }
 
-        static SyntaxNode RemoveThisExpression(SyntaxNode node) =>
-            node is MemberAccessExpressionSyntax { Expression: ThisExpressionSyntax } memberAccess ? memberAccess.Name : node;
+    private static SyntaxNode CleanupExpression(SyntaxNode node)
+    {
+        while (node is ParenthesizedExpressionSyntax parenthesized)
+        {
+            node = parenthesized.Expression;
+        }
+
+        node = node is MemberAccessExpressionSyntax { Expression: ThisExpressionSyntax } memberAccess ? memberAccess.Name : node;
+
+        return node;
     }
 }
