@@ -5,6 +5,7 @@ public abstract partial class PartialMixed
 {
     public abstract void X();
 }
+
 public abstract partial class PartialMixed
 {
     public void Y() { }
@@ -14,6 +15,7 @@ public abstract partial class PartialAbstract // Noncompliant
 {
     public abstract void X();
 }
+
 public abstract partial class PartialAbstract // Noncompliant
 {
     public abstract void Y();
@@ -32,11 +34,10 @@ public abstract class Animal // Noncompliant {{Convert this 'abstract' class to 
 
 public class SomeBaseClass { }
 
-public abstract class Animal2 : SomeBaseClass //Compliant
+public abstract class Animal2 : SomeBaseClass // Compliant
 {
     public abstract void move();
     public abstract void feed();
-
 }
 
 public abstract class Color
@@ -53,10 +54,8 @@ public abstract class Color
 
 public interface AnimalCompliant
 {
-
     void move();
     void feed();
-
 }
 
 public class ColorCompliant
@@ -66,7 +65,8 @@ public class ColorCompliant
     private int blue = 0;
 
     private ColorCompliant()
-    { }
+    {
+    }
 
     public int getRed()
     {
@@ -140,4 +140,10 @@ public abstract class AbstractClassWithConstructor      // Noncompliant - FP: th
 {
     protected AbstractClassWithConstructor() { }
     public abstract void SomeMethod();
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9421
+public abstract class BaseClass                         // Noncompliant - FP
+{
+    protected abstract void SomeMethod();
 }
