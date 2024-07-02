@@ -357,30 +357,29 @@ tag = ""AfterCatch"";";
     [TestMethod]
     public void ExceptionCandidate_ForEachLoop()
     {
-        const string code = @"
-var tag = ""BeforeTry"";
-try
-{
-    tag = ""InTry"";
-    foreach (string element in collection) // can throw if the collection is null or if it gets modified
-    {
-    }
-}
-catch
-{
-    tag = ""InCatch"";
-}
-tag = ""AfterCatch"";";
+        const string code = """
+            var tag = "BeforeTry";
+            try
+            {
+                tag = "InTry";
+                foreach (string element in collection) // can throw if the collection is null or if it gets modified
+                {
+                }
+            }
+            catch
+            {
+                tag = "InCatch";
+            }
+            tag = "AfterCatch";
+            """;
         var validator = SETestContext.CreateCS(code, "IEnumerable<string> collection").Validator;
-        validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch", "InCatch", "InCatch", "InCatch", "AfterCatch", "AfterCatch", "InCatch");
+        validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch", "InCatch", "InCatch", "AfterCatch", "AfterCatch");
         // IForEachLoopOperation is not generated. It doesn't seem to be used.
         // In the case of foreach, there are implicit method calls that in the current implementation can throw:
         // - IEnumerable<>.GetEnumerator()
         // - System.Collections.IEnumerator.MoveNext()
         // - System.IDisposable.Dispose()
-        validator.TagStates("InCatch").Should().HaveCount(5)
-            .And.Contain(x => HasExceptionOfType(x, "NullReferenceException"))
-            .And.Subject.Where(HasUnknownException).Should().HaveCount(3);
+        validator.TagStates("InCatch").Should().HaveCount(3).And.OnlyContain(x => HasUnknownException(x));
         validator.ExitStates.Should().HaveCount(3).And.OnlyContain(x => HasNoException(x));
     }
 

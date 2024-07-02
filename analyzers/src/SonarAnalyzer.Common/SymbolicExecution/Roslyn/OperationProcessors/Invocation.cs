@@ -93,9 +93,13 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         {
             state = state.ResetStaticFieldConstraints(invocation.TargetMethod.ContainingType);
         }
-        if (LearnNotNullCandidate(invocation) is { } operation && operation.TrackedSymbol(state) is { } symbol)
+        if (LearnNotNullCandidate(invocation) is { } operation)
         {
-            state = state.SetOperationConstraint(operation, ObjectConstraint.NotNull).SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
+            state = state.SetOperationConstraint(operation, ObjectConstraint.NotNull);
+            if (operation.TrackedSymbol(state) is { } symbol)
+            {
+                state = state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
+            }
         }
         if (invocation.HasThisReceiver(state))
         {
