@@ -26,16 +26,16 @@ public abstract class Empty
 public abstract class Animal // Noncompliant {{Convert this 'abstract' class to an interface.}}
 //                    ^^^^^^
 {
-    protected abstract void move();
-    protected abstract void feed();
+    public abstract void move();
+    public abstract void feed();
 }
 
 public class SomeBaseClass { }
 
 public abstract class Animal2 : SomeBaseClass //Compliant
 {
-    protected abstract void move();
-    protected abstract void feed();
+    public abstract void move();
+    public abstract void feed();
 
 }
 
@@ -127,4 +127,17 @@ public abstract class WithConstructor   // Noncompliant
     {
         // Do something here
     }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9494
+public abstract class AbstractClassWithField            // Noncompliant - FP: the class has a field, it cannot be converted to an interface
+{
+    protected int _data;
+    public abstract void SomeMethod();
+}
+
+public abstract class AbstractClassWithConstructor      // Noncompliant - FP: the class has a constructor, it cannot be converted to an interface
+{
+    protected AbstractClassWithConstructor() { }
+    public abstract void SomeMethod();
 }
