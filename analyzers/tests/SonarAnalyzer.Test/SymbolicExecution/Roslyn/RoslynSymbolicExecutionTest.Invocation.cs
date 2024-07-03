@@ -49,11 +49,9 @@ public partial class RoslynSymbolicExecutionTest
 
     [DataTestMethod]
     [DataRow("Aggregate", "(x, y) => x")]
-    //[DataRow("Any")]
     [DataRow("Append", "1")]
     [DataRow("Average")]
     [DataRow("Concat", "[]")]
-   // [DataRow("Contains", "1")]
     [DataRow("Count")]
     [DataRow("ElementAt", "1")]
     [DataRow("ElementAtOrDefault", "1")]
@@ -236,7 +234,6 @@ public partial class RoslynSymbolicExecutionTest
 
     [DataTestMethod]
     [DataRow("Count")]
-   // [DataRow("Any")]
     [DataRow("ToArray")]
     [DataRow("ToList")]
     public void Invocation_SetsNotNull_OnSourceOfLinqExtension_VB(string method)
@@ -686,10 +683,10 @@ public partial class RoslynSymbolicExecutionTest
         validator.TagValue("IfAfter").Should().HaveOnlyConstraint(dontInvalidateConstraint, "ObjectConstraint.Null is reset");
         validator.TagValue("ElseBefore").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, dontInvalidateConstraint);
         validator.TagValue("ElseAfter").Should().HaveOnlyConstraint(dontInvalidateConstraint, "ObjectConstraint.NotNull is reset");
-        validator.TagValues("AfterIfElse").Should().Equal(new[]
-        {
+        validator.TagValues("AfterIfElse").Should().Equal(
+        [
             SymbolicValue.Empty.WithConstraint(dontInvalidateConstraint),
-        });
+        ]);
     }
 
     [TestMethod]
@@ -880,8 +877,7 @@ public partial class RoslynSymbolicExecutionTest
         validator.TagValue("ExceptionChecked").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         validator.TagValues("ExceptionAfterCheck").Should().Equal(
             SymbolicValue.Empty.WithConstraint(ObjectConstraint.Null),
-            SymbolicValue.Empty.WithConstraint(ObjectConstraint.NotNull)
-        );
+            SymbolicValue.Empty.WithConstraint(ObjectConstraint.NotNull));
     }
 
     [TestMethod]
@@ -898,11 +894,10 @@ public partial class RoslynSymbolicExecutionTest
             }
             """;
         var validator = SETestContext.CreateCS(code, "string arg").Validator;
-        validator.TagValues("ArgInFinally").Should().Equal(
+        _ = validator.TagValues("ArgInFinally").Should().Equal(
             null,
             SymbolicValue.Empty.WithConstraint(ObjectConstraint.NotNull),
-            SymbolicValue.Empty.WithConstraint(ObjectConstraint.Null)   // Wrong. IsNullOrEmpty does not throw and "arg" is known to be not null.
-        );
+            SymbolicValue.Empty.WithConstraint(ObjectConstraint.Null));   // Wrong. IsNullOrEmpty does not throw and "arg" is known to be not null.
     }
 
     [DataTestMethod]
