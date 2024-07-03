@@ -894,7 +894,7 @@ public partial class RoslynSymbolicExecutionTest
             }
             """;
         var validator = SETestContext.CreateCS(code, "string arg").Validator;
-        _ = validator.TagValues("ArgInFinally").Should().Equal(
+        validator.TagValues("ArgInFinally").Should().Equal(
             null,
             SymbolicValue.Empty.WithConstraint(ObjectConstraint.NotNull),
             SymbolicValue.Empty.WithConstraint(ObjectConstraint.Null));   // Wrong. IsNullOrEmpty does not throw and "arg" is known to be not null.
