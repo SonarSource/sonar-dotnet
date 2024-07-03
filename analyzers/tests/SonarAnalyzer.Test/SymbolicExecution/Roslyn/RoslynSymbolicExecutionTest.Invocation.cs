@@ -30,17 +30,18 @@ public partial class RoslynSymbolicExecutionTest
 {
     private static IEnumerable<object[]> ThrowHelperCalls =>
         [
-            new[] { @"System.Diagnostics.Debug.Fail(""Fail"");" },
-            new[] { @"Environment.FailFast(""Fail"");" },
-            new[] { @"Environment.Exit(-1);" },
+            ["""System.Diagnostics.Debug.Fail("Fail");"""],
+            ["""Environment.FailFast("Fail");"""],
+            ["""Environment.Exit(-1);"""],
         ];
 
     [TestMethod]
     public void InstanceReference_SetsNotNull_VB()
     {
-        const string code = @"
-Dim FromMe As Sample = Me
-Tag(""Me"", FromMe)";
+        const string code = """
+            Dim FromMe As Sample = Me
+            Tag(""Me"", FromMe)
+            """;
         var validator = SETestContext.CreateVB(code).Validator;
         validator.ValidateContainsOperation(OperationKind.InstanceReference);
         validator.TagValue("Me").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
@@ -399,40 +400,41 @@ Tag(""Me"", FromMe)";
     [TestMethod]
     public void Invocation_SetsNotNullOnInstance_CS()
     {
-        const string code = @"
-public class Sample
-{
-    public void Main(Sample instanceArg, Sample extensionArg)
-    {
-        var preserve = true;
-        Sample extensionNull = null;
-        Tag(""BeforeInstance"", instanceArg);
-        Tag(""BeforeExtensionArg"", extensionArg);
-        Tag(""BeforeExtensionNull"", extensionNull);
-        Tag(""BeforePreserve"", preserve);
+        const string code = """
+            public class Sample
+            {
+                public void Main(Sample instanceArg, Sample extensionArg)
+                {
+                    var preserve = true;
+                    Sample extensionNull = null;
+                    Tag("BeforeInstance", instanceArg);
+                    Tag("BeforeExtensionArg", extensionArg);
+                    Tag("BeforeExtensionNull", extensionNull);
+                    Tag("BeforePreserve", preserve);
 
-        instanceArg.InstanceMethod();
-        extensionArg.ExtensionMethod();
-        UntrackedSymbol().InstanceMethod(); // Is not invoked on any symbol, should not fail
-        preserve.ExtensionMethod();
-        preserve.ToString();
+                    instanceArg.InstanceMethod();
+                    extensionArg.ExtensionMethod();
+                    UntrackedSymbol().InstanceMethod(); // Is not invoked on any symbol, should not fail
+                    preserve.ExtensionMethod();
+                    preserve.ToString();
 
-        Tag(""AfterInstance"", instanceArg);
-        Tag(""AfterExtensionArg"", extensionArg);
-        Tag(""AfterExtensionNull"", extensionNull);
-        Tag(""AfterPreserve"", preserve);
-    }
+                    Tag("AfterInstance", instanceArg);
+                    Tag("AfterExtensionArg", extensionArg);
+                    Tag("AfterExtensionNull", extensionNull);
+                    Tag("AfterPreserve", preserve);
+                }
 
-    private void InstanceMethod() { }
-    private static void Tag(string name, object arg) { }
-    private Sample UntrackedSymbol() => this;
-}
+                private void InstanceMethod() { }
+                private static void Tag(string name, object arg) { }
+                private Sample UntrackedSymbol() => this;
+            }
 
-public static class Extensions
-{
-    public static void ExtensionMethod(this Sample s) { }
-    public static void ExtensionMethod(this bool b) { }
-}";
+            public static class Extensions
+            {
+                public static void ExtensionMethod(this Sample s) { }
+                public static void ExtensionMethod(this bool b) { }
+            }
+        """;
         var validator = new SETestContext(code, AnalyzerLanguage.CSharp, []).Validator;
         validator.ValidateContainsOperation(OperationKind.Invocation);
         validator.TagValue("BeforeInstance").Should().BeNull();
@@ -448,41 +450,42 @@ public static class Extensions
     [TestMethod]
     public void Invocation_SetsNotNullOnInstance_VB()
     {
-        const string code = @"
-Public Class Sample
+        const string code = """
+            Public Class Sample
 
-    Public Sub Main(InstanceArg As Sample, StaticArg As Sample, ExtensionArg As Sample)
-        Tag(""BeforeInstance"", InstanceArg)
-        Tag(""BeforeStatic"", StaticArg)
-        Tag(""BeforeExtension"", ExtensionArg)
+                Public Sub Main(InstanceArg As Sample, StaticArg As Sample, ExtensionArg As Sample)
+                    Tag("BeforeInstance", InstanceArg)
+                    Tag("BeforeStatic", StaticArg)
+                    Tag("BeforeExtension", ExtensionArg)
 
-        InstanceArg.InstanceMethod()
-        StaticArg.StaticMethod()
-        ExtensionArg.ExtensionMethod()
+                    InstanceArg.InstanceMethod()
+                    StaticArg.StaticMethod()
+                    ExtensionArg.ExtensionMethod()
 
-        Tag(""AfterInstance"", InstanceArg)
-        Tag(""AfterStatic"", StaticArg)
-        Tag(""AfterExtension"", ExtensionArg)
-    End Sub
+                    Tag("AfterInstance", InstanceArg)
+                    Tag("AfterStatic", StaticArg)
+                    Tag("AfterExtension", ExtensionArg)
+                End Sub
 
-    Private Sub InstanceMethod()
-    End Sub
+                Private Sub InstanceMethod()
+                End Sub
 
-    Private Shared Sub StaticMethod()
-    End Sub
+                Private Shared Sub StaticMethod()
+                End Sub
 
-    Private Shared Sub Tag(Name As String, Arg As Object)
-    End Sub
+                Private Shared Sub Tag(Name As String, Arg As Object)
+                End Sub
 
-End Class
+            End Class
 
-Public Module Extensions
+            Public Module Extensions
 
-    <Runtime.CompilerServices.Extension>
-    Public Sub ExtensionMethod(S As Sample)
-    End Sub
+                <Runtime.CompilerServices.Extension>
+                Public Sub ExtensionMethod(S As Sample)
+                End Sub
 
-End Module";
+            End Module
+            """;
         var validator = new SETestContext(code, AnalyzerLanguage.VisualBasic, []).Validator;
         validator.ValidateContainsOperation(OperationKind.ObjectCreation);
         validator.TagValue("BeforeInstance").Should().BeNull();
@@ -510,35 +513,36 @@ End Module";
     [DataRow("((object)(IDisposable)this).SomeExtensionOnObject();")]
     public void Invocation_InstanceMethodCall_DoesClearFieldOnThis(string invocation)
     {
-        var code = $@"
-using System;
-using static Extensions;
-public class Sample: IDisposable
-{{
-    object field;
-    static object staticField;
+        var code = $$"""
+            using System;
+            using static Extensions;
+            public class Sample: IDisposable
+            {
+                object field;
+                static object staticField;
 
-    void Main()
-    {{
-        field = null;
-        staticField = null;
-        Tag(""BeforeField"", field);
-        Tag(""BeforeStaticField"", staticField);
-        {invocation}
-        Tag(""AfterField"", field);
-        Tag(""AfterStaticField"", staticField);
-    }}
+                void Main()
+                {
+                    field = null;
+                    staticField = null;
+                    Tag("BeforeField", field);
+                    Tag("BeforeStaticField", staticField);
+                    {invocation}
+                    Tag("AfterField", field);
+                    Tag("AfterStaticField", staticField);
+                }
 
-    private void Initialize() {{ }}
-    void IDisposable.Dispose() {{ }}
-}}
+                private void Initialize() { }
+                void IDisposable.Dispose() { }
+            }
 
-public static class Extensions
-{{
-    public static void SomeExtensionOnSample(this Sample sample) {{ }}
-    public static void SomeExtensionOnObject(this object obj) {{ }}
-    public static void Tag(string name, object arg) {{ }}
-}}";
+            public static class Extensions
+            {
+                public static void SomeExtensionOnSample(this Sample sample) { }
+                public static void SomeExtensionOnObject(this object obj) { }
+                public static void Tag(string name, object arg) { }
+            }
+        """;
         var validator = new SETestContext(code, AnalyzerLanguage.CSharp, []).Validator;
         validator.ValidateContainsOperation(OperationKind.Invocation);
         validator.TagValue("BeforeField").HasConstraint(ObjectConstraint.Null).Should().BeTrue();
@@ -576,13 +580,14 @@ public static class Extensions
     [DataRow("(otherInstance).InstanceMethod();")]
     public void Instance_InstanceMethodCall_DoesNotClearFieldsOnOtherInstances(string invocation)
     {
-        var code = $@"
-ObjectField = null;
-StaticObjectField = null;
-var otherInstance = new Sample();
-{invocation}
-Tag(""Field"", ObjectField);
-Tag(""StaticField"", StaticObjectField);";
+        var code = $"""
+            ObjectField = null;
+            StaticObjectField = null;
+            var otherInstance = new Sample();
+            {invocation}
+            Tag("Field", ObjectField);
+            Tag("StaticField", StaticObjectField);
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.Invocation);
         validator.TagValue("Field").Should().HaveOnlyConstraint(ObjectConstraint.Null);
@@ -594,28 +599,29 @@ Tag(""StaticField"", StaticObjectField);";
     [DataRow("(condition ? this : otherInstance).ExtensionMethod();")] // invocation with flow-capture and conversion on the receiver
     public void Instance_InstanceMethodCall_ClearsFields_Ternary(string instanceCall)
     {
-        var code = $@"
-public class Sample
-{{
-    private object ObjectField;
-    private static object StaticObjectField;
+        var code = $$"""
+            public class Sample
+            {
+                private object ObjectField;
+                private static object StaticObjectField;
 
-    public void Test(bool condition)
-    {{
-        ObjectField = null;
-        StaticObjectField = null;
-        var otherInstance = new Sample();
-        {instanceCall}
-        Extensions.Tag(""End"");
-    }}
+                public void Test(bool condition)
+                {
+                    ObjectField = null;
+                    StaticObjectField = null;
+                    var otherInstance = new Sample();
+                    {{instanceCall}}
+                    Extensions.Tag("End");
+                }
 
-    public void InstanceMethod() {{ }}
-}}
-public static class Extensions
-{{
-    public static void ExtensionMethod(this object o) {{ }}
-    public static void Tag(string name) {{ }}
-}}";
+                public void InstanceMethod() { }
+            }
+            public static class Extensions
+            {
+                public static void ExtensionMethod(this object o) {{ }}
+                public static void Tag(string name) {{ }}
+            }
+            """;
         var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
         validator.ValidateContainsOperation(OperationKind.Invocation);
         validator.ValidateContainsOperation(OperationKind.FlowCapture);
@@ -641,28 +647,29 @@ public static class Extensions
     [TestMethod]
     public void Instance_InstanceMethodCall_ClearsFieldInConsistentManner()
     {
-        var code = $@"
-ObjectField = null;
-Tag(""InitNull"", ObjectField);
-InstanceMethod();
-Tag(""AfterInvocationNull"", ObjectField);
-ObjectField = new object();
-Tag(""InitNotNull"", ObjectField);
-InstanceMethod();
-Tag(""AfterInvocationNotNull"", ObjectField);
-if (ObjectField == null)
-{{
-    Tag(""IfBefore"", ObjectField);
-    InstanceMethod();
-    Tag(""IfAfter"", ObjectField);
-}}
-else
-{{
-    Tag(""ElseBefore"", ObjectField);
-    InstanceMethod();
-    Tag(""ElseAfter"", ObjectField);
-}}
-Tag(""AfterIfElse"", ObjectField);";
+        var code = """
+            ObjectField = null;
+            Tag("InitNull", ObjectField);
+            InstanceMethod();
+            Tag("AfterInvocationNull", ObjectField);
+            ObjectField = new object();
+            Tag("InitNotNull", ObjectField);
+            InstanceMethod();
+            Tag("AfterInvocationNotNull", ObjectField);
+            if (ObjectField == null)
+            {
+                Tag("IfBefore", ObjectField);
+                InstanceMethod();
+                Tag(""IfAfter"", ObjectField);
+            }
+            else
+            {
+                Tag("ElseBefore"", ObjectField);
+                InstanceMethod();
+                Tag("ElseAfter", ObjectField);
+            }
+            Tag(""AfterIfElse"", ObjectField);
+            """;
         var invalidateConstraint = DummyConstraint.Dummy;
         var dontInvalidateConstraint = LockConstraint.Held;
         var check = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKindEx.SimpleAssignment
@@ -688,12 +695,13 @@ Tag(""AfterIfElse"", ObjectField);";
     [TestMethod]
     public void Instance_InstanceMethodCall_ClearsField()
     {
-        var code = $@"
-if (this.ObjectField == null)
-{{
-    this.InstanceMethod(StaticObjectField == null ? 1 : 0);
-}}
-Tag(""After"", this.ObjectField);";
+        var code = """
+            if (this.ObjectField == null)
+            {
+                this.InstanceMethod(StaticObjectField == null ? 1 : 0);
+            }
+            Tag("After", this.ObjectField);
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.TagValues("After").Should().Equal(
             SymbolicValue.Empty.WithConstraint(ObjectConstraint.NotNull),
@@ -703,10 +711,11 @@ Tag(""After"", this.ObjectField);";
     [TestMethod]
     public void Instance_InstanceMethodCall_ClearsFieldWithBranchInArgument()
     {
-        var code = $@"
-this.ObjectField = null;
-this.InstanceMethod(boolParameter ? 1 : 0);
-Tag(""After"", this.ObjectField);";
+        var code = """
+            this.ObjectField = null;
+            this.InstanceMethod(boolParameter ? 1 : 0);
+            Tag("After", this.ObjectField);
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.TagValue("After").Should().BeNull();
     }
@@ -714,66 +723,67 @@ Tag(""After"", this.ObjectField);";
     [TestMethod]
     public void Invocation_StaticMethodCall_ClearsField()
     {
-        var code = @"
-public class Sample: Base
-{
-    public static object SampleField1;
-    public static object SampleField2;
+        var code = """
+            public class Sample: Base
+            {
+                public static object SampleField1;
+                public static object SampleField2;
 
-    public static void SampleMethod()
-    {
-        Base.BaseField = null;
-        Other.OtherField = null;
-        Sample.SampleField1 = null;
-        Sample.SampleField2 = null;
-        Tagger.Tag(""Start_Base_BaseField"", BaseField);
-        Tagger.Tag(""Start_Other_OtherField"", Other.OtherField);
-        Tagger.Tag(""Start_Sample_SampleField1"", SampleField1);
-        Tagger.Tag(""Start_Sample_SampleField2"", SampleField2);
+                public static void SampleMethod()
+                {
+                    Base.BaseField = null;
+                    Other.OtherField = null;
+                    Sample.SampleField1 = null;
+                    Sample.SampleField2 = null;
+                    Tagger.Tag("Start_Base_BaseField", BaseField);
+                    Tagger.Tag("Start_Other_OtherField", Other.OtherField);
+                    Tagger.Tag("Start_Sample_SampleField1", SampleField1);
+                    Tagger.Tag("Start_Sample_SampleField2", SampleField2);
 
-        SampleMethod();
-        Tagger.Tag(""SampleMethod_Base_BaseField"", BaseField);
-        Tagger.Tag(""SampleMethod_Other_OtherField"", Other.OtherField);
-        Tagger.Tag(""SampleMethod_Sample_SampleField1"", SampleField1);
-        Tagger.Tag(""SampleMethod_Sample_SampleField2"", SampleField2);
+                    SampleMethod();
+                    Tagger.Tag("SampleMethod_Base_BaseField", BaseField);
+                    Tagger.Tag("SampleMethod_Other_OtherField", Other.OtherField);
+                    Tagger.Tag("SampleMethod_Sample_SampleField1", SampleField1);
+                    Tagger.Tag("SampleMethod_Sample_SampleField2", SampleField2);
 
-        Base.BaseField = null;
-        Other.OtherField = null;
-        Sample.SampleField1 = null;
-        Sample.SampleField2 = null;
-        Other.OtherMethod();
-        Tagger.Tag(""OtherMethod_Base_BaseField"", BaseField);
-        Tagger.Tag(""OtherMethod_Other_OtherField"", Other.OtherField);
-        Tagger.Tag(""OtherMethod_Sample_SampleField1"", SampleField1);
-        Tagger.Tag(""OtherMethod_Sample_SampleField2"", SampleField2);
+                    Base.BaseField = null;
+                    Other.OtherField = null;
+                    Sample.SampleField1 = null;
+                    Sample.SampleField2 = null;
+                    Other.OtherMethod();
+                    Tagger.Tag("OtherMethod_Base_BaseField", BaseField);
+                    Tagger.Tag("OtherMethod_Other_OtherField", Other.OtherField);
+                    Tagger.Tag("OtherMethod_Sample_SampleField1", SampleField1);
+                    Tagger.Tag("OtherMethod_Sample_SampleField2", SampleField2);
 
-        Base.BaseField = null;
-        Other.OtherField = null;
-        Sample.SampleField1 = null;
-        Sample.SampleField2 = null;
-        BaseMethod();
-        Tagger.Tag(""BaseMethod_Base_BaseField"", BaseField);
-        Tagger.Tag(""BaseMethod_Other_OtherField"", Other.OtherField);
-        Tagger.Tag(""BaseMethod_Sample_SampleField1"", SampleField1);
-        Tagger.Tag(""BaseMethod_Sample_SampleField2"", SampleField2);
-    }
-}
+                    Base.BaseField = null;
+                    Other.OtherField = null;
+                    Sample.SampleField1 = null;
+                    Sample.SampleField2 = null;
+                    BaseMethod();
+                    Tagger.Tag("BaseMethod_Base_BaseField", BaseField);
+                    Tagger.Tag("BaseMethod_Other_OtherField", Other.OtherField);
+                    Tagger.Tag("BaseMethod_Sample_SampleField1", SampleField1);
+                    Tagger.Tag("BaseMethod_Sample_SampleField2", SampleField2);
+                }
+            }
 
-public static class Tagger
-{
-    public static void Tag<T>(string name, T value) { }
-}
+            public static class Tagger
+            {
+                public static void Tag<T>(string name, T value) { }
+            }
 
-public class Base
-{
-    protected static object BaseField;
-    public static void BaseMethod() { }
-}
-public class Other
-{
-    public static object OtherField;
-    public static void OtherMethod() { }
-}";
+            public class Base
+            {
+                protected static object BaseField;
+                public static void BaseMethod() { }
+            }
+            public class Other
+            {
+                public static object OtherField;
+                public static void OtherMethod() { }
+            }
+            """;
         var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
         validator.TagValue("Start_Base_BaseField").HasConstraint(ObjectConstraint.Null).Should().BeTrue();
         validator.TagValue("Start_Other_OtherField").HasConstraint(ObjectConstraint.Null).Should().BeTrue();
@@ -804,14 +814,15 @@ public class Other
     [DataRow("Sample.StaticMethod();")]
     public void Invocation_StaticMethodCall_DoesNotClearInstanceFields(string invocation)
     {
-        var code = $@"
-ObjectField = null;
-StaticObjectField = null;
-Tag(""BeforeField"", ObjectField);
-Tag(""BeforeStaticField"", StaticObjectField);
-{invocation}
-Tag(""AfterField"", ObjectField);
-Tag(""AfterStaticField"", StaticObjectField);";
+        var code = $"""
+            ObjectField = null;
+            StaticObjectField = null;
+            Tag("BeforeField", ObjectField);
+            Tag("BeforeStaticField", StaticObjectField);
+            {invocation}
+            Tag("AfterField", ObjectField);
+            Tag("AfterStaticField", StaticObjectField);
+""";
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.Invocation);
         validator.TagValue("BeforeField").Should().HaveOnlyConstraint(ObjectConstraint.Null);
@@ -823,26 +834,27 @@ Tag(""AfterStaticField"", StaticObjectField);";
     [TestMethod]
     public void Invocation_IsNullOrEmpty_ValidateOrder()
     {
-        var validator = SETestContext.CreateCS(@"var isNullOrEmpy = string.IsNullOrEmpty(arg);", "string arg").Validator;
+        var validator = SETestContext.CreateCS("var isNullOrEmpy = string.IsNullOrEmpty(arg);", "string arg").Validator;
         validator.ValidateOrder(
-"LocalReference: isNullOrEmpy = string.IsNullOrEmpty(arg) (Implicit)",
-"ParameterReference: arg",
-"Argument: arg",
-"Invocation: string.IsNullOrEmpty(arg)", // True/Null
-"Invocation: string.IsNullOrEmpty(arg)", // True/NotNull
-"Invocation: string.IsNullOrEmpty(arg)", // False/NotNull
-"SimpleAssignment: isNullOrEmpy = string.IsNullOrEmpty(arg) (Implicit)",  // True/Null
-"SimpleAssignment: isNullOrEmpy = string.IsNullOrEmpty(arg) (Implicit)",  // True/NotNull
-"SimpleAssignment: isNullOrEmpy = string.IsNullOrEmpty(arg) (Implicit)"); // False/NotNull
+            "LocalReference: isNullOrEmpy = string.IsNullOrEmpty(arg) (Implicit)",
+            "ParameterReference: arg",
+            "Argument: arg",
+            "Invocation: string.IsNullOrEmpty(arg)", // True/Null
+            "Invocation: string.IsNullOrEmpty(arg)", // True/NotNull
+            "Invocation: string.IsNullOrEmpty(arg)", // False/NotNull
+            "SimpleAssignment: isNullOrEmpy = string.IsNullOrEmpty(arg) (Implicit)",  // True/Null
+            "SimpleAssignment: isNullOrEmpy = string.IsNullOrEmpty(arg) (Implicit)",  // True/NotNull
+            "SimpleAssignment: isNullOrEmpy = string.IsNullOrEmpty(arg) (Implicit)"); // False/NotNull
     }
 
     [TestMethod]
     public void Invocation_IsNullOrEmpty_Tags()
     {
-        const string code = @"
-var isNullOrEmpy = string.IsNullOrEmpty(arg);
-Tag(""IsNullOrEmpy"", isNullOrEmpy);
-Tag(""Arg"", arg);";
+        const string code = """
+            var isNullOrEmpy = string.IsNullOrEmpty(arg);
+            Tag("IsNullOrEmpy", isNullOrEmpy);
+            Tag("Arg", arg);
+            """;
         var validator = SETestContext.CreateCS(code, "string arg").Validator;
         validator.TagValues("IsNullOrEmpy").Should().Equal(
             SymbolicValue.NotNull.WithConstraint(BoolConstraint.False),      // False/NotNull
@@ -857,40 +869,40 @@ Tag(""Arg"", arg);";
     [TestMethod]
     public void Invocation_IsNullOrEmpty_NestedProperty()
     {
-        const string code = @"
-if (!string.IsNullOrEmpty(exception?.Message))
-{
-    Tag(""ExceptionChecked"", exception);
-}
-Tag(""ExceptionAfterCheck"", exception);";
+        const string code = """
+            if (!string.IsNullOrEmpty(exception?.Message))
+            {
+                Tag("ExceptionChecked", exception);
+            }
+            Tag("ExceptionAfterCheck", exception);
+            """;
         var validator = SETestContext.CreateCS(code, "InvalidOperationException exception").Validator;
         validator.TagValue("ExceptionChecked").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValues("ExceptionAfterCheck").Should().Equal(new[]
-        {
+        validator.TagValues("ExceptionAfterCheck").Should().Equal(
             SymbolicValue.Empty.WithConstraint(ObjectConstraint.Null),
             SymbolicValue.Empty.WithConstraint(ObjectConstraint.NotNull)
-        });
+        );
     }
 
     [TestMethod]
     public void Invocation_IsNullOrEmpty_TryFinally()
     {
-        const string code = @"
-try
-{
-    if (string.IsNullOrEmpty(arg)) return;
-}
-finally
-{
-    Tag(""ArgInFinally"", arg);
-}";
+        const string code = """
+            try
+            {
+                if (string.IsNullOrEmpty(arg)) return;
+            }
+            finally
+            {
+                Tag("ArgInFinally", arg);
+            }
+            """;
         var validator = SETestContext.CreateCS(code, "string arg").Validator;
-        validator.TagValues("ArgInFinally").Should().Equal(new[]
-        {
+        validator.TagValues("ArgInFinally").Should().Equal(
             null,
             SymbolicValue.Empty.WithConstraint(ObjectConstraint.NotNull),
             SymbolicValue.Empty.WithConstraint(ObjectConstraint.Null)   // Wrong. IsNullOrEmpty does not throw and "arg" is known to be not null.
-        });
+        );
     }
 
     [DataTestMethod]
@@ -940,9 +952,10 @@ finally
 #endif
     public void Invocation_LinqEnumerableAndQueryable_NotNull(string expression)
     {
-        var code = $@"
-var value = {expression};
-Tag(""Value"", value);";
+        var code = $"""
+            var value = {expression};
+            Tag(""Value"", value);
+            """;
         var enumerableValidator = SETestContext.CreateCS(code, "IEnumerable<object> arg").Validator;
         enumerableValidator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
 
@@ -956,9 +969,10 @@ Tag(""Value"", value);";
     [DataRow("SingleOrDefault();")]
     public void Invocation_LinqEnumerableAndQueryable_NullOrNotNull(string expression)
     {
-        var code = $@"
-var value = arg.{expression};
-Tag(""Value"", value);";
+        var code = $"""
+            var value = arg.{expression};
+            Tag("Value", value);
+            """;
         var enumerableValidator = SETestContext.CreateCS(code, $"IEnumerable<object> arg").Validator;
         enumerableValidator.TagValues("Value").Should().HaveCount(2)
             .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
@@ -978,9 +992,10 @@ Tag(""Value"", value);";
     [DataRow("SingleOrDefault();")]
     public void Invocation_LinqEnumerable_Unknown_Int(string expression)
     {
-        var code = $@"
-var value = arg.{expression};
-Tag(""Value"", value);";
+        var code = $"""
+            var value = arg.{expression};
+            Tag(""Value"", value);
+            """;
         var validator = SETestContext.CreateCS(code, $"IEnumerable<int> arg").Validator;
         validator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
@@ -990,9 +1005,10 @@ Tag(""Value"", value);";
     [DataRow("ElementAtOrDefault(42);")]
     public void Invocation_LinqEnumerable_Unknown_Object(string expression)
     {
-        var code = $@"
-var value = arg.{expression};
-Tag(""Value"", value);";
+        var code = $"""
+            var value = arg.{expression};
+            Tag(""Value"", value);
+            """;
         var validator = SETestContext.CreateCS(code, $"IEnumerable<object> arg").Validator;
         validator.TagValue("Value").Should().BeNull();
     }
@@ -1050,12 +1066,13 @@ Tag(""Value"", value);";
     [TestMethod]
     public void Invocation_Linq_VB()
     {
-        const string code = @"
-Dim Query = From Item In Items Where Item IsNot Nothing
-If Query.Count <> 0 Then
-    Dim Value = Query(0)
-    Tag(""Value"", Value)
-End If";
+        const string code = """
+            Dim Query = From Item In Items Where Item IsNot Nothing
+            If Query.Count <> 0 Then
+                Dim Value = Query(0)
+                Tag(""Value"", Value)
+            End If
+            """;
         var validator = SETestContext.CreateVB(code, "Items() As Object").Validator;
         validator.TagValue("Value").Should().BeNull();
     }
@@ -1119,12 +1136,13 @@ End If";
     [DataRow("T = Nothing", false)]
     public void Invocation_InformationIsNothing_KnownSymbol(string declarationSuffix, bool expected)
     {
-        var code = $@"
-Public Sub Main(Of T, TStruct As Structure)()
-    Dim Value As {declarationSuffix}
-    Dim Result As Boolean = IsNothing(CType(DirectCast(Value, Object), Object)) ' Some conversions in the way to detect the value type
-    Tag(""Result"", Result)
-End Sub";
+        var code = $"""
+            Public Sub Main(Of T, TStruct As Structure)()
+                Dim Value As {declarationSuffix}
+                Dim Result As Boolean = IsNothing(CType(DirectCast(Value, Object), Object)) ' Some conversions in the way to detect the value type
+                Tag(""Result"", Result)
+            End Sub
+            """;
         var validator = SETestContext.CreateVBMethod(code).Validator;
         validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expected));
     }
@@ -1136,11 +1154,12 @@ End Sub";
     [DataRow("TClass")]
     public void Invocation_InformationIsNothing_UnknownSymbol(string type)
     {
-        var code = @$"
-Public Sub Main(Of TClass As Class)(Arg As {type})
-    Dim Result As Boolean = IsNothing(Arg)
-    Tag(""Result"", Result)
-End Sub";
+        var code = $"""
+            Public Sub Main(Of TClass As Class)(Arg As {type})
+                Dim Result As Boolean = IsNothing(Arg)
+                Tag(""Result"", Result)
+            End Sub
+            """;
         var validator = SETestContext.CreateVBMethod(code).Validator;
         var argSymbol = validator.Symbol("Arg");
         var resultSymbol = validator.Symbol("Result");
@@ -1152,9 +1171,10 @@ End Sub";
     [TestMethod]
     public void Invocation_InformationIsNothing_NoTrackedSymbol()
     {
-        var code = $@"
-Dim Result As Boolean = IsNothing(Arg.ToString())
-Tag(""Result"", Result)";
+        var code = $"""
+            Dim Result As Boolean = IsNothing(Arg.ToString())
+            Tag("Result", Result)
+            """;
         var validator = SETestContext.CreateVB(code, "Arg As Object").Validator;
         validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
@@ -1188,10 +1208,11 @@ Tag(""Result"", Result)";
     [TestMethod]
     public void Invocation_DebugAssert_LearnsNotNullForAll_AndAlso()
     {
-        var code = $@"
-Debug.Assert(arg1 != null && arg2 != null);
-Tag(""Arg1"", arg1);
-Tag(""Arg2"", arg2);";
+        var code = """
+            Debug.Assert(arg1 != null && arg2 != null);
+            Tag("Arg1", arg1);
+            Tag("Arg2", arg2);
+            """;
         var validator = SETestContext.CreateCS(code, $"object arg1, object arg2").Validator;
         validator.TagValue("Arg1").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         validator.TagValue("Arg2").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
@@ -1230,27 +1251,28 @@ Tag(""Arg2"", arg2);";
     [TestMethod]
     public void Invocation_DebugAssert_CustomNoParameters_DoesNotFail()
     {
-        const string code = @"
-using System.Diagnostics;
+        const string code = """
+            using System.Diagnostics;
 
-public class Sample
-{
-    public void Main()
-    {
-        Debug.Assert();
-        Tag(""End"");
-    }
+            public class Sample
+            {
+                public void Main()
+                {
+                    Debug.Assert();
+                    Tag("End");
+                }
 
-    private static void Tag(string name) { }
-}
+                private static void Tag(string name) { }
+            }
 
-namespace System.Diagnostics
-{
-    public static class Debug
-    {
-        public static void Assert() { }
-    }
-}";
+            namespace System.Diagnostics
+            {
+                public static class Debug
+                {
+                    public static void Assert() { }
+                }
+            }
+            """;
         new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator.ValidateTagOrder("End");
     }
 
@@ -1266,22 +1288,15 @@ namespace System.Diagnostics
     public void Invocation_DebugAssert_NullableHasValue_Binary(string argType) =>
         DebugAssertValues("arg.HasValue == true", argType).Should().SatisfyRespectively(x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
 
-    private static SymbolicValue[] DebugAssertValues(string expression, string argType = "object")
-    {
-        var code = $@"
-Debug.Assert({expression});
-Tag(""Arg"", arg);";
-        return SETestContext.CreateCS(code, $"{argType} arg, bool condition").Validator.TagValues("Arg");
-    }
-
     [DataTestMethod]
     [DynamicData(nameof(ThrowHelperCalls))]
     public void Invocation_ThrowHelper_StopProcessing(string throwHelperCall)
     {
-        var code = $@"
-Tag(""Before"");
-{throwHelperCall}
-Tag(""Unreachable"");";
+        var code = $$"""
+            Tag("Before");
+            {{throwHelperCall}}
+            Tag("Unreachable");
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateTagOrder("Before");
         validator.ValidateExitReachCount(0);
@@ -1292,14 +1307,15 @@ Tag(""Unreachable"");";
     [DynamicData(nameof(ThrowHelperCalls))]
     public void Invocation_ThrowHelper_OnlyInBranch(string throwHelperCall)
     {
-        var code = @$"
-if (condition)
-{{
-    Tag(""Before"");
-    {throwHelperCall}
-    Tag(""Unreachable"");
-}}
-Tag(""End"");";
+        var code = $$"""
+            if (condition)
+            {
+                Tag("Before");
+                {{throwHelperCall}}
+                Tag("Unreachable");
+            }
+            Tag("End");
+            """;
         var validator = SETestContext.CreateCS(code, "bool condition").Validator;
         validator.ValidateTagOrder("Before", "End");
         validator.ValidateExitReachCount(1);
@@ -1310,21 +1326,22 @@ Tag(""End"");";
     [DynamicData(nameof(ThrowHelperCalls))]
     public void Invocation_ThrowHelper_TryCatchFinally(string throwHelperCall)
     {
-        var code = @$"
-try
-{{
-    {throwHelperCall}
-    Tag(""Unreachable"");
-}}
-catch
-{{
-    Tag(""Catch"");
-}}
-finally
-{{
-    Tag(""Finally"");
-}}
-Tag(""End"");";
+        var code = $$"""
+            try
+            {
+                {{throwHelperCall}}
+                Tag("Unreachable");
+            }
+            catch
+            {
+                Tag("Catch");
+            }
+            finally
+            {
+                Tag("Finally");
+            }
+            Tag("End");
+            """;
         var validator = SETestContext.CreateCS(code, "bool condition").Validator;
         validator.ValidateTagOrder("Catch", "Finally", "Finally", "End");
         validator.ValidateExitReachCount(2);
@@ -1334,9 +1351,10 @@ Tag(""End"");";
     [TestMethod]
     public void Invocation_TargetMethodIsDelegateInvoke()
     {
-        var code = @"
-Func<Action> f = () => new Action(()=> { });
-f()();";
+        var code = """
+            Func<Action> f = () => new Action(()=> { });
+            f()();
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKindEx.Invocation);
         validator.ValidateExitReachCount(1);
@@ -1353,13 +1371,14 @@ f()();";
     [DataRow("new char?()", "'x'", false, ConstraintKind.Null, ConstraintKind.NotNull)]
     public void Invocation_ObjectEquals_LearnResult(string left, string right, bool expectedResult, ConstraintKind expectedConstraintLeft, ConstraintKind expectedConstraintRight)
     {
-        var code = $@"
-object left = {left};
-object right = {right};
-var result = object.Equals(left, right);
-Tag(""Result"", result);
-Tag(""Left"", left);
-Tag(""Right"", right);";
+        var code = $"""
+            object left = {left};
+            object right = {right};
+            var result = object.Equals(left, right);
+            Tag("Result", result);
+            Tag("Left", left);
+            Tag("Right", right);
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedResult));
         validator.TagValue("Left").AllConstraints.Should().ContainSingle().Which.Kind.Should().Be(expectedConstraintLeft);
@@ -1372,11 +1391,12 @@ Tag(""Right"", right);";
     [DataRow("null", "(bool?)true", false)]
     public void Invocation_ObjectEqualsMixedNullObjectArguments_LearnResult(string left, string right, bool expectedResult)
     {
-        var code = $@"
-object left = {left};
-object right = {right};
-var result = object.Equals(left, right);
-Tag(""Result"", result);";
+        var code = $"""
+            object left = {left};
+            object right = {right};
+            var result = object.Equals(left, right);
+            Tag("Result", result);
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedResult));
     }
@@ -1391,11 +1411,12 @@ Tag(""Result"", result);";
     [DataRow("(bool?)true", "new object()")]
     public void Invocation_ObjectEquals_DoesNotLearnResult(string left, string right)
     {
-        var code = $@"
-object left = {left};
-object right = {right};
-var result = object.Equals(left, right);
-Tag(""Result"", result);";
+        var code = $"""
+            object left = {left};
+            object right = {right};
+            var result = object.Equals(left, right);
+            Tag(""Result"", result);
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
@@ -1407,9 +1428,10 @@ Tag(""Result"", result);";
     [DataRow("arg", "null", "int?")]
     public void Invocation_ObjectEquals_SplitsToBothResults(string left, string right, string argType)
     {
-        var code = $@"
-var result = object.Equals({left}, {right});
-Tag(""End"");";
+        var code = $"""
+            var result = object.Equals({left}, {right});
+            Tag("End");
+            """;
         var validator = SETestContext.CreateCS(code, $"{argType} arg").Validator;
         var result = validator.Symbol("result");
         var arg = validator.Symbol("arg");
@@ -1485,24 +1507,25 @@ Tag(""End"");";
     [TestMethod]
     public void Invocation_Equals_CustomSignatures_NotSupported()
     {
-        const string code = @"
-public void Main()
-{
-    var instanceOne = Equals(null);
-    var instanceTwo = Equals(null, null);
-    var noArgs = Equals();
-    var moreArgs = Equals(null, null, null);
+        const string code = """
+            public void Main()
+            {
+                var instanceOne = Equals(null);
+                var instanceTwo = Equals(null, null);
+                var noArgs = Equals();
+                var moreArgs = Equals(null, null, null);
 
-    Tag(""InstanceOne"", instanceOne);
-    Tag(""InstanceTwo"", instanceTwo);
-    Tag(""NoArgs"", noArgs);
-    Tag(""MoreArgs"", moreArgs);
-}
+                Tag("InstanceOne", instanceOne);
+                Tag("InstanceTwo", instanceTwo);
+                Tag("NoArgs", noArgs);
+                Tag("MoreArgs", moreArgs);
+            }
 
-private bool Equals(object a) => false;
-private bool Equals(object a, object b) => false;
-private static bool Equals() => false;
-private static bool Equals(object a, object b, object c) => false;";
+            private bool Equals(object a) => false;
+            private bool Equals(object a, object b) => false;
+            private static bool Equals() => false;
+            private static bool Equals(object a, object b, object c) => false;
+            """;
         var validator = SETestContext.CreateCSMethod(code).Validator;
         validator.TagValue("InstanceOne").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         validator.TagValue("InstanceTwo").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
@@ -1787,20 +1810,19 @@ private static bool Equals(object a, object b, object c) => false;";
     public void Invocation_EnumerableCount_SetsNumberConstraint()
     {
         const string code = """
-                var x = list.Count();
-                Tag("Before", x);
+            var x = list.Count();
+            Tag("Before", x);
 
-                list.Clear();
-                x = list.Count();
-                Tag("Clear", x);
+            list.Clear();
+            x = list.Count();
+            Tag("Clear", x);
 
-                list.Add(42);
-                x = list.Count();
-                Tag("Add", x);
+            list.Add(42);
+            x = list.Count();
+            Tag("Add", x);
 
-                x = list.Count(_ => true);
-                Tag("Predicate", x);
-
+            x = list.Count(_ => true);
+            Tag("Predicate", x);
             """;
         var validator = SETestContext.CreateCS(code, "List<int> list").Validator;
         validator.ValidateContainsOperation(OperationKind.Invocation);
@@ -1815,18 +1837,18 @@ private static bool Equals(object a, object b, object c) => false;";
     public void Invocation_CollectionMethods_SetCollectionConstraint()
     {
         const string code = """
-                var tag = "before";
+            var tag = "before";
 
-                list.Clear();
-                tag = "clear";
+            list.Clear();
+            tag = "clear";
 
-                list.Add(42);
-                tag = "add";
+            list.Add(42);
+            tag = "add";
 
-                list.RemoveAt(0);
-                tag = "remove";
+            list.RemoveAt(0);
+            tag = "remove";
 
-                void Invoke(Action<int> action) { }
+            void Invoke(Action<int> action) { }
             """;
         var validator = SETestContext.CreateCS(code, "List<int> list", new PreserveTestCheck("list")).Validator;
         validator.ValidateContainsOperation(OperationKind.Invocation);
@@ -1844,15 +1866,15 @@ private static bool Equals(object a, object b, object c) => false;";
     public void Invocation_CollectionArgument_RemovesCollectionConstraint()
     {
         const string code = """
-                var tag = "before";
+            var tag = "before";
 
-                list.Add(42);
-                tag = "add";
+            list.Add(42);
+            tag = "add";
 
-                Use(list);
-                tag = "argument";
+            Use(list);
+            tag = "argument";
 
-                void Use(List<int> arg) { }
+            void Use(List<int> arg) { }
             """;
         var validator = SETestContext.CreateCS(code, "List<int> list", new PreserveTestCheck("list")).Validator;
         validator.ValidateContainsOperation(OperationKind.Argument);
@@ -1893,5 +1915,14 @@ private static bool Equals(object a, object b, object c) => false;";
 
         void Verify(string state, params SymbolicConstraint[] constraints) =>
             validator.TagValue(state, "list").Should().HaveOnlyConstraints(constraints);
+    }
+
+    private static SymbolicValue[] DebugAssertValues(string expression, string argType = "object")
+    {
+        var code = $"""
+            Debug.Assert({expression});
+            Tag("Arg", arg);
+            """;
+        return SETestContext.CreateCS(code, $"{argType} arg, bool condition").Validator.TagValues("Arg");
     }
 }

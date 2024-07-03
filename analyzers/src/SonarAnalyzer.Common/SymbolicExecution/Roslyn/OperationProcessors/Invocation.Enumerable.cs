@@ -18,15 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Runtime.CompilerServices;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal sealed partial class Invocation
 {
-    private static readonly HashSet<string> ReturningNotNull = new()
-    {
+    private static readonly HashSet<string> ReturningNotNull =
+    [
         nameof(Enumerable.Append),
         nameof(Enumerable.AsEnumerable),
         nameof(Queryable.AsQueryable),
@@ -70,7 +69,7 @@ internal sealed partial class Invocation
         "UnionBy",
         nameof(Enumerable.Where),
         nameof(Enumerable.Zip),
-    };
+    ];
 
     private static readonly HashSet<string> BoolCollectionMethods =
     [
@@ -109,7 +108,8 @@ internal sealed partial class Invocation
             return state[instanceSymbol]?.Constraint<CollectionConstraint>() switch
             {
                 CollectionConstraint constraint when constraint == CollectionConstraint.Empty => state.SetOperationConstraint(invocation, BoolConstraint.False).ToArray(),
-                CollectionConstraint constraint when constraint == CollectionConstraint.NotEmpty => state.SetOperationConstraint(invocation, BoolConstraint.True).ToArray(),
+                CollectionConstraint constraint when constraint == CollectionConstraint.NotEmpty && HasNoParameters(invocation.TargetMethod) =>
+                    state.SetOperationConstraint(invocation, BoolConstraint.True).ToArray(),
                 _ when HasNoParameters(invocation.TargetMethod) =>
                 [
                     state.SetOperationConstraint(invocation, BoolConstraint.True).SetSymbolConstraint(instanceSymbol, CollectionConstraint.NotEmpty),
