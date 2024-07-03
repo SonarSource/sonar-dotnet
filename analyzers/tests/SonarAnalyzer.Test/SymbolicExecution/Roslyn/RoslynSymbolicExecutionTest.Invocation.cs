@@ -40,7 +40,7 @@ public partial class RoslynSymbolicExecutionTest
     {
         const string code = """
             Dim FromMe As Sample = Me
-            Tag(""Me"", FromMe)
+            Tag("Me", FromMe)
             """;
         var validator = SETestContext.CreateVB(code).Validator;
         validator.ValidateContainsOperation(OperationKind.InstanceReference);
@@ -527,7 +527,7 @@ public partial class RoslynSymbolicExecutionTest
                     staticField = null;
                     Tag("BeforeField", field);
                     Tag("BeforeStaticField", staticField);
-                    {invocation}
+                    {{invocation}}
                     Tag("AfterField", field);
                     Tag("AfterStaticField", staticField);
                 }
@@ -618,8 +618,8 @@ public partial class RoslynSymbolicExecutionTest
             }
             public static class Extensions
             {
-                public static void ExtensionMethod(this object o) {{ }}
-                public static void Tag(string name) {{ }}
+                public static void ExtensionMethod(this object o) { }
+                public static void Tag(string name) { }
             }
             """;
         var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
@@ -660,15 +660,15 @@ public partial class RoslynSymbolicExecutionTest
             {
                 Tag("IfBefore", ObjectField);
                 InstanceMethod();
-                Tag(""IfAfter"", ObjectField);
+                Tag("IfAfter", ObjectField);
             }
             else
             {
-                Tag("ElseBefore"", ObjectField);
+                Tag("ElseBefore", ObjectField);
                 InstanceMethod();
                 Tag("ElseAfter", ObjectField);
             }
-            Tag(""AfterIfElse"", ObjectField);
+            Tag("AfterIfElse", ObjectField);
             """;
         var invalidateConstraint = DummyConstraint.Dummy;
         var dontInvalidateConstraint = LockConstraint.Held;
@@ -822,7 +822,7 @@ public partial class RoslynSymbolicExecutionTest
             {invocation}
             Tag("AfterField", ObjectField);
             Tag("AfterStaticField", StaticObjectField);
-""";
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.Invocation);
         validator.TagValue("BeforeField").Should().HaveOnlyConstraint(ObjectConstraint.Null);
@@ -954,7 +954,7 @@ public partial class RoslynSymbolicExecutionTest
     {
         var code = $"""
             var value = {expression};
-            Tag(""Value"", value);
+            Tag("Value", value);
             """;
         var enumerableValidator = SETestContext.CreateCS(code, "IEnumerable<object> arg").Validator;
         enumerableValidator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
@@ -994,7 +994,7 @@ public partial class RoslynSymbolicExecutionTest
     {
         var code = $"""
             var value = arg.{expression};
-            Tag(""Value"", value);
+            Tag("Value", value);
             """;
         var validator = SETestContext.CreateCS(code, $"IEnumerable<int> arg").Validator;
         validator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
@@ -1007,16 +1007,16 @@ public partial class RoslynSymbolicExecutionTest
     {
         var code = $"""
             var value = arg.{expression};
-            Tag(""Value"", value);
+            Tag("Value", value);
             """;
         var validator = SETestContext.CreateCS(code, $"IEnumerable<object> arg").Validator;
         validator.TagValue("Value").Should().BeNull();
     }
 
     [TestMethod]
-    public void Invocation_LinqEnumerable_AnyNoParameters()
+    public void Invocation_BoolCollectionMethod_NoParameters_NoConstrains()
     {
-        var code = $"""
+        var code = """
             var value = collection.Any();
             Tag("Value", value);
             """;
@@ -1028,11 +1028,72 @@ public partial class RoslynSymbolicExecutionTest
             .And.ContainSingle(x => x[collectionSymbol].HasConstraint(CollectionConstraint.Empty) && x[valueSymbol].HasConstraint(BoolConstraint.False));
     }
 
+    [TestMethod]
+    public void Invocation_BoolCollectionMethod_NoParameters_CollectionEmpty()
+    {
+        var code = """
+            collection.Clear();
+            var value = collection.Any();
+            Tag("Value", value);
+            """;
+        var enumerableValidator = SETestContext.CreateCS(code, $"List<int> collection").Validator;
+        var collectionSymbol = enumerableValidator.Symbol("collection");
+        var valueSymbol = enumerableValidator.Symbol("value");
+        enumerableValidator.TagStates("Value").Should().HaveCount(1)
+            .And.ContainSingle(x => x[collectionSymbol].HasConstraint(CollectionConstraint.Empty) && x[valueSymbol].HasConstraint(BoolConstraint.False));
+    }
+
+    [TestMethod]
+    public void Invocation_BoolCollectionMethod_NoParameters_CollectionNotEmpty()
+    {
+        var code = """
+            collection.Add(1);
+            var value = collection.Any();
+            Tag("Value", value);
+            """;
+        var enumerableValidator = SETestContext.CreateCS(code, $"List<int> collection").Validator;
+        var collectionSymbol = enumerableValidator.Symbol("collection");
+        var valueSymbol = enumerableValidator.Symbol("value");
+        enumerableValidator.TagStates("Value").Should().HaveCount(1)
+            .And.ContainSingle(x => x[collectionSymbol].HasConstraint(CollectionConstraint.NotEmpty) && x[valueSymbol].HasConstraint(BoolConstraint.True));
+    }
+
+    [TestMethod]
+    public void Invocation_BoolCollectionMethod_Parameters_CollectionEmpty()
+    {
+        var code = """
+            collection.Clear();
+            var value = collection.Any(x => x is 1);
+            Tag("Value", value);
+            """;
+        var enumerableValidator = SETestContext.CreateCS(code, $"List<int> collection").Validator;
+        var collectionSymbol = enumerableValidator.Symbol("collection");
+        var valueSymbol = enumerableValidator.Symbol("value");
+        enumerableValidator.TagStates("Value").Should().HaveCount(1)
+            .And.ContainSingle(x => x[collectionSymbol].HasConstraint(CollectionConstraint.Empty) && x[valueSymbol].HasConstraint(BoolConstraint.False));
+    }
+
+    [TestMethod]
+    public void Invocation_BoolCollectionMethod_Parameters_CollectionNotEmpty()
+    {
+        var code = """
+            collection.Add(1);
+            var value = collection.Any(x => x is 1);
+            Tag("Value", value);
+            """;
+        var enumerableValidator = SETestContext.CreateCS(code, $"List<int> collection").Validator;
+        var collectionSymbol = enumerableValidator.Symbol("collection");
+        var valueSymbol = enumerableValidator.Symbol("value");
+        enumerableValidator.TagStates("Value").Should().HaveCount(1)
+            .And.Contain(x => x[collectionSymbol].HasConstraint(CollectionConstraint.NotEmpty))
+            .And.NotContain(x => x[valueSymbol].HasConstraint<BoolConstraint>());
+    }
+
     [DataTestMethod]
     [DataRow("Any(x => x is 1)")]
     [DataRow("Exists(x => x is 1)")]
     [DataRow("Contains(1)")]
-    public void Invocation_LinqEnumerable_CheckWithParameters(string expression)
+    public void Invocation_BoolCollectionMethod_NoPrexistingConstrains(string expression)
     {
         var code = $"""
             var value = collection.{expression};
@@ -1049,7 +1110,7 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow("Any(x => x is 1)")]
     [DataRow("Exists(x => x is 1)")]
     [DataRow("Contains(1)")]
-    public void Invocation_LinqEnumerable_CheckWithParametersCollectionAlreadyHasContraint(string expression)
+    public void Invocation_BoolCollectionMethod_CollectionAlreadyHasContraint(string expression)
     {
         var code = $"""
             collection.Clear();
@@ -1070,7 +1131,7 @@ public partial class RoslynSymbolicExecutionTest
             Dim Query = From Item In Items Where Item IsNot Nothing
             If Query.Count <> 0 Then
                 Dim Value = Query(0)
-                Tag(""Value"", Value)
+                Tag("Value", Value)
             End If
             """;
         var validator = SETestContext.CreateVB(code, "Items() As Object").Validator;
@@ -1140,7 +1201,7 @@ public partial class RoslynSymbolicExecutionTest
             Public Sub Main(Of T, TStruct As Structure)()
                 Dim Value As {declarationSuffix}
                 Dim Result As Boolean = IsNothing(CType(DirectCast(Value, Object), Object)) ' Some conversions in the way to detect the value type
-                Tag(""Result"", Result)
+                Tag("Result", Result)
             End Sub
             """;
         var validator = SETestContext.CreateVBMethod(code).Validator;
@@ -1157,7 +1218,7 @@ public partial class RoslynSymbolicExecutionTest
         var code = $"""
             Public Sub Main(Of TClass As Class)(Arg As {type})
                 Dim Result As Boolean = IsNothing(Arg)
-                Tag(""Result"", Result)
+                Tag("Result", Result)
             End Sub
             """;
         var validator = SETestContext.CreateVBMethod(code).Validator;
@@ -1415,7 +1476,7 @@ public partial class RoslynSymbolicExecutionTest
             object left = {left};
             object right = {right};
             var result = object.Equals(left, right);
-            Tag(""Result"", result);
+            Tag("Result", result);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);

@@ -110,6 +110,7 @@ internal sealed partial class Invocation
                 CollectionConstraint constraint when constraint == CollectionConstraint.Empty => state.SetOperationConstraint(invocation, BoolConstraint.False).ToArray(),
                 CollectionConstraint constraint when constraint == CollectionConstraint.NotEmpty && HasNoParameters(invocation.TargetMethod) =>
                     state.SetOperationConstraint(invocation, BoolConstraint.True).ToArray(),
+                CollectionConstraint constraint when constraint == CollectionConstraint.NotEmpty => state.ToArray(),
                 _ when HasNoParameters(invocation.TargetMethod) =>
                 [
                     state.SetOperationConstraint(invocation, BoolConstraint.True).SetSymbolConstraint(instanceSymbol, CollectionConstraint.NotEmpty),
