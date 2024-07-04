@@ -71,7 +71,7 @@ internal sealed partial class Invocation
         nameof(Enumerable.Zip),
     ];
 
-    private static readonly HashSet<string> ElemenetExistsCheckMethods =
+    private static readonly HashSet<string> ElementExistsCheckMethods =
     [
         nameof(Enumerable.Contains),
         nameof(Enumerable.Any),
@@ -81,7 +81,7 @@ internal sealed partial class Invocation
     private static ProgramState[] ProcessLinqEnumerableAndQueryable(ProgramState state, IInvocationOperationWrapper invocation)
     {
         var name = invocation.TargetMethod.Name;
-        var states = ProcessBoolCollectionMethods(state, invocation);
+        var states = ProcessElementExistsCheckMethods(state, invocation);
         if (ReturningNotNull.Contains(name))
         {
             return states.Select(x => x.SetOperationConstraint(invocation, ObjectConstraint.NotNull)).ToArray();
@@ -101,16 +101,17 @@ internal sealed partial class Invocation
         }
     }
 
-    private static ProgramState[] ProcessBoolCollectionMethods(ProgramState state, IInvocationOperationWrapper invocation)
+    private static ProgramState[] ProcessElementExistsCheckMethods(ProgramState state, IInvocationOperationWrapper invocation)
     {
-        if (invocation.TryGetInstance(state) is { } instance && ElemenetExistsCheckMethods.Contains(invocation.TargetMethod.Name) && instance.TrackedSymbol(state) is { } instanceSymbol)
+        if (ElementExistsCheckMethods.Contains(invocation.TargetMethod.Name)  && invocation.GetInstance(state) is { } instance && instance.TrackedSymbol(state) is { } instanceSymbol)
         {
             return state[instanceSymbol]?.Constraint<CollectionConstraint>() switch
             {
                 CollectionConstraint constraint when constraint == CollectionConstraint.Empty => state.SetOperationConstraint(invocation, BoolConstraint.False).ToArray(),
-                CollectionConstraint constraint when constraint == CollectionConstraint.NotEmpty && HasNoParameters(invocation.TargetMethod) =>
-                    state.SetOperationConstraint(invocation, BoolConstraint.True).ToArray(),
-                CollectionConstraint constraint when constraint == CollectionConstraint.NotEmpty => state.ToArray(),
+                CollectionConstraint constraint when constraint == CollectionConstraint.NotEmpty =>
+                    HasNoParameters(invocation.TargetMethod)
+                        ? state.SetOperationConstraint(invocation, BoolConstraint.True).ToArray()
+                        : state.ToArray(),
                 _ when HasNoParameters(invocation.TargetMethod) =>
                 [
                     state.SetOperationConstraint(invocation, BoolConstraint.True).SetSymbolConstraint(instanceSymbol, CollectionConstraint.NotEmpty),

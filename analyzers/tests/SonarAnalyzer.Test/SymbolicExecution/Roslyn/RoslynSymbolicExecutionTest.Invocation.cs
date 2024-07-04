@@ -1009,11 +1009,11 @@ public partial class RoslynSymbolicExecutionTest
     }
 
     [TestMethod]
-    public void Invocation_BoolCollectionMethod_NoParameters_NoConstrains()
+    public void Invocation_ElementExistsCheckMethods_NoParameters_NoConstrains()
     {
         var code = """
             var value = collection.Any();
-            Tag("Value", value);
+            Tag("Value");
             """;
         var enumerableValidator = SETestContext.CreateCS(code, $"IEnumerable<object> collection").Validator;
         var collectionSymbol = enumerableValidator.Symbol("collection");
@@ -1024,27 +1024,12 @@ public partial class RoslynSymbolicExecutionTest
     }
 
     [TestMethod]
-    public void Invocation_BoolCollectionMethod_NoParameters_CollectionEmpty()
-    {
-        var code = """
-            collection.Clear();
-            var value = collection.Any();
-            Tag("Value", value);
-            """;
-        var enumerableValidator = SETestContext.CreateCS(code, $"List<int> collection").Validator;
-        var collectionSymbol = enumerableValidator.Symbol("collection");
-        var valueSymbol = enumerableValidator.Symbol("value");
-        enumerableValidator.TagStates("Value").Should().HaveCount(1)
-            .And.ContainSingle(x => x[collectionSymbol].HasConstraint(CollectionConstraint.Empty) && x[valueSymbol].HasConstraint(BoolConstraint.False));
-    }
-
-    [TestMethod]
-    public void Invocation_BoolCollectionMethod_NoParameters_CollectionNotEmpty()
+    public void Invocation_ElementExistsCheckMethods_NoParameters_CollectionNotEmpty()
     {
         var code = """
             collection.Add(1);
             var value = collection.Any();
-            Tag("Value", value);
+            Tag("Value");
             """;
         var enumerableValidator = SETestContext.CreateCS(code, $"List<int> collection").Validator;
         var collectionSymbol = enumerableValidator.Symbol("collection");
@@ -1054,27 +1039,12 @@ public partial class RoslynSymbolicExecutionTest
     }
 
     [TestMethod]
-    public void Invocation_BoolCollectionMethod_Parameters_CollectionEmpty()
-    {
-        var code = """
-            collection.Clear();
-            var value = collection.Any(x => x is 1);
-            Tag("Value", value);
-            """;
-        var enumerableValidator = SETestContext.CreateCS(code, $"List<int> collection").Validator;
-        var collectionSymbol = enumerableValidator.Symbol("collection");
-        var valueSymbol = enumerableValidator.Symbol("value");
-        enumerableValidator.TagStates("Value").Should().HaveCount(1)
-            .And.ContainSingle(x => x[collectionSymbol].HasConstraint(CollectionConstraint.Empty) && x[valueSymbol].HasConstraint(BoolConstraint.False));
-    }
-
-    [TestMethod]
-    public void Invocation_BoolCollectionMethod_Parameters_CollectionNotEmpty()
+    public void Invocation_ElementExistsCheckMethods_Parameters_CollectionNotEmpty()
     {
         var code = """
             collection.Add(1);
             var value = collection.Any(x => x is 1);
-            Tag("Value", value);
+            Tag("Value");
             """;
         var enumerableValidator = SETestContext.CreateCS(code, $"List<int> collection").Validator;
         var collectionSymbol = enumerableValidator.Symbol("collection");
@@ -1088,11 +1058,11 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow("Any(x => x is 1)")]
     [DataRow("Exists(x => x is 1)")]
     [DataRow("Contains(1)")]
-    public void Invocation_BoolCollectionMethod_NoPrexistingConstrains(string expression)
+    public void Invocation_ElementExistsCheckMethods_NoPrexistingConstrains(string expression)
     {
         var code = $"""
             var value = collection.{expression};
-            Tag("Value", value);
+            Tag("Value");
             """;
         var enumerableValidator = SETestContext.CreateCS(code, $"List<int> collection").Validator;
         var collectionSymbol = enumerableValidator.Symbol("collection");
@@ -1102,15 +1072,16 @@ public partial class RoslynSymbolicExecutionTest
     }
 
     [DataTestMethod]
+    [DataRow("Any()")]
     [DataRow("Any(x => x is 1)")]
     [DataRow("Exists(x => x is 1)")]
     [DataRow("Contains(1)")]
-    public void Invocation_BoolCollectionMethod_CollectionAlreadyHasContraint(string expression)
+    public void Invocation_ElementExistsCheckMethods_CollectionAlreadyHasContraint(string expression)
     {
         var code = $"""
             collection.Clear();
             var value = collection.{expression};
-            Tag("Value", value);
+            Tag("Value");
             """;
         var enumerableValidator = SETestContext.CreateCS(code, $"List<int> collection").Validator;
         var collectionSymbol = enumerableValidator.Symbol("collection");
