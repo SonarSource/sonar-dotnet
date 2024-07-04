@@ -78,6 +78,11 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             nameof(Enumerable.Zip),
         ];
 
+    private static readonly ImmutableArray<KnownType> CollectionTypes = ImmutableArray.Create(
+        KnownType.System_Linq_Enumerable,              // Has all the extension methods for IEnumerable <T>
+        KnownType.System_Linq_Queryable,               // Has it's own versions of several extension methods (like Any() with IQueryable<T> parameter)
+        KnownType.System_Collections_Generic_IList_T); // Has it's own implementation of certain methods (like Contains())
+
     protected override IInvocationOperationWrapper Convert(IOperation operation) =>
         IInvocationOperationWrapper.FromOperation(operation);
 
@@ -121,7 +126,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             _ when invocation.TargetMethod.Is(KnownType.System_Diagnostics_Debug, nameof(Debug.Assert)) => ProcessDebugAssert(context, invocation),
             _ when invocation.TargetMethod.Is(KnownType.System_Object, nameof(ReferenceEquals)) => ProcessReferenceEquals(context, invocation),
             _ when invocation.TargetMethod.Is(KnownType.System_Nullable_T, "get_HasValue") => ProcessNullableHasValue(state, invocation),
-            _ when invocation.TargetMethod.ContainingType.IsAny(KnownType.System_Linq_Enumerable, KnownType.System_Linq_Queryable) => ProcessLinqEnumerableAndQueryable(state, invocation),
+            _ when invocation.TargetMethod.ContainingType.DerivesOrImplementsAny(CollectionTypes) => ProcessLinqEnumerableAndQueryable(state, invocation),
             _ when invocation.TargetMethod.Name == nameof(Equals) => ProcessEquals(context, invocation),
             _ when invocation.TargetMethod.ContainingType.Is(KnownType.System_String) => ProcessSystemStringInvocation(state, invocation),
             _ => ProcessArgumentAttributes(state, invocation),
@@ -204,17 +209,15 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
 
         ProgramState[] ExplodeStates(ISymbol argumentSymbol) =>
             learnNull
-                ? new[]
-                    {
-                        state.SetOperationConstraint(invocation, whenBoolConstraint).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
-                        state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite).SetSymbolConstraint(argumentSymbol, ObjectConstraint.Null),
-                        state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
-                    }
-                : new[]
-                    {
-                        state.SetOperationConstraint(invocation, whenBoolConstraint).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
-                        state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite),
-                    };
+                ? [
+                    state.SetOperationConstraint(invocation, whenBoolConstraint).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
+                    state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite).SetSymbolConstraint(argumentSymbol, ObjectConstraint.Null),
+                    state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
+                  ]
+                : [
+                    state.SetOperationConstraint(invocation, whenBoolConstraint).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
+                    state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite),
+                  ];
     }
 
     private static ProgramState[] ProcessDoesNotReturnIf(ProgramState state, IArgumentOperationWrapper argument, bool when) =>
@@ -316,11 +319,11 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             }
             else if ((leftConstraint == ObjectConstraint.Null ? rightOperation : leftOperation).TrackedSymbol(context.State) is { } symbol)
             {
-                return new[]
-                {
+                return
+                [
                     context.SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(symbol, ObjectConstraint.Null),
                     context.SetOperationConstraint(BoolConstraint.False).SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
-                };
+                ];
             }
         }
         return context.State.ToArray();
@@ -352,11 +355,11 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         }
         else if (invocation.Instance.TrackedSymbol(state) is { } symbol)
         {
-            return new[]
-            {
+            return
+            [
                 state.SetSymbolConstraint(symbol, ObjectConstraint.Null).SetOperationConstraint(invocation, BoolConstraint.False),
                 state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull).SetOperationConstraint(invocation, BoolConstraint.True),
-            };
+            ];
         }
         else
         {
@@ -377,11 +380,11 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             ObjectConstraint constraint when constraint == ObjectConstraint.Null => context.SetOperationConstraint(BoolConstraint.True).ToArray(),
             ObjectConstraint constraint when constraint == ObjectConstraint.NotNull => context.SetOperationConstraint(BoolConstraint.False).ToArray(),
             _ when invocation.Arguments[0].ToArgument().Value.UnwrapConversion().Type is { } type && !type.CanBeNull() => context.SetOperationConstraint(BoolConstraint.False).ToArray(),
-            _ when invocation.Arguments[0].TrackedSymbol(context.State) is { } argumentSymbol => new[]
-            {
+            _ when invocation.Arguments[0].TrackedSymbol(context.State) is { } argumentSymbol =>
+            [
                         context.SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(argumentSymbol, ObjectConstraint.Null),
                         context.SetOperationConstraint(BoolConstraint.False).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),
-            },
+            ],
             _ => context.State.ToArray()
         };
 
@@ -391,5 +394,5 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
     private static bool IsSupportedEqualsType(ITypeSymbol type) =>
         type.IsNullableValueType()                                      // int?.Equals
         || (type.IsStruct() && type.SpecialType != SpecialType.None)    // int.Equals and similar build-in basic value types
-        || type.SpecialType == SpecialType.System_ValueType;           // struct.Equals that was not overriden
+        || type.SpecialType == SpecialType.System_ValueType;            // struct.Equals that was not overriden
 }
