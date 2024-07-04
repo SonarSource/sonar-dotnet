@@ -79,9 +79,9 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         ];
 
     private static readonly ImmutableArray<KnownType> CollectionTypes = ImmutableArray.Create(
-        KnownType.System_Linq_Enumerable,
-        KnownType.System_Linq_Queryable,
-        KnownType.System_Collections_Generic_IList_T);
+        KnownType.System_Linq_Enumerable,              // Has all the extension methods for IEnumerable < T >
+        KnownType.System_Linq_Queryable,               // Has it's own versions of several extension methods (like Any() with IQueryable<T> parameter)
+        KnownType.System_Collections_Generic_IList_T); // Has it's own implementation of certain methods (like Contains())
 
     protected override IInvocationOperationWrapper Convert(IOperation operation) =>
         IInvocationOperationWrapper.FromOperation(operation);

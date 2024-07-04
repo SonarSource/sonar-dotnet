@@ -71,7 +71,7 @@ internal sealed partial class Invocation
         nameof(Enumerable.Zip),
     ];
 
-    private static readonly HashSet<string> BoolCollectionMethods =
+    private static readonly HashSet<string> ElemenetExistsCheckMethods =
     [
         nameof(Enumerable.Contains),
         nameof(Enumerable.Any),
@@ -87,7 +87,7 @@ internal sealed partial class Invocation
             return states.Select(x => x.SetOperationConstraint(invocation, ObjectConstraint.NotNull)).ToArray();
         }
         // ElementAtOrDefault is intentionally not supported. It's causing many FPs
-        else if (name is nameof(Enumerable.FirstOrDefault) or nameof(Enumerable.LastOrDefault) or nameof(Enumerable.SingleOrDefault) && invocation.TargetMethod.ReturnType.IsReferenceType)
+        else if (name is nameof(Enumerable.FirstOrDefault) or nameof(Enumerable.LastOrDefault) or nameof(Enumerable.SingleOrDefault))
         {
             return states.SelectMany(x => new List<ProgramState>
             {
@@ -103,7 +103,7 @@ internal sealed partial class Invocation
 
     private static ProgramState[] ProcessBoolCollectionMethods(ProgramState state, IInvocationOperationWrapper invocation)
     {
-        if (invocation.Instance(state) is { } instance && BoolCollectionMethods.Contains(invocation.TargetMethod.Name) && instance.TrackedSymbol(state) is { } instanceSymbol)
+        if (invocation.TryGetInstance(state) is { } instance && ElemenetExistsCheckMethods.Contains(invocation.TargetMethod.Name) && instance.TrackedSymbol(state) is { } instanceSymbol)
         {
             return state[instanceSymbol]?.Constraint<CollectionConstraint>() switch
             {
