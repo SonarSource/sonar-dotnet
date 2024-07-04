@@ -861,3 +861,12 @@ public class Keywords
         @event.ToString(); // Noncompliant {{Refactor this method to add validation of parameter '@event' before using it.}}
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9500
+public class Repro_9500
+{
+    void Method(List<int> list)
+    {
+        _ = list.Where(x => true);  // FN
+    }
+}
