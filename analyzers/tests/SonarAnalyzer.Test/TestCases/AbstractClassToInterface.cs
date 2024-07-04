@@ -114,36 +114,41 @@ public abstract class View3Derived : SomeUnknownType // Error [CS0246]
     public override int Content1 { get { return 1; } }
 }
 
-public abstract class WithConstructor   // Noncompliant
+public abstract class WithStaticConstructor         // TN for .NET Framework, FN for .NET Core / .NET (where interfaces can have static constructors)
 {
     public abstract void ToOverride();
 
-    static WithConstructor()
+    static WithStaticConstructor()
     {
         // Do something here
     }
+}
 
-    public WithConstructor()
+public abstract class WithNonStaticConstructor      // Compliant: the class has a non-static constructor, it cannot be converted to an interface
+{
+    public abstract void ToOverride();
+
+    public WithNonStaticConstructor()
     {
         // Do something here
     }
 }
 
 // https://github.com/SonarSource/sonar-dotnet/issues/9494
-public abstract class AbstractClassWithField            // Noncompliant - FP: the class has a field, it cannot be converted to an interface
+public abstract class AbstractClassWithField            // Compliant: the class has a field, it cannot be converted to an interface
 {
     protected int _data;
     public abstract void SomeMethod();
 }
 
-public abstract class AbstractClassWithConstructor      // Noncompliant - FP: the class has a constructor, it cannot be converted to an interface
+// https://github.com/SonarSource/sonar-dotnet/issues/9421
+public abstract class AbstractProtectedMethod           // Compliant
 {
-    protected AbstractClassWithConstructor() { }
-    public abstract void SomeMethod();
+    protected abstract void SomeMethod();
 }
 
 // https://github.com/SonarSource/sonar-dotnet/issues/9421
-public abstract class BaseClass                         // Noncompliant - FP
+public abstract class AbstractProtectedInternalMethod   // Compliant
 {
-    protected abstract void SomeMethod();
+    protected internal abstract void SomeMethod();
 }

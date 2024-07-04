@@ -3,12 +3,6 @@
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to an interface.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/FailureDetector.cs#L17",
-      "Location": "Line 17 Position 27-42"
-    },
-    {
-      "Id": "S1694",
-      "Message": "Convert this \u0027abstract\u0027 class to an interface.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemotingLifecycleEvent.cs#L21",
       "Location": "Line 21 Position 27-49"
     },
