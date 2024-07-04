@@ -103,7 +103,7 @@ internal sealed partial class Invocation
 
     private static ProgramState[] ProcessElementExistsCheckMethods(ProgramState state, IInvocationOperationWrapper invocation)
     {
-        if (ElementExistsCheckMethods.Contains(invocation.TargetMethod.Name)  && invocation.GetInstance(state) is { } instance && instance.TrackedSymbol(state) is { } instanceSymbol)
+        if (ElementExistsCheckMethods.Contains(invocation.TargetMethod.Name) && invocation.GetInstance(state).TrackedSymbol(state) is { } instanceSymbol)
         {
             return state[instanceSymbol]?.Constraint<CollectionConstraint>() switch
             {

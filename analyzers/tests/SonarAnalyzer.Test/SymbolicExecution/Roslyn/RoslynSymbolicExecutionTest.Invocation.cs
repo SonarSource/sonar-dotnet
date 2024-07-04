@@ -1029,29 +1029,25 @@ public partial class RoslynSymbolicExecutionTest
         var code = """
             collection.Add(1);
             var value = collection.Any();
-            Tag("Value");
+            Tag("Value", value);
             """;
         var enumerableValidator = SETestContext.CreateCS(code, $"List<int> collection").Validator;
-        var collectionSymbol = enumerableValidator.Symbol("collection");
-        var valueSymbol = enumerableValidator.Symbol("value");
-        enumerableValidator.TagStates("Value").Should().HaveCount(1)
-            .And.ContainSingle(x => x[collectionSymbol].HasConstraint(CollectionConstraint.NotEmpty) && x[valueSymbol].HasConstraint(BoolConstraint.True));
+        enumerableValidator.TagValue("Value").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
     }
 
-    [TestMethod]
-    public void Invocation_ElementExistsCheckMethods_Parameters_CollectionNotEmpty()
+    [DataTestMethod]
+    [DataRow("Any(x => x is 1)")]
+    [DataRow("Exists(x => x is 1)")]
+    [DataRow("Contains(1)")]
+    public void Invocation_ElementExistsCheckMethods_Parameters_CollectionNotEmpty(string expression)
     {
-        var code = """
+        var code = $"""
             collection.Add(1);
-            var value = collection.Any(x => x is 1);
-            Tag("Value");
+            var value = collection.{expression};
+            Tag("Value", value);
             """;
         var enumerableValidator = SETestContext.CreateCS(code, $"List<int> collection").Validator;
-        var collectionSymbol = enumerableValidator.Symbol("collection");
-        var valueSymbol = enumerableValidator.Symbol("value");
-        enumerableValidator.TagStates("Value").Should().HaveCount(1)
-            .And.Contain(x => x[collectionSymbol].HasConstraint(CollectionConstraint.NotEmpty))
-            .And.NotContain(x => x[valueSymbol].HasConstraint<BoolConstraint>());
+        enumerableValidator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]
@@ -1068,7 +1064,8 @@ public partial class RoslynSymbolicExecutionTest
         var collectionSymbol = enumerableValidator.Symbol("collection");
         var valueSymbol = enumerableValidator.Symbol("value");
         enumerableValidator.TagStates("Value").Should().HaveCount(2)
-            .And.ContainSingle(x => x[collectionSymbol].HasConstraint(CollectionConstraint.NotEmpty) && x[valueSymbol].HasConstraint(BoolConstraint.True));
+            .And.ContainSingle(x => x[collectionSymbol].HasConstraint(CollectionConstraint.NotEmpty) && x[valueSymbol].HasConstraint(BoolConstraint.True))
+            .And.ContainSingle(x => x[collectionSymbol].HasConstraint(CollectionConstraint.NotEmpty) && x[valueSymbol].AllConstraints.Any(x => !(x is BoolConstraint)));
     }
 
     [DataTestMethod]
@@ -1081,13 +1078,10 @@ public partial class RoslynSymbolicExecutionTest
         var code = $"""
             collection.Clear();
             var value = collection.{expression};
-            Tag("Value");
+            Tag("Value", value);
             """;
         var enumerableValidator = SETestContext.CreateCS(code, $"List<int> collection").Validator;
-        var collectionSymbol = enumerableValidator.Symbol("collection");
-        var valueSymbol = enumerableValidator.Symbol("value");
-        enumerableValidator.TagStates("Value").Should().HaveCount(1)
-            .And.ContainSingle(x => x[collectionSymbol].HasConstraint(CollectionConstraint.Empty) && x[valueSymbol].HasConstraint(BoolConstraint.False));
+        enumerableValidator.TagValue("Value").Should().HaveOnlyConstraints(BoolConstraint.False, ObjectConstraint.NotNull);
     }
 
     [TestMethod]
