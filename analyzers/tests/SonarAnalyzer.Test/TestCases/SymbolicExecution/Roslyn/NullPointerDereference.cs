@@ -2085,7 +2085,7 @@ public class Repro_8266
         if (array.Any())
         {
             Exception exception = array.FirstOrDefault();
-            Console.WriteLine(exception.Message); // Noncompliant - FP
+            Console.WriteLine(exception.Message); // Compliant - we know that array is not empty
         }
     }
 }

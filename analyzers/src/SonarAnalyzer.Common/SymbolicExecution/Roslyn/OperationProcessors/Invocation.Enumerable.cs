@@ -87,18 +87,34 @@ internal sealed partial class Invocation
             return states.Select(x => x.SetOperationConstraint(invocation, ObjectConstraint.NotNull)).ToArray();
         }
         // ElementAtOrDefault is intentionally not supported. It's causing many FPs
-        else if (name is nameof(Enumerable.FirstOrDefault) or nameof(Enumerable.LastOrDefault) or nameof(Enumerable.SingleOrDefault))
+        else if (name is nameof(Enumerable.FirstOrDefault) or nameof(Enumerable.LastOrDefault) or nameof(Enumerable.SingleOrDefault)
+                && invocation.TryGetInstance(state) is { } instance
+                && instance.TrackedSymbol(state) is { } instanceSymbol
+                && GetElementType(instanceSymbol) is { } elementType)
         {
-            return states.SelectMany(x => new List<ProgramState>
-            {
-                x.SetOperationConstraint(invocation, ObjectConstraint.Null),
-                x.SetOperationConstraint(invocation, ObjectConstraint.NotNull)
-            }).ToArray();
+            return states.SelectMany(x => ProcessElementOrDefaultMethods(x, invocation, elementType, instanceSymbol)).ToArray();
         }
         else
         {
             return states;
         }
+
+        static IEnumerable<ProgramState> ProcessElementOrDefaultMethods(ProgramState state, IInvocationOperationWrapper invocation, ITypeSymbol elementType, ISymbol instanceSymbol) =>
+            state[instanceSymbol]?.Constraint<CollectionConstraint>() switch
+            {
+                CollectionConstraint constraint when constraint == CollectionConstraint.Empty && elementType.IsReferenceType => [state.SetOperationConstraint(invocation, ObjectConstraint.Null)],
+                CollectionConstraint constraint when constraint == CollectionConstraint.NotEmpty && elementType.IsReferenceType =>
+                    [
+                        state,
+                        state.SetOperationConstraint(invocation, ObjectConstraint.NotNull)
+                    ],
+                _ when elementType.IsReferenceType =>
+                    [
+                        state.SetOperationConstraint(invocation, ObjectConstraint.Null),
+                        state.SetOperationConstraint(invocation, ObjectConstraint.NotNull)
+                    ],
+                _ => state.SetOperationConstraint(invocation, ObjectConstraint.NotNull).ToArray()
+            };
     }
 
     private static ProgramState[] ProcessElementExistsCheckMethods(ProgramState state, IInvocationOperationWrapper invocation)
@@ -130,4 +146,12 @@ internal sealed partial class Invocation
             (symbol.IsExtensionMethod && symbol.Parameters.Length == 1)
             || symbol.Parameters.IsEmpty;
     }
+
+    private static ITypeSymbol GetElementType(ISymbol instance) =>
+        instance.GetSymbolType() switch
+        {
+            INamedTypeSymbol { TypeArguments: { Length: 1 } typeArguments } => typeArguments.First(),
+            IArrayTypeSymbol arrayType => arrayType.ElementType,
+            _ => null
+        };
 }
