@@ -89,7 +89,8 @@ internal sealed partial class Invocation
         // ElementAtOrDefault is intentionally not supported. It's causing many FPs
         else if (name is nameof(Enumerable.FirstOrDefault) or nameof(Enumerable.LastOrDefault) or nameof(Enumerable.SingleOrDefault)
             && invocation.GetInstance(state).TrackedSymbol(state) is { } instanceSymbol
-            && GetElementType(instanceSymbol) is { IsReferenceType: true })
+            && GetElementType(instanceSymbol) is { } elementType
+            && (elementType.IsReferenceType || elementType.IsNullableValueType()))
         {
             return states.SelectMany(x => ProcessElementOrDefaultMethods(x, invocation, instanceSymbol)).ToArray();
         }
