@@ -41,6 +41,22 @@ class Program
             _ = (Fruit)differentInstance.Property;
         }
 
+        // https://github.com/SonarSource/sonar-dotnet/issues/9491
+        if (arg.Property is Fruit)                  // Noncompliant
+        {
+            _ = ((Fruit)(arg.Property)).Property;   // Secondary
+        }
+
+        if (arg.Property is Fruit)                  // Noncompliant
+        {
+            _ = ((Fruit)((arg.Property))).Property; // Secondary
+        }
+
+        if (arg.Property is Fruit)                  // Noncompliant
+        {
+            _ = ((Fruit)arg.Property).Property;     // Secondary
+        }
+
         if (f.Property is Fruit)                    // Compliant, the cast is on a different instance
         {
             _ = (Fruit)differentInstance.Property;
@@ -127,6 +143,12 @@ class Program
         {
             var fruit = (Fruit)this.someField;
 //                      ^^^^^^^^^^^^^^^^^^^^^ Secondary
+        }
+
+        if (someField is Fruit) // Noncompliant
+        {
+            var fruit = ((Fruit)(this.someField));
+//                       ^^^^^^^^^^^^^^^^^^^^^^^ Secondary
         }
     }
 
