@@ -981,10 +981,10 @@ public partial class RoslynSymbolicExecutionTest
 
     [DataTestMethod]    // Just a few examples to demonstrate that we don't set ObjectContraint for all
     [DataRow("Min()")]
-    [DataRow("ElementAtOrDefault(42);")]
-    [DataRow("FirstOrDefault();")]
-    [DataRow("LastOrDefault();")]
-    [DataRow("SingleOrDefault();")]
+    [DataRow("ElementAtOrDefault(42)")]
+    [DataRow("FirstOrDefault()")]
+    [DataRow("LastOrDefault()")]
+    [DataRow("SingleOrDefault()")]
     public void Invocation_LinqEnumerable_Unknown_Int(string expression)
     {
         var code = $"""
@@ -992,6 +992,102 @@ public partial class RoslynSymbolicExecutionTest
             Tag("Value", value);
             """;
         var validator = SETestContext.CreateCS(code, $"IEnumerable<int> arg").Validator;
+        validator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    }
+
+    [DataTestMethod]
+    [DataRow("FirstOrDefault()", "object")]
+    [DataRow("LastOrDefault()", "object")]
+    [DataRow("SingleOrDefault()", "object")]
+    [DataRow("FirstOrDefault()", "int?")]
+    [DataRow("LastOrDefault()", "int?")]
+    [DataRow("SingleOrDefault()", "int?")]
+    public void Invocation_ElementOrDefault_CollectionEmpty_ReferenceElementType(string expression, string type)
+    {
+        var code = $"""
+            collection.Clear();
+            var value = collection.{expression};
+            Tag("Value", value);
+            """;
+        var validator = SETestContext.CreateCS(code, $"List<{type}> collection").Validator;
+        validator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.Null);
+    }
+
+    [DataTestMethod]
+    [DataRow("FirstOrDefault()")]
+    [DataRow("LastOrDefault()")]
+    [DataRow("SingleOrDefault()")]
+    public void Invocation_ElementOrDefault_CollectionNotEmpty_ReferenceElementType(string expression)
+    {
+        var code = $"""
+            collection.Add(new object());
+            var value = collection.{expression};
+            Tag("Value", value);
+            """;
+        var validator = SETestContext.CreateCS(code, $"List<object> collection").Validator;
+        validator.TagValue("Value").Should().HaveNoConstraints();
+    }
+
+    [DataTestMethod]
+    [DataRow("FirstOrDefault()")]
+    [DataRow("LastOrDefault()")]
+    [DataRow("SingleOrDefault()")]
+    public void Invocation_ElementOrDefault_CollectionEmpty_ReferenceElementType(string expression)
+    {
+        var code = $"""
+            collection.Clear();
+            var value = collection.{expression};
+            Tag("Value", value);
+            """;
+        var validator = SETestContext.CreateCS(code, $"List<object> collection").Validator;
+        validator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.Null);
+    }
+
+    [DataTestMethod]
+    [DataRow("FirstOrDefault()", true)]
+    [DataRow("LastOrDefault()", true)]
+    [DataRow("SingleOrDefault()", true)]
+    [DataRow("FirstOrDefault()", false)]
+    [DataRow("LastOrDefault()", false)]
+    [DataRow("SingleOrDefault()", false)]
+    public void Invocation_ElementOrDefault_ValueElementType(string expression, bool empty)
+    {
+        var code = $"""
+            collection.{(empty ? "Clear()" : "Add(1)")};
+            var value = collection.{expression};
+            Tag("Value", value);
+            """;
+        var validator = SETestContext.CreateCS(code, $"List<int> collection").Validator;
+        validator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    }
+
+    [DataTestMethod]
+    [DataRow("FirstOrDefault(x => x is {})")]
+    [DataRow("LastOrDefault(x => x is {})")]
+    [DataRow("SingleOrDefault(x => x is {})")]
+    public void Invocation_ElementOrDefault_CallWithParameters(string expression)
+    {
+        var code = $"""
+            var value = collection.{expression};
+            Tag("Value", value);
+            """;
+        var validator = SETestContext.CreateCS(code, $"List<object> collection").Validator;
+        validator.TagValues("Value").Should().HaveCount(2)
+            .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
+            .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+    }
+
+    [DataTestMethod]
+    [DataRow("FirstOrDefault()")]
+    [DataRow("LastOrDefault()")]
+    [DataRow("SingleOrDefault()")]
+    public void Invocation_ElementOrDefault_Dictionary(string expression) // Dictionaries always return KeyValuePair<TKey, TValue> which is a value type
+    {
+        var code = $"""
+            var value = dict.{expression};
+            Tag("Value", value);
+            """;
+        var validator = SETestContext.CreateCS(code, $"Dictionary<int, object> dict").Validator;
         validator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
