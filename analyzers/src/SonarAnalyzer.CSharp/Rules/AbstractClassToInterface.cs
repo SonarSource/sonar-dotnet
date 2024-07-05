@@ -25,8 +25,6 @@ public sealed class AbstractClassToInterface : SonarDiagnosticAnalyzer<SyntaxKin
 {
     private const string DiagnosticId = "S1694";
 
-    private static readonly MethodKind[] ConstructorKinds = [MethodKind.Constructor, MethodKind.SharedConstructor];
-
     protected override string MessageFormat => "Convert this 'abstract' {0} to an interface.";
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
@@ -41,7 +39,8 @@ public sealed class AbstractClassToInterface : SonarDiagnosticAnalyzer<SyntaxKin
                     && symbol.IsAbstract
                     && symbol.BaseType.Is(KnownType.System_Object)
                     && !IsRecordWithParameters(symbol)
-                    && AllMethodsAreAbstract(symbol))
+                    && AllMethodsAreAbstract(symbol)
+                    && !symbol.GetMembers().OfType<IFieldSymbol>().Any())
                 {
                     foreach (var declaringSyntaxReference in symbol.DeclaringSyntaxReferences)
                     {
@@ -64,15 +63,11 @@ public sealed class AbstractClassToInterface : SonarDiagnosticAnalyzer<SyntaxKin
     private static bool IsRecordWithParameters(ISymbol symbol) =>
         symbol.DeclaringSyntaxReferences.Any(x => x.GetSyntax() is { } node
                                                   && RecordDeclarationSyntaxWrapper.IsInstance(node)
-                                                  && ((RecordDeclarationSyntaxWrapper)node).ParameterList is { } parameterList
-                                                  && parameterList.Parameters.Count > 0);
+                                                  && ((RecordDeclarationSyntaxWrapper)node).ParameterList is { Parameters.Count: > 0 });
 
     private static bool AllMethodsAreAbstract(INamedTypeSymbol symbol)
     {
-        var methods = GetAllMethods(symbol);
-        return methods.Any() && methods.All(x => x.IsAbstract);
+        var methods = symbol.GetMembers().Where(x => x is IMethodSymbol { IsImplicitlyDeclared: false }).ToArray();
+        return methods.Any() && Array.TrueForAll(methods, x => x.IsAbstract);
     }
-
-    private static IMethodSymbol[] GetAllMethods(INamedTypeSymbol symbol) =>
-        symbol.GetMembers().OfType<IMethodSymbol>().Where(x => !x.IsImplicitlyDeclared && !ConstructorKinds.Contains(x.MethodKind)).ToArray();
 }

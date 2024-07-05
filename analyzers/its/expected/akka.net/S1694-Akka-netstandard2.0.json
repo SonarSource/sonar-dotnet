@@ -9,12 +9,6 @@
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to an interface.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L554",
-      "Location": "Line 554 Position 27-38"
-    },
-    {
-      "Id": "S1694",
-      "Message": "Convert this \u0027abstract\u0027 class to an interface.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/IO.cs#L15",
       "Location": "Line 15 Position 27-38"
     },

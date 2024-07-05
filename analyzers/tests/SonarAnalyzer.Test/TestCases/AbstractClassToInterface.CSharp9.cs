@@ -5,16 +5,21 @@ public abstract record Empty { }
 
 public abstract record Animal // Noncompliant {{Convert this 'abstract' record to an interface.}}
 {
-    protected abstract void move();
-    protected abstract void feed();
+    public abstract void move();
+    public abstract void feed();
 }
 
 public record SomeBaseRecord { }
 
 public abstract record Animal2 : SomeBaseRecord // Compliant
 {
-    protected abstract void move();
-    protected abstract void feed();
+    public abstract void move();
+    public abstract void feed();
+}
+
+public abstract record RecordWithProtectedAbstractMethod // Noncompliant
+{
+    protected abstract void ProtectedMethod();
 }
 
 public abstract record Color
@@ -74,4 +79,11 @@ public abstract record Record(string X);
 public abstract record Record2(string X) // Compliant, this record has a propery X which is concrete
 {
     public abstract string Content { get; }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9494
+public abstract class AbstractClassWithStaticField      // TN for .NET Framework, FN for .NET Core / .NET (where interfaces can have static members)
+{
+    protected static int _data;
+    public abstract void SomeMethod();
 }
