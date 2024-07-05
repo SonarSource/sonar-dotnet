@@ -138,8 +138,11 @@ internal sealed partial class Invocation
     }
 
     private static bool HasParameters(IMethodSymbol symbol) =>
-        (symbol.IsExtensionMethod && symbol.Parameters.Length > 1)
-        || !symbol.Parameters.IsEmpty;
+        symbol.IsExtensionMethod switch
+        {
+            true => symbol.Parameters.Length > 1,
+            false => !symbol.Parameters.IsEmpty
+        };
 
     private static ITypeSymbol GetElementType(ISymbol instance) =>
         instance.GetSymbolType() switch
