@@ -1019,12 +1019,12 @@ public partial class RoslynSymbolicExecutionTest
         var code = $"""
             collection.Add(new object());
             var value = collection.{expression};
-            Tag("Value");
+            Tag("Value", value);
             """;
         var validator = SETestContext.CreateCS(code, $"List<object> collection").Validator;
-        var valueSymbol = validator.Symbol("value");
-        validator.TagStates("Value").Should().HaveCount(2).And.ContainSingle(x => x[valueSymbol].HasConstraint(ObjectConstraint.Null))
-        ;
+        validator.TagValues("Value").Should().HaveCount(2)
+            .And.ContainSingle(x => x == null)
+            .And.ContainSingle(x => x != null && x.HasConstraint(ObjectConstraint.NotNull));
     }
 
     [DataTestMethod]

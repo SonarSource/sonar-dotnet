@@ -92,8 +92,7 @@ internal sealed partial class Invocation
                 && instance.TrackedSymbol(state) is { } instanceSymbol
                 && GetElementType(instanceSymbol) is { } elementType)
         {
-            var b = states.SelectMany(x => ProcessElementOrDefaultMethods(x, invocation, elementType, instanceSymbol)).ToArray();
-            return b;
+            return states.SelectMany(x => ProcessElementOrDefaultMethods(x, invocation, elementType, instanceSymbol)).ToArray();
         }
         else
         {
@@ -106,8 +105,8 @@ internal sealed partial class Invocation
                 CollectionConstraint constraint when constraint == CollectionConstraint.Empty && elementType.IsReferenceType => [state.SetOperationConstraint(invocation, ObjectConstraint.Null)],
                 CollectionConstraint constraint when constraint == CollectionConstraint.NotEmpty && elementType.IsReferenceType =>
                     [
-                        state,
-                        state.SetOperationConstraint(invocation, ObjectConstraint.NotNull)
+                        state.SetOperationConstraint(invocation, ObjectConstraint.NotNull),
+                        state
                     ],
                 _ when elementType.IsReferenceType =>
                     [
