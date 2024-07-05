@@ -15,6 +15,12 @@
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to an interface.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L77",
+      "Location": "Line 77 Position 27-41"
+    },
+    {
+      "Id": "S1694",
+      "Message": "Convert this \u0027abstract\u0027 class to an interface.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/Router.cs#L263",
       "Location": "Line 263 Position 27-39"
     }
