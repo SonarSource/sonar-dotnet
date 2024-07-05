@@ -1029,6 +1029,21 @@ public partial class RoslynSymbolicExecutionTest
     }
 
     [DataTestMethod]
+    [DataRow("FirstOrDefault()")]
+    [DataRow("LastOrDefault()")]
+    [DataRow("SingleOrDefault()")]
+    public void Invocation_ElementOrDefault_CollectionEmpty_ReferenceElementType(string expression)
+    {
+        var code = $"""
+            collection.Clear();
+            var value = collection.{expression};
+            Tag("Value", value);
+            """;
+        var validator = SETestContext.CreateCS(code, $"List<object> collection").Validator;
+        validator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.Null);
+    }
+
+    [DataTestMethod]
     [DataRow("FirstOrDefault()", true)]
     [DataRow("LastOrDefault()", true)]
     [DataRow("SingleOrDefault()", true)]
@@ -1060,6 +1075,20 @@ public partial class RoslynSymbolicExecutionTest
         validator.TagValues("Value").Should().HaveCount(2)
             .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
             .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
+    }
+
+    [DataTestMethod]
+    [DataRow("FirstOrDefault()")]
+    [DataRow("LastOrDefault()")]
+    [DataRow("SingleOrDefault()")]
+    public void Invocation_ElementOrDefault_Dictionary(string expression) // Dictionaries always return KeyValuePair<TKey, TValue> which is a value type
+    {
+        var code = $"""
+            var value = dict.{expression};
+            Tag("Value", value);
+            """;
+        var validator = SETestContext.CreateCS(code, $"Dictionary<int, object> dict").Validator;
+        validator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]    // Just a few examples to demonstrate that we don't set ObjectContraint for all
