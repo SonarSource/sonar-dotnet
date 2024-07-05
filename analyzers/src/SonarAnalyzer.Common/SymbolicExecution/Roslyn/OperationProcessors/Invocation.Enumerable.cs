@@ -88,32 +88,26 @@ internal sealed partial class Invocation
         }
         // ElementAtOrDefault is intentionally not supported. It's causing many FPs
         else if (name is nameof(Enumerable.FirstOrDefault) or nameof(Enumerable.LastOrDefault) or nameof(Enumerable.SingleOrDefault)
-                && invocation.GetInstance(state) is { } instance
-                && instance.TrackedSymbol(state) is { } instanceSymbol
-                && GetElementType(instanceSymbol) is { } elementType)
+            && invocation.GetInstance(state).TrackedSymbol(state) is { } instanceSymbol
+            && GetElementType(instanceSymbol) is { IsReferenceType: true })
         {
-            return states.SelectMany(x => ProcessElementOrDefaultMethods(x, invocation, elementType, instanceSymbol)).ToArray();
+            return states.SelectMany(x => ProcessElementOrDefaultMethods(x, invocation, instanceSymbol)).ToArray();
         }
         else
         {
             return states;
         }
 
-        static IEnumerable<ProgramState> ProcessElementOrDefaultMethods(ProgramState state, IInvocationOperationWrapper invocation, ITypeSymbol elementType, ISymbol instanceSymbol) =>
+        static IEnumerable<ProgramState> ProcessElementOrDefaultMethods(ProgramState state, IInvocationOperationWrapper invocation, ISymbol instanceSymbol) =>
             state[instanceSymbol]?.Constraint<CollectionConstraint>() switch
             {
-                CollectionConstraint constraint when constraint == CollectionConstraint.Empty && elementType.IsReferenceType => [state.SetOperationConstraint(invocation, ObjectConstraint.Null)],
-                CollectionConstraint constraint when constraint == CollectionConstraint.NotEmpty && elementType.IsReferenceType =>
-                    [
-                        state.SetOperationConstraint(invocation, ObjectConstraint.NotNull),
-                        state
-                    ],
-                _ when elementType.IsReferenceType =>
+                CollectionConstraint constraint when constraint == CollectionConstraint.Empty => [state.SetOperationConstraint(invocation, ObjectConstraint.Null)],
+                CollectionConstraint constraint when constraint == CollectionConstraint.NotEmpty && !HasParameters(invocation.TargetMethod) => [state],
+                _  =>
                     [
                         state.SetOperationConstraint(invocation, ObjectConstraint.Null),
                         state.SetOperationConstraint(invocation, ObjectConstraint.NotNull)
                     ],
-                _ => state.SetOperationConstraint(invocation, ObjectConstraint.NotNull).ToArray()
             };
     }
 
@@ -125,10 +119,10 @@ internal sealed partial class Invocation
             {
                 CollectionConstraint constraint when constraint == CollectionConstraint.Empty => state.SetOperationConstraint(invocation, BoolConstraint.False).ToArray(),
                 CollectionConstraint constraint when constraint == CollectionConstraint.NotEmpty =>
-                    HasNoParameters(invocation.TargetMethod)
+                    !HasParameters(invocation.TargetMethod)
                         ? state.SetOperationConstraint(invocation, BoolConstraint.True).ToArray()
                         : state.ToArray(),
-                _ when HasNoParameters(invocation.TargetMethod) =>
+                _ when !HasParameters(invocation.TargetMethod) =>
                 [
                     state.SetOperationConstraint(invocation, BoolConstraint.True).SetSymbolConstraint(instanceSymbol, CollectionConstraint.NotEmpty),
                     state.SetOperationConstraint(invocation, BoolConstraint.False).SetSymbolConstraint(instanceSymbol, CollectionConstraint.Empty)
@@ -141,16 +135,16 @@ internal sealed partial class Invocation
             };
         }
         return state.ToArray();
-
-        static bool HasNoParameters(IMethodSymbol symbol) =>
-            (symbol.IsExtensionMethod && symbol.Parameters.Length == 1)
-            || symbol.Parameters.IsEmpty;
     }
+
+    private static bool HasParameters(IMethodSymbol symbol) =>
+        (symbol.IsExtensionMethod && symbol.Parameters.Length > 1)
+        || !symbol.Parameters.IsEmpty;
 
     private static ITypeSymbol GetElementType(ISymbol instance) =>
         instance.GetSymbolType() switch
         {
-            INamedTypeSymbol { TypeArguments: { Length: 1 } typeArguments } => typeArguments.First(),
+            INamedTypeSymbol { TypeArguments: { Length: 1 } typeArguments } => typeArguments.Single(),  // Dictionary<TKey, TValue> contain keyvalue pairs which are structs
             IArrayTypeSymbol arrayType => arrayType.ElementType,
             _ => null
         };
