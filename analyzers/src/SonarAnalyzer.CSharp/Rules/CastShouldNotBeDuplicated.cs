@@ -253,9 +253,6 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
         {
             node = parenthesized.Expression;
         }
-
-        node = node is MemberAccessExpressionSyntax { Expression: ThisExpressionSyntax } memberAccess ? memberAccess.Name : node;
-
-        return node;
+        return node is MemberAccessExpressionSyntax { Expression: ThisExpressionSyntax } memberAccess ? memberAccess.Name : node;
     }
 }
