@@ -141,14 +141,12 @@ public abstract class AbstractClassWithField            // Compliant: the class 
     public abstract void SomeMethod();
 }
 
-// https://github.com/SonarSource/sonar-dotnet/issues/9421
-public abstract class AbstractProtectedMethod           // Compliant
+public abstract class AbstractProtectedMethod           // Noncompliant
 {
     protected abstract void SomeMethod();
 }
 
-// https://github.com/SonarSource/sonar-dotnet/issues/9421
-public abstract class AbstractProtectedInternalMethod   // Compliant
+public abstract class AbstractProtectedInternalMethod   // Noncompliant
 {
     protected internal abstract void SomeMethod();
 }

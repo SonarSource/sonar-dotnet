@@ -17,7 +17,7 @@ public abstract record Animal2 : SomeBaseRecord // Compliant
     public abstract void feed();
 }
 
-public abstract record RecordWithProtectedAbstractMethod
+public abstract record RecordWithProtectedAbstractMethod // Noncompliant
 {
     protected abstract void ProtectedMethod();
 }

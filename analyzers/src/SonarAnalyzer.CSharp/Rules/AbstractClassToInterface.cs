@@ -68,6 +68,6 @@ public sealed class AbstractClassToInterface : SonarDiagnosticAnalyzer<SyntaxKin
     private static bool AllMethodsAreAbstract(INamedTypeSymbol symbol)
     {
         var methods = symbol.GetMembers().Where(x => x is IMethodSymbol { IsImplicitlyDeclared: false }).ToArray();
-        return methods.Any() && Array.TrueForAll(methods, x => x.IsAbstract && x.DeclaredAccessibility == Accessibility.Public);
+        return methods.Any() && Array.TrueForAll(methods, x => x.IsAbstract);
     }
 }
