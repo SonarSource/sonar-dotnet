@@ -14,12 +14,6 @@
     },
     {
       "Id": "S2259",
-      "Message": "\u0027cs\u0027 is Nothing on at least one execution path.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L231",
-      "Location": "Line 231 Position 21-23"
-    },
-    {
-      "Id": "S2259",
       "Message": "\u0027_AdvancedSettings.FirstOrDefault(Function(f) f.Name = key AndAlso f.Section = Assembly)\u0027 is Nothing on at least one execution path.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L304",
       "Location": "Line 304 Position 17-104"
