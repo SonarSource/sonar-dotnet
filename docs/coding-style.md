@@ -102,9 +102,9 @@ public void MethodB()
 ### Principles
 
 Keep it minimal and suggestive.
-- Generic words that don't convey meaning (e.g. `Helper`) should be avoided.
-- Overwordy and complex names should be avoided as well.
-- Use positive naming when possible.
+- Generic words that don't convey meaning (e.g. `Helper`, `Manager`, `Data`) should be avoided.
+- Overwordy and complex names should be avoided as well: e.g. `SaveAllDataToDatabase()` -> `Save()` (the rest should be understandable from the context).
+- Use positive naming when possible: `var shouldNotInclude = true;` -> `var shouldInclude = false;`
 
 ### Casing
 
@@ -116,10 +116,6 @@ Single variable lambdas should use `x` as the variable name (based on lambda cal
 
 Short names can be used as parameter and variable names, namely `SyntaxTree tree`, `SemanticModel model`, `SyntaxNode node` and `CancellationToken cancel`.
 
-### Method names
-
-FIXME Avoid Get prefixes for method names. Save three characters when it only gets x.Foo.Bar.
-
 ### Unit tests
 
 Unit tests for common C# and VB.NET rules should use two aliases `using CS = SonarAnalyzer.Rules.CSharp` and `using VB = SonarAnalyzer.Rules.VisualBasic`. Test method names should have `_CS` and `_VB` suffixes.
@@ -128,12 +124,53 @@ Unit tests for single language rule should not use alias nor language method suf
 
 Variable name `sut` (System Under Test) is recommended in unit tests that really tests a single unit (contrary to our usual rule integration unit tests).
 
-FIXME - Avoid names without meaning like `foo`, `bar`, `baz`. OR KISS?
+Avoid generic names without meaning like `foo`, `bar`, `baz`. E.g. for an analyzer that raises on methods with empty bodies avoid using these names:
+    ```cs
+    public void Foo() // Noncompliant
+    { 
+    } 
+
+    public void Bar() // Compliant
+    {
+    // Some explanation
+    }
+
+    public void Baz()  // Compliant
+    {
+    Console.WriteLine();
+    }
+
+    public override void Kiss() // Compliant
+    {
+    }
+    ```
+Instead use names that show how the given member is relevant to the analyzer that's being tested:
+    ```cs
+    public void Empty() // Noncompliant
+    { 
+    } 
+
+    public override void HasComment()  // Compliant
+    {
+    // Some explanation
+    }
+
+    public void NotEmpty()  // Compliant
+    {
+    Console.WriteLine();
+    }
+
+    public override void Overriden() // Compliant
+    {
+    }
+    ```
 
 Unit test method names:
-- Underscore in UT names separates logical groups, not individual words.
-- FIXME: what should the name pattern be? NEEDS DISCUSSION ([many patterns](https://dzone.com/articles/7-popular-unit-test-naming) and also [Microsoft convention](https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices#naming-your-tests) - I'd go for MS convention)
-
+- Underscore in UT names separates logical groups, not individual words. 
+- The name of your test should consist of three parts (e.g. `Add_SingleNumber_ReturnsSameNumber`):
+  - The name of the method being tested.
+  - The scenario under which it's being tested.
+  - The expected behavior when the scenario is invoked.
 
 ## Multi-line statements
 
@@ -209,7 +246,10 @@ Unit test method names:
 
 * When to factorize: two is a group, three is a crowd.
 * Less is more.
-* Rely on Roslyn Type inference to reduce used characters.
+* Avoid using explicit type names, rely on type inference instead. Use the
+  * the var keyword: `string name = "Joe";` -> `var name = "Joe";`
+  * target-typed expressions for fields: `private CustomType type = new CustomType();` =>`private CustomType type = new();`
+  * target-typed expressions for parameters: `Method(new CustomType());` => `Method(new());`
 
 ### Style
 
@@ -247,14 +287,13 @@ var thingy = new Thingy
 
 var collection = new Dictionary<string, int>
 {
-	{ "hey" : 1 },
-	{ "there": 42 },
+	{ "hey", 1 },
+	{ "there", 42 },
 }
 ```
-* FIXME - align on how to use collection initializers int[] x = [ 1, 2, 3 ] or old style (see [slack discussion](https://sonarsource.slack.com/archives/C01H2B58DE1/p1697103918957899?thread_ts=1696951023.295859&cid=C01H2B58DE1))
 
 ### Unit Tests
-* VerifierBuilder.AddSnippet should not be used to assert compliant/noncomplaint test cases. Move it to a TestCases file.
+* VerifierBuilder.AddSnippet should not be used to assert compliant/noncomplaint test cases. Move it to a TestCases file. Exception: the test cases are parameterized/data-driven.
 
 
 ## Comments
@@ -264,7 +303,7 @@ var collection = new Dictionary<string, int>
 * Comments on the same line with code are acceptable for short lines of code and short comments.
 * Documentation comments for abstract methods and their implementations should be placed only on the abstract method, to avoid duplication. _When reading the implementation, the IDE offers the tooling to peek in the base class and read the method comment._
 * Avoid using comments for "Arrange, Act, Assert" in UTs, unless the test is complex.
-* Use single-line comments. Exception: `Internal /* for testing */ void Something()`.
+* Use `// ...` comments instead of `/* ... */`. Exception: `internal /* for testing */ void Something()`.
 * Prefer well-named members instead of documentation.
 * When writing [xmldoc](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/xmldoc/recommended-tags) for methods, avoid adding superflous tags (e.g. members that have self-explanatory names).
 
@@ -286,7 +325,7 @@ for the implementation of these interfaces.
 
 ## Spacing
 
-* Avoid spaces unless they bring clarity and help the reader understand logical groups. Prefer spaces over comments.
+* Avoid empty lines unless they bring clarity and help the reader understand logical groups. But prefer them over comments.
 
 ## Type definition
 
