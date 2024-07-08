@@ -2170,16 +2170,10 @@ public class Repro_NoCollectionInstanceOnFirstOrDefault
     public void Put(long id, AClass model)
     {
         var element = Elements.Where(x => x.Name == "name").FirstOrDefault(x => x.Id == id);
-        var newElement = new AClass()
-        {
-            Name = element.Name, // Noncompliant
-        };
+        _ = element.Name;      // Noncompliant
 
         var structElement = StructElements.Where(x => x.Name == "name").FirstOrDefault(x => x.Id == id);
-        var newStructElement = new AStruct()
-        {
-            Name = structElement.Name, // Compliant, default struct is not null
-        };
+        _ = structElement.Name; // Compliant, structs are never null
     }
 
     public class AClass
