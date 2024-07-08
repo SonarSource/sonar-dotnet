@@ -25,6 +25,7 @@ namespace Tests.Diagnostics
 
         private int F5 = 0; // Noncompliant
         private int F6; // Noncompliant
+
         void M2()
         {
             F5 = 42;
@@ -239,6 +240,36 @@ namespace Tests.Diagnostics
             SetValueInProperty = 42;
             Use(PropertyWithSideEffect);
         }
+
+        private int F38 = 21; // Compliant - unread
+
+        void M18()
+        {
+            F38 = 42;
+        }
+
+        struct SomeStruct
+        {
+            public int Field;
+        }
+
+        private SomeStruct F39; // Noncompliant
+        private SomeStruct? F40 = null; // Noncompliant
+
+        void M19()
+        {
+            F39 = new SomeStruct() { Field = 42 };
+            F39.Field = 42;
+        }
+
+        void M20()
+        {
+            F40 = new SomeStruct() { Field = 42 };
+            if (F40 != null)
+            {
+                Console.WriteLine(F40?.Field);
+            }
+        }
     }
 
     public partial class SomePartialClass
@@ -360,18 +391,21 @@ namespace Tests.Diagnostics
         public void M15(int i) => F36 = i + 1;
     }
 
-    // https://github.com/SonarSource/sonar-dotnet/issues/8239
-    public class Repo_8239
+    public class Broker
     {
-        private bool _received; // Noncompliant FP
+        public event EventHandler Receive;
+        public void Process() { Receive?.Invoke(this, EventArgs.Empty); }
+    }
 
-        public void Program()
+    // https://github.com/SonarSource/sonar-dotnet/issues/8239
+    public class Repro_8239
+    {
+        private bool _received; // Noncompliant
+
+        public void Program(Broker broker)
         {
-            var broker = new Broker();
             broker.Receive += Broker_Receive; // Broker_Receive should be treated as "public" as it is passed as a delegate
-
-            _received = false;
-
+            _received = false; // This is not compliant because this line is after registering the event
             broker.Process();
 
             if (_received)
@@ -384,17 +418,33 @@ namespace Tests.Diagnostics
         {
             _received = true;
         }
+    }
 
-        public class Broker
+    public class Repro_8239_Compliant
+    {
+        private bool _received;
+
+        public void Program(Broker broker)
         {
-            public event EventHandler Receive;
-            public void Process() { Receive?.Invoke(this, EventArgs.Empty); }
+            _received = false;
+            broker.Receive += Broker_Receive;
+            broker.Process();
+
+            if (_received)
+            {
+                Console.WriteLine("OK");
+            }
+        }
+
+        private void Broker_Receive(object sender, EventArgs e)
+        {
+            _received = true;
         }
     }
 
     public class Repo_8239_Variation
     {
-        private bool _wasCalled; // Noncompliant FP
+        private bool _wasCalled;
 
         public void Program()
         {
@@ -402,7 +452,6 @@ namespace Tests.Diagnostics
             _wasCalled = false;
 
             list.ForEach(Increment);            // Increment is passed as a delegate `new Action<int>(Increment)` and should be treated as "public"
-            // list.ForEach(x => Increment(x)); // This is detected correctly
 
             if (_wasCalled)
             {
@@ -412,6 +461,25 @@ namespace Tests.Diagnostics
 
         private void Increment(int dummy)
             => _wasCalled = true;
+    }
 
+    public class Repo_8239_Variation_Noncompliant
+    {
+        private bool _wasCalled; // Noncompliant
+
+        public void Program()
+        {
+            var list = new List<int>();
+            list.ForEach(x => Increment(x));
+            _wasCalled = false;
+
+            if (_wasCalled)
+            {
+                Console.WriteLine("OK");
+            }
+        }
+
+        private void Increment(int dummy)
+            => _wasCalled = true;
     }
 }

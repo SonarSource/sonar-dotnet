@@ -175,7 +175,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitIdentifierName(IdentifierNameSyntax node)
             {
-                if (privateFields.Keys.Any(x => x.Name == node.Identifier.ValueText))
+                if (privateFields.Keys.Any(x => x.Name == node.Identifier.ValueText)
+                    || (node.Parent is not InvocationExpressionSyntax
+                        && methodNames.Contains(node.Identifier.ValueText)))
                 {
                     var memberReference = GetTopmostSyntaxWithTheSameSymbol(node);
                     if (memberReference.Symbol is IFieldSymbol fieldSymbol
@@ -183,7 +185,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         ClassifyFieldReference(semanticModel.GetEnclosingSymbol(memberReference.Node.SpanStart), memberReference);
                     }
+                    else if (memberReference.Symbol is IMethodSymbol
+                             && GetParentPseudoStatement(memberReference) is { } pseudoStatement)
+                    {
+                        invocations.GetOrAdd(pseudoStatement, _ => new HashSet<ISymbol>())
+                            .Add(memberReference.Symbol);
+                    }
                 }
+
                 base.VisitIdentifierName(node);
             }
 
@@ -195,6 +204,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     && memberReference.Symbol is IMethodSymbol
                     && GetParentPseudoStatement(memberReference) is { } pseudoStatement)
                 {
+                    // Adding method group to the invocation list
                     invocations.GetOrAdd(pseudoStatement, _ => new HashSet<ISymbol>())
                         .Add(memberReference.Symbol);
                 }
@@ -248,18 +258,18 @@ namespace SonarAnalyzer.Rules.CSharp
                     && assignmentExpression.Left == syntaxNode;
             }
 
-            private NodeAndSymbol GetTopmostSyntaxWithTheSameSymbol(SyntaxNode identifier) =>
+            private NodeAndSymbol GetTopmostSyntaxWithTheSameSymbol(SyntaxNode node) =>
                 // All of the cases below could be parts of invocation or other expressions
-                identifier.Parent switch
+                node.Parent switch
                 {
                     // this.identifier or a.identifier or ((a)).identifier, but not identifier.other
-                    MemberAccessExpressionSyntax memberAccess when memberAccess.Name == identifier =>
+                    MemberAccessExpressionSyntax memberAccess when memberAccess.Name == node =>
                         new NodeAndSymbol(memberAccess.GetSelfOrTopParenthesizedExpression(), semanticModel.GetSymbolInfo(memberAccess).Symbol),
                     // this?.identifier or a?.identifier or ((a))?.identifier, but not identifier?.other
-                    MemberBindingExpressionSyntax memberBinding when memberBinding.Name == identifier =>
+                    MemberBindingExpressionSyntax memberBinding when memberBinding.Name == node =>
                         new NodeAndSymbol(memberBinding.Parent.GetSelfOrTopParenthesizedExpression(), semanticModel.GetSymbolInfo(memberBinding).Symbol),
                     // identifier or ((identifier))
-                    _ => new NodeAndSymbol(identifier.GetSelfOrTopParenthesizedExpression(), semanticModel.GetSymbolInfo(identifier).Symbol)
+                    _ => new NodeAndSymbol(node.GetSelfOrTopParenthesizedExpression(), semanticModel.GetSymbolInfo(node).Symbol)
                 };
         }
 
