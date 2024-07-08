@@ -2165,6 +2165,7 @@ class Repro_8910
 public class Repro_NoCollectionInstanceOnFirstOrDefault
 {
     public IQueryable<AClass> Elements { get; set; }
+    public IQueryable<AStruct> StructElements { get; set; }
 
     public void Put(long id, AClass model)
     {
@@ -2173,9 +2174,21 @@ public class Repro_NoCollectionInstanceOnFirstOrDefault
         {
             Name = element.Name, // Noncompliant
         };
+
+        var structElement = StructElements.Where(x => x.Name == "name").FirstOrDefault(x => x.Id == id);
+        var newStructElement = new AStruct()
+        {
+            Name = structElement.Name, // Compliant, default struct is not null
+        };
     }
 
     public class AClass
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+
+    public struct AStruct
     {
         public int Id { get; set; }
         public string Name { get; set; }
