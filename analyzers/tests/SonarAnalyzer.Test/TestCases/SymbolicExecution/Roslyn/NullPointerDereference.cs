@@ -2161,3 +2161,30 @@ class Repro_8910
         }
     }
 }
+
+public class Repro_NoCollectionInstanceOnFirstOrDefault
+{
+    public IQueryable<AClass> Elements { get; set; }
+    public IQueryable<AStruct> StructElements { get; set; }
+
+    public void Put(long id, AClass model)
+    {
+        var element = Elements.Where(x => x.Name == "name").FirstOrDefault(x => x.Id == id);
+        _ = element.Name;      // Noncompliant
+
+        var structElement = StructElements.Where(x => x.Name == "name").FirstOrDefault(x => x.Id == id);
+        _ = structElement.Name; // Compliant, structs are never null
+    }
+
+    public class AClass
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+
+    public struct AStruct
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+}

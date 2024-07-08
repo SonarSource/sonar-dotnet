@@ -87,29 +87,34 @@ internal sealed partial class Invocation
             return states.Select(x => x.SetOperationConstraint(invocation, ObjectConstraint.NotNull)).ToArray();
         }
         // ElementAtOrDefault is intentionally not supported. It's causing many FPs
-        else if (name is nameof(Enumerable.FirstOrDefault) or nameof(Enumerable.LastOrDefault) or nameof(Enumerable.SingleOrDefault)
-            && invocation.GetInstance(state).TrackedSymbol(state) is { } instanceSymbol
-            && GetElementType(instanceSymbol) is { } elementType
-            && (elementType.IsReferenceType || elementType.IsNullableValueType()))
+        else if (name is nameof(Enumerable.FirstOrDefault) or nameof(Enumerable.LastOrDefault) or nameof(Enumerable.SingleOrDefault))
         {
-            return states.SelectMany(x => ProcessElementOrDefaultMethods(x, invocation, instanceSymbol)).ToArray();
+            return states.SelectMany(x => ProcessElementOrDefaultMethods(x, invocation)).ToArray();
         }
         else
         {
             return states;
         }
 
-        static IEnumerable<ProgramState> ProcessElementOrDefaultMethods(ProgramState state, IInvocationOperationWrapper invocation, ISymbol instanceSymbol) =>
-            state[instanceSymbol]?.Constraint<CollectionConstraint>() switch
+        static IEnumerable<ProgramState> ProcessElementOrDefaultMethods(ProgramState state, IInvocationOperationWrapper invocation)
+        {
+            var constraint = invocation.GetInstance(state).TrackedSymbol(state) is { } instanceSymbol
+                             && GetElementType(instanceSymbol) is { } elementType
+                             && (elementType.IsReferenceType || elementType.IsNullableValueType())
+                             ? state[instanceSymbol]?.Constraint<CollectionConstraint>()
+                             : null;
+
+            return constraint switch
             {
-                CollectionConstraint constraint when constraint == CollectionConstraint.Empty => [state.SetOperationConstraint(invocation, ObjectConstraint.Null)],
-                CollectionConstraint constraint when constraint == CollectionConstraint.NotEmpty && !HasParameters(invocation.TargetMethod) => [state],
-                _  =>
+                _ when constraint == CollectionConstraint.Empty => [state.SetOperationConstraint(invocation, ObjectConstraint.Null)],
+                _ when constraint == CollectionConstraint.NotEmpty && !HasParameters(invocation.TargetMethod) => [state],
+                _ =>
                     [
                         state.SetOperationConstraint(invocation, ObjectConstraint.Null),
                         state.SetOperationConstraint(invocation, ObjectConstraint.NotNull)
                     ],
             };
+        }
     }
 
     private static ProgramState[] ProcessElementExistsCheckMethods(ProgramState state, IInvocationOperationWrapper invocation)
