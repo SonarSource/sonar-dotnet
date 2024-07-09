@@ -71,7 +71,7 @@ public abstract class InitializationVectorShouldBeRandomBase : CryptographyRuleB
         invocation.TargetMethod.Name == nameof(SymmetricAlgorithm.GenerateIV)
         && invocation.TargetMethod.ContainingType.DerivesFrom(KnownType.System_Security_Cryptography_SymmetricAlgorithm)
             ? state.SetSymbolConstraint(invocation.Instance.TrackedSymbol(state), ByteCollectionConstraint.CryptographicallyStrong)
-            : null;9iu8okj79o08pl;hjuo980
+            : null;
 
     private ProgramState ProcessCreateEncryptorMethodInvocation(ProgramState state, IInvocationOperationWrapper invocation)
     {
