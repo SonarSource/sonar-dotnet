@@ -37,6 +37,10 @@ public sealed class FieldsShouldBeEncapsulatedInProperties : SonarDiagnosticAnal
         SyntaxKind.ConstKeyword
     };
 
+    private static readonly ImmutableArray<KnownType> IgnoredTypes = ImmutableArray.Create(
+        KnownType.UnityEngine_MonoBehaviour,
+        KnownType.UnityEngine_ScriptableObject);
+
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
@@ -52,7 +56,9 @@ public sealed class FieldsShouldBeEncapsulatedInProperties : SonarDiagnosticAnal
                 var firstVariable = fieldDeclaration.Declaration.Variables[0];
                 var symbol = c.SemanticModel.GetDeclaredSymbol(firstVariable);
                 var parentSymbol = c.SemanticModel.GetDeclaredSymbol(fieldDeclaration.Parent);
-                if (parentSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_StructLayoutAttribute) || Serializable(symbol, parentSymbol))
+                if (symbol.ContainingType.DerivesFromAny(IgnoredTypes)
+                    || parentSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_StructLayoutAttribute)
+                    || Serializable(symbol, parentSymbol))
                 {
                     return;
                 }

@@ -31,6 +31,13 @@ public class FieldsShouldBeEncapsulatedInPropertiesTest
     public void FieldsShouldBeEncapsulatedInProperties() =>
         builder.AddPaths("FieldsShouldBeEncapsulatedInProperties.cs").Verify();
 
+    [TestMethod]
+    public void FieldsShouldBeEncapsulatedInProperties_Unity3D_Ignored() =>
+        builder.AddPaths("FieldsShouldBeEncapsulatedInProperties.Unity3D.cs")
+            // Concurrent analysis puts fake Unity3D class into the Concurrent namespace
+            .WithConcurrentAnalysis(false)
+            .VerifyNoIssues();
+
 #if NET
 
     [TestMethod]
