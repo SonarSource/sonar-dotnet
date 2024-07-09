@@ -18,54 +18,53 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class FieldsShouldBeEncapsulatedInProperties : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class FieldsShouldBeEncapsulatedInProperties : SonarDiagnosticAnalyzer
+    private const string DiagnosticId = "S1104";
+    private const string MessageFormat = "Make this field 'private' and encapsulate it in a 'public' property.";
+
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+    private static readonly ISet<SyntaxKind> ValidModifiers = new HashSet<SyntaxKind>
     {
-        private const string DiagnosticId = "S1104";
-        private const string MessageFormat = "Make this field 'private' and encapsulate it in a 'public' property.";
+        SyntaxKind.PrivateKeyword,
+        SyntaxKind.ProtectedKeyword,
+        SyntaxKind.InternalKeyword,
+        SyntaxKind.ReadOnlyKeyword,
+        SyntaxKind.ConstKeyword
+    };
 
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-
-        private static readonly ISet<SyntaxKind> ValidModifiers = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.PrivateKeyword,
-            SyntaxKind.ProtectedKeyword,
-            SyntaxKind.InternalKeyword,
-            SyntaxKind.ReadOnlyKeyword,
-            SyntaxKind.ConstKeyword
-        };
-
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(
-                c =>
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            c =>
+            {
+                var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
+                if (fieldDeclaration.Modifiers.Any(m => ValidModifiers.Contains(m.Kind())))
                 {
-                    var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
-                    if (fieldDeclaration.Modifiers.Any(m => ValidModifiers.Contains(m.Kind())))
-                    {
-                        return;
-                    }
+                    return;
+                }
 
-                    var firstVariable = fieldDeclaration.Declaration.Variables[0];
-                    var symbol = c.SemanticModel.GetDeclaredSymbol(firstVariable);
-                    var parentSymbol = c.SemanticModel.GetDeclaredSymbol(fieldDeclaration.Parent);
-                    if (parentSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_StructLayoutAttribute) || Serializable(symbol, parentSymbol))
-                    {
-                        return;
-                    }
+                var firstVariable = fieldDeclaration.Declaration.Variables[0];
+                var symbol = c.SemanticModel.GetDeclaredSymbol(firstVariable);
+                var parentSymbol = c.SemanticModel.GetDeclaredSymbol(fieldDeclaration.Parent);
+                if (parentSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_StructLayoutAttribute) || Serializable(symbol, parentSymbol))
+                {
+                    return;
+                }
 
-                    if (symbol.GetEffectiveAccessibility() == Accessibility.Public)
-                    {
-                        c.ReportIssue(Rule, firstVariable);
-                    }
-                },
-                SyntaxKind.FieldDeclaration);
+                if (symbol.GetEffectiveAccessibility() == Accessibility.Public)
+                {
+                    c.ReportIssue(Rule, firstVariable);
+                }
+            },
+            SyntaxKind.FieldDeclaration);
 
-        private static bool Serializable(ISymbol symbol, ISymbol parentSymbol) =>
-            parentSymbol.HasAttribute(KnownType.System_SerializableAttribute)
-            && !symbol.HasAttribute(KnownType.System_NonSerializedAttribute);
-    }
+    private static bool Serializable(ISymbol symbol, ISymbol parentSymbol) =>
+        parentSymbol.HasAttribute(KnownType.System_SerializableAttribute)
+        && !symbol.HasAttribute(KnownType.System_NonSerializedAttribute);
 }
