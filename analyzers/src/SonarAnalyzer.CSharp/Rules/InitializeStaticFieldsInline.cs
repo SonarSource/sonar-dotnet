@@ -18,49 +18,48 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class InitializeStaticFieldsInline : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class InitializeStaticFieldsInline : SonarDiagnosticAnalyzer
-    {
-        private const string DiagnosticId = "S3963";
-        private const string MessageFormat = "Initialize all 'static fields' inline and remove the 'static constructor'.";
+    private const string DiagnosticId = "S3963";
+    private const string MessageFormat = "Initialize all 'static fields' inline and remove the 'static constructor'.";
 
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(c =>
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(c =>
+            {
+                var constructor = (ConstructorDeclarationSyntax)c.Node;
+                if (!constructor.Modifiers.Any(SyntaxKind.StaticKeyword)
+                    || (constructor.Body is null && constructor.ExpressionBody() is null))
                 {
-                    var constructor = (ConstructorDeclarationSyntax)c.Node;
-                    if (!constructor.Modifiers.Any(SyntaxKind.StaticKeyword)
-                        || (constructor.Body == null && constructor.ExpressionBody() == null))
-                    {
-                        return;
-                    }
-                    if (c.SemanticModel.GetDeclaredSymbol(constructor).ContainingType is { } currentType)
-                    {
-                        var bodyDescendantNodes = constructor.Body?.DescendantNodes().ToArray()
-                            ?? constructor.ExpressionBody()?.DescendantNodes().ToArray()
-                            ?? Array.Empty<SyntaxNode>();
+                    return;
+                }
+                if (c.SemanticModel.GetDeclaredSymbol(constructor).ContainingType is { } currentType)
+                {
+                    var bodyDescendantNodes = constructor.Body?.DescendantNodes().ToArray()
+                                              ?? constructor.ExpressionBody()?.DescendantNodes().ToArray()
+                                              ?? [];
 
-                        var assignedFieldCount = bodyDescendantNodes
-                            .OfType<AssignmentExpressionSyntax>()
-                            .Select(x => c.SemanticModel.GetSymbolInfo(x.Left).Symbol)
-                            .OfType<IFieldSymbol>()
-                            .Where(x => x.ContainingType.Equals(currentType))
-                            .Select(x => x.Name)
-                            .Distinct()
-                            .Count();
-                        var hasIfOrSwitch = bodyDescendantNodes.Any(x => x.IsAnyKind(SyntaxKind.IfStatement, SyntaxKind.SwitchStatement));
-                        if ((hasIfOrSwitch && assignedFieldCount <= 1)
-                            || (!hasIfOrSwitch && assignedFieldCount > 0))
-                        {
-                            c.ReportIssue(Rule, constructor.Identifier);
-                        }
+                    var assignedFieldCount = bodyDescendantNodes
+                        .OfType<AssignmentExpressionSyntax>()
+                        .Select(x => c.SemanticModel.GetSymbolInfo(x.Left).Symbol)
+                        .OfType<IFieldSymbol>()
+                        .Where(x => x.ContainingType.Equals(currentType))
+                        .Select(x => x.Name)
+                        .Distinct()
+                        .Count();
+                    var hasIfOrSwitch = Array.Exists(bodyDescendantNodes, x => x.IsAnyKind(SyntaxKind.IfStatement, SyntaxKind.SwitchStatement));
+                    if ((hasIfOrSwitch && assignedFieldCount <= 1)
+                        || (!hasIfOrSwitch && assignedFieldCount > 0))
+                    {
+                        c.ReportIssue(Rule, constructor.Identifier);
                     }
-                },
-                SyntaxKind.ConstructorDeclaration);
-    }
+                }
+            },
+            SyntaxKind.ConstructorDeclaration);
 }
