@@ -54,7 +54,7 @@ public sealed class InitializeStaticFieldsInline : SonarDiagnosticAnalyzer
                         .Distinct()
                         .Count();
                     var hasIfOrSwitch = Array.Exists(bodyDescendantNodes, x => x.IsAnyKind(SyntaxKind.IfStatement, SyntaxKind.SwitchStatement));
-                    if ((hasIfOrSwitch && assignedFieldCount <= 1)
+                    if ((hasIfOrSwitch && assignedFieldCount == 1)
                         || (!hasIfOrSwitch && assignedFieldCount > 0))
                     {
                         c.ReportIssue(Rule, constructor.Identifier);
