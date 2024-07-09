@@ -22,7 +22,7 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="binaries\internal\Internal.SonarAnalyzer.CSharp.Styling.dll" target="analyzers" />
+    <file src="binaries\SonarAnalyzer.CSharp.Styling\Internal.SonarAnalyzer.CSharp.Styling.dll" target="analyzers" />
     <file src="logos\sonarsource_64.png" target="images\" />
     <file src="..\..\THIRD-PARTY-NOTICES.txt" target="license\" />
   </files>

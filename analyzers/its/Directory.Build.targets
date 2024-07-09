@@ -20,7 +20,8 @@
       <SonarProjectType Condition="$(SonarUnknownProjectType) == 'true'">Unknown</SonarProjectType>
     </PropertyGroup>
 
-    <Error Text="Could not find '$(BinariesFolder)\SonarAnalyzer.dll'" Condition="!Exists('$(BinariesFolder)\SonarAnalyzer.dll')" />
+    <Error Text="Could not find '$(BinariesFolder)\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.dll'" Condition="!Exists('$(BinariesFolder)\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.dll')" />
+    <Error Text="Could not find '$(BinariesFolder)\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.dll'" Condition="!Exists('$(BinariesFolder)\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.dll')" />
 
     <!-- This section builds content of SonarProjectConfig.xml additional file. We need to simulate S4MSB behavior to configure the analyzer. -->
     <ItemGroup>
@@ -52,8 +53,8 @@
       <!-- Remove all previously added analyzers, except built-in SourceGenerators -->
       <Analyzer Remove="@(Analyzer)" Condition="!$([System.Text.RegularExpressions.Regex]::IsMatch('%(Filename)', '(Generator|Generators|SourceGeneration|SourceGenerators)$'))"/>
       <!-- Add the SonarAnalyzer analyzer DLLs -->
-      <Analyzer Include="$(BinariesFolder)\SonarAnalyzer*.dll" />
-      <Analyzer Include="$(BinariesFolder)\Google.Protobuf.dll" />
+      <Analyzer Include="$(BinariesFolder)\SonarAnalyzer.CSharp\*.dll" />
+      <Analyzer Include="$(BinariesFolder)\SonarAnalyzer.VisualBasic\*.dll" />
       <AdditionalFiles Include="$(MSBuildStartupDirectory)\output\$(PROJECT)\SonarLint.xml" />
       <AdditionalFiles Include="$(SonarProjectConfigFilePath)" />
     </ItemGroup>
