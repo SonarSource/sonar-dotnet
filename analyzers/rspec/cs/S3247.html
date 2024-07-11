@@ -1,27 +1,41 @@
 <h2>Why is this an issue?</h2>
-<p>Because the <code>is</code> operator performs a cast if the object is not null, using <code>is</code> to check type and then casting the same
-argument to that type, necessarily performs two casts. The same result can be achieved more efficiently with a single cast using <code>as</code>,
-followed by a null-check.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>In C#, the <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast#is-operator"><code>is</code>
+type testing operator</a> can be used to check if the run-time type of an object is compatible with a given type. If the object is not null, then the
+<code>is</code> operator performs a cast, and so performing another cast following the check result is redundant.</p>
+<p>This can impact:</p>
+<ul>
+  <li> Performance: Performing the type check and cast separately can lead to minor performance issues. While this might not be noticeable in small
+  applications, it can add up in larger, more complex systems. </li>
+  <li> Readability: The code is less readable and less clean because it requires two lines (and two operations) to achieve something that could be
+  done in one. </li>
+</ul>
+<h2>How to fix it</h2>
+<p>Use <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/pattern-matching">pattern macthing</a> to perform the check
+and retrieve the cast result.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 if (x is Fruit)  // Noncompliant
 {
   var f = (Fruit)x; // or x as Fruit
   // ...
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-// C# 6
-var f = x as Fruit;
-if (f != null)
-{
-  // ...
-}
-// C# 7
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 if (x is Fruit fruit)
 {
   // ...
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast">Type-testing
+  operators and cast expressions - <code>is</code>, <code>as</code>, <code>typeof</code> and casts</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/is">is operator (C# reference)</a>
+  </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/pattern-matching">Pattern matching
+  overview</a> </li>
+</ul>
 

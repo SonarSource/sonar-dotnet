@@ -18,6 +18,7 @@ under test. Those tests increase the coverage without enforcing anything on the 
   <li> <code>FluentAssertions</code> (4.x and 5.x) </li>
   <li> <code>NFluent</code> </li>
   <li> <code>NSubstitute</code> </li>
+  <li> <code>Moq</code> </li>
   <li> <code>Shoudly</code> </li>
 </ul>
 <p>By enforcing the presence of assertions, this rule aims to enhance the reliability and comprehensiveness of tests by ensuring that they provide
@@ -26,7 +27,8 @@ meaningful validation of the expected behavior.</p>
 <p>Test methods that include a call to a custom assertion method will not raise any issues.</p>
 <h3>How to fix it</h3>
 <p>To address this issue, you should include assertions to validate the expected behavior. Choose an appropriate assertion method provided by your
-testing framework (such as MSTest, NUnit, xUnit) or select a suitable assertion library like FluentAssertions, NFluent, NSubstitute, or Shouldly.</p>
+testing framework (such as MSTest, NUnit, xUnit) or select a suitable assertion library like FluentAssertions, NFluent, NSubstitute, Moq, or
+Shouldly.</p>
 <p>In addition to using built-in assertion methods, you also have the option to create custom assertion methods. To do this, declare an attribute
 named <code>[AssertionMethodAttribute]</code> and apply it to the respective method. This allows you to encapsulate specific validation logic within
 your custom assertion methods without raising the issue. Here’s an example:</p>
