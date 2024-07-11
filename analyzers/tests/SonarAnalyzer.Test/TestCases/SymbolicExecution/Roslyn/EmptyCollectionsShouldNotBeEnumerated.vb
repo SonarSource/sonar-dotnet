@@ -264,7 +264,7 @@ Public Class AdvancedTests
         Dim List As New List(Of Integer)
         List.All(Function(X) True)      ' FN
         List.Any()                      ' FN
-        Enumerable.Reverse(List)        ' FN
+        Enumerable.Reverse(List)        ' Noncompliant
         List.Clear()                    ' Noncompliant
     End Sub
 

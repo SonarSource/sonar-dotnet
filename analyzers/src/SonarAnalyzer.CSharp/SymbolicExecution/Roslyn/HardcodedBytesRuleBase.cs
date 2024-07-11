@@ -61,7 +61,7 @@ public abstract class HardcodedBytesRuleBase : SymbolicRuleCheck
     {
         if (invocation.TargetMethod.Name == nameof(Array.SetValue)
             && invocation.TargetMethod.ContainingType.Is(KnownType.System_Array)
-            && invocation.GetInstance(state).TrackedSymbol(state) is { } array)
+            && invocation.Instance.TrackedSymbol(state) is { } array)
         {
             return invocation.ArgumentValue("value") is { ConstantValue.HasValue: true }
                        ? state
@@ -74,7 +74,7 @@ public abstract class HardcodedBytesRuleBase : SymbolicRuleCheck
     protected ProgramState ProcessArrayInitialize(ProgramState state, IInvocationOperationWrapper invocation) =>
         invocation.TargetMethod.Name == nameof(Array.Initialize)
         && invocation.TargetMethod.ContainingType.Is(KnownType.System_Array)
-        && invocation.GetInstance(state).TrackedSymbol(state) is { } array
+        && invocation.Instance.TrackedSymbol(state) is { } array
             ? state.SetSymbolConstraint(array, Hardcoded)
             : null;
 

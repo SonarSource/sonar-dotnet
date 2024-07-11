@@ -149,7 +149,7 @@ internal static class CollectionTracker
         {
             return state.SetOperationConstraint(invocation, constraint);
         }
-        if (invocation.GetInstance(state) is { } instance && instance.Type.DerivesOrImplementsAny(CollectionTypes))
+        if (invocation.EffectiveInstance(state) is { } instance && instance.Type.DerivesOrImplementsAny(CollectionTypes))
         {
             var targetMethod = invocation.TargetMethod;
             var symbolValue = state[instance] ?? SymbolicValue.Empty;
@@ -182,7 +182,7 @@ internal static class CollectionTracker
     {
         if (invocation.TargetMethod.Is(KnownType.System_Linq_Enumerable, nameof(Enumerable.Count)))
         {
-            if (invocation.GetInstance(state).TrackedSymbol(state) is { } symbol
+            if (invocation.EffectiveInstance(state).TrackedSymbol(state) is { } symbol
                 && state[symbol]?.Constraint<CollectionConstraint>() is { } collection)
             {
                 if (collection == CollectionConstraint.Empty)

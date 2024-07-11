@@ -18,9 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using StyleCop.Analyzers.Lightup;
+using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
+using SyntaxVB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Test.SymbolicExecution.Roslyn;
 
@@ -28,24 +29,23 @@ namespace SonarAnalyzer.Test.SymbolicExecution.Roslyn;
 public class IInvocationOperationExtensionsTest
 {
     [DataTestMethod]
-    [DataRow("public void Method() {}", "sample.Method()", OperationKind.FieldReference)]
-    [DataRow("", "this.Method()", OperationKind.InstanceReference)]
-    [DataRow("", "sample.ExtensionMethod()", OperationKind.FieldReference)]
-    [DataRow("public void Method() {}", "sample.GetSample().Method()", OperationKind.Invocation)]
+    [DataRow("sample.Method()", OperationKind.FieldReference)]
+    [DataRow("this.Method()", OperationKind.InstanceReference)]
+    [DataRow("sample.ExtensionMethod()", OperationKind.FieldReference)]
+    [DataRow("sample.GetSample().Method()", OperationKind.Invocation)]
 
-    public void Invocation_GetInstance_ReturnsSymbol(string definition, string invocation, OperationKind kind)
+    public void Invocation_GetInstance_ReturnsSymbol_CS(string invocation, OperationKind kind)
     {
         var code = $$"""
-            class Test
-            {
-                Sample sample = new Sample();
-                void Method() {}
-                void M() => {{invocation}};
-            }
 
             public class Sample
             {
-               {{definition}}
+               Sample sample = new Sample();
+
+               public void Method() {}
+
+               void M() => {{invocation}};
+
                public Sample GetSample() => new Sample();
             }
 
@@ -55,9 +55,47 @@ public class IInvocationOperationExtensionsTest
             }
             """;
         var (tree, model) = TestHelper.CompileCS(code);
-        var invocationSyntax = tree.GetRoot().DescendantNodesAndSelf().OfType<InvocationExpressionSyntax>().First();
+        var invocationSyntax = tree.GetRoot().DescendantNodesAndSelf().OfType<SyntaxCS.InvocationExpressionSyntax>().First();
         var operation = IInvocationOperationWrapper.FromOperation(model.GetOperation(invocationSyntax));
-        var d = operation.GetInstance(ProgramState.Empty);
-        d.Should().NotBeNull().And.BeAssignableTo<IOperation>().Which.Kind.Should().Be(kind);
+        operation.EffectiveInstance(ProgramState.Empty).Should().NotBeNull().And.BeAssignableTo<IOperation>().Which.Kind.Should().Be(kind);
+    }
+
+    [DataTestMethod]
+    [DataRow("sample.Method()", OperationKind.FieldReference)]
+    [DataRow("Me.Method()", OperationKind.InstanceReference)]
+    [DataRow("sample.ExtensionMethod()", OperationKind.FieldReference)]
+    [DataRow("sample.GetSample().Method()", OperationKind.Invocation)]
+
+    public void Invocation_GetInstance_ReturnsSymbol_VB(string invocation, OperationKind kind)
+    {
+        var code = $$"""
+            Public Class Sample
+                Private sample As Sample = New Sample()
+
+                Public Sub Method()
+                End Sub
+
+                Private Sub M()
+                    {{invocation}}
+                End Sub
+
+                Public Function GetSample() As Sample
+                    Return New Sample()
+                End Function
+
+            End Class
+
+            Public Module Extensions
+
+                <System.Runtime.CompilerServices.Extension()>
+                    Public Sub ExtensionMethod(sample As Sample)
+                End Sub
+
+            End Module
+            """;
+        var (tree, model) = TestHelper.CompileVB(code);
+        var invocationSyntax = tree.GetRoot().DescendantNodesAndSelf().OfType<SyntaxVB.InvocationExpressionSyntax>().First();
+        var operation = IInvocationOperationWrapper.FromOperation(model.GetOperation(invocationSyntax));
+        operation.EffectiveInstance(ProgramState.Empty).Should().NotBeNull().And.BeAssignableTo<IOperation>().Which.Kind.Should().Be(kind);
     }
 }

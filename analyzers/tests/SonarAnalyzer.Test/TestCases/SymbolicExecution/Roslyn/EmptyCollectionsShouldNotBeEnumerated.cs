@@ -1001,6 +1001,23 @@ class Flows2
     }
 }
 
+namespace Extensions
+{
+    class ExtensionMethods
+    {
+        public void Test()
+        {
+            var list = new List<int>();
+            list.Clear(3); // Noncompliant
+        }
+    }
+
+    public static class Extensions
+    {
+        public static void Clear(this List<int> list, int i) { }
+    }
+}
+
 // See https://github.com/SonarSource/sonar-dotnet/issues/1002
 class Program
 {
