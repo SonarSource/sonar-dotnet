@@ -100,34 +100,35 @@ public class TestMethodShouldContainAssertionTest
     [DataRow(NUnitVersions.Ver25, FluentAssertionVersions.Ver1)]
     [DataRow(NUnitVersions.Ver25, FluentAssertionVersions.Ver4)]
     public void TestMethodShouldContainAssertion_NUnit_FluentAssertionsLegacy(string testFwkVersion, string fluentVersion) =>
-        WithTestReferences(NuGetMetadataReference.NUnit(testFwkVersion), fluentVersion).AddSnippet(@"
-using System;
-using FluentAssertions;
-using NUnit.Framework;
+        WithTestReferences(NuGetMetadataReference.NUnit(testFwkVersion), fluentVersion).AddSnippet("""
+            using System;
+            using FluentAssertions;
+            using NUnit.Framework;
 
-[TestFixture]
-public class Foo
-{
-    [Test]
-    public void Test1() // Noncompliant
-    {
-        var x = 42;
-    }
+            [TestFixture]
+            public class Foo
+            {
+               [Test]
+               public void Test1() // Noncompliant
+               {
+                   var x = 42;
+               }
 
-    [Test]
-    public void ShouldThrowTest()
-    {
-        Action act = () => { throw new Exception(); };
-        act.ShouldThrow<Exception>();
-    }
+               [Test]
+               public void ShouldThrowTest()
+               {
+                   Action act = () => { throw new Exception(); };
+                   act.ShouldThrow<Exception>();
+               }
 
-    [Test]
-    public void ShouldNotThrowTest()
-    {
-        Action act = () => { throw new Exception(); };
-        act.ShouldNotThrow<Exception>();
-    }
-}").Verify();
+               [Test]
+               public void ShouldNotThrowTest()
+               {
+                   Action act = () => { throw new Exception(); };
+                   act.ShouldNotThrow<Exception>();
+               }
+            }
+            """).Verify();
 
     [TestMethod]
     public void TestMethodShouldContainAssertion_NUnit_NFluentLegacy() =>
@@ -146,6 +147,10 @@ public class Foo
                }
            }
            """).VerifyNoIssues();
+
+    [TestMethod]
+    public void TestMethodShouldContainAssertion_Moq() =>
+        WithTestReferences(NuGetMetadataReference.MSTestTestFramework(Latest)).AddPaths("TestMethodShouldContainAssertion.Moq.cs").Verify();
 
     [TestMethod]
     public void TestMethodShouldContainAssertion_CustomAssertionMethod() =>
@@ -175,13 +180,15 @@ public class Foo
                                                                           string fluentVersion = Latest,
                                                                           string nSubstituteVersion = Latest,
                                                                           string nFluentVersion = Latest,
-                                                                          string shouldlyVersion = Latest) =>
+                                                                          string shouldlyVersion = Latest,
+                                                                          string moqVersion = Latest) =>
         new VerifierBuilder<TestMethodShouldContainAssertion>()
             .AddReferences(testFrameworkReference)
             .AddReferences(NuGetMetadataReference.FluentAssertions(fluentVersion))
             .AddReferences(NuGetMetadataReference.NSubstitute(nSubstituteVersion))
             .AddReferences(NuGetMetadataReference.NFluent(nFluentVersion))
             .AddReferences(NuGetMetadataReference.Shouldly(shouldlyVersion))
+            .AddReferences(NuGetMetadataReference.Moq(moqVersion))
             .AddReferences(MetadataReferenceFacade.SystemData)
             .AddReferences(MetadataReferenceFacade.SystemNetHttp)
             .AddReferences(MetadataReferenceFacade.SystemXml)
