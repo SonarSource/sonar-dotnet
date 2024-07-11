@@ -149,6 +149,10 @@ public class TestMethodShouldContainAssertionTest
            """).VerifyNoIssues();
 
     [TestMethod]
+    public void TestMethodShouldContainAssertion_Moq() =>
+        WithTestReferences(NuGetMetadataReference.MSTestTestFramework(Latest)).AddPaths("TestMethodShouldContainAssertion.Moq.cs").Verify();
+
+    [TestMethod]
     public void TestMethodShouldContainAssertion_CustomAssertionMethod() =>
         builder.AddPaths("TestMethodShouldContainAssertion.Custom.cs").AddReferences(NuGetMetadataReference.MSTestTestFramework(Latest)).Verify();
 

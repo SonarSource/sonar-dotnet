@@ -37,7 +37,9 @@ public sealed class TestMethodShouldContainAssertion : SonarDiagnosticAnalyzer
         {"InOrder", [KnownType.NSubstitute_Received] }
     };
 
-    /// The assertions in the Shouldly library are supported by <see cref="UnitTestHelper.KnownAssertionMethodParts"/> (they all contain "Should")
+    /// The assertions in the Shouldly and Moq libraries are supported by <see cref="UnitTestHelper.KnownAssertionMethodParts"/>
+    /// - All assertions in Shouldly contain "Should" in their name.
+    /// - All assertions in Moq contain "Verify" in their name.
     private static readonly ImmutableArray<KnownType> KnownAssertionTypes = ImmutableArray.Create(
         KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert,
         KnownType.NFluent_Check,
