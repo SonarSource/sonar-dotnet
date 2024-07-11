@@ -20,33 +20,32 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class PrivateFieldUsedAsLocalVariableTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<PrivateFieldUsedAsLocalVariable>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void PrivateFieldUsedAsLocalVariable() =>
-            builder.AddPaths("PrivateFieldUsedAsLocalVariable.cs")
-                .Verify();
+[TestClass]
+public class PrivateFieldUsedAsLocalVariableTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<PrivateFieldUsedAsLocalVariable>();
+
+    [TestMethod]
+    public void PrivateFieldUsedAsLocalVariable() =>
+        builder.AddPaths("PrivateFieldUsedAsLocalVariable.cs")
+            .Verify();
 
 #if NET
 
-        [TestMethod]
-        public void PrivateFieldUsedAsLocalVariable_CSharp9() =>
-            builder.AddPaths("PrivateFieldUsedAsLocalVariable.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
+    [TestMethod]
+    public void PrivateFieldUsedAsLocalVariable_CSharp9() =>
+        builder.AddPaths("PrivateFieldUsedAsLocalVariable.CSharp9.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .Verify();
 
-        [TestMethod]
-        public void PrivateFieldUsedAsLocalVariable_CSharp10() =>
-            builder.AddPaths("PrivateFieldUsedAsLocalVariable.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
+    [TestMethod]
+    public void PrivateFieldUsedAsLocalVariable_CSharp10() =>
+        builder.AddPaths("PrivateFieldUsedAsLocalVariable.CSharp10.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .Verify();
 
 #endif
 
-    }
 }
