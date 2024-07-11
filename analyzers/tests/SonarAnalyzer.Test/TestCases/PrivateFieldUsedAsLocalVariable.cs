@@ -479,7 +479,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        private void Increment(int dummy)
-            => _wasCalled = true;
+        private void Increment(int dummy) =>
+            _wasCalled = true;
     }
 }

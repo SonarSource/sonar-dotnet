@@ -20,17 +20,17 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class PrivateFieldUsedAsLocalVariableTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<PrivateFieldUsedAsLocalVariable>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void PrivateFieldUsedAsLocalVariable() =>
-            builder.AddPaths("PrivateFieldUsedAsLocalVariable.cs")
-                .Verify();
+[TestClass]
+public class PrivateFieldUsedAsLocalVariableTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<PrivateFieldUsedAsLocalVariable>();
+
+    [TestMethod]
+    public void PrivateFieldUsedAsLocalVariable() =>
+        builder.AddPaths("PrivateFieldUsedAsLocalVariable.cs")
+            .Verify();
 
 #if NET
 
@@ -48,5 +48,4 @@ namespace SonarAnalyzer.Test.Rules
 
 #endif
 
-    }
 }

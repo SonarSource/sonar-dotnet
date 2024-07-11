@@ -180,17 +180,14 @@ public sealed class PrivateFieldUsedAsLocalVariable : SonarDiagnosticAnalyzer
                     && methodNames.Contains(node.Identifier.ValueText)))
             {
                 var memberReference = GetTopmostSyntaxWithTheSameSymbol(node);
-                if (memberReference.Symbol is IFieldSymbol fieldSymbol
-                    && privateFields.ContainsKey(fieldSymbol))
+                if (memberReference.Symbol is IFieldSymbol fieldSymbol && privateFields.ContainsKey(fieldSymbol))
                 {
                     ClassifyFieldReference(model.GetEnclosingSymbol(memberReference.Node.SpanStart), memberReference);
                 }
-                else if (memberReference.Symbol is IMethodSymbol
-                         && GetParentPseudoStatement(memberReference) is { } pseudoStatement)
+                else if (memberReference.Symbol is IMethodSymbol && GetParentPseudoStatement(memberReference) is { } pseudoStatement)
                 {
                     // Adding method group to the invocation list
-                    invocations.GetOrAdd(pseudoStatement, _ => new HashSet<ISymbol>())
-                        .Add(memberReference.Symbol);
+                    invocations.GetOrAdd(pseudoStatement, _ => new HashSet<ISymbol>()).Add(memberReference.Symbol);
                 }
             }
 
@@ -239,8 +236,7 @@ public sealed class PrivateFieldUsedAsLocalVariable : SonarDiagnosticAnalyzer
         {
             // If the field is not static and is not from the current instance we
             // consider the reference as read.
-            if (!fieldReference.Symbol.IsStatic
-                && !(fieldReference.Node as ExpressionSyntax).RemoveParentheses().IsOnThis())
+            if (!fieldReference.Symbol.IsStatic && !(fieldReference.Node as ExpressionSyntax).RemoveParentheses().IsOnThis())
             {
                 return false;
             }
