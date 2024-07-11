@@ -3,6 +3,23 @@
 <p>A type or member that is never called is dead code, and should be removed. Cleaning out dead code decreases the size of the maintained codebase,
 making it easier to understand the program and preventing bugs from being introduced.</p>
 <p>This rule detects type or members that are never referenced from inside a translation unit, and cannot be referenced from the outside.</p>
+<h3>Exceptions</h3>
+<p>This rule doesn’t raise issues on:</p>
+<ul>
+  <li> empty constructors </li>
+  <li> members with attributes </li>
+  <li> the <code>Main</code> method of the application </li>
+  <li> <code>void</code> methods with two parameters when the second parameter type derives from <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.eventargs">EventArgs</a> </li>
+  <li> empty serialization constructor on type with <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.serializableattribute">System.SerializableAttribute</a> attribute. </li>
+  <li> field and property members of types marked with <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.serializableattribute">System.SerializableAttribute</a> attribute </li>
+  <li> internal members in assemblies that have a <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.internalsvisibletoattribute">System.Runtime.CompilerServices.InternalsVisibleToAttribute</a> attribute. </li>
+  <li> types and members decorated with the <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.dynamicallyaccessedmembersattribute">System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute</a> attribute (available in .NET 5.0+) or a custom attribute named <code>DynamicallyAccessedMembersAttribute</code>. </li>
+</ul>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
@@ -30,22 +47,6 @@ public class Foo
     private class UsedClass {...}
 }
 </pre>
-<h3>Exceptions</h3>
-<p>This rule doesn’t raise issues on:</p>
-<ul>
-  <li> empty constructors </li>
-  <li> members with attributes </li>
-  <li> the <code>Main</code> method of the application </li>
-  <li> methods with event handler signature <code>void Foo(object, EventArgs)</code> that are declared in partial class </li>
-  <li> empty serialization constructor on type with <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.serializableattribute">System.SerializableAttribute</a> attribute. </li>
-  <li> field and property members of types marked with <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.serializableattribute">System.SerializableAttribute</a> attribute </li>
-  <li> internal members in assemblies that have a <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.internalsvisibletoattribute">System.Runtime.CompilerServices.InternalsVisibleToAttribute</a> attribute. </li>
-  <li> types and members decorated with the <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.dynamicallyaccessedmembersattribute">System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute</a> attribute (available in .NET 5.0+) or a custom attribute named <code>DynamicallyAccessedMembersAttribute</code>. </li>
-</ul>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
