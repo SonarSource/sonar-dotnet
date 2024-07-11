@@ -98,7 +98,7 @@ internal sealed partial class Invocation
 
         static IEnumerable<ProgramState> ProcessElementOrDefaultMethods(ProgramState state, IInvocationOperationWrapper invocation)
         {
-            var constraint = invocation.EffectiveInstance(state).TrackedSymbol(state) is { } instanceSymbol
+            var constraint = invocation.Target(state).TrackedSymbol(state) is { } instanceSymbol
                              && GetElementType(instanceSymbol) is { } elementType
                              && (elementType.IsReferenceType || elementType.IsNullableValueType())
                              ? state[instanceSymbol]?.Constraint<CollectionConstraint>()
@@ -119,7 +119,7 @@ internal sealed partial class Invocation
 
     private static ProgramState[] ProcessElementExistsCheckMethods(ProgramState state, IInvocationOperationWrapper invocation)
     {
-        if (ElementExistsCheckMethods.Contains(invocation.TargetMethod.Name) && invocation.EffectiveInstance(state).TrackedSymbol(state) is { } instanceSymbol)
+        if (ElementExistsCheckMethods.Contains(invocation.TargetMethod.Name) && invocation.Target(state).TrackedSymbol(state) is { } instanceSymbol)
         {
             return state[instanceSymbol]?.Constraint<CollectionConstraint>() switch
             {

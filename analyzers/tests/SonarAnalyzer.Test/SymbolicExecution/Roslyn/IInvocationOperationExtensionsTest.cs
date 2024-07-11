@@ -57,7 +57,7 @@ public class IInvocationOperationExtensionsTest
         var (tree, model) = TestHelper.CompileCS(code);
         var invocationSyntax = tree.GetRoot().DescendantNodesAndSelf().OfType<SyntaxCS.InvocationExpressionSyntax>().First();
         var operation = IInvocationOperationWrapper.FromOperation(model.GetOperation(invocationSyntax));
-        operation.EffectiveInstance(ProgramState.Empty).Should().NotBeNull().And.BeAssignableTo<IOperation>().Which.Kind.Should().Be(kind);
+        operation.Target(ProgramState.Empty).Should().NotBeNull().And.BeAssignableTo<IOperation>().Which.Kind.Should().Be(kind);
     }
 
     [DataTestMethod]
@@ -96,6 +96,6 @@ public class IInvocationOperationExtensionsTest
         var (tree, model) = TestHelper.CompileVB(code);
         var invocationSyntax = tree.GetRoot().DescendantNodesAndSelf().OfType<SyntaxVB.InvocationExpressionSyntax>().First();
         var operation = IInvocationOperationWrapper.FromOperation(model.GetOperation(invocationSyntax));
-        operation.EffectiveInstance(ProgramState.Empty).Should().NotBeNull().And.BeAssignableTo<IOperation>().Which.Kind.Should().Be(kind);
+        operation.Target(ProgramState.Empty).Should().NotBeNull().And.BeAssignableTo<IOperation>().Which.Kind.Should().Be(kind);
     }
 }

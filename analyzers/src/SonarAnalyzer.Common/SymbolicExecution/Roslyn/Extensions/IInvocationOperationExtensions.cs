@@ -43,7 +43,7 @@ internal static class IInvocationOperationExtensions
             && !invocation.Arguments.IsEmpty
             && state.ResolveCaptureAndUnwrapConversion(invocation.Arguments[0].ToArgument().Value).Kind == OperationKindEx.InstanceReference);
 
-    public static IOperation EffectiveInstance(this IInvocationOperationWrapper invocation, ProgramState state) =>
+    public static IOperation Target(this IInvocationOperationWrapper invocation, ProgramState state) =>
         invocation.Instance
         ?? (invocation.TargetMethod.IsExtensionMethod
                 ? state.ResolveCaptureAndUnwrapConversion(invocation.Arguments[0].ToArgument().Value)
