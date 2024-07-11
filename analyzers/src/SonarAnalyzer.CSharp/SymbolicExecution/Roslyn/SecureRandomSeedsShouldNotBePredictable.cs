@@ -119,7 +119,7 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : HardcodedBytesRule
     private static ProgramState ProcessSeedingMethods(ProgramState state, IInvocationOperationWrapper invocation)
     {
         return (IsSetSeed() || IsAddSeedMaterial())
-            && invocation.GetInstance(state).TrackedSymbol(state) is { } instance
+            && invocation.Instance.TrackedSymbol(state) is { } instance
             // If it is already unpredictable, do nothing.
             // Seeding methods do not overwrite the state, but _mix_ it with the new value.
             && state[instance]?.HasConstraint(CryptographicSeedConstraint.Predictable) is true
@@ -143,7 +143,7 @@ public sealed class SecureRandomSeedsShouldNotBePredictable : HardcodedBytesRule
     private ProgramState ProcessNextMethods(ProgramState state, IInvocationOperationWrapper invocation)
     {
         if ((IsSecureRandomMethod() || IsRandomGeneratorMethod())
-            && invocation.GetInstance(state) is { } instance
+            && invocation.Instance is { } instance
             && state[instance]?.HasConstraint(CryptographicSeedConstraint.Predictable) is true)
         {
             ReportIssue(invocation.WrappedOperation);

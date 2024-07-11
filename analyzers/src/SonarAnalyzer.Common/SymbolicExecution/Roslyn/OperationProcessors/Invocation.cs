@@ -113,7 +113,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         if (invocation.TargetMethod.IsExtensionMethod
             && invocation.TargetMethod.ReducedFrom is { } reducedFrom   // VB reduces method symbol to 'instance.Extension()' without annotated ArgumentOperation
             && reducedFrom.Parameters.First().HasNotNullAttribute()
-            && invocation.GetInstance(state).TrackedSymbol(state) is { } instanceSymbol)
+            && invocation.EffectiveInstance(state).TrackedSymbol(state) is { } instanceSymbol)
         {
             state = state.SetSymbolConstraint(instanceSymbol, ObjectConstraint.NotNull);
         }

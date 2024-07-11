@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using StyleCop.Analyzers.Lightup;
 using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -48,9 +47,6 @@ public class IInvocationOperationExtensionsTest
                 void M() => {{invocation}};
             }
 
-            public class Sample
-            {
-               {{definition}}
                public Sample GetSample() => new Sample();
             }
 
