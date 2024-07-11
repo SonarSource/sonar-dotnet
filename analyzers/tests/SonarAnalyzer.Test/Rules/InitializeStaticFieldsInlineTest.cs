@@ -20,13 +20,12 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class InitializeStaticFieldsInlineTest
 {
-    [TestClass]
-    public class InitializeStaticFieldsInlineTest
-    {
-        [TestMethod]
-        public void InitializeStaticFieldsInline() =>
-            new VerifierBuilder<InitializeStaticFieldsInline>().AddPaths("InitializeStaticFieldsInline.cs").Verify();
-    }
+    [TestMethod]
+    public void InitializeStaticFieldsInline() =>
+        new VerifierBuilder<InitializeStaticFieldsInline>().AddPaths("InitializeStaticFieldsInline.cs").Verify();
 }
