@@ -34,7 +34,7 @@ public class IInvocationOperationExtensionsTest
     [DataRow("sample.ExtensionMethod()", OperationKind.FieldReference)]
     [DataRow("sample.GetSample().Method()", OperationKind.Invocation)]
 
-    public void Invocation_GetInstance_ReturnsSymbol_CS(string invocation, OperationKind kind)
+    public void Invocation_Target_ReturnsSymbol_CS(string invocation, OperationKind kind)
     {
         var code = $$"""
 
@@ -42,17 +42,16 @@ public class IInvocationOperationExtensionsTest
             {
                 Sample sample = new Sample();
 
-               public void Method() {}
+                public void Method() { }
 
                 void M() => {{invocation}};
-            }
 
-               public Sample GetSample() => new Sample();
+                public Sample GetSample() => new Sample();
             }
 
             public static class Extensions
             {
-                public static void ExtensionMethod(this Sample sample) {}
+                public static void ExtensionMethod(this Sample sample) { }
             }
             """;
         var (tree, model) = TestHelper.CompileCS(code);
@@ -67,7 +66,7 @@ public class IInvocationOperationExtensionsTest
     [DataRow("sample.ExtensionMethod()", OperationKind.FieldReference)]
     [DataRow("sample.GetSample().Method()", OperationKind.Invocation)]
 
-    public void Invocation_GetInstance_ReturnsSymbol_VB(string invocation, OperationKind kind)
+    public void Invocation_Target_ReturnsSymbol_VB(string invocation, OperationKind kind)
     {
         var code = $$"""
             Public Class Sample
