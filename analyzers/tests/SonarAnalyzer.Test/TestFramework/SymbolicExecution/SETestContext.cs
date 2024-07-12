@@ -183,6 +183,11 @@ public static class Tagger
     public static void Tag(this object o, string name) {{ }}
     public static T Unknown<T>() => default;
 }}
+
+public static class ExtensionMethods
+{{
+    public static void Add(this List<int> list, int a, int b) {{ }}
+}}
 ";
 
     private static string PrependComma(string additionalParameters) =>

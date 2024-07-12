@@ -711,7 +711,8 @@ public partial class RoslynSymbolicExecutionTest
             list.RemoveAt(0);
             tag = "remove";
 
-            void Invoke(Action<int> action) { }
+            list.Add(1, 2); // Extension method
+            tag = "addExtension";
             """;
         var validator = SETestContext.CreateCS(code, "List<int> list", new PreserveTestCheck("list")).Validator;
         validator.ValidateContainsOperation(OperationKind.Invocation);
@@ -720,6 +721,7 @@ public partial class RoslynSymbolicExecutionTest
         Verify("clear", ObjectConstraint.NotNull, CollectionConstraint.Empty);
         Verify("add", ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
         Verify("remove", ObjectConstraint.NotNull);
+        Verify("addExtension", ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
 
         void Verify(string state, params SymbolicConstraint[] constraints) =>
             validator.TagValue(state, "list").Should().HaveOnlyConstraints(constraints);
