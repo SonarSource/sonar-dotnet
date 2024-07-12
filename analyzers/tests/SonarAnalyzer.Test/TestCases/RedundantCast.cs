@@ -119,9 +119,8 @@ namespace Tests.Diagnostics
     // https://github.com/SonarSource/sonar-dotnet/issues/9498
     public class Repro_9498
     {
-        void Sample()
+        void Sample(float x)
         {
-            float x = 3.14f;
             float res = 1 / (float)(x * 2); // Noncompliant FP
         }
     }
