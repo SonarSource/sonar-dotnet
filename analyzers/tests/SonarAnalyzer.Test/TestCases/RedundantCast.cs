@@ -115,4 +115,13 @@ namespace Tests.Diagnostics
 
         public void OfType() => OfType();
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/9498
+    public class Repro_9498
+    {
+        void Sample(float x)
+        {
+            float res = 1 / (float)(x * 2); // Noncompliant FP
+        }
+    }
 }
