@@ -97,7 +97,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
         if (context.Operation.Instance.AsInvocation() is { } invocation
-            && invocation.Instance is { } instance
+            && invocation.Target(context.State) is { } instance
             && RaisingMethods.Contains(invocation.TargetMethod.Name))
         {
             if (context.State[instance]?.HasConstraint(CollectionConstraint.Empty) is true)
