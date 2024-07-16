@@ -143,6 +143,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         if (block.IsEnclosedIn(ControlFlowRegionKind.Catch) && block.Successors.Any(x => x.Semantics == ControlFlowBranchSemantics.Rethrow))
         {
             BuildBranchesNestedCatchRethrow(block);
+            BuildBranchesRethrowFinally(block);
         }
 
         void AddPredecessorsOutsideRegion(BasicBlock destination)
@@ -173,6 +174,20 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         foreach (var catchBlock in reachableHandlers.Where(x => x.Kind == ControlFlowRegionKind.Catch && x.FirstBlockOrdinal > block.Ordinal).SelectMany(x => x.Blocks(Cfg)))
         {
             AddBranch(block, catchBlock);
+        }
+    }
+
+    private void BuildBranchesRethrowFinally(BasicBlock block)
+    {
+        var tryRegion = block.EnclosingRegion(ControlFlowRegionKind.TryAndCatch).NestedRegion(ControlFlowRegionKind.Try);
+        var finallyOrCatchBlock = tryRegion.ReachableHandlers()
+            .Where(x => x.Kind is ControlFlowRegionKind.Catch or ControlFlowRegionKind.Finally && x.FirstBlockOrdinal > block.Ordinal)
+            .SelectMany(x => x.Blocks(Cfg))
+            .FirstOrDefault();
+
+        if (finallyOrCatchBlock is not null)
+        {
+            AddBranch(block, finallyOrCatchBlock);
         }
     }
 

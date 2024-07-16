@@ -65,7 +65,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Using_Nested_Block_LiveInUntilTheEnd()
     {
-        var code = """
+        const string code = """
             using (var msOuter = new MemoryStream())
             {
                 if (boolParameter)
@@ -95,7 +95,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Using_Nested_Declaration_LiveInUntilTheEnd()
     {
-        var code = """
+        const string code = """
             using var msOuter = new MemoryStream();
             if (boolParameter)
             {
@@ -124,7 +124,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Catch_LiveIn()
     {
-        var code = """
+        const string code = """
             try
             {
                 Method(0);
@@ -146,7 +146,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Catch_TryHasLocalLifetimeRegion_LiveIn()
     {
-        var code = """
+        const string code = """
             try
             {
                 Method(0);
@@ -169,7 +169,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Catch_VariableUsedAfter_LiveIn_LiveOut()
     {
-        var code = """
+        const string code = """
             try
             {
                 Method(0);
@@ -191,7 +191,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Catch_WithThrowStatement_LiveIn()
     {
-        var code = """
+        const string code = """
             var usedInTry = 42;
             var usedInTryUnreachable = 42;
             var usedInCatch = 42;
@@ -224,7 +224,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Catch_WithThrowStatement_Conditional_LiveIn()
     {
-        var code = """
+        const string code = """
             try
             {
                 Method(0);
@@ -253,7 +253,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Catch_Rethrow_LiveIn()
     {
-        var code = """
+        const string code = """
             try
             {
                 Method(0);
@@ -276,7 +276,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Catch_NotLiveIn_NotLiveOut()
     {
-        var code = """
+        const string code = """
             try
             {
                 Method(0);
@@ -299,7 +299,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Catch_Nested_LiveIn()
     {
-        var code = """
+        const string code = """
             var outer = 42;
             var inner = 42;
             try
@@ -341,7 +341,7 @@ public partial class RoslynLiveVariableAnalysisTest
          *      |
          *    Exit 2
          */
-        var code = """
+        const string code = """
             // Error CS1003 Syntax error, 'try' expected
             // Error CS1514 { expected
             // Error CS1513 } expected
@@ -361,7 +361,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Catch_Loop_Propagates_LiveIn_LiveOut()
     {
-        var code = """
+        const string code = """
             var variableUsedInCatch = 42;
             A:
             Method(intParameter);
@@ -390,7 +390,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Catch_ExVariable_LiveIn()
     {
-        var code = """
+        const string code = """
             try
             {
                 Method(0);
@@ -416,7 +416,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Catch_SingleType_LiveIn()
     {
-        var code = """
+        const string code = """
             var usedAfter = 42;
             var usedInTry = 42;
             var usedInCatch = 42;
@@ -441,7 +441,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Catch_SingleTypeWhenCondition_LiveIn()
     {
-        var code = """
+        const string code = """
             var usedAfter = 42;
             var usedInTry = 42;
             var usedInCatch = 42;
@@ -466,7 +466,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Catch_SingleTypeWhenConditionReferencingArgument_LiveIn()
     {
-        var code = """
+        const string code = """
             try
             {
                 Method(0);
@@ -488,7 +488,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Catch_MultipleTypes_LiveIn()
     {
-        var code = """
+        const string code = """
             var usedAfter = 42;
             var usedInTry = 42;
             var usedInCatchA = 42;
@@ -522,7 +522,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Catch_AssignedInTry_LiveOut()
     {
-        var code = """
+        const string code = """
             int variable = 42;
             Method(0);
             try
@@ -547,7 +547,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Catch_When_AssignedInTry_LiveOut()
     {
-        var code = """
+        const string code = """
             int variable = 42;
             Method(0);
             try
@@ -573,7 +573,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Catch_Loop_Propagates_LiveIn()
     {
-        var code = """
+        const string code = """
             var variable = 0;
             Method(0);
             while (variable < 5)
@@ -606,7 +606,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Throw_NestedCatch_LiveOut()
     {
-        var code = """
+        const string code = """
             var value = 100;
             try
             {
@@ -638,7 +638,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Throw_NestedCatch_LiveInInConsecutiveOuterCatch()
     {
-        var code = """
+        const string code = """
             var value = 100;
             try
             {
@@ -682,7 +682,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Throw_NestedCatch_OuterCatchRethrows_LiveOutOuterCathc()
     {
-        var code = """
+        const string code = """
             var value = 100;
             try
             {
@@ -724,7 +724,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Finally_LiveIn()
     {
-        var code = """
+        const string code = """
             try
             {
                 Method(0);
@@ -746,7 +746,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Finally_VariableUsedAfter_LiveIn_LiveOut()
     {
-        var code = """
+        const string code = """
             try
             {
                 Method(0);
@@ -768,7 +768,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Finally_VariableUsedAfter_FinallyHasLocalLifetimeRegion_LiveIn_LiveOut()
     {
-        var code = """
+        const string code = """
             try
             {
                 Method(0);
@@ -791,7 +791,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Finally_WithThrowStatement_LiveIn()
     {
-        var code = """
+        const string code = """
             try
             {
                 Method(0);
@@ -817,7 +817,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Finally_WithThrowStatementAsSingleExit_LiveIn()
     {
-        var code = """
+        const string code = """
             try
             {
                 Method(0);
@@ -841,7 +841,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Finally_WithThrowStatement_Conditional_LiveIn()
     {
-        var code = """
+        const string code = """
             try
             {
                 Method(0);
@@ -870,7 +870,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Finally_WithThrowStatementInTry_LiveOut()
     {
-        var code = """
+        const string code = """
             int variable = 42;
             Method(0);
             try
@@ -895,7 +895,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Finally_WithThrowStatementInTry_LiveOut_FilteredCatch()
     {
-        var code = """
+        const string code = """
             int variable = 42;
             Method(0);
             try
@@ -957,7 +957,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Finally_NotLiveIn_NotLiveOut()
     {
-        var code = """
+        const string code = """
             try
             {
                 Method(0);
@@ -980,7 +980,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Finally_Nested_LiveIn()
     {
-        var code = """
+        const string code = """
             var outer = 42;
             var inner = 42;
             try
@@ -1014,7 +1014,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Finally_Nested_NoInstructionBetweenFinally_LiveIn()
     {
-        var code = """
+        const string code = """
             var outer = 42;
             var inner = 42;
             try
@@ -1047,7 +1047,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Finally_ForEach_LiveIn()
     {
-        var code = """
+        const string code = """
             var outer = 42;
             try
             {
@@ -1082,7 +1082,7 @@ public partial class RoslynLiveVariableAnalysisTest
          *      |
          *    Exit 2
          */
-        var code = """
+        const string code = """
             // Error CS1003 Syntax error, 'try' expected
             // Error CS1514 { expected
             // Error CS1513 } expected
@@ -1102,7 +1102,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Finally_Loop_Propagates_LiveIn_LiveOut()
     {
-        var code = """
+        const string code = """
             A:
             Method(intParameter);
             if (boolParameter)
@@ -1130,7 +1130,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Finally_Loop_Propagates_FinallyHasLocalLifetimeRegion_LiveIn_LiveOut()
     {
-        var code = """
+        const string code = """
             A:
             Method(intParameter);
             if (boolParameter)
@@ -1159,7 +1159,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void Finally_AssignedInTry_LiveOut()
     {
-        var code = """
+        const string code = """
             int variable = 42;
             Method(0);
             try
@@ -1184,7 +1184,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void TryCatchFinally_LiveIn()
     {
-        var code = """
+        const string code = """
             var usedInTry = 42;
             var usedInCatch = 42;
             var usedInFinally = 42;
@@ -1209,6 +1209,202 @@ public partial class RoslynLiveVariableAnalysisTest
         context.Validate("Method(usedInCatch);", LiveIn("usedInCatch", "usedInFinally", "usedAfter"), LiveOut("usedInFinally", "usedAfter"));
         context.Validate("Method(usedInFinally);", LiveIn("usedInFinally", "usedAfter"), LiveOut("usedAfter"));
         context.Validate("Method(usedAfter);", LiveIn("usedAfter"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void TryCatchFinally_RethrowWithFinally()
+    {
+        const string code = """
+            var value = 0;
+            try
+            {
+                Method(0);
+                value = 42;
+            }
+            catch
+            {
+                Method(value);
+                value = 1;
+                throw;
+            }
+            finally
+            {
+                Method(value + 1);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("value = 1;", LiveIn("value"), LiveOut("value"));
+        context.Validate("Method(value + 1);", LiveIn("value"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void TryCatchFinally_RethrowOuterFinally()
+    {
+        const string code = """
+            var value = 0;
+            try
+            {
+               Method(0);
+               try
+               {
+                   Method(0);
+                   value = 42;
+               }
+               catch
+               {
+                   Method(value);
+                   value = 2;
+                   throw;
+               }
+            }
+            finally
+            {
+               Method(value + 1);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("value = 2;", LiveIn("value"), LiveOut("value"));
+        context.Validate("Method(value + 1);", LiveIn("value"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void TryCatchFinally_RethrowOuterCatchFinally()
+    {
+        const string code = """
+            var value = 0;
+            try
+            {
+               Method(0);
+               try
+               {
+                   Method(1);
+                   value = 42;
+               }
+               catch
+               {
+                   value = 2;
+                   throw;
+               }
+            }
+            catch
+            {
+               Method(2);
+            }
+            finally
+            {
+               Method(value + 1);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("value = 2;", LiveOut("value"));
+        context.Validate("Method(2);", LiveIn("value"), LiveOut("value"));
+        context.Validate("Method(value + 1);", LiveIn("value"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void TryCatchFinally_RethrowOuterCatchRethrowFinally()
+    {
+        const string code = """
+            var value = 0;
+            try
+            {
+               Method(0);
+               try
+               {
+                   Method(1);
+                   value = 42;
+               }
+               catch
+               {
+                   value = 2;
+                   throw;
+               }
+            }
+            catch
+            {
+               Method(2);
+               throw;
+            }
+            finally
+            {
+               Method(value + 1);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("value = 2;", LiveOut("value"));
+        context.Validate("Method(2);", LiveIn("value"), LiveOut("value"));
+        context.Validate("Method(value + 1);", LiveIn("value"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void TryCatchFinally_ConsecutiveCatchRethrowFinally()
+    {
+        const string code = """
+            var value = 0;
+            try
+            {
+                Method(0);
+                value = 42;
+            }
+            catch (IOException)
+            {
+                Method(value);
+                value = 1;
+                throw;
+            }
+            catch
+            {
+                Method(value);
+                value = 2;
+                throw;
+            }
+            finally
+            {
+                Method(value + 1);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("value = 1;", LiveIn("value"), LiveOut("value"));
+        context.Validate("value = 2;", LiveIn("value"), LiveOut("value"));
+        context.Validate("Method(value + 1);", LiveIn("value"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void TryCatchFinally_FilteredCatchRethrowFinally()
+    {
+        const string code = """
+            var value = 0;
+            try
+            {
+                Method(0);
+                value = 42;
+            }
+            catch (IOException)
+            {
+                Method(value);
+                value = 1;
+                throw;
+            }
+            finally
+            {
+                Method(value + 1);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("value = 1;", LiveIn("value"), LiveOut("value"));
+        context.Validate("Method(value + 1);", LiveIn("value"));
         context.ValidateExit();
     }
 }
