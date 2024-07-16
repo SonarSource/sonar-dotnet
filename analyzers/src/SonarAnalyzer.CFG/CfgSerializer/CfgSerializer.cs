@@ -21,22 +21,21 @@
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Sonar;
 
-namespace SonarAnalyzer.CFG
-{
-    public partial class CfgSerializer
-    {
-        public static string Serialize(IControlFlowGraph cfg, string title = "SonarCfg")
-        {
-            var writer = new DotWriter();
-            new SonarCfgWalker(writer).Visit(cfg, title);
-            return writer.ToString();
-        }
+namespace SonarAnalyzer.CFG;
 
-        public static string Serialize(ControlFlowGraph cfg, string title = "RoslynCfg")
-        {
-            var writer = new DotWriter();
-            new RoslynCfgWalker(writer, new RoslynCfgIdProvider()).Visit(cfg, title);
-            return writer.ToString();
-        }
+public static partial class CfgSerializer
+{
+    public static string Serialize(IControlFlowGraph cfg, string title = "SonarCfg")
+    {
+        var writer = new DotWriter();
+        new SonarCfgWalker(writer).Visit(cfg, title);
+        return writer.ToString();
+    }
+
+    public static string Serialize(ControlFlowGraph cfg, string title = "RoslynCfg")
+    {
+        var writer = new DotWriter();
+        new RoslynCfgWalker(writer, new RoslynCfgIdProvider()).Visit(cfg, title);
+        return writer.ToString();
     }
 }

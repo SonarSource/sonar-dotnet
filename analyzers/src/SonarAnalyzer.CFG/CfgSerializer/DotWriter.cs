@@ -20,67 +20,70 @@
 
 using System.Text;
 
-namespace SonarAnalyzer.CFG
+namespace SonarAnalyzer.CFG;
+
+public class DotWriter
 {
-    public class DotWriter
+    private readonly StringBuilder builder = new StringBuilder();
+    private readonly StringBuilder edges = new StringBuilder();
+    private bool started;
+
+    public void WriteGraphStart(string graphName)
     {
-        private readonly StringBuilder builder = new StringBuilder();
-        private readonly StringBuilder edges = new StringBuilder();
-        private bool started;
-
-        public void WriteGraphStart(string graphName)
+        if (started)
         {
-            if (started)
-            {
-                throw new InvalidOperationException("Graph was already started");
-            }
-            started = true;
-            builder.AppendLine($"digraph \"{Encode(graphName)}\" {{");
+            throw new InvalidOperationException("Graph was already started");
         }
+        started = true;
+        builder.AppendLine($"digraph \"{Encode(graphName)}\" {{");
+    }
 
-        public void WriteGraphEnd()
+    public void WriteGraphEnd()
+    {
+        if (!started)
         {
-            if (!started)
-            {
-                throw new InvalidOperationException("Graph was not started");
-            }
-            started = false;
-            builder.Append(edges).AppendLine("}");  // Edges crossing subgraphs must be listed at the end of the main graph to keep nodes rendered in the correct subgraph
-            edges.Clear();
+            throw new InvalidOperationException("Graph was not started");
         }
+        started = false;
+        builder.Append(edges).AppendLine("}");  // Edges crossing subgraphs must be listed at the end of the main graph to keep nodes rendered in the correct subgraph
+        edges.Clear();
+    }
 
-        public void WriteSubGraphStart(int id, string title) =>
-            builder.AppendLine($"subgraph \"cluster_{id}\" {{\nlabel = \"{Encode(title)}\"");
+    public void WriteSubGraphStart(int id, string title) =>
+        builder.AppendLine($"subgraph \"cluster_{id}\" {{\nlabel = \"{Encode(title)}\"");
 
-        public void WriteSubGraphEnd() =>
-            builder.AppendLine("}");
+    public void WriteSubGraphEnd() =>
+        builder.AppendLine("}");
 
-        public void WriteNode(string id, string header, params string[] items)
+    public void WriteNode(string id, string header, params string[] items)
+    {
+        // Curly braces in the label reverse the orientation of the columns/rows
+        // Columns/rows are created with pipe
+        // New lines are inserted with \n; \r\n does not work well.
+        // ID [shape=record label="{<header>|<line1>\n<line2>\n...}"]
+        builder.Append(id).Append(" [shape=record label=\"{").Append(header);
+        foreach (var item in items)
         {
-            // Curly braces in the label reverse the orientation of the columns/rows
-            // Columns/rows are created with pipe
-            // New lines are inserted with \n; \r\n does not work well.
-            // ID [shape=record label="{<header>|<line1>\n<line2>\n...}"]
-            builder.Append(id).Append(" [shape=record label=\"{").Append(header);
-            foreach (var item in items)
-            {
-                builder.Append("|").Append(Encode(item));
-            }
-            builder.AppendLine("}\"]");
+            builder.Append("|").Append(Encode(item));
         }
+        builder.AppendLine("}\"]");
+    }
 
-        public void WriteEdge(string startId, string endId, string label)
+    public void WriteEdge(string startId, string endId, string label)
+    {
+        edges.Append(startId).Append(" -> ").Append(endId);
+        if (!string.IsNullOrEmpty(label))
         {
-            edges.Append(startId).Append(" -> ").Append(endId);
-            if (!string.IsNullOrEmpty(label))
-            {
-                edges.Append($" [label=\"{label}\"]");
-            }
-            edges.AppendLine();
+            edges.Append($" [label=\"{label}\"]");
         }
+        edges.AppendLine();
+    }
 
-        private static string Encode(string s) =>
-            s.Replace("\r", string.Empty)
+    public override string ToString() =>
+        builder.ToString();
+
+    private static string Encode(string s) =>
+        s.Replace("\r", string.Empty)
             .Replace("\n", @"\n")
             .Replace("{", @"\{")
             .Replace("}", @"\}")
@@ -88,8 +91,4 @@ namespace SonarAnalyzer.CFG
             .Replace("<", @"\<")
             .Replace(">", @"\>")
             .Replace("\"", @"\""");
-
-        public override string ToString() =>
-            builder.ToString();
-    }
 }
