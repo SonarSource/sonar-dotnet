@@ -20,30 +20,30 @@
 
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
-using SonarAnalyzer.CFG.Sonar;
 
 namespace SonarAnalyzer.CFG;
 
 public static partial class CfgSerializer
 {
-    public static string Serialize(IControlFlowGraph cfg, string title = "SonarCfg")
+    private sealed class RoslynLvaWalker : RoslynCfgWalker
     {
-        var writer = new DotWriter();
-        new SonarCfgWalker(writer).Visit(cfg, title);
-        return writer.ToString();
-    }
+        private readonly RoslynLiveVariableAnalysis lva;
 
-    public static string Serialize(ControlFlowGraph cfg, string title = "RoslynCfg")
-    {
-        var writer = new DotWriter();
-        new RoslynCfgWalker(writer, new RoslynCfgIdProvider()).Visit(cfg, title);
-        return writer.ToString();
-    }
+        public RoslynLvaWalker(RoslynLiveVariableAnalysis lva, DotWriter writer, RoslynCfgIdProvider cfgIdProvider) : base(writer, cfgIdProvider)
+        {
+            this.lva = lva;
+        }
 
-    public static string Serialize(RoslynLiveVariableAnalysis lva, string title = "RoslynCfg")
-    {
-        var writer = new DotWriter();
-        new RoslynLvaWalker(lva, writer, new RoslynCfgIdProvider()).Visit(lva.Cfg, title);
-        return writer.ToString();
+        protected override void WriteEdges(BasicBlock block)
+        {
+            foreach (var predecessor in lva.BlockPredecessors[block.Ordinal])
+            {
+                writer.WriteEdge(BlockId(predecessor), BlockId(block), string.Empty);
+            }
+            if (block.FallThroughSuccessor is { Destination: null })
+            {
+                writer.WriteEdge(BlockId(block), "NoDestination_" + BlockId(block), block.FallThroughSuccessor.Semantics.ToString());
+            }
+        }
     }
 }

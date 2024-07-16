@@ -27,8 +27,8 @@ public static partial class CfgSerializer
 {
     private class RoslynCfgWalker
     {
-        private readonly DotWriter writer;
-        private readonly HashSet<BasicBlock> visited = new();
+        protected readonly DotWriter writer;
+        private readonly HashSet<BasicBlock> visited = [];
         private readonly RoslynCfgIdProvider cfgIdProvider;
         private readonly int cfgId;
 
@@ -45,6 +45,27 @@ public static partial class CfgSerializer
             VisitContent(cfg, title);
             writer.WriteGraphEnd();
         }
+
+        protected virtual void WriteEdges(BasicBlock block)
+        {
+            foreach (var predecessor in block.Predecessors)
+            {
+                var condition = string.Empty;
+                if (predecessor.Source.ConditionKind != ControlFlowConditionKind.None)
+                {
+                    condition = predecessor == predecessor.Source.ConditionalSuccessor ? predecessor.Source.ConditionKind.ToString() : "Else";
+                }
+                var semantics = predecessor.Semantics == ControlFlowBranchSemantics.Regular ? null : predecessor.Semantics.ToString();
+                writer.WriteEdge(BlockId(predecessor.Source), BlockId(block), $"{semantics} {condition}".Trim());
+            }
+            if (block.FallThroughSuccessor is { Destination: null })
+            {
+                writer.WriteEdge(BlockId(block), "NoDestination_" + BlockId(block), block.FallThroughSuccessor.Semantics.ToString());
+            }
+        }
+
+        protected string BlockId(BasicBlock block) =>
+            $"cfg{cfgId}_block{block.Ordinal}";
 
         private void VisitSubGraph(ControlFlowGraph cfg, string title)
         {
@@ -140,27 +161,6 @@ public static partial class CfgSerializer
             }
             return sb.ToString();
         }
-
-        private void WriteEdges(BasicBlock block)
-        {
-            foreach (var predecessor in block.Predecessors)
-            {
-                var condition = string.Empty;
-                if (predecessor.Source.ConditionKind != ControlFlowConditionKind.None)
-                {
-                    condition = predecessor == predecessor.Source.ConditionalSuccessor ? predecessor.Source.ConditionKind.ToString() : "Else";
-                }
-                var semantics = predecessor.Semantics == ControlFlowBranchSemantics.Regular ? null : predecessor.Semantics.ToString();
-                writer.WriteEdge(BlockId(predecessor.Source), BlockId(block), $"{semantics} {condition}".Trim());
-            }
-            if (block.FallThroughSuccessor is { Destination: null })
-            {
-                writer.WriteEdge(BlockId(block), "NoDestination_" + BlockId(block), block.FallThroughSuccessor.Semantics.ToString());
-            }
-        }
-
-        private string BlockId(BasicBlock block) =>
-            $"cfg{cfgId}_block{block.Ordinal}";
 
         private static IEnumerable<IFlowAnonymousFunctionOperationWrapper> AnonymousFunctions(ControlFlowGraph cfg) =>
             cfg.Blocks

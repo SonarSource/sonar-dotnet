@@ -28,6 +28,8 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
     private readonly Dictionary<int, List<BasicBlock>> blockPredecessors = [];
     private readonly Dictionary<int, List<BasicBlock>> blockSuccessors = [];
 
+    internal ImmutableDictionary<int, List<BasicBlock>> BlockPredecessors => blockPredecessors.ToImmutableDictionary();
+
     protected override BasicBlock ExitBlock => Cfg.ExitBlock;
 
     public RoslynLiveVariableAnalysis(ControlFlowGraph cfg, CancellationToken cancel)
