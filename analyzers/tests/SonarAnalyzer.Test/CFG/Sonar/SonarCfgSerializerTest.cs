@@ -40,10 +40,11 @@ public class SonarCfgSerializerTest
             """;
         var dot = CfgSerializer.Serialize(CreateMethodCfg(code), "Foo");
 
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "Foo" {
             0 [shape=record label="{EXIT}"]
             }
+
             """);
     }
 
@@ -70,7 +71,7 @@ public class SonarCfgSerializerTest
             """;
         var dot = CfgSerializer.Serialize(CreateMethodCfg(code), "Foo");
 
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "Foo" {
             0 [shape=record label="{BRANCH:SwitchStatement|a}"]
             1 [shape=record label="{BINARY:CaseSwitchLabel|a}"]
@@ -86,6 +87,7 @@ public class SonarCfgSerializerTest
             3 -> 4 [label="False"]
             5 -> 4
             }
+
             """);
     }
 
@@ -107,7 +109,7 @@ public class SonarCfgSerializerTest
             """;
         var dot = CfgSerializer.Serialize(CreateMethodCfg(code), "Foo");
 
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "Foo" {
             0 [shape=record label="{BINARY:TrueLiteralExpression|true}"]
             1 [shape=record label="{SIMPLE|Bar|Bar()}"]
@@ -116,6 +118,7 @@ public class SonarCfgSerializerTest
             0 -> 2 [label="False"]
             1 -> 2
             }
+
             """);
     }
 
@@ -136,7 +139,7 @@ public class SonarCfgSerializerTest
             """;
         var dot = CfgSerializer.Serialize(CreateMethodCfg(code), "Foo");
 
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "Foo" {
             0 [shape=record label="{FOREACH:ForEachStatement|items}"]
             1 [shape=record label="{BINARY:ForEachStatement}"]
@@ -147,6 +150,7 @@ public class SonarCfgSerializerTest
             1 -> 3 [label="False"]
             2 -> 1
             }
+
             """);
     }
 
@@ -172,7 +176,7 @@ public class SonarCfgSerializerTest
 
         var dot = CfgSerializer.Serialize(CreateMethodCfg(code), "ForEach");
 
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "ForEach" {
             0 [shape=record label="{FOREACH:ForEachVariableStatement|values}"]
             1 [shape=record label="{BINARY:ForEachVariableStatement}"]
@@ -183,6 +187,7 @@ public class SonarCfgSerializerTest
             1 -> 3 [label="False"]
             2 -> 1
             }
+
             """);
     }
 
@@ -203,7 +208,7 @@ public class SonarCfgSerializerTest
             """;
         var dot = CfgSerializer.Serialize(CreateMethodCfg(code), "Foo");
 
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "Foo" {
             0 [shape=record label="{FOR:ForStatement|0|i = 0}"]
             1 [shape=record label="{BINARY:ForStatement|i|10|i \< 10}"]
@@ -216,6 +221,7 @@ public class SonarCfgSerializerTest
             2 -> 4
             4 -> 1
             }
+
             """);
     }
 
@@ -236,7 +242,7 @@ public class SonarCfgSerializerTest
             """;
         var dot = CfgSerializer.Serialize(CreateMethodCfg(code), "Foo");
 
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "Foo" {
             0 [shape=record label="{JUMP:UsingStatement|x}"]
             1 [shape=record label="{USING:UsingStatement|Bar|Bar()}"]
@@ -244,6 +250,7 @@ public class SonarCfgSerializerTest
             0 -> 1
             1 -> 2
             }
+
             """);
     }
 
@@ -264,7 +271,7 @@ public class SonarCfgSerializerTest
             """;
         var dot = CfgSerializer.Serialize(CreateMethodCfg(code), "Foo");
 
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "Foo" {
             0 [shape=record label="{LOCK:LockStatement|x}"]
             1 [shape=record label="{SIMPLE|Bar|Bar()}"]
@@ -272,6 +279,7 @@ public class SonarCfgSerializerTest
             0 -> 1
             1 -> 2
             }
+
             """);
     }
 
@@ -292,12 +300,13 @@ public class SonarCfgSerializerTest
             """;
         var dot = CfgSerializer.Serialize(CreateMethodCfg(code), "Foo");
 
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "Foo" {
             0 [shape=record label="{SIMPLE|Bar|x =\>\n        \{\n            return 1 + 1;\n        \}|Bar(x =\>\n        \{\n            return 1 + 1;\n        \})}"]
             1 [shape=record label="{EXIT}"]
             0 -> 1
             }
+
             """);
     }
 
@@ -315,12 +324,13 @@ public class SonarCfgSerializerTest
             """;
         var dot = CfgSerializer.Serialize(CreateMethodCfg(code), "Range");
 
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "Range" {
             0 [shape=record label="{SIMPLE|1..4|r = 1..4}"]
             1 [shape=record label="{EXIT}"]
             0 -> 1
             }
+
             """);
     }
 
@@ -338,12 +348,13 @@ public class SonarCfgSerializerTest
             """;
         var dot = CfgSerializer.Serialize(CreateMethodCfg(code), "Index");
 
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "Index" {
             0 [shape=record label="{SIMPLE|^1|index = ^1}"]
             1 [shape=record label="{EXIT}"]
             0 -> 1
             }
+
             """);
     }
 
@@ -361,12 +372,13 @@ public class SonarCfgSerializerTest
             """;
         var dot = CfgSerializer.Serialize(CreateMethodCfg(code), "Range");
 
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "Range" {
             0 [shape=record label="{SIMPLE|^2..^0|range = ^2..^0}"]
             1 [shape=record label="{EXIT}"]
             0 -> 1
             }
+
             """);
     }
 
@@ -385,12 +397,13 @@ public class SonarCfgSerializerTest
             """;
         var dot = CfgSerializer.Serialize(CreateMethodCfg(code), "Range");
 
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "Range" {
             0 [shape=record label="{SIMPLE|new[] \{ 1, 2 \}|1|2|\{ 1, 2 \}|ints = new[] \{ 1, 2 \}|ints|^2..^1|ints[^2..^1]|lastTwo = ints[^2..^1]}"]
             1 [shape=record label="{EXIT}"]
             0 -> 1
             }
+
             """);
     }
 

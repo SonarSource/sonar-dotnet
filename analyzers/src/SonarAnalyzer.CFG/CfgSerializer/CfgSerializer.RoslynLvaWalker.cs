@@ -36,9 +36,21 @@ public static partial class CfgSerializer
 
         protected override void WriteEdges(BasicBlock block)
         {
-            foreach (var predecessor in lva.BlockPredecessors[block.Ordinal])
+            var lvaPredecessors = lva.BlockPredecessors[block.Ordinal];
+            foreach (var predecessor in block.Predecessors)
             {
-                writer.WriteEdge(BlockId(predecessor), BlockId(block), string.Empty);
+                var condition = string.Empty;
+                if (predecessor.Source.ConditionKind != ControlFlowConditionKind.None)
+                {
+                    condition = predecessor == predecessor.Source.ConditionalSuccessor ? predecessor.Source.ConditionKind.ToString() : "Else";
+                }
+                var semantics = predecessor.Semantics == ControlFlowBranchSemantics.Regular ? null : predecessor.Semantics.ToString();
+                writer.WriteEdge(BlockId(predecessor.Source), BlockId(block), $"{semantics} {condition}".Trim());
+                lvaPredecessors.Remove(predecessor.Source);
+            }
+            foreach (var predecessor in lvaPredecessors)
+            {
+                writer.WriteEdge(BlockId(predecessor), BlockId(block), "LVA");
             }
             if (block.FallThroughSuccessor is { Destination: null })
             {

@@ -40,7 +40,7 @@ public static partial class CfgSerializer
         return writer.ToString();
     }
 
-    public static string Serialize(RoslynLiveVariableAnalysis lva, string title = "RoslynCfg")
+    public static string Serialize(RoslynLiveVariableAnalysis lva, string title = "RoslynCfgLva")
     {
         var writer = new DotWriter();
         new RoslynLvaWalker(lva, writer, new RoslynCfgIdProvider()).Visit(lva.Cfg, title);

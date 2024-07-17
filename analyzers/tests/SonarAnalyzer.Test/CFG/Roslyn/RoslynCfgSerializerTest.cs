@@ -35,13 +35,14 @@ public class RoslynCfgSerializerTest
             }
             """;
         var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code), "GraphTitle");
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines(
+        dot.Should().BeIgnoringLineEndings(
             """
             digraph "GraphTitle" {
             cfg0_block0 [shape=record label="{ENTRY #0}"]
             cfg0_block1 [shape=record label="{EXIT #1}"]
             cfg0_block0 -> cfg0_block1
             }
+
             """);
     }
 
@@ -56,13 +57,14 @@ public class RoslynCfgSerializerTest
             """;
         var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
 
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines(
+        dot.Should().BeIgnoringLineEndings(
             """
             digraph "RoslynCfg" {
             cfg0_block0 [shape=record label="{ENTRY #0}"]
             cfg0_block1 [shape=record label="{EXIT #1}"]
             cfg0_block0 -> cfg0_block1
             }
+
             """);
     }
 
@@ -85,7 +87,7 @@ public class RoslynCfgSerializerTest
             }
             """;
         var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
             label = "LocalLifetime region, Locals: c"
@@ -96,6 +98,7 @@ public class RoslynCfgSerializerTest
             cfg0_block0 -> cfg0_block1
             cfg0_block1 -> cfg0_block2
             }
+
             """);
     }
 
@@ -123,7 +126,7 @@ public class RoslynCfgSerializerTest
             }
             """;
         var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
             label = "LocalLifetime region, Captures: #Capture-0"
@@ -142,6 +145,7 @@ public class RoslynCfgSerializerTest
             cfg0_block3 -> cfg0_block5 [label="WhenFalse"]
             cfg0_block4 -> cfg0_block5
             }
+
             """);
     }
 
@@ -163,7 +167,7 @@ public class RoslynCfgSerializerTest
             """;
         var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
 
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             cfg0_block0 [shape=record label="{ENTRY #0}"]
             cfg0_block1 [shape=record label="{BLOCK #1|## BranchValue ##|0#: LiteralOperation: true|##########}"]
@@ -174,6 +178,7 @@ public class RoslynCfgSerializerTest
             cfg0_block1 -> cfg0_block3 [label="WhenFalse"]
             cfg0_block2 -> cfg0_block3
             }
+
             """);
     }
 
@@ -194,7 +199,7 @@ public class RoslynCfgSerializerTest
             }
             """;
         var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
             label = "LocalLifetime region, Captures: #Capture-0"
@@ -229,6 +234,7 @@ public class RoslynCfgSerializerTest
             cfg0_block0 -> cfg0_block1
             cfg0_block2 -> cfg0_block7 [label="WhenFalse"]
             }
+
             """);
     }
 
@@ -249,7 +255,7 @@ public class RoslynCfgSerializerTest
             }
             """;
         var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
             label = "LocalLifetime region, Captures: #Capture-0"
@@ -289,6 +295,7 @@ public class RoslynCfgSerializerTest
             cfg0_block0 -> cfg0_block1
             cfg0_block2 -> cfg0_block8 [label="WhenFalse"]
             }
+
             """);
     }
 
@@ -309,7 +316,7 @@ public class RoslynCfgSerializerTest
             }
             """;
         var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
             label = "LocalLifetime region, Locals: i"
@@ -325,6 +332,7 @@ public class RoslynCfgSerializerTest
             cfg0_block2 -> cfg0_block3 [label="Else"]
             cfg0_block2 -> cfg0_block4 [label="WhenFalse"]
             }
+
             """);
     }
 
@@ -345,7 +353,7 @@ public class RoslynCfgSerializerTest
             }
             """;
         var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
             label = "LocalLifetime region, Locals: x"
@@ -374,6 +382,7 @@ public class RoslynCfgSerializerTest
             cfg0_block0 -> cfg0_block1
             cfg0_block2 -> cfg0_block6
             }
+
             """);
     }
 
@@ -396,7 +405,7 @@ public class RoslynCfgSerializerTest
             }
             """;
         var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
             label = "LocalLifetime region, Locals: N/A, Captures: #Capture-0"
@@ -425,6 +434,7 @@ public class RoslynCfgSerializerTest
             cfg0_block0 -> cfg0_block1
             cfg0_block2 -> cfg0_block6
             }
+
             """);
     }
 
@@ -454,7 +464,7 @@ public class RoslynCfgSerializerTest
             }
             """;
         var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
             label = "TryAndFinally region"
@@ -477,6 +487,7 @@ public class RoslynCfgSerializerTest
             cfg0_block2 -> cfg0_block4
             cfg0_block4 -> cfg0_block5
             }
+
             """);
     }
 
@@ -494,7 +505,7 @@ public class RoslynCfgSerializerTest
             }
             """;
         var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
             label = "TryAndCatch region"
@@ -513,6 +524,7 @@ public class RoslynCfgSerializerTest
             cfg0_block1 -> cfg0_block3
             cfg0_block2 -> cfg0_block3
             }
+
             """);
     }
 
@@ -535,7 +547,7 @@ public class RoslynCfgSerializerTest
             }
             """;
         var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
             label = "LocalLifetime region, Locals: fourty"
@@ -570,6 +582,7 @@ public class RoslynCfgSerializerTest
             cfg6_block0 -> cfg6_block1
             cfg6_block1 -> cfg6_block2 [label="Return"]
             }
+
             """);
     }
 
@@ -588,7 +601,7 @@ public class RoslynCfgSerializerTest
             }
             """;
         var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             cfg0_block0 [shape=record label="{ENTRY #0}"]
             cfg0_block1 [shape=record label="{BLOCK #1|0#: ExpressionStatementOperation: Bar(x =\> \{ return arg + 1; \});|1#: 0#.Operation: InvocationOperation: Bar: Bar(x =\> \{ return arg + 1; \})|2#: 1#.Instance: InstanceReferenceOperation: Bar|2#: ArgumentOperation: x =\> \{ return arg + 1; \}|3#: 2#.Value: DelegateCreationOperation: x =\> \{ return arg + 1; \}|4#: 3#.Target: FlowAnonymousFunctionOperation: x =\> \{ return arg + 1; \}|##########|0#: ExpressionStatementOperation: Bar(x =\> arg - 1);|1#: 0#.Operation: InvocationOperation: Bar: Bar(x =\> arg - 1)|2#: 1#.Instance: InstanceReferenceOperation: Bar|2#: ArgumentOperation: x =\> arg - 1|3#: 2#.Value: DelegateCreationOperation: x =\> arg - 1|4#: 3#.Target: FlowAnonymousFunctionOperation: x =\> arg - 1|##########}"]
@@ -612,6 +625,7 @@ public class RoslynCfgSerializerTest
             cfg3_block0 -> cfg3_block1
             cfg3_block1 -> cfg3_block2 [label="Return"]
             }
+
             """);
     }
 
@@ -629,7 +643,7 @@ public class RoslynCfgSerializerTest
             }
             """;
         var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
             label = "LocalLifetime region, Locals: b"
@@ -662,6 +676,7 @@ public class RoslynCfgSerializerTest
             cfg0_block7 -> cfg0_block8
             cfg0_block8 -> cfg0_block9
             }
+
             """);
     }
 
@@ -678,7 +693,7 @@ public class RoslynCfgSerializerTest
             }
             """;
         var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code, ignoreErrors: true));
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             cfg0_block0 [shape=record label="{ENTRY #0}"]
             cfg0_block1 [shape=record label="{BLOCK #1|0#: ExpressionStatementOperation: undefined();|1#: 0#.Operation: INVALID: undefined()|2#: INVALID: undefined|##########}"]
@@ -686,6 +701,7 @@ public class RoslynCfgSerializerTest
             cfg0_block0 -> cfg0_block1
             cfg0_block1 -> cfg0_block2
             }
+
             """);
     }
 
@@ -706,7 +722,7 @@ public class RoslynCfgSerializerTest
             }
             """;
         var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
-        dot.Should().BeIgnoringLineEndingsAndEmptyLines("""
+        dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
             label = "TryAndCatch region"
@@ -738,6 +754,7 @@ public class RoslynCfgSerializerTest
             cfg0_block3 -> cfg0_block5
             cfg0_block4 -> cfg0_block5
             }
+
             """);
     }
 }
