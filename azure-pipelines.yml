@@ -52,7 +52,7 @@ resources:
     - repository: pipelines-yaml-templates
       type: git
       name: pipelines-yaml-templates
-      ref:  refs/tags/v1.0.13
+      ref:  refs/tags/v3.0.0
 
 stages:
 - stage: build
