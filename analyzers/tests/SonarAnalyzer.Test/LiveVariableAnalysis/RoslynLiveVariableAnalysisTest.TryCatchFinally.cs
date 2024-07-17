@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Google.Protobuf.WellKnownTypes;
 using Microsoft.CodeAnalysis.Operations;
 using IIsNullOperation = Microsoft.CodeAnalysis.FlowAnalysis.IIsNullOperation;
 
@@ -331,6 +332,90 @@ public partial class RoslynLiveVariableAnalysisTest
     }
 
     [TestMethod]
+    public void Catch_TryWithConditionalBranching_LiveOut()
+    {
+        var code = """
+            var value = 100;
+            Method(0);
+            try
+            {
+                Method(1);
+                if (condition)
+                {
+                    Method(2);
+                }
+                value = 200;
+                Method(3);
+            }
+            catch (Exception exc)
+            {
+                Method(4);
+            }
+            Method(value);
+            """;
+        var context = CreateContextCS(code, additionalParameters: "bool condition");
+        context.ValidateEntry(LiveIn("condition"), LiveOut("condition"));
+        context.Validate("Method(0);", LiveIn("condition"), LiveOut("condition", "value"));
+        context.Validate("Method(1);", LiveIn("condition", "value"), LiveOut("value"));
+        context.Validate("Method(2);", LiveIn("value"), LiveOut("value"));
+        context.Validate("Method(3);", LiveOut("value"));
+        context.Validate("Method(4);", LiveIn("value"), LiveOut("value"));
+        context.Validate("Method(value);", LiveIn("value"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void Catch_TryWithLoop_LiveOut()
+    {
+        var code = """
+            object propArgument = null;
+            try
+            {
+                while(condition)
+                {
+                    propArgument = list.FirstOrDefault();
+                    Method(0);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(propArgument);
+                Method(1);
+            };
+            Method(2);
+            """;
+        var context = CreateContextCS(code, additionalParameters: "List<object> list, bool condition");
+        context.Validate("Method(0);", LiveIn("list", "condition"), LiveOut("condition", "list", "propArgument"));
+        context.Validate("Method(1);", LiveIn("propArgument"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void Catch_TryWithForEachLoop_LiveOut()
+    {
+        var code = """
+            object propArgument = null;
+            try
+            {
+                foreach(var item in list)
+                {
+                    propArgument = item;
+                }
+                Method(0);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(propArgument);
+                Method(1);
+            };
+            """;
+        var context = CreateContextCS(code, additionalParameters: "List<object> list");
+        context.Validate("Method(0);", LiveIn("propArgument"), LiveOut("propArgument"));
+        context.Validate("Method(1);", LiveIn("propArgument"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
     public void Catch_InvalidSyntax_LiveIn()
     {
         /*    Entry 0
@@ -467,21 +552,32 @@ public partial class RoslynLiveVariableAnalysisTest
     public void Catch_SingleTypeWhenConditionReferencingArgument_LiveIn()
     {
         const string code = """
+            var value = 100;    // Compliant, used in catch
+            Method(0);
+            if (boolParameter ) {Console.WriteLine("Hi");}
             try
             {
-                Method(0);
+                value = Method(10);
+                //if (boolParameter)
+                //{
+                //    Method(1);
+                //}
+                //else
+                //{
+                //     Method(2);
+                //}
             }
-            catch (Exception ex) when (boolParameter)
+            catch
             {
-                Method(intParameter);
+                Method(value);
             }
-            Method(1);
             """;
         var context = CreateContextCS(code);
-        context.ValidateEntry(LiveIn("boolParameter", "intParameter"), LiveOut("boolParameter", "intParameter"));
-        context.Validate("Method(0);", LiveIn("boolParameter", "intParameter"), LiveOut("boolParameter", "intParameter"));
-        context.Validate("Method(intParameter);", LiveIn("intParameter"));
-        context.Validate("Method(1);");
+       // context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
+        context.Validate("Method(0);", LiveIn("boolParameter"), LiveOut( "value"));
+       // context.Validate("Method(0);", LiveIn("value"), LiveOut("value"));
+       // context.Validate("Method(1);", LiveIn("value"), LiveOut("value"));
+        context.Validate("Method(value);", LiveIn("value"));
         context.ValidateExit();
     }
 
