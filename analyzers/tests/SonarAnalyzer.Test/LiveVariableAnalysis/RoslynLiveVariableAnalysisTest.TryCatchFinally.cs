@@ -604,6 +604,124 @@ public partial class RoslynLiveVariableAnalysisTest
     }
 
     [TestMethod]
+    public void Throw_NestedCatch_LiveOut()
+    {
+        var code = """
+            var value = 100;
+            try
+            {
+                try
+                {
+                     Method(value);
+                     Method(0);
+                }
+                catch
+                {
+                    value = 200;
+                    throw;
+                }
+            }
+            catch
+            {
+                 Method(value);
+                 Method(1);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("Method(0);", LiveIn("value"), LiveOut("value"));
+        context.Validate("value = 200;", LiveOut("value"));
+        context.Validate("Method(1);", LiveIn("value"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void Throw_NestedCatch_LiveInInConsecutiveOuterCatch()
+    {
+        var code = """
+            var value = 100;
+            try
+            {
+                try
+                {
+                     Method(value);
+                     Method(0);
+                }
+                catch
+                {
+                    value = 200;
+                    throw;
+                }
+            }
+            catch (ArgumentNullException)
+            {
+                Method(value);
+                Method(1);
+            }
+            catch (IOException)
+            {
+                Method(value);
+                Method(2);
+            }
+            catch (NullReferenceException)
+            {
+                Method(value);
+                Method(3);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("Method(0);", LiveIn("value"), LiveOut("value"));
+        context.Validate("value = 200;", LiveOut("value"));
+        context.Validate("Method(1);", LiveIn("value"));
+        context.Validate("Method(2);", LiveIn("value"));
+        context.Validate("Method(3);", LiveIn("value"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void Throw_NestedCatch_OuterCatchRethrows_LiveOutOuterCathc()
+    {
+        var code = """
+            var value = 100;
+            try
+            {
+                try
+                {
+                    try
+                    {
+                        Method(value);
+                        Method(0);
+                    }
+                    catch
+                    {
+                        value = 200;
+                        throw;
+                    }
+                }
+                catch   // Outer catch
+                {
+                    Method(value);
+                    Method(1);
+                    throw;
+                }
+            }
+            catch
+            {
+                Method(value);
+                Method(2);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("Method(0);", LiveIn("value"), LiveOut("value"));
+        context.Validate("value = 200;", LiveOut("value"));
+        context.Validate("Method(1);", LiveIn("value"), LiveOut("value"));
+        context.Validate("Method(2);", LiveIn("value"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
     public void Finally_LiveIn()
     {
         var code = """

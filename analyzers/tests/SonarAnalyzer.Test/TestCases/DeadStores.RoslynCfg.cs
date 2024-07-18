@@ -1612,7 +1612,7 @@ public class PeachValidation
             }
             catch
             {
-                value = 200;    // Noncompliant FP
+                value = 200;  // Compliant, catch rethrows and moves to the next catch.
                 throw;
             }
         }
