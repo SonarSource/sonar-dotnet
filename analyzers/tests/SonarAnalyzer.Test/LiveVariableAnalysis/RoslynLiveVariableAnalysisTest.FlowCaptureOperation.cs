@@ -303,9 +303,9 @@ public partial class RoslynLiveVariableAnalysisTest
         var context = CreateContextCS(code, additionalParameters: "string s1");
         context.ValidateEntry(LiveIn("s1"), LiveOut("s1"));
         context.Validate(context.Cfg.Blocks[1], LiveIn("s1"));
-        context.Validate(context.Cfg.Blocks[2]);                // This should have LiveIn("s1") and LiveOut("s1") but #1 gets as value all the assignment operation.
-        context.Validate(context.Cfg.Blocks[3], LiveOut("s1")); // This should have LiveIn("s1")
-        context.Validate(context.Cfg.Blocks[4], LiveOut("s1")); // This should have LiveIn("s1")
+        context.Validate(context.Cfg.Blocks[2], LiveOut("s1"));                // This should have LiveIn("s1") and LiveOut("s1") but #1 gets as value all the assignment operation.
+        context.Validate(context.Cfg.Blocks[3], LiveIn("s1"), LiveOut("s1"));
+        context.Validate(context.Cfg.Blocks[4], LiveIn("s1"), LiveOut("s1"));
         context.Validate(context.Cfg.Blocks[5], LiveIn("s1"));
         context.ValidateExit();
     }

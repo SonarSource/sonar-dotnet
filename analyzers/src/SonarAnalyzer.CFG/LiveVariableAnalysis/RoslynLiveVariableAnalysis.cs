@@ -24,7 +24,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis;
 
 public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<ControlFlowGraph, BasicBlock>
 {
-    private readonly Dictionary<CaptureId, List<IOperation>> flowCaptureOperations = [];
+    private readonly Dictionary<CaptureId, List<ISymbol>> flowCaptureOperations = [];
     private readonly Dictionary<int, List<BasicBlock>> blockPredecessors = [];
     private readonly Dictionary<int, List<BasicBlock>> blockSuccessors = [];
 
@@ -86,24 +86,24 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
                                     .Select(x => x.Instance.ToFlowCapture()))
         {
             if (flowCapture.Value.AsFlowCaptureReference() is { } captureReference
-                && flowCaptureOperations.TryGetValue(captureReference.Id, out var capturedOperations))
+                && flowCaptureOperations.TryGetValue(captureReference.Id, out var symbols))
             {
-                AppendFlowCaptureReference(flowCapture.Id, capturedOperations.ToArray());
+                AppendFlowCaptureReference(flowCapture.Id, symbols.ToArray());
             }
-            else
+            else if (ParameterOrLocalSymbol(flowCapture.Value) is { } symbol)
             {
-                AppendFlowCaptureReference(flowCapture.Id, flowCapture.Value);
+                AppendFlowCaptureReference(flowCapture.Id, symbol);
             }
         }
 
-        void AppendFlowCaptureReference(CaptureId id, params IOperation[] operations)
+        void AppendFlowCaptureReference(CaptureId id, params ISymbol[] symbols)
         {
             if (!flowCaptureOperations.TryGetValue(id, out var list))
             {
                 list = [];
                 flowCaptureOperations.Add(id, list);
             }
-            list.AddRange(operations);
+            list.AddRange(symbols);
         }
     }
 
@@ -223,17 +223,13 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         public RoslynState(RoslynLiveVariableAnalysis owner) =>
             this.owner = owner;
 
-        public void ProcessBlock(ControlFlowGraph cfg, BasicBlock block, Dictionary<CaptureId, List<IOperation>> flowCaptureOperations)
+        public void ProcessBlock(ControlFlowGraph cfg, BasicBlock block, Dictionary<CaptureId, List<ISymbol>> flowCaptureOperations)
         {
             foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder().Select(x => x.Instance))
             {
-                if ((operation.AsFlowCapture() is { } flowCapture && flowCaptureOperations.TryGetValue(flowCapture.Id, out var captured))
-                    || (operation.AsFlowCaptureReference() is { } flowCaptureReference  && flowCaptureOperations.TryGetValue(flowCaptureReference.Id, out captured)))
+                if (operation.AsFlowCaptureReference() is { } flowCaptureReference  && flowCaptureOperations.TryGetValue(flowCaptureReference.Id, out var symbols))
                 {
-                    foreach (var capturedOperation in captured)
-                    {
-                        ProcessOperation(cfg, capturedOperation);
-                    }
+                    UsedBeforeAssigned.UnionWith(symbols);
                 }
                 else
                 {

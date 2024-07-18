@@ -1625,8 +1625,7 @@ public class PeachValidation
     // https://github.com/SonarSource/sonar-dotnet/issues/9471
     void AssignmentInTernary(bool condition, string st)
     {
-        string st2 = condition ? st = "Hi" : "Hello"; // Noncompliant FP
-        //                       ^^^^^^^^^
+        string st2 = condition ? st = "Hi" : "Hello"; // Compliant
         Console.WriteLine(st);
         Console.WriteLine(st2);
     }
@@ -1635,7 +1634,7 @@ public class PeachValidation
     void AssignmentInSwitch()
     {
         char ch;
-        switch (ch = GetAChar())   // Noncompliant FP
+        switch (ch = GetAChar())   // Compliant
         {
             case 'A':
                 break;
@@ -1652,9 +1651,9 @@ public class PeachValidation
     // https://github.com/SonarSource/sonar-dotnet/issues/9473
     void ReassignAfterUsing(IDisposable data)
     {
-        using (data = Something()) // Noncompliant
+        using (data = Something()) // Compliant - if Something() throws, value will be used directly in Console.WriteLine(data);
         {
-            data = Something();    // Noncompliant FP
+            data = Something();
         }
         Console.WriteLine(data);
 
