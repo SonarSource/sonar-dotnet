@@ -24,7 +24,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis;
 
 public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<ControlFlowGraph, BasicBlock>
 {
-    private readonly Dictionary<CaptureId, List<ISymbol>> flowCaptureOperations = [];
+    private readonly Dictionary<CaptureId, List<ISymbol>> flowCaptures = [];
     private readonly Dictionary<int, List<BasicBlock>> blockPredecessors = [];
     private readonly Dictionary<int, List<BasicBlock>> blockSuccessors = [];
 
@@ -72,7 +72,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
     protected override State ProcessBlock(BasicBlock block)
     {
         var ret = new RoslynState(this);
-        ret.ProcessBlock(Cfg, block, flowCaptureOperations);
+        ret.ProcessBlock(Cfg, block, flowCaptures);
         return ret;
     }
 
@@ -86,7 +86,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
                                     .Select(x => x.Instance.ToFlowCapture()))
         {
             if (flowCapture.Value.AsFlowCaptureReference() is { } captureReference
-                && flowCaptureOperations.TryGetValue(captureReference.Id, out var symbols))
+                && flowCaptures.TryGetValue(captureReference.Id, out var symbols))
             {
                 AppendFlowCaptureReference(flowCapture.Id, symbols.ToArray());
             }
@@ -98,10 +98,10 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
 
         void AppendFlowCaptureReference(CaptureId id, params ISymbol[] symbols)
         {
-            if (!flowCaptureOperations.TryGetValue(id, out var list))
+            if (!flowCaptures.TryGetValue(id, out var list))
             {
                 list = [];
-                flowCaptureOperations.Add(id, list);
+                flowCaptures.Add(id, list);
             }
             list.AddRange(symbols);
         }
