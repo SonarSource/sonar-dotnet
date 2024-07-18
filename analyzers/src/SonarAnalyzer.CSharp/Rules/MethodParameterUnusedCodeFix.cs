@@ -19,39 +19,68 @@
  */
 
 using Microsoft.CodeAnalysis.CodeFixes;
+using Microsoft.CodeAnalysis.FindSymbols;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[ExportCodeFixProvider(LanguageNames.CSharp)]
+public sealed class MethodParameterUnusedCodeFix : SonarCodeFix
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public sealed class MethodParameterUnusedCodeFix : SonarCodeFix
+    private const string Title = "Remove unused parameter";
+
+    public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(MethodParameterUnused.DiagnosticId);
+
+    protected override async Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
     {
-        private const string Title = "Remove unused parameter";
+        var diagnostic = context.Diagnostics.First();
+        var diagnosticSpan = diagnostic.Location.SourceSpan;
+        var parameter = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) as ParameterSyntax;
+        IEnumerable<SyntaxNode> arguments = [];
 
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(MethodParameterUnused.DiagnosticId);
-
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
+        if (!bool.Parse(diagnostic.Properties[MethodParameterUnused.IsRemovableKey]))
         {
-            var diagnostic = context.Diagnostics.First();
-            var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var parameter = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) as ParameterSyntax;
-
-            if (!bool.Parse(diagnostic.Properties[MethodParameterUnused.IsRemovableKey]))
-            {
-                return Task.CompletedTask;
-            }
-
-            context.RegisterCodeFix(
-                Title,
-                c =>
-                {
-                    var newRoot = root.RemoveNode(
-                        parameter,
-                        SyntaxRemoveOptions.KeepLeadingTrivia | SyntaxRemoveOptions.AddElasticMarker);
-                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                },
-                context.Diagnostics);
-
-            return Task.CompletedTask;
+            return;
         }
+
+        if (parameter?.Parent.Parent is BaseMethodDeclarationSyntax methodDeclaration)
+        {
+            var model = await context.Document.GetSemanticModelAsync(context.CancellationToken);
+            var parameterIndex = methodDeclaration.ParameterList.Parameters.IndexOf(parameter);
+
+            if (parameterIndex >= 0 && model.GetDeclaredSymbol(methodDeclaration, context.CancellationToken) is { } methodSymbol)
+            {
+                var callers = await SymbolFinder.FindCallersAsync(
+                    methodSymbol,
+                    context.Document.Project.Solution,
+                    ImmutableHashSet.Create(context.Document),
+                    context.CancellationToken);
+
+                arguments = callers
+                    .SelectMany(x => x.Locations)
+                    .Select(x => GetArgumentFromLocation(x, parameterIndex));
+            }
+        }
+
+        context.RegisterCodeFix(
+            Title,
+            _ =>
+            {
+                var newRoot = root.RemoveNodes(
+                    [parameter, ..arguments.Where(x => x is not null)],
+                    SyntaxRemoveOptions.KeepLeadingTrivia | SyntaxRemoveOptions.AddElasticMarker);
+
+                return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+            },
+            context.Diagnostics);
     }
+
+    private static SyntaxNode GetArgumentFromLocation(Location location, int parameterIndex) =>
+        location.SourceTree.GetRoot().FindNode(location.SourceSpan, getInnermostNodeForTie: true) is { } node
+        && GetIdentifierNameParent(node).ArgumentList() is { } argumentList
+        && argumentList.Arguments.Count > parameterIndex
+            ? argumentList.Arguments[parameterIndex]
+            : null;
+
+    private static SyntaxNode GetIdentifierNameParent(SyntaxNode node) =>
+        node is IdentifierNameSyntax identifierName ? identifierName.Parent : node;
 }

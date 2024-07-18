@@ -16,7 +16,7 @@ namespace Tests.TestCases
 
     public class BasicTests : MyPrivateInterface
     {
-        private BasicTests(int a) : this(a, 42) // Compliant
+        private BasicTests(int a) : this(a) // Compliant
         { }
 
         private BasicTests(
@@ -643,6 +643,20 @@ namespace Tests.TestCases
                 ReferenceEquals(1, 2);
                 return null;
             }
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/8187
+    public class Repro_8187_CodeFix
+    {
+        void Method()
+        {
+            DoSomething(21);
+        }
+
+        void DoSomething(int a) // Fixed
+        {
+            Console.WriteLine(a);
         }
     }
 }

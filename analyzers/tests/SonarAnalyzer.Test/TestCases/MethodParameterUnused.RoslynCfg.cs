@@ -647,4 +647,18 @@ namespace Tests.TestCases
             }
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/8187
+    public class Repro_8187_CodeFix
+    {
+        void Method()
+        {
+            DoSomething(21, 42);
+        }
+
+        void DoSomething(int a, int b) // Noncompliant
+        {
+            Console.WriteLine(a);
+        }
+    }
 }
