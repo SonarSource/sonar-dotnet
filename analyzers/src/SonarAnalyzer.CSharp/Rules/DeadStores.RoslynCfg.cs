@@ -73,25 +73,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 private void ProcessParameterOrLocalReference(IOperationWrapper reference)
                 {
-                    if (owner.lva.ParameterOrLocalSymbol(reference.WrappedOperation) is { } symbol && IsSymbolRelevant(symbol))
+                    var symbols = owner.lva.ParameterOrLocalSymbols(reference.WrappedOperation).Where(x => IsSymbolRelevant(x));
+                    if (reference.IsOutArgument())
                     {
-                        if (reference.IsOutArgument())
-                        {
-                            liveOut.Remove(symbol);
-                        }
-                        else if (!reference.IsAssignmentTarget() && !reference.IsCompoundAssignmentTarget())
-                        {
-                            liveOut.Add(symbol);
-                        }
+                        liveOut.ExceptWith(symbols);
+                    }
+                    else if (!reference.IsAssignmentTarget() && !reference.IsCompoundAssignmentTarget())
+                    {
+                        liveOut.UnionWith(symbols);
                     }
                 }
 
                 private void ProcessSimpleAssignment(ISimpleAssignmentOperationWrapper assignment)
                 {
-                    if (ProcessAssignment(assignment, assignment.Target, assignment.Value) is { } localTarget)
-                    {
-                        liveOut.Remove(localTarget);
-                    }
+                    var targets = ProcessAssignment(assignment, assignment.Target, assignment.Value);
+                    liveOut.ExceptWith(targets);
                 }
 
                 private void ProcessCompoundAssignment(ICompoundAssignmentOperationWrapper assignment) =>
@@ -106,43 +102,38 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         foreach (var tupleElement in ITupleOperationWrapper.FromOperation(deconstructionAssignment.Target).AllElements())
                         {
-                            if (ProcessAssignment(deconstructionAssignment, tupleElement) is { } target)
-                            {
-                                liveOut.Remove(target);
-                            }
+                            var targets = ProcessAssignment(deconstructionAssignment, tupleElement);
+                            liveOut.ExceptWith(targets);
                         }
                     }
                 }
 
-                private ISymbol ProcessAssignment(IOperationWrapper operation, IOperation target, IOperation value = null)
+                private ISymbol[] ProcessAssignment(IOperationWrapper operation, IOperation target, IOperation value = null)
                 {
-                    if (owner.lva.ParameterOrLocalSymbol(target) is { } localTarget && IsSymbolRelevant(localTarget))
+                    var targets = owner.lva.ParameterOrLocalSymbols(target).Where(IsSymbolRelevant).ToArray();
+                    foreach (var localTarget in targets)
                     {
-                        if (TargetRefKind() == RefKind.None
-                            && !IsConst()
+                        if (TargetRefKind(localTarget) == RefKind.None
+                            && !IsConst(localTarget)
                             && !liveOut.Contains(localTarget)
-                            && !IsAllowedInitialization()
+                            && !IsAllowedInitialization(localTarget)
                             && !ICaughtExceptionOperationWrapper.IsInstance(value)
                             && !target.Syntax.Parent.IsKind(SyntaxKind.ForEachStatement)
                             && !IsMuted(target.Syntax, localTarget))
                         {
                             ReportIssue(operation.WrappedOperation.Syntax.GetLocation(), localTarget);
                         }
-                        return localTarget;
                     }
-                    else
-                    {
-                        return null;
-                    }
+                    return targets;
 
-                    bool IsConst() =>
+                    static bool IsConst(ISymbol localTarget) =>
                         localTarget is ILocalSymbol local && local.IsConst;
 
-                    RefKind TargetRefKind() =>
+                    static RefKind TargetRefKind(ISymbol localTarget) =>
                         // Only ILocalSymbol and IParameterSymbol can be returned by ParameterOrLocalSymbol
                         localTarget is ILocalSymbol local ? local.RefKind() : ((IParameterSymbol)localTarget).RefKind;
 
-                    bool IsAllowedInitialization() =>
+                    bool IsAllowedInitialization(ISymbol localTarget) =>
                         operation.WrappedOperation.Syntax is VariableDeclaratorSyntax variableDeclarator
                         && variableDeclarator.Initializer != null
                         // Avoid collision with S1481: Unused is allowed. Used only in local function is also unused in current CFG.

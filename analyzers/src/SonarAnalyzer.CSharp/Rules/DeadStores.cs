@@ -57,6 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.OperatorDeclaration,
                 SyntaxKind.RemoveAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,
+                SyntaxKindEx.CoalesceAssignmentExpression,
                 SyntaxKindEx.InitAccessorDeclaration,
                 SyntaxKindEx.LocalFunctionStatement);
 
