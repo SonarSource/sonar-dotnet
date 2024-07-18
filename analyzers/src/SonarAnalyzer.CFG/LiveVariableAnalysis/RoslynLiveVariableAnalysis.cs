@@ -142,8 +142,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         }
         if (block.IsEnclosedIn(ControlFlowRegionKind.Catch) && block.Successors.Any(x => x.Semantics == ControlFlowBranchSemantics.Rethrow))
         {
-            BuildBranchesNestedCatchRethrow(block);
-            BuildBranchesRethrowFinally(block);
+            BuildBranchesRethrow(block);
         }
 
         void AddPredecessorsOutsideRegion(BasicBlock destination)
@@ -168,26 +167,17 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         }
     }
 
-    private void BuildBranchesNestedCatchRethrow(BasicBlock block)
+    private void BuildBranchesRethrow(BasicBlock block)
     {
-        var reachableHandlers = block.EnclosingRegion(ControlFlowRegionKind.TryAndCatch).NestedRegion(ControlFlowRegionKind.Try).ReachableHandlers();
-        foreach (var catchBlock in reachableHandlers.Where(x => x.Kind == ControlFlowRegionKind.Catch && x.FirstBlockOrdinal > block.Ordinal).SelectMany(x => x.Blocks(Cfg)))
+        var reachableHandlerRegions = block.EnclosingRegion(ControlFlowRegionKind.TryAndCatch).NestedRegion(ControlFlowRegionKind.Try).ReachableHandlers();
+        var reachableCatchAndFinallyBlocks = reachableHandlerRegions.Where(x => x.FirstBlockOrdinal > block.Ordinal).SelectMany(x => x.Blocks(Cfg));
+        foreach (var catchBlock in reachableCatchAndFinallyBlocks.Where(x => x.EnclosingRegion.Kind is ControlFlowRegionKind.Catch))
         {
             AddBranch(block, catchBlock);
         }
-    }
-
-    private void BuildBranchesRethrowFinally(BasicBlock block)
-    {
-        var tryRegion = block.EnclosingRegion(ControlFlowRegionKind.TryAndCatch).NestedRegion(ControlFlowRegionKind.Try);
-        var finallyOrCatchBlock = tryRegion.ReachableHandlers()
-            .Where(x => x.Kind is ControlFlowRegionKind.Catch or ControlFlowRegionKind.Finally && x.FirstBlockOrdinal > block.Ordinal)
-            .SelectMany(x => x.Blocks(Cfg))
-            .FirstOrDefault();
-
-        if (finallyOrCatchBlock is not null)
+        if (reachableCatchAndFinallyBlocks.FirstOrDefault() is { } finallyBlock)
         {
-            AddBranch(block, finallyOrCatchBlock);
+            AddBranch(block, finallyBlock);
         }
     }
 

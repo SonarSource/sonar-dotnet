@@ -1213,7 +1213,7 @@ public partial class RoslynLiveVariableAnalysisTest
     }
 
     [TestMethod]
-    public void TryCatchFinally_RethrowWithFinally()
+    public void TryCatchFinally_Rethrow_ValueLivesOut()
     {
         const string code = """
             var value = 0;
