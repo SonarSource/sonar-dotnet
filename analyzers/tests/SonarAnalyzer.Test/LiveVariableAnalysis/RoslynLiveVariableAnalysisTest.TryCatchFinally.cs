@@ -684,7 +684,8 @@ public partial class RoslynLiveVariableAnalysisTest
     {
         var code = """
             var value = 100;
-            try{
+            try
+            {
                 try
                 {
                     try
