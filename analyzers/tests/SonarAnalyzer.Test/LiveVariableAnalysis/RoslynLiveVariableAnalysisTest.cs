@@ -21,6 +21,7 @@
 extern alias csharp;
 using csharp::SonarAnalyzer.Extensions;
 using Microsoft.CodeAnalysis.CSharp;
+using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
 
@@ -837,7 +838,7 @@ public partial class RoslynLiveVariableAnalysisTest
         var context = CreateContextCS(code, null, "string[] args");
         context.Validate("Method(0);", LiveIn("args", null), LiveOut("args", "value", null));   // The null-named symbol is implicit `bool LockTaken` from the lock(args) statement
         context.Validate("Method(1);", LiveIn("value", null), LiveOut("value", null));
-        context.Validate("Method(value);", LiveIn(null, "value"), LiveOut(new string[] { null }));
+        context.Validate("Method(value);", LiveIn(null, "value"), LiveOut([null]));
         context.Validate("Method(2);");
         context.ValidateExit();
     }
@@ -1080,6 +1081,10 @@ public partial class RoslynLiveVariableAnalysisTest
         {
             Cfg = TestHelper.CompileCfg(code, language, code.Contains("// Error CS"), localFunctionName);
             Lva = new RoslynLiveVariableAnalysis(Cfg, default);
+            const string Separator = "----------";
+            Console.WriteLine(Separator);
+            Console.WriteLine(CfgSerializer.Serialize(Lva));
+            Console.WriteLine(Separator);
         }
 
         public Context(string code, SyntaxKind syntaxKind)
