@@ -91,10 +91,10 @@ public class RoslynLvaSerializerTest
             cfg0_block3 -> cfg0_block4 [label="LVA"]
             cfg0_block4 -> NoDestination_cfg0_block4 [label="StructuredExceptionHandling"]
             cfg0_block0 -> cfg0_block1
+            cfg0_block4 -> cfg0_block5 [label="LVA"]
+            cfg0_block4 -> cfg0_block5 [label="LVA"]
             cfg0_block2 -> cfg0_block5
             cfg0_block3 -> cfg0_block5
-            cfg0_block4 -> cfg0_block5 [label="LVA"]
-            cfg0_block4 -> cfg0_block5 [label="LVA"]
             }
 
             """);
@@ -166,8 +166,8 @@ public class RoslynLvaSerializerTest
             cfg0_block2 -> cfg0_block4 [label="LVA"]
             cfg0_block4 -> NoDestination_cfg0_block4 [label="StructuredExceptionHandling"]
             cfg0_block0 -> cfg0_block1
-            cfg0_block2 -> cfg0_block5
             cfg0_block4 -> cfg0_block5 [label="LVA"]
+            cfg0_block2 -> cfg0_block5
             }
 
             """);
@@ -275,8 +275,8 @@ public class RoslynLvaSerializerTest
             cfg0_block7 -> NoDestination_cfg0_block7 [label="StructuredExceptionHandling"]
             cfg0_block1 -> cfg0_block2
             cfg0_block0 -> cfg0_block1
-            cfg0_block3 -> cfg0_block8 [label="WhenFalse"]
             cfg0_block7 -> cfg0_block8 [label="LVA"]
+            cfg0_block3 -> cfg0_block8 [label="WhenFalse"]
             }
 
             """);
