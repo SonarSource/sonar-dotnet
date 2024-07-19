@@ -302,7 +302,7 @@ namespace Tests.Diagnostics
             string coa = SomeString();
             coa ??= SomeString();
             Use(coa);
-            coa ??= SomeString();  // Roslyn CFG FN: Branching with FlowCaptureOperation
+            coa ??= SomeString();  // Noncompliant
         }
 
         public void Unary()
@@ -650,9 +650,9 @@ namespace Tests.Diagnostics
             var x = false;  // Compliant ignored value
             x = true;       // Roslyn CFG FN: Consequence of inaccurate LVA state below
             x = b1 && b2;   // Roslyn CFG FN: Branching with FlowCaptureOperation
-            x = b1 || b2;   // Roslyn CFG FN: Branching with FlowCaptureOperation
-            coalesce = coalesce ?? "Value";   // Roslyn CFG FN: Branching with FlowCaptureOperation
-            coalesceAssignment ??= "Value";   // Roslyn CFG FN: Branching with FlowCaptureOperation
+            x = b1 || b2;   // Noncompliant
+            coalesce = coalesce ?? "Value";   // Noncompliant
+            coalesceAssignment ??= "Value";   // Noncompliant
         }
 
         private void SimpleAssignment()
@@ -776,7 +776,7 @@ namespace Tests.Diagnostics
                 var lst = arr;    //Compliant
                 var unused = arr;
                 lst ??= new int[0];
-                unused ??= new int[0];  // Roslyn CFG FN: Branching with FlowCaptureOperation
+                unused ??= new int[0];  // Noncompliant
                 return lst;
             }
         }

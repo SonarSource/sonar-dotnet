@@ -48,15 +48,16 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         Analyze();
     }
 
-    public ISymbol ParameterOrLocalSymbol(IOperation operation)
+    public IEnumerable<ISymbol> ParameterOrLocalSymbols(IOperation operation)
     {
-        ISymbol candidate = operation switch
+        var candidates = operation switch
         {
-            _ when operation.AsParameterReference() is { } parameterReference => parameterReference.Parameter,
-            _ when operation.AsLocalReference() is { } localReference => localReference.Local,
-            _ => null
+            _ when operation.AsParameterReference() is { } parameterReference => [parameterReference.Parameter],
+            _ when operation.AsLocalReference() is { } localReference => [localReference.Local],
+            _ when operation.AsFlowCaptureReference() is { } flowCaptureReference => flowCaptures.TryGetValue(flowCaptureReference.Id, out var symbols) ? symbols : [],
+            _ => []
         };
-        return IsLocal(candidate) ? candidate : null;
+        return candidates.Where(x => IsLocal(x));
     }
 
     public override bool IsLocal(ISymbol symbol) =>
@@ -90,15 +91,15 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
             if (flowCapture.Value.AsFlowCaptureReference() is { } captureReference
                 && flowCaptures.TryGetValue(captureReference.Id, out var symbols))
             {
-                AppendFlowCaptureReference(flowCapture.Id, symbols.ToArray());
+                AppendFlowCaptureReference(flowCapture.Id, symbols);
             }
-            else if (ParameterOrLocalSymbol(flowCapture.Value) is { } symbol)
+            else
             {
-                AppendFlowCaptureReference(flowCapture.Id, symbol);
+                AppendFlowCaptureReference(flowCapture.Id, ParameterOrLocalSymbols(flowCapture.Value));
             }
         }
 
-        void AppendFlowCaptureReference(CaptureId id, params ISymbol[] symbols)
+        void AppendFlowCaptureReference(CaptureId id, IEnumerable<ISymbol> symbols)
         {
             if (!flowCaptures.TryGetValue(id, out var list))
             {
@@ -281,27 +282,23 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
 
         private void ProcessParameterOrLocalReference(IOperationWrapper reference)
         {
-            if (owner.ParameterOrLocalSymbol(reference.WrappedOperation) is { } symbol)
+            var symbols = owner.ParameterOrLocalSymbols(reference.WrappedOperation);
+            if (reference.IsOutArgument())
             {
-                if (reference.IsOutArgument())
-                {
-                    Assigned.Add(symbol);
-                    UsedBeforeAssigned.Remove(symbol);
-                }
-                else if (!reference.IsAssignmentTarget())
-                {
-                    UsedBeforeAssigned.Add(symbol);
-                }
+                Assigned.UnionWith(symbols);
+                UsedBeforeAssigned.ExceptWith(symbols);
+            }
+            else if (!reference.IsAssignmentTarget())
+            {
+                UsedBeforeAssigned.UnionWith(symbols);
             }
         }
 
         private void ProcessSimpleAssignment(ISimpleAssignmentOperationWrapper assignment)
         {
-            if (owner.ParameterOrLocalSymbol(assignment.Target) is { } localTarget)
-            {
-                Assigned.Add(localTarget);
-                UsedBeforeAssigned.Remove(localTarget);
-            }
+            var targets = owner.ParameterOrLocalSymbols(assignment.Target);
+            Assigned.UnionWith(targets);
+            UsedBeforeAssigned.ExceptWith(targets);
         }
 
         private void ProcessFlowAnonymousFunction(ControlFlowGraph cfg, IFlowAnonymousFunctionOperationWrapper anonymousFunction)
@@ -316,9 +313,10 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         {
             foreach (var operation in cfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).SelectMany(x => x.DescendantsAndSelf()))
             {
-                if (owner.ParameterOrLocalSymbol(operation) is { } symbol)
+                var symbols = owner.ParameterOrLocalSymbols(operation);
+                if (symbols.Any())
                 {
-                    Captured.Add(symbol);
+                    Captured.UnionWith(symbols);
                 }
                 else
                 {

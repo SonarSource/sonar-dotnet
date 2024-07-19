@@ -2,6 +2,12 @@
   "Issues": [
     {
       "Id": "S1854",
+      "Message": "Remove this useless assignment to local variable \u0027person\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp11Features/RequiredMembers.cs#L20",
+      "Location": "Line 20 Position 9-51"
+    },
+    {
+      "Id": "S1854",
       "Message": "Remove this useless assignment to local variable \u0027a\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S1854.cs#L10",
       "Location": "Line 10 Position 17-24"
@@ -35,6 +41,18 @@
       "Message": "Remove this useless assignment to local variable \u0027result\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S2437.cs#L10",
       "Location": "Line 10 Position 9-30"
+    },
+    {
+      "Id": "S1854",
+      "Message": "Remove this useless assignment to local variable \u0027a\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3240.cs#L12",
+      "Location": "Line 12 Position 9-32"
+    },
+    {
+      "Id": "S1854",
+      "Message": "Remove this useless assignment to local variable \u0027y\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3440.cs#L8-L12",
+      "Location": "Lines 8-12 Position 9-10"
     }
   ]
 }
