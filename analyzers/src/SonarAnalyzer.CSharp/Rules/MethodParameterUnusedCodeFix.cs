@@ -60,7 +60,6 @@ public sealed class MethodParameterUnusedCodeFix : SonarCodeFix
         var diagnosticSpan = diagnostic.Location.SourceSpan;
         var parameter = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) as ParameterSyntax;
 
-
         if (!bool.Parse(diagnostic.Properties[MethodParameterUnused.IsRemovableKey]))
         {
             return Task.CompletedTask;
@@ -71,7 +70,7 @@ public sealed class MethodParameterUnusedCodeFix : SonarCodeFix
             async x =>
             {
                 var newRoot = root.RemoveNodes(
-                    [parameter, ..(await ArgumentsToRemoveAsync(context, parameter, x))],
+                    [parameter, ..await ArgumentsToRemoveAsync(context, parameter, x)],
                     SyntaxRemoveOptions.KeepLeadingTrivia | SyntaxRemoveOptions.AddElasticMarker);
 
                 return context.Document.WithSyntaxRoot(newRoot);

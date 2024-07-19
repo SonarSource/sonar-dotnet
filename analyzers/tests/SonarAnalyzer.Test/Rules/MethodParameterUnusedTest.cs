@@ -86,9 +86,9 @@ public class Sample
 
 #if NET
 
-        [TestMethod]
-        public void MethodParameterUnused_CSharp10_RoslynCfg() =>
-            roslynCS.AddPaths("MethodParameterUnused.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+    [TestMethod]
+    public void MethodParameterUnused_CSharp10_RoslynCfg() =>
+        roslynCS.AddPaths("MethodParameterUnused.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif
 
