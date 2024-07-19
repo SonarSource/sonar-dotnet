@@ -140,7 +140,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
                 AddPredecessorsOutsideRegion(finallyBlock);
             }
         }
-        if (block.IsEnclosedIn(ControlFlowRegionKind.Catch) && block.Successors.Any(x => x.Semantics == ControlFlowBranchSemantics.Rethrow))
+        if (block.IsEnclosedIn(ControlFlowRegionKind.Catch) && block.Successors.Any(x => x.Semantics is ControlFlowBranchSemantics.Rethrow or ControlFlowBranchSemantics.Throw))
         {
             BuildBranchesRethrow(block);
         }

@@ -680,6 +680,45 @@ public partial class RoslynLiveVariableAnalysisTest
     }
 
     [TestMethod]
+    public void Throw_NestedCatch_LiveInInConsecutiveOuterCatchNewThrow()
+    {
+        const string code = """
+            var value = 100;
+            try
+            {
+                try
+                {
+                     Method(value);
+                     Method(0);
+                }
+                catch (ArgumentNullException ex)
+                {
+                    Method(value);
+                    Method(1);
+                    throw new Exception("Message", ex);
+                }
+            }
+            catch (IOException)
+            {
+                Method(value);
+                Method(2);
+            }
+            catch (NullReferenceException)
+            {
+                Method(value);
+                Method(3);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("Method(0);", LiveIn("value"), LiveOut("value"));
+        context.Validate("Method(1);", LiveIn("value"), LiveOut("value"));
+        context.Validate("Method(2);", LiveIn("value"));
+        context.Validate("Method(3);", LiveIn("value"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
     public void Throw_NestedCatch_OuterCatchRethrows_LiveOutOuterCathc()
     {
         const string code = """
@@ -1459,6 +1498,41 @@ public partial class RoslynLiveVariableAnalysisTest
                 Method(value);
                 value = 1;
                 throw;
+            }
+            catch (ArgumentException)
+            {
+                Method(value);
+                value = 2;
+                throw;
+            }
+            finally
+            {
+                Method(value + 1);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("value = 1;", LiveIn("value"), LiveOut("value"));
+        context.Validate("value = 2;", LiveIn("value"), LiveOut("value"));
+        context.Validate("Method(value + 1);", LiveIn("value"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void TryCatchFinally_MultipleFilteredCatchNewThrowFinally()
+    {
+        const string code = """
+            var value = 0;
+            try
+            {
+                Method(0);
+                value = 42;
+            }
+            catch (IOException ex)
+            {
+                Method(value);
+                value = 1;
+                throw new Exception("Message", ex);
             }
             catch (ArgumentException)
             {
