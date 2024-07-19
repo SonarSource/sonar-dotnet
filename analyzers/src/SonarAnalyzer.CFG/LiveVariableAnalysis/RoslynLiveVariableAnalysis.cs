@@ -175,7 +175,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         {
             AddBranch(block, catchBlock);
         }
-        if (reachableCatchAndFinallyBlocks.Any() && reachableCatchAndFinallyBlocks.First() is { EnclosingRegion.Kind: ControlFlowRegionKind.Finally } finallyBlock)
+        if (reachableCatchAndFinallyBlocks.FirstOrDefault() is { EnclosingRegion.Kind: ControlFlowRegionKind.Finally } finallyBlock)
         {
             AddBranch(block, finallyBlock);
         }
