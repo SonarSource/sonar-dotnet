@@ -75,7 +75,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
     protected override State ProcessBlock(BasicBlock block)
     {
         var ret = new RoslynState(this);
-        ret.ProcessBlock(Cfg, block, flowCaptures);
+        ret.ProcessBlock(Cfg, block);
         return ret;
     }
 
@@ -239,18 +239,11 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         public RoslynState(RoslynLiveVariableAnalysis owner) =>
             this.owner = owner;
 
-        public void ProcessBlock(ControlFlowGraph cfg, BasicBlock block, Dictionary<CaptureId, List<ISymbol>> flowCaptureOperations)
+        public void ProcessBlock(ControlFlowGraph cfg, BasicBlock block)
         {
             foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder().Select(x => x.Instance))
             {
-                if (operation.AsFlowCaptureReference() is { } flowCaptureReference  && flowCaptureOperations.TryGetValue(flowCaptureReference.Id, out var symbols))
-                {
-                    UsedBeforeAssigned.UnionWith(symbols);
-                }
-                else
-                {
-                    ProcessOperation(cfg, operation);
-                }
+                ProcessOperation(cfg, operation);
             }
         }
 
@@ -264,6 +257,9 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
                     break;
                 case OperationKindEx.ParameterReference:
                     ProcessParameterOrLocalReference(IParameterReferenceOperationWrapper.FromOperation(operation));
+                    break;
+                case OperationKindEx.FlowCaptureReference:
+                    ProcessParameterOrLocalReference(IFlowCaptureReferenceOperationWrapper.FromOperation(operation));
                     break;
                 case OperationKindEx.SimpleAssignment:
                     ProcessSimpleAssignment(ISimpleAssignmentOperationWrapper.FromOperation(operation));
@@ -288,7 +284,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
                 Assigned.UnionWith(symbols);
                 UsedBeforeAssigned.ExceptWith(symbols);
             }
-            else if (!reference.IsAssignmentTarget())
+            else if (!reference.IsAssignmentTarget() && reference.ToSonar().Parent?.Kind != OperationKindEx.FlowCapture)
             {
                 UsedBeforeAssigned.UnionWith(symbols);
             }
@@ -351,9 +347,10 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
             {
                 ProcessedLocalFunctions.Add(localFunction);
                 var localFunctionCfg = cfg.FindLocalFunctionCfgInScope(localFunction, owner.Cancel);
+                
                 foreach (var block in localFunctionCfg.Blocks.Reverse())    // Simplified approach, ignoring branching and try/catch/finally flows
                 {
-                    ProcessBlock(localFunctionCfg, block, []);
+                    ProcessBlock(localFunctionCfg, block);
                 }
             }
         }
