@@ -653,6 +653,17 @@ namespace Tests.Diagnostics
             x = b1 || b2;   // Noncompliant
             coalesce = coalesce ?? "Value";   // Noncompliant
             coalesceAssignment ??= "Value";   // Noncompliant
+
+            DeadStores lst;
+            lst = new DeadStores  // FN
+            {
+                Property = 42
+            };
+            lst = new DeadStores
+            {
+                Property = 42
+            };
+            lst.ToString();
         }
 
         private void SimpleAssignment()
