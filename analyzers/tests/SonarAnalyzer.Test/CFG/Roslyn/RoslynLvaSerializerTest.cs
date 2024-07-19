@@ -85,14 +85,14 @@ public class RoslynLvaSerializerTest
             cfg0_block0 [shape=record label="{ENTRY #0}"]
             cfg0_block5 [shape=record label="{EXIT #5}"]
             cfg0_block1 -> cfg0_block2
-            cfg0_block2 -> cfg0_block3 [label="LVA"]
-            cfg0_block1 -> cfg0_block3 [label="LVA"]
-            cfg0_block2 -> cfg0_block4 [label="LVA"]
-            cfg0_block3 -> cfg0_block4 [label="LVA"]
+            cfg0_block2 -> cfg0_block3 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
+            cfg0_block1 -> cfg0_block3 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
+            cfg0_block2 -> cfg0_block4 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
+            cfg0_block3 -> cfg0_block4 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
             cfg0_block4 -> NoDestination_cfg0_block4 [label="StructuredExceptionHandling"]
             cfg0_block0 -> cfg0_block1
-            cfg0_block4 -> cfg0_block5 [label="LVA"]
-            cfg0_block4 -> cfg0_block5 [label="LVA"]
+            cfg0_block4 -> cfg0_block5 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
+            cfg0_block4 -> cfg0_block5 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
             cfg0_block2 -> cfg0_block5
             cfg0_block3 -> cfg0_block5
             }
@@ -160,13 +160,14 @@ public class RoslynLvaSerializerTest
             cfg0_block0 [shape=record label="{ENTRY #0}"]
             cfg0_block5 [shape=record label="{EXIT #5}"]
             cfg0_block1 -> cfg0_block2
-            cfg0_block2 -> cfg0_block3 [label="LVA"]
-            cfg0_block1 -> cfg0_block3 [label="LVA"]
+            cfg0_block2 -> cfg0_block3 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
+            cfg0_block1 -> cfg0_block3 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
             cfg0_block3 -> NoDestination_cfg0_block3 [label="Rethrow"]
-            cfg0_block2 -> cfg0_block4 [label="LVA"]
+            cfg0_block2 -> cfg0_block4 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
+            cfg0_block3 -> cfg0_block4 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
             cfg0_block4 -> NoDestination_cfg0_block4 [label="StructuredExceptionHandling"]
             cfg0_block0 -> cfg0_block1
-            cfg0_block4 -> cfg0_block5 [label="LVA"]
+            cfg0_block4 -> cfg0_block5 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
             cfg0_block2 -> cfg0_block5
             }
 
@@ -265,17 +266,17 @@ public class RoslynLvaSerializerTest
             cfg0_block3 -> cfg0_block4 [label="Else"]
             cfg0_block2 -> cfg0_block3
             cfg0_block4 -> cfg0_block3
-            cfg0_block3 -> cfg0_block5 [label="LVA"]
-            cfg0_block3 -> cfg0_block5 [label="LVA"]
-            cfg0_block2 -> cfg0_block5 [label="LVA"]
-            cfg0_block4 -> cfg0_block5 [label="LVA"]
+            cfg0_block3 -> cfg0_block5 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
+            cfg0_block3 -> cfg0_block5 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
+            cfg0_block2 -> cfg0_block5 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
+            cfg0_block4 -> cfg0_block5 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
             cfg0_block5 -> cfg0_block6 [label="Else"]
             cfg0_block5 -> cfg0_block7 [label="WhenTrue"]
             cfg0_block6 -> cfg0_block7
             cfg0_block7 -> NoDestination_cfg0_block7 [label="StructuredExceptionHandling"]
             cfg0_block1 -> cfg0_block2
             cfg0_block0 -> cfg0_block1
-            cfg0_block7 -> cfg0_block8 [label="LVA"]
+            cfg0_block7 -> cfg0_block8 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
             cfg0_block3 -> cfg0_block8 [label="WhenFalse"]
             }
 

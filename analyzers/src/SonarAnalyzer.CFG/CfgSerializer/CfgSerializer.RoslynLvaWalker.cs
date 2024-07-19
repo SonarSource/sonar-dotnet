@@ -38,7 +38,7 @@ public static partial class CfgSerializer
         {
             foreach (var predecessor in lva.BlockPredecessors[block.Ordinal].Where(x => !block.Predecessors.Any(y => y.Source == x)))
             {
-                writer.WriteEdge(BlockId(predecessor), BlockId(block), "LVA");
+                writer.WriteEdge(BlockId(predecessor), BlockId(block), "LVA\" fontcolor=\"blue\" penwidth=\"2\" color=\"blue");
             }
             base.WriteEdges(block);
         }

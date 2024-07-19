@@ -1530,7 +1530,7 @@ public class PeachValidation
         }
         catch
         {
-            value = 1;  // Noncompliant FP, used in finally after the throw
+            value = 1;
             throw;
         }
         finally
