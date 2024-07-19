@@ -1346,6 +1346,42 @@ public partial class RoslynLiveVariableAnalysisTest
     }
 
     [TestMethod]
+    public void TryCatchFinally_RethrowCatchRethrowOuterFinally()
+    {
+        const string code = """
+            var value = 0;
+            try
+            {
+                Method(0);
+                try
+                {
+                   Method(1);
+                   value = 42;
+                }
+                catch
+                {
+                   value = 2;
+                   throw;
+                }
+                finally
+                {
+                   Method(value + 1);
+                }
+            }
+            finally
+            {
+               Method(value + 2);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("value = 2;", LiveOut("value"));
+        context.Validate("Method(value + 1);", LiveIn("value"), LiveOut("value"));
+        context.Validate("Method(value + 2);", LiveIn("value"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
     public void TryCatchFinally_ConsecutiveCatchRethrowFinally()
     {
         const string code = """
@@ -1404,6 +1440,41 @@ public partial class RoslynLiveVariableAnalysisTest
         var context = CreateContextCS(code);
         context.ValidateEntry();
         context.Validate("value = 1;", LiveIn("value"), LiveOut("value"));
+        context.Validate("Method(value + 1);", LiveIn("value"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void TryCatchFinally_MultipleFilteredCatchRethrowFinally()
+    {
+        const string code = """
+            var value = 0;
+            try
+            {
+                Method(0);
+                value = 42;
+            }
+            catch (IOException)
+            {
+                Method(value);
+                value = 1;
+                throw;
+            }
+            catch (ArgumentException)
+            {
+                Method(value);
+                value = 2;
+                throw;
+            }
+            finally
+            {
+                Method(value + 1);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("value = 1;", LiveIn("value"), LiveOut("value"));
+        context.Validate("value = 2;", LiveIn("value"), LiveOut("value"));
         context.Validate("Method(value + 1);", LiveIn("value"));
         context.ValidateExit();
     }
