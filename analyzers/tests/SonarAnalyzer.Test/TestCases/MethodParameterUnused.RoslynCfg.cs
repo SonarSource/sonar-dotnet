@@ -651,14 +651,45 @@ namespace Tests.TestCases
     // https://github.com/SonarSource/sonar-dotnet/issues/8187
     public class Repro_8187_CodeFix
     {
-        void Method()
+        private int a = 21;
+        private int? obj = null;
+
+        async Task Method()
         {
             DoSomething(21, 42);
+            DoSomething(b: 21, a: 42);
+            DoSomething(21, a++);
+            DoSomething(21, a % 2 == 0 ? a++ : a);
+            DoSomething(21, a % 2 == 0 ? 21 : a);
+            DoSomething(21, obj ?? (a % 2 == 0 ? a++ : SomeMethod()));
+            DoSomething(21, SomeMethod());
+            DoSomething(21, await SomeMethodAsync());
+
+            DoSomething2(21, c: 32);
         }
 
         void DoSomething(int a, int b) // Noncompliant
         {
             Console.WriteLine(a);
+        }
+
+        // Noncompliant@+2
+        // Noncompliant@+1
+        void DoSomething2(int a, int b = 21, int c = 42) // Noncompliant
+        {
+            Console.WriteLine("DoSomething2");
+        }
+
+        int SomeMethod()
+        {
+            a++;
+            return a;
+        }
+
+        Task<int> SomeMethodAsync()
+        {
+            a++;
+            return Task.FromResult(a);
         }
     }
 }

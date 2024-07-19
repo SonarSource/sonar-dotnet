@@ -28,58 +28,92 @@ public sealed class MethodParameterUnusedCodeFix : SonarCodeFix
 {
     private const string Title = "Remove unused parameter";
 
+    private static readonly ISet<SyntaxKind> SideEffectExpression =
+        new HashSet<SyntaxKind>
+        {
+            SyntaxKind.AddAssignmentExpression,
+            SyntaxKind.AndAssignmentExpression,
+            SyntaxKind.AwaitExpression,
+            SyntaxKind.DivideAssignmentExpression,
+            SyntaxKind.ExclusiveOrAssignmentExpression,
+            SyntaxKind.InvocationExpression,
+            SyntaxKind.LeftShiftAssignmentExpression,
+            SyntaxKind.ModuloAssignmentExpression,
+            SyntaxKind.MultiplyAssignmentExpression,
+            SyntaxKind.OrAssignmentExpression,
+            SyntaxKind.PostDecrementExpression,
+            SyntaxKind.PostIncrementExpression,
+            SyntaxKind.PreDecrementExpression,
+            SyntaxKind.PreIncrementExpression,
+            SyntaxKind.RightShiftAssignmentExpression,
+            SyntaxKind.SimpleAssignmentExpression,
+            SyntaxKind.SubtractAssignmentExpression,
+            SyntaxKindEx.CoalesceAssignmentExpression,
+            SyntaxKindEx.UnsignedRightShiftAssignmentExpression
+        };
+
     public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(MethodParameterUnused.DiagnosticId);
 
-    protected override async Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
+    protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
     {
         var diagnostic = context.Diagnostics.First();
         var diagnosticSpan = diagnostic.Location.SourceSpan;
         var parameter = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) as ParameterSyntax;
-        IEnumerable<SyntaxNode> arguments = [];
+
 
         if (!bool.Parse(diagnostic.Properties[MethodParameterUnused.IsRemovableKey]))
         {
-            return;
+            return Task.CompletedTask;
         }
+
+        context.RegisterCodeFix(
+            Title,
+            async x =>
+            {
+                var newRoot = root.RemoveNodes(
+                    [parameter, ..(await ArgumentsToRemoveAsync(context, parameter, x))],
+                    SyntaxRemoveOptions.KeepLeadingTrivia | SyntaxRemoveOptions.AddElasticMarker);
+
+                return context.Document.WithSyntaxRoot(newRoot);
+            },
+            context.Diagnostics);
+        return Task.CompletedTask;
+    }
+
+    private static async Task<IEnumerable<SyntaxNode>> ArgumentsToRemoveAsync(SonarCodeFixContext context, ParameterSyntax parameter, CancellationToken cancel)
+    {
+        IEnumerable<SyntaxNode> arguments = [];
 
         if (parameter?.Parent.Parent is BaseMethodDeclarationSyntax methodDeclaration)
         {
-            var model = await context.Document.GetSemanticModelAsync(context.CancellationToken);
-            var parameterIndex = methodDeclaration.ParameterList.Parameters.IndexOf(parameter);
+            var model = await context.Document.GetSemanticModelAsync(cancel);
 
-            if (parameterIndex >= 0 && model.GetDeclaredSymbol(methodDeclaration, context.CancellationToken) is { } methodSymbol)
+            if (model.GetDeclaredSymbol(methodDeclaration, cancel) is { } methodSymbol)
             {
                 var callers = await SymbolFinder.FindCallersAsync(
                     methodSymbol,
                     context.Document.Project.Solution,
                     ImmutableHashSet.Create(context.Document),
-                    context.CancellationToken);
+                    cancel);
 
                 arguments = callers
                     .SelectMany(x => x.Locations)
-                    .Select(x => GetArgumentFromLocation(x, parameterIndex));
+                    .Select(x => GetArgumentFromLocation(x, parameter))
+                    .Where(x => x is not null && !x.DescendantNodes().Select(y => y.Kind()).Any(y => SideEffectExpression.Contains(y)));
             }
         }
 
-        context.RegisterCodeFix(
-            Title,
-            _ =>
-            {
-                var newRoot = root.RemoveNodes(
-                    [parameter, ..arguments.Where(x => x is not null)],
-                    SyntaxRemoveOptions.KeepLeadingTrivia | SyntaxRemoveOptions.AddElasticMarker);
-
-                return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-            },
-            context.Diagnostics);
+        return arguments;
     }
 
-    private static SyntaxNode GetArgumentFromLocation(Location location, int parameterIndex) =>
+    private static ArgumentSyntax GetArgumentFromLocation(Location location, ParameterSyntax parameter) =>
         location.SourceTree.GetRoot().FindNode(location.SourceSpan, getInnermostNodeForTie: true) is { } node
         && GetIdentifierNameParent(node).ArgumentList() is { } argumentList
-        && argumentList.Arguments.Count > parameterIndex
-            ? argumentList.Arguments[parameterIndex]
+            ? argumentList.Arguments.FirstOrDefault(x => ArgumentEqualsParameter(x, parameter))
             : null;
+
+    private static bool ArgumentEqualsParameter(ArgumentSyntax argument, ParameterSyntax parameter) =>
+        argument.NameIs(parameter.GetName()) || argument.GetArgumentIndex() == parameter.GetParameterIndex();
 
     private static SyntaxNode GetIdentifierNameParent(SyntaxNode node) =>
         node is IdentifierNameSyntax identifierName ? identifierName.Parent : node;
