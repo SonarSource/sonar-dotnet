@@ -1,5 +1,4 @@
 {
-  "title": "LINQ expressions should be simplified",
   "type": "CODE_SMELL",
   "code": {
     "impacts": {
@@ -19,5 +18,6 @@
   "ruleSpecification": "RSPEC-2971",
   "sqKey": "S2971",
   "scope": "All",
-  "quickfix": "unknown"
+  "quickfix": "unknown",
+  "title": "LINQ expressions should be simplified"
 }

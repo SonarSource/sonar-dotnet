@@ -1,5 +1,4 @@
 {
-  "title": "\"IsNot\" should be used instead of \"Not ... Is ...\"",
   "type": "CODE_SMELL",
   "code": {
     "impacts": {
@@ -19,5 +18,6 @@
   "ruleSpecification": "RSPEC-2358",
   "sqKey": "S2358",
   "scope": "Main",
-  "quickfix": "covered"
+  "quickfix": "covered",
+  "title": "\"IsNot\" should be used instead of \"Not ... Is ...\""
 }
