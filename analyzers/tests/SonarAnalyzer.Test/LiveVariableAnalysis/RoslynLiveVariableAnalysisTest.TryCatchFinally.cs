@@ -1421,7 +1421,7 @@ public partial class RoslynLiveVariableAnalysisTest
     }
 
     [TestMethod]
-    public void TryCatchFinally_ConsecutiveCatchRethrowFinally()
+    public void TryCatchFinally_ConsecutiveCatchAllThrowRethrowFinally()
     {
         const string code = """
             var value = 0;
@@ -1451,6 +1451,34 @@ public partial class RoslynLiveVariableAnalysisTest
         context.ValidateEntry();
         context.Validate("value = 1;", LiveIn("value"), LiveOut("value"));
         context.Validate("value = 2;", LiveIn("value"), LiveOut("value"));
+        context.Validate("Method(value + 1);", LiveIn("value"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void TryCatchFinally_ConsecutiveCatchRethrowFinally()
+    {
+        const string code = """
+            var value = 0;
+            try
+            {
+                Method(0);
+                value = 42;
+            }
+            catch (IOException)
+            {
+                Method(value);
+                value = 1;
+                throw;
+            }
+            catch (ArgumentNullException)
+            {
+                Method(value + 1);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("value = 1;", LiveIn("value"));
         context.Validate("Method(value + 1);", LiveIn("value"));
         context.ValidateExit();
     }
