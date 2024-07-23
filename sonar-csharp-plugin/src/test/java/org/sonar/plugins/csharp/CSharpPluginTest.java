@@ -20,7 +20,6 @@
 package org.sonar.plugins.csharp;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 import org.sonar.api.Plugin;
@@ -100,7 +99,7 @@ class CSharpPluginTest {
   private static List<Object> nonProperties(List<Object> extensions) {
     return extensions.stream()
       .filter(extension -> !(extension instanceof PropertyDefinition))
-      .collect(Collectors.toList());
+      .toList();
   }
 
 }
