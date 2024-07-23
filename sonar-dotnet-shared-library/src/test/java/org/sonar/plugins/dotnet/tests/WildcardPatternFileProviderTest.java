@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import com.google.common.base.Joiner;
 import java.io.File;
 import java.util.List;
 import java.util.Set;
@@ -249,7 +248,7 @@ public class WildcardPatternFileProviderTest {
   }
 
   private static String path(String... elements) {
-    return Joiner.on(File.separator).join(elements);
+    return String.join(File.separator, elements);
   }
 
   private static Set<File> listFiles(String pattern) {

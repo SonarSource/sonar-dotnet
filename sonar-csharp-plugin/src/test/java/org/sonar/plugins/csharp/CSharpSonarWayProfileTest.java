@@ -19,11 +19,11 @@
  */
 package org.sonar.plugins.csharp;
 
-import com.google.common.collect.Sets;
 import com.sonar.plugins.security.api.CsRules;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,7 +57,7 @@ class CSharpSonarWayProfileTest {
     Mockito.when(profile.activateRule(CSharpPlugin.REPOSITORY_KEY, "TEST")).thenThrow(IllegalArgumentException.class);
     Context context = Mockito.mock(Context.class);
     Mockito.when(context.createBuiltInQualityProfile(anyString(), anyString())).thenReturn(profile);
-    CsRules.ruleKeys = Sets.newHashSet("TEST");
+    CsRules.ruleKeys = Set.of("TEST");
 
     CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
     profileDef.define(context);
@@ -73,7 +73,7 @@ class CSharpSonarWayProfileTest {
     Mockito.when(profile.activateRule("roslyn.TEST", "TEST")).thenThrow(IllegalStateException.class);
     Context context = Mockito.mock(Context.class);
     Mockito.when(context.createBuiltInQualityProfile(anyString(), anyString())).thenReturn(profile);
-    CsRules.ruleKeys = Sets.newHashSet("TEST");
+    CsRules.ruleKeys = Set.of("TEST");
     CsRules.returnRepository = true;
 
     CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
@@ -85,7 +85,7 @@ class CSharpSonarWayProfileTest {
   @Test
   void sonar_security_with_custom_frontend_plugin() {
     Context context = new Context();
-    CsRules.ruleKeys = Sets.newHashSet("S3649");
+    CsRules.ruleKeys = Set.of("S3649");
     CsRules.returnRepository = true;
 
     CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
@@ -102,7 +102,7 @@ class CSharpSonarWayProfileTest {
     NewBuiltInQualityProfile sonarWay = context.createBuiltInQualityProfile("Sonar way", CSharpPlugin.LANGUAGE_KEY);
     sonarWay.activateRule(CSharpPlugin.REPOSITORY_KEY, "S1");
     sonarWay.done();
-    CsRules.ruleKeys = Sets.newHashSet("S2");
+    CsRules.ruleKeys = Set.of("S2");
 
     CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
 
@@ -126,7 +126,7 @@ class CSharpSonarWayProfileTest {
   @Test
   void sonar_security_7_3_present() {
     Context context = new Context();
-    CsRules.ruleKeys = Sets.newHashSet("S3649");
+    CsRules.ruleKeys = Set.of("S3649");
     CsRules.returnRepository = false;
 
     CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();

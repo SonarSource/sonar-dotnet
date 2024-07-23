@@ -19,12 +19,12 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import org.junit.Before;
 import org.junit.Rule;
@@ -247,20 +247,14 @@ public class CoverageReportImportSensorTest {
     String bazPath = new File(baseDir, "Baz.java").getAbsolutePath();
     String barPath = new File(baseDir, "Bar.cs").getAbsolutePath();
     when(coverage.files()).thenReturn(new HashSet<>(asList(fooPath, barPath, bazPath)));
-    when(coverage.hits(fooPath)).thenReturn(ImmutableMap.<Integer, Integer>builder()
-      .put(2, 1)
-      .put(4, 0)
-      .build());
-    when(coverage.hits(barPath)).thenReturn(ImmutableMap.<Integer, Integer>builder()
-      .put(42, 1)
-      .build());
-    when(coverage.hits(bazPath)).thenReturn(ImmutableMap.<Integer, Integer>builder()
-      .put(42, 1)
-      .build());
-    when(coverage.getBranchCoverage(fooPath)).thenReturn(ImmutableList.<BranchCoverage>builder()
-      .add(new BranchCoverage(5, 2, 1))
-      .add(new BranchCoverage(6, 3, 2))
-      .build());
+    when(coverage.hits(fooPath)).thenReturn(Map.of(
+      2, 1,
+      4, 0));
+    when(coverage.hits(barPath)).thenReturn(Map.of(42, 1));
+    when(coverage.hits(bazPath)).thenReturn(Map.of(42, 1));
+    when(coverage.getBranchCoverage(fooPath)).thenReturn(List.of(
+      new BranchCoverage(5, 2, 1),
+      new BranchCoverage(6, 3, 2)));
 
     DefaultInputFile inputFile = new TestInputFileBuilder("foo", baseDir, new File(baseDir, "Foo.cs"))
       .setLanguage("cs")

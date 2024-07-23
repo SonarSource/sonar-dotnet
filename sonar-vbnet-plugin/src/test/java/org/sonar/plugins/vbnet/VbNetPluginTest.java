@@ -19,8 +19,8 @@
  */
 package org.sonar.plugins.vbnet;
 
-import com.google.common.collect.ImmutableList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 import org.sonar.api.Plugin;
@@ -95,14 +95,10 @@ class VbNetPluginTest {
         + new VbNetPropertyDefinitions(sonarRuntime).create().size());
   }
 
-  private static List nonProperties(List extensions) {
-    ImmutableList.Builder builder = ImmutableList.builder();
-    for (Object extension : extensions) {
-      if (!(extension instanceof PropertyDefinition)) {
-        builder.add(extension);
-      }
-    }
-    return builder.build();
+  private static List<Object> nonProperties(List<Object> extensions) {
+    return extensions.stream()
+      .filter(extension -> !(extension instanceof PropertyDefinition))
+      .collect(Collectors.toList());
   }
 
 }

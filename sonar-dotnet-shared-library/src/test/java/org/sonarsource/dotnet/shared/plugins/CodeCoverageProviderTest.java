@@ -19,9 +19,9 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import com.google.common.collect.ImmutableSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.config.PropertyDefinition;
@@ -113,25 +113,17 @@ public class CodeCoverageProviderTest {
     return new CodeCoverageProvider(pluginMetadata);
   }
 
-  private static Set<Object> nonProperties(List extensions) {
-    ImmutableSet.Builder<Object> builder = ImmutableSet.builder();
-    for (Object extension : extensions) {
-      if (!(extension instanceof PropertyDefinition)) {
-        builder.add(extension);
-      }
-    }
-    return builder.build();
+  private static Set<Object> nonProperties(List<Object> extensions) {
+    return extensions.stream()
+      .filter(extension -> !(extension instanceof PropertyDefinition))
+      .collect(Collectors.toSet());
   }
 
-  private static Set<String> propertyKeys(List extensions) {
-    ImmutableSet.Builder<String> builder = ImmutableSet.builder();
-    for (Object extension : extensions) {
-      if (extension instanceof PropertyDefinition) {
-        PropertyDefinition property = (PropertyDefinition) extension;
-        builder.add(property.key());
-      }
-    }
-    return builder.build();
+  private static Set<String> propertyKeys(List<Object> extensions) {
+    return extensions.stream()
+      .filter(extension -> (extension instanceof PropertyDefinition))
+      .map(extension -> ((PropertyDefinition) extension).key())
+      .collect(Collectors.toSet());
   }
 
 }
