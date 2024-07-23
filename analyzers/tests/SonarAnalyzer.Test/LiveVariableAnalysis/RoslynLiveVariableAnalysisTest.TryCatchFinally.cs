@@ -554,18 +554,21 @@ public partial class RoslynLiveVariableAnalysisTest
         const string code = """
             var value = 100;    // Compliant, used in catch
             Method(0);
-            if (boolParameter ) {Console.WriteLine("Hi");}
+            if (boolParameter )
+            {
+                Console.WriteLine("Hi");
+            }
             try
             {
-                value = Method(10);
-                //if (boolParameter)
-                //{
-                //    Method(1);
-                //}
-                //else
-                //{
-                //     Method(2);
-                //}
+                value = Method(1);
+                if (boolParameter)
+                {
+                    Method(2);
+                }
+                else
+                {
+                     Method(3);
+                }
             }
             catch
             {
@@ -573,10 +576,11 @@ public partial class RoslynLiveVariableAnalysisTest
             }
             """;
         var context = CreateContextCS(code);
-       // context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
-        context.Validate("Method(0);", LiveIn("boolParameter"), LiveOut( "value"));
-       // context.Validate("Method(0);", LiveIn("value"), LiveOut("value"));
-       // context.Validate("Method(1);", LiveIn("value"), LiveOut("value"));
+        context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
+        context.Validate("Method(0);", LiveIn("boolParameter"), LiveOut("boolParameter", "value"));
+        context.Validate("value = Method(1);", LiveIn("boolParameter"), LiveOut("value"));
+        context.Validate("Method(2);", LiveIn("value"), LiveOut("value"));
+        context.Validate("Method(3);", LiveIn("value"), LiveOut("value"));
         context.Validate("Method(value);", LiveIn("value"));
         context.ValidateExit();
     }
