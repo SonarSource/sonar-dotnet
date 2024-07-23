@@ -134,13 +134,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
                 AddBranch(block, catchOrFilterBlock);
                 var sourceBlock = block.Ordinal > tryRegion.FirstBlockOrdinal ? Cfg.Blocks[tryRegion.FirstBlockOrdinal] : block;
                 AddPredecessorsOutsideRegion(sourceBlock, catchOrFilterBlock);
-                if (block.Ordinal > tryRegion.FirstBlockOrdinal)
-                {
-                    foreach (var predecessor in block.Predecessors.Where(x => x.Source.Ordinal >= tryRegion.FirstBlockOrdinal && x.Source.Ordinal < block.Ordinal))
-                    {
-                        AddBranch(predecessor.Source, catchOrFilterBlock);
-                    }
-                }
+                ConnectPredecessorsToCath(block, catchOrFilterBlock);
                 catchesAll = catchesAll || (catchOrFilterRegion.Kind == ControlFlowRegionKind.Catch && IsCatchAllType(catchOrFilterRegion.ExceptionType));
             }
             if (!catchesAll && block.EnclosingRegion(ControlFlowRegionKind.TryAndFinally)?.NestedRegion(ControlFlowRegionKind.Finally) is { } finallyRegion)
@@ -161,6 +155,17 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
             foreach (var predecessor in source.Predecessors.Where(x => x.Source.Ordinal < tryRegion.FirstBlockOrdinal || x.Source.Ordinal > tryRegion.LastBlockOrdinal))
             {
                 AddBranch(predecessor.Source, destination);
+            }
+        }
+
+        void ConnectPredecessorsToCath(BasicBlock block, BasicBlock catchOrFilterBlock)
+        {
+            if (block.Ordinal > tryRegion.FirstBlockOrdinal)
+            {
+                foreach (var predecessor in block.Predecessors.Where(x => x.Source.Ordinal >= tryRegion.FirstBlockOrdinal && x.Source.Ordinal < block.Ordinal))
+                {
+                    AddBranch(predecessor.Source, catchOrFilterBlock);
+                }
             }
         }
     }
