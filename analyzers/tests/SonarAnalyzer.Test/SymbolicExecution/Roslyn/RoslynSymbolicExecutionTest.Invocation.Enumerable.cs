@@ -72,7 +72,7 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow("Union", "[]")]
     [DataRow("Where", "x => true")]
     [DataRow("Zip", "[1], (x, y) => x")]
-    public void Invocation_SetsNotNull_OnLinqMethodsNullChecking(string method, string args = null)
+    public void Invocation_LinqMethodsNullChecking_SetsNotNull(string method, string args = null)
     {
         var code = $$"""
             using System;
@@ -110,7 +110,7 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow("OfType<short>()")]
     [DataRow("ThenBy(x => x)")]
     [DataRow("ThenByDescending(x => x)")]
-    public void Invocation_SetsNotNull_OnLinqMethodsWithGenericParamNullChecking(string invocation)
+    public void Invocation_LinqMethodsWithGenericParamNullChecking_SetsNotNull(string invocation)
     {
         var code = $$"""
             using System;
@@ -136,7 +136,7 @@ public partial class RoslynSymbolicExecutionTest
 
     [DataTestMethod]
     [DataRow("AsEnumerable")]
-    public void Invocation_DoesNotSetNotNull_OnLinqMethodNonNullChecking(string method, string args = null)
+    public void Invocation_LinqMethodNonNullChecking_SetsNoConstraint(string method, string args = null)
     {
         var code = $$"""
             using System;
@@ -161,7 +161,7 @@ public partial class RoslynSymbolicExecutionTest
                 private static void Tag(string name, object arg) { }
             }
             """;
-        var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+        var validator = new SETestContext(code, AnalyzerLanguage.CSharp, []).Validator;
         validator.ValidateContainsOperation(OperationKind.Invocation);
         validator.TagValue("Before1").Should().BeNull();
         validator.TagValue("After1").Should().BeNull();
@@ -170,7 +170,7 @@ public partial class RoslynSymbolicExecutionTest
     }
 
     [TestMethod]
-    public void Invocation_DoesntSetNotNull_OnExtensionsNonLinq()
+    public void Invocation_ExtensionsNonLinq_SetsNoConstraint()
     {
         var code = $$"""
             using System;
@@ -217,7 +217,7 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow("Count")]
     [DataRow("ToArray")]
     [DataRow("ToList")]
-    public void Invocation_SetsNotNull_OnSourceOfLinqExtension_VB(string method)
+    public void Invocation_LinqExtension_SetsNotNullOnSource_VB(string method)
     {
         var code = $$"""
             Imports System
@@ -281,7 +281,7 @@ public partial class RoslynSymbolicExecutionTest
                 End Function
             End Module
             """;
-        var validator = new SETestContext(code, AnalyzerLanguage.VisualBasic, Array.Empty<SymbolicCheck>()).Validator;
+        var validator = new SETestContext(code, AnalyzerLanguage.VisualBasic, []).Validator;
         validator.ValidateContainsOperation(OperationKind.Invocation);
         validator.TagValue("Before1").Should().BeNull();
         validator.TagValue("After1").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
@@ -300,7 +300,7 @@ public partial class RoslynSymbolicExecutionTest
     }
 
     [TestMethod]
-    public void Invocation_SetNotNull_OnCountOfList_VB()
+    public void Invocation_CountOfList_SetsNotNull_VB()
     {
         var code = $$"""
             Imports System
@@ -338,7 +338,7 @@ public partial class RoslynSymbolicExecutionTest
     [DataTestMethod]
     [DataRow("Count")]
     [DataRow("AsEnumerable")]
-    public void Invocation_DoesntSetNotNull_OnSourceOfLinqLikeExtension(string method)
+    public void Invocation_EnumerableExtension_SetsNoConstraintOnSource(string method)
     {
         var code = $$"""
             using System.Linq;
@@ -420,7 +420,7 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow("arg.UnionBy(arg, x => x);")]
     [DataRow("arg.TakeLast(42);")]
 #endif
-    public void Invocation_LinqEnumerableAndQueryable_NotNull(string expression)
+    public void Invocation_LinqEnumerableAndQueryable_SetNotNull(string expression)
     {
         var code = $"""
             var value = {expression};
@@ -477,7 +477,7 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow("FirstOrDefault()", "int?")]
     [DataRow("LastOrDefault()", "int?")]
     [DataRow("SingleOrDefault()", "int?")]
-    public void Invocation_ElementOrDefault_CollectionEmpty_ReferenceElementType(string expression, string type)
+    public void Invocation_ElementOrDefault_CollectionEmpty_NullableType(string expression, string type)
     {
         var code = $"""
             collection.Clear();
