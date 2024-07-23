@@ -20,16 +20,15 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.junit.Test;
-import org.sonar.api.config.PropertyDefinition;
 import org.sonar.plugins.dotnet.tests.UnitTestResultsImportSensor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.sonarsource.dotnet.shared.PropertyUtils.nonProperties;
+import static org.sonarsource.dotnet.shared.PropertyUtils.propertyKeys;
 
 public class UnitTestResultsProviderTest {
 
@@ -61,19 +60,6 @@ public class UnitTestResultsProviderTest {
     assertThat(propertyKeys(extensions)).containsOnly(
       "sonar.cs.vstest.reportsPaths",
       "sonar.cs.nunit.reportsPaths");
-  }
-
-  private static Set<Object> nonProperties(List<Object> extensions) {
-    return extensions.stream()
-      .filter(extension -> !(extension instanceof PropertyDefinition))
-      .collect(Collectors.toSet());
-  }
-
-  private static Set<String> propertyKeys(List<Object> extensions) {
-    return extensions.stream()
-      .filter(extension -> extension instanceof PropertyDefinition)
-      .map(extension -> ((PropertyDefinition) extension).key())
-      .collect(Collectors.toSet());
   }
 
 }

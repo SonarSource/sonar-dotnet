@@ -19,14 +19,11 @@
  */
 package org.sonar.plugins.csharp;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.sonar.api.Plugin;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
-import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.utils.Version;
 import org.sonarsource.dotnet.shared.plugins.AnalysisWarningsSensor;
@@ -48,6 +45,7 @@ import org.sonarsource.dotnet.shared.plugins.UnitTestResultsProvider;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonarsource.dotnet.shared.PropertyUtils.nonProperties;
 
 class CSharpPluginTest {
 
@@ -94,12 +92,6 @@ class CSharpPluginTest {
         + new UnitTestResultsProvider(CSharpPlugin.METADATA).extensions().size()
         + RoslynProfileExporter.sonarLintRepositoryProperties(CSharpPlugin.METADATA).size()
         + new CSharpPropertyDefinitions(sonarRuntime).create().size());
-  }
-
-  private static List<Object> nonProperties(List<Object> extensions) {
-    return extensions.stream()
-      .filter(extension -> !(extension instanceof PropertyDefinition))
-      .toList();
   }
 
 }

@@ -19,18 +19,16 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 import org.junit.Test;
 import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonar.api.config.PropertyDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.sonarsource.dotnet.shared.PropertyUtils.nonProperties;
+import static org.sonarsource.dotnet.shared.PropertyUtils.propertyKeys;
 
 public class CodeCoverageProviderTest {
 
@@ -111,19 +109,6 @@ public class CodeCoverageProviderTest {
     when(pluginMetadata.languageKey()).thenReturn("KEY");
     when(pluginMetadata.languageName()).thenReturn("NAME");
     return new CodeCoverageProvider(pluginMetadata);
-  }
-
-  private static Set<Object> nonProperties(List<Object> extensions) {
-    return extensions.stream()
-      .filter(extension -> !(extension instanceof PropertyDefinition))
-      .collect(Collectors.toSet());
-  }
-
-  private static Set<String> propertyKeys(List<Object> extensions) {
-    return extensions.stream()
-      .filter(extension -> (extension instanceof PropertyDefinition))
-      .map(extension -> ((PropertyDefinition) extension).key())
-      .collect(Collectors.toSet());
   }
 
 }
