@@ -63,6 +63,7 @@ public class UseConstantLoggingTemplateTest
     [DataRow("Warn")]
     public void UseConstantLoggingTemplate_Log4Net_CS(string methodName) =>
         builder.AddSnippet($$"""
+            using System;
             using log4net;
 
             public class Program
@@ -73,6 +74,11 @@ public class UseConstantLoggingTemplateTest
                     logger.{{methodName}}($"{arg}");                // Noncompliant
                     logger.{{methodName}}Format("Arg: {0}", arg);   // Compliant
                     logger.{{methodName}}Format($"{arg}");          // Noncompliant
+                }
+
+                void Repro_9547(ILog logger, string filePath, Exception ex)
+                {
+                  logger.Error($"Error while loading file '{filePath}'!", ex); // Noncompliant FP
                 }
             }
             """).Verify();
