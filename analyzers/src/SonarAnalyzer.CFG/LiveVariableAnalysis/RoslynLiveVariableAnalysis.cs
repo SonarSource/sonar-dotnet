@@ -162,7 +162,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         {
             if (block.Ordinal > tryRegion.FirstBlockOrdinal)
             {
-                foreach (var predecessor in block.Predecessors.Where(x => x.Source.Ordinal >= tryRegion.FirstBlockOrdinal && x.Source.Ordinal < block.Ordinal))
+                foreach (var predecessor in block.Predecessors.Where(x => x.Source.Ordinal >= tryRegion.FirstBlockOrdinal))
                 {
                     AddBranch(predecessor.Source, catchOrFilterBlock);
                 }
