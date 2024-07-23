@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import com.google.common.collect.ImmutableMap;
+import java.util.Map;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,39 +34,39 @@ public class CoverageTest {
 
     coverage.addHits("foo.txt", 42, 1);
     assertThat(coverage.files()).containsExactlyInAnyOrder("foo.txt");
-    assertThat(coverage.hits("foo.txt")).isEqualTo(ImmutableMap.of(42, 1));
+    assertThat(coverage.hits("foo.txt")).isEqualTo(Map.of(42, 1));
 
     coverage.addHits("foo.txt", 42, 3);
     assertThat(coverage.files()).containsExactlyInAnyOrder("foo.txt");
-    assertThat(coverage.hits("foo.txt")).isEqualTo(ImmutableMap.of(42, 4));
+    assertThat(coverage.hits("foo.txt")).isEqualTo(Map.of(42, 4));
 
     coverage.addHits("foo.txt", 1234, 11);
     assertThat(coverage.files()).containsExactlyInAnyOrder("foo.txt");
-    assertThat(coverage.hits("foo.txt")).isEqualTo(ImmutableMap.of(42, 4, 1234, 11));
+    assertThat(coverage.hits("foo.txt")).isEqualTo(Map.of(42, 4, 1234, 11));
 
     coverage.addHits("bar.txt", 1, 2);
     assertThat(coverage.files()).containsExactlyInAnyOrder("foo.txt", "bar.txt");
-    assertThat(coverage.hits("foo.txt")).isEqualTo(ImmutableMap.of(42, 4, 1234, 11));
-    assertThat(coverage.hits("bar.txt")).isEqualTo(ImmutableMap.of(1, 2));
+    assertThat(coverage.hits("foo.txt")).isEqualTo(Map.of(42, 4, 1234, 11));
+    assertThat(coverage.hits("bar.txt")).isEqualTo(Map.of(1, 2));
 
     Coverage other = new Coverage();
 
     coverage.mergeWith(other);
     assertThat(coverage.files()).containsExactlyInAnyOrder("foo.txt", "bar.txt");
-    assertThat(coverage.hits("foo.txt")).isEqualTo(ImmutableMap.of(42, 4, 1234, 11));
-    assertThat(coverage.hits("bar.txt")).isEqualTo(ImmutableMap.of(1, 2));
+    assertThat(coverage.hits("foo.txt")).isEqualTo(Map.of(42, 4, 1234, 11));
+    assertThat(coverage.hits("bar.txt")).isEqualTo(Map.of(1, 2));
 
     other.addHits("baz.txt", 2, 7);
     assertThat(other.files()).containsExactlyInAnyOrder("baz.txt");
-    assertThat(other.hits("baz.txt")).isEqualTo(ImmutableMap.of(2, 7));
+    assertThat(other.hits("baz.txt")).isEqualTo(Map.of(2, 7));
 
     coverage.mergeWith(other);
     assertThat(other.files()).containsExactlyInAnyOrder("baz.txt");
-    assertThat(other.hits("baz.txt")).isEqualTo(ImmutableMap.of(2, 7));
+    assertThat(other.hits("baz.txt")).isEqualTo(Map.of(2, 7));
     assertThat(coverage.files()).containsExactlyInAnyOrder("foo.txt", "bar.txt", "baz.txt");
-    assertThat(coverage.hits("foo.txt")).isEqualTo(ImmutableMap.of(42, 4, 1234, 11));
-    assertThat(coverage.hits("bar.txt")).isEqualTo(ImmutableMap.of(1, 2));
-    assertThat(coverage.hits("baz.txt")).isEqualTo(ImmutableMap.of(2, 7));
+    assertThat(coverage.hits("foo.txt")).isEqualTo(Map.of(42, 4, 1234, 11));
+    assertThat(coverage.hits("bar.txt")).isEqualTo(Map.of(1, 2));
+    assertThat(coverage.hits("baz.txt")).isEqualTo(Map.of(2, 7));
   }
 
   @Test

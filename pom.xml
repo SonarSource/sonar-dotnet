@@ -62,7 +62,6 @@
     <sonar.api.impl.version>10.6.0.92116</sonar.api.impl.version>
     <jdk.min.version>17</jdk.min.version>
     <maven.compiler.release>${jdk.min.version}</maven.compiler.release>
-    <guava.version>33.2.1-jre</guava.version>
     <!-- See: https://github.com/SonarSource/sonar-plugin-api#compatibility -->
     <plugin.api.min.version>9.14.0.375</plugin.api.min.version>
 
@@ -137,12 +136,6 @@
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
         <version>5.12.0</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.google.guava</groupId>
-        <artifactId>guava</artifactId>
-        <version>${guava.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>

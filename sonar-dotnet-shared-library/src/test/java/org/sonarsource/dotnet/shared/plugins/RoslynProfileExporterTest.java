@@ -19,11 +19,11 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import com.google.common.io.Files;
-import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -79,7 +79,7 @@ public class RoslynProfileExporterTest {
     exporter.exportProfile(mock(RulesProfile.class), writer);
 
     String actual = writer.toString().replaceAll("\r?\n|\r", "");
-    String expected = Files.toString(new File("src/test/resources/RoslynProfileExporterTest/no_rules.xml"), StandardCharsets.UTF_8).replaceAll("\r?\n|\r", "");
+    String expected = Files.readString(Path.of("src/test/resources/RoslynProfileExporterTest/no_rules.xml"), StandardCharsets.UTF_8).replaceAll("\r?\n|\r", "");
     assertThat(actual).isEqualTo(expected);
   }
 
@@ -139,7 +139,7 @@ public class RoslynProfileExporterTest {
     exporter.exportProfile(rulesProfile, writer);
 
     String actual = writer.toString().replaceAll("\r?\n|\r", "");
-    String expected = Files.toString(new File("src/test/resources/RoslynProfileExporterTest/only_sonarlint.xml"), StandardCharsets.UTF_8).replaceAll("\r?\n|\r", "");
+    String expected = Files.readString(Path.of("src/test/resources/RoslynProfileExporterTest/only_sonarlint.xml"), StandardCharsets.UTF_8).replaceAll("\r?\n|\r", "");
     assertThat(actual).isEqualTo(expected);
   }
 
@@ -221,7 +221,7 @@ public class RoslynProfileExporterTest {
     exporter.exportProfile(rulesProfile, writer);
 
     String actual = writer.toString().replaceAll("\r?\n|\r", "");
-    String expected = Files.toString(new File("src/test/resources/RoslynProfileExporterTest/mixed.xml"), StandardCharsets.UTF_8).replaceAll("\r?\n|\r", "");
+    String expected = Files.readString(Path.of("src/test/resources/RoslynProfileExporterTest/mixed.xml"), StandardCharsets.UTF_8).replaceAll("\r?\n|\r", "");
     assertThat(actual).isEqualTo(expected);
   }
 
@@ -289,7 +289,7 @@ public class RoslynProfileExporterTest {
     exporter.exportProfile(rulesProfile, writer);
 
     String actual = writer.toString().replaceAll("\r?\n|\r", "");
-    String expected = Files.toString(new File("src/test/resources/RoslynProfileExporterTest/empty_string_value.xml"), StandardCharsets.UTF_8).replaceAll("\r?\n|\r", "");
+    String expected = Files.readString(Path.of("src/test/resources/RoslynProfileExporterTest/empty_string_value.xml"), StandardCharsets.UTF_8).replaceAll("\r?\n|\r", "");
     assertThat(actual).isEqualTo(expected);
   }
 
