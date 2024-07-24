@@ -40,7 +40,7 @@ public abstract class AbstractPropertyDefinitions {
   private final String languageName;
   private final String fileSuffixDefaultValue;
 
-  public AbstractPropertyDefinitions(String languageKey, String languageName, String fileSuffixDefaultValue) {
+  protected AbstractPropertyDefinitions(String languageKey, String languageName, String fileSuffixDefaultValue) {
     this.languageKey = languageKey;
     this.languageName = languageName;
     this.fileSuffixDefaultValue = fileSuffixDefaultValue;
