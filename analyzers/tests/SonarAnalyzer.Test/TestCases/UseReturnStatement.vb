@@ -160,7 +160,7 @@ Public Class DoesNotApplyOn
 
 End Class
 
-Public Class Repo_9553 ' https://github.com/SonarSource/sonar-dotnet/issues/9553   
+Public Class Repro_9553 ' https://github.com/SonarSource/sonar-dotnet/issues/9553   
     Public Function TestFunc() As String
         Return Invoke(AddressOf TestFunc) 'Noncompliant FP
     End Function
