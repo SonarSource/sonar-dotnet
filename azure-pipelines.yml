@@ -298,7 +298,7 @@ stages:
 
     - template: set-azp-variables-steps.yml@pipelines-yaml-templates
 
-    - task: SonarCloudPrepare@1
+    - task: SonarCloudPrepare@2
       displayName: 'Code Analysis - Begin (PR)'
       condition: eq(variables['Build.Reason'], 'PullRequest')
       inputs:
@@ -319,7 +319,7 @@ stages:
           sonar.analysis.prNumber=$(System.PullRequest.PullRequestNumber)
           sonar.analysis.repository=$(Build.Repository.ID)
 
-    - task: SonarCloudPrepare@1
+    - task: SonarCloudPrepare@2
       displayName: 'Code Analysis - Begin (master or branch)'
       condition: ne(variables['Build.Reason'], 'PullRequest')
       inputs:
@@ -436,10 +436,10 @@ stages:
         }
       displayName: Fix coverage paths
 
-    - task: SonarCloudAnalyze@1
+    - task: SonarCloudAnalyze@2
       displayName: 'Code Analysis - End'
 
-    - task: SonarCloudPublish@1
+    - task: SonarCloudPublish@2
       displayName: 'Code Analysis - Publish QG'
       inputs:
         pollingTimeoutSec: '300'
@@ -551,7 +551,7 @@ stages:
         artifact: Binaries
         targetPath: 'analyzers/packaging/binaries/'
 
-    - task: SonarCloudPrepare@1
+    - task: SonarCloudPrepare@2
       displayName: 'Prepare code analysis for Java plugin'
       inputs:
         SonarCloud: 'SonarCloud'
@@ -572,7 +572,7 @@ stages:
         sonarQubeRunAnalysis: true
         sqMavenPluginVersionChoice: 'latest'
 
-    - task: SonarCloudPublish@1
+    - task: SonarCloudPublish@2
       displayName: 'Code Analysis - Publish QG'
       inputs:
         pollingTimeoutSec: '300'
