@@ -57,7 +57,7 @@ Public Class ImplicitReturnStatementsAreNoncompliant
     Private Sub WithExplicitArgumentName(Something As Integer)
     End Sub
 
-    ' https//github.com/SonarSource/sonar-dotnet/issues/4159
+    ' https://github.com/SonarSource/sonar-dotnet/issues/4159
     Public Function Repro_4159() As String
         Repro_4159 = NameOf(Exception)  ' Noncompliant
         Return NameOf(Repro_4159)       ' Compliant
@@ -157,6 +157,17 @@ Public Class DoesNotApplyOn
         Dim S As Source
         AddHandler S.SomeEvent, AddressOf SomeEvent
     End Sub
+
+End Class
+
+Public Class Repo_9553 ' https://github.com/SonarSource/sonar-dotnet/issues/9553   
+    Public Function TestFunc() As String
+        Return Invoke(AddressOf TestFunc) 'Noncompliant FP
+    End Function
+
+    Private Function Invoke(func As Func(Of string)) As String
+        Return func()
+    End Function
 
 End Class
 
