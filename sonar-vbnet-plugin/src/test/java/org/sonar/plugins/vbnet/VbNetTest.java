@@ -21,14 +21,10 @@ package org.sonar.plugins.vbnet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.sonar.api.SonarEdition;
-import org.sonar.api.SonarQubeSide;
 import org.sonar.api.config.PropertyDefinitions;
 import org.sonar.api.config.internal.MapSettings;
-import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.resources.AbstractLanguage;
 import org.sonar.api.utils.System2;
-import org.sonar.api.utils.Version;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -41,7 +37,7 @@ class VbNetTest {
   @BeforeEach
   public void init() {
     PropertyDefinitions defs = new PropertyDefinitions(mock(System2.class),
-      new VbNetPropertyDefinitions(SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY)).create());
+      new VbNetPropertyDefinitions().create());
     settings = new MapSettings(defs);
     vbnet = new VbNet(settings.asConfig());
   }

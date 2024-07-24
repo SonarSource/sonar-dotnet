@@ -19,12 +19,11 @@
  */
 package org.sonar.plugins.vbnet;
 
-import org.sonar.api.SonarRuntime;
 import org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions;
 
 public class VbNetPropertyDefinitions extends AbstractPropertyDefinitions {
 
-  public VbNetPropertyDefinitions(SonarRuntime runtime) {
-    super(VbNetPlugin.LANGUAGE_KEY, VbNetPlugin.LANGUAGE_NAME, VbNetPlugin.FILE_SUFFIXES_DEFVALUE, runtime);
+  public VbNetPropertyDefinitions() {
+    super(VbNetPlugin.LANGUAGE_KEY, VbNetPlugin.LANGUAGE_NAME, VbNetPlugin.FILE_SUFFIXES_DEFVALUE);
   }
 }
