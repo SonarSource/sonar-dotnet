@@ -170,8 +170,9 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
 
     private void BuildBranchesRethrow(BasicBlock block)
     {
-        var reachableHandlerRegions = block.EnclosingRegion(ControlFlowRegionKind.TryAndCatch).NestedRegion(ControlFlowRegionKind.Try).ReachableHandlers();
-        var reachableCatchAndFinallyBlocks = reachableHandlerRegions.Where(x => x.FirstBlockOrdinal > block.Ordinal).SelectMany(x => x.Blocks(Cfg));
+        var currentTryCatchRegion = block.EnclosingRegion(ControlFlowRegionKind.TryAndCatch);
+        var reachableHandlerRegions = currentTryCatchRegion.NestedRegion(ControlFlowRegionKind.Try).ReachableHandlers();
+        var reachableCatchAndFinallyBlocks = reachableHandlerRegions.Where(x => x.FirstBlockOrdinal > currentTryCatchRegion.LastBlockOrdinal).SelectMany(x => x.Blocks(Cfg));
         foreach (var catchBlock in reachableCatchAndFinallyBlocks.Where(x => x.EnclosingRegion.Kind is ControlFlowRegionKind.Catch))
         {
             AddBranch(block, catchBlock);
