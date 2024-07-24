@@ -1456,7 +1456,7 @@ public partial class RoslynLiveVariableAnalysisTest
     }
 
     [TestMethod]
-    public void TryCatchFinally_ConsecutiveCatchRethrowFinally()
+    public void TryCatchFinally_ConsecutiveCatchRethrow()
     {
         const string code = """
             var value = 0;
