@@ -23,17 +23,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.api.io.TempDir;
 import org.slf4j.event.Level;
-import org.sonar.api.SonarEdition;
-import org.sonar.api.SonarQubeSide;
-import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.cache.WriteCache;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
-import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
-import org.sonar.api.utils.Version;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
 
 import java.io.File;
@@ -47,8 +42,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class CSharpFileCacheSensorTest {
-  private static final SonarRuntime RUNTIME_WITH_ANALYSIS_CACHE = SonarRuntimeImpl.forSonarQube(Version.create(9, 4), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
-
   @TempDir
   public Path basePath;
 
@@ -68,7 +61,7 @@ class CSharpFileCacheSensorTest {
     context.setNextCache(mock(WriteCache.class));
     AddFile(context, basePath.toString(), "CSharp/Foo.cs", CSharpPlugin.LANGUAGE_KEY);
     AddFile(context, basePath.toString(), "VB/Bar.vb", "other-language-key");
-    var sut = new CSharpFileCacheSensor(new CSharp(settings.asConfig()), hashProvider, RUNTIME_WITH_ANALYSIS_CACHE);
+    var sut = new CSharpFileCacheSensor(new CSharp(settings.asConfig()), hashProvider);
 
     sut.execute(context);
 

@@ -19,12 +19,11 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.sonar.api.SonarRuntime;
 import org.sonarsource.dotnet.shared.plugins.AbstractFileCacheSensor;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
 
 public class CSharpFileCacheSensor extends AbstractFileCacheSensor {
-  public CSharpFileCacheSensor(CSharp cSharp, HashProvider hashProvider, SonarRuntime runtime) {
-    super(cSharp, hashProvider, runtime);
+  public CSharpFileCacheSensor(CSharp cSharp, HashProvider hashProvider) {
+    super(cSharp, hashProvider);
   }
 }
