@@ -43,8 +43,7 @@ public class UnitTestResultsProviderTest {
       UnitTestResultsProvider.DotNetUnitTestResultsAggregator.class,
       UnitTestResultsImportSensor.class);
     assertThat(propertyKeys(extensions)).containsOnly(
-      "sonar.vbnet.vstest.reportsPaths",
-      "sonar.vbnet.nunit.reportsPaths");
+      "sonar.vbnet.vstest.reportsPaths", "sonar.vbnet.nunit.reportsPaths");
   }
 
   @Test
@@ -58,8 +57,7 @@ public class UnitTestResultsProviderTest {
       UnitTestResultsProvider.DotNetUnitTestResultsAggregator.class,
       UnitTestResultsImportSensor.class);
     assertThat(propertyKeys(extensions)).containsOnly(
-      "sonar.cs.vstest.reportsPaths",
-      "sonar.cs.nunit.reportsPaths");
+      "sonar.cs.vstest.reportsPaths", "sonar.cs.nunit.reportsPaths");
   }
 
 }
