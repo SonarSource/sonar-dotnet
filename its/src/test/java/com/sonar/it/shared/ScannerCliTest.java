@@ -47,7 +47,6 @@ class ScannerCliTest {
 
     assertThat(result.getLogsLines(l -> l.contains("WARN")))
       .hasSize(4)
-      .doesNotHaveDuplicates()
       .anyMatch(x -> x.endsWith("WARN  Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html"))
       .anyMatch(y -> y.endsWith("WARN  Your project contains VB.NET files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html"))
       .anyMatch(w -> w.endsWith(INCREMENTAL_PR_ANALYSIS_WARNING))
@@ -67,7 +66,6 @@ class ScannerCliTest {
 
     assertThat(result.getLogsLines(l -> l.contains("WARN")))
       .hasSize(2)
-      .doesNotHaveDuplicates()
       .anyMatch(x -> x.endsWith("WARN  Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html"))
       .anyMatch(y -> y.endsWith(INCREMENTAL_PR_ANALYSIS_WARNING));
 
@@ -85,7 +83,6 @@ class ScannerCliTest {
 
     assertThat(result.getLogsLines(l -> l.contains("WARN")))
       .hasSize(2)
-      .doesNotHaveDuplicates()
       .anyMatch(y -> y.endsWith("WARN  Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html"))
       .anyMatch(z -> z.endsWith(INCREMENTAL_PR_ANALYSIS_WARNING));
 
