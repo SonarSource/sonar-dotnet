@@ -40,7 +40,6 @@ public class CodeCoverageProvider {
 
   private final DotNetPluginMetadata pluginMetadata;
   private final CoverageConfiguration coverageConf;
-  private final CoverageConfiguration itCoverageConf;
 
   public CodeCoverageProvider(DotNetPluginMetadata pluginMetadata) {
     this.pluginMetadata = pluginMetadata;
@@ -52,13 +51,6 @@ public class CodeCoverageProvider {
       SONAR_PROPERTY_PREFIX + languageKey + ".opencover.reportsPaths",
       SONAR_PROPERTY_PREFIX + languageKey + ".dotcover.reportsPaths",
       SONAR_PROPERTY_PREFIX + languageKey + ".vscoveragexml.reportsPaths");
-
-    itCoverageConf = new CoverageConfiguration(
-      languageKey,
-      SONAR_PROPERTY_PREFIX + languageKey + ".ncover3.it.reportsPaths",
-      SONAR_PROPERTY_PREFIX + languageKey + ".opencover.it.reportsPaths",
-      SONAR_PROPERTY_PREFIX + languageKey + ".dotcover.it.reportsPaths",
-      SONAR_PROPERTY_PREFIX + languageKey + ".vscoveragexml.it.reportsPaths");
   }
 
   public List<Object> extensions() {
@@ -66,19 +58,11 @@ public class CodeCoverageProvider {
 
     return Arrays.asList(
       this,
-      UnitTestCoverageAggregator.class, IntegrationTestCoverageAggregator.class,
-      UnitTestCoverageReportImportSensor.class, IntegrationTestCoverageReportImportSensor.class,
+      UnitTestCoverageAggregator.class,
+      UnitTestCoverageReportImportSensor.class,
 
       PropertyDefinition.builder(coverageConf.ncover3PropertyKey())
         .name("NCover3 Unit Tests Reports Paths")
-        .description("Example: \"report.nccov\", \"report1.nccov,report2.nccov\" or \"C:/report.nccov\"")
-        .category(category)
-        .subCategory(SUBCATEGORY)
-        .onlyOnQualifiers(Qualifiers.PROJECT)
-        .multiValues(true)
-        .build(),
-      PropertyDefinition.builder(itCoverageConf.ncover3PropertyKey())
-        .name("NCover3 Integration Tests Reports Paths")
         .description("Example: \"report.nccov\", \"report1.nccov,report2.nccov\" or \"C:/report.nccov\"")
         .category(category)
         .subCategory(SUBCATEGORY)
@@ -93,14 +77,6 @@ public class CodeCoverageProvider {
         .onlyOnQualifiers(Qualifiers.PROJECT)
         .multiValues(true)
         .build(),
-      PropertyDefinition.builder(itCoverageConf.openCoverPropertyKey())
-        .name("OpenCover Integration Tests Reports Paths")
-        .description("Example: \"report.xml\", \"report1.xml,report2.xml\" or \"C:/report.xml\"")
-        .category(category)
-        .subCategory(SUBCATEGORY)
-        .onlyOnQualifiers(Qualifiers.PROJECT)
-        .multiValues(true)
-        .build(),
       PropertyDefinition.builder(coverageConf.dotCoverPropertyKey())
         .name("dotCover Unit Tests (HTML) Reports Paths")
         .description("Example: \"report.html\", \"report1.html,report2.html\" or \"C:/report.html\"")
@@ -109,24 +85,8 @@ public class CodeCoverageProvider {
         .onlyOnQualifiers(Qualifiers.PROJECT)
         .multiValues(true)
         .build(),
-      PropertyDefinition.builder(itCoverageConf.dotCoverPropertyKey())
-        .name("dotCover Integration Tests (HTML) Reports Paths")
-        .description("Example: \"report.html\", \"report1.html,report2.html\" or \"C:/report.html\"")
-        .category(category)
-        .subCategory(SUBCATEGORY)
-        .onlyOnQualifiers(Qualifiers.PROJECT)
-        .multiValues(true)
-        .build(),
       PropertyDefinition.builder(coverageConf.visualStudioCoverageXmlPropertyKey())
         .name("Visual Studio Unit Tests (XML) Reports Paths")
-        .description("Example: \"report.coveragexml\", \"report1.coveragexml,report2.coveragexml\" or \"C:/report.coveragexml\"")
-        .category(category)
-        .subCategory(SUBCATEGORY)
-        .onlyOnQualifiers(Qualifiers.PROJECT)
-        .multiValues(true)
-        .build(),
-      PropertyDefinition.builder(itCoverageConf.visualStudioCoverageXmlPropertyKey())
-        .name("Visual Studio Integration Tests (XML) Reports Paths")
         .description("Example: \"report.coveragexml\", \"report1.coveragexml,report2.coveragexml\" or \"C:/report.coveragexml\"")
         .category(category)
         .subCategory(SUBCATEGORY)
@@ -150,29 +110,8 @@ public class CodeCoverageProvider {
   public class UnitTestCoverageReportImportSensor extends CoverageReportImportSensor {
 
     public UnitTestCoverageReportImportSensor(UnitTestCoverageAggregator coverageAggregator) {
-      super(coverageConf, coverageAggregator, pluginMetadata.languageKey(), pluginMetadata.languageName(), false);
+      super(coverageConf, coverageAggregator, pluginMetadata.languageKey(), pluginMetadata.languageName());
     }
 
   }
-
-  public class IntegrationTestCoverageAggregator extends CoverageAggregator {
-
-    public IntegrationTestCoverageAggregator(Configuration configuration, FileSystem fileSystem,
-      AnalysisWarnings analysisWarnings) {
-      super(itCoverageConf,
-            configuration,
-            new ScannerFileService(coverageConf.languageKey(), fileSystem),
-            analysisWarnings);
-    }
-
-  }
-
-  public class IntegrationTestCoverageReportImportSensor extends CoverageReportImportSensor {
-
-    public IntegrationTestCoverageReportImportSensor(IntegrationTestCoverageAggregator coverageAggregator) {
-      super(itCoverageConf, coverageAggregator, pluginMetadata.languageKey(), pluginMetadata.languageName(), true);
-    }
-
-  }
-
 }

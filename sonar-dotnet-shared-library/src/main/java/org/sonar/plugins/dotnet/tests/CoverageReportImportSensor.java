@@ -47,26 +47,20 @@ public class CoverageReportImportSensor implements ProjectSensor {
   private final WildcardPatternFileProvider wildcardPatternFileProvider = new WildcardPatternFileProvider(BASE_DIR);
   private final CoverageConfiguration coverageConf;
   private final CoverageAggregator coverageAggregator;
-  private final boolean isIntegrationTest;
   private final String languageKey;
   private final String languageName;
 
   public CoverageReportImportSensor(CoverageConfiguration coverageConf, CoverageAggregator coverageAggregator,
-                                    String languageKey, String languageName, boolean isIntegrationTest) {
+                                    String languageKey, String languageName) {
     this.coverageConf = coverageConf;
     this.coverageAggregator = coverageAggregator;
-    this.isIntegrationTest = isIntegrationTest;
     this.languageKey = languageKey;
     this.languageName = languageName;
   }
 
   @Override
   public void describe(SensorDescriptor descriptor) {
-    if (this.isIntegrationTest) {
-      descriptor.name("[Deprecated] " + this.languageName + " Integration Tests Coverage Report Import");
-    } else {
-      descriptor.name(this.languageName + " Tests Coverage Report Import");
-    }
+    descriptor.name(this.languageName + " Tests Coverage Report Import");
     descriptor.onlyWhenConfiguration(c -> coverageAggregator.hasCoverageProperty(c::hasKey));
     descriptor.onlyOnLanguage(this.languageKey);
   }
@@ -77,12 +71,6 @@ public class CoverageReportImportSensor implements ProjectSensor {
       LOG.debug("No coverage property. Skip Sensor");
       return;
     }
-
-    if (this.isIntegrationTest) {
-      LOG.warn("Starting with SonarQube 6.2 separation between Unit Tests and Integration Tests Coverage" +
-        " reports is deprecated. Please move all reports specified from *.it.reportPaths into *.reportPaths.");
-    }
-
     analyze(context, new Coverage());
   }
 

@@ -40,14 +40,12 @@ public class CodeCoverageProviderTest {
     assertThat(nonProperties(provider.extensions())).containsOnly(
       provider,
       CodeCoverageProvider.UnitTestCoverageAggregator.class,
-      CodeCoverageProvider.IntegrationTestCoverageAggregator.class,
-      CodeCoverageProvider.UnitTestCoverageReportImportSensor.class,
-      CodeCoverageProvider.IntegrationTestCoverageReportImportSensor.class);
+      CodeCoverageProvider.UnitTestCoverageReportImportSensor.class);
     assertThat(propertyKeys(provider.extensions())).containsOnly(
-      "sonar.vbnet.ncover3.reportsPaths", "sonar.vbnet.ncover3.it.reportsPaths",
-      "sonar.vbnet.opencover.reportsPaths", "sonar.vbnet.opencover.it.reportsPaths",
-      "sonar.vbnet.dotcover.reportsPaths", "sonar.vbnet.dotcover.it.reportsPaths",
-      "sonar.vbnet.vscoveragexml.reportsPaths", "sonar.vbnet.vscoveragexml.it.reportsPaths");
+      "sonar.vbnet.ncover3.reportsPaths",
+      "sonar.vbnet.opencover.reportsPaths",
+      "sonar.vbnet.dotcover.reportsPaths",
+      "sonar.vbnet.vscoveragexml.reportsPaths");
   }
 
   @Test
@@ -58,14 +56,12 @@ public class CodeCoverageProviderTest {
     assertThat(nonProperties(provider.extensions())).containsOnly(
       provider,
       CodeCoverageProvider.UnitTestCoverageAggregator.class,
-      CodeCoverageProvider.IntegrationTestCoverageAggregator.class,
-      CodeCoverageProvider.UnitTestCoverageReportImportSensor.class,
-      CodeCoverageProvider.IntegrationTestCoverageReportImportSensor.class);
+      CodeCoverageProvider.UnitTestCoverageReportImportSensor.class);
     assertThat(propertyKeys(provider.extensions())).containsOnly(
-      "sonar.cs.ncover3.reportsPaths", "sonar.cs.ncover3.it.reportsPaths",
-      "sonar.cs.opencover.reportsPaths", "sonar.cs.opencover.it.reportsPaths",
-      "sonar.cs.dotcover.reportsPaths", "sonar.cs.dotcover.it.reportsPaths",
-      "sonar.cs.vscoveragexml.reportsPaths", "sonar.cs.vscoveragexml.it.reportsPaths");
+      "sonar.cs.ncover3.reportsPaths",
+      "sonar.cs.opencover.reportsPaths",
+      "sonar.cs.dotcover.reportsPaths",
+      "sonar.cs.vscoveragexml.reportsPaths");
   }
 
   @Test
@@ -86,29 +82,10 @@ public class CodeCoverageProviderTest {
     verify(mockDescriptor, times(1)).onlyOnLanguage("KEY");
   }
 
-  @Test
-  public void verify_IntegrationTestCoverageReportImportSensor_constructor_uses_arguments() {
-    // setup
-    CodeCoverageProvider provider = createTestProvider();
-
-    // act
-    CodeCoverageProvider.IntegrationTestCoverageReportImportSensor sut = provider.new IntegrationTestCoverageReportImportSensor(
-      mock(CodeCoverageProvider.IntegrationTestCoverageAggregator.class)
-    );
-
-    // verify that what got passed to the constructor is used later on
-    SensorDescriptor mockDescriptor = mock(SensorDescriptor.class);
-    sut.describe(mockDescriptor);
-
-    verify(mockDescriptor, times(1)).name("[Deprecated] NAME Integration Tests Coverage Report Import");
-    verify(mockDescriptor, times(1)).onlyOnLanguage("KEY");
-  }
-
   private static CodeCoverageProvider createTestProvider() {
     DotNetPluginMetadata pluginMetadata = mock(DotNetPluginMetadata.class);
     when(pluginMetadata.languageKey()).thenReturn("KEY");
     when(pluginMetadata.languageName()).thenReturn("NAME");
     return new CodeCoverageProvider(pluginMetadata);
   }
-
 }

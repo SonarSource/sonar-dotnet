@@ -71,18 +71,10 @@ public class CoverageReportImportSensorTest {
 
   @Test
   public void describe_unit_test() {
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#")
       .describe(descriptor);
 
     assertThat(descriptor.name()).isEqualTo("C# Tests Coverage Report Import");
-  }
-
-  @Test
-  public void describe_integration_test() {
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", true)
-      .describe(descriptor);
-
-    assertThat(descriptor.name()).isEqualTo("[Deprecated] C# Integration Tests Coverage Report Import");
   }
 
   @Test
@@ -102,7 +94,7 @@ public class CoverageReportImportSensorTest {
       return pr.test("expectedKey");
     });
 
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#")
       .describe(descriptor);
 
     assertThat(descriptor.configurationPredicate()).accepts(configWithKey);
@@ -111,7 +103,7 @@ public class CoverageReportImportSensorTest {
 
   @Test
   public void execute_no_coverage_property() throws Exception {
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#")
       .execute(context);
 
     assertThat(logTester.logs(Level.INFO)).isEmpty();
@@ -119,31 +111,8 @@ public class CoverageReportImportSensorTest {
   }
 
   @Test
-  public void execute_warn_about_deprecated_integration_tests() throws IOException {
-    when(coverageAggregator.hasCoverageProperty()).thenReturn(true);
-
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", true)
-      .execute(context);
-
-    assertThat(logTester.logs(Level.INFO)).isEmpty();
-    assertThat(logTester.logs(Level.WARN)).containsOnly("Starting with SonarQube 6.2 separation between Unit Tests and Integration Tests "
-      + "Coverage reports is deprecated. Please move all reports specified from *.it.reportPaths into *.reportPaths.");
-  }
-
-  @Test
   public void analyze() throws Exception {
-    SensorContextTester context = computeCoverageMeasures(false);
-    assertThat(context.lineHits("foo:Foo.cs", 2)).isEqualTo(1);
-    assertThat(context.lineHits("foo:Foo.cs", 4)).isZero();
-    assertThat(context.coveredConditions("foo:Foo.cs", 1)).isNull();
-    assertThat(context.coveredConditions("foo:Foo.cs", 4)).isNull();
-    assertThat(context.coveredConditions("foo:Foo.cs", 5)).isEqualTo(1);
-    assertThat(context.coveredConditions("foo:Foo.cs", 6)).isEqualTo(2);
-  }
-
-  @Test
-  public void analyzeIntegrationTests() throws Exception {
-    SensorContextTester context = computeCoverageMeasures(true);
+    SensorContextTester context = computeCoverageMeasures();
     assertThat(context.lineHits("foo:Foo.cs", 2)).isEqualTo(1);
     assertThat(context.lineHits("foo:Foo.cs", 4)).isZero();
     assertThat(context.coveredConditions("foo:Foo.cs", 1)).isNull();
@@ -161,7 +130,7 @@ public class CoverageReportImportSensorTest {
     context.fileSystem().add(new TestInputFileBuilder("foo", "Foo.cs").setLanguage("cs")
       .setType(Type.TEST).build());
 
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#")
       .analyze(context, coverage);
 
     assertThat(logTester.logs(Level.INFO)).containsOnly("Coverage Report Statistics: " +
@@ -185,7 +154,7 @@ public class CoverageReportImportSensorTest {
     context.fileSystem().add(new TestInputFileBuilder("foo", "Foo.cs").setLanguage("cs")
       .setType(Type.MAIN).build());
 
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#")
       .analyze(context, coverage);
 
     assertThat(logTester.logs(Level.INFO)).containsOnly("Coverage Report Statistics: " +
@@ -208,7 +177,7 @@ public class CoverageReportImportSensorTest {
     String fooPath = new File(baseDir, "Foo.cs").getCanonicalPath();
     when(coverage.files()).thenReturn(new HashSet<>(Collections.singletonList(fooPath)));
 
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#")
       .analyze(context, coverage);
 
     assertThat(logTester.logs(Level.INFO)).containsOnly("Coverage Report Statistics: " +
@@ -231,7 +200,7 @@ public class CoverageReportImportSensorTest {
     context.fileSystem().add(new TestInputFileBuilder("foo", "Foo.cs").setLanguage("cs")
       .setType(Type.MAIN).build());
 
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#")
       .analyze(context, coverage);
 
     assertThat(logTester.logs(Level.DEBUG)).contains(
@@ -241,7 +210,7 @@ public class CoverageReportImportSensorTest {
       "Invalid data found in the coverage report, please check the debug logs for more details and raise an issue on the coverage tool being used.");
   }
 
-  private SensorContextTester computeCoverageMeasures(boolean isIntegrationTest) {
+  private SensorContextTester computeCoverageMeasures() {
     Coverage coverage = mock(Coverage.class);
     String fooPath = new File(baseDir, "Foo.cs").getAbsolutePath();
     String bazPath = new File(baseDir, "Baz.java").getAbsolutePath();
@@ -263,7 +232,7 @@ public class CoverageReportImportSensorTest {
     context.fileSystem().add(inputFile);
     context.fileSystem().add(new TestInputFileBuilder("foo", "Baz.java").setLanguage("java").build());
 
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", isIntegrationTest)
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#")
       .analyze(context, coverage);
 
     verify(coverageAggregator).aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.eq(coverage));
