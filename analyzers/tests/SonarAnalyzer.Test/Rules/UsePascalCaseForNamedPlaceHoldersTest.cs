@@ -18,6 +18,7 @@
 * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Rules.MessageTemplates;
 
@@ -38,6 +39,14 @@ public class UsePascalCaseForNamedPlaceHoldersTest
     [TestMethod]
     public void UsePascalCaseForNamedPlaceHolders_CS() =>
         Builder.AddPaths("UsePascalCaseForNamedPlaceHolders.cs").Verify();
+
+#if NET
+
+    [TestMethod]
+    public void UsePascalCaseForNamedPlaceHolders_Latest_CS() =>
+        Builder.AddPaths("UsePascalCaseForNamedPlaceHolders.Latest.cs").WithLanguageVersion(LanguageVersion.Latest).VerifyNoIssues();
+
+#endif
 
     [DataTestMethod]
     [DataRow("LogCritical")]

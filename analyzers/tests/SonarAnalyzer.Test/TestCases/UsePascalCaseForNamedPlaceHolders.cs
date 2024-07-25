@@ -102,4 +102,15 @@ public class Program
     {
         public static void LogCritical(NotILogger logger, string message, params object[] args) { }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/9545
+    public class Repro_9545
+    {
+        public void Method(ILogger logger, int number)
+        {
+            logger.LogDebug($"{nameof(Repro_9545)} filter: {{number}}", number);    // Compliant - FN
+            logger.LogDebug("Repro_9545) filter: {number}", number);                // Noncompliant
+                                                                                    // Secondary @-1
+        }
+    }
 }
