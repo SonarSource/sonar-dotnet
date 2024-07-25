@@ -88,7 +88,7 @@ public class Tests implements BeforeAllCallback, AfterAllCallback {
 
   public static BuildResult analyzeProjectPath(String projectKey, Path projectFullPath, @Nullable String profileKey, String... keyValues) {
     ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectKey, projectFullPath)
-      .setProfile(profileKey)
+      //.setProfile(profileKey)
       .setProperties(keyValues);
 
     ORCHESTRATOR.executeBuild(beginStep);

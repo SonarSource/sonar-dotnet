@@ -64,7 +64,7 @@ public class Tests implements BeforeAllCallback, AfterAllCallback {
   static BuildResult analyzeProject(Path temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
     Path projectFullPath = TestUtils.projectDir(temp, projectDir);
     ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectDir, projectFullPath)
-      .setProfile(profileKey)
+      //.setProfile(profileKey)
       .setProperties(keyValues);
 
     ORCHESTRATOR.executeBuild(beginStep);
