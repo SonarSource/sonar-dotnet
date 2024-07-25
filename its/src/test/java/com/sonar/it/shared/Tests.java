@@ -52,14 +52,9 @@ public class Tests implements BeforeAllCallback, AfterAllCallback {
     ORCHESTRATOR_STATE.stopOnce();
   }
 
-  public static BuildResult analyzeProject(Path temp, String projectDir) throws IOException {
-    return analyzeProject(temp, projectDir, null);
-  }
-
-  public static BuildResult analyzeProject(Path temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
+  public static BuildResult analyzeProject(Path temp, String projectDir, String... keyValues) throws IOException {
     Path projectFullPath = TestUtils.projectDir(temp, projectDir);
     ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectDir, projectFullPath)
-      //.setProfile(profileKey)
       .setProperties(keyValues);
     ORCHESTRATOR.executeBuild(beginStep);
     TestUtils.runBuild(projectFullPath);

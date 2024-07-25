@@ -40,7 +40,7 @@ class SharedFilesTest {
 
   @Test
   void should_analyze_shared_files() throws Exception {
-    BuildResult buildResult = Tests.analyzeProject(temp, "SharedFilesTest", null, "sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
+    BuildResult buildResult = Tests.analyzeProject(temp, "SharedFilesTest", "sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
     assertThat(getComponent("SharedFilesTest:Class1.cs")).isNotNull();
     assertThat(getComponent("SharedFilesTest:ConsoleApp1/Program1.cs")).isNotNull();

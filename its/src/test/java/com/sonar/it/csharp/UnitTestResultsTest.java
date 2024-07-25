@@ -79,6 +79,6 @@ class UnitTestResultsTest {
   }
 
   private BuildResult analyzeTestProject(String... keyValues) throws IOException {
-    return Tests.analyzeProject(temp, PROJECT, "no_rule", keyValues);
+    return Tests.analyzeProject(temp, PROJECT, keyValues);
   }
 }

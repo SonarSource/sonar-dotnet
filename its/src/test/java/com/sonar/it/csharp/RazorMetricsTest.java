@@ -41,7 +41,7 @@ public class RazorMetricsTest {
 
   @BeforeAll
   public static void beforeAll() throws Exception {
-    Tests.analyzeProject(temp, PROJECT, "no_rule");
+    Tests.analyzeProject(temp, PROJECT);
   }
 
   @Test

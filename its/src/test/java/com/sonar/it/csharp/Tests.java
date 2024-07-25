@@ -71,26 +71,20 @@ public class Tests implements BeforeAllCallback, AfterAllCallback {
   public static BuildResult analyzeProject(Path temp, String projectDir) throws IOException {
     return analyzeProject(projectDir, temp, projectDir);
   }
-
-  public static BuildResult analyzeProject(String projectKey, Path temp, String projectDir) throws IOException {
-    return analyzeProject(projectKey, temp, projectDir, null);
+  
+  public static BuildResult analyzeProject(Path temp, String projectDir, String... keyValues) throws IOException {
+    return analyzeProject(projectDir, temp, projectDir, keyValues);
   }
 
-  public static BuildResult analyzeProject(Path temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
-    return analyzeProject(projectDir, temp, projectDir, profileKey, keyValues);
-  }
-
-  public static BuildResult analyzeProject(String projectKey, Path temp, String projectDir, @Nullable String profileKey, String... keyValues) throws IOException {
+  public static BuildResult analyzeProject(String projectKey, Path temp, String projectDir, String... keyValues) throws IOException {
     Path projectFullPath = TestUtils.projectDir(temp, projectDir);
 
-    return analyzeProjectPath(projectKey, projectFullPath, profileKey, keyValues);
+    return analyzeProjectPath(projectKey, projectFullPath, keyValues);
   }
 
-  public static BuildResult analyzeProjectPath(String projectKey, Path projectFullPath, @Nullable String profileKey, String... keyValues) {
+  public static BuildResult analyzeProjectPath(String projectKey, Path projectFullPath, String... keyValues) {
     ScannerForMSBuild beginStep = TestUtils.createBeginStep(projectKey, projectFullPath)
-      //.setProfile(profileKey)
       .setProperties(keyValues);
-
     ORCHESTRATOR.executeBuild(beginStep);
     TestUtils.runBuild(projectFullPath);
     return ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectFullPath));

@@ -117,7 +117,7 @@ class CoverageTest {
 
   @Test
   void open_cover_with_deterministic_source_paths() throws Exception {
-    BuildResult buildResult = Tests.analyzeProject(temp, "CoverageWithDeterministicSourcePaths", "no_rule", "sonar.cs.opencover.reportsPaths", "opencover.xml");
+    BuildResult buildResult = Tests.analyzeProject(temp, "CoverageWithDeterministicSourcePaths", "sonar.cs.opencover.reportsPaths", "opencover.xml");
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
@@ -169,7 +169,7 @@ class CoverageTest {
 
   @Test
   void visual_studio_with_deterministic_source_paths() throws Exception {
-    BuildResult buildResult = Tests.analyzeProject(temp, "CoverageWithDeterministicSourcePaths", "no_rule", "sonar.cs.vscoveragexml.reportsPaths", "VisualStudio.coveragexml");
+    BuildResult buildResult = Tests.analyzeProject(temp, "CoverageWithDeterministicSourcePaths", "sonar.cs.vscoveragexml.reportsPaths", "VisualStudio.coveragexml");
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
@@ -184,7 +184,7 @@ class CoverageTest {
 
   @Test
   void no_coverage_on_tests() throws Exception {
-    BuildResult buildResult = Tests.analyzeProject(temp, "NoCoverageOnTests", "no_rule", "sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
+    BuildResult buildResult = Tests.analyzeProject(temp, "NoCoverageOnTests", "sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
@@ -209,15 +209,15 @@ class CoverageTest {
   }
 
   private BuildResult analyzeCoverageTestProject(String... keyValues) throws IOException {
-    return Tests.analyzeProject(temp, "CoverageTest", "no_rule", keyValues);
+    return Tests.analyzeProject(temp, "CoverageTest", keyValues);
   }
 
   private BuildResult analyzeMultipleProjectsTestProject(String coverageProperty, String coverageFileName) throws IOException {
-    return Tests.analyzeProject(temp, "CoverageTest.MultipleProjects", "no_rule", coverageProperty, coverageFileName);
+    return Tests.analyzeProject(temp, "CoverageTest.MultipleProjects", coverageProperty, coverageFileName);
   }
 
   private BuildResult analyzeMultipleFrameworksTestProject(String coverageProperty, String coverageFileNames) throws IOException {
-    return Tests.analyzeProject(temp, "CoverageTest.MultipleFrameworks", "no_rule", coverageProperty, coverageFileNames);
+    return Tests.analyzeProject(temp, "CoverageTest.MultipleFrameworks", coverageProperty, coverageFileNames);
   }
 
   private void assertCoverageMetrics(String componentKey, int linesToCover, int uncoveredLines, int conditionsToCover, int uncoveredConditions) {

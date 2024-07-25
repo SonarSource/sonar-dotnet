@@ -58,7 +58,6 @@ public class MetricsIncludeHeaderCommentTest {
   public static void beforeAll() throws Exception {
     Path projectDir = TestUtils.projectDir(temp, "MetricsTest");
     ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT_KEY, projectDir)
-      //.setProfile("no_rule")
       // Without that, the MetricsTest project is considered as a Test project :)
       .setProperty("sonar.msbuild.testProjectPattern", "noTests");
 

@@ -86,6 +86,6 @@ public class CoverageTest {
   }
 
   private BuildResult analyzeCoverageMixProject(String... keyValues) throws IOException {
-    return Tests.analyzeProject(temp, "CSharpVBNetCoverage", null, keyValues);
+    return Tests.analyzeProject(temp, "CSharpVBNetCoverage", keyValues);
   }
 }

@@ -52,7 +52,7 @@ class IncrementalAnalysisTest {
   @Test
   void incrementalPrAnalysis_NoCache_FullAnalysisDone() throws IOException {
     var projectKey = PROJECT_DIR + "_noCache_fullAnalysis";
-    Tests.analyzeProject(projectKey, temp, PROJECT_DIR, null, "sonar.branch.name", "base-branch", "sonar.analysisCache.enabled", "false");
+    Tests.analyzeProject(projectKey, temp, PROJECT_DIR, "sonar.branch.name", "base-branch", "sonar.analysisCache.enabled", "false");
     Path projectDir = TestUtils.projectDir(temp, PROJECT_DIR);
     File withChangesPath = projectDir.resolve(PROJECT_DIR + "\\WithChanges.cs").toFile();
     addIssue(withChangesPath);
@@ -73,7 +73,7 @@ class IncrementalAnalysisTest {
   @Test
   void incrementalPrAnalysis_cacheAvailableNoChanges_nothingReported() throws IOException {
     var projectKey = PROJECT_DIR + "cacheAvailable_noChanges";
-    Tests.analyzeProject(projectKey, temp, PROJECT_DIR, null, "sonar.branch.name", "base-branch");
+    Tests.analyzeProject(projectKey, temp, PROJECT_DIR, "sonar.branch.name", "base-branch");
     Path projectDir = TestUtils.projectDir(temp, PROJECT_DIR);
 
     BeginAndEndStepResults results = executeAnalysisForPRBranch(projectKey, projectDir, "");
@@ -90,7 +90,7 @@ class IncrementalAnalysisTest {
   @Test
   void incrementalPrAnalysis_cacheAvailableChangesDone_issuesReportedForChangedFiles() throws IOException {
     var projectKey = PROJECT_DIR + "cacheAvailable_withChanges";
-    Tests.analyzeProject(projectKey, temp, PROJECT_DIR, null, "sonar.branch.name", "base-branch");
+    Tests.analyzeProject(projectKey, temp, PROJECT_DIR, "sonar.branch.name", "base-branch");
     Path projectDir = TestUtils.projectDir(temp, PROJECT_DIR);
     File unchanged1Path = projectDir.resolve(PROJECT_DIR + "\\Unchanged1.cs").toFile();
     File unchanged2Path = projectDir.resolve(PROJECT_DIR + "\\Unchanged2.cs").toFile();
@@ -124,7 +124,7 @@ class IncrementalAnalysisTest {
   @Test
   void incrementalPrAnalysis_cacheAvailableProjectBaseDirChanged_everythingIsReanalyzed() throws IOException {
     var projectKey = PROJECT_DIR + "cacheAvailable_baseDirChanged";
-    Tests.analyzeProject(projectKey, temp, PROJECT_DIR, null, "sonar.branch.name", "base-branch");
+    Tests.analyzeProject(projectKey, temp, PROJECT_DIR, "sonar.branch.name", "base-branch");
     Path projectDir = TestUtils.projectDir(temp, PROJECT_DIR);
     File withChangesPath = projectDir.resolve(PROJECT_DIR + "\\WithChanges.cs").toFile();
     addIssue(withChangesPath);
@@ -153,7 +153,7 @@ class IncrementalAnalysisTest {
   @Test
   void incrementalPrAnalysis_cacheAvailableDuplicationIntroduced_duplicationReportedForChangedFile() throws IOException {
     String projectKey = "IncrementalPRAnalysisDuplication";
-    Tests.analyzeProject(temp, projectKey, null, "sonar.branch.name", "base-branch");
+    Tests.analyzeProject(temp, projectKey, "sonar.branch.name", "base-branch");
     Path projectDir = TestUtils.projectDir(temp, projectKey);
     File originalFile = projectDir.resolve("IncrementalPRAnalysisDuplication\\OriginalClass.cs").toFile();
     File duplicatedFile = projectDir.resolve("IncrementalPRAnalysisDuplication\\CopyClass.cs").toFile();

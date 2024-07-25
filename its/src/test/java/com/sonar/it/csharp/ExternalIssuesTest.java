@@ -81,7 +81,7 @@ class ExternalIssuesTest {
   void external_issues_are_ignored() throws Exception {
     var projectKey = MAIN_PROJECT_DIR + "_ignored";
     var componentId = projectKey + PROGRAM_COMPONENT_ID;
-    Tests.analyzeProject(projectKey, temp, MAIN_PROJECT_DIR, null,
+    Tests.analyzeProject(projectKey, temp, MAIN_PROJECT_DIR,
       "sonar.cs.roslyn.ignoreIssues", "true");
 
     assertThat(getComponent(componentId)).isNotNull();
@@ -96,7 +96,7 @@ class ExternalIssuesTest {
   void external_issues_categories_multiple_categories_mapped() throws Exception {
     var projectKey = MAIN_PROJECT_DIR + "_categories_mapped";
     var componentId = projectKey + PROGRAM_COMPONENT_ID;
-    Tests.analyzeProject(projectKey, temp, MAIN_PROJECT_DIR, null,
+    Tests.analyzeProject(projectKey, temp, MAIN_PROJECT_DIR,
       // notice that bugCategories has a list of 2 external categories
       "sonar.cs.roslyn.bugCategories", "StyleCop.CSharp.DocumentationRules,StyleCop.CSharp.MaintainabilityRules",
       "sonar.cs.roslyn.vulnerabilityCategories", "StyleCop.CSharp.OrderingRules");
@@ -124,7 +124,7 @@ class ExternalIssuesTest {
   void external_issues_all_three_properties() throws Exception {
     var projectKey = MAIN_PROJECT_DIR + "_three_properties";
     var componentId = projectKey + PROGRAM_COMPONENT_ID;
-    Tests.analyzeProject(projectKey, temp, MAIN_PROJECT_DIR, null,
+    Tests.analyzeProject(projectKey, temp, MAIN_PROJECT_DIR,
       "sonar.cs.roslyn.codeSmellCategories", "StyleCop.CSharp.DocumentationRules",
       "sonar.cs.roslyn.bugCategories", "StyleCop.CSharp.MaintainabilityRules",
       "sonar.cs.roslyn.vulnerabilityCategories", "StyleCop.CSharp.OrderingRules");

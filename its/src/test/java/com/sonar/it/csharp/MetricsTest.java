@@ -44,7 +44,7 @@ public class MetricsTest {
   @BeforeAll
   public static void beforeAll() throws Exception {
     // Without setting the testProjectPattern, the MetricsTest project is considered as a Test project :)
-    Tests.analyzeProject(temp, PROJECT, "no_rule", "sonar.msbuild.testProjectPattern", "noTests");
+    Tests.analyzeProject(temp, PROJECT, "sonar.msbuild.testProjectPattern", "noTests");
   }
 
   @Test
