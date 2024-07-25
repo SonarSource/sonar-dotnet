@@ -91,7 +91,7 @@ class VbNetPluginTest {
         + new CodeCoverageProvider(VbNetPlugin.METADATA).extensions().size()
         + new UnitTestResultsProvider(VbNetPlugin.METADATA).extensions().size()
         + RoslynProfileExporter.sonarLintRepositoryProperties(VbNetPlugin.METADATA).size()
-        + new VbNetPropertyDefinitions(sonarRuntime).create().size());
+        + new VbNetPropertyDefinitions().create().size());
   }
 
 }

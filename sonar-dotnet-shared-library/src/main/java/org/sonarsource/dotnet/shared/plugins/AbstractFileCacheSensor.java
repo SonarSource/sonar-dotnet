@@ -19,13 +19,11 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.resources.AbstractLanguage;
 import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.scanner.sensor.ProjectSensor;
-import org.sonar.api.utils.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,12 +35,10 @@ public abstract class AbstractFileCacheSensor implements ProjectSensor {
   private static final Logger LOG = LoggerFactory.getLogger(AbstractFileCacheSensor.class);
   private final AbstractLanguage language;
   private final HashProvider hashProvider;
-  private final SonarRuntime runtime;
 
-  protected AbstractFileCacheSensor(AbstractLanguage language, HashProvider hashProvider, SonarRuntime runtime) {
+  protected AbstractFileCacheSensor(AbstractLanguage language, HashProvider hashProvider) {
     this.language = language;
     this.hashProvider = hashProvider;
-    this.runtime = runtime;
   }
 
   @Override
@@ -56,11 +52,6 @@ public abstract class AbstractFileCacheSensor implements ProjectSensor {
     var configuration = context.config();
     if (configuration.get(AbstractPropertyDefinitions.getPullRequestBase()).isPresent()) {
       LOG.debug("Incremental PR analysis: Cache is not uploaded for pull requests.");
-      return;
-    }
-
-    if (!runtime.getApiVersion().isGreaterThanOrEqual(Version.create(9, 4))){
-      LOG.info("Incremental PR analysis is supported only starting with SonarQube 9.4.");
       return;
     }
 

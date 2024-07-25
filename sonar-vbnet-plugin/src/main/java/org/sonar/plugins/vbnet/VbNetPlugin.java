@@ -85,7 +85,7 @@ public class VbNetPlugin implements Plugin {
       RoslynProfileExporter.class,
       SonarLintProfileExporter.class);
 
-    context.addExtensions(new VbNetPropertyDefinitions(context.getRuntime()).create());
+    context.addExtensions(new VbNetPropertyDefinitions().create());
     context.addExtension(new VbNetSonarWayProfile());
     context.addExtensions(new CodeCoverageProvider(METADATA).extensions());
     context.addExtensions(new UnitTestResultsProvider(METADATA).extensions());

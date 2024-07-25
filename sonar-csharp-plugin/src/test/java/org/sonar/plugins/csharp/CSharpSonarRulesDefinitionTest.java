@@ -114,17 +114,6 @@ class CSharpSonarRulesDefinitionTest {
   }
 
   @Test
-  void test_security_standards_before_9_3() {
-    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 2), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
-    RulesDefinition.Context context = new RulesDefinition.Context();
-    new CSharpSonarRulesDefinition(sonarRuntime).define(context);
-    RulesDefinition.Repository repository = context.repository("csharpsquid");
-
-    RulesDefinition.Rule rule = repository.rule(VULNERABILITY_RULE_KEY);
-    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:326", "owaspTop10:a3", "owaspTop10:a6");
-  }
-
-  @Test
   void test_all_rules_have_metadata_set() {
     CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();

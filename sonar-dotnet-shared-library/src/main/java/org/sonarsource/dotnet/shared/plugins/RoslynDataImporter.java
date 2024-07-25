@@ -26,7 +26,6 @@ import java.util.function.UnaryOperator;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.scanner.ScannerSide;
-import org.sonar.api.utils.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonarsource.dotnet.shared.StringUtils;
@@ -47,7 +46,7 @@ public class RoslynDataImporter {
   public void importRoslynReports(List<RoslynReport> reports, final SensorContext context, Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey,
     UnaryOperator<String> toRealPath) {
     Map<String, String> repositoryKeyByRoslynRuleKey = getRepoKeyByRoslynRuleKey(activeRoslynRulesByPartialRepoKey);
-    boolean ignoreThirdPartyIssues = config.ignoreThirdPartyIssues() || !context.runtime().getApiVersion().isGreaterThanOrEqual(Version.create(7, 4));
+    boolean ignoreThirdPartyIssues = config.ignoreThirdPartyIssues();
     SarifParserCallback callback = new SarifParserCallbackImpl(context, repositoryKeyByRoslynRuleKey, ignoreThirdPartyIssues, config.bugCategories(),
       config.codeSmellCategories(), config.vulnerabilityCategories());
 

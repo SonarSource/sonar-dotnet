@@ -26,17 +26,12 @@ import java.security.NoSuchAlgorithmException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.api.io.TempDir;
-import org.sonar.api.SonarEdition;
-import org.sonar.api.SonarQubeSide;
-import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.cache.WriteCache;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
-import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
-import org.sonar.api.utils.Version;
 import org.slf4j.event.Level;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
 
@@ -46,8 +41,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class VbNetFileCacheSensorTest {
-  private static final SonarRuntime RUNTIME_WITH_ANALYSIS_CACHE = SonarRuntimeImpl.forSonarQube(Version.create(9, 4), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
-
   @TempDir
   public Path basePath;
 
@@ -67,7 +60,7 @@ class VbNetFileCacheSensorTest {
     context.setNextCache(mock(WriteCache.class));
     AddFile(context, basePath.toFile(), "CSharp/Foo.cs", "other-language-key");
     AddFile(context, basePath.toFile(), "VB/Bar.vb", VbNetPlugin.LANGUAGE_KEY);
-    var sut = new VbNetFileCacheSensor(new VbNet(settings.asConfig()), hashProvider, RUNTIME_WITH_ANALYSIS_CACHE);
+    var sut = new VbNetFileCacheSensor(new VbNet(settings.asConfig()), hashProvider);
 
     sut.execute(context);
 

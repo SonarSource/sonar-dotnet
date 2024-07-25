@@ -37,10 +37,10 @@ public class AbstractRulesDefinitionTest {
 
   private static final String PCI_DSS_RULE_KEY = "S1115";
   private static final String OWASP_ASVS_RULE_KEY = "S1116";
+  private static final SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 3), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
 
   @Test
   public void test() {
-    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 3), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
     AbstractRulesDefinition sut = new TestRulesDefinition(sonarRuntime);
     RulesDefinition.Context context = new RulesDefinition.Context();
     sut.define(context);
@@ -55,23 +55,8 @@ public class AbstractRulesDefinitionTest {
   }
 
   @Test
-  public void test_before_9_3() {
-    assertThat(getSecurityStandards(Version.create(9, 2), "S1111")).containsExactlyInAnyOrder("cwe:117", "cwe:532", "owaspTop10:a10", "owaspTop10:a3");
-  }
-
-  @Test
-  public void test_security_standards_9_4_PCI_DSS_is_not_available() {
-    assertThat(getSecurityStandards(Version.create(9, 4), PCI_DSS_RULE_KEY)).isEmpty();
-  }
-
-  @Test
   public void test_security_standards_9_5_PCI_DSS_is_available() {
     assertThat(getSecurityStandards(Version.create(9, 5), PCI_DSS_RULE_KEY)).containsExactlyInAnyOrder("pciDss-3.2:6.5.10", "pciDss-4.0:6.2.4");
-  }
-
-  @Test
-  public void test_security_standards_9_8_ASVS_is_not_available() {
-    assertThat(getSecurityStandards(Version.create(9, 8), OWASP_ASVS_RULE_KEY)).isEmpty();
   }
 
   @Test
@@ -81,7 +66,6 @@ public class AbstractRulesDefinitionTest {
 
   @Test
   public void test_remediation_is_set() {
-    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 3), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
     AbstractRulesDefinition sut = new TestRulesDefinition(sonarRuntime);
     RulesDefinition.Context context = new RulesDefinition.Context();
     sut.define(context);
@@ -96,7 +80,6 @@ public class AbstractRulesDefinitionTest {
 
   @Test
   public void test_missing_resource_throws() {
-    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 3), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
     AbstractRulesDefinition sut = new AbstractRulesDefinition("test", "test", sonarRuntime) {
       @Override
       protected String getResourcesDirectory() {
