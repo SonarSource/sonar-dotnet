@@ -45,12 +45,14 @@ class ScannerCliTest {
     SonarScanner scanner = getSonarScanner(RAZOR_PAGES_PROJECT, "projects/" + RAZOR_PAGES_PROJECT);
     BuildResult result = ORCHESTRATOR.executeBuild(scanner);
 
-    assertThat(result.getLogsLines(l -> l.contains("WARN")))
+    var logLines = result.getLogsLines(l -> l.contains("WARN"));
+
+    assertThat(logLines)
       .hasSize(4)
       .anyMatch(x -> x.endsWith("WARN  Your project contains C# files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html"))
-      .anyMatch(y -> y.endsWith("WARN  Your project contains VB.NET files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html"))
-      .anyMatch(w -> w.endsWith(INCREMENTAL_PR_ANALYSIS_WARNING))
-      .anyMatch(z -> z.endsWith(INCREMENTAL_PR_ANALYSIS_WARNING));
+      .anyMatch(y -> y.endsWith("WARN  Your project contains VB.NET files which cannot be analyzed with the scanner you are using. To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html"));
+
+    assertThat(logLines.stream().filter(x -> x.endsWith(INCREMENTAL_PR_ANALYSIS_WARNING))).hasSize(2);
 
     // The HTML plugin works
     assertThat(TestUtils.getMeasureAsInt(ORCHESTRATOR, RAZOR_PAGES_PROJECT, "violations")).isEqualTo(2);
