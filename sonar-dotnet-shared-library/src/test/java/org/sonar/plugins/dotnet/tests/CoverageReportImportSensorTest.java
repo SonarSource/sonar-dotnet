@@ -112,13 +112,13 @@ public class CoverageReportImportSensorTest {
 
   @Test
   public void analyze() throws Exception {
-    SensorContextTester context = computeCoverageMeasures();
-    assertThat(context.lineHits("foo:Foo.cs", 2)).isEqualTo(1);
-    assertThat(context.lineHits("foo:Foo.cs", 4)).isZero();
-    assertThat(context.coveredConditions("foo:Foo.cs", 1)).isNull();
-    assertThat(context.coveredConditions("foo:Foo.cs", 4)).isNull();
-    assertThat(context.coveredConditions("foo:Foo.cs", 5)).isEqualTo(1);
-    assertThat(context.coveredConditions("foo:Foo.cs", 6)).isEqualTo(2);
+    SensorContextTester localContext = computeCoverageMeasures();
+    assertThat(localContext.lineHits("foo:Foo.cs", 2)).isEqualTo(1);
+    assertThat(localContext.lineHits("foo:Foo.cs", 4)).isZero();
+    assertThat(localContext.coveredConditions("foo:Foo.cs", 1)).isNull();
+    assertThat(localContext.coveredConditions("foo:Foo.cs", 4)).isNull();
+    assertThat(localContext.coveredConditions("foo:Foo.cs", 5)).isEqualTo(1);
+    assertThat(localContext.coveredConditions("foo:Foo.cs", 6)).isEqualTo(2);
   }
 
   @Test
