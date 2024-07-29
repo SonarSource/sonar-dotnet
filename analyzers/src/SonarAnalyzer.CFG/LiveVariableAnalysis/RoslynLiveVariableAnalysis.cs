@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using SonarAnalyzer.CFG.Roslyn;
 
 namespace SonarAnalyzer.CFG.LiveVariableAnalysis;
@@ -131,14 +132,16 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
             {
                 var catchOrFilterBlock = Cfg.Blocks[catchOrFilterRegion.FirstBlockOrdinal];
                 AddBranch(block, catchOrFilterBlock);
-                AddPredecessorsOutsideRegion(catchOrFilterBlock);
+                var sourceBlock = block.Ordinal > tryRegion.FirstBlockOrdinal ? Cfg.Blocks[tryRegion.FirstBlockOrdinal] : block;
+                AddPredecessorsOutsideRegion(sourceBlock, catchOrFilterBlock);
+                ConnectPredecessorsToCath(block, catchOrFilterBlock);
                 catchesAll = catchesAll || (catchOrFilterRegion.Kind == ControlFlowRegionKind.Catch && IsCatchAllType(catchOrFilterRegion.ExceptionType));
             }
             if (!catchesAll && block.EnclosingRegion(ControlFlowRegionKind.TryAndFinally)?.NestedRegion(ControlFlowRegionKind.Finally) is { } finallyRegion)
             {
                 var finallyBlock = Cfg.Blocks[finallyRegion.FirstBlockOrdinal];
                 AddBranch(block, finallyBlock);
-                AddPredecessorsOutsideRegion(finallyBlock);
+                AddPredecessorsOutsideRegion(block, finallyBlock);
             }
         }
         if (block.IsEnclosedIn(ControlFlowRegionKind.Catch) && block.Successors.Any(x => x.Semantics is ControlFlowBranchSemantics.Rethrow or ControlFlowBranchSemantics.Throw))
@@ -146,12 +149,23 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
             BuildBranchesRethrow(block);
         }
 
-        void AddPredecessorsOutsideRegion(BasicBlock destination)
+        void AddPredecessorsOutsideRegion(BasicBlock source, BasicBlock destination)
         {
             // We assume that current block can throw in its first operation. Therefore predecessors outside this tryRegion need to be redirected to catch/filter/finally
-            foreach (var predecessor in block.Predecessors.Where(x => x.Source.Ordinal < tryRegion.FirstBlockOrdinal || x.Source.Ordinal > tryRegion.LastBlockOrdinal))
+            foreach (var predecessor in source.Predecessors.Where(x => x.Source.Ordinal < tryRegion.FirstBlockOrdinal || x.Source.Ordinal > tryRegion.LastBlockOrdinal))
             {
                 AddBranch(predecessor.Source, destination);
+            }
+        }
+
+        void ConnectPredecessorsToCath(BasicBlock block, BasicBlock catchOrFilterBlock)
+        {
+            if (block.Ordinal > tryRegion.FirstBlockOrdinal)
+            {
+                foreach (var predecessor in block.Predecessors.Where(x => x.Source.Ordinal >= tryRegion.FirstBlockOrdinal))
+                {
+                    AddBranch(predecessor.Source, catchOrFilterBlock);
+                }
             }
         }
     }
