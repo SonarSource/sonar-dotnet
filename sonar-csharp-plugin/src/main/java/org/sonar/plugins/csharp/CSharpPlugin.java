@@ -35,8 +35,6 @@ import org.sonarsource.dotnet.shared.plugins.PropertiesSensor;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
 import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
-import org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter;
-import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.UnitTestResultsProvider;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
@@ -84,16 +82,13 @@ public class CSharpPlugin implements Plugin {
       AnalysisWarningsSensor.class,
       CSharpFileCacheSensor.class,
       ProtobufDataImporter.class,
-      RoslynDataImporter.class,
-      RoslynProfileExporter.class,
-      SonarLintProfileExporter.class);
+      RoslynDataImporter.class);
 
     context.addExtensions(new CSharpPropertyDefinitions().create());
     context.addExtension(new CSharpSonarWayProfile());
     context.addExtensions(new CodeCoverageProvider(METADATA).extensions());
     context.addExtensions(new UnitTestResultsProvider(METADATA).extensions());
-    context.addExtensions(RoslynProfileExporter.sonarLintRepositoryProperties(METADATA));
-  }
+ }
 
   private static class CSharpPluginMetadata implements DotNetPluginMetadata {
 
