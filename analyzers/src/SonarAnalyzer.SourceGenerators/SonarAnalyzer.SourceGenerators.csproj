@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <!-- The scanner removes all the analyzers that have the "SonarAnalyzer" prefix -->
+    <AssemblyName>Internal.SonarAnalyzer.SourceGenerators</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

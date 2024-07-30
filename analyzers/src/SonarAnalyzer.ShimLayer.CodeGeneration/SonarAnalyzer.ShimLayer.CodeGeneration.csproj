@@ -5,6 +5,8 @@
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <Nullable>enable</Nullable>
     <SonarQubeExclude>true</SonarQubeExclude>
+    <!-- The scanner removes all the analyzers that have the "SonarAnalyzer" prefix -->
+    <AssemblyName>Internal.SonarAnalyzer.ShimLayer.CodeGeneration</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
