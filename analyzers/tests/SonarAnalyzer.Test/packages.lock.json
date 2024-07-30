@@ -4,9 +4,9 @@
     ".NETFramework,Version=v4.8": {
       "altcover": {
         "type": "Direct",
-        "requested": "[8.8.21, )",
-        "resolved": "8.8.21",
-        "contentHash": "COxBMzfbrgv/WPcvU6rHdA75UUP2OfPR+wFV8NejTGLrwNqboS+5yY2vpxv1T7r/33N3c+MkBqBCn0Z4nbBzVA=="
+        "requested": "[8.8.173, )",
+        "resolved": "8.8.173",
+        "contentHash": "iejmqWdC9H9ShTtsT7vSLpZ74RG4sDhheW7wllczXWl6WZAaCqGXMFGRRHi8TZGCzV/7Ah5gjXZ4GRlfAef4Eg=="
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
@@ -592,9 +592,9 @@
     "net8.0": {
       "altcover": {
         "type": "Direct",
-        "requested": "[8.8.21, )",
-        "resolved": "8.8.21",
-        "contentHash": "COxBMzfbrgv/WPcvU6rHdA75UUP2OfPR+wFV8NejTGLrwNqboS+5yY2vpxv1T7r/33N3c+MkBqBCn0Z4nbBzVA=="
+        "requested": "[8.8.173, )",
+        "resolved": "8.8.173",
+        "contentHash": "iejmqWdC9H9ShTtsT7vSLpZ74RG4sDhheW7wllczXWl6WZAaCqGXMFGRRHi8TZGCzV/7Ah5gjXZ4GRlfAef4Eg=="
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
