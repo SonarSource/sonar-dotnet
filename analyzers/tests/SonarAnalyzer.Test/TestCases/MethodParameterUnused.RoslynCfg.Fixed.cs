@@ -16,7 +16,7 @@ namespace Tests.TestCases
 
     public class BasicTests : MyPrivateInterface
     {
-        private BasicTests(int a) : this(a, 42) // Compliant
+        private BasicTests(int a) : this(a) // Compliant
         { }
 
         private BasicTests(
@@ -643,6 +643,51 @@ namespace Tests.TestCases
                 ReferenceEquals(1, 2);
                 return null;
             }
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/8187
+    public class Repro_8187_CodeFix
+    {
+        private int a = 21;
+        private int? obj = null;
+
+        async Task Method()
+        {
+            DoSomething(21);
+            DoSomething(a: 42);
+            DoSomething(21, a++);
+            DoSomething(21, a % 2 == 0 ? a++ : a);
+            DoSomething(21);
+            DoSomething(21, obj ?? (a % 2 == 0 ? a++ : SomeMethod()));
+            DoSomething(21, SomeMethod());
+            DoSomething(21, await SomeMethodAsync());
+
+            DoSomething2();
+        }
+
+        void DoSomething(int a) // Fixed
+        {
+            Console.WriteLine(a);
+        }
+
+        // Fixed
+        // Fixed
+        void DoSomething2() // Fixed
+        {
+            Console.WriteLine("DoSomething2");
+        }
+
+        int SomeMethod()
+        {
+            a++;
+            return a;
+        }
+
+        Task<int> SomeMethodAsync()
+        {
+            a++;
+            return Task.FromResult(a);
         }
     }
 }

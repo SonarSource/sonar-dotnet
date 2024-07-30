@@ -19,39 +19,101 @@
  */
 
 using Microsoft.CodeAnalysis.CodeFixes;
+using Microsoft.CodeAnalysis.FindSymbols;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[ExportCodeFixProvider(LanguageNames.CSharp)]
+public sealed class MethodParameterUnusedCodeFix : SonarCodeFix
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public sealed class MethodParameterUnusedCodeFix : SonarCodeFix
-    {
-        private const string Title = "Remove unused parameter";
+    private const string Title = "Remove unused parameter";
 
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(MethodParameterUnused.DiagnosticId);
-
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
+    private static readonly ISet<SyntaxKind> SideEffectExpression =
+        new HashSet<SyntaxKind>
         {
-            var diagnostic = context.Diagnostics.First();
-            var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var parameter = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) as ParameterSyntax;
+            SyntaxKind.AddAssignmentExpression,
+            SyntaxKind.AndAssignmentExpression,
+            SyntaxKind.AwaitExpression,
+            SyntaxKind.DivideAssignmentExpression,
+            SyntaxKind.ExclusiveOrAssignmentExpression,
+            SyntaxKind.InvocationExpression,
+            SyntaxKind.LeftShiftAssignmentExpression,
+            SyntaxKind.ModuloAssignmentExpression,
+            SyntaxKind.MultiplyAssignmentExpression,
+            SyntaxKind.OrAssignmentExpression,
+            SyntaxKind.PostDecrementExpression,
+            SyntaxKind.PostIncrementExpression,
+            SyntaxKind.PreDecrementExpression,
+            SyntaxKind.PreIncrementExpression,
+            SyntaxKind.RightShiftAssignmentExpression,
+            SyntaxKind.SimpleAssignmentExpression,
+            SyntaxKind.SubtractAssignmentExpression,
+            SyntaxKindEx.CoalesceAssignmentExpression,
+            SyntaxKindEx.UnsignedRightShiftAssignmentExpression
+        };
 
-            if (!bool.Parse(diagnostic.Properties[MethodParameterUnused.IsRemovableKey]))
-            {
-                return Task.CompletedTask;
-            }
+    public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(MethodParameterUnused.DiagnosticId);
 
-            context.RegisterCodeFix(
-                Title,
-                c =>
-                {
-                    var newRoot = root.RemoveNode(
-                        parameter,
-                        SyntaxRemoveOptions.KeepLeadingTrivia | SyntaxRemoveOptions.AddElasticMarker);
-                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                },
-                context.Diagnostics);
+    protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
+    {
+        var diagnostic = context.Diagnostics.First();
+        var diagnosticSpan = diagnostic.Location.SourceSpan;
+        var parameter = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) as ParameterSyntax;
 
+        if (!bool.Parse(diagnostic.Properties[MethodParameterUnused.IsRemovableKey]))
+        {
             return Task.CompletedTask;
         }
+
+        context.RegisterCodeFix(
+            Title,
+            async x =>
+            {
+                var newRoot = root.RemoveNodes(
+                    [parameter, ..await ArgumentsToRemoveAsync(context, parameter, x)],
+                    SyntaxRemoveOptions.KeepLeadingTrivia | SyntaxRemoveOptions.AddElasticMarker);
+
+                return context.Document.WithSyntaxRoot(newRoot);
+            },
+            context.Diagnostics);
+        return Task.CompletedTask;
     }
+
+    private static async Task<IEnumerable<SyntaxNode>> ArgumentsToRemoveAsync(SonarCodeFixContext context, ParameterSyntax parameter, CancellationToken cancel)
+    {
+        IEnumerable<SyntaxNode> arguments = [];
+
+        if (parameter?.Parent.Parent is BaseMethodDeclarationSyntax methodDeclaration)
+        {
+            var model = await context.Document.GetSemanticModelAsync(cancel);
+
+            if (model.GetDeclaredSymbol(methodDeclaration, cancel) is { } methodSymbol)
+            {
+                var callers = await SymbolFinder.FindCallersAsync(
+                    methodSymbol,
+                    context.Document.Project.Solution,
+                    ImmutableHashSet.Create(context.Document),
+                    cancel);
+
+                arguments = callers
+                    .SelectMany(x => x.Locations)
+                    .Select(x => GetArgumentFromLocation(x, parameter))
+                    .Where(x => x is not null && !x.DescendantNodes().Select(y => y.Kind()).Any(y => SideEffectExpression.Contains(y)));
+            }
+        }
+
+        return arguments;
+    }
+
+    private static ArgumentSyntax GetArgumentFromLocation(Location location, ParameterSyntax parameter) =>
+        location.SourceTree.GetRoot().FindNode(location.SourceSpan, getInnermostNodeForTie: true) is { } node
+        && GetIdentifierNameParent(node).ArgumentList() is { } argumentList
+            ? argumentList.Arguments.FirstOrDefault(x => ArgumentEqualsParameter(x, parameter))
+            : null;
+
+    private static bool ArgumentEqualsParameter(ArgumentSyntax argument, ParameterSyntax parameter) =>
+        argument.NameIs(parameter.GetName()) || argument.GetArgumentIndex() == parameter.GetParameterIndex();
+
+    private static SyntaxNode GetIdentifierNameParent(SyntaxNode node) =>
+        node is IdentifierNameSyntax identifierName ? identifierName.Parent : node;
 }
