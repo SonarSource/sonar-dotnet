@@ -39,6 +39,8 @@ int CallerTwo() => Leaf() + PublicMethod();
 int Leaf() =>  42;
 ```
 
+Do not use auto-implemented private properties. Use fields instead.
+
 ### Local functions
 
 There are no strict rules on when to use local functions. It should be decided on a case-by-case basis.
@@ -97,17 +99,78 @@ public void MethodB()
 
 ## Naming conventions
 
-Generic words in class names that don't convey meaning (e.g. `Helper`) should be avoided. Overwordy and complex names should be avoided as well.
+### Principles
+
+Keep it minimal and suggestive.
+- Generic words that don't convey meaning (e.g. `Helper`, `Manager`, `Data`) should be avoided.
+- Overwordy and complex names should be avoided as well: e.g. `SaveAllDataToDatabase()` -> `Save()` (the rest should be understandable from the context).
+- Use positive naming when possible: `var shouldNotInclude = true;` -> `var shouldInclude = false;`
+
+### Casing
+
+Protected fields should start with lowercase letter.
+
+### Parameters and variables
 
 Single variable lambdas should use `x` as the variable name (based on lambda calculus λx). Multi variable lambdas should use descriptive names, where `x` can be used for the main iterated item like `(x, index) => ...`. Name `c` can be used for context of Roslyn callback.
 
 Short names can be used as parameter and variable names, namely `SyntaxTree tree`, `SemanticModel model`, `SyntaxNode node` and `CancellationToken cancel`.
+
+### Unit tests
 
 Unit tests for common C# and VB.NET rules should use two aliases `using CS = SonarAnalyzer.Rules.CSharp` and `using VB = SonarAnalyzer.Rules.VisualBasic`. Test method names should have `_CS` and `_VB` suffixes.
 
 Unit tests for single language rule should not use alias nor language method suffix.
 
 Variable name `sut` (System Under Test) is recommended in unit tests that really tests a single unit (contrary to our usual rule integration unit tests).
+
+Avoid generic names without meaning like `foo`, `bar`, `baz`. E.g. for an analyzer that raises on methods with empty bodies avoid using these names:
+    ```cs
+    public void Foo() // Noncompliant
+    { 
+    } 
+
+    public void Bar() // Compliant
+    {
+    // Some explanation
+    }
+
+    public void Baz()  // Compliant
+    {
+    Console.WriteLine();
+    }
+
+    public override void Kiss() // Compliant
+    {
+    }
+    ```
+Instead use names that show how the given member is relevant to the analyzer that's being tested:
+    ```cs
+    public void Empty() // Noncompliant
+    { 
+    } 
+
+    public override void HasComment()  // Compliant
+    {
+    // Some explanation
+    }
+
+    public void NotEmpty()  // Compliant
+    {
+    Console.WriteLine();
+    }
+
+    public override void Overriden() // Compliant
+    {
+    }
+    ```
+
+Unit test method names:
+- Underscore in UT names separates logical groups, not individual words. 
+- The name of your test should consist of three parts (e.g. `Add_SingleNumber_ReturnsSameNumber`):
+  - The name of the method being tested.
+  - The scenario under which it's being tested.
+  - The expected behavior when the scenario is invoked.
 
 ## Multi-line statements
 
@@ -179,6 +242,17 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
 
 ## Code structure
 
+### Principles
+
+* When to factorize: two is a group, three is a crowd.
+* Less is more.
+* Avoid using explicit type names, rely on type inference instead. Use the
+  * the var keyword: `string name = "Joe";` -> `var name = "Joe";`
+  * target-typed expressions for fields: `private CustomType type = new CustomType();` =>`private CustomType type = new();`
+  * target-typed expressions for parameters: `Method(new CustomType());` => `Method(new());`
+
+### Style
+
 * Field and property initializations are done directly in the member declaration instead of in a constructor.
 * `if`/`else if` and explicit `else` is used
   * when it helps to understand overall structure of the method,
@@ -193,6 +267,34 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
 * Var pattern `is var o` can be used only where variable declarations would require additional nesting.
 * Var pattern `o is { P: var p }` can be used only where `o` can be `null` and `p` is used at least 3 times.
 * Do not use `nullable`.
+* Avoid single-use variables, unless they really bring readability value.
+* Use file-scoped namespaces.
+* Tested variable is on the left, like `iterated == searchParameter` (where `iterated` is the tested variable)
+* If a string is multiline, use raw string literals, indented one tab-in from the declaration:
+```
+var raw = """
+    hello
+    my friend
+	""";
+```
+* Always use multi-line initializers for collection and objects, e.g.:
+```
+var thingy = new Thingy
+{
+	x = "hello",
+	y = 42,
+}
+
+var collection = new Dictionary<string, int>
+{
+	{ "hey", 1 },
+	{ "there", 42 },
+}
+```
+
+### Unit Tests
+* VerifierBuilder.AddSnippet should not be used to assert compliant/noncomplaint test cases. Move it to a TestCases file. Exception: the test cases are parameterized/data-driven.
+
 
 ## Comments
 
@@ -200,6 +302,10 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
 * Comments should generally be on separate lines.
 * Comments on the same line with code are acceptable for short lines of code and short comments.
 * Documentation comments for abstract methods and their implementations should be placed only on the abstract method, to avoid duplication. _When reading the implementation, the IDE offers the tooling to peek in the base class and read the method comment._
+* Avoid using comments for "Arrange, Act, Assert" in UTs, unless the test is complex.
+* Use `// ...` comments instead of `/* ... */`. Exception: `internal /* for testing */ void Something()`.
+* Prefer well-named members instead of documentation.
+* When writing [xmldoc](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/xmldoc/recommended-tags) for methods, avoid adding superflous tags (e.g. members that have self-explanatory names).
 
 ## FIXME and ToDo
 
@@ -216,6 +322,15 @@ Generally, as we do not want to have classes that are too long, regions are not 
 It can still be used when and where it makes sense. For instance, when a class having a specific purpose is
 implementing generic interfaces (such as `IComparable`, `IDisposable`), it can make sense to have regions 
 for the implementation of these interfaces.
+
+## Spacing
+
+* Avoid empty lines unless they bring clarity and help the reader understand logical groups. But prefer them over comments.
+
+## Type definition
+
+* If a class is a POCO data-container, use a record.
+* Do not use primary constructors on normal classes and structs, use standard constructor + field/properties.
 
 ## ValueTuples
 
