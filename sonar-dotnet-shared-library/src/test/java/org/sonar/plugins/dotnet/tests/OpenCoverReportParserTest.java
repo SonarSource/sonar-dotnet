@@ -324,8 +324,8 @@ public class OpenCoverReportParserTest {
       // The other logs contain system-dependants paths (e.g. "The current user dir is ...", "CoveredFile created: ...")
       .contains(
         // these are not ordered
-        "Skipping the file (ID '1', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', visitCount '1' because file is not indexed or does not have the supported language.",
-        "Skipping the file (ID '2', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', visitCount '1' because file is not indexed or does not have the supported language.",
+        "Skipping the file (ID '1', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', visitCount '1' because file is not indexed or does not have the supported language. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",
+        "Skipping the file (ID '2', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', visitCount '1' because file is not indexed or does not have the supported language. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",
         "OpenCover parser: Skipping branch hits for file (ID '2', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', offset '1', visitCount '1' because file is not indexed or does not have the supported language.",
         "OpenCover parser: Skipping branch hits for file (ID '2', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', offset '1', visitCount '0' because file is not indexed or does not have the supported language.",
         "OpenCover parser: Skipping branch hits for file (ID '1', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', offset '1', visitCount '0' because file is not indexed or does not have the supported language.",
@@ -402,9 +402,9 @@ public class OpenCoverReportParserTest {
     assertThat(debugLogs.stream().skip(1))
       .containsExactlyInAnyOrder(
         "CoveredFile created: (ID '1', path 'MyLibraryNUnitTest\\AdderNUnitTest.cs', NO INDEXED PATH).",
-        "Skipping the file (ID '1', path 'MyLibraryNUnitTest\\AdderNUnitTest.cs', NO INDEXED PATH), line '16', visitCount '1' because file is not indexed or does not have the supported language.",
-        "Skipping the file (ID '1', path 'MyLibraryNUnitTest\\AdderNUnitTest.cs', NO INDEXED PATH), line '17', visitCount '1' because file is not indexed or does not have the supported language.",
-        "Skipping the file (ID '1', path 'MyLibraryNUnitTest\\AdderNUnitTest.cs', NO INDEXED PATH), line '18', visitCount '1' because file is not indexed or does not have the supported language."
+        "Skipping the file (ID '1', path 'MyLibraryNUnitTest\\AdderNUnitTest.cs', NO INDEXED PATH), line '16', visitCount '1' because file is not indexed or does not have the supported language. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",
+        "Skipping the file (ID '1', path 'MyLibraryNUnitTest\\AdderNUnitTest.cs', NO INDEXED PATH), line '17', visitCount '1' because file is not indexed or does not have the supported language. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",
+        "Skipping the file (ID '1', path 'MyLibraryNUnitTest\\AdderNUnitTest.cs', NO INDEXED PATH), line '18', visitCount '1' because file is not indexed or does not have the supported language. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties."
       );
   }
 

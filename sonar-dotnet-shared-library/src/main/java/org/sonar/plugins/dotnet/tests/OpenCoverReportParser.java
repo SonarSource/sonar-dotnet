@@ -128,7 +128,8 @@ public class OpenCoverReportParser implements CoverageParser {
           LOG.trace("OpenCover parser: add hits for file {}, line '{}', visitCount '{}'.",
             coveredFile, line, visitCount);
         } else {
-          LOG.debug("Skipping the file {}, line '{}', visitCount '{}' because file is not indexed or does not have the supported language.",
+          LOG.debug("Skipping the file {}, line '{}', visitCount '{}' because file is not indexed or does not have the supported language."
+              + " Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",
             coveredFile, line, visitCount);
         }
       } else {

@@ -70,8 +70,9 @@ public class DotCoverReportParser implements CoverageParser {
       if (fileCanonicalPath != null && fileService.isSupportedAbsolute(fileCanonicalPath)) {
         collectCoverage(fileCanonicalPath, contents);
       } else {
-        LOG.debug("Skipping the import of dotCover code coverage for file '{}'"
-          + " because it is not indexed or does not have the supported language.", fileCanonicalPath);
+        LOG.debug("Skipping the import of dotCover code coverage for file '{}' because it is not indexed or"
+            + " does not have the supported language. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",
+          fileCanonicalPath);
       }
     }
 

@@ -140,10 +140,12 @@ public class NCover3ReportParserTest {
     assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
     assertThat(debugLogs.get(1))
       .startsWith("NCover3 doc '1', line '31', vc '4' will be skipped because it has a path '")
-      .endsWith("\\MyLibrary\\Adder.cs' which is not indexed or does not have the supported language.");
+      .endsWith("\\MyLibrary\\Adder.cs' which is not indexed or does not have the supported language. "
+        + "Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
     assertThat(debugLogs.get(2))
       .startsWith("NCover3 doc '1', line '32', vc '4' will be skipped because it has a path '")
-      .endsWith("\\MyLibrary\\Adder.cs' which is not indexed or does not have the supported language.");
+      .endsWith("\\MyLibrary\\Adder.cs' which is not indexed or does not have the supported language. "
+        + "Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
     List<String> traceLogs = logTester.logs(Level.TRACE);
     assertThat(traceLogs.get(0)).isEqualTo("Analyzing the doc tag with NCover3 ID '1' and url 'MyLibrary\\Adder.cs'.");
     assertThat(traceLogs.get(1))

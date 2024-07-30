@@ -67,12 +67,15 @@ public class ScannerFileService implements FileService {
         LOG.trace("Found indexed file '{}' for '{}' (normalized to '{}').", foundFile, deterministicBuildPath, pathSuffix);
         return Optional.of(foundFile);
       } else {
-        LOG.debug("Found {} indexed files for '{}' (normalized to '{}'). Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",
+        LOG.debug("Found {} indexed files for '{}' (normalized to '{}'). Will skip this coverage entry."
+            + " Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",
           foundFiles.size(), deterministicBuildPath, pathSuffix);
         return Optional.empty();
       }
     }
-    LOG.debug("Did not find deterministic source path in '{}'. Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.", deterministicBuildPath);
+    LOG.debug("The file '{}' is not indexed or does not have the supported language. Will skip this coverage entry. "
+        + "Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",
+      deterministicBuildPath);
     return Optional.empty();
   }
 }
