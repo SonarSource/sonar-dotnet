@@ -43,7 +43,7 @@ public class NoSonarTest {
 
   @BeforeAll
   public static void init() throws Exception {
-    buildResult = Tests.analyzeProject(temp, PROJECT, "vbnet_class_name");
+    buildResult = Tests.analyzeProject(temp, PROJECT);
   }
 
   @Test

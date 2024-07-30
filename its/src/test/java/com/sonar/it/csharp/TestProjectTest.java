@@ -97,7 +97,7 @@ public class TestProjectTest {
 
   @Test
   void with_html_and_csharp_code_explicitly_marked_as_test_should_not_populate_metrics() throws Exception {
-    BuildResult buildResult = Tests.analyzeProject(temp, EXPLICITLY_MARKED_AS_TEST, "no_rule");
+    BuildResult buildResult = Tests.analyzeProject(temp, EXPLICITLY_MARKED_AS_TEST);
 
     assertThat(Tests.getComponent("HtmlCSharpExplicitlyMarkedAsTest:Foo.cs")).isNotNull();
     assertThat(getMeasureAsInt(EXPLICITLY_MARKED_AS_TEST, "files")).isNull();

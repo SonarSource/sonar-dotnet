@@ -25,18 +25,20 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(Tests.class)
-public class CoverageTest {
+class CoverageTest {
 
   @TempDir
   private static Path temp;
 
   @Test
-  public void without_coverage_report_still_count_lines_to_cover() throws Exception {
+  void without_coverage_report_still_count_lines_to_cover() throws Exception {
     BuildResult buildResult = analyzeCoverageTestProject();
 
     assertThat(buildResult.getLogs())
@@ -48,57 +50,23 @@ public class CoverageTest {
     assertThat(getMeasureAsInt("VbCoverageTest", "uncovered_lines")).isEqualTo(4);
   }
 
-  @Test
-  public void ncover3() throws Exception {
-    BuildResult buildResult = analyzeCoverageTestProject("sonar.vbnet.ncover3.reportsPaths", "reports/ncover3.nccov");
+  @ParameterizedTest
+  @CsvSource(value = {"ncover3:nccov:6:1", "opencover:xml:9:1", "dotcover:html:5:1", "vscoveragexml:visualstudio.coveragexml:5:1"}, delimiter = ':')
+  void coverage(String testFramework,  String format, int linesToCover, int uncoveredLines) throws Exception {
+    String reportFile = testFramework.equals("vscoveragexml") ? format : testFramework + "." + format;
+    BuildResult buildResult = analyzeCoverageTestProject("sonar.vbnet." + testFramework + ".reportsPaths", "reports/" + reportFile);
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor VB.NET Tests Coverage Report Import",
       "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
 
-    assertThat(getMeasureAsInt("VbCoverageTest", "lines_to_cover")).isEqualTo(6);
-    assertThat(getMeasureAsInt("VbCoverageTest", "uncovered_lines")).isEqualTo(1);
+    assertThat(getMeasureAsInt("VbCoverageTest", "lines_to_cover")).isEqualTo(linesToCover);
+    assertThat(getMeasureAsInt("VbCoverageTest", "uncovered_lines")).isEqualTo(uncoveredLines);
   }
 
   @Test
-  public void open_cover() throws Exception {
-    BuildResult buildResult = analyzeCoverageTestProject("sonar.vbnet.opencover.reportsPaths", "reports/opencover.xml");
-
-    assertThat(buildResult.getLogs()).contains(
-      "Sensor VB.NET Tests Coverage Report Import",
-      "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
-
-    assertThat(getMeasureAsInt("VbCoverageTest", "lines_to_cover")).isEqualTo(9);
-    assertThat(getMeasureAsInt("VbCoverageTest", "uncovered_lines")).isEqualTo(1);
-  }
-
-  @Test
-  public void dotcover() throws Exception {
-    BuildResult buildResult = analyzeCoverageTestProject("sonar.vbnet.dotcover.reportsPaths", "reports/dotcover.html");
-
-    assertThat(buildResult.getLogs()).contains(
-      "Sensor VB.NET Tests Coverage Report Import",
-      "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
-
-    assertThat(getMeasureAsInt("VbCoverageTest", "lines_to_cover")).isEqualTo(5);
-    assertThat(getMeasureAsInt("VbCoverageTest", "uncovered_lines")).isEqualTo(1);
-  }
-
-  @Test
-  public void visual_studio() throws Exception {
-    BuildResult buildResult = analyzeCoverageTestProject("sonar.vbnet.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
-
-    assertThat(buildResult.getLogs()).contains(
-      "Sensor VB.NET Tests Coverage Report Import",
-      "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
-
-    assertThat(getMeasureAsInt("VbCoverageTest", "lines_to_cover")).isEqualTo(5);
-    assertThat(getMeasureAsInt("VbCoverageTest", "uncovered_lines")).isEqualTo(1);
-  }
-
-  @Test
-  public void no_coverage_on_tests() throws Exception {
-    BuildResult buildResult = Tests.analyzeProject(temp, "VbNoCoverageOnTests", "vbnet_no_rule", "sonar.vbnet.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
+  void no_coverage_on_tests() throws Exception {
+    BuildResult buildResult = Tests.analyzeProject(temp, "VbNoCoverageOnTests", "sonar.vbnet.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor VB.NET Tests Coverage Report Import",
@@ -113,7 +81,7 @@ public class CoverageTest {
   }
 
   @Test
-  public void should_support_wildcard_patterns() throws Exception {
+  void should_support_wildcard_patterns() throws Exception {
     BuildResult buildResult = analyzeCoverageTestProject("sonar.vbnet.ncover3.reportsPaths", "reports/*.nccov");
 
     assertThat(buildResult.getLogs()).contains(
@@ -124,6 +92,6 @@ public class CoverageTest {
   }
 
   private BuildResult analyzeCoverageTestProject(String... keyValues) throws IOException {
-    return Tests.analyzeProject(temp, "VbCoverageTest", "vbnet_no_rule", keyValues);
+    return Tests.analyzeProject(temp, "VbCoverageTest", keyValues);
   }
 }

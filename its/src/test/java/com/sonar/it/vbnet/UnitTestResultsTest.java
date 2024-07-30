@@ -38,7 +38,7 @@ public class UnitTestResultsTest {
   private static final String PROJECT = "VbUnitTestResultsTest";
 
   @Test
-  public void should_not_import_unit_test_results_without_report() throws Exception {
+  void should_not_import_unit_test_results_without_report() throws Exception {
     analyzeTestProject();
 
     assertThat(getMeasure(PROJECT, "tests")).isNull();
@@ -48,7 +48,7 @@ public class UnitTestResultsTest {
   }
 
   @Test
-  public void vstest() throws Exception {
+  void vstest() throws Exception {
     analyzeTestProject("sonar.vbnet.vstest.reportsPaths", "reports/vstest.trx");
 
     assertThat(getMeasureAsInt(PROJECT, "tests")).isEqualTo(42);
@@ -58,7 +58,7 @@ public class UnitTestResultsTest {
   }
 
   @Test
-  public void nunit() throws Exception {
+  void nunit() throws Exception {
     analyzeTestProject("sonar.vbnet.nunit.reportsPaths", "reports/nunit.xml");
 
     assertThat(getMeasureAsInt(PROJECT, "tests")).isEqualTo(200);
@@ -68,13 +68,13 @@ public class UnitTestResultsTest {
   }
 
   @Test
-  public void should_support_wildcard_patterns() throws Exception {
+  void should_support_wildcard_patterns() throws Exception {
     analyzeTestProject("sonar.vbnet.vstest.reportsPaths", "reports/*.trx");
 
     assertThat(getMeasureAsInt(PROJECT, "tests")).isEqualTo(42);
   }
 
   private void analyzeTestProject(String... keyValues) throws IOException {
-    Tests.analyzeProject(temp, PROJECT, "vbnet_no_rule", keyValues);
+    Tests.analyzeProject(temp, PROJECT, keyValues);
   }
 }
