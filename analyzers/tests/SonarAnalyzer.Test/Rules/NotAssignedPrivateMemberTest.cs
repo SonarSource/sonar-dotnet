@@ -33,13 +33,13 @@ public class NotAssignedPrivateMemberTest
         builder.AddPaths("NotAssignedPrivateMember.cs").Verify();
 
 #if NET
-        [TestMethod]
-        public void NotAssignedPrivateMember_CSharp9() =>
-            builder.AddPaths("NotAssignedPrivateMember.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+    [TestMethod]
+    public void NotAssignedPrivateMember_CSharp9() =>
+        builder.AddPaths("NotAssignedPrivateMember.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
-        public void NotAssignedPrivateMember_Razor() =>
-            builder.AddPaths("NotAssignedPrivateMember.Partial.razor", "NotAssignedPrivateMember.Partial.razor.cs").Verify();
+    [TestMethod]
+    public void NotAssignedPrivateMember_Razor() =>
+        builder.AddPaths("NotAssignedPrivateMember.razor", "NotAssignedPrivateMember.razor.cs").VerifyNoIssues();
 #endif
 
     [TestMethod]
