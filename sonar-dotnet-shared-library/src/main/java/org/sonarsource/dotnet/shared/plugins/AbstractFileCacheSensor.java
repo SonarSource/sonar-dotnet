@@ -29,6 +29,8 @@ import org.slf4j.LoggerFactory;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 @ScannerSide
 public abstract class AbstractFileCacheSensor implements ProjectSensor {
@@ -39,6 +41,11 @@ public abstract class AbstractFileCacheSensor implements ProjectSensor {
   protected AbstractFileCacheSensor(AbstractLanguage language, HashProvider hashProvider) {
     this.language = language;
     this.hashProvider = hashProvider;
+  }
+
+  // Some file extensions are owned by other analyzers
+  protected String[] additionalSupportedExtensions() {
+    return new String[0];
   }
 
   @Override
@@ -70,7 +77,10 @@ public abstract class AbstractFileCacheSensor implements ProjectSensor {
 
     LOG.debug("Incremental PR analysis: Preparing to upload file hashes.");
     var fileSystem = context.fileSystem();
-    fileSystem.inputFiles(fileSystem.predicates().hasLanguage(language.getKey())).forEach(inputFile -> {
+    var predicates = fileSystem.predicates();
+    var filePredicates = Arrays.stream(additionalSupportedExtensions()).map(extension -> fileSystem.predicates().hasExtension(extension)).collect(Collectors.toList());
+    filePredicates.add(predicates.hasLanguage(language.getKey()));
+    fileSystem.inputFiles(predicates.or(filePredicates)).forEach(inputFile -> {
       // Normalize to unix style separators. The scanner should be able to read the files on both windows and unix.
       var uri = inputFile.uri();
       var key = basePath.get().relativize(uri).getPath().replace('\\','/');
