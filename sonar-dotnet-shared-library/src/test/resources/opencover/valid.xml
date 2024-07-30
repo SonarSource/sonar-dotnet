@@ -254,12 +254,12 @@
                 -->
               </SequencePoints>
               <BranchPoints>
-                <BranchPoint vc="2" uspid="21" ordinal="0" offset="6" path="0" />
-                <BranchPoint vc="0" uspid="22" ordinal="1" offset="6" path="1" />
-                <BranchPoint vc="0" uspid="23" ordinal="2" offset="21" path="0" />
-                <BranchPoint vc="2" uspid="24" ordinal="3" offset="21" path="1" />
-                <BranchPoint vc="2" uspid="25" ordinal="4" offset="81" path="0" />
-                <BranchPoint vc="0" uspid="26" ordinal="5" offset="81" path="1" />
+                <BranchPoint vc="2" uspid="21" ordinal="0" offset="6" sl="12" path="0" offsetend="10" />
+                <BranchPoint vc="0" uspid="22" ordinal="1" offset="6" sl="12" path="1" offsetend="10" />
+                <BranchPoint vc="0" uspid="23" ordinal="2" offset="21" sl="12" path="0" offsetend="22" />
+                <BranchPoint vc="2" uspid="24" ordinal="3" offset="21" sl="12" path="1" offsetend="22" />
+                <BranchPoint vc="2" uspid="25" ordinal="4" offset="81" sl="22" path="0" offsetend="82" />
+                <BranchPoint vc="0" uspid="26" ordinal="5" offset="81" sl="22" path="1" offsetend="82" />
               </BranchPoints>
               <MethodPoint xsi:type="SequencePoint" vc="2" uspid="8" ordinal="0" offset="0" sl="11" sc="9" el="11" ec="10" />
             </Method>

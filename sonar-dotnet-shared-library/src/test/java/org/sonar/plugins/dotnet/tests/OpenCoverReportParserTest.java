@@ -121,10 +121,7 @@ public class OpenCoverReportParserTest {
     List<String> debugLogs = logTester.logs(Level.DEBUG);
     assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
 
-    // FIXME the test case may be wrong https://github.com/SonarSource/sonar-dotnet/issues/4038
-    assertThat(logTester.logs(Level.WARN)).hasSize(6);
-    assertThat(logTester.logs(Level.WARN).get(0))
-      .startsWith("OpenCover parser: invalid start line for file (ID '3', path 'MyLibrary\\Adder.cs', indexed as");
+    assertThat(logTester.logs(Level.WARN)).isEmpty();
   }
 
   @Test
@@ -139,10 +136,7 @@ public class OpenCoverReportParserTest {
     assertThat(logTester.logs(Level.INFO).get(0)).startsWith("Parsing the OpenCover report ");
     assertThat(logTester.logs(Level.DEBUG).get(0)).startsWith("The current user dir is ");
 
-    // FIXME the test case may be wrong https://github.com/SonarSource/sonar-dotnet/issues/4038
-    assertThat(logTester.logs(Level.WARN))
-      .hasSize(6)
-      .contains("OpenCover parser: invalid start line for file (ID '3', path 'MyLibrary\\Adder.cs', NO INDEXED PATH).");
+    assertThat(logTester.logs(Level.WARN)).isEmpty();
   }
 
   @Test
@@ -184,8 +178,7 @@ public class OpenCoverReportParserTest {
         "CoveredFile created: (ID '4', path 'MyLibrary\\Multiplier.cs', NO INDEXED PATH)."
       );
 
-    // FIXME the test case may be wrong https://github.com/SonarSource/sonar-dotnet/issues/4038
-    assertThat(logTester.logs(Level.WARN)).hasSize(6);
+    assertThat(logTester.logs(Level.WARN)).isEmpty();
   }
 
   @Test
