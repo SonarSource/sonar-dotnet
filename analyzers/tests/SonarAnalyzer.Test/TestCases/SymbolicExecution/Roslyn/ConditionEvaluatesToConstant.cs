@@ -4322,8 +4322,8 @@ public class Repro_9580
         {
             Console.WriteLine(element.ToString());
         }
-        if (collection.Count == 0)          // Noncompliant - FP: the indexer with string argument returns null if the key is not found rather than throwing,
-        {                                   // so at this point we can't know for sure that the collection is empty.
+        if (collection.Count == 0)          // Noncompliant - FP: the indexer with string argument returns null if the key is not found rather than throwing an exception,
+        {                                   // so at this point we can't know for sure that the collection is not empty.
             Console.WriteLine("Empty!");    // Secondary - FP
         }
     }
