@@ -1,0 +1,15 @@
+{
+  "title": "No remediation",
+  "type": "SECURITY_HOTSPOT",
+  "status": "ready",
+  "tags": [ ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-1116",
+  "scope": "Main",
+  "securityStandards": {
+    "STIG ASD_V5R3": [
+      "V-222542",
+      "V-222603"
+    ]
+  }
+}
