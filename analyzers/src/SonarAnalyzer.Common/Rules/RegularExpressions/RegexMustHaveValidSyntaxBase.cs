@@ -35,7 +35,7 @@ public abstract class RegexMustHaveValidSyntaxBase<TSyntaxKind> : RegexAnalyzerB
     {
         if (regexContext?.ParseError is { } error)
         {
-            c.ReportIssue(Rule, context.PatternNode, error.Message);
+            context.ReportIssue(Rule, regexContext.PatternNode, error.Message);
         }
     }
 }
