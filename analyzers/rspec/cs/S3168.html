@@ -57,7 +57,7 @@ private async Task ThrowExceptionAsync() // Compliant: async method return type 
   throw new InvalidOperationException();
 }
 
-public void Method()
+public async Task Method()
 {
   try
   {
