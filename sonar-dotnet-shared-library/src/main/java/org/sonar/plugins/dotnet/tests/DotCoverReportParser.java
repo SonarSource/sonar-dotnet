@@ -71,7 +71,7 @@ public class DotCoverReportParser implements CoverageParser {
         collectCoverage(fileCanonicalPath, contents);
       } else {
         LOG.debug("Skipping the import of dotCover code coverage for file '{}' because it is not indexed or"
-            + " does not have the supported language. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",
+            + " does not have the supported language. " + VERIFY_SONARPROJECTPROPERTIES_MESSAGE,
           fileCanonicalPath);
       }
     }

@@ -24,4 +24,5 @@ import java.util.function.BiConsumer;
 
 @FunctionalInterface
 public interface CoverageParser extends BiConsumer<File, Coverage> {
+  String VERIFY_SONARPROJECTPROPERTIES_MESSAGE = "Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.";
 }

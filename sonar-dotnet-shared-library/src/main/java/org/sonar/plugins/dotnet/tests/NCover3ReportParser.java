@@ -129,8 +129,7 @@ public class NCover3ReportParser implements CoverageParser {
           coverage.addHits(path, line, vc);
         } else {
           LOG.debug("NCover3 doc '{}', line '{}', vc '{}' will be skipped because it has a path '{}'"
-              + " which is not indexed or does not have the supported language. "
-              + "Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",
+              + " which is not indexed or does not have the supported language. " + VERIFY_SONARPROJECTPROPERTIES_MESSAGE,
             doc, line, vc, path);
         }
       } else if (!isExcludedLine(line)) {

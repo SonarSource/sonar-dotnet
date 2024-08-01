@@ -66,16 +66,22 @@ public class ScannerFileService implements FileService {
         String foundFile = foundFiles.get(0);
         LOG.trace("Found indexed file '{}' for '{}' (normalized to '{}').", foundFile, deterministicBuildPath, pathSuffix);
         return Optional.of(foundFile);
+      } else if (foundFiles.isEmpty()) {
+        LOG.debug("The file '{}' is not indexed or does not have the supported language. Will skip this coverage entry. "
+            + CoverageParser.VERIFY_SONARPROJECTPROPERTIES_MESSAGE,
+          deterministicBuildPath);
+        return Optional.empty();
       } else {
-        LOG.debug("Found {} indexed files for '{}' (normalized to '{}'). Will skip this coverage entry."
-            + " Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",
+        LOG.debug("Found {} indexed files for '{}' (normalized to '{}'). Will skip this coverage entry. "
+            + CoverageParser.VERIFY_SONARPROJECTPROPERTIES_MESSAGE,
           foundFiles.size(), deterministicBuildPath, pathSuffix);
         return Optional.empty();
       }
+    } else {
+      LOG.debug("The file '{}' is not indexed or does not have the supported language and does not have deterministic build path. "
+          + "Will skip this coverage entry. " + CoverageParser.VERIFY_SONARPROJECTPROPERTIES_MESSAGE,
+        deterministicBuildPath);
+      return Optional.empty();
     }
-    LOG.debug("The file '{}' is not indexed or does not have the supported language. Will skip this coverage entry. "
-        + "Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",
-      deterministicBuildPath);
-    return Optional.empty();
   }
 }

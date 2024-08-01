@@ -128,8 +128,8 @@ public class OpenCoverReportParser implements CoverageParser {
           LOG.trace("OpenCover parser: add hits for file {}, line '{}', visitCount '{}'.",
             coveredFile, line, visitCount);
         } else {
-          LOG.debug("Skipping the file {}, line '{}', visitCount '{}' because file is not indexed or does not have the supported language."
-              + " Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",
+          LOG.debug("Skipping the file {}, line '{}', visitCount '{}' because file is not indexed or does not have the supported language. "
+              + VERIFY_SONARPROJECTPROPERTIES_MESSAGE,
             coveredFile, line, visitCount);
         }
       } else {
@@ -165,7 +165,7 @@ public class OpenCoverReportParser implements CoverageParser {
             coveredFile, line, offset, visitCount);
         } else {
           LOG.debug("OpenCover parser: Skipping branch hits for file {}, line '{}', offset '{}', visitCount '{}' because file" +
-              " is not indexed or does not have the supported language.",
+              " is not indexed or does not have the supported language. " + VERIFY_SONARPROJECTPROPERTIES_MESSAGE,
             coveredFile, line, offset, visitCount);
         }
       } else {

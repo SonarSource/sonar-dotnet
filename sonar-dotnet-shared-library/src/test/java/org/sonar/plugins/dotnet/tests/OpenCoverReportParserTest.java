@@ -326,10 +326,10 @@ public class OpenCoverReportParserTest {
         // these are not ordered
         "Skipping the file (ID '1', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', visitCount '1' because file is not indexed or does not have the supported language. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",
         "Skipping the file (ID '2', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', visitCount '1' because file is not indexed or does not have the supported language. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",
-        "OpenCover parser: Skipping branch hits for file (ID '2', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', offset '1', visitCount '1' because file is not indexed or does not have the supported language.",
-        "OpenCover parser: Skipping branch hits for file (ID '2', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', offset '1', visitCount '0' because file is not indexed or does not have the supported language.",
-        "OpenCover parser: Skipping branch hits for file (ID '1', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', offset '1', visitCount '0' because file is not indexed or does not have the supported language.",
-        "OpenCover parser: Skipping branch hits for file (ID '1', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', offset '1', visitCount '1' because file is not indexed or does not have the supported language.");
+        "OpenCover parser: Skipping branch hits for file (ID '2', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', offset '1', visitCount '1' because file is not indexed or does not have the supported language. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",
+        "OpenCover parser: Skipping branch hits for file (ID '2', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', offset '1', visitCount '0' because file is not indexed or does not have the supported language. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",
+        "OpenCover parser: Skipping branch hits for file (ID '1', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', offset '1', visitCount '0' because file is not indexed or does not have the supported language. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.",
+        "OpenCover parser: Skipping branch hits for file (ID '1', path 'BranchCoverage3296\\Code\\ValueProvider.cs', NO INDEXED PATH), line '5', offset '1', visitCount '1' because file is not indexed or does not have the supported language. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
   }
 
   @Test
