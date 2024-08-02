@@ -130,6 +130,7 @@
     }
 }
 
+// https://github.com/SonarSource/sonar-dotnet/issues/9569
 namespace SqlNamedParameters
 {
     public class Program
