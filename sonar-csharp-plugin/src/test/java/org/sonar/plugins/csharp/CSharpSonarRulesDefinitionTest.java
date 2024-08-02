@@ -36,13 +36,13 @@ import org.sonar.api.utils.Version;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CSharpSonarRulesDefinitionTest {
-  private static final String SECURITY_HOTSPOT_RULE_KEY = "S5766";
-  private static final String VULNERABILITY_RULE_KEY = "S4426";
+  private static final String SECURITY_HOTSPOT_RULE_KEY = "S4502";
+  private static final String VULNERABILITY_RULE_KEY = "S2053";
   private static final String NO_TAGS_RULE_KEY = "S1048";
   private static final String SINGLE_PARAM_RULE_KEY = "S1200";
   private static final String MULTI_PARAM_RULE_KEY = "S110";
 
-  private static final SonarRuntime SONAR_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(9, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
+  private static final SonarRuntime SONAR_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(10, 10), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
 
   @Test
   void test() {
@@ -88,12 +88,14 @@ class CSharpSonarRulesDefinitionTest {
     RulesDefinition.Rule rule = repository.rule(SECURITY_HOTSPOT_RULE_KEY);
     assertThat(rule.type()).isEqualTo(RuleType.SECURITY_HOTSPOT);
     assertThat(rule.securityStandards()).containsExactlyInAnyOrder(
-      "cwe:502",
-      "owaspAsvs-4.0:1.5.2",
-      "owaspAsvs-4.0:5.5.1",
-      "owaspAsvs-4.0:5.5.3",
-      "owaspTop10-2021:a8",
-      "owaspTop10:a8");
+      "cwe:352",
+      "owaspTop10:a6",
+      "owaspTop10-2021:a1",
+      "pciDss-3.2:6.5.9",
+      "pciDss-4.0:6.2.4",
+      "owaspAsvs-4.0:13.2.3",
+      "owaspAsvs-4.0:4.2.2",
+      "stig-ASD_V5R3:V-222603");
   }
 
   @Test
@@ -106,11 +108,13 @@ class CSharpSonarRulesDefinitionTest {
     RulesDefinition.Rule rule = repository.rule(VULNERABILITY_RULE_KEY);
     assertThat(rule.type()).isEqualTo(RuleType.VULNERABILITY);
     assertThat(rule.securityStandards()).containsExactlyInAnyOrder(
-      "cwe:326",
-      "owaspAsvs-4.0:6.2.3",
-      "owaspTop10-2021:a2",
+      "cwe:759",
+      "cwe:760",
       "owaspTop10:a3",
-      "owaspTop10:a6");
+      "owaspTop10-2021:a2",
+      "pciDss-3.2:6.5.10",
+      "pciDss-4.0:6.2.4",
+      "stig-ASD_V5R3:V-222542");
   }
 
   @Test

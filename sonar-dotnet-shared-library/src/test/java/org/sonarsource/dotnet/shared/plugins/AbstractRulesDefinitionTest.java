@@ -37,6 +37,7 @@ public class AbstractRulesDefinitionTest {
 
   private static final String PCI_DSS_RULE_KEY = "S1115";
   private static final String OWASP_ASVS_RULE_KEY = "S1116";
+  private static final String STIG_RULE_KEY = "S1117";
   private static final SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 3), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
 
   @Test
@@ -62,6 +63,11 @@ public class AbstractRulesDefinitionTest {
   @Test
   public void test_security_standards_9_9_ASVS_is_available() {
     assertThat(getSecurityStandards(Version.create(9, 9), OWASP_ASVS_RULE_KEY)).containsExactlyInAnyOrder("owaspAsvs-4.0:2.10.4", "owaspAsvs-4.0:3.5.2", "owaspAsvs-4.0:6.4.1");
+  }
+
+  @Test
+  public void test_security_standards_STIG_is_available() {
+    assertThat(getSecurityStandards(Version.create(10, 10), STIG_RULE_KEY)).containsExactlyInAnyOrder("stig-ASD_V5R3:V-222542", "stig-ASD_V5R3:V-222603");
   }
 
   @Test
