@@ -3,12 +3,6 @@
     {
       "Id": "S1854",
       "Message": "Remove this useless assignment to local variable \u0027person\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp11Features/RequiredMembers.cs#L19",
-      "Location": "Line 19 Position 13-40"
-    },
-    {
-      "Id": "S1854",
-      "Message": "Remove this useless assignment to local variable \u0027person\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp11Features/RequiredMembers.cs#L20",
       "Location": "Line 20 Position 9-51"
     },
