@@ -1085,6 +1085,25 @@ namespace Tests.Diagnostics
         public static void MyExtension(this object o) { }
     }
 
+    class ObjectInitializerInTry
+    {
+        public int ID { get; set; }
+
+        void Method()
+        {
+            ObjectInitializerInTry x = null;
+            try
+            {
+                x = new ObjectInitializerInTry { ID = 1 };
+                x.Method();
+            }
+            catch
+            {
+                _ = x.ID;   // Noncompliant
+            }
+        }
+    }
+
     class Foo // https://github.com/SonarSource/sonar-dotnet/issues/538
     {
         private string bar;

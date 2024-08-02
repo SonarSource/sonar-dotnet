@@ -488,6 +488,43 @@ namespace Tests.TestCases
         }
     }
 
+    public class SwitchInTry
+    {
+        private int Method(int i)   // Compliant
+        {
+            try
+            {
+                switch (i)
+                {
+                    case 0:
+                        return 1;
+                    case 1:
+                        return 2;
+                    default:
+                        return 3;
+                }
+            }
+            catch
+            {
+                return 4;
+            }
+        }
+    }
+
+    class NullConditionalOperatorInTry
+    {
+        private void Method(string s)   // Compliant
+        {
+            try
+            {
+                s?.ToString();
+            }
+            catch
+            {
+            }
+        }
+    }
+
     public class ReproGithubIssue2010
     {
         static int PatternMatch(StringSplitOptions splitOptions, int i)
