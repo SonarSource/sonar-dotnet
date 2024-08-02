@@ -78,7 +78,7 @@ public class ScannerFileService implements FileService {
         return Optional.empty();
       }
     } else {
-      LOG.debug("The file '{}' is not indexed or does not have the supported language and does not have deterministic build path. "
+      LOG.debug("The file '{}' does not have a deterministic build path and is either not indexed or does not have a supported language. "
           + "Will skip this coverage entry. " + CoverageParser.VERIFY_SONARPROJECTPROPERTIES_MESSAGE,
         deterministicBuildPath);
       return Optional.empty();
