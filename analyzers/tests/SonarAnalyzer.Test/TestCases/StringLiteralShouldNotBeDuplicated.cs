@@ -129,3 +129,47 @@
             + "Say \"hello\"";                        // Secondary
     }
 }
+
+namespace SqlNamedParameters
+{
+    public class Program
+    {
+        public void ExecuteSqlCommands()
+        {
+            var userCommand = new SqlCommand("SELECT * FROM Users WHERE Name = @Name");
+            userCommand.AddParameter(new SqlParameter("@Name", "John Doe"));                    // Noncompliant - FP: @Name refers to parameters in different SQL tables.
+            var users = userCommand.ExecuteQuery();                                             // Renaming one does not necessitate renaming of parameters with the same name from other tables.
+
+            var companyCommand = new SqlCommand("SELECT * FROM Companies WHERE Name = @Name");
+            companyCommand.AddParameter(new SqlParameter("@Name", "Contosco"));                 // Secondary - FP
+            var companies = companyCommand.ExecuteQuery();
+
+            var productCommand = new SqlCommand("SELECT * FROM Products WHERE Name = @Name");
+            productCommand.AddParameter(new SqlParameter("@Name", "CleanBot 9000"));            // Secondary - FP
+            var products = productCommand.ExecuteQuery();
+
+            var countryCommand = new SqlCommand("SELECT * FROM Countries WHERE Name = @Name");
+            countryCommand.AddParameter(new SqlParameter("@Name", "Norway"));                   // Secondary - FP
+            var countries = countryCommand.ExecuteQuery();
+        }
+    }
+
+    public class SqlCommand
+    {
+        public string CommandText { get; }
+        public SqlCommand(string commandText) => CommandText = commandText;
+        public void AddParameter(SqlParameter parameter) { }
+        public object ExecuteQuery() => null;
+    }
+
+    public class SqlParameter
+    {
+        public string Name { get; }
+        public string Value { get; }
+        public SqlParameter(string name, string value)
+        {
+            Name = name;
+            Value = value;
+        }
+    }
+}
