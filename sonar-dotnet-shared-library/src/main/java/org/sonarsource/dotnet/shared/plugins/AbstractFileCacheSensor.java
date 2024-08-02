@@ -43,7 +43,7 @@ public abstract class AbstractFileCacheSensor implements ProjectSensor {
     this.hashProvider = hashProvider;
   }
 
-  // Some file extensions are owned by other analyzers
+  // Some file extensions are owned by other analyzers (like .cshtml) so we need this workaround to support caching for those files.
   protected String[] additionalSupportedExtensions() {
     return new String[0];
   }
@@ -80,6 +80,7 @@ public abstract class AbstractFileCacheSensor implements ProjectSensor {
     var predicates = fileSystem.predicates();
     var filePredicates = Arrays.stream(additionalSupportedExtensions()).map(extension -> fileSystem.predicates().hasExtension(extension)).collect(Collectors.toList());
     filePredicates.add(predicates.hasLanguage(language.getKey()));
+
     fileSystem.inputFiles(predicates.or(filePredicates)).forEach(inputFile -> {
       // Normalize to unix style separators. The scanner should be able to read the files on both windows and unix.
       var uri = inputFile.uri();
