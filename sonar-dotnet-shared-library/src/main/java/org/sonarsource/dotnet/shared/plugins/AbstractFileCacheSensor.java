@@ -77,11 +77,11 @@ public abstract class AbstractFileCacheSensor implements ProjectSensor {
 
     LOG.debug("Incremental PR analysis: Preparing to upload file hashes.");
     var fileSystem = context.fileSystem();
-    var predicates = fileSystem.predicates();
-    var filePredicates = Arrays.stream(additionalSupportedExtensions()).map(extension -> fileSystem.predicates().hasExtension(extension)).collect(Collectors.toList());
-    filePredicates.add(predicates.hasLanguage(language.getKey()));
+    var predicateFactory = fileSystem.predicates();
+    var filePredicates = Arrays.stream(additionalSupportedExtensions()).map(predicateFactory::hasExtension).collect(Collectors.toList());
+    filePredicates.add(predicateFactory.hasLanguage(language.getKey()));
 
-    fileSystem.inputFiles(predicates.or(filePredicates)).forEach(inputFile -> {
+    fileSystem.inputFiles(predicateFactory.or(filePredicates)).forEach(inputFile -> {
       // Normalize to unix style separators. The scanner should be able to read the files on both windows and unix.
       var uri = inputFile.uri();
       var key = basePath.get().relativize(uri).getPath().replace('\\','/');
