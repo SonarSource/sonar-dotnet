@@ -20,6 +20,8 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.UnaryOperator;
@@ -35,7 +37,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
-import static org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter.activeRoslynRulesByPartialRepoKey;
 
 /**
  * This class is the main sensor for C# and VB.NET which is going to process all Roslyn reports and protobuf contents and then push them to SonarQube.
@@ -114,6 +115,28 @@ public class DotNetSensor implements ProjectSensor {
         .toList());
       roslynDataImporter.importRoslynReports(roslynReports, context, activeRoslynRulesByPartialRepoKey, toRealPath);
     }
+  }
+
+  private static Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey(DotNetPluginMetadata pluginMetadata, Iterable<RuleKey> activeRules) {
+    String ROSLYN_REPOSITORY_PREFIX = "roslyn.";
+    Map<String, List<RuleKey>> result = new LinkedHashMap<>();
+
+    for (RuleKey activeRule : activeRules) {
+      if (activeRule.repository().startsWith(ROSLYN_REPOSITORY_PREFIX)) {
+        String pluginKey = activeRule.repository().substring(ROSLYN_REPOSITORY_PREFIX.length());
+        result.putIfAbsent(pluginKey, new ArrayList<>());
+        result.get(pluginKey).add(activeRule);
+      } else if (pluginMetadata.repositoryKey().equals(activeRule.repository())) {
+        result.putIfAbsent(sonarAnalyzerPartialRepoKey(pluginMetadata), new ArrayList<>());
+        result.get(sonarAnalyzerPartialRepoKey(pluginMetadata)).add(activeRule);
+      }
+    }
+
+    return result;
+  }
+
+  private static String sonarAnalyzerPartialRepoKey(DotNetPluginMetadata pluginMetadata) {
+    return "sonaranalyzer-" + pluginMetadata.languageKey();
   }
 
   /**

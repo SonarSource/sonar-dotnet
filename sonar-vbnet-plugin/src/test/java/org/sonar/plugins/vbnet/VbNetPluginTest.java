@@ -40,8 +40,6 @@ import org.sonarsource.dotnet.shared.plugins.PropertiesSensor;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
 import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
-import org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter;
-import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.UnitTestResultsProvider;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
@@ -71,8 +69,6 @@ class VbNetPluginTest {
       ProtobufDataImporter.class,
       ReportPathCollector.class,
       RoslynDataImporter.class,
-      RoslynProfileExporter.class,
-      SonarLintProfileExporter.class,
       VbNet.class,
       VbNetFileCacheSensor.class,
       VbNetGlobalProtobufFileProcessor.class,
@@ -90,7 +86,6 @@ class VbNetPluginTest {
         + 1 // VbNetSonarWayProfile
         + new CodeCoverageProvider(VbNetPlugin.METADATA).extensions().size()
         + new UnitTestResultsProvider(VbNetPlugin.METADATA).extensions().size()
-        + RoslynProfileExporter.sonarLintRepositoryProperties(VbNetPlugin.METADATA).size()
         + new VbNetPropertyDefinitions().create().size());
   }
 

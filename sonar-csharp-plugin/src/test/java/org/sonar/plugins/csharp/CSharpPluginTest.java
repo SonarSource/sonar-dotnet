@@ -39,8 +39,6 @@ import org.sonarsource.dotnet.shared.plugins.PropertiesSensor;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
 import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
-import org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter;
-import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.UnitTestResultsProvider;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
@@ -78,8 +76,6 @@ class CSharpPluginTest {
       ProtobufDataImporter.class,
       ReportPathCollector.class,
       RoslynDataImporter.class,
-      RoslynProfileExporter.class,
-      SonarLintProfileExporter.class,
       WrongEncodingFileFilter.class
     };
 
@@ -90,7 +86,6 @@ class CSharpPluginTest {
         + 1 // CSharpSonarWayProfile
         + new CodeCoverageProvider(CSharpPlugin.METADATA).extensions().size()
         + new UnitTestResultsProvider(CSharpPlugin.METADATA).extensions().size()
-        + RoslynProfileExporter.sonarLintRepositoryProperties(CSharpPlugin.METADATA).size()
         + new CSharpPropertyDefinitions().create().size());
   }
 
