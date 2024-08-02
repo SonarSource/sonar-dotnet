@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Linq;
 using System.Timers;
+using System.Collections.Specialized;
 
 namespace Tests.Diagnostics
 {
@@ -4307,6 +4308,23 @@ class Repro_9204_8885_AssignmentOfCaptures
             // FP@+1
             if (collectionOfIds.Count > 0) // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
             { }
+        }
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9580
+public class Repro_9580
+{
+    public void IndexerReturnsNullInsteadOfThrowingException(NameValueCollection collection)
+    {
+        var element = collection["key"];
+        if (element != null)
+        {
+            Console.WriteLine(element.ToString());
+        }
+        if (collection.Count == 0)          // Noncompliant - FP: the indexer with string argument returns null if the key is not found rather than throwing an exception,
+        {                                   // so at this point we can't know for sure that the collection is not empty.
+            Console.WriteLine("Empty!");    // Secondary - FP
         }
     }
 }
