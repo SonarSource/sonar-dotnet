@@ -201,7 +201,8 @@ public class DotCoverReportParserTest {
     assertThat(logTester.logs(Level.INFO).get(0)).startsWith("Parsing the dotCover report ");
     assertThat(logTester.logs(Level.DEBUG).get(0))
       .startsWith("Skipping the import of dotCover code coverage for file '")
-      .endsWith("' because it is not indexed or does not have the supported language.");
+      .endsWith("' because it is not indexed or does not have the supported language. "
+        + "Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
   }
 
   @Test

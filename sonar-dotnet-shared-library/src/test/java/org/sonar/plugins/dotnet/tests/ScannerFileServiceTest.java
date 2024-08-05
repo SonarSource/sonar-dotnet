@@ -159,7 +159,8 @@ public class ScannerFileServiceTest {
 
     // assert
     assertThat(result).isEmpty();
-    assertThat(logTester.logs(Level.DEBUG)).containsExactly("Found 0 indexed files for '/_/some/path/file.cs' (normalized to 'some/path/file.cs'). Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly("The file '/_/some/path/file.cs' is not indexed or does not have the "
+      + "supported language. Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
   }
 
   @Test
@@ -199,8 +200,9 @@ public class ScannerFileServiceTest {
     verify(fs, never()).predicates();
     assertThat(logTester.logs(Level.TRACE)).isEmpty();
     assertThat(logTester.logs(Level.DEBUG)).hasSize(1);
-    assertThat(logTester.logs(Level.DEBUG).get(0)).isEqualTo("Did not find deterministic source path in 'C:\\_\\some\\path\\file.cs'." +
-      " Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
+    assertThat(logTester.logs(Level.DEBUG).get(0)).isEqualTo("The file 'C:\\_\\some\\path\\file.cs' "
+      + "does not have a deterministic build path and is either not indexed or does not have a supported language. "
+      + "Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
   }
 
   @Test
