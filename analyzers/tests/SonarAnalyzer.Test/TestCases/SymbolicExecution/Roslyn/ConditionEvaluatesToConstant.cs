@@ -4321,10 +4321,67 @@ public class Repro_9580
         if (element != null)
         {
             Console.WriteLine(element.ToString());
+            if (collection.Count == 0)          // Noncompliant - the indexer returned a non-null result, so the collection is not empty
+            {
+                Console.WriteLine("Empty!");    // Secondary
+            }
         }
-        if (collection.Count == 0)          // Noncompliant - FP: the indexer with string argument returns null if the key is not found rather than throwing an exception,
+        if (collection.Count == 0)          // Noncompliant - FP: the indexer returns null if the key is not found rather than throwing an exception,
         {                                   // so at this point we can't know for sure that the collection is not empty.
             Console.WriteLine("Empty!");    // Secondary - FP
+        }
+    }
+
+    public void IndexerReturnsNullInsteadOfThrowingException(PersonCollection collection)
+    {
+        var person = collection[42];
+        if (person != null)
+        {
+            person.RemoveFromGroup();
+            collection.Refresh();
+
+            if (collection.Count == 0)          // Noncompliant - FP: the collection has custom removal logic that doesn't adhere to the ICollection<T> or other standard interfaces,
+            {                                   // so at this point it might have removed the only item from the collection, therefore it might be empty.
+                Console.WriteLine("Empty!");    // Secondary - FP
+            }
+        }
+    }
+
+    public class PersonCollection
+    {
+        internal readonly List<Person> persons;
+
+        public PersonCollection(List<Person> persons)
+        {
+            this.persons = persons;
+        }
+
+        public Person this[int index] => persons[index];
+
+        public int Count => persons.Count;
+
+        public void Add(Person person)
+        {
+            person.IsPartOfGroup = true;
+            persons.Add(person);
+        }
+
+        public void Refresh()
+        {
+            persons.RemoveAll(p => !p.IsPartOfGroup);
+        }
+    }
+
+    public class Person
+    {
+        internal bool IsPartOfGroup;
+
+        public string Name { get; set; }
+        public int Age { get; set; }
+
+        public void RemoveFromGroup()
+        {
+            IsPartOfGroup = false;
         }
     }
 }
