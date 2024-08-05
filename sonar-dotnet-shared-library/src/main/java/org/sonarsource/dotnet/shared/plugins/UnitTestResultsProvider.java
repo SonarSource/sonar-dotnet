@@ -67,7 +67,15 @@ public class UnitTestResultsProvider {
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT)
         .multiValues(true)
-        .build());
+        .build(),
+      PropertyDefinition.builder(unitTestConfiguration.xunitTestResultsFilePropertyKey())
+      .name("xUnit Test Reports Paths")
+      .description("Example: \"TestResult.xml\", \"TestResult1.xml,TestResult2.xml\" or \"C:/TestResult.xml\"")
+      .category(category)
+      .subCategory(SUBCATEGORY)
+      .onlyOnQualifiers(Qualifiers.PROJECT)
+      .multiValues(true)
+      .build());
   }
 
   public class DotNetUnitTestResultsAggregator extends UnitTestResultsAggregator {
