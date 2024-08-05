@@ -60,6 +60,8 @@ class CSharpFileCacheSensorTest {
     context.setSettings(settings);
     context.setNextCache(mock(WriteCache.class));
     AddFile(context, basePath.toString(), "CSharp/Foo.cs", CSharpPlugin.LANGUAGE_KEY);
+    AddFile(context, basePath.toString(), "CSharp/Foo.cshtml", CSharpPlugin.LANGUAGE_KEY);
+    AddFile(context, basePath.toString(), "CSharp/Foo.razor", CSharpPlugin.LANGUAGE_KEY);
     AddFile(context, basePath.toString(), "VB/Bar.vb", "other-language-key");
     var sut = new CSharpFileCacheSensor(new CSharp(settings.asConfig()), hashProvider);
 
@@ -68,7 +70,9 @@ class CSharpFileCacheSensorTest {
     assertThat(logTester.logs(Level.WARN)).isEmpty();
     assertThat(logTester.logs(Level.DEBUG)).containsExactly(
       "Incremental PR analysis: Preparing to upload file hashes.",
-      "Incremental PR analysis: Adding hash for 'CSharp/Foo.cs' to the cache."
+      "Incremental PR analysis: Adding hash for 'CSharp/Foo.cs' to the cache.",
+      "Incremental PR analysis: Adding hash for 'CSharp/Foo.cshtml' to the cache.",
+      "Incremental PR analysis: Adding hash for 'CSharp/Foo.razor' to the cache."
     );
   }
 
