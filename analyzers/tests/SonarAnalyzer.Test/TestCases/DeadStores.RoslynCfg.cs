@@ -914,6 +914,59 @@ namespace Tests.Diagnostics
         }
     }
 
+    class NullConditionalOperatorInTry
+    {
+        private void Method(bool condition)
+        {
+            var i = 5;          // Noncompliant    FP
+            M(i += 1, i += 1);  // the first one is an FP, the second a TP
+        //    ^^^^^^               Noncompliant
+        //            ^^^^^^       Noncompliant@-1
+        }
+
+        void M(int i, int j)
+        {
+            Console.WriteLine(i);
+            Console.WriteLine(j);
+        }
+    }
+
+    class ObjectInitializer
+    {
+        public int ID { get; set; }
+
+        void Method()
+        {
+            var x = new ObjectInitializer();     // FN
+            x = new ObjectInitializer { ID = 1 };
+            x.Method();
+        }
+    }
+
+    class TernaryInTry
+    {
+        void Method(out string param, string param2)
+        {
+            var s = "";     // FN
+            s = param2 switch
+            {
+                "a" => "a",
+                _ => "b"
+            };
+            param = s;
+        }
+    }
+
+    class OutParameter
+    {
+        void Method(out string param)
+        {
+            var s = "";     // FN
+            Method(out s);
+            param = s;
+        }
+    }
+
     public class ReproGithubIssue697
     {
         private bool DoStuff() => true;
