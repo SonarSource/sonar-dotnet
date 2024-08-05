@@ -562,6 +562,7 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
+          "SonarAnalyzer.ShimLayer": "[1.0.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
@@ -570,6 +571,14 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
           "SonarAnalyzer": "[1.0.0, )",
+          "System.Collections.Immutable": "[1.1.37, )"
+        }
+      },
+      "sonaranalyzer.shimlayer": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
+          "Microsoft.Composition": "[1.0.27, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
