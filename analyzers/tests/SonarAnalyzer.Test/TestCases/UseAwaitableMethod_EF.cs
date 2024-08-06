@@ -79,3 +79,32 @@ public class EntityFramework
         databaseFacade.UseTransaction(null);                                                         // Noncompliant
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9590
+public class Repro_9590
+{
+    public async Task DoSomeWork(IDbContextFactory<AppDbContext> factory, MyDbContextFactory factory2, NotADbContextFactory factory3)
+    {
+        using AppDbContext dbContext = factory.CreateDbContext(); // Compliant - CreateDbContextAsync is excluded
+        using AppDbContext dbContext2 = factory2.CreateDbContext(); // Compliant - CreateDbContextAsync is excluded
+        using AppDbContext dbContext3 = factory3.CreateDbContext(); // Noncompliant
+    }
+
+    public class MyDbContextFactory : IDbContextFactory<AppDbContext>
+    {
+        public AppDbContext CreateDbContext() => throw new NotImplementedException();
+
+        public Task<AppDbContext> CreateDbContextAsync() => throw new NotImplementedException();
+    }
+
+    public class NotADbContextFactory
+    {
+        public AppDbContext CreateDbContext() => throw new NotImplementedException();
+
+        public Task<AppDbContext> CreateDbContextAsync() => throw new NotImplementedException();
+    }
+
+    public class AppDbContext : DbContext
+    {
+    }
+}

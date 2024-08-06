@@ -95,6 +95,8 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         {
             exclusions.Add(x => x.IsAny(KnownType.Microsoft_EntityFrameworkCore_DbSet_TEntity, ExcludedMethodNames)); // https://github.com/SonarSource/sonar-dotnet/issues/9269
             exclusions.Add(x => x.IsAny(KnownType.Microsoft_EntityFrameworkCore_DbContext, ExcludedMethodNames));     // https://github.com/SonarSource/sonar-dotnet/issues/9269
+            // https://github.com/SonarSource/sonar-dotnet/issues/9590
+            exclusions.Add(x => x.IsImplementingInterfaceMember(KnownType.Microsoft_EntityFrameworkCore_IDbContextFactory_TContext, "CreateDbContext"));
         }
         if (compilation.GetTypeByMetadataName(KnownType.FluentValidation_IValidator) is not null)
         {
@@ -109,25 +111,25 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
     }
 
     private static ImmutableArray<ISymbol> FindAwaitableAlternatives(WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer, ImmutableArray<Func<IMethodSymbol, bool>> exclusions,
-        InvocationExpressionSyntax invocationExpression, SemanticModel semanticModel, ISymbol containingSymbol, CancellationToken cancel)
+        InvocationExpressionSyntax invocationExpression, SemanticModel model, ISymbol containingSymbol, CancellationToken cancel)
     {
         var awaitableRoot = GetAwaitableRootOfInvocation(invocationExpression);
         if (awaitableRoot is not { Parent: AwaitExpressionSyntax } // Invocation result is already awaited.
             && invocationExpression.EnclosingScope() is { } scope
             && IsAsyncCodeBlock(scope)
-            && semanticModel.GetSymbolInfo(invocationExpression, cancel).Symbol is IMethodSymbol { MethodKind: not MethodKind.DelegateInvoke } methodSymbol
+            && model.GetSymbolInfo(invocationExpression, cancel).Symbol is IMethodSymbol { MethodKind: not MethodKind.DelegateInvoke } methodSymbol
             && !(methodSymbol.IsAwaitableNonDynamic()  // The invoked method returns something awaitable (but it isn't awaited).
                 || methodSymbol.ContainingType.DerivesFromAny(ExcludedTypes))
             && !exclusions.Any(x => x(methodSymbol)))
         {
             // Perf: Before doing (expensive) speculative re-binding in SpeculativeBindCandidates, we check if there is an "..Async()" alternative in scope.
-            var invokedType = invocationExpression.Expression.GetLeftOfDot() is { } expression && semanticModel.GetTypeInfo(expression) is { Type: { } type }
+            var invokedType = invocationExpression.Expression.GetLeftOfDot() is { } expression && model.GetTypeInfo(expression) is { Type: { } type }
                 ? type // A dotted expression: Lookup the type, left of the dot (this may be different from methodSymbol.ContainingType)
                 : containingSymbol.ContainingType; // If not dotted, than the scope is the current type. Local function support is missing here.
             var members = GetMethodSymbolsInScope($"{methodSymbol.Name}Async", wellKnownExtensionMethodContainer, invokedType, methodSymbol.ContainingType);
             var awaitableCandidates = members.Where(x => x.IsAwaitableNonDynamic());
             // Get the method alternatives and exclude candidates that would resolve to the containing method (endless loop)
-            var awaitableAlternatives = SpeculativeBindCandidates(semanticModel, awaitableRoot, invocationExpression, awaitableCandidates)
+            var awaitableAlternatives = SpeculativeBindCandidates(model, awaitableRoot, invocationExpression, awaitableCandidates)
                 .Where(x => !containingSymbol.Equals(x))
                 .ToImmutableArray();
             return awaitableAlternatives;
@@ -148,15 +150,15 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
             ? extensionMethodContainer
             : [];
 
-    private static IEnumerable<ISymbol> SpeculativeBindCandidates(SemanticModel semanticModel, SyntaxNode awaitableRoot,
+    private static IEnumerable<ISymbol> SpeculativeBindCandidates(SemanticModel model, SyntaxNode awaitableRoot,
         InvocationExpressionSyntax invocationExpression, IEnumerable<IMethodSymbol> awaitableCandidates) =>
         awaitableCandidates
             .Select(x => x.Name)
             .Distinct()
-            .Select(x => SpeculativeBindCandidate(semanticModel, x, awaitableRoot, invocationExpression))
+            .Select(x => SpeculativeBindCandidate(model, x, awaitableRoot, invocationExpression))
             .WhereNotNull();
 
-    private static IMethodSymbol SpeculativeBindCandidate(SemanticModel semanticModel, string candidateName, SyntaxNode awaitableRoot,
+    private static IMethodSymbol SpeculativeBindCandidate(SemanticModel model, string candidateName, SyntaxNode awaitableRoot,
         InvocationExpressionSyntax invocationExpression)
     {
         var invocationIdentifierName = invocationExpression.GetMethodCallIdentifier()?.Parent;
@@ -165,7 +167,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
             return null;
         }
         var invocationReplaced = ReplaceInvocation(awaitableRoot, invocationExpression, invocationIdentifierName, candidateName);
-        var speculativeSymbolInfo = semanticModel.GetSpeculativeSymbolInfo(invocationReplaced.SpanStart, invocationReplaced, SpeculativeBindingOption.BindAsExpression);
+        var speculativeSymbolInfo = model.GetSpeculativeSymbolInfo(invocationReplaced.SpanStart, invocationReplaced, SpeculativeBindingOption.BindAsExpression);
         var speculativeSymbol = speculativeSymbolInfo.Symbol as IMethodSymbol;
         return speculativeSymbol;
     }
