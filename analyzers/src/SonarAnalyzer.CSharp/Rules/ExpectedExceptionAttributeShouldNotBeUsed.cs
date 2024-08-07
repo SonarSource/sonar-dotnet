@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Common.Walkers;
+
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -25,11 +27,42 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override bool HasMultiLineBody(SyntaxNode syntax)
+        protected override bool HasMultiLineBody(SyntaxNode node)
         {
-            var declaration = (MethodDeclarationSyntax)syntax;
+            var declaration = (MethodDeclarationSyntax)node;
             return declaration.ExpressionBody is null
                 && declaration.Body?.Statements.Count > 1;
+        }
+
+        protected override bool AssertInCatchFinallyBlock(SyntaxNode node)
+        {
+            var walker = new CatchFinallyAssertion();
+            foreach (var x in node.DescendantNodes(_ => true).Where(x => x.IsAnyKind(SyntaxKind.CatchClause, SyntaxKind.FinallyClause)))
+            {
+                walker.SafeVisit(x);
+            }
+            return walker.HasAssertion;
+        }
+
+        private sealed class CatchFinallyAssertion : SafeCSharpSyntaxWalker
+        {
+            public bool HasAssertion { get; set; }
+
+            public override void VisitInvocationExpression(InvocationExpressionSyntax node)
+            {
+                HasAssertion = node.Expression
+                    .ToString()
+                    .SplitCamelCaseToWords()
+                    .Intersect(UnitTestHelper.KnownAssertionMethodParts)
+                    .Any();
+
+                if (HasAssertion)
+                {
+                    return;
+                }
+
+                base.VisitInvocationExpression(node);
+            }
         }
     }
 }

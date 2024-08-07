@@ -18,15 +18,44 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.VisualBasic
-{
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class ExpectedExceptionAttributeShouldNotBeUsed : ExpectedExceptionAttributeShouldNotBeUsedBase<SyntaxKind>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+namespace SonarAnalyzer.Rules.VisualBasic;
 
-        protected override bool HasMultiLineBody(SyntaxNode syntax) =>
-            syntax.Parent is MethodBlockSyntax methodBlockSyntax
-            && methodBlockSyntax.Statements.Count > 1;
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class ExpectedExceptionAttributeShouldNotBeUsed : ExpectedExceptionAttributeShouldNotBeUsedBase<SyntaxKind>
+{
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
+    protected override bool HasMultiLineBody(SyntaxNode node) =>
+        node.Parent is MethodBlockSyntax { Statements.Count: > 1 };
+
+    protected override bool AssertInCatchFinallyBlock(SyntaxNode node)
+    {
+        var walker = new CatchFinallyAssertion();
+        foreach (var x in node.Parent.DescendantNodes(_ => true).Where(x => x.IsAnyKind(SyntaxKind.CatchBlock, SyntaxKind.FinallyBlock)))
+        {
+            walker.SafeVisit(x);
+        }
+        return walker.HasAssertion;
+    }
+
+    private sealed class CatchFinallyAssertion : SafeVisualBasicSyntaxWalker
+    {
+        public bool HasAssertion { get; set; }
+
+        public override void VisitInvocationExpression(InvocationExpressionSyntax node)
+        {
+            HasAssertion = node.Expression
+                .ToString()
+                .SplitCamelCaseToWords()
+                .Intersect(UnitTestHelper.KnownAssertionMethodParts)
+                .Any();
+
+            if (HasAssertion)
+            {
+                return;
+            }
+
+            base.VisitInvocationExpression(node);
+        }
     }
 }

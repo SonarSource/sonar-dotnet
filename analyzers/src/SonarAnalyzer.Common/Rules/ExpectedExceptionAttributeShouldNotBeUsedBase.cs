@@ -25,7 +25,8 @@ namespace SonarAnalyzer.Rules
     {
         internal const string DiagnosticId = "S3431";
 
-        protected abstract bool HasMultiLineBody(SyntaxNode syntax);
+        protected abstract bool HasMultiLineBody(SyntaxNode node);
+        protected abstract bool AssertInCatchFinallyBlock(SyntaxNode node);
 
         protected override string MessageFormat => "Replace the 'ExpectedException' attribute with a throw assertion or a try/catch block.";
 
@@ -35,6 +36,7 @@ namespace SonarAnalyzer.Rules
             context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
             {
                 if (HasMultiLineBody(c.Node)
+                    && !AssertInCatchFinallyBlock(c.Node)
                     && c.SemanticModel.GetDeclaredSymbol(c.Node) is { } methodSymbol
                     && methodSymbol.GetAttributes(UnitTestHelper.KnownExpectedExceptionAttributes).FirstOrDefault() is { } attribute)
                 {
