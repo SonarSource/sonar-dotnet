@@ -136,6 +136,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_EntityFrameworkCore_DbContextOptionsBuilder = new("Microsoft.EntityFrameworkCore.DbContextOptionsBuilder");
         public static readonly KnownType Microsoft_EntityFrameworkCore_DbSet_TEntity = new("Microsoft.EntityFrameworkCore.DbSet", "TEntity");
         public static readonly KnownType Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions = new("Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions");
+        public static readonly KnownType Microsoft_EntityFrameworkCore_IDbContextFactory_TContext = new("Microsoft.EntityFrameworkCore.IDbContextFactory", "TContext");
         public static readonly KnownType Microsoft_EntityFrameworkCore_Migrations_Migration = new("Microsoft.EntityFrameworkCore.Migrations.Migration");
         public static readonly KnownType Microsoft_EntityFrameworkCore_MySQLDbContextOptionsExtensions = new("Microsoft.EntityFrameworkCore.MySQLDbContextOptionsExtensions");
         public static readonly KnownType Microsoft_EntityFrameworkCore_NpgsqlDbContextOptionsExtensions = new("Microsoft.EntityFrameworkCore.NpgsqlDbContextOptionsExtensions");
