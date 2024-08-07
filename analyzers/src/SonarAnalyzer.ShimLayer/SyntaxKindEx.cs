@@ -5,13 +5,10 @@ namespace StyleCop.Analyzers.Lightup
 {
     using Microsoft.CodeAnalysis.CSharp;
 
-    public static class SyntaxKindEx
+    public static partial class SyntaxKindEx
     {
         public const SyntaxKind DotDotToken = (SyntaxKind)8222;
         public const SyntaxKind QuestionQuestionEqualsToken = (SyntaxKind)8284;
-        public const SyntaxKind GreaterThanGreaterThanGreaterThanToken = (SyntaxKind)8286; // Sonar
-        public const SyntaxKind GreaterThanGreaterThanGreaterThanEqualsToken = (SyntaxKind)8287; // Sonar
-        public const SyntaxKind NameOfKeyword = (SyntaxKind)8434; // Sonar
         public const SyntaxKind OrKeyword = (SyntaxKind)8438;
         public const SyntaxKind AndKeyword = (SyntaxKind)8439;
         public const SyntaxKind NotKeyword = (SyntaxKind)8440;
@@ -26,12 +23,6 @@ namespace StyleCop.Analyzers.Lightup
         public const SyntaxKind AnnotationsKeyword = (SyntaxKind)8489;
         public const SyntaxKind VarKeyword = (SyntaxKind)8490;
         public const SyntaxKind UnderscoreToken = (SyntaxKind)8491;
-        public const SyntaxKind SingleLineRawStringLiteralToken = (SyntaxKind)8518; // Sonar
-        public const SyntaxKind MultiLineRawStringLiteralToken = (SyntaxKind)8519; // Sonar
-        public const SyntaxKind Utf8StringLiteralToken = (SyntaxKind)8520; // Sonar
-        public const SyntaxKind Utf8SingleLineRawStringLiteralToken = (SyntaxKind)8521; // Sonar
-        public const SyntaxKind Utf8MultiLineRawStringLiteralToken = (SyntaxKind)8522; // Sonar
-        public const SyntaxKind PragmaChecksumDirectiveTrivia = (SyntaxKind)8560; // Sonar
         public const SyntaxKind ConflictMarkerTrivia = (SyntaxKind)8564;
         public const SyntaxKind IsPatternExpression = (SyntaxKind)8657;
         public const SyntaxKind RangeExpression = (SyntaxKind)8658;
@@ -41,11 +32,8 @@ namespace StyleCop.Analyzers.Lightup
         public const SyntaxKind UnsignedRightShiftAssignmentExpression = (SyntaxKind)8726;
         public const SyntaxKind IndexExpression = (SyntaxKind)8741;
         public const SyntaxKind DefaultLiteralExpression = (SyntaxKind)8755;
-        public const SyntaxKind Utf8StringLiteralExpression = (SyntaxKind)8756; // Sonar
         public const SyntaxKind LocalFunctionStatement = (SyntaxKind)8830;
-        public const SyntaxKind GlobalStatement = (SyntaxKind)8841; // Sonar
         public const SyntaxKind FileScopedNamespaceDeclaration = (SyntaxKind)8845;
-        public const SyntaxKind ArrowExpressionClause = (SyntaxKind)8917; // Sonar
         public const SyntaxKind TupleType = (SyntaxKind)8924;
         public const SyntaxKind TupleElement = (SyntaxKind)8925;
         public const SyntaxKind TupleExpression = (SyntaxKind)8926;
@@ -66,11 +54,6 @@ namespace StyleCop.Analyzers.Lightup
         public const SyntaxKind SwitchExpressionArm = (SyntaxKind)9026;
         public const SyntaxKind VarPattern = (SyntaxKind)9027;
         public const SyntaxKind ParenthesizedPattern = (SyntaxKind)9028;
-        public const SyntaxKind RelationalPattern = (SyntaxKind)9029; // Sonar
-        public const SyntaxKind TypePattern = (SyntaxKind)9030; // Sonar
-        public const SyntaxKind OrPattern = (SyntaxKind)9031; // Sonar
-        public const SyntaxKind AndPattern = (SyntaxKind)9032; // Sonar
-        public const SyntaxKind NotPattern = (SyntaxKind)9033; // Sonar
         public const SyntaxKind SlicePattern = (SyntaxKind)9034;
         public const SyntaxKind ListPattern = (SyntaxKind)9035;
         public const SyntaxKind DeclarationExpression = (SyntaxKind)9040;
@@ -82,22 +65,12 @@ namespace StyleCop.Analyzers.Lightup
         public const SyntaxKind NullableDirectiveTrivia = (SyntaxKind)9055;
         public const SyntaxKind FunctionPointerType = (SyntaxKind)9056;
         public const SyntaxKind FunctionPointerParameter = (SyntaxKind)9057;
-        public const SyntaxKind FunctionPointerParameterList = (SyntaxKind)9058; // Sonar
-        public const SyntaxKind FunctionPointerCallingConvention = (SyntaxKind)9059; // Sonar
         public const SyntaxKind InitAccessorDeclaration = (SyntaxKind)9060;
         public const SyntaxKind WithExpression = (SyntaxKind)9061;
         public const SyntaxKind WithInitializerExpression = (SyntaxKind)9062;
-        public const SyntaxKind RecordDeclaration = (SyntaxKind)9063; // Sonar
         public const SyntaxKind PrimaryConstructorBaseType = (SyntaxKind)9065;
         public const SyntaxKind FunctionPointerUnmanagedCallingConventionList = (SyntaxKind)9066;
-        public const SyntaxKind FunctionPointerUnmanagedCallingConvention = (SyntaxKind)9067; // Sonar
         public const SyntaxKind RecordStructDeclaration = (SyntaxKind)9068;
         public const SyntaxKind CollectionExpression = (SyntaxKind)9076;
-        public const SyntaxKind ExpressionColon = (SyntaxKind)9069; // Sonar
-        public const SyntaxKind InterpolatedSingleLineRawStringStartToken = (SyntaxKind)9072; // Sonar
-        public const SyntaxKind InterpolatedMultiLineRawStringStartToken = (SyntaxKind)9073; // Sonar
-        public const SyntaxKind InterpolatedRawStringEndToken = (SyntaxKind)9074; // Sonar
-        public const SyntaxKind ScopedType = (SyntaxKind)9075; // Sonar
-        public const SyntaxKind SpreadElement = (SyntaxKind)9078; // Sonar
     }
 }
