@@ -66,7 +66,7 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
 
     private static IEnumerable<SyntaxNode> GetPropertyDescendants(PropertyDeclarationSyntax propertyDeclaration) =>
         propertyDeclaration.ExpressionBody is null
-            ? propertyDeclaration.AccessorList.Accessors.SelectMany(a => a.DescendantNodes())
+            ? propertyDeclaration.AccessorList.Accessors.SelectMany(x => x.DescendantNodes())
             : propertyDeclaration.ExpressionBody.DescendantNodes();
 
     private static IEnumerable<SyntaxNode> GetMethodDescendants(MethodDeclarationSyntax methodDeclaration) =>
@@ -132,21 +132,21 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
 
     private static bool IsNewMethod(ISymbol symbol) =>
         symbol.DeclaringSyntaxReferences
-              .Select(r => r.GetSyntax())
+              .Select(x => x.GetSyntax())
               .OfType<MethodDeclarationSyntax>()
-              .Any(s => s.Modifiers.Any(SyntaxKind.NewKeyword));
+              .Any(x => x.Modifiers.Any(SyntaxKind.NewKeyword));
 
     private static bool IsNewProperty(ISymbol symbol) =>
         symbol.DeclaringSyntaxReferences
-              .Select(r => r.GetSyntax())
+              .Select(x => x.GetSyntax())
               .OfType<PropertyDeclarationSyntax>()
-              .Any(s => s.Modifiers.Any(SyntaxKind.NewKeyword));
+              .Any(x => x.Modifiers.Any(SyntaxKind.NewKeyword));
 
     private static bool IsAutoProperty(ISymbol symbol) =>
         symbol.DeclaringSyntaxReferences
-              .Select(r => r.GetSyntax())
+              .Select(x => x.GetSyntax())
               .OfType<PropertyDeclarationSyntax>()
-              .Any(s => s.AccessorList is not null && s.AccessorList.Accessors.All(a => a.Body is null && a.ExpressionBody() is null));
+              .Any(x => x.AccessorList is not null && x.AccessorList.Accessors.All(a => a.Body is null && a.ExpressionBody() is null));
 
     private static bool IsPublicControllerMethod(ISymbol symbol) =>
         symbol is IMethodSymbol methodSymbol
@@ -162,8 +162,8 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
     private static bool HasInstanceReferences(IEnumerable<SyntaxNode> nodes, SemanticModel model) =>
         nodes.OfType<ExpressionSyntax>()
              .Where(IsLeftmostIdentifierName)
-             .Where(n => !n.IsInNameOfArgument(model))
-             .Any(n => IsInstanceMember(n, model));
+             .Where(x => !x.IsInNameOfArgument(model))
+             .Any(x => IsInstanceMember(x, model));
 
     private static bool IsLeftmostIdentifierName(ExpressionSyntax node)
     {
