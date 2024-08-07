@@ -51,6 +51,9 @@ $project.Object.AnalyzerReferences.Add($analyzerFilePath)
 $analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.CFG.dll"
 $project.Object.AnalyzerReferences.Add($analyzerFilePath)
 
+$analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.ShimLayer.dll"
+$project.Object.AnalyzerReferences.Add($analyzerFilePath)
+
 $analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.CSharp.dll"
 $project.Object.AnalyzerReferences.Add($analyzerFilePath)
 

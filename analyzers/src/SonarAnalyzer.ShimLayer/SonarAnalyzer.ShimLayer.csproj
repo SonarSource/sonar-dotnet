@@ -1,12 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <AssemblyName>SonarAnalyzer.CFG</AssemblyName>
     <RootNamespace>SonarAnalyzer</RootNamespace>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
-    <CompilerGeneratedFilesOutputPath>$(MSBuildProjectDirectory)\Lightup\.generated</CompilerGeneratedFilesOutputPath>
   </PropertyGroup>
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="1.3.2" />
     <PackageReference Include="Microsoft.CodeAnalysis.PerformanceSensitiveAnalyzers" Version="3.3.1">
@@ -22,16 +19,19 @@
       <NoWarn>NU1605, NU1701</NoWarn>
     </PackageReference>
 
-    <ProjectReference Include="..\SonarAnalyzer.ShimLayer\SonarAnalyzer.ShimLayer.csproj" />
+    <ProjectReference Include="..\SonarAnalyzer.ShimLayer.CodeGeneration\SonarAnalyzer.ShimLayer.CodeGeneration.csproj" SetTargetFramework="TargetFramework=netstandard2.0" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <Compile Include="..\Signing.cs" Link="Properties\Signing.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="SonarAnalyzer.Extensions" />
-    <Using Include="SonarAnalyzer.Helpers" />
+    <AdditionalFiles Include="OperationInterfaces.xml" />
+    <AdditionalFiles Include="Syntax.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="StyleCop.Analyzers.Lightup" />
     <Using Include="Microsoft.CodeAnalysis" />
     <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
@@ -39,7 +39,7 @@
 
   <Target Name="SignDlls" Condition="'$(SignAssembly)' == 'true' and $(TargetFramework) != ''" AfterTargets="Build">
     <Message Importance="high" Text="Signing SonarAnalyzer.CFG assemblies from $(OutDir)" />
-    <Exec WorkingDirectory="$(OutDir)" Command="signtool sign /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 /csp &quot;DigiCert Signing Manager KSP&quot; /kc &quot;$(SM_KP)&quot; /f &quot;$(SM_CLIENT_CRT_FILE)&quot; SonarAnalyzer.CFG.dll" />
+    <Exec WorkingDirectory="$(OutDir)" Command="signtool sign /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 /csp &quot;DigiCert Signing Manager KSP&quot; /kc &quot;$(SM_KP)&quot; /f &quot;$(SM_CLIENT_CRT_FILE)&quot; SonarAnalyzer.ShimLayer.dll" />
   </Target>
 
 </Project>

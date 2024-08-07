@@ -57,6 +57,7 @@
       <BinariesToCopy Include="$(OutputPath)Google.Protobuf.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CFG.dll" />
+      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.ShimLayer.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CSharp.dll" />
     </ItemGroup>
     <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)" />

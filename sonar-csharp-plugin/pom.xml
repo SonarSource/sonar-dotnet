@@ -225,6 +225,7 @@
                     <include name="Google.Protobuf.dll"/>
                     <include name="SonarAnalyzer.dll"/>
                     <include name="SonarAnalyzer.CFG.dll"/>
+                    <include name="SonarAnalyzer.ShimLayer.dll"/>
                     <include name="SonarAnalyzer.CSharp.dll"/>
                   </fileset>
                   <fileset dir="${project.build.directory}/../..">
