@@ -3,6 +3,8 @@
 
 namespace StyleCop.Analyzers.Lightup
 {
+    using Microsoft.CodeAnalysis;
+
     public static class SymbolKindEx
     {
         public const SymbolKind Discard = (SymbolKind)19;

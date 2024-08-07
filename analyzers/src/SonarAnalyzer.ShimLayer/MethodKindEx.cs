@@ -3,6 +3,7 @@
 
 namespace StyleCop.Analyzers.Lightup
 {
+    using Microsoft.CodeAnalysis;
 
     public static class MethodKindEx
     {

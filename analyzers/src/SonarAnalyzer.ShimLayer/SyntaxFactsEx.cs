@@ -1,10 +1,14 @@
 ﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+#nullable disable
+
 namespace StyleCop.Analyzers.Lightup
 {
+    using System;
     using System.Linq.Expressions;
     using System.Reflection;
+    using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
 
     public static class SyntaxFactsEx

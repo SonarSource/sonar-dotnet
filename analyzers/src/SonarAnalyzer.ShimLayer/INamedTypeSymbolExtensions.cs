@@ -5,6 +5,10 @@
 
 namespace StyleCop.Analyzers.Lightup
 {
+    using System;
+    using System.Collections.Immutable;
+    using Microsoft.CodeAnalysis;
+
     public static class INamedTypeSymbolExtensions
     {
         private static readonly Func<INamedTypeSymbol, INamedTypeSymbol> TupleUnderlyingTypeAccessor;
