@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             context.RegisterNodeAction(
                 VerifyRecordDeclaration,
-                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordDeclaration,
                 SyntaxKindEx.RecordStructDeclaration);
         }
 

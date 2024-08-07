@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.StructDeclaration,
             SyntaxKind.EnumDeclaration,
             SyntaxKind.InterfaceDeclaration,
-            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordDeclaration,
             SyntaxKindEx.RecordStructDeclaration,
         };
 
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.StructDeclaration,
                 SyntaxKind.NamespaceDeclaration,
                 SyntaxKind.InterfaceDeclaration,
-                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordDeclaration,
                 SyntaxKindEx.RecordStructDeclaration,
                 SyntaxKindEx.FileScopedNamespaceDeclaration);
 

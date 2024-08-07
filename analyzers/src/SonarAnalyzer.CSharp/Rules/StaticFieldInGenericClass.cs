@@ -56,7 +56,7 @@ public sealed class StaticFieldInGenericClass : SonarDiagnosticAnalyzer
             },
             SyntaxKind.ClassDeclaration,
             SyntaxKind.InterfaceDeclaration,
-            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordDeclaration,
             SyntaxKindEx.RecordStructDeclaration,
             SyntaxKind.StructDeclaration);
 

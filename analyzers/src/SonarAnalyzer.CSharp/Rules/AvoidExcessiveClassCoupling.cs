@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration,
                 SyntaxKind.InterfaceDeclaration,
-                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordDeclaration,
                 SyntaxKindEx.RecordStructDeclaration);
 
         private static bool IsTrackedType(INamedTypeSymbol namedType) =>
@@ -162,7 +162,7 @@ namespace SonarAnalyzer.Rules.CSharp
             // This override is needed because VisitRecordDeclaration is not available due to the Roslyn version.
             public override void Visit(SyntaxNode node)
             {
-                if (node.IsKind(SyntaxKindEx.RecordClassDeclaration))
+                if (node.IsKind(SyntaxKindEx.RecordDeclaration))
                 {
                     if (node == originalTypeDeclaration)
                     {

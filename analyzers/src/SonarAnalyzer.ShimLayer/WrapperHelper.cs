@@ -1,9 +1,14 @@
 ﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+#nullable disable
+
 namespace StyleCop.Analyzers.Lightup
 {
+    using System;
+    using System.Collections.Immutable;
     using System.Reflection;
+    using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
 
     public static class WrapperHelper
@@ -17,8 +22,8 @@ namespace StyleCop.Analyzers.Lightup
 
             builder.Add(typeof(AnalyzerConfigOptionsProviderWrapper), codeAnalysisAssembly.GetType(AnalyzerConfigOptionsProviderWrapper.WrappedTypeName));
             builder.Add(typeof(AnalyzerConfigOptionsWrapper), codeAnalysisAssembly.GetType(AnalyzerConfigOptionsWrapper.WrappedTypeName));
-            builder.Add(typeof(CompilationOptionsWrapper), codeAnalysisAssembly.GetType(CompilationOptionsWrapper.WrappedTypeName));
-            builder.Add(typeof(SyntaxTreeOptionsProviderWrapper), codeAnalysisAssembly.GetType(SyntaxTreeOptionsProviderWrapper.WrappedTypeName));
+            builder.Add(typeof(CompilationOptionsWrapper), codeAnalysisAssembly.GetType(CompilationOptionsWrapper.WrappedTypeName)); // Sonar
+            builder.Add(typeof(SyntaxTreeOptionsProviderWrapper), codeAnalysisAssembly.GetType(SyntaxTreeOptionsProviderWrapper.WrappedTypeName)); // Sonar
 
             WrappedTypes = builder.ToImmutable();
         }

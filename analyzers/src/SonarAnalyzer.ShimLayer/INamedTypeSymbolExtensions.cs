@@ -1,9 +1,14 @@
 ﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+#nullable disable
 
 namespace StyleCop.Analyzers.Lightup
 {
+    using System;
+    using System.Collections.Immutable;
+    using Microsoft.CodeAnalysis;
+
     public static class INamedTypeSymbolExtensions
     {
         private static readonly Func<INamedTypeSymbol, INamedTypeSymbol> TupleUnderlyingTypeAccessor;
@@ -17,10 +22,19 @@ namespace StyleCop.Analyzers.Lightup
             IsSerializableAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<INamedTypeSymbol, bool>(typeof(INamedTypeSymbol), nameof(IsSerializable));
         }
 
-        public static INamedTypeSymbol TupleUnderlyingType(this INamedTypeSymbol symbol) => TupleUnderlyingTypeAccessor(symbol);
+        public static INamedTypeSymbol TupleUnderlyingType(this INamedTypeSymbol symbol)
+        {
+            return TupleUnderlyingTypeAccessor(symbol);
+        }
 
-        public static ImmutableArray<IFieldSymbol> TupleElements(this INamedTypeSymbol symbol) => TupleElementsAccessor(symbol);
+        public static ImmutableArray<IFieldSymbol> TupleElements(this INamedTypeSymbol symbol)
+        {
+            return TupleElementsAccessor(symbol);
+        }
 
-        public static bool IsSerializable(this INamedTypeSymbol symbol) => IsSerializableAccessor(symbol);
+        public static bool IsSerializable(this INamedTypeSymbol symbol)
+        {
+            return IsSerializableAccessor(symbol);
+        }
     }
 }

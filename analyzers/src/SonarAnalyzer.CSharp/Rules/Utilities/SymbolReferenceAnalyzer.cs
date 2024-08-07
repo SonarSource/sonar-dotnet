@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.TypeParameter,
                 SyntaxKind.VariableDeclaration,
                 SyntaxKindEx.LocalFunctionStatement,
-                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordDeclaration,
                 SyntaxKindEx.RecordStructDeclaration,
                 SyntaxKindEx.SingleVariableDesignation
             }.Cast<ushort>().ToHashSet();

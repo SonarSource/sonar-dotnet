@@ -1,8 +1,11 @@
 ﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+#nullable disable
+
 namespace StyleCop.Analyzers.Lightup
 {
+    using System;
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -22,17 +25,17 @@ namespace StyleCop.Analyzers.Lightup
                 // Prior to C# 7, the ExpressionBody properties did not override a base method.
                 switch (syntax.Kind())
                 {
-                case SyntaxKind.MethodDeclaration:
-                    return ((MethodDeclarationSyntax)syntax).ExpressionBody;
+                    case SyntaxKind.MethodDeclaration:
+                        return ((MethodDeclarationSyntax)syntax).ExpressionBody;
 
-                case SyntaxKind.OperatorDeclaration:
-                    return ((OperatorDeclarationSyntax)syntax).ExpressionBody;
+                    case SyntaxKind.OperatorDeclaration:
+                        return ((OperatorDeclarationSyntax)syntax).ExpressionBody;
 
-                case SyntaxKind.ConversionOperatorDeclaration:
-                    return ((ConversionOperatorDeclarationSyntax)syntax).ExpressionBody;
+                    case SyntaxKind.ConversionOperatorDeclaration:
+                        return ((ConversionOperatorDeclarationSyntax)syntax).ExpressionBody;
 
-                default:
-                    break;
+                    default:
+                        break;
                 }
             }
 

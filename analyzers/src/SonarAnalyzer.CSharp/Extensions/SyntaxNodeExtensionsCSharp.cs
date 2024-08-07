@@ -130,7 +130,7 @@ public static class SyntaxNodeExtensionsCSharp
             SyntaxKindEx.LocalFunctionStatement => "local function",
             SyntaxKind.MethodDeclaration => "method",
             SyntaxKind.PropertyDeclaration => "property",
-            SyntaxKindEx.RecordClassDeclaration => "record",
+            SyntaxKindEx.RecordDeclaration => "record",
             SyntaxKindEx.RecordStructDeclaration => "record struct",
             SyntaxKind.StructDeclaration => "struct",
 #if DEBUG

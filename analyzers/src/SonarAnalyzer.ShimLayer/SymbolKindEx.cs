@@ -3,10 +3,11 @@
 
 namespace StyleCop.Analyzers.Lightup
 {
+    using Microsoft.CodeAnalysis;
 
     public static class SymbolKindEx
     {
         public const SymbolKind Discard = (SymbolKind)19;
-        public const SymbolKind FunctionPointerType = (SymbolKind)20;
+        public const SymbolKind FunctionPointerType = (SymbolKind)20; // Sonar
     }
 }

@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Metrics.CSharp
             switch (node.Kind())
             {
                 case SyntaxKind.ClassDeclaration:
-                case SyntaxKindEx.RecordClassDeclaration:
+                case SyntaxKindEx.RecordDeclaration:
                 case SyntaxKind.StructDeclaration:
                 case SyntaxKindEx.RecordStructDeclaration:
                 case SyntaxKind.InterfaceDeclaration:

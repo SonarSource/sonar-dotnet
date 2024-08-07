@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             SyntaxKind.ClassDeclaration,
             SyntaxKind.InterfaceDeclaration,
-            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordDeclaration,
         };
 
         protected override SyntaxToken GetKeyword(TypeDeclarationSyntax declaration) =>

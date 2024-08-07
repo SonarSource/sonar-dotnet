@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules
             context.RegisterSymbolAction(CheckClassWithOnlyUnusedPrivateConstructors, SymbolKind.NamedType);
 
         private bool IsClassTypeDeclaration(SyntaxNode node) =>
-            Language.Syntax.IsAnyKind(node, Language.SyntaxKind.ClassAndRecordClassDeclarations);
+            Language.Syntax.IsAnyKind(node, Language.SyntaxKind.ClassAndRecordDeclarations);
 
         private bool IsAnyConstructorCalled(INamedTypeSymbol namedType, IEnumerable<ConstructorContext> typeDeclarations) =>
             typeDeclarations

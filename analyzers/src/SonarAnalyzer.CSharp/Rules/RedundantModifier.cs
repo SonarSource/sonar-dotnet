@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 CheckTypeDeclarationForRedundantPartial,
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.InterfaceDeclaration,
-                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordDeclaration,
                 SyntaxKindEx.RecordStructDeclaration,
                 SyntaxKind.StructDeclaration);
 
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 CheckForUnnecessaryUnsafeBlocks,
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.InterfaceDeclaration,
-                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordDeclaration,
                 SyntaxKindEx.RecordStructDeclaration,
                 SyntaxKind.StructDeclaration);
 

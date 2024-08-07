@@ -30,7 +30,7 @@ public sealed class RedundancyInConstructorDestructorDeclaration : SonarDiagnost
     [
         SyntaxKind.ClassDeclaration,
         SyntaxKind.StructDeclaration,
-        SyntaxKindEx.RecordClassDeclaration,
+        SyntaxKindEx.RecordDeclaration,
         SyntaxKindEx.RecordStructDeclaration
     ];
 

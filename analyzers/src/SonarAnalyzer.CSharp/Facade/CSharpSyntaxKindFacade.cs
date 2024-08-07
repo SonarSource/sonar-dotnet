@@ -25,10 +25,10 @@ internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
     public SyntaxKind Attribute => SyntaxKind.Attribute;
     public SyntaxKind[] CastExpressions => new[] {SyntaxKind.CastExpression };
     public SyntaxKind ClassDeclaration => SyntaxKind.ClassDeclaration;
-    public SyntaxKind[] ClassAndRecordClassDeclarations => new[]
+    public SyntaxKind[] ClassAndRecordDeclarations => new[]
     {
         SyntaxKind.ClassDeclaration,
-        SyntaxKindEx.RecordClassDeclaration,
+        SyntaxKindEx.RecordDeclaration,
     };
     public SyntaxKind[] ClassAndModuleDeclarations => new[] { SyntaxKind.ClassDeclaration };
     public SyntaxKind[] CommentTrivia => new[]
@@ -79,7 +79,7 @@ internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
         SyntaxKind.StructDeclaration,
         SyntaxKind.InterfaceDeclaration,
         SyntaxKind.EnumDeclaration,
-        SyntaxKindEx.RecordClassDeclaration,
+        SyntaxKindEx.RecordDeclaration,
         SyntaxKindEx.RecordStructDeclaration,
     };
     public SyntaxKind VariableDeclarator => SyntaxKind.VariableDeclarator;
