@@ -8,25 +8,18 @@ namespace StyleCop.Analyzers.Lightup
     using System;
     using Microsoft.CodeAnalysis;
 
-    public static class ITypeSymbolExtensions
+    public static partial class ITypeSymbolExtensions
     {
         private static readonly Func<ITypeSymbol, bool> IsTupleTypeAccessor;
-        private static readonly Func<ITypeSymbol, bool> IsRefLikeTypeAccessor; // Sonar
 
         static ITypeSymbolExtensions()
         {
             IsTupleTypeAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ITypeSymbol, bool>(typeof(ITypeSymbol), nameof(IsTupleType));
-            IsRefLikeTypeAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ITypeSymbol, bool>(typeof(ITypeSymbol), nameof(IsRefLikeType)); // Sonar
         }
 
         public static bool IsTupleType(this ITypeSymbol symbol)
         {
             return IsTupleTypeAccessor(symbol);
-        }
-
-        public static bool IsRefLikeType(this ITypeSymbol symbol) // Sonar
-        {
-            return IsRefLikeTypeAccessor(symbol);
         }
     }
 }
