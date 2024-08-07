@@ -315,12 +315,6 @@ public static class LightupHelpers
         {
             return FallbackAccessor;
         }
-
-        if (!typeof(TProperty).GetTypeInfo().IsAssignableFrom(property.PropertyType.GetTypeInfo()))
-        {
-            throw new InvalidOperationException();
-        }
-
         var syntaxParameter = Expression.Parameter(typeof(TSyntax), "syntax");
         Expression instance =
             type.GetTypeInfo().IsAssignableFrom(typeof(TSyntax).GetTypeInfo())
