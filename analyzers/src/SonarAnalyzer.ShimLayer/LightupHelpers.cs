@@ -160,22 +160,42 @@ public static class LightupHelpers
             return FallbackAccessor;
         }
 
-        if (!typeof(TProperty).GetTypeInfo().IsAssignableFrom(property.PropertyType.GetTypeInfo()))
-        {
-            throw new InvalidOperationException();
-        }
-
         var operationParameter = Expression.Parameter(typeof(TOperation), "operation");
         Expression instance =
             type.GetTypeInfo().IsAssignableFrom(typeof(TOperation).GetTypeInfo())
             ? (Expression)operationParameter
             : Expression.Convert(operationParameter, type);
 
-        Expression<Func<TOperation, TProperty>> expression =
-            Expression.Lambda<Func<TOperation, TProperty>>(
-                Expression.Call(instance, property.GetMethod),
-                operationParameter);
-        return expression.Compile();
+        if (property.PropertyType.FullName == "Microsoft.CodeAnalysis.FlowAnalysis.CaptureId") // Sonar - begin
+        {
+            var constructor = typeof(CaptureId).GetConstructors().Single();
+
+            Expression<Func<TOperation, TProperty>> expression =
+                Expression.Lambda<Func<TOperation, TProperty>>(
+                    Expression.New(constructor, Expression.Convert(Expression.Call(instance, property.GetMethod), typeof(object))),
+                    operationParameter);
+            return expression.Compile();
+        }
+        else if (typeof(TProperty).IsEnum && property.PropertyType.IsEnum)
+        {
+            Expression<Func<TOperation, TProperty>> expression =
+                Expression.Lambda<Func<TOperation, TProperty>>(
+                    Expression.Convert(Expression.Call(instance, property.GetMethod), typeof(TProperty)),
+                    operationParameter);
+            return expression.Compile();
+        }
+        else if (!typeof(TProperty).GetTypeInfo().IsAssignableFrom(property.PropertyType.GetTypeInfo()))
+        {
+            throw new InvalidOperationException();
+        }
+        else
+        {
+            Expression<Func<TOperation, TProperty>> expression =
+                Expression.Lambda<Func<TOperation, TProperty>>(
+                    Expression.Call(instance, property.GetMethod),
+                    operationParameter);
+            return expression.Compile();
+        } // Sonar - end
     }
 
     internal static Func<TOperation, ImmutableArray<IOperation>> CreateOperationListPropertyAccessor<TOperation>(Type type, string propertyName)
@@ -307,11 +327,14 @@ public static class LightupHelpers
             ? (Expression)syntaxParameter
             : Expression.Convert(syntaxParameter, type);
 
-        Expression<Func<TSyntax, TProperty>> expression =
-            Expression.Lambda<Func<TSyntax, TProperty>>(
-                Expression.Call(instance, property.GetMethod),
-                syntaxParameter);
-        return expression.Compile();
+        Expression body = Expression.Call(instance, property.GetMethod); // Sonar - begin
+
+        if (!typeof(TProperty).GetTypeInfo().IsAssignableFrom(property.PropertyType.GetTypeInfo()))
+        {
+            body = Expression.Convert(body, typeof(TProperty));
+        }
+
+        return Expression.Lambda<Func<TSyntax, TProperty>>(body, syntaxParameter).Compile(); // Sonar - end
     }
 
     internal static Func<TSyntax, TArg, TProperty> CreateSyntaxPropertyAccessor<TSyntax, TArg, TProperty>(Type type, Type argumentType, string accessorMethodName)
