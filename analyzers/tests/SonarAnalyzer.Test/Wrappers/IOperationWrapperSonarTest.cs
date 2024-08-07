@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Test.Wrappers
             sut.Children.Single().Kind.Should().Be(OperationKind.Literal);
             sut.Language.Should().Be("C#");
             sut.IsImplicit.Should().Be(false);
-            sut.Model.Should().Be(semanticModel);
+            sut.SemanticModel.Should().Be(semanticModel);
         }
 
         [TestMethod]

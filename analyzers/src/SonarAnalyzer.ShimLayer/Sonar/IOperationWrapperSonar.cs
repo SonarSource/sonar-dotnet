@@ -34,7 +34,7 @@ public readonly struct IOperationWrapperSonar
     public IEnumerable<IOperation> Children => ChildrenAccessor(Instance);
     public string Language => LanguageAccessor(Instance);
     public bool IsImplicit => IsImplicitAccessor(Instance);
-    public SemanticModel Model => SemanticModelAccessor(Instance);
+    public SemanticModel SemanticModel => SemanticModelAccessor(Instance);
 
     public IOperationWrapperSonar(IOperation instance) =>
         Instance = instance ?? throw new ArgumentNullException(nameof(instance));
@@ -46,7 +46,7 @@ public readonly struct IOperationWrapperSonar
         ChildrenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IOperation, IEnumerable<IOperation>>(type, nameof(Children));
         LanguageAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IOperation, string>(type, nameof(Language));
         IsImplicitAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IOperation, bool>(type, nameof(IsImplicit));
-        SemanticModelAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IOperation, SemanticModel>(type, nameof(Model));
+        SemanticModelAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IOperation, SemanticModel>(type, nameof(SemanticModel));
     }
 
     public override int GetHashCode() =>

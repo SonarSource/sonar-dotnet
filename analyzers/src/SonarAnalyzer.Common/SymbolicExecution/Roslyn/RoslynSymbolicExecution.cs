@@ -51,7 +51,7 @@ internal class RoslynSymbolicExecution
         }
         this.checks = new(new SymbolicCheck[] { new NonNullableValueTypeCheck(), new ConstantCheck() }.Concat(checks).ToArray());
         this.cancel = cancel;
-        exceptionCandidate = new(cfg.OriginalOperation.ToSonar().Model.Compilation);
+        exceptionCandidate = new(cfg.OriginalOperation.ToSonar().SemanticModel.Compilation);
         loopDetector = new(cfg);
         lva = new(cfg, cancel);
         logger.Log(cfg);
