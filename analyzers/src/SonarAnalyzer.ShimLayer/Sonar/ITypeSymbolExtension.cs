@@ -24,8 +24,5 @@ public static partial class ITypeSymbolExtensions
 {
     private static readonly Func<ITypeSymbol, bool> IsRefLikeTypeAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ITypeSymbol, bool>(typeof(ITypeSymbol), nameof(IsRefLikeType));
 
-    public static bool IsRefLikeType(this ITypeSymbol symbol)
-    {
-        return IsRefLikeTypeAccessor(symbol);
-    }
+    public static bool IsRefLikeType(this ITypeSymbol symbol) => IsRefLikeTypeAccessor(symbol);
 }
