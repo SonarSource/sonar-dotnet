@@ -18,25 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace StyleCop.Analyzers.Lightup
+namespace StyleCop.Analyzers.Lightup;
+
+public readonly struct CaptureId : IEquatable<CaptureId>
 {
-    public struct CaptureId : IEquatable<CaptureId>
-    {
-        private readonly object instance;   // Underlaying struct holds only internal int Value as the identificator.
+    private readonly object instance;   // Underlaying struct holds only internal int Value as the identificator.
 
-        public CaptureId(object instance) =>
-            this.instance = instance ?? throw new ArgumentNullException(nameof(instance));
+    public CaptureId(object instance) =>
+        this.instance = instance ?? throw new ArgumentNullException(nameof(instance));
 
-        public override bool Equals(object obj) =>
-            obj is CaptureId capture && Equals(capture);
+    public override bool Equals(object obj) =>
+        obj is CaptureId capture && Equals(capture);
 
-        public bool Equals(CaptureId other) =>
-            instance.Equals(other.instance);
+    public bool Equals(CaptureId other) =>
+        instance.Equals(other.instance);
 
-        public override int GetHashCode() =>
-            instance.GetHashCode();
+    public override int GetHashCode() =>
+        instance.GetHashCode();
 
-        public string Serialize() =>
-            "#Capture-" + GetHashCode();
-    }
+    public string Serialize() =>
+        "#Capture-" + GetHashCode();
 }
