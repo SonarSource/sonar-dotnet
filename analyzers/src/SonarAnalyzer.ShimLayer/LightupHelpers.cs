@@ -321,13 +321,13 @@ namespace StyleCop.Analyzers.Lightup
             {
                 return FallbackAccessor;
             }
-            var syntaxParameter = Expression.Parameter(typeof(TSyntax), "syntax");
+            var syntaxParameter = Expression.Parameter(typeof(TSyntax), "syntax"); // Sonar - begin
             Expression instance =
                 type.GetTypeInfo().IsAssignableFrom(typeof(TSyntax).GetTypeInfo())
                 ? (Expression)syntaxParameter
                 : Expression.Convert(syntaxParameter, type);
 
-            Expression body = Expression.Call(instance, property.GetMethod); // Sonar - begin
+            Expression body = Expression.Call(instance, property.GetMethod);
 
             if (!typeof(TProperty).GetTypeInfo().IsAssignableFrom(property.PropertyType.GetTypeInfo()))
             {
