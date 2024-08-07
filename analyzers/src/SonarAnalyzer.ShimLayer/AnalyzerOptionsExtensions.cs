@@ -3,7 +3,6 @@
 
 namespace StyleCop.Analyzers.Lightup
 {
-
     public static class AnalyzerOptionsExtensions
     {
         private static readonly Func<AnalyzerOptions, object> AnalyzerConfigOptionsProviderAccessor;

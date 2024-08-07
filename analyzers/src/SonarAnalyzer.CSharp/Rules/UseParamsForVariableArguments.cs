@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ConstructorDeclaration,
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration,
-                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordDeclaration,
                 SyntaxKindEx.RecordStructDeclaration);
 
         private static IMethodSymbol MethodSymbol(SyntaxNode node, SemanticModel semanticModel) =>

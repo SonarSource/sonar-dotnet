@@ -3,16 +3,15 @@
 
 namespace StyleCop.Analyzers.Lightup
 {
-
     public static class ITypeSymbolExtensions
     {
         private static readonly Func<ITypeSymbol, bool> IsTupleTypeAccessor;
-        private static readonly Func<ITypeSymbol, bool> IsRefLikeTypeAccessor;
+        private static readonly Func<ITypeSymbol, bool> IsRefLikeTypeAccessor; // Sonar
 
         static ITypeSymbolExtensions()
         {
             IsTupleTypeAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ITypeSymbol, bool>(typeof(ITypeSymbol), nameof(IsTupleType));
-            IsRefLikeTypeAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ITypeSymbol, bool>(typeof(ITypeSymbol), nameof(IsRefLikeType));
+            IsRefLikeTypeAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ITypeSymbol, bool>(typeof(ITypeSymbol), nameof(IsRefLikeType)); // Sonar
         }
 
         public static bool IsTupleType(this ITypeSymbol symbol)
@@ -20,7 +19,7 @@ namespace StyleCop.Analyzers.Lightup
             return IsTupleTypeAccessor(symbol);
         }
 
-        public static bool IsRefLikeType(this ITypeSymbol symbol)
+        public static bool IsRefLikeType(this ITypeSymbol symbol) // Sonar
         {
             return IsRefLikeTypeAccessor(symbol);
         }

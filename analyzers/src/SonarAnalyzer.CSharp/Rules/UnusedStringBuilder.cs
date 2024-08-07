@@ -30,7 +30,7 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
         SyntaxKind.EnumDeclaration,
         SyntaxKind.InterfaceDeclaration,
         SyntaxKind.UsingDirective,
-        SyntaxKindEx.RecordClassDeclaration,
+        SyntaxKindEx.RecordDeclaration,
         SyntaxKindEx.RecordStructDeclaration
     };
 

@@ -4,6 +4,6 @@
 namespace StyleCop.Analyzers.Lightup
 {
     internal delegate bool TryGetValueAccessor<T, TKey, TValue>(T instance, TKey key, out TValue value);
-    internal delegate bool TryGetValueAccessor<T, TFirst, TSecond, TValue>(T instance, TFirst first, TSecond second, out TValue value);
-    internal delegate bool TryGetValueAccessor<T, TFirst, TSecond, TThird, TValue>(T instance, TFirst first, TSecond second, TThird third, out TValue value);
+    internal delegate bool TryGetValueAccessor<T, TFirst, TSecond, TValue>(T instance, TFirst first, TSecond second, out TValue value); // Sonar
+    internal delegate bool TryGetValueAccessor<T, TFirst, TSecond, TThird, TValue>(T instance, TFirst first, TSecond second, TThird third, out TValue value); // Sonar
 }

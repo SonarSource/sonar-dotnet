@@ -64,7 +64,7 @@ public sealed class PrivateFieldUsedAsLocalVariable : SonarDiagnosticAnalyzer
             },
             SyntaxKind.ClassDeclaration,
             SyntaxKind.StructDeclaration,
-            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordDeclaration,
             SyntaxKindEx.RecordStructDeclaration);
 
     private static IDictionary<IFieldSymbol, VariableDeclaratorSyntax> GetPrivateFields(SemanticModel model, TypeDeclarationSyntax typeDeclaration)

@@ -28,7 +28,7 @@ public sealed class PublicMethodWithMultidimensionalArray : PublicMethodWithMult
         SyntaxKind.ConstructorDeclaration,
         SyntaxKind.ClassDeclaration,
         SyntaxKind.StructDeclaration,
-        SyntaxKindEx.RecordClassDeclaration,
+        SyntaxKindEx.RecordDeclaration,
         SyntaxKindEx.RecordStructDeclaration);
 
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;

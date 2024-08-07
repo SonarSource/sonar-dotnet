@@ -348,7 +348,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         // This override is needed because VisitRecordDeclaration and LocalFunctionStatementSyntax are not available due to the Roslyn version.
         public override void Visit(SyntaxNode node)
         {
-            if (node.IsAnyKind(SyntaxKindEx.RecordClassDeclaration, SyntaxKindEx.RecordStructDeclaration))
+            if (node.IsAnyKind(SyntaxKindEx.RecordDeclaration, SyntaxKindEx.RecordStructDeclaration))
             {
                 VisitBaseTypeDeclaration(node);
             }

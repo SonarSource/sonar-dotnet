@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             },
             SyntaxKind.ClassDeclaration,
-            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordDeclaration,
             SyntaxKindEx.RecordStructDeclaration,
             SyntaxKind.StructDeclaration);
 
@@ -165,7 +165,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void Visit(SyntaxNode node)
             {
-                if (node.IsAnyKind(SyntaxKindEx.RecordClassDeclaration, SyntaxKindEx.RecordStructDeclaration))
+                if (node.IsAnyKind(SyntaxKindEx.RecordDeclaration, SyntaxKindEx.RecordStructDeclaration))
                 {
                     if (visitedFirstLevel)
                     {

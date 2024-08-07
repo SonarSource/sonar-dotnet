@@ -3,7 +3,6 @@
 
 namespace StyleCop.Analyzers.Lightup
 {
-
     public readonly struct AnalyzerConfigOptionsWrapper
     {
         internal const string WrappedTypeName = "Microsoft.CodeAnalysis.Diagnostics.AnalyzerConfigOptions";

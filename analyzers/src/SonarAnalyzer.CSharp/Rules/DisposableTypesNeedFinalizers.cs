@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             },
             SyntaxKind.ClassDeclaration,
-            SyntaxKindEx.RecordClassDeclaration);
+            SyntaxKindEx.RecordDeclaration);
 
         private static bool HasNativeHandleFields(TypeDeclarationSyntax classDeclaration, SemanticModel semanticModel) =>
             classDeclaration.Members

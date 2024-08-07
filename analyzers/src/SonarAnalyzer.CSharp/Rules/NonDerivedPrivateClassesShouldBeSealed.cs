@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.InterfaceDeclaration,
             SyntaxKind.ClassDeclaration,
             SyntaxKind.StructDeclaration,
-            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordDeclaration,
             SyntaxKindEx.RecordStructDeclaration);
 
         private static readonly ImmutableHashSet<SyntaxKind> PossiblyVirtualKinds = ImmutableHashSet.Create(
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterTreeAction(c =>
             {
                 var declarations = c.Tree.GetRoot().DescendantNodes(x => x.IsAnyKind(KindsToBeDescended))
-                     .Where(x => x.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordClassDeclaration))
+                     .Where(x => x.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration))
                      .Select(x => (TypeDeclarationSyntax)x);
 
                 var model = new Lazy<SemanticModel>(() => c.Compilation.GetSemanticModel(c.Tree));

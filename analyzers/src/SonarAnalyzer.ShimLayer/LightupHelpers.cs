@@ -38,9 +38,18 @@ public static class LightupHelpers
     public static bool SupportsCSharp9 { get; }
         = Enum.GetNames(typeof(LanguageVersion)).Contains(nameof(LanguageVersionEx.CSharp9));
 
+    public static bool SupportsCSharp10 { get; }
+        = Enum.GetNames(typeof(LanguageVersion)).Contains(nameof(LanguageVersionEx.CSharp10));
+
+    public static bool SupportsCSharp11 { get; }
+        = Enum.GetNames(typeof(LanguageVersion)).Contains(nameof(LanguageVersionEx.CSharp11));
+
+    public static bool SupportsCSharp12 { get; }
+        = Enum.GetNames(typeof(LanguageVersion)).Contains(nameof(LanguageVersionEx.CSharp12));
+
     public static bool SupportsIOperation => SupportsCSharp73;
 
-    [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/8106", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
+    [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/8106", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)] // Sonar
     internal static bool CanWrapObject(object obj, Type underlyingType)
     {
         if (obj == null)
@@ -67,7 +76,7 @@ public static class LightupHelpers
         return canCast;
     }
 
-    [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/8106", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
+    [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/8106", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)] // Sonar
     internal static bool CanWrapNode(SyntaxNode node, Type underlyingType)
     {
         if (node == null)
@@ -94,7 +103,7 @@ public static class LightupHelpers
         return canCast;
     }
 
-    [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/8106", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
+    [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/8106", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)] // Sonar
     internal static bool CanWrapOperation(IOperation operation, Type underlyingType)
     {
         if (operation == null)
@@ -151,42 +160,22 @@ public static class LightupHelpers
             return FallbackAccessor;
         }
 
+        if (!typeof(TProperty).GetTypeInfo().IsAssignableFrom(property.PropertyType.GetTypeInfo()))
+        {
+            throw new InvalidOperationException();
+        }
+
         var operationParameter = Expression.Parameter(typeof(TOperation), "operation");
         Expression instance =
             type.GetTypeInfo().IsAssignableFrom(typeof(TOperation).GetTypeInfo())
             ? (Expression)operationParameter
             : Expression.Convert(operationParameter, type);
 
-        if (property.PropertyType.FullName == "Microsoft.CodeAnalysis.FlowAnalysis.CaptureId")
-        {
-            var constructor = typeof(CaptureId).GetConstructors().Single();
-
-            Expression<Func<TOperation, TProperty>> expression =
-                Expression.Lambda<Func<TOperation, TProperty>>(
-                    Expression.New(constructor, Expression.Convert(Expression.Call(instance, property.GetMethod), typeof(object))),
-                    operationParameter);
-            return expression.Compile();
-        }
-        else if (typeof(TProperty).IsEnum && property.PropertyType.IsEnum)
-        {
-            Expression<Func<TOperation, TProperty>> expression =
-                Expression.Lambda<Func<TOperation, TProperty>>(
-                    Expression.Convert(Expression.Call(instance, property.GetMethod), typeof(TProperty)),
-                    operationParameter);
-            return expression.Compile();
-        }
-        else if (!typeof(TProperty).GetTypeInfo().IsAssignableFrom(property.PropertyType.GetTypeInfo()))
-        {
-            throw new InvalidOperationException();
-        }
-        else
-        {
-            Expression<Func<TOperation, TProperty>> expression =
-                Expression.Lambda<Func<TOperation, TProperty>>(
-                    Expression.Call(instance, property.GetMethod),
-                    operationParameter);
-            return expression.Compile();
-        }
+        Expression<Func<TOperation, TProperty>> expression =
+            Expression.Lambda<Func<TOperation, TProperty>>(
+                Expression.Call(instance, property.GetMethod),
+                operationParameter);
+        return expression.Compile();
     }
 
     internal static Func<TOperation, ImmutableArray<IOperation>> CreateOperationListPropertyAccessor<TOperation>(Type type, string propertyName)
@@ -306,20 +295,23 @@ public static class LightupHelpers
         {
             return FallbackAccessor;
         }
+
+        if (!typeof(TProperty).GetTypeInfo().IsAssignableFrom(property.PropertyType.GetTypeInfo()))
+        {
+            throw new InvalidOperationException();
+        }
+
         var syntaxParameter = Expression.Parameter(typeof(TSyntax), "syntax");
         Expression instance =
             type.GetTypeInfo().IsAssignableFrom(typeof(TSyntax).GetTypeInfo())
             ? (Expression)syntaxParameter
             : Expression.Convert(syntaxParameter, type);
 
-        Expression body = Expression.Call(instance, property.GetMethod);
-
-        if (!typeof(TProperty).GetTypeInfo().IsAssignableFrom(property.PropertyType.GetTypeInfo()))
-        {
-            body = Expression.Convert(body, typeof(TProperty));
-        }
-
-        return Expression.Lambda<Func<TSyntax, TProperty>>(body, syntaxParameter).Compile();
+        Expression<Func<TSyntax, TProperty>> expression =
+            Expression.Lambda<Func<TSyntax, TProperty>>(
+                Expression.Call(instance, property.GetMethod),
+                syntaxParameter);
+        return expression.Compile();
     }
 
     internal static Func<TSyntax, TArg, TProperty> CreateSyntaxPropertyAccessor<TSyntax, TArg, TProperty>(Type type, Type argumentType, string accessorMethodName)
@@ -476,7 +468,7 @@ public static class LightupHelpers
         return expression.Compile();
     }
 
-    internal static TryGetValueAccessor<TSender, TFirst, TSecond, TValue> CreateTryGetValueAccessor<TSender, TFirst, TSecond, TValue>(Type type, Type firstType, Type secondType, string methodName)
+    internal static TryGetValueAccessor<TSender, TFirst, TSecond, TValue> CreateTryGetValueAccessor<TSender, TFirst, TSecond, TValue>(Type type, Type firstType, Type secondType, string methodName) // Sonar
     {
         static bool FallbackAccessor(TSender sender, TFirst first, TSecond second, out TValue value)
         {
@@ -567,7 +559,7 @@ public static class LightupHelpers
         return expression.Compile();
     }
 
-    internal static TryGetValueAccessor<TSender, TFirst, TSecond, TThird, TValue> CreateTryGetValueAccessor<TSender, TFirst, TSecond, TThird, TValue>(Type type, Type firstType, Type secondType, Type thirdType, string methodName)
+    internal static TryGetValueAccessor<TSender, TFirst, TSecond, TThird, TValue> CreateTryGetValueAccessor<TSender, TFirst, TSecond, TThird, TValue>(Type type, Type firstType, Type secondType, Type thirdType, string methodName) // Sonar
     {
         static bool FallbackAccessor(TSender sender, TFirst first, TSecond second, TThird third, out TValue value)
         {

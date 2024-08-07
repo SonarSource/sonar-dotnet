@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.InterfaceDeclaration,
             SyntaxKind.ClassDeclaration,
             SyntaxKind.StructDeclaration,
-            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordDeclaration,
             SyntaxKindEx.RecordStructDeclaration);
 
         private static void ReportRedundantBaseType(SonarSyntaxNodeReportingContext context, BaseTypeDeclarationSyntax typeDeclaration, KnownType redundantType, string message)

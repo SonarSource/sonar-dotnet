@@ -34,7 +34,7 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
         SyntaxKind.ClassDeclaration,
         SyntaxKind.StructDeclaration,
         SyntaxKind.InterfaceDeclaration,
-        SyntaxKindEx.RecordClassDeclaration,
+        SyntaxKindEx.RecordDeclaration,
         SyntaxKindEx.RecordStructDeclaration
     };
 

@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Extensions
             {
                 SyntaxKind.ClassDeclaration => ((ClassDeclarationSyntaxWrapper)typeDeclaration).ParameterList,
                 SyntaxKind.StructDeclaration => ((StructDeclarationSyntaxWrapper)typeDeclaration).ParameterList,
-                SyntaxKindEx.RecordClassDeclaration or SyntaxKindEx.RecordStructDeclaration => ((RecordDeclarationSyntaxWrapper)typeDeclaration).ParameterList,
+                SyntaxKindEx.RecordDeclaration or SyntaxKindEx.RecordStructDeclaration => ((RecordDeclarationSyntaxWrapper)typeDeclaration).ParameterList,
                 _ => default,
             };
     }

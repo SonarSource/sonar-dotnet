@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules
                     }
                 }
             },
-            SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordClassDeclaration, SyntaxKindEx.RecordStructDeclaration);
+            SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordDeclaration, SyntaxKindEx.RecordStructDeclaration);
 
         private bool HasAllInvalidModifiers(FieldDeclarationSyntax fieldDeclaration) =>
             fieldDeclaration.Modifiers.Count(m => InvalidModifiers.Contains(m.Kind())) == InvalidModifiers.Count;

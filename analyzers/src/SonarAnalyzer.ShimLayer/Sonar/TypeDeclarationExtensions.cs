@@ -5,6 +5,7 @@ namespace StyleCop.Analyzers.Lightup
 {
     using Microsoft.CodeAnalysis.CSharp.Syntax;
 
+    /*
     internal static class TypeDeclarationExtensions
     {
         private static readonly Func<TypeDeclarationSyntax, ParameterListSyntax> ParameterListAccessor;
@@ -22,8 +23,9 @@ namespace StyleCop.Analyzers.Lightup
         }
 
         public static ParameterListSyntax ParameterList(this TypeDeclarationSyntax syntax) =>
-            syntax.Kind() is SyntaxKindEx.RecordClassDeclaration or SyntaxKindEx.RecordStructDeclaration
+            syntax.Kind() is SyntaxKindEx.RecordDeclaration or SyntaxKindEx.RecordStructDeclaration
                 ? RecordDeclarationParameterListAccessor(syntax)
                 : ParameterListAccessor(syntax);
     }
+    */
 }

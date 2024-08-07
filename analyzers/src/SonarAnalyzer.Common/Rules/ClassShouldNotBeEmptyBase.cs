@@ -61,7 +61,7 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind, TDeclarationSyntax>
                     c.ReportIssue(Rule, identifier, DeclarationTypeKeyword(c.Node));
                 }
             },
-            Language.SyntaxKind.ClassAndRecordClassDeclarations);
+            Language.SyntaxKind.ClassAndRecordDeclarations);
 
     private static bool ShouldIgnoreBecauseOfName(SyntaxToken identifier) =>
         IgnoredNames.Contains(identifier.ValueText)

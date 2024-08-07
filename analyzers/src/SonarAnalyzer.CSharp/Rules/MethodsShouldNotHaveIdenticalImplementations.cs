@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override SyntaxKind[] SyntaxKinds => new[]
         {
             SyntaxKind.ClassDeclaration,
-            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordDeclaration,
             SyntaxKind.StructDeclaration,
             SyntaxKindEx.RecordStructDeclaration,
             SyntaxKind.InterfaceDeclaration,
