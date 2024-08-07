@@ -43,7 +43,6 @@ public static partial class SyntaxKindEx
     public const SyntaxKind NotPattern = (SyntaxKind)9033;
     public const SyntaxKind FunctionPointerParameterList = (SyntaxKind)9058;
     public const SyntaxKind FunctionPointerCallingConvention = (SyntaxKind)9059;
-    public const SyntaxKind RecordDeclaration = (SyntaxKind)9063;
     public const SyntaxKind FunctionPointerUnmanagedCallingConvention = (SyntaxKind)9067;
     public const SyntaxKind ExpressionColon = (SyntaxKind)9069;
     public const SyntaxKind InterpolatedSingleLineRawStringStartToken = (SyntaxKind)9072;
