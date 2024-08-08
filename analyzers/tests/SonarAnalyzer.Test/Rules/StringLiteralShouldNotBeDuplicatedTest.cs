@@ -58,6 +58,16 @@ namespace SonarAnalyzer.Test.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 
+        [TestMethod]
+        public void StringLiteralShouldNotBeDuplicated_CSharp_Dapper() =>
+            builderCS.AddPaths("StringLiteralShouldNotBeDuplicated.Dapper.cs")
+                .AddReferences([
+                    CoreMetadataReference.SystemDataCommon,
+                    CoreMetadataReference.SystemComponentModelPrimitives,
+                    ..NuGetMetadataReference.Dapper(),
+                    ..NuGetMetadataReference.SystemDataSqlClient()])
+                .Verify();
+
 #endif
 
         [TestMethod]
