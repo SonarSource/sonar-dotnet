@@ -31,9 +31,12 @@ public sealed class ExpectedExceptionAttributeShouldNotBeUsed : ExpectedExceptio
     protected override bool AssertInCatchFinallyBlock(SyntaxNode node)
     {
         var walker = new CatchFinallyAssertion();
-        foreach (var x in node.Parent.DescendantNodes(_ => true).Where(x => x.IsAnyKind(SyntaxKind.CatchBlock, SyntaxKind.FinallyBlock)))
+        foreach (var x in node.Parent.DescendantNodes().Where(x => x.Kind() is SyntaxKind.CatchBlock or SyntaxKind.FinallyBlock))
         {
-            walker.SafeVisit(x);
+            if (!walker.HasAssertion)
+            {
+                walker.SafeVisit(x);
+            }
         }
         return walker.HasAssertion;
     }
@@ -44,16 +47,16 @@ public sealed class ExpectedExceptionAttributeShouldNotBeUsed : ExpectedExceptio
 
         public override void VisitInvocationExpression(InvocationExpressionSyntax node)
         {
+            if (HasAssertion)
+            {
+                return;
+            }
+
             HasAssertion = node.Expression
                 .ToString()
                 .SplitCamelCaseToWords()
                 .Intersect(UnitTestHelper.KnownAssertionMethodParts)
                 .Any();
-
-            if (HasAssertion)
-            {
-                return;
-            }
 
             base.VisitInvocationExpression(node);
         }

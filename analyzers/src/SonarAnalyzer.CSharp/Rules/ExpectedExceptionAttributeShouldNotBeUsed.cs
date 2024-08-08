@@ -37,9 +37,12 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override bool AssertInCatchFinallyBlock(SyntaxNode node)
         {
             var walker = new CatchFinallyAssertion();
-            foreach (var x in node.DescendantNodes(_ => true).Where(x => x.IsAnyKind(SyntaxKind.CatchClause, SyntaxKind.FinallyClause)))
+            foreach (var x in node.DescendantNodes().Where(x => x.Kind() is SyntaxKind.CatchClause or SyntaxKind.FinallyClause))
             {
-                walker.SafeVisit(x);
+                if (!walker.HasAssertion)
+                {
+                    walker.SafeVisit(x);
+                }
             }
             return walker.HasAssertion;
         }
@@ -50,16 +53,16 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitInvocationExpression(InvocationExpressionSyntax node)
             {
+                if (HasAssertion)
+                {
+                    return;
+                }
+
                 HasAssertion = node.Expression
                     .ToString()
                     .SplitCamelCaseToWords()
                     .Intersect(UnitTestHelper.KnownAssertionMethodParts)
                     .Any();
-
-                if (HasAssertion)
-                {
-                    return;
-                }
 
                 base.VisitInvocationExpression(node);
             }

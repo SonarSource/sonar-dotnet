@@ -38,8 +38,8 @@ public class ExpectedExceptionAttributeShouldNotBeUsedTest
             .Verify();
 
     [DataTestMethod]
-    [DataRow("2.5.7.10213")]
-    [DataRow("2.6.7")]
+    [DataRow("2.5.7.10213")] // Lowest NUnit version available
+    [DataRow("2.7.1")] // Latest version of NUnit that contains the attribute
     public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit_CS(string testFwkVersion) =>
         builderCS.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs")
             .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))

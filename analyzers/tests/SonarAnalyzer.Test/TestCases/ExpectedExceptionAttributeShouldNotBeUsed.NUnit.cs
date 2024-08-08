@@ -48,7 +48,7 @@ namespace Tests.Diagnostics
     class Repro_8300
     {
         [Test]
-        [NUnit.Framework.ExpectedException(typeof(InvalidOperationException))] // Compliant
+        [NUnit.Framework.ExpectedException(typeof(InvalidOperationException))] // Compliant - using ExpectedException makes the test more readable
         public void AssertInFinally()
         {
             Console.ForegroundColor = ConsoleColor.Red;

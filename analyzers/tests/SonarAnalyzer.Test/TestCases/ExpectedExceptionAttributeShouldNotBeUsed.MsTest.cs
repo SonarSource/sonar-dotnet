@@ -21,8 +21,8 @@ namespace Tests.Diagnostics
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))] // Compliant - FN
-        public void TestMultineFalseNegative()
+        [ExpectedException(typeof(ArgumentNullException))] // FN
+        public void TestMultilineFalseNegative()
         {
             {
                 new object().ToString();
@@ -61,7 +61,7 @@ namespace Tests.Diagnostics
     class Repro_8300
     {
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))] // Compliant
+        [ExpectedException(typeof(InvalidOperationException))] // Compliant - using ExpectedException makes the test more readable
         public void AssertInFinally()
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -137,6 +137,38 @@ namespace Tests.Diagnostics
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))] // Compliant
+        public void AssertInAllCatch_InvocationBeforeAssert()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            try
+            {
+                throw new InvalidOperationException();
+            }
+            catch
+            {
+                Console.WriteLine("An invocation before Assert");
+                Assert.AreEqual(ConsoleColor.Black, Console.ForegroundColor);
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))] // Compliant
+        public void AssertInAllCatch_InvocationAfterAssert()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            try
+            {
+                throw new InvalidOperationException();
+            }
+            catch
+            {
+                Assert.AreEqual(ConsoleColor.Black, Console.ForegroundColor);
+                Console.WriteLine("An invocation after Assert");
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))] // Compliant
         public void AssertInFinallyWithCatch()
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -155,7 +187,7 @@ namespace Tests.Diagnostics
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))] // Noncompliant - FP
+        [ExpectedException(typeof(InvalidOperationException))] // Compliant
         public void AssertInCatchWithFinally()
         {
             Console.ForegroundColor = ConsoleColor.Red;
