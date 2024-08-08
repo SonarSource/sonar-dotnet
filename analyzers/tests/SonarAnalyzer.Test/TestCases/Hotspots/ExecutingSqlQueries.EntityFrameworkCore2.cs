@@ -108,4 +108,28 @@ namespace Tests.Diagnostics
     {
         public string Url { get; set; }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/9602
+    class Repro_9602
+    {
+        public void ConstantQuery(DbContext context, bool onlyEnabled)
+        {
+            string query = "SELECT id FROM users";
+            if(onlyEnabled)
+                query += " WHERE enabled = 1";
+            string query2 = $"SELECT id FROM users {(onlyEnabled ? "WHERE enabled = 1" : "")}"; // Secondary [c1, c2, c3]
+
+            context.Database.ExecuteSqlCommand(query); // Compliant
+            context.Database.ExecuteSqlCommand(query2); // Noncompliant [c1] - FP
+            context.Database.ExecuteSqlCommand($"SELECT id FROM users {(onlyEnabled ? "WHERE enabled = 1" : "")}"); // Compliant
+
+            context.Database.ExecuteSqlCommandAsync(query); // Compliant
+            context.Database.ExecuteSqlCommandAsync(query2); // Noncompliant [c2] - FP
+            context.Database.ExecuteSqlCommandAsync($"SELECT id FROM users {(onlyEnabled ? "WHERE enabled = 1" : "")}"); // Compliant
+
+            context.Query<User>().FromSql(query); // Compliant
+            context.Query<User>().FromSql(query2); // Noncompliant [c3] - FP
+            context.Query<User>().FromSql($"SELECT id FROM users {(onlyEnabled ? "WHERE enabled = 1" : "")}"); // Compliant
+        }
+    }
 }

@@ -322,4 +322,25 @@ namespace Tests.Diagnostics
             command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);    // Noncompliant
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/9602
+    class Repro_9602
+    {
+        public void ConstantQuery(SqliteConnection connection, bool onlyEnabled)
+        {
+            string query = "SELECT id FROM users";
+            if(onlyEnabled)
+                query += " WHERE enabled = 1";
+            string query2 = $"SELECT id FROM users {(onlyEnabled ? "WHERE enabled = 1" : "")}"; // Secondary [c2, c3]
+
+            var command = new SqliteCommand(query, connection);  // Compliant
+            command.CommandText = query;    // Compliant
+
+            var command2 = new SqliteCommand(query2, connection);  // Noncompliant [c2] - FP
+            command2.CommandText = query2;    // Noncompliant [c3] - FP
+
+            var command3 = new SqliteCommand($"SELECT id FROM users {(onlyEnabled ? "WHERE enabled = 1" : "")}", connection);  // Noncompliant - FP
+            command3.CommandText = $"SELECT id FROM users {(onlyEnabled ? "WHERE enabled = 1" : "")}";    // Noncompliant - FP
+        }
+    }
 }

@@ -97,6 +97,29 @@ Namespace Tests.Diagnostics
 
     End Class
 
+    ' https://github.com/SonarSource/sonar-dotnet/issues/9602
+    Class Repro_9602
+        Public Sub ConstantQuery(context As DbContext, onlyEnabled As Boolean)
+            Dim query As String = "SELECT id FROM users"
+            If onlyEnabled Then
+                query += " WHERE enabled = 1"
+            End If
+            Dim query2 As String = $"SELECT id FROM users {(If(onlyEnabled, "WHERE enabled = 1", ""))}" ' Secondary [c1, c2, c3]
+
+            context.Database.ExecuteSqlRaw(query) ' Compliant
+            context.Database.ExecuteSqlRaw(query2) ' Noncompliant [c1] - FP
+            context.Database.ExecuteSqlRaw($"SELECT id FROM users {(If(onlyEnabled, "WHERE enabled = 1", ""))}") ' Noncompliant - FP
+
+            context.Database.ExecuteSqlRawAsync(query) ' Compliant
+            context.Database.ExecuteSqlRawAsync(query2) ' Noncompliant [c2] - FP
+            context.Database.ExecuteSqlRawAsync($"SELECT id FROM users {(If(onlyEnabled, "WHERE enabled = 1", ""))}") ' Noncompliant - FP
+
+            context.Set(Of User)().FromSqlRaw(query) ' Compliant
+            context.Set(Of User)().FromSqlRaw(query2) ' Noncompliant [c3] - FP
+            context.Set(Of User)().FromSqlRaw($"SELECT id FROM users {(If(onlyEnabled, "WHERE enabled = 1", ""))}") ' Noncompliant - FP
+        End Sub
+    End Class
+
     Class User
         Private Property Id As String
         Private Property Name As String
