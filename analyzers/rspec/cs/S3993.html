@@ -1,55 +1,47 @@
 <h2>Why is this an issue?</h2>
-<p>When defining custom attributes, <code>System.AttributeUsageAttribute</code> must be used to indicate where the attribute can be applied. This will
-determine its valid locations in the code.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-using System;
-
-namespace MyLibrary
+<p>When defining custom attributes, System.AttributeUsageAttribute must be used to indicate where the attribute can be applied. This will:</p>
+<ul>
+  <li> indicate how the attribute can be used </li>
+  <li> prevent it from being used at invalid locations </li>
+</ul>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public sealed class MyAttribute : Attribute // Noncompliant - AttributeUsage is missing
 {
+    private string text;
 
-   public sealed class MyAttribute :Attribute // Noncompliant
-   {
-      string text;
+    public MyAttribute(string text)
+    {
+        this.text = text;
+    }
 
-      public MyAttribute(string myText)
-      {
-         text = myText;
-      }
-      public string Text
-      {
-         get
-         {
-            return text;
-         }
-      }
-   }
+    public string Text =&gt; text;
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-using System;
-
-namespace MyLibrary
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Enum | AttributeTargets.Interface | AttributeTargets.Delegate)]
+public sealed class MyAttribute : Attribute
 {
+    private string text;
 
-   [AttributeUsage(AttributeTargets.Class | AttributeTargets.Enum | AttributeTargets.Interface | AttributeTargets.Delegate)]
-   public sealed class MyAttribute :Attribute
-   {
-      string text;
+    public MyAttribute(string text)
+    {
+        this.text = text;
+    }
 
-      public MyAttribute(string myText)
-      {
-         text = myText;
-      }
-      public string Text
-      {
-         get
-         {
-            return text;
-         }
-      }
-   }
+    public string Text =&gt; text;
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/reflection-and-attributes/creating-custom-attributes">Create custom
+  attributes</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.attributeusageattribute">AttributeUsageAttribute class</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.attributeusageattribute">AttributeUsageAttribute class</a> </li>
+</ul>
 
