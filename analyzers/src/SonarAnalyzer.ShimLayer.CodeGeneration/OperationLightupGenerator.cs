@@ -264,7 +264,7 @@ namespace StyleCop.Analyzers.CodeGeneration
                     continue;
                 }
 
-                var propertyType = property.NeedsWrapper ? SyntaxFactory.IdentifierName(property.Type + "Wrapper") : property.AccessorResultType;
+                var propertyType = property.NeedsWrapper ? SyntaxFactory.IdentifierName(property.WrappedType) : property.AccessorResultType; // Sonar
 
                 // ConstructorAccessor(this.WrappedOperation)
                 var evaluatedAccessor = SyntaxFactory.InvocationExpression(
@@ -321,7 +321,7 @@ namespace StyleCop.Analyzers.CodeGeneration
 
                     var propertyType = property.IsSkipped
                         ? SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.ObjectKeyword))
-                        : property.NeedsWrapper ? SyntaxFactory.IdentifierName(property.Type + "Wrapper") : property.AccessorResultType;
+                        : property.NeedsWrapper ? SyntaxFactory.IdentifierName(property.WrappedType) : property.AccessorResultType; // Sonar
 
                     // public IOperation Instance => ((IMemberReferenceOperationWrapper)this).Instance;
                     members = members.Add(SyntaxFactory.PropertyDeclaration(
@@ -1028,12 +1028,14 @@ namespace StyleCop.Analyzers.CodeGeneration
                 this.Name = node.Attribute("Name").Value;
                 this.AccessorName = this.Name + "Accessor";
                 this.Type = node.Attribute("Type").Value;
+                this.TypeNonNullable = Type.TrimEnd('?'); // Sonar - When comparing types as strings, the nullable suffix should be ignored.
+                this.WrappedType = TypeNonNullable + "Wrapper"; // Sonar
 
                 this.IsNew = node.Attribute("New")?.Value == "true";
                 this.IsPublicProperty = node.Attribute("Internal")?.Value != "true";
                 this.IsOverride = node.Attribute("Override")?.Value == "true";
 
-                this.IsSkipped = this.Type switch
+                this.IsSkipped = this.TypeNonNullable switch // Sonar
                 {
                     "ArgumentKind" => true,
                     "BranchKind" => true,
@@ -1048,8 +1050,8 @@ namespace StyleCop.Analyzers.CodeGeneration
                     _ => !this.IsPublicProperty || this.IsOverride,
                 };
 
-                this.NeedsWrapper = IsAnyOperation(this.Type) && this.Type != "IOperation";
-                this.IsDerivedOperationArray = IsAnyOperationArray(this.Type) && this.Type != "ImmutableArray<IOperation>";
+                this.NeedsWrapper = IsAnyOperation(TypeNonNullable) && TypeNonNullable != "IOperation"; // Sonar
+                this.IsDerivedOperationArray = IsAnyOperationArray(TypeNonNullable) && TypeNonNullable != "ImmutableArray<IOperation>"; // Sonar
 
                 if (this.IsDerivedOperationArray)
                 {
@@ -1057,7 +1059,7 @@ namespace StyleCop.Analyzers.CodeGeneration
                         identifier: SyntaxFactory.Identifier("ImmutableArray"),
                         typeArgumentList: SyntaxFactory.TypeArgumentList(SyntaxFactory.SingletonSeparatedList<TypeSyntax>(SyntaxFactory.IdentifierName("IOperation"))));
                 }
-                else if (IsAnyOperation(this.Type))
+                else if (IsAnyOperation(TypeNonNullable)) // Sonar
                 {
                     this.AccessorResultType = SyntaxFactory.IdentifierName("IOperation");
                 }
@@ -1071,7 +1073,7 @@ namespace StyleCop.Analyzers.CodeGeneration
 
             public bool IsPublicProperty { get; }
 
-            public bool IsOverride{ get; } // Added by Sonar. Usages are also by Sonar.
+            public bool IsOverride { get; } // Added by Sonar. Usages are also by Sonar.
 
             public bool IsSkipped { get; }
 
@@ -1080,6 +1082,10 @@ namespace StyleCop.Analyzers.CodeGeneration
             public string AccessorName { get; }
 
             public string Type { get; }
+
+            public string TypeNonNullable { get; } // Sonar
+
+            public string WrappedType { get; } // Sonar
 
             public bool NeedsWrapper { get; }
 
