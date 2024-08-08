@@ -18,3 +18,5 @@ They are used to generate the `Lightup` layer. We copy them from Roslyn and not 
 - Keep our changes and all logic in a dedicated directory `Sonar`, using partial classes, extension methods, and external handlers.
 - Keep the namespace. Have different license headers.
 - Inject ourselves to the StyleCop code with minimal changes that are annotated with `// Sonar` comment everywhere.
+- When importing `Syntax.xml` and `OperationInterfaces.xml`, keep the original file content, including the whitespaces, by downloading the file to the project directory. 
+If you copy-paste the content, you may lose the whitespaces, and the diff will be harder to read and future updates harder to apply.
