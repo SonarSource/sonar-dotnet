@@ -16,7 +16,7 @@ jobs:
           secrets: |
             development/github/token/{REPO_OWNER_NAME_DASH}-lock token | lock_token;
             development/kv/data/slack token | slack_api_token;
-      - uses: sonarsource/gh-action-lt-backlog/ToggleLockBranch@v1
+      - uses: sonarsource/gh-action-lt-backlog/ToggleLockBranch@v2
         with:
           github-token: ${{ fromJSON(steps.secrets.outputs.vault).lock_token }}
           slack-token: ${{ fromJSON(steps.secrets.outputs.vault).slack_api_token }}

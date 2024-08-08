@@ -21,7 +21,7 @@ jobs:
         with:
           secrets: |
             development/github/token/{REPO_OWNER_NAME_DASH}-kanban token | kanban_token;
-      - uses: sonarsource/gh-action-lt-backlog/CreateCardForIssueFromLabel@v1
+      - uses: sonarsource/gh-action-lt-backlog/CreateCardForIssueFromLabel@v2
         with:
           github-token: ${{ fromJSON(steps.secrets.outputs.vault).kanban_token }}
           project-number: 10
@@ -35,7 +35,7 @@ jobs:
         github.event.issue.state != 'closed'
         && startsWith(github.event.label.name, 'Sprint:')
     steps:
-      - uses: sonarsource/gh-action-lt-backlog/CreateCardForIssue@v1
+      - uses: sonarsource/gh-action-lt-backlog/CreateCardForIssue@v2
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           column-id: 4971951

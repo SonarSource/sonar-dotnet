@@ -15,7 +15,7 @@ jobs:
         && github.event.review.author_association != 'NONE'
         && github.event.review.state == 'changes_requested'
     steps:
-      - uses: sonarsource/gh-action-lt-backlog/MoveCardAfterReview@v1
+      - uses: sonarsource/gh-action-lt-backlog/MoveCardAfterReview@v2
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           column-id: 4971952     # Kanban "In progress" column
@@ -28,7 +28,7 @@ jobs:
         && github.event.review.author_association != 'NONE'
         && github.event.review.state == 'approved'
     steps:
-      - uses: sonarsource/gh-action-lt-backlog/MoveCardAfterReview@v1
+      - uses: sonarsource/gh-action-lt-backlog/MoveCardAfterReview@v2
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           column-id: 4971954     # Kanban "Review approved" column

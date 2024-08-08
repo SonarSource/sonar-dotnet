@@ -9,7 +9,7 @@ jobs:
     name: Create RSPEC Issue
     runs-on: ubuntu-latest
     steps:
-      - uses: sonarsource/gh-action-lt-backlog/CreateRspecIssue@v1
+      - uses: sonarsource/gh-action-lt-backlog/CreateRspecIssue@v2
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           column-id: 4971951  # Kanban "To Do" column

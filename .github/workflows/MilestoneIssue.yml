@@ -12,7 +12,7 @@ jobs:
     if: github.event.issue.state != 'closed'
 
     steps:
-      - uses: sonarsource/gh-action-lt-backlog/CreateCardForIssue@v1
+      - uses: sonarsource/gh-action-lt-backlog/CreateCardForIssue@v2
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           column-id: 4971951     # Kanban "To do" column

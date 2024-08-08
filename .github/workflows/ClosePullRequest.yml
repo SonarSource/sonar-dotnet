@@ -19,7 +19,7 @@ jobs:
         && github.event.pull_request.user.type != 'Bot'
         && github.event.pull_request.merged
     steps:
-      - uses: sonarsource/gh-action-lt-backlog/CreateNote@v1
+      - uses: sonarsource/gh-action-lt-backlog/CreateNote@v2
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           column-id: 4971951

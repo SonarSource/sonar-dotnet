@@ -15,11 +15,11 @@ jobs:
         github.event.pull_request.head.repo.full_name == github.repository
         && github.event.sender.type != 'Bot'
     steps:
-      - uses: sonarsource/gh-action-lt-backlog/CreateCardForStandalonePR@v1
+      - uses: sonarsource/gh-action-lt-backlog/CreateCardForStandalonePR@v2
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           column-id: 4971952  # Kanban "In Progress" column
-      - uses: sonarsource/gh-action-lt-backlog/CopyLabelToPR@v1
+      - uses: sonarsource/gh-action-lt-backlog/CopyLabelToPR@v2
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           label-prefix: 'Sprint:'
