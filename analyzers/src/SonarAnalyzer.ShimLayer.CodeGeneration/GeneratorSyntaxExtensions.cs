@@ -3,6 +3,7 @@
 
 namespace StyleCop.Analyzers.CodeGeneration
 {
+    using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
 
     internal static class GeneratorSyntaxExtensions
@@ -11,7 +12,7 @@ namespace StyleCop.Analyzers.CodeGeneration
             where TSyntax : SyntaxNode
         {
             return syntax.WithLeadingTrivia(SyntaxFactory.TriviaList(
-                SyntaxFactory.PreprocessingMessage(Environment.NewLine)));
+                SyntaxFactory.PreprocessingMessage(XmlSyntaxFactory.CrLf)));
         }
     }
 }
