@@ -78,7 +78,7 @@ namespace StyleCop.Analyzers.CodeGeneration
                 {
                     return new CompilationData(
                         ExistingTypesWrapper: new EquatableValue<ImmutableDictionary<string, ExistingTypeData>>(
-                            existingTypes.ToImmutableDictionary(type => type.GetType().FullName),
+                            existingTypes.ToImmutableDictionary(type => type.TypeName),
                             ImmutableDictionaryEqualityComparer<string, ExistingTypeData>.Default));
                 });
 
