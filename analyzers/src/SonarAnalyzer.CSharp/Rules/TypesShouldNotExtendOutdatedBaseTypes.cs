@@ -18,43 +18,42 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class TypesShouldNotExtendOutdatedBaseTypes : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class TypesShouldNotExtendOutdatedBaseTypes : SonarDiagnosticAnalyzer
-    {
-        private const string DiagnosticId = "S4052";
-        private const string MessageFormat = "Refactor this type not to derive from an outdated type '{0}'.";
+    private const string DiagnosticId = "S4052";
+    private const string MessageFormat = "Refactor this type not to derive from an outdated type '{0}'.";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    private static readonly DiagnosticDescriptor Rule =
+        DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        private static readonly ImmutableArray<KnownType> OutdatedTypes =
-            ImmutableArray.Create(
-                KnownType.System_ApplicationException,
-                KnownType.System_Xml_XmlDocument,
-                KnownType.System_Collections_CollectionBase,
-                KnownType.System_Collections_DictionaryBase,
-                KnownType.System_Collections_Queue,
-                KnownType.System_Collections_ReadOnlyCollectionBase,
-                KnownType.System_Collections_SortedList,
-                KnownType.System_Collections_Stack);
+    private static readonly ImmutableArray<KnownType> OutdatedTypes =
+        ImmutableArray.Create(
+            KnownType.System_ApplicationException,
+            KnownType.System_Xml_XmlDocument,
+            KnownType.System_Collections_CollectionBase,
+            KnownType.System_Collections_DictionaryBase,
+            KnownType.System_Collections_Queue,
+            KnownType.System_Collections_ReadOnlyCollectionBase,
+            KnownType.System_Collections_SortedList,
+            KnownType.System_Collections_Stack);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(c =>
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(c =>
+        {
+            var classDeclaration = (ClassDeclarationSyntax)c.Node;
+            var classSymbol = (INamedTypeSymbol)c.ContainingSymbol;
+
+            if (!classDeclaration.Identifier.IsMissing
+                && classSymbol.BaseType.IsAny(OutdatedTypes))
             {
-                var classDeclaration = (ClassDeclarationSyntax)c.Node;
-                var classSymbol = (INamedTypeSymbol)c.ContainingSymbol;
-
-                if (!classDeclaration.Identifier.IsMissing
-                    && classSymbol.BaseType.IsAny(OutdatedTypes))
-                {
-                    c.ReportIssue(Rule, classDeclaration.Identifier, messageArgs: classSymbol.BaseType.ToDisplayString());
-                }
-            },
-            // The rule is not applicable for records as at the current moment all the outdated types are classes and records cannot inherit classes.
-            SyntaxKind.ClassDeclaration);
-    }
+                c.ReportIssue(Rule, classDeclaration.Identifier, messageArgs: classSymbol.BaseType.ToDisplayString());
+            }
+        },
+        // The rule is not applicable for records as at the current moment all the outdated types are classes and records cannot inherit classes.
+        SyntaxKind.ClassDeclaration);
 }
