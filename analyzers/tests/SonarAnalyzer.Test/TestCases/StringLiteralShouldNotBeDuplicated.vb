@@ -109,3 +109,49 @@
     End Class
 
 End Namespace
+
+' https://github.com/SonarSource/sonar-dotnet/issues/9569
+Namespace SqlNamedParameters
+    Public Class Program
+        Public Sub ExecuteSqlCommands()
+            Dim userCommand = New SqlCommand("SELECT * FROM Users WHERE Name = @Name")
+            userCommand.AddParameter(New SqlParameter("@Name", "John Doe"))                    ' Noncompliant - FP: @Name refers to parameters in different SQL tables.
+            Dim users = userCommand.ExecuteQuery()                                             ' Renaming one does not necessitate renaming of parameters with the same name from other tables.
+
+            Dim companyCommand = New SqlCommand("SELECT * FROM Companies WHERE Name = @Name")
+            companyCommand.AddParameter(New SqlParameter("@Name", "Contosco"))                 ' Secondary - FP
+            Dim companies = companyCommand.ExecuteQuery()
+
+            Dim productCommand = New SqlCommand("SELECT * FROM Products WHERE Name = @Name")
+            productCommand.AddParameter(New SqlParameter("@Name", "CleanBot 9000"))            ' Secondary - FP
+            Dim products = productCommand.ExecuteQuery()
+
+            Dim countryCommand = New SqlCommand("SELECT * FROM Countries WHERE Name = @Name")
+            countryCommand.AddParameter(New SqlParameter("@Name", "Norway"))                   ' Secondary - FP
+            Dim countries = countryCommand.ExecuteQuery()
+        End Sub
+    End Class
+
+    Public Class SqlCommand
+        Public ReadOnly Property CommandText As String
+        Public Sub New(commandText As String)
+            Me.CommandText = commandText
+        End Sub
+
+        Public Sub AddParameter(parameter As SqlParameter)
+        End Sub
+
+        Public Function ExecuteQuery() As Object
+            Return Nothing
+        End Function
+    End Class
+
+    Public Class SqlParameter
+        Public ReadOnly Property Name As String
+        Public ReadOnly Property Value As String
+        Public Sub New(name As String, value As String)
+            Me.Name = name
+            Me.Value = value
+        End Sub
+    End Class
+End Namespace

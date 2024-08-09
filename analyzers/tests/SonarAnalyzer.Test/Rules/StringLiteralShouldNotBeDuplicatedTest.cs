@@ -26,6 +26,15 @@ namespace SonarAnalyzer.Test.Rules
     [TestClass]
     public class StringLiteralShouldNotBeDuplicatedTest
     {
+#if NET
+        private static readonly ImmutableArray<MetadataReference> DapperReferences = [
+            CoreMetadataReference.SystemDataCommon,
+            CoreMetadataReference.SystemComponentModelPrimitives,
+            ..NuGetMetadataReference.Dapper(),
+            ..NuGetMetadataReference.SystemDataSqlClient()
+        ];
+#endif
+
         private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.StringLiteralShouldNotBeDuplicated>();
 
         [TestMethod]
@@ -56,6 +65,19 @@ namespace SonarAnalyzer.Test.Rules
         public void StringLiteralShouldNotBeDuplicated_CSharp11() =>
             builderCS.AddPaths("StringLiteralShouldNotBeDuplicated.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+        [TestMethod]
+        public void StringLiteralShouldNotBeDuplicated_CS_Dapper() =>
+            builderCS.AddPaths("StringLiteralShouldNotBeDuplicated.Dapper.cs")
+                .AddReferences(DapperReferences)
+                .Verify();
+
+        [TestMethod]
+        public void StringLiteralShouldNotBeDuplicated_VB_Dapper() =>
+            new VerifierBuilder<VB.StringLiteralShouldNotBeDuplicated>()
+                .AddPaths("StringLiteralShouldNotBeDuplicated.Dapper.vb")
+                .AddReferences(DapperReferences)
                 .Verify();
 
 #endif
