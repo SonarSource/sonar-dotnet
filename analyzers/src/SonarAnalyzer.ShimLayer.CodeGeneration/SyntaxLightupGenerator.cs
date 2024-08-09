@@ -1496,15 +1496,15 @@ namespace StyleCop.Analyzers.CodeGeneration
 
         private sealed class EquatableValue<T> : IEquatable<EquatableValue<T>?>
         {
-            public T Value { get; } // Sonar
-
-            public IEqualityComparer<T> Comparer { get; } // Sonar
-
-            public EquatableValue(T value, IEqualityComparer<T> comparer) // Sonar
+            public EquatableValue(T value, IEqualityComparer<T> comparer)
             {
                 this.Value = value;
                 this.Comparer = comparer;
             }
+
+            public T Value { get; }
+
+            public IEqualityComparer<T> Comparer { get; }
 
             public bool Equals(EquatableValue<T>? other)
             {
