@@ -14,6 +14,30 @@ namespace Tests.Diagnostics
         }
 
         [TestMethod]
+        [ExpectedExceptionAttribute(typeof(ArgumentNullException))]  // Noncompliant
+        public void WithAttributeSuffix()
+        {
+            var x = true;
+            x.ToString();
+        }
+
+        [TestMethod]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ExpectedException(typeof(ArgumentNullException))]  // Noncompliant
+        public void FullyQualifiedAttribute()
+        {
+            var x = true;
+            x.ToString();
+        }
+
+        [TestMethod]
+        [Unrelated.ExpectedException(typeof(ArgumentNullException))]  // Noncompliant - FP
+        public void UnrelatedAttribute()
+        {
+            var x = true;
+            x.ToString();
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))] // Compliant - one line
         public void TestFoo3()
         {
@@ -203,6 +227,20 @@ namespace Tests.Diagnostics
             {
                 Console.WriteLine(Console.ForegroundColor);
             }
+        }
+    }
+}
+
+namespace Unrelated
+{
+    [AttributeUsage(AttributeTargets.Method)]
+    public class ExpectedExceptionAttribute : Attribute
+    {
+        public Type ExceptionType { get; private set; }
+
+        public ExpectedExceptionAttribute(Type exceptionType)
+        {
+            ExceptionType = exceptionType;
         }
     }
 }
