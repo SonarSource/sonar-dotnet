@@ -26,7 +26,7 @@ Public Class ExceptionTests
     End Sub
 
     <TestMethod>
-    <Unrelated.ExpectedException(GetType(ArgumentNullException))>  ' Compliant
+    <Unrelated.ExpectedException(GetType(ArgumentNullException))>  ' Noncompliant - FPgit
     Public Sub UnrelatedAttribute()
         Dim x As Boolean = True
         x.ToString()

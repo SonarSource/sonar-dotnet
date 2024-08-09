@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Rules
     {
         internal const string DiagnosticId = "S3431";
 
-        protected abstract bool HasExpectedExceptionAttribute(SyntaxNode node);
+        protected abstract SyntaxNode FindExpectedExceptionAttribute(SyntaxNode node);
         protected abstract bool HasMultiLineBody(SyntaxNode node);
         protected abstract bool AssertInCatchFinallyBlock(SyntaxNode node);
 
@@ -43,13 +43,11 @@ namespace SonarAnalyzer.Rules
 
                 c.RegisterNodeAction(Language.GeneratedCodeRecognizer, cc =>
                     {
-                        if (HasExpectedExceptionAttribute(cc.Node)
+                        if (FindExpectedExceptionAttribute(cc.Node) is {} attribute
                             && HasMultiLineBody(cc.Node)
-                            && !AssertInCatchFinallyBlock(cc.Node)
-                            && cc.SemanticModel.GetDeclaredSymbol(cc.Node) is { } methodSymbol
-                            && methodSymbol.GetAttributes(UnitTestHelper.KnownExpectedExceptionAttributes).FirstOrDefault() is { } attribute)
+                            && !AssertInCatchFinallyBlock(cc.Node))
                         {
-                            cc.ReportIssue(Rule, attribute.ApplicationSyntaxReference.GetSyntax());
+                            cc.ReportIssue(Rule, attribute);
                         }
                     },
                     Language.SyntaxKind.MethodDeclarations);

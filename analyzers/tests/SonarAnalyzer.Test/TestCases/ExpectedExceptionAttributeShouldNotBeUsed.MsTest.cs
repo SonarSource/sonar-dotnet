@@ -30,7 +30,7 @@ namespace Tests.Diagnostics
         }
 
         [TestMethod]
-        [Unrelated.ExpectedException(typeof(ArgumentNullException))]  // Compliant
+        [Unrelated.ExpectedException(typeof(ArgumentNullException))]  // Noncompliant - FP
         public void UnrelatedAttribute()
         {
             var x = true;
