@@ -21,64 +21,63 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class ExpectedExceptionAttributeShouldNotBeUsedTest
 {
-    [TestClass]
-    public class ExpectedExceptionAttributeShouldNotBeUsedTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ExpectedExceptionAttributeShouldNotBeUsed>();
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ExpectedExceptionAttributeShouldNotBeUsed>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ExpectedExceptionAttributeShouldNotBeUsed>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ExpectedExceptionAttributeShouldNotBeUsed>();
 
-        [DataTestMethod]
-        [DataRow("1.1.11")]
-        [DataRow(Constants.NuGetLatestVersion)]
-        public void ExpectedExceptionAttributeShouldNotBeUsed_MsTest_CS(string testFwkVersion) =>
-            builderCS.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.MsTest.cs")
-                .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
-                .Verify();
+    [DataTestMethod]
+    [DataRow("1.1.11")]
+    [DataRow(Constants.NuGetLatestVersion)]
+    public void ExpectedExceptionAttributeShouldNotBeUsed_MsTest_CS(string testFwkVersion) =>
+        builderCS.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.MsTest.cs")
+            .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
+            .Verify();
 
-        [DataTestMethod]
-        [DataRow("2.5.7.10213")]
-        [DataRow("2.6.7")]
-        public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit_CS(string testFwkVersion) =>
-            builderCS.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs")
-                .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
-                .Verify();
+    [DataTestMethod]
+    [DataRow("2.5.7.10213")] // Lowest NUnit version available
+    [DataRow("2.7.1")] // Latest version of NUnit that contains the attribute
+    public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit_CS(string testFwkVersion) =>
+        builderCS.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs")
+            .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
+            .Verify();
 
-        [DataTestMethod]
-        [DataRow("3.0.0")]
-        [DataRow(Constants.NuGetLatestVersion)]
-        [Description("Starting with version 3.0.0 the attribute was removed.")]
-        public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit_NoIssue_CS(string testFwkVersion) =>
-            builderCS.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs")
-                .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
-                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
-                .VerifyNoIssues();
+    [DataTestMethod]
+    [DataRow("3.0.0")]
+    [DataRow(Constants.NuGetLatestVersion)]
+    [Description("Starting with version 3.0.0 the attribute was removed.")]
+    public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit_NoIssue_CS(string testFwkVersion) =>
+        builderCS.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs")
+            .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
+            .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+            .VerifyNoIssues();
 
-        [DataTestMethod]
-        [DataRow("1.1.11")]
-        [DataRow(Constants.NuGetLatestVersion)]
-        public void ExpectedExceptionAttributeShouldNotBeUsed_MsTest_VB(string testFwkVersion) =>
-            builderVB.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.MsTest.vb")
-                .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
-                .Verify();
+    [DataTestMethod]
+    [DataRow("1.1.11")]
+    [DataRow(Constants.NuGetLatestVersion)]
+    public void ExpectedExceptionAttributeShouldNotBeUsed_MsTest_VB(string testFwkVersion) =>
+        builderVB.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.MsTest.vb")
+            .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
+            .Verify();
 
-        [DataTestMethod]
-        [DataRow("2.5.7.10213")]
-        [DataRow("2.6.7")]
-        public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit_VB(string testFwkVersion) =>
-            builderVB.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.NUnit.vb")
-                .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
-                .Verify();
+    [DataTestMethod]
+    [DataRow("2.5.7.10213")]
+    [DataRow("2.6.7")]
+    public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit_VB(string testFwkVersion) =>
+        builderVB.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.NUnit.vb")
+            .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
+            .Verify();
 
-        [DataTestMethod]
-        [DataRow("3.0.0")]
-        [DataRow(Constants.NuGetLatestVersion)]
-        [Description("Starting with version 3.0.0 the attribute was removed.")]
-        public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit_NoIssue_VB(string testFwkVersion) =>
-            builderVB.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.NUnit.vb")
-                .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
-                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
-                .VerifyNoIssues();
-    }
+    [DataTestMethod]
+    [DataRow("3.0.0")]
+    [DataRow(Constants.NuGetLatestVersion)]
+    [Description("Starting with version 3.0.0 the attribute was removed.")]
+    public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit_NoIssue_VB(string testFwkVersion) =>
+        builderVB.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.NUnit.vb")
+            .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
+            .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+            .VerifyNoIssues();
 }

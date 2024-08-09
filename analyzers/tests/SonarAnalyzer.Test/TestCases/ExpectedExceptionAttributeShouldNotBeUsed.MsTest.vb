@@ -32,5 +32,113 @@ Public Class ExceptionTests
     Public Function ExpectedExceptionAttrbuteAllowedForSingleLineFunction() As Integer
         Return 42
     End Function
-
 End Class
+
+' https://github.com/SonarSource/sonar-dotnet/issues/8300
+Class Repro_8300
+    <TestMethod>
+    <ExpectedException(GetType(InvalidOperationException))> ' Compliant - using ExpectedException makes the test more readable
+    Public Sub AssertInFinally()
+        Console.ForegroundColor = ConsoleColor.Red
+        Try
+            Throw New InvalidOperationException()
+        Finally
+            Assert.AreEqual(ConsoleColor.Black, Console.ForegroundColor)
+        End Try
+    End Sub
+
+    <TestMethod>
+    <ExpectedException(GetType(InvalidOperationException))> ' Noncompliant
+    Public Sub NoAssertInFinally()
+        Console.ForegroundColor = ConsoleColor.Red
+        Try
+            Throw New InvalidOperationException()
+        Finally
+            Console.WriteLine("No Assert")
+        End Try
+    End Sub
+
+    <TestMethod>
+    <ExpectedException(GetType(InvalidOperationException))> ' Noncompliant
+    Public Sub NoAssertInCatch()
+        Console.ForegroundColor = ConsoleColor.Red
+        Try
+            Throw New InvalidOperationException()
+        Catch e As InvalidOperationException
+            Console.ForegroundColor = ConsoleColor.Black
+        End Try
+    End Sub
+
+    <TestMethod>
+    <ExpectedException(GetType(InvalidOperationException))> ' Compliant
+    Public Sub AssertInCatch()
+        Console.ForegroundColor = ConsoleColor.Red
+        Try
+            Throw New InvalidOperationException()
+        Catch e As InvalidOperationException
+            Assert.AreEqual(ConsoleColor.Black, Console.ForegroundColor)
+        End Try
+    End Sub
+
+    <TestMethod>
+    <ExpectedException(GetType(InvalidOperationException))> ' Compliant
+    Public Sub AssertInAllCatch()
+        Console.ForegroundColor = ConsoleColor.Red
+        Try
+            Throw New InvalidOperationException()
+        Catch
+            Assert.AreEqual(ConsoleColor.Black, Console.ForegroundColor)
+        End Try
+    End Sub
+
+    <TestMethod>
+    <ExpectedException(GetType(InvalidOperationException))> ' Compliant
+    Public Sub AssertInAllCatch_InvocationBeforeAssert()
+        Console.ForegroundColor = ConsoleColor.Red
+        Try
+            Throw New InvalidOperationException()
+        Catch
+            Console.WriteLine("An invocation before Assert")
+            Assert.AreEqual(ConsoleColor.Black, Console.ForegroundColor)
+        End Try
+    End Sub
+
+    <TestMethod>
+    <ExpectedException(GetType(InvalidOperationException))> ' Compliant
+    Public Sub AssertInAllCatch_InvocationAfterAssert()
+        Console.ForegroundColor = ConsoleColor.Red
+        Try
+            Throw New InvalidOperationException()
+        Catch
+            Assert.AreEqual(ConsoleColor.Black, Console.ForegroundColor)
+            Console.WriteLine("An invocation after Assert")
+        End Try
+    End Sub
+
+    <TestMethod>
+    <ExpectedException(GetType(InvalidOperationException))> ' Compliant
+    Public Sub AssertInFinallyWithCatch()
+        Console.ForegroundColor = ConsoleColor.Red
+        Try
+            Throw New InvalidOperationException()
+        Catch e As InvalidOperationException
+            Console.WriteLine(Console.ForegroundColor)
+        Finally
+            Assert.AreEqual(ConsoleColor.Black, Console.ForegroundColor)
+        End Try
+    End Sub
+
+    <TestMethod>
+    <ExpectedException(GetType(InvalidOperationException))> ' Compliant
+    Public Sub AssertInCatchWithFinally()
+        Console.ForegroundColor = ConsoleColor.Red
+        Try
+            Throw New InvalidOperationException()
+        Catch e As InvalidOperationException
+            Assert.AreEqual(ConsoleColor.Black, Console.ForegroundColor)
+        Finally
+            Console.WriteLine(Console.ForegroundColor)
+        End Try
+    End Sub
+End Class
+

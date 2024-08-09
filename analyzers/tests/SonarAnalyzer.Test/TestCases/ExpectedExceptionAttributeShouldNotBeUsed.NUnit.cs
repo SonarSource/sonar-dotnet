@@ -43,4 +43,23 @@ namespace Tests.Diagnostics
         [NUnit.Framework.ExpectedException(typeof(ArgumentNullException))]
         public void NoBody() // Error [CS0501,CS1002]
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/8300
+    class Repro_8300
+    {
+        [Test]
+        [NUnit.Framework.ExpectedException(typeof(InvalidOperationException))] // Compliant - using ExpectedException makes the test more readable
+        public void AssertInFinally()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            try
+            {
+                throw new InvalidOperationException();
+            }
+            finally
+            {
+                Assert.AreEqual(ConsoleColor.Black, Console.ForegroundColor);
+            }
+        }
+    }
 }

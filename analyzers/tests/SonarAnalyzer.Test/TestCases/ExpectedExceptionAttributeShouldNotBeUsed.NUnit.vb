@@ -42,3 +42,17 @@ End Interface
 Public MustInherit Class AbstractClass
     Protected MustOverride Function AbstractFunction() As Boolean
 End Class
+
+' https://github.com/SonarSource/sonar-dotnet/issues/8300
+Class Repro_8300
+    <Test>
+    <ExpectedException(GetType(InvalidOperationException))>
+    Public Sub AssertInFinally()
+        Console.ForegroundColor = ConsoleColor.Red
+        Try
+            Throw New InvalidOperationException()
+        Finally
+            Assert.AreEqual(ConsoleColor.Black, Console.ForegroundColor)
+        End Try
+    End Sub
+End Class
