@@ -1,38 +1,53 @@
 <h2>Why is this an issue?</h2>
-<p>You cannot assume that any given stream reading call will fill the <code>byte[]</code> passed in to the method with the number of bytes requested.
-Instead, you must check the value returned by the read method to see how many bytes were read. Fail to do so, and you introduce a bug that is both
-harmful and difficult to reproduce.</p>
-<p>This rule raises an issue when a <code>Stream.Read</code> or a <code>Stream.ReadAsync</code> method is called, but the return value is not
-checked.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-public void DoSomething(string fileName)
+<p>Invoking a stream reading method without verifying the number of bytes read can lead to erroneous assumptions. A Stream can represent any I/O
+operation, such as reading a file, network communication, or inter-process communication. As such, it is not guaranteed that the <code>byte[]</code>
+passed into the method will be filled with the requested number of bytes. Therefore, inspecting the value returned by the reading method is important
+to ensure the number of bytes read.</p>
+<p>Neglecting the returned length read can result in a bug that is difficult to reproduce.</p>
+<p>This rule raises an issue when the returned value is ignored for the following methods:</p>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.read">Stream.Read</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.readasync">Stream.ReadAsync</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.readatleast">Stream.ReadAtLeast</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.readatleastasync">Stream.ReadAtLeastAsync</a> </li>
+</ul>
+<h2>How to fix it</h2>
+<p>Check the return value of stream reading methods to verify the actual number of bytes read, and use this value when processing the data to avoid
+potential bugs.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public byte[] ReadFile(string fileName)
 {
-  using (var stream = File.Open(fileName, FileMode.Open))
-  {
+    using var stream = File.Open(fileName, FileMode.Open);
     var result = new byte[stream.Length];
+
     stream.Read(result, 0, (int)stream.Length); // Noncompliant
-    // ... do something with result
-  }
+
+    return result;
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-public void DoSomething(string fileName)
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+public byte[] ReadFile(string fileName)
 {
-  using (var stream = File.Open(fileName, FileMode.Open))
-  {
+    using var stream = File.Open(fileName, FileMode.Open);
+    using var ms = new MemoryStream();
     var buffer = new byte[1024];
-    using (var ms = new MemoryStream())
+    int read;
+
+    while ((read = stream.Read(buffer, 0, buffer.Length)) &gt; 0)
     {
-        int read;
-        while ((read = stream.Read(buffer, 0, buffer.Length)) &gt; 0)
-        {
-            ms.Write(buffer, 0, read);
-        }
-        // ... do something with ms
+        ms.Write(buffer, 0, read);
     }
-  }
+
+    return ms.ToArray();
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.read">Stream.Read Method</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.readasync">Stream.ReadAsync Method</a> </li>
+</ul>
 

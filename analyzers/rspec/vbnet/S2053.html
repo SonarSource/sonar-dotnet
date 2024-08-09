@@ -49,7 +49,7 @@ End Sub
 Imports System.Security.Cryptography
 
 Public Sub Hash(Password As String)
-    Dim Hashed As New Rfc2898DeriveBytes(Password, 64)
+    Dim Hashed As New Rfc2898DeriveBytes(Password, 32, 10000, HashAlgorithmName.SHA256)
 End Sub
 </pre>
 <h3>How does this work?</h3>
