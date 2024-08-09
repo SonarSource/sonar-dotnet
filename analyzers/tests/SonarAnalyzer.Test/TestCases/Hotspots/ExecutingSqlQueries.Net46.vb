@@ -276,6 +276,25 @@ Namespace Tests.Diagnostics
             y = sensitiveQuery                                                                                  ' Secondary [4] {{SQL query is assigned to y.}} ^13#1
             command.CommandText = y                                                                             ' Noncompliant  [4]
         End Sub
+    End Class
 
+    ' https://github.com/SonarSource/sonar-dotnet/issues/9602
+    Class Repro_9602
+        Public Sub ConstantBuiltQuery(connection As MSSqlite.SqliteConnection, onlyEnabled As Boolean)
+            Dim query As String = "SELECT id FROM users"
+            If onlyEnabled Then
+                query += " WHERE enabled = 1"
+            End If
+            Dim query2 As String = $"SELECT id FROM users {(If(onlyEnabled, "WHERE enabled = 1", ""))}" ' Secondary [c2, c3]
+
+            Dim command As New MSSqlite.SqliteCommand(query, connection)  ' Compliant
+            command.CommandText = query    ' Compliant
+
+            Dim command2 As New MSSqlite.SqliteCommand(query2, connection)  ' Noncompliant [c2] - FP
+            command2.CommandText = query2    ' Noncompliant [c3] - FP
+
+            Dim command3 As New MSSqlite.SqliteCommand($"SELECT id FROM users {(If(onlyEnabled, "WHERE enabled = 1", ""))}", connection)  ' Noncompliant - FP
+            command3.CommandText = $"SELECT id FROM users {(If(onlyEnabled, "WHERE enabled = 1", ""))}"    ' Noncompliant - FP
+        End Sub
     End Class
 End Namespace

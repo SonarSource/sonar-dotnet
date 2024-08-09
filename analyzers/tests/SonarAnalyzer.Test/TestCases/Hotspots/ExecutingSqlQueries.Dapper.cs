@@ -210,4 +210,20 @@ namespace Tests.Diagnostics
             new CommandDefinition(query + param, new { Id = 1 });                            // Noncompliant
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/9602
+    class Repro_9602
+    {
+        public void ConstantQuery(IDbConnection dbConnection, bool onlyEnabled)
+        {
+            string query = "SELECT id FROM users";
+            if(onlyEnabled)
+                query += " WHERE enabled = 1";
+            string query2 = $"SELECT id FROM users {(onlyEnabled ? "WHERE enabled = 1" : "")}"; // Secondary - FP
+
+            dbConnection.Query<int>(query); // Compliant
+            dbConnection.Query<int>(query2); // Noncompliant - FP
+            dbConnection.Query<int>($"SELECT id FROM users {(onlyEnabled ? "WHERE enabled = 1" : "")}"); // Noncompliant - FP
+        }
+    }
 }
