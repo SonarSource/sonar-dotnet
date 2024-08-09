@@ -17,7 +17,6 @@ namespace StyleCop.Analyzers.CodeGeneration
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
-    using Microsoft.CodeAnalysis.Text;
 
     [Generator]
     internal sealed class SyntaxLightupGenerator : IIncrementalGenerator
@@ -1462,26 +1461,29 @@ namespace StyleCop.Analyzers.CodeGeneration
 
         private sealed record CompilationData
         {
-            public EquatableValue<ImmutableDictionary<string, ExistingTypeData>> ExistingTypesWrapper { get; }
+            public EquatableValue<ImmutableDictionary<string, ExistingTypeData>> ExistingTypesWrapper { get; } // Sonar
 
-            public CompilationData(EquatableValue<ImmutableDictionary<string, ExistingTypeData>> ExistingTypesWrapper)
+            public ImmutableDictionary<string, ExistingTypeData> ExistingTypes => this.ExistingTypesWrapper.Value;
+
+            public CompilationData(EquatableValue<ImmutableDictionary<string, ExistingTypeData>> ExistingTypesWrapper) // Sonar
             {
                 this.ExistingTypesWrapper = ExistingTypesWrapper;
             }
-
-            public ImmutableDictionary<string, ExistingTypeData> ExistingTypes => this.ExistingTypesWrapper.Value;
         }
 
         private record class ExistingTypeData
         {
-            public string TypeName { get; }
-            public EquatableValue<ImmutableArray<string>> MemberNamesWrapper { get; }
-            public ExistingTypeData(string TypeName, EquatableValue<ImmutableArray<string>> MemberNamesWrapper)
+            public string TypeName { get; } // Sonar
+
+            public EquatableValue<ImmutableArray<string>> MemberNamesWrapper { get; } // Sonar
+
+            public ImmutableArray<string> MemberNames => this.MemberNamesWrapper.Value;
+
+            public ExistingTypeData(string TypeName, EquatableValue<ImmutableArray<string>> MemberNamesWrapper) // Sonar
             {
                 this.TypeName = TypeName;
                 this.MemberNamesWrapper = MemberNamesWrapper;
             }
-            public ImmutableArray<string> MemberNames => this.MemberNamesWrapper.Value;
 
             public static ExistingTypeData FromNamedType(INamedTypeSymbol namedType, string typeName)
             {
@@ -1494,15 +1496,15 @@ namespace StyleCop.Analyzers.CodeGeneration
 
         private sealed class EquatableValue<T> : IEquatable<EquatableValue<T>?>
         {
-            public EquatableValue(T value, IEqualityComparer<T> comparer)
+            public T Value { get; } // Sonar
+
+            public IEqualityComparer<T> Comparer { get; } // Sonar
+
+            public EquatableValue(T value, IEqualityComparer<T> comparer) // Sonar
             {
                 this.Value = value;
                 this.Comparer = comparer;
             }
-
-            public T Value { get; }
-
-            public IEqualityComparer<T> Comparer { get; }
 
             public bool Equals(EquatableValue<T>? other)
             {
