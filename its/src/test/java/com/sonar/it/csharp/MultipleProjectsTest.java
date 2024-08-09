@@ -98,11 +98,12 @@ public class MultipleProjectsTest {
       .collect(Collectors.toList());
 
     assertThat(barIssues)
-      .hasSize(2)
+      .hasSize(3)
       .extracting(Issues.Issue::getRule, Issues.Issue::getLine)
       .containsExactlyInAnyOrder(
         tuple("csharpsquid:S1134", 3),
-        tuple("csharpsquid:S1135", 4));
+        tuple("csharpsquid:S1135", 4),
+        tuple("csharpsquid:S2325", 16));
   }
 
   @Test
@@ -114,7 +115,9 @@ public class MultipleProjectsTest {
 
     assertThat(barIssues)
       .extracting(Issues.Issue::getRule, Issues.Issue::getLine)
-      .containsExactlyInAnyOrder(tuple("csharpsquid:S1135", 1));
+      .containsExactlyInAnyOrder(
+        tuple("csharpsquid:S1135", 1),
+        tuple("csharpsquid:S2325", 10));
   }
 
   /* Files */

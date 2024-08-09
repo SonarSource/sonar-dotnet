@@ -2,40 +2,100 @@
 <p>It should be clear to a casual reader what code a test is testing and what results are expected. Unfortunately, that’s not usually the case with
 the <code>ExpectedException</code> attribute since an exception could be thrown from almost any line in the method.</p>
 <p>This rule detects MSTest and NUnit <code>ExpectedException</code> attribute.</p>
-<h3>Noncompliant code example</h3>
+<h3>Exceptions</h3>
+<p>This rule ignores:</p>
+<ul>
+  <li> single-line tests, since it is obvious in such methods where the exception is expected to be thrown </li>
+  <li> tests when it tests control flow and assertion are present in either a <code>catch</code> or <code>finally</code> clause </li>
+</ul>
 <pre>
+[TestMethod]
+[ExpectedException(typeof(InvalidOperationException))]
+public void UsingTest()
+{
+    Console.ForegroundColor = ConsoleColor.Black;
+    try
+    {
+        using var _ = new ConsoleAlert();
+        Assert.AreEqual(ConsoleColor.Red, Console.ForegroundColor);
+        throw new InvalidOperationException();
+    }
+    finally
+    {
+        Assert.AreEqual(ConsoleColor.Black, Console.ForegroundColor); // The exception itself is not relevant for the test.
+    }
+}
+
+public sealed class ConsoleAlert : IDisposable
+{
+    private readonly ConsoleColor previous;
+
+    public  ConsoleAlert()
+    {
+        previous = Console.ForegroundColor;
+        Console.ForegroundColor = ConsoleColor.Red;
+    }
+
+    public void Dispose() =&gt;
+        Console.ForegroundColor = previous;
+}
+</pre>
+<h2>How to fix it in MSTest</h2>
+<p>Remove the <code>ExpectedException</code> attribute in favor of using the <a
+href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.visualstudio.testtools.unittesting.assert.throwsexception">Assert.ThrowsException</a>
+assertion.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 [TestMethod]
 [ExpectedException(typeof(ArgumentNullException))]  // Noncompliant
-public void TestNullArg()
+public void Method_NullParam()
 {
-  //...
+    var sut = new MyService();
+    sut.Method(null);
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 [TestMethod]
-public void TestNullArg()
+public void Method_NullParam()
 {
-  bool callFailed = false;
-  try
-  {
-    //...
-  }
-  catch (ArgumentNullException)
-  {
-    callFailed = true;
-  }
-  Assert.IsTrue(callFailed, "Expected call to MyMethod to fail with ArgumentNullException");
+    var sut = new MyService();
+    Assert.ThrowsException&lt;ArgumentNullException&gt;(() =&gt; sut.Method(null));
 }
 </pre>
-<p>or</p>
-<pre>
-[TestMethod]
-public void TestNullArg()
+<h2>How to fix it in NUnit</h2>
+<p>Remove the <code>ExpectedException</code> attribute in favor of using the <a
+href="https://docs.nunit.org/articles/nunit/writing-tests/assertions/classic-assertions/Assert.Throws.html">Assert.Throws</a> assertion.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+[Test]
+[ExpectedException(typeof(ArgumentNullException))]  // Noncompliant
+public void Method_NullParam()
 {
-  Assert.ThrowsException&lt;ArgumentNullException&gt;(() =&gt; /*...*/);
+    var sut = new MyService();
+    sut.Method(null);
 }
 </pre>
-<h3>Exceptions</h3>
-<p>This rule ignores one-line test methods, since it is obvious in such methods where the exception is expected to be thrown.</p>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+[Test]
+public void Method_NullParam()
+{
+    var sut = new MyService();
+    Assert.Throws&lt;ArgumentNullException&gt;(() =&gt; sut.Method(null));
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.visualstudio.testtools.unittesting.assert.throwsexception">Assert.ThrowsException
+  Method</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.visualstudio.testtools.unittesting.expectedexceptionattribute">ExpectedExceptionAttribute Class</a> </li>
+  <li> NUnit - <a href="https://docs.nunit.org/articles/nunit/writing-tests/assertions/classic-assertions/Assert.Throws.html">Assert.Throws</a> </li>
+  <li> NUnit - <a href="https://docs.nunit.org/2.4/exception.html">ExpectedExceptionAttribute</a> </li>
+</ul>
 

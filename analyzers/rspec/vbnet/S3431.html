@@ -2,34 +2,94 @@
 <p>It should be clear to a casual reader what code a test is testing and what results are expected. Unfortunately, that’s not usually the case with
 the <code>ExpectedException</code> attribute since an exception could be thrown from almost any line in the method.</p>
 <p>This rule detects MSTest and NUnit <code>ExpectedException</code> attribute.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-&lt;TestMethod&gt;
-&lt;ExpectedException(GetType(ArgumentNullException))&gt; ' Noncompliant
-Public Sub TestNullArg()
-  '...
-End Sub
-</pre>
-<h3>Compliant solution</h3>
-<pre>
-&lt;TestMethod&gt;
-Public Sub TestNullArg()
-    Dim CallFailed As Boolean = False
-    Try
-    ' ...
-    Catch ex As Exception
-        CallFailed = true
-    End Try
-    Assert.IsTrue(CallFailed, "Expected call to MyMethod to fail with ArgumentNullException")
-End Sub
-</pre>
-<p>or</p>
-<pre>
-&lt;TestMethod&gt;
-Public Sub TestNullArg()
-    Assert.ThrowsException(Of ArgumentNullException)(Sub() ... )
-End Sub
-</pre>
 <h3>Exceptions</h3>
-<p>This rule ignores one-line test methods, since it is obvious in such methods where the exception is expected to be thrown.</p>
+<p>This rule ignores:</p>
+<ul>
+  <li> single-line tests, since it is obvious in such methods where the exception is expected to be thrown </li>
+  <li> tests when it tests control flow and assertion are present in either a <code>Catch</code> or <code>Finally</code> clause </li>
+</ul>
+<pre>
+&lt;TestMethod&gt;
+&lt;ExpectedException(GetType(InvalidOperationException))&gt;
+Public Sub UsingTest()
+    Console.ForegroundColor = ConsoleColor.Black
+    Try
+        Using alert As New ConsoleAlert()
+            Assert.AreEqual(ConsoleColor.Red, Console.ForegroundColor)
+            Throw New InvalidOperationException()
+        End Using
+    Finally
+        Assert.AreEqual(ConsoleColor.Black, Console.ForegroundColor) ' The exception itself is not relevant for the test.
+    End Try
+End Sub
+
+Public NotInheritable Class ConsoleAlert
+    Implements IDisposable
+
+    Private ReadOnly previous As ConsoleColor
+
+    Public Sub New()
+        previous = Console.ForegroundColor
+        Console.ForegroundColor = ConsoleColor.Red
+    End Sub
+
+    Public Sub Dispose() Implements IDisposable.Dispose
+        Console.ForegroundColor = previous
+    End Sub
+End Class
+</pre>
+<h2>How to fix it in MSTest</h2>
+<p>Remove the <code>ExpectedException</code> attribute in favor of using the <a
+href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.visualstudio.testtools.unittesting.assert.throwsexception">Assert.ThrowsException</a>
+assertion.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+&lt;TestMethod&gt;
+&lt;ExpectedException(GetType(ArgumentNullException))&gt;  ' Noncompliant
+Public Sub Method_NullParam()
+    Dim sut As New MyService()
+    sut.Method(Nothing)
+End Sub
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+&lt;TestMethod&gt;
+Public Sub Method_NullParam()
+    Dim sut As New MyService()
+    Assert.ThrowsException(Of ArgumentNullException)(Sub() sut.Method(Nothing))
+End Sub
+</pre>
+<h2>How to fix it in NUnit</h2>
+<p>Remove the <code>ExpectedException</code> attribute in favor of using the <a
+href="https://docs.nunit.org/articles/nunit/writing-tests/assertions/classic-assertions/Assert.Throws.html">Assert.Throws</a> assertion.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+&lt;Test&gt;
+&lt;ExpectedException(GetType(ArgumentNullException))&gt;  ' Noncompliant
+Public Sub Method_NullParam()
+    Dim sut As New MyService()
+    sut.Method(Nothing)
+End Sub
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+&lt;Test&gt;
+Public Sub Method_NullParam()
+    Dim sut As New MyService()
+    Assert.Throws(Of ArgumentNullException)(Sub() sut.Method(Nothing))
+End Sub
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.visualstudio.testtools.unittesting.assert.throwsexception">Assert.ThrowsException
+  Method</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.visualstudio.testtools.unittesting.expectedexceptionattribute">ExpectedExceptionAttribute Class</a> </li>
+  <li> NUnit - <a href="https://docs.nunit.org/articles/nunit/writing-tests/assertions/classic-assertions/Assert.Throws.html">Assert.Throws</a> </li>
+  <li> NUnit - <a href="https://docs.nunit.org/2.4/exception.html">ExpectedExceptionAttribute</a> </li>
+</ul>
 

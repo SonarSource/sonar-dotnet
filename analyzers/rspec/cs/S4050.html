@@ -1,51 +1,45 @@
 <h2>Why is this an issue?</h2>
-<p>When implementing operator overloads, it is very important to make sure that all related operators and methods are consistent in their
-implementation.</p>
+<p>When overloading some arithmetic operator overloads, it is very important to make sure that all related operators and methods are consistent in
+their implementation.</p>
 <p>The following guidelines should be followed:</p>
 <ul>
-  <li> When providing <code>operator ==</code> you should also provide <code>operator !=</code> and vice-versa. </li>
-  <li> When providing <code>operator ==</code> you should also provide <code>Equals(Object)</code> and <code>GetHashCode()</code>. </li>
-  <li> When providing <code>operator +, -, *, / or %</code>&nbsp;you should also provide <code>operator ==</code>, respecting previous guidelines.
+  <li> When providing <code>operator ==, !=</code> you should also provide <code>Equals(Object)</code> and <code>GetHashCode()</code>. </li>
+  <li> When providing <code>operator +, -, *, / or %</code>&nbsp;you should also provide <code>operator ==</code>, respecting the previous guideline.
   </li>
 </ul>
-<p>This rule raises an issue when any of these guidelines are not followed on publicly-visible type (public, protected or protected internal).</p>
-<h3>Noncompliant code example</h3>
-<pre>
-using System;
-
-namespace MyLibrary
+<p>This rule raises an issue when any of these guidelines are not followed on a publicly-visible class or struct (<code>public</code>,
+<code>protected</code> or <code>protected internal</code>).</p>
+<h2>How to fix it</h2>
+<p>Make sure to implement all related operators.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public class Foo // Noncompliant
 {
-  public class Foo // Noncompliant
-  {
     private int left;
     private int right;
 
     public Foo(int l, int r)
     {
-      this.left = l;
-      this.right = r;
+        this.left = l;
+        this.right = r;
     }
 
     public static Foo operator +(Foo a, Foo b)
     {
-      return new Foo(a.left + b.left, a.right + b.right);
+        return new Foo(a.left + b.left, a.right + b.right);
     }
 
     public static Foo operator -(Foo a, Foo b)
     {
-      return new Foo(a.left - b.left, a.right - b.right);
+        return new Foo(a.left - b.left, a.right - b.right);
     }
-  }
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-using System;
-
-namespace MyLibrary
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+public class Foo
 {
-  public class Foo
-  {
     private int left;
     private int right;
 
@@ -53,41 +47,50 @@ namespace MyLibrary
     {
       this.left = l;
       this.right = r;
-    }
-
-    public static Foo operator +(Foo a, Foo b)
-    {
-      return new Foo(a.left + b.left, a.right + b.right);
-    }
-
-    public static Foo operator -(Foo a, Foo b)
-    {
-      return new Foo(a.left - b.left, a.right - b.right);
-    }
-
-    public static bool operator ==(Foo a, Foo b)
-    {
-      return (a.left == b.left &amp;&amp; a.right == b.right);
-    }
-
-    public static bool operator !=(Foo a, Foo b)
-    {
-      return !(a == b);
     }
 
     public override bool Equals(Object obj)
     {
-      Foo a = obj as Foo;
-      if (a == null)
-        return false;
-      return this == a;
+        var a = obj as Foo;
+        if (a == null)
+          return false;
+        return this == a;
     }
 
     public override int GetHashCode()
     {
-       return (this.left * 10) + this.right;
+        return HashCode.Combine(right, left);
     }
-  }
+
+    public static Foo operator +(Foo a, Foo b)
+    {
+        return new Foo(a.left + b.left, a.right + b.right);
+    }
+
+    public static Foo operator -(Foo a, Foo b)
+    {
+        return new Foo(a.left - b.left, a.right - b.right);
+    }
+
+    public static bool operator ==(Foo a, Foo b)
+    {
+        return a.left == b.left &amp;&amp; a.right == b.right;
+    }
+
+    public static bool operator !=(Foo a, Foo b)
+    {
+        return !(a == b);
+    }
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading">Operator
+  overloading</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/equality-operators">Equality
+  operators</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/arithmetic-operators">Arithmetic
+  operators (C# reference)</a> </li>
+</ul>
 
