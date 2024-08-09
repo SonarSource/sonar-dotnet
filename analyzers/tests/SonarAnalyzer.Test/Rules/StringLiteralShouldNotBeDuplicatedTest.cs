@@ -26,8 +26,7 @@ namespace SonarAnalyzer.Test.Rules
     [TestClass]
     public class StringLiteralShouldNotBeDuplicatedTest
     {
-
-# if NET
+#if NET
         private static readonly ImmutableArray<MetadataReference> DapperReferences = [
             CoreMetadataReference.SystemDataCommon,
             CoreMetadataReference.SystemComponentModelPrimitives,
