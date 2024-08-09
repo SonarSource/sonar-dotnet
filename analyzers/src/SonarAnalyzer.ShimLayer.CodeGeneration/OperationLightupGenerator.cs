@@ -1135,7 +1135,7 @@ namespace StyleCop.Analyzers.CodeGeneration
 
                 this.IsNew = node.Attribute("New")?.Value == "true";
                 this.IsPublicProperty = node.Attribute("Internal")?.Value != "true";
-                this.IsOverride = node.Attribute("Override")?.Value == "true";
+                this.IsOverride = node.Attribute("Override")?.Value == "true"; // Sonar
 
                 this.IsSkipped = this.TypeNonNullable switch // Sonar
                 {
