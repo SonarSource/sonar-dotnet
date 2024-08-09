@@ -25,6 +25,10 @@ public sealed class ExpectedExceptionAttributeShouldNotBeUsed : ExpectedExceptio
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
+    protected override bool HasExpectedExceptionAttribute(SyntaxNode node) =>
+        node is MethodStatementSyntax methodStatementSyntax
+        && methodStatementSyntax.AttributeLists.Any(x => x.Attributes.Any(y => y.GetName() is "ExpectedException" or "ExpectedExceptionAttribute"));
+
     protected override bool HasMultiLineBody(SyntaxNode node) =>
         node.Parent is MethodBlockSyntax { Statements.Count: > 1 };
 

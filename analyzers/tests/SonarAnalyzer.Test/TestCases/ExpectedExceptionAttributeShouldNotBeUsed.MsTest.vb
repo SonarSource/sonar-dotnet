@@ -11,6 +11,27 @@ Public Class ExceptionTests
         instance.ToString()
     End Sub
 
+    <TestMethod>
+    <ExpectedExceptionAttribute(GetType(ArgumentNullException))>  ' Noncompliant
+    Public Sub WithAttributeSuffix()
+        Dim x As Boolean = True
+        x.ToString()
+    End Sub
+
+    <TestMethod>
+    <Microsoft.VisualStudio.TestTools.UnitTesting.ExpectedException(GetType(ArgumentNullException))>  ' Noncompliant
+    Public Sub FullyQualifiedAttribute()
+        Dim x As Boolean = True
+        x.ToString()
+    End Sub
+
+    <TestMethod>
+    <Unrelated.ExpectedException(GetType(ArgumentNullException))>  ' Compliant
+    Public Sub UnrelatedAttribute()
+        Dim x As Boolean = True
+        x.ToString()
+    End Sub
+
     ' Noncompliant@+2
     <TestMethod>
     <ExpectedException(GetType(DivideByZeroException))>
@@ -142,3 +163,15 @@ Class Repro_8300
     End Sub
 End Class
 
+Namespace Unrelated
+    <AttributeUsage(AttributeTargets.Method)>
+    Public Class ExpectedExceptionAttribute
+        Inherits Attribute
+
+        Public ReadOnly Property ExceptionType As Type
+
+        Public Sub New(exceptionType As Type)
+            Me.ExceptionType = exceptionType
+        End Sub
+    End Class
+End Namespace

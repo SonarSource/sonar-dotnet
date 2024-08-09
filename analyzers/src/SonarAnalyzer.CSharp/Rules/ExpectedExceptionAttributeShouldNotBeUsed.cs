@@ -27,6 +27,10 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
+        protected override bool HasExpectedExceptionAttribute(SyntaxNode node) =>
+            node is MethodDeclarationSyntax methodDeclaration
+                && methodDeclaration.AttributeLists.Any(x => x.Attributes.Any(y => y.GetName() is "ExpectedException" or "ExpectedExceptionAttribute"));
+
         protected override bool HasMultiLineBody(SyntaxNode node)
         {
             var declaration = (MethodDeclarationSyntax)node;
