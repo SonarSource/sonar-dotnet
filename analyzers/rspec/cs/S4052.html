@@ -1,21 +1,23 @@
 <h2>Why is this an issue?</h2>
-<p>With the advent of .NET framework version 2, certain practices have become obsolete.</p>
+<p>With the advent of .NET Framework 2.0, certain practices and types have become obsolete.</p>
 <p>In particular, exceptions should now extend <code>System.Exception</code> instead of <code>System.ApplicationException</code>. Similarly, generic
 collections should be used instead of the older, non-generic, ones. Finally when creating an XML view, you should not extend
-<code>System.Xml.XmlDocument</code>.</p>
-<p>This rule raises an issue when an externally visible type extends one of these types:</p>
+<code>System.Xml.XmlDocument</code>. This rule raises an issue when an externally visible type extends one of these types:</p>
 <ul>
-  <li> <code>System.ApplicationException</code> </li>
-  <li> <code>System.Xml.XmlDocument</code> </li>
-  <li> <code>System.Collections.CollectionBase</code> </li>
-  <li> <code>System.Collections.DictionaryBase</code> </li>
-  <li> <code>System.Collections.Queue</code> </li>
-  <li> <code>System.Collections.ReadOnlyCollectionBase</code> </li>
-  <li> <code>System.Collections.SortedList</code> </li>
-  <li> <code>System.Collections.Stack</code> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.applicationexception">System.ApplicationException</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.xml.xmldocument">System.Xml.XmlDocument</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.collectionbase">System.Collections.CollectionBase</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.dictionarybase">System.Collections.DictionaryBase</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.queue">System.Collections.Queue</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.readonlycollectionbase">System.Collections.ReadOnlyCollectionBase</a>
+  </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.sortedlist">System.Collections.SortedList</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.stack">System.Collections.Stack</a> </li>
 </ul>
-<h3>Noncompliant code example</h3>
-<pre>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 using System;
 using System.Collections;
 
@@ -26,10 +28,10 @@ namespace MyLibrary
   }
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 using System;
-using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace MyLibrary
 {
