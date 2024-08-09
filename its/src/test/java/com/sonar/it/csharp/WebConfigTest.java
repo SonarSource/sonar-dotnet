@@ -48,10 +48,10 @@ class WebConfigTest extends WebConfigBase {
     assertContentLengthHotspot(hotspots.get(5), 14, "WebConfig.CSharp/Web.config");
 
     List<Issues.Issue> issues = Tests.getIssues(PROJECT);
-    assertThat(issues).hasSize(6);
+    assertThat(issues).hasSize(7);
     assertIssue(issues.get(0), 9, "PathOutsideProjectRoot/Web.config");
     assertIssue(issues.get(1), 3, "PathOutsideProjectRoot/appsettings.json");
-    assertIssue(issues.get(4), 9, "WebConfig.CSharp/Web.config");
-    assertIssue(issues.get(5), 3, "WebConfig.CSharp/appsettings.json");
+    assertIssue(issues.get(5), 9, "WebConfig.CSharp/Web.config");
+    assertIssue(issues.get(6), 3, "WebConfig.CSharp/appsettings.json");
   }
 }
