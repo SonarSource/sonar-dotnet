@@ -57,8 +57,6 @@ public sealed class ExpectedExceptionAttributeShouldNotBeUsed : ExpectedExceptio
                 .SplitCamelCaseToWords()
                 .Intersect(UnitTestHelper.KnownAssertionMethodParts)
                 .Any();
-
-            base.VisitInvocationExpression(node);
         }
     }
 }

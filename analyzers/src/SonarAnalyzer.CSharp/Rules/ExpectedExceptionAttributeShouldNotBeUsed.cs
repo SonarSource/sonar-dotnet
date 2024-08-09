@@ -63,8 +63,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     .SplitCamelCaseToWords()
                     .Intersect(UnitTestHelper.KnownAssertionMethodParts)
                     .Any();
-
-                base.VisitInvocationExpression(node);
             }
         }
     }
