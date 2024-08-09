@@ -74,8 +74,7 @@ namespace MyLibrary
         public override int GetHashCode() => 0;
     }
 
-    public class Foo5
-//               ^^^^ Noncompliant {{Provide an implementation for: 'operator=='.}}
+    public class Foo5 // Compliant - Covered by CS0216
     {
         public static object operator !=(Foo5 a, Foo5 b) => new object(); // Error [CS0216] - requires == operator
 
@@ -84,7 +83,7 @@ namespace MyLibrary
     }
 
     public class Foo6
-//               ^^^^ Noncompliant {{Provide an implementation for: 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.}}
+//               ^^^^ Noncompliant {{Provide an implementation for: 'Object.Equals' and 'Object.GetHashCode'.}}
     {
         public static object operator ==(Foo6 a, Foo6 b) => new object(); // Error [CS0216] - requires != operator
     }
