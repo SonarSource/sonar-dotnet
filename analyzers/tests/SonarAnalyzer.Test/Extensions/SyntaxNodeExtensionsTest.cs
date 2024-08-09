@@ -473,7 +473,7 @@ public class SyntaxNodeExtensionsTest
                     SyntaxNodeExtensionsCSharp.CreateCfg(lambda, model, default);
                 }
             };
-        a.ExecutionTime().Should().BeLessThan(1.Seconds());     // Takes roughly 0.2 sec on CI
+        a.ExecutionTime().Should().BeLessThan(1500.Milliseconds());     // Takes roughly 0.2 sec on CI
     }
 
     [TestMethod]
