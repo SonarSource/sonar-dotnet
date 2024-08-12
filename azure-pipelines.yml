@@ -68,5 +68,5 @@ steps:
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: '$(Agent.TempDirectory)/sign-key.asc'  # Path to the downloaded secure file
-    artifactName: 'secure-file'
+    ArtifactName: 'secure-file'
     publishLocation: 'pipeline'
