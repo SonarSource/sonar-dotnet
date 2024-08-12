@@ -98,15 +98,23 @@ public class TestUtils {
     assertThat(task.getWarningsList()).isEmpty();
   }
 
+  public static void verifyGuiTestOnlyProjectAnalysisWarning(Orchestrator orchestrator, BuildResult buildResult, String language)
+  {
+    verifyGuiTestOnlyProjectAnalysisWarning(orchestrator, buildResult, language, new String[0]);
+  }
+
   // Verify an AnalysisWarning is raised inside the SQ GUI (on the project dashboard)
-  public static void verifyGuiTestOnlyProjectAnalysisWarning(Orchestrator orchestrator, BuildResult buildResult, String language) {
+  public static void verifyGuiTestOnlyProjectAnalysisWarning(Orchestrator orchestrator, BuildResult buildResult, String language, String... additionalWarnings) {
     Ce.Task task = TestUtils.getAnalysisWarningsTask(orchestrator, buildResult);
     assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);
-    assertThat(task.getWarningsList()).containsExactly("Your project contains only TEST-code for language " + language
+    List<String> expectedWarnings = new ArrayList<>();
+    expectedWarnings.add("Your project contains only TEST-code for language " + language
       + " and no MAIN-code for any language, so only TEST-code related results are imported. "
       + "Many of our rules (e.g. vulnerabilities) are raised only on MAIN-code. "
       + "Read more about how the SonarScanner for .NET detects test projects: "
       + "https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
+    Collections.addAll(expectedWarnings, additionalWarnings);
+    assertThat(task.getWarningsList()).containsExactlyElementsOf(expectedWarnings);
   }
 
   public static Ce.Task getAnalysisWarningsTask(Orchestrator orchestrator, BuildResult buildResult) {

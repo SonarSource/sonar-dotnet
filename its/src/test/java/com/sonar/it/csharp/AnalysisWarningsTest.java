@@ -52,7 +52,10 @@ class AnalysisWarningsTest {
 
     Ce.Task task = TestUtils.getAnalysisWarningsTask(ORCHESTRATOR, buildResult);
     assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);
-    assertThat(task.getWarningsList()).containsExactly("First message", "Second message");
+    assertThat(task.getWarningsList()).containsExactly(
+      "First message",
+      "Second message",
+      "Multi-Language analysis is enabled. If this was not intended, please set \"/d:sonar.scanner.scanAll=false\" in the begin step.");
   }
 
   @Test
@@ -60,7 +63,9 @@ class AnalysisWarningsTest {
     BuildResult buildResult = Tests.analyzeProject(temp, "Roslyn.1.3.2");
     Ce.Task task = TestUtils.getAnalysisWarningsTask(ORCHESTRATOR, buildResult);
     assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);
-    assertThat(task.getWarningsList()).containsExactly("The analysis using MsBuild 14 is no longer supported and the analysis with MsBuild 15 is deprecated. Please update your pipeline to MsBuild 16 or higher.");
+    assertThat(task.getWarningsList()).containsExactly(
+      "The analysis using MsBuild 14 is no longer supported and the analysis with MsBuild 15 is deprecated. Please update your pipeline to MsBuild 16 or higher.",
+      "Multi-Language analysis is enabled. If this was not intended, please set \"/d:sonar.scanner.scanAll=false\" in the begin step.");
   }
 
   @Test
@@ -68,6 +73,8 @@ class AnalysisWarningsTest {
     BuildResult buildResult = Tests.analyzeProject(temp, "Roslyn.2.4.0");
     Ce.Task task = TestUtils.getAnalysisWarningsTask(ORCHESTRATOR, buildResult);
     assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);
-    assertThat(task.getWarningsList()).containsExactly("The analysis using MsBuild 15 is deprecated. Please update your pipeline to MsBuild 16 or higher.");
+    assertThat(task.getWarningsList()).containsExactly(
+      "The analysis using MsBuild 15 is deprecated. Please update your pipeline to MsBuild 16 or higher.",
+      "Multi-Language analysis is enabled. If this was not intended, please set \"/d:sonar.scanner.scanAll=false\" in the begin step.");
   }
 }

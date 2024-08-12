@@ -68,7 +68,7 @@ public class TestProjectTest {
         "Many of our rules (e.g. vulnerabilities) are raised only on MAIN-code. " +
         "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects",
       "Found 1 MSBuild C# project: 1 TEST project.");
-    TestUtils.verifyGuiTestOnlyProjectAnalysisWarning(ORCHESTRATOR, buildResult, "C#");
+    TestUtils.verifyGuiTestOnlyProjectAnalysisWarning(ORCHESTRATOR, buildResult, "C#", "Multi-Language analysis is enabled. If this was not intended, please set \"/d:sonar.scanner.scanAll=false\" in the begin step.");
   }
 
   @Test
@@ -110,6 +110,6 @@ public class TestProjectTest {
         "Many of our rules (e.g. vulnerabilities) are raised only on MAIN-code. " +
         "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects");
     assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 1 MSBuild C# project: 1 TEST project.");
-    TestUtils.verifyGuiTestOnlyProjectAnalysisWarning(ORCHESTRATOR, buildResult, "C#");
+    TestUtils.verifyGuiTestOnlyProjectAnalysisWarning(ORCHESTRATOR, buildResult, "C#", "Multi-Language analysis is enabled. If this was not intended, please set \"/d:sonar.scanner.scanAll=false\" in the begin step.");
   }
 }
