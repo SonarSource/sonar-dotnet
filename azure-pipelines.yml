@@ -57,10 +57,16 @@ resources:
 # something
 steps:
 - task: DownloadSecureFile@1
-  displayName: 'Download the sign key'
-  name: signKey
   inputs:
-    secureFile: 'sign-key.asc'
+    secureFile: '3755ac9b-4269-4218-a8d7-97aa4f1dd117'  # Secure file ID for sign-key.asc
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
+- script: |
+    echo "Secure file downloaded to $(Agent.TempDirectory)"
+    ls -la $(Agent.TempDirectory)
+  displayName: 'List contents of temp directory'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Agent.TempDirectory)/sign-key.asc'  # Path to the downloaded secure file
+    artifactName: 'secure-file'
+    publishLocation: 'pipeline'
