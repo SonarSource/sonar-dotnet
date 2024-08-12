@@ -69,7 +69,8 @@ public class VbMainCodeCsTestCodeTest {
     assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains(
       "INFO: Found 1 MSBuild VB.NET project: 1 MAIN project.",
       "INFO: Found 1 MSBuild C# project: 1 TEST project.");
-    TestUtils.verifyNoGuiWarnings(ORCHESTRATOR, buildResult);
+    assertThat(TestUtils.getAnalysisWarningsTask(ORCHESTRATOR, buildResult).getWarningsList()).containsExactly(
+      "Multi-Language analysis is enabled. If this was not intended, please set \"/d:sonar.scanner.scanAll=false\" in the begin step.");
   }
 
   @Test
