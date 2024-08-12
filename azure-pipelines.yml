@@ -54,7 +54,7 @@ resources:
       name: pipelines-yaml-templates
       ref:  refs/tags/v3.0.0
 
-
+# something
 steps:
 - task: DownloadSecureFile@1
   displayName: 'Download the sign key'
