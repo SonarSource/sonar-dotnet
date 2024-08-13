@@ -56,10 +56,6 @@ resources:
 
 
 steps:
-- task: NuGetToolInstaller@1
-  displayName: "Install NuGet"
-
-- template: set-azp-variables-steps.yml@pipelines-yaml-templates
 
 - powershell: .\scripts\Mend\Mend-Scan.ps1
   displayName: "Mend scan"
