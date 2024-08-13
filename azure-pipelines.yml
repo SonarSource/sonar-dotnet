@@ -59,7 +59,6 @@ steps:
 
 - powershell: .\scripts\Mend\Mend-Scan.ps1
   displayName: "Mend scan"
-  condition: eq(variables.isReleaseBranch, 'True')
   env:
     WS_PRODUCTNAME: '$(MEND_PRODUCTNAME)'
     WS_APIKEY: '$(MEND_APIKEY)'
