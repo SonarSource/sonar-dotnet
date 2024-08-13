@@ -267,9 +267,13 @@ class Repro9613
 {
     public async Task<int> Run()
     {
-        return Method(); // Noncompliant, FP the methods have different signatures
+        var a =  Method();                        // Noncompliant, FP the methods have different signatures
+        return MethodNonOptionalParameters(true);
     }
 
     public int Method(bool something = true) => 1;
-    public async Task<int> MethodAsync(string somethingElse = "") => await Task.FromResult((int)1);
+    public async Task<int> MethodAsync(string somethingElse = "") => await Task.FromResult(1);
+
+    public int MethodNonOptionalParameters(bool something) => 1;
+    public async Task<int> MethodNonOptionalParametersAsync(string somethingElse) => await Task.FromResult(1);
 }
