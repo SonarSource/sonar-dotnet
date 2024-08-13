@@ -55,23 +55,17 @@ resources:
       ref:  refs/tags/v3.0.0
 
 
-  - job: dotNetAnalysis
-    displayName: '.Net Analysis'
-    workspace:
-      clean: all
-    # This job runs the .Net code analysis and uploads to SonarCloud the test results and coverage reports generated
-    # in previous jobs.
-    steps:
-    - task: NuGetToolInstaller@1
-      displayName: "Install NuGet"
+steps:
+- task: NuGetToolInstaller@1
+  displayName: "Install NuGet"
 
-    - template: set-azp-variables-steps.yml@pipelines-yaml-templates
+- template: set-azp-variables-steps.yml@pipelines-yaml-templates
 
-    - powershell: .\scripts\Mend\Mend-Scan.ps1
-      displayName: "Mend scan"
-      condition: eq(variables.isReleaseBranch, 'True')
-      env:
-        WS_PRODUCTNAME: '$(MEND_PRODUCTNAME)'
-        WS_APIKEY: '$(MEND_APIKEY)'
-        BUILD_NUMBER: '$(Build.BuildId)'
-        GIT_SHA: '$(Build.SourceVersion)'
+- powershell: .\scripts\Mend\Mend-Scan.ps1
+  displayName: "Mend scan"
+  condition: eq(variables.isReleaseBranch, 'True')
+  env:
+    WS_PRODUCTNAME: '$(MEND_PRODUCTNAME)'
+    WS_APIKEY: '$(MEND_APIKEY)'
+    BUILD_NUMBER: '$(Build.BuildId)'
+    GIT_SHA: '$(Build.SourceVersion)'
