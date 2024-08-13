@@ -43,7 +43,7 @@ public class C
         ReturnMethod(); // Noncompliant
         _ = ReturnMethod(); // Noncompliant
         this.ReturnMethod().ReturnMethod().ReturnMethod();
-//      ^^^^^^^^^^^^^^^^^^^                                  
+//      ^^^^^^^^^^^^^^^^^^^
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                   @-1
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    @-2
         _ = true ? ReturnMethod() : ReturnMethod();
@@ -186,12 +186,12 @@ class AsynchronousLambdas
         Func<Task> a = async () =>
         {
             await Foo();
-            reader.ReadLine(); // Noncompliant  
+            reader.ReadLine(); // Noncompliant
         };
         Func<Task> b = async delegate ()
         {
             await Foo();
-            reader.ReadLine(); // Noncompliant  
+            reader.ReadLine(); // Noncompliant
         };
     }
 
@@ -251,13 +251,25 @@ class ResolvesToSelf
 
     public async Task SynchronousAsync()
     {
-        Synchronous(); // Compliant. The fix would cause an endless loop
+        Synchronous();   // Compliant. The fix would cause an endless loop
     }
 
     public void Generic<T>() { }
 
     public async Task GenericAsync<T>()
     {
-        Generic<T>(); // Compliant. The fix would cause an endless loop
+        Generic<T>();    // Compliant. The fix would cause an endless loop
     }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9613
+class Repro9613
+{
+    public async Task<int> Run()
+    {
+        return Method(); // Noncompliant, FP the methods have different signatures
+    }
+
+    public int Method(bool something = true) => 1;
+    public async Task<int> MethodAsync(string somethingElse = "") => await Task.FromResult((int)1);
 }
