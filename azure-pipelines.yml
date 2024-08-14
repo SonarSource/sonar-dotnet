@@ -19,21 +19,11 @@ variables:
   - group: sonarsource-build-variables
   - group: artifactory_access
   - group: digicert-keylocker
-  # ARTIFACTORY_URL https://repox.jfrog.io/repox => https://repox.jfrog.io/artifactory
-  # JFROG_URL https://repox.jfrog.io
-  # https://github.com/SonarSource/parent-oss/blob/master/pom.xml#L708-L711
-  - name: ARTIFACTORY_DEPLOY_USERNAME
-    value: $[variables.ARTIFACTORY_QA_DEPLOYER_USERNAME]
   # ~https://github.com/SonarSource/re-ci-images/blob/master/docker/mvn/settings-private.xml
   - name: ARTIFACTORY_PRIVATE_USERNAME
     value: $[variables.ARTIFACTORY_PRIVATE_READER_USERNAME]
   - name: ARTIFACTORY_QA_READER_USERNAME
     value: $[variables.ARTIFACTORY_PRIVATE_READER_USERNAME]
-  # pipelines-yaml-templates/promote-stage.yml line 56
-  - name: ARTIFACTORY_API_USER
-    value: $[variables.ARTIFACTORY_PROMOTER_USERNAME]
-  - name: ARTIFACTORY_API_KEY
-    value: $[variables.ARTIFACTORY_PROMOTER_ACCESS_TOKEN]
   - name: UnitTestProjectPath
     value: 'analyzers\tests\SonarAnalyzer.Test\'
   - name: UnitTestResultsPath
@@ -172,24 +162,6 @@ stages:
       inputs:
         pathToPublish: '$(Build.ArtifactStagingDirectory)/packages'
         artifactName: 'NuGet Packages'
-
-    - task: JFrogNuGet@1
-      displayName: 'Publish SonarAnalyzer.CFG NuGet on repox'
-      inputs:
-        command: 'push'
-        artifactoryConnection: 'repox_qa_deployer_token'
-        targetDeployRepo: '$(ARTIFACTORY_NUGET_REPO)'
-        module: SonarAnalyzer.CFG
-        pathToNupkg: '$(Build.ArtifactStagingDirectory)/packages/SonarAnalyzer.CFG.*.nupkg'
-        collectBuildInfo: true
-        buildName: sonar-dotnet_nuget
-        buildNumber: '$(Build.BuildId)'
-
-    - task: JFrogPublishBuildInfo@1
-      inputs:
-        artifactoryConnection: 'repox_qa_deployer_token'
-        buildName: sonar-dotnet_nuget
-        buildNumber: '$(Build.BuildId)'
 
     - task: PublishPipelineArtifact@1
       displayName: 'Publish analyzer binaries as pipeline artifact'
@@ -444,15 +416,6 @@ stages:
       inputs:
         pollingTimeoutSec: '300'
 
-    - powershell: .\scripts\Mend\Mend-Scan.ps1
-      displayName: "Mend scan"
-      condition: eq(variables.isReleaseBranch, 'True')
-      env:
-        WS_PRODUCTNAME: '$(MEND_PRODUCTNAME)'
-        WS_APIKEY: '$(MEND_APIKEY)'
-        BUILD_NUMBER: '$(Build.BuildId)'
-        GIT_SHA: '$(Build.SourceVersion)'
-
   - job: runIntegrationTestsJob
     displayName: '.NET ITs'
     workspace:
@@ -506,26 +469,6 @@ stages:
     - template: update-maven-version-steps.yml@pipelines-yaml-templates
       parameters:
         mavenSettingsFilePath: $(mavenSettings.secureFilePath)
-
-    - task: Maven@3
-      displayName: 'Maven deploy'
-      env:
-        ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_QA_DEPLOYER_ACCESS_TOKEN)
-        PGP_PASSPHRASE: $(PGP_PASSPHRASE)
-        GITHUB_BRANCH: $(Build.SourceBranchName)
-        GIT_SHA1: $(Build.SourceVersion)
-      inputs:
-        ${{ if eq(variables.isReleaseBranch, 'True') }}:
-          goals: 'deploy -P release,sign'
-        ${{ else }}:
-          goals: 'deploy -P release'
-        options: >-
-          $(commonMavenArguments)
-          --settings $(mavenSettings.secureFilePath)
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
-        mavenOptions: $(MAVEN_OPTS)
 
   - job: runJavaUnitTests
     displayName: 'Java UTs'
@@ -640,36 +583,3 @@ stages:
         javaHomeOption: 'JDKVersion'
         jdkVersionOption: '1.17'
         mavenOptions: $(MAVEN_OPTS)
-
-- stage: promoteNugets
-  displayName: Promote NuGet on repox
-  dependsOn: qa
-  condition: succeeded()
-  jobs:
-    - job: promoteRepox
-      displayName: 'SonarAnalyzer.CFG'
-      workspace:
-        clean: all
-      steps:
-        - template: set-azp-variables-steps.yml@pipelines-yaml-templates
-
-        - task: JFrogBuildPromotion@1
-          inputs:
-            artifactoryConnection: 'repox_promoter_token'
-            buildName: sonar-dotnet_nuget
-            buildNumber: '$(Build.BuildId)'
-            sourceRepo: '$(ARTIFACTORY_NUGET_REPO)'
-            ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
-              targetRepo: sonarsource-nuget-dev
-            ${{ else }}:
-              targetRepo: sonarsource-nuget-public
-            status: 'it-passed'
-            includeDependencies: false
-            copy: false
-            dryRun: false
-
-- template: promote-stage.yml@pipelines-yaml-templates
-  parameters:
-    stageName: 'Artifacts:'
-    stageDependencies:
-    - promoteNugets
