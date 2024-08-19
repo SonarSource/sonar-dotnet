@@ -28,6 +28,12 @@ public sealed class AvoidValueTuple : StylingAnalyzer
     protected override void Initialize(SonarAnalysisContext context)
     {
         context.RegisterNodeAction(c => c.ReportIssue(Rule, c.Node), SyntaxKind.TupleType);
-        context.RegisterNodeAction(c => c.ReportIssue(Rule, c.Node), SyntaxKind.TupleExpression);
+        context.RegisterNodeAction(c =>
+        {
+            if (!c.Node.Parent.IsKind(SyntaxKind.SwitchExpression))
+            {
+                c.ReportIssue(Rule, c.Node);
+            }
+        }, SyntaxKind.TupleExpression);
     }
 }
