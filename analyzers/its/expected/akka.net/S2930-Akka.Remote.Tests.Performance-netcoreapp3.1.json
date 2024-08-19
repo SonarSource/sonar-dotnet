@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2930",
+      "Message": "Dispose \u0027cts\u0027 when it is no longer needed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L56",
+      "Location": "Line 56 Position 29-88"
+    }
+  ]
+}

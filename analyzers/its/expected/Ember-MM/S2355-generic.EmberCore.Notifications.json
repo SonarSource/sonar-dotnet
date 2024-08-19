@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L66",
+      "Location": "Line 66 Position 55-119"
+    }
+  ]
+}

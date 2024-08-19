@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S5659",
+      "Message": "Use only strong cipher algorithms when verifying the signature of this JWT.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/S5659.cs#L10",
+      "Location": "Line 10 Position 13-47"
+    }
+  ]
+}

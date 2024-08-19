@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of System.Data.DataRow)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L433",
+      "Location": "Line 433 Position 158-163"
+    }
+  ]
+}

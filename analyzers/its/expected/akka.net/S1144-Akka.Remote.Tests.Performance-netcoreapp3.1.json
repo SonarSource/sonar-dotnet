@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027_echo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L31",
+      "Location": "Line 31 Position 9-33"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027_remoteEcho\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L32",
+      "Location": "Line 32 Position 9-39"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027_remoteReceiver\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L33",
+      "Location": "Line 33 Position 9-43"
+    }
+  ]
+}

@@ -1,24 +1,27 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using System.Text;
 using System.Text.RegularExpressions;
-using SonarAnalyzer.Core.Trackers;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class StringFormatValidator : SonarDiagnosticAnalyzer
@@ -70,7 +73,7 @@ namespace SonarAnalyzer.CSharp.Rules
         };
 
         // pattern is: index[,alignment][:formatString]
-        private static readonly Regex StringFormatItemRegex = new Regex(@"^(?<Index>\d+)(\s*,\s*(?<Alignment>-?\d+)\s*)?(:(?<Format>.+))?$", RegexOptions.Compiled, Constants.DefaultRegexTimeout);
+        private static readonly Regex StringFormatItemRegex = new Regex(@"^(?<Index>\d+)(\s*,\s*(?<Alignment>-?\d+)\s*)?(:(?<Format>.+))?$", RegexOptions.Compiled, RegexConstants.DefaultTimeout);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(BugRule, CodeSmellRule);
 
@@ -81,7 +84,7 @@ namespace SonarAnalyzer.CSharp.Rules
         {
             var invocation = (InvocationExpressionSyntax)analysisContext.Node;
 
-            if (!(analysisContext.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol)
+            if (!(analysisContext.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol)
                 || !methodSymbol.Parameters.Any()
                 || methodSymbol.Parameters.All(x => x.Name != "format"))
             {
@@ -100,7 +103,7 @@ namespace SonarAnalyzer.CSharp.Rules
             var formatStringExpression = invocation.ArgumentList.Arguments[formatArgumentIndex].Expression;
             var failure = formatStringExpression.IsNullLiteral()
                 ? new ValidationFailureWithAdditionalData(ValidationFailure.NullFormatString)
-                : TryParseAndValidate(formatStringExpression.FindStringConstant(analysisContext.Model), invocation.ArgumentList, formatArgumentIndex, analysisContext.Model);
+                : TryParseAndValidate(formatStringExpression.FindStringConstant(analysisContext.SemanticModel), invocation.ArgumentList, formatArgumentIndex, analysisContext.SemanticModel);
             if (failure == null || CanIgnoreFailure(failure, currentMethodSignature.Name, invocation.ArgumentList.Arguments.Count))
             {
                 return;

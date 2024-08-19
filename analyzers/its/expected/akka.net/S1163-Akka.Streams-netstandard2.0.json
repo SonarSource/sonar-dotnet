@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1163",
+      "Message": "Refactor this code to not throw exceptions in finally blocks.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1583",
+      "Location": "Line 1583 Position 21-30"
+    },
+    {
+      "Id": "S1163",
+      "Message": "Refactor this code to not throw exceptions in finally blocks.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1641",
+      "Location": "Line 1641 Position 21-30"
+    },
+    {
+      "Id": "S1163",
+      "Message": "Refactor this code to not throw exceptions in finally blocks.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1752",
+      "Location": "Line 1752 Position 29-38"
+    }
+  ]
+}

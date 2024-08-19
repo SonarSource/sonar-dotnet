@@ -1,11 +1,18 @@
 ﻿  <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFrameworks>net8.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="altcover" Version="8.8.21" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="TestCases\**\*" />
@@ -21,9 +28,8 @@
 
   <ItemGroup>
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
-    <Using Include="SonarAnalyzer.Core.Configuration" />
-    <Using Include="SonarAnalyzer.CSharp.Styling.Common.Test" />
-    <Using Include="SonarAnalyzer.CSharp.Styling.Rules" />
+    <Using Include="SonarAnalyzer.CSharp.Styling.Test.Common" />
+    <Using Include="SonarAnalyzer.Rules.CSharp.Styling" />
     <Using Include="SonarAnalyzer.TestFramework.Build" />
     <Using Include="SonarAnalyzer.TestFramework.Verification" />
   </ItemGroup>

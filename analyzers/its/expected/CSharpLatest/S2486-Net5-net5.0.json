@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2486",
+      "Message": "Handle the exception or explain in a comment why it can be ignored.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L47",
+      "Location": "Line 47 Position 17-26"
+    },
+    {
+      "Id": "S2486",
+      "Message": "Handle the exception or explain in a comment why it can be ignored.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L51",
+      "Location": "Line 51 Position 5-14"
+    }
+  ]
+}

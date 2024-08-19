@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2589",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L251",
+      "Location": "Line 251 Position 51-63"
+    }
+  ]
+}

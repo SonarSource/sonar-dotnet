@@ -1,0 +1,40 @@
+{
+  "Issues": [
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L794",
+      "Location": "Line 794 Position 22-45"
+    },
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L799",
+      "Location": "Line 799 Position 22-28"
+    },
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L538",
+      "Location": "Line 538 Position 29-46"
+    },
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L722",
+      "Location": "Line 722 Position 20-38"
+    },
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L297",
+      "Location": "Line 297 Position 27-35"
+    },
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L947",
+      "Location": "Line 947 Position 22-29"
+    }
+  ]
+}

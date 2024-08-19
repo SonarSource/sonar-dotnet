@@ -1,0 +1,40 @@
+{
+  "Issues": [
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.Query/EventEnvelope.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.Query/Interfaces.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.Query/IReadJournalProvider.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.Query/Offset.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.Query/PersistenceQuery.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.Query/Properties/AssemblyInfo.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    }
+  ]
+}

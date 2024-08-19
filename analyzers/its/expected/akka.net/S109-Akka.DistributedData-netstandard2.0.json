@@ -1,0 +1,82 @@
+{
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002710\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/DeltaPropagationSelector.cs#L54",
+      "Location": "Line 54 Position 102-104"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/DeltaPropagationSelector.cs#L54",
+      "Location": "Line 54 Position 75-76"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/ReadWriteAggregator.cs#L55",
+      "Location": "Line 55 Position 125-126"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/ReadWriteAggregator.cs#L78",
+      "Location": "Line 78 Position 58-59"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002710\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1073",
+      "Location": "Line 1073 Position 58-60"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027100\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L381",
+      "Location": "Line 381 Position 87-90"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027100\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L383",
+      "Location": "Line 383 Position 58-61"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027500\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/ReplicatorSettings.cs#L72",
+      "Location": "Line 72 Position 71-74"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002750\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/ReplicatorSettings.cs#L80",
+      "Location": "Line 80 Position 74-76"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L164",
+      "Location": "Line 164 Position 98-99"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274294967295\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L373",
+      "Location": "Line 373 Position 34-45"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L48",
+      "Location": "Line 48 Position 32-34"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L196",
+      "Location": "Line 196 Position 25-26"
+    }
+  ]
+}

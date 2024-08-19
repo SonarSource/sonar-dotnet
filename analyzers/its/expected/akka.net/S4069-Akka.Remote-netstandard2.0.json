@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Add\u0027 for the operator \u0027\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Deadline.cs#L110",
+      "Location": "Line 110 Position 41-42"
+    },
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Add\u0027 for the operator \u0027\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Deadline.cs#L99",
+      "Location": "Line 99 Position 41-42"
+    },
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Add\u0027 for the operator \u0027\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L355",
+      "Location": "Line 355 Position 49-50"
+    }
+  ]
+}

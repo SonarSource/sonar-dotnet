@@ -1,0 +1,64 @@
+{
+  "Issues": [
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L362",
+      "Location": "Line 362 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Props.cs#L293",
+      "Location": "Line 293 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/RepointableActorRef.cs#L104",
+      "Location": "Line 104 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/RepointableActorRef.cs#L96",
+      "Location": "Line 96 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L125",
+      "Location": "Line 125 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L363",
+      "Location": "Line 363 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L362",
+      "Location": "Line 362 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L679",
+      "Location": "Line 679 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L736",
+      "Location": "Line 736 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L566",
+      "Location": "Line 566 Position 1-24"
+    }
+  ]
+}

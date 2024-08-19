@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2583",
+      "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027. Some code paths are unreachable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L340",
+      "Location": "Line 340 Position 20-37"
+    }
+  ]
+}

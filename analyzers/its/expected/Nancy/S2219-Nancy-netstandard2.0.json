@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S2219",
+      "Message": "Use the \u0027is\u0027 operator instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/Modules/InfoModule.cs#L64",
+      "Location": "Line 64 Position 63-116"
+    },
+    {
+      "Id": "S2219",
+      "Message": "Use the \u0027IsInstanceOfType()\u0027 method instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/DynamicDictionaryValue.cs#L328",
+      "Location": "Line 328 Position 25-74"
+    },
+    {
+      "Id": "S2219",
+      "Message": "Use the \u0027is\u0027 operator instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Security/CsrfToken.cs#L62",
+      "Location": "Line 62 Position 17-51"
+    }
+  ]
+}

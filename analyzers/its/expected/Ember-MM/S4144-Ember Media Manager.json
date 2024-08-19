@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S4144",
+      "Message": "Update this method so that its implementation is not identical to \u0027chkNoDisplayFanart_CheckedChanged\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1486",
+      "Location": "Line 1486 Position 17-50"
+    },
+    {
+      "Id": "S4144",
+      "Message": "Update this method so that its implementation is not identical to \u0027chkEpProperCase_CheckedChanged\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1599",
+      "Location": "Line 1599 Position 17-45"
+    },
+    {
+      "Id": "S4144",
+      "Message": "Update this method so that its implementation is not identical to \u0027chkEpProperCase_CheckedChanged\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1952",
+      "Location": "Line 1952 Position 17-49"
+    },
+    {
+      "Id": "S4144",
+      "Message": "Update this method so that its implementation is not identical to \u0027chkVideoTSParent_CheckedChanged\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4550",
+      "Location": "Line 4550 Position 17-44"
+    },
+    {
+      "Id": "S4144",
+      "Message": "Update this method so that its implementation is not identical to \u0027chkVideoTSParent_CheckedChanged\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4559",
+      "Location": "Line 4559 Position 17-46"
+    }
+  ]
+}

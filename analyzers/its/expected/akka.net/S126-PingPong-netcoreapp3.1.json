@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/PingPong/ClientActorBase.cs#L39",
+      "Location": "Line 39 Position 17-24"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/PingPong/ClientAsyncActor.cs#L30",
+      "Location": "Line 30 Position 17-24"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/PingPong/ClientReceiveActor.cs#L28",
+      "Location": "Line 28 Position 17-24"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/PingPong/Program.cs#L254",
+      "Location": "Line 254 Position 17-24"
+    }
+  ]
+}

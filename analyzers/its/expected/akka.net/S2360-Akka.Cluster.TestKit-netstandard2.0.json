@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L178",
+      "Location": "Line 178 Position 53-59"
+    },
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L210",
+      "Location": "Line 210 Position 68-74"
+    },
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L217",
+      "Location": "Line 217 Position 66-72"
+    },
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L274",
+      "Location": "Line 274 Position 65-71"
+    },
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L274",
+      "Location": "Line 274 Position 92-98"
+    },
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L353",
+      "Location": "Line 353 Position 64-70"
+    },
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L354",
+      "Location": "Line 354 Position 31-37"
+    }
+  ]
+}

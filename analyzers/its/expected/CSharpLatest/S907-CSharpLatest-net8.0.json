@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027goto\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3626.cs#L9",
+      "Location": "Line 9 Position 13-17"
+    }
+  ]
+}

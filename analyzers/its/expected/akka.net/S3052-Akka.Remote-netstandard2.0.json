@@ -1,0 +1,88 @@
+{
+  "Issues": [
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_heartbeatTimestamp\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/DeadlineFailureDetector.cs#L23",
+      "Location": "Line 23 Position 42-46"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_active\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/DeadlineFailureDetector.cs#L24",
+      "Location": "Line 24 Position 39-46"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_lastAck\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L1078",
+      "Location": "Line 1078 Position 30-36"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_writeCount\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L1362",
+      "Location": "Line 1362 Position 33-36"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_fullBackoff\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L1365",
+      "Location": "Line 1365 Position 35-42"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_smallBackoffCount\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L1369",
+      "Location": "Line 1369 Position 40-43"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_noBackoffCount\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L1370",
+      "Location": "Line 1370 Position 37-40"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_bailoutAt\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L515",
+      "Location": "Line 515 Position 37-43"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_maxSilenceTimer\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L541",
+      "Location": "Line 541 Position 46-52"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_normalShutdown\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/EndpointManager.cs#L475",
+      "Location": "Line 475 Position 38-45"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_upstreamListener\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L207",
+      "Location": "Line 207 Position 70-76"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027MaximumOverhead\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L214",
+      "Location": "Line 214 Position 39-42"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_upstreamListener\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L408",
+      "Location": "Line 408 Position 65-71"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027UniqueId\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L577",
+      "Location": "Line 577 Position 33-37"
+    }
+  ]
+}

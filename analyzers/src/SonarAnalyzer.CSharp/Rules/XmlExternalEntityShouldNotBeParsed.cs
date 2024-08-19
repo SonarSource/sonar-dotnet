@@ -1,24 +1,28 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using System.Xml;
-using SonarAnalyzer.CSharp.Core.Trackers;
-using SonarAnalyzer.CSharp.Rules.XXE;
+using SonarAnalyzer.Helpers.Trackers;
+using SonarAnalyzer.Rules.XXE;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class XmlExternalEntityShouldNotBeParsed : SonarDiagnosticAnalyzer
@@ -34,11 +38,11 @@ namespace SonarAnalyzer.CSharp.Rules
 
         // For the XXE rule we actually need to know about .NET 4.5.2,
         // but it is good enough given the other .NET 4.x do not have support anymore
-        private readonly NetFrameworkVersionProvider versionProvider;
+        private readonly INetFrameworkVersionProvider versionProvider;
 
         public XmlExternalEntityShouldNotBeParsed() : this(new NetFrameworkVersionProvider()) { }
 
-        internal /*for testing*/ XmlExternalEntityShouldNotBeParsed(NetFrameworkVersionProvider netFrameworkVersionProvider) =>
+        internal /*for testing*/ XmlExternalEntityShouldNotBeParsed(INetFrameworkVersionProvider netFrameworkVersionProvider) =>
             versionProvider = netFrameworkVersionProvider;
 
         protected override void Initialize(SonarAnalysisContext context) =>
@@ -49,11 +53,12 @@ namespace SonarAnalyzer.CSharp.Rules
                         c =>
                         {
                             var objectCreation = ObjectCreationFactory.Create(c.Node);
-                            var netFrameworkVersion = versionProvider.Version(c.Compilation);
+                            var netFrameworkVersion = versionProvider.GetDotNetFrameworkVersion(c.Compilation);
                             var constructorIsSafe = ConstructorIsSafe(netFrameworkVersion);
+
                             var trackers = TrackerFactory.Create();
-                            if (trackers.XmlDocumentTracker.ShouldBeReported(objectCreation, c.Model, constructorIsSafe)
-                               || trackers.XmlTextReaderTracker.ShouldBeReported(objectCreation, c.Model, constructorIsSafe))
+                            if (trackers.XmlDocumentTracker.ShouldBeReported(objectCreation, c.SemanticModel, constructorIsSafe)
+                               || trackers.XmlTextReaderTracker.ShouldBeReported(objectCreation, c.SemanticModel, constructorIsSafe))
                             {
                                 c.ReportIssue(Rule, objectCreation.Expression);
                             }
@@ -68,8 +73,8 @@ namespace SonarAnalyzer.CSharp.Rules
                             var assignment = (AssignmentExpressionSyntax)c.Node;
 
                             var trackers = TrackerFactory.Create();
-                            if (trackers.XmlDocumentTracker.ShouldBeReported(assignment, c.Model)
-                               || trackers.XmlTextReaderTracker.ShouldBeReported(assignment, c.Model))
+                            if (trackers.XmlDocumentTracker.ShouldBeReported(assignment, c.SemanticModel)
+                               || trackers.XmlTextReaderTracker.ShouldBeReported(assignment, c.SemanticModel))
                             {
                                 c.ReportIssue(Rule, assignment);
                             }
@@ -82,18 +87,18 @@ namespace SonarAnalyzer.CSharp.Rules
         private void VerifyXmlReaderInvocations(SonarSyntaxNodeReportingContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
-            if (!invocation.IsMemberAccessOnKnownType("Create", KnownType.System_Xml_XmlReader, context.Model))
+            if (!invocation.IsMemberAccessOnKnownType("Create", KnownType.System_Xml_XmlReader, context.SemanticModel))
             {
                 return;
             }
 
-            var settings = invocation.GetArgumentSymbolsOfKnownType(KnownType.System_Xml_XmlReaderSettings, context.Model).FirstOrDefault();
+            var settings = invocation.GetArgumentSymbolsOfKnownType(KnownType.System_Xml_XmlReaderSettings, context.SemanticModel).FirstOrDefault();
             if (settings == null)
             {
                 return; // safe by default
             }
 
-            var xmlReaderSettingsValidator = new XmlReaderSettingsValidator(context.Model, versionProvider.Version(context.Compilation));
+            var xmlReaderSettingsValidator = new XmlReaderSettingsValidator(context.SemanticModel, versionProvider.GetDotNetFrameworkVersion(context.Compilation));
             if (xmlReaderSettingsValidator.GetUnsafeAssignmentLocations(invocation, settings, SecondaryMessage) is { } secondaryLocations && secondaryLocations.Any())
             {
                 context.ReportIssue(Rule, invocation, secondaryLocations);
@@ -102,15 +107,15 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private void VerifyXPathDocumentConstructor(SonarSyntaxNodeReportingContext context, IObjectCreation objectCreation)
         {
-            if (!context.Model.GetTypeInfo(objectCreation.Expression).Type.Is(KnownType.System_Xml_XPath_XPathDocument)
+            if (!context.SemanticModel.GetTypeInfo(objectCreation.Expression).Type.Is(KnownType.System_Xml_XPath_XPathDocument)
                 // If a XmlReader is provided in the constructor, XPathDocument will be as safe as the received reader.
                 // In this case we don't raise a warning since the XmlReader has it's own checks.
-                || objectCreation.ArgumentList.Arguments.GetArgumentsOfKnownType(KnownType.System_Xml_XmlReader, context.Model).Any())
+                || objectCreation.ArgumentList.Arguments.GetArgumentsOfKnownType(KnownType.System_Xml_XmlReader, context.SemanticModel).Any())
             {
                 return;
             }
 
-            if (!IsXPathDocumentSecureByDefault(versionProvider.Version(context.Compilation)))
+            if (!IsXPathDocumentSecureByDefault(versionProvider.GetDotNetFrameworkVersion(context.Compilation)))
             {
                 context.ReportIssue(Rule, objectCreation.Expression);
             }

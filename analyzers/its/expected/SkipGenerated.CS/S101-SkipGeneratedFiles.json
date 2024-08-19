@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S101",
+      "Message": "Rename class \u0027Class_15\u0027 to match pascal case naming rules, consider using \u0027Class15\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/GeneratedCode.CS/generated_region_2.cs#L5",
+      "Location": "Line 5 Position 11-19"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename class \u0027Class_14\u0027 to match pascal case naming rules, consider using \u0027Class14\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/GeneratedCode.CS/generated_region.cs#L5",
+      "Location": "Line 5 Position 11-19"
+    }
+  ]
+}

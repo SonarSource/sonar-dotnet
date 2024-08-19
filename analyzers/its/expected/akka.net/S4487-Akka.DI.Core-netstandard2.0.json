@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4487",
+      "Message": "Remove this unread private field \u0027system\u0027 or refactor the code to use its value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/DIActorSystemAdapter.cs#L20",
+      "Location": "Line 20 Position 30-36"
+    }
+  ]
+}

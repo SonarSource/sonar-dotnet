@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.TestKit.TestSubscriber.ManualProbe\u003CAkka.Persistence.Query.EventEnvelope\u003E\u0027 instead of \u0027Akka.Streams.TestKit.TestSubscriber.Probe\u003CAkka.Persistence.Query.EventEnvelope\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L109",
+      "Location": "Line 109 Position 82-87"
+    }
+  ]
+}

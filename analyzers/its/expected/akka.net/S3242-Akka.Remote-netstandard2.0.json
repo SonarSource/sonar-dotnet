@@ -1,0 +1,70 @@
+{
+  "Issues": [
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Reflection.IReflect\u0027 instead of \u0027System.Type\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/IPExtensions.cs#L29",
+      "Location": "Line 29 Position 54-58"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Actor.ActorSystem\u0027 instead of \u0027Akka.Actor.ExtendedActorSystem\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/MessageSerializer.cs#L30",
+      "Location": "Line 30 Position 62-68"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.IEquatable\u003CAkka.Actor.IActorRef\u003E\u0027 instead of \u0027Akka.Actor.IActorRef\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteActorRef.cs#L219",
+      "Location": "Line 219 Position 50-57"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.IEquatable\u003CAkka.Actor.IActorRef\u003E\u0027 instead of \u0027Akka.Actor.IActorRef\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteActorRef.cs#L219",
+      "Location": "Line 219 Position 69-76"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Actor.ActorSystem\u0027 instead of \u0027Akka.Actor.ExtendedActorSystem\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteMetricsExtension.cs#L48",
+      "Location": "Line 48 Position 65-71"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Routing.Pool\u0027 instead of \u0027Akka.Routing.FromConfig\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L248",
+      "Location": "Line 248 Position 53-63"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Routing.Pool\u0027 instead of \u0027Akka.Routing.RoundRobinPool\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L329",
+      "Location": "Line 329 Position 61-75"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Routing.Pool\u0027 instead of \u0027Akka.Routing.BroadcastPool\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L357",
+      "Location": "Line 357 Position 59-72"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Routing.Pool\u0027 instead of \u0027Akka.Routing.RandomPool\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L384",
+      "Location": "Line 384 Position 53-63"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Routing.Pool\u0027 instead of \u0027Akka.Routing.ConsistentHashingPool\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L478",
+      "Location": "Line 478 Position 75-86"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Exception\u0027 instead of \u0027DotNetty.Transport.Channels.ConnectException\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/TcpTransport.cs#L229",
+      "Location": "Line 229 Position 97-102"
+    }
+  ]
+}

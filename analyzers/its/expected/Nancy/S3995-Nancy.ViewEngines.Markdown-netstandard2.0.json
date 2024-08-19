@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3995",
+      "Message": "Change this return type to \u0027System.Uri\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Markdown/MarkdownViewEngineHost.cs#L88",
+      "Location": "Line 88 Position 16-22"
+    }
+  ]
+}

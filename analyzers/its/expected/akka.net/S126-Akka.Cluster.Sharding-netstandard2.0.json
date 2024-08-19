@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L800",
+      "Location": "Line 800 Position 13-20"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L205",
+      "Location": "Line 205 Position 21-28"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L1210",
+      "Location": "Line 1210 Position 25-32"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L1255",
+      "Location": "Line 1255 Position 13-20"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L679",
+      "Location": "Line 679 Position 21-28"
+    }
+  ]
+}

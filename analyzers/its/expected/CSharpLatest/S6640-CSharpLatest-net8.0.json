@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S6640",
+      "Message": "Make sure that using \u0022unsafe\u0022 is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/FunctionPointers.cs#L3",
+      "Location": "Line 3 Position 8-14"
+    },
+    {
+      "Id": "S6640",
+      "Message": "Make sure that using \u0022unsafe\u0022 is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S4000.cs#L5",
+      "Location": "Line 5 Position 8-14"
+    }
+  ]
+}

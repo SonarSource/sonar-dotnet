@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L12",
+      "Location": "Line 12 Position 1-25"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L17",
+      "Location": "Line 17 Position 1-23"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterReadView.cs#L13",
+      "Location": "Line 13 Position 1-26"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L12",
+      "Location": "Line 12 Position 1-25"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Member.cs#L14",
+      "Location": "Line 14 Position 1-26"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Properties/AssemblyInfo.cs#L8",
+      "Location": "Line 8 Position 1-25"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L13",
+      "Location": "Line 13 Position 1-36"
+    }
+  ]
+}

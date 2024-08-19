@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1226",
+      "Message": "Introduce a new variable instead of reusing the parameter \u0027value\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S1854.cs#L9",
+      "Location": "Line 9 Position 13-18"
+    }
+  ]
+}

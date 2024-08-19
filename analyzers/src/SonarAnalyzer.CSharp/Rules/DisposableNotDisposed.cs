@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class DisposableNotDisposed : SonarDiagnosticAnalyzer
@@ -106,7 +110,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 SymbolKind.NamedType);
 
         private static NodeAndModel<SyntaxNode> CreateNodeAndModel(SonarSymbolReportingContext c, SyntaxReference syntaxReference) =>
-            new(syntaxReference.GetSyntax(), c.Compilation.GetSemanticModel(syntaxReference.SyntaxTree));
+            new(c.Compilation.GetSemanticModel(syntaxReference.SyntaxTree), syntaxReference.GetSyntax());
 
         private static void TrackInitializedLocalsAndPrivateFields(INamedTypeSymbol namedType,
                                                                    SyntaxNode typeDeclaration,
@@ -179,7 +183,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private static void ExcludeDisposedAndClosedLocalsAndPrivateFields(SyntaxNode typeDeclaration, SemanticModel semanticModel, ISet<ISymbol> possiblyDisposed)
         {
-            var invocationsAndConditionalAccesses = typeDeclaration.DescendantNodes().Where(x => x.Kind() is SyntaxKind.InvocationExpression or SyntaxKind.ConditionalAccessExpression);
+            var invocationsAndConditionalAccesses = typeDeclaration.DescendantNodes().Where(n => n.IsAnyKind(SyntaxKind.InvocationExpression, SyntaxKind.ConditionalAccessExpression));
             foreach (var invocationOrConditionalAccess in invocationsAndConditionalAccesses)
             {
                 SimpleNameSyntax name;
@@ -253,27 +257,28 @@ namespace SonarAnalyzer.CSharp.Rules
             !(expression.Parent is ExpressionSyntax)
             || (expression.Parent is AssignmentExpressionSyntax parentAsAssignment && ReferenceEquals(expression, parentAsAssignment.Right));
 
-        private static bool IsInstantiation(ExpressionSyntax expression, SemanticModel model) =>
-            IsNewTrackedTypeObjectCreation(expression, model)
-            || IsDisposableRefStructCreation(expression, model)
-            || IsFactoryMethodInvocation(expression, model);
+        private static bool IsInstantiation(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            IsNewTrackedTypeObjectCreation(expression, semanticModel)
+            || IsDisposableRefStructCreation(expression, semanticModel)
+            || IsFactoryMethodInvocation(expression, semanticModel);
 
-        private static bool IsNewTrackedTypeObjectCreation(ExpressionSyntax expression, SemanticModel model) =>
-            expression?.Kind() is SyntaxKind.ObjectCreationExpression or SyntaxKindEx.ImplicitObjectCreationExpression
-            && model.GetTypeInfo(expression).Type is var type
+        private static bool IsNewTrackedTypeObjectCreation(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            expression.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression)
+            && semanticModel.GetTypeInfo(expression).Type is var type
             && type.IsAny(TrackedTypes)
-            && model.GetSymbolInfo(expression).Symbol is IMethodSymbol constructor
+            && semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol constructor
             && !constructor.Parameters.Any(x => x.Type.ImplementsAny(DisposableTypes));
 
-        private static bool IsDisposableRefStructCreation(ExpressionSyntax expression, SemanticModel model) =>
-            expression?.Kind() is SyntaxKind.ObjectCreationExpression or SyntaxKindEx.ImplicitObjectCreationExpression
-            && model.GetTypeInfo(expression).Type is var type
-            && type.IsRefStruct()
+        private static bool IsDisposableRefStructCreation(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            expression.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression)
+            && semanticModel.GetTypeInfo(expression).Type is var type
+            && type.IsStruct()
+            && type.IsRefLikeType()
             && type.GetMembers().OfType<IMethodSymbol>().Any(x => x.Name == "Dispose");
 
-        private static bool IsFactoryMethodInvocation(ExpressionSyntax expression, SemanticModel model) =>
+        private static bool IsFactoryMethodInvocation(ExpressionSyntax expression, SemanticModel semanticModel) =>
             expression is InvocationExpressionSyntax invocation
-            && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+            && semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
             && FactoryMethods.Contains(methodSymbol.ContainingType.ToDisplayString() + "." + methodSymbol.Name);
     }
 }

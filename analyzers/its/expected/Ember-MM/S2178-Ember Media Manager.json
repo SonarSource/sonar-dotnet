@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S2178",
+      "Message": "Correct this \u0027And\u0027 to \u0027AndAlso\u0027 and extract the right operand to a variable if it should always be evaluated.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3169",
+      "Location": "Line 3169 Position 60-63"
+    },
+    {
+      "Id": "S2178",
+      "Message": "Correct this \u0027And\u0027 to \u0027AndAlso\u0027 and extract the right operand to a variable if it should always be evaluated.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3491",
+      "Location": "Line 3491 Position 60-63"
+    },
+    {
+      "Id": "S2178",
+      "Message": "Correct this \u0027And\u0027 to \u0027AndAlso\u0027 and extract the right operand to a variable if it should always be evaluated.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3776",
+      "Location": "Line 3776 Position 60-63"
+    },
+    {
+      "Id": "S2178",
+      "Message": "Correct this \u0027And\u0027 to \u0027AndAlso\u0027 and extract the right operand to a variable if it should always be evaluated.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4043",
+      "Location": "Line 4043 Position 60-63"
+    }
+  ]
+}

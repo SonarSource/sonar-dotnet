@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S6566",
+      "Message": "Prefer using \u0022DateTimeOffset\u0022 instead of \u0022DateTime\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MediaTag.vb#L59",
+      "Location": "Line 59 Position 34-42"
+    },
+    {
+      "Id": "S6566",
+      "Message": "Prefer using \u0022DateTimeOffset\u0022 instead of \u0022DateTime\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L290",
+      "Location": "Line 290 Position 35-43"
+    },
+    {
+      "Id": "S6566",
+      "Message": "Prefer using \u0022DateTimeOffset\u0022 instead of \u0022DateTime\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L511",
+      "Location": "Line 511 Position 34-42"
+    },
+    {
+      "Id": "S6566",
+      "Message": "Prefer using \u0022DateTimeOffset\u0022 instead of \u0022DateTime\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L69",
+      "Location": "Line 69 Position 31-39"
+    }
+  ]
+}

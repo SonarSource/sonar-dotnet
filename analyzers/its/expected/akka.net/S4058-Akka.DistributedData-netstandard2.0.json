@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027key.EndsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L390",
+      "Location": "Line 390 Position 21-38"
+    }
+  ]
+}

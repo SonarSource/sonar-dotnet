@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/HyperionSerializerSetup.cs#L82",
+      "Location": "Line 82 Position 40-61"
+    }
+  ]
+}

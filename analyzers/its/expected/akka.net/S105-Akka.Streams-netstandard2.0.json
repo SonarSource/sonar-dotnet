@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L170",
+      "Location": "Line 170 Position 10-10"
+    }
+  ]
+}

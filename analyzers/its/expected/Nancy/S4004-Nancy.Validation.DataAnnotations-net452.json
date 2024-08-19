@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027AttributeAdaptors\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Validation.DataAnnotations/IPropertyValidator.cs#L16",
+      "Location": "Line 16 Position 89-106"
+    }
+  ]
+}

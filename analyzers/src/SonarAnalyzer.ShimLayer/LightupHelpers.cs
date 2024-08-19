@@ -127,8 +127,7 @@ namespace StyleCop.Analyzers.Lightup
             ConcurrentDictionary<OperationKind, bool> wrappedSyntax = SupportedOperationWrappers.GetOrAdd(underlyingType, static _ => new ConcurrentDictionary<OperationKind, bool>());
 
             // Avoid creating a delegate and capture class
-            // Sonar: https://learn.microsoft.com/en-us/dotnet/api/microsoft.codeanalysis.operationkind Loop && CaseClause are further differentiated by LoopKind & CaseKind, but are not castable between different Kinds which can result in InvalidCast Exceptions
-            if (!wrappedSyntax.TryGetValue(operation.Kind, out var canCast) || operation.Kind is OperationKindEx.Loop or OperationKindEx.CaseClause) // Sonar
+            if (!wrappedSyntax.TryGetValue(operation.Kind, out var canCast))
             {
                 canCast = underlyingType.GetTypeInfo().IsAssignableFrom(operation.GetType().GetTypeInfo());
                 wrappedSyntax.TryAdd(operation.Kind, canCast);

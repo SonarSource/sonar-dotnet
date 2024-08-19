@@ -1,0 +1,52 @@
+{
+  "Issues": [
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L553",
+      "Location": "Line 553 Position 17-22"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L584",
+      "Location": "Line 584 Position 17-22"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L684",
+      "Location": "Line 684 Position 21-26"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L689",
+      "Location": "Line 689 Position 21-26"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L694",
+      "Location": "Line 694 Position 21-26"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L701",
+      "Location": "Line 701 Position 13-34"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L819",
+      "Location": "Line 819 Position 9-30"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L90",
+      "Location": "Line 90 Position 9-30"
+    }
+  ]
+}

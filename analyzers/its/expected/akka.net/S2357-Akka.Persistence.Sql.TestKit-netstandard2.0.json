@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027ToSequenceNr\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.TestKit/TestActor.cs#L18",
+      "Location": "Line 18 Position 34-46"
+    }
+  ]
+}

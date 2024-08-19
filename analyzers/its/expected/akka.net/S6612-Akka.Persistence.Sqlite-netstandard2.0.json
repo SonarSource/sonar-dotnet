@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6612",
+      "Message": "Use the lambda parameter instead of capturing the argument \u0027connectionString\u0027",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/ConnectionContext.cs#L34",
+      "Location": "Line 34 Position 62-105"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S104",
+      "Message": "This file has 2035 lines, which is greater than 1000 authorized. Split it into smaller files.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027configuration\u0027 with \u0027nameof(configuration)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L199",
+      "Location": "Line 199 Position 49-64"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027pipelines\u0027 with \u0027nameof(pipelines)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L46",
+      "Location": "Line 46 Position 49-60"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027configuration\u0027 with \u0027nameof(configuration)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L51",
+      "Location": "Line 51 Position 49-64"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027module\u0027 with \u0027nameof(module)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L74",
+      "Location": "Line 74 Position 49-57"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027configuration\u0027 with \u0027nameof(configuration)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L79",
+      "Location": "Line 79 Position 49-64"
+    }
+  ]
+}

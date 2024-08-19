@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2326",
+      "Message": "\u0027TModel\u0027 is not used in the class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/UrlHelpers.cs#L7",
+      "Location": "Line 7 Position 29-35"
+    }
+  ]
+}

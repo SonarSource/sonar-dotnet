@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3962",
+      "Message": "Replace this \u0027static readonly\u0027 declaration with \u0027const\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L313",
+      "Location": "Line 313 Position 41-61"
+    }
+  ]
+}

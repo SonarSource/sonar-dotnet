@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027DefaultJournalConfig\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Extension.cs#L44",
+      "Location": "Line 44 Position 32-52"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027DefaultSnapshotConfig\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Extension.cs#L49",
+      "Location": "Line 49 Position 32-53"
+    }
+  ]
+}

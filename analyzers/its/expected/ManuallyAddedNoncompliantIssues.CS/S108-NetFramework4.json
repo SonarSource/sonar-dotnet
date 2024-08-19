@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework4/XmlReaderTest.cs#L19",
+      "Location": "Line 19 Position 55-58"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework4/XmlReaderTest.cs#L24",
+      "Location": "Line 24 Position 106-109"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework4/XmlReaderTest.cs#L29",
+      "Location": "Line 29 Position 70-73"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework4/XmlReaderTest.cs#L34",
+      "Location": "Line 34 Position 107-110"
+    }
+  ]
+}

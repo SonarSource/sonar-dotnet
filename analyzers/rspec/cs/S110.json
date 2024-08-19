@@ -15,7 +15,7 @@
     "linearFactor": "30min"
   },
   "tags": [
-    "architecture"
+    "design"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-110",

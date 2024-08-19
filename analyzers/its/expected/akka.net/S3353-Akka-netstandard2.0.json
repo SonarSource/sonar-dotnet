@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3353",
+      "Message": "Add the \u0027const\u0027 modifier to \u0027interruption\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L403",
+      "Location": "Line 403 Position 23-35"
+    },
+    {
+      "Id": "S3353",
+      "Message": "Add the \u0027const\u0027 modifier to \u0027bindFlags\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/IPExtensions.cs#L32",
+      "Location": "Line 32 Position 26-35"
+    }
+  ]
+}

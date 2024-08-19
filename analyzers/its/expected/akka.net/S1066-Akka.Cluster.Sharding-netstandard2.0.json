@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L1016",
+      "Location": "Line 1016 Position 25-27"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S2257",
+      "Message": "Make sure using a non-standard cryptographic algorithm is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UsingNonstandardCryptographyTest.cs#L23",
+      "Location": "Line 23 Position 23-42"
+    },
+    {
+      "Id": "S2257",
+      "Message": "Make sure using a non-standard cryptographic algorithm is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UsingNonstandardCryptographyTest.cs#L33",
+      "Location": "Line 33 Position 22-44"
+    },
+    {
+      "Id": "S2257",
+      "Message": "Make sure using a non-standard cryptographic algorithm is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UsingNonstandardCryptographyTest.cs#L37",
+      "Location": "Line 37 Position 18-39"
+    },
+    {
+      "Id": "S2257",
+      "Message": "Make sure using a non-standard cryptographic algorithm is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UsingNonstandardCryptographyTest.cs#L54",
+      "Location": "Line 54 Position 18-43"
+    }
+  ]
+}

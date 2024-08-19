@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6613",
+      "Message": "\u0027First\u0027 property of \u0027LinkedList\u0027 should be used instead of the \u0027First()\u0027 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L84",
+      "Location": "Line 84 Position 35-40"
+    }
+  ]
+}

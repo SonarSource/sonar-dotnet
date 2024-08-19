@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L295",
+      "Location": "Line 295 Position 29-31"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L349",
+      "Location": "Line 349 Position 21-23"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4035",
+      "Message": "Seal class \u0027EmberPlugin\u0027 or implement \u0027IEqualityComparer\u003CT\u003E\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/PluginManager.cs#L231",
+      "Location": "Line 231 Position 22-33"
+    }
+  ]
+}

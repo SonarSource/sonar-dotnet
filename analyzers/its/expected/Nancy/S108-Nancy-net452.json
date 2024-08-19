@@ -1,0 +1,40 @@
+{
+  "Issues": [
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L116-L117",
+      "Location": "Lines 116-117 Position 13-14"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L441-L442",
+      "Location": "Lines 441-442 Position 17-18"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L110-L111",
+      "Location": "Lines 110-111 Position 13-14"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L123-L124",
+      "Location": "Lines 123-124 Position 13-14"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/IO/RequestStream.cs#L446-L447",
+      "Location": "Lines 446-447 Position 13-14"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/IO/RequestStream.cs#L465-L466",
+      "Location": "Lines 465-466 Position 13-14"
+    }
+  ]
+}

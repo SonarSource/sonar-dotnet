@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2589",
+      "Message": "Remove this unnecessary check for null.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/SqlSnapshotStore.cs#L59",
+      "Location": "Line 59 Position 51-55"
+    }
+  ]
+}

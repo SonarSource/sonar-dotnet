@@ -1,0 +1,76 @@
+{
+  "Issues": [
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/Actor/ActorSelectionBenchmark.cs#L2",
+      "Location": "Line 2 Position 1-34"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/Actor/ActorSelectionBenchmark.cs#L3",
+      "Location": "Line 3 Position 1-37"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/Actor/ActorSelectionBenchmark.cs#L4",
+      "Location": "Line 4 Position 1-19"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/Actor/ActorSelectionBenchmark.cs#L9",
+      "Location": "Line 9 Position 1-31"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/Actor/PingPongBenchmarks.cs#L12",
+      "Location": "Line 12 Position 1-26"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/Cluster/HeartbeatNodeRingBenchmarks.cs#L5",
+      "Location": "Line 5 Position 1-19"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/Cluster/VectorClockBenchmarks.cs#L5",
+      "Location": "Line 5 Position 1-19"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L11",
+      "Location": "Line 11 Position 1-19"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L13",
+      "Location": "Line 13 Position 1-19"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L17",
+      "Location": "Line 17 Position 1-18"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L19",
+      "Location": "Line 19 Position 1-26"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L9",
+      "Location": "Line 9 Position 1-37"
+    }
+  ]
+}

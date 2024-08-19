@@ -1,23 +1,27 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class CryptographicKeyShouldNotBeTooShort : SonarDiagnosticAnalyzer
@@ -29,7 +33,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private const int MinimalCommonKeyLength = 2048;
         private const int MinimalEllipticCurveKeyLength = 224;
         private readonly Regex namedEllipticCurve = new("^(secp|sect|prime|c2tnb|c2pnb|brainpoolP|B-|K-|P-)(?<KeyLength>\\d+)",
-            RegexOptions.Compiled | RegexOptions.IgnoreCase, Constants.DefaultRegexTimeout);
+            RegexOptions.Compiled | RegexOptions.IgnoreCase, RegexConstants.DefaultTimeout);
 
         private static readonly ImmutableArray<KnownType> BouncyCastleCurveClasses =
             ImmutableArray.Create(
@@ -60,7 +64,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-                    var containingType = new Lazy<ITypeSymbol>(() => c.Model.GetSymbolInfo(invocation).Symbol?.ContainingType);
+                    var containingType = new Lazy<ITypeSymbol>(() => c.SemanticModel.GetSymbolInfo(invocation).Symbol?.ContainingType);
 
                     switch (GetMethodName(invocation))
                     {
@@ -87,7 +91,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 c =>
                 {
                     var objectCreation = ObjectCreationFactory.Create(c.Node);
-                    var containingType = objectCreation.TypeSymbol(c.Model);
+                    var containingType = objectCreation.TypeSymbol(c.SemanticModel);
                     CheckSystemSecurityEllipticCurve(c, containingType, objectCreation.Expression, objectCreation.ArgumentList);
                     CheckSystemSecurityCryptographyAlgorithms(c, containingType, objectCreation);
                     CheckBouncyCastleKeyGenerationParameters(c, containingType, objectCreation);
@@ -100,7 +104,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     var assignment = (AssignmentExpressionSyntax)c.Node;
                     if (GetPropertyName(assignment.Left) == nameof(AsymmetricAlgorithm.KeySize)
                         && assignment.Left is MemberAccessExpressionSyntax { Expression: { } expression }
-                        && c.Model.GetTypeInfo(expression).Type is ITypeSymbol containingType)
+                        && c.SemanticModel.GetTypeInfo(expression).Type is ITypeSymbol containingType)
                     {
                         // Using the KeySize setter on DSACryptoServiceProvider/RSACryptoServiceProvider does not actually change the underlying key size
                         // https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.dsacryptoserviceprovider.keysize
@@ -144,7 +148,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 return;
             }
 
-            if (firstParam.FindStringConstant(c.Model) is { } curveId)
+            if (firstParam.FindStringConstant(c.SemanticModel) is { } curveId)
             {
                 CheckCurveNameKeyLength(c, invocation, curveId);
             }
@@ -158,7 +162,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 return;
             }
 
-            if (c.Model.GetSymbolInfo(firstParam).Symbol is { } paramSymbol)
+            if (c.SemanticModel.GetSymbolInfo(firstParam).Symbol is { } paramSymbol)
             {
                 CheckCurveNameKeyLength(c, syntaxElement, paramSymbol.Name);
             }
@@ -193,7 +197,7 @@ namespace SonarAnalyzer.CSharp.Rules
             argumentList == null
             || argumentList.Arguments.Count == 0
             || (argumentList.Arguments.Count == 1
-                && c.Model.GetTypeInfo(argumentList.Arguments[0].Expression).Type is ITypeSymbol type
+                && c.SemanticModel.GetTypeInfo(argumentList.Arguments[0].Expression).Type is ITypeSymbol type
                 && type.Is(KnownType.System_Security_Cryptography_CspParameters));
 
         private static void CheckGenericDsaRsaCryptographyAlgorithms(SonarSyntaxNodeReportingContext c, ITypeSymbol containingType, SyntaxNode syntaxElement, SyntaxNode keyLengthSyntax)
@@ -227,7 +231,7 @@ namespace SonarAnalyzer.CSharp.Rules
         }
 
         private static bool IsInvalidCommonKeyLength(SonarSyntaxNodeReportingContext c, SyntaxNode keyLengthSyntax) =>
-            keyLengthSyntax.FindConstantValue(c.Model) is int keyLength && keyLength < MinimalCommonKeyLength;
+            keyLengthSyntax.FindConstantValue(c.SemanticModel) is int keyLength && keyLength < MinimalCommonKeyLength;
 
         private static string GetMethodName(InvocationExpressionSyntax invocationExpression) =>
             invocationExpression.Expression.GetIdentifier()?.ValueText;

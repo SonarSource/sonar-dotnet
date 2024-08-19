@@ -1,0 +1,136 @@
+{
+  "Issues": [
+    {
+      "Id": "S2343",
+      "Message": "Rename \u0027music\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Enumerators.vb#L43",
+      "Location": "Line 43 Position 13-18"
+    },
+    {
+      "Id": "S2343",
+      "Message": "Rename \u0027video\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Enumerators.vb#L44",
+      "Location": "Line 44 Position 13-18"
+    },
+    {
+      "Id": "S2343",
+      "Message": "Rename \u0027album\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Enumerators.vb#L48",
+      "Location": "Line 48 Position 13-18"
+    },
+    {
+      "Id": "S2343",
+      "Message": "Rename \u0027artist\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Enumerators.vb#L49",
+      "Location": "Line 49 Position 13-19"
+    },
+    {
+      "Id": "S2343",
+      "Message": "Rename \u0027movie\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Enumerators.vb#L50",
+      "Location": "Line 50 Position 13-18"
+    },
+    {
+      "Id": "S2343",
+      "Message": "Rename \u0027musicvideo\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Enumerators.vb#L51",
+      "Location": "Line 51 Position 13-23"
+    },
+    {
+      "Id": "S2343",
+      "Message": "Rename \u0027person\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Enumerators.vb#L52",
+      "Location": "Line 52 Position 13-19"
+    },
+    {
+      "Id": "S2343",
+      "Message": "Rename \u0027tvshow\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Enumerators.vb#L53",
+      "Location": "Line 53 Position 13-19"
+    },
+    {
+      "Id": "S2343",
+      "Message": "Rename \u0027tvepisode\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Enumerators.vb#L54",
+      "Location": "Line 54 Position 13-22"
+    },
+    {
+      "Id": "S2343",
+      "Message": "Rename \u0027boolean\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Enumerators.vb#L58",
+      "Location": "Line 58 Position 13-22"
+    },
+    {
+      "Id": "S2343",
+      "Message": "Rename \u0027variable\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Enumerators.vb#L59",
+      "Location": "Line 59 Position 13-21"
+    },
+    {
+      "Id": "S2343",
+      "Message": "Rename \u0027albums\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Enumerators.vb#L63",
+      "Location": "Line 63 Position 13-19"
+    },
+    {
+      "Id": "S2343",
+      "Message": "Rename \u0027movies\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Enumerators.vb#L64",
+      "Location": "Line 64 Position 13-19"
+    },
+    {
+      "Id": "S2343",
+      "Message": "Rename \u0027musicvideos\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Enumerators.vb#L65",
+      "Location": "Line 65 Position 13-24"
+    },
+    {
+      "Id": "S2343",
+      "Message": "Rename \u0027tvshows\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Enumerators.vb#L66",
+      "Location": "Line 66 Position 13-20"
+    },
+    {
+      "Id": "S2343",
+      "Message": "Rename \u0027bool\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L208",
+      "Location": "Line 208 Position 17-21"
+    },
+    {
+      "Id": "S2343",
+      "Message": "Rename \u0027int\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L209",
+      "Location": "Line 209 Position 17-20"
+    },
+    {
+      "Id": "S2343",
+      "Message": "Rename \u0027labelenum\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L210",
+      "Location": "Line 210 Position 17-26"
+    },
+    {
+      "Id": "S2343",
+      "Message": "Rename \u0027text\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L211",
+      "Location": "Line 211 Position 17-21"
+    },
+    {
+      "Id": "S2343",
+      "Message": "Rename \u0027sep\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L212",
+      "Location": "Line 212 Position 17-20"
+    },
+    {
+      "Id": "S2343",
+      "Message": "Rename \u0027general\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/UrlInfo.vb#L62",
+      "Location": "Line 62 Position 17-24"
+    },
+    {
+      "Id": "S2343",
+      "Message": "Rename \u0027season\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/UrlInfo.vb#L63",
+      "Location": "Line 63 Position 17-23"
+    }
+  ]
+}

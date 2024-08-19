@@ -1,0 +1,64 @@
+{
+  "Issues": [
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L141",
+      "Location": "Line 141 Position 12-31"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L157",
+      "Location": "Line 157 Position 16-32"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L264",
+      "Location": "Line 264 Position 20-46"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPILocalization.vb#L222",
+      "Location": "Line 222 Position 38-134"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L102",
+      "Location": "Line 102 Position 20-38"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L124",
+      "Location": "Line 124 Position 20-38"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIModules.vb#L144",
+      "Location": "Line 144 Position 32-48"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIModules.vb#L207",
+      "Location": "Line 207 Position 28-44"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIModules.vb#L278",
+      "Location": "Line 278 Position 28-44"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIXML.vb#L221",
+      "Location": "Line 221 Position 20-44"
+    }
+  ]
+}

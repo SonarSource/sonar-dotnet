@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6678",
+      "Message": "Use PascalCase for named placeholders.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6668.cs#L9",
+      "Location": "Line 9 Position 32-55"
+    }
+  ]
+}

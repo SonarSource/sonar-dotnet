@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6575",
+      "Message": "Use \u0022TimeZoneInfo.FindSystemTimeZoneById\u0022 directly instead of \u0022TZConvert.IanaToWindows\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/Net7/S6575.vb#L6",
+      "Location": "Line 6 Position 23-36"
+    }
+  ]
+}

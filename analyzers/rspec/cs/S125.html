@@ -2,26 +2,4 @@
 <p>Commented-out code distracts the focus from the actual executed code. It creates a noise that increases maintenance code. And because it is never
 executed, it quickly becomes out of date and invalid.</p>
 <p>Commented-out code should be deleted and can be retrieved from source control history if required.</p>
-<h2>How to fix it</h2>
-<p>Delete the commented out code.</p>
-<h3>Code examples</h3>
-<h4>Noncompliant code example</h4>
-<pre data-diff-id="1" data-diff-type="noncompliant">
-void Method(string s)
-{
-    // if (s.StartsWith('A'))
-    // {
-    //     s = s.Substring(1);
-    // }
-
-    // Do something...
-}
-</pre>
-<h4>Compliant solution</h4>
-<pre data-diff-id="1" data-diff-type="compliant">
-void Method(string s)
-{
-    // Do something...
-}
-</pre>
 

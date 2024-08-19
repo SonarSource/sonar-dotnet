@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3220",
+      "Message": "Review this call, which partially matches an overload without \u0027params\u0027. The partial match is \u0027RoundRobinGroup.RoundRobinGroup(Config config)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/AkkaSerializationSpec.cs#L228",
+      "Location": "Line 228 Position 27-53"
+    },
+    {
+      "Id": "S3220",
+      "Message": "Review this call, which partially matches an overload without \u0027params\u0027. The partial match is \u0027RandomGroup.RandomGroup(Config config)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/AkkaSerializationSpec.cs#L249",
+      "Location": "Line 249 Position 27-49"
+    }
+  ]
+}

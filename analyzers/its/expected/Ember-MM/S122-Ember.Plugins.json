@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L53",
+      "Location": "Line 53 Position 17-89"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L66",
+      "Location": "Line 66 Position 21-67"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L77",
+      "Location": "Line 77 Position 21-86"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L125",
+      "Location": "Line 125 Position 17-64"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L85",
+      "Location": "Line 85 Position 17-64"
+    }
+  ]
+}

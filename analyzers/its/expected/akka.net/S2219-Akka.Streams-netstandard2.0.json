@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2219",
+      "Message": "Use a \u0027null\u0027 check instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Attributes.cs#L210",
+      "Location": "Line 210 Position 56-78"
+    }
+  ]
+}

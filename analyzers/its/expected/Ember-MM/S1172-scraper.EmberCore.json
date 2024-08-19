@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused procedure parameter \u0027doProgress\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L133",
+      "Location": "Line 133 Position 62-89"
+    },
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused procedure parameter \u0027iProgress\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L313",
+      "Location": "Line 313 Position 73-99"
+    }
+  ]
+}

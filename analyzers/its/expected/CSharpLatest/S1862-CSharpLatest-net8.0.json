@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1862",
+      "Message": "This branch duplicates the one on line 10.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S1862.cs#L11",
+      "Location": "Line 11 Position 18-27"
+    },
+    {
+      "Id": "S1862",
+      "Message": "This branch duplicates the one on line 7.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S1862.cs#L8",
+      "Location": "Line 8 Position 18-27"
+    }
+  ]
+}

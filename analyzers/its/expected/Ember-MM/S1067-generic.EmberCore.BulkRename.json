@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L91",
+      "Location": "Line 91 Position 20-128"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L95",
+      "Location": "Line 95 Position 20-256"
+    }
+  ]
+}

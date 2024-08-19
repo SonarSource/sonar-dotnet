@@ -16,7 +16,7 @@
   "quickfix": "partial",
   "code": {
     "impacts": {
-      "MAINTAINABILITY": "MEDIUM"
+      "MAINTAINABILITY": "HIGH"
     },
     "attribute": "CLEAR"
   }

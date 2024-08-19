@@ -1,0 +1,172 @@
+{
+  "Issues": [
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/Accept.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/AndConnector.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/AssertEqualityComparer.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/AssertException.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/AssertExtensions.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/Asserts.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/Browser.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserContext.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserContextMultipartFormData.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserResponse.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserResponseBodyWrapper.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserResponseBodyWrapperExtensions.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserResponseExtensions.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/ConfigurableNancyModule.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/DocumentWrapper.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/IBrowserContextValues.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/IndexHelper.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/NancyContextExtensions.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/NodeWrapper.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/PassThroughStatusHandler.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/PathHelper.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/QueryWrapper.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/StaticConfigurationContext.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/TestingViewBrowserResponseExtensions.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/TestingViewContextKeys.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/TestingViewFactory.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    }
+  ]
+}

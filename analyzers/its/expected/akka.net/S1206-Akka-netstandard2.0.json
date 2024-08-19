@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1206",
+      "Message": "This class overrides \u0027GetHashCode\u0027 and should therefore also override \u0027Equals\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorPath.cs#L642",
+      "Location": "Line 642 Position 18-32"
+    },
+    {
+      "Id": "S1206",
+      "Message": "This class overrides \u0027Equals\u0027 and should therefore also override \u0027GetHashCode\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/RouterConfig.cs#L22",
+      "Location": "Line 22 Position 27-39"
+    }
+  ]
+}

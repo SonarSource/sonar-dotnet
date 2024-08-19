@@ -1,0 +1,58 @@
+{
+  "Issues": [
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 33 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L229",
+      "Location": "Line 229 Position 18-33"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 54 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShard.cs#L31",
+      "Location": "Line 31 Position 27-37"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 51 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShardCoordinator.cs#L17",
+      "Location": "Line 17 Position 27-48"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 44 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShard.cs#L28",
+      "Location": "Line 28 Position 27-42"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 39 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L22",
+      "Location": "Line 22 Position 27-53"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 65 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Serialization/ClusterShardingMessageSerializer.cs#L28",
+      "Location": "Line 28 Position 18-50"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 49 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L497",
+      "Location": "Line 497 Position 27-33"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 49 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L44",
+      "Location": "Line 44 Position 27-43"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 83 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L30",
+      "Location": "Line 30 Position 18-29"
+    }
+  ]
+}

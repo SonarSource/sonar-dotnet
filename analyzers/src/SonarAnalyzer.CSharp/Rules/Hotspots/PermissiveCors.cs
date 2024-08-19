@@ -1,22 +1,26 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Core.Trackers;
+using SonarAnalyzer.Helpers.Trackers;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class PermissiveCors : TrackerHotspotDiagnosticAnalyzer<SyntaxKind>
@@ -60,8 +64,8 @@ namespace SonarAnalyzer.CSharp.Rules
                 input,
                 tracker.MatchMethod(new MemberDescriptor(KnownType.System_Collections_Generic_IDictionary_TKey_TValue, "Add")),
                 tracker.MethodHasParameters(parameterCount),
-                c => IsFirstArgumentAccessControlAllowOrigin((InvocationExpressionSyntax)c.Node, c.Model)
-                    && IsSecondArgumentStarString((InvocationExpressionSyntax)c.Node, c.Model),
+                c => IsFirstArgumentAccessControlAllowOrigin((InvocationExpressionSyntax)c.Node, c.SemanticModel)
+                    && IsSecondArgumentStarString((InvocationExpressionSyntax)c.Node, c.SemanticModel),
                 tracker.IsIHeadersDictionary());
 
             tracker.Track(
@@ -72,13 +76,13 @@ namespace SonarAnalyzer.CSharp.Rules
                                     new MemberDescriptor(KnownType.System_Collections_Specialized_NameValueCollection, "Add"),
                                     new MemberDescriptor(KnownType.System_Net_Http_Headers_HttpHeaders, "Add")),
                 tracker.MethodHasParameters(parameterCount),
-                c => IsFirstArgumentAccessControlAllowOrigin((InvocationExpressionSyntax)c.Node, c.Model)
-                    && IsSecondArgumentStarString((InvocationExpressionSyntax)c.Node, c.Model));
+                c => IsFirstArgumentAccessControlAllowOrigin((InvocationExpressionSyntax)c.Node, c.SemanticModel)
+                    && IsSecondArgumentStarString((InvocationExpressionSyntax)c.Node, c.SemanticModel));
 
             tracker.Track(
                 input,
                 tracker.MatchMethod(new MemberDescriptor(KnownType.Microsoft_AspNetCore_Cors_Infrastructure_CorsPolicyBuilder, "WithOrigins")),
-                c => ContainsStar(((InvocationExpressionSyntax)c.Node).ArgumentList.Arguments.Select(a => a.Expression), c.Model));
+                c => ContainsStar(((InvocationExpressionSyntax)c.Node).ArgumentList.Arguments.Select(a => a.Expression), c.SemanticModel));
 
             tracker.Track(
                 input,
@@ -89,13 +93,13 @@ namespace SonarAnalyzer.CSharp.Rules
             tracker.Track(
                 input,
                 tracker.MatchConstructor(KnownType.Microsoft_AspNetCore_Cors_Infrastructure_CorsPolicyBuilder),
-                c => ContainsStar(ObjectCreationFactory.Create(c.Node), c.Model));
+                c => ContainsStar(ObjectCreationFactory.Create(c.Node), c.SemanticModel));
 
         private void VisitAttribute(SonarSyntaxNodeReportingContext context)
         {
             var attribute = (AttributeSyntax)context.Node;
-            if (attribute.IsKnownType(KnownType.System_Web_Http_Cors_EnableCorsAttribute, context.Model)
-                && IsStar(attribute.ArgumentList.Arguments[0].Expression, context.Model))
+            if (attribute.IsKnownType(KnownType.System_Web_Http_Cors_EnableCorsAttribute, context.SemanticModel)
+                && IsStar(attribute.ArgumentList.Arguments[0].Expression, context.SemanticModel))
             {
                 context.ReportIssue(Rule, attribute);
             }
@@ -117,15 +121,15 @@ namespace SonarAnalyzer.CSharp.Rules
         private static bool IsSecondArgumentStarString(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
             IsStar(invocation.ArgumentList.Arguments[1].Expression, semanticModel);
 
-        private static bool IsStar(ExpressionSyntax expressionSyntax, SemanticModel model) =>
+        private static bool IsStar(ExpressionSyntax expressionSyntax, SemanticModel semanticModel) =>
             expressionSyntax switch
             {
-                InterpolatedStringExpressionSyntax interpolation => interpolation.FindStringConstant(model) == StarConstant,
-                LiteralExpressionSyntax literal => ContainsStar(model.GetConstantValue(literal)),
-                IdentifierNameSyntax identifier => ContainsStar(model.GetConstantValue(identifier)),
-                ImplicitArrayCreationExpressionSyntax arrayCreation => ContainsStar(arrayCreation.Initializer.Expressions, model),
-                { } objectCreation when objectCreation.Kind() is SyntaxKind.ObjectCreationExpression or SyntaxKindEx.ImplicitObjectCreationExpression =>
-                    ContainsStar(ObjectCreationFactory.Create(objectCreation), model),
+                InterpolatedStringExpressionSyntax interpolation => interpolation.FindStringConstant(semanticModel) == StarConstant,
+                LiteralExpressionSyntax literal => ContainsStar(semanticModel.GetConstantValue(literal)),
+                IdentifierNameSyntax identifier => ContainsStar(semanticModel.GetConstantValue(identifier)),
+                ImplicitArrayCreationExpressionSyntax arrayCreation => ContainsStar(arrayCreation.Initializer.Expressions, semanticModel),
+                { } objectCreation when objectCreation.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression) =>
+                    ContainsStar(ObjectCreationFactory.Create(objectCreation), semanticModel),
                 _ => false
             };
 

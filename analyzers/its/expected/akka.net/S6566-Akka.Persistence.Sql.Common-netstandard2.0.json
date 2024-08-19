@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S6566",
+      "Message": "Prefer using \u0022DateTimeOffset\u0022 instead of \u0022DateTime\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1279",
+      "Location": "Line 1279 Position 66-74"
+    },
+    {
+      "Id": "S6566",
+      "Message": "Prefer using \u0022DateTimeOffset\u0022 instead of \u0022DateTime\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/ITimestampProvider.cs#L35",
+      "Location": "Line 35 Position 77-85"
+    },
+    {
+      "Id": "S6566",
+      "Message": "Prefer using \u0022DateTimeOffset\u0022 instead of \u0022DateTime\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L687",
+      "Location": "Line 687 Position 59-67"
+    },
+    {
+      "Id": "S6566",
+      "Message": "Prefer using \u0022DateTimeOffset\u0022 instead of \u0022DateTime\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/SqlSnapshotStore.cs#L203",
+      "Location": "Line 203 Position 61-69"
+    }
+  ]
+}

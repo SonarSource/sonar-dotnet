@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L67",
+      "Location": "Line 67 Position 35-41"
+    }
+  ]
+}

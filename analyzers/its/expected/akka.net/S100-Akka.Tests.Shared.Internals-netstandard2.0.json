@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S100",
+      "Message": "Rename method \u0027intercept\u0027 to match pascal case naming rules, consider using \u0027Intercept\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L172",
+      "Location": "Line 172 Position 24-33"
+    },
+    {
+      "Id": "S100",
+      "Message": "Rename method \u0027expectMsgPF\u0027 to match pascal case naming rules, consider using \u0027ExpectMsgPf\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L178",
+      "Location": "Line 178 Position 21-32"
+    },
+    {
+      "Id": "S100",
+      "Message": "Rename method \u0027expectMsgPF\u0027 to match pascal case naming rules, consider using \u0027ExpectMsgPf\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L184",
+      "Location": "Line 184 Position 21-32"
+    }
+  ]
+}

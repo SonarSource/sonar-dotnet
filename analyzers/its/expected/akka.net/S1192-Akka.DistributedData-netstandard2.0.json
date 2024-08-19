@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027Unknown response type: \u0027 4 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L113",
+      "Location": "Line 113 Position 58-83"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetricsSupervisor.cs#L58",
+      "Location": "Line 58 Position 13-19"
+    }
+  ]
+}

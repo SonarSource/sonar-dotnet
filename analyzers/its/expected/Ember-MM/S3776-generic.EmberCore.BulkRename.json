@@ -1,0 +1,58 @@
+{
+  "Issues": [
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 50 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L241",
+      "Location": "Line 241 Position 23-35"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L358",
+      "Location": "Line 358 Position 28-38"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 183 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L398",
+      "Location": "Line 398 Position 16-24"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L579",
+      "Location": "Line 579 Position 16-29"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L624",
+      "Location": "Line 624 Position 29-41"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 111 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L662",
+      "Location": "Line 662 Position 24-38"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 72 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L76",
+      "Location": "Line 76 Position 28-43"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L266",
+      "Location": "Line 266 Position 17-37"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 155 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L76",
+      "Location": "Line 76 Position 17-34"
+    }
+  ]
+}

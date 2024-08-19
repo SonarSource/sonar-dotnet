@@ -13,8 +13,7 @@
     "constantCost": "5min"
   },
   "tags": [
-    "convention",
-    "symbolic-execution"
+    "convention"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-3900",

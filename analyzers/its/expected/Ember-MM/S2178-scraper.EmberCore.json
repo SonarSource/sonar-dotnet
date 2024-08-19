@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S2178",
+      "Message": "Correct this \u0027And\u0027 to \u0027AndAlso\u0027 and extract the right operand to a variable if it should always be evaluated.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L921",
+      "Location": "Line 921 Position 60-63"
+    },
+    {
+      "Id": "S2178",
+      "Message": "Correct this \u0027And\u0027 to \u0027AndAlso\u0027 and extract the right operand to a variable if it should always be evaluated.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L931",
+      "Location": "Line 931 Position 57-60"
+    },
+    {
+      "Id": "S2178",
+      "Message": "Correct this \u0027Or\u0027 to \u0027OrElse\u0027 and extract the right operand to a variable if it should always be evaluated.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L931",
+      "Location": "Line 931 Position 93-95"
+    },
+    {
+      "Id": "S2178",
+      "Message": "Correct this \u0027And\u0027 to \u0027AndAlso\u0027 and extract the right operand to a variable if it should always be evaluated.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L938",
+      "Location": "Line 938 Position 54-57"
+    },
+    {
+      "Id": "S2178",
+      "Message": "Correct this \u0027And\u0027 to \u0027AndAlso\u0027 and extract the right operand to a variable if it should always be evaluated.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L947",
+      "Location": "Line 947 Position 57-60"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/examples/Cluster/Metrics/Samples.Cluster.Metrics.Common/FactorialFrontend.cs#L62",
+      "Location": "Line 62 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027else\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/examples/Cluster/Metrics/Samples.Cluster.Metrics.Common/FactorialFrontend.cs#L64",
+      "Location": "Line 64 Position 21-25"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/examples/Cluster/Metrics/Samples.Cluster.Metrics.Common/FactorialFrontend.cs#L79",
+      "Location": "Line 79 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027foreach\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/examples/Cluster/Metrics/Samples.Cluster.Metrics.Common/FactorialFrontend.cs#L86",
+      "Location": "Line 86 Position 13-20"
+    }
+  ]
+}

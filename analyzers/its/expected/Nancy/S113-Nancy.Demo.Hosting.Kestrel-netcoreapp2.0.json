@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S113",
+      "Message": "Add a new line at the end of the file \u0027AppConfiguration.cs\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/samples/Nancy.Demo.Hosting.Kestrel/AppConfiguration.cs#L29",
+      "Location": "Line 29 Position 1-2"
+    },
+    {
+      "Id": "S113",
+      "Message": "Add a new line at the end of the file \u0027DemoBootstrapper.cs\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/samples/Nancy.Demo.Hosting.Kestrel/DemoBootstrapper.cs#L26",
+      "Location": "Line 26 Position 1-2"
+    },
+    {
+      "Id": "S113",
+      "Message": "Add a new line at the end of the file \u0027IAppConfiguration.cs\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/samples/Nancy.Demo.Hosting.Kestrel/IAppConfiguration.cs#L8",
+      "Location": "Line 8 Position 1-2"
+    },
+    {
+      "Id": "S113",
+      "Message": "Add a new line at the end of the file \u0027Person.cs\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/samples/Nancy.Demo.Hosting.Kestrel/Person.cs#L7",
+      "Location": "Line 7 Position 1-2"
+    }
+  ]
+}

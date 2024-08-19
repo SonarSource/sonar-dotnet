@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\common.props" />
+  <PropertyGroup>
+    <AssemblyTitle>Akka.Persistence</AssemblyTitle>
+    <Description>Persistence actor support for Akka.NET</Description>
+    <TargetFrameworks>$(NetStandardLibVersion)</TargetFrameworks>
+    <PackageTags>$(AkkaPackageTags);persistence;eventsource</PackageTags>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <CodeAnalysisRuleSet>..\..\..\..\..\ValidationRuleset.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="persistence.conf" />
+    <ProjectReference Include="..\Akka\Akka.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="$(ProtobufVersion)" />
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
+  </PropertyGroup>
+</Project>

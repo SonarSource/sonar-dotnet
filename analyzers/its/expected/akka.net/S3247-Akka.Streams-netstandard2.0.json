@@ -1,0 +1,316 @@
+{
+  "Issues": [
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L710",
+      "Location": "Line 710 Position 17-57"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L95",
+      "Location": "Line 95 Position 17-41"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Actors/ActorPublisher.cs#L489",
+      "Location": "Line 489 Position 17-35"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Actors/ActorPublisher.cs#L514",
+      "Location": "Line 514 Position 22-45"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Actors/ActorSubscriber.cs#L164",
+      "Location": "Line 164 Position 22-44"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L129",
+      "Location": "Line 129 Position 21-42"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L137",
+      "Location": "Line 137 Position 26-49"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L145",
+      "Location": "Line 145 Position 26-52"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L159",
+      "Location": "Line 159 Position 26-47"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L164",
+      "Location": "Line 164 Position 26-52"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L670",
+      "Location": "Line 670 Position 17-39"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L297",
+      "Location": "Line 297 Position 22-44"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L299",
+      "Location": "Line 299 Position 22-40"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L313",
+      "Location": "Line 313 Position 17-34"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L317",
+      "Location": "Line 317 Position 22-44"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L319",
+      "Location": "Line 319 Position 22-40"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L510",
+      "Location": "Line 510 Position 17-44"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L529",
+      "Location": "Line 529 Position 22-44"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorRefSinkActor.cs#L73",
+      "Location": "Line 73 Position 17-34"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorRefSinkActor.cs#L78",
+      "Location": "Line 78 Position 22-40"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Remove this cast and use the appropriate variable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1473",
+      "Location": "Line 1473 Position 21-28"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L821",
+      "Location": "Line 821 Position 22-41"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L205",
+      "Location": "Line 205 Position 21-54"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L408",
+      "Location": "Line 408 Position 20-30"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1270",
+      "Location": "Line 1270 Position 26-43"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1282",
+      "Location": "Line 1282 Position 30-44"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1284",
+      "Location": "Line 1284 Position 30-43"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L117",
+      "Location": "Line 117 Position 21-37"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L143",
+      "Location": "Line 143 Position 26-46"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L463",
+      "Location": "Line 463 Position 21-37"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L485",
+      "Location": "Line 485 Position 21-38"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L502",
+      "Location": "Line 502 Position 30-54"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L504",
+      "Location": "Line 504 Position 30-50"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L530",
+      "Location": "Line 530 Position 26-50"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L531",
+      "Location": "Line 531 Position 26-48"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L536",
+      "Location": "Line 536 Position 26-45"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2364",
+      "Location": "Line 2364 Position 26-51"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2423",
+      "Location": "Line 2423 Position 17-44"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2428",
+      "Location": "Line 2428 Position 22-50"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2434",
+      "Location": "Line 2434 Position 22-52"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L299",
+      "Location": "Line 299 Position 17-34"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L301",
+      "Location": "Line 301 Position 17-31"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L747",
+      "Location": "Line 747 Position 17-51"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L759",
+      "Location": "Line 759 Position 17-39"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L760",
+      "Location": "Line 760 Position 17-42"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L761",
+      "Location": "Line 761 Position 17-38"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Transfer.cs#L592",
+      "Location": "Line 592 Position 17-69"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Transfer.cs#L614",
+      "Location": "Line 614 Position 17-69"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/UntypedPublisher.cs#L71",
+      "Location": "Line 71 Position 17-53"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/UntypedSubscriber.cs#L103",
+      "Location": "Line 103 Position 17-55"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/UntypedVirtualPublisher.cs#L81",
+      "Location": "Line 81 Position 17-60"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L421",
+      "Location": "Line 421 Position 34-76"
+    }
+  ]
+}

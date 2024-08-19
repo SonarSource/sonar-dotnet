@@ -1,0 +1,70 @@
+{
+  "Issues": [
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Conventions/BuiltInAcceptHeaderCoercions.cs#L84",
+      "Location": "Line 84 Position 36-41"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at Count-1 should be used instead of the \u0022Enumerable\u0022 extension method \u0022Last\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/Modules/InfoModule.cs#L103",
+      "Location": "Line 103 Position 66-70"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at Count-1 should be used instead of the \u0022Enumerable\u0022 extension method \u0022Last\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/Modules/InfoModule.cs#L91",
+      "Location": "Line 91 Position 66-70"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/Modules/SettingsModule.cs#L75",
+      "Location": "Line 75 Position 68-73"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at Count-1 should be used instead of the \u0022Enumerable\u0022 extension method \u0022Last\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/HttpMultipartBoundary.cs#L76",
+      "Location": "Line 76 Position 68-72"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Json/Converters/TupleConverter.cs#L42",
+      "Location": "Line 42 Position 47-52"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Localization/ResourceBasedTextResource.cs#L75",
+      "Location": "Line 75 Position 32-37"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ModelBinding/DefaultConverters/CollectionConverter.cs#L113",
+      "Location": "Line 113 Position 69-74"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ModelBinding/DefaultConverters/CollectionConverter.cs#L66",
+      "Location": "Line 66 Position 69-74"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/Trie/Nodes/TrieNode.cs#L153",
+      "Location": "Line 153 Position 42-47"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ViewEngines/DefaultViewLocator.cs#L129",
+      "Location": "Line 129 Position 36-41"
+    }
+  ]
+}

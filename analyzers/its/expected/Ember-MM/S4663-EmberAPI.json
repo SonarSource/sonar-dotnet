@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4663",
+      "Message": "Remove this empty comment",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPICommon.vb#L577",
+      "Location": "Line 577 Position 19-21"
+    }
+  ]
+}

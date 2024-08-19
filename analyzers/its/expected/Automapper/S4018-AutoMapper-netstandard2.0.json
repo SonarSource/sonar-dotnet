@@ -1,0 +1,346 @@
+{
+  "Issues": [
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/IMappingExpression.cs#L107",
+      "Location": "Line 107 Position 14-16"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/IMappingExpression.cs#L81",
+      "Location": "Line 81 Position 51-58"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/IMappingExpression.cs#L88",
+      "Location": "Line 88 Position 51-62"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/IMappingExpressionBase.cs#L119",
+      "Location": "Line 119 Position 28-36"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/IMappingExpressionBase.cs#L201",
+      "Location": "Line 201 Position 14-26"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/IMappingExpressionBase.cs#L98",
+      "Location": "Line 98 Position 28-37"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/IMemberConfigurationExpression.cs#L150",
+      "Location": "Line 150 Position 14-26"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/IMemberConfigurationExpression.cs#L161",
+      "Location": "Line 161 Position 14-26"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/IMemberConfigurationExpression.cs#L172",
+      "Location": "Line 172 Position 14-26"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/IMemberConfigurationExpression.cs#L25",
+      "Location": "Line 25 Position 14-21"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/IMemberConfigurationExpression.cs#L32",
+      "Location": "Line 32 Position 14-21"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/IMemberConfigurationExpression.cs#L41",
+      "Location": "Line 41 Position 14-21"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/IProfileExpression.cs#L22",
+      "Location": "Line 22 Position 51-60"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/IProfileExpression.cs#L32",
+      "Location": "Line 32 Position 51-60"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/IProfileExpression.cs#L40",
+      "Location": "Line 40 Position 54-70"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/IProfileExpression.cs#L50",
+      "Location": "Line 50 Position 54-70"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L160",
+      "Location": "Line 160 Position 91-107"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L238",
+      "Location": "Line 238 Position 38-52"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L479",
+      "Location": "Line 479 Position 35-61"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MapperConfigurationExpression.cs#L155",
+      "Location": "Line 155 Position 21-31"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MapperConfigurationExpression.cs#L25",
+      "Location": "Line 25 Position 14-24"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MappingExpression.cs#L219",
+      "Location": "Line 219 Position 58-65"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MappingExpression.cs#L228",
+      "Location": "Line 228 Position 58-69"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MappingExpression.cs#L244",
+      "Location": "Line 244 Position 21-23"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L339",
+      "Location": "Line 339 Position 35-44"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L341",
+      "Location": "Line 341 Position 35-43"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L343",
+      "Location": "Line 343 Position 29-42"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L480",
+      "Location": "Line 480 Position 21-33"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L270",
+      "Location": "Line 270 Position 21-33"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L274",
+      "Location": "Line 274 Position 21-33"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L278",
+      "Location": "Line 278 Position 21-33"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L291",
+      "Location": "Line 291 Position 29-41"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L42",
+      "Location": "Line 42 Position 21-28"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L50",
+      "Location": "Line 50 Position 21-28"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L61",
+      "Location": "Line 61 Position 21-28"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/Profile.cs#L137",
+      "Location": "Line 137 Position 61-77"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/Profile.cs#L139",
+      "Location": "Line 139 Position 61-77"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/Profile.cs#L141",
+      "Location": "Line 141 Position 58-67"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/Profile.cs#L143",
+      "Location": "Line 143 Position 58-67"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/Profile.cs#L145",
+      "Location": "Line 145 Position 59-72"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Features.cs#L30",
+      "Location": "Line 30 Position 31-34"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Internal/InternalApi.cs#L113",
+      "Location": "Line 113 Position 14-40"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Internal/InternalApi.cs#L131",
+      "Location": "Line 131 Position 70-86"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Internal/InternalApi.cs#L85",
+      "Location": "Line 85 Position 17-31"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Internal/ReflectionHelper.cs#L16",
+      "Location": "Line 16 Position 28-31"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Mapper.cs#L125",
+      "Location": "Line 125 Position 34-43"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Mapper.cs#L156",
+      "Location": "Line 156 Position 29-32"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Mapper.cs#L158",
+      "Location": "Line 158 Position 29-32"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Mapper.cs#L174",
+      "Location": "Line 174 Position 41-50"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Mapper.cs#L19",
+      "Location": "Line 19 Position 22-25"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Mapper.cs#L27",
+      "Location": "Line 27 Position 22-25"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/QueryableExtensions/Extensions.cs#L101",
+      "Location": "Line 101 Position 41-47"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/QueryableExtensions/Extensions.cs#L62",
+      "Location": "Line 62 Position 48-57"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/QueryableExtensions/Extensions.cs#L95",
+      "Location": "Line 95 Position 40-42"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L369",
+      "Location": "Line 369 Position 63-79"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/ResolutionContext.cs#L62",
+      "Location": "Line 62 Position 34-37"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/ResolutionContext.cs#L63",
+      "Location": "Line 63 Position 34-37"
+    }
+  ]
+}

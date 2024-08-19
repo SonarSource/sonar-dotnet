@@ -1,11 +1,8 @@
 <h2>Why is this an issue?</h2>
-<p>Both the <code>List.Find</code> method and the <code>Enumerable.FirstOrDefault</code> method can be used to locate the first element that meets a
-specified condition within a collection. However, for <code>List</code> objects, <code>List.Find</code> may offer superior performance compared to
-<code>Enumerable.FirstOrDefault</code>. While the performance difference might be negligible for small collections, it can become significant for
-larger collections. This observation also holds true for <code>ImmutableList</code> and arrays.</p>
-<p>It is important to enable this rule with caution, as performance outcomes can vary significantly across different runtimes. Notably, the <a
-href="https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-9/#collections">performance improvements in .NET 9</a> have brought
-<code>FirstOrDefault</code> closer to the performance of collection-specific <code>Find</code> methods in most scenarios.</p>
+<p>Both the <code>List.Find</code> method and <code>IEnumerable.FirstOrDefault</code> method can be used to find the first element that satisfies a
+given condition in a collection. However, <code>List.Find</code> can be faster than <code>IEnumerable.FirstOrDefault</code> for <code>List</code>
+objects. For small collections, the performance difference may be minor, but for large collections, it can make a noticeable difference. The same
+applies for <code>ImmutableList</code> and arrays too.</p>
 <p><strong>Applies to</strong></p>
 <ul>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.find">List</a> </li>
@@ -54,18 +51,16 @@ End Function
 <h3>Benchmarks</h3>
 <table>
   <colgroup>
-    <col style="width: 16.6666%;">
-    <col style="width: 16.6666%;">
-    <col style="width: 16.6666%;">
-    <col style="width: 16.6666%;">
-    <col style="width: 16.6666%;">
-    <col style="width: 16.667%;">
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+    <col style="width: 20%;">
   </colgroup>
   <thead>
     <tr>
       <th>Method</th>
       <th>Runtime</th>
-      <th>Categories</th>
       <th>Mean</th>
       <th>Standard Deviation</th>
       <th>Allocated</th>
@@ -73,212 +68,32 @@ End Function
   </thead>
   <tbody>
     <tr>
-      <td><p>ArrayFirstOrDefault</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>Array</p></td>
-      <td><p>10.515 μs</p></td>
-      <td><p>0.1410 μs</p></td>
-      <td><p>32 B</p></td>
+      <td><p>FirstOrDefault</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>5.373 ms</p></td>
+      <td><p>0.1049 ms</p></td>
+      <td><p>125 KB</p></td>
     </tr>
     <tr>
-      <td><p>ArrayFind</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>Array</p></td>
-      <td><p>4.417 μs</p></td>
-      <td><p>0.0729 μs</p></td>
-      <td><p>-</p></td>
+      <td><p>Find</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>1.691 ms</p></td>
+      <td><p>0.0334 ms</p></td>
+      <td><p>85.94 KB</p></td>
     </tr>
     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td><p>FirstOrDefault</p></td>
+      <td><p>.NET Framework 4.6.2</p></td>
+      <td><p>5.035 ms</p></td>
+      <td><p>0.0421 ms</p></td>
+      <td><p>125.38 KB</p></td>
     </tr>
     <tr>
-      <td><p>ArrayFirstOrDefault</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>Array</p></td>
-      <td><p>2.262 μs</p></td>
-      <td><p>0.0135 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td><p>ArrayFind</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>Array</p></td>
-      <td><p>3.428 μs</p></td>
-      <td><p>0.0206 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ArrayFirstOrDefault</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>Array</p></td>
-      <td><p>45.074 μs</p></td>
-      <td><p>0.7517 μs</p></td>
-      <td><p>32 B</p></td>
-    </tr>
-    <tr>
-      <td><p>ArrayFind</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>Array</p></td>
-      <td><p>13.948 μs</p></td>
-      <td><p>0.1496 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListFirstOrDefault</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>83.796 μs</p></td>
-      <td><p>1.3199 μs</p></td>
-      <td><p>72 B</p></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListFind</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>59.720 μs</p></td>
-      <td><p>1.0723 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListFirstOrDefault</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>81.984 μs</p></td>
-      <td><p>1.0886 μs</p></td>
-      <td><p>72 B</p></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListFind</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>58.288 μs</p></td>
-      <td><p>0.8079 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListFirstOrDefault</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>446.893 μs</p></td>
-      <td><p>9.8430 μs</p></td>
-      <td><p>76 B</p></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListFind</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>427.476 μs</p></td>
-      <td><p>3.3371 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ListFirstOrDefault</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>14.808 μs</p></td>
-      <td><p>0.1723 μs</p></td>
-      <td><p>40 B</p></td>
-    </tr>
-    <tr>
-      <td><p>ListFind</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>6.040 μs</p></td>
-      <td><p>0.1104 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ListFirstOrDefault</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>2.233 μs</p></td>
-      <td><p>0.0154 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td><p>ListFind</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>4.458 μs</p></td>
-      <td><p>0.0745 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ListFirstOrDefault</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>57.290 μs</p></td>
-      <td><p>1.0494 μs</p></td>
-      <td><p>40 B</p></td>
-    </tr>
-    <tr>
-      <td><p>ListFind</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>18.476 μs</p></td>
-      <td><p>0.0504 μs</p></td>
-      <td><p>-</p></td>
+      <td><p>Find</p></td>
+      <td><p>.NET Framework 4.6.2</p></td>
+      <td><p>1.779 ms</p></td>
+      <td><p>0.0107 ms</p></td>
+      <td><p>86.2 KB</p></td>
     </tr>
   </tbody>
 </table>
@@ -290,53 +105,42 @@ End Function
 </ul>
 <p>The results were generated by running the following snippet with <a href="https://github.com/dotnet/BenchmarkDotNet">BenchmarkDotNet</a>:</p>
 <pre>
-// Explicitly cache the delegates to avoid allocations inside the benchmark.
-private readonly static Func&lt;int, bool&gt; ConditionFunc = static x =&gt; x == 1;
-private readonly static Predicate&lt;int&gt; ConditionPredicate = static x =&gt; x == 1;
-private List&lt;int&gt; list;
-private ImmutableList&lt;int&gt; immutableList;
-private int[] array;
-public const int N = 10_000;
+private List&lt;string&gt; data;
+private Random random = new Random();
+
+[Params(1_000)]
+public int N { get; set; }
 
 [GlobalSetup]
-public void GlobalSetup()
+public void Setup() =&gt;
+    data = Enumerable.Range(0, N).Select(x =&gt; Guid.NewGuid().ToString()).ToList();
+
+[Benchmark(Baseline = true)]
+public void FirstOrDefault()
 {
-    list = Enumerable.Range(0, N).Select(x =&gt; N - x).ToList();
-    immutableList = ImmutableList.CreateRange(list);
-    array = list.ToArray();
+    for (var i = 0; i &lt; N; i++)
+    {
+        var value = data[random.Next(N - 1)];
+        _ = data.FirstOrDefault(x =&gt; x == value);   // Enumerable.FirstOrDefault()
+    }
 }
 
-[BenchmarkCategory("List&lt;T&gt;"), Benchmark(Baseline = true)]
-public int ListFirstOrDefault() =&gt;
-    list.FirstOrDefault(ConditionFunc);
-
-[BenchmarkCategory("List&lt;T&gt;"), Benchmark]
-public int ListFind() =&gt;
-    list.Find(ConditionPredicate);
-
-[BenchmarkCategory("ImmutableList&lt;T&gt;"), Benchmark(Baseline = true)]
-public int ImmutableListFirstOrDefault() =&gt;
-    immutableList.FirstOrDefault(ConditionFunc);
-
-[BenchmarkCategory("ImmutableList&lt;T&gt;"), Benchmark]
-public int ImmutableListFind() =&gt;
-    immutableList.Find(ConditionPredicate);
-
-[BenchmarkCategory("Array"), Benchmark(Baseline = true)]
-public int ArrayFirstOrDefault() =&gt;
-    array.FirstOrDefault(ConditionFunc);
-
-[BenchmarkCategory("Array"), Benchmark]
-public int ArrayFind() =&gt;
-    Array.Find(array, ConditionPredicate);
+[Benchmark]
+public void Find()
+{
+    for (var i = 0; i &lt; N; i++)
+    {
+        var value = data[random.Next(N - 1)];
+        _ = data.Find(x =&gt; x == value);             // List&lt;T&gt;.Find()
+    }
+}
 </pre>
 <p>Hardware configuration:</p>
 <pre>
-BenchmarkDotNet v0.14.0, Windows 11 (10.0.22631.4317/23H2/2023Update/SunValley3)
+BenchmarkDotNet=v0.13.5, OS=Windows 10 (10.0.19045.2846/22H2/2022Update)
 11th Gen Intel Core i7-11850H 2.50GHz, 1 CPU, 16 logical and 8 physical cores
-  [Host]               : .NET Framework 4.8.1 (4.8.9277.0), X64 RyuJIT VectorSize=256
-  .NET 8.0             : .NET 8.0.10 (8.0.1024.46610), X64 RyuJIT AVX-512F+CD+BW+DQ+VL+VBMI
-  .NET 9.0             : .NET 9.0.0 (9.0.24.47305), X64 RyuJIT AVX-512F+CD+BW+DQ+VL+VBMI
-  .NET Framework 4.8.1 : .NET Framework 4.8.1 (4.8.9277.0), X64 RyuJIT VectorSize=256
+  [Host]               : .NET Framework 4.8 (4.8.4614.0), X64 RyuJIT VectorSize=256
+  .NET 7.0             : .NET 7.0.5 (7.0.523.17405), X64 RyuJIT AVX2
+  .NET Framework 4.6.2 : .NET Framework 4.8 (4.8.4614.0), X64 RyuJIT VectorSize=256
 </pre>
 

@@ -1,49 +1,12 @@
 <h2>Why is this an issue?</h2>
-<p>Using a <code>for</code> loop without its typical structure (initialization, condition, increment) can be confusing. In those cases, it is better
-to use a <code>while</code> loop as it is more readable.</p>
-<p>The initializer section should contain a variable declaration to be considered as a valid initialization.</p>
-<h2>How to fix it</h2>
-<p>Replace the <code>for</code> loop with a <code>while</code> loop.</p>
-<h3>Code example</h3>
-<h4>Noncompliant code example</h4>
-<pre data-diff-id="1" data-diff-type="noncompliant">
-for (;condition;) // Noncompliant; both the initializer and increment sections are missing
-{
-    // Do something
-}
+<p>When only the condition expression is defined in a <code>for</code> loop, and the initialization and increment expressions are missing, a
+<code>while</code> loop should be used instead to increase readability.</p>
+<h3>Noncompliant code example</h3>
+<pre>
+for (;condition;) { /*...*/ }
 </pre>
-<h4>Compliant solution</h4>
-<pre data-diff-id="1" data-diff-type="compliant">
-while (condition)
-{
-    // Do something
-}
+<h3>Compliant solution</h3>
+<pre>
+while (condition) { /*...*/ }
 </pre>
-<h4>Noncompliant code example</h4>
-<pre data-diff-id="2" data-diff-type="noncompliant">
-int i;
-
-for (i = 0; i &lt; 10;) // Noncompliant; the initializer section should contain a variable declaration
-{
-    // Do something
-    i++;
-}
-</pre>
-<h4>Compliant solution</h4>
-<pre data-diff-id="2" data-diff-type="compliant">
-int i = 0;
-
-while (i &lt; 10)
-{
-    // Do something
-    i++;
-}
-</pre>
-<h2>Resources</h2>
-<h3>Documentation</h3>
-<ul>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-for-statement">The <code>for</code>
-  statement</a> </li>
-</ul>
 

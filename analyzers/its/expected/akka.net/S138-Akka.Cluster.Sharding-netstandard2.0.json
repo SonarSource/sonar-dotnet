@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S138",
+      "Message": "This method \u0027HandleCoordinatorMessage\u0027 has 87 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L982",
+      "Location": "Line 982 Position 22-46"
+    }
+  ]
+}

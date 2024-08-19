@@ -1,25 +1,28 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using System.IO;
 using System.Xml.XPath;
-using SonarAnalyzer.Core.Trackers;
-using SonarAnalyzer.CSharp.Core.Trackers;
+using SonarAnalyzer.Helpers.Trackers;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules
 {
     public abstract class ObjectShouldBeInitializedCorrectlyBase : TrackerHotspotDiagnosticAnalyzer<SyntaxKind>
     {
@@ -54,7 +57,7 @@ namespace SonarAnalyzer.CSharp.Rules
                         c =>
                         {
                             var objectCreation = ObjectCreationFactory.Create(c.Node);
-                            if (ObjectInitializationTracker.ShouldBeReported(objectCreation, c.Model, isDefaultConstructorSafe ))
+                            if (ObjectInitializationTracker.ShouldBeReported(objectCreation, c.SemanticModel, isDefaultConstructorSafe ))
                             {
                                 c.ReportIssue(SupportedDiagnostics[0], objectCreation.Expression);
                             }
@@ -65,7 +68,7 @@ namespace SonarAnalyzer.CSharp.Rules
                         c =>
                         {
                             var assignment = (AssignmentExpressionSyntax)c.Node;
-                            if (ObjectInitializationTracker.ShouldBeReported(assignment, c.Model))
+                            if (ObjectInitializationTracker.ShouldBeReported(assignment, c.SemanticModel))
                             {
                                 c.ReportIssue(SupportedDiagnostics[0], assignment);
                             }
@@ -79,7 +82,7 @@ namespace SonarAnalyzer.CSharp.Rules
             foreach (var fullPath in context.ProjectConfiguration().FilesToAnalyze.FindFiles("web.config"))
             {
                 var webConfig = File.ReadAllText(fullPath);
-                if (webConfig.Contains("<system.web>") && webConfig.ParseXDocument() is { } doc
+                if (webConfig.Contains("<system.web>") && XmlHelper.ParseXDocument(webConfig) is { } doc
                     && doc.XPathSelectElements("configuration/system.web/httpCookies").Any(x => x.GetAttributeIfBoolValueIs(attribute, true) != null))
                 {
                     return true;

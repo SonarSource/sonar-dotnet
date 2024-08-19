@@ -1,0 +1,208 @@
+{
+  "Issues": [
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L161",
+      "Location": "Line 161 Position 16-68"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L167",
+      "Location": "Line 167 Position 38-73"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L303",
+      "Location": "Line 303 Position 39-127"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L43",
+      "Location": "Line 43 Position 25-135"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1227",
+      "Location": "Line 1227 Position 63-159"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L672",
+      "Location": "Line 672 Position 63-159"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L835",
+      "Location": "Line 835 Position 91-119"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L151",
+      "Location": "Line 151 Position 21-84"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L154",
+      "Location": "Line 154 Position 28-106"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L155",
+      "Location": "Line 155 Position 31-106"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L158",
+      "Location": "Line 158 Position 25-95"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L160",
+      "Location": "Line 160 Position 32-124"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L161",
+      "Location": "Line 161 Position 35-117"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L175",
+      "Location": "Line 175 Position 21-60"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L178",
+      "Location": "Line 178 Position 28-83"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L179",
+      "Location": "Line 179 Position 31-82"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L186",
+      "Location": "Line 186 Position 25-83"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L188",
+      "Location": "Line 188 Position 32-111"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L190",
+      "Location": "Line 190 Position 35-105"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L197",
+      "Location": "Line 197 Position 29-71"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L200",
+      "Location": "Line 200 Position 36-89"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L201",
+      "Location": "Line 201 Position 39-89"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L211",
+      "Location": "Line 211 Position 33-73"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L213",
+      "Location": "Line 213 Position 40-90"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L214",
+      "Location": "Line 214 Position 43-91"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L223",
+      "Location": "Line 223 Position 37-71"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L225",
+      "Location": "Line 225 Position 44-90"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L227",
+      "Location": "Line 227 Position 47-94"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L278",
+      "Location": "Line 278 Position 26-80"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L279",
+      "Location": "Line 279 Position 26-80"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L284",
+      "Location": "Line 284 Position 18-81"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgMovieSource.vb#L143",
+      "Location": "Line 143 Position 37-95"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgTVSource.vb#L128",
+      "Location": "Line 128 Position 37-95"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1382",
+      "Location": "Line 1382 Position 16-69"
+    }
+  ]
+}

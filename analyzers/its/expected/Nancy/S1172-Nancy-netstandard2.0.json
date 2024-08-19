@@ -1,0 +1,58 @@
+{
+  "Issues": [
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused method parameter \u0027typeCatalog\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/DefaultRuntimeEnvironmentInformation.cs#L33",
+      "Location": "Line 33 Position 42-66"
+    },
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused method parameter \u0027serializer\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L268",
+      "Location": "Line 268 Position 129-163"
+    },
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused method parameter \u0027diagnosticsProvider\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/InteractiveDiagnostics.cs#L211",
+      "Location": "Line 211 Position 59-99"
+    },
+    {
+      "Id": "S1172",
+      "Message": "Remove this parameter \u0027viewName\u0027, whose value is ignored in the method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ViewEngines/DefaultViewLocator.cs#L243",
+      "Location": "Line 243 Position 38-53"
+    },
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused method parameter \u0027model\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L377",
+      "Location": "Line 377 Position 76-88"
+    },
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused method parameter \u0027model\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L439",
+      "Location": "Line 439 Position 76-88"
+    },
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused method parameter \u0027model\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L597",
+      "Location": "Line 597 Position 73-85"
+    },
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused method parameter \u0027model\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L633",
+      "Location": "Line 633 Position 85-97"
+    },
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused method parameter \u0027viewEngine\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ViewEngines/ViewEngineApplicationStartup.cs#L42",
+      "Location": "Line 42 Position 73-95"
+    }
+  ]
+}

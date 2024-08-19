@@ -1,0 +1,37 @@
+[
+  {
+    "id": "S1111",
+    "parameters": [
+      {
+        "key": "answer",
+        "description": "Answer to life the universe and everything.",
+        "type": "INTEGER",
+        "defaultValue": "42"
+      }
+    ]
+  },
+  {
+    "id": "S1112",
+    "parameters": [ ]
+  },
+  {
+    "id": "S1113",
+    "parameters": [ ]
+  },
+  {
+    "id": "S1114",
+    "parameters": [ ]
+  },
+  {
+    "id": "S1115",
+    "parameters": [ ]
+  },
+  {
+    "id": "S1116",
+    "parameters": [ ]
+  },
+  {
+    "id": "S1117",
+    "parameters": [ ]
+  }
+]

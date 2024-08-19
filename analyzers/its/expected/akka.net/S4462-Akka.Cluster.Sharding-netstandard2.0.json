@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Result\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L328",
+      "Location": "Line 328 Position 29-74"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Result\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L655",
+      "Location": "Line 655 Position 29-74"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Result\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L961",
+      "Location": "Line 961 Position 25-70"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Result\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L300",
+      "Location": "Line 300 Position 52-69"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Result\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L80",
+      "Location": "Line 80 Position 78-95"
+    }
+  ]
+}

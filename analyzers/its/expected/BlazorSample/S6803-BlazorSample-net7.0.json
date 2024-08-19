@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6803",
+      "Message": "Component parameters can only receive query parameter values in routable components.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/BlazorSample/BlazorSample/Pages/S6797/S6797.Partial.razor.cs#L9",
+      "Location": "Line 9 Position 25-33"
+    }
+  ]
+}

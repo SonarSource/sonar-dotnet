@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027a\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/BlazorSample/BlazorSample/Pages/S6802/S6802.cs#L13",
+      "Location": "Line 13 Position 17-18"
+    }
+  ]
+}

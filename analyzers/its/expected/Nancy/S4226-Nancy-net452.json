@@ -1,0 +1,106 @@
+{
+  "Issues": [
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Conventions/StaticContentHelper.cs#L22",
+      "Location": "Line 22 Position 28-44"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Owin/NancyOptionsExtensions.cs#L16",
+      "Location": "Line 16 Position 28-57"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ResponseExtensions.cs#L103",
+      "Location": "Line 103 Position 32-42"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ResponseExtensions.cs#L117",
+      "Location": "Line 117 Position 32-43"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ResponseExtensions.cs#L131",
+      "Location": "Line 131 Position 32-43"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ResponseExtensions.cs#L152",
+      "Location": "Line 152 Position 32-47"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ResponseExtensions.cs#L164",
+      "Location": "Line 164 Position 32-46"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ResponseExtensions.cs#L176",
+      "Location": "Line 176 Position 32-46"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ResponseExtensions.cs#L22",
+      "Location": "Line 22 Position 32-44"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ResponseExtensions.cs#L51",
+      "Location": "Line 51 Position 32-42"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ResponseExtensions.cs#L64",
+      "Location": "Line 64 Position 32-42"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ResponseExtensions.cs#L79",
+      "Location": "Line 79 Position 32-42"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ResponseExtensions.cs#L90",
+      "Location": "Line 90 Position 32-42"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/Trie/NodeDataExtensions.cs#L16",
+      "Location": "Line 16 Position 35-43"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Security/CsrfTokenExtensions.cs#L22",
+      "Location": "Line 22 Position 30-47"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Security/CsrfTokenExtensions.cs#L35",
+      "Location": "Line 35 Position 28-38"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Security/CsrfTokenExtensions.cs#L44",
+      "Location": "Line 44 Position 28-45"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "Issues": [
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp10Features/AllowAsyncMethodBuilderAttributeOnMethods.cs#L6",
+      "Location": "Line 6 Position 23-33"
+    },
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp10Features/GenericAttributes.cs#L14",
+      "Location": "Line 14 Position 17-24"
+    },
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/AttributesOnLocalFunctions.cs#L12",
+      "Location": "Line 12 Position 14-27"
+    },
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/ExtendingPartial.cs#L14",
+      "Location": "Line 14 Position 26-28"
+    },
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/FunctionPointers.cs#L5",
+      "Location": "Line 5 Position 24-27"
+    },
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S2953.Part2.cs#L5",
+      "Location": "Line 5 Position 25-32"
+    },
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3251.Part2.cs#L12",
+      "Location": "Line 12 Position 25-27"
+    },
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3251.Part2.cs#L17",
+      "Location": "Line 17 Position 25-28"
+    },
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3251.Part2.cs#L7",
+      "Location": "Line 7 Position 18-25"
+    },
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3603.cs#L13",
+      "Location": "Line 13 Position 18-37"
+    },
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3925.Part1.cs#L24",
+      "Location": "Line 24 Position 34-47"
+    },
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3925.Part2.cs#L7",
+      "Location": "Line 7 Position 34-47"
+    },
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S4583.Part1.cs#L62",
+      "Location": "Line 62 Position 25-34"
+    },
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S4583.Part2.cs#L10",
+      "Location": "Line 10 Position 25-34"
+    }
+  ]
+}

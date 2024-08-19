@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L286",
+      "Location": "Line 286 Position 10-55"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/DeadlineFailureDetector.cs#L32",
+      "Location": "Line 32 Position 10-118"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteActorRef.cs#L99",
+      "Location": "Line 99 Position 10-71"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L385",
+      "Location": "Line 385 Position 10-104"
+    }
+  ]
+}

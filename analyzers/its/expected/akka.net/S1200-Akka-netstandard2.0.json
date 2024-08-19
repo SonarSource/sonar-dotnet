@@ -1,0 +1,64 @@
+{
+  "Issues": [
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 36 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L23",
+      "Location": "Line 23 Position 26-35"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 47 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.cs#L28",
+      "Location": "Line 28 Position 26-35"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 43 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L24",
+      "Location": "Line 24 Position 26-35"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 46 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L153",
+      "Location": "Line 153 Position 25-46"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 35 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L120",
+      "Location": "Line 120 Position 25-44"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 37 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/FSM.cs#L668",
+      "Location": "Line 668 Position 27-30"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 48 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Internal/ActorSystemImpl.cs#L35",
+      "Location": "Line 35 Position 18-33"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 31 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L35",
+      "Location": "Line 35 Position 18-43"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 61 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/TcpConnection.cs#L50",
+      "Location": "Line 50 Position 29-42"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 34 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/UdpConnection.cs#L22",
+      "Location": "Line 22 Position 20-33"
+    }
+  ]
+}

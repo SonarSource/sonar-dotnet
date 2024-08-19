@@ -1,22 +1,26 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class RedundantInheritanceList : SonarDiagnosticAnalyzer
@@ -63,7 +67,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private static void ReportRedundantBaseType(SonarSyntaxNodeReportingContext context, BaseTypeDeclarationSyntax typeDeclaration, KnownType redundantType, string message)
         {
             var baseTypeSyntax = typeDeclaration.BaseList.Types.First().Type;
-            if (context.Model.GetSymbolInfo(baseTypeSyntax).Symbol is ITypeSymbol baseTypeSymbol
+            if (context.SemanticModel.GetSymbolInfo(baseTypeSyntax).Symbol is ITypeSymbol baseTypeSymbol
                 && baseTypeSymbol.Is(redundantType))
             {
                 var location = GetLocationWithToken(baseTypeSyntax, typeDeclaration.BaseList.Types);
@@ -73,26 +77,26 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private static void ReportRedundantInterfaces(SonarSyntaxNodeReportingContext context, BaseTypeDeclarationSyntax typeDeclaration)
         {
-            var declaredType = context.Model.GetDeclaredSymbol(typeDeclaration);
+            var declaredType = context.SemanticModel.GetDeclaredSymbol(typeDeclaration);
             if (declaredType is null)
             {
                 return;
             }
 
             var baseList = typeDeclaration.BaseList;
-            var interfaceTypesWithAllInterfaces = GetImplementedInterfaceMappings(baseList, context.Model);
+            var interfaceTypesWithAllInterfaces = GetImplementedInterfaceMappings(baseList, context.SemanticModel);
 
             for (var i = 0; i < baseList.Types.Count; i++)
             {
                 var baseType = baseList.Types[i];
-                if (context.Model.GetSymbolInfo(baseType.Type).Symbol is INamedTypeSymbol interfaceType
+                if (context.SemanticModel.GetSymbolInfo(baseType.Type).Symbol is INamedTypeSymbol interfaceType
                     && interfaceType.IsInterface()
                     && CollidingDeclaration(declaredType, interfaceType, interfaceTypesWithAllInterfaces) is { } collidingDeclaration)
                 {
                     var location = GetLocationWithToken(baseType.Type, baseList.Types);
                     var message = string.Format(MessageAlreadyImplements,
-                        collidingDeclaration.ToMinimalDisplayString(context.Model, baseType.Type.SpanStart),
-                        interfaceType.ToMinimalDisplayString(context.Model, baseType.Type.SpanStart));
+                        collidingDeclaration.ToMinimalDisplayString(context.SemanticModel, baseType.Type.SpanStart),
+                        interfaceType.ToMinimalDisplayString(context.SemanticModel, baseType.Type.SpanStart));
 
                     context.ReportIssue(Rule, location, DiagnosticsProperties(i), message);
                 }

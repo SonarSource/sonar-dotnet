@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L121",
+      "Location": "Line 121 Position 31-54"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L294",
+      "Location": "Line 294 Position 42-61"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L162",
+      "Location": "Line 162 Position 38-83"
+    }
+  ]
+}

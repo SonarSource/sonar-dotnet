@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Mapper.cs#L136",
+      "Location": "Line 136 Position 22-36"
+    }
+  ]
+}

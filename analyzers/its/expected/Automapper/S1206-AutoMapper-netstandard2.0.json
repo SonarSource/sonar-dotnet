@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1206",
+      "Message": "This class overrides \u0027GetHashCode\u0027 and should therefore also override \u0027Equals\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/ProfileMap.cs#L283",
+      "Location": "Line 283 Position 18-32"
+    }
+  ]
+}

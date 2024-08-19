@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class DoNotHardcodeCredentials : DoNotHardcodeCredentialsBase<SyntaxKind>
@@ -192,7 +196,7 @@ namespace SonarAnalyzer.VisualBasic.Rules
                     InterpolationSyntax interpolation => interpolation.Expression.FindStringConstant(semanticModel),
                     InterpolatedStringTextSyntax text => text.TextToken.ToString(),
                     _ => null
-                } ?? KeywordSeparator.ToString()); // Unknown elements resolved to separator to terminate the keyword-value sequence
+                } ?? CredentialSeparator.ToString()); // Unknown elements resolved to separator to terminate the keyword-value sequence
 
             protected override string GetVariableName(InterpolatedStringExpressionSyntax syntaxNode) => null;
 
@@ -205,7 +209,7 @@ namespace SonarAnalyzer.VisualBasic.Rules
 
             protected override string GetAssignedValue(InvocationExpressionSyntax syntaxNode, SemanticModel semanticModel)
             {
-                var allArgs = syntaxNode.ArgumentList.Arguments.Select(x => x.GetExpression().FindStringConstant(semanticModel) ?? KeywordSeparator.ToString());
+                var allArgs = syntaxNode.ArgumentList.Arguments.Select(x => x.GetExpression().FindStringConstant(semanticModel) ?? CredentialSeparator.ToString());
                 try
                 {
                     return string.Format(allArgs.First(), allArgs.Skip(1).ToArray());

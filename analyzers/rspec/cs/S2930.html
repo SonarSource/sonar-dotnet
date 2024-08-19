@@ -14,24 +14,12 @@ the finalizers of these objects at an unpredictable time in the future.</p>
 <code>IAsyncDisposable</code>. It identifies instances of these types that are not properly disposed, closed, aliased, returned, or passed to other
 methods. This applies to instances that are either directly created using the <code>new</code> operator or instantiated through a predefined list of
 factory methods.</p>
-<p>Here is the list of the types tracked by this rule:</p>
-<ul>
-  <li> <code>FluentAssertions.Execution.AssertionScope</code> </li>
-  <li> <code>System.Drawing.Bitmap</code> </li>
-  <li> <code>System.Drawing.Image</code> </li>
-  <li> <code>System.IO.FileStream</code> </li>
-  <li> <code>System.IO.StreamReader</code> </li>
-  <li> <code>System.IO.StreamWriter</code> </li>
-  <li> <code>System.Net.Sockets.TcpClient</code> </li>
-  <li> <code>System.Net.Sockets.UdpClient</code> </li>
-  <li> <code>System.Net.WebClient</code> </li>
-</ul>
 <p>Here is the list of predefined factory methods tracked by this rule:</p>
 <ul>
-  <li> <code>System.Drawing.Image.FromFile()</code> </li>
-  <li> <code>System.Drawing.Image.FromStream()</code> </li>
   <li> <code>System.IO.File.Create()</code> </li>
   <li> <code>System.IO.File.Open()</code> </li>
+  <li> <code>System.Drawing.Image.FromFile()</code> </li>
+  <li> <code>System.Drawing.Image.FromStream()</code> </li>
 </ul>
 <h3>Exceptions</h3>
 <p><code>IDisposable</code> / <code>IAsyncDisposable</code> variables returned from a method or passed to other methods are ignored, as are local
@@ -114,23 +102,20 @@ public class ResourceHolder : IDisposable, IAsyncDisposable
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/standard/managed-code">What is "managed code"?</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection">Garbage collection</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/finalizers">Finalizers</a>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/managed-code">What is "managed code"?</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection">Garbage collection</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/finalizers">Finalizers</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/unsafe-code">Unsafe code, pointer types, and function pointers</a>
   </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/unsafe-code">Unsafe code, pointer types, and
-  function pointers</a> </li>
-  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/File_descriptor">File descriptor</a> </li>
-  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Network_socket">Network socket</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/dispose-pattern">Dispose pattern</a>
+  <li> <a href="https://en.wikipedia.org/wiki/File_descriptor">File descriptor - Wiki</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Network_socket">Network socket - Wiki</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/dispose-pattern">Dispose pattern</a>
     <ul>
-      <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose">Implement a Dispose
+      <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose">Implement a Dispose method</a> </li>
+      <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-disposeasync">Implement a DisposeAsync
       method</a> </li>
-      <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-disposeasync">Implement a
-      DisposeAsync method</a> </li>
     </ul>  </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/using">using statement and using
-  declaration</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/using">using statement and using declaration</a> </li>
   <li> CWE - <a href="https://cwe.mitre.org/data/definitions/459">CWE-459 - Incomplete Cleanup</a> </li>
 </ul>
 

@@ -1,24 +1,29 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using System.IO;
+using System.Reflection;
 using Microsoft.CodeAnalysis.CSharp;
-using SonarAnalyzer.Core.Configuration;
-using SonarAnalyzer.CSharp.Rules;
 using SonarAnalyzer.Protobuf;
+using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 using SonarAnalyzer.TestFramework.Verification;
 using static SonarAnalyzer.TestFramework.Verification.Verifier;
 
@@ -59,7 +64,7 @@ public class VerifierTest
 
     [TestMethod]
     public void Constructor_MixedLanguageAnalyzers_Throws() =>
-        DummyCS.AddAnalyzer(() => new SonarAnalyzer.VisualBasic.Rules.OptionStrictOn())
+        DummyCS.AddAnalyzer(() => new SonarAnalyzer.Rules.VisualBasic.OptionStrictOn())
             .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("All Analyzers must declare the same language in their DiagnosticAnalyzerAttribute.");
 
     [TestMethod]
@@ -155,7 +160,7 @@ public class VerifierTest
     [DataRow("Dummy.SecondaryLocation.cshtml")]
     public void Verify_RazorWithAdditionalLocation(string path) =>
         DummyWithLocation.AddPaths(path)
-            .WithOptions(LanguageOptions.BeforeCSharp10)
+            .WithOptions(ParseOptionsHelper.BeforeCSharp10)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
@@ -164,7 +169,7 @@ public class VerifierTest
     [DataRow("Dummy.SecondaryLocation.cshtml")]
     public void Verify_RazorWithAdditionalLocation_CSharp10(string path) =>
         DummyWithLocation.AddPaths(path)
-            .WithOptions(LanguageOptions.FromCSharp10)
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
@@ -182,7 +187,7 @@ public class VerifierTest
     public void Verify_RazorExpressions_Locations(string path) =>
         DummyWithLocation
             .AddPaths(path)
-            .WithOptions(LanguageOptions.BeforeCSharp10)
+            .WithOptions(ParseOptionsHelper.BeforeCSharp10)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
@@ -192,7 +197,7 @@ public class VerifierTest
     public void Verify_RazorExpressions_Locations_CSharp10(string path) =>
         DummyWithLocation
             .AddPaths(path)
-            .WithOptions(LanguageOptions.FromCSharp10)
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
@@ -207,10 +212,10 @@ public class VerifierTest
     [DataTestMethod]
     [DataRow("Dummy.razor")]
     [DataRow("Dummy.cshtml")]
-    public void Verify_RazorAnalysisInSLAndNugetContext(string path) =>
+    public void Verify_RazorAnalysisInSLAndNugetContext_DoesNotRaise(string path) =>
         DummyWithLocation.AddPaths(path)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Unknown))
-            .Verify();
+            .VerifyNoIssues();
 
     [TestMethod]
     public void Compile_Razor_DefaultFramework()
@@ -221,7 +226,7 @@ public class VerifierTest
             .Build()
             .Compile(false)
             .Single();
-        compilation.Compilation.GetSpecialType(SpecialType.System_Object).ContainingAssembly.Identity.Version.Major.Should().Be(9, "This version is the default framework for in-memory compilation");
+        compilation.Compilation.GetSpecialType(SpecialType.System_Object).ContainingAssembly.Identity.Version.Major.Should().Be(8, "This version is the default framework for in-memory compilation");
 
         compilation.Compilation.ExternalReferences.Select(x => Path.GetFileName(x.Display)).Should().Contain([
             "Microsoft.AspNetCore.dll",
@@ -527,8 +532,8 @@ public class VerifierTest
                 System.Exception ex = new();    // C# 9 target-typed new
             }
             """);
-        builder.WithOptions(LanguageOptions.FromCSharp9).Invoking(x => x.Verify()).Should().NotThrow();
-        builder.WithOptions(LanguageOptions.BeforeCSharp9).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
+        builder.WithOptions(ParseOptionsHelper.FromCSharp9).Invoking(x => x.Verify()).Should().NotThrow();
+        builder.WithOptions(ParseOptionsHelper.BeforeCSharp9).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
             There are differences for CSharp5 File.Concurrent.cs:
               Line 4: Unexpected error, use // Error [CS8026] Feature 'target-typed object creation' is not available in C# 5. Please use language version 9.0 or greater.
 
@@ -586,30 +591,46 @@ public class VerifierTest
     [TestMethod]
     public void Verify_OnlyDiagnostics()
     {
-        var builder = new VerifierBuilder<ObsoleteAttributes>().AddPaths(WriteFile("File.cs", "[System.Obsolete]public class Sample { }"));
+        var builder = new VerifierBuilder<SymbolicExecutionRunner>().AddPaths(WriteFile("File.cs", """
+            public class Sample
+            {
+                public void Method()
+                {
+                    var t = true;
+                    if (t)          // S2583
+                        t = true;
+                    else
+                        t = true;
+                    if (t)          // S2589
+                        t = true;
+                }
+            }
+            """));
         builder.Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
             There are differences for CSharp7 File.Concurrent.cs:
-              Line 1: Unexpected issue 'Add an explanation.' Rule S1123
-              Line 1: Unexpected issue 'Do not forget to remove this deprecated code someday.' Rule S1133
+              Line 6: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.' Rule S2583
+              Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
+              Line 9 Secondary location: Unexpected issue '' Rule S2583
 
             There are differences for CSharp7 File.cs:
-              Line 1: Unexpected issue 'Add an explanation.' Rule S1123
-              Line 1: Unexpected issue 'Do not forget to remove this deprecated code someday.' Rule S1133
+              Line 6: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.' Rule S2583
+              Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
+              Line 9 Secondary location: Unexpected issue '' Rule S2583
             """);
-        builder.WithOnlyDiagnostics(AnalysisScaffolding.CreateDescriptor("S1123")).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
+        builder.WithOnlyDiagnostics(ConditionEvaluatesToConstant.S2589).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
             There are differences for CSharp7 File.Concurrent.cs:
-              Line 1: Unexpected issue 'Add an explanation.' Rule S1123
+              Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
 
             There are differences for CSharp7 File.cs:
-              Line 1: Unexpected issue 'Add an explanation.' Rule S1123
+              Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
             """);
-        builder.WithOnlyDiagnostics(AnalysisScaffolding.CreateDescriptor("S0000")).Invoking(x => x.VerifyNoIssues()).Should().NotThrow();
+        builder.WithOnlyDiagnostics(NullPointerDereference.S2259).Invoking(x => x.VerifyNoIssues()).Should().NotThrow();
     }
 
     [TestMethod]
     public void Verify_NonConcurrentAnalysis()
     {
-        var builder = WithSnippetCS("var topLevelStatement = 42;  // Noncompliant").WithOptions(LanguageOptions.FromCSharp9).WithOutputKind(OutputKind.ConsoleApplication);
+        var builder = WithSnippetCS("var topLevelStatement = 42;  // Noncompliant").WithOptions(ParseOptionsHelper.FromCSharp9).WithOutputKind(OutputKind.ConsoleApplication);
         builder.Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>("Default Verifier behavior duplicates the source file.").WithMessage("""
             There are differences for CSharp9 File.Concurrent.cs:
               Line 1: Unexpected error, use // Error [CS0825] The contextual keyword 'var' may only appear within a local variable declaration or in script code
@@ -621,7 +642,7 @@ public class VerifierTest
     [TestMethod]
     public void Verify_OutputKind()
     {
-        var builder = WithSnippetCS("var topLevelStatement = 42;  // Noncompliant").WithOptions(LanguageOptions.FromCSharp9);
+        var builder = WithSnippetCS("var topLevelStatement = 42;  // Noncompliant").WithOptions(ParseOptionsHelper.FromCSharp9);
         builder.WithTopLevelStatements().Invoking(x => x.Verify()).Should().NotThrow();
         builder.WithOutputKind(OutputKind.ConsoleApplication).WithConcurrentAnalysis(false).Invoking(x => x.Verify()).Should().NotThrow();
         builder.Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
@@ -771,28 +792,6 @@ public class VerifierTest
         WithSnippetCS("Nonsense").Invoking(x => x.VerifyNoIssues()).Should().Throw<AssertFailedException>();
 
     [TestMethod]
-    public void VerifyNoAD0001_AnalyzerException_Fail() =>
-        new VerifierBuilder<DummyAnalyzerThatThrowsCS>()
-            .AddSnippet("""
-                        public class Class7
-                        {
-                            public int X = 7;
-                        }
-                        """)
-            .Invoking(x => x.VerifyNoAD0001()).Should().Throw<AssertFailedException>();
-
-    [TestMethod]
-    public void VerifyNoAD0001_NoAD0001_DoesNotFail() =>
-        new VerifierBuilder<DummyAnalyzerCS>()
-            .AddSnippet("""
-                        public class Class7
-                        {
-                            public int X = 7;
-                        }
-                        """)
-            .VerifyNoAD0001();
-
-    [TestMethod]
     public void VerifyNoIssuesIgnoreErrors_NoIssues_Succeeds() =>
         WithSnippetCS("// Noncompliant - this comment is ignored").Invoking(x => x.VerifyNoIssuesIgnoreErrors()).Should().NotThrow();
 
@@ -820,7 +819,7 @@ public class VerifierTest
     [TestMethod]
     public void VerifyUtilityAnalyzerProducesEmptyProtobuf_EmptyFile()
     {
-        var protobufPath = TestFiles.TestPath(TestContext, "Empty.pb");
+        var protobufPath = TestHelper.TestPath(TestContext, "Empty.pb");
         new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobufPath, null)).AddSnippet("// Nothing to see here").WithProtobufPath(protobufPath)
             .Invoking(x => x.VerifyUtilityAnalyzerProducesEmptyProtobuf())
             .Should().NotThrow();
@@ -829,7 +828,7 @@ public class VerifierTest
     [TestMethod]
     public void VerifyUtilityAnalyzerProducesEmptyProtobuf_WithContent()
     {
-        var protobufPath = TestFiles.TestPath(TestContext, "Empty.pb");
+        var protobufPath = TestHelper.TestPath(TestContext, "Empty.pb");
         var message = new LogInfo { Text = "Lorem Ipsum" };
         new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobufPath, message)).AddSnippet("// Nothing to see here").WithProtobufPath(protobufPath)
             .Invoking(x => x.VerifyUtilityAnalyzerProducesEmptyProtobuf())
@@ -839,7 +838,7 @@ public class VerifierTest
     [TestMethod]
     public void VerifyUtilityAnalyzer_CorrectProtobuf_CS()
     {
-        var protobufPath = TestFiles.TestPath(TestContext, "Log.pb");
+        var protobufPath = TestHelper.TestPath(TestContext, "Log.pb");
         var message = new LogInfo { Text = "Lorem Ipsum" };
         var wasInvoked = false;
         new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobufPath, message)).AddSnippet("// Nothing to see here").WithProtobufPath(protobufPath)
@@ -854,7 +853,7 @@ public class VerifierTest
     [TestMethod]
     public void VerifyUtilityAnalyzer_CorrectProtobuf_VB()
     {
-        var protobufPath = TestFiles.TestPath(TestContext, "Log.pb");
+        var protobufPath = TestHelper.TestPath(TestContext, "Log.pb");
         var message = new LogInfo { Text = "Lorem Ipsum" };
         var wasInvoked = false;
         new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerVB(protobufPath, message)).AddSnippet("' Nothing to see here").WithProtobufPath(protobufPath)
@@ -869,7 +868,7 @@ public class VerifierTest
     [TestMethod]
     public void VerifyUtilityAnalyzer_VerifyProtobuf_PropagateFailedAssertion_CS()
     {
-        var protobufPath = TestFiles.TestPath(TestContext, "Empty.pb");
+        var protobufPath = TestHelper.TestPath(TestContext, "Empty.pb");
         new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobufPath, null)).AddSnippet("// Nothing to see here").WithProtobufPath(protobufPath)
             .Invoking(x => x.VerifyUtilityAnalyzer<LogInfo>(x => throw new AssertFailedException("Some failed assertion about Protobuf")))
             .Should().Throw<AssertFailedException>().WithMessage("Some failed assertion about Protobuf");
@@ -878,7 +877,7 @@ public class VerifierTest
     [TestMethod]
     public void VerifyUtilityAnalyzer_VerifyProtobuf_PropagateFailedAssertion_VB()
     {
-        var protobufPath = TestFiles.TestPath(TestContext, "Empty.pb");
+        var protobufPath = TestHelper.TestPath(TestContext, "Empty.pb");
         new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerVB(protobufPath, null)).AddSnippet("' Nothing to see here").WithProtobufPath(protobufPath)
             .Invoking(x => x.VerifyUtilityAnalyzer<LogInfo>(x => throw new AssertFailedException("Some failed assertion about Protobuf")))
             .Should().Throw<AssertFailedException>().WithMessage("Some failed assertion about Protobuf");
@@ -891,7 +890,7 @@ public class VerifierTest
         DummyVB.AddPaths(WriteFile("File.vb", code));
 
     private string WriteFile(string name, string content) =>
-        TestFiles.WriteFile(TestContext, $@"TestCases\{name}", content);
+        TestHelper.WriteFile(TestContext, $@"TestCases\{name}", content);
 
     private static void ContainsSyntaxTreeWithName(CompilationData compilation, string suffix) =>
         compilation.Compilation.SyntaxTrees.Select(x => x.FilePath).Should().Contain(x => x.EndsWith(suffix));

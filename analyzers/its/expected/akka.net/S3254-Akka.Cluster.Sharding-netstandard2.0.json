@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L158",
+      "Location": "Line 158 Position 145-146"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L275",
+      "Location": "Line 275 Position 49-53"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027rememberEntities\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L62",
+      "Location": "Line 62 Position 17-40"
+    }
+  ]
+}

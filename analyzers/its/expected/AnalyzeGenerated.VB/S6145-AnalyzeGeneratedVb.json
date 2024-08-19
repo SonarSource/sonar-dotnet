@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S6145",
+      "Message": "Configure \u0027Option Strict On\u0027 for assembly \u0027AnalyzeGeneratedVb\u0027.",
+      "Uri": null,
+      "Location": null
+    },
+    {
+      "Id": "S6145",
+      "Message": "Change this to \u0027Option Strict On\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AnalyzeGenerated.VB/obj/Debug/.NETFramework,Version=v4.8.AssemblyAttributes.vb#L2",
+      "Location": "Line 2 Position 13-30"
+    }
+  ]
+}

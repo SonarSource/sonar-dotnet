@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S101",
+      "Message": "Rename class \u0027FSMSpecHelpers\u0027 to match pascal case naming rules, consider using \u0027FsmSpecHelpers\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/FSMSpecHelpers.cs#L17",
+      "Location": "Line 17 Position 25-39"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename class \u0027TestFSMRef\u0027 to match pascal case naming rules, consider using \u0027TestFsmRef\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestFSMRef.cs#L21",
+      "Location": "Line 21 Position 18-28"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<string control="Notify_chkEnabled">Enable or disable this module.</string>
+	<string control="Notify_chkOnError">If enabled, a notification box will be displayed when an error occurs.</string>
+	<string control="Notify_chkOnNewMovie">If enabled, a notification box will be displayed when a movie is added to the library.</string>
+	<string control="Notify_chkOnMovieScraped">If enabled, a notification box will be displayed when a movie is scraped.</string>
+	<string control="Notify_chkOnNewEp">If enabled, a notification box will be displayed when an episode is added to the library.</string>
+</strings>

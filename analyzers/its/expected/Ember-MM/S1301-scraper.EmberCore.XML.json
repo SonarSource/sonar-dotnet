@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L883",
+      "Location": "Line 883 Position 13-19"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/UrlInfo.vb#L178",
+      "Location": "Line 178 Position 17-23"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Execution/ObjectFactory.cs#L47-L51",
+      "Location": "Lines 47-51 Position 13-86"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/TypeMap.cs#L122-L129",
+      "Location": "Lines 122-129 Position 13-105"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/TypeMap.cs#L73-L74",
+      "Location": "Lines 73-74 Position 46-91"
+    }
+  ]
+}

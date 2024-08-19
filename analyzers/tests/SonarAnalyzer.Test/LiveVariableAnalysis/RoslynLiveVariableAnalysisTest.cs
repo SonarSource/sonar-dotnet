@@ -1,27 +1,29 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+extern alias csharp;
+using csharp::SonarAnalyzer.Extensions;
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
-using SonarAnalyzer.CFG.Syntax.Utilities;
-using SonarAnalyzer.CSharp.Core.Syntax.Extensions;
-using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
-using SonarAnalyzer.VisualBasic.Core.Syntax.Utilities;
 
 namespace SonarAnalyzer.Test.LiveVariableAnalysis;
 
@@ -110,7 +112,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void ProcessParameterReference_MemberBindingByReference_DifferentCfgOnNetFx_LiveIn()
     {
-        // This specific char/string scenario produces different CFG shape under .NET Framework build. We have a syntax-based solution in place to support it.
+        // This specific char/string scenario produces different CFG shape under .NET Framework build.
         // https://github.com/dotnet/roslyn/issues/56644
         var code = """
             char[] charArray = null;
@@ -121,7 +123,11 @@ public partial class RoslynLiveVariableAnalysisTest
             """;
         var context = CreateContextCS(code);
         context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
+#if NET
         context.Validate("ret = charArray.Any(stringVariable.Contains);", LiveIn("charArray", "stringVariable"));
+#else
+        context.Validate("ret = charArray.Any(stringVariable.Contains);", LiveIn("charArray"));
+#endif
     }
 
     [TestMethod]
@@ -1073,14 +1079,8 @@ public partial class RoslynLiveVariableAnalysisTest
 
         public Context(string code, AnalyzerLanguage language, string localFunctionName = null)
         {
-            Cfg = TestCompiler.CompileCfg(code, language, code.Contains("// Error CS"), localFunctionName);
-            SyntaxClassifierBase syntaxClassifier = language.LanguageName switch
-            {
-                LanguageNames.CSharp => CSharpSyntaxClassifier.Instance,
-                LanguageNames.VisualBasic => VisualBasicSyntaxClassifier.Instance,
-                _ => throw new UnexpectedLanguageException(language)
-            };
-            Lva = new RoslynLiveVariableAnalysis(Cfg, syntaxClassifier, default);
+            Cfg = TestHelper.CompileCfg(code, language, code.Contains("// Error CS"), localFunctionName);
+            Lva = new RoslynLiveVariableAnalysis(Cfg, default);
             const string Separator = "----------";
             Console.WriteLine(Separator);
             Console.WriteLine(CfgSerializer.Serialize(Lva));
@@ -1089,10 +1089,10 @@ public partial class RoslynLiveVariableAnalysisTest
 
         public Context(string code, SyntaxKind syntaxKind)
         {
-            var (tree, model) = TestCompiler.Compile(code, false, AnalyzerLanguage.CSharp);
+            var (tree, model) = TestHelper.Compile(code, false, AnalyzerLanguage.CSharp);
             var node = tree.GetRoot().DescendantNodes().First(x => x.RawKind == (int)syntaxKind);
             Cfg = node.CreateCfg(model, default);
-            Lva = new RoslynLiveVariableAnalysis(Cfg, CSharpSyntaxClassifier.Instance, default);   // FIXME: null?
+            Lva = new RoslynLiveVariableAnalysis(Cfg, default);
         }
 
         public void ValidateAllEmpty()

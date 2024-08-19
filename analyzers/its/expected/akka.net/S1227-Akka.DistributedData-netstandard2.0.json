@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/SerializationSupport.cs#L114",
+      "Location": "Line 114 Position 29-35"
+    }
+  ]
+}

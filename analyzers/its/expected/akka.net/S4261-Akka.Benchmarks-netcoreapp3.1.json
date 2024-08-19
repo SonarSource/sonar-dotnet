@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S4261",
+      "Message": "Add the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/Actor/ActorSelectionBenchmark.cs#L35",
+      "Location": "Line 35 Position 27-56"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Add the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/Actor/PingPongBenchmarks.cs#L43",
+      "Location": "Line 43 Position 27-64"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Add the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/Actor/SpawnActorBenchmarks.cs#L38",
+      "Location": "Line 38 Position 27-38"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Add the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L59",
+      "Location": "Line 59 Position 27-52"
+    }
+  ]
+}

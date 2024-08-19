@@ -1,0 +1,52 @@
+{
+  "Issues": [
+    {
+      "Id": "S4055",
+      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L55",
+      "Location": "Line 55 Position 27-61"
+    },
+    {
+      "Id": "S4055",
+      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L63",
+      "Location": "Line 63 Position 27-62"
+    },
+    {
+      "Id": "S4055",
+      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L71",
+      "Location": "Line 71 Position 27-62"
+    },
+    {
+      "Id": "S4055",
+      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L79",
+      "Location": "Line 79 Position 27-63"
+    },
+    {
+      "Id": "S4055",
+      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L101",
+      "Location": "Line 101 Position 35-81"
+    },
+    {
+      "Id": "S4055",
+      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L53",
+      "Location": "Line 53 Position 51-87"
+    },
+    {
+      "Id": "S4055",
+      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L85",
+      "Location": "Line 85 Position 35-114"
+    },
+    {
+      "Id": "S4055",
+      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L95",
+      "Location": "Line 95 Position 35-124"
+    }
+  ]
+}

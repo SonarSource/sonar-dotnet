@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Foo\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/S2077.cs#L7",
+      "Location": "Line 7 Position 14-17"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027TestCases\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/S2330.cs#L9",
+      "Location": "Line 9 Position 21-30"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Foo\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/S5659.cs#L7",
+      "Location": "Line 7 Position 21-24"
+    }
+  ]
+}

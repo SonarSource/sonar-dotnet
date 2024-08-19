@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/RemotePingPong/Program.cs#L226",
+      "Location": "Line 226 Position 26-36"
+    }
+  ]
+}

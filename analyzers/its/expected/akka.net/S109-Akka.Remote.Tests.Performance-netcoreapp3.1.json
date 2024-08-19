@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002710\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/TestTransportAssociationStressSpec.cs#L43",
+      "Location": "Line 43 Position 20-22"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002710\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/TestTransportRemoteMessagingThroughputSpec.cs#L45",
+      "Location": "Line 45 Position 20-22"
+    }
+  ]
+}

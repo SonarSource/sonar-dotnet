@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L220",
+      "Location": "Line 220 Position 9-30"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L264",
+      "Location": "Line 264 Position 13-34"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L61",
+      "Location": "Line 61 Position 9-30"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L79",
+      "Location": "Line 79 Position 9-30"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L21",
+      "Location": "Line 21 Position 9-30"
+    }
+  ]
+}

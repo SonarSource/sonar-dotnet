@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6797",
+      "Message": "Query parameter type \u0027TimeSpan\u0027 is not supported.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/BlazorSample/BlazorSample/Pages/S6797/S6797.CsharpOnly.cs#L11",
+      "Location": "Line 11 Position 16-24"
+    }
+  ]
+}

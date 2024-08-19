@@ -1,24 +1,28 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Sonar;
 using SymbolWithInitializer = System.Collections.Generic.KeyValuePair<Microsoft.CodeAnalysis.ISymbol, Microsoft.CodeAnalysis.CSharp.Syntax.EqualsValueClauseSyntax>;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed partial class MemberInitializerRedundant : SonarDiagnosticAnalyzer
@@ -43,7 +47,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 c =>
                 {
                     var declaration = (TypeDeclarationSyntax)c.Node;
-                    if (c.Model.GetDeclaredSymbol(declaration)?.GetMembers() is { Length: > 0 } members)
+                    if (c.SemanticModel.GetDeclaredSymbol(declaration)?.GetMembers() is { Length: > 0 } members)
                     {
                         // structs cannot initialize fields/properties at declaration time
                         // interfaces cannot have instance fields and instance properties cannot have initializers
@@ -71,7 +75,7 @@ namespace SonarAnalyzer.CSharp.Rules
             }
 
             // only retrieve the member symbols (an expensive call) if there are explicit class initializers
-            var initializedMembers = GetInitializedMembers(c.Model, declaration, IsNotStaticOrConst);
+            var initializedMembers = GetInitializedMembers(c.SemanticModel, declaration, IsNotStaticOrConst);
             if (initializedMembers.Count == 0)
             {
                 return;
@@ -101,7 +105,7 @@ namespace SonarAnalyzer.CSharp.Rules
             }
 
             // only retrieve the member symbols (an expensive call) if there are explicit class initializers
-            var initializedMembers = GetInitializedMembers(c.Model, declaration, IsStatic);
+            var initializedMembers = GetInitializedMembers(c.SemanticModel, declaration, IsStatic);
             if (initializedMembers.Count == 0)
             {
                 return;
@@ -168,9 +172,9 @@ namespace SonarAnalyzer.CSharp.Rules
             where TSyntax : SyntaxNode =>
                 (from constructorSymbol in constructorSymbols
                  from declarationNode in constructorSymbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax()).OfType<TSyntax>()
-                 let model = declarationNode.EnsureCorrectSemanticModelOrDefault(context.Model)
+                 let model = declarationNode.EnsureCorrectSemanticModelOrDefault(context.SemanticModel)
                  where model != null
-                 select new NodeSymbolAndModel<TSyntax, IMethodSymbol>(declarationNode, constructorSymbol, model)).ToList();
+                 select new NodeSymbolAndModel<TSyntax, IMethodSymbol>(model, declarationNode, constructorSymbol)).ToList();
 
         private static IEnumerable<DeclarationTuple<IPropertySymbol>> GetInitializedPropertyDeclarations(TypeDeclarationSyntax declaration,
                                                                                                          Func<SyntaxTokenList, bool> filterModifiers,

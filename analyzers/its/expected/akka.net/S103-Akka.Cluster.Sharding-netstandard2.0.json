@@ -1,0 +1,112 @@
+{
+  "Issues": [
+    {
+      "Id": "S103",
+      "Message": "Split this 204 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L198",
+      "Location": "Line 198 Position 1-205"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 218 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShardCoordinator.cs#L217",
+      "Location": "Line 217 Position 1-219"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 226 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShardCoordinator.cs#L231",
+      "Location": "Line 231 Position 1-227"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 231 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShardCoordinator.cs#L255",
+      "Location": "Line 255 Position 1-232"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 285 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShardCoordinator.cs#L270",
+      "Location": "Line 270 Position 1-286"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 212 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShardCoordinator.cs#L67",
+      "Location": "Line 67 Position 1-213"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 212 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1302",
+      "Location": "Line 1302 Position 1-213"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 201 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Serialization/ClusterShardingMessageSerializer.cs#L338",
+      "Location": "Line 338 Position 1-202"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 267 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L970",
+      "Location": "Line 970 Position 1-268"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 216 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L977",
+      "Location": "Line 977 Position 1-217"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 201 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L215",
+      "Location": "Line 215 Position 1-202"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 281 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L453",
+      "Location": "Line 453 Position 1-282"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 276 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L313",
+      "Location": "Line 313 Position 1-277"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 217 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L315",
+      "Location": "Line 315 Position 1-218"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 221 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L329",
+      "Location": "Line 329 Position 1-222"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 211 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L331",
+      "Location": "Line 331 Position 1-212"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 267 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L431",
+      "Location": "Line 431 Position 1-268"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 223 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L959",
+      "Location": "Line 959 Position 1-224"
+    }
+  ]
+}

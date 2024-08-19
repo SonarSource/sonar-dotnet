@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S107",
+      "Message": "Function has 8 parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L686",
+      "Location": "Line 686 Position 33-258"
+    },
+    {
+      "Id": "S107",
+      "Message": "Function has 8 parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L718",
+      "Location": "Line 718 Position 34-255"
+    }
+  ]
+}

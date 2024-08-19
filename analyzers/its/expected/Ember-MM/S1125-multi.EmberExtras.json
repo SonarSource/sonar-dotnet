@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L100",
+      "Location": "Line 100 Position 82-86"
+    }
+  ]
+}

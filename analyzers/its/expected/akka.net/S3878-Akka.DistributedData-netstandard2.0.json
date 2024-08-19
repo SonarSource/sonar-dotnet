@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L270",
+      "Location": "Line 270 Position 73-89"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L271",
+      "Location": "Line 271 Position 77-95"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2326",
+      "Message": "\u0027T\u0027 is not used in the class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/EventSequences.cs#L66",
+      "Location": "Line 66 Position 32-33"
+    }
+  ]
+}

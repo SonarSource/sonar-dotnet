@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/MultiValueDictionaryExtensions.cs#L49",
+      "Location": "Line 49 Position 17-19"
+    }
+  ]
+}

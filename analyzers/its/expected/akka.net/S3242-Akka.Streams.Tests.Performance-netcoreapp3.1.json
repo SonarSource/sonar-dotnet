@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IMaterializer\u0027 instead of \u0027Akka.Streams.ActorMaterializer\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams.Tests.Performance/FlowSelectBenchmark.cs#L234",
+      "Location": "Line 234 Position 48-65"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CAkka.Streams.ClosedShape, Akka.TestKit.TestLatch\u003E\u0027 instead of \u0027Akka.Streams.Dsl.IRunnableGraph\u003CAkka.TestKit.TestLatch\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams.Tests.Performance/FusedGraphsBenchmark.cs#L163",
+      "Location": "Line 163 Position 80-85"
+    }
+  ]
+}

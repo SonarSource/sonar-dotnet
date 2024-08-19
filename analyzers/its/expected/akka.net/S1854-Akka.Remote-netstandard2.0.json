@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1854",
+      "Message": "Remove this useless assignment to local variable \u0027order\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L68",
+      "Location": "Line 68 Position 17-47"
+    }
+  ]
+}

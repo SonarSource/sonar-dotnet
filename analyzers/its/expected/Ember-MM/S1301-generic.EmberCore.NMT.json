@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L111",
+      "Location": "Line 111 Position 25-31"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L146",
+      "Location": "Line 146 Position 25-31"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L213",
+      "Location": "Line 213 Position 17-23"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L226",
+      "Location": "Line 226 Position 13-19"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L93",
+      "Location": "Line 93 Position 13-19"
+    }
+  ]
+}

@@ -1,0 +1,310 @@
+{
+  "Issues": [
+    {
+      "Id": "S103",
+      "Message": "Split this 236 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L447",
+      "Location": "Line 447 Position 1-237"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 233 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorRef.cs#L469",
+      "Location": "Line 469 Position 1-234"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 250 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L596",
+      "Location": "Line 596 Position 1-251"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 235 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Deployer.cs#L101",
+      "Location": "Line 101 Position 1-236"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 261 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/FSM.cs#L556",
+      "Location": "Line 556 Position 1-262"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 247 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/IAutoReceivedMessage.cs#L31",
+      "Location": "Line 31 Position 1-248"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 245 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Scheduler/DeprecatedSchedulerExtensions.cs#L27",
+      "Location": "Line 27 Position 1-246"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 202 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Scheduler/SchedulerExtensions.cs#L106",
+      "Location": "Line 106 Position 1-203"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 220 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Scheduler/SchedulerExtensions.cs#L42",
+      "Location": "Line 42 Position 1-221"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 300 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Annotations/Attributes.cs#L22",
+      "Location": "Line 22 Position 1-301"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 300 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Annotations/Attributes.cs#L43",
+      "Location": "Line 43 Position 1-301"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 313 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L24",
+      "Location": "Line 24 Position 1-314"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 241 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L360",
+      "Location": "Line 360 Position 1-242"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 229 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/CurrentSynchronizationContextDispatcher.cs#L102",
+      "Location": "Line 102 Position 1-230"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 215 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L452",
+      "Location": "Line 452 Position 1-216"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 214 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L288",
+      "Location": "Line 288 Position 1-215"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 226 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/Logging.cs#L307",
+      "Location": "Line 307 Position 1-227"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 235 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/UdpSettings.cs#L51",
+      "Location": "Line 51 Position 1-236"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 287 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L102",
+      "Location": "Line 102 Position 1-288"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 243 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L108",
+      "Location": "Line 108 Position 1-244"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 327 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L115",
+      "Location": "Line 115 Position 1-328"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 284 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L143",
+      "Location": "Line 143 Position 1-285"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 201 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L159",
+      "Location": "Line 159 Position 1-202"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 273 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L174",
+      "Location": "Line 174 Position 1-274"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 215 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L184",
+      "Location": "Line 184 Position 1-216"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 206 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L213",
+      "Location": "Line 213 Position 1-207"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L25",
+      "Location": "Line 25 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L39",
+      "Location": "Line 39 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 221 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L40",
+      "Location": "Line 40 Position 1-222"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L54",
+      "Location": "Line 54 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L68",
+      "Location": "Line 68 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 221 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L69",
+      "Location": "Line 69 Position 1-222"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 201 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L86",
+      "Location": "Line 86 Position 1-202"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 270 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L93",
+      "Location": "Line 93 Position 1-271"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 253 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L97",
+      "Location": "Line 97 Position 1-254"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffSupervisor.cs#L185",
+      "Location": "Line 185 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffSupervisor.cs#L207",
+      "Location": "Line 207 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 222 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffSupervisor.cs#L208",
+      "Location": "Line 208 Position 1-223"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffSupervisor.cs#L242",
+      "Location": "Line 242 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/RetrySupport.cs#L46",
+      "Location": "Line 46 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 204 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/ConsistentHash.cs#L177",
+      "Location": "Line 177 Position 1-205"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 207 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/ConsistentHash.cs#L193",
+      "Location": "Line 193 Position 1-208"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 311 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/Resizer.cs#L352",
+      "Location": "Line 352 Position 1-312"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 205 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Serialization/NewtonSoftJsonSerializer.cs#L180",
+      "Location": "Line 180 Position 1-206"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 246 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Serialization/NewtonSoftJsonSerializer.cs#L43",
+      "Location": "Line 43 Position 1-247"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 202 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/ByteString.cs#L136",
+      "Location": "Line 136 Position 1-203"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 210 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/ByteString.cs#L71",
+      "Location": "Line 71 Position 1-211"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 209 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/ListPriorityQueue.cs#L77",
+      "Location": "Line 77 Position 1-210"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 221 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/MatchHandler/MatchExpressionBuilder.cs#L257",
+      "Location": "Line 257 Position 1-222"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 204 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/MatchHandler/MatchExpressionBuilder.cs#L275",
+      "Location": "Line 275 Position 1-205"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 779 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/MatchHandler/PartialActionBuilder.cs#L45",
+      "Location": "Line 45 Position 1-780"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4040",
+      "Message": "Change this normalization to \u0027ToUpperInvariant()\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L179",
+      "Location": "Line 179 Position 30-46"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L130",
+      "Location": "Line 130 Position 60-73"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L169",
+      "Location": "Line 169 Position 45-58"
+    }
+  ]
+}

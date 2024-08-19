@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster.Tests.Performance/Properties/AssemblyInfo.cs#L8",
+      "Location": "Line 8 Position 1-25"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster.Tests.Performance/Properties/AssemblyInfo.cs#L9",
+      "Location": "Line 9 Position 1-39"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster.Tests.Performance/Startup/ClusterStartupSpec.cs#L10",
+      "Location": "Line 10 Position 1-19"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster.Tests.Performance/Startup/ClusterStartupSpec.cs#L9",
+      "Location": "Line 9 Position 1-34"
+    }
+  ]
+}

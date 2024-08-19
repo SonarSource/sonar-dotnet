@@ -1,0 +1,58 @@
+{
+  "Issues": [
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 28 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L241",
+      "Location": "Line 241 Position 5-214"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 39 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L398",
+      "Location": "Line 398 Position 5-76"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L579",
+      "Location": "Line 579 Position 5-147"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 11 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L624",
+      "Location": "Line 624 Position 5-117"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 31 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L662",
+      "Location": "Line 662 Position 5-184"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 31 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L76",
+      "Location": "Line 76 Position 5-102"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L300",
+      "Location": "Line 300 Position 5-169"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 31 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L76",
+      "Location": "Line 76 Position 5-141"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 13 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L91",
+      "Location": "Line 91 Position 5-210"
+    }
+  ]
+}

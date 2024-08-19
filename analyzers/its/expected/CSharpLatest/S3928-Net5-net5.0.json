@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3928",
+      "Message": "ArgumentException constructor arguments have been inverted.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L12",
+      "Location": "Line 12 Position 11-51"
+    }
+  ]
+}

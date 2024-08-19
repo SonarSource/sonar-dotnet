@@ -1,0 +1,52 @@
+{
+  "Issues": [
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/DefaultFailureDetectorRegistry.cs#L94",
+      "Location": "Line 94 Position 25-31"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/EndpointManager.cs#L552",
+      "Location": "Line 552 Position 21-27"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/EndpointManager.cs#L856",
+      "Location": "Line 856 Position 17-23"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/EndpointManager.cs#L953",
+      "Location": "Line 953 Position 17-23"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L181",
+      "Location": "Line 181 Position 13-19"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L205",
+      "Location": "Line 205 Position 13-19"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L839",
+      "Location": "Line 839 Position 25-31"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L848",
+      "Location": "Line 848 Position 25-31"
+    }
+  ]
+}

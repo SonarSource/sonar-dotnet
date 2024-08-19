@@ -97,7 +97,6 @@ namespace Tests.Diagnostics
             var newItem = new Item
             {
                 Required = !(item == null) && item.Required // Fixed
-
             };
         }
 

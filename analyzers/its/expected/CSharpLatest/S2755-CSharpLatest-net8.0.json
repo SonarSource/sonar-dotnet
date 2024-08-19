@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2755",
+      "Message": "Disable access to external entities in XML parsing.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S2755.cs#L10",
+      "Location": "Line 10 Position 28-85"
+    },
+    {
+      "Id": "S2755",
+      "Message": "Disable access to external entities in XML parsing.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S2755.cs#L9",
+      "Location": "Line 9 Position 23-74"
+    }
+  ]
+}

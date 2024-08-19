@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this method is 18 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L495",
+      "Location": "Line 495 Position 24-31"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this constructor is 12 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L33",
+      "Location": "Line 33 Position 16-27"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this method is 14 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L355",
+      "Location": "Line 355 Position 24-31"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this method is 24 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L277",
+      "Location": "Line 277 Position 33-42"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this method is 19 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/MsgDecoder.cs#L40",
+      "Location": "Line 40 Position 26-32"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this method is 18 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L45",
+      "Location": "Line 45 Position 33-39"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this method is 44 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L350",
+      "Location": "Line 350 Position 21-28"
+    }
+  ]
+}

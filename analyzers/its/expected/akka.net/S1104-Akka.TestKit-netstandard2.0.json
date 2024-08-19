@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/AutoPilots.cs#L60",
+      "Location": "Line 60 Position 35-63"
+    },
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/AutoPilots.cs#L85",
+      "Location": "Line 85 Position 35-63"
+    },
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/CallingThreadDispatcher.cs#L46",
+      "Location": "Line 46 Position 30-72"
+    },
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/NullMessageEnvelope.cs#L20",
+      "Location": "Line 20 Position 43-77"
+    }
+  ]
+}

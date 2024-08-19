@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2589",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L21",
+      "Location": "Line 21 Position 10-13"
+    },
+    {
+      "Id": "S2589",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L26",
+      "Location": "Line 26 Position 10-13"
+    }
+  ]
+}

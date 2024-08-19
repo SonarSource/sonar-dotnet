@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L274",
+      "Location": "Line 274 Position 36-50"
+    }
+  ]
+}

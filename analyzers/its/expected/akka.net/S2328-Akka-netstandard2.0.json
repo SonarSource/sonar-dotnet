@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2328",
+      "Message": "Refactor \u0027GetHashCode\u0027 to not reference mutable fields.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Props.cs#L332",
+      "Location": "Line 332 Position 29-40"
+    },
+    {
+      "Id": "S2328",
+      "Message": "Refactor \u0027GetHashCode\u0027 to not reference mutable fields.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/AppVersion.cs#L266",
+      "Location": "Line 266 Position 29-40"
+    }
+  ]
+}

@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules;
+namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
@@ -78,7 +82,7 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
 
     private static Location[] DuplicatedCastLocations(SonarSyntaxNodeReportingContext context, SyntaxNode parentStatement, TypeSyntax castType, SyntaxNode typedVariable)
     {
-        var typeExpressionSymbol = context.Model.GetSymbolInfo(typedVariable).Symbol ?? context.Model.GetDeclaredSymbol(typedVariable);
+        var typeExpressionSymbol = context.SemanticModel.GetSymbolInfo(typedVariable).Symbol ?? context.SemanticModel.GetDeclaredSymbol(typedVariable);
         return typeExpressionSymbol is null ? [] : parentStatement.DescendantNodes().Where(IsDuplicatedCast).Select(x => x.GetLocation()).ToArray();
 
         bool IsDuplicatedCast(SyntaxNode node)
@@ -87,7 +91,7 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
             {
                 return IsDuplicatedCastOnSameSymbol(cast.Expression, cast.Type);
             }
-            else if (node is BinaryExpressionSyntax binary && binary.Kind() is SyntaxKind.AsExpression or SyntaxKind.IsExpression)
+            else if (node is BinaryExpressionSyntax binary && binary.IsAnyKind(SyntaxKind.AsExpression, SyntaxKind.IsExpression))
             {
                 return IsDuplicatedCastOnSameSymbol(binary.Left, binary.Right);
             }
@@ -100,22 +104,24 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
         bool IsDuplicatedCastOnSameSymbol(ExpressionSyntax expression, SyntaxNode type) =>
             type.WithoutTrivia().IsEquivalentTo(castType.WithoutTrivia())
             && IsCastOnSameSymbol(expression)
-            && !CSharpFacade.Instance.Syntax.IsInExpressionTree(context.Model, expression); // see https://github.com/SonarSource/sonar-dotnet/issues/8735#issuecomment-1943419398
+            && !CSharpFacade.Instance.Syntax.IsInExpressionTree(context.SemanticModel, expression); // see https://github.com/SonarSource/sonar-dotnet/issues/8735#issuecomment-1943419398
 
         bool IsCastOnSameSymbol(ExpressionSyntax expression) =>
             IsEquivalentVariable(expression, typedVariable)
-            && Equals(context.Model.GetSymbolInfo(expression).Symbol, typeExpressionSymbol);
+            && Equals(context.SemanticModel.GetSymbolInfo(expression).Symbol, typeExpressionSymbol);
     }
 
     private static void ProcessPatternExpression(SonarSyntaxNodeReportingContext analysisContext, SyntaxNode isPattern, SyntaxNode mainVariableExpression, SyntaxNode parentStatement)
     {
-        foreach (var expressionPatternPair in ((ExpressionSyntax)mainVariableExpression).MapToPattern(isPattern))
+        var objectToPattern = new Dictionary<ExpressionSyntax, SyntaxNode>();
+        PatternExpressionObjectToPatternMapping.MapObjectToPattern((ExpressionSyntax)mainVariableExpression.RemoveParentheses(), isPattern.RemoveParentheses(), objectToPattern);
+        foreach (var expressionPatternPair in objectToPattern)
         {
             var pattern = expressionPatternPair.Value;
             var leftVariable = expressionPatternPair.Key;
             var targetTypes = GetTypesFromPattern(pattern);
             var rightPartsToCheck = new Dictionary<SyntaxNode, Tuple<TypeSyntax, Location>>();
-            foreach (var subPattern in pattern.DescendantNodesAndSelf().Where(x => x?.Kind() is SyntaxKindEx.DeclarationPattern or SyntaxKindEx.RecursivePattern))
+            foreach (var subPattern in pattern.DescendantNodesAndSelf().Where(x => x.IsAnyKind(SyntaxKindEx.DeclarationPattern, SyntaxKindEx.RecursivePattern)))
             {
                 if (DeclarationPatternSyntaxWrapper.IsInstance(subPattern) && (DeclarationPatternSyntaxWrapper)subPattern is var declarationPattern)
                 {

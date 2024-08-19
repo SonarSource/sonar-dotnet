@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.NodeTestRunner/Program.cs#L164",
+      "Location": "Line 164 Position 54-67"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.NodeTestRunner/Program.cs#L62",
+      "Location": "Line 62 Position 55-68"
+    }
+  ]
+}

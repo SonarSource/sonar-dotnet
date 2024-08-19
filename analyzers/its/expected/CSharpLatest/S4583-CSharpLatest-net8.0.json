@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S4583",
+      "Message": "Pair this \u0022BeginInvoke\u0022 with an \u0022EndInvoke\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S4583.Part1.cs#L22",
+      "Location": "Line 22 Position 16-27"
+    },
+    {
+      "Id": "S4583",
+      "Message": "Pair this \u0022BeginInvoke\u0022 with an \u0022EndInvoke\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S4583.Part1.cs#L38",
+      "Location": "Line 38 Position 16-27"
+    }
+  ]
+}

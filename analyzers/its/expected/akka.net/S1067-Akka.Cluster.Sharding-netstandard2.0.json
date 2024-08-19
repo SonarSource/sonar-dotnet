@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L197",
+      "Location": "Line 197 Position 21-136"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L212-L216",
+      "Location": "Lines 212-216 Position 24-71"
+    }
+  ]
+}

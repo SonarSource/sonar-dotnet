@@ -12,7 +12,7 @@ static class Program
     {
         list.OrderBy(x => x).Where(x => true);
         //                   ^^^^^ {{"Where" should be used before "OrderBy"}}
-        //   ^^^^^^^ Secondary@-1 {{This "OrderBy" precedes a "Where" - you should change the order.}}
+        //   ^^^^^^^ Secondary@-1
 
         list.OrderBy(x => x)?.Where(x => true);
         //                    ^^^^^ {{"Where" should be used before "OrderBy"}}
@@ -31,7 +31,7 @@ static class Program
     {
         list.OrderByDescending(x => x).Where(x => true);
         //                             ^^^^^ {{"Where" should be used before "OrderByDescending"}}
-        //   ^^^^^^^^^^^^^^^^^ Secondary@-1 {{This "OrderByDescending" precedes a "Where" - you should change the order.}}
+        //   ^^^^^^^^^^^^^^^^^ Secondary@-1
 
         list.OrderByDescending(x => x)?.Where(x => true);
         //                              ^^^^^ {{"Where" should be used before "OrderByDescending"}}

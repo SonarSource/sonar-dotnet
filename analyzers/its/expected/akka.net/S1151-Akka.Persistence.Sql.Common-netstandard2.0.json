@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 13 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L758",
+      "Location": "Line 758 Position 21-44"
+    }
+  ]
+}

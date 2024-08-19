@@ -1,0 +1,82 @@
+{
+  "Issues": [
+    {
+      "Id": "S3956",
+      "Message": "Refactor this field to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunCoordinator.cs#L101",
+      "Location": "Line 101 Position 19-34"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this constructor to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L26",
+      "Location": "Line 26 Position 44-58"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this constructor to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L32",
+      "Location": "Line 32 Position 44-58"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this field to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/SinkCoordinator.cs#L83",
+      "Location": "Line 83 Position 19-36"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this field to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/SinkCoordinator.cs#L84",
+      "Location": "Line 84 Position 19-36"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this property to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/SpecLog.cs#L20",
+      "Location": "Line 20 Position 16-28"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this property to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/SpecLog.cs#L24",
+      "Location": "Line 24 Position 16-72"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this property to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/Output.cs#L18",
+      "Location": "Line 18 Position 16-28"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this property to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/Output.cs#L19",
+      "Location": "Line 19 Position 16-28"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this property to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/Output.cs#L20",
+      "Location": "Line 20 Position 16-28"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this property to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/Output.cs#L22",
+      "Location": "Line 22 Position 16-28"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this field to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/UnitTest.cs#L33",
+      "Location": "Line 33 Position 16-36"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this property to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/UnitTestResult.cs#L45",
+      "Location": "Line 45 Position 16-36"
+    }
+  ]
+}

@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml;
 
 public class C
 {
@@ -44,7 +43,7 @@ public class C
         ReturnMethod(); // Noncompliant
         _ = ReturnMethod(); // Noncompliant
         this.ReturnMethod().ReturnMethod().ReturnMethod();
-//      ^^^^^^^^^^^^^^^^^^^
+//      ^^^^^^^^^^^^^^^^^^^                                  
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                   @-1
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    @-2
         _ = true ? ReturnMethod() : ReturnMethod();
@@ -187,12 +186,12 @@ class AsynchronousLambdas
         Func<Task> a = async () =>
         {
             await Foo();
-            reader.ReadLine(); // Noncompliant
+            reader.ReadLine(); // Noncompliant  
         };
         Func<Task> b = async delegate ()
         {
             await Foo();
-            reader.ReadLine(); // Noncompliant
+            reader.ReadLine(); // Noncompliant  
         };
     }
 
@@ -260,53 +259,5 @@ class ResolvesToSelf
     public async Task GenericAsync<T>()
     {
         Generic<T>(); // Compliant. The fix would cause an endless loop
-    }
-}
-
-public class XmlReaderException
-{
-    async Task TestReader(Stream stream)
-    {
-        using (XmlReader reader = XmlReader.Create(stream))
-        {
-            reader.Read();                           // Compliant, we don't raise for XmlReader methods https://github.com/SonarSource/sonar-dotnet/issues/9336
-            reader.ReadContentAs(typeof(int), null); // Compliant
-            reader.MoveToContent();                  // Compliant
-            reader.ReadContentAsBase64(null, 0, 0);  // Compliant
-            reader.ReadContentAsBinHex(null, 0, 0);  // Compliant
-            reader.ReadContentAsObject();            // Compliant
-            reader.ReadContentAsString();            // Compliant
-            reader.ReadInnerXml();                   // Compliant
-            reader.ReadOuterXml();                   // Compliant
-            reader.ReadValueChunk(null, 0, 0);       // Compliant
-        }
-
-        using (XmlWriter writer = XmlWriter.Create(stream))
-        {
-            writer.WriteStartElement("pf", "root", "http://ns");    // Compliant, we don't raise for XmlWriter methods https://github.com/SonarSource/sonar-dotnet/issues/9336
-            writer.WriteStartElement(null, "sub", null);            // Compliant
-            writer.WriteAttributeString(null, "att", null, "val");  // Compliant
-            writer.WriteString("text");                             // Compliant
-            writer.WriteEndElement();                               // Compliant
-            writer.WriteProcessingInstruction("pName", "pValue");   // Compliant
-            writer.WriteComment("cValue");                          // Compliant
-            writer.WriteCData("cdata value");                       // Compliant
-            writer.WriteEndElement();                               // Compliant
-            writer.Flush();                                         // Compliant
-        }
-    }
-}
-
-// Repro for https://sonarsource.atlassian.net/browse/NET-1468
-public class TestLockClass
-{
-    private readonly object locktarget;
-    private readonly SemaphoreSlim sm;
-    public async Task DoWorkAsync(CancellationToken cancellationToken)
-    {
-        lock (locktarget)
-        {
-            sm.Wait(); // Noncompliant FP
-        }
     }
 }

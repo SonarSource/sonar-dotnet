@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S2755",
+      "Message": "Disable access to external entities in XML parsing.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework452/XmlDocumentTest.cs#L29",
+      "Location": "Line 29 Position 13-45"
+    },
+    {
+      "Id": "S2755",
+      "Message": "Disable access to external entities in XML parsing.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework452/XmlReaderTest.cs#L19",
+      "Location": "Line 19 Position 20-53"
+    },
+    {
+      "Id": "S2755",
+      "Message": "Disable access to external entities in XML parsing.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework452/XmlTextReaderTest.cs#L25",
+      "Location": "Line 25 Position 13-43"
+    },
+    {
+      "Id": "S2755",
+      "Message": "Disable access to external entities in XML parsing.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework452/XPathDocumentTest.cs#L23",
+      "Location": "Line 23 Position 29-149"
+    }
+  ]
+}

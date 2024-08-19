@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L130",
+      "Location": "Line 130 Position 76-114"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L90",
+      "Location": "Line 90 Position 21-59"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L94",
+      "Location": "Line 94 Position 21-59"
+    }
+  ]
+}

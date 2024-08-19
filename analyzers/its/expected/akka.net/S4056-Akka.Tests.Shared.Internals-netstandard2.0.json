@@ -1,0 +1,40 @@
+{
+  "Issues": [
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L123",
+      "Location": "Line 123 Position 33-143"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L125",
+      "Location": "Line 125 Position 52-108"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L127",
+      "Location": "Line 127 Position 129-193"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L135",
+      "Location": "Line 135 Position 117-175"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpecExtensions.cs#L54",
+      "Location": "Line 54 Position 63-88"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpecExtensions.cs#L55",
+      "Location": "Line 55 Position 60-85"
+    }
+  ]
+}

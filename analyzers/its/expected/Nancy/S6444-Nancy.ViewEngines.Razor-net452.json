@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/RazorViewEngine.cs#L286",
+      "Location": "Line 286 Position 29-94"
+    }
+  ]
+}

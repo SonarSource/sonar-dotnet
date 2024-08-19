@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027tPath\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L289",
+      "Location": "Line 289 Position 13-18"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027mePath\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L38",
+      "Location": "Line 38 Position 13-19"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027tmpList\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L458",
+      "Location": "Line 458 Position 37-44"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027frmToolTip\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgTVBulkRename.vb#L36",
+      "Location": "Line 36 Position 13-23"
+    }
+  ]
+}

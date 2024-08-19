@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S2348",
+      "Message": "Rename this event to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L70",
+      "Location": "Line 70 Position 19-27"
+    },
+    {
+      "Id": "S2348",
+      "Message": "Rename this event to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L72",
+      "Location": "Line 72 Position 19-27"
+    },
+    {
+      "Id": "S2348",
+      "Message": "Rename this event to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L74",
+      "Location": "Line 74 Position 19-27"
+    }
+  ]
+}

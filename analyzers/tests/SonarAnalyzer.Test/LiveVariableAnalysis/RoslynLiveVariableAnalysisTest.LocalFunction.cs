@@ -1,17 +1,21 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 namespace SonarAnalyzer.Test.LiveVariableAnalysis;
@@ -221,29 +225,7 @@ public partial class RoslynLiveVariableAnalysisTest
     }
 
     [TestMethod]
-    public void LocalFunctionInvocation_Recursive_LiveIn_WithoutFlowCapture()
-    {
-        var code = """
-            var variable = 42;
-            if (boolParameter)
-                return;
-            LocalFunction(10);
-
-            int LocalFunction(int cnt)
-            {
-                if (cnt == 0)
-                    return 0;
-                return variable + LocalFunction(cnt - 1);
-            }
-            """;
-        var context = CreateContextCS(code);
-        context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
-        context.Validate("boolParameter", LiveIn("boolParameter"), LiveOut("variable"));
-        context.Validate("LocalFunction(10);", LiveIn("variable"));
-    }
-
-    [TestMethod]
-    public void LocalFunctionInvocation_Recursive_LiveIn_FlowCapture()
+    public void LocalFunctionInvocation_Recursive_LiveIn()
     {
         var code = """
             var variable = 42;
@@ -255,8 +237,8 @@ public partial class RoslynLiveVariableAnalysisTest
             """;
         var context = CreateContextCS(code);
         context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
-        context.Validate("boolParameter", LiveIn("boolParameter")); // should be LiveOut("variable") but FlowCaptures inside of local functions are not resolved
-        context.Validate("LocalFunction(10);");                     // should be LiveIn("variable")
+        context.Validate("boolParameter", LiveIn("boolParameter"), LiveOut("variable"));
+        context.Validate("LocalFunction(10);", LiveIn("variable"));
     }
 
     [TestMethod]

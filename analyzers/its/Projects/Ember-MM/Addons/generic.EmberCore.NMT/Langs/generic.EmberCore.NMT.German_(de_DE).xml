@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<string id="1">Jukebox Builder</string>
+	<string id="2">Compiling Film List...</string>
+	<string id="3">Abbruch Compilation...</string>
+	<string id="4">Template</string>
+	<string id="5">Template auswählen</string>
+	<string id="6">BasePath kann nicht gleich dem Ausgangsordner sein</string>
+	<string id="7">Achtung</string>
+	<string id="8">Exportiere Daten...</string>
+	<string id="9">Exportiere Flags...</string>
+	<string id="10">Exportiere Cover...</string>
+	<string id="11">Exportiere Hintergrund Bilder...</string>
+	<string id="12">Benutze den NMT Pfad wenn die Quelle nicht gleich dem Ausgangsordner ist.{0}Syntax zum NMT ist:{0}file:///opt/sybhttpd/localhost.drives/NETWORK_SHARE/[remote_filesystem_name]/[Path_to_Source]{0}file:///opt/sybhttpd/localhost.drives/HARD_DISK/USB_DRIVE_A-1/[Path_to_Source]</string>
+	<string id="13">Laufwerk und Ordner wo Jukebox Dateien exportiert werden sollen</string>
+	<string id="14">Ausgangs Ordner</string>
+	<string id="15">Template speichern</string>
+	<string id="16">Erstellen</string>
+	<string id="17">Hilfe</string>
+	<string id="18">Installiert</string>
+	<string id="19">Neu</string>
+	<string id="20">Starten...</string>
+	<string id="21">Ausgangs Ordner leeren...</string>
+	<string id="22">veraltet</string>
+	<string id="23">Vorbereiten Ordner...</string>
+	<string id="24">Bestätigung Info...</string>
+	<string id="25">Falscher Ausgangs Ordner</string>
+	<string id="26">Bitte den korrekten NMT-Path nicht vergessen einzutragen da Ember weder Source noch NMT Path überprüft</string>
+	<string id="27">Template entfernen kann nicht rückgängig gemacht werden. Bist du sicher?</string>
+	<string id="28">entferne Template</string>
+	<string id="29">Eigenschaften</string>
+	<string id="30">Auswahl J/N</string>
+	<string id="31">Ember Quelle</string>
+	<string id="32">NMT Path</string>
+	<string id="33">Einstellungen</string>
+	<string id="34">Template Einstellungen</string>
+	<string id="35">Skin Einstellungen</string>
+	<string id="36">Installiere Template</string>
+    <string id="37">Ordner existiert bereits. Überschreiben?</string>
+    <string id="38">Datei/Ordner wird verwendet! Überschreiben nicht möglich</string>
+    <string id="39">Hohe Priorität</string>
+    <string id="40">Falls externe Tools benutzt werden, mehrere Instanzen laufen, bekommt Ember NMT Build hohe Priorität</string>
+	<string id="41">Click für mehr Details</string>
+	<string id="42">Bitte auswählen / Installiere zuerst ein Template</string>
+</strings>
+<!-- Rev2384 created by F089-->

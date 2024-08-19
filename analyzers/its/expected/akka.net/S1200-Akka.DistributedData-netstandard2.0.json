@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 38 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L24",
+      "Location": "Line 24 Position 18-33"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 33 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L122",
+      "Location": "Line 122 Position 25-37"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 36 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L168",
+      "Location": "Line 168 Position 25-30"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 119 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L264",
+      "Location": "Line 264 Position 27-37"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 113 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L27",
+      "Location": "Line 27 Position 25-49"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 73 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L28",
+      "Location": "Line 28 Position 25-52"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 32 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L17",
+      "Location": "Line 17 Position 20-35"
+    }
+  ]
+}

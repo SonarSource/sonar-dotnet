@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class UseStringIsNullOrEmpty : SonarDiagnosticAnalyzer
@@ -39,26 +43,41 @@ namespace SonarAnalyzer.CSharp.Rules
 
                     if (invocationExpression.Expression is MemberAccessExpressionSyntax memberAccessExpression
                         && memberAccessExpression.Name.Identifier.ValueText == EqualsName
-                        && invocationExpression.TryGetFirstArgument(out var firstArgument)
-                        && memberAccessExpression.IsMemberAccessOnKnownType(EqualsName, KnownType.System_String, c.Model))
+                        && TryGetFirstArgument(invocationExpression, out var firstArgument)
+                        && IsStringEqualsMethod(memberAccessExpression, c.SemanticModel))
                     {
                         // x.Equals(value), where x is string.Empty, "" or const "", and value is some string
-                        if (IsStringIdentifier(firstArgument.Expression, c.Model)
-                            && IsConstantEmptyString(memberAccessExpression.Expression, c.Model))
+                        if (IsStringIdentifier(firstArgument.Expression, c.SemanticModel)
+                            && IsConstantEmptyString(memberAccessExpression.Expression, c.SemanticModel))
                         {
                             c.ReportIssue(rule, invocationExpression, MessageFormat);
                             return;
                         }
 
                         // value.Equals(x), where x is string.Empty, "" or const "", and value is some string
-                        if (IsStringIdentifier(memberAccessExpression.Expression, c.Model)
-                            && IsConstantEmptyString(firstArgument.Expression, c.Model))
+                        if (IsStringIdentifier(memberAccessExpression.Expression, c.SemanticModel)
+                            && IsConstantEmptyString(firstArgument.Expression, c.SemanticModel))
                         {
                             c.ReportIssue(rule, invocationExpression, MessageFormat);
                         }
                     }
                 },
                 SyntaxKind.InvocationExpression);
+        }
+
+        private static bool TryGetFirstArgument(InvocationExpressionSyntax invocationExpression, out ArgumentSyntax firstArgument)
+        {
+            firstArgument = invocationExpression?.ArgumentList?.Arguments.FirstOrDefault();
+
+            return firstArgument != null;
+        }
+
+        private static bool IsStringEqualsMethod(MemberAccessExpressionSyntax memberAccessExpression, SemanticModel semanticModel)
+        {
+            var methodName = semanticModel.GetSymbolInfo(memberAccessExpression.Name);
+
+            return methodName.Symbol.IsInType(KnownType.System_String)
+                && methodName.Symbol.Name == EqualsName;
         }
 
         private static bool IsStringIdentifier(ExpressionSyntax expression, SemanticModel semanticModel)

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4027",
+      "Message": "Implement the missing constructors for this exception.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Hosting.Self/AutomaticUrlReservationCreationFailureException.cs#L11",
+      "Location": "Line 11 Position 18-65"
+    }
+  ]
+}

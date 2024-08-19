@@ -1,0 +1,106 @@
+{
+  "Issues": [
+    {
+      "Id": "S2362",
+      "Message": "Rename \u0027TITLE_PATTERN\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L100",
+      "Location": "Line 100 Position 23-36"
+    },
+    {
+      "Id": "S2362",
+      "Message": "Rename \u0027TR_PATTERN\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L101",
+      "Location": "Line 101 Position 23-33"
+    },
+    {
+      "Id": "S2362",
+      "Message": "Rename \u0027LINK_PATTERN\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L85",
+      "Location": "Line 85 Position 23-35"
+    },
+    {
+      "Id": "S2362",
+      "Message": "Rename \u0027ACTORTABLE_PATTERN\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L87",
+      "Location": "Line 87 Position 23-41"
+    },
+    {
+      "Id": "S2362",
+      "Message": "Rename \u0027HREF_PATTERN\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L88",
+      "Location": "Line 88 Position 23-35"
+    },
+    {
+      "Id": "S2362",
+      "Message": "Rename \u0027HREF_PATTERN_2\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L89",
+      "Location": "Line 89 Position 23-37"
+    },
+    {
+      "Id": "S2362",
+      "Message": "Rename \u0027HREF_PATTERN_3\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L90",
+      "Location": "Line 90 Position 23-37"
+    },
+    {
+      "Id": "S2362",
+      "Message": "Rename \u0027HREF_PATTERN_4\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L91",
+      "Location": "Line 91 Position 23-37"
+    },
+    {
+      "Id": "S2362",
+      "Message": "Rename \u0027IMDB_ID_REGEX\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L92",
+      "Location": "Line 92 Position 23-36"
+    },
+    {
+      "Id": "S2362",
+      "Message": "Rename \u0027IMG_PATTERN\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L93",
+      "Location": "Line 93 Position 23-34"
+    },
+    {
+      "Id": "S2362",
+      "Message": "Rename \u0027MOVIE_TITLE_PATTERN\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L94",
+      "Location": "Line 94 Position 23-42"
+    },
+    {
+      "Id": "S2362",
+      "Message": "Rename \u0027TABLE_PATTERN\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L95",
+      "Location": "Line 95 Position 23-36"
+    },
+    {
+      "Id": "S2362",
+      "Message": "Rename \u0027TD_PATTERN_1\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L96",
+      "Location": "Line 96 Position 23-35"
+    },
+    {
+      "Id": "S2362",
+      "Message": "Rename \u0027TD_PATTERN_2\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L97",
+      "Location": "Line 97 Position 23-35"
+    },
+    {
+      "Id": "S2362",
+      "Message": "Rename \u0027TD_PATTERN_3\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L98",
+      "Location": "Line 98 Position 23-35"
+    },
+    {
+      "Id": "S2362",
+      "Message": "Rename \u0027TD_PATTERN_4\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L99",
+      "Location": "Line 99 Position 23-35"
+    },
+    {
+      "Id": "S2362",
+      "Message": "Rename \u0027APIKey\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L33",
+      "Location": "Line 33 Position 23-29"
+    }
+  ]
+}

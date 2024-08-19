@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/test/Nancy.Tests/Unit/ModelBinding/DefaultBinderFixture.cs#L89",
+      "Location": "Line 89 Position 21-89"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/test/Nancy.Tests/Unit/NancyEngineFixture.cs#L166",
+      "Location": "Line 166 Position 27-112"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/test/Nancy.Tests/Unit/NancyEngineFixture.cs#L180",
+      "Location": "Line 180 Position 27-113"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027assemblyBuilder\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor.BuildProviders/NancyCSharpRazorBuildProvider.cs#L45",
+      "Location": "Line 45 Position 13-28"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027results\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor.BuildProviders/NancyCSharpRazorBuildProvider.cs#L57",
+      "Location": "Line 57 Position 20-27"
+    }
+  ]
+}

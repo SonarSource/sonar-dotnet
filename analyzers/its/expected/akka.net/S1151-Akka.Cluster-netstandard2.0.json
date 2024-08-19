@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 14 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1913",
+      "Location": "Line 1913 Position 17-25"
+    },
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 12 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L323",
+      "Location": "Line 323 Position 21-57"
+    },
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 9 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L327",
+      "Location": "Line 327 Position 29-46"
+    },
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 17 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L396",
+      "Location": "Line 396 Position 21-48"
+    },
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 9 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L301",
+      "Location": "Line 301 Position 17-72"
+    }
+  ]
+}

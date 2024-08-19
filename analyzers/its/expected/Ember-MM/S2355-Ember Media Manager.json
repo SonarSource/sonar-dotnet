@@ -1,0 +1,262 @@
+{
+  "Issues": [
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L801",
+      "Location": "Line 801 Position 38-169"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L67",
+      "Location": "Line 67 Position 48-86"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2945",
+      "Location": "Line 2945 Position 48-215"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2947",
+      "Location": "Line 2947 Position 48-253"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2958",
+      "Location": "Line 2958 Position 48-215"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2960",
+      "Location": "Line 2960 Position 48-253"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4073",
+      "Location": "Line 4073 Position 40-245"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4075",
+      "Location": "Line 4075 Position 40-168"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4077",
+      "Location": "Line 4077 Position 40-168"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4079",
+      "Location": "Line 4079 Position 44-172"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4081",
+      "Location": "Line 4081 Position 42-170"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4083",
+      "Location": "Line 4083 Position 43-149"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4085",
+      "Location": "Line 4085 Position 43-171"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4088",
+      "Location": "Line 4088 Position 39-246"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4091",
+      "Location": "Line 4091 Position 38-169"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4094",
+      "Location": "Line 4094 Position 45-142"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4097",
+      "Location": "Line 4097 Position 41-183"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6583",
+      "Location": "Line 6583 Position 71-102"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6881",
+      "Location": "Line 6881 Position 47-94"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6882",
+      "Location": "Line 6882 Position 47-130"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6883",
+      "Location": "Line 6883 Position 47-130"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6884",
+      "Location": "Line 6884 Position 47-132"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6885",
+      "Location": "Line 6885 Position 47-79"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7017",
+      "Location": "Line 7017 Position 47-93"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7018",
+      "Location": "Line 7018 Position 47-94"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7019",
+      "Location": "Line 7019 Position 47-83"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7020",
+      "Location": "Line 7020 Position 47-83"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7021",
+      "Location": "Line 7021 Position 47-80"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7022",
+      "Location": "Line 7022 Position 47-84"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7023",
+      "Location": "Line 7023 Position 47-80"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7024",
+      "Location": "Line 7024 Position 47-82"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7025",
+      "Location": "Line 7025 Position 47-80"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7026",
+      "Location": "Line 7026 Position 47-97"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7027",
+      "Location": "Line 7027 Position 47-101"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7028",
+      "Location": "Line 7028 Position 47-97"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7107",
+      "Location": "Line 7107 Position 43-137"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7109",
+      "Location": "Line 7109 Position 47-141"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7111",
+      "Location": "Line 7111 Position 43-75"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7193",
+      "Location": "Line 7193 Position 47-96"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7194",
+      "Location": "Line 7194 Position 47-130"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7195",
+      "Location": "Line 7195 Position 47-130"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7196",
+      "Location": "Line 7196 Position 47-134"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7197",
+      "Location": "Line 7197 Position 47-79"
+    }
+  ]
+}

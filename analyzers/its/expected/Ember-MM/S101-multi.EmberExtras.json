@@ -1,0 +1,58 @@
+{
+  "Issues": [
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.EmberExtras/frmAVCodecEditor.vb#L4",
+      "Location": "Line 4 Position 14-30"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L241",
+      "Location": "Line 241 Position 11-18"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L278",
+      "Location": "Line 278 Position 11-23"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L283",
+      "Location": "Line 283 Position 11-17"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L6",
+      "Location": "Line 6 Position 14-29"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L4",
+      "Location": "Line 4 Position 14-29"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.EmberExtras/genericGenresEditor.vb#L3",
+      "Location": "Line 3 Position 14-33"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.EmberExtras/genericMediaSources.vb#L3",
+      "Location": "Line 3 Position 14-33"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.EmberExtras/genericMetadataEditor.vb#L3",
+      "Location": "Line 3 Position 14-35"
+    }
+  ]
+}

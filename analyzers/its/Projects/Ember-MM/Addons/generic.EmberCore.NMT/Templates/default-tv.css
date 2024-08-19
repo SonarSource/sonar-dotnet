@@ -1,0 +1,185 @@
+#place-5 {
+	visibility:visible;
+	left:25px;
+	top:450px;
+
+}
+#place-4 {
+	visibility:visible;
+	left:115px;
+	top:470px;
+
+}
+#place-3 {
+	visibility:visible;
+	left:205px;
+	top:480px;
+
+}
+#place-2 {
+	visibility:visible;
+	left:295px;
+	top:490px;
+
+}
+#place-1 {
+	visibility:visible;
+	left:385px;
+	top:500px;
+
+}
+#place0 {
+	visibility:visible;
+	left:465px;
+	top:410px;
+}
+
+#place1 {
+	visibility:visible;
+	left:615px;
+	top:500px;
+
+}
+#place2 {
+	visibility:visible;
+	left:705px;
+	top:490px;
+
+}
+#place3 {
+	visibility:visible;
+	left:795px;
+	top:480px;
+
+}
+#place4 {
+	visibility:visible;
+	left:885px;
+	top:470px;
+
+}
+#place5 {
+	visibility:visible;
+	left:975px;
+	top:450px;
+}
+
+#eps1 {
+	color:white;
+}
+#eps2 {
+	color:white;
+}
+#eps3 {
+	color:white;
+}
+#eps4 {
+	color:white;
+}
+#eps5 {
+	color:white;
+}
+#eps6 {
+	color:white;
+}
+#eps7 {
+	color:white;
+}
+#eps8 {
+	color:white;
+}
+#eps9 {
+	color:white;
+}
+#eps10 {
+	color:white;
+}
+
+
+#box0 {
+	visibility:visible;
+	left:465px;
+	top:377px;
+	width:150px;
+	height:211px;
+	position:absolute;
+}
+
+.place { 
+	width:80px;
+	height:118px;
+	position:absolute;
+	#top:470px;
+	background-color:black;
+}
+.place img {
+	width:80px;
+	height:118px;
+}
+
+.placefocus { 
+	width:160px;
+	height:232px;
+	position:absolute;
+	#top:455px;
+	background-color:black;
+}
+.placefocus img {
+	width:158px;
+	height:230px;
+}
+
+.showposter { 
+	//height:118px;
+	position:absolute;
+	top:10px;
+	left:950px;
+}
+.showposter img { 
+	width:180px;
+
+}
+.epsposter { 
+	width:240px;
+	height:135px;
+	position:absolute;
+	top:90px;
+	left:30px;
+}
+
+.placebox { 
+	width:1280px;
+	height:119px;
+	position:absolute;
+	top:420px;
+	left:0;
+	#background-color:Black-alpha2;
+}
+
+.showname { 
+	color:white;
+	font-size:28px;
+}
+.seasonname { 
+	color:white;
+	font-size:22px;
+}
+.epsname { 
+	color:white;
+	font-size:24px;
+}
+.infotextspacer {
+	color:white;
+	font-size:22px;
+	width:1080px;
+	height:50px;
+}
+
+.episodes { 
+	font-size:20px;
+}
+
+.plot { 
+	color:white;
+	font-size:20px;
+}

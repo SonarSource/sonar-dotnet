@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L370",
+      "Location": "Line 370 Position 137-142"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L371",
+      "Location": "Line 371 Position 70-75"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Remoting.cs#L392",
+      "Location": "Line 392 Position 50-55"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "Issues": [
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2182-L2185",
+      "Location": "Lines 2182-2185 Position 46-78"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Reachability.cs#L385-L386",
+      "Location": "Lines 385-386 Position 21-105"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Util.cs#L113",
+      "Location": "Line 113 Position 17-47"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Util.cs#L114",
+      "Location": "Line 114 Position 17-47"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Util.cs#L115",
+      "Location": "Line 115 Position 17-47"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/VectorClock.cs#L137",
+      "Location": "Line 137 Position 35-51"
+    }
+  ]
+}

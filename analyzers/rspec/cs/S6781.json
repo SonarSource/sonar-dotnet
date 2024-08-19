@@ -3,7 +3,7 @@
   "type": "VULNERABILITY",
   "code": {
     "impacts": {
-      "SECURITY": "BLOCKER"
+      "SECURITY": "HIGH"
     },
     "attribute": "TRUSTWORTHY"
   },
@@ -13,8 +13,7 @@
     "constantCost": "30min"
   },
   "tags": [
-    "cwe",
-    "symbolic-execution"
+    "cwe"
   ],
   "defaultSeverity": "Blocker",
   "ruleSpecification": "RSPEC-6781",

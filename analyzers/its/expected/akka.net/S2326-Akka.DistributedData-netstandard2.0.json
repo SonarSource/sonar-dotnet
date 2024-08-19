@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2326",
+      "Message": "\u0027T\u0027 is not used in the interface.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Key.cs#L27",
+      "Location": "Line 27 Position 27-32"
+    }
+  ]
+}

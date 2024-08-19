@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1698",
+      "Message": "Consider using \u0027Equals\u0027 if value comparison was intended.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L523",
+      "Location": "Line 523 Position 138-140"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "Issues": [
+    {
+      "Id": "S2221",
+      "Message": "Catch a list of specific exception subtype or use exception filters instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L1004",
+      "Location": "Line 1004 Position 20-29"
+    },
+    {
+      "Id": "S2221",
+      "Message": "Catch a list of specific exception subtype or use exception filters instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L1145",
+      "Location": "Line 1145 Position 20-29"
+    },
+    {
+      "Id": "S2221",
+      "Message": "Catch a list of specific exception subtype or use exception filters instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L1519",
+      "Location": "Line 1519 Position 20-29"
+    },
+    {
+      "Id": "S2221",
+      "Message": "Catch a list of specific exception subtype or use exception filters instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/EndpointManager.cs#L1055",
+      "Location": "Line 1055 Position 32-41"
+    },
+    {
+      "Id": "S2221",
+      "Message": "Catch a list of specific exception subtype or use exception filters instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteActorRef.cs#L194",
+      "Location": "Line 194 Position 20-29"
+    },
+    {
+      "Id": "S2221",
+      "Message": "Catch a list of specific exception subtype or use exception filters instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteActorRef.cs#L209",
+      "Location": "Line 209 Position 61-70"
+    },
+    {
+      "Id": "S2221",
+      "Message": "Catch a list of specific exception subtype or use exception filters instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L569",
+      "Location": "Line 569 Position 20-29"
+    },
+    {
+      "Id": "S2221",
+      "Message": "Catch a list of specific exception subtype or use exception filters instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L590",
+      "Location": "Line 590 Position 17-22"
+    },
+    {
+      "Id": "S2221",
+      "Message": "Catch a list of specific exception subtype or use exception filters instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L216",
+      "Location": "Line 216 Position 17-22"
+    },
+    {
+      "Id": "S2221",
+      "Message": "Catch a list of specific exception subtype or use exception filters instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1305",
+      "Location": "Line 1305 Position 13-18"
+    }
+  ]
+}

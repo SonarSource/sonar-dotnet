@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S5122",
+      "Message": "Make sure this permissive CORS policy is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L16",
+      "Location": "Line 16 Position 6-93"
+    },
+    {
+      "Id": "S5122",
+      "Message": "Make sure this permissive CORS policy is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L24",
+      "Location": "Line 24 Position 13-69"
+    },
+    {
+      "Id": "S5122",
+      "Message": "Make sure this permissive CORS policy is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L26",
+      "Location": "Line 26 Position 13-76"
+    },
+    {
+      "Id": "S5122",
+      "Message": "Make sure this permissive CORS policy is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L42",
+      "Location": "Line 42 Position 13-102"
+    },
+    {
+      "Id": "S5122",
+      "Message": "Make sure this permissive CORS policy is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L43",
+      "Location": "Line 43 Position 13-109"
+    },
+    {
+      "Id": "S5122",
+      "Message": "Make sure this permissive CORS policy is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L60",
+      "Location": "Line 60 Position 13-77"
+    },
+    {
+      "Id": "S5122",
+      "Message": "Make sure this permissive CORS policy is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L61",
+      "Location": "Line 61 Position 13-84"
+    }
+  ]
+}

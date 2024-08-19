@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S3908",
+      "Message": "Refactor this delegate to use \u0027System.EventHandler\u003CTEventArgs\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp10Features/StaticAbstractMembersInInterfaces.cs#L26",
+      "Location": "Line 26 Position 25-31"
+    },
+    {
+      "Id": "S3908",
+      "Message": "Refactor this delegate to use \u0027System.EventHandler\u003CTEventArgs\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp10Features/StaticAbstractMembersInInterfaces.cs#L27",
+      "Location": "Line 27 Position 25-31"
+    },
+    {
+      "Id": "S3908",
+      "Message": "Refactor this delegate to use \u0027System.EventHandler\u003CTEventArgs\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp10Features/StaticAbstractMembersInInterfaces.cs#L9",
+      "Location": "Line 9 Position 27-33"
+    }
+  ]
+}

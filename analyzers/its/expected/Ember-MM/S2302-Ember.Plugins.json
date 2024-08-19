@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027plugin\u0027 with \u0027nameof(plugin)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/PluginManager.cs#L290",
+      "Location": "Line 290 Position 53-61"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027context\u0027 with \u0027nameof(context)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L110",
+      "Location": "Line 110 Position 49-58"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027context\u0027 with \u0027nameof(context)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L70",
+      "Location": "Line 70 Position 49-58"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027paths\u0027 with \u0027nameof(paths)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/Utility.cs#L23",
+      "Location": "Line 23 Position 49-56"
+    }
+  ]
+}

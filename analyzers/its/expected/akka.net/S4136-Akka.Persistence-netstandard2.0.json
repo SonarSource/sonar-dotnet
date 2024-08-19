@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Equals\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L264",
+      "Location": "Line 264 Position 25-31"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027GetAtLeastOnceDeliverySnapshot\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L102",
+      "Location": "Line 102 Position 55-85"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027GetStateChangeEvent\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L121",
+      "Location": "Line 121 Position 44-63"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027GetPersistentFSMSnapshot\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L134",
+      "Location": "Line 134 Position 39-63"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027GetAtomicWrite\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L92",
+      "Location": "Line 92 Position 39-53"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of String)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L183",
+      "Location": "Line 183 Position 67-72"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of EmberScraperModule.XMLScraper.ScraperLib.ScraperSetting)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L645",
+      "Location": "Line 645 Position 59-64"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of EmberScraperModule.XMLScraper.ScraperLib.ScraperSetting)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L650",
+      "Location": "Line 650 Position 59-64"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of System.Xml.Linq.XElement)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/GenericScraper.vb#L487",
+      "Location": "Line 487 Position 35-40"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of System.Xml.Linq.XElement)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Util.vb#L200",
+      "Location": "Line 200 Position 40-45"
+    }
+  ]
+}

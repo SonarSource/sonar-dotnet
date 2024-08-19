@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S113",
+      "Message": "Add a new line at the end of the file \u0027StatelessAuthenticationConfiguration.cs\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Authentication.Stateless/StatelessAuthenticationConfiguration.cs#L32",
+      "Location": "Line 32 Position 1-2"
+    }
+  ]
+}

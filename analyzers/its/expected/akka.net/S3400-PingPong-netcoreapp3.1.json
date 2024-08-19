@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3400",
+      "Message": "Remove this method and declare a constant for this value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/PingPong/Program.cs#L31",
+      "Location": "Line 31 Position 28-36"
+    }
+  ]
+}

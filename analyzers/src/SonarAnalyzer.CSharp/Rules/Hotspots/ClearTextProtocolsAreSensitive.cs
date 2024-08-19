@@ -1,23 +1,27 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using System.Text.RegularExpressions;
-using SonarAnalyzer.CSharp.Core.Trackers;
+using SonarAnalyzer.Helpers.Trackers;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class ClearTextProtocolsAreSensitive : HotspotDiagnosticAnalyzer
@@ -138,11 +142,11 @@ namespace SonarAnalyzer.CSharp.Rules
         {
             var objectCreation = ObjectCreationFactory.Create(context.Node);
 
-            if (!IsServerSafe(objectCreation, context.Model) && ObjectInitializationTracker.ShouldBeReported(objectCreation, context.Model, false))
+            if (!IsServerSafe(objectCreation, context.SemanticModel) && ObjectInitializationTracker.ShouldBeReported(objectCreation, context.SemanticModel, false))
             {
                 context.ReportIssue(EnableSslRule, objectCreation.Expression);
             }
-            else if (objectCreation.TypeAsString(context.Model) is { } typeAsString && TelnetRegexForIdentifier.SafeIsMatch(typeAsString))
+            else if (objectCreation.TypeAsString(context.SemanticModel) is { } typeAsString && TelnetRegexForIdentifier.SafeIsMatch(typeAsString))
             {
                 context.ReportIssue(DefaultRule, objectCreation.Expression, TelnetKey, RecommendedProtocols[TelnetKey]);
             }
@@ -161,8 +165,8 @@ namespace SonarAnalyzer.CSharp.Rules
         {
             var assignment = (AssignmentExpressionSyntax)context.Node;
             if (assignment.Left is MemberAccessExpressionSyntax memberAccess
-                && memberAccess.IsMemberAccessOnKnownType(EnableSslName, KnownType.System_Net_FtpWebRequest, context.Model)
-                && assignment.Right.FindConstantValue(context.Model) is bool enableSslValue
+                && memberAccess.IsMemberAccessOnKnownType(EnableSslName, KnownType.System_Net_FtpWebRequest, context.SemanticModel)
+                && assignment.Right.FindConstantValue(context.SemanticModel) is bool enableSslValue
                 && !enableSslValue)
             {
                 context.ReportIssue(EnableSslRule, assignment);
@@ -171,7 +175,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private static void VisitStringExpressions(SonarSyntaxNodeReportingContext c)
         {
-            if (GetUnsafeProtocol(c.Node, c.Model) is { } unsafeProtocol)
+            if (GetUnsafeProtocol(c.Node, c.SemanticModel) is { } unsafeProtocol)
             {
                 c.ReportIssue(DefaultRule, c.Node, unsafeProtocol, RecommendedProtocols[unsafeProtocol]);
             }
@@ -202,11 +206,12 @@ namespace SonarAnalyzer.CSharp.Rules
             }
         }
 
-        private static string GetText(SyntaxNode node, SemanticModel model)
+        private static string GetText(SyntaxNode node, SemanticModel semanticModel)
         {
             if (node is InterpolatedStringExpressionSyntax interpolatedStringExpression)
             {
-                return interpolatedStringExpression.InterpolatedTextValue(model) ?? interpolatedStringExpression.ContentsText();
+                interpolatedStringExpression.TryGetInterpolatedTextValue(semanticModel, out var interpolatedValue);
+                return interpolatedValue ?? interpolatedStringExpression.GetContentsText();
             }
             else
             {

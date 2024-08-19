@@ -1,21 +1,25 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using CS = SonarAnalyzer.CSharp.Rules;
-using VB = SonarAnalyzer.VisualBasic.Rules;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.Test.Rules;
 
@@ -54,14 +58,14 @@ public class ExecutingSqlQueriesTest
         builderCS
             .AddPaths(@"ExecutingSqlQueries.OrmLite.cs")
             .AddReferences(MetadataReferenceFacade.SystemData)
-            .AddReferences(NuGetMetadataReference.ServiceStackOrmLite(TestConstants.NuGetLatestVersion))
+            .AddReferences(NuGetMetadataReference.ServiceStackOrmLite(Constants.NuGetLatestVersion))
             .Verify();
 
     [TestMethod]
     public void ExecutingSqlQueries_NHibernate_CS() =>
         builderCS
             .AddPaths("ExecutingSqlQueries.NHibernate.cs")
-            .AddReferences(NuGetMetadataReference.NHibernate(TestConstants.NuGetLatestVersion))
+            .AddReferences(NuGetMetadataReference.NHibernate(Constants.NuGetLatestVersion))
             .Verify();
 
 #if NETFRAMEWORK // System.Data.OracleClient.dll is not available on .Net Core
@@ -70,15 +74,15 @@ public class ExecutingSqlQueriesTest
     public void ExecutingSqlQueries_CS_Net46() =>
         builderCS
             .AddPaths("ExecutingSqlQueries.Net46.cs")
-            .AddReferences(GetReferencesNet46(TestConstants.NuGetLatestVersion))
+            .AddReferences(GetReferencesNet46(Constants.NuGetLatestVersion))
             .Verify();
 
     [TestMethod]
     public void ExecutingSqlQueries_VB_Net46() =>
         builderVB
             .AddPaths("ExecutingSqlQueries.Net46.vb")
-            .WithOptions(LanguageOptions.FromVisualBasic15)
-            .AddReferences(GetReferencesNet46(TestConstants.NuGetLatestVersion))
+            .WithOptions(ParseOptionsHelper.FromVisualBasic15)
+            .AddReferences(GetReferencesNet46(Constants.NuGetLatestVersion))
             .Verify();
 
     [TestMethod]
@@ -95,7 +99,7 @@ public class ExecutingSqlQueriesTest
             .AddPaths("ExecutingSqlQueries.Net46.MonoSqlLite.vb")
             .AddReferences(FrameworkMetadataReference.SystemData)
             .AddReferences(NuGetMetadataReference.MonoDataSqlite())
-            .WithOptions(LanguageOptions.FromVisualBasic14)
+            .WithOptions(ParseOptionsHelper.FromVisualBasic14)
             .Verify();
 
     internal static IEnumerable<MetadataReference> GetReferencesNet46(string sqlServerCeVersion) =>
@@ -113,7 +117,7 @@ public class ExecutingSqlQueriesTest
     public void ExecutingSqlQueries_CS_EntityFrameworkCore2() =>
         builderCS
             .AddPaths("ExecutingSqlQueries.EntityFrameworkCore2.cs")
-            .WithOptions(LanguageOptions.FromCSharp8)
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
             .AddReferences(GetReferencesEntityFrameworkNetCore("2.2.6").Concat(NuGetMetadataReference.SystemComponentModelTypeConverter()))
             .Verify();
 
@@ -121,31 +125,57 @@ public class ExecutingSqlQueriesTest
     public void ExecutingSqlQueries_CS_EntityFrameworkCore7() =>
         builderCS
             .AddPaths("ExecutingSqlQueries.EntityFrameworkCoreLatest.cs")
-            .WithOptions(LanguageOptions.FromCSharp8)
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
             .AddReferences(GetReferencesEntityFrameworkNetCore("7.0.14"))
             .Verify();
 
     [TestMethod]
-    public void ExecutingSqlQueries_CS_Latest() =>
-        builderCS.AddPaths("ExecutingSqlQueries.Latest.cs")
+    public void ExecutingSqlQueries_CSharp9() =>
+        builderCS
+            .AddPaths("ExecutingSqlQueries.CSharp9.cs")
             .WithTopLevelStatements()
-            .WithOptions(LanguageOptions.CSharpLatest)
-            .AddReferences(GetReferencesEntityFrameworkNetCore(TestConstants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()))
+            .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()))
+            .Verify();
+
+    [TestMethod]
+    public void ExecutingSqlQueries_CSharp10() =>
+        builderCS
+            .AddPaths("ExecutingSqlQueries.CSharp10.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithTopLevelStatements()
+            .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()))
+            .Verify();
+
+    [TestMethod]
+    public void ExecutingSqlQueries_CSharp11() =>
+        builderCS
+            .AddPaths("ExecutingSqlQueries.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .WithTopLevelStatements()
+            .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()))
+            .Verify();
+
+    [TestMethod]
+    public void ExecutingSqlQueries_CSharp12() =>
+        builderCS
+            .AddPaths("ExecutingSqlQueries.CSharp12.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()))
             .Verify();
 
     [TestMethod]
     public void ExecutingSqlQueries_VB_EntityFrameworkCore2() =>
         builderVB
             .AddPaths(@"ExecutingSqlQueries.EntityFrameworkCore2.vb")
-            .WithOptions(LanguageOptions.FromVisualBasic15)
-            .AddReferences(GetReferencesEntityFrameworkNetCore(TestConstants.DotNetCore220Version))
+            .WithOptions(ParseOptionsHelper.FromVisualBasic15)
+            .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.DotNetCore220Version))
             .Verify();
 
     [TestMethod]
     public void ExecutingSqlQueries_VB_EntityFrameworkCore7() =>
         builderVB
             .AddPaths(@"ExecutingSqlQueries.EntityFrameworkCoreLatest.vb")
-            .WithOptions(LanguageOptions.FromVisualBasic15)
+            .WithOptions(ParseOptionsHelper.FromVisualBasic15)
             .AddReferences(GetReferencesEntityFrameworkNetCore("7.0.14"))
             .Verify();
 

@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S2326",
+      "Message": "\u0027T1\u0027 is not used in the local function.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L91",
+      "Location": "Line 91 Position 15-17"
+    },
+    {
+      "Id": "S2326",
+      "Message": "\u0027T2\u0027 is not used in the local function.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L91",
+      "Location": "Line 91 Position 19-21"
+    },
+    {
+      "Id": "S2326",
+      "Message": "\u0027T3\u0027 is not used in the local function.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L91",
+      "Location": "Line 91 Position 23-25"
+    },
+    {
+      "Id": "S2326",
+      "Message": "\u0027T4\u0027 is not used in the local function.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L91",
+      "Location": "Line 91 Position 27-29"
+    }
+  ]
+}

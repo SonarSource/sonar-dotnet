@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestBarrier.cs#L29",
+      "Location": "Line 29 Position 10-68"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestLatch.cs#L36",
+      "Location": "Line 36 Position 10-99"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestProbe.cs#L91",
+      "Location": "Line 91 Position 10-70"
+    }
+  ]
+}

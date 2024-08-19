@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1168",
+      "Message": "Return an empty collection instead of null.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2590",
+      "Location": "Line 2590 Position 20-24"
+    },
+    {
+      "Id": "S1168",
+      "Message": "Return an empty collection instead of null.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L491",
+      "Location": "Line 491 Position 24-28"
+    }
+  ]
+}

@@ -116,7 +116,7 @@ public void encrypt()
 <h4>RSA (Rivest-Shamir-Adleman) and DSA (Digital Signature Algorithm)</h4>
 <p>The security of these algorithms depends on the difficulty of attacks attempting to solve their underlying mathematical problem.</p>
 <p>In general, a minimum key size of <strong>2048</strong> bits is recommended for both. It provides 112 bits of security. A key length of
-<strong>3072</strong> or <strong>4096</strong> should be preferred when possible.</p>
+<strong>3072</strong> or <strong>4092</strong> should be preferred when possible.</p>
 <h4>AES (Advanced Encryption Standard)</h4>
 <p>AES supports three key sizes: 128 bits, 192 bits and 256 bits. The security of the AES algorithm is based on the computational complexity of trying
 all possible keys.<br> A larger key size increases the number of possible keys and makes exhaustive search attacks computationally infeasible.
@@ -182,6 +182,9 @@ in mind that NIST-approved digital signature schemes, key agreement, and key tra
   Exposure</a> </li>
   <li> OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration">Top 10 2017 Category A6 - Security
   Misconfiguration</a> </li>
+  <li> OWASP - <a href="https://mas.owasp.org/checklists/MASVS-CRYPTO/">Mobile AppSec Verification Standard - Cryptography Requirements</a> </li>
+  <li> OWASP - <a href="https://owasp.org/www-project-mobile-top-10/2016-risks/m5-insufficient-cryptography">Mobile Top 10 2016 Category M5 -
+  Insufficient Cryptography</a> </li>
   <li> <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar1.pdf">NIST 800-131A</a> - Recommendation for Transitioning the
   Use of Cryptographic Algorithms and Key Lengths </li>
   <li> CWE - <a href="https://cwe.mitre.org/data/definitions/326">CWE-326 - Inadequate Encryption Strength</a> </li>

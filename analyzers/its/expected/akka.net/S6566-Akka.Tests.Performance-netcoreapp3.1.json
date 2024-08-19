@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S6566",
+      "Message": "Prefer using \u0022DateTimeOffset\u0022 instead of \u0022DateTime\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/IO/TcpHorizontalScaleSpec.cs#L147",
+      "Location": "Line 147 Position 27-35"
+    },
+    {
+      "Id": "S6566",
+      "Message": "Prefer using \u0022DateTimeOffset\u0022 instead of \u0022DateTime\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/IO/TcpHorizontalScaleSpec.cs#L148",
+      "Location": "Line 148 Position 20-28"
+    }
+  ]
+}

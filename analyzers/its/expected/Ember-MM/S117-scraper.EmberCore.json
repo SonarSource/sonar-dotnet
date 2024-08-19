@@ -1,0 +1,1318 @@
+{
+  "Issues": [
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L36",
+      "Location": "Line 36 Position 7-11"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L37",
+      "Location": "Line 37 Position 7-11"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L376",
+      "Location": "Line 376 Position 10-18"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L38",
+      "Location": "Line 38 Position 7-11"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L39",
+      "Location": "Line 39 Position 7-18"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L40",
+      "Location": "Line 40 Position 7-18"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L41",
+      "Location": "Line 41 Position 7-18"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L42",
+      "Location": "Line 42 Position 7-15"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L43",
+      "Location": "Line 43 Position 7-15"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L44",
+      "Location": "Line 44 Position 7-15"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L45",
+      "Location": "Line 45 Position 7-15"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L46",
+      "Location": "Line 46 Position 7-15"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L47",
+      "Location": "Line 47 Position 7-15"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L48",
+      "Location": "Line 48 Position 7-15"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L49",
+      "Location": "Line 49 Position 7-15"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L50",
+      "Location": "Line 50 Position 7-15"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L51",
+      "Location": "Line 51 Position 7-15"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L53",
+      "Location": "Line 53 Position 7-16"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L659",
+      "Location": "Line 659 Position 7-13"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L660",
+      "Location": "Line 660 Position 7-11"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L661",
+      "Location": "Line 661 Position 7-11"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L662",
+      "Location": "Line 662 Position 7-11"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L666",
+      "Location": "Line 666 Position 8-19"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L667",
+      "Location": "Line 667 Position 8-16"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L669",
+      "Location": "Line 669 Position 8-17"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L897",
+      "Location": "Line 897 Position 11-14"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L898",
+      "Location": "Line 898 Position 11-18"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L925",
+      "Location": "Line 925 Position 7-15"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L149",
+      "Location": "Line 149 Position 25-35"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L158",
+      "Location": "Line 158 Position 21-26"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L159",
+      "Location": "Line 159 Position 21-25"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L165",
+      "Location": "Line 165 Position 21-29"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L172",
+      "Location": "Line 172 Position 21-34"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L202",
+      "Location": "Line 202 Position 21-22"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L202",
+      "Location": "Line 202 Position 24-25"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L202",
+      "Location": "Line 202 Position 27-32"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L225",
+      "Location": "Line 225 Position 33-37"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L247",
+      "Location": "Line 247 Position 25-32"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L261",
+      "Location": "Line 261 Position 25-36"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L310",
+      "Location": "Line 310 Position 25-36"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L314",
+      "Location": "Line 314 Position 25-30"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L327",
+      "Location": "Line 327 Position 25-29"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L330",
+      "Location": "Line 330 Position 30-32"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L352",
+      "Location": "Line 352 Position 25-35"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L368",
+      "Location": "Line 368 Position 29-32"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L388",
+      "Location": "Line 388 Position 29-32"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L413",
+      "Location": "Line 413 Position 37-40"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L455",
+      "Location": "Line 455 Position 33-44"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L483",
+      "Location": "Line 483 Position 29-38"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L484",
+      "Location": "Line 484 Position 29-38"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L485",
+      "Location": "Line 485 Position 29-37"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L513",
+      "Location": "Line 513 Position 33-35"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L559",
+      "Location": "Line 559 Position 34-35"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L565",
+      "Location": "Line 565 Position 37-39"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L578",
+      "Location": "Line 578 Position 37-39"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L598",
+      "Location": "Line 598 Position 33-35"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L617",
+      "Location": "Line 617 Position 17-22"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L618",
+      "Location": "Line 618 Position 17-21"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L621",
+      "Location": "Line 621 Position 17-18"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L621",
+      "Location": "Line 621 Position 20-21"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L626",
+      "Location": "Line 626 Position 21-23"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L656",
+      "Location": "Line 656 Position 35-40"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L756",
+      "Location": "Line 756 Position 17-21"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L773",
+      "Location": "Line 773 Position 17-20"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L789",
+      "Location": "Line 789 Position 17-28"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L806",
+      "Location": "Line 806 Position 21-26"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L807",
+      "Location": "Line 807 Position 21-25"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L810",
+      "Location": "Line 810 Position 21-22"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L810",
+      "Location": "Line 810 Position 24-25"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L843",
+      "Location": "Line 843 Position 21-22"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L843",
+      "Location": "Line 843 Position 24-25"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L844",
+      "Location": "Line 844 Position 21-22"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L846",
+      "Location": "Line 846 Position 21-26"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L847",
+      "Location": "Line 847 Position 21-25"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L848",
+      "Location": "Line 848 Position 21-26"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L849",
+      "Location": "Line 849 Position 21-26"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L865",
+      "Location": "Line 865 Position 21-26"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L931",
+      "Location": "Line 931 Position 17-28"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L932",
+      "Location": "Line 932 Position 17-30"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L933",
+      "Location": "Line 933 Position 17-22"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L936",
+      "Location": "Line 936 Position 17-21"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L939",
+      "Location": "Line 939 Position 17-24"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L940",
+      "Location": "Line 940 Position 17-33"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L107",
+      "Location": "Line 107 Position 17-21"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L131",
+      "Location": "Line 131 Position 21-26"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L132",
+      "Location": "Line 132 Position 21-25"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L135",
+      "Location": "Line 135 Position 21-27"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L75",
+      "Location": "Line 75 Position 21-25"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L79",
+      "Location": "Line 79 Position 25-30"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L80",
+      "Location": "Line 80 Position 25-29"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L87",
+      "Location": "Line 87 Position 25-34"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeMPDB.vb#L109",
+      "Location": "Line 109 Position 17-21"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeMPDB.vb#L76",
+      "Location": "Line 76 Position 21-26"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeMPDB.vb#L77",
+      "Location": "Line 77 Position 21-25"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeMPDB.vb#L89",
+      "Location": "Line 89 Position 25-34"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L114",
+      "Location": "Line 114 Position 13-21"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L118",
+      "Location": "Line 118 Position 21-26"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L119",
+      "Location": "Line 119 Position 21-25"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L122",
+      "Location": "Line 122 Position 21-22"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L122",
+      "Location": "Line 122 Position 24-25"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L122",
+      "Location": "Line 122 Position 27-28"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L123",
+      "Location": "Line 123 Position 21-28"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L127",
+      "Location": "Line 127 Position 25-26"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L145",
+      "Location": "Line 145 Position 13-17"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L149",
+      "Location": "Line 149 Position 21-26"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L150",
+      "Location": "Line 150 Position 21-25"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L156",
+      "Location": "Line 156 Position 29-38"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L160",
+      "Location": "Line 160 Position 25-26"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L160",
+      "Location": "Line 160 Position 28-29"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L160",
+      "Location": "Line 160 Position 31-32"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L161",
+      "Location": "Line 161 Position 25-32"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L178",
+      "Location": "Line 178 Position 33-34"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L184",
+      "Location": "Line 184 Position 41-49"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L201",
+      "Location": "Line 201 Position 37-40"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L219",
+      "Location": "Line 219 Position 13-20"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L222",
+      "Location": "Line 222 Position 17-22"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L223",
+      "Location": "Line 223 Position 17-21"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L227",
+      "Location": "Line 227 Position 21-30"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L94",
+      "Location": "Line 94 Position 13-24"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L104",
+      "Location": "Line 104 Position 42-47"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L128",
+      "Location": "Line 128 Position 17-24"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L129",
+      "Location": "Line 129 Position 17-22"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L136",
+      "Location": "Line 136 Position 21-27"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L178",
+      "Location": "Line 178 Position 41-49"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L203",
+      "Location": "Line 203 Position 17-21"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L70",
+      "Location": "Line 70 Position 17-24"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L71",
+      "Location": "Line 71 Position 17-22"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L75",
+      "Location": "Line 75 Position 21-27"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L94",
+      "Location": "Line 94 Position 42-47"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L102",
+      "Location": "Line 102 Position 29-31"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L188",
+      "Location": "Line 188 Position 13-17"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L241",
+      "Location": "Line 241 Position 13-17"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L251",
+      "Location": "Line 251 Position 13-17"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L252",
+      "Location": "Line 252 Position 13-15"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L91",
+      "Location": "Line 91 Position 13-17"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L124",
+      "Location": "Line 124 Position 17-27"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L134",
+      "Location": "Line 134 Position 17-30"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L135",
+      "Location": "Line 135 Position 17-22"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L140",
+      "Location": "Line 140 Position 21-25"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L148",
+      "Location": "Line 148 Position 21-31"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L153",
+      "Location": "Line 153 Position 25-34"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L155",
+      "Location": "Line 155 Position 25-36"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L170",
+      "Location": "Line 170 Position 29-33"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L90",
+      "Location": "Line 90 Position 17-20"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L107",
+      "Location": "Line 107 Position 13-17"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L124",
+      "Location": "Line 124 Position 13-16"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L306",
+      "Location": "Line 306 Position 25-28"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L311",
+      "Location": "Line 311 Position 34-39"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L327",
+      "Location": "Line 327 Position 34-39"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L343",
+      "Location": "Line 343 Position 34-39"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1189",
+      "Location": "Line 1189 Position 22-32"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L610",
+      "Location": "Line 610 Position 17-22"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L621",
+      "Location": "Line 621 Position 17-26"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L708",
+      "Location": "Line 708 Position 17-26"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L290",
+      "Location": "Line 290 Position 13-17"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L136",
+      "Location": "Line 136 Position 13-17"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L170",
+      "Location": "Line 170 Position 13-19"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L202",
+      "Location": "Line 202 Position 13-19"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L310",
+      "Location": "Line 310 Position 13-19"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L311",
+      "Location": "Line 311 Position 13-19"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L314",
+      "Location": "Line 314 Position 13-17"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L315",
+      "Location": "Line 315 Position 13-20"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L548",
+      "Location": "Line 548 Position 13-21"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperTVNativeModule.vb#L141",
+      "Location": "Line 141 Position 13-19"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperTVNativeModule.vb#L158",
+      "Location": "Line 158 Position 13-19"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1019",
+      "Location": "Line 1019 Position 30-32"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1052",
+      "Location": "Line 1052 Position 17-23"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1058",
+      "Location": "Line 1058 Position 17-19"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1070",
+      "Location": "Line 1070 Position 38-43"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1085",
+      "Location": "Line 1085 Position 29-31"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1107",
+      "Location": "Line 1107 Position 38-45"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L144",
+      "Location": "Line 144 Position 17-23"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L191",
+      "Location": "Line 191 Position 23-31"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L197",
+      "Location": "Line 197 Position 27-36"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L199",
+      "Location": "Line 199 Position 35-45"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L205",
+      "Location": "Line 205 Position 39-48"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L260",
+      "Location": "Line 260 Position 25-30"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L301",
+      "Location": "Line 301 Position 17-23"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L318",
+      "Location": "Line 318 Position 42-47"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L331",
+      "Location": "Line 331 Position 38-45"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L433",
+      "Location": "Line 433 Position 27-38"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L506",
+      "Location": "Line 506 Position 27-38"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L579",
+      "Location": "Line 579 Position 27-38"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L618",
+      "Location": "Line 618 Position 31-42"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L668",
+      "Location": "Line 668 Position 27-38"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L68",
+      "Location": "Line 68 Position 13-20"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L69",
+      "Location": "Line 69 Position 13-18"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L709",
+      "Location": "Line 709 Position 31-42"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L71",
+      "Location": "Line 71 Position 13-19"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L739",
+      "Location": "Line 739 Position 17-21"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L769",
+      "Location": "Line 769 Position 17-20"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L803",
+      "Location": "Line 803 Position 26-32"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L821",
+      "Location": "Line 821 Position 19-27"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L824",
+      "Location": "Line 824 Position 27-37"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L83",
+      "Location": "Line 83 Position 22-24"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L831",
+      "Location": "Line 831 Position 30-37"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L918",
+      "Location": "Line 918 Position 38-45"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L937",
+      "Location": "Line 937 Position 17-22"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L960",
+      "Location": "Line 960 Position 17-24"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L961",
+      "Location": "Line 961 Position 17-23"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L962",
+      "Location": "Line 962 Position 17-22"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L967",
+      "Location": "Line 967 Position 21-27"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L983",
+      "Location": "Line 983 Position 33-41"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVChangeEp.vb#L63",
+      "Location": "Line 63 Position 18-24"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVChangeEp.vb#L68",
+      "Location": "Line 68 Position 22-29"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L146",
+      "Location": "Line 146 Position 13-17"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L158",
+      "Location": "Line 158 Position 13-16"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L251",
+      "Location": "Line 251 Position 17-29"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L77",
+      "Location": "Line 77 Position 17-23"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L84",
+      "Location": "Line 84 Position 17-25"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1171",
+      "Location": "Line 1171 Position 38-44"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L244",
+      "Location": "Line 244 Position 26-33"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L714",
+      "Location": "Line 714 Position 26-29"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L741",
+      "Location": "Line 741 Position 26-30"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L770",
+      "Location": "Line 770 Position 26-31"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L799",
+      "Location": "Line 799 Position 26-30"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L829",
+      "Location": "Line 829 Position 26-30"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L865",
+      "Location": "Line 865 Position 13-18"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L898",
+      "Location": "Line 898 Position 17-20"
+    }
+  ]
+}

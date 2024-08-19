@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L748",
+      "Location": "Line 748 Position 22-40"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/SqlJournal.cs#L136",
+      "Location": "Line 136 Position 66-84"
+    }
+  ]
+}

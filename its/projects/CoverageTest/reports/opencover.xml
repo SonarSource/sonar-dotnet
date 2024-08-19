@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageSession xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Summary numSequencePoints="28" visitedSequencePoints="20" numBranchPoints="12" visitedBranchPoints="8" sequenceCoverage="71.43" branchCoverage="66.67" maxCyclomaticComplexity="4" minCyclomaticComplexity="1" />
+  <Modules>
+    <Module skippedDueTo="Filter" hash="54-D4-51-C6-FF-08-C9-23-DD-60-29-FB-72-FC-DE-35-B4-41-DA-06">
+      <FullName>C:\Windows\assembly\GAC_64\mscorlib\2.0.0.0__b77a5c561934e089\mscorlib.dll</FullName>
+      <ModuleName>mscorlib</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="F9-04-A8-31-CD-FB-23-72-95-63-5D-14-9A-A0-66-8E-7F-44-93-7A">
+      <FullName>C:\Windows\assembly\GAC_64\mscorlib\2.0.0.0__b77a5c561934e089\sorttbls.nlp</FullName>
+      <ModuleName>mscorlib</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="6E-30-2E-50-36-FB-60-2C-8E-50-C0-83-54-8B-CC-EA-A8-91-B6-CC">
+      <FullName>C:\Windows\assembly\GAC_64\mscorlib\2.0.0.0__b77a5c561934e089\sortkey.nlp</FullName>
+      <ModuleName>mscorlib</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="2C-99-EE-29-D5-25-03-C4-0E-40-26-9B-F7-DF-C2-68-6E-74-74-31">
+      <FullName>C:\Windows\assembly\GAC_MSIL\System.Configuration\2.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll</FullName>
+      <ModuleName>System.Configuration</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="D3-99-70-9D-4C-FD-70-CC-82-00-AA-75-7A-54-8C-25-AC-54-B1-BF">
+      <FullName>C:\Windows\assembly\GAC_MSIL\System\2.0.0.0__b77a5c561934e089\System.dll</FullName>
+      <ModuleName>System</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="C4-AD-0A-97-FF-1D-61-5F-88-89-A6-25-BD-02-5E-E5-F5-1D-6F-20">
+      <FullName>C:\Windows\assembly\GAC_MSIL\System.Xml\2.0.0.0__b77a5c561934e089\System.Xml.dll</FullName>
+      <ModuleName>System.Xml</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="92-44-10-37-4C-84-2D-65-E3-A0-6A-B9-9F-01-42-6A-27-41-4A-8C">
+      <FullName>C:\Windows\assembly\GAC_MSIL\System.Runtime.Remoting\2.0.0.0__b77a5c561934e089\System.Runtime.Remoting.dll</FullName>
+      <ModuleName>System.Runtime.Remoting</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="E1-6B-09-74-39-13-D1-98-9B-D2-7B-04-C8-8F-57-18-D7-9F-22-BA">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_64\mscorlib\v4.0_4.0.0.0__b77a5c561934e089\mscorlib.dll</FullName>
+      <ModuleName>mscorlib</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="1B-30-81-91-69-2E-50-BD-B9-CC-A1-5B-46-3A-D5-62-E3-7E-58-C4">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</FullName>
+      <ModuleName>System</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="E8-47-7A-41-67-F7-5A-91-1D-B2-1A-48-85-F5-81-AF-DE-91-B4-C2">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Runtime.Remoting\v4.0_4.0.0.0__b77a5c561934e089\System.Runtime.Remoting.dll</FullName>
+      <ModuleName>System.Runtime.Remoting</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="57-C7-F0-53-3B-97-01-CD-67-C1-80-37-68-7F-8F-89-D0-76-B4-48">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Configuration\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll</FullName>
+      <ModuleName>System.Configuration</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="88-AF-AF-B3-FF-8A-DE-A7-50-A8-49-A8-87-FF-70-25-57-19-89-27">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Xml\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.dll</FullName>
+      <ModuleName>System.Xml</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="37-B7-01-DE-3F-2D-BD-A2-E5-87-BA-4F-BE-B4-83-E0-93-20-AD-5A">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_64\System.Web\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Web.dll</FullName>
+      <ModuleName>System.Web</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="F6-A6-9F-51-A3-09-AC-3A-FF-DB-AE-4D-25-AE-9C-74-61-4E-0C-75">
+      <FullName>C:\Windows\assembly\GAC_64\System.Web\2.0.0.0__b03f5f7f11d50a3a\System.Web.dll</FullName>
+      <ModuleName>System.Web</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="1B-30-81-91-69-2E-50-BD-B9-CC-A1-5B-46-3A-D5-62-E3-7E-58-C4">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</FullName>
+      <ModuleName>System</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="88-AF-AF-B3-FF-8A-DE-A7-50-A8-49-A8-87-FF-70-25-57-19-89-27">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Xml\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.dll</FullName>
+      <ModuleName>System.Xml</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="57-C7-F0-53-3B-97-01-CD-67-C1-80-37-68-7F-8F-89-D0-76-B4-48">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Configuration\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll</FullName>
+      <ModuleName>System.Configuration</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="E8-47-7A-41-67-F7-5A-91-1D-B2-1A-48-85-F5-81-AF-DE-91-B4-C2">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Runtime.Remoting\v4.0_4.0.0.0__b77a5c561934e089\System.Runtime.Remoting.dll</FullName>
+      <ModuleName>System.Runtime.Remoting</ModuleName>
+      <Classes />
+    </Module>
+    <Module hash="B1-CF-91-59-2E-7C-F5-48-46-09-DF-45-D3-08-55-46-D8-A2-AD-BE">
+      <Summary numSequencePoints="22" visitedSequencePoints="14" numBranchPoints="10" visitedBranchPoints="6" sequenceCoverage="63.64" branchCoverage="60" maxCyclomaticComplexity="4" minCyclomaticComplexity="1" />
+      <FullName>C:\Users\User\Documents\Visual Studio 2010\Projects\CoverageTest\CSLib\bin\Debug\CSLib.dll</FullName>
+      <ModuleName>MyLibrary</ModuleName>
+      <Files>
+        <File uid="3" fullPath="CSLib/Class1.cs" />
+      </Files>
+      <Classes>
+        <Class>
+          <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" />
+          <FullName>&lt;Module&gt;</FullName>
+          <Methods />
+        </Class>
+        <Class>
+          <Summary numSequencePoints="19" visitedSequencePoints="14" numBranchPoints="9" visitedBranchPoints="6" sequenceCoverage="73.68" branchCoverage="66.67" maxCyclomaticComplexity="4" minCyclomaticComplexity="1" />
+          <FullName>CSLib.Class1</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="4" sequenceCoverage="61.54" branchCoverage="57.14" isConstructor="false" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="13" visitedSequencePoints="8" numBranchPoints="7" visitedBranchPoints="4" sequenceCoverage="61.54" branchCoverage="57.14" maxCyclomaticComplexity="4" minCyclomaticComplexity="4" />
+              <MetadataToken>100663297</MetadataToken>
+              <Name>System.Void CSLib.Class1::Method()</Name>
+              <FileRef uid="3" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="8" ordinal="0" offset="0" sl="12" sc="13" el="12" ec="42" />
+                <SequencePoint vc="1" uspid="9" ordinal="1" offset="1" sl="13" sc="13" el="13" ec="41" />
+              </SequencePoints>
+              <MethodPoint xsi:type="SequencePoint" vc="2" uspid="8" ordinal="0" offset="0" sl="11" sc="9" el="11" ec="10" />
+            </Method>
+          </Methods>
+        </Class>
+      </Classes>
+    </Module>
+  </Modules>
+</CoverageSession>

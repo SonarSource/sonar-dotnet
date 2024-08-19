@@ -74,21 +74,4 @@ namespace MyLibrary
         {
         }
     }
-
-    // https://community.sonarsource.com/t/s3342-and-s4017-complains-on-user-code-while-implementing-external-interface/120432
-    namespace Repro_120432
-    {
-        public abstract class External
-        {
-            public abstract void DoWork(IDictionary<String, IList<string>> data); // Noncompliant
-        }
-
-        public class UserCode : External
-        {
-            public override void DoWork(IDictionary<String, IList<string>> data) // Noncompliant FP
-            {
-                throw new NotImplementedException();
-            }
-        }
-    }
 }

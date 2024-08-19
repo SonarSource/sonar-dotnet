@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 44 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L22",
+      "Location": "Line 22 Position 27-48"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 96 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyInternalConfiguration.cs#L26",
+      "Location": "Line 26 Position 25-51"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 58 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L27",
+      "Location": "Line 27 Position 25-40"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 31 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L17",
+      "Location": "Line 17 Position 18-31"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 36 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L940",
+      "Location": "Line 940 Position 26-42"
+    }
+  ]
+}

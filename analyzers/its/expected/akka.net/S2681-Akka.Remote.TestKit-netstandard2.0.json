@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2681",
+      "Message": "This line will not be executed conditionally; only the first line of this 2-line block will be. The rest will execute unconditionally.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L59",
+      "Location": "Line 59 Position 17-26"
+    }
+  ]
+}

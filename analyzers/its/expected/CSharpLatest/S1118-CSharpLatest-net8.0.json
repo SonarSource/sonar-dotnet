@@ -1,0 +1,52 @@
+{
+  "Issues": [
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027protected\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp10Features/CallerArgumentExpression.cs#L3",
+      "Location": "Line 3 Position 16-40"
+    },
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027protected\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp10Features/ConstantInterpolatedStrings.cs#L3",
+      "Location": "Line 3 Position 16-43"
+    },
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027protected\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp10Features/MutexAclTest.cs#L7",
+      "Location": "Line 7 Position 14-26"
+    },
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027protected\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp11Features/ExtendedNameofScope.cs#L3",
+      "Location": "Line 3 Position 16-35"
+    },
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027protected\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3604.cs#L5",
+      "Location": "Line 5 Position 14-19"
+    },
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027protected\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3877.cs#L6",
+      "Location": "Line 6 Position 14-19"
+    },
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027protected\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S4583.Part1.cs#L7",
+      "Location": "Line 7 Position 7-12"
+    },
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027protected\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/VariousPatternsOfPatterns.cs#L80",
+      "Location": "Line 80 Position 18-29"
+    }
+  ]
+}

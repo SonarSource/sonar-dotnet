@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetDeliverySnapshot\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/AtLeastOnceDelivery.cs#L234",
+      "Location": "Line 234 Position 44-63"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetDeliverySnapshot\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliveryReceiveActor.cs#L215",
+      "Location": "Line 215 Position 44-63"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetDeliverySnapshot\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L483",
+      "Location": "Line 483 Position 44-63"
+    }
+  ]
+}

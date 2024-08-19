@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S4261",
+      "Message": "Add the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/RemotePingPong/Program.cs#L111",
+      "Location": "Line 111 Position 35-40"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Add the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/RemotePingPong/Program.cs#L145",
+      "Location": "Line 145 Position 54-63"
+    }
+  ]
+}

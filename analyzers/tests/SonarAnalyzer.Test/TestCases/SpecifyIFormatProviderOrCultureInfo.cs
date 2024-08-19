@@ -76,6 +76,7 @@ namespace Tests.Diagnostics
         {
             42.ToString(); // Noncompliant {{Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.}}
 //          ^^^^^^^^^^^^^
+            string.Format("bla"); // Noncompliant
             Methods.DoStuff2("foo"); // Noncompliant
 
             "".StartsWith(""); // FN, overload with CultureInfo has 3 parameters and is difficult to tell if is the proper overload
@@ -89,6 +90,7 @@ namespace Tests.Diagnostics
 
             "asdasd".ToUpper(); // Noncompliant
 
+            string.Format("%s %s", "foo", "bar", "quix", "hi", "bye"); // Noncompliant
             string.Format("%s %s", "foo"); // Noncompliant
             string.Format("%s %s", "foo", "bar"); // Noncompliant
             string.Format("%s %s", "foo", "bar", "quix"); // Noncompliant

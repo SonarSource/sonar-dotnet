@@ -1,20 +1,26 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules;
+using Microsoft.CodeAnalysis.CodeFixes;
+
+namespace SonarAnalyzer.Rules.CSharp;
 
 [ExportCodeFixProvider(LanguageNames.CSharp)]
 public sealed class CommentedOutCodeCodeFix : SonarCodeFix
@@ -39,7 +45,7 @@ public sealed class CommentedOutCodeCodeFix : SonarCodeFix
     }
 
     private static bool IsCode(SyntaxTrivia trivia) =>
-        trivia.LineNumbers().Count() == 1
+        trivia.GetLineNumbers().Count() == 1
         || Array.TrueForAll(Lines(trivia), IsCode);
 
     private static bool IsCode(string line)
@@ -53,7 +59,7 @@ public sealed class CommentedOutCodeCodeFix : SonarCodeFix
     }
 
     private static string[] Lines(SyntaxTrivia trivia) =>
-        trivia.ToFullString().Split(Constants.LineTerminators, StringSplitOptions.None);
+        trivia.ToFullString().Split(MetricsBase.LineTerminators, StringSplitOptions.None);
 
     private sealed class Context
     {
@@ -109,10 +115,10 @@ public sealed class CommentedOutCodeCodeFix : SonarCodeFix
                 .WithTrailingTrivia(Trailing);
 
         private static bool ShareLine(SyntaxToken token, SyntaxTrivia trivia) =>
-            ShareLine(token.LineNumbers(), trivia.LineNumbers());
+            ShareLine(token.GetLineNumbers(), trivia.GetLineNumbers());
 
         private static bool ShareLine(SyntaxTrivia l, SyntaxTrivia r) =>
-            ShareLine(l.LineNumbers(), r.LineNumbers());
+            ShareLine(l.GetLineNumbers(), r.GetLineNumbers());
 
         private static bool ShareLine(IEnumerable<int> l, IEnumerable<int> r) =>
             l.Intersect(r).Any();

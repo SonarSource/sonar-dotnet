@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClient.cs#L584",
+      "Location": "Line 584 Position 22-45"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClient.cs#L608",
+      "Location": "Line 608 Position 22-47"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClient.cs#L627",
+      "Location": "Line 627 Position 22-39"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterReceptionist.cs#L26",
+      "Location": "Line 26 Position 22-43"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSub.cs#L18",
+      "Location": "Line 18 Position 22-47"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L178",
+      "Location": "Line 178 Position 22-43"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L29",
+      "Location": "Line 29 Position 22-46"
+    }
+  ]
+}

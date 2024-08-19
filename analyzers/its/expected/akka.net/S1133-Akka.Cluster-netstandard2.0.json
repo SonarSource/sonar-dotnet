@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L261",
+      "Location": "Line 261 Position 10-75"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L117",
+      "Location": "Line 117 Position 10-55"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L130",
+      "Location": "Line 130 Position 10-55"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L31",
+      "Location": "Line 31 Position 10-55"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L45",
+      "Location": "Line 45 Position 10-55"
+    }
+  ]
+}

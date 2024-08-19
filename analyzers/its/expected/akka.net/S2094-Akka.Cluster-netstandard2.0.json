@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L281",
+      "Location": "Line 281 Position 24-36"
+    },
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L368",
+      "Location": "Line 368 Position 23-36"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "Issues": [
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L151",
+      "Location": "Line 151 Position 39-47"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L658",
+      "Location": "Line 658 Position 25-33"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L644",
+      "Location": "Line 644 Position 33-41"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L830",
+      "Location": "Line 830 Position 29-39"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunctionContainer.vb#L132",
+      "Location": "Line 132 Position 25-33"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L79",
+      "Location": "Line 79 Position 25-33"
+    }
+  ]
+}

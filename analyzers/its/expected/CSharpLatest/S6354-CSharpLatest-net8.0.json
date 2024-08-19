@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/JsonSerializerRecords.cs#L10",
+      "Location": "Line 10 Position 33-45"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/RecordWithStaticHelper.cs#L14",
+      "Location": "Line 14 Position 45-57"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4035",
+      "Message": "Seal class \u0027TestActorRefBase\u0027 or implement \u0027IEqualityComparer\u003CT\u003E\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L22",
+      "Location": "Line 22 Position 27-43"
+    }
+  ]
+}

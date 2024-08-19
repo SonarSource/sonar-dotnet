@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027duration\u0027 with \u0027nameof(duration)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L428",
+      "Location": "Line 428 Position 67-100"
+    }
+  ]
+}

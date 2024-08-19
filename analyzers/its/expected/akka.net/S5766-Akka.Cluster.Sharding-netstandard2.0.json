@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S5766",
+      "Message": "Make sure not performing data validation after deserialization is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L142",
+      "Location": "Line 142 Position 20-30"
+    },
+    {
+      "Id": "S5766",
+      "Message": "Make sure not performing data validation after deserialization is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L93",
+      "Location": "Line 93 Position 20-25"
+    },
+    {
+      "Id": "S5766",
+      "Message": "Make sure not performing data validation after deserialization is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L113",
+      "Location": "Line 113 Position 16-32"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+image: Visual Studio 2017
+
+version: 2.0.0-ci000{build}
+configuration: Release
+cache: C:\Users\appveyor\.nuget\packages
+
+nuget:
+  disable_publish_on_pr: true
+
+pull_requests:
+  do_not_increment_build_number: true
+
+install:
+- set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
+
+build_script:
+- ps: .\build.ps1 -verbosity=minimal
+
+artifacts:
+- path: build\nuget\*.nupkg
+  name: NuGet
+
+deploy:
+- provider: NuGet
+  server: https://www.myget.org/F/nancyfx/api/v2/package
+  api_key:
+    secure: +D460p+eBTZg/1k7YpDwGp8G74VhOhjxp62EypsjVyul8DT/6B8o3taDbQCZCJ6+
+  skip_symbols: true
+  on:
+    branch: master
+
+test: off

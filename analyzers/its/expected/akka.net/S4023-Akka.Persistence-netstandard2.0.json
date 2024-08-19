@@ -1,0 +1,64 @@
+{
+  "Issues": [
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/EventSequences.cs#L28",
+      "Location": "Line 28 Position 22-41"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L18",
+      "Location": "Line 18 Position 22-37"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L23",
+      "Location": "Line 23 Position 22-37"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L28",
+      "Location": "Line 28 Position 22-38"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L153",
+      "Location": "Line 153 Position 22-44"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Protocol.cs#L22",
+      "Location": "Line 22 Position 22-41"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Serialization/IMessage.cs#L22",
+      "Location": "Line 22 Position 22-30"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L17",
+      "Location": "Line 17 Position 22-38"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L22",
+      "Location": "Line 22 Position 22-38"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L27",
+      "Location": "Line 27 Position 22-39"
+    }
+  ]
+}

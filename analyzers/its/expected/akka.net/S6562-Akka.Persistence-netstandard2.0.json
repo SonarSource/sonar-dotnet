@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S6562",
+      "Message": "Provide the \u0022DateTimeKind\u0022 when creating this object.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L295",
+      "Location": "Line 295 Position 66-85"
+    },
+    {
+      "Id": "S6562",
+      "Message": "Provide the \u0022DateTimeKind\u0022 when creating this object.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Snapshot/MemorySnapshotStore.cs#L102",
+      "Location": "Line 102 Position 101-130"
+    }
+  ]
+}

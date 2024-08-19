@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027protected\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/examples/Cluster/Roles/Samples.Cluster.Transformation/Program.cs#L17",
+      "Location": "Line 17 Position 11-18"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4275",
+      "Message": "Refactor this getter so that it actually refers to the field \u0027_messages\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/MemoryJournal.cs#L251",
+      "Location": "Line 251 Position 120-134"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L27",
+      "Location": "Line 27 Position 33-44"
+    },
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L34",
+      "Location": "Line 34 Position 33-43"
+    },
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/ILoggingAdapter.cs#L200",
+      "Location": "Line 200 Position 21-25"
+    }
+  ]
+}

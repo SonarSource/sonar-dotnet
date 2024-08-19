@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<string id="0">MediaBrowser Compatibility</string>
+	<string id="1">YAMJ Compatibility</string>
+	<string id="2">YAMJ Compatible Sets</string>
+	<string id="3">Compatible VIDEO_TS File Placement/Naming (NOTE: This will be applyed even if module is disabled)</string>
+	<string id="4">YAMJ Compatible TV Images Naming</string>
+	<string id="5">YAMJ Specific NFO fields</string>
+	<string id="6">Show Poster as Set_&lt;Show&gt;_1.jpg</string>
+	<string id="7">Show Poster as Set_&lt;Show&gt;_1.fanart.jpg</string>
+	<string id="8">Season Poster as &lt;Episode&gt;SxxE01.jpg</string>
+	<string id="9">Season Fanart as &lt;Episode&gt;SxxE01.fanart.jpg</string>
+	<string id="10">Episode Poster as &lt;Show&gt;.videoimage.jpg</string>
+	<string id="11">Compatible VIDEO_TS File Placement/Naming (NOTE: This will be applyed even if module is disabled)</string>
+	<string id="12">Movie Fanart as backdrop.jpg</string>
+	<string id="13">Media Browser mymovies.xml</string>
+	<string id="14">Show All Season as Season 1.banner.jpg</string>
+	<string id="15">Replace ID field with Boxee Id Field</string>
+	<string id="16">TV Show Options</string>
+	<string id="17">Experimental module</string>
+</strings>

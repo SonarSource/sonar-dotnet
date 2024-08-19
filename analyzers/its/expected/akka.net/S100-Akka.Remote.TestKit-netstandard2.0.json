@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S100",
+      "Message": "Rename method \u0027InitFSM\u0027 to match pascal case naming rules, consider using \u0027InitFsm\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L495",
+      "Location": "Line 495 Position 24-31"
+    },
+    {
+      "Id": "S100",
+      "Message": "Rename method \u0027InitFSM\u0027 to match pascal case naming rules, consider using \u0027InitFsm\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L355",
+      "Location": "Line 355 Position 24-31"
+    },
+    {
+      "Id": "S100",
+      "Message": "Rename property \u0027FSM\u0027 to match pascal case naming rules, consider using \u0027Fsm\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L160",
+      "Location": "Line 160 Position 30-33"
+    },
+    {
+      "Id": "S100",
+      "Message": "Rename method \u0027InitFSM\u0027 to match pascal case naming rules, consider using \u0027InitFsm\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L350",
+      "Location": "Line 350 Position 21-28"
+    }
+  ]
+}

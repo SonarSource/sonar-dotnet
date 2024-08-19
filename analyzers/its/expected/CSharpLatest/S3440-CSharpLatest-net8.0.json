@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S3440",
+      "Message": "Remove this useless conditional.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3440.cs#L10",
+      "Location": "Line 10 Position 13-14"
+    },
+    {
+      "Id": "S3440",
+      "Message": "Remove this useless conditional.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3440.cs#L11",
+      "Location": "Line 11 Position 13-14"
+    },
+    {
+      "Id": "S3440",
+      "Message": "Remove this useless conditional.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3440.cs#L21",
+      "Location": "Line 21 Position 17-26"
+    }
+  ]
+}

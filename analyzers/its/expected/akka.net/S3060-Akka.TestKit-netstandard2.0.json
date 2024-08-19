@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3060",
+      "Message": "Offload the code that\u0027s conditional on this type test to the appropriate subclass and remove the condition.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L177",
+      "Location": "Line 177 Position 19-44"
+    },
+    {
+      "Id": "S3060",
+      "Message": "Offload the code that\u0027s conditional on this type test to the appropriate subclass and remove the condition.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L181",
+      "Location": "Line 181 Position 24-41"
+    }
+  ]
+}

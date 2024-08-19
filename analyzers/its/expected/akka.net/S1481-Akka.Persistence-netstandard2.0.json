@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027j\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Eventsourced.Lifecycle.cs#L49",
+      "Location": "Line 49 Position 17-18"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027s\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Eventsourced.Lifecycle.cs#L50",
+      "Location": "Line 50 Position 17-18"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027l\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L335",
+      "Location": "Line 335 Position 29-30"
+    }
+  ]
+}

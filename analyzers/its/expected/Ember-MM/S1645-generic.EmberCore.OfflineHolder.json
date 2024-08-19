@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1645",
+      "Message": "Switch this use of the \u0027\u002B\u0027 operator to the \u0027\u0026\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L468",
+      "Location": "Line 468 Position 21-22"
+    }
+  ]
+}

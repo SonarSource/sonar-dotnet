@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2365",
+      "Message": "Refactor \u0027Commands\u0027 into a method, properties should not copy collections.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L53",
+      "Location": "Line 53 Position 48-87"
+    }
+  ]
+}

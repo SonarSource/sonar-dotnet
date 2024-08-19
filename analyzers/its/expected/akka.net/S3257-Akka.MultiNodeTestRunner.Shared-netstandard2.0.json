@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3257",
+      "Message": "Remove the initializer; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/JsonPersistentTestRunStore.cs#L54-L58",
+      "Location": "Lines 54-58 Position 13-14"
+    }
+  ]
+}

@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class MemberInitializedToDefault : SonarDiagnosticAnalyzer
@@ -46,7 +50,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 return;
             }
 
-            var propertySymbol = context.Model.GetDeclaredSymbol(propertyDeclaration);
+            var propertySymbol = context.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
 
             if (propertySymbol != null
                 && IsDefaultValueInitializer(propertyDeclaration.Initializer, propertySymbol.Type))
@@ -61,7 +65,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
             foreach (var eventDeclaration in field.Declaration.Variables.Where(v => v.Initializer != null))
             {
-                if (!(context.Model.GetDeclaredSymbol(eventDeclaration) is IEventSymbol eventSymbol))
+                if (!(context.SemanticModel.GetDeclaredSymbol(eventDeclaration) is IEventSymbol eventSymbol))
                 {
                     continue;
                 }
@@ -80,7 +84,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
             foreach (var variableDeclarator in field.Declaration.Variables.Where(v => v.Initializer != null))
             {
-                if (context.Model.GetDeclaredSymbol(variableDeclarator) is IFieldSymbol {IsConst: false} fieldSymbol
+                if (context.SemanticModel.GetDeclaredSymbol(variableDeclarator) is IFieldSymbol {IsConst: false} fieldSymbol
                     && IsDefaultValueInitializer(variableDeclarator.Initializer, fieldSymbol.Type))
                 {
                     context.ReportIssue(Rule, variableDeclarator.Initializer, fieldSymbol.Name);
@@ -98,7 +102,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private static bool IsReferenceTypeNullInitializer(EqualsValueClauseSyntax initializer, ITypeSymbol type) =>
             type.IsReferenceType
-            && CSharpEquivalenceChecker.AreEquivalent(SyntaxConstants.NullLiteralExpression, initializer.Value);
+            && CSharpEquivalenceChecker.AreEquivalent(CSharpSyntaxHelper.NullLiteralExpression, initializer.Value);
 
         private static bool IsValueTypeDefaultValueInitializer(EqualsValueClauseSyntax initializer, ITypeSymbol type)
         {
@@ -110,11 +114,14 @@ namespace SonarAnalyzer.CSharp.Rules
             switch (type.SpecialType)
             {
                 case SpecialType.System_Boolean:
-                    return CSharpEquivalenceChecker.AreEquivalent(initializer.Value, SyntaxConstants.FalseLiteralExpression);
+                    return CSharpEquivalenceChecker.AreEquivalent(initializer.Value, CSharpSyntaxHelper.FalseLiteralExpression);
                 case SpecialType.System_Decimal:
                 case SpecialType.System_Double:
                 case SpecialType.System_Single:
-                    return ExpressionNumericConverter.ConstantDoubleValue(initializer.Value) is { } constantValue && Math.Abs(constantValue - default(double)) < double.Epsilon;
+                    {
+                        return ExpressionNumericConverter.TryGetConstantDoubleValue(initializer.Value, out var constantValue) &&
+                            Math.Abs(constantValue - default(double)) < double.Epsilon;
+                    }
                 case SpecialType.System_Char:
                 case SpecialType.System_Byte:
                 case SpecialType.System_Int16:
@@ -127,23 +134,26 @@ namespace SonarAnalyzer.CSharp.Rules
                 case SpecialType.System_IntPtr:
                 case SpecialType.System_UIntPtr:
                     {
-                        if (initializer.Value is MemberAccessExpressionSyntax memberAccess && memberAccess.Name.Identifier.Text == Zero)
+                        if (initializer.Value is MemberAccessExpressionSyntax memberAccess
+                            && memberAccess.Name.Identifier.Text == Zero)
                         {
                             return true;
                         }
                         else if (ObjectCreationFactory.TryCreate(initializer.Value) is { } objectCreation)
                         {
                             var argCount = objectCreation.ArgumentList?.Arguments.Count;
-                            if (argCount is null || argCount == 0)
+                            if (argCount == null || argCount == 0)
                             {
                                 return true;
                             }
 
-                            return ExpressionNumericConverter.ConstantIntValue(objectCreation.ArgumentList.Arguments.First().Expression) is 0;
+                            return ExpressionNumericConverter.TryGetConstantIntValue(objectCreation.ArgumentList.Arguments.First().Expression, out var ctorParameter)
+                                   && ctorParameter == default;
                         }
                         else
                         {
-                            return ExpressionNumericConverter.ConstantIntValue(initializer.Value) is 0;
+                            return ExpressionNumericConverter.TryGetConstantIntValue(initializer.Value, out var constantValue)
+                                   && constantValue == default;
                         }
                     }
                 default:

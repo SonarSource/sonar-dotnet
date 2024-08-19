@@ -2,20 +2,20 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>SonarAnalyzer.VisualBasic</id>
-    <version>$Version$</version>
+    <version>9.33.0.0</version>
     <title>SonarAnalyzer for Visual Basic</title>
     <authors>SonarSource</authors>
     <owners>SonarSource</owners>
-    <license type="file">LICENSE.txt</license>
+    <license type="expression">LGPL-3.0-only</license>
     <projectUrl>https://redirect.sonarsource.com/doc/sonar-visualstudio.html</projectUrl>
     <repository type="git" url="https://github.com/SonarSource/sonar-dotnet" />
     <icon>images\sonarsource_64.png</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <summary>Roslyn analyzers that spot Bugs, Vulnerabilities and Code Smells in your code. For an even better overall experience, you can use SonarQube for IDE (Visual Studio, Rider), which is a free extension that can be used standalone or with SonarQube (Server, Cloud).</summary>
-    <description>Roslyn analyzers that spot Bugs, Vulnerabilities and Code Smells in your code. For an even better overall experience, you can use SonarQube for IDE (Visual Studio, Rider, see https://www.sonarsource.com/products/sonarlint), which is a free extension that can be used standalone or with SonarQube (Server, Cloud, see: https://www.sonarsource.com/products/sonarqube/ and https://www.sonarsource.com/products/sonarcloud/).</description>
-    <releaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/$Version$</releaseNotes>
+    <summary>Roslyn analyzers that spot Bugs, Vulnerabilities and Code Smells in your code. For an even better overall experience, you can use SonarLint for Visual Studio, which is a free extension that can be used standalone or with SonarQube and/or SonarCloud.</summary>
+    <description>Roslyn analyzers that spot Bugs, Vulnerabilities and Code Smells in your code. For an even better overall experience, you can use SonarLint for Visual Studio, which is a free extension (https://www.sonarlint.org/visualstudio/) that can be used standalone or with SonarQube (https://www.sonarqube.org/) and/or SonarCloud (https://sonarcloud.io/).</description>
+    <releaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/9.33.0.0</releaseNotes>
     <language>en-US</language>
-    <copyright>Copyright © 2015-2025 SonarSource SA</copyright>
+    <copyright>Copyright © 2015-2024 SonarSource SA</copyright>
     <tags>Roslyn Analyzer Analyzers Refactoring CodeAnalysis CleanCode Clean Code Sonar SonarAnalyzer Dotnet VisualBasic CodeQuality CodeReview StaticCodeAnalysis SonarQube SonarCloud SonarLint</tags>
     <developmentDependency>true</developmentDependency>
     <frameworkAssemblies>
@@ -23,10 +23,13 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="binaries\SonarAnalyzer.VisualBasic\*.dll" target="analyzers" />
+    <file src="binaries\SonarAnalyzer.VisualBasic\Google.Protobuf.dll" target="analyzers" />
+    <file src="binaries\SonarAnalyzer.VisualBasic\SonarAnalyzer.dll" target="analyzers" />
+    <file src="binaries\SonarAnalyzer.VisualBasic\SonarAnalyzer.CFG.dll" target="analyzers" />
+    <file src="binaries\SonarAnalyzer.VisualBasic\SonarAnalyzer.ShimLayer.dll" target="analyzers" />
+    <file src="binaries\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.dll" target="analyzers" />
     <file src="tools-vbnet\*.ps1" target="tools\" />
     <file src="logos\sonarsource_64.png" target="images\" />
     <file src="..\..\THIRD-PARTY-NOTICES.txt" target="license\" />
-    <file src="..\..\LICENSE.txt"/>
   </files>
 </package>

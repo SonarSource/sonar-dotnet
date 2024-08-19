@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3267",
+      "Message": "Loops should be simplified using the \u0022Where\u0022 LINQ method",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L311",
+      "Location": "Line 311 Position 44-57"
+    },
+    {
+      "Id": "S3267",
+      "Message": "Loop should be simplified by calling Select(entry =\u003E entry.Value))",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L462",
+      "Location": "Line 462 Position 35-44"
+    }
+  ]
+}

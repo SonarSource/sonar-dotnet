@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L185",
+      "Location": "Line 185 Position 17-36"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L87",
+      "Location": "Line 87 Position 17-43"
+    }
+  ]
+}

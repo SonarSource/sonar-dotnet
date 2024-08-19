@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027ConfigureServices\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/NetCore31WithConfigurableRules/Startup.cs#L24",
+      "Location": "Line 24 Position 21-38"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Configure\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/NetCore31WithConfigurableRules/Startup.cs#L30",
+      "Location": "Line 30 Position 21-30"
+    }
+  ]
+}

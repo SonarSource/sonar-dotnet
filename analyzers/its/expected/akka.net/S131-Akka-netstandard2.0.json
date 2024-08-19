@@ -1,0 +1,94 @@
+{
+  "Issues": [
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027default\u0027 clause to this \u0027switch\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorBase.cs#L166",
+      "Location": "Line 166 Position 21-27"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027default\u0027 clause to this \u0027switch\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L215",
+      "Location": "Line 215 Position 21-27"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027default\u0027 clause to this \u0027switch\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L144",
+      "Location": "Line 144 Position 13-19"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027default\u0027 clause to this \u0027switch\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorRef.cs#L1002",
+      "Location": "Line 1002 Position 13-19"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027default\u0027 clause to this \u0027switch\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorSelection.cs#L207",
+      "Location": "Line 207 Position 25-31"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027default\u0027 clause to this \u0027switch\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/FSM.cs#L1099",
+      "Location": "Line 1099 Position 13-19"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027default\u0027 clause to this \u0027switch\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L60",
+      "Location": "Line 60 Position 13-19"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027default\u0027 clause to this \u0027switch\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconParser.cs#L110",
+      "Location": "Line 110 Position 17-23"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027default\u0027 clause to this \u0027switch\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconParser.cs#L149",
+      "Location": "Line 149 Position 17-23"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027default\u0027 clause to this \u0027switch\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconParser.cs#L74",
+      "Location": "Line 74 Position 17-23"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027default\u0027 clause to this \u0027switch\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L388",
+      "Location": "Line 388 Position 17-23"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027default\u0027 clause to this \u0027switch\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/ActorTaskScheduler.cs#L168",
+      "Location": "Line 168 Position 13-19"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027default\u0027 clause to this \u0027switch\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/StandardOutLogger.cs#L119",
+      "Location": "Line 119 Position 21-27"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027default\u0027 clause to this \u0027switch\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/TcpConnection.cs#L478",
+      "Location": "Line 478 Position 21-27"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027default\u0027 clause to this \u0027switch\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/UdpListener.cs#L87",
+      "Location": "Line 87 Position 13-19"
+    }
+  ]
+}

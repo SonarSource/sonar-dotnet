@@ -1,0 +1,250 @@
+{
+  "Issues": [
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027initialValue\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Cluster.cs#L496",
+      "Location": "Line 496 Position 74-79"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterActorRefProvider.cs#L161",
+      "Location": "Line 161 Position 57-62"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterActorRefProvider.cs#L166",
+      "Location": "Line 166 Position 66-67"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterActorRefProvider.cs#L174",
+      "Location": "Line 174 Position 65-70"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L40",
+      "Location": "Line 40 Position 75-80"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L41",
+      "Location": "Line 41 Position 78-83"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L43",
+      "Location": "Line 43 Position 107-111"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L44",
+      "Location": "Line 44 Position 90-94"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L45",
+      "Location": "Line 45 Position 108-112"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L46",
+      "Location": "Line 46 Position 98-99"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L49",
+      "Location": "Line 49 Position 78-82"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L52",
+      "Location": "Line 52 Position 99-103"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L53",
+      "Location": "Line 53 Position 75-79"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L54",
+      "Location": "Line 54 Position 81-85"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L55",
+      "Location": "Line 55 Position 90-94"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L56",
+      "Location": "Line 56 Position 109-113"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L67",
+      "Location": "Line 67 Position 66-70"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L74",
+      "Location": "Line 74 Position 72-73"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L76",
+      "Location": "Line 76 Position 72-76"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L79",
+      "Location": "Line 79 Position 117-118"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L80",
+      "Location": "Line 80 Position 90-94"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L81",
+      "Location": "Line 81 Position 88-89"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L86",
+      "Location": "Line 86 Position 99-104"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L87",
+      "Location": "Line 87 Position 109-114"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L89",
+      "Location": "Line 89 Position 94-98"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L97",
+      "Location": "Line 97 Position 109-114"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L100",
+      "Location": "Line 100 Position 68-72"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L172",
+      "Location": "Line 172 Position 71-72"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L173",
+      "Location": "Line 173 Position 66-71"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L174",
+      "Location": "Line 174 Position 68-72"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L261",
+      "Location": "Line 261 Position 59-60"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027useRole\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L33",
+      "Location": "Line 33 Position 69-73"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L99",
+      "Location": "Line 99 Position 66-71"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L123",
+      "Location": "Line 123 Position 44-48"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L160",
+      "Location": "Line 160 Position 44-48"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L206",
+      "Location": "Line 206 Position 64-68"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L29",
+      "Location": "Line 29 Position 62-66"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L41",
+      "Location": "Line 41 Position 70-74"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L94",
+      "Location": "Line 94 Position 53-54"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L95",
+      "Location": "Line 95 Position 43-47"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Util.cs#L116",
+      "Location": "Line 116 Position 46-50"
+    }
+  ]
+}

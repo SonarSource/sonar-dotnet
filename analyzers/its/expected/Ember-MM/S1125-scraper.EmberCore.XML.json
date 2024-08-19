@@ -1,0 +1,124 @@
+{
+  "Issues": [
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L723",
+      "Location": "Line 723 Position 96-107"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L276",
+      "Location": "Line 276 Position 86-90"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L282",
+      "Location": "Line 282 Position 81-85"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L294",
+      "Location": "Line 294 Position 81-85"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L302",
+      "Location": "Line 302 Position 82-86"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L310",
+      "Location": "Line 310 Position 84-88"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L318",
+      "Location": "Line 318 Position 85-89"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L462",
+      "Location": "Line 462 Position 86-90"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L472",
+      "Location": "Line 472 Position 83-87"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L482",
+      "Location": "Line 482 Position 87-91"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L492",
+      "Location": "Line 492 Position 88-92"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L498",
+      "Location": "Line 498 Position 85-89"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L504",
+      "Location": "Line 504 Position 87-91"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L510",
+      "Location": "Line 510 Position 67-71"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L367",
+      "Location": "Line 367 Position 88-92"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L373",
+      "Location": "Line 373 Position 82-86"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L379",
+      "Location": "Line 379 Position 83-87"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L385",
+      "Location": "Line 385 Position 81-85"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/UrlInfo.vb#L256",
+      "Location": "Line 256 Position 58-62"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/UrlInfo.vb#L260",
+      "Location": "Line 260 Position 55-59"
+    }
+  ]
+}

@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.CSharp.Rules;
+using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Test.Rules
 {
@@ -26,15 +30,15 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void MemberInitializerRedundant_RoslynCfg() =>
-            builder.AddPaths(@"MemberInitializerRedundant.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
+            builder.AddPaths(@"MemberInitializerRedundant.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
         [TestMethod]
         public void MemberInitializerRedundant_RoslynCfg_FlowCaptureOperationNotSupported() =>
-            builder.AddPaths(@"MemberInitializerRedundant.RoslynCfg.FlowCaptureBug.cs").WithOptions(LanguageOptions.FromCSharp8).VerifyNoIssues();
+            builder.AddPaths(@"MemberInitializerRedundant.RoslynCfg.FlowCaptureBug.cs").WithOptions(ParseOptionsHelper.FromCSharp8).VerifyNoIssues();
 
         [TestMethod]
         public void MemberInitializerRedundant_SonarCfg() =>
-            builderSonarCfg.AddPaths(@"MemberInitializerRedundant.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
+            builderSonarCfg.AddPaths(@"MemberInitializerRedundant.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
         [TestMethod]
         public void MemberInitializerRedundant_CodeFix() =>
@@ -48,7 +52,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void MemberInitializerRedundant_CSharp9() =>
-            builder.AddPaths("MemberInitializerRedundant.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
+            builder.AddPaths("MemberInitializerRedundant.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void MemberInitializerRedundant_CSharp9_CodeFix() =>
@@ -56,12 +60,12 @@ namespace SonarAnalyzer.Test.Rules
                 .WithCodeFix<MemberInitializedToDefaultCodeFix>()
                 .AddPaths("MemberInitializerRedundant.CSharp9.cs")
                 .WithCodeFixedPaths("MemberInitializerRedundant.CSharp9.Fixed.cs")
-                .WithOptions(LanguageOptions.FromCSharp9)
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .VerifyCodeFix();
 
         [TestMethod]
         public void MemberInitializerRedundant_CSharp10() =>
-            builder.AddPaths("MemberInitializerRedundant.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
+            builder.AddPaths("MemberInitializerRedundant.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
         public void MemberInitializerRedundant_CSharp10_CodeFix() =>
@@ -69,12 +73,12 @@ namespace SonarAnalyzer.Test.Rules
                 .WithCodeFix<MemberInitializedToDefaultCodeFix>()
                 .AddPaths("MemberInitializerRedundant.CSharp10.cs")
                 .WithCodeFixedPaths("MemberInitializerRedundant.CSharp10.Fixed.cs")
-                .WithOptions(LanguageOptions.FromCSharp10)
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .VerifyCodeFix();
 
         [TestMethod]
         public void MemberInitializerRedundant_CSharp12() =>
-            builder.AddPaths("MemberInitializerRedundant.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).Verify();
+            builder.AddPaths("MemberInitializerRedundant.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
 
 #endif
 

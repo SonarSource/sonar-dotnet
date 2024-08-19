@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1075",
+      "Message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/examples/Chat/ChatClient/Program.cs#L81",
+      "Location": "Line 81 Position 74-126"
+    }
+  ]
+}

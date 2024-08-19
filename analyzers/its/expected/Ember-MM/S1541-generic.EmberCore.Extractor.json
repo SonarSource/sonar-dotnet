@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 38 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L131",
+      "Location": "Line 131 Position 9-35"
+    }
+  ]
+}

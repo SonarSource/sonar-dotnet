@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3267",
+      "Message": "Loop should be simplified by calling Select(registrationType =\u003E registrationType.ModuleType))",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Hosting.Aspnet/DefaultNancyAspNetBootstrapper.cs#L231",
+      "Location": "Line 231 Position 46-69"
+    }
+  ]
+}

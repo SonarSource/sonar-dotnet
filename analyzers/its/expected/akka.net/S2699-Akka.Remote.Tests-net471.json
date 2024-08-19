@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.Tests/RemoteDeployerSpec.cs#L55",
+      "Location": "Line 55 Position 21-101"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.Tests/RemotingSpec.cs#L195",
+      "Location": "Line 195 Position 21-46"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.Tests/RemotingSpec.cs#L204",
+      "Location": "Line 204 Position 21-61"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.Tests/Transport/AkkaProtocolSpec.cs#L136",
+      "Location": "Line 136 Position 21-90"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.Tests/Transport/AkkaProtocolSpec.cs#L183",
+      "Location": "Line 183 Position 21-129"
+    }
+  ]
+}

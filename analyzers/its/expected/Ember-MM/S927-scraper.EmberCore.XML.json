@@ -1,0 +1,76 @@
+{
+  "Issues": [
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027mMovie\u0027 to \u0027DBMovie\u0027 to match the interface declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L762",
+      "Location": "Line 762 Position 38-44"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027element\u0027 to \u0027xmlElement\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L237",
+      "Location": "Line 237 Position 62-69"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027element\u0027 to \u0027xmlElement\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/ArtistTag.vb#L254",
+      "Location": "Line 254 Position 62-69"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027element\u0027 to \u0027xmlElement\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MovieTag.vb#L377",
+      "Location": "Line 377 Position 62-69"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027element\u0027 to \u0027xmlElement\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MusicVideoTag.vb#L142",
+      "Location": "Line 142 Position 62-69"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027element\u0027 to \u0027xmlElement\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L240",
+      "Location": "Line 240 Position 62-69"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027element\u0027 to \u0027xUrl\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/Thumbnail.vb#L147",
+      "Location": "Line 147 Position 62-69"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027element\u0027 to \u0027xmlElement\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVEpisodeTag.vb#L185",
+      "Location": "Line 185 Position 62-69"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027element\u0027 to \u0027xmlElement\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVShow.vb#L245",
+      "Location": "Line 245 Position 62-69"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027xExpression\u0027 to \u0027xNodeInfo\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L454",
+      "Location": "Line 454 Position 62-73"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027xFunctionElement\u0027 to \u0027xNodeInfo\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L283",
+      "Location": "Line 283 Position 62-78"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027xRegExp\u0027 to \u0027xNodeInfo\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L360",
+      "Location": "Line 360 Position 62-69"
+    }
+  ]
+}

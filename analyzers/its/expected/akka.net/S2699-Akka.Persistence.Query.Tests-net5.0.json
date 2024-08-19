@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.Query.Tests/PersistenceQuerySpec.cs#L25",
+      "Location": "Line 25 Position 21-67"
+    }
+  ]
+}

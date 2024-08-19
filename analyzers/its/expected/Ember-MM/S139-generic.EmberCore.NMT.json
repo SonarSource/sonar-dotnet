@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1447",
+      "Location": "Line 1447 Position 54-74"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1520",
+      "Location": "Line 1520 Position 40-70"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L510",
+      "Location": "Line 510 Position 30-62"
+    }
+  ]
+}

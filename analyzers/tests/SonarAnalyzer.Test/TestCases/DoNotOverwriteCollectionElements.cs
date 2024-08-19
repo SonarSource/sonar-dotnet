@@ -9,7 +9,7 @@ namespace Tests.Diagnostics
 
         void SameIndexOnDictionary(Dictionary<int, int> dict)
         {
-            dict[0] = 42; // Secondary  {{The index/key set here gets set again later.}}
+            dict[0] = 42; // Secondary
 //          ^^^^^^^^^^^^^
             dict[0] = 42; // Noncompliant {{Verify this is the index/key that was intended; a value has already been set for it.}}
 //          ^^^^^^^^^^^^^
@@ -17,7 +17,7 @@ namespace Tests.Diagnostics
 
         void SameIndexOnArray(int[] array)
         {
-            array[0] = 42; // Secondary  {{The index/key set here gets set again later.}}
+            array[0] = 42; // Secondary
             array[0] = 42; // Noncompliant
         }
 

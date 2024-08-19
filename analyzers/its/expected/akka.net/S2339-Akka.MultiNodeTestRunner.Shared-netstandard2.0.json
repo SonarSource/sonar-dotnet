@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/MessageSink.cs#L78",
+      "Location": "Line 78 Position 29-38"
+    }
+  ]
+}

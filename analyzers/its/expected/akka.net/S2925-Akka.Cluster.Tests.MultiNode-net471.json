@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2925",
+      "Message": "Do not use \u0027Thread.Sleep()\u0027 in a test.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster.Tests.MultiNode/DisallowJoinOfTwoClustersSpec.cs#L96",
+      "Location": "Line 96 Position 17-35"
+    },
+    {
+      "Id": "S2925",
+      "Message": "Do not use \u0027Thread.Sleep()\u0027 in a test.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster.Tests.MultiNode/JoinInProgressSpec.cs#L71",
+      "Location": "Line 71 Position 21-38"
+    }
+  ]
+}

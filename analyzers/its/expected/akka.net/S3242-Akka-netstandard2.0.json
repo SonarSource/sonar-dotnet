@@ -1,0 +1,214 @@
+{
+  "Issues": [
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.ICollection\u003CAkka.Actor.IActorRef\u003E\u0027 instead of \u0027System.Collections.Generic.List\u003CAkka.Actor.IActorRef\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L277",
+      "Location": "Line 277 Position 54-63"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Actor.ActorRefBase\u0027 instead of \u0027Akka.Actor.FunctionRef\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L59",
+      "Location": "Line 59 Position 53-64"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Actor.ICanTell\u0027 instead of \u0027Akka.Actor.IActorRef\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorRef.cs#L196",
+      "Location": "Line 196 Position 48-56"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Actor.ICanTell\u0027 instead of \u0027Akka.Actor.IActorRef\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorRef.cs#L208",
+      "Location": "Line 208 Position 51-59"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Actor.IActorRef\u0027 instead of \u0027Akka.Actor.LocalActorRef\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L352",
+      "Location": "Line 352 Position 107-119"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Actor.Setup.Setup\u0027 instead of \u0027Akka.Actor.BootstrapSetup\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorSystem.cs#L246",
+      "Location": "Line 246 Position 70-75"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Actor.ICanTell\u0027 instead of \u0027Akka.Actor.IActorRef\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/FSM.cs#L354",
+      "Location": "Line 354 Position 44-49"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Linq.Expressions.LambdaExpression\u0027 instead of \u0027System.Linq.Expressions.Expression\u003CSystem.Func\u003CTActor\u003E\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Props.cs#L352",
+      "Location": "Line 352 Position 69-76"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Tools.MatchHandler.MatchBuilder\u003Cobject\u003E\u0027 instead of \u0027Akka.Tools.MatchHandler.MatchBuilder\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ReceiveActor.cs#L46",
+      "Location": "Line 46 Position 75-87"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.ISet\u003CAkka.Actor.HashedWheelTimerScheduler.SchedulerRegistration\u003E\u0027 instead of \u0027System.Collections.Generic.HashSet\u003CAkka.Actor.HashedWheelTimerScheduler.SchedulerRegistration\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L566",
+      "Location": "Line 566 Position 75-88"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.ISet\u003CAkka.Actor.HashedWheelTimerScheduler.SchedulerRegistration\u003E\u0027 instead of \u0027System.Collections.Generic.HashSet\u003CAkka.Actor.HashedWheelTimerScheduler.SchedulerRegistration\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L583",
+      "Location": "Line 583 Position 72-85"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Actor.IActorContext\u0027 instead of \u0027Akka.Actor.ActorCell\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L57",
+      "Location": "Line 57 Position 45-54"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Actor.IActorContext\u0027 instead of \u0027Akka.Actor.ActorCell\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L635",
+      "Location": "Line 635 Position 50-54"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Reflection.MemberInfo\u0027 instead of \u0027System.Type\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/EventBus.cs#L44",
+      "Location": "Line 44 Position 42-48"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Actor.ExtendedActorSystem\u0027 instead of \u0027Akka.Actor.Internal.ActorSystemImpl\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/EventBusUnsubscriber.cs#L178",
+      "Location": "Line 178 Position 43-49"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Event.EventBus\u003Cobject, System.Type, Akka.Actor.IActorRef\u003E\u0027 instead of \u0027Akka.Event.EventStream\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/EventStreamExtensions.cs#L31",
+      "Location": "Line 31 Position 65-76"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Event.EventBus\u003Cobject, System.Type, Akka.Actor.IActorRef\u003E\u0027 instead of \u0027Akka.Event.EventStream\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/EventStreamExtensions.cs#L44",
+      "Location": "Line 44 Position 67-78"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Reflection.MemberInfo\u0027 instead of \u0027System.Type\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/Logging.cs#L137",
+      "Location": "Line 137 Position 46-47"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Actor.ExtendedActorSystem\u0027 instead of \u0027Akka.Actor.Internal.ActorSystemImpl\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/LoggingBus.cs#L182",
+      "Location": "Line 182 Position 48-54"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Event.AllDeadLetters\u0027 instead of \u0027Akka.Event.UnhandledMessage\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/LoggingBus.cs#L273",
+      "Location": "Line 273 Position 59-66"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Reflection.IReflect\u0027 instead of \u0027System.Type\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/IPExtensions.cs#L30",
+      "Location": "Line 30 Position 54-58"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.IO.Tcp.Command\u0027 instead of \u0027Akka.IO.Tcp.WriteCommand\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/TcpConnection.cs#L410",
+      "Location": "Line 410 Position 66-71"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.IO.Tcp.Event\u0027 instead of \u0027Akka.IO.Tcp.ConnectionClosed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/TcpConnection.cs#L588",
+      "Location": "Line 588 Position 104-115"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Exception\u0027 instead of \u0027System.Net.Sockets.SocketException\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/TcpConnection.cs#L602",
+      "Location": "Line 602 Position 69-78"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.IO.UdpConnected.SocketCompleted\u0027 instead of \u0027Akka.IO.UdpConnected.SocketReceived\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/UdpConnection.cs#L167",
+      "Location": "Line 167 Position 44-52"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.ICollection\u003CAkka.Routing.Routee\u003E\u0027 instead of \u0027System.Collections.Generic.IList\u003CAkka.Routing.Routee\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/RoutedActorCell.cs#L101",
+      "Location": "Line 101 Position 51-66"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IEnumerable\u003CAkka.Routing.Routee\u003E\u0027 instead of \u0027System.Collections.Generic.IList\u003CAkka.Routing.Routee\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/RoutedActorCell.cs#L75",
+      "Location": "Line 75 Position 48-55"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Actor.IActorRefFactory\u0027 instead of \u0027Akka.Actor.IActorContext\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/RouterConfig.cs#L185",
+      "Location": "Line 185 Position 62-69"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Actor.ActorSystem\u0027 instead of \u0027Akka.Actor.ExtendedActorSystem\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Serialization/Serializer.cs#L187",
+      "Location": "Line 187 Position 92-98"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.IEnumerator\u0027 instead of \u0027System.Collections.Generic.IEnumerator\u003CSystem.ArraySegment\u003Cbyte\u003E\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/ByteString.cs#L36",
+      "Location": "Line 36 Position 72-79"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IEnumerable\u003CT\u003E\u0027 instead of \u0027System.Collections.Generic.List\u003CT\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/Internal/Collections/ListExtensions.cs#L15",
+      "Location": "Line 15 Position 55-60"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.ICollection\u003CSystem.Linq.Expressions.Expression\u003E\u0027 instead of \u0027System.Collections.Generic.List\u003CSystem.Linq.Expressions.Expression\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/MatchHandler/MatchExpressionBuilder.cs#L282",
+      "Location": "Line 282 Position 103-107"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.ICollection\u003CSystem.Linq.Expressions.Expression\u003E\u0027 instead of \u0027System.Collections.Generic.List\u003CSystem.Linq.Expressions.Expression\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/MatchHandler/MatchExpressionBuilder.cs#L293",
+      "Location": "Line 293 Position 116-120"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.ICollection\u003CSystem.Linq.Expressions.Expression\u003E\u0027 instead of \u0027System.Collections.Generic.List\u003CSystem.Linq.Expressions.Expression\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/MatchHandler/MatchExpressionBuilder.cs#L311",
+      "Location": "Line 311 Position 101-105"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IReadOnlyList\u003CSystem.Linq.Expressions.Expression\u003E\u0027 instead of \u0027System.Collections.ObjectModel.ReadOnlyCollection\u003CSystem.Linq.Expressions.Expression\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/Reflection/ExpressionExtensions.cs#L57",
+      "Location": "Line 57 Position 44-51"
+    }
+  ]
+}

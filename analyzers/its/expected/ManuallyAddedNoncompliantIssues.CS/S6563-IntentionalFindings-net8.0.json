@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S6563",
+      "Message": "Use UTC when recording DateTime instants",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6561.cs#L11",
+      "Location": "Line 11 Position 35-47"
+    },
+    {
+      "Id": "S6563",
+      "Message": "Use UTC when recording DateTime instants",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6561.cs#L9",
+      "Location": "Line 9 Position 25-37"
+    }
+  ]
+}

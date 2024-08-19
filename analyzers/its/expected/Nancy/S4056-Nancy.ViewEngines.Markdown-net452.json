@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Markdown/MarkdownViewEngineHost.cs#L68",
+      "Location": "Line 68 Position 17-50"
+    }
+  ]
+}

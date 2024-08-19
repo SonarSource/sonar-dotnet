@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2201",
+      "Message": "Use the return value of method \u0027Select\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.NodeTestRunner/Program.cs#L59-L63",
+      "Location": "Lines 59-63 Position 13-123"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3902",
+      "Message": "Replace this call to \u0027Assembly.GetExecutingAssembly()\u0027 with \u0027Type.Assembly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L67",
+      "Location": "Line 67 Position 27-47"
+    }
+  ]
+}

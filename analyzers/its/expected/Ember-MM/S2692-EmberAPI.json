@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S2692",
+      "Message": "0 is a valid index, but this check ignores it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPICommon.vb#L667",
+      "Location": "Line 667 Position 74-77"
+    },
+    {
+      "Id": "S2692",
+      "Message": "0 is a valid index, but this check ignores it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L141",
+      "Location": "Line 141 Position 48-51"
+    },
+    {
+      "Id": "S2692",
+      "Message": "0 is a valid index, but this check ignores it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L203",
+      "Location": "Line 203 Position 44-47"
+    },
+    {
+      "Id": "S2692",
+      "Message": "0 is a valid index, but this check ignores it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L248",
+      "Location": "Line 248 Position 44-47"
+    }
+  ]
+}

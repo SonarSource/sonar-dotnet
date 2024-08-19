@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S107",
+      "Message": "Constructor has 11 parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L317",
+      "Location": "Line 317 Position 42-367"
+    },
+    {
+      "Id": "S107",
+      "Message": "Constructor has 15 parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L209-L224",
+      "Location": "Lines 209-224 Position 34-38"
+    },
+    {
+      "Id": "S107",
+      "Message": "Constructor has 11 parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L134-L145",
+      "Location": "Lines 134-145 Position 34-38"
+    }
+  ]
+}

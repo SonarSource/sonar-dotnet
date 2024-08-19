@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class TestMethodShouldNotBeIgnored : SonarDiagnosticAnalyzer
@@ -23,15 +27,15 @@ namespace SonarAnalyzer.CSharp.Rules
         private const string MessageFormat = "Either remove this 'Ignore' attribute or add an explanation about why this test is ignored.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ImmutableArray<KnownType> TrackedTestIdentifierAttributes =
-            // xUnit has it's own "ignore" mechanism (by providing a (Skip = "reason") string in the attribute, so there is always an explanation for the test being skipped).
-            KnownType.TestMethodAttributesOfMSTest
-            .Concat(KnownType.TestMethodAttributesOfNUnit)
-            .Append(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute)
+            // xUnit has it's own "ignore" mechanism (by providing a (Skip = "reason") string in
+            // the attribute, so there is always an explanation for the test being skipped).
+            UnitTestHelper.KnownTestMethodAttributesOfMSTest
+            .Concat(new[] { KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute })
+            .Concat(UnitTestHelper.KnownTestMethodAttributesOfNUnit)
             .ToImmutableArray();
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(
@@ -40,13 +44,13 @@ namespace SonarAnalyzer.CSharp.Rules
                     var attribute = (AttributeSyntax)c.Node;
                     if (HasReasonPhrase(attribute)
                         || HasTrailingComment(attribute)
-                        || !IsKnownIgnoreAttribute(attribute, c.Model)
+                        || !IsKnownIgnoreAttribute(attribute, c.SemanticModel)
                         || attribute.Parent?.Parent is not { } attributeTarget)
                     {
                         return;
                     }
 
-                    var attributes = GetAllAttributes(attributeTarget, c.Model);
+                    var attributes = GetAllAttributes(attributeTarget, c.SemanticModel);
 
                     if (attributes.Any(IsTestOrTestClassAttribute)
                         && !attributes.Any(IsWorkItemAttribute))
@@ -78,7 +82,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
             var attributeConstructor = symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.FirstOrDefault();
 
-            return attributeConstructor is not null && attributeConstructor.ContainingType.DerivesFromAny(KnownType.IgnoreAttributes);
+            return attributeConstructor != null && attributeConstructor.ContainingType.DerivesFromAny(UnitTestHelper.KnownIgnoreAttributes);
         }
 
         private static bool IsTestOrTestClassAttribute(AttributeData a) =>

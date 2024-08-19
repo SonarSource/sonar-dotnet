@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules;
+namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class RedundantCast : SonarDiagnosticAnalyzer
@@ -56,8 +60,8 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
     private static void CheckCastExpression(SonarSyntaxNodeReportingContext context, ExpressionSyntax expression, ExpressionSyntax type, Location location)
     {
         if (!expression.IsKind(SyntaxKindEx.DefaultLiteralExpression)
-            && context.Model.GetTypeInfo(expression) is { Type: { } expressionType } expressionTypeInfo
-            && context.Model.GetTypeInfo(type) is { Type: { } castType }
+            && context.SemanticModel.GetTypeInfo(expression) is { Type: { } expressionType } expressionTypeInfo
+            && context.SemanticModel.GetTypeInfo(type) is { Type: { } castType }
             && expressionType.Equals(castType)
             && FlowStateEquals(expressionTypeInfo, type))
         {
@@ -80,7 +84,7 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
     private static void CheckExtensionMethodInvocation(SonarSyntaxNodeReportingContext context)
     {
         var invocation = (InvocationExpressionSyntax)context.Node;
-        if (GetEnumerableExtensionSymbol(invocation, context.Model) is { } methodSymbol)
+        if (GetEnumerableExtensionSymbol(invocation, context.SemanticModel) is { } methodSymbol)
         {
             var returnType = methodSymbol.ReturnType;
             if (GetGenericTypeArgument(returnType) is { } castType)
@@ -91,7 +95,7 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
                     return;
                 }
 
-                var elementType = GetElementType(invocation, methodSymbol, context.Model);
+                var elementType = GetElementType(invocation, methodSymbol, context.SemanticModel);
                 if (elementType != null && elementType.Equals(castType) && elementType.NullableAnnotation() == castType.NullableAnnotation())
                 {
                     var methodCalledAsStatic = methodSymbol.MethodKind == MethodKind.Ordinary;
@@ -102,7 +106,7 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
     }
 
     private static void ReportIssue(SonarSyntaxNodeReportingContext context, ExpressionSyntax expression, ITypeSymbol castType, Location location) =>
-        context.ReportIssue(Rule, location, castType.ToMinimalDisplayString(context.Model, expression.SpanStart));
+        context.ReportIssue(Rule, location, castType.ToMinimalDisplayString(context.SemanticModel, expression.SpanStart));
 
     /// If the invocation one of the <see cref="CastIEnumerableMethods"/> extensions, returns the method symbol.
     private static IMethodSymbol GetEnumerableExtensionSymbol(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>

@@ -213,19 +213,3 @@ public interface ISomething
     public void DoNothing();    // Secondary [ISomething]
     public int Value { get; }   // Noncompliant [ISomething] {{Move Properties before Methods.}}
 }
-
-public class AbstractClassValid
-{
-    public void Go() { }
-
-    protected class NestedClassBefore();
-    protected abstract class NestedAbstract { }     // Compliant, classes should be at the end, even when abstract
-    protected class NestedClassAfter();
-}
-
-public class AbstractClassWrong
-{
-    protected abstract class Nested { } // Secondary    [AbstractClass]
-
-    public void Go() { }                // Noncompliant [AbstractClass]
-}

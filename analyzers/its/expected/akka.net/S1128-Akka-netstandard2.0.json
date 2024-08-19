@@ -1,0 +1,520 @@
+{
+  "Issues": [
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L16",
+      "Location": "Line 16 Position 1-28"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L19",
+      "Location": "Line 19 Position 1-26"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.cs#L15",
+      "Location": "Line 15 Position 1-25"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.DeathWatch.cs#L13",
+      "Location": "Line 13 Position 1-26"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L16",
+      "Location": "Line 16 Position 1-28"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.FaultHandling.cs#L11",
+      "Location": "Line 11 Position 1-39"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.FaultHandling.cs#L13",
+      "Location": "Line 13 Position 1-24"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorPath.cs#L10",
+      "Location": "Line 10 Position 1-36"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L13",
+      "Location": "Line 13 Position 1-25"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Address.cs#L10",
+      "Location": "Line 10 Position 1-26"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/EmptyChildrenContainer.cs#L10",
+      "Location": "Line 10 Position 1-38"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/NormalChildrenContainer.cs#L11",
+      "Location": "Line 11 Position 1-38"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/TerminatingChildrenContainer.cs#L12",
+      "Location": "Line 12 Position 1-38"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L13",
+      "Location": "Line 13 Position 1-24"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/FSM.cs#L11",
+      "Location": "Line 11 Position 1-19"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/GracefulStopSupport.cs#L10",
+      "Location": "Line 10 Position 1-24"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/GracefulStopSupport.cs#L9",
+      "Location": "Line 9 Position 1-38"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/IUntypedActorContext.cs#L8",
+      "Location": "Line 8 Position 1-14"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Props.cs#L12",
+      "Location": "Line 12 Position 1-26"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/RootGuardianActorRef.cs#L8",
+      "Location": "Line 8 Position 1-14"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Scheduler/ITimerScheduler.cs#L10",
+      "Location": "Line 10 Position 1-18"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Scheduler/ITimerScheduler.cs#L9",
+      "Location": "Line 9 Position 1-28"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Scheduler/SchedulerBase.cs#L9",
+      "Location": "Line 9 Position 1-24"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Setup/ActorSystemSetup.cs#L12",
+      "Location": "Line 12 Position 1-24"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Stash/IActorStash.cs#L9",
+      "Location": "Line 9 Position 1-25"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L11",
+      "Location": "Line 11 Position 1-25"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconTokenizer.cs#L10",
+      "Location": "Line 10 Position 1-28"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L9",
+      "Location": "Line 9 Position 1-39"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/CurrentSynchronizationContextDispatcher.cs#L10",
+      "Location": "Line 10 Position 1-19"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/CurrentSynchronizationContextDispatcher.cs#L11",
+      "Location": "Line 11 Position 1-19"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/CurrentSynchronizationContextDispatcher.cs#L9",
+      "Location": "Line 9 Position 1-34"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/IDispatcherPrerequisites.cs#L8",
+      "Location": "Line 8 Position 1-18"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/IDispatcherPrerequisites.cs#L9",
+      "Location": "Line 9 Position 1-18"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L10",
+      "Location": "Line 10 Position 1-31"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/MessageQueues/BlockingMessageQueue.cs#L9",
+      "Location": "Line 9 Position 1-24"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/MessageQueues/UnboundedDequeMessageQueue.cs#L10",
+      "Location": "Line 10 Position 1-26"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/ThreadPoolBuilder.cs#L9",
+      "Location": "Line 9 Position 1-24"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/AddressTerminatedTopic.cs#L12",
+      "Location": "Line 12 Position 1-17"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/AddressTerminatedTopic.cs#L8",
+      "Location": "Line 8 Position 1-14"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/DefaultLogger.cs#L8",
+      "Location": "Line 8 Position 1-14"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/EventStream.cs#L11",
+      "Location": "Line 11 Position 1-19"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/EventStreamExtensions.cs#L10",
+      "Location": "Line 10 Position 1-34"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/EventStreamExtensions.cs#L11",
+      "Location": "Line 11 Position 1-19"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/EventStreamExtensions.cs#L12",
+      "Location": "Line 12 Position 1-19"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/EventStreamExtensions.cs#L13",
+      "Location": "Line 13 Position 1-30"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/LogEvent.cs#L10",
+      "Location": "Line 10 Position 1-19"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/IPExtensions.cs#L12",
+      "Location": "Line 12 Position 1-39"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/SocketEventArgsPool.cs#L14",
+      "Location": "Line 14 Position 1-39"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/SocketEventArgsPool.cs#L15",
+      "Location": "Line 15 Position 1-23"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Tcp.cs#L14",
+      "Location": "Line 14 Position 1-26"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Tcp.cs#L15",
+      "Location": "Line 15 Position 1-39"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Tcp.cs#L9",
+      "Location": "Line 9 Position 1-25"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/TcpConnection.cs#L16",
+      "Location": "Line 16 Position 1-24"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/TcpConnection.cs#L23",
+      "Location": "Line 23 Position 1-26"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Udp.cs#L9",
+      "Location": "Line 9 Position 1-25"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/UdpConnected.cs#L9",
+      "Location": "Line 9 Position 1-25"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/UdpSettings.cs#L8",
+      "Location": "Line 8 Position 1-14"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/UserCalledFailException.cs#L11",
+      "Location": "Line 11 Position 1-19"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/UserCalledFailException.cs#L8",
+      "Location": "Line 8 Position 1-14"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/UserCalledFailException.cs#L9",
+      "Location": "Line 9 Position 1-34"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Properties/AssemblyInfo.cs#L8",
+      "Location": "Line 8 Position 1-25"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/ResizablePoolCell.cs#L14",
+      "Location": "Line 14 Position 1-28"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/Router.cs#L13",
+      "Location": "Line 13 Position 1-26"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Serialization/NewtonSoftJsonSerializerSetup.cs#L10",
+      "Location": "Line 10 Position 1-19"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Serialization/NewtonSoftJsonSerializerSetup.cs#L9",
+      "Location": "Line 9 Position 1-34"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Serialization/SerializationSetup.cs#L11",
+      "Location": "Line 11 Position 1-19"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Serialization/SerializationSetup.cs#L9",
+      "Location": "Line 9 Position 1-34"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Serialization/Serializer.cs#L10",
+      "Location": "Line 10 Position 1-25"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/AppVersion.cs#L10",
+      "Location": "Line 10 Position 1-19"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/AppVersion.cs#L12",
+      "Location": "Line 12 Position 1-39"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/AppVersion.cs#L13",
+      "Location": "Line 13 Position 1-26"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/AppVersion.cs#L9",
+      "Location": "Line 9 Position 1-34"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/Internal/TaskExtensions.cs#L8",
+      "Location": "Line 8 Position 1-14"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/MatchHandler/CachedMatchCompiler.cs#L11",
+      "Location": "Line 11 Position 1-19"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/MatchHandler/CachedMatchCompiler.cs#L12",
+      "Location": "Line 12 Position 1-25"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/MatchHandler/CachedMatchCompiler.cs#L13",
+      "Location": "Line 13 Position 1-30"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/MatchHandler/ILambdaExpressionCompiler.cs#L10",
+      "Location": "Line 10 Position 1-30"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/MatchHandler/IMatchCompiler.cs#L10",
+      "Location": "Line 10 Position 1-30"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/MatchHandler/IMatchCompiler.cs#L9",
+      "Location": "Line 9 Position 1-25"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/MatchHandler/LambdaExpressionCompiler.cs#L10",
+      "Location": "Line 10 Position 1-30"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/MatchHandler/MatchBuilder.cs#L10",
+      "Location": "Line 10 Position 1-25"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/MatchHandler/MatchBuilder.cs#L11",
+      "Location": "Line 11 Position 1-30"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/MonotonicClock.cs#L11",
+      "Location": "Line 11 Position 1-38"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/Reflection/ExpressionExtensions.cs#L10",
+      "Location": "Line 10 Position 1-34"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/TypeExtensions.cs#L10",
+      "Location": "Line 10 Position 1-25"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/WildcardIndex.cs#L11",
+      "Location": "Line 11 Position 1-19"
+    }
+  ]
+}

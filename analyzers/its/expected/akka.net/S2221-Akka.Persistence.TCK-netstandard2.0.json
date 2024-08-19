@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2221",
+      "Message": "Catch a list of specific exception subtype or use exception filters instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L363",
+      "Location": "Line 363 Position 20-29"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3217",
+      "Message": "Either change the type of \u0027task\u0027 to \u0027Task\u0027 or iterate on a generic collection of type \u0027Task\u003CFinished\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/PersistenceBenchmark/Program.cs#L80",
+      "Location": "Line 80 Position 26-40"
+    }
+  ]
+}

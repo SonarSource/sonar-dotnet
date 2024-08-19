@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027ClusterCore\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1110",
+      "Location": "Line 1110 Position 32-43"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027SelectRandomNode\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2489",
+      "Location": "Line 2489 Position 30-46"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027PublishDiff\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L1091",
+      "Location": "Line 1091 Position 22-33"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027ReverseDecision\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L420",
+      "Location": "Line 420 Position 26-41"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027ResolveSplitBrainStrategy\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L39",
+      "Location": "Line 39 Position 37-62"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4041",
+      "Message": "Change the name of type \u0027Timers\u0027 to be different from an existing framework namespace.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L28",
+      "Location": "Line 28 Position 25-31"
+    }
+  ]
+}

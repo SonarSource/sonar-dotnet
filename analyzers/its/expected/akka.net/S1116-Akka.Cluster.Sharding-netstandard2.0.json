@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1116",
+      "Message": "Remove this empty statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1040",
+      "Location": "Line 1040 Position 14-15"
+    },
+    {
+      "Id": "S1116",
+      "Message": "Remove this empty statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1067",
+      "Location": "Line 1067 Position 14-15"
+    },
+    {
+      "Id": "S1116",
+      "Message": "Remove this empty statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L715",
+      "Location": "Line 715 Position 14-15"
+    }
+  ]
+}

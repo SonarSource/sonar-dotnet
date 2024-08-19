@@ -1,56 +1,33 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class RequestsWithExcessiveLength : RequestsWithExcessiveLengthBase<SyntaxKind, AttributeSyntax>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        public RequestsWithExcessiveLength() : this(SonarAnalyzer.Core.Common.AnalyzerConfiguration.Hotspot) { }
+        public RequestsWithExcessiveLength() : this(AnalyzerConfiguration.Hotspot) { }
 
         internal RequestsWithExcessiveLength(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
-
-        protected override void Initialize(SonarParametrizedAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                c =>
-                {
-                    var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-                    var body = methodDeclaration.GetBodyOrExpressionBody();
-
-                    if (body is not null
-                        && body.DescendantNodes()
-                               .OfType<InvocationExpressionSyntax>()
-                               .Any(x => x.IsMethodInvocation(KnownType.Microsoft_AspNetCore_Components_Forms_IBrowserFile, "OpenReadStream", c.Model)))
-                    {
-                        var walker = new StreamReadSizeCheck(c.Model, FileUploadSizeLimit);
-                        if (walker.SafeVisit(body))
-                        {
-                            foreach (var location in walker.Locations)
-                            {
-                                c.ReportIssue(Rule, location);
-                            }
-                        }
-                    }
-                }, SyntaxKind.MethodDeclaration);
-
-            base.Initialize(context);
-        }
 
         protected override AttributeSyntax IsInvalidRequestFormLimits(AttributeSyntax attribute, SemanticModel semanticModel) =>
             IsRequestFormLimits(attribute.Name.ToString())
@@ -81,42 +58,5 @@ namespace SonarAnalyzer.CSharp.Rules
         private static bool IsMultipartBodyLengthLimit(AttributeArgumentSyntax argument) =>
             argument.NameEquals is { } nameEquals
             && nameEquals.Name.Identifier.ValueText.Equals(MultipartBodyLengthLimit);
-
-        private sealed class StreamReadSizeCheck(SemanticModel model, int fileUploadSizeLimit) : SafeCSharpSyntaxWalker
-        {
-            private const int GetMultipleFilesMaximumFileCount = 10; // Default value for `maximumFileCount` in `InputFileChangeEventArgs.GetMultipleFiles` is 10
-            private int numberOfFiles = 1;
-
-            public List<Location> Locations { get; } = new();
-
-            public override void VisitInvocationExpression(InvocationExpressionSyntax node)
-            {
-                if (node.IsMethodInvocation(KnownType.Microsoft_AspNetCore_Components_Forms_InputFileChangeEventArgs, "GetMultipleFiles", model))
-                {
-                    numberOfFiles = node.ArgumentList.Arguments.FirstOrDefault() is { } firstArgument
-                                    && model.GetConstantValue(firstArgument.Expression) is { HasValue: true } constantValue
-                                    && Convert.ToInt32(constantValue.Value) is var count
-                                        ? count
-                                        : GetMultipleFilesMaximumFileCount;
-                }
-                if (node.IsMethodInvocation(KnownType.Microsoft_AspNetCore_Components_Forms_IBrowserFile, "OpenReadStream", model))
-                {
-                    var size = OpenReadStreamInvocationSize(node, model);
-                    if (numberOfFiles * size > fileUploadSizeLimit)
-                    {
-                        Locations.Add(node.GetLocation());
-                    }
-                }
-
-                base.VisitInvocationExpression(node);
-            }
-
-            private static long OpenReadStreamInvocationSize(InvocationExpressionSyntax invocation, SemanticModel model) =>
-                invocation.ArgumentList.Arguments.FirstOrDefault() is { } firstArgument
-                && model.GetConstantValue(firstArgument.Expression) is { HasValue: true } constantValue
-                && Convert.ToInt64(constantValue.Value) is var size
-                    ? size
-                    : 500 * 1024; // Default `maxAllowedSize` in `IBrowserFile.OpenReadStream` is 500 KB
-        }
     }
 }

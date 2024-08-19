@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/Hocon/HoconBenchmarks.cs#L101",
+      "Location": "Line 101 Position 68-72"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/Hocon/HoconBenchmarks.cs#L77",
+      "Location": "Line 77 Position 63-67"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/Hocon/HoconBenchmarks.cs#L83",
+      "Location": "Line 83 Position 71-72"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/Hocon/HoconBenchmarks.cs#L95",
+      "Location": "Line 95 Position 96-101"
+    }
+  ]
+}

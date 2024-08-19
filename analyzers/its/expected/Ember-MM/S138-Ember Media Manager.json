@@ -1,0 +1,148 @@
+{
+  "Issues": [
+    {
+      "Id": "S138",
+      "Message": "This method \u0027frmAbout_Load\u0027 has 106 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L39",
+      "Location": "Line 39 Position 17-30"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027Populate_FileList\u0027 has 152 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L155",
+      "Location": "Line 155 Position 17-34"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027SetInfo\u0027 has 103 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1182",
+      "Location": "Line 1182 Position 17-24"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027FillInfo\u0027 has 156 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L595",
+      "Location": "Line 595 Position 17-25"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027LoadInfo\u0027 has 101 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L209",
+      "Location": "Line 209 Position 17-25"
+    },
+    {
+      "Id": "S138",
+      "Message": "This function \u0027ShowDialog\u0027 has 82 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L36",
+      "Location": "Line 36 Position 31-41"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027IndentFormat\u0027 has 103 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L124",
+      "Location": "Line 124 Position 17-29"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027FillSettings\u0027 has 373 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2173",
+      "Location": "Line 2173 Position 17-29"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027SaveSettings\u0027 has 437 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3236",
+      "Location": "Line 3236 Position 17-29"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027SetUp\u0027 has 378 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3702",
+      "Location": "Line 3702 Position 17-22"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027ClearInfo\u0027 has 92 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L206",
+      "Location": "Line 206 Position 16-25"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027FillList\u0027 has 152 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4312",
+      "Location": "Line 4312 Position 17-25"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027fillScreenInfoWithEpisode\u0027 has 134 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4488",
+      "Location": "Line 4488 Position 17-42"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027fillScreenInfoWithMovie\u0027 has 160 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4646",
+      "Location": "Line 4646 Position 17-40"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027fillScreenInfoWithSeason\u0027 has 119 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4840",
+      "Location": "Line 4840 Position 17-41"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027fillScreenInfoWithShow\u0027 has 141 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4983",
+      "Location": "Line 4983 Position 17-39"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027frmMain_Load\u0027 has 396 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5282",
+      "Location": "Line 5282 Position 17-29"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027MovieInfoDownloaded\u0027 has 109 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6354",
+      "Location": "Line 6354 Position 17-36"
+    },
+    {
+      "Id": "S138",
+      "Message": "This function \u0027RefreshMovie\u0027 has 134 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6918",
+      "Location": "Line 6918 Position 22-34"
+    },
+    {
+      "Id": "S138",
+      "Message": "This function \u0027RefreshShow\u0027 has 92 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7135",
+      "Location": "Line 7135 Position 22-33"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027SetMenus\u0027 has 154 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7719",
+      "Location": "Line 7719 Position 17-25"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027SettingsShow\u0027 has 81 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7917",
+      "Location": "Line 7917 Position 9-21"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027SetUp\u0027 has 331 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8046",
+      "Location": "Line 8046 Position 17-22"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027TVScraperEvent\u0027 has 88 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8752",
+      "Location": "Line 8752 Position 17-31"
+    }
+  ]
+}

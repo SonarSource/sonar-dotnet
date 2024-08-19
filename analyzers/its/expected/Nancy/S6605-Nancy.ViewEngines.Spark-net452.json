@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6605",
+      "Message": "Collection-specific \u0022Exists\u0022 method should be used instead of the \u0022Any\u0022 extension.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Spark/NancyViewFolder.cs#L135",
+      "Location": "Line 135 Position 60-63"
+    }
+  ]
+}

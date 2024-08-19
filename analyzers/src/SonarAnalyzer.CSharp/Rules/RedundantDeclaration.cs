@@ -1,22 +1,26 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class RedundantDeclaration : SonarDiagnosticAnalyzer
@@ -83,7 +87,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 return;
             }
 
-            if (!(context.Model.GetSymbolInfo(lambda).Symbol is IMethodSymbol symbol))
+            if (!(context.SemanticModel.GetSymbolInfo(lambda).Symbol is IMethodSymbol symbol))
             {
                 return;
             }
@@ -91,7 +95,7 @@ namespace SonarAnalyzer.CSharp.Rules
             var newParameterList = SyntaxFactory.ParameterList(SyntaxFactory.SeparatedList(lambda.ParameterList.Parameters.Select(p => SyntaxFactory.Parameter(p.Identifier))));
             var newLambda = lambda.WithParameterList(newParameterList);
 
-            newLambda = ChangeSyntaxElement(lambda, newLambda, context.Model, out var newSemanticModel);
+            newLambda = ChangeSyntaxElement(lambda, newLambda, context.SemanticModel, out var newSemanticModel);
 
             if (!(newSemanticModel.GetSymbolInfo(newLambda).Symbol is IMethodSymbol newSymbol) || ParameterTypesDoNotMatch(symbol, newSymbol))
             {
@@ -154,14 +158,14 @@ namespace SonarAnalyzer.CSharp.Rules
         private static void ReportRedundantNullableConstructorCall(SonarSyntaxNodeReportingContext context)
         {
             var objectCreation = ObjectCreationFactory.Create(context.Node);
-            if (!IsNullableCreation(objectCreation, context.Model))
+            if (!IsNullableCreation(objectCreation, context.SemanticModel))
             {
                 return;
             }
 
             if (IsInNotVarDeclaration(objectCreation.Expression)
                 || IsInAssignmentOrReturnValue(objectCreation.Expression)
-                || IsInArgumentAndCanBeChanged(objectCreation, context.Model))
+                || IsInArgumentAndCanBeChanged(objectCreation, context.SemanticModel))
             {
                 ReportIssueOnRedundantObjectCreation(context, objectCreation.Expression, "explicit nullable type creation", RedundancyType.ExplicitNullable);
             }
@@ -237,13 +241,13 @@ namespace SonarAnalyzer.CSharp.Rules
                 return;
             }
 
-            if (!(context.Model.GetTypeInfo(array.Type).Type is IArrayTypeSymbol arrayType))
+            if (!(context.SemanticModel.GetTypeInfo(array.Type).Type is IArrayTypeSymbol arrayType))
             {
                 return;
             }
 
             var canBeSimplified = array.Initializer.Expressions
-                .Select(exp => context.Model.GetTypeInfo(exp).Type)
+                .Select(exp => context.SemanticModel.GetTypeInfo(exp).Type)
                 .All(type => Equals(type, arrayType.ElementType));
 
             if (canBeSimplified)
@@ -280,16 +284,16 @@ namespace SonarAnalyzer.CSharp.Rules
                 return;
             }
 
-            if (!IsDelegateCreation(objectCreation, context.Model))
+            if (!IsDelegateCreation(objectCreation, context.SemanticModel))
             {
                 return;
             }
 
-            if (IsInDeclarationNotVarNotDelegate(objectCreation.Expression, context.Model)
-                || IsAssignmentNotDelegate(objectCreation.Expression, context.Model)
-                || IsReturnValueNotDelegate(objectCreation.Expression, context.Model)
-                || IsInArgumentAndCanBeChanged(objectCreation, context.Model,
-                    invocation => invocation.ArgumentList.Arguments.Any(a => IsDynamic(a, context.Model))))
+            if (IsInDeclarationNotVarNotDelegate(objectCreation.Expression, context.SemanticModel)
+                || IsAssignmentNotDelegate(objectCreation.Expression, context.SemanticModel)
+                || IsReturnValueNotDelegate(objectCreation.Expression, context.SemanticModel)
+                || IsInArgumentAndCanBeChanged(objectCreation, context.SemanticModel,
+                    invocation => invocation.ArgumentList.Arguments.Any(a => IsDynamic(a, context.SemanticModel))))
             {
                 ReportIssueOnRedundantObjectCreation(context, objectCreation.Expression, "explicit delegate creation", RedundancyType.ExplicitDelegate);
             }
@@ -360,7 +364,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 return;
             }
 
-            if (!(context.Model.GetSymbolInfo(anonymousMethod).Symbol is IMethodSymbol methodSymbol))
+            if (!(context.SemanticModel.GetSymbolInfo(anonymousMethod).Symbol is IMethodSymbol methodSymbol))
             {
                 return;
             }
@@ -370,7 +374,7 @@ namespace SonarAnalyzer.CSharp.Rules
             var usedParameters = anonymousMethod.Body.DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
                 .Where(id => parameterNames.Contains(id.Identifier.ValueText))
-                .Select(id => context.Model.GetSymbolInfo(id).Symbol as IParameterSymbol)
+                .Select(id => context.SemanticModel.GetSymbolInfo(id).Symbol as IParameterSymbol)
                 .WhereNotNull()
                 .ToHashSet();
 

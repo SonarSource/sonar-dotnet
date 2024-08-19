@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S6566",
+      "Message": "Prefer using \u0022DateTimeOffset\u0022 instead of \u0022DateTime\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L490",
+      "Location": "Line 490 Position 32-40"
+    },
+    {
+      "Id": "S6566",
+      "Message": "Prefer using \u0022DateTimeOffset\u0022 instead of \u0022DateTime\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L498",
+      "Location": "Line 498 Position 86-94"
+    }
+  ]
+}

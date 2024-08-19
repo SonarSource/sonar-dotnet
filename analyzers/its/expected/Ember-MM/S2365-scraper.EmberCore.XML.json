@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2365",
+      "Message": "Refactor \u0027Buffers\u0027 into a method, properties should not be based on arrays.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L72",
+      "Location": "Line 72 Position 29-36"
+    }
+  ]
+}

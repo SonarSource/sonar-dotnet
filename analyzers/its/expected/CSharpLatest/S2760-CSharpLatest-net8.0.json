@@ -1,0 +1,76 @@
+{
+  "Issues": [
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 13.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S1541.cs#L14",
+      "Location": "Line 14 Position 17-22"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 14.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S1541.cs#L15",
+      "Location": "Line 15 Position 17-22"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 15.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S1541.cs#L16",
+      "Location": "Line 16 Position 17-22"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 16.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S1541.cs#L17",
+      "Location": "Line 17 Position 17-22"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 17.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S1541.cs#L18",
+      "Location": "Line 18 Position 17-22"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 18.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S1541.cs#L19",
+      "Location": "Line 19 Position 17-22"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 19.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S1541.cs#L20",
+      "Location": "Line 20 Position 17-22"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 20.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S1541.cs#L21",
+      "Location": "Line 21 Position 17-22"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 21.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S1541.cs#L22",
+      "Location": "Line 22 Position 17-22"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 22.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S1541.cs#L23",
+      "Location": "Line 23 Position 17-22"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 23.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S1541.cs#L24",
+      "Location": "Line 24 Position 17-22"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 8.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S2760.cs#L9",
+      "Location": "Line 9 Position 13-22"
+    }
+  ]
+}

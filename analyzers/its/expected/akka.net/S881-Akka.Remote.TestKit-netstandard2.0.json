@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S881",
+      "Message": "Extract this increment operation into a dedicated statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L284",
+      "Location": "Line 284 Position 97-99"
+    }
+  ]
+}

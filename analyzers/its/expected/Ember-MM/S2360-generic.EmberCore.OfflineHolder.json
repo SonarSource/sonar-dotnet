@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L588",
+      "Location": "Line 588 Position 47-55"
+    }
+  ]
+}

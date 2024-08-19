@@ -1,0 +1,88 @@
+{
+  "Issues": [
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/AppDomainAssemblyCatalog.cs#L54",
+      "Location": "Line 54 Position 46-76"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L39",
+      "Location": "Line 39 Position 29-61"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/DynamicDictionaryValue.cs#L260",
+      "Location": "Line 260 Position 30-40"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L174",
+      "Location": "Line 174 Position 32-43"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 57 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L389",
+      "Location": "Line 389 Position 32-42"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L139",
+      "Location": "Line 139 Position 30-39"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L253",
+      "Location": "Line 253 Position 30-39"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L258",
+      "Location": "Line 258 Position 29-61"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 58 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L87",
+      "Location": "Line 87 Position 23-27"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/NancyEngine.cs#L221",
+      "Location": "Line 221 Position 22-44"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 76 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/RequestHeaders.cs#L298",
+      "Location": "Line 298 Position 53-70"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3282",
+      "Location": "Line 3282 Position 22-42"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 50 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3453",
+      "Location": "Line 3453 Position 22-40"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 39 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3584",
+      "Location": "Line 3584 Position 24-39"
+    }
+  ]
+}

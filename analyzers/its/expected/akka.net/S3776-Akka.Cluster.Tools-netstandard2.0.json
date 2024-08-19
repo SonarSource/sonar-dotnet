@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClient.cs#L276",
+      "Location": "Line 276 Position 22-34"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClient.cs#L355",
+      "Location": "Line 355 Position 25-31"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 34 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterReceptionist.cs#L436",
+      "Location": "Line 436 Position 33-40"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this constructor to reduce its Cognitive Complexity from 96 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L150",
+      "Location": "Line 150 Position 16-41"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L503",
+      "Location": "Line 503 Position 22-36"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 270 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L875",
+      "Location": "Line 875 Position 22-35"
+    },
+    {
+      "Id": "S3776",
+      "Message": "Refactor this constructor to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonProxy.cs#L95",
+      "Location": "Line 95 Position 16-37"
+    }
+  ]
+}

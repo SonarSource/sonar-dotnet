@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1185",
+      "Message": "Remove this property \u0027MyProperty1\u0027 to simply inherit its behavior.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S1185.cs#L12",
+      "Location": "Line 12 Position 9-103"
+    }
+  ]
+}

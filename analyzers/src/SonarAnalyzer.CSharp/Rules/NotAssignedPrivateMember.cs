@@ -1,22 +1,26 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using MemberUsage = SonarAnalyzer.Core.Common.NodeSymbolAndModel<Microsoft.CodeAnalysis.CSharp.Syntax.SimpleNameSyntax, Microsoft.CodeAnalysis.ISymbol>;
+using MemberUsage = SonarAnalyzer.Common.NodeSymbolAndModel<Microsoft.CodeAnalysis.CSharp.Syntax.SimpleNameSyntax, Microsoft.CodeAnalysis.ISymbol>;
 
-namespace SonarAnalyzer.CSharp.Rules;
+namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class NotAssignedPrivateMember : SonarDiagnosticAnalyzer
@@ -130,14 +134,14 @@ public sealed class NotAssignedPrivateMember : SonarDiagnosticAnalyzer
                 .Where(node => node.IsKind(SyntaxKind.IdentifierName))
                 .Cast<IdentifierNameSyntax>()
                 .Where(x => symbolNames.Contains(x.Identifier.ValueText))
-                .Select(x => new MemberUsage(x, container.Model.GetSymbolInfo(x).Symbol, container.Model)));
+                .Select(x => new MemberUsage(container.Model, x, container.Model.GetSymbolInfo(x).Symbol)));
 
         var generic = removableDeclarationCollector.TypeDeclarations
             .SelectMany(container => container.Node.DescendantNodes()
                 .Where(node => node.IsKind(SyntaxKind.GenericName))
                 .Cast<GenericNameSyntax>()
                 .Where(x => symbolNames.Contains(x.Identifier.ValueText))
-                .Select(x => new MemberUsage(x, container.Model.GetSymbolInfo(x).Symbol, container.Model)));
+                .Select(x => new MemberUsage(container.Model, x, container.Model.GetSymbolInfo(x).Symbol)));
 
         return identifiers.Concat(generic)
             .Where(x => x.Symbol is IFieldSymbol or IPropertySymbol)

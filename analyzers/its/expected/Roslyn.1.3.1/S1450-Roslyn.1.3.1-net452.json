@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027field\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Roslyn.1.3.1/OldRoslyn.cs#L10",
+      "Location": "Line 10 Position 24-29"
+    }
+  ]
+}

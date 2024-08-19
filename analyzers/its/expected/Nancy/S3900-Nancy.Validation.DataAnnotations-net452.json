@@ -1,0 +1,100 @@
+{
+  "Issues": [
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027factory\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Validation.DataAnnotations/DataAnnotationsValidator.cs#L26",
+      "Location": "Line 26 Position 31-38"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027result\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Validation.DataAnnotations/DataAnnotationsValidatorAdapter.cs#L106",
+      "Location": "Line 106 Position 45-51"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027attribute\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Validation.DataAnnotations/DataAnnotationsValidatorAdapter.cs#L48",
+      "Location": "Line 48 Position 60-69"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027attribute\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Validation.DataAnnotations/DataAnnotationsValidatorAdapter.cs#L89",
+      "Location": "Line 89 Position 17-26"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027attribute\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Validation.DataAnnotations/RangeValidatorAdapter.cs#L43",
+      "Location": "Line 43 Position 55-64"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027descriptor\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Validation.DataAnnotations/RangeValidatorAdapter.cs#L44",
+      "Location": "Line 44 Position 25-35"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027attribute\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Validation.DataAnnotations/RangeValidatorAdapter.cs#L48",
+      "Location": "Line 48 Position 55-64"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027attribute\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Validation.DataAnnotations/RegexValidatorAdapter.cs#L40",
+      "Location": "Line 40 Position 50-59"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027descriptor\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Validation.DataAnnotations/RegexValidatorAdapter.cs#L41",
+      "Location": "Line 41 Position 25-35"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027attribute\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Validation.DataAnnotations/RegexValidatorAdapter.cs#L42",
+      "Location": "Line 42 Position 46-55"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027attribute\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Validation.DataAnnotations/RequiredValidatorAdapter.cs#L42",
+      "Location": "Line 42 Position 52-61"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027descriptor\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Validation.DataAnnotations/RequiredValidatorAdapter.cs#L42",
+      "Location": "Line 42 Position 90-100"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027attribute\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Validation.DataAnnotations/RequiredValidatorAdapter.cs#L46",
+      "Location": "Line 46 Position 57-66"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027attribute\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Validation.DataAnnotations/StringLengthValidatorAdapter.cs#L40",
+      "Location": "Line 40 Position 57-66"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027descriptor\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Validation.DataAnnotations/StringLengthValidatorAdapter.cs#L41",
+      "Location": "Line 41 Position 25-35"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027attribute\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Validation.DataAnnotations/StringLengthValidatorAdapter.cs#L42",
+      "Location": "Line 42 Position 41-50"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "Issues": [
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/frmBoxee.vb#L22",
+      "Location": "Line 22 Position 1-1"
+    },
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/frmMediaBrowser.vb#L46",
+      "Location": "Line 46 Position 1-1"
+    },
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/frmYAMJ.vb#L41",
+      "Location": "Line 41 Position 1-1"
+    },
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericBoxee.vb#L8",
+      "Location": "Line 8 Position 1-1"
+    },
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L11",
+      "Location": "Line 11 Position 1-1"
+    },
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L8",
+      "Location": "Line 8 Position 1-1"
+    }
+  ]
+}

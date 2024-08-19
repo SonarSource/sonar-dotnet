@@ -1,22 +1,26 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using static Roslyn.Utilities.SonarAnalyzer.Shared.LoggingFrameworkMethods;
 
-namespace SonarAnalyzer.CSharp.Rules;
+namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAnalyzer
@@ -43,7 +47,7 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
             {
                 var invocation = (InvocationExpressionSyntax)c.Node;
                 if (!LoggingMethodNames.Contains(invocation.GetName())
-                    || c.Model.GetSymbolInfo(invocation).Symbol is not IMethodSymbol invocationSymbol)
+                    || c.SemanticModel.GetSymbolInfo(invocation).Symbol is not IMethodSymbol invocationSymbol)
                 {
                     return;
                 }
@@ -77,7 +81,7 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
 
         var paramsIndex = invocationSymbol.Parameters.IndexOf(paramsParameter);
         var invalidArguments = invocation.ArgumentList.Arguments
-            .Where(x => x.GetArgumentIndex() >= paramsIndex && IsInvalidArgument(x, c.Model, knownTypes))
+            .Where(x => x.GetArgumentIndex() >= paramsIndex && IsInvalidArgument(x, c.SemanticModel, knownTypes))
             .ToSecondaryLocations()
             .ToArray();
         if (invalidArguments.Length > 0)
@@ -92,7 +96,7 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
         {
             var typeParameterNames = methodSymbol.TypeParameters.Select(x => x.MetadataName).ToArray();
             var positions = methodSymbol.ConstructedFrom.Parameters.Where(x => typeParameterNames.Contains(x.Type.MetadataName)).Select(x => methodSymbol.ConstructedFrom.Parameters.IndexOf(x));
-            var invalidArguments = InvalidArguments(invocation, c.Model, positions, knownTypes).ToSecondaryLocations();
+            var invalidArguments = InvalidArguments(invocation, c.SemanticModel, positions, knownTypes).ToSecondaryLocations();
             c.ReportIssue(Rule, invocation.Expression, invalidArguments);
         }
     }

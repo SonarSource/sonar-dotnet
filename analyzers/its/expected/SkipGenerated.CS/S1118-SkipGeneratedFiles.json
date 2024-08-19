@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027protected\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/GeneratedCode.CS/generated_region_2.cs#L5",
+      "Location": "Line 5 Position 11-19"
+    },
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027protected\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/GeneratedCode.CS/generated_region.cs#L5",
+      "Location": "Line 5 Position 11-19"
+    }
+  ]
+}

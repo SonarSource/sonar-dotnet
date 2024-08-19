@@ -1,0 +1,52 @@
+{
+  "Issues": [
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_currentMessages\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L38",
+      "Location": "Line 38 Position 43-46"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_currentMessages\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L126",
+      "Location": "Line 126 Position 43-46"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_currentMessages\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L160",
+      "Location": "Line 160 Position 43-46"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_currentMessages\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L26",
+      "Location": "Line 26 Position 43-46"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_currentMessages\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L71",
+      "Location": "Line 71 Position 43-46"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027nameCounter\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/Internal/ChildrenContainerSpec.cs#L28",
+      "Location": "Line 28 Position 33-36"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_messagesSeen\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Dispatch/DispatcherThroughputSpecBase.cs#L35",
+      "Location": "Line 35 Position 36-40"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027i\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/IO/TcpInboundOnlySpec.cs#L40",
+      "Location": "Line 40 Position 27-30"
+    }
+  ]
+}

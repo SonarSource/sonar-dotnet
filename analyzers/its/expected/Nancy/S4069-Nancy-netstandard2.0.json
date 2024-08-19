@@ -1,0 +1,52 @@
+{
+  "Issues": [
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Add\u0027 for the operator \u0027\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/AfterPipeline.cs#L65",
+      "Location": "Line 65 Position 46-47"
+    },
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Add\u0027 for the operator \u0027\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/AfterPipeline.cs#L79",
+      "Location": "Line 79 Position 46-47"
+    },
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Add\u0027 for the operator \u0027\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/AfterPipeline.cs#L93",
+      "Location": "Line 93 Position 46-47"
+    },
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Add\u0027 for the operator \u0027\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/BeforePipeline.cs#L68",
+      "Location": "Line 68 Position 47-48"
+    },
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Add\u0027 for the operator \u0027\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/BeforePipeline.cs#L83",
+      "Location": "Line 83 Position 47-48"
+    },
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Add\u0027 for the operator \u0027\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/BeforePipeline.cs#L98",
+      "Location": "Line 98 Position 47-48"
+    },
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Add\u0027 for the operator \u0027\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ErrorPipeline.cs#L71",
+      "Location": "Line 71 Position 46-47"
+    },
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Add\u0027 for the operator \u0027\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ErrorPipeline.cs#L86",
+      "Location": "Line 86 Position 46-47"
+    }
+  ]
+}

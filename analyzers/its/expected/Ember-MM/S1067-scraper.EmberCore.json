@@ -1,0 +1,70 @@
+{
+  "Issues": [
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L817-L819",
+      "Location": "Lines 817-819 Position 9-57"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (12) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L825-L828",
+      "Location": "Lines 825-828 Position 9-180"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L147-L148",
+      "Location": "Lines 147-148 Position 20-97"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L230",
+      "Location": "Line 230 Position 40-247"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (8) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L673-L675",
+      "Location": "Lines 673-675 Position 28-125"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1125",
+      "Location": "Line 1125 Position 88-430"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1135",
+      "Location": "Line 1135 Position 99-490"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1193-L1195",
+      "Location": "Lines 1193-1195 Position 32-172"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L338-L340",
+      "Location": "Lines 338-340 Position 44-178"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L343",
+      "Location": "Line 343 Position 95-388"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L230",
+      "Location": "Line 230 Position 28-267"
+    }
+  ]
+}

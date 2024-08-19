@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S6605",
+      "Message": "Collection-specific \u0022Exists\u0022 method should be used instead of the \u0022Any\u0022 extension.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L197",
+      "Location": "Line 197 Position 85-88"
+    },
+    {
+      "Id": "S6605",
+      "Message": "Collection-specific \u0022Exists\u0022 method should be used instead of the \u0022Any\u0022 extension.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L217",
+      "Location": "Line 217 Position 120-123"
+    }
+  ]
+}

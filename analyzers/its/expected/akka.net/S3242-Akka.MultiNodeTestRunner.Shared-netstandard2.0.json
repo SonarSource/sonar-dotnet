@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IDictionary\u003Cint, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult\u003E\u0027 instead of \u0027System.Collections.Generic.Dictionary\u003Cint, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/TrxSinkActor.cs#L126",
+      "Location": "Line 126 Position 96-107"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IDictionary\u003Cint, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult\u003E\u0027 instead of \u0027System.Collections.Generic.Dictionary\u003Cint, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/TrxSinkActor.cs#L146",
+      "Location": "Line 146 Position 96-107"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IDictionary\u003Cint, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult\u003E\u0027 instead of \u0027System.Collections.Generic.Dictionary\u003Cint, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/TrxSinkActor.cs#L161",
+      "Location": "Line 161 Position 45-56"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IDictionary\u003Cint, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult\u003E\u0027 instead of \u0027System.Collections.Generic.Dictionary\u003Cint, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/TrxSinkActor.cs#L182",
+      "Location": "Line 182 Position 101-112"
+    }
+  ]
+}

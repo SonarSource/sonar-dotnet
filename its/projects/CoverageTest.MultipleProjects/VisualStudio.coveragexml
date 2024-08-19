@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<results>
+  <modules>
+    <module name="secondprojecttests.dll" path="secondprojecttests.dll" id="2822EF0330B72445861F06316483241601000000" block_coverage="100.00" line_coverage="100.00" blocks_covered="12" blocks_not_covered="0" lines_covered="12" lines_partially_covered="0" lines_not_covered="0">
+      <functions>
+        <function id="8284" token="0x6000003" name="Ten()" namespace="SecondProjectTests" type_name="FirstClassTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="4" blocks_not_covered="0" lines_covered="4" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="11" start_column="9" end_line="11" end_column="10" />
+            <range source_id="0" covered="yes" start_line="12" start_column="13" end_line="12" end_column="46" />
+            <range source_id="0" covered="yes" start_line="13" start_column="13" end_line="13" end_column="68" />
+            <range source_id="0" covered="yes" start_line="14" start_column="9" end_line="14" end_column="10" />
+          </ranges>
+        </function>
+        <function id="8324" token="0x6000004" name="Twenty()" namespace="SecondProjectTests" type_name="FirstClassTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="4" blocks_not_covered="0" lines_covered="4" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="18" start_column="9" end_line="18" end_column="10" />
+            <range source_id="0" covered="yes" start_line="19" start_column="13" end_line="19" end_column="46" />
+            <range source_id="0" covered="yes" start_line="20" start_column="13" end_line="20" end_column="71" />
+            <range source_id="0" covered="yes" start_line="21" start_column="9" end_line="21" end_column="10" />
+          </ranges>
+        </function>
+        <function id="8364" token="0x6000005" name="IfTrue()" namespace="SecondProjectTests" type_name="FirstClassTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="4" blocks_not_covered="0" lines_covered="4" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="25" start_column="9" end_line="25" end_column="10" />
+            <range source_id="0" covered="yes" start_line="26" start_column="13" end_line="26" end_column="46" />
+            <range source_id="0" covered="yes" start_line="27" start_column="13" end_line="27" end_column="60" />
+            <range source_id="0" covered="yes" start_line="28" start_column="9" end_line="28" end_column="10" />
+          </ranges>
+        </function>
+      </functions>
+      <source_files>
+        <source_file id="0" path="SecondProjectTests\FirstClassTests.cs" checksum_type="unknown">
+        </source_file>
+      </source_files>
+    </module>
+    <module name="secondproject.dll" path="secondproject.dll" id="3CC6017CD6CB6A4B97AAE904B9510EF101000000" block_coverage="71.43" line_coverage="75.00" blocks_covered="10" blocks_not_covered="4" lines_covered="36" lines_partially_covered="0" lines_not_covered="12">
+      <functions>
+        <function id="8272" token="0x6000001" name="SwitchExpression(int)" namespace="SecondProject" type_name="FirstClass" block_coverage="75.00" line_coverage="75.61" blocks_covered="6" blocks_not_covered="2" lines_covered="31" lines_partially_covered="0" lines_not_covered="10">
+          <ranges>
+            <range source_id="0" covered="partial" start_line="7" start_column="13" end_line="12" end_column="14" />
+          </ranges>
+        </function>
+        <function id="8324" token="0x6000002" name="IfElse(bool)" namespace="SecondProject" type_name="FirstClass" block_coverage="66.67" line_coverage="71.43" blocks_covered="4" blocks_not_covered="2" lines_covered="5" lines_partially_covered="0" lines_not_covered="2">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="15" start_column="9" end_line="15" end_column="10" />
+            <range source_id="0" covered="yes" start_line="16" start_column="13" end_line="16" end_column="27" />
+            <range source_id="0" covered="yes" start_line="17" start_column="13" end_line="17" end_column="14" />
+            <range source_id="0" covered="yes" start_line="18" start_column="17" end_line="18" end_column="45" />
+            <range source_id="0" covered="no" start_line="21" start_column="13" end_line="21" end_column="14" />
+            <range source_id="0" covered="no" start_line="22" start_column="17" end_line="22" end_column="45" />
+            <range source_id="0" covered="yes" start_line="24" start_column="9" end_line="24" end_column="10" />
+          </ranges>
+        </function>
+      </functions>
+      <source_files>
+        <source_file id="0" path="SecondProject\FirstClass.cs" checksum_type="unknown">
+        </source_file>
+      </source_files>
+    </module>
+    <module name="firstprojecttests.dll" path="firstprojecttests.dll" id="420571ECC758EB4CA3D06A6E3B5A915201000000" block_coverage="100.00" line_coverage="100.00" blocks_covered="10" blocks_not_covered="0" lines_covered="9" lines_partially_covered="0" lines_not_covered="0">
+      <functions>
+        <function id="8284" token="0x6000003" name="CallMethods()" namespace="FirstProjectTests" type_name="FirstProjectTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="6" blocks_not_covered="0" lines_covered="5" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="12" start_column="9" end_line="12" end_column="10" />
+            <range source_id="0" covered="yes" start_line="13" start_column="13" end_line="13" end_column="54" />
+            <range source_id="0" covered="yes" start_line="14" start_column="13" end_line="14" end_column="57" />
+            <range source_id="0" covered="yes" start_line="15" start_column="13" end_line="15" end_column="62" />
+            <range source_id="0" covered="yes" start_line="16" start_column="9" end_line="16" end_column="10" />
+          </ranges>
+        </function>
+        <function id="8332" token="0x6000004" name="CallFirstClassViaSecondClass()" namespace="FirstProjectTests" type_name="FirstProjectTests" block_coverage="100.00" line_coverage="100.00" blocks_covered="4" blocks_not_covered="0" lines_covered="4" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="20" start_column="9" end_line="20" end_column="10" />
+            <range source_id="0" covered="yes" start_line="21" start_column="13" end_line="21" end_column="57" />
+            <range source_id="0" covered="yes" start_line="22" start_column="13" end_line="22" end_column="58" />
+            <range source_id="0" covered="yes" start_line="23" start_column="9" end_line="23" end_column="10" />
+          </ranges>
+        </function>
+      </functions>
+      <source_files>
+        <source_file id="0" path="FirstProjectTests\FirstProjectTests.cs" checksum_type="unknown">
+        </source_file>
+      </source_files>
+    </module>
+    <module name="firstproject.dll" path="firstproject.dll" id="FFAEC66C8C0FA94C8C2159DB96A0B71801000000" block_coverage="74.07" line_coverage="71.43" blocks_covered="20" blocks_not_covered="7" lines_covered="15" lines_partially_covered="1" lines_not_covered="5">
+      <functions>
+        <function id="8272" token="0x6000001" name="get_CoveredGet()" namespace="FirstProject" type_name="FirstClass" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="8" start_column="33" end_line="8" end_column="37" />
+          </ranges>
+        </function>
+        <function id="8280" token="0x6000002" name="set_CoveredGet(int)" namespace="FirstProject" type_name="FirstClass" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="1" covered="no" start_line="8" start_column="38" end_line="8" end_column="42" />
+          </ranges>
+        </function>
+        <function id="8289" token="0x6000003" name="get_UncoveredProperty()" namespace="FirstProject" type_name="FirstClass" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="1" covered="no" start_line="8" start_column="76" end_line="8" end_column="80" />
+          </ranges>
+        </function>
+        <function id="8297" token="0x6000004" name="set_UncoveredProperty(int)" namespace="FirstProject" type_name="FirstClass" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="1" covered="no" start_line="8" start_column="81" end_line="8" end_column="85" />
+          </ranges>
+        </function>
+        <function id="8306" token="0x6000005" name="get_CoveredSet()" namespace="FirstProject" type_name="FirstClass" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="1" covered="no" start_line="8" start_column="112" end_line="8" end_column="116" />
+          </ranges>
+        </function>
+        <function id="8314" token="0x6000006" name="set_CoveredSet(int)" namespace="FirstProject" type_name="FirstClass" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="8" start_column="117" end_line="8" end_column="121" />
+          </ranges>
+        </function>
+        <function id="8323" token="0x6000007" name="get_AnotherCoveredGet()" namespace="FirstProject" type_name="FirstClass" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="10" start_column="40" end_line="10" end_column="44" />
+          </ranges>
+        </function>
+        <function id="8331" token="0x6000008" name="set_AnotherCoveredGet(int)" namespace="FirstProject" type_name="FirstClass" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="1" covered="no" start_line="10" start_column="45" end_line="10" end_column="49" />
+          </ranges>
+        </function>
+        <function id="8340" token="0x6000009" name="get_CoveredProperty()" namespace="FirstProject" type_name="FirstClass" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="12" start_column="38" end_line="12" end_column="42" />
+          </ranges>
+        </function>
+        <function id="8348" token="0x600000a" name="set_CoveredProperty(int)" namespace="FirstProject" type_name="FirstClass" block_coverage="100.00" line_coverage="100.00" blocks_covered="1" blocks_not_covered="0" lines_covered="1" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="12" start_column="43" end_line="12" end_column="47" />
+          </ranges>
+        </function>
+        <function id="8357" token="0x600000b" name="ArrowMethod(bool)" namespace="FirstProject" type_name="FirstClass" block_coverage="60.00" line_coverage="0.00" blocks_covered="3" blocks_not_covered="2" lines_covered="0" lines_partially_covered="1" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="partial" start_line="14" start_column="51" end_line="14" end_column="100" />
+          </ranges>
+        </function>
+        <function id="8376" token="0x600000c" name="BodyMethod()" namespace="FirstProject" type_name="FirstClass" block_coverage="100.00" line_coverage="100.00" blocks_covered="7" blocks_not_covered="0" lines_covered="6" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="1" covered="yes" start_line="17" start_column="9" end_line="17" end_column="10" />
+            <range source_id="1" covered="yes" start_line="18" start_column="13" end_line="18" end_column="37" />
+            <range source_id="1" covered="yes" start_line="18" start_column="38" end_line="18" end_column="58" />
+            <range source_id="1" covered="yes" start_line="18" start_column="59" end_line="18" end_column="70" />
+            <range source_id="1" covered="yes" start_line="22" start_column="13" end_line="22" end_column="19" />
+            <range source_id="1" covered="yes" start_line="23" start_column="13" end_line="23" end_column="28" />
+            <range source_id="1" covered="yes" start_line="25" start_column="13" end_line="25" end_column="31" />
+            <range source_id="1" covered="yes" start_line="26" start_column="9" end_line="26" end_column="10" />
+          </ranges>
+        </function>
+        <function id="8435" token="0x600000e" name="CallFirstClass(FirstProject.FirstClass)" namespace="FirstProject" type_name="SecondClass" block_coverage="100.00" line_coverage="100.00" blocks_covered="5" blocks_not_covered="0" lines_covered="4" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="8" start_column="9" end_line="8" end_column="10" />
+            <range source_id="0" covered="yes" start_line="9" start_column="13" end_line="9" end_column="47" />
+            <range source_id="0" covered="yes" start_line="10" start_column="13" end_line="10" end_column="52" />
+            <range source_id="0" covered="yes" start_line="11" start_column="9" end_line="11" end_column="10" />
+          </ranges>
+        </function>
+      </functions>
+      <source_files>
+        <source_file id="0" path="FirstProject\SecondClass.cs">
+        </source_file>
+        <source_file id="1" path="FirstProject\FirstClass.cs">
+        </source_file>
+      </source_files>
+    </module>
+  </modules>
+</results>

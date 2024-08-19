@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4830",
+      "Message": "Enable server certificate validation on this SSL/TLS connection",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S4830.vb#L10",
+      "Location": "Line 10 Position 40-75"
+    }
+  ]
+}

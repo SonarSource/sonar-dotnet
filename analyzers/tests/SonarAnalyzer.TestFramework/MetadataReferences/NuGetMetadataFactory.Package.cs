@@ -1,20 +1,25 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using System.Globalization;
+using System.IO;
 using NuGet.Common;
 using NuGet.Packaging;
 using NuGet.Protocol;
@@ -38,7 +43,7 @@ internal static partial class NuGetMetadataFactory
         {
             Id = id;
             this.runtime = runtime;
-            this.version = version == TestConstants.NuGetLatestVersion
+            this.version = version == Constants.NuGetLatestVersion
                 ? GetLatestVersion().Result
                 : version;
         }
@@ -89,8 +94,8 @@ internal static partial class NuGetMetadataFactory
             var (nextCheck, latest) = File.Exists(path)
                 && File.ReadAllText(path).Split(';') is var values
                 && DateTime.TryParseExact(values[0], "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var nextCheckValue)
-                    ? Pair.From(nextCheckValue, values[1])
-                    : new(DateTime.MinValue, null);
+                    ? (nextCheckValue, values[1])
+                    : (DateTime.MinValue, null);
             LogMessage($"Next check for latest NuGets: {nextCheck}");
             if (nextCheck < DateTime.Now)
             {

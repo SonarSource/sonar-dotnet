@@ -1,17 +1,21 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using System.Text;
@@ -51,7 +55,7 @@ public class DotWriter
     public void WriteSubGraphEnd() =>
         builder.AppendLine("}");
 
-    public void WriteRecordNode(string id, string header, params string[] items)
+    public void WriteNode(string id, string header, params string[] items)
     {
         // Curly braces in the label reverse the orientation of the columns/rows
         // Columns/rows are created with pipe
@@ -63,16 +67,6 @@ public class DotWriter
             builder.Append("|").Append(Encode(item));
         }
         builder.AppendLine("}\"]");
-    }
-
-    public void WriteNode(string id, string[] attributes)
-    {
-        builder.Append(id);
-        if (attributes.Length > 0)
-        {
-            builder.Append(" [").Append(string.Join(" ", attributes)).Append("]");
-        }
-        builder.AppendLine();
     }
 
     public void WriteEdge(string startId, string endId, string label)

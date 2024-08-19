@@ -47,11 +47,11 @@ public class Program
 
         logger.LogInformation("Arg: {First} {Second}", second, first);
         //                           ^^^^^ {{Template placeholders should be in the right order: placeholder 'First' does not match with argument 'second'.}}
-        //                                             ^^^^^^ Secondary @-1 {{The argument should be 'first' to match placeholder 'First'.}}
+        //                                             ^^^^^^ Secondary @-1
 
         logger.LogInformation("Arg: {First} {Third} {Second}", first, second, third);
         //                                   ^^^^^ {{Template placeholders should be in the right order: placeholder 'Third' does not match with argument 'second'.}}
-        //                                                            ^^^^^^ Secondary @-1 {{The argument should be 'third' to match placeholder 'Third'.}}
+        //                                                            ^^^^^^ Secondary @-1
 
         logger.LogInformation("Arg: {First} {First}", first, second);   // Compliant - S6677 should raise for duplicate placeholder names, but not this rule
         logger.LogInformation(@"
@@ -94,15 +94,15 @@ public class Program
     {
         logger.LogInformation("Person: {FirstName} {Age}", person.FirstName, person.Age);       // Compliant
         logger.LogInformation("Person: {Age} {FirstName}", person.FirstName, person.Age);       // Noncompliant
-                                                                                                // Secondary @-1 {{The argument should be 'person.Age' to match placeholder 'Age'.}}
+                                                                                                // Secondary @-1
 
         logger.LogInformation("Person: {FirstName} {Age}", _person.FirstName, _person.Age);     // Compliant
         logger.LogInformation("Person: {Age} {FirstName}", _person.FirstName, _person.Age);     // Noncompliant
-                                                                                                // Secondary @-1  {{The argument should be '_person.Age' to match placeholder 'Age'.}}
+                                                                                                // Secondary @-1
 
         logger.LogInformation("Person: {FirstName} {Age}", Person.FirstName, Person.Age);       // Compliant
         logger.LogInformation("Person: {Age} {FirstName}", Person.FirstName, Person.Age);       // Noncompliant
-                                                                                                // Secondary @-1  {{The argument should be 'Person.Age' to match placeholder 'Age'.}}
+                                                                                                // Secondary @-1
 
         logger.LogInformation("Father: {Father}, Mother: {Mother}", person.Father.LastName, person.Mother.LastName);    // Compliant
         logger.LogInformation("Father: {Father}, Mother: {Mother}", person.Mother.LastName, person.Father.LastName);    // FN

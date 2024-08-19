@@ -1,21 +1,26 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.CFG.Helpers;
 
 namespace SonarAnalyzer.CFG.Sonar
 {
@@ -570,7 +575,7 @@ namespace SonarAnalyzer.CFG.Sonar
             // If there is a catch with no Exception filter or equivalent we don't want to
             // join the tryStatement start/end blocks with the exit block because all
             // exceptions will be caught before going to finally
-            var areAllExceptionsCaught = tryStatement.Catches.Any(IsCatchingAllExceptions);
+            var areAllExceptionsCaught = tryStatement.Catches.Any(CSharpSyntaxHelper.IsCatchingAllExceptions);
 
             // try end
             var tryEndStatementConnections = catchBlocks.ToList();
@@ -618,19 +623,6 @@ namespace SonarAnalyzer.CFG.Sonar
             }
 
             return beforeTryBlock;
-        }
-
-        private static bool IsCatchingAllExceptions(CatchClauseSyntax catchClause)
-        {
-            if (catchClause.Declaration == null)
-            {
-                return true;
-            }
-
-            var exceptionTypeName = catchClause.Declaration.Type.GetText().ToString().Trim();
-
-            return catchClause.Filter == null &&
-                (exceptionTypeName == "Exception" || exceptionTypeName == "System.Exception");
         }
 
         private Block BuildGotoDefaultStatement(GotoStatementSyntax statement, Block currentBlock)
@@ -1132,7 +1124,8 @@ namespace SonarAnalyzer.CFG.Sonar
             ExpressionSyntax child, IEnumerable<ArgumentSyntax> arguments)
         {
             currentBlock.ReversedInstructions.Add(parent);
-            var isNameof = parent is InvocationExpressionSyntax invocation && IsNameof(invocation);
+            var isNameof = parent is InvocationExpressionSyntax invocation
+                && invocation.IsNameof(this.semanticModel);
 
             // The nameof arguments are not evaluated at runtime and should not be added
             // to the block as instructions
@@ -1206,7 +1199,8 @@ namespace SonarAnalyzer.CFG.Sonar
 
             // The nameof arguments are not evaluated at runtime and should not be added
             // to the block as instructions
-            var isNameof = parent is InvocationExpressionSyntax invocation && IsNameof(invocation);
+            var isNameof = parent is InvocationExpressionSyntax invocation
+                && invocation.IsNameof(this.semanticModel);
 
             return children == null || isNameof
                 ? currentBlock
@@ -1391,9 +1385,5 @@ namespace SonarAnalyzer.CFG.Sonar
         #endregion Condition
 
         #endregion Build*
-
-        private bool IsNameof(InvocationExpressionSyntax expression) =>
-            (expression?.Expression as IdentifierNameSyntax)?.Identifier.ToString() == "nameof"
-            && semanticModel.GetSymbolOrCandidateSymbol(expression) is not IMethodSymbol;
     }
 }

@@ -1,0 +1,166 @@
+{
+  "Issues": [
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027destPath\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1341",
+      "Location": "Line 1341 Position 13-21"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027resizePoster\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1342",
+      "Location": "Line 1342 Position 13-25"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027srcPath\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1343",
+      "Location": "Line 1343 Position 13-20"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027dtMovieMedia\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L65",
+      "Location": "Line 65 Position 19-31"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027dtEpisodesPaths\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L66",
+      "Location": "Line 66 Position 19-34"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027dtEpisodes\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L67",
+      "Location": "Line 67 Position 19-29"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027dtSeasons\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L68",
+      "Location": "Line 68 Position 19-28"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027dtShows\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L69",
+      "Location": "Line 69 Position 19-26"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027name\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L214",
+      "Location": "Line 214 Position 20-24"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027type\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L215",
+      "Location": "Line 215 Position 20-24"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027value\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L216",
+      "Location": "Line 216 Position 20-25"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027access\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L217",
+      "Location": "Line 217 Position 20-26"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027description\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L218",
+      "Location": "Line 218 Position 20-31"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027label\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L221",
+      "Location": "Line 221 Position 20-25"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027name\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L222",
+      "Location": "Line 222 Position 20-24"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027description\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L223",
+      "Location": "Line 223 Position 20-31"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027group\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L224",
+      "Location": "Line 224 Position 20-25"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027type\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L225",
+      "Location": "Line 225 Position 20-24"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027value\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L226",
+      "Location": "Line 226 Position 20-25"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027values\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L229",
+      "Location": "Line 229 Position 20-26"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027value\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L233",
+      "Location": "Line 233 Position 20-25"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027label\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L235",
+      "Location": "Line 235 Position 20-25"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027_type\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L239",
+      "Location": "Line 239 Position 20-25"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027execute\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L245",
+      "Location": "Line 245 Position 20-27"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027params\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L246",
+      "Location": "Line 246 Position 20-26"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027prefix\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L247",
+      "Location": "Line 247 Position 20-26"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027sufix\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L248",
+      "Location": "Line 248 Position 20-25"
+    }
+  ]
+}

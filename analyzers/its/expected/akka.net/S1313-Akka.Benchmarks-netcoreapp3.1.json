@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1313",
+      "Message": "Make sure using this hardcoded IP address \u002710.62.0.101\u0027 is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/Actor/AddressBenchmarks.cs#L23",
+      "Location": "Line 23 Position 56-69"
+    },
+    {
+      "Id": "S1313",
+      "Message": "Make sure using this hardcoded IP address \u002710.62.0.101\u0027 is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/Actor/AddressBenchmarks.cs#L24",
+      "Location": "Line 24 Position 56-69"
+    }
+  ]
+}

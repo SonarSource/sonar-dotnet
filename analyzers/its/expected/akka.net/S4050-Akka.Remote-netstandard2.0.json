@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4050",
+      "Message": "Provide an implementation for: \u0027operator==\u0027 and \u0027operator!=\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Deadline.cs#L15",
+      "Location": "Line 15 Position 18-26"
+    }
+  ]
+}

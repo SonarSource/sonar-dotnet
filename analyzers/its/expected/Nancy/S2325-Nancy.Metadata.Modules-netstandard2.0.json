@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027ConfigureMetadataModuleConventions\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Metadata.Modules/DefaultMetadataModuleConventions.cs#L42",
+      "Location": "Line 42 Position 96-130"
+    }
+  ]
+}

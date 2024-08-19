@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3776",
+      "Message": "Refactor this method to reduce its Cognitive Complexity from 33 to the 15 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L397",
+      "Location": "Line 397 Position 33-42"
+    }
+  ]
+}

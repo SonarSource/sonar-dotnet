@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027default\u0027 clause to this \u0027switch\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/ReplayFilter.cs#L158",
+      "Location": "Line 158 Position 29-35"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027default\u0027 clause to this \u0027switch\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/ReplayFilter.cs#L186",
+      "Location": "Line 186 Position 25-31"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027default\u0027 clause to this \u0027switch\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/ReplayFilter.cs#L222",
+      "Location": "Line 222 Position 33-39"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027default\u0027 clause to this \u0027switch\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/ReplayFilter.cs#L275",
+      "Location": "Line 275 Position 13-19"
+    }
+  ]
+}

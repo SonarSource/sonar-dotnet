@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused internal class \u0027MyPayload2Serializer\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L183",
+      "Location": "Line 183 Position 22-42"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused internal class \u0027MyWriteAdapter\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L219",
+      "Location": "Line 219 Position 22-36"
+    }
+  ]
+}

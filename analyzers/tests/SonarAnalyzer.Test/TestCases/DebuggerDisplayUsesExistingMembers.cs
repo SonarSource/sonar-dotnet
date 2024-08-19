@@ -10,7 +10,6 @@ class PropertiesAndFields
 
     int SomeProperty => 1;
     int SomeField = 2;
-    string[] DeclaredNamespaces = new string[0];
 
     [DebuggerDisplayAttribute("Hardcoded text")] int WithSuffix => 1;
     [System.Diagnostics.DebuggerDisplay("Hardcoded text")] int WithNamespace => 1;
@@ -40,36 +39,22 @@ class PropertiesAndFields
     [DebuggerDisplay(@"Some text
         {Nonexistent}")] int WithNonexistentMemberVerbatimMultiLine1 => 1;                       // Noncompliant@-1^22#34 {{'Nonexistent' doesn't exist in this context.}}
     [DebuggerDisplay(@"Some text {Some
-        Property}")] int WithNonexistentMemberVerbatimMultiLine2 => 1;                           // Noncompliant@-1
-    [DebuggerDisplay(@"Some text {(ParseError1}")] int ParseError1 => 1;                         // Noncompliant {{'{(ParseError1}' is not a valid expression. CS1026: ) expected.}}
-    [DebuggerDisplay(@"Some text {int}")] int ParseError2 => 1;                                  // Noncompliant {{'{int}' is not a valid expression. CS1525: Invalid expression term 'int'.}}
-    [DebuggerDisplay(@"{ | ParseError3}")] int ParseError3 => 1;                                 // Noncompliant {{'{ | ParseError3}' is not a valid expression. CS1525: Invalid expression term '|'.}}
-    [DebuggerDisplay(@"{ ! ParseValid}")] int ParseValid => 1;                                   // Compliant
+        Property}")] int WithNonexistentMemberVerbatimMultiLine2 => 1;                           // FN@-1: the new line char make the expression within braces not a valid identifier
 
-    [DebuggerDisplay(ConstantWithInvalidMember)] int WithFormatAsConstant2 => 1;                            // Noncompliant
-    [DebuggerDisplay("{Non" + "Existent}")] int WithFormatAsConcatenationOfLiterals => 1;                   // Noncompliant
+    [DebuggerDisplay(ConstantWithInvalidMember)] int WithFormatAsConstant2 => 1;                            // FN: constants are not checked
+    [DebuggerDisplay("{Non" + "Existent}")] int WithFormatAsConcatenationOfLiterals => 1;                   // FN: only simple literal supported
     [DebuggerDisplay("{Non"
-        + "Existent}")] int WithFormatAsConcatenationOfLiteralsMultiLine => 1;                              // Noncompliant@-1
-    [DebuggerDisplay(ConstantFragment1 + ConstantFragment2)] int WithFormatAsConcatenationOfConstants => 1; // Noncompliant
+        + "Existent}")] int WithFormatAsConcatenationOfLiteralsMultiLine => 1;                              // FN: only simple literal supported
+    [DebuggerDisplay(ConstantFragment1 + ConstantFragment2)] int WithFormatAsConcatenationOfConstants => 1; // FN: only simple literal supported
 
-    [DebuggerDisplay("{this.NonexistentProperty}")] int PropertyWithExplicitThis => 1;                      // Noncompliant
-    [DebuggerDisplay("{Me.NonexistentField}")] int FieldWithExplicitThis => 1;                              // Noncompliant {{'Me' doesn't exist in this context.}}
-    [DebuggerDisplay("{!NonexistentProperty}")] int UnaryExpression1 => 1;                                  // Noncompliant {{'NonexistentProperty' doesn't exist in this context.}}
-    [DebuggerDisplay("{NonexistentProperty!}")] int UnaryExpression2 => 1;                                  // Noncompliant {{'NonexistentProperty' doesn't exist in this context.}}
-    [DebuggerDisplay("{1 + NonexistentProperty}")] int BinaryExpression => 1;                               // Noncompliant
-    [DebuggerDisplay("{(1 + 1 + (1 + NonexistentProperty))}")] int NestedBinaryExpression => 1;             // Noncompliant
-    [DebuggerDisplay("{NonexistentProperty ? 1 : 0}")] int TernaryInCondition => 1;                         // Noncompliant
-    [DebuggerDisplay("{true ? NonexistentProperty : 0}")] int TernaryInTrue => 1;                           // Noncompliant
-    [DebuggerDisplay("{true ? 1 : NonexistentProperty}")] int TernaryInFalse => 1;                          // Noncompliant
-    [DebuggerDisplay("{true ? 1 : (true ? 0 : 1 + NonexistentProperty)}")] int TernaryNested => 1;          // Noncompliant
-    [DebuggerDisplay("{Math.Abs(SomeProperty)}")] int StaticMemberAccess => 1;                              // Noncompliant {{'Math' doesn't exist in this context.}} FP
-    [DebuggerDisplay("CsdlSemanticsModel({string.Join(\",\", DeclaredNamespaces)})")] int ExpressionWithDoubleQuotes => 1; // Compliant https://sonarsource.atlassian.net/browse/NET-646
+    [DebuggerDisplay("{this.NonexistentProperty}")] int PropertyWithExplicitThis => 1;                      // FN: "this." not supported (valid when debugging a C# project)
+    [DebuggerDisplay("{Me.NonexistentField}")] int FieldWithExplicitThis => 1;                              // FN: "Me." not supported (valid when debugging a VB.NET project)
+    [DebuggerDisplay("{1 + NonexistentProperty}")] int ContainingInvalidMembers => 1;                       // FN: expressions not supported
 }
 
-[DebuggerDisplay("{this.ToString()}")]     // Compliant, valid when debugging a C# project
-[DebuggerDisplay("{this.Nonexistent()}")]  // Noncompliant
-[DebuggerDisplay("{Me.ToString()}")]       // Noncompliant, valid when debugging a VB.NET project but not in C#
-[DebuggerDisplay("{Nonexistent}")]         // Noncompliant
+[DebuggerDisplay("{this.ToString()}")]  // Compliant, valid when debugging a C# project
+[DebuggerDisplay("{Me.ToString()}")]    // Compliant, valid when debugging a VB.NET project
+[DebuggerDisplay("{Nonexistent}")]      // Noncompliant
 public enum TopLevelEnum { One, Two, Three }
 
 [DebuggerDisplay("{SomeProperty}")]
@@ -195,15 +180,12 @@ public class NoQuotesModifier
     int SomeProperty => 1;
 }
 
-public class OtherModifier
+public class InvalidModifier
 {
-    [DebuggerDisplay("{SomeProperty,d}")]     // Compliant https://sonarsource.atlassian.net/browse/NET-646
-    [DebuggerDisplay("{SomeProperty,raw}")]   // Compliant https://sonarsource.atlassian.net/browse/NET-646
-    [DebuggerDisplay("{SomeProperty,asdf}")]  // Compliant, the qualifiers are not specified in the documentation. We assume any word is valid here
-    [DebuggerDisplay("{SomeProperty, asdf}")] // Compliant
-    [DebuggerDisplay("{Nonexistent,asdf}")]   // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
-    [DebuggerDisplay("{Nonexistent, asdf}")]  // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
-    [DebuggerDisplay("{Nonexistent, a12f}")]  // Noncompliant {{'{Nonexistent, a12f}' is not a valid expression. CS1073: Unexpected token ','.}}
+    [DebuggerDisplay("{SomeProperty,asdf}")]
+    [DebuggerDisplay("{SomeProperty, asdf}")]
+    [DebuggerDisplay("{Nonexistent,asdf}")]  // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+    [DebuggerDisplay("{Nonexistent, asdf}")] // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
     int SomeProperty => 1;
 }
 
@@ -280,54 +262,6 @@ namespace WithTypeAlias
 
     public class Test
     {
-        [DebuggerDisplayAlias("{Nonexistent}")] int WithAlias => 1; // FN: Aliases are not supported for performance reasons
+        [DebuggerDisplayAlias("{Nonexistent}")] int WithAlias => 1; // Noncompliant: attribute name also checked at semantic level
     }
-}
-
-// https://sonarsource.atlassian.net/browse/NET-575
-public class Repo_Net575
-{
-    [DebuggerDisplay("{Property}",
-        Name = "{Nonexistent}",  // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
-        Type = "{Nonexistent}")] // Noncompliant
-    public int Property { get; }
-
-    [DebuggerDisplay("{Property1}",
-        Type = "{Type}")] // Noncompliant TP https://sonarsource.atlassian.net/browse/NET-646 (Checked in VS: "Type" can not be evaluated by the compiler)
-    public int Property1 { get; }
-}
-
-// Noncompliant@+1 {{'Error' doesn't exist in this context.}}
-[DebuggerDisplay(@"
-    Some text
-    {
-        Property == 0
-            ? Error
-            : ""Okay""
-    }
-")]
-public class Multiline
-{
-    public int Property { get; }
-}
-
-[DebuggerDisplay("{this.Recurse}")]
-[DebuggerDisplay("{Recurse}")]
-[DebuggerDisplay("{Recurse.Recurse}")]
-[DebuggerDisplay("{Recurse.Recurse.Recurse}")]
-[DebuggerDisplay("{Recurse.Recurse.Method()}")]
-[DebuggerDisplay("{Recurse.Method().Recurse}")]
-[DebuggerDisplay("{Method().Recurse.Recurse}")]
-[DebuggerDisplay("{Nonexistent.Recurse.Recurse}")]      // Noncompliant
-[DebuggerDisplay("{this.Nonexistent.Recurse.Recurse}")] // Noncompliant
-[DebuggerDisplay("{Recurse.Nonexistent.Recurse}")]      // Compliant: Only the most left hand side of a member access is detected
-[DebuggerDisplay("{Recurse.Recurse.Nonexistent}")]      // Compliant
-[DebuggerDisplay("{Nonexistent?.Recurse}")]             // Noncompliant
-[DebuggerDisplay("{Recurse ?? Recurse}")]               // Compliant
-[DebuggerDisplay("{Nonexistent ?? Recurse}")]           // Noncompliant
-[DebuggerDisplay("{Recurse ?? Nonexistent}")]           // Noncompliant
-public class Recursion
-{
-    public Recursion Recurse { get; }
-    public void Method() { }
 }

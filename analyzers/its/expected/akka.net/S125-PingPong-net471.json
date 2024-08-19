@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S125",
+      "Message": "Remove this commented out code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/PingPong/ClientActorBase.cs#L41",
+      "Location": "Line 41 Position 21-71"
+    }
+  ]
+}

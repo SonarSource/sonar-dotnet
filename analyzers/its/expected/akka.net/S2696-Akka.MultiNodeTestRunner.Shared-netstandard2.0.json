@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2696",
+      "Message": "Make the enclosing instance method \u0027static\u0027 or remove this set on the \u0027static\u0027 field.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/SinkCoordinator.cs#L135",
+      "Location": "Line 135 Position 17-45"
+    }
+  ]
+}

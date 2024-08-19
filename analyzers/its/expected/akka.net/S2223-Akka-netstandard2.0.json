@@ -1,0 +1,40 @@
+{
+  "Issues": [
+    {
+      "Id": "S2223",
+      "Message": "Change the visibility of \u0027Instance\u0027 or make it \u0027const\u0027 or \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorRef.cs#L656",
+      "Location": "Line 656 Position 30-38"
+    },
+    {
+      "Id": "S2223",
+      "Message": "Change the visibility of \u0027DefaultDecider\u0027 or make it \u0027const\u0027 or \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L90",
+      "Location": "Line 90 Position 32-46"
+    },
+    {
+      "Id": "S2223",
+      "Message": "Change the visibility of \u0027Instance\u0027 or make it \u0027const\u0027 or \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Tcp.cs#L684",
+      "Location": "Line 684 Position 42-50"
+    },
+    {
+      "Id": "S2223",
+      "Message": "Change the visibility of \u0027Instance\u0027 or make it \u0027const\u0027 or \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Tcp.cs#L700",
+      "Location": "Line 700 Position 41-49"
+    },
+    {
+      "Id": "S2223",
+      "Message": "Change the visibility of \u0027Instance\u0027 or make it \u0027const\u0027 or \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Tcp.cs#L835",
+      "Location": "Line 835 Position 42-50"
+    },
+    {
+      "Id": "S2223",
+      "Message": "Change the visibility of \u0027Instance\u0027 or make it \u0027const\u0027 or \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Tcp.cs#L872",
+      "Location": "Line 872 Position 35-43"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S6566",
+      "Message": "Prefer using \u0022DateTimeOffset\u0022 instead of \u0022DateTime\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/JsonSerializerRecords.cs#L10",
+      "Location": "Line 10 Position 33-41"
+    },
+    {
+      "Id": "S6566",
+      "Message": "Prefer using \u0022DateTimeOffset\u0022 instead of \u0022DateTime\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/RecordWithStaticHelper.cs#L14",
+      "Location": "Line 14 Position 45-53"
+    }
+  ]
+}

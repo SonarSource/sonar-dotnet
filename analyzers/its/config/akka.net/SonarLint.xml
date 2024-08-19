@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AnalysisInput>
+  <Settings>
+    <Setting>
+      <Key>sonar.cs.ignoreHeaderComments</Key>
+      <Value>true</Value>
+    </Setting>
+    <Setting>
+      <Key>sonar.vbnet.ignoreHeaderComments</Key>
+      <Value>true</Value>
+    </Setting>
+  </Settings>
+  <Rules>
+    <!-- Security Hotspots are injected here by regression-test.ps1 and content is saved in ./output/<Project>/SonarLint.xml -->
+    <Rule>
+      <Key>S1451</Key>
+      <Parameters>
+        <Parameter>
+          <Key>headerFormat</Key>
+          <Value><![CDATA[//-----------------------------------------------------------------------
+// <copyright file=".*" company="Akka\.NET Project">
+//     Copyright \(C\) 2009-2015 Typesafe Inc\. <http://www\.typesafe\.com>
+//     Copyright \(C\) 2013-2015 Akka\.NET project <https://github\.com/akkadotnet/akka\.net>
+// </copyright>
+//-----------------------------------------------------------------------
+]]></Value>
+        </Parameter>
+        <Parameter>
+          <Key>isRegularExpression</Key>
+          <Value>true</Value>
+        </Parameter>
+      </Parameters>
+    </Rule>
+  </Rules></AnalysisInput>

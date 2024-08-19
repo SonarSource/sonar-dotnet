@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2376",
+      "Message": "Provide a getter for \u0027TestTransport\u0027 or replace the property with a \u0027SetTestTransport\u0027 method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L110",
+      "Location": "Line 110 Position 21-34"
+    },
+    {
+      "Id": "S2376",
+      "Message": "Provide a getter for \u0027CommonConfig\u0027 or replace the property with a \u0027SetCommonConfig\u0027 method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L48",
+      "Location": "Line 48 Position 23-35"
+    }
+  ]
+}

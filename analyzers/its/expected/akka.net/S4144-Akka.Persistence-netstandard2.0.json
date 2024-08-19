@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4144",
+      "Message": "Update this method so that its implementation is not identical to \u0027Command\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L685",
+      "Location": "Line 685 Position 24-34"
+    }
+  ]
+}

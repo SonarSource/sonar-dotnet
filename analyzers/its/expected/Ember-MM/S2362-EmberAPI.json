@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2362",
+      "Message": "Rename \u0027ifo_CellInfoSize\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDVD.vb#L28",
+      "Location": "Line 28 Position 19-35"
+    },
+    {
+      "Id": "S2362",
+      "Message": "Rename \u0027ifo_SECTOR_SIZE\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDVD.vb#L29",
+      "Location": "Line 29 Position 19-34"
+    }
+  ]
+}

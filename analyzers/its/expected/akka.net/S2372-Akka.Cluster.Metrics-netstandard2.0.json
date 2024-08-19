@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2372",
+      "Message": "Remove the exception throwing from this property getter, or refactor the property into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/WeightedRoutees.cs#L56",
+      "Location": "Line 56 Position 21-100"
+    }
+  ]
+}

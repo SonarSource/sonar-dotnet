@@ -16,8 +16,7 @@
     "cwe",
     "unused",
     "suspicious",
-    "pitfall",
-    "symbolic-execution"
+    "pitfall"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-2583",

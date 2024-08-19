@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027IMPA\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L661",
+      "Location": "Line 661 Position 7-11"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027MPDB\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L662",
+      "Location": "Line 662 Position 7-11"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027thumbLink\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L719",
+      "Location": "Line 719 Position 11-20"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027popularHaveYear\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L679",
+      "Location": "Line 679 Position 29-44"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027movieInfo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L780",
+      "Location": "Line 780 Position 29-38"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027doSave\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L321",
+      "Location": "Line 321 Position 13-19"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027iEpisode\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L62",
+      "Location": "Line 62 Position 13-21"
+    }
+  ]
+}

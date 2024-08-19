@@ -1,14 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <AssemblyName>SonarAnalyzer.VisualBasic</AssemblyName>
+    <RootNamespace>SonarAnalyzer</RootNamespace>
     <TargetFramework>netstandard2.0</TargetFramework>
     <!-- .NET Standard target does not copy referenced DLLs into bin folder, so we need to enable it explicitly. -->
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <!-- Title for DLL file properties -->
-    <AssemblyTitle>SonarAnalyzer Visual Basic .NET</AssemblyTitle>
+    <DefineConstants>TRACE;VB</DefineConstants>
+    <PackageTags>Roslyn;Analyzer;Analyzers;Refactoring;CodeAnalysis;CleanCode;Clean Code;Sonar;SonarAnalyzer;Sonar Anlyzer;Dotnet;Visual Basic;CodeQuality;CodeReview;StaticCodeAnalysis;SonarQube;SonarCloud;SonarLint</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.PerformanceSensitiveAnalyzers" Version="3.3.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces" Version="1.3.2" />
     <PackageReference Include="System.Collections.Immutable" Version="1.1.37">
       <!-- Downgrade System.Collections.Immutable to support VS2015 Update 3 -->
@@ -18,46 +24,40 @@
 
   <ItemGroup>
     <!-- We need to update NuGet and JAR packaging after changing references -->
-    <ProjectReference Include="..\SonarAnalyzer.Core\SonarAnalyzer.Core.csproj" />
-    <ProjectReference Include="..\SonarAnalyzer.VisualBasic.Core\SonarAnalyzer.VisualBasic.Core.csproj" />
+    <ProjectReference Include="..\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj" />
+    <ProjectReference Include="..\SonarAnalyzer.SourceGenerators\SonarAnalyzer.SourceGenerators.csproj" SetTargetFramework="TargetFramework=netstandard2.0" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Microsoft.CodeAnalysis" />
-    <Using Include="Microsoft.CodeAnalysis.CodeFixes" />
-    <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
-    <Using Include="Microsoft.CodeAnalysis.Shared.Extensions" />
     <Using Include="Microsoft.CodeAnalysis.VisualBasic" />
     <Using Include="Microsoft.CodeAnalysis.VisualBasic.Syntax" />
     <Using Include="Microsoft.CodeAnalysis.VisualBasic.Extensions" />
-    <Using Include="SonarAnalyzer.Core.AnalysisContext" />
-    <Using Include="SonarAnalyzer.Core.Analyzers" />
-    <Using Include="SonarAnalyzer.Core.Common" />
-    <Using Include="SonarAnalyzer.Core.Extensions" />
-    <Using Include="SonarAnalyzer.Core.Facade" />
-    <Using Include="SonarAnalyzer.Core.RegularExpressions" />
-    <Using Include="SonarAnalyzer.Core.Rules" />
-    <Using Include="SonarAnalyzer.Core.Semantics" />
-    <Using Include="SonarAnalyzer.Core.Semantics.Extensions" />
-    <Using Include="SonarAnalyzer.Core.Syntax.Extensions" />
-    <Using Include="SonarAnalyzer.Core.Syntax.Utilities" />
-    <Using Include="SonarAnalyzer.VisualBasic.Core.Common" />
-    <Using Include="SonarAnalyzer.VisualBasic.Core.Extensions" />
-    <Using Include="SonarAnalyzer.VisualBasic.Core.Syntax.Extensions" />
-    <Using Include="SonarAnalyzer.VisualBasic.Core.Syntax.Utilities" />
-    <Using Include="SonarAnalyzer.VisualBasic.Core.Facade" />
+    <Using Include="Microsoft.CodeAnalysis.Shared.Extensions" />
+    <Using Include="SonarAnalyzer.AnalysisContext" />
+    <Using Include="SonarAnalyzer.Analyzers" />
+    <Using Include="SonarAnalyzer.Common" />
+    <Using Include="SonarAnalyzer.Extensions" />
+    <Using Include="SonarAnalyzer.Helpers" />
+    <Using Include="Microsoft.CodeAnalysis" />
+    <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
   </ItemGroup>
 
-  <Target Name="CopyBinaries" AfterTargets="Build">
+  <Target Name="SignDlls" Condition="'$(SignAssembly)' == 'true'">
+    <Message Importance="high" Text="Signing analyzer assemblies from $(OutputPath)" />
+    <Exec WorkingDirectory="$(OutputPath)" Command="signtool sign /du https://www.sonarsource.com/ /d &quot;Roslyn analyzers that spot Bugs, Vulnerabilities and Code Smells in your code.&quot; /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 /csp &quot;DigiCert Signing Manager KSP&quot; /kc &quot;$(SM_KP)&quot; /f &quot;$(SM_CLIENT_CRT_FILE)&quot; SonarAnalyzer*.dll" />
+  </Target>
+
+  <Target Name="CopyBinaries" AfterTargets="Build" DependsOnTargets="SignDlls">
     <ItemGroup>
       <BinariesToCopy Include="$(OutputPath)Google.Protobuf.dll" />
+      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CFG.dll" />
-      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.Core.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.ShimLayer.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.VisualBasic.dll" />
-      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.VisualBasic.Core.dll" />
     </ItemGroup>
     <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)" />
   </Target>
+
+  <Import Project="..\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems" Label="Shared" />
 
 </Project>

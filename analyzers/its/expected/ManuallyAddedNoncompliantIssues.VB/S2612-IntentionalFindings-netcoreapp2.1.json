@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2612",
+      "Message": "Make sure this permission is safe.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S2612.vb#L13",
+      "Location": "Line 13 Position 9-122"
+    },
+    {
+      "Id": "S2612",
+      "Message": "Make sure this permission is safe.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S2612.vb#L17",
+      "Location": "Line 17 Position 9-127"
+    }
+  ]
+}

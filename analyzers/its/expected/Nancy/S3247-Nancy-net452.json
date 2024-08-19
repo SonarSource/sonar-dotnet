@@ -1,0 +1,112 @@
+{
+  "Issues": [
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/DynamicDictionaryValue.cs#L498",
+      "Location": "Line 498 Position 17-43"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/DynamicDictionaryValue.cs#L541",
+      "Location": "Line 541 Position 17-47"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/DynamicDictionaryValue.cs#L583",
+      "Location": "Line 583 Position 17-47"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L187",
+      "Location": "Line 187 Position 17-36"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L191",
+      "Location": "Line 191 Position 22-44"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L195",
+      "Location": "Line 195 Position 22-41"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L257",
+      "Location": "Line 257 Position 17-36"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L261",
+      "Location": "Line 261 Position 22-44"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L283",
+      "Location": "Line 283 Position 17-36"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L288",
+      "Location": "Line 288 Position 22-44"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L309",
+      "Location": "Line 309 Position 22-44"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L329",
+      "Location": "Line 329 Position 22-44"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Json/Converters/TimeSpanConverter.cs#L73",
+      "Location": "Line 73 Position 17-29"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Json/Converters/TimeSpanConverter.cs#L78",
+      "Location": "Line 78 Position 17-30"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Json/Simple/NancySerializationStrategy.cs#L188",
+      "Location": "Line 188 Position 17-34"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Json/Simple/NancySerializationStrategy.cs#L193",
+      "Location": "Line 193 Position 17-40"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Responses/Negotiation/DefaultResponseNegotiator.cs#L83",
+      "Location": "Line 83 Position 17-40"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L182",
+      "Location": "Line 182 Position 17-48"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "Issues": [
+    {
+      "Id": "S3260",
+      "Message": "Private classes which are not derived in the current assembly should be marked as \u0027sealed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L255",
+      "Location": "Line 255 Position 23-46"
+    },
+    {
+      "Id": "S3260",
+      "Message": "Private classes which are not derived in the current assembly should be marked as \u0027sealed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/HttpLink.cs#L283",
+      "Location": "Line 283 Position 23-48"
+    },
+    {
+      "Id": "S3260",
+      "Message": "Private classes which are not derived in the current assembly should be marked as \u0027sealed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Responses/Negotiation/DefaultResponseNegotiator.cs#L453",
+      "Location": "Line 453 Position 23-39"
+    },
+    {
+      "Id": "S3260",
+      "Message": "Private classes which are not derived in the current assembly should be marked as \u0027sealed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/DefaultRouteCacheProvider.cs#L66",
+      "Location": "Line 66 Position 23-44"
+    },
+    {
+      "Id": "S3260",
+      "Message": "Private classes which are not derived in the current assembly should be marked as \u0027sealed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2693",
+      "Location": "Line 2693 Position 23-43"
+    },
+    {
+      "Id": "S3260",
+      "Message": "Private classes which are not derived in the current assembly should be marked as \u0027sealed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2752",
+      "Location": "Line 2752 Position 23-38"
+    },
+    {
+      "Id": "S3260",
+      "Message": "Private classes which are not derived in the current assembly should be marked as \u0027sealed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2810",
+      "Location": "Line 2810 Position 23-42"
+    },
+    {
+      "Id": "S3260",
+      "Message": "Private classes which are not derived in the current assembly should be marked as \u0027sealed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2877",
+      "Location": "Line 2877 Position 23-38"
+    },
+    {
+      "Id": "S3260",
+      "Message": "Private classes which are not derived in the current assembly should be marked as \u0027sealed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2945",
+      "Location": "Line 2945 Position 23-42"
+    },
+    {
+      "Id": "S3260",
+      "Message": "Private classes which are not derived in the current assembly should be marked as \u0027sealed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3022",
+      "Location": "Line 3022 Position 23-39"
+    },
+    {
+      "Id": "S3260",
+      "Message": "Private classes which are not derived in the current assembly should be marked as \u0027sealed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3107",
+      "Location": "Line 3107 Position 23-50"
+    }
+  ]
+}

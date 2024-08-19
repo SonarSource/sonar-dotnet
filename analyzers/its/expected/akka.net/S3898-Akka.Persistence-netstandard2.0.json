@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027Tagged\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/Tagged.cs#L22",
+      "Location": "Line 22 Position 19-25"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027PluginHolder\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Persistence.cs#L21",
+      "Location": "Line 21 Position 21-33"
+    }
+  ]
+}

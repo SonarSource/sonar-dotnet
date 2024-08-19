@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.CSharp.Rules;
+using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Test.Rules;
 
@@ -25,7 +29,7 @@ public class MemberShouldBeStaticTest
 
     [DataTestMethod]
     [DataRow("1.0.0", "3.0.20105.1")]
-    [DataRow(TestConstants.NuGetLatestVersion, TestConstants.NuGetLatestVersion)]
+    [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
     public void MemberShouldBeStatic(string aspnetCoreVersion, string aspnetVersion) =>
         builder.AddPaths("MemberShouldBeStatic.cs")
             .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreMvcWebApiCompatShim(aspnetCoreVersion)
@@ -41,22 +45,22 @@ public class MemberShouldBeStaticTest
             .AddReferences(MetadataReferenceFacade.SystemWindowsForms)
             .Verify();
 
-    [TestMethod]
-    public void MemberShouldBeStatic_Xaml() =>
-        builder.AddPaths("MemberShouldBeStatic.Xaml.cs")
-            .AddReferences(MetadataReferenceFacade.PresentationFramework)
-            .Verify();
-
 #if NET
+    [TestMethod]
+    public void MemberShouldBeStatic_CSharp9() =>
+        builder.AddPaths("MemberShouldBeStatic.CSharp9.cs").WithTopLevelStatements().Verify();
 
     [TestMethod]
-    public void MemberShouldBeStatic_Latest() =>
-        builder
-            .AddPaths("MemberShouldBeStatic.Latest.cs")
-            .AddPaths("MemberShouldBeStatic.Latest.Partial.cs")
-            .WithOptions(LanguageOptions.CSharpLatest)
-            .WithTopLevelStatements().Verify();
+    public void MemberShouldBeStatic_CSharp12() =>
+        builder.AddPaths("MemberShouldBeStatic.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
 #endif
+
+    [TestMethod]
+    public void MemberShouldBeStatic_CSharp8() =>
+        builder.AddPaths("MemberShouldBeStatic.CSharp8.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .AddReferences(MetadataReferenceFacade.NetStandard21)
+            .Verify();
 
 #if NETFRAMEWORK // HttpApplication is available only on .Net Framework
     [TestMethod]
@@ -75,15 +79,15 @@ protected int FooFoo() => 0; // Noncompliant
     public void MemberShouldBeStatic_InvalidCode() =>
         // Handle invalid code causing NullReferenceException: https://github.com/SonarSource/sonar-dotnet/issues/819
         builder.AddSnippet("""
-                           public class Class7
-                           {
-                               public async Task<Result<T> Function<T>(Func<Task<Result<T>>> f)
-                               {
-                                   Result<T> result;
-                                   result = await f();
-                                   return result;
-                               }
-                           }
-                           """)
-                .VerifyNoAD0001();
+
+            public class Class7
+            {
+                public async Task<Result<T> Function<T>(Func<Task<Result<T>>> f)
+                {
+                    Result<T> result;
+                    result = await f();
+                    return result;
+                }
+            }
+            """).VerifyNoIssuesIgnoreErrors();
 }

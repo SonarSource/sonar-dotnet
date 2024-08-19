@@ -1,0 +1,148 @@
+{
+  "Issues": [
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestActorRefBase\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027ISurrogated.ToSurrogate\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L248",
+      "Location": "Line 248 Position 32-43"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestActorRefBase\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IActorRefScope.IsLocal\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L253",
+      "Location": "Line 253 Position 29-36"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestActorRefBase\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IInternalActorRef.Parent\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L255",
+      "Location": "Line 255 Position 45-51"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestActorRefBase\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IInternalActorRef.Provider\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L257",
+      "Location": "Line 257 Position 45-53"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestActorRefBase\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IInternalActorRef.IsTerminated\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L259",
+      "Location": "Line 259 Position 32-44"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestActorRefBase\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IInternalActorRef.GetChild\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L261",
+      "Location": "Line 261 Position 37-45"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestActorRefBase\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IInternalActorRef.Resume\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L266",
+      "Location": "Line 266 Position 32-38"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestActorRefBase\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IInternalActorRef.Start\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L271",
+      "Location": "Line 271 Position 32-37"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestActorRefBase\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IInternalActorRef.Stop\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L276",
+      "Location": "Line 276 Position 32-36"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestActorRefBase\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IInternalActorRef.Restart\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L281",
+      "Location": "Line 281 Position 32-39"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestActorRefBase\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IInternalActorRef.Suspend\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L286",
+      "Location": "Line 286 Position 32-39"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestProbe\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IActorRef.Path\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestProbe.cs#L107",
+      "Location": "Line 107 Position 29-33"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestProbe\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027ICanTell.Tell\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestProbe.cs#L109",
+      "Location": "Line 109 Position 23-27"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestProbe\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027ISurrogated.ToSurrogate\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestProbe.cs#L114",
+      "Location": "Line 114 Position 32-43"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestProbe\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IActorRefScope.IsLocal\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestProbe.cs#L119",
+      "Location": "Line 119 Position 29-36"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestProbe\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IInternalActorRef.Parent\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestProbe.cs#L121",
+      "Location": "Line 121 Position 45-51"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestProbe\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IInternalActorRef.Provider\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestProbe.cs#L123",
+      "Location": "Line 123 Position 45-53"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestProbe\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IInternalActorRef.IsTerminated\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestProbe.cs#L125",
+      "Location": "Line 125 Position 32-44"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestProbe\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IInternalActorRef.GetChild\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestProbe.cs#L127",
+      "Location": "Line 127 Position 37-45"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestProbe\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IInternalActorRef.Resume\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestProbe.cs#L132",
+      "Location": "Line 132 Position 32-38"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestProbe\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IInternalActorRef.Start\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestProbe.cs#L137",
+      "Location": "Line 137 Position 32-37"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestProbe\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IInternalActorRef.Stop\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestProbe.cs#L142",
+      "Location": "Line 142 Position 32-36"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestProbe\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IInternalActorRef.Restart\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestProbe.cs#L147",
+      "Location": "Line 147 Position 32-39"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027TestProbe\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IInternalActorRef.Suspend\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestProbe.cs#L152",
+      "Location": "Line 152 Position 32-39"
+    }
+  ]
+}

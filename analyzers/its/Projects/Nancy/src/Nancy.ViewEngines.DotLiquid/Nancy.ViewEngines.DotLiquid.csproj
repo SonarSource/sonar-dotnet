@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Enables using the DotLiquid view engine with Nancy.</Description>
+    <PackageTags>$(PackageTags);View Engine;DotLiquid</PackageTags>
+    <TargetFramework>net452</TargetFramework>
+    <CodeAnalysisRuleSet>..\..\..\..\ValidationRuleset.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotLiquid" Version="2.0.64" />
+  </ItemGroup>
+</Project>

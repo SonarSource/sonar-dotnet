@@ -1,24 +1,29 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Sonar;
-using SonarAnalyzer.CSharp.Core.LiveVariableAnalysis;
+using SonarAnalyzer.Common.Walkers;
+using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed partial class DeadStores : SonarDiagnosticAnalyzer
@@ -42,7 +47,7 @@ namespace SonarAnalyzer.CSharp.Rules
         {
             // No need to check for ExpressionBody as it can't contain variable assignment
             context.RegisterNodeAction(
-                c => CheckForDeadStores(c, c.Model.GetDeclaredSymbol(c.Node)),
+                c => CheckForDeadStores(c, c.SemanticModel.GetDeclaredSymbol(c.Node)),
                 SyntaxKind.AddAccessorDeclaration,
                 SyntaxKind.ConstructorDeclaration,
                 SyntaxKind.ConversionOperatorDeclaration,
@@ -57,7 +62,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 SyntaxKindEx.LocalFunctionStatement);
 
             context.RegisterNodeAction(
-                c => CheckForDeadStores(c, c.Model.GetSymbolInfo(c.Node).Symbol),
+                c => CheckForDeadStores(c, c.SemanticModel.GetSymbolInfo(c.Node).Symbol),
                 SyntaxKind.AnonymousMethodExpression,
                 SyntaxKind.ParenthesizedLambdaExpression,
                 SyntaxKind.SimpleLambdaExpression);
@@ -70,16 +75,16 @@ namespace SonarAnalyzer.CSharp.Rules
                 if (useSonarCfg)
                 {
                     // Tuple expressions are not supported. See https://github.com/SonarSource/sonar-dotnet/issues/3094
-                    if (!context.Node.DescendantNodes().AnyOfKind(SyntaxKindEx.TupleExpression) && CSharpControlFlowGraph.TryGet(context.Node, context.Model, out var cfg))
+                    if (!context.Node.DescendantNodes().AnyOfKind(SyntaxKindEx.TupleExpression) && CSharpControlFlowGraph.TryGet(context.Node, context.SemanticModel, out var cfg))
                     {
-                        var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.Model, context.Cancel);
+                        var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel, context.Cancel);
                         var checker = new SonarChecker(context, lva, context.Node);
                         checker.Analyze(cfg.Blocks);
                     }
                 }
-                else if (context.Node.CreateCfg(context.Model, context.Cancel) is { } cfg)
+                else if (context.Node.CreateCfg(context.SemanticModel, context.Cancel) is { } cfg)
                 {
-                    var lva = new RoslynLiveVariableAnalysis(cfg, CSharpSyntaxClassifier.Instance, context.Cancel);
+                    var lva = new RoslynLiveVariableAnalysis(cfg, context.Cancel);
                     var checker = new RoslynChecker(context, lva);
                     checker.Analyze(cfg.Blocks);
                 }
@@ -121,7 +126,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
                 public abstract void AnalyzeBlock();
 
-                protected SemanticModel SemanticModel => owner.context.Model;
+                protected SemanticModel SemanticModel => owner.context.SemanticModel;
 
                 protected State(CheckerBase<TCfg, TBlock> owner, TBlock block)
                 {
@@ -141,7 +146,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
                 protected bool IsAllowedInitializationValue(ExpressionSyntax value, Optional<object> constantValue = default) =>
                     (constantValue.HasValue && IsAllowedInitializationConstant(constantValue.Value, value.IsKind(SyntaxKind.IdentifierName)))
-                    || value?.Kind() is SyntaxKind.DefaultExpression or SyntaxKind.TrueLiteralExpression or SyntaxKind.FalseLiteralExpression
+                    || value.IsAnyKind(SyntaxKind.DefaultExpression, SyntaxKind.TrueLiteralExpression, SyntaxKind.FalseLiteralExpression)
                     || value.IsNullLiteral()
                     || IsAllowedNumericInitialization(value)
                     || IsAllowedUnaryNumericInitialization(value)
@@ -161,8 +166,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     expression.IsKind(SyntaxKind.NumericLiteralExpression) && AllowedNumericValues.Contains(((LiteralExpressionSyntax)expression).Token.ValueText);  // -1, 0 or 1
 
                 private static bool IsAllowedUnaryNumericInitialization(ExpressionSyntax expression) =>
-                    expression?.Kind() is SyntaxKind.UnaryPlusExpression or SyntaxKind.UnaryMinusExpression
-                    && IsAllowedNumericInitialization(((PrefixUnaryExpressionSyntax)expression).Operand);
+                    expression.IsAnyKind(SyntaxKind.UnaryPlusExpression, SyntaxKind.UnaryMinusExpression) && IsAllowedNumericInitialization(((PrefixUnaryExpressionSyntax)expression).Operand);
 
                 private bool IsAllowedStringInitialization(ExpressionSyntax expression) =>
                     (expression.IsKind(SyntaxKind.StringLiteralExpression) && AllowedStringValues.Contains(((LiteralExpressionSyntax)expression).Token.ValueText))

@@ -1,23 +1,27 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
-using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 
-namespace SonarAnalyzer.CFG.Roslyn.Test;
+namespace SonarAnalyzer.Test.CFG.Roslyn;
 
 [TestClass]
 public class RoslynLvaSerializerTest
@@ -81,8 +85,8 @@ public class RoslynLvaSerializerTest
             cfg0_block0 [shape=record label="{ENTRY #0}"]
             cfg0_block5 [shape=record label="{EXIT #5}"]
             cfg0_block1 -> cfg0_block2
-            cfg0_block1 -> cfg0_block3 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
             cfg0_block2 -> cfg0_block3 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
+            cfg0_block1 -> cfg0_block3 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
             cfg0_block2 -> cfg0_block4 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
             cfg0_block3 -> cfg0_block4 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
             cfg0_block4 -> NoDestination_cfg0_block4 [label="StructuredExceptionHandling"]
@@ -156,8 +160,8 @@ public class RoslynLvaSerializerTest
             cfg0_block0 [shape=record label="{ENTRY #0}"]
             cfg0_block5 [shape=record label="{EXIT #5}"]
             cfg0_block1 -> cfg0_block2
-            cfg0_block1 -> cfg0_block3 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
             cfg0_block2 -> cfg0_block3 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
+            cfg0_block1 -> cfg0_block3 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
             cfg0_block3 -> NoDestination_cfg0_block3 [label="Rethrow"]
             cfg0_block2 -> cfg0_block4 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
             cfg0_block3 -> cfg0_block4 [label="LVA" fontcolor="blue" penwidth="2" color="blue"]
@@ -320,7 +324,7 @@ public class RoslynLvaSerializerTest
 
     private static RoslynLiveVariableAnalysis CreateLva(string code)
     {
-        var cfg = TestCompiler.CompileCfgCS(code);
-        return new RoslynLiveVariableAnalysis(cfg, CSharpSyntaxClassifier.Instance, CancellationToken.None);
+        var cfg = TestHelper.CompileCfgCS(code);
+        return new RoslynLiveVariableAnalysis(cfg, CancellationToken.None);
     }
 }

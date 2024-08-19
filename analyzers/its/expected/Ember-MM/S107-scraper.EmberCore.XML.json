@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S107",
+      "Message": "Sub has 8 parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L489-L490",
+      "Location": "Lines 489-490 Position 37-82"
+    },
+    {
+      "Id": "S107",
+      "Message": "Sub has 10 parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L207-L208",
+      "Location": "Lines 207-208 Position 42-112"
+    },
+    {
+      "Id": "S107",
+      "Message": "Sub has 11 parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L393-L394",
+      "Location": "Lines 393-394 Position 42-137"
+    }
+  ]
+}

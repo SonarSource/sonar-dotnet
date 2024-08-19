@@ -1,17 +1,21 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using SonarAnalyzer.TestFramework.Verification.IssueValidation;
@@ -24,12 +28,18 @@ public static class DiagnosticVerifier
     private const string LineContinuationVB12 = "BC36716";  // Visual Basic 12.0 does not support line continuation comments.
 
     public static int Verify(Compilation compilation,
+                             DiagnosticAnalyzer analyzer,
+                             string additionalFilePath = null,
+                             string[] onlyDiagnostics = null,
+                             string[] additionalSourceFiles = null) =>
+        Verify(compilation, [analyzer], CompilationErrorBehavior.FailTest, additionalFilePath, onlyDiagnostics, additionalSourceFiles);
+
+    public static int Verify(Compilation compilation,
                              DiagnosticAnalyzer[] analyzers,
                              CompilationErrorBehavior checkMode, // ToDo: Remove this parameter in https://github.com/SonarSource/sonar-dotnet/issues/8588
-                             string additionalFilePath,
-                             string[] onlyDiagnostics,
-                             string[] additionalSourceFiles,
-                             bool? concurrentAnalysis = null)
+                             string additionalFilePath = null,
+                             string[] onlyDiagnostics = null,
+                             string[] additionalSourceFiles = null)
     {
         SuppressionHandler.HookSuppression();
         try
@@ -37,7 +47,7 @@ public static class DiagnosticVerifier
             var sources = compilation.SyntaxTrees.ExceptRazorGeneratedFiles()
                 .Select(x => new FileContent(x))
                 .Concat((additionalSourceFiles ?? Array.Empty<string>()).Select(x => new FileContent(x)));
-            var diagnostics = DiagnosticsAndErrors(compilation, analyzers, checkMode, additionalFilePath, onlyDiagnostics, concurrentAnalysis).ToArray();
+            var diagnostics = DiagnosticsAndErrors(compilation, analyzers, checkMode, additionalFilePath, onlyDiagnostics).ToArray();
             var expected = new CompilationIssues(sources);
             VerifyNoExceptionThrown(diagnostics);
             Compare(compilation.LanguageVersionString(), new(diagnostics), expected);
@@ -65,30 +75,25 @@ public static class DiagnosticVerifier
                                                   DiagnosticAnalyzer analyzer,
                                                   CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
                                                   string additionalFilePath = null,
-                                                  string[] onlyDiagnostics = null)
-    {
-        var diagnostics = AnalyzerDiagnostics(compilation, analyzer, checkMode, additionalFilePath, onlyDiagnostics);
-        diagnostics.Should().NotContain(x => x.Severity != DiagnosticSeverity.Error);
-    }
+                                                  string[] onlyDiagnostics = null) =>
+        AnalyzerDiagnostics(compilation, analyzer, checkMode, additionalFilePath, onlyDiagnostics).Should().NotContain(x => x.Severity != DiagnosticSeverity.Error);
 
     public static IEnumerable<Diagnostic> AnalyzerDiagnostics(Compilation compilation, DiagnosticAnalyzer analyzer, CompilationErrorBehavior checkMode, string additionalFilePath = null, string[] onlyDiagnostics = null) =>
-        AnalyzerDiagnostics(compilation, [analyzer], checkMode, additionalFilePath, onlyDiagnostics);
+        AnalyzerDiagnostics(compilation, new[] { analyzer }, checkMode, additionalFilePath, onlyDiagnostics);
 
     public static IEnumerable<Diagnostic> AnalyzerDiagnostics(Compilation compilation, DiagnosticAnalyzer[] analyzers, CompilationErrorBehavior checkMode, string additionalFilePath = null, string[] onlyDiagnostics = null) =>
         VerifyNoExceptionThrown(DiagnosticsAndErrors(compilation, analyzers, checkMode, additionalFilePath, onlyDiagnostics));
 
     public static IEnumerable<Diagnostic> AnalyzerExceptions(Compilation compilation, DiagnosticAnalyzer analyzer) =>
-        DiagnosticsAndErrors(compilation, [analyzer], CompilationErrorBehavior.FailTest, null, null).Where(x => x.Id == AD0001);
+        DiagnosticsAndErrors(compilation, new[] { analyzer }, CompilationErrorBehavior.FailTest).Where(x => x.Id == AD0001);
 
     private static ImmutableArray<Diagnostic> DiagnosticsAndErrors(Compilation compilation,
                                                                    DiagnosticAnalyzer[] analyzer,
                                                                    CompilationErrorBehavior checkMode, // ToDo: Remove in https://github.com/SonarSource/sonar-dotnet/issues/8588
-                                                                   string additionalFilePath,
-                                                                   string[] onlyDiagnostics,
-                                                                   bool? concurrentAnalysis = null)
+                                                                   string additionalFilePath = null,
+                                                                   string[] onlyDiagnostics = null)
     {
-        using var scope = concurrentAnalysis.HasValue ? new EnvironmentVariableScope { EnableConcurrentAnalysis = concurrentAnalysis.Value } : null;
-        onlyDiagnostics ??= [];
+        onlyDiagnostics ??= Array.Empty<string>();
         var supportedDiagnostics = analyzer
             .SelectMany(x => x.SupportedDiagnostics.Select(d => d.Id))
             .ToImmutableDictionary(x => x, Severity)
@@ -116,7 +121,7 @@ public static class DiagnosticVerifier
         foreach (var filePairs in MatchPairs(actual, expected).GroupBy(x => x.FilePath).OrderBy(x => x.Key))
         {
             messages.Add(new(null, $"There are differences for {languageVersion} {SerializePath(filePairs.Key)}:", null, 0));
-            foreach (var pair in from x in filePairs orderby x.Type, x.LineNumber, x.Start, x.IssueId, x.RuleId select x)
+            foreach (var pair in filePairs.OrderBy(x => (x.Type, x.LineNumber, x.Start, x.IssueId, x.RuleId)))
             {
                 messages.Add(pair.CreateMessage());
             }

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1199",
+      "Message": "Extract this nested code block into a separate method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Serialization/DaemonMsgCreateSerializer.cs#L109",
+      "Location": "Line 109 Position 13-14"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3358",
+      "Message": "Extract this nested ternary operation into an independent statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/MemberAgeOrdering.cs#L29",
+      "Location": "Line 29 Position 20-39"
+    },
+    {
+      "Id": "S3358",
+      "Message": "Extract this nested ternary operation into an independent statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/MemberAgeOrdering.cs#L30",
+      "Location": "Line 30 Position 20-39"
+    }
+  ]
+}

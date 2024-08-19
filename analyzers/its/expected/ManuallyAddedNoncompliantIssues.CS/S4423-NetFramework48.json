@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S4423",
+      "Message": "Change this code to use a stronger protocol.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/WeakSslTlsProtocolsTest.cs#L19",
+      "Location": "Line 19 Position 73-76"
+    },
+    {
+      "Id": "S4423",
+      "Message": "Change this code to use a stronger protocol.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/WeakSslTlsProtocolsTest.cs#L23",
+      "Location": "Line 23 Position 45-52"
+    }
+  ]
+}

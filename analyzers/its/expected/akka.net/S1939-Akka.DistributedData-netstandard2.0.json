@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S1939",
+      "Message": "\u0027IRequireCausualDeliveryOfDeltas\u0027 implements \u0027IReplicatedDelta\u0027 so \u0027IReplicatedDelta\u0027 can be removed from the inheritance list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L446",
+      "Location": "Line 446 Position 44-61"
+    },
+    {
+      "Id": "S1939",
+      "Message": "\u0027IRequireCausualDeliveryOfDeltas\u0027 implements \u0027IReplicatedDelta\u0027 so \u0027IReplicatedDelta\u0027 can be removed from the inheritance list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L476",
+      "Location": "Line 476 Position 44-61"
+    },
+    {
+      "Id": "S1939",
+      "Message": "\u0027IUpdateResponse\u0027 implements \u0027INoSerializationVerificationNeeded\u0027 so \u0027INoSerializationVerificationNeeded\u0027 can be removed from the inheritance list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L554",
+      "Location": "Line 554 Position 83-119"
+    },
+    {
+      "Id": "S1939",
+      "Message": "\u0027IRemovedNodePruning\u003CVersionVector\u003E\u0027 implements \u0027IReplicatedData\u003CVersionVector\u003E\u0027 so \u0027IReplicatedData\u003CVersionVector\u003E\u0027 can be removed from the inheritance list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L26",
+      "Location": "Line 26 Position 43-74"
+    }
+  ]
+}

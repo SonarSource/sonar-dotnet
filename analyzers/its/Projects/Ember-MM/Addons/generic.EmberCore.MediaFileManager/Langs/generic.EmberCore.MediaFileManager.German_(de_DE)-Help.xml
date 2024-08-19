@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<string control="FileManager_cbEnabled">Aktiviert dieses Modul.</string>
+	<string control="FileManager_ListView1"></string>
+	<string control="FileManager_ColumnHeader1"></string>
+	<string control="FileManager_ColumnHeader2"></string>
+	<string control="FileManager_btnNewSet"></string>
+	<string control="FileManager_btnEditSet"></string>
+	<string control="FileManager_btnRemoveSet"></string>
+	<string control="FileManager_TextBox1"></string>
+	<string control="FileManager_TextBox2"></string>
+	<string control="FileManager_Button4"></string>
+</strings>
+<!-- Rev1921 please mail sphere@dersphere.de if you find errors or have suggestions-->

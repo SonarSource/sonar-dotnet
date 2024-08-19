@@ -1,0 +1,208 @@
+{
+  "Issues": [
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L132",
+      "Location": "Line 132 Position 9-13"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L160",
+      "Location": "Line 160 Position 47-51"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L165",
+      "Location": "Line 165 Position 47-51"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L170",
+      "Location": "Line 170 Position 47-51"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L175",
+      "Location": "Line 175 Position 47-51"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L223",
+      "Location": "Line 223 Position 12-16"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L271",
+      "Location": "Line 271 Position 12-16"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L288",
+      "Location": "Line 288 Position 45-49"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L294",
+      "Location": "Line 294 Position 45-49"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L300",
+      "Location": "Line 300 Position 45-49"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L306",
+      "Location": "Line 306 Position 45-49"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L318",
+      "Location": "Line 318 Position 10-14"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L322",
+      "Location": "Line 322 Position 10-14"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L326",
+      "Location": "Line 326 Position 10-14"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L330",
+      "Location": "Line 330 Position 10-14"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L334",
+      "Location": "Line 334 Position 10-14"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L345",
+      "Location": "Line 345 Position 10-14"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L349",
+      "Location": "Line 349 Position 10-14"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L353",
+      "Location": "Line 353 Position 10-14"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L357",
+      "Location": "Line 357 Position 10-14"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L361",
+      "Location": "Line 361 Position 10-14"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L493",
+      "Location": "Line 493 Position 10-14"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L589",
+      "Location": "Line 589 Position 12-16"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L598",
+      "Location": "Line 598 Position 12-16"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L607",
+      "Location": "Line 607 Position 12-16"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L621",
+      "Location": "Line 621 Position 10-14"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L627",
+      "Location": "Line 627 Position 10-14"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L633",
+      "Location": "Line 633 Position 10-14"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L448",
+      "Location": "Line 448 Position 41-45"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L452",
+      "Location": "Line 452 Position 37-41"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L862",
+      "Location": "Line 862 Position 32-36"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L876",
+      "Location": "Line 876 Position 32-36"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L890",
+      "Location": "Line 890 Position 32-36"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L909",
+      "Location": "Line 909 Position 32-36"
+    }
+  ]
+}

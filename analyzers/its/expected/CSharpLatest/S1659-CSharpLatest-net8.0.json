@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027b\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3240.cs#L10",
+      "Location": "Line 10 Position 25-26"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027two\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3776.cs#L6",
+      "Location": "Line 6 Position 22-25"
+    }
+  ]
+}

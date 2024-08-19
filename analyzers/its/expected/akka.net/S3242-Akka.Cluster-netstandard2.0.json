@@ -1,0 +1,52 @@
+{
+  "Issues": [
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Immutable.IImmutableSet\u003CAkka.Cluster.UniqueAddress\u003E\u0027 instead of \u0027System.Collections.Immutable.ImmutableHashSet\u003CAkka.Cluster.UniqueAddress\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Reachability.cs#L263",
+      "Location": "Line 263 Position 77-82"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Immutable.IImmutableSet\u003Cstring\u003E\u0027 instead of \u0027System.Collections.Immutable.ImmutableHashSet\u003Cstring\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L673",
+      "Location": "Line 673 Position 61-72"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.IEquatable\u003CAkka.Actor.Address\u003E\u0027 instead of \u0027Akka.Actor.Address\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L287",
+      "Location": "Line 287 Position 44-56"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Immutable.IImmutableSet\u003CAkka.Cluster.UniqueAddress\u003E\u0027 instead of \u0027System.Collections.Immutable.ImmutableHashSet\u003CAkka.Cluster.UniqueAddress\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L501",
+      "Location": "Line 501 Position 45-56"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IList\u003CAkka.Cluster.UniqueAddress\u003E\u0027 instead of \u0027System.Collections.Generic.List\u003CAkka.Cluster.UniqueAddress\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L401",
+      "Location": "Line 401 Position 142-156"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IDictionary\u003CT, int\u003E\u0027 instead of \u0027System.Collections.Generic.Dictionary\u003CT, int\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L443",
+      "Location": "Line 443 Position 70-73"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IEnumerable\u003CAkka.Cluster.Member\u003E\u0027 instead of \u0027System.Collections.Immutable.ImmutableSortedSet\u003CAkka.Cluster.Member\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L149",
+      "Location": "Line 149 Position 87-94"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IEnumerable\u003CAkka.Cluster.Member\u003E\u0027 instead of \u0027System.Collections.Immutable.ImmutableSortedSet\u003CAkka.Cluster.Member\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L196",
+      "Location": "Line 196 Position 87-94"
+    }
+  ]
+}

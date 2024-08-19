@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3717",
+      "Message": "Implement this method or throw \u0027NotSupportedException\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Json/Converters/TupleConverter.cs#L55",
+      "Location": "Line 55 Position 13-49"
+    },
+    {
+      "Id": "S3717",
+      "Message": "Implement this method or throw \u0027NotSupportedException\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/NancyViewEngineHost.cs#L69",
+      "Location": "Line 69 Position 13-49"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1206",
+      "Message": "This struct overrides \u0027Equals\u0027 and should therefore also override \u0027GetHashCode\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/EventSequences.cs#L100",
+      "Location": "Line 100 Position 19-38"
+    },
+    {
+      "Id": "S1206",
+      "Message": "This class overrides \u0027Equals\u0027 and should therefore also override \u0027GetHashCode\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/EventSequences.cs#L34",
+      "Location": "Line 34 Position 25-43"
+    },
+    {
+      "Id": "S1206",
+      "Message": "This class overrides \u0027Equals\u0027 and should therefore also override \u0027GetHashCode\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/EventSequences.cs#L66",
+      "Location": "Line 66 Position 18-31"
+    }
+  ]
+}

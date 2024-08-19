@@ -1,0 +1,52 @@
+{
+  "Issues": [
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_leader\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/AutoDown.cs#L153",
+      "Location": "Line 153 Position 32-39"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_seedNodeProcessCounter\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1012",
+      "Location": "Line 1012 Position 45-48"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_leaderActionCounter\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1016",
+      "Location": "Line 1016 Position 42-45"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_selfDownCounter\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1017",
+      "Location": "Line 1017 Position 38-41"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_exitingTasksInProgress\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1019",
+      "Location": "Line 1019 Position 46-53"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_attempts\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2696",
+      "Location": "Line 2696 Position 31-34"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_selfMember\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/MembershipState.cs#L46",
+      "Location": "Line 46 Position 36-42"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027Zero\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/VectorClock.cs#L179",
+      "Location": "Line 179 Position 46-50"
+    }
+  ]
+}

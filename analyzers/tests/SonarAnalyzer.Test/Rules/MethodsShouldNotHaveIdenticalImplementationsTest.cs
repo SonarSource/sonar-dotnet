@@ -1,22 +1,26 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using Microsoft.CodeAnalysis.CSharp;
-using CS = SonarAnalyzer.CSharp.Rules;
-using VB = SonarAnalyzer.VisualBasic.Rules;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.Test.Rules;
 
@@ -28,7 +32,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
 
     [TestMethod]
     public void MethodsShouldNotHaveIdenticalImplementations() =>
-        builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
+        builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
     [CombinatorialDataTestMethod]
     public void MethodsShouldNotHaveIdenticalImplementations_MethodTypeParameters(
@@ -54,7 +58,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
                     return true;
                 }
             }
-            """).WithOptions(LanguageOptions.FromCSharp9);
+            """).WithOptions(ParseOptionsHelper.FromCSharp9);
         if (nonCompliant)
         {
             builder.Verify();
@@ -88,7 +92,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
                     return true;
                 }
             }
-            """).WithOptions(LanguageOptions.FromCSharp9).Verify();
+            """).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
     [DataTestMethod]
     [DataRow("", "")]
@@ -123,7 +127,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
                     return true;
                 }
             }
-            """).WithOptions(LanguageOptions.FromCSharp9).Verify();
+            """).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
     [DataTestMethod]
     [DataRow("Of TKey, TValue", "Of TKey, TValue")]
@@ -185,7 +189,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
                     return true;
                 }
             }
-            """).WithOptions(LanguageOptions.FromCSharp9).VerifyNoIssues();
+            """).WithOptions(ParseOptionsHelper.FromCSharp9).VerifyNoIssues();
 
     [DataTestMethod]
     [DataRow("Of TKey, TValue", "Of TKey, TValue As Structure")]
@@ -245,7 +249,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
                     return true;
                 }
             }
-            """).WithOptions(LanguageOptions.FromCSharp9).Verify();
+            """).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
 #if NET
 
@@ -275,7 +279,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
                     return true;
                 }
             }
-            """).WithOptions(LanguageOptions.FromCSharp9).Verify();
+            """).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
     [TestMethod]
     public void MethodsShouldNotHaveIdenticalImplementations_CSharp9() =>

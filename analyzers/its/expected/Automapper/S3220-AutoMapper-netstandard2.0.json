@@ -1,0 +1,58 @@
+{
+  "Issues": [
+    {
+      "Id": "S3220",
+      "Message": "Review this call, which partially matches an overload without \u0027params\u0027. The partial match is \u0027BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2, Expression arg3)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L109-L112",
+      "Location": "Lines 109-112 Position 24-41"
+    },
+    {
+      "Id": "S3220",
+      "Message": "Review this call, which partially matches an overload without \u0027params\u0027. The partial match is \u0027BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L257-L266",
+      "Location": "Lines 257-266 Position 24-34"
+    },
+    {
+      "Id": "S3220",
+      "Message": "Review this call, which partially matches an overload without \u0027params\u0027. The partial match is \u0027BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L273-L281",
+      "Location": "Lines 273-281 Position 28-33"
+    },
+    {
+      "Id": "S3220",
+      "Message": "Review this call, which partially matches an overload without \u0027params\u0027. The partial match is \u0027BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L299",
+      "Location": "Line 299 Position 35-179"
+    },
+    {
+      "Id": "S3220",
+      "Message": "Review this call, which partially matches an overload without \u0027params\u0027. The partial match is \u0027BlockExpression Expression.Block(Expression arg0, Expression arg1)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L340",
+      "Location": "Line 340 Position 64-103"
+    },
+    {
+      "Id": "S3220",
+      "Message": "Review this call, which partially matches an overload without \u0027params\u0027. The partial match is \u0027BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L280-L282",
+      "Location": "Lines 280-282 Position 26-156"
+    },
+    {
+      "Id": "S3220",
+      "Message": "Review this call, which partially matches an overload without \u0027params\u0027. The partial match is \u0027BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2, Expression arg3, Expression arg4)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Mappers/CollectionMapper.cs#L184-L188",
+      "Location": "Lines 184-188 Position 24-33"
+    },
+    {
+      "Id": "S3220",
+      "Message": "Review this call, which partially matches an overload without \u0027params\u0027. The partial match is \u0027BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2, Expression arg3)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Mappers/CollectionMapper.cs#L198-L201",
+      "Location": "Lines 198-201 Position 28-37"
+    },
+    {
+      "Id": "S3220",
+      "Message": "Review this call, which partially matches an overload without \u0027params\u0027. The partial match is \u0027BlockExpression Expression.Block(Expression arg0, Expression arg1)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Mappers/EnumToEnumMapper.cs#L20",
+      "Location": "Line 20 Position 20-116"
+    }
+  ]
+}

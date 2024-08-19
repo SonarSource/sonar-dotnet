@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/Scraper/ITVImageScraper.cs#L6",
+      "Location": "Line 6 Position 22-37"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/Scraper/ITVInfoScraper.cs#L6",
+      "Location": "Line 6 Position 22-36"
+    }
+  ]
+}

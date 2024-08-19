@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S100",
+      "Message": "Rename property \u0027RequiresSSL\u0027 to match pascal case naming rules, consider using \u0027RequiresSsl\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Authentication.Forms/FormsAuthenticationConfiguration.cs#L49",
+      "Location": "Line 49 Position 21-32"
+    }
+  ]
+}

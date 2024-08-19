@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027Error\u0027 6 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L70",
+      "Location": "Line 70 Position 68-75"
+    },
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027XBMCSyncPlayCount\u0027 4 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L106",
+      "Location": "Line 106 Position 74-93"
+    },
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027Error\u0027 8 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L194",
+      "Location": "Line 194 Position 77-84"
+    },
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027XBMC Controller\u0027 4 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L37",
+      "Location": "Line 37 Position 31-48"
+    }
+  ]
+}

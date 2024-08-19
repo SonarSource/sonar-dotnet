@@ -1,0 +1,64 @@
+{
+  "Issues": [
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Uid\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/AddressUidExtension.cs#L54",
+      "Location": "Line 54 Position 29-32"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027AssociateBehavior\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L35",
+      "Location": "Line 35 Position 78-95"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027DisassociateBehavior\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L39",
+      "Location": "Line 39 Position 79-99"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027ListenBehavior\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L48",
+      "Location": "Line 48 Position 13-27"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027LocalAddress\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L53",
+      "Location": "Line 53 Position 33-45"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027ShutdownBehavior\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L57",
+      "Location": "Line 57 Position 62-78"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027WriteBehavior\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L61",
+      "Location": "Line 61 Position 93-106"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Inbound\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L770",
+      "Location": "Line 770 Position 30-37"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Actor\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L231",
+      "Location": "Line 231 Position 35-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027AddedSchemeIdentifier\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L145",
+      "Location": "Line 145 Position 32-53"
+    }
+  ]
+}

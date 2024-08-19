@@ -1,17 +1,21 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using References = System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis.MetadataReference>;
@@ -20,20 +24,6 @@ namespace SonarAnalyzer.TestFramework.MetadataReferences;
 
 public static class MetadataReferenceFacade
 {
-#if NET
-    public static IEnumerable<MetadataReference> AspNetCoreReferences =>
-    [
-        AspNetCoreMetadataReference.MicrosoftAspNetCore,                    // For WebApplication
-        AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions, // For IHost
-        AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,    // For HttpContext, RouteValueDictionary
-        AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpFeatures,
-        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
-        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
-        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcRazorPages,       // For RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage
-        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
-        AspNetCoreMetadataReference.MicrosoftAspNetCoreRouting,             // For IEndpointRouteBuilder
-    ];
-#endif
     public static References NetStandard { get; } = MetadataReferenceFactory.Create("netstandard.dll");
 
     public static References MsCorLib =>
@@ -45,7 +35,7 @@ public static class MetadataReferenceFacade
 
     public static References MicrosoftExtensionsDependencyInjectionAbstractions =>
 #if NETFRAMEWORK
-        NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(TestConstants.DotNetCore220Version);
+        NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(Constants.DotNetCore220Version);
 #else
         new[] { AspNetCoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions };
 #endif
@@ -86,14 +76,12 @@ public static class MetadataReferenceFacade
 #if NETFRAMEWORK
         FrameworkMetadataReference.PresentationFramework;
 #else
-        [WindowsDesktopMetadataReference.PresentationCore,
-            WindowsDesktopMetadataReference.PresentationFramework,
-            WindowsDesktopMetadataReference.WindowsBase];
+        Enumerable.Empty<MetadataReference>();
 #endif
 
     public static References SystemCollections =>
 #if NETFRAMEWORK
-        NuGetMetadataReference.SystemCollectionsImmutable(TestConstants.NuGetLatestVersion);
+        Enumerable.Empty<MetadataReference>();
 #else
         new[]
         {
@@ -149,13 +137,6 @@ public static class MetadataReferenceFacade
             CoreMetadataReference.SystemIoCompression,
             CoreMetadataReference.SystemIoCompressionZipFile
         };
-#endif
-
-    public static References SystemMemory =>
-#if NETFRAMEWORK
-        NuGetMetadataReference.SystemMemory();
-#else
-        [];
 #endif
 
     public static References SystemServiceModel =>
@@ -216,14 +197,14 @@ public static class MetadataReferenceFacade
         FrameworkMetadataReference.SystemThreadingTasks
             .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions("4.0.0"));
 #else
-        [CoreMetadataReference.SystemThreadingTasks, CoreMetadataReference.SystemThreadingTasksParallel];
+        new[] { CoreMetadataReference.SystemThreadingTasks };
 #endif
 
     public static References RegularExpressions =>
 #if NETFRAMEWORK
         Enumerable.Empty<MetadataReference>();
 #else
-        [CoreMetadataReference.SystemTextRegularExpressions];
+        NuGetMetadataReference.SystemTextRegularExpressions();
 #endif
 
     public static References SystemRuntimeSerialization =>
@@ -281,7 +262,7 @@ public static class MetadataReferenceFacade
 #if NETFRAMEWORK
         FrameworkMetadataReference.SystemWindowsForms;
 #else
-        new[] { WindowsDesktopMetadataReference.SystemWindowsForms };
+        new[] { WindowsFormsMetadataReference.SystemWindowsForms };
 #endif
 
     public static References SystemComponentModelComposition =>

@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3871",
+      "Message": "Make this exception \u0027public\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L113",
+      "Location": "Line 113 Position 23-45"
+    },
+    {
+      "Id": "S3871",
+      "Message": "Make this exception \u0027public\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L114",
+      "Location": "Line 114 Position 23-44"
+    }
+  ]
+}

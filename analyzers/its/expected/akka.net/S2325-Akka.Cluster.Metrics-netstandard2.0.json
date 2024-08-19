@@ -1,0 +1,52 @@
+{
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027SelectRandomNode\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetricsCollector.cs#L207",
+      "Location": "Line 207 Position 33-49"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027GetProcesses\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Collectors/DefaultCollector.cs#L138",
+      "Location": "Line 138 Position 27-39"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Requiring\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Configuration/ClusterMetricsSettings.cs#L76",
+      "Location": "Line 76 Position 19-28"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Weights\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/MetricSelectors.cs#L77",
+      "Location": "Line 77 Position 57-64"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027AddressFromProto\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L188",
+      "Location": "Line 188 Position 36-52"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027MapWithErrorMessage\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L193",
+      "Location": "Line 193 Position 21-40"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Compress\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L64",
+      "Location": "Line 64 Position 24-32"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Decompress\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L78",
+      "Location": "Line 78 Position 24-34"
+    }
+  ]
+}

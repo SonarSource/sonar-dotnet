@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MimeTypes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <List>
+    <MimeType Ext=".htme">text/html</MimeType>
+    <MimeType Ext=".htm">text/html</MimeType>
+    <MimeType Ext=".js">text/html</MimeType>
+    <MimeType Ext=".html">text/html</MimeType>
+    <MimeType Ext=".css">text/css</MimeType>
+    <MimeType Ext=".txt">text/html</MimeType>
+    <MimeType Ext=".jpg">image/jpeg</MimeType>
+    <MimeType Ext=".tbn">image/jpeg</MimeType>
+    <MimeType Ext=".jpeg">image/jpeg</MimeType>
+    <MimeType Ext=".gif">image/gif</MimeType>
+    <MimeType Ext=".png">image/png</MimeType>
+  </List>
+</MimeTypes>

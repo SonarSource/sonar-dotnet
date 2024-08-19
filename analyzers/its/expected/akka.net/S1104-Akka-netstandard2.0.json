@@ -1,0 +1,40 @@
+{
+  "Issues": [
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorRef.cs#L656",
+      "Location": "Line 656 Position 30-53"
+    },
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L90-L93",
+      "Location": "Lines 90-93 Position 32-55"
+    },
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Tcp.cs#L684",
+      "Location": "Line 684 Position 42-73"
+    },
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Tcp.cs#L700",
+      "Location": "Line 700 Position 41-71"
+    },
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Tcp.cs#L835",
+      "Location": "Line 835 Position 42-73"
+    },
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Tcp.cs#L872",
+      "Location": "Line 872 Position 35-59"
+    }
+  ]
+}

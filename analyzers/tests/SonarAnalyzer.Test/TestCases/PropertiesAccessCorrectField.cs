@@ -25,21 +25,6 @@ class NonCompliantClass_FromRspec
     }
 }
 
-partial class NonCompliant_PartialClass
-{
-    private int x;
-    private int y;
-}
-
-partial class NonCompliant_PartialClass
-{
-    public int Y
-    {
-        get { return x; }  // Noncompliant
-        set { x = value; } // Noncompliant
-    }
-}
-
 struct NonCompliantStruct_FromRspec
 {
     private int x;

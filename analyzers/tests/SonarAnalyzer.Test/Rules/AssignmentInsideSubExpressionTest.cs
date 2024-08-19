@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.CSharp.Rules;
+using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Test.Rules
 {
@@ -25,17 +29,21 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void AssignmentInsideSubExpression() =>
-            builder.AddPaths("AssignmentInsideSubExpression.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
+            builder.AddPaths("AssignmentInsideSubExpression.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
         [TestMethod]
-        public void AssignmentInsideSubExpression_TopLevelStatements() =>
-            builder.AddPaths("AssignmentInsideSubExpression.TopLevelStatements.cs").WithTopLevelStatements().WithOptions(LanguageOptions.CSharpLatest).Verify();
+        public void AssignmentInsideSubExpression_CSharp9() =>
+            builder.AddPaths("AssignmentInsideSubExpression.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
-        public void AssignmentInsideSubExpression_Latest() =>
-            builder.AddPaths("AssignmentInsideSubExpression.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+        public void AssignmentInsideSubExpression_CSharp10() =>
+            builder.AddPaths("AssignmentInsideSubExpression.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
+        [TestMethod]
+        public void AssignmentInsideSubExpression_CSharp11() =>
+            builder.AddPaths("AssignmentInsideSubExpression.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 

@@ -6,7 +6,6 @@ using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.Design;
 
 namespace Basics
 {
@@ -334,21 +333,5 @@ namespace UsingBindNeverAttribute
     {
         [HttpGet] public IActionResult Get(ModelWithBindNeverProperty model) => View(model);
         [HttpPost] public IActionResult Post(EntireModelWithBindNeverAttribute model) => View(model);
-    }
-}
-
-// https://github.com/SonarSource/sonar-dotnet/issues/9690
-namespace Repro_GH9690
-{
-    public class DataModel
-    {
-        [BindRequired]
-        public int PasswordMinLength { get; set; } // Noncompliant FP BindRequiredAttribute ensure value are set with a value from the client request
-    }
-
-    public class DataModelController : Controller
-    {
-        [HttpPost]
-        public IActionResult Post([FromBody] DataModel model) => View(model);
     }
 }

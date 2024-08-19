@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027_cluster\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L155",
+      "Location": "Line 155 Position 9-73"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027_sharding\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L156",
+      "Location": "Line 156 Position 9-90"
+    }
+  ]
+}

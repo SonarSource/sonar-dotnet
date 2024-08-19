@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 9 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.EmberExtras/frmAVCodecEditor.vb#L99",
+      "Location": "Line 99 Position 9-67"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 8 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L226",
+      "Location": "Line 226 Position 9-67"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 10 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L71",
+      "Location": "Line 71 Position 9-68"
+    }
+  ]
+}

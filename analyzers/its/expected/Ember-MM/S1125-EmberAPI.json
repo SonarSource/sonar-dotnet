@@ -1,0 +1,52 @@
+{
+  "Issues": [
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPICommon.vb#L1030",
+      "Location": "Line 1030 Position 77-82"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPICommon.vb#L893",
+      "Location": "Line 893 Position 130-136"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPICommon.vb#L919",
+      "Location": "Line 919 Position 122-128"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L112",
+      "Location": "Line 112 Position 62-69"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L641",
+      "Location": "Line 641 Position 119-124"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L65",
+      "Location": "Line 65 Position 146-152"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L78",
+      "Location": "Line 78 Position 142-148"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L860",
+      "Location": "Line 860 Position 175-180"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2221",
+      "Message": "Catch a list of specific exception subtype or use exception filters instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Cluster.cs#L157",
+      "Location": "Line 157 Position 20-29"
+    },
+    {
+      "Id": "S2221",
+      "Message": "Catch a list of specific exception subtype or use exception filters instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L3107",
+      "Location": "Line 3107 Position 20-29"
+    }
+  ]
+}

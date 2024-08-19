@@ -1,0 +1,124 @@
+{
+  "Issues": [
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L176",
+      "Location": "Line 176 Position 13-22"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L267",
+      "Location": "Line 267 Position 13-17"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L103",
+      "Location": "Line 103 Position 13-19"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L137",
+      "Location": "Line 137 Position 17-27"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L138",
+      "Location": "Line 138 Position 17-31"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L162",
+      "Location": "Line 162 Position 8-15"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L173",
+      "Location": "Line 173 Position 10-20"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L174",
+      "Location": "Line 174 Position 10-24"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L261",
+      "Location": "Line 261 Position 21-28"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L267",
+      "Location": "Line 267 Position 21-28"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L275",
+      "Location": "Line 275 Position 21-28"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L379",
+      "Location": "Line 379 Position 13-15"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L380",
+      "Location": "Line 380 Position 13-15"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L393",
+      "Location": "Line 393 Position 23-27"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L432",
+      "Location": "Line 432 Position 13-18"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L584",
+      "Location": "Line 584 Position 21-26"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L589",
+      "Location": "Line 589 Position 29-33"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L609",
+      "Location": "Line 609 Position 29-38"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L628",
+      "Location": "Line 628 Position 21-26"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L641",
+      "Location": "Line 641 Position 29-38"
+    }
+  ]
+}

@@ -1,26 +1,28 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using System.Text;
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.Core.Syntax.Utilities;
-using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
-using SonarAnalyzer.VisualBasic.Core.Syntax.Utilities;
-using CS = SonarAnalyzer.CSharp.Rules;
-using VB = SonarAnalyzer.VisualBasic.Rules;
+using NSubstitute;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.Test.AnalysisContext;
 
@@ -176,23 +178,27 @@ public partial class SonarAnalysisContextBaseTest
     [DataRow("Windows Form Designer GeNeRaTed code")] // legacy Windows Forms used to include generated code in dev files, surrounded by such a region
     public void ShouldAnalyzeTree_IssuesRaisedOnPartiallyGenerated_LegacyWinFormsFile(string regionName)
     {
-        new VerifierBuilder<CS.EmptyStatement>()
-            .AddSnippet($$"""
-                class Sample
+        var content = $$"""
+            class Sample
+            {
+                void HandWrittenEventHandler()
                 {
-                    void HandWrittenEventHandler()
-                    {
-                        ; // Noncompliant
-                    }
-                #region {{regionName}}
-                    void GeneratedStuff()
-                    {
-                        ; // Noncompliant
-                    }
-                #endregion
+                    ; // Noncompliant
                 }
-                """)
-            .Verify();
+            #region {{regionName}}
+                void GeneratedStuff()
+                {
+                    ; // Noncompliant
+                }
+            #endregion
+            }
+            """;
+        var compilation = SolutionBuilder
+           .Create()
+           .AddProject(AnalyzerLanguage.CSharp)
+           .AddSnippet(content, "Foo.cs")
+           .GetCompilation();
+        DiagnosticVerifier.Verify(compilation, new CS.EmptyStatement());
     }
 
     [TestMethod]
@@ -425,7 +431,7 @@ public partial class SonarAnalysisContextBaseTest
         var compilation = SolutionBuilder
             .Create()
             .AddProject(analyzerLanguage)
-            .AddReferences(TestCompiler.ProjectTypeReference(projectType))
+            .AddReferences(TestHelper.ProjectTypeReference(projectType))
             .AddSnippet(string.Empty, fileName)
             .GetCompilation();
         var tree = compilation.SyntaxTrees.Single(x => x.FilePath.Contains(fileName));

@@ -1,0 +1,81 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="OverrideRoslynCodeAnalysisPropertiesWithSonarAnalyzer"
+          AfterTargets="ResolveCodeAnalysisRuleSet"
+          BeforeTargets="CoreCompile">
+    <PropertyGroup>
+      <BinariesFolder>$(MSBuildStartupDirectory)\..\packaging\binaries</BinariesFolder>
+      <AnalysisOutputPath>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)</AnalysisOutputPath>
+      <ErrorLogFolder>$(MSBuildStartupDirectory)\output\$(PROJECT)\issues</ErrorLogFolder>
+      <ErrorLogPrefix Condition="'$(TargetFramework)' == ''">$(ErrorLogFolder)\$(AssemblyName)</ErrorLogPrefix>
+      <ErrorLogPrefix Condition="'$(TargetFramework)' != ''">$(ErrorLogFolder)\$(AssemblyName)-$(TargetFramework)</ErrorLogPrefix>
+      <SonarAnalysisConfigPath>$(MSBuildStartupDirectory)\SonarQubeAnalysisConfig.xml</SonarAnalysisConfigPath>
+      <SonarProjectOutputPath Condition="'$(TargetFramework)' != ''">$(AnalysisOutputPath)\$(TargetFramework)</SonarProjectOutputPath>
+      <SonarProjectOutputPath Condition="'$(TargetFramework)' == ''">$(AnalysisOutputPath)</SonarProjectOutputPath>
+      <SonarProjectConfigFilePath>$(SonarProjectOutputPath)\SonarProjectConfig.xml</SonarProjectConfigFilePath>
+      <SonarFilesToAnalyzePath>$(AnalysisOutputPath)\FilesToAnalyze.txt</SonarFilesToAnalyzePath>
+      <!-- Only projects with explicit SonarQubeTestProject=true will be classified as test ones. -->
+      <SonarProjectType Condition="$(SonarQubeTestProject) != 'true'">Product</SonarProjectType>
+      <SonarProjectType Condition="$(SonarQubeTestProject) == 'true'">Test</SonarProjectType>
+      <!-- When SonarUnknownProjectType is present and it's true, indicated that we emulate the SonarLint envirorment -->
+      <SonarProjectType Condition="$(SonarUnknownProjectType) == 'true'">Unknown</SonarProjectType>
+    </PropertyGroup>
+
+    <Error Text="Could not find '$(BinariesFolder)\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.dll'" Condition="!Exists('$(BinariesFolder)\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.dll')" />
+    <Error Text="Could not find '$(BinariesFolder)\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.dll'" Condition="!Exists('$(BinariesFolder)\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.dll')" />
+
+    <!-- This section builds content of SonarProjectConfig.xml additional file. We need to simulate S4MSB behavior to configure the analyzer. -->
+    <ItemGroup>
+      <SonarProjectConfigLine Include="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;" />
+      <SonarProjectConfigLine Include="&lt;SonarProjectConfig xmlns=&quot;http://www.sonarsource.com/msbuild/analyzer/2021/1&quot;&gt;" />
+      <SonarProjectConfigLine Include="  &lt;AnalysisConfigPath&gt;$(SonarAnalysisConfigPath)&lt;/AnalysisConfigPath&gt;" />
+      <SonarProjectConfigLine Include="  &lt;ProjectPath&gt;$(MSBuildProjectFullPath)&lt;/ProjectPath&gt;" />
+      <SonarProjectConfigLine Include="  &lt;FilesToAnalyzePath&gt;$(SonarFilesToAnalyzePath)&lt;/FilesToAnalyzePath&gt;" />
+      <SonarProjectConfigLine Include="  &lt;OutPath&gt;$(SonarProjectOutputPath)&lt;/OutPath&gt;" />
+      <SonarProjectConfigLine Include="  &lt;ProjectType&gt;$(SonarProjectType)&lt;/ProjectType&gt;" />
+      <SonarProjectConfigLine Include="  &lt;TargetFramework&gt;$(TargetFramework)&lt;/TargetFramework&gt;" />
+      <SonarProjectConfigLine Include="&lt;/SonarProjectConfig&gt;" />
+    </ItemGroup>
+
+    <MakeDir Directories="$(AnalysisOutputPath)"/>
+    <MakeDir Directories="$(SonarProjectOutputPath)"/>
+    <MakeDir Directories="$(ErrorLogFolder)"/>
+
+    <!-- First FINDSTR removes \bin\, \obj\ and \packages\ subdirectories from FilesToAnalyze.txt. Second FINDSTR includes only files with an extension, because DIR lists also directories themselves.-->
+    <Exec Command="dir &quot;$(MSBuildStartupDirectory)\Projects\$(PROJECT)&quot; /s /b | findstr /v &quot;\\bin\\ \\obj\\ \\packages\\&quot; | findstr /e /r &quot;\\[^\\]*\.[^\\]*&quot; > &quot;$(SonarFilesToAnalyzePath)&quot;" Condition="'$(TargetFrameworks)' == ''"/>
+
+    <WriteLinesToFile File="$(SonarProjectConfigFilePath)"
+                      Lines="@(SonarProjectConfigLine)"
+                      WriteOnlyWhenDifferent="true"
+                      ContinueOnError="WarnAndContinue"
+                      Overwrite="true" />
+
+    <ItemGroup>
+      <!-- Remove all previously added analyzers, except built-in SourceGenerators -->
+      <Analyzer Remove="@(Analyzer)" Condition="!$([System.Text.RegularExpressions.Regex]::IsMatch('%(Filename)', '(Generator|Generators|SourceGeneration|SourceGenerators)$'))"/>
+      <!-- Add the SonarAnalyzer analyzer DLLs -->
+      <Analyzer Include="$(BinariesFolder)\SonarAnalyzer.CSharp\*.dll" />
+      <Analyzer Include="$(BinariesFolder)\SonarAnalyzer.VisualBasic\*.dll" />
+      <AdditionalFiles Include="$(MSBuildStartupDirectory)\output\$(PROJECT)\SonarLint.xml" />
+      <AdditionalFiles Include="$(SonarProjectConfigFilePath)" />
+    </ItemGroup>
+
+    <PropertyGroup>
+      <!-- Set the path to the SARIF report -->
+      <ErrorLog>$(ErrorLogPrefix).json</ErrorLog>
+      <RazorCompilationErrorLog>$(ErrorLogPrefix).Views.json</RazorCompilationErrorLog>
+
+      <!-- Override the ruleset with all SonarAnalyzer rules -->
+      <ResolvedCodeAnalysisRuleSet>$(MSBuildStartupDirectory)\output\AllSonarAnalyzerRules.ruleset</ResolvedCodeAnalysisRuleSet>
+
+      <!-- Don't fail the build -->
+      <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+      <WarningsAsErrors></WarningsAsErrors>
+
+      <!-- Keep all messages, including AD0001 -->
+      <WarningLevel>4</WarningLevel>
+
+      <!-- Enable the reporting of analyzer performances -->
+      <ReportAnalyzer>true</ReportAnalyzer>
+    </PropertyGroup>
+  </Target>
+</Project>

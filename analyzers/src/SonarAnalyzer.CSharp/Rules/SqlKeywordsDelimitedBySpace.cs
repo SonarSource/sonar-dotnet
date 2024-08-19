@@ -1,20 +1,26 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+using SonarAnalyzer.Common.Walkers;
+
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class SqlKeywordsDelimitedBySpace : SonarDiagnosticAnalyzer
@@ -24,25 +30,25 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        private static readonly NameSyntax[] SqlNamespaces =
-            [
-                BuildQualifiedNameSyntax("System", "Data"),
-                BuildQualifiedNameSyntax("Microsoft", "EntityFrameworkCore"),
-                BuildQualifiedNameSyntax("ServiceStack", "OrmLite"),
-                BuildQualifiedNameSyntax("System", "Data", "SqlClient"),
-                BuildQualifiedNameSyntax("System", "Data", "SQLite"),
-                BuildQualifiedNameSyntax("System", "Data", "SqlServerCe"),
-                BuildQualifiedNameSyntax("System", "Data", "Entity"),
-                BuildQualifiedNameSyntax("System", "Data", "Odbc"),
-                BuildQualifiedNameSyntax("System", "Data", "OracleClient"),
-                BuildQualifiedNameSyntax("Microsoft", "Data", "SqlClient"),
-                BuildQualifiedNameSyntax("Microsoft", "Data", "Sqlite"),
-                SyntaxFactory.IdentifierName("Dapper"),
-                SyntaxFactory.IdentifierName("NHibernate"),
-                SyntaxFactory.IdentifierName("PetaPoco")
-            ];
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        private static readonly IList<NameSyntax> SqlNamespaces = new List<NameSyntax>
+        {
+            CSharpSyntaxHelper.BuildQualifiedNameSyntax("System", "Data"),
+            CSharpSyntaxHelper.BuildQualifiedNameSyntax("Microsoft", "EntityFrameworkCore"),
+            CSharpSyntaxHelper.BuildQualifiedNameSyntax("ServiceStack", "OrmLite"),
+            CSharpSyntaxHelper.BuildQualifiedNameSyntax("System", "Data", "SqlClient"),
+            CSharpSyntaxHelper.BuildQualifiedNameSyntax("System", "Data", "SQLite"),
+            CSharpSyntaxHelper.BuildQualifiedNameSyntax("System", "Data", "SqlServerCe"),
+            CSharpSyntaxHelper.BuildQualifiedNameSyntax("System", "Data", "Entity"),
+            CSharpSyntaxHelper.BuildQualifiedNameSyntax("System", "Data", "Odbc"),
+            CSharpSyntaxHelper.BuildQualifiedNameSyntax("System", "Data", "OracleClient"),
+            CSharpSyntaxHelper.BuildQualifiedNameSyntax("Microsoft", "Data", "SqlClient"),
+            CSharpSyntaxHelper.BuildQualifiedNameSyntax("Microsoft", "Data", "Sqlite"),
+            SyntaxFactory.IdentifierName("Dapper"),
+            SyntaxFactory.IdentifierName("NHibernate"),
+            SyntaxFactory.IdentifierName("PetaPoco")
+        };
 
         // The '@' symbol is used for named parameters.
         // The '{' and '}' symbols are used in string interpolations.
@@ -101,20 +107,6 @@ namespace SonarAnalyzer.CSharp.Rules
         private static bool HasSqlNamespace(SyntaxList<UsingDirectiveSyntax> usings) =>
             usings.Select(x => x.Name)
                 .Any(x => SqlNamespaces.Any(usingsNamespace => SyntaxFactory.AreEquivalent(x, usingsNamespace)));
-
-        // creates a QualifiedNameSyntax "a.b"
-        private static QualifiedNameSyntax BuildQualifiedNameSyntax(string a, string b) =>
-            SyntaxFactory.QualifiedName(
-                SyntaxFactory.IdentifierName(a),
-                SyntaxFactory.IdentifierName(b));
-
-        // creates a QualifiedNameSyntax "a.b.c"
-        private static QualifiedNameSyntax BuildQualifiedNameSyntax(string a, string b, string c) =>
-            SyntaxFactory.QualifiedName(
-                SyntaxFactory.QualifiedName(
-                    SyntaxFactory.IdentifierName(a),
-                    SyntaxFactory.IdentifierName(b)),
-                SyntaxFactory.IdentifierName(c));
 
         private sealed class StringConcatenationWalker : SafeCSharpSyntaxWalker
         {
@@ -186,13 +178,13 @@ namespace SonarAnalyzer.CSharp.Rules
                 }
                 else if (expression is InterpolatedStringExpressionSyntax interpolatedString)
                 {
-                    stringWrapper = new StringWrapper(interpolatedString, interpolatedString.ContentsText());
+                    stringWrapper = new StringWrapper(interpolatedString, interpolatedString.GetContentsText());
                     return true;
                 }
                 // if this is a nested binary, we skip it so that we can raise when we visit it.
                 // Otherwise, FindConstantValue will merge it into one value.
                 else if (expression.RemoveParentheses() is not BinaryExpressionSyntax
-                    && expression.FindConstantValue(context.Model) is string constantValue)
+                    && expression.FindConstantValue(context.SemanticModel) is string constantValue)
                 {
                     stringWrapper = new StringWrapper(expression, constantValue);
                     return true;
@@ -238,7 +230,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 foreach (var content in interpolatedStringExpression.Contents)
                 {
                     if (content is InterpolationSyntax interpolation
-                        && interpolation.Expression.FindConstantValue(context.Model) is string constantValue)
+                        && interpolation.Expression.FindConstantValue(context.SemanticModel) is string constantValue)
                     {
                         parts.Add(new StringWrapper(content, constantValue));
                     }

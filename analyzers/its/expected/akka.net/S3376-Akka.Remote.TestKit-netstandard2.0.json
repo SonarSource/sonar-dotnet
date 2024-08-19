@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3376",
+      "Message": "Make this class name end with \u0027Exception\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L309",
+      "Location": "Line 309 Position 24-41"
+    }
+  ]
+}

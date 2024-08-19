@@ -1,0 +1,1486 @@
+{
+  "Issues": [
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CTShape1\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CTShape1, TMat1\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/Dsl/GraphApply.cs#L120",
+      "Location": "Line 120 Position 63-65"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CTShape2\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CTShape2, TMat2\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/Dsl/GraphApply.cs#L120",
+      "Location": "Line 120 Position 90-92"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CTShape3\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CTShape3, TMat3\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/Dsl/GraphApply.cs#L161",
+      "Location": "Line 161 Position 117-119"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CTShape1\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CTShape1, TMat1\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/Dsl/GraphApply.cs#L161",
+      "Location": "Line 161 Position 63-65"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CTShape2\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CTShape2, TMat2\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/Dsl/GraphApply.cs#L161",
+      "Location": "Line 161 Position 90-92"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CTShape3\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CTShape3, TMat3\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/Dsl/GraphApply.cs#L207",
+      "Location": "Line 207 Position 117-119"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CTShape4\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CTShape4, TMat4\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/Dsl/GraphApply.cs#L207",
+      "Location": "Line 207 Position 144-146"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CTShape1\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CTShape1, TMat1\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/Dsl/GraphApply.cs#L207",
+      "Location": "Line 207 Position 63-65"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CTShape2\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CTShape2, TMat2\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/Dsl/GraphApply.cs#L207",
+      "Location": "Line 207 Position 90-92"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CTShape1\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CTShape1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/Dsl/GraphApply.cs#L56",
+      "Location": "Line 56 Position 102-104"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CTShape1\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CTShape1, TMat1\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/Dsl/GraphApply.cs#L84",
+      "Location": "Line 84 Position 63-65"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1001",
+      "Location": "Line 1001 Position 94-98"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1029",
+      "Location": "Line 1029 Position 100-104"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1064",
+      "Location": "Line 1064 Position 114-118"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1097",
+      "Location": "Line 1097 Position 98-102"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1135",
+      "Location": "Line 1135 Position 102-106"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1174",
+      "Location": "Line 1174 Position 111-115"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L118",
+      "Location": "Line 118 Position 108-112"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1207",
+      "Location": "Line 1207 Position 106-110"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1235",
+      "Location": "Line 1235 Position 96-100"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1253",
+      "Location": "Line 1253 Position 109-113"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1278",
+      "Location": "Line 1278 Position 144-148"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1324",
+      "Location": "Line 1324 Position 118-122"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1390",
+      "Location": "Line 1390 Position 114-118"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L146",
+      "Location": "Line 146 Position 101-105"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1461",
+      "Location": "Line 1461 Position 115-119"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1502",
+      "Location": "Line 1502 Position 110-114"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1528",
+      "Location": "Line 1528 Position 109-113"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1546",
+      "Location": "Line 1546 Position 110-114"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1569",
+      "Location": "Line 1569 Position 104-108"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1592",
+      "Location": "Line 1592 Position 107-111"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1616",
+      "Location": "Line 1616 Position 101-105"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1640",
+      "Location": "Line 1640 Position 109-113"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1670",
+      "Location": "Line 1670 Position 115-119"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1710",
+      "Location": "Line 1710 Position 98-102"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTIn, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CT, TIn, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L175",
+      "Location": "Line 175 Position 94-98"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1751",
+      "Location": "Line 1751 Position 98-102"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1775",
+      "Location": "Line 1775 Position 40-44"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1799",
+      "Location": "Line 1799 Position 96-100"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1820",
+      "Location": "Line 1820 Position 114-118"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1838",
+      "Location": "Line 1838 Position 105-109"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1861",
+      "Location": "Line 1861 Position 96-100"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1883",
+      "Location": "Line 1883 Position 102-106"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1913",
+      "Location": "Line 1913 Position 93-97"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CT1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, T1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1936",
+      "Location": "Line 1936 Position 97-101"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CT1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, T1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1962",
+      "Location": "Line 1962 Position 99-103"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CT1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, T1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1998",
+      "Location": "Line 1998 Position 98-102"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CT1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, T1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2028",
+      "Location": "Line 2028 Position 125-129"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2054",
+      "Location": "Line 2054 Position 105-109"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2078",
+      "Location": "Line 2078 Position 132-136"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTIn, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CT, TIn, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L208",
+      "Location": "Line 208 Position 98-102"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2107",
+      "Location": "Line 2107 Position 101-105"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2133",
+      "Location": "Line 2133 Position 100-104"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2161",
+      "Location": "Line 2161 Position 101-105"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2190",
+      "Location": "Line 2190 Position 96-100"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2220",
+      "Location": "Line 2220 Position 107-111"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CT, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CT, T, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2254",
+      "Location": "Line 2254 Position 78-82"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CT, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CT, T, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2276",
+      "Location": "Line 2276 Position 105-109"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CT, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CT, T, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2288",
+      "Location": "Line 2288 Position 77-81"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTIn, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CT, TIn, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L248",
+      "Location": "Line 248 Position 106-110"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTIn, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CT, TIn, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L292",
+      "Location": "Line 292 Position 99-103"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTIn, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CT, TIn, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L337",
+      "Location": "Line 337 Position 108-112"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L364",
+      "Location": "Line 364 Position 95-99"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L391",
+      "Location": "Line 391 Position 98-102"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L425",
+      "Location": "Line 425 Position 99-103"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L448",
+      "Location": "Line 448 Position 99-103"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L474",
+      "Location": "Line 474 Position 107-111"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L501",
+      "Location": "Line 501 Position 41-45"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L52",
+      "Location": "Line 52 Position 97-101"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L528",
+      "Location": "Line 528 Position 110-114"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L601",
+      "Location": "Line 601 Position 103-107"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L629",
+      "Location": "Line 629 Position 110-114"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L663",
+      "Location": "Line 663 Position 104-108"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L701",
+      "Location": "Line 701 Position 109-113"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L734",
+      "Location": "Line 734 Position 109-113"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L769",
+      "Location": "Line 769 Position 114-118"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L801",
+      "Location": "Line 801 Position 93-97"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L833",
+      "Location": "Line 833 Position 101-105"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L863",
+      "Location": "Line 863 Position 101-105"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L894",
+      "Location": "Line 894 Position 116-120"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L928",
+      "Location": "Line 928 Position 95-99"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L951",
+      "Location": "Line 951 Position 94-98"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L973",
+      "Location": "Line 973 Position 100-104"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CTShape\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CTShape, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L100",
+      "Location": "Line 100 Position 66-71"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.FanInShape\u003CTOut\u003E\u0027 instead of \u0027Akka.Streams.UniformFanInShape\u003CTIn, TOut\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L212",
+      "Location": "Line 212 Position 85-90"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.FanOutShape\u003CTIn\u003E\u0027 instead of \u0027Akka.Streams.UniformFanOutShape\u003CTIn, TOut\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L289",
+      "Location": "Line 289 Position 83-89"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.OutPort\u0027 instead of \u0027Akka.Streams.Outlet\u003CT1\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L42",
+      "Location": "Line 42 Position 54-58"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.InPort\u0027 instead of \u0027Akka.Streams.Inlet\u003CT2\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L42",
+      "Location": "Line 42 Position 70-72"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CTShape\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CTShape, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L58",
+      "Location": "Line 58 Position 75-80"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Implementation.Stages.ISymbolicStage\u003CTOut, TOut2\u003E\u0027 instead of \u0027Akka.Streams.Implementation.Stages.SymbolicStage\u003CTOut, TOut2\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L48",
+      "Location": "Line 48 Position 40-42"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Delegate\u0027 instead of \u0027System.Func\u003CT1, T2, T3\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Keep.cs#L69",
+      "Location": "Line 69 Position 65-67"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Delegate\u0027 instead of \u0027System.Func\u003CT1, T2, T3\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Keep.cs#L84",
+      "Location": "Line 84 Position 64-66"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CAkka.Streams.ClosedShape\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CAkka.Streams.ClosedShape, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/RunnableGraph.cs#L162",
+      "Location": "Line 162 Position 85-86"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1027",
+      "Location": "Line 1027 Position 87-91"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1058",
+      "Location": "Line 1058 Position 92-96"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1096",
+      "Location": "Line 1096 Position 100-104"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1128",
+      "Location": "Line 1128 Position 95-99"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L115",
+      "Location": "Line 115 Position 97-101"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1155",
+      "Location": "Line 1155 Position 85-89"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1172",
+      "Location": "Line 1172 Position 98-102"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1196",
+      "Location": "Line 1196 Position 133-137"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1236",
+      "Location": "Line 1236 Position 115-119"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1300",
+      "Location": "Line 1300 Position 111-115"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1368",
+      "Location": "Line 1368 Position 112-116"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1407",
+      "Location": "Line 1407 Position 99-103"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L143",
+      "Location": "Line 143 Position 90-94"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1432",
+      "Location": "Line 1432 Position 98-102"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1451",
+      "Location": "Line 1451 Position 102-106"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1473",
+      "Location": "Line 1473 Position 93-97"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1495",
+      "Location": "Line 1495 Position 96-100"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1518",
+      "Location": "Line 1518 Position 90-94"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1541",
+      "Location": "Line 1541 Position 98-102"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1570",
+      "Location": "Line 1570 Position 104-108"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1609",
+      "Location": "Line 1609 Position 87-91"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1649",
+      "Location": "Line 1649 Position 87-91"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1672",
+      "Location": "Line 1672 Position 37-41"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTIn, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTIn, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L168",
+      "Location": "Line 168 Position 89-93"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1695",
+      "Location": "Line 1695 Position 85-89"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1715",
+      "Location": "Line 1715 Position 103-107"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1732",
+      "Location": "Line 1732 Position 94-98"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1754",
+      "Location": "Line 1754 Position 85-89"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1775",
+      "Location": "Line 1775 Position 91-95"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1801",
+      "Location": "Line 1801 Position 82-86"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CT1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CT1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1823",
+      "Location": "Line 1823 Position 86-90"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CT1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CT1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1848",
+      "Location": "Line 1848 Position 88-92"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CT1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CT1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1883",
+      "Location": "Line 1883 Position 87-91"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CT1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CT1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1912",
+      "Location": "Line 1912 Position 114-118"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1937",
+      "Location": "Line 1937 Position 94-98"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1961",
+      "Location": "Line 1961 Position 121-125"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1989",
+      "Location": "Line 1989 Position 90-94"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L200",
+      "Location": "Line 200 Position 99-103"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2014",
+      "Location": "Line 2014 Position 90-94"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2041",
+      "Location": "Line 2041 Position 90-94"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2069",
+      "Location": "Line 2069 Position 85-89"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2116",
+      "Location": "Line 2116 Position 96-100"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CT, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CT, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2149",
+      "Location": "Line 2149 Position 76-80"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CT, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CT, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2172",
+      "Location": "Line 2172 Position 103-107"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CT, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CT, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2198",
+      "Location": "Line 2198 Position 75-79"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L237",
+      "Location": "Line 237 Position 107-111"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTIn, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTIn, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L280",
+      "Location": "Line 280 Position 94-98"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTIn, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTIn, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L322",
+      "Location": "Line 322 Position 103-107"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L345",
+      "Location": "Line 345 Position 84-88"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L368",
+      "Location": "Line 368 Position 87-91"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L401",
+      "Location": "Line 401 Position 88-92"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L423",
+      "Location": "Line 423 Position 88-92"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L448",
+      "Location": "Line 448 Position 96-100"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L474",
+      "Location": "Line 474 Position 38-42"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L500",
+      "Location": "Line 500 Position 99-103"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L51",
+      "Location": "Line 51 Position 86-90"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CT, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CT, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L568",
+      "Location": "Line 568 Position 83-87"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L595",
+      "Location": "Line 595 Position 99-103"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L625",
+      "Location": "Line 625 Position 93-97"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L659",
+      "Location": "Line 659 Position 98-102"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L688",
+      "Location": "Line 688 Position 98-102"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut1, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L719",
+      "Location": "Line 719 Position 103-107"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L747",
+      "Location": "Line 747 Position 82-86"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L778",
+      "Location": "Line 778 Position 90-94"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L807",
+      "Location": "Line 807 Position 90-94"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L837",
+      "Location": "Line 837 Position 105-109"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L870",
+      "Location": "Line 870 Position 84-88"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L892",
+      "Location": "Line 892 Position 83-87"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L913",
+      "Location": "Line 913 Position 89-93"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L940",
+      "Location": "Line 940 Position 83-87"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L967",
+      "Location": "Line 967 Position 89-93"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L998",
+      "Location": "Line 998 Position 103-107"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1000",
+      "Location": "Line 1000 Position 132-136"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1030",
+      "Location": "Line 1030 Position 116-120"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1062",
+      "Location": "Line 1062 Position 121-125"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1101",
+      "Location": "Line 1101 Position 129-133"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut1, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1134",
+      "Location": "Line 1134 Position 124-128"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1162",
+      "Location": "Line 1162 Position 114-118"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L118",
+      "Location": "Line 118 Position 126-130"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut1, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1180",
+      "Location": "Line 1180 Position 127-131"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1205",
+      "Location": "Line 1205 Position 162-166"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut1, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1230",
+      "Location": "Line 1230 Position 128-132"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut1, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1256",
+      "Location": "Line 1256 Position 128-132"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut1, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1274",
+      "Location": "Line 1274 Position 131-135"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1297",
+      "Location": "Line 1297 Position 122-126"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1320",
+      "Location": "Line 1320 Position 125-129"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1344",
+      "Location": "Line 1344 Position 119-123"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1368",
+      "Location": "Line 1368 Position 127-131"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1398",
+      "Location": "Line 1398 Position 133-137"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1438",
+      "Location": "Line 1438 Position 116-120"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L146",
+      "Location": "Line 146 Position 119-123"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1479",
+      "Location": "Line 1479 Position 116-120"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1503",
+      "Location": "Line 1503 Position 47-51"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1527",
+      "Location": "Line 1527 Position 114-118"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1548",
+      "Location": "Line 1548 Position 132-136"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1570",
+      "Location": "Line 1570 Position 114-118"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1592",
+      "Location": "Line 1592 Position 120-124"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1619",
+      "Location": "Line 1619 Position 111-115"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CT1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CT1, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1642",
+      "Location": "Line 1642 Position 115-119"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CT1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CT1, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1668",
+      "Location": "Line 1668 Position 117-121"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CT1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CT1, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1704",
+      "Location": "Line 1704 Position 116-120"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTIn, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTIn, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L172",
+      "Location": "Line 172 Position 118-122"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CT1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CT1, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1734",
+      "Location": "Line 1734 Position 143-147"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut1, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1760",
+      "Location": "Line 1760 Position 123-127"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut1, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1785",
+      "Location": "Line 1785 Position 150-154"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1814",
+      "Location": "Line 1814 Position 119-123"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1840",
+      "Location": "Line 1840 Position 119-123"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1868",
+      "Location": "Line 1868 Position 119-123"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1897",
+      "Location": "Line 1897 Position 114-118"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut1, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1927",
+      "Location": "Line 1927 Position 125-129"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CT, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CT, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1961",
+      "Location": "Line 1961 Position 105-109"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut1, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L205",
+      "Location": "Line 205 Position 128-132"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut1, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L243",
+      "Location": "Line 243 Position 136-140"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTIn, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTIn, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L287",
+      "Location": "Line 287 Position 123-127"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTIn, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTIn, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L330",
+      "Location": "Line 330 Position 132-136"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L354",
+      "Location": "Line 354 Position 113-117"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L378",
+      "Location": "Line 378 Position 116-120"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L412",
+      "Location": "Line 412 Position 117-121"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L435",
+      "Location": "Line 435 Position 117-121"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut1, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L460",
+      "Location": "Line 460 Position 125-129"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L485",
+      "Location": "Line 485 Position 128-132"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L52",
+      "Location": "Line 52 Position 123-127"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CT, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CT, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L555",
+      "Location": "Line 555 Position 112-116"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L583",
+      "Location": "Line 583 Position 128-132"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut1, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L614",
+      "Location": "Line 614 Position 122-126"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut1, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L649",
+      "Location": "Line 649 Position 127-131"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut1, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut1, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L679",
+      "Location": "Line 679 Position 127-131"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTIn, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTIn, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L711",
+      "Location": "Line 711 Position 126-130"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L740",
+      "Location": "Line 740 Position 111-115"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L772",
+      "Location": "Line 772 Position 119-123"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L802",
+      "Location": "Line 802 Position 119-123"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L833",
+      "Location": "Line 833 Position 134-138"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L867",
+      "Location": "Line 867 Position 113-117"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L890",
+      "Location": "Line 890 Position 112-116"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L912",
+      "Location": "Line 912 Position 118-122"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L940",
+      "Location": "Line 940 Position 112-116"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.SubFlow\u003CTOut, TMat, TClosed\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L968",
+      "Location": "Line 968 Position 118-122"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTIn, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Source\u003CTIn, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Extra/Implicits.cs#L44",
+      "Location": "Line 44 Position 96-102"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Dsl.IFlow\u003CTOut, TMat\u003E\u0027 instead of \u0027Akka.Streams.Dsl.Flow\u003CTIn, TOut, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Extra/Implicits.cs#L82",
+      "Location": "Line 82 Position 110-114"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IMaterializer\u0027 instead of \u0027Akka.Streams.Implementation.SubFusingActorMaterializerImpl\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L202",
+      "Location": "Line 202 Position 72-78"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CTShape\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CTShape, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L102",
+      "Location": "Line 102 Position 94-99"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.ICollection\u003CAkka.Streams.Implementation.IModule\u003E\u0027 instead of \u0027System.Collections.Generic.ISet\u003CAkka.Streams.Implementation.IModule\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L153",
+      "Location": "Line 153 Position 86-91"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CTShape\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CTShape, TMat\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L42",
+      "Location": "Line 42 Position 109-114"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Implementation.IModule\u0027 instead of \u0027Akka.Streams.Implementation.Module\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1193",
+      "Location": "Line 1193 Position 53-59"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Inlet\u0027 instead of \u0027Akka.Streams.Inlet\u003CT\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L1064",
+      "Location": "Line 1064 Position 43-48"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Outlet\u0027 instead of \u0027Akka.Streams.Outlet\u003CT\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L1256",
+      "Location": "Line 1256 Position 42-48"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Outlet\u0027 instead of \u0027Akka.Streams.Outlet\u003CT\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L1303",
+      "Location": "Line 1303 Position 58-64"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Outlet\u0027 instead of \u0027Akka.Streams.Outlet\u003CT\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L1311",
+      "Location": "Line 1311 Position 46-52"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Inlet\u0027 instead of \u0027Akka.Streams.Inlet\u003CT\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L906",
+      "Location": "Line 906 Position 56-61"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.InPort\u0027 instead of \u0027Akka.Streams.Inlet\u003CT\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L935",
+      "Location": "Line 935 Position 53-58"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.OutPort\u0027 instead of \u0027Akka.Streams.Outlet\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L985",
+      "Location": "Line 985 Position 47-53"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.InPort\u0027 instead of \u0027Akka.Streams.Inlet\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L994",
+      "Location": "Line 994 Position 48-53"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.OutPort\u0027 instead of \u0027Akka.Streams.Outlet\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L996",
+      "Location": "Line 996 Position 49-55"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.Stage.IContext\u0027 instead of \u0027Akka.Streams.Stage.IContext\u003CTOut\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L365",
+      "Location": "Line 365 Position 92-99"
+    }
+  ]
+}

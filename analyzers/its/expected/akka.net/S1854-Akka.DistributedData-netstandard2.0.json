@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1854",
+      "Message": "Remove this useless assignment to local variable \u0027seed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/PruningState.cs#L69",
+      "Location": "Line 69 Position 28-61"
+    }
+  ]
+}

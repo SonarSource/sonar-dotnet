@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules;
+namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class GetTypeWithIsAssignableFrom : SonarDiagnosticAnalyzer
@@ -40,7 +44,7 @@ public sealed class GetTypeWithIsAssignableFrom : SonarDiagnosticAnalyzer
                     && invocation.HasExactlyNArguments(1)
                     && memberAccess.Name.Identifier.ValueText is var methodName
                     && (methodName == "IsInstanceOfType" || methodName == "IsAssignableFrom")
-                    && c.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+                    && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
                     && methodSymbol.IsInType(KnownType.System_Type))
                 {
                     CheckForIsAssignableFrom(c, memberAccess, methodSymbol, invocation.ArgumentList.Arguments.First().Expression);
@@ -65,9 +69,9 @@ public sealed class GetTypeWithIsAssignableFrom : SonarDiagnosticAnalyzer
         context.RegisterNodeAction(c =>
             {
                 var isExpression = (BinaryExpressionSyntax)c.Node;
-                if (c.Model.GetTypeInfo(isExpression.Left).Type is var objectToCast
+                if (c.SemanticModel.GetTypeInfo(isExpression.Left).Type is var objectToCast
                     && objectToCast.IsClass()
-                    && c.Model.GetSymbolInfo(isExpression.Right).Symbol is INamedTypeSymbol namedSymbol
+                    && c.SemanticModel.GetSymbolInfo(isExpression.Right).Symbol is INamedTypeSymbol namedSymbol
                     && namedSymbol.GetSymbolType() is var typeCastTo
                     && typeCastTo.IsClass()
                     && !typeCastTo.Is(KnownType.System_Object)
@@ -101,8 +105,8 @@ public sealed class GetTypeWithIsAssignableFrom : SonarDiagnosticAnalyzer
     {
         if (sideA.ToStringContains("GetType")
             && sideB is TypeOfExpressionSyntax sideBTypeOf
-            && (sideA as InvocationExpressionSyntax).IsGetTypeCall(context.Model)
-            && context.Model.GetTypeInfo(sideBTypeOf.Type).Type is { } typeSymbol // Can be null for empty identifier from 'typeof' unfinished syntax
+            && (sideA as InvocationExpressionSyntax).IsGetTypeCall(context.SemanticModel)
+            && context.SemanticModel.GetTypeInfo(sideBTypeOf.Type).Type is { } typeSymbol // Can be null for empty identifier from 'typeof' unfinished syntax
             && typeSymbol.IsSealed
             && !typeSymbol.OriginalDefinition.Is(KnownType.System_Nullable_T))
         {
@@ -122,7 +126,7 @@ public sealed class GetTypeWithIsAssignableFrom : SonarDiagnosticAnalyzer
 
     private static void CheckForIsAssignableFrom(SonarSyntaxNodeReportingContext context, MemberAccessExpressionSyntax memberAccess, IMethodSymbol methodSymbol, ExpressionSyntax argument)
     {
-        if (methodSymbol.Name == nameof(Type.IsAssignableFrom) && (argument as InvocationExpressionSyntax).IsGetTypeCall(context.Model))
+        if (methodSymbol.Name == nameof(Type.IsAssignableFrom) && (argument as InvocationExpressionSyntax).IsGetTypeCall(context.SemanticModel))
         {
             if (memberAccess.Expression is TypeOfExpressionSyntax typeOf)
             {

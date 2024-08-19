@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/samples/Nancy.Demo.Hosting.Kestrel/DemoBootstrapper.cs#L3",
+      "Location": "Line 3 Position 5-17"
+    }
+  ]
+}

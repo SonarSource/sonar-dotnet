@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L172",
+      "Location": "Line 172 Position 29-54"
+    },
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L173",
+      "Location": "Line 173 Position 29-48"
+    }
+  ]
+}

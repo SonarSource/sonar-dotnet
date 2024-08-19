@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S113",
+      "Message": "Add a new line at the end of the file \u0027NetSh.cs\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Hosting.Self/NetSh.cs#L37",
+      "Location": "Line 37 Position 1-2"
+    },
+    {
+      "Id": "S113",
+      "Message": "Add a new line at the end of the file \u0027UacHelper.cs\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Hosting.Self/UacHelper.cs#L39",
+      "Location": "Line 39 Position 1-2"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L412",
+      "Location": "Line 412 Position 13-19"
+    }
+  ]
+}

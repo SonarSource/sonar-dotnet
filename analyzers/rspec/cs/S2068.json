@@ -3,7 +3,7 @@
   "type": "SECURITY_HOTSPOT",
   "code": {
     "impacts": {
-      "SECURITY": "BLOCKER"
+      "SECURITY": "HIGH"
     },
     "attribute": "TRUSTWORTHY"
   },

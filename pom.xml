@@ -6,12 +6,12 @@
   <parent>
     <groupId>org.sonarsource.parent</groupId>
     <artifactId>parent</artifactId>
-    <version>83.0.0.2369</version>
+    <version>75.0.0.1943</version>
   </parent>
 
   <groupId>org.sonarsource.dotnet</groupId>
   <artifactId>sonar-dotnet</artifactId>
-  <version>10.11-SNAPSHOT</version>
+  <version>9.33-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Sonar .NET Java Plugin</name>
@@ -26,18 +26,16 @@
 
   <licenses>
     <license>
-      <name>SSALv1</name>
-      <url>https://sonarsource.com/license/ssal/</url>
+      <name>GNU LGPL 3</name>
+      <url>http://www.gnu.org/licenses/lgpl.txt</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
 
   <modules>
-    <module>sonar-dotnet-core</module>
-    <module>sonar-csharp-core</module>
+    <module>sonar-dotnet-shared-library</module>
     <module>sonar-csharp-plugin</module>
     <module>sonar-vbnet-plugin</module>
-    <module>sonar-vbnet-core</module>
   </modules>
 
   <scm>
@@ -53,28 +51,22 @@
   </issueManagement>
 
   <properties>
+    <gitRepositoryName>sonar-dotnet</gitRepositoryName>
     <!-- Release: enable publication to Bintray -->
     <artifactsToPublish>${project.groupId}:sonar-csharp-plugin:jar,${project.groupId}:sonar-vbnet-plugin:jar</artifactsToPublish>
     <artifactsToDownload>${project.groupId}:SonarAnalyzer.CSharp:nupkg,${project.groupId}:SonarAnalyzer.VisualBasic:nupkg</artifactsToDownload>
     <!-- We are ignoring java doc warnings - this is because we are using JDK 11. Ideally we should not do that. -->
     <doclint>none</doclint>
-    
-    <sonar.analyzer.commons.version>2.17.0.3322</sonar.analyzer.commons.version>
-    <sonar.plugin.api.version>12.0.0.2960</sonar.plugin.api.version>
-    <sonar.api.impl.version>25.5.0.107428</sonar.api.impl.version>
+    <sonar.analyzer.commons.version>2.12.0.2964</sonar.analyzer.commons.version>
+    <sonar.version>10.10.0.2391</sonar.version>
+    <sonar.api.impl.version>10.6.0.92116</sonar.api.impl.version>
     <jdk.min.version>17</jdk.min.version>
     <maven.compiler.release>${jdk.min.version}</maven.compiler.release>
     <!-- See: https://github.com/SonarSource/sonar-plugin-api#compatibility -->
     <plugin.api.min.version>9.14.0.375</plugin.api.min.version>
 
     <!-- Test dependencies -->
-    <junit.version>5.12.2</junit.version>
-
-    <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
-    <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
-    <rspec.directory>${project.build.directory}/../../analyzers/rspec</rspec.directory>
-    <packaging.directory>${project.build.directory}/../../analyzers/packaging</packaging.directory>
-    <maven.deploy.skip>false</maven.deploy.skip>
+    <junit.version>5.10.3</junit.version>
   </properties>
 
   <dependencyManagement>
@@ -82,7 +74,7 @@
       <dependency>
         <groupId>org.sonarsource.api.plugin</groupId>
         <artifactId>sonar-plugin-api</artifactId>
-        <version>${sonar.plugin.api.version}</version>
+        <version>${sonar.version}</version>
         <!-- Provided at runtime by SonarQube/Cloud -->
         <scope>provided</scope>
       </dependency>
@@ -100,7 +92,7 @@
       <dependency>
         <groupId>org.sonarsource.api.plugin</groupId>
         <artifactId>sonar-plugin-api-test-fixtures</artifactId>
-        <version>${sonar.plugin.api.version}</version>
+        <version>${sonar.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
@@ -131,7 +123,7 @@
       <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
-        <version>3.27.3</version>
+        <version>3.26.3</version>
         <scope>test</scope>
       </dependency>
       <dependency>
@@ -143,7 +135,7 @@
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
-        <version>5.17.0</version>
+        <version>5.12.0</version>
         <scope>test</scope>
       </dependency>
       <dependency>
@@ -168,6 +160,12 @@
   </dependencyManagement>
 
   <profiles>
+    <profile>
+      <id>its</id>
+      <modules>
+        <module>its</module>
+      </modules>
+    </profile>
     <profile>
       <id>sign</id>
       <build>

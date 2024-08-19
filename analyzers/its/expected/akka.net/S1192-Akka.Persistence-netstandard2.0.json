@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027Cannot persist during replay. Events can be persisted when receiving RecoveryCompleted or later.\u0027 5 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L301",
+      "Location": "Line 301 Position 53-151"
+    }
+  ]
+}

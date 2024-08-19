@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Add\u0027 for the operator \u0027\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/EWMA.cs#L62",
+      "Location": "Line 62 Position 45-46"
+    },
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Add\u0027 for the operator \u0027\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/MetricsGossip.cs#L65",
+      "Location": "Line 65 Position 46-47"
+    }
+  ]
+}

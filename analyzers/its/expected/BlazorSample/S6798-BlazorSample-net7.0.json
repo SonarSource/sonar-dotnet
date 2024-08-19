@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S6798",
+      "Message": "Methods marked as \u0027JSInvokable\u0027 should be \u0027public\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/BlazorSample/BlazorSample/Pages/S6798/S6798.CSharpOnly.cs#L7",
+      "Location": "Line 7 Position 24-82"
+    },
+    {
+      "Id": "S6798",
+      "Message": "Methods marked as \u0027JSInvokable\u0027 should be \u0027public\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/BlazorSample/BlazorSample/Pages/S6798/S6798.Partial.razor.cs#L7",
+      "Location": "Line 7 Position 32-79"
+    },
+    {
+      "Id": "S6798",
+      "Message": "Methods marked as \u0027JSInvokable\u0027 should be \u0027public\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/BlazorSample/BlazorSample/Pages/S6798/S6798.Partial.razor.cs#L8",
+      "Location": "Line 8 Position 24-82"
+    }
+  ]
+}

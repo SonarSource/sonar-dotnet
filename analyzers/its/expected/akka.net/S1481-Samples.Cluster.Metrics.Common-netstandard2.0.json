@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027cluster\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/examples/Cluster/Metrics/Samples.Cluster.Metrics.Common/MetricListener.cs#L31",
+      "Location": "Line 31 Position 17-24"
+    }
+  ]
+}

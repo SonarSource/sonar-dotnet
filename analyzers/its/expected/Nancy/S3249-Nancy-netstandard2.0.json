@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3249",
+      "Message": "Remove this \u0027base\u0027 call to \u0027object.Equals\u0027, which is directly based on the object reference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L456",
+      "Location": "Line 456 Position 20-36"
+    },
+    {
+      "Id": "S3249",
+      "Message": "Remove this \u0027base\u0027 call to \u0027object.GetHashCode\u0027, which is directly based on the object reference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L465",
+      "Location": "Line 465 Position 20-38"
+    }
+  ]
+}

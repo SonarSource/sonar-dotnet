@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Config.cs#L445",
+      "Location": "Line 445 Position 33-41"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L385",
+      "Location": "Line 385 Position 77-85"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/CircuitBreakerState.cs#L194",
+      "Location": "Line 194 Position 125-132"
+    }
+  ]
+}

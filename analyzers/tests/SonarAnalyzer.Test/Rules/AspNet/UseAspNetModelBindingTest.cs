@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.CSharp.Rules;
+using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Test.Rules;
 
@@ -25,7 +29,7 @@ public class UseAspNetModelBindingTest
 {
     private readonly VerifierBuilder builderAspNetCore = new VerifierBuilder<UseAspNetModelBinding>()
         .WithBasePath("AspNet")
-        .WithOptions(LanguageOptions.CSharpLatest)
+        .WithOptions(ParseOptionsHelper.CSharpLatest)
         .AddReferences([
             AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
             AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
@@ -62,12 +66,12 @@ public class UseAspNetModelBindingTest
             using System;
             using System.Linq;
             using System.Threading.Tasks;
-
+            
             public class TestController : Controller
             {
                 async Task NoncompliantKeyVariations(IFormCollection form, HttpRequest request)
                 {
-                    _ = {{filesAccess}}; // {{(compliant ? string.Empty : "//Noncompliant")}}
+                    _ = {{filesAccess}}; // {{(compliant ? string.Empty : "//Noncompliant")}} 
                 }
             }
             """");
@@ -103,7 +107,7 @@ public class UseAspNetModelBindingTest
                     _ = Request.{{property}}.TryGetValue(@"key", out _);              // Noncompliant
                     _ = Request.{{property}}["""key"""];                              // Noncompliant
                     _ = Request.{{property}}.TryGetValue("""key""", out _);           // Noncompliant
-
+            
                     const string key = "id";
                     _ = Request.{{property}}[key];                                    // Noncompliant
                     _ = Request.{{property}}.TryGetValue(key, out _);                 // Noncompliant
@@ -111,7 +115,7 @@ public class UseAspNetModelBindingTest
                     _ = Request.{{property}}.TryGetValue($"prefix.{key}", out _);     // Noncompliant
                     _ = Request.{{property}}[$"""prefix.{key}"""];                    // Noncompliant
                     _ = Request.{{property}}.TryGetValue($"""prefix.{key}""", out _); // Noncompliant
-
+            
                     _ = Request.{{property}}[key: "id"];                              // Noncompliant
                     _ = Request.{{property}}.TryGetValue(value: out _, key: "id");    // Noncompliant
                 }
@@ -259,7 +263,7 @@ public class UseAspNetModelBindingTest
     [DataRow("Headers")]
     [DataRow("Query")]
     [DataRow("RouteValues")]
-    public void UseAspNetModelBinding_NoController_Properties(string property) =>
+    public void UseAspNetModelBinding_NoControllerHelpers(string property) =>
         builderAspNetCore.AddSnippet($$""""
             using Microsoft.AspNetCore.Http;
             using Microsoft.AspNetCore.Mvc;
@@ -285,7 +289,7 @@ public class UseAspNetModelBindingTest
                     _ = Request.{{property}}["id"]; // Compliant: Not in a controller
                     _ = request.{{property}}["id"]; // Compliant: Not in a controller
                 }
-            }
+            }            
             """").VerifyNoIssues();
 
     [CombinatorialDataTestMethod]

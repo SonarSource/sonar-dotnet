@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S125",
+      "Message": "Remove this commented out code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L857",
+      "Location": "Line 857 Position 17-158"
+    }
+  ]
+}

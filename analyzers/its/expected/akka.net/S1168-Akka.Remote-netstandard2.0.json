@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1168",
+      "Message": "Return an empty collection instead of null.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L240",
+      "Location": "Line 240 Position 28-32"
+    }
+  ]
+}

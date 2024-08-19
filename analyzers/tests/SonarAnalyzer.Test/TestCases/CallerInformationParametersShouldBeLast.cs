@@ -33,8 +33,6 @@ namespace Tests.Diagnostics
 
         public Program([CallerFilePath]string callerFilePath = "", string other = "") { } // Noncompliant
         public Program(int other, [CallerFilePath]string callerFilePath = "") { }
-
-        public delegate void Del([CallerFilePath] string callerFilePath = "", string other = ""); // Noncompliant (see also https://github.com/dotnet/csharplang/discussions/7267#discussioncomment-6141445)
     }
 
     class BaseClass

@@ -1,21 +1,25 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using FluentAssertions.Extensions;
-using SonarAnalyzer.CSharp.Rules;
+using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Test.Rules;
 
@@ -160,21 +164,48 @@ public partial class UnusedPrivateMemberTest
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void UnusedPrivateMember(ProjectType projectType) =>
-        builder.AddPaths("UnusedPrivateMember.cs").AddReferences(TestCompiler.ProjectTypeReference(projectType)).Verify();
-
-#if NET
+        builder.AddPaths("UnusedPrivateMember.cs").AddReferences(TestHelper.ProjectTypeReference(projectType)).Verify();
 
     [TestMethod]
-    public void UnusedPrivateMember_CS_Latest() =>
-        builder.AddPaths("UnusedPrivateMember.Latest.cs", "UnusedPrivateMember.Latest.Partial.cs")
-            .WithOptions(LanguageOptions.CSharpLatest)
+    public void UnusedPrivateMember_FromCSharp7() =>
+        builder.AddPaths("UnusedPrivateMember.CSharp7.cs").WithOptions(ParseOptionsHelper.FromCSharp7).Verify();
+
+    [TestMethod]
+    public void UnusedPrivateMember_FromCSharp8() =>
+        builder.AddPaths("UnusedPrivateMember.CSharp8.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
             .AddReferences(MetadataReferenceFacade.NetStandard21)
             .AddReferences(MetadataReferenceFacade.MicrosoftExtensionsDependencyInjectionAbstractions)
             .Verify();
 
+#if NET
+
     [TestMethod]
-    public void UnusedPrivateMember_TopLevelStatements() =>
-        builder.AddPaths("UnusedPrivateMember.TopLevelStatements.cs").WithTopLevelStatements().Verify();
+    public void UnusedPrivateMember_FromCSharp9() =>
+        builder.AddPaths("UnusedPrivateMember.CSharp9.cs", "UnusedPrivateMember.CSharp9.Second.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
+    [TestMethod]
+    public void UnusedPrivateMember_FromCSharp9_TopLevelStatements() =>
+        builder.AddPaths("UnusedPrivateMember.CSharp9.TopLevelStatements.cs").WithTopLevelStatements().Verify();
+
+    [TestMethod]
+    public void UnusedPrivateMember_FromCSharp10() =>
+        builder.AddPaths("UnusedPrivateMember.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
+    [TestMethod]
+    public void UnusedPrivateMember_FromCSharp11() =>
+        builder.AddPaths("UnusedPrivateMember.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
+    // The exception should disappear once the fix for https://github.com/dotnet/roslyn/issues/70041 gets released.
+    // If this does not happen before the official release of .NET8 and C#12, the code should be refactored to handle potential null values.
+    //
+    // Workaround to return null in ImplicitObjectCreation.TypeAsString in this particular case to avoid AD0001.
+    // Should be reverted once the fix is released
+    [TestMethod]
+    public void UnusedPrivateMember_FromCSharp12() =>
+        builder.AddPaths("UnusedPrivateMember.CSharp12.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .VerifyNoIssues();
 
     [TestMethod]
     public void UnusedPrivateMemeber_EntityFramework_DontRaiseOnUnusedEntityPropertiesPrivateSetters() =>

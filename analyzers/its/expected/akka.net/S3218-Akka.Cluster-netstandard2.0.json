@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3218",
+      "Message": "Rename this method to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/VectorClock.cs#L102",
+      "Location": "Line 102 Position 32-38"
+    }
+  ]
+}

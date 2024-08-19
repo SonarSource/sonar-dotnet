@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class SetLocaleForDataTypes : SonarDiagnosticAnalyzer
@@ -47,7 +51,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private static void ProcessObjectCreations(SonarSyntaxNodeReportingContext c, IDictionary<ISymbol, SyntaxNode> symbolsWhereTypeIsCreated)
         {
-            if (GetSymbolFromConstructorInvocation(c.Node, c.Model) is ITypeSymbol objectType
+            if (GetSymbolFromConstructorInvocation(c.Node, c.SemanticModel) is ITypeSymbol objectType
                 && objectType.IsAny(CheckedTypes)
                 && GetAssignmentTargetVariable(c.Node) is { } variableSyntax)
             {
@@ -57,8 +61,8 @@ namespace SonarAnalyzer.CSharp.Rules
                 }
 
                 var variableSymbol = variableSyntax is IdentifierNameSyntax
-                    ? c.Model.GetSymbolInfo(variableSyntax).Symbol
-                    : c.Model.GetDeclaredSymbol(variableSyntax);
+                    ? c.SemanticModel.GetSymbolInfo(variableSyntax).Symbol
+                    : c.SemanticModel.GetDeclaredSymbol(variableSyntax);
 
                 if (variableSymbol != null && !symbolsWhereTypeIsCreated.ContainsKey(variableSymbol))
                 {
@@ -71,10 +75,10 @@ namespace SonarAnalyzer.CSharp.Rules
         {
             var assignmentExpression = (AssignmentExpressionSyntax)c.Node;
             var variableSymbols = assignmentExpression.AssignmentTargets()
-                .Where(x => c.Model.GetSymbolInfo(x).Symbol is IPropertySymbol propertySymbol
+                .Where(x => c.SemanticModel.GetSymbolInfo(x).Symbol is IPropertySymbol propertySymbol
                             && propertySymbol.Name == "Locale"
                             && propertySymbol.ContainingType.IsAny(CheckedTypes))
-                .Select(x => GetAccessedVariable(x, c.Model))
+                .Select(x => GetAccessedVariable(x, c.SemanticModel))
                 .WhereNotNull();
             symbolsWhereLocaleIsSet.UnionWith(variableSymbols);
         }

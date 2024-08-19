@@ -1,8 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="altcover" Version="8.8.21" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SonarAnalyzer.TestFramework\SonarAnalyzer.TestFramework.csproj" />
@@ -19,7 +26,8 @@
     <Using Include="Microsoft.CodeAnalysis" />
     <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
-    <Using Include="SonarAnalyzer.Core.Common" />
+    <Using Include="SonarAnalyzer.Common" />
+    <Using Include="SonarAnalyzer.Helpers" />
     <Using Include="SonarAnalyzer.TestFramework.Analyzers" />
     <Using Include="SonarAnalyzer.TestFramework.Build" />
     <Using Include="SonarAnalyzer.TestFramework.Common" />

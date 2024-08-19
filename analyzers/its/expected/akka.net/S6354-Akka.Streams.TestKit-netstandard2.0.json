@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L490",
+      "Location": "Line 490 Position 32-47"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L498",
+      "Location": "Line 498 Position 86-101"
+    }
+  ]
+}

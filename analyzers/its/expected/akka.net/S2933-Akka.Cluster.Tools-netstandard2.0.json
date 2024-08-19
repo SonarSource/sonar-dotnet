@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027_log\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClient.cs#L183",
+      "Location": "Line 183 Position 33-37"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027_checkDeadlinesTask\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterReceptionist.cs#L360",
+      "Location": "Line 360 Position 29-48"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027_registry\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L124",
+      "Location": "Line 124 Position 46-55"
+    }
+  ]
+}

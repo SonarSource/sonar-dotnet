@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S106",
+      "Message": "Remove this logging statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L687",
+      "Location": "Line 687 Position 21-38"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S107",
+      "Message": "Sub has 8 parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L113",
+      "Location": "Line 113 Position 29-259"
+    },
+    {
+      "Id": "S107",
+      "Message": "Sub has 8 parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L121",
+      "Location": "Line 121 Position 28-273"
+    },
+    {
+      "Id": "S107",
+      "Message": "Function has 9 parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L97",
+      "Location": "Line 97 Position 35-276"
+    }
+  ]
+}

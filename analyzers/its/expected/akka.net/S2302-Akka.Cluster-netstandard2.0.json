@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027selfAddress\u0027 with \u0027nameof(selfAddress)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L597",
+      "Location": "Line 597 Position 81-109"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027status\u0027 with \u0027nameof(status)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Member.cs#L197",
+      "Location": "Line 197 Position 55-88"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027manifest\u0027 with \u0027nameof(manifest)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L136",
+      "Location": "Line 136 Position 51-69"
+    }
+  ]
+}

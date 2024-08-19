@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S3366",
+      "Message": "Make sure the use of \u0027this\u0027 doesn\u0027t expose partially-constructed instances of this class in multi-threaded environments.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteMetricsExtension.cs#L71",
+      "Location": "Line 71 Position 46-50"
+    },
+    {
+      "Id": "S3366",
+      "Message": "Make sure the use of \u0027this\u0027 doesn\u0027t expose partially-constructed instances of this class in multi-threaded environments.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L100",
+      "Location": "Line 100 Position 58-62"
+    },
+    {
+      "Id": "S3366",
+      "Message": "Make sure the use of \u0027this\u0027 doesn\u0027t expose partially-constructed instances of this class in multi-threaded environments.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L196",
+      "Location": "Line 196 Position 59-63"
+    },
+    {
+      "Id": "S3366",
+      "Message": "Make sure the use of \u0027this\u0027 doesn\u0027t expose partially-constructed instances of this class in multi-threaded environments.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L422",
+      "Location": "Line 422 Position 59-63"
+    }
+  ]
+}

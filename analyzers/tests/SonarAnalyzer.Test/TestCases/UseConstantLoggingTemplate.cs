@@ -39,15 +39,12 @@ public class Program
         logger.Log(LogLevel.Warning, (arg + " " + arg).ToLower());              // Noncompliant
         //                            ^^^^^^^^^^^^^^^
 
-        logger.Log(LogLevel.Warning, "First " + "Second " + "Third");                               // Compliant - all strings in the concatenation are constants, the compiler can optimize it
-        logger.Log(LogLevel.Warning, FieldConstant + localConstant);                                // Compliant
-        logger.Log(LogLevel.Warning, FieldConstant + "Second");                                     // Compliant
-        logger.Log(LogLevel.Warning, $"Constant: {FieldConstant}");                                 // Compliant, see https://github.com/SonarSource/sonar-dotnet/issues/9247
-        logger.Log(LogLevel.Warning, $"Constant: {FieldConstant}" + $"Constant: {FieldConstant}");  // Compliant, see https://github.com/SonarSource/sonar-dotnet/issues/9653
-        logger.Log(LogLevel.Warning, FieldConstant + $"Constant: {FieldConstant}");                 // Compliant
-        logger.Log(LogLevel.Warning, "First" + $"Constant: {FieldConstant}");                       // Compliant
-        logger.Log(LogLevel.Warning, "First " + arg + "Third");                                     // Noncompliant
-        logger.Log(LogLevel.Warning, ("First " + "Second").ToLower());                              // FN
+        logger.Log(LogLevel.Warning, "First " + "Second " + "Third");           // Compliant - all strings in the concatenation are constants, the compiler can optimize it
+        logger.Log(LogLevel.Warning, FieldConstant + localConstant);            // Compliant
+        logger.Log(LogLevel.Warning, FieldConstant + "Second");                 // Compliant
+        logger.Log(LogLevel.Warning, $"Constant: {FieldConstant}");             // Compliant, see https://github.com/SonarSource/sonar-dotnet/issues/9247
+        logger.Log(LogLevel.Warning, "First " + arg + "Third");                 // Noncompliant
+        logger.Log(LogLevel.Warning, ("First " + "Second").ToLower());          // FN
 
         logger.Log(LogLevel.Warning, new EventId(42), $"{arg}");                // Noncompliant
         logger.Log(LogLevel.Warning, new Exception(), $"{arg}");                // Noncompliant

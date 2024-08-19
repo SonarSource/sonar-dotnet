@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AnalysisInput>
+    <Rules>
+    </Rules>
+    <Settings>
+        <Setting>
+            <Key>sonar.cs.ignoreHeaderComments</Key>
+            <Value>true</Value>
+        </Setting>
+        <Setting>
+            <Key>sonar.vbnet.ignoreHeaderComments</Key>
+            <Value>true</Value>
+        </Setting>
+        <Setting>
+            <Key>sonar.inclusions</Key>
+            <Value>**/Included/*.cs</Value>
+        </Setting>
+        <Setting>
+            <Key>sonar.exclusions</Key>
+            <Value>**/ExcludedByExclusion.cs,**/ExcludedByExclusion2.cs</Value>
+        </Setting>
+        <Setting>
+            <Key>sonar.global.exclusions</Key>
+            <Value>**/ExcludedByGlobalExclusion.cs</Value>
+        </Setting>
+        <!-- Test parameters -->
+        <Setting>
+            <Key>sonar.test.inclusions</Key>
+            <Value>**/IncludedTest/*.cs</Value>
+        </Setting>
+        <Setting>
+            <Key>sonar.test.exclusions</Key>
+            <Value>**/ExcludedByExclusionTest.cs</Value>
+        </Setting>
+        <Setting>
+            <Key>sonar.global.test.exclusions</Key>
+            <Value>**/ExcludedByGlobalExclusionTest.cs</Value>
+        </Setting>
+    </Settings>
+</AnalysisInput>

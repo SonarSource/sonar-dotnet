@@ -81,17 +81,3 @@ Namespace Tests.TestCases
         End Sub
     End Class
 End Namespace
-
-' https://github.com/SonarSource/sonar-dotnet/issues/9637
-Public Class UnresolvedSymbols
-    Public Function Method(first As String, second As String)
-        If first.Length = 42 Then
-            Dim ret = UnknownMethod()   ' Error [BC30451]
-            Return ret
-        ElseIf second.Length = 42 Then  ' Noncompliant@+1
-            Dim ret = UnknownMethod()   ' Error [BC30451]
-            Return ret
-        End If
-        Return ""
-    End Function
-End Class

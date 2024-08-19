@@ -1,0 +1,70 @@
+{
+  "Issues": [
+    {
+      "Id": "S113",
+      "Message": "Add a new line at the end of the file \u0027AttributeValue.cs\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/AttributeValue.cs#L35",
+      "Location": "Line 35 Position 1-2"
+    },
+    {
+      "Id": "S113",
+      "Message": "Add a new line at the end of the file \u0027DefaultRazorConfiguration.cs\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/DefaultRazorConfiguration.cs#L59",
+      "Location": "Line 59 Position 1-2"
+    },
+    {
+      "Id": "S113",
+      "Message": "Add a new line at the end of the file \u0027HelperResult.cs\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/HelperResult.cs#L60",
+      "Location": "Line 60 Position 1-2"
+    },
+    {
+      "Id": "S113",
+      "Message": "Add a new line at the end of the file \u0027HtmlHelpersExtensions.cs\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/HtmlHelpersExtensions.cs#L23",
+      "Location": "Line 23 Position 1-2"
+    },
+    {
+      "Id": "S113",
+      "Message": "Add a new line at the end of the file \u0027IHtmlString.cs\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/IHtmlString.cs#L11",
+      "Location": "Line 11 Position 1-2"
+    },
+    {
+      "Id": "S113",
+      "Message": "Add a new line at the end of the file \u0027INancyRazorView.cs\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/INancyRazorView.cs#L6",
+      "Location": "Line 6 Position 1-2"
+    },
+    {
+      "Id": "S113",
+      "Message": "Add a new line at the end of the file \u0027ModelCodeGenerator.cs\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/ModelCodeGenerator.cs#L35",
+      "Location": "Line 35 Position 1-2"
+    },
+    {
+      "Id": "S113",
+      "Message": "Add a new line at the end of the file \u0027NancyRazorEngineHost.cs\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorEngineHost.cs#L48",
+      "Location": "Line 48 Position 1-2"
+    },
+    {
+      "Id": "S113",
+      "Message": "Add a new line at the end of the file \u0027NonEncodedHtmlString.cs\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/NonEncodedHtmlString.cs#L38",
+      "Location": "Line 38 Position 1-2"
+    },
+    {
+      "Id": "S113",
+      "Message": "Add a new line at the end of the file \u0027RazorViewEngine.cs\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/RazorViewEngine.cs#L399",
+      "Location": "Line 399 Position 1-2"
+    },
+    {
+      "Id": "S113",
+      "Message": "Add a new line at the end of the file \u0027UrlHelpers.cs\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/UrlHelpers.cs#L41",
+      "Location": "Line 41 Position 1-2"
+    }
+  ]
+}

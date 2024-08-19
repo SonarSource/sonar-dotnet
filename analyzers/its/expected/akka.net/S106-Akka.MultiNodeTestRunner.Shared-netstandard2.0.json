@@ -1,0 +1,94 @@
+{
+  "Issues": [
+    {
+      "Id": "S106",
+      "Message": "Remove this logging statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TeamCityLoggerActor.cs#L28",
+      "Location": "Line 28 Position 21-38"
+    },
+    {
+      "Id": "S106",
+      "Message": "Remove this logging statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L143",
+      "Location": "Line 143 Position 13-30"
+    },
+    {
+      "Id": "S106",
+      "Message": "Remove this logging statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L150",
+      "Location": "Line 150 Position 13-30"
+    },
+    {
+      "Id": "S106",
+      "Message": "Remove this logging statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L157",
+      "Location": "Line 157 Position 13-30"
+    },
+    {
+      "Id": "S106",
+      "Message": "Remove this logging statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L164",
+      "Location": "Line 164 Position 13-30"
+    },
+    {
+      "Id": "S106",
+      "Message": "Remove this logging statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L170",
+      "Location": "Line 170 Position 13-30"
+    },
+    {
+      "Id": "S106",
+      "Message": "Remove this logging statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L211",
+      "Location": "Line 211 Position 13-30"
+    },
+    {
+      "Id": "S106",
+      "Message": "Remove this logging statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/FileSystemMessageSinkActor.cs#L68",
+      "Location": "Line 68 Position 17-34"
+    },
+    {
+      "Id": "S106",
+      "Message": "Remove this logging statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/FileSystemMessageSinkActor.cs#L76",
+      "Location": "Line 76 Position 21-38"
+    },
+    {
+      "Id": "S106",
+      "Message": "Remove this logging statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/FileSystemMessageSinkActor.cs#L79",
+      "Location": "Line 79 Position 17-34"
+    },
+    {
+      "Id": "S106",
+      "Message": "Remove this logging statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TeamCityMessageSinkActor.cs#L114",
+      "Location": "Line 114 Position 13-30"
+    },
+    {
+      "Id": "S106",
+      "Message": "Remove this logging statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TimelineLogCollectorActor.cs#L75",
+      "Location": "Line 75 Position 21-38"
+    },
+    {
+      "Id": "S106",
+      "Message": "Remove this logging statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TimelineLogCollectorActor.cs#L79",
+      "Location": "Line 79 Position 29-46"
+    },
+    {
+      "Id": "S106",
+      "Message": "Remove this logging statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TimelineLogCollectorActor.cs#L81",
+      "Location": "Line 81 Position 21-38"
+    },
+    {
+      "Id": "S106",
+      "Message": "Remove this logging statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/TrxMessageSink.cs#L24",
+      "Location": "Line 24 Position 13-30"
+    }
+  ]
+}

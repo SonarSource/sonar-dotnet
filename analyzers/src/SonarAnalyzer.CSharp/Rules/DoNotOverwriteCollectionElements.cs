@@ -1,155 +1,160 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules;
-
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class DoNotOverwriteCollectionElements : DoNotOverwriteCollectionElementsBase<SyntaxKind, ExpressionStatementSyntax>
+namespace SonarAnalyzer.Rules.CSharp
 {
-    private static readonly HashSet<SyntaxKind> IdentifierOrLiteral =
-    [
-        SyntaxKind.IdentifierName,
-        SyntaxKind.StringLiteralExpression,
-        SyntaxKind.NumericLiteralExpression,
-        SyntaxKind.CharacterLiteralExpression,
-        SyntaxKind.NullLiteralExpression,
-        SyntaxKind.TrueLiteralExpression,
-        SyntaxKind.FalseLiteralExpression
-    ];
-
-    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(
-            AnalysisAction,
-            SyntaxKind.ExpressionStatement);
-
-    protected override SyntaxNode GetCollectionIdentifier(ExpressionStatementSyntax statement)
+    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    public sealed class DoNotOverwriteCollectionElements : DoNotOverwriteCollectionElementsBase<SyntaxKind, ExpressionStatementSyntax>
     {
-        var assignmentOrInvocation = GetAssignmentOrInvocation(statement);
-
-        switch (assignmentOrInvocation?.Kind())
+        private static readonly HashSet<SyntaxKind> IdentifierOrLiteral = new HashSet<SyntaxKind>
         {
-            case SyntaxKind.InvocationExpression:
-                return GetInvokedMethodContainer((InvocationExpressionSyntax)assignmentOrInvocation)
-                    .RemoveParentheses();
+            SyntaxKind.IdentifierName,
+            SyntaxKind.StringLiteralExpression,
+            SyntaxKind.NumericLiteralExpression,
+            SyntaxKind.CharacterLiteralExpression,
+            SyntaxKind.NullLiteralExpression,
+            SyntaxKind.TrueLiteralExpression,
+            SyntaxKind.FalseLiteralExpression,
+        };
 
-            case SyntaxKind.SimpleAssignmentExpression:
-                var assignment = (AssignmentExpressionSyntax)assignmentOrInvocation;
-                var elementAccess = assignment.Left as ElementAccessExpressionSyntax;
-                return GetIdentifier(elementAccess?.Expression.RemoveParentheses())
-                    .RemoveParentheses();
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-            default:
-                return null;
-        }
-    }
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterNodeAction(
+                AnalysisAction,
+                SyntaxKind.ExpressionStatement);
 
-    protected override SyntaxNode GetIndexOrKey(ExpressionStatementSyntax statement) =>
-        GetIndexOrKeyArgument(statement)?.Expression.RemoveParentheses();
-
-    protected override bool IsIdentifierOrLiteral(SyntaxNode node) =>
-        node.IsAnyKind(IdentifierOrLiteral);
-
-    private static SyntaxNode GetAssignmentOrInvocation(StatementSyntax statement)
-    {
-        if (!(statement is ExpressionStatementSyntax expressionStatement))
+        protected override SyntaxNode GetCollectionIdentifier(ExpressionStatementSyntax statement)
         {
-            return null;
+            var assignmentOrInvocation = GetAssignmentOrInvocation(statement);
+
+            switch (assignmentOrInvocation?.Kind())
+            {
+                case SyntaxKind.InvocationExpression:
+                    return GetInvokedMethodContainer((InvocationExpressionSyntax)assignmentOrInvocation)
+                        .RemoveParentheses();
+
+                case SyntaxKind.SimpleAssignmentExpression:
+                    var assignment = (AssignmentExpressionSyntax)assignmentOrInvocation;
+                    var elementAccess = assignment.Left as ElementAccessExpressionSyntax;
+                    return GetIdentifier(elementAccess?.Expression.RemoveParentheses())
+                        .RemoveParentheses();
+
+                default:
+                    return null;
+            }
         }
 
-        var expression = expressionStatement.Expression;
+        protected override SyntaxNode GetIndexOrKey(ExpressionStatementSyntax statement) =>
+            GetIndexOrKeyArgument(statement)?.Expression.RemoveParentheses();
 
-        return expression.IsKind(SyntaxKind.ConditionalAccessExpression)
-            ? ((ConditionalAccessExpressionSyntax)expression).WhenNotNull
-            : expression;
-    }
+        protected override bool IsIdentifierOrLiteral(SyntaxNode syntaxNode) =>
+            syntaxNode.IsAnyKind(IdentifierOrLiteral);
 
-    private static ArgumentSyntax GetIndexOrKeyArgument(StatementSyntax statement)
-    {
-        var assignmentOrInvocation = GetAssignmentOrInvocation(statement);
-
-        switch (assignmentOrInvocation?.Kind())
+        private static SyntaxNode GetAssignmentOrInvocation(StatementSyntax statement)
         {
-            case SyntaxKind.InvocationExpression:
-                var invocation = (InvocationExpressionSyntax)assignmentOrInvocation;
-                return invocation.ArgumentList.Arguments.ElementAtOrDefault(0);
-
-            case SyntaxKind.SimpleAssignmentExpression:
-                var assignment = (AssignmentExpressionSyntax)assignmentOrInvocation;
-                return assignment.Left is ElementAccessExpressionSyntax elementAccess
-                    ? elementAccess.ArgumentList.Arguments.ElementAtOrDefault(0)
-                    : null;
-
-            default:
+            if (!(statement is ExpressionStatementSyntax expressionStatement))
+            {
                 return null;
+            }
+
+            var expression = expressionStatement.Expression;
+
+            return expression.IsKind(SyntaxKind.ConditionalAccessExpression)
+                ? ((ConditionalAccessExpressionSyntax)expression).WhenNotNull
+                : expression;
         }
-    }
 
-    private static SyntaxNode GetInvokedMethodContainer(InvocationExpressionSyntax invocation)
-    {
-        var expression = invocation.Expression.RemoveParentheses();
-        switch (expression.Kind())
+        private static ArgumentSyntax GetIndexOrKeyArgument(StatementSyntax statement)
         {
-            case SyntaxKind.SimpleMemberAccessExpression:
-                // a.Add(x)
-                // InvocationExpression | a.Add(x)
-                //   Expression: SimpleMemberAccess
-                //                 Name: Add
-                //                 Expression: a  // we need this
-                var memberAccess = (MemberAccessExpressionSyntax)expression;
-                return memberAccess.Name.ToString() == "Add" && invocation.ArgumentList?.Arguments.Count != 1 // #2674 Do not raise on ICollection.Add(item)
-                    ? memberAccess.Expression
-                    : null; // Ignore invocations that are on methods different than Add
-            case SyntaxKind.MemberBindingExpression:
-                // a?.Add(x)
-                // ConditionalExpression | a?.Add(x)
-                //   Expression: a // <-- we need this
-                //   WhenTrue: InvocationExpression | ?.Add(x)
-                //               Expression: MemberBinding   // <-- we are here
-                //                              Identifier: Add
-                var conditional = expression.Parent.Parent as ConditionalAccessExpressionSyntax;
-                return conditional?.Expression;
-            default:
-                return null;
+            var assignmentOrInvocation = GetAssignmentOrInvocation(statement);
+
+            switch (assignmentOrInvocation?.Kind())
+            {
+                case SyntaxKind.InvocationExpression:
+                    var invocation = (InvocationExpressionSyntax)assignmentOrInvocation;
+                    return invocation.ArgumentList.Arguments.ElementAtOrDefault(0);
+
+                case SyntaxKind.SimpleAssignmentExpression:
+                    var assignment = (AssignmentExpressionSyntax)assignmentOrInvocation;
+                    return assignment.Left is ElementAccessExpressionSyntax elementAccess
+                        ? elementAccess.ArgumentList.Arguments.ElementAtOrDefault(0)
+                        : null;
+
+                default:
+                    return null;
+            }
         }
-    }
 
-    private static SyntaxNode GetIdentifier(ExpressionSyntax expression)
-    {
-        switch (expression?.Kind())
+        private static SyntaxNode GetInvokedMethodContainer(InvocationExpressionSyntax invocation)
         {
-            case SyntaxKind.SimpleMemberAccessExpression:
-                // a.b[index]
-                // ElementAccess    // <-- we are here
-                //   Arguments: index
-                //   Expression: SimpleMemberAccess
-                //                 Expression: a
-                //                 Name: b
-                // We need a.b
-                return expression;
-            case SyntaxKind.IdentifierName:
-                // a[index]
-                // ElementAccess    // <-- we are here
-                //   Arguments: index
-                //   Expression: IdentifierName
-                //                 Name: a  // <-- we need this
-                return expression;
-            default:
-                return null;
+            var expression = invocation.Expression.RemoveParentheses();
+            switch (expression.Kind())
+            {
+                case SyntaxKind.SimpleMemberAccessExpression:
+                    // a.Add(x)
+                    // InvocationExpression | a.Add(x)
+                    //   Expression: SimpleMemberAccess
+                    //                 Name: Add
+                    //                 Expression: a  // we need this
+                    var memberAccess = (MemberAccessExpressionSyntax)expression;
+                    return memberAccess.Name.ToString() == "Add" && invocation.ArgumentList?.Arguments.Count != 1   //#2674 Do not raise on ICollection.Add(item)
+                        ? memberAccess.Expression
+                        : null; // Ignore invocations that are on methods different than Add
+                case SyntaxKind.MemberBindingExpression:
+                    // a?.Add(x)
+                    // ConditionalExpression | a?.Add(x)
+                    //   Expression: a // <-- we need this
+                    //   WhenTrue: InvocationExpression | ?.Add(x)
+                    //               Expression: MemberBinding   // <-- we are here
+                    //                              Identifier: Add
+                    var conditional = expression.Parent.Parent as ConditionalAccessExpressionSyntax;
+                    return conditional?.Expression;
+                default:
+                    return null;
+            }
+        }
+
+        private static SyntaxNode GetIdentifier(ExpressionSyntax expression)
+        {
+            switch (expression?.Kind())
+            {
+                case SyntaxKind.SimpleMemberAccessExpression:
+                    // a.b[index]
+                    // ElementAccess    // <-- we are here
+                    //   Arguments: index
+                    //   Expression: SimpleMemberAccess
+                    //                 Expression: a
+                    //                 Name: b
+                    // We need a.b
+                    return expression;
+                case SyntaxKind.IdentifierName:
+                    // a[index]
+                    // ElementAccess    // <-- we are here
+                    //   Arguments: index
+                    //   Expression: IdentifierName
+                    //                 Name: a  // <-- we need this
+                    return expression;
+                default:
+                    return null;
+            }
         }
     }
 }

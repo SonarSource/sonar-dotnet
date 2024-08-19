@@ -1,0 +1,64 @@
+{
+  "Issues": [
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IReadOnlyDictionary\u003Cstring, object\u003E\u0027 instead of \u0027Nancy.Configuration.INancyEnvironment\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Configuration/INancyEnvironmentExtensions.cs#L39",
+      "Location": "Line 39 Position 60-71"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Nancy.IObjectSerializer\u0027 instead of \u0027Nancy.DefaultObjectSerializer\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L200",
+      "Location": "Line 200 Position 177-187"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Reflection.MemberInfo\u0027 instead of \u0027System.Reflection.MethodInfo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/InteractiveDiagnostics.cs#L211",
+      "Location": "Line 211 Position 112-122"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Reflection.ICustomAttributeProvider\u0027 instead of \u0027System.Reflection.PropertyInfo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/Modules/SettingsModule.cs#L68",
+      "Location": "Line 68 Position 59-67"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Nancy.Routing.Trie.NodeData\u0027 instead of \u0027Nancy.Routing.Trie.MatchResult\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/DefaultRouteResolver.cs#L144",
+      "Location": "Line 144 Position 89-95"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Security.Principal.IPrincipal\u0027 instead of \u0027System.Security.Claims.ClaimsPrincipal\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Security/ClaimsPrincipalExtensions.cs#L18",
+      "Location": "Line 18 Position 65-69"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Security.Principal.IPrincipal\u0027 instead of \u0027System.Security.Claims.ClaimsPrincipal\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Security/ClaimsPrincipalExtensions.cs#L66",
+      "Location": "Line 66 Position 59-63"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Security.Principal.IPrincipal\u0027 instead of \u0027System.Security.Claims.ClaimsPrincipal\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Security/ClaimsPrincipalExtensions.cs#L77",
+      "Location": "Line 77 Position 61-65"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IDictionary\u003Cstring, string\u003E\u0027 instead of \u0027System.Collections.Generic.Dictionary\u003Cstring, string\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Security/Csrf.cs#L175",
+      "Location": "Line 175 Position 70-80"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IDictionary\u003Cstring, object\u003E\u0027 instead of \u0027Nancy.TinyIoc.NamedParameterOverloads\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3783",
+      "Location": "Line 3783 Position 81-91"
+    }
+  ]
+}

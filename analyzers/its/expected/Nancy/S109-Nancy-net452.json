@@ -1,0 +1,400 @@
+{
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00270.2\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Conventions/BuiltInAcceptHeaderCoercions.cs#L70",
+      "Location": "Line 70 Position 73-77"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Cryptography/AesEncryptionProvider.cs#L22",
+      "Location": "Line 22 Position 46-48"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002716\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Cryptography/AesEncryptionProvider.cs#L23",
+      "Location": "Line 23 Position 45-47"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Cryptography/Base64Helpers.cs#L19",
+      "Location": "Line 19 Position 70-73"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Cryptography/Base64Helpers.cs#L19",
+      "Location": "Line 19 Position 76-79"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L152",
+      "Location": "Line 152 Position 27-29"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00279\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L152",
+      "Location": "Line 152 Position 39-40"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027127\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L152",
+      "Location": "Line 152 Position 51-54"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027159\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L268",
+      "Location": "Line 268 Position 73-76"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027159\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L317",
+      "Location": "Line 317 Position 34-37"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027256\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L317",
+      "Location": "Line 317 Position 46-49"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L464",
+      "Location": "Line 464 Position 37-38"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L468",
+      "Location": "Line 468 Position 37-38"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L476",
+      "Location": "Line 476 Position 35-36"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L483",
+      "Location": "Line 483 Position 98-99"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L494",
+      "Location": "Line 494 Position 35-36"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002765535\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L503",
+      "Location": "Line 503 Position 38-43"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002716\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L522",
+      "Location": "Line 522 Position 43-45"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002710\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L530",
+      "Location": "Line 530 Position 43-45"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L545",
+      "Location": "Line 545 Position 33-34"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002710\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L587",
+      "Location": "Line 587 Position 23-25"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027255\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L604",
+      "Location": "Line 604 Position 21-24"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002712\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L614",
+      "Location": "Line 614 Position 28-30"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00278\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L616",
+      "Location": "Line 616 Position 29-30"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002715\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L616",
+      "Location": "Line 616 Position 34-38"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L618",
+      "Location": "Line 618 Position 29-30"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002715\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L618",
+      "Location": "Line 618 Position 34-38"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002715\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L620",
+      "Location": "Line 620 Position 27-31"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027127\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L640",
+      "Location": "Line 640 Position 38-41"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002715\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L652",
+      "Location": "Line 652 Position 34-38"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002733\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L661",
+      "Location": "Line 661 Position 21-23"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027126\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L661",
+      "Location": "Line 661 Position 31-34"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002715\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L669",
+      "Location": "Line 669 Position 43-47"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027255\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L130",
+      "Location": "Line 130 Position 22-25"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L158",
+      "Location": "Line 158 Position 38-39"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L160",
+      "Location": "Line 160 Position 48-49"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L163",
+      "Location": "Line 163 Position 48-49"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L163",
+      "Location": "Line 163 Position 51-52"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L167",
+      "Location": "Line 167 Position 34-35"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L172",
+      "Location": "Line 172 Position 57-58"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L175",
+      "Location": "Line 175 Position 30-31"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002710\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L211",
+      "Location": "Line 211 Position 34-36"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002710\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L214",
+      "Location": "Line 214 Position 34-36"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L228",
+      "Location": "Line 228 Position 35-36"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027127\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L241",
+      "Location": "Line 241 Position 25-28"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L247",
+      "Location": "Line 247 Position 31-32"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L273",
+      "Location": "Line 273 Position 44-45"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L275",
+      "Location": "Line 275 Position 58-59"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L282",
+      "Location": "Line 282 Position 52-53"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L282",
+      "Location": "Line 282 Position 55-56"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L286",
+      "Location": "Line 286 Position 34-35"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L290",
+      "Location": "Line 290 Position 61-62"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L293",
+      "Location": "Line 293 Position 30-31"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L370",
+      "Location": "Line 370 Position 48-49"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L376",
+      "Location": "Line 376 Position 30-31"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/HttpMultipart.cs#L74",
+      "Location": "Line 74 Position 80-81"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/HttpMultipart.cs#L76",
+      "Location": "Line 76 Position 60-61"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00277\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/HttpMultipartBoundary.cs#L70",
+      "Location": "Line 70 Position 88-89"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00278196\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/IO/RequestStream.cs#L502",
+      "Location": "Line 502 Position 46-50"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Request.cs#L186",
+      "Location": "Line 186 Position 77-78"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00271000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/StaticConfiguration.cs#L17",
+      "Location": "Line 17 Position 46-50"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027397\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L540",
+      "Location": "Line 540 Position 40-43"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027397\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L544",
+      "Location": "Line 544 Position 44-47"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027397\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L549",
+      "Location": "Line 549 Position 44-47"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ViewEngines/ResourceViewLocationProvider.cs#L173",
+      "Location": "Line 173 Position 36-37"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ViewEngines/ResourceViewLocationProvider.cs#L175",
+      "Location": "Line 175 Position 59-60"
+    }
+  ]
+}

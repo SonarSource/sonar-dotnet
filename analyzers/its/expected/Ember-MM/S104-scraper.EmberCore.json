@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S104",
+      "Message": "This file has 1053 lines, which is greater than 1000 authorized. Split it into smaller files.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S104",
+      "Message": "This file has 1480 lines, which is greater than 1000 authorized. Split it into smaller files.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S104",
+      "Message": "This file has 1005 lines, which is greater than 1000 authorized. Split it into smaller files.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1",
+      "Location": "Line 1 Position 1-1"
+    }
+  ]
+}

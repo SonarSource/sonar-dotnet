@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S103",
+      "Message": "Split this 225 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/BatchingSqliteJournal.cs#L69",
+      "Location": "Line 69 Position 1-226"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 225 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/BatchingSqliteJournal.cs#L70",
+      "Location": "Line 70 Position 1-226"
+    }
+  ]
+}

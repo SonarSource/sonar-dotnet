@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027GetCleanTemplateName\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.DotLiquid/LiquidNancyFileSystem.cs#L79",
+      "Location": "Line 79 Position 24-44"
+    }
+  ]
+}

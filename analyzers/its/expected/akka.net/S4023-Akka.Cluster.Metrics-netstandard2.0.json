@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetricsSupervisor.cs#L87",
+      "Location": "Line 87 Position 26-51"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Events/ClusterMetricsEvents.cs#L18",
+      "Location": "Line 18 Position 22-42"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricMessages.cs#L20",
+      "Location": "Line 20 Position 22-43"
+    }
+  ]
+}

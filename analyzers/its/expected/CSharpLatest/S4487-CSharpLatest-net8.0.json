@@ -1,0 +1,52 @@
+{
+  "Issues": [
+    {
+      "Id": "S4487",
+      "Message": "Remove this unread private field \u0027field\u0027 or refactor the code to use its value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S2259.cs#L5",
+      "Location": "Line 5 Position 20-25"
+    },
+    {
+      "Id": "S4487",
+      "Message": "Remove this unread private field \u0027foo1\u0027 or refactor the code to use its value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S2376.cs#L5",
+      "Location": "Line 5 Position 17-25"
+    },
+    {
+      "Id": "S4487",
+      "Message": "Remove this unread private field \u0027backing_field\u0027 or refactor the code to use its value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S2930.cs#L7",
+      "Location": "Line 7 Position 24-37"
+    },
+    {
+      "Id": "S4487",
+      "Message": "Remove this unread private field \u0027foo\u0027 or refactor the code to use its value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3604.cs#L24",
+      "Location": "Line 24 Position 12-23"
+    },
+    {
+      "Id": "S4487",
+      "Message": "Remove this unread private field \u0027foo\u0027 or refactor the code to use its value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3604.cs#L7",
+      "Location": "Line 7 Position 16-23"
+    },
+    {
+      "Id": "S4487",
+      "Message": "Remove this unread private field \u0027bar\u0027 or refactor the code to use its value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3604.cs#L8",
+      "Location": "Line 8 Position 16-23"
+    },
+    {
+      "Id": "S4487",
+      "Message": "Remove this unread private field \u0027field\u0027 or refactor the code to use its value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3776.cs#L5",
+      "Location": "Line 5 Position 12-17"
+    },
+    {
+      "Id": "S4487",
+      "Message": "Remove this unread private field \u0027list\u0027 or refactor the code to use its value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/TargetTypedNew.cs#L10",
+      "Location": "Line 10 Position 23-27"
+    }
+  ]
+}

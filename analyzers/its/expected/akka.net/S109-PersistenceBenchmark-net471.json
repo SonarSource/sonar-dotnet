@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00271000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/PersistenceBenchmark/Program.cs#L78",
+      "Location": "Line 78 Position 107-113"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00271000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/PersistenceBenchmark/Program.cs#L78",
+      "Location": "Line 78 Position 158-164"
+    }
+  ]
+}

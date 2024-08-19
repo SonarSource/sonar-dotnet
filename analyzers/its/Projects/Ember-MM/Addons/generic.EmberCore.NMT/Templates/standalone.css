@@ -1,0 +1,42 @@
+
+.flags img {
+	height:20px;
+	padding-right: 10px;
+	
+}
+.txttitle {
+font-size: 22px;
+font-style: bold;
+color: white;
+}
+.txttagline {
+font-size: 18px;
+font-style: italic;
+color: white;
+}
+.txtDirector {
+font-size: 16px;
+font-weight: bold;
+color: white;
+}
+.txtRuntime {
+font-size: 18px;
+font-style: normal;
+color: white;;
+}
+.txtoutline {
+font-size: 18px;
+color: white;;
+text-indent: 10;
+}
+
+.txtplot {
+font-size: 18px;
+color: white;;
+text-indent: 10;
+}
+
+.box {
+	background-color:Black-alpha2;
+	height:550px;
+}

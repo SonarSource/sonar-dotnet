@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3928",
+      "Message": "The parameter name \u0027discoveryMethods\u0027 is not declared in the argument list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Discovery/Aggregate/AggregateServiceDiscovery.cs#L29",
+      "Location": "Line 29 Position 23-133"
+    }
+  ]
+}

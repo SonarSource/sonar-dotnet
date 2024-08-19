@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S2326",
+      "Message": "\u0027T\u0027 is not used in the class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp10Features/GenericAttributes.cs#L4",
+      "Location": "Line 4 Position 26-27"
+    },
+    {
+      "Id": "S2326",
+      "Message": "\u0027T\u0027 is not used in the class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp11Features/GenericAttributes.cs#L10",
+      "Location": "Line 10 Position 30-31"
+    },
+    {
+      "Id": "S2326",
+      "Message": "\u0027T\u0027 is not used in the class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp11Features/GenericAttributes.cs#L5",
+      "Location": "Line 5 Position 35-36"
+    },
+    {
+      "Id": "S2326",
+      "Message": "\u0027T\u0027 is not used in the record.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/Records.cs#L109",
+      "Location": "Line 109 Position 17-18"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027path.EndsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L127",
+      "Location": "Line 127 Position 20-47"
+    }
+  ]
+}

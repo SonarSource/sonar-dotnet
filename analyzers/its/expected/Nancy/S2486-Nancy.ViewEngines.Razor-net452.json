@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2486",
+      "Message": "Handle the exception or explain in a comment why it can be ignored.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/RazorAssemblyProvider.cs#L69-L71",
+      "Location": "Lines 69-71 Position 17-18"
+    }
+  ]
+}

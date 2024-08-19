@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S2259",
+      "Message": "\u0027bReturn\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgErrorViewer.vb#L64",
+      "Location": "Line 64 Position 65-72"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027Me.SettingsPanels.FirstOrDefault(Function(p) p.Name = tvSettings.SelectedNode.Name)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4315",
+      "Location": "Line 4315 Position 24-107"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027MyTVShowRegExProfiles.Profiles.FirstOrDefault(Function(y) y.Name = lstProfiles.SelectedItems(0).Text)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgTVRegExProfiles.vb#L13",
+      "Location": "Line 13 Position 36-137"
+    }
+  ]
+}

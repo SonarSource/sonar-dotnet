@@ -1,24 +1,29 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using System.IO;
-using SonarAnalyzer.Core.AnalysisContext;
-using SonarAnalyzer.Core.Rules;
-using SonarAnalyzer.CSharp.Rules;
+using NSubstitute;
+using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Protobuf;
+using SonarAnalyzer.Rules;
+using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Test.Rules;
 
@@ -84,7 +89,7 @@ public class FileMetadataAnalyzerTest
         var tree = Substitute.For<SyntaxTree>();
         tree.FilePath.Returns("File.Generated.cs");    // Generated to simplify mocking for GeneratedCodeRecognizer
         tree.Encoding.Returns(x => null);
-        var model = TestCompiler.CompileCS(string.Empty).Model;
+        var model = TestHelper.CompileCS(string.Empty).Model;
         var sut = new TestFileMetadataAnalyzer(null, isTestProject);
 
         sut.TestCreateMessage(UtilityAnalyzerParameters.Default, tree, model).Encoding.Should().BeEmpty();
@@ -126,7 +131,7 @@ public class FileMetadataAnalyzerTest
             .AddAnalyzer(() => new TestFileMetadataAnalyzer(testRoot, projectType == ProjectType.Test))
             .AddPaths(projectFiles)
             .WithBasePath(BasePath)
-            .WithOptions(LanguageOptions.CSharpLatest)
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
             .WithProtobufPath(@$"{testRoot}\file-metadata.pb");
     }
 
@@ -142,7 +147,7 @@ public class FileMetadataAnalyzerTest
             this.isTestProject = isTestProject;
         }
 
-        protected override UtilityAnalyzerParameters ReadParameters(IAnalysisContext context) =>
+        protected override UtilityAnalyzerParameters ReadParameters<T>(SonarAnalysisContextBase<T> context) =>
             base.ReadParameters(context) with { IsAnalyzerEnabled = true, OutPath = outPath, IsTestProject = isTestProject };
 
         public FileMetadataInfo TestCreateMessage(UtilityAnalyzerParameters parameters, SyntaxTree tree, SemanticModel model) =>

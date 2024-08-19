@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1121",
+      "Message": "Extract the assignment of \u0027nameCounter\u0027 from this expression.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/Internal/ChildrenContainerSpec.cs#L76",
+      "Location": "Line 76 Position 37-39"
+    }
+  ]
+}

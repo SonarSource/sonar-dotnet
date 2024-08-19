@@ -1,20 +1,26 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CFG.Sonar.Test;
+using SonarAnalyzer.CFG;
+
+namespace SonarAnalyzer.Test.CFG.Sonar;
 
 [TestClass]
 public class RoslynCfgSerializerTest
@@ -28,7 +34,7 @@ public class RoslynCfgSerializerTest
                 void Method() { }
             }
             """;
-        var dot = CfgSerializer.Serialize(TestCompiler.CompileCfgCS(code), "GraphTitle");
+        var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code), "GraphTitle");
         dot.Should().BeIgnoringLineEndings(
             """
             digraph "GraphTitle" {
@@ -49,7 +55,7 @@ public class RoslynCfgSerializerTest
                 void Method() { }
             }
             """;
-        var dot = CfgSerializer.Serialize(TestCompiler.CompileCfgCS(code));
+        var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
 
         dot.Should().BeIgnoringLineEndings(
             """
@@ -80,7 +86,7 @@ public class RoslynCfgSerializerTest
                 private int C() => 42;
             }
             """;
-        var dot = CfgSerializer.Serialize(TestCompiler.CompileCfgCS(code));
+        var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
         dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
@@ -119,7 +125,7 @@ public class RoslynCfgSerializerTest
                 private void c2() { }
             }
             """;
-        var dot = CfgSerializer.Serialize(TestCompiler.CompileCfgCS(code));
+        var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
         dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
@@ -159,7 +165,7 @@ public class RoslynCfgSerializerTest
                 void Bar() { }
             }
             """;
-        var dot = CfgSerializer.Serialize(TestCompiler.CompileCfgCS(code));
+        var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
 
         dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
@@ -192,7 +198,7 @@ public class RoslynCfgSerializerTest
                 private void Bar(int i) { }
             }
             """;
-        var dot = CfgSerializer.Serialize(TestCompiler.CompileCfgCS(code));
+        var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
         dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
@@ -248,7 +254,7 @@ public class RoslynCfgSerializerTest
                 }
             }
             """;
-        var dot = CfgSerializer.Serialize(TestCompiler.CompileCfgCS(code));
+        var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
         dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
@@ -309,7 +315,7 @@ public class RoslynCfgSerializerTest
                 private void Bar(int i) { }
             }
             """;
-        var dot = CfgSerializer.Serialize(TestCompiler.CompileCfgCS(code));
+        var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
         dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
@@ -346,7 +352,7 @@ public class RoslynCfgSerializerTest
                 private void Bar() { }
             }
             """;
-        var dot = CfgSerializer.Serialize(TestCompiler.CompileCfgCS(code));
+        var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
         dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
@@ -398,7 +404,7 @@ public class RoslynCfgSerializerTest
                 private void Bar() { }
             }
             """;
-        var dot = CfgSerializer.Serialize(TestCompiler.CompileCfgCS(code));
+        var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
         dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
@@ -457,7 +463,7 @@ public class RoslynCfgSerializerTest
                 private void After() { }
             }
             """;
-        var dot = CfgSerializer.Serialize(TestCompiler.CompileCfgCS(code));
+        var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
         dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
@@ -498,7 +504,7 @@ public class RoslynCfgSerializerTest
                }
             }
             """;
-        var dot = CfgSerializer.Serialize(TestCompiler.CompileCfgCS(code));
+        var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
         dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
@@ -540,7 +546,7 @@ public class RoslynCfgSerializerTest
                }
             }
             """;
-        var dot = CfgSerializer.Serialize(TestCompiler.CompileCfgCS(code));
+        var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
         dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
@@ -594,7 +600,7 @@ public class RoslynCfgSerializerTest
                 private void Bar(System.Func<int, int> f) { }
             }
             """;
-        var dot = CfgSerializer.Serialize(TestCompiler.CompileCfgCS(code));
+        var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
         dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             cfg0_block0 [shape=record label="{ENTRY #0}"]
@@ -636,7 +642,7 @@ public class RoslynCfgSerializerTest
                 }
             }
             """;
-        var dot = CfgSerializer.Serialize(TestCompiler.CompileCfgCS(code));
+        var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
         dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {
@@ -686,7 +692,7 @@ public class RoslynCfgSerializerTest
                 }
             }
             """;
-        var dot = CfgSerializer.Serialize(TestCompiler.CompileCfgCS(code, ignoreErrors: true));
+        var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code, ignoreErrors: true));
         dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             cfg0_block0 [shape=record label="{ENTRY #0}"]
@@ -715,7 +721,7 @@ public class RoslynCfgSerializerTest
                 }
             }
             """;
-        var dot = CfgSerializer.Serialize(TestCompiler.CompileCfgCS(code));
+        var dot = CfgSerializer.Serialize(TestHelper.CompileCfgCS(code));
         dot.Should().BeIgnoringLineEndings("""
             digraph "RoslynCfg" {
             subgraph "cluster_1" {

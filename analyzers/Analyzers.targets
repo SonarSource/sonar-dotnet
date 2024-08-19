@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <!-- This file is included in all projects inside src and tests directories. -->
+  <Import Project="$(MSBuildThisFileDirectory)\StylingAnalyzers.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)\Directory.Build.targets" />
+
+  <PropertyGroup>
+    <LangVersion>12</LangVersion>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <!-- Store output of Source Generators in obj\debug\net46\generated for easier debugging -->
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>$(IntermediateOutputPath)generated</CompilerGeneratedFilesOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="System" />
+    <Using Include="System.Collections.Generic" />
+    <Using Include="System.Collections.Immutable" />
+    <Using Include="System.Diagnostics" />
+    <Using Include="System.Linq" />
+    <Using Include="System.Threading" />
+    <Using Include="System.Threading.Tasks" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)\src\AssemblyInfo.Shared.cs" Link="Properties\AssemblyInfo.Shared.cs" />
+  </ItemGroup>
+</Project>

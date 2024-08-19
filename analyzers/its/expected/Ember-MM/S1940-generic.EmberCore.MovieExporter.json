@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1940",
+      "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L498",
+      "Location": "Line 498 Position 20-88"
+    },
+    {
+      "Id": "S1940",
+      "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L826",
+      "Location": "Line 826 Position 16-50"
+    }
+  ]
+}

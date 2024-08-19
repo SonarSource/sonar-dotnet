@@ -1,26 +1,48 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules;
+using SonarAnalyzer.Common.Walkers;
+
+namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class TooManyLoggingCalls : ParametrizedDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6664";
     private const string MessageFormat = "Reduce the number of {0} logging calls within this code block from {1} to the {2} allowed.";
+
+    private static class CategoryNames
+    {
+        public const string Debug = "Debug";
+        public const string Information = "Information";
+        public const string Warning = "Warning";
+        public const string Error = "Error";
+    }
+
+    private static class DefaultThresholds
+    {
+        public const int Debug = 4;
+        public const int Information = 2;
+        public const int Warning = 1;
+        public const int Error = 1;
+    }
 
     public static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
@@ -79,7 +101,7 @@ public sealed class TooManyLoggingCalls : ParametrizedDiagnosticAnalyzer
         var node = context.Node;
         if (IsBlockNodeSupported(node))
         {
-            var logCallCollector = new LoggingCallCollector(context.Model, node);
+            var logCallCollector = new LoggingCallCollector(context.SemanticModel, node);
             logCallCollector.Visit(node);
             foreach (var group in logCallCollector.GroupedLoggingInvocations)
             {
@@ -88,9 +110,8 @@ public sealed class TooManyLoggingCalls : ParametrizedDiagnosticAnalyzer
                 if (invocations.Count > threshold)
                 {
                     var primaryLocation = invocations[0].GetLocation();
-                    string[] messageParams = [group.Key, invocations.Count.ToString(), threshold.ToString()];
-                    var secondaryLocations = invocations.Skip(1).ToSecondaryLocations(MessageFormat, messageParams);
-                    context.ReportIssue(Rule, primaryLocation, secondaryLocations, messageParams);
+                    var secondaryLocations = invocations.Skip(1).ToSecondaryLocations();
+                    context.ReportIssue(Rule, primaryLocation, secondaryLocations, group.Key, invocations.Count.ToString(), threshold.ToString());
                 }
             }
         }
@@ -114,14 +135,14 @@ public sealed class TooManyLoggingCalls : ParametrizedDiagnosticAnalyzer
 
     private sealed class LoggingCallCollector : SafeCSharpSyntaxWalker
     {
-        private readonly SemanticModel model;
+        private readonly SemanticModel semanticModel;
         private readonly SyntaxNode currentBlock;
 
         public Dictionary<string, List<InvocationExpressionSyntax>> GroupedLoggingInvocations { get; } = [];
 
-        public LoggingCallCollector(SemanticModel model, SyntaxNode currentBlock)
+        public LoggingCallCollector(SemanticModel semanticModel, SyntaxNode currentBlock)
         {
-            this.model = model;
+            this.semanticModel = semanticModel;
             this.currentBlock = currentBlock;
         }
 
@@ -136,7 +157,7 @@ public sealed class TooManyLoggingCalls : ParametrizedDiagnosticAnalyzer
         public override void VisitInvocationExpression(InvocationExpressionSyntax node)
         {
             if (IsLoggerMethod(node.GetName())
-                && model.GetSymbolInfo(node).Symbol is IMethodSymbol methodSymbol
+                && semanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol methodSymbol
                 && methodSymbol.ContainingType.DerivesOrImplementsAny(LoggerTypes)
                 && LoggingCategoryName(node, methodSymbol) is { } loggingCategory)
             {
@@ -201,20 +222,4 @@ public sealed class TooManyLoggingCalls : ParametrizedDiagnosticAnalyzer
     }
 
     private sealed record LoggingCategory(string CategoryName, ImmutableHashSet<string> LoggingMethods);
-
-    private static class DefaultThresholds
-    {
-        public const int Debug = 4;
-        public const int Information = 2;
-        public const int Warning = 1;
-        public const int Error = 1;
-    }
-
-    private static class CategoryNames
-    {
-        public const string Debug = "Debug";
-        public const string Information = "Information";
-        public const string Warning = "Warning";
-        public const string Error = "Error";
-    }
 }

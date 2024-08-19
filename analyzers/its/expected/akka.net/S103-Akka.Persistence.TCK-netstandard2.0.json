@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S103",
+      "Message": "Split this 245 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L311",
+      "Location": "Line 311 Position 1-246"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 245 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L322",
+      "Location": "Line 322 Position 1-246"
+    }
+  ]
+}

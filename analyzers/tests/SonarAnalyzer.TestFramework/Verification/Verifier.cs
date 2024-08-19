@@ -1,25 +1,30 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using Google.Protobuf;
 using Microsoft.CodeAnalysis.CodeFixes;
-using SonarAnalyzer.Core.Rules;
+using SonarAnalyzer.Rules;
 using SonarAnalyzer.TestFramework.Build;
 
 namespace SonarAnalyzer.TestFramework.Verification;
@@ -28,7 +33,7 @@ internal class Verifier
 {
     private const string TestCases = "TestCases";
 
-    private static readonly Regex ImportsRegexVB = new(@"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft, Constants.DefaultRegexTimeout);
+    private static readonly Regex ImportsRegexVB = new(@"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft, RegexConstants.DefaultTimeout);
     private readonly VerifierBuilder builder;
     private readonly DiagnosticAnalyzer[] analyzers;
     private readonly SonarCodeFix codeFix;
@@ -103,8 +108,7 @@ internal class Verifier
                 builder.ErrorBehavior,
                 builder.AdditionalFilePath,
                 onlyDiagnosticIds,
-                razorFilePaths.Concat(x.AdditionalSourceFiles ?? []).ToArray(),
-                builder.ConcurrentAnalysis));
+                razorFilePaths.Concat(x.AdditionalSourceFiles ?? []).ToArray()));
         numberOfIssues.Should().BeGreaterThan(0, $"otherwise you should use '{nameof(VerifyNoIssues)}' instead");
     }
 
@@ -115,17 +119,6 @@ internal class Verifier
             foreach (var analyzer in analyzers)
             {
                 DiagnosticVerifier.VerifyNoIssues(compilation.Compilation, analyzer, builder.ErrorBehavior, builder.AdditionalFilePath, onlyDiagnosticIds);
-            }
-        }
-    }
-
-    public void VerifyNoAD0001()    // This should never have any arguments
-    {
-        foreach (var compilation in Compile(builder.ConcurrentAnalysis))
-        {
-            foreach (var analyzer in analyzers)
-            {
-                DiagnosticVerifier.AnalyzerExceptions(compilation.Compilation, analyzer).Should().BeEmpty();
             }
         }
     }
@@ -161,7 +154,7 @@ internal class Verifier
     {
         foreach (var compilation in Compile(false))
         {
-            DiagnosticVerifier.Verify(compilation.Compilation, analyzers, CompilationErrorBehavior.Default, builder.AdditionalFilePath, [], []);
+            DiagnosticVerifier.Verify(compilation.Compilation, analyzers.Single(), builder.AdditionalFilePath);
             new FileInfo(builder.ProtobufPath).Length.Should().Be(0, "protobuf file should be empty");
         }
     }
@@ -171,7 +164,7 @@ internal class Verifier
     {
         foreach (var compilation in Compile(false))
         {
-            DiagnosticVerifier.Verify(compilation.Compilation, analyzers, CompilationErrorBehavior.Default, builder.AdditionalFilePath, [], []);
+            DiagnosticVerifier.Verify(compilation.Compilation, analyzers.Single(), builder.AdditionalFilePath);
             verifyProtobuf(ReadProtobuf().ToList());
         }
 
@@ -186,8 +179,11 @@ internal class Verifier
         }
     }
 
-    public IEnumerable<CompilationData> Compile(bool concurrentAnalysis) =>
-        CreateProject(concurrentAnalysis).Solution.Compile(builder.ParseOptions.ToArray()).Select(x => new CompilationData(x, builder.AdditionalSourceFiles.ToArray()));
+    public IEnumerable<CompilationData> Compile(bool concurrentAnalysis)
+    {
+        using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = concurrentAnalysis };
+        return CreateProject(concurrentAnalysis).Solution.Compile(builder.ParseOptions.ToArray()).Select(x => new CompilationData(x, null));
+    }
 
     private ProjectBuilder CreateProject(bool concurrentAnalysis)
     {
@@ -204,17 +200,13 @@ internal class Verifier
             .AddDocuments(sourceFilePaths)
             .AddDocuments(concurrentSourceFiles)
             .AddReferences(builder.References);
-        if (builder.CompilationOptionsCustomization is not null)
-        {
-            projectBuilder = ProjectBuilder.FromProject(projectBuilder.Project.WithCompilationOptions(builder.CompilationOptionsCustomization(projectBuilder.Project.CompilationOptions)));
-        }
         if (hasRazorFiles)
         {
             projectBuilder = projectBuilder
                 .AddAdditionalDocuments(razorFilePaths)
                 .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreAppRef("7.0.17"))
                 .AddReferences(NuGetMetadataReference.SystemTextEncodingsWeb("7.0.0"))
-                .AddAnalyzerReferences(SdkPathProvider.SourceGenerators)
+                .AddAnalyzerReferences(SourceGeneratorProvider.SourceGenerators)
                 .AddAnalyzerConfigDocument(
                     Path.Combine(Directory.GetCurrentDirectory(), ".editorconfig"),
                     editorConfigGenerator.Generate(razorFilePaths));

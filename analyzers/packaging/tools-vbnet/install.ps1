@@ -42,5 +42,17 @@ if ($project.Type -ne "VB.NET") {
 $analyzersPath = Split-Path -Path $toolsPath -Parent
 $analyzersPath = Join-Path $analyzersPath "analyzers"
 
+$analyzerFilePath = Join-Path $analyzersPath "Google.Protobuf.dll"
+$project.Object.AnalyzerReferences.Add($analyzerFilePath)
+
+$analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.dll"
+$project.Object.AnalyzerReferences.Add($analyzerFilePath)
+
+$analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.CFG.dll"
+$project.Object.AnalyzerReferences.Add($analyzerFilePath)
+
+$analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.ShimLayer.dll"
+$project.Object.AnalyzerReferences.Add($analyzerFilePath)
+
 $analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.VisualBasic.dll"
 $project.Object.AnalyzerReferences.Add($analyzerFilePath)

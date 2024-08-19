@@ -75,7 +75,7 @@ public class RuleRegistration
         RegisterSonarWhateverAnalysisContext(whateverContext => { });
         RegisterSonarWhateverReportingContext(c => { });
         RegisterSonarSomething(c => { });                // Noncompliant, wrong suffix
-        RegisterSomethingAnalysisContext(c => { });
+        RegisterSomethingAnalysisContext(c => { });      // Noncompliant, wrong prefix
         RegisterSomethingReportingContext(c => { });     // Noncompliant, wrong prefix
         RegisterSonarSomethingContext(c => { });         // Noncompliant, wrong suffix
     }
@@ -90,9 +90,9 @@ public class RuleRegistration
     // Well-known expected classes patterns
     public class SonarWhateverAnalysisContext { }
     public class SonarWhateverReportingContext { }
-    public class SomethingAnalysisContext { }
     // Unexpected types
     public class SonarSomething { }
+    public class SomethingAnalysisContext { }
     public class SomethingReportingContext { }
     public class SonarSomethingContext { }
 }

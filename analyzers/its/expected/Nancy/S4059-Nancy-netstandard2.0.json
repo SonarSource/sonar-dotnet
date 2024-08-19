@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S4059",
+      "Message": "Change either the name of property \u0027ApplicationStartupTasks\u0027 or the name of method \u0027GetApplicationStartupTasks\u0027 to make them distinguishable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L181",
+      "Location": "Line 181 Position 45-68"
+    },
+    {
+      "Id": "S4059",
+      "Message": "Change either the name of property \u0027RegistrationTasks\u0027 or the name of method \u0027GetRegistrationTasks\u0027 to make them distinguishable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L197",
+      "Location": "Line 197 Position 45-62"
+    },
+    {
+      "Id": "S4059",
+      "Message": "Change either the name of property \u0027ApplicationContainer\u0027 or the name of method \u0027GetApplicationContainer\u0027 to make them distinguishable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L84",
+      "Location": "Line 84 Position 30-50"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Timeout\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/IO/TcpHorizontalScaleSpec.cs#L132",
+      "Location": "Line 132 Position 25-32"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Timeout\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/IO/TcpInboundOnlySpec.cs#L67",
+      "Location": "Line 67 Position 25-32"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Timeout\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/IO/TcpSingleConnectionSpec.cs#L125",
+      "Location": "Line 125 Position 25-32"
+    }
+  ]
+}

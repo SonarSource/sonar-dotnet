@@ -1,0 +1,52 @@
+{
+  "Issues": [
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 18 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1343",
+      "Location": "Line 1343 Position 17-39"
+    },
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 9 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L191",
+      "Location": "Line 191 Position 17-44"
+    },
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L66",
+      "Location": "Line 66 Position 17-66"
+    },
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 14 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L1011",
+      "Location": "Line 1011 Position 17-64"
+    },
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L1044",
+      "Location": "Line 1044 Position 17-66"
+    },
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L1065",
+      "Location": "Line 1065 Position 17-60"
+    },
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L865",
+      "Location": "Line 865 Position 17-41"
+    },
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L986",
+      "Location": "Line 986 Position 17-62"
+    }
+  ]
+}

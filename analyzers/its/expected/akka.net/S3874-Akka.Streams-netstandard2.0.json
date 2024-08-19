@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3874",
+      "Message": "Consider refactoring this method in order to remove the need for this \u0027out\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Modules.cs#L84",
+      "Location": "Line 84 Position 81-84"
+    },
+    {
+      "Id": "S3874",
+      "Message": "Consider refactoring this method in order to remove the need for this \u0027out\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L96",
+      "Location": "Line 96 Position 71-74"
+    }
+  ]
+}

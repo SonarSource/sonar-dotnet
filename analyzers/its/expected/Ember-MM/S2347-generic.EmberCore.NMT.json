@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027OK_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgHelp.vb#L31",
+      "Location": "Line 31 Position 17-32"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027bwBuildHTML_DoWork\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1436",
+      "Location": "Line 1436 Position 17-35"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027bwBuildHTML_ProgressChanged\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1443",
+      "Location": "Line 1443 Position 17-44"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027OK_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/frmWhatsNew.vb#L26",
+      "Location": "Line 26 Position 17-32"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027Cancel_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/frmWhatsNew.vb#L31",
+      "Location": "Line 31 Position 17-36"
+    }
+  ]
+}

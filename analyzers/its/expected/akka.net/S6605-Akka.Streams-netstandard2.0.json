@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S6605",
+      "Message": "Collection-specific \u0022Exists\u0022 method should be used instead of the \u0022Any\u0022 extension.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Attributes.cs#L332",
+      "Location": "Line 332 Position 29-32"
+    },
+    {
+      "Id": "S6605",
+      "Message": "Collection-specific \u0022Exists\u0022 method should be used instead of the \u0022Any\u0022 extension.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1131",
+      "Location": "Line 1131 Position 45-48"
+    },
+    {
+      "Id": "S6605",
+      "Message": "Collection-specific \u0022Exists\u0022 method should be used instead of the \u0022Any\u0022 extension.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1140",
+      "Location": "Line 1140 Position 42-45"
+    },
+    {
+      "Id": "S6605",
+      "Message": "Collection-specific \u0022Exists\u0022 method should be used instead of the \u0022Any\u0022 extension.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L503",
+      "Location": "Line 503 Position 51-54"
+    }
+  ]
+}

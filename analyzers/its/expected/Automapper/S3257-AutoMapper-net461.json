@@ -1,0 +1,142 @@
+{
+  "Issues": [
+    {
+      "Id": "S3257",
+      "Message": "\u0027dest\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/CtorParamConfigurationExpression.cs#L58",
+      "Location": "Line 58 Position 117-121"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027destMember\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/CtorParamConfigurationExpression.cs#L58",
+      "Location": "Line 58 Position 123-133"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027ctxt\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L318",
+      "Location": "Line 318 Position 33-37"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027ctxt\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L351",
+      "Location": "Line 351 Position 33-37"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027ctxt\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L458",
+      "Location": "Line 458 Position 33-37"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027ctxt\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L103",
+      "Location": "Line 103 Position 125-129"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027ctxt\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L152",
+      "Location": "Line 152 Position 56-60"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027destMember\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L163",
+      "Location": "Line 163 Position 44-54"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027ctxt\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L163",
+      "Location": "Line 163 Position 56-60"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027srcMember\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L174",
+      "Location": "Line 174 Position 33-42"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027destMember\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L174",
+      "Location": "Line 174 Position 44-54"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027ctxt\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L174",
+      "Location": "Line 174 Position 56-60"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027dest\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L185",
+      "Location": "Line 185 Position 27-31"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027srcMember\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L185",
+      "Location": "Line 185 Position 33-42"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027destMember\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L185",
+      "Location": "Line 185 Position 44-54"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027ctxt\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L185",
+      "Location": "Line 185 Position 56-60"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027dest\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L196",
+      "Location": "Line 196 Position 27-31"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027ctxt\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L196",
+      "Location": "Line 196 Position 33-37"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027src\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L207",
+      "Location": "Line 207 Position 22-25"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027dest\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L207",
+      "Location": "Line 207 Position 27-31"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027dest\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L218",
+      "Location": "Line 218 Position 27-31"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027destMember\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L93",
+      "Location": "Line 93 Position 113-123"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027ctxt\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L93",
+      "Location": "Line 93 Position 125-129"
+    }
+  ]
+}

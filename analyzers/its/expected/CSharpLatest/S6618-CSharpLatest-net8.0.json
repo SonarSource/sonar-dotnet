@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6618",
+      "Message": "Use \u0022string.Create\u0022 instead of \u0022FormattableString\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp11Features/UseStringCreate.cs#L6",
+      "Location": "Line 6 Position 27-41"
+    }
+  ]
+}

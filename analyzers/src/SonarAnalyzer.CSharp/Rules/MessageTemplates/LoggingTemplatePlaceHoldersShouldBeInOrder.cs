@@ -1,29 +1,31 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using System.Text;
-using SonarAnalyzer.Core.RegularExpressions;
 
-namespace SonarAnalyzer.CSharp.Rules.MessageTemplates;
+namespace SonarAnalyzer.Rules.MessageTemplates;
 
 public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplateCheck
 {
     private const string DiagnosticId = "S6673";
     private const string MessageFormat = "Template placeholders should be in the right order: placeholder '{0}' does not match with argument '{1}'.";
-    private const string SecondaryMessageFormat = "The argument should be '{0}' to match placeholder '{1}'.";
 
     internal static readonly DiagnosticDescriptor S6673 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -31,7 +33,7 @@ public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplat
 
     public void Execute(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, ArgumentSyntax templateArgument, MessageTemplatesParser.Placeholder[] placeholders)
     {
-        var methodSymbol = (IMethodSymbol)context.Model.GetSymbolInfo(invocation).Symbol;
+        var methodSymbol = (IMethodSymbol)context.SemanticModel.GetSymbolInfo(invocation).Symbol;
         var placeholderValues = PlaceholderValues(invocation, methodSymbol).ToImmutableArray();
         for (var i = 0; i < placeholders.Length; i++)
         {
@@ -39,21 +41,15 @@ public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplat
             if (placeholder.Name != "_"
                 && !int.TryParse(placeholder.Name, out _)
                 && Array.FindIndex(placeholders, x => x.Name == placeholder.Name) == i // don't raise for duplicate placeholders
-                && OutOfOrderPlaceholderValue(placeholder, i, placeholderValues, out var betterFitArgument) is { } outOfOrderArgument)
+                && OutOfOrderPlaceholderValue(placeholder, i, placeholderValues) is { } outOfOrderArgument)
             {
                 var templateStart = templateArgument.Expression.GetLocation().SourceSpan.Start;
                 var primaryLocation = Location.Create(context.Tree, new(templateStart + placeholder.Start, placeholder.Length));
-                context.ReportIssue(Rule, primaryLocation, SecondaryLocations(outOfOrderArgument, betterFitArgument, placeholder), placeholder.Name, outOfOrderArgument.ToString());
+                context.ReportIssue(Rule, primaryLocation, [outOfOrderArgument.ToSecondaryLocation()], placeholder.Name, outOfOrderArgument.ToString());
                 return; // only raise on the first out-of-order placeholder to make the rule less noisy
             }
         }
     }
-
-    private static IEnumerable<SecondaryLocation> SecondaryLocations(SyntaxNode node, SyntaxNode betterFitArgument, MessageTemplatesParser.Placeholder placeholder) =>
-        [node.ToSecondaryLocation(SecondaryMessageFormat, BetterFitName(betterFitArgument), placeholder.Name)];
-
-    private static string BetterFitName(SyntaxNode node) =>
-        node is MemberAccessExpressionSyntax or CastExpressionSyntax ? node.ToString() : node.GetName();
 
     private static IEnumerable<SyntaxNode> PlaceholderValues(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol)
     {
@@ -78,13 +74,8 @@ public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplat
         }
     }
 
-    private static SyntaxNode OutOfOrderPlaceholderValue(
-        MessageTemplatesParser.Placeholder placeholder,
-        int placeholderIndex,
-        ImmutableArray<SyntaxNode> placeholderValues,
-        out SyntaxNode betterFitArgument)
+    private static SyntaxNode OutOfOrderPlaceholderValue(MessageTemplatesParser.Placeholder placeholder, int placeholderIndex, ImmutableArray<SyntaxNode> placeholderValues)
     {
-        betterFitArgument = null;
         if (placeholderIndex < placeholderValues.Length && MatchesName(placeholder.Name, placeholderValues[placeholderIndex], isStrict: false) is not false)
         {
             return null;
@@ -95,7 +86,6 @@ public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplat
             {
                 if (i != placeholderIndex && placeholderIndex < placeholderValues.Length && MatchesName(placeholder.Name, placeholderValues[i], isStrict: true) is true)
                 {
-                    betterFitArgument = placeholderValues.Skip(i).FirstOrDefault(x => MatchesName(placeholder.Name, x, isStrict: true) is true);
                     return placeholderValues[placeholderIndex];
                 }
             }

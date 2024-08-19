@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027MethodWithoutAttributes\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/NetCore31/Controllers/S5693Controller.cs#L55",
+      "Location": "Line 55 Position 29-52"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027ConfigureServices\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/NetCore31/Startup.cs#L12",
+      "Location": "Line 12 Position 21-38"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Configure\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/NetCore31/Startup.cs#L26",
+      "Location": "Line 26 Position 21-30"
+    }
+  ]
+}

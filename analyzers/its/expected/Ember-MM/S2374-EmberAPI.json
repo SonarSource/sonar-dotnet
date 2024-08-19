@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S2374",
+      "Message": "Change this unsigned type to \u0027Integer\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L379",
+      "Location": "Line 379 Position 106-114"
+    },
+    {
+      "Id": "S2374",
+      "Message": "Change this unsigned type to \u0027Integer\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L379",
+      "Location": "Line 379 Position 95-103"
+    },
+    {
+      "Id": "S2374",
+      "Message": "Change this unsigned type to \u0027Integer\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L38",
+      "Location": "Line 38 Position 29-37"
+    },
+    {
+      "Id": "S2374",
+      "Message": "Change this unsigned type to \u0027Integer\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L380",
+      "Location": "Line 380 Position 27-35"
+    },
+    {
+      "Id": "S2374",
+      "Message": "Change this unsigned type to \u0027Integer\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L43",
+      "Location": "Line 43 Position 31-39"
+    }
+  ]
+}

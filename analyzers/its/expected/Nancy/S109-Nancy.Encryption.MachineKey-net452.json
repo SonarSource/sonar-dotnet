@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Encryption.MachineKey/MachineKeyHmacProvider.cs#L87",
+      "Location": "Line 87 Position 61-62"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Encryption.MachineKey/MachineKeyHmacProvider.cs#L94",
+      "Location": "Line 94 Position 47-48"
+    }
+  ]
+}

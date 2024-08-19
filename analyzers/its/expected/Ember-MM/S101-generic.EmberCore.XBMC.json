@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L5",
+      "Location": "Line 5 Position 14-25"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/frmSettingsHolder.vb#L23",
+      "Location": "Line 23 Position 14-31"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L27",
+      "Location": "Line 27 Position 14-22"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L453",
+      "Location": "Line 453 Position 18-25"
+    }
+  ]
+}

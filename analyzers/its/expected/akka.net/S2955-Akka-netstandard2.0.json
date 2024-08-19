@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S2955",
+      "Message": "Use a comparison to \u0027default(S)\u0027 instead or add a constraint to \u0027S\u0027 so that it can\u0027t be a value type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/FastLazy.cs#L114",
+      "Location": "Line 114 Position 25-29"
+    },
+    {
+      "Id": "S2955",
+      "Message": "Use a comparison to \u0027default(T)\u0027 instead or add a constraint to \u0027T\u0027 so that it can\u0027t be a value type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/Internal/StringBuilderExtensions.cs#L35",
+      "Location": "Line 35 Position 32-36"
+    },
+    {
+      "Id": "S2955",
+      "Message": "Use a comparison to \u0027default(T)\u0027 instead or add a constraint to \u0027T\u0027 so that it can\u0027t be a value type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/Internal/StringBuilderExtensions.cs#L47",
+      "Location": "Line 47 Position 36-40"
+    },
+    {
+      "Id": "S2955",
+      "Message": "Use a comparison to \u0027default(T)\u0027 instead or add a constraint to \u0027T\u0027 so that it can\u0027t be a value type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/Option.cs#L33",
+      "Location": "Line 33 Position 33-37"
+    },
+    {
+      "Id": "S2955",
+      "Message": "Use a comparison to \u0027default(T)\u0027 instead or add a constraint to \u0027T\u0027 so that it can\u0027t be a value type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/Result.cs#L76",
+      "Location": "Line 76 Position 29-33"
+    }
+  ]
+}

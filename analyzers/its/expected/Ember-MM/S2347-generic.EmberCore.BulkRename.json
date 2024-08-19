@@ -1,0 +1,52 @@
+{
+  "Issues": [
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027Close_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L256",
+      "Location": "Line 256 Position 17-35"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027Rename_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L410",
+      "Location": "Line 410 Position 17-36"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027Cancel_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgHelpTips.vb#L10",
+      "Location": "Line 10 Position 17-36"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027OK_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgHelpTips.vb#L5",
+      "Location": "Line 5 Position 17-32"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027Cancel_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgRenameManual.vb#L44",
+      "Location": "Line 44 Position 17-36"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027OK_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgRenameManual.vb#L65",
+      "Location": "Line 65 Position 17-32"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027Cancel_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgTVBulkRename.vb#L11",
+      "Location": "Line 11 Position 17-36"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027OK_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgTVBulkRename.vb#L6",
+      "Location": "Line 6 Position 17-32"
+    }
+  ]
+}

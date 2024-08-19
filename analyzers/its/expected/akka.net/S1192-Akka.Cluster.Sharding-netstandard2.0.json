@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027Starting Shard Region Proxy [{0}] (no actors will be hosted on this node)...\u0027 4 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L346",
+      "Location": "Line 346 Position 43-121"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1643",
+      "Message": "Use a StringBuilder instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/AutoMapperMappingException.cs#L166-L168",
+      "Location": "Lines 166-168 Position 29-196"
+    }
+  ]
+}

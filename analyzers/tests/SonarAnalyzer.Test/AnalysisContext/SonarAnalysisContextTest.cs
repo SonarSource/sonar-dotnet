@@ -1,23 +1,27 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using System.IO;
-using SonarAnalyzer.Core.AnalysisContext;
-using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
-using SonarAnalyzer.CSharp.Rules;
+using NSubstitute;
+using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Test.Rules;
 
 namespace SonarAnalyzer.Test.AnalysisContext;
@@ -77,7 +81,7 @@ public partial class SonarAnalysisContextTest
             {
                 // ToDo: We should find a way to ack the fact the action was not run
                 testCase.Builder
-                    .WithOptions(LanguageOptions.FromCSharp8)
+                    .WithOptions(ParseOptionsHelper.FromCSharp8)
                     .VerifyNoIssuesIgnoreErrors();
             }
         }
@@ -94,7 +98,7 @@ public partial class SonarAnalysisContextTest
         {
             // ToDo: We test that a rule is enabled only by checking the issues are reported
             testCase.Builder
-                .WithOptions(LanguageOptions.FromCSharp8)
+                .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
         }
     }
@@ -109,7 +113,7 @@ public partial class SonarAnalysisContextTest
             if (hasTestScope)
             {
                 testCase.Builder
-                    .WithOptions(LanguageOptions.FromCSharp8)
+                    .WithOptions(ParseOptionsHelper.FromCSharp8)
                     .WithAdditionalFilePath(sonarProjectConfig)
                     .Verify();
             }
@@ -117,7 +121,7 @@ public partial class SonarAnalysisContextTest
             {
                 // MAIN-only
                 testCase.Builder
-                    .WithOptions(LanguageOptions.FromCSharp8)
+                    .WithOptions(ParseOptionsHelper.FromCSharp8)
                     .WithAdditionalFilePath(sonarProjectConfig)
                     .VerifyNoIssuesIgnoreErrors();
             }
@@ -135,14 +139,14 @@ public partial class SonarAnalysisContextTest
             {
                 // MAIN-only and MAIN & TEST rules
                 testCase.Builder
-                    .WithOptions(LanguageOptions.FromCSharp8)
+                    .WithOptions(ParseOptionsHelper.FromCSharp8)
                     .WithAdditionalFilePath(sonarProjectConfig)
                     .VerifyNoIssuesIgnoreErrors();
             }
             else
             {
                 testCase.Builder
-                    .WithOptions(LanguageOptions.FromCSharp8)
+                    .WithOptions(ParseOptionsHelper.FromCSharp8)
                     .WithAdditionalFilePath(sonarProjectConfig)
                     .Verify();
             }
@@ -159,7 +163,7 @@ public partial class SonarAnalysisContextTest
             if (hasProductScope)
             {
                 testCase.Builder
-                    .WithOptions(LanguageOptions.FromCSharp8)
+                    .WithOptions(ParseOptionsHelper.FromCSharp8)
                     .WithAdditionalFilePath(sonarProjectConfig)
                     .Verify();
             }
@@ -167,7 +171,7 @@ public partial class SonarAnalysisContextTest
             {
                 // TEST-only rule
                 testCase.Builder
-                    .WithOptions(LanguageOptions.FromCSharp8)
+                    .WithOptions(ParseOptionsHelper.FromCSharp8)
                     .WithAdditionalFilePath(sonarProjectConfig)
                     .VerifyNoIssues();
             }
@@ -220,13 +224,13 @@ public partial class SonarAnalysisContextTest
                     if (testCase.Analyzer is AnonymousDelegateEventUnsubscribe || testCase.Analyzer is TestMethodShouldContainAssertion)
                     {
                         testCase.Builder
-                            .WithOptions(LanguageOptions.FromCSharp8)
+                            .WithOptions(ParseOptionsHelper.FromCSharp8)
                             .VerifyNoIssues();
                     }
                     else
                     {
                         testCase.Builder
-                            .WithOptions(LanguageOptions.FromCSharp8)
+                            .WithOptions(ParseOptionsHelper.FromCSharp8)
                             .Verify();
                     }
                 }
@@ -243,7 +247,7 @@ public partial class SonarAnalysisContextTest
     [DataRow(ProjectType.Test, true)]
     public void IsTestProject_Standalone(ProjectType projectType, bool expectedResult)
     {
-        var compilation = new SnippetCompiler("// Nothing to see here", TestCompiler.ProjectTypeReference(projectType)).SemanticModel.Compilation;
+        var compilation = new SnippetCompiler("// Nothing to see here", TestHelper.ProjectTypeReference(projectType)).SemanticModel.Compilation;
         var context = new CompilationAnalysisContext(compilation, AnalysisScaffolding.CreateOptions(), null, null, default);
         var sut = new SonarCompilationReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 

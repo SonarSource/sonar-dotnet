@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S107",
+      "Message": "Constructor has 9 parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestScheduler.cs#L299-L300",
+      "Location": "Lines 299-300 Position 33-58"
+    },
+    {
+      "Id": "S107",
+      "Message": "Method has 8 parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestScheduler.cs#L86-L87",
+      "Location": "Lines 86-87 Position 38-77"
+    }
+  ]
+}

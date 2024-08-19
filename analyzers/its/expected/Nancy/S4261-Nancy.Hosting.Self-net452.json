@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4261",
+      "Message": "Add the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Hosting.Self/NancyHost.cs#L418",
+      "Location": "Line 418 Position 28-35"
+    }
+  ]
+}

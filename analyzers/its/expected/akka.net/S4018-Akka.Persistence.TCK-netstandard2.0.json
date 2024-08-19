@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.TCK/PluginSpec.cs#L63",
+      "Location": "Line 63 Position 21-30"
+    }
+  ]
+}

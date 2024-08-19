@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S3956",
+      "Message": "Refactor this property to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L766",
+      "Location": "Line 766 Position 16-29"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this constructor to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L39",
+      "Location": "Line 39 Position 27-46"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this property to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L68",
+      "Location": "Line 68 Position 16-35"
+    }
+  ]
+}

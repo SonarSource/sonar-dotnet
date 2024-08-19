@@ -1,0 +1,52 @@
+{
+  "Issues": [
+    {
+      "Id": "S3060",
+      "Message": "Offload the code that\u0027s conditional on this type test to the appropriate subclass and remove the condition.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorBase.cs#L107",
+      "Location": "Line 107 Position 17-47"
+    },
+    {
+      "Id": "S3060",
+      "Message": "Offload the code that\u0027s conditional on this type test to the appropriate subclass and remove the condition.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorBase.cs#L164",
+      "Location": "Line 164 Position 21-51"
+    },
+    {
+      "Id": "S3060",
+      "Message": "Offload the code that\u0027s conditional on this type test to the appropriate subclass and remove the condition.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorBase.cs#L177",
+      "Location": "Line 177 Position 33-52"
+    },
+    {
+      "Id": "S3060",
+      "Message": "Offload the code that\u0027s conditional on this type test to the appropriate subclass and remove the condition.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorBase.Lifecycle.cs#L21",
+      "Location": "Line 21 Position 17-47"
+    },
+    {
+      "Id": "S3060",
+      "Message": "Offload the code that\u0027s conditional on this type test to the appropriate subclass and remove the condition.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorBase.Lifecycle.cs#L89",
+      "Location": "Line 89 Position 17-47"
+    },
+    {
+      "Id": "S3060",
+      "Message": "Offload the code that\u0027s conditional on this type test to the appropriate subclass and remove the condition.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorPath.cs#L205",
+      "Location": "Line 205 Position 21-42"
+    },
+    {
+      "Id": "S3060",
+      "Message": "Offload the code that\u0027s conditional on this type test to the appropriate subclass and remove the condition.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorPath.cs#L407",
+      "Location": "Line 407 Position 17-38"
+    },
+    {
+      "Id": "S3060",
+      "Message": "Offload the code that\u0027s conditional on this type test to the appropriate subclass and remove the condition.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/FSM.cs#L677",
+      "Location": "Line 677 Position 17-36"
+    }
+  ]
+}

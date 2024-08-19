@@ -1,22 +1,26 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using NodeSymbolAndModel = SonarAnalyzer.Core.Common.NodeSymbolAndModel<Microsoft.CodeAnalysis.CSharp.Syntax.InvocationExpressionSyntax, Microsoft.CodeAnalysis.IMethodSymbol>;
+using NodeSymbolAndModel = SonarAnalyzer.Common.NodeSymbolAndModel<Microsoft.CodeAnalysis.CSharp.Syntax.InvocationExpressionSyntax, Microsoft.CodeAnalysis.IMethodSymbol>;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class UnusedReturnValue : SonarDiagnosticAnalyzer
@@ -78,13 +82,13 @@ namespace SonarAnalyzer.CSharp.Rules
                 return;
             }
 
-            var localFunctionSymbol = (IMethodSymbol)context.Model.GetDeclaredSymbol(localFunctionSyntax);
+            var localFunctionSymbol = (IMethodSymbol)context.SemanticModel.GetDeclaredSymbol(localFunctionSyntax);
             if (localFunctionSymbol.ReturnsVoid || localFunctionSymbol.IsAsync)
             {
                 return;
             }
 
-            var matchingInvocations = GetLocalMatchingInvocations(topMostContainingMethod, localFunctionSymbol, context.Model).ToList();
+            var matchingInvocations = GetLocalMatchingInvocations(topMostContainingMethod, localFunctionSymbol, context.SemanticModel).ToList();
             // Method invocation is noncompliant when there is at least 1 invocation of the method, and no invocation is using the return value. The case of 0 invocation is handled by S1144.
             if (matchingInvocations.Any() && !matchingInvocations.Any(IsReturnValueUsed))
             {
@@ -107,20 +111,20 @@ namespace SonarAnalyzer.CSharp.Rules
             containingMethod.DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
                 .Where(x => semanticModel.GetSymbolInfo(x.Expression).Symbol is IMethodSymbol methodSymbol && invocationSymbol.Equals(methodSymbol))
-                .Select(x => new NodeSymbolAndModel(x, invocationSymbol, semanticModel))
+                .Select(x => new NodeSymbolAndModel(semanticModel, x, invocationSymbol))
                 .ToList();
 
         private static IEnumerable<NodeSymbolAndModel> FilterInvocations(NodeAndModel<BaseTypeDeclarationSyntax> container) =>
             container.Node.DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
-                .Select(x => new NodeSymbolAndModel(x, container.Model.GetSymbolInfo(x).Symbol as IMethodSymbol, container.Model))
+                .Select(x => new NodeSymbolAndModel(container.Model, x, container.Model.GetSymbolInfo(x).Symbol as IMethodSymbol))
                 .Where(x => x.Symbol != null);
 
         private static IEnumerable<NodeSymbolAndModel<MethodDeclarationSyntax, IMethodSymbol>> CollectRemovableMethods(CSharpRemovableDeclarationCollector removableDeclarationCollector) =>
                 removableDeclarationCollector.TypeDeclarations
                     .SelectMany(container => container.Node.DescendantNodes(CSharpRemovableDeclarationCollector.IsNodeContainerTypeDeclaration)
                         .OfType<MethodDeclarationSyntax>()
-                        .Select(x => new NodeSymbolAndModel<MethodDeclarationSyntax, IMethodSymbol>(x, container.Model.GetDeclaredSymbol(x), container.Model)))
+                        .Select(x => new NodeSymbolAndModel<MethodDeclarationSyntax, IMethodSymbol>(container.Model, x, container.Model.GetDeclaredSymbol(x))))
                         .Where(x => x.Symbol is { ReturnsVoid: false, IsAsync: false } && CSharpRemovableDeclarationCollector.IsRemovable(x.Symbol, Accessibility.Private));
     }
 }

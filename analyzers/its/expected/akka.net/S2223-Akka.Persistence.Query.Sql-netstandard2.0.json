@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2223",
+      "Message": "Change the visibility of \u0027Identifier\u0027 or make it \u0027const\u0027 or \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/SqlReadJournal.cs#L29",
+      "Location": "Line 29 Position 30-40"
+    }
+  ]
+}

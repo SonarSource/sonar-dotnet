@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S2589",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L674",
+      "Location": "Line 674 Position 44-68"
+    },
+    {
+      "Id": "S2589",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L694",
+      "Location": "Line 694 Position 40-64"
+    },
+    {
+      "Id": "S2589",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L715",
+      "Location": "Line 715 Position 48-72"
+    }
+  ]
+}

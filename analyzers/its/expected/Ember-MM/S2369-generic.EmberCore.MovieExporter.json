@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027destPath\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L841",
+      "Location": "Line 841 Position 13-21"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027resizePoster\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L842",
+      "Location": "Line 842 Position 13-25"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027srcPath\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L843",
+      "Location": "Line 843 Position 13-20"
+    }
+  ]
+}

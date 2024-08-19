@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class LiteralsShouldNotBePassedAsLocalizedParameters : SonarDiagnosticAnalyzer
@@ -22,16 +26,16 @@ namespace SonarAnalyzer.CSharp.Rules
         private const string DiagnosticId = "S4055";
         private const string MessageFormat = "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.";
 
-        private static readonly HashSet<string> LocalizableSymbolNames = new(StringComparer.OrdinalIgnoreCase)
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        private static readonly ISet<string> LocalizableSymbolNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
             "TEXT",
             "CAPTION",
             "MESSAGE"
         };
-
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -42,7 +46,8 @@ namespace SonarAnalyzer.CSharp.Rules
         private static void AnalyzeInvocations(SonarSyntaxNodeReportingContext context)
         {
             var invocationSyntax = (InvocationExpressionSyntax)context.Node;
-            if (!(context.Model.GetSymbolInfo(invocationSyntax).Symbol is IMethodSymbol methodSymbol) || invocationSyntax.ArgumentList is null)
+            if (!(context.SemanticModel.GetSymbolInfo(invocationSyntax).Symbol is IMethodSymbol methodSymbol)
+                || invocationSyntax.ArgumentList == null)
             {
                 return;
             }
@@ -50,7 +55,7 @@ namespace SonarAnalyzer.CSharp.Rules
             // Calling to/from debug-only code
             if (methodSymbol.IsDiagnosticDebugMethod()
                 || methodSymbol.IsConditionalDebugMethod()
-                || invocationSyntax.IsInConditionalDebug(context.Model))
+                || CSharpDebugOnlyCodeHelper.IsCallerInConditionalDebug(invocationSyntax, context.SemanticModel))
             {
                 return;
             }
@@ -58,7 +63,7 @@ namespace SonarAnalyzer.CSharp.Rules
             if (methodSymbol.IsConsoleWrite() || methodSymbol.IsConsoleWriteLine())
             {
                 var firstArgument = invocationSyntax.ArgumentList.Arguments.FirstOrDefault();
-                if (IsStringLiteral(firstArgument?.Expression, context.Model))
+                if (IsStringLiteral(firstArgument?.Expression, context.SemanticModel))
                 {
                     context.ReportIssue(Rule, firstArgument);
                 }
@@ -66,8 +71,8 @@ namespace SonarAnalyzer.CSharp.Rules
             }
 
             var nonCompliantParameters = methodSymbol.Parameters
-                .Merge(invocationSyntax.ArgumentList.Arguments, (parameter, syntax) => new { parameter, syntax })
-                .Where(x => IsLocalizableStringLiteral(x.parameter, x.syntax, context.Model));
+                                                     .Merge(invocationSyntax.ArgumentList.Arguments, (parameter, syntax) => new { parameter, syntax })
+                                                     .Where(x => IsLocalizableStringLiteral(x.parameter, x.syntax, context.SemanticModel));
 
             foreach (var nonCompliantParameter in nonCompliantParameters)
             {
@@ -78,7 +83,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private static void AnalyzeAssignments(SonarSyntaxNodeReportingContext context)
         {
             var assignmentSyntax = (AssignmentExpressionSyntax)context.Node;
-            if (assignmentSyntax.IsInConditionalDebug(context.Model))
+            if (CSharpDebugOnlyCodeHelper.IsCallerInConditionalDebug(assignmentSyntax, context.SemanticModel))
             {
                 return;
             }
@@ -86,20 +91,21 @@ namespace SonarAnalyzer.CSharp.Rules
             var assignmentMappings = assignmentSyntax.MapAssignmentArguments();
             foreach (var assignmentMapping in assignmentMappings)
             {
-                if (context.Model.GetSymbolInfo(assignmentMapping.Left).Symbol is IPropertySymbol propertySymbol
+                if (context.SemanticModel.GetSymbolInfo(assignmentMapping.Left).Symbol is IPropertySymbol propertySymbol
                     && IsLocalizable(propertySymbol)
-                    && IsStringLiteral(assignmentMapping.Right, context.Model))
+                    && IsStringLiteral(assignmentMapping.Right, context.SemanticModel))
                 {
                     context.ReportIssue(Rule, assignmentMapping.Right);
                 }
             }
         }
 
-        private static bool IsStringLiteral(SyntaxNode expression, SemanticModel model) =>
-            expression is not null && model.GetConstantValue(expression) is { HasValue: true, Value: string _ };
+        private static bool IsStringLiteral(SyntaxNode expression, SemanticModel semanticModel) =>
+            expression != null
+            && semanticModel.GetConstantValue(expression) is { HasValue: true, Value: string _ };
 
         private static bool IsLocalizable(ISymbol symbol) =>
-            symbol?.Name is not null
+            symbol?.Name != null
             && symbol.GetAttributes(KnownType.System_ComponentModel_LocalizableAttribute) is var localizableAttributes
             && IsLocalizable(symbol.Name, new List<AttributeData>(localizableAttributes));
 
@@ -108,13 +114,13 @@ namespace SonarAnalyzer.CSharp.Rules
             || (symbolName.SplitCamelCaseToWords().Any(LocalizableSymbolNames.Contains)
                && (!localizableAttributes.Any(x => HasConstructorWitValue(x, false))));
 
-        private static bool IsLocalizableStringLiteral(ISymbol symbol, ArgumentSyntax argumentSyntax, SemanticModel model) =>
-            symbol is not null
-            && argumentSyntax is not null
+        private static bool IsLocalizableStringLiteral(ISymbol symbol, ArgumentSyntax argumentSyntax, SemanticModel semanticModel) =>
+            symbol != null
+            && argumentSyntax != null
             && IsLocalizable(symbol)
-            && IsStringLiteral(argumentSyntax.Expression, model);
+            && IsStringLiteral(argumentSyntax.Expression, semanticModel);
 
         private static bool HasConstructorWitValue(AttributeData attribute, bool expectedValue) =>
-            attribute.ConstructorArguments.Any(x => x.Value is bool boolValue && boolValue == expectedValue);
+            attribute.ConstructorArguments.Any(c => c.Value is bool boolValue && boolValue == expectedValue);
     }
 }

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S138",
+      "Message": "This method \u0027Main\u0027 has 206 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L136",
+      "Location": "Line 136 Position 21-25"
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "Issues": [
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L175",
+      "Location": "Line 175 Position 24-45"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L240",
+      "Location": "Line 240 Position 24-40"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L275",
+      "Location": "Line 275 Position 24-40"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L304",
+      "Location": "Line 304 Position 24-40"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L66",
+      "Location": "Line 66 Position 24-45"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L103",
+      "Location": "Line 103 Position 24-67"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L104",
+      "Location": "Line 104 Position 24-67"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L105",
+      "Location": "Line 105 Position 24-67"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L109",
+      "Location": "Line 109 Position 24-66"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L110",
+      "Location": "Line 110 Position 24-66"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L111",
+      "Location": "Line 111 Position 24-66"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L48",
+      "Location": "Line 48 Position 20-40"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L68",
+      "Location": "Line 68 Position 20-40"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L78",
+      "Location": "Line 78 Position 20-40"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L97",
+      "Location": "Line 97 Position 24-67"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L98",
+      "Location": "Line 98 Position 24-67"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgMovieSource.vb#L109",
+      "Location": "Line 109 Position 20-39"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2629",
+      "Location": "Line 2629 Position 50-75"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2633",
+      "Location": "Line 2633 Position 50-75"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2800",
+      "Location": "Line 2800 Position 28-45"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L282",
+      "Location": "Line 282 Position 16-37"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L284",
+      "Location": "Line 284 Position 51-78"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2855",
+      "Location": "Line 2855 Position 28-45"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L482",
+      "Location": "Line 482 Position 24-41"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L520",
+      "Location": "Line 520 Position 24-41"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L600",
+      "Location": "Line 600 Position 16-33"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L619",
+      "Location": "Line 619 Position 16-33"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6951",
+      "Location": "Line 6951 Position 95-161"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8958",
+      "Location": "Line 8958 Position 12-44"
+    }
+  ]
+}

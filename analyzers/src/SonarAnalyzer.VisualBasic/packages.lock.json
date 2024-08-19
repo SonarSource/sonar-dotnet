@@ -29,9 +29,9 @@
       },
       "SonarAnalyzer.CSharp.Styling": {
         "type": "Direct",
-        "requested": "[10.10.0.116381, )",
-        "resolved": "10.10.0.116381",
-        "contentHash": "sv8cQMZcHVKEtYkkw4OooZsE3F3Bz2mIuKfQqV+nsbvbdw3v1TUjYepCN5dCgk+Ln4QuGuc2YI4PEtNsGbXRYw=="
+        "requested": "[9.26.0.92422, )",
+        "resolved": "9.26.0.92422",
+        "contentHash": "IBKknUgTK+2p9M6jVG7i7kREXqrpjKff7peHL7eVf/MN+ftOovF/3VXe2U4PcI6/RKQjL0EntVk9DK11QnpZhg=="
       },
       "StyleCop.Analyzers": {
         "type": "Direct",
@@ -935,23 +935,23 @@
           "System.Xml.XPath": "4.0.1"
         }
       },
-      "sonaranalyzer.cfg": {
-        "type": "Project",
-        "dependencies": {
-          "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
-          "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.ShimLayer": "[10.10.0, )",
-          "System.Collections.Immutable": "[1.1.37, )"
-        }
-      },
-      "sonaranalyzer.core": {
+      "SonarAnalyzer": {
         "type": "Project",
         "dependencies": {
           "Google.Protobuf": "[3.6.1, )",
           "Google.Protobuf.Tools": "[3.6.1, )",
           "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.CFG": "[10.10.0, )",
+          "SonarAnalyzer.CFG": "[1.0.0, )",
+          "System.Collections.Immutable": "[1.1.37, )"
+        }
+      },
+      "sonaranalyzer.cfg": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
+          "Microsoft.Composition": "[1.0.27, )",
+          "SonarAnalyzer.ShimLayer": "[1.0.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
@@ -960,15 +960,6 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "System.Collections.Immutable": "[1.1.37, )"
-        }
-      },
-      "sonaranalyzer.visualbasic.core": {
-        "type": "Project",
-        "dependencies": {
-          "Microsoft.CodeAnalysis.VisualBasic.Workspaces": "[1.3.2, )",
-          "SonarAnalyzer.CFG": "[10.10.0, )",
-          "SonarAnalyzer.Core": "[10.10.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       }

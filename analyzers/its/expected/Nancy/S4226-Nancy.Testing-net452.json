@@ -1,0 +1,226 @@
+{
+  "Issues": [
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/AssertExtensions.cs#L104",
+      "Location": "Line 104 Position 50-66"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/AssertExtensions.cs#L116",
+      "Location": "Line 116 Position 50-66"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/AssertExtensions.cs#L128",
+      "Location": "Line 128 Position 49-71"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/AssertExtensions.cs#L138",
+      "Location": "Line 138 Position 49-71"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/AssertExtensions.cs#L14",
+      "Location": "Line 14 Position 49-60"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/AssertExtensions.cs#L148",
+      "Location": "Line 148 Position 50-72"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/AssertExtensions.cs#L163",
+      "Location": "Line 163 Position 50-72"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/AssertExtensions.cs#L24",
+      "Location": "Line 24 Position 50-61"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/AssertExtensions.cs#L37",
+      "Location": "Line 37 Position 50-64"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/AssertExtensions.cs#L51",
+      "Location": "Line 51 Position 49-64"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/AssertExtensions.cs#L60",
+      "Location": "Line 60 Position 50-68"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/AssertExtensions.cs#L69",
+      "Location": "Line 69 Position 49-64"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/AssertExtensions.cs#L79",
+      "Location": "Line 79 Position 50-65"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/AssertExtensions.cs#L94",
+      "Location": "Line 94 Position 49-62"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L112",
+      "Location": "Line 112 Position 28-34"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L131",
+      "Location": "Line 131 Position 28-34"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L150",
+      "Location": "Line 150 Position 28-39"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L161",
+      "Location": "Line 161 Position 28-37"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L174",
+      "Location": "Line 174 Position 28-34"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L179",
+      "Location": "Line 179 Position 28-34"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L28",
+      "Location": "Line 28 Position 28-45"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L39",
+      "Location": "Line 39 Position 28-45"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L54",
+      "Location": "Line 54 Position 28-36"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L76",
+      "Location": "Line 76 Position 28-35"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L98",
+      "Location": "Line 98 Position 28-37"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserResponseBodyWrapperExtensions.cs#L21",
+      "Location": "Line 21 Position 30-38"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserResponseBodyWrapperExtensions.cs#L31",
+      "Location": "Line 31 Position 30-38"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserResponseBodyWrapperExtensions.cs#L41",
+      "Location": "Line 41 Position 35-48"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserResponseBodyWrapperExtensions.cs#L56",
+      "Location": "Line 56 Position 30-45"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserResponseBodyWrapperExtensions.cs#L69",
+      "Location": "Line 69 Position 30-44"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserResponseBodyWrapperExtensions.cs#L83",
+      "Location": "Line 83 Position 30-41"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserResponseExtensions.cs#L20",
+      "Location": "Line 20 Position 28-50"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserResponseExtensions.cs#L41",
+      "Location": "Line 41 Position 33-42"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/TestingViewBrowserResponseExtensions.cs#L16",
+      "Location": "Line 16 Position 29-37"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/TestingViewBrowserResponseExtensions.cs#L27",
+      "Location": "Line 27 Position 30-41"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/TestingViewBrowserResponseExtensions.cs#L38",
+      "Location": "Line 38 Position 30-43"
+    },
+    {
+      "Id": "S4226",
+      "Message": "Either move this extension to another namespace or move the method inside the class itself.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/TestingViewBrowserResponseExtensions.cs#L49",
+      "Location": "Line 49 Position 30-43"
+    }
+  ]
+}

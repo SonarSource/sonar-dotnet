@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027Case Else\u0027 clause to this \u0027Select\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L95",
+      "Location": "Line 95 Position 9-15"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027Case Else\u0027 clause to this \u0027Select\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L111",
+      "Location": "Line 111 Position 17-23"
+    }
+  ]
+}

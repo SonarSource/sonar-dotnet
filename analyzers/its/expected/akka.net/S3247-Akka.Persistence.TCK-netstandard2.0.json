@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence to use pattern matching.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L196",
+      "Location": "Line 196 Position 21-38"
+    }
+  ]
+}

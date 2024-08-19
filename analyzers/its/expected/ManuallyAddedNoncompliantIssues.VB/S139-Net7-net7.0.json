@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/Net7/S6575.vb#L6",
+      "Location": "Line 6 Position 51-73"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027dlgXBMCHost_Load\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L143",
+      "Location": "Line 143 Position 17-33"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027OK_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L22",
+      "Location": "Line 22 Position 17-32"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027Cancel_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L77",
+      "Location": "Line 77 Position 17-36"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027lbXBMCCom_KeyDown\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/frmSettingsHolder.vb#L89",
+      "Location": "Line 89 Position 17-34"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027lbXBMCCom_SelectedIndexChanged\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/frmSettingsHolder.vb#L93",
+      "Location": "Line 93 Position 17-47"
+    }
+  ]
+}

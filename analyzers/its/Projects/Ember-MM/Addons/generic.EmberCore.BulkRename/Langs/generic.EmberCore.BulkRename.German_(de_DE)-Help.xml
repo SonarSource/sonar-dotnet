@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<string control="Renamer_chkEnabled">Aktiviert dieses Modul</string>
+	<string control="Renamer_chkGenericModule">Aktiviert den eingebauten Mehrfach Umbenenner</string>
+	<string control="Renamer_txtFolderPattern">Gib ein Schema zum automatischen Umbenennen von Verzeichnissen ein.</string>
+	<string control="Renamer_txtFilePattern">Gib ein Schema zum automatischen Umbenennen von Dateien ein.</string>
+	<string control="Renamer_chkRenameMulti">Wenn aktiviert wird Ember automatisch Dateien und Verzeichnisse beim Multi-Scrapen umbenennen</string>
+	<string control="Renamer_chkRenameSingle">Wenn aktiviert wird Ember automatisch Dateien und Verzeichnisse beim Einzel-Scrapen umbenennen</string>
+	<string control="Renamer_chkBulkRenamer">Aktiviert den Mehrfach Umbenenner</string>
+</strings>
+<!-- Rev2123 -->

@@ -1,0 +1,40 @@
+{
+  "Issues": [
+    {
+      "Id": "S2223",
+      "Message": "Change the visibility of \u0027TestRunSystem\u0027 or make it \u0027const\u0027 or \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L48",
+      "Location": "Line 48 Position 38-51"
+    },
+    {
+      "Id": "S2223",
+      "Message": "Change the visibility of \u0027SinkCoordinator\u0027 or make it \u0027const\u0027 or \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L49",
+      "Location": "Line 49 Position 36-51"
+    },
+    {
+      "Id": "S2223",
+      "Message": "Change the visibility of \u0027OutputDirectory\u0027 or make it \u0027const\u0027 or \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L54",
+      "Location": "Line 54 Position 33-48"
+    },
+    {
+      "Id": "S2223",
+      "Message": "Change the visibility of \u0027FailedSpecsDirectory\u0027 or make it \u0027const\u0027 or \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L58",
+      "Location": "Line 58 Position 33-53"
+    },
+    {
+      "Id": "S2223",
+      "Message": "Change the visibility of \u0027TeamCityFormattingOn\u0027 or make it \u0027const\u0027 or \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L60",
+      "Location": "Line 60 Position 31-51"
+    },
+    {
+      "Id": "S2223",
+      "Message": "Change the visibility of \u0027MultiPlatform\u0027 or make it \u0027const\u0027 or \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L61",
+      "Location": "Line 61 Position 31-44"
+    }
+  ]
+}

@@ -1,0 +1,200 @@
+// body {
+//	padding:150px 50px;
+//	font-family:"Lucida Grande","Lucida Sans Unicode","bitstream vera sans","trebuchet ms",verdana;
+//}
+
+.flags img {
+	height:25px;
+	padding-right: 10px;
+	
+}
+
+.infoPanel {
+	left:3px;
+	border: 1px solid #333;
+	background-color:#dddddd; 
+	layer-background-color:#dddddd;
+	width:100%; 
+	float:top; 
+	//top:450px; 
+	//bottom:0px;
+top:0px;
+	height:100px;
+	//position: absolute;
+	position: relative;
+	z-index: 1001;
+}
+
+.MovieInfo {
+	overflow:hidden;
+	max-height:100%;
+	min-height:550px;
+ height:expression(document.body.clientHeight > 550? "550px": "auto" );
+}
+
+
+.fancontainer {
+    width: 100%; 
+    height: 100%; 
+// max-width:950px;
+ width:expression(document.body.clientWidth > 900? "900px": "auto" );
+}
+
+#info {
+    width: 100%; 
+    height: 100%; 
+    left: 0px; 
+    top: 0px; 
+    position: relative;
+    z-index: 5;
+    vertical-align:top
+    display:inline-block;
+    min-width:600px;
+ // max-width:950px;
+ width:expression(document.body.clientWidth > 900? "900px": "auto" );
+}
+
+#background {
+    width: 100%; 
+    height: 100%; 
+    left: 0px; 
+    top:expression(35);
+    top: 50px; 
+    position: relative;
+    z-index: -1;
+}
+
+.stretch {
+    width:100%;
+    height:100%;
+// width:expression(document.body.clientWidth > 900? "900px": "auto" );
+}
+
+
+
+
+/* get rid of those system borders being generated for A tags */
+a:active {
+  outline:none;
+}
+
+:focus {
+  -moz-outline-style:none;
+}
+
+
+.brdr_imagen {
+border: medium solid #CCC;
+height: 165px;
+top: 10px;
+right: 10px;
+padding-top: 0px;
+padding-right: 0px;
+padding-bottom: 0px;
+padding-left: 0px;
+}
+
+
+.fanartbg {
+position: absolute;
+height:40px;
+clip:rect(auto, auto, auto, auto);
+max-height:300px
+
+}
+
+.contenido {
+position: relative;
+
+}
+
+
+.tablealtura {
+border: 1px dotted #000;
+-moz-background-size: cover;
+
+}
+.blur{
+background: transparent url(shadow1.png);
+/*path to the 80%-transparent 1x1pixel black-colored background image*/
+color: inherit;
+margin-left: 4px;
+margin-top: 4px;
+}
+
+.shadow{
+background: transparent url(shadow2.png);
+/*path to the 60%-transparent 1x1pixel black-colored background image*/
+color: inherit;
+}
+
+.shadow,
+.content{
+position: relative;
+bottom: 2px;
+right: 2px;
+}
+
+
+.content{
+font-family: Arial, Helvetica, sans-serif;
+font-size: 14px;
+font-style: normal;
+line-height: normal;
+font-weight: bolder;
+background-color: #000; /*background color of content*/
+color: #FFF; /*text color of content*/
+border: 1px solid #000; /*border color*/
+padding: .5em 2ex;
+text-align: justify;
+filter:alpha(opacity=75);
+-moz-opacity:0.75;
+-khtml-opacity: 0.75;
+opacity: 0.75;
+height:80px;
+max-height:280px;
+overflow:auto;
+}
+
+.titulopeli {
+font-family: Arial, Helvetica, sans-serif;
+font-size: 14px;
+font-style: normal;
+line-height: normal;
+font-weight: bold;
+text-transform: uppercase;
+color: #333;
+}
+.txttagline {
+font-family: Arial, Helvetica, sans-serif;
+font-size: 10px;
+font-style: italic;
+line-height: normal;
+font-weight: normal;
+text-transform: capitalize;
+color: #333;
+}
+.txtDirector {
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight: bold;
+}
+.txtRuntime {
+font-family: Arial, Helvetica, sans-serif;
+font-size: 10px;
+font-style: normal;
+line-height: normal;
+color: #333;
+}
+.txtoutline {
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+color: #666;
+text-indent: 10;
+}
+.tdencabezado {
+border-bottom-width: 1px;
+border-bottom-style: double;
+border-bottom-color: #000;
+background-color: #CCC;
+}

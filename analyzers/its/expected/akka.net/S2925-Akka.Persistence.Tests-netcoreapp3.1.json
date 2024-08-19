@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2925",
+      "Message": "Do not use \u0027Thread.Sleep()\u0027 in a test.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.Tests/PersistentActorSpec.cs#L209",
+      "Location": "Line 209 Position 17-47"
+    },
+    {
+      "Id": "S2925",
+      "Message": "Do not use \u0027Thread.Sleep()\u0027 in a test.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.Tests/PersistentActorSpecAsyncAwait.cs#L208",
+      "Location": "Line 208 Position 17-47"
+    }
+  ]
+}

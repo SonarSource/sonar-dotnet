@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027Sections\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L102",
+      "Location": "Line 102 Position 44-52"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027SectionContents\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L59",
+      "Location": "Line 59 Position 44-59"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027Assemblies\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/RazorConfigurationSection.cs#L18",
+      "Location": "Line 18 Position 48-58"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027Namespaces\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/RazorConfigurationSection.cs#L25",
+      "Location": "Line 25 Position 49-59"
+    }
+  ]
+}

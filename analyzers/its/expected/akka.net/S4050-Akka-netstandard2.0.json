@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S4050",
+      "Message": "Provide an implementation for: \u0027operator==\u0027, \u0027operator!=\u0027, \u0027Object.Equals\u0027 and \u0027Object.GetHashCode\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Config.cs#L22",
+      "Location": "Line 22 Position 18-24"
+    },
+    {
+      "Id": "S4050",
+      "Message": "Provide an implementation for: \u0027operator==\u0027, \u0027operator!=\u0027, \u0027Object.Equals\u0027 and \u0027Object.GetHashCode\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/ConsistentHash.cs#L28",
+      "Location": "Line 28 Position 18-32"
+    }
+  ]
+}

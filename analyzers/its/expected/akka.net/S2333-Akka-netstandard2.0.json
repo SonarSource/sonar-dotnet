@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2333",
+      "Message": "\u0027partial\u0027 is gratuitous in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/TcpListener.cs#L20",
+      "Location": "Line 20 Position 5-12"
+    }
+  ]
+}

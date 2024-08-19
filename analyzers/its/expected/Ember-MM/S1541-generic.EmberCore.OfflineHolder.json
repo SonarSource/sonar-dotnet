@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 19 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L100",
+      "Location": "Line 100 Position 5-149"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 16 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L276",
+      "Location": "Line 276 Position 5-26"
+    }
+  ]
+}

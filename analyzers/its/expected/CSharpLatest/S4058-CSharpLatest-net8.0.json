@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027c.Name.Contains\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/VariousPatternsOfPatterns.cs#L100",
+      "Location": "Line 100 Position 43-73"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027name.Contains\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/VariousPatternsOfPatterns.cs#L98",
+      "Location": "Line 98 Position 47-75"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "Issues": [
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027Handle_ModuleEnabledChanged\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L124",
+      "Location": "Line 124 Position 17-44"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027Handle_ModuleSettingsChanged\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L128",
+      "Location": "Line 128 Position 17-45"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027StartHTTPServer\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L156",
+      "Location": "Line 156 Position 16-31"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename function \u0027internalResizeImage\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L161",
+      "Location": "Line 161 Position 14-33"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename function \u0027MovieBuildHTML\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L21",
+      "Location": "Line 21 Position 21-35"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename function \u0027GetValueGET\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L263",
+      "Location": "Line 263 Position 21-32"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename function \u0027GetValueQueryORDERID\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L291",
+      "Location": "Line 291 Position 21-41"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename function \u0027GetValueQueryROWS\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L305",
+      "Location": "Line 305 Position 21-38"
+    }
+  ]
+}

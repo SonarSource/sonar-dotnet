@@ -1,17 +1,21 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 namespace SonarAnalyzer.Test.Rules;
@@ -794,23 +798,6 @@ public partial class TokenTypeAnalyzerTest
             """, allowSemanticModel);
 
     [DataTestMethod]
-    [DataRow("public [k:partial] [t:Int32] Prop { get; set; }", "public [k:partial] Int32 Prop { get => 1; set { } }")]
-    [DataRow("public partial [t:Int32] this[int index] { get; set; }", "public partial Int32 this[int index] { get => 1; set { } }")]
-    public void IdentifierToken_Type_PartialPropertyDeclaration(string propertyDeclaration, string propertyImplementation) =>
-        ClassifierTestHarness.AssertTokenTypes($$"""
-            using System;
-
-            public partial class Test
-            {
-                {{propertyDeclaration}}
-            }
-            public partial class Test
-            {
-                {{propertyImplementation}}
-            }
-            """);
-
-    [DataTestMethod]
     [DataRow("[t:Int32]", false)]
     [DataRow("[u:System].Int32", true)]
     public void IdentifierToken_Type_LocalFunction(string returnType, bool allowSemanticModel = true) =>
@@ -1409,6 +1396,8 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
+#if NET
+
     [TestMethod]
     public void CSharp12Syntax_Classification() =>
         ClassifierTestHarness.AssertTokenTypes("""
@@ -1423,19 +1412,6 @@ public partial class TokenTypeAnalyzerTest
             }
             """);
 
-#if NET
-    [TestMethod]
-    public void KeywordToken_AllowsAntiConstraintAndParameterModifiers() =>
-        ClassifierTestHarness.AssertTokenTypes("""
-            class Allows<T> where T: [k:allows] [k:ref] [k:struct]
-            {
-                public void M1([k:scoped] [t:T] [u:t])
-                { }
-                public void M1([k:ref] [k:readonly] T t)
-                { }
-                public void M2([k:in] T t)
-                { }
-            }
-            """);
 #endif
+
 }

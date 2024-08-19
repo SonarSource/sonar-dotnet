@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Hosting.Aspnet/TinyIoCAspNetExtensions.cs#L26",
+      "Location": "Line 26 Position 13-15"
+    }
+  ]
+}

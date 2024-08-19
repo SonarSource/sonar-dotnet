@@ -1,0 +1,2 @@
+﻿{{>nustachePartial}}
+You have just won ${{value}}!

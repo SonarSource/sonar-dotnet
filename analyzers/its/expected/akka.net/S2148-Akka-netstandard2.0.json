@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S2148",
+      "Message": "Add underscores to this numeric value for readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L91",
+      "Location": "Line 91 Position 33-43"
+    },
+    {
+      "Id": "S2148",
+      "Message": "Add underscores to this numeric value for readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L395",
+      "Location": "Line 395 Position 104-113"
+    },
+    {
+      "Id": "S2148",
+      "Message": "Add underscores to this numeric value for readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/WildcardIndex.cs#L80",
+      "Location": "Line 80 Position 33-42"
+    },
+    {
+      "Id": "S2148",
+      "Message": "Add underscores to this numeric value for readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/WildcardIndex.cs#L81",
+      "Location": "Line 81 Position 40-50"
+    },
+    {
+      "Id": "S2148",
+      "Message": "Add underscores to this numeric value for readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/WildcardIndex.cs#L82",
+      "Location": "Line 82 Position 40-50"
+    }
+  ]
+}

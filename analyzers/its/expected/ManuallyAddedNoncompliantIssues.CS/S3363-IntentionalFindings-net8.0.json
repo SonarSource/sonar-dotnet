@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3363",
+      "Message": "\u0027DateTime\u0027 should not be used as a type for primary keys",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S3363.cs#L15",
+      "Location": "Line 15 Position 10-18"
+    }
+  ]
+}

@@ -14,8 +14,7 @@
   },
   "tags": [
     "cwe",
-    "pitfall",
-    "symbolic-execution"
+    "pitfall"
   ],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-4347",

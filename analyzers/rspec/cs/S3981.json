@@ -12,9 +12,7 @@
     "func": "Constant\/Issue",
     "constantCost": "2min"
   },
-  "tags": [
-    "confusing"
-  ],
+  "tags": [],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-3981",
   "sqKey": "S3981",

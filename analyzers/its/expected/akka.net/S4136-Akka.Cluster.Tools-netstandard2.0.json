@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4136",
+      "Message": "All \u0027MakeKey\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Internal/Topics.cs#L317",
+      "Location": "Line 317 Position 30-37"
+    }
+  ]
+}

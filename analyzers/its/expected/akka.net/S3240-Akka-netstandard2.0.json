@@ -1,0 +1,232 @@
+{
+  "Issues": [
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L420",
+      "Location": "Line 420 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorRef.cs#L280",
+      "Location": "Line 280 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L201",
+      "Location": "Line 201 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Deployer.cs#L143",
+      "Location": "Line 143 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Deployer.cs#L160",
+      "Location": "Line 160 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Extensions.cs#L112",
+      "Location": "Line 112 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Extensions.cs#L132",
+      "Location": "Line 132 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/FSM.cs#L1185",
+      "Location": "Line 1185 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Futures.cs#L420",
+      "Location": "Line 420 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Props.cs#L197",
+      "Location": "Line 197 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Scheduler/TimerScheduler.cs#L199",
+      "Location": "Line 199 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L147",
+      "Location": "Line 147 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconTokenizer.cs#L88",
+      "Location": "Line 88 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/CachingConfig.cs#L213",
+      "Location": "Line 213 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/CachingConfig.cs#L289",
+      "Location": "Line 289 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L273",
+      "Location": "Line 273 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L293",
+      "Location": "Line 293 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L263",
+      "Location": "Line 263 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L149",
+      "Location": "Line 149 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffSupervisorBase.cs#L49",
+      "Location": "Line 49 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/Broadcast.cs#L161",
+      "Location": "Line 161 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/ConsistentHash.cs#L98",
+      "Location": "Line 98 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/ConsistentHashRouter.cs#L525",
+      "Location": "Line 525 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/Random.cs#L161",
+      "Location": "Line 161 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/Resizer.cs#L59",
+      "Location": "Line 59 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/RoundRobin.cs#L206",
+      "Location": "Line 206 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/ScatterGatherFirstCompleted.cs#L260",
+      "Location": "Line 260 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/SmallestMailbox.cs#L232",
+      "Location": "Line 232 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/TailChopping.cs#L290",
+      "Location": "Line 290 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Serialization/Serialization.cs#L484",
+      "Location": "Line 484 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/AppVersion.cs#L101",
+      "Location": "Line 101 Position 21-23"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/AppVersion.cs#L232",
+      "Location": "Line 232 Position 33-35"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/Internal/StringBuilderExtensions.cs#L24",
+      "Location": "Line 24 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/Internal/StringBuilderExtensions.cs#L25",
+      "Location": "Line 25 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/MatchHandler/CachedMatchCompiler.cs#L58",
+      "Location": "Line 58 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/Reflection/ExpressionExtensions.cs#L144",
+      "Location": "Line 144 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/Try.cs#L114",
+      "Location": "Line 114 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/WildcardTree.cs#L86",
+      "Location": "Line 86 Position 13-15"
+    }
+  ]
+}

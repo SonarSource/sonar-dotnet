@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_systemNumber\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L51",
+      "Location": "Line 51 Position 42-45"
+    }
+  ]
+}

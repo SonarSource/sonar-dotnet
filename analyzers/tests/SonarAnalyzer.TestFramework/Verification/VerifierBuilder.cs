@@ -1,17 +1,21 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using Google.Protobuf;
@@ -36,24 +40,22 @@ public enum CompilationErrorBehavior
 public record VerifierBuilder
 {
     // All properties are (and should be) immutable.
-    public ImmutableArray<Func<DiagnosticAnalyzer>> Analyzers { get; init; } = [];
+    public ImmutableArray<Func<DiagnosticAnalyzer>> Analyzers { get; init; } = ImmutableArray<Func<DiagnosticAnalyzer>>.Empty;
+    public bool AutogenerateConcurrentFiles { get; init; } = true;
     public string BasePath { get; init; }
     public Func<SonarCodeFix> CodeFix { get; init; }
     public string CodeFixedPath { get; init; }
     public string CodeFixedPathBatch { get; init; }
     public string CodeFixTitle { get; init; }
-    public bool ConcurrentAnalysis { get; init; } = !Debugger.IsAttached;
-    public bool AutogenerateConcurrentFiles { get; init; } = !Debugger.IsAttached;
+    public bool ConcurrentAnalysis { get; init; } = true;
     public CompilationErrorBehavior ErrorBehavior { get; init; } = CompilationErrorBehavior.Default;
-    public ImmutableArray<DiagnosticDescriptor> OnlyDiagnostics { get; init; } = [];
+    public ImmutableArray<DiagnosticDescriptor> OnlyDiagnostics { get; init; } = ImmutableArray<DiagnosticDescriptor>.Empty;
     public OutputKind OutputKind { get; init; } = OutputKind.DynamicallyLinkedLibrary;
-    public Func<CompilationOptions, CompilationOptions> CompilationOptionsCustomization { get; init; }
-    public ImmutableArray<string> Paths { get; init; } = [];
-    public ImmutableArray<string> AdditionalSourceFiles { get; init; } = [];
-    public ImmutableArray<ParseOptions> ParseOptions { get; init; } = [];
+    public ImmutableArray<string> Paths { get; init; } = ImmutableArray<string>.Empty;
+    public ImmutableArray<ParseOptions> ParseOptions { get; init; } = ImmutableArray<ParseOptions>.Empty;
     public string ProtobufPath { get; init; }
-    public ImmutableArray<MetadataReference> References { get; init; } = [];
-    public ImmutableArray<Snippet> Snippets { get; init; } = [];
+    public ImmutableArray<MetadataReference> References { get; init; } = ImmutableArray<MetadataReference>.Empty;
+    public ImmutableArray<Snippet> Snippets { get; init; } = ImmutableArray<Snippet>.Empty;
     public string AdditionalFilePath { get; init; }
 
     /// <summary>
@@ -70,9 +72,6 @@ public record VerifierBuilder
 
     public VerifierBuilder AddSnippet(string snippet, string fileName = null) =>
         this with { Snippets = Snippets.Add(new(snippet, fileName)) };
-
-    public VerifierBuilder AddAdditionalSourceFiles(params string[] additionalSourceFiles) =>
-        this with { AdditionalSourceFiles = AdditionalSourceFiles.Concat(additionalSourceFiles).ToImmutableArray() };
 
     /// <summary>
     /// Add a test reference to change the project type to Test project.
@@ -99,9 +98,6 @@ public record VerifierBuilder
 
     public VerifierBuilder WithCodeFixTitle(string codeFixTitle) =>
         this with { CodeFixTitle = codeFixTitle };
-
-    public VerifierBuilder WithCompilationOptionsCustomization(Func<CompilationOptions, CompilationOptions> compilationOptionsCustomization) =>
-        this with { CompilationOptionsCustomization = compilationOptionsCustomization };
 
     public VerifierBuilder WithConcurrentAnalysis(bool concurrentAnalysis) =>
         this with { ConcurrentAnalysis = concurrentAnalysis };
@@ -141,7 +137,7 @@ public record VerifierBuilder
         {
             throw new InvalidOperationException($"{nameof(WithTopLevelStatements)} is supported from {nameof(CS.LanguageVersion.CSharp9)}.");
         }
-        return (ParseOptions.IsEmpty ? WithOptions(LanguageOptions.FromCSharp9) : this)
+        return (ParseOptions.IsEmpty ? WithOptions(ParseOptionsHelper.FromCSharp9) : this)
             .WithOutputKind(OutputKind.ConsoleApplication)
             .WithConcurrentAnalysis(false);
     }
@@ -160,12 +156,6 @@ public record VerifierBuilder
     /// </summary>
     public void VerifyNoIssues() =>
         Build().VerifyNoIssues();
-
-    /// <summary>
-    /// Check that the compilation does not produce any AD0001 issues. Other diagnostics are ignored.
-    /// </summary>
-    public void VerifyNoAD0001() =>
-        Build().VerifyNoAD0001();
 
     /// <summary>
     /// Verifies that no diagnostics, except errors, are found.

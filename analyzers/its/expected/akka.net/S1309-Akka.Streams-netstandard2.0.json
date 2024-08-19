@@ -1,0 +1,64 @@
+{
+  "Issues": [
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1223",
+      "Location": "Line 1223 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1357",
+      "Location": "Line 1357 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L227",
+      "Location": "Line 227 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L1013",
+      "Location": "Line 1013 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L536",
+      "Location": "Line 536 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L641",
+      "Location": "Line 641 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L785",
+      "Location": "Line 785 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L527",
+      "Location": "Line 527 Position 10-25"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/IO/FilePublisher.cs#L19",
+      "Location": "Line 19 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/StreamRefs.cs#L16",
+      "Location": "Line 16 Position 1-24"
+    }
+  ]
+}

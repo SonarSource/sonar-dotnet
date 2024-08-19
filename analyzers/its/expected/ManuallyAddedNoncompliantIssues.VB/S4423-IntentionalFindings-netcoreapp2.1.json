@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S4423",
+      "Message": "Change this code to use a stronger protocol.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S4423.vb#L14",
+      "Location": "Line 14 Position 69-72"
+    },
+    {
+      "Id": "S4423",
+      "Message": "Change this code to use a stronger protocol.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S4423.vb#L16",
+      "Location": "Line 16 Position 86-93"
+    }
+  ]
+}

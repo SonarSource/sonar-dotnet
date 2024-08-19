@@ -1,62 +1,32 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.CFG.Operations.Utilities;
-
-namespace SonarAnalyzer.CFG.Extensions;
+namespace SonarAnalyzer.Extensions;
 
 public static class IOperationExtensions
 {
-    [Obsolete("Use extension methods for IOperation properties instead.")] // should be made private and ObsoleteAttribute removed when there is no usage outside of this file left
     public static IOperationWrapperSonar ToSonar(this IOperation operation) =>
         new(operation);
 
-    [Obsolete("Use extension methods for IOperation properties instead.")] // should be made private and ObsoleteAttribute removed when there is no usage outside of this file left
     public static IOperationWrapperSonar ToSonar(this IOperationWrapper operation) =>
         new(operation.WrappedOperation);
-
-    public static IOperation Parent(this IOperation operation) =>
-        operation.ToSonar().Parent;
-
-    public static IOperation Parent(this IOperationWrapper operation) =>
-        operation.WrappedOperation.Parent();
-
-    public static IEnumerable<IOperation> Children(this IOperation operation) =>
-        operation.ToSonar().Children;
-
-    public static IEnumerable<IOperation> Children(this IOperationWrapper operation) =>
-        operation.WrappedOperation.Children();
-
-    public static string Language(this IOperation operation) =>
-        operation.ToSonar().Language;
-
-    public static string Language(this IOperationWrapper operation) =>
-        operation.WrappedOperation.Language();
-
-    public static bool IsImplicit(this IOperation operation) =>
-        operation.ToSonar().IsImplicit;
-
-    public static bool IsImplicit(this IOperationWrapper operation) =>
-        operation.WrappedOperation.IsImplicit();
-
-    public static SemanticModel SemanticModel(this IOperation operation) =>
-        operation.ToSonar().SemanticModel;
-
-    public static SemanticModel SemanticModel(this IOperationWrapper operation) =>
-        operation.WrappedOperation.SemanticModel();
 
     public static bool IsOutArgumentReference(this IOperation operation) =>
         operation.ToSonar() is var wrapped
@@ -132,9 +102,6 @@ public static class IOperationExtensions
     public static IArrayCreationOperationWrapper? AsArrayCreation(this IOperation operation) =>
         operation.As(OperationKindEx.ArrayCreation, IArrayCreationOperationWrapper.FromOperation);
 
-    public static IArrayElementReferenceOperationWrapper? AsArrayElementReference(this IOperation operation) =>
-        operation.As(OperationKindEx.ArrayElementReference, IArrayElementReferenceOperationWrapper.FromOperation);
-
     public static IConversionOperationWrapper? AsConversion(this IOperation operation) =>
         operation.As(OperationKindEx.Conversion, IConversionOperationWrapper.FromOperation);
 
@@ -144,18 +111,11 @@ public static class IOperationExtensions
     public static IDeclarationPatternOperationWrapper? AsDeclarationPattern(this IOperation operation) =>
         operation.As(OperationKindEx.DeclarationPattern, IDeclarationPatternOperationWrapper.FromOperation);
 
+    public static IFlowCaptureOperationWrapper? AsFlowCapture(this IOperation operation) =>
+        operation.As(OperationKindEx.FlowCapture, IFlowCaptureOperationWrapper.FromOperation);
+
     public static IFlowCaptureReferenceOperationWrapper? AsFlowCaptureReference(this IOperation operation) =>
         operation.As(OperationKindEx.FlowCaptureReference, IFlowCaptureReferenceOperationWrapper.FromOperation);
-
-    public static IForEachLoopOperationWrapper? AsForEachLoop(this IOperation operation)
-    {
-        if (operation is null)  // null check to be consistent with other the other As methods
-        {
-            throw new NullReferenceException(nameof(operation));
-        }
-        // Other LoopKinds (e.g. For, While) are still OperationKindEx.Loop, but cannot be cast to IForEachLoopOperationWrapper so we need an additional check
-        return IForEachLoopOperationWrapper.IsInstance(operation) ? IForEachLoopOperationWrapper.FromOperation(operation) : null;
-    }
 
     public static IInvocationOperationWrapper? AsInvocation(this IOperation operation) =>
         operation.As(OperationKindEx.Invocation, IInvocationOperationWrapper.FromOperation);
@@ -165,9 +125,6 @@ public static class IOperationExtensions
 
     public static ILocalReferenceOperationWrapper? AsLocalReference(this IOperation operation) =>
         operation.As(OperationKindEx.LocalReference, ILocalReferenceOperationWrapper.FromOperation);
-
-    public static IIsNullOperationWrapper? AsIsNull(this IOperation operation) =>
-        operation.As(OperationKindEx.IsNull, IIsNullOperationWrapper.FromOperation);
 
     public static IIsPatternOperationWrapper? AsIsPattern(this IOperation operation) =>
         operation.As(OperationKindEx.IsPattern, IIsPatternOperationWrapper.FromOperation);
@@ -187,26 +144,17 @@ public static class IOperationExtensions
     public static IRecursivePatternOperationWrapper? AsRecursivePattern(this IOperation operation) =>
         operation.As(OperationKindEx.RecursivePattern, IRecursivePatternOperationWrapper.FromOperation);
 
-    public static ISpreadOperationWrapper? AsSpread(this IOperation operation) =>
-        operation.As(OperationKindEx.Spread, ISpreadOperationWrapper.FromOperation);
+    public static IArrayElementReferenceOperationWrapper? AsArrayElementReference(this IOperation operation) =>
+        operation.As(OperationKindEx.ArrayElementReference, IArrayElementReferenceOperationWrapper.FromOperation);
 
     public static ITupleOperationWrapper? AsTuple(this IOperation operation) =>
         operation.As(OperationKindEx.Tuple, ITupleOperationWrapper.FromOperation);
-
-    public static IVariableDeclaratorOperationWrapper? AsVariableDeclarator(this IOperation operation) =>
-        operation.As(OperationKindEx.VariableDeclarator, IVariableDeclaratorOperationWrapper.FromOperation);
-
-    public static IAddressOfOperationWrapper ToAddressOf(this IOperation operation) =>
-        IAddressOfOperationWrapper.FromOperation(operation);
 
     public static IAwaitOperationWrapper ToAwait(this IOperation operation) =>
         IAwaitOperationWrapper.FromOperation(operation);
 
     public static IArgumentOperationWrapper ToArgument(this IOperation operation) =>
         IArgumentOperationWrapper.FromOperation(operation);
-
-    public static IArrayCreationOperationWrapper ToArrayCreation(this IOperation operation) =>
-        IArrayCreationOperationWrapper.FromOperation(operation);
 
     public static IAssignmentOperationWrapper ToAssignment(this IOperation operation) =>
         IAssignmentOperationWrapper.FromOperation(operation);
@@ -219,9 +167,6 @@ public static class IOperationExtensions
 
     public static IBinaryPatternOperationWrapper ToBinaryPattern(this IOperation operation) =>
         IBinaryPatternOperationWrapper.FromOperation(operation);
-
-    public static ICatchClauseOperationWrapper ToCatchClause(this IOperation operation) =>
-        ICatchClauseOperationWrapper.FromOperation(operation);
 
     public static ICompoundAssignmentOperationWrapper ToCompoundAssignment(this IOperation operation) =>
         ICompoundAssignmentOperationWrapper.FromOperation(operation);
@@ -253,12 +198,6 @@ public static class IOperationExtensions
     public static IInvocationOperationWrapper ToInvocation(this IOperation operation) =>
         IInvocationOperationWrapper.FromOperation(operation);
 
-    public static IIsTypeOperationWrapper ToIsType(this IOperation operation) =>
-        IIsTypeOperationWrapper.FromOperation(operation);
-
-    public static ILocalFunctionOperationWrapper ToLocalFunction(this IOperation operation) =>
-        ILocalFunctionOperationWrapper.FromOperation(operation);
-
     public static ILocalReferenceOperationWrapper ToLocalReference(this IOperation operation) =>
         ILocalReferenceOperationWrapper.FromOperation(operation);
 
@@ -273,9 +212,6 @@ public static class IOperationExtensions
 
     public static IObjectCreationOperationWrapper ToObjectCreation(this IOperation operation) =>
         IObjectCreationOperationWrapper.FromOperation(operation);
-
-    public static IPatternOperationWrapper ToPattern(this IOperation operation) =>
-        IPatternOperationWrapper.FromOperation(operation);
 
     public static IParameterReferenceOperationWrapper ToParameterReference(this IOperation operation) =>
         IParameterReferenceOperationWrapper.FromOperation(operation);
@@ -297,12 +233,6 @@ public static class IOperationExtensions
 
     public static IUnaryOperationWrapper ToUnary(this IOperation operation) =>
         IUnaryOperationWrapper.FromOperation(operation);
-
-    public static IVariableDeclarationOperationWrapper ToVariableDeclaration(this IOperation operation) =>
-        IVariableDeclarationOperationWrapper.FromOperation(operation);
-
-    public static IVariableDeclaratorOperationWrapper ToVariableDeclarator(this IOperation operation) =>
-        IVariableDeclaratorOperationWrapper.FromOperation(operation);
 
     public static IOperation UnwrapConversion(this IOperation operation)
     {

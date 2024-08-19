@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3353",
+      "Message": "Add the \u0027const\u0027 modifier to \u0027bindFlags\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/IPExtensions.cs#L31",
+      "Location": "Line 31 Position 26-35"
+    },
+    {
+      "Id": "S3353",
+      "Message": "Add the \u0027const\u0027 modifier to \u0027bufferSizeLogKey\u0027, and replace \u0027var\u0027 with \u0027string\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L36",
+      "Location": "Line 36 Position 17-33"
+    }
+  ]
+}

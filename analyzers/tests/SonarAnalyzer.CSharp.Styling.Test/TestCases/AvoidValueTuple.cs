@@ -28,7 +28,7 @@ public class Sample
 
     public int SwitchExpression(int a, int b)
     {
-        var result = (a, b) switch      // Noncompliant: a ValueTuple is created for the SwitchExpressionException that is thrown for uncovered cases
+        var result = (a, b) switch      // Compliant: no ValueTuple is created under the hood for switch expressions
         {
             (0, 0) => 0,
             (1, 1) => 2,
@@ -48,16 +48,5 @@ public class Sample
             default:
                 return 42;
         };
-    }
-
-    public int PositionalPatternMatching(Sample s) => s switch
-    {
-        (0, 0) => 0, // Compliant, Sample.Deconstruct is called
-        _ => 42
-    };
-
-    void Deconstruct(out int i, out int j)
-    {
-        i = 42; j = 12;
     }
 }

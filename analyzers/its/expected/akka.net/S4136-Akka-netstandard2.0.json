@@ -1,0 +1,118 @@
+{
+  "Issues": [
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Equals\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorPath.cs#L236",
+      "Location": "Line 236 Position 21-27"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027ToStringWithAddress\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorPath.cs#L519",
+      "Location": "Line 519 Position 23-42"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Equals\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorRef.cs#L303",
+      "Location": "Line 303 Position 30-36"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027CompareTo\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorRef.cs#L327",
+      "Location": "Line 327 Position 20-29"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Cancel\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Cancellation/ICancelable.cs#L30",
+      "Location": "Line 30 Position 14-20"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027GetExtension\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Internal/ActorSystemImpl.cs#L348",
+      "Location": "Line 348 Position 32-44"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Equals\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Props.cs#L265",
+      "Location": "Line 265 Position 21-27"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Create\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Props.cs#L352",
+      "Location": "Line 352 Position 29-35"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Take\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconTokenizer.cs#L103",
+      "Location": "Line 103 Position 23-27"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Matches\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconTokenizer.cs#L64",
+      "Location": "Line 64 Position 21-28"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Info\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/LoggingAdapterBase.cs#L237",
+      "Location": "Line 237 Position 29-33"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Equals\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/NotUsed.cs#L37",
+      "Location": "Line 37 Position 30-36"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027WithTransport\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Serialization/Serialization.cs#L135",
+      "Location": "Line 135 Position 25-38"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Equals\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/ByteString.cs#L535",
+      "Location": "Line 535 Position 30-36"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Remove\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/Index.cs#L147",
+      "Location": "Line 147 Position 21-27"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027CopyAndAdd\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/Internal/ImmutabilityUtils.cs#L35",
+      "Location": "Line 35 Position 34-44"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027CopyAndRemove\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/Internal/ImmutabilityUtils.cs#L55",
+      "Location": "Line 55 Position 34-47"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027SwitchOff\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/Switch.cs#L63",
+      "Location": "Line 63 Position 21-30"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027SwitchOn\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/Switch.cs#L75",
+      "Location": "Line 75 Position 21-29"
+    }
+  ]
+}

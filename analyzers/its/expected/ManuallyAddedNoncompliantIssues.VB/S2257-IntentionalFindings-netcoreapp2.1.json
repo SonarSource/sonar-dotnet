@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S2257",
+      "Message": "Make sure using a non-standard cryptographic algorithm is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S2257.vb#L26",
+      "Location": "Line 26 Position 18-40"
+    },
+    {
+      "Id": "S2257",
+      "Message": "Make sure using a non-standard cryptographic algorithm is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S2257.vb#L31",
+      "Location": "Line 31 Position 14-35"
+    },
+    {
+      "Id": "S2257",
+      "Message": "Make sure using a non-standard cryptographic algorithm is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S2257.vb#L72",
+      "Location": "Line 72 Position 14-39"
+    },
+    {
+      "Id": "S2257",
+      "Message": "Make sure using a non-standard cryptographic algorithm is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S2257.vb#L9",
+      "Location": "Line 9 Position 14-24"
+    }
+  ]
+}

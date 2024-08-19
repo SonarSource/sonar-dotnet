@@ -71,19 +71,20 @@ analyzers/packaging/binaries/
 analyzers/packaging/internal/
 
 # Actual SARIF files
-/private/analyzers/its/actual/
+analyzers/its/actual/
 
 # MSBuild & other output
-/private/analyzers/its/output/
+analyzers/its/output/
 
 # Temporary diff folder
-/private/analyzers/its/diff/
+analyzers/its/diff/
 
-/private/analyzers/its/**/packages.lock.json
+/analyzers/its/**/packages.lock.json
 
 /its/projects/WebApplication/.scannerwork/report-task.txt
 /its/projects/WebApplication/.scannerwork/.sonar_lock
 
-# ITs.JsonParser expects to be run from "sonar-dotnet-enterprise/private/analyzers/its".
+
+# ITs.JsonParser expects to be run from "sonar-dotnet/analyzers/its".
 # Feel free to configure your local launchSettings.json.
 analyzers/src/ITs.JsonParser/Properties/launchSettings.json

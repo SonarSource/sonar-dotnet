@@ -1,28 +1,31 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using SonarAnalyzer.Core.Json;
-using SonarAnalyzer.Core.Json.Parsing;
-using SonarAnalyzer.Core.Trackers;
+using SonarAnalyzer.Json;
+using SonarAnalyzer.Json.Parsing;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class DatabasePasswordsShouldBeSecure : TrackerHotspotDiagnosticAnalyzer<SyntaxKind>
@@ -31,7 +34,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private const string MessageFormat = "Use a secure password when connecting to this database.";
 
         private static readonly Regex Sanitizers = new(@"((integrated[_\s]security)|(trusted[_\s]connection))=(sspi|yes|true)",
-            RegexOptions.Compiled | RegexOptions.IgnoreCase, Constants.DefaultRegexTimeout);
+            RegexOptions.Compiled | RegexOptions.IgnoreCase, RegexConstants.DefaultTimeout);
 
         private static readonly MemberDescriptor[] TrackedInvocations =
         {
@@ -72,7 +75,7 @@ namespace SonarAnalyzer.CSharp.Rules
             foreach (var fullPath in c.WebConfigFiles())
             {
                 var webConfig = File.ReadAllText(fullPath);
-                if (webConfig.Contains("<connectionStrings>") && webConfig.ParseXDocument() is { } doc)
+                if (webConfig.Contains("<connectionStrings>") && XmlHelper.ParseXDocument(webConfig) is { } doc)
                 {
                     ReportEmptyPassword(c, doc, fullPath);
                 }
@@ -142,9 +145,10 @@ namespace SonarAnalyzer.CSharp.Rules
         private static ArgumentSyntax ConnectionStringArgument(SeparatedSyntaxList<ArgumentSyntax> argumentList) =>
             // Where(cond).First() is more efficient than First(cond)
             argumentList.Where(a => a.NameColon?.Name.Identifier.ValueText == "connectionString").FirstOrDefault()
-                ?? argumentList.Where(x => x.Expression.Kind() is
-                    SyntaxKind.StringLiteralExpression or SyntaxKind.InterpolatedStringExpression or SyntaxKind.AddExpression)
-                    .FirstOrDefault()
+                ?? argumentList.Where(a => a.Expression.IsAnyKind(
+                    SyntaxKind.StringLiteralExpression,
+                    SyntaxKind.InterpolatedStringExpression,
+                    SyntaxKind.AddExpression)).FirstOrDefault()
                 ?? argumentList.FirstOrDefault();
 
         // For both interpolated strings and concatenation chain, it's easier to search in the string representation of the tree, rather than doing string searches for each individual

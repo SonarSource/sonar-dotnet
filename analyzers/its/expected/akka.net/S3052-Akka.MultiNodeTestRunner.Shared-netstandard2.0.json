@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027ExitCode\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/ExitCodeContainer.cs#L19",
+      "Location": "Line 19 Position 36-39"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_unMuted\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TeamCityLoggerActor.cs#L19",
+      "Location": "Line 19 Position 40-47"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027TotalReceiveClosedConfirmations\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/SinkCoordinator.cs#L86",
+      "Location": "Line 86 Position 55-58"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027ReceivedSinkCloseConfirmations\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/SinkCoordinator.cs#L87",
+      "Location": "Line 87 Position 54-57"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private method \u0027TestCases\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S4347.cs#L7",
+      "Location": "Line 7 Position 10-19"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027dateTime\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6588.cs#L7",
+      "Location": "Line 7 Position 9-62"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027dateTimeOffset\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6588.cs#L8",
+      "Location": "Line 8 Position 9-104"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private method \u0027Log\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6668.cs#L8",
+      "Location": "Line 8 Position 22-25"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027_logger\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6669.cs#L11",
+      "Location": "Line 11 Position 9-33"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027my_logger\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6669.cs#L7",
+      "Location": "Line 7 Position 9-35"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027_log2\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6669.cs#L9",
+      "Location": "Line 9 Position 9-36"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private method \u0027Log\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6673.cs#L8",
+      "Location": "Line 8 Position 22-25"
+    }
+  ]
+}

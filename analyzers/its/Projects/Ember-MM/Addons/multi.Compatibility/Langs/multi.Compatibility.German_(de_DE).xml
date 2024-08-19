@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <string id="1">YAMJ Kompatiblitätsmodul</string>
+	<string id="2">YAMJ komaptible Sets</string>
+	<string id="3">YAMJ kompatible VIDEO_TS Datei und Namen</string>
+	<string id="4">YAMJ kompatible TV Images Namen</string>
+	<string id="5">YAMJ spezifische NFO Einträge</string>
+	<string id="6">Zeige Cover als SET_&lt;Show&gt;_1.jpg</string>
+	<string id="7">Zeige Cover als SET_&lt;Show&gt;_1.fanart.jpg</string>
+	<string id="8">Staffel Cover als &lt;Episode&gt;SxxE01.jpg</string>
+	<string id="9">Staffel Fanart als &lt;Episode&gt;SxxE01.fanart.jpg</string>
+	<string id="10">Episode Poster als &lt;Show&gt;.videoimage.jpg</string>
+	<string id="11">kompatible VIDEO_TS VIDEO_TS Datei und Namen (Aktiv belassen falls Modul deaktiviert, wegen YAMJ)</string>
+	<string id="12">Movie Fanart als backdrop.jpg</string>
+	<string id="13">Media Browser mymovies.xml</string>
+	<string id="14">Zeige alle Staffeln als Season 1.banner.jpg</string>
+</strings>
+<!-- created by F089 Rev2384 -->

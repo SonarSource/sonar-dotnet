@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2696",
+      "Message": "Make the enclosing instance method \u0027static\u0027 or remove this set on the \u0027static\u0027 field.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/SerializationSupport.cs#L212",
+      "Location": "Line 212 Position 21-83"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3963",
+      "Message": "Initialize all \u0027static fields\u0027 inline and remove the \u0027static constructor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/LogEvent.cs#L25",
+      "Location": "Line 25 Position 16-26"
+    },
+    {
+      "Id": "S3963",
+      "Message": "Initialize all \u0027static fields\u0027 inline and remove the \u0027static constructor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/MurmurHash.cs#L55",
+      "Location": "Line 55 Position 16-26"
+    }
+  ]
+}

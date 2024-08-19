@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/GeneratedCode.CS/handwritten.cs#L14",
+      "Location": "Line 14 Position 22-25"
+    }
+  ]
+}

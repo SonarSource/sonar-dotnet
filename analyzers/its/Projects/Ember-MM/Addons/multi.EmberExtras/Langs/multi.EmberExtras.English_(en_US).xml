@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<string id="0">Audio &amp; Video Codec Mapping</string>
+	<string id="1">Genres Editor</string>
+	<string id="2">&lt; All &gt;</string>
+	<string id="3">Enter the new Language</string>
+	<string id="4">New Language</string>
+	<string id="5">This will remove the Language from all Genres. Are you sure?</string>
+	<string id="6">Remove Language</string>
+	<string id="7">Languages</string>
+	<string id="8">Change</string>
+	<string id="9">Image</string>
+	<string id="10">Genres Filter</string>
+	<string id="11"></string>
+
+	<string id="30">Audio</string>
+	<string id="31">Video</string>
+	<string id="32">Mediainfo Codec</string>
+	<string id="33">Mapped Codec</string>
+	
+	<string id="61">Media Sources Editor</string>
+	<string id="62">Sources</string>
+	<string id="63">Search String</string>
+	<string id="64">Source Name</string>
+	<string id="65">Map Media Source by File Extension</string>	
+	<string id="66">File Extension</string>	
+	<string id="67">Set Defaults</string>		
+</strings>

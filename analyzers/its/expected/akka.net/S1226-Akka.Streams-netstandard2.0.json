@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1226",
+      "Message": "Introduce a new variable instead of reusing the parameter \u0027firstAttempt\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L249",
+      "Location": "Line 249 Position 29-41"
+    }
+  ]
+}

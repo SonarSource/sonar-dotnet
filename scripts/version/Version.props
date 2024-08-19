@@ -1,0 +1,14 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MainVersion>9.33.0</MainVersion>
+    <BuildNumber>0</BuildNumber>
+    <MilestoneVersion>9.33</MilestoneVersion>
+    <Sha1>$(Sha1)</Sha1>
+    <BranchName>$(BranchName)</BranchName>
+    <FullVersion>$(MainVersion).$(BuildNumber)</FullVersion>
+    <AssemblyVersion>$(MainVersion)</AssemblyVersion>
+    <AssemblyFileVersion>$(FullVersion)</AssemblyFileVersion>
+    <NugetVersion>$(FullVersion)</NugetVersion>
+    <AssemblyInformationalVersion>Version:$(FullVersion) Branch:$(BranchName) Sha1:$(Sha1)</AssemblyInformationalVersion>
+  </PropertyGroup>
+</Project>

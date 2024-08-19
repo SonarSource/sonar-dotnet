@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027n\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L181",
+      "Location": "Line 181 Position 21-22"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027iSel\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/frmSettingsHolder.vb#L63",
+      "Location": "Line 63 Position 13-17"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027id\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L144",
+      "Location": "Line 144 Position 21-23"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027DBMovie\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L275",
+      "Location": "Line 275 Position 21-28"
+    }
+  ]
+}

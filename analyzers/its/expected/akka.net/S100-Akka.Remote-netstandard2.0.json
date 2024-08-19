@@ -1,0 +1,40 @@
+{
+  "Issues": [
+    {
+      "Id": "S100",
+      "Message": "Rename property \u0027state\u0027 to match pascal case naming rules, consider using \u0027State\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L157",
+      "Location": "Line 157 Position 24-29"
+    },
+    {
+      "Id": "S100",
+      "Message": "Rename method \u0027InitFSM\u0027 to match pascal case naming rules, consider using \u0027InitFsm\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L712",
+      "Location": "Line 712 Position 26-33"
+    },
+    {
+      "Id": "S100",
+      "Message": "Rename property \u0027logRemoteLifeCycleEvents\u0027 to match pascal case naming rules, consider using \u0027LogRemoteLifeCycleEvents\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteTransport.cs#L69",
+      "Location": "Line 69 Position 21-45"
+    },
+    {
+      "Id": "S100",
+      "Message": "Rename property \u0027DISASSOCIATE\u0027 to match pascal case naming rules, consider using \u0027Disassociate\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L531",
+      "Location": "Line 531 Position 28-40"
+    },
+    {
+      "Id": "S100",
+      "Message": "Rename method \u0027InitializeFSM\u0027 to match pascal case naming rules, consider using \u0027InitializeFsm\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L832",
+      "Location": "Line 832 Position 22-35"
+    },
+    {
+      "Id": "S100",
+      "Message": "Rename method \u0027InitializeFSM\u0027 to match pascal case naming rules, consider using \u0027InitializeFsm\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1102",
+      "Location": "Line 1102 Position 22-35"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027NonGenericList\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S4004.cs#L8",
+      "Location": "Line 8 Position 22-36"
+    }
+  ]
+}

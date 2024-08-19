@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027protected\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ArrayCache.cs#L6",
+      "Location": "Line 6 Position 18-28"
+    },
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027private\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/MimeTypes.cs#L39",
+      "Location": "Line 39 Position 25-34"
+    },
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027protected\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TypeResolveStrategies.cs#L10",
+      "Location": "Line 10 Position 18-39"
+    }
+  ]
+}

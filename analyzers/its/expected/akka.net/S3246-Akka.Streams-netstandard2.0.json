@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3246",
+      "Message": "Add the \u0027in\u0027 keyword to parameter \u0027T\u0027 to make it \u0027contravariant\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/DelayFlow.cs#L20",
+      "Location": "Line 20 Position 37-38"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027BuildSpecificationId\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/VisualizerRuntimeTemplate.Tree.cs#L33",
+      "Location": "Line 33 Position 23-43"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027BuildGroupItems\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/VisualizerRuntimeTemplate.Tree.cs#L60",
+      "Location": "Line 60 Position 23-38"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027BuildOptions\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/VisualizerRuntimeTemplate.Tree.cs#L71",
+      "Location": "Line 71 Position 23-35"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027WriteSpecMessage\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L140",
+      "Location": "Line 140 Position 22-38"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027WriteSpecPass\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L147",
+      "Location": "Line 147 Position 22-35"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027WriteSpecFail\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L154",
+      "Location": "Line 154 Position 22-35"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027WriteRunnerMessage\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L161",
+      "Location": "Line 161 Position 22-40"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027WriteNodeMessage\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L168",
+      "Location": "Line 168 Position 22-38"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027AdapterTypeName\u0027 a static property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/UnitTest.cs#L30",
+      "Location": "Line 30 Position 23-38"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027TestType\u0027 a static property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/UnitTestResult.cs#L41",
+      "Location": "Line 41 Position 27-35"
+    }
+  ]
+}

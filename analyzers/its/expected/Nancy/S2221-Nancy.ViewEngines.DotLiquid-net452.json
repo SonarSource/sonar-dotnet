@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2221",
+      "Message": "Catch a list of specific exception subtype or use exception filters instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.DotLiquid/DotLiquidViewEngine.cs#L124",
+      "Location": "Line 124 Position 20-29"
+    }
+  ]
+}

@@ -162,7 +162,7 @@ namespace Tests.Diagnostics
     {
         public void M1()
         {
-            static double divide(int divisor, int dividend) // Secondary
+            static double divide(int divisor, int dividend)
             {
                 return divisor / dividend;
             }
@@ -175,7 +175,7 @@ namespace Tests.Diagnostics
 
         public void M2()
         {
-            double divide(int divisor, int dividend) // Secondary
+            double divide(int divisor, int dividend)
             {
                 return divisor / dividend;
             }
@@ -188,7 +188,7 @@ namespace Tests.Diagnostics
 
         public void M3()
         {
-            double divide(int divisor, int dividend) => divisor / dividend; // Secondary
+            double divide(int divisor, int dividend) => divisor / dividend;
 
             double doTheThing(int divisor, int dividend) => divide(dividend, divisor);  // Noncompliant
         }

@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027Delay must be greater than zero\u0027 7 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L56",
+      "Location": "Line 56 Position 69-102"
+    },
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027Delay must be greater than zero\u0027 6 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalWriteBehavior.cs#L193",
+      "Location": "Line 193 Position 69-102"
+    },
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027Delay must be greater than zero\u0027 6 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.TestKit/SnapshotStore/SnapshotStoreSaveBehavior.cs#L59",
+      "Location": "Line 59 Position 69-102"
+    }
+  ]
+}

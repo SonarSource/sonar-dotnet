@@ -1,0 +1,484 @@
+{
+  "Issues": [
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L2017",
+      "Location": "Line 2017 Position 25-33"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDVD.vb#L104",
+      "Location": "Line 104 Position 30-50"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDVD.vb#L110",
+      "Location": "Line 110 Position 30-41"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDVD.vb#L62",
+      "Location": "Line 62 Position 30-41"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDVD.vb#L84",
+      "Location": "Line 84 Position 30-55"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDVD.vb#L90",
+      "Location": "Line 90 Position 30-42"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1496",
+      "Location": "Line 1496 Position 25-40"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1506",
+      "Location": "Line 1506 Position 34-58"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1575",
+      "Location": "Line 1575 Position 25-29"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1585",
+      "Location": "Line 1585 Position 34-47"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1660",
+      "Location": "Line 1660 Position 25-31"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1731",
+      "Location": "Line 1731 Position 25-34"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1732",
+      "Location": "Line 1732 Position 25-28"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L262",
+      "Location": "Line 262 Position 25-34"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L347",
+      "Location": "Line 347 Position 25-28"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L498",
+      "Location": "Line 498 Position 25-31"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L639",
+      "Location": "Line 639 Position 25-29"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L649",
+      "Location": "Line 649 Position 34-47"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPINFO.vb#L1116",
+      "Location": "Line 1116 Position 25-31"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L1522",
+      "Location": "Line 1522 Position 25-33"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L1093",
+      "Location": "Line 1093 Position 21-30"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L1255",
+      "Location": "Line 1255 Position 21-30"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L1507",
+      "Location": "Line 1507 Position 21-37"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L1570",
+      "Location": "Line 1570 Position 21-29"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L1579",
+      "Location": "Line 1579 Position 21-42"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L1588",
+      "Location": "Line 1588 Position 21-39"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L1597",
+      "Location": "Line 1597 Position 21-33"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L1606",
+      "Location": "Line 1606 Position 21-43"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L1624",
+      "Location": "Line 1624 Position 21-33"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L1633",
+      "Location": "Line 1633 Position 21-33"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L1642",
+      "Location": "Line 1642 Position 21-29"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L1669",
+      "Location": "Line 1669 Position 21-29"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L1921",
+      "Location": "Line 1921 Position 21-30"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L1948",
+      "Location": "Line 1948 Position 21-30"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2092",
+      "Location": "Line 2092 Position 21-29"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2308",
+      "Location": "Line 2308 Position 21-35"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2326",
+      "Location": "Line 2326 Position 21-36"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2380",
+      "Location": "Line 2380 Position 21-33"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2389",
+      "Location": "Line 2389 Position 21-33"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2398",
+      "Location": "Line 2398 Position 21-39"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2416",
+      "Location": "Line 2416 Position 21-42"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2452",
+      "Location": "Line 2452 Position 21-36"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2479",
+      "Location": "Line 2479 Position 21-36"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2488",
+      "Location": "Line 2488 Position 21-34"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2497",
+      "Location": "Line 2497 Position 21-34"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2524",
+      "Location": "Line 2524 Position 21-36"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2542",
+      "Location": "Line 2542 Position 21-36"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2560",
+      "Location": "Line 2560 Position 21-28"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2578",
+      "Location": "Line 2578 Position 21-42"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2641",
+      "Location": "Line 2641 Position 21-34"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2677",
+      "Location": "Line 2677 Position 21-34"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2695",
+      "Location": "Line 2695 Position 21-28"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2776",
+      "Location": "Line 2776 Position 21-34"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2785",
+      "Location": "Line 2785 Position 21-34"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2803",
+      "Location": "Line 2803 Position 21-34"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2839",
+      "Location": "Line 2839 Position 21-28"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2974",
+      "Location": "Line 2974 Position 21-33"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2983",
+      "Location": "Line 2983 Position 21-34"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L2992",
+      "Location": "Line 2992 Position 21-31"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L3091",
+      "Location": "Line 3091 Position 21-35"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L3190",
+      "Location": "Line 3190 Position 21-39"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L452",
+      "Location": "Line 452 Position 21-34"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L542",
+      "Location": "Line 542 Position 21-38"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L560",
+      "Location": "Line 560 Position 21-35"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L569",
+      "Location": "Line 569 Position 21-35"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L578",
+      "Location": "Line 578 Position 21-40"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L587",
+      "Location": "Line 587 Position 21-34"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L596",
+      "Location": "Line 596 Position 21-38"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L605",
+      "Location": "Line 605 Position 21-34"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L614",
+      "Location": "Line 614 Position 21-35"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L623",
+      "Location": "Line 623 Position 21-34"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L632",
+      "Location": "Line 632 Position 21-35"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L641",
+      "Location": "Line 641 Position 21-35"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L650",
+      "Location": "Line 650 Position 21-35"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L751",
+      "Location": "Line 751 Position 21-34"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L823",
+      "Location": "Line 823 Position 21-31"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L832",
+      "Location": "Line 832 Position 21-40"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L859",
+      "Location": "Line 859 Position 21-31"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L976",
+      "Location": "Line 976 Position 21-39"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L994",
+      "Location": "Line 994 Position 21-30"
+    }
+  ]
+}

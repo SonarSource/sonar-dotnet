@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericBoxee.vb#L31",
+      "Location": "Line 31 Position 46-183"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L38",
+      "Location": "Line 38 Position 46-184"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L48",
+      "Location": "Line 48 Position 46-180"
+    }
+  ]
+}

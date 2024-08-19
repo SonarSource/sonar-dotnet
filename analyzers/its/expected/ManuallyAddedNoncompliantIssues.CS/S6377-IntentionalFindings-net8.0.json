@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6377",
+      "Message": "Change this code to only accept signatures computed from a trusted party.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6377.cs#L16",
+      "Location": "Line 16 Position 13-39"
+    }
+  ]
+}

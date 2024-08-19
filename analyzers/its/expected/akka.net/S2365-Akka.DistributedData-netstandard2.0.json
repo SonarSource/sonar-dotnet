@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2365",
+      "Message": "Refactor \u0027OperationsSerialization\u0027 into a method, properties should not copy collections.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L759",
+      "Location": "Line 759 Position 91-145"
+    }
+  ]
+}

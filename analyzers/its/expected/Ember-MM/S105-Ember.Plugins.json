@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/PluginManager.cs#L160",
+      "Location": "Line 160 Position 13-13"
+    },
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L155",
+      "Location": "Line 155 Position 13-13"
+    },
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/Scraper/ScraperActionContext.cs#L53",
+      "Location": "Line 53 Position 13-13"
+    }
+  ]
+}

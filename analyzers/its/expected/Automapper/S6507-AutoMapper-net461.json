@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6507",
+      "Message": "Do not lock on local variable \u0027typeMap\u0027, use a readonly field instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L256",
+      "Location": "Line 256 Position 27-34"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/EventFilter/DeadLettersFilter.cs#L46",
+      "Location": "Line 46 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L560",
+      "Location": "Line 560 Position 25-27"
+    }
+  ]
+}

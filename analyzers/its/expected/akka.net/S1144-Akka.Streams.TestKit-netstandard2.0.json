@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private method \u0027Assert\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L516",
+      "Location": "Line 516 Position 26-32"
+    }
+  ]
+}

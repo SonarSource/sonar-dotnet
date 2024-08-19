@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1226",
+      "Message": "Introduce a new variable instead of reusing the parameter \u0027port\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/TestTransportAssociationStressSpec.cs#L43",
+      "Location": "Line 43 Position 13-17"
+    },
+    {
+      "Id": "S1226",
+      "Message": "Introduce a new variable instead of reusing the parameter \u0027port\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/TestTransportRemoteMessagingThroughputSpec.cs#L45",
+      "Location": "Line 45 Position 13-17"
+    }
+  ]
+}

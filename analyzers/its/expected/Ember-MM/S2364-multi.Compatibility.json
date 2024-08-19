@@ -1,0 +1,154 @@
+{
+  "Issues": [
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_AssemblyName\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericBoxee.vb#L11",
+      "Location": "Line 11 Position 10-23"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_AssemblyName\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L14",
+      "Location": "Line 14 Position 10-23"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_ID\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L167",
+      "Location": "Line 167 Position 11-14"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_CollectionNumber\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L168",
+      "Location": "Line 168 Position 11-28"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_Type\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L169",
+      "Location": "Line 169 Position 11-16"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_LocalTitle\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L170",
+      "Location": "Line 170 Position 11-22"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_OriginalTitle\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L171",
+      "Location": "Line 171 Position 11-25"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_SortTitle\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L172",
+      "Location": "Line 172 Position 11-21"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_ForcedTitle\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L173",
+      "Location": "Line 173 Position 11-23"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_IMDBrating\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L174",
+      "Location": "Line 174 Position 11-22"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_ProductionYear\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L175",
+      "Location": "Line 175 Position 11-26"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_Added\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L178",
+      "Location": "Line 178 Position 11-17"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_IMDbId\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L179",
+      "Location": "Line 179 Position 11-18"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_RunningTime\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L180",
+      "Location": "Line 180 Position 11-23"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_TMDbId\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L181",
+      "Location": "Line 181 Position 11-18"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_Studios\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L182",
+      "Location": "Line 182 Position 11-19"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_CDUniverseId\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L183",
+      "Location": "Line 183 Position 11-24"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_Persons\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L184",
+      "Location": "Line 184 Position 11-19"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_Genres\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L185",
+      "Location": "Line 185 Position 11-18"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_Description\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L186",
+      "Location": "Line 186 Position 11-23"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_AudioTracks\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L187",
+      "Location": "Line 187 Position 11-23"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_Subtitles\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L188",
+      "Location": "Line 188 Position 11-21"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_MPAARating\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L189",
+      "Location": "Line 189 Position 11-22"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_AssemblyName\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L11",
+      "Location": "Line 11 Position 10-23"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027fYAMJ\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L8",
+      "Location": "Line 8 Position 10-15"
+    }
+  ]
+}

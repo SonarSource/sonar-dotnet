@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1109",
+      "Message": "Move this closing curly brace to the next line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L1132",
+      "Location": "Line 1132 Position 113-114"
+    }
+  ]
+}

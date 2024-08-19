@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1311",
+      "Location": "Line 1311 Position 80-84"
+    },
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027GoTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1331",
+      "Location": "Line 1331 Position 80-84"
+    }
+  ]
+}

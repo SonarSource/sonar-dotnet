@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <string id="0">Ember XML Film Scrapers</string>
+	<string id="1"></string>
+	<string id="2">Genre(s):</string>
+	<string id="3">Zeigt Details jedes Ergebnisses an, um den richtigen Film zu finden.</string>
+	<string id="4">Film Such Ergebnis</string>
+	<string id="5">Suchen...</string>
+	<string id="6">Downloading details...</string>
+	<string id="7">Suche Ergebnisse - </string>
+	<string id="8">Configuriere diese Scraper Einstellungen in</string>
+	<string id="9">Lade Bitte Warten</string>
+	<string id="10">Scraper Felder - Scraper spezifisch</string>
+	<string id="11">Diese Einstellungen sind zu diesem Modul spezifisch.{0}Beziehe dich bitte auf die globalen Einstellungen für mehr Optionen.</string>
+</strings>
+<!-- Rev2384 created by F089-->

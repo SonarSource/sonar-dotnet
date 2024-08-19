@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6618",
+      "Message": "Use \u0022string.Create\u0022 instead of \u0022FormattableString\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/Net6/S6618.cs#L9",
+      "Location": "Line 9 Position 27-41"
+    }
+  ]
+}

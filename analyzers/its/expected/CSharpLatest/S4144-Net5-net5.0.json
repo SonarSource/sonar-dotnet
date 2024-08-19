@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4144",
+      "Message": "Update this method so that its implementation is not identical to \u0027Method1\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L121",
+      "Location": "Line 121 Position 6-13"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+﻿@namespace Test
+@using Microsoft.AspNetCore.Components.Rendering
+@inherits PublicMethodArgumentsShouldBeCheckedForNull_component
+
+@Render <!-- Compliant -->
+
+@code {
+    public RenderFragment Render => base.BuildRenderTree;
+
+    public int Method(string arg1) => arg1.Length;  // Noncompliant
+}

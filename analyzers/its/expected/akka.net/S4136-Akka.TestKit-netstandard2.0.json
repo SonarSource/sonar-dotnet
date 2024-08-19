@@ -1,0 +1,136 @@
+{
+  "Issues": [
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Mute\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L234",
+      "Location": "Line 234 Position 11-15"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027MuteAsync\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L242",
+      "Location": "Line 242 Position 17-26"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027ExpectOne\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L27",
+      "Location": "Line 27 Position 14-23"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027ExpectOneAsync\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L37",
+      "Location": "Line 37 Position 14-28"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Expect\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L78",
+      "Location": "Line 78 Position 14-20"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027ExpectAsync\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L89",
+      "Location": "Line 89 Position 14-25"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Mute\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L213",
+      "Location": "Line 213 Position 18-22"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027MuteAsync\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L221",
+      "Location": "Line 221 Position 30-39"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027ExpectOne\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L44",
+      "Location": "Line 44 Position 21-30"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027ExpectOneAsync\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L49",
+      "Location": "Line 49 Position 21-35"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Expect\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L87",
+      "Location": "Line 87 Position 21-27"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027ExpectAsync\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L95",
+      "Location": "Line 95 Position 21-32"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Equals\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L149",
+      "Location": "Line 149 Position 30-36"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Tell\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L87",
+      "Location": "Line 87 Position 21-25"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027InternalAwaitCondition\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L305",
+      "Location": "Line 305 Position 31-53"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027InternalAwaitConditionAsync\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L318",
+      "Location": "Line 318 Position 37-64"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027AwaitCondition\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L34",
+      "Location": "Line 34 Position 21-35"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027AwaitConditionAsync\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L55",
+      "Location": "Line 55 Position 27-46"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027ExpectMsgFrom\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L31",
+      "Location": "Line 31 Position 18-31"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Within\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L30",
+      "Location": "Line 30 Position 21-27"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027WithinAsync\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L38",
+      "Location": "Line 38 Position 21-32"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027SendSystemMessage\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestProbe.cs#L162",
+      "Location": "Line 162 Position 21-38"
+    }
+  ]
+}

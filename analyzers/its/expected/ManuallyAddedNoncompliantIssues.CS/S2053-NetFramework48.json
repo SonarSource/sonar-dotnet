@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2053",
+      "Message": "Make this salt unpredictable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/HashesShouldHaveUnpredictableSaltTest.cs#L20",
+      "Location": "Line 20 Position 52-61"
+    },
+    {
+      "Id": "S2053",
+      "Message": "Make this salt unpredictable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/HashesShouldHaveUnpredictableSaltTest.cs#L21",
+      "Location": "Line 21 Position 51-60"
+    }
+  ]
+}

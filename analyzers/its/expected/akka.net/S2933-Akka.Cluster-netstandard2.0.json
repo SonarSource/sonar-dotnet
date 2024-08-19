@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027_membersMap\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Gossip.cs#L171",
+      "Location": "Line 171 Position 58-69"
+    }
+  ]
+}

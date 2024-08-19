@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class EqualityOnModulus : SonarDiagnosticAnalyzer
@@ -43,21 +47,19 @@ namespace SonarAnalyzer.CSharp.Rules
         {
             var equalsExpression = (BinaryExpressionSyntax)c.Node;
 
-            if ((CheckExpression(equalsExpression.Left, equalsExpression.Right, c.Model)
-                ?? CheckExpression(equalsExpression.Right, equalsExpression.Left, c.Model)) is { } constantValue)
+            if (CheckExpression(equalsExpression.Left, equalsExpression.Right, c.SemanticModel, out var constantValue)
+                || CheckExpression(equalsExpression.Right, equalsExpression.Left, c.SemanticModel, out constantValue))
             {
                 c.ReportIssue(Rule, equalsExpression, constantValue < 0 ? "negative" : "positive");
             }
         }
 
-        private static int? CheckExpression(SyntaxNode node, ExpressionSyntax expression, SemanticModel model) =>
-            ExpressionNumericConverter.ConstantIntValue(node) is { } constantValue
+        private static bool CheckExpression(SyntaxNode node, ExpressionSyntax expression, SemanticModel semanticModel, out int constantValue) =>
+            ExpressionNumericConverter.TryGetConstantIntValue(node, out constantValue)
             && constantValue != 0
             && expression.RemoveParentheses() is BinaryExpressionSyntax binary
             && binary.IsKind(SyntaxKind.ModuloExpression)
-            && !ExpressionIsAlwaysPositive(binary, model)
-                ? constantValue
-                : null;
+            && !ExpressionIsAlwaysPositive(binary, semanticModel);
 
         private static bool ExpressionIsAlwaysPositive(BinaryExpressionSyntax binaryExpression, SemanticModel semantic)
         {
@@ -85,7 +87,7 @@ namespace SonarAnalyzer.CSharp.Rules
             (CountName.Equals(symbol.Name) || LongCountName.Equals(symbol.Name))
             && symbol is IMethodSymbol methodSymbol
             && methodSymbol.IsExtensionMethod
-            && methodSymbol.ReceiverType is not null
+            && methodSymbol.ReceiverType != null
             && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 
         private static bool IsLengthProperty(IPropertySymbol propertySymbol) =>

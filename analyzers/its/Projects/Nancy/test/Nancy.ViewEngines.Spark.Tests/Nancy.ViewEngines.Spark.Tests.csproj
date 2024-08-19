@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- We need to manually mark this project as TEST. See analyzers\its\Directory.Build.targets for details.-->
+    <SonarQubeTestProject>true</SonarQubeTestProject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net452</TargetFramework>
+    <CodeAnalysisRuleSet>..\..\..\..\ValidationRuleset.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="ShadeViews\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestViews\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

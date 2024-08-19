@@ -1,0 +1,58 @@
+{
+  "Issues": [
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property init accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S134.cs#L8",
+      "Location": "Line 8 Position 9-13"
+    },
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property init accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S1541.cs#L11",
+      "Location": "Line 11 Position 9-13"
+    },
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property init accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S2259.cs#L10",
+      "Location": "Line 10 Position 9-13"
+    },
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property init accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S2930.cs#L10",
+      "Location": "Line 10 Position 9-13"
+    },
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property init accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3237.cs#L10",
+      "Location": "Line 10 Position 9-13"
+    },
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property init accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3440.cs#L27",
+      "Location": "Line 27 Position 9-13"
+    },
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property init accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3626.cs#L7",
+      "Location": "Line 7 Position 9-13"
+    },
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property init accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3776.cs#L10",
+      "Location": "Line 10 Position 9-13"
+    },
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property init accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3928.cs#L10",
+      "Location": "Line 10 Position 9-13"
+    }
+  ]
+}

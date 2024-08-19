@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L322",
+      "Location": "Line 322 Position 74-87"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L331",
+      "Location": "Line 331 Position 86-98"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L755",
+      "Location": "Line 755 Position 39-55"
+    }
+  ]
+}

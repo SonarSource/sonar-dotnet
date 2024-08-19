@@ -1,0 +1,70 @@
+{
+  "Issues": [
+    {
+      "Id": "S127",
+      "Message": "Do not update the loop counter \u0027i\u0027 within the loop body.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L144",
+      "Location": "Line 144 Position 19-20"
+    },
+    {
+      "Id": "S127",
+      "Message": "Do not update the loop counter \u0027i\u0027 within the loop body.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L102",
+      "Location": "Line 102 Position 19-20"
+    },
+    {
+      "Id": "S127",
+      "Message": "Do not update the loop counter \u0027i\u0027 within the loop body.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L88",
+      "Location": "Line 88 Position 19-20"
+    },
+    {
+      "Id": "S127",
+      "Message": "Do not update the loop counter \u0027i\u0027 within the loop body.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L237",
+      "Location": "Line 237 Position 19-20"
+    },
+    {
+      "Id": "S127",
+      "Message": "Do not update the loop counter \u0027i\u0027 within the loop body.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L255",
+      "Location": "Line 255 Position 19-20"
+    },
+    {
+      "Id": "S127",
+      "Message": "Do not update the loop counter \u0027i\u0027 within the loop body.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L273",
+      "Location": "Line 273 Position 19-20"
+    },
+    {
+      "Id": "S127",
+      "Message": "Do not update the loop counter \u0027i\u0027 within the loop body.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L291",
+      "Location": "Line 291 Position 19-20"
+    },
+    {
+      "Id": "S127",
+      "Message": "Do not update the loop counter \u0027i\u0027 within the loop body.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/AddressSpec.cs#L59",
+      "Location": "Line 59 Position 19-20"
+    },
+    {
+      "Id": "S127",
+      "Message": "Do not update the loop counter \u0027i\u0027 within the loop body.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Dispatch/DispatcherThroughputSpecBase.cs#L118",
+      "Location": "Line 118 Position 19-20"
+    },
+    {
+      "Id": "S127",
+      "Message": "Do not update the loop counter \u0027i\u0027 within the loop body.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Dispatch/DispatcherThroughputSpecBase.cs#L82",
+      "Location": "Line 82 Position 19-20"
+    },
+    {
+      "Id": "S127",
+      "Message": "Do not update the loop counter \u0027i\u0027 within the loop body.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Event/EventStreamThroughputSpec.cs#L70",
+      "Location": "Line 70 Position 18-19"
+    }
+  ]
+}

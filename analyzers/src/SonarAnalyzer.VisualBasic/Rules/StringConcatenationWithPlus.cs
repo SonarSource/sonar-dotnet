@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class StringConcatenationWithPlus : SonarDiagnosticAnalyzer
@@ -31,10 +35,10 @@ namespace SonarAnalyzer.VisualBasic.Rules
                 c =>
                 {
                     var binary = (BinaryExpressionSyntax)c.Node;
-                    var leftType = c.Model.GetTypeInfo(binary.Left).Type;
+                    var leftType = c.SemanticModel.GetTypeInfo(binary.Left).Type;
                     if (leftType.Is(KnownType.System_String)
                         // If op_Addition exist, there's areason for it => don't raise. We don't care about type of op_Addition arguments, they match because it compiles.
-                        || (leftType.GetMembers("op_Addition").IsEmpty && c.Model.GetTypeInfo(binary.Right).Type.Is(KnownType.System_String)))
+                        || (leftType.GetMembers("op_Addition").IsEmpty && c.SemanticModel.GetTypeInfo(binary.Right).Type.Is(KnownType.System_String)))
                     {
                         c.ReportIssue(Rule, binary.OperatorToken);
                     }

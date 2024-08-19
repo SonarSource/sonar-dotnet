@@ -17,12 +17,6 @@
           "Microsoft.CodeAnalysis.Common": "[4.7.0]"
         }
       },
-      "Microsoft.CodeAnalysis.PerformanceSensitiveAnalyzers": {
-        "type": "Direct",
-        "requested": "[3.3.1, )",
-        "resolved": "3.3.1",
-        "contentHash": "eT+kgNCDdTRbQ5WF6BGx1HI3D5jYfHteza/koefhWC2vNZGxObA74XxwWfg40dy3uUv7dn3OGKLK5GUPLroVog=="
-      },
       "NETStandard.Library": {
         "type": "Direct",
         "requested": "[2.0.3, )",
@@ -40,9 +34,9 @@
       },
       "SonarAnalyzer.CSharp.Styling": {
         "type": "Direct",
-        "requested": "[10.10.0.116381, )",
-        "resolved": "10.10.0.116381",
-        "contentHash": "sv8cQMZcHVKEtYkkw4OooZsE3F3Bz2mIuKfQqV+nsbvbdw3v1TUjYepCN5dCgk+Ln4QuGuc2YI4PEtNsGbXRYw=="
+        "requested": "[9.26.0.92422, )",
+        "resolved": "9.26.0.92422",
+        "contentHash": "IBKknUgTK+2p9M6jVG7i7kREXqrpjKff7peHL7eVf/MN+ftOovF/3VXe2U4PcI6/RKQjL0EntVk9DK11QnpZhg=="
       },
       "StyleCop.Analyzers": {
         "type": "Direct",

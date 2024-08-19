@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2930",
+      "Message": "Dispose \u0027engineDisposedCts\u0027 when it is no longer needed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/NancyEngine.cs#L98",
+      "Location": "Line 98 Position 13-67"
+    }
+  ]
+}

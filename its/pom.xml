@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.sonarsource.dotnet</groupId>
+    <artifactId>sonar-dotnet</artifactId>
+    <version>9.33-SNAPSHOT</version>
+  </parent>
+
+  <groupId>com.sonarsource.it</groupId>
+  <artifactId>it-dotnet-plugin</artifactId>
+  <name>SonarSource :: C# :: ITs :: Plugin</name>
+  <inceptionYear>2011</inceptionYear>
+
+  <organization>
+    <name>SonarSource</name>
+    <url>http://www.sonarsource.com</url>
+  </organization>
+
+  <properties>
+    <surefire.argLine>-server</surefire.argLine>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.sonarsource.orchestrator</groupId>
+      <artifactId>sonar-orchestrator-junit5</artifactId>
+      <version>5.0.0.2065</version>
+    </dependency>
+    <dependency>
+      <groupId>org.sonarsource.sonarqube</groupId>
+      <artifactId>sonar-ws</artifactId>
+      <version>10.6.0.92116</version>
+    </dependency>
+    <dependency>
+      <groupId>org.sonarsource.ucfg</groupId>
+      <artifactId>sonar-ucfg</artifactId>
+      <version>1.2.0.107</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.github.classgraph</groupId>
+      <artifactId>classgraph</artifactId>
+      <version>4.8.174</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.3.1</version>
+          <configuration>
+            <failIfNoTests>true</failIfNoTests>
+            <!-- Display logs in AzureDevOps pipeline output -->
+            <redirectTestOutputToFile>false</redirectTestOutputToFile>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+</project>

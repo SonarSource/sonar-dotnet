@@ -58,11 +58,7 @@ if (signedXml.CheckSignature(rsaKey)) {
 </pre>
 <h3>How does this work?</h3>
 <p>Here, the compliant solution provides an RSA public key to the signature validation function. This will ensure only signatures computed with the
-associated private key will be accepted, preventing signature forgery attacks.</p>
-<p>Using the <code>CheckSignature</code> method without providing a key can be risky because it may search the <code>AddressBook</code> store for
-certificates, which includes all trusted root CA certificates on the machine. This broad trust base can be exploited by attackers. Additionally, if
-the document is not signed with an X.509 signature, the method will use the key embedded in the signature element, which can lead to accepting
-signatures from untrusted sources.</p>
+associated private key will be accepted. This prevents signature forgery attacks.</p>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
@@ -78,7 +74,7 @@ signatures from untrusted sources.</p>
   <li> OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure">Top 10 2017 Category A3 - Sensitive Data
   Exposure</a> </li>
   <li> CWE - <a href="https://cwe.mitre.org/data/definitions/347">CWE-347 - Improper Verification of Cryptographic Signature</a> </li>
-  <li> STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222608">Application Security and
+  <li> STIG Viewer - <a href="https://stigviewer.com/stig/application_security_and_development/2023-06-08/finding/V-222608">Application Security and
   Development: V-222608</a> - The application must not be vulnerable to XML-oriented attacks. </li>
 </ul>
 

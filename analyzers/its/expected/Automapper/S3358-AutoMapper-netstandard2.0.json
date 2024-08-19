@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S3358",
+      "Message": "Extract this nested ternary operation into an independent statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L366",
+      "Location": "Line 366 Position 14-132"
+    },
+    {
+      "Id": "S3358",
+      "Message": "Extract this nested ternary operation into an independent statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L79",
+      "Location": "Line 79 Position 17-89"
+    },
+    {
+      "Id": "S3358",
+      "Message": "Extract this nested ternary operation into an independent statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Execution/ObjectFactory.cs#L48-L51",
+      "Location": "Lines 48-51 Position 13-86"
+    },
+    {
+      "Id": "S3358",
+      "Message": "Extract this nested ternary operation into an independent statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Execution/ObjectFactory.cs#L49-L51",
+      "Location": "Lines 49-51 Position 13-86"
+    },
+    {
+      "Id": "S3358",
+      "Message": "Extract this nested ternary operation into an independent statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Execution/ObjectFactory.cs#L50-L51",
+      "Location": "Lines 50-51 Position 13-86"
+    },
+    {
+      "Id": "S3358",
+      "Message": "Extract this nested ternary operation into an independent statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L455-L457",
+      "Location": "Lines 455-457 Position 21-87"
+    },
+    {
+      "Id": "S3358",
+      "Message": "Extract this nested ternary operation into an independent statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/TypeMap.cs#L202-L204",
+      "Location": "Lines 202-204 Position 19-66"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L88-L91",
+      "Location": "Lines 88-91 Position 24-56"
+    }
+  ]
+}

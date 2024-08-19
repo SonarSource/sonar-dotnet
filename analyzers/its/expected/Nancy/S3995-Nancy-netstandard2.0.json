@@ -1,0 +1,82 @@
+{
+  "Issues": [
+    {
+      "Id": "S3995",
+      "Message": "Change this return type to \u0027System.Uri\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L220",
+      "Location": "Line 220 Position 9-15"
+    },
+    {
+      "Id": "S3995",
+      "Message": "Change this return type to \u0027System.Uri\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L117",
+      "Location": "Line 117 Position 23-29"
+    },
+    {
+      "Id": "S3995",
+      "Message": "Change this return type to \u0027System.Uri\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L139",
+      "Location": "Line 139 Position 23-29"
+    },
+    {
+      "Id": "S3995",
+      "Message": "Change this return type to \u0027System.Uri\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L196",
+      "Location": "Line 196 Position 23-29"
+    },
+    {
+      "Id": "S3995",
+      "Message": "Change this return type to \u0027System.Uri\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L253",
+      "Location": "Line 253 Position 23-29"
+    },
+    {
+      "Id": "S3995",
+      "Message": "Change this return type to \u0027System.Uri\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L385",
+      "Location": "Line 385 Position 23-29"
+    },
+    {
+      "Id": "S3995",
+      "Message": "Change this return type to \u0027System.Uri\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L390",
+      "Location": "Line 390 Position 23-29"
+    },
+    {
+      "Id": "S3995",
+      "Message": "Change this return type to \u0027System.Uri\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L422",
+      "Location": "Line 422 Position 23-29"
+    },
+    {
+      "Id": "S3995",
+      "Message": "Change this return type to \u0027System.Uri\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L433",
+      "Location": "Line 433 Position 23-29"
+    },
+    {
+      "Id": "S3995",
+      "Message": "Change this return type to \u0027System.Uri\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L483",
+      "Location": "Line 483 Position 23-29"
+    },
+    {
+      "Id": "S3995",
+      "Message": "Change this return type to \u0027System.Uri\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L680",
+      "Location": "Line 680 Position 23-29"
+    },
+    {
+      "Id": "S3995",
+      "Message": "Change this return type to \u0027System.Uri\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/IViewEngineHost.cs#L36",
+      "Location": "Line 36 Position 9-15"
+    },
+    {
+      "Id": "S3995",
+      "Message": "Change this return type to \u0027System.Uri\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/NancyViewEngineHost.cs#L67",
+      "Location": "Line 67 Position 16-22"
+    }
+  ]
+}

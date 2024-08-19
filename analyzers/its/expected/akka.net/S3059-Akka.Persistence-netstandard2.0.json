@@ -1,0 +1,88 @@
+{
+  "Issues": [
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L18",
+      "Location": "Line 18 Position 20-37"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L455",
+      "Location": "Line 455 Position 20-42"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Internal/CollectionsExtensions.cs#L13",
+      "Location": "Line 13 Position 27-48"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L437",
+      "Location": "Line 437 Position 20-34"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L125",
+      "Location": "Line 125 Position 20-41"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L151",
+      "Location": "Line 151 Position 20-40"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L234",
+      "Location": "Line 234 Position 20-41"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L264",
+      "Location": "Line 264 Position 20-41"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Persistence.cs#L21",
+      "Location": "Line 21 Position 21-33"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Persistent.cs#L71",
+      "Location": "Line 71 Position 27-47"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/RecoveryPermitter.cs#L17",
+      "Location": "Line 17 Position 27-48"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/RecoveryPermitter.cs#L23",
+      "Location": "Line 23 Position 27-48"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/RecoveryPermitter.cs#L29",
+      "Location": "Line 29 Position 27-47"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/RecoveryPermitter.cs#L39",
+      "Location": "Line 39 Position 20-37"
+    }
+  ]
+}

@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules;
+namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class ConditionalStructureSameImplementation : ConditionalStructureSameImplementationBase
@@ -36,14 +40,14 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
             c =>
             {
                 var ifStatement = (IfStatementSyntax)c.Node;
-                var precedingStatements = ifStatement.PrecedingStatementsInConditionChain().ToList();
+                var precedingStatements = ifStatement.GetPrecedingStatementsInConditionChain().ToList();
                 var hasElse = HasLeafElseClause(ifStatement);
 
-                CheckStatement(c, ifStatement.Statement, precedingStatements, c.Model, hasElse, "branch");
+                CheckStatement(c, ifStatement.Statement, precedingStatements, c.SemanticModel, hasElse, "branch");
 
                 if (ifStatement.Else is not null)
                 {
-                    CheckStatement(c, ifStatement.Else.Statement, [..precedingStatements, ifStatement.Statement], c.Model, hasElse, "branch");
+                    CheckStatement(c, ifStatement.Else.Statement, [..precedingStatements, ifStatement.Statement], c.SemanticModel, hasElse, "branch");
                 }
             },
             SyntaxKind.IfStatement);
@@ -52,9 +56,9 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
             c =>
             {
                 var switchSection = (SwitchSectionSyntax)c.Node;
-                var precedingSections = switchSection.PrecedingSections().ToList();
+                var precedingSections = switchSection.GetPrecedingSections().ToList();
 
-                CheckStatement(c, switchSection, precedingSections, c.Model, HasDefaultClause((SwitchStatementSyntax)switchSection.Parent), "case");
+                CheckStatement(c, switchSection, precedingSections, c.SemanticModel, HasDefaultClause((SwitchStatementSyntax)switchSection.Parent), "case");
             },
             SyntaxKind.SwitchSection);
     }
@@ -109,7 +113,7 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
     }
 
     private static void ReportSyntaxNode(SonarSyntaxNodeReportingContext context, SyntaxNode node, SyntaxNode precedingNode, string errorMessageDiscriminator) =>
-        context.ReportIssue(Rule, node, [precedingNode.ToSecondaryLocation()], precedingNode.LineNumberToReport().ToString(), errorMessageDiscriminator);
+        context.ReportIssue(Rule, node, [precedingNode.ToSecondaryLocation()], precedingNode.GetLineNumberToReport().ToString(), errorMessageDiscriminator);
 
     private static bool IsApprovedStatement(SyntaxNode statement) =>
         !statement.IsAnyKind(IgnoredStatementsInSwitch);

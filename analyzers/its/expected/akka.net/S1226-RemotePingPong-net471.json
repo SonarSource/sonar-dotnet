@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1226",
+      "Message": "Introduce a new variable instead of reusing the parameter \u0027redCount\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/RemotePingPong/Program.cs#L211",
+      "Location": "Line 211 Position 17-25"
+    }
+  ]
+}

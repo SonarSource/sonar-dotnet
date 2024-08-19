@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3992",
+      "Message": "Provide a \u0027ComVisible\u0027 attribute for assembly \u0027SpawnBenchmark\u0027.",
+      "Uri": null,
+      "Location": null
+    }
+  ]
+}

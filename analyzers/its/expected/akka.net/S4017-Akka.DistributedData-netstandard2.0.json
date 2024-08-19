@@ -1,0 +1,58 @@
+{
+  "Issues": [
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L379",
+      "Location": "Line 379 Position 32-93"
+    },
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L418",
+      "Location": "Line 418 Position 55-116"
+    },
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L346",
+      "Location": "Line 346 Position 32-87"
+    },
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L377",
+      "Location": "Line 377 Position 64-119"
+    },
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L100",
+      "Location": "Line 100 Position 42-94"
+    },
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1116",
+      "Location": "Line 1116 Position 52-117"
+    },
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1376",
+      "Location": "Line 1376 Position 56-115"
+    },
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L166",
+      "Location": "Line 166 Position 34-83"
+    },
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L167",
+      "Location": "Line 167 Position 13-62"
+    }
+  ]
+}

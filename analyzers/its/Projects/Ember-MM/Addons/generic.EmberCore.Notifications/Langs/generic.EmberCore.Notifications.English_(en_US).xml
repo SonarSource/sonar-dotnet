@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<string id="0">Notifications</string>
+	<string id="1">On Error</string>
+	<string id="2">On New Movie Added</string>
+	<string id="3">On Movie Scraped</string>
+	<string id="4">On New Episode Added</string>
+</strings>

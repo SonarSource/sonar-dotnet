@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1206",
+      "Message": "This class overrides \u0027GetHashCode\u0027 and should therefore also override \u0027Equals\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/MultiNodeMessage.cs#L115",
+      "Location": "Line 115 Position 18-40"
+    },
+    {
+      "Id": "S1206",
+      "Message": "This class overrides \u0027GetHashCode\u0027 and should therefore also override \u0027Equals\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/MultiNodeMessage.cs#L164",
+      "Location": "Line 164 Position 18-44"
+    },
+    {
+      "Id": "S1206",
+      "Message": "This class overrides \u0027GetHashCode\u0027 and should therefore also override \u0027Equals\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/MultiNodeMessage.cs#L241",
+      "Location": "Line 241 Position 18-37"
+    }
+  ]
+}

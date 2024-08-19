@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused procedure parameter \u0027isChecked\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPINFO.vb#L1022",
+      "Location": "Line 1022 Position 66-92"
+    }
+  ]
+}

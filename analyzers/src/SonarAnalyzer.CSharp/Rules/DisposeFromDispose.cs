@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class DisposeFromDispose : SonarDiagnosticAnalyzer
@@ -35,13 +39,13 @@ namespace SonarAnalyzer.CSharp.Rules
                 var invocation = (InvocationExpressionSyntax)c.Node;
                 var languageVersion = c.Compilation.GetLanguageVersion();
                 if (InvocationTargetAndName(invocation, out var fieldCandidate, out var name)
-                    && c.Model.GetSymbolInfo(fieldCandidate).Symbol is IFieldSymbol invocationTarget
+                    && c.SemanticModel.GetSymbolInfo(fieldCandidate).Symbol is IFieldSymbol invocationTarget
                     && invocationTarget.IsNonStaticNonPublicDisposableField(languageVersion)
-                    && IsDisposeMethodCalled(invocation, c.Model, languageVersion)
+                    && IsDisposeMethodCalled(invocation, c.SemanticModel, languageVersion)
                     && IsDisposableClassOrStruct(invocationTarget.ContainingType, languageVersion)
-                    && !IsCalledInsideDispose(invocation, c.Model)
-                    && FieldDeclaredInType(c.Model, invocation, invocationTarget)
-                    && !FieldDisposedInDispose(c.Model, invocationTarget))
+                    && !IsCalledInsideDispose(invocation, c.SemanticModel)
+                    && FieldDeclaredInType(c.SemanticModel, invocation, invocationTarget)
+                    && !FieldDisposedInDispose(c.SemanticModel, invocationTarget))
                 {
                     c.ReportIssue(Rule, name);
                 }
@@ -56,12 +60,11 @@ namespace SonarAnalyzer.CSharp.Rules
         private static bool FieldIsDisposedIn(SemanticModel model, IFieldSymbol invocationTarget, IMethodSymbol dispose) =>
             (dispose.PartialImplementationPart ?? dispose).DeclaringSyntaxReferences
             .SelectMany(x => x.GetSyntax()
-                .DescendantNodesAndSelf(x =>
-                    !(x.Kind() is
-                        SyntaxKindEx.LocalFunctionStatement or
-                        SyntaxKind.ParenthesizedLambdaExpression or
-                        SyntaxKind.SimpleLambdaExpression or
-                        SyntaxKind.AnonymousMethodExpression))
+                .DescendantNodesAndSelf(x => !x.IsAnyKind(
+                    SyntaxKindEx.LocalFunctionStatement,
+                    SyntaxKind.ParenthesizedLambdaExpression,
+                    SyntaxKind.SimpleLambdaExpression,
+                    SyntaxKind.AnonymousMethodExpression))
             .OfType<InvocationExpressionSyntax>())
             .Any(x => InvocationTargetAndName(x, out var target, out var name)
                 && name.NameIs(DisposeMethodName)

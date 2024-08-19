@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/INoImplicitSender.cs#L42",
+      "Location": "Line 42 Position 22-39"
+    }
+  ]
+}

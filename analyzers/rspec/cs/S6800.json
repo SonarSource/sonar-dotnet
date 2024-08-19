@@ -16,7 +16,7 @@
   "quickfix": "infeasible",
   "code": {
     "impacts": {
-      "RELIABILITY": "MEDIUM"
+      "RELIABILITY": "HIGH"
     },
     "attribute": "LOGICAL"
   }

@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class NonFlagsEnumInBitwiseOperation : SonarDiagnosticAnalyzer
@@ -47,13 +51,13 @@ namespace SonarAnalyzer.CSharp.Rules
         private static void CheckExpressionWithOperator<T>(SonarSyntaxNodeReportingContext context, Func<T, SyntaxToken> operatorSelector)
             where T : SyntaxNode
         {
-            if (context.Model.GetSymbolInfo(context.Node).Symbol is not IMethodSymbol { MethodKind: MethodKind.BuiltinOperator, ReturnType.TypeKind: TypeKind.Enum } operation
+            if (context.SemanticModel.GetSymbolInfo(context.Node).Symbol is not IMethodSymbol { MethodKind: MethodKind.BuiltinOperator, ReturnType.TypeKind: TypeKind.Enum } operation
                 || operation.ReturnType.HasAttribute(KnownType.System_FlagsAttribute))
             {
                 return;
             }
 
-            var friendlyTypeName = operation.ReturnType.ToMinimalDisplayString(context.Model, context.Node.SpanStart);
+            var friendlyTypeName = operation.ReturnType.ToMinimalDisplayString(context.SemanticModel, context.Node.SpanStart);
             var messageFormat = operation.ReturnType.DeclaringSyntaxReferences.Any()
                 ? MessageChangeOrRemove
                 : MessageRemove;

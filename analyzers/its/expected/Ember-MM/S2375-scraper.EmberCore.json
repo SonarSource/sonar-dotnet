@@ -1,0 +1,58 @@
+{
+  "Issues": [
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 34 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L194",
+      "Location": "Line 194 Position 9-75"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 16 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L127",
+      "Location": "Line 127 Position 9-64"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 6 statements that use \u0027Master.tmpMovie\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L253",
+      "Location": "Line 253 Position 17-57"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 11 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L377",
+      "Location": "Line 377 Position 9-68"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 7 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1137",
+      "Location": "Line 1137 Position 13-72"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 8 statements that use \u0027Me.chkImage(iIndex)\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L144",
+      "Location": "Line 144 Position 17-59"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 9 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L394",
+      "Location": "Line 394 Position 9-63"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 6 statements that use \u0027Master.currMovie\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L596",
+      "Location": "Line 596 Position 29-64"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 7 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L301",
+      "Location": "Line 301 Position 9-73"
+    }
+  ]
+}

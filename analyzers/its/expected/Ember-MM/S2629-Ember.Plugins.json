@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2629",
+      "Message": "Don\u0027t use String.Format in logging message templates.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/PluginBase.cs#L71-L73",
+      "Location": "Lines 71-73 Position 27-49"
+    },
+    {
+      "Id": "S2629",
+      "Message": "Don\u0027t use String.Format in logging message templates.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L70",
+      "Location": "Line 70 Position 35-94"
+    }
+  ]
+}

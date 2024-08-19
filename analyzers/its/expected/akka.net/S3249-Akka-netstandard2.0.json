@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3249",
+      "Message": "Remove this \u0027base\u0027 call to \u0027object.Equals\u0027, which is directly based on the object reference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/AppVersion.cs#L251",
+      "Location": "Line 251 Position 20-50"
+    }
+  ]
+}

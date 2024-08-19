@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L26",
+      "Location": "Line 26 Position 14-28"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgHelpTips.vb#L3",
+      "Location": "Line 3 Position 14-25"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgRenameManual.vb#L24",
+      "Location": "Line 24 Position 14-29"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgTVBulkRename.vb#L4",
+      "Location": "Line 4 Position 14-30"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L23",
+      "Location": "Line 23 Position 14-31"
+    }
+  ]
+}

@@ -1,5 +1,4 @@
-﻿Imports System.IO
-Imports System.Security.Cryptography
+﻿Imports System.Security.Cryptography
 
 Namespace Tests.Diagnostics
 
@@ -66,35 +65,5 @@ Namespace Tests.Diagnostics
         End Sub
 
     End Class
-
-    Public Class MyDSA
-        Inherits DSA
-
-        Public Overrides Sub ImportParameters(parameters As DSAParameters)
-            Throw New NotImplementedException()
-        End Sub
-
-        Public Overrides Function CreateSignature(rgbHash() As Byte) As Byte()
-            Throw New NotImplementedException()
-        End Function
-
-        Public Overrides Function ExportParameters(includePrivateParameters As Boolean) As DSAParameters
-            Throw New NotImplementedException()
-        End Function
-
-        Public Overrides Function VerifySignature(rgbHash() As Byte, rgbSignature() As Byte) As Boolean
-            Throw New NotImplementedException()
-        End Function
-
-        Public Sub UseHashData()
-            Dim data = New Byte(41) {}
-            Using stream = New System.IO.MemoryStream(data)
-                Dim a = HashData(data, 0, data.Length, HashAlgorithmName.SHA1)                             ' Noncompliant
-                Dim b = HashData(stream, HashAlgorithmName.SHA1)                                           ' Noncompliant
-            End Using
-        End Sub
-
-    End Class
-
 
 End Namespace

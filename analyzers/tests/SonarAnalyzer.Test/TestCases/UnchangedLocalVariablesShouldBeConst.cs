@@ -345,6 +345,7 @@ namespace Tests.Diagnostics
             NormalClass x = null; // Noncompliant
             return x;
         }
+
     }
 }
 

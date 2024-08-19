@@ -6,12 +6,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <!-- .NET Standard target does not copy referenced DLLs into bin folder, so we need to enable it explicitly. -->
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <!-- Title for DLL file properties -->
-    <AssemblyTitle>Internal Sonar styling analyzer for C#</AssemblyTitle>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.12.0-1.final" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.9.2" />
     <!-- Fody with ILMerge are buggy. Consult SONARSEC-4584 if you see TypeInitializationException, TypeLoadException, or similar at ITs runtime locally -->
     <PackageReference Include="Fody" Version="6.8.0" PrivateAssets="All" />
     <PackageReference Include="ILMerge.Fody" Version="1.24.0" PrivateAssets="All" />
@@ -27,29 +25,30 @@
 
   <ItemGroup>
     <!-- We need to update NuGet packaging after changing references -->
-    <ProjectReference Include="..\SonarAnalyzer.Core\SonarAnalyzer.Core.csproj" />
-    <ProjectReference Include="..\SonarAnalyzer.CSharp.Core\SonarAnalyzer.CSharp.Core.csproj" />
+    <ProjectReference Include="..\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj" />
+    <ProjectReference Include="..\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Microsoft.CodeAnalysis" />
     <Using Include="Microsoft.CodeAnalysis.CSharp" />
     <Using Include="Microsoft.CodeAnalysis.CSharp.Syntax" />
-    <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
-    <Using Include="SonarAnalyzer.Core.AnalysisContext" />
-    <Using Include="SonarAnalyzer.Core.Common" />
-    <Using Include="SonarAnalyzer.Core.Extensions" />
-    <Using Include="SonarAnalyzer.Core.Semantics" />
-    <Using Include="SonarAnalyzer.Core.Semantics.Extensions" />
-    <Using Include="SonarAnalyzer.Core.Syntax.Extensions" />
-    <Using Include="SonarAnalyzer.CSharp.Core.Extensions" />
-    <Using Include="SonarAnalyzer.CSharp.Core.Syntax.Extensions" />
+    <Using Include="SonarAnalyzer.AnalysisContext" />
+    <Using Include="SonarAnalyzer.Common" />
     <Using Include="SonarAnalyzer.CSharp.Styling.Common" />
     <Using Include="SonarAnalyzer.CSharp.Styling.Extensions" />
+    <Using Include="SonarAnalyzer.Extensions" />
+    <Using Include="SonarAnalyzer.Helpers" />
     <Using Include="StyleCop.Analyzers.Lightup" />
+    <Using Include="Microsoft.CodeAnalysis" />
+    <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
   </ItemGroup>
 
-  <Target Name="CopyBinaries" AfterTargets="Build">
+  <Target Name="SignDlls" Condition="'$(SignAssembly)' == 'true'">
+    <Message Importance="high" Text="Signing analyzer assembly from $(OutputPath)" />
+    <Exec WorkingDirectory="$(OutputPath)" Command="signtool sign /du https://www.sonarsource.com/ /d &quot;Internal Sonar styling analyzer for C#&quot; /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 /csp &quot;DigiCert Signing Manager KSP&quot; /kc &quot;$(SM_KP)&quot; /f &quot;$(SM_CLIENT_CRT_FILE)&quot; Internal.SonarAnalyzer.CSharp.Styling.dll" />
+  </Target>
+
+  <Target Name="CopyBinaries" AfterTargets="Build" DependsOnTargets="SignDlls">
     <Copy SourceFiles="$(OutputPath)$(TargetFileName)" DestinationFolder="$(BinariesFolder)" />
   </Target>
 </Project>

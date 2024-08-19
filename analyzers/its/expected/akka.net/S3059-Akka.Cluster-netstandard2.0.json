@@ -1,0 +1,304 @@
+{
+  "Issues": [
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/AutoDown.cs#L141",
+      "Location": "Line 141 Position 29-41"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/AutoDown.cs#L27",
+      "Location": "Line 27 Position 20-28"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterActorRefProvider.cs#L133",
+      "Location": "Line 133 Position 20-35"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L130",
+      "Location": "Line 130 Position 27-48"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2689",
+      "Location": "Line 2689 Position 27-46"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2792",
+      "Location": "Line 2792 Position 27-47"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2883",
+      "Location": "Line 2883 Position 27-38"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L3023",
+      "Location": "Line 3023 Position 20-49"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L3126",
+      "Location": "Line 3126 Position 27-43"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L34",
+      "Location": "Line 34 Position 20-37"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L824",
+      "Location": "Line 824 Position 27-40"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L920",
+      "Location": "Line 920 Position 20-41"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L983",
+      "Location": "Line 983 Position 20-37"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L994",
+      "Location": "Line 994 Position 27-54"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L25",
+      "Location": "Line 25 Position 27-51"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L398",
+      "Location": "Line 398 Position 27-54"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L569",
+      "Location": "Line 569 Position 21-38"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L67",
+      "Location": "Line 67 Position 20-42"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterReadView.cs#L23",
+      "Location": "Line 23 Position 20-35"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterRemoteWatcher.cs#L26",
+      "Location": "Line 26 Position 20-40"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Configuration/ClusterConfigFactory.cs#L20",
+      "Location": "Line 20 Position 27-47"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/CoordinatedShutdownLeave.cs#L20",
+      "Location": "Line 20 Position 27-51"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/DowningProvider.cs#L72",
+      "Location": "Line 72 Position 27-42"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Gossip.cs#L372",
+      "Location": "Line 372 Position 20-34"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Gossip.cs#L48",
+      "Location": "Line 48 Position 27-33"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/MembershipState.cs#L20",
+      "Location": "Line 20 Position 27-42"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Reachability.cs#L29",
+      "Location": "Line 29 Position 20-32"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L601",
+      "Location": "Line 601 Position 29-47"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L793",
+      "Location": "Line 793 Position 20-43"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L893",
+      "Location": "Line 893 Position 20-42"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L100",
+      "Location": "Line 100 Position 20-58"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L130",
+      "Location": "Line 130 Position 20-50"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L141",
+      "Location": "Line 141 Position 29-44"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L22",
+      "Location": "Line 22 Position 20-33"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L33",
+      "Location": "Line 33 Position 20-35"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L44",
+      "Location": "Line 44 Position 20-27"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L461",
+      "Location": "Line 461 Position 20-32"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L495",
+      "Location": "Line 495 Position 20-32"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L55",
+      "Location": "Line 55 Position 20-43"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L582",
+      "Location": "Line 582 Position 20-30"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L685",
+      "Location": "Line 685 Position 20-33"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L71",
+      "Location": "Line 71 Position 20-50"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L26",
+      "Location": "Line 26 Position 20-38"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L75",
+      "Location": "Line 75 Position 29-51"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L120",
+      "Location": "Line 120 Position 27-39"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L156",
+      "Location": "Line 156 Position 27-37"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L203",
+      "Location": "Line 203 Position 27-38"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L232",
+      "Location": "Line 232 Position 27-44"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L53",
+      "Location": "Line 53 Position 27-50"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L91",
+      "Location": "Line 91 Position 27-39"
+    }
+  ]
+}

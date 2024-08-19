@@ -1,28 +1,31 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.ComponentModel;
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.Core.Semantics.Extensions;
-using SonarAnalyzer.Core.Trackers;
-using SonarAnalyzer.CSharp.Core.Trackers;
-using SonarAnalyzer.VisualBasic.Core.Trackers;
+using SonarAnalyzer.Extensions;
+using SonarAnalyzer.Helpers.Trackers;
 using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace SonarAnalyzer.Test.Trackers;
+namespace SonarAnalyzer.UnitTest.Trackers;
 
 [TestClass]
 public class ArgumentTrackerTest
@@ -1270,32 +1273,7 @@ public class ArgumentTrackerTest
             """;
         var context = ArgumentContextCS(snippet);
 
-        var descriptor = ArgumentDescriptor.AttributeArgument("DesignerAttribute", parameterName, descriptorPosition);
-        var result = MatchArgumentCS(context, descriptor);
-        result.Should().BeTrue();
-    }
-
-    [DataTestMethod]
-    [DataRow("""[Obsolete($$"message")]""", "message", 0)]
-    [DataRow("""[ObsoleteAttribute($$"message")]""", "message", 0)]
-    [DataRow("""[ObsoleteAttribute($$"message", true)]""", "message", 0)]
-    [DataRow("""[ObsoleteAttribute(error: true, message: $$"message")]""", "message", 0)]
-    public void Attribute_ConstructorParameters_KnownType(string attribute, string parameterName, int parameterPosition)
-    {
-        var snippet = $$"""
-            using System;
-
-            {{attribute}}
-            public class Test
-            {
-                public void M()
-                {
-                }
-            }
-            """;
-        var context = ArgumentContextCS(snippet);
-
-        var descriptor = ArgumentDescriptor.AttributeArgument(KnownType.System_ObsoleteAttribute, parameterName, parameterPosition);
+        var descriptor = ArgumentDescriptor.AttributeArgument("Designer", parameterName, descriptorPosition);
         var result = MatchArgumentCS(context, descriptor);
         result.Should().BeTrue();
     }
@@ -1353,7 +1331,7 @@ public class ArgumentTrackerTest
             """;
         var context = ArgumentContextVB(snippet);
 
-        var descriptor = ArgumentDescriptor.AttributeArgument("DesignerAttribute", parameterName, descriptorPosition);
+        var descriptor = ArgumentDescriptor.AttributeArgument("Designer", parameterName, descriptorPosition);
         var result = MatchArgumentVB(context, descriptor);
         result.Should().BeTrue();
     }
@@ -1376,36 +1354,6 @@ public class ArgumentTrackerTest
         var context = ArgumentContextCS(snippet);
 
         var descriptor = ArgumentDescriptor.AttributeProperty("AttributeUsage", propertyName);
-        var result = MatchArgumentCS(context, descriptor);
-        result.Should().Be(expected);
-        if (result)
-        {
-            // The mapped parameter is the "value" parameter of the property set method.
-            context.Parameter.Name.Should().Be("value");
-            var method = context.Parameter.ContainingSymbol.Should().BeAssignableTo<IMethodSymbol>().Which;
-            method.MethodKind.Should().Be(MethodKind.PropertySet);
-            method.AssociatedSymbol.Should().BeAssignableTo<IPropertySymbol>().Which.Name.Should().Be(propertyName);
-        }
-    }
-
-    [DataTestMethod]
-    [DataRow("""[AttributeUsage(AttributeTargets.All,  $$AllowMultiple = true)]""", "AllowMultiple", true)]
-    [DataRow("""[AttributeUsage(AttributeTargets.All,  $$AllowMultiple = true, Inherited = true)]""", "AllowMultiple", true)]
-    [DataRow("""[AttributeUsage(AttributeTargets.All,  $$AllowMultiple = true, Inherited = true)]""", "Inherited", false)]
-    [DataRow("""[AttributeUsage(AttributeTargets.All,  AllowMultiple = true, $$Inherited = true)]""", "Inherited", true)]
-    public void Attribute_PropertySetter_KnownType(string attribute, string propertyName, bool expected)
-    {
-        var snippet = $$"""
-            using System;
-
-            {{attribute}}
-            public sealed class TestAttribute: Attribute
-            {
-            }
-            """;
-        var context = ArgumentContextCS(snippet);
-
-        var descriptor = ArgumentDescriptor.AttributeProperty(KnownType.System_AttributeUsageAttribute, propertyName);
         var result = MatchArgumentCS(context, descriptor);
         result.Should().Be(expected);
         if (result)
@@ -1471,10 +1419,10 @@ public class ArgumentTrackerTest
         """;
 
     private static ArgumentContext ArgumentContextCS(string snippet) =>
-        ArgumentContext(snippet, TestCompiler.CompileCS, typeof(CS.ArgumentSyntax), typeof(CS.AttributeArgumentSyntax));
+        ArgumentContext(snippet, TestHelper.CompileCS, typeof(CS.ArgumentSyntax), typeof(CS.AttributeArgumentSyntax));
 
     private static ArgumentContext ArgumentContextVB(string snippet) =>
-        ArgumentContext(snippet, TestCompiler.CompileVB, typeof(VB.ArgumentSyntax));
+        ArgumentContext(snippet, TestHelper.CompileVB, typeof(VB.ArgumentSyntax));
 
     private static ArgumentContext ArgumentContext(string snippet,
         Func<string, MetadataReference[], (SyntaxTree Tree, SemanticModel Model)> compile, params Type[] descriptorNodeTypes)

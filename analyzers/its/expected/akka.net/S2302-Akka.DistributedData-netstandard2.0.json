@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027consistency\u0027 with \u0027nameof(consistency)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L144",
+      "Location": "Line 144 Position 114-147"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027consistency\u0027 with \u0027nameof(consistency)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L183",
+      "Location": "Line 183 Position 126-159"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027consistency\u0027 with \u0027nameof(consistency)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L214",
+      "Location": "Line 214 Position 139-172"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027manifest\u0027 with \u0027nameof(manifest)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L151",
+      "Location": "Line 151 Position 51-99"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027manifest\u0027 with \u0027nameof(manifest)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L531",
+      "Location": "Line 531 Position 56-112"
+    }
+  ]
+}

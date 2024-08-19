@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S103",
+      "Message": "Split this 209 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L112",
+      "Location": "Line 112 Position 1-210"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 204 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L207",
+      "Location": "Line 207 Position 1-205"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 247 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L139",
+      "Location": "Line 139 Position 1-248"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 323 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L143",
+      "Location": "Line 143 Position 1-324"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 323 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L147",
+      "Location": "Line 147 Position 1-324"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 276 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L209",
+      "Location": "Line 209 Position 1-277"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 292 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L218",
+      "Location": "Line 218 Position 1-293"
+    }
+  ]
+}

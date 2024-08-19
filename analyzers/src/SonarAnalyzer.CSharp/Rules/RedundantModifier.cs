@@ -1,20 +1,26 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+using SonarAnalyzer.Common.Walkers;
+
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class RedundantModifier : SonarDiagnosticAnalyzer
@@ -100,7 +106,7 @@ namespace SonarAnalyzer.CSharp.Rules
             else
             {
                 MarkAllUnsafeBlockInside(context, typeDeclaration);
-                if (!HasUnsafeConstructInside(typeDeclaration, context.Model))
+                if (!HasUnsafeConstructInside(typeDeclaration, context.SemanticModel))
                 {
                     ReportOnUnsafeBlock(context, unsafeKeyword.GetLocation());
                 }
@@ -113,7 +119,7 @@ namespace SonarAnalyzer.CSharp.Rules
             if (unsafeKeyword != default)
             {
                 MarkAllUnsafeBlockInside(context, member);
-                if (!HasUnsafeConstructInside(member, context.Model))
+                if (!HasUnsafeConstructInside(member, context.SemanticModel))
                 {
                     ReportOnUnsafeBlock(context, unsafeKeyword.GetLocation());
                 }
@@ -128,7 +134,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 foreach (var topLevelUnsafeBlock in topLevelUnsafeBlocks)
                 {
                     MarkAllUnsafeBlockInside(context, topLevelUnsafeBlock);
-                    if (!HasUnsafeConstructInside(member, context.Model))
+                    if (!HasUnsafeConstructInside(member, context.SemanticModel))
                     {
                         ReportOnUnsafeBlock(context, topLevelUnsafeBlock.UnsafeKeyword.GetLocation());
                     }
@@ -190,7 +196,7 @@ namespace SonarAnalyzer.CSharp.Rules
             var typeDeclaration = (TypeDeclarationSyntax)context.Node;
             if (!context.IsRedundantPositionalRecordContext()
                 && typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword)
-                && context.Model.GetDeclaredSymbol(typeDeclaration) is { DeclaringSyntaxReferences.Length: <= 1 })
+                && context.SemanticModel.GetDeclaredSymbol(typeDeclaration) is { DeclaringSyntaxReferences.Length: <= 1 })
             {
                 var keyword = typeDeclaration.Modifiers.First(m => m.IsKind(SyntaxKind.PartialKeyword));
                 context.ReportIssue(Rule, keyword, "partial", "gratuitous");
@@ -331,15 +337,15 @@ namespace SonarAnalyzer.CSharp.Rules
             {
                 if (!currentContextHasIntegralOperation)
                 {
-                    var expressionType = context.Model.GetTypeInfo(node.Expression).Type;
-                    var castedToType = context.Model.GetTypeInfo(node.Type).Type;
+                    var expressionType = context.SemanticModel.GetTypeInfo(node.Expression).Type;
+                    var castedToType = context.SemanticModel.GetTypeInfo(node.Type).Type;
                     currentContextHasIntegralOperation = castedToType is not null && expressionType is not null && castedToType.IsAny(KnownType.IntegralNumbers);
                 }
             }
 
             private void SetHasIntegralOperation(ExpressionSyntax node) =>
                 currentContextHasIntegralOperation = currentContextHasIntegralOperation
-                    || (context.Model.GetSymbolInfo(node).Symbol is IMethodSymbol methodSymbol && methodSymbol.ReceiverType.IsAny(KnownType.IntegralNumbers));
+                    || (context.SemanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol methodSymbol && methodSymbol.ReceiverType.IsAny(KnownType.IntegralNumbers));
         }
     }
 }

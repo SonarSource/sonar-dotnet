@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S4225",
+      "Message": "Refactor this extension to extend a more concrete type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/PatternMatch.cs#L24",
+      "Location": "Line 24 Position 28-33"
+    },
+    {
+      "Id": "S4225",
+      "Message": "Refactor this extension to extend a more concrete type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/PatternMatch.cs#L34",
+      "Location": "Line 34 Position 31-36"
+    },
+    {
+      "Id": "S4225",
+      "Message": "Refactor this extension to extend a more concrete type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/Internal/Extensions.cs#L25",
+      "Location": "Line 25 Position 25-37"
+    }
+  ]
+}

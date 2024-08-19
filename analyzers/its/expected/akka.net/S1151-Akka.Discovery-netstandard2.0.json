@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 9 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Discovery/Aggregate/AggregateServiceDiscovery.cs#L63",
+      "Location": "Line 63 Position 17-77"
+    }
+  ]
+}

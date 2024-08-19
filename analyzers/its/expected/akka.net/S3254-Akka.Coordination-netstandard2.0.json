@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Coordination/LeaseProvider.cs#L133",
+      "Location": "Line 133 Position 84-88"
+    }
+  ]
+}

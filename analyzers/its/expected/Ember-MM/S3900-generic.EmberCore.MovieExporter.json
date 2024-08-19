@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027_params\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L88",
+      "Location": "Line 88 Position 49-56"
+    }
+  ]
+}

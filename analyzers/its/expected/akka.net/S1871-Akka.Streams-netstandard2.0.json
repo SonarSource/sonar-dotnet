@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1871",
+      "Message": "Either merge this branch with the identical one on line 130 or change one of the implementations.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/JsonObjectParser.cs#L139-L143",
+      "Location": "Lines 139-143 Position 13-14"
+    }
+  ]
+}

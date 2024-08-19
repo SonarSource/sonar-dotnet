@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Nancy metadata modules to describe your APIs.</Description>
+    <PackageTags>$(PackageTags);Metadata</PackageTags>
+    <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
+    <CodeAnalysisRuleSet>..\..\..\..\ValidationRuleset.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+</Project>

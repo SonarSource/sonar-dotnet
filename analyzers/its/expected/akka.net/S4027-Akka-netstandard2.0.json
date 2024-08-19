@@ -1,0 +1,118 @@
+{
+  "Issues": [
+    {
+      "Id": "S4027",
+      "Message": "Implement the missing constructors for this exception.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Exceptions.cs#L116",
+      "Location": "Line 116 Position 18-43"
+    },
+    {
+      "Id": "S4027",
+      "Message": "Implement the missing constructors for this exception.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Exceptions.cs#L16",
+      "Location": "Line 16 Position 27-40"
+    },
+    {
+      "Id": "S4027",
+      "Message": "Implement the missing constructors for this exception.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Exceptions.cs#L263",
+      "Location": "Line 263 Position 18-38"
+    },
+    {
+      "Id": "S4027",
+      "Message": "Implement the missing constructors for this exception.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Exceptions.cs#L293",
+      "Location": "Line 293 Position 18-44"
+    },
+    {
+      "Id": "S4027",
+      "Message": "Implement the missing constructors for this exception.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Exceptions.cs#L318",
+      "Location": "Line 318 Position 18-43"
+    },
+    {
+      "Id": "S4027",
+      "Message": "Implement the missing constructors for this exception.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Exceptions.cs#L344",
+      "Location": "Line 344 Position 18-36"
+    },
+    {
+      "Id": "S4027",
+      "Message": "Implement the missing constructors for this exception.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Exceptions.cs#L388",
+      "Location": "Line 388 Position 18-37"
+    },
+    {
+      "Id": "S4027",
+      "Message": "Implement the missing constructors for this exception.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Exceptions.cs#L434",
+      "Location": "Line 434 Position 18-38"
+    },
+    {
+      "Id": "S4027",
+      "Message": "Implement the missing constructors for this exception.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Exceptions.cs#L475",
+      "Location": "Line 475 Position 18-40"
+    },
+    {
+      "Id": "S4027",
+      "Message": "Implement the missing constructors for this exception.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Exceptions.cs#L510",
+      "Location": "Line 510 Position 18-41"
+    },
+    {
+      "Id": "S4027",
+      "Message": "Implement the missing constructors for this exception.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Exceptions.cs#L54",
+      "Location": "Line 54 Position 18-43"
+    },
+    {
+      "Id": "S4027",
+      "Message": "Implement the missing constructors for this exception.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Exceptions.cs#L89",
+      "Location": "Line 89 Position 18-37"
+    },
+    {
+      "Id": "S4027",
+      "Message": "Implement the missing constructors for this exception.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Scheduler/SchedulerException.cs#L16",
+      "Location": "Line 16 Position 25-43"
+    },
+    {
+      "Id": "S4027",
+      "Message": "Implement the missing constructors for this exception.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Stash/StashOverflowException.cs#L16",
+      "Location": "Line 16 Position 18-40"
+    },
+    {
+      "Id": "S4027",
+      "Message": "Implement the missing constructors for this exception.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/ConfigurationException.cs#L17",
+      "Location": "Line 17 Position 18-40"
+    },
+    {
+      "Id": "S4027",
+      "Message": "Implement the missing constructors for this exception.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/ExecutorService.cs#L66",
+      "Location": "Line 66 Position 18-44"
+    },
+    {
+      "Id": "S4027",
+      "Message": "Implement the missing constructors for this exception.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Buffers/DirectBufferPool.cs#L19",
+      "Location": "Line 19 Position 18-47"
+    },
+    {
+      "Id": "S4027",
+      "Message": "Implement the missing constructors for this exception.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/IllegalStateException.cs#L17",
+      "Location": "Line 17 Position 18-39"
+    },
+    {
+      "Id": "S4027",
+      "Message": "Implement the missing constructors for this exception.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/UserCalledFailException.cs#L16",
+      "Location": "Line 16 Position 18-41"
+    }
+  ]
+}

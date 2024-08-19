@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1312",
+      "Message": "Make the logger \u0027_logger\u0027 private static readonly.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6669.cs#L11",
+      "Location": "Line 11 Position 25-32"
+    },
+    {
+      "Id": "S1312",
+      "Message": "Make the logger \u0027my_logger\u0027 private static readonly.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6669.cs#L7",
+      "Location": "Line 7 Position 25-34"
+    },
+    {
+      "Id": "S1312",
+      "Message": "Make the logger \u0027_log2\u0027 private static readonly.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6669.cs#L9",
+      "Location": "Line 9 Position 30-35"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S2372",
+      "Message": "Remove the exception throwing from this property getter, or refactor the property into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L39",
+      "Location": "Line 39 Position 41-112"
+    },
+    {
+      "Id": "S2372",
+      "Message": "Remove the exception throwing from this property getter, or refactor the property into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L42",
+      "Location": "Line 42 Position 37-109"
+    },
+    {
+      "Id": "S2372",
+      "Message": "Remove the exception throwing from this property getter, or refactor the property into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L43",
+      "Location": "Line 43 Position 56-194"
+    }
+  ]
+}

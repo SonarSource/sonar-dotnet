@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_NextSink\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L39",
+      "Location": "Line 39 Position 45-57"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private method \u0027ChangeDllPathPlatform\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L469",
+      "Location": "Line 469 Position 23-44"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private method \u0027PublishToAllSinks\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L536",
+      "Location": "Line 536 Position 29-46"
+    }
+  ]
+}

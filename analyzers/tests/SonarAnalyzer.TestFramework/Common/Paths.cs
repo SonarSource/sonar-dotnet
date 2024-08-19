@@ -1,24 +1,29 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
+
+using System.IO;
 
 namespace SonarAnalyzer.TestFramework.Common;
 
 public static class Paths
 {
-    public static string ProjectRoot { get; }
     public static string TestsRoot { get; }
     public static string AnalyzersRoot { get; }
     public static string Rspec { get; }
@@ -27,16 +32,13 @@ public static class Paths
     {
         // The AltCover tool has a limitation. It has to be invoked without a parameter for the project/solution path.
         // Due to this we have to call it from the analyzers folder and the working directory is different when running in CI context.
-        TestsRoot = Path.Combine(FindRoot("tests"), "tests");
+        TestsRoot = FindTestsRoot();
         Console.WriteLine("Test project root: " + TestsRoot);
 
         AnalyzersRoot = Path.GetDirectoryName(TestsRoot);
         Console.WriteLine("Analyzers root: " + AnalyzersRoot);
 
-        ProjectRoot = FindRoot(".github");
-        Console.WriteLine("Project root: " + ProjectRoot);
-
-        Rspec = Path.Combine(ProjectRoot, "analyzers", "rspec");
+        Rspec = Path.Combine(AnalyzersRoot, "rspec");
         Console.WriteLine("Rspec folder " + Rspec);
     }
 
@@ -48,7 +50,7 @@ public static class Paths
         // Under AltCover, this starts deeper than usually and we need to avoid the copied TestCases from TFM folder
         // C:\...\sonar-dotnet\analyzers\tests\SonarAnalyzer.TestFramework.Test\bin\Debug\net7.0-windows\__Instrumented_SonarAnalyzer.TestFramework.Test\
         var current = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetFullPath(".")));
-        while (current is not null && current != TestsRoot)
+        while (current != TestsRoot)
         {
             var testCases = Path.Combine(current, "TestCases");
             if (Directory.Exists(testCases))
@@ -60,16 +62,16 @@ public static class Paths
                 current = Path.GetDirectoryName(current);
             }
         }
-        return null; // Some test projects don't have TestCases, like the SonarAnalyzer.Enterprise.SymbolicExecution.Test
+        throw new InvalidOperationException("Could not find TestCases directory from current path: " + Path.GetFullPath("."));
     }
 
-    private static string FindRoot(string expectedSubdirectory)
+    private static string FindTestsRoot()
     {
         var current = Path.GetFullPath(".");
         var root = Path.GetPathRoot(current);
         while (current != root)
         {
-            if (Directory.Exists(Path.Combine(current, expectedSubdirectory)))
+            if (Directory.Exists(Path.Combine(current, "SonarAnalyzer.Test")))
             {
                 return current;
             }
@@ -78,6 +80,6 @@ public static class Paths
                 current = Path.GetDirectoryName(current);
             }
         }
-        throw new InvalidOperationException($"Could not find TestsRoot directory for '{expectedSubdirectory}' from current path: ${Path.GetFullPath(".")}");
+        throw new InvalidOperationException("Could not find TestProjectRoot directory from current path: " + Path.GetFullPath("."));
     }
 }

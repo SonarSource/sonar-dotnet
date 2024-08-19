@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4790",
+      "Message": "Make sure this weak hash algorithm is not used in a sensitive context here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIHashing.vb#L96",
+      "Location": "Line 96 Position 26-54"
+    }
+  ]
+}

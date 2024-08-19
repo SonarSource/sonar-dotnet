@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Styling.Rules;
+namespace SonarAnalyzer.Rules.CSharp.Styling;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class TypeMemberOrdering : StylingAnalyzer
@@ -22,9 +26,7 @@ public sealed class TypeMemberOrdering : StylingAnalyzer
     private const string NestedTypes = "Nested Types";
 
     private static readonly MemberKind Constant = new(1, "Constants");
-    private static readonly MemberKind AbstractMember = new(10, "Abstract Members");
-    private static readonly MemberKind AbstractType = new(40, "Abstract Types");
-
+    private static readonly MemberKind Abstract = new(10, "Abstract Members");
     private static readonly Dictionary<SyntaxKind, MemberKind> MemberKinds = new()
         {
             // Order 1: Constants are FieldDeclaration and are handled separately in the code
@@ -40,7 +42,6 @@ public sealed class TypeMemberOrdering : StylingAnalyzer
             {SyntaxKind.MethodDeclaration, new(30, "Methods") },
             {SyntaxKind.ConversionOperatorDeclaration, new(31, "Operators") },
             {SyntaxKind.OperatorDeclaration, new(31, "Operators") },
-            // Order 40: Abstract types are handled separtely in the code
             {SyntaxKind.ClassDeclaration, new(40, NestedTypes) },
             {SyntaxKind.InterfaceDeclaration, new(40, NestedTypes) },
             {SyntaxKind.RecordDeclaration, new(40, NestedTypes) },
@@ -95,7 +96,7 @@ public sealed class TypeMemberOrdering : StylingAnalyzer
         }
         else if (member.Modifiers.Any(SyntaxKind.AbstractKeyword))
         {
-            return member is BaseTypeDeclarationSyntax ? AbstractType : AbstractMember;
+            return Abstract;
         }
         else if (MemberKinds.TryGetValue(member.Kind(), out var kind))
         {

@@ -1,21 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
-using SonarAnalyzer.CSharp.Rules;
+using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Test.Rules
 {
@@ -32,7 +35,7 @@ namespace SonarAnalyzer.Test.Rules
         public void RedundantModifier_Unsafe_CodeFix() =>
             builder.AddPaths("RedundantModifier.cs")
                 .WithCodeFix<RedundantModifierCodeFix>()
-                .WithCodeFixedPaths("RedundantModifier.Fixed.Unsafe.cs")
+                .WithCodeFixedPaths("RedundantModifier.Unsafe.Fixed.cs")
                 .WithCodeFixTitle(RedundantModifierCodeFix.TitleUnsafe)
                 .VerifyCodeFix();
 
@@ -40,7 +43,7 @@ namespace SonarAnalyzer.Test.Rules
         public void RedundantModifier_Checked_CodeFix() =>
             builder.AddPaths("RedundantModifier.cs")
                 .WithCodeFix<RedundantModifierCodeFix>()
-                .WithCodeFixedPaths("RedundantModifier.Fixed.Checked.cs")
+                .WithCodeFixedPaths("RedundantModifier.Checked.Fixed.cs")
                 .WithCodeFixTitle(RedundantModifierCodeFix.TitleChecked)
                 .VerifyCodeFix();
 
@@ -48,7 +51,7 @@ namespace SonarAnalyzer.Test.Rules
         public void RedundantModifier_Partial_CodeFix() =>
             builder.AddPaths("RedundantModifier.cs")
                 .WithCodeFix<RedundantModifierCodeFix>()
-                .WithCodeFixedPaths("RedundantModifier.Fixed.Partial.cs")
+                .WithCodeFixedPaths("RedundantModifier.Partial.Fixed.cs")
                 .WithCodeFixTitle(RedundantModifierCodeFix.TitlePartial)
                 .VerifyCodeFix();
 
@@ -56,73 +59,108 @@ namespace SonarAnalyzer.Test.Rules
         public void RedundantModifier_Sealed_CodeFix() =>
             builder.AddPaths("RedundantModifier.cs")
                 .WithCodeFix<RedundantModifierCodeFix>()
-                .WithCodeFixedPaths("RedundantModifier.Fixed.Sealed.cs")
+                .WithCodeFixedPaths("RedundantModifier.Sealed.Fixed.cs")
                 .WithCodeFixTitle(RedundantModifierCodeFix.TitleSealed)
                 .VerifyCodeFix();
 
-#if NETFRAMEWORK
-        [TestMethod]
-        public void RedundantModifier_Preprocessor()
-        {
-            var options = new CSharpParseOptions();
-            builder.AddPaths("RedundantModifier.Preprocessor.NetFx.cs")
-                .WithLanguageVersion(LanguageVersion.CSharp13)
-                .AddReferences(MetadataReferenceFacade.RegularExpressions)
-                .WithOptions([options.WithPreprocessorSymbols("NETFRAMEWORK")])
-                .Verify();
-        }
-#endif
-
 #if NET
-        [TestMethod]
-        public void RedundantModifier_Preprocessor() =>
-            builder.AddPaths("RedundantModifier.Preprocessor.Net.cs", "RedundantModifier.Preprocessor.Net.Partial.cs")
-                .WithLanguageVersion(LanguageVersion.CSharp13)
-                .AddReferences(MetadataReferenceFacade.RegularExpressions)
-                .VerifyNoIssues();
 
         [TestMethod]
-        public void RedundantModifier_Latest() =>
-            builder.AddPaths("RedundantModifier.Latest.cs", "RedundantModifier.Latest.Partial.cs")
-                .WithOptions(LanguageOptions.CSharpLatest)
-                .Verify();
+        public void RedundantModifier_CSharp9() =>
+            builder.AddPaths("RedundantModifier.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
-        public void RedundantModifier_Checked_CodeFix_Latest() =>
-            builder.AddPaths("RedundantModifier.Latest.cs")
+        public void RedundantModifier_Checked_CodeFix_CSharp9() =>
+            builder.AddPaths("RedundantModifier.CSharp9.cs")
                 .WithCodeFix<RedundantModifierCodeFix>()
-                .WithCodeFixedPaths("RedundantModifier.Latest.Fixed.Checked.cs")
-                .WithOptions(LanguageOptions.CSharpLatest)
+                .WithCodeFixedPaths("RedundantModifier.CSharp9.Checked.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .WithCodeFixTitle(RedundantModifierCodeFix.TitleChecked)
                 .VerifyCodeFix();
 
         [TestMethod]
-        public void RedundantModifier_Partial_CodeFix_Latest() =>
-            builder.AddPaths("RedundantModifier.Latest.cs")
+        public void RedundantModifier_Partial_CodeFix_CSharp9() =>
+            builder.AddPaths("RedundantModifier.CSharp9.cs")
                 .WithCodeFix<RedundantModifierCodeFix>()
-                .WithCodeFixedPaths("RedundantModifier.Latest.Fixed.Partial.cs")
-                .WithOptions(LanguageOptions.CSharpLatest)
+                .WithCodeFixedPaths("RedundantModifier.CSharp9.Partial.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .WithCodeFixTitle(RedundantModifierCodeFix.TitlePartial)
                 .VerifyCodeFix();
 
         [TestMethod]
-        public void RedundantModifier_Sealed_CodeFix_Latest() =>
-            builder.AddPaths("RedundantModifier.Latest.cs")
+        public void RedundantModifier_Sealed_CodeFix_CSharp9() =>
+            builder.AddPaths("RedundantModifier.CSharp9.cs")
                 .WithCodeFix<RedundantModifierCodeFix>()
-                .WithCodeFixedPaths("RedundantModifier.Latest.Fixed.Sealed.cs")
-                .WithOptions(LanguageOptions.CSharpLatest)
+                .WithCodeFixedPaths("RedundantModifier.CSharp9.Sealed.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .WithCodeFixTitle(RedundantModifierCodeFix.TitleSealed)
                 .VerifyCodeFix();
 
         [TestMethod]
-        public void RedundantModifier_Unsafe_CodeFix_Latest() =>
-            builder.AddPaths("RedundantModifier.Latest.cs")
+        public void RedundantModifier_Unsafe_CodeFix_CSharp9() =>
+            builder.AddPaths("RedundantModifier.CSharp9.cs")
                 .WithCodeFix<RedundantModifierCodeFix>()
-                .WithCodeFixedPaths("RedundantModifier.Latest.Fixed.Unsafe.cs")
-                .WithOptions(LanguageOptions.CSharpLatest)
+                .WithCodeFixedPaths("RedundantModifier.CSharp9.Unsafe.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .WithCodeFixTitle(RedundantModifierCodeFix.TitleUnsafe)
                 .VerifyCodeFix();
 
+        [TestMethod]
+        public void RedundantModifier_CSharp10() =>
+            builder.AddPaths("RedundantModifier.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
+        [TestMethod]
+        public void RedundantModifier_Unsafe_CodeFix_CSharp10() =>
+            builder.AddPaths("RedundantModifier.CSharp10.cs")
+                .WithCodeFix<RedundantModifierCodeFix>()
+                .WithCodeFixedPaths("RedundantModifier.CSharp10.Unsafe.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithCodeFixTitle(RedundantModifierCodeFix.TitleUnsafe)
+                .VerifyCodeFix();
+
+        [TestMethod]
+        public void RedundantModifier_Checked_CodeFix_CSharp10() =>
+            builder.AddPaths("RedundantModifier.CSharp10.cs")
+                .WithCodeFix<RedundantModifierCodeFix>()
+                .WithCodeFixedPaths("RedundantModifier.CSharp10.Checked.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithCodeFixTitle(RedundantModifierCodeFix.TitleChecked)
+                .VerifyCodeFix();
+
+        [TestMethod]
+        public void RedundantModifier_CSharp11() =>
+            builder.AddPaths("RedundantModifier.CSharp11.cs", "RedundantModifier.CSharp11.Partial.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
+
+        [TestMethod]
+        public void RedundantModifier_Partial_CodeFix_CSharp11() =>
+            builder.AddPaths("RedundantModifier.CSharp11.cs")
+                .WithCodeFix<RedundantModifierCodeFix>()
+                .WithCodeFixedPaths("RedundantModifier.CSharp11.Partial.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithCodeFixTitle(RedundantModifierCodeFix.TitlePartial)
+                .VerifyCodeFix();
+
+        [TestMethod]
+        public void RedundantModifier_Unsafe_CodeFix_CSharp11() =>
+            builder.AddPaths("RedundantModifier.CSharp11.cs")
+                .WithCodeFix<RedundantModifierCodeFix>()
+                .WithCodeFixedPaths("RedundantModifier.CSharp11.Unsafe.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithCodeFixTitle(RedundantModifierCodeFix.TitleUnsafe)
+                .VerifyCodeFix();
+
+        [TestMethod]
+        public void RedundantModifier_Checked_CodeFix_CSharp11() =>
+            builder.AddPaths("RedundantModifier.CSharp11.cs")
+                .WithCodeFix<RedundantModifierCodeFix>()
+                .WithCodeFixedPaths("RedundantModifier.CSharp11.Checked.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithCodeFixTitle(RedundantModifierCodeFix.TitleChecked)
+                .VerifyCodeFix();
+
 #endif
+
     }
 }

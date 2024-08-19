@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3260",
+      "Message": "Private classes which are not derived in the current assembly should be marked as \u0027sealed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L332",
+      "Location": "Line 332 Position 23-43"
+    }
+  ]
+}

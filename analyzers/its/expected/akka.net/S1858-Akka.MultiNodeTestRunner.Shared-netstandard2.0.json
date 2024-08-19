@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1858",
+      "Message": "There\u0027s no need to call \u0027ToString()\u0027, the compiler will do it for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/FileSystemAppenderActor.cs#L28",
+      "Location": "Line 28 Position 52-63"
+    }
+  ]
+}

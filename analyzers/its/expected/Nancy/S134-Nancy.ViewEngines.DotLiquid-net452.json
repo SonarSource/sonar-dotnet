@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.DotLiquid/LiquidNancyFileSystem.cs#L63",
+      "Location": "Line 63 Position 25-27"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S113",
+      "Message": "Add a new line at the end of the file \u0027IUserValidator.cs\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Authentication.Basic/IUserValidator.cs#L18",
+      "Location": "Line 18 Position 1-2"
+    },
+    {
+      "Id": "S113",
+      "Message": "Add a new line at the end of the file \u0027UserPromptBehaviour.cs\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Authentication.Basic/UserPromptBehaviour.cs#L23",
+      "Location": "Line 23 Position 1-2"
+    }
+  ]
+}

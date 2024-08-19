@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<string id="1">Medien Datei Manager</string>
+	<string id="2">Verschiebe nach</string>
+	<string id="3">Kopiere nach</string>
+	<string id="4">Verschiebe von {0} nach {1}</string>
+	<string id="5">Kopiere von {0} nach {1}</string>
+	<string id="6">Verschiebe Film</string>
+	<string id="7">Kopiere Film</string>
+</strings>
+<!-- Edit by F089 Rev.2292-->

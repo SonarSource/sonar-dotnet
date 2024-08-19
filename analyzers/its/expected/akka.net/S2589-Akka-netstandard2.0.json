@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S2589",
+      "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L260",
+      "Location": "Line 260 Position 30-46"
+    },
+    {
+      "Id": "S2589",
+      "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/RetrySupport.cs#L121",
+      "Location": "Line 121 Position 34-56"
+    },
+    {
+      "Id": "S2589",
+      "Message": "Remove this unnecessary check for null.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/Internal/AtomicState.cs#L145",
+      "Location": "Line 145 Position 27-44"
+    },
+    {
+      "Id": "S2589",
+      "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/MatchHandler/CachedMatchCompiler.cs#L58",
+      "Location": "Line 58 Position 16-41"
+    }
+  ]
+}

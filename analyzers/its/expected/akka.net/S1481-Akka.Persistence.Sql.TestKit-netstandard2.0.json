@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027readJournal\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.TestKit/DefaultConfigSpec.cs#L27",
+      "Location": "Line 27 Position 17-28"
+    }
+  ]
+}

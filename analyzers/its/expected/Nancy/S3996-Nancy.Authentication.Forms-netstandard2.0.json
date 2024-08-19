@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3996",
+      "Message": "Change this property type to \u0027System.Uri\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Authentication.Forms/FormsAuthenticationConfiguration.cs#L38",
+      "Location": "Line 38 Position 16-22"
+    }
+  ]
+}

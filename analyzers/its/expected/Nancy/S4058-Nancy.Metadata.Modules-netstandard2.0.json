@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027moduleName.LastIndexOf\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Metadata.Modules/DefaultMetadataModuleConventions.cs#L38",
+      "Location": "Line 38 Position 21-53"
+    }
+  ]
+}

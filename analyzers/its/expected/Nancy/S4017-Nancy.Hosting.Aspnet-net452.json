@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Hosting.Aspnet/NancyHandler.cs#L122",
+      "Location": "Line 122 Position 48-104"
+    },
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Hosting.Aspnet/NancyHandler.cs#L93",
+      "Location": "Line 93 Position 54-110"
+    }
+  ]
+}

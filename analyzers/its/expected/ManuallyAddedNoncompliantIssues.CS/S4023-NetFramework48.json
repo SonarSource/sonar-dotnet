@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UsingNonstandardCryptographyTest.cs#L33",
+      "Location": "Line 33 Position 22-44"
+    }
+  ]
+}

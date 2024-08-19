@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2219",
+      "Message": "Use the \u0027IsInstanceOfType()\u0027 method instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Validation.FluentValidation/FluentValidationValidatorFactory.cs#L49",
+      "Location": "Line 49 Position 37-97"
+    }
+  ]
+}

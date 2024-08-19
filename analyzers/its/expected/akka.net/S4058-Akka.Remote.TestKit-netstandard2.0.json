@@ -1,0 +1,88 @@
+{
+  "Issues": [
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027string.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L318",
+      "Location": "Line 318 Position 24-61"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027string.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L89",
+      "Location": "Line 89 Position 24-61"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027args[i].Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L43",
+      "Location": "Line 43 Position 21-50"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027args[i \u002B 1].StartsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L43",
+      "Location": "Line 43 Position 54-81"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027arg.StartsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L54",
+      "Location": "Line 54 Position 22-42"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027a.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L57",
+      "Location": "Line 57 Position 25-39"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027a.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L57",
+      "Location": "Line 57 Position 43-61"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027a.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L62",
+      "Location": "Line 62 Position 25-39"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027a.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L62",
+      "Location": "Line 62 Position 43-64"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027string.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L236",
+      "Location": "Line 236 Position 20-53"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027string.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L27",
+      "Location": "Line 27 Position 20-51"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027string.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L308",
+      "Location": "Line 308 Position 20-53"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027string.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L377",
+      "Location": "Line 377 Position 20-53"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027string.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L440",
+      "Location": "Line 440 Position 20-53"
+    }
+  ]
+}

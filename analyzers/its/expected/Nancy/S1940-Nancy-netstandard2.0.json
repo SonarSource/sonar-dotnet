@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1940",
+      "Message": "Use the opposite operator (\u0027!=\u0027) instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/IO/RequestStream.cs#L158",
+      "Location": "Line 158 Position 26-72"
+    }
+  ]
+}

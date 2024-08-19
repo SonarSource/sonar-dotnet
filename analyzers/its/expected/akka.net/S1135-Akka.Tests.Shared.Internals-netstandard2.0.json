@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L126",
+      "Location": "Line 126 Position 15-19"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L134",
+      "Location": "Line 134 Position 15-19"
+    }
+  ]
+}

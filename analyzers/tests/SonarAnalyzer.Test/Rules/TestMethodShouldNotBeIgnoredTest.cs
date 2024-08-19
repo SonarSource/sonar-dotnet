@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.CSharp.Rules;
+using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Test.Rules;
 
@@ -31,7 +35,7 @@ public class TestMethodShouldNotBeIgnoredTest
 
     [DataTestMethod]
     [DataRow("1.2.0")]
-    [DataRow(TestConstants.NuGetLatestVersion)]
+    [DataRow(Constants.NuGetLatestVersion)]
     public void TestMethodShouldNotBeIgnored_MsTest(string testFwkVersion) =>
         new VerifierBuilder<TestMethodShouldNotBeIgnored>()
             .AddPaths("TestMethodShouldNotBeIgnored.MsTest.cs")
@@ -63,13 +67,13 @@ public class TestMethodShouldNotBeIgnoredTest
 
     [DataTestMethod]
     [DataRow("3.0.0")] // Ignore without reason no longer exist
-    [DataRow(TestConstants.NuGetLatestVersion)]
+    [DataRow(Constants.NuGetLatestVersion)]
     public void TestMethodShouldNotBeIgnored_NUnit(string testFwkVersion) =>
         builder.AddPaths("TestMethodShouldNotBeIgnored.NUnit.cs").AddReferences(NuGetMetadataReference.NUnit(testFwkVersion)).Verify();
 
     [DataTestMethod]
     [DataRow("2.0.0")]
-    [DataRow(TestConstants.NuGetLatestVersion)]
+    [DataRow(Constants.NuGetLatestVersion)]
     public void TestMethodShouldNotBeIgnored_Xunit(string testFwkVersion) =>
         builder.AddPaths("TestMethodShouldNotBeIgnored.Xunit.cs").AddReferences(NuGetMetadataReference.XunitFramework(testFwkVersion)).VerifyNoIssues();
 
@@ -83,15 +87,15 @@ public class TestMethodShouldNotBeIgnoredTest
     public void TestMethodShouldNotBeIgnored_CSharp9() =>
         builder.AddPaths("TestMethodShouldNotBeIgnored.CSharp9.cs")
             .AddReferences(NuGetMetadataReference.XunitFrameworkV1)
-            .AddReferences(NuGetMetadataReference.NUnit(TestConstants.NuGetLatestVersion))
-            .WithOptions(LanguageOptions.FromCSharp9)
+            .AddReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
             .Verify();
 
     [TestMethod]
     public void TestMethodShouldNotBeIgnored_CSharp11() =>
         builder.AddPaths("TestMethodShouldNotBeIgnored.CSharp11.cs")
-            .AddReferences(NuGetMetadataReference.MSTestTestFramework(TestConstants.NuGetLatestVersion))
-            .WithOptions(LanguageOptions.FromCSharp11)
+            .AddReferences(NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion))
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
             .Verify();
 
 #endif

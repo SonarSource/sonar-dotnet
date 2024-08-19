@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027i\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L17",
+      "Location": "Line 17 Position 21-22"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027i\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L30",
+      "Location": "Line 30 Position 17-18"
+    }
+  ]
+}

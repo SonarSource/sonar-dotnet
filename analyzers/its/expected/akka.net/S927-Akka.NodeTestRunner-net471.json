@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027discovery\u0027 to \u0027testCaseDiscovered\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.NodeTestRunner/Discovery.cs#L30",
+      "Location": "Line 30 Position 65-74"
+    }
+  ]
+}

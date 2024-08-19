@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4581",
+      "Message": "Use \u0027Guid.NewGuid()\u0027 or \u0027Guid.Empty\u0027 or add arguments to this GUID instantiation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/DynamicDictionaryValue.cs#L495",
+      "Location": "Line 495 Position 24-37"
+    }
+  ]
+}

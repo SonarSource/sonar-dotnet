@@ -1,17 +1,21 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using System.Text;
@@ -55,31 +59,31 @@ internal sealed record IssueLocationPair(IssueLocation Actual, IssueLocation Exp
         return new($"{Type} {concise}", builder.ToString(), FilePath, LineNumber);
     }
 
-    private Message AssertionMessage()
+    private (string Concise, string Detailed) AssertionMessage()
     {
         if (Actual is null)
         {
-            return new("Missing", MissingMessage());
+            return ("Missing", MissingMessage());
         }
         else if (Expected is null)
         {
-            return new("Unexpected", UnexpectedMessage());
+            return ("Unexpected", UnexpectedMessage());
         }
         else if (Expected.IssueId != Actual.IssueId)
         {
-            return new("Different ID", $"The expected issueId '{Expected.IssueId}' does not match the actual issueId '{Actual.IssueId}'");
+            return ("Different ID", $"The expected issueId '{Expected.IssueId}' does not match the actual issueId '{Actual.IssueId}'");
         }
         else if (Expected.Message is not null && Actual.Message != Expected.Message)
         {
-            return new("Different Message", $"The expected message '{Expected.Message}' does not match the actual message '{Actual.Message}'");
+            return ("Different Message", $"The expected message '{Expected.Message}' does not match the actual message '{Actual.Message}'");
         }
         else if (Expected.Start.HasValue && Actual.Start != Expected.Start)
         {
-            return new("Different Location", $"Should start on column {Expected.Start} but got column {Actual.Start}");
+            return ("Different Location", $"Should start on column {Expected.Start} but got column {Actual.Start}");
         }
         else if (Expected.Length.HasValue && Actual.Length != Expected.Length)
         {
-            return new("Different Length", $"Should have a length of {Expected.Length} but got a length of {Actual.Length}");
+            return ("Different Length", $"Should have a length of {Expected.Length} but got a length of {Actual.Length}");
         }
         else
         {
@@ -99,6 +103,4 @@ internal sealed record IssueLocationPair(IssueLocation Actual, IssueLocation Exp
             ? $"Unexpected error, use {comment} Error [{Actual.RuleId}] {Actual.Message}"   // We don't want to assert the precise {{Message}}
             : $"Unexpected issue '{Actual.Message}'";
     }
-
-    private readonly record struct Message(string Concise, string Detailed);
 }

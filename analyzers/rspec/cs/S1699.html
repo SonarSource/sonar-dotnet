@@ -19,7 +19,7 @@ public class Parent
 
   public virtual void DoSomething() // can be overridden
   {
-    // ...
+    ...
   }
 }
 
@@ -46,122 +46,13 @@ public class Child : Parent
   <code>Child</code> class constructor, unexpected behavior (such as a <code>NullReferenceException</code>) can result, because the fields aren’t
   initialized yet. </li>
 </ul>
-<h2>How to fix it</h2>
-<p>Depending on the context, you can either:</p>
-<ul>
-  <li> avoid calling overridable methods from constructors. This is the recommended approach </li>
-  <li> ensure that the method is not overridden in any derived classes. This can be done by marking the method as <code>sealed</code> in the current
-  class </li>
-  <li> ensure that the class is not inherited from. This can be done by marking the class as <code>sealed</code> </li>
-</ul>
-<h3>Code examples</h3>
-<h4>Noncompliant code example</h4>
-<pre data-diff-id="1" data-diff-type="noncompliant">
-class Parent
-{
-  public virtual void DoSomething() { }
-}
-
-class Child : Parent
-{
-  public Child()
-  {
-    DoSomething();  // Noncompliant
-  }
-}
-</pre>
-<pre data-diff-id="2" data-diff-type="noncompliant">
-class Parent
-{
-  public virtual void DoSomething() { }
-}
-
-class Child : Parent
-{
-  public Child()
-  {
-    DoSomething();  // Noncompliant
-  }
-}
-</pre>
-<pre data-diff-id="3" data-diff-type="noncompliant">
-class Parent
-{
-  public virtual void DoSomething() { }
-}
-
-class Child : Parent
-{
-  public Child()
-  {
-    DoSomething();  // Noncompliant
-  }
-}
-</pre>
-<h4>Compliant solution</h4>
-<pre data-diff-id="1" data-diff-type="compliant">
-class Parent
-{
-  public virtual void DoSomething() { }
-}
-
-class Child : Parent
-{
-  public Child()
-  {
-    // Call removed
-  }
-}
-</pre>
-<pre data-diff-id="2" data-diff-type="compliant">
-class Parent
-{
-  public virtual void DoSomething() { }
-}
-
-class Child : Parent
-{
-  public Child()
-  {
-    DoSomething();
-  }
-
-  // Method sealed to prevent overriding
-  public sealed override void DoSomething()
-  {
-    base.DoSomething();
-  }
-}
-</pre>
-<pre data-diff-id="3" data-diff-type="compliant">
-class Parent
-{
-  public virtual void DoSomething() { }
-}
-
-// Class sealed to prevent inheritance
-sealed class Child : Parent
-{
-  public Child()
-  {
-    DoSomething();
-  }
-}
-</pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/constructors">Constructors</a>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/constructors">Constructors</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/object-oriented/inheritance">Inheritance</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/object-oriented/polymorphism#virtual-methods">Polimorphism</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/methods#method-signatures">Method signatures</a>
   </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/object-oriented/inheritance">Inheritance</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/object-oriented/polymorphism">Polimorphism</a> </li>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/methods#method-signatures">Methods - Method
-  signatures</a> </li>
-  <li> Stack Overflow - Answer by Eric Lippert for <a href="https://stackoverflow.com/a/20418640">Overriding and calling same method in Base class
-  constructor in C#</a> </li>
-  <li> Fabulous adventures in coding - <a
-  href="https://ericlippert.com/2008/02/15/why-do-initializers-run-in-the-opposite-order-as-constructors-part-one">Why Do Initializers Run In The
-  Opposite Order As Constructors?</a> </li>
 </ul>
 

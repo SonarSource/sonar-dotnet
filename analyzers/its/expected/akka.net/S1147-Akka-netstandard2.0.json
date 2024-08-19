@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1147",
+      "Message": "Remove this call to \u0027Environment.Exit\u0027 or ensure it is really required.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L649",
+      "Location": "Line 649 Position 45-49"
+    },
+    {
+      "Id": "S1147",
+      "Message": "Remove this call to \u0027Environment.Exit\u0027 or ensure it is really required.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L661",
+      "Location": "Line 661 Position 45-49"
+    },
+    {
+      "Id": "S1147",
+      "Message": "Remove this call to \u0027Environment.Exit\u0027 or ensure it is really required.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L668",
+      "Location": "Line 668 Position 37-41"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2292",
+      "Message": "Make this an auto-implemented property and remove its backing field.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L24",
+      "Location": "Line 24 Position 30-59"
+    }
+  ]
+}

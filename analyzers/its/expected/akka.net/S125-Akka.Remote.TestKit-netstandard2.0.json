@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S125",
+      "Message": "Remove this commented out code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L388",
+      "Location": "Line 388 Position 35-72"
+    },
+    {
+      "Id": "S125",
+      "Message": "Remove this commented out code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/RemoteConnection.cs#L122",
+      "Location": "Line 122 Position 17-143"
+    }
+  ]
+}

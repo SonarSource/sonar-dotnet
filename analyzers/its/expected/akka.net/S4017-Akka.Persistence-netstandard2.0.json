@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L347",
+      "Location": "Line 347 Position 69-117"
+    }
+  ]
+}

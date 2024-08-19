@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.Query/Interfaces.cs#L29",
+      "Location": "Line 29 Position 22-34"
+    }
+  ]
+}

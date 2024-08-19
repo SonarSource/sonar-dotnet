@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S100",
+      "Message": "Rename property \u0027payload\u0027 to match pascal case naming rules, consider using \u0027Payload\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/SerializationBenchmarks/Program.cs#L46",
+      "Location": "Line 46 Position 30-37"
+    }
+  ]
+}

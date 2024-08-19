@@ -1,0 +1,136 @@
+{
+  "Issues": [
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorBase.cs#L169",
+      "Location": "Line 169 Position 30-48"
+    },
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorBase.cs#L179",
+      "Location": "Line 179 Position 49-67"
+    },
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L151",
+      "Location": "Line 151 Position 43-71"
+    },
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L269",
+      "Location": "Line 269 Position 35-84"
+    },
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L332",
+      "Location": "Line 332 Position 25-51"
+    },
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L334",
+      "Location": "Line 334 Position 64-87"
+    },
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L517",
+      "Location": "Line 517 Position 49-77"
+    },
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/ChildrenContainerBase.cs#L167",
+      "Location": "Line 167 Position 31-57"
+    },
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/ChildrenContainerBase.cs#L198",
+      "Location": "Line 198 Position 37-68"
+    },
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Futures.cs#L515",
+      "Location": "Line 515 Position 26-59"
+    },
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Futures.cs#L520",
+      "Location": "Line 520 Position 29-45"
+    },
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Futures.cs#L538",
+      "Location": "Line 538 Position 31-49"
+    },
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/LocalActorRef.cs#L220",
+      "Location": "Line 220 Position 44-68"
+    },
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/RepointableActorRef.cs#L151",
+      "Location": "Line 151 Position 33-60"
+    },
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/RepointableActorRef.cs#L298",
+      "Location": "Line 298 Position 35-61"
+    },
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/RepointableActorRef.cs#L576",
+      "Location": "Line 576 Position 51-73"
+    },
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/RootGuardianSupervisor.cs#L66",
+      "Location": "Line 66 Position 26-49"
+    },
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/RootGuardianSupervisor.cs#L76",
+      "Location": "Line 76 Position 29-55"
+    },
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/RootGuardianSupervisor.cs#L82",
+      "Location": "Line 82 Position 42-81"
+    },
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Stash/Internal/AbstractStash.cs#L37",
+      "Location": "Line 37 Position 29-47"
+    },
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L104",
+      "Location": "Line 104 Position 21-39"
+    },
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L55",
+      "Location": "Line 55 Position 29-53"
+    }
+  ]
+}

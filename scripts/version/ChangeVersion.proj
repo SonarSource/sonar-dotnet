@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildProjectDirectory)\Version.props" />
+  <Import Project="$(MSBuildProjectDirectory)\RegexTransform.tasks" />
+  <PropertyGroup>
+    <SolutionRoot>$(MSBuildProjectDirectory)\..\..\analyzers</SolutionRoot>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AssemblyVersion Include="$(SolutionRoot)\src\AssemblyInfo.Shared.cs">
+      <Find>(?&lt;=\[assembly\: AssemblyVersion\(")([^"]*)</Find>
+      <ReplaceWith>$(AssemblyVersion)</ReplaceWith>
+      <ExpectedMatchCount>1</ExpectedMatchCount>
+    </AssemblyVersion>
+    <AssemblyFileVersion Include="$(SolutionRoot)\src\AssemblyInfo.Shared.cs">
+      <Find>(?&lt;=\[assembly\: AssemblyFileVersion\(")([^"]*)</Find>
+      <ReplaceWith>$(AssemblyFileVersion)</ReplaceWith>
+      <ExpectedMatchCount>1</ExpectedMatchCount>
+    </AssemblyFileVersion>
+    <AssemblyInformationalVersion Include="$(SolutionRoot)\src\AssemblyInfo.Shared.cs">
+      <Find>(?&lt;=\[assembly\: AssemblyInformationalVersion\(")([^"]*)</Find>
+      <ReplaceWith>$(AssemblyInformationalVersion)</ReplaceWith>
+      <ExpectedMatchCount>1</ExpectedMatchCount>
+    </AssemblyInformationalVersion>
+
+    <NugetAnalyzer Include="$(SolutionRoot)\packaging\SonarAnalyzer.*.nuspec">
+      <Find>(?&lt;=&lt;version&gt;)([^&lt;]*)</Find>
+      <ReplaceWith>$(NugetVersion)</ReplaceWith>
+      <ExpectedMatchCount>1</ExpectedMatchCount>
+    </NugetAnalyzer>
+
+    <NugetReleaseNotes Include="$(SolutionRoot)\packaging\SonarAnalyzer.*.nuspec">
+      <Find>(?&lt;=&lt;releaseNotes&gt;https:\/\/github.com\/SonarSource\/sonar-dotnet\/releases\/tag\/)([^&lt;]*)</Find>
+      <ReplaceWith>$(NugetVersion)</ReplaceWith>
+      <ExpectedMatchCount>1</ExpectedMatchCount>
+    </NugetReleaseNotes>
+
+    <NugetCFG Include="$(SolutionRoot)\src\SonarAnalyzer.CFG\SonarAnalyzer.CFG.*.nuspec">
+      <Find>(?&lt;=&lt;version&gt;)([^&lt;]*)</Find>
+      <ReplaceWith>$(NugetVersion)</ReplaceWith>
+      <ExpectedMatchCount>1</ExpectedMatchCount>
+    </NugetCFG>
+  </ItemGroup>
+
+  <Target Name="UpdateAssemblyVersion">
+    <RegexTransform Items="@(AssemblyVersion)" />
+    <RegexTransform Items="@(AssemblyFileVersion)" />
+    <RegexTransform Items="@(AssemblyInformationalVersion)" />
+    <RegexTransform Items="@(NugetAnalyzer)" />
+    <RegexTransform Items="@(NugetReleaseNotes)" />
+    <RegexTransform Items="@(NugetCFG)" />
+  </Target>
+</Project>

@@ -1,12 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <AssemblyName>RuleDescriptorGenerator</AssemblyName>
+    <RootNamespace>RuleDescriptorGenerator</RootNamespace>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8</TargetFramework>
+    <TargetFramework>net6</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SonarAnalyzer.Core\SonarAnalyzer.Core.csproj" />
+    <ProjectReference Include="..\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>

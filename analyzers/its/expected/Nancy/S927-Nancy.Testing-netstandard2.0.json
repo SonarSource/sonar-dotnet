@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027expected\u0027 to \u0027x\u0027 to match the interface declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/AssertEqualityComparer.cs#L14",
+      "Location": "Line 14 Position 30-38"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027actual\u0027 to \u0027y\u0027 to match the interface declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/AssertEqualityComparer.cs#L14",
+      "Location": "Line 14 Position 42-48"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027actual\u0027 to \u0027obj\u0027 to match the interface declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/AssertEqualityComparer.cs#L54",
+      "Location": "Line 54 Position 34-40"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027collectionTypeRegistrations\u0027 to \u0027collectionTypeRegistrationsn\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L486",
+      "Location": "Line 486 Position 125-152"
+    }
+  ]
+}

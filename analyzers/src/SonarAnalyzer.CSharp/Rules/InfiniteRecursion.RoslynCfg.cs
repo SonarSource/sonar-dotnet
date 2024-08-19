@@ -1,23 +1,27 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using SonarAnalyzer.CFG.Roslyn;
 using CfgAllPathValidator = SonarAnalyzer.CFG.Roslyn.CfgAllPathValidator;
 
-namespace SonarAnalyzer.CSharp.Rules;
+namespace SonarAnalyzer.Rules.CSharp;
 
 public partial class InfiniteRecursion
 {
@@ -41,7 +45,7 @@ public partial class InfiniteRecursion
             {
                 foreach (var accessor in eventDeclaration.AccessorList.Accessors.Where(x => x.HasBodyOrExpressionBody()))
                 {
-                    var cfg = ControlFlowGraph.Create(accessor, c.Model, c.Cancel);
+                    var cfg = ControlFlowGraph.Create(accessor, c.SemanticModel, c.Cancel);
                     var context = new RecursionContext<ControlFlowGraph>(c, cfg, eventSymbol, accessor.Keyword.GetLocation(), "event accessor's recursion");
                     var walker = new RecursionSearcher(context);
                     walker.CheckPaths();
@@ -51,7 +55,7 @@ public partial class InfiniteRecursion
 
         public void CheckForNoExitMethod(SonarSyntaxNodeReportingContext c, SyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol)
         {
-            if (body.CreateCfg(c.Model, c.Cancel) is { } cfg)
+            if (body.CreateCfg(c.SemanticModel, c.Cancel) is { } cfg)
             {
                 var context = new RecursionContext<ControlFlowGraph>(c, cfg, symbol, identifier.GetLocation(), "method's recursion");
                 var walker = new RecursionSearcher(context);
@@ -84,7 +88,7 @@ public partial class InfiniteRecursion
 
             if (expressionBody?.Expression is not null)
             {
-                var cfg = ControlFlowGraph.Create(expressionBody, c.Model, c.Cancel);
+                var cfg = ControlFlowGraph.Create(expressionBody, c.SemanticModel, c.Cancel);
                 var walker = new RecursionSearcher(new RecursionContext<ControlFlowGraph>(c, cfg, propertySymbol, location, arrowExpressionMessageArg));
                 walker.CheckPaths();
             }
@@ -92,7 +96,7 @@ public partial class InfiniteRecursion
             {
                 foreach (var accessor in accessorList.Accessors.Where(x => x.HasBodyOrExpressionBody()))
                 {
-                    var cfg = ControlFlowGraph.Create(accessor, c.Model, c.Cancel);
+                    var cfg = ControlFlowGraph.Create(accessor, c.SemanticModel, c.Cancel);
                     var context = new RecursionContext<ControlFlowGraph>(c, cfg, propertySymbol, accessor.Keyword.GetLocation(), accessorMessageArg);
                     var walker = new RecursionSearcher(context, !accessor.Keyword.IsAnyKind(SyntaxKind.SetKeyword, SyntaxKindEx.InitKeyword));
                     walker.CheckPaths();

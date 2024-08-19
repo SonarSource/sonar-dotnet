@@ -1,19 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 using SonarAnalyzer.TestFramework.Verification;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
@@ -184,24 +189,21 @@ public class VerifierBuilderTest
     [TestMethod]
     public void WithOnlyDiagnostics_Overwrites_IsImmutable()
     {
-        var s1111 = AnalysisScaffolding.CreateDescriptor("S1111");
-        var s2222 = AnalysisScaffolding.CreateDescriptor("S2222");
-        var s2223 = AnalysisScaffolding.CreateDescriptor("S2223");
-        var one = Empty.WithOnlyDiagnostics(s1111);
-        var two = one.WithOnlyDiagnostics(s2222, s2223);
+        var one = Empty.WithOnlyDiagnostics(NullPointerDereference.S2259);
+        var two = one.WithOnlyDiagnostics(PublicMethodArgumentsShouldBeCheckedForNull.S3900, ConditionEvaluatesToConstant.S2583);
         Empty.OnlyDiagnostics.Should().BeEmpty();
-        one.OnlyDiagnostics.Should().BeEquivalentTo(new[] { s1111 });
-        two.OnlyDiagnostics.Should().BeEquivalentTo(new[] { s2222, s2223 });
+        one.OnlyDiagnostics.Should().BeEquivalentTo(new[] { NullPointerDereference.S2259 });
+        two.OnlyDiagnostics.Should().BeEquivalentTo(new[] { PublicMethodArgumentsShouldBeCheckedForNull.S3900, ConditionEvaluatesToConstant.S2583 });
     }
 
     [TestMethod]
     public void WithOptions_Overwrites_IsImmutable()
     {
-        var only7 = Empty.WithOptions(LanguageOptions.OnlyCSharp7);
-        var from8 = only7.WithOptions(LanguageOptions.FromCSharp8);
+        var only7 = Empty.WithOptions(ParseOptionsHelper.OnlyCSharp7);
+        var from8 = only7.WithOptions(ParseOptionsHelper.FromCSharp8);
         Empty.ParseOptions.Should().BeEmpty();
-        only7.ParseOptions.Should().BeEquivalentTo(LanguageOptions.OnlyCSharp7);
-        from8.ParseOptions.Should().BeEquivalentTo(LanguageOptions.FromCSharp8);
+        only7.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.OnlyCSharp7);
+        from8.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp8);
     }
 
     [TestMethod]
@@ -243,25 +245,25 @@ public class VerifierBuilderTest
         Empty.OutputKind.Should().Be(OutputKind.DynamicallyLinkedLibrary);
         Empty.ParseOptions.Should().BeEmpty();
         sut.OutputKind.Should().Be(OutputKind.ConsoleApplication);
-        sut.ParseOptions.Should().BeEquivalentTo(LanguageOptions.FromCSharp9);
+        sut.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp9);
     }
 
     [TestMethod]
     public void WithTopLevelSupport_PreservesParseOptions()
     {
-        var sut = Empty.WithOptions(LanguageOptions.FromCSharp10).WithTopLevelStatements();
+        var sut = Empty.WithOptions(ParseOptionsHelper.FromCSharp10).WithTopLevelStatements();
         sut.OutputKind.Should().Be(OutputKind.ConsoleApplication);
-        sut.ParseOptions.Should().BeEquivalentTo(LanguageOptions.FromCSharp10);
+        sut.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp10);
     }
 
     [TestMethod]
     public void WithTopLevelSupport_ForVisualBasicOptions_NotSupported() =>
-        Empty.WithOptions(LanguageOptions.FromVisualBasic15).Invoking(x => x.WithTopLevelStatements()).Should().Throw<InvalidOperationException>()
+        Empty.WithOptions(ParseOptionsHelper.FromVisualBasic15).Invoking(x => x.WithTopLevelStatements()).Should().Throw<InvalidOperationException>()
             .WithMessage("WithTopLevelStatements is not supported with VisualBasicParseOptions.");
 
     [TestMethod]
     public void WithTopLevelSupport_ForOldCSharp_NotSupported() =>
-        Empty.WithOptions(LanguageOptions.FromCSharp8).Invoking(x => x.WithTopLevelStatements()).Should().Throw<InvalidOperationException>()
+        Empty.WithOptions(ParseOptionsHelper.FromCSharp8).Invoking(x => x.WithTopLevelStatements()).Should().Throw<InvalidOperationException>()
             .WithMessage("WithTopLevelStatements is supported from CSharp9.");
 
     [TestMethod]

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/examples/Chat/ChatClient/Program.cs#L61",
+      "Location": "Line 61 Position 29-35"
+    }
+  ]
+}

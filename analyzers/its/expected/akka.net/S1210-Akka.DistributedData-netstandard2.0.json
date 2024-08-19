@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1210",
+      "Message": "When implementing IComparable\u003CT\u003E or IComparable, you should also override ==, !=, \u003C, \u003C=, \u003E, and \u003E=.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Flag.cs#L19",
+      "Location": "Line 19 Position 25-29"
+    }
+  ]
+}

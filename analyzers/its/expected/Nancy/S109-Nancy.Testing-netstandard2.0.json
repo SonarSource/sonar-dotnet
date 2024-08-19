@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00271.0\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L176",
+      "Location": "Line 176 Position 47-51"
+    }
+  ]
+}

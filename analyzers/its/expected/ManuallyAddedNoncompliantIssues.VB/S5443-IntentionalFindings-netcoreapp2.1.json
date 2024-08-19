@@ -1,0 +1,82 @@
+{
+  "Issues": [
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L12",
+      "Location": "Line 12 Position 29-47"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L13",
+      "Location": "Line 13 Position 15-33"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L14",
+      "Location": "Line 14 Position 15-59"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L16",
+      "Location": "Line 16 Position 15-56"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L17",
+      "Location": "Line 17 Position 15-57"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L18",
+      "Location": "Line 18 Position 54-64"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L19",
+      "Location": "Line 19 Position 54-61"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L20",
+      "Location": "Line 20 Position 54-62"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L21",
+      "Location": "Line 21 Position 15-51"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L22",
+      "Location": "Line 22 Position 15-25"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L23",
+      "Location": "Line 23 Position 15-24"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L24",
+      "Location": "Line 24 Position 15-27"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L26",
+      "Location": "Line 26 Position 15-35"
+    }
+  ]
+}

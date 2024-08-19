@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules;
+namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class UseConstantLoggingTemplate : SonarDiagnosticAnalyzer
@@ -84,12 +88,11 @@ public sealed class UseConstantLoggingTemplate : SonarDiagnosticAnalyzer
         {
             var invocation = (InvocationExpressionSyntax)c.Node;
             if (LoggerMethodNames.Contains(invocation.GetName())
-                && c.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol method
-                && !IsLog4NetExceptionMethod(method)
+                && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol method
                 && LoggerTypes.Any(x => x.Matches(method.ContainingType))
                 && method.Parameters.FirstOrDefault(x => LogMessageParameterNames.Contains(x.Name)) is { } messageParameter
                 && ArgumentValue(invocation, method, messageParameter) is { } argumentValue
-                && InvalidSyntaxNode(argumentValue, c.Model) is { } invalidNode)
+                && InvalidSyntaxNode(argumentValue, c.SemanticModel) is { } invalidNode)
             {
                 c.ReportIssue(Rule, invalidNode, Messages[invalidNode.Kind()]);
             }
@@ -109,9 +112,6 @@ public sealed class UseConstantLoggingTemplate : SonarDiagnosticAnalyzer
         }
     }
 
-    private static bool IsLog4NetExceptionMethod(IMethodSymbol method) =>
-        method.ContainingType.Is(KnownType.log4net_ILog) && method.Parameters.Any(x => x.Type.Is(KnownType.System_Exception));
-
     private static SyntaxNode InvalidSyntaxNode(SyntaxNode messageArgument, SemanticModel model) =>
         messageArgument.DescendantNodesAndSelf().FirstOrDefault(x =>
             (x as InterpolatedStringExpressionSyntax is { } interpolatedString && !interpolatedString.HasConstantValue(model))
@@ -123,7 +123,6 @@ public sealed class UseConstantLoggingTemplate : SonarDiagnosticAnalyzer
 
     private static bool IsConstantStringOrConcatenation(SyntaxNode node, SemanticModel model) =>
         node.Kind() == SyntaxKind.StringLiteralExpression
-        || (node as InterpolatedStringExpressionSyntax is { } interpolatedString && interpolatedString.HasConstantValue(model))
         || (node.Kind() == SyntaxKind.IdentifierName && model.GetSymbolInfo(node).Symbol is IFieldSymbol { HasConstantValue: true } or ILocalSymbol { HasConstantValue: true})
         || (node is BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AddExpression } concatenation
             && AllMembersAreConstantStrings(concatenation, model));

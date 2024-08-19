@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L301",
+      "Location": "Line 301 Position 120-132"
+    }
+  ]
+}

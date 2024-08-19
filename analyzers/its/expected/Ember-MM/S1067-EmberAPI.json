@@ -1,0 +1,160 @@
+{
+  "Issues": [
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPICommon.vb#L912",
+      "Location": "Line 912 Position 16-93"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (13) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L266-L272",
+      "Location": "Lines 266-272 Position 36-153"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIImages.vb#L1086-L1087",
+      "Location": "Lines 1086-1087 Position 16-77"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIImages.vb#L405-L407",
+      "Location": "Lines 405-407 Position 24-72"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (13) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIImages.vb#L413-L416",
+      "Location": "Lines 413-416 Position 24-195"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L115-L116",
+      "Location": "Lines 115-116 Position 16-94"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L147",
+      "Location": "Line 147 Position 16-147"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L158-L159",
+      "Location": "Lines 158-159 Position 28-98"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L469-L470",
+      "Location": "Lines 469-470 Position 28-141"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L672-L674",
+      "Location": "Lines 672-674 Position 24-99"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L82-L83",
+      "Location": "Lines 82-83 Position 16-94"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPINFO.vb#L368",
+      "Location": "Line 368 Position 26-179"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPINFO.vb#L372",
+      "Location": "Line 372 Position 26-130"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPINFO.vb#L378",
+      "Location": "Line 378 Position 26-122"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (23) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L276-L284",
+      "Location": "Lines 276-284 Position 24-167"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (47) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L293-L312",
+      "Location": "Lines 293-312 Position 24-161"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (11) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L320-L325",
+      "Location": "Lines 320-325 Position 24-132"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L364-L366",
+      "Location": "Lines 364-366 Position 20-107"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (10) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L429-L433",
+      "Location": "Lines 429-433 Position 16-120"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L831-L833",
+      "Location": "Lines 831-833 Position 90-183"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L882-L884",
+      "Location": "Lines 882-884 Position 73-140"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L3586",
+      "Location": "Line 3586 Position 12-192"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L3611",
+      "Location": "Line 3611 Position 12-199"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L3641",
+      "Location": "Line 3641 Position 12-193"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L32-L33",
+      "Location": "Lines 32-33 Position 12-137"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L322",
+      "Location": "Line 322 Position 12-139"
+    }
+  ]
+}

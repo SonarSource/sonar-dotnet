@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3928",
+      "Message": "The parameter name \u0027foo\u0027 is not declared in the argument list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3928.cs#L13",
+      "Location": "Line 13 Position 19-51"
+    },
+    {
+      "Id": "S3928",
+      "Message": "The parameter name \u0027foo\u0027 is not declared in the argument list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3928.cs#L7",
+      "Location": "Line 7 Position 35-51"
+    }
+  ]
+}

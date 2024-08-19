@@ -3,7 +3,7 @@
   "type": "CODE_SMELL",
   "code": {
     "impacts": {
-      "MAINTAINABILITY": "INFO"
+      "MAINTAINABILITY": "LOW"
     },
     "attribute": "CLEAR"
   },
@@ -19,5 +19,5 @@
   "ruleSpecification": "RSPEC-1133",
   "sqKey": "S1133",
   "scope": "All",
-  "quickfix": "infeasible"
+  "quickfix": "unknown"
 }

@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S1206",
+      "Message": "This class overrides \u0027GetHashCode\u0027 and should therefore also override \u0027Equals\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/EWMA.cs#L12",
+      "Location": "Line 12 Position 33-44"
+    },
+    {
+      "Id": "S1206",
+      "Message": "This class overrides \u0027GetHashCode\u0027 and should therefore also override \u0027Equals\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/Metric.cs#L17",
+      "Location": "Line 17 Position 33-44"
+    },
+    {
+      "Id": "S1206",
+      "Message": "This class overrides \u0027GetHashCode\u0027 and should therefore also override \u0027Equals\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/Metric.cs#L26",
+      "Location": "Line 26 Position 41-47"
+    },
+    {
+      "Id": "S1206",
+      "Message": "This class overrides \u0027GetHashCode\u0027 and should therefore also override \u0027Equals\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/NodeMetrics.cs#L23",
+      "Location": "Line 23 Position 33-44"
+    }
+  ]
+}

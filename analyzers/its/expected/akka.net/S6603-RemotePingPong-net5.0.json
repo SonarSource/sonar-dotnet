@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6603",
+      "Message": "The collection-specific \u0022TrueForAll\u0022 method should be used instead of the \u0022All\u0022 extension",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/RemotePingPong/Program.cs#L247",
+      "Location": "Line 247 Position 75-78"
+    }
+  ]
+}

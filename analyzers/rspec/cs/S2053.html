@@ -51,9 +51,7 @@ using System.Security.Cryptography;
 
 public static void hash(string password)
 {
-    var saltSize = 32;
-    var iterations = 100_000;
-    var hashed = new Rfc2898DeriveBytes(password, saltSize, iterations, HashAlgorithmName.SHA512);
+    var hashed = new Rfc2898DeriveBytes(password, 32, 10000, HashAlgorithmName.SHA256);
 }
 </pre>
 <h3>How does this work?</h3>
@@ -68,7 +66,7 @@ provides the required security level. It uses a salt length of at least 32 bytes
   Exposure</a> </li>
   <li> CWE - <a href="https://cwe.mitre.org/data/definitions/759">CWE-759 - Use of a One-Way Hash without a Salt</a> </li>
   <li> CWE - <a href="https://cwe.mitre.org/data/definitions/760">CWE-760 - Use of a One-Way Hash with a Predictable Salt</a> </li>
-  <li> STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222542">Application Security and
+  <li> STIG Viewer - <a href="https://stigviewer.com/stig/application_security_and_development/2023-06-08/finding/V-222542">Application Security and
   Development: V-222542</a> - The application must only store cryptographic representations of passwords. </li>
 </ul>
 

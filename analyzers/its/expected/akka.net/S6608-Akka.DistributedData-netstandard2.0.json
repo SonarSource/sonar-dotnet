@@ -1,0 +1,52 @@
+{
+  "Issues": [
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L390",
+      "Location": "Line 390 Position 67-72"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L357",
+      "Location": "Line 357 Position 67-72"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounterDictionary.cs#L262",
+      "Location": "Line 262 Position 67-72"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L314",
+      "Location": "Line 314 Position 62-67"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1061",
+      "Location": "Line 1061 Position 49-54"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1070",
+      "Location": "Line 1070 Position 49-54"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1079",
+      "Location": "Line 1079 Position 49-54"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1088",
+      "Location": "Line 1088 Position 49-54"
+    }
+  ]
+}

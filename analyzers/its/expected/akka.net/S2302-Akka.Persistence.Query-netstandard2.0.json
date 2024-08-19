@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027config\u0027 with \u0027nameof(config)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.Query/PersistenceQuery.cs#L47",
+      "Location": "Line 47 Position 45-116"
+    }
+  ]
+}

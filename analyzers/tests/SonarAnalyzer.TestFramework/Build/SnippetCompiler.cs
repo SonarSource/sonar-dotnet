@@ -1,23 +1,28 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
 using System.Reflection;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
-using SonarAnalyzer.Core.AnalysisContext;
+using SonarAnalyzer.AnalysisContext;
 using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
@@ -92,18 +97,15 @@ public class SnippetCompiler
         return symbol;
     }
 
-    public ISymbol GetDeclaredSymbol(string name)
+    public ITypeSymbol GetTypeSymbol(string typeName)
     {
-        var indentifierKind = IsCSharp() ? (int)Microsoft.CodeAnalysis.CSharp.SyntaxKind.IdentifierToken : (int)Microsoft.CodeAnalysis.VisualBasic.SyntaxKind.IdentifierToken;
-        var identfierTokens = SyntaxTree.GetRoot().DescendantTokens().Where(x => x.RawKind == indentifierKind && x.ValueText == name).ToList();
-        identfierTokens.Should().NotBeEmpty($"Test setup error: could not find identifier in code snippet: {name}");
-        var symbol = identfierTokens.Select(x => SemanticModel.GetDeclaredSymbol(x.Parent)).FirstOrDefault(x => x is not null);
-        symbol.Should().NotBeNull($"Test setup error: could not find symbol in code snippet: {name}");
+        var type = (SyntaxNode)GetNodes<CS.TypeDeclarationSyntax>().FirstOrDefault(m => m.Identifier.ValueText == typeName)
+            ?? GetNodes<VB.TypeStatementSyntax>().FirstOrDefault(m => m.Identifier.ValueText == typeName);
+
+        var symbol = SemanticModel.GetDeclaredSymbol(type) as ITypeSymbol;
+        symbol.Should().NotBeNull($"Test setup error: could not find type in code snippet: {type}");
         return symbol;
     }
-
-    public T GetDeclaredSymbol<T>(string name) where T : ISymbol =>
-        GetDeclaredSymbol(name).Should().BeAssignableTo<T>($"Test setup error: found symbol is not of the expected symbol kind: {name}").Subject;
 
     public IMethodSymbol GetMethodSymbol(string typeDotMethodName)
     {
@@ -111,9 +113,9 @@ public class SnippetCompiler
         return SemanticModel.GetDeclaredSymbol(method) as IMethodSymbol;
     }
 
-    public IPropertySymbol GetPropertySymbol(string typeDotPropertyName)
+    public IPropertySymbol GetPropertySymbol(string typeDotMethodName)
     {
-        var nameParts = typeDotPropertyName.Split('.');
+        var nameParts = typeDotMethodName.Split('.');
         SyntaxNode property = null;
 
         if (IsCSharp())

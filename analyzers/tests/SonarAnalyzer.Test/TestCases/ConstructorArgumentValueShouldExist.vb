@@ -107,9 +107,8 @@ Namespace Tests.Diagnostics
             Value1 = value1
         End Sub
 
-        <ConstructorArgument("foo")> ' Compliant
-        <ConstructorArgument("bar")> ' Compliant
-                                     ' Error@-2 [BC32035] Invalid syntax - only 1 attribute allowed
+        <ConstructorArgument("foo")>
+        <ConstructorArgument("bar")> ' Error [BC30663] Invalid syntax - only 1 attribute allowed - do not raise
         Public Property Value1 As Object
     End Class
 End Namespace

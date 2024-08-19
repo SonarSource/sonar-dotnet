@@ -1,0 +1,52 @@
+{
+  "Issues": [
+    {
+      "Id": "S2156",
+      "Message": "Remove this \u0027protected\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L294",
+      "Location": "Line 294 Position 9-18"
+    },
+    {
+      "Id": "S2156",
+      "Message": "Remove this \u0027protected\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1221",
+      "Location": "Line 1221 Position 9-18"
+    },
+    {
+      "Id": "S2156",
+      "Message": "Remove this \u0027protected\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L312",
+      "Location": "Line 312 Position 9-18"
+    },
+    {
+      "Id": "S2156",
+      "Message": "Remove this \u0027protected\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/StreamRefs.cs#L106",
+      "Location": "Line 106 Position 9-18"
+    },
+    {
+      "Id": "S2156",
+      "Message": "Remove this \u0027protected\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/StreamRefs.cs#L129",
+      "Location": "Line 129 Position 9-18"
+    },
+    {
+      "Id": "S2156",
+      "Message": "Remove this \u0027protected\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/StreamRefs.cs#L163",
+      "Location": "Line 163 Position 9-18"
+    },
+    {
+      "Id": "S2156",
+      "Message": "Remove this \u0027protected\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/StreamRefs.cs#L69",
+      "Location": "Line 69 Position 9-18"
+    },
+    {
+      "Id": "S2156",
+      "Message": "Remove this \u0027protected\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/StreamRefs.cs#L86",
+      "Location": "Line 86 Position 9-18"
+    }
+  ]
+}

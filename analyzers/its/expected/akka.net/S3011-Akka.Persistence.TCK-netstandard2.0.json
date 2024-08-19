@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3011",
+      "Message": "Make sure that this accessibility bypass is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L198",
+      "Location": "Line 198 Position 25-47"
+    }
+  ]
+}

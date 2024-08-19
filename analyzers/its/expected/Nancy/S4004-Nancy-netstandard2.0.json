@@ -1,0 +1,154 @@
+{
+  "Issues": [
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027DefaultConfigurationProviders\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyInternalConfiguration.cs#L100",
+      "Location": "Line 100 Position 28-57"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027RouteMetadataProviders\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyInternalConfiguration.cs#L115",
+      "Location": "Line 115 Position 28-50"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027StatusCodeHandlers\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyInternalConfiguration.cs#L210",
+      "Location": "Line 210 Position 28-46"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027Serializers\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyInternalConfiguration.cs#L225",
+      "Location": "Line 225 Position 28-39"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027InteractiveDiagnosticProviders\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyInternalConfiguration.cs#L230",
+      "Location": "Line 230 Position 28-58"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027ResponseProcessors\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyInternalConfiguration.cs#L245",
+      "Location": "Line 245 Position 28-46"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027RouteSegmentConstraints\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyInternalConfiguration.cs#L305",
+      "Location": "Line 305 Position 28-51"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027ViewLocationConventions\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Conventions/NancyConventions.cs#L32",
+      "Location": "Line 32 Position 74-97"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027StaticContentsConventions\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Conventions/NancyConventions.cs#L37",
+      "Location": "Line 37 Position 60-85"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027AcceptHeaderCoercionConventions\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Conventions/NancyConventions.cs#L44",
+      "Location": "Line 44 Position 116-147"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027CultureConventions\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Conventions/NancyConventions.cs#L49",
+      "Location": "Line 49 Position 83-101"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027Items\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/IRequestTrace.cs#L14",
+      "Location": "Line 14 Position 37-42"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027Headers\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/ResponseData.cs#L21",
+      "Location": "Line 21 Position 44-51"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027RequestData\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ModelBinding/BindingContext.cs#L44",
+      "Location": "Line 44 Position 44-55"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027Headers\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Response.cs#L64",
+      "Location": "Line 64 Position 44-51"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027Cookies\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Responses/Negotiation/NegotiationContext.cs#L31",
+      "Location": "Line 31 Position 36-43"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027Headers\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Responses/Negotiation/NegotiationContext.cs#L43",
+      "Location": "Line 43 Position 44-51"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027MediaRangeModelMappings\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Responses/Negotiation/NegotiationContext.cs#L49",
+      "Location": "Line 49 Position 55-78"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027PermissableMediaRanges\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Responses/Negotiation/NegotiationContext.cs#L67",
+      "Location": "Line 67 Position 34-56"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027Parameters\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/ResolveResult.cs#L18",
+      "Location": "Line 18 Position 34-44"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027Parameters\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/Trie/MatchResult.cs#L18",
+      "Location": "Line 18 Position 44-54"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027Children\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/Trie/Nodes/TrieNode.cs#L27",
+      "Location": "Line 27 Position 46-54"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027NodeData\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/Trie/Nodes/TrieNode.cs#L33",
+      "Location": "Line 33 Position 32-40"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027AdditionalParameters\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/Trie/Nodes/TrieNode.cs#L38",
+      "Location": "Line 38 Position 44-64"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027Errors\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Validation/ModelValidationResult.cs#L44",
+      "Location": "Line 44 Position 65-71"
+    }
+  ]
+}

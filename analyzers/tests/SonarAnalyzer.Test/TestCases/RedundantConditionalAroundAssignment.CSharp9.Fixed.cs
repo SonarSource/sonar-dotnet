@@ -108,20 +108,12 @@ public static class SwitchExpressionCases
         {
             "https" => "wss",
             "http" => "ws",
-            "wss" => "wss", // Compliant, if this is removed the switch logic changes
-            "ws" => "ws",   // Compliant, if this is removed the switch logic changes
+            "wss" => "wss", // Fixed
+            "ws" => "ws", // Fixed
             _ => throw new ArgumentException($"Cannot convert URI scheme '{uri.Scheme}' to a websocket scheme."),
         };
         return builder.Uri;
     }
-
-    static string M(string s) =>
-        s switch
-        {
-            null => null, // Compliant, if this is removed "s" will be assigned non-empty is case of null.
-            "" => "Empty",
-            _ => "Not empty",
-        };
 }
 
 // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/6447

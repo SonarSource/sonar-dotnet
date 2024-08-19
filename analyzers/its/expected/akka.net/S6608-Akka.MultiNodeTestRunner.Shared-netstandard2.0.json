@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/SinkCoordinator.cs#L180",
+      "Location": "Line 180 Position 30-35"
+    }
+  ]
+}

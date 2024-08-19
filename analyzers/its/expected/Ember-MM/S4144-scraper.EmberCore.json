@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S4144",
+      "Message": "Update this method so that its implementation is not identical to \u0027rbLarge_CheckedChanged\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1088",
+      "Location": "Line 1088 Position 17-40"
+    },
+    {
+      "Id": "S4144",
+      "Message": "Update this method so that its implementation is not identical to \u0027rbLarge_CheckedChanged\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1093",
+      "Location": "Line 1093 Position 17-39"
+    },
+    {
+      "Id": "S4144",
+      "Message": "Update this method so that its implementation is not identical to \u0027rbLarge_CheckedChanged\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1098",
+      "Location": "Line 1098 Position 17-40"
+    }
+  ]
+}

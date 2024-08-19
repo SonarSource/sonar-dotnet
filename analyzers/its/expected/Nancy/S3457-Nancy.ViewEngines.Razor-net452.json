@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3457",
+      "Message": "Remove this formatting call and simply use the input string.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/CSharp/NancyCSharpRazorCodeParser.cs#L54",
+      "Location": "Line 54 Position 56-69"
+    },
+    {
+      "Id": "S3457",
+      "Message": "Remove this formatting call and simply use the input string.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/CSharp/NancyCSharpRazorCodeParser.cs#L77",
+      "Location": "Line 77 Position 70-83"
+    }
+  ]
+}

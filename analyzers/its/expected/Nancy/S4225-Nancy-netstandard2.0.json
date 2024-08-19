@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S4225",
+      "Message": "Refactor this extension to extend a more concrete type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Extensions/ObjectExtensions.cs#L17",
+      "Location": "Line 17 Position 31-40"
+    },
+    {
+      "Id": "S4225",
+      "Message": "Refactor this extension to extend a more concrete type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ViewEngines/Extensions.cs#L18",
+      "Location": "Line 18 Position 28-43"
+    }
+  ]
+}

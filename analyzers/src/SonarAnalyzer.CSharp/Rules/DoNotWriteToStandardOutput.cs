@@ -1,46 +1,58 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules;
-
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-public class DoNotWriteToStandardOutput : SonarDiagnosticAnalyzer
+namespace SonarAnalyzer.Rules.CSharp
 {
-    private const string DiagnosticId = "S106";
-    private const string MessageFormat = "Remove this logging statement.";
+    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    public class DoNotWriteToStandardOutput : SonarDiagnosticAnalyzer
+    {
+        private const string DiagnosticId = "S106";
+        private const string MessageFormat = "Remove this logging statement.";
 
-    private static readonly string[] BannedConsoleMembers = ["WriteLine", "Write"];
+        protected static DiagnosticDescriptor Rule =>
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        private static readonly ISet<string> BannedConsoleMembers = new HashSet<string> { "WriteLine", "Write" };
 
-    protected static DiagnosticDescriptor Rule =>
-        DescriptorFactory.Create(DiagnosticId, MessageFormat);
-
-    protected sealed override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
-            {
-                var invocation = (InvocationExpressionSyntax)c.Node;
-                if (c.Compilation.Options.OutputKind != OutputKind.ConsoleApplication
-                    && c.Model.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol method
-                    && method.IsAny(KnownType.System_Console, BannedConsoleMembers)
-                    && !c.Node.IsInDebugBlock()
-                    && !invocation.IsInConditionalDebug(c.Model))
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            ImmutableArray.Create(Rule);
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterNodeAction(c =>
                 {
-                    c.ReportIssue(Rule, invocation.Expression);
-                }
-            },
-            SyntaxKind.InvocationExpression);
+                    if (c.Compilation.Options.OutputKind == OutputKind.ConsoleApplication)
+                    {
+                        return;
+                    }
+
+                    var methodCall = (InvocationExpressionSyntax)c.Node;
+                    var methodSymbol = c.SemanticModel.GetSymbolInfo(methodCall.Expression).Symbol;
+
+                    if (methodSymbol != null &&
+                        methodSymbol.IsInType(KnownType.System_Console) &&
+                        BannedConsoleMembers.Contains(methodSymbol.Name) &&
+                        !c.Node.IsInDebugBlock() &&
+                        !CSharpDebugOnlyCodeHelper.IsCallerInConditionalDebug(methodCall, c.SemanticModel))
+                    {
+                        c.ReportIssue(Rule, methodCall.Expression);
+                    }
+                },
+                SyntaxKind.InvocationExpression);
+    }
 }

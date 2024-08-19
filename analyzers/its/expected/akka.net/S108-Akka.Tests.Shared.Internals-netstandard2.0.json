@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Shared.Internals/AsyncContext/SynchronousTaskExtensions.cs.cs#L100-L101",
+      "Location": "Lines 100-101 Position 13-14"
+    }
+  ]
+}

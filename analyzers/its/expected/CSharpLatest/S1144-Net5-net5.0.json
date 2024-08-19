@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027a\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L216",
+      "Location": "Line 216 Position 5-19"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private method \u0027Foo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/S2077.cs#L7",
+      "Location": "Line 7 Position 14-17"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027cookie\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/S2092.cs#L7",
+      "Location": "Line 7 Position 9-83"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027cookie\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/S3330.cs#L7",
+      "Location": "Line 7 Position 9-52"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027builder\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/S5122.cs#L7",
+      "Location": "Line 7 Position 9-47"
+    }
+  ]
+}

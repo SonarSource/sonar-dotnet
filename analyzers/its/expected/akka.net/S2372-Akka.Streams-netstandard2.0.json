@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S2372",
+      "Message": "Remove the exception throwing from this property getter, or refactor the property into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SinkRefImpl.cs#L107",
+      "Location": "Line 107 Position 46-94"
+    },
+    {
+      "Id": "S2372",
+      "Message": "Remove the exception throwing from this property getter, or refactor the property into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SourceRefImpl.cs#L101",
+      "Location": "Line 101 Position 46-94"
+    },
+    {
+      "Id": "S2372",
+      "Message": "Remove the exception throwing from this property getter, or refactor the property into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L817",
+      "Location": "Line 817 Position 21-135"
+    },
+    {
+      "Id": "S2372",
+      "Message": "Remove the exception throwing from this property getter, or refactor the property into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L872",
+      "Location": "Line 872 Position 21-73"
+    }
+  ]
+}

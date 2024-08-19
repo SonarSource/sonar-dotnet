@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027Tests\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L25",
+      "Location": "Line 25 Position 51-56"
+    }
+  ]
+}

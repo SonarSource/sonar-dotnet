@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3993",
+      "Message": "Specify AttributeUsage on \u0027MyAttribute\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp10Features/GenericAttributes.cs#L4",
+      "Location": "Line 4 Position 14-25"
+    },
+    {
+      "Id": "S3993",
+      "Message": "Specify AttributeUsage on \u0027GenericAttribute\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp11Features/GenericAttributes.cs#L5",
+      "Location": "Line 5 Position 18-34"
+    }
+  ]
+}

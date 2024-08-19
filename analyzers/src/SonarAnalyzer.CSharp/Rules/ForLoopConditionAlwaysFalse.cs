@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class ForLoopConditionAlwaysFalse : SonarDiagnosticAnalyzer
@@ -43,7 +47,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 c =>
                 {
                     var forNode = (ForStatementSyntax)c.Node;
-                    if (forNode.Condition is not null && (IsAlwaysFalseCondition(forNode.Condition) || IsConditionFalseAtInitialization(forNode)))
+                    if (forNode.Condition != null && (IsAlwaysFalseCondition(forNode.Condition) || IsConditionFalseAtInitialization(forNode)))
                     {
                         c.ReportIssue(Rule, forNode.Condition);
                     }
@@ -76,8 +80,8 @@ namespace SonarAnalyzer.CSharp.Rules
                 .ToDictionary(d => d.Key, d => d.Value);
 
             var binaryCondition = (BinaryExpressionSyntax)condition;
-            if (DecimalValue(variableNameToDecimalMapping, binaryCondition.Left) is { } leftValue
-                && DecimalValue(variableNameToDecimalMapping, binaryCondition.Right) is { } rightValue)
+            if (DecimalValue(variableNameToDecimalMapping, binaryCondition.Left, out var leftValue)
+                && DecimalValue(variableNameToDecimalMapping, binaryCondition.Right, out var rightValue))
             {
                 return !ConditionIsTrue(condition.Kind(), leftValue, rightValue);
             }
@@ -99,15 +103,25 @@ namespace SonarAnalyzer.CSharp.Rules
         private static bool IsLogicalNot(ExpressionSyntax expression, out PrefixUnaryExpressionSyntax logicalNot)
         {
             var prefixUnaryExpression = expression.RemoveParentheses() as PrefixUnaryExpressionSyntax;
+
             logicalNot = prefixUnaryExpression;
-            return prefixUnaryExpression is not null && prefixUnaryExpression.OperatorToken.IsKind(SyntaxKind.ExclamationToken);
+
+            return prefixUnaryExpression != null
+                && prefixUnaryExpression.OperatorToken.IsKind(SyntaxKind.ExclamationToken);
         }
 
-        private static decimal? DecimalValue(IDictionary<string, decimal> variableNameToDecimalValue, ExpressionSyntax expression) =>
-            ExpressionNumericConverter.ConstantDecimalValue(expression) is { } parsedValue
-                || (expression is SimpleNameSyntax simpleName && variableNameToDecimalValue.TryGetValue(simpleName.Identifier.ValueText, out parsedValue))
-                    ? parsedValue
-                    : (decimal?)null;
+        private static bool DecimalValue(IDictionary<string, decimal> variableNameToDecimalValue, ExpressionSyntax expression, out decimal parsedValue)
+        {
+            if (ExpressionNumericConverter.TryGetConstantDecimalValue(expression, out parsedValue)
+                || (expression is SimpleNameSyntax simpleName
+                    && variableNameToDecimalValue.TryGetValue(simpleName.Identifier.ValueText, out parsedValue)))
+            {
+                return true;
+            }
+
+            parsedValue = default;
+            return false;
+        }
 
         /// <summary>
         /// Retrieves the mapping of variable names to their decimal value from the variable declaration part of a for loop.
@@ -119,12 +133,12 @@ namespace SonarAnalyzer.CSharp.Rules
         private static IDictionary<string, decimal> VariableDeclarationMapping(VariableDeclarationSyntax variableDeclarationSyntax)
         {
             var loopInitializerValues = new Dictionary<string, decimal>();
-            if (variableDeclarationSyntax is not null)
+            if (variableDeclarationSyntax != null)
             {
                 foreach (var variableDeclaration in variableDeclarationSyntax.Variables)
                 {
                     if (variableDeclaration.Initializer is { } initializer
-                        && ExpressionNumericConverter.ConstantDecimalValue(initializer.Value) is { } decimalValue)
+                        && ExpressionNumericConverter.TryGetConstantDecimalValue(initializer.Value, out var decimalValue))
                     {
                         loopInitializerValues.Add(variableDeclaration.Identifier.ValueText, decimalValue);
                     }
@@ -144,13 +158,13 @@ namespace SonarAnalyzer.CSharp.Rules
         private static IDictionary<string, decimal> LoopInitializerMapping(IEnumerable<ExpressionSyntax> initializers)
         {
             var loopInitializerValues = new Dictionary<string, decimal>();
-            if (initializers is not null)
+            if (initializers != null)
             {
                 foreach (var initializer in initializers)
                 {
                     if (initializer.IsKind(SyntaxKind.SimpleAssignmentExpression)
                         && initializer is AssignmentExpressionSyntax { Left: SimpleNameSyntax simpleName } assignment
-                        && ExpressionNumericConverter.ConstantDecimalValue(assignment.Right) is { } decimalValue)
+                        && ExpressionNumericConverter.TryGetConstantDecimalValue(assignment.Right, out var decimalValue))
                     {
                         loopInitializerValues.Add(simpleName.Identifier.ValueText, decimalValue);
                     }

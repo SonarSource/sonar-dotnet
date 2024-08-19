@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S103",
+      "Message": "Split this 260 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericBoxee.vb#L96",
+      "Location": "Line 96 Position 1-261"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 260 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L107",
+      "Location": "Line 107 Position 1-261"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 260 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L118",
+      "Location": "Line 118 Position 1-261"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 226 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L164",
+      "Location": "Line 164 Position 1-227"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 226 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L175",
+      "Location": "Line 175 Position 1-227"
+    }
+  ]
+}

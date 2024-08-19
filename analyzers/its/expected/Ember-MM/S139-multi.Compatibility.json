@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L306",
+      "Location": "Line 306 Position 17-59"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L477",
+      "Location": "Line 477 Position 17-60"
+    }
+  ]
+}

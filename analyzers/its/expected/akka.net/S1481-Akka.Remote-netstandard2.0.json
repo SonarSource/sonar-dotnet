@@ -1,0 +1,106 @@
+{
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027f\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L1536",
+      "Location": "Line 1536 Position 39-40"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027quarantined\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/EndpointManager.cs#L833",
+      "Location": "Line 833 Position 38-49"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027p\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L318",
+      "Location": "Line 318 Position 47-48"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027mailboxType\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L397",
+      "Location": "Line 397 Position 29-40"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027p\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L146",
+      "Location": "Line 146 Position 47-48"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027p\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L148",
+      "Location": "Line 148 Position 47-48"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027h\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L233",
+      "Location": "Line 233 Position 32-33"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027h\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1013",
+      "Location": "Line 1013 Position 48-49"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027ht\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1039",
+      "Location": "Line 1039 Position 41-43"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027ht\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1041",
+      "Location": "Line 1041 Position 41-43"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027n\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1173",
+      "Location": "Line 1173 Position 29-30"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027s\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1175",
+      "Location": "Line 1175 Position 31-32"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027du\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L879",
+      "Location": "Line 879 Position 49-51"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027t\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L881",
+      "Location": "Line 881 Position 41-42"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027t\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L941",
+      "Location": "Line 941 Position 41-42"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027t\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L980",
+      "Location": "Line 980 Position 41-42"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027t\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L986",
+      "Location": "Line 986 Position 41-42"
+    }
+  ]
+}

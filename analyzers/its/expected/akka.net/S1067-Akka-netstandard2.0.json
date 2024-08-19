@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorPath.cs#L127-L128",
+      "Location": "Lines 127-128 Position 52-102"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorPath.cs#L130-L131",
+      "Location": "Lines 130-131 Position 50-72"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (12) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Deploy.cs#L202-L209",
+      "Location": "Lines 202-209 Position 20-111"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/FSM.cs#L556",
+      "Location": "Line 556 Position 24-261"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/Resizer.cs#L352",
+      "Location": "Line 352 Position 20-311"
+    }
+  ]
+}

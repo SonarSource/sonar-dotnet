@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027path\u0027 to \u0027s\u0027 to match the interface declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/EventFilter/Internal/StringMatcher/EqualsStringAndPathMatcher.cs#L37",
+      "Location": "Line 37 Position 36-40"
+    }
+  ]
+}

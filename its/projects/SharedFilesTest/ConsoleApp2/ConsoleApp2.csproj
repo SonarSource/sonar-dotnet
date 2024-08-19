@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Class1.cs" Link="Class1.cs" />
+    <Compile Include="..\ConsoleApp1\Program1.cs" Link="Program1.cs" />
+  </ItemGroup>
+
+</Project>

@@ -37,7 +37,7 @@ namespace Tests.Diagnostics
     public interface IPublicMethodSecond
     {
         public string Method(string value);
-//                    ^^^^^^ Secondary {{This member collides with 'IPublicMethodFirst.Method(string)'}}
+//                    ^^^^^^ Secondary
     }
 
     public interface ICommon : IPublicMethodFirst, IPublicMethodSecond // Noncompliant {{Rename or add member 'Method(string)' to this interface to resolve ambiguities.}}
@@ -53,7 +53,7 @@ namespace Tests.Diagnostics
     public interface IAbstractMethodSecond
     {
         public abstract string AbstractMethod(string value);
-//                             ^^^^^^^^^^^^^^ Secondary {{This member collides with 'IAbstractMethodFirst.AbstractMethod(string)'}}
+//                             ^^^^^^^^^^^^^^ Secondary
     }
 
     public interface IAbstractMethodCommon : IAbstractMethodFirst, IAbstractMethodSecond // Noncompliant {{Rename or add member 'AbstractMethod(string)' to this interface to resolve ambiguities.}}
@@ -72,7 +72,7 @@ namespace Tests.Diagnostics
     public interface IVirtualMethodSecond
     {
         public virtual string Virtual(string value)
-//                            ^^^^^^^ Secondary {{This member collides with 'IVirtualMethodFirst.Virtual(string)'}}
+//                            ^^^^^^^ Secondary
         {
             return value;
         }
@@ -94,7 +94,7 @@ namespace Tests.Diagnostics
     public interface IInternalMethodSecond
     {
         internal string Internal(string value)
-//                      ^^^^^^^^ Secondary {{This member collides with 'IInternalMethodFirst.Internal(string)'}}
+//                      ^^^^^^^^ Secondary
         {
             return value;
         }
@@ -116,7 +116,7 @@ namespace Tests.Diagnostics
     public interface IProtectedMethodSecond
     {
         protected string Protected(string value)
-//                       ^^^^^^^^^ Secondary {{This member collides with 'IProtectedMethodFirst.Protected(string)'}}
+//                       ^^^^^^^^^ Secondary
         {
             return value;
         }
@@ -158,7 +158,7 @@ namespace Tests.Diagnostics
     public interface ISealedMethodSecond
     {
         public sealed string Sealed(string value)
-//                           ^^^^^^ Secondary {{This member collides with 'ISealedMethodFirst.Sealed(string)'}}
+//                           ^^^^^^ Secondary
         {
             return value;
         }
@@ -180,7 +180,7 @@ namespace Tests.Diagnostics
     public interface IStaticMethodSecond
     {
         public static string Static(string value)
-//                           ^^^^^^ Secondary {{This member collides with 'IStaticMethodFirst.Static(string)'}}
+//                           ^^^^^^ Secondary
         {
             return value;
         }
@@ -218,9 +218,9 @@ namespace Tests.Diagnostics
         public string this[int i] // Indexer does not have a name, signature is used instead
         {
             get { return ""; }
-//          ^^^ Secondary {{This member collides with 'IIndexer1.this[int]'}}
+//          ^^^ Secondary
             set { }
-//          ^^^ Secondary {{This member collides with 'IIndexer1.this[int]'}}
+//          ^^^ Secondary
         }
     }
 
@@ -243,9 +243,9 @@ namespace Tests.Diagnostics
         public string Property
         {
             get => string.Empty;
-//          ^^^ Secondary {{This member collides with 'IProperty1.Property.get'}}
+//          ^^^ Secondary
             set => Console.WriteLine(value);
-//          ^^^ Secondary {{This member collides with 'IProperty1.Property.set'}}
+//          ^^^ Secondary
         }
     }
 
@@ -274,12 +274,12 @@ namespace Tests.Diagnostics
     public interface IEvents2
     {
         public event EventHandler Click;
-//                                ^^^^^ Secondary {{This member collides with 'IEvents1.Click'}}
+//                                ^^^^^ Secondary
 
         public event EventHandler OnClick
         {
             add
-//          ^^^ Secondary {{This member collides with 'IEvents1.OnClick'}}
+//          ^^^ Secondary
             {
                 Click += value;
             }

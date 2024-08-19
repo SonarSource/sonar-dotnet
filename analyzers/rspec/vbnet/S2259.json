@@ -13,8 +13,7 @@
     "constantCost": "10min"
   },
   "tags": [
-    "cwe",
-    "symbolic-execution"
+    "cwe"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-2259",

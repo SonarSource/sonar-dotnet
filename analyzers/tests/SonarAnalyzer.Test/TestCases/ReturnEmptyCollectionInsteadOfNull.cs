@@ -176,7 +176,7 @@ namespace Tests.Diagnostics
                 case "Second":
                     return new List<string> { };
                 default:
-                    return null; // Secondary {{Return an empty collection instead of null.}}
+                    return null; // Secondary
             }
         }
     }

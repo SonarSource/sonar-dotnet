@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S125",
+      "Message": "Remove this commented out code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Collectors/DefaultCollector.cs#L140",
+      "Location": "Line 140 Position 13-46"
+    },
+    {
+      "Id": "S125",
+      "Message": "Remove this commented out code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L68",
+      "Location": "Line 68 Position 13-62"
+    },
+    {
+      "Id": "S125",
+      "Message": "Remove this commented out code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L82",
+      "Location": "Line 82 Position 13-66"
+    }
+  ]
+}

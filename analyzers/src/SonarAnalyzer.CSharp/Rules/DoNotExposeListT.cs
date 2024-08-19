@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class DoNotExposeListT : SonarDiagnosticAnalyzer
@@ -31,7 +35,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 c =>
                 {
                     var baseMethodDeclaration = (BaseMethodDeclarationSyntax)c.Node;
-                    var methodSymbol = c.Model.GetDeclaredSymbol(baseMethodDeclaration);
+                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(baseMethodDeclaration);
 
                     if (methodSymbol == null
                         || !methodSymbol.IsPubliclyAccessible()
@@ -61,7 +65,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 c =>
                 {
                     var propertyDeclaration = (PropertyDeclarationSyntax)c.Node;
-                    var propertySymbol = c.Model.GetDeclaredSymbol(propertyDeclaration);
+                    var propertySymbol = c.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
 
                     if (propertySymbol != null
                         && propertySymbol.IsPubliclyAccessible()
@@ -84,7 +88,7 @@ namespace SonarAnalyzer.CSharp.Rules
                         return;
                     }
 
-                    var fieldSymbol = c.Model.GetDeclaredSymbol(variableDeclaration);
+                    var fieldSymbol = c.SemanticModel.GetDeclaredSymbol(variableDeclaration);
 
                     if (fieldSymbol != null
                         && fieldSymbol.IsPubliclyAccessible()
@@ -98,7 +102,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private static void ReportIfListT(SonarSyntaxNodeReportingContext context, TypeSyntax typeSyntax, string memberType)
         {
-            if (typeSyntax != null && typeSyntax.IsKnownType(KnownType.System_Collections_Generic_List_T, context.Model))
+            if (typeSyntax != null && typeSyntax.IsKnownType(KnownType.System_Collections_Generic_List_T, context.SemanticModel))
             {
                 context.ReportIssue(Rule, typeSyntax, memberType);
             }

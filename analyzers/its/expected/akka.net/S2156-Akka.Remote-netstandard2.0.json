@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S2156",
+      "Message": "Remove this \u0027protected\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L332",
+      "Location": "Line 332 Position 9-18"
+    },
+    {
+      "Id": "S2156",
+      "Message": "Remove this \u0027protected\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L364",
+      "Location": "Line 364 Position 9-18"
+    },
+    {
+      "Id": "S2156",
+      "Message": "Remove this \u0027protected\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L389",
+      "Location": "Line 389 Position 9-18"
+    }
+  ]
+}

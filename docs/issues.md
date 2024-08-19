@@ -1,14 +1,13 @@
 # Issue tracking
 
-All issues for C# and VB.NET code should be reported via our [Community Forum](https://community.sonarsource.com/c/clean-code/fp/7).
+All issues for C# and VB.NET code analyzers are tracked using [GitHub Issues](https://github.com/SonarSource/sonar-dotnet/issues).
 
 You're welcome to submit any issue that you've found using the C# and VB.NET code analyzers in:
 
-* [SonarQube cloud](https://www.sonarsource.com/products/sonarcloud/)
-* [SonarQube server](https://www.sonarsource.com/products/sonarqube/)
-* [SonarQube for IDE](https://www.sonarsource.com/products/sonarlint/)
-* [SonarAnalyzer.CSharp NuGet package](https://www.nuget.org/packages/SonarAnalyzer.CSharp/)
-* [SonarAnalyzer.VisualBasic Nuget package](https://www.nuget.org/packages/SonarAnalyzer.VisualBasic/)
+* [standalone nugets](https://www.nuget.org/packages/SonarAnalyzer.CSharp/)
+* [SonarLint for Visual Studio](https://www.sonarlint.org/visualstudio/)
+* [SonarQube](https://www.sonarqube.org/) plugins 
+* [SonarCloud](https://sonarcloud.io/about) analysis
 
 Please report all exceptions thrown from analyzer as well as False-Positive and False-Negative behavior. Try to provide a minimal reproducible example for each case.
 

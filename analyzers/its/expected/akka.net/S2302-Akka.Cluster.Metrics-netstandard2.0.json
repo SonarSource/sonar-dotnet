@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027manifest\u0027 with \u0027nameof(manifest)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L112",
+      "Location": "Line 112 Position 51-107"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027halfLife\u0027 with \u0027nameof(halfLife)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/EWMA.cs#L86",
+      "Location": "Line 86 Position 71-95"
+    }
+  ]
+}

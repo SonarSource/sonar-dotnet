@@ -1,0 +1,106 @@
+{
+  "Issues": [
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027obj\u0027 to \u0027o\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L86",
+      "Location": "Line 86 Position 48-51"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027obj\u0027 to \u0027o\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Serialization/PrimitiveSerializers.cs#L79",
+      "Location": "Line 79 Position 48-51"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027ctx\u0027 to \u0027context\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L102",
+      "Location": "Line 102 Position 65-68"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027ctx\u0027 to \u0027context\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L113",
+      "Location": "Line 113 Position 64-67"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027ctx\u0027 to \u0027context\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L123",
+      "Location": "Line 123 Position 59-62"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027ctx\u0027 to \u0027context\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L36",
+      "Location": "Line 36 Position 71-74"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027ctx\u0027 to \u0027context\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L42",
+      "Location": "Line 42 Position 73-76"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027ctx\u0027 to \u0027context\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L48",
+      "Location": "Line 48 Position 67-70"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027ctx\u0027 to \u0027context\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L54",
+      "Location": "Line 54 Position 69-72"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027ctx\u0027 to \u0027context\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L60",
+      "Location": "Line 60 Position 69-72"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027cause\u0027 to \u0027exception\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L60",
+      "Location": "Line 60 Position 84-89"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027ctx\u0027 to \u0027context\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L66",
+      "Location": "Line 66 Position 72-75"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027ctx\u0027 to \u0027context\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L72",
+      "Location": "Line 72 Position 63-66"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027ctx\u0027 to \u0027context\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L78",
+      "Location": "Line 78 Position 66-69"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027ctx\u0027 to \u0027context\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L84",
+      "Location": "Line 84 Position 69-72"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027ctx\u0027 to \u0027context\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L90",
+      "Location": "Line 90 Position 64-67"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027ctx\u0027 to \u0027context\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L96",
+      "Location": "Line 96 Position 69-72"
+    }
+  ]
+}

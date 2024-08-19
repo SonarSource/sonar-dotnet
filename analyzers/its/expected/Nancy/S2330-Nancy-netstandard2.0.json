@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2330",
+      "Message": "Refactor the code to not rely on potentially unsafe array conversions.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L339",
+      "Location": "Line 339 Position 36-63"
+    },
+    {
+      "Id": "S2330",
+      "Message": "Refactor the code to not rely on potentially unsafe array conversions.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L344",
+      "Location": "Line 344 Position 23-54"
+    }
+  ]
+}

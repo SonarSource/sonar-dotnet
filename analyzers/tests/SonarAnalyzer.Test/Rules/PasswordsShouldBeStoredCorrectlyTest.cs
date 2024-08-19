@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.CSharp.Rules;
+using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Test.Rules;
 
@@ -27,7 +31,7 @@ public class PasswordsShouldBeStoredCorrectlyTest
     [TestMethod]
     public void PasswordsShouldBeStoredCorrectly_CS_Core() =>
         Builder
-            .WithOptions(LanguageOptions.FromCSharp8)
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
             .AddPaths("PasswordsShouldBeStoredCorrectly.Core.cs")
             .AddReferences([
                 AspNetCoreMetadataReference.MicrosoftExtensionsIdentityCore,
@@ -40,7 +44,7 @@ public class PasswordsShouldBeStoredCorrectlyTest
     [TestMethod]
     public void PasswordsShouldBeStoredCorrectly_CS_PasswordHasherOptions() =>
         Builder
-            .WithOptions(LanguageOptions.FromCSharp9)
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
             .AddReferences(NuGetMetadataReference.MicrosoftAspNetIdentity())
             .AddSnippet("""
                 using Microsoft.AspNet.Identity;

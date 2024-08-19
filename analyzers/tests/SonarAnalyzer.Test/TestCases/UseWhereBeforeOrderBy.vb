@@ -12,7 +12,7 @@ Module Program
     Private Sub SimpleCase_OrderBy()
         list.OrderBy(Function(x) x).Where(Function(x) True)
         '                           ^^^^^ {{"Where" should be used before "OrderBy"}}
-        '    ^^^^^^^ Secondary@-1 {{This "OrderBy" precedes a "Where" - you should change the order.}}
+        '    ^^^^^^^ Secondary@-1
 
         list.OrderBy(Function(x) x)?.Where(Function(x) True)
         '                            ^^^^^ {{"Where" should be used before "OrderBy"}}
@@ -30,7 +30,7 @@ Module Program
     Private Sub SimpleCase_OrderByDescending()
         list.OrderByDescending(Function(x) x).Where(Function(x) True)
         '                                     ^^^^^ {{"Where" should be used before "OrderByDescending"}}
-        '    ^^^^^^^^^^^^^^^^^ Secondary@-1 {{This "OrderByDescending" precedes a "Where" - you should change the order.}}
+        '    ^^^^^^^^^^^^^^^^^ Secondary@-1
 
         list.OrderByDescending(Function(x) x)?.Where(Function(x) True)
         '                                      ^^^^^ {{"Where" should be used before "OrderByDescending"}}

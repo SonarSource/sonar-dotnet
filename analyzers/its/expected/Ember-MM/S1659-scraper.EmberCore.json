@@ -1,0 +1,58 @@
+{
+  "Issues": [
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027W\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L202",
+      "Location": "Line 202 Position 24-25"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027tempD\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L202",
+      "Location": "Line 202 Position 27-32"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027W\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L621",
+      "Location": "Line 621 Position 20-21"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027W\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L810",
+      "Location": "Line 810 Position 24-25"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027W\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L843",
+      "Location": "Line 843 Position 24-25"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027W\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L122",
+      "Location": "Line 122 Position 24-25"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027B\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L122",
+      "Location": "Line 122 Position 27-28"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027W\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L160",
+      "Location": "Line 160 Position 28-29"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027B\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L160",
+      "Location": "Line 160 Position 31-32"
+    }
+  ]
+}

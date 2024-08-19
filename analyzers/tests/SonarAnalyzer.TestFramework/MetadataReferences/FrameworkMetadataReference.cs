@@ -1,17 +1,21 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 #if NETFRAMEWORK
@@ -25,12 +29,7 @@ public static class FrameworkMetadataReference
 {
     public static References MicrosoftVisualBasic { get; } = Create("Microsoft.VisualBasic.dll");
     public static References Mscorlib { get; } = Create("mscorlib.dll");
-
-    public static References PresentationFramework { get; } =
-    [
-        CreateReference("PresentationFramework.dll", "WPF"), CreateReference("PresentationCore.dll", "WPF"), CreateReference("WindowsBase.dll", "WPF")
-    ];
-
+    public static References PresentationFramework { get; } = new[] { CreateReference("PresentationFramework.dll", "WPF"), CreateReference("PresentationCore.dll", "WPF") };
     public static References System { get; } = Create("System.dll");
     public static References SystemComponentModelComposition { get; } = Create("System.ComponentModel.Composition.dll");
     public static References SystemNetHttp { get; } = Create("System.Net.Http.dll");

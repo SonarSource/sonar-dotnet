@@ -14,16 +14,13 @@ execution</a>, such as:</p>
 </ul>
 <h3>Exceptions</h3>
 <ul>
-  <li> Methods implementing an interface </li>
-  <li> Methods overriding a base class method </li>
-  <li> Virtual methods </li>
-  <li> Methods with the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.eventhandler"><code>EventHandler</code></a> delegate signature  Using <code>void</code> for <code>EventHandler</code> is compliant with the TAP model.  <pre>
+  <li> Methods with the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.eventhandler"><code>EventHandler</code></a> delegate signature.  Using <code>void</code> for <code>EventHandler</code> is compliant with the TAP model.  <pre>
 public async void button1_Click(object sender, EventArgs e)
 {
   await DoSomethingAsync();
 }
 </pre> </li>
-  <li> Methods name matching <code>On[A-Z]\w*</code> pattern  Some frameworks may not use the same <code>EventHandler</code> method signature.  <pre>
+  <li> Methods name matching <code>On[A-Z]\w*</code> pattern.  Some frameworks may not use the same <code>EventHandler</code> method signature  <pre>
 public async void OnClick(EventContext data)
 {
   await DoSomethingAsync();

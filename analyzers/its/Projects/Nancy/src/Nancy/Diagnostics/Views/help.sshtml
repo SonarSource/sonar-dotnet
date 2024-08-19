@@ -1,0 +1,21 @@
+﻿@Master['_DiagnosticsMaster']
+
+@Section['Title']Diagnostics Disabled@EndSection
+
+@Section['Header']
+@EndSection
+
+@Section['Page_Title']
+	<h1>Diagnostics Disabled</h1>
+@EndSection
+
+@Section['Body']
+	<div class="grid_2">&nbsp;</div>
+	<div class="grid_8 help">
+		<p>Diagnostics is currently not correctly configured for this website. Please review your diagnostic configuration and try again.</p>
+	</div>
+	<div class="grid_2">&nbsp;</div>
+@EndSection
+
+
+

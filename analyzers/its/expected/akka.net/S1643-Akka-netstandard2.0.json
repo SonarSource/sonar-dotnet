@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1643",
+      "Message": "Use a StringBuilder instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/ListPriorityQueue.cs#L113",
+      "Location": "Line 113 Position 17-47"
+    },
+    {
+      "Id": "S1643",
+      "Message": "Use a StringBuilder instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/StableListPriorityQueue.cs#L146",
+      "Location": "Line 146 Position 17-47"
+    }
+  ]
+}

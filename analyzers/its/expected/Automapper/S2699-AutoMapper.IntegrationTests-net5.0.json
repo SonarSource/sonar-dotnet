@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/IntegrationTests/BuiltInTypes/ProjectUsing.cs#L133",
+      "Location": "Line 133 Position 21-44"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/IntegrationTests/ProjectionOrderTest.cs#L70",
+      "Location": "Line 70 Position 21-68"
+    }
+  ]
+}

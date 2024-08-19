@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027iVal\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L127",
+      "Location": "Line 127 Position 19-23"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027bTrimString\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L419",
+      "Location": "Line 419 Position 105-116"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027bCleanString\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L419",
+      "Location": "Line 419 Position 72-84"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027bTrimString\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L443",
+      "Location": "Line 443 Position 105-116"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027bCleanString\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L443",
+      "Location": "Line 443 Position 72-84"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S1871",
+      "Message": "Either merge this branch with the identical one on line 113 or change one of the implementations.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L116-L117",
+      "Location": "Lines 116-117 Position 45-107"
+    },
+    {
+      "Id": "S1871",
+      "Message": "Either merge this case with the identical one on line 343 or change one of the implementations.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L346-L347",
+      "Location": "Lines 346-347 Position 33-41"
+    },
+    {
+      "Id": "S1871",
+      "Message": "Either merge this case with the identical one on line 343 or change one of the implementations.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L349-L350",
+      "Location": "Lines 349-350 Position 33-41"
+    },
+    {
+      "Id": "S1871",
+      "Message": "Either merge this case with the identical one on line 343 or change one of the implementations.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L352-L353",
+      "Location": "Lines 352-353 Position 33-41"
+    },
+    {
+      "Id": "S1871",
+      "Message": "Either merge this case with the identical one on line 343 or change one of the implementations.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L355-L356",
+      "Location": "Lines 355-356 Position 33-41"
+    },
+    {
+      "Id": "S1871",
+      "Message": "Either merge this case with the identical one on line 343 or change one of the implementations.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L358-L359",
+      "Location": "Lines 358-359 Position 33-41"
+    },
+    {
+      "Id": "S1871",
+      "Message": "Either merge this branch with the identical one on line 808 or change one of the implementations.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L811",
+      "Location": "Line 811 Position 29-51"
+    }
+  ]
+}

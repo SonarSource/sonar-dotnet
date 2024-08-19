@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S113",
+      "Message": "Add a new line at the end of the file \u0027Reachability.cs\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Reachability.cs#L528",
+      "Location": "Line 528 Position 1-2"
+    }
+  ]
+}

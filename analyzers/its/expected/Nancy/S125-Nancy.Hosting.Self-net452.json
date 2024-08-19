@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S125",
+      "Message": "Remove this commented out code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Hosting.Self/NancyHost.cs#L179",
+      "Location": "Line 179 Position 17-69"
+    }
+  ]
+}

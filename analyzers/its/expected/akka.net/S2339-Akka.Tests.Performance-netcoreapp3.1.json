@@ -1,0 +1,58 @@
+{
+  "Issues": [
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/Pattern/AskSpec.cs#L27",
+      "Location": "Line 27 Position 29-53"
+    },
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/Scheduler/DefaultSchedulerPerformanceTests.cs#L41",
+      "Location": "Line 41 Position 26-40"
+    },
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/IO/TcpHorizontalScaleSpec.cs#L131",
+      "Location": "Line 131 Position 26-43"
+    },
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/IO/TcpInboundOnlySpec.cs#L63",
+      "Location": "Line 63 Position 26-40"
+    },
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/IO/TcpInboundOnlySpec.cs#L64",
+      "Location": "Line 64 Position 26-36"
+    },
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/IO/TcpInboundOnlySpec.cs#L66",
+      "Location": "Line 66 Position 26-43"
+    },
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/IO/TcpSingleConnectionSpec.cs#L121",
+      "Location": "Line 121 Position 26-40"
+    },
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/IO/TcpSingleConnectionSpec.cs#L122",
+      "Location": "Line 122 Position 26-36"
+    },
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/IO/TcpSingleConnectionSpec.cs#L124",
+      "Location": "Line 124 Position 26-43"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027PreserveObjectReferences\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/HyperionSerializer.cs#L234",
+      "Location": "Line 234 Position 30-54"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027VersionTolerance\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/HyperionSerializer.cs#L240",
+      "Location": "Line 240 Position 30-46"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027KnownTypesProvider\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/HyperionSerializer.cs#L250",
+      "Location": "Line 250 Position 30-48"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027PackageNameOverrides\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/HyperionSerializer.cs#L256",
+      "Location": "Line 256 Position 59-79"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Settings\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/HyperionSerializer.cs#L33",
+      "Location": "Line 33 Position 52-60"
+    }
+  ]
+}

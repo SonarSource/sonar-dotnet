@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Spark/NancyViewFolder.cs#L242",
+      "Location": "Line 242 Position 40-52"
+    }
+  ]
+}

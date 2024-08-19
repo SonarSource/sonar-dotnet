@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6562",
+      "Message": "Provide the \u0022DateTimeKind\u0022 when creating this object.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Snapshot/SqliteSnapshotStore.cs#L88",
+      "Location": "Line 88 Position 29-61"
+    }
+  ]
+}

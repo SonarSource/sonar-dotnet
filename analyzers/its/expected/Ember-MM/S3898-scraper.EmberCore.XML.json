@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027Arguments\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L302",
+      "Location": "Line 302 Position 23-32"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027Results\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L312",
+      "Location": "Line 312 Position 23-30"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027Arguments\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/dlgTrailer.vb#L336",
+      "Location": "Line 336 Position 23-32"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027Arguments\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L49",
+      "Location": "Line 49 Position 23-32"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027BufferContents\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/FunctionInformation.vb#L33",
+      "Location": "Line 33 Position 26-40"
+    }
+  ]
+}

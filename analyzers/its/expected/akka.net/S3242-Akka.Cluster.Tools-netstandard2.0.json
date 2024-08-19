@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Actor.ICanTell\u0027 instead of \u0027Akka.Actor.IActorRef\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClient.cs#L493",
+      "Location": "Line 493 Position 45-57"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Actor.ICanTell\u0027 instead of \u0027Akka.Actor.IActorRef\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/PerGroupingBuffer.cs#L80",
+      "Location": "Line 80 Position 75-84"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Actor.IWrappedMessage\u0027 instead of \u0027Akka.Cluster.Tools.PublishSubscribe.Send\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Serialization/DistributedPubSubMessageSerializer.cs#L210",
+      "Location": "Line 210 Position 41-45"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Actor.IWrappedMessage\u0027 instead of \u0027Akka.Cluster.Tools.PublishSubscribe.SendToAll\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Serialization/DistributedPubSubMessageSerializer.cs#L225",
+      "Location": "Line 225 Position 51-60"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Actor.IWrappedMessage\u0027 instead of \u0027Akka.Cluster.Tools.PublishSubscribe.Publish\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Serialization/DistributedPubSubMessageSerializer.cs#L240",
+      "Location": "Line 240 Position 47-54"
+    }
+  ]
+}

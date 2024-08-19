@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S1134",
+      "Message": "Take the required action to fix the issue indicated by this \u0027FIXME\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L213",
+      "Location": "Line 213 Position 15-20"
+    },
+    {
+      "Id": "S1134",
+      "Message": "Take the required action to fix the issue indicated by this \u0027FIXME\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Attributes.cs#L440",
+      "Location": "Line 440 Position 20-25"
+    },
+    {
+      "Id": "S1134",
+      "Message": "Take the required action to fix the issue indicated by this \u0027FIXME\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L92",
+      "Location": "Line 92 Position 16-21"
+    },
+    {
+      "Id": "S1134",
+      "Message": "Take the required action to fix the issue indicated by this \u0027FIXME\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L82",
+      "Location": "Line 82 Position 16-21"
+    },
+    {
+      "Id": "S1134",
+      "Message": "Take the required action to fix the issue indicated by this \u0027FIXME\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1205",
+      "Location": "Line 1205 Position 13-18"
+    },
+    {
+      "Id": "S1134",
+      "Message": "Take the required action to fix the issue indicated by this \u0027FIXME\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/IO/IOSources.cs#L88",
+      "Location": "Line 88 Position 16-21"
+    },
+    {
+      "Id": "S1134",
+      "Message": "Take the required action to fix the issue indicated by this \u0027FIXME\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L74",
+      "Location": "Line 74 Position 20-25"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "Issues": [
+    {
+      "Id": "S1848",
+      "Message": "Either remove this useless object instantiation of class \u0027PasswordDeriveBytes\u0027 or use it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/HashesShouldHaveUnpredictableSaltTest.cs#L20",
+      "Location": "Line 20 Position 13-62"
+    },
+    {
+      "Id": "S1848",
+      "Message": "Either remove this useless object instantiation of class \u0027Rfc2898DeriveBytes\u0027 or use it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/HashesShouldHaveUnpredictableSaltTest.cs#L21",
+      "Location": "Line 21 Position 13-64"
+    },
+    {
+      "Id": "S1848",
+      "Message": "Either remove this useless object instantiation of class \u0027PasswordDeriveBytes\u0027 or use it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/HashesShouldHaveUnpredictableSaltTest.cs#L25",
+      "Location": "Line 25 Position 13-61"
+    },
+    {
+      "Id": "S1848",
+      "Message": "Either remove this useless object instantiation of class \u0027Rfc2898DeriveBytes\u0027 or use it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/HashesShouldHaveUnpredictableSaltTest.cs#L26",
+      "Location": "Line 26 Position 13-63"
+    },
+    {
+      "Id": "S1848",
+      "Message": "Either remove this useless object instantiation of class \u0027LosFormatter\u0027 or use it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LosFormatterTest.cs#L17",
+      "Location": "Line 17 Position 13-31"
+    },
+    {
+      "Id": "S1848",
+      "Message": "Either remove this useless object instantiation of class \u0027LosFormatter\u0027 or use it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LosFormatterTest.cs#L19",
+      "Location": "Line 19 Position 13-40"
+    },
+    {
+      "Id": "S1848",
+      "Message": "Either remove this useless object instantiation of class \u0027LosFormatter\u0027 or use it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LosFormatterTest.cs#L20",
+      "Location": "Line 20 Position 13-49"
+    },
+    {
+      "Id": "S1848",
+      "Message": "Either remove this useless object instantiation of class \u0027LosFormatter\u0027 or use it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LosFormatterTest.cs#L22",
+      "Location": "Line 22 Position 13-39"
+    },
+    {
+      "Id": "S1848",
+      "Message": "Either remove this useless object instantiation of class \u0027LosFormatter\u0027 or use it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LosFormatterTest.cs#L23",
+      "Location": "Line 23 Position 13-48"
+    }
+  ]
+}

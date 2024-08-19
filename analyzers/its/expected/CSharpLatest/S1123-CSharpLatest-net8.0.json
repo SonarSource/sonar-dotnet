@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1123",
+      "Message": "Add an explanation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/AttributesOnLocalFunctions.cs#L11",
+      "Location": "Line 11 Position 10-18"
+    }
+  ]
+}

@@ -48,21 +48,4 @@ namespace Tests.TestCases
             };
         }
     }
-
-    // Repro for https://github.com/SonarSource/sonar-dotnet/issues/9667
-    public class Sample
-    {
-        public string First { get; set; }
-        public string Second { get; set; }
-
-        public Sample(string first)
-        {
-            this.First = first;    // Compliant
-            Second = Second;       // Noncompliant
-                                   // Secondary @-1
-            this.Second = Second;  // False Negative
-            Second = this.Second;  // False Negative
-        }
-    }
-
 }

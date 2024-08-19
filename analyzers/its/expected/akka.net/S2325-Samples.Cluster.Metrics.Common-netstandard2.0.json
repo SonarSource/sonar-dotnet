@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Factorial\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/examples/Cluster/Metrics/Samples.Cluster.Metrics.Common/FactorialBackend.cs#L29",
+      "Location": "Line 29 Position 47-56"
+    }
+  ]
+}

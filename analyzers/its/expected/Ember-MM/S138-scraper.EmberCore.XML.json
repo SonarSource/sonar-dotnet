@@ -1,0 +1,52 @@
+{
+  "Issues": [
+    {
+      "Id": "S138",
+      "Message": "This method \u0027GetPreferredFAasET\u0027 has 81 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L29",
+      "Location": "Line 29 Position 23-41"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027OK_Button_Click\u0027 has 103 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L585",
+      "Location": "Line 585 Position 17-32"
+    },
+    {
+      "Id": "S138",
+      "Message": "This function \u0027Scraper\u0027 has 119 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L215",
+      "Location": "Line 215 Position 14-21"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027MapFields\u0027 has 84 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L343",
+      "Location": "Line 343 Position 9-18"
+    },
+    {
+      "Id": "S138",
+      "Message": "This function \u0027PostScraper\u0027 has 97 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L433",
+      "Location": "Line 433 Position 21-32"
+    },
+    {
+      "Id": "S138",
+      "Message": "This function \u0027Evaluate\u0027 has 85 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L361",
+      "Location": "Line 361 Position 49-57"
+    },
+    {
+      "Id": "S138",
+      "Message": "This function \u0027BlankSerialize\u0027 has 162 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L211",
+      "Location": "Line 211 Position 36-50"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027ParseExpression\u0027 has 135 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L129",
+      "Location": "Line 129 Position 24-39"
+    }
+  ]
+}

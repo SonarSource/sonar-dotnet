@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S4055",
+      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/AutomaticJoin/DBHelper.cs#L28-L30",
+      "Location": "Lines 28-30 Position 35-20"
+    },
+    {
+      "Id": "S4055",
+      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/Program.cs#L97",
+      "Location": "Line 97 Position 27-71"
+    }
+  ]
+}

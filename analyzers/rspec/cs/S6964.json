@@ -16,7 +16,7 @@
   "quickfix": "targeted",
   "code": {
     "impacts": {
-      "RELIABILITY": "MEDIUM"
+      "RELIABILITY": "HIGH"
     },
     "attribute": "TRUSTWORTHY"
   }

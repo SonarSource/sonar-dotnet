@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S2333",
+      "Message": "\u0027partial\u0027 is gratuitous in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/BlazorSample/BlazorSample/Pages/S6797/S6797.Partial.razor.cs#L5",
+      "Location": "Line 5 Position 12-19"
+    },
+    {
+      "Id": "S2333",
+      "Message": "\u0027partial\u0027 is gratuitous in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/BlazorSample/BlazorSample/Pages/S6798/S6798.Partial.razor.cs#L5",
+      "Location": "Line 5 Position 8-15"
+    },
+    {
+      "Id": "S2333",
+      "Message": "\u0027partial\u0027 is gratuitous in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/BlazorSample/BlazorSample/Pages/S6800/S6800Partial.razor.cs#L5",
+      "Location": "Line 5 Position 8-15"
+    }
+  ]
+}

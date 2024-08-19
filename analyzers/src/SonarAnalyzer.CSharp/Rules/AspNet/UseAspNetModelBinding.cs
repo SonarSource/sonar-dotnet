@@ -1,23 +1,26 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using System.Collections.Concurrent;
-using SonarAnalyzer.Core.Trackers;
 
-namespace SonarAnalyzer.CSharp.Rules;
+namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
@@ -94,7 +97,7 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
             codeBlockStart.RegisterNodeAction(nodeContext =>
             {
                 var argument = (ArgumentSyntax)nodeContext.Node;
-                var model = nodeContext.Model;
+                var model = nodeContext.SemanticModel;
                 if (allConstantAccesses
                     && AddMatchingArgumentToCandidates(model, codeBlockCandidates, argument, argumentDescriptors)
                     && model.GetConstantValue(argument.Expression) is not { HasValue: true, Value: string })
@@ -110,12 +113,12 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
                 // The property access of Request.Form.Files can be replaced by an IFormFile binding.
                 // Any access to a "Files" property is therefore noncompliant. This is different from the Argument handling above.
                 var memberAccess = (MemberAccessExpressionSyntax)nodeContext.Node;
-                var context = new PropertyAccessContext(memberAccess, nodeContext.Model, memberAccess.Name.Identifier.ValueText);
+                var context = new PropertyAccessContext(memberAccess, nodeContext.SemanticModel, memberAccess.Name.Identifier.ValueText);
                 if (Language.Tracker.PropertyAccess.MatchProperty(propertyAccessDescriptors)(context)
                     // form.Files is okay, if "form" is a parameter, because IFormCollection binding is considered appropriate for binding as well
-                    && nodeContext.Model.GetSymbolInfo(memberAccess.Expression).Symbol is not IParameterSymbol)
+                    && nodeContext.SemanticModel.GetSymbolInfo(memberAccess.Expression).Symbol is not IParameterSymbol)
                 {
-                    codeBlockCandidates.Push(new(UseIFormFileBindingMessage, memberAccess.GetLocation(), IsOriginatingFromParameter(nodeContext.Model, memberAccess)));
+                    codeBlockCandidates.Push(new(UseIFormFileBindingMessage, memberAccess.GetLocation(), IsOriginatingFromParameter(nodeContext.SemanticModel, memberAccess)));
                 }
             }, SyntaxKind.SimpleMemberAccessExpression);
         }
@@ -222,7 +225,7 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
     // Check that the "Headers" expression in the Headers.TryGetValue("id", out _) invocation is of type IHeaderDictionary
     private static bool IsAccessedViaHeaderDictionary(SemanticModel model, ILanguageFacade language, SyntaxNode invocation) =>
         invocation is InvocationExpressionSyntax { Expression: { } expression }
-            && expression.GetLeftOfDot() is { } left
+            && GetLeftOfDot(expression) is { } left
             && model.GetTypeInfo(left) is { Type: { } typeSymbol }
             && typeSymbol.Is(KnownType.Microsoft_AspNetCore_Http_IHeaderDictionary);
 
@@ -236,6 +239,14 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
 
     private static bool IsOriginatingFromParameter(SemanticModel semanticModel, ExpressionSyntax expression) =>
         MostLeftOfDottedChain(expression) is { } mostLeft && semanticModel.GetSymbolInfo(mostLeft).Symbol is IParameterSymbol;
+
+    private static ExpressionSyntax GetLeftOfDot(ExpressionSyntax expression) =>
+        expression switch
+        {
+            MemberAccessExpressionSyntax memberAccessExpression => memberAccessExpression.Expression,
+            MemberBindingExpressionSyntax memberBindingExpression => memberBindingExpression.GetParentConditionalAccessExpression()?.Expression,
+            _ => null,
+        };
 
     private static ExpressionSyntax MostLeftOfDottedChain(ExpressionSyntax root)
     {

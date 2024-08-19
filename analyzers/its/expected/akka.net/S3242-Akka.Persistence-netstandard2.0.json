@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Exception\u0027 instead of \u0027Akka.Pattern.IllegalStateException\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/ReplayFilter.cs#L289",
+      "Location": "Line 289 Position 49-54"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.IEnumerable\u0027 instead of \u0027System.Collections.Generic.IEnumerable\u003CAkka.Persistence.IPersistentEnvelope\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/WriteJournal.cs#L37",
+      "Location": "Line 37 Position 100-115"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Persistence.IPersistentRepresentation\u0027 instead of \u0027Akka.Persistence.Persistent\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Persistent.cs#L398",
+      "Location": "Line 398 Position 39-44"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Tools.MatchHandler.MatchBuilder\u003Cobject\u003E\u0027 instead of \u0027Akka.Tools.MatchHandler.MatchBuilder\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L360",
+      "Location": "Line 360 Position 75-87"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Persistence.IPersistentEnvelope\u0027 instead of \u0027Akka.Persistence.AtomicWrite\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L92",
+      "Location": "Line 92 Position 66-71"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.IO.FileSystemInfo\u0027 instead of \u0027System.IO.FileInfo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L283",
+      "Location": "Line 283 Position 67-75"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.IO.FileSystemInfo\u0027 instead of \u0027System.IO.FileInfo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L338",
+      "Location": "Line 338 Position 71-79"
+    }
+  ]
+}

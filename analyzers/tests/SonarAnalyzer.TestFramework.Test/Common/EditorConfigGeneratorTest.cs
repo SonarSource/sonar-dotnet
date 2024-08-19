@@ -1,17 +1,21 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 namespace SonarAnalyzer.TestFramework.Test.Common;
@@ -52,7 +56,10 @@ public class EditorConfigGeneratorTest
     {
         var rootPath = "C:/Users/Johnny/source/repos/WebApplication";
         var editorConfig = new EditorConfigGenerator(rootPath).Generate([]);
-        editorConfig.Should().Be("is_global = true");
+        editorConfig.Should().Be(
+        $"""
+        is_global = true
+        """.Replace("\n", Environment.NewLine));
     }
 
     [TestMethod]
@@ -61,11 +68,12 @@ public class EditorConfigGeneratorTest
         var rootPath = "C:/Users/Johnny/source/repos/WebApplication";
         var razorFile = "C:/Users/Johnny/source/repos/WebApplication/Component.razor";
         var editorConfig = new EditorConfigGenerator(rootPath).Generate([razorFile]);
-        editorConfig.Should().BeIgnoringLineEndings("""
-            is_global = true
-            [C:/Users/Johnny/source/repos/WebApplication/Component.razor]
-            build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50LnJhem9y
-            """);
+        editorConfig.Should().Be(
+        $"""
+        is_global = true
+        [C:/Users/Johnny/source/repos/WebApplication/Component.razor]
+        build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50LnJhem9y
+        """.Replace("\n", Environment.NewLine));
     }
 
     [TestMethod]
@@ -79,15 +87,16 @@ public class EditorConfigGeneratorTest
             "C:/Users/Johnny/source/repos/Parent.razor"
         };
         var editorConfig = new EditorConfigGenerator(rootPath).Generate(razorFiles);
-        editorConfig.Should().BeIgnoringLineEndings("""
-            is_global = true
-            [C:/Users/Johnny/source/repos/WebApplication/Component.razor]
-            build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50LnJhem9y
-            [C:/Users/Johnny/source/repos/WebApplication/Folder/Child.razor]
-            build_metadata.AdditionalFiles.TargetPath = Rm9sZGVyXENoaWxkLnJhem9y
-            [C:/Users/Johnny/source/repos/Parent.razor]
-            build_metadata.AdditionalFiles.TargetPath = Li5cUGFyZW50LnJhem9y
-            """);
+        editorConfig.Should().Be(
+        $"""
+        is_global = true
+        [C:/Users/Johnny/source/repos/WebApplication/Component.razor]
+        build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50LnJhem9y
+        [C:/Users/Johnny/source/repos/WebApplication/Folder/Child.razor]
+        build_metadata.AdditionalFiles.TargetPath = Rm9sZGVyXENoaWxkLnJhem9y
+        [C:/Users/Johnny/source/repos/Parent.razor]
+        build_metadata.AdditionalFiles.TargetPath = Li5cUGFyZW50LnJhem9y
+        """.Replace("\n", Environment.NewLine));
     }
 
     [TestMethod]
@@ -112,7 +121,8 @@ public class EditorConfigGeneratorTest
     public void GenerateEditorConfig_MixedFiles_Throws()
     {
         var rootPath = "C:/Users/Johnny/source/repos/WebApplication";
-        var generateMixedWithNullElement = () => _ = new EditorConfigGenerator(rootPath).Generate([null, "C:/Users/Johnny/source/repos/WebApplication/Component.razor", string.Empty]);
+        var generateMixedWithNullElement = () => _ = new EditorConfigGenerator(rootPath)
+            .Generate([null, "C:/Users/Johnny/source/repos/WebApplication/Component.razor", string.Empty]);
         generateMixedWithNullElement.Should().Throw<NullReferenceException>();
     }
 }

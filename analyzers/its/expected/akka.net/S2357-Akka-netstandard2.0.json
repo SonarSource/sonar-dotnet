@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Status\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorBase.cs#L28",
+      "Location": "Line 28 Position 36-42"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Cause\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorBase.cs#L49",
+      "Location": "Line 49 Position 39-44"
+    }
+  ]
+}

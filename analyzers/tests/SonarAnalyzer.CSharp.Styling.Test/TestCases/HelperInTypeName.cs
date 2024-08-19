@@ -51,13 +51,3 @@ interface IMonsterWhelpEradicator
 {
 
 }
-
-namespace Something.Helper { }              // Noncompliant {{Do not use 'Helper' in type names.}}
-namespace Something.Helpers { }             // Noncompliant
-namespace Something.SyntaxHelper { }        // Noncompliant
-namespace Something.SyntaxHelpers { }       // Noncompliant
-namespace Something.Helpers.Extensions { }  // Noncompliant
-namespace Helper.Helping.Helpers.Work { }   // Noncompliant, just once
-namespace { }   // Error [CS1001] Identifier expected
-namespace;      // Error [CS1001] Identifier expected
-                // Error@-1 [CS8956] File-scoped namespace must precede all other members in a file.

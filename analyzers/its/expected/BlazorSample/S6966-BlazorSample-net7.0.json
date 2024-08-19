@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6966",
+      "Message": "Await RunAsync instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/BlazorSample/BlazorSample/Program.cs#L29",
+      "Location": "Line 29 Position 1-10"
+    }
+  ]
+}

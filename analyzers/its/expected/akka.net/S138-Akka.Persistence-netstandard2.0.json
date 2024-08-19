@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S138",
+      "Message": "This method \u0027Recovering\u0027 has 93 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L174",
+      "Location": "Line 174 Position 35-45"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027RecoveryStarted\u0027 has 92 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L64",
+      "Location": "Line 64 Position 35-50"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027Receive\u0027 has 114 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Journal/ReplayFilter.cs#L132",
+      "Location": "Line 132 Position 33-40"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027ReceiveSnapshotStore\u0027 has 138 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Snapshot/SnapshotStore.cs#L53",
+      "Location": "Line 53 Position 22-42"
+    }
+  ]
+}

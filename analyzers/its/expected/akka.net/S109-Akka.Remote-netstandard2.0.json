@@ -1,0 +1,160 @@
+{
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00271.2\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L1378",
+      "Location": "Line 1378 Position 90-93"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00270.6\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L1380",
+      "Location": "Line 1380 Position 54-57"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00270.9\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L1382",
+      "Location": "Line 1382 Position 90-93"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00270.2\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L1384",
+      "Location": "Line 1384 Position 54-57"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00271.1\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L1386",
+      "Location": "Line 1386 Position 90-93"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00271000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Endpoint.cs#L1584",
+      "Location": "Line 1584 Position 152-156"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L201",
+      "Location": "Line 201 Position 71-72"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L201",
+      "Location": "Line 201 Position 75-76"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L432",
+      "Location": "Line 432 Position 72-73"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002723\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L40",
+      "Location": "Line 40 Position 31-33"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002726\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L41",
+      "Location": "Line 41 Position 32-34"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002717\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L42",
+      "Location": "Line 42 Position 32-34"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274294967295\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L46",
+      "Location": "Line 46 Position 42-52"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002723\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L74",
+      "Location": "Line 74 Position 39-41"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002726\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L75",
+      "Location": "Line 75 Position 40-42"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002717\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L76",
+      "Location": "Line 76 Position 40-42"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274294967295\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L80",
+      "Location": "Line 80 Position 50-60"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L113",
+      "Location": "Line 113 Position 56-57"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L113",
+      "Location": "Line 113 Position 64-65"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L253",
+      "Location": "Line 253 Position 32-37"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272552\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L85",
+      "Location": "Line 85 Position 45-49"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027128000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L89",
+      "Location": "Line 89 Position 96-102"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274096\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L95",
+      "Location": "Line 95 Position 51-55"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027256000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L97",
+      "Location": "Line 97 Position 101-107"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027256000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L98",
+      "Location": "Line 98 Position 95-101"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L72",
+      "Location": "Line 72 Position 68-74"
+    }
+  ]
+}

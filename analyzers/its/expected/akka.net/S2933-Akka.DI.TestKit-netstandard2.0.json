@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027_counter\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L122",
+      "Location": "Line 122 Position 27-35"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027_pid\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L193",
+      "Location": "Line 193 Position 24-28"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027_disposeCounter\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L199",
+      "Location": "Line 199 Position 31-46"
+    }
+  ]
+}

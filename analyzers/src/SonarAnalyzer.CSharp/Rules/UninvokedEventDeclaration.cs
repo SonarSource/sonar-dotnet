@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class UninvokedEventDeclaration : SonarDiagnosticAnalyzer
@@ -73,12 +77,12 @@ namespace SonarAnalyzer.CSharp.Rules
                 .SelectMany(container => container.Node.DescendantNodes()
                     .Where(x => x.IsKind(SyntaxKind.InvocationExpression))
                     .Cast<InvocationExpressionSyntax>()
-                    .Select(x => new NodeSymbolAndModel<InvocationExpressionSyntax, IMethodSymbol>(x, container.Model.GetSymbolInfo(x).Symbol as IMethodSymbol, container.Model)))
+                    .Select(x => new NodeSymbolAndModel<InvocationExpressionSyntax, IMethodSymbol>(container.Model, x, container.Model.GetSymbolInfo(x).Symbol as IMethodSymbol)))
                  .Where(x => x.Symbol != null && IsDelegateInvocation(x.Symbol));
 
             var invokedEventSymbols = delegateInvocations
-                .Select(x => new NodeAndModel<ExpressionSyntax>(GetEventExpressionFromInvocation(x.Node, x.Symbol), x.Model))
-                .Select(x => new NodeSymbolAndModel<ExpressionSyntax, IEventSymbol>(x.Node, x.Model.GetSymbolInfo(x.Node).Symbol as IEventSymbol, x.Model))
+                .Select(x => new NodeAndModel<ExpressionSyntax>(x.Model, GetEventExpressionFromInvocation(x.Node, x.Symbol)))
+                .Select(x => new NodeSymbolAndModel<ExpressionSyntax, IEventSymbol>(x.Model, x.Node, x.Model.GetSymbolInfo(x.Node).Symbol as IEventSymbol))
                 .Where(x => x.Symbol != null)
                 .Select(x => x.Symbol.OriginalDefinition);
 
@@ -91,18 +95,18 @@ namespace SonarAnalyzer.CSharp.Rules
                 .SelectMany(container => container.Node.DescendantNodes()
                     .Where(x => x.IsKind(SyntaxKind.Argument))
                     .Cast<ArgumentSyntax>()
-                    .Select(x => new NodeAndModel<SyntaxNode>(x.Expression, container.Model)));
+                    .Select(x => new NodeAndModel<SyntaxNode>(container.Model, x.Expression)));
 
             var equalsValue = removableDeclarationCollector.TypeDeclarations
                 .SelectMany(container => container.Node.DescendantNodes()
                     .OfType<EqualsValueClauseSyntax>()
-                    .Select(x => new NodeAndModel<SyntaxNode>(x.Value, container.Model)));
+                    .Select(x => new NodeAndModel<SyntaxNode>(container.Model, x.Value)));
 
             var assignment = removableDeclarationCollector.TypeDeclarations
                 .SelectMany(container => container.Node.DescendantNodes()
                     .Where(x => x.IsKind(SyntaxKind.SimpleAssignmentExpression))
                     .Cast<AssignmentExpressionSyntax>()
-                    .Select(x => new NodeAndModel<SyntaxNode>(x.Right, container.Model)));
+                    .Select(x => new NodeAndModel<SyntaxNode>(container.Model, x.Right)));
 
             var allNodes = arguments.Concat(equalsValue).Concat(assignment);
 

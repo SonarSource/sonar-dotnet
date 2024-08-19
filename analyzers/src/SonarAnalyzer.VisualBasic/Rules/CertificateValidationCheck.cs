@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class CertificateValidationCheck : CertificateValidationCheckBase<
@@ -30,7 +34,7 @@ namespace SonarAnalyzer.VisualBasic.Rules
         MemberAccessExpressionSyntax>
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
-        protected override HashSet<SyntaxKind> MethodDeclarationKinds { get; } = [ SyntaxKind.FunctionBlock, SyntaxKind.SubBlock ];
+        protected override SyntaxKind[] MethodDeclarationKinds { get; } = { SyntaxKind.FunctionBlock, SyntaxKind.SubBlock };
 
         internal override MethodParameterLookupBase<ArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method) =>
             argumentListNode switch
@@ -80,7 +84,7 @@ namespace SonarAnalyzer.VisualBasic.Rules
             // Return value set by assignment to function variable/value
             var assignments = block.DescendantNodes()
                 .OfType<AssignmentStatementSyntax>()
-                .Where(x => c.Context.Model.GetSymbolInfo(x.Left).Symbol is ILocalSymbol {IsFunctionValue: true});
+                .Where(x => c.Context.SemanticModel.GetSymbolInfo(x.Left).Symbol is ILocalSymbol {IsFunctionValue: true});
             // And normal Return statements and throws
             return block.DescendantNodes().OfType<ReturnStatementSyntax>().Select(x => x.Expression)
                 // Throw statements #2825. x.Expression can be NULL for standalone Throw and we need that one as well.

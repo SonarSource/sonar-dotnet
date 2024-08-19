@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.sonarsource.dotnet</groupId>
     <artifactId>sonar-dotnet</artifactId>
-    <version>10.11-SNAPSHOT</version>
+    <version>9.33-SNAPSHOT</version>
   </parent>
 
   <artifactId>sonar-csharp-plugin</artifactId>
@@ -17,13 +17,33 @@
   <url>http://redirect.sonarsource.com/plugins/csharp.html</url>
   <inceptionYear>2014</inceptionYear>
 
+  <organization>
+    <name>SonarSource</name>
+    <url>http://www.sonarsource.com</url>
+  </organization>
+
   <licenses>
     <license>
-      <name>SSALv1</name>
-      <url>https://sonarsource.com/license/ssal/</url>
+      <name>GNU LGPL 3</name>
+      <url>http://www.gnu.org/licenses/lgpl.txt</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
+
+  <scm>
+    <connection>scm:git:git@github.com:SonarSource/sonar-dotnet.git</connection>
+    <developerConnection>scm:git:git@github.com:SonarSource/sonar-dotnet.git</developerConnection>
+    <url>https://github.com/SonarSource/sonar-dotnet</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <properties>
+    <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
+    <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
+    <documentationDirectory>${project.basedir}/src/main/resources</documentationDirectory>
+    <analyzers.directory>${project.build.directory}/../../analyzers</analyzers.directory>
+    <maven.deploy.skip>false</maven.deploy.skip>
+  </properties>
 
   <dependencies>
     <!-- provided at runtime -->
@@ -45,12 +65,7 @@
     <!-- compiled -->
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>sonar-dotnet-core</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>sonar-csharp-core</artifactId>
+      <artifactId>sonar-dotnet-shared-library</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
@@ -120,7 +135,9 @@
         <includes>
           <include>org/sonar/plugins/csharp/*.json</include>
           <include>org/sonar/plugins/csharp/*.html</include>
-          <include>static/SonarAnalyzer-csharp-${project.version}.zip</include>
+          <include>static/version.txt</include>
+          <include>static/documentation.md</include>
+          <include>static/SonarAnalyzer-${project.version}.zip</include>
         </includes>
       </resource>
     </resources>
@@ -180,8 +197,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <maxsize>5700000</maxsize>
-                  <minsize>5500000</minsize>
+                  <maxsize>5600000</maxsize>
+                  <minsize>5400000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>
@@ -202,29 +219,40 @@
             <configuration>
               <exportAntProperties>true</exportAntProperties>
               <target>
+                <!-- ITs requires the SonarAnalyzer-VERSION.zip to be present so don't remove these lines -->
                 <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp">
-                  <fileset dir="${packaging.directory}/binaries/SonarAnalyzer.CSharp/">
-                    <include name="*.dll"/>
+                  <fileset dir="${analyzers.directory}/packaging/binaries/SonarAnalyzer.CSharp/">
+                    <include name="Google.Protobuf.dll"/>
+                    <include name="SonarAnalyzer.dll"/>
+                    <include name="SonarAnalyzer.CFG.dll"/>
+                    <include name="SonarAnalyzer.ShimLayer.dll"/>
+                    <include name="SonarAnalyzer.CSharp.dll"/>
                   </fileset>
                   <fileset dir="${project.build.directory}/../..">
                     <include name="THIRD-PARTY-NOTICES.txt"/>
                   </fileset>
                 </copy>
-                <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-csharp-${project.version}.zip"
+                <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
                      basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp"/>
                 <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
-                  <fileset dir="${rspec.directory}/cs">
+                  <fileset dir="${analyzers.directory}/rspec/cs">
                     <include name="*.json"/>
                     <include name="*.html"/>
                   </fileset>
                 </copy>
                 <exec executable="dotnet"
                       failonerror="true"
-                      dir="${packaging.directory}/binaries/RuleDescriptorGenerator">
+                      dir="${analyzers.directory}/packaging/binaries/RuleDescriptorGenerator">
                   <arg value="RuleDescriptorGenerator.dll"/>
+                  <arg value="${analyzers.directory}/packaging/binaries/SonarAnalyzer.CSharp/SonarAnalyzer.CSharp.dll"/>
                   <arg value="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp/Rules.json"/>
-                  <arg value="${packaging.directory}/binaries/SonarAnalyzer.CSharp/SonarAnalyzer.CSharp.dll"/>
                 </exec>
+                <copy todir="${sonarAnalyzer.workDirectory}/static">
+                  <fileset dir="${documentationDirectory}">
+                    <include name="documentation.md"/>
+                  </fileset>
+                </copy>
+                <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8"/>
               </target>
             </configuration>
             <goals>

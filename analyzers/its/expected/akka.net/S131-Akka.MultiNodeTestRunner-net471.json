@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027default\u0027 clause to this \u0027switch\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L43",
+      "Location": "Line 43 Position 13-19"
+    }
+  ]
+}

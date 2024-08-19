@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S113",
+      "Message": "Add a new line at the end of the file \u0027S6618.cs\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/Net5/S6618.cs#L12",
+      "Location": "Line 12 Position 1-2"
+    }
+  ]
+}

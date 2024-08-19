@@ -29,19 +29,4 @@ Namespace Tests.TestCases
             }
         End Sub
     End Class
-
-    ' Repro for https://github.com/SonarSource/sonar-dotnet/issues/9667
-    Public Class Sample
-
-        Public First, Second As String
-
-        Public Sub New(First As String)
-            Me.First = First    ' Compliant
-            Second = Second     ' Noncompliant
-            Me.Second = Second  ' False Negative
-            Second = Me.Second  ' False Negative
-        End Sub
-
-    End Class
-
 End Namespace

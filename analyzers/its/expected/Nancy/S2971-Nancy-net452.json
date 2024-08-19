@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S2971",
+      "Message": "Drop \u0027Where\u0027 and move the condition into the \u0027FirstOrDefault\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/NegotiatorExtensions.cs#L259",
+      "Location": "Line 259 Position 38-43"
+    },
+    {
+      "Id": "S2971",
+      "Message": "Drop \u0027Where\u0027 and move the condition into the \u0027FirstOrDefault\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/NegotiatorExtensions.cs#L263",
+      "Location": "Line 263 Position 38-43"
+    },
+    {
+      "Id": "S2971",
+      "Message": "Drop \u0027Where\u0027 and move the condition into the \u0027FirstOrDefault\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ResponseExtensions.cs#L191",
+      "Location": "Line 191 Position 18-23"
+    },
+    {
+      "Id": "S2971",
+      "Message": "Drop \u0027Where\u0027 and move the condition into the \u0027FirstOrDefault\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ResponseExtensions.cs#L195",
+      "Location": "Line 195 Position 18-23"
+    },
+    {
+      "Id": "S2971",
+      "Message": "Use \u0027Count\u0027 property here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Security/Csrf.cs#L212",
+      "Location": "Line 212 Position 29-34"
+    },
+    {
+      "Id": "S2971",
+      "Message": "Drop \u0027Where\u0027 and move the condition into the \u0027FirstOrDefault\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L221",
+      "Location": "Line 221 Position 28-33"
+    },
+    {
+      "Id": "S2971",
+      "Message": "Drop \u0027Where\u0027 and move the condition into the \u0027FirstOrDefault\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L232",
+      "Location": "Line 232 Position 24-29"
+    }
+  ]
+}

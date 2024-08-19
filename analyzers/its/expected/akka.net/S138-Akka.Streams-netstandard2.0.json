@@ -1,0 +1,40 @@
+{
+  "Issues": [
+    {
+      "Id": "S138",
+      "Message": "This constructor \u0027UnzipWithStageLogic\u0027 has 100 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1159",
+      "Location": "Line 1159 Position 20-39"
+    },
+    {
+      "Id": "S138",
+      "Message": "This constructor \u0027UnzipWithStageLogic\u0027 has 86 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L927",
+      "Location": "Line 927 Position 20-39"
+    },
+    {
+      "Id": "S138",
+      "Message": "This constructor \u0027Logic\u0027 has 95 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Retry.cs#L229",
+      "Location": "Line 229 Position 24-29"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027FuseGroup\u0027 has 116 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L153",
+      "Location": "Line 153 Position 36-45"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027Descend\u0027 has 139 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L322",
+      "Location": "Line 322 Position 82-89"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027Validate\u0027 has 99 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L172",
+      "Location": "Line 172 Position 28-36"
+    }
+  ]
+}

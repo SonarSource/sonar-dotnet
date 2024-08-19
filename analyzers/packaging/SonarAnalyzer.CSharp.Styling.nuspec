@@ -2,20 +2,20 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>SonarAnalyzer.CSharp.Styling</id>
-    <version>$Version$</version>
+    <version>9.33.0.0</version>
     <title>Internal Sonar styling analyzer for C#</title>
     <authors>SonarSource</authors>
     <owners>SonarSource</owners>
-    <license type="file">LICENSE.txt</license>
+    <license type="expression">LGPL-3.0-only</license>
     <projectUrl>https://redirect.sonarsource.com/doc/sonar-visualstudio.html</projectUrl>
     <repository type="git" url="https://github.com/SonarSource/sonar-dotnet" />
     <icon>images\sonarsource_64.png</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>Internal Sonar styling analyzer for C#</summary>
     <description>This package contains a set of coding style rules to follow in Sonar code base. Coding style changes as well as breaking changes will appear between minor versions without prior notice. We do not provide support for this package.</description>
-    <releaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/$Version$</releaseNotes>
+    <releaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/9.33.0.0</releaseNotes>
     <language>en-US</language>
-    <copyright>Copyright © 2015-2025 SonarSource SA</copyright>
+    <copyright>Copyright © 2015-2024 SonarSource SA</copyright>
     <developmentDependency>true</developmentDependency>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System" targetFramework="" />
@@ -24,7 +24,6 @@
   <files>
     <file src="binaries\SonarAnalyzer.CSharp.Styling\Internal.SonarAnalyzer.CSharp.Styling.dll" target="analyzers" />
     <file src="logos\sonarsource_64.png" target="images\" />
-    <file src="..\..\THIRD-PARTY-NOTICES.txt"/>
-    <file src="..\..\LICENSE.txt"/>
+    <file src="..\..\THIRD-PARTY-NOTICES.txt" target="license\" />
   </files>
 </package>

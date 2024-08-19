@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4040",
+      "Message": "Change this normalization to \u0027ToUpperInvariant()\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L667",
+      "Location": "Line 667 Position 60-76"
+    }
+  ]
+}

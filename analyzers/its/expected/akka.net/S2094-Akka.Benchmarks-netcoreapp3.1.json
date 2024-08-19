@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L76",
+      "Location": "Line 76 Position 22-43"
+    },
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L77",
+      "Location": "Line 77 Position 22-48"
+    }
+  ]
+}

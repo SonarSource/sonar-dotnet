@@ -12,9 +12,7 @@
     "func": "Constant\/Issue",
     "constantCost": "15min"
   },
-  "tags": [
-    "symbolic-execution"
-  ],
+  "tags": [],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-4158",
   "sqKey": "S4158",

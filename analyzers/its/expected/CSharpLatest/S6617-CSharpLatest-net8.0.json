@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6617",
+      "Message": "Collection-specific \u0022Contains\u0022 method should be used instead of the \u0022Any\u0022 extension.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp11Features/ContainsInsteadOfAny.cs#L6",
+      "Location": "Line 6 Position 14-17"
+    }
+  ]
+}

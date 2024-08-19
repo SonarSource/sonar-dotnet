@@ -1,0 +1,982 @@
+{
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L330",
+      "Location": "Line 330 Position 84-85"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002716\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L331",
+      "Location": "Line 331 Position 76-78"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00271000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L336",
+      "Location": "Line 336 Position 71-75"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00271000000000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L339",
+      "Location": "Line 339 Position 76-86"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00271000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L340",
+      "Location": "Line 340 Position 77-81"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Actors/RequestStrategies.cs#L147",
+      "Location": "Line 147 Position 41-42"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Actors/RequestStrategies.cs#L90",
+      "Location": "Line 90 Position 56-57"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Framing.cs#L101",
+      "Location": "Line 101 Position 105-106"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Framing.cs#L101",
+      "Location": "Line 101 Position 32-33"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Framing.cs#L101",
+      "Location": "Line 101 Position 58-59"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Framing.cs#L64",
+      "Location": "Line 64 Position 50-51"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274095\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L1135",
+      "Location": "Line 1135 Position 30-34"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L1142",
+      "Location": "Line 1142 Position 39-40"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L1145",
+      "Location": "Line 1145 Position 45-46"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L1145",
+      "Location": "Line 1145 Position 62-63"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L1556",
+      "Location": "Line 1556 Position 54-55"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L1556",
+      "Location": "Line 1556 Position 76-77"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L438",
+      "Location": "Line 438 Position 55-56"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L438",
+      "Location": "Line 438 Position 83-84"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027256\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L523",
+      "Location": "Line 523 Position 72-75"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002716\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L67",
+      "Location": "Line 67 Position 76-78"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L717",
+      "Location": "Line 717 Position 75-76"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L383",
+      "Location": "Line 383 Position 49-50"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L415",
+      "Location": "Line 415 Position 93-94"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L767",
+      "Location": "Line 767 Position 49-50"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L823",
+      "Location": "Line 823 Position 93-94"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/StreamRefs.cs#L65",
+      "Location": "Line 65 Position 66-68"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L144",
+      "Location": "Line 144 Position 75-76"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00271000000000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Buffers.cs#L99",
+      "Location": "Line 99 Position 70-80"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L164",
+      "Location": "Line 164 Position 46-47"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L964",
+      "Location": "Line 964 Position 69-70"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L347",
+      "Location": "Line 347 Position 125-126"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L367",
+      "Location": "Line 367 Position 114-115"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L467",
+      "Location": "Line 467 Position 123-124"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L467",
+      "Location": "Line 467 Position 70-71"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L570",
+      "Location": "Line 570 Position 117-118"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L466",
+      "Location": "Line 466 Position 48-50"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002716\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L470",
+      "Location": "Line 470 Position 53-55"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00271000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L3237",
+      "Location": "Line 3237 Position 138-142"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002710\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L3237",
+      "Location": "Line 3237 Position 145-147"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002710\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L3255",
+      "Location": "Line 3255 Position 36-38"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L263",
+      "Location": "Line 263 Position 86-87"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027255\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L389",
+      "Location": "Line 389 Position 48-52"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002763\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L235",
+      "Location": "Line 235 Position 48-50"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L251",
+      "Location": "Line 251 Position 92-93"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2390",
+      "Location": "Line 2390 Position 63-64"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2431",
+      "Location": "Line 2431 Position 96-97"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2432",
+      "Location": "Line 2432 Position 73-74"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2437",
+      "Location": "Line 2437 Position 103-104"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L36",
+      "Location": "Line 36 Position 113-114"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00278\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L36",
+      "Location": "Line 36 Position 61-62"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027100\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L36",
+      "Location": "Line 36 Position 64-67"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L115",
+      "Location": "Line 115 Position 20-22"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L131",
+      "Location": "Line 131 Position 31-33"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L132",
+      "Location": "Line 132 Position 31-33"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00278\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L133",
+      "Location": "Line 133 Position 31-33"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002716\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L134",
+      "Location": "Line 134 Position 31-33"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027130329821\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L141",
+      "Location": "Line 141 Position 40-51"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002727\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L141",
+      "Location": "Line 141 Position 56-58"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L158",
+      "Location": "Line 158 Position 47-48"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L159",
+      "Location": "Line 159 Position 42-43"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002724\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L159",
+      "Location": "Line 159 Position 61-63"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L178",
+      "Location": "Line 178 Position 47-48"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L179",
+      "Location": "Line 179 Position 42-43"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002756\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L179",
+      "Location": "Line 179 Position 61-63"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L203",
+      "Location": "Line 203 Position 24-26"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027125613361\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L210",
+      "Location": "Line 210 Position 62-73"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002727\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L210",
+      "Location": "Line 210 Position 78-80"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L233",
+      "Location": "Line 233 Position 24-26"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L233",
+      "Location": "Line 233 Position 63-65"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L248",
+      "Location": "Line 248 Position 47-49"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002764\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L260",
+      "Location": "Line 260 Position 47-49"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L272",
+      "Location": "Line 272 Position 47-49"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002764\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L284",
+      "Location": "Line 284 Position 47-49"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L30",
+      "Location": "Line 30 Position 81-83"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002728\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L32",
+      "Location": "Line 32 Position 21-23"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L32",
+      "Location": "Line 32 Position 25-27"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002729\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L32",
+      "Location": "Line 32 Position 29-31"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002714\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L32",
+      "Location": "Line 32 Position 33-35"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002724\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L32",
+      "Location": "Line 32 Position 37-39"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L32",
+      "Location": "Line 32 Position 41-43"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002730\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L33",
+      "Location": "Line 33 Position 13-15"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002722\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L33",
+      "Location": "Line 33 Position 17-19"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002720\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L33",
+      "Location": "Line 33 Position 21-23"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002715\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L33",
+      "Location": "Line 33 Position 25-27"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002725\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L33",
+      "Location": "Line 33 Position 29-31"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002717\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L33",
+      "Location": "Line 33 Position 33-35"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L33",
+      "Location": "Line 33 Position 37-39"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00278\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L33",
+      "Location": "Line 33 Position 41-43"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002731\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L34",
+      "Location": "Line 34 Position 13-15"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002727\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L34",
+      "Location": "Line 34 Position 17-19"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002713\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L34",
+      "Location": "Line 34 Position 21-23"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002723\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L34",
+      "Location": "Line 34 Position 25-27"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002721\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L34",
+      "Location": "Line 34 Position 29-31"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002719\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L34",
+      "Location": "Line 34 Position 33-35"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002716\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L34",
+      "Location": "Line 34 Position 37-39"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00277\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L34",
+      "Location": "Line 34 Position 41-43"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002726\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L35",
+      "Location": "Line 35 Position 13-15"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002712\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L35",
+      "Location": "Line 35 Position 17-19"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002718\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L35",
+      "Location": "Line 35 Position 21-23"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00276\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L35",
+      "Location": "Line 35 Position 25-27"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002711\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L35",
+      "Location": "Line 35 Position 29-31"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L35",
+      "Location": "Line 35 Position 33-35"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002710\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L35",
+      "Location": "Line 35 Position 37-39"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00279\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L35",
+      "Location": "Line 35 Position 41-43"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L38",
+      "Location": "Line 38 Position 68-70"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00279\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L40",
+      "Location": "Line 40 Position 17-19"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002710\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L40",
+      "Location": "Line 40 Position 25-27"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002713\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L40",
+      "Location": "Line 40 Position 29-31"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002721\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L40",
+      "Location": "Line 40 Position 33-35"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L40",
+      "Location": "Line 40 Position 37-39"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002729\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L40",
+      "Location": "Line 40 Position 41-43"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002711\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L41",
+      "Location": "Line 41 Position 13-15"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002714\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L41",
+      "Location": "Line 41 Position 17-19"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002716\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L41",
+      "Location": "Line 41 Position 21-23"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002718\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L41",
+      "Location": "Line 41 Position 25-27"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002722\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L41",
+      "Location": "Line 41 Position 29-31"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002725\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L41",
+      "Location": "Line 41 Position 33-35"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L41",
+      "Location": "Line 41 Position 37-39"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002730\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L41",
+      "Location": "Line 41 Position 41-43"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00278\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L42",
+      "Location": "Line 42 Position 13-15"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002712\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L42",
+      "Location": "Line 42 Position 17-19"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002720\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L42",
+      "Location": "Line 42 Position 21-23"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002728\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L42",
+      "Location": "Line 42 Position 25-27"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002715\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L42",
+      "Location": "Line 42 Position 29-31"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002717\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L42",
+      "Location": "Line 42 Position 33-35"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002724\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L42",
+      "Location": "Line 42 Position 37-39"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00277\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L42",
+      "Location": "Line 42 Position 41-43"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002719\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L43",
+      "Location": "Line 43 Position 13-15"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002727\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L43",
+      "Location": "Line 43 Position 17-19"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002723\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L43",
+      "Location": "Line 43 Position 21-23"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00276\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L43",
+      "Location": "Line 43 Position 25-27"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002726\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L43",
+      "Location": "Line 43 Position 29-31"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L43",
+      "Location": "Line 43 Position 33-35"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L43",
+      "Location": "Line 43 Position 37-39"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002731\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L43",
+      "Location": "Line 43 Position 41-43"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L56",
+      "Location": "Line 56 Position 24-26"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002731\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L58",
+      "Location": "Line 58 Position 20-22"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L72",
+      "Location": "Line 72 Position 24-26"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L24",
+      "Location": "Line 24 Position 24-25"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L25",
+      "Location": "Line 25 Position 24-25"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00278\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L26",
+      "Location": "Line 26 Position 24-25"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002716\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L27",
+      "Location": "Line 27 Position 24-26"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00271431655765\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L29",
+      "Location": "Line 29 Position 29-39"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L30",
+      "Location": "Line 30 Position 24-25"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027858993459\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L30",
+      "Location": "Line 30 Position 29-39"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027858993459\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L30",
+      "Location": "Line 30 Position 48-58"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L31",
+      "Location": "Line 31 Position 24-25"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027252645135\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L31",
+      "Location": "Line 31 Position 34-44"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00278\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L32",
+      "Location": "Line 32 Position 23-24"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002716\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L33",
+      "Location": "Line 33 Position 23-25"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002763\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L34",
+      "Location": "Line 34 Position 21-31"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00278\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L36",
+      "Location": "Line 36 Position 33-34"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L47",
+      "Location": "Line 47 Position 24-26"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00271431655765\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L50",
+      "Location": "Line 50 Position 30-40"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L51",
+      "Location": "Line 51 Position 25-26"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027858993459\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L51",
+      "Location": "Line 51 Position 30-40"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027858993459\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L51",
+      "Location": "Line 51 Position 49-59"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L52",
+      "Location": "Line 52 Position 25-26"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027252645135\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L52",
+      "Location": "Line 52 Position 35-45"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00278\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L53",
+      "Location": "Line 53 Position 24-25"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002716\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L54",
+      "Location": "Line 54 Position 24-26"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002763\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/Int32Extensions.cs#L55",
+      "Location": "Line 55 Position 25-35"
+    }
+  ]
+}

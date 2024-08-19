@@ -1,0 +1,64 @@
+{
+  "Issues": [
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp11Features/WarningWave7.cs#L5",
+      "Location": "Line 5 Position 18-31"
+    },
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/ModuleInitializers.cs#L3",
+      "Location": "Line 3 Position 14-32"
+    },
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/ParameterValidation.cs#L3",
+      "Location": "Line 3 Position 14-33"
+    },
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty record, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/Records.cs#L109",
+      "Location": "Line 109 Position 15-16"
+    },
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty record, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S2219.cs#L5",
+      "Location": "Line 5 Position 12-17"
+    },
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty record, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S2219.cs#L6",
+      "Location": "Line 6 Position 19-24"
+    },
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3240.cs#L5",
+      "Location": "Line 5 Position 20-25"
+    },
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3247.cs#L8",
+      "Location": "Line 8 Position 11-20"
+    },
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3453.cs#L22",
+      "Location": "Line 22 Position 22-30"
+    },
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/StaticLambdas.cs#L3",
+      "Location": "Line 3 Position 14-27"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private method \u0027Delegate\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/DelegatingSupervisorStrategy.cs#L48",
+      "Location": "Line 48 Position 36-44"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private class \u0027QueueWithAddFirst\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/Internal/BlockingQueue.cs#L145",
+      "Location": "Line 145 Position 23-40"
+    }
+  ]
+}

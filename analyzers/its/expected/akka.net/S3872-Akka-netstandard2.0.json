@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S3872",
+      "Message": "Rename the parameter \u0027key\u0027 so that it does not duplicate the method name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconToken.cs#L131",
+      "Location": "Line 131 Position 40-43"
+    },
+    {
+      "Id": "S3872",
+      "Message": "Rename the parameter \u0027format\u0027 so that it does not duplicate the method name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/DefaultLogMessageFormatter.cs#L21",
+      "Location": "Line 21 Position 37-43"
+    },
+    {
+      "Id": "S3872",
+      "Message": "Rename the parameter \u0027format\u0027 so that it does not duplicate the method name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/ILogMessageFormatter.cs#L21",
+      "Location": "Line 21 Position 30-36"
+    }
+  ]
+}

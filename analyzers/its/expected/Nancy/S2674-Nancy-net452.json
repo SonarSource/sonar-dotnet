@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2674",
+      "Message": "Check the return value of the \u0027Read\u0027 call to see how many bytes were read.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L64",
+      "Location": "Line 64 Position 13-71"
+    }
+  ]
+}

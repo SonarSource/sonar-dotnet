@@ -1,0 +1,13 @@
+﻿@namespace BlazorSample.Pages.S6800
+
+@page "/S6800/{Unmatched:int}"
+@page "/S6800/{Matched:datetime}"
+<h3>S6800</h3>
+
+@code {
+    [Parameter]
+    public string Unmatched { get; set; }
+
+    [Parameter]
+    public DateTime Matched { get; set; }
+}

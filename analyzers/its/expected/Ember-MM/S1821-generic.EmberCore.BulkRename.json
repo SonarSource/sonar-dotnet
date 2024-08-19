@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1821",
+      "Message": "Refactor the code to eliminate this nested \u0027Select Case\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L108",
+      "Location": "Line 108 Position 21-59"
+    }
+  ]
+}

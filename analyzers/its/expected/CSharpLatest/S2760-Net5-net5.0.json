@@ -1,0 +1,82 @@
+{
+  "Issues": [
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 99.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L100",
+      "Location": "Line 100 Position 9-14"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 100.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L101",
+      "Location": "Line 101 Position 9-14"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 101.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L102",
+      "Location": "Line 102 Position 9-14"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 102.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L103",
+      "Location": "Line 103 Position 9-14"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 103.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L104",
+      "Location": "Line 104 Position 9-14"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 104.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L105",
+      "Location": "Line 105 Position 9-14"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 105.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L106",
+      "Location": "Line 106 Position 9-14"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 106.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L107",
+      "Location": "Line 107 Position 9-14"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 107.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L108",
+      "Location": "Line 108 Position 9-14"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 108.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L109",
+      "Location": "Line 109 Position 9-14"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 17.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L18",
+      "Location": "Line 18 Position 5-11"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 19.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L24",
+      "Location": "Line 24 Position 9-10"
+    },
+    {
+      "Id": "S2760",
+      "Message": "This condition was just checked on line 98.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L99",
+      "Location": "Line 99 Position 9-14"
+    }
+  ]
+}

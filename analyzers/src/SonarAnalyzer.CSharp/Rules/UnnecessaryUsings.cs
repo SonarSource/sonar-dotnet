@@ -1,22 +1,27 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using System.IO;
+using SonarAnalyzer.Common.Walkers;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class UnnecessaryUsings : SonarDiagnosticAnalyzer
@@ -60,7 +65,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private static void VisitContent(ISafeSyntaxWalker visitor, SyntaxList<MemberDeclarationSyntax> members, IEnumerable<SyntaxTrivia> trivias)
         {
-            var comments = trivias.Where(x => x.Kind() is SyntaxKind.SingleLineDocumentationCommentTrivia or SyntaxKind.MultiLineDocumentationCommentTrivia);
+            var comments = trivias.Where(trivia => trivia.IsAnyKind(SyntaxKind.SingleLineDocumentationCommentTrivia, SyntaxKind.MultiLineDocumentationCommentTrivia));
 
             foreach (var member in members)
             {
@@ -86,7 +91,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 {
                     continue;
                 }
-                if (context.Model.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol
+                if (context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol
                     && !necessaryNamespaces.Any(usedNamespace => usedNamespace.IsSameNamespace(namespaceSymbol)))
                 {
                     context.ReportIssue(Rule, usingDirective);
@@ -121,7 +126,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 {
                     foreach (var addExpression in node.Expressions)
                     {
-                        VisitSymbol(context.Model.GetCollectionInitializerSymbolInfo(addExpression).Symbol);
+                        VisitSymbol(context.SemanticModel.GetCollectionInitializerSymbolInfo(addExpression).Symbol);
                     }
                 }
                 base.VisitInitializerExpression(node);
@@ -138,7 +143,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
             public override void VisitAwaitExpression(AwaitExpressionSyntax node)
             {
-                VisitSymbol(context.Model.GetAwaitExpressionInfo(node).GetAwaiterMethod);
+                VisitSymbol(context.SemanticModel.GetAwaitExpressionInfo(node).GetAwaiterMethod);
                 base.VisitAwaitExpression(node);
             }
 
@@ -178,7 +183,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 newUsingDirectives.UnionWith(simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)));
 
                 // We visit the namespace declaration with the updated set of parent 'usings', this is needed in case of nested namespaces
-                var visitingNamespace = context.Model.GetSymbolInfo(name).Symbol as INamespaceSymbol;
+                var visitingNamespace = context.SemanticModel.GetSymbolInfo(name).Symbol as INamespaceSymbol;
                 var visitor = new CSharpRemovableUsingWalker(context, newUsingDirectives.ToImmutableHashSet(), visitingNamespace);
 
                 VisitContent(visitor, members, node.DescendantTrivia());
@@ -191,7 +196,7 @@ namespace SonarAnalyzer.CSharp.Rules
             {
                 foreach (var usingDirective in usingDirectivesFromParent)
                 {
-                    if (context.Model.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol
+                    if (context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol
                         && namespaceSymbol.ToDisplayString() == "System.Linq")
                     {
                         systemLinqNamespace = namespaceSymbol;
@@ -208,7 +213,7 @@ namespace SonarAnalyzer.CSharp.Rules
             /// importing that namespace is indeed necessary.
             /// </summary>
             private void VisitNameNode(ExpressionSyntax node) =>
-                VisitSymbol(context.Model.GetSymbolInfo(node).Symbol);
+                VisitSymbol(context.SemanticModel.GetSymbolInfo(node).Symbol);
 
             private void VisitSymbol(ISymbol symbol)
             {

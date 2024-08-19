@@ -1,0 +1,58 @@
+{
+  "Issues": [
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027dataExample\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L195",
+      "Location": "Line 195 Position 28-39"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027intExample\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L196",
+      "Location": "Line 196 Position 21-31"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027stringExample\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L197",
+      "Location": "Line 197 Position 24-37"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027_actorSystem\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Dispatch/MailboxMemoryFootprintSpec.cs#L23",
+      "Location": "Line 23 Position 29-41"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027stringExample\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Event/EventStreamThroughputSpec.cs#L38",
+      "Location": "Line 38 Position 24-37"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027_bytes\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/IO/TcpHorizontalScaleSpec.cs#L129",
+      "Location": "Line 129 Position 24-30"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027resetEvent\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/IO/TcpInboundOnlySpec.cs#L72",
+      "Location": "Line 72 Position 38-48"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027cancel\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/IO/TcpInboundOnlySpec.cs#L73",
+      "Location": "Line 73 Position 41-47"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027resetEvent\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/IO/TcpSingleConnectionSpec.cs#L132",
+      "Location": "Line 132 Position 38-48"
+    }
+  ]
+}

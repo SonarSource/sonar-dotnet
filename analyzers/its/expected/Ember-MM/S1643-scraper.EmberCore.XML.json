@@ -1,0 +1,64 @@
+{
+  "Issues": [
+    {
+      "Id": "S1643",
+      "Message": "Use a StringBuilder instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L587",
+      "Location": "Line 587 Position 21-53"
+    },
+    {
+      "Id": "S1643",
+      "Message": "Use a StringBuilder instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L588",
+      "Location": "Line 588 Position 21-67"
+    },
+    {
+      "Id": "S1643",
+      "Message": "Use a StringBuilder instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L126",
+      "Location": "Line 126 Position 25-68"
+    },
+    {
+      "Id": "S1643",
+      "Message": "Use a StringBuilder instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L213",
+      "Location": "Line 213 Position 25-49"
+    },
+    {
+      "Id": "S1643",
+      "Message": "Use a StringBuilder instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L214",
+      "Location": "Line 214 Position 25-68"
+    },
+    {
+      "Id": "S1643",
+      "Message": "Use a StringBuilder instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunctionContainer.vb#L212",
+      "Location": "Line 212 Position 21-46"
+    },
+    {
+      "Id": "S1643",
+      "Message": "Use a StringBuilder instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L625",
+      "Location": "Line 625 Position 25-68"
+    },
+    {
+      "Id": "S1643",
+      "Message": "Use a StringBuilder instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L238",
+      "Location": "Line 238 Position 29-51"
+    },
+    {
+      "Id": "S1643",
+      "Message": "Use a StringBuilder instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L432",
+      "Location": "Line 432 Position 29-51"
+    },
+    {
+      "Id": "S1643",
+      "Message": "Use a StringBuilder instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Util.vb#L120",
+      "Location": "Line 120 Position 41-68"
+    }
+  ]
+}

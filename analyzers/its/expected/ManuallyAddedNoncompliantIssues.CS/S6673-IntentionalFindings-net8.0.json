@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6673",
+      "Message": "Template placeholders should be in the right order: placeholder \u0027First\u0027 does not match with argument \u0027second\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6673.cs#L9",
+      "Location": "Line 9 Position 42-47"
+    }
+  ]
+}

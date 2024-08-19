@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027Close_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L472",
+      "Location": "Line 472 Position 17-35"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027Reset_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L710",
+      "Location": "Line 710 Position 17-35"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027Save_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L744",
+      "Location": "Line 744 Position 17-34"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027Search_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L762",
+      "Location": "Line 762 Position 17-36"
+    }
+  ]
+}

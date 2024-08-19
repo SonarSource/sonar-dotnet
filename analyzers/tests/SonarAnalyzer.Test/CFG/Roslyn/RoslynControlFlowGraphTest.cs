@@ -1,26 +1,30 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using Microsoft.CodeAnalysis.Operations;
-using SonarAnalyzer.CFG.Common;
-using SonarAnalyzer.CFG.Extensions;
+using SonarAnalyzer.CFG.Helpers;
+using SonarAnalyzer.CFG.Roslyn;
 using StyleCop.Analyzers.Lightup;
 using FlowAnalysis = Microsoft.CodeAnalysis.FlowAnalysis;
 
-namespace SonarAnalyzer.CFG.Roslyn.Test;
+namespace SonarAnalyzer.Test.CFG.Roslyn;
 
 [TestClass]
 public class RoslynControlFlowGraphTest
@@ -41,7 +45,7 @@ public class RoslynControlFlowGraphTest
                 }
             }
             """;
-        TestCompiler.CompileCfgCS(code).Should().NotBeNull();
+        TestHelper.CompileCfgCS(code).Should().NotBeNull();
     }
 
     [TestMethod]
@@ -54,7 +58,7 @@ public class RoslynControlFlowGraphTest
             void MethodA() { }
             void MethodB() { }
             """;
-        TestCompiler.CompileCfg(code, AnalyzerLanguage.CSharp, outputKind: OutputKind.ConsoleApplication).Should().NotBeNull();
+        TestHelper.CompileCfg(code, AnalyzerLanguage.CSharp, outputKind: OutputKind.ConsoleApplication).Should().NotBeNull();
     }
 
     [TestMethod]
@@ -67,7 +71,7 @@ public class RoslynControlFlowGraphTest
                 End Function
             End Class
             """;
-        TestCompiler.CompileCfg(code, AnalyzerLanguage.VisualBasic).Should().NotBeNull();
+        TestHelper.CompileCfg(code, AnalyzerLanguage.VisualBasic).Should().NotBeNull();
     }
 
     [TestMethod]
@@ -85,7 +89,7 @@ public class RoslynControlFlowGraphTest
                 }
             }
             """;
-        var cfg = TestCompiler.CompileCfgCS(code);
+        var cfg = TestHelper.CompileCfgCS(code);
         cfg.Should().NotBeNull();
         cfg.Root.Should().NotBeNull();
         cfg.Blocks.Should().NotBeNull().And.HaveCount(3); // Enter, Instructions, Exit
@@ -97,7 +101,7 @@ public class RoslynControlFlowGraphTest
         localFunctionCfg.Should().NotBeNull();
         localFunctionCfg.Parent.Should().Be(cfg);
 
-        var anonymousFunction = cfg.Blocks.SelectMany(x => x.Operations).SelectMany(OperationExtensions.DescendantsAndSelf).OfType<FlowAnalysis.IFlowAnonymousFunctionOperation>().Single();
+        var anonymousFunction = cfg.Blocks.SelectMany(x => x.Operations).SelectMany(x => x.DescendantsAndSelf()).OfType<FlowAnalysis.IFlowAnonymousFunctionOperation>().Single();
         cfg.GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper.FromOperation(anonymousFunction), default).Should().NotBeNull();
     }
 
@@ -117,8 +121,8 @@ public class RoslynControlFlowGraphTest
                 }
             }
             """;
-        var cfg = TestCompiler.CompileCfgCS(code);
-        var anonymousFunctionOperations = ControlFlowGraphExtensions.FlowAnonymousFunctionOperations(cfg).ToList();
+        var cfg = TestHelper.CompileCfgCS(code);
+        var anonymousFunctionOperations = SonarAnalyzer.Extensions.ControlFlowGraphExtensions.FlowAnonymousFunctionOperations(cfg).ToList();
         anonymousFunctionOperations.Should().HaveCount(2);
         cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunctionOperations[0], default).Should().NotBeNull();
         cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunctionOperations[1], default).Should().NotBeNull();
@@ -128,10 +132,10 @@ public class RoslynControlFlowGraphTest
     public void RoslynCfgSupportedVersions()
     {
         // We are running on 3 rd major version - it is the minimum requirement
-        RoslynVersion.IsRoslynCfgSupported().Should().BeTrue();
+        RoslynHelper.IsRoslynCfgSupported().Should().BeTrue();
         // If we set minimum requirement to 2 - we will able to pass the check even with old MsBuild
-        RoslynVersion.IsRoslynCfgSupported(2).Should().BeTrue();
+        RoslynHelper.IsRoslynCfgSupported(2).Should().BeTrue();
         // If we set minimum requirement to 100 - we won't be able to pass the check
-        RoslynVersion.IsRoslynCfgSupported(100).Should().BeFalse();
+        RoslynHelper.IsRoslynCfgSupported(100).Should().BeFalse();
     }
 }

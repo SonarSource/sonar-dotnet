@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetTestActorCell\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/Internal/InternalTestActorRef.cs#L70",
+      "Location": "Line 70 Position 33-49"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetAll\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/Internal/ITestActorQueue.cs#L39",
+      "Location": "Line 39 Position 24-30"
+    }
+  ]
+}

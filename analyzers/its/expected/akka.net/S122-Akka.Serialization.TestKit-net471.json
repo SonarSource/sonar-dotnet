@@ -1,0 +1,70 @@
+{
+  "Issues": [
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessage.cs#L29",
+      "Location": "Line 29 Position 13-58"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessage.cs#L30",
+      "Location": "Line 30 Position 13-57"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessage.cs#L31",
+      "Location": "Line 31 Position 13-58"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessageWithPrivateCtor.cs#L28",
+      "Location": "Line 28 Position 13-58"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessageWithPrivateCtor.cs#L29",
+      "Location": "Line 29 Position 13-57"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessageWithPrivateCtor.cs#L30",
+      "Location": "Line 30 Position 13-58"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/UntypedContainerMessage.cs#L16",
+      "Location": "Line 16 Position 13-60"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/UntypedContainerMessage.cs#L17",
+      "Location": "Line 17 Position 13-59"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/UntypedContainerMessage.cs#L23",
+      "Location": "Line 23 Position 13-58"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/UntypedContainerMessage.cs#L24",
+      "Location": "Line 24 Position 13-57"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/UntypedContainerMessage.cs#L25",
+      "Location": "Line 25 Position 13-63"
+    }
+  ]
+}

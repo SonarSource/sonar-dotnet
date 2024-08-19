@@ -1,23 +1,28 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using Microsoft.CodeAnalysis.VisualBasic;
+using SonarAnalyzer.TestFramework.Analyzers;
 using SonarAnalyzer.TestFramework.Verification;
-using CS = SonarAnalyzer.CSharp.Rules;
-using VB = SonarAnalyzer.VisualBasic.Rules;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.Test.TestFramework.Tests.Verification;
 
@@ -247,8 +252,7 @@ public class DiagnosticVerifierTest
         new VerifierBuilder<DummyAnalyzerVB>().AddSnippet("Public Class UnexpectedBuildError")
             .WithConcurrentAnalysis(false)
             .Invoking(x => x.Verify())
-            .Should().Throw<DiagnosticVerifierException>()
-            .Which.Message.Should().ContainIgnoringLineEndings("""
+            .Should().Throw<DiagnosticVerifierException>().Which.Message.Should().ContainIgnoringLineEndings("""
                 There are differences for VisualBasic12 snippet0.vb:
                   Line 1: Unexpected error, use ' Error [BC30481] 'Class' statement must end with a matching 'End Class'.
                 """);
@@ -322,8 +326,7 @@ public class DiagnosticVerifierTest
             .AddPaths("ExpectedIssuesNotRaised.cs", "ExpectedIssuesNotRaised2.cs")
             .WithConcurrentAnalysis(false)
             .Invoking(x => x.Verify())
-            .Should().Throw<DiagnosticVerifierException>()
-            .WithMessage("""
+            .Should().Throw<DiagnosticVerifierException>().WithMessage("""
                 There are differences for CSharp7 DiagnosticsVerifier\ExpectedIssuesNotRaised.cs:
                   Line 3: Missing expected issue ID MyId0
                   Line 5: Missing expected issue
@@ -342,12 +345,10 @@ public class DiagnosticVerifierTest
             .AddProject(AnalyzerLanguage.VisualBasic)
             .AddSnippet("' Noncompliant ^1#0 {{This is not the correct message.}}");
         var compilation = project.GetCompilation(null, new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionExplicit: false));
-        ((Action)(() => DiagnosticVerifier.Verify(compilation, [new VB.OptionExplicitOn()], CompilationErrorBehavior.Default, null, [], [])))
-            .Should().Throw<DiagnosticVerifierException>()
-            .WithMessage("""
-                There are differences for VisualBasic16_9 <project-level-issue>:
-                  Line 1: The expected message 'This is not the correct message.' does not match the actual message 'Configure 'Option Explicit On' for assembly 'project0'.' Rule S6146
-                """);
+        ((Action)(() => DiagnosticVerifier.Verify(compilation, new VB.OptionExplicitOn()))).Should().Throw<DiagnosticVerifierException>().WithMessage("""
+            There are differences for VisualBasic16_9 <project-level-issue>:
+              Line 1: The expected message 'This is not the correct message.' does not match the actual message 'Configure 'Option Explicit On' for assembly 'project0'.' Rule S6146
+            """);
     }
 
     [TestMethod]
@@ -357,15 +358,13 @@ public class DiagnosticVerifierTest
             .AddProject(AnalyzerLanguage.VisualBasic)
             .AddSnippet("' Noncompliant@+1 {{This is expected on a wrong line.}}");
         var compilation = project.GetCompilation(null, new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionExplicit: false));
-        ((Action)(() => DiagnosticVerifier.Verify(compilation, [new VB.OptionExplicitOn()], CompilationErrorBehavior.Default, null, [], [])))
-            .Should().Throw<DiagnosticVerifierException>()
-            .WithMessage("""
-                There are differences for VisualBasic16_9 <project-level-issue>:
-                  Line 1: Unexpected issue 'Configure 'Option Explicit On' for assembly 'project0'.' Rule S6146
+        ((Action)(() => DiagnosticVerifier.Verify(compilation, new VB.OptionExplicitOn()))).Should().Throw<DiagnosticVerifierException>().WithMessage("""
+            There are differences for VisualBasic16_9 <project-level-issue>:
+              Line 1: Unexpected issue 'Configure 'Option Explicit On' for assembly 'project0'.' Rule S6146
 
-                There are differences for VisualBasic16_9 snippet0.vb:
-                  Line 2: Missing expected issue 'This is expected on a wrong line.'
-                """);
+            There are differences for VisualBasic16_9 snippet0.vb:
+              Line 2: Missing expected issue 'This is expected on a wrong line.'
+            """);
     }
 
     [DataTestMethod]
@@ -378,7 +377,7 @@ public class DiagnosticVerifierTest
             .AddSnippet("' Noncompliant ^1#0 {{Configure 'Option Explicit On' for assembly 'project0'.}}", projectLevelIssueFile)
             .AddSnippet("Option Explicit Off ' Noncompliant ^1#19 {{Change this to 'Option Explicit On'.}}", fileLevelIssueFile);
         var compilation = project.GetCompilation(null, new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionExplicit: false));
-        ((Action)(() => DiagnosticVerifier.Verify(compilation, [new VB.OptionExplicitOn()], CompilationErrorBehavior.Default, null, [], []))).Should().NotThrow();
+        ((Action)(() => DiagnosticVerifier.Verify(compilation, new VB.OptionExplicitOn()))).Should().NotThrow();
     }
 
     [TestMethod]
@@ -387,12 +386,12 @@ public class DiagnosticVerifierTest
         var project = SolutionBuilder.Create()
             .AddProject(AnalyzerLanguage.VisualBasic)
             .AddSnippet("""
-                ' Noncompliant ^1#0 {{Configure 'Option Explicit On' for assembly 'project0'.}}
-                ' Noncompliant@-1 ^1#0 {{Configure 'Option Strict On' for assembly 'project0'.}}
-                """);
+            ' Noncompliant ^1#0 {{Configure 'Option Explicit On' for assembly 'project0'.}}
+            ' Noncompliant@-1 ^1#0 {{Configure 'Option Strict On' for assembly 'project0'.}}
+            """);
         var compilation = project.GetCompilation(null, new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionExplicit: false, optionStrict: OptionStrict.Off));
         var analyzers = new DiagnosticAnalyzer[] { new VB.OptionExplicitOn(), new VB.OptionStrictOn() };
-        ((Action)(() => DiagnosticVerifier.Verify(compilation, analyzers, CompilationErrorBehavior.Default, null, [], [], true))).Should().NotThrow();
+        ((Action)(() => DiagnosticVerifier.Verify(compilation, analyzers, CompilationErrorBehavior.Default))).Should().NotThrow();
     }
 
     [TestMethod]
@@ -424,6 +423,5 @@ public class DiagnosticVerifierTest
         builder.AddSnippet(snippet)
             .WithConcurrentAnalysis(false)
             .Invoking(x => x.Verify())
-            .Should().Throw<AssertFailedException>()
-            .Which.Message.Should().ContainIgnoringLineEndings(expectedMessage);
+            .Should().Throw<AssertFailedException>().Which.Message.Should().ContainIgnoringLineEndings(expectedMessage);
 }

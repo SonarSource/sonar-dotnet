@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/examples/Chat/ChatServer/Program.cs#L57",
+      "Location": "Line 57 Position 17-78"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/examples/Chat/ChatServer/Program.cs#L77",
+      "Location": "Line 77 Position 17-78"
+    }
+  ]
+}

@@ -1,0 +1,250 @@
+{
+  "Issues": [
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 214 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L30",
+      "Location": "Line 30 Position 2-261"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 48 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L658",
+      "Location": "Line 658 Position 2-85"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 23 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L813",
+      "Location": "Line 813 Position 2-160"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 15 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L864",
+      "Location": "Line 864 Position 2-143"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 185 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L138",
+      "Location": "Line 138 Position 9-265"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 24 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L635",
+      "Location": "Line 635 Position 9-209"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 16 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L840",
+      "Location": "Line 840 Position 9-83"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 11 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L930",
+      "Location": "Line 930 Position 9-73"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 20 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L144",
+      "Location": "Line 144 Position 5-33"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 18 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L127",
+      "Location": "Line 127 Position 9-70"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 16 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L68",
+      "Location": "Line 68 Position 9-119"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 28 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L90",
+      "Location": "Line 90 Position 5-158"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 35 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L133",
+      "Location": "Line 133 Position 9-117"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 19 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L296",
+      "Location": "Line 296 Position 5-76"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 14 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1042",
+      "Location": "Line 1042 Position 5-77"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 22 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1169",
+      "Location": "Line 1169 Position 5-53"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L204",
+      "Location": "Line 204 Position 5-31"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 23 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L359",
+      "Location": "Line 359 Position 5-142"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 24 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L619",
+      "Location": "Line 619 Position 5-28"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 16 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L706",
+      "Location": "Line 706 Position 5-29"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 32 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L887",
+      "Location": "Line 887 Position 5-116"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L65",
+      "Location": "Line 65 Position 5-60"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 51 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L308",
+      "Location": "Line 308 Position 5-185"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 28 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L540",
+      "Location": "Line 540 Position 5-220"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 149 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1051",
+      "Location": "Line 1051 Position 9-99"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 17 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L240",
+      "Location": "Line 240 Position 9-118"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 57 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L300",
+      "Location": "Line 300 Position 9-128"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 18 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L427",
+      "Location": "Line 427 Position 9-86"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 24 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L572",
+      "Location": "Line 572 Position 9-71"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 17 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L664",
+      "Location": "Line 664 Position 9-76"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 33 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L811",
+      "Location": "Line 811 Position 9-36"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 32 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L957",
+      "Location": "Line 957 Position 9-104"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 24 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L313",
+      "Location": "Line 313 Position 5-127"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 17 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L75",
+      "Location": "Line 75 Position 5-116"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 50 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1077",
+      "Location": "Line 1077 Position 5-144"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 19 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L376",
+      "Location": "Line 376 Position 5-31"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 35 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L436",
+      "Location": "Line 436 Position 5-134"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 100 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L60",
+      "Location": "Line 60 Position 5-45"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 47 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L707",
+      "Location": "Line 707 Position 5-52"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 16 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L892",
+      "Location": "Line 892 Position 5-31"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 14 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L937",
+      "Location": "Line 937 Position 5-76"
+    }
+  ]
+}

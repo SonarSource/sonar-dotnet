@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 56 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Cluster.cs#L54",
+      "Location": "Line 54 Position 18-25"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 75 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L983",
+      "Location": "Line 983 Position 20-37"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 47 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L75",
+      "Location": "Line 75 Position 29-51"
+    },
+    {
+      "Id": "S1200",
+      "Message": "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 68 to the maximum authorized 30 or less.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L28",
+      "Location": "Line 28 Position 18-42"
+    }
+  ]
+}

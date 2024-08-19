@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- We need to manually mark this project as TEST. See analyzers\its\Directory.Build.targets for details.-->
+    <SonarQubeTestProject>true</SonarQubeTestProject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp2.0;net452</TargetFrameworks>
+    <CodeAnalysisRuleSet>..\..\..\..\ValidationRuleset.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="Content\**\*;Views\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
+    <ProjectReference Include="../../src/Nancy.ViewEngines.Razor/Nancy.ViewEngines.Razor.csproj" />
+  </ItemGroup>
+</Project>

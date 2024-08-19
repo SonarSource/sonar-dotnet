@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4158",
+      "Message": "Remove this call, the collection is known to be empty here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L615",
+      "Location": "Line 615 Position 13-29"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002716\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/AesCngTest.cs#L19",
+      "Location": "Line 19 Position 51-53"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002716\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/AesCryptoServiceProviderTest.cs#L20",
+      "Location": "Line 20 Position 53-55"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002716\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/AesTest.cs#L20",
+      "Location": "Line 20 Position 55-57"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002716\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/SymmetricAlgorithmTest.cs#L20",
+      "Location": "Line 20 Position 53-55"
+    }
+  ]
+}

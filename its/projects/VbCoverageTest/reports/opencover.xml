@@ -1,0 +1,1824 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageSession xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Summary numSequencePoints="438" visitedSequencePoints="11" numBranchPoints="217" visitedBranchPoints="4" sequenceCoverage="2.51" branchCoverage="1.84" maxCyclomaticComplexity="19" minCyclomaticComplexity="1" />
+  <Modules>
+    <Module skippedDueTo="Filter" hash="12-65-6A-66-2E-D6-63-35-62-65-A9-F9-3A-99-F3-2E-1A-A3-76-A4">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_32\mscorlib\v4.0_4.0.0.0__b77a5c561934e089\mscorlib.dll</FullName>
+      <ModuleName>mscorlib</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="A9-93-86-B0-13-44-F7-CE-DF-88-D0-6B-AD-A6-A9-B1-6E-17-A2-49">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe</FullName>
+      <ModuleName>vstest.console</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="CD-B3-17-56-CA-2B-DF-F1-86-B3-80-6C-CA-87-A1-BD-64-B6-30-0C">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.ObjectModel</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="8F-46-4B-BE-28-40-30-A2-E6-52-58-36-C3-F3-E3-75-03-AF-F4-FC">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</FullName>
+      <ModuleName>System</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="8F-6E-E8-4F-40-6A-75-31-1B-08-C2-22-D5-EA-FE-23-3B-7B-82-15">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Configuration\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll</FullName>
+      <ModuleName>System.Configuration</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="2E-28-A3-E7-4F-05-75-91-3B-B4-A6-B7-58-E7-27-B0-EF-F7-52-11">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Xml\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.dll</FullName>
+      <ModuleName>System.Xml</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="41-DD-EF-C7-66-EB-7B-1F-67-53-24-B2-B6-C8-2B-A5-5B-51-C7-C2">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.ComponentModel.Composition\v4.0_4.0.0.0__b77a5c561934e089\System.ComponentModel.Composition.dll</FullName>
+      <ModuleName>System.ComponentModel.Composition</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="1D-4C-5A-E0-2F-C0-C3-3A-4E-2C-65-81-1A-A3-14-05-4F-49-BE-BD">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Microsoft.VisualStudio.TestPlatform.Common.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Common</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="F0-AC-29-46-F9-CE-FF-96-AE-EE-4F-C0-DE-9E-59-D3-7E-1B-ED-08">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll</FullName>
+      <ModuleName>System.Core</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="48-F7-B8-99-73-35-32-72-AB-9E-2D-4B-02-B4-C1-56-2C-61-5E-8C">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Microsoft.VisualStudio.TestPlatform.Core.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Core</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="BC-AB-B8-B7-0B-33-D0-F8-A5-18-C6-FA-8A-AA-1F-8F-FC-93-03-06">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Microsoft.VisualStudio.TestPlatform.Utilities.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Utilities</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="E1-44-EF-4D-A0-E1-56-7D-57-78-41-69-0B-8C-34-58-CF-B2-A5-5A">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Microsoft.VisualStudio.TestPlatform.Client.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Client</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="8D-76-70-17-DF-22-05-F7-91-4E-E9-DC-8C-A0-33-23-DB-70-5D-47">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.ServiceModel\v4.0_4.0.0.0__b77a5c561934e089\System.ServiceModel.dll</FullName>
+      <ModuleName>System.ServiceModel</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="73-40-A6-9D-16-C6-DF-C1-8A-0D-DF-A3-12-EB-64-2A-78-45-DE-64">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_32\System.Transactions\v4.0_4.0.0.0__b77a5c561934e089\System.Transactions.dll</FullName>
+      <ModuleName>System.Transactions</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="">
+      <FullName>RefEmit_InMemoryManifestModule</FullName>
+      <ModuleName>MetadataViewProxies_e0ea5f5a-4c44-42c6-980a-41fec55bfdee</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="EC-EB-0C-B7-2A-06-A8-2E-67-58-FF-C7-30-AF-90-EA-DB-3F-D9-A5">
+      <FullName>C:\Windows\assembly\GAC_MSIL\Microsoft.VisualStudio.Diagnostics.Measurement\12.0.0.0__b03f5f7f11d50a3a\Microsoft.VisualStudio.Diagnostics.Measurement.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.Diagnostics.Measurement</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="2A-AF-F1-4F-17-70-38-B9-47-C0-95-72-84-97-C5-49-91-16-5D-53">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Extensions\Microsoft.VisualStudio.TestPlatform.Extensions.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Extensions</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="F2-34-EF-81-79-DD-A6-D2-29-6B-7E-06-E2-9C-42-7F-EE-73-FD-46">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Extensions\Microsoft.VisualStudio.TestPlatform.Extensions.GenericTestAdapter.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Extensions.GenericTestAdapter</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="43-C4-CD-E8-C4-F2-D3-78-D4-D7-85-25-2D-DF-A7-4F-97-BA-73-4E">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Extensions\Microsoft.VisualStudio.TestPlatform.Extensions.MSAppContainerAdapter.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Extensions.MSAppContainerAdapter</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="93-85-52-65-9F-0F-6F-E4-5D-FD-CB-29-DD-97-41-01-BC-4D-0D-A3">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Extensions\Microsoft.VisualStudio.TestPlatform.UnitTestFramework.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.UnitTestFramework</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="69-0D-AC-4D-B4-54-59-DE-D5-3C-B6-40-C4-E6-88-FF-51-02-DE-3A">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Extensions\Microsoft.VisualStudio.TestPlatform.Extensions.OrderedTestAdapter.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Extensions.OrderedTestAdapter</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="99-71-41-AC-91-88-1B-A5-A7-8E-4C-A2-DB-46-F5-D9-A3-35-4C-E4">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Extensions\Microsoft.VisualStudio.TestPlatform.Extensions.TfsLogger.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Extensions.TfsLogger</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="33-9A-90-8B-2F-81-97-7B-09-0C-A7-1A-6A-F0-E5-6A-CF-49-E5-75">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Extensions\Microsoft.VisualStudio.TestPlatform.Extensions.TmiAdapter.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Extensions.TmiAdapter</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="A2-3A-9A-4F-DD-EA-BC-71-DF-1F-65-A1-9C-D8-29-3C-90-81-69-97">
+      <FullName>C:\Windows\assembly\GAC_MSIL\Microsoft.VisualStudio.QualityTools.Common\12.0.0.0__b03f5f7f11d50a3a\Microsoft.VisualStudio.QualityTools.Common.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.QualityTools.Common</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="89-3B-C3-FB-2F-00-D2-68-CE-38-0D-51-B0-78-09-48-36-31-7E-A9">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Extensions\Microsoft.VisualStudio.TestPlatform.Extensions.TrxLogger.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Extensions.TrxLogger</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="BE-36-55-98-98-E2-83-B0-7F-1A-5B-46-88-B0-27-CC-66-3C-0D-A3">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Extensions\Microsoft.VisualStudio.TestPlatform.Extensions.VSTestIntegration.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Extensions.VSTestIntegration</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="B6-BE-C7-09-6A-69-79-02-C4-B3-2E-2E-B9-3D-72-09-BB-84-01-6E">
+      <FullName>C:\Windows\assembly\GAC_MSIL\Microsoft.VisualStudio.QualityTools.UnitTestFramework\10.0.0.0__b03f5f7f11d50a3a\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.QualityTools.UnitTestFramework</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="83-92-A6-61-AB-24-2D-60-6E-B3-F0-4C-6A-F3-38-AF-4E-6E-B8-30">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_32\System.Data\v4.0_4.0.0.0__b77a5c561934e089\System.Data.dll</FullName>
+      <ModuleName>System.Data</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="47-E0-71-7A-71-73-8A-74-ED-67-A4-2E-2D-FC-DF-E5-71-84-BB-70">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Extensions\Microsoft.VisualStudio.TestTools.CppUnitTestFramework.ComInterfaces.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestTools.CppUnitTestFramework.ComInterfaces</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="05-85-6C-E2-56-69-E3-16-5E-B3-FF-51-8F-E0-36-DE-4F-BC-AE-80">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Extensions\Microsoft.VisualStudio.TestTools.CppUnitTestFramework.CppUnitTestExtension.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestTools.CppUnitTestFramework.CppUnitTestExtension</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="DE-51-DB-F4-4A-65-17-7B-CB-68-D7-3A-AD-2F-B8-6A-A6-23-F6-DE">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\SMDiagnostics\v4.0_4.0.0.0__b77a5c561934e089\SMDiagnostics.dll</FullName>
+      <ModuleName>SMDiagnostics</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="">
+      <FullName>RefEmit_InMemoryManifestModule</FullName>
+      <ModuleName>MetadataViewProxies_e0ea5f5a-4c44-42c6-980a-41fec55bfdee</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="CD-B3-17-56-CA-2B-DF-F1-86-B3-80-6C-CA-87-A1-BD-64-B6-30-0C">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.ObjectModel</ModuleName>
+      <Classes />
+    </Module>
+    <Module hash="2E-E2-25-E3-12-FF-2E-49-6C-41-67-C9-4A-F2-B0-9E-85-E3-4B-41">
+      <Summary numSequencePoints="216" visitedSequencePoints="3" numBranchPoints="107" visitedBranchPoints="1" sequenceCoverage="1.39" branchCoverage="0.93" maxCyclomaticComplexity="19" minCyclomaticComplexity="1" />
+      <FullName>C:\Users\User\Documents\Visual Studio 2013\Projects\CoverageTest\VBLibTest\bin\Debug\VBLibTest.dll</FullName>
+      <ModuleName>VBLibTest</ModuleName>
+      <Files>
+        <File uid="1" fullPath="17d14f5c-a337-4978-8281-53493378c1071.vb" />
+        <File uid="5" fullPath="17d14f5c-a337-4978-8281-53493378c1072.vb" />
+        <File uid="7" fullPath="VBLibTest/My Project/Resources.Designer.vb" />
+        <File uid="8" fullPath="VBLibTest/My Project/Settings.Designer.vb" />
+        <File uid="10" fullPath="VBLibTest/UnitTest1.vb" />
+      </Files>
+      <Classes>
+        <Class>
+          <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" />
+          <FullName>&lt;Module&gt;</FullName>
+          <Methods />
+        </Class>
+        <Class>
+          <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>VBLibTest.My.MyApplication</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663297</MetadataToken>
+              <Name>System.Void VBLibTest.My.MyApplication::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="1" ordinal="0" offset="0" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>VBLibTest.My.MyComputer</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663298</MetadataToken>
+              <Name>System.Void VBLibTest.My.MyComputer::.ctor()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="2" ordinal="0" offset="0" sl="107" sc="9" el="107" ec="25" />
+                <SequencePoint vc="0" uspid="3" ordinal="1" offset="1" sl="108" sc="13" el="108" ec="25" />
+                <SequencePoint vc="0" uspid="4" ordinal="2" offset="8" sl="109" sc="9" el="109" ec="16" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="2" ordinal="0" offset="0" sl="107" sc="9" el="107" ec="25" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="16" visitedSequencePoints="0" numBranchPoints="5" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>VBLibTest.My.MyProject</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663300</MetadataToken>
+              <Name>VBLibTest.My.MyComputer VBLibTest.My.MyProject::get_Computer()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="5" ordinal="0" offset="0" sl="121" sc="13" el="121" ec="16" />
+                <SequencePoint vc="0" uspid="6" ordinal="1" offset="1" sl="122" sc="17" el="122" ec="62" />
+                <SequencePoint vc="0" uspid="7" ordinal="2" offset="14" sl="123" sc="13" el="123" ec="20" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="5" ordinal="0" offset="0" sl="121" sc="13" el="121" ec="16" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663301</MetadataToken>
+              <Name>VBLibTest.My.MyApplication VBLibTest.My.MyProject::get_Application()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="8" ordinal="0" offset="0" sl="133" sc="13" el="133" ec="16" />
+                <SequencePoint vc="0" uspid="9" ordinal="1" offset="1" sl="134" sc="17" el="134" ec="57" />
+                <SequencePoint vc="0" uspid="10" ordinal="2" offset="14" sl="135" sc="13" el="135" ec="20" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="8" ordinal="0" offset="0" sl="133" sc="13" el="133" ec="16" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663302</MetadataToken>
+              <Name>Microsoft.VisualBasic.ApplicationServices.User VBLibTest.My.MyProject::get_User()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="11" ordinal="0" offset="0" sl="144" sc="13" el="144" ec="16" />
+                <SequencePoint vc="0" uspid="12" ordinal="1" offset="1" sl="145" sc="17" el="145" ec="58" />
+                <SequencePoint vc="0" uspid="13" ordinal="2" offset="14" sl="146" sc="13" el="146" ec="20" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="11" ordinal="0" offset="0" sl="144" sc="13" el="144" ec="16" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663303</MetadataToken>
+              <Name>VBLibTest.My.MyProject/MyWebServices VBLibTest.My.MyProject::get_WebServices()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="14" ordinal="0" offset="0" sl="237" sc="14" el="237" ec="17" />
+                <SequencePoint vc="0" uspid="15" ordinal="1" offset="1" sl="238" sc="17" el="238" ec="67" />
+                <SequencePoint vc="0" uspid="16" ordinal="2" offset="14" sl="239" sc="13" el="239" ec="20" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="14" ordinal="0" offset="0" sl="237" sc="14" el="237" ec="17" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="4" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663299</MetadataToken>
+              <Name>System.Void VBLibTest.My.MyProject::.cctor()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="17" ordinal="0" offset="0" sl="126" sc="26" el="126" ec="50" />
+                <SequencePoint vc="0" uspid="18" ordinal="1" offset="10" sl="137" sc="26" el="137" ec="45" />
+                <SequencePoint vc="0" uspid="19" ordinal="2" offset="20" sl="148" sc="26" el="148" ec="46" />
+                <SequencePoint vc="0" uspid="20" ordinal="3" offset="30" sl="284" sc="26" el="284" ec="55" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="17" ordinal="0" offset="0" sl="126" sc="26" el="126" ec="50" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="25" visitedSequencePoints="0" numBranchPoints="9" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="1" />
+          <FullName>VBLibTest.My.MyProject/MyWebServices</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663304</MetadataToken>
+              <Name>System.Boolean VBLibTest.My.MyProject/MyWebServices::Equals(System.Object)</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="21" ordinal="0" offset="0" sl="247" sc="13" el="247" ec="75" />
+                <SequencePoint vc="0" uspid="22" ordinal="1" offset="1" sl="248" sc="17" el="248" ec="40" />
+                <SequencePoint vc="0" uspid="23" ordinal="2" offset="16" sl="249" sc="13" el="249" ec="25" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="21" ordinal="0" offset="0" sl="247" sc="13" el="247" ec="75" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663305</MetadataToken>
+              <Name>System.Int32 VBLibTest.My.MyProject/MyWebServices::GetHashCode()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="24" ordinal="0" offset="0" sl="251" sc="13" el="251" ec="63" />
+                <SequencePoint vc="0" uspid="25" ordinal="1" offset="1" sl="252" sc="17" el="252" ec="42" />
+                <SequencePoint vc="0" uspid="26" ordinal="2" offset="10" sl="253" sc="13" el="253" ec="25" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="24" ordinal="0" offset="0" sl="251" sc="13" el="251" ec="63" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663306</MetadataToken>
+              <Name>System.Type VBLibTest.My.MyProject/MyWebServices::GetType()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="27" ordinal="0" offset="0" sl="255" sc="13" el="255" ec="72" />
+                <SequencePoint vc="0" uspid="28" ordinal="1" offset="1" sl="256" sc="17" el="256" ec="46" />
+                <SequencePoint vc="0" uspid="29" ordinal="2" offset="14" sl="257" sc="13" el="257" ec="25" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="27" ordinal="0" offset="0" sl="255" sc="13" el="255" ec="72" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663307</MetadataToken>
+              <Name>System.String VBLibTest.My.MyProject/MyWebServices::ToString()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="30" ordinal="0" offset="0" sl="259" sc="13" el="259" ec="59" />
+                <SequencePoint vc="0" uspid="31" ordinal="1" offset="1" sl="260" sc="17" el="260" ec="39" />
+                <SequencePoint vc="0" uspid="32" ordinal="2" offset="10" sl="261" sc="13" el="261" ec="25" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="30" ordinal="0" offset="0" sl="259" sc="13" el="259" ec="59" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="2" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="7" visitedSequencePoints="0" numBranchPoints="3" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" />
+              <MetadataToken>100663308</MetadataToken>
+              <Name>T VBLibTest.My.MyProject/MyWebServices::Create__Instance__(T)</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="33" ordinal="0" offset="0" sl="264" sc="12" el="264" ec="95" />
+                <SequencePoint vc="0" uspid="34" ordinal="1" offset="1" sl="265" sc="17" el="265" ec="44" />
+                <SequencePoint vc="0" uspid="35" ordinal="2" offset="14" sl="266" sc="21" el="266" ec="35" />
+                <SequencePoint vc="0" uspid="36" ordinal="3" offset="24" sl="267" sc="17" el="267" ec="21" />
+                <SequencePoint vc="0" uspid="37" ordinal="4" offset="25" sl="268" sc="21" el="268" ec="36" />
+                <SequencePoint vc="0" uspid="38" ordinal="5" offset="29" sl="269" sc="17" el="269" ec="23" />
+                <SequencePoint vc="0" uspid="39" ordinal="6" offset="30" sl="270" sc="13" el="270" ec="25" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="40" ordinal="0" offset="12" path="0" />
+                <BranchPoint vc="0" uspid="41" ordinal="1" offset="12" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="33" ordinal="0" offset="0" sl="264" sc="12" el="264" ec="95" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663309</MetadataToken>
+              <Name>System.Void VBLibTest.My.MyProject/MyWebServices::Dispose__Instance__(T&amp;)</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="42" ordinal="0" offset="0" sl="273" sc="13" el="273" ec="71" />
+                <SequencePoint vc="0" uspid="43" ordinal="1" offset="1" sl="274" sc="17" el="274" ec="35" />
+                <SequencePoint vc="0" uspid="44" ordinal="2" offset="16" sl="275" sc="13" el="275" ec="20" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="42" ordinal="0" offset="0" sl="273" sc="13" el="273" ec="71" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663310</MetadataToken>
+              <Name>System.Void VBLibTest.My.MyProject/MyWebServices::.ctor()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="45" ordinal="0" offset="0" sl="279" sc="13" el="279" ec="29" />
+                <SequencePoint vc="0" uspid="46" ordinal="1" offset="1" sl="280" sc="16" el="280" ec="28" />
+                <SequencePoint vc="0" uspid="47" ordinal="2" offset="8" sl="281" sc="13" el="281" ec="20" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="45" ordinal="0" offset="0" sl="279" sc="13" el="279" ec="29" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="12" visitedSequencePoints="0" numBranchPoints="4" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="1" />
+          <FullName>VBLibTest.My.MyProject/ThreadSafeObjectProvider`1</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="2" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="8" visitedSequencePoints="0" numBranchPoints="3" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" />
+              <MetadataToken>100663311</MetadataToken>
+              <Name>T VBLibTest.My.MyProject/ThreadSafeObjectProvider`1::get_GetInstance()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="48" ordinal="0" offset="0" sl="331" sc="17" el="331" ec="20" />
+                <SequencePoint vc="0" uspid="49" ordinal="1" offset="1" sl="332" sc="25" el="332" ec="53" />
+                <SequencePoint vc="0" uspid="50" ordinal="2" offset="13" sl="333" sc="21" el="333" ec="45" />
+                <SequencePoint vc="0" uspid="51" ordinal="3" offset="26" sl="334" sc="25" el="334" ec="38" />
+                <SequencePoint vc="0" uspid="52" ordinal="4" offset="32" sl="335" sc="25" el="335" ec="50" />
+                <SequencePoint vc="0" uspid="53" ordinal="5" offset="45" sl="336" sc="21" el="336" ec="27" />
+                <SequencePoint vc="0" uspid="54" ordinal="6" offset="46" sl="337" sc="21" el="337" ec="33" />
+                <SequencePoint vc="0" uspid="55" ordinal="7" offset="50" sl="338" sc="17" el="338" ec="24" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="56" ordinal="0" offset="24" path="0" />
+                <BranchPoint vc="0" uspid="57" ordinal="1" offset="24" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="48" ordinal="0" offset="0" sl="331" sc="17" el="331" ec="20" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="4" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663312</MetadataToken>
+              <Name>System.Void VBLibTest.My.MyProject/ThreadSafeObjectProvider`1::.ctor()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="58" ordinal="0" offset="0" sl="350" sc="13" el="350" ec="29" />
+                <SequencePoint vc="0" uspid="59" ordinal="1" offset="1" sl="351" sc="17" el="351" ec="29" />
+                <SequencePoint vc="0" uspid="60" ordinal="2" offset="8" sl="355" sc="30" el="355" ec="39" />
+                <SequencePoint vc="0" uspid="61" ordinal="3" offset="19" sl="352" sc="13" el="352" ec="20" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="58" ordinal="0" offset="0" sl="350" sc="13" el="350" ec="29" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="121" visitedSequencePoints="0" numBranchPoints="74" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="19" minCyclomaticComplexity="1" />
+          <FullName>VBLibTest.My.InternalXmlHelper</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="3" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="6" visitedSequencePoints="0" numBranchPoints="5" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="3" minCyclomaticComplexity="3" />
+              <MetadataToken>100663314</MetadataToken>
+              <Name>System.String VBLibTest.My.InternalXmlHelper::get_Value(System.Collections.Generic.IEnumerable`1&lt;System.Xml.Linq.XElement&gt;)</Name>
+              <FileRef uid="5" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="62" ordinal="0" offset="0" sl="11" sc="7" el="11" ec="10" />
+                <SequencePoint vc="0" uspid="63" ordinal="1" offset="2" sl="12" sc="9" el="12" ec="67" />
+                <SequencePoint vc="0" uspid="64" ordinal="2" offset="18" sl="13" sc="11" el="13" ec="28" />
+                <SequencePoint vc="0" uspid="65" ordinal="3" offset="27" sl="14" sc="9" el="14" ec="13" />
+                <SequencePoint vc="0" uspid="66" ordinal="4" offset="61" sl="15" sc="9" el="15" ec="23" />
+                <SequencePoint vc="0" uspid="67" ordinal="5" offset="65" sl="16" sc="7" el="16" ec="14" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="68" ordinal="0" offset="36" path="0" />
+                <BranchPoint vc="0" uspid="69" ordinal="1" offset="36" path="1" />
+                <BranchPoint vc="0" uspid="70" ordinal="2" offset="50" path="0" />
+                <BranchPoint vc="0" uspid="71" ordinal="3" offset="50" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="62" ordinal="0" offset="0" sl="11" sc="7" el="11" ec="10" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="3" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="true">
+              <Summary numSequencePoints="6" visitedSequencePoints="0" numBranchPoints="5" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="3" minCyclomaticComplexity="3" />
+              <MetadataToken>100663315</MetadataToken>
+              <Name>System.Void VBLibTest.My.InternalXmlHelper::set_Value(System.Collections.Generic.IEnumerable`1&lt;System.Xml.Linq.XElement&gt;,System.String)</Name>
+              <FileRef uid="5" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="72" ordinal="0" offset="0" sl="17" sc="7" el="17" ec="27" />
+                <SequencePoint vc="0" uspid="73" ordinal="1" offset="2" sl="18" sc="9" el="18" ec="67" />
+                <SequencePoint vc="0" uspid="74" ordinal="2" offset="18" sl="19" sc="11" el="19" ec="29" />
+                <SequencePoint vc="0" uspid="75" ordinal="3" offset="26" sl="20" sc="11" el="20" ec="19" />
+                <SequencePoint vc="0" uspid="76" ordinal="4" offset="29" sl="21" sc="9" el="21" ec="13" />
+                <SequencePoint vc="0" uspid="77" ordinal="5" offset="63" sl="22" sc="7" el="22" ec="14" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="78" ordinal="0" offset="38" path="0" />
+                <BranchPoint vc="0" uspid="79" ordinal="1" offset="38" path="1" />
+                <BranchPoint vc="0" uspid="80" ordinal="2" offset="52" path="0" />
+                <BranchPoint vc="0" uspid="81" ordinal="3" offset="52" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="72" ordinal="0" offset="0" sl="17" sc="7" el="17" ec="27" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="3" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="6" visitedSequencePoints="0" numBranchPoints="5" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="3" minCyclomaticComplexity="3" />
+              <MetadataToken>100663316</MetadataToken>
+              <Name>System.String VBLibTest.My.InternalXmlHelper::get_AttributeValue(System.Collections.Generic.IEnumerable`1&lt;System.Xml.Linq.XElement&gt;,System.Xml.Linq.XName)</Name>
+              <FileRef uid="5" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="82" ordinal="0" offset="0" sl="26" sc="7" el="26" ec="10" />
+                <SequencePoint vc="0" uspid="83" ordinal="1" offset="2" sl="27" sc="9" el="27" ec="67" />
+                <SequencePoint vc="0" uspid="84" ordinal="2" offset="18" sl="28" sc="11" el="28" ec="53" />
+                <SequencePoint vc="0" uspid="85" ordinal="3" offset="33" sl="29" sc="9" el="29" ec="13" />
+                <SequencePoint vc="0" uspid="86" ordinal="4" offset="67" sl="30" sc="9" el="30" ec="23" />
+                <SequencePoint vc="0" uspid="87" ordinal="5" offset="71" sl="31" sc="7" el="31" ec="14" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="88" ordinal="0" offset="42" path="0" />
+                <BranchPoint vc="0" uspid="89" ordinal="1" offset="42" path="1" />
+                <BranchPoint vc="0" uspid="90" ordinal="2" offset="56" path="0" />
+                <BranchPoint vc="0" uspid="91" ordinal="3" offset="56" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="82" ordinal="0" offset="0" sl="26" sc="7" el="26" ec="10" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="3" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="true">
+              <Summary numSequencePoints="6" visitedSequencePoints="0" numBranchPoints="5" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="3" minCyclomaticComplexity="3" />
+              <MetadataToken>100663317</MetadataToken>
+              <Name>System.Void VBLibTest.My.InternalXmlHelper::set_AttributeValue(System.Collections.Generic.IEnumerable`1&lt;System.Xml.Linq.XElement&gt;,System.Xml.Linq.XName,System.String)</Name>
+              <FileRef uid="5" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="92" ordinal="0" offset="0" sl="32" sc="7" el="32" ec="27" />
+                <SequencePoint vc="0" uspid="93" ordinal="1" offset="2" sl="33" sc="9" el="33" ec="67" />
+                <SequencePoint vc="0" uspid="94" ordinal="2" offset="18" sl="34" sc="11" el="34" ec="46" />
+                <SequencePoint vc="0" uspid="95" ordinal="3" offset="27" sl="35" sc="11" el="35" ec="19" />
+                <SequencePoint vc="0" uspid="96" ordinal="4" offset="30" sl="36" sc="9" el="36" ec="13" />
+                <SequencePoint vc="0" uspid="97" ordinal="5" offset="64" sl="37" sc="7" el="37" ec="14" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="98" ordinal="0" offset="39" path="0" />
+                <BranchPoint vc="0" uspid="99" ordinal="1" offset="39" path="1" />
+                <BranchPoint vc="0" uspid="100" ordinal="2" offset="53" path="0" />
+                <BranchPoint vc="0" uspid="101" ordinal="3" offset="53" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="92" ordinal="0" offset="0" sl="32" sc="7" el="32" ec="27" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663318</MetadataToken>
+              <Name>System.String VBLibTest.My.InternalXmlHelper::get_AttributeValue(System.Xml.Linq.XElement,System.Xml.Linq.XName)</Name>
+              <FileRef uid="5" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="102" ordinal="0" offset="0" sl="41" sc="7" el="41" ec="10" />
+                <SequencePoint vc="0" uspid="103" ordinal="1" offset="1" sl="42" sc="9" el="42" ec="53" />
+                <SequencePoint vc="0" uspid="104" ordinal="2" offset="16" sl="43" sc="7" el="43" ec="14" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="102" ordinal="0" offset="0" sl="41" sc="7" el="41" ec="10" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="true">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663319</MetadataToken>
+              <Name>System.Void VBLibTest.My.InternalXmlHelper::set_AttributeValue(System.Xml.Linq.XElement,System.Xml.Linq.XName,System.String)</Name>
+              <FileRef uid="5" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="105" ordinal="0" offset="0" sl="44" sc="7" el="44" ec="27" />
+                <SequencePoint vc="0" uspid="106" ordinal="1" offset="1" sl="45" sc="9" el="45" ec="46" />
+                <SequencePoint vc="0" uspid="107" ordinal="2" offset="10" sl="46" sc="7" el="46" ec="14" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="105" ordinal="0" offset="0" sl="44" sc="7" el="44" ec="27" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="2" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663313</MetadataToken>
+              <Name>System.Void VBLibTest.My.InternalXmlHelper::.ctor()</Name>
+              <FileRef uid="5" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="108" ordinal="0" offset="0" sl="7" sc="5" el="7" ec="22" />
+                <SequencePoint vc="0" uspid="109" ordinal="1" offset="8" sl="8" sc="5" el="8" ec="12" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="108" ordinal="0" offset="0" sl="7" sc="5" el="7" ec="22" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="2" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="6" visitedSequencePoints="0" numBranchPoints="3" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" />
+              <MetadataToken>100663320</MetadataToken>
+              <Name>System.Xml.Linq.XAttribute VBLibTest.My.InternalXmlHelper::CreateAttribute(System.Xml.Linq.XName,System.Object)</Name>
+              <FileRef uid="5" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="110" ordinal="0" offset="0" sl="49" sc="5" el="49" ec="135" />
+                <SequencePoint vc="0" uspid="111" ordinal="1" offset="1" sl="50" sc="7" el="50" ec="31" />
+                <SequencePoint vc="0" uspid="112" ordinal="2" offset="9" sl="51" sc="9" el="51" ec="23" />
+                <SequencePoint vc="0" uspid="113" ordinal="3" offset="13" sl="52" sc="7" el="52" ec="13" />
+                <SequencePoint vc="0" uspid="114" ordinal="4" offset="14" sl="53" sc="7" el="53" ec="64" />
+                <SequencePoint vc="0" uspid="115" ordinal="5" offset="29" sl="54" sc="5" el="54" ec="17" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="116" ordinal="0" offset="7" path="0" />
+                <BranchPoint vc="0" uspid="117" ordinal="1" offset="7" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="110" ordinal="0" offset="0" sl="49" sc="5" el="49" ec="135" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="5" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663321</MetadataToken>
+              <Name>System.Xml.Linq.XAttribute VBLibTest.My.InternalXmlHelper::CreateNamespaceAttribute(System.Xml.Linq.XName,System.Xml.Linq.XNamespace)</Name>
+              <FileRef uid="5" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="118" ordinal="0" offset="0" sl="56" sc="5" el="56" ec="168" />
+                <SequencePoint vc="0" uspid="119" ordinal="1" offset="1" sl="57" sc="11" el="57" ec="77" />
+                <SequencePoint vc="0" uspid="120" ordinal="2" offset="14" sl="58" sc="7" el="58" ec="26" />
+                <SequencePoint vc="0" uspid="121" ordinal="3" offset="22" sl="59" sc="7" el="59" ec="15" />
+                <SequencePoint vc="0" uspid="122" ordinal="4" offset="26" sl="60" sc="5" el="60" ec="17" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="118" ordinal="0" offset="0" sl="56" sc="5" el="56" ec="168" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="4" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="14" visitedSequencePoints="0" numBranchPoints="7" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="4" minCyclomaticComplexity="4" />
+              <MetadataToken>100663322</MetadataToken>
+              <Name>System.Object VBLibTest.My.InternalXmlHelper::RemoveNamespaceAttributes(System.String[],System.Xml.Linq.XNamespace[],System.Collections.Generic.List`1&lt;System.Xml.Linq.XAttribute&gt;,System.Object)</Name>
+              <FileRef uid="5" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="123" ordinal="0" offset="0" sl="62" sc="9" el="62" ec="253" />
+                <SequencePoint vc="0" uspid="124" ordinal="1" offset="1" sl="63" sc="13" el="63" ec="38" />
+                <SequencePoint vc="0" uspid="125" ordinal="2" offset="12" sl="64" sc="21" el="64" ec="108" />
+                <SequencePoint vc="0" uspid="126" ordinal="3" offset="19" sl="65" sc="17" el="65" ec="44" />
+                <SequencePoint vc="0" uspid="127" ordinal="4" offset="30" sl="66" sc="21" el="66" ec="99" />
+                <SequencePoint vc="0" uspid="128" ordinal="5" offset="44" sl="67" sc="17" el="67" ec="21" />
+                <SequencePoint vc="0" uspid="129" ordinal="6" offset="45" sl="68" sc="25" el="68" ec="125" />
+                <SequencePoint vc="0" uspid="130" ordinal="7" offset="52" sl="69" sc="21" el="69" ec="48" />
+                <SequencePoint vc="0" uspid="131" ordinal="8" offset="63" sl="70" sc="25" el="70" ec="104" />
+                <SequencePoint vc="0" uspid="132" ordinal="9" offset="75" sl="71" sc="21" el="71" ec="27" />
+                <SequencePoint vc="0" uspid="133" ordinal="10" offset="76" sl="72" sc="17" el="72" ec="23" />
+                <SequencePoint vc="0" uspid="134" ordinal="11" offset="77" sl="73" sc="13" el="73" ec="19" />
+                <SequencePoint vc="0" uspid="135" ordinal="12" offset="78" sl="74" sc="13" el="74" ec="23" />
+                <SequencePoint vc="0" uspid="136" ordinal="13" offset="82" sl="75" sc="9" el="75" ec="22" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="137" ordinal="0" offset="10" path="0" />
+                <BranchPoint vc="0" uspid="138" ordinal="1" offset="10" path="1" />
+                <BranchPoint vc="0" uspid="139" ordinal="2" offset="28" path="0" />
+                <BranchPoint vc="0" uspid="140" ordinal="3" offset="28" path="1" />
+                <BranchPoint vc="0" uspid="141" ordinal="4" offset="61" path="0" />
+                <BranchPoint vc="0" uspid="142" ordinal="5" offset="61" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="123" ordinal="0" offset="0" sl="62" sc="9" el="62" ec="253" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="3" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="11" visitedSequencePoints="0" numBranchPoints="5" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="3" minCyclomaticComplexity="3" />
+              <MetadataToken>100663323</MetadataToken>
+              <Name>System.Collections.IEnumerable VBLibTest.My.InternalXmlHelper::RemoveNamespaceAttributes(System.String[],System.Xml.Linq.XNamespace[],System.Collections.Generic.List`1&lt;System.Xml.Linq.XAttribute&gt;,System.Collections.IEnumerable)</Name>
+              <FileRef uid="5" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="143" ordinal="0" offset="0" sl="77" sc="9" el="77" ec="315" />
+                <SequencePoint vc="0" uspid="144" ordinal="1" offset="1" sl="78" sc="13" el="78" ec="38" />
+                <SequencePoint vc="0" uspid="145" ordinal="2" offset="12" sl="79" sc="21" el="79" ec="209" />
+                <SequencePoint vc="0" uspid="146" ordinal="3" offset="19" sl="80" sc="17" el="80" ec="44" />
+                <SequencePoint vc="0" uspid="147" ordinal="4" offset="30" sl="81" sc="21" el="81" ec="175" />
+                <SequencePoint vc="0" uspid="148" ordinal="5" offset="61" sl="82" sc="17" el="82" ec="21" />
+                <SequencePoint vc="0" uspid="149" ordinal="6" offset="62" sl="83" sc="21" el="83" ec="218" />
+                <SequencePoint vc="0" uspid="150" ordinal="7" offset="96" sl="84" sc="17" el="84" ec="23" />
+                <SequencePoint vc="0" uspid="151" ordinal="8" offset="97" sl="85" sc="13" el="85" ec="19" />
+                <SequencePoint vc="0" uspid="152" ordinal="9" offset="98" sl="86" sc="13" el="86" ec="23" />
+                <SequencePoint vc="0" uspid="153" ordinal="10" offset="102" sl="87" sc="9" el="87" ec="22" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="154" ordinal="0" offset="10" path="0" />
+                <BranchPoint vc="0" uspid="155" ordinal="1" offset="10" path="1" />
+                <BranchPoint vc="0" uspid="156" ordinal="2" offset="28" path="0" />
+                <BranchPoint vc="0" uspid="157" ordinal="3" offset="28" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="143" ordinal="0" offset="0" sl="77" sc="9" el="77" ec="315" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="19" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="53" visitedSequencePoints="0" numBranchPoints="35" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="19" minCyclomaticComplexity="19" />
+              <MetadataToken>100663324</MetadataToken>
+              <Name>System.Xml.Linq.XElement VBLibTest.My.InternalXmlHelper::RemoveNamespaceAttributes(System.String[],System.Xml.Linq.XNamespace[],System.Collections.Generic.List`1&lt;System.Xml.Linq.XAttribute&gt;,System.Xml.Linq.XElement)</Name>
+              <FileRef uid="5" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="158" ordinal="0" offset="0" sl="116" sc="9" el="116" ec="301" />
+                <SequencePoint vc="0" uspid="159" ordinal="1" offset="1" sl="117" sc="13" el="117" ec="36" />
+                <SequencePoint vc="0" uspid="160" ordinal="2" offset="17" sl="118" sc="21" el="118" ec="78" />
+                <SequencePoint vc="0" uspid="161" ordinal="3" offset="29" sl="121" sc="25" el="121" ec="85" />
+                <SequencePoint vc="0" uspid="162" ordinal="4" offset="36" sl="123" sc="21" el="123" ec="55" />
+                <SequencePoint vc="0" uspid="163" ordinal="5" offset="51" sl="124" sc="29" el="124" ec="123" />
+                <SequencePoint vc="0" uspid="164" ordinal="6" offset="58" sl="125" sc="29" el="125" ec="64" />
+                <SequencePoint vc="0" uspid="165" ordinal="7" offset="71" sl="127" sc="25" el="127" ec="49" />
+                <SequencePoint vc="0" uspid="166" ordinal="8" offset="87" sl="128" sc="29" el="128" ec="98" />
+                <SequencePoint vc="0" uspid="167" ordinal="9" offset="104" sl="129" sc="37" el="129" ec="86" />
+                <SequencePoint vc="0" uspid="168" ordinal="10" offset="111" sl="131" sc="33" el="131" ec="66" />
+                <SequencePoint vc="0" uspid="169" ordinal="11" offset="120" sl="132" sc="41" el="132" ec="92" />
+                <SequencePoint vc="0" uspid="170" ordinal="12" offset="126" sl="133" sc="41" el="133" ec="109" />
+                <SequencePoint vc="0" uspid="171" ordinal="13" offset="132" sl="134" sc="37" el="134" ec="80" />
+                <SequencePoint vc="0" uspid="172" ordinal="14" offset="147" sl="135" sc="41" el="135" ec="70" />
+                <SequencePoint vc="0" uspid="173" ordinal="15" offset="161" sl="137" sc="45" el="137" ec="55" />
+                <SequencePoint vc="0" uspid="174" ordinal="16" offset="168" sl="138" sc="41" el="138" ec="47" />
+                <SequencePoint vc="0" uspid="175" ordinal="17" offset="169" sl="141" sc="41" el="141" ec="52" />
+                <SequencePoint vc="0" uspid="176" ordinal="18" offset="171" sl="142" sc="41" el="142" ec="49" />
+                <SequencePoint vc="0" uspid="177" ordinal="19" offset="174" sl="143" sc="37" el="143" ec="43" />
+                <SequencePoint vc="0" uspid="178" ordinal="20" offset="175" sl="144" sc="33" el="144" ec="37" />
+                <SequencePoint vc="0" uspid="179" ordinal="21" offset="192" sl="145" sc="29" el="145" ec="35" />
+                <SequencePoint vc="0" uspid="180" ordinal="22" offset="193" sl="147" sc="29" el="147" ec="52" />
+                <SequencePoint vc="0" uspid="181" ordinal="23" offset="209" sl="151" sc="33" el="151" ec="65" />
+                <SequencePoint vc="0" uspid="182" ordinal="24" offset="222" sl="152" sc="41" el="152" ec="84" />
+                <SequencePoint vc="0" uspid="183" ordinal="25" offset="232" sl="153" sc="37" el="153" ec="70" />
+                <SequencePoint vc="0" uspid="184" ordinal="26" offset="241" sl="154" sc="45" el="154" ec="106" />
+                <SequencePoint vc="0" uspid="185" ordinal="27" offset="251" sl="155" sc="45" el="155" ec="101" />
+                <SequencePoint vc="0" uspid="186" ordinal="28" offset="265" sl="156" sc="45" el="156" ec="160" />
+                <SequencePoint vc="0" uspid="187" ordinal="29" offset="274" sl="157" sc="41" el="157" ec="79" />
+                <SequencePoint vc="0" uspid="188" ordinal="30" offset="288" sl="158" sc="45" el="158" ec="88" />
+                <SequencePoint vc="0" uspid="189" ordinal="31" offset="303" sl="159" sc="49" el="159" ec="78" />
+                <SequencePoint vc="0" uspid="190" ordinal="32" offset="317" sl="161" sc="53" el="161" ec="63" />
+                <SequencePoint vc="0" uspid="191" ordinal="33" offset="324" sl="162" sc="49" el="162" ec="55" />
+                <SequencePoint vc="0" uspid="192" ordinal="34" offset="325" sl="165" sc="49" el="165" ec="60" />
+                <SequencePoint vc="0" uspid="193" ordinal="35" offset="327" sl="166" sc="49" el="166" ec="57" />
+                <SequencePoint vc="0" uspid="194" ordinal="36" offset="330" sl="167" sc="45" el="167" ec="51" />
+                <SequencePoint vc="0" uspid="195" ordinal="37" offset="331" sl="168" sc="41" el="168" ec="47" />
+                <SequencePoint vc="0" uspid="196" ordinal="38" offset="332" sl="169" sc="37" el="169" ec="41" />
+                <SequencePoint vc="0" uspid="197" ordinal="39" offset="349" sl="170" sc="33" el="170" ec="39" />
+                <SequencePoint vc="0" uspid="198" ordinal="40" offset="350" sl="172" sc="33" el="172" ec="56" />
+                <SequencePoint vc="0" uspid="199" ordinal="41" offset="363" sl="174" sc="37" el="174" ec="47" />
+                <SequencePoint vc="0" uspid="200" ordinal="42" offset="370" sl="176" sc="37" el="176" ec="54" />
+                <SequencePoint vc="0" uspid="201" ordinal="43" offset="378" sl="177" sc="33" el="177" ec="39" />
+                <SequencePoint vc="0" uspid="202" ordinal="44" offset="379" sl="178" sc="29" el="178" ec="35" />
+                <SequencePoint vc="0" uspid="203" ordinal="45" offset="380" sl="179" sc="25" el="179" ec="31" />
+                <SequencePoint vc="0" uspid="204" ordinal="46" offset="381" sl="180" sc="21" el="180" ec="27" />
+                <SequencePoint vc="0" uspid="205" ordinal="47" offset="382" sl="182" sc="21" el="182" ec="30" />
+                <SequencePoint vc="0" uspid="206" ordinal="48" offset="384" sl="183" sc="17" el="183" ec="26" />
+                <SequencePoint vc="0" uspid="207" ordinal="49" offset="385" sl="120" sc="17" el="120" ec="38" />
+                <SequencePoint vc="0" uspid="208" ordinal="50" offset="401" sl="184" sc="13" el="184" ec="19" />
+                <SequencePoint vc="0" uspid="209" ordinal="51" offset="402" sl="185" sc="13" el="185" ec="21" />
+                <SequencePoint vc="0" uspid="210" ordinal="52" offset="406" sl="186" sc="9" el="186" ec="22" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="211" ordinal="0" offset="12" path="0" />
+                <BranchPoint vc="0" uspid="212" ordinal="1" offset="12" path="1" />
+                <BranchPoint vc="0" uspid="213" ordinal="2" offset="46" path="0" />
+                <BranchPoint vc="0" uspid="214" ordinal="3" offset="46" path="1" />
+                <BranchPoint vc="0" uspid="215" ordinal="4" offset="82" path="0" />
+                <BranchPoint vc="0" uspid="216" ordinal="5" offset="82" path="1" />
+                <BranchPoint vc="0" uspid="217" ordinal="6" offset="88" path="0" />
+                <BranchPoint vc="0" uspid="218" ordinal="7" offset="88" path="1" />
+                <BranchPoint vc="0" uspid="219" ordinal="8" offset="91" path="0" />
+                <BranchPoint vc="0" uspid="220" ordinal="9" offset="91" path="1" />
+                <BranchPoint vc="0" uspid="221" ordinal="10" offset="102" path="0" />
+                <BranchPoint vc="0" uspid="222" ordinal="11" offset="102" path="1" />
+                <BranchPoint vc="0" uspid="223" ordinal="12" offset="145" path="0" />
+                <BranchPoint vc="0" uspid="224" ordinal="13" offset="145" path="1" />
+                <BranchPoint vc="0" uspid="225" ordinal="14" offset="159" path="0" />
+                <BranchPoint vc="0" uspid="226" ordinal="15" offset="159" path="1" />
+                <BranchPoint vc="0" uspid="227" ordinal="16" offset="190" path="0" />
+                <BranchPoint vc="0" uspid="228" ordinal="17" offset="190" path="1" />
+                <BranchPoint vc="0" uspid="229" ordinal="18" offset="204" path="0" />
+                <BranchPoint vc="0" uspid="230" ordinal="19" offset="204" path="1" />
+                <BranchPoint vc="0" uspid="231" ordinal="20" offset="220" path="0" />
+                <BranchPoint vc="0" uspid="232" ordinal="21" offset="220" path="1" />
+                <BranchPoint vc="0" uspid="233" ordinal="22" offset="286" path="0" />
+                <BranchPoint vc="0" uspid="234" ordinal="23" offset="286" path="1" />
+                <BranchPoint vc="0" uspid="235" ordinal="24" offset="301" path="0" />
+                <BranchPoint vc="0" uspid="236" ordinal="25" offset="301" path="1" />
+                <BranchPoint vc="0" uspid="237" ordinal="26" offset="315" path="0" />
+                <BranchPoint vc="0" uspid="238" ordinal="27" offset="315" path="1" />
+                <BranchPoint vc="0" uspid="239" ordinal="28" offset="347" path="0" />
+                <BranchPoint vc="0" uspid="240" ordinal="29" offset="347" path="1" />
+                <BranchPoint vc="0" uspid="241" ordinal="30" offset="361" path="0" />
+                <BranchPoint vc="0" uspid="242" ordinal="31" offset="361" path="1" />
+                <BranchPoint vc="0" uspid="243" ordinal="32" offset="396" path="0" />
+                <BranchPoint vc="0" uspid="244" ordinal="33" offset="396" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="158" ordinal="0" offset="0" sl="116" sc="9" el="116" ec="301" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="16" visitedSequencePoints="0" numBranchPoints="5" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="1" />
+          <FullName>VBLibTest.My.InternalXmlHelper/RemoveNamespaceAttributesClosure</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="5" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663325</MetadataToken>
+              <Name>System.Void VBLibTest.My.InternalXmlHelper/RemoveNamespaceAttributesClosure::.ctor(System.String[],System.Xml.Linq.XNamespace[],System.Collections.Generic.List`1&lt;System.Xml.Linq.XAttribute&gt;)</Name>
+              <FileRef uid="5" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="245" ordinal="0" offset="0" sl="96" sc="13" el="96" ec="198" />
+                <SequencePoint vc="0" uspid="246" ordinal="1" offset="8" sl="97" sc="17" el="97" ec="52" />
+                <SequencePoint vc="0" uspid="247" ordinal="2" offset="15" sl="98" sc="17" el="98" ec="40" />
+                <SequencePoint vc="0" uspid="248" ordinal="3" offset="22" sl="99" sc="17" el="99" ec="42" />
+                <SequencePoint vc="0" uspid="249" ordinal="4" offset="29" sl="100" sc="13" el="100" ec="21" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="245" ordinal="0" offset="0" sl="96" sc="13" el="96" ec="198" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663326</MetadataToken>
+              <Name>System.Xml.Linq.XElement VBLibTest.My.InternalXmlHelper/RemoveNamespaceAttributesClosure::ProcessXElement(System.Xml.Linq.XElement)</Name>
+              <FileRef uid="5" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="250" ordinal="0" offset="0" sl="102" sc="13" el="102" ec="120" />
+                <SequencePoint vc="0" uspid="251" ordinal="1" offset="1" sl="103" sc="17" el="103" ec="119" />
+                <SequencePoint vc="0" uspid="252" ordinal="2" offset="28" sl="104" sc="13" el="104" ec="26" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="250" ordinal="0" offset="0" sl="102" sc="13" el="102" ec="120" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="2" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="8" visitedSequencePoints="0" numBranchPoints="3" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" />
+              <MetadataToken>100663327</MetadataToken>
+              <Name>System.Object VBLibTest.My.InternalXmlHelper/RemoveNamespaceAttributesClosure::ProcessObject(System.Object)</Name>
+              <FileRef uid="5" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="253" ordinal="0" offset="0" sl="106" sc="13" el="106" ec="67" />
+                <SequencePoint vc="0" uspid="254" ordinal="1" offset="1" sl="107" sc="21" el="107" ec="108" />
+                <SequencePoint vc="0" uspid="255" ordinal="2" offset="8" sl="108" sc="17" el="108" ec="43" />
+                <SequencePoint vc="0" uspid="256" ordinal="3" offset="19" sl="109" sc="21" el="109" ec="123" />
+                <SequencePoint vc="0" uspid="257" ordinal="4" offset="48" sl="110" sc="17" el="110" ec="21" />
+                <SequencePoint vc="0" uspid="258" ordinal="5" offset="49" sl="111" sc="21" el="111" ec="31" />
+                <SequencePoint vc="0" uspid="259" ordinal="6" offset="53" sl="112" sc="17" el="112" ec="23" />
+                <SequencePoint vc="0" uspid="260" ordinal="7" offset="54" sl="113" sc="13" el="113" ec="26" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="261" ordinal="0" offset="17" path="0" />
+                <BranchPoint vc="0" uspid="262" ordinal="1" offset="17" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="253" ordinal="0" offset="0" sl="106" sc="13" el="106" ec="67" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="13" visitedSequencePoints="0" numBranchPoints="5" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="1" />
+          <FullName>VBLibTest.My.Resources.Resources</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="2" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="7" visitedSequencePoints="0" numBranchPoints="3" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" />
+              <MetadataToken>100663328</MetadataToken>
+              <Name>System.Resources.ResourceManager VBLibTest.My.Resources.Resources::get_ResourceManager()</Name>
+              <FileRef uid="7" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="263" ordinal="0" offset="0" sl="39" sc="13" el="39" ec="16" />
+                <SequencePoint vc="0" uspid="264" ordinal="1" offset="1" sl="40" sc="17" el="40" ec="69" />
+                <SequencePoint vc="0" uspid="265" ordinal="2" offset="16" sl="41" sc="25" el="41" ec="170" />
+                <SequencePoint vc="0" uspid="266" ordinal="3" offset="42" sl="42" sc="21" el="42" ec="39" />
+                <SequencePoint vc="0" uspid="267" ordinal="4" offset="48" sl="43" sc="17" el="43" ec="23" />
+                <SequencePoint vc="0" uspid="268" ordinal="5" offset="49" sl="44" sc="17" el="44" ec="35" />
+                <SequencePoint vc="0" uspid="269" ordinal="6" offset="57" sl="45" sc="13" el="45" ec="20" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="270" ordinal="0" offset="14" path="0" />
+                <BranchPoint vc="0" uspid="271" ordinal="1" offset="14" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="263" ordinal="0" offset="0" sl="39" sc="13" el="39" ec="16" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663329</MetadataToken>
+              <Name>System.Globalization.CultureInfo VBLibTest.My.Resources.Resources::get_Culture()</Name>
+              <FileRef uid="7" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="272" ordinal="0" offset="0" sl="54" sc="13" el="54" ec="16" />
+                <SequencePoint vc="0" uspid="273" ordinal="1" offset="1" sl="55" sc="17" el="55" ec="39" />
+                <SequencePoint vc="0" uspid="274" ordinal="2" offset="9" sl="56" sc="13" el="56" ec="20" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="272" ordinal="0" offset="0" sl="54" sc="13" el="54" ec="16" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="true">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663330</MetadataToken>
+              <Name>System.Void VBLibTest.My.Resources.Resources::set_Culture(System.Globalization.CultureInfo)</Name>
+              <FileRef uid="7" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="275" ordinal="0" offset="0" sl="57" sc="13" el="57" ec="72" />
+                <SequencePoint vc="0" uspid="276" ordinal="1" offset="1" sl="58" sc="17" el="58" ec="40" />
+                <SequencePoint vc="0" uspid="277" ordinal="2" offset="7" sl="59" sc="13" el="59" ec="20" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="275" ordinal="0" offset="0" sl="57" sc="13" el="57" ec="72" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="4" visitedSequencePoints="0" numBranchPoints="2" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>VBLibTest.My.MySettings</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663333</MetadataToken>
+              <Name>VBLibTest.My.MySettings VBLibTest.My.MySettings::get_Default()</Name>
+              <FileRef uid="8" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="278" ordinal="0" offset="0" sl="41" sc="13" el="41" ec="16" />
+                <SequencePoint vc="0" uspid="279" ordinal="1" offset="1" sl="53" sc="17" el="53" ec="39" />
+                <SequencePoint vc="0" uspid="280" ordinal="2" offset="9" sl="54" sc="13" el="54" ec="20" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="278" ordinal="0" offset="0" sl="41" sc="13" el="41" ec="16" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663331</MetadataToken>
+              <Name>System.Void VBLibTest.My.MySettings::.cctor()</Name>
+              <FileRef uid="8" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="281" ordinal="0" offset="0" sl="23" sc="24" el="23" ec="155" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="281" ordinal="0" offset="0" sl="23" sc="24" el="23" ec="155" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663332</MetadataToken>
+              <Name>System.Void VBLibTest.My.MySettings::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="282" ordinal="0" offset="0" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>VBLibTest.My.MySettingsProperty</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663334</MetadataToken>
+              <Name>VBLibTest.My.MySettings VBLibTest.My.MySettingsProperty::get_Settings()</Name>
+              <FileRef uid="8" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="283" ordinal="0" offset="0" sl="68" sc="13" el="68" ec="16" />
+                <SequencePoint vc="0" uspid="284" ordinal="1" offset="1" sl="69" sc="17" el="69" ec="62" />
+                <SequencePoint vc="0" uspid="285" ordinal="2" offset="9" sl="70" sc="13" el="70" ec="20" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="283" ordinal="0" offset="0" sl="68" sc="13" el="68" ec="16" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="3" visitedSequencePoints="3" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>VBLibTest.UnitTest1</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663335</MetadataToken>
+              <Name>System.Void VBLibTest.UnitTest1::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="1" uspid="286" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="3" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663336</MetadataToken>
+              <Name>System.Void VBLibTest.UnitTest1::TestMethod1()</Name>
+              <FileRef uid="10" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="287" ordinal="0" offset="0" sl="7" sc="20" el="7" ec="44" />
+                <SequencePoint vc="1" uspid="288" ordinal="1" offset="1" sl="8" sc="9" el="8" ec="35" />
+                <SequencePoint vc="1" uspid="289" ordinal="2" offset="12" sl="9" sc="5" el="9" ec="12" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="287" ordinal="0" offset="0" sl="7" sc="20" el="7" ec="44" />
+            </Method>
+          </Methods>
+        </Class>
+      </Classes>
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="46-81-63-01-0F-D8-E9-0B-43-67-AC-93-9F-84-D4-53-C4-CA-44-62">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Microsoft.VisualStudio.TestPlatform.Fakes.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Fakes</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="4A-BD-FC-E0-62-EE-01-0E-10-D8-5F-CF-14-96-35-3B-A7-CC-C6-E7">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\PrivateAssemblies\Microsoft.VisualStudio.QualityTools.Sqm.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.QualityTools.Sqm</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="0C-07-89-21-EF-F2-18-45-95-46-C7-26-55-4A-07-48-07-AF-3D-18">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Management\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Management.dll</FullName>
+      <ModuleName>System.Management</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="0D-D5-B2-1E-4C-1B-8D-16-0A-9F-65-F1-B0-E9-42-FD-A9-97-83-3E">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Drawing\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Drawing.dll</FullName>
+      <ModuleName>System.Drawing</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="95-1C-13-07-F1-08-FE-50-F0-58-50-93-34-72-93-D0-D9-64-92-62">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Windows.Forms\v4.0_4.0.0.0__b77a5c561934e089\System.Windows.Forms.dll</FullName>
+      <ModuleName>System.Windows.Forms</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="4C-91-16-51-E3-B0-AF-37-F6-72-1B-70-BF-AE-79-75-9A-E0-50-76">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Microsoft.VisualStudio.TestPlatform.Utilities.AppContainer.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Utilities.AppContainer</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="CD-B3-17-56-CA-2B-DF-F1-86-B3-80-6C-CA-87-A1-BD-64-B6-30-0C">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.ObjectModel</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="CD-B3-17-56-CA-2B-DF-F1-86-B3-80-6C-CA-87-A1-BD-64-B6-30-0C">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.ObjectModel</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="CD-B3-17-56-CA-2B-DF-F1-86-B3-80-6C-CA-87-A1-BD-64-B6-30-0C">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.ObjectModel</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="BE-36-55-98-98-E2-83-B0-7F-1A-5B-46-88-B0-27-CC-66-3C-0D-A3">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Extensions\Microsoft.VisualStudio.TestPlatform.Extensions.VSTestIntegration.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Extensions.VSTestIntegration</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="C3-EF-EA-A4-A7-81-AA-2C-D4-C5-FC-87-87-93-D2-5C-0E-B2-B8-7E">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\Microsoft.VisualBasic\v4.0_10.0.0.0__b03f5f7f11d50a3a\Microsoft.VisualBasic.dll</FullName>
+      <ModuleName>Microsoft.VisualBasic</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="50-D1-2E-18-09-00-96-D1-E5-5F-62-09-93-83-51-58-1F-78-2C-D9">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\msdia120typelib_clr0200.dll</FullName>
+      <ModuleName>msdia120typelib_clr0200</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="CD-B3-17-56-CA-2B-DF-F1-86-B3-80-6C-CA-87-A1-BD-64-B6-30-0C">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.ObjectModel</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="BE-36-55-98-98-E2-83-B0-7F-1A-5B-46-88-B0-27-CC-66-3C-0D-A3">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Extensions\Microsoft.VisualStudio.TestPlatform.Extensions.VSTestIntegration.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestPlatform.Extensions.VSTestIntegration</ModuleName>
+      <Classes />
+    </Module>
+    <Module hash="9C-B9-44-43-9E-21-A3-B0-36-06-1C-46-EC-DC-7E-97-95-D9-EB-8D">
+      <Summary numSequencePoints="222" visitedSequencePoints="8" numBranchPoints="110" visitedBranchPoints="3" sequenceCoverage="3.60" branchCoverage="2.73" maxCyclomaticComplexity="19" minCyclomaticComplexity="1" />
+      <FullName>C:\Users\User\Documents\Visual Studio 2013\Projects\CoverageTest\VBLibTest\bin\Debug\VBLib.dll</FullName>
+      <ModuleName>VBLib</ModuleName>
+      <Files>
+        <File uid="21" fullPath="17d14f5c-a337-4978-8281-53493378c1071.vb" />
+        <File uid="25" fullPath="17d14f5c-a337-4978-8281-53493378c1072.vb" />
+        <File uid="27" fullPath="VBLib/Class1.vb" />
+        <File uid="28" fullPath="VBLib/My Project/Resources.Designer.vb" />
+        <File uid="29" fullPath="VBLib/My Project/Settings.Designer.vb" />
+      </Files>
+      <Classes>
+        <Class>
+          <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" />
+          <FullName>&lt;Module&gt;</FullName>
+          <Methods />
+        </Class>
+        <Class>
+          <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>VBLib.My.MyApplication</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663297</MetadataToken>
+              <Name>System.Void VBLib.My.MyApplication::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="290" ordinal="0" offset="0" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>VBLib.My.MyComputer</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663298</MetadataToken>
+              <Name>System.Void VBLib.My.MyComputer::.ctor()</Name>
+              <FileRef uid="21" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="291" ordinal="0" offset="0" sl="107" sc="9" el="107" ec="25" />
+                <SequencePoint vc="0" uspid="292" ordinal="1" offset="1" sl="108" sc="13" el="108" ec="25" />
+                <SequencePoint vc="0" uspid="293" ordinal="2" offset="8" sl="109" sc="9" el="109" ec="16" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="291" ordinal="0" offset="0" sl="107" sc="9" el="107" ec="25" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="16" visitedSequencePoints="0" numBranchPoints="5" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>VBLib.My.MyProject</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663300</MetadataToken>
+              <Name>VBLib.My.MyComputer VBLib.My.MyProject::get_Computer()</Name>
+              <FileRef uid="21" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="294" ordinal="0" offset="0" sl="121" sc="13" el="121" ec="16" />
+                <SequencePoint vc="0" uspid="295" ordinal="1" offset="1" sl="122" sc="17" el="122" ec="62" />
+                <SequencePoint vc="0" uspid="296" ordinal="2" offset="14" sl="123" sc="13" el="123" ec="20" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="294" ordinal="0" offset="0" sl="121" sc="13" el="121" ec="16" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663301</MetadataToken>
+              <Name>VBLib.My.MyApplication VBLib.My.MyProject::get_Application()</Name>
+              <FileRef uid="21" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="297" ordinal="0" offset="0" sl="133" sc="13" el="133" ec="16" />
+                <SequencePoint vc="0" uspid="298" ordinal="1" offset="1" sl="134" sc="17" el="134" ec="57" />
+                <SequencePoint vc="0" uspid="299" ordinal="2" offset="14" sl="135" sc="13" el="135" ec="20" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="297" ordinal="0" offset="0" sl="133" sc="13" el="133" ec="16" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663302</MetadataToken>
+              <Name>Microsoft.VisualBasic.ApplicationServices.User VBLib.My.MyProject::get_User()</Name>
+              <FileRef uid="21" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="300" ordinal="0" offset="0" sl="144" sc="13" el="144" ec="16" />
+                <SequencePoint vc="0" uspid="301" ordinal="1" offset="1" sl="145" sc="17" el="145" ec="58" />
+                <SequencePoint vc="0" uspid="302" ordinal="2" offset="14" sl="146" sc="13" el="146" ec="20" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="300" ordinal="0" offset="0" sl="144" sc="13" el="144" ec="16" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663303</MetadataToken>
+              <Name>VBLib.My.MyProject/MyWebServices VBLib.My.MyProject::get_WebServices()</Name>
+              <FileRef uid="21" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="303" ordinal="0" offset="0" sl="237" sc="14" el="237" ec="17" />
+                <SequencePoint vc="0" uspid="304" ordinal="1" offset="1" sl="238" sc="17" el="238" ec="67" />
+                <SequencePoint vc="0" uspid="305" ordinal="2" offset="14" sl="239" sc="13" el="239" ec="20" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="303" ordinal="0" offset="0" sl="237" sc="14" el="237" ec="17" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="4" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663299</MetadataToken>
+              <Name>System.Void VBLib.My.MyProject::.cctor()</Name>
+              <FileRef uid="21" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="306" ordinal="0" offset="0" sl="126" sc="26" el="126" ec="50" />
+                <SequencePoint vc="0" uspid="307" ordinal="1" offset="10" sl="137" sc="26" el="137" ec="45" />
+                <SequencePoint vc="0" uspid="308" ordinal="2" offset="20" sl="148" sc="26" el="148" ec="46" />
+                <SequencePoint vc="0" uspid="309" ordinal="3" offset="30" sl="284" sc="26" el="284" ec="55" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="306" ordinal="0" offset="0" sl="126" sc="26" el="126" ec="50" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="25" visitedSequencePoints="0" numBranchPoints="9" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="1" />
+          <FullName>VBLib.My.MyProject/MyWebServices</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663304</MetadataToken>
+              <Name>System.Boolean VBLib.My.MyProject/MyWebServices::Equals(System.Object)</Name>
+              <FileRef uid="21" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="310" ordinal="0" offset="0" sl="247" sc="13" el="247" ec="75" />
+                <SequencePoint vc="0" uspid="311" ordinal="1" offset="1" sl="248" sc="17" el="248" ec="40" />
+                <SequencePoint vc="0" uspid="312" ordinal="2" offset="16" sl="249" sc="13" el="249" ec="25" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="310" ordinal="0" offset="0" sl="247" sc="13" el="247" ec="75" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663305</MetadataToken>
+              <Name>System.Int32 VBLib.My.MyProject/MyWebServices::GetHashCode()</Name>
+              <FileRef uid="21" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="313" ordinal="0" offset="0" sl="251" sc="13" el="251" ec="63" />
+                <SequencePoint vc="0" uspid="314" ordinal="1" offset="1" sl="252" sc="17" el="252" ec="42" />
+                <SequencePoint vc="0" uspid="315" ordinal="2" offset="10" sl="253" sc="13" el="253" ec="25" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="313" ordinal="0" offset="0" sl="251" sc="13" el="251" ec="63" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663306</MetadataToken>
+              <Name>System.Type VBLib.My.MyProject/MyWebServices::GetType()</Name>
+              <FileRef uid="21" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="316" ordinal="0" offset="0" sl="255" sc="13" el="255" ec="72" />
+                <SequencePoint vc="0" uspid="317" ordinal="1" offset="1" sl="256" sc="17" el="256" ec="46" />
+                <SequencePoint vc="0" uspid="318" ordinal="2" offset="14" sl="257" sc="13" el="257" ec="25" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="316" ordinal="0" offset="0" sl="255" sc="13" el="255" ec="72" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663307</MetadataToken>
+              <Name>System.String VBLib.My.MyProject/MyWebServices::ToString()</Name>
+              <FileRef uid="21" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="319" ordinal="0" offset="0" sl="259" sc="13" el="259" ec="59" />
+                <SequencePoint vc="0" uspid="320" ordinal="1" offset="1" sl="260" sc="17" el="260" ec="39" />
+                <SequencePoint vc="0" uspid="321" ordinal="2" offset="10" sl="261" sc="13" el="261" ec="25" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="319" ordinal="0" offset="0" sl="259" sc="13" el="259" ec="59" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="2" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="7" visitedSequencePoints="0" numBranchPoints="3" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" />
+              <MetadataToken>100663308</MetadataToken>
+              <Name>T VBLib.My.MyProject/MyWebServices::Create__Instance__(T)</Name>
+              <FileRef uid="21" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="322" ordinal="0" offset="0" sl="264" sc="12" el="264" ec="95" />
+                <SequencePoint vc="0" uspid="323" ordinal="1" offset="1" sl="265" sc="17" el="265" ec="44" />
+                <SequencePoint vc="0" uspid="324" ordinal="2" offset="14" sl="266" sc="21" el="266" ec="35" />
+                <SequencePoint vc="0" uspid="325" ordinal="3" offset="24" sl="267" sc="17" el="267" ec="21" />
+                <SequencePoint vc="0" uspid="326" ordinal="4" offset="25" sl="268" sc="21" el="268" ec="36" />
+                <SequencePoint vc="0" uspid="327" ordinal="5" offset="29" sl="269" sc="17" el="269" ec="23" />
+                <SequencePoint vc="0" uspid="328" ordinal="6" offset="30" sl="270" sc="13" el="270" ec="25" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="329" ordinal="0" offset="12" path="0" />
+                <BranchPoint vc="0" uspid="330" ordinal="1" offset="12" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="322" ordinal="0" offset="0" sl="264" sc="12" el="264" ec="95" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663309</MetadataToken>
+              <Name>System.Void VBLib.My.MyProject/MyWebServices::Dispose__Instance__(T&amp;)</Name>
+              <FileRef uid="21" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="331" ordinal="0" offset="0" sl="273" sc="13" el="273" ec="71" />
+                <SequencePoint vc="0" uspid="332" ordinal="1" offset="1" sl="274" sc="17" el="274" ec="35" />
+                <SequencePoint vc="0" uspid="333" ordinal="2" offset="16" sl="275" sc="13" el="275" ec="20" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="331" ordinal="0" offset="0" sl="273" sc="13" el="273" ec="71" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663310</MetadataToken>
+              <Name>System.Void VBLib.My.MyProject/MyWebServices::.ctor()</Name>
+              <FileRef uid="21" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="334" ordinal="0" offset="0" sl="279" sc="13" el="279" ec="29" />
+                <SequencePoint vc="0" uspid="335" ordinal="1" offset="1" sl="280" sc="16" el="280" ec="28" />
+                <SequencePoint vc="0" uspid="336" ordinal="2" offset="8" sl="281" sc="13" el="281" ec="20" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="334" ordinal="0" offset="0" sl="279" sc="13" el="279" ec="29" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="12" visitedSequencePoints="0" numBranchPoints="4" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="1" />
+          <FullName>VBLib.My.MyProject/ThreadSafeObjectProvider`1</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="2" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="8" visitedSequencePoints="0" numBranchPoints="3" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" />
+              <MetadataToken>100663311</MetadataToken>
+              <Name>T VBLib.My.MyProject/ThreadSafeObjectProvider`1::get_GetInstance()</Name>
+              <FileRef uid="21" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="337" ordinal="0" offset="0" sl="331" sc="17" el="331" ec="20" />
+                <SequencePoint vc="0" uspid="338" ordinal="1" offset="1" sl="332" sc="25" el="332" ec="53" />
+                <SequencePoint vc="0" uspid="339" ordinal="2" offset="13" sl="333" sc="21" el="333" ec="45" />
+                <SequencePoint vc="0" uspid="340" ordinal="3" offset="26" sl="334" sc="25" el="334" ec="38" />
+                <SequencePoint vc="0" uspid="341" ordinal="4" offset="32" sl="335" sc="25" el="335" ec="50" />
+                <SequencePoint vc="0" uspid="342" ordinal="5" offset="45" sl="336" sc="21" el="336" ec="27" />
+                <SequencePoint vc="0" uspid="343" ordinal="6" offset="46" sl="337" sc="21" el="337" ec="33" />
+                <SequencePoint vc="0" uspid="344" ordinal="7" offset="50" sl="338" sc="17" el="338" ec="24" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="345" ordinal="0" offset="24" path="0" />
+                <BranchPoint vc="0" uspid="346" ordinal="1" offset="24" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="337" ordinal="0" offset="0" sl="331" sc="17" el="331" ec="20" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="4" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663312</MetadataToken>
+              <Name>System.Void VBLib.My.MyProject/ThreadSafeObjectProvider`1::.ctor()</Name>
+              <FileRef uid="21" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="347" ordinal="0" offset="0" sl="350" sc="13" el="350" ec="29" />
+                <SequencePoint vc="0" uspid="348" ordinal="1" offset="1" sl="351" sc="17" el="351" ec="29" />
+                <SequencePoint vc="0" uspid="349" ordinal="2" offset="8" sl="355" sc="30" el="355" ec="39" />
+                <SequencePoint vc="0" uspid="350" ordinal="3" offset="19" sl="352" sc="13" el="352" ec="20" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="347" ordinal="0" offset="0" sl="350" sc="13" el="350" ec="29" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="121" visitedSequencePoints="0" numBranchPoints="74" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="19" minCyclomaticComplexity="1" />
+          <FullName>VBLib.My.InternalXmlHelper</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="3" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="6" visitedSequencePoints="0" numBranchPoints="5" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="3" minCyclomaticComplexity="3" />
+              <MetadataToken>100663314</MetadataToken>
+              <Name>System.String VBLib.My.InternalXmlHelper::get_Value(System.Collections.Generic.IEnumerable`1&lt;System.Xml.Linq.XElement&gt;)</Name>
+              <FileRef uid="25" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="351" ordinal="0" offset="0" sl="11" sc="7" el="11" ec="10" />
+                <SequencePoint vc="0" uspid="352" ordinal="1" offset="2" sl="12" sc="9" el="12" ec="67" />
+                <SequencePoint vc="0" uspid="353" ordinal="2" offset="18" sl="13" sc="11" el="13" ec="28" />
+                <SequencePoint vc="0" uspid="354" ordinal="3" offset="27" sl="14" sc="9" el="14" ec="13" />
+                <SequencePoint vc="0" uspid="355" ordinal="4" offset="61" sl="15" sc="9" el="15" ec="23" />
+                <SequencePoint vc="0" uspid="356" ordinal="5" offset="65" sl="16" sc="7" el="16" ec="14" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="357" ordinal="0" offset="36" path="0" />
+                <BranchPoint vc="0" uspid="358" ordinal="1" offset="36" path="1" />
+                <BranchPoint vc="0" uspid="359" ordinal="2" offset="50" path="0" />
+                <BranchPoint vc="0" uspid="360" ordinal="3" offset="50" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="351" ordinal="0" offset="0" sl="11" sc="7" el="11" ec="10" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="3" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="true">
+              <Summary numSequencePoints="6" visitedSequencePoints="0" numBranchPoints="5" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="3" minCyclomaticComplexity="3" />
+              <MetadataToken>100663315</MetadataToken>
+              <Name>System.Void VBLib.My.InternalXmlHelper::set_Value(System.Collections.Generic.IEnumerable`1&lt;System.Xml.Linq.XElement&gt;,System.String)</Name>
+              <FileRef uid="25" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="361" ordinal="0" offset="0" sl="17" sc="7" el="17" ec="27" />
+                <SequencePoint vc="0" uspid="362" ordinal="1" offset="2" sl="18" sc="9" el="18" ec="67" />
+                <SequencePoint vc="0" uspid="363" ordinal="2" offset="18" sl="19" sc="11" el="19" ec="29" />
+                <SequencePoint vc="0" uspid="364" ordinal="3" offset="26" sl="20" sc="11" el="20" ec="19" />
+                <SequencePoint vc="0" uspid="365" ordinal="4" offset="29" sl="21" sc="9" el="21" ec="13" />
+                <SequencePoint vc="0" uspid="366" ordinal="5" offset="63" sl="22" sc="7" el="22" ec="14" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="367" ordinal="0" offset="38" path="0" />
+                <BranchPoint vc="0" uspid="368" ordinal="1" offset="38" path="1" />
+                <BranchPoint vc="0" uspid="369" ordinal="2" offset="52" path="0" />
+                <BranchPoint vc="0" uspid="370" ordinal="3" offset="52" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="361" ordinal="0" offset="0" sl="17" sc="7" el="17" ec="27" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="3" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="6" visitedSequencePoints="0" numBranchPoints="5" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="3" minCyclomaticComplexity="3" />
+              <MetadataToken>100663316</MetadataToken>
+              <Name>System.String VBLib.My.InternalXmlHelper::get_AttributeValue(System.Collections.Generic.IEnumerable`1&lt;System.Xml.Linq.XElement&gt;,System.Xml.Linq.XName)</Name>
+              <FileRef uid="25" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="371" ordinal="0" offset="0" sl="26" sc="7" el="26" ec="10" />
+                <SequencePoint vc="0" uspid="372" ordinal="1" offset="2" sl="27" sc="9" el="27" ec="67" />
+                <SequencePoint vc="0" uspid="373" ordinal="2" offset="18" sl="28" sc="11" el="28" ec="53" />
+                <SequencePoint vc="0" uspid="374" ordinal="3" offset="33" sl="29" sc="9" el="29" ec="13" />
+                <SequencePoint vc="0" uspid="375" ordinal="4" offset="67" sl="30" sc="9" el="30" ec="23" />
+                <SequencePoint vc="0" uspid="376" ordinal="5" offset="71" sl="31" sc="7" el="31" ec="14" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="377" ordinal="0" offset="42" path="0" />
+                <BranchPoint vc="0" uspid="378" ordinal="1" offset="42" path="1" />
+                <BranchPoint vc="0" uspid="379" ordinal="2" offset="56" path="0" />
+                <BranchPoint vc="0" uspid="380" ordinal="3" offset="56" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="371" ordinal="0" offset="0" sl="26" sc="7" el="26" ec="10" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="3" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="true">
+              <Summary numSequencePoints="6" visitedSequencePoints="0" numBranchPoints="5" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="3" minCyclomaticComplexity="3" />
+              <MetadataToken>100663317</MetadataToken>
+              <Name>System.Void VBLib.My.InternalXmlHelper::set_AttributeValue(System.Collections.Generic.IEnumerable`1&lt;System.Xml.Linq.XElement&gt;,System.Xml.Linq.XName,System.String)</Name>
+              <FileRef uid="25" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="381" ordinal="0" offset="0" sl="32" sc="7" el="32" ec="27" />
+                <SequencePoint vc="0" uspid="382" ordinal="1" offset="2" sl="33" sc="9" el="33" ec="67" />
+                <SequencePoint vc="0" uspid="383" ordinal="2" offset="18" sl="34" sc="11" el="34" ec="46" />
+                <SequencePoint vc="0" uspid="384" ordinal="3" offset="27" sl="35" sc="11" el="35" ec="19" />
+                <SequencePoint vc="0" uspid="385" ordinal="4" offset="30" sl="36" sc="9" el="36" ec="13" />
+                <SequencePoint vc="0" uspid="386" ordinal="5" offset="64" sl="37" sc="7" el="37" ec="14" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="387" ordinal="0" offset="39" path="0" />
+                <BranchPoint vc="0" uspid="388" ordinal="1" offset="39" path="1" />
+                <BranchPoint vc="0" uspid="389" ordinal="2" offset="53" path="0" />
+                <BranchPoint vc="0" uspid="390" ordinal="3" offset="53" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="381" ordinal="0" offset="0" sl="32" sc="7" el="32" ec="27" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663318</MetadataToken>
+              <Name>System.String VBLib.My.InternalXmlHelper::get_AttributeValue(System.Xml.Linq.XElement,System.Xml.Linq.XName)</Name>
+              <FileRef uid="25" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="391" ordinal="0" offset="0" sl="41" sc="7" el="41" ec="10" />
+                <SequencePoint vc="0" uspid="392" ordinal="1" offset="1" sl="42" sc="9" el="42" ec="53" />
+                <SequencePoint vc="0" uspid="393" ordinal="2" offset="16" sl="43" sc="7" el="43" ec="14" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="391" ordinal="0" offset="0" sl="41" sc="7" el="41" ec="10" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="true">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663319</MetadataToken>
+              <Name>System.Void VBLib.My.InternalXmlHelper::set_AttributeValue(System.Xml.Linq.XElement,System.Xml.Linq.XName,System.String)</Name>
+              <FileRef uid="25" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="394" ordinal="0" offset="0" sl="44" sc="7" el="44" ec="27" />
+                <SequencePoint vc="0" uspid="395" ordinal="1" offset="1" sl="45" sc="9" el="45" ec="46" />
+                <SequencePoint vc="0" uspid="396" ordinal="2" offset="10" sl="46" sc="7" el="46" ec="14" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="394" ordinal="0" offset="0" sl="44" sc="7" el="44" ec="27" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="2" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663313</MetadataToken>
+              <Name>System.Void VBLib.My.InternalXmlHelper::.ctor()</Name>
+              <FileRef uid="25" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="397" ordinal="0" offset="0" sl="7" sc="5" el="7" ec="22" />
+                <SequencePoint vc="0" uspid="398" ordinal="1" offset="8" sl="8" sc="5" el="8" ec="12" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="397" ordinal="0" offset="0" sl="7" sc="5" el="7" ec="22" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="2" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="6" visitedSequencePoints="0" numBranchPoints="3" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" />
+              <MetadataToken>100663320</MetadataToken>
+              <Name>System.Xml.Linq.XAttribute VBLib.My.InternalXmlHelper::CreateAttribute(System.Xml.Linq.XName,System.Object)</Name>
+              <FileRef uid="25" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="399" ordinal="0" offset="0" sl="49" sc="5" el="49" ec="135" />
+                <SequencePoint vc="0" uspid="400" ordinal="1" offset="1" sl="50" sc="7" el="50" ec="31" />
+                <SequencePoint vc="0" uspid="401" ordinal="2" offset="9" sl="51" sc="9" el="51" ec="23" />
+                <SequencePoint vc="0" uspid="402" ordinal="3" offset="13" sl="52" sc="7" el="52" ec="13" />
+                <SequencePoint vc="0" uspid="403" ordinal="4" offset="14" sl="53" sc="7" el="53" ec="64" />
+                <SequencePoint vc="0" uspid="404" ordinal="5" offset="29" sl="54" sc="5" el="54" ec="17" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="405" ordinal="0" offset="7" path="0" />
+                <BranchPoint vc="0" uspid="406" ordinal="1" offset="7" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="399" ordinal="0" offset="0" sl="49" sc="5" el="49" ec="135" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="5" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663321</MetadataToken>
+              <Name>System.Xml.Linq.XAttribute VBLib.My.InternalXmlHelper::CreateNamespaceAttribute(System.Xml.Linq.XName,System.Xml.Linq.XNamespace)</Name>
+              <FileRef uid="25" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="407" ordinal="0" offset="0" sl="56" sc="5" el="56" ec="168" />
+                <SequencePoint vc="0" uspid="408" ordinal="1" offset="1" sl="57" sc="11" el="57" ec="77" />
+                <SequencePoint vc="0" uspid="409" ordinal="2" offset="14" sl="58" sc="7" el="58" ec="26" />
+                <SequencePoint vc="0" uspid="410" ordinal="3" offset="22" sl="59" sc="7" el="59" ec="15" />
+                <SequencePoint vc="0" uspid="411" ordinal="4" offset="26" sl="60" sc="5" el="60" ec="17" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="407" ordinal="0" offset="0" sl="56" sc="5" el="56" ec="168" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="4" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="14" visitedSequencePoints="0" numBranchPoints="7" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="4" minCyclomaticComplexity="4" />
+              <MetadataToken>100663322</MetadataToken>
+              <Name>System.Object VBLib.My.InternalXmlHelper::RemoveNamespaceAttributes(System.String[],System.Xml.Linq.XNamespace[],System.Collections.Generic.List`1&lt;System.Xml.Linq.XAttribute&gt;,System.Object)</Name>
+              <FileRef uid="25" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="412" ordinal="0" offset="0" sl="62" sc="9" el="62" ec="253" />
+                <SequencePoint vc="0" uspid="413" ordinal="1" offset="1" sl="63" sc="13" el="63" ec="38" />
+                <SequencePoint vc="0" uspid="414" ordinal="2" offset="12" sl="64" sc="21" el="64" ec="108" />
+                <SequencePoint vc="0" uspid="415" ordinal="3" offset="19" sl="65" sc="17" el="65" ec="44" />
+                <SequencePoint vc="0" uspid="416" ordinal="4" offset="30" sl="66" sc="21" el="66" ec="99" />
+                <SequencePoint vc="0" uspid="417" ordinal="5" offset="44" sl="67" sc="17" el="67" ec="21" />
+                <SequencePoint vc="0" uspid="418" ordinal="6" offset="45" sl="68" sc="25" el="68" ec="125" />
+                <SequencePoint vc="0" uspid="419" ordinal="7" offset="52" sl="69" sc="21" el="69" ec="48" />
+                <SequencePoint vc="0" uspid="420" ordinal="8" offset="63" sl="70" sc="25" el="70" ec="104" />
+                <SequencePoint vc="0" uspid="421" ordinal="9" offset="75" sl="71" sc="21" el="71" ec="27" />
+                <SequencePoint vc="0" uspid="422" ordinal="10" offset="76" sl="72" sc="17" el="72" ec="23" />
+                <SequencePoint vc="0" uspid="423" ordinal="11" offset="77" sl="73" sc="13" el="73" ec="19" />
+                <SequencePoint vc="0" uspid="424" ordinal="12" offset="78" sl="74" sc="13" el="74" ec="23" />
+                <SequencePoint vc="0" uspid="425" ordinal="13" offset="82" sl="75" sc="9" el="75" ec="22" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="426" ordinal="0" offset="10" path="0" />
+                <BranchPoint vc="0" uspid="427" ordinal="1" offset="10" path="1" />
+                <BranchPoint vc="0" uspid="428" ordinal="2" offset="28" path="0" />
+                <BranchPoint vc="0" uspid="429" ordinal="3" offset="28" path="1" />
+                <BranchPoint vc="0" uspid="430" ordinal="4" offset="61" path="0" />
+                <BranchPoint vc="0" uspid="431" ordinal="5" offset="61" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="412" ordinal="0" offset="0" sl="62" sc="9" el="62" ec="253" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="3" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="11" visitedSequencePoints="0" numBranchPoints="5" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="3" minCyclomaticComplexity="3" />
+              <MetadataToken>100663323</MetadataToken>
+              <Name>System.Collections.IEnumerable VBLib.My.InternalXmlHelper::RemoveNamespaceAttributes(System.String[],System.Xml.Linq.XNamespace[],System.Collections.Generic.List`1&lt;System.Xml.Linq.XAttribute&gt;,System.Collections.IEnumerable)</Name>
+              <FileRef uid="25" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="432" ordinal="0" offset="0" sl="77" sc="9" el="77" ec="315" />
+                <SequencePoint vc="0" uspid="433" ordinal="1" offset="1" sl="78" sc="13" el="78" ec="38" />
+                <SequencePoint vc="0" uspid="434" ordinal="2" offset="12" sl="79" sc="21" el="79" ec="209" />
+                <SequencePoint vc="0" uspid="435" ordinal="3" offset="19" sl="80" sc="17" el="80" ec="44" />
+                <SequencePoint vc="0" uspid="436" ordinal="4" offset="30" sl="81" sc="21" el="81" ec="175" />
+                <SequencePoint vc="0" uspid="437" ordinal="5" offset="61" sl="82" sc="17" el="82" ec="21" />
+                <SequencePoint vc="0" uspid="438" ordinal="6" offset="62" sl="83" sc="21" el="83" ec="218" />
+                <SequencePoint vc="0" uspid="439" ordinal="7" offset="96" sl="84" sc="17" el="84" ec="23" />
+                <SequencePoint vc="0" uspid="440" ordinal="8" offset="97" sl="85" sc="13" el="85" ec="19" />
+                <SequencePoint vc="0" uspid="441" ordinal="9" offset="98" sl="86" sc="13" el="86" ec="23" />
+                <SequencePoint vc="0" uspid="442" ordinal="10" offset="102" sl="87" sc="9" el="87" ec="22" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="443" ordinal="0" offset="10" path="0" />
+                <BranchPoint vc="0" uspid="444" ordinal="1" offset="10" path="1" />
+                <BranchPoint vc="0" uspid="445" ordinal="2" offset="28" path="0" />
+                <BranchPoint vc="0" uspid="446" ordinal="3" offset="28" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="432" ordinal="0" offset="0" sl="77" sc="9" el="77" ec="315" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="19" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="53" visitedSequencePoints="0" numBranchPoints="35" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="19" minCyclomaticComplexity="19" />
+              <MetadataToken>100663324</MetadataToken>
+              <Name>System.Xml.Linq.XElement VBLib.My.InternalXmlHelper::RemoveNamespaceAttributes(System.String[],System.Xml.Linq.XNamespace[],System.Collections.Generic.List`1&lt;System.Xml.Linq.XAttribute&gt;,System.Xml.Linq.XElement)</Name>
+              <FileRef uid="25" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="447" ordinal="0" offset="0" sl="116" sc="9" el="116" ec="301" />
+                <SequencePoint vc="0" uspid="448" ordinal="1" offset="1" sl="117" sc="13" el="117" ec="36" />
+                <SequencePoint vc="0" uspid="449" ordinal="2" offset="17" sl="118" sc="21" el="118" ec="78" />
+                <SequencePoint vc="0" uspid="450" ordinal="3" offset="29" sl="121" sc="25" el="121" ec="85" />
+                <SequencePoint vc="0" uspid="451" ordinal="4" offset="36" sl="123" sc="21" el="123" ec="55" />
+                <SequencePoint vc="0" uspid="452" ordinal="5" offset="51" sl="124" sc="29" el="124" ec="123" />
+                <SequencePoint vc="0" uspid="453" ordinal="6" offset="58" sl="125" sc="29" el="125" ec="64" />
+                <SequencePoint vc="0" uspid="454" ordinal="7" offset="71" sl="127" sc="25" el="127" ec="49" />
+                <SequencePoint vc="0" uspid="455" ordinal="8" offset="87" sl="128" sc="29" el="128" ec="98" />
+                <SequencePoint vc="0" uspid="456" ordinal="9" offset="104" sl="129" sc="37" el="129" ec="86" />
+                <SequencePoint vc="0" uspid="457" ordinal="10" offset="111" sl="131" sc="33" el="131" ec="66" />
+                <SequencePoint vc="0" uspid="458" ordinal="11" offset="120" sl="132" sc="41" el="132" ec="92" />
+                <SequencePoint vc="0" uspid="459" ordinal="12" offset="126" sl="133" sc="41" el="133" ec="109" />
+                <SequencePoint vc="0" uspid="460" ordinal="13" offset="132" sl="134" sc="37" el="134" ec="80" />
+                <SequencePoint vc="0" uspid="461" ordinal="14" offset="147" sl="135" sc="41" el="135" ec="70" />
+                <SequencePoint vc="0" uspid="462" ordinal="15" offset="161" sl="137" sc="45" el="137" ec="55" />
+                <SequencePoint vc="0" uspid="463" ordinal="16" offset="168" sl="138" sc="41" el="138" ec="47" />
+                <SequencePoint vc="0" uspid="464" ordinal="17" offset="169" sl="141" sc="41" el="141" ec="52" />
+                <SequencePoint vc="0" uspid="465" ordinal="18" offset="171" sl="142" sc="41" el="142" ec="49" />
+                <SequencePoint vc="0" uspid="466" ordinal="19" offset="174" sl="143" sc="37" el="143" ec="43" />
+                <SequencePoint vc="0" uspid="467" ordinal="20" offset="175" sl="144" sc="33" el="144" ec="37" />
+                <SequencePoint vc="0" uspid="468" ordinal="21" offset="192" sl="145" sc="29" el="145" ec="35" />
+                <SequencePoint vc="0" uspid="469" ordinal="22" offset="193" sl="147" sc="29" el="147" ec="52" />
+                <SequencePoint vc="0" uspid="470" ordinal="23" offset="209" sl="151" sc="33" el="151" ec="65" />
+                <SequencePoint vc="0" uspid="471" ordinal="24" offset="222" sl="152" sc="41" el="152" ec="84" />
+                <SequencePoint vc="0" uspid="472" ordinal="25" offset="232" sl="153" sc="37" el="153" ec="70" />
+                <SequencePoint vc="0" uspid="473" ordinal="26" offset="241" sl="154" sc="45" el="154" ec="106" />
+                <SequencePoint vc="0" uspid="474" ordinal="27" offset="251" sl="155" sc="45" el="155" ec="101" />
+                <SequencePoint vc="0" uspid="475" ordinal="28" offset="265" sl="156" sc="45" el="156" ec="160" />
+                <SequencePoint vc="0" uspid="476" ordinal="29" offset="274" sl="157" sc="41" el="157" ec="79" />
+                <SequencePoint vc="0" uspid="477" ordinal="30" offset="288" sl="158" sc="45" el="158" ec="88" />
+                <SequencePoint vc="0" uspid="478" ordinal="31" offset="303" sl="159" sc="49" el="159" ec="78" />
+                <SequencePoint vc="0" uspid="479" ordinal="32" offset="317" sl="161" sc="53" el="161" ec="63" />
+                <SequencePoint vc="0" uspid="480" ordinal="33" offset="324" sl="162" sc="49" el="162" ec="55" />
+                <SequencePoint vc="0" uspid="481" ordinal="34" offset="325" sl="165" sc="49" el="165" ec="60" />
+                <SequencePoint vc="0" uspid="482" ordinal="35" offset="327" sl="166" sc="49" el="166" ec="57" />
+                <SequencePoint vc="0" uspid="483" ordinal="36" offset="330" sl="167" sc="45" el="167" ec="51" />
+                <SequencePoint vc="0" uspid="484" ordinal="37" offset="331" sl="168" sc="41" el="168" ec="47" />
+                <SequencePoint vc="0" uspid="485" ordinal="38" offset="332" sl="169" sc="37" el="169" ec="41" />
+                <SequencePoint vc="0" uspid="486" ordinal="39" offset="349" sl="170" sc="33" el="170" ec="39" />
+                <SequencePoint vc="0" uspid="487" ordinal="40" offset="350" sl="172" sc="33" el="172" ec="56" />
+                <SequencePoint vc="0" uspid="488" ordinal="41" offset="363" sl="174" sc="37" el="174" ec="47" />
+                <SequencePoint vc="0" uspid="489" ordinal="42" offset="370" sl="176" sc="37" el="176" ec="54" />
+                <SequencePoint vc="0" uspid="490" ordinal="43" offset="378" sl="177" sc="33" el="177" ec="39" />
+                <SequencePoint vc="0" uspid="491" ordinal="44" offset="379" sl="178" sc="29" el="178" ec="35" />
+                <SequencePoint vc="0" uspid="492" ordinal="45" offset="380" sl="179" sc="25" el="179" ec="31" />
+                <SequencePoint vc="0" uspid="493" ordinal="46" offset="381" sl="180" sc="21" el="180" ec="27" />
+                <SequencePoint vc="0" uspid="494" ordinal="47" offset="382" sl="182" sc="21" el="182" ec="30" />
+                <SequencePoint vc="0" uspid="495" ordinal="48" offset="384" sl="183" sc="17" el="183" ec="26" />
+                <SequencePoint vc="0" uspid="496" ordinal="49" offset="385" sl="120" sc="17" el="120" ec="38" />
+                <SequencePoint vc="0" uspid="497" ordinal="50" offset="401" sl="184" sc="13" el="184" ec="19" />
+                <SequencePoint vc="0" uspid="498" ordinal="51" offset="402" sl="185" sc="13" el="185" ec="21" />
+                <SequencePoint vc="0" uspid="499" ordinal="52" offset="406" sl="186" sc="9" el="186" ec="22" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="500" ordinal="0" offset="12" path="0" />
+                <BranchPoint vc="0" uspid="501" ordinal="1" offset="12" path="1" />
+                <BranchPoint vc="0" uspid="502" ordinal="2" offset="46" path="0" />
+                <BranchPoint vc="0" uspid="503" ordinal="3" offset="46" path="1" />
+                <BranchPoint vc="0" uspid="504" ordinal="4" offset="82" path="0" />
+                <BranchPoint vc="0" uspid="505" ordinal="5" offset="82" path="1" />
+                <BranchPoint vc="0" uspid="506" ordinal="6" offset="88" path="0" />
+                <BranchPoint vc="0" uspid="507" ordinal="7" offset="88" path="1" />
+                <BranchPoint vc="0" uspid="508" ordinal="8" offset="91" path="0" />
+                <BranchPoint vc="0" uspid="509" ordinal="9" offset="91" path="1" />
+                <BranchPoint vc="0" uspid="510" ordinal="10" offset="102" path="0" />
+                <BranchPoint vc="0" uspid="511" ordinal="11" offset="102" path="1" />
+                <BranchPoint vc="0" uspid="512" ordinal="12" offset="145" path="0" />
+                <BranchPoint vc="0" uspid="513" ordinal="13" offset="145" path="1" />
+                <BranchPoint vc="0" uspid="514" ordinal="14" offset="159" path="0" />
+                <BranchPoint vc="0" uspid="515" ordinal="15" offset="159" path="1" />
+                <BranchPoint vc="0" uspid="516" ordinal="16" offset="190" path="0" />
+                <BranchPoint vc="0" uspid="517" ordinal="17" offset="190" path="1" />
+                <BranchPoint vc="0" uspid="518" ordinal="18" offset="204" path="0" />
+                <BranchPoint vc="0" uspid="519" ordinal="19" offset="204" path="1" />
+                <BranchPoint vc="0" uspid="520" ordinal="20" offset="220" path="0" />
+                <BranchPoint vc="0" uspid="521" ordinal="21" offset="220" path="1" />
+                <BranchPoint vc="0" uspid="522" ordinal="22" offset="286" path="0" />
+                <BranchPoint vc="0" uspid="523" ordinal="23" offset="286" path="1" />
+                <BranchPoint vc="0" uspid="524" ordinal="24" offset="301" path="0" />
+                <BranchPoint vc="0" uspid="525" ordinal="25" offset="301" path="1" />
+                <BranchPoint vc="0" uspid="526" ordinal="26" offset="315" path="0" />
+                <BranchPoint vc="0" uspid="527" ordinal="27" offset="315" path="1" />
+                <BranchPoint vc="0" uspid="528" ordinal="28" offset="347" path="0" />
+                <BranchPoint vc="0" uspid="529" ordinal="29" offset="347" path="1" />
+                <BranchPoint vc="0" uspid="530" ordinal="30" offset="361" path="0" />
+                <BranchPoint vc="0" uspid="531" ordinal="31" offset="361" path="1" />
+                <BranchPoint vc="0" uspid="532" ordinal="32" offset="396" path="0" />
+                <BranchPoint vc="0" uspid="533" ordinal="33" offset="396" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="447" ordinal="0" offset="0" sl="116" sc="9" el="116" ec="301" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="16" visitedSequencePoints="0" numBranchPoints="5" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="1" />
+          <FullName>VBLib.My.InternalXmlHelper/RemoveNamespaceAttributesClosure</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="5" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663325</MetadataToken>
+              <Name>System.Void VBLib.My.InternalXmlHelper/RemoveNamespaceAttributesClosure::.ctor(System.String[],System.Xml.Linq.XNamespace[],System.Collections.Generic.List`1&lt;System.Xml.Linq.XAttribute&gt;)</Name>
+              <FileRef uid="25" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="534" ordinal="0" offset="0" sl="96" sc="13" el="96" ec="198" />
+                <SequencePoint vc="0" uspid="535" ordinal="1" offset="8" sl="97" sc="17" el="97" ec="52" />
+                <SequencePoint vc="0" uspid="536" ordinal="2" offset="15" sl="98" sc="17" el="98" ec="40" />
+                <SequencePoint vc="0" uspid="537" ordinal="3" offset="22" sl="99" sc="17" el="99" ec="42" />
+                <SequencePoint vc="0" uspid="538" ordinal="4" offset="29" sl="100" sc="13" el="100" ec="21" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="534" ordinal="0" offset="0" sl="96" sc="13" el="96" ec="198" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663326</MetadataToken>
+              <Name>System.Xml.Linq.XElement VBLib.My.InternalXmlHelper/RemoveNamespaceAttributesClosure::ProcessXElement(System.Xml.Linq.XElement)</Name>
+              <FileRef uid="25" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="539" ordinal="0" offset="0" sl="102" sc="13" el="102" ec="120" />
+                <SequencePoint vc="0" uspid="540" ordinal="1" offset="1" sl="103" sc="17" el="103" ec="119" />
+                <SequencePoint vc="0" uspid="541" ordinal="2" offset="28" sl="104" sc="13" el="104" ec="26" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="539" ordinal="0" offset="0" sl="102" sc="13" el="102" ec="120" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="2" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="8" visitedSequencePoints="0" numBranchPoints="3" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" />
+              <MetadataToken>100663327</MetadataToken>
+              <Name>System.Object VBLib.My.InternalXmlHelper/RemoveNamespaceAttributesClosure::ProcessObject(System.Object)</Name>
+              <FileRef uid="25" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="542" ordinal="0" offset="0" sl="106" sc="13" el="106" ec="67" />
+                <SequencePoint vc="0" uspid="543" ordinal="1" offset="1" sl="107" sc="21" el="107" ec="108" />
+                <SequencePoint vc="0" uspid="544" ordinal="2" offset="8" sl="108" sc="17" el="108" ec="43" />
+                <SequencePoint vc="0" uspid="545" ordinal="3" offset="19" sl="109" sc="21" el="109" ec="123" />
+                <SequencePoint vc="0" uspid="546" ordinal="4" offset="48" sl="110" sc="17" el="110" ec="21" />
+                <SequencePoint vc="0" uspid="547" ordinal="5" offset="49" sl="111" sc="21" el="111" ec="31" />
+                <SequencePoint vc="0" uspid="548" ordinal="6" offset="53" sl="112" sc="17" el="112" ec="23" />
+                <SequencePoint vc="0" uspid="549" ordinal="7" offset="54" sl="113" sc="13" el="113" ec="26" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="550" ordinal="0" offset="17" path="0" />
+                <BranchPoint vc="0" uspid="551" ordinal="1" offset="17" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="542" ordinal="0" offset="0" sl="106" sc="13" el="106" ec="67" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="9" visitedSequencePoints="8" numBranchPoints="4" visitedBranchPoints="3" sequenceCoverage="88.89" branchCoverage="75" maxCyclomaticComplexity="2" minCyclomaticComplexity="1" />
+          <FullName>VBLib.Class1</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663328</MetadataToken>
+              <Name>System.Void VBLib.Class1::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="1" uspid="552" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="2" sequenceCoverage="83.33" branchCoverage="66.67" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="6" visitedSequencePoints="5" numBranchPoints="3" visitedBranchPoints="2" sequenceCoverage="83.33" branchCoverage="66.67" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" />
+              <MetadataToken>100663329</MetadataToken>
+              <Name>System.Void VBLib.Class1::Method()</Name>
+              <FileRef uid="27" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="553" ordinal="0" offset="0" sl="3" sc="5" el="3" ec="24" />
+                <SequencePoint vc="1" uspid="554" ordinal="1" offset="1" sl="4" sc="9" el="4" ec="37" />
+                <SequencePoint vc="1" uspid="555" ordinal="2" offset="12" sl="6" sc="9" el="6" ec="28" />
+                <SequencePoint vc="0" uspid="556" ordinal="3" offset="22" sl="7" sc="13" el="7" ec="40" />
+                <SequencePoint vc="1" uspid="557" ordinal="4" offset="33" sl="8" sc="9" el="8" ec="15" />
+                <SequencePoint vc="1" uspid="558" ordinal="5" offset="34" sl="9" sc="5" el="9" ec="12" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="559" ordinal="0" offset="20" path="0" />
+                <BranchPoint vc="1" uspid="560" ordinal="1" offset="20" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="553" ordinal="0" offset="0" sl="3" sc="5" el="3" ec="24" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="3" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663330</MetadataToken>
+              <Name>System.Boolean VBLib.Class1::Condition()</Name>
+              <FileRef uid="27" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="561" ordinal="0" offset="0" sl="11" sc="5" el="11" ec="43" />
+                <SequencePoint vc="1" uspid="562" ordinal="1" offset="1" sl="12" sc="9" el="12" ec="21" />
+                <SequencePoint vc="1" uspid="563" ordinal="2" offset="5" sl="13" sc="5" el="13" ec="17" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="561" ordinal="0" offset="0" sl="11" sc="5" el="11" ec="43" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="13" visitedSequencePoints="0" numBranchPoints="5" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="1" />
+          <FullName>VBLib.My.Resources.Resources</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="2" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="7" visitedSequencePoints="0" numBranchPoints="3" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="2" minCyclomaticComplexity="2" />
+              <MetadataToken>100663331</MetadataToken>
+              <Name>System.Resources.ResourceManager VBLib.My.Resources.Resources::get_ResourceManager()</Name>
+              <FileRef uid="28" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="564" ordinal="0" offset="0" sl="39" sc="13" el="39" ec="16" />
+                <SequencePoint vc="0" uspid="565" ordinal="1" offset="1" sl="40" sc="17" el="40" ec="69" />
+                <SequencePoint vc="0" uspid="566" ordinal="2" offset="16" sl="41" sc="25" el="41" ec="166" />
+                <SequencePoint vc="0" uspid="567" ordinal="3" offset="42" sl="42" sc="21" el="42" ec="39" />
+                <SequencePoint vc="0" uspid="568" ordinal="4" offset="48" sl="43" sc="17" el="43" ec="23" />
+                <SequencePoint vc="0" uspid="569" ordinal="5" offset="49" sl="44" sc="17" el="44" ec="35" />
+                <SequencePoint vc="0" uspid="570" ordinal="6" offset="57" sl="45" sc="13" el="45" ec="20" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="0" uspid="571" ordinal="0" offset="14" path="0" />
+                <BranchPoint vc="0" uspid="572" ordinal="1" offset="14" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="564" ordinal="0" offset="0" sl="39" sc="13" el="39" ec="16" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663332</MetadataToken>
+              <Name>System.Globalization.CultureInfo VBLib.My.Resources.Resources::get_Culture()</Name>
+              <FileRef uid="28" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="573" ordinal="0" offset="0" sl="54" sc="13" el="54" ec="16" />
+                <SequencePoint vc="0" uspid="574" ordinal="1" offset="1" sl="55" sc="17" el="55" ec="39" />
+                <SequencePoint vc="0" uspid="575" ordinal="2" offset="9" sl="56" sc="13" el="56" ec="20" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="573" ordinal="0" offset="0" sl="54" sc="13" el="54" ec="16" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="true">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663333</MetadataToken>
+              <Name>System.Void VBLib.My.Resources.Resources::set_Culture(System.Globalization.CultureInfo)</Name>
+              <FileRef uid="28" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="576" ordinal="0" offset="0" sl="57" sc="13" el="57" ec="72" />
+                <SequencePoint vc="0" uspid="577" ordinal="1" offset="1" sl="58" sc="17" el="58" ec="40" />
+                <SequencePoint vc="0" uspid="578" ordinal="2" offset="7" sl="59" sc="13" el="59" ec="20" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="576" ordinal="0" offset="0" sl="57" sc="13" el="57" ec="72" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="4" visitedSequencePoints="0" numBranchPoints="2" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>VBLib.My.MySettings</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663336</MetadataToken>
+              <Name>VBLib.My.MySettings VBLib.My.MySettings::get_Default()</Name>
+              <FileRef uid="29" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="579" ordinal="0" offset="0" sl="41" sc="13" el="41" ec="16" />
+                <SequencePoint vc="0" uspid="580" ordinal="1" offset="1" sl="53" sc="17" el="53" ec="39" />
+                <SequencePoint vc="0" uspid="581" ordinal="2" offset="9" sl="54" sc="13" el="54" ec="20" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="579" ordinal="0" offset="0" sl="41" sc="13" el="41" ec="16" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663334</MetadataToken>
+              <Name>System.Void VBLib.My.MySettings::.cctor()</Name>
+              <FileRef uid="29" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="582" ordinal="0" offset="0" sl="23" sc="24" el="23" ec="155" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="582" ordinal="0" offset="0" sl="23" sc="24" el="23" ec="155" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663335</MetadataToken>
+              <Name>System.Void VBLib.My.MySettings::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="583" ordinal="0" offset="0" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>VBLib.My.MySettingsProperty</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663337</MetadataToken>
+              <Name>VBLib.My.MySettings VBLib.My.MySettingsProperty::get_Settings()</Name>
+              <FileRef uid="29" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="584" ordinal="0" offset="0" sl="68" sc="13" el="68" ec="16" />
+                <SequencePoint vc="0" uspid="585" ordinal="1" offset="1" sl="69" sc="17" el="69" ec="58" />
+                <SequencePoint vc="0" uspid="586" ordinal="2" offset="9" sl="70" sc="13" el="70" ec="20" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="584" ordinal="0" offset="0" sl="68" sc="13" el="68" ec="16" />
+            </Method>
+          </Methods>
+        </Class>
+      </Classes>
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="7E-D6-0C-5F-08-95-B3-B7-AE-9C-0F-24-97-E9-46-63-43-CF-F3-C3">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Extensions\CppUnitFramework\Microsoft.VisualStudio.TestTools.CppUnitTestFramework.TestEngine.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestTools.CppUnitTestFramework.TestEngine</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="49-FB-E6-5F-63-17-3F-47-76-D5-73-EE-00-1C-ED-B8-E9-ED-07-82">
+      <FullName>C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\Extensions\CppUnitFramework\Microsoft.VisualStudio.TestTools.CppUnitTestFramework.Discoverer.dll</FullName>
+      <ModuleName>Microsoft.VisualStudio.TestTools.CppUnitTestFramework.Discoverer</ModuleName>
+      <Classes />
+    </Module>
+  </Modules>
+</CoverageSession>

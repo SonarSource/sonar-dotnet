@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6781",
+      "Message": "JWT secret keys should not be disclosed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6781.cs#L12",
+      "Location": "Line 12 Position 13-75"
+    }
+  ]
+}

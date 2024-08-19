@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S103",
+      "Message": "Split this 207 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S2257.vb#L58",
+      "Location": "Line 58 Position 1-208"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 308 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S3884.vb#L12",
+      "Location": "Line 12 Position 1-309"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 259 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S3884.vb#L52",
+      "Location": "Line 52 Position 1-260"
+    }
+  ]
+}

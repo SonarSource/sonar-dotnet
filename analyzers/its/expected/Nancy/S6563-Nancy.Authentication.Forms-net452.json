@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6563",
+      "Message": "Use UTC when recording DateTime instants",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L301",
+      "Location": "Line 301 Position 120-132"
+    }
+  ]
+}

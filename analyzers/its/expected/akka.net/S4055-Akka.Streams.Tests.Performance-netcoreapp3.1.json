@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4055",
+      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams.Tests.Performance/InterpreterBenchmark.cs#L98",
+      "Location": "Line 98 Position 35-48"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S5344",
+      "Message": "Use at least 100,000 iterations here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S5344.cs#L11",
+      "Location": "Line 11 Position 17-31"
+    }
+  ]
+}

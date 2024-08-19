@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027Assert.Contains\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/AkkaSerializationSpec.cs#L411",
+      "Location": "Line 411 Position 13-55"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027string.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessage.cs#L24",
+      "Location": "Line 24 Position 20-49"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027string.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessage.cs#L24",
+      "Location": "Line 24 Position 53-82"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027String.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessageWithPrivateCtor.cs#L23",
+      "Location": "Line 23 Position 20-49"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027String.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessageWithPrivateCtor.cs#L23",
+      "Location": "Line 23 Position 53-82"
+    }
+  ]
+}

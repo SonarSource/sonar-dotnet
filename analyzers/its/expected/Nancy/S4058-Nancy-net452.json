@@ -1,0 +1,196 @@
+{
+  "Issues": [
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027contentPath.StartsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L134",
+      "Location": "Line 134 Position 18-45"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027pathWithoutFileName.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L219",
+      "Location": "Line 219 Position 21-52"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027contentPath.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L227",
+      "Location": "Line 227 Position 18-41"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027requestedPath.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L229",
+      "Location": "Line 229 Position 17-42"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027string.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L294",
+      "Location": "Line 294 Position 24-60"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027string.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L294",
+      "Location": "Line 294 Position 64-108"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027requestedPath.StartsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L36",
+      "Location": "Line 36 Position 18-47"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027contentPath.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L65",
+      "Location": "Line 65 Position 21-44"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027path.StartsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/DiagnosticsConfiguration.cs#L83",
+      "Location": "Line 83 Position 22-42"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027context.Request.Url.BasePath.TrimEnd(\u0027/\u0027).EndsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L292",
+      "Location": "Line 292 Position 17-98"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027asmName.Name.StartsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/Modules/InfoModule.cs#L87",
+      "Location": "Line 87 Position 68-115"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027asmName.Name.StartsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/Modules/InfoModule.cs#L99",
+      "Location": "Line 99 Position 68-109"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027uri.Scheme.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Extensions/ContextExtensions.cs#L167",
+      "Location": "Line 167 Position 21-46"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027url.StartsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Extensions/ContextExtensions.cs#L170",
+      "Location": "Line 170 Position 29-49"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027url.StartsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Extensions/ContextExtensions.cs#L170",
+      "Location": "Line 170 Position 53-80"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027path.StartsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Extensions/ContextExtensions.cs#L46",
+      "Location": "Line 46 Position 18-39"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027userHostAddress.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Extensions/RequestExtensions.cs#L34",
+      "Location": "Line 34 Position 21-56"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027userHostAddress.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Extensions/RequestExtensions.cs#L39",
+      "Location": "Line 39 Position 21-50"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027uri.StartsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/HttpLink.cs#L274",
+      "Location": "Line 274 Position 27-46"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027parsedRelation.AbsolutePath.EndsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/HttpLinkRelation.cs#L146",
+      "Location": "Line 146 Position 24-65"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027resourceName.EndsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Localization/ResourceBasedTextResource.cs#L28",
+      "Location": "Line 28 Position 23-58"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027contentType.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Responses/Negotiation/MediaRange.cs#L31",
+      "Location": "Line 31 Position 17-40"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027match.Value.StartsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/Trie/Nodes/CaptureNodeWithMultipleParameters.cs#L60",
+      "Location": "Line 60 Position 20-47"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027match.Value.EndsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/Trie/Nodes/CaptureNodeWithMultipleParameters.cs#L60",
+      "Location": "Line 60 Position 51-76"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027segment.StartsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/Trie/TrieNodeFactory.cs#L53",
+      "Location": "Line 53 Position 17-41"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027segment.EndsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/Trie/TrieNodeFactory.cs#L53",
+      "Location": "Line 53 Position 46-67"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027segment.EndsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/Trie/TrieNodeFactory.cs#L53",
+      "Location": "Line 53 Position 71-93"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027segment.EndsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/Trie/TrieNodeFactory.cs#L73",
+      "Location": "Line 73 Position 17-39"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027segment.EndsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/Trie/TrieNodeFactory.cs#L78",
+      "Location": "Line 78 Position 17-39"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027path.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Url.cs#L209",
+      "Location": "Line 209 Position 51-67"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027resourceFileName.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ViewEngines/ResourceViewLocationProvider.cs#L117",
+      "Location": "Line 117 Position 24-61"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027properties.Last().StartsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L306",
+      "Location": "Line 306 Position 54-89"
+    }
+  ]
+}

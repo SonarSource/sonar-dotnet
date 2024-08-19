@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IEnumerable\u003CTSymbol\u003E\u0027 instead of \u0027System.Collections.Generic.List\u003CTSymbol\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/ClrTypeResolver.cs#L61",
+      "Location": "Line 61 Position 43-50"
+    }
+  ]
+}

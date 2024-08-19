@@ -1,16 +1,16 @@
-<p>The instance passed to the <a
-href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/synclock-statement"><code>SyncLock</code> statement</a>
-should be a dedicated private field.</p>
 <h2>Why is this an issue?</h2>
-<p>If the instance representing an exclusively acquired lock is publicly accessible, another thread in another part of the program could accidentally
-attempt to acquire the same lock. This increases the likelihood of <a href="https://en.wikipedia.org/wiki/Deadlock">deadlocks</a>.</p>
-<p>For example, a <code>string</code> should never be used for locking. When a <code>string</code> is <a
+<p>A shared resource refers to a resource or data that can be accessed or modified by multiple <a
+href="https://en.wikipedia.org/wiki/Thread_(computing)">threads</a> or concurrent parts of a program. It could be any piece of data, object, file,
+database connection, or system resource that needs to be accessed or manipulated by multiple parts of a program at the same time.</p>
+<p>Shared resources should not be used for <a href="https://en.wikipedia.org/wiki/Lock_(computer_science)">locking</a> because it increases the chance
+of <a href="https://en.wikipedia.org/wiki/Deadlock">deadlocks</a>. Any other thread could acquire (or attempt to acquire) the same lock while doing
+some operation, without knowing that the resource is meant to be used for locking purposes.</p>
+<p>For example, a <code>String</code> should never be used for locking. When a <code>String</code> is <a
 href="https://en.wikipedia.org/wiki/Interning_(computer_science)">interned</a> by the runtime, it can be shared by multiple threads, breaking the
 locking mechanism.</p>
-<p>Instead, a dedicated private <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.lock?view=net-9.0"><code>Lock</code></a> object
-instance (or <code>object</code> instance, for frameworks before .Net 9) should be used for locking. This minimizes access to the lock instance and
-therefore prevents accidential lock sharing.</p>
-<p>The following objects are considered potentially prone to accidental lock sharing:</p>
+<p>Instead, a dedicated private <code>Object</code> instance should be used for each shared resource. This minimizes access to the lock instance,
+avoiding deadlocks and lock contention.</p>
+<p>The following objects are considered as shared resources:</p>
 <ul>
   <li> a reference to <a
   href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/program-structure/me-my-mybase-and-myclass#me">Me</a>: if the instance
@@ -42,14 +42,12 @@ End Sub
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Thread_(computing)">Thread</a> </li>
-  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Lock_(computer_science)">Locking</a> </li>
-  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Deadlock">Deadlock</a> </li>
-  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Interning_(computer_science)">Interning</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.intern#remarks">String interning by the runtime</a> </li>
-  <li> Microsoft Learn - <a href="https://docs.microsoft.com/en-us/dotnet/standard/threading/managed-threading-best-practices">Managed Threading Best
-  Practices</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/synclock-statement">SyncLock
-  Statement</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Thread_(computing)">Thread</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Lock_(computer_science)">Locking</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Deadlock">Deadlock</a> </li>
+  <li> <a href="https://en.wikipedia.org/wiki/Interning_(computer_science)">Interning</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.intern#remarks">String interning by the runtime</a> </li>
+  <li> <a href="https://docs.microsoft.com/en-us/dotnet/standard/threading/managed-threading-best-practices">Managed Threading Best Practices</a>
+  </li>
 </ul>
 

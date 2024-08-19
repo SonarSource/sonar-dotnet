@@ -1,0 +1,106 @@
+{
+  "Issues": [
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027IsDebug\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L33",
+      "Location": "Line 33 Position 45-52"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_isDefinedFunc\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L535",
+      "Location": "Line 535 Position 57-63"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_unbindStarted\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L42",
+      "Location": "Line 42 Position 41-48"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_lastInput\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/JsonObjectParser.cs#L56",
+      "Location": "Line 56 Position 33-36"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027IsFused\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1279",
+      "Location": "Line 1279 Position 47-54"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027Demand\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1930",
+      "Location": "Line 1930 Position 41-44"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027IsDebug\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2129",
+      "Location": "Line 2129 Position 45-52"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027IsDebug\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L32",
+      "Location": "Line 32 Position 45-52"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_partnerRef\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SinkRefImpl.cs#L88",
+      "Location": "Line 88 Position 43-49"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_remoteCumulativeDemandReceived\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SinkRefImpl.cs#L91",
+      "Location": "Line 91 Position 58-62"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_remoteCumulativeDemandConsumed\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SinkRefImpl.cs#L92",
+      "Location": "Line 92 Position 58-62"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_completedBeforeRemoteConnected\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SinkRefImpl.cs#L95",
+      "Location": "Line 95 Position 60-66"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_completed\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SourceRefImpl.cs#L108",
+      "Location": "Line 108 Position 37-44"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_expectingSeqNr\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SourceRefImpl.cs#L109",
+      "Location": "Line 109 Position 42-46"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_localCumulativeDemand\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SourceRefImpl.cs#L110",
+      "Location": "Line 110 Position 49-53"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_localRemainingRequested\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SourceRefImpl.cs#L111",
+      "Location": "Line 111 Position 51-55"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_partnerRef\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SourceRefImpl.cs#L88",
+      "Location": "Line 88 Position 43-49"
+    }
+  ]
+}

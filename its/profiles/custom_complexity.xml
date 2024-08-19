@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<profile>
+  <name>custom_complexity</name>
+  <language>cs</language>
+  <rules>
+      <rule>
+          <repositoryKey>csharpsquid</repositoryKey>
+          <key>S3776</key>
+          <priority>MAJOR</priority>
+          <parameters>
+              <parameter>
+                  <key>threshold</key>
+                  <value>0</value>
+              </parameter>
+          </parameters>
+      </rule>
+  </rules>
+</profile>

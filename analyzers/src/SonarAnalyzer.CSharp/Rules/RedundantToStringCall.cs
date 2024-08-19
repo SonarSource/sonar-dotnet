@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class RedundantToStringCall : SonarDiagnosticAnalyzer
@@ -44,7 +48,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 c =>
                 {
                     var assignment = (AssignmentExpressionSyntax)c.Node;
-                    var operation = c.Model.GetSymbolInfo(assignment).Symbol as IMethodSymbol;
+                    var operation = c.SemanticModel.GetSymbolInfo(assignment).Symbol as IMethodSymbol;
                     if (!IsOperationAddOnString(operation))
                     {
                         return;
@@ -61,7 +65,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 c =>
                 {
                     var binary = (BinaryExpressionSyntax)c.Node;
-                    var operation = c.Model.GetSymbolInfo(binary).Symbol as IMethodSymbol;
+                    var operation = c.SemanticModel.GetSymbolInfo(binary).Symbol as IMethodSymbol;
                     if (!IsOperationAddOnString(operation))
                     {
                         return;
@@ -79,7 +83,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-                    if (!IsArgumentlessToStringCallNotOnBaseExpression(invocation, c.Model, out var location, out var methodSymbol))
+                    if (!IsArgumentlessToStringCallNotOnBaseExpression(invocation, c.SemanticModel, out var location, out var methodSymbol))
                     {
                         return;
                     }
@@ -90,7 +94,7 @@ namespace SonarAnalyzer.CSharp.Rules
                         return;
                     }
 
-                    if (!TryGetExpressionTypeOfOwner(invocation, c.Model, out var subExpressionType) ||
+                    if (!TryGetExpressionTypeOfOwner(invocation, c.SemanticModel, out var subExpressionType) ||
                         subExpressionType.IsValueType)
                     {
                         return;
@@ -98,12 +102,12 @@ namespace SonarAnalyzer.CSharp.Rules
 
                     var stringFormatArgument = invocation?.Parent as ArgumentSyntax;
                     if (!(stringFormatArgument?.Parent?.Parent is InvocationExpressionSyntax stringFormatInvocation) ||
-                        !IsStringFormatCall(c.Model.GetSymbolInfo(stringFormatInvocation).Symbol as IMethodSymbol))
+                        !IsStringFormatCall(c.SemanticModel.GetSymbolInfo(stringFormatInvocation).Symbol as IMethodSymbol))
                     {
                         return;
                     }
 
-                    var parameterLookup = new CSharpMethodParameterLookup(stringFormatInvocation, c.Model);
+                    var parameterLookup = new CSharpMethodParameterLookup(stringFormatInvocation, c.SemanticModel);
                     if (parameterLookup.TryGetSymbol(stringFormatArgument, out var argParameter) &&
                         argParameter.Name.StartsWith("arg", StringComparison.Ordinal))
                     {
@@ -132,19 +136,19 @@ namespace SonarAnalyzer.CSharp.Rules
         private static void CheckExpressionForRemovableToStringCall(SonarSyntaxNodeReportingContext context,
             ExpressionSyntax expressionWithToStringCall, ExpressionSyntax otherOperandOfAddition, int checkedSideIndex)
         {
-            if (!IsArgumentlessToStringCallNotOnBaseExpression(expressionWithToStringCall, context.Model, out var location, out var methodSymbol) ||
+            if (!IsArgumentlessToStringCallNotOnBaseExpression(expressionWithToStringCall, context.SemanticModel, out var location, out var methodSymbol) ||
                 methodSymbol.IsInType(KnownType.System_String))
             {
                 return;
             }
 
-            var sideBType = context.Model.GetTypeInfo(otherOperandOfAddition).Type;
+            var sideBType = context.SemanticModel.GetTypeInfo(otherOperandOfAddition).Type;
             if (!sideBType.Is(KnownType.System_String))
             {
                 return;
             }
 
-            if (!TryGetExpressionTypeOfOwner((InvocationExpressionSyntax)expressionWithToStringCall, context.Model, out var subExpressionType) ||
+            if (!TryGetExpressionTypeOfOwner((InvocationExpressionSyntax)expressionWithToStringCall, context.SemanticModel, out var subExpressionType) ||
                 subExpressionType.IsValueType)
             {
                 return;

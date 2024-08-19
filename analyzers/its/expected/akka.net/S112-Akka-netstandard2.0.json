@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S112",
+      "Message": "\u0027System.Exception\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconParser.cs#L142",
+      "Location": "Line 142 Position 23-88"
+    },
+    {
+      "Id": "S112",
+      "Message": "\u0027System.Exception\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Dns.cs#L133",
+      "Location": "Line 133 Position 46-75"
+    },
+    {
+      "Id": "S112",
+      "Message": "\u0027System.Exception\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/IPExtensions.cs#L48",
+      "Location": "Line 48 Position 23-69"
+    },
+    {
+      "Id": "S112",
+      "Message": "\u0027System.Exception\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/IPExtensions.cs#L54",
+      "Location": "Line 54 Position 23-98"
+    },
+    {
+      "Id": "S112",
+      "Message": "\u0027System.Exception\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/IPExtensions.cs#L75",
+      "Location": "Line 75 Position 23-98"
+    },
+    {
+      "Id": "S112",
+      "Message": "\u0027System.IndexOutOfRangeException\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/ByteString.cs#L243",
+      "Location": "Line 243 Position 44-134"
+    },
+    {
+      "Id": "S112",
+      "Message": "\u0027System.IndexOutOfRangeException\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/ByteString.cs#L349",
+      "Location": "Line 349 Position 19-125"
+    }
+  ]
+}

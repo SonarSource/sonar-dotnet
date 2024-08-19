@@ -1,0 +1,94 @@
+{
+  "Issues": [
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L449",
+      "Location": "Line 449 Position 17-25"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L451",
+      "Location": "Line 451 Position 102-108"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L452",
+      "Location": "Line 452 Position 103-109"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L453",
+      "Location": "Line 453 Position 95-101"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L454",
+      "Location": "Line 454 Position 95-101"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L455",
+      "Location": "Line 455 Position 87-93"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L456",
+      "Location": "Line 456 Position 87-93"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L457",
+      "Location": "Line 457 Position 79-85"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L458",
+      "Location": "Line 458 Position 79-85"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L459",
+      "Location": "Line 459 Position 71-77"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L460",
+      "Location": "Line 460 Position 71-77"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L461",
+      "Location": "Line 461 Position 63-69"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L462",
+      "Location": "Line 462 Position 63-69"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L463",
+      "Location": "Line 463 Position 59-65"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array size specification; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/IPExtensions.cs#L78",
+      "Location": "Line 78 Position 41-43"
+    }
+  ]
+}

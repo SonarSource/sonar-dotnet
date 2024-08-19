@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4047",
+      "Message": "Make this method generic and replace the \u0027object\u0027 parameter with a type parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Json/Simple/NancySerializationStrategy.cs#L216",
+      "Location": "Line 216 Position 22-52"
+    }
+  ]
+}

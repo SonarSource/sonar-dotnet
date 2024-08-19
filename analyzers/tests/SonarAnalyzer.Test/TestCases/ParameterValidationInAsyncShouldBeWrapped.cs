@@ -11,7 +11,7 @@ namespace Tests.Diagnostics
 //                                       ^^^^^^^^
         {
             if (something == null) { throw new ArgumentNullException(nameof(something)); }
-//                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary {{This ArgumentException will be raised only after observing the task.}}
+//                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary
 
             await Task.Delay(1);
             return something + "foo";
@@ -62,11 +62,11 @@ namespace Tests.Diagnostics
             public Task<int[]> CheckAsync() => Task.FromResult(new int[] { 1 });
             public Task<int> Check2Async() => Task.FromResult(1);
 
-            public async Task HasS4457Async(int request) // Compliant
+            public async Task HasS4457Async(int request) // Compliant 
             {
                 var identifierType = (await CheckAsync()).FirstOrDefault(x => x == request);
                 if (identifierType == 0)
-                    throw new ArgumentException("message");
+                    throw new ArgumentException("message"); 
             }
         }
 

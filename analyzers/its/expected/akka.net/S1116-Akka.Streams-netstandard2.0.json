@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1116",
+      "Message": "Remove this empty statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L420",
+      "Location": "Line 420 Position 60-61"
+    }
+  ]
+}

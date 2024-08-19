@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1821",
+      "Message": "Refactor the code to eliminate this nested \u0027switch\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1058",
+      "Location": "Line 1058 Position 33-39"
+    }
+  ]
+}

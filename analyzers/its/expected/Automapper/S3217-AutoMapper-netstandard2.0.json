@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3217",
+      "Message": "Either change the type of \u0027foundMethod\u0027 to \u0027MemberInfo\u0027 or iterate on a generic collection of type \u0027MethodInfo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Internal/TypeExtensions.cs#L16",
+      "Location": "Line 16 Position 22-32"
+    },
+    {
+      "Id": "S3217",
+      "Message": "Either change the type of \u0027sourceMethod\u0027 to \u0027MemberInfo\u0027 or iterate on a generic collection of type \u0027MethodInfo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Mappers/ConversionOperatorMapper.cs#L13",
+      "Location": "Line 13 Position 22-32"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L21",
+      "Location": "Line 21 Position 6-21"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpUtility.cs#L1",
+      "Location": "Line 1 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1",
+      "Location": "Line 1 Position 1-24"
+    }
+  ]
+}

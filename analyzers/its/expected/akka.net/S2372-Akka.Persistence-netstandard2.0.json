@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S2372",
+      "Message": "Remove the exception throwing from this property getter, or refactor the property into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSMBase.cs#L294",
+      "Location": "Line 294 Position 17-102"
+    },
+    {
+      "Id": "S2372",
+      "Message": "Remove the exception throwing from this property getter, or refactor the property into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSMBase.cs#L310",
+      "Location": "Line 310 Position 17-102"
+    },
+    {
+      "Id": "S2372",
+      "Message": "Remove the exception throwing from this property getter, or refactor the property into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSMBase.cs#L331",
+      "Location": "Line 331 Position 17-104"
+    }
+  ]
+}

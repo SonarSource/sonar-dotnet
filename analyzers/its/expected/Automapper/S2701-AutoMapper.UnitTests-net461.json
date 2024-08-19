@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2701",
+      "Message": "Remove or correct this assertion.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/UnitTests/Internal/GenerateSimilarType.cs#L59",
+      "Location": "Line 59 Position 13-60"
+    }
+  ]
+}

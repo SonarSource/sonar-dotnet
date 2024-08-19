@@ -1,0 +1,388 @@
+{
+  "Issues": [
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 29 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgEditEpisode.vb#L565",
+      "Location": "Line 565 Position 9-62"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 52 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1323",
+      "Location": "Line 1323 Position 9-62"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 9 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgEditSeason.vb#L247",
+      "Location": "Line 247 Position 9-65"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 33 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L767",
+      "Location": "Line 767 Position 9-62"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 6 statements that use \u0027i.SubItems\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L227",
+      "Location": "Line 227 Position 17-69"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 6 statements that use \u0027i.SubItems\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L244",
+      "Location": "Line 244 Position 25-48"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 12 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L146",
+      "Location": "Line 146 Position 9-63"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 5 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L388",
+      "Location": "Line 388 Position 9-76"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 9 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgMovieSource.vb#L165",
+      "Location": "Line 165 Position 9-62"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 7 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgNewVersion.vb#L104",
+      "Location": "Line 104 Position 9-70"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 9 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSetsManager.vb#L500",
+      "Location": "Line 500 Position 9-62"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 6 statements that use \u0027Me.chkNoFilterEpisode\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1503",
+      "Location": "Line 1503 Position 9-71"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 11 statements that use \u0027Me.SettingsPanels\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L155",
+      "Location": "Line 155 Position 9-34"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 23 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2175",
+      "Location": "Line 2175 Position 13-67"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 12 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2213",
+      "Location": "Line 2213 Position 13-73"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 51 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2241",
+      "Location": "Line 2241 Position 13-89"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 20 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2352",
+      "Location": "Line 2352 Position 13-56"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 6 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2378",
+      "Location": "Line 2378 Position 13-63"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 20 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2403",
+      "Location": "Line 2403 Position 13-73"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 13 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2430",
+      "Location": "Line 2430 Position 13-61"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 5 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2448",
+      "Location": "Line 2448 Position 13-67"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 39 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2455",
+      "Location": "Line 2455 Position 13-71"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 38 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2515",
+      "Location": "Line 2515 Position 13-68"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 16 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3254",
+      "Location": "Line 3254 Position 17-54"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 15 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3272",
+      "Location": "Line 3272 Position 17-55"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 8 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3289",
+      "Location": "Line 3289 Position 13-65"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 13 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3304",
+      "Location": "Line 3304 Position 13-58"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 79 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3333",
+      "Location": "Line 3333 Position 13-119"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 8 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3430",
+      "Location": "Line 3430 Position 13-73"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 5 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3444",
+      "Location": "Line 3444 Position 13-78"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 6 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3464",
+      "Location": "Line 3464 Position 13-63"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 21 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3496",
+      "Location": "Line 3496 Position 13-62"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 19 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3530",
+      "Location": "Line 3530 Position 13-79"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 38 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3556",
+      "Location": "Line 3556 Position 13-71"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 38 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3628",
+      "Location": "Line 3628 Position 13-68"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 8 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3705",
+      "Location": "Line 3705 Position 9-58"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 7 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3715",
+      "Location": "Line 3715 Position 9-71"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 17 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3726",
+      "Location": "Line 3726 Position 9-93"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 11 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3745",
+      "Location": "Line 3745 Position 9-121"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 5 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3760",
+      "Location": "Line 3760 Position 9-66"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 24 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3775",
+      "Location": "Line 3775 Position 9-73"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 15 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3813",
+      "Location": "Line 3813 Position 9-90"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 51 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3834",
+      "Location": "Line 3834 Position 9-72"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 14 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3889",
+      "Location": "Line 3889 Position 9-81"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 10 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3915",
+      "Location": "Line 3915 Position 9-92"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 11 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3940",
+      "Location": "Line 3940 Position 9-76"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 28 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3995",
+      "Location": "Line 3995 Position 9-91"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 10 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4025",
+      "Location": "Line 4025 Position 9-88"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 20 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4046",
+      "Location": "Line 4046 Position 9-69"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 6 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSortFiles.vb#L82",
+      "Location": "Line 82 Position 9-73"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 5 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgTVSource.vb#L144",
+      "Location": "Line 144 Position 9-59"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 15 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L259",
+      "Location": "Line 259 Position 13-63"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 39 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L369",
+      "Location": "Line 369 Position 9-80"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 42 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L127",
+      "Location": "Line 127 Position 3-73"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 42 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L326",
+      "Location": "Line 326 Position 3-73"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 11 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L384",
+      "Location": "Line 384 Position 3-68"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 24 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L399",
+      "Location": "Line 399 Position 3-167"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 5 statements that use \u0027Master.currShow\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4496",
+      "Location": "Line 4496 Position 13-196"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 5 statements that use \u0027Master.currMovie\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4748",
+      "Location": "Line 4748 Position 13-66"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 6 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5260",
+      "Location": "Line 5260 Position 17-57"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 7 statements that use \u0027ModulesManager.Instance.RuntimeObjects\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5355",
+      "Location": "Line 5355 Position 13-83"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 9 statements that use \u0027Master.currMovie\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5602",
+      "Location": "Line 5602 Position 45-81"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 5 statements that use \u0027Master.eSettings\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7942",
+      "Location": "Line 7942 Position 17-89"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 5 statements that use \u0027Me.dgvMediaList\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7942",
+      "Location": "Line 7942 Position 17-89"
+    }
+  ]
+}

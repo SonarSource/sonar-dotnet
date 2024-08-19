@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules;
+namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class InvocationResolvesToOverrideWithParams : SonarDiagnosticAnalyzer
@@ -40,25 +44,25 @@ public sealed class InvocationResolvesToOverrideWithParams : SonarDiagnosticAnal
     private static void CheckCall(SonarSyntaxNodeReportingContext context, SyntaxNode node, ArgumentListSyntax argumentList)
     {
         if (argumentList is { Arguments.Count: > 0 }
-            && context.Model.GetSymbolInfo(node).Symbol is IMethodSymbol method
+            && context.SemanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol method
             && method.Parameters.LastOrDefault() is { IsParams: true }
-            && !IsInvocationWithExplicitArray(argumentList, method, context.Model)
+            && !IsInvocationWithExplicitArray(argumentList, method, context.SemanticModel)
             && ArgumentTypes(context, argumentList) is var argumentTypes
             && Array.TrueForAll(argumentTypes, x => x is not IErrorTypeSymbol)
             && OtherOverloadsOf(method).FirstOrDefault(IsPossibleMatch) is { } otherMethod
             && method.IsGenericMethod == otherMethod.IsGenericMethod)
         {
-            context.ReportIssue(Rule, node, otherMethod.ToMinimalDisplayString(context.Model, node.SpanStart));
+            context.ReportIssue(Rule, node, otherMethod.ToMinimalDisplayString(context.SemanticModel, node.SpanStart));
         }
 
         bool IsPossibleMatch(IMethodSymbol method) =>
-            ArgumentsMatchParameters(argumentList, argumentTypes, method, context.Model)
+            ArgumentsMatchParameters(argumentList, argumentTypes, method, context.SemanticModel)
             && MethodAccessibleWithinType(method, context.ContainingSymbol.ContainingType);
     }
 
     private static ITypeSymbol[] ArgumentTypes(SonarSyntaxNodeReportingContext context, ArgumentListSyntax argumentList) =>
         argumentList.Arguments
-            .Select(x => context.Model.GetTypeInfo(x.Expression))
+            .Select(x => context.SemanticModel.GetTypeInfo(x.Expression))
             .Select(x => x.Type ?? x.ConvertedType) // Action and Func won't always resolve properly with Type
             .ToArray();
 

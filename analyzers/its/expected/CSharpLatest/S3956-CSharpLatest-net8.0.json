@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S3956",
+      "Message": "Refactor this method to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp11Features/ContainsInsteadOfAny.cs#L5",
+      "Location": "Line 5 Position 28-37"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this method to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp11Features/OrderByBeforeWhere.cs#L5",
+      "Location": "Line 5 Position 19-28"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this method to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/CovariantReturn.cs#L33",
+      "Location": "Line 33 Position 16-25"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this property to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/RecordsAndNullability.cs#L44",
+      "Location": "Line 44 Position 12-22"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this property to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/RecordsAndNullability.cs#L48",
+      "Location": "Line 48 Position 12-25"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this method to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3267.cs#L23",
+      "Location": "Line 23 Position 12-21"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this method to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3267.cs#L8",
+      "Location": "Line 8 Position 12-24"
+    }
+  ]
+}

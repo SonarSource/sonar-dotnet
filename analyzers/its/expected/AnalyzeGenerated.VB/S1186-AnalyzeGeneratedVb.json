@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/GeneratedCode.VB/CompilerGenerated.vb#L11",
+      "Location": "Line 11 Position 9-12"
+    },
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/GeneratedCode.VB/GeneratedCode.vb#L11",
+      "Location": "Line 11 Position 17-20"
+    },
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/GeneratedCode.VB/NotIgnored.vb#L11",
+      "Location": "Line 11 Position 21-24"
+    }
+  ]
+}

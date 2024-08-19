@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private method \u0027IsNancyReferencing\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperLocator.cs#L66",
+      "Location": "Line 66 Position 29-47"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private property \u0027RootPath\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L277",
+      "Location": "Line 277 Position 27-35"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private method \u0027GetAllRoutes\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/DefaultRouteCacheProvider.cs#L76",
+      "Location": "Line 76 Position 55-67"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private method \u0027ConstructType\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3843",
+      "Location": "Line 3843 Position 24-37"
+    }
+  ]
+}

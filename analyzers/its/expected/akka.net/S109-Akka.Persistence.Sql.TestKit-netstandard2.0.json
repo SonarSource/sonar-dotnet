@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027100\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.TestKit/DefaultConfigSpec.cs#L33",
+      "Location": "Line 33 Position 61-64"
+    }
+  ]
+}

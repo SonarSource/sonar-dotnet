@@ -1,0 +1,58 @@
+{
+  "Issues": [
+    {
+      "Id": "S2701",
+      "Message": "Remove or correct this assertion.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests/Configuration/HoconTests.cs#L119",
+      "Location": "Line 119 Position 13-60"
+    },
+    {
+      "Id": "S2701",
+      "Message": "Remove or correct this assertion.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests/Configuration/HoconTests.cs#L152",
+      "Location": "Line 152 Position 13-63"
+    },
+    {
+      "Id": "S2701",
+      "Message": "Remove or correct this assertion.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests/Configuration/HoconTests.cs#L153",
+      "Location": "Line 153 Position 13-76"
+    },
+    {
+      "Id": "S2701",
+      "Message": "Remove or correct this assertion.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests/Configuration/HoconTests.cs#L187",
+      "Location": "Line 187 Position 13-63"
+    },
+    {
+      "Id": "S2701",
+      "Message": "Remove or correct this assertion.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests/Configuration/HoconTests.cs#L188",
+      "Location": "Line 188 Position 13-76"
+    },
+    {
+      "Id": "S2701",
+      "Message": "Remove or correct this assertion.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests/Configuration/HoconTests.cs#L358",
+      "Location": "Line 358 Position 13-88"
+    },
+    {
+      "Id": "S2701",
+      "Message": "Remove or correct this assertion.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests/Configuration/HoconTests.cs#L360",
+      "Location": "Line 360 Position 13-89"
+    },
+    {
+      "Id": "S2701",
+      "Message": "Remove or correct this assertion.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests/Configuration/HoconTests.cs#L363",
+      "Location": "Line 363 Position 13-88"
+    },
+    {
+      "Id": "S2701",
+      "Message": "Remove or correct this assertion.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests/Configuration/HoconTests.cs#L365",
+      "Location": "Line 365 Position 13-89"
+    }
+  ]
+}

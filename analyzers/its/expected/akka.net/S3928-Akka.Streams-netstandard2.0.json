@@ -1,0 +1,82 @@
+{
+  "Issues": [
+    {
+      "Id": "S3928",
+      "Message": "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2023",
+      "Location": "Line 2023 Position 31-64"
+    },
+    {
+      "Id": "S3928",
+      "Message": "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L3757",
+      "Location": "Line 3757 Position 35-68"
+    },
+    {
+      "Id": "S3928",
+      "Message": "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L427",
+      "Location": "Line 427 Position 31-64"
+    },
+    {
+      "Id": "S3928",
+      "Message": "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L923",
+      "Location": "Line 923 Position 39-72"
+    },
+    {
+      "Id": "S3928",
+      "Message": "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L234",
+      "Location": "Line 234 Position 31-64"
+    },
+    {
+      "Id": "S3928",
+      "Message": "The parameter name \u0027key\u0027 is not declared in the argument list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L400",
+      "Location": "Line 400 Position 31-91"
+    },
+    {
+      "Id": "S3928",
+      "Message": "The parameter name \u0027subscriber\u0027 is not declared in the argument list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ReactiveStreamsCompliance.cs#L103",
+      "Location": "Line 103 Position 77-144"
+    },
+    {
+      "Id": "S3928",
+      "Message": "The parameter name \u0027exception\u0027 is not declared in the argument list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ReactiveStreamsCompliance.cs#L108",
+      "Location": "Line 108 Position 76-141"
+    },
+    {
+      "Id": "S3928",
+      "Message": "The parameter name \u0027element\u0027 is not declared in the argument list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ReactiveStreamsCompliance.cs#L93",
+      "Location": "Line 93 Position 13-74"
+    },
+    {
+      "Id": "S3928",
+      "Message": "The parameter name \u0027subscription\u0027 is not declared in the argument list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ReactiveStreamsCompliance.cs#L98",
+      "Location": "Line 98 Position 13-84"
+    },
+    {
+      "Id": "S3928",
+      "Message": "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Sources.cs#L277",
+      "Location": "Line 277 Position 47-80"
+    },
+    {
+      "Id": "S3928",
+      "Message": "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Sources.cs#L452",
+      "Location": "Line 452 Position 39-72"
+    },
+    {
+      "Id": "S3928",
+      "Message": "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Sources.cs#L703",
+      "Location": "Line 703 Position 31-64"
+    }
+  ]
+}

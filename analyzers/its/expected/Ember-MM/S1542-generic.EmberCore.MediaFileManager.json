@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027Handle_ModuleEnabledChanged\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L253",
+      "Location": "Line 253 Position 17-44"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027Handle_ModuleSettingsChanged\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L257",
+      "Location": "Line 257 Position 17-45"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027_DirectoryCopy\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L336",
+      "Location": "Line 336 Position 17-31"
+    }
+  ]
+}

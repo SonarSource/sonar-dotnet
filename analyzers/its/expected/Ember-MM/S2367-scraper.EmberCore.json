@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2367",
+      "Message": "Rename \u0027APIKey\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L32",
+      "Location": "Line 32 Position 18-24"
+    }
+  ]
+}

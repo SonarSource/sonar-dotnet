@@ -1,0 +1,88 @@
+{
+  "Issues": [
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/ApplicationEvents.vb#L44",
+      "Location": "Line 44 Position 17-23"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1226",
+      "Location": "Line 1226 Position 29-36"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1312",
+      "Location": "Line 1312 Position 13-26"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L671",
+      "Location": "Line 671 Position 29-36"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L704",
+      "Location": "Line 704 Position 25-37"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L408",
+      "Location": "Line 408 Position 21-33"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L58",
+      "Location": "Line 58 Position 17-27"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2132",
+      "Location": "Line 2132 Position 17-29"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L186",
+      "Location": "Line 186 Position 29-32"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2802",
+      "Location": "Line 2802 Position 13-25"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5296",
+      "Location": "Line 5296 Position 17-23"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L70",
+      "Location": "Line 70 Position 13-22"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L71",
+      "Location": "Line 71 Position 13-23"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7848",
+      "Location": "Line 7848 Position 21-29"
+    }
+  ]
+}

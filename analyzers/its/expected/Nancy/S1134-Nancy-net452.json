@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1134",
+      "Message": "Take the required action to fix the issue indicated by this \u0027FIXME\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L606",
+      "Location": "Line 606 Position 19-24"
+    }
+  ]
+}

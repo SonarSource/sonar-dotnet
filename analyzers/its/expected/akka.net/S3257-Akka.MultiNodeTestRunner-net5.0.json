@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S3257",
+      "Message": "\u0027sender\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L375",
+      "Location": "Line 375 Position 64-70"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027sender\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L388",
+      "Location": "Line 388 Position 52-58"
+    },
+    {
+      "Id": "S3257",
+      "Message": "\u0027eventArgs\u0027 is not used. Use discard parameter instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L388",
+      "Location": "Line 388 Position 60-69"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AnalyzeGenerated.CS/obj/Debug/.NETFramework,Version=v4.8.AssemblyAttributes.cs#L3",
+      "Location": "Line 3 Position 1-25"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/GeneratedCode.CS/AssemblyInfo.cs#L4",
+      "Location": "Line 4 Position 1-39"
+    }
+  ]
+}

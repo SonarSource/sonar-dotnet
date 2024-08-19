@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Tests.Diagnostics
 {
@@ -22,14 +20,14 @@ namespace Tests.Diagnostics
             var once = await valueTask; // Noncompliant {{Refactor this 'ValueTask' usage to consume it only once.}}
 //                           ^^^^^^^^^
             var twice = await valueTask;
-//                            ^^^^^^^^^ Secondary {{The 'ValueTask' is consumed here again}}
+//                            ^^^^^^^^^ Secondary
         }
 
         public void Foo2(ValueTaskProvider stream)
         {
             var valueTask = stream.ReadAsync();
             var once = valueTask.AsTask(); // Noncompliant
-            var twice = valueTask.AsTask(); // Secondary {{The 'ValueTask' is consumed here again}}
+            var twice = valueTask.AsTask(); // Secondary
         }
 
         public async void Foo3(ValueTaskProvider stream)
@@ -417,47 +415,6 @@ namespace Tests.Diagnostics
                          x = await valueTask; // Secondary
 
         }
-    }
 
-    // https://sonarsource.atlassian.net/browse/NET-1360
-    internal class Repro_1360
-    {
-        public static async Task MethodCallChain()
-        {
-            var stream = new ValueTaskProvider();
-            var t1 = stream.ReadAsync().AsTask(); // Noncompliant FP ReadAsync returns a new ValueTask on each invocation. t1 and t2 are not the same
-            var t2 = stream.ReadAsync().AsTask(); // Secondary
-
-            await Task.WhenAll(t1, t2);
-        }
-
-        public static async Task StaticMethodCallChain()
-        {
-            var t1 = Repro_1360.StaticValueTask().AsTask(); // Noncompliant FP
-            var t2 = Repro_1360.StaticValueTask().AsTask(); // Secondary
-
-            await Task.WhenAll(t1, t2);
-        }
-
-        public static async Task MethodCallChainThreeMethods()
-        {
-            var t1 = Repro_1360.Factory().InstanceValueTask().AsTask(); // Compliant
-            var t2 = Repro_1360.Factory().InstanceValueTask().AsTask();
-
-            await Task.WhenAll(t1, t2);
-        }
-
-        public static async Task MethodCallChainTwoMethods()
-        {
-            var c = Repro_1360.Factory();
-            var t1 = c.InstanceValueTask().AsTask(); // Noncompliant FP
-            var t2 = c.InstanceValueTask().AsTask(); // Secondary
-
-            await Task.WhenAll(t1, t2);
-        }
-
-        public ValueTask<int> InstanceValueTask() => new ValueTask<int>(1);
-        public static ValueTask<int> StaticValueTask() => new ValueTask<int>(1);
-        public static Repro_1360 Factory() => new Repro_1360();
     }
 }

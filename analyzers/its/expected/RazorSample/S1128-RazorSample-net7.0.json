@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/RazorSample/RazorSample/Pages/Index.cshtml.cs#L1",
+      "Location": "Line 1 Position 1-32"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/RazorSample/RazorSample/Pages/Privacy.cshtml.cs#L1",
+      "Location": "Line 1 Position 1-32"
+    }
+  ]
+}

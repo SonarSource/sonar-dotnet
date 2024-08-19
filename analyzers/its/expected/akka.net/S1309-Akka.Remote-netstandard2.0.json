@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L424",
+      "Location": "Line 424 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L201",
+      "Location": "Line 201 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L255",
+      "Location": "Line 255 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L183",
+      "Location": "Line 183 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L285",
+      "Location": "Line 285 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L505",
+      "Location": "Line 505 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L402",
+      "Location": "Line 402 Position 1-24"
+    }
+  ]
+}

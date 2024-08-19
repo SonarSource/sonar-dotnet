@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027system1Address\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/RemotePingPong/Program.cs#L157",
+      "Location": "Line 157 Position 17-31"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027a\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/RemotePingPong/Program.cs#L238",
+      "Location": "Line 238 Position 37-38"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3267",
+      "Message": "Loop should be simplified by calling Select(test =\u003E test.Value))",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L254",
+      "Location": "Line 254 Position 46-71"
+    }
+  ]
+}

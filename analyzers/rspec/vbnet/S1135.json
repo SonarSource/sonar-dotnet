@@ -3,7 +3,7 @@
   "type": "CODE_SMELL",
   "code": {
     "impacts": {
-      "MAINTAINABILITY": "INFO"
+      "MAINTAINABILITY": "LOW"
     },
     "attribute": "COMPLETE"
   },
@@ -24,5 +24,5 @@
       546
     ]
   },
-  "quickfix": "infeasible"
+  "quickfix": "unknown"
 }

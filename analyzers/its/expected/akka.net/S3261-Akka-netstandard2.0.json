@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3261",
+      "Message": "Remove this empty namespace.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/IDispatcherPrerequisites.cs#L11-L14",
+      "Location": "Lines 11-14 Position 1-2"
+    }
+  ]
+}

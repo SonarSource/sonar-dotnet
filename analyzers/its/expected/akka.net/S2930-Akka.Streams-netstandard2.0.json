@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2930",
+      "Message": "Dispose \u0027_cancellation\u0027 when it is no longer needed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/IO/OutputStreamSourceStage.cs#L124",
+      "Location": "Line 124 Position 54-99"
+    }
+  ]
+}

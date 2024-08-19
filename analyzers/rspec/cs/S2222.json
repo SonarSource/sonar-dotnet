@@ -14,8 +14,7 @@
   },
   "tags": [
     "cwe",
-    "multi-threading",
-    "symbolic-execution"
+    "multi-threading"
   ],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-2222",

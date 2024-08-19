@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/ConfigurationValidator.cs#L36",
+      "Location": "Line 36 Position 83-103"
+    },
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/MapperConfigurationExpression.cs#L199",
+      "Location": "Line 199 Position 45-133"
+    }
+  ]
+}

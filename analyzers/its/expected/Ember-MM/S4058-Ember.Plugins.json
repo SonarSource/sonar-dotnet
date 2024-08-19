@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027lTitle.EndsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L63",
+      "Location": "Line 63 Position 17-41"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027lTitle.EndsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L65",
+      "Location": "Line 65 Position 22-44"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027lTitle.EndsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L67",
+      "Location": "Line 67 Position 22-45"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027\u0022tt\u0022.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/Utility.cs#L40",
+      "Location": "Line 40 Position 17-36"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027imdbId.StartsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/Utility.cs#L44",
+      "Location": "Line 44 Position 22-45"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S1939",
+      "Message": "\u0027IJournalRequest\u0027 implements \u0027INoSerializationVerificationNeeded\u0027 so \u0027INoSerializationVerificationNeeded\u0027 can be removed from the inheritance list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L201",
+      "Location": "Line 201 Position 56-92"
+    },
+    {
+      "Id": "S1939",
+      "Message": "\u0027IJournalResponse\u0027 implements \u0027INoSerializationVerificationNeeded\u0027 so \u0027INoSerializationVerificationNeeded\u0027 can be removed from the inheritance list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L399",
+      "Location": "Line 399 Position 64-100"
+    },
+    {
+      "Id": "S1939",
+      "Message": "\u0027IJournalResponse\u0027 implements \u0027INoSerializationVerificationNeeded\u0027 so \u0027INoSerializationVerificationNeeded\u0027 can be removed from the inheritance list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L470",
+      "Location": "Line 470 Position 63-99"
+    },
+    {
+      "Id": "S1939",
+      "Message": "\u0027IJournalResponse\u0027 implements \u0027INoSerializationVerificationNeeded\u0027 so \u0027INoSerializationVerificationNeeded\u0027 can be removed from the inheritance list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L540",
+      "Location": "Line 540 Position 62-98"
+    },
+    {
+      "Id": "S1939",
+      "Message": "\u0027IJournalResponse\u0027 implements \u0027INoSerializationVerificationNeeded\u0027 so \u0027INoSerializationVerificationNeeded\u0027 can be removed from the inheritance list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L675",
+      "Location": "Line 675 Position 83-119"
+    }
+  ]
+}

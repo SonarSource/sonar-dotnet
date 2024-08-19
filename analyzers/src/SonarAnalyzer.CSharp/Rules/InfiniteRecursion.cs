@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules;
+namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public partial class InfiniteRecursion : SonarDiagnosticAnalyzer
@@ -70,7 +74,7 @@ public partial class InfiniteRecursion : SonarDiagnosticAnalyzer
             c =>
             {
                 var property = (PropertyDeclarationSyntax)c.Node;
-                checker.CheckForNoExitProperty(c, property, c.Model.GetDeclaredSymbol(property));
+                checker.CheckForNoExitProperty(c, property, c.SemanticModel.GetDeclaredSymbol(property));
             },
             SyntaxKind.PropertyDeclaration);
 
@@ -78,7 +82,7 @@ public partial class InfiniteRecursion : SonarDiagnosticAnalyzer
             c =>
             {
                 var indexer = (IndexerDeclarationSyntax)c.Node;
-                checker.CheckForNoExitIndexer(c, indexer, c.Model.GetDeclaredSymbol(indexer));
+                checker.CheckForNoExitIndexer(c, indexer, c.SemanticModel.GetDeclaredSymbol(indexer));
             },
             SyntaxKind.IndexerDeclaration);
 
@@ -86,14 +90,14 @@ public partial class InfiniteRecursion : SonarDiagnosticAnalyzer
             c =>
             {
                 var eventDeclaration = (EventDeclarationSyntax)c.Node;
-                checker.CheckForNoExitEvent(c, eventDeclaration, c.Model.GetDeclaredSymbol(eventDeclaration));
+                checker.CheckForNoExitEvent(c, eventDeclaration, c.SemanticModel.GetDeclaredSymbol(eventDeclaration));
             },
             SyntaxKind.EventDeclaration);
     }
 
     private void CheckForNoExitMethod(SonarSyntaxNodeReportingContext c, SyntaxToken identifier)
     {
-        if (c.Model.GetDeclaredSymbol(c.Node) is IMethodSymbol symbol)
+        if (c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol symbol)
         {
             checker.CheckForNoExitMethod(c, c.Node, identifier, symbol);
         }
@@ -118,7 +122,7 @@ public partial class InfiniteRecursion : SonarDiagnosticAnalyzer
 
         public TControlFlowGraph ControlFlowGraph { get; }
         public ISymbol AnalyzedSymbol { get; }
-        public SemanticModel Model => analysisContext.Model;
+        public SemanticModel Model => analysisContext.SemanticModel;
 
         public RecursionContext(SonarSyntaxNodeReportingContext analysisContext,
                                 TControlFlowGraph controlFlowGraph,

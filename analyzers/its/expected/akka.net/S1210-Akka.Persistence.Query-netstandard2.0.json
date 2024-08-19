@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1210",
+      "Message": "When implementing IComparable\u003CT\u003E, you should also override Equals, ==, !=, \u003C, \u003C=, \u003E, and \u003E=.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.Query/Offset.cs#L18",
+      "Location": "Line 18 Position 27-33"
+    }
+  ]
+}

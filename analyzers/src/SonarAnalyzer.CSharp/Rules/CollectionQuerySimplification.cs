@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class CollectionQuerySimplification : SonarDiagnosticAnalyzer
@@ -87,9 +91,9 @@ namespace SonarAnalyzer.CSharp.Rules
                         Expression: { } memberAccessExpression
                     }
                 }
-                && context.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol { Name: CountName } methodSymbol
+                && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol { Name: CountName } methodSymbol
                 && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
-                && HasCountProperty(memberAccessExpression, context.Model))
+                && HasCountProperty(memberAccessExpression, context.SemanticModel))
             {
                 context.ReportIssue(Rule, GetReportLocation(invocation), string.Format(MessageUseInstead, $"'{CountName}' property"));
             }
@@ -101,8 +105,8 @@ namespace SonarAnalyzer.CSharp.Rules
         private static void CheckToCollectionCalls(SonarSyntaxNodeReportingContext context)
         {
             var outerInvocation = (InvocationExpressionSyntax)context.Node;
-            if (context.Model.GetSymbolInfo(outerInvocation).Symbol is not IMethodSymbol outerMethodSymbol
-                || !MethodExistsOnIEnumerable(outerMethodSymbol, context.Model))
+            if (context.SemanticModel.GetSymbolInfo(outerInvocation).Symbol is not IMethodSymbol outerMethodSymbol
+                || !MethodExistsOnIEnumerable(outerMethodSymbol, context.SemanticModel))
             {
                 return;
             }
@@ -113,7 +117,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 return;
             }
 
-            if (context.Model.GetSymbolInfo(innerInvocation).Symbol is IMethodSymbol innerMethodSymbol
+            if (context.SemanticModel.GetSymbolInfo(innerInvocation).Symbol is IMethodSymbol innerMethodSymbol
                 && IsToCollectionCall(innerMethodSymbol))
             {
                 context.ReportIssue(Rule, GetReportLocation(innerInvocation), GetToCollectionCallsMessage(context, innerInvocation, innerMethodSymbol));
@@ -168,13 +172,13 @@ namespace SonarAnalyzer.CSharp.Rules
                 || methodSymbol.ContainingType.ConstructedFrom.Is(KnownType.System_Collections_Generic_List_T));
 
         private static string GetToCollectionCallsMessage(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol) =>
-            IsLinqDatabaseQuery(invocation, context.Model)
+            IsLinqDatabaseQuery(invocation, context.SemanticModel)
                 ? string.Format(MessageUseInstead, "'AsEnumerable'")
                 : string.Format(MessageDropFromMiddle, methodSymbol.Name);
 
         private static bool IsLinqDatabaseQuery(InvocationExpressionSyntax node, SemanticModel model)
         {
-            while (node?.Operands().Left is { } left)
+            while (node is not null && node.TryGetOperands(out var left, out _))
             {
                 if (GetNodeTypeSymbol(left, model).DerivesOrImplementsAny(KnownType.DatabaseBaseQueryTypes))
                 {
@@ -197,7 +201,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private static void CheckExtensionMethodsOnIEnumerable(SonarSyntaxNodeReportingContext context)
         {
             var outerInvocation = (InvocationExpressionSyntax)context.Node;
-            if (context.Model.GetSymbolInfo(outerInvocation).Symbol is not IMethodSymbol outerMethodSymbol
+            if (context.SemanticModel.GetSymbolInfo(outerInvocation).Symbol is not IMethodSymbol outerMethodSymbol
                 || !outerMethodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T))
             {
                 return;
@@ -209,7 +213,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 return;
             }
 
-            if (context.Model.GetSymbolInfo(innerInvocation).Symbol is not IMethodSymbol innerMethodSymbol
+            if (context.SemanticModel.GetSymbolInfo(innerInvocation).Symbol is not IMethodSymbol innerMethodSymbol
                 || !innerMethodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T))
             {
                 return;
@@ -314,13 +318,13 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private static bool IsNullChecking(BinaryExpressionSyntax binaryExpression, string lambdaParameter)
         {
-            if (CSharpEquivalenceChecker.AreEquivalent(SyntaxConstants.NullLiteralExpression, binaryExpression.Left.RemoveParentheses())
+            if (CSharpEquivalenceChecker.AreEquivalent(CSharpSyntaxHelper.NullLiteralExpression, binaryExpression.Left.RemoveParentheses())
                 && binaryExpression.Right.RemoveParentheses().ToString() == lambdaParameter)
             {
                 return true;
             }
 
-            if (CSharpEquivalenceChecker.AreEquivalent(SyntaxConstants.NullLiteralExpression, binaryExpression.Right.RemoveParentheses())
+            if (CSharpEquivalenceChecker.AreEquivalent(CSharpSyntaxHelper.NullLiteralExpression, binaryExpression.Right.RemoveParentheses())
                 && binaryExpression.Left.RemoveParentheses().ToString() == lambdaParameter)
             {
                 return true;

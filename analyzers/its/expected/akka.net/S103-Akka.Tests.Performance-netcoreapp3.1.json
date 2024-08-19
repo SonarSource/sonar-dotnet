@@ -1,0 +1,40 @@
+{
+  "Issues": [
+    {
+      "Id": "S103",
+      "Message": "Split this 217 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/AddressSpec.cs#L29",
+      "Location": "Line 29 Position 1-218"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 218 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Actor/AddressSpec.cs#L38",
+      "Location": "Line 38 Position 1-219"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 202 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Dispatch/MailboxMemoryFootprintSpec.cs#L64",
+      "Location": "Line 64 Position 1-203"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 222 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Dispatch/MessageDispatchAndReceiveBenchmark.cs#L46",
+      "Location": "Line 46 Position 1-223"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 222 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Dispatch/ReceiveOnlyBenchmark.cs#L53",
+      "Location": "Line 53 Position 1-223"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 222 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Performance/Dispatch/ReceiveOnlyBenchmark.cs#L56",
+      "Location": "Line 56 Position 1-223"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027_worker\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L117",
+      "Location": "Line 117 Position 24-31"
+    },
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027_root\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconParser.cs#L22",
+      "Location": "Line 22 Position 28-33"
+    },
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027_ext\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/SimpleDnsManager.cs#L19",
+      "Location": "Line 19 Position 33-37"
+    },
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027_serializerDetails\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Serialization/Serialization.cs#L149",
+      "Location": "Line 149 Position 62-80"
+    }
+  ]
+}

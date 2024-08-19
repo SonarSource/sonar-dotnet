@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S6563",
+      "Message": "Use UTC when recording DateTime instants",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L535",
+      "Location": "Line 535 Position 70-82"
+    },
+    {
+      "Id": "S6563",
+      "Message": "Use UTC when recording DateTime instants",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/SimpleDnsCache.cs#L40",
+      "Location": "Line 40 Position 26-38"
+    },
+    {
+      "Id": "S6563",
+      "Message": "Use UTC when recording DateTime instants",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/SimpleDnsCache.cs#L59",
+      "Location": "Line 59 Position 23-35"
+    },
+    {
+      "Id": "S6563",
+      "Message": "Use UTC when recording DateTime instants",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/TokenBucket.cs#L139",
+      "Location": "Line 139 Position 45-57"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S103",
+      "Message": "Split this 252 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L358",
+      "Location": "Line 358 Position 1-253"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 248 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L359",
+      "Location": "Line 359 Position 1-249"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 258 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L366",
+      "Location": "Line 366 Position 1-259"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 254 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L367",
+      "Location": "Line 367 Position 1-255"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 249 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L376",
+      "Location": "Line 376 Position 1-250"
+    }
+  ]
+}

@@ -185,9 +185,9 @@ csharp_preserve_single_line_blocks = true
 
 # Naming rules
 
-dotnet_naming_rule.interface_must_start_with_i.severity = warning
+dotnet_naming_rule.interface_must_start_with_I.severity = warning
 dotnet_naming_rule.interface_must_start_with_I.symbols = interface_types
-dotnet_naming_rule.interface_must_start_with_i.style = I_style
+dotnet_naming_rule.interface_must_start_with_I.style = I_style
 
 dotnet_naming_rule.variables_must_be_camel_style.severity = warning
 dotnet_naming_rule.variables_must_be_camel_style.symbols = parameter_types
@@ -227,6 +227,7 @@ dotnet_naming_style.I_style.capitalization = pascal_case
 # Rules
 # ----------------------------------------------------------------------------------------------------------------------
 
+dotnet_diagnostic.S1451.severity = warning  # Force activation of license header check for UTs
 dotnet_diagnostic.CS7035.severity = none    # CS7035: it expects the build number to fit in 16 bits, our build numbers are bigger https://github.com/dotnet/roslyn/issues/17024#issuecomment-1669503201
 dotnet_diagnostic.CA1822.severity = warning # Increase visibility for Member 'xxx' does not access instance data and can be marked as static
 dotnet_diagnostic.CS8785.severity = error   # Do not hide root cause for: Generator 'xxx' failed to generate source. It will not contribute to the output and compilation errors may occur as a result. Exception was of type 'xxx' with message 'xxx'
@@ -457,11 +458,3 @@ dotnet_diagnostic.SA1652.severity = none
 dotnet_diagnostic.SX1101.severity = none
 dotnet_diagnostic.SX1309.severity = none
 dotnet_diagnostic.SX1309S.severity = none
-
-# IDE0130 Change namespace to match folder structure
-[**.Test/**/*.cs]     # Do not raise in UTs, as we use .Test suffix after the whole namespace
-dotnet_diagnostic.IDE0130.severity = none
-[*.Roslyn.cs]       # Do not raise on files copied from Roslyn repository
-dotnet_diagnostic.IDE0130.severity = none
-[**/Rules/*/*.cs]      # Do not raise on files nested inside Rules (like Rules/AspNet/xxx.cs), as those are for logical separation and don't need a dedicated namespace
-dotnet_diagnostic.IDE0130.severity = none

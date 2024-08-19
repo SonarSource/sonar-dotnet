@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this method is 14 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClient.cs#L276",
+      "Location": "Line 276 Position 22-34"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClient.cs#L355",
+      "Location": "Line 355 Position 25-31"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this method is 24 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterReceptionist.cs#L436",
+      "Location": "Line 436 Position 33-40"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this constructor is 40 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L150",
+      "Location": "Line 150 Position 16-41"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this method is 156 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L875",
+      "Location": "Line 875 Position 22-35"
+    }
+  ]
+}

@@ -1,20 +1,26 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules;
+using SonarAnalyzer.Helpers;
+
+namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
@@ -23,16 +29,10 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
     private const string MessageFormat = "ModelState.IsValid should be checked in controller actions.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-
     private static readonly SyntaxKind[] PropertyAccessSyntaxNodesToVisit = [
         SyntaxKind.ConditionalAccessExpression,
         SyntaxKind.SimpleMemberAccessExpression,
         SyntaxKindEx.Subpattern];
-
-    private static readonly ImmutableArray<KnownType> IgnoredArgumentTypes = ImmutableArray.Create(
-        KnownType.System_Object,
-        KnownType.System_String,
-        KnownType.System_Threading_CancellationToken);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -66,24 +66,18 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
     {
         if (codeBlockContext.CodeBlock is MethodDeclarationSyntax methodDeclaration
             && codeBlockContext.OwningSymbol is IMethodSymbol methodSymbol
-            && !methodSymbol.Parameters.All(IgnoreParameter)
+            && methodSymbol.Parameters.Any(x => !x.Type.Is(KnownType.System_Threading_CancellationToken))
             && methodSymbol.IsControllerActionMethod()
             && !HasActionFilterAttribute(methodSymbol))
         {
             var isModelValidated = false;
             codeBlockContext.RegisterNodeAction(nodeContext =>
             {
-                if (!isModelValidated)
-                {
-                    isModelValidated = IsCheckingValidityProperty(nodeContext.Node, nodeContext.Model);
-                }
+                isModelValidated |= IsCheckingValidityProperty(nodeContext.Node, nodeContext.SemanticModel);
             }, PropertyAccessSyntaxNodesToVisit);
             codeBlockContext.RegisterNodeAction(nodeContext =>
             {
-                if (!isModelValidated)
-                {
-                    isModelValidated = IsTryValidateInvocation(nodeContext.Node, nodeContext.Model);
-                }
+                isModelValidated |= IsTryValidateInvocation(nodeContext.Node, nodeContext.SemanticModel);
             }, SyntaxKind.InvocationExpression);
             codeBlockContext.RegisterCodeBlockEndAction(blockEnd =>
             {
@@ -95,24 +89,20 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
         }
     }
 
-    private static bool IgnoreParameter(IParameterSymbol parameter) =>
-        !parameter.GetAttributes().Any(x => x.AttributeClass.DerivesFrom(KnownType.System_ComponentModel_DataAnnotations_ValidationAttribute))
-        && (parameter.Type.TypeKind == TypeKind.Dynamic || parameter.Type.IsAny(IgnoredArgumentTypes));
-
     private static bool HasApiControllerAttribute(ITypeSymbol type) =>
         type.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute));
 
     private static bool HasActionFilterAttribute(ISymbol symbol) =>
         symbol.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Filters_ActionFilterAttribute));
 
-    private static bool IsCheckingValidityProperty(SyntaxNode node, SemanticModel model) =>
+    private static bool IsCheckingValidityProperty(SyntaxNode node, SemanticModel semanticModel) =>
         node.GetIdentifier() is { ValueText: "IsValid" or "ValidationState" } nodeIdentifier
-        && model.GetSymbolInfo(nodeIdentifier.Parent).Symbol is IPropertySymbol propertySymbol
+        && semanticModel.GetSymbolInfo(nodeIdentifier.Parent).Symbol is IPropertySymbol propertySymbol
         && propertySymbol.ContainingType.Is(KnownType.Microsoft_AspNetCore_Mvc_ModelBinding_ModelStateDictionary);
 
-    private static bool IsTryValidateInvocation(SyntaxNode node, SemanticModel model) =>
+    private static bool IsTryValidateInvocation(SyntaxNode node, SemanticModel semanticModel) =>
         node is InvocationExpressionSyntax invocation
         && invocation.GetName() == "TryValidateModel"
-        && model.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol method
+        && semanticModel.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol method
         && method.ContainingType.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase);
 }

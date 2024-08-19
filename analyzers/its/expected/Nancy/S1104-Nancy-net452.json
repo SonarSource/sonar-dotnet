@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/DefaultNancyBootstrapper.cs#L21-L40",
+      "Location": "Lines 21-40 Position 57-14"
+    },
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/IO/RequestStream.cs#L19",
+      "Location": "Line 19 Position 28-64"
+    },
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Response.cs#L22",
+      "Location": "Line 22 Position 38-55"
+    },
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Responses/GenericFileResponse.cs#L20",
+      "Location": "Line 20 Position 27-55"
+    },
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Responses/Negotiation/ProcessorMatch.cs#L11-L15",
+      "Location": "Lines 11-15 Position 38-10"
+    }
+  ]
+}

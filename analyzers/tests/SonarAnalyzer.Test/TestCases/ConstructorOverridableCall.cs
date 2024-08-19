@@ -55,36 +55,6 @@ namespace Tests.Diagnostics
             Console.WriteLine(this.foo.Length);
         }
     }
-
-    public class BaseClass
-    {
-        public BaseClass(int a)
-        {
-        }
-
-        public virtual int DoSomething() { return 0; }
-        public virtual int DoSomething(int a) { return 0; }
-    }
-
-    public class InlineBaseThisCall : BaseClass
-    {
-        public InlineBaseThisCall() : this(DoSomething()) { } // Error [CS0120]
-        public InlineBaseThisCall(int a) : base(DoSomething(a)) { } // Error [CS0120]
-    }
-
-    // https://sonarsource.atlassian.net/browse/NET-1318
-    public class LocalFuncion : BaseClass
-    {
-        public LocalFuncion() : base(0)
-        {
-            Local();
-
-            void Local()
-            {
-                DoSomething(); // FN
-            }
-        }
-    }
 }
 
 // https://github.com/SonarSource/sonar-dotnet/issues/6245
@@ -92,11 +62,6 @@ namespace Tests.Diagnostics.Repro_6245
 {
     public class Class1
     {
-        public Class1()
-        {
-            DoSomething(); // Noncompliant
-        }
-
         public virtual void DoSomething() { }
     }
 
@@ -104,7 +69,7 @@ namespace Tests.Diagnostics.Repro_6245
     {
         public ClassA2()
         {
-            DoSomething(); // Noncompliant
+            DoSomething(); // FN
         }
     }
 
@@ -115,7 +80,6 @@ namespace Tests.Diagnostics.Repro_6245
         public ClassA3(string name)
         {
             Name = name;
-            DoSomething(); // Noncompliant
         }
 
         public override void DoSomething()

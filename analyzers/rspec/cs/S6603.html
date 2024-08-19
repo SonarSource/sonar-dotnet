@@ -2,9 +2,6 @@
 <p>Both the <code>List.TrueForAll</code> method and the <code>IEnumerable.All</code> method can be used to check if all list elements satisfy a given
 condition in a collection. However, <code>List.TrueForAll</code> can be faster than <code>IEnumerable.All</code> for <code>List</code> objects. The
 performance difference may be minor for small collections, but for large collections, it can be noticeable.</p>
-<p>It is important to enable this rule with caution, as performance outcomes can vary significantly across different runtimes. Notably, the <a
-href="https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-9/#collections">performance improvements in .NET 9</a> have brought
-<code>All</code> closer to the performance of collection-specific <code>TrueForAll</code> methods in most scenarios.</p>
 <p><strong>Applies to</strong></p>
 <ul>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.trueforall">List</a> </li>
@@ -41,32 +38,29 @@ public bool AreAllEven(int[] data) =&gt;
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a
+  <li> <a
   href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.trueforall">List&lt;T&gt;.TrueForAll(Predicate&lt;T&gt;)</a>
   </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.array.trueforall">Array.TrueForAll&lt;T&gt;(T[],
-  Predicate&lt;T&gt;)</a> </li>
-  <li> Microsoft Learn - <a
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.array.trueforall">Array.TrueForAll&lt;T&gt;(T[], Predicate&lt;T&gt;)</a> </li>
+  <li> <a
   href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablelist-1.trueforall">ImmutableList&lt;T&gt;.TrueForAll(Predicate&lt;T&gt;)</a> </li>
-  <li> Microsoft Learn - <a
+  <li> <a
   href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablelist-1.builder.trueforall">ImmutableList&lt;T&gt;.Builder.TrueForAll(Predicate&lt;T&gt;)</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.all">Enumerable.All&lt;TSource&gt;</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.all">Enumerable.All&lt;TSource&gt;</a> </li>
 </ul>
 <h3>Benchmarks</h3>
 <table>
   <colgroup>
-    <col style="width: 16.6666%;">
-    <col style="width: 16.6666%;">
-    <col style="width: 16.6666%;">
-    <col style="width: 16.6666%;">
-    <col style="width: 16.6666%;">
-    <col style="width: 16.667%;">
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+    <col style="width: 20%;">
   </colgroup>
   <thead>
     <tr>
       <th>Method</th>
       <th>Runtime</th>
-      <th>Categories</th>
       <th>Mean</th>
       <th>Standard Deviation</th>
       <th>Allocated</th>
@@ -74,284 +68,32 @@ public bool AreAllEven(int[] data) =&gt;
   </thead>
   <tbody>
     <tr>
-      <td><p>ArrayAll</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>Array</p></td>
-      <td><p>109.25 μs</p></td>
-      <td><p>1.767 μs</p></td>
-      <td><p>32 B</p></td>
+      <td><p>TrueForAll</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>1.302 ms</p></td>
+      <td><p>0.0027 ms</p></td>
+      <td><p>1 B</p></td>
     </tr>
     <tr>
-      <td><p>ArrayTrueForAll</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>Array</p></td>
-      <td><p>45.01 μs</p></td>
-      <td><p>0.547 μs</p></td>
+      <td><p>All</p></td>
+      <td><p>.NET 7.0</p></td>
+      <td><p>6.279 ms</p></td>
+      <td><p>0.0181 ms</p></td>
+      <td><p>40004 B</p></td>
+    </tr>
+    <tr>
+      <td><p>TrueForAll</p></td>
+      <td><p>.NET Framework 4.6.2</p></td>
+      <td><p>1.105 ms</p></td>
+      <td><p>0.0142 ms</p></td>
       <td><p>-</p></td>
     </tr>
     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ArrayAll</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>Array</p></td>
-      <td><p>22.28 μs</p></td>
-      <td><p>0.254 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td><p>ArrayTrueForAll</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>Array</p></td>
-      <td><p>37.60 μs</p></td>
-      <td><p>0.382 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ArrayAll</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>Array</p></td>
-      <td><p>495.90 μs</p></td>
-      <td><p>4.342 μs</p></td>
-      <td><p>40 B</p></td>
-    </tr>
-    <tr>
-      <td><p>ArrayTrueForAll</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>Array</p></td>
-      <td><p>164.52 μs</p></td>
-      <td><p>2.030 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListAll</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>940.29 μs</p></td>
-      <td><p>5.600 μs</p></td>
-      <td><p>72 B</p></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListTrueForAll</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>679.46 μs</p></td>
-      <td><p>2.371 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListAll</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>922.43 μs</p></td>
-      <td><p>14.564 μs</p></td>
-      <td><p>72 B</p></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListTrueForAll</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>692.31 μs</p></td>
-      <td><p>8.897 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListAll</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>4,578.72 μs</p></td>
-      <td><p>77.920 μs</p></td>
-      <td><p>128 B</p></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListTrueForAll</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>4,393.49 μs</p></td>
-      <td><p>122.061 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListBuilderAll</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>ImmutableList&lt;T&gt;.Builder</p></td>
-      <td><p>970.45 μs</p></td>
-      <td><p>13.598 μs</p></td>
-      <td><p>73 B</p></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListBuilderTrueForAll</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>ImmutableList&lt;T&gt;.Builder</p></td>
-      <td><p>687.82 μs</p></td>
-      <td><p>6.142 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListBuilderAll</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>ImmutableList&lt;T&gt;.Builder</p></td>
-      <td><p>981.17 μs</p></td>
-      <td><p>12.966 μs</p></td>
-      <td><p>72 B</p></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListBuilderTrueForAll</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>ImmutableList&lt;T&gt;.Builder</p></td>
-      <td><p>710.19 μs</p></td>
-      <td><p>16.195 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListBuilderAll</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>ImmutableList&lt;T&gt;.Builder</p></td>
-      <td><p>4,780.50 μs</p></td>
-      <td><p>43.282 μs</p></td>
-      <td><p>128 B</p></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListBuilderTrueForAll</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>ImmutableList&lt;T&gt;.Builder</p></td>
-      <td><p>4,493.82 μs</p></td>
-      <td><p>76.530 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ListAll</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>151.12 μs</p></td>
-      <td><p>2.028 μs</p></td>
-      <td><p>40 B</p></td>
-    </tr>
-    <tr>
-      <td><p>ListTrueForAll</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>58.03 μs</p></td>
-      <td><p>0.493 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ListAll</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>22.14 μs</p></td>
-      <td><p>0.327 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td><p>ListTrueForAll</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>46.01 μs</p></td>
-      <td><p>0.327 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ListAll</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>619.86 μs</p></td>
-      <td><p>6.037 μs</p></td>
-      <td><p>48 B</p></td>
-    </tr>
-    <tr>
-      <td><p>ListTrueForAll</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>208.49 μs</p></td>
-      <td><p>2.340 μs</p></td>
-      <td><p>-</p></td>
+      <td><p>All</p></td>
+      <td><p>.NET Framework 4.6.2</p></td>
+      <td><p>4.968 ms</p></td>
+      <td><p>0.0143 ms</p></td>
+      <td><p>40128 B</p></td>
     </tr>
   </tbody>
 </table>
@@ -363,67 +105,40 @@ public bool AreAllEven(int[] data) =&gt;
 </ul>
 <p>The results were generated by running the following snippet with <a href="https://github.com/dotnet/BenchmarkDotNet">BenchmarkDotNet</a>:</p>
 <pre>
-// Explicitly cache the delegates to avoid allocations inside the benchmark.
-private readonly static Func&lt;int, bool&gt; ConditionFunc = static x =&gt; x == Math.Abs(x);
-private readonly static Predicate&lt;int&gt; ConditionPredicate = static x =&gt; x == Math.Abs(x);
+private List&lt;int&gt; data;
 
-private List&lt;int&gt; list;
-private ImmutableList&lt;int&gt; immutableList;
-private ImmutableList&lt;int&gt;.Builder immutableListBuilder;
-private int[] array;
-
-[Params(100_000)]
+[Params(10_000)]
 public int N { get; set; }
 
 [GlobalSetup]
-public void GlobalSetup()
+public void Setup() =&gt;
+    data = Enumerable.Range(0, N).Select(x =&gt; 42).ToList();
+
+[Benchmark]
+public void TrueForAll()
 {
-    list = Enumerable.Range(0, N).Select(x =&gt; N - x).ToList();
-    immutableList = ImmutableList.CreateRange(list);
-    immutableListBuilder = ImmutableList.CreateBuilder&lt;int&gt;();
-    immutableListBuilder.AddRange(list);
-    array = list.ToArray();
+    for (var i = 0; i &lt; N; i++)
+    {
+        _ = data.TrueForAll(x =&gt; x == 42);  // List&lt;T&gt;.TrueForAll
+    }
 }
 
-[BenchmarkCategory("List&lt;T&gt;"), Benchmark]
-public bool ListAll() =&gt;
-    list.All(ConditionFunc);
-
-[BenchmarkCategory("List&lt;T&gt;"), Benchmark(Baseline = true)]
-public bool ListTrueForAll() =&gt;
-    list.TrueForAll(ConditionPredicate);
-
-[BenchmarkCategory("ImmutableList&lt;T&gt;"), Benchmark(Baseline = true)]
-public bool ImmutableListAll() =&gt;
-    immutableList.All(ConditionFunc);
-
-[BenchmarkCategory("ImmutableList&lt;T&gt;"), Benchmark]
-public bool ImmutableListTrueForAll() =&gt;
-    immutableList.TrueForAll(ConditionPredicate);
-
-[BenchmarkCategory("ImmutableList&lt;T&gt;.Builder"), Benchmark(Baseline = true)]
-public bool ImmutableListBuilderAll() =&gt;
-    immutableListBuilder.All(ConditionFunc);
-
-[BenchmarkCategory("ImmutableList&lt;T&gt;.Builder"), Benchmark]
-public bool ImmutableListBuilderTrueForAll() =&gt;
-    immutableListBuilder.TrueForAll(ConditionPredicate);
-
-[BenchmarkCategory("Array"), Benchmark(Baseline = true)]
-public bool ArrayAll() =&gt;
-    array.All(ConditionFunc);
-
-[BenchmarkCategory("Array"), Benchmark]
-public bool ArrayTrueForAll() =&gt;
-    Array.TrueForAll(array, ConditionPredicate);
+[Benchmark(Baseline = true)]
+public void All()
+{
+    for (var i = 0; i &lt; N; i++)
+    {
+        _ = data.All(x =&gt; x == 42);         // Enumerable.All&lt;TSource&gt;
+    }
+}
 </pre>
 <p>Hardware configuration:</p>
 <pre>
-BenchmarkDotNet v0.14.0, Windows 11 (10.0.22631.4317/23H2/2023Update/SunValley3)
-11th Gen Intel Core i7-11850H 2.50GHz, 1 CPU, 16 logical and 8 physical cores
-  [Host]               : .NET Framework 4.8.1 (4.8.9277.0), X64 RyuJIT VectorSize=256
-  .NET 8.0             : .NET 8.0.10 (8.0.1024.46610), X64 RyuJIT AVX-512F+CD+BW+DQ+VL+VBMI
-  .NET 9.0             : .NET 9.0.0 (9.0.24.47305), X64 RyuJIT AVX-512F+CD+BW+DQ+VL+VBMI
-  .NET Framework 4.8.1 : .NET Framework 4.8.1 (4.8.9277.0), X64 RyuJIT VectorSize=256
+BenchmarkDotNet=v0.13.5, OS=Windows 10 (10.0.19045.2846/22H2/2022Update)
+12th Gen Intel Core i7-12800H, 1 CPU, 20 logical and 14 physical cores
+.NET SDK=7.0.203
+  [Host]               : .NET 7.0.5 (7.0.523.17405), X64 RyuJIT AVX2
+  .NET 7.0             : .NET 7.0.5 (7.0.523.17405), X64 RyuJIT AVX2
+  .NET Framework 4.6.2 : .NET Framework 4.8 (4.8.4614.0), X64 RyuJIT VectorSize=256
 </pre>
 

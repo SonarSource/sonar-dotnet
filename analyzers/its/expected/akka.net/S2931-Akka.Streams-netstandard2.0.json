@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S2931",
+      "Message": "Implement \u0027IDisposable\u0027 in this class and use the \u0027Dispose\u0027 method to call \u0027Dispose\u0027 on \u0027_downstream\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/EnumeratorInterpreter.cs#L192",
+      "Location": "Line 192 Position 27-48"
+    },
+    {
+      "Id": "S2931",
+      "Message": "Implement \u0027IDisposable\u0027 in this class and use the \u0027Dispose\u0027 method to call \u0027Dispose\u0027 on \u0027_dataQueue\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L22",
+      "Location": "Line 22 Position 20-40"
+    },
+    {
+      "Id": "S2931",
+      "Message": "Implement \u0027IDisposable\u0027 in this class and use the \u0027Dispose\u0027 method to call \u0027Dispose\u0027 on \u0027_cancellation\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/IO/OutputStreamSourceStage.cs#L117",
+      "Location": "Line 117 Position 30-35"
+    },
+    {
+      "Id": "S2931",
+      "Message": "Implement \u0027IDisposable\u0027 in this class and use the \u0027Dispose\u0027 method to call \u0027Dispose\u0027 on \u0027_continuallyEnumerator\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Util/EnumeratorEnumerable.cs#L41",
+      "Location": "Line 41 Position 18-39"
+    }
+  ]
+}

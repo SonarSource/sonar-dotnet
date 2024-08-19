@@ -1,0 +1,70 @@
+{
+  "Issues": [
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027ActorsComplete\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L493",
+      "Location": "Line 493 Position 10-24"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027SubsNotPresent\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L567",
+      "Location": "Line 567 Position 10-24"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Studio\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L577",
+      "Location": "Line 577 Position 11-17"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Name\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L583",
+      "Location": "Line 583 Position 11-15"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Type\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L584",
+      "Location": "Line 584 Position 11-15"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Role\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L585",
+      "Location": "Line 585 Position 11-15"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Genre\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L590",
+      "Location": "Line 590 Position 11-16"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Language\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L595",
+      "Location": "Line 595 Position 11-19"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Type\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L597",
+      "Location": "Line 597 Position 11-15"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Channels\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L599",
+      "Location": "Line 599 Position 11-19"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Language\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L604",
+      "Location": "Line 604 Position 11-19"
+    }
+  ]
+}

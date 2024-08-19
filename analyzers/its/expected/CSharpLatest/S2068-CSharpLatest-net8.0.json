@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2068",
+      "Message": "\u0022password\u0022 detected here, make sure this is not a hard-coded credential.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/JsonSerializerImmutableTypes.cs#L12",
+      "Location": "Line 12 Position 13-30"
+    },
+    {
+      "Id": "S2068",
+      "Message": "\u0022password\u0022 detected here, make sure this is not a hard-coded credential.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/RecordsVsClasses.cs#L12",
+      "Location": "Line 12 Position 13-30"
+    }
+  ]
+}

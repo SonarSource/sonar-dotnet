@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1449",
+      "Message": "Define the locale to be used in this string operation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L62",
+      "Location": "Line 62 Position 79-86"
+    }
+  ]
+}

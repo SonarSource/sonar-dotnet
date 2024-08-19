@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027ConvertMarkdown\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Markdown/MarkDownViewEngine.cs#L98",
+      "Location": "Line 98 Position 23-38"
+    }
+  ]
+}

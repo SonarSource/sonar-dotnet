@@ -1,0 +1,214 @@
+{
+  "Issues": [
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027orderChanged\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L187",
+      "Location": "Line 187 Position 9-21"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027orderChanged\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L119",
+      "Location": "Line 119 Position 9-21"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027orderChanged\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L66",
+      "Location": "Line 66 Position 9-21"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027orderChanged\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L66",
+      "Location": "Line 66 Position 9-21"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename function \u0027GetIMPAPosters\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L70",
+      "Location": "Line 70 Position 25-39"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename function \u0027GetMPDBPosters\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeMPDB.vb#L70",
+      "Location": "Line 70 Position 25-39"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027GetOFDBDetails\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L144",
+      "Location": "Line 144 Position 17-31"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename function \u0027GetOFDBUrlFromIMDBID\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L218",
+      "Location": "Line 218 Position 22-42"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename function \u0027GetTMDBImages\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L68",
+      "Location": "Line 68 Position 25-38"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027GetIMDBTrailer\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L240",
+      "Location": "Line 240 Position 17-31"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027GetTMDBTrailer\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L250",
+      "Location": "Line 250 Position 17-31"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename function \u0027GetServerURL\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1153",
+      "Location": "Line 1153 Position 22-34"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename function \u0027RemoveServerURL\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1161",
+      "Location": "Line 1161 Position 22-37"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027TMDBDoneDownloading\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1266",
+      "Location": "Line 1266 Position 17-36"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027TMDBPostersDownloaded\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1284",
+      "Location": "Line 1284 Position 17-38"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027TMDBProgressUpdated\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1302",
+      "Location": "Line 1302 Position 17-36"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename function \u0027IsTMDBURL\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L600",
+      "Location": "Line 600 Position 22-31"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename function \u0027CleanTMDBURL\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L608",
+      "Location": "Line 608 Position 22-34"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027IMPADoneDownloading\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L805",
+      "Location": "Line 805 Position 17-36"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027IMPAPostersDownloaded\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L814",
+      "Location": "Line 814 Position 17-38"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027IMPAProgressUpdated\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L832",
+      "Location": "Line 832 Position 17-36"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027MPDBDoneDownloading\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L856",
+      "Location": "Line 856 Position 17-36"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027MPDBPostersDownloaded\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L865",
+      "Location": "Line 865 Position 17-38"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027MPDBProgressUpdated\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L883",
+      "Location": "Line 883 Position 17-36"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027Handle_ModuleSettingsChanged\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L146",
+      "Location": "Line 146 Position 17-45"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027Handle_PostModuleSettingsChanged\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L150",
+      "Location": "Line 150 Position 17-49"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027Handle_SetupPostScraperChanged\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L154",
+      "Location": "Line 154 Position 17-47"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027Handle_SetupScraperChanged\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L159",
+      "Location": "Line 159 Position 17-43"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027Handler_ScraperEvent\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperTVNativeModule.vb#L132",
+      "Location": "Line 132 Position 16-36"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027Handle_ModuleSettingsChanged\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperTVNativeModule.vb#L173",
+      "Location": "Line 173 Position 17-45"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027Handle_PostModuleSettingsChanged\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperTVNativeModule.vb#L177",
+      "Location": "Line 177 Position 17-49"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027Handle_SetupPostScraperChanged\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperTVNativeModule.vb#L181",
+      "Location": "Line 181 Position 17-47"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027Handle_SetupScraperChanged\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/scraperTVNativeModule.vb#L186",
+      "Location": "Line 186 Position 17-43"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027ShowFromXML\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1051",
+      "Location": "Line 1051 Position 21-32"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027ProcessTVDBZip\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L535",
+      "Location": "Line 535 Position 20-34"
+    }
+  ]
+}

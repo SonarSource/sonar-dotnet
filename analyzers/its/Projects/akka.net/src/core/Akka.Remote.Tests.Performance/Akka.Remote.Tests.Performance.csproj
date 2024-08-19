@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\common.props" />
+  <PropertyGroup>
+    <TargetFramework>$(NetCoreTestVersion)</TargetFramework>
+    <ServerGarbageCollection>true</ServerGarbageCollection>
+    <IsPackable>false</IsPackable>
+    <OutputType>Exe</OutputType>
+    <CodeAnalysisRuleSet>..\..\..\..\..\ValidationRuleset.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\Akka.Remote\Akka.Remote.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NBench" Version="$(NBenchVersion)" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,82 @@
+{
+  "Issues": [
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027Populate_FileList\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L155",
+      "Location": "Line 155 Position 17-34"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027SelectMPAA\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1121",
+      "Location": "Line 1121 Position 17-27"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027SelectMPAA\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L668",
+      "Location": "Line 668 Position 17-27"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027Handle_ModuleSettingsChanged\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2605",
+      "Location": "Line 2605 Position 17-45"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027Handle_ModuleSetupChanged\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2609",
+      "Location": "Line 2609 Position 17-42"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027createGenreThumbs\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2797",
+      "Location": "Line 2797 Position 17-34"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027dtListUpdate\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4195",
+      "Location": "Line 4195 Position 9-21"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027fillScreenInfoWithEpisode\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4488",
+      "Location": "Line 4488 Position 17-42"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027fillScreenInfoWithMovie\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4646",
+      "Location": "Line 4646 Position 17-40"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027fillScreenInfoWithSeason\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4840",
+      "Location": "Line 4840 Position 17-41"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027fillScreenInfoWithShow\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4983",
+      "Location": "Line 4983 Position 17-39"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027Mono_Shown\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6324",
+      "Location": "Line 6324 Position 17-27"
+    },
+    {
+      "Id": "S1542",
+      "Message": "Rename procedure \u0027MoveMPAA\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6343",
+      "Location": "Line 6343 Position 17-25"
+    }
+  ]
+}

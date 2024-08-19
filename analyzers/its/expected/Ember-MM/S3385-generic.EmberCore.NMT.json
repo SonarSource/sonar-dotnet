@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1401",
+      "Location": "Line 1401 Position 29-39"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1413",
+      "Location": "Line 1413 Position 17-27"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1627",
+      "Location": "Line 1627 Position 29-37"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1636",
+      "Location": "Line 1636 Position 25-33"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L149",
+      "Location": "Line 149 Position 33-43"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3217",
+      "Message": "Either change the type of \u0027plugin\u0027 to \u0027IPlugin\u0027 or iterate on a generic collection of type \u0027IMovieImageScraper\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L119",
+      "Location": "Line 119 Position 22-40"
+    },
+    {
+      "Id": "S3217",
+      "Message": "Either change the type of \u0027plugin\u0027 to \u0027IPlugin\u0027 or iterate on a generic collection of type \u0027IMovieInfoScraper\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L79",
+      "Location": "Line 79 Position 22-39"
+    }
+  ]
+}

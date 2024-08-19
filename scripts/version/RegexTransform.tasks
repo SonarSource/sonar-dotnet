@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <UsingTask TaskName="RegexTransform" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+        <ParameterGroup>
+            <Items ParameterType="Microsoft.Build.Framework.ITaskItem[]" />
+        </ParameterGroup>
+        <Task>
+            <Using Namespace="System.IO" />
+            <Using Namespace="System.Text.RegularExpressions" />
+            <Using Namespace="Microsoft.Build.Framework" />
+            <Code Type="Fragment" Language="cs">
+                <![CDATA[
+            foreach(ITaskItem item in Items) {
+              string fileName = item.GetMetadata("FullPath");
+              string find = item.GetMetadata("Find");
+              string replaceWith = item.GetMetadata("ReplaceWith");
+              string replaceGroup = item.GetMetadata("ReplaceGroup");
+              int expectedMatchCount;
+              if (!int.TryParse(item.GetMetadata("ExpectedMatchCount"), out expectedMatchCount))
+              {
+                Log.LogError("ExpectedMatchCount could not be parsed, the value is '{0}', which is not an integer", item.GetMetadata("ExpectedMatchCount"));
+              }
+
+              if(!File.Exists(fileName)) {
+                Log.LogError("Could not find version file: {0}", fileName);
+              }
+              string content = File.ReadAllText(fileName);
+              int matchCount = 0;
+
+              string replacedContent = Regex.Replace(content, find, (match) =>
+              {
+                  matchCount++;
+                  return match.Result(replaceWith);
+              });
+
+              if (matchCount != expectedMatchCount)
+              {
+                Log.LogError("Actual ({0}) and expected ({1}) match count doesn't match", matchCount, expectedMatchCount);
+              }
+              else
+              {
+                File.WriteAllText(fileName, replacedContent, Encoding.UTF8);
+                Log.LogMessage(MessageImportance.High, string.Format("{0} matches (on pattern '{2}') have been replaced (with '{3}') in file '{1}'", matchCount, fileName, find, replaceWith));
+              }
+            }
+          ]]>
+            </Code>
+        </Task>
+    </UsingTask>
+</Project>

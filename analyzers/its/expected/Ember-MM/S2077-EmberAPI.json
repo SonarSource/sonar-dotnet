@@ -1,0 +1,484 @@
+{
+  "Issues": [
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1011",
+      "Location": "Line 1011 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1245",
+      "Location": "Line 1245 Position 25-52"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1268",
+      "Location": "Line 1268 Position 25-61"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1300",
+      "Location": "Line 1300 Position 25-61"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1323",
+      "Location": "Line 1323 Position 25-57"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1347",
+      "Location": "Line 1347 Position 25-60"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L135",
+      "Location": "Line 135 Position 29-51"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1364",
+      "Location": "Line 1364 Position 25-59"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1393",
+      "Location": "Line 1393 Position 25-57"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1438",
+      "Location": "Line 1438 Position 21-43"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1556",
+      "Location": "Line 1556 Position 25-52"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1579",
+      "Location": "Line 1579 Position 25-57"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1611",
+      "Location": "Line 1611 Position 25-57"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1634",
+      "Location": "Line 1634 Position 25-53"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1668",
+      "Location": "Line 1668 Position 13-43"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1802",
+      "Location": "Line 1802 Position 25-52"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1872",
+      "Location": "Line 1872 Position 13-35"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1917",
+      "Location": "Line 1917 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1937",
+      "Location": "Line 1937 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1949",
+      "Location": "Line 1949 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1951",
+      "Location": "Line 1951 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1973",
+      "Location": "Line 1973 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L303",
+      "Location": "Line 303 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L305",
+      "Location": "Line 305 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L307",
+      "Location": "Line 307 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L309",
+      "Location": "Line 309 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L311",
+      "Location": "Line 311 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L313",
+      "Location": "Line 313 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L315",
+      "Location": "Line 315 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L317",
+      "Location": "Line 317 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L338",
+      "Location": "Line 338 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L343",
+      "Location": "Line 343 Position 33-56"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L345",
+      "Location": "Line 345 Position 33-56"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L347",
+      "Location": "Line 347 Position 33-56"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L349",
+      "Location": "Line 349 Position 33-56"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L351",
+      "Location": "Line 351 Position 33-56"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L353",
+      "Location": "Line 353 Position 33-56"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L358",
+      "Location": "Line 358 Position 33-56"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L360",
+      "Location": "Line 360 Position 33-56"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L383",
+      "Location": "Line 383 Position 17-40"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L387",
+      "Location": "Line 387 Position 29-51"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L392",
+      "Location": "Line 392 Position 45-68"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L394",
+      "Location": "Line 394 Position 45-68"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L396",
+      "Location": "Line 396 Position 45-68"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L398",
+      "Location": "Line 398 Position 45-68"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L400",
+      "Location": "Line 400 Position 45-68"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L403",
+      "Location": "Line 403 Position 45-68"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L408",
+      "Location": "Line 408 Position 57-85"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L414",
+      "Location": "Line 414 Position 45-68"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L418",
+      "Location": "Line 418 Position 41-64"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L446",
+      "Location": "Line 446 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L452",
+      "Location": "Line 452 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L477",
+      "Location": "Line 477 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L483",
+      "Location": "Line 483 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L485",
+      "Location": "Line 485 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L487",
+      "Location": "Line 487 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L582",
+      "Location": "Line 582 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L633",
+      "Location": "Line 633 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L648",
+      "Location": "Line 648 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L667",
+      "Location": "Line 667 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L681",
+      "Location": "Line 681 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L695",
+      "Location": "Line 695 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L708",
+      "Location": "Line 708 Position 21-43"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L720",
+      "Location": "Line 720 Position 21-43"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L744",
+      "Location": "Line 744 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L77",
+      "Location": "Line 77 Position 29-51"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L771",
+      "Location": "Line 771 Position 17-47"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L798",
+      "Location": "Line 798 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L826",
+      "Location": "Line 826 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L835",
+      "Location": "Line 835 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L850",
+      "Location": "Line 850 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L869",
+      "Location": "Line 869 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L883",
+      "Location": "Line 883 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L90",
+      "Location": "Line 90 Position 29-51"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L916",
+      "Location": "Line 916 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L954",
+      "Location": "Line 954 Position 17-47"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L981",
+      "Location": "Line 981 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L1080",
+      "Location": "Line 1080 Position 29-51"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L1154",
+      "Location": "Line 1154 Position 29-51"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L1265",
+      "Location": "Line 1265 Position 33-55"
+    }
+  ]
+}

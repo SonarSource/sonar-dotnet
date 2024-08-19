@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S104",
+      "Message": "This file has 1717 lines, which is greater than 1000 authorized. Split it into smaller files.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S104",
+      "Message": "This file has 1126 lines, which is greater than 1000 authorized. Split it into smaller files.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIImages.vb#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S104",
+      "Message": "This file has 1466 lines, which is greater than 1000 authorized. Split it into smaller files.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S104",
+      "Message": "This file has 1334 lines, which is greater than 1000 authorized. Split it into smaller files.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S104",
+      "Message": "This file has 3398 lines, which is greater than 1000 authorized. Split it into smaller files.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPISettings.vb#L1",
+      "Location": "Line 1 Position 1-1"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="ThisIsNotIncludedInTheProjectFile\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="ThisIsNotIncludedInTheProjectFile\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="ThisIsNotIncludedInTheProjectFile\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="ThisIsNotIncludedInTheProjectFile\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="ThisIsNotIncludedInTheProjectFile\Web.config" />
+    <_ContentIncludedByDefault Remove="ThisIsNotIncludedInTheProjectFile\appsettings.json" />
+  </ItemGroup>
+</Project>

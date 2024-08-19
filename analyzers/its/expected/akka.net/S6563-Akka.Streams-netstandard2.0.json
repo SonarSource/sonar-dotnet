@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6563",
+      "Message": "Use UTC when recording DateTime instants",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Extra/Timed.cs#L296",
+      "Location": "Line 296 Position 36-48"
+    }
+  ]
+}

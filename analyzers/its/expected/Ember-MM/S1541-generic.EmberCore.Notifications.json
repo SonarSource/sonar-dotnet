@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 14 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L106",
+      "Location": "Line 106 Position 5-210"
+    }
+  ]
+}

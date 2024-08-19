@@ -1,0 +1,58 @@
+{
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027lhttp\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L46",
+      "Location": "Line 46 Position 13-18"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027n\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPICommon.vb#L690",
+      "Location": "Line 690 Position 21-22"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027sqlCB\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L510",
+      "Location": "Line 510 Position 17-22"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027test\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDVD.vb#L206",
+      "Location": "Line 206 Position 29-33"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027tmpAL\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L405",
+      "Location": "Line 405 Position 17-22"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027temp\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIHTTP.vb#L312",
+      "Location": "Line 312 Position 25-29"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027sStudio\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIModules.vb#L572",
+      "Location": "Line 572 Position 13-20"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027currname\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L217",
+      "Location": "Line 217 Position 13-21"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027sMoviePath\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L904",
+      "Location": "Line 904 Position 17-27"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2327",
+      "Message": "Combine this \u0027try\u0027 with the one starting on line 149.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L150",
+      "Location": "Line 150 Position 17-50"
+    }
+  ]
+}

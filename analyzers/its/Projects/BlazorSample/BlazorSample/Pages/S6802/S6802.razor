@@ -1,0 +1,34 @@
+﻿@foreach (var button in Buttons)
+{
+    <button @key="button.Id" @onclick="(e) => button.Action(e)">
+        Button #@button.Id
+    </button>
+}
+
+<button @onclick="(e) => Reset(e)">Reset</button>
+
+@if (Buttons.Count > 0)
+{
+    <button @onclick="(e) => Reset(e)">Reset #2</button>
+}
+
+@code {
+    private List<Button> Buttons { get; } = new();
+
+    private void DoAction(MouseEventArgs e, Button button) { }
+
+    private class Button
+    {
+        public string? Id { get; } = Guid.NewGuid().ToString();
+        public Action<MouseEventArgs> Action { get; set; } = e => { };
+    }
+
+    private void Reset(MouseEventArgs mouseEventArgs)
+    {
+        foreach (var button in Buttons)
+        {
+            button.Action = e => { };
+        }
+    }
+
+}

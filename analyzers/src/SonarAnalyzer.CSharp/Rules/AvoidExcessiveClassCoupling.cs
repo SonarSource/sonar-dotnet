@@ -1,20 +1,26 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+using SonarAnalyzer.Common.Walkers;
+
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class AvoidExcessiveClassCoupling : ParametrizedDiagnosticAnalyzer
@@ -72,8 +78,8 @@ namespace SonarAnalyzer.CSharp.Rules
                         return;
                     }
 
-                    var type = c.Model.GetDeclaredSymbol(typeDeclaration);
-                    var collector = new TypeDependencyCollector(c.Model, typeDeclaration);
+                    var type = c.SemanticModel.GetDeclaredSymbol(typeDeclaration);
+                    var collector = new TypeDependencyCollector(c.SemanticModel, typeDeclaration);
                     collector.SafeVisit(typeDeclaration);
                     var dependentTypes = collector.DependentTypes
                         .SelectMany(ExpandGenericTypes)
@@ -254,7 +260,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 // semantic checks to ensure this is the real `nameof` and not a user made method.
                 // Here we prefer to favor fast results over accuracy (at worst we have FNs not FPs).
                 var isNameof = node.Expression.IsKind(SyntaxKind.IdentifierName)
-                    && ((IdentifierNameSyntax)node.Expression).Identifier.ToString() == SyntaxConstants.NameOfKeywordText;
+                    && ((IdentifierNameSyntax)node.Expression).Identifier.ToString() == CSharpSyntaxHelper.NameOfKeywordText;
 
                 if (!isNameof)
                 {

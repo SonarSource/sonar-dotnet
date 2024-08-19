@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S138",
+      "Message": "This method \u0027CreateRandom\u0027 has 100 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L131",
+      "Location": "Line 131 Position 21-33"
+    }
+  ]
+}

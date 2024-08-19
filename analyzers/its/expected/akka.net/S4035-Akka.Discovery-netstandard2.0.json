@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S4035",
+      "Message": "Seal class \u0027Lookup\u0027 or implement \u0027IEqualityComparer\u003CT\u003E\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Discovery/ServiceDiscovery.cs#L137",
+      "Location": "Line 137 Position 18-24"
+    },
+    {
+      "Id": "S4035",
+      "Message": "Seal class \u0027Resolved\u0027 or implement \u0027IEqualityComparer\u003CT\u003E\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Discovery/ServiceDiscovery.cs#L25",
+      "Location": "Line 25 Position 22-30"
+    },
+    {
+      "Id": "S4035",
+      "Message": "Seal class \u0027ResolvedTarget\u0027 or implement \u0027IEqualityComparer\u003CT\u003E\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Discovery/ServiceDiscovery.cs#L66",
+      "Location": "Line 66 Position 22-36"
+    }
+  ]
+}

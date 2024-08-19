@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L805",
+      "Location": "Line 805 Position 82-119"
+    }
+  ]
+}

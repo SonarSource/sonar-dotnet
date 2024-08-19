@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S4035",
+      "Message": "Seal class \u0027DynamicDictionary\u0027 or implement \u0027IEqualityComparer\u003CT\u003E\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/DynamicDictionary.cs#L15",
+      "Location": "Line 15 Position 18-35"
+    },
+    {
+      "Id": "S4035",
+      "Message": "Seal class \u0027DynamicDictionaryValue\u0027 or implement \u0027IEqualityComparer\u003CT\u003E\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/DynamicDictionaryValue.cs#L18",
+      "Location": "Line 18 Position 18-40"
+    },
+    {
+      "Id": "S4035",
+      "Message": "Seal class \u0027HttpLink\u0027 or implement \u0027IEqualityComparer\u003CT\u003E\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/HttpLink.cs#L12",
+      "Location": "Line 12 Position 18-26"
+    },
+    {
+      "Id": "S4035",
+      "Message": "Seal class \u0027HttpLinkRelation\u0027 or implement \u0027IEqualityComparer\u003CT\u003E\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/HttpLinkRelation.cs#L10",
+      "Location": "Line 10 Position 18-34"
+    },
+    {
+      "Id": "S4035",
+      "Message": "Seal class \u0027BindingMemberInfo\u0027 or implement \u0027IEqualityComparer\u003CT\u003E\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ModelBinding/BindingMemberInfo.cs#L11",
+      "Location": "Line 11 Position 18-35"
+    },
+    {
+      "Id": "S4035",
+      "Message": "Seal class \u0027MediaRange\u0027 or implement \u0027IEqualityComparer\u003CT\u003E\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Responses/Negotiation/MediaRange.cs#L9",
+      "Location": "Line 9 Position 18-28"
+    },
+    {
+      "Id": "S4035",
+      "Message": "Seal class \u0027ViewLocationResult\u0027 or implement \u0027IEqualityComparer\u003CT\u003E\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ViewEngines/ViewLocationResult.cs#L9",
+      "Location": "Line 9 Position 18-36"
+    }
+  ]
+}

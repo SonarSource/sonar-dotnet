@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S1694",
+      "Message": "Convert this \u0027abstract\u0027 class to an interface.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/ExecutorService.cs#L53",
+      "Location": "Line 53 Position 27-49"
+    },
+    {
+      "Id": "S1694",
+      "Message": "Convert this \u0027abstract\u0027 class to an interface.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/IO.cs#L15",
+      "Location": "Line 15 Position 27-38"
+    },
+    {
+      "Id": "S1694",
+      "Message": "Convert this \u0027abstract\u0027 class to an interface.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L77",
+      "Location": "Line 77 Position 27-41"
+    },
+    {
+      "Id": "S1694",
+      "Message": "Convert this \u0027abstract\u0027 class to an interface.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/Router.cs#L263",
+      "Location": "Line 263 Position 27-39"
+    }
+  ]
+}

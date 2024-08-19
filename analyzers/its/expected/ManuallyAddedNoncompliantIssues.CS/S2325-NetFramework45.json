@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027XmlReader_SafeByDefault\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework45/XmlReaderTest.cs#L27",
+      "Location": "Line 27 Position 21-44"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027UnsafeByDefault\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework45/XPathDocumentTest.cs#L16",
+      "Location": "Line 16 Position 21-36"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027XmlReaderAsParameter\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework45/XPathDocumentTest.cs#L33",
+      "Location": "Line 33 Position 21-41"
+    }
+  ]
+}

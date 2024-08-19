@@ -1,47 +1,52 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using SonarAnalyzer.CFG.Roslyn;
 
-namespace SonarAnalyzer.CFG.Extensions;
-
-public static class ControlFlowGraphExtensions
+namespace SonarAnalyzer.Extensions
 {
-    public static IEnumerable<IFlowAnonymousFunctionOperationWrapper> FlowAnonymousFunctionOperations(this ControlFlowGraph cfg) =>
-        cfg.Blocks
-           .SelectMany(x => x.OperationsAndBranchValue)
-           .SelectMany(x => x.DescendantsAndSelf())
-           .Where(IFlowAnonymousFunctionOperationWrapper.IsInstance)
-           .Select(IFlowAnonymousFunctionOperationWrapper.FromOperation);
-
-    // Similar to ControlFlowGraphExtensions.GetLocalFunctionControlFlowGraphInScope from Roslyn
-    public static ControlFlowGraph FindLocalFunctionCfgInScope(this ControlFlowGraph cfg, IMethodSymbol localFunction, CancellationToken cancel)
+    public static class ControlFlowGraphExtensions
     {
-        var current = cfg;
-        while (current is not null)
-        {
-            if (current.LocalFunctions.Contains(localFunction))
-            {
-                return current.GetLocalFunctionControlFlowGraph(localFunction, cancel);
-            }
-            current = current.Parent;
-        }
-        throw new ArgumentOutOfRangeException(nameof(localFunction));
-    }
+        public static IEnumerable<IFlowAnonymousFunctionOperationWrapper> FlowAnonymousFunctionOperations(this ControlFlowGraph cfg) =>
+            cfg.Blocks
+               .SelectMany(x => x.OperationsAndBranchValue)
+               .SelectMany(x => x.DescendantsAndSelf())
+               .Where(IFlowAnonymousFunctionOperationWrapper.IsInstance)
+               .Select(IFlowAnonymousFunctionOperationWrapper.FromOperation);
 
-    public static ControlFlowGraph GetLocalFunctionControlFlowGraph(this ControlFlowGraph cfg, SyntaxNode localFunction, CancellationToken cancel) =>
-        cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single(x => x.DeclaringSyntaxReferences.Single().GetSyntax() == localFunction), cancel);
+        // Similar to ControlFlowGraphExtensions.GetLocalFunctionControlFlowGraphInScope from Roslyn
+        public static ControlFlowGraph FindLocalFunctionCfgInScope(this ControlFlowGraph cfg, IMethodSymbol localFunction, CancellationToken cancel)
+        {
+            var current = cfg;
+            while (current != null)
+            {
+                if (current.LocalFunctions.Contains(localFunction))
+                {
+                    return current.GetLocalFunctionControlFlowGraph(localFunction, cancel);
+                }
+                current = current.Parent;
+            }
+            throw new ArgumentOutOfRangeException(nameof(localFunction));
+        }
+
+        public static ControlFlowGraph GetLocalFunctionControlFlowGraph(this ControlFlowGraph cfg, SyntaxNode localFunction, CancellationToken cancel) =>
+            cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single(x => x.DeclaringSyntaxReferences.Single().GetSyntax() == localFunction), cancel);
+    }
 }

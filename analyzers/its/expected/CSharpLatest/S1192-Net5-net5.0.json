@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027foobar\u0027 4 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/Main.cs#L80",
+      "Location": "Line 80 Position 13-21"
+    },
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=\u0027 5 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/S2115.cs#L9",
+      "Location": "Line 9 Position 41-114"
+    }
+  ]
+}

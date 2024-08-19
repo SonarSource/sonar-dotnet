@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027contentPath.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L136",
+      "Location": "Line 136 Position 18-41"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027requestedPath.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L138",
+      "Location": "Line 138 Position 17-42"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027contentPath.StartsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L154",
+      "Location": "Line 154 Position 18-45"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027pathWithoutFileName.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L167",
+      "Location": "Line 167 Position 21-52"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027requestedPath.StartsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L32",
+      "Location": "Line 32 Position 18-47"
+    }
+  ]
+}

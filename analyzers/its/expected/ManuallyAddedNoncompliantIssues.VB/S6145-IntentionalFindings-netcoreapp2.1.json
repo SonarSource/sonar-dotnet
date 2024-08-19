@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6145",
+      "Message": "Configure \u0027Option Strict On\u0027 for assembly \u0027IntentionalFindings\u0027.",
+      "Uri": null,
+      "Location": null
+    }
+  ]
+}

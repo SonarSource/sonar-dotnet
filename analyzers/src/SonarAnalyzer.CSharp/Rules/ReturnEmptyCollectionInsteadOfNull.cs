@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules;
+namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class ReturnEmptyCollectionInsteadOfNull : SonarDiagnosticAnalyzer
@@ -59,7 +63,7 @@ public sealed class ReturnEmptyCollectionInsteadOfNull : SonarDiagnosticAnalyzer
         {
             if (nullOrDefaultLiterals.Count > 0 && IsReturningCollection(context))
             {
-                context.ReportIssue(Rule, nullOrDefaultLiterals[0], nullOrDefaultLiterals.Skip(1).ToSecondary(MessageFormat));
+                context.ReportIssue(Rule, nullOrDefaultLiterals[0], nullOrDefaultLiterals.Skip(1).ToSecondary());
             }
         }
     }
@@ -76,7 +80,7 @@ public sealed class ReturnEmptyCollectionInsteadOfNull : SonarDiagnosticAnalyzer
 
     private static ITypeSymbol GetType(SonarSyntaxNodeReportingContext context)
     {
-        var symbol = context.Model.GetDeclaredSymbol(context.Node);
+        var symbol = context.SemanticModel.GetDeclaredSymbol(context.Node);
         return symbol is IPropertySymbol property ? property.Type : ((IMethodSymbol)symbol).ReturnType;
     }
 
@@ -92,19 +96,19 @@ public sealed class ReturnEmptyCollectionInsteadOfNull : SonarDiagnosticAnalyzer
         property.AccessorList.Accessors.FirstOrDefault(x => x.IsKind(SyntaxKind.GetAccessorDeclaration));
 
     private static IEnumerable<SyntaxNode> GetReturnNullOrDefaultExpressions(SyntaxNode methodBlock) =>
-        methodBlock.DescendantNodes(x =>
-                !(x.Kind() is
-                    SyntaxKindEx.LocalFunctionStatement or
-                    SyntaxKind.SimpleLambdaExpression or
+        methodBlock.DescendantNodes(n =>
+                !n.IsAnyKind(
+                    SyntaxKindEx.LocalFunctionStatement,
+                    SyntaxKind.SimpleLambdaExpression,
                     SyntaxKind.ParenthesizedLambdaExpression))
                .OfType<ReturnStatementSyntax>()
-               .SelectMany(x => GetNullOrDefaultExpressions(x.Expression));
+               .SelectMany(statement => GetNullOrDefaultExpressions(statement.Expression));
 
     private static IEnumerable<SyntaxNode> GetNullOrDefaultExpressions(SyntaxNode node)
     {
         node = node.RemoveParentheses();
 
-        if (node.IsNullLiteral() || node?.Kind() is SyntaxKindEx.DefaultLiteralExpression or SyntaxKind.DefaultExpression)
+        if (node.IsNullLiteral() || node.IsAnyKind(SyntaxKindEx.DefaultLiteralExpression, SyntaxKind.DefaultExpression))
         {
             yield return node;
             yield break;

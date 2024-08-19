@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3532",
+      "Message": "Remove this empty \u0027default\u0027 clause.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S4201.cs#L33-L34",
+      "Location": "Lines 33-34 Position 13-23"
+    }
+  ]
+}

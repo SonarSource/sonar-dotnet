@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027reason\u0027 to \u0027cause\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Eventsourced.Lifecycle.cs#L77",
+      "Location": "Line 77 Position 58-64"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027newTimestamp\u0027 to \u0027timestamp\u0027 to match the interface declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Persistent.cs#L352",
+      "Location": "Line 352 Position 61-73"
+    }
+  ]
+}

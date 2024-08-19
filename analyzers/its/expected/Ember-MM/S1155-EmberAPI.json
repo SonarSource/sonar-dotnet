@@ -1,0 +1,202 @@
+{
+  "Issues": [
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of \u003Canonymous type: Key control As String, Key Value As String\u003E)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPILocalization.vb#L182",
+      "Location": "Line 182 Position 30-35"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of \u003Canonymous type: Key id As String, Key Value As String\u003E)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPILocalization.vb#L231",
+      "Location": "Line 231 Position 34-39"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of EmberAPI.MediaContainers.Set)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1119",
+      "Location": "Line 1119 Position 21-26"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of EmberAPI.MediaContainers.Set)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1247",
+      "Location": "Line 1247 Position 21-26"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of Integer)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L124",
+      "Location": "Line 124 Position 111-116"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of EmberAPI.Scanner.Seasons)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L124",
+      "Location": "Line 124 Position 122-127"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of System.IO.FileInfo)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L791",
+      "Location": "Line 791 Position 77-82"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of System.IO.FileInfo)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L837",
+      "Location": "Line 837 Position 139-144"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of String)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L837",
+      "Location": "Line 837 Position 150-155"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of System.IO.FileInfo)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L953",
+      "Location": "Line 953 Position 122-127"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of System.IO.DirectoryInfo)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L976",
+      "Location": "Line 976 Position 177-182"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of System.IO.DirectoryInfo)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L976",
+      "Location": "Line 976 Position 42-47"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of System.IO.FileInfo)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L976",
+      "Location": "Line 976 Position 75-80"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of System.Xml.Linq.XNode)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIXML.vb#L245",
+      "Location": "Line 245 Position 27-32"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of String)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIXML.vb#L252",
+      "Location": "Line 252 Position 29-34"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of String)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIXML.vb#L257",
+      "Location": "Line 257 Position 27-32"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of String)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIXML.vb#L284",
+      "Location": "Line 284 Position 27-32"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of \u003Canonymous type: Key searchstring As String, Key language As String\u003E)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIXML.vb#L290",
+      "Location": "Line 290 Position 27-32"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of System.Xml.Linq.XNode)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIXML.vb#L317",
+      "Location": "Line 317 Position 28-33"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of System.Xml.Linq.XElement)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIXML.vb#L322",
+      "Location": "Line 322 Position 322-327"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of String)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIXML.vb#L324",
+      "Location": "Line 324 Position 32-37"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of String)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIXML.vb#L329",
+      "Location": "Line 329 Position 32-37"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of System.Xml.Linq.XElement)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIXML.vb#L351",
+      "Location": "Line 351 Position 317-322"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of String)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIXML.vb#L353",
+      "Location": "Line 353 Position 28-33"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of String)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIXML.vb#L358",
+      "Location": "Line 358 Position 28-33"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of String)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIXML.vb#L373",
+      "Location": "Line 373 Position 24-29"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of System.Xml.Linq.XNode)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIXML.vb#L400",
+      "Location": "Line 400 Position 28-33"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of System.Xml.Linq.XElement)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIXML.vb#L405",
+      "Location": "Line 405 Position 169-174"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of String)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIXML.vb#L407",
+      "Location": "Line 407 Position 32-37"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of String)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIXML.vb#L412",
+      "Location": "Line 412 Position 32-37"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of System.Xml.Linq.XElement)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIXML.vb#L434",
+      "Location": "Line 434 Position 168-173"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of String)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIXML.vb#L436",
+      "Location": "Line 436 Position 28-33"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of String)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIXML.vb#L441",
+      "Location": "Line 441 Position 28-33"
+    }
+  ]
+}

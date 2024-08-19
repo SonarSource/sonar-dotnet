@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027_testElements\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams.Tests.Performance/FusedGraphsBenchmark.cs#L144",
+      "Location": "Line 144 Position 34-47"
+    },
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027_materializerSettings\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams.Tests.Performance/MaterializationBenchmark.cs#L20",
+      "Location": "Line 20 Position 43-64"
+    },
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027_materializerSettings\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams.Tests.Performance/MergeManyBenchmark.cs#L22",
+      "Location": "Line 22 Position 43-64"
+    }
+  ]
+}

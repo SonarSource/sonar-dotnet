@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/RazorConfigurationSection.cs#L37",
+      "Location": "Line 37 Position 29-49"
+    },
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/RazorConfigurationSection.cs#L49",
+      "Location": "Line 49 Position 29-47"
+    },
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/RazorConfigurationSection.cs#L86",
+      "Location": "Line 86 Position 29-50"
+    },
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/RazorConfigurationSection.cs#L98",
+      "Location": "Line 98 Position 29-47"
+    }
+  ]
+}

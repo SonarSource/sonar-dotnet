@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/SonarLintExclusions/SonarLintExclusionsTest/IncludedTest/IncludedTest.cs#L8",
+      "Location": "Line 8 Position 21-32"
+    }
+  ]
+}

@@ -1,8 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <RootNamespace>Calculator</RootNamespace>
-        <TargetFramework>net9.0</TargetFramework>
-    </PropertyGroup>
-
-</Project>

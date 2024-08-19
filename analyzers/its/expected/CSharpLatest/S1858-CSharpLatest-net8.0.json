@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1858",
+      "Message": "There\u0027s no need to call \u0027ToString()\u0027, the compiler will do it for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/TargetTypedNew.cs#L18",
+      "Location": "Line 18 Position 29-40"
+    },
+    {
+      "Id": "S1858",
+      "Message": "There\u0027s no need to call \u0027ToString()\u0027, the compiler will do it for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/TargetTypedNew.cs#L18",
+      "Location": "Line 18 Position 46-57"
+    },
+    {
+      "Id": "S1858",
+      "Message": "There\u0027s no need to call \u0027ToString()\u0027, the compiler will do it for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/TargetTypedNew.cs#L18",
+      "Location": "Line 18 Position 63-74"
+    }
+  ]
+}

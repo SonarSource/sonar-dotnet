@@ -5,9 +5,9 @@ namespace Tests.Diagnostics
     class Program
     {
         void Foo1()
-//           ^^^^ Secondary {{Update this method so that its implementation is not identical to 'Foo2'.}}
-//           ^^^^ Secondary@-1 {{Update this method so that its implementation is not identical to 'Foo3'.}}
-//           ^^^^ Secondary@-2 {{Update this method so that its implementation is not identical to 'Foo4'.}}
+//           ^^^^ Secondary
+//           ^^^^ Secondary@-1
+//           ^^^^ Secondary@-2
         {
             string s = "test";
             Console.WriteLine("Result: {0}", s);
@@ -218,12 +218,5 @@ namespace Tests.Diagnostics
                 Console.WriteLine("Two");
             }
         }
-    }
-
-    // https://sonarsource.atlassian.net/browse/NET-348
-    class Repro_348
-    {
-        T Method1<T>() => default;  // FN
-        T Method2<T>() => default;
     }
 }

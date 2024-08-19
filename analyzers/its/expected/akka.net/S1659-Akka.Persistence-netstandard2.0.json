@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027ticks\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L292",
+      "Location": "Line 292 Position 34-39"
+    }
+  ]
+}

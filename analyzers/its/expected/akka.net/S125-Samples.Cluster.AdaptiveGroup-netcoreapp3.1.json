@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S125",
+      "Message": "Remove this commented out code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/examples/Cluster/Metrics/Samples.Cluster.AdaptiveGroup/Program.cs#L56",
+      "Location": "Line 56 Position 17-96"
+    }
+  ]
+}

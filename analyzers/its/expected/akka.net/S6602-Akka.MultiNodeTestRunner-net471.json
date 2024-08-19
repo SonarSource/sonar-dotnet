@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S6602",
+      "Message": "\u0022Array.Find\u0022 static method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L115",
+      "Location": "Line 115 Position 22-36"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Array.Find\u0022 static method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L115",
+      "Location": "Line 115 Position 68-82"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Array.Find\u0022 static method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L127",
+      "Location": "Line 127 Position 31-45"
+    }
+  ]
+}

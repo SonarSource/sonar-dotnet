@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused procedure parameter \u0027filename\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1213",
+      "Location": "Line 1213 Position 90-114"
+    }
+  ]
+}

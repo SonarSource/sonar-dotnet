@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027CreateKnownTypesProvider\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/HyperionSerializer.cs#L146",
+      "Location": "Line 146 Position 37-61"
+    }
+  ]
+}

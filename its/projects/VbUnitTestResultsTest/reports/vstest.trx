@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="db9562ec-872e-4714-a0bc-e9e96f702955" name="vagrant@WIN7PRO64 2014-06-12 10:10:41" runUser="WIN7PRO64\vagrant" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <ResultSummary outcome="Completed">
+    <Counters total="42" executed="40" passed="21" error="1" failed="2" timeout="3" aborted="5" inconclusive="7" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

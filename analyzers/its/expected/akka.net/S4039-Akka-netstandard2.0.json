@@ -1,0 +1,142 @@
+{
+  "Issues": [
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027ActorBase\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IInternalActor.ActorContext\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorBase.cs#L132",
+      "Location": "Line 132 Position 38-50"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027ActorCell\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IActorContext.Child\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorCell.cs#L242",
+      "Location": "Line 242 Position 33-38"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027FSM\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IInternalSupportsTestFSMRef\u003CTState, TData\u003E.ApplyState\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/FSM.cs#L1213",
+      "Location": "Line 1213 Position 57-67"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027FSM\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IInternalSupportsTestFSMRef\u003CTState, TData\u003E.IsStateTimerActive\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/FSM.cs#L886",
+      "Location": "Line 886 Position 57-75"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027ActorSystemImpl\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027ISupportSerializationConfigReload.ReloadSerialization\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Internal/ActorSystemImpl.cs#L432",
+      "Location": "Line 432 Position 48-67"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027ReceiveActor\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IInitializableActor.Init\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ReceiveActor.cs#L35",
+      "Location": "Line 35 Position 34-38"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027SchedulerBase\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027ITellScheduler.ScheduleTellOnce\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Scheduler/SchedulerBase.cs#L45",
+      "Location": "Line 45 Position 29-45"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027SchedulerBase\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027ITellScheduler.ScheduleTellOnce\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Scheduler/SchedulerBase.cs#L51",
+      "Location": "Line 51 Position 29-45"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027SchedulerBase\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027ITellScheduler.ScheduleTellRepeatedly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Scheduler/SchedulerBase.cs#L57",
+      "Location": "Line 57 Position 29-51"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027SchedulerBase\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027ITellScheduler.ScheduleTellRepeatedly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Scheduler/SchedulerBase.cs#L64",
+      "Location": "Line 64 Position 29-51"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027SchedulerBase\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IScheduler.Advanced\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Scheduler/SchedulerBase.cs#L97",
+      "Location": "Line 97 Position 39-47"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027SchedulerBase\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027ITimeProvider.Now\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Scheduler/SchedulerBase.cs#L98",
+      "Location": "Line 98 Position 38-41"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027LoggerMailbox\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IMessageQueue.HasMessages\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/LoggerMailbox.cs#L67",
+      "Location": "Line 67 Position 28-39"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027LoggerMailbox\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IMessageQueue.Count\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/LoggerMailbox.cs#L69",
+      "Location": "Line 69 Position 27-32"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027LoggerMailbox\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IMessageQueue.Enqueue\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/LoggerMailbox.cs#L71",
+      "Location": "Line 71 Position 28-35"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027LoggerMailbox\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IMessageQueue.TryDequeue\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/LoggerMailbox.cs#L76",
+      "Location": "Line 76 Position 28-38"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027LoggerMailbox\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IMessageQueue.CleanUp\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/LoggerMailbox.cs#L81",
+      "Location": "Line 81 Position 28-35"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027ConcurrentSet\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027ICollection\u003CT\u003E.Add\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/ConcurrentSet.cs#L127",
+      "Location": "Line 127 Position 29-32"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027ConcurrentSet\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027ICollection\u003CT\u003E.CopyTo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/ConcurrentSet.cs#L132",
+      "Location": "Line 132 Position 29-35"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027ConcurrentSet\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027ICollection\u003CT\u003E.IsReadOnly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/ConcurrentSet.cs#L138",
+      "Location": "Line 138 Position 29-39"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027ConcurrentSet\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027ICollection\u003CT\u003E.Remove\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/ConcurrentSet.cs#L143",
+      "Location": "Line 143 Position 29-35"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027ConcurrentSet\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IEnumerable\u003CT\u003E.GetEnumerator\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/ConcurrentSet.cs#L148",
+      "Location": "Line 148 Position 39-52"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027ConcurrentSet\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IEnumerable.GetEnumerator\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/ConcurrentSet.cs#L153",
+      "Location": "Line 153 Position 33-46"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetConnectionString\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/SqlJournal.cs#L505",
+      "Location": "Line 505 Position 34-53"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetConnectionString\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/SqlSnapshotStore.cs#L148",
+      "Location": "Line 148 Position 34-53"
+    }
+  ]
+}

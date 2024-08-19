@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Microsoft.Extensions.Hosting.IHostEnvironment\u0027 instead of \u0027Microsoft.AspNetCore.Hosting.IWebHostEnvironment\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/examples/AspNetCore/Samples.Akka.AspNetCore/Startup.cs#L43",
+      "Location": "Line 43 Position 76-79"
+    }
+  ]
+}

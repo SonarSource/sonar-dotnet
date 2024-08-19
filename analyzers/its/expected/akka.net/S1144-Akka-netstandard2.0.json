@@ -1,0 +1,118 @@
+{
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_TypeName\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Props.cs#L229",
+      "Location": "Line 229 Position 13-61"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private class \u0027FactoryConsumer\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Props.cs#L683",
+      "Location": "Line 683 Position 23-38"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove unused constructor of private type \u0027FactoryConsumer\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Props.cs#L687-L690",
+      "Location": "Lines 687-690 Position 13-14"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027_stopped\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/RootGuardianSupervisor.cs#L25",
+      "Location": "Line 25 Position 9-62"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027ExecuteRunnableWithState\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L596",
+      "Location": "Line 596 Position 13-105"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027CurrentSynchronizationContextExecutorConfig\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L522-L523",
+      "Location": "Lines 522-523 Position 9-84"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027_mailboxNonZeroPushTimeoutWarningIssued\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L153",
+      "Location": "Line 153 Position 9-70"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private property \u0027HasTimeLeft\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L240",
+      "Location": "Line 240 Position 25-36"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private property \u0027TimeLeft\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L255",
+      "Location": "Line 255 Position 29-37"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_ExceptionHandler\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L88",
+      "Location": "Line 88 Position 58-70"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private setter \u0027set_ThreadMaxStackSize\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L93",
+      "Location": "Line 93 Position 46-58"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private property \u0027TotalBufferSize\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Buffers/DirectBufferPool.cs#L105",
+      "Location": "Line 105 Position 21-36"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove unused constructor of private type \u0027UpdatePendingWriteAndThen\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/TcpConnection.cs#L892-L896",
+      "Location": "Lines 892-896 Position 13-14"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove unused constructor of private type \u0027WriteFileFailed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/TcpConnection.cs#L903-L906",
+      "Location": "Lines 903-906 Position 13-14"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027acceptLimit\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/TcpListener.cs#L30",
+      "Location": "Line 30 Position 9-33"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private method \u0027SendAsync\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/UdpConnection.cs#L245",
+      "Location": "Line 245 Position 22-31"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027_objectArrayType\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/MatchHandler/PartialActionBuilder.cs#L23",
+      "Location": "Line 23 Position 9-74"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private method \u0027RotateLeft64\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/MurmurHash.cs#L155",
+      "Location": "Line 155 Position 30-42"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027paramNameDictionary\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/Reflection/ExpressionExtensions.cs#L36-L38",
+      "Location": "Lines 36-38 Position 9-71"
+    }
+  ]
+}

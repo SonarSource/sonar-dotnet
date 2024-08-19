@@ -1,0 +1,112 @@
+{
+  "Issues": [
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027usePassivateIdle.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L280",
+      "Location": "Line 280 Position 17-47"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027usePassivateIdle.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L281",
+      "Location": "Line 281 Position 17-49"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027usePassivateIdle.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L282",
+      "Location": "Line 282 Position 17-46"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027Shard.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1153",
+      "Location": "Line 1153 Position 24-49"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027Shard.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1204",
+      "Location": "Line 1204 Position 24-49"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027Shard.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L441",
+      "Location": "Line 441 Position 24-49"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027Shard.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L495",
+      "Location": "Line 495 Position 24-49"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027Shard.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L546",
+      "Location": "Line 546 Position 24-49"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027Shard.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L594",
+      "Location": "Line 594 Position 24-49"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027Shard.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L647",
+      "Location": "Line 647 Position 24-49"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027Shard.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L695",
+      "Location": "Line 695 Position 24-49"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027Shard.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L746",
+      "Location": "Line 746 Position 24-49"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027Shard.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L794",
+      "Location": "Line 794 Position 24-49"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027EntityId.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L206",
+      "Location": "Line 206 Position 24-55"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027ShardId.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L346",
+      "Location": "Line 346 Position 24-53"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027EntityId.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L122",
+      "Location": "Line 122 Position 24-55"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027EntityId.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L176",
+      "Location": "Line 176 Position 24-55"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027ShardId.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L177",
+      "Location": "Line 177 Position 24-53"
+    }
+  ]
+}

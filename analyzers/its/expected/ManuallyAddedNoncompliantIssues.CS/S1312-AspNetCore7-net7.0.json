@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1312",
+      "Message": "Make the logger \u0027_logger\u0027 private static readonly.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/AspNetCore7/Controllers/HomeController.cs#L9",
+      "Location": "Line 9 Position 50-57"
+    }
+  ]
+}

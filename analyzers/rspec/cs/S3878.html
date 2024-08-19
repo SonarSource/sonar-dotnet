@@ -1,57 +1,32 @@
 <h2>Why is this an issue?</h2>
-<p>Creating an array or using a collection expression solely for the purpose of passing it to a <code>params</code> parameter is unnecessary. Simply
-pass the elements directly, and they will be automatically consolidated into the appropriate collection type.</p>
-<h2>How to fix it</h2>
-<h3>Code examples</h3>
-<h4>Noncompliant code example</h4>
-<pre data-diff-id="1" data-diff-type="noncompliant">
+<p>There’s no point in creating an array solely for the purpose of passing it to a <code>params</code> parameter. Simply pass the elements directly.
+They will be consolidated into an array automatically.</p>
+<h3>Noncompliant code example</h3>
+<pre>
 public void Base()
 {
-    Method(new string[] { "s1", "s2" }); // Noncompliant: resolves to string[] overload
-    Method(new string[] { });            // Noncompliant: resolves to string[] overload
-    Method(["s3", "s4"]);                // Noncompliant: resolves to ReadOnlySpan overload
-    Method(new string[12]);              // Compliant: resolves to string[] overload
+    Method(new string[] { "s1", "s2" }); // Noncompliant: unnecessary
+    Method(new string[] { });            // Noncompliant
+    Method(new string[12]);              // Compliant
 }
 
 public void Method(params string[] args)
 {
     // ...
 }
-
-public void Method(params ReadOnlySpan&lt;string&gt; args) // C# 13 params collections
-{
-    // C# 13 params collection
-}
 </pre>
-<h4>Compliant solution</h4>
-<pre data-diff-id="1" data-diff-type="compliant">
+<h3>Compliant solution</h3>
+<pre>
 public void Base()
 {
-    Method("s1", "s2");     // resolves to ReadOnlySpan overload
-    Method();               // resolves to ReadOnlySpan overload
-    Method("s3", "s4");     // resolves to ReadOnlySpan overload
-    Method(new string[12]); // resolves to string[]  overload
+    Method("s1", "s2");
+    Method();
+    Method(new string[12]);
 }
 
 public void Method(params string[] args)
 {
-    // ..
-}
-
-public void Method(params ReadOnlySpan&lt;string&gt; args) // C# 13 params collections
-{
-    // ..
+    // ...
 }
 </pre>
-<h2>Resources</h2>
-<h3>Documentation</h3>
-<ul>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/method-parameters#params-modifier"><code>params</code>
-  modifier</a> </li>
-  <li> Microsoft Learn - C# 13 <a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-13#params-collections"><code>params</code>
-  collections</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/collection-expressions">Collection
-  expressions</a> </li>
-</ul>
 

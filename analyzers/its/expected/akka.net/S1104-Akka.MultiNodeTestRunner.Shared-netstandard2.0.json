@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/ExitCodeContainer.cs#L19",
+      "Location": "Line 19 Position 27-39"
+    },
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/JsonPersistentTestRunStore.cs#L44-L59",
+      "Location": "Lines 44-59 Position 46-10"
+    },
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/UnitTest.cs#L33",
+      "Location": "Line 33 Position 37-73"
+    }
+  ]
+}

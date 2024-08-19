@@ -1,0 +1,1330 @@
+{
+  "Issues": [
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Actor\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L233",
+      "Location": "Line 233 Position 35-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027InitialInputBufferSize\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L348",
+      "Location": "Line 348 Position 29-51"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027MaxInputBufferSize\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L352",
+      "Location": "Line 352 Position 29-47"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Dispatcher\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L356",
+      "Location": "Line 356 Position 32-42"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027SupervisionDecider\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L360",
+      "Location": "Line 360 Position 33-51"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027SubscriptionTimeoutSettings\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L364",
+      "Location": "Line 364 Position 59-86"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027IsDebugLogging\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L368",
+      "Location": "Line 368 Position 30-44"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027OutputBurstLimit\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L372",
+      "Location": "Line 372 Position 29-45"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027IsFuzzingMode\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L376",
+      "Location": "Line 376 Position 30-43"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027IsAutoFusing\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L380",
+      "Location": "Line 380 Position 30-42"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027MaxFixedBufferSize\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L384",
+      "Location": "Line 384 Position 29-47"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027SyncProcessingLimit\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L388",
+      "Location": "Line 388 Position 29-48"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027StreamRefSettings\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L393",
+      "Location": "Line 393 Position 43-60"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Mode\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L685",
+      "Location": "Line 685 Position 66-70"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Timeout\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L690",
+      "Location": "Line 690 Position 34-41"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Subscriber\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Actors/ActorPublisher.cs#L31",
+      "Location": "Line 31 Position 40-50"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Cause\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Actors/ActorPublisher.cs#L731",
+      "Location": "Line 731 Position 35-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Stop\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Actors/ActorPublisher.cs#L735",
+      "Location": "Line 735 Position 30-34"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Count\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Actors/ActorPublisher.cs#L91",
+      "Location": "Line 91 Position 30-35"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Subscription\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Actors/ActorSubscriber.cs#L26",
+      "Location": "Line 26 Position 39-51"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Subscription\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Actors/ActorSubscriber.cs#L394",
+      "Location": "Line 394 Position 43-55"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Requested\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Actors/ActorSubscriber.cs#L398",
+      "Location": "Line 398 Position 34-43"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027IsCanceled\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Actors/ActorSubscriber.cs#L402",
+      "Location": "Line 402 Position 34-44"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Element\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Actors/ActorSubscriber.cs#L52",
+      "Location": "Line 52 Position 32-39"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Cause\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Actors/ActorSubscriber.cs#L73",
+      "Location": "Line 73 Position 35-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Max\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Actors/RequestStrategies.cs#L126",
+      "Location": "Line 126 Position 29-32"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027HighWatermark\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Actors/RequestStrategies.cs#L77",
+      "Location": "Line 77 Position 29-42"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027LowWatermark\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Actors/RequestStrategies.cs#L81",
+      "Location": "Line 81 Position 29-41"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027OnElement\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Attributes.cs#L145",
+      "Location": "Line 145 Position 38-47"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027OnFinish\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Attributes.cs#L149",
+      "Location": "Line 149 Position 38-46"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027OnFailure\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Attributes.cs#L153",
+      "Location": "Line 153 Position 38-47"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Value\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Attributes.cs#L51",
+      "Location": "Line 51 Position 36-41"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Name\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Attributes.cs#L545",
+      "Location": "Line 545 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Decider\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Attributes.cs#L584",
+      "Location": "Line 584 Position 37-44"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Initial\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Attributes.cs#L91",
+      "Location": "Line 91 Position 33-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Max\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Attributes.cs#L95",
+      "Location": "Line 95 Position 33-36"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In0\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L103",
+      "Location": "Line 103 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In1\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L107",
+      "Location": "Line 107 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In0\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L156",
+      "Location": "Line 156 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In1\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L160",
+      "Location": "Line 160 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In2\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L164",
+      "Location": "Line 164 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In0\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L216",
+      "Location": "Line 216 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In1\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L220",
+      "Location": "Line 220 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In2\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L224",
+      "Location": "Line 224 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In3\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L228",
+      "Location": "Line 228 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027N\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L25",
+      "Location": "Line 25 Position 29-30"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In0\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L283",
+      "Location": "Line 283 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In1\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L287",
+      "Location": "Line 287 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In0\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L29",
+      "Location": "Line 29 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In2\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L291",
+      "Location": "Line 291 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In3\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L295",
+      "Location": "Line 295 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In4\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L299",
+      "Location": "Line 299 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In1s\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L33",
+      "Location": "Line 33 Position 51-55"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In0\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L357",
+      "Location": "Line 357 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In1\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L361",
+      "Location": "Line 361 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In2\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L365",
+      "Location": "Line 365 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In3\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L369",
+      "Location": "Line 369 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In4\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L373",
+      "Location": "Line 373 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In5\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L377",
+      "Location": "Line 377 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In0\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L438",
+      "Location": "Line 438 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In1\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L442",
+      "Location": "Line 442 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In2\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L446",
+      "Location": "Line 446 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In3\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L450",
+      "Location": "Line 450 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In4\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L454",
+      "Location": "Line 454 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In5\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L458",
+      "Location": "Line 458 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In6\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L462",
+      "Location": "Line 462 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In0\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L526",
+      "Location": "Line 526 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In1\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L530",
+      "Location": "Line 530 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In2\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L534",
+      "Location": "Line 534 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In3\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L538",
+      "Location": "Line 538 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In4\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L542",
+      "Location": "Line 542 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In5\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L546",
+      "Location": "Line 546 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In6\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L550",
+      "Location": "Line 550 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In7\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L554",
+      "Location": "Line 554 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In0\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L621",
+      "Location": "Line 621 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In1\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L625",
+      "Location": "Line 625 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In2\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L629",
+      "Location": "Line 629 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In3\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L633",
+      "Location": "Line 633 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In4\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L637",
+      "Location": "Line 637 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In5\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L641",
+      "Location": "Line 641 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In6\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L645",
+      "Location": "Line 645 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In7\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L649",
+      "Location": "Line 649 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In8\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L653",
+      "Location": "Line 653 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out0\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L135",
+      "Location": "Line 135 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out1\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L139",
+      "Location": "Line 139 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out2\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L143",
+      "Location": "Line 143 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out3\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L147",
+      "Location": "Line 147 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out0\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L201",
+      "Location": "Line 201 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out1\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L205",
+      "Location": "Line 205 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out2\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L209",
+      "Location": "Line 209 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out3\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L213",
+      "Location": "Line 213 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out4\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L217",
+      "Location": "Line 217 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out0\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L24",
+      "Location": "Line 24 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out0\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L274",
+      "Location": "Line 274 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out1\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L278",
+      "Location": "Line 278 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out1\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L28",
+      "Location": "Line 28 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out2\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L282",
+      "Location": "Line 282 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out3\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L286",
+      "Location": "Line 286 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out4\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L290",
+      "Location": "Line 290 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out5\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L294",
+      "Location": "Line 294 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out0\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L354",
+      "Location": "Line 354 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out1\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L358",
+      "Location": "Line 358 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out2\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L362",
+      "Location": "Line 362 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out3\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L366",
+      "Location": "Line 366 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out4\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L370",
+      "Location": "Line 370 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out5\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L374",
+      "Location": "Line 374 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out6\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L378",
+      "Location": "Line 378 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out0\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L441",
+      "Location": "Line 441 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out1\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L445",
+      "Location": "Line 445 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out2\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L449",
+      "Location": "Line 449 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out3\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L453",
+      "Location": "Line 453 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out4\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L457",
+      "Location": "Line 457 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out5\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L461",
+      "Location": "Line 461 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out6\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L465",
+      "Location": "Line 465 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out7\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L469",
+      "Location": "Line 469 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out0\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L535",
+      "Location": "Line 535 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out1\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L539",
+      "Location": "Line 539 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out2\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L543",
+      "Location": "Line 543 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out3\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L547",
+      "Location": "Line 547 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out4\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L551",
+      "Location": "Line 551 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out5\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L555",
+      "Location": "Line 555 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out6\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L559",
+      "Location": "Line 559 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out7\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L563",
+      "Location": "Line 563 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out8\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L567",
+      "Location": "Line 567 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out0\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L76",
+      "Location": "Line 76 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out1\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L80",
+      "Location": "Line 80 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out2\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L84",
+      "Location": "Line 84 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1012",
+      "Location": "Line 1012 Position 34-36"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1173",
+      "Location": "Line 1173 Position 34-36"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Left\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L870",
+      "Location": "Line 870 Position 34-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Right\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L875",
+      "Location": "Line 875 Position 34-39"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L880",
+      "Location": "Line 880 Position 35-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027N\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/FanInShape.cs#L211",
+      "Location": "Line 211 Position 29-30"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Counter\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L512",
+      "Location": "Line 512 Position 43-50"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Props\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L537",
+      "Location": "Line 537 Position 35-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Name\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L542",
+      "Location": "Line 542 Position 36-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Refs\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L607",
+      "Location": "Line 607 Position 54-58"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Settings\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L640",
+      "Location": "Line 640 Position 51-59"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027HaveShutdown\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L644",
+      "Location": "Line 644 Position 39-51"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Count\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L104",
+      "Location": "Line 104 Position 29-34"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Pump\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L108",
+      "Location": "Line 108 Position 31-35"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Actor\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L354",
+      "Location": "Line 354 Position 35-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Pump\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L358",
+      "Location": "Line 358 Position 31-35"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Implementor\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorPublisher.cs#L322",
+      "Location": "Line 322 Position 35-46"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Subscriber\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorPublisher.cs#L326",
+      "Location": "Line 326 Position 40-50"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027ActiveReceive\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ExposedPublisherReceive.cs#L23",
+      "Location": "Line 23 Position 33-46"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Unhandled\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ExposedPublisherReceive.cs#L27",
+      "Location": "Line 27 Position 40-49"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027AllOfMarkedInputs\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L45",
+      "Location": "Line 45 Position 39-56"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027AnyOfMarkedInputs\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L49",
+      "Location": "Line 49 Position 39-56"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027SubReceive\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L53",
+      "Location": "Line 53 Position 36-46"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027AllOfMarkedOutputs\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L126",
+      "Location": "Line 126 Position 39-57"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027AnyOfMarkedOutputs\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L133",
+      "Location": "Line 133 Position 39-57"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027SubReceive\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L138",
+      "Location": "Line 138 Position 36-46"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027MaterializedValueIds\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L33",
+      "Location": "Line 33 Position 35-55"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Assembly\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L37",
+      "Location": "Line 37 Position 39-47"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027OriginalAttributes\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L103",
+      "Location": "Line 103 Position 38-56"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Inlets\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L107",
+      "Location": "Line 107 Position 33-39"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027InletOwners\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L111",
+      "Location": "Line 111 Position 31-42"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Outlets\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L115",
+      "Location": "Line 115 Position 34-41"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027OutletOwners\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L119",
+      "Location": "Line 119 Position 31-43"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Stages\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L99",
+      "Location": "Line 99 Position 75-81"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Reason\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L135",
+      "Location": "Line 135 Position 39-45"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027PreviousElement\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L139",
+      "Location": "Line 139 Position 36-51"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Logics\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L376",
+      "Location": "Line 376 Position 43-49"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Assembly\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L380",
+      "Location": "Line 380 Position 39-47"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Materializer\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L384",
+      "Location": "Line 384 Position 39-51"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Log\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L388",
+      "Location": "Line 388 Position 41-44"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Connections\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L392",
+      "Location": "Line 392 Position 38-49"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027OnAsyncInput\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L396",
+      "Location": "Line 396 Position 73-85"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027FuzzingMode\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L400",
+      "Location": "Line 400 Position 30-41"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027RunningStagesCount\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L411",
+      "Location": "Line 411 Position 20-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Inlet\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L140",
+      "Location": "Line 140 Position 34-39"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Outlet\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L144",
+      "Location": "Line 144 Position 35-41"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Outlet\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L702",
+      "Location": "Line 702 Position 35-41"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Stage\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L78",
+      "Location": "Line 78 Position 73-78"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Outlet\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L795",
+      "Location": "Line 795 Position 35-41"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Outlet\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L864",
+      "Location": "Line 864 Position 35-41"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2663",
+      "Location": "Line 2663 Position 36-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2667",
+      "Location": "Line 2667 Position 38-41"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2813",
+      "Location": "Line 2813 Position 36-38"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2817",
+      "Location": "Line 2817 Position 38-41"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L554",
+      "Location": "Line 554 Position 34-36"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L639",
+      "Location": "Line 639 Position 34-36"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L743",
+      "Location": "Line 743 Position 34-36"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L885",
+      "Location": "Line 885 Position 34-36"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Transformator\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L117",
+      "Location": "Line 117 Position 50-63"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Node\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L121",
+      "Location": "Line 121 Position 52-56"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Combinator\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L51",
+      "Location": "Line 51 Position 58-68"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Left\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L55",
+      "Location": "Line 55 Position 52-56"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Right\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L59",
+      "Location": "Line 59 Position 52-57"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Module\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L90",
+      "Location": "Line 90 Position 37-43"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Timeout\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L165",
+      "Location": "Line 165 Position 34-41"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Timeout\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L247",
+      "Location": "Line 247 Position 34-41"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Timeout\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L335",
+      "Location": "Line 335 Position 34-41"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Timeout\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L431",
+      "Location": "Line 431 Position 34-41"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In1\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L436",
+      "Location": "Line 436 Position 36-39"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027In2\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L440",
+      "Location": "Line 440 Position 37-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out1\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L444",
+      "Location": "Line 444 Position 37-41"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out2\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L448",
+      "Location": "Line 448 Position 38-42"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Delay\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L540",
+      "Location": "Line 540 Position 34-39"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Timeout\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L94",
+      "Location": "Line 94 Position 34-41"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027State\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Unfold.cs#L147",
+      "Location": "Line 147 Position 32-37"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027UnfoldFunc\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Unfold.cs#L151",
+      "Location": "Line 151 Position 72-82"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Unfold.cs#L155",
+      "Location": "Line 155 Position 42-45"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027State\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Unfold.cs#L217",
+      "Location": "Line 217 Position 32-37"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027UnfoldFunc\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Unfold.cs#L221",
+      "Location": "Line 221 Position 58-68"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Unfold.cs#L225",
+      "Location": "Line 225 Position 42-45"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027State\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Unfold.cs#L56",
+      "Location": "Line 56 Position 32-37"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027UnfoldFunc\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Unfold.cs#L60",
+      "Location": "Line 60 Position 66-76"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Out\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Unfold.cs#L64",
+      "Location": "Line 64 Position 42-45"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Name\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Shape.cs#L133",
+      "Location": "Line 133 Position 32-36"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Outlet\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Shape.cs#L351",
+      "Location": "Line 351 Position 38-44"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Inlet\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Shape.cs#L507",
+      "Location": "Line 507 Position 36-41"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Inlet1\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Shape.cs#L587",
+      "Location": "Line 587 Position 37-43"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Inlet2\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Shape.cs#L591",
+      "Location": "Line 591 Position 37-43"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Outlet1\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Shape.cs#L595",
+      "Location": "Line 595 Position 39-46"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Outlet2\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Shape.cs#L599",
+      "Location": "Line 599 Position 39-46"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Name\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Shape.cs#L71",
+      "Location": "Line 71 Position 32-36"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Factory\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L313",
+      "Location": "Line 313 Position 69-76"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027InCount\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L786",
+      "Location": "Line 786 Position 29-36"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027OutCount\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L790",
+      "Location": "Line 790 Position 29-37"
+    }
+  ]
+}

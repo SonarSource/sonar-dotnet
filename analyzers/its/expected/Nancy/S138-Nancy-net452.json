@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S138",
+      "Message": "This constructor \u0027InteractiveModule\u0027 has 81 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/Modules/InteractiveModule.cs#L23",
+      "Location": "Line 23 Position 16-33"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027HtmlDecode\u0027 has 133 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L389",
+      "Location": "Line 389 Position 32-42"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027InitEntities\u0027 has 253 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L683",
+      "Location": "Line 683 Position 21-33"
+    },
+    {
+      "Id": "S138",
+      "Message": "This constructor \u0027MimeTypes\u0027 has 541 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/MimeTypes.cs#L43",
+      "Location": "Line 43 Position 16-25"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027Bind\u0027 has 104 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L87",
+      "Location": "Line 87 Position 23-27"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027GetWeightedValues\u0027 has 88 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/RequestHeaders.cs#L298",
+      "Location": "Line 298 Position 53-70"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027ResolveInternal\u0027 has 82 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3584",
+      "Location": "Line 3584 Position 24-39"
+    }
+  ]
+}

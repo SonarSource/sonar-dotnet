@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6802",
+      "Message": "Avoid using lambda expressions in loops in Blazor markup.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/BlazorSample/BlazorSample/Pages/S6802/S6802.cs#L35",
+      "Location": "Line 35 Position 30-68"
+    }
+  ]
+}

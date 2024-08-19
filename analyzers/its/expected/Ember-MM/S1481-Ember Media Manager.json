@@ -1,0 +1,52 @@
+{
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027oldwidth\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgEditEpisode.vb#L248",
+      "Location": "Line 248 Position 13-21"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027isFirst\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1256",
+      "Location": "Line 1256 Position 29-36"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027oldwidth\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L551",
+      "Location": "Line 551 Position 17-25"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027isFirst\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L715",
+      "Location": "Line 715 Position 29-36"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027i\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L282",
+      "Location": "Line 282 Position 17-18"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027didEts\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1224",
+      "Location": "Line 1224 Position 29-35"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027movie\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2904",
+      "Location": "Line 2904 Position 21-26"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027tmpShow\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7083",
+      "Location": "Line 7083 Position 13-20"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2952",
+      "Message": "Move this \u0027Dispose\u0027 call into this class\u0027 own \u0027Dispose\u0027 method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/IO/RequestStream.cs#L487",
+      "Location": "Line 487 Position 29-36"
+    }
+  ]
+}

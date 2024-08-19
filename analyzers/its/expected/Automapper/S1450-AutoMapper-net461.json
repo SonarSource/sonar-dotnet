@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027_fieldBuilder\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Execution/ProxyGenerator.cs#L126",
+      "Location": "Line 126 Position 43-56"
+    },
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027_getterBuilder\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Execution/ProxyGenerator.cs#L127",
+      "Location": "Line 127 Position 44-58"
+    },
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027_setterBuilder\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Execution/ProxyGenerator.cs#L129",
+      "Location": "Line 129 Position 44-58"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S5445",
+      "Message": "\u0027Path.GetTempFileName()\u0027 is insecure. Use \u0027Path.GetRandomFileName()\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams.Tests.Performance/IO/FileSourcesBenchmark.cs#L48",
+      "Location": "Line 48 Position 37-57"
+    }
+  ]
+}

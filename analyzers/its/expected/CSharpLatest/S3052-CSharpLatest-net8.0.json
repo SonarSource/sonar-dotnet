@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027CreditLimit\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp12Features/PrimaryConstructor.cs#L9",
+      "Location": "Line 9 Position 45-48"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027Field1\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3052.cs#L5",
+      "Location": "Line 5 Position 24-27"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027Field3\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3052.cs#L7",
+      "Location": "Line 7 Position 25-28"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S881",
+      "Message": "Extract this increment operation into a dedicated statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/Akka.Benchmarks/IO/ByteStringBenchmarks.cs#L38",
+      "Location": "Line 38 Position 42-44"
+    }
+  ]
+}

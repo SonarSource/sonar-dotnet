@@ -1,0 +1,142 @@
+{
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027ConfigureDefaultConventions\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Conventions/DefaultAcceptHeaderCoercionConventions.cs#L37",
+      "Location": "Line 37 Position 22-49"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027GetDescription\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/InteractiveDiagnostics.cs#L156",
+      "Location": "Line 156 Position 24-38"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027GetArguments\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/InteractiveDiagnostics.cs#L162",
+      "Location": "Line 162 Position 50-62"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027SayHelloWithAge\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/TestingDiagnosticProvider.cs#L108",
+      "Location": "Line 108 Position 27-42"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027StringReturnValue\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/TestingDiagnosticProvider.cs#L63",
+      "Location": "Line 63 Position 27-44"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027SayHello\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/TestingDiagnosticProvider.cs#L73",
+      "Location": "Line 73 Position 27-35"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027SayHelloWithAgeTemplate\u0027 a static property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/TestingDiagnosticProvider.cs#L82",
+      "Location": "Line 82 Position 27-50"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027SayHelloWithAgeDescription\u0027 a static property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/TestingDiagnosticProvider.cs#L94",
+      "Location": "Line 94 Position 27-53"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027GetValue\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Json/Converters/TimeSpanConverter.cs#L63",
+      "Location": "Line 63 Position 21-29"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027SerializeDateTime\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Json/Simple/NancySerializationStrategy.cs#L203",
+      "Location": "Line 203 Position 22-39"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027BindingValueIsValid\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L208",
+      "Location": "Line 208 Position 22-41"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027GetBindingListInstanceCount\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L228",
+      "Location": "Line 228 Position 21-48"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027ConvertCollection\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ModelBinding/DefaultConverters/CollectionConverter.cs#L64",
+      "Location": "Line 64 Position 24-41"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027InvokePostRequestHook\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/NancyEngine.cs#L304",
+      "Location": "Line 304 Position 22-43"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027GetResourceContent\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Responses/EmbeddedFileResponse.cs#L58",
+      "Location": "Line 58 Position 24-42"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027TryParseInt\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/Constraints/ParameterizedRouteSegmentConstraintBase.cs#L48",
+      "Location": "Line 48 Position 24-35"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027NoMoreSegments\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/Trie/Nodes/TrieNode.cs#L190",
+      "Location": "Line 190 Position 24-38"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027IsIgnoredAssembly\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3350",
+      "Location": "Line 3350 Position 22-39"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027IsIgnoredType\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3374",
+      "Location": "Line 3374 Position 22-35"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027GetDefaultObjectFactory\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3441",
+      "Location": "Line 3441 Position 35-58"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027IsIEnumerableRequest\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3527",
+      "Location": "Line 3527 Position 22-42"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027IsAutomaticLazyFactoryRequest\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3540",
+      "Location": "Line 3540 Position 22-51"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027GetTypeConstructors\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3834",
+      "Location": "Line 3834 Position 46-65"
+    }
+  ]
+}

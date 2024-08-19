@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S138",
+      "Message": "This method \u0027Setup\u0027 has 84 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams.Tests.Performance/FusedGraphsBenchmark.cs#L167",
+      "Location": "Line 167 Position 21-26"
+    }
+  ]
+}

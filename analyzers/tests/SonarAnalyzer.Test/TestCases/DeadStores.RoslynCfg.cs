@@ -648,8 +648,8 @@ namespace Tests.Diagnostics
         private void ConditionalEvaluation(bool b1, bool b2, object coalesce, object coalesceAssignment)
         {
             var x = false;  // Compliant ignored value
-            x = true;       // Noncompliant
-            x = b1 && b2;   // Noncompliant
+            x = true;       // Roslyn CFG FN: Consequence of inaccurate LVA state below
+            x = b1 && b2;   // Roslyn CFG FN: Branching with FlowCaptureOperation
             x = b1 || b2;   // Noncompliant
             coalesce = coalesce ?? "Value";   // Noncompliant
             coalesceAssignment ??= "Value";   // Noncompliant
@@ -937,7 +937,7 @@ namespace Tests.Diagnostics
 
         void Method()
         {
-            var x = new ObjectInitializer();     // Noncompliant
+            var x = new ObjectInitializer();     // FN
             x = new ObjectInitializer { ID = 1 };
             x.Method();
         }
@@ -1596,7 +1596,7 @@ public class PeachValidation
     // https://github.com/SonarSource/sonar-dotnet/issues/9467
     public int ReadAfterCatchAll_WithType(bool condition)
     {
-        var value = 100;    // used after catch all
+        var value = 100;    // Noncompliant FP, used after catch all
         try
         {
             CanThrow();
@@ -1615,7 +1615,7 @@ public class PeachValidation
     // https://github.com/SonarSource/sonar-dotnet/issues/9467
     public int ReadAfterCatchAll_NoType(bool condition)
     {
-        var value = 100;    // used after catch all
+        var value = 100;    // Noncompliant FP, used after catch all
         try
         {
             CanThrow();
@@ -1634,7 +1634,7 @@ public class PeachValidation
     // https://github.com/SonarSource/sonar-dotnet/issues/9467
     public void ReadInCatch_WithBranching(bool condition)
     {
-        var value = 100;    // used in catch
+        var value = 100;    // Noncompliant FP, used in catch
         try
         {
             value = CanThrow();
@@ -1717,133 +1717,4 @@ public class PeachValidation
         throw new Exception();
 
     private void Log(int value) { }
-
-    void LoopInsideTryCatch(List<object> list, bool condition)
-    {
-        object value  = null;
-        try
-        {
-            while (condition)
-            {
-                value  = list.FirstOrDefault(); // Compliant, it's used in catch
-            }
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(value );
-        }
-    }
-
-    void LoopInsideTryCatch_Finally(List<object> list, bool condition)
-    {
-        object value = null;
-        try
-        {
-            while (condition)
-            {
-                value = list.FirstOrDefault(); // Compliant, it's used in finally
-            }
-        }
-        catch { }
-        finally
-        {
-            Console.WriteLine(value);
-        }
-    }
-
-    void LoopAndBranchingInsideTryCatch_Finally(List<object> list, bool condition)
-    {
-        object arg1 = null;
-        object arg2 = null;
-        object arg3 = null;
-        object arg4 = null;
-        try
-        {
-            while (condition)
-            {
-                arg1 = list.FirstOrDefault();   // Compliant, it's used in catch
-                if (list.Count > 10)
-                {
-                    arg2 = arg1;                // Compliant, it's used in catch
-                    foreach (var item in list)
-                    {
-                        arg3 = item;            // Compliant, it's used in catch
-                        try
-                        {
-                            foreach (var innerItem in list)
-                            {
-                                arg4 = item;    // Compliant, it's used in catch
-                            }
-                        }
-                        catch { throw; }       // this propagates the livein - liveout to the outer catch
-                    }
-                }
-            }
-        }
-        catch
-        {
-            Console.WriteLine(arg1);
-            Console.WriteLine(arg2);
-            Console.WriteLine(arg3);
-            Console.WriteLine(arg4);
-        }
-    }
-
-    void VariableReassignedInCatch()
-    {
-        var usedInCatch = 0;
-        Method(0);
-        try
-        {
-            Method(1);
-            try
-            {
-                usedInCatch = 1;
-                Method(2);
-            }
-            catch
-            {
-                Method(usedInCatch); // This can throw again
-                usedInCatch = 2;     // If Method(3) throws the variable will be used in the outer catch
-                Method(3);
-            }
-        }
-        catch
-        {
-            Method(usedInCatch);
-            Method(4);
-        }
-    }
-
-    void VariableUsedInOuterFinally(bool condition)
-    {
-        var usedInOuterFinally = 0;
-        try
-        {
-            usedInOuterFinally = 1;
-            Method(0);
-            try
-            {
-                Method(1);
-            }
-            finally
-            {
-                usedInOuterFinally = 2; // Compliant - used in outer finally
-                Method(2);
-            }
-        }
-        catch (Exception ex)
-        {
-            try
-            {
-                Method(3);
-            }
-            finally
-            {
-                Method(usedInOuterFinally);
-            }
-        }
-    }
-
-    void Method(int arg) { }
 }

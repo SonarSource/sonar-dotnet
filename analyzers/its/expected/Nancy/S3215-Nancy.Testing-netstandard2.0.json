@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3215",
+      "Message": "Remove this cast and edit the interface to add the missing functionality.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/Browser.cs#L221",
+      "Location": "Line 221 Position 63-99"
+    }
+  ]
+}

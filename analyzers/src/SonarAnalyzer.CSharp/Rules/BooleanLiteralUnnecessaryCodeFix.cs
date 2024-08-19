@@ -1,23 +1,28 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Simplification;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
     public sealed class BooleanLiteralUnnecessaryCodeFix : SonarCodeFix
@@ -95,11 +100,11 @@ namespace SonarAnalyzer.CSharp.Rules
 
             if (replacement.IsTrue())
             {
-                replacement = SyntaxConstants.TrueLiteralExpression;
+                replacement = CSharpSyntaxHelper.TrueLiteralExpression;
             }
             else if (replacement.IsFalse())
             {
-                replacement = SyntaxConstants.FalseLiteralExpression;
+                replacement = CSharpSyntaxHelper.FalseLiteralExpression;
             }
 
             context.RegisterCodeFix(
@@ -178,90 +183,90 @@ namespace SonarAnalyzer.CSharp.Rules
         {
             // logical and false, logical or true
             if (binary.IsKind(SyntaxKind.LogicalAndExpression)
-                && (CSharpEquivalenceChecker.AreEquivalent(binary.Left, SyntaxConstants.FalseLiteralExpression)
-                   || CSharpEquivalenceChecker.AreEquivalent(binary.Right, SyntaxConstants.FalseLiteralExpression)))
+                && (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.FalseLiteralExpression)
+                   || CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.FalseLiteralExpression)))
             {
-                return SyntaxConstants.FalseLiteralExpression;
+                return CSharpSyntaxHelper.FalseLiteralExpression;
             }
             if (binary.IsKind(SyntaxKind.LogicalOrExpression)
-                && (CSharpEquivalenceChecker.AreEquivalent(binary.Left, SyntaxConstants.TrueLiteralExpression)
-                   || CSharpEquivalenceChecker.AreEquivalent(binary.Right, SyntaxConstants.TrueLiteralExpression)))
+                && (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.TrueLiteralExpression)
+                   || CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.TrueLiteralExpression)))
             {
-                return SyntaxConstants.TrueLiteralExpression;
+                return CSharpSyntaxHelper.TrueLiteralExpression;
             }
 
             // ==/!= both sides booleans
             if (binary.IsKind(SyntaxKind.EqualsExpression)
                 && TwoSidesAreDifferentBooleans(binary))
             {
-                return SyntaxConstants.FalseLiteralExpression;
+                return CSharpSyntaxHelper.FalseLiteralExpression;
             }
             if (binary.IsKind(SyntaxKind.EqualsExpression)
                 && TwoSidesAreSameBooleans(binary))
             {
-                return SyntaxConstants.TrueLiteralExpression;
+                return CSharpSyntaxHelper.TrueLiteralExpression;
             }
             if (binary.IsKind(SyntaxKind.NotEqualsExpression)
                 && TwoSidesAreSameBooleans(binary))
             {
-                return SyntaxConstants.FalseLiteralExpression;
+                return CSharpSyntaxHelper.FalseLiteralExpression;
             }
             if (binary.IsKind(SyntaxKind.NotEqualsExpression)
                 && TwoSidesAreDifferentBooleans(binary))
             {
-                return SyntaxConstants.TrueLiteralExpression;
+                return CSharpSyntaxHelper.TrueLiteralExpression;
             }
 
             // ==/!= one side boolean
             if (binary.IsKind(SyntaxKind.EqualsExpression))
             {
                 // edge case [condition == false] -> !condition
-                if (CSharpEquivalenceChecker.AreEquivalent(binary.Right, SyntaxConstants.FalseLiteralExpression))
+                if (CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.FalseLiteralExpression))
                 {
                     return SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, binary.Left);
                 }
                 // edge case [false == condition] -> !condition
-                if (CSharpEquivalenceChecker.AreEquivalent(binary.Left, SyntaxConstants.FalseLiteralExpression))
+                if (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.FalseLiteralExpression))
                 {
                     return SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, binary.Right);
                 }
             }
 
-            return CSharpEquivalenceChecker.AreEquivalent(binary.Left, SyntaxConstants.TrueLiteralExpression)
-                   || CSharpEquivalenceChecker.AreEquivalent(binary.Left, SyntaxConstants.FalseLiteralExpression)
+            return CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.TrueLiteralExpression)
+                   || CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.FalseLiteralExpression)
                 ? binary.Right
                 : binary.Left;
         }
 
         private static bool TwoSidesAreDifferentBooleans(BinaryExpressionSyntax binary) =>
-            (CSharpEquivalenceChecker.AreEquivalent(binary.Left, SyntaxConstants.TrueLiteralExpression)
-             && CSharpEquivalenceChecker.AreEquivalent(binary.Right, SyntaxConstants.FalseLiteralExpression))
-            || (CSharpEquivalenceChecker.AreEquivalent(binary.Left, SyntaxConstants.FalseLiteralExpression)
-               && CSharpEquivalenceChecker.AreEquivalent(binary.Right, SyntaxConstants.TrueLiteralExpression));
+            (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.TrueLiteralExpression)
+             && CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.FalseLiteralExpression))
+            || (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.FalseLiteralExpression)
+               && CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.TrueLiteralExpression));
 
         private static bool TwoSidesAreSameBooleans(BinaryExpressionSyntax binary) =>
-            (CSharpEquivalenceChecker.AreEquivalent(binary.Left, SyntaxConstants.TrueLiteralExpression)
-             && CSharpEquivalenceChecker.AreEquivalent(binary.Right, SyntaxConstants.TrueLiteralExpression))
-            || (CSharpEquivalenceChecker.AreEquivalent(binary.Left, SyntaxConstants.FalseLiteralExpression)
-               && CSharpEquivalenceChecker.AreEquivalent(binary.Right, SyntaxConstants.FalseLiteralExpression));
+            (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.TrueLiteralExpression)
+             && CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.TrueLiteralExpression))
+            || (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.FalseLiteralExpression)
+               && CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.FalseLiteralExpression));
 
         private static Document RemovePrefixUnary(Document document, SyntaxNode root, SyntaxNode literal)
         {
-            if (CSharpEquivalenceChecker.AreEquivalent(literal, SyntaxConstants.TrueLiteralExpression))
+            if (CSharpEquivalenceChecker.AreEquivalent(literal, CSharpSyntaxHelper.TrueLiteralExpression))
             {
-                var newRoot = root.ReplaceNode(literal.Parent, SyntaxConstants.FalseLiteralExpression);
+                var newRoot = root.ReplaceNode(literal.Parent, CSharpSyntaxHelper.FalseLiteralExpression);
                 return document.WithSyntaxRoot(newRoot);
             }
             else
             {
-                var newRoot = root.ReplaceNode(literal.Parent, SyntaxConstants.TrueLiteralExpression);
+                var newRoot = root.ReplaceNode(literal.Parent, CSharpSyntaxHelper.TrueLiteralExpression);
                 return document.WithSyntaxRoot(newRoot);
             }
         }
 
         private static Document RemoveConditional(Document document, SyntaxNode root, ConditionalExpressionSyntax conditional)
         {
-            if (CSharpEquivalenceChecker.AreEquivalent(conditional.WhenTrue, SyntaxConstants.TrueLiteralExpression))
+            if (CSharpEquivalenceChecker.AreEquivalent(conditional.WhenTrue, CSharpSyntaxHelper.TrueLiteralExpression))
             {
                 var newRoot = root.ReplaceNode(
                     conditional,

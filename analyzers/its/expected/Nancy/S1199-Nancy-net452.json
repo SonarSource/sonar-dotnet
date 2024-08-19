@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1199",
+      "Message": "Extract this nested code block into a separate method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Responses/Negotiation/MediaRange.cs#L40",
+      "Location": "Line 40 Position 17-18"
+    }
+  ]
+}

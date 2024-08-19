@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3267",
+      "Message": "Loops should be simplified using the \u0022Where\u0022 LINQ method",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1518",
+      "Location": "Line 1518 Position 35-45"
+    },
+    {
+      "Id": "S3267",
+      "Message": "Loops should be simplified using the \u0022Where\u0022 LINQ method",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L824",
+      "Location": "Line 824 Position 42-47"
+    }
+  ]
+}

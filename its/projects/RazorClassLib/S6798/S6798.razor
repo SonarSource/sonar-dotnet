@@ -1,0 +1,11 @@
+@using Microsoft.JSInterop
+
+@namespace RazorClassLib
+
+@functions {
+    [JSInvokable] private void JSInvokablePrivateMethodInFunctionsBlock() { } // Noncompliant
+}
+
+@{
+    [JSInvokable] void JSInvokableLocalFunctionInDirective() { }              // Compliant: local function
+}

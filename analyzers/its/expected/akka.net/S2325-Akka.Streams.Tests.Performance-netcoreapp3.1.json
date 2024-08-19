@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Execute\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams.Tests.Performance/FlowSelectBenchmark.cs#L234",
+      "Location": "Line 234 Position 22-29"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027CreateFile\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams.Tests.Performance/IO/FileSourcesBenchmark.cs#L44",
+      "Location": "Line 44 Position 26-36"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027Hres1\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S3884.vb#L56",
+      "Location": "Line 56 Position 13-18"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027Hres2\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S3884.vb#L58",
+      "Location": "Line 58 Position 13-18"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027HttpHandler\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S4423.vb#L16",
+      "Location": "Line 16 Position 13-24"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027HttpHandler\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S4423.vb#L22",
+      "Location": "Line 22 Position 13-24"
+    }
+  ]
+}

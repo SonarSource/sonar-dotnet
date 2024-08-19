@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S1449",
+      "Message": "Define the locale to be used in this string operation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/INamingConvention.cs#L29",
+      "Location": "Line 29 Position 78-85"
+    },
+    {
+      "Id": "S1449",
+      "Message": "Define the locale to be used in this string operation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Configuration/INamingConvention.cs#L37",
+      "Location": "Line 37 Position 64-71"
+    }
+  ]
+}

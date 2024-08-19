@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster.Tests.MultiNode/Bugfix4353Specs.cs#L39",
+      "Location": "Line 39 Position 21-71"
+    }
+  ]
+}

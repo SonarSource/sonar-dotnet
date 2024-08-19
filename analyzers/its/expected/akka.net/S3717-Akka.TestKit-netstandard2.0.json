@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S3717",
+      "Message": "Implement this method or throw \u0027NotSupportedException\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/DelegatingSupervisorStrategy.cs#L24",
+      "Location": "Line 24 Position 13-49"
+    },
+    {
+      "Id": "S3717",
+      "Message": "Implement this method or throw \u0027NotSupportedException\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/DelegatingSupervisorStrategy.cs#L45",
+      "Location": "Line 45 Position 13-49"
+    },
+    {
+      "Id": "S3717",
+      "Message": "Implement this method or throw \u0027NotSupportedException\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/Internal/BlockingQueue.cs#L243",
+      "Location": "Line 243 Position 44-80"
+    },
+    {
+      "Id": "S3717",
+      "Message": "Implement this method or throw \u0027NotSupportedException\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestScheduler.cs#L318",
+      "Location": "Line 318 Position 14-50"
+    },
+    {
+      "Id": "S3717",
+      "Message": "Implement this method or throw \u0027NotSupportedException\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestScheduler.cs#L323",
+      "Location": "Line 323 Position 14-50"
+    },
+    {
+      "Id": "S3717",
+      "Message": "Implement this method or throw \u0027NotSupportedException\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestScheduler.cs#L328",
+      "Location": "Line 328 Position 14-50"
+    },
+    {
+      "Id": "S3717",
+      "Message": "Implement this method or throw \u0027NotSupportedException\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.TestKit/TestScheduler.cs#L333",
+      "Location": "Line 333 Position 14-50"
+    }
+  ]
+}

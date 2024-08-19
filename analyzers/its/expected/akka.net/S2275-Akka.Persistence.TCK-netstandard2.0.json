@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2275",
+      "Message": "Invalid string format, opening curly brace can only be followed by a digit or an opening curly brace.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L96",
+      "Location": "Line 96 Position 53-66"
+    }
+  ]
+}

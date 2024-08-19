@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2612",
+      "Message": "Make sure this permission is safe.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LooseFilePermissions.cs#L19",
+      "Location": "Line 19 Position 13-126"
+    },
+    {
+      "Id": "S2612",
+      "Message": "Make sure this permission is safe.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LooseFilePermissions.cs#L23",
+      "Location": "Line 23 Position 13-131"
+    }
+  ]
+}

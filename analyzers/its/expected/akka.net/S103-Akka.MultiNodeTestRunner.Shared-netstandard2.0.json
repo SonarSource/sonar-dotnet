@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S103",
+      "Message": "Split this 309 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/MessageSink.cs#L106",
+      "Location": "Line 106 Position 1-310"
+    }
+  ]
+}

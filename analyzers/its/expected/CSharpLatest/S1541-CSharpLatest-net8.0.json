@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this accessor is 13 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S1541.cs#L11",
+      "Location": "Line 11 Position 9-13"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this accessor is 41 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3776.cs#L10",
+      "Location": "Line 10 Position 9-13"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this method is 40 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3776.cs#L23",
+      "Location": "Line 23 Position 10-49"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S4201.cs#L11",
+      "Location": "Line 11 Position 17-23"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/VariousPatternsOfPatterns.cs#L87",
+      "Location": "Line 87 Position 28-46"
+    }
+  ]
+}

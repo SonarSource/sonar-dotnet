@@ -1,0 +1,202 @@
+{
+  "Issues": [
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1547",
+      "Location": "Line 1547 Position 29-37"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1793",
+      "Location": "Line 1793 Position 29-37"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIImages.vb#L440",
+      "Location": "Line 440 Position 30-38"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIModules.vb#L344",
+      "Location": "Line 344 Position 36-44"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIModules.vb#L358",
+      "Location": "Line 358 Position 36-44"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIModules.vb#L371",
+      "Location": "Line 371 Position 58-66"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIModules.vb#L478",
+      "Location": "Line 478 Position 36-44"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIModules.vb#L490",
+      "Location": "Line 490 Position 36-44"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIModules.vb#L502",
+      "Location": "Line 502 Position 36-44"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIModules.vb#L514",
+      "Location": "Line 514 Position 36-44"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIModules.vb#L527",
+      "Location": "Line 527 Position 36-44"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIModules.vb#L561",
+      "Location": "Line 561 Position 36-44"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIModules.vb#L578",
+      "Location": "Line 578 Position 25-33"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIModules.vb#L591",
+      "Location": "Line 591 Position 36-44"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIModules.vb#L604",
+      "Location": "Line 604 Position 36-44"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIModules.vb#L616",
+      "Location": "Line 616 Position 36-44"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIModules.vb#L628",
+      "Location": "Line 628 Position 36-44"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIModules.vb#L95",
+      "Location": "Line 95 Position 40-48"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPINFO.vb#L265",
+      "Location": "Line 265 Position 21-29"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L344",
+      "Location": "Line 344 Position 33-41"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L347",
+      "Location": "Line 347 Position 33-41"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L350",
+      "Location": "Line 350 Position 33-41"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L353",
+      "Location": "Line 353 Position 33-41"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L356",
+      "Location": "Line 356 Position 33-41"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L359",
+      "Location": "Line 359 Position 33-41"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L367",
+      "Location": "Line 367 Position 21-29"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L612",
+      "Location": "Line 612 Position 17-25"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L615",
+      "Location": "Line 615 Position 17-25"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L618",
+      "Location": "Line 618 Position 17-25"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L621",
+      "Location": "Line 621 Position 17-25"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L814",
+      "Location": "Line 814 Position 100-108"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIScanner.vb#L854",
+      "Location": "Line 854 Position 67-75"
+    },
+    {
+      "Id": "S3385",
+      "Message": "Remove this \u0027Exit\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L179",
+      "Location": "Line 179 Position 21-29"
+    }
+  ]
+}

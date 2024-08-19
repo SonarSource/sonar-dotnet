@@ -192,22 +192,3 @@ namespace Tests.TestCases
         public static int FooInt(this int a) => 0;
     }
 }
-
-// https://github.com/SonarSource/sonar-dotnet/issues/9637
-public class UnresolvedSymbols
-{
-    public string Method(string first, string second)
-    {
-        if (first.Length == 42)
-        {
-            var ret = UnknownMethod();  // Error [CS0103]
-            return ret;
-        }
-        else if (second.Length == 42)
-        {
-            var ret = UnknownMethod();  // Error [CS0103]
-            return ret;
-        }
-        return "";
-    }
-}

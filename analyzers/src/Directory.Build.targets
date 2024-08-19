@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
-  <Import Project="$(MSBuildThisFileDirectory)\..\Common.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)\..\Analyzers.targets" />
 
   <PropertyGroup>
     <!-- `BinariesFolder` - binary files folder used by ITs, NuGet and java packaging -->

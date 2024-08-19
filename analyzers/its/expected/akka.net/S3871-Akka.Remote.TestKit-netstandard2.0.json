@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S3871",
+      "Message": "Make this exception \u0027public\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L138",
+      "Location": "Line 138 Position 29-52"
+    },
+    {
+      "Id": "S3871",
+      "Message": "Make this exception \u0027public\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L190",
+      "Location": "Line 190 Position 29-51"
+    },
+    {
+      "Id": "S3871",
+      "Message": "Make this exception \u0027public\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L242",
+      "Location": "Line 242 Position 29-51"
+    },
+    {
+      "Id": "S3871",
+      "Message": "Make this exception \u0027public\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L300",
+      "Location": "Line 300 Position 29-50"
+    },
+    {
+      "Id": "S3871",
+      "Message": "Make this exception \u0027public\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L364",
+      "Location": "Line 364 Position 29-50"
+    },
+    {
+      "Id": "S3871",
+      "Message": "Make this exception \u0027public\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L416",
+      "Location": "Line 416 Position 29-48"
+    },
+    {
+      "Id": "S3871",
+      "Message": "Make this exception \u0027public\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L309",
+      "Location": "Line 309 Position 24-41"
+    }
+  ]
+}

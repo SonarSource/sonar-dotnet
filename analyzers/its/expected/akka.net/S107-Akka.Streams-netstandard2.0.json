@@ -1,0 +1,64 @@
+{
+  "Issues": [
+    {
+      "Id": "S107",
+      "Message": "Constructor has 12 parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L411-L423",
+      "Location": "Lines 411-423 Position 41-65"
+    },
+    {
+      "Id": "S107",
+      "Message": "Method has 12 parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L452-L464",
+      "Location": "Lines 452-464 Position 47-45"
+    },
+    {
+      "Id": "S107",
+      "Message": "Constructor has 8 new parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L590",
+      "Location": "Line 590 Position 26-167"
+    },
+    {
+      "Id": "S107",
+      "Message": "Constructor has 9 new parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L691",
+      "Location": "Line 691 Position 26-182"
+    },
+    {
+      "Id": "S107",
+      "Message": "Constructor has 8 new parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L504",
+      "Location": "Line 504 Position 27-181"
+    },
+    {
+      "Id": "S107",
+      "Message": "Constructor has 9 new parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L604",
+      "Location": "Line 604 Position 27-198"
+    },
+    {
+      "Id": "S107",
+      "Message": "Constructor has 8 new parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L447-L456",
+      "Location": "Lines 447-456 Position 42-29"
+    },
+    {
+      "Id": "S107",
+      "Message": "Method has 8 parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L219-L220",
+      "Location": "Lines 219-220 Position 53-116"
+    },
+    {
+      "Id": "S107",
+      "Message": "Constructor has 8 parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L438-L446",
+      "Location": "Lines 438-446 Position 32-39"
+    },
+    {
+      "Id": "S107",
+      "Message": "Constructor has 9 parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1239-L1247",
+      "Location": "Lines 1239-1247 Position 36-35"
+    }
+  ]
+}

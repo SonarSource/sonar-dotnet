@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027arg\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Roslyn.1.3.1/OldRoslyn.cs#L36",
+      "Location": "Line 36 Position 24-27"
+    }
+  ]
+}

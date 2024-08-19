@@ -12,14 +12,14 @@ Namespace Tests.TestCases
         Public fooList() As Foo
 
         Private Sub SameIndexOnDictionaryItem(ByVal dict As Dictionary(Of Integer, Integer))
-            dict.Item(0) = 0 ' Secondary {{The index/key set here gets set again later.}}
+            dict.Item(0) = 0 ' Secondary
 '           ^^^^^^^^^^^^^^^^
             dict.Item(0) = 1 ' Noncompliant {{Verify this is the index/key that was intended; a value has already been set for it.}}
 '           ^^^^^^^^^^^^^^^^
         End Sub
 
         Private Sub MeUsage()
-            Me.dictionaryField.Item(0) = 1 ' Secondary {{The index/key set here gets set again later.}}
+            Me.dictionaryField.Item(0) = 1 ' Secondary
             Me.dictionaryField.Item(0) = 1 ' Noncompliant
         End Sub
 

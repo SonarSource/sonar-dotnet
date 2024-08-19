@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S3717",
+      "Message": "Implement this method or throw \u0027NotSupportedException\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorRef.cs#L109",
+      "Location": "Line 109 Position 19-55"
+    },
+    {
+      "Id": "S3717",
+      "Message": "Implement this method or throw \u0027NotSupportedException\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconArray.cs#L46",
+      "Location": "Line 46 Position 13-93"
+    },
+    {
+      "Id": "S3717",
+      "Message": "Implement this method or throw \u0027NotSupportedException\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconLiteral.cs#L67",
+      "Location": "Line 67 Position 13-101"
+    },
+    {
+      "Id": "S3717",
+      "Message": "Implement this method or throw \u0027NotSupportedException\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconObject.cs#L109",
+      "Location": "Line 109 Position 13-94"
+    },
+    {
+      "Id": "S3717",
+      "Message": "Implement this method or throw \u0027NotSupportedException\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/HoconObject.cs#L88",
+      "Location": "Line 88 Position 13-94"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4502",
+      "Message": "Make sure disabling CSRF protection is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/BlazorSample/BlazorSample/Pages/Error.cshtml.cs#L8",
+      "Location": "Line 8 Position 6-28"
+    }
+  ]
+}

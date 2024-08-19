@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L108",
+      "Location": "Line 108 Position 54-56"
+    }
+  ]
+}

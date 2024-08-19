@@ -1,0 +1,58 @@
+{
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/BlazorSample/BlazorSample/Data/WeatherForecast.cs#L9",
+      "Location": "Line 9 Position 36-38"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00270.5556\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/BlazorSample/BlazorSample/Data/WeatherForecast.cs#L9",
+      "Location": "Line 9 Position 62-68"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/BlazorSample/BlazorSample/Data/WeatherForecastService.cs#L11",
+      "Location": "Line 11 Position 49-50"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002720\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/BlazorSample/BlazorSample/Data/WeatherForecastService.cs#L14",
+      "Location": "Line 14 Position 52-54"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002755\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/BlazorSample/BlazorSample/Data/WeatherForecastService.cs#L14",
+      "Location": "Line 14 Position 56-58"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002710\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/BlazorSample/BlazorSample/Pages/S6802/S6802.cs#L11",
+      "Location": "Line 11 Position 29-31"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002712\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/BlazorSample/BlazorSample/Pages/S6802/S6802.cs#L32",
+      "Location": "Line 32 Position 33-35"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002713\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/BlazorSample/BlazorSample/Pages/S6802/S6802.cs#L33",
+      "Location": "Line 33 Position 43-45"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002714\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/BlazorSample/BlazorSample/Pages/S6802/S6802.cs#L37",
+      "Location": "Line 37 Position 38-40"
+    }
+  ]
+}

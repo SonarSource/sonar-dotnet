@@ -1,22 +1,26 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using System.Text.RegularExpressions;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class AvoidExcessiveInheritance : ParametrizedDiagnosticAnalyzer
@@ -57,8 +61,8 @@ namespace SonarAnalyzer.CSharp.Rules
                     {
                         return;
                     }
-                    var objectTypeInfo = new ObjectTypeInfo(c.Node, c.Model);
-                    if (objectTypeInfo.Symbol is null)
+                    var objectTypeInfo = new ObjectTypeInfo(c.Node, c.SemanticModel);
+                    if (objectTypeInfo.Symbol == null)
                     {
                         return;
                     }
@@ -79,21 +83,21 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private static string GetRootNamespace(ISymbol symbol)
         {
-            var ns = symbol.ContainingNamespace;
-            while (ns?.ContainingNamespace?.IsGlobalNamespace is false)
-            {
-                ns = ns.ContainingNamespace;
-            }
-            return ns?.Name ?? string.Empty;
+            var namespaceString = symbol.ContainingNamespace.ToDisplayString();
+
+            var lastDotIndex = namespaceString.IndexOf(".", StringComparison.Ordinal);
+            return lastDotIndex == -1
+                ? namespaceString
+                : namespaceString.Substring(0, lastDotIndex);
         }
 
         private static Regex WildcardPatternToRegularExpression(string pattern)
         {
             var regexPattern = string.Concat("^", Regex.Escape(pattern).Replace("\\*", ".*"), "$");
-            return new Regex(regexPattern, RegexOptions.Compiled, Constants.DefaultRegexTimeout);
+            return new Regex(regexPattern, RegexOptions.Compiled, RegexConstants.DefaultTimeout);
         }
 
-        private readonly struct ObjectTypeInfo
+        private sealed class ObjectTypeInfo
         {
             public SyntaxToken Identifier { get; }
 

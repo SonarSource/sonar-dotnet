@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.CSharp.Rules;
+using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Test.Rules;
 
@@ -369,6 +373,10 @@ public class AvoidExcessiveClassCouplingTest
 #if NET
 
     [TestMethod]
+    public void AvoidExcessiveClassCoupling_CSharp9() =>
+        withThreshold1.AddPaths("AvoidExcessiveClassCoupling.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
+    [TestMethod]
     public void AvoidExcessiveClassCoupling_InRecord_Enums_Not_Counted() =>
         withThreshold0.AddSnippet("""
             using System;
@@ -376,7 +384,7 @@ public class AvoidExcessiveClassCouplingTest
             {
                 public ConsoleColor Foo(ConsoleColor c) { return ConsoleColor.Black; }
             }
-            """).WithOptions(LanguageOptions.FromCSharp9).VerifyNoIssues();
+            """).WithOptions(ParseOptionsHelper.FromCSharp9).VerifyNoIssues();
 
     [TestMethod]
     public void AvoidExcessiveClassCoupling_Base_Records_Interfaces_NotCounted() =>
@@ -391,7 +399,7 @@ public class AvoidExcessiveClassCouplingTest
                 {
                 }
             }
-            """).WithOptions(LanguageOptions.FromCSharp9).Verify();
+            """).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
     [TestMethod]
     public void AvoidExcessiveClassCoupling_Primitive_Types_Not_Counted() =>
@@ -407,13 +415,15 @@ public class AvoidExcessiveClassCouplingTest
                     double d2, string s1,
                     object o1) { }
             }
-            """).WithOptions(LanguageOptions.FromCSharp9).VerifyNoIssues();
+            """).WithOptions(ParseOptionsHelper.FromCSharp9).VerifyNoIssues();
 
     [TestMethod]
-    public void AvoidExcessiveClassCoupling_Latest() =>
-        withThreshold1.AddPaths("AvoidExcessiveClassCoupling.Latest.cs")
-            .WithOptions(LanguageOptions.CSharpLatest)
-            .Verify();
+    public void AvoidExcessiveClassCoupling_CSharp10() =>
+        withThreshold1.AddPaths("AvoidExcessiveClassCoupling.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
+    [TestMethod]
+    public void AvoidExcessiveClassCoupling_CSharp11() =>
+        withThreshold1.AddPaths("AvoidExcessiveClassCoupling.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
 #endif
 

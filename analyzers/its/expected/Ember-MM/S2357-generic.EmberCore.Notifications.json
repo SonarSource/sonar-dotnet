@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Index\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L29",
+      "Location": "Line 29 Position 12-17"
+    }
+  ]
+}

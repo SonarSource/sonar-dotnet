@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027Asserts.Equal\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/AssertExtensions.cs#L71",
+      "Location": "Line 71 Position 13-63"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027x.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L188",
+      "Location": "Line 188 Position 66-81"
+    }
+  ]
+}

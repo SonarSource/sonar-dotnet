@@ -1,20 +1,24 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class ImplementIDisposableCorrectly : SonarDiagnosticAnalyzer
@@ -44,9 +48,9 @@ namespace SonarAnalyzer.CSharp.Rules
                     var declarationIdentifier = typeDeclarationSyntax.Identifier;
                     var checker = new DisposableChecker(typeDeclarationSyntax.BaseList,
                                                         declarationIdentifier,
-                                                        c.Model.GetDeclaredSymbol(typeDeclarationSyntax),
+                                                        c.SemanticModel.GetDeclaredSymbol(typeDeclarationSyntax),
                                                         c.Node.GetDeclarationTypeName(),
-                                                        c.Model);
+                                                        c.SemanticModel);
 
                     var locations = checker.GetIssueLocations(typeDeclarationSyntax);
                     if (locations.Any())
@@ -198,7 +202,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
                 // Because of partial classes we cannot always rely on the current semantic model.
                 // See issue: https://github.com/SonarSource/sonar-dotnet/issues/690
-                var disposeMethodSymbol = disposeMethod.SyntaxTree.SemanticModelOrDefault(semanticModel)?.GetDeclaredSymbol(disposeMethod);
+                var disposeMethodSymbol = disposeMethod.SyntaxTree.GetSemanticModelOrDefault(semanticModel)?.GetDeclaredSymbol(disposeMethod);
                 if (disposeMethodSymbol == null)
                 {
                     return;

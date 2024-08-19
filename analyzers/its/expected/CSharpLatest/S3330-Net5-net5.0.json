@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3330",
+      "Message": "Make sure creating this cookie without the \u0022HttpOnly\u0022 flag is safe.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/S3330.cs#L7",
+      "Location": "Line 7 Position 30-51"
+    }
+  ]
+}

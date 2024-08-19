@@ -5,21 +5,21 @@ using Microsoft.AspNetCore.Mvc.Routing;
 public class NoncompliantController : Controller // Noncompliant {{Change the paths of the actions of this controller to be relative and adapt the controller route accordingly.}}
 //           ^^^^^^^^^^^^^^^^^^^^^^
 {
-    [Route("/Index1")]                  // Secondary {{Change this path to be relative to the controller route defined on class level.}}
+    [Route("/Index1")]                  // Secondary
 //   ^^^^^^^^^^^^^^^^
     public IActionResult Index1() => View();
 
-    [Route("/SubPath/Index2")]          // Secondary {{Change this path to be relative to the controller route defined on class level.}}
+    [Route("/SubPath/Index2")]          // Secondary
 //   ^^^^^^^^^^^^^^^^^^^^^^^^
     public IActionResult Index2() => View();
 
-    [HttpGet("/[action]")]              // Secondary {{Change this path to be relative to the controller route defined on class level.}}
+    [HttpGet("/[action]")]              // Secondary
 //   ^^^^^^^^^^^^^^^^^^^^
     public IActionResult Index3() => View();
 
-    [HttpGet("/SubPath/Index4_1")]      // Secondary {{Change this path to be relative to the controller route defined on class level.}}
+    [HttpGet("/SubPath/Index4_1")]      // Secondary
 //   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    [HttpGet("/[controller]/Index4_2")] // Secondary {{Change this path to be relative to the controller route defined on class level.}}
+    [HttpGet("/[controller]/Index4_2")] // Secondary
 //   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     public IActionResult Index4() => View();
 }
@@ -67,17 +67,17 @@ public class CompliantController : Controller // Compliant: at least one action 
 
 public class NoncompliantNoControllerRouteController : Controller // Noncompliant {{Change the paths of the actions of this controller to be relative and add a controller route with the common prefix.}}
 {
-    [Route("/Index1")]                          // Secondary {{Add a controller route with a common prefix and change this path to be relative it.}}
+    [Route("/Index1")]                          // Secondary
     public IActionResult Index1() => View();
 
-    [Route("/SubPath/Index2")]                  // Secondary {{Add a controller route with a common prefix and change this path to be relative it.}}
+    [Route("/SubPath/Index2")]                  // Secondary
     public IActionResult Index2() => View();
 
-    [HttpGet("/[action]")]                      // Secondary {{Add a controller route with a common prefix and change this path to be relative it.}}
+    [HttpGet("/[action]")]                      // Secondary
     public IActionResult Index3() => View();
 
-    [HttpGet("/SubPath/Index4_1")]              // Secondary {{Add a controller route with a common prefix and change this path to be relative it.}}
-    [HttpGet("/[controller]/Index4_2")]         // Secondary {{Add a controller route with a common prefix and change this path to be relative it.}}
+    [HttpGet("/SubPath/Index4_1")]              // Secondary
+    [HttpGet("/[controller]/Index4_2")]         // Secondary
     public IActionResult Index4() => View();
 }
 

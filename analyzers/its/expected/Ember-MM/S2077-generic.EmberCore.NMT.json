@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L816",
+      "Location": "Line 816 Position 13-35"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L835",
+      "Location": "Line 835 Position 13-35"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L849",
+      "Location": "Line 849 Position 13-35"
+    }
+  ]
+}

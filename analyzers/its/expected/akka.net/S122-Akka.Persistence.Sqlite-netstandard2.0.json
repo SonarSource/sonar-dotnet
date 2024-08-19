@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/ConnectionContext.cs#L32",
+      "Location": "Line 32 Position 13-167"
+    }
+  ]
+}

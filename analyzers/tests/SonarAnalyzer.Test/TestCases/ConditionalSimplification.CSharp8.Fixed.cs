@@ -48,35 +48,3 @@ public class Example
         };
     }
 }
-
-// https://community.sonarsource.com/t/134362
-class Repro_134362
-{
-    public void Method(bool condition1, bool condition2)
-    {
-        string s1 = string.Empty;
-        if (condition1) // Compliant, we don't raise if one of the if branches contains ternary
-                        // Otherwise the fix, raises S3358
-        {
-            s1 = "some value";
-        }
-        else
-        {
-            s1 = $"other value {(condition2 ? "suffix1" : "suffix2")}";
-        }
-    }
-
-    public void Method2(bool condition1, bool condition2)
-    {
-        string s1 = string.Empty;
-        if (condition1) // Compliant, we don't raise if one of the if branches contains ternary
-                        // Otherwise the fix, raises S3358
-        {
-            s1 = "some value";
-        }
-        else
-        {
-            s1 = condition2 ? "suffix1" : "suffix2";
-        }
-    }
-}

@@ -1,29 +1,31 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the Sonar Source-Available License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * You should have received a copy of the Sonar Source-Available License
- * along with this program; if not, see https://sonarsource.com/license/ssal/
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
 using System.Collections.Concurrent;
 
-namespace SonarAnalyzer.CSharp.Rules;
+namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class SpecifyRouteAttribute() : SonarDiagnosticAnalyzer<SyntaxKind>(DiagnosticId)
 {
     private const string DiagnosticId = "S6934";
-
-    private const string SecondaryLocationMessage = "By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.";
 
     protected override string MessageFormat => "Specify the RouteAttribute when an HttpMethodAttribute or RouteAttribute is specified at an action level.";
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
@@ -45,15 +47,15 @@ public sealed class SpecifyRouteAttribute() : SonarDiagnosticAnalyzer<SyntaxKind
                 symbolStart.RegisterSyntaxNodeAction(nodeContext =>
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)nodeContext.Node;
-                    if (nodeContext.Model.GetDeclaredSymbol(methodDeclaration, nodeContext.Cancel) is { } method
+                    if (nodeContext.SemanticModel.GetDeclaredSymbol(methodDeclaration, nodeContext.Cancel) is { } method
                         && !method.ContainingType.IsAbstract
                         && method.IsControllerActionMethod()
                         && method.GetAttributesWithInherited().Any(x => !CanBeIgnored(x.GetAttributeRouteTemplate())))
                     {
-                        secondaryLocations.Push(methodDeclaration.Identifier.ToSecondaryLocation(SecondaryLocationMessage));
+                        secondaryLocations.Push(methodDeclaration.Identifier.ToSecondaryLocation());
                     }
                 }, SyntaxKind.MethodDeclaration);
-                symbolStart.RegisterSymbolEndAction(symbolEnd => ReportIssues(symbolEnd, symbolEnd.Symbol, secondaryLocations));
+                symbolStart.RegisterSymbolEndAction(symbolEnd => ReportIssues(symbolEnd, symbolStart.Symbol, secondaryLocations));
             }, SymbolKind.NamedType);
         });
 

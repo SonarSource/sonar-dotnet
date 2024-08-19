@@ -1,0 +1,58 @@
+{
+  "Issues": [
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 8 statements that use \u0027chkImage(iIndex)\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L125",
+      "Location": "Line 125 Position 17-56"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 8 statements that use \u0027lblImage(iIndex)\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L139",
+      "Location": "Line 139 Position 17-56"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 8 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L802",
+      "Location": "Line 802 Position 13-69"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 8 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L239",
+      "Location": "Line 239 Position 9-68"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 8 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/dlgTrailer.vb#L313",
+      "Location": "Line 313 Position 9-63"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 34 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLSettingsHolder.vb#L66",
+      "Location": "Line 66 Position 9-73"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 5 statements that use \u0027RegExps(RegExps.Count - 1)\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L241",
+      "Location": "Line 241 Position 17-72"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 5 statements that use \u0027RegExps(RegExps.Count - 1)\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L277",
+      "Location": "Line 277 Position 17-72"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 5 statements that use \u0027Me._scraperLookups\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/GenericScraper.vb#L144",
+      "Location": "Line 144 Position 17-153"
+    }
+  ]
+}

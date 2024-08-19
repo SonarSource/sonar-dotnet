@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S4035",
+      "Message": "Seal class \u0027AssociationHandle\u0027 or implement \u0027IEqualityComparer\u003CT\u003E\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L331",
+      "Location": "Line 331 Position 27-44"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L47",
+      "Location": "Line 47 Position 16-37"
+    }
+  ]
+}

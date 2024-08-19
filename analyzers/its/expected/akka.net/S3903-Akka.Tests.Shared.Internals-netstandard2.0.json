@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3903",
+      "Message": "Move \u0027ExceptionHelpers\u0027 into a named namespace.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Tests.Shared.Internals/AsyncContext/ExceptionHelpers.cs#L11",
+      "Location": "Line 11 Position 23-39"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027_serialization\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L39",
+      "Location": "Line 39 Position 59-73"
+    }
+  ]
+}

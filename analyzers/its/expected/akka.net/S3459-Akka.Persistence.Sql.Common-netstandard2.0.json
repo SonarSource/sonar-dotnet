@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S3459",
+      "Message": "Remove unassigned field \u0027_log\u0027, or set its value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/SqlSnapshotStore.cs#L60",
+      "Location": "Line 60 Position 33-37"
+    }
+  ]
+}

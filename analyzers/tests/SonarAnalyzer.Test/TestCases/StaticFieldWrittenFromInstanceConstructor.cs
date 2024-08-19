@@ -31,17 +31,4 @@ namespace SonarAnalyzer.Test.TestCases
             dateOfBirth = DateTime.Now; // Compliant
         }
     }
-
-    public partial class PartialPerson
-    {
-        private static DateTime dateOfBirth; // Secondary
-    }
-
-    public partial class PartialPerson
-    {
-        public PartialPerson(DateTime birthday)
-        {
-            dateOfBirth = birthday;  // Noncompliant; now everyone has this birthday
-        }
-    }
 }

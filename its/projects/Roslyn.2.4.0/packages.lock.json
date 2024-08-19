@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "dependencies": {
+    ".NETFramework,Version=v4.8": {
+      "Microsoft.CodeDom.Providers.DotNetCompilerPlatform": {
+        "type": "Direct",
+        "requested": "[1.0.8, )",
+        "resolved": "1.0.8",
+        "contentHash": "Mrl8R7fzrb4/TxsuqVeXxyuAp7j81MJTCHLWxsMAVeuPqjZ7Y/Zg52q0yAPfmrvA2Nx/gkAsWoed/rSToJuLFg==",
+        "dependencies": {
+          "Microsoft.Net.Compilers": "2.4.0"
+        }
+      },
+      "Microsoft.Net.Compilers": {
+        "type": "Transitive",
+        "resolved": "2.4.0",
+        "contentHash": "jR5y/S/WMlkUThcR/pfmRQfzmI1YEcFgti3/3cTg6z/6XaOe68sJJ29LEqCkTXjZAq8wD2TtUrvpno5cU7lrjg=="
+      }
+    }
+  }
+}

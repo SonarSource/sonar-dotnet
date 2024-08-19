@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S2292",
+      "Message": "Make this an auto-implemented property and remove its backing field.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/InitOnlyProperties.cs#L16",
+      "Location": "Line 16 Position 19-27"
+    },
+    {
+      "Id": "S2292",
+      "Message": "Make this an auto-implemented property and remove its backing field.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S2292.cs#L9",
+      "Location": "Line 9 Position 23-41"
+    }
+  ]
+}

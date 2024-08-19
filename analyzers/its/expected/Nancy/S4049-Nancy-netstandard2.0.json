@@ -1,0 +1,160 @@
+{
+  "Issues": [
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetEngine\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/INancyBootstrapper.cs#L22",
+      "Location": "Line 22 Position 22-31"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetEnvironment\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/INancyBootstrapper.cs#L29",
+      "Location": "Line 29 Position 27-41"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetEnvironmentConfigurator\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L344",
+      "Location": "Line 344 Position 58-84"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetDiagnostics\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L350",
+      "Location": "Line 350 Position 41-55"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetApplicationStartupTasks\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L356",
+      "Location": "Line 356 Position 61-87"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetRegistrationTasks\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L370",
+      "Location": "Line 370 Position 56-76"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetEngineInternal\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L553",
+      "Location": "Line 553 Position 41-58"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetApplicationContainer\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L559",
+      "Location": "Line 559 Position 39-62"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetTypeRegistrations\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyInternalConfiguration.cs#L357",
+      "Location": "Line 357 Position 46-66"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetCollectionTypeRegistrations\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Bootstrapper/NancyInternalConfiguration.cs#L407",
+      "Location": "Line 407 Position 56-86"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetDefaultConfiguration\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Configuration/INancyDefaultConfigurationProvider.cs#L12",
+      "Location": "Line 12 Position 16-39"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetDefaultConfiguration\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Configuration/NancyDefaultConfigurationProvider.cs#L13",
+      "Location": "Line 13 Position 27-50"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetInstanceRegistrations\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Conventions/NancyConventions.cs#L73",
+      "Location": "Line 73 Position 50-74"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetSessions\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/IRequestTracing.cs#L33",
+      "Location": "Line 33 Position 42-53"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetBoundaries\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/HttpMultipart.cs#L36",
+      "Location": "Line 36 Position 51-64"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetAssemblies\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/IAssemblyCatalog.cs#L15",
+      "Location": "Line 15 Position 39-52"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetHashCode\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/IHideObjectMembers.cs#L23",
+      "Location": "Line 23 Position 13-24"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetType\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/IHideObjectMembers.cs#L29",
+      "Location": "Line 29 Position 14-21"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetAssembliesToScan\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/IResourceAssemblyProvider.cs#L15",
+      "Location": "Line 15 Position 31-50"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetRootPath\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/IRootPathProvider.cs#L12",
+      "Location": "Line 12 Position 16-27"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetCache\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/IRouteCacheProvider.cs#L16",
+      "Location": "Line 16 Position 21-29"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetRoutes\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Routing/Trie/Nodes/TrieNode.cs#L146",
+      "Location": "Line 146 Position 44-53"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetChildContainer\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1199",
+      "Location": "Line 1199 Position 33-50"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetObject\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2598",
+      "Location": "Line 2598 Position 20-29"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetCsrfToken\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ViewEngines/IRenderContext.cs#L63",
+      "Location": "Line 63 Position 38-50"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetAllCurrentlyDiscoveredViews\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/ViewEngines/IViewLocator.cs#L25",
+      "Location": "Line 25 Position 41-71"
+    }
+  ]
+}

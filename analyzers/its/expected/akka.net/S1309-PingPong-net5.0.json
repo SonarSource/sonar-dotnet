@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/PingPong/ClientAsyncActor.cs#L12",
+      "Location": "Line 12 Position 1-24"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "Issues": [
+    {
+      "Id": "S100",
+      "Message": "Rename local function \u0027add\u0027 to match pascal case naming rules, consider using \u0027Add\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Deployer.cs#L91",
+      "Location": "Line 91 Position 18-21"
+    },
+    {
+      "Id": "S100",
+      "Message": "Rename method \u0027PeerSentEOF\u0027 to match pascal case naming rules, consider using \u0027PeerSentEof\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/TcpConnection.cs#L238",
+      "Location": "Line 238 Position 25-36"
+    },
+    {
+      "Id": "S100",
+      "Message": "Rename method \u0027IsICMPError\u0027 to match pascal case naming rules, consider using \u0027IsIcmpError\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/UdpListener.cs#L144",
+      "Location": "Line 144 Position 22-33"
+    },
+    {
+      "Id": "S100",
+      "Message": "Rename local function \u0027tryAttempt\u0027 to match pascal case naming rules, consider using \u0027TryAttempt\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/RetrySupport.cs#L97",
+      "Location": "Line 97 Position 21-31"
+    },
+    {
+      "Id": "S100",
+      "Message": "Rename method \u0027_IsWindows\u0027 to match pascal case naming rules, trim underscores from the name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Util/RuntimeDetector.cs#L38",
+      "Location": "Line 38 Position 29-39"
+    }
+  ]
+}

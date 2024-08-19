@@ -1,0 +1,124 @@
+{
+  "Issues": [
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L109",
+      "Location": "Line 109 Position 37-43"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgErrorViewer.vb#L51",
+      "Location": "Line 51 Position 9-15"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2111",
+      "Location": "Line 2111 Position 9-15"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1302",
+      "Location": "Line 1302 Position 21-27"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L184",
+      "Location": "Line 184 Position 17-23"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1927",
+      "Location": "Line 1927 Position 17-23"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1996",
+      "Location": "Line 1996 Position 17-23"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2513",
+      "Location": "Line 2513 Position 13-19"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3304",
+      "Location": "Line 3304 Position 17-23"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3437",
+      "Location": "Line 3437 Position 21-27"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3899",
+      "Location": "Line 3899 Position 17-23"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4026",
+      "Location": "Line 4026 Position 21-27"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5787",
+      "Location": "Line 5787 Position 17-23"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5792",
+      "Location": "Line 5792 Position 17-23"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6618",
+      "Location": "Line 6618 Position 9-15"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7448",
+      "Location": "Line 7448 Position 17-23"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8418",
+      "Location": "Line 8418 Position 9-15"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8790",
+      "Location": "Line 8790 Position 17-23"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8799",
+      "Location": "Line 8799 Position 17-23"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8834",
+      "Location": "Line 8834 Position 17-23"
+    }
+  ]
+}

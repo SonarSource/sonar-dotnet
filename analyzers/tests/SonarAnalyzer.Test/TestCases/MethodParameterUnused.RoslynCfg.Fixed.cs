@@ -352,7 +352,7 @@ namespace Tests.TestCases
 
     public partial class PartialMethod_Issue_8988
     {
-        partial void Partial(string one, string two) // Compliant, we don't want to raise on partial methods due to generated signatures
+        partial void Partial(string two) // Fixed
         {
             Console.Write(two);
         }
@@ -654,25 +654,14 @@ namespace Tests.TestCases
 
         // This case is very similar to our MethodParameterUnused.RoslynCfg.Fixed.cs, but it reproduces on .NET build as well.
         // https://github.com/dotnet/roslyn/issues/56644
-        private bool HasAny(string[] smallerOrEqualArray)       // Compliant
+        private bool HasAny(string[] smallerOrEqualArray)       // Fixed
         {
             return largerArray.Any(smallerOrEqualArray.Contains);
         }
 
-        private static double GetDegreeOfOverlap(string[] largerArray, string[] smallerOrEqualArray)    // Compliant
+        private static double GetDegreeOfOverlap(string[] largerArray, string[] smallerOrEqualArray)    // Fixed
         {
             return (double)largerArray.Count(smallerOrEqualArray.Contains) / largerArray.Length;
-        }
-    }
-
-    // https://github.com/dotnet/roslyn/issues/56644
-    public class RoslynIssue_56644
-    {
-        private char[] invalidCharacters;
-
-        private bool IsValidViewName(string viewName)   // Compliant, this was working as expected under .NET build, but didn't work under .NET Framework. We handle it by syntax now.
-        {
-            return !this.invalidCharacters.Any(viewName.Contains);
         }
     }
 
@@ -690,44 +679,6 @@ namespace Tests.TestCases
             {
                 ReferenceEquals(1, 2);
                 return null;
-            }
-        }
-    }
-
-    // https://sonarsource.atlassian.net/browse/NET-1090
-    public static class Repro_1090
-    {
-        private static bool InstanceMethod(IDictionary<int, bool> dict)
-        {
-            return Enumerable.Range(0, 1).Any(dict.Keys.Contains);
-        }
-
-        private static bool ExtensionMethod(IDictionary<int, bool> dict)
-        {
-            return Enumerable.Range(0, 1).Any(dict.ContainsExt);
-        }
-
-        private static bool ExtensionMethodWithMemberAccess(IDictionary<int, bool> dict) // Fixed
-        {
-            return Enumerable.Range(0, 1).Any(dict.Keys.ContainsExt); // The member access dict.Key is not supported
-        }
-
-        private static bool ContainsExt(this ICollection<int> ints, int value) => ints.Contains(value);
-        private static bool ContainsExt(this IDictionary<int, bool> dict, int value) => dict.Keys.Contains(value);
-    }
-
-    // https://sonarsource.atlassian.net/browse/NET-1168
-    public class Repro_1168
-    {
-        private void Repro(string s1, string s2)  // Fixed
-                                                  // Fixed
-        {
-            LocalFunction();
-
-            void LocalFunction()
-            {
-                s1 = s1?.ToString();
-                Console.WriteLine(s2 ?? "Nothing");
             }
         }
     }

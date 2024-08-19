@@ -1,0 +1,356 @@
+<html>
+<body id="mybody" background="diffuse_background.png" ONLOADSET="zeropos" class="parent" BGCOLOR="#222222">
+<link rel="stylesheet" type="text/css" href="default.css" />
+<center>
+<div class="backg">
+</div>
+<div class="divback">
+&nbsp;
+</div>
+
+
+<div class="placebox">
+<img height="180px" width="1070px" src="table.png"/>
+</div>
+
+<table class="tabela">
+<tr><td align="center" height="0px" >
+</td></tr>
+<tr><td align="center" class="title" >
+<br>
+<div id="moviename" class="moviename">&nbsp;</div>
+<div id="year" class="year">&nbsp;</div>
+</td></tr>
+<tr><td align="center" class="main" >
+<div class="infotextspacer">
+<span id="infotext">
+&nbsp;
+</span>
+</div>
+</td></tr>
+
+
+</table>
+</center>
+    <a onClick="MovePrevPage();" ONFOCUSSET="zeropos" href="#" TVID="PGUP" ></a>
+    <a onClick="MoveNextPage();" ONFOCUSSET="zeropos" href="#" TVID="PGDN" ></a>
+    <a href="../index.htm?idx=<$ID>" TVID="BACK" ></a>
+<div >
+<center>
+
+<div  class="genresbar-4" id="genres-4">-4</div>
+<div  class="genresbar-3" id="genres-3">-3</div>
+<div  class="genresbar-2" id="genres-2">-2</div>
+<div  class="genresbar-1" id="genres-1"><a onFocus="PrevGenre();" href="#" ><span class="genre" id="genre-1">-1</span></a></div>
+<div  class="genresbar1" id="genres1"><a onFocus="NextGenre();" href="#"><span class="genre" id="genre1">1</span></a></div>
+<div  class="genresbar2" id="genres2">2</div>
+<div  class="genresbar3" id="genres3">3</div>
+<div  class="genresbar4" id="genres4">4</div>
+<div  class="genresbar0" id="genres0"><a onClick="FilterGenre();" href="#zeropos" id="lgenre0" name="lgenre0"><span class="genre" id="genre0">0</div></a></span>
+
+
+<table ><tr class="letterbar">
+<td><a onclick="Search('0');" name="search-0" ONKEYLEFTSET="search-z" href="#zeropos" ONKEYDOWNSET="search">0</a></td>
+<td><a onclick="Search('a');" href="#zeropos" ONKEYDOWNSET="search">A</a></td>
+<td><a onclick="Search('b');" href="#zeropos" ONKEYDOWNSET="search">B</a></td>
+<td><a onclick="Search('c');" href="#zeropos" ONKEYDOWNSET="search">C</a></td>
+<td><a onclick="Search('d');" href="#zeropos" ONKEYDOWNSET="search">D</a></td>
+<td><a onclick="Search('e');" href="#zeropos" ONKEYDOWNSET="search">E</a></td>
+<td><a onclick="Search('f');" href="#zeropos" ONKEYDOWNSET="search">F</a></td>
+<td><a onclick="Search('g');" href="#zeropos" ONKEYDOWNSET="search">G</a></td>
+<td><a onclick="Search('h');" href="#zeropos" ONKEYDOWNSET="search">H</a></td>
+<td><a onclick="Search('i');" href="#zeropos" ONKEYDOWNSET="search"><center>I</center></a></td>
+<td><a onclick="Search('j');" href="#zeropos" ONKEYDOWNSET="search">J</a></td>
+<td><a onclick="Search('k');" href="#zeropos" ONKEYDOWNSET="search">K</a></td>
+<td><a name="lsearch" onclick="Search('l');" href="#zeropos" ONKEYDOWNSET="search">L</a></td>
+<td><a onclick="Search('m');" href="#zeropos" ONKEYDOWNSET="search">M</a></td>
+<td><a onclick="Search('n');" href="#zeropos" ONKEYDOWNSET="search">N</a></td>
+<td><a onclick="Search('o');" href="#zeropos" ONKEYDOWNSET="search">O</a></td>
+<td><a onclick="Search('p');" href="#zeropos" ONKEYDOWNSET="search">P</a></td>
+<td><a onclick="Search('q');" href="#zeropos" ONKEYDOWNSET="search">Q</a></td>
+<td><a onclick="Search('r');" href="#zeropos" ONKEYDOWNSET="search">R</a></td>
+<td><a onclick="Search('s');" href="#zeropos" ONKEYDOWNSET="search">S</a></td>
+<td><a onclick="Search('t');" href="#zeropos" ONKEYDOWNSET="search">T</a></td>
+<td><a onclick="Search('u');" href="#zeropos" ONKEYDOWNSET="search">U</a></td>
+<td><a onclick="Search('v');" href="#zeropos" ONKEYDOWNSET="search">V</a></td>
+<td><a onclick="Search('x');" href="#zeropos" ONKEYDOWNSET="search">Y</a></td>
+<td><a onclick="Search('y');" href="#zeropos" ONKEYDOWNSET="search">X</a></td>
+<td><a onclick="Search('z');" name="search-z" ONKEYRIGHTSET="search-0" href="#zeropos" ONKEYDOWNSET="search">Z</a></td>
+</tr></table></center></div>
+<div class="menubar"><center><table><tr>
+<td class="cmdbar"><center><a name="search" href="#" ONKEYUPSET="lsearch" onFocus="ShowSearch();" ONKEYLEFTSET="genres">Search</a></center></td>
+<td class="cmdbar"><center><a id="play" href="" onFocus="HideAll();" TVID="Play" vod>Play</a></center></td>
+<td class="cmdbar"><center><a name="genres" href="#" onFocus="ShowGenres();" ONKEYUPSET="lgenre0" ONKEYRIGHTSET="search">Genres</a></center></td>
+</tr></table>
+</center>
+</div>
+
+<div id="place-5" class="place">
+	 <img id="image-5" src="blank.jpg"></div>
+</div>
+<div id="place-4" class="place">
+	 <img id="image-4" src="blank.jpg"></div>
+</div>
+<div id="place-3" class="place">
+	 <img id="image-3" src="blank.jpg"></div>
+</div>
+<div id="place-2" class="place">
+	 <img id="image-2" src="blank.jpg"></div>
+</div>
+<div id="place-1" class="place">
+	<a onFocus="MovePrev();" ONFOCUSSET="zeropos" href="#"> <img id="image-1" src="blank.jpg"></a></div>
+</div>
+
+<div id="place1" class="place" >
+	<a onFocus="MoveNext();" ONFOCUSSET="zeropos" href="#"> <img id="image1" src="blank.jpg"></a></div>
+</div>
+<div id="place2" class="place" >
+	 <img id="image2" src="blank.jpg"></div>
+</div>
+<div id="place3" class="place">
+	<img id="image3" src="blank.jpg"></div></div>
+</div>
+<div id="place4" class="place">
+	<img id="image4" src="blank.jpg"></div></div>
+</div>
+<div id="place5" class="place">
+	 <img id="image5" src="blank.jpg"></div></div>
+</div>
+<div id="place0" class="placefocus">
+	<a onFocus="HideAll();" name="zeropos" id="asel" href="#" ONKEYDOWNSET="zeropos"> <img id="image0" src="blank.jpg"></a>
+</div>
+<!-- <img id="box0" src="boxes/mkv.png"> -->
+<br>
+<script>
+
+var imgSrc=new Array(); 
+var movieIDs=new Array();
+var movieTitles=new Array(); 
+var movieYears=new Array(); 
+var movieGenres=new Array(); 
+var movieOutline=new Array(); 
+var fanart=new Array(); 
+var movieFile=new Array();
+var backdrop=new Array(); 
+var extrathumbs=new Array(); 
+var barvisible=0;
+</script>
+<$MOVIE> 
+<script>
+imgSrc[<$COUNTER>]="<$POSTER_THUMB>";
+movieIDs[<$COUNTER>]="<$ID>";
+movieTitles[<$COUNTER>]="<$MOVIENAME>";
+movieYears[<$COUNTER>]="<$YEAR>";
+movieGenres[<$COUNTER>]="<$GENRES>";
+movieOutline[<$COUNTER>]="<$OUTLINE>";
+fanart[<$COUNTER>]="<$FANART_FILE>";
+movieFile[<$COUNTER>]="<$MOVIE_PATH>";
+backdrop[<$COUNTER>]="<$BACKDROP_THUMB>";
+extrathumbs[<$COUNTER>]=<$EXTRATHUMB>;
+</script>
+<$/MOVIE> 
+<script>
+  var genresList ="<$GENRES_LIST>";
+ var GenresArr = new Array();
+  GenresArr = genresList .split(",");
+  GenresArr.unshift("- All -");
+
+  var FilderIds = new Array();
+  for(x=1;x<movieIDs.length;x++) {
+	FilderIds[x]=x;
+  }
+
+
+
+  var MyIdx = 1;
+  var GenreIdx = 0;
+  var queryString = new String();
+
+  var CurrentGenre = "";
+  queryString = location.search;
+  var arr1 = new Array();
+  arr1 = queryString.split("=");
+  if(arr1.length == 2) {
+	var MyId= arr1[1];
+	var x=-5;
+	for(x=-1;x<=FilderIds.length;x++) {
+	   if(movieIDs[FilderIds[x]] == MyId) {
+		MyIdx = x;
+		break;
+	   }
+	}
+  }
+ShowPosters();
+
+function MovePrev() {
+    if (MyIdx > 1) {
+	MyIdx -= 1;
+	ShowPosters();
+    } else {
+	MyIdx = FilderIds.length - 1;
+	ShowPosters();
+    } 
+
+}
+
+function MoveNext() {
+    if (MyIdx < FilderIds.length -1) {
+	MyIdx += 1;
+	ShowPosters();
+    } else {
+	MyIdx = 1;
+	ShowPosters();
+    } 
+}
+
+
+function MovePrevPage() {
+	MyIdx -= 5;
+	if (MyIdx <= 0 ) { MyIdx = FilderIds.length + MyIdx -1; }
+	ShowPosters();
+}
+
+function MoveNextPage() {
+	MyIdx += 5;
+	if (MyIdx >= FilderIds.length) { MyIdx = MyIdx - FilderIds.length +1;}
+	ShowPosters();
+}
+
+function ShowPosters() {
+
+	var x=-5;
+	for(x=-5;x<=5;x++) {
+		document.styleSheets[0].cssRules[x+5].style.visibility='hidden'; 
+		if(MyIdx + x > 0 && MyIdx + x < FilderIds.length) { 
+			document.getElementById('image' + x).setAttribute('src', imgSrc[FilderIds[MyIdx + x]]);
+			document.styleSheets[0].cssRules[x+5].style.visibility='visible';
+		} else {
+			var pos = 0;
+			if(MyIdx + x <= 0) {
+				var lidx = FilderIds.length + MyIdx + x - 1;
+				while (lidx<=0) {lidx = FilderIds.length + lidx - 1;}
+				pos=FilderIds[lidx];
+			} else {
+				var lidx = (MyIdx + x) - FilderIds.length + 1;
+				while (lidx >= FilderIds.length) {lidx = lidx - FilderIds.length + 1;}
+				pos=FilderIds[lidx];
+				
+			}
+			document.getElementById('image' + x).setAttribute('src', imgSrc[pos]);
+			if(pos > 0 && pos < movieIDs.length) document.styleSheets[0].cssRules[x+5].style.visibility='visible';
+		}
+
+	}
+
+	document.getElementById('asel').setAttribute('href', 'html/' + movieIDs[FilderIds[MyIdx]]+'.htm');
+	document.getElementById('play').setAttribute('href', movieFile[FilderIds[MyIdx]]);
+	document.getElementById('moviename').firstChild.nodeValue=movieTitles[FilderIds[MyIdx]];
+	document.getElementById('year').firstChild.nodeValue=movieYears[FilderIds[MyIdx]];
+	document.getElementById('infotext').firstChild.nodeValue=movieOutline[FilderIds[MyIdx]];
+{$UseFanartInIndex}	document.getElementById('mybody').setAttribute('background', backdrop[FilderIds[MyIdx]]);
+}
+function ShowSearch() {
+	HideAll();
+barvisible=1;
+	document.styleSheets[0].cssRules[12].style.visibility='visivble';
+}
+function HideAll() {
+   if (barvisible==1) {
+barvisible=0;
+	document.styleSheets[0].cssRules[12].style.visibility='hidden';
+	for(x=0;x < 9;x++) {
+		document.styleSheets[0].cssRules[13+x].style.visibility='hidden';
+	}
+   }
+}
+function ShowGenres() {
+	HideAll();
+	barvisible=1;
+	for(x=-4;x <= 4;x++) {
+
+		var pos = 0;
+		if(GenreIdx + x  < GenresArr.length && GenreIdx + x >= 0) {
+			pos = GenreIdx + x;
+		} else {
+			if(GenreIdx + x  >= GenresArr.length) {
+				pos = GenreIdx + x - GenresArr.length ;
+			} 
+			if(GenreIdx + x < 0) {
+				pos = GenresArr.length + GenreIdx + x ;
+			}
+		}
+		document.styleSheets[0].cssRules[13+x+4].style.visibility='visivble';
+		if(x == 0) CurrentGenre = GenresArr[pos];
+		var spacer ="               ";
+		var strgenre = spacer.substring(0,(14-GenresArr[pos].length)/2) + GenresArr[pos];
+		
+		if(x<-1 || x>1) document.getElementById('genres' + x ).firstChild.nodeValue = strgenre;	
+		if(x>=-1 && x<=1) document.getElementById('genre' + x ).firstChild.nodeValue = strgenre;		
+	}
+	document.getElementById('lgenre0').focus();
+}
+
+function NextGenre() {
+	//HideAll();
+	if(GenreIdx < GenresArr.length)	{
+		GenreIdx += 1;
+	} else {
+		GenreIdx = 0;
+	}
+
+	ShowGenres();
+}
+function PrevGenre() {
+	//HideAll();
+	if(GenreIdx > 0 )	{
+		GenreIdx -= 1;
+	} else {
+		GenreIdx = GenresArr.length -1;
+	}
+
+	ShowGenres();
+}
+
+function FilterGenre() {
+  FilderIds.splice(0,FilderIds.length);
+  if(CurrentGenre == "- All -") {
+	  for(x=1;x<movieIDs.length;x++) {
+		FilderIds[x]=x;
+	  }
+  } else {
+   var count = 1;
+   for(x=1;x<movieIDs.length;x++) {
+	var tArr = new Array();
+	tArr = movieGenres[x].split(" / ");
+	var y=0;
+	for(y=0;y < tArr.length;y++) {
+	   if (tArr[y] == CurrentGenre) {
+		FilderIds[count]=x;
+		count += 1;
+		//document.getElementById('moviename').firstChild.nodeValue=" " + x;
+		break;
+	   } 
+
+	}
+   }
+  }
+  MyIdx = 1;
+  ShowPosters();
+}
+
+function Search(letter)
+{
+	var x=0;
+	for(x=1;x < FilderIds.length;x++) {
+		if(movieTitles[FilderIds[x]].toLowerCase().substring(0,1).charCodeAt(0) >= letter.charCodeAt(0)) {
+			document.getElementById('infotext').firstChild.nodeValue="Searching";
+			MyIdx = x;
+			ShowPosters();
+			break;
+		}
+	}
+	
+}
+</script>
+</body>
+</html>
