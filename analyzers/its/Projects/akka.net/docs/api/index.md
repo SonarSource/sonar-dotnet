@@ -1,1 +1,0 @@
-## Akka.NET API Documentation

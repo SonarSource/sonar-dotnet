@@ -1,7 +1,0 @@
-﻿
-html
-  head
-    title |offset test
-  body
-    .container
-      h1#top |offset test

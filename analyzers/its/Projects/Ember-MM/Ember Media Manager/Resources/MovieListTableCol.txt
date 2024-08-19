@@ -1,1 +1,0 @@
-<td><span style="color:darkblue;">{0}</span></td>

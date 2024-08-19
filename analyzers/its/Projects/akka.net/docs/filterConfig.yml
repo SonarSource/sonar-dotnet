@@ -1,4 +1,0 @@
-apiRules:
-- exclude:
-    hasAttribute:
-      uid: Akka.Annotations.InternalApiAttribute

@@ -1,1 +1,0 @@
-<th style="text-align:left; ">{0}</th>
