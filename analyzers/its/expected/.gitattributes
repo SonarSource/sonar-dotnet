@@ -1,2 +1,0 @@
-# Force LF to avoid "git diff" warning about replacing CRLF
-*.json eol=lf

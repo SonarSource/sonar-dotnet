@@ -1,1 +1,0 @@
-<$MOVIE> <$MQUERYORDERID="[$GET(ID)]"><img style="width:80px;" src="<$THUMB><$MPOSTER_FILE>" onClick="ShowItem(<$MID>,<$MORDERID>);" /><$/MOVIE>

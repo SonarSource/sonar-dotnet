@@ -1,1 +1,0 @@
-﻿alert("This script was loaded by Nancy");

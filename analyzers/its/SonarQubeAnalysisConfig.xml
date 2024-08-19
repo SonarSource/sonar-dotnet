@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<AnalysisConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
-  <!-- Dummy SonarQubeAnalysisConfig.xml file that contains only minimum properties needed by the analyzers for deserialization -->
-  <AdditionalConfig />
-</AnalysisConfig>

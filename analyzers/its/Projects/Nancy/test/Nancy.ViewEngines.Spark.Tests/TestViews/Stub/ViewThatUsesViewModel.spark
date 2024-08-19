@@ -1,2 +1,0 @@
-﻿<viewdata model="Nancy.ViewEngines.Spark.Tests.ViewModels.FakeViewModel"/>
-<div>${Model.Text}</div>

@@ -1,2 +1,0 @@
-﻿<viewdata foo="string"/>
-<div>${foo}</div>
