@@ -30,7 +30,7 @@ internal static class InvocationExpressionSyntaxExtensions
         invocation.ArgumentList.Arguments.GetSymbolsOfKnownType(knownType, model);
 
     internal static bool HasExactlyNArguments(this InvocationExpressionSyntax invocation, int count) =>
-        invocation?.ArgumentList is not null && invocation.ArgumentList.Arguments.Count == count;
+        invocation is not null && invocation.ArgumentList.Arguments.Count == count;
 
     internal static bool IsGetTypeCall(this InvocationExpressionSyntax invocation, SemanticModel model) =>
         invocation is not null

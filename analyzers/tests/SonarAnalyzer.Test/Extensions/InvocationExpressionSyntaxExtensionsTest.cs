@@ -134,6 +134,14 @@ public class InvocationExpressionSyntaxExtensionsTest
     }
 
     [TestMethod]
+    public void HasExactlyNArguments_Null_CS() =>
+        ExtensionsCS.HasExactlyNArguments(null, 42).Should().BeFalse();
+
+    [TestMethod]
+    public void HasExactlyNArguments_Null_VB() =>
+        ExtensionsVB.HasExactlyNArguments(null, 42).Should().BeFalse();
+
+    [TestMethod]
     public void GetMethodCallIdentifier_Null_CS() =>
         ExtensionsCS.GetMethodCallIdentifier(null).Should().BeNull();
 
