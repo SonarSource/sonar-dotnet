@@ -1,0 +1,76 @@
+<h2>Why is this an issue?</h2>
+<p>The Content Security Policy (CSP) is a computer security standard that serves as an additional layer of protection against various types of
+attacks, including Cross-Site Scripting (XSS) and clickjacking. It provides a set of standard procedures for loading resources by user agents, which
+can help to mitigate the risk of content injection vulnerabilities.</p>
+<p>However, it is important to note that CSP is not a primary line of defense, but rather a safety net that catches attempts to exploit
+vulnerabilities that exist in the system despite other protective measures. An insecure CSP does not automatically imply that the website is
+vulnerable, but it does mean that this additional layer of protection is weakened.</p>
+<p>A CSP can be considered insecure if it allows potentially harmful practices, such as inline scripts or loading resources from arbitrary domains.
+These practices can increase the risk of content injection attacks.</p>
+<h3>What is the potential impact?</h3>
+<p>An insecure Content Security Policy (CSP) can increase the potential severity of other vulnerabilities in the system. For instance, if an attacker
+manages to exploit a Cross-Site Scripting (XSS) vulnerability, an insecure CSP might not provide the intended additional protection.</p>
+<p>The impact of a successful XSS attack can be severe. XSS allows an attacker to inject malicious scripts into web pages viewed by other users. These
+scripts can then be used to steal sensitive information like session cookies, personal data, or credit card details, leading to identity theft or
+financial fraud.</p>
+<p>Moreover, XSS can be used to perform actions on behalf of the user without their consent, such as changing their email address or password, or
+making transactions. This can lead to unauthorized access and potential loss of control over user accounts.</p>
+<p>In addition, an insecure CSP that allows loading resources from arbitrary domains could potentially expose sensitive user data to untrusted
+sources. This could lead to data breaches, which can have serious legal and reputational consequences.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+&lt;HeadContent&gt;
+    &lt;meta http-equiv="Content-Security-Policy"
+          content="base-uri 'self';
+               default-src 'self';
+               img-src data: https:;
+               object-src 'none';
+               script-src 'self' 'unsafe-inline';  &lt;!-- Noncompliant --&gt;
+               style-src 'self';
+               upgrade-insecure-requests;"&gt;
+&lt;/HeadContent&gt;
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+&lt;HeadContent&gt;
+    &lt;meta http-equiv="Content-Security-Policy"
+          content="base-uri 'self';
+               default-src 'self';
+               img-src data: https:;
+               object-src 'none';
+               script-src 'self' 'sha256-RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc=';
+               style-src 'self';
+               upgrade-insecure-requests;"&gt;
+&lt;/HeadContent&gt;
+</pre>
+<h3>How does this work?</h3>
+<p>To fix an insecure Content Security Policy (CSP), you should adhere to the principle of least privilege. This principle states that a user should
+be given the minimum levels of access necessary to complete their tasks. In the context of CSP, this means restricting the sources from which content
+can be loaded to the minimum necessary.</p>
+<p>Here are some steps to secure your CSP:</p>
+<ul>
+  <li> Avoid 'unsafe-inline' and 'unsafe-eval': These settings allow inline scripts and script evaluation, which can open the door for executing
+  malicious scripts. Instead, use script hashes, nonces, or strict dynamic scripting if scripts must be used. </li>
+  <li> Specify exact sources: Rather than using a wildcard (*) which allows any domain, specify the exact domains from which resources can be loaded.
+  This reduces the risk of loading resources from potentially malicious sources. </li>
+  <li> Use 'self' cautiously: While 'self' is safer than a wildcard, it can still lead to vulnerabilities if your own site has been compromised or
+  hosts user-uploaded content. Be sure to validate and sanitize all user content. </li>
+</ul>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> MDN web docs - <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP">Content Security Policy (CSP)</a> </li>
+  <li> CSP docs - <a href="https://content-security-policy.com/hash/">Using a hash with CSP</a> </li>
+</ul>
+<h3>Standards</h3>
+<ul>
+  <li> OWASP - <a href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">Top 10 2021 Category A5 - Security Misconfiguration</a> </li>
+  <li> OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration.html">Top 10 2017 Category A6 - Security
+  Misconfiguration</a> </li>
+  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/693">CWE-693 - Protection Mechanism Failure</a> </li>
+  <li> STIG Viewer - <a href="https://stigviewer.com/stig/application_security_and_development/2023-06-08/finding/V-222602">Application Security and
+  Development: V-222602</a> - The application must protect from Cross-Site Scripting (XSS) vulnerabilities. </li>
+</ul>
+

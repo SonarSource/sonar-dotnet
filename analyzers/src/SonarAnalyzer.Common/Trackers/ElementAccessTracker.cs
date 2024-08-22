@@ -23,6 +23,7 @@ namespace SonarAnalyzer.Helpers.Trackers
     public abstract class ElementAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, ElementAccessContext>
         where TSyntaxKind : struct
     {
+        public abstract object AssignedValue(ElementAccessContext context);
         public abstract Condition ArgumentAtIndexEquals(int index, string value);
         public abstract Condition MatchSetter();
         public abstract Condition MatchProperty(MemberDescriptor member);
