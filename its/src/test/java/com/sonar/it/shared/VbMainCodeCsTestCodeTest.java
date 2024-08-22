@@ -70,7 +70,7 @@ public class VbMainCodeCsTestCodeTest {
       "INFO: Found 1 MSBuild VB.NET project: 1 MAIN project.",
       "INFO: Found 1 MSBuild C# project: 1 TEST project.");
     assertThat(TestUtils.getAnalysisWarningsTask(ORCHESTRATOR, buildResult).getWarningsList()).containsExactly(
-      "Multi-Language analysis is enabled. If this was not intended, please set \"/d:sonar.scanner.scanAll=false\" in the begin step.");
+      "Multi-Language analysis is enabled. If this was not intended and you have issues such as hitting your LOC limit or analyzing unwanted files, please set \"/d:sonar.scanner.scanAll=false\" in the begin step.");
   }
 
   @Test
