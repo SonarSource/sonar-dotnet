@@ -58,7 +58,7 @@ public static class NuGetMetadataReference
     public static References MachineSpecifications(string packageVersion) => Create("Machine.Specifications", packageVersion);
     public static References MicrosoftAspNetCore(string packageVersion) => Create("Microsoft.AspNetCore", packageVersion);
     public static References MicrosoftAspNetCoreComponents(string packageVersion) => Create("Microsoft.AspNetCore.Components", packageVersion);
-    public static References MicrosoftAspNetCoreComponentsWeb(string packageVersion) => Create("Microsoft.AspNetCore.Components.Web", packageVersion);
+    public static References MicrosoftAspNetCoreComponentsWeb(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.AspNetCore.Components.Web", packageVersion);
     public static References MicrosoftAspNetCoreDiagnostics(string packageVersion) => Create("Microsoft.AspNetCore.Diagnostics", packageVersion);
     public static References MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore(string packageVersion) => Create("Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore", packageVersion);
     public static References MicrosoftAspNetCoreHosting(string packageVersion) => Create("Microsoft.AspNetCore.Hosting", packageVersion);

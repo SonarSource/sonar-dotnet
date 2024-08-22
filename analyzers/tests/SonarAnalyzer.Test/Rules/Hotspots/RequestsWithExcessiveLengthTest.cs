@@ -57,8 +57,12 @@ namespace SonarAnalyzer.Test.Rules
         public void RequestsWithExcessiveLength_CSharp_Latest() =>
             builderCS
                 .AddPaths("RequestsWithExcessiveLength.Latest.cs")
+                .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreComponentsWeb())
+                .AddReferences(MetadataReferenceFacade.SystemThreadingTasks)
+                .AddReferences(MetadataReferenceFacade.SystemCollections)
                 .WithConcurrentAnalysis(false)
-                .WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .Verify();
 
 #endif
 
@@ -127,12 +131,12 @@ namespace SonarAnalyzer.Test.Rules
                 [corruptFilePath]);
         }
 
-        private static string GetWebConfigPath(string rootFolder) => Path.Combine(rootFolder, "Web.config");
-
-        private static Compilation CreateCompilation() => SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation();
-
         internal static IEnumerable<MetadataReference> GetAdditionalReferences() =>
             NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion)
                 .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(Constants.NuGetLatestVersion));
+
+        private static string GetWebConfigPath(string rootFolder) => Path.Combine(rootFolder, "Web.config");
+
+        private static Compilation CreateCompilation() => SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation();
     }
 }

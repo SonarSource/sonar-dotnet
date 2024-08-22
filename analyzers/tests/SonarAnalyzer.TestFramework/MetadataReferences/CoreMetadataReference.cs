@@ -83,6 +83,7 @@ public static class CoreMetadataReference
     public static MetadataReference SystemSecurityPrincipalWindows { get; } = CreateReference("System.Security.Principal.Windows.dll");
     public static MetadataReference SystemThreading { get; } = CreateReference("System.Threading.dll");
     public static MetadataReference SystemThreadingTasks { get; } = CreateReference("System.Threading.Tasks.dll");
+    public static MetadataReference SystemThreadingTasksParallel { get; } = CreateReference("System.Threading.Tasks.Parallel.dll");
     public static MetadataReference SystemXmlReaderWriter { get; } = CreateReference("System.Xml.ReaderWriter.dll");
     public static MetadataReference SystemXml { get; } = CreateReference("System.Xml.dll");
     public static MetadataReference SystemXmlXDocument { get; } = CreateReference("System.Xml.XDocument.dll");

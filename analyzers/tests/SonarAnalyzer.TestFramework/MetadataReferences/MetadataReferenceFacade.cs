@@ -197,7 +197,7 @@ public static class MetadataReferenceFacade
         FrameworkMetadataReference.SystemThreadingTasks
             .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions("4.0.0"));
 #else
-        new[] { CoreMetadataReference.SystemThreadingTasks };
+    [CoreMetadataReference.SystemThreadingTasks, CoreMetadataReference.SystemThreadingTasksParallel];
 #endif
 
     public static References RegularExpressions =>
