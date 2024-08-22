@@ -55,7 +55,7 @@ class AnalysisWarningsTest {
     assertThat(task.getWarningsList()).containsExactly(
       "First message",
       "Second message",
-      "Multi-Language analysis is enabled. If this was not intended, please set \"/d:sonar.scanner.scanAll=false\" in the begin step.");
+      "Multi-Language analysis is enabled. If this was not intended and you have issues such as hitting your LOC limit or analyzing unwanted files, please set \"/d:sonar.scanner.scanAll=false\" in the begin step.");
   }
 
   @Test
@@ -65,7 +65,7 @@ class AnalysisWarningsTest {
     assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);
     assertThat(task.getWarningsList()).containsExactly(
       "The analysis using MsBuild 14 is no longer supported and the analysis with MsBuild 15 is deprecated. Please update your pipeline to MsBuild 16 or higher.",
-      "Multi-Language analysis is enabled. If this was not intended, please set \"/d:sonar.scanner.scanAll=false\" in the begin step.");
+      "Multi-Language analysis is enabled. If this was not intended and you have issues such as hitting your LOC limit or analyzing unwanted files, please set \"/d:sonar.scanner.scanAll=false\" in the begin step.");
   }
 
   @Test
@@ -75,6 +75,6 @@ class AnalysisWarningsTest {
     assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);
     assertThat(task.getWarningsList()).containsExactly(
       "The analysis using MsBuild 15 is deprecated. Please update your pipeline to MsBuild 16 or higher.",
-      "Multi-Language analysis is enabled. If this was not intended, please set \"/d:sonar.scanner.scanAll=false\" in the begin step.");
+      "Multi-Language analysis is enabled. If this was not intended and you have issues such as hitting your LOC limit or analyzing unwanted files, please set \"/d:sonar.scanner.scanAll=false\" in the begin step.");
   }
 }
