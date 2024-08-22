@@ -25,6 +25,11 @@ namespace SonarAnalyzer.Helpers.Trackers
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
         protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.ElementAccessExpression };
 
+        public override object AssignedValue(ElementAccessContext context) =>
+            context.Node.Ancestors().FirstOrDefault(x => x.IsKind(SyntaxKind.SimpleAssignmentExpression)) is AssignmentExpressionSyntax assignment
+                ? assignment.Right.FindConstantValue(context.SemanticModel)
+                : null;
+
         public override Condition ArgumentAtIndexEquals(int index, string value) =>
             context => ((ElementAccessExpressionSyntax)context.Node).ArgumentList is { } argumentList
                        && index < argumentList.Arguments.Count

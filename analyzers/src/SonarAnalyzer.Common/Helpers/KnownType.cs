@@ -68,6 +68,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Hosting_WebHostBuilderExtensions = new("Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions");
         public static readonly KnownType Microsoft_AspNetCore_Http_CookieOptions = new("Microsoft.AspNetCore.Http.CookieOptions");
         public static readonly KnownType Microsoft_AspNetCore_Http_HeaderDictionaryExtensions = new("Microsoft.AspNetCore.Http.HeaderDictionaryExtensions");
+        public static readonly KnownType Microsoft_AspNetCore_Http_HttpResponse = new("Microsoft.AspNetCore.Http.HttpResponse");
         public static readonly KnownType Microsoft_AspNetCore_Http_IFormCollection = new("Microsoft.AspNetCore.Http.IFormCollection");
         public static readonly KnownType Microsoft_AspNetCore_Http_IFormFile = new("Microsoft.AspNetCore.Http.IFormFile");
         public static readonly KnownType Microsoft_AspNetCore_Http_IFormFileCollection = new("Microsoft.AspNetCore.Http.IFormFileCollection");

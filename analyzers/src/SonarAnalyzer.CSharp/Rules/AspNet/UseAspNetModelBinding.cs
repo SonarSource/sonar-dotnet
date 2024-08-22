@@ -225,7 +225,7 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
     // Check that the "Headers" expression in the Headers.TryGetValue("id", out _) invocation is of type IHeaderDictionary
     private static bool IsAccessedViaHeaderDictionary(SemanticModel model, ILanguageFacade language, SyntaxNode invocation) =>
         invocation is InvocationExpressionSyntax { Expression: { } expression }
-            && GetLeftOfDot(expression) is { } left
+            && expression.GetLeftOfDot() is { } left
             && model.GetTypeInfo(left) is { Type: { } typeSymbol }
             && typeSymbol.Is(KnownType.Microsoft_AspNetCore_Http_IHeaderDictionary);
 
@@ -239,14 +239,6 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
 
     private static bool IsOriginatingFromParameter(SemanticModel semanticModel, ExpressionSyntax expression) =>
         MostLeftOfDottedChain(expression) is { } mostLeft && semanticModel.GetSymbolInfo(mostLeft).Symbol is IParameterSymbol;
-
-    private static ExpressionSyntax GetLeftOfDot(ExpressionSyntax expression) =>
-        expression switch
-        {
-            MemberAccessExpressionSyntax memberAccessExpression => memberAccessExpression.Expression,
-            MemberBindingExpressionSyntax memberBindingExpression => memberBindingExpression.GetParentConditionalAccessExpression()?.Expression,
-            _ => null,
-        };
 
     private static ExpressionSyntax MostLeftOfDottedChain(ExpressionSyntax root)
     {
