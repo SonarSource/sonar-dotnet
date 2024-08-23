@@ -194,3 +194,36 @@ public class TypeConstraintsOnGenericClass<TClass>
         Console.WriteLine("c");
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9654
+public class Repro_9654
+{
+    public record Foo(string A);
+    public record Bar(string A);
+
+    private static Foo Test1() // Secondary [ReturnDifferentType]
+    {
+        string s = "A";
+        return new(s);
+    }
+
+    private static Bar Test2() // Noncompliant [ReturnDifferentType] - FP
+    {
+        string s = "A";
+        return new(s);
+    }
+
+    private static Foo Test3()
+    {
+        Console.WriteLine("Test");
+        _ = Test1();
+        return new Foo("A");
+    }
+
+    private static Bar Test4()
+    {
+        Console.WriteLine("Test");
+        _ = Test1();
+        return new Bar("A");
+    }
+}
