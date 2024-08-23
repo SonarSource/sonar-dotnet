@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Common.Walkers;
+
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -25,9 +27,36 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        public RequestsWithExcessiveLength() : this(AnalyzerConfiguration.Hotspot) { }
+        public RequestsWithExcessiveLength() : this(Common.AnalyzerConfiguration.Hotspot) { }
 
         internal RequestsWithExcessiveLength(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
+
+        protected override void Initialize(SonarParametrizedAnalysisContext context)
+        {
+            context.RegisterNodeAction(
+                c =>
+                {
+                    var methodDeclaration = (MethodDeclarationSyntax)c.Node;
+                    var body = methodDeclaration.GetBodyOrExpressionBody();
+
+                    if (body is not null
+                        && body.DescendantNodes()
+                               .OfType<InvocationExpressionSyntax>()
+                               .Any(x => x.IsMethodInvocation(KnownType.Microsoft_AspNetCore_Components_Forms_IBrowserFile, "OpenReadStream", c.SemanticModel)))
+                    {
+                        var walker = new StreamReadSizeCheck(c.SemanticModel, FileUploadSizeLimit);
+                        if (walker.SafeVisit(body))
+                        {
+                            foreach (var location in walker.Locations)
+                            {
+                                c.ReportIssue(Rule, location);
+                            }
+                        }
+                    }
+                }, SyntaxKind.MethodDeclaration);
+
+            base.Initialize(context);
+        }
 
         protected override AttributeSyntax IsInvalidRequestFormLimits(AttributeSyntax attribute, SemanticModel semanticModel) =>
             IsRequestFormLimits(attribute.Name.ToString())
@@ -58,5 +87,42 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsMultipartBodyLengthLimit(AttributeArgumentSyntax argument) =>
             argument.NameEquals is { } nameEquals
             && nameEquals.Name.Identifier.ValueText.Equals(MultipartBodyLengthLimit);
+
+        private sealed class StreamReadSizeCheck(SemanticModel model, int fileUploadSizeLimit) : SafeCSharpSyntaxWalker
+        {
+            private const int GetMultipleFilesMaximumFileCount = 10; // Default value for `maximumFileCount` in `InputFileChangeEventArgs.GetMultipleFiles` is 10
+            private int numberOfFiles = 1;
+
+            public List<Location> Locations { get; } = new();
+
+            public override void VisitInvocationExpression(InvocationExpressionSyntax node)
+            {
+                if (node.IsMethodInvocation(KnownType.Microsoft_AspNetCore_Components_Forms_InputFileChangeEventArgs, "GetMultipleFiles", model))
+                {
+                    numberOfFiles = node.ArgumentList.Arguments.FirstOrDefault() is { } firstArgument
+                                    && model.GetConstantValue(firstArgument.Expression) is { HasValue: true } constantValue
+                                    && Convert.ToInt32(constantValue.Value) is var count
+                                        ? count
+                                        : GetMultipleFilesMaximumFileCount;
+                }
+                if (node.IsMethodInvocation(KnownType.Microsoft_AspNetCore_Components_Forms_IBrowserFile, "OpenReadStream", model))
+                {
+                    var size = OpenReadStreamInvocationSize(node, model);
+                    if (numberOfFiles * size > fileUploadSizeLimit)
+                    {
+                        Locations.Add(node.GetLocation());
+                    }
+                }
+
+                base.VisitInvocationExpression(node);
+            }
+
+            private static long OpenReadStreamInvocationSize(InvocationExpressionSyntax invocation, SemanticModel model) =>
+                invocation.ArgumentList.Arguments.FirstOrDefault() is { } firstArgument
+                && model.GetConstantValue(firstArgument.Expression) is { HasValue: true } constantValue
+                && Convert.ToInt64(constantValue.Value) is var size
+                    ? size
+                    : 500 * 1024; // Default `maxAllowedSize` in `IBrowserFile.OpenReadStream` is 500 KB
+        }
     }
 }
