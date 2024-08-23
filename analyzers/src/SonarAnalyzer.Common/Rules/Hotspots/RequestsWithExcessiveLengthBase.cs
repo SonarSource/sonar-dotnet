@@ -40,8 +40,9 @@ namespace SonarAnalyzer.Rules
         private const string Attribute = "Attribute";
         private const int DefaultFileUploadSizeLimit = 8_388_608;   // 8 MB (in bytes)
         private const int OneKilobyte = 1024; // 1 KB = 1024 bytes
-        private readonly IAnalyzerConfiguration analyzerConfiguration;
-        private readonly DiagnosticDescriptor rule;
+
+        protected readonly DiagnosticDescriptor Rule;
+        protected readonly IAnalyzerConfiguration AnalyzerConfiguration;
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
@@ -50,7 +51,7 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxNode GetMethodLocalFunctionOrClassDeclaration(TAttributeSyntax attribute);
         protected abstract string AttributeName(TAttributeSyntax attribute);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         [RuleParameter("fileUploadSizeLimit", PropertyType.Integer, "The maximum size of HTTP requests handling file uploads (in bytes).", DefaultFileUploadSizeLimit)]
         public int FileUploadSizeLimit { get; set; } = DefaultFileUploadSizeLimit;
@@ -58,8 +59,8 @@ namespace SonarAnalyzer.Rules
 
         protected RequestsWithExcessiveLengthBase(IAnalyzerConfiguration analyzerConfiguration)
         {
-            this.analyzerConfiguration = analyzerConfiguration;
-            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
+            AnalyzerConfiguration = analyzerConfiguration;
+            Rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
         }
 
         protected override void Initialize(SonarParametrizedAnalysisContext context)
@@ -99,7 +100,7 @@ namespace SonarAnalyzer.Rules
             if (IsDisableRequestSizeLimit(AttributeName(attribute))
                 && attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_DisableRequestSizeLimitAttribute, context.SemanticModel))
             {
-                context.ReportIssue(rule, attribute);
+                context.ReportIssue(Rule, attribute);
                 return;
             }
 
@@ -121,7 +122,7 @@ namespace SonarAnalyzer.Rules
             {
                 context.ReportIssue(
                     Language.GeneratedCodeRecognizer,
-                    rule,
+                    Rule,
                     invalidAttributes.MainAttribute.GetLocation(),
                     invalidAttributes.SecondaryAttribute is null ? [] : [invalidAttributes.SecondaryAttribute.ToSecondaryLocation()]);
             }
@@ -133,8 +134,8 @@ namespace SonarAnalyzer.Rules
 
         private bool IsEnabled(AnalyzerOptions options)
         {
-            analyzerConfiguration.Initialize(options);
-            return SupportedDiagnostics.Any(d => analyzerConfiguration.IsEnabled(d.Id));
+            AnalyzerConfiguration.Initialize(options);
+            return SupportedDiagnostics.Any(x => AnalyzerConfiguration.IsEnabled(x.Id));
         }
 
         private void CheckWebConfig(SonarCompilationReportingContext c)
@@ -157,7 +158,7 @@ namespace SonarAnalyzer.Rules
                     && IsVulnerable(maxRequestLength.Value, FileUploadSizeLimit / OneKilobyte)
                     && maxRequestLength.CreateLocation(webConfigPath) is { } location)
                 {
-                    c.ReportIssue(Language.GeneratedCodeRecognizer, rule, location);
+                    c.ReportIssue(Language.GeneratedCodeRecognizer, Rule, location);
                 }
             }
             foreach (var requestLimit in doc.XPathSelectElements("configuration/system.webServer/security/requestFiltering/requestLimits"))
@@ -166,7 +167,7 @@ namespace SonarAnalyzer.Rules
                     && IsVulnerable(maxAllowedContentLength.Value, FileUploadSizeLimit)
                     && maxAllowedContentLength.CreateLocation(webConfigPath) is { } location)
                 {
-                    c.ReportIssue(Language.GeneratedCodeRecognizer, rule, location);
+                    c.ReportIssue(Language.GeneratedCodeRecognizer, Rule, location);
                 }
             }
         }

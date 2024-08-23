@@ -57,9 +57,34 @@ namespace SonarAnalyzer.Test.Rules
         public void RequestsWithExcessiveLength_CSharp_Latest() =>
             builderCS
                 .AddPaths("RequestsWithExcessiveLength.Latest.cs")
-                .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreComponentsWeb())
-                .AddReferences(MetadataReferenceFacade.SystemThreadingTasks)
-                .AddReferences(MetadataReferenceFacade.SystemCollections)
+                .AddReferences(OpenReadStreamReferences())
+                .WithConcurrentAnalysis(false)
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .Verify();
+
+        [TestMethod]
+        public void RequestsWithExcessiveLength_CSharp_Latest_Params() =>
+            new VerifierBuilder()
+                .AddAnalyzer(() => new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 1024 })
+                .WithBasePath(@"Hotspots")
+                .AddSnippet("""
+                            using System;
+                            using System.Threading.Tasks;
+                            using Microsoft.AspNetCore.Components.Forms;
+                            public class TestCase
+                            {
+                                public static void OpenReadStream(IBrowserFile file, InputFileChangeEventArgs inputFileChange)
+                                {
+                                    file.OpenReadStream(); // Noncompliant - Default size is 500 KB
+
+                                    Parallel.ForEach(inputFileChange.GetMultipleFiles(9), file =>
+                                    {
+                                        file.OpenReadStream(1024 * 1024); // Noncompliant
+                                    });
+                                }
+                            }
+                            """)
+                .AddReferences(OpenReadStreamReferences())
                 .WithConcurrentAnalysis(false)
                 .WithOptions(ParseOptionsHelper.FromCSharp12)
                 .Verify();
@@ -138,5 +163,16 @@ namespace SonarAnalyzer.Test.Rules
         private static string GetWebConfigPath(string rootFolder) => Path.Combine(rootFolder, "Web.config");
 
         private static Compilation CreateCompilation() => SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation();
+
+#if NET
+
+        private static IEnumerable<MetadataReference> OpenReadStreamReferences() =>
+        [
+            ..NuGetMetadataReference.MicrosoftAspNetCoreComponentsWeb(),
+            ..MetadataReferenceFacade.SystemThreadingTasks,
+            ..MetadataReferenceFacade.SystemCollections
+        ];
+
+#endif
     }
 }
