@@ -21,29 +21,21 @@ sources. This could lead to data breaches, which can have serious legal and repu
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-&lt;HeadContent&gt;
-    &lt;meta http-equiv="Content-Security-Policy"
-          content="base-uri 'self';
-               default-src 'self';
-               img-src data: https:;
-               object-src 'none';
-               script-src 'self' 'unsafe-inline';  &lt;!-- Noncompliant --&gt;
-               style-src 'self';
-               upgrade-insecure-requests;"&gt;
-&lt;/HeadContent&gt;
+using System.Web;
+
+public async Task InvokeAsync(HttpContext context)
+{
+    context.Response.Headers.ContentSecurityPolicy = "script-src 'self' 'unsafe-inline';"; // Noncompliant
+}
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
-&lt;HeadContent&gt;
-    &lt;meta http-equiv="Content-Security-Policy"
-          content="base-uri 'self';
-               default-src 'self';
-               img-src data: https:;
-               object-src 'none';
-               script-src 'self' 'sha256-RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc=';
-               style-src 'self';
-               upgrade-insecure-requests;"&gt;
-&lt;/HeadContent&gt;
+using System.Web;
+
+public async Task InvokeAsync(HttpContext context)
+{
+    context.Response.Headers.ContentSecurityPolicy = "script-src 'self' 'sha256-RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc=';";
+}
 </pre>
 <h3>How does this work?</h3>
 <p>To fix an insecure Content Security Policy (CSP), you should adhere to the principle of least privilege. This principle states that a user should
