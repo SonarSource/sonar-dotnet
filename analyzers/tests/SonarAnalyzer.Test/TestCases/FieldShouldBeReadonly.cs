@@ -245,4 +245,37 @@ namespace Tests.Diagnostics
 
         private (string, string) NewValues() => ("FOO", "Bar");
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/9657
+    public struct StructWithThisAssignmentDefault
+    {
+        private int number;     // Compliant: the field's value is overwritten in the Reset() method (with the 'this = default' assignment)
+        public int Number => number;
+
+        public StructWithThisAssignmentDefault(int number)
+        {
+            this.number = number;
+        }
+
+        public void Reset()
+        {
+            this = default;
+        }
+    }
+
+    public struct StructWithMethodReassignmentNew
+    {
+        private int number; // Compliant: the field's value is overwritten in the Reassign method
+        public int Number => number;
+
+        public StructWithMethodReassignmentNew(int number)
+        {
+            this.number = number;
+        }
+
+        public void ReAssign()
+        {
+            this = new StructWithMethodReassignmentNew(42);
+        }
+    }
 }
