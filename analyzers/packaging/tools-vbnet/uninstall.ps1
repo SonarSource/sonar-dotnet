@@ -49,3 +49,11 @@ try {
 }
 catch {
 }
+
+
+$analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.VisualBasic.Core.dll"
+try {
+    $project.Object.AnalyzerReferences.Remove($analyzerFilePath)
+}
+catch {
+}

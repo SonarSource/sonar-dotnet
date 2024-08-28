@@ -56,3 +56,6 @@ $project.Object.AnalyzerReferences.Add($analyzerFilePath)
 
 $analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.VisualBasic.dll"
 $project.Object.AnalyzerReferences.Add($analyzerFilePath)
+
+$analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.VisualBasic.Core.dll"
+$project.Object.AnalyzerReferences.Add($analyzerFilePath)
