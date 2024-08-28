@@ -55,7 +55,7 @@ public class SarifIssue
             var suffix = Location.Region.StartLine == Location.Region.EndLine
                 ? $"#L{Location.Region.StartLine}"
                 : $"#L{Location.Region.StartLine}-L{Location.Region.EndLine}";
-            return $"https://github.com/SonarSource/sonar-dotnet/blob/master/{filePath}{suffix}";
+            return $"https://github.com/SonarSource/sonar-dotnet-enterprise/blob/master/private/{filePath}{suffix}";
         }
     }
 }

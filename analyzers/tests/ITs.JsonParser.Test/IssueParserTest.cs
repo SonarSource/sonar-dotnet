@@ -46,7 +46,7 @@ public class IssueParserTest
                 {
                   "Id": "S100",
                   "Message": "Message_1",
-                  "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/foo/bar/File1.cs#L1",
+                  "Uri": "https://github.com/SonarSource/sonar-dotnet-enterprise/blob/master/private/analyzers/its/foo/bar/File1.cs#L1",
                   "Location": "Line 1 Position 42-99"
                 }
               ]
@@ -102,13 +102,13 @@ public class IssueParserTest
                 {
                   "Id": "S100",
                   "Message": "Message_1",
-                  "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/foo/bar/File1.cs#L1",
+                  "Uri": "https://github.com/SonarSource/sonar-dotnet-enterprise/blob/master/private/analyzers/its/foo/bar/File1.cs#L1",
                   "Location": "Line 1 Position 42-99"
                 },
                 {
                   "Id": "S100",
                   "Message": "Message_2",
-                  "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/foo/bar/File1.cs#L42-L43",
+                  "Uri": "https://github.com/SonarSource/sonar-dotnet-enterprise/blob/master/private/analyzers/its/foo/bar/File1.cs#L42-L43",
                   "Location": "Lines 42-43 Position 42-99"
                 }
               ]
@@ -134,7 +134,7 @@ public class IssueParserTest
                 {
                   "Id": "S200",
                   "Message": "Message_1",
-                  "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/foo/bar/File1.cs#L0",
+                  "Uri": "https://github.com/SonarSource/sonar-dotnet-enterprise/blob/master/private/analyzers/its/foo/bar/File1.cs#L0",
                   "Location": "Line 0 Position 42-99"
                 }
               ]
@@ -147,7 +147,7 @@ public class IssueParserTest
                 {
                   "Id": "S100",
                   "Message": "Message_1",
-                  "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/foo/bar/File1.cs#L1",
+                  "Uri": "https://github.com/SonarSource/sonar-dotnet-enterprise/blob/master/private/analyzers/its/foo/bar/File1.cs#L1",
                   "Location": "Line 1 Position 42-99"
                 }
               ]
