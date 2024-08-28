@@ -25,7 +25,7 @@
 
   <ItemGroup>
     <!-- We need to update NuGet packaging after changing references -->
-    <ProjectReference Include="..\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj" />
+    <ProjectReference Include="..\SonarAnalyzer.Core\SonarAnalyzer.Core.csproj" />
     <ProjectReference Include="..\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj" />
   </ItemGroup>
 

@@ -28,7 +28,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SonarAnalyzer.TestFramework\SonarAnalyzer.TestFramework.csproj" />
     <ProjectReference Include="..\..\src\SonarAnalyzer.CFG\SonarAnalyzer.CFG.csproj" />
-    <ProjectReference Include="..\..\src\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj">
+    <ProjectReference Include="..\..\src\SonarAnalyzer.Core\SonarAnalyzer.Core.csproj">
       <Aliases>global,common</Aliases>
     </ProjectReference>
     <ProjectReference Include="..\..\src\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj">

@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj" />
+    <ProjectReference Include="..\..\src\SonarAnalyzer.Core\SonarAnalyzer.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
