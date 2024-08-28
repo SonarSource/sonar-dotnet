@@ -55,8 +55,8 @@
   <Target Name="CopyBinaries" AfterTargets="Build" DependsOnTargets="SignDlls">
     <ItemGroup>
       <BinariesToCopy Include="$(OutputPath)Google.Protobuf.dll" />
-      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CFG.dll" />
+      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.Core.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.ShimLayer.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CSharp.dll" />
     </ItemGroup>

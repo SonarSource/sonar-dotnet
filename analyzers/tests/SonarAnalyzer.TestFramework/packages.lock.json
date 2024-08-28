@@ -525,7 +525,16 @@
         "resolved": "4.5.0",
         "contentHash": "okurQJO6NRE/apDIP23ajJ0hpiNmJ+f0BwOlB/cSqTLQlw5upkf+5+96+iG2Jw40G1fCVCyPz/FhIABUjMR+RQ=="
       },
-      "SonarAnalyzer": {
+      "sonaranalyzer.cfg": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
+          "Microsoft.Composition": "[1.0.27, )",
+          "SonarAnalyzer.ShimLayer": "[1.0.0, )",
+          "System.Collections.Immutable": "[1.1.37, )"
+        }
+      },
+      "sonaranalyzer.core": {
         "type": "Project",
         "dependencies": {
           "Google.Protobuf": "[3.6.1, )",
@@ -533,15 +542,6 @@
           "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
           "SonarAnalyzer.CFG": "[1.0.0, )",
-          "System.Collections.Immutable": "[1.1.37, )"
-        }
-      },
-      "sonaranalyzer.cfg": {
-        "type": "Project",
-        "dependencies": {
-          "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
-          "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.ShimLayer": "[1.0.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
@@ -1061,7 +1061,16 @@
           "System.Drawing.Common": "6.0.0"
         }
       },
-      "SonarAnalyzer": {
+      "sonaranalyzer.cfg": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
+          "Microsoft.Composition": "[1.0.27, )",
+          "SonarAnalyzer.ShimLayer": "[1.0.0, )",
+          "System.Collections.Immutable": "[1.1.37, )"
+        }
+      },
+      "sonaranalyzer.core": {
         "type": "Project",
         "dependencies": {
           "Google.Protobuf": "[3.6.1, )",
@@ -1069,15 +1078,6 @@
           "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
           "SonarAnalyzer.CFG": "[1.0.0, )",
-          "System.Collections.Immutable": "[1.1.37, )"
-        }
-      },
-      "sonaranalyzer.cfg": {
-        "type": "Project",
-        "dependencies": {
-          "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
-          "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.ShimLayer": "[1.0.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
