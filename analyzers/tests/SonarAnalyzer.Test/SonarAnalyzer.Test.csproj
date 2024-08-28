@@ -34,6 +34,7 @@
     <ProjectReference Include="..\..\src\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj">
       <Aliases>global,csharp</Aliases>
     </ProjectReference>
+    <ProjectReference Include="..\..\src\SonarAnalyzer.CSharp.Core\SonarAnalyzer.CSharp.Core.csproj" />
     <ProjectReference Include="..\..\src\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.csproj">
       <Aliases>global,vbnet</Aliases>
     </ProjectReference>

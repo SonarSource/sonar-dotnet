@@ -29,6 +29,7 @@
   <ItemGroup>
     <!-- We need to update NuGet and JAR packaging after changing references -->
     <ProjectReference Include="..\SonarAnalyzer.Core\SonarAnalyzer.Core.csproj" />
+    <ProjectReference Include="..\SonarAnalyzer.CSharp.Core\SonarAnalyzer.CSharp.Core.csproj" />
     <ProjectReference Include="..\SonarAnalyzer.SourceGenerators\SonarAnalyzer.SourceGenerators.csproj" SetTargetFramework="TargetFramework=netstandard2.0" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
@@ -57,6 +58,7 @@
       <BinariesToCopy Include="$(OutputPath)Google.Protobuf.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CFG.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.Core.dll" />
+      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CSharp.Core.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.ShimLayer.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CSharp.dll" />
     </ItemGroup>
