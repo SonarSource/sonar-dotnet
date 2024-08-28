@@ -223,8 +223,8 @@
                 <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic">
                   <fileset dir="${analyzers.directory}/packaging/binaries/SonarAnalyzer.VisualBasic/">
                     <include name="Google.Protobuf.dll"/>
-                    <include name="SonarAnalyzer.dll"/>
                     <include name="SonarAnalyzer.CFG.dll"/>
+                    <include name="SonarAnalyzer.Core.dll"/>
                     <include name="SonarAnalyzer.ShimLayer.dll"/>
                     <include name="SonarAnalyzer.VisualBasic.dll"/>
                   </fileset>
