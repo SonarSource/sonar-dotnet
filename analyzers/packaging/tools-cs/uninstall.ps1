@@ -36,6 +36,13 @@ try {
 catch {
 }
 
+$analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.CSharp.Core.dll"
+try {
+    $project.Object.AnalyzerReferences.Remove($analyzerFilePath)
+}
+catch {
+}
+
 $analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.ShimLayer.dll"
 try {
     $project.Object.AnalyzerReferences.Remove($analyzerFilePath)
