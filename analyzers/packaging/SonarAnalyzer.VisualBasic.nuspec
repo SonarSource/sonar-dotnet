@@ -28,6 +28,7 @@
     <file src="binaries\SonarAnalyzer.VisualBasic\SonarAnalyzer.Core.dll" target="analyzers" />
     <file src="binaries\SonarAnalyzer.VisualBasic\SonarAnalyzer.ShimLayer.dll" target="analyzers" />
     <file src="binaries\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.dll" target="analyzers" />
+    <file src="binaries\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.Core.dll" target="analyzers" />
     <file src="tools-vbnet\*.ps1" target="tools\" />
     <file src="logos\sonarsource_64.png" target="images\" />
     <file src="..\..\THIRD-PARTY-NOTICES.txt" target="license\" />

@@ -38,6 +38,7 @@
     <ProjectReference Include="..\..\src\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.csproj">
       <Aliases>global,vbnet</Aliases>
     </ProjectReference>
+    <ProjectReference Include="..\..\src\SonarAnalyzer.VisualBasic.Core\SonarAnalyzer.VisualBasic.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -227,6 +227,7 @@
                     <include name="SonarAnalyzer.Core.dll"/>
                     <include name="SonarAnalyzer.ShimLayer.dll"/>
                     <include name="SonarAnalyzer.VisualBasic.dll"/>
+                    <include name="SonarAnalyzer.VisualBasic.Core.dll"/>
                   </fileset>
                   <fileset dir="${project.build.directory}/../..">
                     <include name="THIRD-PARTY-NOTICES.txt"/>
