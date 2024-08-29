@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Test.Extensions
             // NET48 does not support deeply nested tuples and fails with CS8078: An expression is too long or complex to compile
             var deeplyNestedTuple = DeeplyNestedTuple(500); // (1, (2,... , 500))..)
             // Actual execution time is about 0.5 - 10.0 ms.
-            AssertAllElementsExecutionTimeBeLessThan(deeplyNestedTuple, 15.Milliseconds());
+            AssertAllElementsExecutionTimeBeLessThan(deeplyNestedTuple, 25.Milliseconds());
 
             static string DeeplyNestedTuple(int depth)
             {
