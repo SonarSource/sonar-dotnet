@@ -18,23 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
+namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
+
+public class MemberAccessSymbolicValue : SymbolicValue
 {
-    public class MemberAccessSymbolicValue : SymbolicValue
+
+    public SymbolicValue MemberExpression { get; }
+    public string MemberName { get; }
+
+    public MemberAccessSymbolicValue(SymbolicValue memberExpression, string memberName)
     {
+        MemberExpression = memberExpression;
+        this.MemberName = memberName;
+    }
 
-        public SymbolicValue MemberExpression { get; }
-        public string MemberName { get; }
-
-        public MemberAccessSymbolicValue(SymbolicValue memberExpression, string memberName)
-        {
-            MemberExpression = memberExpression;
-            this.MemberName = memberName;
-        }
-
-        public override string ToString()
-        {
-            return $"{MemberExpression}.{this.MemberName}";
-        }
+    public override string ToString()
+    {
+        return $"{MemberExpression}.{this.MemberName}";
     }
 }

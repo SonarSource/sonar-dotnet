@@ -18,162 +18,161 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Metrics.VisualBasic
-{
-    public static class VisualBasicExecutableLinesMetric
-    {
-        public static ImmutableArray<int> GetLineNumbers(SyntaxTree syntaxTree, SemanticModel semanticModel)
-        {
-            var walker = new ExecutableLinesWalker(semanticModel);
-            walker.SafeVisit(syntaxTree.GetRoot());
+namespace SonarAnalyzer.Metrics.VisualBasic;
 
-            return walker.ExecutableLines.ToImmutableArray();
+public static class VisualBasicExecutableLinesMetric
+{
+    public static ImmutableArray<int> GetLineNumbers(SyntaxTree syntaxTree, SemanticModel semanticModel)
+    {
+        var walker = new ExecutableLinesWalker(semanticModel);
+        walker.SafeVisit(syntaxTree.GetRoot());
+
+        return walker.ExecutableLines.ToImmutableArray();
+    }
+
+    private class ExecutableLinesWalker : SafeVisualBasicSyntaxWalker
+    {
+        private readonly HashSet<int> executableLineNumbers = new();
+        private readonly SemanticModel semanticModel;
+
+        public ExecutableLinesWalker(SemanticModel semanticModel)
+        {
+            this.semanticModel = semanticModel;
         }
 
-        private class ExecutableLinesWalker : SafeVisualBasicSyntaxWalker
+        public ICollection<int> ExecutableLines => this.executableLineNumbers;
+
+        public override void DefaultVisit(SyntaxNode node)
         {
-            private readonly HashSet<int> executableLineNumbers = new();
-            private readonly SemanticModel semanticModel;
-
-            public ExecutableLinesWalker(SemanticModel semanticModel)
+            if (FindExecutableLines(node))
             {
-                this.semanticModel = semanticModel;
+                base.DefaultVisit(node);
+            }
+        }
+
+        private static bool HasExcludedAttribute(AttributeSyntax attribute)
+        {
+            var attributeName = attribute?.Name?.ToString() ?? string.Empty;
+
+            // Check the attribute name without the attribute suffix OR the full name of the attribute
+            var excludeCoverageName = KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute.TypeName;
+            return attributeName.EndsWith(excludeCoverageName.Substring(0, excludeCoverageName.Length - 9), StringComparison.Ordinal)
+                || attributeName.EndsWith(excludeCoverageName, StringComparison.Ordinal);
+        }
+
+        private bool FindExecutableLines(SyntaxNode node)
+        {
+            switch (node.Kind())
+            {
+                // The following C# constructs have no equivalent in VB.NET:
+                // - checked
+                // - unchecked
+                // - fixed
+                // - unsafe
+
+                case SyntaxKind.AttributeList:
+                    return false;
+
+                case SyntaxKind.SyncLockStatement:
+                case SyntaxKind.UsingStatement:
+
+                case SyntaxKind.EmptyStatement:
+                case SyntaxKind.ExpressionStatement:
+                case SyntaxKind.SimpleAssignmentStatement:
+
+                case SyntaxKind.DoUntilStatement:
+                case SyntaxKind.DoWhileStatement:
+                case SyntaxKind.ForEachStatement:
+                case SyntaxKind.ForStatement:
+                case SyntaxKind.WhileStatement:
+
+                case SyntaxKind.IfStatement:
+                case SyntaxKind.ElseIfStatement:
+                case SyntaxKind.LabelStatement:
+                case SyntaxKind.SelectStatement:
+                case SyntaxKind.ConditionalAccessExpression:
+                case SyntaxKind.BinaryConditionalExpression:
+                case SyntaxKind.TernaryConditionalExpression:
+
+                case SyntaxKind.GoToStatement:
+                case SyntaxKind.ThrowStatement:
+                case SyntaxKind.ReturnStatement:
+                case SyntaxKind.ExitDoStatement:
+                case SyntaxKind.ExitForStatement:
+                case SyntaxKind.ExitFunctionStatement:
+                case SyntaxKind.ExitOperatorStatement:
+                case SyntaxKind.ExitPropertyStatement:
+                case SyntaxKind.ExitSelectStatement:
+                case SyntaxKind.ExitSubStatement:
+                case SyntaxKind.ExitTryStatement:
+                case SyntaxKind.ExitWhileStatement:
+                case SyntaxKind.ContinueDoStatement:
+                case SyntaxKind.ContinueForStatement:
+
+                case SyntaxKind.YieldStatement:
+
+                case SyntaxKind.SimpleMemberAccessExpression:
+                case SyntaxKind.InvocationExpression:
+
+                case SyntaxKind.SingleLineSubLambdaExpression:
+                case SyntaxKind.SingleLineFunctionLambdaExpression:
+                case SyntaxKind.MultiLineSubLambdaExpression:
+                case SyntaxKind.MultiLineFunctionLambdaExpression:
+                    this.executableLineNumbers.Add(node.GetLocation().GetLineNumberToReport());
+                    return true;
+
+                case SyntaxKind.StructureStatement:
+                case SyntaxKind.ClassStatement:
+                case SyntaxKind.ModuleStatement:
+                    return !HasExcludedCodeAttribute((TypeStatementSyntax)node, tss => tss.AttributeLists,
+                        canBePartial: true);
+
+                case SyntaxKind.FunctionStatement:
+                case SyntaxKind.SubStatement:
+                case SyntaxKind.SubNewStatement:
+                    return !HasExcludedCodeAttribute((MethodBaseSyntax)node, mbs => mbs.AttributeLists,
+                        canBePartial: true);
+
+                case SyntaxKind.PropertyStatement:
+                case SyntaxKind.EventStatement:
+                    return !HasExcludedCodeAttribute((MethodBaseSyntax)node, mbs => mbs.AttributeLists,
+                        canBePartial: false);
+
+                case SyntaxKind.AddHandlerAccessorStatement:
+                case SyntaxKind.RemoveHandlerAccessorStatement:
+                case SyntaxKind.SetAccessorStatement:
+                case SyntaxKind.GetAccessorStatement:
+                    return !HasExcludedCodeAttribute((AccessorStatementSyntax)node, ass => ass.AttributeLists,
+                        canBePartial: false);
+
+                default:
+                    return true;
+            }
+        }
+
+        private bool HasExcludedCodeAttribute<T>(T node, Func<T, SyntaxList<AttributeListSyntax>> getAttributeLists,
+            bool canBePartial = false)
+            where T : SyntaxNode
+        {
+            var hasExcludeFromCodeCoverageAttribute = getAttributeLists(node)
+                .SelectMany(attributeList => attributeList.Attributes)
+                .Any(HasExcludedAttribute);
+
+            if (!canBePartial)
+            {
+                return hasExcludeFromCodeCoverageAttribute;
             }
 
-            public ICollection<int> ExecutableLines => this.executableLineNumbers;
-
-            public override void DefaultVisit(SyntaxNode node)
+            var nodeSymbol = this.semanticModel.GetDeclaredSymbol(node);
+            switch (nodeSymbol?.Kind)
             {
-                if (FindExecutableLines(node))
-                {
-                    base.DefaultVisit(node);
-                }
-            }
+                case SymbolKind.Method:
+                case SymbolKind.NamedType:
+                    return hasExcludeFromCodeCoverageAttribute ||
+                        nodeSymbol.HasAttribute(KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute);
 
-            private static bool HasExcludedAttribute(AttributeSyntax attribute)
-            {
-                var attributeName = attribute?.Name?.ToString() ?? string.Empty;
-
-                // Check the attribute name without the attribute suffix OR the full name of the attribute
-                var excludeCoverageName = KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute.TypeName;
-                return attributeName.EndsWith(excludeCoverageName.Substring(0, excludeCoverageName.Length - 9), StringComparison.Ordinal)
-                    || attributeName.EndsWith(excludeCoverageName, StringComparison.Ordinal);
-            }
-
-            private bool FindExecutableLines(SyntaxNode node)
-            {
-                switch (node.Kind())
-                {
-                    // The following C# constructs have no equivalent in VB.NET:
-                    // - checked
-                    // - unchecked
-                    // - fixed
-                    // - unsafe
-
-                    case SyntaxKind.AttributeList:
-                        return false;
-
-                    case SyntaxKind.SyncLockStatement:
-                    case SyntaxKind.UsingStatement:
-
-                    case SyntaxKind.EmptyStatement:
-                    case SyntaxKind.ExpressionStatement:
-                    case SyntaxKind.SimpleAssignmentStatement:
-
-                    case SyntaxKind.DoUntilStatement:
-                    case SyntaxKind.DoWhileStatement:
-                    case SyntaxKind.ForEachStatement:
-                    case SyntaxKind.ForStatement:
-                    case SyntaxKind.WhileStatement:
-
-                    case SyntaxKind.IfStatement:
-                    case SyntaxKind.ElseIfStatement:
-                    case SyntaxKind.LabelStatement:
-                    case SyntaxKind.SelectStatement:
-                    case SyntaxKind.ConditionalAccessExpression:
-                    case SyntaxKind.BinaryConditionalExpression:
-                    case SyntaxKind.TernaryConditionalExpression:
-
-                    case SyntaxKind.GoToStatement:
-                    case SyntaxKind.ThrowStatement:
-                    case SyntaxKind.ReturnStatement:
-                    case SyntaxKind.ExitDoStatement:
-                    case SyntaxKind.ExitForStatement:
-                    case SyntaxKind.ExitFunctionStatement:
-                    case SyntaxKind.ExitOperatorStatement:
-                    case SyntaxKind.ExitPropertyStatement:
-                    case SyntaxKind.ExitSelectStatement:
-                    case SyntaxKind.ExitSubStatement:
-                    case SyntaxKind.ExitTryStatement:
-                    case SyntaxKind.ExitWhileStatement:
-                    case SyntaxKind.ContinueDoStatement:
-                    case SyntaxKind.ContinueForStatement:
-
-                    case SyntaxKind.YieldStatement:
-
-                    case SyntaxKind.SimpleMemberAccessExpression:
-                    case SyntaxKind.InvocationExpression:
-
-                    case SyntaxKind.SingleLineSubLambdaExpression:
-                    case SyntaxKind.SingleLineFunctionLambdaExpression:
-                    case SyntaxKind.MultiLineSubLambdaExpression:
-                    case SyntaxKind.MultiLineFunctionLambdaExpression:
-                        this.executableLineNumbers.Add(node.GetLocation().GetLineNumberToReport());
-                        return true;
-
-                    case SyntaxKind.StructureStatement:
-                    case SyntaxKind.ClassStatement:
-                    case SyntaxKind.ModuleStatement:
-                        return !HasExcludedCodeAttribute((TypeStatementSyntax)node, tss => tss.AttributeLists,
-                            canBePartial: true);
-
-                    case SyntaxKind.FunctionStatement:
-                    case SyntaxKind.SubStatement:
-                    case SyntaxKind.SubNewStatement:
-                        return !HasExcludedCodeAttribute((MethodBaseSyntax)node, mbs => mbs.AttributeLists,
-                            canBePartial: true);
-
-                    case SyntaxKind.PropertyStatement:
-                    case SyntaxKind.EventStatement:
-                        return !HasExcludedCodeAttribute((MethodBaseSyntax)node, mbs => mbs.AttributeLists,
-                            canBePartial: false);
-
-                    case SyntaxKind.AddHandlerAccessorStatement:
-                    case SyntaxKind.RemoveHandlerAccessorStatement:
-                    case SyntaxKind.SetAccessorStatement:
-                    case SyntaxKind.GetAccessorStatement:
-                        return !HasExcludedCodeAttribute((AccessorStatementSyntax)node, ass => ass.AttributeLists,
-                            canBePartial: false);
-
-                    default:
-                        return true;
-                }
-            }
-
-            private bool HasExcludedCodeAttribute<T>(T node, Func<T, SyntaxList<AttributeListSyntax>> getAttributeLists,
-                bool canBePartial = false)
-                where T : SyntaxNode
-            {
-                var hasExcludeFromCodeCoverageAttribute = getAttributeLists(node)
-                    .SelectMany(attributeList => attributeList.Attributes)
-                    .Any(HasExcludedAttribute);
-
-                if (!canBePartial)
-                {
+                default:
                     return hasExcludeFromCodeCoverageAttribute;
-                }
-
-                var nodeSymbol = this.semanticModel.GetDeclaredSymbol(node);
-                switch (nodeSymbol?.Kind)
-                {
-                    case SymbolKind.Method:
-                    case SymbolKind.NamedType:
-                        return hasExcludeFromCodeCoverageAttribute ||
-                            nodeSymbol.HasAttribute(KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute);
-
-                    default:
-                        return hasExcludeFromCodeCoverageAttribute;
-                }
             }
         }
     }

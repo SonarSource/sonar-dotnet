@@ -18,92 +18,91 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Wrappers
-{
-    internal interface IObjectCreation
-    {
-        InitializerExpressionSyntax Initializer { get; }
-        ArgumentListSyntax ArgumentList { get; }
-        ExpressionSyntax Expression { get; }
-        IEnumerable<ExpressionSyntax> InitializerExpressions { get; }
+namespace SonarAnalyzer.Wrappers;
 
-        bool IsKnownType(KnownType knownType, SemanticModel semanticModel);
-        string TypeAsString(SemanticModel semanticModel);
-        ITypeSymbol TypeSymbol(SemanticModel semanticModel);
-        IMethodSymbol MethodSymbol(SemanticModel semanticModel);
+internal interface IObjectCreation
+{
+    InitializerExpressionSyntax Initializer { get; }
+    ArgumentListSyntax ArgumentList { get; }
+    ExpressionSyntax Expression { get; }
+    IEnumerable<ExpressionSyntax> InitializerExpressions { get; }
+
+    bool IsKnownType(KnownType knownType, SemanticModel semanticModel);
+    string TypeAsString(SemanticModel semanticModel);
+    ITypeSymbol TypeSymbol(SemanticModel semanticModel);
+    IMethodSymbol MethodSymbol(SemanticModel semanticModel);
+}
+
+internal class ObjectCreationFactory
+{
+    public static IObjectCreation Create(SyntaxNode node) =>
+        node switch
+        {
+            null => throw new ArgumentNullException(nameof(node)),
+            ObjectCreationExpressionSyntax objectCreation => new ObjectCreation(objectCreation),
+            { } when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node) => new ImplicitObjectCreation((ImplicitObjectCreationExpressionSyntaxWrapper)node),
+            _ => throw new InvalidOperationException("Unexpected type: " + node.GetType().Name)
+        };
+
+    public static IObjectCreation TryCreate(SyntaxNode node) =>
+         node.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression)
+             ? Create(node)
+             : null;
+
+    public static bool TryCreate(SyntaxNode node, out IObjectCreation objectCreation)
+    {
+        objectCreation = TryCreate(node);
+        return objectCreation is not null;
     }
 
-    internal class ObjectCreationFactory
+    private sealed class ObjectCreation : IObjectCreation
     {
-        public static IObjectCreation Create(SyntaxNode node) =>
-            node switch
-            {
-                null => throw new ArgumentNullException(nameof(node)),
-                ObjectCreationExpressionSyntax objectCreation => new ObjectCreation(objectCreation),
-                { } when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node) => new ImplicitObjectCreation((ImplicitObjectCreationExpressionSyntaxWrapper)node),
-                _ => throw new InvalidOperationException("Unexpected type: " + node.GetType().Name)
-            };
+        private readonly ObjectCreationExpressionSyntax objectCreation;
 
-        public static IObjectCreation TryCreate(SyntaxNode node) =>
-             node.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression)
-                 ? Create(node)
-                 : null;
+        public InitializerExpressionSyntax Initializer => objectCreation.Initializer;
+        public ArgumentListSyntax ArgumentList => objectCreation.ArgumentList;
+        public ExpressionSyntax Expression => objectCreation;
+        public IEnumerable<ExpressionSyntax> InitializerExpressions => objectCreation.Initializer?.Expressions;
 
-        public static bool TryCreate(SyntaxNode node, out IObjectCreation objectCreation)
-        {
-            objectCreation = TryCreate(node);
-            return objectCreation is not null;
-        }
+        public ObjectCreation(ObjectCreationExpressionSyntax objectCreationExpressionSyntax) =>
+            objectCreation = objectCreationExpressionSyntax;
 
-        private sealed class ObjectCreation : IObjectCreation
-        {
-            private readonly ObjectCreationExpressionSyntax objectCreation;
+        public bool IsKnownType(KnownType knownType, SemanticModel semanticModel) =>
+            objectCreation.Type.GetName().EndsWith(knownType.TypeName) && objectCreation.IsKnownType(knownType, semanticModel);
 
-            public InitializerExpressionSyntax Initializer => objectCreation.Initializer;
-            public ArgumentListSyntax ArgumentList => objectCreation.ArgumentList;
-            public ExpressionSyntax Expression => objectCreation;
-            public IEnumerable<ExpressionSyntax> InitializerExpressions => objectCreation.Initializer?.Expressions;
+        public string TypeAsString(SemanticModel semanticModel) =>
+            objectCreation.Type.ToString();
 
-            public ObjectCreation(ObjectCreationExpressionSyntax objectCreationExpressionSyntax) =>
-                objectCreation = objectCreationExpressionSyntax;
+        public ITypeSymbol TypeSymbol(SemanticModel semanticModel) =>
+            semanticModel.GetTypeInfo(objectCreation).Type;
 
-            public bool IsKnownType(KnownType knownType, SemanticModel semanticModel) =>
-                objectCreation.Type.GetName().EndsWith(knownType.TypeName) && objectCreation.IsKnownType(knownType, semanticModel);
+        public IMethodSymbol MethodSymbol(SemanticModel semanticModel) =>
+            semanticModel.GetSymbolInfo(objectCreation).Symbol as IMethodSymbol;
+    }
 
-            public string TypeAsString(SemanticModel semanticModel) =>
-                objectCreation.Type.ToString();
+    private sealed class ImplicitObjectCreation : IObjectCreation
+    {
+        private readonly ImplicitObjectCreationExpressionSyntaxWrapper objectCreation;
 
-            public ITypeSymbol TypeSymbol(SemanticModel semanticModel) =>
-                semanticModel.GetTypeInfo(objectCreation).Type;
+        public InitializerExpressionSyntax Initializer => objectCreation.Initializer;
+        public ArgumentListSyntax ArgumentList => objectCreation.ArgumentList;
+        public ExpressionSyntax Expression => objectCreation.SyntaxNode;
+        public IEnumerable<ExpressionSyntax> InitializerExpressions => objectCreation.Initializer?.Expressions;
 
-            public IMethodSymbol MethodSymbol(SemanticModel semanticModel) =>
-                semanticModel.GetSymbolInfo(objectCreation).Symbol as IMethodSymbol;
-        }
+        public ImplicitObjectCreation(ImplicitObjectCreationExpressionSyntaxWrapper wrapper) =>
+            objectCreation = wrapper;
 
-        private sealed class ImplicitObjectCreation : IObjectCreation
-        {
-            private readonly ImplicitObjectCreationExpressionSyntaxWrapper objectCreation;
+        public bool IsKnownType(KnownType knownType, SemanticModel semanticModel) =>
+            semanticModel.GetTypeInfo(objectCreation).Type.Is(knownType);
 
-            public InitializerExpressionSyntax Initializer => objectCreation.Initializer;
-            public ArgumentListSyntax ArgumentList => objectCreation.ArgumentList;
-            public ExpressionSyntax Expression => objectCreation.SyntaxNode;
-            public IEnumerable<ExpressionSyntax> InitializerExpressions => objectCreation.Initializer?.Expressions;
+        // Return null if TypeSymbol returns null to avoid AD0001 due to this issue: https://github.com/dotnet/roslyn/issues/70041
+        public string TypeAsString(SemanticModel semanticModel) =>
+            TypeSymbol(semanticModel)?.Name;
 
-            public ImplicitObjectCreation(ImplicitObjectCreationExpressionSyntaxWrapper wrapper) =>
-                objectCreation = wrapper;
+        public ITypeSymbol TypeSymbol(SemanticModel semanticModel) =>
+            semanticModel.GetTypeInfo(objectCreation).ConvertedType;
 
-            public bool IsKnownType(KnownType knownType, SemanticModel semanticModel) =>
-                semanticModel.GetTypeInfo(objectCreation).Type.Is(knownType);
-
-            // Return null if TypeSymbol returns null to avoid AD0001 due to this issue: https://github.com/dotnet/roslyn/issues/70041
-            public string TypeAsString(SemanticModel semanticModel) =>
-                TypeSymbol(semanticModel)?.Name;
-
-            public ITypeSymbol TypeSymbol(SemanticModel semanticModel) =>
-                semanticModel.GetTypeInfo(objectCreation).ConvertedType;
-
-            public IMethodSymbol MethodSymbol(SemanticModel semanticModel) =>
-                semanticModel.GetSymbolInfo(objectCreation).Symbol as IMethodSymbol;
-        }
+        public IMethodSymbol MethodSymbol(SemanticModel semanticModel) =>
+            semanticModel.GetSymbolInfo(objectCreation).Symbol as IMethodSymbol;
     }
 }

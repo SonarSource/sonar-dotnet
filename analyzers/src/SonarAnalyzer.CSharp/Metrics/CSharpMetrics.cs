@@ -18,149 +18,148 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Metrics.CSharp
+namespace SonarAnalyzer.Metrics.CSharp;
+
+public class CSharpMetrics : MetricsBase
 {
-    public class CSharpMetrics : MetricsBase
+    private readonly Lazy<ImmutableArray<int>> lazyExecutableLines;
+
+    public override ImmutableArray<int> ExecutableLines =>
+        lazyExecutableLines.Value;
+
+    public CSharpMetrics(SyntaxTree tree, SemanticModel semanticModel) : base(tree)
     {
-        private readonly Lazy<ImmutableArray<int>> lazyExecutableLines;
-
-        public override ImmutableArray<int> ExecutableLines =>
-            lazyExecutableLines.Value;
-
-        public CSharpMetrics(SyntaxTree tree, SemanticModel semanticModel) : base(tree)
+        if (tree.GetRoot().Language != LanguageNames.CSharp)
         {
-            if (tree.GetRoot().Language != LanguageNames.CSharp)
-            {
-                throw new ArgumentException(InitializationErrorTextPattern, nameof(tree));
-            }
-
-            lazyExecutableLines = new Lazy<ImmutableArray<int>>(() =>
-                CSharpExecutableLinesMetric.GetLineNumbers(tree, semanticModel));
+            throw new ArgumentException(InitializationErrorTextPattern, nameof(tree));
         }
 
-        protected override int ComputeCognitiveComplexity(SyntaxNode node) =>
-            CSharpCognitiveComplexityMetric.GetComplexity(node).Complexity;
+        lazyExecutableLines = new Lazy<ImmutableArray<int>>(() =>
+            CSharpExecutableLinesMetric.GetLineNumbers(tree, semanticModel));
+    }
 
-        public override int ComputeCyclomaticComplexity(SyntaxNode node) =>
-            CSharpCyclomaticComplexityMetric.GetComplexity(node).Complexity;
+    protected override int ComputeCognitiveComplexity(SyntaxNode node) =>
+        CSharpCognitiveComplexityMetric.GetComplexity(node).Complexity;
 
-        protected override bool IsClass(SyntaxNode node)
+    public override int ComputeCyclomaticComplexity(SyntaxNode node) =>
+        CSharpCyclomaticComplexityMetric.GetComplexity(node).Complexity;
+
+    protected override bool IsClass(SyntaxNode node)
+    {
+        switch (node.Kind())
         {
-            switch (node.Kind())
-            {
-                case SyntaxKind.ClassDeclaration:
-                case SyntaxKindEx.RecordDeclaration:
-                case SyntaxKind.StructDeclaration:
-                case SyntaxKindEx.RecordStructDeclaration:
-                case SyntaxKind.InterfaceDeclaration:
-                    return IsInSameFile(node.GetLocation().GetMappedLineSpan());
+            case SyntaxKind.ClassDeclaration:
+            case SyntaxKindEx.RecordDeclaration:
+            case SyntaxKind.StructDeclaration:
+            case SyntaxKindEx.RecordStructDeclaration:
+            case SyntaxKind.InterfaceDeclaration:
+                return IsInSameFile(node.GetLocation().GetMappedLineSpan());
 
-                default:
-                    return false;
-            }
+            default:
+                return false;
         }
+    }
 
-        protected override bool IsCommentTrivia(SyntaxTrivia trivia) =>
-            trivia.IsComment();
+    protected override bool IsCommentTrivia(SyntaxTrivia trivia) =>
+        trivia.IsComment();
 
-        protected override bool IsEndOfFile(SyntaxToken token) =>
-            token.IsKind(SyntaxKind.EndOfFileToken);
+    protected override bool IsEndOfFile(SyntaxToken token) =>
+        token.IsKind(SyntaxKind.EndOfFileToken);
 
-        protected override bool IsFunction(SyntaxNode node)
+    protected override bool IsFunction(SyntaxNode node)
+    {
+        switch (node.Kind())
         {
-            switch (node.Kind())
-            {
-                case SyntaxKindEx.LocalFunctionStatement:
+            case SyntaxKindEx.LocalFunctionStatement:
+                return true;
+
+            case SyntaxKind.PropertyDeclaration:
+                return ((PropertyDeclarationSyntax)node).ExpressionBody != null;
+
+            case SyntaxKind.ConstructorDeclaration:
+            case SyntaxKind.ConversionOperatorDeclaration:
+            case SyntaxKind.DestructorDeclaration:
+            case SyntaxKind.OperatorDeclaration:
+                return ((BaseMethodDeclarationSyntax)node).HasBodyOrExpressionBody(); // Non-abstract, non-interface methods
+            case SyntaxKind.MethodDeclaration:
+                var methodDeclaration = (BaseMethodDeclarationSyntax)node;
+                return methodDeclaration.HasBodyOrExpressionBody() // Non-abstract, non-interface methods
+                    && IsInSameFile(methodDeclaration.GetLocation().GetMappedLineSpan()); // Excluding razor functions that are not mapped
+            case SyntaxKind.AddAccessorDeclaration:
+            case SyntaxKind.GetAccessorDeclaration:
+            case SyntaxKind.RemoveAccessorDeclaration:
+            case SyntaxKind.SetAccessorDeclaration:
+            case SyntaxKindEx.InitAccessorDeclaration:
+                var accessor = (AccessorDeclarationSyntax)node;
+                if (accessor.HasBodyOrExpressionBody())
+                {
                     return true;
+                }
 
-                case SyntaxKind.PropertyDeclaration:
-                    return ((PropertyDeclarationSyntax)node).ExpressionBody != null;
-
-                case SyntaxKind.ConstructorDeclaration:
-                case SyntaxKind.ConversionOperatorDeclaration:
-                case SyntaxKind.DestructorDeclaration:
-                case SyntaxKind.OperatorDeclaration:
-                    return ((BaseMethodDeclarationSyntax)node).HasBodyOrExpressionBody(); // Non-abstract, non-interface methods
-                case SyntaxKind.MethodDeclaration:
-                    var methodDeclaration = (BaseMethodDeclarationSyntax)node;
-                    return methodDeclaration.HasBodyOrExpressionBody() // Non-abstract, non-interface methods
-                        && IsInSameFile(methodDeclaration.GetLocation().GetMappedLineSpan()); // Excluding razor functions that are not mapped
-                case SyntaxKind.AddAccessorDeclaration:
-                case SyntaxKind.GetAccessorDeclaration:
-                case SyntaxKind.RemoveAccessorDeclaration:
-                case SyntaxKind.SetAccessorDeclaration:
-                case SyntaxKindEx.InitAccessorDeclaration:
-                    var accessor = (AccessorDeclarationSyntax)node;
-                    if (accessor.HasBodyOrExpressionBody())
-                    {
-                        return true;
-                    }
-
-                    if (!accessor.Parent.Parent.IsAnyKind(SyntaxKind.PropertyDeclaration, SyntaxKind.EventDeclaration))
-                    {
-                        // Unexpected
-                        return false;
-                    }
-
-                    var basePropertyNode = (BasePropertyDeclarationSyntax)accessor.Parent.Parent;
-
-                    if (basePropertyNode.Modifiers.Any(SyntaxKind.AbstractKeyword))
-                    {
-                        return false;
-                    }
-
-                    return !basePropertyNode.Parent.IsKind(SyntaxKind.InterfaceDeclaration);
-
-                default:
+                if (!accessor.Parent.Parent.IsAnyKind(SyntaxKind.PropertyDeclaration, SyntaxKind.EventDeclaration))
+                {
+                    // Unexpected
                     return false;
-            }
+                }
+
+                var basePropertyNode = (BasePropertyDeclarationSyntax)accessor.Parent.Parent;
+
+                if (basePropertyNode.Modifiers.Any(SyntaxKind.AbstractKeyword))
+                {
+                    return false;
+                }
+
+                return !basePropertyNode.Parent.IsKind(SyntaxKind.InterfaceDeclaration);
+
+            default:
+                return false;
         }
+    }
 
-        protected override bool IsNoneToken(SyntaxToken token) =>
-            token.IsKind(SyntaxKind.None);
+    protected override bool IsNoneToken(SyntaxToken token) =>
+        token.IsKind(SyntaxKind.None);
 
-        protected override bool IsStatement(SyntaxNode node)
+    protected override bool IsStatement(SyntaxNode node)
+    {
+        switch (node.Kind())
         {
-            switch (node.Kind())
-            {
-                case SyntaxKind.BreakStatement:
-                case SyntaxKind.CheckedStatement:
-                case SyntaxKind.ContinueStatement:
-                case SyntaxKind.DoStatement:
-                case SyntaxKind.EmptyStatement:
-                case SyntaxKind.ExpressionStatement:
-                case SyntaxKind.FixedStatement:
-                case SyntaxKind.ForEachStatement:
-                case SyntaxKindEx.ForEachVariableStatement:
-                case SyntaxKind.ForStatement:
-                case SyntaxKind.GlobalStatement:
-                case SyntaxKind.GotoCaseStatement:
-                case SyntaxKind.GotoDefaultStatement:
-                case SyntaxKind.GotoStatement:
-                case SyntaxKind.IfStatement:
-                case SyntaxKind.LabeledStatement:
-                case SyntaxKind.LocalDeclarationStatement:
-                case SyntaxKindEx.LocalFunctionStatement:
-                case SyntaxKind.LockStatement:
-                case SyntaxKind.ReturnStatement:
-                case SyntaxKind.SwitchStatement:
-                case SyntaxKind.ThrowStatement:
-                case SyntaxKind.TryStatement:
-                case SyntaxKind.UncheckedStatement:
-                case SyntaxKind.UnsafeStatement:
-                case SyntaxKind.UsingStatement:
-                case SyntaxKind.WhileStatement:
-                case SyntaxKind.YieldBreakStatement:
-                case SyntaxKind.YieldReturnStatement:
-                    return IsInSameFile(node.GetLocation().GetMappedLineSpan()); // Excluding razor statements that are not mapped
-                case SyntaxKind.Block:
-                    return false;
+            case SyntaxKind.BreakStatement:
+            case SyntaxKind.CheckedStatement:
+            case SyntaxKind.ContinueStatement:
+            case SyntaxKind.DoStatement:
+            case SyntaxKind.EmptyStatement:
+            case SyntaxKind.ExpressionStatement:
+            case SyntaxKind.FixedStatement:
+            case SyntaxKind.ForEachStatement:
+            case SyntaxKindEx.ForEachVariableStatement:
+            case SyntaxKind.ForStatement:
+            case SyntaxKind.GlobalStatement:
+            case SyntaxKind.GotoCaseStatement:
+            case SyntaxKind.GotoDefaultStatement:
+            case SyntaxKind.GotoStatement:
+            case SyntaxKind.IfStatement:
+            case SyntaxKind.LabeledStatement:
+            case SyntaxKind.LocalDeclarationStatement:
+            case SyntaxKindEx.LocalFunctionStatement:
+            case SyntaxKind.LockStatement:
+            case SyntaxKind.ReturnStatement:
+            case SyntaxKind.SwitchStatement:
+            case SyntaxKind.ThrowStatement:
+            case SyntaxKind.TryStatement:
+            case SyntaxKind.UncheckedStatement:
+            case SyntaxKind.UnsafeStatement:
+            case SyntaxKind.UsingStatement:
+            case SyntaxKind.WhileStatement:
+            case SyntaxKind.YieldBreakStatement:
+            case SyntaxKind.YieldReturnStatement:
+                return IsInSameFile(node.GetLocation().GetMappedLineSpan()); // Excluding razor statements that are not mapped
+            case SyntaxKind.Block:
+                return false;
 
-                default:
-                    return node is StatementSyntax
-                               ? throw new InvalidOperationException($"{node.Kind()} is statement and it isn't handled.")
-                               : false;
-            }
+            default:
+                return node is StatementSyntax
+                           ? throw new InvalidOperationException($"{node.Kind()} is statement and it isn't handled.")
+                           : false;
         }
     }
 }

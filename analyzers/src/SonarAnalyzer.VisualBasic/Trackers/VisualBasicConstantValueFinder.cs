@@ -18,23 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public class VisualBasicConstantValueFinder : ConstantValueFinder<IdentifierNameSyntax, VariableDeclaratorSyntax>
 {
-    public class VisualBasicConstantValueFinder : ConstantValueFinder<IdentifierNameSyntax, VariableDeclaratorSyntax>
-    {
-        public VisualBasicConstantValueFinder(SemanticModel semanticModel) : base(semanticModel, new VisualBasicAssignmentFinder(), (int)SyntaxKind.NothingLiteralExpression) { }
+    public VisualBasicConstantValueFinder(SemanticModel semanticModel) : base(semanticModel, new VisualBasicAssignmentFinder(), (int)SyntaxKind.NothingLiteralExpression) { }
 
-        protected override string IdentifierName(IdentifierNameSyntax node) =>
-            node.Identifier.ValueText;
+    protected override string IdentifierName(IdentifierNameSyntax node) =>
+        node.Identifier.ValueText;
 
-        protected override SyntaxNode InitializerValue(VariableDeclaratorSyntax node) =>
-            node.Initializer?.Value;
+    protected override SyntaxNode InitializerValue(VariableDeclaratorSyntax node) =>
+        node.Initializer?.Value;
 
-        protected override VariableDeclaratorSyntax VariableDeclarator(SyntaxNode node) =>
-            node?.Parent as VariableDeclaratorSyntax;
+    protected override VariableDeclaratorSyntax VariableDeclarator(SyntaxNode node) =>
+        node?.Parent as VariableDeclaratorSyntax;
 
-        protected override bool IsPtrZero(SyntaxNode node) =>
-            node is MemberAccessExpressionSyntax memberAccess
-            && memberAccess.IsPtrZero(SemanticModel);
-    }
+    protected override bool IsPtrZero(SyntaxNode node) =>
+        node is MemberAccessExpressionSyntax memberAccess
+        && memberAccess.IsPtrZero(SemanticModel);
 }

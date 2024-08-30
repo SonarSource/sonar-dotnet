@@ -18,57 +18,56 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Trackers
+namespace SonarAnalyzer.Helpers.Trackers;
+
+public class VisualBasicMethodDeclarationTracker : MethodDeclarationTracker<SyntaxKind>
 {
-    public class VisualBasicMethodDeclarationTracker : MethodDeclarationTracker<SyntaxKind>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public override Condition ParameterAtIndexIsUsed(int index) =>
-            context =>
+    public override Condition ParameterAtIndexIsUsed(int index) =>
+        context =>
+        {
+            var parameterSymbol = context.MethodSymbol.Parameters.ElementAtOrDefault(0);
+            if (parameterSymbol == null)
             {
-                var parameterSymbol = context.MethodSymbol.Parameters.ElementAtOrDefault(0);
-                if (parameterSymbol == null)
-                {
-                    return false;
-                }
+                return false;
+            }
 
-                var methodDeclaration = context.MethodSymbol.DeclaringSyntaxReferences
-                    .Select(r => (MethodBlockSyntax)r.GetSyntax().Parent)
-                    .FirstOrDefault(HasImplementation);
+            var methodDeclaration = context.MethodSymbol.DeclaringSyntaxReferences
+                .Select(r => (MethodBlockSyntax)r.GetSyntax().Parent)
+                .FirstOrDefault(HasImplementation);
 
-                if (methodDeclaration == null)
-                {
-                    return false;
-                }
-
-                var semanticModel = context.GetSemanticModel(methodDeclaration);
-
-                var descendantNodes = methodDeclaration.Statements
-                    .SelectMany(statement => statement.DescendantNodes());
-
-                return descendantNodes.Any(
-                    node =>
-                        node.IsKind(SyntaxKind.IdentifierName)
-                        && ((IdentifierNameSyntax)node).Identifier.ValueText == parameterSymbol.Name
-                        && parameterSymbol.Equals(semanticModel.GetSymbolInfo(node).Symbol));
-            };
-
-        protected override SyntaxToken? GetMethodIdentifier(SyntaxNode methodDeclaration) =>
-            methodDeclaration switch
+            if (methodDeclaration == null)
             {
-                SubNewStatementSyntax constructor => constructor.NewKeyword,
-                MethodStatementSyntax method => method.Identifier,
-                OperatorStatementSyntax op => op.OperatorToken,
-                _ => methodDeclaration?.Parent.Parent switch
-                {
-                    EventBlockSyntax e => e.EventStatement.Identifier,
-                    PropertyBlockSyntax p => p.PropertyStatement.Identifier,
-                    _ => null
-                }
-            };
+                return false;
+            }
 
-        private static bool HasImplementation(MethodBlockSyntax methodBlock) =>
-            methodBlock.Statements.Count > 0;
-    }
+            var semanticModel = context.GetSemanticModel(methodDeclaration);
+
+            var descendantNodes = methodDeclaration.Statements
+                .SelectMany(statement => statement.DescendantNodes());
+
+            return descendantNodes.Any(
+                node =>
+                    node.IsKind(SyntaxKind.IdentifierName)
+                    && ((IdentifierNameSyntax)node).Identifier.ValueText == parameterSymbol.Name
+                    && parameterSymbol.Equals(semanticModel.GetSymbolInfo(node).Symbol));
+        };
+
+    protected override SyntaxToken? GetMethodIdentifier(SyntaxNode methodDeclaration) =>
+        methodDeclaration switch
+        {
+            SubNewStatementSyntax constructor => constructor.NewKeyword,
+            MethodStatementSyntax method => method.Identifier,
+            OperatorStatementSyntax op => op.OperatorToken,
+            _ => methodDeclaration?.Parent.Parent switch
+            {
+                EventBlockSyntax e => e.EventStatement.Identifier,
+                PropertyBlockSyntax p => p.PropertyStatement.Identifier,
+                _ => null
+            }
+        };
+
+    private static bool HasImplementation(MethodBlockSyntax methodBlock) =>
+        methodBlock.Statements.Count > 0;
 }

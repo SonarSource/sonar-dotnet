@@ -18,49 +18,48 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public class VisualBasicAssignmentFinder : AssignmentFinder
 {
-    public class VisualBasicAssignmentFinder : AssignmentFinder
+    protected override SyntaxNode GetTopMostContainingMethod(SyntaxNode node) =>
+        node.GetTopMostContainingMethod();
+
+    /// <param name="anyAssignmentKind">'true' will find any AssignmentExpressionSyntax like =, +=, -=, &=. 'false' will find only '=' SimpleAssignmentExpression.</param>
+    protected override bool IsAssignmentToIdentifier(SyntaxNode node, string identifierName, bool anyAssignmentKind, out SyntaxNode rightExpression)
     {
-        protected override SyntaxNode GetTopMostContainingMethod(SyntaxNode node) =>
-            node.GetTopMostContainingMethod();
-
-        /// <param name="anyAssignmentKind">'true' will find any AssignmentExpressionSyntax like =, +=, -=, &=. 'false' will find only '=' SimpleAssignmentExpression.</param>
-        protected override bool IsAssignmentToIdentifier(SyntaxNode node, string identifierName, bool anyAssignmentKind, out SyntaxNode rightExpression)
+        if ((anyAssignmentKind || node.IsKind(SyntaxKind.SimpleAssignmentStatement))
+            && node is AssignmentStatementSyntax assignment
+            && assignment.Left.NameIs(identifierName))
         {
-            if ((anyAssignmentKind || node.IsKind(SyntaxKind.SimpleAssignmentStatement))
-                && node is AssignmentStatementSyntax assignment
-                && assignment.Left.NameIs(identifierName))
-            {
-                rightExpression = assignment.Right;
-                return true;
-            }
-            rightExpression = null;
-            return false;
+            rightExpression = assignment.Right;
+            return true;
         }
-
-        protected override bool IsIdentifierDeclaration(SyntaxNode node, string identifierName, out SyntaxNode initializer)
-        {
-            if (node is LocalDeclarationStatementSyntax declarationStatement
-                && declarationStatement.Declarators.SingleOrDefault(MatchesIdentifierName) is { } declaration)
-            {
-                initializer = declaration.Initializer?.Value ?? (declaration.AsClause as AsNewClauseSyntax)?.NewExpression;
-                return true;
-            }
-            initializer = null;
-            return false;
-
-            bool MatchesIdentifierName(VariableDeclaratorSyntax declarator) =>
-                declarator.Names.Any(n => identifierName.Equals(n.Identifier.ValueText, StringComparison.OrdinalIgnoreCase));
-        }
-
-        protected override bool IsLoop(SyntaxNode node) =>
-            node.IsAnyKind(SyntaxKind.ForBlock,
-                           SyntaxKind.ForEachBlock,
-                           SyntaxKind.WhileBlock,
-                           SyntaxKind.DoLoopUntilBlock,
-                           SyntaxKind.DoLoopWhileBlock,
-                           SyntaxKind.DoUntilLoopBlock,
-                           SyntaxKind.DoWhileLoopBlock);
+        rightExpression = null;
+        return false;
     }
+
+    protected override bool IsIdentifierDeclaration(SyntaxNode node, string identifierName, out SyntaxNode initializer)
+    {
+        if (node is LocalDeclarationStatementSyntax declarationStatement
+            && declarationStatement.Declarators.SingleOrDefault(MatchesIdentifierName) is { } declaration)
+        {
+            initializer = declaration.Initializer?.Value ?? (declaration.AsClause as AsNewClauseSyntax)?.NewExpression;
+            return true;
+        }
+        initializer = null;
+        return false;
+
+        bool MatchesIdentifierName(VariableDeclaratorSyntax declarator) =>
+            declarator.Names.Any(n => identifierName.Equals(n.Identifier.ValueText, StringComparison.OrdinalIgnoreCase));
+    }
+
+    protected override bool IsLoop(SyntaxNode node) =>
+        node.IsAnyKind(SyntaxKind.ForBlock,
+                       SyntaxKind.ForEachBlock,
+                       SyntaxKind.WhileBlock,
+                       SyntaxKind.DoLoopUntilBlock,
+                       SyntaxKind.DoLoopWhileBlock,
+                       SyntaxKind.DoUntilLoopBlock,
+                       SyntaxKind.DoWhileLoopBlock);
 }

@@ -21,27 +21,26 @@
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
+namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
+
+public abstract class NotEqualsSymbolicValue : EqualityLikeSymbolicValue
 {
-    public abstract class NotEqualsSymbolicValue : EqualityLikeSymbolicValue
+    protected NotEqualsSymbolicValue(SymbolicValue leftOperand, SymbolicValue rightOperand)
+        : base(leftOperand, rightOperand)
     {
-        protected NotEqualsSymbolicValue(SymbolicValue leftOperand, SymbolicValue rightOperand)
-            : base(leftOperand, rightOperand)
+    }
+
+    internal override IEnumerable<ProgramState> SetConstraint(BoolConstraint boolConstraint,
+        SymbolicValueConstraints leftConstraints, SymbolicValueConstraints rightConstraints,
+        ProgramState programState)
+    {
+        if (boolConstraint == BoolConstraint.False)
         {
+            return RightOperand.TrySetConstraints(leftConstraints, programState)
+                .SelectMany(ps => LeftOperand.TrySetConstraints(rightConstraints, ps));
         }
 
-        internal override IEnumerable<ProgramState> SetConstraint(BoolConstraint boolConstraint,
-            SymbolicValueConstraints leftConstraints, SymbolicValueConstraints rightConstraints,
-            ProgramState programState)
-        {
-            if (boolConstraint == BoolConstraint.False)
-            {
-                return RightOperand.TrySetConstraints(leftConstraints, programState)
-                    .SelectMany(ps => LeftOperand.TrySetConstraints(rightConstraints, ps));
-            }
-
-            return RightOperand.TrySetOppositeConstraints(leftConstraints, programState)
-                .SelectMany(ps => LeftOperand.TrySetOppositeConstraints(rightConstraints, ps));
-        }
+        return RightOperand.TrySetOppositeConstraints(leftConstraints, programState)
+            .SelectMany(ps => LeftOperand.TrySetOppositeConstraints(rightConstraints, ps));
     }
 }

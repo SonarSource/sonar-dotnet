@@ -21,26 +21,25 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar
+namespace SonarAnalyzer.SymbolicExecution.Sonar;
+
+[Serializable]
+public class TooManyInternalStatesException : Exception
 {
-    [Serializable]
-    public class TooManyInternalStatesException : Exception
+    public TooManyInternalStatesException()
+    { }
+
+    public TooManyInternalStatesException(string message)
+        : base(message)
+    { }
+
+    public TooManyInternalStatesException(string message, Exception innerException)
+        : base(message, innerException)
+    { }
+
+    [ExcludeFromCodeCoverage]
+    protected TooManyInternalStatesException(SerializationInfo info, StreamingContext context)
+        : base(info, context)
     {
-        public TooManyInternalStatesException()
-        { }
-
-        public TooManyInternalStatesException(string message)
-            : base(message)
-        { }
-
-        public TooManyInternalStatesException(string message, Exception innerException)
-            : base(message, innerException)
-        { }
-
-        [ExcludeFromCodeCoverage]
-        protected TooManyInternalStatesException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
     }
 }

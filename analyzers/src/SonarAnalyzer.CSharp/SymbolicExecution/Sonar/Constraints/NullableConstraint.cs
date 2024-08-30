@@ -20,16 +20,15 @@
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
+
+internal sealed class NullableConstraint : SymbolicConstraint
 {
-    internal sealed class NullableConstraint : SymbolicConstraint
-    {
-        public static readonly NullableConstraint NoValue = new(ConstraintKind.NullableNoValue);
-        public static readonly NullableConstraint HasValue = new(ConstraintKind.NullableHasValue);
+    public static readonly NullableConstraint NoValue = new(ConstraintKind.NullableNoValue);
+    public static readonly NullableConstraint HasValue = new(ConstraintKind.NullableHasValue);
 
-        public override SymbolicConstraint Opposite =>
-            this == NoValue ? HasValue : NoValue;
+    public override SymbolicConstraint Opposite =>
+        this == NoValue ? HasValue : NoValue;
 
-        private NullableConstraint(ConstraintKind kind) : base(kind) { }
-    }
+    private NullableConstraint(ConstraintKind kind) : base(kind) { }
 }

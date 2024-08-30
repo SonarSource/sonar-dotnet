@@ -18,91 +18,90 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Trackers
+namespace SonarAnalyzer.Helpers.Trackers;
+
+public class CSharpMethodDeclarationTracker : MethodDeclarationTracker<SyntaxKind>
 {
-    public class CSharpMethodDeclarationTracker : MethodDeclarationTracker<SyntaxKind>
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    public override Condition ParameterAtIndexIsUsed(int index) =>
+        context =>
+        {
+            var parameterSymbol = context.MethodSymbol.Parameters.ElementAtOrDefault(0);
+            if (parameterSymbol == null)
+            {
+                return false;
+            }
+
+            var methodInfo = GetMethodInfo(context);
+            if (methodInfo?.DescendantNodes == null)
+            {
+                return false;
+            }
+
+            return methodInfo.DescendantNodes.Any(
+                node =>
+                    node.IsKind(SyntaxKind.IdentifierName)
+                    && ((IdentifierNameSyntax)node).Identifier.ValueText == parameterSymbol.Name
+                    && parameterSymbol.Equals(methodInfo.SemanticModel.GetSymbolInfo(node).Symbol));
+        };
+
+    private static MethodInfo GetMethodInfo(MethodDeclarationContext context)
     {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-        public override Condition ParameterAtIndexIsUsed(int index) =>
-            context =>
-            {
-                var parameterSymbol = context.MethodSymbol.Parameters.ElementAtOrDefault(0);
-                if (parameterSymbol == null)
-                {
-                    return false;
-                }
-
-                var methodInfo = GetMethodInfo(context);
-                if (methodInfo?.DescendantNodes == null)
-                {
-                    return false;
-                }
-
-                return methodInfo.DescendantNodes.Any(
-                    node =>
-                        node.IsKind(SyntaxKind.IdentifierName)
-                        && ((IdentifierNameSyntax)node).Identifier.ValueText == parameterSymbol.Name
-                        && parameterSymbol.Equals(methodInfo.SemanticModel.GetSymbolInfo(node).Symbol));
-            };
-
-        private static MethodInfo GetMethodInfo(MethodDeclarationContext context)
+        if (context.MethodSymbol.IsTopLevelMain())
         {
-            if (context.MethodSymbol.IsTopLevelMain())
-            {
-                var declaration = context.MethodSymbol
-                                         .DeclaringSyntaxReferences
-                                         .Select(r => r.GetSyntax())
-                                         .OfType<CompilationUnitSyntax>()
-                                         .First();
+            var declaration = context.MethodSymbol
+                                     .DeclaringSyntaxReferences
+                                     .Select(r => r.GetSyntax())
+                                     .OfType<CompilationUnitSyntax>()
+                                     .First();
 
-                return new MethodInfo(context.GetSemanticModel(declaration), declaration.GetTopLevelMainBody().SelectMany(x => x.DescendantNodes()));
-            }
-            else
-            {
-                var declaration = context.MethodSymbol
-                                         .DeclaringSyntaxReferences
-                                         .Select(r => r.GetSyntax())
-                                         .OfType<BaseMethodDeclarationSyntax>()
-                                         .FirstOrDefault(declaration => declaration.HasBodyOrExpressionBody());
-                if (declaration == null)
-                {
-                    return null;
-                }
-
-                return new MethodInfo(
-                    context.GetSemanticModel(declaration),
-                    declaration.Body?.DescendantNodes() ?? declaration.ExpressionBody()?.DescendantNodes() ?? Enumerable.Empty<SyntaxNode>());
-            }
+            return new MethodInfo(context.GetSemanticModel(declaration), declaration.GetTopLevelMainBody().SelectMany(x => x.DescendantNodes()));
         }
-
-        protected override SyntaxToken? GetMethodIdentifier(SyntaxNode methodDeclaration) =>
-            methodDeclaration switch
-            {
-                MethodDeclarationSyntax method => method.Identifier,
-                ConstructorDeclarationSyntax constructor => constructor.Identifier,
-                DestructorDeclarationSyntax destructor => destructor.Identifier,
-                OperatorDeclarationSyntax op => op.OperatorToken,
-                _ => methodDeclaration?.Parent.Parent switch // Accessors
-                {
-                    EventDeclarationSyntax e => e.Identifier,
-                    PropertyDeclarationSyntax p => p.Identifier,
-                    IndexerDeclarationSyntax i => i.ThisKeyword,
-                    _ => null
-                }
-            };
-
-        private sealed class MethodInfo
+        else
         {
-            public SemanticModel SemanticModel { get; }
-
-            public IEnumerable<SyntaxNode> DescendantNodes { get; }
-
-            public MethodInfo(SemanticModel model, IEnumerable<SyntaxNode> descendantNodes)
+            var declaration = context.MethodSymbol
+                                     .DeclaringSyntaxReferences
+                                     .Select(r => r.GetSyntax())
+                                     .OfType<BaseMethodDeclarationSyntax>()
+                                     .FirstOrDefault(declaration => declaration.HasBodyOrExpressionBody());
+            if (declaration == null)
             {
-                SemanticModel = model;
-                DescendantNodes = descendantNodes;
+                return null;
             }
+
+            return new MethodInfo(
+                context.GetSemanticModel(declaration),
+                declaration.Body?.DescendantNodes() ?? declaration.ExpressionBody()?.DescendantNodes() ?? Enumerable.Empty<SyntaxNode>());
+        }
+    }
+
+    protected override SyntaxToken? GetMethodIdentifier(SyntaxNode methodDeclaration) =>
+        methodDeclaration switch
+        {
+            MethodDeclarationSyntax method => method.Identifier,
+            ConstructorDeclarationSyntax constructor => constructor.Identifier,
+            DestructorDeclarationSyntax destructor => destructor.Identifier,
+            OperatorDeclarationSyntax op => op.OperatorToken,
+            _ => methodDeclaration?.Parent.Parent switch // Accessors
+            {
+                EventDeclarationSyntax e => e.Identifier,
+                PropertyDeclarationSyntax p => p.Identifier,
+                IndexerDeclarationSyntax i => i.ThisKeyword,
+                _ => null
+            }
+        };
+
+    private sealed class MethodInfo
+    {
+        public SemanticModel SemanticModel { get; }
+
+        public IEnumerable<SyntaxNode> DescendantNodes { get; }
+
+        public MethodInfo(SemanticModel model, IEnumerable<SyntaxNode> descendantNodes)
+        {
+            SemanticModel = model;
+            DescendantNodes = descendantNodes;
         }
     }
 }

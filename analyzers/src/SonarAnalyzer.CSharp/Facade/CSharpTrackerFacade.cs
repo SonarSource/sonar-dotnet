@@ -20,17 +20,16 @@
 
 using SonarAnalyzer.Helpers.Trackers;
 
-namespace SonarAnalyzer.Helpers.Facade
+namespace SonarAnalyzer.Helpers.Facade;
+
+internal sealed class CSharpTrackerFacade : ITrackerFacade<SyntaxKind>
 {
-    internal sealed class CSharpTrackerFacade : ITrackerFacade<SyntaxKind>
-    {
-        public ArgumentTracker<SyntaxKind> Argument { get; } = new CSharpArgumentTracker();
-        public BaseTypeTracker<SyntaxKind> BaseType { get; } = new CSharpBaseTypeTracker();
-        public ElementAccessTracker<SyntaxKind> ElementAccess { get; } = new CSharpElementAccessTracker();
-        public FieldAccessTracker<SyntaxKind> FieldAccess { get; } = new CSharpFieldAccessTracker();
-        public InvocationTracker<SyntaxKind> Invocation { get; } = new CSharpInvocationTracker();
-        public MethodDeclarationTracker<SyntaxKind> MethodDeclaration { get; } = new CSharpMethodDeclarationTracker();
-        public ObjectCreationTracker<SyntaxKind> ObjectCreation { get; } = new CSharpObjectCreationTracker();
-        public PropertyAccessTracker<SyntaxKind> PropertyAccess { get; } = new CSharpPropertyAccessTracker();
-    }
+    public ArgumentTracker<SyntaxKind> Argument { get; } = new CSharpArgumentTracker();
+    public BaseTypeTracker<SyntaxKind> BaseType { get; } = new CSharpBaseTypeTracker();
+    public ElementAccessTracker<SyntaxKind> ElementAccess { get; } = new CSharpElementAccessTracker();
+    public FieldAccessTracker<SyntaxKind> FieldAccess { get; } = new CSharpFieldAccessTracker();
+    public InvocationTracker<SyntaxKind> Invocation { get; } = new CSharpInvocationTracker();
+    public MethodDeclarationTracker<SyntaxKind> MethodDeclaration { get; } = new CSharpMethodDeclarationTracker();
+    public ObjectCreationTracker<SyntaxKind> ObjectCreation { get; } = new CSharpObjectCreationTracker();
+    public PropertyAccessTracker<SyntaxKind> PropertyAccess { get; } = new CSharpPropertyAccessTracker();
 }

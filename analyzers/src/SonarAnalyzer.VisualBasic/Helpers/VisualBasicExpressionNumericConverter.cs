@@ -18,29 +18,28 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+internal class VisualBasicExpressionNumericConverter : ExpressionNumericConverterBase<LiteralExpressionSyntax, UnaryExpressionSyntax>
 {
-    internal class VisualBasicExpressionNumericConverter : ExpressionNumericConverterBase<LiteralExpressionSyntax, UnaryExpressionSyntax>
+    private static readonly ISet<SyntaxKind> SupportedOperatorTokens = new HashSet<SyntaxKind>
     {
-        private static readonly ISet<SyntaxKind> SupportedOperatorTokens = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.MinusToken,
-            SyntaxKind.PlusToken
-        };
+        SyntaxKind.MinusToken,
+        SyntaxKind.PlusToken
+    };
 
-        protected override object TokenValue(LiteralExpressionSyntax literalExpression) =>
-            literalExpression.Token.Value;
+    protected override object TokenValue(LiteralExpressionSyntax literalExpression) =>
+        literalExpression.Token.Value;
 
-        protected override SyntaxNode Operand(UnaryExpressionSyntax unaryExpression) =>
-            unaryExpression.Operand;
+    protected override SyntaxNode Operand(UnaryExpressionSyntax unaryExpression) =>
+        unaryExpression.Operand;
 
-        protected override bool IsSupportedOperator(UnaryExpressionSyntax unaryExpression) =>
-            SupportedOperatorTokens.Contains(unaryExpression.OperatorToken.Kind());
+    protected override bool IsSupportedOperator(UnaryExpressionSyntax unaryExpression) =>
+        SupportedOperatorTokens.Contains(unaryExpression.OperatorToken.Kind());
 
-        protected override bool IsMinusOperator(UnaryExpressionSyntax unaryExpression) =>
-            unaryExpression.OperatorToken.Kind() == SyntaxKind.MinusToken;
+    protected override bool IsMinusOperator(UnaryExpressionSyntax unaryExpression) =>
+        unaryExpression.OperatorToken.Kind() == SyntaxKind.MinusToken;
 
-        protected override SyntaxNode RemoveParentheses(SyntaxNode expression) =>
-            expression.RemoveParentheses();
-    }
+    protected override SyntaxNode RemoveParentheses(SyntaxNode expression) =>
+        expression.RemoveParentheses();
 }

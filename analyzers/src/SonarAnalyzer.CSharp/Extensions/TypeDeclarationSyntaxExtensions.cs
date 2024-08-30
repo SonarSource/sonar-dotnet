@@ -18,46 +18,45 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Extensions;
+
+public static class TypeDeclarationSyntaxExtensions
 {
-    public static class TypeDeclarationSyntaxExtensions
+    /// <summary>
+    /// Returns a union of all the methods and local functions from a given type declaration.
+    /// </summary>
+    public static IEnumerable<IMethodDeclaration> GetMethodDeclarations(this TypeDeclarationSyntax typeDeclaration) =>
+        typeDeclaration.Members
+                       .OfType<MethodDeclarationSyntax>()
+                       .SelectMany(method => GetLocalFunctions(method).Union(new List<IMethodDeclaration> { MethodDeclarationFactory.Create(method) }));
+
+    private static IEnumerable<IMethodDeclaration> GetLocalFunctions(MethodDeclarationSyntax methodDeclaration) =>
+        methodDeclaration.DescendantNodes()
+                         .Where(member => member.IsKind(SyntaxKindEx.LocalFunctionStatement))
+                         .Select(member => MethodDeclarationFactory.Create(member));
+
+    public static IMethodSymbol PrimaryConstructor(this TypeDeclarationSyntax typeDeclaration, SemanticModel semanticModel)
     {
-        /// <summary>
-        /// Returns a union of all the methods and local functions from a given type declaration.
-        /// </summary>
-        public static IEnumerable<IMethodDeclaration> GetMethodDeclarations(this TypeDeclarationSyntax typeDeclaration) =>
-            typeDeclaration.Members
-                           .OfType<MethodDeclarationSyntax>()
-                           .SelectMany(method => GetLocalFunctions(method).Union(new List<IMethodDeclaration> { MethodDeclarationFactory.Create(method) }));
-
-        private static IEnumerable<IMethodDeclaration> GetLocalFunctions(MethodDeclarationSyntax methodDeclaration) =>
-            methodDeclaration.DescendantNodes()
-                             .Where(member => member.IsKind(SyntaxKindEx.LocalFunctionStatement))
-                             .Select(member => MethodDeclarationFactory.Create(member));
-
-        public static IMethodSymbol PrimaryConstructor(this TypeDeclarationSyntax typeDeclaration, SemanticModel semanticModel)
+        if (ParameterList(typeDeclaration) is { } parameterList)
         {
-            if (ParameterList(typeDeclaration) is { } parameterList)
-            {
-                return parameterList is { Parameters: { Count: > 0 } parameters } && parameters[0] is { Identifier.RawKind: not (int)SyntaxKind.ArgListKeyword } parameter0
-                    ? semanticModel.GetDeclaredSymbol(parameter0)?.ContainingSymbol as IMethodSymbol
-                    : semanticModel.GetDeclaredSymbol(typeDeclaration).GetMembers(".ctor").OfType<IMethodSymbol>().FirstOrDefault(m => m is
-                    {
-                        MethodKind: MethodKind.Constructor,
-                        Parameters.Length: 0,
-                    });
-            }
-
-            return null;
+            return parameterList is { Parameters: { Count: > 0 } parameters } && parameters[0] is { Identifier.RawKind: not (int)SyntaxKind.ArgListKeyword } parameter0
+                ? semanticModel.GetDeclaredSymbol(parameter0)?.ContainingSymbol as IMethodSymbol
+                : semanticModel.GetDeclaredSymbol(typeDeclaration).GetMembers(".ctor").OfType<IMethodSymbol>().FirstOrDefault(m => m is
+                {
+                    MethodKind: MethodKind.Constructor,
+                    Parameters.Length: 0,
+                });
         }
 
-        public static ParameterListSyntax ParameterList(this TypeDeclarationSyntax typeDeclaration) =>
-            typeDeclaration.Kind() switch
-            {
-                SyntaxKind.ClassDeclaration => ((ClassDeclarationSyntaxWrapper)typeDeclaration).ParameterList,
-                SyntaxKind.StructDeclaration => ((StructDeclarationSyntaxWrapper)typeDeclaration).ParameterList,
-                SyntaxKindEx.RecordDeclaration or SyntaxKindEx.RecordStructDeclaration => ((RecordDeclarationSyntaxWrapper)typeDeclaration).ParameterList,
-                _ => default,
-            };
+        return null;
     }
+
+    public static ParameterListSyntax ParameterList(this TypeDeclarationSyntax typeDeclaration) =>
+        typeDeclaration.Kind() switch
+        {
+            SyntaxKind.ClassDeclaration => ((ClassDeclarationSyntaxWrapper)typeDeclaration).ParameterList,
+            SyntaxKind.StructDeclaration => ((StructDeclarationSyntaxWrapper)typeDeclaration).ParameterList,
+            SyntaxKindEx.RecordDeclaration or SyntaxKindEx.RecordStructDeclaration => ((RecordDeclarationSyntaxWrapper)typeDeclaration).ParameterList,
+            _ => default,
+        };
 }

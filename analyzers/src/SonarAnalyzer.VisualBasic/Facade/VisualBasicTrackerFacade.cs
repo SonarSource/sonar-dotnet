@@ -20,17 +20,16 @@
 
 using SonarAnalyzer.Helpers.Trackers;
 
-namespace SonarAnalyzer.Helpers.Facade
+namespace SonarAnalyzer.Helpers.Facade;
+
+internal sealed class VisualBasicTrackerFacade : ITrackerFacade<SyntaxKind>
 {
-    internal sealed class VisualBasicTrackerFacade : ITrackerFacade<SyntaxKind>
-    {
-        public ArgumentTracker<SyntaxKind> Argument => new VisualBasicArgumentTracker();
-        public BaseTypeTracker<SyntaxKind> BaseType { get; } = new VisualBasicBaseTypeTracker();
-        public ElementAccessTracker<SyntaxKind> ElementAccess { get; } = new VisualBasicElementAccessTracker();
-        public FieldAccessTracker<SyntaxKind> FieldAccess { get; } = new VisualBasicFieldAccessTracker();
-        public InvocationTracker<SyntaxKind> Invocation { get; } = new VisualBasicInvocationTracker();
-        public MethodDeclarationTracker<SyntaxKind> MethodDeclaration { get; } = new VisualBasicMethodDeclarationTracker();
-        public ObjectCreationTracker<SyntaxKind> ObjectCreation { get; } = new VisualBasicObjectCreationTracker();
-        public PropertyAccessTracker<SyntaxKind> PropertyAccess { get; } = new VisualBasicPropertyAccessTracker();
-    }
+    public ArgumentTracker<SyntaxKind> Argument => new VisualBasicArgumentTracker();
+    public BaseTypeTracker<SyntaxKind> BaseType { get; } = new VisualBasicBaseTypeTracker();
+    public ElementAccessTracker<SyntaxKind> ElementAccess { get; } = new VisualBasicElementAccessTracker();
+    public FieldAccessTracker<SyntaxKind> FieldAccess { get; } = new VisualBasicFieldAccessTracker();
+    public InvocationTracker<SyntaxKind> Invocation { get; } = new VisualBasicInvocationTracker();
+    public MethodDeclarationTracker<SyntaxKind> MethodDeclaration { get; } = new VisualBasicMethodDeclarationTracker();
+    public ObjectCreationTracker<SyntaxKind> ObjectCreation { get; } = new VisualBasicObjectCreationTracker();
+    public PropertyAccessTracker<SyntaxKind> PropertyAccess { get; } = new VisualBasicPropertyAccessTracker();
 }

@@ -20,63 +20,62 @@
 
 using SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.Relationships
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Relationships;
+
+public sealed class ValueEqualsRelationship : EqualsRelationship
 {
-    public sealed class ValueEqualsRelationship : EqualsRelationship
+    public ValueEqualsRelationship(SymbolicValue leftOperand, SymbolicValue rightOperand)
+        : base(leftOperand, rightOperand)
     {
-        public ValueEqualsRelationship(SymbolicValue leftOperand, SymbolicValue rightOperand)
-            : base(leftOperand, rightOperand)
+    }
+
+    internal override bool IsContradicting(IEnumerable<BinaryRelationship> relationships)
+    {
+        var isNotEqContradicting = relationships
+            .OfType<ValueNotEqualsRelationship>()
+            .Any(rel => AreOperandsMatching(rel));
+
+        if (isNotEqContradicting)
         {
+            return true;
         }
 
-        internal override bool IsContradicting(IEnumerable<BinaryRelationship> relationships)
-        {
-            var isNotEqContradicting = relationships
-                .OfType<ValueNotEqualsRelationship>()
-                .Any(rel => AreOperandsMatching(rel));
+        var isComparisonContradicting = relationships
+            .OfType<ComparisonRelationship>()
+            .Where(c => c.ComparisonKind == SymbolicComparisonKind.Less)
+            .Any(c => AreOperandsMatching(c));
 
-            if (isNotEqContradicting)
+        return isComparisonContradicting;
+    }
+
+    public override BinaryRelationship Negate() =>
+        new ValueNotEqualsRelationship(LeftOperand, RightOperand);
+
+    public override string ToString() => $"Eq({LeftOperand}, {RightOperand})";
+
+    internal override BinaryRelationship CreateNew(SymbolicValue leftOperand, SymbolicValue rightOperand) =>
+        new ValueEqualsRelationship(leftOperand, rightOperand);
+
+    internal override IEnumerable<BinaryRelationship> GetTransitiveRelationships(IEnumerable<BinaryRelationship> relationships)
+    {
+        foreach (var other in relationships)
+        {
+            if (other is EqualsRelationship equals)
             {
-                return true;
+                var transitive = ComputeTransitiveRelationship(equals, this);
+                if (transitive != null)
+                {
+                    yield return transitive;
+                }
             }
 
-            var isComparisonContradicting = relationships
-                .OfType<ComparisonRelationship>()
-                .Where(c => c.ComparisonKind == SymbolicComparisonKind.Less)
-                .Any(c => AreOperandsMatching(c));
-
-            return isComparisonContradicting;
-        }
-
-        public override BinaryRelationship Negate() =>
-            new ValueNotEqualsRelationship(LeftOperand, RightOperand);
-
-        public override string ToString() => $"Eq({LeftOperand}, {RightOperand})";
-
-        internal override BinaryRelationship CreateNew(SymbolicValue leftOperand, SymbolicValue rightOperand) =>
-            new ValueEqualsRelationship(leftOperand, rightOperand);
-
-        internal override IEnumerable<BinaryRelationship> GetTransitiveRelationships(IEnumerable<BinaryRelationship> relationships)
-        {
-            foreach (var other in relationships)
+            if (other is ComparisonRelationship ||
+                other is ValueNotEqualsRelationship)
             {
-                if (other is EqualsRelationship equals)
+                var transitive = ComputeTransitiveRelationship(other, other);
+                if (transitive != null)
                 {
-                    var transitive = ComputeTransitiveRelationship(equals, this);
-                    if (transitive != null)
-                    {
-                        yield return transitive;
-                    }
-                }
-
-                if (other is ComparisonRelationship ||
-                    other is ValueNotEqualsRelationship)
-                {
-                    var transitive = ComputeTransitiveRelationship(other, other);
-                    if (transitive != null)
-                    {
-                        yield return transitive;
-                    }
+                    yield return transitive;
                 }
             }
         }

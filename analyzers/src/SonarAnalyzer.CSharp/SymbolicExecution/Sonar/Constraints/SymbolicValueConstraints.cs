@@ -20,98 +20,97 @@
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
+
+public class SymbolicValueConstraints
 {
-    public class SymbolicValueConstraints
+    private readonly Dictionary<Type, SymbolicConstraint> constraints = new Dictionary<Type, SymbolicConstraint>();
+    private readonly int hashCode;
+
+    public static SymbolicValueConstraints Create(SymbolicConstraint constraint) =>
+        new SymbolicValueConstraints(constraint);
+
+    private SymbolicValueConstraints(SymbolicConstraint constraint)
     {
-        private readonly Dictionary<Type, SymbolicConstraint> constraints = new Dictionary<Type, SymbolicConstraint>();
-        private readonly int hashCode;
+        SetConstraint(constraint, constraints);
+        hashCode = ComputeHashcode();
+    }
 
-        public static SymbolicValueConstraints Create(SymbolicConstraint constraint) =>
-            new SymbolicValueConstraints(constraint);
+    private SymbolicValueConstraints(Dictionary<Type, SymbolicConstraint> constraints)
+    {
+        this.constraints = constraints;
+        hashCode = ComputeHashcode();
+    }
 
-        private SymbolicValueConstraints(SymbolicConstraint constraint)
-        {
-            SetConstraint(constraint, constraints);
-            hashCode = ComputeHashcode();
-        }
+    public override int GetHashCode() => hashCode;
 
-        private SymbolicValueConstraints(Dictionary<Type, SymbolicConstraint> constraints)
-        {
-            this.constraints = constraints;
-            hashCode = ComputeHashcode();
-        }
+    public override bool Equals(object obj) =>
+        obj is SymbolicValueConstraints other
+        && constraints.DictionaryEquals(other.constraints);
 
-        public override int GetHashCode() => hashCode;
+    // for debugging and error logging
+    public override string ToString() =>
+        string.Join(", ", constraints.Values);
 
-        public override bool Equals(object obj) =>
-            obj is SymbolicValueConstraints other
-            && constraints.DictionaryEquals(other.constraints);
+    internal IEnumerable<SymbolicConstraint> GetConstraints() => constraints.Values;
 
-        // for debugging and error logging
-        public override string ToString() =>
-            string.Join(", ", constraints.Values);
+    internal SymbolicValueConstraints WithConstraint(SymbolicConstraint constraint)
+    {
+        var constraintsCopy = new Dictionary<Type, SymbolicConstraint>(constraints);
+        SetConstraint(constraint, constraintsCopy);
 
-        internal IEnumerable<SymbolicConstraint> GetConstraints() => constraints.Values;
+        return new SymbolicValueConstraints(constraintsCopy);
+    }
 
-        internal SymbolicValueConstraints WithConstraint(SymbolicConstraint constraint)
+    internal SymbolicValueConstraints WithoutConstraint(SymbolicConstraint constraint)
+    {
+        if (constraints.ContainsKey(constraint.GetType()))
         {
             var constraintsCopy = new Dictionary<Type, SymbolicConstraint>(constraints);
-            SetConstraint(constraint, constraintsCopy);
-
+            constraintsCopy.Remove(constraint.GetType());
             return new SymbolicValueConstraints(constraintsCopy);
         }
-
-        internal SymbolicValueConstraints WithoutConstraint(SymbolicConstraint constraint)
-        {
-            if (constraints.ContainsKey(constraint.GetType()))
-            {
-                var constraintsCopy = new Dictionary<Type, SymbolicConstraint>(constraints);
-                constraintsCopy.Remove(constraint.GetType());
-                return new SymbolicValueConstraints(constraintsCopy);
-            }
-            return this;
-        }
-
-        internal T GetConstraintOrDefault<T>()
-            where T : SymbolicConstraint =>
-            constraints.TryGetValue(typeof(T), out var constraint)
-                ? (T)constraint
-                : null;
-
-        internal bool HasConstraint(SymbolicConstraint constraint) =>
-            constraints.TryGetValue(constraint.GetType(), out var storedConstraint)
-            && storedConstraint == constraint;
-
-        internal bool HasConstraint<T>() =>
-            constraints.ContainsKey(typeof(T));
-
-        private static void SetConstraint(SymbolicConstraint constraint,
-            IDictionary<Type, SymbolicConstraint> constraints)
-        {
-            constraints[constraint.GetType()] = constraint;
-
-            if (constraint is BoolConstraint)
-            {
-                constraints[typeof(ObjectConstraint)] = ObjectConstraint.NotNull;
-                if (constraints.ContainsKey(typeof(NullableConstraint)))
-                {
-                    constraints[typeof(NullableConstraint)] = NullableConstraint.HasValue;
-                }
-            }
-        }
-
-        private int ComputeHashcode()
-        {
-            var hash = 17 * constraints.Count;
-
-            foreach (var item in constraints)
-            {
-                hash = hash * 23 + item.Value.GetHashCode();
-            }
-
-            return hash;
-        }
-
+        return this;
     }
+
+    internal T GetConstraintOrDefault<T>()
+        where T : SymbolicConstraint =>
+        constraints.TryGetValue(typeof(T), out var constraint)
+            ? (T)constraint
+            : null;
+
+    internal bool HasConstraint(SymbolicConstraint constraint) =>
+        constraints.TryGetValue(constraint.GetType(), out var storedConstraint)
+        && storedConstraint == constraint;
+
+    internal bool HasConstraint<T>() =>
+        constraints.ContainsKey(typeof(T));
+
+    private static void SetConstraint(SymbolicConstraint constraint,
+        IDictionary<Type, SymbolicConstraint> constraints)
+    {
+        constraints[constraint.GetType()] = constraint;
+
+        if (constraint is BoolConstraint)
+        {
+            constraints[typeof(ObjectConstraint)] = ObjectConstraint.NotNull;
+            if (constraints.ContainsKey(typeof(NullableConstraint)))
+            {
+                constraints[typeof(NullableConstraint)] = NullableConstraint.HasValue;
+            }
+        }
+    }
+
+    private int ComputeHashcode()
+    {
+        var hash = 17 * constraints.Count;
+
+        foreach (var item in constraints)
+        {
+            hash = hash * 23 + item.Value.GetHashCode();
+        }
+
+        return hash;
+    }
+
 }

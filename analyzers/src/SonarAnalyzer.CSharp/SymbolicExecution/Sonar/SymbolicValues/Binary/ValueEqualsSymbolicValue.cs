@@ -20,23 +20,22 @@
 
 using SonarAnalyzer.SymbolicExecution.Sonar.Relationships;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
+namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
+
+public class ValueEqualsSymbolicValue : EqualsSymbolicValue
 {
-    public class ValueEqualsSymbolicValue : EqualsSymbolicValue
+    public ValueEqualsSymbolicValue(SymbolicValue leftOperand, SymbolicValue rightOperand)
+        : base(leftOperand, rightOperand)
     {
-        public ValueEqualsSymbolicValue(SymbolicValue leftOperand, SymbolicValue rightOperand)
-            : base(leftOperand, rightOperand)
-        {
-        }
+    }
 
-        protected override BinaryRelationship GetRelationship(SymbolicValue left, SymbolicValue right)
-        {
-            return new ValueEqualsRelationship(left, right);
-        }
+    protected override BinaryRelationship GetRelationship(SymbolicValue left, SymbolicValue right)
+    {
+        return new ValueEqualsRelationship(left, right);
+    }
 
-        public override string ToString()
-        {
-            return $"Eq({LeftOperand}, {RightOperand})";
-        }
+    public override string ToString()
+    {
+        return $"Eq({LeftOperand}, {RightOperand})";
     }
 }

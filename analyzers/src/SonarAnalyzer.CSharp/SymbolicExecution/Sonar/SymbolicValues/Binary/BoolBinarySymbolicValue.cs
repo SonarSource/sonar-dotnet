@@ -20,36 +20,35 @@
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
+namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
+
+public abstract class BoolBinarySymbolicValue : BinarySymbolicValue
 {
-    public abstract class BoolBinarySymbolicValue : BinarySymbolicValue
+    // NestedSize:  4, Created ProgramStates:   8, TrySetConstraint visits:    11, Time:  0.03s
+    // NestedSize:  8, Created ProgramStates: 128, TrySetConstraint visits:   247, Time:  0.2s
+    // NestedSize: 12, Created ProgramStates: 256, TrySetConstraint visits:  4083, Time:  3.0s
+    // NestedSize: 16, Created ProgramStates: 256, TrySetConstraint visits: 65519, Time: 46.2s
+    private const int NestedSizeLimit = 8;
+
+    protected abstract IEnumerable<ProgramState> TrySetBoolConstraint(BoolConstraint constraint, ProgramState programState);
+
+    protected BoolBinarySymbolicValue(SymbolicValue leftOperand, SymbolicValue rightOperand) : base(leftOperand, rightOperand) { }
+
+    public sealed override IEnumerable<ProgramState> TrySetConstraint(SymbolicConstraint constraint, ProgramState programState)
     {
-        // NestedSize:  4, Created ProgramStates:   8, TrySetConstraint visits:    11, Time:  0.03s
-        // NestedSize:  8, Created ProgramStates: 128, TrySetConstraint visits:   247, Time:  0.2s
-        // NestedSize: 12, Created ProgramStates: 256, TrySetConstraint visits:  4083, Time:  3.0s
-        // NestedSize: 16, Created ProgramStates: 256, TrySetConstraint visits: 65519, Time: 46.2s
-        private const int NestedSizeLimit = 8;
-
-        protected abstract IEnumerable<ProgramState> TrySetBoolConstraint(BoolConstraint constraint, ProgramState programState);
-
-        protected BoolBinarySymbolicValue(SymbolicValue leftOperand, SymbolicValue rightOperand) : base(leftOperand, rightOperand) { }
-
-        public sealed override IEnumerable<ProgramState> TrySetConstraint(SymbolicConstraint constraint, ProgramState programState)
+        if (constraint is BoolConstraint boolConstraint)
         {
-            if (constraint is BoolConstraint boolConstraint)
-            {
-                return NestedSize() > NestedSizeLimit
-                    ? throw new TooManyInternalStatesException()
-                    : ThrowIfTooMany(TrySetBoolConstraint(boolConstraint, programState));
-            }
-            else
-            {
-                return new[] { programState };
-            }
+            return NestedSize() > NestedSizeLimit
+                ? throw new TooManyInternalStatesException()
+                : ThrowIfTooMany(TrySetBoolConstraint(boolConstraint, programState));
         }
-
-        private int NestedSize() =>
-            (LeftOperand is BoolBinarySymbolicValue left ? left.NestedSize() : 1)
-            + (RightOperand is BoolBinarySymbolicValue right ? right.NestedSize() : 1);
+        else
+        {
+            return new[] { programState };
+        }
     }
+
+    private int NestedSize() =>
+        (LeftOperand is BoolBinarySymbolicValue left ? left.NestedSize() : 1)
+        + (RightOperand is BoolBinarySymbolicValue right ? right.NestedSize() : 1);
 }

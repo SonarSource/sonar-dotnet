@@ -18,13 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Extensions;
+
+public static class ArgumentListSyntaxExtensions
 {
-    public static class ArgumentListSyntaxExtensions
-    {
-        public static ExpressionSyntax Get(this ArgumentListSyntax argumentList, int index) =>
-            argumentList != null && argumentList.Arguments.Count > index
-                ? argumentList.Arguments[index].Expression.RemoveParentheses()
-                : null;
-    }
+    public static ExpressionSyntax Get(this ArgumentListSyntax argumentList, int index) =>
+        argumentList != null && argumentList.Arguments.Count > index
+            ? argumentList.Arguments[index].Expression.RemoveParentheses()
+            : null;
 }

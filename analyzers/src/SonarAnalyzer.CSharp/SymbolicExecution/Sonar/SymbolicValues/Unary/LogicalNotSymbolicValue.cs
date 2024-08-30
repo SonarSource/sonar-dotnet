@@ -20,28 +20,27 @@
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
+namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
+
+public class LogicalNotSymbolicValue : UnarySymbolicValue
 {
-    public class LogicalNotSymbolicValue : UnarySymbolicValue
+    public LogicalNotSymbolicValue(SymbolicValue operand)
+        : base(operand)
     {
-        public LogicalNotSymbolicValue(SymbolicValue operand)
-            : base(operand)
+    }
+
+    public override IEnumerable<ProgramState> TrySetConstraint(SymbolicConstraint constraint, ProgramState programState)
+    {
+        if (!(constraint is BoolConstraint boolConstraint))
         {
+            return new[] { programState };
         }
 
-        public override IEnumerable<ProgramState> TrySetConstraint(SymbolicConstraint constraint, ProgramState programState)
-        {
-            if (!(constraint is BoolConstraint boolConstraint))
-            {
-                return new[] { programState };
-            }
+        return Operand.TrySetConstraint(boolConstraint.Opposite, programState);
+    }
 
-            return Operand.TrySetConstraint(boolConstraint.Opposite, programState);
-        }
-
-        public override string ToString()
-        {
-            return "!" + Operand;
-        }
+    public override string ToString()
+    {
+        return "!" + Operand;
     }
 }

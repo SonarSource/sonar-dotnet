@@ -18,12 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar
-{
-    internal interface ISymbolicExecutionAnalyzer
-    {
-        IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; }
+namespace SonarAnalyzer.SymbolicExecution.Sonar;
 
-        ISymbolicExecutionAnalysisContext CreateContext(SonarSyntaxNodeReportingContext context, SonarExplodedGraph explodedGraph);
-    }
+internal interface ISymbolicExecutionAnalyzer
+{
+    IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; }
+
+    ISymbolicExecutionAnalysisContext CreateContext(SonarSyntaxNodeReportingContext context, SonarExplodedGraph explodedGraph);
 }

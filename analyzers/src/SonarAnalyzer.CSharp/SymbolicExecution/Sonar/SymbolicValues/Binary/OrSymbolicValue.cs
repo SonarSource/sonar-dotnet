@@ -20,20 +20,19 @@
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
+namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
+
+public class OrSymbolicValue : BoolBinarySymbolicValue
 {
-    public class OrSymbolicValue : BoolBinarySymbolicValue
-    {
-        public OrSymbolicValue(SymbolicValue leftOperand, SymbolicValue rightOperand) : base(leftOperand, rightOperand) { }
+    public OrSymbolicValue(SymbolicValue leftOperand, SymbolicValue rightOperand) : base(leftOperand, rightOperand) { }
 
-        protected override IEnumerable<ProgramState> TrySetBoolConstraint(BoolConstraint constraint, ProgramState programState) =>
-            constraint == BoolConstraint.False
-                ? LeftOperand.TrySetConstraint(BoolConstraint.False, programState).SelectMany(ps => RightOperand.TrySetConstraint(BoolConstraint.False, ps))
-                : LeftOperand.TrySetConstraint(BoolConstraint.True, programState).SelectMany(ps => RightOperand.TrySetConstraint(BoolConstraint.False, ps))
-                    .Union(LeftOperand.TrySetConstraint(BoolConstraint.False, programState).SelectMany(ps => RightOperand.TrySetConstraint(BoolConstraint.True, ps)))
-                    .Union(LeftOperand.TrySetConstraint(BoolConstraint.True, programState).SelectMany(ps => RightOperand.TrySetConstraint(BoolConstraint.True, ps)));
+    protected override IEnumerable<ProgramState> TrySetBoolConstraint(BoolConstraint constraint, ProgramState programState) =>
+        constraint == BoolConstraint.False
+            ? LeftOperand.TrySetConstraint(BoolConstraint.False, programState).SelectMany(ps => RightOperand.TrySetConstraint(BoolConstraint.False, ps))
+            : LeftOperand.TrySetConstraint(BoolConstraint.True, programState).SelectMany(ps => RightOperand.TrySetConstraint(BoolConstraint.False, ps))
+                .Union(LeftOperand.TrySetConstraint(BoolConstraint.False, programState).SelectMany(ps => RightOperand.TrySetConstraint(BoolConstraint.True, ps)))
+                .Union(LeftOperand.TrySetConstraint(BoolConstraint.True, programState).SelectMany(ps => RightOperand.TrySetConstraint(BoolConstraint.True, ps)));
 
-        public override string ToString() =>
-            LeftOperand + " | " + RightOperand;
-    }
+    public override string ToString() =>
+        LeftOperand + " | " + RightOperand;
 }

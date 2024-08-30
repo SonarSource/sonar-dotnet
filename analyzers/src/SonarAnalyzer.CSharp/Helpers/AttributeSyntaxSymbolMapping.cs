@@ -18,23 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+internal class AttributeSyntaxSymbolMapping
 {
-    internal class AttributeSyntaxSymbolMapping
+    public AttributeSyntax SyntaxNode { get; }
+    public IMethodSymbol Symbol { get; }
+
+    private AttributeSyntaxSymbolMapping(AttributeSyntax syntaxNode, IMethodSymbol symbol)
     {
-        public AttributeSyntax SyntaxNode { get; }
-        public IMethodSymbol Symbol { get; }
-
-        private AttributeSyntaxSymbolMapping(AttributeSyntax syntaxNode, IMethodSymbol symbol)
-        {
-            SyntaxNode = syntaxNode;
-            Symbol = symbol;
-        }
-
-        public static IEnumerable<AttributeSyntaxSymbolMapping> GetAttributesForParameter(ParameterSyntax parameter, SemanticModel semanticModel) =>
-            parameter.AttributeLists
-                     .SelectMany(al => al.Attributes)
-                     .Select(attr => new AttributeSyntaxSymbolMapping(attr, semanticModel.GetSymbolInfo(attr).Symbol as IMethodSymbol))
-                     .Where(attr => attr.Symbol != null);
+        SyntaxNode = syntaxNode;
+        Symbol = symbol;
     }
+
+    public static IEnumerable<AttributeSyntaxSymbolMapping> GetAttributesForParameter(ParameterSyntax parameter, SemanticModel semanticModel) =>
+        parameter.AttributeLists
+                 .SelectMany(al => al.Attributes)
+                 .Select(attr => new AttributeSyntaxSymbolMapping(attr, semanticModel.GetSymbolInfo(attr).Symbol as IMethodSymbol))
+                 .Where(attr => attr.Symbol != null);
 }

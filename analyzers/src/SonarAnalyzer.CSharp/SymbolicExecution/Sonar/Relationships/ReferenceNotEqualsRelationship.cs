@@ -18,43 +18,42 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.Relationships
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Relationships;
+
+public sealed class ReferenceNotEqualsRelationship : NotEqualsRelationship
 {
-    public sealed class ReferenceNotEqualsRelationship : NotEqualsRelationship
+    public ReferenceNotEqualsRelationship(SymbolicValue leftOperand, SymbolicValue rightOperand)
+        : base(leftOperand, rightOperand)
     {
-        public ReferenceNotEqualsRelationship(SymbolicValue leftOperand, SymbolicValue rightOperand)
-            : base(leftOperand, rightOperand)
-        {
-        }
+    }
 
-        internal override bool IsContradicting(IEnumerable<BinaryRelationship> relationships)
-        {
-            return relationships
-                .OfType<ReferenceEqualsRelationship>()
-                .Any(rel => AreOperandsMatching(rel));
-        }
+    internal override bool IsContradicting(IEnumerable<BinaryRelationship> relationships)
+    {
+        return relationships
+            .OfType<ReferenceEqualsRelationship>()
+            .Any(rel => AreOperandsMatching(rel));
+    }
 
-        public override BinaryRelationship Negate()
-        {
-            return new ReferenceEqualsRelationship(LeftOperand, RightOperand);
-        }
+    public override BinaryRelationship Negate()
+    {
+        return new ReferenceEqualsRelationship(LeftOperand, RightOperand);
+    }
 
-        public override string ToString()
-        {
-            return $"!RefEq({LeftOperand}, {RightOperand})";
-        }
+    public override string ToString()
+    {
+        return $"!RefEq({LeftOperand}, {RightOperand})";
+    }
 
-        internal override BinaryRelationship CreateNew(SymbolicValue leftOperand, SymbolicValue rightOperand)
-        {
-            return new ReferenceNotEqualsRelationship(leftOperand, rightOperand);
-        }
+    internal override BinaryRelationship CreateNew(SymbolicValue leftOperand, SymbolicValue rightOperand)
+    {
+        return new ReferenceNotEqualsRelationship(leftOperand, rightOperand);
+    }
 
-        internal override IEnumerable<BinaryRelationship> GetTransitiveRelationships(IEnumerable<BinaryRelationship> relationships)
-        {
-            return relationships
-                .OfType<ReferenceEqualsRelationship>()
-                .Select(other => ComputeTransitiveRelationship(other, this))
-                .WhereNotNull();
-        }
+    internal override IEnumerable<BinaryRelationship> GetTransitiveRelationships(IEnumerable<BinaryRelationship> relationships)
+    {
+        return relationships
+            .OfType<ReferenceEqualsRelationship>()
+            .Select(other => ComputeTransitiveRelationship(other, this))
+            .WhereNotNull();
     }
 }

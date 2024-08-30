@@ -20,43 +20,42 @@
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
-{
-    internal sealed class StringConstraint : SymbolicConstraint
-    {
-        public static readonly StringConstraint EmptyString = new(ConstraintKind.StringEmpty);
-        public static readonly StringConstraint FullString = new(ConstraintKind.StringFull);
-        public static readonly StringConstraint FullOrNullString = new(ConstraintKind.StringFullOrNull);
-        public static readonly StringConstraint WhiteSpaceString = new(ConstraintKind.StringWhiteSpace);
-        public static readonly StringConstraint NotWhiteSpaceString = new(ConstraintKind.StringNotWhiteSpace);
-        public static readonly StringConstraint FullNotWhiteSpaceString = new(ConstraintKind.StringFullNotWhiteSpace);
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 
-        // Currently FullOrNullString and NotWhiteSpaceString  is never set as a constraint. It is there to imply the opposite of EmptyString
-        public override SymbolicConstraint Opposite
+internal sealed class StringConstraint : SymbolicConstraint
+{
+    public static readonly StringConstraint EmptyString = new(ConstraintKind.StringEmpty);
+    public static readonly StringConstraint FullString = new(ConstraintKind.StringFull);
+    public static readonly StringConstraint FullOrNullString = new(ConstraintKind.StringFullOrNull);
+    public static readonly StringConstraint WhiteSpaceString = new(ConstraintKind.StringWhiteSpace);
+    public static readonly StringConstraint NotWhiteSpaceString = new(ConstraintKind.StringNotWhiteSpace);
+    public static readonly StringConstraint FullNotWhiteSpaceString = new(ConstraintKind.StringFullNotWhiteSpace);
+
+    // Currently FullOrNullString and NotWhiteSpaceString  is never set as a constraint. It is there to imply the opposite of EmptyString
+    public override SymbolicConstraint Opposite
+    {
+        get
         {
-            get
+            if (this == EmptyString)
             {
-                if (this == EmptyString)
-                {
-                    return FullOrNullString;
-                }
-                else if (this == WhiteSpaceString)
-                {
-                    return NotWhiteSpaceString;
-                }
-                else
-                {
-                    return null;
-                }
+                return FullOrNullString;
+            }
+            else if (this == WhiteSpaceString)
+            {
+                return NotWhiteSpaceString;
+            }
+            else
+            {
+                return null;
             }
         }
-
-        private StringConstraint(ConstraintKind kind) : base(kind) { }
-
-        public static bool IsNotNull(StringConstraint constraint) =>
-            constraint == FullString
-            || constraint == EmptyString
-            || constraint == WhiteSpaceString
-            || constraint == FullNotWhiteSpaceString;
     }
+
+    private StringConstraint(ConstraintKind kind) : base(kind) { }
+
+    public static bool IsNotNull(StringConstraint constraint) =>
+        constraint == FullString
+        || constraint == EmptyString
+        || constraint == WhiteSpaceString
+        || constraint == FullNotWhiteSpaceString;
 }

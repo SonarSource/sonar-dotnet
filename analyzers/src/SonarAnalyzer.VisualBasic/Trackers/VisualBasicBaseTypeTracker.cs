@@ -18,24 +18,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Trackers
-{
-    public class VisualBasicBaseTypeTracker : BaseTypeTracker<SyntaxKind>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-        protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.InheritsStatement, SyntaxKind.ImplementsStatement };
+namespace SonarAnalyzer.Helpers.Trackers;
 
-        protected override IEnumerable<SyntaxNode> GetBaseTypeNodes(SyntaxNode contextNode) =>
-            // VB has separate Inherits and Implements keywords so the base types
-            // are in separate lists under different types of syntax node.
-            // If a class both inherits and implements then this tracker will check
-            // the conditions against Inherits and Implements *separately*
-            // i.e. the conditions will be called twice
-            contextNode switch
-            {
-                InheritsStatementSyntax inherits => inherits.Types,
-                ImplementsStatementSyntax implements => implements.Types,
-                _ => Enumerable.Empty<SyntaxNode>(),
-            };
-    }
+public class VisualBasicBaseTypeTracker : BaseTypeTracker<SyntaxKind>
+{
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+    protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.InheritsStatement, SyntaxKind.ImplementsStatement };
+
+    protected override IEnumerable<SyntaxNode> GetBaseTypeNodes(SyntaxNode contextNode) =>
+        // VB has separate Inherits and Implements keywords so the base types
+        // are in separate lists under different types of syntax node.
+        // If a class both inherits and implements then this tracker will check
+        // the conditions against Inherits and Implements *separately*
+        // i.e. the conditions will be called twice
+        contextNode switch
+        {
+            InheritsStatementSyntax inherits => inherits.Types,
+            ImplementsStatementSyntax implements => implements.Types,
+            _ => Enumerable.Empty<SyntaxNode>(),
+        };
 }

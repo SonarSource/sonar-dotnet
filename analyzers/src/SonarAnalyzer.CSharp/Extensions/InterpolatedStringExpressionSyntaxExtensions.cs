@@ -18,14 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
-{
-    public static class InterpolatedStringExpressionSyntaxExtensions
-    {
-        public static string GetContentsText(this InterpolatedStringExpressionSyntax interpolatedStringExpression) =>
-            interpolatedStringExpression.Contents.JoinStr(null, content => content.ToString());
+namespace SonarAnalyzer.Extensions;
 
-        public static bool TryGetInterpolatedTextValue(this InterpolatedStringExpressionSyntax interpolatedStringExpression, SemanticModel semanticModel, out string interpolatedValue) =>
-            CsharpStringInterpolationConstantValueResolver.Instance.TryGetInterpolatedTextValue(interpolatedStringExpression, semanticModel, out interpolatedValue);
-    }
+public static class InterpolatedStringExpressionSyntaxExtensions
+{
+    public static string GetContentsText(this InterpolatedStringExpressionSyntax interpolatedStringExpression) =>
+        interpolatedStringExpression.Contents.JoinStr(null, content => content.ToString());
+
+    public static bool TryGetInterpolatedTextValue(this InterpolatedStringExpressionSyntax interpolatedStringExpression, SemanticModel semanticModel, out string interpolatedValue) =>
+        CsharpStringInterpolationConstantValueResolver.Instance.TryGetInterpolatedTextValue(interpolatedStringExpression, semanticModel, out interpolatedValue);
 }

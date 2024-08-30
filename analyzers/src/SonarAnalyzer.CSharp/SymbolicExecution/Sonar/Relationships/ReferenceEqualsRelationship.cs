@@ -18,42 +18,41 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.Relationships
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Relationships;
+
+public sealed class ReferenceEqualsRelationship : EqualsRelationship
 {
-    public sealed class ReferenceEqualsRelationship : EqualsRelationship
+    public ReferenceEqualsRelationship(SymbolicValue leftOperand, SymbolicValue rightOperand)
+        : base(leftOperand, rightOperand)
     {
-        public ReferenceEqualsRelationship(SymbolicValue leftOperand, SymbolicValue rightOperand)
-            : base(leftOperand, rightOperand)
-        {
-        }
+    }
 
-        internal override bool IsContradicting(IEnumerable<BinaryRelationship> relationships)
-        {
-            return relationships
-                .OfType<NotEqualsRelationship>()
-                .Any(rel => AreOperandsMatching(rel));
-        }
+    internal override bool IsContradicting(IEnumerable<BinaryRelationship> relationships)
+    {
+        return relationships
+            .OfType<NotEqualsRelationship>()
+            .Any(rel => AreOperandsMatching(rel));
+    }
 
-        public override BinaryRelationship Negate()
-        {
-            return new ReferenceNotEqualsRelationship(LeftOperand, RightOperand);
-        }
+    public override BinaryRelationship Negate()
+    {
+        return new ReferenceNotEqualsRelationship(LeftOperand, RightOperand);
+    }
 
-        public override string ToString()
-        {
-            return $"RefEq({LeftOperand}, {RightOperand})";
-        }
+    public override string ToString()
+    {
+        return $"RefEq({LeftOperand}, {RightOperand})";
+    }
 
-        internal override IEnumerable<BinaryRelationship> GetTransitiveRelationships(IEnumerable<BinaryRelationship> relationships)
-        {
-            return relationships
-                .Select(other => ComputeTransitiveRelationship(other, other))
-                .WhereNotNull();
-        }
+    internal override IEnumerable<BinaryRelationship> GetTransitiveRelationships(IEnumerable<BinaryRelationship> relationships)
+    {
+        return relationships
+            .Select(other => ComputeTransitiveRelationship(other, other))
+            .WhereNotNull();
+    }
 
-        internal override BinaryRelationship CreateNew(SymbolicValue leftOperand, SymbolicValue rightOperand)
-        {
-            return new ReferenceEqualsRelationship(leftOperand, rightOperand);
-        }
+    internal override BinaryRelationship CreateNew(SymbolicValue leftOperand, SymbolicValue rightOperand)
+    {
+        return new ReferenceEqualsRelationship(leftOperand, rightOperand);
     }
 }

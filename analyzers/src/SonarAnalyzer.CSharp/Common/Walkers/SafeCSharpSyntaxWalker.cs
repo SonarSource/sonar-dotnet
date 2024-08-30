@@ -18,27 +18,26 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Common.Walkers
+namespace SonarAnalyzer.Common.Walkers;
+
+public class SafeCSharpSyntaxWalker : CSharpSyntaxWalker, ISafeSyntaxWalker
 {
-    public class SafeCSharpSyntaxWalker : CSharpSyntaxWalker, ISafeSyntaxWalker
+    protected SafeCSharpSyntaxWalker() { }
+
+    protected SafeCSharpSyntaxWalker(SyntaxWalkerDepth depth) : base(depth) { }
+
+    public bool SafeVisit(SyntaxNode syntaxNode)
     {
-        protected SafeCSharpSyntaxWalker() { }
-
-        protected SafeCSharpSyntaxWalker(SyntaxWalkerDepth depth) : base(depth) { }
-
-        public bool SafeVisit(SyntaxNode syntaxNode)
+        try
         {
-            try
-            {
-                Visit(syntaxNode);
-                return true;
-            }
-            catch (InsufficientExecutionStackException)
-            {
-                // Roslyn walker overflows the stack when the depth of the call is around 2050.
-                // See https://github.com/SonarSource/sonar-dotnet/issues/2115
-                return false;
-            }
+            Visit(syntaxNode);
+            return true;
+        }
+        catch (InsufficientExecutionStackException)
+        {
+            // Roslyn walker overflows the stack when the depth of the call is around 2050.
+            // See https://github.com/SonarSource/sonar-dotnet/issues/2115
+            return false;
         }
     }
 }

@@ -18,14 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
-{
-    internal static class AttributeListSyntaxExtensions
-    {
-        public static IEnumerable<AttributeSyntax> GetAttributes(this SyntaxList<AttributeListSyntax> attributeLists, KnownType attributeKnownType, SemanticModel semanticModel) =>
-            attributeLists.SelectMany(x => x.Attributes).Where(x => x.IsKnownType(attributeKnownType, semanticModel));
+namespace SonarAnalyzer.Extensions;
 
-        public static IEnumerable<AttributeSyntax> GetAttributes(this SyntaxList<AttributeListSyntax> attributeLists, ImmutableArray<KnownType> attributeKnownTypes, SemanticModel semanticModel) =>
-            attributeLists.SelectMany(list => list.Attributes).Where(x => x.IsKnownType(attributeKnownTypes, semanticModel));
-    }
+internal static class AttributeListSyntaxExtensions
+{
+    public static IEnumerable<AttributeSyntax> GetAttributes(this SyntaxList<AttributeListSyntax> attributeLists, KnownType attributeKnownType, SemanticModel semanticModel) =>
+        attributeLists.SelectMany(x => x.Attributes).Where(x => x.IsKnownType(attributeKnownType, semanticModel));
+
+    public static IEnumerable<AttributeSyntax> GetAttributes(this SyntaxList<AttributeListSyntax> attributeLists, ImmutableArray<KnownType> attributeKnownTypes, SemanticModel semanticModel) =>
+        attributeLists.SelectMany(list => list.Attributes).Where(x => x.IsKnownType(attributeKnownTypes, semanticModel));
 }

@@ -18,19 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
-{
-    internal static class ParameterSyntaxExtensions
-    {
-        /// <summary>
-        /// Returns true if the parameter is of type string. For performance reasons the check is done at the syntax level.
-        /// </summary>
-        internal static bool IsString(this ParameterSyntax parameterSyntax) =>
-            IsString(parameterSyntax.Type.ToString());
+namespace SonarAnalyzer.Extensions;
 
-        private static bool IsString(string parameterTypeName) =>
-            parameterTypeName == "string" ||
-            parameterTypeName == "String" ||
-            parameterTypeName == "System.String";
-    }
+internal static class ParameterSyntaxExtensions
+{
+    /// <summary>
+    /// Returns true if the parameter is of type string. For performance reasons the check is done at the syntax level.
+    /// </summary>
+    internal static bool IsString(this ParameterSyntax parameterSyntax) =>
+        IsString(parameterSyntax.Type.ToString());
+
+    private static bool IsString(string parameterTypeName) =>
+        parameterTypeName == "string" ||
+        parameterTypeName == "String" ||
+        parameterTypeName == "System.String";
 }

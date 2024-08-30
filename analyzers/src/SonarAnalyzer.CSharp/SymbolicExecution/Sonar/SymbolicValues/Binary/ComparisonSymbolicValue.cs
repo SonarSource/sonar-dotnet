@@ -21,27 +21,26 @@
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar.Relationships;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
+namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
+
+public class ComparisonSymbolicValue : BoolBinarySymbolicValue
 {
-    public class ComparisonSymbolicValue : BoolBinarySymbolicValue
+    private readonly SymbolicComparisonKind  comparisonKind;
+
+    public ComparisonSymbolicValue(SymbolicComparisonKind  comparisonKind, SymbolicValue leftOperand, SymbolicValue rightOperand) : base(leftOperand, rightOperand) =>
+        this.comparisonKind = comparisonKind;
+
+    protected override IEnumerable<ProgramState> TrySetBoolConstraint(BoolConstraint constraint, ProgramState programState) =>
+        programState.TrySetRelationship(GetRelationship(constraint)) is { } newProgramState
+        ? new[] { newProgramState }
+        : Enumerable.Empty<ProgramState>();
+
+    private BinaryRelationship GetRelationship(BoolConstraint boolConstraint)
     {
-        private readonly SymbolicComparisonKind  comparisonKind;
-
-        public ComparisonSymbolicValue(SymbolicComparisonKind  comparisonKind, SymbolicValue leftOperand, SymbolicValue rightOperand) : base(leftOperand, rightOperand) =>
-            this.comparisonKind = comparisonKind;
-
-        protected override IEnumerable<ProgramState> TrySetBoolConstraint(BoolConstraint constraint, ProgramState programState) =>
-            programState.TrySetRelationship(GetRelationship(constraint)) is { } newProgramState
-            ? new[] { newProgramState }
-            : Enumerable.Empty<ProgramState>();
-
-        private BinaryRelationship GetRelationship(BoolConstraint boolConstraint)
-        {
-            var relationship = new ComparisonRelationship(comparisonKind, LeftOperand, RightOperand);
-            return boolConstraint == BoolConstraint.True ? relationship : relationship.Negate();
-        }
-
-        public override string ToString() =>
-            $"{(comparisonKind == SymbolicComparisonKind.Less ? "<" : "<=")}({LeftOperand}, {RightOperand})";
+        var relationship = new ComparisonRelationship(comparisonKind, LeftOperand, RightOperand);
+        return boolConstraint == BoolConstraint.True ? relationship : relationship.Negate();
     }
+
+    public override string ToString() =>
+        $"{(comparisonKind == SymbolicComparisonKind.Less ? "<" : "<=")}({LeftOperand}, {RightOperand})";
 }

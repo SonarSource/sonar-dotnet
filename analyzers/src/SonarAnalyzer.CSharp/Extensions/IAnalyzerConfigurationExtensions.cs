@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Extensions;
+
+public static class IAnalyzerConfigurationExtensions
 {
-    public static class IAnalyzerConfigurationExtensions
-    {
-        public static bool UseSonarCfg(this IAnalyzerConfiguration configuration) =>
-            configuration.ForceSonarCfg || !CFG.Roslyn.ControlFlowGraph.IsAvailable;
-    }
+    public static bool UseSonarCfg(this IAnalyzerConfiguration configuration) =>
+        configuration.ForceSonarCfg || !CFG.Roslyn.ControlFlowGraph.IsAvailable;
 }

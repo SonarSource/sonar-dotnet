@@ -20,47 +20,46 @@
 
 using SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.Relationships
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Relationships;
+
+public sealed class ValueNotEqualsRelationship : NotEqualsRelationship
 {
-    public sealed class ValueNotEqualsRelationship : NotEqualsRelationship
+    public ValueNotEqualsRelationship(SymbolicValue leftOperand, SymbolicValue rightOperand)
+        : base(leftOperand, rightOperand)
     {
-        public ValueNotEqualsRelationship(SymbolicValue leftOperand, SymbolicValue rightOperand)
-            : base(leftOperand, rightOperand)
-        {
-        }
-
-        internal override bool IsContradicting(IEnumerable<BinaryRelationship> relationships)
-        {
-            var isEqContradicting = relationships
-                .OfType<EqualsRelationship>()
-                .Any(rel => AreOperandsMatching(rel));
-
-            if (isEqContradicting)
-            {
-                return true;
-            }
-
-            var comparisons = relationships
-                .OfType<ComparisonRelationship>()
-                .Where(c => c.ComparisonKind == SymbolicComparisonKind.LessOrEqual)
-                .Where(c => AreOperandsMatching(c));
-
-            return comparisons.Count() == 2;
-        }
-
-        public override BinaryRelationship Negate() =>
-            new ValueEqualsRelationship(LeftOperand, RightOperand);
-
-        public override string ToString() =>
-            $"!Eq({LeftOperand}, {RightOperand})";
-
-        internal override BinaryRelationship CreateNew(SymbolicValue leftOperand, SymbolicValue rightOperand) =>
-            new ValueNotEqualsRelationship(leftOperand, rightOperand);
-
-        internal override IEnumerable<BinaryRelationship> GetTransitiveRelationships(IEnumerable<BinaryRelationship> relationships) =>
-            relationships
-                .OfType<EqualsRelationship>()
-                .Select(other => ComputeTransitiveRelationship(other, this))
-                .WhereNotNull();
     }
+
+    internal override bool IsContradicting(IEnumerable<BinaryRelationship> relationships)
+    {
+        var isEqContradicting = relationships
+            .OfType<EqualsRelationship>()
+            .Any(rel => AreOperandsMatching(rel));
+
+        if (isEqContradicting)
+        {
+            return true;
+        }
+
+        var comparisons = relationships
+            .OfType<ComparisonRelationship>()
+            .Where(c => c.ComparisonKind == SymbolicComparisonKind.LessOrEqual)
+            .Where(c => AreOperandsMatching(c));
+
+        return comparisons.Count() == 2;
+    }
+
+    public override BinaryRelationship Negate() =>
+        new ValueEqualsRelationship(LeftOperand, RightOperand);
+
+    public override string ToString() =>
+        $"!Eq({LeftOperand}, {RightOperand})";
+
+    internal override BinaryRelationship CreateNew(SymbolicValue leftOperand, SymbolicValue rightOperand) =>
+        new ValueNotEqualsRelationship(leftOperand, rightOperand);
+
+    internal override IEnumerable<BinaryRelationship> GetTransitiveRelationships(IEnumerable<BinaryRelationship> relationships) =>
+        relationships
+            .OfType<EqualsRelationship>()
+            .Select(other => ComputeTransitiveRelationship(other, this))
+            .WhereNotNull();
 }

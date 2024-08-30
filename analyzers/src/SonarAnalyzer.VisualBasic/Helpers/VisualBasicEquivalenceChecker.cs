@@ -18,32 +18,31 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+internal static class VisualBasicEquivalenceChecker
 {
-    internal static class VisualBasicEquivalenceChecker
-    {
-        public static bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) =>
-            Common.EquivalenceChecker.AreEquivalent(node1, node2,
-                (n1, n2) => SyntaxFactory.AreEquivalent(n1, n2));
+    public static bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) =>
+        Common.EquivalenceChecker.AreEquivalent(node1, node2,
+            (n1, n2) => SyntaxFactory.AreEquivalent(n1, n2));
 
-        public static bool AreEquivalent(SyntaxList<SyntaxNode> nodeList1, SyntaxList<SyntaxNode> nodeList2) =>
-            Common.EquivalenceChecker.AreEquivalent(nodeList1, nodeList2,
-                (n1, n2) => SyntaxFactory.AreEquivalent(n1, n2));
-    }
+    public static bool AreEquivalent(SyntaxList<SyntaxNode> nodeList1, SyntaxList<SyntaxNode> nodeList2) =>
+        Common.EquivalenceChecker.AreEquivalent(nodeList1, nodeList2,
+            (n1, n2) => SyntaxFactory.AreEquivalent(n1, n2));
+}
 
-    internal class VisualBasicSyntaxNodeEqualityComparer<T> : IEqualityComparer<T>, IEqualityComparer<SyntaxList<T>>
-        where T : SyntaxNode
-    {
-        public bool Equals(T x, T y) =>
-            VisualBasicEquivalenceChecker.AreEquivalent(x, y);
+internal class VisualBasicSyntaxNodeEqualityComparer<T> : IEqualityComparer<T>, IEqualityComparer<SyntaxList<T>>
+    where T : SyntaxNode
+{
+    public bool Equals(T x, T y) =>
+        VisualBasicEquivalenceChecker.AreEquivalent(x, y);
 
-        public bool Equals(SyntaxList<T> x, SyntaxList<T> y) =>
-            VisualBasicEquivalenceChecker.AreEquivalent(x, y);
+    public bool Equals(SyntaxList<T> x, SyntaxList<T> y) =>
+        VisualBasicEquivalenceChecker.AreEquivalent(x, y);
 
-        public int GetHashCode(T obj) =>
-            obj.GetType().FullName.GetHashCode();
+    public int GetHashCode(T obj) =>
+        obj.GetType().FullName.GetHashCode();
 
-        public int GetHashCode(SyntaxList<T> obj) =>
-            (obj.Count + string.Join(", ", obj.Select(x => x.GetType().FullName).Distinct())).GetHashCode();
-    }
+    public int GetHashCode(SyntaxList<T> obj) =>
+        (obj.Count + string.Join(", ", obj.Select(x => x.GetType().FullName).Distinct())).GetHashCode();
 }

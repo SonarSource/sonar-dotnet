@@ -18,22 +18,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Wrappers
+namespace SonarAnalyzer.Wrappers;
+
+public interface IMethodDeclaration
 {
-    public interface IMethodDeclaration
-    {
-        BlockSyntax Body { get; }
+    BlockSyntax Body { get; }
 
-        ArrowExpressionClauseSyntax ExpressionBody { get; }
+    ArrowExpressionClauseSyntax ExpressionBody { get; }
 
-        SyntaxToken Identifier { get; }
+    SyntaxToken Identifier { get; }
 
-        ParameterListSyntax ParameterList { get; }
+    ParameterListSyntax ParameterList { get; }
 
-        public TypeParameterListSyntax TypeParameterList { get; }
+    public TypeParameterListSyntax TypeParameterList { get; }
 
-        bool HasImplementation { get; }
+    bool HasImplementation { get; }
 
-        bool IsLocal { get; }
-    }
+    bool IsLocal { get; }
 }

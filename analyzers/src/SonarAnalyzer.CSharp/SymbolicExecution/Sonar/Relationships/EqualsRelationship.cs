@@ -18,51 +18,50 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.Relationships
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Relationships;
+
+public abstract class EqualsRelationship : BinaryRelationship, IEquatable<EqualsRelationship>
 {
-    public abstract class EqualsRelationship : BinaryRelationship, IEquatable<EqualsRelationship>
+    private readonly Lazy<int> hash;
+
+    protected EqualsRelationship(SymbolicValue leftOperand, SymbolicValue rightOperand)
+        : base(leftOperand, rightOperand)
     {
-        private readonly Lazy<int> hash;
-
-        protected EqualsRelationship(SymbolicValue leftOperand, SymbolicValue rightOperand)
-            : base(leftOperand, rightOperand)
+        this.hash = new Lazy<int>(() =>
         {
-            this.hash = new Lazy<int>(() =>
-            {
-                var left = LeftOperand.GetHashCode();
-                var right = RightOperand.GetHashCode();
+            var left = LeftOperand.GetHashCode();
+            var right = RightOperand.GetHashCode();
 
-                return GetHashCodeMinMaxOrdered(left, right, GetType().GetHashCode());
-            });
+            return GetHashCodeMinMaxOrdered(left, right, GetType().GetHashCode());
+        });
+    }
+
+    public bool Equals(EqualsRelationship other)
+    {
+        return other != null && AreOperandsMatching(other);
+    }
+
+    public sealed override int GetHashCode() => this.hash.Value;
+
+    public sealed override bool Equals(object obj)
+    {
+        if (obj == null)
+        {
+            return false;
         }
 
-        public bool Equals(EqualsRelationship other)
-        {
-            return other != null && AreOperandsMatching(other);
-        }
+        return Equals(obj as EqualsRelationship);
+    }
 
-        public sealed override int GetHashCode() => this.hash.Value;
+    internal static int GetHashCodeMinMaxOrdered(int leftHash, int rightHash, int typeHash)
+    {
+        var min = Math.Min(leftHash, rightHash);
+        var max = Math.Max(leftHash, rightHash);
 
-        public sealed override bool Equals(object obj)
-        {
-            if (obj == null)
-            {
-                return false;
-            }
-
-            return Equals(obj as EqualsRelationship);
-        }
-
-        internal static int GetHashCodeMinMaxOrdered(int leftHash, int rightHash, int typeHash)
-        {
-            var min = Math.Min(leftHash, rightHash);
-            var max = Math.Max(leftHash, rightHash);
-
-            var h = 19;
-            h = h * 31 + typeHash;
-            h = h * 31 + min.GetHashCode();
-            h = h * 31 + max.GetHashCode();
-            return h;
-        }
+        var h = 19;
+        h = h * 31 + typeHash;
+        h = h * 31 + min.GetHashCode();
+        h = h * 31 + max.GetHashCode();
+        return h;
     }
 }
