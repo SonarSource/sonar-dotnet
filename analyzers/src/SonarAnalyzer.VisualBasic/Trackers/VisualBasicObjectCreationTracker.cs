@@ -18,22 +18,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Trackers
+namespace SonarAnalyzer.Helpers.Trackers;
+
+public class VisualBasicObjectCreationTracker : ObjectCreationTracker<SyntaxKind>
 {
-    public class VisualBasicObjectCreationTracker : ObjectCreationTracker<SyntaxKind>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        internal override Condition ArgumentAtIndexIsConst(int index) =>
-            context => ((ObjectCreationExpressionSyntax)context.Node).ArgumentList  is { } argumentList
-                       && argumentList.Arguments.Count > index
-                       && argumentList.Arguments[index].GetExpression().HasConstantValue(context.SemanticModel);
+    internal override Condition ArgumentAtIndexIsConst(int index) =>
+        context => ((ObjectCreationExpressionSyntax)context.Node).ArgumentList  is { } argumentList
+                   && argumentList.Arguments.Count > index
+                   && argumentList.Arguments[index].GetExpression().HasConstantValue(context.SemanticModel);
 
-        internal override object ConstArgumentForParameter(ObjectCreationContext context, string parameterName) =>
-            ((ObjectCreationExpressionSyntax)context.Node).ArgumentList is { } argumentList
-                && VisualBasicSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, argumentList, parameterName) is { Length: 1 } values
-                && values[0] is ExpressionSyntax valueSyntax
-                    ? valueSyntax.FindConstantValue(context.SemanticModel)
-                    : null;
-    }
+    internal override object ConstArgumentForParameter(ObjectCreationContext context, string parameterName) =>
+        ((ObjectCreationExpressionSyntax)context.Node).ArgumentList is { } argumentList
+            && VisualBasicSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, argumentList, parameterName) is { Length: 1 } values
+            && values[0] is ExpressionSyntax valueSyntax
+                ? valueSyntax.FindConstantValue(context.SemanticModel)
+                : null;
 }

@@ -18,34 +18,33 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Trackers
+namespace SonarAnalyzer.Helpers.Trackers;
+
+public class CSharpPropertyAccessTracker : PropertyAccessTracker<SyntaxKind>
 {
-    public class CSharpPropertyAccessTracker : PropertyAccessTracker<SyntaxKind>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-        protected override SyntaxKind[] TrackedSyntaxKinds { get; } =
-            new[]
-            {
-                SyntaxKind.SimpleMemberAccessExpression,
-                SyntaxKind.MemberBindingExpression,
-                SyntaxKind.IdentifierName
-            };
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    protected override SyntaxKind[] TrackedSyntaxKinds { get; } =
+        new[]
+        {
+            SyntaxKind.SimpleMemberAccessExpression,
+            SyntaxKind.MemberBindingExpression,
+            SyntaxKind.IdentifierName
+        };
 
-        public override object AssignedValue(PropertyAccessContext context) =>
-            context.Node.Ancestors().FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentExpression)) is AssignmentExpressionSyntax assignment
-                ? assignment.Right.FindConstantValue(context.SemanticModel)
-                : null;
+    public override object AssignedValue(PropertyAccessContext context) =>
+        context.Node.Ancestors().FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentExpression)) is AssignmentExpressionSyntax assignment
+            ? assignment.Right.FindConstantValue(context.SemanticModel)
+            : null;
 
-        public override Condition MatchGetter() =>
-            context => !((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
+    public override Condition MatchGetter() =>
+        context => !((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
 
-        public override Condition MatchSetter() =>
-            context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
+    public override Condition MatchSetter() =>
+        context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
 
-        public override Condition AssignedValueIsConstant() =>
-            context => AssignedValue(context) != null;
+    public override Condition AssignedValueIsConstant() =>
+        context => AssignedValue(context) != null;
 
-        protected override bool IsIdentifierWithinMemberAccess(SyntaxNode expression) =>
-            expression.IsKind(SyntaxKind.IdentifierName) && expression.Parent.IsKind(SyntaxKind.SimpleMemberAccessExpression);
-    }
+    protected override bool IsIdentifierWithinMemberAccess(SyntaxNode expression) =>
+        expression.IsKind(SyntaxKind.IdentifierName) && expression.Parent.IsKind(SyntaxKind.SimpleMemberAccessExpression);
 }

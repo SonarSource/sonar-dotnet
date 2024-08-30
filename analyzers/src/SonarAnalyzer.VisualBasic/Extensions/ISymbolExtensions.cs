@@ -18,19 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
-{
-    internal static class ISymbolExtensions
-    {
-        public static IEnumerable<SyntaxNode> GetLocationNodes(this ISymbol symbol, SyntaxNode node) =>
-            symbol.Locations.SelectMany(location => GetDescendantNodes(location, node));
+namespace SonarAnalyzer.Extensions;
 
-        public static IEnumerable<SyntaxNode> GetDescendantNodes(Location location, SyntaxNode node) =>
-            location.SourceTree?.GetRoot() is { } locationRootNode
-            && locationRootNode == node.SyntaxTree.GetRoot()
-            && locationRootNode.FindNode(location.SourceSpan)
-                               .FirstAncestorOrSelf<VariableDeclaratorSyntax>() is { } declaration
-                ? declaration.DescendantNodes()
-                : Enumerable.Empty<SyntaxNode>();
-    }
+internal static class ISymbolExtensions
+{
+    public static IEnumerable<SyntaxNode> GetLocationNodes(this ISymbol symbol, SyntaxNode node) =>
+        symbol.Locations.SelectMany(location => GetDescendantNodes(location, node));
+
+    public static IEnumerable<SyntaxNode> GetDescendantNodes(Location location, SyntaxNode node) =>
+        location.SourceTree?.GetRoot() is { } locationRootNode
+        && locationRootNode == node.SyntaxTree.GetRoot()
+        && locationRootNode.FindNode(location.SourceSpan)
+                           .FirstAncestorOrSelf<VariableDeclaratorSyntax>() is { } declaration
+            ? declaration.DescendantNodes()
+            : Enumerable.Empty<SyntaxNode>();
 }

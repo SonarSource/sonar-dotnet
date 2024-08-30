@@ -20,178 +20,177 @@
 
 using SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.Relationships
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Relationships;
+
+public sealed class ComparisonRelationship : BinaryRelationship, IEquatable<ComparisonRelationship>
 {
-    public sealed class ComparisonRelationship : BinaryRelationship, IEquatable<ComparisonRelationship>
+    private readonly Lazy<int> hash;
+
+    internal SymbolicComparisonKind ComparisonKind { get; }
+
+    public ComparisonRelationship(SymbolicComparisonKind comparisonKind, SymbolicValue leftOperand, SymbolicValue rightOperand)
+        : base(leftOperand, rightOperand)
     {
-        private readonly Lazy<int> hash;
+        ComparisonKind = comparisonKind;
 
-        internal SymbolicComparisonKind ComparisonKind { get; }
-
-        public ComparisonRelationship(SymbolicComparisonKind comparisonKind, SymbolicValue leftOperand, SymbolicValue rightOperand)
-            : base(leftOperand, rightOperand)
+        hash = new Lazy<int>(() =>
         {
-            ComparisonKind = comparisonKind;
+            var h = 19;
+            h = h * 31 + ComparisonKind.GetHashCode();
+            h = h * 31 + base.GetHashCode();
+            return h;
+        });
+    }
 
-            hash = new Lazy<int>(() =>
-            {
-                var h = 19;
-                h = h * 31 + ComparisonKind.GetHashCode();
-                h = h * 31 + base.GetHashCode();
-                return h;
-            });
+    public override BinaryRelationship Negate()
+    {
+        var otherComparisonKind = ComparisonKind == SymbolicComparisonKind.Less
+            ? SymbolicComparisonKind.LessOrEqual
+            : SymbolicComparisonKind.Less;
+
+        return new ComparisonRelationship(otherComparisonKind, RightOperand, LeftOperand);
+    }
+
+    internal override bool IsContradicting(IEnumerable<BinaryRelationship> relationships)
+    {
+        // a < b and a <= b contradicts b < a
+        var isLessOpContradicting = relationships
+            .OfType<ComparisonRelationship>()
+            .Where(c => c.ComparisonKind == SymbolicComparisonKind.Less)
+            .Any(rel => AreOperandsSwapped(rel));
+
+        if (isLessOpContradicting)
+        {
+            return true;
         }
 
-        public override BinaryRelationship Negate()
+        if (ComparisonKind == SymbolicComparisonKind.Less)
         {
-            var otherComparisonKind = ComparisonKind == SymbolicComparisonKind.Less
-                ? SymbolicComparisonKind.LessOrEqual
-                : SymbolicComparisonKind.Less;
-
-            return new ComparisonRelationship(otherComparisonKind, RightOperand, LeftOperand);
-        }
-
-        internal override bool IsContradicting(IEnumerable<BinaryRelationship> relationships)
-        {
-            // a < b and a <= b contradicts b < a
-            var isLessOpContradicting = relationships
+            // a < b contradicts b <= a
+            var isLessEqualOpContradicting = relationships
                 .OfType<ComparisonRelationship>()
-                .Where(c => c.ComparisonKind == SymbolicComparisonKind.Less)
+                .Where(c => c.ComparisonKind == SymbolicComparisonKind.LessOrEqual)
                 .Any(rel => AreOperandsSwapped(rel));
 
-            if (isLessOpContradicting)
+            if (isLessEqualOpContradicting)
             {
                 return true;
             }
 
-            if (ComparisonKind == SymbolicComparisonKind.Less)
+            // a < b contradicts a == b and b == a
+            var isEqualOpContradicting = relationships
+                .OfType<EqualsRelationship>()
+                .Any(rel => AreOperandsMatching(rel));
+
+            if (isEqualOpContradicting)
             {
-                // a < b contradicts b <= a
-                var isLessEqualOpContradicting = relationships
-                    .OfType<ComparisonRelationship>()
-                    .Where(c => c.ComparisonKind == SymbolicComparisonKind.LessOrEqual)
-                    .Any(rel => AreOperandsSwapped(rel));
-
-                if (isLessEqualOpContradicting)
-                {
-                    return true;
-                }
-
-                // a < b contradicts a == b and b == a
-                var isEqualOpContradicting = relationships
-                    .OfType<EqualsRelationship>()
-                    .Any(rel => AreOperandsMatching(rel));
-
-                if (isEqualOpContradicting)
-                {
-                    return true;
-                }
+                return true;
             }
-
-            if (ComparisonKind == SymbolicComparisonKind.LessOrEqual)
-            {
-                // a <= b contradicts a >= b && a != b
-                var isLessEqualOp = relationships
-                    .OfType<ComparisonRelationship>()
-                    .Where(c => c.ComparisonKind == SymbolicComparisonKind.LessOrEqual)
-                    .Any(rel => AreOperandsSwapped(rel));
-
-                var isNotEqualOpContradicting = relationships
-                    .OfType<ValueNotEqualsRelationship>()
-                    .Any(rel => AreOperandsMatching(rel));
-
-                if (isLessEqualOp && isNotEqualOpContradicting)
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
-        internal override IEnumerable<BinaryRelationship> GetTransitiveRelationships(IEnumerable<BinaryRelationship> relationships)
+        if (ComparisonKind == SymbolicComparisonKind.LessOrEqual)
         {
-            foreach (var other in relationships)
-            {
-                if (other is ComparisonRelationship comparison)
-                {
-                    var transitive = GetTransitiveRelationship(comparison);
-                    if (transitive != null)
-                    {
-                        yield return transitive;
-                    }
-                }
+            // a <= b contradicts a >= b && a != b
+            var isLessEqualOp = relationships
+                .OfType<ComparisonRelationship>()
+                .Where(c => c.ComparisonKind == SymbolicComparisonKind.LessOrEqual)
+                .Any(rel => AreOperandsSwapped(rel));
 
-                if (other is EqualsRelationship equals)
-                {
-                    var transitive = GetTransitiveRelationship(equals);
-                    if (transitive != null)
-                    {
-                        yield return transitive;
-                    }
-                }
+            var isNotEqualOpContradicting = relationships
+                .OfType<ValueNotEqualsRelationship>()
+                .Any(rel => AreOperandsMatching(rel));
+
+            if (isLessEqualOp && isNotEqualOpContradicting)
+            {
+                return true;
             }
         }
 
-        private ComparisonRelationship GetTransitiveRelationship(ComparisonRelationship other)
-        {
-            var comparisonKind = ComparisonKind == SymbolicComparisonKind.LessOrEqual && other.ComparisonKind == SymbolicComparisonKind.LessOrEqual
-                    ? SymbolicComparisonKind.LessOrEqual
-                    : SymbolicComparisonKind.Less;
-
-            if (RightOperand.Equals(other.LeftOperand))
-            {
-                return new ComparisonRelationship(comparisonKind, LeftOperand, other.RightOperand);
-            }
-            else if (LeftOperand.Equals(other.RightOperand))
-            {
-                return new ComparisonRelationship(comparisonKind, other.LeftOperand, RightOperand);
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        private BinaryRelationship GetTransitiveRelationship(EqualsRelationship other)
-        {
-            if (LeftOperand.Equals(other.LeftOperand))
-            {
-                return new ComparisonRelationship(ComparisonKind, other.RightOperand, RightOperand);
-            }
-            else if (RightOperand.Equals(other.LeftOperand))
-            {
-                return new ComparisonRelationship(ComparisonKind, LeftOperand, other.RightOperand);
-            }
-            else if (LeftOperand.Equals(other.RightOperand))
-            {
-                return new ComparisonRelationship(ComparisonKind, other.LeftOperand, RightOperand);
-            }
-            else if (RightOperand.Equals(other.RightOperand))
-            {
-                return new ComparisonRelationship(ComparisonKind, LeftOperand, other.LeftOperand);
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        internal bool AreOperandsSwapped(ComparisonRelationship rel) =>
-            LeftOperand.Equals(rel.RightOperand) && RightOperand.Equals(rel.LeftOperand);
-
-        public override string ToString()
-            => $"{(ComparisonKind == SymbolicComparisonKind.Less ? "<" : "<=")}({LeftOperand}, {RightOperand})";
-
-        public override bool Equals(object obj) =>
-            obj != null && Equals(obj as ComparisonRelationship);
-
-        public bool Equals(ComparisonRelationship other) =>
-            other != null && ComparisonKind == other.ComparisonKind && base.Equals(other);
-
-        public override int GetHashCode() => this.hash.Value;
-
-        internal override BinaryRelationship CreateNew(SymbolicValue leftOperand, SymbolicValue rightOperand) =>
-            new ComparisonRelationship(ComparisonKind, leftOperand, rightOperand);
+        return false;
     }
+
+    internal override IEnumerable<BinaryRelationship> GetTransitiveRelationships(IEnumerable<BinaryRelationship> relationships)
+    {
+        foreach (var other in relationships)
+        {
+            if (other is ComparisonRelationship comparison)
+            {
+                var transitive = GetTransitiveRelationship(comparison);
+                if (transitive != null)
+                {
+                    yield return transitive;
+                }
+            }
+
+            if (other is EqualsRelationship equals)
+            {
+                var transitive = GetTransitiveRelationship(equals);
+                if (transitive != null)
+                {
+                    yield return transitive;
+                }
+            }
+        }
+    }
+
+    private ComparisonRelationship GetTransitiveRelationship(ComparisonRelationship other)
+    {
+        var comparisonKind = ComparisonKind == SymbolicComparisonKind.LessOrEqual && other.ComparisonKind == SymbolicComparisonKind.LessOrEqual
+                ? SymbolicComparisonKind.LessOrEqual
+                : SymbolicComparisonKind.Less;
+
+        if (RightOperand.Equals(other.LeftOperand))
+        {
+            return new ComparisonRelationship(comparisonKind, LeftOperand, other.RightOperand);
+        }
+        else if (LeftOperand.Equals(other.RightOperand))
+        {
+            return new ComparisonRelationship(comparisonKind, other.LeftOperand, RightOperand);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private BinaryRelationship GetTransitiveRelationship(EqualsRelationship other)
+    {
+        if (LeftOperand.Equals(other.LeftOperand))
+        {
+            return new ComparisonRelationship(ComparisonKind, other.RightOperand, RightOperand);
+        }
+        else if (RightOperand.Equals(other.LeftOperand))
+        {
+            return new ComparisonRelationship(ComparisonKind, LeftOperand, other.RightOperand);
+        }
+        else if (LeftOperand.Equals(other.RightOperand))
+        {
+            return new ComparisonRelationship(ComparisonKind, other.LeftOperand, RightOperand);
+        }
+        else if (RightOperand.Equals(other.RightOperand))
+        {
+            return new ComparisonRelationship(ComparisonKind, LeftOperand, other.LeftOperand);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    internal bool AreOperandsSwapped(ComparisonRelationship rel) =>
+        LeftOperand.Equals(rel.RightOperand) && RightOperand.Equals(rel.LeftOperand);
+
+    public override string ToString()
+        => $"{(ComparisonKind == SymbolicComparisonKind.Less ? "<" : "<=")}({LeftOperand}, {RightOperand})";
+
+    public override bool Equals(object obj) =>
+        obj != null && Equals(obj as ComparisonRelationship);
+
+    public bool Equals(ComparisonRelationship other) =>
+        other != null && ComparisonKind == other.ComparisonKind && base.Equals(other);
+
+    public override int GetHashCode() => this.hash.Value;
+
+    internal override BinaryRelationship CreateNew(SymbolicValue leftOperand, SymbolicValue rightOperand) =>
+        new ComparisonRelationship(ComparisonKind, leftOperand, rightOperand);
 }

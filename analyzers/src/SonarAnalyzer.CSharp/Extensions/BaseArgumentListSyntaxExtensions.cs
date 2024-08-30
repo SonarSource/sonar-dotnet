@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Extensions;
+
+internal static class BaseArgumentListSyntaxExtensions
 {
-    internal static class BaseArgumentListSyntaxExtensions
-    {
-        internal static ArgumentSyntax GetArgumentByName(this BaseArgumentListSyntax list, string name) =>
-            list.Arguments.FirstOrDefault(argument => argument.NameIs(name));
-    }
+    internal static ArgumentSyntax GetArgumentByName(this BaseArgumentListSyntax list, string name) =>
+        list.Arguments.FirstOrDefault(argument => argument.NameIs(name));
 }

@@ -20,58 +20,57 @@
 
 using SonarAnalyzer.CFG.Sonar;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar
+namespace SonarAnalyzer.SymbolicExecution.Sonar;
+
+public sealed class ProgramPoint : IEquatable<ProgramPoint>
 {
-    public sealed class ProgramPoint : IEquatable<ProgramPoint>
+    public Block Block { get; }
+    public int Offset { get; }
+
+    private int? hash;
+
+    internal ProgramPoint(Block block, int offset)
     {
-        public Block Block { get; }
-        public int Offset { get; }
+        Block = block;
+        Offset = offset;
+    }
 
-        private int? hash;
+    internal ProgramPoint(Block block)
+        : this(block, 0)
+    { }
 
-        internal ProgramPoint(Block block, int offset)
+    public SyntaxNode CurrentInstruction =>
+        Block.Instructions[Offset];
+
+    public override bool Equals(object obj)
+    {
+        if (obj == null)
         {
-            Block = block;
-            Offset = offset;
+            return false;
         }
 
-        internal ProgramPoint(Block block)
-            : this(block, 0)
-        { }
+        var p = obj as ProgramPoint;
+        return Equals(p);
+    }
 
-        public SyntaxNode CurrentInstruction =>
-            Block.Instructions[Offset];
-
-        public override bool Equals(object obj)
+    public bool Equals(ProgramPoint other)
+    {
+        if (other == null)
         {
-            if (obj == null)
-            {
-                return false;
-            }
-
-            var p = obj as ProgramPoint;
-            return Equals(p);
+            return false;
         }
 
-        public bool Equals(ProgramPoint other)
-        {
-            if (other == null)
-            {
-                return false;
-            }
+        return Block == other.Block && Offset == other.Offset;
+    }
 
-            return Block == other.Block && Offset == other.Offset;
-        }
+    public override int GetHashCode() =>
+        hash ??= ComputeHash();
 
-        public override int GetHashCode() =>
-            hash ??= ComputeHash();
-
-        private int ComputeHash()
-        {
-            var h = 19;
-            h = h * 31 + Block.GetHashCode();
-            h = h * 31 + Offset.GetHashCode();
-            return h;
-        }
+    private int ComputeHash()
+    {
+        var h = 19;
+        h = h * 31 + Block.GetHashCode();
+        h = h * 31 + Offset.GetHashCode();
+        return h;
     }
 }

@@ -18,51 +18,50 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar
+namespace SonarAnalyzer.SymbolicExecution.Sonar;
+
+internal class ExplodedGraphNode : IEquatable<ExplodedGraphNode>
 {
-    internal class ExplodedGraphNode : IEquatable<ExplodedGraphNode>
+    public ProgramState ProgramState { get; }
+    public ProgramPoint ProgramPoint { get; }
+
+    private int? hash;
+
+    public ExplodedGraphNode(ProgramPoint programPoint, ProgramState programState)
     {
-        public ProgramState ProgramState { get; }
-        public ProgramPoint ProgramPoint { get; }
+        ProgramState = programState;
+        ProgramPoint = programPoint;
+    }
 
-        private int? hash;
-
-        public ExplodedGraphNode(ProgramPoint programPoint, ProgramState programState)
+    public override bool Equals(object obj)
+    {
+        if (obj == null)
         {
-            ProgramState = programState;
-            ProgramPoint = programPoint;
+            return false;
         }
 
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-            {
-                return false;
-            }
+        var n = obj as ExplodedGraphNode;
+        return Equals(n);
+    }
 
-            var n = obj as ExplodedGraphNode;
-            return Equals(n);
+    public bool Equals(ExplodedGraphNode other)
+    {
+        if (other == null)
+        {
+            return false;
         }
 
-        public bool Equals(ExplodedGraphNode other)
-        {
-            if (other == null)
-            {
-                return false;
-            }
+        return ProgramState.Equals(other.ProgramState) && ProgramPoint.Equals(other.ProgramPoint);
+    }
 
-            return ProgramState.Equals(other.ProgramState) && ProgramPoint.Equals(other.ProgramPoint);
-        }
+    public override int GetHashCode() =>
+        hash ??= ComputeHash();
 
-        public override int GetHashCode() =>
-            hash ??= ComputeHash();
-
-        private int ComputeHash()
-        {
-            var h = 19;
-            h = h * 31 + ProgramState.GetHashCode();
-            h = h * 31 + ProgramPoint.GetHashCode();
-            return h;
-        }
+    private int ComputeHash()
+    {
+        var h = 19;
+        h = h * 31 + ProgramState.GetHashCode();
+        h = h * 31 + ProgramPoint.GetHashCode();
+        return h;
     }
 }

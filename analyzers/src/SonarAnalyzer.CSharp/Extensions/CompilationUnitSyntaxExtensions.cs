@@ -18,22 +18,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Extensions;
+
+public static class CompilationUnitSyntaxExtensions
 {
-    public static class CompilationUnitSyntaxExtensions
-    {
-        public static IEnumerable<SyntaxNode> GetTopLevelMainBody(this CompilationUnitSyntax compilationUnit) =>
-            compilationUnit.ChildNodes()
-                           .SkipWhile(x => x.IsAnyKind(SyntaxKind.UsingDirective, SyntaxKind.NamespaceDeclaration))
-                           .TakeWhile(x => x.IsKind(SyntaxKind.GlobalStatement));
+    public static IEnumerable<SyntaxNode> GetTopLevelMainBody(this CompilationUnitSyntax compilationUnit) =>
+        compilationUnit.ChildNodes()
+                       .SkipWhile(x => x.IsAnyKind(SyntaxKind.UsingDirective, SyntaxKind.NamespaceDeclaration))
+                       .TakeWhile(x => x.IsKind(SyntaxKind.GlobalStatement));
 
-        public static IEnumerable<IMethodDeclaration> GetMethodDeclarations(this CompilationUnitSyntax compilationUnitSyntax) =>
-            compilationUnitSyntax.GetTopLevelMainBody()
-                                 .Select(x => x.ChildNodes().FirstOrDefault(y => y.IsKind(SyntaxKindEx.LocalFunctionStatement)))
-                                 .Where(x => x != null)
-                                 .Select(x => MethodDeclarationFactory.Create(x));
+    public static IEnumerable<IMethodDeclaration> GetMethodDeclarations(this CompilationUnitSyntax compilationUnitSyntax) =>
+        compilationUnitSyntax.GetTopLevelMainBody()
+                             .Select(x => x.ChildNodes().FirstOrDefault(y => y.IsKind(SyntaxKindEx.LocalFunctionStatement)))
+                             .Where(x => x != null)
+                             .Select(x => MethodDeclarationFactory.Create(x));
 
-        public static bool IsTopLevelMain(this CompilationUnitSyntax compilationUnit) =>
-            compilationUnit.Members.Any(x => x.IsKind(SyntaxKind.GlobalStatement));
-    }
+    public static bool IsTopLevelMain(this CompilationUnitSyntax compilationUnit) =>
+        compilationUnit.Members.Any(x => x.IsKind(SyntaxKind.GlobalStatement));
 }

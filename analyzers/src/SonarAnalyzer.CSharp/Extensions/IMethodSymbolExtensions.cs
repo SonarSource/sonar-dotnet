@@ -18,24 +18,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Extensions;
+
+internal static class IMethodSymbolExtensions
 {
-    internal static class IMethodSymbolExtensions
-    {
-        public static bool IsModuleInitializer(this IMethodSymbol methodSymbol) =>
-            methodSymbol.AnyAttributeDerivesFrom(KnownType.System_Runtime_CompilerServices_ModuleInitializerAttribute);
+    public static bool IsModuleInitializer(this IMethodSymbol methodSymbol) =>
+        methodSymbol.AnyAttributeDerivesFrom(KnownType.System_Runtime_CompilerServices_ModuleInitializerAttribute);
 
-        public static bool IsGetTypeCall(this IMethodSymbol invokedMethod) =>
-            invokedMethod.Name == nameof(Type.GetType)
-            && !invokedMethod.IsStatic
-            && invokedMethod.ContainingType != null
-            && IsObjectOrType(invokedMethod.ContainingType);
+    public static bool IsGetTypeCall(this IMethodSymbol invokedMethod) =>
+        invokedMethod.Name == nameof(Type.GetType)
+        && !invokedMethod.IsStatic
+        && invokedMethod.ContainingType != null
+        && IsObjectOrType(invokedMethod.ContainingType);
 
-        public static SyntaxNode ImplementationSyntax(this IMethodSymbol method) =>
-            (method.PartialImplementationPart ?? method).DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
+    public static SyntaxNode ImplementationSyntax(this IMethodSymbol method) =>
+        (method.PartialImplementationPart ?? method).DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
 
-        private static bool IsObjectOrType(ITypeSymbol namedType) =>
-            namedType.SpecialType == SpecialType.System_Object
-            || namedType.Is(KnownType.System_Type);
-    }
+    private static bool IsObjectOrType(ITypeSymbol namedType) =>
+        namedType.SpecialType == SpecialType.System_Object
+        || namedType.Is(KnownType.System_Type);
 }

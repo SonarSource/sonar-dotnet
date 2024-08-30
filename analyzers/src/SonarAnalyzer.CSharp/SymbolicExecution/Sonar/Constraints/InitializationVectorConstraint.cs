@@ -20,16 +20,15 @@
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
+
+internal class InitializationVectorConstraint : SymbolicConstraint
 {
-    internal class InitializationVectorConstraint : SymbolicConstraint
-    {
-        public static readonly InitializationVectorConstraint NotInitialized = new(ConstraintKind.InitializationVectorNotInitialized);
-        public static readonly InitializationVectorConstraint Initialized = new(ConstraintKind.InitializationVectorInitialized);
+    public static readonly InitializationVectorConstraint NotInitialized = new(ConstraintKind.InitializationVectorNotInitialized);
+    public static readonly InitializationVectorConstraint Initialized = new(ConstraintKind.InitializationVectorInitialized);
 
-        public override SymbolicConstraint Opposite =>
-            this == Initialized ? NotInitialized : Initialized;
+    public override SymbolicConstraint Opposite =>
+        this == Initialized ? NotInitialized : Initialized;
 
-        private InitializationVectorConstraint(ConstraintKind kind) : base(kind) { }
-    }
+    private InitializationVectorConstraint(ConstraintKind kind) : base(kind) { }
 }

@@ -18,13 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
-{
-    public static class VisualBasicCompilationHelper
-    {
-        public static bool IsAtLeastLanguageVersion(this Compilation compilation, LanguageVersion languageVersion) =>
-            compilation.VB()?.LanguageVersion.CompareTo(languageVersion) >= 0;
+namespace SonarAnalyzer.Helpers;
 
-        public static VisualBasicCompilation VB(this Compilation compilation) => compilation as VisualBasicCompilation;
-    }
+public static class VisualBasicCompilationHelper
+{
+    public static bool IsAtLeastLanguageVersion(this Compilation compilation, LanguageVersion languageVersion) =>
+        compilation.VB()?.LanguageVersion.CompareTo(languageVersion) >= 0;
+
+    public static VisualBasicCompilation VB(this Compilation compilation) => compilation as VisualBasicCompilation;
 }

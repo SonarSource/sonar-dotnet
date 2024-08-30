@@ -18,14 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Trackers
-{
-    public class CSharpBaseTypeTracker : BaseTypeTracker<SyntaxKind>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-        protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.BaseList };
+namespace SonarAnalyzer.Helpers.Trackers;
 
-        protected override IEnumerable<SyntaxNode> GetBaseTypeNodes(SyntaxNode contextNode) =>
-            ((BaseListSyntax)contextNode)?.Types.Select(t => t.Type).ToArray();
-    }
+public class CSharpBaseTypeTracker : BaseTypeTracker<SyntaxKind>
+{
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.BaseList };
+
+    protected override IEnumerable<SyntaxNode> GetBaseTypeNodes(SyntaxNode contextNode) =>
+        ((BaseListSyntax)contextNode)?.Types.Select(t => t.Type).ToArray();
 }

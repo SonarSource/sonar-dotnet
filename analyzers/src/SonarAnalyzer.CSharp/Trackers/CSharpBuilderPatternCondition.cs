@@ -18,44 +18,43 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public class CSharpBuilderPatternCondition : BuilderPatternCondition<SyntaxKind, InvocationExpressionSyntax>
 {
-    public class CSharpBuilderPatternCondition : BuilderPatternCondition<SyntaxKind, InvocationExpressionSyntax>
+    public CSharpBuilderPatternCondition(bool constructorIsSafe, params BuilderPatternDescriptor<SyntaxKind, InvocationExpressionSyntax>[] descriptors)
+        : base(constructorIsSafe, descriptors, new CSharpAssignmentFinder()) { }
+
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override SyntaxNode GetExpression(InvocationExpressionSyntax node) =>
+        node.Expression;
+
+    protected override string GetIdentifierName(InvocationExpressionSyntax node) =>
+        node.Expression.GetName();
+
+    protected override bool IsMemberAccess(SyntaxNode node, out SyntaxNode memberAccessExpression)
     {
-        public CSharpBuilderPatternCondition(bool constructorIsSafe, params BuilderPatternDescriptor<SyntaxKind, InvocationExpressionSyntax>[] descriptors)
-            : base(constructorIsSafe, descriptors, new CSharpAssignmentFinder()) { }
-
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-        protected override SyntaxNode GetExpression(InvocationExpressionSyntax node) =>
-            node.Expression;
-
-        protected override string GetIdentifierName(InvocationExpressionSyntax node) =>
-            node.Expression.GetName();
-
-        protected override bool IsMemberAccess(SyntaxNode node, out SyntaxNode memberAccessExpression)
+        if (node is MemberAccessExpressionSyntax memberAccess)
         {
-            if (node is MemberAccessExpressionSyntax memberAccess)
-            {
-                memberAccessExpression = memberAccess.Expression;
-                return true;
-            }
-            memberAccessExpression = null;
-            return false;
+            memberAccessExpression = memberAccess.Expression;
+            return true;
         }
+        memberAccessExpression = null;
+        return false;
+    }
 
-        protected override bool IsObjectCreation(SyntaxNode node) =>
-            node.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
+    protected override bool IsObjectCreation(SyntaxNode node) =>
+        node.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
-        protected override bool IsIdentifier(SyntaxNode node, out string identifierName)
+    protected override bool IsIdentifier(SyntaxNode node, out string identifierName)
+    {
+        if (node is IdentifierNameSyntax identifier)
         {
-            if (node is IdentifierNameSyntax identifier)
-            {
-                identifierName = identifier.Identifier.ValueText;
-                return true;
-            }
-            identifierName = null;
-            return false;
+            identifierName = identifier.Identifier.ValueText;
+            return true;
         }
+        identifierName = null;
+        return false;
     }
 }

@@ -18,13 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Extensions;
+
+public static class PropertyDeclarationSyntaxExtensions
 {
-    public static class PropertyDeclarationSyntaxExtensions
-    {
-        internal static bool IsAutoProperty(this PropertyDeclarationSyntax propertyDeclaration) =>
-            propertyDeclaration.AccessorList != null
-            && propertyDeclaration.AccessorList.Accessors
-                                  .All(accessor => accessor.Body == null && accessor.ExpressionBody() == null);
-    }
+    internal static bool IsAutoProperty(this PropertyDeclarationSyntax propertyDeclaration) =>
+        propertyDeclaration.AccessorList != null
+        && propertyDeclaration.AccessorList.Accessors
+                              .All(accessor => accessor.Body == null && accessor.ExpressionBody() == null);
 }

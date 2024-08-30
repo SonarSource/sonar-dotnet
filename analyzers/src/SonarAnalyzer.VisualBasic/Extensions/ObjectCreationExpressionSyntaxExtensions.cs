@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Extensions;
+
+internal static class ObjectCreationExpressionSyntaxExtensions
 {
-    internal static class ObjectCreationExpressionSyntaxExtensions
-    {
-        public static SyntaxToken? GetObjectCreationTypeIdentifier(this ObjectCreationExpressionSyntax objectCreation) =>
-            objectCreation?.Type.GetIdentifier();
-    }
+    public static SyntaxToken? GetObjectCreationTypeIdentifier(this ObjectCreationExpressionSyntax objectCreation) =>
+        objectCreation?.Type.GetIdentifier();
 }

@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Extensions;
+
+internal static class LanguageVersionExtensions
 {
-    internal static class LanguageVersionExtensions
-    {
-        internal static bool IsAtLeast(this LanguageVersion left, LanguageVersion right) =>
-            left.CompareTo(right) >= 0;
-    }
+    internal static bool IsAtLeast(this LanguageVersion left, LanguageVersion right) =>
+        left.CompareTo(right) >= 0;
 }

@@ -18,28 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
-{
-    internal static class ITupleOperationWrapperExtensions
-    {
-        public static ImmutableArray<IOperation> AllElements(this ITupleOperationWrapper tuple)
-        {
-            var arrayBuilder = ImmutableArray.CreateBuilder<IOperation>();
-            CollectTupleElements(tuple);
-            return arrayBuilder.ToImmutableArray();
+namespace SonarAnalyzer.Extensions;
 
-            void CollectTupleElements(ITupleOperationWrapper tuple)
+internal static class ITupleOperationWrapperExtensions
+{
+    public static ImmutableArray<IOperation> AllElements(this ITupleOperationWrapper tuple)
+    {
+        var arrayBuilder = ImmutableArray.CreateBuilder<IOperation>();
+        CollectTupleElements(tuple);
+        return arrayBuilder.ToImmutableArray();
+
+        void CollectTupleElements(ITupleOperationWrapper tuple)
+        {
+            foreach (var element in tuple.Elements)
             {
-                foreach (var element in tuple.Elements)
+                if (ITupleOperationWrapper.IsInstance(element))
                 {
-                    if (ITupleOperationWrapper.IsInstance(element))
-                    {
-                        CollectTupleElements(ITupleOperationWrapper.FromOperation(element));
-                    }
-                    else
-                    {
-                        arrayBuilder.Add(element);
-                    }
+                    CollectTupleElements(ITupleOperationWrapper.FromOperation(element));
+                }
+                else
+                {
+                    arrayBuilder.Add(element);
                 }
             }
         }

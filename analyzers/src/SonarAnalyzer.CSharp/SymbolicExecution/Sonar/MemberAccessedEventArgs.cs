@@ -18,15 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar
-{
-    internal class MemberAccessedEventArgs : EventArgs
-    {
-        public MemberAccessedEventArgs(IdentifierNameSyntax identifier)
-        {
-            Identifier = identifier;
-        }
+namespace SonarAnalyzer.SymbolicExecution.Sonar;
 
-        public IdentifierNameSyntax Identifier { get; }
+internal class MemberAccessedEventArgs : EventArgs
+{
+    public MemberAccessedEventArgs(IdentifierNameSyntax identifier)
+    {
+        Identifier = identifier;
     }
+
+    public IdentifierNameSyntax Identifier { get; }
 }

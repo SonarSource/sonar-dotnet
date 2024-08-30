@@ -18,12 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar
+namespace SonarAnalyzer.SymbolicExecution.Sonar;
+
+public class VisitCountExceedLimitEventArgs : EventArgs
 {
-    public class VisitCountExceedLimitEventArgs : EventArgs
-    {
-        public ProgramPoint ProgramPoint { get; set; }
-        public ProgramState ProgramState { get; set; }
-        public int Limit { get; set; }
-    }
+    public ProgramPoint ProgramPoint { get; set; }
+    public ProgramState ProgramState { get; set; }
+    public int Limit { get; set; }
 }

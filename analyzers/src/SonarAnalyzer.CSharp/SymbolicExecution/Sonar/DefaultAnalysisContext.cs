@@ -18,31 +18,30 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar
+namespace SonarAnalyzer.SymbolicExecution.Sonar;
+
+internal abstract class DefaultAnalysisContext<T> : ISymbolicExecutionAnalysisContext
 {
-    internal abstract class DefaultAnalysisContext<T> : ISymbolicExecutionAnalysisContext
+    private readonly List<T> locations = new List<T>();
+
+    protected abstract Diagnostic CreateDiagnostic(T location);
+
+    public bool SupportsPartialResults => false;
+
+    public IEnumerable<Diagnostic> GetDiagnostics() =>
+        locations.Distinct().Select(CreateDiagnostic);
+
+    public void AddLocation(T location) =>
+        locations.Add(location);
+
+    public void Dispose()
     {
-        private readonly List<T> locations = new List<T>();
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
 
-        protected abstract Diagnostic CreateDiagnostic(T location);
-
-        public bool SupportsPartialResults => false;
-
-        public IEnumerable<Diagnostic> GetDiagnostics() =>
-            locations.Distinct().Select(CreateDiagnostic);
-
-        public void AddLocation(T location) =>
-            locations.Add(location);
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            // Nothing to do here
-        }
+    protected virtual void Dispose(bool disposing)
+    {
+        // Nothing to do here
     }
 }

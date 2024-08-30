@@ -18,72 +18,71 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Wrappers
+namespace SonarAnalyzer.Wrappers;
+
+internal static class MethodDeclarationFactory
 {
-    internal static class MethodDeclarationFactory
+    public static IMethodDeclaration Create(SyntaxNode node)
     {
-        public static IMethodDeclaration Create(SyntaxNode node)
+        if (node is null)
         {
-            if (node is null)
-            {
-                throw new ArgumentNullException(nameof(node));
-            }
-            else if (LocalFunctionStatementSyntaxWrapper.IsInstance(node))
-            {
-                return new LocalFunctionStatementAdapter((LocalFunctionStatementSyntaxWrapper)node);
-            }
-            else if (node is MethodDeclarationSyntax method)
-            {
-                return new MethodDeclarationSyntaxAdapter(method);
-            }
-            else
-            {
-                throw new InvalidOperationException("Unexpected type: " + node.GetType().Name);
-            }
+            throw new ArgumentNullException(nameof(node));
         }
-
-        private class LocalFunctionStatementAdapter : IMethodDeclaration
+        else if (LocalFunctionStatementSyntaxWrapper.IsInstance(node))
         {
-            private readonly LocalFunctionStatementSyntaxWrapper syntaxWrapper;
-
-            public LocalFunctionStatementAdapter(LocalFunctionStatementSyntaxWrapper syntaxWrapper)
-                => this.syntaxWrapper = syntaxWrapper;
-
-            public BlockSyntax Body => syntaxWrapper.Body;
-
-            public ArrowExpressionClauseSyntax ExpressionBody => syntaxWrapper.ExpressionBody;
-
-            public SyntaxToken Identifier => syntaxWrapper.Identifier;
-
-            public ParameterListSyntax ParameterList => syntaxWrapper.ParameterList;
-
-            public TypeParameterListSyntax TypeParameterList => syntaxWrapper.TypeParameterList;
-
-            public bool HasImplementation => Body != null || ExpressionBody != null;
-
-            public bool IsLocal => true;
+            return new LocalFunctionStatementAdapter((LocalFunctionStatementSyntaxWrapper)node);
         }
-
-        private class MethodDeclarationSyntaxAdapter : IMethodDeclaration
+        else if (node is MethodDeclarationSyntax method)
         {
-            private readonly MethodDeclarationSyntax declarationSyntax;
-
-            public MethodDeclarationSyntaxAdapter(MethodDeclarationSyntax declarationSyntax)
-                => this.declarationSyntax = declarationSyntax;
-
-            public BlockSyntax Body => declarationSyntax.Body;
-
-            public ArrowExpressionClauseSyntax ExpressionBody => declarationSyntax.ExpressionBody;
-
-            public SyntaxToken Identifier => declarationSyntax.Identifier;
-
-            public ParameterListSyntax ParameterList => declarationSyntax.ParameterList;
-
-            public TypeParameterListSyntax TypeParameterList => declarationSyntax.TypeParameterList;
-
-            public bool HasImplementation => Body != null || ExpressionBody != null;
-
-            public bool IsLocal => false;
+            return new MethodDeclarationSyntaxAdapter(method);
         }
+        else
+        {
+            throw new InvalidOperationException("Unexpected type: " + node.GetType().Name);
+        }
+    }
+
+    private class LocalFunctionStatementAdapter : IMethodDeclaration
+    {
+        private readonly LocalFunctionStatementSyntaxWrapper syntaxWrapper;
+
+        public LocalFunctionStatementAdapter(LocalFunctionStatementSyntaxWrapper syntaxWrapper)
+            => this.syntaxWrapper = syntaxWrapper;
+
+        public BlockSyntax Body => syntaxWrapper.Body;
+
+        public ArrowExpressionClauseSyntax ExpressionBody => syntaxWrapper.ExpressionBody;
+
+        public SyntaxToken Identifier => syntaxWrapper.Identifier;
+
+        public ParameterListSyntax ParameterList => syntaxWrapper.ParameterList;
+
+        public TypeParameterListSyntax TypeParameterList => syntaxWrapper.TypeParameterList;
+
+        public bool HasImplementation => Body != null || ExpressionBody != null;
+
+        public bool IsLocal => true;
+    }
+
+    private class MethodDeclarationSyntaxAdapter : IMethodDeclaration
+    {
+        private readonly MethodDeclarationSyntax declarationSyntax;
+
+        public MethodDeclarationSyntaxAdapter(MethodDeclarationSyntax declarationSyntax)
+            => this.declarationSyntax = declarationSyntax;
+
+        public BlockSyntax Body => declarationSyntax.Body;
+
+        public ArrowExpressionClauseSyntax ExpressionBody => declarationSyntax.ExpressionBody;
+
+        public SyntaxToken Identifier => declarationSyntax.Identifier;
+
+        public ParameterListSyntax ParameterList => declarationSyntax.ParameterList;
+
+        public TypeParameterListSyntax TypeParameterList => declarationSyntax.TypeParameterList;
+
+        public bool HasImplementation => Body != null || ExpressionBody != null;
+
+        public bool IsLocal => false;
     }
 }

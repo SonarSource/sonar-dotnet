@@ -18,30 +18,29 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Trackers
+namespace SonarAnalyzer.Helpers.Trackers;
+
+public class CSharpElementAccessTracker : ElementAccessTracker<SyntaxKind>
 {
-    public class CSharpElementAccessTracker : ElementAccessTracker<SyntaxKind>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-        protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.ElementAccessExpression };
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.ElementAccessExpression };
 
-        public override object AssignedValue(ElementAccessContext context) =>
-            context.Node.Ancestors().FirstOrDefault(x => x.IsKind(SyntaxKind.SimpleAssignmentExpression)) is AssignmentExpressionSyntax assignment
-                ? assignment.Right.FindConstantValue(context.SemanticModel)
-                : null;
+    public override object AssignedValue(ElementAccessContext context) =>
+        context.Node.Ancestors().FirstOrDefault(x => x.IsKind(SyntaxKind.SimpleAssignmentExpression)) is AssignmentExpressionSyntax assignment
+            ? assignment.Right.FindConstantValue(context.SemanticModel)
+            : null;
 
-        public override Condition ArgumentAtIndexEquals(int index, string value) =>
-            context => ((ElementAccessExpressionSyntax)context.Node).ArgumentList is { } argumentList
-                       && index < argumentList.Arguments.Count
-                       && argumentList.Arguments[index].Expression.FindStringConstant(context.SemanticModel) == value;
+    public override Condition ArgumentAtIndexEquals(int index, string value) =>
+        context => ((ElementAccessExpressionSyntax)context.Node).ArgumentList is { } argumentList
+                   && index < argumentList.Arguments.Count
+                   && argumentList.Arguments[index].Expression.FindStringConstant(context.SemanticModel) == value;
 
-        public override Condition MatchSetter() =>
-            context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
+    public override Condition MatchSetter() =>
+        context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
 
-        public override Condition MatchProperty(MemberDescriptor member) =>
-            context => ((ElementAccessExpressionSyntax)context.Node).Expression is MemberAccessExpressionSyntax memberAccess
-                       && memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
-                       && context.SemanticModel.GetTypeInfo(memberAccess.Expression) is TypeInfo enclosingClassType
-                       && member.IsMatch(memberAccess.Name.Identifier.ValueText, enclosingClassType.Type, Language.NameComparison);
-    }
+    public override Condition MatchProperty(MemberDescriptor member) =>
+        context => ((ElementAccessExpressionSyntax)context.Node).Expression is MemberAccessExpressionSyntax memberAccess
+                   && memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
+                   && context.SemanticModel.GetTypeInfo(memberAccess.Expression) is TypeInfo enclosingClassType
+                   && member.IsMatch(memberAccess.Name.Identifier.ValueText, enclosingClassType.Type, Language.NameComparison);
 }

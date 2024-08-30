@@ -18,24 +18,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public class CsharpStringInterpolationConstantValueResolver : StringInterpolationConstantValueResolver<SyntaxKind,
+                                                                                                       InterpolatedStringExpressionSyntax,
+                                                                                                       InterpolatedStringContentSyntax,
+                                                                                                       InterpolationSyntax,
+                                                                                                       InterpolatedStringTextSyntax>
 {
-    public class CsharpStringInterpolationConstantValueResolver : StringInterpolationConstantValueResolver<SyntaxKind,
-                                                                                                           InterpolatedStringExpressionSyntax,
-                                                                                                           InterpolatedStringContentSyntax,
-                                                                                                           InterpolationSyntax,
-                                                                                                           InterpolatedStringTextSyntax>
-    {
-        private static readonly Lazy<CsharpStringInterpolationConstantValueResolver> Singleton = new(() => new CsharpStringInterpolationConstantValueResolver());
+    private static readonly Lazy<CsharpStringInterpolationConstantValueResolver> Singleton = new(() => new CsharpStringInterpolationConstantValueResolver());
 
-        public static CsharpStringInterpolationConstantValueResolver Instance => Singleton.Value;
+    public static CsharpStringInterpolationConstantValueResolver Instance => Singleton.Value;
 
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override IEnumerable<InterpolatedStringContentSyntax> Contents(InterpolatedStringExpressionSyntax interpolatedStringExpression) =>
-            interpolatedStringExpression.Contents;
+    protected override IEnumerable<InterpolatedStringContentSyntax> Contents(InterpolatedStringExpressionSyntax interpolatedStringExpression) =>
+        interpolatedStringExpression.Contents;
 
-        protected override SyntaxToken TextToken(InterpolatedStringTextSyntax interpolatedStringText) =>
-            interpolatedStringText.TextToken;
-    }
+    protected override SyntaxToken TextToken(InterpolatedStringTextSyntax interpolatedStringText) =>
+        interpolatedStringText.TextToken;
 }

@@ -18,30 +18,29 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+internal class CSharpGeneratedCodeRecognizer : GeneratedCodeRecognizer
 {
-    internal class CSharpGeneratedCodeRecognizer : GeneratedCodeRecognizer
+    #region Singleton implementation
+
+    private CSharpGeneratedCodeRecognizer()
     {
-        #region Singleton implementation
-
-        private CSharpGeneratedCodeRecognizer()
-        {
-        }
-
-        private static readonly Lazy<CSharpGeneratedCodeRecognizer> Lazy =
-            new Lazy<CSharpGeneratedCodeRecognizer>(() => new CSharpGeneratedCodeRecognizer());
-
-        public static CSharpGeneratedCodeRecognizer Instance => Lazy.Value;
-
-        #endregion Singleton implementation
-
-        protected override bool IsTriviaComment(SyntaxTrivia trivia) =>
-            trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) ||
-            trivia.IsKind(SyntaxKind.MultiLineCommentTrivia);
-
-        protected override string GetAttributeName(SyntaxNode node) =>
-            node.IsKind(SyntaxKind.Attribute)
-                ? ((AttributeSyntax)node).Name.ToString()
-                : string.Empty;
     }
+
+    private static readonly Lazy<CSharpGeneratedCodeRecognizer> Lazy =
+        new Lazy<CSharpGeneratedCodeRecognizer>(() => new CSharpGeneratedCodeRecognizer());
+
+    public static CSharpGeneratedCodeRecognizer Instance => Lazy.Value;
+
+    #endregion Singleton implementation
+
+    protected override bool IsTriviaComment(SyntaxTrivia trivia) =>
+        trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) ||
+        trivia.IsKind(SyntaxKind.MultiLineCommentTrivia);
+
+    protected override string GetAttributeName(SyntaxNode node) =>
+        node.IsKind(SyntaxKind.Attribute)
+            ? ((AttributeSyntax)node).Name.ToString()
+            : string.Empty;
 }

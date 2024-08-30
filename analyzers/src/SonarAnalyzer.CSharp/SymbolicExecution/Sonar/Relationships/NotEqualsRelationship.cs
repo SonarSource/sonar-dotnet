@@ -18,39 +18,38 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.Relationships
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Relationships;
+
+public abstract class NotEqualsRelationship : BinaryRelationship, IEquatable<NotEqualsRelationship>
 {
-    public abstract class NotEqualsRelationship : BinaryRelationship, IEquatable<NotEqualsRelationship>
+    private readonly Lazy<int> hash;
+
+    protected NotEqualsRelationship(SymbolicValue leftOperand, SymbolicValue rightOperand)
+        : base(leftOperand, rightOperand)
     {
-        private readonly Lazy<int> hash;
-
-        protected NotEqualsRelationship(SymbolicValue leftOperand, SymbolicValue rightOperand)
-            : base(leftOperand, rightOperand)
+        this.hash = new Lazy<int>(() =>
         {
-            this.hash = new Lazy<int>(() =>
-            {
-                var left = LeftOperand.GetHashCode();
-                var right = RightOperand.GetHashCode();
+            var left = LeftOperand.GetHashCode();
+            var right = RightOperand.GetHashCode();
 
-                return EqualsRelationship.GetHashCodeMinMaxOrdered(left, right, GetType().GetHashCode());
-            });
-        }
-
-        public sealed override bool Equals(object obj)
-        {
-            if (obj == null)
-            {
-                return false;
-            }
-
-            return Equals(obj as EqualsRelationship);
-        }
-
-        public bool Equals(NotEqualsRelationship other)
-        {
-            return other != null && AreOperandsMatching(other);
-        }
-
-        public sealed override int GetHashCode() => this.hash.Value;
+            return EqualsRelationship.GetHashCodeMinMaxOrdered(left, right, GetType().GetHashCode());
+        });
     }
+
+    public sealed override bool Equals(object obj)
+    {
+        if (obj == null)
+        {
+            return false;
+        }
+
+        return Equals(obj as EqualsRelationship);
+    }
+
+    public bool Equals(NotEqualsRelationship other)
+    {
+        return other != null && AreOperandsMatching(other);
+    }
+
+    public sealed override int GetHashCode() => this.hash.Value;
 }

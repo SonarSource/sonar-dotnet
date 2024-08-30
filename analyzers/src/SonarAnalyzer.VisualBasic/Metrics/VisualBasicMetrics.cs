@@ -18,161 +18,160 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Metrics.VisualBasic
+namespace SonarAnalyzer.Metrics.VisualBasic;
+
+public sealed class VisualBasicMetrics : MetricsBase
 {
-    public sealed class VisualBasicMetrics : MetricsBase
+    private static readonly ISet<SyntaxKind> FunctionKinds = new HashSet<SyntaxKind>
     {
-        private static readonly ISet<SyntaxKind> FunctionKinds = new HashSet<SyntaxKind>
+        SyntaxKind.SubNewStatement,
+        SyntaxKind.SubStatement,
+        SyntaxKind.FunctionStatement,
+        SyntaxKind.OperatorStatement,
+        SyntaxKind.GetAccessorStatement,
+        SyntaxKind.SetAccessorStatement,
+        SyntaxKind.RaiseEventAccessorStatement,
+        SyntaxKind.AddHandlerAccessorStatement,
+        SyntaxKind.RemoveHandlerAccessorStatement,
+        SyntaxKind.DeclareSubStatement,
+        SyntaxKind.DeclareFunctionStatement
+    };
+
+    private static readonly ISet<SyntaxKind> MethodBlocks = new HashSet<SyntaxKind>
+    {
+        SyntaxKind.ConstructorBlock,
+        SyntaxKind.FunctionBlock,
+        SyntaxKind.SubBlock,
+        SyntaxKind.OperatorBlock,
+        SyntaxKind.GetAccessorBlock,
+        SyntaxKind.SetAccessorBlock,
+        SyntaxKind.RaiseEventAccessorBlock,
+        SyntaxKind.AddHandlerAccessorBlock,
+        SyntaxKind.RemoveHandlerAccessorBlock
+    };
+
+    private readonly Lazy<ImmutableArray<int>> lazyExecutableLines;
+
+    public override ImmutableArray<int> ExecutableLines =>
+        lazyExecutableLines.Value;
+
+    public VisualBasicMetrics(SyntaxTree tree, SemanticModel semanticModel)
+        : base(tree)
+    {
+        var root = tree.GetRoot();
+        if (root.Language != LanguageNames.VisualBasic)
         {
-            SyntaxKind.SubNewStatement,
-            SyntaxKind.SubStatement,
-            SyntaxKind.FunctionStatement,
-            SyntaxKind.OperatorStatement,
-            SyntaxKind.GetAccessorStatement,
-            SyntaxKind.SetAccessorStatement,
-            SyntaxKind.RaiseEventAccessorStatement,
-            SyntaxKind.AddHandlerAccessorStatement,
-            SyntaxKind.RemoveHandlerAccessorStatement,
-            SyntaxKind.DeclareSubStatement,
-            SyntaxKind.DeclareFunctionStatement
-        };
-
-        private static readonly ISet<SyntaxKind> MethodBlocks = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.ConstructorBlock,
-            SyntaxKind.FunctionBlock,
-            SyntaxKind.SubBlock,
-            SyntaxKind.OperatorBlock,
-            SyntaxKind.GetAccessorBlock,
-            SyntaxKind.SetAccessorBlock,
-            SyntaxKind.RaiseEventAccessorBlock,
-            SyntaxKind.AddHandlerAccessorBlock,
-            SyntaxKind.RemoveHandlerAccessorBlock
-        };
-
-        private readonly Lazy<ImmutableArray<int>> lazyExecutableLines;
-
-        public override ImmutableArray<int> ExecutableLines =>
-            lazyExecutableLines.Value;
-
-        public VisualBasicMetrics(SyntaxTree tree, SemanticModel semanticModel)
-            : base(tree)
-        {
-            var root = tree.GetRoot();
-            if (root.Language != LanguageNames.VisualBasic)
-            {
-                throw new ArgumentException(InitializationErrorTextPattern, nameof(tree));
-            }
-
-            lazyExecutableLines = new Lazy<ImmutableArray<int>>(() => VisualBasicExecutableLinesMetric.GetLineNumbers(tree, semanticModel));
+            throw new ArgumentException(InitializationErrorTextPattern, nameof(tree));
         }
 
-        protected override int ComputeCognitiveComplexity(SyntaxNode node) =>
-            VisualBasicCognitiveComplexityMetric.GetComplexity(node).Complexity;
+        lazyExecutableLines = new Lazy<ImmutableArray<int>>(() => VisualBasicExecutableLinesMetric.GetLineNumbers(tree, semanticModel));
+    }
 
-        public override int ComputeCyclomaticComplexity(SyntaxNode node) =>
-            node.DescendantNodesAndSelf().Count(n => IsComplexityIncreasingKind(n) || IsFunction(n));
+    protected override int ComputeCognitiveComplexity(SyntaxNode node) =>
+        VisualBasicCognitiveComplexityMetric.GetComplexity(node).Complexity;
 
-        protected override bool IsClass(SyntaxNode node)
+    public override int ComputeCyclomaticComplexity(SyntaxNode node) =>
+        node.DescendantNodesAndSelf().Count(n => IsComplexityIncreasingKind(n) || IsFunction(n));
+
+    protected override bool IsClass(SyntaxNode node)
+    {
+        switch (node.Kind())
         {
-            switch (node.Kind())
-            {
-                case SyntaxKind.ClassBlock:
-                case SyntaxKind.StructureBlock:
-                case SyntaxKind.InterfaceBlock:
-                case SyntaxKind.ModuleBlock:
-                    return true;
+            case SyntaxKind.ClassBlock:
+            case SyntaxKind.StructureBlock:
+            case SyntaxKind.InterfaceBlock:
+            case SyntaxKind.ModuleBlock:
+                return true;
 
-                default:
-                    return false;
-            }
-        }
-
-        protected override bool IsCommentTrivia(SyntaxTrivia trivia) => trivia.IsComment();
-
-        protected override bool IsEndOfFile(SyntaxToken token) =>
-            token.IsKind(SyntaxKind.EndOfFileToken);
-
-        protected override bool IsFunction(SyntaxNode node)
-        {
-            if (!FunctionKinds.Contains(node.Kind())
-                || !MethodBlocks.Contains(node.Parent.Kind())
-                || node.Parent.Parent.IsKind(SyntaxKind.InterfaceBlock))
-            {
+            default:
                 return false;
-            }
+        }
+    }
 
-            if (node is MethodBaseSyntax method && method.Modifiers.Any(SyntaxKind.MustOverrideKeyword))
-            {
-                return false;
-            }
+    protected override bool IsCommentTrivia(SyntaxTrivia trivia) => trivia.IsComment();
 
-            return true;
+    protected override bool IsEndOfFile(SyntaxToken token) =>
+        token.IsKind(SyntaxKind.EndOfFileToken);
+
+    protected override bool IsFunction(SyntaxNode node)
+    {
+        if (!FunctionKinds.Contains(node.Kind())
+            || !MethodBlocks.Contains(node.Parent.Kind())
+            || node.Parent.Parent.IsKind(SyntaxKind.InterfaceBlock))
+        {
+            return false;
         }
 
-        protected override bool IsNoneToken(SyntaxToken token) =>
-            token.IsKind(SyntaxKind.None);
-
-        protected override bool IsStatement(SyntaxNode node) =>
-            node is ExecutableStatementSyntax;
-
-        private static bool IsComplexityIncreasingKind(SyntaxNode node)
+        if (node is MethodBaseSyntax method && method.Modifiers.Any(SyntaxKind.MustOverrideKeyword))
         {
-            switch (node.Kind())
-            {
-                case SyntaxKind.IfStatement:
-                case SyntaxKind.SingleLineIfStatement:
-                case SyntaxKind.TernaryConditionalExpression:
-                case SyntaxKind.CaseStatement:
+            return false;
+        }
 
-                case SyntaxKind.WhileStatement:
-                case SyntaxKind.DoWhileStatement:
-                case SyntaxKind.DoUntilStatement:
-                case SyntaxKind.SimpleDoStatement:
-                case SyntaxKind.ForStatement:
-                case SyntaxKind.ForEachStatement:
+        return true;
+    }
 
-                case SyntaxKind.ThrowStatement:
-                case SyntaxKind.TryStatement:
+    protected override bool IsNoneToken(SyntaxToken token) =>
+        token.IsKind(SyntaxKind.None);
 
-                case SyntaxKind.ErrorStatement:
+    protected override bool IsStatement(SyntaxNode node) =>
+        node is ExecutableStatementSyntax;
 
-                case SyntaxKind.ResumeStatement:
-                case SyntaxKind.ResumeNextStatement:
-                case SyntaxKind.ResumeLabelStatement:
+    private static bool IsComplexityIncreasingKind(SyntaxNode node)
+    {
+        switch (node.Kind())
+        {
+            case SyntaxKind.IfStatement:
+            case SyntaxKind.SingleLineIfStatement:
+            case SyntaxKind.TernaryConditionalExpression:
+            case SyntaxKind.CaseStatement:
 
-                case SyntaxKind.OnErrorGoToLabelStatement:
-                case SyntaxKind.OnErrorGoToMinusOneStatement:
-                case SyntaxKind.OnErrorGoToZeroStatement:
-                case SyntaxKind.OnErrorResumeNextStatement:
+            case SyntaxKind.WhileStatement:
+            case SyntaxKind.DoWhileStatement:
+            case SyntaxKind.DoUntilStatement:
+            case SyntaxKind.SimpleDoStatement:
+            case SyntaxKind.ForStatement:
+            case SyntaxKind.ForEachStatement:
 
-                case SyntaxKind.GoToStatement:
+            case SyntaxKind.ThrowStatement:
+            case SyntaxKind.TryStatement:
 
-                case SyntaxKind.ExitDoStatement:
-                case SyntaxKind.ExitForStatement:
-                case SyntaxKind.ExitFunctionStatement:
-                case SyntaxKind.ExitOperatorStatement:
-                case SyntaxKind.ExitPropertyStatement:
-                case SyntaxKind.ExitSelectStatement:
-                case SyntaxKind.ExitSubStatement:
-                case SyntaxKind.ExitTryStatement:
-                case SyntaxKind.ExitWhileStatement:
+            case SyntaxKind.ErrorStatement:
 
-                case SyntaxKind.ContinueDoStatement:
-                case SyntaxKind.ContinueForStatement:
-                case SyntaxKind.ContinueWhileStatement:
+            case SyntaxKind.ResumeStatement:
+            case SyntaxKind.ResumeNextStatement:
+            case SyntaxKind.ResumeLabelStatement:
 
-                case SyntaxKind.StopStatement:
+            case SyntaxKind.OnErrorGoToLabelStatement:
+            case SyntaxKind.OnErrorGoToMinusOneStatement:
+            case SyntaxKind.OnErrorGoToZeroStatement:
+            case SyntaxKind.OnErrorResumeNextStatement:
 
-                case SyntaxKind.AndAlsoExpression:
-                case SyntaxKind.OrElseExpression:
+            case SyntaxKind.GoToStatement:
 
-                case SyntaxKind.EndStatement:
-                    return true;
+            case SyntaxKind.ExitDoStatement:
+            case SyntaxKind.ExitForStatement:
+            case SyntaxKind.ExitFunctionStatement:
+            case SyntaxKind.ExitOperatorStatement:
+            case SyntaxKind.ExitPropertyStatement:
+            case SyntaxKind.ExitSelectStatement:
+            case SyntaxKind.ExitSubStatement:
+            case SyntaxKind.ExitTryStatement:
+            case SyntaxKind.ExitWhileStatement:
 
-                default:
-                    return false;
-            }
+            case SyntaxKind.ContinueDoStatement:
+            case SyntaxKind.ContinueForStatement:
+            case SyntaxKind.ContinueWhileStatement:
+
+            case SyntaxKind.StopStatement:
+
+            case SyntaxKind.AndAlsoExpression:
+            case SyntaxKind.OrElseExpression:
+
+            case SyntaxKind.EndStatement:
+                return true;
+
+            default:
+                return false;
         }
     }
 }

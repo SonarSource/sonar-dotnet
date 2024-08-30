@@ -18,27 +18,26 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public sealed class VisualBasicGeneratedCodeRecognizer : GeneratedCodeRecognizer
 {
-    public sealed class VisualBasicGeneratedCodeRecognizer : GeneratedCodeRecognizer
+    #region Singleton implementation
+
+    private VisualBasicGeneratedCodeRecognizer()
     {
-        #region Singleton implementation
-
-        private VisualBasicGeneratedCodeRecognizer()
-        {
-        }
-
-        private static readonly Lazy<VisualBasicGeneratedCodeRecognizer> Lazy = new Lazy<VisualBasicGeneratedCodeRecognizer>(() => new VisualBasicGeneratedCodeRecognizer());
-        public static VisualBasicGeneratedCodeRecognizer Instance => Lazy.Value;
-
-        #endregion Singleton implementation
-
-        protected override bool IsTriviaComment(SyntaxTrivia trivia) =>
-            trivia.IsKind(SyntaxKind.CommentTrivia);
-
-        protected override string GetAttributeName(SyntaxNode node) =>
-            node.IsKind(SyntaxKind.Attribute)
-                ? ((AttributeSyntax)node).Name.ToString()
-                : string.Empty;
     }
+
+    private static readonly Lazy<VisualBasicGeneratedCodeRecognizer> Lazy = new Lazy<VisualBasicGeneratedCodeRecognizer>(() => new VisualBasicGeneratedCodeRecognizer());
+    public static VisualBasicGeneratedCodeRecognizer Instance => Lazy.Value;
+
+    #endregion Singleton implementation
+
+    protected override bool IsTriviaComment(SyntaxTrivia trivia) =>
+        trivia.IsKind(SyntaxKind.CommentTrivia);
+
+    protected override string GetAttributeName(SyntaxNode node) =>
+        node.IsKind(SyntaxKind.Attribute)
+            ? ((AttributeSyntax)node).Name.ToString()
+            : string.Empty;
 }

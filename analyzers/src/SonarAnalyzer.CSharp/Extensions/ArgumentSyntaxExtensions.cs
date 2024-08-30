@@ -18,37 +18,36 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Extensions;
+
+internal static class ArgumentSyntaxExtensions
 {
-    internal static class ArgumentSyntaxExtensions
-    {
-        internal static int? GetArgumentIndex(this ArgumentSyntax argument) =>
-            (argument.Parent as ArgumentListSyntax)?.Arguments.IndexOf(argument);
+    internal static int? GetArgumentIndex(this ArgumentSyntax argument) =>
+        (argument.Parent as ArgumentListSyntax)?.Arguments.IndexOf(argument);
 
-        internal static IEnumerable<ArgumentSyntax> GetArgumentsOfKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
-            syntaxList
-                .Where(argument => semanticModel.GetTypeInfo(argument.Expression).Type.Is(knownType));
+    internal static IEnumerable<ArgumentSyntax> GetArgumentsOfKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
+        syntaxList
+            .Where(argument => semanticModel.GetTypeInfo(argument.Expression).Type.Is(knownType));
 
-        internal static IEnumerable<ISymbol> GetSymbolsOfKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
-            syntaxList
-                .GetArgumentsOfKnownType(knownType, semanticModel)
-                .Select(argument => semanticModel.GetSymbolInfo(argument.Expression).Symbol);
+    internal static IEnumerable<ISymbol> GetSymbolsOfKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
+        syntaxList
+            .GetArgumentsOfKnownType(knownType, semanticModel)
+            .Select(argument => semanticModel.GetSymbolInfo(argument.Expression).Symbol);
 
-        internal static bool NameIs(this ArgumentSyntax argument, string name) =>
-            argument.NameColon?.Name.Identifier.Text == name;
+    internal static bool NameIs(this ArgumentSyntax argument, string name) =>
+        argument.NameColon?.Name.Identifier.Text == name;
 
-        // (arg, b) = something
-        internal static bool IsInTupleAssignmentTarget(this ArgumentSyntax argument) =>
-            argument.OutermostTuple() is { SyntaxNode: { } tupleExpression }
-            && tupleExpression.Parent is AssignmentExpressionSyntax assignment
-            && assignment.Left == tupleExpression;
+    // (arg, b) = something
+    internal static bool IsInTupleAssignmentTarget(this ArgumentSyntax argument) =>
+        argument.OutermostTuple() is { SyntaxNode: { } tupleExpression }
+        && tupleExpression.Parent is AssignmentExpressionSyntax assignment
+        && assignment.Left == tupleExpression;
 
-        internal static TupleExpressionSyntaxWrapper? OutermostTuple(this ArgumentSyntax argument) =>
-            argument.Ancestors()
-                .TakeWhile(x => x.IsAnyKind(SyntaxKind.Argument, SyntaxKindEx.TupleExpression))
-                .LastOrDefault(x => x.IsKind(SyntaxKindEx.TupleExpression)) is { } outerTuple
-                && TupleExpressionSyntaxWrapper.IsInstance(outerTuple)
-                    ? (TupleExpressionSyntaxWrapper)outerTuple
-                    : null;
-    }
+    internal static TupleExpressionSyntaxWrapper? OutermostTuple(this ArgumentSyntax argument) =>
+        argument.Ancestors()
+            .TakeWhile(x => x.IsAnyKind(SyntaxKind.Argument, SyntaxKindEx.TupleExpression))
+            .LastOrDefault(x => x.IsKind(SyntaxKindEx.TupleExpression)) is { } outerTuple
+            && TupleExpressionSyntaxWrapper.IsInstance(outerTuple)
+                ? (TupleExpressionSyntaxWrapper)outerTuple
+                : null;
 }

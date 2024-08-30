@@ -18,13 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Extensions;
+
+internal static partial class MemberAccessExpressionSyntaxExtensions
 {
-    internal static partial class MemberAccessExpressionSyntaxExtensions
-    {
-        public static bool IsPtrZero(this MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel) =>
-            memberAccess.Name.Identifier.Text == "Zero"
-            && semanticModel.GetTypeInfo(memberAccess).Type is var type
-            && type.IsAny(KnownType.System_IntPtr, KnownType.System_UIntPtr);
-    }
+    public static bool IsPtrZero(this MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel) =>
+        memberAccess.Name.Identifier.Text == "Zero"
+        && semanticModel.GetTypeInfo(memberAccess).Type is var type
+        && type.IsAny(KnownType.System_IntPtr, KnownType.System_UIntPtr);
 }

@@ -18,17 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
-{
-    public class BinarySymbolicValue : SymbolicValue
-    {
-        public SymbolicValue LeftOperand { get; }
-        public SymbolicValue RightOperand { get; }
+namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
 
-        public BinarySymbolicValue(SymbolicValue leftOperand, SymbolicValue rightOperand)
-        {
-            LeftOperand = leftOperand;
-            RightOperand = rightOperand;
-        }
+public class BinarySymbolicValue : SymbolicValue
+{
+    public SymbolicValue LeftOperand { get; }
+    public SymbolicValue RightOperand { get; }
+
+    public BinarySymbolicValue(SymbolicValue leftOperand, SymbolicValue rightOperand)
+    {
+        LeftOperand = leftOperand;
+        RightOperand = rightOperand;
     }
 }

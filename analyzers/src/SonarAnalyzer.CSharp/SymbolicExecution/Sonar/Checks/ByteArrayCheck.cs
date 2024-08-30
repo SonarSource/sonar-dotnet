@@ -20,49 +20,48 @@
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.Checks
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Checks;
+
+internal sealed class ByteArrayCheck : ExplodedGraphCheck
 {
-    internal sealed class ByteArrayCheck : ExplodedGraphCheck
-    {
-        public ByteArrayCheck(AbstractExplodedGraph explodedGraph) : base(explodedGraph) { }
+    public ByteArrayCheck(AbstractExplodedGraph explodedGraph) : base(explodedGraph) { }
 
-        public override ProgramState PostProcessInstruction(ProgramPoint programPoint, ProgramState programState) =>
-            programPoint.CurrentInstruction switch
-            {
-                ArrayCreationExpressionSyntax arrayCreation => ArrayCreationPostProcess(arrayCreation, programState),
-                InitializerExpressionSyntax initializerExpression => ImplicitlyTypedArrayPostProcess(initializerExpression, programState),
-                InvocationExpressionSyntax invocation => InvocationExpressionPostProcess(invocation, programState),
-                _ => programState
-            };
+    public override ProgramState PostProcessInstruction(ProgramPoint programPoint, ProgramState programState) =>
+        programPoint.CurrentInstruction switch
+        {
+            ArrayCreationExpressionSyntax arrayCreation => ArrayCreationPostProcess(arrayCreation, programState),
+            InitializerExpressionSyntax initializerExpression => ImplicitlyTypedArrayPostProcess(initializerExpression, programState),
+            InvocationExpressionSyntax invocation => InvocationExpressionPostProcess(invocation, programState),
+            _ => programState
+        };
 
-        private ProgramState ArrayCreationPostProcess(ArrayCreationExpressionSyntax arrayCreation, ProgramState programState) =>
-            semanticModel.GetTypeInfo(arrayCreation).Type.Is(KnownType.System_Byte_Array) && programState.HasValue
-                ? programState.SetConstraint(programState.PeekValue(), ByteCollectionConstraint.CryptographicallyWeak)
-                : programState;
+    private ProgramState ArrayCreationPostProcess(ArrayCreationExpressionSyntax arrayCreation, ProgramState programState) =>
+        semanticModel.GetTypeInfo(arrayCreation).Type.Is(KnownType.System_Byte_Array) && programState.HasValue
+            ? programState.SetConstraint(programState.PeekValue(), ByteCollectionConstraint.CryptographicallyWeak)
+            : programState;
 
-        private ProgramState ImplicitlyTypedArrayPostProcess(InitializerExpressionSyntax initializerExpression, ProgramState programState) =>
-            initializerExpression.IsKind(SyntaxKind.ArrayInitializerExpression)
-            // when the initializer is in a typed array creation, it is handled by ArrayCreationPostProcess()
-            && !initializerExpression.Parent.IsKind(SyntaxKind.ArrayCreationExpression)
-            && initializerExpression.FirstAncestorOrSelf<VariableDeclarationSyntax>() is VariableDeclarationSyntax variableDeclaration
-            && semanticModel.GetTypeInfo(variableDeclaration.Type).Type.Is(KnownType.System_Byte_Array)
-            && programState.HasValue
-                ? programState.SetConstraint(programState.PeekValue(), ByteCollectionConstraint.CryptographicallyWeak)
-                : programState;
+    private ProgramState ImplicitlyTypedArrayPostProcess(InitializerExpressionSyntax initializerExpression, ProgramState programState) =>
+        initializerExpression.IsKind(SyntaxKind.ArrayInitializerExpression)
+        // when the initializer is in a typed array creation, it is handled by ArrayCreationPostProcess()
+        && !initializerExpression.Parent.IsKind(SyntaxKind.ArrayCreationExpression)
+        && initializerExpression.FirstAncestorOrSelf<VariableDeclarationSyntax>() is VariableDeclarationSyntax variableDeclaration
+        && semanticModel.GetTypeInfo(variableDeclaration.Type).Type.Is(KnownType.System_Byte_Array)
+        && programState.HasValue
+            ? programState.SetConstraint(programState.PeekValue(), ByteCollectionConstraint.CryptographicallyWeak)
+            : programState;
 
-        private ProgramState InvocationExpressionPostProcess(InvocationExpressionSyntax invocation, ProgramState programState) =>
-            IsSanitizer(invocation, semanticModel)
-            && semanticModel.GetSymbolInfo(invocation.ArgumentList.Arguments[0].Expression).Symbol is {} symbol
-            && symbol.GetSymbolType().Is(KnownType.System_Byte_Array)
-            && programState.GetSymbolValue(symbol) is {} symbolicValue
-                ? programState.SetConstraint(symbolicValue, ByteCollectionConstraint.CryptographicallyStrong)
-                : programState;
+    private ProgramState InvocationExpressionPostProcess(InvocationExpressionSyntax invocation, ProgramState programState) =>
+        IsSanitizer(invocation, semanticModel)
+        && semanticModel.GetSymbolInfo(invocation.ArgumentList.Arguments[0].Expression).Symbol is {} symbol
+        && symbol.GetSymbolType().Is(KnownType.System_Byte_Array)
+        && programState.GetSymbolValue(symbol) is {} symbolicValue
+            ? programState.SetConstraint(symbolicValue, ByteCollectionConstraint.CryptographicallyStrong)
+            : programState;
 
-        private static bool IsSanitizer(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-            invocation.Expression is MemberAccessExpressionSyntax memberAccessExpressionSyntax
-            && (memberAccessExpressionSyntax.NameIs("GetBytes") || memberAccessExpressionSyntax.NameIs("GetNonZeroBytes"))
-            && semanticModel.GetSymbolInfo(invocation).Symbol is {} symbol
-            && symbol.ContainingType.IsAny(KnownType.System_Security_Cryptography_RNGCryptoServiceProvider,
-                                           KnownType.System_Security_Cryptography_RandomNumberGenerator);
-    }
+    private static bool IsSanitizer(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+        invocation.Expression is MemberAccessExpressionSyntax memberAccessExpressionSyntax
+        && (memberAccessExpressionSyntax.NameIs("GetBytes") || memberAccessExpressionSyntax.NameIs("GetNonZeroBytes"))
+        && semanticModel.GetSymbolInfo(invocation).Symbol is {} symbol
+        && symbol.ContainingType.IsAny(KnownType.System_Security_Cryptography_RNGCryptoServiceProvider,
+                                       KnownType.System_Security_Cryptography_RandomNumberGenerator);
 }

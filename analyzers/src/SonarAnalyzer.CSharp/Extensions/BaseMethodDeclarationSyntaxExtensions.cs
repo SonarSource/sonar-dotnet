@@ -18,25 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Extensions;
+
+internal static class BaseMethodDeclarationSyntaxExtensions
 {
-    internal static class BaseMethodDeclarationSyntaxExtensions
-    {
-        public static IEnumerable<SyntaxNode> GetBodyDescendantNodes(this BaseMethodDeclarationSyntax method) =>
-            (method ?? throw new ArgumentNullException(nameof(method))).Body == null
-                ? method.ExpressionBody().DescendantNodes()
-                : method.Body.DescendantNodes();
+    public static IEnumerable<SyntaxNode> GetBodyDescendantNodes(this BaseMethodDeclarationSyntax method) =>
+        (method ?? throw new ArgumentNullException(nameof(method))).Body == null
+            ? method.ExpressionBody().DescendantNodes()
+            : method.Body.DescendantNodes();
 
-        public static bool IsStatic(this BaseMethodDeclarationSyntax methodDeclaration) =>
-            methodDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword);
+    public static bool IsStatic(this BaseMethodDeclarationSyntax methodDeclaration) =>
+        methodDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword);
 
-        public static bool IsExtern(this BaseMethodDeclarationSyntax methodDeclaration) =>
-            methodDeclaration.Modifiers.Any(SyntaxKind.ExternKeyword);
+    public static bool IsExtern(this BaseMethodDeclarationSyntax methodDeclaration) =>
+        methodDeclaration.Modifiers.Any(SyntaxKind.ExternKeyword);
 
-        public static bool HasBodyOrExpressionBody(this BaseMethodDeclarationSyntax node) =>
-            node.GetBodyOrExpressionBody() is not null;
+    public static bool HasBodyOrExpressionBody(this BaseMethodDeclarationSyntax node) =>
+        node.GetBodyOrExpressionBody() is not null;
 
-        public static SyntaxNode GetBodyOrExpressionBody(this BaseMethodDeclarationSyntax node) =>
-            (node?.Body as SyntaxNode) ?? node?.ExpressionBody()?.Expression;
-    }
+    public static SyntaxNode GetBodyOrExpressionBody(this BaseMethodDeclarationSyntax node) =>
+        (node?.Body as SyntaxNode) ?? node?.ExpressionBody()?.Expression;
 }

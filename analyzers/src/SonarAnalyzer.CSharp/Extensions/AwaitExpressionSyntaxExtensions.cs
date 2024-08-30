@@ -18,22 +18,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Extensions;
+
+internal static class AwaitExpressionSyntaxExtensions
 {
-    internal static class AwaitExpressionSyntaxExtensions
-    {
-        public static ExpressionSyntax AwaitedExpressionWithoutConfigureAwait(this AwaitExpressionSyntax awaitExpression) =>
-            awaitExpression.Expression?.RemoveParentheses() switch
+    public static ExpressionSyntax AwaitedExpressionWithoutConfigureAwait(this AwaitExpressionSyntax awaitExpression) =>
+        awaitExpression.Expression?.RemoveParentheses() switch
+        {
+            InvocationExpressionSyntax
             {
-                InvocationExpressionSyntax
+                Expression: MemberAccessExpressionSyntax
                 {
-                    Expression: MemberAccessExpressionSyntax
-                    {
-                        Name.Identifier.Text: nameof(Task.ConfigureAwait),
-                        Expression: { } configuredExpression
-                    }
-                } => configuredExpression,
-                var x => x,
-            };
-    }
+                    Name.Identifier.Text: nameof(Task.ConfigureAwait),
+                    Expression: { } configuredExpression
+                }
+            } => configuredExpression,
+            var x => x,
+        };
 }

@@ -18,28 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
-{
-    public static class TupleExpressionSyntaxExtensions
-    {
-        public static ImmutableArray<ArgumentSyntax> AllArguments(this TupleExpressionSyntaxWrapper tupleExpression)
-        {
-            var builder = ImmutableArray.CreateBuilder<ArgumentSyntax>(tupleExpression.Arguments.Count);
-            CollectTupleElements(tupleExpression.Arguments);
-            return builder.ToImmutableArray();
+namespace SonarAnalyzer.Extensions;
 
-            void CollectTupleElements(SeparatedSyntaxList<ArgumentSyntax> arguments)
+public static class TupleExpressionSyntaxExtensions
+{
+    public static ImmutableArray<ArgumentSyntax> AllArguments(this TupleExpressionSyntaxWrapper tupleExpression)
+    {
+        var builder = ImmutableArray.CreateBuilder<ArgumentSyntax>(tupleExpression.Arguments.Count);
+        CollectTupleElements(tupleExpression.Arguments);
+        return builder.ToImmutableArray();
+
+        void CollectTupleElements(SeparatedSyntaxList<ArgumentSyntax> arguments)
+        {
+            foreach (var argument in arguments)
             {
-                foreach (var argument in arguments)
+                if (TupleExpressionSyntaxWrapper.IsInstance(argument.Expression))
                 {
-                    if (TupleExpressionSyntaxWrapper.IsInstance(argument.Expression))
-                    {
-                        CollectTupleElements(((TupleExpressionSyntaxWrapper)argument.Expression).Arguments);
-                    }
-                    else
-                    {
-                        builder.Add(argument);
-                    }
+                    CollectTupleElements(((TupleExpressionSyntaxWrapper)argument.Expression).Arguments);
+                }
+                else
+                {
+                    builder.Add(argument);
                 }
             }
         }

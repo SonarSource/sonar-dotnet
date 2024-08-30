@@ -18,58 +18,57 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+internal static class CSharpDebugOnlyCodeHelper
 {
-    internal static class CSharpDebugOnlyCodeHelper
+    // Looking for an exact case-sensitive match
+    public static bool IsDebugString(string text) =>
+        "DEBUG".Equals(text, System.StringComparison.Ordinal);
+
+    #region DEBUG directive blocks
+
+    public static bool IsInDebugBlock(this SyntaxNode node) =>
+        CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node)
+        .Any(IsDebugString);
+
+    #endregion
+
+    #region DEBUG conditional method attributes
+
+    public static bool IsCallerInConditionalDebug(SyntaxNode node, SemanticModel semanticModel)
     {
-        // Looking for an exact case-sensitive match
-        public static bool IsDebugString(string text) =>
-            "DEBUG".Equals(text, System.StringComparison.Ordinal);
+        var methodSymbol = FindContainingMethod(node, semanticModel);
+        return IsConditionalDebugMethod(methodSymbol);
+    }
 
-        #region DEBUG directive blocks
-
-        public static bool IsInDebugBlock(this SyntaxNode node) =>
-            CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node)
-            .Any(IsDebugString);
-
-        #endregion
-
-        #region DEBUG conditional method attributes
-
-        public static bool IsCallerInConditionalDebug(SyntaxNode node, SemanticModel semanticModel)
+    public static bool IsConditionalDebugMethod(this IMethodSymbol methodSymbol)
+    {
+        if (methodSymbol == null)
         {
-            var methodSymbol = FindContainingMethod(node, semanticModel);
-            return IsConditionalDebugMethod(methodSymbol);
+            return false;
         }
 
-        public static bool IsConditionalDebugMethod(this IMethodSymbol methodSymbol)
-        {
-            if (methodSymbol == null)
-            {
-                return false;
-            }
-
-            // Conditional attribute can be applied to a class, but it does nothing unless
-            // the class is an attribute class. So we only need to worry about whether the
-            // conditional attribute is on the method.
-            return methodSymbol.GetAttributes(KnownType.System_Diagnostics_ConditionalAttribute)
-                .Any(attribute => attribute.ConstructorArguments.Any(
-                    constructorArg => constructorArg.Type.Is(KnownType.System_String)
-                          && IsDebugString((string)constructorArg.Value)));
-
-        }
-
-        private static IMethodSymbol FindContainingMethod(SyntaxNode node, SemanticModel semanticModel)
-        {
-            var methodDecl = node.FirstAncestorOrSelf<MethodDeclarationSyntax>();
-            if (methodDecl != null)
-            {
-                return semanticModel.GetDeclaredSymbol(methodDecl);
-            }
-            return null;
-        }
-
-        #endregion
+        // Conditional attribute can be applied to a class, but it does nothing unless
+        // the class is an attribute class. So we only need to worry about whether the
+        // conditional attribute is on the method.
+        return methodSymbol.GetAttributes(KnownType.System_Diagnostics_ConditionalAttribute)
+            .Any(attribute => attribute.ConstructorArguments.Any(
+                constructorArg => constructorArg.Type.Is(KnownType.System_String)
+                      && IsDebugString((string)constructorArg.Value)));
 
     }
+
+    private static IMethodSymbol FindContainingMethod(SyntaxNode node, SemanticModel semanticModel)
+    {
+        var methodDecl = node.FirstAncestorOrSelf<MethodDeclarationSyntax>();
+        if (methodDecl != null)
+        {
+            return semanticModel.GetDeclaredSymbol(methodDecl);
+        }
+        return null;
+    }
+
+    #endregion
+
 }

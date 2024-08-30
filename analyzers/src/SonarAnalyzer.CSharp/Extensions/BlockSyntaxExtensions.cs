@@ -18,25 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Extensions;
+
+public static class BlockSyntaxExtensions
 {
-    public static class BlockSyntaxExtensions
+    public static bool IsEmpty(this BlockSyntax block, bool treatCommentsAsContent = true, bool treatConditionalCompilationAsContent = true)
     {
-        public static bool IsEmpty(this BlockSyntax block, bool treatCommentsAsContent = true, bool treatConditionalCompilationAsContent = true)
-        {
-            _ = block ?? throw new ArgumentNullException(nameof(block));
-            return !IsNotEmpty();
+        _ = block ?? throw new ArgumentNullException(nameof(block));
+        return !IsNotEmpty();
 
-            bool IsNotEmpty() =>
-                block.Statements.Any()
-                || ((treatCommentsAsContent || treatConditionalCompilationAsContent)
-                    && (TriviaContainsCommentOrConditionalCompilation(block.OpenBraceToken.TrailingTrivia)
-                        || TriviaContainsCommentOrConditionalCompilation(block.CloseBraceToken.LeadingTrivia)));
+        bool IsNotEmpty() =>
+            block.Statements.Any()
+            || ((treatCommentsAsContent || treatConditionalCompilationAsContent)
+                && (TriviaContainsCommentOrConditionalCompilation(block.OpenBraceToken.TrailingTrivia)
+                    || TriviaContainsCommentOrConditionalCompilation(block.CloseBraceToken.LeadingTrivia)));
 
-            bool TriviaContainsCommentOrConditionalCompilation(SyntaxTriviaList triviaList) =>
-                triviaList.Any(trivia =>
-                    (treatCommentsAsContent && trivia.IsAnyKind(SyntaxKind.SingleLineCommentTrivia, SyntaxKind.MultiLineCommentTrivia))
-                     || (treatConditionalCompilationAsContent && trivia.IsKind(SyntaxKind.DisabledTextTrivia)));
-        }
+        bool TriviaContainsCommentOrConditionalCompilation(SyntaxTriviaList triviaList) =>
+            triviaList.Any(trivia =>
+                (treatCommentsAsContent && trivia.IsAnyKind(SyntaxKind.SingleLineCommentTrivia, SyntaxKind.MultiLineCommentTrivia))
+                 || (treatConditionalCompilationAsContent && trivia.IsKind(SyntaxKind.DisabledTextTrivia)));
     }
 }

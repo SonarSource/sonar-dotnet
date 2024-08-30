@@ -18,27 +18,26 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar
+namespace SonarAnalyzer.SymbolicExecution.Sonar;
+
+internal class ExplodedGraphCheck
 {
-    internal class ExplodedGraphCheck
+    protected readonly AbstractExplodedGraph explodedGraph;
+    protected readonly SemanticModel semanticModel;
+
+    protected ExplodedGraphCheck(AbstractExplodedGraph explodedGraph)
     {
-        protected readonly AbstractExplodedGraph explodedGraph;
-        protected readonly SemanticModel semanticModel;
-
-        protected ExplodedGraphCheck(AbstractExplodedGraph explodedGraph)
-        {
-            this.explodedGraph = explodedGraph;
-            semanticModel = explodedGraph.SemanticModel;
-        }
-
-        public virtual ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState) => programState;
-
-        public virtual ProgramState PostProcessInstruction(ProgramPoint programPoint, ProgramState programState) => programState;
-
-        public virtual ProgramState PreProcessUsingStatement(ProgramPoint programPoint, ProgramState programState) => programState;
-
-        public virtual ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue, SyntaxNode instruction) => programState;
-
-        public virtual ProgramState ObjectCreating(ProgramState programState, SyntaxNode instruction) => programState;
+        this.explodedGraph = explodedGraph;
+        semanticModel = explodedGraph.SemanticModel;
     }
+
+    public virtual ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState) => programState;
+
+    public virtual ProgramState PostProcessInstruction(ProgramPoint programPoint, ProgramState programState) => programState;
+
+    public virtual ProgramState PreProcessUsingStatement(ProgramPoint programPoint, ProgramState programState) => programState;
+
+    public virtual ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue, SyntaxNode instruction) => programState;
+
+    public virtual ProgramState ObjectCreating(ProgramState programState, SyntaxNode instruction) => programState;
 }

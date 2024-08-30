@@ -20,34 +20,33 @@
 
 using NodeSymbolAndModel = SonarAnalyzer.Common.NodeSymbolAndModel<Microsoft.CodeAnalysis.SyntaxNode, Microsoft.CodeAnalysis.ISymbol>;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+internal class VisualBasicRemovableDeclarationCollector : RemovableDeclarationCollectorBase<TypeBlockSyntax, TypeStatementSyntax, SyntaxKind>
 {
-    internal class VisualBasicRemovableDeclarationCollector : RemovableDeclarationCollectorBase<TypeBlockSyntax, TypeStatementSyntax, SyntaxKind>
+    public VisualBasicRemovableDeclarationCollector(INamedTypeSymbol namedType, Compilation compilation) : base(namedType, compilation) { }
+
+    public static bool IsNodeStructOrClassDeclaration(SyntaxNode node) =>
+        node.IsKind(SyntaxKind.ClassBlock) || node.IsKind(SyntaxKind.StructureBlock);
+
+    public static bool IsNodeContainerTypeDeclaration(SyntaxNode node) =>
+        IsNodeStructOrClassDeclaration(node) || node.IsKind(SyntaxKind.InterfaceBlock);
+
+    protected override IEnumerable<SyntaxNode> SelectMatchingDeclarations(NodeAndModel<TypeBlockSyntax> container, ISet<SyntaxKind> kinds) =>
+        container.Node.DescendantNodes(IsNodeContainerTypeDeclaration).Where(node => kinds.Contains(node.Kind()));
+
+    public override IEnumerable<NodeSymbolAndModel> GetRemovableFieldLikeDeclarations(ISet<SyntaxKind> kinds, Accessibility maxAccessibility)
     {
-        public VisualBasicRemovableDeclarationCollector(INamedTypeSymbol namedType, Compilation compilation) : base(namedType, compilation) { }
+        var fieldLikeNodes = TypeDeclarations
+            .SelectMany(typeDeclaration => SelectMatchingDeclarations(typeDeclaration, kinds)
+                .Select(x => new NodeAndModel<FieldDeclarationSyntax>(typeDeclaration.Model, (FieldDeclarationSyntax)x)));
 
-        public static bool IsNodeStructOrClassDeclaration(SyntaxNode node) =>
-            node.IsKind(SyntaxKind.ClassBlock) || node.IsKind(SyntaxKind.StructureBlock);
-
-        public static bool IsNodeContainerTypeDeclaration(SyntaxNode node) =>
-            IsNodeStructOrClassDeclaration(node) || node.IsKind(SyntaxKind.InterfaceBlock);
-
-        protected override IEnumerable<SyntaxNode> SelectMatchingDeclarations(NodeAndModel<TypeBlockSyntax> container, ISet<SyntaxKind> kinds) =>
-            container.Node.DescendantNodes(IsNodeContainerTypeDeclaration).Where(node => kinds.Contains(node.Kind()));
-
-        public override IEnumerable<NodeSymbolAndModel> GetRemovableFieldLikeDeclarations(ISet<SyntaxKind> kinds, Accessibility maxAccessibility)
-        {
-            var fieldLikeNodes = TypeDeclarations
-                .SelectMany(typeDeclaration => SelectMatchingDeclarations(typeDeclaration, kinds)
-                    .Select(x => new NodeAndModel<FieldDeclarationSyntax>(typeDeclaration.Model, (FieldDeclarationSyntax)x)));
-
-            return fieldLikeNodes
-                .SelectMany(fieldLikeNode => fieldLikeNode.Node.Declarators.SelectMany(x => x.Names)
-                    .Select(name => SelectNodeTuple(name, fieldLikeNode.Model))
-                    .Where(x => IsRemovable(x.Symbol, maxAccessibility)));
-        }
-
-        internal override TypeBlockSyntax GetOwnerOfSubnodes(TypeStatementSyntax node) =>
-            node.Parent as TypeBlockSyntax;
+        return fieldLikeNodes
+            .SelectMany(fieldLikeNode => fieldLikeNode.Node.Declarators.SelectMany(x => x.Names)
+                .Select(name => SelectNodeTuple(name, fieldLikeNode.Model))
+                .Where(x => IsRemovable(x.Symbol, maxAccessibility)));
     }
+
+    internal override TypeBlockSyntax GetOwnerOfSubnodes(TypeStatementSyntax node) =>
+        node.Parent as TypeBlockSyntax;
 }

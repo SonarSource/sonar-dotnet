@@ -18,89 +18,88 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.Relationships
+namespace SonarAnalyzer.SymbolicExecution.Sonar.Relationships;
+
+public abstract class BinaryRelationship : IEquatable<BinaryRelationship>
 {
-    public abstract class BinaryRelationship : IEquatable<BinaryRelationship>
+    private readonly Lazy<int> hash;
+
+    internal SymbolicValue LeftOperand { get; }
+    internal SymbolicValue RightOperand { get; }
+
+    protected BinaryRelationship(SymbolicValue leftOperand, SymbolicValue rightOperand)
     {
-        private readonly Lazy<int> hash;
+        LeftOperand = leftOperand;
+        RightOperand = rightOperand;
 
-        internal SymbolicValue LeftOperand { get; }
-        internal SymbolicValue RightOperand { get; }
-
-        protected BinaryRelationship(SymbolicValue leftOperand, SymbolicValue rightOperand)
+        this.hash = new Lazy<int>(() =>
         {
-            LeftOperand = leftOperand;
-            RightOperand = rightOperand;
+            var h = 19;
+            h = h * 31 + GetType().GetHashCode();
+            h = h * 31 + LeftOperand.GetHashCode();
+            h = h * 31 + RightOperand.GetHashCode();
+            return h;
+        });
+    }
 
-            this.hash = new Lazy<int>(() =>
-            {
-                var h = 19;
-                h = h * 31 + GetType().GetHashCode();
-                h = h * 31 + LeftOperand.GetHashCode();
-                h = h * 31 + RightOperand.GetHashCode();
-                return h;
-            });
+    public override bool Equals(object obj)
+    {
+        if (obj == null)
+        {
+            return false;
         }
 
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-            {
-                return false;
-            }
+        return Equals(obj as BinaryRelationship);
+    }
 
-            return Equals(obj as BinaryRelationship);
+    public bool Equals(BinaryRelationship other)
+    {
+        if (other == null ||
+            GetType() != other.GetType())
+        {
+            return false;
         }
 
-        public bool Equals(BinaryRelationship other)
-        {
-            if (other == null ||
-                GetType() != other.GetType())
-            {
-                return false;
-            }
+        return LeftOperand.Equals(other.LeftOperand) && RightOperand.Equals(other.RightOperand);
+    }
 
-            return LeftOperand.Equals(other.LeftOperand) && RightOperand.Equals(other.RightOperand);
+    public override int GetHashCode() => this.hash.Value;
+
+    internal abstract BinaryRelationship CreateNew(SymbolicValue leftOperand, SymbolicValue rightOperand);
+
+    internal abstract bool IsContradicting(IEnumerable<BinaryRelationship> relationships);
+
+    public abstract BinaryRelationship Negate();
+
+    internal bool AreOperandsMatching(BinaryRelationship other)
+    {
+        return LeftOperand.Equals(other.LeftOperand) && RightOperand.Equals(other.RightOperand) ||
+            RightOperand.Equals(other.LeftOperand) && LeftOperand.Equals(other.RightOperand);
+    }
+
+    internal abstract IEnumerable<BinaryRelationship> GetTransitiveRelationships(IEnumerable<BinaryRelationship> relationships);
+
+    protected BinaryRelationship ComputeTransitiveRelationship(BinaryRelationship other, BinaryRelationship factory)
+    {
+        if (LeftOperand.Equals(other.LeftOperand))
+        {
+            return factory.CreateNew(RightOperand, other.RightOperand);
         }
-
-        public override int GetHashCode() => this.hash.Value;
-
-        internal abstract BinaryRelationship CreateNew(SymbolicValue leftOperand, SymbolicValue rightOperand);
-
-        internal abstract bool IsContradicting(IEnumerable<BinaryRelationship> relationships);
-
-        public abstract BinaryRelationship Negate();
-
-        internal bool AreOperandsMatching(BinaryRelationship other)
+        else if (RightOperand.Equals(other.LeftOperand))
         {
-            return LeftOperand.Equals(other.LeftOperand) && RightOperand.Equals(other.RightOperand) ||
-                RightOperand.Equals(other.LeftOperand) && LeftOperand.Equals(other.RightOperand);
+            return factory.CreateNew(LeftOperand, other.RightOperand);
         }
-
-        internal abstract IEnumerable<BinaryRelationship> GetTransitiveRelationships(IEnumerable<BinaryRelationship> relationships);
-
-        protected BinaryRelationship ComputeTransitiveRelationship(BinaryRelationship other, BinaryRelationship factory)
+        else if (LeftOperand.Equals(other.RightOperand))
         {
-            if (LeftOperand.Equals(other.LeftOperand))
-            {
-                return factory.CreateNew(RightOperand, other.RightOperand);
-            }
-            else if (RightOperand.Equals(other.LeftOperand))
-            {
-                return factory.CreateNew(LeftOperand, other.RightOperand);
-            }
-            else if (LeftOperand.Equals(other.RightOperand))
-            {
-                return factory.CreateNew(other.LeftOperand, RightOperand);
-            }
-            else if (RightOperand.Equals(other.RightOperand))
-            {
-                return factory.CreateNew(other.LeftOperand, LeftOperand);
-            }
-            else
-            {
-                return null;
-            }
+            return factory.CreateNew(other.LeftOperand, RightOperand);
+        }
+        else if (RightOperand.Equals(other.RightOperand))
+        {
+            return factory.CreateNew(other.LeftOperand, LeftOperand);
+        }
+        else
+        {
+            return null;
         }
     }
 }

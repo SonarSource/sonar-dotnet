@@ -18,43 +18,42 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
-{
-    internal static class StatementSyntaxExtensions
-    {
-        /// <summary>
-        /// Returns all statements before the specified statement within the containing method.
-        /// This method recursively traverses all parent blocks of the provided statement.
-        /// </summary>
-        public static IEnumerable<StatementSyntax> GetPreviousStatements(this StatementSyntax statement)
-        {
-            var previousStatements = statement.GetPreviousStatementsCurrentBlock();
+namespace SonarAnalyzer.Extensions;
 
-            return statement.Parent is StatementSyntax parentStatement
-                ? previousStatements.Union(GetPreviousStatements(parentStatement))
-                : previousStatements;
-        }
+internal static class StatementSyntaxExtensions
+{
+    /// <summary>
+    /// Returns all statements before the specified statement within the containing method.
+    /// This method recursively traverses all parent blocks of the provided statement.
+    /// </summary>
+    public static IEnumerable<StatementSyntax> GetPreviousStatements(this StatementSyntax statement)
+    {
+        var previousStatements = statement.GetPreviousStatementsCurrentBlock();
+
+        return statement.Parent is StatementSyntax parentStatement
+            ? previousStatements.Union(GetPreviousStatements(parentStatement))
+            : previousStatements;
+    }
 
 #if CS
-        /// <summary>
-        /// Returns the statement before the statement given as input.
-        /// </summary>
-        public static StatementSyntax GetPrecedingStatement(this StatementSyntax statement)
-        {
-            var siblings = statement.Parent is GlobalStatementSyntax
-                           ? statement.SyntaxTree
-                                      .GetCompilationUnitRoot()
-                                      .ChildNodes()
-                                      .OfType<GlobalStatementSyntax>()
-                                      .Select(x => x.Statement)
-                           : statement.Parent.ChildNodes();
-            return statement.GetPrecedingStatement(siblings);
-        }
-
-        private static StatementSyntax GetPrecedingStatement(this StatementSyntax statement, IEnumerable<SyntaxNode> statementSiblingNodes) =>
-            statementSiblingNodes.OfType<StatementSyntax>()
-                                 .TakeWhile(x => x != statement)
-                                 .LastOrDefault();
-#endif
+    /// <summary>
+    /// Returns the statement before the statement given as input.
+    /// </summary>
+    public static StatementSyntax GetPrecedingStatement(this StatementSyntax statement)
+    {
+        var siblings = statement.Parent is GlobalStatementSyntax
+                       ? statement.SyntaxTree
+                                  .GetCompilationUnitRoot()
+                                  .ChildNodes()
+                                  .OfType<GlobalStatementSyntax>()
+                                  .Select(x => x.Statement)
+                       : statement.Parent.ChildNodes();
+        return statement.GetPrecedingStatement(siblings);
     }
+
+    private static StatementSyntax GetPrecedingStatement(this StatementSyntax statement, IEnumerable<SyntaxNode> statementSiblingNodes) =>
+        statementSiblingNodes.OfType<StatementSyntax>()
+                             .TakeWhile(x => x != statement)
+                             .LastOrDefault();
+#endif
 }

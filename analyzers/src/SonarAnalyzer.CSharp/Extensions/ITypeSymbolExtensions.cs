@@ -18,20 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
-{
-    internal static class ITypeSymbolExtensions
-    {
-        internal static bool IsDisposableRefStruct(this ITypeSymbol symbol, LanguageVersion languageVersion) =>
-            languageVersion.IsAtLeast(LanguageVersionEx.CSharp8)
-            && IsRefStruct(symbol)
-            && symbol.GetMembers(nameof(IDisposable.Dispose)).Any(x => x.DeclaredAccessibility == Accessibility.Public && KnownMethods.IsIDisposableDispose(x as IMethodSymbol));
+namespace SonarAnalyzer.Extensions;
 
-        internal static bool IsRefStruct(this ITypeSymbol symbol) =>
-            symbol != null
-            && symbol.IsStruct()
-            && symbol.DeclaringSyntaxReferences.Length > 0
-            && symbol.DeclaringSyntaxReferences[0].GetSyntax() is StructDeclarationSyntax structDeclaration
-            && structDeclaration.Modifiers.Any(SyntaxKind.RefKeyword);
-    }
+internal static class ITypeSymbolExtensions
+{
+    internal static bool IsDisposableRefStruct(this ITypeSymbol symbol, LanguageVersion languageVersion) =>
+        languageVersion.IsAtLeast(LanguageVersionEx.CSharp8)
+        && IsRefStruct(symbol)
+        && symbol.GetMembers(nameof(IDisposable.Dispose)).Any(x => x.DeclaredAccessibility == Accessibility.Public && KnownMethods.IsIDisposableDispose(x as IMethodSymbol));
+
+    internal static bool IsRefStruct(this ITypeSymbol symbol) =>
+        symbol != null
+        && symbol.IsStruct()
+        && symbol.DeclaringSyntaxReferences.Length > 0
+        && symbol.DeclaringSyntaxReferences[0].GetSyntax() is StructDeclarationSyntax structDeclaration
+        && structDeclaration.Modifiers.Any(SyntaxKind.RefKeyword);
 }

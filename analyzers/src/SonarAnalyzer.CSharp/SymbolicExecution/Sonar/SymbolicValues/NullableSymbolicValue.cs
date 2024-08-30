@@ -21,61 +21,60 @@
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues
+namespace SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
+
+public class NullableSymbolicValue : SymbolicValue
 {
-    public class NullableSymbolicValue : SymbolicValue
+    public SymbolicValue WrappedValue { get; }
+
+    public NullableSymbolicValue(SymbolicValue wrappedValue)
     {
-        public SymbolicValue WrappedValue { get; }
-
-        public NullableSymbolicValue(SymbolicValue wrappedValue)
-        {
-            WrappedValue = wrappedValue;
-        }
-
-        public override IEnumerable<ProgramState> TrySetConstraint(SymbolicConstraint constraint, ProgramState programState)
-        {
-            if (constraint == null)
-            {
-                return new[] { programState };
-            }
-
-            if (constraint is ObjectConstraint)
-            {
-                var optionalConstraint = constraint == ObjectConstraint.Null
-                    ? NullableConstraint.NoValue
-                    : NullableConstraint.HasValue;
-
-                return TrySetConstraint(optionalConstraint, programState);
-            }
-
-            var oldConstraint = ((IDictionary<SymbolicValue, SymbolicValueConstraints>)programState.Constraints).GetValueOrDefault(this)?.GetConstraintOrDefault<NullableConstraint>();
-            if (constraint is NullableConstraint)
-            {
-                if (oldConstraint == null)
-                {
-                    return new[] { programState.SetConstraint(this, constraint) };
-                }
-
-                if (oldConstraint != constraint)
-                {
-                    return Enumerable.Empty<ProgramState>();
-                }
-
-                return new[] { programState };
-            }
-
-            return TrySetConstraint(NullableConstraint.HasValue, programState).SelectMany(ps => WrappedValue.TrySetConstraint(constraint, ps));
-        }
-
-        public override IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicConstraint constraint, ProgramState programState)
-        {
-            var negateConstraint = constraint?.Opposite;
-
-            return constraint is BoolConstraint
-                ? TrySetConstraint(negateConstraint, programState).Union(TrySetConstraint(NullableConstraint.NoValue, programState))
-                : TrySetConstraint(negateConstraint, programState);
-        }
-
-        public override string ToString() => $"NULLABLE_SV_{identifier}" ;
+        WrappedValue = wrappedValue;
     }
+
+    public override IEnumerable<ProgramState> TrySetConstraint(SymbolicConstraint constraint, ProgramState programState)
+    {
+        if (constraint == null)
+        {
+            return new[] { programState };
+        }
+
+        if (constraint is ObjectConstraint)
+        {
+            var optionalConstraint = constraint == ObjectConstraint.Null
+                ? NullableConstraint.NoValue
+                : NullableConstraint.HasValue;
+
+            return TrySetConstraint(optionalConstraint, programState);
+        }
+
+        var oldConstraint = ((IDictionary<SymbolicValue, SymbolicValueConstraints>)programState.Constraints).GetValueOrDefault(this)?.GetConstraintOrDefault<NullableConstraint>();
+        if (constraint is NullableConstraint)
+        {
+            if (oldConstraint == null)
+            {
+                return new[] { programState.SetConstraint(this, constraint) };
+            }
+
+            if (oldConstraint != constraint)
+            {
+                return Enumerable.Empty<ProgramState>();
+            }
+
+            return new[] { programState };
+        }
+
+        return TrySetConstraint(NullableConstraint.HasValue, programState).SelectMany(ps => WrappedValue.TrySetConstraint(constraint, ps));
+    }
+
+    public override IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicConstraint constraint, ProgramState programState)
+    {
+        var negateConstraint = constraint?.Opposite;
+
+        return constraint is BoolConstraint
+            ? TrySetConstraint(negateConstraint, programState).Union(TrySetConstraint(NullableConstraint.NoValue, programState))
+            : TrySetConstraint(negateConstraint, programState);
+    }
+
+    public override string ToString() => $"NULLABLE_SV_{identifier}" ;
 }

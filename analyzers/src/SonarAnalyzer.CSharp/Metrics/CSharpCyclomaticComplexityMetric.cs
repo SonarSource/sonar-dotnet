@@ -20,208 +20,207 @@
 
 using SonarAnalyzer.Common.Walkers;
 
-namespace SonarAnalyzer.Metrics.CSharp
+namespace SonarAnalyzer.Metrics.CSharp;
+
+public static class CSharpCyclomaticComplexityMetric
 {
-    public static class CSharpCyclomaticComplexityMetric
+    public class CyclomaticComplexity
     {
-        public class CyclomaticComplexity
+        public CyclomaticComplexity(ImmutableArray<SecondaryLocation> locations)
         {
-            public CyclomaticComplexity(ImmutableArray<SecondaryLocation> locations)
-            {
-                Locations = locations;
-            }
-
-            public ImmutableArray<SecondaryLocation> Locations { get; }
-            public int Complexity => Locations.Length;
+            Locations = locations;
         }
 
-        public static CyclomaticComplexity GetComplexity(SyntaxNode syntaxNode) =>
-            GetComplexity(syntaxNode, false);
+        public ImmutableArray<SecondaryLocation> Locations { get; }
+        public int Complexity => Locations.Length;
+    }
 
-        public static CyclomaticComplexity GetComplexity(SyntaxNode syntaxNode, bool onlyGlobalStatements)
+    public static CyclomaticComplexity GetComplexity(SyntaxNode syntaxNode) =>
+        GetComplexity(syntaxNode, false);
+
+    public static CyclomaticComplexity GetComplexity(SyntaxNode syntaxNode, bool onlyGlobalStatements)
+    {
+        var walker = new CyclomaticWalker(onlyGlobalStatements);
+        if (syntaxNode.IsKind(SyntaxKindEx.LocalFunctionStatement))
         {
-            var walker = new CyclomaticWalker(onlyGlobalStatements);
-            if (syntaxNode.IsKind(SyntaxKindEx.LocalFunctionStatement))
-            {
-                walker.VisitLocalFunction((LocalFunctionStatementSyntaxWrapper)syntaxNode);
-            }
-            else
-            {
-                walker.SafeVisit(syntaxNode);
-            }
-
-            return new CyclomaticComplexity(walker.IncrementLocations.ToImmutableArray());
+            walker.VisitLocalFunction((LocalFunctionStatementSyntaxWrapper)syntaxNode);
+        }
+        else
+        {
+            walker.SafeVisit(syntaxNode);
         }
 
-        private sealed class CyclomaticWalker : SafeCSharpSyntaxWalker
+        return new CyclomaticComplexity(walker.IncrementLocations.ToImmutableArray());
+    }
+
+    private sealed class CyclomaticWalker : SafeCSharpSyntaxWalker
+    {
+        private readonly bool onlyGlobalStatements;
+
+        public List<SecondaryLocation> IncrementLocations { get; } = new();
+
+        public CyclomaticWalker(bool onlyGlobalStatements) =>
+            this.onlyGlobalStatements = onlyGlobalStatements;
+
+        public override void VisitCompilationUnit(CompilationUnitSyntax node)
         {
-            private readonly bool onlyGlobalStatements;
-
-            public List<SecondaryLocation> IncrementLocations { get; } = new();
-
-            public CyclomaticWalker(bool onlyGlobalStatements) =>
-                this.onlyGlobalStatements = onlyGlobalStatements;
-
-            public override void VisitCompilationUnit(CompilationUnitSyntax node)
+            foreach (var globalStatement in node.Members.Where(x => x.IsKind(SyntaxKind.GlobalStatement)))
             {
-                foreach (var globalStatement in node.Members.Where(x => x.IsKind(SyntaxKind.GlobalStatement)))
+                if (!IsStaticLocalFunction(globalStatement))
                 {
-                    if (!IsStaticLocalFunction(globalStatement))
-                    {
-                        base.Visit(globalStatement);
-                    }
-                }
-
-                if (!onlyGlobalStatements)
-                {
-                    base.VisitCompilationUnit(node);
+                    base.Visit(globalStatement);
                 }
             }
 
-            public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
+            if (!onlyGlobalStatements)
             {
-                if (node.ExpressionBody != null || HasBody(node))
-                {
-                    AddLocation(node.Identifier);
-                }
-                base.VisitMethodDeclaration(node);
+                base.VisitCompilationUnit(node);
             }
+        }
 
-            public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
+        public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
+        {
+            if (node.ExpressionBody != null || HasBody(node))
             {
-                if (node.ExpressionBody != null || HasBody(node))
-                {
-                    AddLocation(node.Identifier);
-                }
-                base.VisitPropertyDeclaration(node);
+                AddLocation(node.Identifier);
             }
+            base.VisitMethodDeclaration(node);
+        }
 
-            public override void VisitOperatorDeclaration(OperatorDeclarationSyntax node)
+        public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
+        {
+            if (node.ExpressionBody != null || HasBody(node))
+            {
+                AddLocation(node.Identifier);
+            }
+            base.VisitPropertyDeclaration(node);
+        }
+
+        public override void VisitOperatorDeclaration(OperatorDeclarationSyntax node)
+        {
+            AddLocation(node.OperatorToken);
+            base.VisitOperatorDeclaration(node);
+        }
+
+        public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
+        {
+            AddLocation(node.Identifier);
+            base.VisitConstructorDeclaration(node);
+        }
+
+        public override void VisitDestructorDeclaration(DestructorDeclarationSyntax node)
+        {
+            AddLocation(node.Identifier);
+            base.VisitDestructorDeclaration(node);
+        }
+
+        public override void VisitAccessorDeclaration(AccessorDeclarationSyntax node)
+        {
+            AddLocation(node.Keyword);
+            base.VisitAccessorDeclaration(node);
+        }
+
+        public override void VisitIfStatement(IfStatementSyntax node)
+        {
+            AddLocation(node.IfKeyword);
+            base.VisitIfStatement(node);
+        }
+
+        public override void VisitConditionalExpression(ConditionalExpressionSyntax node)
+        {
+            AddLocation(node.QuestionToken);
+            base.VisitConditionalExpression(node);
+        }
+
+        public override void VisitConditionalAccessExpression(ConditionalAccessExpressionSyntax node)
+        {
+            AddLocation(node.OperatorToken);
+            base.VisitConditionalAccessExpression(node);
+        }
+
+        public override void VisitWhileStatement(WhileStatementSyntax node)
+        {
+            AddLocation(node.WhileKeyword);
+            base.VisitWhileStatement(node);
+        }
+
+        public override void VisitDoStatement(DoStatementSyntax node)
+        {
+            AddLocation(node.DoKeyword);
+            base.VisitDoStatement(node);
+        }
+
+        public override void VisitForStatement(ForStatementSyntax node)
+        {
+            AddLocation(node.ForKeyword);
+            base.VisitForStatement(node);
+        }
+
+        public override void VisitForEachStatement(ForEachStatementSyntax node)
+        {
+            AddLocation(node.ForEachKeyword);
+            base.VisitForEachStatement(node);
+        }
+
+        public override void VisitBinaryExpression(BinaryExpressionSyntax node)
+        {
+            if (node.IsKind(SyntaxKind.CoalesceExpression) ||
+                node.IsKind(SyntaxKind.LogicalAndExpression) ||
+                node.IsKind(SyntaxKind.LogicalOrExpression))
             {
                 AddLocation(node.OperatorToken);
-                base.VisitOperatorDeclaration(node);
             }
 
-            public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
-            {
-                AddLocation(node.Identifier);
-                base.VisitConstructorDeclaration(node);
-            }
+            base.VisitBinaryExpression(node);
+        }
 
-            public override void VisitDestructorDeclaration(DestructorDeclarationSyntax node)
-            {
-                AddLocation(node.Identifier);
-                base.VisitDestructorDeclaration(node);
-            }
-
-            public override void VisitAccessorDeclaration(AccessorDeclarationSyntax node)
-            {
-                AddLocation(node.Keyword);
-                base.VisitAccessorDeclaration(node);
-            }
-
-            public override void VisitIfStatement(IfStatementSyntax node)
-            {
-                AddLocation(node.IfKeyword);
-                base.VisitIfStatement(node);
-            }
-
-            public override void VisitConditionalExpression(ConditionalExpressionSyntax node)
-            {
-                AddLocation(node.QuestionToken);
-                base.VisitConditionalExpression(node);
-            }
-
-            public override void VisitConditionalAccessExpression(ConditionalAccessExpressionSyntax node)
+        public override void VisitAssignmentExpression(AssignmentExpressionSyntax node)
+        {
+            if (node.IsKind(SyntaxKindEx.CoalesceAssignmentExpression))
             {
                 AddLocation(node.OperatorToken);
-                base.VisitConditionalAccessExpression(node);
             }
 
-            public override void VisitWhileStatement(WhileStatementSyntax node)
-            {
-                AddLocation(node.WhileKeyword);
-                base.VisitWhileStatement(node);
-            }
-
-            public override void VisitDoStatement(DoStatementSyntax node)
-            {
-                AddLocation(node.DoKeyword);
-                base.VisitDoStatement(node);
-            }
-
-            public override void VisitForStatement(ForStatementSyntax node)
-            {
-                AddLocation(node.ForKeyword);
-                base.VisitForStatement(node);
-            }
-
-            public override void VisitForEachStatement(ForEachStatementSyntax node)
-            {
-                AddLocation(node.ForEachKeyword);
-                base.VisitForEachStatement(node);
-            }
-
-            public override void VisitBinaryExpression(BinaryExpressionSyntax node)
-            {
-                if (node.IsKind(SyntaxKind.CoalesceExpression) ||
-                    node.IsKind(SyntaxKind.LogicalAndExpression) ||
-                    node.IsKind(SyntaxKind.LogicalOrExpression))
-                {
-                    AddLocation(node.OperatorToken);
-                }
-
-                base.VisitBinaryExpression(node);
-            }
-
-            public override void VisitAssignmentExpression(AssignmentExpressionSyntax node)
-            {
-                if (node.IsKind(SyntaxKindEx.CoalesceAssignmentExpression))
-                {
-                    AddLocation(node.OperatorToken);
-                }
-
-                base.VisitAssignmentExpression(node);
-            }
-
-            public override void VisitCaseSwitchLabel(CaseSwitchLabelSyntax node)
-            {
-                AddLocation(node.Keyword);
-                base.VisitCaseSwitchLabel(node);
-            }
-
-            public void VisitLocalFunction(LocalFunctionStatementSyntaxWrapper node)
-            {
-                AddLocation(node.Identifier);
-                base.Visit(node.SyntaxNode);
-            }
-
-            public override void Visit(SyntaxNode node)
-            {
-                if (SwitchExpressionArmSyntaxWrapper.IsInstance(node))
-                {
-                    var arm = (SwitchExpressionArmSyntaxWrapper)node;
-                    AddLocation(arm.EqualsGreaterThanToken);
-                }
-                else if (node.IsAnyKind(SyntaxKindEx.AndPattern, SyntaxKindEx.OrPattern))
-                {
-                    var binaryPatternNode = (BinaryPatternSyntaxWrapper)node;
-                    AddLocation(binaryPatternNode.OperatorToken);
-                }
-
-                if (!IsStaticLocalFunction(node))
-                {
-                    base.Visit(node);
-                }
-            }
-
-            private void AddLocation(SyntaxToken node) => IncrementLocations.Add(new SecondaryLocation(node.GetLocation(), "+1"));
-
-            private static bool HasBody(SyntaxNode node) => node.ChildNodes().AnyOfKind(SyntaxKind.Block);
-
-            private static bool IsStaticLocalFunction(SyntaxNode node) =>
-                node.IsKind(SyntaxKindEx.LocalFunctionStatement)
-                && ((LocalFunctionStatementSyntaxWrapper)node).Modifiers.Any(SyntaxKind.StaticKeyword);
+            base.VisitAssignmentExpression(node);
         }
+
+        public override void VisitCaseSwitchLabel(CaseSwitchLabelSyntax node)
+        {
+            AddLocation(node.Keyword);
+            base.VisitCaseSwitchLabel(node);
+        }
+
+        public void VisitLocalFunction(LocalFunctionStatementSyntaxWrapper node)
+        {
+            AddLocation(node.Identifier);
+            base.Visit(node.SyntaxNode);
+        }
+
+        public override void Visit(SyntaxNode node)
+        {
+            if (SwitchExpressionArmSyntaxWrapper.IsInstance(node))
+            {
+                var arm = (SwitchExpressionArmSyntaxWrapper)node;
+                AddLocation(arm.EqualsGreaterThanToken);
+            }
+            else if (node.IsAnyKind(SyntaxKindEx.AndPattern, SyntaxKindEx.OrPattern))
+            {
+                var binaryPatternNode = (BinaryPatternSyntaxWrapper)node;
+                AddLocation(binaryPatternNode.OperatorToken);
+            }
+
+            if (!IsStaticLocalFunction(node))
+            {
+                base.Visit(node);
+            }
+        }
+
+        private void AddLocation(SyntaxToken node) => IncrementLocations.Add(new SecondaryLocation(node.GetLocation(), "+1"));
+
+        private static bool HasBody(SyntaxNode node) => node.ChildNodes().AnyOfKind(SyntaxKind.Block);
+
+        private static bool IsStaticLocalFunction(SyntaxNode node) =>
+            node.IsKind(SyntaxKindEx.LocalFunctionStatement)
+            && ((LocalFunctionStatementSyntaxWrapper)node).Modifiers.Any(SyntaxKind.StaticKeyword);
     }
 }
