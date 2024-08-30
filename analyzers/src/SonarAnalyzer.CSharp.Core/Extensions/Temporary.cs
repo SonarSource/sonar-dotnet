@@ -18,12 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using SonarAnalyzer;
+namespace SonarAnalyzer.CSharp.Core.Extensions;
 
-[assembly: AssemblyTitle("SonarAnalyzer CSharp Core")]
-[assembly: AssemblyProduct("SonarAnalyzer")]
-[assembly: AssemblyDescription("")]
+internal static class Temporary // ToDo: NET-175 Remove this file
+{
+    public static string Method() =>
+        "Make sure coverage works CSharp";
 
-[assembly: InternalsVisibleTo("SonarAnalyzer.CSharp.Core.Test" + Signing.InternalsVisibleToPublicKey)]
+    public static string Uncovered() =>
+        "Lorem ipsum";
+}

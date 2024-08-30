@@ -19,7 +19,11 @@
  */
 
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using SonarAnalyzer;
 
 [assembly: AssemblyTitle("SonarAnalyzer Visual Basic Core")]
 [assembly: AssemblyProduct("SonarAnalyzer")]
 [assembly: AssemblyDescription("")]
+
+[assembly: InternalsVisibleTo("SonarAnalyzer.VisualBasic.Core.Test" + Signing.InternalsVisibleToPublicKey)]
