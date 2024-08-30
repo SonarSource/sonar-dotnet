@@ -173,4 +173,16 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    // https://sonarsource.atlassian.net/browse/NET-184
+    static class Repro_184
+    {
+        private static readonly bool IsAvailable;
+
+        static Repro_184() // Noncompliant FP
+        {
+            IsAvailable = true;
+            System.Console.Write("side effect");
+        }
+    }
 }
