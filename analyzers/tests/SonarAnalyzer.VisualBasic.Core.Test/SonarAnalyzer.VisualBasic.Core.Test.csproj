@@ -1,0 +1,26 @@
+﻿  <Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0</TargetFrameworks>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="altcover" Version="8.8.21" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\SonarAnalyzer.VisualBasic.Core\SonarAnalyzer.VisualBasic.Core.csproj" />
+    <ProjectReference Include="..\SonarAnalyzer.TestFramework\SonarAnalyzer.TestFramework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="FluentAssertions" />
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+    <Using Include="SonarAnalyzer.VisualBasic.Core.Extensions" />
+  </ItemGroup>
+
+</Project>

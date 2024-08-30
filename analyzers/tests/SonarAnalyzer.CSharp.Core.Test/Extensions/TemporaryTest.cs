@@ -18,12 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using SonarAnalyzer;
+namespace SonarAnalyzer.CSharp.Core.Test.Extensions;
 
-[assembly: AssemblyTitle("SonarAnalyzer CSharp Core")]
-[assembly: AssemblyProduct("SonarAnalyzer")]
-[assembly: AssemblyDescription("")]
-
-[assembly: InternalsVisibleTo("SonarAnalyzer.CSharp.Core.Test" + Signing.InternalsVisibleToPublicKey)]
+[TestClass]
+public class TemporaryTest  // ToDo: NET-175 Remove this file
+{
+    [TestMethod]
+    public void Method() =>
+        Temporary.Method().Should().Be("Make sure coverage works CSharp");
+}
