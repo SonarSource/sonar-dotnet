@@ -35,6 +35,12 @@
           "Microsoft.CodeAnalysis.Workspaces.Common": "[4.9.2]"
         }
       },
+      "Microsoft.CodeAnalysis.PerformanceSensitiveAnalyzers": {
+        "type": "Direct",
+        "requested": "[3.3.1, )",
+        "resolved": "3.3.1",
+        "contentHash": "eT+kgNCDdTRbQ5WF6BGx1HI3D5jYfHteza/koefhWC2vNZGxObA74XxwWfg40dy3uUv7dn3OGKLK5GUPLroVog=="
+      },
       "Microsoft.CodeAnalysis.VisualBasic.Workspaces": {
         "type": "Direct",
         "requested": "[4.9.2, )",
@@ -587,6 +593,12 @@
           "Microsoft.CodeAnalysis.Common": "[4.9.2]",
           "Microsoft.CodeAnalysis.Workspaces.Common": "[4.9.2]"
         }
+      },
+      "Microsoft.CodeAnalysis.PerformanceSensitiveAnalyzers": {
+        "type": "Direct",
+        "requested": "[3.3.1, )",
+        "resolved": "3.3.1",
+        "contentHash": "eT+kgNCDdTRbQ5WF6BGx1HI3D5jYfHteza/koefhWC2vNZGxObA74XxwWfg40dy3uUv7dn3OGKLK5GUPLroVog=="
       },
       "Microsoft.CodeAnalysis.VisualBasic.Workspaces": {
         "type": "Direct",

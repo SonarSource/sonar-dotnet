@@ -23,6 +23,12 @@
         "resolved": "0.31.0",
         "contentHash": "KWyAnqT5gCx1vHr/oNhyEV8HV1aCJswREoxEbZcWOWBGTWm7aAeMnzwjfAPNNYumzhT8Y8IafgcLur0OXrLZrA=="
       },
+      "Microsoft.CodeAnalysis.PerformanceSensitiveAnalyzers": {
+        "type": "Direct",
+        "requested": "[3.3.1, )",
+        "resolved": "3.3.1",
+        "contentHash": "eT+kgNCDdTRbQ5WF6BGx1HI3D5jYfHteza/koefhWC2vNZGxObA74XxwWfg40dy3uUv7dn3OGKLK5GUPLroVog=="
+      },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
         "requested": "[17.9.0, )",

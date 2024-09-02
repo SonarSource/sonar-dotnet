@@ -8,6 +8,12 @@
         "resolved": "8.8.21",
         "contentHash": "COxBMzfbrgv/WPcvU6rHdA75UUP2OfPR+wFV8NejTGLrwNqboS+5yY2vpxv1T7r/33N3c+MkBqBCn0Z4nbBzVA=="
       },
+      "Microsoft.CodeAnalysis.PerformanceSensitiveAnalyzers": {
+        "type": "Direct",
+        "requested": "[3.3.1, )",
+        "resolved": "3.3.1",
+        "contentHash": "eT+kgNCDdTRbQ5WF6BGx1HI3D5jYfHteza/koefhWC2vNZGxObA74XxwWfg40dy3uUv7dn3OGKLK5GUPLroVog=="
+      },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
         "requested": "[17.9.0, )",
@@ -626,6 +632,12 @@
         "requested": "[8.8.21, )",
         "resolved": "8.8.21",
         "contentHash": "COxBMzfbrgv/WPcvU6rHdA75UUP2OfPR+wFV8NejTGLrwNqboS+5yY2vpxv1T7r/33N3c+MkBqBCn0Z4nbBzVA=="
+      },
+      "Microsoft.CodeAnalysis.PerformanceSensitiveAnalyzers": {
+        "type": "Direct",
+        "requested": "[3.3.1, )",
+        "resolved": "3.3.1",
+        "contentHash": "eT+kgNCDdTRbQ5WF6BGx1HI3D5jYfHteza/koefhWC2vNZGxObA74XxwWfg40dy3uUv7dn3OGKLK5GUPLroVog=="
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",

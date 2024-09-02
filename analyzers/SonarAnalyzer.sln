@@ -51,7 +51,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AnalysisConfig", "AnalysisConfig", "{E044950A-098B-4090-B4FB-8D6BD086828B}"
 	ProjectSection(SolutionItems) = preProject
 		stylecop.json = stylecop.json
-		StylingAnalyzers.targets = StylingAnalyzers.targets
+		CodeAnalysis.targets = CodeAnalysis.targets
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.SourceGenerators", "src\SonarAnalyzer.SourceGenerators\SonarAnalyzer.SourceGenerators.csproj", "{76D6EBB8-D2B0-41C1-8880-027EC78CB7FF}"
