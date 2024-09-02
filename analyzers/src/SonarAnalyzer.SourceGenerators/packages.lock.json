@@ -17,6 +17,12 @@
           "Microsoft.CodeAnalysis.Common": "[4.7.0]"
         }
       },
+      "Microsoft.CodeAnalysis.PerformanceSensitiveAnalyzers": {
+        "type": "Direct",
+        "requested": "[3.3.1, )",
+        "resolved": "3.3.1",
+        "contentHash": "eT+kgNCDdTRbQ5WF6BGx1HI3D5jYfHteza/koefhWC2vNZGxObA74XxwWfg40dy3uUv7dn3OGKLK5GUPLroVog=="
+      },
       "NETStandard.Library": {
         "type": "Direct",
         "requested": "[2.0.3, )",

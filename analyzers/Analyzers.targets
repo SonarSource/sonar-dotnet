@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <!-- This file is included in all projects inside src and tests directories. -->
-  <Import Project="$(MSBuildThisFileDirectory)\StylingAnalyzers.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)\CodeAnalysis.targets" />
   <Import Project="$(MSBuildThisFileDirectory)\Directory.Build.targets" />
 
   <PropertyGroup>
