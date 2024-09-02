@@ -205,7 +205,7 @@ public partial class UnusedPrivateMemberTest
     public void UnusedPrivateMember_FromCSharp12() =>
         builder.AddPaths("UnusedPrivateMember.CSharp12.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp12)
-            .VerifyNoIssues();
+            .Verify();
 
     [TestMethod]
     public void UnusedPrivateMemeber_EntityFramework_DontRaiseOnUnusedEntityPropertiesPrivateSetters() =>
