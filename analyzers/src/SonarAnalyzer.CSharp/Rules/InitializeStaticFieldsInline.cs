@@ -47,18 +47,36 @@ public sealed class InitializeStaticFieldsInline : SonarDiagnosticAnalyzer
 
                     var assignedFieldCount = bodyDescendantNodes
                         .OfType<AssignmentExpressionSyntax>()
-                        .Select(x => c.SemanticModel.GetSymbolInfo(x.Left).Symbol)
-                        .OfType<IFieldSymbol>()
-                        .Where(x => x.ContainingType.Equals(currentType))
+                        .SelectMany(x => FieldSymbolsFromLeftSide(x, c.SemanticModel, currentType))
                         .Select(x => x.Name)
                         .Distinct()
                         .Count();
                     var hasIfOrSwitch = Array.Exists(bodyDescendantNodes, x => x.IsAnyKind(SyntaxKind.IfStatement, SyntaxKind.SwitchStatement));
-                    if ((hasIfOrSwitch && assignedFieldCount == 1) || (!hasIfOrSwitch && assignedFieldCount > 0))
+                    if (((hasIfOrSwitch && assignedFieldCount == 1) || (!hasIfOrSwitch && assignedFieldCount > 0))
+                        && !HasTupleAssignmentForMultipleFields(bodyDescendantNodes, c.SemanticModel, currentType))
                     {
                         c.ReportIssue(Rule, constructor.Identifier);
                     }
                 }
             },
             SyntaxKind.ConstructorDeclaration);
+
+    private static bool HasTupleAssignmentForMultipleFields(SyntaxNode[] nodes, SemanticModel model, INamedTypeSymbol currentType) =>
+        nodes.OfType<AssignmentExpressionSyntax>()
+            .Where(x => x.Left.Kind() is SyntaxKindEx.TupleExpression)
+            .Select(x => FieldSymbolsFromLeftSide(x, model, currentType))
+            .Any(x => x.Count() > 1); // if more than one field is assigned in a tuple then we assume that the static constructor is needed
+
+    private static IEnumerable<ISymbol> FieldSymbolsFromLeftSide(AssignmentExpressionSyntax assignment, SemanticModel model, INamedTypeSymbol currentType) =>
+        ExtractSymbols(assignment.Left, model)
+            .OfType<IFieldSymbol>()
+            .Distinct()
+            .Where(x => x.ContainingType.Equals(currentType));
+
+    private static ISymbol[] ExtractSymbols(SyntaxNode node, SemanticModel model) =>
+        TupleExpressionSyntaxWrapper.IsInstance(node)
+            ? ((TupleExpressionSyntaxWrapper)node).Arguments
+                .SelectMany(x => ExtractSymbols(x.Expression, model))
+                .ToArray()
+            : [model.GetSymbolInfo(node).Symbol];
 }
