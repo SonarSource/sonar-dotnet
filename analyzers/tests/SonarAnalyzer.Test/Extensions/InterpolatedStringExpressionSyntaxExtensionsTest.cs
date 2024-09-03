@@ -18,12 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-extern alias vbnet;
-
 using CS = Microsoft.CodeAnalysis.CSharp;
-using ExtensionsCS = csharp::SonarAnalyzer.Extensions.InterpolatedStringExpressionSyntaxExtensions;
-using ExtensionsVB = vbnet::SonarAnalyzer.Extensions.InterpolatedStringExpressionSyntaxExtensions;
+using ExtensionsCS = SonarAnalyzer.CSharp.Core.Syntax.Extensions.InterpolatedStringExpressionSyntaxExtensions;
+using ExtensionsVB = SonarAnalyzer.VisualBasic.Core.Syntax.Extensions.InterpolatedStringExpressionSyntaxExtensions;
 using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using SyntaxVB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 

@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Extensions;
 
-internal static partial class MemberAccessExpressionSyntaxExtensions
+internal static class MemberAccessExpressionSyntaxExtensions
 {
     public static bool IsPtrZero(this MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel) =>
         memberAccess.Name.Identifier.Text == "Zero"

@@ -19,7 +19,7 @@
  */
 
 using System.Xml;
-using SonarAnalyzer.Helpers.Trackers;
+using SonarAnalyzer.CSharp.Core.Trackers;
 using SonarAnalyzer.Rules.XXE;
 
 namespace SonarAnalyzer.Rules.CSharp

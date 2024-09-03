@@ -19,8 +19,9 @@
  */
 
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.VisualBasic.Core.Trackers;
 
-namespace SonarAnalyzer.Extensions;
+namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
 
 public static class SyntaxNodeExtensionsVisualBasic
 {

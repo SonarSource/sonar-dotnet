@@ -27,8 +27,8 @@ using NSubstitute;
 using CodeAnalysisCS = Microsoft.CodeAnalysis.CSharp;
 using CodeAnalysisVB = Microsoft.CodeAnalysis.VisualBasic;
 using ISymbolExtensionsCommon = common::SonarAnalyzer.Extensions.ISymbolExtensions;
-using ISymbolExtensionsCS = csharp::SonarAnalyzer.Extensions.ISymbolExtensions;
-using ISymbolExtensionsVB = vbnet::SonarAnalyzer.Extensions.ISymbolExtensions;
+using ISymbolExtensionsCS = csharp::SonarAnalyzer.CSharp.Core.Extensions.ISymbolExtensions;
+using ISymbolExtensionsVB = vbnet::SonarAnalyzer.VisualBasic.Core.Extensions.ISymbolExtensions;
 
 namespace SonarAnalyzer.Test.Extensions;
 

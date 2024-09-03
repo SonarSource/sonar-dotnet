@@ -18,9 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Helpers.Trackers;
-using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
-using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.CSharp.Core.Trackers;
+using SonarAnalyzer.VisualBasic.Core.Trackers;
+using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
+using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Test.Helpers
 {
@@ -68,10 +69,10 @@ End Class";
         public void MatchSet_CS()
         {
             var tracker = new CSharpFieldAccessTracker();
-            var context = CreateContext<CSharpSyntax.IdentifierNameSyntax>(TestInputCS, "assignConst", AnalyzerLanguage.CSharp);
+            var context = CreateContext<CS.IdentifierNameSyntax>(TestInputCS, "assignConst", AnalyzerLanguage.CSharp);
             tracker.MatchSet()(context).Should().BeTrue();
 
-            context = CreateContext<CSharpSyntax.IdentifierNameSyntax>(TestInputCS, "read", AnalyzerLanguage.CSharp);
+            context = CreateContext<CS.IdentifierNameSyntax>(TestInputCS, "read", AnalyzerLanguage.CSharp);
             tracker.MatchSet()(context).Should().BeFalse();
         }
 
@@ -79,10 +80,10 @@ End Class";
         public void MatchSet_VB()
         {
             var tracker = new VisualBasicFieldAccessTracker();
-            var context = CreateContext<VBSyntax.IdentifierNameSyntax>(TestInputVB, "AssignConst", AnalyzerLanguage.VisualBasic);
+            var context = CreateContext<VB.IdentifierNameSyntax>(TestInputVB, "AssignConst", AnalyzerLanguage.VisualBasic);
             tracker.MatchSet()(context).Should().BeTrue();
 
-            context = CreateContext<VBSyntax.IdentifierNameSyntax>(TestInputVB, "Read", AnalyzerLanguage.VisualBasic);
+            context = CreateContext<VB.IdentifierNameSyntax>(TestInputVB, "Read", AnalyzerLanguage.VisualBasic);
             tracker.MatchSet()(context).Should().BeFalse();
         }
 
@@ -90,13 +91,13 @@ End Class";
         public void AssignedValueIsConstant_CS()
         {
             var tracker = new CSharpFieldAccessTracker();
-            var context = CreateContext<CSharpSyntax.IdentifierNameSyntax>(TestInputCS, "assignConst", AnalyzerLanguage.CSharp);
+            var context = CreateContext<CS.IdentifierNameSyntax>(TestInputCS, "assignConst", AnalyzerLanguage.CSharp);
             tracker.AssignedValueIsConstant()(context).Should().BeTrue();
 
-            context = CreateContext<CSharpSyntax.IdentifierNameSyntax>(TestInputCS, "assignVariable", AnalyzerLanguage.CSharp);
+            context = CreateContext<CS.IdentifierNameSyntax>(TestInputCS, "assignVariable", AnalyzerLanguage.CSharp);
             tracker.AssignedValueIsConstant()(context).Should().BeFalse();
 
-            context = CreateContext<CSharpSyntax.IdentifierNameSyntax>(TestInputCS, "invocationArg", AnalyzerLanguage.CSharp);
+            context = CreateContext<CS.IdentifierNameSyntax>(TestInputCS, "invocationArg", AnalyzerLanguage.CSharp);
             tracker.AssignedValueIsConstant()(context).Should().BeFalse();
         }
 
@@ -104,13 +105,13 @@ End Class";
         public void AssignedValueIsConstant_VB()
         {
             var tracker = new VisualBasicFieldAccessTracker();
-            var context = CreateContext<VBSyntax.IdentifierNameSyntax>(TestInputVB, "AssignConst", AnalyzerLanguage.VisualBasic);
+            var context = CreateContext<VB.IdentifierNameSyntax>(TestInputVB, "AssignConst", AnalyzerLanguage.VisualBasic);
             tracker.AssignedValueIsConstant()(context).Should().BeTrue();
 
-            context = CreateContext<VBSyntax.IdentifierNameSyntax>(TestInputVB, "AssignVariable", AnalyzerLanguage.VisualBasic);
+            context = CreateContext<VB.IdentifierNameSyntax>(TestInputVB, "AssignVariable", AnalyzerLanguage.VisualBasic);
             tracker.AssignedValueIsConstant()(context).Should().BeFalse();
 
-            context = CreateContext<VBSyntax.IdentifierNameSyntax>(TestInputVB, "InvocationArg", AnalyzerLanguage.VisualBasic);
+            context = CreateContext<VB.IdentifierNameSyntax>(TestInputVB, "InvocationArg", AnalyzerLanguage.VisualBasic);
             tracker.AssignedValueIsConstant()(context).Should().BeFalse();
         }
 

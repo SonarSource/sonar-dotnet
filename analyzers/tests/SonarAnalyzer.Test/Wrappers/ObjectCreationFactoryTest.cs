@@ -19,7 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Wrappers;
+using SonarAnalyzer.CSharp.Core.Wrappers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Test.Wrappers

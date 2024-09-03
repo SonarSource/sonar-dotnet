@@ -18,6 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.CSharp.Metrics;
+using SonarAnalyzer.VisualBasic.Metrics;
+
 namespace SonarAnalyzer.Test.Common
 {
     [TestClass]
@@ -503,7 +506,7 @@ End Class")
                 .AddSnippet(csharp9Text)
                 .GetCompilation();
             var csharp9SyntaxTree = csharp9Compilation.SyntaxTrees.Single();
-            new Metrics.CSharp.CSharpMetrics(csharp9SyntaxTree, csharp9Compilation.GetSemanticModel(csharp9SyntaxTree)).CognitiveComplexity.Should().Be(38);
+            new CSharpMetrics(csharp9SyntaxTree, csharp9Compilation.GetSemanticModel(csharp9SyntaxTree)).CognitiveComplexity.Should().Be(38);
 
             var visualBasicCode = System.IO.File.ReadAllText(@"TestCases\CognitiveComplexity.vb");
             CognitiveComplexity(AnalyzerLanguage.VisualBasic, visualBasicCode).Should().Be(122);
@@ -513,14 +516,14 @@ End Class")
         public void WrongMetrics_CSharp()
         {
             var (syntaxTree, semanticModel) = TestHelper.CompileVB(string.Empty);
-            Assert.ThrowsException<ArgumentException>(() => new Metrics.CSharp.CSharpMetrics(syntaxTree, semanticModel));
+            Assert.ThrowsException<ArgumentException>(() => new CSharpMetrics(syntaxTree, semanticModel));
         }
 
         [TestMethod]
         public void WrongMetrics_VisualBasic()
         {
             var (syntaxTree, semanticModel) = TestHelper.CompileCS(string.Empty);
-            Assert.ThrowsException<ArgumentException>(() => new Metrics.VisualBasic.VisualBasicMetrics(syntaxTree, semanticModel));
+            Assert.ThrowsException<ArgumentException>(() => new VisualBasicMetrics(syntaxTree, semanticModel));
         }
 
         [TestMethod]
@@ -577,8 +580,8 @@ End Module")
             var (syntaxTree, semanticModel) = TestHelper.Compile(text, false, language);
 
             return language == AnalyzerLanguage.CSharp
-                ? new Metrics.CSharp.CSharpMetrics(syntaxTree, semanticModel)
-                : new Metrics.VisualBasic.VisualBasicMetrics(syntaxTree, semanticModel);
+                ? new CSharpMetrics(syntaxTree, semanticModel)
+                : new VisualBasicMetrics(syntaxTree, semanticModel);
         }
     }
 }

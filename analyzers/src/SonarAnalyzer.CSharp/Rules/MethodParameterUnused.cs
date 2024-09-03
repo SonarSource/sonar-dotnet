@@ -21,7 +21,7 @@
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Sonar;
-using SonarAnalyzer.LiveVariableAnalysis.CSharp;
+using SonarAnalyzer.CSharp.Core.LiveVariableAnalysis;
 
 namespace SonarAnalyzer.Rules.CSharp
 {

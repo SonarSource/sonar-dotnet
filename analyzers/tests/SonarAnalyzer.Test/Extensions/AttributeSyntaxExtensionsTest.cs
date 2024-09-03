@@ -20,7 +20,7 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Extensions;
+using SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 namespace SonarAnalyzer.Test.Extensions
 {

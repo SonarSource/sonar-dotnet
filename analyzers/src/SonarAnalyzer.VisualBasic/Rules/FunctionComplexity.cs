@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.VisualBasic.Metrics;
+
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
@@ -55,7 +57,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         }
 
         protected override int GetComplexity(SyntaxNode node, SemanticModel semanticModel) =>
-            new Metrics.VisualBasic.VisualBasicMetrics(node.SyntaxTree, semanticModel).ComputeCyclomaticComplexity(node);
+            new VisualBasicMetrics(node.SyntaxTree, semanticModel).ComputeCyclomaticComplexity(node);
 
         protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
     }

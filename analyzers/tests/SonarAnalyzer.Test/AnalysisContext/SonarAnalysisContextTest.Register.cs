@@ -25,9 +25,9 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using NSubstitute;
 using SonarAnalyzer.AnalysisContext;
-using CS = csharp::SonarAnalyzer.Extensions.SonarAnalysisContextExtensions;
+using CS = csharp::SonarAnalyzer.CSharp.Core.Extensions.SonarAnalysisContextExtensions;
 using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
-using VB = vbnet::SonarAnalyzer.Extensions.SonarAnalysisContextExtensions;
+using VB = vbnet::SonarAnalyzer.VisualBasic.Core.Extensions.SonarAnalysisContextExtensions;
 
 namespace SonarAnalyzer.Test.AnalysisContext;
 

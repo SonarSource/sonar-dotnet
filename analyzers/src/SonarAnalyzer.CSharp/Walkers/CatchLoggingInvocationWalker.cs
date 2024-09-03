@@ -20,7 +20,7 @@
 
 using static Roslyn.Utilities.SonarAnalyzer.Shared.LoggingFrameworkMethods;
 
-namespace SonarAnalyzer.Common.Walkers;
+namespace SonarAnalyzer.CSharp.Walkers;
 
 // The walker is used to:
 // - visit the catch clause (all the nested catch clauses are skipped; they will be visited independently)

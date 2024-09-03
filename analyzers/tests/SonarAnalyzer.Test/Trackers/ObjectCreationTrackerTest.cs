@@ -18,9 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Helpers.Trackers;
-using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
-using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.CSharp.Core.Trackers;
+using SonarAnalyzer.VisualBasic.Core.Trackers;
+using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
+using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Test.Helpers
 {
@@ -40,7 +41,7 @@ public class Base
       new Base(notAConst, ""myConst"", true, 4, new object());
     }
 }";
-            var context = CreateContext<CSharpSyntax.ObjectCreationExpressionSyntax>(testInput, AnalyzerLanguage.CSharp);
+            var context = CreateContext<CS.ObjectCreationExpressionSyntax>(testInput, AnalyzerLanguage.CSharp);
             var tracker = new CSharpObjectCreationTracker();
 
             tracker.ConstArgumentForParameter(context, "a").Should().BeNull();
@@ -65,7 +66,7 @@ public class Base
       return new (notAConst, ""myConst"", true, 4, new object());
     }
 }";
-            var context = CreateContext<CSharpSyntax.ImplicitObjectCreationExpressionSyntax>(testInput, AnalyzerLanguage.CSharp);
+            var context = CreateContext<CS.ImplicitObjectCreationExpressionSyntax>(testInput, AnalyzerLanguage.CSharp);
             var tracker = new CSharpObjectCreationTracker();
 
             tracker.ConstArgumentForParameter(context, "a").Should().BeNull();
@@ -89,7 +90,7 @@ Public Class Base
         Dim tmp = New Base(notAConst, ""myConst"", True, 4, 5, New Object())
     End Sub
 End Class";
-            var context = CreateContext<VBSyntax.ObjectCreationExpressionSyntax>(testInput, AnalyzerLanguage.VisualBasic);
+            var context = CreateContext<VB.ObjectCreationExpressionSyntax>(testInput, AnalyzerLanguage.VisualBasic);
             var tracker = new VisualBasicObjectCreationTracker();
 
             tracker.ConstArgumentForParameter(context, "a").Should().BeNull();
@@ -112,7 +113,7 @@ public class Base
       new Undefined(true);
     }
 }";
-            var context = CreateContext<CSharpSyntax.ObjectCreationExpressionSyntax>(testInput, AnalyzerLanguage.CSharp);
+            var context = CreateContext<CS.ObjectCreationExpressionSyntax>(testInput, AnalyzerLanguage.CSharp);
             var tracker = new CSharpObjectCreationTracker();
             tracker.ArgumentAtIndexIs(0, KnownType.System_Boolean)(context).Should().BeFalse();
             tracker.WhenDerivesFrom(KnownType.System_Exception)(context).Should().BeFalse();
@@ -138,7 +139,7 @@ public class Base : Exception, IDisposable
         Method(true);
     }
 }";
-            var context = CreateContext<CSharpSyntax.InvocationExpressionSyntax>(testInput, AnalyzerLanguage.CSharp);   // Created with wrong syntax
+            var context = CreateContext<CS.InvocationExpressionSyntax>(testInput, AnalyzerLanguage.CSharp);   // Created with wrong syntax
             var tracker = new CSharpObjectCreationTracker();
             tracker.ArgumentAtIndexIs(0, KnownType.System_Boolean)(context).Should().BeTrue();  // Doesn't care about symbol type
             tracker.WhenDerivesFrom(KnownType.System_Exception)(context).Should().BeFalse();
@@ -159,7 +160,7 @@ public class Base
       new Base { Foo = 42 };
     }
 }";
-            var context = CreateContext<CSharpSyntax.ObjectCreationExpressionSyntax>(testInput, AnalyzerLanguage.CSharp);
+            var context = CreateContext<CS.ObjectCreationExpressionSyntax>(testInput, AnalyzerLanguage.CSharp);
             var tracker = new CSharpObjectCreationTracker();
             tracker.ArgumentAtIndexIsConst(0).Invoke(context).Should().BeFalse();
         }

@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Common.Walkers;
-
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
 public sealed class ObjectsShouldNotBeDisposedMoreThanOnce : ObjectsShouldNotBeDisposedMoreThanOnceBase

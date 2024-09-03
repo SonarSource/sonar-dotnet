@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.VisualBasic.Core.Facade;
 
 namespace SonarAnalyzer.Test.Facade;
 

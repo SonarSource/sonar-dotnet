@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Common.Walkers;
+namespace SonarAnalyzer.CSharp.Walkers;
 
 /// <summary>
 /// This class find syntax cases that are not properly supported by current CFG/SE/LVA and we mute all issues related to these scenarios.

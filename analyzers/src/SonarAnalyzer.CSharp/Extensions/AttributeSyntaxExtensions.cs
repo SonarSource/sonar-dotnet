@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions;
+namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 internal static class AttributeSyntaxExtensions
 {

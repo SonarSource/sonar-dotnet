@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Facade;
+using SonarAnalyzer.Helpers.Facade;
+
+namespace SonarAnalyzer.VisualBasic.Core.Facade.Implementation;
 
 internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
 {

@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Common;
+namespace SonarAnalyzer.VisualBasic.Core.Common;
 
 internal static class DescriptorFactory
 {

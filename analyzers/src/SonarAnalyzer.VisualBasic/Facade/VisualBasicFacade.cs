@@ -19,8 +19,10 @@
  */
 
 using SonarAnalyzer.Helpers.Facade;
+using SonarAnalyzer.VisualBasic.Core.Facade.Implementation;
+using SonarAnalyzer.VisualBasic.Core.Trackers;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.VisualBasic.Core.Facade;
 
 internal sealed class VisualBasicFacade : ILanguageFacade<SyntaxKind>
 {

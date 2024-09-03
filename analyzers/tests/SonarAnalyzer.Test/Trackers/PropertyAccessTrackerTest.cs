@@ -18,9 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Helpers.Trackers;
-using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
-using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.CSharp.Core.Trackers;
+using SonarAnalyzer.VisualBasic.Core.Trackers;
+using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
+using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Test.Helpers
 {
@@ -50,7 +51,7 @@ End Class";
         [TestMethod]
         public void MatchesGetter_CS()
         {
-            var context = CreateContext<CSharpSyntax.MemberAccessExpressionSyntax>(TestInputCS, "MyProperty", AnalyzerLanguage.CSharp);
+            var context = CreateContext<CS.MemberAccessExpressionSyntax>(TestInputCS, "MyProperty", AnalyzerLanguage.CSharp);
             var tracker = new CSharpPropertyAccessTracker();
 
             tracker.MatchGetter()(context).Should().BeTrue();
@@ -60,7 +61,7 @@ End Class";
         [TestMethod]
         public void MatchesGetter_VB()
         {
-            var context = CreateContext<VBSyntax.MemberAccessExpressionSyntax>(TestInputVB, "MyProperty", AnalyzerLanguage.VisualBasic);
+            var context = CreateContext<VB.MemberAccessExpressionSyntax>(TestInputVB, "MyProperty", AnalyzerLanguage.VisualBasic);
             var tracker = new VisualBasicPropertyAccessTracker();
 
             tracker.MatchGetter()(context).Should().BeTrue();

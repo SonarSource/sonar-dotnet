@@ -19,7 +19,7 @@
  */
 
 using System.Text.RegularExpressions;
-using SonarAnalyzer.Helpers.Trackers;
+using SonarAnalyzer.CSharp.Core.Trackers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {

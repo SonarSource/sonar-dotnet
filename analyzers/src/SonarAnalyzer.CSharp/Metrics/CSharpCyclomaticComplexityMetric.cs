@@ -18,9 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Common.Walkers;
-
-namespace SonarAnalyzer.Metrics.CSharp;
+namespace SonarAnalyzer.CSharp.Metrics;
 
 public static class CSharpCyclomaticComplexityMetric
 {

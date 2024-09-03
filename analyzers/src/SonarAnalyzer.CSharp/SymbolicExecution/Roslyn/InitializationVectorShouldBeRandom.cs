@@ -19,7 +19,6 @@
  */
 
 using System.Security.Cryptography;
-using SonarAnalyzer.Common.Walkers;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 

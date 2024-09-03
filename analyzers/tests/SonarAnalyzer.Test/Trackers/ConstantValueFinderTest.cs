@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.CSharp.Core.Trackers;
 
 namespace SonarAnalyzer.Test.Helpers
 {

@@ -19,7 +19,7 @@
  */
 
 using SonarAnalyzer.CFG.Sonar;
-using SonarAnalyzer.LiveVariableAnalysis.CSharp;
+using SonarAnalyzer.CSharp.Core.LiveVariableAnalysis;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;

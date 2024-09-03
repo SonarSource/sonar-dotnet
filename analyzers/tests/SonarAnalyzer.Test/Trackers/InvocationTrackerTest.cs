@@ -18,9 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Helpers.Trackers;
-using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
-using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.CSharp.Core.Trackers;
+using SonarAnalyzer.VisualBasic.Core.Trackers;
+using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
+using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Test.Helpers
 {
@@ -86,7 +87,7 @@ namespace WebPoc
         [TestMethod]
         public void ConstArgumentForParameter_CS()
         {
-            var context = CreateContext<CSharpSyntax.InvocationExpressionSyntax>(TestInputCS, "MyMethod", AnalyzerLanguage.CSharp);
+            var context = CreateContext<CS.InvocationExpressionSyntax>(TestInputCS, "MyMethod", AnalyzerLanguage.CSharp);
             var tracker = new CSharpInvocationTracker();
 
             tracker.ConstArgumentForParameter(context, "a").Should().BeNull();
@@ -100,7 +101,7 @@ namespace WebPoc
         [TestMethod]
         public void ArgumentIsBoolConstant_CS()
         {
-            var context = CreateContext<CSharpSyntax.InvocationExpressionSyntax>(TestInputCS, "MyMethod", AnalyzerLanguage.CSharp);
+            var context = CreateContext<CS.InvocationExpressionSyntax>(TestInputCS, "MyMethod", AnalyzerLanguage.CSharp);
             var tracker = new CSharpInvocationTracker();
 
             tracker.ArgumentIsBoolConstant("a", true)(context).Should().Be(false);
@@ -114,7 +115,7 @@ namespace WebPoc
         [TestMethod]
         public void ConstArgumentForParameter_VB()
         {
-            var context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "MyMethod", AnalyzerLanguage.VisualBasic);
+            var context = CreateContext<VB.InvocationExpressionSyntax>(TestInputVB, "MyMethod", AnalyzerLanguage.VisualBasic);
             var tracker = new VisualBasicInvocationTracker();
 
             tracker.ConstArgumentForParameter(context, "a").Should().BeNull();
@@ -129,7 +130,7 @@ namespace WebPoc
         [TestMethod]
         public void ArgumentIsBoolConstant_VB()
         {
-            var context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "MyMethod", AnalyzerLanguage.VisualBasic);
+            var context = CreateContext<VB.InvocationExpressionSyntax>(TestInputVB, "MyMethod", AnalyzerLanguage.VisualBasic);
             var tracker = new VisualBasicInvocationTracker();
 
             tracker.ArgumentIsBoolConstant("a", true)(context).Should().Be(false);
@@ -143,7 +144,7 @@ namespace WebPoc
         [TestMethod]
         public void ArgumentAtIndexIsStringConstant_CS()
         {
-            var context = CreateContext<CSharpSyntax.InvocationExpressionSyntax>(TestInputCS, "MyMethod", AnalyzerLanguage.CSharp);
+            var context = CreateContext<CS.InvocationExpressionSyntax>(TestInputCS, "MyMethod", AnalyzerLanguage.CSharp);
             var tracker = new CSharpInvocationTracker();
             tracker.ArgumentAtIndexIsStringConstant(0)(context).Should().BeFalse();
             tracker.ArgumentAtIndexIsStringConstant(1)(context).Should().BeTrue();
@@ -156,7 +157,7 @@ namespace WebPoc
         [TestMethod]
         public void ArgumentAtIndexIsStringConstant_VB()
         {
-            var context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "MyMethod", AnalyzerLanguage.VisualBasic);
+            var context = CreateContext<VB.InvocationExpressionSyntax>(TestInputVB, "MyMethod", AnalyzerLanguage.VisualBasic);
             var tracker = new VisualBasicInvocationTracker();
             tracker.ArgumentAtIndexIsStringConstant(0)(context).Should().BeFalse();
             tracker.ArgumentAtIndexIsStringConstant(1)(context).Should().BeTrue();
@@ -166,14 +167,14 @@ namespace WebPoc
             tracker.ArgumentAtIndexIsStringConstant(5)(context).Should().BeFalse();
             tracker.ArgumentAtIndexIsStringConstant(42)(context).Should().BeFalse();
 
-            context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "NoArgs", AnalyzerLanguage.VisualBasic, 1);
+            context = CreateContext<VB.InvocationExpressionSyntax>(TestInputVB, "NoArgs", AnalyzerLanguage.VisualBasic, 1);
             tracker.ArgumentAtIndexIsStringConstant(0)(context).Should().BeFalse();
         }
 
         [TestMethod]
         public void ArgumentAtIndexIsAny_CS()
         {
-            var context = CreateContext<CSharpSyntax.InvocationExpressionSyntax>(TestInputCS, "MyMethod", AnalyzerLanguage.CSharp);
+            var context = CreateContext<CS.InvocationExpressionSyntax>(TestInputCS, "MyMethod", AnalyzerLanguage.CSharp);
             var tracker = new CSharpInvocationTracker();
             tracker.ArgumentAtIndexIsAny(0, "myConst")(context).Should().BeFalse();
             tracker.ArgumentAtIndexIsAny(1, "myConst")(context).Should().BeTrue();
@@ -186,7 +187,7 @@ namespace WebPoc
         [TestMethod]
         public void ArgumentAtIndexIsAny_VB()
         {
-            var context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "MyMethod", AnalyzerLanguage.VisualBasic);
+            var context = CreateContext<VB.InvocationExpressionSyntax>(TestInputVB, "MyMethod", AnalyzerLanguage.VisualBasic);
             var tracker = new VisualBasicInvocationTracker();
             tracker.ArgumentAtIndexIsAny(0, "myConst")(context).Should().BeFalse();
             tracker.ArgumentAtIndexIsAny(1, "myConst")(context).Should().BeTrue();
@@ -195,14 +196,14 @@ namespace WebPoc
             tracker.ArgumentAtIndexIsAny(2, "true")(context).Should().BeFalse();   // Not a string
             tracker.ArgumentAtIndexIsAny(42, "myConst")(context).Should().BeFalse();
 
-            context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, "NoArgs", AnalyzerLanguage.VisualBasic, 1);
+            context = CreateContext<VB.InvocationExpressionSyntax>(TestInputVB, "NoArgs", AnalyzerLanguage.VisualBasic, 1);
             tracker.ArgumentAtIndexIsAny(0, "myConst")(context).Should().BeFalse();
         }
 
         [TestMethod]
         public void InvocationConditionForUndefinedMethod()
         {
-            var context = CreateContext<CSharpSyntax.InvocationExpressionSyntax>(TestInputCS, "Undefined", AnalyzerLanguage.CSharp, 1);
+            var context = CreateContext<CS.InvocationExpressionSyntax>(TestInputCS, "Undefined", AnalyzerLanguage.CSharp, 1);
             var tracker = new CSharpInvocationTracker();
             tracker.MethodIsStatic()(context).Should().BeFalse();
             tracker.MethodIsExtension()(context).Should().BeFalse();
@@ -218,7 +219,7 @@ namespace WebPoc
         [DataRow(3, true)]
         public void IsIHeadersDictionary(int invocationsToSkip, bool expectedValue)
         {
-            var context = CreateContext<CSharpSyntax.InvocationExpressionSyntax>(IsIHeadersDictionaryCode,
+            var context = CreateContext<CS.InvocationExpressionSyntax>(IsIHeadersDictionaryCode,
                                                                                  "MethodName",
                                                                                  AnalyzerLanguage.CSharp,
                                                                                  invocationsToSkip,

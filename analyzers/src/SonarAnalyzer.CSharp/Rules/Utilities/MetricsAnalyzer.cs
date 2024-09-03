@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.CSharp.Metrics;
+
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -26,6 +28,6 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
 
         protected override MetricsBase GetMetrics(SyntaxTree syntaxTree, SemanticModel semanticModel) =>
-            new Metrics.CSharp.CSharpMetrics(syntaxTree, semanticModel);
+            new CSharpMetrics(syntaxTree, semanticModel);
     }
 }

@@ -18,13 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-extern alias vbnet;
-
-using SonarAnalyzer.Extensions;
+using SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 using CS = Microsoft.CodeAnalysis.CSharp;
-using ExtensionsCS = csharp::SonarAnalyzer.Extensions.ObjectCreationExpressionSyntaxExtensions;
-using ExtensionsVB = vbnet::SonarAnalyzer.Extensions.ObjectCreationExpressionSyntaxExtensions;
+using ExtensionsCS = SonarAnalyzer.CSharp.Core.Syntax.Extensions.ObjectCreationExpressionSyntaxExtensions;
+using ExtensionsVB = SonarAnalyzer.VisualBasic.Core.Syntax.Extensions.ObjectCreationExpressionSyntaxExtensions;
 using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.Test.Extensions

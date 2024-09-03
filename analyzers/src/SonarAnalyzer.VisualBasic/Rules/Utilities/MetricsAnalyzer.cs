@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.VisualBasic.Metrics;
+
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
@@ -26,6 +28,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
 
         protected override MetricsBase GetMetrics(SyntaxTree syntaxTree, SemanticModel semanticModel) =>
-            new Metrics.VisualBasic.VisualBasicMetrics(syntaxTree, semanticModel);
+            new VisualBasicMetrics(syntaxTree, semanticModel);
     }
 }

@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Trackers;
+namespace SonarAnalyzer.CSharp.Core.Trackers;
 
 /// <summary>
 /// Verifies the initialization of an object, whether one or more properties have been correctly set when the object was initialized.

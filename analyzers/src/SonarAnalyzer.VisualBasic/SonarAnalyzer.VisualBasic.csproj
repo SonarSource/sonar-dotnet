@@ -26,17 +26,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="Microsoft.CodeAnalysis" />
+    <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
+    <Using Include="Microsoft.CodeAnalysis.Shared.Extensions" />
     <Using Include="Microsoft.CodeAnalysis.VisualBasic" />
     <Using Include="Microsoft.CodeAnalysis.VisualBasic.Syntax" />
     <Using Include="Microsoft.CodeAnalysis.VisualBasic.Extensions" />
-    <Using Include="Microsoft.CodeAnalysis.Shared.Extensions" />
     <Using Include="SonarAnalyzer.AnalysisContext" />
     <Using Include="SonarAnalyzer.Analyzers" />
     <Using Include="SonarAnalyzer.Common" />
     <Using Include="SonarAnalyzer.Extensions" />
     <Using Include="SonarAnalyzer.Helpers" />
-    <Using Include="Microsoft.CodeAnalysis" />
-    <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
+    <Using Include="SonarAnalyzer.VisualBasic.Core.Common" />
+    <Using Include="SonarAnalyzer.VisualBasic.Core.Extensions" />
+    <Using Include="SonarAnalyzer.VisualBasic.Core.Syntax.Extensions" />
+    <Using Include="SonarAnalyzer.VisualBasic.Core.Facade" />
   </ItemGroup>
 
   <Target Name="SignDlls" Condition="'$(SignAssembly)' == 'true'">
