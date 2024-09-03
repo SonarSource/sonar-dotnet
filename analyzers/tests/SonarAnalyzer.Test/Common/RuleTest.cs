@@ -378,11 +378,11 @@ namespace SonarAnalyzer.Test.Common
             {
                 if (diagnostic.CustomTags.Contains(LanguageNames.CSharp))
                 {
-                    return csharp::SonarAnalyzer.RuleCatalog.Rules;
+                    return CSharp.Core.Rspec.RuleCatalog.Rules;
                 }
                 else if (diagnostic.CustomTags.Contains(LanguageNames.VisualBasic))
                 {
-                    return vbnet::SonarAnalyzer.RuleCatalog.Rules;
+                    return VisualBasic.Core.Rspec.RuleCatalog.Rules;
                 }
                 else
                 {

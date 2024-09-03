@@ -18,9 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.VisualBasic.Core.Rspec;
+
 namespace SonarAnalyzer.VisualBasic.Core.Common;
 
-internal static class DescriptorFactory
+public static class DescriptorFactory
 {
     public static DiagnosticDescriptor Create(string id, string messageFormat, bool? isEnabledByDefault = null, bool fadeOutCode = false) =>
         // RuleCatalog class is created from SonarAnalyzer.SourceGenerator
