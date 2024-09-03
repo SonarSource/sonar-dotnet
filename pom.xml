@@ -161,12 +161,6 @@
 
   <profiles>
     <profile>
-      <id>its</id>
-      <modules>
-        <module>its</module>
-      </modules>
-    </profile>
-    <profile>
       <id>sign</id>
       <build>
         <plugins>

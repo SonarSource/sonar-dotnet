@@ -1,7 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <RootNamespace>VbCodeDuplicationTestProj</RootNamespace>
-    <TargetFramework>net7.0</TargetFramework>
-    <SonarQubeTestProject>True</SonarQubeTestProject>
-  </PropertyGroup>
-</Project>
