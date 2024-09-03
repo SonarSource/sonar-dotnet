@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.CSharp.Core.Facade;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Test.Facade;

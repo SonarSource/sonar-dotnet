@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions;
+namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
-internal static partial class MemberAccessExpressionSyntaxExtensions
+internal static class MemberAccessExpressionSyntaxExtensions
 {
     public static bool IsMemberAccessOnKnownType(this MemberAccessExpressionSyntax memberAccess, string name, KnownType knownType, SemanticModel semanticModel) =>
         memberAccess.NameIs(name)

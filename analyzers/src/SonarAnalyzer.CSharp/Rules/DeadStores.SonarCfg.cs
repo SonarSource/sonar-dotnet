@@ -20,8 +20,8 @@
 
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.CFG.Sonar;
-using SonarAnalyzer.Common.Walkers;
-using SonarAnalyzer.LiveVariableAnalysis.CSharp;
+using SonarAnalyzer.CSharp.Core.LiveVariableAnalysis;
+using SonarAnalyzer.CSharp.Walkers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {

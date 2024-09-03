@@ -18,10 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
+using SonarAnalyzer.CSharp.Core.Facade.Implementation;
+using SonarAnalyzer.CSharp.Core.Trackers;
 using SonarAnalyzer.Helpers.Facade;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.CSharp.Core.Facade;
 
 internal sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
 {

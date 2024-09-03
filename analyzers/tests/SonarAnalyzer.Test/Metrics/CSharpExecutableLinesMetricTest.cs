@@ -19,8 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp;
-using SonarAnalyzer.Test.Helpers;
-using SonarAnalyzer.Test.TestFramework.Tests;
+using SonarAnalyzer.CSharp.Metrics;
 
 namespace SonarAnalyzer.Test.Common
 {
@@ -1034,7 +1033,7 @@ class Program
         private static void AssertLineNumbersOfExecutableLines(string code, params int[] expectedExecutableLines)
         {
             var (syntaxTree, semanticModel) = TestHelper.CompileCS(code);
-            Metrics.CSharp.CSharpExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel).Should().BeEquivalentTo(expectedExecutableLines);
+            CSharpExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel).Should().BeEquivalentTo(expectedExecutableLines);
         }
 
         private static void AssertLineNumbersOfExecutableLinesRazor(string code, string fileName, params int[] expectedExecutableLines)
@@ -1048,7 +1047,7 @@ class Program
             var syntaxTree = compilation.SyntaxTrees.Single(x => x.ToString().Contains(fileName));
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
 
-            var lineNumbers = Metrics.CSharp.CSharpExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel);
+            var lineNumbers = CSharpExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel);
             lineNumbers.Should().BeEquivalentTo(expectedExecutableLines);
         }
     }

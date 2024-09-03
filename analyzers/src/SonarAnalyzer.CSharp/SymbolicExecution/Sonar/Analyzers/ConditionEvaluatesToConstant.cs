@@ -19,7 +19,7 @@
  */
 
 using SonarAnalyzer.CFG.Sonar;
-using SonarAnalyzer.Common.Walkers;
+using SonarAnalyzer.CSharp.Walkers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;

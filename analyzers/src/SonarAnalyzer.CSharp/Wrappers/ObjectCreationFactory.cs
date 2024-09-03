@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Wrappers;
+namespace SonarAnalyzer.CSharp.Core.Wrappers;
 
 internal interface IObjectCreation
 {

@@ -20,7 +20,7 @@
 
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Sonar;
-using SonarAnalyzer.LiveVariableAnalysis.CSharp;
+using SonarAnalyzer.CSharp.Core.LiveVariableAnalysis;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.SymbolicExecution.Roslyn.CSharp;

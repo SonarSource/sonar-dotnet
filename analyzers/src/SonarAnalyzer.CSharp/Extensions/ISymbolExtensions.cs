@@ -21,7 +21,7 @@
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 
-namespace SonarAnalyzer.Extensions;
+namespace SonarAnalyzer.CSharp.Core.Extensions;
 
 internal static class ISymbolExtensions
 {

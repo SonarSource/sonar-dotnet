@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.VisualBasic.Metrics;
+
 namespace SonarAnalyzer.Test.Common
 {
     [TestClass]
@@ -468,7 +470,7 @@ End Module", 4, 6);
         private static void AssertLinesOfCode(string code, params int[] expectedExecutableLines)
         {
             var (syntaxTree, semanticModel) = TestHelper.CompileVB(code);
-            Metrics.VisualBasic.VisualBasicExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel).Should().BeEquivalentTo(expectedExecutableLines);
+            VisualBasicExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel).Should().BeEquivalentTo(expectedExecutableLines);
         }
     }
 }

@@ -19,8 +19,9 @@
  */
 
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.CSharp.Core.Trackers;
 
-namespace SonarAnalyzer.Extensions;
+namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class SyntaxNodeExtensionsCSharp
 {

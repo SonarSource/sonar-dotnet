@@ -21,7 +21,7 @@
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Sonar;
 
-namespace SonarAnalyzer.LiveVariableAnalysis.CSharp;
+namespace SonarAnalyzer.CSharp.Core.LiveVariableAnalysis;
 
 public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<IControlFlowGraph, Block>
 {

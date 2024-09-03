@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.VisualBasic.Core.Trackers;
 
 public class VisualBasicBuilderPatternCondition : BuilderPatternCondition<SyntaxKind, InvocationExpressionSyntax>
 {

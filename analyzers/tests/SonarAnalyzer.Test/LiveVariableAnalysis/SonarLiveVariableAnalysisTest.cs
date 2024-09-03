@@ -21,7 +21,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Sonar;
-using SonarAnalyzer.LiveVariableAnalysis.CSharp;
+using SonarAnalyzer.CSharp.Core.LiveVariableAnalysis;
 using SonarAnalyzer.Test.CFG.Sonar;
 using StyleCop.Analyzers.Lightup;
 

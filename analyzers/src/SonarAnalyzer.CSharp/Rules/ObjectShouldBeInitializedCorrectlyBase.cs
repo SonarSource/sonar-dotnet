@@ -20,7 +20,7 @@
 
 using System.IO;
 using System.Xml.XPath;
-using SonarAnalyzer.Helpers.Trackers;
+using SonarAnalyzer.CSharp.Core.Trackers;
 
 namespace SonarAnalyzer.Rules
 {

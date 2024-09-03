@@ -36,6 +36,8 @@
     <Using Include="Microsoft.CodeAnalysis.CSharp.Syntax" />
     <Using Include="SonarAnalyzer.AnalysisContext" />
     <Using Include="SonarAnalyzer.Common" />
+    <Using Include="SonarAnalyzer.CSharp.Core.Extensions" />
+    <Using Include="SonarAnalyzer.CSharp.Core.Syntax.Extensions" />
     <Using Include="SonarAnalyzer.CSharp.Styling.Common" />
     <Using Include="SonarAnalyzer.CSharp.Styling.Extensions" />
     <Using Include="SonarAnalyzer.Extensions" />

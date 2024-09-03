@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Common.Walkers;
+namespace SonarAnalyzer.CSharp.Core.Walkers;
 
 public class SafeCSharpSyntaxWalker : CSharpSyntaxWalker, ISafeSyntaxWalker
 {

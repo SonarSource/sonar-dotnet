@@ -18,12 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Extensions;
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 namespace SonarAnalyzer.Test.LiveVariableAnalysis;
 

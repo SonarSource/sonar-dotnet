@@ -19,7 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp;
-using SonarAnalyzer.Common.Walkers;
+using SonarAnalyzer.CSharp.Core.Walkers;
 
 namespace SonarAnalyzer.Test.Extensions
 {

@@ -18,9 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Helpers.Facade;
 using SonarAnalyzer.Helpers.Trackers;
+using SonarAnalyzer.VisualBasic.Core.Trackers;
 
-namespace SonarAnalyzer.Helpers.Facade;
+namespace SonarAnalyzer.VisualBasic.Core.Facade.Implementation;
 
 internal sealed class VisualBasicTrackerFacade : ITrackerFacade<SyntaxKind>
 {
