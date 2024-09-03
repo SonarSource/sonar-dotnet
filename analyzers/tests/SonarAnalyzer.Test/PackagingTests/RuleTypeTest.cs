@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-extern alias vbnet;
-
 namespace SonarAnalyzer.Test.PackagingTests
 {
     [TestClass]
@@ -28,11 +25,11 @@ namespace SonarAnalyzer.Test.PackagingTests
     {
         [TestMethod]
         public void DetectRuleTypeChanges_CS() =>
-            DetectTypeChanges(csharp::SonarAnalyzer.RuleCatalog.Rules, RuleTypeMappingCS.Rules, LanguageNames.CSharp, nameof(RuleTypeMappingCS));
+            DetectTypeChanges(CSharp.Core.Rspec.RuleCatalog.Rules, RuleTypeMappingCS.Rules, LanguageNames.CSharp, nameof(RuleTypeMappingCS));
 
         [TestMethod]
         public void DetectRuleTypeChanges_VB() =>
-            DetectTypeChanges(vbnet::SonarAnalyzer.RuleCatalog.Rules, RuleTypeMappingVB.Rules, LanguageNames.VisualBasic, nameof(RuleTypeMappingVB));
+            DetectTypeChanges(VisualBasic.Core.Rspec.RuleCatalog.Rules, RuleTypeMappingVB.Rules, LanguageNames.VisualBasic, nameof(RuleTypeMappingVB));
 
         private static void DetectTypeChanges(Dictionary<string, RuleDescriptor> rules, IImmutableDictionary<string, string> expectedTypes, string language, string expectedTypesName)
         {

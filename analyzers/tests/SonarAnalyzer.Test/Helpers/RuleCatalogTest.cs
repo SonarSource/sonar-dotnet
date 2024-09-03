@@ -18,12 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-extern alias vbnet;
 using System.IO;
-using SonarAnalyzer.Test.Common;
-using RuleCatalogCS = csharp::SonarAnalyzer.RuleCatalog;
-using RuleCatalogVB = vbnet::SonarAnalyzer.RuleCatalog;
+using RuleCatalogCS = SonarAnalyzer.CSharp.Core.Rspec.RuleCatalog;
+using RuleCatalogVB = SonarAnalyzer.VisualBasic.Core.Rspec.RuleCatalog;
 
 namespace SonarAnalyzer.Test.Helpers
 {
