@@ -18,9 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.CodeAnalysis.CSharp;
-using static csharp::SonarAnalyzer.Extensions.SyntaxTokenExtensions;
+using static SonarAnalyzer.CSharp.Core.Syntax.Extensions.SyntaxTokenExtensionsShared;
 
 namespace SonarAnalyzer.Test.Extensions
 {

@@ -18,10 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias common;
-extern alias csharp;
-extern alias vbnet;
-
 using FluentAssertions.Extensions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -31,11 +27,11 @@ using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 using SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
 using StyleCop.Analyzers.Lightup;
-using ExtensionsCommon = common::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
-using ExtensionsShared = csharp::SonarAnalyzer.Extensions.SyntaxNodeExtensionsShared;
-using MicrosoftExtensionsCS = csharp::Microsoft.CodeAnalysis.CSharp.Extensions.SyntaxNodeExtensions;
+using ExtensionsCommon = SonarAnalyzer.Extensions.SyntaxNodeExtensions;
+using ExtensionsShared = SonarAnalyzer.CSharp.Core.Syntax.Extensions.SyntaxNodeExtensionsShared;
+using MicrosoftExtensionsCS = Microsoft.CodeAnalysis.CSharp.Extensions.SyntaxNodeExtensions;
 using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
-using SyntaxTokenExtensions = csharp::SonarAnalyzer.Extensions.SyntaxTokenExtensions;
+using SyntaxTokenExtensions = SonarAnalyzer.CSharp.Core.Syntax.Extensions.SyntaxTokenExtensionsShared;
 using SyntaxVB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Test.Extensions;

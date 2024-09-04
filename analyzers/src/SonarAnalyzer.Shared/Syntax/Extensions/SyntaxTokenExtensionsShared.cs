@@ -18,9 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions;
+#if CS
+namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
+#else
+namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
+#endif
 
-internal static class SyntaxTokenExtensions
+public static class SyntaxTokenExtensionsShared
 {
     // Based on Roslyn: https://github.com/dotnet/roslyn/blob/09903da31892a30f71eab67d2fd83232cfbf0cea/src/Workspaces/CSharp/Portable/LanguageServices/CSharpSyntaxFactsService.cs#L1187-L1254
     public static SyntaxNode GetBindableParent(this SyntaxToken token)

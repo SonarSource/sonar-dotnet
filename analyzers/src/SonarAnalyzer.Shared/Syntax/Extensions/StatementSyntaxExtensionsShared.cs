@@ -18,9 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions;
+#if CS
+namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
+#else
+namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
+#endif
 
-internal static class StatementSyntaxExtensions
+public static class StatementSyntaxExtensionsShared
 {
     /// <summary>
     /// Returns all statements before the specified statement within the containing method.
