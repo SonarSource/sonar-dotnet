@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
-internal static class AssignmentExpressionSyntaxExtensions
+public static class AssignmentExpressionSyntaxExtensions
 {
     public readonly record struct AssignmentMapping(SyntaxNode Left, SyntaxNode Right);
 

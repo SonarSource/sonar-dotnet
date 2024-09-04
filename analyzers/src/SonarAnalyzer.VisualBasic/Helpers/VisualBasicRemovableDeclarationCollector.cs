@@ -22,7 +22,7 @@ using NodeSymbolAndModel = SonarAnalyzer.Common.NodeSymbolAndModel<Microsoft.Cod
 
 namespace SonarAnalyzer.VisualBasic.Core.Syntax.Utilities;
 
-internal class VisualBasicRemovableDeclarationCollector : RemovableDeclarationCollectorBase<TypeBlockSyntax, TypeStatementSyntax, SyntaxKind>
+public class VisualBasicRemovableDeclarationCollector : RemovableDeclarationCollectorBase<TypeBlockSyntax, TypeStatementSyntax, SyntaxKind>
 {
     public VisualBasicRemovableDeclarationCollector(INamedTypeSymbol namedType, Compilation compilation) : base(namedType, compilation) { }
 

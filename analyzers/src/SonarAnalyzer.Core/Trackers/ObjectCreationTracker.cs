@@ -25,8 +25,8 @@ namespace SonarAnalyzer.Helpers.Trackers
     {
         protected override TSyntaxKind[] TrackedSyntaxKinds => Language.SyntaxKind.ObjectCreationExpressions;
 
-        internal abstract Condition ArgumentAtIndexIsConst(int index);
-        internal abstract object ConstArgumentForParameter(ObjectCreationContext context, string parameterName);
+        public abstract Condition ArgumentAtIndexIsConst(int index);
+        public abstract object ConstArgumentForParameter(ObjectCreationContext context, string parameterName);
 
         internal Condition ArgumentIsBoolConstant(string parameterName, bool expectedValue) =>
             context => ConstArgumentForParameter(context, parameterName) is bool boolValue && boolValue == expectedValue;

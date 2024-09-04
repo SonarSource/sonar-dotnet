@@ -27,5 +27,5 @@ namespace System.Runtime.CompilerServices
     // It is used only by compiler to track metadata. It does not affect MSIL, CLR nor runtime.
     // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-9.0/init#metadata-encoding
     [EditorBrowsable(EditorBrowsableState.Never)]
-    internal static class IsExternalInit { }
+    public static class IsExternalInit { }
 }

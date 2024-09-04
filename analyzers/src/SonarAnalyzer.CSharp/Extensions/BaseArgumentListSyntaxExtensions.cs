@@ -20,8 +20,8 @@
 
 namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
-internal static class BaseArgumentListSyntaxExtensions
+public static class BaseArgumentListSyntaxExtensions
 {
-    internal static ArgumentSyntax GetArgumentByName(this BaseArgumentListSyntax list, string name) =>
+    public static ArgumentSyntax GetArgumentByName(this BaseArgumentListSyntax list, string name) =>
         list.Arguments.FirstOrDefault(argument => argument.NameIs(name));
 }

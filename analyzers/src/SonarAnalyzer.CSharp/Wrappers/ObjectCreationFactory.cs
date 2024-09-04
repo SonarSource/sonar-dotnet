@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.CSharp.Core.Wrappers;
 
-internal interface IObjectCreation
+public interface IObjectCreation
 {
     InitializerExpressionSyntax Initializer { get; }
     ArgumentListSyntax ArgumentList { get; }
@@ -33,7 +33,7 @@ internal interface IObjectCreation
     IMethodSymbol MethodSymbol(SemanticModel semanticModel);
 }
 
-internal class ObjectCreationFactory
+public class ObjectCreationFactory
 {
     public static IObjectCreation Create(SyntaxNode node) =>
         node switch

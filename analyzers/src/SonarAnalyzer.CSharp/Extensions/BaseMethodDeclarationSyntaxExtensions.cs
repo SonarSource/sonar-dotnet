@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
-internal static class BaseMethodDeclarationSyntaxExtensions
+public static class BaseMethodDeclarationSyntaxExtensions
 {
     public static IEnumerable<SyntaxNode> GetBodyDescendantNodes(this BaseMethodDeclarationSyntax method) =>
         (method ?? throw new ArgumentNullException(nameof(method))).Body == null

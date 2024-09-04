@@ -60,7 +60,7 @@ public class CSharpObjectInitializationTracker
     /// </summary>
     private readonly int trackedConstructorArgumentIndex;
 
-    internal CSharpObjectInitializationTracker(Predicate<object> isAllowedConstantValue,
+    public CSharpObjectInitializationTracker(Predicate<object> isAllowedConstantValue,
         ImmutableArray<KnownType> trackedTypes,
         Predicate<string> isTrackedPropertyName,
         Func<ISymbol, SyntaxNode, SemanticModel, bool> isAllowedObject = null,
@@ -73,12 +73,12 @@ public class CSharpObjectInitializationTracker
         this.trackedConstructorArgumentIndex = trackedConstructorArgumentIndex;
     }
 
-    internal bool ShouldBeReported(IObjectCreation objectCreation, SemanticModel semanticModel, bool isDefaultConstructorSafe) =>
+    public bool ShouldBeReported(IObjectCreation objectCreation, SemanticModel semanticModel, bool isDefaultConstructorSafe) =>
         IsTrackedType(objectCreation.Expression, semanticModel)
         && !ObjectCreatedWithAllowedValue(objectCreation, semanticModel, isDefaultConstructorSafe)
         && !IsLaterAssignedWithAllowedValue(objectCreation, semanticModel);
 
-    internal bool ShouldBeReported(AssignmentExpressionSyntax assignment, SemanticModel semanticModel)
+    public bool ShouldBeReported(AssignmentExpressionSyntax assignment, SemanticModel semanticModel)
     {
         var assignmentMap = assignment.MapAssignmentArguments();
 

@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.VisualBasic.Core.Extensions;
 
-internal static class ISymbolExtensions
+public static class ISymbolExtensions
 {
     public static IEnumerable<SyntaxNode> GetLocationNodes(this ISymbol symbol, SyntaxNode node) =>
         symbol.Locations.SelectMany(location => GetDescendantNodes(location, node));

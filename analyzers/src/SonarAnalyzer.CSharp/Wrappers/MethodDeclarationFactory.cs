@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.CSharp.Core.Wrappers;
 
-internal static class MethodDeclarationFactory
+public static class MethodDeclarationFactory
 {
     public static IMethodDeclaration Create(SyntaxNode node)
     {

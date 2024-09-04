@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
-internal static class AwaitExpressionSyntaxExtensions
+public static class AwaitExpressionSyntaxExtensions
 {
     public static ExpressionSyntax AwaitedExpressionWithoutConfigureAwait(this AwaitExpressionSyntax awaitExpression) =>
         awaitExpression.Expression?.RemoveParentheses() switch

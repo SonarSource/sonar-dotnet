@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
-internal static class AttributeListSyntaxExtensions
+public static class AttributeListSyntaxExtensions
 {
     public static IEnumerable<AttributeSyntax> GetAttributes(this SyntaxList<AttributeListSyntax> attributeLists, KnownType attributeKnownType, SemanticModel semanticModel) =>
         attributeLists.SelectMany(x => x.Attributes).Where(x => x.IsKnownType(attributeKnownType, semanticModel));

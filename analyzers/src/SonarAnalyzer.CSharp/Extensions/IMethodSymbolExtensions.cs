@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.CSharp.Core.Extensions;
 
-internal static class IMethodSymbolExtensions
+public static class IMethodSymbolExtensions
 {
     public static bool IsModuleInitializer(this IMethodSymbol methodSymbol) =>
         methodSymbol.AnyAttributeDerivesFrom(KnownType.System_Runtime_CompilerServices_ModuleInitializerAttribute);

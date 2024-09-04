@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
-internal static class MethodDeclarationSyntaxExtensions
+public static class MethodDeclarationSyntaxExtensions
 {
     /// <summary>
     /// Returns true if the method throws exceptions or returns null.

@@ -39,12 +39,6 @@ public class CSharpInvocationTracker : InvocationTracker<SyntaxKind>
         ArgumentAtIndexConformsTo(index, (argument, model) =>
             predicate(argument, model));
 
-    private Condition ArgumentAtIndexConformsTo(int index, Func<ArgumentSyntax, SemanticModel, bool> predicate) => context =>
-        context.Node is InvocationExpressionSyntax { ArgumentList.Arguments: { } arguments }
-            && index < arguments.Count
-            && arguments[index] is { } argument
-            && predicate(argument, context.SemanticModel);
-
     public override Condition MatchProperty(MemberDescriptor member) =>
         context => ((InvocationExpressionSyntax)context.Node).Expression is MemberAccessExpressionSyntax methodMemberAccess
                    && methodMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
@@ -53,7 +47,7 @@ public class CSharpInvocationTracker : InvocationTracker<SyntaxKind>
                    && context.SemanticModel.GetTypeInfo(propertyMemberAccess.Expression) is TypeInfo enclosingClassType
                    && member.IsMatch(propertyMemberAccess.Name.Identifier.ValueText, enclosingClassType.Type, Language.NameComparison);
 
-    internal override object ConstArgumentForParameter(InvocationContext context, string parameterName)
+    public override object ConstArgumentForParameter(InvocationContext context, string parameterName)
     {
         var argumentList = ((InvocationExpressionSyntax)context.Node).ArgumentList;
         var values = argumentList.ArgumentValuesForParameter(context.SemanticModel, parameterName);
@@ -64,4 +58,10 @@ public class CSharpInvocationTracker : InvocationTracker<SyntaxKind>
 
     protected override SyntaxToken? ExpectedExpressionIdentifier(SyntaxNode expression) =>
         ((ExpressionSyntax)expression).GetIdentifier();
+
+    private static Condition ArgumentAtIndexConformsTo(int index, Func<ArgumentSyntax, SemanticModel, bool> predicate) =>
+        context => context.Node is InvocationExpressionSyntax { ArgumentList.Arguments: { } arguments }
+            && index < arguments.Count
+            && arguments[index] is { } argument
+            && predicate(argument, context.SemanticModel);
 }

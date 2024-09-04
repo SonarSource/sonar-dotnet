@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Extensions;
 
-internal static class SyntaxNodeExtensions
+public static class SyntaxNodeExtensions
 {
     public static bool IsKnownType(this SyntaxNode syntaxNode, KnownType knownType, SemanticModel semanticModel)
     {

@@ -24,7 +24,7 @@ using SonarAnalyzer.VisualBasic.Core.Trackers;
 
 namespace SonarAnalyzer.VisualBasic.Core.Facade;
 
-internal sealed class VisualBasicFacade : ILanguageFacade<SyntaxKind>
+public sealed class VisualBasicFacade : ILanguageFacade<SyntaxKind>
 {
     private static readonly Lazy<VisualBasicFacade> Singleton = new(() => new VisualBasicFacade());
     private static readonly Lazy<AssignmentFinder> AssignmentFinderLazy = new(() => new VisualBasicAssignmentFinder());

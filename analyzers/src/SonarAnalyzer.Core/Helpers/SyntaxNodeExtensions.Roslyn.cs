@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace Microsoft.CodeAnalysis.Shared.Extensions;
 
 [ExcludeFromCodeCoverage]
-internal static class SyntaxNodeExtensions
+public static class SyntaxNodeExtensions
 {
     /// <summary>
     /// Returns true if is a given token is a child token of a certain type of parent node.

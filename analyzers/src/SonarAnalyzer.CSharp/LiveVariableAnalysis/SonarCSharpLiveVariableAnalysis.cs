@@ -47,7 +47,7 @@ public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<I
             || (symbol is IParameterSymbol parameter && parameter.RefKind == RefKind.None);
     }
 
-    internal static bool IsOutArgument(IdentifierNameSyntax identifier) =>
+    public static bool IsOutArgument(IdentifierNameSyntax identifier) =>
         identifier.GetFirstNonParenthesizedParent() is ArgumentSyntax argument && argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
 
     protected override IEnumerable<Block> ReversedBlocks() =>
