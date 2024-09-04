@@ -20,14 +20,21 @@
 
 namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
 
-public static class MethodBlockSyntaxExtensions
+public static class ArgumentListSyntaxExtensions
 {
-    public static bool IsShared(this MethodBlockSyntax methodBlock) =>
-        methodBlock.SubOrFunctionStatement.Modifiers.Any(SyntaxKind.SharedKeyword);
+    public static ExpressionSyntax Get(this ArgumentListSyntax argumentList, int index) =>
+        argumentList is not null && argumentList.Arguments.Count > index
+            ? argumentList.Arguments[index].GetExpression().RemoveParentheses()
+            : null;
 
-    public static string GetIdentifierText(this MethodBlockSyntax method) =>
-        method.SubOrFunctionStatement.Identifier.ValueText;
-
-    public static SeparatedSyntaxList<ParameterSyntax>? GetParameters(this MethodBlockSyntax method) =>
-        method.BlockStatement?.ParameterList?.Parameters;
+    /// <summary>
+    /// Returns argument expressions for given parameter.
+    ///
+    /// There can be zero, one or more results based on parameter type (Optional or ParamArray/params).
+    /// </summary>
+    public static ImmutableArray<SyntaxNode> ArgumentValuesForParameter(this ArgumentListSyntax argumentList, SemanticModel model, string parameterName) =>
+        argumentList is not null
+            && new VisualBasicMethodParameterLookup(argumentList, model).TryGetSyntax(parameterName, out var expressions)
+                ? expressions
+                : ImmutableArray<SyntaxNode>.Empty;
 }

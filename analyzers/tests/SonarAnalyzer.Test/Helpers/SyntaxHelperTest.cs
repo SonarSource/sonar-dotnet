@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.CSharp.Core.Syntax.Extensions;
+using SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
 using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
@@ -104,7 +105,7 @@ End Class";
             Assert<CS.ReturnStatementSyntax>(string.Empty);
 
             void Assert<T>(params string[] expectedNames) where T : SyntaxNode =>
-                nodes.OfType<T>().Select(x => CSharpSyntaxHelper.GetName(x)).Should().BeEquivalentTo(expectedNames, because: "GetName for {0} should return the identifier", typeof(T));
+                nodes.OfType<T>().Select(x => SyntaxNodeExtensionsCSharp.GetName(x)).Should().BeEquivalentTo(expectedNames, because: "GetName for {0} should return the identifier", typeof(T));
         }
 
         [TestMethod]
@@ -122,7 +123,7 @@ End Class";
             GetName(nodes.OfType<VB.InvocationExpressionSyntax>().Single()).Should().Be("ToString");
             GetName(nodes.OfType<VB.ReturnStatementSyntax>().Single()).Should().BeEmpty();
 
-            static string GetName(SyntaxNode node) => VisualBasicSyntaxHelper.GetName(node);
+            static string GetName(SyntaxNode node) => SyntaxNodeExtensionsVisualBasic.GetName(node);
         }
 
         [TestMethod]
@@ -288,11 +289,11 @@ public class C
 
         [TestMethod]
         public void IsNullLiteral_Null_CS() =>
-            CSharpSyntaxHelper.IsNullLiteral(null).Should().BeFalse();
+            SyntaxNodeExtensionsCSharp.IsNullLiteral(null).Should().BeFalse();
 
         [TestMethod]
         public void IsNothingLiteral_Null_VB() =>
-            VisualBasicSyntaxHelper.IsNothingLiteral(null).Should().BeFalse();
+            SyntaxNodeExtensionsVisualBasic.IsNothingLiteral(null).Should().BeFalse();
 
         private static SyntaxNode[] Parse_CS(string source) =>
             Microsoft.CodeAnalysis.CSharp.CSharpSyntaxTree.ParseText(source).GetRoot().DescendantNodes().ToArray();

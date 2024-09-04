@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             (context) =>
             {
                 var argumentList = ((InvocationExpressionSyntax)context.Node).ArgumentList;
-                var values = VisualBasicSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, argumentList, "padding");
+                var values = argumentList.ArgumentValuesForParameter(context.SemanticModel, "padding");
                 return values.Length == 1
                     && values[0] is ExpressionSyntax valueSyntax
                     && context.SemanticModel.GetSymbolInfo(valueSyntax).Symbol is ISymbol symbol

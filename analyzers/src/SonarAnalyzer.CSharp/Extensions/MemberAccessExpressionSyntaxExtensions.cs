@@ -26,4 +26,9 @@ internal static class MemberAccessExpressionSyntaxExtensions
         memberAccess.NameIs(name)
         && semanticModel.GetSymbolInfo(memberAccess).Symbol is {} symbol
         && symbol.ContainingType.DerivesFrom(knownType);
+
+    public static bool IsPropertyInvocation(this MemberAccessExpressionSyntax expression, ImmutableArray<KnownType> types, string propertyName, SemanticModel semanticModel) =>
+        expression.NameIs(propertyName) &&
+        semanticModel.GetSymbolInfo(expression).Symbol is IPropertySymbol propertySymbol &&
+        propertySymbol.IsInType(types);
 }

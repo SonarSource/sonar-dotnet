@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var forLoop = (ForStatementSyntax)context.Node;
 
             if (forLoop.Condition != null
-                && CSharpEquivalenceChecker.AreEquivalent(forLoop.Condition.RemoveParentheses(), CSharpSyntaxHelper.TrueLiteralExpression))
+                && CSharpEquivalenceChecker.AreEquivalent(forLoop.Condition.RemoveParentheses(), SyntaxConstants.TrueLiteralExpression))
             {
                 context.ReportIssue(Rule, forLoop.Condition);
             }

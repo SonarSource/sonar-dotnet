@@ -318,13 +318,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsNullChecking(BinaryExpressionSyntax binaryExpression, string lambdaParameter)
         {
-            if (CSharpEquivalenceChecker.AreEquivalent(CSharpSyntaxHelper.NullLiteralExpression, binaryExpression.Left.RemoveParentheses())
+            if (CSharpEquivalenceChecker.AreEquivalent(SyntaxConstants.NullLiteralExpression, binaryExpression.Left.RemoveParentheses())
                 && binaryExpression.Right.RemoveParentheses().ToString() == lambdaParameter)
             {
                 return true;
             }
 
-            if (CSharpEquivalenceChecker.AreEquivalent(CSharpSyntaxHelper.NullLiteralExpression, binaryExpression.Right.RemoveParentheses())
+            if (CSharpEquivalenceChecker.AreEquivalent(SyntaxConstants.NullLiteralExpression, binaryExpression.Right.RemoveParentheses())
                 && binaryExpression.Left.RemoveParentheses().ToString() == lambdaParameter)
             {
                 return true;

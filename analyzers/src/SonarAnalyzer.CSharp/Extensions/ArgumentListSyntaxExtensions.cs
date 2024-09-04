@@ -26,4 +26,14 @@ public static class ArgumentListSyntaxExtensions
         argumentList != null && argumentList.Arguments.Count > index
             ? argumentList.Arguments[index].Expression.RemoveParentheses()
             : null;
+
+    /// <summary>
+    /// Returns argument expressions for given parameter.
+    ///
+    /// There can be zero, one or more results based on parameter type (Optional or ParamArray/params).
+    /// </summary>
+    public static ImmutableArray<SyntaxNode> ArgumentValuesForParameter(this ArgumentListSyntax argumentList, SemanticModel model, string parameterName) =>
+        argumentList is not null && new CSharpMethodParameterLookup(argumentList, model).TryGetSyntax(parameterName, out var expressions)
+            ? expressions
+            : ImmutableArray<SyntaxNode>.Empty;
 }

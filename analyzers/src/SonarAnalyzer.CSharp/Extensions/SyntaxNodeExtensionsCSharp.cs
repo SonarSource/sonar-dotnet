@@ -456,6 +456,56 @@ public static class SyntaxNodeExtensionsCSharp
     public static SyntaxNode EnclosingScope(this SyntaxNode node) =>
         node.AncestorsAndSelf().FirstOrDefault(x => x.IsAnyKind(EnclosingScopeSyntaxKinds));
 
+    public static SyntaxNode GetTopMostContainingMethod(this SyntaxNode node) =>
+        node.AncestorsAndSelf().LastOrDefault(x => x is BaseMethodDeclarationSyntax || x is PropertyDeclarationSyntax);
+
+    public static SyntaxNode GetSelfOrTopParenthesizedExpression(this SyntaxNode node)
+    {
+        var current = node;
+        while (current?.Parent?.IsKind(SyntaxKind.ParenthesizedExpression) ?? false)
+        {
+            current = current.Parent;
+        }
+        return current;
+    }
+
+    public static SyntaxNode GetFirstNonParenthesizedParent(this SyntaxNode node) =>
+        node.GetSelfOrTopParenthesizedExpression().Parent;
+
+    public static bool HasAncestor(this SyntaxNode node, params SyntaxKind[] syntaxKinds) =>
+        node.Ancestors().Any(x => x.IsAnyKind(syntaxKinds));
+
+    public static bool IsNullLiteral(this SyntaxNode node) =>
+        node is not null && node.IsKind(SyntaxKind.NullLiteralExpression);
+
+    public static bool IsAnyKind(this SyntaxNode node, params SyntaxKind[] syntaxKinds) =>
+        node is not null && syntaxKinds.Contains((SyntaxKind)node.RawKind);
+
+    public static bool IsAnyKind(this SyntaxNode node, ISet<SyntaxKind> syntaxKinds) =>
+        node is not null && syntaxKinds.Contains((SyntaxKind)node.RawKind);
+
+    public static string GetName(this SyntaxNode node) =>
+        node.GetIdentifier()?.ValueText ?? string.Empty;
+
+    public static bool NameIs(this SyntaxNode node, string name) =>
+        node.GetName().Equals(name, StringComparison.Ordinal);
+
+    public static bool NameIs(this SyntaxNode node, string name, params string[] orNames) =>
+        node.GetName() is { } nodeName
+        && (nodeName.Equals(name, StringComparison.Ordinal)
+            || Array.Exists(orNames, x => nodeName.Equals(x, StringComparison.Ordinal)));
+
+    public static string StringValue(this SyntaxNode node, SemanticModel model) =>
+        node switch
+        {
+            LiteralExpressionSyntax literal when literal.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKindEx.Utf8StringLiteralExpression) => literal.Token.ValueText,
+            InterpolatedStringExpressionSyntax expression => expression.TryGetInterpolatedTextValue(model, out var interpolatedValue) ? interpolatedValue : expression.GetContentsText(),
+            _ => null
+        };
+
+    public static bool AnyOfKind(this IEnumerable<SyntaxNode> nodes, SyntaxKind kind) =>
+        nodes.Any(x => x.RawKind == (int)kind);
+
     private readonly record struct PathPosition(int Index, int TupleLength);
 
     private sealed class ControlFlowGraphCache : ControlFlowGraphCacheBase

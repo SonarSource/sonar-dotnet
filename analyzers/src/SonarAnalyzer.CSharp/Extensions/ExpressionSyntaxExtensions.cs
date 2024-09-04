@@ -22,11 +22,21 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class ExpressionSyntaxExtensions
 {
-    private static readonly ISet<SyntaxKind> EqualsOrNotEquals = new HashSet<SyntaxKind>
-    {
-        SyntaxKind.EqualsExpression,
-        SyntaxKind.NotEqualsExpression
-    };
+    private static readonly SyntaxKind[] LiteralSyntaxKinds =
+        [
+            SyntaxKind.CharacterLiteralExpression,
+            SyntaxKind.FalseLiteralExpression,
+            SyntaxKind.NullLiteralExpression,
+            SyntaxKind.NumericLiteralExpression,
+            SyntaxKind.StringLiteralExpression,
+            SyntaxKind.TrueLiteralExpression
+        ];
+
+    private static readonly HashSet<SyntaxKind> EqualsOrNotEquals =
+        [
+            SyntaxKind.EqualsExpression,
+            SyntaxKind.NotEqualsExpression
+        ];
 
     public static ExpressionSyntax RemoveParentheses(this ExpressionSyntax expression) =>
         (ExpressionSyntax)((SyntaxNode)expression).RemoveParentheses();
@@ -66,12 +76,12 @@ public static class ExpressionSyntaxExtensions
             isAffirmative = binary.IsKind(SyntaxKind.EqualsExpression);
             var binaryLeft = binary.Left.RemoveParentheses();
             var binaryRight = binary.Right.RemoveParentheses();
-            if (CSharpEquivalenceChecker.AreEquivalent(binaryLeft, CSharpSyntaxHelper.NullLiteralExpression))
+            if (CSharpEquivalenceChecker.AreEquivalent(binaryLeft, SyntaxConstants.NullLiteralExpression))
             {
                 compared = binaryRight;
                 return true;
             }
-            else if (CSharpEquivalenceChecker.AreEquivalent(binaryRight, CSharpSyntaxHelper.NullLiteralExpression))
+            else if (CSharpEquivalenceChecker.AreEquivalent(binaryRight, SyntaxConstants.NullLiteralExpression))
             {
                 compared = binaryLeft;
                 return true;
@@ -112,4 +122,53 @@ public static class ExpressionSyntaxExtensions
             MemberBindingExpressionSyntax memberBindingExpression => memberBindingExpression.GetParentConditionalAccessExpression()?.Expression,
             _ => null,
         };
+
+    public static ExpressionSyntax GetSelfOrTopParenthesizedExpression(this ExpressionSyntax node) =>
+         (ExpressionSyntax)SyntaxNodeExtensionsCSharp.GetSelfOrTopParenthesizedExpression((SyntaxNode)node);
+
+    public static bool IsOnThis(this ExpressionSyntax expression) =>
+        IsOn(expression, SyntaxKind.ThisExpression);
+
+    private static bool IsOn(this ExpressionSyntax expression, SyntaxKind onKind) =>
+        expression switch
+        {
+            InvocationExpressionSyntax invocation => IsOn(invocation.Expression, onKind),
+            // Following statement is a simplification as we don't check where the method is defined (so this could be this or base)
+            AliasQualifiedNameSyntax or GenericNameSyntax or IdentifierNameSyntax or QualifiedNameSyntax => true,
+            MemberAccessExpressionSyntax memberAccess => memberAccess.Expression.RemoveParentheses().IsKind(onKind),
+            ConditionalAccessExpressionSyntax conditionalAccess => conditionalAccess.Expression.RemoveParentheses().IsKind(onKind),
+            _ => false,
+        };
+
+    public static bool IsInNameOfArgument(this ExpressionSyntax expression, SemanticModel semanticModel)
+    {
+        var parentInvocation = expression.FirstAncestorOrSelf<InvocationExpressionSyntax>();
+        return parentInvocation is not null && parentInvocation.IsNameof(semanticModel);
+    }
+
+    public static bool IsStringEmpty(this ExpressionSyntax expression, SemanticModel semanticModel)
+    {
+        if (!expression.IsKind(SyntaxKind.SimpleMemberAccessExpression) &&
+            !expression.IsKind(SyntaxKind.PointerMemberAccessExpression))
+        {
+            return false;
+        }
+
+        var nameSymbolInfo = semanticModel.GetSymbolInfo(((MemberAccessExpressionSyntax)expression).Name);
+
+        return nameSymbolInfo.Symbol is not null &&
+               nameSymbolInfo.Symbol.IsInType(KnownType.System_String) &&
+               nameSymbolInfo.Symbol.Name == nameof(string.Empty);
+    }
+
+    public static bool HasConstantValue(this ExpressionSyntax expression, SemanticModel semanticModel) =>
+        expression.RemoveParentheses().IsAnyKind(LiteralSyntaxKinds) || expression.FindConstantValue(semanticModel) is not null;
+
+    public static bool IsLeftSideOfAssignment(this ExpressionSyntax expression)
+    {
+        var topParenthesizedExpression = expression.GetSelfOrTopParenthesizedExpression();
+        return topParenthesizedExpression.Parent.IsKind(SyntaxKind.SimpleAssignmentExpression)
+               && topParenthesizedExpression.Parent is AssignmentExpressionSyntax assignment
+               && assignment.Left == topParenthesizedExpression;
+    }
 }

@@ -160,7 +160,7 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
         node.RemoveParentheses();
 
     public override string StringValue(SyntaxNode node, SemanticModel semanticModel) =>
-        CSharpSyntaxHelper.StringValue(node, semanticModel);
+        node.StringValue(semanticModel);
 
     public override bool TryGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
         Cast<InterpolatedStringExpressionSyntax>(node).TryGetInterpolatedTextValue(semanticModel, out interpolatedValue);

@@ -160,7 +160,7 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
         node.RemoveParentheses();
 
     public override string StringValue(SyntaxNode node, SemanticModel semanticModel) =>
-        VisualBasicSyntaxHelper.StringValue(node, semanticModel);
+        node.StringValue(semanticModel);
 
     public override bool TryGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
         Cast<InterpolatedStringExpressionSyntax>(node).TryGetInterpolatedTextValue(semanticModel, out interpolatedValue);

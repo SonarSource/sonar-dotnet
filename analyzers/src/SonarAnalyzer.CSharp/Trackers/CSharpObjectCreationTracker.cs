@@ -33,7 +33,7 @@ public class CSharpObjectCreationTracker : ObjectCreationTracker<SyntaxKind>
 
     internal override object ConstArgumentForParameter(ObjectCreationContext context, string parameterName) =>
         ObjectCreationFactory.TryCreate(context.Node, out var objectCreation)
-        && CSharpSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, objectCreation.ArgumentList, parameterName) is { Length: 1 } values
+        && objectCreation.ArgumentList.ArgumentValuesForParameter(context.SemanticModel, parameterName) is { Length: 1 } values
         && values[0] is ExpressionSyntax valueSyntax
             ? valueSyntax.FindConstantValue(context.SemanticModel)
             : null;

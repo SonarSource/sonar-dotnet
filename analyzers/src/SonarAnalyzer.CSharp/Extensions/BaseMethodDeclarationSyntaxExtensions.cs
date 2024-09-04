@@ -38,4 +38,34 @@ internal static class BaseMethodDeclarationSyntaxExtensions
 
     public static SyntaxNode GetBodyOrExpressionBody(this BaseMethodDeclarationSyntax node) =>
         (node?.Body as SyntaxNode) ?? node?.ExpressionBody()?.Expression;
+
+    public static bool ContainsMethodInvocation(this BaseMethodDeclarationSyntax methodDeclarationBase, SemanticModel semanticModel, Func<InvocationExpressionSyntax, bool> syntaxPredicate, Func<IMethodSymbol, bool> symbolPredicate)
+    {
+        var childNodes = methodDeclarationBase?.Body?.DescendantNodes()
+            ?? methodDeclarationBase?.ExpressionBody()?.DescendantNodes()
+            ?? Enumerable.Empty<SyntaxNode>();
+
+        // See issue: https://github.com/SonarSource/sonar-dotnet/issues/416
+        // Where clause excludes nodes that are not defined on the same SyntaxTree as the SemanticModel
+        // (because of partial definition).
+        // More details: https://github.com/dotnet/roslyn/issues/18730
+        return childNodes
+            .OfType<InvocationExpressionSyntax>()
+            .Where(syntaxPredicate)
+            .Select(x => x.Expression.SyntaxTree.GetSemanticModelOrDefault(semanticModel)?.GetSymbolInfo(x.Expression).Symbol)
+            .OfType<IMethodSymbol>()
+            .Any(symbolPredicate);
+    }
+
+    public static SyntaxToken? GetIdentifierOrDefault(this BaseMethodDeclarationSyntax methodDeclaration) =>
+        methodDeclaration switch
+        {
+            ConstructorDeclarationSyntax constructor => (SyntaxToken?)constructor.Identifier,
+            DestructorDeclarationSyntax destructor => (SyntaxToken?)destructor.Identifier,
+            MethodDeclarationSyntax method => (SyntaxToken?)method.Identifier,
+            _ => null,
+        };
+
+    public static Location FindIdentifierLocation(this BaseMethodDeclarationSyntax methodDeclaration) =>
+        GetIdentifierOrDefault(methodDeclaration)?.GetLocation();
 }

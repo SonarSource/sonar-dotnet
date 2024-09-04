@@ -102,7 +102,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static BinaryExpressionSyntax NullCheck(BinaryExpressionSyntax binary) =>
-            SyntaxFactory.BinaryExpression(SyntaxKind.NotEqualsExpression, binary.Left.RemoveParentheses(), CSharpSyntaxHelper.NullLiteralExpression);
+            SyntaxFactory.BinaryExpression(SyntaxKind.NotEqualsExpression, binary.Left.RemoveParentheses(), SyntaxConstants.NullLiteralExpression);
 
         private static ExpressionSyntax RefactoredExpression(BinaryExpressionSyntax binary)
         {

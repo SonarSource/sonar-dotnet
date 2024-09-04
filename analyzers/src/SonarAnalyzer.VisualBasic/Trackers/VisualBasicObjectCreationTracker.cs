@@ -33,7 +33,7 @@ public class VisualBasicObjectCreationTracker : ObjectCreationTracker<SyntaxKind
 
     internal override object ConstArgumentForParameter(ObjectCreationContext context, string parameterName) =>
         ((ObjectCreationExpressionSyntax)context.Node).ArgumentList is { } argumentList
-            && VisualBasicSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, argumentList, parameterName) is { Length: 1 } values
+            && argumentList.ArgumentValuesForParameter(context.SemanticModel, parameterName) is { Length: 1 } values
             && values[0] is ExpressionSyntax valueSyntax
                 ? valueSyntax.FindConstantValue(context.SemanticModel)
                 : null;
