@@ -18,12 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.SymbolicExecution;
-using SonarAnalyzer.SymbolicExecution.Sonar;
-
 namespace SonarAnalyzer.CSharp.Core.Extensions;
 
-internal static class ISymbolExtensions
+public static class ISymbolExtensions
 {
     private static readonly SyntaxKind[] DeclarationsTypesWithPrimaryConstructor =
     {
@@ -32,42 +29,6 @@ internal static class ISymbolExtensions
         SyntaxKindEx.RecordDeclaration,
         SyntaxKindEx.RecordStructDeclaration
     };
-
-    public static bool HasConstraint(this ISymbol symbol, SymbolicConstraint constraint, ProgramState programState)
-    {
-        var symbolicValue = programState.GetSymbolValue(symbol);
-        if (symbolicValue == null)
-        {
-            return false;
-        }
-
-        return programState.HasConstraint(symbolicValue, constraint);
-    }
-
-    public static ProgramState SetConstraint(this ISymbol symbol, SymbolicConstraint constraint,
-        ProgramState programState)
-    {
-        var symbolicValue = programState.GetSymbolValue(symbol);
-        if (symbolicValue == null ||
-            programState.HasConstraint(symbolicValue, constraint))
-        {
-            return programState;
-        }
-
-        return programState.SetConstraint(symbolicValue, constraint);
-    }
-
-    public static ProgramState RemoveConstraint(this ISymbol symbol, SymbolicConstraint constraint, ProgramState programState)
-    {
-        var symbolicValue = programState.GetSymbolValue(symbol);
-        if (symbolicValue == null ||
-            !programState.HasConstraint(symbolicValue, constraint))
-        {
-            return programState;
-        }
-
-        return programState.RemoveConstraint(symbolicValue, constraint);
-    }
 
     public static IEnumerable<SyntaxNode> GetLocationNodes(this ISymbol symbol, SyntaxNode node) =>
         symbol.Locations.SelectMany(location => GetDescendantNodes(location, node));

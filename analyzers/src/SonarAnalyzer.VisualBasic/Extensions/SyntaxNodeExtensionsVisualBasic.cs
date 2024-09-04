@@ -189,7 +189,7 @@ public static class SyntaxNodeExtensionsVisualBasic
         return node as ConditionalAccessExpressionSyntax;
     }
 
-    internal static bool IsAnyMemberAccessExpressionName(this SyntaxNode node) =>
+    public static bool IsAnyMemberAccessExpressionName(this SyntaxNode node) =>
         node.Parent is MemberAccessExpressionSyntax memberAccess && memberAccess.Name == node;
 
     public static bool IsTrue(this SyntaxNode node) =>

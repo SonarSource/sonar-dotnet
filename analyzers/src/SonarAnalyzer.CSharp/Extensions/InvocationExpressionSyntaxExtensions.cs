@@ -20,26 +20,26 @@
 
 namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
-internal static class InvocationExpressionSyntaxExtensions
+public static class InvocationExpressionSyntaxExtensions
 {
-    internal static bool IsMemberAccessOnKnownType(this InvocationExpressionSyntax invocation, string identifierName, KnownType knownType, SemanticModel model) =>
+    public static bool IsMemberAccessOnKnownType(this InvocationExpressionSyntax invocation, string identifierName, KnownType knownType, SemanticModel model) =>
         invocation.Expression is MemberAccessExpressionSyntax memberAccess
         && memberAccess.IsMemberAccessOnKnownType(identifierName, knownType, model);
 
-    internal static IEnumerable<ISymbol> GetArgumentSymbolsOfKnownType(this InvocationExpressionSyntax invocation, KnownType knownType, SemanticModel model) =>
+    public static IEnumerable<ISymbol> GetArgumentSymbolsOfKnownType(this InvocationExpressionSyntax invocation, KnownType knownType, SemanticModel model) =>
         invocation.ArgumentList.Arguments.GetSymbolsOfKnownType(knownType, model);
 
-    internal static bool HasExactlyNArguments(this InvocationExpressionSyntax invocation, int count) =>
+    public static bool HasExactlyNArguments(this InvocationExpressionSyntax invocation, int count) =>
         invocation is not null && invocation.ArgumentList.Arguments.Count == count;
 
-    internal static bool IsGetTypeCall(this InvocationExpressionSyntax invocation, SemanticModel model) =>
+    public static bool IsGetTypeCall(this InvocationExpressionSyntax invocation, SemanticModel model) =>
         invocation is not null
         && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol && methodSymbol.IsGetTypeCall();
 
-    internal static bool IsOnBase(this InvocationExpressionSyntax invocation) =>
+    public static bool IsOnBase(this InvocationExpressionSyntax invocation) =>
         (invocation.Expression as MemberAccessExpressionSyntax)?.Expression is BaseExpressionSyntax;
 
-    internal static bool IsEqualTo(this InvocationExpressionSyntax first, InvocationExpressionSyntax second, SemanticModel model) =>
+    public static bool IsEqualTo(this InvocationExpressionSyntax first, InvocationExpressionSyntax second, SemanticModel model) =>
         (model.GetSymbolInfo(first).Symbol, model.GetSymbolInfo(second).Symbol) switch
         {
             // the nameof(someVariable) is considered an Invocation Expression, but it is not a method call, and GetSymbolInfo returns null for it.
@@ -48,7 +48,7 @@ internal static class InvocationExpressionSyntaxExtensions
             _ => false
         };
 
-    internal static bool TryGetOperands(this InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
+    public static bool TryGetOperands(this InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
     {
         (left, right) = invocation switch
         {
@@ -60,7 +60,7 @@ internal static class InvocationExpressionSyntaxExtensions
         return left is not null && right is not null;
     }
 
-    internal static SyntaxToken? GetMethodCallIdentifier(this InvocationExpressionSyntax invocation) =>
+    public static SyntaxToken? GetMethodCallIdentifier(this InvocationExpressionSyntax invocation) =>
         invocation?.Expression.GetIdentifier();
 
     public static bool IsNameof(this InvocationExpressionSyntax expression, SemanticModel semanticModel) =>

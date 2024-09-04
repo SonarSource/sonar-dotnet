@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.CSharp.Core.Extensions;
 
-internal static class ITupleOperationWrapperExtensions
+public static class ITupleOperationWrapperExtensions
 {
     public static ImmutableArray<IOperation> AllElements(this ITupleOperationWrapper tuple)
     {

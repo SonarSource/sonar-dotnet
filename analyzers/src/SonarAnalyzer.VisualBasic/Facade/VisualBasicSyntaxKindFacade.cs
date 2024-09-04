@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.Helpers.Facade;
+
 namespace SonarAnalyzer.VisualBasic.Core.Facade.Implementation;
 
 internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>

@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace Microsoft.CodeAnalysis.CSharp.Extensions;
 
 [ExcludeFromCodeCoverage]
-internal static class SyntaxNodeExtensions
+public static class SyntaxNodeExtensions
 {
     /// <summary>
     /// Returns the left hand side of a conditional access expression. Returns c in case like a?.b?[0].c?.d.e?.f if d is passed.

@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
-internal static class SwitchExpressionSyntaxWrapperExtensions
+public static class SwitchExpressionSyntaxWrapperExtensions
 {
     public static bool HasDiscardPattern(this SwitchExpressionSyntaxWrapper switchExpression) =>
         switchExpression.Arms.Any(arm => DiscardPatternSyntaxWrapper.IsInstance(arm.Pattern.SyntaxNode));

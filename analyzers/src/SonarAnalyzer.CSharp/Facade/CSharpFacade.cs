@@ -24,7 +24,7 @@ using SonarAnalyzer.Helpers.Facade;
 
 namespace SonarAnalyzer.CSharp.Core.Facade;
 
-internal sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
+public sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
 {
     private static readonly Lazy<CSharpFacade> Singleton = new(() => new CSharpFacade());
     private static readonly Lazy<AssignmentFinder> AssignmentFinderLazy = new(() => new CSharpAssignmentFinder());

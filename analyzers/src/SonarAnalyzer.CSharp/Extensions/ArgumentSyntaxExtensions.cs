@@ -20,30 +20,30 @@
 
 namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
-internal static class ArgumentSyntaxExtensions
+public static class ArgumentSyntaxExtensions
 {
-    internal static int? GetArgumentIndex(this ArgumentSyntax argument) =>
+    public static int? GetArgumentIndex(this ArgumentSyntax argument) =>
         (argument.Parent as ArgumentListSyntax)?.Arguments.IndexOf(argument);
 
-    internal static IEnumerable<ArgumentSyntax> GetArgumentsOfKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
+    public static IEnumerable<ArgumentSyntax> GetArgumentsOfKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
         syntaxList
             .Where(argument => semanticModel.GetTypeInfo(argument.Expression).Type.Is(knownType));
 
-    internal static IEnumerable<ISymbol> GetSymbolsOfKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
+    public static IEnumerable<ISymbol> GetSymbolsOfKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
         syntaxList
             .GetArgumentsOfKnownType(knownType, semanticModel)
             .Select(argument => semanticModel.GetSymbolInfo(argument.Expression).Symbol);
 
-    internal static bool NameIs(this ArgumentSyntax argument, string name) =>
+    public static bool NameIs(this ArgumentSyntax argument, string name) =>
         argument.NameColon?.Name.Identifier.Text == name;
 
     // (arg, b) = something
-    internal static bool IsInTupleAssignmentTarget(this ArgumentSyntax argument) =>
+    public static bool IsInTupleAssignmentTarget(this ArgumentSyntax argument) =>
         argument.OutermostTuple() is { SyntaxNode: { } tupleExpression }
         && tupleExpression.Parent is AssignmentExpressionSyntax assignment
         && assignment.Left == tupleExpression;
 
-    internal static TupleExpressionSyntaxWrapper? OutermostTuple(this ArgumentSyntax argument) =>
+    public static TupleExpressionSyntaxWrapper? OutermostTuple(this ArgumentSyntax argument) =>
         argument.Ancestors()
             .TakeWhile(x => x.IsAnyKind(SyntaxKind.Argument, SyntaxKindEx.TupleExpression))
             .LastOrDefault(x => x.IsKind(SyntaxKindEx.TupleExpression)) is { } outerTuple

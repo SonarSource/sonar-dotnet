@@ -26,12 +26,12 @@ public class CSharpObjectCreationTracker : ObjectCreationTracker<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    internal override Condition ArgumentAtIndexIsConst(int index) =>
+    public override Condition ArgumentAtIndexIsConst(int index) =>
         context => ObjectCreationFactory.Create(context.Node).ArgumentList is { } argumentList
                    && argumentList.Arguments.Count > index
                    && argumentList.Arguments[index].Expression.HasConstantValue(context.SemanticModel);
 
-    internal override object ConstArgumentForParameter(ObjectCreationContext context, string parameterName) =>
+    public override object ConstArgumentForParameter(ObjectCreationContext context, string parameterName) =>
         ObjectCreationFactory.TryCreate(context.Node, out var objectCreation)
         && objectCreation.ArgumentList.ArgumentValuesForParameter(context.SemanticModel, parameterName) is { Length: 1 } values
         && values[0] is ExpressionSyntax valueSyntax

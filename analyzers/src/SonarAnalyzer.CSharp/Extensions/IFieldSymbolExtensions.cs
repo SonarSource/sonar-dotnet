@@ -20,9 +20,9 @@
 
 namespace SonarAnalyzer.CSharp.Core.Extensions;
 
-internal static class IFieldSymbolExtensions
+public static class IFieldSymbolExtensions
 {
-    internal static bool IsNonStaticNonPublicDisposableField(this IFieldSymbol fieldSymbol, LanguageVersion languageVersion) =>
+    public static bool IsNonStaticNonPublicDisposableField(this IFieldSymbol fieldSymbol, LanguageVersion languageVersion) =>
         fieldSymbol != null
         && !fieldSymbol.IsStatic
         && (fieldSymbol.DeclaredAccessibility == Accessibility.Protected || fieldSymbol.DeclaredAccessibility == Accessibility.Private)
