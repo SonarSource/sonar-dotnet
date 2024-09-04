@@ -18,15 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 
-internal static class CSharpEquivalenceChecker
+public static class CSharpEquivalenceChecker
 {
     public static bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) =>
-        Common.EquivalenceChecker.AreEquivalent(node1, node2, NodeComparator);
+        Helpers.Common.EquivalenceChecker.AreEquivalent(node1, node2, NodeComparator);
 
     public static bool AreEquivalent(SyntaxList<SyntaxNode> nodeList1, SyntaxList<SyntaxNode> nodeList2) =>
-        Common.EquivalenceChecker.AreEquivalent(nodeList1, nodeList2, NodeComparator);
+        Helpers.Common.EquivalenceChecker.AreEquivalent(nodeList1, nodeList2, NodeComparator);
 
     private static bool NodeComparator(SyntaxNode node1, SyntaxNode node2) =>
         NullCheckState(node1, true) is { } nullCheck1
@@ -107,7 +107,7 @@ internal static class CSharpEquivalenceChecker
     }
 }
 
-internal class CSharpSyntaxNodeEqualityComparer<T> : IEqualityComparer<T>, IEqualityComparer<SyntaxList<T>>
+public class CSharpSyntaxNodeEqualityComparer<T> : IEqualityComparer<T>, IEqualityComparer<SyntaxList<T>>
     where T : SyntaxNode
 {
     public bool Equals(T x, T y) =>

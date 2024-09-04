@@ -40,8 +40,9 @@
     <Using Include="SonarAnalyzer.Common" />
     <Using Include="SonarAnalyzer.CSharp.Core.Common" />
     <Using Include="SonarAnalyzer.CSharp.Core.Extensions" />
-    <Using Include="SonarAnalyzer.CSharp.Core.Syntax.Extensions" />
     <Using Include="SonarAnalyzer.CSharp.Core.Facade" />
+    <Using Include="SonarAnalyzer.CSharp.Core.Syntax.Extensions" />
+    <Using Include="SonarAnalyzer.CSharp.Core.Syntax.Utilities" />
     <Using Include="SonarAnalyzer.CSharp.Core.Walkers" />
     <Using Include="SonarAnalyzer.CSharp.Core.Wrappers" />
     <Using Include="SonarAnalyzer.Extensions" />

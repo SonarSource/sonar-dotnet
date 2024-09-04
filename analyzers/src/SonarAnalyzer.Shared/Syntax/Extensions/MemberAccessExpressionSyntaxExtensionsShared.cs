@@ -26,8 +26,8 @@ namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
 
 internal static class MemberAccessExpressionSyntaxExtensionsShared
 {
-    public static bool IsPtrZero(this MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel) =>
+    public static bool IsPtrZero(this MemberAccessExpressionSyntax memberAccess, SemanticModel model) =>
         memberAccess.Name.Identifier.Text == "Zero"
-        && semanticModel.GetTypeInfo(memberAccess).Type is var type
+        && model.GetTypeInfo(memberAccess).Type is var type
         && type.IsAny(KnownType.System_IntPtr, KnownType.System_UIntPtr);
 }

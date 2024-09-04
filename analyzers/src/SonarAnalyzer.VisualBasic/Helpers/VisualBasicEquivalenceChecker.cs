@@ -18,20 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.Common;
 
-internal static class VisualBasicEquivalenceChecker
+namespace SonarAnalyzer.VisualBasic.Core.Syntax.Utilities;
+
+public static class VisualBasicEquivalenceChecker
 {
     public static bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) =>
-        Common.EquivalenceChecker.AreEquivalent(node1, node2,
+        EquivalenceChecker.AreEquivalent(node1, node2,
             (n1, n2) => SyntaxFactory.AreEquivalent(n1, n2));
 
     public static bool AreEquivalent(SyntaxList<SyntaxNode> nodeList1, SyntaxList<SyntaxNode> nodeList2) =>
-        Common.EquivalenceChecker.AreEquivalent(nodeList1, nodeList2,
+        EquivalenceChecker.AreEquivalent(nodeList1, nodeList2,
             (n1, n2) => SyntaxFactory.AreEquivalent(n1, n2));
 }
 
-internal class VisualBasicSyntaxNodeEqualityComparer<T> : IEqualityComparer<T>, IEqualityComparer<SyntaxList<T>>
+public class VisualBasicSyntaxNodeEqualityComparer<T> : IEqualityComparer<T>, IEqualityComparer<SyntaxList<T>>
     where T : SyntaxNode
 {
     public bool Equals(T x, T y) =>

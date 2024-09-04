@@ -18,17 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 
-public class CsharpStringInterpolationConstantValueResolver : StringInterpolationConstantValueResolver<SyntaxKind,
+public class CSharpStringInterpolationConstantValueResolver : StringInterpolationConstantValueResolver<SyntaxKind,
                                                                                                        InterpolatedStringExpressionSyntax,
                                                                                                        InterpolatedStringContentSyntax,
                                                                                                        InterpolationSyntax,
                                                                                                        InterpolatedStringTextSyntax>
 {
-    private static readonly Lazy<CsharpStringInterpolationConstantValueResolver> Singleton = new(() => new CsharpStringInterpolationConstantValueResolver());
+    private static readonly Lazy<CSharpStringInterpolationConstantValueResolver> Singleton = new(() => new CSharpStringInterpolationConstantValueResolver());
 
-    public static CsharpStringInterpolationConstantValueResolver Instance => Singleton.Value;
+    public static CSharpStringInterpolationConstantValueResolver Instance => Singleton.Value;
 
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 

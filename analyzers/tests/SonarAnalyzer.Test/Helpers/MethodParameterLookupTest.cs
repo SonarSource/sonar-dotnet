@@ -19,6 +19,8 @@
  */
 
 using System.Collections;
+using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
+using SonarAnalyzer.VisualBasic.Core.Syntax.Utilities;
 using CSharpCodeAnalysis = Microsoft.CodeAnalysis.CSharp;
 using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VBCodeAnalysis = Microsoft.CodeAnalysis.VisualBasic;
@@ -195,7 +197,7 @@ public class MethodParameterLookupTest
                 {
                     void Main(dynamic d) =>
                         AmbiguousCall(d);
-                
+
                     void AmbiguousCall(int p) { }
 
                     void AmbiguousCall(string p) { }
@@ -242,7 +244,7 @@ public class MethodParameterLookupTest
                 {
                     void Main(dynamic d) =>
                         AmbiguousCall(d, d);
-                
+
                     void AmbiguousCall(int a, int b) { }
 
                     void AmbiguousCall(string b, string a) { }

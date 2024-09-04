@@ -40,6 +40,7 @@
     <Using Include="SonarAnalyzer.VisualBasic.Core.Common" />
     <Using Include="SonarAnalyzer.VisualBasic.Core.Extensions" />
     <Using Include="SonarAnalyzer.VisualBasic.Core.Syntax.Extensions" />
+    <Using Include="SonarAnalyzer.VisualBasic.Core.Syntax.Utilities" />
     <Using Include="SonarAnalyzer.VisualBasic.Core.Facade" />
   </ItemGroup>
 

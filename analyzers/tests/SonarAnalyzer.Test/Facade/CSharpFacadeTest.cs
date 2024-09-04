@@ -21,6 +21,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CSharp.Core.Facade;
+using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Test.Facade;

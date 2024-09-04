@@ -21,6 +21,7 @@
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.VisualBasic.Core.Facade;
+using SonarAnalyzer.VisualBasic.Core.Syntax.Utilities;
 
 namespace SonarAnalyzer.Test.Facade;
 

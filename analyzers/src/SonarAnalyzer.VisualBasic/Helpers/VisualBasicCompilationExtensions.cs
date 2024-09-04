@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
 
-public static class VisualBasicCompilationHelper
+public static class VisualBasicCompilationExtensions
 {
     public static bool IsAtLeastLanguageVersion(this Compilation compilation, LanguageVersion languageVersion) =>
         compilation.VB()?.LanguageVersion.CompareTo(languageVersion) >= 0;

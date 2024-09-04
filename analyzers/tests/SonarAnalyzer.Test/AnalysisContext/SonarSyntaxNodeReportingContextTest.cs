@@ -21,6 +21,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using NSubstitute;
 using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Test.AnalysisContext;

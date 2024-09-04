@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.VisualBasic;
+using SonarAnalyzer.VisualBasic.Core.Syntax.Utilities;
 
 namespace SonarAnalyzer.Test.Extensions
 {
