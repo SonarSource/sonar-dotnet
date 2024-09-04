@@ -18,7 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions;
+#if CS
+namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
+#else
+namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
+#endif
 
 public static class SyntaxNodeExtensionsShared
 {
