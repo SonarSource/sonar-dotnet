@@ -47,16 +47,20 @@ internal static class CollectionTracker
     private static readonly HashSet<string> AddMethods =
     [
         nameof(ICollection<int>.Add),
-        nameof(List<int>.AddRange),
         nameof(List<int>.Insert),
-        nameof(List<int>.InsertRange),
-        nameof(HashSet<int>.UnionWith),
-        nameof(HashSet<int>.SymmetricExceptWith),   // This can add and/or remove items => It should remove all CollectionConstraints.
-                                                    // However, just learning NotEmpty (and thus unlearning Empty) is good enough for now.
         nameof(Queue<int>.Enqueue),
         nameof(Stack<int>.Push),
         nameof(Collection<int>.Insert),
         "TryAdd"
+    ];
+
+    private static readonly HashSet<string> ConditionalAddMethods =
+    [
+        nameof(List<int>.AddRange),
+        nameof(List<int>.InsertRange),
+        nameof(HashSet<int>.SymmetricExceptWith),   // This can add and/or remove items => It should remove all CollectionConstraints.
+                                                    // However, just removing Empty is good enough for now.
+        nameof(HashSet<int>.UnionWith),
     ];
 
     private static readonly HashSet<string> RemoveMethods =
@@ -72,7 +76,7 @@ internal static class CollectionTracker
         nameof(Stack<int>.Pop)
     ];
 
-    private static readonly HashSet<string> AddOrRemoveMethods = [.. AddMethods, .. RemoveMethods];
+    private static readonly HashSet<string> AddOrRemoveMethods = [..AddMethods, ..ConditionalAddMethods, ..RemoveMethods];
 
     public static ProgramState LearnFrom(ProgramState state, IObjectCreationOperationWrapper operation)
     {
@@ -156,6 +160,10 @@ internal static class CollectionTracker
             if (AddMethods.Contains(targetMethod.Name))
             {
                 return SetOperationAndSymbolValue(symbolValue.WithConstraint(CollectionConstraint.NotEmpty));
+            }
+            else if (ConditionalAddMethods.Contains(targetMethod.Name))
+            {
+                return SetOperationAndSymbolValue(symbolValue.WithoutConstraint(CollectionConstraint.Empty));
             }
             else if (RemoveMethods.Contains(targetMethod.Name))
             {

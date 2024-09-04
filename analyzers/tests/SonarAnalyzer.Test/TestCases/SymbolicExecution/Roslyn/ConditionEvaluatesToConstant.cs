@@ -3209,9 +3209,9 @@ namespace Tests.Diagnostics
         }
     }
 
-    public class CollectionsCount
+    public class Collections
     {
-        public void Method(List<int> list)
+        public void Count(List<int> list)
         {
             if (list.Count() == 0) // Compliant
             { }
@@ -3229,7 +3229,53 @@ namespace Tests.Diagnostics
             { }
         }
 
+        public void AddKnownCollection()
+        {
+            var empty = new List<int>();
+            var notEmpty = new List<int> { 1, 2, 3 };
+
+            var list = new List<int>();
+            list.AddRange(empty);
+            if (list.Count == 0)    // FN: should be always true
+            { }
+            list.Clear();
+            list.AddRange(notEmpty);
+            if (list.Count == 0)    // FN: should be always false
+            { }
+            list.Clear();
+            list.AddRange(GetList());
+            if (list.Count == 0)    // Compliant
+            { }
+
+            list = new List<int> { 1, 2, 3 };
+            list.AddRange(empty);
+            if (list.Count == 0)    // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
+            { }
+            list = new List<int> { 1, 2, 3 };
+            list.AddRange(notEmpty);
+            if (list.Count == 0)    // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
+            { }
+            list = new List<int> { 1, 2, 3 };
+            list.AddRange(GetList());
+            if (list.Count == 0)    // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
+            { }
+
+            list = GetList();
+            list.AddRange(empty);
+            if (list.Count == 0)    // Compliant
+            { }
+            list = GetList();
+            list.AddRange(notEmpty);
+            if (list.Count == 0)    // FN: should be always false
+            { }
+            list = GetList();
+            list.AddRange(GetList());
+            if (list.Count == 0)    // Compliant
+            { }
+        }
+
         private bool Condition(int x) => true;
+        private List<int> GetList() => new List<int>();
     }
 }
 
@@ -4183,14 +4229,12 @@ class Repro_8570
         var list = new List<int>();
         list.AddRange(more);
 
-        if (list.Count == 0)            // Noncompliant {{Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.}}
-                                        // FP, we do not know if "more" is empty or not
+        if (list.Count == 0)            // Compliant
         {
-            Console.WriteLine();        // Secondary FP
+            Console.WriteLine();
         }
 
-        if (list.Count() != 0)          // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
-                                        // FP, we do not know if "more" is empty or not
+        if (list.Count() != 0)          // Compliant
         {
             Console.WriteLine();
         }
