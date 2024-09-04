@@ -21,7 +21,7 @@
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.Test.TestFramework.Tests.Build;
+namespace SonarAnalyzer.TestFramework.Test.Build;
 
 [TestClass]
 public class ParseOptionsHelperTest
@@ -33,37 +33,36 @@ public class ParseOptionsHelperTest
         var csVersions = ParseOptionsHelper.FromCSharp6.Cast<CS.CSharpParseOptions>().Select(x => x.LanguageVersion);
         if (!TestContextHelper.IsAzureDevOpsContext || TestContextHelper.IsPullRequestBuild)
         {
-            csVersions.Should().BeEquivalentTo(new[] { CS.LanguageVersion.CSharp6 });
-            vbVersions.Should().BeEquivalentTo(new[] { VB.LanguageVersion.VisualBasic12 });
+            csVersions.Should().BeEquivalentTo([CS.LanguageVersion.CSharp6]);
+            vbVersions.Should().BeEquivalentTo([VB.LanguageVersion.VisualBasic12]);
         }
         else
         {
             // This should fail when we add new language version
             csVersions.Should().BeEquivalentTo(
-                new[]
-                {
-                    CS.LanguageVersion.CSharp6,
-                    CS.LanguageVersion.CSharp7,
-                    CS.LanguageVersion.CSharp7_1,
-                    CS.LanguageVersion.CSharp7_2,
-                    CS.LanguageVersion.CSharp7_3,
-                    CS.LanguageVersion.CSharp8,
-                    CS.LanguageVersion.CSharp9,
-                    CS.LanguageVersion.CSharp10,
-                    CS.LanguageVersion.CSharp11,
-                    CS.LanguageVersion.CSharp12
-                });
+            [
+                CS.LanguageVersion.CSharp6,
+                CS.LanguageVersion.CSharp7,
+                CS.LanguageVersion.CSharp7_1,
+                CS.LanguageVersion.CSharp7_2,
+                CS.LanguageVersion.CSharp7_3,
+                CS.LanguageVersion.CSharp8,
+                CS.LanguageVersion.CSharp9,
+                CS.LanguageVersion.CSharp10,
+                CS.LanguageVersion.CSharp11,
+                CS.LanguageVersion.CSharp12,
+                CS.LanguageVersion.CSharp13
+            ]);
 
             vbVersions.Should().BeEquivalentTo(
-                new[]
-                {
-                    VB.LanguageVersion.VisualBasic12,
-                    VB.LanguageVersion.VisualBasic14,
-                    VB.LanguageVersion.VisualBasic15,
-                    VB.LanguageVersion.VisualBasic15_3,
-                    VB.LanguageVersion.VisualBasic15_5,
-                    VB.LanguageVersion.VisualBasic16
-                });
+            [
+                VB.LanguageVersion.VisualBasic12,
+                VB.LanguageVersion.VisualBasic14,
+                VB.LanguageVersion.VisualBasic15,
+                VB.LanguageVersion.VisualBasic15_3,
+                VB.LanguageVersion.VisualBasic15_5,
+                VB.LanguageVersion.VisualBasic16
+            ]);
         }
     }
 }
