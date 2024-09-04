@@ -20,7 +20,7 @@
 
 using NodeSymbolAndModel = SonarAnalyzer.Common.NodeSymbolAndModel<Microsoft.CodeAnalysis.SyntaxNode, Microsoft.CodeAnalysis.ISymbol>;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.VisualBasic.Core.Syntax.Utilities;
 
 internal class VisualBasicRemovableDeclarationCollector : RemovableDeclarationCollectorBase<TypeBlockSyntax, TypeStatementSyntax, SyntaxKind>
 {

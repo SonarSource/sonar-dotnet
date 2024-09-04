@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 
-internal class CSharpGeneratedCodeRecognizer : GeneratedCodeRecognizer
+public class CSharpGeneratedCodeRecognizer : GeneratedCodeRecognizer
 {
     #region Singleton implementation
 

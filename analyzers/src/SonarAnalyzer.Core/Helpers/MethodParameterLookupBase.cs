@@ -30,7 +30,7 @@ public interface IMethodParameterLookup
 }
 
 // This should come from the Roslyn API (https://github.com/dotnet/roslyn/issues/9)
-internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodParameterLookup
+public abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodParameterLookup
     where TArgumentSyntax : SyntaxNode
 {
     private readonly SeparatedSyntaxList<TArgumentSyntax> argumentList;

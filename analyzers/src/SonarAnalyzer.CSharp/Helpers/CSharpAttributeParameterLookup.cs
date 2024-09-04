@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 
 internal class CSharpAttributeParameterLookup(AttributeSyntax attribute, IMethodSymbol methodSymbol) :
     MethodParameterLookupBase<AttributeArgumentSyntax>(attribute.ArgumentList?.Arguments ?? default, methodSymbol)

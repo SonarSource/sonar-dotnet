@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.VisualBasic.Core.Syntax.Utilities;
 
 internal class VisualBasicAttributeParameterLookup(SeparatedSyntaxList<ArgumentSyntax> argumentList, IMethodSymbol methodSymbol) : MethodParameterLookupBase<ArgumentSyntax>(argumentList, methodSymbol)
 {

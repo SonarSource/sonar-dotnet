@@ -21,6 +21,7 @@
 using System.IO;
 using NSubstitute;
 using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Test.Rules;
 

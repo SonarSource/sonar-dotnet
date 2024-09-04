@@ -18,16 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-extern alias vbnet;
-
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using NSubstitute;
 using SonarAnalyzer.AnalysisContext;
-using CS = csharp::SonarAnalyzer.CSharp.Core.Extensions.SonarAnalysisContextExtensions;
+using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
+using CS = SonarAnalyzer.CSharp.Core.Extensions.SonarAnalysisContextExtensions;
 using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
-using VB = vbnet::SonarAnalyzer.VisualBasic.Core.Extensions.SonarAnalysisContextExtensions;
+using VB = SonarAnalyzer.VisualBasic.Core.Extensions.SonarAnalysisContextExtensions;
 
 namespace SonarAnalyzer.Test.AnalysisContext;
 

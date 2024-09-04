@@ -26,5 +26,5 @@ public static class InterpolatedStringExpressionSyntaxExtensions
         interpolatedStringExpression.Contents.JoinStr(null, content => content.ToString());
 
     public static bool TryGetInterpolatedTextValue(this InterpolatedStringExpressionSyntax interpolatedStringExpression, SemanticModel semanticModel, out string interpolatedValue) =>
-        CsharpStringInterpolationConstantValueResolver.Instance.TryGetInterpolatedTextValue(interpolatedStringExpression, semanticModel, out interpolatedValue);
+        CSharpStringInterpolationConstantValueResolver.Instance.TryGetInterpolatedTextValue(interpolatedStringExpression, semanticModel, out interpolatedValue);
 }

@@ -31,7 +31,7 @@ public static class SyntaxTokenExtensionsShared
     {
         var node = token.Parent;
 
-        while (node != null)
+        while (node is not null)
         {
             var parent = node.Parent;
 
