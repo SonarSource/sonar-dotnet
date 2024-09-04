@@ -116,13 +116,19 @@ internal static class CSharpOverloadHelper
         var lastInvocationParameter = invocationParameters[invocationParameters.Count - 1];
         if (lastInvocationParameter.IsParams)
         {
-            return GetParamsElementType(lastInvocationParameter.Type).DerivesOrImplements(paramsType);
+            var elementType = GetParamsElementType(lastInvocationParameter.Type);
+            return elementType is not null && elementType.DerivesOrImplements(paramsType);
         }
         else
         {
             return lastInvocationParameter.Type.DerivesOrImplements(paramsType);
         }
 
-        ITypeSymbol GetParamsElementType(ITypeSymbol typeSymbol) => (typeSymbol as IArrayTypeSymbol).ElementType;
+        ITypeSymbol GetParamsElementType(ITypeSymbol typeSymbol) =>
+            typeSymbol switch
+            {
+                IArrayTypeSymbol symbol => symbol.ElementType,
+                _ => null
+            };
     }
 }
