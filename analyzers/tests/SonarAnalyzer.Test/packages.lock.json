@@ -626,7 +626,7 @@
         }
       }
     },
-    "net8.0": {
+    "net9.0": {
       "altcover": {
         "type": "Direct",
         "requested": "[8.8.21, )",

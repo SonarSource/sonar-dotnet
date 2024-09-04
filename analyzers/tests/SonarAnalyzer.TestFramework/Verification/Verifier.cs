@@ -206,7 +206,7 @@ internal class Verifier
                 .AddAdditionalDocuments(razorFilePaths)
                 .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreAppRef("7.0.17"))
                 .AddReferences(NuGetMetadataReference.SystemTextEncodingsWeb("7.0.0"))
-                .AddAnalyzerReferences(SourceGeneratorProvider.SourceGenerators)
+                .AddAnalyzerReferences(SdkPathProvider.SourceGenerators)
                 .AddAnalyzerConfigDocument(
                     Path.Combine(Directory.GetCurrentDirectory(), ".editorconfig"),
                     editorConfigGenerator.Generate(razorFilePaths));

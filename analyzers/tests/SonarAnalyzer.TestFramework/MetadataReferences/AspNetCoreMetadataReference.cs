@@ -44,6 +44,7 @@ public static class AspNetCoreMetadataReference
     public static MetadataReference MicrosoftExtensionsIdentityCore { get; } = CreateReference("Microsoft.Extensions.Identity.Core.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftAspNetCoreCryptographyKeyDerivation { get; } = CreateReference("Microsoft.AspNetCore.Cryptography.KeyDerivation.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftExtensionsDependencyInjectionAbstractions { get; } = CreateReference("Microsoft.Extensions.DependencyInjection.Abstractions.dll", Sdk.AspNetCore);
+    public static MetadataReference MicrosoftExtensionsLoggingAbstractions { get; } = CreateReference("Microsoft.Extensions.Logging.Abstractions.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftExtensionsLoggingEventSource { get; } = CreateReference("Microsoft.Extensions.Logging.EventSource.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftExtensionsPrimitives { get; } = CreateReference("Microsoft.Extensions.Primitives.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftNetHttpHeadersHeaderNames { get; } = CreateReference("Microsoft.Net.Http.Headers.dll", Sdk.AspNetCore);

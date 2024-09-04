@@ -119,6 +119,7 @@ namespace SonarAnalyzer.Test.Rules
                     AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions,
                     AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
                     AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions,
+                    AspNetCoreMetadataReference.MicrosoftExtensionsLoggingAbstractions,
                     AspNetCoreMetadataReference.MicrosoftExtensionsLoggingEventSource
                 }
                 .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(version))

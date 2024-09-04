@@ -226,7 +226,7 @@ public class VerifierTest
             .Build()
             .Compile(false)
             .Single();
-        compilation.Compilation.GetSpecialType(SpecialType.System_Object).ContainingAssembly.Identity.Version.Major.Should().Be(8, "This version is the default framework for in-memory compilation");
+        compilation.Compilation.GetSpecialType(SpecialType.System_Object).ContainingAssembly.Identity.Version.Major.Should().Be(9, "This version is the default framework for in-memory compilation");
 
         compilation.Compilation.ExternalReferences.Select(x => Path.GetFileName(x.Display)).Should().Contain([
             "Microsoft.AspNetCore.dll",

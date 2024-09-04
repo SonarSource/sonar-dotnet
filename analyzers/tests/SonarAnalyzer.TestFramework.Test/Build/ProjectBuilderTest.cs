@@ -103,7 +103,7 @@ public class ProjectBuilderTest
 
     [TestMethod]
     public void AddAnalyzerReferences_AddAnalyzer() =>
-        EmptyCS.AddAnalyzerReferences(SourceGeneratorProvider.SourceGenerators).Project.AnalyzerReferences.Should().BeEquivalentTo(SourceGeneratorProvider.SourceGenerators);
+        EmptyCS.AddAnalyzerReferences(SdkPathProvider.SourceGenerators).Project.AnalyzerReferences.Should().BeEquivalentTo(SdkPathProvider.SourceGenerators);
 
     private static void AssertAdditionalDocumentContains(ProjectBuilder builder, string fileName) =>
         builder.Project.AdditionalDocuments.Should().ContainSingle(x => x.Name == Path.Combine(Directory.GetCurrentDirectory(), "TestCases", fileName));

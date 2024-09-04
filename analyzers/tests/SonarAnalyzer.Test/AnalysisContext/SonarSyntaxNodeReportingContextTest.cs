@@ -76,7 +76,7 @@ public class SonarSyntaxNodeReportingContextTest
             }
             else
             {
-                ex.GetType().Name.Should().Be("DebugAssertException");
+                ex.GetType().Name.Should().Be("AssertionException");
                 ex.Message.Should().Contain("Primary location should be part of the compilation. An AD0001 is raised if this is not the case.");
             }
         }

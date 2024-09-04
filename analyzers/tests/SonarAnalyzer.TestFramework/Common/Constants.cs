@@ -18,14 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
+
 namespace SonarAnalyzer.TestFramework.Common;
 
 public static class Constants
 {
     public const string NuGetLatestVersion = "LATEST";
-    public const string DotNet7Preview = "7.0.0-rc.1.22426.10";
-    public const string DotNet7PreviewAzureAppServices = "7.0.0-rc.1.22427.2";
+    public const string DotNet9Preview7 = "9.0.0-preview.7.24405.7";
     public const string DotNetCore220Version = "2.2.0";
     public const string WindowsLineEnding = "\r\n";
     public const string UnixLineEnding = "\n";
+    public static readonly string SdkPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "dotnet", "sdk");
+    public static readonly string AspNetCorePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "dotnet", "shared", "Microsoft.AspNetCore.App");
+    public static readonly string WindowsDesktopPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "dotnet", "shared", "Microsoft.WindowsDesktop.App");
 }
