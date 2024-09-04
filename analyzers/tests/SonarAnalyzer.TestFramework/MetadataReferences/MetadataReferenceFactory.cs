@@ -45,8 +45,17 @@ internal static class MetadataReferenceFactory
 
 #if NET
 
-    public static MetadataReference CreateReference(string assemblyName, Sdk sdk) =>
-        MetadataReference.CreateFromFile(Path.Combine(SystemAssembliesFolder.Replace(Sdk.NETCore.ToString(), sdk.ToString()), assemblyName));
+    public static MetadataReference CreateReference(string assemblyName, Sdk sdk)
+    {
+        var  path = sdk switch
+        {
+            Sdk.AspNetCore => SdkPathProvider.LatestAspNetCoreSdkFolder(),
+            Sdk.WindowsDesktop => SdkPathProvider.LatestWindowsDesktopSdkFolder(),
+            _ => SystemAssembliesFolder
+        };
+
+        return MetadataReference.CreateFromFile(Path.Combine(path, assemblyName));
+    }
 
 #endif
 

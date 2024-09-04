@@ -1,7 +1,7 @@
 {
   "version": 1,
   "dependencies": {
-    "net8.0": {
+    "net9.0": {
       "CommandLineParser": {
         "type": "Direct",
         "requested": "[2.9.1, )",

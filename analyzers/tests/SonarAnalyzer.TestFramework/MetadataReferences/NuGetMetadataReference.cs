@@ -99,10 +99,10 @@ public static class NuGetMetadataReference
     public static References MicrosoftExtensionsHttp(string packageVersion = Constants.NuGetLatestVersion) => Create("Microsoft.Extensions.Http", packageVersion);
     public static References MicrosoftExtensionsLoggingPackages(string packageVersion) =>
         Create("Microsoft.Extensions.Logging", packageVersion)
-        .Concat(Create("Microsoft.Extensions.Logging.AzureAppServices", packageVersion == Constants.DotNet7Preview
-                                                                            ? Constants.DotNet7PreviewAzureAppServices // Work around for .Net 7 preview since AzureAppServices has a slightly different version.
+        .Concat(Create("Microsoft.Extensions.Logging.AzureAppServices", packageVersion))
+        .Concat(Create("Microsoft.Extensions.Logging.Abstractions", packageVersion == Constants.NuGetLatestVersion
+                                                                            ? Constants.DotNet9Preview7                // Work around for .Net 9 preview. Can be removed after release.
                                                                             : packageVersion))
-        .Concat(Create("Microsoft.Extensions.Logging.Abstractions", packageVersion))
         .Concat(Create("Microsoft.Extensions.Logging.Console", packageVersion))
         .Concat(Create("Microsoft.Extensions.Logging.Debug", packageVersion))
         .Concat(Create("Microsoft.Extensions.Logging.EventLog", packageVersion));

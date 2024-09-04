@@ -23,8 +23,10 @@ using System.Reflection;
 
 namespace SonarAnalyzer.TestFramework.Common;
 
-public static class SourceGeneratorProvider
+public static class SdkPathProvider
 {
+    private const int DotnetVersion = 9;
+
     private static readonly string RazorSourceGeneratorPath =
         Path.Combine(LatestSdkFolder(), "Sdks", "Microsoft.NET.Sdk.Razor", "source-generators", "Microsoft.CodeAnalysis.Razor.Compiler.dll");
 
@@ -33,27 +35,34 @@ public static class SourceGeneratorProvider
         new(RazorSourceGeneratorPath, new AssemblyLoader())
     ];
 
-    public static string LatestSdkFolder()
-    {
-        var objectAssembly = typeof(object).Assembly;
-        var objectAssemblyDirectory = Directory.GetParent(objectAssembly.Location);    // C:\Program Files\dotnet\shared\Microsoft.NETCore.App\8.0.4
-        var dotnetDirectory = objectAssemblyDirectory.Parent.Parent.Parent;            // C:\Program Files\dotnet
-        var sdkDirectory = Path.Combine(dotnetDirectory.FullName, "sdk");              // C:\Program Files\dotnet\sdk
+    public static string LatestSdkFolder() =>
+        LatestFolder(Constants.SdkPath, "dotnet.dll");
 
-        if (!Directory.Exists(sdkDirectory))
+    public static string LatestAspNetCoreSdkFolder() =>
+        LatestFolder(Constants.AspNetCorePath, "Microsoft.AspNetCore.dll");
+
+    public static string LatestWindowsDesktopSdkFolder() =>
+        LatestFolder(Constants.WindowsDesktopPath, "PresentationCore.dll");
+
+    public static string LatestFolder(string path, string assemblyName)
+    {
+        if (!Directory.Exists(path))
         {
-            throw new NotSupportedException($"The directory '{sdkDirectory}' does not exist. " +
-                $"This may be because you are not using .NET Core. " +
-                $"Please note that Razor analysis is only supported when using .NET Core.");
+            throw new NotSupportedException(
+                $"The directory '{path}' does not exist. This may be because you are not using .NET Core. Please note that Razor analysis is only supported when using .NET Core.");
         }
-        return Directory.GetDirectories(sdkDirectory, $"{objectAssembly.GetName().Version.Major}.*")
-            .OrderBy(x => Version.Parse(new DirectoryInfo(x).Name))
+
+        // Due to the preview versions naming convention, we cannot use the folder names as version numbers so we need to look at the file versions of the assemblies from the folder.
+        // When reading the dll versions, the File version (e.g. 9.1.24.40712) is considered instead of the Product version (e.g. 9.1.100-preview.7.24407.12+hash).
+        return Directory.GetDirectories(path, $"{DotnetVersion}.*")
+            .OrderBy(x => FileVersionInfo.GetVersionInfo(Path.Combine(x, assemblyName)))
             .Last();
     }
 
     private sealed class AssemblyLoader : IAnalyzerAssemblyLoader
     {
         public void AddDependencyLocation(string fullPath) { }
+
         public Assembly LoadFromPath(string fullPath) => Assembly.LoadFrom(fullPath);
     }
 }
