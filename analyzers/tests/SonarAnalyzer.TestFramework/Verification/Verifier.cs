@@ -123,6 +123,17 @@ internal class Verifier
         }
     }
 
+    public void VerifyNoAD0001()    // This should never have any arguments
+    {
+        foreach (var compilation in Compile(builder.ConcurrentAnalysis))
+        {
+            foreach (var analyzer in analyzers)
+            {
+                DiagnosticVerifier.AnalyzerExceptions(compilation.Compilation, analyzer).Should().BeEmpty();
+            }
+        }
+    }
+
     public void VerifyNoIssuesIgnoreErrors()    // This should never have any arguments
     {
         foreach (var compilation in Compile(builder.ConcurrentAnalysis))

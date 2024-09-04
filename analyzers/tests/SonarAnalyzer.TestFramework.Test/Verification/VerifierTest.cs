@@ -792,6 +792,28 @@ public class VerifierTest
         WithSnippetCS("Nonsense").Invoking(x => x.VerifyNoIssues()).Should().Throw<AssertFailedException>();
 
     [TestMethod]
+    public void VerifyNoAD0001_AnalyzerException_Fail() =>
+        new VerifierBuilder<DummyAnalyzerThatThrowsCS>()
+            .AddSnippet("""
+                        public class Class7
+                        {
+                            public int X = 7;
+                        }
+                        """)
+            .Invoking(x => x.VerifyNoAD0001()).Should().Throw<AssertFailedException>();
+
+    [TestMethod]
+    public void VerifyNoAD0001_NoAD0001_DoesNotFail() =>
+        new VerifierBuilder<DummyAnalyzerCS>()
+            .AddSnippet("""
+                        public class Class7
+                        {
+                            public int X = 7;
+                        }
+                        """)
+            .VerifyNoAD0001();
+
+    [TestMethod]
     public void VerifyNoIssuesIgnoreErrors_NoIssues_Succeeds() =>
         WithSnippetCS("// Noncompliant - this comment is ignored").Invoking(x => x.VerifyNoIssuesIgnoreErrors()).Should().NotThrow();
 

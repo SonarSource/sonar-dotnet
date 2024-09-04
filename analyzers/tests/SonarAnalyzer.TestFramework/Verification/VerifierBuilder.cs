@@ -158,6 +158,12 @@ public record VerifierBuilder
         Build().VerifyNoIssues();
 
     /// <summary>
+    /// Check that the compilation does not produce any AD0001 issues. Other diagnostics are ignored.
+    /// </summary>
+    public void VerifyNoAD0001() =>
+        Build().VerifyNoAD0001();
+
+    /// <summary>
     /// Verifies that no diagnostics, except errors, are found.
     /// </summary>
     public void VerifyNoIssuesIgnoreErrors() =>

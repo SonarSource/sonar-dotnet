@@ -75,8 +75,11 @@ public static class DiagnosticVerifier
                                                   DiagnosticAnalyzer analyzer,
                                                   CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
                                                   string additionalFilePath = null,
-                                                  string[] onlyDiagnostics = null) =>
-        AnalyzerDiagnostics(compilation, analyzer, checkMode, additionalFilePath, onlyDiagnostics).Should().NotContain(x => x.Severity != DiagnosticSeverity.Error);
+                                                  string[] onlyDiagnostics = null)
+    {
+        var diagnostics = AnalyzerDiagnostics(compilation, analyzer, checkMode, additionalFilePath, onlyDiagnostics);
+        diagnostics.Should().NotContain(x => x.Severity != DiagnosticSeverity.Error);
+    }
 
     public static IEnumerable<Diagnostic> AnalyzerDiagnostics(Compilation compilation, DiagnosticAnalyzer analyzer, CompilationErrorBehavior checkMode, string additionalFilePath = null, string[] onlyDiagnostics = null) =>
         AnalyzerDiagnostics(compilation, new[] { analyzer }, checkMode, additionalFilePath, onlyDiagnostics);

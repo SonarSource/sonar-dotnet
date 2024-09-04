@@ -79,15 +79,15 @@ protected int FooFoo() => 0; // Noncompliant
     public void MemberShouldBeStatic_InvalidCode() =>
         // Handle invalid code causing NullReferenceException: https://github.com/SonarSource/sonar-dotnet/issues/819
         builder.AddSnippet("""
-
-            public class Class7
-            {
-                public async Task<Result<T> Function<T>(Func<Task<Result<T>>> f)
-                {
-                    Result<T> result;
-                    result = await f();
-                    return result;
-                }
-            }
-            """).VerifyNoIssuesIgnoreErrors();
+                           public class Class7
+                           {
+                               public async Task<Result<T> Function<T>(Func<Task<Result<T>>> f)
+                               {
+                                   Result<T> result;
+                                   result = await f();
+                                   return result;
+                               }
+                           }
+                           """)
+                .VerifyNoAD0001();
 }
