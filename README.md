@@ -151,6 +151,10 @@ Then, update the projects to include this additional file:
 * [Azure Pipelines](https://sonarsource.visualstudio.com/DotNetTeam%20Project/_build?definitionId=77&_a=summary)
 * [Peachee configuration](https://github.com/SonarSource/peachee-languages/tree/dotnet)
 
+## Security Issues
+
+If you believe you have discovered a security vulnerability in Sonar's products, please check [this document](./SECURITY.md)
+
 ## License
 
 Copyright 2014-2024 SonarSource.
