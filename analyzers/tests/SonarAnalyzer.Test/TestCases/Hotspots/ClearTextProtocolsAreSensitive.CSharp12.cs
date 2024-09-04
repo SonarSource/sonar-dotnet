@@ -14,5 +14,5 @@ public sealed class Repro
 {
     public Telnet[] GetTelnet() => CreateTelnets();
 
-    private static Telnet[] CreateTelnets() => [new()]; // Compliant - FN
+    private static Telnet[] CreateTelnets() => [new()]; // Noncompliant
 }

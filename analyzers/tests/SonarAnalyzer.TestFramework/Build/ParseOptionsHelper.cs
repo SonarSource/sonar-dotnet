@@ -38,6 +38,7 @@ public static class ParseOptionsHelper
     public static ImmutableArray<ParseOptions> BeforeCSharp10 { get; }
     public static ImmutableArray<ParseOptions> BeforeCSharp11 { get; }
     public static ImmutableArray<ParseOptions> BeforeCSharp12 { get; }
+    public static ImmutableArray<ParseOptions> BeforeCSharp13 { get; }
 
     public static ImmutableArray<ParseOptions> FromCSharp6 { get; }
     public static ImmutableArray<ParseOptions> FromCSharp7 { get; }
@@ -46,6 +47,7 @@ public static class ParseOptionsHelper
     public static ImmutableArray<ParseOptions> FromCSharp10 { get; }
     public static ImmutableArray<ParseOptions> FromCSharp11 { get; }
     public static ImmutableArray<ParseOptions> FromCSharp12 { get; }
+    public static ImmutableArray<ParseOptions> FromCSharp13 { get; }
     public static ImmutableArray<ParseOptions> CSharpPreview { get; }
 
     public static ImmutableArray<ParseOptions> CSharpLatest { get; }
@@ -63,6 +65,7 @@ public static class ParseOptionsHelper
 
     static ParseOptionsHelper()
     {
+        var cs12 = CreateOptions(CSharp12);
         var cs11 = CreateOptions(CSharp11);
         var cs10 = CreateOptions(CSharp10);
         var cs9 = CreateOptions(CSharp9);
@@ -76,8 +79,10 @@ public static class ParseOptionsHelper
         BeforeCSharp10 = BeforeCSharp9.Concat(cs9).FilterByEnvironment();
         BeforeCSharp11 = BeforeCSharp10.Concat(cs10).FilterByEnvironment();
         BeforeCSharp12 = BeforeCSharp11.Concat(cs11).FilterByEnvironment();
+        BeforeCSharp13 = BeforeCSharp12.Concat(cs12).FilterByEnvironment();
 
-        FromCSharp12 = CreateOptions(CSharp12).FilterByEnvironment();
+        FromCSharp13 = CreateOptions(CSharp13).FilterByEnvironment();
+        FromCSharp12 = cs12.Concat(FromCSharp13).FilterByEnvironment();
         FromCSharp11 = cs11.Concat(FromCSharp12).FilterByEnvironment();
         FromCSharp10 = cs10.Concat(FromCSharp11).FilterByEnvironment();
         FromCSharp9 = cs9.Concat(FromCSharp10).FilterByEnvironment();
