@@ -122,7 +122,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             return returnStatement?.Expression != null
-                   && CSharpEquivalenceChecker.AreEquivalent(returnStatement.Expression, CSharpSyntaxHelper.TrueLiteralExpression);
+                   && CSharpEquivalenceChecker.AreEquivalent(returnStatement.Expression, SyntaxConstants.TrueLiteralExpression);
         }
     }
 }

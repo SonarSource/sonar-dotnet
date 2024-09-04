@@ -62,4 +62,20 @@ internal static class InvocationExpressionSyntaxExtensions
 
     internal static SyntaxToken? GetMethodCallIdentifier(this InvocationExpressionSyntax invocation) =>
         invocation?.Expression.GetIdentifier();
+
+    public static bool IsNameof(this InvocationExpressionSyntax expression, SemanticModel semanticModel) =>
+        expression is not null &&
+        expression.Expression is IdentifierNameSyntax identifierNameSyntax &&
+        identifierNameSyntax.Identifier.ValueText == Common.SyntaxConstants.NameOfKeywordText &&
+        semanticModel.GetSymbolInfo(expression).Symbol?.Kind != SymbolKind.Method;
+
+    public static bool IsMethodInvocation(this InvocationExpressionSyntax invocation, KnownType type, string methodName, SemanticModel semanticModel) =>
+        invocation.Expression.NameIs(methodName) &&
+        semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
+        methodSymbol.IsInType(type);
+
+    public static bool IsMethodInvocation(this InvocationExpressionSyntax invocation, ImmutableArray<KnownType> types, string methodName, SemanticModel semanticModel) =>
+        invocation.Expression.NameIs(methodName) &&
+        semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
+        methodSymbol.IsInType(types);
 }

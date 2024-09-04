@@ -28,25 +28,25 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        private static readonly NameSyntax[] SqlNamespaces =
+            [
+                BuildQualifiedNameSyntax("System", "Data"),
+                BuildQualifiedNameSyntax("Microsoft", "EntityFrameworkCore"),
+                BuildQualifiedNameSyntax("ServiceStack", "OrmLite"),
+                BuildQualifiedNameSyntax("System", "Data", "SqlClient"),
+                BuildQualifiedNameSyntax("System", "Data", "SQLite"),
+                BuildQualifiedNameSyntax("System", "Data", "SqlServerCe"),
+                BuildQualifiedNameSyntax("System", "Data", "Entity"),
+                BuildQualifiedNameSyntax("System", "Data", "Odbc"),
+                BuildQualifiedNameSyntax("System", "Data", "OracleClient"),
+                BuildQualifiedNameSyntax("Microsoft", "Data", "SqlClient"),
+                BuildQualifiedNameSyntax("Microsoft", "Data", "Sqlite"),
+                SyntaxFactory.IdentifierName("Dapper"),
+                SyntaxFactory.IdentifierName("NHibernate"),
+                SyntaxFactory.IdentifierName("PetaPoco")
+            ];
 
-        private static readonly IList<NameSyntax> SqlNamespaces = new List<NameSyntax>
-        {
-            CSharpSyntaxHelper.BuildQualifiedNameSyntax("System", "Data"),
-            CSharpSyntaxHelper.BuildQualifiedNameSyntax("Microsoft", "EntityFrameworkCore"),
-            CSharpSyntaxHelper.BuildQualifiedNameSyntax("ServiceStack", "OrmLite"),
-            CSharpSyntaxHelper.BuildQualifiedNameSyntax("System", "Data", "SqlClient"),
-            CSharpSyntaxHelper.BuildQualifiedNameSyntax("System", "Data", "SQLite"),
-            CSharpSyntaxHelper.BuildQualifiedNameSyntax("System", "Data", "SqlServerCe"),
-            CSharpSyntaxHelper.BuildQualifiedNameSyntax("System", "Data", "Entity"),
-            CSharpSyntaxHelper.BuildQualifiedNameSyntax("System", "Data", "Odbc"),
-            CSharpSyntaxHelper.BuildQualifiedNameSyntax("System", "Data", "OracleClient"),
-            CSharpSyntaxHelper.BuildQualifiedNameSyntax("Microsoft", "Data", "SqlClient"),
-            CSharpSyntaxHelper.BuildQualifiedNameSyntax("Microsoft", "Data", "Sqlite"),
-            SyntaxFactory.IdentifierName("Dapper"),
-            SyntaxFactory.IdentifierName("NHibernate"),
-            SyntaxFactory.IdentifierName("PetaPoco")
-        };
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         // The '@' symbol is used for named parameters.
         // The '{' and '}' symbols are used in string interpolations.
@@ -105,6 +105,20 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool HasSqlNamespace(SyntaxList<UsingDirectiveSyntax> usings) =>
             usings.Select(x => x.Name)
                 .Any(x => SqlNamespaces.Any(usingsNamespace => SyntaxFactory.AreEquivalent(x, usingsNamespace)));
+
+        // creates a QualifiedNameSyntax "a.b"
+        private static QualifiedNameSyntax BuildQualifiedNameSyntax(string a, string b) =>
+            SyntaxFactory.QualifiedName(
+                SyntaxFactory.IdentifierName(a),
+                SyntaxFactory.IdentifierName(b));
+
+        // creates a QualifiedNameSyntax "a.b.c"
+        private static QualifiedNameSyntax BuildQualifiedNameSyntax(string a, string b, string c) =>
+            SyntaxFactory.QualifiedName(
+                SyntaxFactory.QualifiedName(
+                    SyntaxFactory.IdentifierName(a),
+                    SyntaxFactory.IdentifierName(b)),
+                SyntaxFactory.IdentifierName(c));
 
         private sealed class StringConcatenationWalker : SafeCSharpSyntaxWalker
         {

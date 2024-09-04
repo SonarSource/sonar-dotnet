@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 using StyleCop.Analyzers.Lightup;
 using NullabilityInfo = StyleCop.Analyzers.Lightup.NullabilityInfo;
 using NullableAnnotation = StyleCop.Analyzers.Lightup.NullableAnnotation;

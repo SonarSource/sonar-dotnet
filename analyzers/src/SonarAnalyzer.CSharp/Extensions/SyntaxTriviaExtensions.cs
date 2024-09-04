@@ -18,16 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
+namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
-public static class MethodBlockSyntaxExtensions
+public static class SyntaxTriviaExtensions
 {
-    public static bool IsShared(this MethodBlockSyntax methodBlock) =>
-        methodBlock.SubOrFunctionStatement.Modifiers.Any(SyntaxKind.SharedKeyword);
+    public static bool IsAnyKind(this SyntaxTrivia syntaxTravia, params SyntaxKind[] syntaxKinds) =>
+        syntaxKinds.Contains((SyntaxKind)syntaxTravia.RawKind);
 
-    public static string GetIdentifierText(this MethodBlockSyntax method) =>
-        method.SubOrFunctionStatement.Identifier.ValueText;
-
-    public static SeparatedSyntaxList<ParameterSyntax>? GetParameters(this MethodBlockSyntax method) =>
-        method.BlockStatement?.ParameterList?.Parameters;
+    public static bool IsComment(this SyntaxTrivia trivia) =>
+        trivia.IsAnyKind(
+            SyntaxKind.SingleLineCommentTrivia,
+            SyntaxKind.MultiLineCommentTrivia,
+            SyntaxKind.SingleLineDocumentationCommentTrivia,
+            SyntaxKind.MultiLineDocumentationCommentTrivia);
 }

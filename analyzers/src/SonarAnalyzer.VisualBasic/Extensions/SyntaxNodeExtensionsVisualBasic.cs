@@ -208,6 +208,58 @@ public static class SyntaxNodeExtensionsVisualBasic
             _ => false,
         };
 
+    public static SyntaxNode GetTopMostContainingMethod(this SyntaxNode node) =>
+        node.AncestorsAndSelf().LastOrDefault(x => x is MethodBaseSyntax || x is PropertyBlockSyntax);
+
+    public static SyntaxNode RemoveParentheses(this SyntaxNode expression)
+    {
+        var current = expression;
+        while (current is ParenthesizedExpressionSyntax parenthesized)
+        {
+            current = parenthesized.Expression;
+        }
+        return current;
+    }
+
+    public static SyntaxNode GetSelfOrTopParenthesizedExpression(this SyntaxNode node)
+    {
+        var current = node;
+        while (current?.Parent?.IsKind(SyntaxKind.ParenthesizedExpression) ?? false)
+        {
+            current = current.Parent;
+        }
+        return current;
+    }
+
+    public static bool HasAncestor(this SyntaxNode syntaxNode, params SyntaxKind[] syntaxKinds) =>
+        syntaxNode.Ancestors().Any(x => x.IsAnyKind(syntaxKinds));
+
+    public static bool IsNothingLiteral(this SyntaxNode syntaxNode) =>
+        syntaxNode is not null && syntaxNode.IsKind(SyntaxKind.NothingLiteralExpression);
+
+    public static bool IsAnyKind(this SyntaxNode syntaxNode, params SyntaxKind[] syntaxKinds) =>
+       syntaxNode is not null && syntaxKinds.Contains((SyntaxKind)syntaxNode.RawKind);
+
+    public static SyntaxNode GetFirstNonParenthesizedParent(this SyntaxNode node) =>
+        node.GetSelfOrTopParenthesizedExpression().Parent;
+
+    public static bool IsAnyKind(this SyntaxNode syntaxNode, ISet<SyntaxKind> collection) =>
+        syntaxNode is not null && collection.Contains((SyntaxKind)syntaxNode.RawKind);
+
+    public static string GetName(this SyntaxNode expression) =>
+        expression.GetIdentifier()?.ValueText ?? string.Empty;
+
+    public static string StringValue(this SyntaxNode node, SemanticModel semanticModel) =>
+        node switch
+        {
+            LiteralExpressionSyntax literal when literal.IsKind(SyntaxKind.StringLiteralExpression) => literal.Token.ValueText,
+            InterpolatedStringExpressionSyntax expression => expression.TryGetInterpolatedTextValue(semanticModel, out var interpolatedValue) ? interpolatedValue : expression.GetContentsText(),
+            _ => null
+        };
+
+    public static bool AnyOfKind(this IEnumerable<SyntaxNode> nodes, SyntaxKind kind) =>
+        nodes.Any(x => x.RawKind == (int)kind);
+
     private sealed class ControlFlowGraphCache : ControlFlowGraphCacheBase
     {
         protected override bool IsLocalFunction(SyntaxNode node) =>

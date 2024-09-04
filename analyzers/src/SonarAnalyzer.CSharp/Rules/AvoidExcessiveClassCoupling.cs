@@ -258,7 +258,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 // semantic checks to ensure this is the real `nameof` and not a user made method.
                 // Here we prefer to favor fast results over accuracy (at worst we have FNs not FPs).
                 var isNameof = node.Expression.IsKind(SyntaxKind.IdentifierName)
-                    && ((IdentifierNameSyntax)node.Expression).Identifier.ToString() == CSharpSyntaxHelper.NameOfKeywordText;
+                    && ((IdentifierNameSyntax)node.Expression).Identifier.ToString() == SyntaxConstants.NameOfKeywordText;
 
                 if (!isNameof)
                 {

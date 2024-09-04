@@ -20,10 +20,15 @@
 
 namespace SonarAnalyzer.CSharp.Core.Common;
 
-internal static class SyntaxConstants
+public static class SyntaxConstants
 {
     public const string Discard = "_";
     public const string Private = "private";
     public const string Protected = "protected";
     public const string Internal = "internal";
+    public const string NameOfKeywordText = "nameof";
+
+    public static readonly ExpressionSyntax NullLiteralExpression = SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression);
+    public static readonly ExpressionSyntax FalseLiteralExpression = SyntaxFactory.LiteralExpression(SyntaxKind.FalseLiteralExpression);
+    public static readonly ExpressionSyntax TrueLiteralExpression = SyntaxFactory.LiteralExpression(SyntaxKind.TrueLiteralExpression);
 }

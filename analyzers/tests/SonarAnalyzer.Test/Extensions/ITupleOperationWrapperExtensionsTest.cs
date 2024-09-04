@@ -22,6 +22,7 @@ using System.Text;
 using FluentAssertions.Extensions;
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CSharp.Core.Extensions;
+using SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Test.Extensions

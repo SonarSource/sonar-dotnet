@@ -56,7 +56,7 @@ public class VisualBasicInvocationTracker : InvocationTracker<SyntaxKind>
     internal override object ConstArgumentForParameter(InvocationContext context, string parameterName)
     {
         var argumentList = ((InvocationExpressionSyntax)context.Node).ArgumentList;
-        var values = VisualBasicSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, argumentList, parameterName);
+        var values = argumentList.ArgumentValuesForParameter(context.SemanticModel, parameterName);
         return values.Length == 1 && values[0] is ExpressionSyntax valueSyntax
             ? valueSyntax.FindConstantValue(context.SemanticModel)
             : null;

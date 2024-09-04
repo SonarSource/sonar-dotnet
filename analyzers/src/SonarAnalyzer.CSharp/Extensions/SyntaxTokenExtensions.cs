@@ -18,16 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
+namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
-public static class MethodBlockSyntaxExtensions
+public static class SyntaxTokenExtensions
 {
-    public static bool IsShared(this MethodBlockSyntax methodBlock) =>
-        methodBlock.SubOrFunctionStatement.Modifiers.Any(SyntaxKind.SharedKeyword);
+    public static bool IsAnyKind(this SyntaxToken token, params SyntaxKind[] syntaxKinds) =>
+        syntaxKinds.Contains((SyntaxKind)token.RawKind);
 
-    public static string GetIdentifierText(this MethodBlockSyntax method) =>
-        method.SubOrFunctionStatement.Identifier.ValueText;
+    public static bool IsAnyKind(this SyntaxToken token, ISet<SyntaxKind> syntaxKinds) =>
+        syntaxKinds.Contains((SyntaxKind)token.RawKind);
 
-    public static SeparatedSyntaxList<ParameterSyntax>? GetParameters(this MethodBlockSyntax method) =>
-        method.BlockStatement?.ParameterList?.Parameters;
+    public static bool AnyOfKind(this IEnumerable<SyntaxToken> tokens, SyntaxKind kind) =>
+        tokens.Any(x => x.RawKind == (int)kind);
 }

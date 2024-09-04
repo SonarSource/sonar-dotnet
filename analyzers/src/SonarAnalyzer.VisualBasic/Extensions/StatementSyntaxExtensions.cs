@@ -20,14 +20,19 @@
 
 namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
 
-public static class MethodBlockSyntaxExtensions
+public static class StatementSyntaxExtensions
 {
-    public static bool IsShared(this MethodBlockSyntax methodBlock) =>
-        methodBlock.SubOrFunctionStatement.Modifiers.Any(SyntaxKind.SharedKeyword);
+    public static StatementSyntax GetPrecedingStatement(this StatementSyntax currentStatement)
+    {
+        var children = currentStatement.Parent.ChildNodes().ToList();
+        var index = children.IndexOf(currentStatement);
+        return index == 0 ? null : children[index - 1] as StatementSyntax;
+    }
 
-    public static string GetIdentifierText(this MethodBlockSyntax method) =>
-        method.SubOrFunctionStatement.Identifier.ValueText;
-
-    public static SeparatedSyntaxList<ParameterSyntax>? GetParameters(this MethodBlockSyntax method) =>
-        method.BlockStatement?.ParameterList?.Parameters;
+    public static StatementSyntax GetSucceedingStatement(this StatementSyntax currentStatement)
+    {
+        var children = currentStatement.Parent.ChildNodes().ToList();
+        var index = children.IndexOf(currentStatement);
+        return index == children.Count - 1 ? null : children[index + 1] as StatementSyntax;
+    }
 }

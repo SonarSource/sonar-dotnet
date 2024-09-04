@@ -245,7 +245,7 @@ internal sealed class ConditionEvaluatesToConstant : ISymbolicExecutionAnalyzer
         private static SyntaxNode GetUnreachableStatement(IEnumerable<ExpressionSyntax> unreachableExpressions, bool constantValue)
         {
             var parent = unreachableExpressions
-                .Select(CSharpSyntaxHelper.GetSelfOrTopParenthesizedExpression) // unreachable expressions
+                .Select(SyntaxNodeExtensionsCSharp.GetSelfOrTopParenthesizedExpression) // unreachable expressions
                 .Select(node => node.Parent is BinaryExpressionSyntax
                     ? node.Parent.Parent
                     : node.Parent) // Constant node is the only expression in an if statement condition

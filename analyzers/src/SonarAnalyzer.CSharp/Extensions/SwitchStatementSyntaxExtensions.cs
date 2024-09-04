@@ -18,16 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
+namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
-public static class MethodBlockSyntaxExtensions
+public static class SwitchStatementSyntaxExtensions
 {
-    public static bool IsShared(this MethodBlockSyntax methodBlock) =>
-        methodBlock.SubOrFunctionStatement.Modifiers.Any(SyntaxKind.SharedKeyword);
+    public static bool HasDefaultLabel(this SwitchStatementSyntax node) =>
+        GetDefaultLabelSectionIndex(node) >= 0;
 
-    public static string GetIdentifierText(this MethodBlockSyntax method) =>
-        method.SubOrFunctionStatement.Identifier.ValueText;
-
-    public static SeparatedSyntaxList<ParameterSyntax>? GetParameters(this MethodBlockSyntax method) =>
-        method.BlockStatement?.ParameterList?.Parameters;
+    public static int GetDefaultLabelSectionIndex(this SwitchStatementSyntax node) =>
+        node.Sections.IndexOf(x => x.Labels.AnyOfKind(SyntaxKind.DefaultSwitchLabel));
 }
