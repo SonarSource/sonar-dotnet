@@ -742,6 +742,35 @@ class AdvancedTests
         list.Clear();       // Noncompliant FP
     }
 
+    public void AddKnownCollection()
+    {
+        // Repro for https://sonarsource.atlassian.net/browse/NET-210
+        var empty = new List<int>();
+        var notEmpty = new List<int> { 1, 2, 3 };
+
+        var list = new List<int>();
+        list.AddRange(empty);
+        list.Clear();                       // FN
+        list.AddRange(notEmpty);
+        list.Clear();                       // Compliant
+
+        list.InsertRange(0, empty);
+        list.Clear();                       // FN
+        list.InsertRange(0, notEmpty);
+        list.Clear();                       // Compliant
+
+        var set = new HashSet<int>();
+        set.UnionWith(empty);
+        set.Clear();                        // FN
+        set.UnionWith(notEmpty);
+        set.Clear();                        // Compliant
+
+        set.SymmetricExceptWith(empty);     // Noncompliant
+        set.Clear();                        // FN
+        set.SymmetricExceptWith(notEmpty);  // Noncompliant
+        set.Clear();                        // Compliant
+    }
+
     void Foo(List<int> items) { }
 
     class CollectionLookALike
