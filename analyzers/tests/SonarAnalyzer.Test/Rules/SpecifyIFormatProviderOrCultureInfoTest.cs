@@ -31,11 +31,41 @@ namespace SonarAnalyzer.Test.Rules
         public void SpecifyIFormatProviderOrCultureInfo() =>
             builder.AddPaths("SpecifyIFormatProviderOrCultureInfo.cs").Verify();
 
+        [TestMethod]
+        public void SpecifyIFormatProviderOrCultureInfo_BeforeCSharp13() =>
+            builder.AddSnippet("""
+                    using System;
+
+                    class C
+                    {
+                        void M()
+                        {
+                            string.Format("bla");                                      // Noncompliant
+                            string.Format("%s %s", "foo", "bar", "quix", "hi", "bye"); // Noncompliant
+                        }
+                    }
+                    """)
+                .WithOptions(ParseOptionsHelper.BeforeCSharp13)
+                .Verify();
+
 #if NET
 
         [TestMethod]
-        public void SpecifyIFormatProviderOrCultureInfo_CSharp11() =>
-            builder.AddPaths("SpecifyIFormatProviderOrCultureInfo.CSharp11.cs").Verify();
+        public void SpecifyIFormatProviderOrCultureInfo_CS_Latest() =>
+            builder.AddPaths("SpecifyIFormatProviderOrCultureInfo.Latest.cs").Verify();
+
+        // Repro https://sonarsource.atlassian.net/browse/NET-230
+        [TestMethod]
+        public void SpecifyIFormatProviderOrCultureInfo_FromCSharp13() =>
+            builder.AddSnippet("""
+                    using System;
+
+                    string.Format("bla");                                      // FN
+                    string.Format("%s %s", "foo", "bar", "quix", "hi", "bye"); // FN
+                    """)
+                .WithOptions(ParseOptionsHelper.FromCSharp13)
+                .WithTopLevelStatements()
+                .VerifyNoIssues();
 
 #endif
 
