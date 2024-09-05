@@ -36,15 +36,9 @@ public class ArrayPassedAsParamsTest
 #if NET
 
     [TestMethod]
-    public void ArrayPassedAsParams_CSharp9() =>
-        builderCS.AddPaths("ArrayPassedAsParams.CSharp9.cs")
-            .WithTopLevelStatements()
-            .Verify();
-
-    [TestMethod]
-    public void ArrayPassedAsParams_CSharp12() =>
-        builderCS.AddPaths("ArrayPassedAsParams.CSharp12.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp12)
+    public void ArrayPassedAsParams_CS_Latest() =>
+        builderCS.AddPaths("ArrayPassedAsParams.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
             .WithTopLevelStatements()
             .Verify();
 

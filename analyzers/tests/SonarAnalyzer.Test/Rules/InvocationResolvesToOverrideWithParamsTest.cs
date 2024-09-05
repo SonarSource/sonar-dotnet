@@ -55,15 +55,15 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
 
         [TestMethod]
-        public void InvocationResolvesToOverrideWithParams_CSharp11() =>
-            builder.AddPaths("InvocationResolvesToOverrideWithParams.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
-
-        [TestMethod]
         public void InvocationResolvesToOverrideWithParams_TopLevelStatements() =>
             builder.AddPaths("InvocationResolvesToOverrideWithParams.TopLevelStatements.cs")
                 .WithTopLevelStatements()
+                .Verify();
+
+        [TestMethod]
+        public void InvocationResolvesToOverrideWithParams_CS_Latest() =>
+            builder.AddPaths("InvocationResolvesToOverrideWithParams.Latest.cs")
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .Verify();
 
 #endif
