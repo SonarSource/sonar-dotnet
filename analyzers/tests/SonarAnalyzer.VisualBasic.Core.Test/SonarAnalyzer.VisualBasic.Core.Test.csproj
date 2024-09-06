@@ -19,8 +19,21 @@
 
   <ItemGroup>
     <Using Include="FluentAssertions" />
+    <Using Include="Microsoft.CodeAnalysis" />
+    <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
+    <Using Include="Microsoft.CodeAnalysis.VisualBasic" />
+    <Using Include="Microsoft.CodeAnalysis.VisualBasic.Syntax" />
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+    <Using Include="SonarAnalyzer.Common" />
+    <Using Include="SonarAnalyzer.Extensions" />
     <Using Include="SonarAnalyzer.VisualBasic.Core.Extensions" />
+    <Using Include="SonarAnalyzer.VisualBasic.Core.Syntax.Extensions" />
+    <Using Include="SonarAnalyzer.VisualBasic.Core.Syntax.Utilities" />
+    <Using Include="SonarAnalyzer.VisualBasic.Core.Facade" />
+    <Using Include="SonarAnalyzer.TestFramework.Build" />
+    <Using Include="SonarAnalyzer.TestFramework.Common" />
+    <Using Include="SonarAnalyzer.TestFramework.Extensions" />
+    <Using Include="SonarAnalyzer.TestFramework.MetadataReferences" />
   </ItemGroup>
 
 </Project>
