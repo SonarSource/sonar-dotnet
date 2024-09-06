@@ -18,17 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using SonarAnalyzer;
+namespace SonarAnalyzer.VisualBasic.Core.Test.Syntax.Extensions;
 
-[assembly: AssemblyTitle("SonarAnalyzer Core")]
-[assembly: AssemblyProduct("SonarAnalyzer")]
-[assembly: AssemblyDescription("")]
-
-[assembly: InternalsVisibleTo("SonarAnalyzer.CSharp" + Signing.InternalsVisibleToPublicKey)]
-[assembly: InternalsVisibleTo("SonarAnalyzer.VisualBasic" + Signing.InternalsVisibleToPublicKey)]
-[assembly: InternalsVisibleTo("SonarAnalyzer.CSharp.Core.Test" + Signing.InternalsVisibleToPublicKey)]
-[assembly: InternalsVisibleTo("SonarAnalyzer.Test" + Signing.InternalsVisibleToPublicKey)]
-[assembly: InternalsVisibleTo("SonarAnalyzer.TestFramework" + Signing.InternalsVisibleToPublicKey)]
-[assembly: InternalsVisibleTo("SonarAnalyzer.VisualBasic.Core.Test" + Signing.InternalsVisibleToPublicKey)]
+[TestClass]
+public class ObjectCreationExpressionSyntaxExtensionsTest
+{
+    [TestMethod]
+    public void GetObjectCreationTypeIdentifier_Null_VB() =>
+        ObjectCreationExpressionSyntaxExtensions.GetObjectCreationTypeIdentifier(null).Should().BeNull();
+}

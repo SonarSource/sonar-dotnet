@@ -101,7 +101,7 @@ public class RoslynControlFlowGraphTest
         localFunctionCfg.Should().NotBeNull();
         localFunctionCfg.Parent.Should().Be(cfg);
 
-        var anonymousFunction = cfg.Blocks.SelectMany(x => x.Operations).SelectMany(x => x.DescendantsAndSelf()).OfType<FlowAnalysis.IFlowAnonymousFunctionOperation>().Single();
+        var anonymousFunction = cfg.Blocks.SelectMany(x => x.Operations).SelectMany(OperationExtensions.DescendantsAndSelf).OfType<FlowAnalysis.IFlowAnonymousFunctionOperation>().Single();
         cfg.GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper.FromOperation(anonymousFunction), default).Should().NotBeNull();
     }
 
