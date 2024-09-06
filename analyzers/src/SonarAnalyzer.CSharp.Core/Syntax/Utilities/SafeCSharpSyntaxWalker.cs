@@ -18,14 +18,26 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
+namespace SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 
-internal static class ObjectCreationExpressionSyntaxExtensions
+public class SafeCSharpSyntaxWalker : CSharpSyntaxWalker, ISafeSyntaxWalker
 {
-    public static bool IsKnownType(this ObjectCreationExpressionSyntax objectCreation, KnownType knownType, SemanticModel semanticModel) =>
-        objectCreation.Type.GetName().EndsWith(knownType.TypeName)
-        && ((SyntaxNode)objectCreation).IsKnownType(knownType, semanticModel);
+    protected SafeCSharpSyntaxWalker() { }
 
-    public static SyntaxToken? GetObjectCreationTypeIdentifier(this ObjectCreationExpressionSyntax objectCreation) =>
-        objectCreation?.Type.GetIdentifier();
+    protected SafeCSharpSyntaxWalker(SyntaxWalkerDepth depth) : base(depth) { }
+
+    public bool SafeVisit(SyntaxNode syntaxNode)
+    {
+        try
+        {
+            Visit(syntaxNode);
+            return true;
+        }
+        catch (InsufficientExecutionStackException)
+        {
+            // Roslyn walker overflows the stack when the depth of the call is around 2050.
+            // See https://github.com/SonarSource/sonar-dotnet/issues/2115
+            return false;
+        }
+    }
 }

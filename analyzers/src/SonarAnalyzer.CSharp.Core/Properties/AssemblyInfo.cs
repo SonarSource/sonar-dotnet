@@ -26,4 +26,5 @@ using SonarAnalyzer;
 [assembly: AssemblyProduct("SonarAnalyzer")]
 [assembly: AssemblyDescription("")]
 
+[assembly: InternalsVisibleTo("SonarAnalyzer.Test" + Signing.InternalsVisibleToPublicKey)]
 [assembly: InternalsVisibleTo("SonarAnalyzer.CSharp.Core.Test" + Signing.InternalsVisibleToPublicKey)]

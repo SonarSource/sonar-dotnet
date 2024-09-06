@@ -48,8 +48,8 @@ namespace SonarAnalyzer.SourceGenerators
             var project = Path.GetFileName(projectDir.TrimEnd(Path.DirectorySeparatorChar));
             var directorySuffix = project switch
             {
-                "SonarAnalyzer.CSharp" => "cs",         // ToDo: Add .Core here, and remove it from namespacePrefix below
-                "SonarAnalyzer.VisualBasic" => "vbnet",
+                "SonarAnalyzer.CSharp.Core" => "cs",
+                "SonarAnalyzer.VisualBasic.Core" => "vbnet",
                 _ => throw new ArgumentException($"Unexpected projectDir: {projectDir}")
             };
             var rspecDirectory = Path.Combine(projectDir, "..", "..", "rspec", directorySuffix);
@@ -86,7 +86,7 @@ namespace SonarAnalyzer.SourceGenerators
 
                 using SonarAnalyzer.Common;
 
-                namespace {{namespacePrefix}}.Core.Rspec;
+                namespace {{namespacePrefix}}.Rspec;
 
                 internal static class RuleCatalog
                 {

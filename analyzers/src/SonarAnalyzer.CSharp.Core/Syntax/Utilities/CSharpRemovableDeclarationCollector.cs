@@ -39,7 +39,7 @@ public class CSharpRemovableDeclarationCollector : RemovableDeclarationCollector
                 .Where(tuple => IsRemovable(tuple.Symbol, maxAccessibility)));
     }
 
-    internal override BaseTypeDeclarationSyntax GetOwnerOfSubnodes(BaseTypeDeclarationSyntax node) =>
+    public override BaseTypeDeclarationSyntax GetOwnerOfSubnodes(BaseTypeDeclarationSyntax node) =>
         node;
 
     public static bool IsNodeContainerTypeDeclaration(SyntaxNode node) =>

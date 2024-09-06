@@ -47,6 +47,6 @@ public class VisualBasicRemovableDeclarationCollector : RemovableDeclarationColl
                 .Where(x => IsRemovable(x.Symbol, maxAccessibility)));
     }
 
-    internal override TypeBlockSyntax GetOwnerOfSubnodes(TypeStatementSyntax node) =>
+    public override TypeBlockSyntax GetOwnerOfSubnodes(TypeStatementSyntax node) =>
         node.Parent as TypeBlockSyntax;
 }

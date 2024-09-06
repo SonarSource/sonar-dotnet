@@ -6,7 +6,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <!-- .NET Standard target does not copy referenced DLLs into bin folder, so we need to enable it explicitly. -->
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <DefineConstants>TRACE;CS</DefineConstants>
     <!-- Avoid CS0436. see also https://github.com/dotnet/roslyn-analyzers/blob/main/src/PerformanceSensitiveAnalyzers/PerformanceSensitiveAnalyzers.md -->
     <GeneratePerformanceSensitiveAttribute>false</GeneratePerformanceSensitiveAttribute>
     <PackageTags>Roslyn;Analyzer;Analyzers;Refactoring;CodeAnalysis;CleanCode;Clean Code;Sonar;SonarAnalyzer;Sonar Anlyzer;Dotnet;CSharp;CodeQuality;CodeReview;StaticCodeAnalysis;SonarQube;SonarCloud;SonarLint</PackageTags>
@@ -26,7 +25,6 @@
     <!-- We need to update NuGet and JAR packaging after changing references -->
     <ProjectReference Include="..\SonarAnalyzer.Core\SonarAnalyzer.Core.csproj" />
     <ProjectReference Include="..\SonarAnalyzer.CSharp.Core\SonarAnalyzer.CSharp.Core.csproj" />
-    <ProjectReference Include="..\SonarAnalyzer.SourceGenerators\SonarAnalyzer.SourceGenerators.csproj" SetTargetFramework="TargetFramework=netstandard2.0" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,7 +41,6 @@
     <Using Include="SonarAnalyzer.CSharp.Core.Facade" />
     <Using Include="SonarAnalyzer.CSharp.Core.Syntax.Extensions" />
     <Using Include="SonarAnalyzer.CSharp.Core.Syntax.Utilities" />
-    <Using Include="SonarAnalyzer.CSharp.Core.Walkers" />
     <Using Include="SonarAnalyzer.CSharp.Core.Wrappers" />
     <Using Include="SonarAnalyzer.Extensions" />
     <Using Include="SonarAnalyzer.Helpers" />
@@ -66,6 +63,5 @@
     </ItemGroup>
     <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)" />
   </Target>
-  <Import Project="..\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems" Label="Shared" />
 
 </Project>
