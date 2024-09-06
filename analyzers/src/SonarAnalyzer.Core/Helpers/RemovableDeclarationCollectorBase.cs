@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Helpers
         private IEnumerable<NodeAndModel<TOwnerOfSubnodes>> typeDeclarations;
 
         public abstract IEnumerable<NodeSymbolAndModel> GetRemovableFieldLikeDeclarations(ISet<TSyntaxKind> kinds, Accessibility maxAccessibility);
-        internal abstract TOwnerOfSubnodes GetOwnerOfSubnodes(TDeclaration node);
+        public abstract TOwnerOfSubnodes GetOwnerOfSubnodes(TDeclaration node);
         protected abstract IEnumerable<SyntaxNode> SelectMatchingDeclarations(NodeAndModel<TOwnerOfSubnodes> container, ISet<TSyntaxKind> kinds);
 
         public IEnumerable<NodeAndModel<TOwnerOfSubnodes>> TypeDeclarations
