@@ -26,8 +26,6 @@
   <ItemGroup>
     <!-- We need to update NuGet packaging after changing references -->
     <ProjectReference Include="..\SonarAnalyzer.Core\SonarAnalyzer.Core.csproj" />
-    <!-- NET-119 CSharp reference should be removed -->
-    <ProjectReference Include="..\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj" />
     <ProjectReference Include="..\SonarAnalyzer.CSharp.Core\SonarAnalyzer.CSharp.Core.csproj" />
   </ItemGroup>
 
