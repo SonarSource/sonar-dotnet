@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 // Repro for https://github.com/SonarSource/sonar-dotnet/issues/6779
 class Repro_FN_6779
@@ -22,4 +23,17 @@ class Repro_FN_6779
 //                       ^^^^^^^ Secondary
         }
     }
+}
+
+
+// Repro for https://github.com/SonarSource/sonar-dotnet/issues/9661
+class Test
+{
+    static ValueTask<string> MethodAsync(ValueTask<string> task) =>
+        task.IsCompletedSuccessfully
+            ? ValueTask.FromResult<string>(task.Result) // Noncompliant, FP
+            : AnotherMethodAsync(task);
+
+    static async ValueTask<string> AnotherMethodAsync(ValueTask<string> task) =>
+        await task;
 }
