@@ -41,7 +41,8 @@
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
     <documentationDirectory>${project.basedir}/src/main/resources</documentationDirectory>
-    <analyzers.directory>${project.build.directory}/../../analyzers</analyzers.directory>
+    <rspec.directory>${project.build.directory}/../../analyzers/rspec</rspec.directory>
+    <packaging.directory>${project.build.directory}/../../analyzers/packaging</packaging.directory>
     <maven.deploy.skip>false</maven.deploy.skip>
   </properties>
 
@@ -221,7 +222,7 @@
               <target>
                 <!-- ITs requires the SonarAnalyzer-VERSION.zip to be present so don't remove these lines -->
                 <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp">
-                  <fileset dir="${analyzers.directory}/packaging/binaries/SonarAnalyzer.CSharp/">
+                  <fileset dir="${packaging.directory}/binaries/SonarAnalyzer.CSharp/">
                     <include name="Google.Protobuf.dll"/>
                     <include name="SonarAnalyzer.CFG.dll"/>
                     <include name="SonarAnalyzer.Core.dll"/>
@@ -236,16 +237,16 @@
                 <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
                      basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp"/>
                 <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
-                  <fileset dir="${analyzers.directory}/rspec/cs">
+                  <fileset dir="${rspec.directory}/cs">
                     <include name="*.json"/>
                     <include name="*.html"/>
                   </fileset>
                 </copy>
                 <exec executable="dotnet"
                       failonerror="true"
-                      dir="${analyzers.directory}/packaging/binaries/RuleDescriptorGenerator">
+                      dir="${packaging.directory}/binaries/RuleDescriptorGenerator">
                   <arg value="RuleDescriptorGenerator.dll"/>
-                  <arg value="${analyzers.directory}/packaging/binaries/SonarAnalyzer.CSharp/SonarAnalyzer.CSharp.dll"/>
+                  <arg value="${packaging.directory}/binaries/SonarAnalyzer.CSharp/SonarAnalyzer.CSharp.dll"/>
                   <arg value="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp/Rules.json"/>
                 </exec>
                 <copy todir="${sonarAnalyzer.workDirectory}/static">
