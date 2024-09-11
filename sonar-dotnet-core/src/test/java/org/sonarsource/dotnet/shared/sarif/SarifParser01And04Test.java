@@ -27,7 +27,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -55,7 +54,7 @@ public class SarifParser01And04Test {
   public ExpectedException thrown = ExpectedException.none();
 
   private JsonObject getRoot(String fileName) throws IOException {
-    return new JsonParser().parse(new String(Files.readAllBytes(Paths.get("src/test/resources/SarifParserTest/" + fileName)), StandardCharsets.UTF_8)).getAsJsonObject();
+    return JsonParser.parseString(new String(Files.readAllBytes(Paths.get("src/test/resources/SarifParserTest/" + fileName)), StandardCharsets.UTF_8)).getAsJsonObject();
   }
 
   @Test
@@ -67,7 +66,7 @@ public class SarifParser01And04Test {
     new SarifParser01And04(null, getRoot("v0_4_empty_no_runLogs.json"), String::toString).accept(callback);
     new SarifParser01And04(null, getRoot("v0_4_empty_results.json"), String::toString).accept(callback);
     new SarifParser01And04(null, getRoot("v0_4_empty_runLogs.json"), String::toString).accept(callback);
-    verify(callback, never()).onIssue(Mockito.anyString(), Mockito.isNull(), Mockito.any(Location.class), Mockito.anyCollection());
+    verify(callback, never()).onIssue(Mockito.anyString(), Mockito.isNull(), Mockito.any(Location.class), Mockito.anyCollection(), Mockito.eq(false));
   }
 
   // VS 2015 Update 1
@@ -78,10 +77,10 @@ public class SarifParser01And04Test {
     new SarifParser01And04(null, getRoot("v0_1.json"), String::toString).accept(callback);
 
     Location location = new Location("C:\\Foo.cs", "Remove this unused method parameter \"args\".", 43, 55, 44, 57);
-    verify(callback).onIssue("S1172", null, location, emptyList());
+    verify(callback).onIssue("S1172", null, location, emptyList(), false);
     location = new Location("C:\\Bar.cs", "There is just a full message.", 2, 2, 4, 4);
-    verify(callback).onIssue("CA1000", null, location, emptyList());
-    verify(callback, times(2)).onIssue(Mockito.anyString(), Mockito.isNull(), Mockito.any(Location.class), Mockito.anyCollection());
+    verify(callback).onIssue("CA1000", null, location, emptyList(), false);
+    verify(callback, times(2)).onIssue(Mockito.anyString(), Mockito.isNull(), Mockito.any(Location.class), Mockito.anyCollection(), Mockito.eq(false));
 
     verify(callback).onProjectIssue("AssemblyLevelRule", null, null, "This is an assembly level Roslyn issue with no location.");
     verify(callback).onProjectIssue("NoAnalysisTargetsLocation", null, null, "No analysis targets, report at assembly level.");
@@ -97,8 +96,8 @@ public class SarifParser01And04Test {
     InOrder inOrder = inOrder(callback);
 
     Location location = new Location("C:\\Foo`1.cs", "Remove this commented out code.", 58, 12, 58, 50);
-    inOrder.verify(callback).onIssue("S125", null, location, emptyList());
-    verify(callback, only()).onIssue(Mockito.anyString(), Mockito.isNull(), Mockito.any(Location.class), Mockito.anyCollection());
+    inOrder.verify(callback).onIssue("S125", null, location, emptyList(), false);
+    verify(callback, only()).onIssue(Mockito.anyString(), Mockito.isNull(), Mockito.any(Location.class), Mockito.anyCollection(), Mockito.eq(false));
 
     verify(callback, never()).onProjectIssue(Mockito.anyString(), Mockito.isNull(), Mockito.any(InputProject.class), Mockito.anyString());
   }
@@ -112,7 +111,7 @@ public class SarifParser01And04Test {
     inOrder.verify(callback).onFileIssue(eq("S104"), Mockito.isNull(), Mockito.anyString(), eq(emptyList()), eq("Dummy"));
     inOrder.verify(callback).onFileIssue(eq("S105"), Mockito.isNull(), Mockito.anyString(), eq(emptyList()), eq("Dummy"));
     Location location = new Location("C:\\Program.cs", "Dummy", 1, 0, 1, 1);
-    inOrder.verify(callback).onIssue("S105", null, location, emptyList());
+    inOrder.verify(callback).onIssue("S105", null, location, emptyList(), false);
 
     inOrder.verify(callback).onFileIssue(eq("S106"), Mockito.isNull(), Mockito.anyString(), eq(emptyList()), eq("Dummy"));
 
@@ -130,7 +129,7 @@ public class SarifParser01And04Test {
     Collection<Location> secondaryLocations = new ArrayList<>();
     secondaryLocations.add(new Location("c:\\secondary1.cs", "+1", 56, 12, 56, 14));
     secondaryLocations.add(new Location("c:\\secondary2.cs", "+2 (incl 1 for nesting)", 65, 16, 65, 18));
-    inOrder.verify(callback).onIssue("S3776", null, primaryLocation, secondaryLocations);
+    inOrder.verify(callback).onIssue("S3776", null, primaryLocation, secondaryLocations, false);
     verifyNoMoreInteractions(callback);
   }
 
@@ -145,7 +144,7 @@ public class SarifParser01And04Test {
     Collection<Location> secondaryLocations = new ArrayList<>();
     secondaryLocations.add(new Location("c:\\secondary1.cs", null, 56, 12, 56, 14));
     secondaryLocations.add(new Location("c:\\secondary2.cs", null, 65, 16, 65, 18));
-    inOrder.verify(callback).onIssue("S3776", null, primaryLocation, secondaryLocations);
+    inOrder.verify(callback).onIssue("S3776", null, primaryLocation, secondaryLocations, false);
     verifyNoMoreInteractions(callback);
   }
 }

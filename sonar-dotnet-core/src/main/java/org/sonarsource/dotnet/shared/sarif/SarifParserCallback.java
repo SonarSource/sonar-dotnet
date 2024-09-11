@@ -29,7 +29,7 @@ public interface SarifParserCallback {
 
   void onFileIssue(String ruleId, @Nullable String level, String absolutePath, Collection<Location> secondaryLocations, String message);
 
-  void onIssue(String ruleId, @Nullable String level, Location primaryLocation, Collection<Location> secondaryLocations);
+  void onIssue(String ruleId, @Nullable String level, Location primaryLocation, Collection<Location> secondaryLocations, boolean withExecutionFlow);
 
   void onRule(String ruleId, @Nullable String shortDescription, @Nullable String fullDescription, String defaultLevel, @Nullable String category);
 }
