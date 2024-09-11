@@ -105,7 +105,7 @@ class SarifParser01And04 implements SarifParser {
       }
     }
 
-    callback.onIssue(ruleId, null, primaryLocation, secondaryLocations);
+    callback.onIssue(ruleId, null, primaryLocation, secondaryLocations, false);
   }
 
   @CheckForNull

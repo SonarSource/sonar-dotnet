@@ -41,6 +41,7 @@ import org.slf4j.LoggerFactory;
 class SarifParser10 implements SarifParser {
   private static final Logger LOG = LoggerFactory.getLogger(SarifParser10.class);
   private static final String PROPERTIES_PROP = "properties";
+  private static final String SECONDARY_LOCATION_AS_EXECUTION_FLOW = "secondaryLocationAsExecutionFlow";
   private static final String LEVEL_PROP = "level";
   private final InputProject inputProject;
   private final JsonObject root;
@@ -106,7 +107,7 @@ class SarifParser10 implements SarifParser {
 
     String ruleId = resultObj.get("ruleId").getAsString();
     String message = resultObj.has("message") ? resultObj.get("message").getAsString() : null;
-    if (message == null){
+    if (message == null) {
       LOG.warn("Issue raised without a message for rule {}. Content: {}.", ruleId, resultObj);
       return;
     }
@@ -130,6 +131,7 @@ class SarifParser10 implements SarifParser {
     }
 
     JsonArray relatedLocations = new JsonArray();
+    boolean relatedLocationAsExecutionFlow = false;
     if (resultObj.has("relatedLocations")) {
       relatedLocations = resultObj.getAsJsonArray("relatedLocations");
     }
@@ -139,15 +141,16 @@ class SarifParser10 implements SarifParser {
       if (properties.has("customProperties")) {
         messageMap = new Gson().fromJson(properties.get("customProperties"), new TypeToken<Map<String, String>>() {
         }.getType());
+        relatedLocationAsExecutionFlow = !relatedLocations.isEmpty() && Boolean.parseBoolean(messageMap.remove(SECONDARY_LOCATION_AS_EXECUTION_FLOW));
       }
     }
 
     JsonObject firstIssueLocation = locations.get(0).getAsJsonObject().getAsJsonObject("resultFile");
-    return handleResultFileElement(ruleId, level, message, firstIssueLocation, relatedLocations, messageMap, callback);
+    return handleResultFileElement(ruleId, level, message, firstIssueLocation, relatedLocations, messageMap, relatedLocationAsExecutionFlow, callback);
   }
 
   private boolean handleResultFileElement(String ruleId, @Nullable String level, String message, JsonObject resultFileObj, JsonArray relatedLocations,
-    Map<String, String> messageMap, SarifParserCallback callback) {
+    Map<String, String> messageMap, boolean relatedLocationAsExecutionFlow, SarifParserCallback callback) {
     if (!resultFileObj.has("uri") || !resultFileObj.has("region")) {
       return false;
     }
@@ -170,9 +173,12 @@ class SarifParser10 implements SarifParser {
     if (primaryLocation == null) {
       String uri = resultFileObj.get("uri").getAsString();
       String path = toRealPath.apply(uriToPath(uri));
+      if (relatedLocationAsExecutionFlow) {
+        LOG.warn("Unexpected file issue with an execution flow for rule {}. File: {}", ruleId, path);
+      }
       callback.onFileIssue(ruleId, level, path, secondaryLocations, message);
     } else {
-      callback.onIssue(ruleId, level, primaryLocation, secondaryLocations);
+      callback.onIssue(ruleId, level, primaryLocation, secondaryLocations, relatedLocationAsExecutionFlow);
     }
 
     return true;

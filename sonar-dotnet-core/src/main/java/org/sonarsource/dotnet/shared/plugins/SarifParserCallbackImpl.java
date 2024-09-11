@@ -26,13 +26,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import javax.annotation.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.scanner.fs.InputProject;
 import org.sonar.api.batch.rule.Severity;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.issue.NewExternalIssue;
@@ -40,8 +42,7 @@ import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.rules.RuleType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.sonar.api.scanner.fs.InputProject;
 import org.sonarsource.dotnet.shared.sarif.Location;
 import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
 
@@ -53,7 +54,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
   private static final Logger LOG = LoggerFactory.getLogger(SarifParserCallbackImpl.class);
 
   private static final String EXTERNAL_ENGINE_ID = "roslyn";
-  private static final List<String> OWN_REPOSITORIES =  Arrays.asList("csharpsquid", "vbnet");
+  private static final List<String> OWN_REPOSITORIES = Arrays.asList("csharpsquid", "vbnet");
   private final SensorContext context;
   private final Map<String, String> repositoryKeyByRoslynRuleKey;
   private final Set<Issue> savedIssues = new HashSet<>();
@@ -148,7 +149,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
   }
 
   @Override
-  public void onIssue(String ruleId, @Nullable String level, Location primaryLocation, Collection<Location> secondaryLocations) {
+  public void onIssue(String ruleId, @Nullable String level, Location primaryLocation, Collection<Location> secondaryLocations, boolean withExecutionFlow) {
     // De-duplicate issues
     Issue issue = new Issue(ruleId, primaryLocation);
     if (!savedIssues.add(issue)) {
@@ -164,7 +165,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
 
     String repositoryKey = repositoryKeyByRoslynRuleKey.get(ruleId);
     if (repositoryKey != null) {
-      createIssue(inputFile, ruleId, primaryLocation, secondaryLocations, repositoryKey);
+      createIssue(inputFile, ruleId, primaryLocation, secondaryLocations, repositoryKey, withExecutionFlow);
     } else if (shouldCreateExternalIssue(ruleId)) {
       createExternalIssue(inputFile, ruleId, level, primaryLocation, secondaryLocations);
     }
@@ -173,7 +174,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
   private void createExternalIssue(InputFile inputFile, String ruleId, @Nullable String level, Location primaryLocation, Collection<Location> secondaryLocations) {
     logIssue("external", ruleId, primaryLocation.getAbsolutePath());
     NewExternalIssue newIssue = newExternalIssue(ruleId);
-    newIssue.at(createPrimaryLocation(inputFile, primaryLocation, newIssue::newLocation, true));
+    newIssue.at(createIssueLocation(inputFile, primaryLocation, newIssue::newLocation, true));
     setExternalIssueSeverityAndType(ruleId, level, newIssue);
     populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation, true);
     newIssue.save();
@@ -200,21 +201,30 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     return newIssue;
   }
 
-  private void createIssue(InputFile inputFile, String ruleId, Location primaryLocation, Collection<Location> secondaryLocations, String repositoryKey) {
-    boolean isSonarSourceRepository  = isSonarSourceRepository(repositoryKey);
+  private void createIssue(InputFile inputFile, String ruleId, Location primaryLocation, Collection<Location> secondaryLocations, String repositoryKey, boolean withExecutionFlow) {
+    boolean isSonarSourceRepository = isSonarSourceRepository(repositoryKey);
     logIssue("normal", ruleId, primaryLocation.getAbsolutePath());
     NewIssue newIssue = context.newIssue();
     newIssue
       .forRule(RuleKey.of(repositoryKey, ruleId))
-      .at(createPrimaryLocation(inputFile, primaryLocation, newIssue::newLocation, !isSonarSourceRepository ));
-    populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation, !isSonarSourceRepository );
+      .at(createIssueLocation(inputFile, primaryLocation, newIssue::newLocation, !isSonarSourceRepository));
+    if (withExecutionFlow) {
+      populateExecutionFlow(secondaryLocations, newIssue, !isSonarSourceRepository);
+    } else {
+      populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation, !isSonarSourceRepository);
+    }
     newIssue.save();
   }
 
-  private static NewIssueLocation createPrimaryLocation(InputFile inputFile, Location primaryLocation, Supplier<NewIssueLocation> newIssueLocationSupplier,
-    boolean isLocationResilient) {
-
-    return createIssueLocation(inputFile, primaryLocation, newIssueLocationSupplier, isLocationResilient);
+  private void populateExecutionFlow(Collection<Location> locations, NewIssue newIssue, boolean isLocationResilient) {
+    List<NewIssueLocation> newIssueLocations = locations.stream()
+      .map(x -> context.fileSystem().inputFile(context.fileSystem().predicates().hasAbsolutePath(x.getAbsolutePath())))
+      .filter(Objects::nonNull)
+      .map(x -> createIssueLocation(x, locations.iterator().next(), newIssue::newLocation, isLocationResilient))
+      .toList();
+    if (!newIssueLocations.isEmpty()) {
+      newIssue.addFlow(newIssueLocations, NewIssue.FlowType.EXECUTION, "Execution Flow");
+    }
   }
 
   private void populateSecondaryLocations(Collection<Location> secondaryLocations, Supplier<NewIssueLocation> newIssueLocationSupplier,
@@ -317,26 +327,27 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     }
   }
 
-  private static boolean isSonarSourceRepository(String repositoryKey){
+  private static boolean isSonarSourceRepository(String repositoryKey) {
     return OWN_REPOSITORIES.contains(repositoryKey);
   }
 
-  private static boolean isLocationInsideRazorFile(Location location){
+  private static boolean isLocationInsideRazorFile(Location location) {
     String absolutePath = location.getAbsolutePath();
 
     return absolutePath.endsWith(".razor")
       || absolutePath.endsWith(".cshtml");
   }
 
-  private void logIssue(String issueType, String ruleId, String location){
+  private void logIssue(String issueType, String ruleId, String location) {
     LOG.debug("Adding {} issue {}: {}", issueType, ruleId, location);
   }
 
-  private void logMissingInputFile(String ruleId, String filePath){
+  private void logMissingInputFile(String ruleId, String filePath) {
     LOG.debug("Skipping issue {}, input file not found or excluded: {}", ruleId, filePath);
   }
 
-  private record ProjectIssue(String ruleId, String message) { }
+  private record ProjectIssue(String ruleId, String message) {
+  }
 
   private record Issue(String ruleId, String absolutePath, int startLine, int startColumn, int endLine, int endColumn) {
     Issue(String ruleId, String path) {

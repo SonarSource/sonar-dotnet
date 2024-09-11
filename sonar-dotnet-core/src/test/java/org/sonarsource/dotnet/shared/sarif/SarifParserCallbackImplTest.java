@@ -36,6 +36,7 @@ import org.sonar.api.batch.sensor.issue.ExternalIssue;
 import org.sonar.api.batch.sensor.issue.Issue;
 import org.sonar.api.batch.sensor.issue.Issue.Flow;
 import org.sonar.api.batch.sensor.issue.IssueLocation;
+import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.rule.AdHocRule;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.rules.RuleType;
@@ -178,7 +179,7 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_ignore_issue_with_unknown_file() {
-    callback.onIssue("rule1", "warning", createLocation("file-unknown", 2, 3), Collections.emptyList());
+    callback.onIssue("rule1", "warning", createLocation("file-unknown", 2, 3), Collections.emptyList(), false);
     assertThat(ctx.allIssues()).isEmpty();
     assertThat(logTester.logs(Level.DEBUG))
       .containsOnly(String.format("Skipping issue rule1, input file not found or excluded: " + createAbsolutePath("file-unknown")));
@@ -200,8 +201,8 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_add_issues() {
-    callback.onIssue("rule1", "warning", createLocation("file1", 2, 3), Collections.emptyList());
-    callback.onIssue("rule2", "warning", createLocation("file1", 2, 3), Collections.emptyList());
+    callback.onIssue("rule1", "warning", createLocation("file1", 2, 3), Collections.emptyList(), false);
+    callback.onIssue("rule2", "warning", createLocation("file1", 2, 3), Collections.emptyList(), false);
 
     assertThat(ctx.allIssues()).extracting("ruleKey").extracting("rule")
       .containsOnly("rule1", "rule2");
@@ -212,16 +213,54 @@ public class SarifParserCallbackImplTest {
   }
 
   @Test
+  public void should_add_execution_flow() {
+    callback.onIssue("rule1", "warning", createLocation("file1", 2, 3), Collections.singletonList(createLocation("file1", 4, 5)), true);
+
+    assertThat(ctx.allIssues())
+      .extracting(Issue::flows)
+      .hasSize(1)
+      .extracting(x -> x.get(0))
+      .extracting(
+        Flow::type,
+        Flow::description,
+        x -> x.locations().get(0).inputComponent().key(),
+        x -> x.locations().get(0).textRange().start().line(),
+        x -> x.locations().get(0).textRange().start().lineOffset(),
+        x -> x.locations().get(0).textRange().end().line(),
+        x -> x.locations().get(0).textRange().end().lineOffset())
+      .containsOnly(tuple(NewIssue.FlowType.EXECUTION, "Execution Flow", "module1:file1", 4, 5, 4, 6));
+  }
+
+  @Test
+  public void should_not_add_execution_flow_with_no_secondary_locations() {
+    callback.onIssue("rule1", "warning", createLocation("file1", 2, 3), Collections.emptyList(), true);
+
+    assertThat(ctx.allIssues())
+      .extracting(Issue::flows)
+      .allSatisfy(flows -> assertThat(flows).isEmpty());
+  }
+
+  @Test
+  public void should_not_add_execution_flow_with_secondary_locations_invalid_file() {
+    callback.onIssue("rule1", "warning", createLocation("file1", 2, 3), Collections.singletonList(createLocation("does-not-exit-file", 4, 5)), true);
+
+    assertThat(ctx.allIssues())
+      .hasSize(1)
+      .extracting(Issue::flows)
+      .allSatisfy(flows -> assertThat(flows).isEmpty());
+  }
+
+  @Test
   public void should_create_external_issue_for_unknown_rule_key() {
-    callback.onIssue("rule45", "warning", createLocation("file1", 2, 3), Collections.emptyList());
+    callback.onIssue("rule45", "warning", createLocation("file1", 2, 3), Collections.emptyList(), false);
 
     assertThat(ctx.allIssues()).isEmpty();
     assertThat(ctx.allExternalIssues()).isEmpty();
 
     callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
 
-    callback.onIssue("rule45", "warning", createLocation("file1", 2, 3), Collections.emptyList());
-    callback.onIssue("S1234", "warning", createLocation("file1", 2, 3), Collections.emptyList()); // sonar rule, ignored
+    callback.onIssue("rule45", "warning", createLocation("file1", 2, 3), Collections.emptyList(), false);
+    callback.onIssue("S1234", "warning", createLocation("file1", 2, 3), Collections.emptyList(), false); // sonar rule, ignored
 
     assertThat(ctx.allIssues()).isEmpty();
     assertThat(ctx.allExternalIssues())
@@ -237,7 +276,7 @@ public class SarifParserCallbackImplTest {
 
     // We try to report an issue that contains an invalid startColumn (bigger than the line length) but with a valid start line
     // So we expect the issue to be reported on the start line.
-    callback.onIssue("rule45", "warning", createLocation("file1", 2, 20, 4, 2), Collections.emptyList());
+    callback.onIssue("rule45", "warning", createLocation("file1", 2, 20, 4, 2), Collections.emptyList(), false);
 
     assertThat(ctx.allIssues()).isEmpty();
     assertThat(ctx.allExternalIssues())
@@ -256,7 +295,7 @@ public class SarifParserCallbackImplTest {
 
     // We try to report an issue that contains an invalid startLine (bigger than the file length)
     // So we expect the issue to be reported on the file.
-    callback.onIssue("rule45", "warning", createLocation("file1", 10, 12), Collections.emptyList());
+    callback.onIssue("rule45", "warning", createLocation("file1", 10, 12), Collections.emptyList(), false);
 
     assertThat(ctx.allIssues()).isEmpty();
     assertThat(ctx.allExternalIssues())
@@ -271,7 +310,7 @@ public class SarifParserCallbackImplTest {
 
     // We try to report an issue that contains an invalid startLine (bigger than the file length)
     // So we expect the issue to be reported on the file.
-    callback.onIssue("rule45", "warning", createLocation("file1", 10, 53, 80, 42), Collections.emptyList());
+    callback.onIssue("rule45", "warning", createLocation("file1", 10, 53, 80, 42), Collections.emptyList(), false);
 
     assertThat(ctx.allIssues()).isEmpty();
     assertThat(ctx.allExternalIssues())
@@ -282,7 +321,7 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_add_issue_with_secondary_location() {
-    callback.onIssue("rule1", "warning", createLocation("file1", 2, 3), Collections.singletonList(createLocation("file1", 4, 5)));
+    callback.onIssue("rule1", "warning", createLocation("file1", 2, 3), Collections.singletonList(createLocation("file1", 4, 5)), false);
 
     assertThat(ctx.allIssues()).hasSize(1);
 
@@ -298,6 +337,16 @@ public class SarifParserCallbackImplTest {
     assertThat(textRange.start().line()).isEqualTo(4);
     assertThat(textRange.end().lineOffset()).isEqualTo(6);
     assertThat(textRange.end().line()).isEqualTo(4);
+  }
+
+  @Test
+  public void should_add_issue_with_secondary_location_with_invalid_file() {
+    callback.onIssue("rule1", "warning", createLocation("file1", 2, 3), Collections.singletonList(createLocation("invalid-file", 4, 5)), false);
+
+    assertThat(ctx.allIssues())
+      .hasSize(1)
+      .extracting(Issue::flows)
+      .allSatisfy(flows -> assertThat(flows).isEmpty());
   }
 
   @Test
@@ -322,8 +371,8 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_ignore_repeated_issues() {
-    callback.onIssue("rule1", "warning", createLocation("file1", 2, 3), Collections.emptyList());
-    callback.onIssue("rule1", "warning", createLocation("file1", 2, 3), Collections.emptyList());
+    callback.onIssue("rule1", "warning", createLocation("file1", 2, 3), Collections.emptyList(), false);
+    callback.onIssue("rule1", "warning", createLocation("file1", 2, 3), Collections.emptyList(), false);
 
     assertThat(ctx.allIssues()).hasSize(1);
     assertThat(ctx.allIssues()).extracting("ruleKey").extracting("rule")
@@ -383,7 +432,7 @@ public class SarifParserCallbackImplTest {
     callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
     callback.onRule("rule45", "My rule", "Rule description", "Note", "Foo");
 
-    callback.onIssue("rule45", null, createLocation("file1", 2, 3), Collections.emptyList());
+    callback.onIssue("rule45", null, createLocation("file1", 2, 3), Collections.emptyList(), false);
 
     assertThat(ctx.allExternalIssues()).extracting(ExternalIssue::severity).containsExactly(Severity.INFO);
   }
@@ -392,7 +441,7 @@ public class SarifParserCallbackImplTest {
   public void should_fallback_on_major_severity() {
     callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
 
-    callback.onIssue("rule45", null, createLocation("file1", 2, 3), Collections.emptyList());
+    callback.onIssue("rule45", null, createLocation("file1", 2, 3), Collections.emptyList(), false);
 
     assertThat(ctx.allExternalIssues()).extracting(ExternalIssue::severity).containsExactly(Severity.MAJOR);
   }
@@ -446,7 +495,7 @@ public class SarifParserCallbackImplTest {
 
     // We try to report an issue that contains an invalid startColumn (bigger than the line length) but with a valid start line
     // So we expect the issue to be reported on the start line.
-    callback.onIssue("rule42", "warning", createLocation(fileName, 2, 99, 2, 101), Collections.emptyList());
+    callback.onIssue("rule42", "warning", createLocation(fileName, 2, 99, 2, 101), Collections.emptyList(), false);
 
     assertThat(ctx.allIssues()).hasSize(1)
       .extracting(Issue::ruleKey,
@@ -460,7 +509,7 @@ public class SarifParserCallbackImplTest {
     List<String> logs = logTester.logs();
     assertThat(logs.get(1))
       .startsWith("Precise issue location cannot be found! Location:")
-      .endsWith(fileName +", message=msg, startLine=2, startColumn=99, endLine=2, endColumn=101]");
+      .endsWith(fileName + ", message=msg, startLine=2, startColumn=99, endLine=2, endColumn=101]");
   }
 
   private Location createLocation(String filePath, int line, int column) {
