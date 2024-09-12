@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp.Styling;
+namespace SonarAnalyzer.CSharp.Styling.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class PropertyOrdering : StylingAnalyzer
@@ -43,7 +43,7 @@ public sealed class PropertyOrdering : StylingAnalyzer
 
     private void ValidateMembers(SonarSyntaxNodeReportingContext context, OrderDescriptor order, IEnumerable<PropertyDeclarationSyntax> members)
     {
-        bool hasInstance = false;
+        var hasInstance = false;
         foreach (var member in members)
         {
             if (member.Modifiers.Any(SyntaxKind.StaticKeyword))

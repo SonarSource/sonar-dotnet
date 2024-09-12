@@ -24,9 +24,9 @@ namespace SonarAnalyzer.CSharp.Styling.Common;
 
 public abstract class StylingAnalyzer : SonarDiagnosticAnalyzer
 {
-    protected DiagnosticDescriptor Rule { get; }
-
     public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+    protected DiagnosticDescriptor Rule { get; }
 
     protected StylingAnalyzer(string id, string messageFormat, SourceScope scope = SourceScope.All) =>
        Rule = DescriptorFactory.Create(id, messageFormat, scope);

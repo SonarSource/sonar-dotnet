@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp.Styling;
+namespace SonarAnalyzer.CSharp.Styling.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class TypeMemberOrdering : StylingAnalyzer
@@ -27,6 +27,7 @@ public sealed class TypeMemberOrdering : StylingAnalyzer
 
     private static readonly MemberKind Constant = new(1, "Constants");
     private static readonly MemberKind Abstract = new(10, "Abstract Members");
+
     private static readonly Dictionary<SyntaxKind, MemberKind> MemberKinds = new()
         {
             // Order 1: Constants are FieldDeclaration and are handled separately in the code
