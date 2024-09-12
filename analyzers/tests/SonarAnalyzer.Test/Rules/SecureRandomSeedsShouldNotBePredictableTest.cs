@@ -28,6 +28,7 @@ public class SecureRandomSeedsShouldNotBePredictableTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder()
         .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))
+        .WithBasePath(@"SymbolicExecution\Roslyn")
         .WithOnlyDiagnostics(ChecksCS.SecureRandomSeedsShouldNotBePredictable.S4347)
         .AddReferences(NuGetMetadataReference.BouncyCastleCryptography());
 

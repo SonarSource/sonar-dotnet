@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 using SonarAnalyzer.TestFramework.Verification;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
@@ -189,11 +188,14 @@ public class VerifierBuilderTest
     [TestMethod]
     public void WithOnlyDiagnostics_Overwrites_IsImmutable()
     {
-        var one = Empty.WithOnlyDiagnostics(NullPointerDereference.S2259);
-        var two = one.WithOnlyDiagnostics(PublicMethodArgumentsShouldBeCheckedForNull.S3900, ConditionEvaluatesToConstant.S2583);
+        var s1111 = AnalysisScaffolding.CreateDescriptor("S1111");
+        var s2222 = AnalysisScaffolding.CreateDescriptor("S2222");
+        var s2223 = AnalysisScaffolding.CreateDescriptor("S2223");
+        var one = Empty.WithOnlyDiagnostics(s1111);
+        var two = one.WithOnlyDiagnostics(s2222, s2223);
         Empty.OnlyDiagnostics.Should().BeEmpty();
-        one.OnlyDiagnostics.Should().BeEquivalentTo(new[] { NullPointerDereference.S2259 });
-        two.OnlyDiagnostics.Should().BeEquivalentTo(new[] { PublicMethodArgumentsShouldBeCheckedForNull.S3900, ConditionEvaluatesToConstant.S2583 });
+        one.OnlyDiagnostics.Should().BeEquivalentTo(new[] { s1111 });
+        two.OnlyDiagnostics.Should().BeEquivalentTo(new[] { s2222, s2223 });
     }
 
     [TestMethod]

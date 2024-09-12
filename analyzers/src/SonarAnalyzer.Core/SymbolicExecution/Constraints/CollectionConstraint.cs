@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Constraints;
 
-internal sealed class CollectionConstraint : SymbolicConstraint
+public sealed class CollectionConstraint : SymbolicConstraint
 {
     public static readonly CollectionConstraint Empty = new(ConstraintKind.CollectionEmpty);
     public static readonly CollectionConstraint NotEmpty = new(ConstraintKind.CollectionNotEmpty);

@@ -107,9 +107,9 @@ public class CollectionConstraintTests
             {
                 List<int> items;
                 int Count => items.Count;
-            
+
                 void Remove(int i) => items.Remove(i);
-            
+
                 void Foo(NotACollection notACollection)
                 {
                     if (notACollection.Count > 0)

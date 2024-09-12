@@ -24,7 +24,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
 public abstract class EmptyNullableValueAccessBase : SymbolicRuleCheck
 {
-    internal const string DiagnosticId = "S3655";
+    public const string DiagnosticId = "S3655";
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {

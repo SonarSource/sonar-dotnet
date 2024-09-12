@@ -19,7 +19,6 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using SonarAnalyzer.Test.Helpers;
 
 namespace SonarAnalyzer.Test.SymbolicExecution.Roslyn;
 

@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.Enterprise.Core.Rules;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 using SonarAnalyzer.SymbolicExecution.Roslyn.VisualBasic;

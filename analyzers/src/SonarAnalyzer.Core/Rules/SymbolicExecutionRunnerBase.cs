@@ -22,7 +22,7 @@ using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
-namespace SonarAnalyzer.Rules;
+namespace SonarAnalyzer.Enterprise.Core.Rules;
 
 public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
 {
@@ -31,13 +31,13 @@ public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
     protected abstract void AnalyzeSonar(SonarSyntaxNodeReportingContext context, ISymbol symbol);
     protected abstract SyntaxClassifierBase SyntaxClassifier { get; }
 
-    protected IAnalyzerConfiguration Configuration { get; }
-
-    private protected /* for testing */ SymbolicExecutionRunnerBase(IAnalyzerConfiguration configuration) =>
-        Configuration = configuration;
-
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => AllRules.Keys.ToImmutableArray();
+
+    protected IAnalyzerConfiguration Configuration { get; }
     protected override bool EnableConcurrentExecution => false;
+
+    protected SymbolicExecutionRunnerBase(IAnalyzerConfiguration configuration) =>
+        Configuration = configuration;
 
     protected static RuleFactory CreateFactory<TRuleCheck>() where TRuleCheck : SymbolicRuleCheck, new() =>
         new RuleFactory<TRuleCheck>();

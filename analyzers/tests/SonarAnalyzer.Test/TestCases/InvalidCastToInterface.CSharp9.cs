@@ -2,18 +2,30 @@
 using System.Text;
 
 var standalone = new StandaloneClass();
-var casted = (ISomething)standalone;    // Noncompliant {{Review this cast; in this project there's no type that extends 'StandaloneClass' and implements 'ISomething'.}}
+var casted = (ISomething)standalone;    // Noncompliant, this part is not based on SE
 
 var implementing = new ImplementingClass();
 casted = (ISomething)implementing;
 
+int? nullable = 42;
+var i = (int)nullable;
+
+nullable = null;
+i = (int)nullable; // FN {{Nullable is known to be empty, this cast throws an exception.}};
+
 void TopLevelLocalFunction()
 {
     var localstandalone = new StandaloneClass();
-    var localcasted = (ISomething)localstandalone;    // Noncompliant
+    var localcasted = (ISomething)localstandalone;    // Noncompliant, this part is not based on SE
 
     var localimplementing = new ImplementingClass();
     localcasted = (ISomething)localimplementing;
+
+    int? localnullable = 42;
+    var i = (int)localnullable;
+
+    localnullable = null;
+    i = (int)localnullable; // SE part
 }
 
 public interface ISomething { }
@@ -22,13 +34,21 @@ public class ImplementingClass : ISomething { }
 
 public class Sample
 {
+    private string field;
+
     public void TargetTypedNew()
     {
         StandaloneClass standalone = new();
-        var casted = (ISomething)standalone;    // Noncompliant
+        var casted = (ISomething)standalone;    // Noncompliant, this part is not based on SE
 
         ImplementingClass implementing = new();
         casted = (ISomething)implementing;
+
+        int? nullable = 42;
+        var i = (int)nullable;
+
+        nullable = null;
+        i = (int)nullable; // FN, can't build CFG for this method
     }
 
     public void StaticLambda()
@@ -40,6 +60,12 @@ public class Sample
 
             var implementing = new ImplementingClass();
             casted = (ISomething)implementing;
+
+            int? nullable = 42;
+            var i = (int)nullable;
+
+            nullable = null;
+            i = (int)nullable; // SE part
         };
         a();
     }
@@ -50,10 +76,16 @@ public class Sample
         init
         {
             var standalone = new StandaloneClass();
-            var casted = (ISomething)standalone;     // Noncompliant
+            var casted = (ISomething)standalone;     // Noncompliant, this part is not based on SE
 
             var implementing = new ImplementingClass();
             casted = (ISomething)implementing;
+
+            int? nullable = 42;
+            var i = (int)nullable;
+
+            nullable = null;
+            i = (int)nullable;  // SE part
         }
     }
 }
@@ -70,6 +102,12 @@ public record Record
 
         var implementing = new ImplementingClass();
         casted = (ISomething)implementing;
+
+        int? nullable = 42;
+        var i = (int)nullable;
+
+        nullable = null;
+        i = (int)nullable; // SE part
     }
 
     public void MethodWithRecords()
@@ -99,5 +137,11 @@ public partial class Partial
 
         var implementingPartial = new Partial();
         casted = (ISomething)implementingPartial;
+
+        int? nullable = 42;
+        var i = (int)nullable;
+
+        nullable = null;
+        i = (int)nullable; // SE part
     }
 }

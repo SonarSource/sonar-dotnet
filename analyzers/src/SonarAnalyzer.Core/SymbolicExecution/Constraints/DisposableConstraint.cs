@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Constraints;
 
-internal sealed class DisposableConstraint : SymbolicConstraint
+public sealed class DisposableConstraint : SymbolicConstraint
 {
     public static readonly DisposableConstraint Disposed = new(ConstraintKind.DisposableDisposed);
 

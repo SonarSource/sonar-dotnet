@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Constraints;
 
-internal class ByteCollectionConstraint : SymbolicConstraint
+public class ByteCollectionConstraint : SymbolicConstraint
 {
     public static readonly ByteCollectionConstraint CryptographicallyStrong = new(ConstraintKind.CryptographicallyStrong);
     public static readonly ByteCollectionConstraint CryptographicallyWeak = new(ConstraintKind.CryptographicallyWeak);

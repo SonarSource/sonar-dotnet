@@ -24,6 +24,7 @@ using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.Test.TestFramework.SymbolicExecution;
+using SonarAnalyzer.TestFramework.Build;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Test.SymbolicExecution.Roslyn;

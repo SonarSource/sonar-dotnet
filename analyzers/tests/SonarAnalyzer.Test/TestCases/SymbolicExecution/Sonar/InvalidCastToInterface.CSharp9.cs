@@ -2,7 +2,7 @@
 using System.Text;
 
 var standalone = new StandaloneClass();
-var casted = (ISomething)standalone;    // Noncompliant, this part is not based on SE
+var casted = (ISomething)standalone;    // Syntax-part
 
 var implementing = new ImplementingClass();
 casted = (ISomething)implementing;
@@ -16,7 +16,7 @@ i = (int)nullable; // FN {{Nullable is known to be empty, this cast throws an ex
 void TopLevelLocalFunction()
 {
     var localstandalone = new StandaloneClass();
-    var localcasted = (ISomething)localstandalone;    // Noncompliant, this part is not based on SE
+    var localcasted = (ISomething)localstandalone;    // Syntax-part
 
     var localimplementing = new ImplementingClass();
     localcasted = (ISomething)localimplementing;
@@ -39,7 +39,7 @@ public class Sample
     public void TargetTypedNew()
     {
         StandaloneClass standalone = new();
-        var casted = (ISomething)standalone;    // Noncompliant, this part is not based on SE
+        var casted = (ISomething)standalone;    // Syntax-part
 
         ImplementingClass implementing = new();
         casted = (ISomething)implementing;
@@ -56,7 +56,7 @@ public class Sample
         Action a = static () =>
         {
             var standalone = new StandaloneClass();
-            var casted = (ISomething)standalone;     // Noncompliant
+            var casted = (ISomething)standalone;     // Syntax-part
 
             var implementing = new ImplementingClass();
             casted = (ISomething)implementing;
@@ -76,7 +76,7 @@ public class Sample
         init
         {
             var standalone = new StandaloneClass();
-            var casted = (ISomething)standalone;     // Noncompliant, this part is not based on SE
+            var casted = (ISomething)standalone;     // Syntax-part
 
             var implementing = new ImplementingClass();
             casted = (ISomething)implementing;
@@ -98,7 +98,7 @@ public record Record
     public void MethodWithClasses()
     {
         var standalone = new StandaloneClass();
-        var casted = (ISomething)standalone;     // Noncompliant
+        var casted = (ISomething)standalone;     // Syntax-part
 
         var implementing = new ImplementingClass();
         casted = (ISomething)implementing;
@@ -113,7 +113,7 @@ public record Record
     public void MethodWithRecords()
     {
         var standalone = new StandaloneRecord();
-        var casted = (ISomething)standalone;     // Noncompliant
+        var casted = (ISomething)standalone;     // Syntax-part
 
         var implementing = new ImplementingRecord();
         casted = (ISomething)implementing;
@@ -130,7 +130,7 @@ public partial class Partial
     public partial void Method()
     {
         var standalone = new StandaloneClass();
-        var casted = (ISomething)standalone;     // Noncompliant
+        var casted = (ISomething)standalone;     // Syntax-part
 
         var implementing = new ImplementingClass();
         casted = (ISomething)implementing;

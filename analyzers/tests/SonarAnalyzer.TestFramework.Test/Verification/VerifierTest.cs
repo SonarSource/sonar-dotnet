@@ -617,14 +617,14 @@ public class VerifierTest
               Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
               Line 9 Secondary location: Unexpected issue '' Rule S2583
             """);
-        builder.WithOnlyDiagnostics(ConditionEvaluatesToConstant.S2589).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
+        builder.WithOnlyDiagnostics(AnalysisScaffolding.CreateDescriptor("S2589")).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
             There are differences for CSharp7 File.Concurrent.cs:
               Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
 
             There are differences for CSharp7 File.cs:
               Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
             """);
-        builder.WithOnlyDiagnostics(NullPointerDereference.S2259).Invoking(x => x.VerifyNoIssues()).Should().NotThrow();
+        builder.WithOnlyDiagnostics(AnalysisScaffolding.CreateDescriptor("S2259")).Invoking(x => x.VerifyNoIssues()).Should().NotThrow();
     }
 
     [TestMethod]

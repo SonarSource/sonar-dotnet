@@ -39,8 +39,7 @@ namespace Tests.Diagnostics
         static void Main()
         {
             var myclass1 = new MyClass1();
-            var x = (IMyInterface)myclass1; // Noncompliant
-//                   ^^^^^^^^^^^^
+            var x = (IMyInterface)myclass1; // Syntax part
             x = myclass1 as IMyInterface;
             bool b = myclass1 is IMyInterface;
 
@@ -154,12 +153,12 @@ namespace Tests.Diagnostics
             FinalBar finalbar = null;
             object o = null;
 
-            o = (IFoo)bar;  // Noncompliant
+            o = (IFoo)bar;      // Syntax-part
             o = (IFoo)ibar;
-            o = (Foo)bar; // Compliant; causes compiler error // Error [CS0030] - invalid cast
+            o = (Foo)bar;       // Compliant; causes compiler error // Error [CS0030] - invalid cast
             o = (Foo)ibar;
             o = (IFoo)finalbar; // Compliant; causes compiler error // Error [CS0030] - invalid cast
-            o = (Bar)generic; // Compliant; causes compiler error // Error [CS0030] - invalid cast
+            o = (Bar)generic;   // Compliant; causes compiler error // Error [CS0030] - invalid cast
 
             o = bar  as IFoo;
             o = ibar as IFoo;

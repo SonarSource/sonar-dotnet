@@ -21,6 +21,7 @@
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.CSharp.Core.LiveVariableAnalysis;
+using SonarAnalyzer.Enterprise.Core.Rules;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.SymbolicExecution.Roslyn.CSharp;
@@ -34,8 +35,10 @@ namespace SonarAnalyzer.Rules.CSharp;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
 {
+    public static DiagnosticDescriptor S1944 = DescriptorFactory.Create("S1944", "{0}");    // This is a recreation of InvalidCastToInterface.S1944 that should be removed once we drop the old SE engine
+
     protected override ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; } = ImmutableDictionary<DiagnosticDescriptor, RuleFactory>.Empty
-        .Add(InvalidCastToInterface.S1944, CreateFactory<EmptyRuleCheck, SonarRules.InvalidCastToInterfaceSymbolicExecution>()) // This old SE rule is part of S3655.
+        .Add(S1944, CreateFactory<EmptyRuleCheck, SonarRules.InvalidCastToInterfaceSymbolicExecution>()) // This old SE rule is part of S3655.
         .Add(HashesShouldHaveUnpredictableSalt.S2053, CreateFactory<HashesShouldHaveUnpredictableSalt, SonarRules.HashesShouldHaveUnpredictableSalt>())
         .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>())
         .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference, SonarRules.NullPointerDereference>())

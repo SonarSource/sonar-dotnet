@@ -24,7 +24,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
 public abstract class NullPointerDereferenceBase : SymbolicRuleCheck
 {
-    internal const string DiagnosticId = "S2259";
+    public const string DiagnosticId = "S2259";
 
     protected virtual bool IsSupressed(SyntaxNode node) => false;
 

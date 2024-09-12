@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn;
 
-internal static class IOperationExtensions
+public static class IOperationExtensions
 {
     public static bool IsStaticOrThis(this IMemberReferenceOperationWrapper reference, ProgramState state) =>
         reference.Instance is null // static fields
@@ -30,7 +30,7 @@ internal static class IOperationExtensions
         conversion.Operand.Type.DerivesOrImplements(conversion.Type)
         || (conversion.Operand.Type.IsNonNullableValueType() && conversion.Type.IsNullableValueType());
 
-    internal static ISymbol TrackedSymbol(this IOperation operation, ProgramState state) =>
+    public static ISymbol TrackedSymbol(this IOperation operation, ProgramState state) =>
         operation?.Kind switch
         {
             OperationKindEx.FlowCaptureReference when state.ResolveCapture(operation) is var resolved && resolved != operation => resolved.TrackedSymbol(state),

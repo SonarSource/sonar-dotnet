@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Extensions;
 
-internal static class IParameterSymbolExtensions
+public static class IParameterSymbolExtensions
 {
     public static bool IsType(this IParameterSymbol parameter, KnownType type) =>
         parameter is not null && parameter.Type.Is(type);

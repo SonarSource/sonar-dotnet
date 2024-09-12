@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Constraints;
 
-internal class CryptographicSeedConstraint : SymbolicConstraint
+public class CryptographicSeedConstraint : SymbolicConstraint
 {
     public static readonly CryptographicSeedConstraint Predictable = new(ConstraintKind.CryptographicallyPredictable);
     public static readonly CryptographicSeedConstraint Unpredictable = new(ConstraintKind.CryptographicallyUnpredictable);

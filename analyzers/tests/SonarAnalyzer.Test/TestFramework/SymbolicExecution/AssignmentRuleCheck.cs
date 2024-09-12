@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp;
+using SonarAnalyzer.Analyzers;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
 namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution
