@@ -18,12 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CSharp.Walkers;
+namespace SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 
 /// <summary>
 /// This class find syntax cases that are not properly supported by current CFG/SE/LVA and we mute all issues related to these scenarios.
 /// </summary>
-internal class MutedSyntaxWalker : CSharpSyntaxWalker
+public class MutedSyntaxWalker : CSharpSyntaxWalker
 {
     // All kinds that SonarAnalysisContextExtensions.RegisterExplodedGraphBasedAnalysis registers for
     private static readonly SyntaxKind[] RootKinds =

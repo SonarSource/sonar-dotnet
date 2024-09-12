@@ -27,7 +27,7 @@ internal sealed class InvalidCastToInterfaceSymbolicExecution : ISymbolicExecuti
 {
     private const string MessageDefinite = "Nullable is known to be empty, this cast throws an exception.";
 
-    public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(InvalidCastToInterface.S1944);
+    public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(SymbolicExecutionRunner.S1944);
 
     public ISymbolicExecutionAnalysisContext CreateContext(SonarSyntaxNodeReportingContext context, SonarExplodedGraph explodedGraph) =>
         new AnalysisContext(context, explodedGraph);
@@ -77,7 +77,7 @@ internal sealed class InvalidCastToInterfaceSymbolicExecution : ISymbolicExecuti
 
             if (context is not null)
             {
-                context.ReportIssue(InvalidCastToInterface.S1944, castExpression, MessageDefinite);
+                context.ReportIssue(SymbolicExecutionRunner.S1944, castExpression, MessageDefinite);
             }
 
             return null;

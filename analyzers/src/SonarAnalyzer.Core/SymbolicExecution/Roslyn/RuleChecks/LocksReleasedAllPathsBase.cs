@@ -24,7 +24,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
 public abstract class LocksReleasedAllPathsBase : SymbolicRuleCheck
 {
-    internal const string DiagnosticId = "S2222";
+    public const string DiagnosticId = "S2222";
     protected const string MessageFormat = "Unlock this lock along all executions paths of this method.";
 
     private readonly HashSet<ISymbol> releasedSymbols = new();

@@ -27,12 +27,12 @@ namespace SonarAnalyzer.Test.Rules;
 public class JwtSecretKeysTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder()
-                                               .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))
-                                               .WithOnlyDiagnostics(ChecksCS.JwtSecretKeys.S6781)
-                                               .AddReferences([
-                                                   ..NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.NuGetLatestVersion),
-                                                   ..NuGetMetadataReference.MicrosoftIdentityModelTokens(),
-                                                   ..NuGetMetadataReference.SystemIdentityModelTokensJwt()]);
+        .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))
+        .WithBasePath(@"SymbolicExecution\Roslyn")
+        .WithOnlyDiagnostics(ChecksCS.JwtSecretKeys.S6781)
+        .AddReferences(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.NuGetLatestVersion))
+        .AddReferences(NuGetMetadataReference.MicrosoftIdentityModelTokens())
+        .AddReferences(NuGetMetadataReference.SystemIdentityModelTokensJwt());
 
 #if NET
 

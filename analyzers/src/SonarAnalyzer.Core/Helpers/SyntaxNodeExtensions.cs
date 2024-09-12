@@ -20,10 +20,10 @@
 
 namespace SonarAnalyzer.Helpers;
 
-internal static class SyntaxNodeExtensions
+public static class SyntaxNodeExtensions
 {
-    public static SemanticModel EnsureCorrectSemanticModelOrDefault(this SyntaxNode node, SemanticModel semanticModel) =>
-        node.SyntaxTree.GetSemanticModelOrDefault(semanticModel);
+    public static SemanticModel EnsureCorrectSemanticModelOrDefault(this SyntaxNode node, SemanticModel model) =>
+        node.SyntaxTree.GetSemanticModelOrDefault(model);
 
     public static bool ToStringContains(this SyntaxNode node, string s) =>
         node.ToString().Contains(s);

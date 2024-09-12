@@ -33,7 +33,6 @@ public class IInvocationOperationExtensionsTest
     [DataRow("this.Method()", OperationKind.InstanceReference)]
     [DataRow("sample.ExtensionMethod()", OperationKind.FieldReference)]
     [DataRow("sample.GetSample().Method()", OperationKind.Invocation)]
-
     public void Invocation_GetInstance_ReturnsSymbol_CS(string invocation, OperationKind kind)
     {
         var code = $$"""

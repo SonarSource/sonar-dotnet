@@ -19,8 +19,6 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
-using SonarAnalyzer.Test.Helpers;
-
 using ChecksCS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using ChecksVB = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 using CS = SonarAnalyzer.Rules.CSharp;

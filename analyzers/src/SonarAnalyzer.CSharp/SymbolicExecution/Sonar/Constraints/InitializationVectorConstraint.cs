@@ -22,7 +22,7 @@ using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 
-internal class InitializationVectorConstraint : SymbolicConstraint
+public class InitializationVectorConstraint : SymbolicConstraint
 {
     public static readonly InitializationVectorConstraint NotInitialized = new(ConstraintKind.InitializationVectorNotInitialized);
     public static readonly InitializationVectorConstraint Initialized = new(ConstraintKind.InitializationVectorInitialized);

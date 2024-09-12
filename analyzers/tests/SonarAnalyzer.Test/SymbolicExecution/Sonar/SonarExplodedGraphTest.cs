@@ -24,12 +24,9 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CFG.Helpers;
 using SonarAnalyzer.CFG.Sonar;
-using SonarAnalyzer.CSharp.Core.Extensions;
 using SonarAnalyzer.CSharp.Core.LiveVariableAnalysis;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar;
-using SonarAnalyzer.Test.CFG.Sonar;
-using SonarAnalyzer.Test.Helpers;
 
 namespace SonarAnalyzer.Test.SymbolicExecution.Sonar
 {
@@ -449,7 +446,7 @@ namespace TesteAnalyzer
             var maxInternalStateCountReached = false;
             context.ExplodedGraph.MaxInternalStateCountReached += (sender, args) => { maxInternalStateCountReached = true; };
 
-            context.ExplodedGraph.Walk();  // Special case, walk and check everythink manually
+            context.ExplodedGraph.Walk();  // Special case, walk and check everything manually
 
             maxInternalStateCountReached.Should().BeTrue();
             context.NumberOfExitBlockReached.Should().Be(0);
@@ -1544,7 +1541,7 @@ namespace Namespace
             public int NumberOfProcessedInstructions;
 
             public ExplodedGraphContext(string methodBody)
-                : this(SonarControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, methodBody)))
+                : this(TestHelper.Compile(string.Format(TestInput, methodBody), true, AnalyzerLanguage.CSharp))
             { }
 
             public ExplodedGraphContext((SyntaxTree tree, SemanticModel semanticModel) compilation)

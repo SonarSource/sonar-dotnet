@@ -20,12 +20,13 @@
 
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn;
 
-internal class RoslynSymbolicExecution
+public class RoslynSymbolicExecution
 {
     internal const int MaxStepCount = 4000;
     private const int MaxOperationVisits = 3;

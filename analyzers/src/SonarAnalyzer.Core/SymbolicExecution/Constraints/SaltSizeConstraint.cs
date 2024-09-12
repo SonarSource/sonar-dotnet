@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Constraints;
 
-internal class SaltSizeConstraint : SymbolicConstraint
+public class SaltSizeConstraint : SymbolicConstraint
 {
     public static readonly SaltSizeConstraint Short = new(ConstraintKind.SaltSizeShort);
 

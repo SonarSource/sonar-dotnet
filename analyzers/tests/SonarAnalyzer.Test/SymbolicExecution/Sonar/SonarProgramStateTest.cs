@@ -18,21 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.CSharp.Core.Extensions;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar;
-using SonarAnalyzer.Test.CFG.Sonar;
-using SonarAnalyzer.Test.TestFramework.SymbolicExecution;
 
 namespace SonarAnalyzer.Test.SymbolicExecution.Sonar
 {
     [TestClass]
     public class SonarProgramStateTest
     {
-        private sealed class FakeConstraint : TestConstraintBase
+        private sealed class FakeConstraint : SymbolicConstraint
         {
-            public FakeConstraint() : base(ConstraintKindTest.Fake) { }
+            public FakeConstraint() : base((ConstraintKind)(-1)) { }
             public override SymbolicConstraint Opposite => null;
         }
 
@@ -138,9 +135,13 @@ namespace SonarAnalyzer.Test.SymbolicExecution.Sonar
 
         private static ISymbol GetSymbol()
         {
-            var testInput = "var a = true; var b = false; b = !b; a = (b);";
-            var (method, model) = SonarControlFlowGraphTest.CompileWithMethodBody(string.Format(SonarControlFlowGraphTest.TestInput, testInput));
-            return model.GetDeclaredSymbol(method);
+            const string code = """
+                public class Sample
+                {
+                    public void Main() { }
+                }
+                """;
+            return new SnippetCompiler(code).GetMethodSymbol("Sample.Main");
         }
     }
 }
