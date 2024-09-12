@@ -21,46 +21,45 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class CommandPathTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots")
-            .AddReferences(MetadataReferenceFacade.SystemDiagnosticsProcess)
-            .AddAnalyzer(() => new CS.CommandPath(AnalyzerConfiguration.AlwaysEnabled));
-        private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots")
-            .AddReferences(MetadataReferenceFacade.SystemDiagnosticsProcess)
-            .AddAnalyzer(() => new VB.CommandPath(AnalyzerConfiguration.AlwaysEnabled));
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void CommandPath_CS() =>
-            builderCS.AddPaths("CommandPath.cs").Verify();
+[TestClass]
+public class CommandPathTest
+{
+    private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots")
+        .AddReferences(MetadataReferenceFacade.SystemDiagnosticsProcess)
+        .AddAnalyzer(() => new CS.CommandPath(AnalyzerConfiguration.AlwaysEnabled));
+    private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots")
+        .AddReferences(MetadataReferenceFacade.SystemDiagnosticsProcess)
+        .AddAnalyzer(() => new VB.CommandPath(AnalyzerConfiguration.AlwaysEnabled));
+
+    [TestMethod]
+    public void CommandPath_CS() =>
+        builderCS.AddPaths("CommandPath.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void CommandPath_CSharp10() =>
-            builderCS.AddPaths("CommandPath.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
+    [TestMethod]
+    public void CommandPath_CSharp10() =>
+        builderCS.AddPaths("CommandPath.CSharp10.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .Verify();
 
-        [TestMethod]
-        public void CommandPath_CSharp11() =>
-            builderCS.AddPaths("CommandPath.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void CommandPath_CSharp11() =>
+        builderCS.AddPaths("CommandPath.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
 
-        [TestMethod]
-        public void CommandPath_CSharp12() =>
-            builderCS.AddPaths("CommandPath.CSharp12.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp12)
-                .VerifyNoIssues();
+    [TestMethod]
+    public void CommandPath_CSharp12() =>
+        builderCS.AddPaths("CommandPath.CSharp12.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .VerifyNoIssues();
 
 #endif
 
-        [TestMethod]
-        public void CommandPath_VB() =>
-            builderVB.AddPaths("CommandPath.vb").Verify();
-    }
+    [TestMethod]
+    public void CommandPath_VB() =>
+        builderVB.AddPaths("CommandPath.vb").Verify();
 }

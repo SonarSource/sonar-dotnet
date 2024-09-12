@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Reflection;
+using SonarAnalyzer.Rules;
 using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.Test.PackagingTests;
 using SonarAnalyzer.Test.Rules;
-using SonarAnalyzer.Test.TestFramework;
 
 namespace SonarAnalyzer.Test.Common;
 
@@ -38,7 +38,7 @@ public class SecurityHotspotTest
 
     private static void VerifyNoIssues(AnalyzerLanguage language, ImmutableArray<ParseOptions> parseOptions)
     {
-        foreach (var analyzer in GetHotspotAnalyzers(language))
+        foreach (var analyzer in CreateHotspotAnalyzers(language))
         {
             var analyzerName = analyzer.GetType().Name;
 
@@ -51,31 +51,29 @@ public class SecurityHotspotTest
 #endif
 
             new VerifierBuilder()
-                .AddPaths(@$"Hotspots\{GetTestCaseFileName(analyzerName)}{language.FileExtension}")
+                .AddPaths(@$"Hotspots\{TestCaseFileName(analyzerName)}{language.FileExtension}")
                 .AddAnalyzer(() => analyzer)
                 .WithOptions(parseOptions)
-                .AddReferences(GetAdditionalReferences(analyzerName))
+                .AddReferences(AdditionalReferences(analyzerName))
                 .WithConcurrentAnalysis(analyzerName is not nameof(ClearTextProtocolsAreSensitive))
                 .VerifyNoIssuesIgnoreErrors();
         }
     }
 
-    private static IEnumerable<SonarDiagnosticAnalyzer> GetHotspotAnalyzers(AnalyzerLanguage language) =>
-        RuleFinder.GetAnalyzerTypes(language)
-            .Where(type => typeof(SonarDiagnosticAnalyzer).IsAssignableFrom(type))   // Avoid IRuleFactory and SE rules
-            .Select(type => (SonarDiagnosticAnalyzer)Activator.CreateInstance(type))
+    private static IEnumerable<SonarDiagnosticAnalyzer> CreateHotspotAnalyzers(AnalyzerLanguage language) =>
+        new[] { typeof(CSharp.Metrics.CSharpMetrics), typeof(VisualBasic.Metrics.VisualBasicMetrics) }  // Any type from those assemblies
+            .SelectMany(x => x.Assembly.GetExportedTypes())
+            .Where(x => x.IsSubclassOf(typeof(DiagnosticAnalyzer))
+                        && !typeof(UtilityAnalyzerBase).IsAssignableFrom(x)
+                        && x.GetCustomAttributes<DiagnosticAnalyzerAttribute>().Any())
+            .Where(x => typeof(SonarDiagnosticAnalyzer).IsAssignableFrom(x) && x.AnalyzerTargetLanguage() == language)   // Avoid IRuleFactory and SE rules
+            .Select(x => (SonarDiagnosticAnalyzer)Activator.CreateInstance(x))
             .Where(IsSecurityHotspot);
 
     private static bool IsSecurityHotspot(DiagnosticAnalyzer analyzer) =>
-        analyzer.SupportedDiagnostics.Any(IsSecurityHotspot);
+        analyzer.SupportedDiagnostics.Any(x => x.IsSecurityHotspot());
 
-    private static bool IsSecurityHotspot(DiagnosticDescriptor diagnostic)
-    {
-        var type = RuleTypeMappingCS.Rules.GetValueOrDefault(diagnostic.Id) ?? RuleTypeMappingVB.Rules.GetValueOrDefault(diagnostic.Id);
-        return type == "SECURITY_HOTSPOT";
-    }
-
-    private static string GetTestCaseFileName(string analyzerName) =>
+    private static string TestCaseFileName(string analyzerName) =>
         analyzerName switch
         {
             "ConfiguringLoggers" => "ConfiguringLoggers_Log4Net",
@@ -96,7 +94,7 @@ public class SecurityHotspotTest
             _ => analyzerName
         };
 
-    private static IEnumerable<MetadataReference> GetAdditionalReferences(string analyzerName) =>
+    private static IEnumerable<MetadataReference> AdditionalReferences(string analyzerName) =>
         analyzerName switch
         {
             nameof(ClearTextProtocolsAreSensitive) => ClearTextProtocolsAreSensitiveTest.AdditionalReferences,

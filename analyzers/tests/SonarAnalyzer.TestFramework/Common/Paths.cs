@@ -24,6 +24,7 @@ namespace SonarAnalyzer.TestFramework.Common;
 
 public static class Paths
 {
+    public static string ProjectRoot { get; }
     public static string TestsRoot { get; }
     public static string AnalyzersRoot { get; }
     public static string Rspec { get; }
@@ -32,13 +33,16 @@ public static class Paths
     {
         // The AltCover tool has a limitation. It has to be invoked without a parameter for the project/solution path.
         // Due to this we have to call it from the analyzers folder and the working directory is different when running in CI context.
-        TestsRoot = FindTestsRoot();
+        TestsRoot = Path.Combine(FindRoot("tests"), "tests");
         Console.WriteLine("Test project root: " + TestsRoot);
 
         AnalyzersRoot = Path.GetDirectoryName(TestsRoot);
         Console.WriteLine("Analyzers root: " + AnalyzersRoot);
 
-        Rspec = Path.Combine(AnalyzersRoot, "rspec");
+        ProjectRoot = FindRoot(".github");
+        Console.WriteLine("Project root: " + ProjectRoot);
+
+        Rspec = Path.Combine(ProjectRoot, "analyzers", "rspec");
         Console.WriteLine("Rspec folder " + Rspec);
     }
 
@@ -65,13 +69,13 @@ public static class Paths
         throw new InvalidOperationException("Could not find TestCases directory from current path: " + Path.GetFullPath("."));
     }
 
-    private static string FindTestsRoot()
+    private static string FindRoot(string expectedSubdirectory)
     {
         var current = Path.GetFullPath(".");
         var root = Path.GetPathRoot(current);
         while (current != root)
         {
-            if (Directory.Exists(Path.Combine(current, "SonarAnalyzer.Test")))
+            if (Directory.Exists(Path.Combine(current, expectedSubdirectory)))
             {
                 return current;
             }
@@ -80,6 +84,6 @@ public static class Paths
                 current = Path.GetDirectoryName(current);
             }
         }
-        throw new InvalidOperationException("Could not find TestProjectRoot directory from current path: " + Path.GetFullPath("."));
+        throw new InvalidOperationException($"Could not find TestsRoot directory for '{expectedSubdirectory}' from current path: ${Path.GetFullPath(".")}");
     }
 }

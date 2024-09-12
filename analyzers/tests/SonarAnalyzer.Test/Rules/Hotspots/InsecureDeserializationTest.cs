@@ -20,28 +20,27 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class InsecureDeserializationTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled)).WithBasePath("Hotspots");
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void InsecureDeserialization() =>
-            builder.AddPaths("InsecureDeserialization.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+[TestClass]
+public class InsecureDeserializationTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled)).WithBasePath("Hotspots");
+
+    [TestMethod]
+    public void InsecureDeserialization() =>
+        builder.AddPaths("InsecureDeserialization.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
-        [TestMethod]
-        public void InsecureDeserialization_CSharp9() =>
-            builder.AddPaths("InsecureDeserialization.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+    [TestMethod]
+    public void InsecureDeserialization_CSharp9() =>
+        builder.AddPaths("InsecureDeserialization.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
-        public void InsecureDeserialization_CSharp10() =>
-            builder.AddPaths("InsecureDeserialization.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+    [TestMethod]
+    public void InsecureDeserialization_CSharp10() =>
+        builder.AddPaths("InsecureDeserialization.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif
 
-    }
 }
