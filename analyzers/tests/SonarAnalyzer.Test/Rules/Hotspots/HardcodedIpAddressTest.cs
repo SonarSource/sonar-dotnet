@@ -21,42 +21,41 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class HardcodedIpAddressTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
-        private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void HardcodedIpAddress_CS() =>
-            builderCS.AddPaths(@"Hotspots\HardcodedIpAddress.cs").Verify();
+[TestClass]
+public class HardcodedIpAddressTest
+{
+    private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
+    private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
+
+    [TestMethod]
+    public void HardcodedIpAddress_CS() =>
+        builderCS.AddPaths(@"Hotspots\HardcodedIpAddress.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void HardcodedIpAddress_CSharp10() =>
-            builderCS.AddPaths(@"Hotspots\HardcodedIpAddress.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
+    [TestMethod]
+    public void HardcodedIpAddress_CSharp10() =>
+        builderCS.AddPaths(@"Hotspots\HardcodedIpAddress.CSharp10.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .Verify();
 
-        [TestMethod]
-        public void HardcodedIpAddress_CSharp11() =>
-            builderCS.AddPaths(@"Hotspots\HardcodedIpAddress.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void HardcodedIpAddress_CSharp11() =>
+        builderCS.AddPaths(@"Hotspots\HardcodedIpAddress.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
 
-        [TestMethod]
-        public void HardcodedIpAddress_CSharp12() =>
-            builderCS.AddPaths(@"Hotspots\HardcodedIpAddress.CSharp12.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp12)
-                .Verify();
+    [TestMethod]
+    public void HardcodedIpAddress_CSharp12() =>
+        builderCS.AddPaths(@"Hotspots\HardcodedIpAddress.CSharp12.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .Verify();
 
 #endif
 
-        [TestMethod]
-        public void HardcodedIpAddress_VB() =>
-            builderVB.AddPaths(@"Hotspots\HardcodedIpAddress.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
-    }
+    [TestMethod]
+    public void HardcodedIpAddress_VB() =>
+        builderVB.AddPaths(@"Hotspots\HardcodedIpAddress.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
 }

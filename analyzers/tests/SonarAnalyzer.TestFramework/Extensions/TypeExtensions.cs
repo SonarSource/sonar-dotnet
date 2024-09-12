@@ -18,17 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Rules.CSharp;
+using System.Reflection;
 
-namespace SonarAnalyzer.Test.Rules;
+namespace SonarAnalyzer.TestFramework.Extensions;
 
-[TestClass]
-public class DoNotUseRandomTest
+public static class TypeExtensions
 {
-    [TestMethod]
-    public void DoNotUseRandom() =>
-        new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new DoNotUseRandom(AnalyzerConfiguration.AlwaysEnabled))
-            .AddPaths("DoNotUseRandom.cs")
-            .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography)
-            .Verify();
+    public static AnalyzerLanguage AnalyzerTargetLanguage(this Type analyzerType)
+    {
+        var languages = analyzerType.GetCustomAttributes<DiagnosticAnalyzerAttribute>().SingleOrDefault()?.Languages
+                        ?? throw new NotSupportedException($"Can not find any language for the given type {analyzerType.Name}!");
+        return languages.Length == 1
+            ? AnalyzerLanguage.FromName(languages.Single())
+            : throw new NotSupportedException($"Analyzer can not have multiple languages: {analyzerType.Name}");
+    }
 }

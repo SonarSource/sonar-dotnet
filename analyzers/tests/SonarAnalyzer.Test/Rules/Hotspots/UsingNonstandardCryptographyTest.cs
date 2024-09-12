@@ -21,39 +21,38 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class UsingNonstandardCryptographyTest
-    {
-        private readonly VerifierBuilder builderCS = CreateBuilder().AddAnalyzer(() => new CS.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled));
-        private readonly VerifierBuilder builderVB = CreateBuilder().AddAnalyzer(() => new VB.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled));
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void UsingNonstandardCryptography_CS() =>
-            builderCS.AddPaths("UsingNonstandardCryptography.cs").Verify();
+[TestClass]
+public class UsingNonstandardCryptographyTest
+{
+    private readonly VerifierBuilder builderCS = CreateBuilder().AddAnalyzer(() => new CS.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled));
+    private readonly VerifierBuilder builderVB = CreateBuilder().AddAnalyzer(() => new VB.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled));
+
+    [TestMethod]
+    public void UsingNonstandardCryptography_CS() =>
+        builderCS.AddPaths("UsingNonstandardCryptography.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void UsingNonstandardCryptography_CSharp9() =>
-            builderCS.AddPaths("UsingNonstandardCryptography.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+    [TestMethod]
+    public void UsingNonstandardCryptography_CSharp9() =>
+        builderCS.AddPaths("UsingNonstandardCryptography.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
-        [TestMethod]
-        public void UsingNonstandardCryptography_CSharp10() =>
-            builderCS.AddPaths("UsingNonstandardCryptography.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+    [TestMethod]
+    public void UsingNonstandardCryptography_CSharp10() =>
+        builderCS.AddPaths("UsingNonstandardCryptography.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
-        [TestMethod]
-        public void UsingNonstandardCryptography_CSharp12() =>
-            builderCS.AddPaths("UsingNonstandardCryptography.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+    [TestMethod]
+    public void UsingNonstandardCryptography_CSharp12() =>
+        builderCS.AddPaths("UsingNonstandardCryptography.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
 
 #endif
 
-        [TestMethod]
-        public void UsingNonstandardCryptography_VB() =>
-            builderVB.AddPaths("UsingNonstandardCryptography.vb").Verify();
+    [TestMethod]
+    public void UsingNonstandardCryptography_VB() =>
+        builderVB.AddPaths("UsingNonstandardCryptography.vb").Verify();
 
-        private static VerifierBuilder CreateBuilder() =>
-            new VerifierBuilder().AddReferences(MetadataReferenceFacade.SystemSecurityCryptography).WithBasePath("Hotspots");
-    }
+    private static VerifierBuilder CreateBuilder() =>
+        new VerifierBuilder().AddReferences(MetadataReferenceFacade.SystemSecurityCryptography).WithBasePath("Hotspots");
 }

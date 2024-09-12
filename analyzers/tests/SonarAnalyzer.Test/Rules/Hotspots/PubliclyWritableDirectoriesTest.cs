@@ -21,42 +21,41 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class PubliclyWritableDirectoriesTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.PubliclyWritableDirectories(AnalyzerConfiguration.AlwaysEnabled));
-        private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.PubliclyWritableDirectories(AnalyzerConfiguration.AlwaysEnabled));
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void PubliclyWritableDirectories_CS() =>
-            builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.cs").Verify();
+[TestClass]
+public class PubliclyWritableDirectoriesTest
+{
+    private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.PubliclyWritableDirectories(AnalyzerConfiguration.AlwaysEnabled));
+    private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.PubliclyWritableDirectories(AnalyzerConfiguration.AlwaysEnabled));
+
+    [TestMethod]
+    public void PubliclyWritableDirectories_CS() =>
+        builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void PubliclyWritableDirectories_CSharp10() =>
-            builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
+    [TestMethod]
+    public void PubliclyWritableDirectories_CSharp10() =>
+        builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.CSharp10.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .Verify();
 
-        [TestMethod]
-        public void PubliclyWritableDirectories_CSharp11() =>
-            builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void PubliclyWritableDirectories_CSharp11() =>
+        builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
 
-        [TestMethod]
-        public void PubliclyWritableDirectories_CSharp12() =>
-            builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.CSharp12.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp12)
-                .Verify();
+    [TestMethod]
+    public void PubliclyWritableDirectories_CSharp12() =>
+        builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.CSharp12.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .Verify();
 
 #endif
 
-        [TestMethod]
-        public void PubliclyWritableDirectories_VB() =>
-            builderVB.AddPaths(@"Hotspots\PubliclyWritableDirectories.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
-    }
+    [TestMethod]
+    public void PubliclyWritableDirectories_VB() =>
+        builderVB.AddPaths(@"Hotspots\PubliclyWritableDirectories.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
 }

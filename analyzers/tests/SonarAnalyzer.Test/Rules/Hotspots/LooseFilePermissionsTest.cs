@@ -21,63 +21,62 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules.Hotspots
+namespace SonarAnalyzer.Test.Rules.Hotspots;
+
+[TestClass]
+public class LooseFilePermissionsTest
 {
-    [TestClass]
-    public class LooseFilePermissionsTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
-        private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
+    private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
+    private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
 
-        [TestMethod]
-        public void LooseFilePermissions_Windows_CS() =>
-            builderCS.AddPaths("LooseFilePermissions.Windows.cs").Verify();
+    [TestMethod]
+    public void LooseFilePermissions_Windows_CS() =>
+        builderCS.AddPaths("LooseFilePermissions.Windows.cs").Verify();
 
-        [TestMethod]
-        public void LooseFilePermissions_Windows_VB() =>
-            builderVB.AddPaths("LooseFilePermissions.Windows.vb").Verify();
+    [TestMethod]
+    public void LooseFilePermissions_Windows_VB() =>
+        builderVB.AddPaths("LooseFilePermissions.Windows.vb").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void LooseFilePermissions_Windows_CSharp9() =>
-            builderCS.AddPaths("LooseFilePermissions.Windows.CSharp9.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void LooseFilePermissions_Windows_CSharp9() =>
+        builderCS.AddPaths("LooseFilePermissions.Windows.CSharp9.cs")
+            .WithTopLevelStatements()
+            .Verify();
 
-        [TestMethod]
-        public void LooseFilePermissions_Windows_CSharp10() =>
-            builderCS.AddPaths("LooseFilePermissions.Windows.CSharp10.cs")
-                .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
+    [TestMethod]
+    public void LooseFilePermissions_Windows_CSharp10() =>
+        builderCS.AddPaths("LooseFilePermissions.Windows.CSharp10.cs")
+            .WithTopLevelStatements()
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .Verify();
 
-        [TestMethod]
-        public void LooseFilePermissions_Windows_CSharp11() =>
-            builderCS.AddPaths("LooseFilePermissions.Windows.CSharp11.cs")
-                .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void LooseFilePermissions_Windows_CSharp11() =>
+        builderCS.AddPaths("LooseFilePermissions.Windows.CSharp11.cs")
+            .WithTopLevelStatements()
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
 
-        [TestMethod]
-        public void LooseFilePermissions_Windows_CSharp12() =>
-            builderCS.AddPaths("LooseFilePermissions.Windows.CSharp12.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp12)
-                .Verify();
+    [TestMethod]
+    public void LooseFilePermissions_Windows_CSharp12() =>
+        builderCS.AddPaths("LooseFilePermissions.Windows.CSharp12.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .Verify();
 
-        [TestMethod]
-        public void LooseFilePermissions_Unix_CS() =>
-            builderCS.AddPaths("LooseFilePermissions.Unix.cs")
-                .AddReferences(NuGetMetadataReference.MonoPosixNetStandard())
-                .Verify();
+    [TestMethod]
+    public void LooseFilePermissions_Unix_CS() =>
+        builderCS.AddPaths("LooseFilePermissions.Unix.cs")
+            .AddReferences(NuGetMetadataReference.MonoPosixNetStandard())
+            .Verify();
 
-        [TestMethod]
-        public void LooseFilePermissions_Unix_VB() =>
-            builderVB.AddPaths("LooseFilePermissions.Unix.vb")
-                .AddReferences(NuGetMetadataReference.MonoPosixNetStandard())
-                .Verify();
+    [TestMethod]
+    public void LooseFilePermissions_Unix_VB() =>
+        builderVB.AddPaths("LooseFilePermissions.Unix.vb")
+            .AddReferences(NuGetMetadataReference.MonoPosixNetStandard())
+            .Verify();
 
 #endif
 
-    }
 }

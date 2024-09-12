@@ -18,17 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.TestFramework.Packaging;
 
-namespace SonarAnalyzer.Test.Rules;
+namespace SonarAnalyzer.TestFramework.Extensions;
 
-[TestClass]
-public class DoNotUseRandomTest
+public static class DiagnosticDescriptorExtensions
 {
-    [TestMethod]
-    public void DoNotUseRandom() =>
-        new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new DoNotUseRandom(AnalyzerConfiguration.AlwaysEnabled))
-            .AddPaths("DoNotUseRandom.cs")
-            .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography)
-            .Verify();
+    public static bool IsSecurityHotspot(this DiagnosticDescriptor diagnostic)
+    {
+        var type = RuleTypeMappingCS.Rules.GetValueOrDefault(diagnostic.Id) ?? RuleTypeMappingVB.Rules.GetValueOrDefault(diagnostic.Id);
+        return type == "SECURITY_HOTSPOT";
+    }
 }
