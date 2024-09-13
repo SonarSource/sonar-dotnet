@@ -246,12 +246,12 @@ namespace Tests.Diagnostics
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/9657
-    public struct StructWithThisAssignmentDefault
+    public struct StructWithThisReassignmentToDefaultInMethod
     {
         private int number;     // Compliant: the field's value is overwritten in the Reset() method (with the 'this = default' assignment)
         public int Number => number;
 
-        public StructWithThisAssignmentDefault(int number)
+        public StructWithThisReassignmentToDefaultInMethod(int number)
         {
             this.number = number;
         }
@@ -262,19 +262,58 @@ namespace Tests.Diagnostics
         }
     }
 
-    public struct StructWithMethodReassignmentNew
+    public struct StructWithThisReassignmentToNewInMethod
     {
-        private int number; // Compliant: the field's value is overwritten in the Reassign method
+        private int number;     // Compliant: the field's value is overwritten in the Reassign method
         public int Number => number;
 
-        public StructWithMethodReassignmentNew(int number)
+        public StructWithThisReassignmentToNewInMethod(int number)
         {
             this.number = number;
         }
 
         public void ReAssign()
         {
-            this = new StructWithMethodReassignmentNew(42);
+            this = new StructWithThisReassignmentToNewInMethod(42);
+        }
+    }
+
+    public struct StructWithThisReassignmentInConstructor
+    {
+        private readonly int number;     // Fixed
+        public int Number => number;
+
+        public StructWithThisReassignmentInConstructor(int number)
+        {
+            this = default;
+            this.number = number;
+        }
+    }
+
+    public class NestedStructWithThisReassignment
+    {
+        private readonly int number;     // Fixed
+        public int Number => number;
+
+        public NestedStructWithThisReassignment(int number)
+        {
+            this.number = number;
+        }
+
+        public struct NestedStruct
+        {
+            private int number;
+            public int Number => number;
+
+            public NestedStruct(int number)
+            {
+                this.number = number;
+            }
+
+            public void Reset()
+            {
+                this = default;
+            }
         }
     }
 }

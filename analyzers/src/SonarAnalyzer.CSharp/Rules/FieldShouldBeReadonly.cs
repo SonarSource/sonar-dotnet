@@ -149,7 +149,7 @@ public sealed class FieldShouldBeReadonly : SonarDiagnosticAnalyzer
                 this.partialTypeDeclaration = partialTypeDeclaration;
                 this.readonlyFieldCollector = readonlyFieldCollector;
 
-                AllFields = partialTypeDeclaration.Node.DescendantNodes()
+                AllFields = partialTypeDeclaration.Node.ChildNodes()
                     .OfType<FieldDeclarationSyntax>()
                     .SelectMany(GetAllFields);
             }
@@ -227,7 +227,9 @@ public sealed class FieldShouldBeReadonly : SonarDiagnosticAnalyzer
 
                 foreach (var leftSide in assignments.Select(x => x.Left))
                 {
-                    if (leftSide.Kind() is SyntaxKind.ThisExpression)
+                    if (leftSide.Kind() is SyntaxKind.ThisExpression
+                        && leftSide.EnclosingScope().Kind() is not SyntaxKind.ConstructorDeclaration
+                        && leftSide.Ancestors().OfType<TypeDeclarationSyntax>().First().Equals(partialTypeDeclaration.Node))
                     {
                         readonlyFieldCollector.HasAssignmentToThis = true;
                         return;
