@@ -37,12 +37,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class CSharpSonarRulesDefinitionTest {
   private static final String SECURITY_HOTSPOT_RULE_KEY = "S4502";
-  private static final String VULNERABILITY_RULE_KEY = "S2053";
+  private static final String VULNERABILITY_RULE_KEY = "S2115";
   private static final String NO_TAGS_RULE_KEY = "S1048";
   private static final String SINGLE_PARAM_RULE_KEY = "S1200";
   private static final String MULTI_PARAM_RULE_KEY = "S110";
 
-  private static final SonarRuntime SONAR_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(10, 10), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
+  private static final SonarRuntime SONAR_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(10, 10), SonarQubeSide.SCANNER,
+    SonarEdition.COMMUNITY);
 
   @Test
   void test() {
@@ -108,13 +109,14 @@ class CSharpSonarRulesDefinitionTest {
     RulesDefinition.Rule rule = repository.rule(VULNERABILITY_RULE_KEY);
     assertThat(rule.type()).isEqualTo(RuleType.VULNERABILITY);
     assertThat(rule.securityStandards()).containsExactlyInAnyOrder(
-      "cwe:759",
-      "cwe:760",
+      "cwe:521",
+      "owaspAsvs-4.0:9.2.2",
+      "owaspAsvs-4.0:9.2.3",
+      "owaspTop10:a2",
       "owaspTop10:a3",
-      "owaspTop10-2021:a2",
+      "owaspTop10-2021:a7",
       "pciDss-3.2:6.5.10",
-      "pciDss-4.0:6.2.4",
-      "stig-ASD_V5R3:V-222542");
+      "pciDss-4.0:6.2.4");
   }
 
   @Test
@@ -172,8 +174,10 @@ class CSharpSonarRulesDefinitionTest {
     RulesDefinition.Repository repository = context.repository("csharpsquid");
 
     // We don't have rule with Linear to assert. That path is tested in AbstractRulesDefinition.test_remediation_is_set_linear()
-    assertThat(repository.rule("S100").debtRemediationFunction()).hasToString("DebtRemediationFunction{type=CONSTANT_ISSUE, gap multiplier=null, base effort=5min}");
-    assertThat(repository.rule("S110").debtRemediationFunction()).hasToString("DebtRemediationFunction{type=LINEAR_OFFSET, gap multiplier=30min, base effort=4h}");
+    assertThat(repository.rule("S100").debtRemediationFunction()).hasToString("DebtRemediationFunction{type=CONSTANT_ISSUE, gap " +
+      "multiplier=null, base effort=5min}");
+    assertThat(repository.rule("S110").debtRemediationFunction()).hasToString("DebtRemediationFunction{type=LINEAR_OFFSET, gap " +
+      "multiplier=30min, base effort=4h}");
   }
 
   @Test
@@ -194,7 +198,8 @@ class CSharpSonarRulesDefinitionTest {
     RulesDefinition.Rule rule = context.repository("csharpsquid").rule(SINGLE_PARAM_RULE_KEY);
 
     assertThat(rule.params()).hasSize(1);
-    assertParam(rule.params().get(0), "max", RuleParamType.INTEGER, "30", "Maximum number of types a single type is allowed to depend upon");
+    assertParam(rule.params().get(0), "max", RuleParamType.INTEGER, "30", "Maximum number of types a single type is allowed to depend " +
+      "upon");
   }
 
   @Test
@@ -207,10 +212,12 @@ class CSharpSonarRulesDefinitionTest {
     assertThat(rule.params()).hasSize(2);
     assertParam(rule.params().get(0), "max", RuleParamType.INTEGER, "5", "Maximum depth of the inheritance tree. (Number)");
     assertParam(rule.params().get(1), "filteredClasses", RuleParamType.STRING, null,
-      "Comma-separated list of classes or records to be filtered out of the count of inheritance. Depth counting will stop when a filtered class or record is reached. For example: System.Windows.Controls.UserControl, System.Windows.*. (String)");
+      "Comma-separated list of classes or records to be filtered out of the count of inheritance. Depth counting will stop when a " +
+        "filtered class or record is reached. For example: System.Windows.Controls.UserControl, System.Windows.*. (String)");
   }
 
-  private static void assertParam(RulesDefinition.Param param, String expectedKey, RuleParamType expectedType, String expectedDefaultValue, String expectedDescription) {
+  private static void assertParam(RulesDefinition.Param param, String expectedKey, RuleParamType expectedType,
+    String expectedDefaultValue, String expectedDescription) {
     assertThat(param.key()).isEqualTo(expectedKey);
     assertThat(param.type()).isEqualTo(expectedType);
     assertThat(param.defaultValue()).isEqualTo(expectedDefaultValue);
