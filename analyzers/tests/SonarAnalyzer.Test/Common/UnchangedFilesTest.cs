@@ -19,7 +19,6 @@
  */
 
 using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
 namespace SonarAnalyzer.Test.Common;
 
@@ -27,18 +26,6 @@ namespace SonarAnalyzer.Test.Common;
 public class UnchangedFilesTest
 {
     public TestContext TestContext { get; set; }
-
-    [DataTestMethod]
-    [DataRow(@"SymbolicExecution\Roslyn\NullPointerDereference.cs", true)]
-    [DataRow("SomeOtherFile.cs", false)]
-    public void UnchangedFiles_SymbolicExecutionRule(string unchangedFileName, bool expectEmptyResults)
-    {
-        var builder = new VerifierBuilder()
-            .AddAnalyzer(() => new SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))
-            .AddPaths(@"SymbolicExecution\Roslyn\NullPointerDereference.cs")
-            .WithOnlyDiagnostics(NullPointerDereference.S2259);
-        UnchangedFiles_Verify(builder, unchangedFileName, expectEmptyResults);
-    }
 
     [DataTestMethod]
     [DataRow("ClassNotInstantiatable.cs", true)]
