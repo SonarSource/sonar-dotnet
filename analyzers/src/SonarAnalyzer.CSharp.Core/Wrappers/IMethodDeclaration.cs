@@ -35,4 +35,6 @@ public interface IMethodDeclaration
     bool HasImplementation { get; }
 
     bool IsLocal { get; }
+
+    TypeSyntax ReturnType { get; }
 }

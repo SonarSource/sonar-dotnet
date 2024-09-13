@@ -77,6 +77,11 @@ public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TSyntaxKi
         return firstSymbols.All(x => Array.Exists(secondSymbols, secondSymbol => TypeParametersHaveSameNameAndConstraints(x, secondSymbol)));
     }
 
+    protected static bool AreTheSameType(SemanticModel model, SyntaxNode first, SyntaxNode second) =>
+        (first is null && second is null)
+        || (first is not null && second is not null
+            && model.GetTypeInfo(first).Type?.Equals(model.GetTypeInfo(second).Type) == true);
+
     private static bool HaveSameParameterLists<TSyntax>(SeparatedSyntaxList<TSyntax> firstParameters,
                                                         SeparatedSyntaxList<TSyntax> secondParameters) where TSyntax : SyntaxNode =>
         firstParameters.Equals(secondParameters, (first, second) => first.IsEquivalentTo(second)); // Perf: Syntactic equivalence for all parameters

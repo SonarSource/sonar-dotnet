@@ -45,6 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
             && firstMethod.Identifier.ValueText != secondMethod.Identifier.ValueText
             && HaveSameParameters(firstMethod.ParameterList?.Parameters, secondMethod.ParameterList?.Parameters)
             && HaveSameTypeParameters(model, firstMethod.TypeParameterList?.Parameters, secondMethod.TypeParameterList?.Parameters)
+            && AreTheSameType(model, firstMethod.ReturnType, secondMethod.ReturnType)
             && firstMethod.Body.IsEquivalentTo(secondMethod.Body, false);
 
         protected override SyntaxToken GetMethodIdentifier(IMethodDeclaration method) =>

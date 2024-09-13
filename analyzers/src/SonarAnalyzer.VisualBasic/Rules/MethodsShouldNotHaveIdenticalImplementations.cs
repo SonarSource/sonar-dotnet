@@ -35,6 +35,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             && firstMethod.GetIdentifierText() != secondMethod.GetIdentifierText()
             && HaveSameParameters(firstMethod.GetParameters(), secondMethod.GetParameters())
             && HaveSameTypeParameters(model, firstMethod.SubOrFunctionStatement?.TypeParameterList?.Parameters, secondMethod.SubOrFunctionStatement?.TypeParameterList?.Parameters)
+            && AreTheSameType(model, firstMethod.SubOrFunctionStatement.AsClause?.Type, secondMethod.SubOrFunctionStatement.AsClause?.Type)
             && VisualBasicEquivalenceChecker.AreEquivalent(firstMethod.Statements, secondMethod.Statements);
 
         protected override SyntaxToken GetMethodIdentifier(MethodBlockSyntax method) =>
