@@ -42,47 +42,37 @@ public static class MethodDeclarationFactory
         }
     }
 
-    private class LocalFunctionStatementAdapter : IMethodDeclaration
+    private sealed class LocalFunctionStatementAdapter : IMethodDeclaration
     {
         private readonly LocalFunctionStatementSyntaxWrapper syntaxWrapper;
 
-        public LocalFunctionStatementAdapter(LocalFunctionStatementSyntaxWrapper syntaxWrapper)
-            => this.syntaxWrapper = syntaxWrapper;
-
         public BlockSyntax Body => syntaxWrapper.Body;
-
         public ArrowExpressionClauseSyntax ExpressionBody => syntaxWrapper.ExpressionBody;
-
         public SyntaxToken Identifier => syntaxWrapper.Identifier;
-
         public ParameterListSyntax ParameterList => syntaxWrapper.ParameterList;
-
         public TypeParameterListSyntax TypeParameterList => syntaxWrapper.TypeParameterList;
-
-        public bool HasImplementation => Body != null || ExpressionBody != null;
-
+        public bool HasImplementation => Body is not null || ExpressionBody is not null;
         public bool IsLocal => true;
+        public TypeSyntax ReturnType => syntaxWrapper.ReturnType;
+
+        public LocalFunctionStatementAdapter(LocalFunctionStatementSyntaxWrapper syntaxWrapper) =>
+            this.syntaxWrapper = syntaxWrapper;
     }
 
-    private class MethodDeclarationSyntaxAdapter : IMethodDeclaration
+    private sealed class MethodDeclarationSyntaxAdapter : IMethodDeclaration
     {
         private readonly MethodDeclarationSyntax declarationSyntax;
 
-        public MethodDeclarationSyntaxAdapter(MethodDeclarationSyntax declarationSyntax)
-            => this.declarationSyntax = declarationSyntax;
-
         public BlockSyntax Body => declarationSyntax.Body;
-
         public ArrowExpressionClauseSyntax ExpressionBody => declarationSyntax.ExpressionBody;
-
         public SyntaxToken Identifier => declarationSyntax.Identifier;
-
         public ParameterListSyntax ParameterList => declarationSyntax.ParameterList;
-
         public TypeParameterListSyntax TypeParameterList => declarationSyntax.TypeParameterList;
-
-        public bool HasImplementation => Body != null || ExpressionBody != null;
-
+        public bool HasImplementation => Body is not null || ExpressionBody is not null;
         public bool IsLocal => false;
+        public TypeSyntax ReturnType => declarationSyntax.ReturnType;
+
+        public MethodDeclarationSyntaxAdapter(MethodDeclarationSyntax declarationSyntax) =>
+            this.declarationSyntax = declarationSyntax;
     }
 }

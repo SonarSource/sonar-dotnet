@@ -201,29 +201,63 @@ public class Repro_9654
     public record Foo(string A);
     public record Bar(string A);
 
-    private static Foo Test1() // Secondary [ReturnDifferentType]
+    private static Foo SameBodyDifferentReturnTypeImplicit1()
     {
         string s = "A";
         return new(s);
     }
 
-    private static Bar Test2() // Noncompliant [ReturnDifferentType] - FP
+    private static Bar SameBodyDifferentReturnTypeImplicit2()       // Compliant - different return type
     {
         string s = "A";
         return new(s);
     }
 
-    private static Foo Test3()
+    private static Foo SameBodyDifferentReturnTypeExplicit1()
     {
         Console.WriteLine("Test");
-        _ = Test1();
         return new Foo("A");
     }
 
-    private static Bar Test4()
+    private static Bar SameBodyDifferentReturnTypeExplicit2()
     {
         Console.WriteLine("Test");
-        _ = Test1();
         return new Bar("A");
+    }
+
+    private static int SameBodyDifferentReturnTypeLiteral1()
+    {
+        Console.WriteLine("Test");
+        return 42;
+    }
+
+    private static double SameBodyDifferentReturnTypeLiteral2()     // Compliant - different return type
+    {
+        Console.WriteLine("Test");
+        return 42;
+    }
+
+    private static string SameReturnTypeWithDifferentName1()        // Secondary [SameReturnTypeWithDifferentName]
+    {
+        Console.WriteLine("Test");
+        return "A";
+    }
+
+    private static System.String SameReturnTypeWithDifferentName2() // Noncompliant [SameReturnTypeWithDifferentName]
+    {
+        Console.WriteLine("Test");
+        return "A";
+    }
+
+    private static UnkownType1 SameImplementationWithUnknownReturnType1() // Error[CS0246]
+    {
+        Console.WriteLine("Test");
+        return "A";
+    }
+
+    private static UnkownType2 SameImplementationWithUnknownReturnType2() // Error[CS0246]
+    {
+        Console.WriteLine("Test");
+        return "A";
     }
 }

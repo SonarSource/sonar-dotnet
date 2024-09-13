@@ -87,7 +87,6 @@ Namespace Tests.Diagnostics
             Throw New NotSupportedException()
         End Sub
 
-
         Function Qux1(val As Integer) As String
             Return val.ToString()
         End Function
@@ -110,7 +109,7 @@ Namespace Tests.Diagnostics
 
     Structure SomeStruct
         Private Sub Foo1()
-'                   ^^^^ Secondary
+            '       ^^^^ Secondary
             Dim s As String = "test"
             Console.WriteLine("Result: {0}", s)
         End Sub
@@ -120,5 +119,49 @@ Namespace Tests.Diagnostics
             Console.WriteLine("Result: {0}", s)
         End Sub
     End Structure
+
+    ' https://github.com/SonarSource/sonar-dotnet/issues/9654
+    Public Class Repro_9654
+        Private Shared Function SameBodyDifferentReturnTypeLiteral1() As Integer
+            Console.WriteLine("Test")
+            Return 42
+        End Function
+
+        Private Shared Function SameBodyDifferentReturnTypeLiteral2() As Double     ' Compliant - different return type
+            Console.WriteLine("Test")
+            Return 42
+        End Function
+
+        Private Shared Function SameReturnTypeWithDifferentName1() As String        ' Secondary [SameReturnTypeWithDifferentName]
+            Console.WriteLine("Test")
+            Return "A"
+        End Function
+
+        Private Shared Function SameReturnTypeWithDifferentName2() As String        ' Noncompliant [SameReturnTypeWithDifferentName]
+            Console.WriteLine("Test")
+            Return "A"
+        End Function
+
+        Private Shared Function SameImplementationWithUnknownReturnType1() As UnkownType1  ' Error[BC30002]
+            Console.WriteLine("Test")
+            Return "A"
+        End Function
+
+        Private Shared Function SameImplementationWithUnknownReturnType2() As UnkownType2  ' Error[BC30002]
+            Console.WriteLine("Test")
+            Return "A"
+        End Function
+
+        Private Shared Sub SubProcedure()
+            Console.WriteLine("Test1")
+            Console.WriteLine("Test2")
+        End Sub
+
+        Private Shared Function Func() As String    ' Compliant - Func() and SubProcedure() has different return types
+            Console.WriteLine("Test1")
+            Console.WriteLine("Test2")
+            Return "A"
+        End Function
+    End Class
 
 End Namespace
