@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Concurrent;
+using SonarAnalyzer.Core.Trackers;
 
 namespace SonarAnalyzer.Rules.CSharp;
 

@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Trackers;
+namespace SonarAnalyzer.Core.Trackers;
 
 /// <summary>
 /// Tracker class for rules that check the inheritance tree for e.g. disallowed base classes.

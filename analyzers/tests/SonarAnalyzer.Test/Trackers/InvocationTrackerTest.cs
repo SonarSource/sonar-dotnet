@@ -18,12 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Core.Trackers;
 using SonarAnalyzer.CSharp.Core.Trackers;
 using SonarAnalyzer.VisualBasic.Core.Trackers;
 using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace SonarAnalyzer.Test.Helpers
+namespace SonarAnalyzer.Test.Trackers
 {
     [TestClass]
     public class InvocationTrackerTest

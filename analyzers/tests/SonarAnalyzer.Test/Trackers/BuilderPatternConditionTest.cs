@@ -18,16 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Core.Trackers;
 using SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 using SonarAnalyzer.CSharp.Core.Trackers;
 using SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
 using SonarAnalyzer.VisualBasic.Core.Trackers;
-using BuilderPatternDescriptorCS = SonarAnalyzer.Helpers.BuilderPatternDescriptor<Microsoft.CodeAnalysis.CSharp.SyntaxKind, Microsoft.CodeAnalysis.CSharp.Syntax.InvocationExpressionSyntax>;
-using BuilderPatternDescriptorVB = SonarAnalyzer.Helpers.BuilderPatternDescriptor<Microsoft.CodeAnalysis.VisualBasic.SyntaxKind, Microsoft.CodeAnalysis.VisualBasic.Syntax.InvocationExpressionSyntax>;
+using BuilderPatternDescriptorCS = SonarAnalyzer.Core.Trackers.BuilderPatternDescriptor<Microsoft.CodeAnalysis.CSharp.SyntaxKind, Microsoft.CodeAnalysis.CSharp.Syntax.InvocationExpressionSyntax>;
+using BuilderPatternDescriptorVB = SonarAnalyzer.Core.Trackers.BuilderPatternDescriptor<Microsoft.CodeAnalysis.VisualBasic.SyntaxKind, Microsoft.CodeAnalysis.VisualBasic.Syntax.InvocationExpressionSyntax>;
 using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace SonarAnalyzer.Test.Helpers
+namespace SonarAnalyzer.Test.Trackers
 {
     [TestClass]
     public class BuilderPatternConditionTest

@@ -21,7 +21,7 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CSharp.Core.Trackers;
 
-namespace SonarAnalyzer.Test.Helpers
+namespace SonarAnalyzer.Test.Trackers
 {
     [TestClass]
     public class ConstantValueFinderTest
