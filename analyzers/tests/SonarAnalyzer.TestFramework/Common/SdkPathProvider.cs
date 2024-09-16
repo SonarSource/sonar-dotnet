@@ -55,8 +55,14 @@ public static class SdkPathProvider
         // Due to the preview versions naming convention, we cannot use the folder names as version numbers so we need to look at the file versions of the assemblies from the folder.
         // When reading the dll versions, the File version (e.g. 9.1.24.40712) is considered instead of the Product version (e.g. 9.1.100-preview.7.24407.12+hash).
         return Directory.GetDirectories(path, $"{DotnetVersion}.*")
-            .OrderBy(x => FileVersionInfo.GetVersionInfo(Path.Combine(x, assemblyName)))
+            .OrderBy(x => FromFolderName(x, assemblyName))
             .Last();
+
+        static Version FromFolderName(string folderName, string assemblyName)
+        {
+            var fv = FileVersionInfo.GetVersionInfo(Path.Combine(folderName, assemblyName));
+            return new Version(fv.FileMajorPart, fv.FileMinorPart, fv.FileBuildPart, fv.FilePrivatePart);
+        }
     }
 
     private sealed class AssemblyLoader : IAnalyzerAssemblyLoader
