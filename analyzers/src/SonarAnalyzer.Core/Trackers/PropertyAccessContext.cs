@@ -18,23 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public class PropertyAccessContext : SyntaxBaseContext
 {
-    public class PropertyAccessContext : SyntaxBaseContext
+    public string PropertyName { get; }
+    public Lazy<IPropertySymbol> PropertySymbol { get; }
+
+    public PropertyAccessContext(SonarSyntaxNodeReportingContext context, string propertyName) : base(context)
     {
-        public string PropertyName { get; }
-        public Lazy<IPropertySymbol> PropertySymbol { get; }
+        PropertyName = propertyName;
+        PropertySymbol = new Lazy<IPropertySymbol>(() => context.SemanticModel.GetSymbolInfo(context.Node).Symbol as IPropertySymbol);
+    }
 
-        public PropertyAccessContext(SonarSyntaxNodeReportingContext context, string propertyName) : base(context)
-        {
-            PropertyName = propertyName;
-            PropertySymbol = new Lazy<IPropertySymbol>(() => context.SemanticModel.GetSymbolInfo(context.Node).Symbol as IPropertySymbol);
-        }
-
-        public PropertyAccessContext(SyntaxNode node, SemanticModel semanticModel, string propertyName) : base(node, semanticModel)
-        {
-            PropertyName = propertyName;
-            PropertySymbol = new Lazy<IPropertySymbol>(() => semanticModel.GetSymbolInfo(node).Symbol as IPropertySymbol);
-        }
+    public PropertyAccessContext(SyntaxNode node, SemanticModel semanticModel, string propertyName) : base(node, semanticModel)
+    {
+        PropertyName = propertyName;
+        PropertySymbol = new Lazy<IPropertySymbol>(() => semanticModel.GetSymbolInfo(node).Symbol as IPropertySymbol);
     }
 }

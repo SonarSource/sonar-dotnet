@@ -18,70 +18,69 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public abstract class BuilderPatternCondition<TSyntaxKind, TInvocationSyntax>
+    where TSyntaxKind : struct
+    where TInvocationSyntax : SyntaxNode
 {
-    public abstract class BuilderPatternCondition<TSyntaxKind, TInvocationSyntax>
-        where TSyntaxKind : struct
-        where TInvocationSyntax : SyntaxNode
+    private readonly bool constructorIsSafe;
+    private readonly BuilderPatternDescriptor<TSyntaxKind, TInvocationSyntax>[] descriptors;
+    private readonly AssignmentFinder assignmentFinder;
+
+    protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+    protected abstract SyntaxNode GetExpression(TInvocationSyntax node);
+    protected abstract string GetIdentifierName(TInvocationSyntax node);
+    protected abstract bool IsMemberAccess(SyntaxNode node, out SyntaxNode memberAccessExpression);
+    protected abstract bool IsObjectCreation(SyntaxNode node);
+    protected abstract bool IsIdentifier(SyntaxNode node, out string identifierName);
+
+    protected BuilderPatternCondition(bool constructorIsSafe, BuilderPatternDescriptor<TSyntaxKind, TInvocationSyntax>[] descriptors, AssignmentFinder assignmentFinder)
     {
-        private readonly bool constructorIsSafe;
-        private readonly BuilderPatternDescriptor<TSyntaxKind, TInvocationSyntax>[] descriptors;
-        private readonly AssignmentFinder assignmentFinder;
+        this.constructorIsSafe = constructorIsSafe;
+        this.descriptors = descriptors;
+        this.assignmentFinder = assignmentFinder;
+    }
 
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-        protected abstract SyntaxNode GetExpression(TInvocationSyntax node);
-        protected abstract string GetIdentifierName(TInvocationSyntax node);
-        protected abstract bool IsMemberAccess(SyntaxNode node, out SyntaxNode memberAccessExpression);
-        protected abstract bool IsObjectCreation(SyntaxNode node);
-        protected abstract bool IsIdentifier(SyntaxNode node, out string identifierName);
-
-        protected BuilderPatternCondition(bool constructorIsSafe, BuilderPatternDescriptor<TSyntaxKind, TInvocationSyntax>[] descriptors, AssignmentFinder assignmentFinder)
+    public bool IsInvalidBuilderInitialization(InvocationContext context)
+    {
+        var current = context.Node;
+        while (current != null)
         {
-            this.constructorIsSafe = constructorIsSafe;
-            this.descriptors = descriptors;
-            this.assignmentFinder = assignmentFinder;
-        }
-
-        public bool IsInvalidBuilderInitialization(InvocationContext context)
-        {
-            var current = context.Node;
-            while (current != null)
+            current = Language.Syntax.RemoveParentheses(current);
+            if (current is TInvocationSyntax invocation)
             {
-                current = Language.Syntax.RemoveParentheses(current);
-                if (current is TInvocationSyntax invocation)
+                var invocationContext = new InvocationContext(invocation, GetIdentifierName(invocation), context.SemanticModel);
+                if (descriptors.FirstOrDefault(x => x.IsMatch(invocationContext)) is { } desc)
                 {
-                    var invocationContext = new InvocationContext(invocation, GetIdentifierName(invocation), context.SemanticModel);
-                    if (descriptors.FirstOrDefault(x => x.IsMatch(invocationContext)) is { } desc)
-                    {
-                        return !desc.IsValid(invocation);
-                    }
-                    current = GetExpression(invocation);
+                    return !desc.IsValid(invocation);
                 }
-                else if (IsMemberAccess(current, out var memberAccessExpression))
-                {
-                    current = memberAccessExpression;
-                }
-                else if (IsObjectCreation(current))
-                {
-                    // We're sure that full invocation chain started here => we've seen all configuration invocations.
-                    return !constructorIsSafe;
-                }
-                else if (IsIdentifier(current, out var identifierName))
-                {
-                    if (!(context.SemanticModel.GetSymbolInfo(current).Symbol is ILocalSymbol))
-                    {
-                        return false;
-                    }
-                    // When tracking reaches the local variable in invocation chain 'variable.MethodA().MethodB()'
-                    // we'll try to find preceding assignment to that variable to continue inspection of initialization chain.
-                    current = assignmentFinder.FindLinearPrecedingAssignmentExpression(identifierName, current);
-                }
-                else
+                current = GetExpression(invocation);
+            }
+            else if (IsMemberAccess(current, out var memberAccessExpression))
+            {
+                current = memberAccessExpression;
+            }
+            else if (IsObjectCreation(current))
+            {
+                // We're sure that full invocation chain started here => we've seen all configuration invocations.
+                return !constructorIsSafe;
+            }
+            else if (IsIdentifier(current, out var identifierName))
+            {
+                if (!(context.SemanticModel.GetSymbolInfo(current).Symbol is ILocalSymbol))
                 {
                     return false;
                 }
+                // When tracking reaches the local variable in invocation chain 'variable.MethodA().MethodB()'
+                // we'll try to find preceding assignment to that variable to continue inspection of initialization chain.
+                current = assignmentFinder.FindLinearPrecedingAssignmentExpression(identifierName, current);
             }
-            return false;
+            else
+            {
+                return false;
+            }
         }
+        return false;
     }
 }

@@ -18,13 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
-{
-    public class ElementAccessContext : SyntaxBaseContext
-    {
-        public Lazy<IPropertySymbol> InvokedPropertySymbol { get; }
+namespace SonarAnalyzer.Helpers;
 
-        public ElementAccessContext(SonarSyntaxNodeReportingContext context) : base(context) =>
-            InvokedPropertySymbol = new Lazy<IPropertySymbol>(() => context.SemanticModel.GetSymbolInfo(context.Node).Symbol as IPropertySymbol);
-    }
+public class ElementAccessContext : SyntaxBaseContext
+{
+    public Lazy<IPropertySymbol> InvokedPropertySymbol { get; }
+
+    public ElementAccessContext(SonarSyntaxNodeReportingContext context) : base(context) =>
+        InvokedPropertySymbol = new Lazy<IPropertySymbol>(() => context.SemanticModel.GetSymbolInfo(context.Node).Symbol as IPropertySymbol);
 }

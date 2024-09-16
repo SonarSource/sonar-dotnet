@@ -18,48 +18,47 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Trackers
+namespace SonarAnalyzer.Helpers.Trackers;
+
+public abstract class ObjectCreationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, ObjectCreationContext>
+    where TSyntaxKind : struct
 {
-    public abstract class ObjectCreationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, ObjectCreationContext>
-        where TSyntaxKind : struct
-    {
-        protected override TSyntaxKind[] TrackedSyntaxKinds => Language.SyntaxKind.ObjectCreationExpressions;
+    protected override TSyntaxKind[] TrackedSyntaxKinds => Language.SyntaxKind.ObjectCreationExpressions;
 
-        public abstract Condition ArgumentAtIndexIsConst(int index);
-        public abstract object ConstArgumentForParameter(ObjectCreationContext context, string parameterName);
+    public abstract Condition ArgumentAtIndexIsConst(int index);
+    public abstract object ConstArgumentForParameter(ObjectCreationContext context, string parameterName);
 
-        internal Condition ArgumentIsBoolConstant(string parameterName, bool expectedValue) =>
-            context => ConstArgumentForParameter(context, parameterName) is bool boolValue && boolValue == expectedValue;
+    internal Condition ArgumentIsBoolConstant(string parameterName, bool expectedValue) =>
+        context => ConstArgumentForParameter(context, parameterName) is bool boolValue && boolValue == expectedValue;
 
-        internal Condition ArgumentAtIndexIs(int index, KnownType type) =>
-            context => context.InvokedConstructorSymbol.Value != null
-                       && context.InvokedConstructorSymbol.Value.Parameters.Length > index
-                       && context.InvokedConstructorSymbol.Value.Parameters[index].Type.Is(type);
+    internal Condition ArgumentAtIndexIs(int index, KnownType type) =>
+        context => context.InvokedConstructorSymbol.Value != null
+                   && context.InvokedConstructorSymbol.Value.Parameters.Length > index
+                   && context.InvokedConstructorSymbol.Value.Parameters[index].Type.Is(type);
 
-        internal Condition WhenDerivesOrImplementsAny(params KnownType[] types) =>
-            context => context.InvokedConstructorSymbol.Value != null
-                       && context.InvokedConstructorSymbol.Value.IsConstructor()
-                       && context.InvokedConstructorSymbol.Value.ContainingType.DerivesOrImplementsAny(types.ToImmutableArray());
+    internal Condition WhenDerivesOrImplementsAny(params KnownType[] types) =>
+        context => context.InvokedConstructorSymbol.Value != null
+                   && context.InvokedConstructorSymbol.Value.IsConstructor()
+                   && context.InvokedConstructorSymbol.Value.ContainingType.DerivesOrImplementsAny(types.ToImmutableArray());
 
-        internal Condition MatchConstructor(params KnownType[] types) =>
-            // We cannot do a syntax check first because a type name can be aliased with
-            // a using Alias = Fully.Qualified.Name and we will generate false negative
-            // for new Alias()
-            context => context.InvokedConstructorSymbol.Value != null
-                       && context.InvokedConstructorSymbol.Value.IsConstructor()
-                       && context.InvokedConstructorSymbol.Value.ContainingType.IsAny(types);
+    internal Condition MatchConstructor(params KnownType[] types) =>
+        // We cannot do a syntax check first because a type name can be aliased with
+        // a using Alias = Fully.Qualified.Name and we will generate false negative
+        // for new Alias()
+        context => context.InvokedConstructorSymbol.Value != null
+                   && context.InvokedConstructorSymbol.Value.IsConstructor()
+                   && context.InvokedConstructorSymbol.Value.ContainingType.IsAny(types);
 
-        internal Condition WhenDerivesFrom(KnownType baseType) =>
-            context => context.InvokedConstructorSymbol.Value != null
-                       && context.InvokedConstructorSymbol.Value.IsConstructor()
-                       && context.InvokedConstructorSymbol.Value.ContainingType.DerivesFrom(baseType);
+    internal Condition WhenDerivesFrom(KnownType baseType) =>
+        context => context.InvokedConstructorSymbol.Value != null
+                   && context.InvokedConstructorSymbol.Value.IsConstructor()
+                   && context.InvokedConstructorSymbol.Value.ContainingType.DerivesFrom(baseType);
 
-        internal Condition WhenImplements(KnownType baseType) =>
-            context => context.InvokedConstructorSymbol.Value != null
-                       && context.InvokedConstructorSymbol.Value.IsConstructor()
-                       && context.InvokedConstructorSymbol.Value.ContainingType.Implements(baseType);
+    internal Condition WhenImplements(KnownType baseType) =>
+        context => context.InvokedConstructorSymbol.Value != null
+                   && context.InvokedConstructorSymbol.Value.IsConstructor()
+                   && context.InvokedConstructorSymbol.Value.ContainingType.Implements(baseType);
 
-        protected override ObjectCreationContext CreateContext(SonarSyntaxNodeReportingContext context) =>
-            new ObjectCreationContext(context);
-    }
+    protected override ObjectCreationContext CreateContext(SonarSyntaxNodeReportingContext context) =>
+        new ObjectCreationContext(context);
 }

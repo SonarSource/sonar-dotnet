@@ -18,19 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public class InvocationContext : SyntaxBaseContext
 {
-    public class InvocationContext : SyntaxBaseContext
+    public string MethodName { get; }
+    public Lazy<IMethodSymbol> MethodSymbol { get; }
+
+    public InvocationContext(SonarSyntaxNodeReportingContext context, string methodName) : this(context.Node, methodName, context.SemanticModel) { }
+
+    public InvocationContext(SyntaxNode node, string methodName, SemanticModel semanticModel) : base(node, semanticModel)
     {
-        public string MethodName { get; }
-        public Lazy<IMethodSymbol> MethodSymbol { get; }
-
-        public InvocationContext(SonarSyntaxNodeReportingContext context, string methodName) : this(context.Node, methodName, context.SemanticModel) { }
-
-        public InvocationContext(SyntaxNode node, string methodName, SemanticModel semanticModel) : base(node, semanticModel)
-        {
-            MethodName = methodName;
-            MethodSymbol = new Lazy<IMethodSymbol>(() => SemanticModel.GetSymbolInfo(Node).Symbol as IMethodSymbol);
-        }
+        MethodName = methodName;
+        MethodSymbol = new Lazy<IMethodSymbol>(() => SemanticModel.GetSymbolInfo(Node).Symbol as IMethodSymbol);
     }
 }

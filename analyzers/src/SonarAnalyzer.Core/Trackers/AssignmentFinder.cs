@@ -18,47 +18,46 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public abstract class AssignmentFinder
 {
-    public abstract class AssignmentFinder
+    protected abstract SyntaxNode GetTopMostContainingMethod(SyntaxNode node);
+    /// <param name="anyAssignmentKind">'true' will find any AssignmentExpressionSyntax like =, +=, -=, &=. 'false' will find only '=' SimpleAssignmentExpression.</param>
+    protected abstract bool IsAssignmentToIdentifier(SyntaxNode node, string identifierName, bool anyAssignmentKind, out SyntaxNode rightExpression);
+    protected abstract bool IsIdentifierDeclaration(SyntaxNode node, string identifierName, out SyntaxNode initializer);
+    protected abstract bool IsLoop(SyntaxNode node);
+
+    public SyntaxNode FindLinearPrecedingAssignmentExpression(string identifierName, SyntaxNode current, Func<SyntaxNode> defaultValue = null)
     {
-        protected abstract SyntaxNode GetTopMostContainingMethod(SyntaxNode node);
-        /// <param name="anyAssignmentKind">'true' will find any AssignmentExpressionSyntax like =, +=, -=, &=. 'false' will find only '=' SimpleAssignmentExpression.</param>
-        protected abstract bool IsAssignmentToIdentifier(SyntaxNode node, string identifierName, bool anyAssignmentKind, out SyntaxNode rightExpression);
-        protected abstract bool IsIdentifierDeclaration(SyntaxNode node, string identifierName, out SyntaxNode initializer);
-        protected abstract bool IsLoop(SyntaxNode node);
-
-        public SyntaxNode FindLinearPrecedingAssignmentExpression(string identifierName, SyntaxNode current, Func<SyntaxNode> defaultValue = null)
+        var method = GetTopMostContainingMethod(current);
+        while (current != method && current?.Parent != null)
         {
-            var method = GetTopMostContainingMethod(current);
-            while (current != method && current?.Parent != null)
+            if (IsLoop(current) && ContainsNestedAssignmentToIdentifier(current))
             {
-                if (IsLoop(current) && ContainsNestedAssignmentToIdentifier(current))
-                {
-                    return null; // There's assignment inside this loop, value can be altered by each iteration
-                }
-
-                foreach (var statement in current.Parent.ChildNodes().TakeWhile(x => x != current).Reverse())
-                {
-                    if (IsAssignmentToIdentifier(statement, identifierName, false, out var right))
-                    {
-                        return right;
-                    }
-                    else if (IsIdentifierDeclaration(statement, identifierName, out var initializer))
-                    {
-                        return initializer;
-                    }
-                    else if (ContainsNestedAssignmentToIdentifier(statement))
-                    {
-                        return null; // Assignment inside nested statement (if, try, for, ...)
-                    }
-                }
-                current = current.Parent;
+                return null; // There's assignment inside this loop, value can be altered by each iteration
             }
-            return defaultValue?.Invoke();
 
-            bool ContainsNestedAssignmentToIdentifier(SyntaxNode node) =>
-                node.DescendantNodes().Any(x => IsAssignmentToIdentifier(x, identifierName, true, out _));
+            foreach (var statement in current.Parent.ChildNodes().TakeWhile(x => x != current).Reverse())
+            {
+                if (IsAssignmentToIdentifier(statement, identifierName, false, out var right))
+                {
+                    return right;
+                }
+                else if (IsIdentifierDeclaration(statement, identifierName, out var initializer))
+                {
+                    return initializer;
+                }
+                else if (ContainsNestedAssignmentToIdentifier(statement))
+                {
+                    return null; // Assignment inside nested statement (if, try, for, ...)
+                }
+            }
+            current = current.Parent;
         }
+        return defaultValue?.Invoke();
+
+        bool ContainsNestedAssignmentToIdentifier(SyntaxNode node) =>
+            node.DescendantNodes().Any(x => IsAssignmentToIdentifier(x, identifierName, true, out _));
     }
 }

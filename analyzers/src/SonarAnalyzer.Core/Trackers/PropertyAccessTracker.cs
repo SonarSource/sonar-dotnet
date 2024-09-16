@@ -18,33 +18,32 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Trackers
+namespace SonarAnalyzer.Helpers.Trackers;
+
+public abstract class PropertyAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, PropertyAccessContext>
+    where TSyntaxKind : struct
 {
-    public abstract class PropertyAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, PropertyAccessContext>
-        where TSyntaxKind : struct
+    public abstract object AssignedValue(PropertyAccessContext context);
+    public abstract Condition MatchGetter();
+    public abstract Condition MatchSetter();
+    public abstract Condition AssignedValueIsConstant();
+    protected abstract bool IsIdentifierWithinMemberAccess(SyntaxNode expression);
+
+    public Condition MatchProperty(params MemberDescriptor[] properties) =>
+        MatchProperty(false, properties);
+
+    public Condition MatchProperty(bool checkOverridenProperties, params MemberDescriptor[] properties) =>
+        context => MemberDescriptor.MatchesAny(context.PropertyName, context.PropertySymbol, checkOverridenProperties, Language.NameComparison, properties);
+
+    protected override PropertyAccessContext CreateContext(SonarSyntaxNodeReportingContext context)
     {
-        public abstract object AssignedValue(PropertyAccessContext context);
-        public abstract Condition MatchGetter();
-        public abstract Condition MatchSetter();
-        public abstract Condition AssignedValueIsConstant();
-        protected abstract bool IsIdentifierWithinMemberAccess(SyntaxNode expression);
-
-        public Condition MatchProperty(params MemberDescriptor[] properties) =>
-            MatchProperty(false, properties);
-
-        public Condition MatchProperty(bool checkOverridenProperties, params MemberDescriptor[] properties) =>
-            context => MemberDescriptor.MatchesAny(context.PropertyName, context.PropertySymbol, checkOverridenProperties, Language.NameComparison, properties);
-
-        protected override PropertyAccessContext CreateContext(SonarSyntaxNodeReportingContext context)
+        // We register for both MemberAccess and IdentifierName and we want to
+        // avoid raising two times for the same identifier.
+        if (IsIdentifierWithinMemberAccess(context.Node))
         {
-            // We register for both MemberAccess and IdentifierName and we want to
-            // avoid raising two times for the same identifier.
-            if (IsIdentifierWithinMemberAccess(context.Node))
-            {
-                return null;
-            }
-
-            return Language.Syntax.NodeIdentifier(context.Node) is { } propertyIdentifier ? new PropertyAccessContext(context, propertyIdentifier.ValueText) : null;
+            return null;
         }
+
+        return Language.Syntax.NodeIdentifier(context.Node) is { } propertyIdentifier ? new PropertyAccessContext(context, propertyIdentifier.ValueText) : null;
     }
 }

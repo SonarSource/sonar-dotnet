@@ -18,50 +18,49 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public abstract class SyntaxTrackerBase<TSyntaxKind, TContext> : TrackerBase<TSyntaxKind, TContext>
+    where TSyntaxKind : struct
+    where TContext : SyntaxBaseContext
 {
-    public abstract class SyntaxTrackerBase<TSyntaxKind, TContext> : TrackerBase<TSyntaxKind, TContext>
-        where TSyntaxKind : struct
-        where TContext : SyntaxBaseContext
+    protected abstract TSyntaxKind[] TrackedSyntaxKinds { get; }
+    protected abstract TContext CreateContext(SonarSyntaxNodeReportingContext context);
+
+    public void Track(TrackerInput input, params Condition[] conditions) =>
+        Track(input, [], conditions);
+
+    public void Track(TrackerInput input, string[] diagnosticMessageArgs, params Condition[] conditions)
     {
-        protected abstract TSyntaxKind[] TrackedSyntaxKinds { get; }
-        protected abstract TContext CreateContext(SonarSyntaxNodeReportingContext context);
-
-        public void Track(TrackerInput input, params Condition[] conditions) =>
-            Track(input, [], conditions);
-
-        public void Track(TrackerInput input, string[] diagnosticMessageArgs, params Condition[] conditions)
-        {
-            input.Context.RegisterCompilationStartAction(c =>
+        input.Context.RegisterCompilationStartAction(c =>
+          {
+              if (input.IsEnabled(c.Options))
               {
-                  if (input.IsEnabled(c.Options))
-                  {
-                      c.RegisterNodeAction(Language.GeneratedCodeRecognizer, TrackAndReportIfNecessary, TrackedSyntaxKinds);
-                  }
-              });
+                  c.RegisterNodeAction(Language.GeneratedCodeRecognizer, TrackAndReportIfNecessary, TrackedSyntaxKinds);
+              }
+          });
 
-            void TrackAndReportIfNecessary(SonarSyntaxNodeReportingContext c)
+        void TrackAndReportIfNecessary(SonarSyntaxNodeReportingContext c)
+        {
+            if (CreateContext(c) is { } trackingContext
+                && Array.TrueForAll(conditions, x => x(trackingContext))
+                && trackingContext.PrimaryLocation is not null
+                && trackingContext.PrimaryLocation != Location.None)
             {
-                if (CreateContext(c) is { } trackingContext
-                    && Array.TrueForAll(conditions, x => x(trackingContext))
-                    && trackingContext.PrimaryLocation is not null
-                    && trackingContext.PrimaryLocation != Location.None)
-                {
-                    c.ReportIssue(input.Rule, trackingContext.PrimaryLocation, trackingContext.SecondaryLocations, diagnosticMessageArgs);
-                }
+                c.ReportIssue(input.Rule, trackingContext.PrimaryLocation, trackingContext.SecondaryLocations, diagnosticMessageArgs);
             }
         }
-
-        public Condition ExceptWhen(Condition condition) =>
-            x => !condition(x);
-
-        public Condition And(Condition condition1, Condition condition2) =>
-            x => condition1(x) && condition2(x);
-
-        public Condition Or(Condition condition1, Condition condition2) =>
-            x => condition1(x) || condition2(x);
-
-        public Condition Or(Condition condition1, Condition condition2, Condition condition3) =>
-            x => condition1(x) || condition2(x) || condition3(x);
     }
+
+    public Condition ExceptWhen(Condition condition) =>
+        x => !condition(x);
+
+    public Condition And(Condition condition1, Condition condition2) =>
+        x => condition1(x) && condition2(x);
+
+    public Condition Or(Condition condition1, Condition condition2) =>
+        x => condition1(x) || condition2(x);
+
+    public Condition Or(Condition condition1, Condition condition2, Condition condition3) =>
+        x => condition1(x) || condition2(x) || condition3(x);
 }
