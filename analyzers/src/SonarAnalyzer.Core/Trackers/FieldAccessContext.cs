@@ -18,17 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
-{
-    public class FieldAccessContext : SyntaxBaseContext
-    {
-        public string FieldName { get; }
-        public Lazy<IFieldSymbol> InvokedFieldSymbol { get; }
+namespace SonarAnalyzer.Helpers;
 
-        public FieldAccessContext(SonarSyntaxNodeReportingContext context, string fieldName) : base(context)
-        {
-            FieldName = fieldName;
-            InvokedFieldSymbol = new Lazy<IFieldSymbol>(() => SemanticModel.GetSymbolInfo(Node).Symbol as IFieldSymbol);
-        }
+public class FieldAccessContext : SyntaxBaseContext
+{
+    public string FieldName { get; }
+    public Lazy<IFieldSymbol> InvokedFieldSymbol { get; }
+
+    public FieldAccessContext(SonarSyntaxNodeReportingContext context, string fieldName) : base(context)
+    {
+        FieldName = fieldName;
+        InvokedFieldSymbol = new Lazy<IFieldSymbol>(() => SemanticModel.GetSymbolInfo(Node).Symbol as IFieldSymbol);
     }
 }

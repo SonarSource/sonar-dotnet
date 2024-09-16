@@ -18,21 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public class SyntaxBaseContext : BaseContext
 {
-    public class SyntaxBaseContext : BaseContext
+    public SemanticModel SemanticModel { get; }
+    public SyntaxNode Node { get; }
+    public Location PrimaryLocation { get; set; }
+
+    public SyntaxBaseContext(SonarSyntaxNodeReportingContext context) : this(context.Node, context.SemanticModel) { }
+
+    public SyntaxBaseContext(SyntaxNode node, SemanticModel semanticModel)
     {
-        public SemanticModel SemanticModel { get; }
-        public SyntaxNode Node { get; }
-        public Location PrimaryLocation { get; set; }
-
-        public SyntaxBaseContext(SonarSyntaxNodeReportingContext context) : this(context.Node, context.SemanticModel) { }
-
-        public SyntaxBaseContext(SyntaxNode node, SemanticModel semanticModel)
-        {
-            SemanticModel = semanticModel;
-            Node = node;
-            PrimaryLocation = Node.GetLocation();
-        }
+        SemanticModel = semanticModel;
+        Node = node;
+        PrimaryLocation = Node.GetLocation();
     }
 }

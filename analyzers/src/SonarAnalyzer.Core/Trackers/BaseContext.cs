@@ -18,18 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
-{
-    public class BaseContext
-    {
-        public IList<SecondaryLocation> SecondaryLocations { get; } = new List<SecondaryLocation>();
+namespace SonarAnalyzer.Helpers;
 
-        public void AddSecondaryLocation(Location location, string message, params string[] formatArgs)
+public class BaseContext
+{
+    public IList<SecondaryLocation> SecondaryLocations { get; } = new List<SecondaryLocation>();
+
+    public void AddSecondaryLocation(Location location, string message, params string[] formatArgs)
+    {
+        if (location != null && location != Location.None)
         {
-            if (location != null && location != Location.None)
-            {
-                SecondaryLocations.Add(new SecondaryLocation(location, string.Format(message, formatArgs)));
-            }
+            SecondaryLocations.Add(new SecondaryLocation(location, string.Format(message, formatArgs)));
         }
     }
 }

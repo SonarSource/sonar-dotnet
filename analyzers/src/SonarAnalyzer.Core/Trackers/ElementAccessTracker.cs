@@ -18,26 +18,25 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Trackers
+namespace SonarAnalyzer.Helpers.Trackers;
+
+public abstract class ElementAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, ElementAccessContext>
+    where TSyntaxKind : struct
 {
-    public abstract class ElementAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, ElementAccessContext>
-        where TSyntaxKind : struct
-    {
-        public abstract object AssignedValue(ElementAccessContext context);
-        public abstract Condition ArgumentAtIndexEquals(int index, string value);
-        public abstract Condition MatchSetter();
-        public abstract Condition MatchProperty(MemberDescriptor member);
+    public abstract object AssignedValue(ElementAccessContext context);
+    public abstract Condition ArgumentAtIndexEquals(int index, string value);
+    public abstract Condition MatchSetter();
+    public abstract Condition MatchProperty(MemberDescriptor member);
 
-        internal Condition ArgumentAtIndexIs(int index, params KnownType[] types) =>
-            context => context.InvokedPropertySymbol.Value != null
-                       && context.InvokedPropertySymbol.Value.Parameters.Length > index
-                       && context.InvokedPropertySymbol.Value.Parameters[0].Type.DerivesOrImplements(types[index]);
+    internal Condition ArgumentAtIndexIs(int index, params KnownType[] types) =>
+        context => context.InvokedPropertySymbol.Value != null
+                   && context.InvokedPropertySymbol.Value.Parameters.Length > index
+                   && context.InvokedPropertySymbol.Value.Parameters[0].Type.DerivesOrImplements(types[index]);
 
-        internal Condition MatchIndexerIn(params KnownType[] types) =>
-            context => context.InvokedPropertySymbol.Value != null
-                       && context.InvokedPropertySymbol.Value.ContainingType.DerivesOrImplementsAny(types.ToImmutableArray());
+    internal Condition MatchIndexerIn(params KnownType[] types) =>
+        context => context.InvokedPropertySymbol.Value != null
+                   && context.InvokedPropertySymbol.Value.ContainingType.DerivesOrImplementsAny(types.ToImmutableArray());
 
-        protected override ElementAccessContext CreateContext(SonarSyntaxNodeReportingContext context) =>
-            new ElementAccessContext(context);
-    }
+    protected override ElementAccessContext CreateContext(SonarSyntaxNodeReportingContext context) =>
+        new ElementAccessContext(context);
 }

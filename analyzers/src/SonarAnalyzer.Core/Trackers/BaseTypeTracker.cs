@@ -18,42 +18,41 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Trackers
+namespace SonarAnalyzer.Helpers.Trackers;
+
+/// <summary>
+/// Tracker class for rules that check the inheritance tree for e.g. disallowed base classes.
+/// </summary>
+/// <typeparam name="TSyntaxKind">The syntax type.</typeparam>
+public abstract class BaseTypeTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, BaseTypeContext>
+    where TSyntaxKind : struct
 {
     /// <summary>
-    /// Tracker class for rules that check the inheritance tree for e.g. disallowed base classes.
+    /// Extract the list of type syntax nodes for the base types/interface types.
     /// </summary>
-    /// <typeparam name="TSyntaxKind">The syntax type.</typeparam>
-    public abstract class BaseTypeTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, BaseTypeContext>
-        where TSyntaxKind : struct
+    protected abstract IEnumerable<SyntaxNode> GetBaseTypeNodes(SyntaxNode contextNode);
+
+    internal Condition MatchSubclassesOf(params KnownType[] types)
     {
-        /// <summary>
-        /// Extract the list of type syntax nodes for the base types/interface types.
-        /// </summary>
-        protected abstract IEnumerable<SyntaxNode> GetBaseTypeNodes(SyntaxNode contextNode);
-
-        internal Condition MatchSubclassesOf(params KnownType[] types)
+        var immutableTypes = types.ToImmutableArray();
+        return context =>
         {
-            var immutableTypes = types.ToImmutableArray();
-            return context =>
+            foreach (var baseTypeNode in context.AllBaseTypeNodes)
             {
-                foreach (var baseTypeNode in context.AllBaseTypeNodes)
+                if (context.SemanticModel.GetTypeInfo(baseTypeNode).Type.DerivesOrImplementsAny(immutableTypes))
                 {
-                    if (context.SemanticModel.GetTypeInfo(baseTypeNode).Type.DerivesOrImplementsAny(immutableTypes))
-                    {
-                        context.PrimaryLocation = baseTypeNode.GetLocation();
-                        return true; // assume there won't be more than one matching node
-                    }
+                    context.PrimaryLocation = baseTypeNode.GetLocation();
+                    return true; // assume there won't be more than one matching node
                 }
+            }
 
-                return false;
-            };
-        }
-
-        protected override BaseTypeContext CreateContext(SonarSyntaxNodeReportingContext context) =>
-            GetBaseTypeNodes(context.Node) is { } baseTypeList
-            && baseTypeList.Any()
-            ? new BaseTypeContext(context, baseTypeList)
-            : null;
+            return false;
+        };
     }
+
+    protected override BaseTypeContext CreateContext(SonarSyntaxNodeReportingContext context) =>
+        GetBaseTypeNodes(context.Node) is { } baseTypeList
+        && baseTypeList.Any()
+        ? new BaseTypeContext(context, baseTypeList)
+        : null;
 }

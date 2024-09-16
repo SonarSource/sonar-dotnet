@@ -18,26 +18,25 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public class TrackerInput
 {
-    public class TrackerInput
+    private readonly IAnalyzerConfiguration configuration;
+
+    public DiagnosticDescriptor Rule { get; }
+    public SonarAnalysisContext Context { get; }
+
+    public TrackerInput(SonarAnalysisContext context, IAnalyzerConfiguration configuration, DiagnosticDescriptor rule)
     {
-        private readonly IAnalyzerConfiguration configuration;
+        Context = context;
+        this.configuration = configuration;
+        Rule = rule;
+    }
 
-        public DiagnosticDescriptor Rule { get; }
-        public SonarAnalysisContext Context { get; }
-
-        public TrackerInput(SonarAnalysisContext context, IAnalyzerConfiguration configuration, DiagnosticDescriptor rule)
-        {
-            Context = context;
-            this.configuration = configuration;
-            Rule = rule;
-        }
-
-        public bool IsEnabled(AnalyzerOptions options)
-        {
-            configuration.Initialize(options);
-            return configuration.IsEnabled(Rule.Id);
-        }
+    public bool IsEnabled(AnalyzerOptions options)
+    {
+        configuration.Initialize(options);
+        return configuration.IsEnabled(Rule.Id);
     }
 }

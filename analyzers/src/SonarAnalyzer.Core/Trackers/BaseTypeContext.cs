@@ -18,19 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+/// <summary>
+/// Syntax and semantic information about an inheritance relationship.
+/// </summary>
+public class BaseTypeContext : SyntaxBaseContext
 {
     /// <summary>
-    /// Syntax and semantic information about an inheritance relationship.
+    /// A list of all type syntax nodes for node being analyzed.
     /// </summary>
-    public class BaseTypeContext : SyntaxBaseContext
-    {
-        /// <summary>
-        /// A list of all type syntax nodes for node being analyzed.
-        /// </summary>
-        public IEnumerable<SyntaxNode> AllBaseTypeNodes { get; }
+    public IEnumerable<SyntaxNode> AllBaseTypeNodes { get; }
 
-        public BaseTypeContext(SonarSyntaxNodeReportingContext context, IEnumerable<SyntaxNode> allBaseTypeNodes) : base(context) =>
-            AllBaseTypeNodes = allBaseTypeNodes ?? Enumerable.Empty<SyntaxNode>();
-    }
+    public BaseTypeContext(SonarSyntaxNodeReportingContext context, IEnumerable<SyntaxNode> allBaseTypeNodes) : base(context) =>
+        AllBaseTypeNodes = allBaseTypeNodes ?? Enumerable.Empty<SyntaxNode>();
 }
