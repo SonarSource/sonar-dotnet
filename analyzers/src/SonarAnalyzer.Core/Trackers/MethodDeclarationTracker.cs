@@ -20,7 +20,7 @@
 
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.Helpers.Trackers;
+namespace SonarAnalyzer.Core.Trackers;
 
 public abstract class MethodDeclarationTracker<TSyntaxKind> : TrackerBase<TSyntaxKind, MethodDeclarationContext>
     where TSyntaxKind : struct

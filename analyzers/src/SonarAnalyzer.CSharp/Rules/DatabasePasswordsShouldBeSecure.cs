@@ -22,6 +22,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using SonarAnalyzer.Core.Trackers;
 using SonarAnalyzer.Json;
 using SonarAnalyzer.Json.Parsing;
 

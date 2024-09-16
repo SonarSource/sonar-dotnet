@@ -19,14 +19,13 @@
  */
 
 using Microsoft.CodeAnalysis.Text;
+using SonarAnalyzer.Core.Trackers;
 using SonarAnalyzer.CSharp.Core.Trackers;
-using SonarAnalyzer.Extensions;
-using SonarAnalyzer.Helpers.Trackers;
 using SonarAnalyzer.VisualBasic.Core.Trackers;
 using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace SonarAnalyzer.UnitTest.Trackers;
+namespace SonarAnalyzer.Test.Trackers;
 
 [TestClass]
 public class ArgumentTrackerTest

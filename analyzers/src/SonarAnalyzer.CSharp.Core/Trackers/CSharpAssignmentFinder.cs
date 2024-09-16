@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Core.Trackers;
+
 namespace SonarAnalyzer.CSharp.Core.Trackers;
 
 public class CSharpAssignmentFinder : AssignmentFinder

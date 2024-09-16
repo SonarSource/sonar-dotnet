@@ -20,11 +20,24 @@
 
 namespace SonarAnalyzer.Core.Trackers;
 
-public abstract class TrackerBase<TSyntaxKind, TContext>
+public class BuilderPatternDescriptor<TSyntaxKind, TInvocationSyntax>
     where TSyntaxKind : struct
-    where TContext : BaseContext
+    where TInvocationSyntax : SyntaxNode
 {
-    protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+    private readonly TrackerBase<TSyntaxKind, InvocationContext>.Condition[] invocationConditions;
+    private readonly Func<TInvocationSyntax, bool> isValid;
 
-    public delegate bool Condition(TContext trackingContext);
+    public BuilderPatternDescriptor(bool isValid, params TrackerBase<TSyntaxKind, InvocationContext>.Condition[] invocationConditions) : this(invocation => isValid, invocationConditions) { }
+
+    public BuilderPatternDescriptor(Func<TInvocationSyntax, bool> isValid, params TrackerBase<TSyntaxKind, InvocationContext>.Condition[] invocationConditions)
+    {
+        this.isValid = isValid;
+        this.invocationConditions = invocationConditions;
+    }
+
+    public bool IsMatch(InvocationContext context) =>
+        invocationConditions.All(x => x(context));
+
+    public bool IsValid(TInvocationSyntax invocation) =>
+        isValid(invocation);
 }
