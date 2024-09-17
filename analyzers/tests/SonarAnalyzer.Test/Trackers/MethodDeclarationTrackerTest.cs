@@ -25,32 +25,32 @@ using SonarAnalyzer.VisualBasic.Core.Facade;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.Test.Trackers
+namespace SonarAnalyzer.Test.Trackers;
+
+[TestClass]
+public class MethodDeclarationTrackerTest
 {
-    [TestClass]
-    public class MethodDeclarationTrackerTest
-    {
-        private const string TestInputCS = @"
+    private const string TestInputCS = @"
 public class Sample
 {
     public void NoArgs() {}
 }";
 
-        [TestMethod]
-        public void MatchMethodName()
-        {
-            var tracker = new CSharpMethodDeclarationTracker();
-            var context = CreateContext(TestInputCS, AnalyzerLanguage.CSharp, "NoArgs");
-            tracker.MatchMethodName("NoArgs")(context).Should().BeTrue();
-            tracker.MatchMethodName("Something")(context).Should().BeFalse();
-        }
+    [TestMethod]
+    public void MatchMethodName()
+    {
+        var tracker = new CSharpMethodDeclarationTracker();
+        var context = CreateContext(TestInputCS, AnalyzerLanguage.CSharp, "NoArgs");
+        tracker.MatchMethodName("NoArgs")(context).Should().BeTrue();
+        tracker.MatchMethodName("Something")(context).Should().BeFalse();
+    }
 
 #if NET
 
-        [TestMethod]
-        public void Track_VerifyMethodIdentifierLocations_CS()
-        {
-            const string code = @"
+    [TestMethod]
+    public void Track_VerifyMethodIdentifierLocations_CS()
+    {
+        const string code = @"
 abstract record AbstractRecordHasMethodSymbol(string Y); //For Coverage
 
 public class Sample
@@ -95,15 +95,15 @@ public class Sample
     public static int operator +(Sample a, Sample b) => 42;
 //                             ^
 }";
-            new VerifierBuilder<TestRule_CS>().AddSnippet(code).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
-        }
+        new VerifierBuilder<TestRule_CS>().AddSnippet(code).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+    }
 
 #endif
 
-        [TestMethod]
-        public void Track_VerifyMethodIdentifierLocations_VB()
-        {
-            const string code = @"
+    [TestMethod]
+    public void Track_VerifyMethodIdentifierLocations_VB()
+    {
+        const string code = @"
 Public Class Sample
 
     Public Sub New()
@@ -160,36 +160,35 @@ Public Class Sample
     Declare Function ExternalMethod Lib ""foo.dll"" (lpBuffer As String) As Integer
 
 End Class";
-            new VerifierBuilder<TestRule_VB>().AddSnippet(code).Verify();
-        }
+        new VerifierBuilder<TestRule_VB>().AddSnippet(code).Verify();
+    }
 
-        private static MethodDeclarationContext CreateContext(string testInput, AnalyzerLanguage language, string methodName)
-        {
-            var testCode = new SnippetCompiler(testInput, false, language);
-            var symbol = testCode.GetMethodSymbol("Sample." + methodName);
-            return new MethodDeclarationContext(symbol, testCode.SemanticModel.Compilation);
-        }
+    private static MethodDeclarationContext CreateContext(string testInput, AnalyzerLanguage language, string methodName)
+    {
+        var testCode = new SnippetCompiler(testInput, false, language);
+        var symbol = testCode.GetMethodSymbol("Sample." + methodName);
+        return new MethodDeclarationContext(symbol, testCode.SemanticModel.Compilation);
+    }
 
-        [DiagnosticAnalyzer(LanguageNames.CSharp)]
-        private class TestRule_CS : TrackerHotspotDiagnosticAnalyzer<CS.SyntaxKind>
-        {
-            protected override ILanguageFacade<CS.SyntaxKind> Language => CSharpFacade.Instance;
+    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    private class TestRule_CS : TrackerHotspotDiagnosticAnalyzer<CS.SyntaxKind>
+    {
+        protected override ILanguageFacade<CS.SyntaxKind> Language => CSharpFacade.Instance;
 
-            public TestRule_CS() : base(AnalyzerConfiguration.AlwaysEnabled, "S104", "Message") { } // Any existing rule ID
+        public TestRule_CS() : base(AnalyzerConfiguration.AlwaysEnabled, "S104", "Message") { } // Any existing rule ID
 
-            protected override void Initialize(TrackerInput input) =>
-                Language.Tracker.MethodDeclaration.Track(input);
-        }
+        protected override void Initialize(TrackerInput input) =>
+            Language.Tracker.MethodDeclaration.Track(input);
+    }
 
-        [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-        private class TestRule_VB : TrackerHotspotDiagnosticAnalyzer<VB.SyntaxKind>
-        {
-            protected override ILanguageFacade<VB.SyntaxKind> Language => VisualBasicFacade.Instance;
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+    private class TestRule_VB : TrackerHotspotDiagnosticAnalyzer<VB.SyntaxKind>
+    {
+        protected override ILanguageFacade<VB.SyntaxKind> Language => VisualBasicFacade.Instance;
 
-            public TestRule_VB() : base(AnalyzerConfiguration.AlwaysEnabled, "S104", "Message") { } // Any existing rule ID
+        public TestRule_VB() : base(AnalyzerConfiguration.AlwaysEnabled, "S104", "Message") { } // Any existing rule ID
 
-            protected override void Initialize(TrackerInput input) =>
-                Language.Tracker.MethodDeclaration.Track(input);
-        }
+        protected override void Initialize(TrackerInput input) =>
+            Language.Tracker.MethodDeclaration.Track(input);
     }
 }

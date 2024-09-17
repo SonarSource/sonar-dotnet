@@ -21,60 +21,59 @@
 using SonarAnalyzer.Core.Trackers;
 using SonarAnalyzer.CSharp.Core.Trackers;
 
-namespace SonarAnalyzer.CSharp.Core.Test.Trackers
+namespace SonarAnalyzer.CSharp.Core.Test.Trackers;
+
+[TestClass]
+public class FieldAccessTrackerTest
 {
-    [TestClass]
-    public class FieldAccessTrackerTest
+    [TestMethod]
+    public void MatchSet_CS()
     {
-        [TestMethod]
-        public void MatchSet_CS()
-        {
-            var tracker = new CSharpFieldAccessTracker();
-            var context = CreateContext("assignConst");
-            tracker.MatchSet()(context).Should().BeTrue();
+        var tracker = new CSharpFieldAccessTracker();
+        var context = CreateContext("assignConst");
+        tracker.MatchSet()(context).Should().BeTrue();
 
-            context = CreateContext("read");
-            tracker.MatchSet()(context).Should().BeFalse();
-        }
+        context = CreateContext("read");
+        tracker.MatchSet()(context).Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void AssignedValueIsConstant_CS()
-        {
-            var tracker = new CSharpFieldAccessTracker();
-            var context = CreateContext("assignConst");
-            tracker.AssignedValueIsConstant()(context).Should().BeTrue();
+    [TestMethod]
+    public void AssignedValueIsConstant_CS()
+    {
+        var tracker = new CSharpFieldAccessTracker();
+        var context = CreateContext("assignConst");
+        tracker.AssignedValueIsConstant()(context).Should().BeTrue();
 
-            context = CreateContext("assignVariable");
-            tracker.AssignedValueIsConstant()(context).Should().BeFalse();
+        context = CreateContext("assignVariable");
+        tracker.AssignedValueIsConstant()(context).Should().BeFalse();
 
-            context = CreateContext("invocationArg");
-            tracker.AssignedValueIsConstant()(context).Should().BeFalse();
-        }
+        context = CreateContext("invocationArg");
+        tracker.AssignedValueIsConstant()(context).Should().BeFalse();
+    }
 
-        private static FieldAccessContext CreateContext(string fieldName)
-        {
-            const string code = """
-                public class Sample
+    private static FieldAccessContext CreateContext(string fieldName)
+    {
+        const string code = """
+            public class Sample
+            {
+                private int assignConst;
+                private int assignVariable;
+                private int read;
+                private int invocationArg;
+
+                private void Usage()
                 {
-                    private int assignConst;
-                    private int assignVariable;
-                    private int read;
-                    private int invocationArg;
-
-                    private void Usage()
-                    {
-                        var x = read;
-                        assignConst = 42;
-                        assignVariable = x;
-                        Method(invocationArg);
-                    }
-
-                    private void Method(int arg) { }
+                    var x = read;
+                    assignConst = 42;
+                    assignVariable = x;
+                    Method(invocationArg);
                 }
-                """;
-            var testCode = new SnippetCompiler(code, false, AnalyzerLanguage.CSharp);
-            var node = testCode.GetNodes<IdentifierNameSyntax>().First(x => x.ToString() == fieldName);
-            return new FieldAccessContext(testCode.CreateAnalysisContext(node), fieldName);
-        }
+
+                private void Method(int arg) { }
+            }
+            """;
+        var testCode = new SnippetCompiler(code, false, AnalyzerLanguage.CSharp);
+        var node = testCode.GetNodes<IdentifierNameSyntax>().First(x => x.ToString() == fieldName);
+        return new FieldAccessContext(testCode.CreateAnalysisContext(node), fieldName);
     }
 }
