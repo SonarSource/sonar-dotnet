@@ -26,15 +26,37 @@ public sealed class UseRegexSafeIsMatch : StylingAnalyzer
     public UseRegexSafeIsMatch() : base("T0004", "Use '{0}{1}' instead.") { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
+        context.RegisterCompilationStartAction(c =>
+        {
+            var regexExtensions = c.Compilation.GetSymbolsWithName("RegexExtensions", SymbolFilter.Type).OfType<INamedTypeSymbol>().ToArray();
+            Verify(c, "IsMatch", "SafeIsMatch", regexExtensions);
+            Verify(c, "Match", "SafeMatch", regexExtensions);
+            Verify(c, "Matches", "SafeMatches", regexExtensions);
+        });
+
+    private void Verify(
+        SonarCompilationStartAnalysisContext context,
+        string methodName,
+        string replacementName,
+        IEnumerable<INamedTypeSymbol> regexExtensions)
+    {
+        if (regexExtensions.Any(x => x.GetMembers(replacementName).Any()))
+        {
+            context.RegisterNodeAction(c =>
             {
                 var memberAccess = (MemberAccessExpressionSyntax)c.Node;
-                if (memberAccess.NameIs("IsMatch", "Match", "Matches")
+                if (memberAccess.NameIs(methodName)
                     && c.SemanticModel.GetSymbolInfo(memberAccess).Symbol is IMethodSymbol method
                     && method.ContainingType.Is(KnownType.System_Text_RegularExpressions_Regex))
                 {
-                    c.ReportIssue(Rule, method.IsStatic ? memberAccess.Expression : memberAccess.Name, method.IsStatic ? "SafeRegex." : "Safe", method.Name);
+                    c.ReportIssue(
+                        Rule,
+                        method.IsStatic ? memberAccess.Expression : memberAccess.Name,
+                        method.IsStatic ? "SafeRegex." : "Safe",
+                        method.Name);
                 }
             },
             SyntaxKind.SimpleMemberAccessExpression);
+        }
+    }
 }
