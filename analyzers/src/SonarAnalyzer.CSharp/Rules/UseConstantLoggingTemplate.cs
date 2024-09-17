@@ -89,6 +89,7 @@ public sealed class UseConstantLoggingTemplate : SonarDiagnosticAnalyzer
             var invocation = (InvocationExpressionSyntax)c.Node;
             if (LoggerMethodNames.Contains(invocation.GetName())
                 && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol method
+                && !IsLog4NetExceptionMethod(method)
                 && LoggerTypes.Any(x => x.Matches(method.ContainingType))
                 && method.Parameters.FirstOrDefault(x => LogMessageParameterNames.Contains(x.Name)) is { } messageParameter
                 && ArgumentValue(invocation, method, messageParameter) is { } argumentValue
@@ -111,6 +112,9 @@ public sealed class UseConstantLoggingTemplate : SonarDiagnosticAnalyzer
             return invocation.ArgumentList.Arguments[paramIndex].Expression;
         }
     }
+
+    private static bool IsLog4NetExceptionMethod(IMethodSymbol method) =>
+        method.ContainingType.Is(KnownType.log4net_ILog) && method.Parameters.Any(x => x.Type.Is(KnownType.System_Exception));
 
     private static SyntaxNode InvalidSyntaxNode(SyntaxNode messageArgument, SemanticModel model) =>
         messageArgument.DescendantNodesAndSelf().FirstOrDefault(x =>
