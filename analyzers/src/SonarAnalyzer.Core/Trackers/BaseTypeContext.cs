@@ -31,5 +31,5 @@ public class BaseTypeContext : SyntaxBaseContext
     public IEnumerable<SyntaxNode> AllBaseTypeNodes { get; }
 
     public BaseTypeContext(SonarSyntaxNodeReportingContext context, IEnumerable<SyntaxNode> allBaseTypeNodes) : base(context) =>
-        AllBaseTypeNodes = allBaseTypeNodes ?? Enumerable.Empty<SyntaxNode>();
+        AllBaseTypeNodes = allBaseTypeNodes ?? [];
 }

@@ -26,7 +26,7 @@ public class BaseContext
 
     public void AddSecondaryLocation(Location location, string message, params string[] formatArgs)
     {
-        if (location != null && location != Location.None)
+        if (location is not null && location != Location.None)
         {
             SecondaryLocations.Add(new SecondaryLocation(location, string.Format(message, formatArgs)));
         }

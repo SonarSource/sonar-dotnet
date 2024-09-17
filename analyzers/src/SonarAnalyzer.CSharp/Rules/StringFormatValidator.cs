@@ -20,6 +20,7 @@
 
 using System.Text;
 using System.Text.RegularExpressions;
+using SonarAnalyzer.Core.Trackers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {

@@ -44,15 +44,15 @@ public class CSharpInvocationTracker : InvocationTracker<SyntaxKind>
                    && methodMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
                    && methodMemberAccess.Expression is MemberAccessExpressionSyntax propertyMemberAccess
                    && propertyMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
-                   && context.SemanticModel.GetTypeInfo(propertyMemberAccess.Expression) is TypeInfo enclosingClassType
+                   && context.Model.GetTypeInfo(propertyMemberAccess.Expression) is TypeInfo enclosingClassType
                    && member.IsMatch(propertyMemberAccess.Name.Identifier.ValueText, enclosingClassType.Type, Language.NameComparison);
 
     public override object ConstArgumentForParameter(InvocationContext context, string parameterName)
     {
         var argumentList = ((InvocationExpressionSyntax)context.Node).ArgumentList;
-        var values = argumentList.ArgumentValuesForParameter(context.SemanticModel, parameterName);
+        var values = argumentList.ArgumentValuesForParameter(context.Model, parameterName);
         return values.Length == 1 && values[0] is ExpressionSyntax valueSyntax
-            ? valueSyntax.FindConstantValue(context.SemanticModel)
+            ? valueSyntax.FindConstantValue(context.Model)
             : null;
     }
 
@@ -63,5 +63,5 @@ public class CSharpInvocationTracker : InvocationTracker<SyntaxKind>
         context => context.Node is InvocationExpressionSyntax { ArgumentList.Arguments: { } arguments }
             && index < arguments.Count
             && arguments[index] is { } argument
-            && predicate(argument, context.SemanticModel);
+            && predicate(argument, context.Model);
 }

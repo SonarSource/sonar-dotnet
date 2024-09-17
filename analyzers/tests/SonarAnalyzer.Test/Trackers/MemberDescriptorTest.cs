@@ -25,7 +25,7 @@ using SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
 using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using SyntaxVB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Test.Trackers;
 
 [TestClass]
 public class MethodDescriptorTest

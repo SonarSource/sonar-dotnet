@@ -26,12 +26,12 @@ public class MethodDeclarationContext : BaseContext
 
     public IMethodSymbol MethodSymbol { get; }
 
-    public SemanticModel GetSemanticModel(SyntaxNode syntaxNode) =>
-        compilation.GetSemanticModel(syntaxNode.SyntaxTree);
-
     public MethodDeclarationContext(IMethodSymbol methodSymbol, Compilation compilation)
     {
         MethodSymbol = methodSymbol;
         this.compilation = compilation;
     }
+
+    public SemanticModel GetSemanticModel(SyntaxNode node) =>
+        compilation.GetSemanticModel(node.SyntaxTree);
 }

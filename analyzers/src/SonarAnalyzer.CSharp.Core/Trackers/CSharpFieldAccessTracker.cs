@@ -43,7 +43,7 @@ public class CSharpFieldAccessTracker : FieldAccessTracker<SyntaxKind>
         context =>
         {
             var assignment = (AssignmentExpressionSyntax)context.Node.Ancestors().FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentExpression));
-            return assignment != null && assignment.Right.HasConstantValue(context.SemanticModel);
+            return assignment != null && assignment.Right.HasConstantValue(context.Model);
         };
 
     protected override bool IsIdentifierWithinMemberAccess(SyntaxNode expression) =>

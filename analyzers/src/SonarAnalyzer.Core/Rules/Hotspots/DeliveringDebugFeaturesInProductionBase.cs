@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules
             t.Track(input,
                     t.MatchMethod(new MemberDescriptor(KnownType.Microsoft_AspNetCore_Builder_DeveloperExceptionPageExtensions, "UseDeveloperExceptionPage"),
                                   new MemberDescriptor(KnownType.Microsoft_AspNetCore_Builder_DatabaseErrorPageExtensions, "UseDatabaseErrorPage")),
-                    t.ExceptWhen(c => IsDevelopmentCheckInvoked(c.Node, c.SemanticModel)),
+                    t.ExceptWhen(c => IsDevelopmentCheckInvoked(c.Node, c.Model)),
                     t.ExceptWhen(c => IsInDevelopmentContext(c.Node)));
         }
 

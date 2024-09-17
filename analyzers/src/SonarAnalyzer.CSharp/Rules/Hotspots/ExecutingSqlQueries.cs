@@ -20,91 +20,90 @@
 
 using SonarAnalyzer.Core.Trackers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind, ExpressionSyntax, IdentifierNameSyntax>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind, ExpressionSyntax, IdentifierNameSyntax>
+    protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
+
+    public ExecutingSqlQueries() : this(AnalyzerConfiguration.Hotspot) { }
+
+    internal /*for testing*/ ExecutingSqlQueries(IAnalyzerConfiguration configuration) : base(configuration) { }
+
+    protected override ExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index) =>
+        context.Node is InvocationExpressionSyntax invocation
+            ? invocation.ArgumentList.Get(index)
+            : null;
+
+    protected override ExpressionSyntax GetArgumentAtIndex(ObjectCreationContext context, int index) =>
+        ObjectCreationFactory.Create(context.Node).ArgumentList.Get(index);
+
+    protected override ExpressionSyntax GetSetValue(PropertyAccessContext context) =>
+        context.Node is MemberAccessExpressionSyntax setter && setter.IsLeftSideOfAssignment()
+            ? ((AssignmentExpressionSyntax)setter.GetSelfOrTopParenthesizedExpression().Parent).Right.RemoveParentheses()
+            : null;
+
+    protected override bool IsTracked(ExpressionSyntax expression, SyntaxBaseContext context) =>
+        IsSensitiveExpression(expression, context.Model) || IsTrackedVariableDeclaration(expression, context);
+
+    protected override bool IsSensitiveExpression(ExpressionSyntax expression, SemanticModel semanticModel) =>
+        expression is not null
+        && (IsConcatenation(expression, semanticModel)
+        || expression.IsKind(SyntaxKind.InterpolatedStringExpression)
+        || (expression is InvocationExpressionSyntax invocation && IsInvocationOfInterest(invocation, semanticModel)));
+
+    protected override Location SecondaryLocationForExpression(ExpressionSyntax node, string identifierNameToFind, out string identifierNameFound)
     {
-        protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
+        identifierNameFound = identifierNameToFind;
 
-        public ExecutingSqlQueries() : this(AnalyzerConfiguration.Hotspot) { }
-
-        internal /*for testing*/ ExecutingSqlQueries(IAnalyzerConfiguration configuration) : base(configuration) { }
-
-        protected override ExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index) =>
-            context.Node is InvocationExpressionSyntax invocation
-                ? invocation.ArgumentList.Get(index)
-                : null;
-
-        protected override ExpressionSyntax GetArgumentAtIndex(ObjectCreationContext context, int index) =>
-            ObjectCreationFactory.Create(context.Node).ArgumentList.Get(index);
-
-        protected override ExpressionSyntax GetSetValue(PropertyAccessContext context) =>
-            context.Node is MemberAccessExpressionSyntax setter && setter.IsLeftSideOfAssignment()
-                ? ((AssignmentExpressionSyntax)setter.GetSelfOrTopParenthesizedExpression().Parent).Right.RemoveParentheses()
-                : null;
-
-        protected override bool IsTracked(ExpressionSyntax expression, SyntaxBaseContext context) =>
-            IsSensitiveExpression(expression, context.SemanticModel) || IsTrackedVariableDeclaration(expression, context);
-
-        protected override bool IsSensitiveExpression(ExpressionSyntax expression, SemanticModel semanticModel) =>
-            expression != null
-            && (IsConcatenation(expression, semanticModel)
-            || expression.IsKind(SyntaxKind.InterpolatedStringExpression)
-            || (expression is InvocationExpressionSyntax invocation && IsInvocationOfInterest(invocation, semanticModel)));
-
-        protected override Location SecondaryLocationForExpression(ExpressionSyntax node, string identifierNameToFind, out string identifierNameFound)
+        if (node is null)
         {
-            identifierNameFound = identifierNameToFind;
-
-            if (node == null)
-            {
-                return Location.None;
-            }
-
-            if (node.Parent is EqualsValueClauseSyntax {Parent: VariableDeclaratorSyntax declarationSyntax})
-            {
-                return declarationSyntax.Identifier.GetLocation();
-            }
-
-            return node.Parent is AssignmentExpressionSyntax assignment ? assignment.Left.GetLocation() : Location.None;
+            return Location.None;
         }
 
-        private static bool IsInvocationOfInterest(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-            (invocation.IsMethodInvocation(KnownType.System_String, "Format", semanticModel) || invocation.IsMethodInvocation(KnownType.System_String, "Concat", semanticModel))
-            && !AllConstants(invocation.ArgumentList.Arguments.ToList(), semanticModel);
-
-        private static bool IsConcatenation(ExpressionSyntax expression, SemanticModel semanticModel) =>
-            expression.IsKind(SyntaxKind.AddExpression)
-            && expression is BinaryExpressionSyntax concatenation
-            && !IsConcatenationOfConstants(concatenation, semanticModel);
-
-        private static bool AllConstants(IEnumerable<ArgumentSyntax> arguments, SemanticModel semanticModel) =>
-            arguments.All(a => a.Expression.HasConstantValue(semanticModel));
-
-        private static bool IsConcatenationOfConstants(BinaryExpressionSyntax binaryExpression, SemanticModel semanticModel)
+        if (node.Parent is EqualsValueClauseSyntax {Parent: VariableDeclaratorSyntax declarationSyntax})
         {
-            System.Diagnostics.Debug.Assert(binaryExpression.IsKind(SyntaxKind.AddExpression), "Binary expression should be of syntax kind add expression.");
-            if ((semanticModel.GetTypeInfo(binaryExpression).Type != null) && binaryExpression.Right.HasConstantValue(semanticModel))
+            return declarationSyntax.Identifier.GetLocation();
+        }
+
+        return node.Parent is AssignmentExpressionSyntax assignment ? assignment.Left.GetLocation() : Location.None;
+    }
+
+    private static bool IsInvocationOfInterest(InvocationExpressionSyntax invocation, SemanticModel model) =>
+        (invocation.IsMethodInvocation(KnownType.System_String, "Format", model) || invocation.IsMethodInvocation(KnownType.System_String, "Concat", model))
+        && !AllConstants(invocation.ArgumentList.Arguments.ToList(), model);
+
+    private static bool IsConcatenation(ExpressionSyntax expression, SemanticModel model) =>
+        expression.IsKind(SyntaxKind.AddExpression)
+        && expression is BinaryExpressionSyntax concatenation
+        && !IsConcatenationOfConstants(concatenation, model);
+
+    private static bool AllConstants(IEnumerable<ArgumentSyntax> arguments, SemanticModel model) =>
+        arguments.All(x => x.Expression.HasConstantValue(model));
+
+    private static bool IsConcatenationOfConstants(BinaryExpressionSyntax binaryExpression, SemanticModel model)
+    {
+        System.Diagnostics.Debug.Assert(binaryExpression.IsKind(SyntaxKind.AddExpression), "Binary expression should be of syntax kind add expression.");
+        if ((model.GetTypeInfo(binaryExpression).Type is not null) && binaryExpression.Right.HasConstantValue(model))
+        {
+            var nestedLeft = binaryExpression.Left;
+            var nestedBinary = nestedLeft as BinaryExpressionSyntax;
+            while (nestedBinary is not null)
             {
-                var nestedLeft = binaryExpression.Left;
-                var nestedBinary = nestedLeft as BinaryExpressionSyntax;
-                while (nestedBinary != null)
+                if (nestedBinary.Right.HasConstantValue(model)
+                    && (nestedBinary.IsKind(SyntaxKind.AddExpression) || nestedBinary.HasConstantValue(model)))
                 {
-                    if (nestedBinary.Right.HasConstantValue(semanticModel)
-                        && (nestedBinary.IsKind(SyntaxKind.AddExpression) || nestedBinary.HasConstantValue(semanticModel)))
-                    {
-                        nestedLeft = nestedBinary.Left;
-                        nestedBinary = nestedLeft as BinaryExpressionSyntax;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    nestedLeft = nestedBinary.Left;
+                    nestedBinary = nestedLeft as BinaryExpressionSyntax;
                 }
-                return nestedLeft.HasConstantValue(semanticModel);
+                else
+                {
+                    return false;
+                }
             }
-            return false;
+            return nestedLeft.HasConstantValue(model);
         }
+        return false;
     }
 }

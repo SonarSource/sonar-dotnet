@@ -37,5 +37,5 @@ public class VisualBasicConstantValueFinder : ConstantValueFinder<IdentifierName
 
     protected override bool IsPtrZero(SyntaxNode node) =>
         node is MemberAccessExpressionSyntax memberAccess
-        && memberAccess.IsPtrZero(SemanticModel);
+        && memberAccess.IsPtrZero(Model);
 }

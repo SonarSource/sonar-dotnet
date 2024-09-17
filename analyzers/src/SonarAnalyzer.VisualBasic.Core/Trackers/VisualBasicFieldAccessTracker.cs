@@ -42,7 +42,7 @@ public class VisualBasicFieldAccessTracker : FieldAccessTracker<SyntaxKind>
         context =>
         {
             var assignment = (AssignmentStatementSyntax)context.Node.Ancestors().FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentStatement));
-            return assignment != null && assignment.Right.HasConstantValue(context.SemanticModel);
+            return assignment != null && assignment.Right.HasConstantValue(context.Model);
         };
 
     protected override bool IsIdentifierWithinMemberAccess(SyntaxNode expression) =>

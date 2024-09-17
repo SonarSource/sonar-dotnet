@@ -27,9 +27,9 @@ public class InvocationContext : SyntaxBaseContext
 
     public InvocationContext(SonarSyntaxNodeReportingContext context, string methodName) : this(context.Node, methodName, context.SemanticModel) { }
 
-    public InvocationContext(SyntaxNode node, string methodName, SemanticModel semanticModel) : base(node, semanticModel)
+    public InvocationContext(SyntaxNode node, string methodName, SemanticModel model) : base(node, model)
     {
         MethodName = methodName;
-        MethodSymbol = new Lazy<IMethodSymbol>(() => SemanticModel.GetSymbolInfo(Node).Symbol as IMethodSymbol);
+        MethodSymbol = new Lazy<IMethodSymbol>(() => Model.GetSymbolInfo(Node).Symbol as IMethodSymbol);
     }
 }

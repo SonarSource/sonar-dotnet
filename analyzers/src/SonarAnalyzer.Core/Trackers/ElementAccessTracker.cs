@@ -29,14 +29,14 @@ public abstract class ElementAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyn
     public abstract Condition MatchProperty(MemberDescriptor member);
 
     internal Condition ArgumentAtIndexIs(int index, params KnownType[] types) =>
-        context => context.InvokedPropertySymbol.Value != null
-                   && context.InvokedPropertySymbol.Value.Parameters.Length > index
-                   && context.InvokedPropertySymbol.Value.Parameters[0].Type.DerivesOrImplements(types[index]);
+        context => context.InvokedPropertySymbol.Value is { } property
+            && property.Parameters.Length > index
+            && property.Parameters[0].Type.DerivesOrImplements(types[index]);
 
     internal Condition MatchIndexerIn(params KnownType[] types) =>
-        context => context.InvokedPropertySymbol.Value != null
-                   && context.InvokedPropertySymbol.Value.ContainingType.DerivesOrImplementsAny(types.ToImmutableArray());
+        context => context.InvokedPropertySymbol.Value is { } property
+            && property.ContainingType.DerivesOrImplementsAny(types.ToImmutableArray());
 
     protected override ElementAccessContext CreateContext(SonarSyntaxNodeReportingContext context) =>
-        new ElementAccessContext(context);
+        new(context);
 }

@@ -161,7 +161,7 @@ public sealed class PasswordsShouldBeStoredCorrectly : SonarDiagnosticAnalyzer
         tracker.AssignedValue(context) is < IterationCountThreshold;
 
     private static bool ArgumentLessThan(ArgumentContext context, int threshold) =>
-        context.SemanticModel.GetConstantValue(((ArgumentSyntax)context.Node).Expression) is { HasValue: true, Value: int value }
+        context.Model.GetConstantValue(((ArgumentSyntax)context.Node).Expression) is { HasValue: true, Value: int value }
         && value < threshold;
 
     private static void Track<TContext>(SyntaxTrackerBase<SyntaxKind, TContext> tracker,

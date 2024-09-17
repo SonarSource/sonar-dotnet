@@ -37,42 +37,34 @@ public abstract class InvocationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntax
         context => context.MethodName == methodName;
 
     public Condition MethodIsStatic() =>
-        context => context.MethodSymbol.Value != null
-                   && context.MethodSymbol.Value.IsStatic;
+        context => context.MethodSymbol.Value is { IsStatic: true };
 
     public Condition MethodIsExtension() =>
-        context => context.MethodSymbol.Value != null
-                   && context.MethodSymbol.Value.IsExtensionMethod;
+        context => context.MethodSymbol.Value is { IsExtensionMethod: true };
 
     public Condition MethodHasParameters(int count) =>
-        context => context.MethodSymbol.Value != null
-                   && context.MethodSymbol.Value.Parameters.Length == count;
+        context => context.MethodSymbol.Value is { } method
+            && method.Parameters.Length == count;
 
     public Condition IsInvalidBuilderInitialization<TInvocationSyntax>(BuilderPatternCondition<TSyntaxKind, TInvocationSyntax> condition) where TInvocationSyntax : SyntaxNode =>
         condition.IsInvalidBuilderInitialization;
 
     internal Condition MethodReturnTypeIs(KnownType returnType) =>
-        context => context.MethodSymbol.Value != null
-                   && context.MethodSymbol.Value.ReturnType.DerivesFrom(returnType);
+        context => context.MethodSymbol.Value is { } method
+            && method.ReturnType.DerivesFrom(returnType);
 
     internal Condition ArgumentIsBoolConstant(string parameterName, bool expectedValue) =>
         context => ConstArgumentForParameter(context, parameterName) is bool boolValue
-                   && boolValue == expectedValue;
+            && boolValue == expectedValue;
 
     internal Condition IsIHeadersDictionary() =>
-        context =>
-        {
-            const int argumentsNumber = 2;
-
-            var containingType = context.MethodSymbol.Value.ContainingType;
-
-            return containingType.TypeArguments.Length == argumentsNumber
-                   && containingType.TypeArguments[0].Is(KnownType.System_String)
-                   && containingType.TypeArguments[1].Is(KnownType.Microsoft_Extensions_Primitives_StringValues);
-        };
+        context => context.MethodSymbol.Value.ContainingType.TypeArguments is var typeArguments
+            && typeArguments.Length == 2
+            && typeArguments[0].Is(KnownType.System_String)
+            && typeArguments[1].Is(KnownType.Microsoft_Extensions_Primitives_StringValues);
 
     protected override InvocationContext CreateContext(SonarSyntaxNodeReportingContext context) =>
-        Language.Syntax.NodeExpression(context.Node) is { } expression
-        && ExpectedExpressionIdentifier(expression) is { } identifier
-            ? new InvocationContext(context, identifier.ValueText) : null;
+        Language.Syntax.NodeExpression(context.Node) is { } expression && ExpectedExpressionIdentifier(expression) is { } identifier
+            ? new InvocationContext(context, identifier.ValueText)
+            : null;
 }

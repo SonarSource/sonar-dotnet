@@ -45,15 +45,15 @@ public abstract class BuilderPatternCondition<TSyntaxKind, TInvocationSyntax>
     public bool IsInvalidBuilderInitialization(InvocationContext context)
     {
         var current = context.Node;
-        while (current != null)
+        while (current is not null)
         {
             current = Language.Syntax.RemoveParentheses(current);
             if (current is TInvocationSyntax invocation)
             {
-                var invocationContext = new InvocationContext(invocation, GetIdentifierName(invocation), context.SemanticModel);
-                if (descriptors.FirstOrDefault(x => x.IsMatch(invocationContext)) is { } desc)
+                var invocationContext = new InvocationContext(invocation, GetIdentifierName(invocation), context.Model);
+                if (descriptors.FirstOrDefault(x => x.IsMatch(invocationContext)) is { } descriptor)
                 {
-                    return !desc.IsValid(invocation);
+                    return !descriptor.IsValid(invocation);
                 }
                 current = GetExpression(invocation);
             }
@@ -68,7 +68,7 @@ public abstract class BuilderPatternCondition<TSyntaxKind, TInvocationSyntax>
             }
             else if (IsIdentifier(current, out var identifierName))
             {
-                if (!(context.SemanticModel.GetSymbolInfo(current).Symbol is ILocalSymbol))
+                if (!(context.Model.GetSymbolInfo(current).Symbol is ILocalSymbol))
                 {
                     return false;
                 }
