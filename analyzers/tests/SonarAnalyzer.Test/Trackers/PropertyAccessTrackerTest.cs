@@ -24,12 +24,12 @@ using SonarAnalyzer.VisualBasic.Core.Trackers;
 using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace SonarAnalyzer.Test.Trackers
+namespace SonarAnalyzer.Test.Trackers;
+
+[TestClass]
+public class PropertyAccessTrackerTest
 {
-    [TestClass]
-    public class PropertyAccessTrackerTest
-    {
-        private const string TestInputCS = @"
+    private const string TestInputCS = @"
 public class Base
 {
     private int MyProperty {get; set;}
@@ -40,7 +40,7 @@ public class Base
     }
 }";
 
-        private const string TestInputVB = @"
+    private const string TestInputVB = @"
 Public Class Base
     Public Property MyProperty As Integer
 
@@ -49,60 +49,59 @@ Public Class Base
     End Sub
 End Class";
 
-        [TestMethod]
-        public void MatchesGetter_CS()
-        {
-            var context = CreateContext<CS.MemberAccessExpressionSyntax>(TestInputCS, "MyProperty", AnalyzerLanguage.CSharp);
-            var tracker = new CSharpPropertyAccessTracker();
+    [TestMethod]
+    public void MatchesGetter_CS()
+    {
+        var context = CreateContext<CS.MemberAccessExpressionSyntax>(TestInputCS, "MyProperty", AnalyzerLanguage.CSharp);
+        var tracker = new CSharpPropertyAccessTracker();
 
-            tracker.MatchGetter()(context).Should().BeTrue();
-            tracker.MatchSetter()(context).Should().BeFalse();
-        }
+        tracker.MatchGetter()(context).Should().BeTrue();
+        tracker.MatchSetter()(context).Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void MatchesGetter_VB()
-        {
-            var context = CreateContext<VB.MemberAccessExpressionSyntax>(TestInputVB, "MyProperty", AnalyzerLanguage.VisualBasic);
-            var tracker = new VisualBasicPropertyAccessTracker();
+    [TestMethod]
+    public void MatchesGetter_VB()
+    {
+        var context = CreateContext<VB.MemberAccessExpressionSyntax>(TestInputVB, "MyProperty", AnalyzerLanguage.VisualBasic);
+        var tracker = new VisualBasicPropertyAccessTracker();
 
-            tracker.MatchGetter()(context).Should().BeTrue();
-            tracker.MatchSetter()(context).Should().BeFalse();
-        }
+        tracker.MatchGetter()(context).Should().BeTrue();
+        tracker.MatchSetter()(context).Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void AndCondition()
-        {
-            var tracker = new CSharpPropertyAccessTracker();
-            CSharpPropertyAccessTracker.Condition trueCondition = x => true;
-            CSharpPropertyAccessTracker.Condition falseCondition = x => false;
+    [TestMethod]
+    public void AndCondition()
+    {
+        var tracker = new CSharpPropertyAccessTracker();
+        CSharpPropertyAccessTracker.Condition trueCondition = x => true;
+        CSharpPropertyAccessTracker.Condition falseCondition = x => false;
 
-            tracker.And(trueCondition, trueCondition)(null).Should().BeTrue();
-            tracker.And(trueCondition, falseCondition)(null).Should().BeFalse();
-            tracker.And(falseCondition, trueCondition)(null).Should().BeFalse();
-            tracker.And(falseCondition, falseCondition)(null).Should().BeFalse();
-        }
+        tracker.And(trueCondition, trueCondition)(null).Should().BeTrue();
+        tracker.And(trueCondition, falseCondition)(null).Should().BeFalse();
+        tracker.And(falseCondition, trueCondition)(null).Should().BeFalse();
+        tracker.And(falseCondition, falseCondition)(null).Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void OrCondition()
-        {
-            var tracker = new CSharpPropertyAccessTracker();
-            CSharpPropertyAccessTracker.Condition trueCondition = x => true;
-            CSharpPropertyAccessTracker.Condition falseCondition = x => false;
+    [TestMethod]
+    public void OrCondition()
+    {
+        var tracker = new CSharpPropertyAccessTracker();
+        CSharpPropertyAccessTracker.Condition trueCondition = x => true;
+        CSharpPropertyAccessTracker.Condition falseCondition = x => false;
 
-            tracker.Or(trueCondition, trueCondition)(null).Should().BeTrue();
-            tracker.Or(trueCondition, falseCondition)(null).Should().BeTrue();
-            tracker.Or(falseCondition, trueCondition)(null).Should().BeTrue();
-            tracker.Or(falseCondition, falseCondition)(null).Should().BeFalse();
+        tracker.Or(trueCondition, trueCondition)(null).Should().BeTrue();
+        tracker.Or(trueCondition, falseCondition)(null).Should().BeTrue();
+        tracker.Or(falseCondition, trueCondition)(null).Should().BeTrue();
+        tracker.Or(falseCondition, falseCondition)(null).Should().BeFalse();
 
-            tracker.Or(falseCondition, falseCondition, trueCondition)(null).Should().BeTrue();
-            tracker.Or(falseCondition, falseCondition, falseCondition)(null).Should().BeFalse();
-        }
+        tracker.Or(falseCondition, falseCondition, trueCondition)(null).Should().BeTrue();
+        tracker.Or(falseCondition, falseCondition, falseCondition)(null).Should().BeFalse();
+    }
 
-        private static PropertyAccessContext CreateContext<TSyntaxNodeType>(string testInput, string propertyName, AnalyzerLanguage language) where TSyntaxNodeType : SyntaxNode
-        {
-            var testCode = new SnippetCompiler(testInput, false, language);
-            var node = testCode.GetNodes<TSyntaxNodeType>().First();
-            return new PropertyAccessContext(testCode.CreateAnalysisContext(node), propertyName);
-        }
+    private static PropertyAccessContext CreateContext<TSyntaxNodeType>(string testInput, string propertyName, AnalyzerLanguage language) where TSyntaxNodeType : SyntaxNode
+    {
+        var testCode = new SnippetCompiler(testInput, false, language);
+        var node = testCode.GetNodes<TSyntaxNodeType>().First();
+        return new PropertyAccessContext(testCode.CreateAnalysisContext(node), propertyName);
     }
 }

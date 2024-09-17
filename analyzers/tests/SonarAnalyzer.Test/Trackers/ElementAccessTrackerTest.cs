@@ -24,12 +24,12 @@ using SonarAnalyzer.VisualBasic.Core.Trackers;
 using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace SonarAnalyzer.Test.Trackers
+namespace SonarAnalyzer.Test.Trackers;
+
+[TestClass]
+public class ElementAccessTrackerTest
 {
-    [TestClass]
-    public class ElementAccessTrackerTest
-    {
-        private const string TestInputCS = @"
+    private const string TestInputCS = @"
 public class Sample
 {
     public int this[string key]
@@ -47,7 +47,7 @@ public class Sample
     }
 }";
 
-        private const string TestInputVB = @"
+    private const string TestInputVB = @"
 Public Class Sample
 
     Default Public Property Item(Key As String) As Integer
@@ -71,81 +71,80 @@ Public Class Sample
 
 End Class";
 
-        [TestMethod]
-        public void ArgumentAtIndexIs_CS()
-        {
-            var context = CreateContext<CSharpSyntax.ElementAccessExpressionSyntax>(TestInputCS, 0, AnalyzerLanguage.CSharp);
-            var tracker = new CSharpElementAccessTracker();
-            tracker.ArgumentAtIndexIs(0, KnownType.System_String)(context).Should().BeTrue();
-            tracker.ArgumentAtIndexIs(0, KnownType.System_Int32)(context).Should().BeFalse();
-            tracker.ArgumentAtIndexIs(42, KnownType.System_String)(context).Should().BeFalse();
+    [TestMethod]
+    public void ArgumentAtIndexIs_CS()
+    {
+        var context = CreateContext<CSharpSyntax.ElementAccessExpressionSyntax>(TestInputCS, 0, AnalyzerLanguage.CSharp);
+        var tracker = new CSharpElementAccessTracker();
+        tracker.ArgumentAtIndexIs(0, KnownType.System_String)(context).Should().BeTrue();
+        tracker.ArgumentAtIndexIs(0, KnownType.System_Int32)(context).Should().BeFalse();
+        tracker.ArgumentAtIndexIs(42, KnownType.System_String)(context).Should().BeFalse();
 
-            context = CreateContext<CSharpSyntax.ElementAccessExpressionSyntax>(TestInputCS, 3, AnalyzerLanguage.CSharp);
-            tracker.ArgumentAtIndexIs(0, KnownType.System_String)(context).Should().BeFalse();
-        }
+        context = CreateContext<CSharpSyntax.ElementAccessExpressionSyntax>(TestInputCS, 3, AnalyzerLanguage.CSharp);
+        tracker.ArgumentAtIndexIs(0, KnownType.System_String)(context).Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void ArgumentAtIndexIs_VB()
-        {
-            var context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, 0, AnalyzerLanguage.VisualBasic);
-            var tracker = new CSharpElementAccessTracker();
-            tracker.ArgumentAtIndexIs(0, KnownType.System_String)(context).Should().BeTrue();
-            tracker.ArgumentAtIndexIs(0, KnownType.System_Int32)(context).Should().BeFalse();
-            tracker.ArgumentAtIndexIs(42, KnownType.System_String)(context).Should().BeFalse();
+    [TestMethod]
+    public void ArgumentAtIndexIs_VB()
+    {
+        var context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, 0, AnalyzerLanguage.VisualBasic);
+        var tracker = new CSharpElementAccessTracker();
+        tracker.ArgumentAtIndexIs(0, KnownType.System_String)(context).Should().BeTrue();
+        tracker.ArgumentAtIndexIs(0, KnownType.System_Int32)(context).Should().BeFalse();
+        tracker.ArgumentAtIndexIs(42, KnownType.System_String)(context).Should().BeFalse();
 
-            context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, 4, AnalyzerLanguage.VisualBasic);
-            tracker.ArgumentAtIndexIs(0, KnownType.System_String)(context).Should().BeFalse();
-        }
+        context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, 4, AnalyzerLanguage.VisualBasic);
+        tracker.ArgumentAtIndexIs(0, KnownType.System_String)(context).Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void ArgumentAtIndexEquals_CS()
-        {
-            var context = CreateContext<CSharpSyntax.ElementAccessExpressionSyntax>(TestInputCS, 0, AnalyzerLanguage.CSharp);
-            var tracker = new CSharpElementAccessTracker();
-            tracker.ArgumentAtIndexEquals(0, "key")(context).Should().BeTrue();
-            tracker.ArgumentAtIndexEquals(0, "foo")(context).Should().BeFalse();
-            tracker.ArgumentAtIndexEquals(42, "key")(context).Should().BeFalse();
+    [TestMethod]
+    public void ArgumentAtIndexEquals_CS()
+    {
+        var context = CreateContext<CSharpSyntax.ElementAccessExpressionSyntax>(TestInputCS, 0, AnalyzerLanguage.CSharp);
+        var tracker = new CSharpElementAccessTracker();
+        tracker.ArgumentAtIndexEquals(0, "key")(context).Should().BeTrue();
+        tracker.ArgumentAtIndexEquals(0, "foo")(context).Should().BeFalse();
+        tracker.ArgumentAtIndexEquals(42, "key")(context).Should().BeFalse();
 
-            context = CreateContext<CSharpSyntax.ElementAccessExpressionSyntax>(TestInputCS, 1, AnalyzerLanguage.CSharp);
-            tracker.ArgumentAtIndexEquals(0, "key")(context).Should().BeTrue();
-            tracker.ArgumentAtIndexEquals(0, "foo")(context).Should().BeFalse();
-            tracker.ArgumentAtIndexEquals(42, "key")(context).Should().BeFalse();
+        context = CreateContext<CSharpSyntax.ElementAccessExpressionSyntax>(TestInputCS, 1, AnalyzerLanguage.CSharp);
+        tracker.ArgumentAtIndexEquals(0, "key")(context).Should().BeTrue();
+        tracker.ArgumentAtIndexEquals(0, "foo")(context).Should().BeFalse();
+        tracker.ArgumentAtIndexEquals(42, "key")(context).Should().BeFalse();
 
-            context = CreateContext<CSharpSyntax.ElementAccessExpressionSyntax>(TestInputCS, 2, AnalyzerLanguage.CSharp);
-            tracker.ArgumentAtIndexEquals(0, "key")(context).Should().BeFalse();
-            tracker.ArgumentAtIndexEquals(0, "foo")(context).Should().BeFalse();
-            tracker.ArgumentAtIndexEquals(42, "key")(context).Should().BeFalse();
-        }
+        context = CreateContext<CSharpSyntax.ElementAccessExpressionSyntax>(TestInputCS, 2, AnalyzerLanguage.CSharp);
+        tracker.ArgumentAtIndexEquals(0, "key")(context).Should().BeFalse();
+        tracker.ArgumentAtIndexEquals(0, "foo")(context).Should().BeFalse();
+        tracker.ArgumentAtIndexEquals(42, "key")(context).Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void ArgumentAtIndexEquals_VB()
-        {
-            var context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, 0, AnalyzerLanguage.VisualBasic);
-            var tracker = new VisualBasicElementAccessTracker();
-            tracker.ArgumentAtIndexEquals(0, "key")(context).Should().BeTrue();
-            tracker.ArgumentAtIndexEquals(0, "foo")(context).Should().BeFalse();
-            tracker.ArgumentAtIndexEquals(42, "key")(context).Should().BeFalse();
+    [TestMethod]
+    public void ArgumentAtIndexEquals_VB()
+    {
+        var context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, 0, AnalyzerLanguage.VisualBasic);
+        var tracker = new VisualBasicElementAccessTracker();
+        tracker.ArgumentAtIndexEquals(0, "key")(context).Should().BeTrue();
+        tracker.ArgumentAtIndexEquals(0, "foo")(context).Should().BeFalse();
+        tracker.ArgumentAtIndexEquals(42, "key")(context).Should().BeFalse();
 
-            context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, 1, AnalyzerLanguage.VisualBasic);
-            tracker.ArgumentAtIndexEquals(0, "key")(context).Should().BeTrue();
-            tracker.ArgumentAtIndexEquals(0, "foo")(context).Should().BeFalse();
-            tracker.ArgumentAtIndexEquals(42, "key")(context).Should().BeFalse();
+        context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, 1, AnalyzerLanguage.VisualBasic);
+        tracker.ArgumentAtIndexEquals(0, "key")(context).Should().BeTrue();
+        tracker.ArgumentAtIndexEquals(0, "foo")(context).Should().BeFalse();
+        tracker.ArgumentAtIndexEquals(42, "key")(context).Should().BeFalse();
 
-            context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, 2, AnalyzerLanguage.VisualBasic);
-            tracker.ArgumentAtIndexEquals(0, "key")(context).Should().BeFalse();
-            tracker.ArgumentAtIndexEquals(0, "foo")(context).Should().BeFalse();
-            tracker.ArgumentAtIndexEquals(42, "key")(context).Should().BeFalse();
+        context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, 2, AnalyzerLanguage.VisualBasic);
+        tracker.ArgumentAtIndexEquals(0, "key")(context).Should().BeFalse();
+        tracker.ArgumentAtIndexEquals(0, "foo")(context).Should().BeFalse();
+        tracker.ArgumentAtIndexEquals(42, "key")(context).Should().BeFalse();
 
-            context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, 3, AnalyzerLanguage.VisualBasic);
-            tracker.ArgumentAtIndexEquals(0, "key")(context).Should().BeFalse();
-        }
+        context = CreateContext<VBSyntax.InvocationExpressionSyntax>(TestInputVB, 3, AnalyzerLanguage.VisualBasic);
+        tracker.ArgumentAtIndexEquals(0, "key")(context).Should().BeFalse();
+    }
 
-        private static ElementAccessContext CreateContext<TSyntaxNodeType>(string testInput, int skip, AnalyzerLanguage language) where TSyntaxNodeType : SyntaxNode
-        {
-            var testCode = new SnippetCompiler(testInput, true, language);
-            var node = testCode.GetNodes<TSyntaxNodeType>().Skip(skip).First();
-            var context = new ElementAccessContext(testCode.CreateAnalysisContext(node));
-            return context;
-        }
+    private static ElementAccessContext CreateContext<TSyntaxNodeType>(string testInput, int skip, AnalyzerLanguage language) where TSyntaxNodeType : SyntaxNode
+    {
+        var testCode = new SnippetCompiler(testInput, true, language);
+        var node = testCode.GetNodes<TSyntaxNodeType>().Skip(skip).First();
+        var context = new ElementAccessContext(testCode.CreateAnalysisContext(node));
+        return context;
     }
 }

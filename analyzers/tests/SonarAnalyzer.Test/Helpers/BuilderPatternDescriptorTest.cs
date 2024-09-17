@@ -23,64 +23,63 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Core.Trackers;
 using BuilderPatternDescriptor = SonarAnalyzer.Core.Trackers.BuilderPatternDescriptor<Microsoft.CodeAnalysis.CSharp.SyntaxKind, Microsoft.CodeAnalysis.CSharp.Syntax.InvocationExpressionSyntax>;
 
-namespace SonarAnalyzer.Test.Helpers
+namespace SonarAnalyzer.Test.Helpers;
+
+[TestClass]
+public class BuilderPatternDescriptorTest
 {
-    [TestClass]
-    public class BuilderPatternDescriptorTest
+    [TestMethod]
+    public void IsMatch()
     {
-        [TestMethod]
-        public void IsMatch()
-        {
-            var context = CreateContext();
-            TrackerBase<SyntaxKind, InvocationContext>.Condition trueCondition = _ => true;
-            TrackerBase<SyntaxKind, InvocationContext>.Condition falseCondition = _ => false;
-            BuilderPatternDescriptor descriptor;
+        var context = CreateContext();
+        TrackerBase<SyntaxKind, InvocationContext>.Condition trueCondition = _ => true;
+        TrackerBase<SyntaxKind, InvocationContext>.Condition falseCondition = _ => false;
+        BuilderPatternDescriptor descriptor;
 
-            descriptor = new BuilderPatternDescriptor(true);
-            descriptor.IsMatch(context).Should().BeTrue();
+        descriptor = new BuilderPatternDescriptor(true);
+        descriptor.IsMatch(context).Should().BeTrue();
 
-            descriptor = new BuilderPatternDescriptor(true, trueCondition);
-            descriptor.IsMatch(context).Should().BeTrue();
+        descriptor = new BuilderPatternDescriptor(true, trueCondition);
+        descriptor.IsMatch(context).Should().BeTrue();
 
-            descriptor = new BuilderPatternDescriptor(true, trueCondition, trueCondition);
-            descriptor.IsMatch(context).Should().BeTrue();
+        descriptor = new BuilderPatternDescriptor(true, trueCondition, trueCondition);
+        descriptor.IsMatch(context).Should().BeTrue();
 
-            descriptor = new BuilderPatternDescriptor(true, falseCondition);
-            descriptor.IsMatch(context).Should().BeFalse();
+        descriptor = new BuilderPatternDescriptor(true, falseCondition);
+        descriptor.IsMatch(context).Should().BeFalse();
 
-            descriptor = new BuilderPatternDescriptor(true, trueCondition, falseCondition);
-            descriptor.IsMatch(context).Should().BeFalse();
-        }
+        descriptor = new BuilderPatternDescriptor(true, trueCondition, falseCondition);
+        descriptor.IsMatch(context).Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void IsValid_Literal()
-        {
-            var context = CreateContext();
+    [TestMethod]
+    public void IsValid_Literal()
+    {
+        var context = CreateContext();
 
-            var trueDescriptor = new BuilderPatternDescriptor(true);
-            trueDescriptor.IsValid(null).Should().BeTrue();
-            trueDescriptor.IsValid(context.Node as InvocationExpressionSyntax).Should().BeTrue();
+        var trueDescriptor = new BuilderPatternDescriptor(true);
+        trueDescriptor.IsValid(null).Should().BeTrue();
+        trueDescriptor.IsValid(context.Node as InvocationExpressionSyntax).Should().BeTrue();
 
-            var falseDescriptor = new BuilderPatternDescriptor(false);
-            falseDescriptor.IsValid(null).Should().BeFalse();
-            falseDescriptor.IsValid(context.Node as InvocationExpressionSyntax).Should().BeFalse();
-        }
+        var falseDescriptor = new BuilderPatternDescriptor(false);
+        falseDescriptor.IsValid(null).Should().BeFalse();
+        falseDescriptor.IsValid(context.Node as InvocationExpressionSyntax).Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void IsValid_Lambda()
-        {
-            var context = CreateContext();
+    [TestMethod]
+    public void IsValid_Lambda()
+    {
+        var context = CreateContext();
 
-            var descriptor = new BuilderPatternDescriptor(invocation => invocation != null);
-            descriptor.IsValid(null).Should().BeFalse();
-            descriptor.IsValid(context.Node as InvocationExpressionSyntax).Should().BeTrue();
-        }
+        var descriptor = new BuilderPatternDescriptor(invocation => invocation != null);
+        descriptor.IsValid(null).Should().BeFalse();
+        descriptor.IsValid(context.Node as InvocationExpressionSyntax).Should().BeTrue();
+    }
 
-        private static InvocationContext CreateContext()
-        {
-            const string source = @"class X{void Foo(object x){x.ToString()}};";
-            var snippet = new SnippetCompiler(source, true, AnalyzerLanguage.CSharp);
-            return new InvocationContext(snippet.SyntaxTree.Single<InvocationExpressionSyntax>(), "ToString", snippet.SemanticModel);
-        }
+    private static InvocationContext CreateContext()
+    {
+        const string source = @"class X{void Foo(object x){x.ToString()}};";
+        var snippet = new SnippetCompiler(source, true, AnalyzerLanguage.CSharp);
+        return new InvocationContext(snippet.SyntaxTree.Single<InvocationExpressionSyntax>(), "ToString", snippet.SemanticModel);
     }
 }
