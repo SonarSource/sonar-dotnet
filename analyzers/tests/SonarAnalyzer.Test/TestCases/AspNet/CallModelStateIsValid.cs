@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 public class NonCompliantController : ControllerBase
 {
     [HttpGet("/[controller]")]
-    public string Get([Required, FromQuery] string id)                           // Noncompliant {{ModelState.IsValid should be checked in controller actions.}}
+    public string Get([Required, FromQuery] string id)                          // Noncompliant {{ModelState.IsValid should be checked in controller actions.}}
     //            ^^^
     {
         return "Hello!";
@@ -254,5 +255,24 @@ namespace Repro_9325
         }
 
         private bool CheckModelState() => ModelState.IsValid;
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9262
+namespace Repro_9262
+{
+    public class MyController : ControllerBase
+    {
+        [HttpGet("/[controller]")]
+        public string OnlyIngoredTypes(string str, object obj, dynamic dyn)
+        {
+            return "Hello!";
+        }
+
+        [HttpGet("/[controller]")]
+        public string WithValidationAttribute(string str, [Required] object obj, dynamic dyn)   // Noncompliant
+        {
+            return "Hello!";
+        }
     }
 }
