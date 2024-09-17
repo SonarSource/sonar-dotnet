@@ -76,9 +76,10 @@ public class UseConstantLoggingTemplateTest
                     logger.{{methodName}}Format($"{arg}");          // Noncompliant
                 }
 
+                //https://github.com/SonarSource/sonar-dotnet/issues/9547
                 void Repro_9547(ILog logger, string filePath, Exception ex)
                 {
-                  logger.Error($"Error while loading file '{filePath}'!", ex); // Noncompliant FP
+                  logger.{{methodName}}($"Error while loading file '{filePath}'!", ex); // Compliant
                 }
             }
             """).Verify();
