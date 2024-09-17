@@ -23,7 +23,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Core.Trackers;
 using BuilderPatternDescriptor = SonarAnalyzer.Core.Trackers.BuilderPatternDescriptor<Microsoft.CodeAnalysis.CSharp.SyntaxKind, Microsoft.CodeAnalysis.CSharp.Syntax.InvocationExpressionSyntax>;
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Test.Trackers;
 
 [TestClass]
 public class BuilderPatternDescriptorTest
@@ -71,7 +71,7 @@ public class BuilderPatternDescriptorTest
     {
         var context = CreateContext();
 
-        var descriptor = new BuilderPatternDescriptor(invocation => invocation != null);
+        var descriptor = new BuilderPatternDescriptor(x => x is not null);
         descriptor.IsValid(null).Should().BeFalse();
         descriptor.IsValid(context.Node as InvocationExpressionSyntax).Should().BeTrue();
     }

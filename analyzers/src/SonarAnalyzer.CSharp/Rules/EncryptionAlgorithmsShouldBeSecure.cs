@@ -36,10 +36,10 @@ namespace SonarAnalyzer.Rules.CSharp
             context =>
             {
                 var argumentList = ((InvocationExpressionSyntax)context.Node).ArgumentList;
-                var values = argumentList.ArgumentValuesForParameter(context.SemanticModel, "padding");
+                var values = argumentList.ArgumentValuesForParameter(context.Model, "padding");
                 return values.Length == 1
                     && values[0] is ExpressionSyntax valueSyntax
-                    && context.SemanticModel.GetSymbolInfo(valueSyntax).Symbol is ISymbol symbol
+                    && context.Model.GetSymbolInfo(valueSyntax).Symbol is ISymbol symbol
                     && symbol.Name == "Pkcs1";
             };
     }

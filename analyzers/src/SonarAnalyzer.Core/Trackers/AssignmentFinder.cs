@@ -22,16 +22,16 @@ namespace SonarAnalyzer.Core.Trackers;
 
 public abstract class AssignmentFinder
 {
-    protected abstract SyntaxNode GetTopMostContainingMethod(SyntaxNode node);
     /// <param name="anyAssignmentKind">'true' will find any AssignmentExpressionSyntax like =, +=, -=, &=. 'false' will find only '=' SimpleAssignmentExpression.</param>
     protected abstract bool IsAssignmentToIdentifier(SyntaxNode node, string identifierName, bool anyAssignmentKind, out SyntaxNode rightExpression);
     protected abstract bool IsIdentifierDeclaration(SyntaxNode node, string identifierName, out SyntaxNode initializer);
     protected abstract bool IsLoop(SyntaxNode node);
+    protected abstract SyntaxNode GetTopMostContainingMethod(SyntaxNode node);
 
     public SyntaxNode FindLinearPrecedingAssignmentExpression(string identifierName, SyntaxNode current, Func<SyntaxNode> defaultValue = null)
     {
         var method = GetTopMostContainingMethod(current);
-        while (current != method && current?.Parent != null)
+        while (current != method && current?.Parent is not null)
         {
             if (IsLoop(current) && ContainsNestedAssignmentToIdentifier(current))
             {

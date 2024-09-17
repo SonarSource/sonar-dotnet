@@ -24,7 +24,7 @@ public abstract class ConstantValueFinder<TIdentifierNameSyntax, TVariableDeclar
     where TIdentifierNameSyntax : SyntaxNode
     where TVariableDeclaratorSyntax : SyntaxNode
 {
-    protected readonly SemanticModel SemanticModel;
+    protected readonly SemanticModel Model;
 
     private readonly AssignmentFinder assignmentFinder;
     private readonly int nullLiteralExpressionSyntaxKind;
@@ -34,9 +34,9 @@ public abstract class ConstantValueFinder<TIdentifierNameSyntax, TVariableDeclar
     protected abstract TVariableDeclaratorSyntax VariableDeclarator(SyntaxNode node);
     protected abstract bool IsPtrZero(SyntaxNode node);
 
-    protected ConstantValueFinder(SemanticModel semanticModel, AssignmentFinder assignmentFinder, int nullLiteralExpressionSyntaxKind)
+    protected ConstantValueFinder(SemanticModel model, AssignmentFinder assignmentFinder, int nullLiteralExpressionSyntaxKind)
     {
-        SemanticModel = semanticModel;
+        Model = model;
         this.assignmentFinder = assignmentFinder;
         this.nullLiteralExpressionSyntaxKind = nullLiteralExpressionSyntaxKind;
     }
@@ -46,7 +46,7 @@ public abstract class ConstantValueFinder<TIdentifierNameSyntax, TVariableDeclar
 
     private object FindConstant(SyntaxNode node, HashSet<SyntaxNode> visitedVariables)
     {
-        if (node == null || node.RawKind == nullLiteralExpressionSyntaxKind) // Performance shortcut
+        if (node is null || node.RawKind == nullLiteralExpressionSyntaxKind) // Performance shortcut
         {
             return null;
         }
@@ -56,12 +56,12 @@ public abstract class ConstantValueFinder<TIdentifierNameSyntax, TVariableDeclar
             return 0;
         }
 
-        return node.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } nodeSemanticModel
-            ? nodeSemanticModel.GetConstantValue(node).Value ?? FindAssignedConstant(node, nodeSemanticModel, visitedVariables)
+        return node.EnsureCorrectSemanticModelOrDefault(Model) is { } nodeModel
+            ? nodeModel.GetConstantValue(node).Value ?? FindAssignedConstant(node, nodeModel, visitedVariables)
             : null;
     }
 
-    private object FindAssignedConstant(SyntaxNode node, SemanticModel nodeSemanticModel, HashSet<SyntaxNode> visitedVariables)
+    private object FindAssignedConstant(SyntaxNode node, SemanticModel model, HashSet<SyntaxNode> visitedVariables)
     {
         return node is TIdentifierNameSyntax identifier
             ? FindConstant(assignmentFinder.FindLinearPrecedingAssignmentExpression(IdentifierName(identifier), node, FindFieldInitializer), visitedVariables)
@@ -69,11 +69,11 @@ public abstract class ConstantValueFinder<TIdentifierNameSyntax, TVariableDeclar
 
         SyntaxNode FindFieldInitializer()
         {
-            if (nodeSemanticModel.GetSymbolInfo(identifier).Symbol is IFieldSymbol fieldSymbol
+            if (model.GetSymbolInfo(identifier).Symbol is IFieldSymbol fieldSymbol
                 && VariableDeclarator(fieldSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()) is { } variable
-                && (visitedVariables == null || !visitedVariables.Contains(variable)))
+                && (visitedVariables is null || !visitedVariables.Contains(variable)))
             {
-                visitedVariables ??= new HashSet<SyntaxNode>();
+                visitedVariables ??= new();
                 visitedVariables.Add(variable);
                 return InitializerValue(variable);
             }

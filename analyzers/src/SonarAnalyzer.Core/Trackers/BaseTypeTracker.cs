@@ -39,7 +39,7 @@ public abstract class BaseTypeTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKi
         {
             foreach (var baseTypeNode in context.AllBaseTypeNodes)
             {
-                if (context.SemanticModel.GetTypeInfo(baseTypeNode).Type.DerivesOrImplementsAny(immutableTypes))
+                if (context.Model.GetTypeInfo(baseTypeNode).Type.DerivesOrImplementsAny(immutableTypes))
                 {
                     context.PrimaryLocation = baseTypeNode.GetLocation();
                     return true; // assume there won't be more than one matching node

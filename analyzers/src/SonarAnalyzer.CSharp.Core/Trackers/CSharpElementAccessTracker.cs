@@ -29,13 +29,13 @@ public class CSharpElementAccessTracker : ElementAccessTracker<SyntaxKind>
 
     public override object AssignedValue(ElementAccessContext context) =>
         context.Node.Ancestors().FirstOrDefault(x => x.IsKind(SyntaxKind.SimpleAssignmentExpression)) is AssignmentExpressionSyntax assignment
-            ? assignment.Right.FindConstantValue(context.SemanticModel)
+            ? assignment.Right.FindConstantValue(context.Model)
             : null;
 
     public override Condition ArgumentAtIndexEquals(int index, string value) =>
         context => ((ElementAccessExpressionSyntax)context.Node).ArgumentList is { } argumentList
                    && index < argumentList.Arguments.Count
-                   && argumentList.Arguments[index].Expression.FindStringConstant(context.SemanticModel) == value;
+                   && argumentList.Arguments[index].Expression.FindStringConstant(context.Model) == value;
 
     public override Condition MatchSetter() =>
         context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
@@ -43,6 +43,6 @@ public class CSharpElementAccessTracker : ElementAccessTracker<SyntaxKind>
     public override Condition MatchProperty(MemberDescriptor member) =>
         context => ((ElementAccessExpressionSyntax)context.Node).Expression is MemberAccessExpressionSyntax memberAccess
                    && memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
-                   && context.SemanticModel.GetTypeInfo(memberAccess.Expression) is TypeInfo enclosingClassType
+                   && context.Model.GetTypeInfo(memberAccess.Expression) is TypeInfo enclosingClassType
                    && member.IsMatch(memberAccess.Name.Identifier.ValueText, enclosingClassType.Type, Language.NameComparison);
 }

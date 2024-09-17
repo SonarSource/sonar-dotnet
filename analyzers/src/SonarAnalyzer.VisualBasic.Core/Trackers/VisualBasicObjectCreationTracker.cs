@@ -29,12 +29,12 @@ public class VisualBasicObjectCreationTracker : ObjectCreationTracker<SyntaxKind
     public override Condition ArgumentAtIndexIsConst(int index) =>
         context => ((ObjectCreationExpressionSyntax)context.Node).ArgumentList  is { } argumentList
                    && argumentList.Arguments.Count > index
-                   && argumentList.Arguments[index].GetExpression().HasConstantValue(context.SemanticModel);
+                   && argumentList.Arguments[index].GetExpression().HasConstantValue(context.Model);
 
     public override object ConstArgumentForParameter(ObjectCreationContext context, string parameterName) =>
         ((ObjectCreationExpressionSyntax)context.Node).ArgumentList is { } argumentList
-            && argumentList.ArgumentValuesForParameter(context.SemanticModel, parameterName) is { Length: 1 } values
+            && argumentList.ArgumentValuesForParameter(context.Model, parameterName) is { Length: 1 } values
             && values[0] is ExpressionSyntax valueSyntax
-                ? valueSyntax.FindConstantValue(context.SemanticModel)
+                ? valueSyntax.FindConstantValue(context.Model)
                 : null;
 }

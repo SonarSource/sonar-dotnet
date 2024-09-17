@@ -29,17 +29,14 @@ public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKi
     protected abstract bool InvocationMatchesMemberKind(SyntaxNode invokedExpression, MemberKind memberKind);
     protected abstract bool InvokedMemberMatches(SemanticModel model, SyntaxNode invokedExpression, MemberKind memberKind, Func<string, bool> invokedMemberNameConstraint);
 
-    protected override ArgumentContext CreateContext(SonarSyntaxNodeReportingContext context) =>
-        new(context);
-
     public Condition MatchArgument(ArgumentDescriptor descriptor) =>
         trackingContext =>
         {
             if (trackingContext.Node is { } argumentNode
                 && argumentNode is { Parent.Parent: { } invoked }
-                && SyntacticChecks(trackingContext.SemanticModel, descriptor, argumentNode, invoked)
-                && (descriptor.InvokedMemberNodeConstraint?.Invoke(trackingContext.SemanticModel, Language, invoked) ?? true)
-                && MethodSymbol(trackingContext.SemanticModel, invoked) is { } methodSymbol
+                && SyntacticChecks(trackingContext.Model, descriptor, argumentNode, invoked)
+                && (descriptor.InvokedMemberNodeConstraint?.Invoke(trackingContext.Model, Language, invoked) ?? true)
+                && MethodSymbol(trackingContext.Model, invoked) is { } methodSymbol
                 && Language.MethodParameterLookup(invoked, methodSymbol).TryGetSymbol(argumentNode, out var parameter)
                 && ParameterMatches(parameter, descriptor.ParameterConstraint, descriptor.InvokedMemberConstraint))
             {
@@ -48,6 +45,9 @@ public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKi
             }
             return false;
         };
+
+    protected override ArgumentContext CreateContext(SonarSyntaxNodeReportingContext context) =>
+        new(context);
 
     private IMethodSymbol MethodSymbol(SemanticModel model, SyntaxNode invoked) =>
         model.GetSymbolInfo(invoked).Symbol switch

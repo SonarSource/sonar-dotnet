@@ -61,11 +61,10 @@ namespace SonarAnalyzer.Rules
         }
 
         protected BuilderPatternDescriptor<TSyntaxKind, TInvocationSyntax>[] JwtBuilderDescriptors(Func<TInvocationSyntax, bool> singleArgumentIsNotFalseLiteral) =>
-            new[]
-            {
+            [
                 new BuilderPatternDescriptor<TSyntaxKind, TInvocationSyntax>(true, Language.Tracker.Invocation.MethodNameIs("MustVerifySignature")),
                 new BuilderPatternDescriptor<TSyntaxKind, TInvocationSyntax>(false, Language.Tracker.Invocation.MethodNameIs("DoNotVerifySignature")),
                 new BuilderPatternDescriptor<TSyntaxKind, TInvocationSyntax>(singleArgumentIsNotFalseLiteral, Language.Tracker.Invocation.MethodNameIs("WithVerifySignature"))
-            };
+            ];
     }
 }

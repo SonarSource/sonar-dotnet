@@ -27,7 +27,7 @@ public class BuilderPatternDescriptor<TSyntaxKind, TInvocationSyntax>
     private readonly TrackerBase<TSyntaxKind, InvocationContext>.Condition[] invocationConditions;
     private readonly Func<TInvocationSyntax, bool> isValid;
 
-    public BuilderPatternDescriptor(bool isValid, params TrackerBase<TSyntaxKind, InvocationContext>.Condition[] invocationConditions) : this(invocation => isValid, invocationConditions) { }
+    public BuilderPatternDescriptor(bool isValid, params TrackerBase<TSyntaxKind, InvocationContext>.Condition[] invocationConditions) : this(_ => isValid, invocationConditions) { }
 
     public BuilderPatternDescriptor(Func<TInvocationSyntax, bool> isValid, params TrackerBase<TSyntaxKind, InvocationContext>.Condition[] invocationConditions)
     {

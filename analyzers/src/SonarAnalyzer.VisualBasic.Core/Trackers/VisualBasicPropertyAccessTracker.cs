@@ -34,7 +34,7 @@ public class VisualBasicPropertyAccessTracker : PropertyAccessTracker<SyntaxKind
 
     public override object AssignedValue(PropertyAccessContext context) =>
         context.Node.Ancestors().FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentStatement)) is AssignmentStatementSyntax assignment
-            ? assignment.Right.FindConstantValue(context.SemanticModel)
+            ? assignment.Right.FindConstantValue(context.Model)
             : null;
 
     public override Condition MatchGetter() =>

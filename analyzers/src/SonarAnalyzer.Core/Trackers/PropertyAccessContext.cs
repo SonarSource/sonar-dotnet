@@ -31,9 +31,9 @@ public class PropertyAccessContext : SyntaxBaseContext
         PropertySymbol = new Lazy<IPropertySymbol>(() => context.SemanticModel.GetSymbolInfo(context.Node).Symbol as IPropertySymbol);
     }
 
-    public PropertyAccessContext(SyntaxNode node, SemanticModel semanticModel, string propertyName) : base(node, semanticModel)
+    public PropertyAccessContext(SyntaxNode node, SemanticModel model, string propertyName) : base(node, model)
     {
         PropertyName = propertyName;
-        PropertySymbol = new Lazy<IPropertySymbol>(() => semanticModel.GetSymbolInfo(node).Symbol as IPropertySymbol);
+        PropertySymbol = new Lazy<IPropertySymbol>(() => model.GetSymbolInfo(node).Symbol as IPropertySymbol);
     }
 }

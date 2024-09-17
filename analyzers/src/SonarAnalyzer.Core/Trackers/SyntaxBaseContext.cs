@@ -22,15 +22,15 @@ namespace SonarAnalyzer.Core.Trackers;
 
 public class SyntaxBaseContext : BaseContext
 {
-    public SemanticModel SemanticModel { get; }
+    public SemanticModel Model { get; }
     public SyntaxNode Node { get; }
     public Location PrimaryLocation { get; set; }
 
     public SyntaxBaseContext(SonarSyntaxNodeReportingContext context) : this(context.Node, context.SemanticModel) { }
 
-    public SyntaxBaseContext(SyntaxNode node, SemanticModel semanticModel)
+    public SyntaxBaseContext(SyntaxNode node, SemanticModel model)
     {
-        SemanticModel = semanticModel;
+        Model = model;
         Node = node;
         PrimaryLocation = Node.GetLocation();
     }

@@ -208,7 +208,7 @@ namespace SonarAnalyzer.Rules
                 node = Language.AssignmentFinder.FindLinearPrecedingAssignmentExpression(identifierName, node) as TExpressionSyntax;
 
                 var location = SecondaryLocationForExpression(node, identifierName, out var foundName);
-                if (IsSensitiveExpression(node, context.SemanticModel))
+                if (IsSensitiveExpression(node, context.Model))
                 {
                     context.AddSecondaryLocation(location, AssignmentWithFormattingMessage, foundName);
                     return true;
@@ -244,7 +244,7 @@ namespace SonarAnalyzer.Rules
             context =>
             {
                 return Language.Syntax.NodeExpression(context.Node) is { } invocationExpression
-                       && context.SemanticModel.GetSymbolInfo(invocationExpression).Symbol is IMethodSymbol methodSymbol
+                       && context.Model.GetSymbolInfo(invocationExpression).Symbol is IMethodSymbol methodSymbol
                        && (ParameterIsRawString(methodSymbol, 0) || ParameterIsRawString(methodSymbol, 1));
 
                 static bool ParameterIsRawString(IMethodSymbol method, int index) =>

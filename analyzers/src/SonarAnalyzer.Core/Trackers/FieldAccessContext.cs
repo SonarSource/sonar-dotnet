@@ -28,6 +28,6 @@ public class FieldAccessContext : SyntaxBaseContext
     public FieldAccessContext(SonarSyntaxNodeReportingContext context, string fieldName) : base(context)
     {
         FieldName = fieldName;
-        InvokedFieldSymbol = new Lazy<IFieldSymbol>(() => SemanticModel.GetSymbolInfo(Node).Symbol as IFieldSymbol);
+        InvokedFieldSymbol = new Lazy<IFieldSymbol>(() => Model.GetSymbolInfo(Node).Symbol as IFieldSymbol);
     }
 }
