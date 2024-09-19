@@ -207,7 +207,9 @@ internal class CSharpSymbolUsageCollector : SafeCSharpSyntaxWalker
 
     public override void VisitElementAccessExpression(ElementAccessExpressionSyntax node)
     {
-        if (node.Expression.IsKind(SyntaxKind.ThisExpression) || knownSymbolNames.Contains(node.Expression.GetIdentifier()?.ValueText))
+        if (node.Expression.IsKind(SyntaxKind.ThisExpression)
+            || knownSymbolNames.Contains(node.Expression.GetIdentifier()?.ValueText)
+            || knownSymbolNames.Contains(model.GetTypeInfo(node.Expression).Type?.Name))
         {
             var symbols = GetSymbols(node);
             UsedSymbols.UnionWith(symbols);
