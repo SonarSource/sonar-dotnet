@@ -79,7 +79,26 @@ public class SonarSyntaxTreeReportingContextTest
         var sut = new SonarSyntaxTreeReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), default, compilation);
         var rule = AnalysisScaffolding.CreateDescriptor("Sxxxx", DiagnosticDescriptorFactory.MainSourceScopeTag);
 
-        sut.Invoking(x => x.ReportIssue(null, primaryLocation: null,  secondaryLocations: [])).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("rule");
-        sut.Invoking(x => x.ReportIssue(rule, primaryLocation: null,  secondaryLocations: null)).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("secondaryLocations");
+        sut.Invoking(x => x.ReportIssue(null, primaryLocation: null, secondaryLocations: [])).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("rule");
+        sut.Invoking(x => x.ReportIssue(rule, primaryLocation: null, secondaryLocations: null)).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("secondaryLocations");
+        sut.Invoking(x => x.ReportIssue(rule, primaryLocation: null, secondaryLocations: [], properties: null)).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("properties");
+    }
+
+    [TestMethod]
+    public void ReportIssue_PropertiesAndSecondaryLocations_Combine()
+    {
+        Diagnostic lastDiagnostic = null;
+        var (tree, model) = TestHelper.CompileCS("using System;");
+        var context = new SyntaxTreeAnalysisContext(tree, AnalysisScaffolding.CreateOptions(), x => lastDiagnostic = x, _ => true, default);
+        var sut = new SonarSyntaxTreeReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context, model.Compilation);
+        var rule = AnalysisScaffolding.CreateDescriptor("Sxxxx", DiagnosticDescriptorFactory.MainSourceScopeTag);
+        var secondaryLocation = new SecondaryLocation(tree.GetRoot().GetLocation(), "secondary");
+
+        sut.ReportIssue(rule, tree.GetRoot().GetLocation(), [secondaryLocation], properties: new[] { "custom property"}.ToImmutableDictionary(x => x));
+        lastDiagnostic.Should().NotBeNull();
+        lastDiagnostic.Id.Should().Be("Sxxxx");
+        lastDiagnostic.Properties.Should().HaveCount(2)
+            .And.Contain(new KeyValuePair<string, string>("custom property", "custom property")).And.Contain(new KeyValuePair<string, string>("0", "secondary"));
+        lastDiagnostic.AdditionalLocations.Should().ContainSingle("secondary");
     }
 }

@@ -118,12 +118,20 @@ public abstract class SonarTreeReportingContextBase<TContext> : SonarReportingCo
     public void ReportIssue(DiagnosticDescriptor rule, Location location, ImmutableDictionary<string, string> properties, params string[] messageArgs) =>
         ReportIssueCore(Diagnostic.Create(rule, location, properties, messageArgs));
 
-    public void ReportIssue(DiagnosticDescriptor rule, Location primaryLocation, IEnumerable<SecondaryLocation> secondaryLocations, params string[] messageArgs)
+    public void ReportIssue(DiagnosticDescriptor rule, Location primaryLocation, IEnumerable<SecondaryLocation> secondaryLocations, params string[] messageArgs) =>
+        ReportIssue(rule, primaryLocation, secondaryLocations, ImmutableDictionary<string, string>.Empty, messageArgs);
+
+    public void ReportIssue(DiagnosticDescriptor rule,
+                            Location primaryLocation,
+                            IEnumerable<SecondaryLocation> secondaryLocations,
+                            ImmutableDictionary<string, string> properties,
+                            params string[] messageArgs)
     {
         _ = rule ?? throw new ArgumentNullException(nameof(rule));
         _ = secondaryLocations ?? throw new ArgumentNullException(nameof(secondaryLocations));
+        _ = properties ?? throw new ArgumentNullException(nameof(properties));
         secondaryLocations = secondaryLocations.Where(x => x.Location.IsValid(Compilation)).ToArray();
-        var properties = secondaryLocations.Select((x, index) => new KeyValuePair<string, string>(index.ToString(), x.Message)).ToImmutableDictionary();
+        properties = properties.AddRange(secondaryLocations.Select((x, index) => new KeyValuePair<string, string>(index.ToString(), x.Message)));
         ReportIssueCore(Diagnostic.Create(rule, primaryLocation, secondaryLocations.Select(x => x.Location), properties, messageArgs));
     }
 }
