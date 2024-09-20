@@ -8,6 +8,102 @@ namespace Tests.Diagnostics
 {
     public class VariableUnused
     {
+        void LinqRangeVariables()
+        {
+            var byteArray = new byte[10];
+
+            _ = from a in byteArray //Compliant
+                let b = a / 2
+                let c = b + a
+                group c by c * b into g
+                join d in new object[0] on g equals d into f
+                select f into z
+                select z;
+
+            _ = from a in byteArray // Compliant
+                let b = a
+                let c = 1
+                group c by b into d
+                where d != null
+                let y = 2
+                let z = 1
+                orderby y
+                select z;
+
+            _ = from a in byteArray // Compliant
+                let b = a
+                let c = 1
+                let d = 8 * 12
+                let e = -13
+                select a * b + c - d / e;
+
+            _ = from a in byteArray                             //Noncompliant
+//                   ^
+                let b = true                                    //Noncompliant
+//                  ^
+                let c = false
+                group c by c into g
+                join d in new object[0] on g equals d into f    //Noncompliant
+//                                                         ^
+                select g into e                                 //Noncompliant
+//                            ^
+                select true;
+
+            var byteArrayB = new byte[10];
+
+            _ = from upper in byteArray
+                from lower in byteArrayB
+                let a = lower - 10
+                let b = upper - 10
+                let c = -10                     //Noncompliant
+                where upper != lower && lower > b
+                orderby a descending
+                select upper;
+
+            _ = from a in byteArray //Noncompliant
+                let b = 0
+                select b;
+
+            _ = from a in byteArray
+                let b = 0
+                where a != 0
+                select b;
+
+            _ = from a in byteArray
+                let b = 0
+                let c = 1   //Noncompliant
+                where a != 0
+                select b;
+
+            _ = from a in byteArray //Noncompliant
+                let b = 0
+                where b != 0
+                select b;
+
+            _ = from a in "HELLO"   //Noncompliant
+                let c = "a"
+                let b = c   //Noncompliant
+                let z = ""
+                where z is null
+                let x = false
+                group x by x into w //Noncompliant
+                let p = "p"
+                orderby p descending
+                select p;
+
+            //Nested subquery
+            _ = from a in "HELLO"
+                let b = "a"
+                group a by b into c
+                select new
+                {
+                    Key = c.Key,
+                    Value =
+                        from z in c //Noncompliant 
+                        select "1"
+                };
+        }
+
         void F1()
         {
             var packageA = DoSomething("Foo", "1.0");
