@@ -151,4 +151,108 @@ namespace Tests.Diagnostics
 
         private void Use((int, int) t) { }
     }
+
+    public class CSharpSevenVariableDeclarations
+    {
+        public void Foo()
+        {
+
+            var x = "hello";
+            if (x is string s) // Noncompliant
+//                          ^
+            {           
+                x += ":)";
+            }
+
+            if (x is string t) // Compliant
+            {
+               t += ":)";
+            }
+
+            Bar(out var b); // Noncompliant
+//                      ^
+            Bar(out var c); //Compliant
+            c++;
+
+            void Bar(out int num)
+            {
+                num = 42;
+            }
+            ref string refX = ref x; //Noncompliant
+//                     ^^^^
+            ref string refXX = ref x; //Compliant
+            refXX += "1";
+
+            var tuple = ("hello", "bye");
+            if (tuple is (string strX, string strY)) // Noncompliant
+//                                            ^^^^
+            {
+                strX += ":)";
+            }
+
+            if (tuple is (string comX, string comY)) // Compliant
+            {
+                comX += comY;
+            }
+
+            if (x is string { Length:5 } rec) //Noncompliant
+//                                       ^^^
+            {
+                x += ":)";
+            }
+            if (x is string { Length: 5 } com) //Compliant
+            {
+                com += ":)";
+            }
+
+            if (tuple is (string str, { } d)) // Noncompliant
+//                                        ^
+            {
+                str += ":)";
+            }
+
+            if (tuple is (string y, { } z)) // Noncompliant
+//                               ^
+            {
+                z += ":)";
+            }
+
+            if (tuple is (string strCom, { } dCom)) // Compliant
+            {
+                strCom += dCom;
+            }
+        }
+
+        public void SwitchStatements()
+        {
+            var o = new Shape();
+
+            switch (o)
+            {
+                case Circle c: //Noncompliant
+//                          ^
+                    break;
+                case Square s: //Compliant
+                    s.side = 10;
+                    break;
+                default:
+                    break;
+            }
+        }
+        public class Shape
+        {
+            public int A;
+        }
+
+        public class Square : Shape
+        {
+            public int side = 0;
+        }
+
+        public class Circle : Shape
+        {
+            public int radius = 0;
+        }
+    }
+
 }

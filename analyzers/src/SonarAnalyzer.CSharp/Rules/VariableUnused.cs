@@ -38,7 +38,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     SyntaxKindEx.VarPattern,
                     SyntaxKindEx.RecursivePattern,
                     SyntaxKindEx.DeclarationPattern,
-                    SyntaxKindEx.ListPattern);
+                    SyntaxKindEx.ListPattern,
+                    SyntaxKindEx.SingleVariableDesignation);
                 cbc.RegisterNodeAction(collector.CollectUsages, SyntaxKind.IdentifierName);
                 cbc.RegisterCodeBlockEndAction(c => collector.ReportUnusedVariables(c, Rule));
             });
@@ -55,6 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     { RawKind: (int)SyntaxKindEx.RecursivePattern } pattern when ((RecursivePatternSyntaxWrapper)pattern).Designation is { } designation => Variables(designation),
                     { RawKind: (int)SyntaxKindEx.DeclarationPattern } pattern when ((DeclarationPatternSyntaxWrapper)pattern).Designation is { } designation => Variables(designation),
                     { RawKind: (int)SyntaxKindEx.ListPattern } pattern when ((ListPatternSyntaxWrapper)pattern).Designation is { } designation => Variables(designation),
+                    { RawKind: (int)SyntaxKindEx.SingleVariableDesignation } singleVariable when ((SingleVariableDesignationSyntaxWrapper)singleVariable) is { } designation => Variables(designation),
                     _ => Enumerable.Empty<SyntaxNode>(),
                 };
 
