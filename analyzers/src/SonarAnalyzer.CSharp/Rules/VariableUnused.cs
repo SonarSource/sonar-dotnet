@@ -31,6 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCodeBlockStartAction(cbc =>
             {
                 var collector = new UnusedLocalsCollector();
+                var walker = new QueryExpressionWalker(cbc.SemanticModel);
 
                 cbc.RegisterNodeAction(collector.CollectDeclarations,
                     SyntaxKind.LocalDeclarationStatement,
@@ -40,9 +41,19 @@ namespace SonarAnalyzer.Rules.CSharp
                     SyntaxKindEx.DeclarationPattern,
                     SyntaxKindEx.ListPattern,
                     SyntaxKindEx.SingleVariableDesignation);
+                cbc.RegisterNodeAction(walker.CollectDeclarationsAndUsedSymbols, SyntaxKind.QueryExpression);
                 cbc.RegisterNodeAction(collector.CollectUsages, SyntaxKind.IdentifierName);
                 cbc.RegisterCodeBlockEndAction(c => collector.ReportUnusedVariables(c, Rule));
+                cbc.RegisterCodeBlockEndAction(c => ReportUnusedQueryExpressionVariables(c, walker));
             });
+
+        private static void ReportUnusedQueryExpressionVariables(SonarCodeBlockReportingContext c, QueryExpressionWalker walker)
+        {
+            foreach (var unused in walker.FindUnused())
+            {
+                c.ReportIssue(Rule, unused.Locations.First(), unused.Name);
+            }
+        }
 
         private sealed class UnusedLocalsCollector : UnusedLocalsCollectorBase<SyntaxNode>
         {
@@ -62,6 +73,53 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static IEnumerable<SyntaxNode> Variables(VariableDesignationSyntaxWrapper designation) =>
                 designation.AllVariables().Select(v => v.SyntaxNode);
+        }
+
+        private sealed class QueryExpressionWalker : SafeCSharpSyntaxWalker
+        {
+            private readonly ISet<ISymbol> declaredSymbols = new HashSet<ISymbol>();
+            private readonly ISet<ISymbol> usedSymbols = new HashSet<ISymbol>();
+            private readonly SemanticModel model;
+
+            public QueryExpressionWalker(SemanticModel model)
+            {
+                this.model = model;
+            }
+
+            public IEnumerable<ISymbol> FindUnused() =>
+                declaredSymbols.Except(usedSymbols);
+
+            public void CollectDeclarationsAndUsedSymbols(SonarSyntaxNodeReportingContext context)
+            {
+                if (!context.Node.HasAncestor(SyntaxKind.QueryExpression)) // only run for top-level query expression
+                {
+                    Visit(context.Node);
+                }
+            }
+
+            public override void VisitLetClause(LetClauseSyntax node) =>
+                AddDeclaredSymbol(node);
+
+            public override void VisitFromClause(FromClauseSyntax node) =>
+                AddDeclaredSymbol(node);
+
+            public override void VisitJoinIntoClause(JoinIntoClauseSyntax node) =>
+                AddDeclaredSymbol(node);
+
+            public override void VisitQueryContinuation(QueryContinuationSyntax node) =>
+                AddDeclaredSymbol(node);
+
+            public override void VisitIdentifierName(IdentifierNameSyntax node) =>
+                usedSymbols.UnionWith(GetUsedSymbols(node, model));
+
+            private void AddDeclaredSymbol(CSharpSyntaxNode node)
+            {
+                if (model.GetDeclaredSymbol(node) is ISymbol symbol)
+                {
+                    declaredSymbols.Add(symbol);
+                }
+                DefaultVisit(node);
+            }
         }
     }
 }
