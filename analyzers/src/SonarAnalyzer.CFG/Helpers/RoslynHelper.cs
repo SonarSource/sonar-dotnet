@@ -18,20 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CFG.Helpers
+namespace SonarAnalyzer.CFG.Helpers;
+
+public static class RoslynHelper
 {
-    public static class RoslynHelper
-    {
-        public const int VS2017MajorVersion = 2;
-        public const int MinimalSupportedMajorVersion = 3;
+    public const int VS2017MajorVersion = 2;
+    public const int MinimalSupportedMajorVersion = 3;
 
-        public static bool IsRoslynCfgSupported(int minimalVersion = MinimalSupportedMajorVersion) =>
-            !IsVersionLessThan(minimalVersion);
+    public static bool IsRoslynCfgSupported(int minimalVersion = MinimalSupportedMajorVersion) =>
+        !IsVersionLessThan(minimalVersion);
 
-        public static Type FlowAnalysisType(string typeName) =>
-            typeof(SemanticModel).Assembly.GetType("Microsoft.CodeAnalysis.FlowAnalysis." + typeName);
+    public static Type FlowAnalysisType(string typeName) =>
+        typeof(SemanticModel).Assembly.GetType("Microsoft.CodeAnalysis.FlowAnalysis." + typeName);
 
-        public static bool IsVersionLessThan(int minimalVersion = MinimalSupportedMajorVersion) =>
-            typeof(SemanticModel).Assembly.GetName().Version.Major < minimalVersion;
-    }
+    public static bool IsVersionLessThan(int minimalVersion = MinimalSupportedMajorVersion) =>
+        typeof(SemanticModel).Assembly.GetName().Version.Major < minimalVersion;
 }

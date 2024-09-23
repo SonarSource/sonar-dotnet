@@ -18,17 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public enum NetFrameworkVersion
 {
-    public enum NetFrameworkVersion
-    {
-        // cannot tell
-        Unknown,
-        // probably .NET 3.5
-        Probably35,
-        // between .NET 4.0 (inclusive) and .NET 4.5.1 (inclusive)
-        Between4And451,
-        // after .NET 4.5.2 (inclusive)
-        After452
-    }
+    // cannot tell
+    Unknown,
+    // probably .NET 3.5
+    Probably35,
+    // between .NET 4.0 (inclusive) and .NET 4.5.1 (inclusive)
+    Between4And451,
+    // after .NET 4.5.2 (inclusive)
+    After452
 }

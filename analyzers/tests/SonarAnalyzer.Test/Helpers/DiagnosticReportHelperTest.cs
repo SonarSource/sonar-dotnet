@@ -21,27 +21,26 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.Test.Helpers
+namespace SonarAnalyzer.Test.Helpers;
+
+[TestClass]
+public class DiagnosticReportHelperTest
 {
-    [TestClass]
-    public class DiagnosticReportHelperTest
-    {
-        private const string Source =
+    private const string Source =
 @"namespace Test
 {
     class TestClass
     {
     }
 }";
-        [TestMethod]
-        public void GetLineNumberToReport()
-        {
-            var syntaxTree = CSharpSyntaxTree.ParseText(Source);
-            var method = syntaxTree.Single<ClassDeclarationSyntax>();
-            method.GetLineNumberToReport()
-                .Should().Be(3);
-            method.GetLocation().GetLineSpan().StartLinePosition.GetLineNumberToReport()
-                .Should().Be(3);
-        }
+    [TestMethod]
+    public void GetLineNumberToReport()
+    {
+        var syntaxTree = CSharpSyntaxTree.ParseText(Source);
+        var method = syntaxTree.Single<ClassDeclarationSyntax>();
+        method.GetLineNumberToReport()
+            .Should().Be(3);
+        method.GetLocation().GetLineSpan().StartLinePosition.GetLineNumberToReport()
+            .Should().Be(3);
     }
 }

@@ -18,44 +18,43 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Test.Helpers
+namespace SonarAnalyzer.Test.Helpers;
+
+[TestClass]
+public class DictionaryExtensionsTest
 {
-    [TestClass]
-    public class DictionaryExtensionsTest
+    [TestMethod]
+    public void DictionaryEquals_Different()
     {
-        [TestMethod]
-        public void DictionaryEquals_Different()
-        {
-            var empty = new Dictionary<string, string>();
-            var original = new Dictionary<string, string> { { "a", "a" }, { "b", "b" } };
-            var differentKeys = new Dictionary<string, string> { { "a", "a" }, { "c", "c" } };
-            var differentValues = new Dictionary<string, string> { { "a", "a" }, { "b", "xxxx" } };
+        var empty = new Dictionary<string, string>();
+        var original = new Dictionary<string, string> { { "a", "a" }, { "b", "b" } };
+        var differentKeys = new Dictionary<string, string> { { "a", "a" }, { "c", "c" } };
+        var differentValues = new Dictionary<string, string> { { "a", "a" }, { "b", "xxxx" } };
 
-            DictionaryExtensions.DictionaryEquals(null, empty).Should().BeFalse();
-            DictionaryExtensions.DictionaryEquals(empty, null).Should().BeFalse();
-            original.DictionaryEquals(empty).Should().BeFalse();
-            original.DictionaryEquals(differentKeys).Should().BeFalse();
-            original.DictionaryEquals(differentValues).Should().BeFalse();
-        }
+        DictionaryExtensions.DictionaryEquals(null, empty).Should().BeFalse();
+        DictionaryExtensions.DictionaryEquals(empty, null).Should().BeFalse();
+        original.DictionaryEquals(empty).Should().BeFalse();
+        original.DictionaryEquals(differentKeys).Should().BeFalse();
+        original.DictionaryEquals(differentValues).Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void DictionaryEquals_SameContent()
-        {
-            var dict1 = new Dictionary<string, string> { { "a", "a" }, { "b", "b" } };
-            var dict2 = new Dictionary<string, string> { { "a", "a" }, { "b", "b" } };
-            dict1.DictionaryEquals(dict1).Should().BeTrue();
-            dict1.DictionaryEquals(dict2).Should().BeTrue();
-        }
+    [TestMethod]
+    public void DictionaryEquals_SameContent()
+    {
+        var dict1 = new Dictionary<string, string> { { "a", "a" }, { "b", "b" } };
+        var dict2 = new Dictionary<string, string> { { "a", "a" }, { "b", "b" } };
+        dict1.DictionaryEquals(dict1).Should().BeTrue();
+        dict1.DictionaryEquals(dict2).Should().BeTrue();
+    }
 
-        [TestMethod]
-        public void DictionaryEquals_SameContent_DifferentOrdering()
-        {
-            var numbers = Enumerable.Range(1, 1000);
-            var dict1 = numbers.ToDictionary(x => x, x => x);
-            var dict2 = numbers.OrderByDescending(x => x).ToDictionary(x => x, x => x);
-            dict1.DictionaryEquals(dict1).Should().BeTrue();
-            dict1.DictionaryEquals(dict2).Should().BeTrue();
-            dict2.DictionaryEquals(dict1).Should().BeTrue();
-        }
+    [TestMethod]
+    public void DictionaryEquals_SameContent_DifferentOrdering()
+    {
+        var numbers = Enumerable.Range(1, 1000);
+        var dict1 = numbers.ToDictionary(x => x, x => x);
+        var dict2 = numbers.OrderByDescending(x => x).ToDictionary(x => x, x => x);
+        dict1.DictionaryEquals(dict1).Should().BeTrue();
+        dict1.DictionaryEquals(dict2).Should().BeTrue();
+        dict2.DictionaryEquals(dict1).Should().BeTrue();
     }
 }

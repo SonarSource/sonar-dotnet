@@ -25,16 +25,16 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.Test.Helpers
+namespace SonarAnalyzer.Test.Helpers;
+
+[TestClass]
+public class IfDirectiveTestHelper
 {
-    [TestClass]
-    public class IfDirectiveTestHelper
+    [TestMethod]
+    public void NoDirectives()
     {
-        [TestMethod]
-        public void NoDirectives()
-        {
-            // Arrange
-            var source = @"
+        // Arrange
+        var source = @"
 namespace Test
 {
   class TestClass
@@ -43,21 +43,21 @@ namespace Test
   }
 }
 ";
-            var node = GetMethod1Node(source);
+        var node = GetMethod1Node(source);
 
-            // Act
-            var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        // Act
+        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
 
-            // Assert
-            activeSections.Should().NotBeNull();
-            activeSections.Should().BeEmpty();
-        }
+        // Assert
+        activeSections.Should().NotBeNull();
+        activeSections.Should().BeEmpty();
+    }
 
-        [TestMethod]
-        public void ActiveBlocks_NonNestedIfs()
-        {
-            // Arrange
-            var source = @"
+    [TestMethod]
+    public void ActiveBlocks_NonNestedIfs()
+    {
+        // Arrange
+        var source = @"
 #define BLOCK1
 #define BLOCK2
 #define BLOCK3
@@ -87,22 +87,22 @@ namespace Test
 
 }
 ";
-            var node = GetMethod1Node(source);
+        var node = GetMethod1Node(source);
 
-            // Act
-            var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        // Act
+        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
 
-            // Assert
-            activeSections.Should().NotBeNull();
-            activeSections.Should().ContainSingle();
-            activeSections.Should().BeEquivalentTo(new[] { "BLOCK3" });
-        }
+        // Assert
+        activeSections.Should().NotBeNull();
+        activeSections.Should().ContainSingle();
+        activeSections.Should().BeEquivalentTo(new[] { "BLOCK3" });
+    }
 
-        [TestMethod]
-        public void ActiveBlocks_NestedIfs()
-        {
-            // Arrange
-            var source = @"
+    [TestMethod]
+    public void ActiveBlocks_NestedIfs()
+    {
+        // Arrange
+        var source = @"
 #define BLOCK1
 #define BLOCK2
 #define BLOCK3
@@ -130,22 +130,22 @@ namespace Test
 
 }
 ";
-            var node = GetMethod1Node(source);
+        var node = GetMethod1Node(source);
 
-            // Act
-            var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        // Act
+        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
 
-            // Assert
-            activeSections.Should().NotBeNull();
-            activeSections.Should().HaveCount(3);
-            activeSections.Should().BeEquivalentTo(new[] { "BLOCK1", "BLOCK2", "BLOCK3" });
-        }
+        // Assert
+        activeSections.Should().NotBeNull();
+        activeSections.Should().HaveCount(3);
+        activeSections.Should().BeEquivalentTo(new[] { "BLOCK1", "BLOCK2", "BLOCK3" });
+    }
 
-        [TestMethod]
-        public void ActiveBlocks_DirectivesInLeadingTrivia()
-        {
-            // Arrange
-            var source = @"
+    [TestMethod]
+    public void ActiveBlocks_DirectivesInLeadingTrivia()
+    {
+        // Arrange
+        var source = @"
 #define BLOCK1
 #define BLOCK2
 #define BLOCK3
@@ -173,21 +173,21 @@ namespace Test
 
 }
 ";
-            var node = GetMethod1Node(source);
+        var node = GetMethod1Node(source);
 
-            // Act
-            var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        // Act
+        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
 
-            // Assert
-            activeSections.Should().NotBeNull();
-            activeSections.Should().BeEquivalentTo(new[] { "BLOCK2", "BLOCK3" });
-        }
+        // Assert
+        activeSections.Should().NotBeNull();
+        activeSections.Should().BeEquivalentTo(new[] { "BLOCK2", "BLOCK3" });
+    }
 
-        [TestMethod]
-        public void ActiveBlocks_ElseInPrecedingCode()
-        {
-            // Arrange
-            var source = @"
+    [TestMethod]
+    public void ActiveBlocks_ElseInPrecedingCode()
+    {
+        // Arrange
+        var source = @"
 #define BLOCK2
 
 #if BLOCK1
@@ -210,21 +210,21 @@ namespace Test
 }
 #endif
 ";
-            var node = GetMethod1Node(source);
+        var node = GetMethod1Node(source);
 
-            // Act
-            var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        // Act
+        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
 
-            // Assert
-            activeSections.Should().NotBeNull();
-            activeSections.Should().BeEquivalentTo(new[] { "BLOCK2" });
-        }
+        // Assert
+        activeSections.Should().NotBeNull();
+        activeSections.Should().BeEquivalentTo(new[] { "BLOCK2" });
+    }
 
-        [TestMethod]
-        public void ActiveBlocks_NegativeConditions_InIf()
-        {
-            // Arrange
-            var source = @"
+    [TestMethod]
+    public void ActiveBlocks_NegativeConditions_InIf()
+    {
+        // Arrange
+        var source = @"
 namespace Test
 {
 #if !BLOCK1
@@ -236,21 +236,21 @@ namespace Test
 #endif
 }
 ";
-            var node = GetMethod1Node(source);
+        var node = GetMethod1Node(source);
 
-            // Act
-            var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        // Act
+        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
 
-            // Assert
-            activeSections.Should().NotBeNull();
-            activeSections.Should().BeEmpty();
-        }
+        // Assert
+        activeSections.Should().NotBeNull();
+        activeSections.Should().BeEmpty();
+    }
 
-        [TestMethod]
-        public void ActiveBlocks_NegativeConditions_InElse()
-        {
-            // Arrange
-            var source = @"
+    [TestMethod]
+    public void ActiveBlocks_NegativeConditions_InElse()
+    {
+        // Arrange
+        var source = @"
 #define BLOCK1
 
 namespace Test
@@ -264,21 +264,21 @@ namespace Test
 #endif
 }
 ";
-            var node = GetMethod1Node(source);
+        var node = GetMethod1Node(source);
 
-            // Act
-            var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        // Act
+        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
 
-            // Assert
-            activeSections.Should().NotBeNull();
-            activeSections.Should().BeEmpty();
-        }
+        // Assert
+        activeSections.Should().NotBeNull();
+        activeSections.Should().BeEmpty();
+    }
 
-        [TestMethod]
-        public void ActiveBlocks_Else_FirstBranchIsActive()
-        {
-            // Arrange
-            var source = @"
+    [TestMethod]
+    public void ActiveBlocks_Else_FirstBranchIsActive()
+    {
+        // Arrange
+        var source = @"
 #define BLOCK1
 
 namespace Test
@@ -293,21 +293,21 @@ namespace Test
         void Method1() {}
 #endif
 ";
-            var node = GetMethod1Node(source);
+        var node = GetMethod1Node(source);
 
-            // Act
-            var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        // Act
+        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
 
-            // Assert
-            activeSections.Should().NotBeNull();
-            activeSections.Should().BeEquivalentTo(new[] { "BLOCK1" });
-        }
+        // Assert
+        activeSections.Should().NotBeNull();
+        activeSections.Should().BeEquivalentTo(new[] { "BLOCK1" });
+    }
 
-        [TestMethod]
-        public void ActiveBlocks_Else_SecondBranchIsActive()
-        {
-            // Arrange
-            var source = @"
+    [TestMethod]
+    public void ActiveBlocks_Else_SecondBranchIsActive()
+    {
+        // Arrange
+        var source = @"
 #define BLOCK2
 
 namespace Test
@@ -322,21 +322,21 @@ namespace Test
         void Method1() {}
 #endif
 ";
-            var node = GetMethod1Node(source);
+        var node = GetMethod1Node(source);
 
-            // Act
-            var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        // Act
+        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
 
-            // Assert
-            activeSections.Should().NotBeNull();
-            activeSections.Should().BeEmpty();
-        }
+        // Assert
+        activeSections.Should().NotBeNull();
+        activeSections.Should().BeEmpty();
+    }
 
-        [TestMethod]
-        public void ActiveBlocks_Elif_FirstBranchIsActive()
-        {
-            // Arrange
-            var source = @"
+    [TestMethod]
+    public void ActiveBlocks_Elif_FirstBranchIsActive()
+    {
+        // Arrange
+        var source = @"
 #define BLOCK1
 #define BLOCK2
 
@@ -354,21 +354,21 @@ namespace Test
     }
 }
 ";
-            var node = GetMethod1Node(source);
+        var node = GetMethod1Node(source);
 
-            // Act
-            var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        // Act
+        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
 
-            // Assert
-            activeSections.Should().NotBeNull();
-            activeSections.Should().BeEquivalentTo(new[] { "BLOCK1" });
-        }
+        // Assert
+        activeSections.Should().NotBeNull();
+        activeSections.Should().BeEquivalentTo(new[] { "BLOCK1" });
+    }
 
-        [TestMethod]
-        public void ActiveBlocks_Elif_SecondBranchIsActive()
-        {
-            // Arrange
-            var source = @"
+    [TestMethod]
+    public void ActiveBlocks_Elif_SecondBranchIsActive()
+    {
+        // Arrange
+        var source = @"
 #define BLOCK2
 
 namespace Test
@@ -385,21 +385,21 @@ namespace Test
     }
 }
 ";
-            var node = GetMethod1Node(source);
+        var node = GetMethod1Node(source);
 
-            // Act
-            var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        // Act
+        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
 
-            // Assert
-            activeSections.Should().NotBeNull();
-            activeSections.Should().BeEquivalentTo(new[] { "BLOCK2" });
-        }
+        // Assert
+        activeSections.Should().NotBeNull();
+        activeSections.Should().BeEquivalentTo(new[] { "BLOCK2" });
+    }
 
-        [TestMethod]
-        public void ActiveBlocks_Elif_FirstBranchIsActive_InLeadingTrivia()
-        {
-            // Arrange
-            var source = @"
+    [TestMethod]
+    public void ActiveBlocks_Elif_FirstBranchIsActive_InLeadingTrivia()
+    {
+        // Arrange
+        var source = @"
 #define BLOCK1
 #define BLOCK2
 
@@ -415,21 +415,21 @@ namespace Test
     }
 }
 ";
-            var node = GetMethod1Node(source);
+        var node = GetMethod1Node(source);
 
-            // Act
-            var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        // Act
+        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
 
-            // Assert
-            activeSections.Should().NotBeNull();
-            activeSections.Should().BeEquivalentTo(new[] { "BLOCK1" });
-        }
+        // Assert
+        activeSections.Should().NotBeNull();
+        activeSections.Should().BeEquivalentTo(new[] { "BLOCK1" });
+    }
 
-        [TestMethod]
-        public void ActiveBlocks_Elif_SecondBranchIsActive_InLeadingTrivia()
-        {
-            // Arrange
-            var source = @"
+    [TestMethod]
+    public void ActiveBlocks_Elif_SecondBranchIsActive_InLeadingTrivia()
+    {
+        // Arrange
+        var source = @"
 #define BLOCK2
 
 namespace Test
@@ -444,21 +444,21 @@ namespace Test
     }
 }
 ";
-            var node = GetMethod1Node(source);
+        var node = GetMethod1Node(source);
 
-            // Act
-            var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        // Act
+        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
 
-            // Assert
-            activeSections.Should().NotBeNull();
-            activeSections.Should().BeEquivalentTo(new[] { "BLOCK2" });
-        }
+        // Assert
+        activeSections.Should().NotBeNull();
+        activeSections.Should().BeEquivalentTo(new[] { "BLOCK2" });
+    }
 
-        [TestMethod]
-        public void InactiveDirectives_ShouldBeIgnored()
-        {
-            // Arrange
-            var source = @"
+    [TestMethod]
+    public void InactiveDirectives_ShouldBeIgnored()
+    {
+        // Arrange
+        var source = @"
 #define BLOCK1
 #define BLOCK2
 #define BLOCK3
@@ -489,21 +489,21 @@ namespace Test
 
 }
 ";
-            var node = GetMethod1Node(source);
+        var node = GetMethod1Node(source);
 
-            // Act
-            var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        // Act
+        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
 
-            // Assert
-            activeSections.Should().NotBeNull();
-            activeSections.Should().BeEquivalentTo(new[] { "BLOCK3", "BLOCK4" });
-        }
+        // Assert
+        activeSections.Should().NotBeNull();
+        activeSections.Should().BeEquivalentTo(new[] { "BLOCK3", "BLOCK4" });
+    }
 
-        [TestMethod]
-        public void BadDirectives_ShouldBeIgnored()
-        {
-            // Arrange
-            var source = @"
+    [TestMethod]
+    public void BadDirectives_ShouldBeIgnored()
+    {
+        // Arrange
+        var source = @"
 #define BLOCK2
 
 #if BLOCK1
@@ -523,20 +523,19 @@ namespace Test
     }
 }
 ";
-            var node = GetMethod1Node(source);
+        var node = GetMethod1Node(source);
 
-            // Act
-            var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        // Act
+        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
 
-            // Assert
-            activeSections.Should().NotBeNull();
-            activeSections.Should().BeEquivalentTo(new[] { "BLOCK2" });
-        }
-
-        private static SyntaxNode GetMethod1Node(string source) =>
-            CSharpSyntaxTree.ParseText(source).GetRoot()
-                .DescendantNodes()
-                .OfType<MethodDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Method1");
+        // Assert
+        activeSections.Should().NotBeNull();
+        activeSections.Should().BeEquivalentTo(new[] { "BLOCK2" });
     }
+
+    private static SyntaxNode GetMethod1Node(string source) =>
+        CSharpSyntaxTree.ParseText(source).GetRoot()
+            .DescendantNodes()
+            .OfType<MethodDeclarationSyntax>()
+            .First(m => m.Identifier.ValueText == "Method1");
 }

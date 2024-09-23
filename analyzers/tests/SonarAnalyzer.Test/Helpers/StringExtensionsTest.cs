@@ -18,34 +18,33 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Test.Helpers
-{
-    [TestClass]
-    public class StringExtensionsTest
-    {
-        [TestMethod]
-        public void TestSplitCamelCaseToWords()
-        {
-            AssertSplitEquivalent("thisIsAName", "THIS", "IS", "A", "NAME");
-            AssertSplitEquivalent("thisIsSMTPName", "THIS", "IS", "SMTP", "NAME");
-            AssertSplitEquivalent("ThisIsIt", "THIS", "IS", "IT");
-            AssertSplitEquivalent("bin2hex", "BIN", "HEX");
-            AssertSplitEquivalent("HTML", "HTML");
-            AssertSplitEquivalent("SOME_VALUE", "SOME", "VALUE");
-            AssertSplitEquivalent("GR8day", "GR", "DAY");
-            AssertSplitEquivalent("ThisIsEpic", "THIS", "IS", "EPIC");
-            AssertSplitEquivalent("ThisIsEPIC", "THIS", "IS", "EPIC");
-            AssertSplitEquivalent("This_is_EPIC", "THIS", "IS", "EPIC");
-            AssertSplitEquivalent("PEHeader", "PE", "HEADER");
-            AssertSplitEquivalent("PE_Header", "PE", "HEADER");
-            AssertSplitEquivalent("BigB_smallc&GIANTD", "BIG", "B", "SMALLC", "GIANTD");
-            AssertSplitEquivalent("SMTPServer", "SMTP", "SERVER");
-            AssertSplitEquivalent("__url_foo", "URL", "FOO");
-            AssertSplitEquivalent("");
-            AssertSplitEquivalent(null);
-        }
+namespace SonarAnalyzer.Test.Helpers;
 
-        private static void AssertSplitEquivalent(string name, params string[] words) =>
-            CollectionAssert.AreEquivalent(words, name.SplitCamelCaseToWords().ToList(), $" Value: {name}");
+[TestClass]
+public class StringExtensionsTest
+{
+    [TestMethod]
+    public void TestSplitCamelCaseToWords()
+    {
+        AssertSplitEquivalent("thisIsAName", "THIS", "IS", "A", "NAME");
+        AssertSplitEquivalent("thisIsSMTPName", "THIS", "IS", "SMTP", "NAME");
+        AssertSplitEquivalent("ThisIsIt", "THIS", "IS", "IT");
+        AssertSplitEquivalent("bin2hex", "BIN", "HEX");
+        AssertSplitEquivalent("HTML", "HTML");
+        AssertSplitEquivalent("SOME_VALUE", "SOME", "VALUE");
+        AssertSplitEquivalent("GR8day", "GR", "DAY");
+        AssertSplitEquivalent("ThisIsEpic", "THIS", "IS", "EPIC");
+        AssertSplitEquivalent("ThisIsEPIC", "THIS", "IS", "EPIC");
+        AssertSplitEquivalent("This_is_EPIC", "THIS", "IS", "EPIC");
+        AssertSplitEquivalent("PEHeader", "PE", "HEADER");
+        AssertSplitEquivalent("PE_Header", "PE", "HEADER");
+        AssertSplitEquivalent("BigB_smallc&GIANTD", "BIG", "B", "SMALLC", "GIANTD");
+        AssertSplitEquivalent("SMTPServer", "SMTP", "SERVER");
+        AssertSplitEquivalent("__url_foo", "URL", "FOO");
+        AssertSplitEquivalent("");
+        AssertSplitEquivalent(null);
     }
+
+    private static void AssertSplitEquivalent(string name, params string[] words) =>
+        CollectionAssert.AreEquivalent(words, name.SplitCamelCaseToWords().ToList(), $" Value: {name}");
 }

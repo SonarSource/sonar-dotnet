@@ -18,13 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
-{
-    public interface IReportingContext
-    {
-        SyntaxTree SyntaxTree { get; }
-        Diagnostic Diagnostic { get; }
+namespace SonarAnalyzer.Helpers;
 
-        void ReportDiagnostic(Diagnostic diagnostic);
-    }
+public interface IReportingContext
+{
+    SyntaxTree SyntaxTree { get; }
+    Diagnostic Diagnostic { get; }
+
+    void ReportDiagnostic(Diagnostic diagnostic);
 }

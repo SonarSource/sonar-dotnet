@@ -20,46 +20,45 @@
 
 using System.Runtime.CompilerServices;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+internal static class ProjectTypeHelper
 {
-    internal static class ProjectTypeHelper
+    // This list is duplicated in sonar-scanner-msbuild and sonar-security and should be manually synchronized after each change.
+    public /* for testing */ static readonly ISet<string> TestAssemblyNames = new HashSet<string>
     {
-        // This list is duplicated in sonar-scanner-msbuild and sonar-security and should be manually synchronized after each change.
-        public /* for testing */ static readonly ISet<string> TestAssemblyNames = new HashSet<string>
-        {
-            "dotMemory.Unit",
-            "Microsoft.VisualStudio.TestPlatform.TestFramework",
-            "Microsoft.VisualStudio.QualityTools.UnitTestFramework",
-            "Machine.Specifications",
-            "nunit.framework",
-            "nunitlite",
-            "TechTalk.SpecFlow",
-            "xunit", // Legacy Xunit (v1.x)
-            "xunit.core",
-            // Assertion
-            "FluentAssertions",
-            "Shouldly",
-            // Mock
-            "FakeItEasy",
-            "Moq",
-            "NSubstitute",
-            "Rhino.Mocks",
-            "Telerik.JustMock"
-        };
+        "dotMemory.Unit",
+        "Microsoft.VisualStudio.TestPlatform.TestFramework",
+        "Microsoft.VisualStudio.QualityTools.UnitTestFramework",
+        "Machine.Specifications",
+        "nunit.framework",
+        "nunitlite",
+        "TechTalk.SpecFlow",
+        "xunit", // Legacy Xunit (v1.x)
+        "xunit.core",
+        // Assertion
+        "FluentAssertions",
+        "Shouldly",
+        // Mock
+        "FakeItEasy",
+        "Moq",
+        "NSubstitute",
+        "Rhino.Mocks",
+        "Telerik.JustMock"
+    };
 
-        private static readonly ConditionalWeakTable<Compilation, IsTestWrapper> Cache = new ConditionalWeakTable<Compilation, IsTestWrapper>();
+    private static readonly ConditionalWeakTable<Compilation, IsTestWrapper> Cache = new ConditionalWeakTable<Compilation, IsTestWrapper>();
 
-        // Should only be used by SonarAnalysisContext
-        public static bool IsTest(this Compilation compilation) =>
-            // We can't detect references => it's MAIN
-            compilation != null && Cache.GetValue(compilation, x => new IsTestWrapper(x)).Value;
+    // Should only be used by SonarAnalysisContext
+    public static bool IsTest(this Compilation compilation) =>
+        // We can't detect references => it's MAIN
+        compilation != null && Cache.GetValue(compilation, x => new IsTestWrapper(x)).Value;
 
-        private class IsTestWrapper
-        {
-            public readonly bool Value;
+    private class IsTestWrapper
+    {
+        public readonly bool Value;
 
-            public IsTestWrapper(Compilation compilation) =>
-                Value = compilation.ReferencedAssemblyNames.Any(x => TestAssemblyNames.Contains(x.Name));
-        }
+        public IsTestWrapper(Compilation compilation) =>
+            Value = compilation.ReferencedAssemblyNames.Any(x => TestAssemblyNames.Contains(x.Name));
     }
 }

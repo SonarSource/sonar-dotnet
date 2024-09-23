@@ -21,12 +21,12 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.Test.Helpers
+namespace SonarAnalyzer.Test.Helpers;
+
+[TestClass]
+public class NavigationHelperTest
 {
-    [TestClass]
-    public class NavigationHelperTest
-    {
-        private const string Source = @"
+    private const string Source = @"
 namespace Test
 {
     class TestClass
@@ -60,83 +60,82 @@ namespace Test
     }
 }";
 
-        private MethodDeclarationSyntax ifMethod;
-        private MethodDeclarationSyntax switchMethod;
+    private MethodDeclarationSyntax ifMethod;
+    private MethodDeclarationSyntax switchMethod;
 
-        [TestInitialize]
-        public void TestSetup()
-        {
-            var syntaxTree = CSharpSyntaxTree.ParseText(Source);
+    [TestInitialize]
+    public void TestSetup()
+    {
+        var syntaxTree = CSharpSyntaxTree.ParseText(Source);
 
-            ifMethod = syntaxTree.GetRoot()
+        ifMethod = syntaxTree.GetRoot()
+                             .DescendantNodes()
+                             .OfType<MethodDeclarationSyntax>()
+                             .First(m => m.Identifier.ValueText == "IfMethod");
+
+        switchMethod = syntaxTree.GetRoot()
                                  .DescendantNodes()
                                  .OfType<MethodDeclarationSyntax>()
-                                 .First(m => m.Identifier.ValueText == "IfMethod");
+                                 .First(m => m.Identifier.ValueText == "SwitchMethod");
+    }
 
-            switchMethod = syntaxTree.GetRoot()
-                                     .DescendantNodes()
-                                     .OfType<MethodDeclarationSyntax>()
-                                     .First(m => m.Identifier.ValueText == "SwitchMethod");
-        }
+    [TestMethod]
+    public void GetPrecedingIfsInConditionChain()
+    {
+        var ifStatement1 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().First();
+        ifStatement1.GetPrecedingIfsInConditionChain()
+            .Should().BeEmpty();
 
-        [TestMethod]
-        public void GetPrecedingIfsInConditionChain()
-        {
-            var ifStatement1 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().First();
-            ifStatement1.GetPrecedingIfsInConditionChain()
-                .Should().BeEmpty();
+        var ifStatement2 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().Last();
+        var preceding = ifStatement2.GetPrecedingIfsInConditionChain();
+        preceding.Should().ContainSingle();
 
-            var ifStatement2 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().Last();
-            var preceding = ifStatement2.GetPrecedingIfsInConditionChain();
-            preceding.Should().ContainSingle();
+        ifStatement1.Should().BeEquivalentTo(preceding[0]);
+    }
 
-            ifStatement1.Should().BeEquivalentTo(preceding[0]);
-        }
+    [TestMethod]
+    public void GetPrecedingStatementsInConditionChain()
+    {
+        var ifStatement1 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().First();
+        ifStatement1.GetPrecedingStatementsInConditionChain()
+            .Should().BeEmpty();
 
-        [TestMethod]
-        public void GetPrecedingStatementsInConditionChain()
-        {
-            var ifStatement1 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().First();
-            ifStatement1.GetPrecedingStatementsInConditionChain()
-                .Should().BeEmpty();
+        var ifStatement2 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().Last();
+        var preceding = ifStatement2.GetPrecedingStatementsInConditionChain().ToList();
+        preceding.Should().ContainSingle();
 
-            var ifStatement2 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().Last();
-            var preceding = ifStatement2.GetPrecedingStatementsInConditionChain().ToList();
-            preceding.Should().ContainSingle();
+        ifStatement1.Statement.Should().BeEquivalentTo(preceding[0]);
+    }
 
-            ifStatement1.Statement.Should().BeEquivalentTo(preceding[0]);
-        }
+    [TestMethod]
+    public void GetPrecedingConditionsInConditionChain()
+    {
+        var ifStatement1 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().First();
+        ifStatement1.GetPrecedingConditionsInConditionChain()
+            .Should().BeEmpty();
 
-        [TestMethod]
-        public void GetPrecedingConditionsInConditionChain()
-        {
-            var ifStatement1 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().First();
-            ifStatement1.GetPrecedingConditionsInConditionChain()
-                .Should().BeEmpty();
+        var ifStatement2 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().Last();
+        var preceding = ifStatement2.GetPrecedingConditionsInConditionChain().ToList();
+        preceding.Should().ContainSingle();
 
-            var ifStatement2 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().Last();
-            var preceding = ifStatement2.GetPrecedingConditionsInConditionChain().ToList();
-            preceding.Should().ContainSingle();
+        ifStatement1.Condition.Should().BeEquivalentTo(preceding[0]);
+    }
 
-            ifStatement1.Condition.Should().BeEquivalentTo(preceding[0]);
-        }
+    [TestMethod]
+    public void GetPrecedingSections()
+    {
+        var sections = switchMethod.DescendantNodes().OfType<SwitchSectionSyntax>().ToList();
 
-        [TestMethod]
-        public void GetPrecedingSections()
-        {
-            var sections = switchMethod.DescendantNodes().OfType<SwitchSectionSyntax>().ToList();
+        sections.Last().GetPrecedingSections().Should().HaveCount(2);
+        sections.First().GetPrecedingSections().Should().BeEmpty();
+        sections.Last().GetPrecedingSections().First().Should().BeEquivalentTo(sections.First());
+    }
 
-            sections.Last().GetPrecedingSections().Should().HaveCount(2);
-            sections.First().GetPrecedingSections().Should().BeEmpty();
-            sections.Last().GetPrecedingSections().First().Should().BeEquivalentTo(sections.First());
-        }
+    [TestMethod]
+    public void GetPrecedingSections_Empty()
+    {
+        var sections = ifMethod.DescendantNodes().OfType<SwitchSectionSyntax>().ToList();
 
-        [TestMethod]
-        public void GetPrecedingSections_Empty()
-        {
-            var sections = ifMethod.DescendantNodes().OfType<SwitchSectionSyntax>().ToList();
-
-            sections.FirstOrDefault().GetPrecedingSections().Should().BeEmpty();
-        }
+        sections.FirstOrDefault().GetPrecedingSections().Should().BeEmpty();
     }
 }

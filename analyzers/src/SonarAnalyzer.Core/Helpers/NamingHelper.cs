@@ -20,18 +20,17 @@
 
 using System.Text.RegularExpressions;
 
-namespace SonarAnalyzer.Helpers
-{
-    public static class NamingHelper
-    {
-        internal const string MaxTwoLongIdPattern = "([A-Z]{2})?";
-        internal const string PascalCasingInternalPattern = "([A-Z]{1,3}[a-z0-9]+)*" + MaxTwoLongIdPattern;
-        internal const string CamelCasingInternalPattern = "[a-z][a-z0-9]*" + PascalCasingInternalPattern;
-        internal const string PascalCasingPattern = "^" + PascalCasingInternalPattern + "$";
-        internal const string CamelCasingPattern = "^" + CamelCasingInternalPattern + "$";
-        internal const string CamelCasingPatternWithOptionalPrefixes = "^(s_|_)?" + CamelCasingInternalPattern + "$";
+namespace SonarAnalyzer.Helpers;
 
-        internal static bool IsRegexMatch(string name, string pattern) =>
-            SafeRegex.IsMatch(name, pattern, RegexOptions.CultureInvariant | RegexOptions.Compiled);
-    }
+public static class NamingHelper
+{
+    internal const string MaxTwoLongIdPattern = "([A-Z]{2})?";
+    internal const string PascalCasingInternalPattern = "([A-Z]{1,3}[a-z0-9]+)*" + MaxTwoLongIdPattern;
+    internal const string CamelCasingInternalPattern = "[a-z][a-z0-9]*" + PascalCasingInternalPattern;
+    internal const string PascalCasingPattern = "^" + PascalCasingInternalPattern + "$";
+    internal const string CamelCasingPattern = "^" + CamelCasingInternalPattern + "$";
+    internal const string CamelCasingPatternWithOptionalPrefixes = "^(s_|_)?" + CamelCasingInternalPattern + "$";
+
+    internal static bool IsRegexMatch(string name, string pattern) =>
+        SafeRegex.IsMatch(name, pattern, RegexOptions.CultureInvariant | RegexOptions.Compiled);
 }

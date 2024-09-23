@@ -18,32 +18,31 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public static class DictionaryExtensions
 {
-    public static class DictionaryExtensions
+    public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key) =>
+        dictionary.GetValueOrDefault(key, default);
+
+    public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue) =>
+        dictionary.TryGetValue(key, out var result) ? result : defaultValue;
+
+    public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TKey, TValue> factory)
     {
-        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key) =>
-            dictionary.GetValueOrDefault(key, default);
-
-        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue) =>
-            dictionary.TryGetValue(key, out var result) ? result : defaultValue;
-
-        public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TKey, TValue> factory)
+        if (!dictionary.TryGetValue(key, out var value))
         {
-            if (!dictionary.TryGetValue(key, out var value))
-            {
-                value = factory(key);
-                dictionary.Add(key, value);
-            }
-            return value;
+            value = factory(key);
+            dictionary.Add(key, value);
         }
-
-        public static bool DictionaryEquals<TKey, TValue>(this IDictionary<TKey, TValue> dict1, IDictionary<TKey, TValue> dict2) =>
-            dict1 == dict2
-            || (EqualityComparer<TValue>.Default is var valueComparer
-                && dict1 is not null
-                && dict2 is not null
-                && dict1.Count == dict2.Count
-                && dict1.All(x => dict2.TryGetValue(x.Key, out var value2) && valueComparer.Equals(x.Value, value2)));
+        return value;
     }
+
+    public static bool DictionaryEquals<TKey, TValue>(this IDictionary<TKey, TValue> dict1, IDictionary<TKey, TValue> dict2) =>
+        dict1 == dict2
+        || (EqualityComparer<TValue>.Default is var valueComparer
+            && dict1 is not null
+            && dict2 is not null
+            && dict1.Count == dict2.Count
+            && dict1.All(x => dict2.TryGetValue(x.Key, out var value2) && valueComparer.Equals(x.Value, value2)));
 }

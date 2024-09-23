@@ -20,113 +20,112 @@
 
 using System.Collections;
 
-namespace SonarAnalyzer.Helpers
-{
-    public class OperationExecutionOrder : IEnumerable<IOperationWrapperSonar>
-    {
-        private readonly IEnumerable<IOperation> operations;
-        private readonly bool reverseOrder;
+namespace SonarAnalyzer.Helpers;
 
-        public OperationExecutionOrder(IEnumerable<IOperation> operations, bool reverseOrder)
+public class OperationExecutionOrder : IEnumerable<IOperationWrapperSonar>
+{
+    private readonly IEnumerable<IOperation> operations;
+    private readonly bool reverseOrder;
+
+    public OperationExecutionOrder(IEnumerable<IOperation> operations, bool reverseOrder)
+    {
+        this.operations = operations;
+        this.reverseOrder = reverseOrder;
+    }
+
+    public IEnumerator<IOperationWrapperSonar> GetEnumerator() =>
+        new Enumerator(this);
+
+    IEnumerator IEnumerable.GetEnumerator() =>
+        GetEnumerator();
+
+    private sealed class Enumerator : IEnumerator<IOperationWrapperSonar>
+    {
+        private readonly OperationExecutionOrder owner;
+        private readonly Stack<StackItem> stack = new Stack<StackItem>();
+
+        public IOperationWrapperSonar Current { get; private set; }
+        object IEnumerator.Current => Current;
+
+        public Enumerator(OperationExecutionOrder owner)
         {
-            this.operations = operations;
-            this.reverseOrder = reverseOrder;
+            this.owner = owner;
+            Init();
         }
 
-        public IEnumerator<IOperationWrapperSonar> GetEnumerator() =>
-            new Enumerator(this);
-
-        IEnumerator IEnumerable.GetEnumerator() =>
-            GetEnumerator();
-
-        private sealed class Enumerator : IEnumerator<IOperationWrapperSonar>
+        private void Init()
         {
-            private readonly OperationExecutionOrder owner;
-            private readonly Stack<StackItem> stack = new Stack<StackItem>();
-
-            public IOperationWrapperSonar Current { get; private set; }
-            object IEnumerator.Current => Current;
-
-            public Enumerator(OperationExecutionOrder owner)
+            // We need to push them to the stack in reversed order compared to reverseOrder argument
+            foreach (var operation in owner.reverseOrder ? owner.operations : owner.operations.Reverse())
             {
-                this.owner = owner;
-                Init();
+                stack.Push(new StackItem(operation));
             }
+        }
 
-            private void Init()
+        public bool MoveNext()
+        {
+            while (stack.Any())
             {
-                // We need to push them to the stack in reversed order compared to reverseOrder argument
-                foreach (var operation in owner.reverseOrder ? owner.operations : owner.operations.Reverse())
+                if (owner.reverseOrder)
                 {
-                    stack.Push(new StackItem(operation));
-                }
-            }
-
-            public bool MoveNext()
-            {
-                while (stack.Any())
-                {
-                    if (owner.reverseOrder)
-                    {
-                        var current = stack.Pop();
-                        while (current.NextChild() is { } child)
-                        {
-                            stack.Push(new StackItem(child));
-                        }
-                        Current = current.DisposeEnumeratorAndReturnOperation();
-                        return true;
-                    }
-                    else if (stack.Peek().NextChild() is { } child)
+                    var current = stack.Pop();
+                    while (current.NextChild() is { } child)
                     {
                         stack.Push(new StackItem(child));
                     }
-                    else
-                    {
-                        Current = stack.Pop().DisposeEnumeratorAndReturnOperation();
-                        return true;
-                    }
+                    Current = current.DisposeEnumeratorAndReturnOperation();
+                    return true;
                 }
-                Current = default;
-                return false;
-            }
-
-            public void Reset()
-            {
-                Dispose();
-                Init();
-            }
-
-            public void Dispose()
-            {
-                while (stack.Any())
+                else if (stack.Peek().NextChild() is { } child)
                 {
-                    stack.Pop().Dispose();
+                    stack.Push(new StackItem(child));
+                }
+                else
+                {
+                    Current = stack.Pop().DisposeEnumeratorAndReturnOperation();
+                    return true;
                 }
             }
+            Current = default;
+            return false;
         }
 
-        private sealed class StackItem : IDisposable
+        public void Reset()
         {
-            private readonly IOperationWrapperSonar operation;
-            private readonly IEnumerator<IOperation> children;
-
-            public StackItem(IOperation operation)
-            {
-                this.operation = operation.ToSonar();
-                children = this.operation.Children.GetEnumerator();
-            }
-
-            public IOperation NextChild() =>
-                children.MoveNext() ? children.Current : null;
-
-            public IOperationWrapperSonar DisposeEnumeratorAndReturnOperation()
-            {
-                Dispose();
-                return operation;
-            }
-
-            public void Dispose() =>
-                children.Dispose();
+            Dispose();
+            Init();
         }
+
+        public void Dispose()
+        {
+            while (stack.Any())
+            {
+                stack.Pop().Dispose();
+            }
+        }
+    }
+
+    private sealed class StackItem : IDisposable
+    {
+        private readonly IOperationWrapperSonar operation;
+        private readonly IEnumerator<IOperation> children;
+
+        public StackItem(IOperation operation)
+        {
+            this.operation = operation.ToSonar();
+            children = this.operation.Children.GetEnumerator();
+        }
+
+        public IOperation NextChild() =>
+            children.MoveNext() ? children.Current : null;
+
+        public IOperationWrapperSonar DisposeEnumeratorAndReturnOperation()
+        {
+            Dispose();
+            return operation;
+        }
+
+        public void Dispose() =>
+            children.Dispose();
     }
 }

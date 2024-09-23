@@ -20,93 +20,92 @@
 
 using System.Text;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+[DebuggerDisplay("{DebuggerDisplay}")]
+public sealed partial class KnownType
 {
-    [DebuggerDisplay("{DebuggerDisplay}")]
-    public sealed partial class KnownType
+    private readonly IList<string> namespaceParts;
+    private readonly string[] genericParameters;
+
+    public string TypeName { get; }
+    public string FullName { get; }
+    public bool IsArray { get; init; }
+    public IReadOnlyList<string> GenericParameters => genericParameters;
+    public string MetadataName => $"{FullName}{(GenericParameters.Any() ? $"`{GenericParameters.Count}" : string.Empty)}";
+
+    internal string DebuggerDisplay
     {
-        private readonly IList<string> namespaceParts;
-        private readonly string[] genericParameters;
-
-        public string TypeName { get; }
-        public string FullName { get; }
-        public bool IsArray { get; init; }
-        public IReadOnlyList<string> GenericParameters => genericParameters;
-        public string MetadataName => $"{FullName}{(GenericParameters.Any() ? $"`{GenericParameters.Count}" : string.Empty)}";
-
-        internal string DebuggerDisplay
+        get
         {
-            get
+            var sb = new StringBuilder(FullName);
+            if (genericParameters.Length > 0)
             {
-                var sb = new StringBuilder(FullName);
-                if (genericParameters.Length > 0)
-                {
-                    sb.Append('<').Append(genericParameters.JoinStr(", ")).Append('>');
-                }
-
-                if (IsArray)
-                {
-                    sb.Append("[]");
-                }
-
-                return sb.ToString();
+                sb.Append('<').Append(genericParameters.JoinStr(", ")).Append('>');
             }
-        }
 
-        public KnownType(string fullName, params string[] genericParameters)
-        {
-            var parts = fullName.Split('.');
-            namespaceParts = new ArraySegment<string>(parts, 0, parts.Length - 1);
-            this.genericParameters = genericParameters;
-            FullName = fullName;
-            TypeName = parts[parts.Length - 1];
-        }
-
-        public bool Matches(ITypeSymbol symbol) =>
-            IsMatch(symbol) || IsMatch(symbol.OriginalDefinition);
-
-        private bool IsMatch(ITypeSymbol symbol)
-        {
-            _ = symbol ?? throw new ArgumentNullException(nameof(symbol));
             if (IsArray)
             {
-                if (symbol is IArrayTypeSymbol array)
-                {
-                    symbol = array.ElementType;
-                }
-                else
-                {
-                    return false;
-                }
+                sb.Append("[]");
             }
 
-            return symbol.Name == TypeName
-                   && NamespaceMatches(symbol)
-                   && GenericParametersMatch(symbol);
+            return sb.ToString();
         }
+    }
 
-        private bool GenericParametersMatch(ISymbol symbol) =>
-                symbol is INamedTypeSymbol namedType
-                    ? namedType.TypeParameters.Select(x => x.Name).SequenceEqual(genericParameters)
-                    : genericParameters.Length == 0;
+    public KnownType(string fullName, params string[] genericParameters)
+    {
+        var parts = fullName.Split('.');
+        namespaceParts = new ArraySegment<string>(parts, 0, parts.Length - 1);
+        this.genericParameters = genericParameters;
+        FullName = fullName;
+        TypeName = parts[parts.Length - 1];
+    }
 
-        private bool NamespaceMatches(ISymbol symbol)
+    public bool Matches(ITypeSymbol symbol) =>
+        IsMatch(symbol) || IsMatch(symbol.OriginalDefinition);
+
+    private bool IsMatch(ITypeSymbol symbol)
+    {
+        _ = symbol ?? throw new ArgumentNullException(nameof(symbol));
+        if (IsArray)
         {
-            var currentNamespace = symbol.ContainingNamespace;
-            var index = namespaceParts.Count - 1;
-
-            while (currentNamespace != null && !string.IsNullOrEmpty(currentNamespace.Name) && index >= 0)
+            if (symbol is IArrayTypeSymbol array)
             {
-                if (currentNamespace.Name != namespaceParts[index])
-                {
-                    return false;
-                }
+                symbol = array.ElementType;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
-                currentNamespace = currentNamespace.ContainingNamespace;
-                index--;
+        return symbol.Name == TypeName
+               && NamespaceMatches(symbol)
+               && GenericParametersMatch(symbol);
+    }
+
+    private bool GenericParametersMatch(ISymbol symbol) =>
+            symbol is INamedTypeSymbol namedType
+                ? namedType.TypeParameters.Select(x => x.Name).SequenceEqual(genericParameters)
+                : genericParameters.Length == 0;
+
+    private bool NamespaceMatches(ISymbol symbol)
+    {
+        var currentNamespace = symbol.ContainingNamespace;
+        var index = namespaceParts.Count - 1;
+
+        while (currentNamespace != null && !string.IsNullOrEmpty(currentNamespace.Name) && index >= 0)
+        {
+            if (currentNamespace.Name != namespaceParts[index])
+            {
+                return false;
             }
 
-            return index == -1 && string.IsNullOrEmpty(currentNamespace?.Name);
+            currentNamespace = currentNamespace.ContainingNamespace;
+            index--;
         }
+
+        return index == -1 && string.IsNullOrEmpty(currentNamespace?.Name);
     }
 }

@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public interface INetFrameworkVersionProvider
 {
-    public interface INetFrameworkVersionProvider
-    {
-        NetFrameworkVersion GetDotNetFrameworkVersion(Compilation compilation);
-    }
+    NetFrameworkVersion GetDotNetFrameworkVersion(Compilation compilation);
 }

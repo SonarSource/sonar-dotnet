@@ -22,23 +22,23 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
-namespace SonarAnalyzer.Test.Helpers
+namespace SonarAnalyzer.Test.Helpers;
+
+[TestClass]
+public class TypeDeclarationSyntaxExtensionsTest
 {
-    [TestClass]
-    public class TypeDeclarationSyntaxExtensionsTest
+    [TestMethod]
+    public void GetMethodDeclarations_EmptyClass_ReturnsEmpty()
     {
-        [TestMethod]
-        public void GetMethodDeclarations_EmptyClass_ReturnsEmpty()
-        {
-            var typeDeclaration = SyntaxFactory.ClassDeclaration(SyntaxFactory.Identifier("TestClass"));
+        var typeDeclaration = SyntaxFactory.ClassDeclaration(SyntaxFactory.Identifier("TestClass"));
 
-            typeDeclaration.GetMethodDeclarations().Should().BeEmpty();
-        }
+        typeDeclaration.GetMethodDeclarations().Should().BeEmpty();
+    }
 
-        [TestMethod]
-        public void GetMethodDeclarations_SingleMethod_ReturnsMethod()
-        {
-            const string code = @"
+    [TestMethod]
+    public void GetMethodDeclarations_SingleMethod_ReturnsMethod()
+    {
+        const string code = @"
 namespace Test
 {
     class TestClass
@@ -47,15 +47,15 @@ namespace Test
     }
 }
 ";
-            var snippet = new SnippetCompiler(code);
-            var typeDeclaration = snippet.SyntaxTree.Single<TypeDeclarationSyntax>();
-            typeDeclaration.GetMethodDeclarations().Single().Identifier.Text.Should().Be("WriteLine");
-        }
+        var snippet = new SnippetCompiler(code);
+        var typeDeclaration = snippet.SyntaxTree.Single<TypeDeclarationSyntax>();
+        typeDeclaration.GetMethodDeclarations().Single().Identifier.Text.Should().Be("WriteLine");
+    }
 
-        [TestMethod]
-        public void GetMethodDeclarations_MultipleMethodsWithLocalFunctions_ReturnsMethodsAndFunctions()
-        {
-            const string code = @"
+    [TestMethod]
+    public void GetMethodDeclarations_MultipleMethodsWithLocalFunctions_ReturnsMethodsAndFunctions()
+    {
+        const string code = @"
 namespace Test
 {
     class TestClass
@@ -76,207 +76,206 @@ namespace Test
     }
 }
 ";
-            var snippet = new SnippetCompiler(code);
-            var typeDeclaration = snippet.SyntaxTree.Single<TypeDeclarationSyntax>();
-            typeDeclaration
-                .GetMethodDeclarations()
-                .Select(methodDeclaration => methodDeclaration.Identifier.Text)
-                .Should()
-                .BeEquivalentTo(new List<string>
-                {
-                    "Method1",
-                    "Method2",
-                    "Function1",
-                    "Function2",
-                    "Function3"
-                });
-        }
+        var snippet = new SnippetCompiler(code);
+        var typeDeclaration = snippet.SyntaxTree.Single<TypeDeclarationSyntax>();
+        typeDeclaration
+            .GetMethodDeclarations()
+            .Select(methodDeclaration => methodDeclaration.Identifier.Text)
+            .Should()
+            .BeEquivalentTo(new List<string>
+            {
+                "Method1",
+                "Method2",
+                "Function1",
+                "Function2",
+                "Function3"
+            });
+    }
 
-        [DataTestMethod]
-        [DataRow("class")]
-        [DataRow("struct")]
-        [DataRow("readonly struct")]
-        [DataRow("record struct")]
+    [DataTestMethod]
+    [DataRow("class")]
+    [DataRow("struct")]
+    [DataRow("readonly struct")]
+    [DataRow("record struct")]
 
 #if NET
 
-        [DataRow("record")]
-        [DataRow("record class")]
-        [DataRow("readonly record struct")]
+    [DataRow("record")]
+    [DataRow("record class")]
+    [DataRow("readonly record struct")]
 
 #endif
 
-        public void ParameterList_ReturnsList(string type)
+    public void ParameterList_ReturnsList(string type)
+    {
+        var (tree, model) = TestHelper.CompileCS($$"""
+        {{type}} Test(int i)
         {
-            var (tree, model) = TestHelper.CompileCS($$"""
-            {{type}} Test(int i)
-            {
-            }
-            """);
-            var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
-            var parameterList = typeDeclaration.ParameterList();
-            parameterList.Should().NotBeNull();
-            var entry = parameterList.Parameters.Should().ContainSingle().Which;
-            entry.Type.Should().BeOfType<PredefinedTypeSyntax>();
-            entry.Identifier.ValueText.Should().Be("i");
         }
+        """);
+        var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
+        var parameterList = typeDeclaration.ParameterList();
+        parameterList.Should().NotBeNull();
+        var entry = parameterList.Parameters.Should().ContainSingle().Which;
+        entry.Type.Should().BeOfType<PredefinedTypeSyntax>();
+        entry.Identifier.ValueText.Should().Be("i");
+    }
 
-        [TestMethod]
-        public void ParameterList_Interface()
+    [TestMethod]
+    public void ParameterList_Interface()
+    {
+        var (tree, model) = TestHelper.CompileCS($$"""
+        interface Test
         {
-            var (tree, model) = TestHelper.CompileCS($$"""
-            interface Test
-            {
-            }
-            """);
-            var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
-            var parameterList = typeDeclaration.ParameterList();
-            parameterList.Should().BeNull();
         }
+        """);
+        var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
+        var parameterList = typeDeclaration.ParameterList();
+        parameterList.Should().BeNull();
+    }
 
-        [DataTestMethod]
-        [DataRow(LanguageVersion.CSharp1)]
-        [DataRow(LanguageVersion.CSharp2)]
-        [DataRow(LanguageVersion.CSharp3)]
-        [DataRow(LanguageVersion.CSharp4)]
-        [DataRow(LanguageVersion.CSharp5)]
-        [DataRow(LanguageVersion.CSharp6)]
-        [DataRow(LanguageVersion.CSharp7)]
-        [DataRow(LanguageVersion.CSharp7_1)]
-        [DataRow(LanguageVersion.CSharp7_2)]
-        [DataRow(LanguageVersion.CSharp7_3)]
-        [DataRow(LanguageVersion.CSharp8)]
-        [DataRow(LanguageVersion.CSharp9)]
-        [DataRow(LanguageVersion.CSharp10)]
-        [DataRow(LanguageVersion.CSharp11)]
-        [DataRow(LanguageVersion.CSharp12)]
-        public void PrimaryConstructor_NoPrimaryConstructor(LanguageVersion languageVersion)
+    [DataTestMethod]
+    [DataRow(LanguageVersion.CSharp1)]
+    [DataRow(LanguageVersion.CSharp2)]
+    [DataRow(LanguageVersion.CSharp3)]
+    [DataRow(LanguageVersion.CSharp4)]
+    [DataRow(LanguageVersion.CSharp5)]
+    [DataRow(LanguageVersion.CSharp6)]
+    [DataRow(LanguageVersion.CSharp7)]
+    [DataRow(LanguageVersion.CSharp7_1)]
+    [DataRow(LanguageVersion.CSharp7_2)]
+    [DataRow(LanguageVersion.CSharp7_3)]
+    [DataRow(LanguageVersion.CSharp8)]
+    [DataRow(LanguageVersion.CSharp9)]
+    [DataRow(LanguageVersion.CSharp10)]
+    [DataRow(LanguageVersion.CSharp11)]
+    [DataRow(LanguageVersion.CSharp12)]
+    public void PrimaryConstructor_NoPrimaryConstructor(LanguageVersion languageVersion)
+    {
+        var tree = CSharpSyntaxTree.ParseText("""
+        public class Test
         {
-            var tree = CSharpSyntaxTree.ParseText("""
-            public class Test
-            {
-            }
-            """, new CSharpParseOptions(languageVersion));
-            var compilation = CSharpCompilation.Create(assemblyName: null, syntaxTrees: new[] { tree });
-            var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
-            typeDeclaration.PrimaryConstructor(compilation.GetSemanticModel(tree)).Should().BeNull();
         }
+        """, new CSharpParseOptions(languageVersion));
+        var compilation = CSharpCompilation.Create(assemblyName: null, syntaxTrees: new[] { tree });
+        var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
+        typeDeclaration.PrimaryConstructor(compilation.GetSemanticModel(tree)).Should().BeNull();
+    }
 
-        [DataTestMethod]
-        [DataRow(LanguageVersion.CSharp9)]
-        [DataRow(LanguageVersion.CSharp10)]
-        [DataRow(LanguageVersion.CSharp11)]
-        [DataRow(LanguageVersion.CSharp12)]
-        public void PrimaryConstructor_PrimaryConstructorRecord(LanguageVersion languageVersion)
+    [DataTestMethod]
+    [DataRow(LanguageVersion.CSharp9)]
+    [DataRow(LanguageVersion.CSharp10)]
+    [DataRow(LanguageVersion.CSharp11)]
+    [DataRow(LanguageVersion.CSharp12)]
+    public void PrimaryConstructor_PrimaryConstructorRecord(LanguageVersion languageVersion)
+    {
+        var tree = CSharpSyntaxTree.ParseText("""
+        public record Test(int i)
         {
-            var tree = CSharpSyntaxTree.ParseText("""
-            public record Test(int i)
-            {
-            }
-            """, new CSharpParseOptions(languageVersion));
-            var compilation = CSharpCompilation.Create(assemblyName: null, syntaxTrees: new[] { tree });
-            var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
-            var methodSymbol = typeDeclaration.PrimaryConstructor(compilation.GetSemanticModel(tree));
-            methodSymbol.Should().NotBeNull();
-            methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
-            var entry = methodSymbol.Parameters.Should().ContainSingle().Which;
-            entry.Name.Should().Be("i");
-            entry.Type.SpecialType.Should().Be(SpecialType.System_Int32);
         }
+        """, new CSharpParseOptions(languageVersion));
+        var compilation = CSharpCompilation.Create(assemblyName: null, syntaxTrees: new[] { tree });
+        var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
+        var methodSymbol = typeDeclaration.PrimaryConstructor(compilation.GetSemanticModel(tree));
+        methodSymbol.Should().NotBeNull();
+        methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
+        var entry = methodSymbol.Parameters.Should().ContainSingle().Which;
+        entry.Name.Should().Be("i");
+        entry.Type.SpecialType.Should().Be(SpecialType.System_Int32);
+    }
 
-        [DataTestMethod]
-        [DataRow("class")]
-        [DataRow("struct")]
-        [DataRow("readonly struct")]
-        [DataRow("record struct")]
+    [DataTestMethod]
+    [DataRow("class")]
+    [DataRow("struct")]
+    [DataRow("readonly struct")]
+    [DataRow("record struct")]
 
 #if NET
 
-        [DataRow("record")]
-        [DataRow("record class")]
+    [DataRow("record")]
+    [DataRow("record class")]
 
 #endif
 
-        public void PrimaryConstructor_PrimaryConstructorOnClass(string type)
+    public void PrimaryConstructor_PrimaryConstructorOnClass(string type)
+    {
+        var (tree, model) = TestHelper.CompileCS($$"""
+        {{type}} Test(int i)
         {
-            var (tree, model) = TestHelper.CompileCS($$"""
-            {{type}} Test(int i)
-            {
-            }
-            """);
-            var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
-            var methodSymbol = typeDeclaration.PrimaryConstructor(model);
-            methodSymbol.Should().NotBeNull();
-            methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
-            var entry = methodSymbol.Parameters.Should().ContainSingle().Which;
-            entry.Name.Should().Be("i");
-            entry.Type.SpecialType.Should().Be(SpecialType.System_Int32);
         }
+        """);
+        var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
+        var methodSymbol = typeDeclaration.PrimaryConstructor(model);
+        methodSymbol.Should().NotBeNull();
+        methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
+        var entry = methodSymbol.Parameters.Should().ContainSingle().Which;
+        entry.Name.Should().Be("i");
+        entry.Type.SpecialType.Should().Be(SpecialType.System_Int32);
+    }
 
-        [TestMethod]
-        public void PrimaryConstructor_EmptyPrimaryConstructor()
+    [TestMethod]
+    public void PrimaryConstructor_EmptyPrimaryConstructor()
+    {
+        var (tree, model) = TestHelper.CompileCS($$"""
+        public class Test()
         {
-            var (tree, model) = TestHelper.CompileCS($$"""
-            public class Test()
-            {
-            }
-            """);
-            var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
-            var methodSymbol = typeDeclaration.PrimaryConstructor(model);
-            methodSymbol.Should().NotBeNull();
-            methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
-            methodSymbol.Parameters.Should().BeEmpty();
         }
+        """);
+        var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
+        var methodSymbol = typeDeclaration.PrimaryConstructor(model);
+        methodSymbol.Should().NotBeNull();
+        methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
+        methodSymbol.Parameters.Should().BeEmpty();
+    }
 
-        [TestMethod]
-        public void PrimaryConstructor_EmptyPrimaryConstructor_SecondConstructor()
+    [TestMethod]
+    public void PrimaryConstructor_EmptyPrimaryConstructor_SecondConstructor()
+    {
+        var (tree, model) = TestHelper.CompileCS($$"""
+        public class Test()
         {
-            var (tree, model) = TestHelper.CompileCS($$"""
-            public class Test()
-            {
-                public Test(int i) : this() { }
-            }
-            """);
-            var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
-            var methodSymbol = typeDeclaration.PrimaryConstructor(model);
-            methodSymbol.Should().NotBeNull();
-            methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
-            methodSymbol.Parameters.Should().BeEmpty();
+            public Test(int i) : this() { }
         }
+        """);
+        var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
+        var methodSymbol = typeDeclaration.PrimaryConstructor(model);
+        methodSymbol.Should().NotBeNull();
+        methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
+        methodSymbol.Parameters.Should().BeEmpty();
+    }
 
-        [TestMethod]
-        public void PrimaryConstructor_EmptyPrimaryConstructorAndStaticConstructor()
+    [TestMethod]
+    public void PrimaryConstructor_EmptyPrimaryConstructorAndStaticConstructor()
+    {
+        var (tree, model) = TestHelper.CompileCS($$"""
+        public class Test()
         {
-            var (tree, model) = TestHelper.CompileCS($$"""
-            public class Test()
-            {
-                static Test() { }
-            }
-            """);
-            var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
-            var methodSymbol = typeDeclaration.PrimaryConstructor(model);
-            methodSymbol.Should().NotBeNull();
-            methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
-            methodSymbol.Parameters.Should().BeEmpty();
-            methodSymbol.IsStatic.Should().BeFalse();
+            static Test() { }
         }
+        """);
+        var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
+        var methodSymbol = typeDeclaration.PrimaryConstructor(model);
+        methodSymbol.Should().NotBeNull();
+        methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
+        methodSymbol.Parameters.Should().BeEmpty();
+        methodSymbol.IsStatic.Should().BeFalse();
+    }
 
-        [DataTestMethod]
-        [DataRow("__arglist", 0)]
-        [DataRow("int i, __arglist", 1)]
-        [DataRow("int i, int j, __arglist", 2)]
-        public void PrimaryConstructor_ArglistPrimaryConstructor(string parameterList, int expectedNumberOfParameters)
+    [DataTestMethod]
+    [DataRow("__arglist", 0)]
+    [DataRow("int i, __arglist", 1)]
+    [DataRow("int i, int j, __arglist", 2)]
+    public void PrimaryConstructor_ArglistPrimaryConstructor(string parameterList, int expectedNumberOfParameters)
+    {
+        var (tree, model) = TestHelper.CompileCS($$"""
+        public class Test({{parameterList}})
         {
-            var (tree, model) = TestHelper.CompileCS($$"""
-            public class Test({{parameterList}})
-            {
-            }
-            """);
-            var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
-            var methodSymbol = typeDeclaration.PrimaryConstructor(model);
-            methodSymbol.Should().NotBeNull();
-            methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
-            methodSymbol.Parameters.Should().HaveCount(expectedNumberOfParameters);
         }
+        """);
+        var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
+        var methodSymbol = typeDeclaration.PrimaryConstructor(model);
+        methodSymbol.Should().NotBeNull();
+        methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
+        methodSymbol.Parameters.Should().HaveCount(expectedNumberOfParameters);
     }
 }

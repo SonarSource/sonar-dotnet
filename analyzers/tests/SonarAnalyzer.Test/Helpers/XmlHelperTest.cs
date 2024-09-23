@@ -20,16 +20,15 @@
 
 using System.Xml.Linq;
 
-namespace SonarAnalyzer.Test.Helpers
+namespace SonarAnalyzer.Test.Helpers;
+
+[TestClass]
+public class XmlHelperTest
 {
-    [TestClass]
-    public class XmlHelperTest
+    [TestMethod]
+    public void CreateLocation_WithNoLineInfo_ReturnsNull()
     {
-        [TestMethod]
-        public void CreateLocation_WithNoLineInfo_ReturnsNull()
-        {
-            var sut = new XAttribute(XName.Get("name"), "A");
-            sut.CreateLocation("").Should().BeNull();
-        }
+        var sut = new XAttribute(XName.Get("name"), "A");
+        sut.CreateLocation("").Should().BeNull();
     }
 }

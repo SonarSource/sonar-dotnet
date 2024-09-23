@@ -18,28 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
-{
-    public static class ConversionHelper
-    {
-        public static int? TryConvertToInt(object o) =>
-            TryConvertWith(o, Convert.ToInt32, out var ret)
-                ? (int?)ret
-                : null;
+namespace SonarAnalyzer.Helpers;
 
-        public static bool TryConvertWith<T>(object o, Func<object, T> converter, out T value)
-            where T : struct
+public static class ConversionHelper
+{
+    public static int? TryConvertToInt(object o) =>
+        TryConvertWith(o, Convert.ToInt32, out var ret)
+            ? (int?)ret
+            : null;
+
+    public static bool TryConvertWith<T>(object o, Func<object, T> converter, out T value)
+        where T : struct
+    {
+        try
         {
-            try
-            {
-                value = converter(o);
-                return true;
-            }
-            catch (Exception ex) when (ex is FormatException || ex is OverflowException || ex is InvalidCastException)
-            {
-                value = default;
-                return false;
-            }
+            value = converter(o);
+            return true;
+        }
+        catch (Exception ex) when (ex is FormatException || ex is OverflowException || ex is InvalidCastException)
+        {
+            value = default;
+            return false;
         }
     }
 }

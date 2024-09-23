@@ -18,19 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CFG.Helpers
+namespace SonarAnalyzer.CFG.Helpers;
+
+internal static class DictionaryExtensions
 {
-    internal static class DictionaryExtensions
+    public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
+        Func<TKey, TValue> factory)
     {
-        public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
-            Func<TKey, TValue> factory)
+        if (!dictionary.TryGetValue(key, out var value))
         {
-            if (!dictionary.TryGetValue(key, out var value))
-            {
-                value = factory(key);
-                dictionary.Add(key, value);
-            }
-            return value;
+            value = factory(key);
+            dictionary.Add(key, value);
         }
+        return value;
     }
 }

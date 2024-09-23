@@ -18,78 +18,77 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public abstract class ExpressionNumericConverterBase<TLiteralExpressionSyntax, TUnaryExpressionSyntax> : IExpressionNumericConverter
+    where TLiteralExpressionSyntax : SyntaxNode
+    where TUnaryExpressionSyntax : SyntaxNode
 {
-    public abstract class ExpressionNumericConverterBase<TLiteralExpressionSyntax, TUnaryExpressionSyntax> : IExpressionNumericConverter
-        where TLiteralExpressionSyntax : SyntaxNode
-        where TUnaryExpressionSyntax : SyntaxNode
+    protected abstract object TokenValue(TLiteralExpressionSyntax literalExpression);
+    protected abstract SyntaxNode Operand(TUnaryExpressionSyntax unaryExpression);
+    protected abstract bool IsSupportedOperator(TUnaryExpressionSyntax unaryExpression);
+    protected abstract bool IsMinusOperator(TUnaryExpressionSyntax unaryExpression);
+    protected abstract SyntaxNode RemoveParentheses(SyntaxNode expression);
+
+    public bool TryGetConstantIntValue(SemanticModel semanticModel, SyntaxNode expression, out int value) =>
+        TryGetConstantValue(semanticModel, expression, Convert.ToInt32, (multiplier, v) => multiplier * v, out value);
+
+    public bool TryGetConstantIntValue(SyntaxNode expression, out int value) =>
+        TryGetConstantValue(null, expression, Convert.ToInt32, (multiplier, v) => multiplier * v, out value);
+
+    public bool TryGetConstantDoubleValue(SyntaxNode expression, out double value) =>
+        TryGetConstantValue(null, expression, Convert.ToDouble, (multiplier, v) => multiplier * v, out value);
+
+    public bool TryGetConstantDecimalValue(SyntaxNode expression, out decimal value) =>
+        TryGetConstantValue(null, expression, Convert.ToDecimal, (multiplier, v) => multiplier * v, out value);
+
+    private bool TryGetConstantValue<T>(SemanticModel semanticModel, SyntaxNode expression, Func<object, T> converter, Func<int, T, T> multiplierCalculator, out T value)
+        where T : struct
     {
-        protected abstract object TokenValue(TLiteralExpressionSyntax literalExpression);
-        protected abstract SyntaxNode Operand(TUnaryExpressionSyntax unaryExpression);
-        protected abstract bool IsSupportedOperator(TUnaryExpressionSyntax unaryExpression);
-        protected abstract bool IsMinusOperator(TUnaryExpressionSyntax unaryExpression);
-        protected abstract SyntaxNode RemoveParentheses(SyntaxNode expression);
+        expression = RemoveParentheses(expression);
 
-        public bool TryGetConstantIntValue(SemanticModel semanticModel, SyntaxNode expression, out int value) =>
-            TryGetConstantValue(semanticModel, expression, Convert.ToInt32, (multiplier, v) => multiplier * v, out value);
-
-        public bool TryGetConstantIntValue(SyntaxNode expression, out int value) =>
-            TryGetConstantValue(null, expression, Convert.ToInt32, (multiplier, v) => multiplier * v, out value);
-
-        public bool TryGetConstantDoubleValue(SyntaxNode expression, out double value) =>
-            TryGetConstantValue(null, expression, Convert.ToDouble, (multiplier, v) => multiplier * v, out value);
-
-        public bool TryGetConstantDecimalValue(SyntaxNode expression, out decimal value) =>
-            TryGetConstantValue(null, expression, Convert.ToDecimal, (multiplier, v) => multiplier * v, out value);
-
-        private bool TryGetConstantValue<T>(SemanticModel semanticModel, SyntaxNode expression, Func<object, T> converter, Func<int, T, T> multiplierCalculator, out T value)
-            where T : struct
+        if (GetMultiplier(expression, out var internalExpression) is int multiplier
+            && internalExpression is TLiteralExpressionSyntax literalExpression
+            && ConversionHelper.TryConvertWith(TokenValue(literalExpression), converter, out value))
         {
-            expression = RemoveParentheses(expression);
+            value = multiplierCalculator(multiplier, value);
+            return true;
+        }
+        else if (semanticModel is { }
+            && semanticModel.GetConstantValue(expression) is { HasValue: true } optional
+            && optional.Value is T val)
+        {
+            value = val;
+            return true;
+        }
+        else
+        {
+            value = default;
+            return false;
+        }
+    }
 
-            if (GetMultiplier(expression, out var internalExpression) is int multiplier
-                && internalExpression is TLiteralExpressionSyntax literalExpression
-                && ConversionHelper.TryConvertWith(TokenValue(literalExpression), converter, out value))
+    private int? GetMultiplier(SyntaxNode expression, out SyntaxNode internalExpression)
+    {
+        var multiplier = 1;
+        internalExpression = expression;
+        var unary = internalExpression as TUnaryExpressionSyntax;
+        while (unary != null)
+        {
+            if (!IsSupportedOperator(unary))
             {
-                value = multiplierCalculator(multiplier, value);
-                return true;
+                return null;
             }
-            else if (semanticModel is { }
-                && semanticModel.GetConstantValue(expression) is { HasValue: true } optional
-                && optional.Value is T val)
+
+            if (IsMinusOperator(unary))
             {
-                value = val;
-                return true;
+                multiplier *= -1;
             }
-            else
-            {
-                value = default;
-                return false;
-            }
+
+            internalExpression = Operand(unary);
+            unary = internalExpression as TUnaryExpressionSyntax;
         }
 
-        private int? GetMultiplier(SyntaxNode expression, out SyntaxNode internalExpression)
-        {
-            var multiplier = 1;
-            internalExpression = expression;
-            var unary = internalExpression as TUnaryExpressionSyntax;
-            while (unary != null)
-            {
-                if (!IsSupportedOperator(unary))
-                {
-                    return null;
-                }
-
-                if (IsMinusOperator(unary))
-                {
-                    multiplier *= -1;
-                }
-
-                internalExpression = Operand(unary);
-                unary = internalExpression as TUnaryExpressionSyntax;
-            }
-
-            return multiplier;
-        }
+        return multiplier;
     }
 }

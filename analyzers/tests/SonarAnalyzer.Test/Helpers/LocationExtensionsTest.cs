@@ -22,73 +22,72 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Extensions;
 
-namespace SonarAnalyzer.Test.Helpers
+namespace SonarAnalyzer.Test.Helpers;
+
+[TestClass]
+public class LocationExtensionsTest
 {
-    [TestClass]
-    public class LocationExtensionsTest
+    [TestMethod]
+    public void EnsureMappedLocation_NonGeneratedLocation_ShouldBeSame()
     {
-        [TestMethod]
-        public void EnsureMappedLocation_NonGeneratedLocation_ShouldBeSame()
-        {
-            var code = """
-                using System;
+        var code = """
+            using System;
 
-                namespace HelloWorld
+            namespace HelloWorld
+            {
+                class Program
                 {
-                    class Program
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                            Console.WriteLine("Hello, World!");
-                        }
+                        Console.WriteLine("Hello, World!");
                     }
                 }
-                """;
-            var location = Location.Create(CSharpSyntaxTree.ParseText(code), TextSpan.FromBounds(50, 75));
+            }
+            """;
+        var location = Location.Create(CSharpSyntaxTree.ParseText(code), TextSpan.FromBounds(50, 75));
 
-            var result = location.EnsureMappedLocation();
+        var result = location.EnsureMappedLocation();
 
-            result.Should().BeSameAs(location);
-        }
+        result.Should().BeSameAs(location);
+    }
 
-        [TestMethod]
-        public void EnsureMappedLocation_LocationNull_ShouldReturnNull()
-        {
-            Location location = null;
+    [TestMethod]
+    public void EnsureMappedLocation_LocationNull_ShouldReturnNull()
+    {
+        Location location = null;
 
-            var result = location.EnsureMappedLocation();
+        var result = location.EnsureMappedLocation();
 
-            result.Should().BeNull();
-        }
+        result.Should().BeNull();
+    }
 
-        [TestMethod]
-        public void EnsureMappedLocation_GeneratedLocation_ShouldTargetOriginal()
-        {
-            var code = """
-                using System;
+    [TestMethod]
+    public void EnsureMappedLocation_GeneratedLocation_ShouldTargetOriginal()
+    {
+        var code = """
+            using System;
 
-                namespace HelloWorld
+            namespace HelloWorld
+            {
+                class Program
                 {
-                    class Program
+                    static void Main(string[] args)
                     {
-                        static void Main(string[] args)
-                        {
-                #line (1, 5) - (1, 20) 30 "Original.razor"
-                            Console.WriteLine("Hello, World!");
-                        }
+            #line (1, 5) - (1, 20) 30 "Original.razor"
+                        Console.WriteLine("Hello, World!");
                     }
                 }
-                """;
-            var location = Location.Create(CSharpSyntaxTree.ParseText(code).WithFilePath("Program.razor.g.cs"), new TextSpan(code.IndexOf("\"Hello, World!\""), 15));
+            }
+            """;
+        var location = Location.Create(CSharpSyntaxTree.ParseText(code).WithFilePath("Program.razor.g.cs"), new TextSpan(code.IndexOf("\"Hello, World!\""), 15));
 
-            var result = location.EnsureMappedLocation();
+        var result = location.EnsureMappedLocation();
 
-            result.Should().NotBeSameAs(location);
-            result.GetLineSpan().Path.Should().Be("Original.razor");
-            result.GetLineSpan().Span.Start.Line.Should().Be(0);
-            result.GetLineSpan().Span.Start.Character.Should().Be(4);
-            result.GetLineSpan().Span.End.Line.Should().Be(0);
-            result.GetLineSpan().Span.End.Character.Should().Be(19);
-        }
+        result.Should().NotBeSameAs(location);
+        result.GetLineSpan().Path.Should().Be("Original.razor");
+        result.GetLineSpan().Span.Start.Line.Should().Be(0);
+        result.GetLineSpan().Span.Start.Character.Should().Be(4);
+        result.GetLineSpan().Span.End.Line.Should().Be(0);
+        result.GetLineSpan().Span.End.Character.Should().Be(19);
     }
 }

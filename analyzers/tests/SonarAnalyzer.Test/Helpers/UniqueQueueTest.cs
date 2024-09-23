@@ -20,35 +20,34 @@
 
 using SonarAnalyzer.CFG.Helpers;
 
-namespace SonarAnalyzer.Test.Helpers
-{
-    [TestClass]
-    public class UniqueQueueTest
-    {
-        [TestMethod]
-        public void Enqueue_UniqueItems()
-        {
-            var sut = new UniqueQueue<int>();
-            sut.Enqueue(42);
-            sut.Dequeue().Should().Be(42);
-            sut.Enqueue(42);
-            sut.Dequeue().Should().Be(42, "second enqueue of dequeued item should not prevent it from being enqueued again");
-        }
+namespace SonarAnalyzer.Test.Helpers;
 
-        [TestMethod]
-        public void Dequeue_UniqueItems()
-        {
-            var sut = new UniqueQueue<int>();
-            sut.Enqueue(41);
-            sut.Enqueue(42);
-            sut.Enqueue(42);
-            sut.Enqueue(43);
-            sut.Enqueue(42);
-            sut.Dequeue().Should().Be(41);
-            sut.Enqueue(42);
-            sut.Dequeue().Should().Be(42);
-            sut.Dequeue().Should().Be(43);
-            sut.Invoking(x => x.Dequeue()).Should().Throw<InvalidOperationException>();
-        }
+[TestClass]
+public class UniqueQueueTest
+{
+    [TestMethod]
+    public void Enqueue_UniqueItems()
+    {
+        var sut = new UniqueQueue<int>();
+        sut.Enqueue(42);
+        sut.Dequeue().Should().Be(42);
+        sut.Enqueue(42);
+        sut.Dequeue().Should().Be(42, "second enqueue of dequeued item should not prevent it from being enqueued again");
+    }
+
+    [TestMethod]
+    public void Dequeue_UniqueItems()
+    {
+        var sut = new UniqueQueue<int>();
+        sut.Enqueue(41);
+        sut.Enqueue(42);
+        sut.Enqueue(42);
+        sut.Enqueue(43);
+        sut.Enqueue(42);
+        sut.Dequeue().Should().Be(41);
+        sut.Enqueue(42);
+        sut.Dequeue().Should().Be(42);
+        sut.Dequeue().Should().Be(43);
+        sut.Invoking(x => x.Dequeue()).Should().Throw<InvalidOperationException>();
     }
 }

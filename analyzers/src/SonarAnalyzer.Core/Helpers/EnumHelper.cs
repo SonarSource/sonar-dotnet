@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public static class EnumHelper
 {
-    public static class EnumHelper
-    {
-        internal static bool HasFlagsAttribute(this SyntaxNode node, SemanticModel semanticModel) =>
-            semanticModel.GetDeclaredSymbol(node).HasAttribute(KnownType.System_FlagsAttribute);
-    }
+    internal static bool HasFlagsAttribute(this SyntaxNode node, SemanticModel semanticModel) =>
+        semanticModel.GetDeclaredSymbol(node).HasAttribute(KnownType.System_FlagsAttribute);
 }

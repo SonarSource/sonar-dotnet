@@ -20,69 +20,68 @@
 
 using NodeSymbolAndModel = SonarAnalyzer.Common.NodeSymbolAndModel<Microsoft.CodeAnalysis.SyntaxNode, Microsoft.CodeAnalysis.ISymbol>;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+// For C#, TOwnerOfSubnodes == TDeclaration == BaseTypeDeclarationSyntax
+// For VB, TOwnerOfSubnodes == TypeBlockSyntax, TDeclaration = TypeStatementSyntax
+public abstract class RemovableDeclarationCollectorBase<TOwnerOfSubnodes, TDeclaration, TSyntaxKind>
+    where TOwnerOfSubnodes : SyntaxNode
+    where TDeclaration : SyntaxNode
 {
-    // For C#, TOwnerOfSubnodes == TDeclaration == BaseTypeDeclarationSyntax
-    // For VB, TOwnerOfSubnodes == TypeBlockSyntax, TDeclaration = TypeStatementSyntax
-    public abstract class RemovableDeclarationCollectorBase<TOwnerOfSubnodes, TDeclaration, TSyntaxKind>
-        where TOwnerOfSubnodes : SyntaxNode
-        where TDeclaration : SyntaxNode
+    private readonly Compilation compilation;
+    private readonly INamedTypeSymbol namedType;
+
+    private IEnumerable<NodeAndModel<TOwnerOfSubnodes>> typeDeclarations;
+
+    public abstract IEnumerable<NodeSymbolAndModel> GetRemovableFieldLikeDeclarations(ISet<TSyntaxKind> kinds, Accessibility maxAccessibility);
+    public abstract TOwnerOfSubnodes GetOwnerOfSubnodes(TDeclaration node);
+    protected abstract IEnumerable<SyntaxNode> SelectMatchingDeclarations(NodeAndModel<TOwnerOfSubnodes> container, ISet<TSyntaxKind> kinds);
+
+    public IEnumerable<NodeAndModel<TOwnerOfSubnodes>> TypeDeclarations
     {
-        private readonly Compilation compilation;
-        private readonly INamedTypeSymbol namedType;
-
-        private IEnumerable<NodeAndModel<TOwnerOfSubnodes>> typeDeclarations;
-
-        public abstract IEnumerable<NodeSymbolAndModel> GetRemovableFieldLikeDeclarations(ISet<TSyntaxKind> kinds, Accessibility maxAccessibility);
-        public abstract TOwnerOfSubnodes GetOwnerOfSubnodes(TDeclaration node);
-        protected abstract IEnumerable<SyntaxNode> SelectMatchingDeclarations(NodeAndModel<TOwnerOfSubnodes> container, ISet<TSyntaxKind> kinds);
-
-        public IEnumerable<NodeAndModel<TOwnerOfSubnodes>> TypeDeclarations
+        get
         {
-            get
+            if (typeDeclarations == null)
             {
-                if (typeDeclarations == null)
-                {
-                    typeDeclarations = namedType.DeclaringSyntaxReferences
-                        .Select(x => x.GetSyntax())
-                        .OfType<TDeclaration>()
-                        .Select(x => new NodeAndModel<TOwnerOfSubnodes>(compilation.GetSemanticModel(x.SyntaxTree), GetOwnerOfSubnodes(x)))
-                        .Where(x => x.Model != null);
-                }
-                return typeDeclarations;
+                typeDeclarations = namedType.DeclaringSyntaxReferences
+                    .Select(x => x.GetSyntax())
+                    .OfType<TDeclaration>()
+                    .Select(x => new NodeAndModel<TOwnerOfSubnodes>(compilation.GetSemanticModel(x.SyntaxTree), GetOwnerOfSubnodes(x)))
+                    .Where(x => x.Model != null);
             }
+            return typeDeclarations;
         }
-
-        protected RemovableDeclarationCollectorBase(INamedTypeSymbol namedType, Compilation compilation)
-        {
-            this.namedType = namedType;
-            this.compilation = compilation;
-        }
-
-        public IEnumerable<NodeSymbolAndModel> GetRemovableDeclarations(ISet<TSyntaxKind> kinds, Accessibility maxAccessibility) =>
-            TypeDeclarations.SelectMany(container => SelectMatchingDeclarations(container, kinds)
-                                        .Select(x => SelectNodeTuple(x, container.Model)))
-                                        .Where(x => IsRemovable(x.Symbol, maxAccessibility));
-
-        public static bool IsRemovable(IMethodSymbol methodSymbol, Accessibility maxAccessibility) =>
-            IsRemovable((ISymbol)methodSymbol, maxAccessibility)
-            && (methodSymbol.MethodKind == MethodKind.Ordinary || methodSymbol.MethodKind == MethodKind.Constructor)
-            && !methodSymbol.IsMainMethod()
-            && !methodSymbol.IsEventHandler()
-            && !methodSymbol.IsSerializationConstructor();
-
-        protected static bool IsRemovable(ISymbol symbol, Accessibility maxAccessibility) =>
-            symbol != null
-            && symbol.GetEffectiveAccessibility() <= maxAccessibility
-            && !symbol.IsImplicitlyDeclared
-            && !symbol.IsAbstract
-            && !symbol.IsVirtual
-            && !symbol.GetAttributes().Any()
-            && !symbol.ContainingType.IsInterface()
-            && symbol.GetInterfaceMember() == null
-            && symbol.GetOverriddenMember() == null;
-
-        protected static NodeSymbolAndModel SelectNodeTuple(SyntaxNode node, SemanticModel semanticModel) =>
-            new(semanticModel, node, semanticModel.GetDeclaredSymbol(node));
     }
+
+    protected RemovableDeclarationCollectorBase(INamedTypeSymbol namedType, Compilation compilation)
+    {
+        this.namedType = namedType;
+        this.compilation = compilation;
+    }
+
+    public IEnumerable<NodeSymbolAndModel> GetRemovableDeclarations(ISet<TSyntaxKind> kinds, Accessibility maxAccessibility) =>
+        TypeDeclarations.SelectMany(container => SelectMatchingDeclarations(container, kinds)
+                                    .Select(x => SelectNodeTuple(x, container.Model)))
+                                    .Where(x => IsRemovable(x.Symbol, maxAccessibility));
+
+    public static bool IsRemovable(IMethodSymbol methodSymbol, Accessibility maxAccessibility) =>
+        IsRemovable((ISymbol)methodSymbol, maxAccessibility)
+        && (methodSymbol.MethodKind == MethodKind.Ordinary || methodSymbol.MethodKind == MethodKind.Constructor)
+        && !methodSymbol.IsMainMethod()
+        && !methodSymbol.IsEventHandler()
+        && !methodSymbol.IsSerializationConstructor();
+
+    protected static bool IsRemovable(ISymbol symbol, Accessibility maxAccessibility) =>
+        symbol != null
+        && symbol.GetEffectiveAccessibility() <= maxAccessibility
+        && !symbol.IsImplicitlyDeclared
+        && !symbol.IsAbstract
+        && !symbol.IsVirtual
+        && !symbol.GetAttributes().Any()
+        && !symbol.ContainingType.IsInterface()
+        && symbol.GetInterfaceMember() == null
+        && symbol.GetOverriddenMember() == null;
+
+    protected static NodeSymbolAndModel SelectNodeTuple(SyntaxNode node, SemanticModel semanticModel) =>
+        new(semanticModel, node, semanticModel.GetDeclaredSymbol(node));
 }

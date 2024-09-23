@@ -23,15 +23,15 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.VisualBasic.Core.Syntax.Utilities;
 using CodeAnalysisAccessibility = Microsoft.CodeAnalysis.Accessibility; // This is needed because there is an Accessibility namespace in the windows forms binaries.
 
-namespace SonarAnalyzer.Test.Helpers
+namespace SonarAnalyzer.Test.Helpers;
+
+[TestClass]
+public class RemovableDeclarationCollectorTest
 {
-    [TestClass]
-    public class RemovableDeclarationCollectorTest
+    [TestMethod]
+    public void GetRemovableFieldLikeDeclarations_SearchesInNestedTypes_VB()
     {
-        [TestMethod]
-        public void GetRemovableFieldLikeDeclarations_SearchesInNestedTypes_VB()
-        {
-            const string code = @"
+        const string code = @"
 Public Class Sample
 
     Public CompliantA, CompliantB As Integer
@@ -50,16 +50,16 @@ Public Class Sample
     End Structure
 
 End Class";
-            var sut = CreateCollector(code);
-            var ret = sut.GetRemovableFieldLikeDeclarations(new[] { SyntaxKind.FieldDeclaration }.ToHashSet(), CodeAnalysisAccessibility.Public);
-            ret.Should().HaveCount(5);
-            ret.Select(x => x.Symbol.Name).Should().BeEquivalentTo("CompliantA", "CompliantB", "CompliantC", "FieldInNestedClass", "FieldInNestedStruct");
-        }
+        var sut = CreateCollector(code);
+        var ret = sut.GetRemovableFieldLikeDeclarations(new[] { SyntaxKind.FieldDeclaration }.ToHashSet(), CodeAnalysisAccessibility.Public);
+        ret.Should().HaveCount(5);
+        ret.Select(x => x.Symbol.Name).Should().BeEquivalentTo("CompliantA", "CompliantB", "CompliantC", "FieldInNestedClass", "FieldInNestedStruct");
+    }
 
-        [TestMethod]
-        public void GetRemovableDeclarations_VB()
-        {
-            const string code = @"
+    [TestMethod]
+    public void GetRemovableDeclarations_VB()
+    {
+        const string code = @"
 Public Class Base
 
     Public Overridable Sub OverridableMethod_NotRemovable()
@@ -106,21 +106,20 @@ Public Class Sample
     End Class
 
 End Class";
-            var sut = CreateCollector(code);
-            var ret = sut.GetRemovableDeclarations(new[] { SyntaxKind.SubBlock, SyntaxKind.SubStatement }.ToHashSet(), CodeAnalysisAccessibility.Public);
-            ret.Should().ContainSingle();
-            ret.Single().Symbol.Name.Should().Be("RemovableMethod");
-        }
+        var sut = CreateCollector(code);
+        var ret = sut.GetRemovableDeclarations(new[] { SyntaxKind.SubBlock, SyntaxKind.SubStatement }.ToHashSet(), CodeAnalysisAccessibility.Public);
+        ret.Should().ContainSingle();
+        ret.Single().Symbol.Name.Should().Be("RemovableMethod");
+    }
 
-        [TestMethod]
-        public void IsRemovable_Null_ReturnsFalse() =>
-            VisualBasicRemovableDeclarationCollector.IsRemovable(null, CodeAnalysisAccessibility.Public).Should().BeFalse();
+    [TestMethod]
+    public void IsRemovable_Null_ReturnsFalse() =>
+        VisualBasicRemovableDeclarationCollector.IsRemovable(null, CodeAnalysisAccessibility.Public).Should().BeFalse();
 
-        private static VisualBasicRemovableDeclarationCollector CreateCollector(string code)
-        {
-            var (tree, semanticModel) = TestHelper.CompileVB(code, MetadataReferenceFacade.SystemComponentModelPrimitives.ToArray());
-            var type = tree.GetRoot().DescendantNodes().OfType<ClassBlockSyntax>().Single(x => x.ClassStatement.Identifier.ValueText == "Sample");
-            return new VisualBasicRemovableDeclarationCollector(semanticModel.GetDeclaredSymbol(type), semanticModel.Compilation);
-        }
+    private static VisualBasicRemovableDeclarationCollector CreateCollector(string code)
+    {
+        var (tree, semanticModel) = TestHelper.CompileVB(code, MetadataReferenceFacade.SystemComponentModelPrimitives.ToArray());
+        var type = tree.GetRoot().DescendantNodes().OfType<ClassBlockSyntax>().Single(x => x.ClassStatement.Identifier.ValueText == "Sample");
+        return new VisualBasicRemovableDeclarationCollector(semanticModel.GetDeclaredSymbol(type), semanticModel.Compilation);
     }
 }
