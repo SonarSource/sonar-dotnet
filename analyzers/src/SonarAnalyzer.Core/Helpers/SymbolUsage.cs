@@ -18,19 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
-{
-    public class SymbolUsage
-    {
-        public ISymbol Symbol { get; }
-        public SyntaxNode Declaration { get; set; }
-        public SyntaxNode Initializer { get; set; }
-        public HashSet<SyntaxNode> Readings { get; } = new HashSet<SyntaxNode>();
-        public HashSet<SyntaxNode> Writings { get; } = new HashSet<SyntaxNode>();
+namespace SonarAnalyzer.Helpers;
 
-        public SymbolUsage(ISymbol symbol)
-        {
-            this.Symbol = symbol;
-        }
+public class SymbolUsage
+{
+    public ISymbol Symbol { get; }
+    public SyntaxNode Declaration { get; set; }
+    public SyntaxNode Initializer { get; set; }
+    public HashSet<SyntaxNode> Readings { get; } = new HashSet<SyntaxNode>();
+    public HashSet<SyntaxNode> Writings { get; } = new HashSet<SyntaxNode>();
+
+    public SymbolUsage(ISymbol symbol)
+    {
+        this.Symbol = symbol;
     }
 }

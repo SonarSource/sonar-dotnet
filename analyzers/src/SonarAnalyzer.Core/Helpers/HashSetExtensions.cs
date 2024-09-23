@@ -18,16 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public static class HashSetExtensions
 {
-    public static class HashSetExtensions
+    public static void AddRange<T>(this HashSet<T> hashset, IEnumerable<T> values)
     {
-        public static void AddRange<T>(this HashSet<T> hashset, IEnumerable<T> values)
+        foreach(var value in values)
         {
-            foreach(var value in values)
-            {
-                hashset.Add(value);
-            }
+            hashset.Add(value);
         }
     }
 }

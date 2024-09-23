@@ -20,39 +20,38 @@
 
 using SonarAnalyzer.CFG.Sonar;
 
-namespace SonarAnalyzer.Test.Helpers
+namespace SonarAnalyzer.Test.Helpers;
+
+[TestClass]
+public class BlockIdMapTest
 {
-    [TestClass]
-    public class BlockIdMapTest
+    private BlockIdProvider blockId;
+
+    [TestInitialize]
+    public void TestInitialize()
     {
-        private BlockIdProvider blockId;
+        this.blockId = new BlockIdProvider();
+    }
 
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            this.blockId = new BlockIdProvider();
-        }
+    [TestMethod]
+    public void Get_Returns_Same_Id_For_Same_Block()
+    {
+        var block = new TemporaryBlock();
 
-        [TestMethod]
-        public void Get_Returns_Same_Id_For_Same_Block()
-        {
-            var block = new TemporaryBlock();
+        this.blockId.Get(block).Should().Be("0");
+        this.blockId.Get(block).Should().Be("0");
+        this.blockId.Get(block).Should().Be("0");
+    }
 
-            this.blockId.Get(block).Should().Be("0");
-            this.blockId.Get(block).Should().Be("0");
-            this.blockId.Get(block).Should().Be("0");
-        }
+    [TestMethod]
+    public void Get_Returns_Different_Id_For_Different_Block()
+    {
+        var id1 = this.blockId.Get(new TemporaryBlock());
+        var id2 = this.blockId.Get(new TemporaryBlock());
+        var id3 = this.blockId.Get(new TemporaryBlock());
 
-        [TestMethod]
-        public void Get_Returns_Different_Id_For_Different_Block()
-        {
-            var id1 = this.blockId.Get(new TemporaryBlock());
-            var id2 = this.blockId.Get(new TemporaryBlock());
-            var id3 = this.blockId.Get(new TemporaryBlock());
-
-            id1.Should().Be("0");
-            id2.Should().Be("1");
-            id3.Should().Be("2");
-        }
+        id1.Should().Be("0");
+        id2.Should().Be("1");
+        id3.Should().Be("2");
     }
 }

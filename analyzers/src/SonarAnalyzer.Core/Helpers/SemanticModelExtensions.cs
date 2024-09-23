@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public static class SemanticModelExtensions
 {
-    public static class SemanticModelExtensions
-    {
-        public static bool IsExtensionMethod(this SemanticModel semanticModel, SyntaxNode expression) =>
-            semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol memberSymbol && memberSymbol.IsExtensionMethod;
-    }
+    public static bool IsExtensionMethod(this SemanticModel semanticModel, SyntaxNode expression) =>
+        semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol memberSymbol && memberSymbol.IsExtensionMethod;
 }

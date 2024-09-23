@@ -20,33 +20,32 @@
 
 using System.Collections;
 
-namespace SonarAnalyzer.CFG.Helpers
+namespace SonarAnalyzer.CFG.Helpers;
+
+internal class UniqueQueue<T> : IEnumerable<T>
 {
-    internal class UniqueQueue<T> : IEnumerable<T>
+    private readonly Queue<T> queue = new Queue<T>();
+    private readonly ISet<T> unique = new HashSet<T>();
+
+    public void Enqueue(T item)
     {
-        private readonly Queue<T> queue = new Queue<T>();
-        private readonly ISet<T> unique = new HashSet<T>();
-
-        public void Enqueue(T item)
+        if (!unique.Contains(item))
         {
-            if (!unique.Contains(item))
-            {
-                queue.Enqueue(item);
-                unique.Add(item);
-            }
+            queue.Enqueue(item);
+            unique.Add(item);
         }
-
-        public T Dequeue()
-        {
-            var ret = queue.Dequeue();
-            unique.Remove(ret);
-            return ret;
-        }
-
-        public IEnumerator<T> GetEnumerator() =>
-            queue.GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() =>
-            GetEnumerator();
     }
+
+    public T Dequeue()
+    {
+        var ret = queue.Dequeue();
+        unique.Remove(ret);
+        return ret;
+    }
+
+    public IEnumerator<T> GetEnumerator() =>
+        queue.GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator() =>
+        GetEnumerator();
 }

@@ -18,15 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public enum CountComparisonResult
 {
-    public enum CountComparisonResult
-    {
-        None,
-        SizeDepedendent,
-        Empty,
-        NotEmpty,
-        AlwaysTrue,
-        AlwaysFalse,
-    }
+    None,
+    SizeDepedendent,
+    Empty,
+    NotEmpty,
+    AlwaysTrue,
+    AlwaysFalse,
 }

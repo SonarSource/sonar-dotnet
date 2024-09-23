@@ -18,37 +18,36 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Test.Helpers
+namespace SonarAnalyzer.Test.Helpers;
+
+[TestClass]
+public class CountComparisonResultExtensionsTest
 {
-    [TestClass]
-    public class CountComparisonResultExtensionsTest
-    {
-        [TestMethod]
-        [DataRow(ComparisonKind.Equals, -1, CountComparisonResult.AlwaysFalse)]
-        [DataRow(ComparisonKind.Equals, +0, CountComparisonResult.Empty)]
-        [DataRow(ComparisonKind.Equals, +1, CountComparisonResult.SizeDepedendent)]
-        [DataRow(ComparisonKind.Equals, +9, CountComparisonResult.SizeDepedendent)]
-        [DataRow(ComparisonKind.NotEquals, -1, CountComparisonResult.AlwaysTrue)]
-        [DataRow(ComparisonKind.NotEquals, +0, CountComparisonResult.NotEmpty)]
-        [DataRow(ComparisonKind.NotEquals, +1, CountComparisonResult.SizeDepedendent)]
-        [DataRow(ComparisonKind.NotEquals, +9, CountComparisonResult.SizeDepedendent)]
-        [DataRow(ComparisonKind.GreaterThan, -1, CountComparisonResult.AlwaysTrue)]
-        [DataRow(ComparisonKind.GreaterThan, +0, CountComparisonResult.NotEmpty)]
-        [DataRow(ComparisonKind.GreaterThan, +1, CountComparisonResult.SizeDepedendent)]
-        [DataRow(ComparisonKind.GreaterThan, +9, CountComparisonResult.SizeDepedendent)]
-        [DataRow(ComparisonKind.LessThan, -1, CountComparisonResult.AlwaysFalse)]
-        [DataRow(ComparisonKind.LessThan, +0, CountComparisonResult.AlwaysFalse)]
-        [DataRow(ComparisonKind.LessThan, +1, CountComparisonResult.Empty)]
-        [DataRow(ComparisonKind.LessThan, +2, CountComparisonResult.SizeDepedendent)]
-        [DataRow(ComparisonKind.GreaterThanOrEqual, -1, CountComparisonResult.AlwaysTrue)]
-        [DataRow(ComparisonKind.GreaterThanOrEqual, +0, CountComparisonResult.AlwaysTrue)]
-        [DataRow(ComparisonKind.GreaterThanOrEqual, +1, CountComparisonResult.NotEmpty)]
-        [DataRow(ComparisonKind.GreaterThanOrEqual, +2, CountComparisonResult.SizeDepedendent)]
-        [DataRow(ComparisonKind.LessThanOrEqual, -9, CountComparisonResult.AlwaysFalse)]
-        [DataRow(ComparisonKind.LessThanOrEqual, -1, CountComparisonResult.AlwaysFalse)]
-        [DataRow(ComparisonKind.LessThanOrEqual, +0, CountComparisonResult.Empty)]
-        [DataRow(ComparisonKind.LessThanOrEqual, +1, CountComparisonResult.SizeDepedendent)]
-        public void Compare(ComparisonKind comparison, int count, CountComparisonResult expected) =>
-            comparison.Compare(count).Should().Be(expected);
-    }
+    [TestMethod]
+    [DataRow(ComparisonKind.Equals, -1, CountComparisonResult.AlwaysFalse)]
+    [DataRow(ComparisonKind.Equals, +0, CountComparisonResult.Empty)]
+    [DataRow(ComparisonKind.Equals, +1, CountComparisonResult.SizeDepedendent)]
+    [DataRow(ComparisonKind.Equals, +9, CountComparisonResult.SizeDepedendent)]
+    [DataRow(ComparisonKind.NotEquals, -1, CountComparisonResult.AlwaysTrue)]
+    [DataRow(ComparisonKind.NotEquals, +0, CountComparisonResult.NotEmpty)]
+    [DataRow(ComparisonKind.NotEquals, +1, CountComparisonResult.SizeDepedendent)]
+    [DataRow(ComparisonKind.NotEquals, +9, CountComparisonResult.SizeDepedendent)]
+    [DataRow(ComparisonKind.GreaterThan, -1, CountComparisonResult.AlwaysTrue)]
+    [DataRow(ComparisonKind.GreaterThan, +0, CountComparisonResult.NotEmpty)]
+    [DataRow(ComparisonKind.GreaterThan, +1, CountComparisonResult.SizeDepedendent)]
+    [DataRow(ComparisonKind.GreaterThan, +9, CountComparisonResult.SizeDepedendent)]
+    [DataRow(ComparisonKind.LessThan, -1, CountComparisonResult.AlwaysFalse)]
+    [DataRow(ComparisonKind.LessThan, +0, CountComparisonResult.AlwaysFalse)]
+    [DataRow(ComparisonKind.LessThan, +1, CountComparisonResult.Empty)]
+    [DataRow(ComparisonKind.LessThan, +2, CountComparisonResult.SizeDepedendent)]
+    [DataRow(ComparisonKind.GreaterThanOrEqual, -1, CountComparisonResult.AlwaysTrue)]
+    [DataRow(ComparisonKind.GreaterThanOrEqual, +0, CountComparisonResult.AlwaysTrue)]
+    [DataRow(ComparisonKind.GreaterThanOrEqual, +1, CountComparisonResult.NotEmpty)]
+    [DataRow(ComparisonKind.GreaterThanOrEqual, +2, CountComparisonResult.SizeDepedendent)]
+    [DataRow(ComparisonKind.LessThanOrEqual, -9, CountComparisonResult.AlwaysFalse)]
+    [DataRow(ComparisonKind.LessThanOrEqual, -1, CountComparisonResult.AlwaysFalse)]
+    [DataRow(ComparisonKind.LessThanOrEqual, +0, CountComparisonResult.Empty)]
+    [DataRow(ComparisonKind.LessThanOrEqual, +1, CountComparisonResult.SizeDepedendent)]
+    public void Compare(ComparisonKind comparison, int count, CountComparisonResult expected) =>
+        comparison.Compare(count).Should().Be(expected);
 }

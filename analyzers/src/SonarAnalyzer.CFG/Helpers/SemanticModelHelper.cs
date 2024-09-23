@@ -18,28 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CFG.Helpers
+namespace SonarAnalyzer.CFG.Helpers;
+
+public static class SemanticModelHelper
 {
-    public static class SemanticModelHelper
+    /// <summary>
+    /// Starting .NET Framework 4.6.1, we've noticed that LINQ methods aren't resolved properly, so we need to use the CandidateSymbol.
+    /// </summary>
+    /// <param name="model">Semantic model</param>
+    /// /// <param name="node">Node for which it gets the symbol</param>
+    /// <returns>
+    /// The symbol if resolved.
+    /// The first candidate symbol if resolution failed.
+    /// Null if no symbol was found.
+    /// </returns>
+    public static ISymbol GetSymbolOrCandidateSymbol(this SemanticModel model, SyntaxNode node)
     {
-        /// <summary>
-        /// Starting .NET Framework 4.6.1, we've noticed that LINQ methods aren't resolved properly, so we need to use the CandidateSymbol.
-        /// </summary>
-        /// <param name="model">Semantic model</param>
-        /// /// <param name="node">Node for which it gets the symbol</param>
-        /// <returns>
-        /// The symbol if resolved.
-        /// The first candidate symbol if resolution failed.
-        /// Null if no symbol was found.
-        /// </returns>
-        public static ISymbol GetSymbolOrCandidateSymbol(this SemanticModel model, SyntaxNode node)
+        var symbolInfo = model.GetSymbolInfo(node);
+        if (symbolInfo.Symbol != null)
         {
-            var symbolInfo = model.GetSymbolInfo(node);
-            if (symbolInfo.Symbol != null)
-            {
-                return symbolInfo.Symbol;
-            }
-            return symbolInfo.CandidateSymbols.FirstOrDefault();
+            return symbolInfo.Symbol;
         }
+        return symbolInfo.CandidateSymbols.FirstOrDefault();
     }
 }

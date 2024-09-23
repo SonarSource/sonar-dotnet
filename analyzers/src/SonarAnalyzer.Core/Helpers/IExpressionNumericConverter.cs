@@ -18,12 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public interface IExpressionNumericConverter
 {
-    public interface IExpressionNumericConverter
-    {
-        bool TryGetConstantIntValue(SemanticModel semanticModel, SyntaxNode expression, out int value);
-        bool TryGetConstantIntValue(SyntaxNode expression, out int value);
-        bool TryGetConstantDoubleValue(SyntaxNode expression, out double value);
-    }
+    bool TryGetConstantIntValue(SemanticModel semanticModel, SyntaxNode expression, out int value);
+    bool TryGetConstantIntValue(SyntaxNode expression, out int value);
+    bool TryGetConstantDoubleValue(SyntaxNode expression, out double value);
 }

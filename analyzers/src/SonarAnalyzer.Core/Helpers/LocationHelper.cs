@@ -20,20 +20,19 @@
 
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public static class LocationHelper
 {
-    public static class LocationHelper
-    {
-        public static Location CreateLocation(this SyntaxToken from, SyntaxToken to) =>
-            Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
+    public static Location CreateLocation(this SyntaxToken from, SyntaxToken to) =>
+        Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
 
-        public static Location CreateLocation(this SyntaxNode from, SyntaxNode to) =>
-            Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
+    public static Location CreateLocation(this SyntaxNode from, SyntaxNode to) =>
+        Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
 
-        public static Location CreateLocation(this SyntaxNode from, SyntaxToken to) =>
-            Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
+    public static Location CreateLocation(this SyntaxNode from, SyntaxToken to) =>
+        Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
 
-        public static Location CreateLocation(this SyntaxToken from, SyntaxNode to) =>
-            Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
-    }
+    public static Location CreateLocation(this SyntaxToken from, SyntaxNode to) =>
+        Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
 }

@@ -20,38 +20,37 @@
 
 using SonarAnalyzer.CFG.Roslyn;
 
-namespace SonarAnalyzer.CFG.Helpers
+namespace SonarAnalyzer.CFG.Helpers;
+
+public abstract class OperationFinder<TResult>
 {
-    public abstract class OperationFinder<TResult>
+    protected abstract bool TryFindOperation(IOperationWrapperSonar operation, out TResult result);
+
+    public bool TryFind(BasicBlock block, out TResult result) =>
+        TryFind(block.OperationsAndBranchValue, out result);
+
+    protected bool TryFind(IEnumerable<IOperation> operations, out TResult result)
     {
-        protected abstract bool TryFindOperation(IOperationWrapperSonar operation, out TResult result);
-
-        public bool TryFind(BasicBlock block, out TResult result) =>
-            TryFind(block.OperationsAndBranchValue, out result);
-
-        protected bool TryFind(IEnumerable<IOperation> operations, out TResult result)
+        var queue = new Queue<IOperation>();
+        foreach (var operation in operations)
         {
-            var queue = new Queue<IOperation>();
-            foreach (var operation in operations)
+            queue.Enqueue(operation);
+            while (queue.Any())
             {
-                queue.Enqueue(operation);
-                while (queue.Any())
+                var wrapper = queue.Dequeue().ToSonar();
+                if (TryFindOperation(wrapper, out result))
                 {
-                    var wrapper = queue.Dequeue().ToSonar();
-                    if (TryFindOperation(wrapper, out result))
-                    {
-                        return true;
-                    }
+                    return true;
+                }
 
-                    foreach (var child in wrapper.Children)
-                    {
-                        queue.Enqueue(child);
-                    }
+                foreach (var child in wrapper.Children)
+                {
+                    queue.Enqueue(child);
                 }
             }
-
-            result = default;
-            return false;
         }
+
+        result = default;
+        return false;
     }
 }

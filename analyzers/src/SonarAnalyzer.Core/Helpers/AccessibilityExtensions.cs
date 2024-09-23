@@ -18,16 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public static class AccessibilityExtensions
 {
-    public static class AccessibilityExtensions
-    {
-        /// <summary>
-        /// Beware of Accessibility members:
-        /// ProtectedOrInternal = C# "protected internal" or VB.NET "Protected Friend" syntax. Accessible from inheriting class OR the same assembly.
-        /// ProtectedAndInternal = C# "private protected" or VB.NET "Private Protected" syntax. Accessible only from inheriting class in the same assembly.
-        /// </summary>
-        public static bool IsAccessibleOutsideTheType(this Accessibility accessibility) =>
-            accessibility == Accessibility.Public || accessibility == Accessibility.Internal || accessibility == Accessibility.ProtectedOrInternal;
-    }
+    /// <summary>
+    /// Beware of Accessibility members:
+    /// ProtectedOrInternal = C# "protected internal" or VB.NET "Protected Friend" syntax. Accessible from inheriting class OR the same assembly.
+    /// ProtectedAndInternal = C# "private protected" or VB.NET "Private Protected" syntax. Accessible only from inheriting class in the same assembly.
+    /// </summary>
+    public static bool IsAccessibleOutsideTheType(this Accessibility accessibility) =>
+        accessibility == Accessibility.Public || accessibility == Accessibility.Internal || accessibility == Accessibility.ProtectedOrInternal;
 }

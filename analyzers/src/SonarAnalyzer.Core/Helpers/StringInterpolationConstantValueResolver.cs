@@ -20,49 +20,39 @@
 
 using System.Text;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+public abstract class StringInterpolationConstantValueResolver<TSyntaxKind,
+                                                               TInterpolatedStringExpressionSyntax,
+                                                               TInterpolatedStringContentSyntax,
+                                                               TInterpolationSyntax,
+                                                               TInterpolatedStringTextSyntax>
+    where TSyntaxKind : struct
+    where TInterpolatedStringExpressionSyntax : SyntaxNode
+    where TInterpolatedStringContentSyntax : SyntaxNode
+    where TInterpolationSyntax : SyntaxNode
+    where TInterpolatedStringTextSyntax : SyntaxNode
 {
-    public abstract class StringInterpolationConstantValueResolver<TSyntaxKind,
-                                                                   TInterpolatedStringExpressionSyntax,
-                                                                   TInterpolatedStringContentSyntax,
-                                                                   TInterpolationSyntax,
-                                                                   TInterpolatedStringTextSyntax>
-        where TSyntaxKind : struct
-        where TInterpolatedStringExpressionSyntax : SyntaxNode
-        where TInterpolatedStringContentSyntax : SyntaxNode
-        where TInterpolationSyntax : SyntaxNode
-        where TInterpolatedStringTextSyntax : SyntaxNode
+    protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+
+    protected abstract IEnumerable<TInterpolatedStringContentSyntax> Contents(TInterpolatedStringExpressionSyntax interpolatedStringExpression);
+    protected abstract SyntaxToken TextToken(TInterpolatedStringTextSyntax interpolatedStringText);
+
+    public bool TryGetInterpolatedTextValue(TInterpolatedStringExpressionSyntax interpolatedStringExpression, SemanticModel semanticModel, out string interpolatedValue)
     {
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-
-        protected abstract IEnumerable<TInterpolatedStringContentSyntax> Contents(TInterpolatedStringExpressionSyntax interpolatedStringExpression);
-        protected abstract SyntaxToken TextToken(TInterpolatedStringTextSyntax interpolatedStringText);
-
-        public bool TryGetInterpolatedTextValue(TInterpolatedStringExpressionSyntax interpolatedStringExpression, SemanticModel semanticModel, out string interpolatedValue)
+        var resolvedContent = new StringBuilder();
+        foreach (var interpolatedStringContent in Contents(interpolatedStringExpression))
         {
-            var resolvedContent = new StringBuilder();
-            foreach (var interpolatedStringContent in Contents(interpolatedStringExpression))
+            if (interpolatedStringContent is TInterpolationSyntax interpolation)
             {
-                if (interpolatedStringContent is TInterpolationSyntax interpolation)
+                if (Language.Syntax.NodeExpression(interpolation) is TInterpolatedStringExpressionSyntax nestedInterpolatedString
+                    && TryGetInterpolatedTextValue(nestedInterpolatedString, semanticModel, out var innerInterpolatedValue))
                 {
-                    if (Language.Syntax.NodeExpression(interpolation) is TInterpolatedStringExpressionSyntax nestedInterpolatedString
-                        && TryGetInterpolatedTextValue(nestedInterpolatedString, semanticModel, out var innerInterpolatedValue))
-                    {
-                        resolvedContent.Append(innerInterpolatedValue);
-                    }
-                    else if (Language.FindConstantValue(semanticModel, Language.Syntax.NodeExpression(interpolation)) is string constantValue)
-                    {
-                        resolvedContent.Append(constantValue);
-                    }
-                    else
-                    {
-                        interpolatedValue = null;
-                        return false;
-                    }
+                    resolvedContent.Append(innerInterpolatedValue);
                 }
-                else if (interpolatedStringContent is TInterpolatedStringTextSyntax interpolatedText)
+                else if (Language.FindConstantValue(semanticModel, Language.Syntax.NodeExpression(interpolation)) is string constantValue)
                 {
-                    resolvedContent.Append(TextToken(interpolatedText).Text);
+                    resolvedContent.Append(constantValue);
                 }
                 else
                 {
@@ -70,8 +60,17 @@ namespace SonarAnalyzer.Helpers
                     return false;
                 }
             }
-            interpolatedValue = resolvedContent.ToString();
-            return true;
+            else if (interpolatedStringContent is TInterpolatedStringTextSyntax interpolatedText)
+            {
+                resolvedContent.Append(TextToken(interpolatedText).Text);
+            }
+            else
+            {
+                interpolatedValue = null;
+                return false;
+            }
         }
+        interpolatedValue = resolvedContent.ToString();
+        return true;
     }
 }

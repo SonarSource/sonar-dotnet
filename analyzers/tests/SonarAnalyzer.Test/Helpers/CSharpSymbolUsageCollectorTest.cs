@@ -20,15 +20,15 @@
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.Test.Helpers
+namespace SonarAnalyzer.Test.Helpers;
+
+[TestClass]
+public class CSharpSymbolUsageCollectorTest
 {
-    [TestClass]
-    public class CSharpSymbolUsageCollectorTest
+    [TestMethod]
+    public void VerifyUsagesBeingCollectedOnMatchingSyntaxNodes()
     {
-        [TestMethod]
-        public void VerifyUsagesBeingCollectedOnMatchingSyntaxNodes()
-        {
-            const string firstSnippet = @"
+        const string firstSnippet = @"
 public class Foo
 {
     private int Field = 42;
@@ -38,7 +38,7 @@ public class Foo
         return Field;
     }
 }";
-            const string secondSnippet = @"
+        const string secondSnippet = @"
 public class Bar
 {
     private int Field = 42;
@@ -47,26 +47,25 @@ public class Bar
         return Field;
     }
 }";
-            var firstCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(firstSnippet).GetCompilation();
-            var secondCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(secondSnippet).GetCompilation();
+        var firstCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(firstSnippet).GetCompilation();
+        var secondCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(secondSnippet).GetCompilation();
 
-            var firstTree = firstCompilation.SyntaxTrees.Single();
-            var fooMethod = firstTree.Single<MethodDeclarationSyntax>();
-            var firstCompilationSemanticModel = firstCompilation.GetSemanticModel(firstTree);
-            var firstCompilationFieldSymbol = firstCompilationSemanticModel.GetSymbolInfo(fooMethod.DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression).Symbol;
-            var firstCompilationKnownSymbols = new List<ISymbol> { firstCompilationFieldSymbol };
+        var firstTree = firstCompilation.SyntaxTrees.Single();
+        var fooMethod = firstTree.Single<MethodDeclarationSyntax>();
+        var firstCompilationSemanticModel = firstCompilation.GetSemanticModel(firstTree);
+        var firstCompilationFieldSymbol = firstCompilationSemanticModel.GetSymbolInfo(fooMethod.DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression).Symbol;
+        var firstCompilationKnownSymbols = new List<ISymbol> { firstCompilationFieldSymbol };
 
-            // compilation matches semantic model and syntax node
-            var firstCompilationUsageCollector = new CSharpSymbolUsageCollector(firstCompilation, firstCompilationKnownSymbols);
-            firstCompilationUsageCollector.Visit(fooMethod);
-            firstCompilationUsageCollector.UsedSymbols.Should().NotBeEmpty();
-            var firstCompilationUsedSymbols = firstCompilationUsageCollector.UsedSymbols;
+        // compilation matches semantic model and syntax node
+        var firstCompilationUsageCollector = new CSharpSymbolUsageCollector(firstCompilation, firstCompilationKnownSymbols);
+        firstCompilationUsageCollector.Visit(fooMethod);
+        firstCompilationUsageCollector.UsedSymbols.Should().NotBeEmpty();
+        var firstCompilationUsedSymbols = firstCompilationUsageCollector.UsedSymbols;
 
-            // compilation doesn't match syntax node, since it belongs to another compilation
-            var secondTree = secondCompilation.SyntaxTrees.Single();
-            var barMethod = secondTree.Single<MethodDeclarationSyntax>();
-            firstCompilationUsageCollector.Visit(barMethod);
-            firstCompilationUsageCollector.UsedSymbols.Should().BeEquivalentTo(firstCompilationUsedSymbols);
-        }
+        // compilation doesn't match syntax node, since it belongs to another compilation
+        var secondTree = secondCompilation.SyntaxTrees.Single();
+        var barMethod = secondTree.Single<MethodDeclarationSyntax>();
+        firstCompilationUsageCollector.Visit(barMethod);
+        firstCompilationUsageCollector.UsedSymbols.Should().BeEquivalentTo(firstCompilationUsedSymbols);
     }
 }

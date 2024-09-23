@@ -18,21 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
-{
-    public static class SemanticModelHelper
-    {
-        public static SemanticModel GetSemanticModelOrDefault(this SyntaxTree syntaxTree, SemanticModel model)
-        {
-            // See https://github.com/dotnet/roslyn/issues/18730
-            if (syntaxTree == model.SyntaxTree)
-            {
-                return model;
-            }
+namespace SonarAnalyzer.Helpers;
 
-            return model.Compilation.ContainsSyntaxTree(syntaxTree)
-                ? model.Compilation.GetSemanticModel(syntaxTree)
-                : null;
+public static class SemanticModelHelper
+{
+    public static SemanticModel GetSemanticModelOrDefault(this SyntaxTree syntaxTree, SemanticModel model)
+    {
+        // See https://github.com/dotnet/roslyn/issues/18730
+        if (syntaxTree == model.SyntaxTree)
+        {
+            return model;
         }
+
+        return model.Compilation.ContainsSyntaxTree(syntaxTree)
+            ? model.Compilation.GetSemanticModel(syntaxTree)
+            : null;
     }
 }

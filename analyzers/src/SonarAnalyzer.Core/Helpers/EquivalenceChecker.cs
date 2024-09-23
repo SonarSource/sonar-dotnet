@@ -18,29 +18,28 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Common
-{
-    public static class EquivalenceChecker
-    {
-        public static bool AreEquivalent(SyntaxNode node1, SyntaxNode node2, Func<SyntaxNode, SyntaxNode, bool> nodeComparator) =>
-            node1.Language == node2.Language && nodeComparator(node1, node2);
+namespace SonarAnalyzer.Helpers.Common;
 
-        public static bool AreEquivalent(SyntaxList<SyntaxNode> nodeList1, SyntaxList<SyntaxNode> nodeList2, Func<SyntaxNode, SyntaxNode, bool> nodeComparator)
+public static class EquivalenceChecker
+{
+    public static bool AreEquivalent(SyntaxNode node1, SyntaxNode node2, Func<SyntaxNode, SyntaxNode, bool> nodeComparator) =>
+        node1.Language == node2.Language && nodeComparator(node1, node2);
+
+    public static bool AreEquivalent(SyntaxList<SyntaxNode> nodeList1, SyntaxList<SyntaxNode> nodeList2, Func<SyntaxNode, SyntaxNode, bool> nodeComparator)
+    {
+        if (nodeList1.Count != nodeList2.Count)
         {
-            if (nodeList1.Count != nodeList2.Count)
+            return false;
+        }
+
+        for (var i = 0; i < nodeList1.Count; i++)
+        {
+            if (!AreEquivalent(nodeList1[i], nodeList2[i], nodeComparator))
             {
                 return false;
             }
-
-            for (var i = 0; i < nodeList1.Count; i++)
-            {
-                if (!AreEquivalent(nodeList1[i], nodeList2[i], nodeComparator))
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
+
+        return true;
     }
 }

@@ -18,14 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Helpers;
+
+[Flags]
+public enum AccessorAccess
 {
-    [Flags]
-    public enum AccessorAccess
-    {
-        None = 0,
-        Get = 1,
-        Set = 2,
-        Both = Get | Set
-    }
+    None = 0,
+    Get = 1,
+    Set = 2,
+    Both = Get | Set
 }
