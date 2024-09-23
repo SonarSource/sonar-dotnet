@@ -683,3 +683,17 @@ class Repro_9203
         { }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9663
+public static class Repro_9663
+{
+    private static void Example(string input, bool y)
+    {
+        _ = (input, y) switch
+        {
+            (var x, true) when x.StartsWith('A') => "A",
+            (var x, _) when x.StartsWith('B') => "B", // Noncompliant
+            _ => "C",
+        };
+    }
+}
