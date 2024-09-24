@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Facade;
+namespace SonarAnalyzer.Core.Facade;
 
-public interface ISyntaxKindFacade<out TSyntaxKind>
-    where TSyntaxKind : struct
+public interface ISyntaxKindFacade<out TSyntaxKind> where TSyntaxKind : struct
 {
     abstract TSyntaxKind Attribute { get; }
     abstract TSyntaxKind[] CastExpressions { get; }

@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Core.Facade;
 using SonarAnalyzer.Core.Trackers;
 using SonarAnalyzer.CSharp.Core.Facade;
 using SonarAnalyzer.CSharp.Core.Trackers;

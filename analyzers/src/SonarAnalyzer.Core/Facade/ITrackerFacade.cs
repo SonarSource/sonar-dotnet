@@ -20,18 +20,16 @@
 
 using SonarAnalyzer.Core.Trackers;
 
-namespace SonarAnalyzer.Helpers.Facade
+namespace SonarAnalyzer.Core.Facade;
+
+public interface ITrackerFacade<TSyntaxKind> where TSyntaxKind : struct
 {
-    public interface ITrackerFacade<TSyntaxKind>
-        where TSyntaxKind : struct
-    {
-        ArgumentTracker<TSyntaxKind> Argument { get; }
-        BaseTypeTracker<TSyntaxKind> BaseType { get; }
-        ElementAccessTracker<TSyntaxKind> ElementAccess { get; }
-        FieldAccessTracker<TSyntaxKind> FieldAccess { get; }
-        InvocationTracker<TSyntaxKind> Invocation { get; }
-        MethodDeclarationTracker<TSyntaxKind> MethodDeclaration { get; }
-        ObjectCreationTracker<TSyntaxKind> ObjectCreation { get; }
-        PropertyAccessTracker<TSyntaxKind> PropertyAccess { get; }
-    }
+    ArgumentTracker<TSyntaxKind> Argument { get; }
+    BaseTypeTracker<TSyntaxKind> BaseType { get; }
+    ElementAccessTracker<TSyntaxKind> ElementAccess { get; }
+    FieldAccessTracker<TSyntaxKind> FieldAccess { get; }
+    InvocationTracker<TSyntaxKind> Invocation { get; }
+    MethodDeclarationTracker<TSyntaxKind> MethodDeclaration { get; }
+    ObjectCreationTracker<TSyntaxKind> ObjectCreation { get; }
+    PropertyAccessTracker<TSyntaxKind> PropertyAccess { get; }
 }

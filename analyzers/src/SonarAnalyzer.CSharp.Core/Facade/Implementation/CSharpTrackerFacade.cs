@@ -20,7 +20,6 @@
 
 using SonarAnalyzer.Core.Trackers;
 using SonarAnalyzer.CSharp.Core.Trackers;
-using SonarAnalyzer.Helpers.Facade;
 
 namespace SonarAnalyzer.CSharp.Core.Facade.Implementation;
 

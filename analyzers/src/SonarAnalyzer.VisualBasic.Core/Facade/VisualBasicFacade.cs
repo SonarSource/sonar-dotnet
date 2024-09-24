@@ -19,7 +19,6 @@
  */
 
 using SonarAnalyzer.Core.Trackers;
-using SonarAnalyzer.Helpers.Facade;
 using SonarAnalyzer.VisualBasic.Core.Facade.Implementation;
 using SonarAnalyzer.VisualBasic.Core.Trackers;
 
@@ -34,6 +33,8 @@ public sealed class VisualBasicFacade : ILanguageFacade<SyntaxKind>
     private static readonly Lazy<ISyntaxKindFacade<SyntaxKind>> SyntaxKindLazy = new(() => new VisualBasicSyntaxKindFacade());
     private static readonly Lazy<ITrackerFacade<SyntaxKind>> TrackerLazy = new(() => new VisualBasicTrackerFacade());
 
+    public static VisualBasicFacade Instance => Singleton.Value;
+
     public AssignmentFinder AssignmentFinder => AssignmentFinderLazy.Value;
     public StringComparison NameComparison => StringComparison.OrdinalIgnoreCase;
     public StringComparer NameComparer => StringComparer.OrdinalIgnoreCase;
@@ -42,8 +43,6 @@ public sealed class VisualBasicFacade : ILanguageFacade<SyntaxKind>
     public SyntaxFacade<SyntaxKind> Syntax => SyntaxLazy.Value;
     public ISyntaxKindFacade<SyntaxKind> SyntaxKind => SyntaxKindLazy.Value;
     public ITrackerFacade<SyntaxKind> Tracker => TrackerLazy.Value;
-
-    public static VisualBasicFacade Instance => Singleton.Value;
 
     private VisualBasicFacade() { }
 
@@ -65,9 +64,9 @@ public sealed class VisualBasicFacade : ILanguageFacade<SyntaxKind>
             _ => new VisualBasicMethodParameterLookup(invocation.ArgumentList(), methodSymbol),
         };
 
-    public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, SemanticModel semanticModel) =>
+    public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, SemanticModel model) =>
         invocation?.ArgumentList() is { } argumentList
-            ? new VisualBasicMethodParameterLookup(argumentList, semanticModel)
+            ? new VisualBasicMethodParameterLookup(argumentList, model)
             : null;
 
     public string GetName(SyntaxNode expression) =>

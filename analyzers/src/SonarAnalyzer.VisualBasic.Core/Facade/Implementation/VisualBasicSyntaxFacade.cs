@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Helpers.Facade;
-
 namespace SonarAnalyzer.VisualBasic.Core.Facade.Implementation;
 
 internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
@@ -73,16 +71,16 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
         };
 
     public override IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum) =>
-        @enum == null ? Enumerable.Empty<SyntaxNode>() : Cast<EnumStatementSyntax>(@enum).Parent.ChildNodes().OfType<EnumMemberDeclarationSyntax>();
+        @enum is null ? Enumerable.Empty<SyntaxNode>() : Cast<EnumStatementSyntax>(@enum).Parent.ChildNodes().OfType<EnumMemberDeclarationSyntax>();
 
     public override ImmutableArray<SyntaxToken> FieldDeclarationIdentifiers(SyntaxNode node) =>
-        Cast<FieldDeclarationSyntax>(node).Declarators.SelectMany(d => d.Names.Select(n => n.Identifier)).ToImmutableArray();
+        Cast<FieldDeclarationSyntax>(node).Declarators.SelectMany(x => x.Names.Select(n => n.Identifier)).ToImmutableArray();
 
     public override bool HasExactlyNArguments(SyntaxNode invocation, int count) =>
         Cast<InvocationExpressionSyntax>(invocation).HasExactlyNArguments(count);
 
     public override SyntaxToken? InvocationIdentifier(SyntaxNode invocation) =>
-        invocation == null ? null : Cast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();
+        invocation is null ? null : Cast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();
 
     public override bool IsAnyKind(SyntaxNode node, ISet<SyntaxKind> syntaxKinds) => node.IsAnyKind(syntaxKinds);
 
@@ -102,8 +100,8 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override bool IsKnownAttributeType(SemanticModel model, SyntaxNode attribute, KnownType knownType) =>
         AttributeSyntaxExtensions.IsKnownType(Cast<AttributeSyntax>(attribute), knownType, model);
 
-    public override bool IsMemberAccessOnKnownType(SyntaxNode memberAccess, string name, KnownType knownType, SemanticModel semanticModel) =>
-        Cast<MemberAccessExpressionSyntax>(memberAccess).IsMemberAccessOnKnownType(name, knownType, semanticModel);
+    public override bool IsMemberAccessOnKnownType(SyntaxNode memberAccess, string name, KnownType knownType, SemanticModel model) =>
+        Cast<MemberAccessExpressionSyntax>(memberAccess).IsMemberAccessOnKnownType(name, knownType, model);
 
     public override bool IsNullLiteral(SyntaxNode node) => node.IsNothingLiteral();
 
@@ -111,8 +109,8 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
         Cast<MethodBlockSyntax>(node).IsShared();
 
     /// <inheritdoc cref="ExpressionSyntaxExtensions.IsWrittenTo(ExpressionSyntax, SemanticModel, CancellationToken)"/>
-    public override bool IsWrittenTo(SyntaxNode expression, SemanticModel semanticModel, CancellationToken cancellationToken) =>
-        Cast<ExpressionSyntax>(expression).IsWrittenTo(semanticModel, cancellationToken);
+    public override bool IsWrittenTo(SyntaxNode expression, SemanticModel model, CancellationToken cancel) =>
+        Cast<ExpressionSyntax>(expression).IsWrittenTo(model, cancel);
 
     public override SyntaxKind Kind(SyntaxNode node) => node.Kind();
 
@@ -120,7 +118,7 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
         Cast<LiteralExpressionSyntax>(literal).Token.ValueText;
 
     public override ImmutableArray<SyntaxToken> LocalDeclarationIdentifiers(SyntaxNode node) =>
-        Cast<LocalDeclarationStatementSyntax>(node).Declarators.SelectMany(d => d.Names.Select(n => n.Identifier)).ToImmutableArray();
+        Cast<LocalDeclarationStatementSyntax>(node).Declarators.SelectMany(x => x.Names.Select(n => n.Identifier)).ToImmutableArray();
 
     public override SyntaxKind[] ModifierKinds(SyntaxNode node) =>
         node is StructureBlockSyntax structureBlock
@@ -144,7 +142,7 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
         node.GetIdentifier();
 
     public override SyntaxToken? ObjectCreationTypeIdentifier(SyntaxNode objectCreation) =>
-        objectCreation == null ? null : Cast<ObjectCreationExpressionSyntax>(objectCreation).GetObjectCreationTypeIdentifier();
+        objectCreation is null ? null : Cast<ObjectCreationExpressionSyntax>(objectCreation).GetObjectCreationTypeIdentifier();
 
     public override SyntaxNode RemoveConditionalAccess(SyntaxNode node)
     {
@@ -159,11 +157,11 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override SyntaxNode RemoveParentheses(SyntaxNode node) =>
         node.RemoveParentheses();
 
-    public override string StringValue(SyntaxNode node, SemanticModel semanticModel) =>
-        node.StringValue(semanticModel);
+    public override string StringValue(SyntaxNode node, SemanticModel model) =>
+        node.StringValue(model);
 
-    public override bool TryGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
-        Cast<InterpolatedStringExpressionSyntax>(node).TryGetInterpolatedTextValue(semanticModel, out interpolatedValue);
+    public override bool TryGetInterpolatedTextValue(SyntaxNode node, SemanticModel model, out string interpolatedValue) =>
+        Cast<InterpolatedStringExpressionSyntax>(node).TryGetInterpolatedTextValue(model, out interpolatedValue);
 
     public override bool TryGetOperands(SyntaxNode invocation, out SyntaxNode left, out SyntaxNode right) =>
         Cast<InvocationExpressionSyntax>(invocation).TryGetOperands(out left, out right);
