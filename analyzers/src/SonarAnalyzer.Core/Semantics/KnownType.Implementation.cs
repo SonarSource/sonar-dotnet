@@ -20,7 +20,7 @@
 
 using System.Text;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Semantics;
 
 [DebuggerDisplay("{DebuggerDisplay}")]
 public sealed partial class KnownType
@@ -43,12 +43,10 @@ public sealed partial class KnownType
             {
                 sb.Append('<').Append(genericParameters.JoinStr(", ")).Append('>');
             }
-
             if (IsArray)
             {
                 sb.Append("[]");
             }
-
             return sb.ToString();
         }
     }
@@ -81,21 +79,20 @@ public sealed partial class KnownType
         }
 
         return symbol.Name == TypeName
-               && NamespaceMatches(symbol)
-               && GenericParametersMatch(symbol);
+            && NamespaceMatches(symbol)
+            && GenericParametersMatch(symbol);
     }
 
     private bool GenericParametersMatch(ISymbol symbol) =>
-            symbol is INamedTypeSymbol namedType
-                ? namedType.TypeParameters.Select(x => x.Name).SequenceEqual(genericParameters)
-                : genericParameters.Length == 0;
+        symbol is INamedTypeSymbol namedType
+            ? namedType.TypeParameters.Select(x => x.Name).SequenceEqual(genericParameters)
+            : genericParameters.Length == 0;
 
     private bool NamespaceMatches(ISymbol symbol)
     {
         var currentNamespace = symbol.ContainingNamespace;
         var index = namespaceParts.Count - 1;
-
-        while (currentNamespace != null && !string.IsNullOrEmpty(currentNamespace.Name) && index >= 0)
+        while (currentNamespace is not null && !string.IsNullOrEmpty(currentNamespace.Name) && index >= 0)
         {
             if (currentNamespace.Name != namespaceParts[index])
             {
@@ -105,7 +102,6 @@ public sealed partial class KnownType
             currentNamespace = currentNamespace.ContainingNamespace;
             index--;
         }
-
         return index == -1 && string.IsNullOrEmpty(currentNamespace?.Name);
     }
 }
