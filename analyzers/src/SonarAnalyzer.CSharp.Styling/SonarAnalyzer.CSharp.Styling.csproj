@@ -32,10 +32,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="Microsoft.CodeAnalysis" />
     <Using Include="Microsoft.CodeAnalysis.CSharp" />
     <Using Include="Microsoft.CodeAnalysis.CSharp.Syntax" />
+    <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
     <Using Include="SonarAnalyzer.AnalysisContext" />
     <Using Include="SonarAnalyzer.Common" />
+    <Using Include="SonarAnalyzer.Core.Semantics" />
     <Using Include="SonarAnalyzer.CSharp.Core.Extensions" />
     <Using Include="SonarAnalyzer.CSharp.Core.Syntax.Extensions" />
     <Using Include="SonarAnalyzer.CSharp.Styling.Common" />
@@ -43,8 +46,6 @@
     <Using Include="SonarAnalyzer.Extensions" />
     <Using Include="SonarAnalyzer.Helpers" />
     <Using Include="StyleCop.Analyzers.Lightup" />
-    <Using Include="Microsoft.CodeAnalysis" />
-    <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
   </ItemGroup>
 
   <Target Name="SignDlls" Condition="'$(SignAssembly)' == 'true'">

@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Semantics;
 
 public sealed partial class KnownType
 {
@@ -27,6 +27,7 @@ public sealed partial class KnownType
 #pragma warning disable SA1311  // Static readonly fields should begin with upper-case letter
 #pragma warning disable SA1307  // Field 'log4net_Config_XmlConfigurator' should begin with upper-case letter
 #pragma warning disable SA1304  // Non-private readonly fields should begin with upper-case letter
+#pragma warning disable T0016   // Empty lines between multiline declarations
 
     public static readonly KnownType Azure_Messaging_ServiceBus_Administration_ServiceBusAdministrationClient = new("Azure.Messaging.ServiceBus.Administration.ServiceBusAdministrationClient");
     public static readonly KnownType Azure_Messaging_ServiceBus_ServiceBusClient = new("Azure.Messaging.ServiceBus.ServiceBusClient");

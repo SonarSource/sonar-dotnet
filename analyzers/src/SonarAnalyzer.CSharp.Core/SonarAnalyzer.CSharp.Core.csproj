@@ -39,6 +39,7 @@
     <Using Include="SonarAnalyzer.AnalysisContext" />
     <Using Include="SonarAnalyzer.Analyzers" />
     <Using Include="SonarAnalyzer.Common" />
+    <Using Include="SonarAnalyzer.Core.Semantics" />
     <Using Include="SonarAnalyzer.CSharp.Core.Common" />
     <Using Include="SonarAnalyzer.CSharp.Core.Extensions" />
     <Using Include="SonarAnalyzer.CSharp.Core.Facade" />
