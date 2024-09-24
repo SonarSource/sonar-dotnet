@@ -19,7 +19,6 @@
  */
 
 using SonarAnalyzer.Core.Trackers;
-using SonarAnalyzer.Helpers.Facade;
 using SonarAnalyzer.VisualBasic.Core.Trackers;
 
 namespace SonarAnalyzer.VisualBasic.Core.Facade.Implementation;

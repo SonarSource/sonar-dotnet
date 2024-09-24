@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers.Facade;
+namespace SonarAnalyzer.Core.Facade;
 
-public abstract class SyntaxFacade<TSyntaxKind>
-    where TSyntaxKind : struct
+public abstract class SyntaxFacade<TSyntaxKind> where TSyntaxKind : struct
 {
     public abstract bool AreEquivalent(SyntaxNode firstNode, SyntaxNode secondNode);
     public abstract IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node);
@@ -48,10 +47,10 @@ public abstract class SyntaxFacade<TSyntaxKind>
     public abstract bool IsKind(SyntaxToken token, TSyntaxKind kind);
     public abstract bool IsKind(SyntaxTrivia trivia, TSyntaxKind kind);
     public abstract bool IsKnownAttributeType(SemanticModel model, SyntaxNode attribute, KnownType knownType);
-    public abstract bool IsMemberAccessOnKnownType(SyntaxNode memberAccess, string name, KnownType knownType, SemanticModel semanticModel);
+    public abstract bool IsMemberAccessOnKnownType(SyntaxNode memberAccess, string name, KnownType knownType, SemanticModel model);
     public abstract bool IsNullLiteral(SyntaxNode node);
     public abstract bool IsStatic(SyntaxNode node);
-    public abstract bool IsWrittenTo(SyntaxNode expression, SemanticModel semanticModel, CancellationToken cancellationToken);
+    public abstract bool IsWrittenTo(SyntaxNode expression, SemanticModel model, CancellationToken cancel);
     public abstract TSyntaxKind Kind(SyntaxNode node);
     public abstract string LiteralText(SyntaxNode literal);
     public abstract ImmutableArray<SyntaxToken> LocalDeclarationIdentifiers(SyntaxNode node);
@@ -61,8 +60,8 @@ public abstract class SyntaxFacade<TSyntaxKind>
     public abstract SyntaxToken? ObjectCreationTypeIdentifier(SyntaxNode objectCreation);
     public abstract SyntaxNode RemoveConditionalAccess(SyntaxNode node);
     public abstract SyntaxNode RemoveParentheses(SyntaxNode node);
-    public abstract string StringValue(SyntaxNode node, SemanticModel semanticModel);
-    public abstract bool TryGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue);
+    public abstract string StringValue(SyntaxNode node, SemanticModel model);
+    public abstract bool TryGetInterpolatedTextValue(SyntaxNode node, SemanticModel model, out string interpolatedValue);
     public abstract bool TryGetOperands(SyntaxNode invocation, out SyntaxNode left, out SyntaxNode right);
 
     protected static T Cast<T>(SyntaxNode node) where T : SyntaxNode =>

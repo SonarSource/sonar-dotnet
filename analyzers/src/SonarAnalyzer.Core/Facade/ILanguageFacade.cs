@@ -19,9 +19,8 @@
  */
 
 using SonarAnalyzer.Core.Trackers;
-using SonarAnalyzer.Helpers.Facade;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Facade;
 
 public interface ILanguageFacade
 {
@@ -34,12 +33,11 @@ public interface ILanguageFacade
     DiagnosticDescriptor CreateDescriptor(string id, string messageFormat, bool? isEnabledByDefault = null, bool fadeOutCode = false);
     object FindConstantValue(SemanticModel model, SyntaxNode node);
     IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol);
-    IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, SemanticModel semanticModel);
+    IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, SemanticModel model);
     string GetName(SyntaxNode expression);
 }
 
-public interface ILanguageFacade<TSyntaxKind> : ILanguageFacade
-    where TSyntaxKind : struct
+public interface ILanguageFacade<TSyntaxKind> : ILanguageFacade where TSyntaxKind : struct
 {
     SyntaxFacade<TSyntaxKind> Syntax { get; }
     ISyntaxKindFacade<TSyntaxKind> SyntaxKind { get; }
