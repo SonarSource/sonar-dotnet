@@ -19,8 +19,10 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -31,6 +33,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -218,11 +221,18 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
 
   private void populateExecutionFlow(Collection<Location> locations, NewIssue newIssue, boolean isLocationResilient) {
     List<NewIssueLocation> newIssueLocations = locations.stream()
-      .map(x -> context.fileSystem().inputFile(context.fileSystem().predicates().hasAbsolutePath(x.getAbsolutePath())))
+      .map(x -> {
+        InputFile file = context.fileSystem().inputFile(context.fileSystem().predicates().hasAbsolutePath(x.getAbsolutePath()));
+        if (file != null) {
+          return createIssueLocation(file, x, newIssue::newLocation, isLocationResilient);
+        } else {
+          return null;
+        }
+      })
       .filter(Objects::nonNull)
-      .map(x -> createIssueLocation(x, locations.iterator().next(), newIssue::newLocation, isLocationResilient))
-      .toList();
+      .collect(Collectors.toCollection(ArrayList::new));
     if (!newIssueLocations.isEmpty()) {
+      Collections.reverse(newIssueLocations);
       newIssue.addFlow(newIssueLocations, NewIssue.FlowType.EXECUTION, "Execution Flow");
     }
   }
