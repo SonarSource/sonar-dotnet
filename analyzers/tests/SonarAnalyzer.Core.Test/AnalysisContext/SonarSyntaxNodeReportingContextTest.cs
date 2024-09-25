@@ -21,7 +21,6 @@
 using Microsoft.CodeAnalysis.CSharp;
 using NSubstitute;
 using SonarAnalyzer.AnalysisContext;
-using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Test.AnalysisContext;
@@ -127,6 +126,6 @@ public class SonarSyntaxNodeReportingContextTest
         }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, c => c.ReportIssue(Rule, c.Node, message(c)), syntaxKinds);
+            context.RegisterNodeAction(TestGeneratedCodeRecognizer.Instance, c => c.ReportIssue(Rule, c.Node, message(c)), syntaxKinds);
     }
 }
