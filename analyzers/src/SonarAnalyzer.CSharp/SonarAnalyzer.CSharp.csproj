@@ -6,7 +6,6 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <!-- Avoid CS0436. see also https://github.com/dotnet/roslyn-analyzers/blob/main/src/PerformanceSensitiveAnalyzers/PerformanceSensitiveAnalyzers.md -->
     <GeneratePerformanceSensitiveAttribute>false</GeneratePerformanceSensitiveAttribute>
-    <PackageTags>Roslyn;Analyzer;Analyzers;Refactoring;CodeAnalysis;CleanCode;Clean Code;Sonar;SonarAnalyzer;Sonar Anlyzer;Dotnet;CSharp;CodeQuality;CodeReview;StaticCodeAnalysis;SonarQube;SonarCloud;SonarLint</PackageTags>
   </PropertyGroup>
 
   <!-- Warning: when adding a package reference, we must make sure this package is available on oldest supported .NET version (currently netstandard2.0) or packaged with the analyzer.
