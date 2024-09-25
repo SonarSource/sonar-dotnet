@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.Extensions;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Test.Extensions;
 

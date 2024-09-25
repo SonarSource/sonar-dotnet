@@ -20,10 +20,6 @@
 
 #pragma warning disable SA1122 // Use string.Empty for empty strings
 
-using System.Globalization;
-using System.Threading;
-using SonarAnalyzer.Test.Helpers;
-
 namespace SonarAnalyzer.Test.Extensions
 {
     [TestClass]

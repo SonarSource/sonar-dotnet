@@ -19,8 +19,6 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Extensions;
-using SonarAnalyzer.Test.Helpers;
 
 namespace SonarAnalyzer.Test.Extensions;
 

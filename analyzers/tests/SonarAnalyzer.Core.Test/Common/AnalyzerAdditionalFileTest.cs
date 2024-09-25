@@ -23,10 +23,13 @@ namespace SonarAnalyzer.Test.Common
     [TestClass]
     public class AnalyzerAdditionalFileTest
     {
+        public TestContext TestContext { get; set; }
+
         [TestMethod]
         public void AnalyzerAdditionalFile_GetText()
         {
-            var additionalFile = new AnalyzerAdditionalFile(@"TestResources\AdditionalFile.txt");
+            var path = TestHelper.WriteFile(TestContext, "AdditionalFile.txt", "some sample content");
+            var additionalFile = new AnalyzerAdditionalFile(path);
             var content = additionalFile.GetText();
             content.ToString().Should().Be("some sample content");
         }

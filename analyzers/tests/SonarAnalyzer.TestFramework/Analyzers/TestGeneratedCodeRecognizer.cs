@@ -23,7 +23,7 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.TestFramework.Analyzers;
 
-internal sealed class TestGeneratedCodeRecognizer : GeneratedCodeRecognizer
+public sealed class TestGeneratedCodeRecognizer : GeneratedCodeRecognizer
 {
     public static TestGeneratedCodeRecognizer Instance { get; } = new();
 
