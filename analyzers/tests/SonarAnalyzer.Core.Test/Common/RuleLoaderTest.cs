@@ -20,22 +20,22 @@
 
 using System.Xml;
 
-namespace SonarAnalyzer.Test.Common
-{
-    [TestClass]
-    public class RuleLoaderTest
-    {
-        [TestMethod]
-        public void GivenNonXmlFile_RuleLoader_Throws()
-        {
-            var sut = new RuleLoader();
-            sut.Invoking(x => x.GetEnabledRules("not xml")).Should().Throw<XmlException>();
-        }
+namespace SonarAnalyzer.Test.Common;
 
-        [TestMethod]
-        public void GivenSonarLintXml_RuleLoader_LoadsActiveRules()
-        {
-            const string content = @"<?xml version=""1.0"" encoding=""UTF-8""?>
+[TestClass]
+public class RuleLoaderTest
+{
+    [TestMethod]
+    public void GivenNonXmlFile_RuleLoader_Throws()
+    {
+        var sut = new RuleLoader();
+        sut.Invoking(x => x.GetEnabledRules("not xml")).Should().Throw<XmlException>();
+    }
+
+    [TestMethod]
+    public void GivenSonarLintXml_RuleLoader_LoadsActiveRules()
+    {
+        const string content = @"<?xml version=""1.0"" encoding=""UTF-8""?>
 <AnalysisInput>
   <Rules>
     <Rule>
@@ -46,8 +46,7 @@ namespace SonarAnalyzer.Test.Common
   </Rules>
 </AnalysisInput>";
 
-            CollectionAssert.AreEqual(new RuleLoader().GetEnabledRules(content).ToArray(),
-                new[] {"S1067"});
-        }
+        CollectionAssert.AreEqual(new RuleLoader().GetEnabledRules(content).ToArray(),
+            new[] {"S1067"});
     }
 }

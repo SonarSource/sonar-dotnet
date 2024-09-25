@@ -18,21 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Test.Common
+namespace SonarAnalyzer.Test.Common;
+
+[TestClass]
+public class UnexpectedLanguageExceptionTest
 {
-    [TestClass]
-    public class UnexpectedLanguageExceptionTest
-    {
-        [TestMethod]
-        public void Message_String_Ctor() =>
-            new UnexpectedLanguageException("F#").Message.Should().Be("Unexpected language: F#");
+    [TestMethod]
+    public void Message_String_Ctor() =>
+        new UnexpectedLanguageException("F#").Message.Should().Be("Unexpected language: F#");
 
-        [TestMethod]
-        public void Message_CS() =>
-            new UnexpectedLanguageException(AnalyzerLanguage.CSharp).Message.Should().Be("Unexpected language: C#");
+    [TestMethod]
+    public void Message_CS() =>
+        new UnexpectedLanguageException(AnalyzerLanguage.CSharp).Message.Should().Be("Unexpected language: C#");
 
-        [TestMethod]
-        public void Message_VB() =>
-            new UnexpectedLanguageException(AnalyzerLanguage.VisualBasic).Message.Should().Be("Unexpected language: Visual Basic");
-    }
+    [TestMethod]
+    public void Message_VB() =>
+        new UnexpectedLanguageException(AnalyzerLanguage.VisualBasic).Message.Should().Be("Unexpected language: Visual Basic");
 }

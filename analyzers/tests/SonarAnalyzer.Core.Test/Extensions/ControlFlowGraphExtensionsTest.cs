@@ -22,39 +22,38 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
 
-namespace SonarAnalyzer.Test.Extensions
+namespace SonarAnalyzer.Test.Extensions;
+
+[TestClass]
+public class ControlFlowGraphExtensionsTest
 {
-    [TestClass]
-    public class ControlFlowGraphExtensionsTest
+    [TestMethod]
+    public void FindLocalFunctionCfgInScope_ThrowForUnexpectedSymbol()
     {
-        [TestMethod]
-        public void FindLocalFunctionCfgInScope_ThrowForUnexpectedSymbol()
-        {
-            const string code = @"
+        const string code = @"
 public class Sample
 {
     public void Method() { }
 }";
-            var (tree, semanticModel) = TestHelper.CompileCS(code);
-            var method = tree.Single<MethodDeclarationSyntax>();
-            var symbol = semanticModel.GetDeclaredSymbol(method) as IMethodSymbol;
-            var cfg = ControlFlowGraph.Create(method, semanticModel, default);
+        var (tree, semanticModel) = TestHelper.CompileCS(code);
+        var method = tree.Single<MethodDeclarationSyntax>();
+        var symbol = semanticModel.GetDeclaredSymbol(method) as IMethodSymbol;
+        var cfg = ControlFlowGraph.Create(method, semanticModel, default);
 
-            Action a = () => cfg.FindLocalFunctionCfgInScope(symbol, default);
-            a.Should().Throw<ArgumentOutOfRangeException>().WithMessage("Specified argument was out of the range of valid values.*Parameter*localFunction*");
-        }
+        Action a = () => cfg.FindLocalFunctionCfgInScope(symbol, default);
+        a.Should().Throw<ArgumentOutOfRangeException>().WithMessage("Specified argument was out of the range of valid values.*Parameter*localFunction*");
+    }
 
-        [TestMethod]
-        public void FindLocalFunctionCfgInScope_ThrowForNullSymbol()
-        {
-            const string code = @"
+    [TestMethod]
+    public void FindLocalFunctionCfgInScope_ThrowForNullSymbol()
+    {
+        const string code = @"
 public class Sample
 {
     public void Method() { }
 }";
-            var cfg = TestHelper.CompileCfgCS(code);
-            Action a = () => cfg.FindLocalFunctionCfgInScope(null, default);
-            a.Should().Throw<ArgumentOutOfRangeException>().WithMessage("Specified argument was out of the range of valid values.*Parameter*localFunction*");
-        }
+        var cfg = TestHelper.CompileCfgCS(code);
+        Action a = () => cfg.FindLocalFunctionCfgInScope(null, default);
+        a.Should().Throw<ArgumentOutOfRangeException>().WithMessage("Specified argument was out of the range of valid values.*Parameter*localFunction*");
     }
 }

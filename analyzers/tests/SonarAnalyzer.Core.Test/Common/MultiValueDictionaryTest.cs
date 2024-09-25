@@ -18,44 +18,43 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Test.Common
+namespace SonarAnalyzer.Test.Common;
+
+[TestClass]
+public class MultiValueDictionaryTest
 {
-    [TestClass]
-    public class MultiValueDictionaryTest
+    [TestMethod]
+    public void MultiValueDictionary_Add()
     {
-        [TestMethod]
-        public void MultiValueDictionary_Add()
+        var mvd = new MultiValueDictionary<int, int>
         {
-            var mvd = new MultiValueDictionary<int, int>
-            {
-                { 5, 42 },
-                { 5, 42 },
-                { 42, 42 }
-            };
+            { 5, 42 },
+            { 5, 42 },
+            { 42, 42 }
+        };
 
-            mvd.Keys.Should().HaveCount(2);
-            mvd[5].Should().HaveCount(2);
-        }
+        mvd.Keys.Should().HaveCount(2);
+        mvd[5].Should().HaveCount(2);
+    }
 
-        [TestMethod]
-        public void MultiValueDictionary_Add_Set()
-        {
-            var mvd = MultiValueDictionary<int, int>.Create<HashSet<int>>();
-            mvd.Add(5, 42);
-            mvd.Add(5, 42);
-            mvd.Add(42, 42);
+    [TestMethod]
+    public void MultiValueDictionary_Add_Set()
+    {
+        var mvd = MultiValueDictionary<int, int>.Create<HashSet<int>>();
+        mvd.Add(5, 42);
+        mvd.Add(5, 42);
+        mvd.Add(42, 42);
 
-            mvd.Keys.Should().HaveCount(2);
-            mvd[5].Should().ContainSingle();
-        }
+        mvd.Keys.Should().HaveCount(2);
+        mvd[5].Should().ContainSingle();
+    }
 
-        [TestMethod]
-        public void MultiValueDictionary_AddRange()
-        {
-            var mvd = new MultiValueDictionary<int, int>();
-            mvd.AddRangeWithKey(5, new[] { 42, 42 });
+    [TestMethod]
+    public void MultiValueDictionary_AddRange()
+    {
+        var mvd = new MultiValueDictionary<int, int>();
+        mvd.AddRangeWithKey(5, new[] { 42, 42 });
 
-            mvd[5].Should().HaveCount(2);
-        }
+        mvd[5].Should().HaveCount(2);
     }
 }
