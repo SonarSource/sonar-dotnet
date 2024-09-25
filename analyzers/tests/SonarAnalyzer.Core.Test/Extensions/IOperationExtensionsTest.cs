@@ -20,13 +20,12 @@
 
 using SonarAnalyzer.Extensions;
 
-namespace SonarAnalyzer.Test.Extensions
+namespace SonarAnalyzer.Test.Extensions;
+
+[TestClass]
+public class IOperationExtensionsTest
 {
-    [TestClass]
-    public class IOperationExtensionsTest
-    {
-        [TestMethod]
-        public void Null_ReturnsNull() =>
-            IOperationExtensions.DescendantsAndSelf(null).Should().BeEmpty();
-    }
+    [TestMethod]
+    public void Null_ReturnsNull() =>
+        IOperationExtensions.DescendantsAndSelf(null).Should().BeEmpty();
 }

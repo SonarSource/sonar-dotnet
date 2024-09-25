@@ -18,20 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Test.Common
-{
-    [TestClass]
-    public class AnalyzerAdditionalFileTest
-    {
-        public TestContext TestContext { get; set; }
+namespace SonarAnalyzer.Test.Common;
 
-        [TestMethod]
-        public void AnalyzerAdditionalFile_GetText()
-        {
-            var path = TestHelper.WriteFile(TestContext, "AdditionalFile.txt", "some sample content");
-            var additionalFile = new AnalyzerAdditionalFile(path);
-            var content = additionalFile.GetText();
-            content.ToString().Should().Be("some sample content");
-        }
+[TestClass]
+public class AnalyzerAdditionalFileTest
+{
+    public TestContext TestContext { get; set; }
+
+    [TestMethod]
+    public void AnalyzerAdditionalFile_GetText()
+    {
+        var path = TestHelper.WriteFile(TestContext, "AdditionalFile.txt", "some sample content");
+        var additionalFile = new AnalyzerAdditionalFile(path);
+        var content = additionalFile.GetText();
+        content.ToString().Should().Be("some sample content");
     }
 }
