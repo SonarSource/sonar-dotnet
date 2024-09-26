@@ -7,22 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <AssemblyVersion Include="$(SolutionRoot)\src\AssemblyInfo.Shared.cs">
-      <Find>(?&lt;=\[assembly\: AssemblyVersion\(")([^"]*)</Find>
-      <ReplaceWith>$(AssemblyVersion)</ReplaceWith>
-      <ExpectedMatchCount>1</ExpectedMatchCount>
-    </AssemblyVersion>
-    <AssemblyFileVersion Include="$(SolutionRoot)\src\AssemblyInfo.Shared.cs">
-      <Find>(?&lt;=\[assembly\: AssemblyFileVersion\(")([^"]*)</Find>
-      <ReplaceWith>$(AssemblyFileVersion)</ReplaceWith>
-      <ExpectedMatchCount>1</ExpectedMatchCount>
-    </AssemblyFileVersion>
-    <AssemblyInformationalVersion Include="$(SolutionRoot)\src\AssemblyInfo.Shared.cs">
-      <Find>(?&lt;=\[assembly\: AssemblyInformationalVersion\(")([^"]*)</Find>
-      <ReplaceWith>$(AssemblyInformationalVersion)</ReplaceWith>
-      <ExpectedMatchCount>1</ExpectedMatchCount>
-    </AssemblyInformationalVersion>
-
     <NugetAnalyzer Include="$(SolutionRoot)\packaging\SonarAnalyzer.*.nuspec">
       <Find>(?&lt;=&lt;version&gt;)([^&lt;]*)</Find>
       <ReplaceWith>$(NugetVersion)</ReplaceWith>
@@ -37,9 +21,6 @@
   </ItemGroup>
 
   <Target Name="UpdateAssemblyVersion">
-    <RegexTransform Items="@(AssemblyVersion)" />
-    <RegexTransform Items="@(AssemblyFileVersion)" />
-    <RegexTransform Items="@(AssemblyInformationalVersion)" />
     <RegexTransform Items="@(NugetAnalyzer)" />
     <RegexTransform Items="@(NugetReleaseNotes)" />
   </Target>
