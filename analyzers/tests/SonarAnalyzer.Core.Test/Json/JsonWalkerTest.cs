@@ -20,7 +20,7 @@
 
 using SonarAnalyzer.Json;
 
-namespace SonarAnalyzer.Test.Common;
+namespace SonarAnalyzer.Core.Test.Json;
 
 [TestClass]
 public class JsonWalkerTest

@@ -22,6 +22,7 @@
     <Using Include="Microsoft.CodeAnalysis" />
     <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+    <Using Include="NSubstitute" />
     <Using Include="SonarAnalyzer.Analyzers" />
     <Using Include="SonarAnalyzer.Common" />
     <Using Include="SonarAnalyzer.Core.Semantics" />

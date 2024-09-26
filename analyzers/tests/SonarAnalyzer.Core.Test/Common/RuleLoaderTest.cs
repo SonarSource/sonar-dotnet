@@ -20,7 +20,7 @@
 
 using System.Xml;
 
-namespace SonarAnalyzer.Test.Common;
+namespace SonarAnalyzer.Core.Test.Common;
 
 [TestClass]
 public class RuleLoaderTest
@@ -35,18 +35,19 @@ public class RuleLoaderTest
     [TestMethod]
     public void GivenSonarLintXml_RuleLoader_LoadsActiveRules()
     {
-        const string content = @"<?xml version=""1.0"" encoding=""UTF-8""?>
-<AnalysisInput>
-  <Rules>
-    <Rule>
-      <Key>S1067</Key>
-    </Rule>
-    <Rule>
-    </Rule>
-  </Rules>
-</AnalysisInput>";
+        const string content = """
+            <?xml version="1.0" encoding="UTF-8"?>
+            <AnalysisInput>
+              <Rules>
+                <Rule>
+                  <Key>S1067</Key>
+                </Rule>
+                <Rule>
+                </Rule>
+              </Rules>
+            </AnalysisInput>
+            """;
 
-        CollectionAssert.AreEqual(new RuleLoader().GetEnabledRules(content).ToArray(),
-            new[] {"S1067"});
+        CollectionAssert.AreEqual(new RuleLoader().GetEnabledRules(content).ToArray(), new[] {"S1067"});
     }
 }

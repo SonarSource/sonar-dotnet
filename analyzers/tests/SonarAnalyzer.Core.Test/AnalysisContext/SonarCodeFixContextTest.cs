@@ -23,7 +23,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.AnalysisContext;
 
-namespace SonarAnalyzer.Test.AnalysisContext;
+namespace SonarAnalyzer.Core.Test.AnalysisContext;
 
 [TestClass]
 public class SonarCodeFixContextTest
@@ -31,16 +31,14 @@ public class SonarCodeFixContextTest
     [TestMethod]
     public async Task SonarCodeFixContext_Properties_ReturnRoslynCodeFixContextProperties()
     {
-        // Arrange
         var document = CreateProject().FindDocument("MyFile.cs");
-        var syntaxTree = await document.GetSyntaxTreeAsync();
-        var literal = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<LiteralExpressionSyntax>().Single();
-        var cancellationToken = new CancellationToken(true);
+        var tree = await document.GetSyntaxTreeAsync();
+        var literal = tree.GetRoot().DescendantNodesAndSelf().OfType<LiteralExpressionSyntax>().Single();
+        var cancel = new CancellationToken(true);
         var diagnostic = Diagnostic.Create(new DiagnosticDescriptor("1", "title", "format", "category", DiagnosticSeverity.Hidden, false), literal.GetLocation());
-        var sonarCodefix = new SonarCodeFixContext(new CodeFixContext(document, diagnostic, (_, _) => { }, cancellationToken));
+        var sonarCodefix = new SonarCodeFixContext(new CodeFixContext(document, diagnostic, (_, _) => { }, cancel));
 
-        // Act & Assert
-        sonarCodefix.CancellationToken.Should().Be(cancellationToken);
+        sonarCodefix.CancellationToken.Should().Be(cancel);
         sonarCodefix.Document.Should().Be(document);
         sonarCodefix.Diagnostics.Should().Contain(diagnostic);
         sonarCodefix.Span.Should().Be(new TextSpan(18, 13));
@@ -49,32 +47,24 @@ public class SonarCodeFixContextTest
     [TestMethod]
     public void SonarCodeFixContext_RegisterDocumentCodeFix_CodeFixRegistered()
     {
-        // Arrange
         var isActionRegistered = false;
         var document = CreateProject().FindDocument("MyFile.cs");
         var diagnostic = Diagnostic.Create(new DiagnosticDescriptor("1", "title", "format", "category", DiagnosticSeverity.Hidden, false), Location.None);
         var sonarCodefix = new SonarCodeFixContext(new CodeFixContext(document, diagnostic, (_, _) => isActionRegistered = true, CancellationToken.None));
+        sonarCodefix.RegisterCodeFix("Title", _ => Task.FromResult(document), [diagnostic]);
 
-        // Act
-        sonarCodefix.RegisterCodeFix("Title", _ => Task.FromResult(document), ImmutableArray.Create(diagnostic));
-
-        // Assert
         isActionRegistered.Should().BeTrue();
     }
 
     [TestMethod]
     public void SonarCodeFixContext_RegisterSolutionCodeFix_CodeFixRegistered()
     {
-        // Arrange
         var isActionRegistered = false;
         var document = CreateProject().FindDocument("MyFile.cs");
         var diagnostic = Diagnostic.Create(new DiagnosticDescriptor("1", "title", "format", "category", DiagnosticSeverity.Hidden, false), Location.None);
         var sonarCodefix = new SonarCodeFixContext(new CodeFixContext(document, diagnostic, (_, _) => isActionRegistered = true, CancellationToken.None));
+        sonarCodefix.RegisterCodeFix("Title", _ => Task.FromResult(new AdhocWorkspace().CurrentSolution), [diagnostic]);
 
-        // Act
-        sonarCodefix.RegisterCodeFix("Title", _ => Task.FromResult(new AdhocWorkspace().CurrentSolution), ImmutableArray.Create(diagnostic));
-
-        // Assert
         isActionRegistered.Should().BeTrue();
     }
 

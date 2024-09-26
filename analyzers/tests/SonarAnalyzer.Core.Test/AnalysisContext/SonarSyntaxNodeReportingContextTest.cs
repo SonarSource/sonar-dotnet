@@ -19,11 +19,10 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp;
-using NSubstitute;
 using SonarAnalyzer.AnalysisContext;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.Test.AnalysisContext;
+namespace SonarAnalyzer.Core.Test.AnalysisContext;
 
 [TestClass]
 public class SonarSyntaxNodeReportingContextTest
@@ -92,7 +91,6 @@ public class SonarSyntaxNodeReportingContextTest
 #endif
     public void IsRedundantPrimaryConstructorBaseTypeContext_ReturnsTrueForTypeDeclaration(string type)
     {
-        var compilerVersion = typeof(DiagnosticAnalyzer).Assembly.GetName().Version;
         // For Roslyn < 4.9.2, the node action is called either twice with different ContainingSymbol.
         var snippet = $$$"""
             public {{{type}}} Base(int i);
@@ -101,7 +99,7 @@ public class SonarSyntaxNodeReportingContextTest
             //  ^^^^^^^    {{IsRedundantPrimaryConstructorBaseTypeContext is False, ContainingSymbol is Method Derived.Derived(int)}}
             """;
         new VerifierBuilder()
-            .AddAnalyzer(() => new TestAnalyzer(new[] { SyntaxKindEx.PrimaryConstructorBaseType }, c =>
+            .AddAnalyzer(() => new TestAnalyzer([SyntaxKindEx.PrimaryConstructorBaseType], c =>
                 $"IsRedundantPrimaryConstructorBaseTypeContext is {c.IsRedundantPrimaryConstructorBaseTypeContext()}, ContainingSymbol is {c.ContainingSymbol.Kind} {c.ContainingSymbol.ToDisplayString()}"))
             .WithOptions(ParseOptionsHelper.FromCSharp12)
             .AddSnippet(snippet)
@@ -117,7 +115,7 @@ public class SonarSyntaxNodeReportingContextTest
         public DiagnosticDescriptor Rule { get; } = DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp,
             new RuleDescriptor("Test", "Test", "BUG", "BLOCKER", "READY", SourceScope.All, true, "Test"), "{0}", true, false);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
         public TestAnalyzer(SyntaxKind[] syntaxKinds, Func<SonarSyntaxNodeReportingContext, string> message)
         {

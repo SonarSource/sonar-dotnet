@@ -18,11 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Extensions;
 using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Core.Test.Semantics;
 
 [TestClass]
 public class KnownTypeTest
@@ -81,9 +80,10 @@ public class KnownTypeTest
 
     private static ITypeSymbol GetSymbol_CS(string type)
     {
-        var (tree, model) = TestHelper.CompileCS($@"
-namespace Exceptions {{ public class Exception {{ }} }}
-public class Test<T, T1, T2, T3> {{ public {type} Value; }}");
+        var (tree, model) = TestHelper.CompileCS($$"""
+            namespace Exceptions { public class Exception { } }
+            public class Test<T, T1, T2, T3> { public {{type}} Value; }
+            """);
         var expression = tree.Single<CS.VariableDeclaratorSyntax>();
         return model.GetDeclaredSymbol(expression).GetSymbolType();
     }

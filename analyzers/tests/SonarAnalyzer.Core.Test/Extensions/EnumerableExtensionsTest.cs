@@ -20,7 +20,7 @@
 
 #pragma warning disable SA1122 // Use string.Empty for empty strings
 
-namespace SonarAnalyzer.Test.Extensions;
+namespace SonarAnalyzer.Core.Test.Extensions;
 
 [TestClass]
 public class EnumerableExtensionsTest
