@@ -10,6 +10,7 @@
     <repository type="git" url="https://github.com/SonarSource/sonar-dotnet" />
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>SonarSource CFG library</description>
+    <releaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/9.33.0.0</releaseNotes>
     <language>en-US</language>
     <copyright>Copyright © 2015-2024 SonarSource SA</copyright>
     <frameworkAssemblies>
@@ -17,7 +18,6 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="bin\Release\netstandard2.0\SonarAnalyzer.CFG.dll" target="lib\netstandard2.0" />
-    <file src="bin\Release\netstandard2.0\SonarAnalyzer.ShimLayer.dll" target="lib\netstandard2.0" />
+    <file src="binaries\SonarAnalyzer.CFG\*.dll" target="lib\netstandard2.0" />
   </files>
 </package>
