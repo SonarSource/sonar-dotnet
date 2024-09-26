@@ -36,4 +36,12 @@
     <Exec WorkingDirectory="$(OutDir)" Command="signtool sign /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 /csp &quot;DigiCert Signing Manager KSP&quot; /kc &quot;$(SM_KP)&quot; /f &quot;$(SM_CLIENT_CRT_FILE)&quot; SonarAnalyzer.CFG.dll" />
   </Target>
 
+  <Target Name="CopyBinaries" AfterTargets="Build" DependsOnTargets="SignDlls">
+    <ItemGroup>
+      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CFG.dll" />
+      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.ShimLayer.dll" />
+    </ItemGroup>
+    <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)" />
+  </Target>
+
 </Project>
