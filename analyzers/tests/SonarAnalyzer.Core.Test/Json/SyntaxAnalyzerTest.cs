@@ -22,7 +22,7 @@ using System.Linq.Expressions;
 using SonarAnalyzer.Json;
 using SonarAnalyzer.Json.Parsing;
 
-namespace SonarAnalyzer.Test.Common;
+namespace SonarAnalyzer.Core.Test.Json;
 
 [TestClass]
 public class SyntaxAnalyzerTest

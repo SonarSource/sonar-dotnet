@@ -22,7 +22,7 @@ using Microsoft.CodeAnalysis.Text;
 using NSubstitute;
 using static SonarAnalyzer.Common.AnalyzerConfiguration;
 
-namespace SonarAnalyzer.Test.Common;
+namespace SonarAnalyzer.Core.Test.Common;
 
 [TestClass]
 public class AnalyzerConfigurationTest

@@ -20,7 +20,7 @@
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.Test.Extensions;
+namespace SonarAnalyzer.Core.Test.Extensions;
 
 [TestClass]
 public class ITypeSymbolExtensionsTest
@@ -81,7 +81,7 @@ public class ITypeSymbolExtensionsTest
         derived2Type.DerivesOrImplements(interfaceType).Should().BeTrue();
         derived1Type.DerivesOrImplements(interfaceType).Should().BeFalse();
 
-        var baseTypes = ImmutableArray.Create(new[] { interfaceType, baseType });
+        var baseTypes = ImmutableArray.Create(interfaceType, baseType);
         derived1Type.DerivesOrImplementsAny(baseTypes).Should().BeTrue();
     }
 
@@ -89,7 +89,7 @@ public class ITypeSymbolExtensionsTest
     public void Type_Is()
     {
         var baseKnownType = new KnownType("NS.Base");
-        var baseKnownTypes = ImmutableArray.Create(new[] { baseKnownType });
+        var baseKnownTypes = ImmutableArray.Create(baseKnownType);
 
         var baseType = model.GetDeclaredSymbol(baseClassDeclaration) as INamedTypeSymbol;
 

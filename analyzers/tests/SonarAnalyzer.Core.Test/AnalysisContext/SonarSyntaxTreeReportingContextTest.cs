@@ -18,11 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Threading.Channels;
-using NSubstitute;
 using SonarAnalyzer.AnalysisContext;
 
-namespace SonarAnalyzer.Test.AnalysisContext;
+namespace SonarAnalyzer.Core.Test.AnalysisContext;
 
 [TestClass]
 public class SonarSyntaxTreeReportingContextTest

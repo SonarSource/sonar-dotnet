@@ -22,7 +22,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.AnalysisContext;
 
-namespace SonarAnalyzer.Test.AnalysisContext;
+namespace SonarAnalyzer.Core.Test.AnalysisContext;
 
 [TestClass]
 public class SonarSymbolReportingContextTest

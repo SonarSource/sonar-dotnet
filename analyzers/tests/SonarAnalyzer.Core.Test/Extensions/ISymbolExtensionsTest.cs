@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using NSubstitute;
 using ISymbolExtensionsCommon = SonarAnalyzer.Extensions.ISymbolExtensions;
 
-namespace SonarAnalyzer.Test.Extensions;
+namespace SonarAnalyzer.Core.Test.Extensions;
 
 [TestClass]
 public class ISymbolExtensionsTest
@@ -236,7 +235,7 @@ public class ISymbolExtensionsTest
 
     [TestMethod]
     public void AnyAttributeDerivesFromAny_WhenSymbolIsNull_ReturnsFalse() =>
-        ISymbolExtensionsCommon.AnyAttributeDerivesFromAny(null, ImmutableArray.Create(KnownType.Void)).Should().BeFalse();
+        ISymbolExtensionsCommon.AnyAttributeDerivesFromAny(null, [KnownType.Void]).Should().BeFalse();
 
     [TestMethod]
     public void GetAttributesForKnownType_WhenSymbolIsNull_ReturnsEmpty() =>
@@ -244,7 +243,7 @@ public class ISymbolExtensionsTest
 
     [TestMethod]
     public void GetAttributesForKnownTypes_WhenSymbolIsNull_ReturnsEmpty() =>
-        ISymbolExtensionsCommon.GetAttributes(null, ImmutableArray.Create(KnownType.Void)).Should().BeEmpty();
+        ISymbolExtensionsCommon.GetAttributes(null, [KnownType.Void]).Should().BeEmpty();
 
     [TestMethod]
     public void GetParameters_WhenSymbolIsNotMethodOrProperty_ReturnsEmpty()

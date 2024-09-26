@@ -20,9 +20,8 @@
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CFG.Roslyn;
-using SonarAnalyzer.Extensions;
 
-namespace SonarAnalyzer.Test.Extensions;
+namespace SonarAnalyzer.Core.Test.Extensions;
 
 [TestClass]
 public class ControlFlowGraphExtensionsTest

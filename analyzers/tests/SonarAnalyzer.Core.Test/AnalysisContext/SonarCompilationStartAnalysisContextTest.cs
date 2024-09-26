@@ -21,7 +21,7 @@
 using NSubstitute;
 using SonarAnalyzer.AnalysisContext;
 
-namespace SonarAnalyzer.Test.AnalysisContext;
+namespace SonarAnalyzer.Core.Test.AnalysisContext;
 
 [TestClass]
 public class SonarCompilationStartAnalysisContextTest

@@ -22,7 +22,7 @@ using System.Globalization;
 using SonarAnalyzer.Json;
 using SonarAnalyzer.Json.Parsing;
 
-namespace SonarAnalyzer.Test.Common;
+namespace SonarAnalyzer.Core.Test.Json;
 
 [TestClass]
 public class LexicalAnalyzerTest
@@ -131,7 +131,7 @@ public class LexicalAnalyzerTest
     [DataRow("-42e+1", -420.0)]
     [DataRow("4.2e1", 42.0)]
     [DataRow("44.22e2", 4422.0)]
-    public void ReadNumber_Double_ParseToDoudle(string source, double expected)
+    public void ReadNumber_Double_ParseToDouble(string source, double expected)
     {
         var sut = new LexicalAnalyzer(source);
         sut.NextSymbol().Should().Be(Symbol.Value);

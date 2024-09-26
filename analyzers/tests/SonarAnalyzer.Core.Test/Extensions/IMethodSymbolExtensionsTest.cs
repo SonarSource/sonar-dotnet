@@ -19,10 +19,8 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using NSubstitute;
-using SonarAnalyzer.Extensions;
 
-namespace SonarAnalyzer.Test.Extensions;
+namespace SonarAnalyzer.Core.Test.Extensions;
 
 [TestClass]
 public class IMethodSymbolExtensionsTest
@@ -53,7 +51,7 @@ public class IMethodSymbolExtensionsTest
         }
         """;
 
-    private SemanticModel semanticModel;
+    private SemanticModel model;
     private List<StatementSyntax> statements;
 
     [TestInitialize]
@@ -62,7 +60,7 @@ public class IMethodSymbolExtensionsTest
         var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(TestInput).GetCompilation();
 
         var tree = compilation.SyntaxTrees.First();
-        semanticModel = compilation.GetSemanticModel(tree);
+        model = compilation.GetSemanticModel(tree);
         statements = tree.GetRoot().DescendantNodes()
             .OfType<MethodDeclarationSyntax>()
             .First(x => x.Identifier.ValueText == "TestMethod").Body
@@ -245,7 +243,7 @@ public class IMethodSymbolExtensionsTest
     private IMethodSymbol GetMethodSymbolForIndex(int index)
     {
         var statement = (ExpressionStatementSyntax)statements[index];
-        var methodSymbol = semanticModel.GetSymbolInfo(statement.Expression).Symbol as IMethodSymbol;
+        var methodSymbol = model.GetSymbolInfo(statement.Expression).Symbol as IMethodSymbol;
         return methodSymbol;
     }
 }

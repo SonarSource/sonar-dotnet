@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Test.Analyzers;
+namespace SonarAnalyzer.Core.Test.Analyzers;
 
 [TestClass]
 public class DiagnosticDescriptorFactoryTest

@@ -23,7 +23,7 @@ using SonarAnalyzer.Helpers;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.Test.AnalysisContext;
+namespace SonarAnalyzer.Core.Test.AnalysisContext;
 
 [TestClass]
 public class SonarSemanticModelReportingContextTest
@@ -107,6 +107,7 @@ public class SonarSemanticModelReportingContextTest
     internal class TestAnalyzerCS : TestAnalyzer
     {
         private readonly Action<SonarAnalysisContext, GeneratedCodeRecognizer> initializeAction;
+
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => TestGeneratedCodeRecognizer.Instance;
 
         public TestAnalyzerCS(Action<SonarAnalysisContext, GeneratedCodeRecognizer> action) =>
@@ -120,6 +121,7 @@ public class SonarSemanticModelReportingContextTest
     internal class TestAnalyzerVB : TestAnalyzer
     {
         private readonly Action<SonarAnalysisContext, GeneratedCodeRecognizer> initializeAction;
+
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => TestGeneratedCodeRecognizer.Instance;
 
         public TestAnalyzerVB(Action<SonarAnalysisContext, GeneratedCodeRecognizer> action) =>

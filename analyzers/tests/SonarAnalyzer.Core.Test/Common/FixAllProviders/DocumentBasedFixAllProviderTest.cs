@@ -21,7 +21,7 @@
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 
-namespace SonarAnalyzer.Test.Common.FixAllProviders;
+namespace SonarAnalyzer.Core.Test.Common.FixAllProviders;
 
 [TestClass]
 public class DocumentBasedFixAllProviderTest
