@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>SonarAnalyzer.VisualBasic</id>
-    <version>9.33.0.0</version>
+    <version>$Version$</version>
     <title>SonarAnalyzer for Visual Basic</title>
     <authors>SonarSource</authors>
     <owners>SonarSource</owners>
@@ -13,7 +13,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>Roslyn analyzers that spot Bugs, Vulnerabilities and Code Smells in your code. For an even better overall experience, you can use SonarLint for Visual Studio, which is a free extension that can be used standalone or with SonarQube and/or SonarCloud.</summary>
     <description>Roslyn analyzers that spot Bugs, Vulnerabilities and Code Smells in your code. For an even better overall experience, you can use SonarLint for Visual Studio, which is a free extension (https://www.sonarlint.org/visualstudio/) that can be used standalone or with SonarQube (https://www.sonarqube.org/) and/or SonarCloud (https://sonarcloud.io/).</description>
-    <releaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/9.33.0.0</releaseNotes>
+    <releaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/$Version$</releaseNotes>
     <language>en-US</language>
     <copyright>Copyright © 2015-2024 SonarSource SA</copyright>
     <tags>Roslyn Analyzer Analyzers Refactoring CodeAnalysis CleanCode Clean Code Sonar SonarAnalyzer Dotnet VisualBasic CodeQuality CodeReview StaticCodeAnalysis SonarQube SonarCloud SonarLint</tags>
