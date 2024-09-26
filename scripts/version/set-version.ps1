@@ -36,9 +36,6 @@ function Set-VersionForDotNet() {
         $Xml.Project.PropertyGroup.MainVersion = $Version
         $Xml.Project.PropertyGroup.MilestoneVersion = $ShortVersion
         $Xml.Save($Path)
-        . (Join-Path $PSScriptRoot "..\build\build-utils.ps1")
-        Invoke-MSBuild "ChangeVersion.proj" /p:BuildNumber=$BuildNumber /p:BranchName=$Branch /p:Sha1=$Sha1
-        Test-ExitCode "ERROR: Change version FAILED."
     }
 
     $Path = Resolve-Path ".\analyzers\Version.targets"
