@@ -581,7 +581,7 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.ShimLayer": "[1.0.0, )",
+          "SonarAnalyzer.ShimLayer": "[9.33.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
@@ -592,7 +592,7 @@
           "Google.Protobuf.Tools": "[3.6.1, )",
           "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.CFG": "[1.0.0, )",
+          "SonarAnalyzer.CFG": "[9.33.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
@@ -600,8 +600,8 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
-          "SonarAnalyzer.CSharp.Core": "[1.0.0, )",
-          "SonarAnalyzer.Core": "[1.0.0, )",
+          "SonarAnalyzer.CSharp.Core": "[9.33.0, )",
+          "SonarAnalyzer.Core": "[9.33.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
@@ -610,8 +610,8 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.CFG": "[1.0.0, )",
-          "SonarAnalyzer.Core": "[1.0.0, )",
+          "SonarAnalyzer.CFG": "[9.33.0, )",
+          "SonarAnalyzer.Core": "[9.33.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
@@ -620,9 +620,9 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.CFG": "[1.0.0, )",
-          "SonarAnalyzer.Core": "[1.0.0, )",
-          "SonarAnalyzer.Enterprise.SymbolicExecution": "[1.0.0, )",
+          "SonarAnalyzer.CFG": "[9.33.0, )",
+          "SonarAnalyzer.Core": "[9.33.0, )",
+          "SonarAnalyzer.Enterprise.SymbolicExecution": "[9.33.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
@@ -630,9 +630,9 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
-          "SonarAnalyzer.CSharp.Core": "[1.0.0, )",
-          "SonarAnalyzer.Core": "[1.0.0, )",
-          "SonarAnalyzer.Enterprise.Core": "[1.0.0, )",
+          "SonarAnalyzer.CSharp.Core": "[9.33.0, )",
+          "SonarAnalyzer.Core": "[9.33.0, )",
+          "SonarAnalyzer.Enterprise.Core": "[9.33.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
@@ -641,8 +641,8 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.CFG": "[1.0.0, )",
-          "SonarAnalyzer.Core": "[1.0.0, )",
+          "SonarAnalyzer.CFG": "[9.33.0, )",
+          "SonarAnalyzer.Core": "[9.33.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
@@ -666,15 +666,15 @@
           "Microsoft.CodeAnalysis.Workspaces.MSBuild": "[4.12.0-1.final, )",
           "NSubstitute": "[5.1.0, )",
           "NuGet.Protocol": "[6.9.1, )",
-          "SonarAnalyzer.Core": "[1.0.0, )"
+          "SonarAnalyzer.Core": "[9.33.0, )"
         }
       },
       "sonaranalyzer.visualbasic": {
         "type": "Project",
         "dependencies": {
           "Microsoft.CodeAnalysis.VisualBasic.Workspaces": "[1.3.2, )",
-          "SonarAnalyzer.Core": "[1.0.0, )",
-          "SonarAnalyzer.VisualBasic.Core": "[1.0.0, )",
+          "SonarAnalyzer.Core": "[9.33.0, )",
+          "SonarAnalyzer.VisualBasic.Core": "[9.33.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
@@ -682,8 +682,8 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.CodeAnalysis.VisualBasic.Workspaces": "[1.3.2, )",
-          "SonarAnalyzer.CFG": "[1.0.0, )",
-          "SonarAnalyzer.Core": "[1.0.0, )",
+          "SonarAnalyzer.CFG": "[9.33.0, )",
+          "SonarAnalyzer.Core": "[9.33.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       }

@@ -18,20 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using System.Reflection;
-using System.Resources;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion("9.33.0")]
-[assembly: AssemblyFileVersion("9.33.0.0")]
-// The value should look like "Version:X.X.X.X Branch:not-set Sha1:not-set"
-[assembly: AssemblyInformationalVersion("Version:9.33.0.0 Branch: Sha1:")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("SonarSource")]
-[assembly: AssemblyCopyright("Copyright © 2015-2024 SonarSource SA")]
-[assembly: AssemblyTrademark("SonarLint, SonarQube, SonarSource")]
-[assembly: AssemblyCulture("")]
 [assembly: CLSCompliant(false)]
 [assembly: ComVisible(false)]
-[assembly: NeutralResourcesLanguageAttribute("en")]

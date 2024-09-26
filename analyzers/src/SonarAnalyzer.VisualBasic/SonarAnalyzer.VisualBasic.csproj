@@ -4,6 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <!-- .NET Standard target does not copy referenced DLLs into bin folder, so we need to enable it explicitly. -->
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <!-- Title for DLL file properties -->
+    <AssemblyTitle>SonarAnalyzer Visual Basic .NET</AssemblyTitle>
   </PropertyGroup>
 
   <ItemGroup>
