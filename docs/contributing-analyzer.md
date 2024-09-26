@@ -150,7 +150,7 @@ After the debug session, remove the `Debugger.Launch()` line.
 * Use IntelliJ IDEA
   * Follow the [Code Style Configuration for Intellij](https://github.com/SonarSource/sonar-developer-toolset#code-style-configuration-for-intellij) instructions
   * Open the root folder of the repo
-  * Make sure the `its`, `sonar-csharp-plugin`, `sonar-dotnet-shared-library`, and `sonar-vbnet-plugin` folders are are imported as Maven modules (indicated by a blue square). Search for `pom.xml` in the folders and make it a maven project if not.
+  * Make sure the `its`, `sonar-csharp-plugin`, `sonar-dotnet-core`, and `sonar-vbnet-plugin` folders are are imported as Maven modules (indicated by a blue square). Search for `pom.xml` in the folders and make it a maven project if not.
 * Create `settings.xml` in the `%USERPROFILE%\.m2` directory. A template can be found in the [Developer box section in the extranet](https://xtranet-sonarsource.atlassian.net/wiki/spaces/DEV/pages/776711/Developer+Box#Maven-Settings). Change the username and password settings with the values from the environment variables above.
 * Run `mvn install clean -DskipTests=true` in the respective directories (pom.xml). To build all artefacts run `.\scripts\build\dev-build.ps1 -buildJava`
 * Use the IDE to run unit tests in the projects.
