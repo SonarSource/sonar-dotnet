@@ -33,7 +33,7 @@
   </licenses>
 
   <modules>
-    <module>sonar-dotnet-shared-library</module>
+    <module>sonar-dotnet-core</module>
     <module>sonar-csharp-plugin</module>
     <module>sonar-vbnet-plugin</module>
   </modules>
