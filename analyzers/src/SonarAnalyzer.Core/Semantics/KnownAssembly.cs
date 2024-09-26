@@ -18,17 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using static SonarAnalyzer.Helpers.KnownAssembly.Predicates;
+using static SonarAnalyzer.Core.Semantics.KnownAssembly.Predicates;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Semantics;
 
 public sealed partial class KnownAssembly
 {
     private readonly Func<IEnumerable<AssemblyIdentity>, bool> predicate;
 
-    public static KnownAssembly XUnit_Assert { get; } = new(
-        And(NameIs("xunit.assert").Or(NameIs("xunit").And(VersionLowerThen("2.0"))),
-            PublicKeyTokenIs("8d05b1bb7a6fdb6c")));
+    public static KnownAssembly XUnit_Assert { get; } = new(And(NameIs("xunit.assert").Or(NameIs("xunit").And(VersionLowerThen("2.0"))), PublicKeyTokenIs("8d05b1bb7a6fdb6c")));
 
     /// <summary>
     /// Any MSTest framework either referenced via
@@ -55,7 +53,7 @@ public sealed partial class KnownAssembly
     internal KnownAssembly(Func<AssemblyIdentity, bool> predicate, params Func<AssemblyIdentity, bool>[] or)
         : this(predicate is null || Array.Exists(or, x => x is null)
               ? throw new ArgumentNullException(nameof(predicate), "All predicates must be non-null.")
-              : identities => identities.Any(x => predicate(x) || Array.Exists(or, orPredicate => orPredicate(x))))
+              : x => x.Any(y => predicate(y) || Array.Exists(or, orPredicate => orPredicate(y))))
     { }
 
     internal KnownAssembly(Func<IEnumerable<AssemblyIdentity>, bool> predicate) =>

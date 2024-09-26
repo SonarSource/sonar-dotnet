@@ -18,25 +18,25 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Semantics;
 
 public sealed partial class KnownAssembly
 {
-    private const StringComparison AssemblyNameComparission = StringComparison.OrdinalIgnoreCase;
+    private const StringComparison AssemblyNameComparison = StringComparison.OrdinalIgnoreCase;
 
     internal static class Predicates
     {
         internal static Func<AssemblyIdentity, bool> NameIs(string name) =>
-            x => x.Name.Equals(name, AssemblyNameComparission);
+            x => x.Name.Equals(name, AssemblyNameComparison);
 
         internal static Func<AssemblyIdentity, bool> StartsWith(string name) =>
-            x => x.Name.StartsWith(name, AssemblyNameComparission);
+            x => x.Name.StartsWith(name, AssemblyNameComparison);
 
         internal static Func<AssemblyIdentity, bool> EndsWith(string name) =>
-            x => x.Name.EndsWith(name, AssemblyNameComparission);
+            x => x.Name.EndsWith(name, AssemblyNameComparison);
 
         internal static Func<AssemblyIdentity, bool> Contains(string name) =>
-            x => x.Name.IndexOf(name, 0, AssemblyNameComparission) >= 0;
+            x => x.Name.IndexOf(name, 0, AssemblyNameComparison) >= 0;
 
         internal static Func<AssemblyIdentity, bool> VersionLowerThen(string version) =>
             VersionLowerThen(Version.Parse(version));

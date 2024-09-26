@@ -18,12 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using NSubstitute;
-using SonarAnalyzer.Extensions;
-using static SonarAnalyzer.Helpers.KnownAssembly;
-using static SonarAnalyzer.Helpers.KnownAssembly.Predicates;
+using static SonarAnalyzer.Core.Semantics.KnownAssembly;
+using static SonarAnalyzer.Core.Semantics.KnownAssembly.Predicates;
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Core.Test.Semantics;
 
 [TestClass]
 public class KnownAssemblyTest
