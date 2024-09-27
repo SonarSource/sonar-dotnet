@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.Core.Syntax.Utilities;
 using SonarAnalyzer.Helpers;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;

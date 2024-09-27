@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using NSubstitute;
+using SonarAnalyzer.Core.Syntax.Utilities;
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace  SonarAnalyzer.Core.Test.Syntax.Utilities;
 
 [TestClass]
 public class GeneratedCodeRecognizerTest
