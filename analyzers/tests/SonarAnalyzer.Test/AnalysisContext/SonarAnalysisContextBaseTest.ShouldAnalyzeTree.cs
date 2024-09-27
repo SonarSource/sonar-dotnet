@@ -21,6 +21,7 @@
 using System.Text;
 using Microsoft.CodeAnalysis.Text;
 using NSubstitute;
+using SonarAnalyzer.Core.Syntax.Utilities;
 using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 using SonarAnalyzer.VisualBasic.Core.Syntax.Utilities;
 using CS = SonarAnalyzer.Rules.CSharp;

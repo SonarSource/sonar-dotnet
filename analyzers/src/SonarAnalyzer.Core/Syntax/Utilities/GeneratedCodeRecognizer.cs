@@ -20,7 +20,7 @@
 
 using System.IO;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Syntax.Utilities;
 
 public abstract class GeneratedCodeRecognizer
 {
