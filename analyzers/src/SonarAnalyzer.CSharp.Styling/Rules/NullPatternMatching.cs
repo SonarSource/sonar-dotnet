@@ -34,7 +34,8 @@ public sealed class NullPatternMatching : StylingAnalyzer
     private void Validate(SonarSyntaxNodeReportingContext context, string messageInfix)
     {
         var binary = (BinaryExpressionSyntax)context.Node;
-        if (binary.Left.IsKind(SyntaxKind.NullLiteralExpression) || binary.Right.IsKind(SyntaxKind.NullLiteralExpression))
+        if ((binary.Left.IsKind(SyntaxKind.NullLiteralExpression) || binary.Right.IsKind(SyntaxKind.NullLiteralExpression))
+            && !context.IsInExpressionTree())
         {
             context.ReportIssue(Rule, binary, messageInfix);
         }
