@@ -1,4 +1,6 @@
-﻿using System.CodeDom;
+﻿using System;
+using System.CodeDom;
+using System.Linq.Expressions;
 
 public class Sample
 {
@@ -52,6 +54,15 @@ public class Sample
         {
             // This is always visited due to overriden operator => we don't care, it's a bad idea anyway
         }
+    }
+
+    public void ExpressionTree(object x)
+    {
+        Func<bool> func1 = () => x == null; // Noncompliant
+        Func<bool> func2 = () => x is null;
+        Expression<Func<bool>> expression1 = () => x == null;
+        Expression<Func<bool>> expression2 = () => x != null;
+        Expression<Func<bool>> expression3 = () => x is null; // Error [CS8122]
     }
 
     public static bool operator ==(Sample a, Sample b) =>
