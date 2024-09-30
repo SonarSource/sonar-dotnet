@@ -18,21 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.CFG.Helpers;
+namespace SonarAnalyzer.Core.Extensions;
 
-internal static class EnumerableExtensions
+public static class HashSetExtensions
 {
-    public static HashSet<T> ToHashSet<T>(this IEnumerable<T> enumerable, IEqualityComparer<T> equalityComparer = null)
+    public static void AddRange<T>(this HashSet<T> hashset, IEnumerable<T> values)
     {
-        if (enumerable == null)
+        foreach (var value in values)
         {
-            return equalityComparer != null
-                ? new HashSet<T>(equalityComparer)
-                : new HashSet<T>();
+            hashset.Add(value);
         }
-
-        return equalityComparer != null
-            ? new HashSet<T>(enumerable, equalityComparer)
-            : new HashSet<T>(enumerable);
     }
 }

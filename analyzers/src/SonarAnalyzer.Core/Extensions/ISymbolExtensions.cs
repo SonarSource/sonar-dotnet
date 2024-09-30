@@ -20,7 +20,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-namespace SonarAnalyzer.Extensions;
+namespace SonarAnalyzer.Core.Extensions;
 
 public static class ISymbolExtensions
 {

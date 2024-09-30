@@ -20,9 +20,8 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.Extensions;
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Core.Test.Extensions;
 
 [TestClass]
 public class LocationExtensionsTest

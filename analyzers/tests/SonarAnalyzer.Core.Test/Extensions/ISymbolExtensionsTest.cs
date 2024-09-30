@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using ISymbolExtensionsCommon = SonarAnalyzer.Extensions.ISymbolExtensions;
+using ISymbolExtensionsCommon = SonarAnalyzer.Core.Extensions.ISymbolExtensions;
 
 namespace SonarAnalyzer.Core.Test.Extensions;
 

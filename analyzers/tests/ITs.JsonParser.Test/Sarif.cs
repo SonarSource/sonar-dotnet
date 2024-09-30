@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Extensions;
+using SonarAnalyzer.Core.Extensions;
 
 namespace ITs.JsonParser.Test;
 

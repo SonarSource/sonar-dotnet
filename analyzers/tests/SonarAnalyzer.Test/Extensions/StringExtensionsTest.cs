@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Test.Helpers;
+using SonarAnalyzer.CFG.Extensions;
+
+namespace SonarAnalyzer.Test.Extensions;
 
 [TestClass]
 public class StringExtensionsTest

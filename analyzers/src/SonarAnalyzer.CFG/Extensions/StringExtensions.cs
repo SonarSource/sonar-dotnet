@@ -20,7 +20,7 @@
 
 using System.Text;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.CFG.Extensions;
 
 public static class StringExtensions
 {
@@ -43,7 +43,7 @@ public static class StringExtensions
     /// <returns>A list of words (all uppercase) contained in the string.</returns>
     public static IEnumerable<string> SplitCamelCaseToWords(this string name)
     {
-        if (name == null)
+        if (name is null)
         {
             yield break;
         }

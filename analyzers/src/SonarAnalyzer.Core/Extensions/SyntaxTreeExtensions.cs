@@ -21,7 +21,7 @@
 using System.Runtime.CompilerServices;
 using Roslyn.Utilities;
 
-namespace SonarAnalyzer.Extensions;
+namespace SonarAnalyzer.Core.Extensions;
 
 internal static class SyntaxTreeExtensions
 {

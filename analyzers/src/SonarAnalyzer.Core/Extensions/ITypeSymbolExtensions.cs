@@ -20,7 +20,7 @@
 
 using System.Reflection;
 
-namespace SonarAnalyzer.Extensions;
+namespace SonarAnalyzer.Core.Extensions;
 
 public static class ITypeSymbolExtensions
 {

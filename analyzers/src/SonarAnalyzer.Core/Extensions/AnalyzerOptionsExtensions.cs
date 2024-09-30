@@ -21,7 +21,7 @@
 using System.IO;
 using Roslyn.Utilities;
 
-namespace SonarAnalyzer.Extensions;
+namespace SonarAnalyzer.Core.Extensions;
 
 public static class AnalyzerOptionsExtensions
 {
