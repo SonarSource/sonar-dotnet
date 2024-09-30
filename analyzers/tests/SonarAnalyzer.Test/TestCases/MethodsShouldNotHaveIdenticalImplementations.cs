@@ -219,4 +219,11 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    // https://sonarsource.atlassian.net/browse/NET-348
+    class Repro_348
+    {
+        T Method1<T>() => default;  // FN
+        T Method2<T>() => default;
+    }
 }
