@@ -1,12 +1,3 @@
-<#
-
-.SYNOPSIS
-This script allows to set the specified version in all required files.
-
-See in .\scripts\version\README.md how version is set during the pipeline run
-
-#>
-
 [CmdletBinding()]
 Param(
     [Parameter(Mandatory = $True, Position = 1)]
@@ -20,11 +11,22 @@ Param(
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
 
+function UpdatePomVersion($Path, $Version) {
+    Write-Host "Updating version to ${Version} in ${Path}"
+    # This is done manually, because mvn tries to resolve parent poms from jfrog and that requires heavy orchestration
+    $Content = Get-Content $Path
+    $Content = $Content -replace "<version>.*?-SNAPSHOT</version>", "<version>${Version}</version>"
+    Set-Content $Path $Content
+}
+
 function Set-VersionForJava() {
     Write-Header "Updating version in Java files"
-
-    mvn org.codehaus.mojo:versions-maven-plugin:2.2:set "-DnewVersion=${ShortVersion}-SNAPSHOT" -DgenerateBackupPoms=false -B -e -P its
-    Test-ExitCode "ERROR: Maven set version FAILED."
+    $PatchVersion = If ($ShortVersion.IndexOf(".") -eq $ShortVersion.LastIndexOf(".")) { "${ShortVersion}.0" } else { $ShortVersion }
+    $MavenVersion = If ($BuildNumber -eq 0) { "${ShortVersion}-SNAPSHOT" } else { "${PatchVersion}.${BuildNumber}" }
+    $Files = Get-ChildItem -Path . -Filter "pom.xml" -Recurse
+    foreach ($File in $Files) {
+        UpdatePomVersion $File.FullName $MavenVersion
+    }
 }
 
 function Set-VersionForDotNet() {
@@ -38,6 +40,7 @@ function Set-VersionForDotNet() {
         $Xml.Save($Path)
     }
 
+    Write-Host "Updating Version.targets to ShortVersion=${ShortVersion}, BuildNumber=${BuildNumber}, Branch=${Branch}, Sha1=${Sha1}"
     $Path = Resolve-Path ".\analyzers\Version.targets"
     $Xml = [xml](Get-Content $Path)
     $Xml.Project.PropertyGroup.ShortVersion = $ShortVersion
@@ -48,9 +51,9 @@ function Set-VersionForDotNet() {
 }
 
 try {
-    . (Join-Path $PSScriptRoot "..\utils.ps1")
+    . (Join-Path $PSScriptRoot ".\utils.ps1")
 
-    Push-Location "${PSScriptRoot}\..\.."
+    Push-Location "${PSScriptRoot}\.."
 
     $ShortVersion = $Version
     if ($ShortVersion.EndsWith(".0")) {
