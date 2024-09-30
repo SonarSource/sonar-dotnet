@@ -18,16 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Core.Extensions;
+
+public static class SymbolInfoExtensions
 {
-    public static class SymbolInfoExtensions
-    {
-        /// <summary>
-        /// Returns the <see cref="SymbolInfo.Symbol"/> or if no symbol could be found the <see cref="SymbolInfo.CandidateSymbols"/>.
-        /// </summary>
-        public static IEnumerable<ISymbol> AllSymbols(this SymbolInfo symbolInfo) =>
-            symbolInfo.Symbol == null
-                ? symbolInfo.CandidateSymbols
-                : new[] { symbolInfo.Symbol };
-    }
+    /// <summary>
+    /// Returns the <see cref="SymbolInfo.Symbol"/> or if no symbol could be found the <see cref="SymbolInfo.CandidateSymbols"/>.
+    /// </summary>
+    public static IEnumerable<ISymbol> AllSymbols(this SymbolInfo symbolInfo) =>
+        symbolInfo.Symbol == null
+            ? symbolInfo.CandidateSymbols
+            : new[] { symbolInfo.Symbol };
 }

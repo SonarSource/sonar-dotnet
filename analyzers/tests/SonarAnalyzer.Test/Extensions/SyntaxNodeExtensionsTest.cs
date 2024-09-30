@@ -27,7 +27,7 @@ using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 using SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
 using StyleCop.Analyzers.Lightup;
-using ExtensionsCommon = SonarAnalyzer.Extensions.SyntaxNodeExtensions;
+using ExtensionsCommon = SonarAnalyzer.Core.Extensions.SyntaxNodeExtensions;
 using ExtensionsShared = SonarAnalyzer.CSharp.Core.Syntax.Extensions.SyntaxNodeExtensionsShared;
 using MicrosoftExtensionsCS = Microsoft.CodeAnalysis.CSharp.Extensions.SyntaxNodeExtensions;
 using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -46,8 +46,8 @@ public class SyntaxNodeExtensionsTest
     {
         const string code = "int x = 42;";
 
-        var syntaxTree = CSharpSyntaxTree.ParseText(code);
-        var compilationUnit = syntaxTree.GetCompilationUnitRoot();
+        var tree = CSharpSyntaxTree.ParseText(code);
+        var compilationUnit = tree.GetCompilationUnitRoot();
 
         ExtensionsShared.GetPreviousStatementsCurrentBlock(compilationUnit).Should().BeEmpty();
     }
@@ -57,8 +57,8 @@ public class SyntaxNodeExtensionsTest
     {
         const string code = "public void M() { int x = 42; }";
 
-        var syntaxTree = CSharpSyntaxTree.ParseText(code);
-        var aToken = GetFirstTokenOfKind(syntaxTree, SyntaxKind.NumericLiteralToken);
+        var tree = CSharpSyntaxTree.ParseText(code);
+        var aToken = GetFirstTokenOfKind(tree, SyntaxKind.NumericLiteralToken);
         var parent = SyntaxTokenExtensions.GetBindableParent(aToken);
         ExtensionsShared.GetPreviousStatementsCurrentBlock(parent).Should().BeEmpty();
     }
@@ -68,8 +68,8 @@ public class SyntaxNodeExtensionsTest
     {
         const string code = "public void M() { string s = null; int x = 42; }";
 
-        var syntaxTree = CSharpSyntaxTree.ParseText(code);
-        var aToken = GetFirstTokenOfKind(syntaxTree, SyntaxKind.NumericLiteralToken);
+        var tree = CSharpSyntaxTree.ParseText(code);
+        var aToken = GetFirstTokenOfKind(tree, SyntaxKind.NumericLiteralToken);
         var parent = SyntaxTokenExtensions.GetBindableParent(aToken);
         ExtensionsShared.GetPreviousStatementsCurrentBlock(parent).Should().HaveCount(1);
     }
@@ -79,8 +79,8 @@ public class SyntaxNodeExtensionsTest
     {
         const string code = "public void M(string y) { string s = null; if (y != null) { int x = 42; } }";
 
-        var syntaxTree = CSharpSyntaxTree.ParseText(code);
-        var aToken = GetFirstTokenOfKind(syntaxTree, SyntaxKind.NumericLiteralToken);
+        var tree = CSharpSyntaxTree.ParseText(code);
+        var aToken = GetFirstTokenOfKind(tree, SyntaxKind.NumericLiteralToken);
         var parent = SyntaxTokenExtensions.GetBindableParent(aToken);
         ExtensionsShared.GetPreviousStatementsCurrentBlock(parent).Should().BeEmpty();
     }
@@ -89,8 +89,8 @@ public class SyntaxNodeExtensionsTest
     public void ArrowExpressionBody_WithNotExpectedNode_ReturnsNull()
     {
         const string code = "var x = 1;";
-        var syntaxTree = CSharpSyntaxTree.ParseText(code);
-        SyntaxNodeExtensionsCSharp.ArrowExpressionBody(syntaxTree.GetRoot()).Should().BeNull();
+        var tree = CSharpSyntaxTree.ParseText(code);
+        SyntaxNodeExtensionsCSharp.ArrowExpressionBody(tree.GetRoot()).Should().BeNull();
     }
 
     [TestMethod]
@@ -600,15 +600,15 @@ public class C
 }}";
         var nodePosition = code.IndexOf("$$");
         code = code.Replace("$$", string.Empty);
-        var syntaxTree = CSharpSyntaxTree.ParseText(code);
-        var argument = syntaxTree.GetRoot().FindNode(new TextSpan(nodePosition, 0));
+        var tree = CSharpSyntaxTree.ParseText(code);
+        var argument = tree.GetRoot().FindNode(new TextSpan(nodePosition, 0));
         argument = argument.AncestorsAndSelf()
             .FirstOrDefault(x => x.IsAnyKind(SyntaxKind.Argument,
                                              SyntaxKindEx.DiscardDesignation,
                                              SyntaxKindEx.SingleVariableDesignation,
                                              SyntaxKindEx.ParenthesizedVariableDesignation,
                                              SyntaxKindEx.TupleExpression)) ?? argument;
-        syntaxTree.GetDiagnostics().Should().BeEmpty();
+        tree.GetDiagnostics().Should().BeEmpty();
         var target = SyntaxNodeExtensionsCSharp.FindAssignmentComplement(argument);
         if (expectedNode is null)
         {
@@ -763,15 +763,15 @@ End Class";
 
     [TestMethod]
     public void Kind_Null_ReturnsNone() =>
-        SonarAnalyzer.Helpers.SyntaxNodeExtensions.Kind<SyntaxKind>(null).Should().Be(SyntaxKind.None);
+        ExtensionsCommon.Kind<SyntaxKind>(null).Should().Be(SyntaxKind.None);
 
     [DataTestMethod]
     [DataRow("class Test { }", DisplayName = "When there is no pragma, return default file name.")]
     [DataRow("#pragma checksum \"FileName.txt\" \"{guid}\" \"checksum bytes\"", "FileName.txt", DisplayName = "When pragma is present, return file name from pragma.")]
     public void GetMappedFilePath(string code, string expectedFileName = DefaultFileName)
     {
-        var syntaxTree = GetSyntaxTree(code, DefaultFileName);
-        syntaxTree.GetRoot().GetMappedFilePathFromRoot().Should().Be(expectedFileName);
+        var tree = GetSyntaxTree(code, DefaultFileName);
+        tree.GetRoot().GetMappedFilePathFromRoot().Should().Be(expectedFileName);
     }
 
     [DataTestMethod]
@@ -905,8 +905,8 @@ End Class";
         var node = NodeBetweenMarkers(code, AnalyzerLanguage.VisualBasic, getInnermostNodeForTie: true);
         var argumentList = SyntaxNodeExtensionsVisualBasic.ArgumentList(node);
         argumentList.Arguments.Should().SatisfyRespectively(
-            a => (a.GetExpression() is SyntaxVB.IdentifierNameSyntax { Identifier.ValueText: "s" }).Should().BeTrue(),
-            a => (a.GetExpression() is SyntaxVB.LiteralExpressionSyntax { Token.ValueText: "1" }).Should().BeTrue());
+            x => (x.GetExpression() is SyntaxVB.IdentifierNameSyntax { Identifier.ValueText: "s" }).Should().BeTrue(),
+            x => (x.GetExpression() is SyntaxVB.LiteralExpressionSyntax { Token.ValueText: "1" }).Should().BeTrue());
     }
 
     [TestMethod]
@@ -1327,8 +1327,8 @@ End Class";
         return node;
     }
 
-    private static SyntaxToken GetFirstTokenOfKind(SyntaxTree syntaxTree, SyntaxKind kind) =>
-        syntaxTree.GetRoot().DescendantTokens().First(token => token.IsKind(kind));
+    private static SyntaxToken GetFirstTokenOfKind(SyntaxTree tree, SyntaxKind kind) =>
+        tree.GetRoot().DescendantTokens().First(x => x.IsKind(kind));
 
     private static SyntaxTree GetSyntaxTree(string content, string fileName = null) =>
         SolutionBuilder

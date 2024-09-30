@@ -19,6 +19,7 @@
  */
 
 using System.Collections;
+using SonarAnalyzer.CFG.Extensions;
 
 namespace SonarAnalyzer.Rules.CSharp
 {

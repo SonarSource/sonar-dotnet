@@ -18,18 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Core.Extensions;
+
+public static class ComparisonKindExtensions
 {
-    public static class ComparisonKindExtensions
-    {
-        public static ComparisonKind Mirror(this ComparisonKind comparison) =>
-           comparison switch
-           {
-               ComparisonKind.GreaterThan => ComparisonKind.LessThan,
-               ComparisonKind.GreaterThanOrEqual => ComparisonKind.LessThanOrEqual,
-               ComparisonKind.LessThan => ComparisonKind.GreaterThan,
-               ComparisonKind.LessThanOrEqual => ComparisonKind.GreaterThanOrEqual,
-               _ => comparison,
-           };
-    }
+    public static ComparisonKind Mirror(this ComparisonKind comparison) =>
+        comparison switch
+        {
+            ComparisonKind.GreaterThan => ComparisonKind.LessThan,
+            ComparisonKind.GreaterThanOrEqual => ComparisonKind.LessThanOrEqual,
+            ComparisonKind.LessThan => ComparisonKind.GreaterThan,
+            ComparisonKind.LessThanOrEqual => ComparisonKind.GreaterThanOrEqual,
+            _ => comparison,
+        };
 }

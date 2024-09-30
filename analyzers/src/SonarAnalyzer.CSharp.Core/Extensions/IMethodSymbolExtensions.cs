@@ -28,7 +28,7 @@ public static class IMethodSymbolExtensions
     public static bool IsGetTypeCall(this IMethodSymbol invokedMethod) =>
         invokedMethod.Name == nameof(Type.GetType)
         && !invokedMethod.IsStatic
-        && invokedMethod.ContainingType != null
+        && invokedMethod.ContainingType is not null
         && IsObjectOrType(invokedMethod.ContainingType);
 
     public static SyntaxNode ImplementationSyntax(this IMethodSymbol method) =>

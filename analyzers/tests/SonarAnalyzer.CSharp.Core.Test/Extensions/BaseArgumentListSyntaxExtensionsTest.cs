@@ -18,11 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.CSharp.Core.Syntax.Extensions;
-
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.CSharp.Core.Test.Extensions;
 
 [TestClass]
 public class BaseArgumentListSyntaxExtensionsTest
@@ -37,11 +33,11 @@ public class BaseArgumentListSyntaxExtensionsTest
 
     [TestMethod]
     public void GivenListWithNamedArgument_GetArgumentByName_ReturnsArgument() =>
-        CreateNamedArgumentList("p1").GetArgumentByName("p1").Should().Match(p => ((ArgumentSyntax)p).NameColon.Name.Identifier.Text == "p1");
+        CreateNamedArgumentList("p1").GetArgumentByName("p1").Should().Match(x => ((ArgumentSyntax)x).NameColon.Name.Identifier.Text == "p1");
 
     [TestMethod]
     public void GivenListWithMultipleNamedArguments_GetArgumentByName_ReturnsArgument() =>
-        CreateNamedArgumentList("p1", "p2", "p3").GetArgumentByName("p2").Should().Match(p =>  ((ArgumentSyntax)p).NameColon.Name.Identifier.Text == "p2");
+        CreateNamedArgumentList("p1", "p2", "p3").GetArgumentByName("p2").Should().Match(x =>  ((ArgumentSyntax)x).NameColon.Name.Identifier.Text == "p2");
 
     [TestMethod]
     public void GivenListWithNotNamedArguments_GetArgumentByName_ReturnsNull() =>
@@ -64,7 +60,7 @@ public class BaseArgumentListSyntaxExtensionsTest
                     CreateNotNamedArgument("p3")
                 }))
             .GetArgumentByName("p1")
-            .Should().Match(p =>  ((ArgumentSyntax)p).NameColon.Name.Identifier.Text == "p1");
+            .Should().Match(x =>  ((ArgumentSyntax)x).NameColon.Name.Identifier.Text == "p1");
 
     private static ArgumentListSyntax CreateNamedArgumentList(params string[] names) =>
         SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(names.Select(CreateNamedArgument)));

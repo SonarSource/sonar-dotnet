@@ -18,12 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.CSharp.Core.Test.Extensions;
 
 [TestClass]
 public class BaseMethodDeclarationSyntaxExtensionsTest

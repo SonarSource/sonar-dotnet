@@ -23,7 +23,7 @@
 namespace SonarAnalyzer.Core.Test.Extensions;
 
 [TestClass]
-public class EnumerableExtensionsTest
+public class IEnumerableExtensionsTest
 {
     [TestMethod]
     public void TestAreEqual_01()

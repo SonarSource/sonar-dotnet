@@ -18,9 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions;
+using Comparison = SonarAnalyzer.Helpers.ComparisonKind;
 
-internal static class IMethodSymbolExtensions
+namespace SonarAnalyzer.Core.Extensions;
+
+public static class IMethodSymbolExtensions
 {
     public static bool IsExtensionOn(this IMethodSymbol methodSymbol, KnownType type)
     {
@@ -42,4 +44,32 @@ internal static class IMethodSymbolExtensions
 
     public static bool IsAnyAttributeInOverridingChain(this IMethodSymbol method) =>
         method.IsAnyAttributeInOverridingChain(x => x.OverriddenMethod);
+
+    public static bool Is(this IMethodSymbol methodSymbol, KnownType knownType, string name) =>
+        methodSymbol.ContainingType.Is(knownType) && methodSymbol.Name == name;
+
+    public static bool IsAny(this IMethodSymbol methodSymbol, KnownType knownType, params string[] names) =>
+        methodSymbol.ContainingType.Is(knownType) && names.Contains(methodSymbol.Name);
+
+    public static bool IsImplementingInterfaceMember(this IMethodSymbol methodSymbol, KnownType knownInterfaceType, string name) =>
+        methodSymbol.Name == name
+        && (methodSymbol.Is(knownInterfaceType, name)
+            || (methodSymbol.GetInterfaceMember() is { } implementedInterfaceMember && implementedInterfaceMember.Is(knownInterfaceType, name)));
+
+    public static Comparison ComparisonKind(this IMethodSymbol method) =>
+        method?.MethodKind == MethodKind.UserDefinedOperator
+            ? ComparisonKind(method.Name)
+            : Comparison.None;
+
+    private static Comparison ComparisonKind(string method) =>
+        method switch
+        {
+            "op_Equality" => Comparison.Equals,
+            "op_Inequality" => Comparison.NotEquals,
+            "op_LessThan" => Comparison.LessThan,
+            "op_LessThanOrEqual" => Comparison.LessThanOrEqual,
+            "op_GreaterThan" => Comparison.GreaterThan,
+            "op_GreaterThanOrEqual" => Comparison.GreaterThanOrEqual,
+            _ => Comparison.None,
+        };
 }
