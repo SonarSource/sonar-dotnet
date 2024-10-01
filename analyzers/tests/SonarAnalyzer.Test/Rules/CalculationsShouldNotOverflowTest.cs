@@ -52,16 +52,16 @@ public class CalculationsShouldNotOverflowTest
 #if NET
 
     [TestMethod]
-    public void CalculationsShouldNotOverflow_CSharp9() =>
-        builderCS.AddPaths("CalculationsShouldNotOverflow.CSharp9.cs").WithTopLevelStatements().Verify();
+    public void CalculationsShouldNotOverflow_CS_Latest() =>
+        builderCS.AddPaths("CalculationsShouldNotOverflow.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
 
     [TestMethod]
-    public void CalculationsShouldNotOverflow_CSharp10() =>
-        builderCS.AddPaths("CalculationsShouldNotOverflow.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
-
-    [TestMethod]
-    public void CalculationsShouldNotOverflow_CSharp11() =>
-        builderCS.AddPaths("CalculationsShouldNotOverflow.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).VerifyNoIssues();
+    public void CalculationsShouldNotOverflow_CS_TopLevelStatements() =>
+        builderCS.AddPaths("CalculationsShouldNotOverflow.TopLevelStatements.cs")
+            .WithTopLevelStatements()
+            .Verify();
 
 #endif
 }
