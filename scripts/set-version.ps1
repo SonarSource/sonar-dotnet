@@ -53,6 +53,11 @@ try {
     UpdateDotNet
     UpdateJava
 
+    If ($BuildNumber -eq 0) {
+        Write-Host "Creating Git commit"
+        git commit -a -m "Bump version to $ShortVersion"
+    }
+
     exit 0
 }
 catch {
