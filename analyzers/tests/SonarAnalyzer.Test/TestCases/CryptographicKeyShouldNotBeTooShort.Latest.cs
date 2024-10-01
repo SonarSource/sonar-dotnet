@@ -1,12 +1,4 @@
-﻿using Org.BouncyCastle.Asn1.Nist;
-using Org.BouncyCastle.Asn1.Sec;
-using Org.BouncyCastle.Asn1.TeleTrust;
-using Org.BouncyCastle.Asn1.X9;
-using Org.BouncyCastle.Crypto.Generators;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Security;
-using System;
+﻿using System;
 using System.Security.Cryptography;
 
 var x = new RSACryptoServiceProvider(); // Noncompliant {{Use a key length of at least 2048 bits for RSA cipher algorithm.}}
@@ -77,5 +69,37 @@ record TestRecord
         ECDsaOpenSsl ec4 = new();
         ec4?.GenerateKey(ECCurve.NamedCurves.brainpoolP192t1); // Noncompliant {{Use a key length of at least 224 bits for EC cipher algorithm.}}
         ec4!.GenerateKey(ECCurve.NamedCurves.brainpoolP192t1); // Noncompliant {{Use a key length of at least 224 bits for EC cipher algorithm.}}
+    }
+
+    // Repro https://sonarsource.atlassian.net/browse/NET-233
+    public void CngKeyCreationOption()
+    {
+        CngKeyCreationParameters compliantParams = new CngKeyCreationParameters
+        {
+            KeyCreationOptions = CngKeyCreationOptions.None,
+            Parameters = { new CngProperty("Length", BitConverter.GetBytes(2048), CngPropertyOptions.None) } // Compliant
+        };
+        CngKey cngkey1 = CngKey.Create(CngAlgorithm.Rsa, null, compliantParams);
+
+        CngKeyCreationParameters noncompliantParams1 = new CngKeyCreationParameters
+        {
+            KeyCreationOptions = CngKeyCreationOptions.PreferVbs,
+            Parameters = { new CngProperty("Length", BitConverter.GetBytes(1024), CngPropertyOptions.None) } // FN
+        };
+        CngKey cngkey2 = CngKey.Create(CngAlgorithm.Rsa, null, noncompliantParams1);
+
+        CngKeyCreationParameters noncompliantParams2 = new CngKeyCreationParameters
+        {
+            KeyCreationOptions = CngKeyCreationOptions.RequireVbs,
+            Parameters = { new CngProperty("Length", BitConverter.GetBytes(validKeySize), CngPropertyOptions.None) } // Compliant
+        };
+        CngKey cngkey3 = CngKey.Create(CngAlgorithm.Rsa, null, noncompliantParams2);
+
+        CngKeyCreationParameters noncompliantParams3 = new CngKeyCreationParameters
+        {
+            KeyCreationOptions = CngKeyCreationOptions.UsePerBootKey,
+            Parameters = { new CngProperty("Length", BitConverter.GetBytes(invalidKeySize), CngPropertyOptions.None) } // FN
+        };
+        CngKey cngkey4 = CngKey.Create(CngAlgorithm.Rsa, null, noncompliantParams3);
     }
 }
