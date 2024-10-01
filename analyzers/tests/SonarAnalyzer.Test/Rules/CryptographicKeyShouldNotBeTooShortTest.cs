@@ -20,46 +20,46 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class CryptographicKeyShouldNotBeTooShortTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<CryptographicKeyShouldNotBeTooShort>().AddReferences(GetAdditionalReferences());
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void CryptographicKeyShouldNotBeTooShort() =>
-            builder.AddPaths("CryptographicKeyShouldNotBeTooShort.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .Verify();
+[TestClass]
+public class CryptographicKeyShouldNotBeTooShortTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<CryptographicKeyShouldNotBeTooShort>().AddReferences(GetAdditionalReferences());
+
+    [TestMethod]
+    public void CryptographicKeyShouldNotBeTooShort() =>
+        builder.AddPaths("CryptographicKeyShouldNotBeTooShort.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
 
 #if NETFRAMEWORK
 
-        [TestMethod]
-        public void CryptographicKeyShouldNotBeTooShort_NetFramework() =>
-            builder.AddPaths("CryptographicKeyShouldNotBeTooShort.BeforeNet7.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .Verify();
+    [TestMethod]
+    public void CryptographicKeyShouldNotBeTooShort_NetFramework() =>
+        builder.AddPaths("CryptographicKeyShouldNotBeTooShort.BeforeNet7.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
 
 #else
 
-        [TestMethod]
-        public void CryptographicKeyShouldNotBeTooShort_CSharp9() =>
-            builder.AddPaths("CryptographicKeyShouldNotBeTooShort.CSharp9.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void CryptographicKeyShouldNotBeTooShort_CS_Latest() =>
+        builder.AddPaths("CryptographicKeyShouldNotBeTooShort.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithTopLevelStatements()
+            .Verify();
 
 #endif
 
-        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            MetadataReferenceFacade.SystemSecurityCryptography
+    private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
+        MetadataReferenceFacade.SystemSecurityCryptography
 
 #if NETFRAMEWORK
 
-                .Concat(NuGetMetadataReference.SystemSecurityCryptographyOpenSsl())
+            .Concat(NuGetMetadataReference.SystemSecurityCryptographyOpenSsl())
 
 #endif
 
-                .Concat(NuGetMetadataReference.BouncyCastle());
-    }
+            .Concat(NuGetMetadataReference.BouncyCastle());
 }
