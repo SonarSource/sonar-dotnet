@@ -81,6 +81,7 @@ public static class CoreMetadataReference
     public static MetadataReference SystemSecurityCryptographyCng { get; } = CreateReference("System.Security.Cryptography.Cng.dll");
     public static MetadataReference SystemSecurityCryptographyPrimitives { get; } = CreateReference("System.Security.Cryptography.Primitives.dll");
     public static MetadataReference SystemSecurityPrincipalWindows { get; } = CreateReference("System.Security.Principal.Windows.dll");
+    public static MetadataReference SystemTextRegularExpressions { get; } = CreateReference("System.Text.RegularExpressions.dll");
     public static MetadataReference SystemThreading { get; } = CreateReference("System.Threading.dll");
     public static MetadataReference SystemThreadingTasks { get; } = CreateReference("System.Threading.Tasks.dll");
     public static MetadataReference SystemThreadingTasksParallel { get; } = CreateReference("System.Threading.Tasks.Parallel.dll");
