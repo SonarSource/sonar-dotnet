@@ -11,37 +11,32 @@ Param(
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
 
-function UpdatePomVersion($Path, $Version) {
-    Write-Host "Updating version to ${Version} in ${Path}"
+function UpdatePom($Path, $Version) {
+    Write-Host "Updating version to $Version in $Path"
     # This is done manually, because mvn tries to resolve parent poms from jfrog and that requires heavy orchestration
+    $Pattern = "<version>.*?-SNAPSHOT</version>"
     $Content = Get-Content $Path
-    $Content = $Content -replace "<version>.*?-SNAPSHOT</version>", "<version>${Version}</version>"
-    Set-Content $Path $Content
+    If ($Content -match $Pattern) {
+        $Content = $Content -replace $Pattern, "<version>$Version</version>"
+        Set-Content $Path $Content
+    }
+    Else {
+        throw "Could not find $Pattern in $Path. This script is not supposed to be run multiple times. Revert your git changes first."
+    }
 }
 
-function Set-VersionForJava() {
-    Write-Header "Updating version in Java files"
-    $PatchVersion = If ($ShortVersion.IndexOf(".") -eq $ShortVersion.LastIndexOf(".")) { "${ShortVersion}.0" } else { $ShortVersion }
-    $MavenVersion = If ($BuildNumber -eq 0) { "${ShortVersion}-SNAPSHOT" } else { "${PatchVersion}.${BuildNumber}" }
+function UpdateJava() {
+    Write-Host "Updating version in Java files"
+    $MavenVersion = If ($BuildNumber -eq 0) { "$ShortVersion-SNAPSHOT" } else { "${PatchVersion}.${BuildNumber}" }
     $Files = Get-ChildItem -Path . -Filter "pom.xml" -Recurse
     foreach ($File in $Files) {
-        UpdatePomVersion $File.FullName $MavenVersion
+        UpdatePom $File.FullName $MavenVersion
     }
 }
 
-function Set-VersionForDotNet() {
-    Write-Header "Updating version in .Net files"
-
-    Invoke-InLocation ".\scripts\version" {
-        $Path = Resolve-Path "Version.props"
-        $Xml = [xml](Get-Content $Path)
-        $Xml.Project.PropertyGroup.MainVersion = $Version
-        $Xml.Project.PropertyGroup.MilestoneVersion = $ShortVersion
-        $Xml.Save($Path)
-    }
-
-    Write-Host "Updating Version.targets to ShortVersion=${ShortVersion}, BuildNumber=${BuildNumber}, Branch=${Branch}, Sha1=${Sha1}"
+function UpdateDotNet() {
     $Path = Resolve-Path ".\analyzers\Version.targets"
+    Write-Host "Updating $Path to ShortVersion=$ShortVersion, BuildNumber=$BuildNumber, Branch=$Branch, Sha1=$Sha1"
     $Xml = [xml](Get-Content $Path)
     $Xml.Project.PropertyGroup.ShortVersion = $ShortVersion
     $Xml.Project.PropertyGroup.BuildNumber = $BuildNumber.ToString()
@@ -50,18 +45,13 @@ function Set-VersionForDotNet() {
     $Xml.Save($Path)
 }
 
+Push-Location "${PSScriptRoot}\.."  # Run everything from the root of the repository
 try {
-    . (Join-Path $PSScriptRoot ".\utils.ps1")
+    $ShortVersion = If ($Version.EndsWith(".0") -and $Version.IndexOf(".") -ne $Version.LastIndexOf(".")) { $Version.Substring(0, $Version.Length - 2) } else { $Version } # x.y   or x.y.z
+    $PatchVersion = If ($ShortVersion.IndexOf(".") -eq $ShortVersion.LastIndexOf(".")) { "$ShortVersion.0" } else { $ShortVersion }                                       # x.y.0 or x.y.z
 
-    Push-Location "${PSScriptRoot}\.."
-
-    $ShortVersion = $Version
-    if ($ShortVersion.EndsWith(".0")) {
-        $ShortVersion = $ShortVersion.Substring(0, $Version.Length - 2)
-    }
-
-    Set-VersionForJava
-    Set-VersionForDotNet
+    UpdateDotNet
+    UpdateJava
 
     exit 0
 }
