@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Text.RegularExpressions;
-using SonarAnalyzer.RegularExpressions;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -45,12 +43,11 @@ public class RegexMustHaveValidSyntaxTest
 #if NET
 
     [TestMethod]
-    public void RegexMustHaveValidSyntax_CSharp9() =>
-        builderCS.AddPaths("RegexMustHaveValidSyntax.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+    public void RegexMustHaveValidSyntax_CS_Latest() =>
+        builderCS.AddPaths("RegexMustHaveValidSyntax.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
 
-    [TestMethod]
-    public void RegexMustHaveValidSyntax_CSharp11() =>
-       builderCS.AddPaths("RegexMustHaveValidSyntax.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 #endif
 
     [TestMethod]

@@ -197,14 +197,14 @@ public static class MetadataReferenceFacade
         FrameworkMetadataReference.SystemThreadingTasks
             .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions("4.0.0"));
 #else
-    [CoreMetadataReference.SystemThreadingTasks, CoreMetadataReference.SystemThreadingTasksParallel];
+        [CoreMetadataReference.SystemThreadingTasks, CoreMetadataReference.SystemThreadingTasksParallel];
 #endif
 
     public static References RegularExpressions =>
 #if NETFRAMEWORK
         Enumerable.Empty<MetadataReference>();
 #else
-        NuGetMetadataReference.SystemTextRegularExpressions();
+        [CoreMetadataReference.SystemTextRegularExpressions];
 #endif
 
     public static References SystemRuntimeSerialization =>
