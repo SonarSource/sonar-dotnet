@@ -21,14 +21,13 @@
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CFG.Helpers;
 
-namespace SonarAnalyzer.Extensions
-{
-    public static class UnaryPatternSyntaxWrapperExtensions
-    {
-        public static bool IsNot(this UnaryPatternSyntaxWrapper unaryPatternSyntaxWrapper) =>
-            unaryPatternSyntaxWrapper.SyntaxNode.RemoveParentheses().Kind() == SyntaxKindEx.NotPattern;
+namespace SonarAnalyzer.Extensions;
 
-        public static bool IsNotNull(this UnaryPatternSyntaxWrapper unaryPatternSyntaxWrapper) =>
-            unaryPatternSyntaxWrapper.IsNot() && unaryPatternSyntaxWrapper.Pattern.IsNull();
-    }
+public static class UnaryPatternSyntaxWrapperExtensions
+{
+    public static bool IsNot(this UnaryPatternSyntaxWrapper unaryPatternSyntaxWrapper) =>
+        unaryPatternSyntaxWrapper.SyntaxNode.RemoveParentheses().Kind() == SyntaxKindEx.NotPattern;
+
+    public static bool IsNotNull(this UnaryPatternSyntaxWrapper unaryPatternSyntaxWrapper) =>
+        unaryPatternSyntaxWrapper.IsNot() && unaryPatternSyntaxWrapper.Pattern.IsNull();
 }

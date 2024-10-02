@@ -18,23 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Extensions;
+
+public static class IsPatternExpressionSyntaxWrapperExtensions
 {
-    public static class IsPatternExpressionSyntaxWrapperExtensions
-    {
-        public static bool IsNull(this IsPatternExpressionSyntaxWrapper isPatternWrapper) =>
-            isPatternWrapper.Pattern.IsNull();
+    public static bool IsNull(this IsPatternExpressionSyntaxWrapper isPatternWrapper) =>
+        isPatternWrapper.Pattern.IsNull();
 
-        public static bool IsNot(this IsPatternExpressionSyntaxWrapper isPatternWrapper) =>
-            isPatternWrapper.Pattern.RemoveParentheses() is var syntaxNode
-            && UnaryPatternSyntaxWrapper.IsInstance(syntaxNode)
-            && ((UnaryPatternSyntaxWrapper)syntaxNode) is var unaryPatternSyntaxWrapper
-            && unaryPatternSyntaxWrapper.IsNot();
+    public static bool IsNot(this IsPatternExpressionSyntaxWrapper isPatternWrapper) =>
+        isPatternWrapper.Pattern.RemoveParentheses() is var syntaxNode
+        && UnaryPatternSyntaxWrapper.IsInstance(syntaxNode)
+        && ((UnaryPatternSyntaxWrapper)syntaxNode) is var unaryPatternSyntaxWrapper
+        && unaryPatternSyntaxWrapper.IsNot();
 
-        public static bool IsNotNull(this IsPatternExpressionSyntaxWrapper isPatternWrapper) =>
-            isPatternWrapper.Pattern.RemoveParentheses() is var syntaxNode
-            && UnaryPatternSyntaxWrapper.IsInstance(syntaxNode)
-            && ((UnaryPatternSyntaxWrapper)syntaxNode) is var unaryPatternSyntaxWrapper
-            && unaryPatternSyntaxWrapper.IsNotNull();
-    }
+    public static bool IsNotNull(this IsPatternExpressionSyntaxWrapper isPatternWrapper) =>
+        isPatternWrapper.Pattern.RemoveParentheses() is var syntaxNode
+        && UnaryPatternSyntaxWrapper.IsInstance(syntaxNode)
+        && ((UnaryPatternSyntaxWrapper)syntaxNode) is var unaryPatternSyntaxWrapper
+        && unaryPatternSyntaxWrapper.IsNotNull();
 }

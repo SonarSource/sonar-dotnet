@@ -20,20 +20,19 @@
 
 using SonarAnalyzer.CFG.Roslyn;
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Extensions;
+
+public static class BasicBlockExtensions
 {
-    public static class BasicBlockExtensions
+    public static bool IsEnclosedIn(this BasicBlock block, ControlFlowRegionKind kind)
     {
-        public static bool IsEnclosedIn(this BasicBlock block, ControlFlowRegionKind kind)
-        {
-            var enclosing = kind == ControlFlowRegionKind.LocalLifetime ? block.EnclosingRegion : block.EnclosingNonLocalLifetimeRegion();
-            return enclosing.Kind == kind;
-        }
-
-        public static ControlFlowRegion EnclosingNonLocalLifetimeRegion(this BasicBlock block) =>
-            block.EnclosingRegion.EnclosingNonLocalLifetimeRegion();
-
-        public static ControlFlowRegion EnclosingRegion(this BasicBlock block, ControlFlowRegionKind kind) =>
-            block.EnclosingRegion.EnclosingRegionOrSelf(kind);
+        var enclosing = kind == ControlFlowRegionKind.LocalLifetime ? block.EnclosingRegion : block.EnclosingNonLocalLifetimeRegion();
+        return enclosing.Kind == kind;
     }
+
+    public static ControlFlowRegion EnclosingNonLocalLifetimeRegion(this BasicBlock block) =>
+        block.EnclosingRegion.EnclosingNonLocalLifetimeRegion();
+
+    public static ControlFlowRegion EnclosingRegion(this BasicBlock block, ControlFlowRegionKind kind) =>
+        block.EnclosingRegion.EnclosingRegionOrSelf(kind);
 }

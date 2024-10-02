@@ -20,33 +20,32 @@
 
 using SonarAnalyzer.CFG.Roslyn;
 
-namespace SonarAnalyzer.Extensions
+namespace SonarAnalyzer.Extensions;
+
+public static class ControlFlowGraphExtensions
 {
-    public static class ControlFlowGraphExtensions
+    public static IEnumerable<IFlowAnonymousFunctionOperationWrapper> FlowAnonymousFunctionOperations(this ControlFlowGraph cfg) =>
+        cfg.Blocks
+           .SelectMany(x => x.OperationsAndBranchValue)
+           .SelectMany(x => x.DescendantsAndSelf())
+           .Where(IFlowAnonymousFunctionOperationWrapper.IsInstance)
+           .Select(IFlowAnonymousFunctionOperationWrapper.FromOperation);
+
+    // Similar to ControlFlowGraphExtensions.GetLocalFunctionControlFlowGraphInScope from Roslyn
+    public static ControlFlowGraph FindLocalFunctionCfgInScope(this ControlFlowGraph cfg, IMethodSymbol localFunction, CancellationToken cancel)
     {
-        public static IEnumerable<IFlowAnonymousFunctionOperationWrapper> FlowAnonymousFunctionOperations(this ControlFlowGraph cfg) =>
-            cfg.Blocks
-               .SelectMany(x => x.OperationsAndBranchValue)
-               .SelectMany(x => x.DescendantsAndSelf())
-               .Where(IFlowAnonymousFunctionOperationWrapper.IsInstance)
-               .Select(IFlowAnonymousFunctionOperationWrapper.FromOperation);
-
-        // Similar to ControlFlowGraphExtensions.GetLocalFunctionControlFlowGraphInScope from Roslyn
-        public static ControlFlowGraph FindLocalFunctionCfgInScope(this ControlFlowGraph cfg, IMethodSymbol localFunction, CancellationToken cancel)
+        var current = cfg;
+        while (current != null)
         {
-            var current = cfg;
-            while (current != null)
+            if (current.LocalFunctions.Contains(localFunction))
             {
-                if (current.LocalFunctions.Contains(localFunction))
-                {
-                    return current.GetLocalFunctionControlFlowGraph(localFunction, cancel);
-                }
-                current = current.Parent;
+                return current.GetLocalFunctionControlFlowGraph(localFunction, cancel);
             }
-            throw new ArgumentOutOfRangeException(nameof(localFunction));
+            current = current.Parent;
         }
-
-        public static ControlFlowGraph GetLocalFunctionControlFlowGraph(this ControlFlowGraph cfg, SyntaxNode localFunction, CancellationToken cancel) =>
-            cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single(x => x.DeclaringSyntaxReferences.Single().GetSyntax() == localFunction), cancel);
+        throw new ArgumentOutOfRangeException(nameof(localFunction));
     }
+
+    public static ControlFlowGraph GetLocalFunctionControlFlowGraph(this ControlFlowGraph cfg, SyntaxNode localFunction, CancellationToken cancel) =>
+        cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single(x => x.DeclaringSyntaxReferences.Single().GetSyntax() == localFunction), cancel);
 }
