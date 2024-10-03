@@ -334,6 +334,7 @@ namespace Tests.Diagnostics
         }
     }
 
+    // Repro https://github.com/SonarSource/sonar-dotnet/issues/9672
     public class MethodUpdateTest
     {
         private int value = 0; // Noncompliant FP
