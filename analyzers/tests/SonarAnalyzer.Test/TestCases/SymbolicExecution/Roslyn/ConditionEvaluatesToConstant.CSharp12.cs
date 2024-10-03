@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 
 class Sample
 {
@@ -48,5 +50,28 @@ class Sample
         }
         if (unknownLength2.Length == 0) { } // Compliant
         if (unknownLength2.Length < 0) { }  // Noncompliant
+    }
+
+    // Repro for https://github.com/SonarSource/sonar-dotnet/issues/9671
+    void ListFilledInLocalFunction()
+    {
+        List<int> list = new();
+        foreach (var item in Enumerable.Range(0, 5))
+        {
+            if (item % 2 == 0)
+            {
+                LocalFunction(item);
+            }
+
+            void LocalFunction(int added)
+            {
+                list.Add(added);
+            }
+        }
+
+        if (list.Count > 0) // Noncompliant FP
+        {
+            Console.WriteLine("This code is reachable"); // Secondary FP
+        }
     }
 }
