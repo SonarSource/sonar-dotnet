@@ -85,47 +85,18 @@ public class HashesShouldHaveUnpredictableSaltTest
 #if NET
 
     [TestMethod]
-    public void HashesShouldHaveUnpredictableSalt_Roslyn_CSharp8_NetCore() =>
-        roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp8.NetCore.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
-            .Verify();
-
-    [TestMethod]
-    public void HashesShouldHaveUnpredictableSalt_Sonar_CSharp9() =>
-        sonar.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp9.cs")
+    public void HashesShouldHaveUnpredictableSalt_Roslyn_CS_Latest() =>
+        roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
             .WithTopLevelStatements()
             .Verify();
 
     [TestMethod]
-    public void HashesShouldHaveUnpredictableSalt_Roslyn_CSharp9() =>
-        roslynCS
-            .AddPaths("HashesShouldHaveUnpredictableSalt.CSharp9.cs")
+    public void HashesShouldHaveUnpredictableSalt_Sonar_CS_Latest() =>
+        sonar.AddPaths("HashesShouldHaveUnpredictableSalt.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
             .WithTopLevelStatements()
             .Verify();
-
-    [TestMethod]
-    public void HashesShouldHaveUnpredictableSalt_Sonar_CSharp10() =>
-        sonar.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp10.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
-            .VerifyNoIssues();
-
-    [TestMethod]
-    public void HashesShouldHaveUnpredictableSalt_Roslyn_CSharp10() =>
-        roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp10.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
-            .Verify();
-
-    [TestMethod]
-    public void HashesShouldHaveUnpredictableSalt_Sonar_CSharp11() =>
-        sonar.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
-            .VerifyNoIssues();
-
-    [TestMethod]
-    public void HashesShouldHaveUnpredictableSalt_Roslyn_CSharp11() =>
-        roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
-            .VerifyNoIssues();
 
 #endif
 
