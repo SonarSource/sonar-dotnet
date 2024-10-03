@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.CFG.Extensions;
 using SonarAnalyzer.CFG.Roslyn;
 
 namespace SonarAnalyzer.Core.Test.Extensions;

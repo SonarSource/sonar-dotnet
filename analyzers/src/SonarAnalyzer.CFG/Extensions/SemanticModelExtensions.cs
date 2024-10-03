@@ -18,15 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
-
 namespace SonarAnalyzer.CFG.Extensions;
 
-public static class UnaryPatternSyntaxWrapperExtensions
+public static class SemanticModelExtensions
 {
-    public static bool IsNot(this UnaryPatternSyntaxWrapper unaryPatternSyntaxWrapper) =>
-        unaryPatternSyntaxWrapper.SyntaxNode.RemoveParentheses().Kind() == SyntaxKindEx.NotPattern;
-
-    public static bool IsNotNull(this UnaryPatternSyntaxWrapper unaryPatternSyntaxWrapper) =>
-        unaryPatternSyntaxWrapper.IsNot() && unaryPatternSyntaxWrapper.Pattern.IsNull();
+    /// <summary>
+    /// Starting .NET Framework 4.6.1, we've noticed that LINQ methods aren't resolved properly, so we need to use the CandidateSymbol.
+    /// </summary>
+    /// <param name="model">Semantic model</param>
+    /// /// <param name="node">Node for which it gets the symbol</param>
+    /// <returns>
+    /// The symbol if resolved.
+    /// The first candidate symbol if resolution failed.
+    /// Null if no symbol was found.
+    /// </returns>
+    public static ISymbol GetSymbolOrCandidateSymbol(this SemanticModel model, SyntaxNode node)
+    {
+        var symbolInfo = model.GetSymbolInfo(node);
+        if (symbolInfo.Symbol is not null)
+        {
+            return symbolInfo.Symbol;
+        }
+        return symbolInfo.CandidateSymbols.FirstOrDefault();
+    }
 }

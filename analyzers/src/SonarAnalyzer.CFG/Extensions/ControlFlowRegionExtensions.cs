@@ -20,7 +20,7 @@
 
 using SonarAnalyzer.CFG.Roslyn;
 
-namespace SonarAnalyzer.Extensions;
+namespace SonarAnalyzer.CFG.Extensions;
 
 public static class ControlFlowRegionExtensions
 {
@@ -60,7 +60,7 @@ public static class ControlFlowRegionExtensions
     /// </summary>
     public static IEnumerable<ControlFlowRegion> ReachableHandlers(this ControlFlowRegion tryRegion) =>
         tryRegion is null
-            ? Enumerable.Empty<ControlFlowRegion>()
+            ? []
             : tryRegion.EnclosingRegion.NestedRegions.Where(x => x.Kind != ControlFlowRegionKind.Try)
                 .Concat(ReachableHandlers(tryRegion.EnclosingRegion(ControlFlowRegionKind.Try)));   // Use also all outer candidates for nested try/catch.
 }

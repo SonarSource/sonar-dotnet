@@ -24,15 +24,9 @@ internal static class IEnumerableExtensions
 {
     public static HashSet<T> ToHashSet<T>(this IEnumerable<T> enumerable, IEqualityComparer<T> equalityComparer = null)
     {
-        if (enumerable is null)
-        {
-            return equalityComparer is not null
-                ? new HashSet<T>(equalityComparer)
-                : new HashSet<T>();
-        }
-
-        return equalityComparer is not null
-            ? new HashSet<T>(enumerable, equalityComparer)
-            : new HashSet<T>(enumerable);
+        enumerable ??= [];
+        return equalityComparer is null
+            ? new(enumerable)
+            : new(enumerable, equalityComparer);
     }
 }

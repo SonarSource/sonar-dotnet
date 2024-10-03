@@ -21,7 +21,7 @@
 using System.Collections;
 using System.Reflection;
 
-namespace SonarAnalyzer.CFG;
+namespace SonarAnalyzer.CFG.Extensions;
 
 internal static class PropertyInfoExtensions
 {

@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions;
+using SonarAnalyzer.Helpers;
+
+namespace SonarAnalyzer.CFG.Extensions;
 
 public static class IOperationExtensions
 {

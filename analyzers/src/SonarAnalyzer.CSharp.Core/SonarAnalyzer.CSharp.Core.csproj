@@ -48,7 +48,6 @@
     <Using Include="SonarAnalyzer.CSharp.Core.Syntax.Extensions" />
     <Using Include="SonarAnalyzer.CSharp.Core.Syntax.Utilities" />
     <Using Include="SonarAnalyzer.CSharp.Core.Wrappers" />
-    <Using Include="SonarAnalyzer.Extensions" />
     <Using Include="SonarAnalyzer.Helpers" />
     <Using Include="StyleCop.Analyzers.Lightup" />
   </ItemGroup>
