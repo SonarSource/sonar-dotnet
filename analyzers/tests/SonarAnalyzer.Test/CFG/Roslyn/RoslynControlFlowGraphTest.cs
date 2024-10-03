@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.Operations;
+using SonarAnalyzer.CFG.Extensions;
 using SonarAnalyzer.CFG.Helpers;
 using SonarAnalyzer.CFG.Roslyn;
 using StyleCop.Analyzers.Lightup;
@@ -122,7 +123,7 @@ public class RoslynControlFlowGraphTest
             }
             """;
         var cfg = TestHelper.CompileCfgCS(code);
-        var anonymousFunctionOperations = SonarAnalyzer.Extensions.ControlFlowGraphExtensions.FlowAnonymousFunctionOperations(cfg).ToList();
+        var anonymousFunctionOperations = ControlFlowGraphExtensions.FlowAnonymousFunctionOperations(cfg).ToList();
         anonymousFunctionOperations.Should().HaveCount(2);
         cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunctionOperations[0], default).Should().NotBeNull();
         cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunctionOperations[1], default).Should().NotBeNull();

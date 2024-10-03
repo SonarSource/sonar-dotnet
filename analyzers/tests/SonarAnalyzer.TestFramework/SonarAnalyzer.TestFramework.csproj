@@ -37,7 +37,6 @@
     <Using Include="SonarAnalyzer.Common" />
     <Using Include="SonarAnalyzer.Core.Extensions" />
     <Using Include="SonarAnalyzer.Helpers" />
-    <Using Include="SonarAnalyzer.Extensions" />
     <Using Include="SonarAnalyzer.TestFramework.Common" />
     <Using Include="SonarAnalyzer.TestFramework.Extensions" />
     <Using Include="SonarAnalyzer.TestFramework.MetadataReferences" />

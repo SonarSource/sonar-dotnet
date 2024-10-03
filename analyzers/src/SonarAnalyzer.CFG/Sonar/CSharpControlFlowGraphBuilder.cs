@@ -575,7 +575,7 @@ namespace SonarAnalyzer.CFG.Sonar
             // If there is a catch with no Exception filter or equivalent we don't want to
             // join the tryStatement start/end blocks with the exit block because all
             // exceptions will be caught before going to finally
-            var areAllExceptionsCaught = tryStatement.Catches.Any(CSharpSyntaxHelper.IsCatchingAllExceptions);
+            var areAllExceptionsCaught = tryStatement.Catches.Any(IsCatchingAllExceptions);
 
             // try end
             var tryEndStatementConnections = catchBlocks.ToList();
@@ -623,6 +623,19 @@ namespace SonarAnalyzer.CFG.Sonar
             }
 
             return beforeTryBlock;
+        }
+
+        private static bool IsCatchingAllExceptions(CatchClauseSyntax catchClause)
+        {
+            if (catchClause.Declaration == null)
+            {
+                return true;
+            }
+
+            var exceptionTypeName = catchClause.Declaration.Type.GetText().ToString().Trim();
+
+            return catchClause.Filter == null &&
+                (exceptionTypeName == "Exception" || exceptionTypeName == "System.Exception");
         }
 
         private Block BuildGotoDefaultStatement(GotoStatementSyntax statement, Block currentBlock)
@@ -1124,8 +1137,7 @@ namespace SonarAnalyzer.CFG.Sonar
             ExpressionSyntax child, IEnumerable<ArgumentSyntax> arguments)
         {
             currentBlock.ReversedInstructions.Add(parent);
-            var isNameof = parent is InvocationExpressionSyntax invocation
-                && invocation.IsNameof(this.semanticModel);
+            var isNameof = parent is InvocationExpressionSyntax invocation && IsNameof(invocation);
 
             // The nameof arguments are not evaluated at runtime and should not be added
             // to the block as instructions
@@ -1199,8 +1211,7 @@ namespace SonarAnalyzer.CFG.Sonar
 
             // The nameof arguments are not evaluated at runtime and should not be added
             // to the block as instructions
-            var isNameof = parent is InvocationExpressionSyntax invocation
-                && invocation.IsNameof(this.semanticModel);
+            var isNameof = parent is InvocationExpressionSyntax invocation && IsNameof(invocation);
 
             return children == null || isNameof
                 ? currentBlock
@@ -1385,5 +1396,9 @@ namespace SonarAnalyzer.CFG.Sonar
         #endregion Condition
 
         #endregion Build*
+
+        private bool IsNameof(InvocationExpressionSyntax expression) =>
+            (expression?.Expression as IdentifierNameSyntax)?.Identifier.ToString() == "nameof"
+            && semanticModel.GetSymbolOrCandidateSymbol(expression) is not IMethodSymbol;
     }
 }

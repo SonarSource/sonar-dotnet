@@ -20,7 +20,7 @@
 
 using SonarAnalyzer.CFG.Roslyn;
 
-namespace SonarAnalyzer.Extensions;
+namespace SonarAnalyzer.CFG.Extensions;
 
 public static class ControlFlowGraphExtensions
 {
@@ -35,7 +35,7 @@ public static class ControlFlowGraphExtensions
     public static ControlFlowGraph FindLocalFunctionCfgInScope(this ControlFlowGraph cfg, IMethodSymbol localFunction, CancellationToken cancel)
     {
         var current = cfg;
-        while (current != null)
+        while (current is not null)
         {
             if (current.LocalFunctions.Contains(localFunction))
             {

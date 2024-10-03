@@ -27,7 +27,6 @@
     <Using Include="SonarAnalyzer.Common" />
     <Using Include="SonarAnalyzer.Core.Extensions" />
     <Using Include="SonarAnalyzer.Core.Semantics" />
-    <Using Include="SonarAnalyzer.Extensions" />
     <Using Include="SonarAnalyzer.TestFramework.Analyzers" />
     <Using Include="SonarAnalyzer.TestFramework.Build" />
     <Using Include="SonarAnalyzer.TestFramework.Common" />

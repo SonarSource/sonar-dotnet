@@ -20,7 +20,7 @@
 
 using SonarAnalyzer.CFG.Roslyn;
 
-namespace SonarAnalyzer.Extensions;
+namespace SonarAnalyzer.CFG.Extensions;
 
 public static class BasicBlockExtensions
 {

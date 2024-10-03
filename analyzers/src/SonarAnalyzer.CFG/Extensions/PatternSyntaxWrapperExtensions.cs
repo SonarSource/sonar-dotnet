@@ -19,9 +19,8 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp;
-using SonarAnalyzer.CFG.Helpers;
 
-namespace SonarAnalyzer.Extensions;
+namespace SonarAnalyzer.CFG.Extensions;
 
 public static class PatternSyntaxWrapperExtensions
 {

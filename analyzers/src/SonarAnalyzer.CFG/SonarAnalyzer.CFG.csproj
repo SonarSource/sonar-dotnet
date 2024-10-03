@@ -24,11 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="SonarAnalyzer.Extensions" />
-    <Using Include="SonarAnalyzer.Helpers" />
-    <Using Include="StyleCop.Analyzers.Lightup" />
     <Using Include="Microsoft.CodeAnalysis" />
     <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
+    <Using Include="SonarAnalyzer.CFG.Extensions" />
+    <Using Include="StyleCop.Analyzers.Lightup" />
   </ItemGroup>
 
   <Target Name="SignDlls" Condition="'$(SignAssembly)' == 'true' and $(TargetFramework) != ''" AfterTargets="Build">
