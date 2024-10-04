@@ -21,38 +21,30 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class DoNotCheckZeroSizeCollectionTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.DoNotCheckZeroSizeCollection>();
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.DoNotCheckZeroSizeCollection>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void DoNotCheckZeroSizeCollection_CS() =>
-            builderCS.AddPaths("DoNotCheckZeroSizeCollection.cs").Verify();
+[TestClass]
+public class DoNotCheckZeroSizeCollectionTest
+{
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.DoNotCheckZeroSizeCollection>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.DoNotCheckZeroSizeCollection>();
+
+    [TestMethod]
+    public void DoNotCheckZeroSizeCollection_CS() =>
+        builderCS.AddPaths("DoNotCheckZeroSizeCollection.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void DoNotCheckZeroSizeCollection_CSharp9() =>
-            builderCS.AddPaths("DoNotCheckZeroSizeCollection.CSharp9.cs")
-                .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
-
-        [TestMethod]
-        public void DoNotCheckZeroSizeCollection_CSharp10() =>
-            builderCS.AddPaths("DoNotCheckZeroSizeCollection.CSharp10.cs")
-                .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
+    [TestMethod]
+    public void DoNotCheckZeroSizeCollection_CS_Latest() =>
+        builderCS.AddPaths("DoNotCheckZeroSizeCollection.Latest.cs")
+            .WithTopLevelStatements()
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
 
 #endif
 
-        [TestMethod]
-        public void DoNotCheckZeroSizeCollection_VB() =>
-            builderVB.AddPaths("DoNotCheckZeroSizeCollection.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
-    }
+    [TestMethod]
+    public void DoNotCheckZeroSizeCollection_VB() =>
+        builderVB.AddPaths("DoNotCheckZeroSizeCollection.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
 }

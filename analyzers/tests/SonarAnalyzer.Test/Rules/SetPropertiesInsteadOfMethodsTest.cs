@@ -35,10 +35,11 @@ public class SetPropertiesInsteadOfMethodsTest
 #if NET
 
     [TestMethod]
-    public void SetPropertiesInsteadOfMethods_CS_Immutable() =>
-        builderCS.AddPaths("SetPropertiesInsteadOfMethods.Immutable.cs")
+    public void SetPropertiesInsteadOfMethods_CS_Latest() =>
+        builderCS.AddPaths("SetPropertiesInsteadOfMethods.Latest.cs")
             .WithTopLevelStatements()
             .AddReferences(MetadataReferenceFacade.SystemCollections)
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
             .Verify();
 
 #endif

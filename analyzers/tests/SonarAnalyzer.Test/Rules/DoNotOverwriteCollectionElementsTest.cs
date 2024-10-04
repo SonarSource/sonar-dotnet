@@ -40,9 +40,9 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
 
         [TestMethod]
-        public void DoNotOverwriteCollectionElements_CSharp11() =>
-            builderCS.AddPaths("DoNotOverwriteCollectionElements.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+        public void DoNotOverwriteCollectionElements_CS_Latest() =>
+            builderCS.AddPaths("DoNotOverwriteCollectionElements.Latest.cs")
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .Verify();
 
 #endif

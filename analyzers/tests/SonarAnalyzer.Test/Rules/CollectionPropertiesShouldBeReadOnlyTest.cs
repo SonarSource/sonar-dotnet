@@ -20,38 +20,32 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class CollectionPropertiesShouldBeReadOnlyTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<CollectionPropertiesShouldBeReadOnly>().AddReferences(MetadataReferenceFacade.SystemRuntimeSerialization);
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void CollectionPropertiesShouldBeReadOnly() =>
-            builder.AddPaths("CollectionPropertiesShouldBeReadOnly.cs")
-                .Verify();
+[TestClass]
+public class CollectionPropertiesShouldBeReadOnlyTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<CollectionPropertiesShouldBeReadOnly>().AddReferences(MetadataReferenceFacade.SystemRuntimeSerialization);
+
+    [TestMethod]
+    public void CollectionPropertiesShouldBeReadOnly() =>
+        builder.AddPaths("CollectionPropertiesShouldBeReadOnly.cs")
+            .Verify();
 
 #if NET
 
-        [TestMethod]
-        public void CollectionPropertiesShouldBeReadOnly_CSharp9() =>
-            builder.AddPaths("CollectionPropertiesShouldBeReadOnly.CSharp9.cs")
-                .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
+    [TestMethod]
+    public void CollectionPropertiesShouldBeReadOnly_CS_Latest() =>
+        builder.AddPaths("CollectionPropertiesShouldBeReadOnly.Latest.cs")
+            .WithTopLevelStatements()
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
 
-        [TestMethod]
-        public void CollectionPropertiesShouldBeReadOnly_CSharp11() =>
-            builder.AddPaths("CollectionPropertiesShouldBeReadOnly.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
-
-        [TestMethod]
-        public void CollectionPropertiesShouldBeReadOnly_Razor() =>
-            builder.AddPaths("CollectionPropertiesShouldBeReadOnly.razor", "CollectionPropertiesShouldBeReadOnly.razor.cs")
-                   .Verify();
+    [TestMethod]
+    public void CollectionPropertiesShouldBeReadOnly_Razor() =>
+        builder.AddPaths("CollectionPropertiesShouldBeReadOnly.razor", "CollectionPropertiesShouldBeReadOnly.razor.cs")
+               .Verify();
 
 #endif
-    }
+
 }

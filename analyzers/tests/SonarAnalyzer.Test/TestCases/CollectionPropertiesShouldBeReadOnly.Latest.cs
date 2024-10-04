@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Runtime.Serialization;
 
 var x = 1;
@@ -54,4 +56,35 @@ public record S4004InterfaceImplicit : IS4004
     public IDictionary<object, object> Items { get; set; }  // Compliant enforced by interface (https://github.com/SonarSource/sonar-dotnet/issues/2606)
 
     public ICollection<string> CollectionInit { get; init; }
+}
+
+namespace CSharp11
+{
+    public interface IS4004
+    {
+        static abstract IDictionary<object, object> Items { get; set; } // Noncompliant
+        static abstract ICollection<string> CollectionInit { get; }
+    }
+
+    public class S4004InterfaceImplicit : IS4004
+    {
+        public static IDictionary<object, object> Items { get; set; }  // Compliant enforced by interface (https://github.com/SonarSource/sonar-dotnet/issues/2606)
+
+        public static ICollection<string> CollectionInit { get; }
+    }
+}
+
+namespace CSharp13
+{
+    public class NewCollectionTypes
+    {
+        public OrderedDictionary<string, string> OrderedDictionary { get; set; } // Noncompliant
+        public ReadOnlySet<string> ReadonlySet { get; set; }                     // Noncompliant
+    }
+
+    public interface INewCollectionTypes
+    {
+        public OrderedDictionary<string, string> OrderedDictionary { get; set; } // Noncompliant
+        public ReadOnlySet<string> ReadonlySet { get; set; }                     // Noncompliant
+    }
 }
