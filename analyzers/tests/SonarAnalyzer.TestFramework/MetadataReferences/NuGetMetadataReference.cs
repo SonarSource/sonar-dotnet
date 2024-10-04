@@ -131,6 +131,7 @@ public static class NuGetMetadataReference
     public static References MonoPosixNetStandard(string packageVersion = "1.0.0") => Create("Mono.Posix.NETStandard", packageVersion, "linux-x64");
     public static References MonoDataSqlite(string packageVersion = Constants.NuGetLatestVersion) => Create("Mono.Data.Sqlite", packageVersion);
     public static References Moq(string packageVersion) => Create("Moq", packageVersion);
+    public static References MoreLinq(string packageVersion = Constants.NuGetLatestVersion) => Create("morelinq", packageVersion);
     public static References MSTestTestFramework(string packageVersion) => Create("MSTest.TestFramework", packageVersion);
     public static References MvvmLightLibs(string packageVersion) => Create("MvvmLightLibs", packageVersion);
     public static References MySqlData(string packageVersion) => Create("MySql.Data", packageVersion);
