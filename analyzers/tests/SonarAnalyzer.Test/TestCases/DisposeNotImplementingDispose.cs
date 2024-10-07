@@ -161,3 +161,19 @@ namespace Tests.Diagnostics
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9679
+namespace Repro_9679
+{
+    public static class DisposableExtensions
+    {
+        public static void Dispose<T>(this Lazy<T> lazy) // Compliant
+            where T : class, IDisposable
+        {
+            if (lazy.IsValueCreated)
+            {
+                lazy.Value.Dispose();
+            }
+        }
+    }
+}
