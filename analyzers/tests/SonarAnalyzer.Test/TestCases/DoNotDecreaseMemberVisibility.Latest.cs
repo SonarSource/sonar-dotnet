@@ -3,6 +3,24 @@ using System.Collections.Generic;
 
 namespace MyLibrary
 {
+    public interface IMyInterface
+    {
+        public static virtual void MyMethod() { }
+    }
+
+    public interface IMyOtherInterface : IMyInterface
+    {
+        private static void MyMethod() { }
+    }
+
+    public class MyClass<T> where T : IMyOtherInterface
+    {
+        public MyClass(IMyOtherInterface other)
+        {
+            T.MyMethod(); // Compliant, the method from IMyInterface is called
+        }
+    }
+
     record A
     {
         public void Method_01(int count) { }
@@ -195,6 +213,39 @@ namespace Indexers
         public int this[string name] // Compliant, parameters are of different types
         {
             get { return name.Length; }
+        }
+    }
+}
+
+namespace PartialProperties
+{
+    public class BaseClass
+    {
+        public int Property_01 { get; }
+        public int this[int index]
+        {
+            get { return index; }
+        }
+    }
+
+    public partial class DescendantClass : BaseClass
+    {
+        private partial int Property_01 { get; } // Noncompliant
+        private partial int this[int index] { get; } // Compliant FN
+    }
+
+    public partial class DescendantClass : BaseClass
+    {
+        private partial int Property_01 { get { return 1; } } // Noncompliant
+        private partial int this[int index] { get { return index + 1; } } // Compliant FN
+    }
+
+    // https://sonarsource.atlassian.net/browse/NET-368
+    public class AnotherClass : BaseClass
+    {
+        private int this[int index]
+        {
+            get { return index + 1; } // Compliant FN, 
         }
     }
 }

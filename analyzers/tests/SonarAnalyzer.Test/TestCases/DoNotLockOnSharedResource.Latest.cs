@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
-    public class LockOnThisOrType
+    public class LockOnThisOrType(string myStringField)
     {
         public void RawStringLiterals()
         {
@@ -17,6 +18,19 @@ namespace Tests.Diagnostics
                 }")
             { }
             // Noncompliant@-4
+        }
+
+        public void MyLockingMethod()
+        {
+            lock (myStringField) // Noncompliant
+            {
+            }
+        }
+
+        public void EscapeChar()
+        {
+            lock ("\e") // Noncompliant
+            { }
         }
     }
 }

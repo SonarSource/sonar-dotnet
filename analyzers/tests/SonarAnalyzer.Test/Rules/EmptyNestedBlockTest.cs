@@ -37,10 +37,10 @@ public class EmptyNestedBlockTest
 #if NET
 
     [TestMethod]
-    public void EmptyNestedBlock_CSharp10() =>
-        builderCS.AddPaths("EmptyNestedBlock.CSharp10.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
-            .VerifyNoIssues();
+    public void EmptyNestedBlock_CS_Latest() =>
+        builderCS.AddPaths("EmptyNestedBlock.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
 
 #endif
 

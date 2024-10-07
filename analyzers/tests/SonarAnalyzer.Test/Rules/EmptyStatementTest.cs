@@ -35,15 +35,15 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
 
         [TestMethod]
-        public void EmptyStatement_CSharp9() =>
-            builder.AddPaths("EmptyStatement.CSharp9.cs")
+        public void EmptyStatement_CS_TopLevelStatements() =>
+            builder.AddPaths("EmptyStatement.TopLevelStatements.cs")
                 .WithTopLevelStatements()
                 .Verify();
 
         [TestMethod]
-        public void EmptyStatement_CSharp11() =>
-            builder.AddPaths("EmptyStatement.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+        public void EmptyStatement_CS_Latest() =>
+            builder.AddPaths("EmptyStatement.Latest.cs")
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .Verify();
 
 #endif
@@ -57,10 +57,10 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
 
         [TestMethod]
-        public void EmptyStatement_CodeFix_CSharp9() =>
-            codeFix.AddPaths("EmptyStatement.CSharp9.cs")
+        public void EmptyStatement_CodeFix_CS_TopLevelStatements() =>
+            codeFix.AddPaths("EmptyStatement.TopLevelStatements.cs")
                 .WithTopLevelStatements()
-                .WithCodeFixedPaths("EmptyStatement.CSharp9.Fixed.cs")
+                .WithCodeFixedPaths("EmptyStatement.TopLevelStatements.Fixed.cs")
                 .VerifyCodeFix();
 
 #endif

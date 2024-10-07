@@ -22,3 +22,14 @@ class MyClass : IMyInterface
         ; // Noncompliant
     }
 }
+
+public partial class PartialProperty
+{
+    private partial int Property_01 { set; }
+}
+
+public partial class PartialProperty
+{
+    private partial int Property_01 { set {; } } // Noncompliant
+}
+

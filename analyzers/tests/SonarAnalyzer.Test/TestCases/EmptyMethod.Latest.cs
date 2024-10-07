@@ -33,3 +33,20 @@ abstract class WithModifiers
     public virtual int Y { get => 42;  private set { } }  // Noncompliant
     public abstract int Z { get; private protected set; } // Compliant: no body
 }
+
+public struct S
+{
+    public S() // Compliant - This will replace the default constructor
+    {
+    }
+}
+
+public partial class PartialProperty
+{
+    public partial int Property_01 { set; } 
+}
+
+public partial class PartialProperty
+{
+    public partial int Property_01 { set { } } // Noncompliant
+}

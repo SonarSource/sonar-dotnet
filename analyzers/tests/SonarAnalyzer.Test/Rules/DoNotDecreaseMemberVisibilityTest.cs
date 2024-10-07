@@ -37,16 +37,10 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
 
         [TestMethod]
-        public void DoNotDecreaseMemberVisibility_CSharp9() =>
-            builder.AddPaths("DoNotDecreaseMemberVisibility.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+        public void DoNotDecreaseMemberVisibility_CS_Latest() =>
+            builder.AddPaths("DoNotDecreaseMemberVisibility.Latest.cs")
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .Verify();
-
-        [TestMethod]
-        public void DoNotDecreaseMemberVisibility_CSharp11() =>
-            builder.AddPaths("DoNotDecreaseMemberVisibility.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .VerifyNoIssues();
 
 #endif
 

@@ -44,9 +44,9 @@ namespace SonarAnalyzer.Test.Rules
         [DataTestMethod]
         [DataRow("3.1.11", "3.19.80")]
         [DataRow("5.0.2", "5.21.1")]
-        public void DatabasePasswordsShouldBeSecure_CSharp11_CS(string entityFrameworkCoreVersion, string oracleVersion) =>
-            builder.AddPaths("DatabasePasswordsShouldBeSecure.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+        public void DatabasePasswordsShouldBeSecure_CS_Latest(string entityFrameworkCoreVersion, string oracleVersion) =>
+            builder.AddPaths("DatabasePasswordsShouldBeSecure.Latest.cs")
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .AddReferences(GetReferences(entityFrameworkCoreVersion, oracleVersion))
                 .Verify();
 
