@@ -34,15 +34,12 @@ public class AbstractClassToInterfaceTest
 #if NET
 
     [TestMethod]
-    public void ClassShouldNotBeAbstract_CSharp9() =>
-        builder.AddPaths("AbstractClassToInterface.CSharp9.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
-            .Verify();
-
-    [TestMethod]
-    public void ClassShouldNotBeAbstract_CSharp11() =>
-        builder.AddPaths("AbstractClassToInterface.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
+    public void ClassShouldNotBeAbstract_CSharpLatest() =>
+        builder
+            .AddPaths("AbstractClassToInterface.Latest.cs")
+            .AddPaths("AbstractClassToInterface.Latest.Partial.cs")
+            .WithConcurrentAnalysis(false)
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
             .Verify();
 
 #endif
