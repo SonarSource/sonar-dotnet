@@ -25,6 +25,11 @@
                 [0]}};Database=myDataBase;User Id=myUsername;Password="""); // Noncompliant@-1
             optionsBuilder.UseSqlServer($$"""Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password={{test
                 [1]}}"""); // Compliant
+
+            var charLiteralEscape = '\e';
+            optionsBuilder.UseSqlServer("Server=Server;Password=" + "\e"); // Compliant
+            optionsBuilder.UseSqlServer("Server=Server;Password=" + "\easda"); // Compliant
+            optionsBuilder.UseSqlServer("Server=Server;Password=" + charLiteralEscape); // Compliant
         }
     }
 }

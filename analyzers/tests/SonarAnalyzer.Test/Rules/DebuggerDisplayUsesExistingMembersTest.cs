@@ -33,27 +33,15 @@ public class DebuggerDisplayUsesExistingMembersTest
     public void DebuggerDisplayUsesExistingMembers_CS() =>
         builderCS.AddPaths("DebuggerDisplayUsesExistingMembers.cs").Verify();
 
-    [TestMethod]
-    public void DebuggerDisplayUsesExistingMembers_CSharp8() =>
-        builderCS.AddPaths("DebuggerDisplayUsesExistingMembers.CSharp8.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
-            .Verify();
-
 #if NET
 
     [TestMethod]
-    public void DebuggerDisplayUsesExistingMembers_CSharp10() =>
-        builderCS.AddPaths("DebuggerDisplayUsesExistingMembers.CSharp10.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
+    public void DebuggerDisplayUsesExistingMembers_CSharp_Latest() =>
+        builderCS.AddPaths("DebuggerDisplayUsesExistingMembers.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
             .Verify();
 
 #endif
-
-    [TestMethod]
-    public void DebuggerDisplayUsesExistingMembers_CSharp11() =>
-        builderCS.AddPaths("DebuggerDisplayUsesExistingMembers.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
-            .Verify();
 
     [TestMethod]
     public void DebuggerDisplayUsesExistingMembers_VB() =>

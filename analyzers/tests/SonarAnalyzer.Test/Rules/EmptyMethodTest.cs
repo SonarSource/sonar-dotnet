@@ -64,15 +64,9 @@ public class EmptyMethodTest
             .VerifyCodeFix();
 
     [TestMethod]
-    public void EmptyMethod_CSharp10() =>
-        builderCS.AddPaths("EmptyMethod.CSharp10.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
-            .VerifyNoIssues();
-
-    [TestMethod]
-    public void EmptyMethod_CSharp11() =>
-        builderCS.AddPaths("EmptyMethod.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
+    public void EmptyMethod_CS_Latest() =>
+        builderCS.AddPaths("EmptyMethod.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
             .Verify();
 
 #endif

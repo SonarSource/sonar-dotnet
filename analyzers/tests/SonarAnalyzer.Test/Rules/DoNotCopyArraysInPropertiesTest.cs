@@ -34,16 +34,10 @@ public class DoNotCopyArraysInPropertiesTest
 #if NET
 
     [TestMethod]
-    public void DoNotCopyArraysInProperties_CSharp9() =>
-        builder.AddPaths("DoNotCopyArraysInProperties.CSharp9.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+    public void DoNotCopyArraysInProperties_CS_Latest() =>
+        builder.AddPaths("DoNotCopyArraysInProperties.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
             .Verify();
-
-    [TestMethod]
-    public void DoNotCopyArraysInProperties_CSharp12() =>
-        builder.AddPaths("DoNotCopyArraysInProperties.CSharp12.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp12)
-            .VerifyNoIssues();
 
 #endif
 

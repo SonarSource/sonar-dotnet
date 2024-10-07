@@ -46,23 +46,10 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
 
         [TestMethod]
-        public void DeadStores_CSharp9() =>
-            roslynCfg.AddPaths("DeadStores.CSharp9.cs")
+        public void DeadStores_CS_Latest() =>
+            roslynCfg.AddPaths("DeadStores.Latest.cs")
                 .WithTopLevelStatements()
-                .Verify();
-
-        [TestMethod]
-        public void DeadStores_CSharp10() =>
-            roslynCfg.AddPaths("DeadStores.CSharp10.cs")
-                .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
-
-        [TestMethod]
-        public void DeadStores_CSharp11() =>
-            roslynCfg.AddPaths("DeadStores.CSharp11.cs")
-                .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .Verify();
 
 #endif
