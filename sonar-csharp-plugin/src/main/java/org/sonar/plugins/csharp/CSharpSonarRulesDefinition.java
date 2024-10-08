@@ -25,15 +25,11 @@ import org.sonarsource.dotnet.shared.plugins.AbstractRulesDefinition;
 
 import static org.sonar.plugins.csharp.CSharpPlugin.LANGUAGE_KEY;
 import static org.sonar.plugins.csharp.CSharpPlugin.REPOSITORY_KEY;
+import static org.sonar.plugins.csharp.CSharpPlugin.RESOURCES_DIRECTORY;
 
 @ScannerSide
 public class CSharpSonarRulesDefinition extends AbstractRulesDefinition {
   public CSharpSonarRulesDefinition(SonarRuntime sonarRuntime) {
-    super(REPOSITORY_KEY, LANGUAGE_KEY, sonarRuntime);
-  }
-
-  @Override
-  protected String getResourcesDirectory() {
-    return "/org/sonar/plugins/csharp";
+    super(REPOSITORY_KEY, LANGUAGE_KEY, RESOURCES_DIRECTORY, sonarRuntime);
   }
 }

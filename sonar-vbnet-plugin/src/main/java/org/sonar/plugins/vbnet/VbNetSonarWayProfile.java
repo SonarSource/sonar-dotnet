@@ -23,6 +23,6 @@ import org.sonarsource.dotnet.shared.plugins.AbstractSonarWayProfile;
 
 class VbNetSonarWayProfile extends AbstractSonarWayProfile {
   VbNetSonarWayProfile() {
-    super(VbNetPlugin.LANGUAGE_KEY, VbNetPlugin.PLUGIN_KEY, VbNetPlugin.REPOSITORY_KEY);
+    super(VbNetPlugin.LANGUAGE_KEY, VbNetPlugin.REPOSITORY_KEY, VbNetPlugin.RESOURCES_DIRECTORY);
   }
 }

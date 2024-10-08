@@ -25,15 +25,11 @@ import org.sonarsource.dotnet.shared.plugins.AbstractRulesDefinition;
 
 import static org.sonar.plugins.vbnet.VbNetPlugin.LANGUAGE_KEY;
 import static org.sonar.plugins.vbnet.VbNetPlugin.REPOSITORY_KEY;
+import static org.sonar.plugins.vbnet.VbNetPlugin.RESOURCES_DIRECTORY;
 
 @ScannerSide
 public class VbNetSonarRulesDefinition extends AbstractRulesDefinition {
   public VbNetSonarRulesDefinition(SonarRuntime sonarRuntime) {
-    super(REPOSITORY_KEY, LANGUAGE_KEY, sonarRuntime);
-  }
-
-  @Override
-  protected String getResourcesDirectory() {
-    return "/org/sonar/plugins/vbnet";
+    super(REPOSITORY_KEY, LANGUAGE_KEY, RESOURCES_DIRECTORY, sonarRuntime);
   }
 }

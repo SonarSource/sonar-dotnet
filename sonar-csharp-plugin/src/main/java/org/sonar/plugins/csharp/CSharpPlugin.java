@@ -48,6 +48,7 @@ public class CSharpPlugin implements Plugin {
   static final String REPOSITORY_KEY = "csharpsquid";
   static final String PLUGIN_KEY = "csharp";
   static final String SONARANALYZER_NAME = "SonarAnalyzer.CSharp";
+  static final String RESOURCES_DIRECTORY = "/org/sonar/plugins/csharp";
 
   static final String FILE_SUFFIXES_KEY = AbstractPropertyDefinitions.getFileSuffixProperty(LANGUAGE_KEY);
   static final String FILE_SUFFIXES_DEFVALUE = ".cs,.razor";
