@@ -34,8 +34,12 @@ public class NotAssignedPrivateMemberTest
 
 #if NET
     [TestMethod]
-    public void NotAssignedPrivateMember_CSharp9() =>
-        builder.AddPaths("NotAssignedPrivateMember.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+    public void NotAssignedPrivateMember_Latest() =>
+        builder
+            .AddPaths("NotAssignedPrivateMember.Latest.cs")
+            .AddPaths("NotAssignedPrivateMember.Latest.Partial.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
 
     [TestMethod]
     public void NotAssignedPrivateMember_Razor() =>

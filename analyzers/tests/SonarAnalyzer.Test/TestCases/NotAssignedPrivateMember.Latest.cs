@@ -50,3 +50,8 @@ public record PositionalRecord(string Value)
         field2 = field;
     }
 }
+
+public partial class PartialProperties
+{
+    public partial int Prop1 => 42;
+}
