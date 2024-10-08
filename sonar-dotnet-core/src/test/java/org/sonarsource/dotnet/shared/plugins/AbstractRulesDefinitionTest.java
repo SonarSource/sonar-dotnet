@@ -21,7 +21,6 @@ package org.sonarsource.dotnet.shared.plugins;
 
 import java.io.InputStream;
 import java.util.Set;
-
 import org.junit.Test;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
@@ -38,7 +37,8 @@ public class AbstractRulesDefinitionTest {
   private static final String PCI_DSS_RULE_KEY = "S1115";
   private static final String OWASP_ASVS_RULE_KEY = "S1116";
   private static final String STIG_RULE_KEY = "S1117";
-  private static final SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 3), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
+  private static final SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 3), SonarQubeSide.SCANNER,
+    SonarEdition.COMMUNITY);
 
   @Test
   public void test() {
@@ -51,23 +51,26 @@ public class AbstractRulesDefinitionTest {
 
     RulesDefinition.Rule rule = repository.rule("S1111");
     assertThat(rule).isNotNull();
-    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:117", "cwe:532", "owaspTop10:a10", "owaspTop10:a3",
-      "owaspTop10-2021:a9");
+    assertThat(rule.securityStandards())
+      .containsExactlyInAnyOrder("cwe:117", "cwe:532", "owaspTop10:a10", "owaspTop10:a3", "owaspTop10-2021:a9");
   }
 
   @Test
   public void test_security_standards_9_5_PCI_DSS_is_available() {
-    assertThat(getSecurityStandards(Version.create(9, 5), PCI_DSS_RULE_KEY)).containsExactlyInAnyOrder("pciDss-3.2:6.5.10", "pciDss-4.0:6.2.4");
+    assertThat(getSecurityStandards(Version.create(9, 5), PCI_DSS_RULE_KEY))
+      .containsExactlyInAnyOrder("pciDss-3.2:6.5.10", "pciDss-4.0:6.2.4");
   }
 
   @Test
   public void test_security_standards_9_9_ASVS_is_available() {
-    assertThat(getSecurityStandards(Version.create(9, 9), OWASP_ASVS_RULE_KEY)).containsExactlyInAnyOrder("owaspAsvs-4.0:2.10.4", "owaspAsvs-4.0:3.5.2", "owaspAsvs-4.0:6.4.1");
+    assertThat(getSecurityStandards(Version.create(9, 9), OWASP_ASVS_RULE_KEY))
+      .containsExactlyInAnyOrder("owaspAsvs-4.0:2.10.4", "owaspAsvs-4.0:3.5.2", "owaspAsvs-4.0:6.4.1");
   }
 
   @Test
   public void test_security_standards_STIG_is_available() {
-    assertThat(getSecurityStandards(Version.create(10, 10), STIG_RULE_KEY)).containsExactlyInAnyOrder("stig-ASD_V5R3:V-222542", "stig-ASD_V5R3:V-222603");
+    assertThat(getSecurityStandards(Version.create(10, 10), STIG_RULE_KEY))
+      .containsExactlyInAnyOrder("stig-ASD_V5R3:V-222542", "stig-ASD_V5R3:V-222603");
   }
 
   @Test
@@ -78,19 +81,18 @@ public class AbstractRulesDefinitionTest {
 
     RulesDefinition.Repository repository = context.repository("test");
 
-    assertThat(repository.rule("S1111").debtRemediationFunction()).hasToString("DebtRemediationFunction{type=CONSTANT_ISSUE, gap multiplier=null, base effort=5min}");
-    assertThat(repository.rule("S1112").debtRemediationFunction()).hasToString("DebtRemediationFunction{type=LINEAR, gap multiplier=10min, base effort=null}");
-    assertThat(repository.rule("S1113").debtRemediationFunction()).hasToString("DebtRemediationFunction{type=LINEAR_OFFSET, gap multiplier=30min, base effort=4h}");
+    assertThat(repository.rule("S1111").debtRemediationFunction())
+      .hasToString("DebtRemediationFunction{type=CONSTANT_ISSUE, gap multiplier=null, base effort=5min}");
+    assertThat(repository.rule("S1112").debtRemediationFunction())
+      .hasToString("DebtRemediationFunction{type=LINEAR, gap multiplier=10min, base effort=null}");
+    assertThat(repository.rule("S1113").debtRemediationFunction())
+      .hasToString("DebtRemediationFunction{type=LINEAR_OFFSET, gap multiplier=30min, base effort=4h}");
     assertThat(repository.rule("S1114").debtRemediationFunction()).isNull();
   }
 
   @Test
   public void test_missing_resource_throws() {
-    AbstractRulesDefinition sut = new AbstractRulesDefinition("test", "test", sonarRuntime) {
-      @Override
-      protected String getResourcesDirectory() {
-        return "/org/sonar/plugins/csharp";
-      }
+    AbstractRulesDefinition sut = new AbstractRulesDefinition("test", "test", "/org/sonar/plugins/csharp", sonarRuntime) {
     };
     RulesDefinition.Context context = new RulesDefinition.Context();
 
@@ -115,12 +117,7 @@ public class AbstractRulesDefinitionTest {
 
   private static class TestRulesDefinition extends AbstractRulesDefinition {
     TestRulesDefinition(SonarRuntime runtime) {
-      super("test", "test", runtime);
-    }
-
-    @Override
-    protected String getResourcesDirectory() {
-      return "/AbstractRulesDefinitionTest/";
+      super("test", "test", "/AbstractRulesDefinitionTest/", runtime);
     }
 
     @Override

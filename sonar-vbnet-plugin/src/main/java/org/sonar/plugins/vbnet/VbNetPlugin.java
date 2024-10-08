@@ -47,6 +47,7 @@ public class VbNetPlugin implements Plugin {
   static final String REPOSITORY_KEY = "vbnet";
   static final String PLUGIN_KEY = "vbnet";
   static final String SONARANALYZER_NAME = "SonarAnalyzer.VisualBasic";
+  static final String RESOURCES_DIRECTORY = "/org/sonar/plugins/vbnet";
 
   static final String FILE_SUFFIXES_KEY = AbstractPropertyDefinitions.getFileSuffixProperty(LANGUAGE_KEY);
   static final String FILE_SUFFIXES_DEFVALUE = ".vb";

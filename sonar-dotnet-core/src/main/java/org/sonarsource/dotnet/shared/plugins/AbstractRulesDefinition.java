@@ -29,7 +29,6 @@ import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.server.rule.RuleParamType;
@@ -43,23 +42,24 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
 
   private final String repositoryKey;
   private final String languageKey;
+  private final String resourcesDirectory;
   private final SonarRuntime sonarRuntime;
 
-  protected AbstractRulesDefinition(String repositoryKey, String languageKey, SonarRuntime sonarRuntime) {
+  protected AbstractRulesDefinition(String repositoryKey, String languageKey, String resourcesDirectory, SonarRuntime sonarRuntime) {
     this.repositoryKey = repositoryKey;
     this.languageKey = languageKey;
+    this.resourcesDirectory = resourcesDirectory;
     this.sonarRuntime = sonarRuntime;
   }
 
-  protected abstract String getResourcesDirectory();
-
   @Override
   public void define(Context context) {
-    Type ruleListType = new TypeToken<List<Rule>>() { }.getType();
+    Type ruleListType = new TypeToken<List<Rule>>() {
+    }.getType();
     List<Rule> rules = GSON.fromJson(readResource("Rules.json"), ruleListType);
 
     NewRepository repository = context.createRepository(repositoryKey, languageKey).setName(REPOSITORY_NAME);
-    RuleMetadataLoader ruleMetadataLoader = new RuleMetadataLoader(getResourcesDirectory(), sonarRuntime);
+    RuleMetadataLoader ruleMetadataLoader = new RuleMetadataLoader(resourcesDirectory, sonarRuntime);
     ruleMetadataLoader.addRulesByRuleKey(repository, rules.stream().map(Rule::getId).toList());
 
     for (Rule rule : rules) {
@@ -78,7 +78,7 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   }
 
   private String readResource(String name) {
-    InputStream stream = getResourceAsStream(getResourcesDirectory() + "/" + name);
+    InputStream stream = getResourceAsStream(resourcesDirectory + "/" + name);
     if (stream == null) {
       throw new IllegalStateException("Resource does not exist: " + name);
     }
@@ -98,7 +98,7 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     String id;
     RuleParameter[] parameters;
 
-    public String getId () {
+    public String getId() {
       return id;
     }
   }
