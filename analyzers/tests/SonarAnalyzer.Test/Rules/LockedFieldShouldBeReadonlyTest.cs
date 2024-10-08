@@ -34,25 +34,11 @@ public class LockedFieldShouldBeReadonlyTest
 #if NET
 
     [TestMethod]
-    public void LockedFieldShouldBeReadonly_CSharp8() =>
+    public void LockedFieldShouldBeReadonly_Latest() =>
         builder
-            .AddPaths("LockedFieldShouldBeReadonly.CSharp8.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .AddPaths("LockedFieldShouldBeReadonly.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
             .Verify();
 
 #endif
-
-    [TestMethod]
-    public void LockedFieldShouldBeReadonly_CSharp9() =>
-        builder
-            .AddPaths("LockedFieldShouldBeReadonly.CSharp9.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
-            .Verify();
-
-    [TestMethod]
-    public void LockedFieldShouldBeReadonly_CSharp11() =>
-        builder
-            .AddPaths("LockedFieldShouldBeReadonly.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
-            .Verify();
 }

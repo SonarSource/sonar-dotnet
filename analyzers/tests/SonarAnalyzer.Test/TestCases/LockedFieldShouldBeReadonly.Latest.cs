@@ -1,4 +1,7 @@
-﻿class Test
+﻿using System;
+using System.Threading;
+
+class Test
 {
     static readonly object staticReadonlyField = null;
 
@@ -41,5 +44,66 @@
     void SwitchExpression(object oPar)
     {
         lock (oPar switch { _ => new object() }) { } // FN, switch expression not supported
+    }
+
+    void StringLiterals()
+    {
+        lock ("""a raw string literal""") // Noncompliant
+        { }                    
+        lock ($"""an interpolated {"raw string literal"}""") // Noncompliant
+        { }
+    }
+
+    void TargetTypedObjectCreation()
+    {
+        lock ((object)new())  // FN
+        { }
+    }
+}
+
+class Records
+{
+    readonly ARecord readonlyField = new();
+    ARecord readWriteField = new();
+
+    static readonly ARecord staticReadonlyField = new();
+    static ARecord staticReadWriteField = new();
+
+    void OnAFieldOfTypeRecord()
+    {
+        lock (readonlyField)
+        { }
+        lock (readWriteField) // Noncompliant
+        { }
+        lock (staticReadonlyField)
+        { }
+        lock (staticReadWriteField) // Noncompliant
+        { }
+    }
+
+    void OnANewRecordInstance()
+    {
+        lock (new ARecord()) // Noncompliant
+        { }
+    }
+
+    record ARecord();
+}
+
+class LockObjectType
+{
+    private readonly Lock _LockReadonly = new();
+    private Lock _LockWriteable = new();
+
+    public void LockOnReadonlyLock()
+    {
+        lock (_LockReadonly)
+        { }
+    }
+
+    public void LockOnWritableLock()
+    {
+        lock (_LockWriteable) // Noncompliant
+        { }
     }
 }
