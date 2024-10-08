@@ -47,20 +47,13 @@ public class MemberShouldBeStaticTest
 
 #if NET
     [TestMethod]
-    public void MemberShouldBeStatic_CSharp9() =>
-        builder.AddPaths("MemberShouldBeStatic.CSharp9.cs").WithTopLevelStatements().Verify();
-
-    [TestMethod]
-    public void MemberShouldBeStatic_CSharp12() =>
-        builder.AddPaths("MemberShouldBeStatic.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+    public void MemberShouldBeStatic_Latest() =>
+        builder
+            .AddPaths("MemberShouldBeStatic.Latest.cs")
+            .AddPaths("MemberShouldBeStatic.Latest.Partial.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithTopLevelStatements().Verify();
 #endif
-
-    [TestMethod]
-    public void MemberShouldBeStatic_CSharp8() =>
-        builder.AddPaths("MemberShouldBeStatic.CSharp8.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
-            .AddReferences(MetadataReferenceFacade.NetStandard21)
-            .Verify();
 
 #if NETFRAMEWORK // HttpApplication is available only on .Net Framework
     [TestMethod]
