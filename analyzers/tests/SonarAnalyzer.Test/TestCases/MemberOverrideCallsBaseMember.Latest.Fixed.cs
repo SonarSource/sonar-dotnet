@@ -20,8 +20,6 @@ record Derived : Base
 {
     bool isInitialized;
     int backingField;
-
-    public override int MyProperty1 { get => base.MyProperty1; init => base.MyProperty1 = value; }      // Noncompliant
     public override int MyProperty2 { get => base.MyProperty2; init => base.MyProperty2 = value + 1; }
     public override int MyProperty3 { get => base.MyProperty3; init { base.MyProperty2 = value; isInitialized = true; } }
     /// <summary>
@@ -31,14 +29,11 @@ record Derived : Base
     public override sealed int MyProperty5 { get => base.MyProperty5; init => base.MyProperty5 = value; }
     public override int MyProperty6 { get => base.MyProperty6; init => base.MyProperty6 = value; } // Error [CS0154, CS0545] The property or indexer 'property' cannot be used in this context because it lacks the get accessor
     public override int MyProperty7 { get => base.MyProperty7; init => base.MyProperty7 = value; } // Error [CS0200, CS0546] Property or indexer 'property' cannot be assigned to -- it is read only
-    public override int MyProperty8 { init => base.MyProperty8 = value; } // Noncompliant
-    public override int MyProperty9 { get => base.MyProperty9; } // Noncompliant
     public sealed int MyProperty10 { get => base.MyProperty10; init => base.MyProperty10 = value; } // Error [CS0238] 'member' cannot be sealed because it is not an override
     public override int MyProperty11 { get => base.MyProperty11; init => backingField = value; }
     public override int MyProperty12 { get => base.MyProperty5; init => base.MyProperty5 = value; }
     public override int MyProperty13 { get; init => base.MyProperty13 = value; } // Error [CS0501] 'member function' must declare a body because it is not marked abstract, extern, or partial
     public override int MyProperty14 { get => base.MyProperty14; init => base.MyProperty14 = value; } // Error [CS0115, CS0117, CS0117] no suitable method found to override, 'Base' does not contain a definition for 'MyProperty14'
-    public override void Method() => base.Method(); // Noncompliant
 }
 
 namespace CompilerGeneratedMethods
@@ -73,5 +68,30 @@ namespace CompilerGeneratedMethods
     {
         public override string ToString() =>
             base.ToString(); // Compliant. Prevents the compiler from generating a custom ToString method.
+    }
+}
+
+namespace PartialProperties
+{
+    public partial class Partial
+    {
+        public virtual partial int Prop1 { get; }
+        public virtual partial int Prop2 { get; set; }
+    }
+
+    public partial class Partial
+    {
+        public virtual partial int Prop1 => 42;
+
+        private int _value;
+        public virtual partial int Prop2
+        {
+            get => _value;
+            set => _value = value;
+        }
+    }
+
+    public class Derived : Partial
+    {
     }
 }

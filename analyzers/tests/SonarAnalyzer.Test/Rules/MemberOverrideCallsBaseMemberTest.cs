@@ -33,15 +33,15 @@ namespace SonarAnalyzer.Test.Rules
 
 #if NET
         [TestMethod]
-        public void MemberOverrideCallsBaseMember_CSharp10() =>
-            builder.AddPaths("MemberOverrideCallsBaseMember.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+        public void MemberOverrideCallsBaseMember_Latest() =>
+            builder.AddPaths("MemberOverrideCallsBaseMember.Latest.cs").WithOptions(ParseOptionsHelper.CSharpLatest).Verify();
 
         [TestMethod]
-        public void MemberOverrideCallsBaseMember_CSharp10_CodeFix() =>
-            builder.AddPaths("MemberOverrideCallsBaseMember.CSharp10.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
+        public void MemberOverrideCallsBaseMember_Latest_CodeFix() =>
+            builder.AddPaths("MemberOverrideCallsBaseMember.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
             .WithCodeFix<MemberOverrideCallsBaseMemberCodeFix>()
-            .WithCodeFixedPaths("MemberOverrideCallsBaseMember.CSharp10.Fixed.cs")
+            .WithCodeFixedPaths("MemberOverrideCallsBaseMember.Latest.Fixed.cs")
             .VerifyCodeFix();
 #endif
 
