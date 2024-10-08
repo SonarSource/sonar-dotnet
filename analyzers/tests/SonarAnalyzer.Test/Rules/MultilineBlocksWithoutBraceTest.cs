@@ -25,7 +25,18 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class MultilineBlocksWithoutBraceTest
 {
+    private static readonly VerifierBuilder Builder = new VerifierBuilder<MultilineBlocksWithoutBrace>();
+
     [TestMethod]
     public void MultilineBlocksWithoutBrace() =>
-        new VerifierBuilder<MultilineBlocksWithoutBrace>().AddPaths("MultilineBlocksWithoutBrace.cs").Verify();
+        Builder.AddPaths("MultilineBlocksWithoutBrace.cs").Verify();
+
+#if NET
+    [TestMethod]
+    public void MultilineBlocksWithoutBrace_Latest() =>
+        Builder
+            .AddPaths("MultilineBlocksWithoutBrace.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
+#endif
 }
