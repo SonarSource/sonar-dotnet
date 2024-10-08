@@ -20,32 +20,21 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class MemberShadowsOuterStaticMemberTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<MemberShadowsOuterStaticMember>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void MemberShadowsOuterStaticMember() =>
-            builder.AddPaths("MemberShadowsOuterStaticMember.cs").Verify();
+[TestClass]
+public class MemberShadowsOuterStaticMemberTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<MemberShadowsOuterStaticMember>();
+
+    [TestMethod]
+    public void MemberShadowsOuterStaticMember() =>
+        builder.AddPaths("MemberShadowsOuterStaticMember.cs").Verify();
 
 #if NET
-
-        [TestMethod]
-        public void MemberShadowsOuterStaticMember_CSharp9() =>
-            builder.AddPaths("MemberShadowsOuterStaticMember.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
-
-        [TestMethod]
-        public void MemberShadowsOuterStaticMember_CSharp10() =>
-            builder.AddPaths("MemberShadowsOuterStaticMember.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
-
-        [TestMethod]
-        public void MemberShadowsOuterStaticMember_CSharp11() =>
-            builder.AddPaths("MemberShadowsOuterStaticMember.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
-
+    [TestMethod]
+    public void MemberShadowsOuterStaticMember_Latest() =>
+        builder.AddPaths("MemberShadowsOuterStaticMember.Latest.cs").WithOptions(ParseOptionsHelper.CSharpLatest).Verify();
 #endif
 
-    }
 }
