@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace Tests.Diagnostics
 {
@@ -9,6 +10,16 @@ namespace Tests.Diagnostics
         private void Test()
         {
             lock (rawStringLiterals) { } // Noncompliant
+        }
+    }
+
+    public class LockOnLockType
+    {
+        private Lock _lock;
+        public void LockOnLock()
+        {
+            lock (_lock) // Compliant
+            { }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Tests.Diagnostics
 {
@@ -7,29 +8,38 @@ namespace Tests.Diagnostics
     {
         public void RawStringLiterals()
         {
-            lock ("""foo""") { }// Noncompliant
+            lock ("""foo""") // Noncompliant
+            { }
         }
 
         void NewlinesInStringInterpolation()
         {
             string s = "test";
             lock ($"{s
-                .ToUpper()
-                }")
+                .ToUpper()}")
             { }
-            // Noncompliant@-4
+            // Noncompliant@-3
         }
 
         public void MyLockingMethod()
         {
             lock (myStringField) // Noncompliant
-            {
-            }
+            { }
         }
 
         public void EscapeChar()
         {
             lock ("\e") // Noncompliant
+            { }
+        }
+    }
+
+    public class LockOnLockType
+    {
+        private Lock _lock;
+        public void LockOnLock()
+        {
+            lock (_lock) // Compliant
             { }
         }
     }

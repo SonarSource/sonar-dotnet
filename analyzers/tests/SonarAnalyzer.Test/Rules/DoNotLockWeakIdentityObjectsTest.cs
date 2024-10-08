@@ -35,9 +35,9 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
 
         [TestMethod]
-        public void DoNotLockWeakIdentityObjects_CSharp11() =>
-            builder.AddPaths("DoNotLockWeakIdentityObjects.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+        public void DoNotLockWeakIdentityObjects_Latest() =>
+            builder.AddPaths("DoNotLockWeakIdentityObjects.Latest.cs")
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .Verify();
 
 #endif
