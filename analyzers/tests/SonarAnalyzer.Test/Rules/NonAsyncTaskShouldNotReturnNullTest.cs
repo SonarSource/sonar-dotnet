@@ -21,27 +21,28 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class NonAsyncTaskShouldNotReturnNullTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<CS.NonAsyncTaskShouldNotReturnNull>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void NonAsyncTaskShouldNotReturnNull_CSharp8() =>
-            builder.AddPaths("NonAsyncTaskShouldNotReturnNull.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+[TestClass]
+public class NonAsyncTaskShouldNotReturnNullTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<CS.NonAsyncTaskShouldNotReturnNull>();
+
+    [TestMethod]
+    public void NonAsyncTaskShouldNotReturnNull_CS() =>
+        builder.AddPaths("NonAsyncTaskShouldNotReturnNull.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
-
-        [TestMethod]
-        public void NonAsyncTaskShouldNotReturnNull_CSharp11() =>
-            builder.AddPaths("NonAsyncTaskShouldNotReturnNull.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
-
+    [TestMethod]
+    public void NonAsyncTaskShouldNotReturnNull__CS_Latest() =>
+        builder
+            .AddPaths("NonAsyncTaskShouldNotReturnNull.Latest.cs")
+            .AddPaths("NonAsyncTaskShouldNotReturnNull.Latest.Partial.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
 #endif
 
-        [TestMethod]
-        public void NonAsyncTaskShouldNotReturnNull_VB() =>
-            new VerifierBuilder<VB.NonAsyncTaskShouldNotReturnNull>().AddPaths("NonAsyncTaskShouldNotReturnNull.vb").Verify();
-    }
+    [TestMethod]
+    public void NonAsyncTaskShouldNotReturnNull_VB() =>
+        new VerifierBuilder<VB.NonAsyncTaskShouldNotReturnNull>().AddPaths("NonAsyncTaskShouldNotReturnNull.vb").Verify();
 }
