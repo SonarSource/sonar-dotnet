@@ -26,13 +26,22 @@ import org.sonar.api.server.ServerSide;
 @ScannerSide
 @ServerSide
 @ExtensionPoint
-public interface DotNetPluginMetadata {
+public interface PluginMetadata {
 
   String languageKey();
+
   String pluginKey();
+
   String languageName();
-  String shortLanguageName();
-  String sonarAnalyzerName();
+
+  String analyzerProjectName();
+
   String repositoryKey();
+
+  String fileSuffixesKey();
+
+  String fileSuffixesDefaultValue();
+
+  String resourcesDirectory();
 
 }

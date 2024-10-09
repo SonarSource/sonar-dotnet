@@ -23,7 +23,7 @@ import org.sonar.api.Plugin;
 import org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions;
 import org.sonarsource.dotnet.shared.plugins.AnalysisWarningsSensor;
 import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
-import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
+import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.FileTypeSensor;
@@ -53,7 +53,7 @@ public class CSharpPlugin implements Plugin {
   static final String FILE_SUFFIXES_KEY = AbstractPropertyDefinitions.getFileSuffixProperty(LANGUAGE_KEY);
   static final String FILE_SUFFIXES_DEFVALUE = ".cs,.razor";
 
-  static final DotNetPluginMetadata METADATA = new CSharpPluginMetadata();
+  static final PluginMetadata METADATA = new CSharpPluginMetadata();
 
   @Override
   public void define(Context context) {
@@ -96,7 +96,7 @@ public class CSharpPlugin implements Plugin {
     context.addExtensions(RoslynProfileExporter.sonarLintRepositoryProperties(METADATA));
   }
 
-  private static class CSharpPluginMetadata implements DotNetPluginMetadata {
+  private static class CSharpPluginMetadata implements PluginMetadata {
 
     @Override
     public String languageKey() {
@@ -114,18 +114,28 @@ public class CSharpPlugin implements Plugin {
     }
 
     @Override
-    public String shortLanguageName() {
-      return LANGUAGE_NAME;
-    }
-
-    @Override
-    public String sonarAnalyzerName() {
+    public String analyzerProjectName() {
       return SONARANALYZER_NAME;
     }
 
     @Override
     public String repositoryKey() {
       return REPOSITORY_KEY;
+    }
+
+    @Override
+    public String fileSuffixesKey() {
+      return FILE_SUFFIXES_KEY;
+    }
+
+    @Override
+    public String fileSuffixesDefaultValue() {
+      return FILE_SUFFIXES_DEFVALUE;
+    }
+
+    @Override
+    public String resourcesDirectory() {
+      return RESOURCES_DIRECTORY;
     }
   }
 }

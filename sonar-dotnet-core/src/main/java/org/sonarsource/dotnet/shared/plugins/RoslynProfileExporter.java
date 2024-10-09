@@ -34,6 +34,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.annotation.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.profiles.ProfileExporter;
@@ -46,8 +48,6 @@ import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinition.Context;
 import org.sonar.api.server.rule.RulesDefinition.Repository;
 import org.sonar.api.server.rule.RulesDefinition.Rule;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * This profile exporter was build to be used by the SonarQube SonarScanner for .NET (S4MSB) during the Begin step,
@@ -58,17 +58,16 @@ import org.slf4j.LoggerFactory;
  * To see the defaults of the settings, see AbstractPropertyDefinitions.java
  *
  * See https://github.com/SonarSource/sonar-scanner-msbuild/blob/4.6.1.2049/src/SonarScanner.MSBuild.PreProcessor/Roslyn/RoslynAnalyzerProvider.cs#L150
- *
  */
 public class RoslynProfileExporter extends ProfileExporter {
   private static final Logger LOG = LoggerFactory.getLogger(RoslynProfileExporter.class);
   private static final String ROSLYN_REPOSITORY_PREFIX = "roslyn.";
 
-  private final DotNetPluginMetadata pluginMetadata;
+  private final PluginMetadata pluginMetadata;
   private final Configuration configuration;
   private final RulesDefinition[] rulesDefinitions;
 
-  public RoslynProfileExporter(DotNetPluginMetadata pluginMetadata, Configuration configuration, RulesDefinition[] rulesDefinitions) {
+  public RoslynProfileExporter(PluginMetadata pluginMetadata, Configuration configuration, RulesDefinition[] rulesDefinitions) {
     super(profileKey(pluginMetadata), "Technical exporter for the MSBuild SonarQube Scanner");
     this.pluginMetadata = pluginMetadata;
     this.configuration = configuration;
@@ -76,15 +75,15 @@ public class RoslynProfileExporter extends ProfileExporter {
     setSupportedLanguages(pluginMetadata.languageKey());
   }
 
-  private static String sonarAnalyzerPartialRepoKey(DotNetPluginMetadata pluginMetadata) {
+  private static String sonarAnalyzerPartialRepoKey(PluginMetadata pluginMetadata) {
     return "sonaranalyzer-" + pluginMetadata.languageKey();
   }
 
-  private static String profileKey(DotNetPluginMetadata pluginMetadata) {
+  private static String profileKey(PluginMetadata pluginMetadata) {
     return "roslyn-" + pluginMetadata.languageKey();
   }
 
-  public static List<PropertyDefinition> sonarLintRepositoryProperties(DotNetPluginMetadata pluginMetadata) {
+  public static List<PropertyDefinition> sonarLintRepositoryProperties(PluginMetadata pluginMetadata) {
     String analyzerVersion = getAnalyzerVersion();
     return Arrays.asList(
       PropertyDefinition.builder(pluginKeyPropertyKey(sonarAnalyzerPartialRepoKey(pluginMetadata)))
@@ -100,15 +99,15 @@ public class RoslynProfileExporter extends ProfileExporter {
         .hidden()
         .build(),
       PropertyDefinition.builder(analyzerIdPropertyKey(sonarAnalyzerPartialRepoKey(pluginMetadata)))
-        .defaultValue(pluginMetadata.sonarAnalyzerName())
+        .defaultValue(pluginMetadata.analyzerProjectName())
         .hidden()
         .build(),
       PropertyDefinition.builder(ruleNamespacePropertyKey(sonarAnalyzerPartialRepoKey(pluginMetadata)))
-        .defaultValue(pluginMetadata.sonarAnalyzerName())
+        .defaultValue(pluginMetadata.analyzerProjectName())
         .hidden()
         .build(),
       PropertyDefinition.builder(nugetPackageIdPropertyKey(sonarAnalyzerPartialRepoKey(pluginMetadata)))
-        .defaultValue(pluginMetadata.sonarAnalyzerName())
+        .defaultValue(pluginMetadata.analyzerProjectName())
         .hidden()
         .build(),
       PropertyDefinition.builder(nugetPackageVersionPropertyKey(sonarAnalyzerPartialRepoKey(pluginMetadata)))
@@ -129,9 +128,9 @@ public class RoslynProfileExporter extends ProfileExporter {
   public void exportProfile(RulesProfile rulesProfile, Writer writer) {
     try {
       Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(pluginMetadata, rulesProfile.getActiveRules()
-        .stream()
-        .map(r -> RuleKey.of(r.getRepositoryKey(), r.getRuleKey()))
-        .toList());
+          .stream()
+          .map(r -> RuleKey.of(r.getRepositoryKey(), r.getRuleKey()))
+          .toList());
 
       appendLine(writer, "<?xml version=\"1.0\" encoding=\"utf-8\"?>");
       appendLine(writer, "<RoslynExportProfile Version=\"1.0\">");
@@ -268,7 +267,7 @@ public class RoslynProfileExporter extends ProfileExporter {
     return result;
   }
 
-  public static Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey(DotNetPluginMetadata pluginMetadata, Iterable<RuleKey> activeRules) {
+  public static Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey(PluginMetadata pluginMetadata, Iterable<RuleKey> activeRules) {
     Map<String, List<RuleKey>> result = new LinkedHashMap<>();
 
     for (RuleKey activeRule : activeRules) {

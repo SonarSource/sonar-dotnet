@@ -25,10 +25,10 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.slf4j.event.Level;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -36,7 +36,7 @@ import static org.mockito.Mockito.when;
 
 public class LogSensorTest {
   private static final String LANG_KEY = "LANG_KEY";
-  private static final String SHORT_LANG_NAME = "SHORT_LANG_NAME";
+  private static final String LANG_NAME = "LANG_NAME";
   // see src/test/resources/ProtobufImporterTest/README.md for explanation. log.pb is copy of custom-log.pb
   private static final File TEST_DATA_DIR = new File("src/test/resources/LogSensorTest");
 
@@ -53,9 +53,9 @@ public class LogSensorTest {
   public void prepare() throws Exception {
     logTester.setLevel(Level.DEBUG);
     context = SensorContextTester.create(temp.getRoot());
-    DotNetPluginMetadata metadata = mock(DotNetPluginMetadata.class);
+    PluginMetadata metadata = mock(PluginMetadata.class);
     when(metadata.languageKey()).thenReturn(LANG_KEY);
-    when(metadata.shortLanguageName()).thenReturn(SHORT_LANG_NAME);
+    when(metadata.languageName()).thenReturn(LANG_NAME);
     AbstractModuleConfiguration configuration = mock(AbstractModuleConfiguration.class);
     when(configuration.protobufReportPaths()).thenReturn(Collections.singletonList(TEST_DATA_DIR.toPath()));
     sensor = new LogSensor(metadata, configuration);
@@ -65,7 +65,7 @@ public class LogSensorTest {
   public void should_describe() {
     DefaultSensorDescriptor sensorDescriptor = new DefaultSensorDescriptor();
     sensor.describe(sensorDescriptor);
-    assertThat(sensorDescriptor.name()).isEqualTo(SHORT_LANG_NAME + " Analysis Log");
+    assertThat(sensorDescriptor.name()).isEqualTo(LANG_NAME + " Analysis Log");
     assertThat(sensorDescriptor.languages()).isEmpty();     // should not filter per language
   }
 

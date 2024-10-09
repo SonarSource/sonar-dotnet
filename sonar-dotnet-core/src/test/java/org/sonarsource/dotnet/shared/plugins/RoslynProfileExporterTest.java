@@ -58,13 +58,13 @@ public class RoslynProfileExporterTest {
   @org.junit.Rule
   public LogTester logs = new LogTester();
 
-  private DotNetPluginMetadata pluginMetadata = csPluginMetadata();
+  private PluginMetadata pluginMetadata = csPluginMetadata();
 
-  private static DotNetPluginMetadata csPluginMetadata() {
-    DotNetPluginMetadata metadata = mock(DotNetPluginMetadata.class);
+  private static PluginMetadata csPluginMetadata() {
+    PluginMetadata metadata = mock(PluginMetadata.class);
     when(metadata.languageKey()).thenReturn("cs");
     when(metadata.repositoryKey()).thenReturn("csharpsquid");
-    when(metadata.sonarAnalyzerName()).thenReturn(SONAR_ANALYZER_NAME);
+    when(metadata.analyzerProjectName()).thenReturn(SONAR_ANALYZER_NAME);
     return metadata;
   }
 
@@ -130,7 +130,7 @@ public class RoslynProfileExporterTest {
       repo.done();
     };
 
-    RoslynProfileExporter exporter = new RoslynProfileExporter(pluginMetadata, configuration, new RulesDefinition[] {sonarLintRepo});
+    RoslynProfileExporter exporter = new RoslynProfileExporter(pluginMetadata, configuration, new RulesDefinition[]{sonarLintRepo});
     assertThat(exporter.getKey()).isEqualTo("roslyn-cs");
     assertThat(exporter.getName()).isEqualTo("Technical exporter for the MSBuild SonarQube Scanner");
     assertThat(exporter.getSupportedLanguages()).containsOnly("cs");
@@ -284,7 +284,7 @@ public class RoslynProfileExporterTest {
     when(rulesProfile.getLanguage()).thenReturn("csharp");
     when(rulesProfile.getName()).thenReturn("myprofile");
 
-    RoslynProfileExporter exporter = new RoslynProfileExporter(pluginMetadata, configuration, new RulesDefinition[] {sonarLintRepo});
+    RoslynProfileExporter exporter = new RoslynProfileExporter(pluginMetadata, configuration, new RulesDefinition[]{sonarLintRepo});
     StringWriter writer = new StringWriter();
     exporter.exportProfile(rulesProfile, writer);
 

@@ -28,10 +28,10 @@ import org.sonarsource.dotnet.shared.plugins.protobuf.LogImporter;
 import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.LOG_FILENAME;
 
 public class LogSensor implements Sensor {
-  private final DotNetPluginMetadata pluginMetadata;
+  private final PluginMetadata pluginMetadata;
   private final AbstractModuleConfiguration configuration;
 
-  public LogSensor(DotNetPluginMetadata pluginMetadata, AbstractModuleConfiguration configuration) {
+  public LogSensor(PluginMetadata pluginMetadata, AbstractModuleConfiguration configuration) {
     this.pluginMetadata = pluginMetadata;
     this.configuration = configuration;
   }
@@ -39,7 +39,7 @@ public class LogSensor implements Sensor {
   @Override
   public void describe(SensorDescriptor descriptor) {
     // We don't filter by language to be invoked on projects without sources - when referencing shared project
-    String name = String.format("%s Analysis Log", pluginMetadata.shortLanguageName());
+    String name = String.format("%s Analysis Log", pluginMetadata.languageName());
     descriptor.name(name);
   }
 

@@ -34,7 +34,7 @@ public class CodeCoverageProviderTest {
 
   @Test
   public void vbnet() {
-    DotNetPluginMetadata pluginMetadata = mock(DotNetPluginMetadata.class);
+    PluginMetadata pluginMetadata = mock(PluginMetadata.class);
     when(pluginMetadata.languageKey()).thenReturn("vbnet");
     CodeCoverageProvider provider = new CodeCoverageProvider(pluginMetadata);
     assertThat(nonProperties(provider.extensions())).containsOnly(
@@ -50,7 +50,7 @@ public class CodeCoverageProviderTest {
 
   @Test
   public void csharp() {
-    DotNetPluginMetadata pluginMetadata = mock(DotNetPluginMetadata.class);
+    PluginMetadata pluginMetadata = mock(PluginMetadata.class);
     when(pluginMetadata.languageKey()).thenReturn("cs");
     CodeCoverageProvider provider = new CodeCoverageProvider(pluginMetadata);
     assertThat(nonProperties(provider.extensions())).containsOnly(
@@ -83,7 +83,7 @@ public class CodeCoverageProviderTest {
   }
 
   private static CodeCoverageProvider createTestProvider() {
-    DotNetPluginMetadata pluginMetadata = mock(DotNetPluginMetadata.class);
+    PluginMetadata pluginMetadata = mock(PluginMetadata.class);
     when(pluginMetadata.languageKey()).thenReturn("KEY");
     when(pluginMetadata.languageName()).thenReturn("NAME");
     return new CodeCoverageProvider(pluginMetadata);

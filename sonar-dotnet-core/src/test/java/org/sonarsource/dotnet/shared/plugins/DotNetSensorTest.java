@@ -32,6 +32,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
+import org.slf4j.event.Level;
 import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
@@ -43,7 +44,6 @@ import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -59,7 +59,7 @@ public class DotNetSensorTest {
   private static final String REPO_KEY = "REPO_KEY";
   private static final String LANG_KEY = "LANG_KEY";
   private static final String A_DIFFERENT_LANG_KEY = "another language than the tested plugin";
-  private static final String SHORT_LANG_NAME = "SHORT_LANG_NAME";
+  private static final String LANG_NAME = "LANG_NAME";
   private static final String READ_MORE_LOG = "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects";
 
   @Rule
@@ -88,12 +88,12 @@ public class DotNetSensorTest {
     tester = SensorContextTester.create(new File("src/test/resources"));
     tester.fileSystem().setWorkDir(workDir);
     when(reportPathCollector.protobufDirs()).thenReturn(reportPaths);
-    when(projectTypeCollector.getSummary(SHORT_LANG_NAME)).thenReturn(Optional.of("TEST PROJECTS SUMMARY"));
+    when(projectTypeCollector.getSummary(LANG_NAME)).thenReturn(Optional.of("TEST PROJECTS SUMMARY"));
     when(projectTypeCollector.hasProjects()).thenReturn(true);
-    DotNetPluginMetadata pluginMetadata = mock(DotNetPluginMetadata.class);
+    PluginMetadata pluginMetadata = mock(PluginMetadata.class);
     when(pluginMetadata.languageKey()).thenReturn(LANG_KEY);
     when(pluginMetadata.repositoryKey()).thenReturn(REPO_KEY);
-    when(pluginMetadata.shortLanguageName()).thenReturn(SHORT_LANG_NAME);
+    when(pluginMetadata.languageName()).thenReturn(LANG_NAME);
     sensor = new DotNetSensor(pluginMetadata, reportPathCollector, projectTypeCollector, protobufDataImporter, roslynDataImporter, analysisWarnings);
   }
 
@@ -102,7 +102,7 @@ public class DotNetSensorTest {
     DefaultSensorDescriptor sensorDescriptor = new DefaultSensorDescriptor();
     sensor.describe(sensorDescriptor);
     assertThat(sensorDescriptor.languages()).containsOnly(LANG_KEY);
-    assertThat(sensorDescriptor.name()).isEqualTo(SHORT_LANG_NAME);
+    assertThat(sensorDescriptor.name()).isEqualTo(LANG_NAME);
   }
 
   @Test
@@ -125,7 +125,7 @@ public class DotNetSensorTest {
 
     assertThat(logTester.logs(Level.DEBUG)).isEmpty();
     assertThat(logTester.logs(Level.INFO)).containsExactly("TEST PROJECTS SUMMARY");
-    assertThat(logTester.logs(Level.WARN)).containsExactly("No protobuf reports found. The " + SHORT_LANG_NAME + " files will not have highlighting and metrics. You can get help on the community forum: https://community.sonarsource.com");
+    assertThat(logTester.logs(Level.WARN)).containsExactly("No protobuf reports found. The " + LANG_NAME + " files will not have highlighting and metrics. You can get help on the community forum: https://community.sonarsource.com");
     verify(analysisWarnings, never()).addUnique(any());
     verify(reportPathCollector).protobufDirs();
     verifyNoInteractions(protobufDataImporter);
@@ -133,8 +133,7 @@ public class DotNetSensorTest {
       put("sonaranalyzer-" + LANG_KEY, Arrays.asList(RuleKey.of(REPO_KEY, "S1186"), RuleKey.of(REPO_KEY, "[parameters_key]")));
       put("foo", Collections.singletonList(RuleKey.of("roslyn.foo", "custom-roslyn")));
     }};
-    verify(roslynDataImporter).importRoslynReports(eq(Collections.singletonList(new RoslynReport(null, workDir.getRoot()))), eq(tester), eq(expectedMap),
-      any(RealPathProvider.class));
+    verify(roslynDataImporter).importRoslynReports(eq(Collections.singletonList(new RoslynReport(null, workDir.getRoot()))), eq(tester), eq(expectedMap), any(RealPathProvider.class));
   }
 
   @Test
@@ -146,7 +145,7 @@ public class DotNetSensorTest {
     verify(reportPathCollector).protobufDirs();
     verify(protobufDataImporter).importResults(eq(tester), eq(reportPaths), any(RealPathProvider.class));
     verifyNoInteractions(roslynDataImporter);
-    assertThat(logTester.logs(Level.WARN)).containsExactly("No Roslyn issue reports were found. The " + SHORT_LANG_NAME + " files have not been analyzed. You can get help on the community forum: https://community.sonarsource.com");
+    assertThat(logTester.logs(Level.WARN)).containsExactly("No Roslyn issue reports were found. The " + LANG_NAME + " files have not been analyzed. You can get help on the community forum: https://community.sonarsource.com");
     verify(analysisWarnings, never()).addUnique(any());
     assertThat(logTester.logs(Level.INFO)).containsExactly("TEST PROJECTS SUMMARY");
     assertThat(logTester.logs(Level.DEBUG)).isEmpty();
@@ -171,7 +170,7 @@ public class DotNetSensorTest {
   public void whereThereIsNoSummary_doNoLogSummary() {
     addMainFileToFileSystem();
     addRoslynReports();
-    when(projectTypeCollector.getSummary(SHORT_LANG_NAME)).thenReturn(Optional.empty());
+    when(projectTypeCollector.getSummary(LANG_NAME)).thenReturn(Optional.empty());
     sensor.execute(tester);
     assertThat(logTester.logs(Level.WARN)).isEmpty();
     assertThat(logTester.logs(Level.INFO)).isEmpty();
@@ -220,10 +219,10 @@ public class DotNetSensorTest {
     sensor.execute(tester);
 
     assertThat(logTester.logs(Level.WARN))
-      .containsExactly("SonarScanner for .NET detected only TEST files and no MAIN files for " + SHORT_LANG_NAME + " in the current solution. " +
+      .containsExactly("SonarScanner for .NET detected only TEST files and no MAIN files for " + LANG_NAME + " in the current solution. " +
         "Only TEST-code related results will be imported to your SonarQube/SonarCloud project. " +
         "Many of our rules (e.g. vulnerabilities) are raised only on MAIN-code. " + READ_MORE_LOG);
-    verify(analysisWarnings).addUnique("Your project contains only TEST-code for language " + SHORT_LANG_NAME +
+    verify(analysisWarnings).addUnique("Your project contains only TEST-code for language " + LANG_NAME +
       " and no MAIN-code for any language, so only TEST-code related results are imported. " +
       "Many of our rules (e.g. vulnerabilities) are raised only on MAIN-code. " + READ_MORE_LOG);
     verify(reportPathCollector).protobufDirs();
@@ -241,7 +240,7 @@ public class DotNetSensorTest {
     sensor.execute(tester);
 
     assertThat(logTester.logs(Level.WARN))
-      .containsExactly("SonarScanner for .NET detected only TEST files and no MAIN files for " + SHORT_LANG_NAME + " in the current solution. " +
+      .containsExactly("SonarScanner for .NET detected only TEST files and no MAIN files for " + LANG_NAME + " in the current solution. " +
         "Only TEST-code related results will be imported to your SonarQube/SonarCloud project. " +
         "Many of our rules (e.g. vulnerabilities) are raised only on MAIN-code. " + READ_MORE_LOG);
     verify(reportPathCollector).protobufDirs();
@@ -266,7 +265,7 @@ public class DotNetSensorTest {
 
     sensor.execute(tester);
 
-    assertThat(logTester.logs(Level.WARN)).containsExactly("Your project contains " + SHORT_LANG_NAME + " files which cannot be analyzed with the scanner you are using." +
+    assertThat(logTester.logs(Level.WARN)).containsExactly("Your project contains " + LANG_NAME + " files which cannot be analyzed with the scanner you are using." +
       " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html");
     verify(analysisWarnings, never()).addUnique(any());
   }
@@ -278,7 +277,7 @@ public class DotNetSensorTest {
 
     sensor.execute(tester);
 
-    assertThat(logTester.logs(Level.WARN)).containsExactly("Your project contains " + SHORT_LANG_NAME + " files which cannot be analyzed with the scanner you are using." +
+    assertThat(logTester.logs(Level.WARN)).containsExactly("Your project contains " + LANG_NAME + " files which cannot be analyzed with the scanner you are using." +
       " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html");
     verify(analysisWarnings, never()).addUnique(any());
   }
@@ -291,7 +290,7 @@ public class DotNetSensorTest {
 
     sensor.execute(tester);
 
-    assertThat(logTester.logs(Level.WARN)).containsExactly("Your project contains " + SHORT_LANG_NAME + " files which cannot be analyzed with the scanner you are using." +
+    assertThat(logTester.logs(Level.WARN)).containsExactly("Your project contains " + LANG_NAME + " files which cannot be analyzed with the scanner you are using." +
       " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html");
     verify(analysisWarnings, never()).addUnique(any());
   }

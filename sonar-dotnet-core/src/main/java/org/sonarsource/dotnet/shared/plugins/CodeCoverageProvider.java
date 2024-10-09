@@ -38,10 +38,10 @@ public class CodeCoverageProvider {
   private static final String SUBCATEGORY = "Code Coverage";
   private static final String SONAR_PROPERTY_PREFIX = "sonar.";
 
-  private final DotNetPluginMetadata pluginMetadata;
+  private final PluginMetadata pluginMetadata;
   private final CoverageConfiguration coverageConf;
 
-  public CodeCoverageProvider(DotNetPluginMetadata pluginMetadata) {
+  public CodeCoverageProvider(PluginMetadata pluginMetadata) {
     this.pluginMetadata = pluginMetadata;
     String languageKey = pluginMetadata.languageKey();
 
@@ -54,7 +54,7 @@ public class CodeCoverageProvider {
   }
 
   public List<Object> extensions() {
-    String category = pluginMetadata.shortLanguageName();
+    String category = pluginMetadata.languageName();
 
     return Arrays.asList(
       this,
@@ -100,9 +100,9 @@ public class CodeCoverageProvider {
     public UnitTestCoverageAggregator(Configuration configuration, FileSystem fileSystem,
       AnalysisWarnings analysisWarnings) {
       super(coverageConf,
-            configuration,
-            new ScannerFileService(coverageConf.languageKey(), fileSystem),
-            analysisWarnings);
+        configuration,
+        new ScannerFileService(coverageConf.languageKey(), fileSystem),
+        analysisWarnings);
     }
 
   }
