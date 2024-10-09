@@ -22,13 +22,14 @@ package org.sonar.plugins.vbnet;
 import org.sonar.api.Plugin;
 import org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions;
 import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
-import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.FileTypeSensor;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
+import org.sonarsource.dotnet.shared.plugins.GlobalProtobufFileProcessor;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
 import org.sonarsource.dotnet.shared.plugins.LogSensor;
+import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 import org.sonarsource.dotnet.shared.plugins.ProjectTypeCollector;
 import org.sonarsource.dotnet.shared.plugins.PropertiesSensor;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
@@ -67,13 +68,13 @@ public class VbNetPlugin implements Plugin {
       ProjectTypeCollector.class,
       ReportPathCollector.class,
       HashProvider.class,
+      GlobalProtobufFileProcessor.class,
       // sensor
       DotNetSensor.class,
       VbNetFileCacheSensor.class,
       // language-specific
       METADATA,
       VbNet.class,
-      VbNetGlobalProtobufFileProcessor.class,
       VbNetLanguageConfiguration.class,
       VbNetSonarRulesDefinition.class,
       // filters

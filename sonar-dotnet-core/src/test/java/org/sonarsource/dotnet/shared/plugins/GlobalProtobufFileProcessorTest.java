@@ -34,6 +34,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.slf4j.event.Level;
 import org.sonar.api.batch.bootstrap.ProjectBuilder;
 import org.sonar.api.batch.bootstrap.ProjectBuilder.Context;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
@@ -41,7 +42,6 @@ import org.sonar.api.batch.bootstrap.ProjectReactor;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.slf4j.event.Level;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.FileMetadataInfo;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -50,7 +50,7 @@ import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class AbstractGlobalProtobufFileProcessorTest {
+public class GlobalProtobufFileProcessorTest {
 
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
@@ -59,7 +59,7 @@ public class AbstractGlobalProtobufFileProcessorTest {
   public LogTester logs = new LogTester();
 
   private Context context;
-  private AbstractGlobalProtobufFileProcessor underTest;
+  private GlobalProtobufFileProcessor underTest;
 
   private ProjectDefinition project1;
   private ProjectDefinition project2;
@@ -82,8 +82,9 @@ public class AbstractGlobalProtobufFileProcessorTest {
         return null;
       }
     };
-    underTest = new AbstractGlobalProtobufFileProcessor("foo") {
-    };
+    PluginMetadata metadata = mock(PluginMetadata.class);
+    when(metadata.languageKey()).thenReturn("foo");
+    underTest = new GlobalProtobufFileProcessor(metadata);
   }
 
   @Test

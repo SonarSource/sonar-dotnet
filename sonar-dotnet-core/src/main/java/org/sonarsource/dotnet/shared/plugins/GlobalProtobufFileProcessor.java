@@ -31,35 +31,35 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import javax.annotation.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Phase;
 import org.sonar.api.batch.Phase.Name;
 import org.sonar.api.batch.bootstrap.ProjectBuilder;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.batch.fs.InputFile;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonarsource.dotnet.shared.plugins.protobuf.FileMetadataImporter;
 
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getAnalyzerWorkDirProperty;
 import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.FILEMETADATA_FILENAME;
 
 /**
- * Since SonarQube 7.5, InputFileFilter can only access to global configuration. Use this ProjectBuilder to collect 
+ * Since SonarQube 7.5, InputFileFilter can only access to global configuration. Use this ProjectBuilder to collect
  * various data in protobuf files that are in every modules.
  */
 @Phase(name = Name.POST)
-public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder {
+public class GlobalProtobufFileProcessor extends ProjectBuilder {
 
-  private static final Logger LOG = LoggerFactory.getLogger(AbstractGlobalProtobufFileProcessor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(GlobalProtobufFileProcessor.class);
 
-  private final String languageKey;
+  private final PluginMetadata metadata;
 
   // We need case-insensitive string matching for Uri, because Uri for "file://D:/Something" is not equal to "file://d:/something"
   private final Map<String, Charset> roslynEncodingPerUri = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
   private final Set<String> generatedFileUris = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
 
-  public AbstractGlobalProtobufFileProcessor(String languageKey) {
-    this.languageKey = languageKey;
+  public GlobalProtobufFileProcessor(PluginMetadata metadata) {
+    this.metadata = metadata;
   }
 
   @Override
@@ -102,8 +102,8 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
   }
 
   private List<Path> protobufReportPaths(Map<String, String> moduleProps) {
-    return Arrays.stream(parseAsStringArray(moduleProps.get(getAnalyzerWorkDirProperty(languageKey))))
-      .map(x -> Paths.get(x).resolve(AbstractModuleConfiguration.getAnalyzerReportDir(languageKey)))
+    return Arrays.stream(parseAsStringArray(moduleProps.get(getAnalyzerWorkDirProperty(metadata.languageKey()))))
+      .map(x -> Paths.get(x).resolve(AbstractModuleConfiguration.getAnalyzerReportDir(metadata.languageKey())))
       .toList();
   }
 
