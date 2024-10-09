@@ -60,7 +60,7 @@ public class CSharpSonarWayProfile extends AbstractSonarWayProfile {
     return new HashSet<>();
   }
 
-  private static String getSecurityRepositoryKey() {
+  private String getSecurityRepositoryKey() {
     try {
       Class<?> csRulesClass = Class.forName("com.sonar.plugins.security.api.CsRules");
       Method getRuleKeysMethod = csRulesClass.getMethod("getRepositoryKey");
@@ -69,6 +69,6 @@ public class CSharpSonarWayProfile extends AbstractSonarWayProfile {
       LOG.debug("com.sonar.plugins.security.api.CsRules#getRepositoryKey is not found, will use default repository key: {}",
         e.getMessage());
     }
-    return CSharpPlugin.REPOSITORY_KEY;
+    return metadata.repositoryKey();
   }
 }

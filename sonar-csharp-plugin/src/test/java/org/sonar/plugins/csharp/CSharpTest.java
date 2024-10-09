@@ -49,7 +49,7 @@ class CSharpTest {
 
   @Test
   void shouldGetCustomFileSuffixes() {
-    settings.setProperty(CSharpPlugin.FILE_SUFFIXES_KEY, ".cs,.csharp");
+    settings.setProperty(CSharpPlugin.METADATA.fileSuffixesKey(), ".cs,.csharp");
     assertThat(csharp.getFileSuffixes()).containsOnly(".cs", ".csharp");
   }
 
@@ -72,7 +72,7 @@ class CSharpTest {
   private class FakeCSharp extends AbstractLanguage {
 
     public FakeCSharp() {
-      super(CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME);
+      super(CSharpPlugin.METADATA.languageKey(), CSharpPlugin.METADATA.languageName());
     }
 
     @Override

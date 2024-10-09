@@ -36,16 +36,17 @@ class VbNetSonarWayProfileTest {
   @Test
   void hotspots_in_sonar_way() {
     Context context = new Context();
+    String repositoryKey = VbNetPlugin.METADATA.repositoryKey();
 
     VbNetSonarWayProfile profileDef = new VbNetSonarWayProfile(VbNetPlugin.METADATA);
     profileDef.define(context);
 
     BuiltInQualityProfile profile = context.profile("vbnet", "Sonar way");
-    assertThat(profile.rule(RuleKey.of(VbNetPlugin.REPOSITORY_KEY, "S4507"))).isNotNull();
-    assertThat(profile.rule(RuleKey.of(VbNetPlugin.REPOSITORY_KEY, "S5042"))).isNotNull();
-    assertThat(profile.rule(RuleKey.of(VbNetPlugin.REPOSITORY_KEY, "S2077"))).isNotNull();
-    assertThat(profile.rule(RuleKey.of(VbNetPlugin.REPOSITORY_KEY, "S2068"))).isNotNull();
-    assertThat(profile.rule(RuleKey.of(VbNetPlugin.REPOSITORY_KEY, "S1313"))).isNotNull();
-    assertThat(profile.rule(RuleKey.of(VbNetPlugin.REPOSITORY_KEY, "S4790"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(repositoryKey, "S4507"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(repositoryKey, "S5042"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(repositoryKey, "S2077"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(repositoryKey, "S2068"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(repositoryKey, "S1313"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(repositoryKey, "S4790"))).isNotNull();
   }
 }

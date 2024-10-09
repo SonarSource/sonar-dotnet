@@ -53,7 +53,7 @@ class CSharpSonarWayProfileTest {
   @Test
   void sonar_security_with_already_activated_rule() {
     NewBuiltInQualityProfile profile = Mockito.mock(NewBuiltInQualityProfile.class);
-    Mockito.when(profile.activateRule(CSharpPlugin.REPOSITORY_KEY, "TEST")).thenThrow(IllegalArgumentException.class);
+    Mockito.when(profile.activateRule(CSharpPlugin.METADATA.repositoryKey(), "TEST")).thenThrow(IllegalArgumentException.class);
     Context context = Mockito.mock(Context.class);
     Mockito.when(context.createBuiltInQualityProfile(anyString(), anyString())).thenReturn(profile);
     CsRules.ruleKeys = Set.of("TEST");
@@ -91,15 +91,15 @@ class CSharpSonarWayProfileTest {
     profileDef.define(context);
 
     BuiltInQualityProfile profile = context.profile("cs", "Sonar way");
-    assertThat(profile.language()).isEqualTo(CSharpPlugin.LANGUAGE_KEY);
+    assertThat(profile.language()).isEqualTo(CSharpPlugin.METADATA.languageKey());
     assertThat(profile.rule(RuleKey.of("roslyn.TEST", "S3649"))).isNotNull();
   }
 
   @Test
   void sonar_security_with_duplicated_quality_profile_name() {
     Context context = new Context();
-    NewBuiltInQualityProfile sonarWay = context.createBuiltInQualityProfile("Sonar way", CSharpPlugin.LANGUAGE_KEY);
-    sonarWay.activateRule(CSharpPlugin.REPOSITORY_KEY, "S1");
+    NewBuiltInQualityProfile sonarWay = context.createBuiltInQualityProfile("Sonar way", CSharpPlugin.METADATA.languageKey());
+    sonarWay.activateRule(CSharpPlugin.METADATA.repositoryKey(), "S1");
     sonarWay.done();
     CsRules.ruleKeys = Set.of("S2");
 
@@ -118,8 +118,8 @@ class CSharpSonarWayProfileTest {
     profileDef.define(context);
 
     BuiltInQualityProfile profile = context.profile("cs", "Sonar way");
-    assertThat(profile.language()).isEqualTo(CSharpPlugin.LANGUAGE_KEY);
-    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S3649"))).isNull();
+    assertThat(profile.language()).isEqualTo(CSharpPlugin.METADATA.languageKey());
+    assertThat(profile.rule(RuleKey.of(CSharpPlugin.METADATA.repositoryKey(), "S3649"))).isNull();
   }
 
   @Test
@@ -132,8 +132,8 @@ class CSharpSonarWayProfileTest {
     profileDef.define(context);
 
     BuiltInQualityProfile profile = context.profile("cs", "Sonar way");
-    assertThat(profile.language()).isEqualTo(CSharpPlugin.LANGUAGE_KEY);
-    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S3649"))).isNotNull();
+    assertThat(profile.language()).isEqualTo(CSharpPlugin.METADATA.languageKey());
+    assertThat(profile.rule(RuleKey.of(CSharpPlugin.METADATA.repositoryKey(), "S3649"))).isNotNull();
   }
 
   @Test
@@ -187,6 +187,7 @@ class CSharpSonarWayProfileTest {
   @Test
   void hotspots_in_sonar_way() {
     Context context = new Context();
+    String repositoryKey = CSharpPlugin.METADATA.repositoryKey();
     CsRules.ruleKeys = new HashSet<>();
     CsRules.returnRepository = false;
 
@@ -195,15 +196,15 @@ class CSharpSonarWayProfileTest {
 
     BuiltInQualityProfile profile = context.profile("cs", "Sonar way");
 
-    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S1313"))).isNotNull();
-    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S2068"))).isNotNull();
-    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S2092"))).isNotNull();
-    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S2245"))).isNotNull();
-    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S3330"))).isNotNull();
-    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S4507"))).isNotNull();
-    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S4790"))).isNotNull();
-    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S5042"))).isNotNull();
-    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S2077"))).isNotNull();
-    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S5766"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(repositoryKey, "S1313"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(repositoryKey, "S2068"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(repositoryKey, "S2092"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(repositoryKey, "S2245"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(repositoryKey, "S3330"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(repositoryKey, "S4507"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(repositoryKey, "S4790"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(repositoryKey, "S5042"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(repositoryKey, "S2077"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of(repositoryKey, "S5766"))).isNotNull();
   }
 }

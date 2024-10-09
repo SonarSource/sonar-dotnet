@@ -36,8 +36,8 @@ public class CSharpPropertyDefinitions extends AbstractPropertyDefinitions {
   public List<PropertyDefinition> create() {
     List<PropertyDefinition> result = super.create();
     result.add(
-      PropertyDefinition.builder(getAnalyzeRazorCode(CSharpPlugin.LANGUAGE_KEY))
-        .category(CSharpPlugin.LANGUAGE_NAME)
+      PropertyDefinition.builder(getAnalyzeRazorCode(metadata.languageKey()))
+        .category(metadata.languageName())
         .defaultValue("true")
         .name("Analyze Razor code")
         .description("If set to \"true\", .razor and .cshtml files will be fully analysed, this may increase the analysis time." +
