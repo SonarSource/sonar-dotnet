@@ -37,19 +37,13 @@ namespace SonarAnalyzer.Test.Rules
                 .Verify();
 
 #if NET
-
         [TestMethod]
-        public void ParameterNameMatchesOriginal_CSharp9() =>
-            builderCS.AddPaths("ParameterNameMatchesOriginal.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+        public void ParameterNameMatchesOriginal_CS_Latest() =>
+            builderCS
+                .AddPaths("ParameterNameMatchesOriginal.Latest.cs")
+                .AddPaths("ParameterNameMatchesOriginal.Latest.Partial.cs")
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .Verify();
-
-        [TestMethod]
-        public void ParameterNameMatchesOriginal_CSharp11() =>
-            builderCS.AddPaths("ParameterNameMatchesOriginal.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
-
 #endif
 
         [TestMethod]
