@@ -21,10 +21,11 @@ package org.sonar.plugins.csharp;
 
 import org.sonar.api.config.Configuration;
 import org.sonarsource.dotnet.shared.plugins.AbstractLanguageConfiguration;
+import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 
 public class CSharpLanguageConfiguration extends AbstractLanguageConfiguration {
-  public CSharpLanguageConfiguration(Configuration configuration) {
-    super(configuration, CSharpPlugin.LANGUAGE_KEY);
+  public CSharpLanguageConfiguration(Configuration configuration, PluginMetadata metadata) {
+    super(configuration, metadata);
   }
 
   public boolean analyzeRazorCode() {

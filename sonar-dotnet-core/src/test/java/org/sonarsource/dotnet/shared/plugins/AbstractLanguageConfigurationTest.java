@@ -49,7 +49,7 @@ public class AbstractLanguageConfigurationTest {
   @Test
   public void bugCategories_reads_configuration() {
     Configuration configuration = mock(Configuration.class);
-    when(configuration.getStringArray("sonar.cs.roslyn.bugCategories")).thenReturn(new String[] {"A", "B", "C"});
+    when(configuration.getStringArray("sonar.cs.roslyn.bugCategories")).thenReturn(new String[]{"A", "B", "C"});
     AbstractLanguageConfiguration config = createConfiguration(configuration);
 
     assertThat(config.bugCategories()).containsExactly("A", "B", "C");
@@ -58,7 +58,7 @@ public class AbstractLanguageConfigurationTest {
   @Test
   public void codeSmellCategories_reads_configuration() {
     Configuration configuration = mock(Configuration.class);
-    when(configuration.getStringArray("sonar.cs.roslyn.codeSmellCategories")).thenReturn(new String[] {"A", "B", "C"});
+    when(configuration.getStringArray("sonar.cs.roslyn.codeSmellCategories")).thenReturn(new String[]{"A", "B", "C"});
     AbstractLanguageConfiguration config = createConfiguration(configuration);
 
     assertThat(config.codeSmellCategories()).containsExactly("A", "B", "C");
@@ -67,7 +67,7 @@ public class AbstractLanguageConfigurationTest {
   @Test
   public void vulnerabilityCategories_reads_configuration() {
     Configuration configuration = mock(Configuration.class);
-    when(configuration.getStringArray("sonar.cs.roslyn.vulnerabilityCategories")).thenReturn(new String[] {"A", "B", "C"});
+    when(configuration.getStringArray("sonar.cs.roslyn.vulnerabilityCategories")).thenReturn(new String[]{"A", "B", "C"});
     AbstractLanguageConfiguration config = createConfiguration(configuration);
 
     assertThat(config.vulnerabilityCategories()).containsExactly("A", "B", "C");
@@ -104,7 +104,9 @@ public class AbstractLanguageConfigurationTest {
   }
 
   private AbstractLanguageConfiguration createConfiguration(Configuration configuration) {
-    return new AbstractLanguageConfiguration(configuration, "cs") {
+    PluginMetadata metadata = mock(PluginMetadata.class);
+    when(metadata.languageKey()).thenReturn("cs");
+    return new AbstractLanguageConfiguration(configuration, metadata) {
     };
   }
 }
