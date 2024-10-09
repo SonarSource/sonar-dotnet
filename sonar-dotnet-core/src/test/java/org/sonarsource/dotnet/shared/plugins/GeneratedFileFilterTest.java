@@ -23,12 +23,12 @@ import java.nio.file.Paths;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.slf4j.event.Level;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.config.PropertyDefinitions;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.System2;
-import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -107,7 +107,7 @@ public class GeneratedFileFilterTest {
   }
 
   private GeneratedFileFilter createFilter(InputFile generatedInputFile, AbstractLanguageConfiguration configuration) {
-    AbstractGlobalProtobufFileProcessor processor = mock(AbstractGlobalProtobufFileProcessor.class);
+    GlobalProtobufFileProcessor processor = mock(GlobalProtobufFileProcessor.class);
     when(processor.isGenerated(generatedInputFile)).thenReturn(true);
     return new GeneratedFileFilter(processor, configuration);
   }

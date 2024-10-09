@@ -20,7 +20,6 @@
 package org.sonar.plugins.vbnet;
 
 import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.sonar.api.Plugin;
 import org.sonar.api.SonarEdition;
@@ -33,6 +32,7 @@ import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.FileTypeSensor;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
+import org.sonarsource.dotnet.shared.plugins.GlobalProtobufFileProcessor;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
 import org.sonarsource.dotnet.shared.plugins.LogSensor;
 import org.sonarsource.dotnet.shared.plugins.ProjectTypeCollector;
@@ -59,7 +59,7 @@ class VbNetPluginTest {
 
     List extensions = context.getExtensions();
 
-    Object[] expectedExtensions = new Object[] {
+    Object[] expectedExtensions = new Object[]{
       DotNetSensor.class,
       EncodingPerFile.class,
       FileTypeSensor.class,
@@ -75,7 +75,7 @@ class VbNetPluginTest {
       SonarLintProfileExporter.class,
       VbNet.class,
       VbNetFileCacheSensor.class,
-      VbNetGlobalProtobufFileProcessor.class,
+      GlobalProtobufFileProcessor.class,
       VbNetLanguageConfiguration.class,
       VbNetModuleConfiguration.class,
       VbNetPlugin.METADATA,

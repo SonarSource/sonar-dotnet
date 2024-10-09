@@ -19,10 +19,10 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.fs.InputFileFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.InputFileFilter;
 
 /**
  * This class allows to filter files to process based on whether or not they are auto-generated.
@@ -34,10 +34,10 @@ import org.slf4j.LoggerFactory;
 public class GeneratedFileFilter implements InputFileFilter {
   private static final Logger LOG = LoggerFactory.getLogger(GeneratedFileFilter.class);
 
-  private final AbstractGlobalProtobufFileProcessor globalReportProcessor;
+  private final GlobalProtobufFileProcessor globalReportProcessor;
   private final boolean analyzeGeneratedCode;
 
-  public GeneratedFileFilter(AbstractGlobalProtobufFileProcessor globalReportProcessor, AbstractLanguageConfiguration configuration) {
+  public GeneratedFileFilter(GlobalProtobufFileProcessor globalReportProcessor, AbstractLanguageConfiguration configuration) {
     this.globalReportProcessor = globalReportProcessor;
     this.analyzeGeneratedCode = configuration.analyzeGeneratedCode();
     if (analyzeGeneratedCode) {

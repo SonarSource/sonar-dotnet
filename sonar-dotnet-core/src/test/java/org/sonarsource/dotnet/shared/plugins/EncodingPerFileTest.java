@@ -28,9 +28,9 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.slf4j.event.Level;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -61,7 +61,8 @@ public class EncodingPerFileTest {
   public void should_treat_as_match_and_warn_when_roslyn_encoding_missing() throws IOException {
     assertEncodingMatch(null, fileUri, null, true);
 
-    assertThat(logTester.logs(Level.WARN)).containsOnly(String.format("Roslyn can not detect encoding for '%s', using default instead.", fileUri.toString()));
+    assertThat(logTester.logs(Level.WARN)).containsOnly(String.format("Roslyn can not detect encoding for '%s', using default instead.",
+      fileUri.toString()));
   }
 
   @Test
@@ -93,7 +94,7 @@ public class EncodingPerFileTest {
   }
 
   private void assertEncodingMatch(Charset roslynCharset, URI fileUri, Charset sqCharset, boolean result) throws IOException {
-    AbstractGlobalProtobufFileProcessor processor = mock(AbstractGlobalProtobufFileProcessor.class);
+    GlobalProtobufFileProcessor processor = mock(GlobalProtobufFileProcessor.class);
     TreeMap<String, Charset> encodingPerUri = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
     encodingPerUri.put(this.fileUri.toString(), roslynCharset);
     when(processor.getRoslynEncodingPerUri()).thenReturn(encodingPerUri);

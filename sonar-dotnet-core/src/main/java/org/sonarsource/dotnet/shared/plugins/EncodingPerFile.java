@@ -21,17 +21,17 @@ package org.sonarsource.dotnet.shared.plugins;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.scanner.ScannerSide;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.scanner.ScannerSide;
 
 @ScannerSide
 public class EncodingPerFile {
   private static final Logger LOG = LoggerFactory.getLogger(EncodingPerFile.class);
-  private final AbstractGlobalProtobufFileProcessor globalReportProcessor;
+  private final GlobalProtobufFileProcessor globalReportProcessor;
 
-  public EncodingPerFile(AbstractGlobalProtobufFileProcessor globalReportProcessor) {
+  public EncodingPerFile(GlobalProtobufFileProcessor globalReportProcessor) {
     this.globalReportProcessor = globalReportProcessor;
   }
 
@@ -59,7 +59,7 @@ public class EncodingPerFile {
         sameEncoding = true;
       } else {
         LOG.warn("Encoding detected by Roslyn and encoding used by SonarQube do not match for file {}. "
-          + "SonarQube encoding is '{}', Roslyn encoding is '{}'. File will be skipped.",
+            + "SonarQube encoding is '{}', Roslyn encoding is '{}'. File will be skipped.",
           uri, sqEncoding, roslynEncoding);
       }
     }
