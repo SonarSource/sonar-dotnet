@@ -30,7 +30,6 @@ import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.utils.Version;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -41,10 +40,11 @@ public class DotNetRulesDefinitionTest {
   private static final String STIG_RULE_KEY = "S1117";
   private static final SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 3), SonarQubeSide.SCANNER,
     SonarEdition.COMMUNITY);
+  private static final PluginMetadata METADATA = mockMetadata();
 
   @Test
   public void test() {
-    DotNetRulesDefinition sut = new TestRulesDefinition(sonarRuntime);
+    DotNetRulesDefinition sut = new DotNetRulesDefinition(METADATA, sonarRuntime, new TestRoslynRules());
     RulesDefinition.Context context = new RulesDefinition.Context();
     sut.define(context);
 
@@ -77,7 +77,7 @@ public class DotNetRulesDefinitionTest {
 
   @Test
   public void test_remediation_is_set() {
-    DotNetRulesDefinition sut = new TestRulesDefinition(sonarRuntime);
+    DotNetRulesDefinition sut = new DotNetRulesDefinition(METADATA, sonarRuntime, new TestRoslynRules());
     RulesDefinition.Context context = new RulesDefinition.Context();
     sut.define(context);
 
@@ -92,21 +92,9 @@ public class DotNetRulesDefinitionTest {
     assertThat(repository.rule("S1114").debtRemediationFunction()).isNull();
   }
 
-  @Test
-  public void test_missing_resource_throws() {
-    PluginMetadata metadata = mockMetadata();
-    when(metadata.resourcesDirectory()).thenReturn("/org/sonar/plugins/csharp");
-    DotNetRulesDefinition sut = new DotNetRulesDefinition(metadata, sonarRuntime);
-    RulesDefinition.Context context = new RulesDefinition.Context();
-
-    assertThatExceptionOfType(IllegalStateException.class)
-      .isThrownBy(() -> sut.define(context))
-      .withMessage("Resource does not exist: Rules.json");
-  }
-
   private static Set<String> getSecurityStandards(Version version, String ruleId) {
     SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(version, SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
-    DotNetRulesDefinition sut = new TestRulesDefinition(sonarRuntime);
+    DotNetRulesDefinition sut = new DotNetRulesDefinition(METADATA, sonarRuntime, new TestRoslynRules());
     RulesDefinition.Context context = new RulesDefinition.Context();
     sut.define(context);
 
@@ -126,10 +114,10 @@ public class DotNetRulesDefinitionTest {
     return metadata;
   }
 
-  private static class TestRulesDefinition extends DotNetRulesDefinition {
+  private static class TestRoslynRules extends RoslynRules {
 
-    TestRulesDefinition(SonarRuntime runtime) {
-      super(mockMetadata(), runtime);
+    TestRoslynRules() {
+      super(METADATA);
     }
 
     @Override
