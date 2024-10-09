@@ -27,12 +27,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonarsource.dotnet.shared.plugins.AbstractSonarWayProfile;
 import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
+import org.sonarsource.dotnet.shared.plugins.RoslynRules;
 
 public class CSharpSonarWayProfile extends AbstractSonarWayProfile {
   private static final Logger LOG = LoggerFactory.getLogger(CSharpSonarWayProfile.class);
 
-  public CSharpSonarWayProfile(PluginMetadata metadata) {
-    super(metadata);
+  public CSharpSonarWayProfile(PluginMetadata metadata, RoslynRules roslynRules) {
+    super(metadata, roslynRules);
   }
 
   @Override

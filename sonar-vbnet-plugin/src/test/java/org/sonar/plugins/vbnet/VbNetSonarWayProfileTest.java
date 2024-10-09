@@ -26,6 +26,7 @@ import org.sonar.api.rule.RuleKey;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.BuiltInQualityProfile;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.Context;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
+import org.sonarsource.dotnet.shared.plugins.RoslynRules;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -33,12 +34,14 @@ class VbNetSonarWayProfileTest {
   @RegisterExtension
   public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
+  private static final RoslynRules ROSLYN_RULES = new RoslynRules(VbNetPlugin.METADATA);
+
   @Test
   void hotspots_in_sonar_way() {
     Context context = new Context();
     String repositoryKey = VbNetPlugin.METADATA.repositoryKey();
 
-    VbNetSonarWayProfile profileDef = new VbNetSonarWayProfile(VbNetPlugin.METADATA);
+    VbNetSonarWayProfile profileDef = new VbNetSonarWayProfile(VbNetPlugin.METADATA, ROSLYN_RULES);
     profileDef.define(context);
 
     BuiltInQualityProfile profile = context.profile("vbnet", "Sonar way");
@@ -48,5 +51,21 @@ class VbNetSonarWayProfileTest {
     assertThat(profile.rule(RuleKey.of(repositoryKey, "S2068"))).isNotNull();
     assertThat(profile.rule(RuleKey.of(repositoryKey, "S1313"))).isNotNull();
     assertThat(profile.rule(RuleKey.of(repositoryKey, "S4790"))).isNotNull();
+  }
+
+
+  @Test
+  void symbolic_execution_not_in_sonar_way() {
+    Context context = new Context();
+    String repositoryKey = VbNetPlugin.METADATA.repositoryKey();
+
+    VbNetSonarWayProfile profileDef = new VbNetSonarWayProfile(VbNetPlugin.METADATA, ROSLYN_RULES);
+    profileDef.define(context);
+    BuiltInQualityProfile profile = context.profile("vbnet", "Sonar way");
+
+    assertThat(profile.rule(RuleKey.of(repositoryKey, "S2222"))).isNull();
+    assertThat(profile.rule(RuleKey.of(repositoryKey, "S2259"))).isNull();
+    assertThat(profile.rule(RuleKey.of(repositoryKey, "S2583"))).isNull();
+    assertThat(profile.rule(RuleKey.of(repositoryKey, "S2589"))).isNull();
   }
 }

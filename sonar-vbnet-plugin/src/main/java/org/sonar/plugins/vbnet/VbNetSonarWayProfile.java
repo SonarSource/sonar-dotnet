@@ -21,9 +21,10 @@ package org.sonar.plugins.vbnet;
 
 import org.sonarsource.dotnet.shared.plugins.AbstractSonarWayProfile;
 import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
+import org.sonarsource.dotnet.shared.plugins.RoslynRules;
 
 class VbNetSonarWayProfile extends AbstractSonarWayProfile {
-  VbNetSonarWayProfile(PluginMetadata metadata) {
-    super(metadata);
+  VbNetSonarWayProfile(PluginMetadata metadata, RoslynRules roslynRules) {
+    super(metadata, roslynRules);
   }
 }
