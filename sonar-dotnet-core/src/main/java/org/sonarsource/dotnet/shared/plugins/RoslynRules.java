@@ -65,7 +65,7 @@ public class RoslynRules {
     return getClass().getResourceAsStream(name);
   }
 
-  public final class Rule {
+  public static final class Rule {
     String id;
     RuleParameter[] parameters;
 
@@ -74,7 +74,7 @@ public class RoslynRules {
     }
   }
 
-  public final class RuleParameter {
+  public static final class RuleParameter {
     String key;
     String description;
     String type;
