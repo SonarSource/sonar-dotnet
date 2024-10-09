@@ -31,20 +31,22 @@ import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinition.Context;
 import org.sonar.api.server.rule.RulesDefinition.Rule;
 import org.sonar.api.utils.Version;
+import org.sonarsource.dotnet.shared.plugins.DotNetRulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class VbNetSonarRulesDefinitionTest {
+class VbNetRulesDefinitionTest {
   private static final String SECURITY_HOTSPOT_RULE_KEY = "S4792";
-  private static final SonarRuntime SONAR_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(9, 3), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
+  private static final SonarRuntime SONAR_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(9, 3), SonarQubeSide.SCANNER,
+    SonarEdition.COMMUNITY);
 
   @Test
   void test() {
     Context context = new Context();
     assertThat(context.repositories()).isEmpty();
 
-    VbNetSonarRulesDefinition vbnetRulesDefinition = new VbNetSonarRulesDefinition(SONAR_RUNTIME);
-    vbnetRulesDefinition.define(context);
+    DotNetRulesDefinition definition = new DotNetRulesDefinition(VbNetPlugin.METADATA, SONAR_RUNTIME);
+    definition.define(context);
 
     assertThat(context.repositories()).hasSize(1);
     assertThat(context.repository("vbnet").rules()).isNotEmpty();
@@ -63,7 +65,7 @@ class VbNetSonarRulesDefinitionTest {
 
   @Test
   void test_security_hotspot() {
-    VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition(SONAR_RUNTIME);
+    DotNetRulesDefinition definition = new DotNetRulesDefinition(VbNetPlugin.METADATA, SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("vbnet");
@@ -75,19 +77,20 @@ class VbNetSonarRulesDefinitionTest {
 
   @Test
   void test_security_hotspot_has_correct_type_and_security_standards() {
-    VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition(SONAR_RUNTIME);
+    DotNetRulesDefinition definition = new DotNetRulesDefinition(VbNetPlugin.METADATA, SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("vbnet");
 
     RulesDefinition.Rule rule = repository.rule(SECURITY_HOTSPOT_RULE_KEY);
     assertThat(rule.type()).isEqualTo(RuleType.SECURITY_HOTSPOT);
-    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:117", "cwe:532", "owaspTop10:a10", "owaspTop10:a3", "owaspTop10-2021:a9");
+    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:117", "cwe:532", "owaspTop10:a10", "owaspTop10:a3", "owaspTop10" +
+      "-2021:a9");
   }
 
   @Test
   void test_all_rules_have_status_set() {
-    VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition(SONAR_RUNTIME);
+    DotNetRulesDefinition definition = new DotNetRulesDefinition(VbNetPlugin.METADATA, SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("vbnet");
