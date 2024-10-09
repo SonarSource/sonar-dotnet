@@ -35,6 +35,7 @@ import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
 import org.sonarsource.dotnet.shared.plugins.GlobalProtobufFileProcessor;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
 import org.sonarsource.dotnet.shared.plugins.LogSensor;
+import org.sonarsource.dotnet.shared.plugins.ModuleConfiguration;
 import org.sonarsource.dotnet.shared.plugins.ProjectTypeCollector;
 import org.sonarsource.dotnet.shared.plugins.PropertiesSensor;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
@@ -65,7 +66,6 @@ class CSharpPluginTest {
       CSharpFileCacheSensor.class,
       GlobalProtobufFileProcessor.class,
       CSharpLanguageConfiguration.class,
-      CSharpModuleConfiguration.class,
       CSharpPlugin.METADATA,
       CSharpSonarRulesDefinition.class,
       DotNetSensor.class,
@@ -74,6 +74,7 @@ class CSharpPluginTest {
       GeneratedFileFilter.class,
       HashProvider.class,
       LogSensor.class,
+      ModuleConfiguration.class,
       ProjectTypeCollector.class,
       PropertiesSensor.class,
       ProtobufDataImporter.class,
