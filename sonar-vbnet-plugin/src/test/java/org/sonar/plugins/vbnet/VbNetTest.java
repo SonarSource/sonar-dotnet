@@ -37,7 +37,7 @@ class VbNetTest {
   @BeforeEach
   public void init() {
     PropertyDefinitions defs = new PropertyDefinitions(mock(System2.class),
-      new VbNetPropertyDefinitions().create());
+      new VbNetPropertyDefinitions(VbNetPlugin.METADATA).create());
     settings = new MapSettings(defs);
     vbnet = new VbNet(settings.asConfig());
   }

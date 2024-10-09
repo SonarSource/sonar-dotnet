@@ -90,7 +90,7 @@ public class CSharpPlugin implements Plugin {
       RoslynProfileExporter.class,
       SonarLintProfileExporter.class);
 
-    context.addExtensions(new CSharpPropertyDefinitions().create());
+    context.addExtensions(new CSharpPropertyDefinitions(METADATA).create());
     context.addExtension(new CSharpSonarWayProfile());
     context.addExtensions(new CodeCoverageProvider(METADATA).extensions());
     context.addExtensions(new UnitTestResultsProvider(METADATA).extensions());

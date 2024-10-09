@@ -45,10 +45,11 @@ public class GeneratedFileFilterTest {
   public void setUp() {
     logs.setLevel(Level.DEBUG);
     // by default, analyzeGeneratedCode is set to false
-    AbstractPropertyDefinitions definitions = new AbstractPropertyDefinitions(
-      "cs",
-      "C#",
-      ".cs") {
+    PluginMetadata metadata = mock(PluginMetadata.class);
+    when(metadata.languageKey()).thenReturn("cs");
+    when(metadata.languageName()).thenReturn("C#");
+    when(metadata.fileSuffixesDefaultValue()).thenReturn(".cs");
+    AbstractPropertyDefinitions definitions = new AbstractPropertyDefinitions(metadata) {
     };
     MapSettings settings = new MapSettings(new PropertyDefinitions(mock(System2.class), definitions.create()));
     defaultConfiguration = new AbstractLanguageConfiguration(settings.asConfig(), "cs") {
