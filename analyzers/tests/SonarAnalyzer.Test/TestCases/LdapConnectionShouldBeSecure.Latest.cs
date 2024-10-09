@@ -14,6 +14,12 @@ DirectoryEntry entry1 = new("path", "user", "pass", AuthenticationTypes.Secure);
 DirectoryEntry entry2 = new("path", "user", "pass", AuthenticationTypes.None);      // Noncompliant
 DirectoryEntry entry3 = new("path", "user", "pass", authTypeSecure);    // Compliant
 DirectoryEntry entry4 = new("path", "user", "pass", authTypeNone);      // Noncompliant
+// https://sonarsource.atlassian.net/browse/NET-412
+DirectoryEntry entry5 = new("path", "user", "pass", AuthenticationTypes.None); // Noncompliant FP
+
+(entry1.AuthenticationType, var x1) = (AuthenticationTypes.None, 0); // Noncompliant
+(entry5.AuthenticationType, var x2) = (AuthenticationTypes.Secure, 0);
+(entry5.AuthenticationType, var x3) = ((AuthenticationTypes.None), 0); // Noncompliant
 
 record FieldsAndProperties
 {
@@ -66,5 +72,43 @@ record FieldsAndProperties
         this.Property5.AuthenticationType = AuthenticationTypes.Secure;
 
         Property6 = new DirectoryEntry(); // Compliant
+    }
+}
+
+public record struct RecordStruct
+{
+    public void SetValueAfterObjectInitialization()
+    {
+        DirectoryEntry entry1 = new("path", "user", "pass", AuthenticationTypes.None); // Compliant, property is set below
+        (entry1.AuthenticationType, var x1) = (AuthenticationTypes.Secure, 0);
+
+        DirectoryEntry entry2 = new("path", "user", "pass", AuthenticationTypes.None); // Noncompliant
+        (entry2.AuthenticationType, var x2) = (AuthenticationTypes.None, 0); // Noncompliant
+
+        AuthenticationTypes AuthenticationType;
+        (AuthenticationType, var x3) = (AuthenticationTypes.None, 0);
+    }
+}
+
+public partial class PartialProperty
+{
+    private partial DirectoryEntry Property1 { get; }
+    private partial DirectoryEntry Property2 { get; }
+    private partial DirectoryEntry this[int index] { get; }
+}
+
+public partial class PartialProperty
+{
+    private partial DirectoryEntry Property1
+    {
+        get => new DirectoryEntry { AuthenticationType = AuthenticationTypes.None }; // Noncompliant
+    }
+    private partial DirectoryEntry Property2
+    {
+        get => new DirectoryEntry() { AuthenticationType = AuthenticationTypes.Secure }; // Compliant
+    }
+    private partial DirectoryEntry this[int index]
+    {
+        get => new DirectoryEntry { AuthenticationType = AuthenticationTypes.None }; // Noncompliant
     }
 }
