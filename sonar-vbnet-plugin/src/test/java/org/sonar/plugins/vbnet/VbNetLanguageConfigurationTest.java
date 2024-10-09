@@ -31,9 +31,9 @@ class VbNetLanguageConfigurationTest {
   @Test
   void reads_correct_language() {
     Configuration configuration = mock(Configuration.class);
-    when(configuration.getStringArray("sonar.cs.roslyn.bugCategories")).thenReturn(new String[] {"C#"});
-    when(configuration.getStringArray("sonar.vbnet.roslyn.bugCategories")).thenReturn(new String[] {"VB.NET"});
-    VbNetLanguageConfiguration config = new VbNetLanguageConfiguration(configuration);
+    when(configuration.getStringArray("sonar.cs.roslyn.bugCategories")).thenReturn(new String[]{"C#"});
+    when(configuration.getStringArray("sonar.vbnet.roslyn.bugCategories")).thenReturn(new String[]{"VB.NET"});
+    VbNetLanguageConfiguration config = new VbNetLanguageConfiguration(configuration, VbNetPlugin.METADATA);
 
     assertThat(config.bugCategories()).containsExactly("VB.NET");
   }

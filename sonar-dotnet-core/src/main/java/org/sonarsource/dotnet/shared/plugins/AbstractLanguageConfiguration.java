@@ -32,9 +32,9 @@ public abstract class AbstractLanguageConfiguration {
 
   protected final Configuration configuration;
 
-  protected AbstractLanguageConfiguration(Configuration configuration, String languageKey) {
+  protected AbstractLanguageConfiguration(Configuration configuration, PluginMetadata metadata) {
     this.configuration = configuration;
-    this.languageKey = languageKey;
+    this.languageKey = metadata.languageKey();
   }
 
   public boolean ignoreThirdPartyIssues() {

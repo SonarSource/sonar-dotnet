@@ -21,9 +21,10 @@ package org.sonar.plugins.vbnet;
 
 import org.sonar.api.config.Configuration;
 import org.sonarsource.dotnet.shared.plugins.AbstractLanguageConfiguration;
+import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 
 public class VbNetLanguageConfiguration extends AbstractLanguageConfiguration {
-  public VbNetLanguageConfiguration(Configuration configuration) {
-    super(configuration, VbNetPlugin.LANGUAGE_KEY);
+  public VbNetLanguageConfiguration(Configuration configuration, PluginMetadata metadata) {
+    super(configuration, metadata);
   }
 }

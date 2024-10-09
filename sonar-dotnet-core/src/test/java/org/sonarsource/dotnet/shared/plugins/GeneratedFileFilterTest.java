@@ -52,7 +52,7 @@ public class GeneratedFileFilterTest {
     AbstractPropertyDefinitions definitions = new AbstractPropertyDefinitions(metadata) {
     };
     MapSettings settings = new MapSettings(new PropertyDefinitions(mock(System2.class), definitions.create()));
-    defaultConfiguration = new AbstractLanguageConfiguration(settings.asConfig(), "cs") {
+    defaultConfiguration = new AbstractLanguageConfiguration(settings.asConfig(), metadata) {
     };
   }
 
