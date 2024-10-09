@@ -28,6 +28,7 @@ import org.sonar.api.SonarRuntime;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.utils.Version;
 import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
+import org.sonarsource.dotnet.shared.plugins.DotNetRulesDefinition;
 import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.FileTypeSensor;
@@ -61,6 +62,7 @@ class VbNetPluginTest {
     List extensions = context.getExtensions();
 
     Object[] expectedExtensions = new Object[]{
+      DotNetRulesDefinition.class,
       DotNetSensor.class,
       EncodingPerFile.class,
       FileTypeSensor.class,
@@ -80,7 +82,6 @@ class VbNetPluginTest {
       GlobalProtobufFileProcessor.class,
       VbNetLanguageConfiguration.class,
       VbNetPlugin.METADATA,
-      VbNetSonarRulesDefinition.class,
       WrongEncodingFileFilter.class
     };
 

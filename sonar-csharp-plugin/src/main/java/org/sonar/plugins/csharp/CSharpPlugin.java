@@ -23,6 +23,7 @@ import org.sonar.api.Plugin;
 import org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions;
 import org.sonarsource.dotnet.shared.plugins.AnalysisWarningsSensor;
 import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
+import org.sonarsource.dotnet.shared.plugins.DotNetRulesDefinition;
 import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.FileTypeSensor;
@@ -69,6 +70,7 @@ public class CSharpPlugin implements Plugin {
       // collectors - they are populated by the module-level sensors
       ProjectTypeCollector.class,
       ReportPathCollector.class,
+      DotNetRulesDefinition.class,
       GlobalProtobufFileProcessor.class,
       // sensor
       DotNetSensor.class,
@@ -76,7 +78,6 @@ public class CSharpPlugin implements Plugin {
       METADATA,
       CSharp.class,
       CSharpLanguageConfiguration.class,
-      CSharpSonarRulesDefinition.class,
       // filters
       EncodingPerFile.class,
       WrongEncodingFileFilter.class,

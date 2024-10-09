@@ -31,8 +31,10 @@ import org.sonar.api.utils.Version;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-public class AbstractRulesDefinitionTest {
+public class DotNetRulesDefinitionTest {
 
   private static final String PCI_DSS_RULE_KEY = "S1115";
   private static final String OWASP_ASVS_RULE_KEY = "S1116";
@@ -42,7 +44,7 @@ public class AbstractRulesDefinitionTest {
 
   @Test
   public void test() {
-    AbstractRulesDefinition sut = new TestRulesDefinition(sonarRuntime);
+    DotNetRulesDefinition sut = new TestRulesDefinition(sonarRuntime);
     RulesDefinition.Context context = new RulesDefinition.Context();
     sut.define(context);
 
@@ -75,7 +77,7 @@ public class AbstractRulesDefinitionTest {
 
   @Test
   public void test_remediation_is_set() {
-    AbstractRulesDefinition sut = new TestRulesDefinition(sonarRuntime);
+    DotNetRulesDefinition sut = new TestRulesDefinition(sonarRuntime);
     RulesDefinition.Context context = new RulesDefinition.Context();
     sut.define(context);
 
@@ -92,8 +94,9 @@ public class AbstractRulesDefinitionTest {
 
   @Test
   public void test_missing_resource_throws() {
-    AbstractRulesDefinition sut = new AbstractRulesDefinition("test", "test", "/org/sonar/plugins/csharp", sonarRuntime) {
-    };
+    PluginMetadata metadata = mockMetadata();
+    when(metadata.resourcesDirectory()).thenReturn("/org/sonar/plugins/csharp");
+    DotNetRulesDefinition sut = new DotNetRulesDefinition(metadata, sonarRuntime);
     RulesDefinition.Context context = new RulesDefinition.Context();
 
     assertThatExceptionOfType(IllegalStateException.class)
@@ -103,7 +106,7 @@ public class AbstractRulesDefinitionTest {
 
   private static Set<String> getSecurityStandards(Version version, String ruleId) {
     SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(version, SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
-    AbstractRulesDefinition sut = new TestRulesDefinition(sonarRuntime);
+    DotNetRulesDefinition sut = new TestRulesDefinition(sonarRuntime);
     RulesDefinition.Context context = new RulesDefinition.Context();
     sut.define(context);
 
@@ -115,14 +118,23 @@ public class AbstractRulesDefinitionTest {
     return rule.securityStandards();
   }
 
-  private static class TestRulesDefinition extends AbstractRulesDefinition {
+  private static PluginMetadata mockMetadata() {
+    PluginMetadata metadata = mock(PluginMetadata.class);
+    when(metadata.repositoryKey()).thenReturn("test");
+    when(metadata.languageKey()).thenReturn("test");
+    when(metadata.resourcesDirectory()).thenReturn("/DotNetRulesDefinitionTest/");
+    return metadata;
+  }
+
+  private static class TestRulesDefinition extends DotNetRulesDefinition {
+
     TestRulesDefinition(SonarRuntime runtime) {
-      super("test", "test", "/AbstractRulesDefinitionTest/", runtime);
+      super(mockMetadata(), runtime);
     }
 
     @Override
     InputStream getResourceAsStream(String name) {
-      return AbstractRulesDefinitionTest.class.getResourceAsStream(name);
+      return DotNetRulesDefinitionTest.class.getResourceAsStream(name);
     }
   }
 }

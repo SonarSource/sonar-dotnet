@@ -32,10 +32,11 @@ import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinition.Context;
 import org.sonar.api.server.rule.RulesDefinition.Rule;
 import org.sonar.api.utils.Version;
+import org.sonarsource.dotnet.shared.plugins.DotNetRulesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class CSharpSonarRulesDefinitionTest {
+class CSharpRulesDefinitionTest {
   private static final String SECURITY_HOTSPOT_RULE_KEY = "S4502";
   private static final String VULNERABILITY_RULE_KEY = "S2115";
   private static final String NO_TAGS_RULE_KEY = "S1048";
@@ -50,8 +51,8 @@ class CSharpSonarRulesDefinitionTest {
     Context context = new Context();
     assertThat(context.repositories()).isEmpty();
 
-    CSharpSonarRulesDefinition csharpRulesDefinition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
-    csharpRulesDefinition.define(context);
+    DotNetRulesDefinition definition = new DotNetRulesDefinition(CSharpPlugin.METADATA, SONAR_RUNTIME);
+    definition.define(context);
 
     assertThat(context.repositories()).hasSize(1);
     assertThat(context.repository("csharpsquid").rules()).isNotEmpty();
@@ -69,7 +70,7 @@ class CSharpSonarRulesDefinitionTest {
 
   @Test
   void test_security_hotspot() {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
+    DotNetRulesDefinition definition = new DotNetRulesDefinition(CSharpPlugin.METADATA, SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("csharpsquid");
@@ -81,7 +82,7 @@ class CSharpSonarRulesDefinitionTest {
 
   @Test
   void test_security_hotspot_has_correct_type_and_security_standards() {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
+    DotNetRulesDefinition definition = new DotNetRulesDefinition(CSharpPlugin.METADATA, SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("csharpsquid");
@@ -101,7 +102,7 @@ class CSharpSonarRulesDefinitionTest {
 
   @Test
   void test_security_standards_with_vulnerability() {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
+    DotNetRulesDefinition definition = new DotNetRulesDefinition(CSharpPlugin.METADATA, SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("csharpsquid");
@@ -121,7 +122,7 @@ class CSharpSonarRulesDefinitionTest {
 
   @Test
   void test_all_rules_have_metadata_set() {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
+    DotNetRulesDefinition definition = new DotNetRulesDefinition(CSharpPlugin.METADATA, SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("csharpsquid");
@@ -136,7 +137,7 @@ class CSharpSonarRulesDefinitionTest {
 
   @Test
   void test_all_rules_have_htmldescription() {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
+    DotNetRulesDefinition definition = new DotNetRulesDefinition(CSharpPlugin.METADATA, SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("csharpsquid");
@@ -148,7 +149,7 @@ class CSharpSonarRulesDefinitionTest {
 
   @Test
   void test_tags_are_set() {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
+    DotNetRulesDefinition definition = new DotNetRulesDefinition(CSharpPlugin.METADATA, SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Rule rule = context.repository("csharpsquid").rule(SECURITY_HOTSPOT_RULE_KEY);
@@ -158,7 +159,7 @@ class CSharpSonarRulesDefinitionTest {
 
   @Test
   void test_tags_are_empty() {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
+    DotNetRulesDefinition definition = new DotNetRulesDefinition(CSharpPlugin.METADATA, SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Rule rule = context.repository("csharpsquid").rule(NO_TAGS_RULE_KEY);
@@ -168,7 +169,7 @@ class CSharpSonarRulesDefinitionTest {
 
   @Test
   void test_remediation_is_set() {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
+    DotNetRulesDefinition definition = new DotNetRulesDefinition(CSharpPlugin.METADATA, SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("csharpsquid");
@@ -182,7 +183,7 @@ class CSharpSonarRulesDefinitionTest {
 
   @Test
   void test_no_params() {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
+    DotNetRulesDefinition definition = new DotNetRulesDefinition(CSharpPlugin.METADATA, SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Rule rule = context.repository("csharpsquid").rule(SECURITY_HOTSPOT_RULE_KEY);
@@ -192,7 +193,7 @@ class CSharpSonarRulesDefinitionTest {
 
   @Test
   void test_single_params() {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
+    DotNetRulesDefinition definition = new DotNetRulesDefinition(CSharpPlugin.METADATA, SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Rule rule = context.repository("csharpsquid").rule(SINGLE_PARAM_RULE_KEY);
@@ -204,7 +205,7 @@ class CSharpSonarRulesDefinitionTest {
 
   @Test
   void test_multiple_params() {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
+    DotNetRulesDefinition definition = new DotNetRulesDefinition(CSharpPlugin.METADATA, SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Rule rule = context.repository("csharpsquid").rule(MULTI_PARAM_RULE_KEY);

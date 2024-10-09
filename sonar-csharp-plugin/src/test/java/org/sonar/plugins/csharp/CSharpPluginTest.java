@@ -28,6 +28,7 @@ import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.utils.Version;
 import org.sonarsource.dotnet.shared.plugins.AnalysisWarningsSensor;
 import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
+import org.sonarsource.dotnet.shared.plugins.DotNetRulesDefinition;
 import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.FileTypeSensor;
@@ -67,7 +68,7 @@ class CSharpPluginTest {
       GlobalProtobufFileProcessor.class,
       CSharpLanguageConfiguration.class,
       CSharpPlugin.METADATA,
-      CSharpSonarRulesDefinition.class,
+      DotNetRulesDefinition.class,
       DotNetSensor.class,
       EncodingPerFile.class,
       FileTypeSensor.class,

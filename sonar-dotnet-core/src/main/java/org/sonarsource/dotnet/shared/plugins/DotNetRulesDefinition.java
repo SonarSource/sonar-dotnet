@@ -36,19 +36,15 @@ import org.sonar.api.server.rule.RulesDefinition;
 import org.sonarsource.analyzer.commons.RuleMetadataLoader;
 
 @ScannerSide
-public abstract class AbstractRulesDefinition implements RulesDefinition {
+public class DotNetRulesDefinition implements RulesDefinition {
   private static final String REPOSITORY_NAME = "SonarAnalyzer";
   private static final Gson GSON = new Gson();
 
-  private final String repositoryKey;
-  private final String languageKey;
-  private final String resourcesDirectory;
+  private final PluginMetadata metadata;
   private final SonarRuntime sonarRuntime;
 
-  protected AbstractRulesDefinition(String repositoryKey, String languageKey, String resourcesDirectory, SonarRuntime sonarRuntime) {
-    this.repositoryKey = repositoryKey;
-    this.languageKey = languageKey;
-    this.resourcesDirectory = resourcesDirectory;
+  public DotNetRulesDefinition(PluginMetadata metadata, SonarRuntime sonarRuntime) {
+    this.metadata = metadata;
     this.sonarRuntime = sonarRuntime;
   }
 
@@ -58,8 +54,8 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     }.getType();
     List<Rule> rules = GSON.fromJson(readResource("Rules.json"), ruleListType);
 
-    NewRepository repository = context.createRepository(repositoryKey, languageKey).setName(REPOSITORY_NAME);
-    RuleMetadataLoader ruleMetadataLoader = new RuleMetadataLoader(resourcesDirectory, sonarRuntime);
+    NewRepository repository = context.createRepository(metadata.repositoryKey(), metadata.languageKey()).setName(REPOSITORY_NAME);
+    RuleMetadataLoader ruleMetadataLoader = new RuleMetadataLoader(metadata.resourcesDirectory(), sonarRuntime);
     ruleMetadataLoader.addRulesByRuleKey(repository, rules.stream().map(Rule::getId).toList());
 
     for (Rule rule : rules) {
@@ -78,7 +74,7 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   }
 
   private String readResource(String name) {
-    InputStream stream = getResourceAsStream(resourcesDirectory + "/" + name);
+    InputStream stream = getResourceAsStream(metadata.resourcesDirectory() + "/" + name);
     if (stream == null) {
       throw new IllegalStateException("Resource does not exist: " + name);
     }
