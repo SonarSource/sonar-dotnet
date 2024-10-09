@@ -36,20 +36,18 @@ public abstract class AbstractPropertyDefinitions {
   public static final String PROJECT_NAME_PROPERTY = PROP_PREFIX + "projectName";
   public static final String PROJECT_BASE_DIR_PROPERTY = PROP_PREFIX + "projectBaseDir";
 
-  private final String languageKey;
-  private final String languageName;
-  private final String fileSuffixDefaultValue;
+  private final PluginMetadata metadata;
 
-  protected AbstractPropertyDefinitions(String languageKey, String languageName, String fileSuffixDefaultValue) {
-    this.languageKey = languageKey;
-    this.languageName = languageName;
-    this.fileSuffixDefaultValue = fileSuffixDefaultValue;
+  protected AbstractPropertyDefinitions(PluginMetadata metadata) {
+    this.metadata = metadata;
   }
 
   public List<PropertyDefinition> create() {
+    String languageKey = metadata.languageKey();
+    String languageName = metadata.languageName();
     List<PropertyDefinition> result = new ArrayList<>();
     result.add(
-      PropertyDefinition.builder(getRoslynJsonReportPathProperty(languageKey))
+      PropertyDefinition.builder(getRoslynJsonReportPathProperty(metadata.languageKey()))
         .multiValues(true)
         .hidden()
         .build());
@@ -63,7 +61,7 @@ public abstract class AbstractPropertyDefinitions {
     result.add(
       PropertyDefinition.builder(getFileSuffixProperty(languageKey))
         .category(languageName)
-        .defaultValue(fileSuffixDefaultValue)
+        .defaultValue(metadata.fileSuffixesDefaultValue())
         .name("File suffixes")
         .description("List of suffixes for files to analyze.")
         .multiValues(true)

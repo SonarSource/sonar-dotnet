@@ -92,7 +92,7 @@ class CSharpPluginTest {
         + new CodeCoverageProvider(CSharpPlugin.METADATA).extensions().size()
         + new UnitTestResultsProvider(CSharpPlugin.METADATA).extensions().size()
         + RoslynProfileExporter.sonarLintRepositoryProperties(CSharpPlugin.METADATA).size()
-        + new CSharpPropertyDefinitions().create().size());
+        + new CSharpPropertyDefinitions(CSharpPlugin.METADATA).create().size());
   }
 
 }

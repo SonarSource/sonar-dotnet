@@ -20,10 +20,11 @@
 package org.sonar.plugins.vbnet;
 
 import org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions;
+import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 
 public class VbNetPropertyDefinitions extends AbstractPropertyDefinitions {
 
-  public VbNetPropertyDefinitions() {
-    super(VbNetPlugin.LANGUAGE_KEY, VbNetPlugin.LANGUAGE_NAME, VbNetPlugin.FILE_SUFFIXES_DEFVALUE);
+  public VbNetPropertyDefinitions(PluginMetadata metadata) {
+    super(metadata);
   }
 }

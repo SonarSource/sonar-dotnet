@@ -37,7 +37,7 @@ class CSharpTest {
   @BeforeEach
   public void init() {
     PropertyDefinitions defs = new PropertyDefinitions(mock(System2.class),
-      new CSharpPropertyDefinitions().create());
+      new CSharpPropertyDefinitions(CSharpPlugin.METADATA).create());
     settings = new MapSettings(defs);
     csharp = new CSharp(settings.asConfig());
   }
