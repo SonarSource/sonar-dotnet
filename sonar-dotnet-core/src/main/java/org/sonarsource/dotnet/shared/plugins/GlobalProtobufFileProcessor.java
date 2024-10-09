@@ -103,7 +103,7 @@ public class GlobalProtobufFileProcessor extends ProjectBuilder {
 
   private List<Path> protobufReportPaths(Map<String, String> moduleProps) {
     return Arrays.stream(parseAsStringArray(moduleProps.get(getAnalyzerWorkDirProperty(metadata.languageKey()))))
-      .map(x -> Paths.get(x).resolve(AbstractModuleConfiguration.getAnalyzerReportDir(metadata.languageKey())))
+      .map(x -> Paths.get(x).resolve(ModuleConfiguration.getAnalyzerReportDir(metadata.languageKey())))
       .toList();
   }
 

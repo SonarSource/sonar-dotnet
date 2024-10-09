@@ -30,6 +30,7 @@ import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
 import org.sonarsource.dotnet.shared.plugins.GlobalProtobufFileProcessor;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
 import org.sonarsource.dotnet.shared.plugins.LogSensor;
+import org.sonarsource.dotnet.shared.plugins.ModuleConfiguration;
 import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 import org.sonarsource.dotnet.shared.plugins.ProjectTypeCollector;
 import org.sonarsource.dotnet.shared.plugins.PropertiesSensor;
@@ -60,7 +61,7 @@ public class CSharpPlugin implements Plugin {
   public void define(Context context) {
     context.addExtensions(
       // module-level components (some relying on deprecated Scanner APIs)
-      CSharpModuleConfiguration.class,
+      ModuleConfiguration.class,
       FileTypeSensor.class,
       LogSensor.class,
       PropertiesSensor.class,

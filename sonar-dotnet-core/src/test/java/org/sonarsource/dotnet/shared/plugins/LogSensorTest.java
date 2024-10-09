@@ -56,7 +56,7 @@ public class LogSensorTest {
     PluginMetadata metadata = mock(PluginMetadata.class);
     when(metadata.languageKey()).thenReturn(LANG_KEY);
     when(metadata.languageName()).thenReturn(LANG_NAME);
-    AbstractModuleConfiguration configuration = mock(AbstractModuleConfiguration.class);
+    ModuleConfiguration configuration = mock(ModuleConfiguration.class);
     when(configuration.protobufReportPaths()).thenReturn(Collections.singletonList(TEST_DATA_DIR.toPath()));
     sensor = new LogSensor(metadata, configuration);
   }

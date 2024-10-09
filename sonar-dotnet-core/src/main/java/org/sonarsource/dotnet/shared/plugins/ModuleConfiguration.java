@@ -29,11 +29,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.StreamSupport;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.InstantiationStrategy;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.config.Configuration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getAnalyzerWorkDirProperty;
@@ -47,22 +47,23 @@ import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.
  * <p>
  * Module-independent configuration is in {@link AbstractLanguageConfiguration}.
  * <p>
- * Although module support has been dropped in SQ/SC, inside the scanner there is no good replacement for {@link org.sonar.api.batch.ScannerSide}, yet.
+ * Although module support has been dropped in SQ/SC, inside the scanner there is no good replacement for
+ * {@link org.sonar.api.batch.ScannerSide}, yet.
  * When a replacement will appear, this code will have to be refactored.
  */
 @ScannerSide
 @InstantiationStrategy(InstantiationStrategy.PER_PROJECT)
-public abstract class AbstractModuleConfiguration {
-  private static final Logger LOG = LoggerFactory.getLogger(AbstractModuleConfiguration.class);
+public class ModuleConfiguration {
+  private static final Logger LOG = LoggerFactory.getLogger(ModuleConfiguration.class);
   private static final String MSG_SUFFIX = "Analyzer results won't be loaded from this directory.";
 
   private final Configuration configuration;
-  private final String languageKey;
   private final String projectKey;
+  private final PluginMetadata metadata;
 
-  public AbstractModuleConfiguration(Configuration configuration, String languageKey) {
+  public ModuleConfiguration(Configuration configuration, PluginMetadata metadata) {
     this.configuration = configuration;
-    this.languageKey = languageKey;
+    this.metadata = metadata;
     this.projectKey = configuration.get(AbstractPropertyDefinitions.PROJECT_KEY_PROPERTY).orElse("<NONE>");
     LOG.trace("Project '{}': AbstractModuleConfiguration has been created.", projectKey);
   }
@@ -78,21 +79,22 @@ public abstract class AbstractModuleConfiguration {
    * - The directory contains at least one protobuf
    */
   public List<Path> protobufReportPaths() {
-    List<Path> analyzerWorkDirPaths = Arrays.stream(configuration.getStringArray(getAnalyzerWorkDirProperty(languageKey)))
+    List<Path> analyzerWorkDirPaths = Arrays.stream(configuration.getStringArray(getAnalyzerWorkDirProperty(metadata.languageKey())))
       .map(Paths::get)
       .toList();
 
     if (analyzerWorkDirPaths.isEmpty() && !configuration.hasKey("sonar.tests")) {
-      LOG.debug("Project '{}': Property missing: '{}'. No protobuf files will be loaded for this project.", projectKey, lazy(() -> getAnalyzerWorkDirProperty(languageKey)));
+      LOG.debug("Project '{}': Property missing: '{}'. No protobuf files will be loaded for this project.", projectKey,
+        lazy(() -> getAnalyzerWorkDirProperty(metadata.languageKey())));
     }
 
-    return analyzerWorkDirPaths.stream().map(x -> x.resolve(getAnalyzerReportDir(languageKey)))
+    return analyzerWorkDirPaths.stream().map(x -> x.resolve(getAnalyzerReportDir(metadata.languageKey())))
       .filter(this::validateOutputDir)
       .toList();
   }
 
   public List<Path> roslynReportPaths() {
-    String[] strPaths = configuration.getStringArray(getRoslynJsonReportPathProperty(languageKey));
+    String[] strPaths = configuration.getStringArray(getRoslynJsonReportPathProperty(metadata.languageKey()));
     if (strPaths.length > 0) {
       LOG.debug("Project '{}': The Roslyn JSON report path has '{}'", projectKey, lazy(() -> String.join(",", strPaths)));
       return Arrays.stream(strPaths)

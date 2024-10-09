@@ -31,11 +31,11 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
  * Note that this is required because a global sensor cannot access to module specific properties.
  */
 public class PropertiesSensor implements Sensor {
-  private final AbstractModuleConfiguration configuration;
+  private final ModuleConfiguration configuration;
   private final ReportPathCollector reportPathCollector;
   private final PluginMetadata pluginMetadata;
 
-  public PropertiesSensor(AbstractModuleConfiguration configuration, ReportPathCollector reportPathCollector,
+  public PropertiesSensor(ModuleConfiguration configuration, ReportPathCollector reportPathCollector,
     PluginMetadata pluginMetadata) {
     this.configuration = configuration;
     this.reportPathCollector = reportPathCollector;

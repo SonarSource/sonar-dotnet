@@ -29,9 +29,9 @@ import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.LOG_FIL
 
 public class LogSensor implements Sensor {
   private final PluginMetadata pluginMetadata;
-  private final AbstractModuleConfiguration configuration;
+  private final ModuleConfiguration configuration;
 
-  public LogSensor(PluginMetadata pluginMetadata, AbstractModuleConfiguration configuration) {
+  public LogSensor(PluginMetadata pluginMetadata, ModuleConfiguration configuration) {
     this.pluginMetadata = pluginMetadata;
     this.configuration = configuration;
   }
