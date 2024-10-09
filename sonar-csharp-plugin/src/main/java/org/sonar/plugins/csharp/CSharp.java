@@ -28,13 +28,13 @@ public class CSharp extends AbstractLanguage {
   private final Configuration configuration;
 
   public CSharp(Configuration configuration) {
-    super(CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME);
+    super(CSharpPlugin.METADATA.languageKey(), CSharpPlugin.METADATA.languageName());
     this.configuration = configuration;
   }
 
   @Override
   public String[] getFileSuffixes() {
-    return configuration.getStringArray(CSharpPlugin.FILE_SUFFIXES_KEY);
+    return configuration.getStringArray(CSharpPlugin.METADATA.fileSuffixesKey());
   }
 
   @Override

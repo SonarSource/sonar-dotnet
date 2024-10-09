@@ -28,13 +28,13 @@ public class VbNet extends AbstractLanguage {
   private final Configuration configuration;
 
   public VbNet(Configuration configuration) {
-    super(VbNetPlugin.LANGUAGE_KEY, VbNetPlugin.LANGUAGE_NAME);
+    super(VbNetPlugin.METADATA.languageKey(), VbNetPlugin.METADATA.languageName());
     this.configuration = configuration;
   }
 
   @Override
   public String[] getFileSuffixes() {
-    return configuration.getStringArray(VbNetPlugin.FILE_SUFFIXES_KEY);
+    return configuration.getStringArray(VbNetPlugin.METADATA.fileSuffixesKey());
   }
 
   @Override

@@ -49,7 +49,7 @@ class VbNetTest {
 
   @Test
   void shouldGetCustomFileSuffixes() {
-    settings.setProperty(VbNetPlugin.FILE_SUFFIXES_KEY, ".vb,.vbnet");
+    settings.setProperty(VbNetPlugin.METADATA.fileSuffixesKey(), ".vb,.vbnet");
     assertThat(vbnet.getFileSuffixes()).containsOnly(".vb", ".vbnet");
   }
 
@@ -72,7 +72,7 @@ class VbNetTest {
   private class FakeVbNet extends AbstractLanguage {
 
     public FakeVbNet() {
-      super(VbNetPlugin.LANGUAGE_KEY, VbNetPlugin.LANGUAGE_NAME);
+      super(VbNetPlugin.METADATA.languageKey(), VbNetPlugin.METADATA.languageName());
     }
 
     @Override

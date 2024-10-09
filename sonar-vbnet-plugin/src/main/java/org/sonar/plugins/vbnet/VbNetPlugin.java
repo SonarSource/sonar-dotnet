@@ -44,17 +44,7 @@ import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
 public class VbNetPlugin implements Plugin {
 
-  static final String LANGUAGE_KEY = "vbnet";
-  static final String LANGUAGE_NAME = "VB.NET";
-
-  static final String REPOSITORY_KEY = "vbnet";
-  static final String PLUGIN_KEY = "vbnet";
-  static final String SONARANALYZER_NAME = "SonarAnalyzer.VisualBasic";
-  static final String RESOURCES_DIRECTORY = "/org/sonar/plugins/vbnet";
-
-  static final String FILE_SUFFIXES_KEY = AbstractPropertyDefinitions.getFileSuffixProperty(LANGUAGE_KEY);
-  static final String FILE_SUFFIXES_DEFVALUE = ".vb";
-
+  // Do NOT add any public fields here, and do NOT reference them directly. Add them to PluginMetadata and inject the metadata.
   static final PluginMetadata METADATA = new VbNetPluginMetadata();
 
   @Override
@@ -100,42 +90,42 @@ public class VbNetPlugin implements Plugin {
 
     @Override
     public String languageKey() {
-      return LANGUAGE_KEY;
+      return "vbnet";
     }
 
     @Override
     public String pluginKey() {
-      return PLUGIN_KEY;
+      return "vbnet";
     }
 
     @Override
     public String languageName() {
-      return LANGUAGE_NAME;
+      return "VB.NET";
     }
 
     @Override
     public String analyzerProjectName() {
-      return SONARANALYZER_NAME;
+      return "SonarAnalyzer.VisualBasic";
     }
 
     @Override
     public String repositoryKey() {
-      return REPOSITORY_KEY;
+      return "vbnet";
     }
 
     @Override
     public String fileSuffixesKey() {
-      return FILE_SUFFIXES_KEY;
+      return AbstractPropertyDefinitions.getFileSuffixProperty(languageKey());
     }
 
     @Override
     public String fileSuffixesDefaultValue() {
-      return FILE_SUFFIXES_DEFVALUE;
+      return ".vb";
     }
 
     @Override
     public String resourcesDirectory() {
-      return RESOURCES_DIRECTORY;
+      return "/org/sonar/plugins/vbnet";
     }
   }
 }

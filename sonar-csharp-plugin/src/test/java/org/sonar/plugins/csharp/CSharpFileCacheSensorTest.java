@@ -19,6 +19,10 @@
  */
 package org.sonar.plugins.csharp;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.security.NoSuchAlgorithmException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.api.io.TempDir;
@@ -30,11 +34,6 @@ import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.security.NoSuchAlgorithmException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -51,7 +50,7 @@ class CSharpFileCacheSensorTest {
   @Test
   void execute_whenCacheIsEnabled_itAddsOnlyTheLanguageFiles() throws IOException, NoSuchAlgorithmException {
     var settings = new MapSettings();
-    settings.setProperty(CSharpPlugin.FILE_SUFFIXES_KEY, ".cs");
+    settings.setProperty(CSharpPlugin.METADATA.fileSuffixesKey(), ".cs");
     settings.setProperty("sonar.pullrequest.cache.basepath", new File(basePath.toString()).getCanonicalPath());
     var hashProvider = mock(HashProvider.class);
     when(hashProvider.computeHash(any())).thenReturn(new byte[]{42});
@@ -59,9 +58,9 @@ class CSharpFileCacheSensorTest {
     context.setCacheEnabled(true);
     context.setSettings(settings);
     context.setNextCache(mock(WriteCache.class));
-    AddFile(context, basePath.toString(), "CSharp/Foo.cs", CSharpPlugin.LANGUAGE_KEY);
-    AddFile(context, basePath.toString(), "CSharp/Foo.cshtml", CSharpPlugin.LANGUAGE_KEY);
-    AddFile(context, basePath.toString(), "CSharp/Foo.razor", CSharpPlugin.LANGUAGE_KEY);
+    AddFile(context, basePath.toString(), "CSharp/Foo.cs", CSharpPlugin.METADATA.languageKey());
+    AddFile(context, basePath.toString(), "CSharp/Foo.cshtml", CSharpPlugin.METADATA.languageKey());
+    AddFile(context, basePath.toString(), "CSharp/Foo.razor", CSharpPlugin.METADATA.languageKey());
     AddFile(context, basePath.toString(), "VB/Bar.vb", "other-language-key");
     var sut = new CSharpFileCacheSensor(new CSharp(settings.asConfig()), hashProvider);
 

@@ -24,7 +24,7 @@ import org.sonarsource.analyzer.commons.BuiltInQualityProfileJsonLoader;
 
 public abstract class AbstractSonarWayProfile implements BuiltInQualityProfilesDefinition {
 
-  private final PluginMetadata metadata;
+  protected final PluginMetadata metadata;
 
   protected AbstractSonarWayProfile(PluginMetadata metadata) {
     this.metadata = metadata;

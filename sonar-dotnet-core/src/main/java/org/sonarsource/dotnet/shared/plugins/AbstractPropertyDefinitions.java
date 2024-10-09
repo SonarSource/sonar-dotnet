@@ -36,7 +36,7 @@ public abstract class AbstractPropertyDefinitions {
   public static final String PROJECT_NAME_PROPERTY = PROP_PREFIX + "projectName";
   public static final String PROJECT_BASE_DIR_PROPERTY = PROP_PREFIX + "projectBaseDir";
 
-  private final PluginMetadata metadata;
+  protected final PluginMetadata metadata;
 
   protected AbstractPropertyDefinitions(PluginMetadata metadata) {
     this.metadata = metadata;

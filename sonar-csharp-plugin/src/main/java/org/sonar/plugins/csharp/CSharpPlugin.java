@@ -45,17 +45,7 @@ import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
 public class CSharpPlugin implements Plugin {
 
-  static final String LANGUAGE_KEY = "cs";
-  static final String LANGUAGE_NAME = "C#";
-
-  static final String REPOSITORY_KEY = "csharpsquid";
-  static final String PLUGIN_KEY = "csharp";
-  static final String SONARANALYZER_NAME = "SonarAnalyzer.CSharp";
-  static final String RESOURCES_DIRECTORY = "/org/sonar/plugins/csharp";
-
-  static final String FILE_SUFFIXES_KEY = AbstractPropertyDefinitions.getFileSuffixProperty(LANGUAGE_KEY);
-  static final String FILE_SUFFIXES_DEFVALUE = ".cs,.razor";
-
+  // Do NOT add any public fields here, and do NOT reference them directly. Add them to PluginMetadata and inject the metadata.
   static final PluginMetadata METADATA = new CSharpPluginMetadata();
 
   @Override
@@ -103,42 +93,42 @@ public class CSharpPlugin implements Plugin {
 
     @Override
     public String languageKey() {
-      return LANGUAGE_KEY;
+      return "cs";
     }
 
     @Override
     public String pluginKey() {
-      return PLUGIN_KEY;
+      return "csharp";
     }
 
     @Override
     public String languageName() {
-      return LANGUAGE_NAME;
+      return "C#";
     }
 
     @Override
     public String analyzerProjectName() {
-      return SONARANALYZER_NAME;
+      return "SonarAnalyzer.CSharp";
     }
 
     @Override
     public String repositoryKey() {
-      return REPOSITORY_KEY;
+      return "csharpsquid";
     }
 
     @Override
     public String fileSuffixesKey() {
-      return FILE_SUFFIXES_KEY;
+      return AbstractPropertyDefinitions.getFileSuffixProperty(languageKey());
     }
 
     @Override
     public String fileSuffixesDefaultValue() {
-      return FILE_SUFFIXES_DEFVALUE;
+      return ".cs,.razor";
     }
 
     @Override
     public String resourcesDirectory() {
-      return RESOURCES_DIRECTORY;
+      return "/org/sonar/plugins/csharp";
     }
   }
 }

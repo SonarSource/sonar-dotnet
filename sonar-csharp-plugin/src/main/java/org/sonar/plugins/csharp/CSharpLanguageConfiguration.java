@@ -29,6 +29,6 @@ public class CSharpLanguageConfiguration extends AbstractLanguageConfiguration {
   }
 
   public boolean analyzeRazorCode() {
-    return configuration.getBoolean(CSharpPropertyDefinitions.getAnalyzeRazorCode(CSharpPlugin.LANGUAGE_KEY)).orElse(true);
+    return configuration.getBoolean(CSharpPropertyDefinitions.getAnalyzeRazorCode(CSharpPlugin.METADATA.languageKey())).orElse(true);
   }
 }

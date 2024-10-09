@@ -26,13 +26,13 @@ import java.security.NoSuchAlgorithmException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.api.io.TempDir;
+import org.slf4j.event.Level;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.cache.WriteCache;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
-import org.slf4j.event.Level;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -50,7 +50,7 @@ class VbNetFileCacheSensorTest {
   @Test
   void execute_whenCacheIsEnabled_itAddsOnlyTheLanguageFiles() throws IOException, NoSuchAlgorithmException {
     var settings = new MapSettings();
-    settings.setProperty(VbNetPlugin.FILE_SUFFIXES_KEY, ".vb");
+    settings.setProperty(VbNetPlugin.METADATA.fileSuffixesKey(), ".vb");
     settings.setProperty("sonar.pullrequest.cache.basepath", new File(basePath.toString()).getCanonicalPath());
     var hashProvider = mock(HashProvider.class);
     when(hashProvider.computeHash(any())).thenReturn(new byte[]{42});
@@ -59,7 +59,7 @@ class VbNetFileCacheSensorTest {
     context.setSettings(settings);
     context.setNextCache(mock(WriteCache.class));
     AddFile(context, basePath.toFile(), "CSharp/Foo.cs", "other-language-key");
-    AddFile(context, basePath.toFile(), "VB/Bar.vb", VbNetPlugin.LANGUAGE_KEY);
+    AddFile(context, basePath.toFile(), "VB/Bar.vb", VbNetPlugin.METADATA.languageKey());
     var sut = new VbNetFileCacheSensor(new VbNet(settings.asConfig()), hashProvider);
 
     sut.execute(context);
