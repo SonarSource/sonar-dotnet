@@ -39,6 +39,7 @@ import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
 import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 import org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter;
+import org.sonarsource.dotnet.shared.plugins.RoslynRules;
 import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.UnitTestResultsProvider;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
@@ -63,6 +64,7 @@ public class CSharpPlugin implements Plugin {
       CSharpSonarWayProfile.class,
       DotNetRulesDefinition.class,
       GlobalProtobufFileProcessor.class,
+      RoslynRules.class,
       // sensor
       DotNetSensor.class,
       // language-specific

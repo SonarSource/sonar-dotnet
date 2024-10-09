@@ -19,49 +19,34 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.sonar.api.SonarRuntime;
-import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.server.rule.RuleParamType;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonarsource.analyzer.commons.RuleMetadataLoader;
 
-@ScannerSide
 public class DotNetRulesDefinition implements RulesDefinition {
   private static final String REPOSITORY_NAME = "SonarAnalyzer";
-  private static final Gson GSON = new Gson();
 
   private final PluginMetadata metadata;
   private final SonarRuntime sonarRuntime;
+  private final RoslynRules roslynRules;
 
-  public DotNetRulesDefinition(PluginMetadata metadata, SonarRuntime sonarRuntime) {
+  public DotNetRulesDefinition(PluginMetadata metadata, SonarRuntime sonarRuntime, RoslynRules roslynRules) {
     this.metadata = metadata;
     this.sonarRuntime = sonarRuntime;
+    this.roslynRules = roslynRules;
   }
 
   @Override
   public void define(Context context) {
-    Type ruleListType = new TypeToken<List<Rule>>() {
-    }.getType();
-    List<Rule> rules = GSON.fromJson(readResource("Rules.json"), ruleListType);
-
     NewRepository repository = context.createRepository(metadata.repositoryKey(), metadata.languageKey()).setName(REPOSITORY_NAME);
     RuleMetadataLoader ruleMetadataLoader = new RuleMetadataLoader(metadata.resourcesDirectory(), sonarRuntime);
-    ruleMetadataLoader.addRulesByRuleKey(repository, rules.stream().map(Rule::getId).toList());
+    ruleMetadataLoader.addRulesByRuleKey(repository, roslynRules.rules().stream().map(RoslynRules.Rule::getId).toList());
 
-    for (Rule rule : rules) {
+    for (RoslynRules.Rule rule : roslynRules.rules()) {
       var currentRule = repository.rule(rule.id);
       if (currentRule != null) {
-        for (RuleParameter param : rule.parameters) {
+        for (RoslynRules.RuleParameter param : rule.parameters) {
           currentRule.createParam(param.key)
             .setType(RuleParamType.parse(param.type))
             .setDescription(param.description)
@@ -71,38 +56,5 @@ public class DotNetRulesDefinition implements RulesDefinition {
     }
 
     repository.done();
-  }
-
-  private String readResource(String name) {
-    InputStream stream = getResourceAsStream(metadata.resourcesDirectory() + "/" + name);
-    if (stream == null) {
-      throw new IllegalStateException("Resource does not exist: " + name);
-    }
-    try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
-      return reader.lines().collect(Collectors.joining("\n"));
-    } catch (IOException e) {
-      throw new IllegalStateException("Failed to read: " + name, e);
-    }
-  }
-
-  // Extracted for testing
-  InputStream getResourceAsStream(String name) {
-    return getClass().getResourceAsStream(name);
-  }
-
-  private static class Rule {
-    String id;
-    RuleParameter[] parameters;
-
-    public String getId() {
-      return id;
-    }
-  }
-
-  private static class RuleParameter {
-    String key;
-    String description;
-    String type;
-    String defaultValue;
   }
 }
