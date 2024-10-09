@@ -27,7 +27,7 @@ import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
+import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 
 /**
  * This class is responsible to handle all the C# and VB.NET unit test results reports (parse and report back to SonarQube).
@@ -42,7 +42,7 @@ public class UnitTestResultsImportSensor implements ProjectSensor {
   private final String languageName;
   private final AnalysisWarnings analysisWarnings;
 
-  public UnitTestResultsImportSensor(UnitTestResultsAggregator unitTestResultsAggregator, DotNetPluginMetadata pluginMetadata, AnalysisWarnings analysisWarnings) {
+  public UnitTestResultsImportSensor(UnitTestResultsAggregator unitTestResultsAggregator, PluginMetadata pluginMetadata, AnalysisWarnings analysisWarnings) {
     this.unitTestResultsAggregator = unitTestResultsAggregator;
     this.languageKey = pluginMetadata.languageKey();
     this.languageName = pluginMetadata.languageName();

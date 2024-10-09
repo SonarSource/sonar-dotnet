@@ -35,7 +35,7 @@ import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.sonar.api.testfixtures.log.LogTester;
 import org.slf4j.event.Level;
-import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
+import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
@@ -60,7 +60,7 @@ public class UnitTestResultsImportSensorTest {
   @Test
   public void should_not_save_metrics_with_empty_results() throws Exception {
     UnitTestResultsAggregator aggregator = mock(UnitTestResultsAggregator.class);
-    DotNetPluginMetadata metadata = mockCSharpMetadata();
+    PluginMetadata metadata = mockCSharpMetadata();
     AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
     UnitTestResults results = new UnitTestResults();
     results.add(42, 1, 2, 3, null);
@@ -85,7 +85,7 @@ public class UnitTestResultsImportSensorTest {
   @Test
   public void describe_execute_only_when_key_present() {
     UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
-    DotNetPluginMetadata metadata = mockCSharpMetadata();
+    PluginMetadata metadata = mockCSharpMetadata();
     AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
 
     Configuration configWithKey = mock(Configuration.class);
@@ -108,7 +108,7 @@ public class UnitTestResultsImportSensorTest {
   @Test
   public void describe_only_on_language() {
     UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
-    DotNetPluginMetadata metadata = mockCSharpMetadata();
+    PluginMetadata metadata = mockCSharpMetadata();
     AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
 
@@ -125,8 +125,8 @@ public class UnitTestResultsImportSensorTest {
   @Test
   public void import_two_reports_for_same_project_should_not_throw() throws Exception {
     UnitTestResultsAggregator aggregator = mock(UnitTestResultsAggregator.class);
-    DotNetPluginMetadata cSharpMetadata = mockCSharpMetadata();
-    DotNetPluginMetadata vbNetMetadata = mockVbNetMetadata();
+    PluginMetadata cSharpMetadata = mockCSharpMetadata();
+    PluginMetadata vbNetMetadata = mockVbNetMetadata();
     AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
     SensorContextTester context = SensorContextTester.create(temp.newFolder());
     UnitTestResults results = mock(UnitTestResults.class);
@@ -143,7 +143,7 @@ public class UnitTestResultsImportSensorTest {
   @Test
   public void execute_saves_metrics() throws IOException {
     UnitTestResultsAggregator aggregator = mock(UnitTestResultsAggregator.class);
-    DotNetPluginMetadata metadata = mockCSharpMetadata();
+    PluginMetadata metadata = mockCSharpMetadata();
     AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
     UnitTestResults results = new UnitTestResults();
     results.add(42, 1, 2, 3, 321L);
@@ -167,7 +167,7 @@ public class UnitTestResultsImportSensorTest {
   @Test
   public void execute_warns_when_no_key_is_present() throws IOException {
     UnitTestResultsAggregator aggregator = mock(UnitTestResultsAggregator.class);
-    DotNetPluginMetadata metadata = mockCSharpMetadata();
+    PluginMetadata metadata = mockCSharpMetadata();
     when(aggregator.hasUnitTestResultsProperty()).thenReturn(false);
 
     UnitTestResultsImportSensor sensor = new UnitTestResultsImportSensor(aggregator, metadata, null);
@@ -176,15 +176,15 @@ public class UnitTestResultsImportSensorTest {
     assertThat(logTester.logs(Level.DEBUG)).containsExactly("No unit test results property. Skip Sensor");
   }
 
-  private DotNetPluginMetadata mockCSharpMetadata() {
-    DotNetPluginMetadata metadata = mock(DotNetPluginMetadata.class);
+  private PluginMetadata mockCSharpMetadata() {
+    PluginMetadata metadata = mock(PluginMetadata.class);
     when(metadata.languageKey()).thenReturn("cs");
     when(metadata.languageName()).thenReturn("C#");
     return metadata;
   }
 
-  private DotNetPluginMetadata mockVbNetMetadata() {
-    DotNetPluginMetadata metadata = mock(DotNetPluginMetadata.class);
+  private PluginMetadata mockVbNetMetadata() {
+    PluginMetadata metadata = mock(PluginMetadata.class);
     when(metadata.languageKey()).thenReturn("vb");
     when(metadata.languageName()).thenReturn("VB.NET");
     return metadata;

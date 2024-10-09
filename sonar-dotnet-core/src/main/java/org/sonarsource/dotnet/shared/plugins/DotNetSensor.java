@@ -23,6 +23,8 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.function.UnaryOperator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.rule.ActiveRule;
@@ -31,8 +33,6 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.scanner.sensor.ProjectSensor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 import static org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter.activeRoslynRulesByPartialRepoKey;
@@ -51,13 +51,13 @@ public class DotNetSensor implements ProjectSensor {
 
   private final ProtobufDataImporter protobufDataImporter;
   private final RoslynDataImporter roslynDataImporter;
-  private final DotNetPluginMetadata pluginMetadata;
+  private final PluginMetadata pluginMetadata;
   private final ReportPathCollector reportPathCollector;
   private final ProjectTypeCollector projectTypeCollector;
   private final AnalysisWarnings analysisWarnings;
 
-  public DotNetSensor(DotNetPluginMetadata pluginMetadata, ReportPathCollector reportPathCollector, ProjectTypeCollector projectTypeCollector,
-                      ProtobufDataImporter protobufDataImporter, RoslynDataImporter roslynDataImporter, AnalysisWarnings analysisWarnings) {
+  public DotNetSensor(PluginMetadata pluginMetadata, ReportPathCollector reportPathCollector, ProjectTypeCollector projectTypeCollector,
+    ProtobufDataImporter protobufDataImporter, RoslynDataImporter roslynDataImporter, AnalysisWarnings analysisWarnings) {
     this.pluginMetadata = pluginMetadata;
     this.reportPathCollector = reportPathCollector;
     this.projectTypeCollector = projectTypeCollector;
@@ -68,7 +68,7 @@ public class DotNetSensor implements ProjectSensor {
 
   @Override
   public void describe(SensorDescriptor descriptor) {
-    descriptor.name(pluginMetadata.shortLanguageName())
+    descriptor.name(pluginMetadata.languageName())
       .onlyOnLanguage(pluginMetadata.languageKey());
   }
 
@@ -82,7 +82,7 @@ public class DotNetSensor implements ProjectSensor {
     } else {
       log(hasFilesOfLanguage, hasProjects);
     }
-    projectTypeCollector.getSummary(pluginMetadata.shortLanguageName()).ifPresent(LOG::info);
+    projectTypeCollector.getSummary(pluginMetadata.languageName()).ifPresent(LOG::info);
   }
 
   private void importResults(FileSystem fs, SensorContext context) {
@@ -91,13 +91,13 @@ public class DotNetSensor implements ProjectSensor {
     UnaryOperator<String> toRealPath = new RealPathProvider();
 
     if (hasTestFiles && !hasMainFiles) {
-      warnThatProjectContainsOnlyTestCode(fs, analysisWarnings, pluginMetadata.shortLanguageName());
+      warnThatProjectContainsOnlyTestCode(fs, analysisWarnings, pluginMetadata.languageName());
     }
 
     List<Path> protobufPaths = reportPathCollector.protobufDirs();
     if (protobufPaths.isEmpty()) {
       LOG.warn("No protobuf reports found. The {} files will not have highlighting and metrics. {}",
-        lazy(pluginMetadata::shortLanguageName),
+        lazy(pluginMetadata::languageName),
         GET_HELP_MESSAGE);
     } else {
       protobufDataImporter.importResults(context, protobufPaths, toRealPath);
@@ -105,7 +105,7 @@ public class DotNetSensor implements ProjectSensor {
 
     List<RoslynReport> roslynReports = reportPathCollector.roslynReports();
     if (roslynReports.isEmpty()) {
-      LOG.warn("No Roslyn issue reports were found. The {} files have not been analyzed. {}", lazy(pluginMetadata::shortLanguageName), GET_HELP_MESSAGE);
+      LOG.warn("No Roslyn issue reports were found. The {} files have not been analyzed. {}", lazy(pluginMetadata::languageName), GET_HELP_MESSAGE);
     } else {
       Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(pluginMetadata, context.activeRules()
         .findAll()
@@ -131,7 +131,7 @@ public class DotNetSensor implements ProjectSensor {
       // the scanner for .NET has _not_ been used.
       LOG.warn("Your project contains {} files which cannot be analyzed with the scanner you are using." +
           " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
-          lazy(pluginMetadata::shortLanguageName));
+        lazy(pluginMetadata::languageName));
     }
     if (!hasFilesOfLanguage) {
       logDebugNoFiles();
@@ -142,7 +142,7 @@ public class DotNetSensor implements ProjectSensor {
     LOG.warn("SonarScanner for .NET detected only TEST files and no MAIN files for {} in the current solution. " +
         "Only TEST-code related results will be imported to your SonarQube/SonarCloud project. " +
         "Many of our rules (e.g. vulnerabilities) are raised only on MAIN-code. {}",
-        languageName, READ_MORE_MESSAGE);
+      languageName, READ_MORE_MESSAGE);
 
     // Before outputting a warning in the User Interface, we want to make sure it's worth the user attention.
     // There can be cases where a project written in language X has tests written in languages X, Y and Z.
@@ -151,7 +151,7 @@ public class DotNetSensor implements ProjectSensor {
       analysisWarnings.addUnique(
         String.format("Your project contains only TEST-code for language %s and no MAIN-code for any language, so only TEST-code related results are imported. " +
             "Many of our rules (e.g. vulnerabilities) are raised only on MAIN-code. %s",
-        languageName, READ_MORE_MESSAGE));
+          languageName, READ_MORE_MESSAGE));
     }
   }
 

@@ -35,7 +35,7 @@ import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.testfixtures.log.LogTester;
 import org.slf4j.event.Level;
 import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
-import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
+import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -301,7 +301,7 @@ public class CoverageAggregatorTest {
   }
 
   private static CodeCoverageProvider createTestProvider() {
-    DotNetPluginMetadata pluginMetadata = mock(DotNetPluginMetadata.class);
+    PluginMetadata pluginMetadata = mock(PluginMetadata.class);
     when(pluginMetadata.languageKey()).thenReturn("KEY");
     return new CodeCoverageProvider(pluginMetadata);
   }

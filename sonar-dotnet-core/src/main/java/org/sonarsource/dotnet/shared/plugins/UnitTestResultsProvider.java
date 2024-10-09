@@ -34,10 +34,10 @@ public class UnitTestResultsProvider {
 
   private static final String SUBCATEGORY = "Unit Tests";
 
-  private final DotNetPluginMetadata pluginMetadata;
+  private final PluginMetadata pluginMetadata;
   private final UnitTestConfiguration unitTestConfiguration;
 
-  public UnitTestResultsProvider(DotNetPluginMetadata pluginMetadata) {
+  public UnitTestResultsProvider(PluginMetadata pluginMetadata) {
     this.pluginMetadata = pluginMetadata;
     this.unitTestConfiguration = new UnitTestConfiguration(propertyKey("vstest"), propertyKey("nunit"), propertyKey("xunit"));
   }
@@ -47,7 +47,7 @@ public class UnitTestResultsProvider {
   }
 
   public List<Object> extensions() {
-    String category = pluginMetadata.shortLanguageName();
+    String category = pluginMetadata.languageName();
     return Arrays.asList(
       this,
       DotNetUnitTestResultsAggregator.class,
@@ -69,13 +69,13 @@ public class UnitTestResultsProvider {
         .multiValues(true)
         .build(),
       PropertyDefinition.builder(unitTestConfiguration.xunitTestResultsFilePropertyKey())
-      .name("xUnit Test Reports Paths")
-      .description("Example: \"TestResult.xml\", \"TestResult1.xml,TestResult2.xml\" or \"C:/TestResult.xml\"")
-      .category(category)
-      .subCategory(SUBCATEGORY)
-      .onlyOnQualifiers(Qualifiers.PROJECT)
-      .multiValues(true)
-      .build());
+        .name("xUnit Test Reports Paths")
+        .description("Example: \"TestResult.xml\", \"TestResult1.xml,TestResult2.xml\" or \"C:/TestResult.xml\"")
+        .category(category)
+        .subCategory(SUBCATEGORY)
+        .onlyOnQualifiers(Qualifiers.PROJECT)
+        .multiValues(true)
+        .build());
   }
 
   public class DotNetUnitTestResultsAggregator extends UnitTestResultsAggregator {

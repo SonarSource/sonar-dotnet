@@ -24,8 +24,8 @@ import org.sonar.api.rules.RuleFinder;
 public class SonarLintProfileExporter extends AbstractSonarLintProfileExporter {
   private static final String PROFILE_NAME = "SonarLint for Visual Studio Rule Set";
 
-  public SonarLintProfileExporter(RuleFinder ruleFinder, DotNetPluginMetadata pluginMetadata) {
+  public SonarLintProfileExporter(RuleFinder ruleFinder, PluginMetadata pluginMetadata) {
     super("sonarlint-vs-" + pluginMetadata.languageKey(), PROFILE_NAME, pluginMetadata.languageKey(),
-      pluginMetadata.sonarAnalyzerName(), pluginMetadata.repositoryKey(), ruleFinder);
+      pluginMetadata.analyzerProjectName(), pluginMetadata.repositoryKey(), ruleFinder);
   }
 }

@@ -41,10 +41,10 @@ public class PropertiesSensorTest {
 
   PropertiesSensor underTest = new PropertiesSensor(config, reportPathCollector, pluginMetadata());
 
-  private DotNetPluginMetadata pluginMetadata() {
-    DotNetPluginMetadata metadata = mock(DotNetPluginMetadata.class);
+  private PluginMetadata pluginMetadata() {
+    PluginMetadata metadata = mock(PluginMetadata.class);
     when(metadata.languageKey()).thenReturn("languageKey");
-    when(metadata.shortLanguageName()).thenReturn("Lang Name");
+    when(metadata.languageName()).thenReturn("Lang Name");
     return metadata;
   }
 

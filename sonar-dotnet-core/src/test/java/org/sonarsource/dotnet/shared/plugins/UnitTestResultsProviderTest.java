@@ -34,7 +34,7 @@ public class UnitTestResultsProviderTest {
 
   @Test
   public void vbnet() {
-    DotNetPluginMetadata pluginMetadata = mock(DotNetPluginMetadata.class);
+    PluginMetadata pluginMetadata = mock(PluginMetadata.class);
     when(pluginMetadata.languageKey()).thenReturn("vbnet");
     UnitTestResultsProvider provider = new UnitTestResultsProvider(pluginMetadata);
     List extensions = provider.extensions();
@@ -48,7 +48,7 @@ public class UnitTestResultsProviderTest {
 
   @Test
   public void csharp() {
-    DotNetPluginMetadata pluginMetadata = mock(DotNetPluginMetadata.class);
+    PluginMetadata pluginMetadata = mock(PluginMetadata.class);
     when(pluginMetadata.languageKey()).thenReturn("cs");
     UnitTestResultsProvider provider = new UnitTestResultsProvider(pluginMetadata);
     List extensions = provider.extensions();

@@ -33,9 +33,10 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 public class PropertiesSensor implements Sensor {
   private final AbstractModuleConfiguration configuration;
   private final ReportPathCollector reportPathCollector;
-  private final DotNetPluginMetadata pluginMetadata;
+  private final PluginMetadata pluginMetadata;
 
-  public PropertiesSensor(AbstractModuleConfiguration configuration, ReportPathCollector reportPathCollector, DotNetPluginMetadata pluginMetadata) {
+  public PropertiesSensor(AbstractModuleConfiguration configuration, ReportPathCollector reportPathCollector,
+    PluginMetadata pluginMetadata) {
     this.configuration = configuration;
     this.reportPathCollector = reportPathCollector;
     this.pluginMetadata = pluginMetadata;
@@ -43,7 +44,7 @@ public class PropertiesSensor implements Sensor {
 
   @Override
   public void describe(SensorDescriptor descriptor) {
-    descriptor.name(pluginMetadata.shortLanguageName() + " Properties");
+    descriptor.name(pluginMetadata.languageName() + " Properties");
     // we do not filter by language because we want to be called on projects without sources
     // (that could reference only shared sources e.g. in .projitems)
   }

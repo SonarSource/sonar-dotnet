@@ -20,6 +20,8 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile.Type;
@@ -27,8 +29,6 @@ import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.config.Configuration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.PROJECT_BASE_DIR_PROPERTY;
@@ -48,16 +48,16 @@ public class FileTypeSensor implements Sensor {
   private static final Logger LOG = LoggerFactory.getLogger(FileTypeSensor.class);
 
   private final ProjectTypeCollector projectTypeCollector;
-  private final DotNetPluginMetadata pluginMetadata;
+  private final PluginMetadata pluginMetadata;
 
-  public FileTypeSensor(ProjectTypeCollector projectTypeCollector, DotNetPluginMetadata pluginMetadata) {
+  public FileTypeSensor(ProjectTypeCollector projectTypeCollector, PluginMetadata pluginMetadata) {
     this.projectTypeCollector = projectTypeCollector;
     this.pluginMetadata = pluginMetadata;
   }
 
   @Override
   public void describe(SensorDescriptor descriptor) {
-    String name = String.format("%s Project Type Information", pluginMetadata.shortLanguageName());
+    String name = String.format("%s Project Type Information", pluginMetadata.languageName());
     descriptor.name(name);
     // we do not filter by language because we want to be called on projects without sources
     // (that could reference only shared sources e.g. in .projitems)
@@ -76,12 +76,12 @@ public class FileTypeSensor implements Sensor {
     // The top-level module has the `sonar.projectKey` and `sonar.projectName` properties, but does not have the "analyzerWorkDir" property.
     if (analyzerWorkDir.isPresent()) {
       LOG.debug("Adding file type information (has MAIN '{}', has TEST '{}') for project '{}' (project key '{}', base dir '{}'). For debug info, see ProjectInfo.xml in '{}'.",
-              hasMainFiles,
-              hasTestFiles,
-              lazy(() -> getValueOrEmpty(configuration, PROJECT_NAME_PROPERTY)),
-              lazy(() -> getValueOrEmpty(configuration, PROJECT_KEY_PROPERTY)),
-              lazy(() -> getValueOrEmpty(configuration, PROJECT_BASE_DIR_PROPERTY)),
-              lazy(analyzerWorkDir::get));
+        hasMainFiles,
+        hasTestFiles,
+        lazy(() -> getValueOrEmpty(configuration, PROJECT_NAME_PROPERTY)),
+        lazy(() -> getValueOrEmpty(configuration, PROJECT_KEY_PROPERTY)),
+        lazy(() -> getValueOrEmpty(configuration, PROJECT_BASE_DIR_PROPERTY)),
+        lazy(analyzerWorkDir::get));
       projectTypeCollector.addProjectInfo(hasMainFiles, hasTestFiles);
     }
   }

@@ -25,6 +25,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.mockito.ArgumentCaptor;
+import org.slf4j.event.Level;
 import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
@@ -32,7 +33,6 @@ import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -44,7 +44,7 @@ import static org.mockito.Mockito.when;
 
 public class FileTypeSensorTest {
   private static final String LANG_KEY = "LANG_KEY";
-  private static final String SHORT_LANG_NAME = "SHORT_LANG_NAME";
+  private static final String LANG_NAME = "LANG_NAME";
 
   @Rule
   public LogTester logTester = new LogTester();
@@ -54,7 +54,7 @@ public class FileTypeSensorTest {
   private MapSettings settingsMock;
   private SensorContextTester tester;
   private ProjectTypeCollector projectTypeCollectorMock;
-  private DotNetPluginMetadata pluginMetadataMock;
+  private PluginMetadata pluginMetadataMock;
   private FileTypeSensor sensor;
 
   @Before
@@ -67,9 +67,9 @@ public class FileTypeSensorTest {
 
     projectTypeCollectorMock = mock(ProjectTypeCollector.class);
 
-    pluginMetadataMock = mock(DotNetPluginMetadata.class);
+    pluginMetadataMock = mock(PluginMetadata.class);
     when(pluginMetadataMock.languageKey()).thenReturn(LANG_KEY);
-    when(pluginMetadataMock.shortLanguageName()).thenReturn(SHORT_LANG_NAME);
+    when(pluginMetadataMock.languageName()).thenReturn(LANG_NAME);
 
     sensor = new FileTypeSensor(projectTypeCollectorMock, pluginMetadataMock);
   }
@@ -78,7 +78,7 @@ public class FileTypeSensorTest {
   public void should_describe() {
     DefaultSensorDescriptor sensorDescriptor = new DefaultSensorDescriptor();
     sensor.describe(sensorDescriptor);
-    assertThat(sensorDescriptor.name()).isEqualTo(SHORT_LANG_NAME + " Project Type Information");
+    assertThat(sensorDescriptor.name()).isEqualTo(LANG_NAME + " Project Type Information");
     // should not filter per language
     assertThat(sensorDescriptor.languages()).isEmpty();
   }
