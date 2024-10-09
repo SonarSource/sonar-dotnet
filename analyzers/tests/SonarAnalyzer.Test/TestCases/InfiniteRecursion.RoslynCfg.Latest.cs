@@ -1,6 +1,64 @@
 ﻿using System;
 using System.Numerics;
 
+// https://github.com/SonarSource/sonar-dotnet/issues/6646
+namespace Repro_6646
+{
+    public class Repro
+    {
+        public string Name
+        {
+            init // Noncompliant
+            {
+                Name = value;
+            }
+        }
+
+        public string Arrow
+        {
+            init => Arrow = value;   // Noncompliant
+        }
+    }
+}
+
+namespace CSharp.Thirteen
+{
+    //https://sonarsource.atlassian.net/browse/NET-403
+    public partial class PartialProperty
+    {
+        public partial string Name { get; set; }
+        public partial string Name2 { init; }
+        public partial int Method();
+    }
+
+    public partial class PartialProperty
+    {
+        public partial string Name
+        {
+            get // Compliant FN
+            {
+                return Name;
+            }
+            set // Compliant FN
+            {
+                Name = value;
+            }
+        }
+        public partial string Name2
+        {
+            init // Compliant FN
+            {
+                Name2 = value;
+            }
+        }
+        public partial int Method()
+        {
+            Method(); // Compliant FN
+            return 1;
+        }
+    }
+}
+
 namespace Tests.Diagnostics
 {
     interface InfiniteRecursion
@@ -73,7 +131,7 @@ namespace Tests.Diagnostics
 //                                     ^
 
         public static BitWise operator &(BitWise left, BitWise right) => left & right; // Noncompliant
-        
+
         public static BitWise operator |(BitWise left, BitWise right) => left | right; // Noncompliant
 
         public static BitWise operator ^(BitWise left, BitWise right) => left ^ right; // Noncompliant

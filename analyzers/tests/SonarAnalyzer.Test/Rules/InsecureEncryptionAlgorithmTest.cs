@@ -45,26 +45,11 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
 
         [TestMethod]
-        public void InsecureEncryptionAlgorithm_CSharp9() =>
-            builderCS.AddPaths("InsecureEncryptionAlgorithm.CSharp9.cs")
+        public void InsecureEncryptionAlgorithm_CS_Latest() =>
+            builderCS.AddPaths("InsecureEncryptionAlgorithm.Latest.cs")
                 .WithTopLevelStatements()
                 .AddReferences(GetAdditionalReferences())
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
-
-        [TestMethod]
-        public void InsecureEncryptionAlgorithm_CSharp10() =>
-            builderCS.AddPaths("InsecureEncryptionAlgorithm.CSharp10.cs")
-                .AddReferences(GetAdditionalReferences())
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
-
-        [TestMethod]
-        public void InsecureEncryptionAlgorithm_CSharp11() =>
-            builderCS.AddPaths("InsecureEncryptionAlgorithm.CSharp11.cs")
-                .WithTopLevelStatements()
-                .AddReferences(GetAdditionalReferences())
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .Verify();
 
 #endif

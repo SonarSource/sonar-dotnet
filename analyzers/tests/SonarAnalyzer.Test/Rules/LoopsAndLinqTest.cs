@@ -33,18 +33,12 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(MetadataReferenceFacade.SystemData)
                 .Verify();
 
-        [TestMethod]
-        public void LoopsAndLinq_CSharp8() =>
-            builder.AddPaths("LoopsAndLinq.CSharp8.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .Verify();
-
 #if NET
 
         [TestMethod]
-        public void LoopsAndLinq_CSharp11() =>
-            builder.AddPaths("LoopsAndLinq.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+        public void LoopsAndLinq_CS_Latest() =>
+            builder.AddPaths("LoopsAndLinq.Latest.cs")
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .Verify();
 
 #endif
