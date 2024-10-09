@@ -26,12 +26,13 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonarsource.dotnet.shared.plugins.AbstractSonarWayProfile;
+import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 
 public class CSharpSonarWayProfile extends AbstractSonarWayProfile {
   private static final Logger LOG = LoggerFactory.getLogger(CSharpSonarWayProfile.class);
 
-  CSharpSonarWayProfile() {
-    super(CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.REPOSITORY_KEY, CSharpPlugin.RESOURCES_DIRECTORY);
+  public CSharpSonarWayProfile(PluginMetadata metadata) {
+    super(metadata);
   }
 
   @Override
