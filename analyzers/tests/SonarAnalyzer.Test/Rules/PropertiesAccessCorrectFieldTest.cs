@@ -38,20 +38,13 @@ public class PropertiesAccessCorrectFieldTest
     public void PropertiesAccessCorrectField_CS() =>
         builderCS.AddPaths("PropertiesAccessCorrectField.cs").AddReferences(AdditionalReferences).Verify();
 
-    [TestMethod]
-    public void PropertiesAccessCorrectField_CSharp8() =>
-        builderCS.AddPaths("PropertiesAccessCorrectField.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
-
 #if NET
-
     [TestMethod]
-    public void PropertiesAccessCorrectField_CSharp9() =>
-        builderCS.AddPaths("PropertiesAccessCorrectField.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
-
-    [TestMethod]
-    public void PropertiesAccessCorrectField_CSharp12() =>
-        builderCS.AddPaths("PropertiesAccessCorrectField.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).VerifyNoIssues();
-
+    public void PropertiesAccessCorrectField_CS_Latest() =>
+        builderCS
+            .AddPaths("PropertiesAccessCorrectField.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
 #else
 
     [TestMethod]
