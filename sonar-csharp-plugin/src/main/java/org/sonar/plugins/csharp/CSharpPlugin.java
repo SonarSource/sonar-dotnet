@@ -70,6 +70,7 @@ public class CSharpPlugin implements Plugin {
       // collectors - they are populated by the module-level sensors
       ProjectTypeCollector.class,
       ReportPathCollector.class,
+      CSharpSonarWayProfile.class,
       DotNetRulesDefinition.class,
       GlobalProtobufFileProcessor.class,
       // sensor
@@ -93,7 +94,6 @@ public class CSharpPlugin implements Plugin {
       SonarLintProfileExporter.class);
 
     context.addExtensions(new CSharpPropertyDefinitions(METADATA).create());
-    context.addExtension(new CSharpSonarWayProfile());
     context.addExtensions(new CodeCoverageProvider(METADATA).extensions());
     context.addExtensions(new UnitTestResultsProvider(METADATA).extensions());
     context.addExtensions(RoslynProfileExporter.sonarLintRepositoryProperties(METADATA));

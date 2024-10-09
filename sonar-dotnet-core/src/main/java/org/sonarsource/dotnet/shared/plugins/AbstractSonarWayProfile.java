@@ -23,21 +23,18 @@ import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonarsource.analyzer.commons.BuiltInQualityProfileJsonLoader;
 
 public abstract class AbstractSonarWayProfile implements BuiltInQualityProfilesDefinition {
-  private final String languageKey;
-  private final String repositoryKey;
-  private final String resourcesDirectory;
 
-  protected AbstractSonarWayProfile(String languageKey, String repositoryKey, String resourcesDirectory) {
-    this.languageKey = languageKey;
-    this.repositoryKey = repositoryKey;
-    this.resourcesDirectory = resourcesDirectory;
+  private final PluginMetadata metadata;
+
+  protected AbstractSonarWayProfile(PluginMetadata metadata) {
+    this.metadata = metadata;
   }
 
   @Override
   public void define(Context context) {
-    NewBuiltInQualityProfile sonarWay = context.createBuiltInQualityProfile("Sonar way", languageKey);
-    String sonarWayJsonPath = resourcesDirectory + "/Sonar_way_profile.json";
-    BuiltInQualityProfileJsonLoader.load(sonarWay, repositoryKey, sonarWayJsonPath);
+    NewBuiltInQualityProfile sonarWay = context.createBuiltInQualityProfile("Sonar way", metadata.languageKey());
+    String sonarWayJsonPath = metadata.resourcesDirectory() + "/Sonar_way_profile.json";
+    BuiltInQualityProfileJsonLoader.load(sonarWay, metadata.repositoryKey(), sonarWayJsonPath);
     activateSecurityRules(sonarWay);
     sonarWay.done();
   }

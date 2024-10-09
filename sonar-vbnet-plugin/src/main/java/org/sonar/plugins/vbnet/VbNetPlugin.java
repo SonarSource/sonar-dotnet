@@ -72,6 +72,7 @@ public class VbNetPlugin implements Plugin {
       HashProvider.class,
       DotNetRulesDefinition.class,
       GlobalProtobufFileProcessor.class,
+      VbNetSonarWayProfile.class,
       // sensor
       DotNetSensor.class,
       VbNetFileCacheSensor.class,
@@ -90,7 +91,6 @@ public class VbNetPlugin implements Plugin {
       SonarLintProfileExporter.class);
 
     context.addExtensions(new VbNetPropertyDefinitions(METADATA).create());
-    context.addExtension(new VbNetSonarWayProfile());
     context.addExtensions(new CodeCoverageProvider(METADATA).extensions());
     context.addExtensions(new UnitTestResultsProvider(METADATA).extensions());
     context.addExtensions(RoslynProfileExporter.sonarLintRepositoryProperties(METADATA));

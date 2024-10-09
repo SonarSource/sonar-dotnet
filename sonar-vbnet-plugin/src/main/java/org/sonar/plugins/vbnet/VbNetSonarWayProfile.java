@@ -20,9 +20,10 @@
 package org.sonar.plugins.vbnet;
 
 import org.sonarsource.dotnet.shared.plugins.AbstractSonarWayProfile;
+import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 
 class VbNetSonarWayProfile extends AbstractSonarWayProfile {
-  VbNetSonarWayProfile() {
-    super(VbNetPlugin.LANGUAGE_KEY, VbNetPlugin.REPOSITORY_KEY, VbNetPlugin.RESOURCES_DIRECTORY);
+  VbNetSonarWayProfile(PluginMetadata metadata) {
+    super(metadata);
   }
 }

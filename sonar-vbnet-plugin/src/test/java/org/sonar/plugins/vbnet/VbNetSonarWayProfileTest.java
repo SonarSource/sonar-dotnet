@@ -37,7 +37,7 @@ class VbNetSonarWayProfileTest {
   void hotspots_in_sonar_way() {
     Context context = new Context();
 
-    VbNetSonarWayProfile profileDef = new VbNetSonarWayProfile();
+    VbNetSonarWayProfile profileDef = new VbNetSonarWayProfile(VbNetPlugin.METADATA);
     profileDef.define(context);
 
     BuiltInQualityProfile profile = context.profile("vbnet", "Sonar way");
