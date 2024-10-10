@@ -166,46 +166,19 @@ public partial class UnusedPrivateMemberTest
     public void UnusedPrivateMember(ProjectType projectType) =>
         builder.AddPaths("UnusedPrivateMember.cs").AddReferences(TestHelper.ProjectTypeReference(projectType)).Verify();
 
-    [TestMethod]
-    public void UnusedPrivateMember_FromCSharp7() =>
-        builder.AddPaths("UnusedPrivateMember.CSharp7.cs").WithOptions(ParseOptionsHelper.FromCSharp7).Verify();
+#if NET
 
     [TestMethod]
-    public void UnusedPrivateMember_FromCSharp8() =>
-        builder.AddPaths("UnusedPrivateMember.CSharp8.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+    public void UnusedPrivateMember_CS_Latest() =>
+        builder.AddPaths("UnusedPrivateMember.Latest.cs", "UnusedPrivateMember.Latest.Partial.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
             .AddReferences(MetadataReferenceFacade.NetStandard21)
             .AddReferences(MetadataReferenceFacade.MicrosoftExtensionsDependencyInjectionAbstractions)
             .Verify();
 
-#if NET
-
     [TestMethod]
-    public void UnusedPrivateMember_FromCSharp9() =>
-        builder.AddPaths("UnusedPrivateMember.CSharp9.cs", "UnusedPrivateMember.CSharp9.Second.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
-
-    [TestMethod]
-    public void UnusedPrivateMember_FromCSharp9_TopLevelStatements() =>
-        builder.AddPaths("UnusedPrivateMember.CSharp9.TopLevelStatements.cs").WithTopLevelStatements().Verify();
-
-    [TestMethod]
-    public void UnusedPrivateMember_FromCSharp10() =>
-        builder.AddPaths("UnusedPrivateMember.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
-
-    [TestMethod]
-    public void UnusedPrivateMember_FromCSharp11() =>
-        builder.AddPaths("UnusedPrivateMember.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
-
-    // The exception should disappear once the fix for https://github.com/dotnet/roslyn/issues/70041 gets released.
-    // If this does not happen before the official release of .NET8 and C#12, the code should be refactored to handle potential null values.
-    //
-    // Workaround to return null in ImplicitObjectCreation.TypeAsString in this particular case to avoid AD0001.
-    // Should be reverted once the fix is released
-    [TestMethod]
-    public void UnusedPrivateMember_FromCSharp12() =>
-        builder.AddPaths("UnusedPrivateMember.CSharp12.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp12)
-            .Verify();
+    public void UnusedPrivateMember_TopLevelStatements() =>
+        builder.AddPaths("UnusedPrivateMember.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 
     [TestMethod]
     public void UnusedPrivateMemeber_EntityFramework_DontRaiseOnUnusedEntityPropertiesPrivateSetters() =>
