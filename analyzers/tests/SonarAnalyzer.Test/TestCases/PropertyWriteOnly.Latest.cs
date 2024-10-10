@@ -43,3 +43,40 @@ namespace ReproIssue2390
         }
     }
 }
+
+public interface IPropertyWriteOnly
+{
+    public static virtual int Foo  // Noncompliant {{Provide a getter for 'Foo' or replace the property with a 'SetFoo' method.}}
+    {
+        set
+        {
+            // ... some code ...
+        }
+    }
+}
+
+namespace CSharp13
+{
+    public partial class PartialProperties
+    {
+        public partial int Foo  // Noncompliant {{Provide a getter for 'Foo' or replace the property with a 'SetFoo' method.}}
+//                         ^^^
+        {
+            set
+            {
+                // ... some code ...
+            }
+        }
+        public partial int Foo2
+        {
+            get
+            {
+                return 1;
+            }
+            set
+            {
+                // ... some code ...
+            }
+        }
+    }
+}

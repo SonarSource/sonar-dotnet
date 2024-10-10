@@ -21,35 +21,28 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class PropertyWriteOnlyTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.PropertyWriteOnly>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void PropertyWriteOnly_CSharp() =>
-            builderCS.AddPaths("PropertyWriteOnly.cs").Verify();
+[TestClass]
+public class PropertyWriteOnlyTest
+{
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.PropertyWriteOnly>();
+
+    [TestMethod]
+    public void PropertyWriteOnly_CS() =>
+        builderCS.AddPaths("PropertyWriteOnly.cs").Verify();
 
 #if NET
-
-        [TestMethod]
-        public void PropertyWriteOnly_CSharp9() =>
-            builderCS.AddPaths("PropertyWriteOnly.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
-
-        [TestMethod]
-        public void PropertyWriteOnly_CSharp11() =>
-            builderCS.AddPaths("PropertyWriteOnly.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
-
+    [TestMethod]
+    public void PropertyWriteOnly_CS_Latest() =>
+        builderCS
+            .AddPaths("PropertyWriteOnly.Latest.cs")
+            .AddPaths("PropertyWriteOnly.Latest.Partial.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
 #endif
 
-        [TestMethod]
-        public void PropertyWriteOnly_VB() =>
-            new VerifierBuilder<VB.PropertyWriteOnly>().AddPaths("PropertyWriteOnly.vb").Verify();
-    }
+    [TestMethod]
+    public void PropertyWriteOnly_VB() =>
+        new VerifierBuilder<VB.PropertyWriteOnly>().AddPaths("PropertyWriteOnly.vb").Verify();
 }
