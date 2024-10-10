@@ -34,15 +34,9 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
 
         [TestMethod]
-        public void UseValueParameter_CSharp9() =>
-            builder.AddPaths("UseValueParameter.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
-
-        [TestMethod]
-        public void UseValueParameter_CSharp11() =>
-            builder.AddPaths("UseValueParameter.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+        public void UseValueParameter_CS_Latest() =>
+            builder.AddPaths("UseValueParameter.Latest.cs", "UseValueParameter.Latest.Partial.cs")
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .Verify();
 
 #endif
