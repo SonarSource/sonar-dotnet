@@ -17,16 +17,16 @@ namespace Tests.Diagnostics
             switch (n)
             {
                 case 0:
-                {
                     {
-                        break;
+                        {
+                            break;
+                        }
                     }
-                }
                 default:
                     break;
             }
 
-            switch(n) // Noncompliant - Blocks are multiline statements
+            switch (n) // Noncompliant - Blocks are multiline statements
             {
                 case 0:
                     {
@@ -46,7 +46,7 @@ namespace Tests.Diagnostics
             }
 
             // Testing mutli-line statements ending with a break
-            switch(n) // Noncompliant
+            switch (n) // Noncompliant
             {
                 case 0:
                     Console.WriteLine("0");
@@ -61,7 +61,7 @@ namespace Tests.Diagnostics
             }
 
             // Testing mutli-line statements ending with a return
-            switch(n) // Noncompliant
+            switch (n) // Noncompliant
             {
                 case 0:
                     Console.WriteLine("0");
@@ -76,7 +76,7 @@ namespace Tests.Diagnostics
             }
 
             // Testing mutli-line statements ending with a throw
-            switch(n) // Noncompliant
+            switch (n) // Noncompliant
             {
                 case 0:
                     Console.WriteLine("0");
@@ -90,7 +90,7 @@ namespace Tests.Diagnostics
                     break;
             }
 
-            switch(n) // Compliant
+            switch (n) // Compliant
             {
                 case 0:
                     Console.WriteLine("0");
@@ -148,7 +148,7 @@ namespace Tests.Diagnostics
 
         public int SwitchCase(char ch, int value)
         {
-            switch(ch)  // Noncompliant {{Consider reworking this 'switch' to reduce the number of 'case' clauses to at most 2 or have only one statement per 'case'.}}
+            switch (ch)  // Noncompliant {{Consider reworking this 'switch' to reduce the number of 'case' clauses to at most 2 or have only one statement per 'case'.}}
 //          ^^^^^^
             {
                 case 'a':
@@ -175,7 +175,7 @@ namespace Tests.Diagnostics
 
         public int SwitchCaseWithCodeBlock(char ch, int value)
         {
-            switch(ch)  // Noncompliant {{Consider reworking this 'switch' to reduce the number of 'case' clauses to at most 2 or have only one statement per 'case'.}}
+            switch (ch)  // Noncompliant {{Consider reworking this 'switch' to reduce the number of 'case' clauses to at most 2 or have only one statement per 'case'.}}
 //          ^^^^^^
             {
                 case 'a':
@@ -197,7 +197,7 @@ namespace Tests.Diagnostics
 
         public int SwitchCaseFallThrough(char ch, int value)
         {
-            switch(ch) // Compliant
+            switch (ch) // Compliant
             {
                 case 'a':
                 case 'b':
@@ -231,6 +231,31 @@ namespace Tests.Diagnostics
             }
 
             return 0;
+        }
+
+        public void TransparentLoops(int n)
+        {
+            switch (n) // Noncompliant
+            {
+                case 0:
+                    Console.WriteLine("0");
+                    break;
+                case 1:
+                    Console.WriteLine("1");
+                    break;
+                case 2:
+                    Console.WriteLine("2");
+                    break;
+                case 3:
+                    foreach (var i in new[] { 1, 2, 3 })
+                    {
+                        Console.WriteLine(i);
+                    }
+                    break;
+                case 4:
+                    Console.WriteLine("4");
+                    return;
+            }
         }
 
         public int Test(string type)

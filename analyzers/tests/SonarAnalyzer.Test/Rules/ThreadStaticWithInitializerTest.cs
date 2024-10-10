@@ -20,38 +20,25 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class ThreadStaticWithInitializerTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<ThreadStaticWithInitializer>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void ThreadStaticWithInitializer() =>
-            builder.AddPaths("ThreadStaticWithInitializer.cs").Verify();
+[TestClass]
+public class ThreadStaticWithInitializerTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<ThreadStaticWithInitializer>();
+
+    [TestMethod]
+    public void ThreadStaticWithInitializer() =>
+        builder.AddPaths("ThreadStaticWithInitializer.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void ThreadStaticWithInitializer_CSharp9() =>
-            builder.AddPaths("ThreadStaticWithInitializer.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
-
-        [TestMethod]
-        public void ThreadStaticWithInitializer_CSharp11() =>
-            builder.AddPaths("ThreadStaticWithInitializer.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
-
-        [TestMethod]
-        public void ThreadStaticWithInitializer_CSharp12() =>
-            builder.AddPaths("ThreadStaticWithInitializer.CSharp12.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp12)
-                .Verify();
+    [TestMethod]
+    public void ThreadStaticWithInitializer_Latest() =>
+        builder.AddPaths("ThreadStaticWithInitializer.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
 
 #endif
 
-    }
 }
