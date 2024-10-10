@@ -21,17 +21,28 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class PropertyGetterWithThrowTest
-    {
-        [TestMethod]
-        public void PropertyGetterWithThrow_CS() =>
-            new VerifierBuilder<CS.PropertyGetterWithThrow>().AddPaths("PropertyGetterWithThrow.cs").Verify();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void PropertyGetterWithThrow_VB() =>
-            new VerifierBuilder<VB.PropertyGetterWithThrow>().AddPaths("PropertyGetterWithThrow.vb").Verify();
-    }
+[TestClass]
+public class PropertyGetterWithThrowTest
+{
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.PropertyGetterWithThrow>();
+
+    [TestMethod]
+    public void PropertyGetterWithThrow_CS() =>
+        builderCS.AddPaths("PropertyGetterWithThrow.cs").Verify();
+
+    [TestMethod]
+    public void PropertyGetterWithThrow_VB() =>
+        new VerifierBuilder<VB.PropertyGetterWithThrow>().AddPaths("PropertyGetterWithThrow.vb").Verify();
+
+#if NET
+    [TestMethod]
+    public void PropertyGetterWithThrow_CS_Latest() =>
+        builderCS
+            .AddPaths("PropertyGetterWithThrow.Latest.cs")
+            .AddPaths("PropertyGetterWithThrow.Latest.Partial.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
+#endif
 }
