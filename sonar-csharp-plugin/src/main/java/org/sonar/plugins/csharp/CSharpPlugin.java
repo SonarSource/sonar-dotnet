@@ -20,7 +20,7 @@
 package org.sonar.plugins.csharp;
 
 import org.sonar.api.Plugin;
-import org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions;
+import org.sonarsource.csharp.core.CSharpCorePluginMetadata;
 import org.sonarsource.dotnet.shared.plugins.AnalysisWarningsSensor;
 import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
 import org.sonarsource.dotnet.shared.plugins.DotNetRulesDefinition;
@@ -91,12 +91,7 @@ public class CSharpPlugin implements Plugin {
     context.addExtensions(RoslynProfileExporter.sonarLintRepositoryProperties(METADATA));
   }
 
-  private static class CSharpPluginMetadata implements PluginMetadata {
-
-    @Override
-    public String languageKey() {
-      return "cs";
-    }
+  private static class CSharpPluginMetadata extends CSharpCorePluginMetadata {
 
     @Override
     public String pluginKey() {
@@ -104,33 +99,8 @@ public class CSharpPlugin implements Plugin {
     }
 
     @Override
-    public String languageName() {
-      return "C#";
-    }
-
-    @Override
     public String analyzerProjectName() {
       return "SonarAnalyzer.CSharp";
-    }
-
-    @Override
-    public String repositoryKey() {
-      return "csharpsquid";
-    }
-
-    @Override
-    public String fileSuffixesKey() {
-      return AbstractPropertyDefinitions.getFileSuffixProperty(languageKey());
-    }
-
-    @Override
-    public String fileSuffixesDefaultValue() {
-      return ".cs,.razor";
-    }
-
-    @Override
-    public String resourcesDirectory() {
-      return "/org/sonar/plugins/csharp";
     }
   }
 }
