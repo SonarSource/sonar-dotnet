@@ -20,60 +20,59 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class RedundantConditionalAroundAssignmentTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<RedundantConditionalAroundAssignment>();
-        private readonly VerifierBuilder codeFixBuilder = new VerifierBuilder<RedundantConditionalAroundAssignment>().WithCodeFix<RedundantConditionalAroundAssignmentCodeFix>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void RedundantConditionalAroundAssignment() =>
-            builder.AddPaths("RedundantConditionalAroundAssignment.cs").Verify();
+[TestClass]
+public class RedundantConditionalAroundAssignmentTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<RedundantConditionalAroundAssignment>();
+    private readonly VerifierBuilder codeFixBuilder = new VerifierBuilder<RedundantConditionalAroundAssignment>().WithCodeFix<RedundantConditionalAroundAssignmentCodeFix>();
+
+    [TestMethod]
+    public void RedundantConditionalAroundAssignment() =>
+        builder.AddPaths("RedundantConditionalAroundAssignment.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void RedundantConditionalAroundAssignment_CSharp9() =>
-            builder.AddPaths("RedundantConditionalAroundAssignment.CSharp9.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void RedundantConditionalAroundAssignment_CSharp9() =>
+        builder.AddPaths("RedundantConditionalAroundAssignment.CSharp9.cs")
+            .WithTopLevelStatements()
+            .Verify();
 
-        [TestMethod]
-        public void RedundantConditionalAroundAssignment_CSharp9_CodeFix() =>
-            codeFixBuilder.AddPaths("RedundantConditionalAroundAssignment.CSharp9.cs")
-                .WithCodeFixedPaths("RedundantConditionalAroundAssignment.CSharp9.Fixed.cs")
-                .WithTopLevelStatements()
-                .VerifyCodeFix();
+    [TestMethod]
+    public void RedundantConditionalAroundAssignment_CSharp9_CodeFix() =>
+        codeFixBuilder.AddPaths("RedundantConditionalAroundAssignment.CSharp9.cs")
+            .WithCodeFixedPaths("RedundantConditionalAroundAssignment.CSharp9.Fixed.cs")
+            .WithTopLevelStatements()
+            .VerifyCodeFix();
 
-        [TestMethod]
-        public void RedundantConditionalAroundAssignment_CSharp10() =>
-             builder.AddPaths("RedundantConditionalAroundAssignment.CSharp10.cs")
-                .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
+    [TestMethod]
+    public void RedundantConditionalAroundAssignment_CSharp10() =>
+         builder.AddPaths("RedundantConditionalAroundAssignment.CSharp10.cs")
+            .WithTopLevelStatements()
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .Verify();
 
-        [TestMethod]
-        public void RedundantConditionalAroundAssignment_CSharp10_CodeFix() =>
-            codeFixBuilder.AddPaths("RedundantConditionalAroundAssignment.CSharp10.cs")
-                .WithCodeFixedPaths("RedundantConditionalAroundAssignment.CSharp10.Fixed.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .WithTopLevelStatements()
-                .VerifyCodeFix();
+    [TestMethod]
+    public void RedundantConditionalAroundAssignment_CSharp10_CodeFix() =>
+        codeFixBuilder.AddPaths("RedundantConditionalAroundAssignment.CSharp10.cs")
+            .WithCodeFixedPaths("RedundantConditionalAroundAssignment.CSharp10.Fixed.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithTopLevelStatements()
+            .VerifyCodeFix();
 
-        [TestMethod]
-        public void RedundantConditionalAroundAssignment_CSharp11() =>
-             builder.AddPaths("RedundantConditionalAroundAssignment.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .VerifyNoIssues();
+    [TestMethod]
+    public void RedundantConditionalAroundAssignment_Latest() =>
+         builder.AddPaths("RedundantConditionalAroundAssignment.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .VerifyNoIssues();
 
 #endif
 
-        [TestMethod]
-        public void RedundantConditionalAroundAssignment_CodeFix() =>
-            codeFixBuilder.AddPaths("RedundantConditionalAroundAssignment.cs")
-                .WithCodeFixedPaths("RedundantConditionalAroundAssignment.Fixed.cs")
-                .VerifyCodeFix();
-    }
+    [TestMethod]
+    public void RedundantConditionalAroundAssignment_CodeFix() =>
+        codeFixBuilder.AddPaths("RedundantConditionalAroundAssignment.cs")
+            .WithCodeFixedPaths("RedundantConditionalAroundAssignment.Fixed.cs")
+            .VerifyCodeFix();
 }

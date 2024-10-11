@@ -20,40 +20,34 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class ReturnEmptyCollectionInsteadOfNullTest
 {
-    [TestClass]
-    public class ReturnEmptyCollectionInsteadOfNullTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<ReturnEmptyCollectionInsteadOfNull>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<ReturnEmptyCollectionInsteadOfNull>();
 
-        [TestMethod]
-        public void ReturnEmptyCollectionInsteadOfNull() =>
-            builder.AddPaths("ReturnEmptyCollectionInsteadOfNull.cs")
-                .AddReferences(MetadataReferenceFacade.SystemXml)
-                .Verify();
+    [TestMethod]
+    public void ReturnEmptyCollectionInsteadOfNull() =>
+        builder.AddPaths("ReturnEmptyCollectionInsteadOfNull.cs")
+            .AddReferences(MetadataReferenceFacade.SystemXml)
+            .Verify();
 
-        [TestMethod]
-        public void ReturnEmptyCollectionInsteadOfNull_CSharp8() =>
-            builder.AddPaths("ReturnEmptyCollectionInsteadOfNull.CSharp8.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .Verify();
+    [TestMethod]
+    public void ReturnEmptyCollectionInsteadOfNull_CSharp8() =>
+        builder.AddPaths("ReturnEmptyCollectionInsteadOfNull.CSharp8.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
 
 #if NET
 
-        [TestMethod]
-        public void ReturnEmptyCollectionInsteadOfNull_CSharp9() =>
-            builder.AddPaths("ReturnEmptyCollectionInsteadOfNull.CSharp9.cs")
-                .WithTopLevelStatements()
-                .Verify();
-
-        [TestMethod]
-        public void ReturnEmptyCollectionInsteadOfNull_CSharp11() =>
-            builder.AddPaths("ReturnEmptyCollectionInsteadOfNull.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void ReturnEmptyCollectionInsteadOfNull_Latest() =>
+        builder.AddPaths("ReturnEmptyCollectionInsteadOfNull.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithTopLevelStatements()
+            .Verify();
 
 #endif
 
-    }
 }

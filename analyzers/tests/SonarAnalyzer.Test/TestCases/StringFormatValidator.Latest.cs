@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-class CollectionExpressions
+class CSharp12
 {
-    void Test(string s1, string s2)
+    void CollectionExpressions(string s1, string s2)
     {
         IList<string> l;
         l = [string.Format("foo")];                                                // Noncompliant
@@ -12,5 +12,15 @@ class CollectionExpressions
         l = [string.Format("{-1}", s1), string.Format(null, "{}")];
         //   ^^^^^^^^^^^^^
         //                              ^^^^^^^^^^^^^@-1
+    }
+}
+
+class CSharp13
+{
+    void EscapeSequence()
+    {
+        _ = string.Format("{'\e'}");        // Noncompliant
+        _ = string.Format("{{\e{0}}}", 42); // Compliant
+        _ = string.Format("{0}", "\e");     // Compliant
     }
 }

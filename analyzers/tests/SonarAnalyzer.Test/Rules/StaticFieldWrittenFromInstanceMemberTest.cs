@@ -18,73 +18,66 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class StaticFieldWrittenFromInstanceMemberTest
 {
-    [TestClass]
-    public class StaticFieldWrittenFromInstanceMemberTest
+    private readonly VerifierBuilder<StaticFieldWrittenFromInstanceMember> builder = new();
+
+    [TestMethod]
+    public void StaticFieldWrittenFromInstanceMember() =>
+        builder.AddPaths(@"StaticFieldWrittenFromInstanceMember.cs").WithOptions(ParseOptionsHelper.FromCSharp8).AddReferences(MetadataReferenceFacade.NetStandard21).Verify();
+
+    [TestMethod]
+    public async Task SecondaryIssueInReferencedCompilation()
     {
-        private readonly VerifierBuilder<StaticFieldWrittenFromInstanceMember> builder = new();
-
-        [TestMethod]
-        public void StaticFieldWrittenFromInstanceMember() =>
-            builder.AddPaths(@"StaticFieldWrittenFromInstanceMember.cs").WithOptions(ParseOptionsHelper.FromCSharp8).AddReferences(MetadataReferenceFacade.NetStandard21).Verify();
-
-        [TestMethod]
-        public async Task SecondaryIssueInReferencedCompilation()
-        {
-            const string firstClass =
-                @"
+        const string firstClass =
+            @"
 public class Foo
 {
     public static int Count = 0; // Secondary
 }
 ";
 
-            const string secondClass =
-                @"
+        const string secondClass =
+            @"
 public class Bar
 {
     public int Increment() => Foo.Count++;
 }
 ";
 
-            var analyzers = ImmutableArray<DiagnosticAnalyzer>.Empty.Add(new StaticFieldWrittenFromInstanceMember());
-            var firstCompilation = CreateCompilation(CSharpSyntaxTree.ParseText(firstClass), "First").WithAnalyzers(analyzers).Compilation;
-            var secondCompilation = CreateCompilation(CSharpSyntaxTree.ParseText(secondClass), "Second")
-                                    .AddReferences(firstCompilation.ToMetadataReference())
-                                    .WithAnalyzers(analyzers);
+        var analyzers = ImmutableArray<DiagnosticAnalyzer>.Empty.Add(new StaticFieldWrittenFromInstanceMember());
+        var firstCompilation = CreateCompilation(CSharpSyntaxTree.ParseText(firstClass), "First").WithAnalyzers(analyzers).Compilation;
+        var secondCompilation = CreateCompilation(CSharpSyntaxTree.ParseText(secondClass), "Second")
+                                .AddReferences(firstCompilation.ToMetadataReference())
+                                .WithAnalyzers(analyzers);
 
-            var result = await secondCompilation.GetAnalyzerDiagnosticsAsync();
+        var result = await secondCompilation.GetAnalyzerDiagnosticsAsync();
 
-            firstCompilation.GetDiagnostics().Should().BeEmpty();
-            result.Should().BeEquivalentTo(new[] { new { Id = "S2696", AdditionalLocations = Array.Empty<Location>() } });
-            result.Single().GetMessage().Should().StartWith("Make the enclosing instance method 'static' or remove this set on the 'static' field.");
-        }
+        firstCompilation.GetDiagnostics().Should().BeEmpty();
+        result.Should().BeEquivalentTo(new[] { new { Id = "S2696", AdditionalLocations = Array.Empty<Location>() } });
+        result.Single().GetMessage().Should().StartWith("Make the enclosing instance method 'static' or remove this set on the 'static' field.");
+    }
 
 #if NET
 
-        [TestMethod]
-        public void StaticFieldWrittenFromInstanceMember_CSharp9() =>
-            builder.AddPaths(@"StaticFieldWrittenFromInstanceMember.CSharp9.cs").WithTopLevelStatements().Verify();
-
-        [TestMethod]
-        public void StaticFieldWrittenFromInstanceMember_CSharp10() =>
-            builder.AddPaths(@"StaticFieldWrittenFromInstanceMember.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
-
-        [TestMethod]
-        public void StaticFieldWrittenFromInstanceMember_CSharp11() =>
-            builder.AddPaths(@"StaticFieldWrittenFromInstanceMember.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+    [TestMethod]
+    public void StaticFieldWrittenFromInstanceMember_Latest() =>
+        builder.AddPaths(@"StaticFieldWrittenFromInstanceMember.Latest.cs")
+            .WithTopLevelStatements()
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
 
 #endif
 
-        private static CSharpCompilation CreateCompilation(SyntaxTree tree, string name) =>
-            CSharpCompilation
-                .Create(name, options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary))
-                .AddReferences(MetadataReference.CreateFromFile(typeof(string).Assembly.Location))
-                .AddSyntaxTrees(tree);
-    }
+    private static CSharpCompilation CreateCompilation(SyntaxTree tree, string name) =>
+        CSharpCompilation
+            .Create(name, options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary))
+            .AddReferences(MetadataReference.CreateFromFile(typeof(string).Assembly.Location))
+            .AddSyntaxTrees(tree);
 }

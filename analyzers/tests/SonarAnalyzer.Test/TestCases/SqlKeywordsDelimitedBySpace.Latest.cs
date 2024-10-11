@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using Linq = System.Linq;
 
-namespace Tests.Diagnostics
+namespace CSharp10
 {
     class Examples
     {
@@ -134,6 +135,141 @@ namespace Tests.Diagnostics
             string s23 = $"{nameof(empty)}Two";             // Compliant
 
             string s24 = $"{{{nonConstOne}}}";              // Compliant
+        }
+    }
+}
+
+namespace CSharp11
+{
+    class Examples
+    {
+        void RawStringLiterals(string unknownValue)
+        {
+            const string s1 = """TRUNCATE"""; // Compliant
+            const string s2 = """TABLE HumanResources.JobCandidate;"""; // Compliant
+
+            const string noncompliant1 = $"""{s1}{s2}"""; // Noncompliant {{Add a space before 'TABLE'.}}
+//                                               ^^^^
+            const string noncompliant2 = $"""{s1}TABLE HumanResources.JobCandidate;"""; // Noncompliant
+//                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            const string complexCase = $""""{s1}{$"""{s1}{s2}"""} """"; // Noncompliant
+                                                                        // Noncompliant@-1
+        }
+
+        void NewlinesInStringInterpolation()
+        {
+            const string s1 = "truncate";
+            const string s2 = "";
+            string noncompliant = $"{s1 +
+                s2}TABLE HumanResources.JobCandidate;"; // Noncompliant
+            string noncompliantRawString = $$"""{{s1 +
+                s2}}TABLE HumanResources.JobCandidate;"""; // Noncompliant
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/9177
+    public class Repro_9177
+    {
+        record ArtifactDto(string Id, string TagIdentifier);
+
+        string sqlQuery1 = $@"
+	        SELECT
+		        [Artifact].[Id] AS [{nameof(ArtifactDto.Id)}],
+		        [Artifact].[TagIdentifier] AS [{nameof(ArtifactDto.TagIdentifier)}]
+	        FROM
+		        [Artifacts] AS [Artifact]"; // Noncompliant@-3 [Id, bracket_Id] FPs
+                                            // Noncompliant@-3 [TagIdentifier, bracket_TagIdentifier] FPs
+
+        string sqlQuery2 = $"""
+            SELECT
+                [Artifact].[Id] AS [{nameof(ArtifactDto.Id)}],
+                [Artifact].[TagIdentifier] AS [{nameof(ArtifactDto.TagIdentifier)}]
+            FROM
+                [Artifacts] AS [Artifact]
+            """; // Noncompliant@-4 [Id2, bracket_Id2] FPs
+                 // Noncompliant@-4 [TagIdentifier2, bracket_TagIdentifier2] FPs
+    }
+}
+
+
+namespace CSharp12
+{
+    class PrimaryConstructors
+    {
+        class C1(string sql = "SELECT x" + "FROM y");          // Noncompliant
+        struct S1(string sql = "SELECT x" + "FROM y");         // Noncompliant
+        record R1(string sql = "SELECT x" + "FROM y");         // Noncompliant
+        record struct RS1(string sql = "SELECT x" + "FROM y"); // Noncompliant
+    }
+
+    class DefaultLambdaParameters
+    {
+        void Test()
+        {
+            var f1 = (string s = "SELECT x" + "FROM y") => s;                   // Noncompliant
+            var f2 = (string s1 = "SELECT x", string s2 = "FROM y") => s1 + s2; // Compliant, different strings
+        }
+    }
+
+    class CollectionExpressions
+    {
+        void MonoDimensional()
+        {
+            IList<string> a;
+            a = ["SELECT x" + "FROM y"];            // Noncompliant
+            a = ["SELECT x" + """FROM y"""];        // Noncompliant
+            a = ["SELECT x", "FROM y"];             // Compliant, different strings
+            a = [$"SELECT x{"FROM y"}"];            // Noncompliant
+            a = [$$$""""SELECT x{{"FROM y"}}""""];  // Compliant
+            a = [$$""""SELECT x{{"FROM y"}}""""];   // Noncompliant
+        }
+
+        void MultiDimensional()
+        {
+            IList<IList<string>> a;
+            a = [
+                    ["SELECT x" + "FROM y",  // Noncompliant
+                "SELECT x"],
+                ["FROM y",
+                "SELECT x" + "FROM y"]   // Noncompliant
+                ];
+        }
+    }
+}
+
+namespace CSharp13
+{
+    public class MyClass
+    {
+        // https://sonarsource.atlassian.net/browse/NET-444
+        void NewEscapeSequence()
+        {
+            const string keyword1 = "SELECT";
+            const string keyword2 = "FROM";
+            const char escape = '\e';
+
+            _ = "\e";
+            _ = "\' \" \\ \0 \a \b \e \f \n \r \t \v";
+            _ = '\e';
+            _ = $"\e{"\e"}";
+            _ = $"{'\e'}";
+            _ = $@"{'\e'}";
+            _ = $"""{'\e'}""";
+            _ = $"""
+            {'\e'}
+            """;
+            _ = "SELECT x\eFROM y";            // Compliant: works as expected in SQL server
+            _ = "SELECT x" + '\e' + "FROM y";  // Compliant: works as expected in SQL server
+            _ = "SELECT x" + "FROM y" + '\e';  // Compliant: works as expected in SQL server
+            _ = keyword1 + escape + keyword2 + " table_name";
+
+            _ = " SELECT" + "FROM y";          // Noncompliant
+            _ = '\e' + " SELECT" + "FROM y";   // FN
+            _ = '\e' + " SELECT x" + "FROM y"; // FN
+            _ = "\e" + " SELECT x" + "FROM y"; // FN
+            _ = "SELECT" + "FROM y" + '\e';    // FN
+            _ = "SELECT x" + "FROM y" + '\e';  // FN
+            _ = "SELECT x" + "FROM y" + "\e";  // Noncompliant
         }
     }
 }

@@ -1,4 +1,10 @@
-﻿class WithPrimaryConstructorParams(int unused, int usedInInlineInitialization, int usedInMethod)
+﻿int x = 42;
+
+  (x, var y) = (x, 42);
+// ^                    Noncompliant
+//              ^       Secondary@-1
+
+class WithPrimaryConstructorParams(int unused, int usedInInlineInitialization, int usedInMethod)
 {
     int usedInInlineInitialization = usedInInlineInitialization;      // Compliant: param to field assignment
 
@@ -28,5 +34,25 @@ class WithInlineArrays
     struct Buffer
     {
         int arrayItem;
+    }
+}
+
+partial class PartialProperties
+{
+    public partial bool IsTrue
+    {
+        get => IsTrue;
+        set => IsTrue = value;
+    }
+}
+
+partial class PartialProperties
+{
+    public partial bool IsTrue { get; set; }
+
+    void MyMethod()
+    {
+        IsTrue = IsTrue; // Noncompliant
+                         // Secondary@-1
     }
 }
