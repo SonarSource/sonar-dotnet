@@ -20,31 +20,26 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class StaticFieldInitializerOrderTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<StaticFieldInitializerOrder>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void StaticFieldInitializerOrder() =>
-            builder.AddPaths("StaticFieldInitializerOrder.cs", "StaticFieldInitializerOrder_PartialClass.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .AddReferences(MetadataReferenceFacade.NetStandard21)
-                .Verify();
+[TestClass]
+public class StaticFieldInitializerOrderTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<StaticFieldInitializerOrder>();
+
+    [TestMethod]
+    public void StaticFieldInitializerOrder() =>
+        builder.AddPaths("StaticFieldInitializerOrder.cs", "StaticFieldInitializerOrder_PartialClass.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .AddReferences(MetadataReferenceFacade.NetStandard21)
+            .Verify();
 
 #if NET
 
-        [TestMethod]
-        public void StaticFieldInitializerOrder_CSharp9() =>
-            builder.AddPaths("StaticFieldInitializerOrder.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
-
-        [TestMethod]
-        public void StaticFieldInitializerOrder_CSharp10() =>
-            builder.AddPaths("StaticFieldInitializerOrder.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+    [TestMethod]
+    public void StaticFieldInitializerOrder_Latest() =>
+        builder.AddPaths("StaticFieldInitializerOrder.Latest.cs").WithOptions(ParseOptionsHelper.CSharpLatest).Verify();
 
 #endif
 
-    }
 }

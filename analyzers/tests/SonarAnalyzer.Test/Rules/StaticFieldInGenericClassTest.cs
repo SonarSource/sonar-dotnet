@@ -34,12 +34,8 @@ public class StaticFieldInGenericClassTest
 #if NET
 
     [TestMethod]
-    public void StaticFieldInGenericClass_CSharp9() =>
-        builder.AddPaths("StaticFieldInGenericClass.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
-
-    [TestMethod]
-    public void StaticFieldInGenericClass_CSharp10() =>
-        builder.AddPaths("StaticFieldInGenericClass.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+    public void StaticFieldInGenericClass_Latest() =>
+        builder.AddPaths("StaticFieldInGenericClass.Latest.cs").WithOptions(ParseOptionsHelper.CSharpLatest).Verify();
 
 #endif
 

@@ -63,21 +63,9 @@ public class SqlKeywordsDelimitedBySpaceTest
             .Verify();
 
     [TestMethod]
-    public void SqlKeywordsDelimitedBySpace_CSharp10() =>
-        Builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp10.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
-            .Verify();
-
-    [TestMethod]
-    public void SqlKeywordsDelimitedBySpace_CSharp11() =>
-        Builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
-            .Verify();
-
-    [TestMethod]
-    public void SqlKeywordsDelimitedBySpace_CSharp12() =>
-        Builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp12.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp12)
+    public void SqlKeywordsDelimitedBySpace_Latest() =>
+        Builder.AddPaths("SqlKeywordsDelimitedBySpace.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
             .WithConcurrentAnalysis(false)
             .Verify();
 

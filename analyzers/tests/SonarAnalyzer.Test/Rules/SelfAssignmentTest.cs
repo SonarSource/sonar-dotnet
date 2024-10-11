@@ -21,31 +21,29 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class SelfAssignmentTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.SelfAssignment>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void SelfAssignment_CSharp8() =>
-            builderCS.AddPaths("SelfAssignment.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+[TestClass]
+public class SelfAssignmentTest
+{
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.SelfAssignment>();
+
+    [TestMethod]
+    public void SelfAssignment_CSharp8() =>
+        builderCS.AddPaths("SelfAssignment.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
-        [TestMethod]
-        public void SelfAssignment_CSharp10() =>
-            builderCS.AddPaths("SelfAssignment.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).WithTopLevelStatements().Verify();
-
-        [TestMethod]
-        public void SelfAssignment_CSharp12() =>
-            builderCS.AddPaths("SelfAssignment.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).WithConcurrentAnalysis(false).Verify();
+    [TestMethod]
+    public void SelfAssignment_CS_Latest() =>
+        builderCS.AddPaths("SelfAssignment.Latest.cs")
+            .WithTopLevelStatements()
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
 
 #endif
 
-        [TestMethod]
-        public void SelfAssignment_VB() =>
-            new VerifierBuilder<VB.SelfAssignment>().AddPaths("SelfAssignment.vb").Verify();
-    }
+    [TestMethod]
+    public void SelfAssignment_VB() =>
+        new VerifierBuilder<VB.SelfAssignment>().AddPaths("SelfAssignment.vb").Verify();
 }

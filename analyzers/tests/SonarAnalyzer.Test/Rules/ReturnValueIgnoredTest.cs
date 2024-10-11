@@ -20,28 +20,27 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class ReturnValueIgnoredTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<ReturnValueIgnored>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void ReturnValueIgnored() =>
-            builder.AddPaths("ReturnValueIgnored.cs").Verify();
+[TestClass]
+public class ReturnValueIgnoredTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<ReturnValueIgnored>();
+
+    [TestMethod]
+    public void ReturnValueIgnored() =>
+        builder.AddPaths("ReturnValueIgnored.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void ReturnValueIgnored_CSharp9() =>
-            builder.AddPaths("ReturnValueIgnored.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).WithTopLevelStatements().Verify();
-
-        [TestMethod]
-        public void ReturnValueIgnored_CSharp11() =>
-            builder.AddPaths("ReturnValueIgnored.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).WithTopLevelStatements().Verify();
+    [TestMethod]
+    public void ReturnValueIgnored_Latest() =>
+        builder.AddPaths("ReturnValueIgnored.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .AddReferences(MetadataReferenceFacade.SystemCollections)
+            .WithTopLevelStatements()
+            .Verify();
 
 #endif
 
-    }
 }

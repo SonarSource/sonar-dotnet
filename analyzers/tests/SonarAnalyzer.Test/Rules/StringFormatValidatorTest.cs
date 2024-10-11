@@ -68,10 +68,10 @@ namespace SonarAnalyzer.Test.Rules
                 .Verify();
 
         [TestMethod]
-        public void StringFormatValidator_CSharp12() =>
-            builder.AddPaths("StringFormatValidator.CSharp12.cs")
+        public void StringFormatValidator_Latest() =>
+            builder.AddPaths("StringFormatValidator.Latest.cs")
                 .AddReferences(TestHelper.ProjectTypeReference(ProjectType.Product))
-                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .Verify();
 
 #endif

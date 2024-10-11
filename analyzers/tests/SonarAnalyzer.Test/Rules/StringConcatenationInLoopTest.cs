@@ -21,29 +21,28 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class StringConcatenationInLoopTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.StringConcatenationInLoop>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void StringConcatenationInLoop_CS() =>
-            builderCS.AddPaths("StringConcatenationInLoop.cs").Verify();
+[TestClass]
+public class StringConcatenationInLoopTest
+{
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.StringConcatenationInLoop>();
+
+    [TestMethod]
+    public void StringConcatenationInLoop_CS() =>
+        builderCS.AddPaths("StringConcatenationInLoop.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void StringConcatenationInLoop_CSharp11() =>
-            builderCS.AddPaths("StringConcatenationInLoop.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void StringConcatenationInLoop_CS_Latest() =>
+        builderCS.AddPaths("StringConcatenationInLoop.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
 
 #endif
 
-        [TestMethod]
-        public void StringConcatenationInLoop_VB() =>
-            new VerifierBuilder<VB.StringConcatenationInLoop>().AddPaths("StringConcatenationInLoop.vb").Verify();
-    }
+    [TestMethod]
+    public void StringConcatenationInLoop_VB() =>
+        new VerifierBuilder<VB.StringConcatenationInLoop>().AddPaths("StringConcatenationInLoop.vb").Verify();
 }
