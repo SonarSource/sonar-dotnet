@@ -34,6 +34,7 @@
 
   <modules>
     <module>sonar-dotnet-core</module>
+    <module>sonar-csharp-core</module>
     <module>sonar-csharp-plugin</module>
     <module>sonar-vbnet-plugin</module>
   </modules>
