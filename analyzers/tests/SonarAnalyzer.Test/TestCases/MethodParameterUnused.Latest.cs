@@ -1,8 +1,31 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Tests.TestCases
+namespace CSharp7
+{
+    public class BasicTests
+    {
+        public void Baz()
+        {
+            this.Foo(new[] { ("some", "thing") });
+        }
+
+        private void Foo((string key, string value)[] bars)
+        {
+            foreach (var (key, value) in bars)
+            { }
+        }
+
+        private void Foo2((string key, string value)[] bars)
+        {
+            var x = bars;
+        }
+    }
+}
+
+namespace CSharp8
 {
     public interface IWithDefaultImplementation
     {
@@ -250,5 +273,162 @@ namespace Tests.TestCases
     {
         public static TValue TryGetValueOrNull<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key) where TValue : struct => default(TValue);
     }
+}
 
+namespace CSharp10
+{
+    public class Base
+    {
+        public Base() { }
+
+        public Base(int x) { }
+
+        public Base(string x) { }
+    }
+
+    public class A : Base
+    {
+        public A(int x, int y) : base(x) { }
+
+        private A(string x, string y) : base(x) { } // Method is empty
+
+        public A(int i, int j, int z)
+        {
+            Console.WriteLine(j + z);
+        }
+
+        private A(string i, string j, string z) // Noncompliant
+        {
+            Console.WriteLine(j + z);
+        }
+
+        public A(int x, int y, string z) : this(x, y) { }
+
+        private A(string x, string y, int z) : this(x, y) // Noncompliant
+        {
+            Console.WriteLine(x);
+        }
+    }
+
+    public record class B
+    {
+        public B(int i, int j)
+        {
+            Console.WriteLine(j);
+        }
+
+        private B(string i, int j) // Noncompliant
+        {
+            Console.WriteLine(j);
+        }
+    }
+
+    public struct C
+    {
+        public C(int i, int j)
+        {
+            Console.WriteLine(j);
+        }
+
+        private C(string i, int j) // Noncompliant
+        {
+            Console.WriteLine(j);
+        }
+    }
+
+    public record struct D
+    {
+        public D(int i, int j)
+        {
+            Console.WriteLine(j);
+        }
+
+        private D(string i, int j) // Noncompliant
+        {
+            Console.WriteLine(j);
+        }
+    }
+}
+
+namespace CSharp11
+{
+    namespace SomeNamespace
+    {
+        public class MethodParameterUnused
+        {
+            private void Argument_Unused(string argument) // Noncompliant
+    //                                   ^^^^^^^^^^^^^^^
+            {
+                var x = 42;
+            }
+
+            private void Argument_Reassigned(string argument) // Noncompliant
+    //                                       ^^^^^^^^^^^^^^^
+            {
+                argument = "So Long, and Thanks for All the Fish";
+            }
+
+            [Obsolete(nameof(argument))]
+            private void Argument_UsedInAttributeByNameOf(string argument) // Compliant, methods with attributes are ignored
+            {
+                var x = 42;
+            }
+
+            [Obsolete(nameof(TArgument))]
+            private void Argument_UsedInGenericAttributeByNameOf<TArgument>(TArgument argument) // Compliant, methods with attributes are ignored
+            {
+                var x = 42;
+            }
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/8988
+    namespace Issue_8988
+    {
+        public partial class PartialMethod
+        {
+            private partial string ExtendedPartialMethod(string one, string two);
+        }
+
+        public partial class PartialMethod
+        {
+            private partial string ExtendedPartialMethod(string one, string two) // Noncompliant FP
+            {
+                return two;
+            }
+        }
+    }
+}
+
+namespace CSharp13
+{
+    public class Class
+    {
+        private async void TaskWhenEach(List<Task> tasks) // Compliant
+        {
+            await foreach (var item in Task.WhenEach(tasks))
+            {
+                var x = 1;
+            }
+        }
+
+        private void NewLinqMethods(List<int> a, List<int> b, List<int> c) // Compliant
+        {
+            _ = new List<int>().CountBy(x => a);
+            _ = b.AggregateBy(x => x, seed: 0, (x, y) => y);
+            _ = c.Index();
+        }
+
+        private IEnumerable<int> IteratorRef(int[] a)  // Compliant
+        {
+            ref int x = ref a[0];
+            yield break;
+        }
+
+        private async Task AsyncRef(int[] a)  // Compliant
+        {
+            ref int x = ref a[0];
+            await Task.Delay(50);
+        }
+    }
 }
