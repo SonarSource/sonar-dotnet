@@ -26,6 +26,7 @@ import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.utils.Version;
+import org.sonarsource.csharp.core.CSharpPropertyDefinitions;
 import org.sonarsource.dotnet.shared.plugins.AnalysisWarningsSensor;
 import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
 import org.sonarsource.dotnet.shared.plugins.DotNetRulesDefinition;
