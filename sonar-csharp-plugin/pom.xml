@@ -223,7 +223,7 @@
                 <!-- ITs requires the SonarAnalyzer-VERSION.zip to be present so don't remove these lines -->
                 <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp">
                   <fileset dir="${packaging.directory}/binaries/SonarAnalyzer.CSharp/">
-                    <include name="*.dll" />
+                    <include name="*.dll"/>
                   </fileset>
                   <fileset dir="${project.build.directory}/../..">
                     <include name="THIRD-PARTY-NOTICES.txt"/>
@@ -241,8 +241,8 @@
                       failonerror="true"
                       dir="${packaging.directory}/binaries/RuleDescriptorGenerator">
                   <arg value="RuleDescriptorGenerator.dll"/>
-                  <arg value="${packaging.directory}/binaries/SonarAnalyzer.CSharp/SonarAnalyzer.CSharp.dll"/>
                   <arg value="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp/Rules.json"/>
+                  <arg value="${packaging.directory}/binaries/SonarAnalyzer.CSharp/SonarAnalyzer.CSharp.dll"/>
                 </exec>
                 <copy todir="${sonarAnalyzer.workDirectory}/static">
                   <fileset dir="${documentationDirectory}">

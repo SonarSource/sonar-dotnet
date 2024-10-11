@@ -32,16 +32,16 @@ public static class Program
 {
     public static void Main(string[] args)
     {
-        if (args.Length == 2)
+        if (args.Length > 1)
         {
-            var analyzers = LoadAnalyzerTypes(args[0]);
+            var analyzers = args.Skip(1).SelectMany(LoadAnalyzerTypes).ToArray();
             var rules = LoadRules(analyzers);
             var json = JsonSerializer.Serialize(rules, new JsonSerializerOptions { WriteIndented = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
-            File.WriteAllText(args[1], json);
+            File.WriteAllText(args[0], json);
         }
         else
         {
-            Console.WriteLine("Application expects two arguments: <Path-To-Dll> <Path-To-Output-Json>");
+            Console.WriteLine("Application expects at least two arguments: <Path-To-Output-Json> <Path-To-Dll> [, <Path-To-Dll> ...] ");
             Console.WriteLine("DiagnosticAnalyzer metadata from <Path-To-Dll> will be serialized to <Path-To-Output-Json>.");
         }
     }
