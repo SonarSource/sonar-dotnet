@@ -1,5 +1,5 @@
 /*
- * SonarC#
+ * SonarSource :: C# :: Core
  * Copyright (C) 2014-2024 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
@@ -17,19 +17,28 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.csharp;
+package org.sonarsource.csharp.core;
 
-import org.sonar.api.config.Configuration;
-import org.sonarsource.csharp.core.CSharpPropertyDefinitions;
-import org.sonarsource.dotnet.shared.plugins.AbstractLanguageConfiguration;
-import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+import org.sonar.api.config.PropertyDefinition;
 
-public class CSharpLanguageConfiguration extends AbstractLanguageConfiguration {
-  public CSharpLanguageConfiguration(Configuration configuration, PluginMetadata metadata) {
-    super(configuration, metadata);
+import static org.assertj.core.api.Assertions.assertThat;
+
+class CSharpPropertyDefinitionsTest {
+
+  @Test
+  void create() {
+    CSharpPropertyDefinitions sut = new CSharpPropertyDefinitions(TestCSharpMetadata.INSTANCE);
+    List<PropertyDefinition> properties = sut.create();
+    assertThat(properties)
+      .hasSize(10)
+      .extracting(PropertyDefinition::name).containsOnlyOnce("Analyze Razor code");
   }
 
-  public boolean analyzeRazorCode() {
-    return configuration.getBoolean(CSharpPropertyDefinitions.getAnalyzeRazorCode(CSharpPlugin.METADATA.languageKey())).orElse(true);
+  @Test
+  void getAnalyzeRazorCode() {
+    CSharpPropertyDefinitions sut = new CSharpPropertyDefinitions(TestCSharpMetadata.INSTANCE);
+    assertThat(sut.getAnalyzeRazorCode("LANG")).isEqualTo("sonar.LANG.analyzeRazorCode");
   }
 }

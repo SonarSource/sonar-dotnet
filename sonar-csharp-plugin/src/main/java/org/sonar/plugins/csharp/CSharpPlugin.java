@@ -21,6 +21,7 @@ package org.sonar.plugins.csharp;
 
 import org.sonar.api.Plugin;
 import org.sonarsource.csharp.core.CSharpCorePluginMetadata;
+import org.sonarsource.csharp.core.CSharpPropertyDefinitions;
 import org.sonarsource.dotnet.shared.plugins.AnalysisWarningsSensor;
 import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
 import org.sonarsource.dotnet.shared.plugins.DotNetRulesDefinition;
