@@ -20,7 +20,7 @@
 package org.sonar.plugins.vbnet;
 
 import org.sonar.api.Plugin;
-import org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions;
+import org.sonarsource.vbnet.core.VbNetCorePluginMetadata;
 import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
 import org.sonarsource.dotnet.shared.plugins.DotNetRulesDefinition;
 import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
@@ -88,12 +88,7 @@ public class VbNetPlugin implements Plugin {
     context.addExtensions(RoslynProfileExporter.sonarLintRepositoryProperties(METADATA));
   }
 
-  private static class VbNetPluginMetadata implements PluginMetadata {
-
-    @Override
-    public String languageKey() {
-      return "vbnet";
-    }
+  private static class VbNetPluginMetadata extends VbNetCorePluginMetadata {
 
     @Override
     public String pluginKey() {
@@ -101,33 +96,8 @@ public class VbNetPlugin implements Plugin {
     }
 
     @Override
-    public String languageName() {
-      return "VB.NET";
-    }
-
-    @Override
     public String analyzerProjectName() {
       return "SonarAnalyzer.VisualBasic";
-    }
-
-    @Override
-    public String repositoryKey() {
-      return "vbnet";
-    }
-
-    @Override
-    public String fileSuffixesKey() {
-      return AbstractPropertyDefinitions.getFileSuffixProperty(languageKey());
-    }
-
-    @Override
-    public String fileSuffixesDefaultValue() {
-      return ".vb";
-    }
-
-    @Override
-    public String resourcesDirectory() {
-      return "/org/sonar/plugins/vbnet";
     }
   }
 }

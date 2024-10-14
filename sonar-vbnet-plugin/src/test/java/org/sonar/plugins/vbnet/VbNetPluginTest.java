@@ -98,4 +98,15 @@ class VbNetPluginTest {
         + new VbNetPropertyDefinitions(VbNetPlugin.METADATA).create().size());
   }
 
+  @Test
+  void pluginProperties() {
+    assertThat(VbNetPlugin.METADATA.languageKey()).isEqualTo("vbnet");
+    assertThat(VbNetPlugin.METADATA.languageName()).isEqualTo("VB.NET");
+    assertThat(VbNetPlugin.METADATA.repositoryKey()).isEqualTo("vbnet");
+    assertThat(VbNetPlugin.METADATA.fileSuffixesKey()).isEqualTo("sonar.vbnet.file.suffixes");
+    assertThat(VbNetPlugin.METADATA.fileSuffixesDefaultValue()).isEqualTo(".vb");
+    assertThat(VbNetPlugin.METADATA.resourcesDirectory()).isEqualTo("/org/sonar/plugins/vbnet");
+    assertThat(VbNetPlugin.METADATA.pluginKey()).isEqualTo("vbnet");
+    assertThat(VbNetPlugin.METADATA.analyzerProjectName()).isEqualTo("SonarAnalyzer.VisualBasic");
+  }
 }
