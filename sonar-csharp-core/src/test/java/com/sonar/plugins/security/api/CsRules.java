@@ -1,5 +1,5 @@
 /*
- * SonarC#
+ * SonarSource :: C# :: Core
  * Copyright (C) 2014-2024 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
@@ -29,10 +29,7 @@ public class CsRules {
 
   public static Set<String> getRuleKeys() throws Exception {
     if (exceptionToThrow != null) {
-      Exception exception = exceptionToThrow;
-      // cleanup for the next execution
-      exceptionToThrow = null;
-      throw exception;
+      throw exceptionToThrow;
     }
     return ruleKeys;
   }
