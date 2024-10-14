@@ -1,5 +1,5 @@
 /*
- * SonarC#
+ * SonarSource :: C# :: Core
  * Copyright (C) 2014-2024 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.csharp;
+package org.sonarsource.csharp.core;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -64,8 +64,8 @@ public class CSharpSonarWayProfile extends AbstractSonarWayProfile {
   private String getSecurityRepositoryKey() {
     try {
       Class<?> csRulesClass = Class.forName("com.sonar.plugins.security.api.CsRules");
-      Method getRuleKeysMethod = csRulesClass.getMethod("getRepositoryKey");
-      return (String) getRuleKeysMethod.invoke(null);
+      Method getRepositoryKeyMethod = csRulesClass.getMethod("getRepositoryKey");
+      return (String) getRepositoryKeyMethod.invoke(null);
     } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
       LOG.debug("com.sonar.plugins.security.api.CsRules#getRepositoryKey is not found, will use default repository key: {}",
         e.getMessage());
