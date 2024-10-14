@@ -17,3 +17,15 @@ public partial class VariableShadowsFieldPrimaryConstructor
         //  ^
     }
 }
+
+public partial class PartialProperty
+{
+
+    public partial int myPartialProperty { get => 42; set { } }
+
+    public void DoSomething()
+    {
+        int myPartialProperty = 0; // Noncompliant
+    }
+
+}
