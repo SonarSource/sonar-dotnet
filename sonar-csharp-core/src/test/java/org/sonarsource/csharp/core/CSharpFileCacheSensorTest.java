@@ -1,5 +1,5 @@
 /*
- * SonarC#
+ * SonarSource :: C# :: Core
  * Copyright (C) 2014-2024 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.csharp;
+package org.sonarsource.csharp.core;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,7 +50,7 @@ class CSharpFileCacheSensorTest {
   @Test
   void execute_whenCacheIsEnabled_itAddsOnlyTheLanguageFiles() throws IOException, NoSuchAlgorithmException {
     var settings = new MapSettings();
-    settings.setProperty(CSharpPlugin.METADATA.fileSuffixesKey(), ".cs");
+    settings.setProperty(TestCSharpMetadata.INSTANCE.fileSuffixesKey(), ".cs");
     settings.setProperty("sonar.pullrequest.cache.basepath", new File(basePath.toString()).getCanonicalPath());
     var hashProvider = mock(HashProvider.class);
     when(hashProvider.computeHash(any())).thenReturn(new byte[]{42});
@@ -58,11 +58,11 @@ class CSharpFileCacheSensorTest {
     context.setCacheEnabled(true);
     context.setSettings(settings);
     context.setNextCache(mock(WriteCache.class));
-    AddFile(context, basePath.toString(), "CSharp/Foo.cs", CSharpPlugin.METADATA.languageKey());
-    AddFile(context, basePath.toString(), "CSharp/Foo.cshtml", CSharpPlugin.METADATA.languageKey());
-    AddFile(context, basePath.toString(), "CSharp/Foo.razor", CSharpPlugin.METADATA.languageKey());
+    AddFile(context, basePath.toString(), "CSharp/Foo.cs", TestCSharpMetadata.INSTANCE.languageKey());
+    AddFile(context, basePath.toString(), "CSharp/Foo.cshtml", TestCSharpMetadata.INSTANCE.languageKey());
+    AddFile(context, basePath.toString(), "CSharp/Foo.razor", TestCSharpMetadata.INSTANCE.languageKey());
     AddFile(context, basePath.toString(), "VB/Bar.vb", "other-language-key");
-    var sut = new CSharpFileCacheSensor(CSharpPlugin.METADATA, hashProvider);
+    var sut = new CSharpFileCacheSensor(TestCSharpMetadata.INSTANCE, hashProvider);
 
     sut.execute(context);
 
