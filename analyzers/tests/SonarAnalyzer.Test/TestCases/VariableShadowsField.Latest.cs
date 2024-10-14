@@ -47,3 +47,76 @@ class Repro_8260(int primaryCtorParam)
         var primaryCtorParam = 42;      // Noncompliant
     }
 }
+
+public partial class VariableShadowsField
+{
+    public int myField;
+    public int myProperty { get; set; }
+}
+
+public partial class VariableShadowsFieldPrimaryConstructor(int a) { }
+
+public class SomeClass
+{
+    private byte[] somefield;
+
+    public void SomeMethod(byte[] byteArray)
+    {
+        if (byteArray is [1, 2, 3] somefield) // Noncompliant {{Rename 'somefield' which hides the field with the same name.}}
+        {
+        }
+    }
+}
+
+public record struct S
+{
+    private int i = 0;
+    private int j = 0;
+    private int k = 0;
+    private int l = 0;
+    private int n = 0;
+    private int p = 0;
+    private int q = 0;
+    private int r = 0;
+    private int s = 0;
+    private int t = 0;
+    private int u = 0;
+    private int v = 0;
+    private int w = 0;
+
+    public S()
+    {
+        (var i, var j) = (0, 0);
+        //   ^
+        //          ^ @-1
+
+        var (k, l) = (0, 0);     // Noncompliant [issue1,issue2]
+        (var m, var n) = (0, 0); // Noncompliant m is not declared as field
+        //          ^
+        var (o, p) = (0, 0);     // Noncompliant
+        (var a, var b) = (0, 0); // Compliant
+        var (c, d) = (0, 0);     // Compliant
+        var (_, _) = (0, 0);     // Compliant
+
+        var (q, (_, r, _), s) = (1, (2, 3, 4), 5);
+        //   ^
+        //          ^        @-1
+        //                 ^ @-2
+        foreach ((var t, var u) in new[] { (1, 2) })
+        //            ^
+        //                   ^ @-1
+        {
+
+        }
+        foreach (var (v, w) in new[] { (1, 2) })
+        //            ^
+        //               ^ @-1
+        {
+
+        }
+    }
+}
+public partial class PartialProperty
+{
+    public partial int myPartialProperty { get; set; }
+}

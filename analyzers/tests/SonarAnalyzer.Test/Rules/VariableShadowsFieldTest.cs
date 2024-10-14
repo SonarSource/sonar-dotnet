@@ -36,34 +36,16 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
 
         [TestMethod]
-        public void VariableShadowsField_CSharp9() =>
-            builder.AddPaths("VariableShadowsField.CSharp9.cs")
+        public void VariableShadowsField_TopLevelStatements() =>
+            builder.AddPaths("VariableShadowsField.TopLevelStatements.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .WithTopLevelStatements()
                 .Verify();
 
         [TestMethod]
-        public void VariableShadowsField_CSharp10() =>
-            builder.AddPaths("VariableShadowsField.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
-
-        [TestMethod]
-        public void VariableShadowsField_CSharp11() =>
-            builder.AddPaths("VariableShadowsField.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
-
-        [TestMethod]
-        public void VariableShadowsField_CSharp12() =>
-            builder.AddPaths("VariableShadowsField.CSharp12.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp12)
-                .Verify();
-
-        [TestMethod]
-        public void VariableShadowsField_PartialClass() =>
-            builder.AddPaths("VariableShadowsField_PartialClass1.cs", "VariableShadowsField_PartialClass2.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp12)
+        public void VariableShadowsField_CS_Latest() =>
+            builder.AddPaths("VariableShadowsField.Latest.cs", "VariableShadowsField.Latest.Partial.cs")
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .Verify();
 
 #endif
