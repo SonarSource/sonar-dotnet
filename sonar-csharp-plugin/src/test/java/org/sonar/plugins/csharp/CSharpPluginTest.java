@@ -27,6 +27,7 @@ import org.sonar.api.SonarRuntime;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.utils.Version;
 import org.sonarsource.csharp.core.CSharpCorePluginMetadata;
+import org.sonarsource.csharp.core.CSharpFileCacheSensor;
 import org.sonarsource.csharp.core.CSharpLanguageConfiguration;
 import org.sonarsource.csharp.core.CSharpPropertyDefinitions;
 import org.sonarsource.dotnet.shared.plugins.AnalysisWarningsSensor;
