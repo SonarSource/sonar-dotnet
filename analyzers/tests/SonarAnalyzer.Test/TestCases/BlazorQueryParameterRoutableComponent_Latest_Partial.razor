@@ -1,0 +1,14 @@
+﻿@namespace EmptyProject
+@page "/component"
+
+@code
+{
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public partial TimeSpan DefinedInBlazor { get; set; } // Noncompliant {{Query parameter type 'TimeSpan' is not supported.}}
+
+    public partial TimeSpan ImplementedInBlazor { get => default; set { } } // Noncompliant {{Query parameter type 'TimeSpan' is not supported.}}
+
+    [Parameter]
+    public partial TimeSpan MixedAttributes { get; set; } // Noncompliant {{Query parameter type 'TimeSpan' is not supported.}}
+}

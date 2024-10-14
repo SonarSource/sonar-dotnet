@@ -20,10 +20,10 @@
 
 namespace SonarAnalyzer.Rules.CSharp;
 
-[Obsolete("This rule has been deprecated since 9.25")]
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class BlazorQueryParameterRoutableComponent : SonarDiagnosticAnalyzer
 {
+    [Obsolete("This rule has been deprecated since 9.25")]
     private const string NoRouteQueryDiagnosticId = "S6803";
     private const string NoRouteQueryMessageFormat = "Component parameters can only receive query parameter values in routable components.";
 

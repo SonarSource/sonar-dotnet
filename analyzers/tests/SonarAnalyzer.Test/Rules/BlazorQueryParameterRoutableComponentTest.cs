@@ -44,10 +44,12 @@ public class BlazorQueryParameterRoutableComponentTest
 
     [TestMethod]
     public void BlazorQueryParameterRoutableComponent_Partial() =>
-        builder.AddPaths("BlazorQueryParameterRoutableComponent_Partial.razor.cs",
-                         "BlazorQueryParameterRoutableComponent_Partial.razor")
-               .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-               .Verify();
+        builder.WithOptions(ParseOptionsHelper.CSharpLatest)
+            .AddPaths("BlazorQueryParameterRoutableComponent_Latest_Partial.razor",
+                      "BlazorQueryParameterRoutableComponent_Latest_Partial_1.razor.cs",
+                      "BlazorQueryParameterRoutableComponent_Latest_Partial_2.razor.cs")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .Verify();
 
     [TestMethod]
     public void BlazorQueryParameterRoutableComponent_CS() =>
