@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
                     var objectTypeInfo = new ObjectTypeInfo(c.Node, c.SemanticModel);
-                    if (objectTypeInfo.Symbol == null)
+                    if (objectTypeInfo.Symbol is null)
                     {
                         return;
                     }
@@ -83,12 +83,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static string GetRootNamespace(ISymbol symbol)
         {
-            var namespaceString = symbol.ContainingNamespace.ToDisplayString();
-
-            var lastDotIndex = namespaceString.IndexOf(".", StringComparison.Ordinal);
-            return lastDotIndex == -1
-                ? namespaceString
-                : namespaceString.Substring(0, lastDotIndex);
+            var ns = symbol.ContainingNamespace;
+            while (ns?.ContainingNamespace?.IsGlobalNamespace is false)
+            {
+                ns = ns.ContainingNamespace;
+            }
+            return ns?.Name ?? string.Empty;
         }
 
         private static Regex WildcardPatternToRegularExpression(string pattern)
@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return new Regex(regexPattern, RegexOptions.Compiled, RegexConstants.DefaultTimeout);
         }
 
-        private sealed class ObjectTypeInfo
+        private readonly struct ObjectTypeInfo
         {
             public SyntaxToken Identifier { get; }
 
