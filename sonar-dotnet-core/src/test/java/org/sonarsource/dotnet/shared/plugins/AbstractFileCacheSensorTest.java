@@ -26,6 +26,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.slf4j.event.Level;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -33,9 +34,7 @@ import org.sonar.api.batch.sensor.cache.WriteCache;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
-import org.sonar.api.resources.AbstractLanguage;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -157,19 +156,14 @@ public class AbstractFileCacheSensorTest {
 
   private static class FileCacheSensor extends AbstractFileCacheSensor {
     public FileCacheSensor(HashProvider hashProvider) {
-      super(new Language(), hashProvider);
+      super(metadata(), hashProvider);
     }
   }
 
-  private static class Language extends AbstractLanguage {
-
-    public Language() {
-      super(LANGUAGE_KEY, LANGUAGE_NAME);
-    }
-
-    @Override
-    public String[] getFileSuffixes() {
-      return new String[]{".cs", ".vb"};
-    }
+  private static PluginMetadata metadata() {
+    PluginMetadata mock = mock(PluginMetadata.class);
+    when(mock.languageKey()).thenReturn(LANGUAGE_KEY);
+    when(mock.languageName()).thenReturn(LANGUAGE_NAME);
+    return mock;
   }
 }

@@ -62,7 +62,7 @@ class CSharpFileCacheSensorTest {
     AddFile(context, basePath.toString(), "CSharp/Foo.cshtml", CSharpPlugin.METADATA.languageKey());
     AddFile(context, basePath.toString(), "CSharp/Foo.razor", CSharpPlugin.METADATA.languageKey());
     AddFile(context, basePath.toString(), "VB/Bar.vb", "other-language-key");
-    var sut = new CSharpFileCacheSensor(new CSharp(settings.asConfig()), hashProvider);
+    var sut = new CSharpFileCacheSensor(CSharpPlugin.METADATA, hashProvider);
 
     sut.execute(context);
 

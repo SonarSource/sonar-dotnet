@@ -21,9 +21,10 @@ package org.sonar.plugins.vbnet;
 
 import org.sonarsource.dotnet.shared.plugins.AbstractFileCacheSensor;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
+import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 
 public class VbNetFileCacheSensor extends AbstractFileCacheSensor {
-  public VbNetFileCacheSensor(VbNet vbNet, HashProvider hashProvider) {
-    super(vbNet, hashProvider);
+  public VbNetFileCacheSensor(PluginMetadata metadata, HashProvider hashProvider) {
+    super(metadata, hashProvider);
   }
 }
