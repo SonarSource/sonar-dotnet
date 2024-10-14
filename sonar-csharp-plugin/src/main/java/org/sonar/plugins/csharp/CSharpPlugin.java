@@ -34,7 +34,6 @@ import org.sonarsource.dotnet.shared.plugins.GlobalProtobufFileProcessor;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
 import org.sonarsource.dotnet.shared.plugins.LogSensor;
 import org.sonarsource.dotnet.shared.plugins.ModuleConfiguration;
-import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 import org.sonarsource.dotnet.shared.plugins.ProjectTypeCollector;
 import org.sonarsource.dotnet.shared.plugins.PropertiesSensor;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
@@ -49,7 +48,7 @@ import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 public class CSharpPlugin implements Plugin {
 
   // Do NOT add any public fields here, and do NOT reference them directly. Add them to PluginMetadata and inject the metadata.
-  static final PluginMetadata METADATA = new CSharpPluginMetadata();
+  static final CSharpCorePluginMetadata METADATA = new CSharpPluginMetadata();
 
   @Override
   public void define(Context context) {
@@ -71,7 +70,7 @@ public class CSharpPlugin implements Plugin {
       DotNetSensor.class,
       // language-specific
       METADATA,
-      CSharp.class,
+      CSharpCorePluginMetadata.CSharp.class,
       CSharpLanguageConfiguration.class,
       // filters
       EncodingPerFile.class,

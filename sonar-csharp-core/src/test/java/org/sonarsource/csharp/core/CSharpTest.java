@@ -1,5 +1,5 @@
 /*
- * SonarC#
+ * SonarSource :: C# :: Core
  * Copyright (C) 2014-2024 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.csharp;
+package org.sonarsource.csharp.core;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,6 @@ import org.sonar.api.config.PropertyDefinitions;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.resources.AbstractLanguage;
 import org.sonar.api.utils.System2;
-import org.sonarsource.csharp.core.CSharpPropertyDefinitions;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -33,14 +32,14 @@ import static org.mockito.Mockito.mock;
 class CSharpTest {
 
   private MapSettings settings;
-  private CSharp csharp;
+  private CSharpCorePluginMetadata.CSharp csharp;
 
   @BeforeEach
   public void init() {
     PropertyDefinitions defs = new PropertyDefinitions(mock(System2.class),
-      new CSharpPropertyDefinitions(CSharpPlugin.METADATA).create());
+      new CSharpPropertyDefinitions(TestCSharpMetadata.INSTANCE).create());
     settings = new MapSettings(defs);
-    csharp = new CSharp(settings.asConfig());
+    csharp = TestCSharpMetadata.INSTANCE.new CSharp(settings.asConfig());
   }
 
   @Test
@@ -50,7 +49,7 @@ class CSharpTest {
 
   @Test
   void shouldGetCustomFileSuffixes() {
-    settings.setProperty(CSharpPlugin.METADATA.fileSuffixesKey(), ".cs,.csharp");
+    settings.setProperty(TestCSharpMetadata.INSTANCE.fileSuffixesKey(), ".cs,.csharp");
     assertThat(csharp.getFileSuffixes()).containsOnly(".cs", ".csharp");
   }
 
@@ -58,8 +57,8 @@ class CSharpTest {
   void equals_and_hashCode_considers_configuration() {
     MapSettings otherSettings = new MapSettings();
     otherSettings.setProperty("key", "value");
-    CSharp otherCSharp = new CSharp(otherSettings.asConfig());
-    CSharp sameCSharp = new CSharp(settings.asConfig());
+    TestCSharpMetadata.CSharp otherCSharp = TestCSharpMetadata.INSTANCE.new CSharp(otherSettings.asConfig());
+    TestCSharpMetadata.CSharp sameCSharp = TestCSharpMetadata.INSTANCE.new CSharp(settings.asConfig());
     FakeCSharp fakeCSharp = new FakeCSharp();
 
     assertThat(csharp).isEqualTo(sameCSharp)
@@ -73,7 +72,7 @@ class CSharpTest {
   private class FakeCSharp extends AbstractLanguage {
 
     public FakeCSharp() {
-      super(CSharpPlugin.METADATA.languageKey(), CSharpPlugin.METADATA.languageName());
+      super(TestCSharpMetadata.INSTANCE.languageKey(), TestCSharpMetadata.INSTANCE.languageName());
     }
 
     @Override

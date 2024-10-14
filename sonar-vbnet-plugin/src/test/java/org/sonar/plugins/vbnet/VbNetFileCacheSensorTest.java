@@ -60,7 +60,7 @@ class VbNetFileCacheSensorTest {
     context.setNextCache(mock(WriteCache.class));
     AddFile(context, basePath.toFile(), "CSharp/Foo.cs", "other-language-key");
     AddFile(context, basePath.toFile(), "VB/Bar.vb", VbNetPlugin.METADATA.languageKey());
-    var sut = new VbNetFileCacheSensor(new VbNet(settings.asConfig()), hashProvider);
+    var sut = new VbNetFileCacheSensor(VbNetPlugin.METADATA, hashProvider);
 
     sut.execute(context);
 

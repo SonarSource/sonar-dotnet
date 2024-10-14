@@ -19,16 +19,17 @@
  */
 package org.sonar.plugins.csharp;
 
+import org.sonarsource.csharp.core.CSharpCorePluginMetadata;
 import org.sonarsource.dotnet.shared.plugins.AbstractFileCacheSensor;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
 
 public class CSharpFileCacheSensor extends AbstractFileCacheSensor {
-  public CSharpFileCacheSensor(CSharp cSharp, HashProvider hashProvider) {
-    super(cSharp, hashProvider);
+  public CSharpFileCacheSensor(CSharpCorePluginMetadata metadata, HashProvider hashProvider) {
+    super(metadata, hashProvider);
   }
 
   @Override
   protected String[] additionalSupportedExtensions() {
-    return new String[] { "cshtml" };
+    return new String[]{"cshtml"};
   }
 }

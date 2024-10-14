@@ -19,6 +19,9 @@
  */
 package org.sonarsource.csharp.core;
 
+import java.util.Objects;
+import org.sonar.api.config.Configuration;
+import org.sonar.api.resources.AbstractLanguage;
 import org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions;
 import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 
@@ -26,12 +29,12 @@ public abstract class CSharpCorePluginMetadata implements PluginMetadata {
 
   @Override
   public String languageKey() {
-    return "cs";
+    return CSharp.LANGUAGE_KEY;
   }
 
   @Override
   public String languageName() {
-    return "C#";
+    return CSharp.LANGUAGE_NAME;
   }
 
   @Override
@@ -52,5 +55,33 @@ public abstract class CSharpCorePluginMetadata implements PluginMetadata {
   @Override
   public String resourcesDirectory() {
     return "/org/sonar/plugins/csharp";
+  }
+
+  public class CSharp extends AbstractLanguage {
+    // Do not make these fields public and access them directly. Use the methods in CSharpCorePluginMetadata instead
+    private static final String LANGUAGE_KEY = "cs";
+    private static final String LANGUAGE_NAME = "C#";
+
+    private final Configuration configuration;
+
+    public CSharp(Configuration configuration) {
+      super(languageKey(), languageName());
+      this.configuration = configuration;
+    }
+
+    @Override
+    public String[] getFileSuffixes() {
+      return configuration.getStringArray(fileSuffixesKey());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      return super.equals(o) && o instanceof CSharp cSharp && configuration == cSharp.configuration;
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(super.hashCode(), configuration.hashCode());
+    }
   }
 }

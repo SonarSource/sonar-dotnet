@@ -19,27 +19,25 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonar.api.resources.AbstractLanguage;
-import org.sonar.api.scanner.ScannerSide;
-import org.sonar.api.scanner.sensor.ProjectSensor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.SensorDescriptor;
+import org.sonar.api.scanner.ScannerSide;
+import org.sonar.api.scanner.sensor.ProjectSensor;
 
 @ScannerSide
 public abstract class AbstractFileCacheSensor implements ProjectSensor {
   private static final Logger LOG = LoggerFactory.getLogger(AbstractFileCacheSensor.class);
-  private final AbstractLanguage language;
+  private final PluginMetadata metadata;
   private final HashProvider hashProvider;
 
-  protected AbstractFileCacheSensor(AbstractLanguage language, HashProvider hashProvider) {
-    this.language = language;
+  protected AbstractFileCacheSensor(PluginMetadata metadata, HashProvider hashProvider) {
+    this.metadata = metadata;
     this.hashProvider = hashProvider;
   }
 
@@ -50,8 +48,8 @@ public abstract class AbstractFileCacheSensor implements ProjectSensor {
 
   @Override
   public void describe(SensorDescriptor descriptor) {
-    descriptor.name(language.getName() + " File Caching Sensor");
-    descriptor.onlyOnLanguage(language.getKey());
+    descriptor.name(metadata.languageName() + " File Caching Sensor");
+    descriptor.onlyOnLanguage(metadata.languageKey());
   }
 
   @Override
@@ -79,12 +77,12 @@ public abstract class AbstractFileCacheSensor implements ProjectSensor {
     var fileSystem = context.fileSystem();
     var predicateFactory = fileSystem.predicates();
     var filePredicates = Arrays.stream(additionalSupportedExtensions()).map(predicateFactory::hasExtension).collect(Collectors.toList());
-    filePredicates.add(predicateFactory.hasLanguage(language.getKey()));
+    filePredicates.add(predicateFactory.hasLanguage(metadata.languageKey()));
 
     fileSystem.inputFiles(predicateFactory.or(filePredicates)).forEach(inputFile -> {
       // Normalize to unix style separators. The scanner should be able to read the files on both windows and unix.
       var uri = inputFile.uri();
-      var key = basePath.get().relativize(uri).getPath().replace('\\','/');
+      var key = basePath.get().relativize(uri).getPath().replace('\\', '/');
       var next = context.nextCache();
       try {
         LOG.debug("Incremental PR analysis: Adding hash for '{}' to the cache.", key);
