@@ -37,6 +37,7 @@
     <module>sonar-csharp-core</module>
     <module>sonar-csharp-plugin</module>
     <module>sonar-vbnet-plugin</module>
+    <module>sonar-vbnet-core</module>
   </modules>
 
   <scm>
