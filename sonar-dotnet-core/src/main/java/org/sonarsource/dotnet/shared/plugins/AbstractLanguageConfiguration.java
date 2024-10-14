@@ -28,32 +28,32 @@ import static java.util.Arrays.asList;
 
 @ScannerSide
 public abstract class AbstractLanguageConfiguration {
-  private final String languageKey;
+  protected final PluginMetadata metadata;
 
   protected final Configuration configuration;
 
   protected AbstractLanguageConfiguration(Configuration configuration, PluginMetadata metadata) {
     this.configuration = configuration;
-    this.languageKey = metadata.languageKey();
+    this.metadata = metadata;
   }
 
   public boolean ignoreThirdPartyIssues() {
-    return configuration.getBoolean(AbstractPropertyDefinitions.getIgnoreIssuesProperty(languageKey)).orElse(false);
+    return configuration.getBoolean(AbstractPropertyDefinitions.getIgnoreIssuesProperty(metadata.languageKey())).orElse(false);
   }
 
   public Set<String> bugCategories() {
-    return new HashSet<>(asList(configuration.getStringArray(AbstractPropertyDefinitions.getBugCategoriesProperty(languageKey))));
+    return new HashSet<>(asList(configuration.getStringArray(AbstractPropertyDefinitions.getBugCategoriesProperty(metadata.languageKey()))));
   }
 
   public Set<String> codeSmellCategories() {
-    return new HashSet<>(asList(configuration.getStringArray(AbstractPropertyDefinitions.getCodeSmellCategoriesProperty(languageKey))));
+    return new HashSet<>(asList(configuration.getStringArray(AbstractPropertyDefinitions.getCodeSmellCategoriesProperty(metadata.languageKey()))));
   }
 
   public Set<String> vulnerabilityCategories() {
-    return new HashSet<>(asList(configuration.getStringArray(AbstractPropertyDefinitions.getVulnerabilityCategoriesProperty(languageKey))));
+    return new HashSet<>(asList(configuration.getStringArray(AbstractPropertyDefinitions.getVulnerabilityCategoriesProperty(metadata.languageKey()))));
   }
 
   public boolean analyzeGeneratedCode() {
-    return configuration.getBoolean(AbstractPropertyDefinitions.getAnalyzeGeneratedCode(languageKey)).orElse(false);
+    return configuration.getBoolean(AbstractPropertyDefinitions.getAnalyzeGeneratedCode(metadata.languageKey())).orElse(false);
   }
 }

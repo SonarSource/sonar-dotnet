@@ -1,5 +1,5 @@
 /*
- * SonarC#
+ * SonarSource :: C# :: Core
  * Copyright (C) 2014-2024 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.csharp;
+package org.sonarsource.csharp.core;
 
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
@@ -34,7 +34,7 @@ class CSharpLanguageConfigurationTest {
     Configuration configuration = mock(Configuration.class);
     when(configuration.getStringArray("sonar.cs.roslyn.bugCategories")).thenReturn(new String[]{"C#"});
     when(configuration.getStringArray("sonar.vbnet.roslyn.bugCategories")).thenReturn(new String[]{"VB.NET"});
-    CSharpLanguageConfiguration config = new CSharpLanguageConfiguration(configuration, CSharpPlugin.METADATA);
+    CSharpLanguageConfiguration config = new CSharpLanguageConfiguration(configuration, TestCSharpMetadata.INSTANCE);
 
     assertThat(config.bugCategories()).containsExactly("C#");
   }
@@ -44,7 +44,7 @@ class CSharpLanguageConfigurationTest {
     Configuration configuration = mock(Configuration.class);
     when(configuration.getBoolean("sonar.cs.analyzeRazorCode")).thenReturn(Optional.of(true));
 
-    CSharpLanguageConfiguration config = new CSharpLanguageConfiguration(configuration, CSharpPlugin.METADATA);
+    CSharpLanguageConfiguration config = new CSharpLanguageConfiguration(configuration, TestCSharpMetadata.INSTANCE);
 
     assertThat(config.analyzeRazorCode()).isTrue();
   }
@@ -54,7 +54,7 @@ class CSharpLanguageConfigurationTest {
     Configuration configuration = mock(Configuration.class);
     when(configuration.getBoolean("sonar.cs.analyzeRazorCode")).thenReturn(Optional.of(false));
 
-    CSharpLanguageConfiguration config = new CSharpLanguageConfiguration(configuration, CSharpPlugin.METADATA);
+    CSharpLanguageConfiguration config = new CSharpLanguageConfiguration(configuration, TestCSharpMetadata.INSTANCE);
 
     assertThat(config.analyzeRazorCode()).isFalse();
   }
@@ -64,7 +64,7 @@ class CSharpLanguageConfigurationTest {
     Configuration configuration = mock(Configuration.class);
     when(configuration.getBoolean("sonar.cs.analyzeRazorCode")).thenReturn(Optional.empty());
 
-    CSharpLanguageConfiguration config = new CSharpLanguageConfiguration(configuration, CSharpPlugin.METADATA);
+    CSharpLanguageConfiguration config = new CSharpLanguageConfiguration(configuration, TestCSharpMetadata.INSTANCE);
 
     assertThat(config.analyzeRazorCode()).isTrue();
   }
