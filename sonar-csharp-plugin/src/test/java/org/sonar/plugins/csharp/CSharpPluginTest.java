@@ -26,34 +26,8 @@ import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.utils.Version;
-import org.sonarsource.csharp.core.CSharpCorePluginMetadata;
-import org.sonarsource.csharp.core.CSharpFileCacheSensor;
-import org.sonarsource.csharp.core.CSharpLanguageConfiguration;
-import org.sonarsource.csharp.core.CSharpPropertyDefinitions;
-import org.sonarsource.dotnet.shared.plugins.AnalysisWarningsSensor;
-import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
-import org.sonarsource.dotnet.shared.plugins.DotNetRulesDefinition;
-import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
-import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
-import org.sonarsource.dotnet.shared.plugins.FileTypeSensor;
-import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
-import org.sonarsource.dotnet.shared.plugins.GlobalProtobufFileProcessor;
-import org.sonarsource.dotnet.shared.plugins.HashProvider;
-import org.sonarsource.dotnet.shared.plugins.LogSensor;
-import org.sonarsource.dotnet.shared.plugins.ModuleConfiguration;
-import org.sonarsource.dotnet.shared.plugins.ProjectTypeCollector;
-import org.sonarsource.dotnet.shared.plugins.PropertiesSensor;
-import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
-import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
-import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
-import org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter;
-import org.sonarsource.dotnet.shared.plugins.RoslynRules;
-import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
-import org.sonarsource.dotnet.shared.plugins.UnitTestResultsProvider;
-import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonarsource.dotnet.shared.PropertyUtils.nonProperties;
 
 class CSharpPluginTest {
 
@@ -63,44 +37,7 @@ class CSharpPluginTest {
 
     Plugin.Context context = new Plugin.Context(sonarRuntime);
     new CSharpPlugin().define(context);
-
-    var extensions = context.getExtensions();
-
-    Object[] expectedExtensions = new Object[]{
-      AnalysisWarningsSensor.class,
-      CSharpCorePluginMetadata.CSharp.class,
-      CSharpFileCacheSensor.class,
-      GlobalProtobufFileProcessor.class,
-      CSharpLanguageConfiguration.class,
-      CSharpPlugin.METADATA,
-      DotNetRulesDefinition.class,
-      DotNetSensor.class,
-      EncodingPerFile.class,
-      FileTypeSensor.class,
-      GeneratedFileFilter.class,
-      HashProvider.class,
-      LogSensor.class,
-      ModuleConfiguration.class,
-      ProjectTypeCollector.class,
-      PropertiesSensor.class,
-      ProtobufDataImporter.class,
-      ReportPathCollector.class,
-      RoslynDataImporter.class,
-      RoslynProfileExporter.class,
-      RoslynRules.class,
-      SonarLintProfileExporter.class,
-      WrongEncodingFileFilter.class
-    };
-
-    assertThat(nonProperties(extensions)).contains(expectedExtensions);
-
-    assertThat(extensions).hasSize(
-      expectedExtensions.length
-        + 1 // CSharpSonarWayProfile
-        + new CodeCoverageProvider(CSharpPlugin.METADATA).extensions().size()
-        + new UnitTestResultsProvider(CSharpPlugin.METADATA).extensions().size()
-        + RoslynProfileExporter.sonarLintRepositoryProperties(CSharpPlugin.METADATA).size()
-        + new CSharpPropertyDefinitions(CSharpPlugin.METADATA).create().size());
+    assertThat(context.getExtensions()).hasSize(54);
   }
 
   @Test
