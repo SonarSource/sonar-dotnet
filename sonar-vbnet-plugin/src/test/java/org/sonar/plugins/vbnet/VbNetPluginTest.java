@@ -47,6 +47,7 @@ import org.sonarsource.dotnet.shared.plugins.RoslynRules;
 import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.UnitTestResultsProvider;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
+import org.sonarsource.vbnet.core.VbNetPropertyDefinitions;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonarsource.dotnet.shared.PropertyUtils.nonProperties;
