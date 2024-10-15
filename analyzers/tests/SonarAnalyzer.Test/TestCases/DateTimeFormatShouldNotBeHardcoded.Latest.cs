@@ -7,6 +7,7 @@ public class DateTimeFormatShouldNotBeHardcoded
     {
         var stringRepresentation = dateOnly.ToString("dd/MM/yyyy"); // Noncompliant
         stringRepresentation = timeOnly.ToString("HH:mm:ss"); // Noncompliant
+        stringRepresentation = timeOnly.ToString("HH:mm:ss\e"); // Noncompliant
     }
 
     public void Compliant(DateOnly dateOnly, TimeOnly timeOnly)

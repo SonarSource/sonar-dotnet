@@ -26,23 +26,29 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class DateTimeFormatShouldNotBeHardcodedTest
 {
+    private readonly VerifierBuilder<CS.DateTimeFormatShouldNotBeHardcoded> builderCS = new();
+    private readonly VerifierBuilder<VB.DateTimeFormatShouldNotBeHardcoded> builderVB = new();
+
     [TestMethod]
     public void DateTimeFormatShouldNotBeHardcoded_CS() =>
-        new VerifierBuilder<CS.DateTimeFormatShouldNotBeHardcoded>().AddPaths("DateTimeFormatShouldNotBeHardcoded.cs").Verify();
+        builderCS.AddPaths("DateTimeFormatShouldNotBeHardcoded.cs").Verify();
 
     [TestMethod]
     public void DateTimeFormatShouldNotBeHardcoded_VB() =>
-        new VerifierBuilder<VB.DateTimeFormatShouldNotBeHardcoded>().AddPaths("DateTimeFormatShouldNotBeHardcoded.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
+        builderVB.AddPaths("DateTimeFormatShouldNotBeHardcoded.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
 
 #if NET
 
     [TestMethod]
-    public void DateTimeFormatShouldNotBeHardcoded_NET_CS() =>
-    new VerifierBuilder<CS.DateTimeFormatShouldNotBeHardcoded>().AddPaths("DateTimeFormatShouldNotBeHardcoded.Net.cs").Verify();
+    public void DateTimeFormatShouldNotBeHardcoded_CS_Latest() =>
+        builderCS
+            .AddPaths("DateTimeFormatShouldNotBeHardcoded.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
 
     [TestMethod]
     public void DateTimeFormatShouldNotBeHardcoded_NET_VB() =>
-        new VerifierBuilder<VB.DateTimeFormatShouldNotBeHardcoded>().AddPaths("DateTimeFormatShouldNotBeHardcoded.Net.vb").Verify();
+        builderVB.AddPaths("DateTimeFormatShouldNotBeHardcoded.Net.vb").Verify();
 
 #endif
 

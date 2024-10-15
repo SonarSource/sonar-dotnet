@@ -87,4 +87,16 @@ namespace CSharp13
         public OrderedDictionary<string, string> OrderedDictionary { get; set; } // Noncompliant
         public ReadOnlySet<string> ReadonlySet { get; set; }                     // Noncompliant
     }
+
+    public partial class PartialProperties
+    {
+        public partial List<string> MyList { get; set; } // Noncompliant
+    }
+
+    public partial class PartialProperties
+    {
+        private List<string> _value = null;
+
+        public partial List<string> MyList { get => _value; set => _value = value;  } // Noncompliant
+    }
 }
