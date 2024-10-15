@@ -1,4 +1,31 @@
-﻿// https://github.com/SonarSource/sonar-dotnet/issues/8153
+﻿using System.Reflection;
+using System;
+
+Type dynClass = Type.GetType("MyInternalClass");
+BindingFlags bindingAttr = BindingFlags.NonPublic | BindingFlags.Static;
+//                         ^^^^^^^^^^^^^^^^^^^^^^   {{Make sure that this accessibility bypass is safe here.}}
+MethodInfo dynMethod = dynClass.GetMethod("Method", bindingAttr);
+dynMethod.Invoke(dynClass, null);
+
+void Foo()
+{
+    BindingFlags bindingAttr = BindingFlags.NonPublic | BindingFlags.Static; // Noncompliant
+    Type.GetType("MyInternalClass").GetMethod("Method", bindingAttr).Invoke(null, null);
+}
+
+public record Record
+{
+    private readonly BindingFlags bindingFlags = BindingFlags.NonPublic; // Noncompliant
+    public BindingFlags GetFlags { get; } = BindingFlags.NonPublic; // Noncompliant
+    public BindingFlags GetBindingFlags() => BindingFlags.NonPublic; // Noncompliant
+
+    void Foo()
+    {
+        Type.GetType("MyInternalClass").GetMember("mymethod", BindingFlags.NonPublic); // Noncompliant
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8153
 namespace Repro_8153
 {
     using System.Runtime.CompilerServices;
@@ -59,5 +86,33 @@ namespace Repro_8153
 
             public int APublicPropertyWithPrivateGet { private get; set; }
         }
+    }
+}
+
+namespace StaticUsing
+{
+    using static System.Reflection.BindingFlags;
+
+    public class Test
+    {
+        public void M()
+        {
+            _ = NonPublic | Static; // Noncompliant
+            //  ^^^^^^^^^
+        }
+    }
+}
+
+namespace Partials
+{
+    public partial class C
+    {
+        public partial BindingFlags Private { get; }
+    }
+
+    public partial class C
+    {
+        public partial BindingFlags Private =>
+            BindingFlags.NonPublic; // Noncompliant
     }
 }
