@@ -1,6 +1,6 @@
 /*
- * SonarVB
- * Copyright (C) 2012-2024 SonarSource SA
+ * SonarSource :: VB.NET :: Core
+ * Copyright (C) 2014-2024 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -17,14 +17,14 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.vbnet;
+package org.sonarsource.vbnet.core;
 
 import org.sonarsource.dotnet.shared.plugins.AbstractSonarWayProfile;
 import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 import org.sonarsource.dotnet.shared.plugins.RoslynRules;
 
-class VbNetSonarWayProfile extends AbstractSonarWayProfile {
-  VbNetSonarWayProfile(PluginMetadata metadata, RoslynRules roslynRules) {
+public class VbNetSonarWayProfile extends AbstractSonarWayProfile {
+  public  VbNetSonarWayProfile(PluginMetadata metadata, RoslynRules roslynRules) {
     super(metadata, roslynRules);
   }
 }

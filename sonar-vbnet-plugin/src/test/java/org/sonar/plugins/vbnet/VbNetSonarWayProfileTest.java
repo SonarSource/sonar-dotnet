@@ -27,6 +27,7 @@ import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.BuiltInQual
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.Context;
 import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonarsource.dotnet.shared.plugins.RoslynRules;
+import org.sonarsource.vbnet.core.VbNetSonarWayProfile;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

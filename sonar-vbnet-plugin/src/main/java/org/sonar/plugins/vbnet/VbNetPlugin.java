@@ -43,6 +43,7 @@ import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.UnitTestResultsProvider;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 import org.sonarsource.vbnet.core.VbNetPropertyDefinitions;
+import org.sonarsource.vbnet.core.VbNetSonarWayProfile;
 
 public class VbNetPlugin implements Plugin {
 
