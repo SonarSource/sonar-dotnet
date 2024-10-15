@@ -29,6 +29,14 @@ class WithAllControllerEndpointRouteBuilderExtensionsMethods
             pattern: "{controller=Home}\\{action=Index}/{id?}", // Noncompliant
             defaults: new { controller = "Home", action = "Index" });
         app.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Home}\e\\{action=Index}/{id?}", // Noncompliant
+            defaults: new { controller = "Home", action = "Index" });
+        app.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Home}\e{action=Index}/{id?}", // Compliant
+            defaults: new { controller = "Home", action = "Index" });
+        app.MapControllerRoute(
             pattern: "{controller=Home}\\{action=Index}/{id?}", // Noncompliant
             name: "default",
             defaults: new { controller = "Home", action = "Index" });
