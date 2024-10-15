@@ -5,6 +5,25 @@ var x = 1;
 
 List<int> Foo() => new();
 
+public interface IMust
+{
+    public abstract List<string> InterfaceMethod();         // Noncompliant
+}
+
+public abstract class Base
+{
+    public abstract List<string> Method();                  // Noncompliant
+    public abstract List<string> Property { get; }          // Noncompliant
+}
+
+public class Overriding : Base, IMust
+{
+    public override List<string> Method() => null;      // Compliant, can't change the return type
+    public override List<string> Property => null;      // Compliant, can't change the return type
+
+    List<string> IMust.InterfaceMethod() => null;       // Compliant, can't change the return type
+}
+
 public class Bar<T>
 {
     public List<T> Method1<T>(T arg) => null; // Noncompliant
@@ -37,3 +56,13 @@ public record R<T>
 }
 
 public record R2(List<int> Property);  // FN #6416
+
+public partial class PartialProperties
+{
+    public partial List<int> Result { get; set; } // Noncompliant
+}
+
+public partial class PartialProperties
+{
+    public partial List<int> Result { get => null; set { } } // Noncompliant
+}

@@ -20,32 +20,24 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class DontMixIncrementOrDecrementWithOtherOperatorsTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<DontMixIncrementOrDecrementWithOtherOperators>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void DontMixIncrementOrDecrementWithOtherOperators() =>
-            builder.AddPaths("DontMixIncrementOrDecrementWithOtherOperators.cs").Verify();
+[TestClass]
+public class DontMixIncrementOrDecrementWithOtherOperatorsTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<DontMixIncrementOrDecrementWithOtherOperators>();
+
+    [TestMethod]
+    public void DontMixIncrementOrDecrementWithOtherOperators() =>
+        builder.AddPaths("DontMixIncrementOrDecrementWithOtherOperators.cs").Verify();
 
 #if NET
-
-        [TestMethod]
-        public void DontMixIncrementOrDecrementWithOtherOperators_CSharp9() =>
-            builder.AddPaths("DontMixIncrementOrDecrementWithOtherOperators.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
-
-        [TestMethod]
-        public void DontMixIncrementOrDecrementWithOtherOperators_CSharp10() =>
-            builder.AddPaths("DontMixIncrementOrDecrementWithOtherOperators.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
-
-        [TestMethod]
-        public void DontMixIncrementOrDecrementWithOtherOperators_CSharp11() =>
-            builder.AddPaths("DontMixIncrementOrDecrementWithOtherOperators.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
-
+    [TestMethod]
+    public void DontMixIncrementOrDecrementWithOtherOperators_Latest() =>
+        builder
+            .AddPaths("DontMixIncrementOrDecrementWithOtherOperators.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
 #endif
 
-    }
 }

@@ -20,49 +20,41 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class DoNotExposeListTTest
 {
-    [TestClass]
-    public class DoNotExposeListTTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotExposeListT>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<DoNotExposeListT>();
 
-        [TestMethod]
-        public void DoNotExposeListT() =>
-            builder.AddPaths("DoNotExposeListT.cs")
-                .AddReferences(MetadataReferenceFacade.SystemXml)
-                .Verify();
-
-        [TestMethod]
-        public void DoNotExposeListT_CSharp8() =>
-            builder.AddPaths("DoNotExposeListT.CSharp8.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .Verify();
+    [TestMethod]
+    public void DoNotExposeListT() =>
+        builder.AddPaths("DoNotExposeListT.cs")
+            .AddReferences(MetadataReferenceFacade.SystemXml)
+            .Verify();
 
 #if NET
-
-        [TestMethod]
-        public void DoNotExposeListT_CSharp9() =>
-            builder.AddPaths("DoNotExposeListT.CSharp9.cs")
-                .WithTopLevelStatements()
-                .Verify();
-
+    [TestMethod]
+    public void DoNotExposeListT_Latest() =>
+        builder.AddPaths("DoNotExposeListT.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithTopLevelStatements()
+            .Verify();
 #endif
 
-        [TestMethod]
-        public void DoNotExposeListT_InvalidCode() =>
-            builder.AddSnippet("""
-                public class InvalidCode
-                {
-                    public List<int> () => null;
+    [TestMethod]
+    public void DoNotExposeListT_InvalidCode() =>
+        builder.AddSnippet("""
+            public class InvalidCode
+            {
+                public List<int> () => null;
 
-                    public List<T> { get; set; }
+                public List<T> { get; set; }
 
-                    public List<InvalidType> Method() => null;
+                public List<InvalidType> Method() => null;
 
-                    public InvalidType Method2() => null;
-                }
-                """)
-                .VerifyNoIssuesIgnoreErrors();
-    }
+                public InvalidType Method2() => null;
+            }
+            """)
+            .VerifyNoIssuesIgnoreErrors();
 }
