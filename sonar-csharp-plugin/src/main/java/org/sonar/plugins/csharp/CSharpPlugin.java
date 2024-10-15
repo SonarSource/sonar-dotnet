@@ -20,32 +20,8 @@
 package org.sonar.plugins.csharp;
 
 import org.sonar.api.Plugin;
+import org.sonarsource.csharp.core.CSharpCoreExtensions;
 import org.sonarsource.csharp.core.CSharpCorePluginMetadata;
-import org.sonarsource.csharp.core.CSharpFileCacheSensor;
-import org.sonarsource.csharp.core.CSharpLanguageConfiguration;
-import org.sonarsource.csharp.core.CSharpPropertyDefinitions;
-import org.sonarsource.csharp.core.CSharpSonarWayProfile;
-import org.sonarsource.dotnet.shared.plugins.AnalysisWarningsSensor;
-import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
-import org.sonarsource.dotnet.shared.plugins.DotNetRulesDefinition;
-import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
-import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
-import org.sonarsource.dotnet.shared.plugins.FileTypeSensor;
-import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
-import org.sonarsource.dotnet.shared.plugins.GlobalProtobufFileProcessor;
-import org.sonarsource.dotnet.shared.plugins.HashProvider;
-import org.sonarsource.dotnet.shared.plugins.LogSensor;
-import org.sonarsource.dotnet.shared.plugins.ModuleConfiguration;
-import org.sonarsource.dotnet.shared.plugins.ProjectTypeCollector;
-import org.sonarsource.dotnet.shared.plugins.PropertiesSensor;
-import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
-import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
-import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
-import org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter;
-import org.sonarsource.dotnet.shared.plugins.RoslynRules;
-import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
-import org.sonarsource.dotnet.shared.plugins.UnitTestResultsProvider;
-import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
 public class CSharpPlugin implements Plugin {
 
@@ -54,44 +30,7 @@ public class CSharpPlugin implements Plugin {
 
   @Override
   public void define(Context context) {
-    context.addExtensions(
-      // module-level components (some relying on deprecated Scanner APIs)
-      ModuleConfiguration.class,
-      FileTypeSensor.class,
-      LogSensor.class,
-      PropertiesSensor.class,
-      // global components
-      // collectors - they are populated by the module-level sensors
-      ProjectTypeCollector.class,
-      ReportPathCollector.class,
-      CSharpSonarWayProfile.class,
-      DotNetRulesDefinition.class,
-      GlobalProtobufFileProcessor.class,
-      RoslynRules.class,
-      // sensor
-      DotNetSensor.class,
-      // language-specific
-      METADATA,
-      CSharpCorePluginMetadata.CSharp.class,
-      CSharpLanguageConfiguration.class,
-      // filters
-      EncodingPerFile.class,
-      WrongEncodingFileFilter.class,
-      GeneratedFileFilter.class,
-      HashProvider.class,
-      // importers / exporters
-      // Analysis warnings sensor is registered only here, without a language filter, to avoid pushing warnings multiple times.
-      AnalysisWarningsSensor.class,
-      CSharpFileCacheSensor.class,
-      ProtobufDataImporter.class,
-      RoslynDataImporter.class,
-      RoslynProfileExporter.class,
-      SonarLintProfileExporter.class);
-
-    context.addExtensions(new CSharpPropertyDefinitions(METADATA).create());
-    context.addExtensions(new CodeCoverageProvider(METADATA).extensions());
-    context.addExtensions(new UnitTestResultsProvider(METADATA).extensions());
-    context.addExtensions(RoslynProfileExporter.sonarLintRepositoryProperties(METADATA));
+    CSharpCoreExtensions.register(context, METADATA);
   }
 
   private static class CSharpPluginMetadata extends CSharpCorePluginMetadata {
