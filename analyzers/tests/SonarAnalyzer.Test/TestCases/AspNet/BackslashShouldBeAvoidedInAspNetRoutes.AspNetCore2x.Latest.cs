@@ -30,4 +30,6 @@ class ControllerRequirementsDontInfluenceRouteCheck
     {
         public ControllerWithoutParameterlessConstructor(int i) { }
     }
+    [Route(@"A\e\[controller]")]    // Noncompliant
+    public class ControllerWithEscapeChar : Controller { }
 }
