@@ -37,15 +37,15 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
 
         [TestMethod]
-        public void UnaryPrefixOperatorRepeated_CSharp9() =>
-            builderCS.AddPaths("UnaryPrefixOperatorRepeated.CSharp9.cs")
+        public void UnaryPrefixOperatorRepeated_CS_TopLevelStatements() =>
+            builderCS.AddPaths("UnaryPrefixOperatorRepeated.TopLevelStatements.cs")
                 .WithTopLevelStatements()
                 .Verify();
 
         [TestMethod]
-        public void UnaryPrefixOperatorRepeated_CSharp11() =>
-            builderCS.AddPaths("UnaryPrefixOperatorRepeated.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+        public void UnaryPrefixOperatorRepeated_CS_Latest() =>
+            builderCS.AddPaths("UnaryPrefixOperatorRepeated.Latest.cs")
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .Verify();
 
 #endif
