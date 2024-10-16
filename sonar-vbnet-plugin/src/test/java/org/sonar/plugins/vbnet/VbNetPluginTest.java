@@ -48,6 +48,7 @@ import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.UnitTestResultsProvider;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 import org.sonarsource.vbnet.core.VbNetCorePluginMetadata;
+import org.sonarsource.vbnet.core.VbNetFileCacheSensor;
 import org.sonarsource.vbnet.core.VbNetLanguageConfiguration;
 import org.sonarsource.vbnet.core.VbNetPropertyDefinitions;
 import org.sonarsource.vbnet.core.VbNetSonarWayProfile;
