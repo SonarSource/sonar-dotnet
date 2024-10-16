@@ -31,7 +31,6 @@ import org.sonarsource.dotnet.shared.plugins.GlobalProtobufFileProcessor;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
 import org.sonarsource.dotnet.shared.plugins.LogSensor;
 import org.sonarsource.dotnet.shared.plugins.ModuleConfiguration;
-import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 import org.sonarsource.dotnet.shared.plugins.ProjectTypeCollector;
 import org.sonarsource.dotnet.shared.plugins.PropertiesSensor;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
@@ -48,7 +47,7 @@ import org.sonarsource.vbnet.core.VbNetSonarWayProfile;
 public class VbNetPlugin implements Plugin {
 
   // Do NOT add any public fields here, and do NOT reference them directly. Add them to PluginMetadata and inject the metadata.
-  static final PluginMetadata METADATA = new VbNetPluginMetadata();
+  static final VbNetCorePluginMetadata METADATA = new VbNetPluginMetadata();
 
   @Override
   public void define(Context context) {
@@ -72,7 +71,7 @@ public class VbNetPlugin implements Plugin {
       VbNetFileCacheSensor.class,
       // language-specific
       METADATA,
-      VbNet.class,
+      VbNetCorePluginMetadata.VbNet.class,
       VbNetLanguageConfiguration.class,
       // filters
       EncodingPerFile.class,
