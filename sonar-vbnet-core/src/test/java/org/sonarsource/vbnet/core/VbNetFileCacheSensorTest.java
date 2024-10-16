@@ -1,6 +1,6 @@
 /*
- * SonarVB
- * Copyright (C) 2012-2024 SonarSource SA
+ * SonarSource :: VB.NET :: Core
+ * Copyright (C) 2014-2024 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.vbnet;
+package org.sonarsource.vbnet.core;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,7 +50,7 @@ class VbNetFileCacheSensorTest {
   @Test
   void execute_whenCacheIsEnabled_itAddsOnlyTheLanguageFiles() throws IOException, NoSuchAlgorithmException {
     var settings = new MapSettings();
-    settings.setProperty(VbNetPlugin.METADATA.fileSuffixesKey(), ".vb");
+    settings.setProperty(TestVbNetMetadata.INSTANCE.fileSuffixesKey(), ".vb");
     settings.setProperty("sonar.pullrequest.cache.basepath", new File(basePath.toString()).getCanonicalPath());
     var hashProvider = mock(HashProvider.class);
     when(hashProvider.computeHash(any())).thenReturn(new byte[]{42});
@@ -59,8 +59,8 @@ class VbNetFileCacheSensorTest {
     context.setSettings(settings);
     context.setNextCache(mock(WriteCache.class));
     AddFile(context, basePath.toFile(), "CSharp/Foo.cs", "other-language-key");
-    AddFile(context, basePath.toFile(), "VB/Bar.vb", VbNetPlugin.METADATA.languageKey());
-    var sut = new VbNetFileCacheSensor(VbNetPlugin.METADATA, hashProvider);
+    AddFile(context, basePath.toFile(), "VB/Bar.vb", TestVbNetMetadata.INSTANCE.languageKey());
+    var sut = new VbNetFileCacheSensor(TestVbNetMetadata.INSTANCE, hashProvider);
 
     sut.execute(context);
 
