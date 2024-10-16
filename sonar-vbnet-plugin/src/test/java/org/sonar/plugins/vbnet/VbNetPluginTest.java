@@ -47,7 +47,9 @@ import org.sonarsource.dotnet.shared.plugins.RoslynRules;
 import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.UnitTestResultsProvider;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
+import org.sonarsource.vbnet.core.VbNetCorePluginMetadata;
 import org.sonarsource.vbnet.core.VbNetPropertyDefinitions;
+import org.sonarsource.vbnet.core.VbNetSonarWayProfile;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonarsource.dotnet.shared.PropertyUtils.nonProperties;
@@ -80,11 +82,12 @@ class VbNetPluginTest {
       RoslynProfileExporter.class,
       RoslynRules.class,
       SonarLintProfileExporter.class,
-      VbNet.class,
       VbNetFileCacheSensor.class,
       GlobalProtobufFileProcessor.class,
       VbNetLanguageConfiguration.class,
       VbNetPlugin.METADATA,
+      VbNetCorePluginMetadata.VbNet.class,
+      VbNetSonarWayProfile.class,
       WrongEncodingFileFilter.class
     };
 
@@ -92,7 +95,6 @@ class VbNetPluginTest {
 
     assertThat(extensions).hasSize(
       expectedExtensions.length
-        + 1 // VbNetSonarWayProfile
         + new CodeCoverageProvider(VbNetPlugin.METADATA).extensions().size()
         + new UnitTestResultsProvider(VbNetPlugin.METADATA).extensions().size()
         + RoslynProfileExporter.sonarLintRepositoryProperties(VbNetPlugin.METADATA).size()
