@@ -36,21 +36,9 @@ public class PubliclyWritableDirectoriesTest
 #if NET
 
     [TestMethod]
-    public void PubliclyWritableDirectories_CSharp10() =>
-        builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.CSharp10.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
-            .Verify();
-
-    [TestMethod]
-    public void PubliclyWritableDirectories_CSharp11() =>
-        builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
-            .Verify();
-
-    [TestMethod]
-    public void PubliclyWritableDirectories_CSharp12() =>
-        builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.CSharp12.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp12)
+    public void PubliclyWritableDirectories_CS_Latest() =>
+        builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
             .Verify();
 
 #endif

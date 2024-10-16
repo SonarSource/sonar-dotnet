@@ -79,17 +79,18 @@ public class SecurityHotspotTest
             "ConfiguringLoggers" => "ConfiguringLoggers_Log4Net",
             "CookieShouldBeHttpOnly" => "CookieShouldBeHttpOnly_Nancy",
             "CookieShouldBeSecure" => "CookieShouldBeSecure_Nancy",
-            "DoNotHardcodeCredentials" => "DoNotHardcodeCredentials.DefaultValues",
             "DeliveringDebugFeaturesInProduction" => "DeliveringDebugFeaturesInProduction.NetCore2",
+            "DoNotHardcodeCredentials" => "DoNotHardcodeCredentials.DefaultValues",
 #if NETFRAMEWORK
             "ExecutingSqlQueries" => "ExecutingSqlQueries.Net46",
-            "UsingCookies" => "UsingCookies_Net46",
             "LooseFilePermissions" => "LooseFilePermissions.Windows",
+            "UsingCookies" => "UsingCookies_Net46",
 #else
+            "DisablingCsrfProtection" => "DisablingCsrfProtection.Latest",
             "ExecutingSqlQueries" => "ExecutingSqlQueries.EntityFrameworkCoreLatest",
-            "UsingCookies" => "UsingCookies_NetCore",
             "LooseFilePermissions" => "LooseFilePermissions.Unix",
-            "PermissiveCors" => "PermissiveCors.Net",
+            "PermissiveCors" => "PermissiveCors.Latest",
+            "UsingCookies" => "UsingCookies_NetCore",
 #endif
             _ => analyzerName
         };

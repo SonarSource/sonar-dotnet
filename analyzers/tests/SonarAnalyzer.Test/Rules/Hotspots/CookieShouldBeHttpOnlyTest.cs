@@ -24,92 +24,77 @@ using System.IO;
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class CookieShouldBeHttpOnlyTest
-    {
+namespace SonarAnalyzer.Test.Rules;
 
+[TestClass]
+public class CookieShouldBeHttpOnlyTest
+{
 #if NETFRAMEWORK
 
-        private const string WebConfig = "Web.config";
+    private const string WebConfig = "Web.config";
 
 #endif
 
-        private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled));
+    private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled));
 
-        public TestContext TestContext { get; set; }
+    public TestContext TestContext { get; set; }
 
-        [TestMethod]
-        public void CookiesShouldBeHttpOnly_Nancy() =>
-            builder.AddPaths("CookieShouldBeHttpOnly_Nancy.cs")
-                .AddReferences(AdditionalReferences)
-                .Verify();
+    internal static IEnumerable<MetadataReference> AdditionalReferences =>
+        NuGetMetadataReference.Nancy();
+
+    [TestMethod]
+    public void CookiesShouldBeHttpOnly_Nancy() =>
+        builder.AddPaths("CookieShouldBeHttpOnly_Nancy.cs")
+            .AddReferences(AdditionalReferences)
+            .Verify();
 
 #if NETFRAMEWORK // The analyzed code is valid only for .Net Framework
 
-        [TestMethod]
-        public void CookiesShouldBeHttpOnly() =>
-            builder.AddPaths("CookieShouldBeHttpOnly.cs")
-                .AddReferences(MetadataReferenceFacade.SystemWeb)
-                .Verify();
+    [TestMethod]
+    public void CookiesShouldBeHttpOnly() =>
+        builder.AddPaths("CookieShouldBeHttpOnly.cs")
+            .AddReferences(MetadataReferenceFacade.SystemWeb)
+            .Verify();
 
-        [DataTestMethod]
-        [DataRow(@"TestCases\WebConfig\CookieShouldBeHttpOnly\HttpOnlyCookiesConfig")]
-        [DataRow(@"TestCases\WebConfig\CookieShouldBeHttpOnly\Formatting")]
-        public void CookiesShouldBeHttpOnly_WithWebConfigValueSetToTrue(string root)
-        {
-            var webConfigPath = Path.Combine(root, WebConfig);
-            builder.AddPaths("CookieShouldBeHttpOnly_WithWebConfig.cs")
-                .AddReferences(MetadataReferenceFacade.SystemWeb)
-                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath))
-                .Verify();
-        }
+    [DataTestMethod]
+    [DataRow(@"TestCases\WebConfig\CookieShouldBeHttpOnly\HttpOnlyCookiesConfig")]
+    [DataRow(@"TestCases\WebConfig\CookieShouldBeHttpOnly\Formatting")]
+    public void CookiesShouldBeHttpOnly_WithWebConfigValueSetToTrue(string root)
+    {
+        var webConfigPath = Path.Combine(root, WebConfig);
+        builder.AddPaths("CookieShouldBeHttpOnly_WithWebConfig.cs")
+            .AddReferences(MetadataReferenceFacade.SystemWeb)
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath))
+            .Verify();
+    }
 
-        [DataTestMethod]
-        [DataRow(@"TestCases\WebConfig\CookieShouldBeHttpOnly\NonHttpOnlyCookiesConfig")]
-        [DataRow(@"TestCases\WebConfig\CookieShouldBeHttpOnly\UnrelatedConfig")]
-        [DataRow(@"TestCases\WebConfig\CookieShouldBeHttpOnly\ConfigWithoutAttribute")]
-        public void CookiesShouldBeHttpOnly_WithWebConfigValueSetToFalse(string root)
-        {
-            var webConfigPath = Path.Combine(root, WebConfig);
-            builder.AddPaths("CookieShouldBeHttpOnly.cs")
-                .AddReferences(MetadataReferenceFacade.SystemWeb)
-                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath))
-                .Verify();
-        }
+    [DataTestMethod]
+    [DataRow(@"TestCases\WebConfig\CookieShouldBeHttpOnly\NonHttpOnlyCookiesConfig")]
+    [DataRow(@"TestCases\WebConfig\CookieShouldBeHttpOnly\UnrelatedConfig")]
+    [DataRow(@"TestCases\WebConfig\CookieShouldBeHttpOnly\ConfigWithoutAttribute")]
+    public void CookiesShouldBeHttpOnly_WithWebConfigValueSetToFalse(string root)
+    {
+        var webConfigPath = Path.Combine(root, WebConfig);
+        builder.AddPaths("CookieShouldBeHttpOnly.cs")
+            .AddReferences(MetadataReferenceFacade.SystemWeb)
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath))
+            .Verify();
+    }
 
 #else
 
-        [TestMethod]
-        public void CookiesShouldBeHttpOnly_NetCore() =>
-            builder.AddPaths("CookieShouldBeHttpOnly_NetCore.cs")
-                .AddReferences(GetAdditionalReferences_NetCore())
-                .Verify();
+    [TestMethod]
+    public void CookiesShouldBeHttpOnly_Latest() =>
+        builder.AddPaths("CookieShouldBeHttpOnly.Latest.cs")
+            .WithTopLevelStatements()
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .AddReferences(GetAdditionalReferences_NetCore())
+            .AddReferences(NuGetMetadataReference.Nancy())
+            .Verify();
 
-        [TestMethod]
-        public void CookiesShouldBeHttpOnly_CSharp9() =>
-            builder.AddPaths("CookieShouldBeHttpOnly.CSharp9.cs")
-                .WithTopLevelStatements()
-                .AddReferences(GetAdditionalReferences_NetCore())
-                .AddReferences(NuGetMetadataReference.Nancy())
-                .Verify();
-
-        [TestMethod]
-        public void CookiesShouldBeHttpOnly_CSharp10() =>
-            builder.AddPaths("CookieShouldBeHttpOnly.CSharp10.cs")
-                .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .AddReferences(GetAdditionalReferences_NetCore())
-                .AddReferences(NuGetMetadataReference.Nancy())
-                .Verify();
-
-        private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>
-            NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(Constants.NuGetLatestVersion);
+    private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>
+        NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(Constants.NuGetLatestVersion);
 
 #endif
 
-        internal static IEnumerable<MetadataReference> AdditionalReferences =>
-            NuGetMetadataReference.Nancy();
-    }
 }
