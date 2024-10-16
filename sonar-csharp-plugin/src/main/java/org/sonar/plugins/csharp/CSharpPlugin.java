@@ -22,11 +22,12 @@ package org.sonar.plugins.csharp;
 import org.sonar.api.Plugin;
 import org.sonarsource.csharp.core.CSharpCoreExtensions;
 import org.sonarsource.csharp.core.CSharpCorePluginMetadata;
+import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 
 public class CSharpPlugin implements Plugin {
 
   // Do NOT add any public fields here, and do NOT reference them directly. Add them to PluginMetadata and inject the metadata.
-  static final CSharpCorePluginMetadata METADATA = new CSharpPluginMetadata();
+  static final PluginMetadata METADATA = new CSharpPluginMetadata();
 
   @Override
   public void define(Context context) {
@@ -43,6 +44,11 @@ public class CSharpPlugin implements Plugin {
     @Override
     public String analyzerProjectName() {
       return "SonarAnalyzer.CSharp";
+    }
+
+    @Override
+    public String resourcesDirectory() {
+      return "/org/sonar/plugins/csharp";
     }
   }
 }

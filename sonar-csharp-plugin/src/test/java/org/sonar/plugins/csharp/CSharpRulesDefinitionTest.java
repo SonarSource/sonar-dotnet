@@ -72,6 +72,19 @@ class CSharpRulesDefinitionTest {
   }
 
   @Test
+  void test_symbolic_execution_rules_are_not_defined() {
+    RulesDefinition.Context context = new RulesDefinition.Context();
+    assertThat(context.repositories()).isEmpty();
+
+    DotNetRulesDefinition definition = new DotNetRulesDefinition(CSharpPlugin.METADATA, SONAR_RUNTIME, ROSLYN_RULES);
+    definition.define(context);
+
+    assertThat(context.repositories()).hasSize(1);
+
+    assertThat(context.repository("csharpsquid").rule("S2259")).isNull();
+  }
+
+  @Test
   void test_security_hotspot() {
     DotNetRulesDefinition definition = new DotNetRulesDefinition(CSharpPlugin.METADATA, SONAR_RUNTIME, ROSLYN_RULES);
     RulesDefinition.Context context = new RulesDefinition.Context();

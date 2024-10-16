@@ -32,4 +32,9 @@ class TestCSharpMetadata extends CSharpCorePluginMetadata {
   public String analyzerProjectName() {
     return "CSharp Test Project Name";
   }
+
+  @Override
+  public String resourcesDirectory() {
+    return "CSharp Test Resources Directory";
+  }
 }

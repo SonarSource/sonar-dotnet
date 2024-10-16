@@ -52,11 +52,6 @@ public abstract class CSharpCorePluginMetadata implements PluginMetadata {
     return ".cs,.razor";
   }
 
-  @Override
-  public String resourcesDirectory() {
-    return "/org/sonar/plugins/csharp";
-  }
-
   public class CSharp extends AbstractLanguage {
     // Do not make these fields public and access them directly. Use the methods in CSharpCorePluginMetadata instead
     private static final String LANGUAGE_KEY = "cs";

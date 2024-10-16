@@ -37,12 +37,16 @@ class CSharpCorePluginMetadataTest {
       public String analyzerProjectName() {
         return null;
       }
+
+      @Override
+      public String resourcesDirectory() {
+        return null;
+      }
     };
     assertThat(sut.languageKey()).isEqualTo("cs");
     assertThat(sut.languageName()).isEqualTo("C#");
     assertThat(sut.repositoryKey()).isEqualTo("csharpsquid");
     assertThat(sut.fileSuffixesKey()).isEqualTo("sonar.cs.file.suffixes");
     assertThat(sut.fileSuffixesDefaultValue()).isEqualTo(".cs,.razor");
-    assertThat(sut.resourcesDirectory()).isEqualTo("/org/sonar/plugins/csharp");
   }
 }
