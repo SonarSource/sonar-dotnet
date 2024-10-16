@@ -13,6 +13,7 @@
 
   <name>SonarSource :: C# :: Core</name>
   <description>Shared code between C# plugins</description>
+  <inceptionYear>2014</inceptionYear>
 
   <properties>
     <!-- used for deployment to SonarSource Artifactory -->
