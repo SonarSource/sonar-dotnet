@@ -30,11 +30,11 @@ namespace SonarAnalyzer.Test.Rules
         private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UriShouldNotBeHardcoded>();
 
         [TestMethod]
-        public void UriShouldNotBeHardcoded_CSharp_General() =>
+        public void UriShouldNotBeHardcoded_CS_General() =>
             builderCS.AddPaths("UriShouldNotBeHardcoded.cs").Verify();
 
         [TestMethod]
-        public void UriShouldNotBeHardcoded_CSharp_Exceptions() =>
+        public void UriShouldNotBeHardcoded_CS_Exceptions() =>
             builderCS
             .AddPaths("UriShouldNotBeHardcoded.Exceptions.cs")
             .AddReferences(MetadataReferenceFacade.SystemXml)
@@ -43,15 +43,9 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
 
         [TestMethod]
-        public void UriShouldNotBeHardcoded_CSharp11() =>
-            builderCS.AddPaths("UriShouldNotBeHardcoded.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
-
-        [TestMethod]
-        public void UriShouldNotBeHardcoded_CSharp12() =>
-            builderCS.AddPaths("UriShouldNotBeHardcoded.CSharp12.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp12)
+        public void UriShouldNotBeHardcoded_CS_Latest() =>
+            builderCS.AddPaths("UriShouldNotBeHardcoded.Latest.cs")
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .Verify();
 
 #endif
@@ -61,7 +55,7 @@ namespace SonarAnalyzer.Test.Rules
         [DataTestMethod]
         [DataRow("3.0.20105.1")]
         [DataRow(Constants.NuGetLatestVersion)]
-        public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNet(string aspNetMvcVersion) =>
+        public void UriShouldNotBeHardcoded_CS_VirtualPath_AspNet(string aspNetMvcVersion) =>
             builderCS
                 .AddPaths("UriShouldNotBeHardcoded.AspNet.cs")
                 .AddReferences(MetadataReferenceFacade.SystemWeb.Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion)))
@@ -72,7 +66,7 @@ namespace SonarAnalyzer.Test.Rules
         [DataTestMethod]
         [DataRow("2.0.4", "2.0.3", "2.1.1")]
         [DataRow("2.2.0", "2.2.0", "2.2.0")]
-        public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNetCore(string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion, string netHttpHeadersVersion) =>
+        public void UriShouldNotBeHardcoded_CS_VirtualPath_AspNetCore(string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion, string netHttpHeadersVersion) =>
             builderCS
                 .AddPaths("UriShouldNotBeHardcoded.AspNetCore.cs")
                 .AddReferences(AdditionalReferences(aspNetCoreMvcVersion, aspNetCoreRoutingVersion, netHttpHeadersVersion))
