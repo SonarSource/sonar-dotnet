@@ -15,3 +15,10 @@ public static class AzureFunctionsStatic
 
     private static void WithArg(int value) { }
 }
+
+public static partial class StaticPartialClass
+{
+    public static partial int PartialProperty { get; set; }
+    [FunctionName("Sample")]
+    public static partial void Update(int value);
+}
