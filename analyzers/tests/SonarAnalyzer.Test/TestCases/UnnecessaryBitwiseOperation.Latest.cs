@@ -3,51 +3,6 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Threading;
 
-nint resultNint;
-nint bitMaskNint = 0x010F;
-const nint nOne = 1;
-const nint nZero = 0;
-
-resultNint = -1 & bitMaskNint;            // Noncompliant
-resultNint = bitMaskNint & -nOne;         // Noncompliant
-resultNint = bitMaskNint | nZero;         // Noncompliant
-resultNint = bitMaskNint ^ nZero;         // Noncompliant
-resultNint = bitMaskNint | IntPtr.Zero;   // Noncompliant
-resultNint = bitMaskNint ^ IntPtr.Zero;   // Noncompliant
-resultNint &= -nOne;                      // Noncompliant
-resultNint |= nZero;                      // Noncompliant
-resultNint ^= nZero;                      // Noncompliant
-var result2 = resultNint ^= nZero;        // Noncompliant
-
-resultNint = bitMaskNint & - - -+nOne; // Noncompliant
-resultNint = bitMaskNint | + + +nZero; // Noncompliant
-
-resultNint = bitMaskNint & 1;   // Compliant
-resultNint = bitMaskNint | 1;   // Compliant
-resultNint = bitMaskNint ^ 1;   // Compliant
-resultNint &= 1;                // Compliant
-resultNint |= 1;                // Compliant
-resultNint ^= 1;                // Compliant
-
-nuint bitMaskNuint = 0x010F;
-nuint resultNuint;
-const nuint nuZero = 0;
-
-resultNuint = bitMaskNuint | + + +nuZero;   // Noncompliant
-resultNuint = bitMaskNuint & nuZero;        // Compliant
-resultNuint = bitMaskNuint ^ 0;             // Noncompliant
-resultNuint = bitMaskNuint | 0;             // Noncompliant
-resultNuint = bitMaskNuint | 0x0;           // Noncompliant
-resultNuint = bitMaskNuint ^ UIntPtr.Zero;  // Noncompliant
-resultNuint = bitMaskNuint | UIntPtr.Zero;  // Noncompliant
-resultNuint = bitMaskNuint & returnNuint(); // Compliant
-resultNuint = bitMaskNuint & 0x0F;          // Compliant
-
-MyMethod(1 | 0x00000); // Noncompliant
-
-static void MyMethod(nuint u) { }
-static nuint returnNuint() => 1;
-
 public class CSharp8
 {
     public async Task FindConstant_AwaitForEach(IAsyncEnumerable<int> values)
@@ -154,5 +109,22 @@ public class CSharp8
         var pointer6 = &bytes6; // The address of operator indicates a possible mutation through the pointer
         *pointer6 = 1; // Pointer indirect mutates a value
         _ = bytes6 | 0x80; // Compliant
+    }
+}
+
+public class CSharp13
+{
+    public class TimerRemaining
+    {
+        TimerRemaining countdown = new TimerRemaining()
+        {
+            buffer =
+        {
+            [^(42 | 0)] = 1, // Noncompliant
+            [^(42 & -1)] = 2, // Noncompliant
+            [^(42 ^ 0)] = 3, // Noncompliant
+        }
+        };
+        public int[] buffer = new int[10];
     }
 }
