@@ -20,31 +20,8 @@
 package org.sonar.plugins.vbnet;
 
 import org.sonar.api.Plugin;
+import org.sonarsource.vbnet.core.VbNetCoreExtensions;
 import org.sonarsource.vbnet.core.VbNetCorePluginMetadata;
-import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
-import org.sonarsource.dotnet.shared.plugins.DotNetRulesDefinition;
-import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
-import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
-import org.sonarsource.dotnet.shared.plugins.FileTypeSensor;
-import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
-import org.sonarsource.dotnet.shared.plugins.GlobalProtobufFileProcessor;
-import org.sonarsource.dotnet.shared.plugins.HashProvider;
-import org.sonarsource.dotnet.shared.plugins.LogSensor;
-import org.sonarsource.dotnet.shared.plugins.ModuleConfiguration;
-import org.sonarsource.dotnet.shared.plugins.ProjectTypeCollector;
-import org.sonarsource.dotnet.shared.plugins.PropertiesSensor;
-import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
-import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
-import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
-import org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter;
-import org.sonarsource.dotnet.shared.plugins.RoslynRules;
-import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
-import org.sonarsource.dotnet.shared.plugins.UnitTestResultsProvider;
-import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
-import org.sonarsource.vbnet.core.VbNetFileCacheSensor;
-import org.sonarsource.vbnet.core.VbNetLanguageConfiguration;
-import org.sonarsource.vbnet.core.VbNetPropertyDefinitions;
-import org.sonarsource.vbnet.core.VbNetSonarWayProfile;
 
 public class VbNetPlugin implements Plugin {
 
@@ -53,42 +30,7 @@ public class VbNetPlugin implements Plugin {
 
   @Override
   public void define(Context context) {
-    context.addExtensions(
-      // module-level components (some relying on deprecated Scanner APIs)
-      FileTypeSensor.class,
-      LogSensor.class,
-      PropertiesSensor.class,
-      ModuleConfiguration.class,
-      // global components
-      // collectors - they are populated by the module-level sensors
-      ProjectTypeCollector.class,
-      ReportPathCollector.class,
-      HashProvider.class,
-      DotNetRulesDefinition.class,
-      GlobalProtobufFileProcessor.class,
-      RoslynRules.class,
-      VbNetSonarWayProfile.class,
-      // sensor
-      DotNetSensor.class,
-      VbNetFileCacheSensor.class,
-      // language-specific
-      METADATA,
-      VbNetCorePluginMetadata.VbNet.class,
-      VbNetLanguageConfiguration.class,
-      // filters
-      EncodingPerFile.class,
-      GeneratedFileFilter.class,
-      WrongEncodingFileFilter.class,
-      // importers / exporters
-      ProtobufDataImporter.class,
-      RoslynDataImporter.class,
-      RoslynProfileExporter.class,
-      SonarLintProfileExporter.class);
-
-    context.addExtensions(new VbNetPropertyDefinitions(METADATA).create());
-    context.addExtensions(new CodeCoverageProvider(METADATA).extensions());
-    context.addExtensions(new UnitTestResultsProvider(METADATA).extensions());
-    context.addExtensions(RoslynProfileExporter.sonarLintRepositoryProperties(METADATA));
+    VbNetCoreExtensions.register(context, METADATA);
   }
 
   private static class VbNetPluginMetadata extends VbNetCorePluginMetadata {
