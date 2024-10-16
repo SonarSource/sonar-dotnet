@@ -1156,3 +1156,36 @@ public class NotAControllerForCoverage
     private readonly IS1 s1;
     private readonly IS2 s2;
 }
+
+namespace CSharp13
+{
+    //https://sonarsource.atlassian.net/browse/NET-509
+    [ApiController]
+    public partial class WithFieldBackedPartialProperties : ControllerBase // Compliant FN
+    {
+        private IS1 _s1;
+        private IS2 _s2;
+
+        public partial IS1 S1 { get => _s1; }
+        public partial IS2 S2 { get => _s2; init => _s2 = value; }
+
+        public WithFieldBackedPartialProperties(IS1 s1, IS2 s2) { _s1 = s1; _s2 = s2; }
+
+        public void A1() { S1.Use(); } // Compliant FN
+        public void A2() { S2.Use(); } // Compliant FN
+    }
+
+    [ApiController]
+    public partial class WithPartialIndexer : ControllerBase // Compliant FN
+    {
+        private readonly IS1 s1;
+        private readonly IS2 s2;
+        private readonly IS3 s3;
+
+        public partial int this[int i] { get { s1.Use(); return 42; } set { s2.Use(); } } // Clamp A1 and A2 together
+
+        public void A1() { s1.Use(); } // Compliant FN
+        public void A2() { s2.Use(); } // Compliant FN
+        public void A3() { s3.Use(); } // Compliant FN
+    }
+}

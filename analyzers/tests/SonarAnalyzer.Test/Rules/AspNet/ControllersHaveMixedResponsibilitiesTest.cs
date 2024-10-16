@@ -43,7 +43,7 @@ public class ControllersHaveMixedResponsibilitiesTest
     [TestMethod]
     public void ControllersHaveMixedResponsibilities_CS() =>
         builder
-            .AddPaths("ControllersHaveMixedResponsibilities.Latest.cs")
+            .AddPaths("ControllersHaveMixedResponsibilities.Latest.cs", "ControllersHaveMixedResponsibilities.Latest.Partial.cs")
             .WithLanguageVersion(LanguageVersion.Latest)
             .Verify();
 }
