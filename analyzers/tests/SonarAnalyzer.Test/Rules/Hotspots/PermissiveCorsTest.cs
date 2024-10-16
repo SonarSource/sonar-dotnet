@@ -18,72 +18,57 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class PermissiveCorsTest
 {
-    [TestClass]
-    public class PermissiveCorsTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder()
-            .AddAnalyzer(() => new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled))
-            .WithBasePath(@"Hotspots\")
-            .AddReferences(AdditionalReferences);
+    private readonly VerifierBuilder builder = new VerifierBuilder()
+        .AddAnalyzer(() => new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled))
+        .WithBasePath(@"Hotspots\")
+        .AddReferences(AdditionalReferences);
 
 #if NET
 
-        [TestMethod]
-        public void PermissiveCors_CSharp9() =>
-            builder.AddPaths("PermissiveCors.Net.cs")
-                .WithLanguageVersion(LanguageVersion.CSharp9)
-                .Verify();
+    internal static IEnumerable<MetadataReference> AdditionalReferences =>
+        [
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreCors,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpFeatures,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvc,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
+            AspNetCoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions,
+            AspNetCoreMetadataReference.MicrosoftExtensionsPrimitives,
+            AspNetCoreMetadataReference.MicrosoftNetHttpHeadersHeaderNames
+        ];
 
-        [TestMethod]
-        public void PermissiveCors_CSharp10() =>
-            builder.AddPaths("PermissiveCors.CSharp10.cs")
-                .WithLanguageVersion(LanguageVersion.CSharp10)
-                .Verify();
-
-        [TestMethod]
-        public void PermissiveCors_CSharp11() =>
-            builder.AddPaths("PermissiveCors.CSharp11.cs")
-                .WithLanguageVersion(LanguageVersion.CSharp11)
-                .Verify();
-
-        internal static IEnumerable<MetadataReference> AdditionalReferences =>
-            new[]
-            {
-                AspNetCoreMetadataReference.MicrosoftAspNetCoreCors,
-                AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
-                AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpFeatures,
-                AspNetCoreMetadataReference.MicrosoftAspNetCoreMvc,
-                AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
-                AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
-                AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
-                AspNetCoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions,
-                AspNetCoreMetadataReference.MicrosoftExtensionsPrimitives,
-                AspNetCoreMetadataReference.MicrosoftNetHttpHeadersHeaderNames
-            };
+    [TestMethod]
+    public void PermissiveCors_Latest() =>
+        builder.AddPaths("PermissiveCors.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
 
 #else
 
-        [TestMethod]
-        public void PermissiveCors_AspNet_WebApi() =>
-            builder
-                .AddPaths("PermissiveCors.NetFramework.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
+    private static IEnumerable<MetadataReference> AdditionalReferences =>
+        NuGetMetadataReference.MicrosoftNetHttpHeaders("2.1.14")
+                              .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(Constants.NuGetLatestVersion))
+                              .Concat(NuGetMetadataReference.MicrosoftAspNetWebApiCors(Constants.NuGetLatestVersion))
+                              .Concat(NuGetMetadataReference.MicrosoftNetWebApiCore(Constants.NuGetLatestVersion))
+                              .Concat(FrameworkMetadataReference.SystemWeb)
+                              .Concat(FrameworkMetadataReference.SystemNetHttp);
 
-        private static IEnumerable<MetadataReference> AdditionalReferences =>
-            NuGetMetadataReference.MicrosoftNetHttpHeaders("2.1.14")
-                                  .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(Constants.NuGetLatestVersion))
-                                  .Concat(NuGetMetadataReference.MicrosoftAspNetWebApiCors(Constants.NuGetLatestVersion))
-                                  .Concat(NuGetMetadataReference.MicrosoftNetWebApiCore(Constants.NuGetLatestVersion))
-                                  .Concat(FrameworkMetadataReference.SystemWeb)
-                                  .Concat(FrameworkMetadataReference.SystemNetHttp);
+    [TestMethod]
+    public void PermissiveCors_AspNet_WebApi() =>
+        builder
+            .AddPaths("PermissiveCors.NetFramework.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .Verify();
 
 #endif
 
-    }
 }

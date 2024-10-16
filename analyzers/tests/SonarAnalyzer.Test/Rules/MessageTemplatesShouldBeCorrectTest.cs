@@ -147,4 +147,16 @@ public class MessageTemplatesShouldBeCorrectTest
             public class MyLogger : Logger { }
             """)
         .Verify();
+
+#if NET
+
+    [TestMethod]
+    public void MessageTemplatesShouldBeCorrect_Latest() =>
+        Builder.AddPaths("MessageTemplatesShouldBeCorrect.Latest.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
+
+#endif
+
 }

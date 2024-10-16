@@ -20,67 +20,48 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class ClearTextProtocolsAreSensitiveTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled));
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void ClearTextProtocolsAreSensitive() =>
-            builder.AddPaths("ClearTextProtocolsAreSensitive.cs")
-                .AddReferences(AdditionalReferences)
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .WithConcurrentAnalysis(false)
-                .Verify();
+[TestClass]
+public class ClearTextProtocolsAreSensitiveTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled));
+
+    internal static IEnumerable<MetadataReference> AdditionalReferences =>
+        MetadataReferenceFacade.SystemNetHttp
+            .Concat(MetadataReferenceFacade.SystemComponentModelPrimitives)
+            .Concat(MetadataReferenceFacade.SystemXml)
+            .Concat(MetadataReferenceFacade.SystemXmlLinq)
+            .Concat(MetadataReferenceFacade.SystemWeb);
+
+    [TestMethod]
+    public void ClearTextProtocolsAreSensitive() =>
+        builder.AddPaths("ClearTextProtocolsAreSensitive.cs")
+            .AddReferences(AdditionalReferences)
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithConcurrentAnalysis(false)
+            .Verify();
 
 #if NETFRAMEWORK
 
-        [TestMethod]
-        public void ClearTextProtocolsAreSensitive_NetFx() =>
-            builder.AddPaths("ClearTextProtocolsAreSensitive.NetFramework.cs")
-                .AddReferences(FrameworkMetadataReference.SystemWebServices)
-                .Verify();
+    [TestMethod]
+    public void ClearTextProtocolsAreSensitive_NetFx() =>
+        builder.AddPaths("ClearTextProtocolsAreSensitive.NetFramework.cs")
+            .AddReferences(FrameworkMetadataReference.SystemWebServices)
+            .Verify();
 
 #endif
 
 #if NET
 
-        [TestMethod]
-        public void ClearTextProtocolsAreSensitive_CSharp9() =>
-            builder.AddPaths("ClearTextProtocolsAreSensitive.CSharp9.cs")
-                .WithTopLevelStatements()
-                .AddReferences(AdditionalReferences)
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
-
-        [TestMethod]
-        public void ClearTextProtocolsAreSensitive_CSharp10() =>
-            builder.AddPaths("ClearTextProtocolsAreSensitive.CSharp10.cs")
-                .WithTopLevelStatements()
-                .AddReferences(AdditionalReferences)
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
-
-        [TestMethod]
-        public void ClearTextProtocolsAreSensitive_CSharp11() =>
-            builder.AddPaths("ClearTextProtocolsAreSensitive.CSharp11.cs")
-                .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
-
-        [TestMethod]
-        public void ClearTextProtocolsAreSensitive_CSharp12() =>
-            builder.AddPaths("ClearTextProtocolsAreSensitive.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+    [TestMethod]
+    public void ClearTextProtocolsAreSensitive_Latest() =>
+        builder.AddPaths("ClearTextProtocolsAreSensitive.Latest.cs")
+            .WithTopLevelStatements()
+            .AddReferences(AdditionalReferences)
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
 
 #endif
 
-        internal static IEnumerable<MetadataReference> AdditionalReferences =>
-            MetadataReferenceFacade.SystemNetHttp
-                .Concat(MetadataReferenceFacade.SystemComponentModelPrimitives)
-                .Concat(MetadataReferenceFacade.SystemXml)
-                .Concat(MetadataReferenceFacade.SystemXmlLinq)
-                .Concat(MetadataReferenceFacade.SystemWeb);
-    }
 }

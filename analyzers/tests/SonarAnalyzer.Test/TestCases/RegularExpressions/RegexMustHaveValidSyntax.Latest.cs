@@ -87,4 +87,12 @@ class Noncompliant
         foreach (var m in Regex.EnumerateMatches(input, "[A", options)) { } // FN
         foreach (var m in Regex.EnumerateMatches(input, "[A", options, TimeSpan.FromSeconds(1))) { } // FN
     }
+
+    void EscapeSequence()
+    {
+        var regex = new Regex("\e[a|b]"); // Compliant
+        regex = new Regex("[a|\eb]");     // Compliant
+        regex = new Regex("[a|\u001bb]"); // Compliant
+        regex = new Regex("[a|b]\e");     // Compliant
+    }
 }

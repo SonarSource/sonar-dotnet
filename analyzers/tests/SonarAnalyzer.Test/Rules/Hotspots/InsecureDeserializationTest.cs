@@ -34,12 +34,8 @@ public class InsecureDeserializationTest
 #if NET
 
     [TestMethod]
-    public void InsecureDeserialization_CSharp9() =>
-        builder.AddPaths("InsecureDeserialization.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
-
-    [TestMethod]
-    public void InsecureDeserialization_CSharp10() =>
-        builder.AddPaths("InsecureDeserialization.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+    public void InsecureDeserialization_Latest() =>
+        builder.AddPaths("InsecureDeserialization.Latest.cs").WithOptions(ParseOptionsHelper.CSharpLatest).Verify();
 
 #endif
 

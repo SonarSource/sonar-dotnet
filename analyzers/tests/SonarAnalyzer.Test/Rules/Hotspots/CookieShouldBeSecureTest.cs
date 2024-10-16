@@ -24,92 +24,79 @@ using System.IO;
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class CookieShouldBeSecureTest
 {
-    [TestClass]
-    public class CookieShouldBeSecureTest
-    {
 
 #if NETFRAMEWORK
 
-        private const string WebConfig = "Web.config";
+    private const string WebConfig = "Web.config";
 
 #endif
 
-        private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled));
+    private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled));
 
-        public TestContext TestContext { get; set; }
+    public TestContext TestContext { get; set; }
 
-        [TestMethod]
-        public void CookiesShouldBeSecure_Nancy() =>
-            builder.AddPaths("CookieShouldBeSecure_Nancy.cs")
-                .AddReferences(AdditionalReferences)
-                .Verify();
+    internal static IEnumerable<MetadataReference> AdditionalReferences =>
+        NuGetMetadataReference.Nancy();
+
+    [TestMethod]
+    public void CookieShouldBeSecure_Nancy() =>
+        builder.AddPaths("CookieShouldBeSecure_Nancy.cs")
+            .AddReferences(AdditionalReferences)
+            .Verify();
 
 #if NETFRAMEWORK // HttpCookie is not available on .Net Core
 
-        [TestMethod]
-        public void CookiesShouldBeSecure() =>
-             builder.AddPaths("CookieShouldBeSecure.cs")
-                .AddReferences(MetadataReferenceFacade.SystemWeb)
-                .Verify();
+    [TestMethod]
+    public void CookieShouldBeSecure() =>
+         builder.AddPaths("CookieShouldBeSecure.cs")
+            .AddReferences(MetadataReferenceFacade.SystemWeb)
+            .Verify();
 
-        [DataTestMethod]
-        [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\SecureCookieConfig")]
-        [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\Formatting")]
-        public void CookiesShouldBeSecure_WithWebConfigValueSetToTrue(string root)
-        {
-            var webConfigPath = Path.Combine(root, WebConfig);
+    [DataTestMethod]
+    [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\SecureCookieConfig")]
+    [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\Formatting")]
+    public void CookieShouldBeSecure_WithWebConfigValueSetToTrue(string root)
+    {
+        var webConfigPath = Path.Combine(root, WebConfig);
 
-            builder.AddPaths("CookieShouldBeSecure_WithWebConfig.cs")
-                .AddReferences(MetadataReferenceFacade.SystemWeb)
-                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath))
-                .Verify();
-        }
+        builder.AddPaths("CookieShouldBeSecure_WithWebConfig.cs")
+            .AddReferences(MetadataReferenceFacade.SystemWeb)
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath))
+            .Verify();
+    }
 
-        [DataTestMethod]
-        [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\NonSecureCookieConfig")]
-        [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\UnrelatedConfig")]
-        [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\ConfigWithoutAttribute")]
-        public void CookiesShouldBeSecure_WithWebConfigValueSetToFalse(string root)
-        {
-            var webConfigPath = Path.Combine(root, WebConfig);
-            builder.AddPaths("CookieShouldBeSecure.cs")
-                .AddReferences(MetadataReferenceFacade.SystemWeb)
-                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath))
-                .Verify();
-        }
+    [DataTestMethod]
+    [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\NonSecureCookieConfig")]
+    [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\UnrelatedConfig")]
+    [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\ConfigWithoutAttribute")]
+    public void CookieShouldBeSecure_WithWebConfigValueSetToFalse(string root)
+    {
+        var webConfigPath = Path.Combine(root, WebConfig);
+        builder.AddPaths("CookieShouldBeSecure.cs")
+            .AddReferences(MetadataReferenceFacade.SystemWeb)
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath))
+            .Verify();
+    }
 
 #else
 
-        [TestMethod]
-        public void CookiesShouldBeSecure_NetCore() =>
-             builder.AddPaths("CookieShouldBeSecure_NetCore.cs")
-                .AddReferences(GetAdditionalReferences_NetCore())
-                .Verify();
+    [TestMethod]
+    public void CookieShouldBeSecure_Latest() =>
+         builder.AddPaths("CookieShouldBeSecure.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithTopLevelStatements()
+            .AddReferences(GetAdditionalReferences_NetCore())
+            .AddReferences(NuGetMetadataReference.Nancy())
+            .Verify();
 
-        [TestMethod]
-        public void CookiesShouldBeSecure_CSharp9() =>
-            builder.AddPaths("CookieShouldBeSecure.CSharp9.cs")
-                .WithTopLevelStatements()
-                .AddReferences(GetAdditionalReferences_NetCore())
-                .AddReferences(NuGetMetadataReference.Nancy())
-                .Verify();
-
-        [TestMethod]
-        public void CookiesShouldBeSecure_CSharp10() =>
-            builder.AddPaths("CookieShouldBeSecure.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .WithTopLevelStatements()
-                .AddReferences(GetAdditionalReferences_NetCore())
-                .AddReferences(NuGetMetadataReference.Nancy())
-                .Verify();
-
-        private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>
-            NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(Constants.NuGetLatestVersion);
+    private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>
+        NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(Constants.NuGetLatestVersion);
 
 #endif
-        internal static IEnumerable<MetadataReference> AdditionalReferences =>
-            NuGetMetadataReference.Nancy();
-    }
+
 }

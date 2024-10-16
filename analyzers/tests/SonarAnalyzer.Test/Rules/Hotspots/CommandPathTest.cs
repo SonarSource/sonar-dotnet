@@ -29,6 +29,7 @@ public class CommandPathTest
     private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots")
         .AddReferences(MetadataReferenceFacade.SystemDiagnosticsProcess)
         .AddAnalyzer(() => new CS.CommandPath(AnalyzerConfiguration.AlwaysEnabled));
+
     private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots")
         .AddReferences(MetadataReferenceFacade.SystemDiagnosticsProcess)
         .AddAnalyzer(() => new VB.CommandPath(AnalyzerConfiguration.AlwaysEnabled));
@@ -40,22 +41,10 @@ public class CommandPathTest
 #if NET
 
     [TestMethod]
-    public void CommandPath_CSharp10() =>
-        builderCS.AddPaths("CommandPath.CSharp10.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
+    public void CommandPath_CS_Latest() =>
+        builderCS.AddPaths("CommandPath.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
             .Verify();
-
-    [TestMethod]
-    public void CommandPath_CSharp11() =>
-        builderCS.AddPaths("CommandPath.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
-            .Verify();
-
-    [TestMethod]
-    public void CommandPath_CSharp12() =>
-        builderCS.AddPaths("CommandPath.CSharp12.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp12)
-            .VerifyNoIssues();
 
 #endif
 

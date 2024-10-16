@@ -1,7 +1,27 @@
 ﻿using System;
 using System.IO;
 
-namespace Tests.Diagnostics
+namespace CSharp10
+{
+    public class Program
+    {
+        public void Examples()
+        {
+            const string t = "T";
+            const string e = "E";
+            const string m = "M";
+            const string p = "P";
+            const string part1 = "/tEmP"; // Noncompliant
+            const string part2 = "/f";
+            const string noncompliant2 = $"{part1}{part2}"; // Noncompliant
+
+            var tmp = Environment.GetEnvironmentVariable($"{t}{e}{m}{p}"); // Noncompliant
+            tmp = Environment.GetEnvironmentVariable($"{t}{e}{m}{p}{5}");
+        }
+    }
+}
+
+namespace CSharp11
 {
     public class Program
     {
@@ -47,6 +67,41 @@ namespace Tests.Diagnostics
             tmp = @"\\Windows\Temp\f"u8;        // Noncompliant
             tmp = @"\Windows\Temp\f"u8;         // Noncompliant
         }
+    }
+}
 
+namespace CSharp12
+{
+    class PrimaryConstructor(string ctorParam = "C:\\TMP\\f",        // Noncompliant
+                             string ctorParam2 = $"C:\\{"TM"}P\\f")  // FN
+    {
+        void Method(string methodParam = "C:\\TMP\\f",        // Noncompliant
+                    string methodParam2 = $"C:\\{"TM"}P\\f")  // FN
+        {
+            const string p = "p";
+            var lambda = (string lambdaParam = "C:\\TMP\\f",                // Noncompliant
+                          string lambdaParam2 = $"C:\\{"TM"}P\\f",          // FN
+                          string lambdaParam3 = $"/tem{p}") => lambdaParam; // Noncompliant
+        }
+    }
+}
+
+namespace CSharp13
+{
+    class MyClass
+    {
+        void EscapeSequence()
+        {
+            var tmp = "\e%TEMP%\\f";                           // Compliant
+            tmp = "\e/tmp";                                    // Compliant
+            tmp = "/var\e/tmp/f";                              // Compliant
+            tmp = "/usr/tm\ep/f";                              // Compliant
+            tmp = "%USERPROFILE%\\AppData\\Local\\Temp\\f\e";  // Noncompliant
+            tmp = "/tmp/\e";                                   // Noncompliant
+            tmp = "/tmp/som\ething";                           // Noncompliant
+            tmp = @"/tmp/f\e";                                 // Noncompliant
+            tmp = "D:\\Windows\\Temp\\f\\\u001b";              // Noncompliant
+            tmp = "\\\\\eServer_Name\\Temp\\f";                // Noncompliant
+        }
     }
 }

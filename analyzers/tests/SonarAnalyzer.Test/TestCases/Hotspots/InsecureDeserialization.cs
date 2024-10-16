@@ -483,4 +483,23 @@ namespace Tests.Diagnostics
             Name = name ?? string.Empty;
         }
     }
+
+    partial class Partial
+    {
+        public Partial(string name) // Noncompliant
+        {
+            if (string.IsNullOrEmpty(name))
+                Name = name;
+        }
+    }
+
+    [Serializable]
+    partial class Partial
+    {
+        public string Name
+        {
+            get => "Name";
+            set => Name = value;
+        }
+    }
 }

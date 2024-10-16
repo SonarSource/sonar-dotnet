@@ -99,4 +99,14 @@ class CSHarp13
         CryptographicOperations.HmacDataAsync(HashAlgorithmName.SHA3_384, memoryData, stream, cancellationToken); // Compliant
         CryptographicOperations.TryHashData(HashAlgorithmName.SHA3_512, readOnlyData, hashSpan, out _);           // Compliant
     }
+
+    partial class Partial
+    {
+        partial HashAlgorithm MyHashAlgorithm { get; }
+    }
+
+    partial class Partial
+    {
+        partial HashAlgorithm MyHashAlgorithm => HashAlgorithm.Create("""System.Security.Cryptography.SHA1"""); // Noncompliant
+    }
 }

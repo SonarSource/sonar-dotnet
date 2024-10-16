@@ -130,36 +130,10 @@ public class ExecutingSqlQueriesTest
             .Verify();
 
     [TestMethod]
-    public void ExecutingSqlQueries_CSharp9() =>
-        builderCS
-            .AddPaths("ExecutingSqlQueries.CSharp9.cs")
+    public void ExecutingSqlQueries_CS_Latest() =>
+        builderCS.AddPaths("ExecutingSqlQueries.Latest.cs")
             .WithTopLevelStatements()
-            .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()))
-            .Verify();
-
-    [TestMethod]
-    public void ExecutingSqlQueries_CSharp10() =>
-        builderCS
-            .AddPaths("ExecutingSqlQueries.CSharp10.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
-            .WithTopLevelStatements()
-            .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()))
-            .Verify();
-
-    [TestMethod]
-    public void ExecutingSqlQueries_CSharp11() =>
-        builderCS
-            .AddPaths("ExecutingSqlQueries.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
-            .WithTopLevelStatements()
-            .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()))
-            .Verify();
-
-    [TestMethod]
-    public void ExecutingSqlQueries_CSharp12() =>
-        builderCS
-            .AddPaths("ExecutingSqlQueries.CSharp12.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
             .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()))
             .Verify();
 

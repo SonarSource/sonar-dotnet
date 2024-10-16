@@ -36,21 +36,9 @@ public class HardcodedIpAddressTest
 #if NET
 
     [TestMethod]
-    public void HardcodedIpAddress_CSharp10() =>
-        builderCS.AddPaths(@"Hotspots\HardcodedIpAddress.CSharp10.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
-            .Verify();
-
-    [TestMethod]
-    public void HardcodedIpAddress_CSharp11() =>
-        builderCS.AddPaths(@"Hotspots\HardcodedIpAddress.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
-            .Verify();
-
-    [TestMethod]
-    public void HardcodedIpAddress_CSharp12() =>
-        builderCS.AddPaths(@"Hotspots\HardcodedIpAddress.CSharp12.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp12)
+    public void HardcodedIpAddress_CS_Latest() =>
+        builderCS.AddPaths(@"Hotspots\HardcodedIpAddress.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
             .Verify();
 
 #endif
