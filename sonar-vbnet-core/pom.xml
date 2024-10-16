@@ -13,6 +13,7 @@
 
   <name>SonarSource :: VB.NET :: Core</name>
   <description>Shared code between VB.NET plugins</description>
+  <inceptionYear>2012</inceptionYear>
 
   <properties>
     <!-- used for deployment to SonarSource Artifactory -->
