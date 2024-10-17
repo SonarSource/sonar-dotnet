@@ -37,6 +37,11 @@ class VbNetCorePluginMetadataTest {
       public String analyzerProjectName() {
         return null;
       }
+
+      @Override
+      public String resourcesDirectory() {
+        return null;
+      }
     };
 
     assertThat(sut.languageKey()).isEqualTo("vbnet");
@@ -44,6 +49,5 @@ class VbNetCorePluginMetadataTest {
     assertThat(sut.repositoryKey()).isEqualTo("vbnet");
     assertThat(sut.fileSuffixesKey()).isEqualTo("sonar.vbnet.file.suffixes");
     assertThat(sut.fileSuffixesDefaultValue()).isEqualTo(".vb");
-    assertThat(sut.resourcesDirectory()).isEqualTo("/org/sonar/plugins/vbnet");
   }
 }

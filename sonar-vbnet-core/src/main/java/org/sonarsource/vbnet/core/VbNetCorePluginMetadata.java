@@ -52,11 +52,6 @@ public abstract class VbNetCorePluginMetadata implements PluginMetadata {
     return ".vb";
   }
 
-  @Override
-  public String resourcesDirectory() {
-    return "/org/sonar/plugins/vbnet";
-  }
-
   public class VbNet extends AbstractLanguage {
 
     // Do not make these fields public and access them directly. Use the methods in VBnetCorePluginMetadata instead.

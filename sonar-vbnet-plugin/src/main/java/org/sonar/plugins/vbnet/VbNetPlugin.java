@@ -20,13 +20,14 @@
 package org.sonar.plugins.vbnet;
 
 import org.sonar.api.Plugin;
+import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 import org.sonarsource.vbnet.core.VbNetCoreExtensions;
 import org.sonarsource.vbnet.core.VbNetCorePluginMetadata;
 
 public class VbNetPlugin implements Plugin {
 
   // Do NOT add any public fields here, and do NOT reference them directly. Add them to PluginMetadata and inject the metadata.
-  static final VbNetCorePluginMetadata METADATA = new VbNetPluginMetadata();
+  static final PluginMetadata METADATA = new VbNetPluginMetadata();
 
   @Override
   public void define(Context context) {
@@ -43,6 +44,11 @@ public class VbNetPlugin implements Plugin {
     @Override
     public String analyzerProjectName() {
       return "SonarAnalyzer.VisualBasic";
+    }
+
+    @Override
+    public String resourcesDirectory() {
+      return "/org/sonar/plugins/vbnet";
     }
   }
 }
