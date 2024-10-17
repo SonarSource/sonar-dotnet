@@ -798,6 +798,23 @@ public partial class TokenTypeAnalyzerTest
             """, allowSemanticModel);
 
     [DataTestMethod]
+    [DataRow("public [k:partial] [t:Int32] Prop { get; set; }", "public [k:partial] Int32 Prop { get => 1; set { } }")]
+    [DataRow("public partial [t:Int32] this[int index] { get; set; }", "public partial Int32 this[int index] { get => 1; set { } }")]
+    public void IdentifierToken_Type_PartialPropertyDeclaration(string propertyDeclaration, string propertyImplementation) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+
+            public partial class Test
+            {
+                {{propertyDeclaration}}
+            }
+            public partial class Test
+            {
+                {{propertyImplementation}}
+            }
+            """);
+
+    [DataTestMethod]
     [DataRow("[t:Int32]", false)]
     [DataRow("[u:System].Int32", true)]
     public void IdentifierToken_Type_LocalFunction(string returnType, bool allowSemanticModel = true) =>
@@ -1396,8 +1413,6 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-#if NET
-
     [TestMethod]
     public void CSharp12Syntax_Classification() =>
         ClassifierTestHarness.AssertTokenTypes("""
@@ -1412,6 +1427,19 @@ public partial class TokenTypeAnalyzerTest
             }
             """);
 
+#if NET
+    [TestMethod]
+    public void KeywordToken_AllowsAntiConstraintAndParameterModifiers() =>
+        ClassifierTestHarness.AssertTokenTypes("""
+            class Allows<T> where T: [k:allows] [k:ref] [k:struct]
+            {
+                public void M1([k:scoped] [t:T] [u:t])
+                { }
+                public void M1([k:ref] [k:readonly] T t)
+                { }
+                public void M2([k:in] T t)
+                { }
+            }
+            """);
 #endif
-
 }
