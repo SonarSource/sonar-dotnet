@@ -164,16 +164,6 @@ public class IEnumerableExtensionsTest
         new StructType?[] { new StructType(1), new StructType(2), null }.WhereNotNull().Should().BeEquivalentTo(new object[] { new StructType(1), new StructType(2) });
     }
 
-    private struct StructType
-    {
-        private readonly int count;
-
-        public StructType(int count)
-        {
-            this.count = count;
-        }
-    }
-
     [TestMethod]
     public void JoinAndNull() =>
         ((object[])null).JoinAnd().Should().Be(string.Empty);
@@ -224,6 +214,16 @@ public class IEnumerableExtensionsTest
         };
         var result = collection.JoinAnd();
         result.Should().Be("System.IndexOutOfRangeException: IndexOutOfRangeMessage, System.InvalidOperationException: OperationMessage, and System.NotSupportedException: NotSupportedMessage");
+    }
+
+    private struct StructType
+    {
+        private readonly int count;
+
+        public StructType(int count)
+        {
+            this.count = count;
+        }
     }
 }
 

@@ -134,7 +134,7 @@ public class AnalyzerConfigurationTest
     public void HotspotConfiguration_WhenIsEnabledWithoutInitialized_ThrowException()
     {
         var sut = new HotspotConfiguration(ruleLoader);
-        sut.Invoking(x => x.IsEnabled("")).Should().Throw<InvalidOperationException>().WithMessage("Call Initialize() before calling IsEnabled().");
+        sut.Invoking(x => x.IsEnabled(string.Empty)).Should().Throw<InvalidOperationException>().WithMessage("Call Initialize() before calling IsEnabled().");
     }
 
     [TestMethod]
