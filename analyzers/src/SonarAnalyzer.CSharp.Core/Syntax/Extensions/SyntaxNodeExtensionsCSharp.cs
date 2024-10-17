@@ -438,6 +438,7 @@ public static class SyntaxNodeExtensionsCSharp
             { RawKind: (int)SyntaxKindEx.NotPattern } => IsFalse(((UnaryPatternSyntaxWrapper)node).Pattern), // is not false
             { RawKind: (int)SyntaxKind.ParenthesizedExpression } => IsTrue(((ParenthesizedExpressionSyntax)node).Expression), // (true)
             { RawKind: (int)SyntaxKindEx.ParenthesizedPattern } => IsTrue(((ParenthesizedPatternSyntaxWrapper)node).Pattern), // is (true)
+            { RawKind: (int)SyntaxKindEx.SuppressNullableWarningExpression } => IsTrue(((PostfixUnaryExpressionSyntax)node).Operand), // true!
             _ => false,
         };
 
@@ -450,6 +451,7 @@ public static class SyntaxNodeExtensionsCSharp
             { RawKind: (int)SyntaxKindEx.NotPattern } => IsTrue(((UnaryPatternSyntaxWrapper)node).Pattern), // is not true
             { RawKind: (int)SyntaxKind.ParenthesizedExpression } => IsFalse(((ParenthesizedExpressionSyntax)node).Expression), // (false)
             { RawKind: (int)SyntaxKindEx.ParenthesizedPattern } => IsFalse(((ParenthesizedPatternSyntaxWrapper)node).Pattern), // is (false)
+            { RawKind: (int)SyntaxKindEx.SuppressNullableWarningExpression } => IsFalse(((PostfixUnaryExpressionSyntax)node).Operand), // false!
             _ => false,
         };
 
