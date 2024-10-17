@@ -32,4 +32,9 @@ class TestVbNetMetadata extends VbNetCorePluginMetadata {
   public String analyzerProjectName() {
     return "VbNet Test Project Name";
   }
+
+  @Override
+  public String resourcesDirectory() {
+    return "VbNet Test Resources Directory";
+  }
 }
