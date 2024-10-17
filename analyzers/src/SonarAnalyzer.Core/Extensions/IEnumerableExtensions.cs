@@ -24,27 +24,23 @@ public static class IEnumerableExtensions
 {
     public static HashSet<T> ToHashSet<T>(this IEnumerable<T> enumerable, IEqualityComparer<T> equalityComparer = null)
     {
-        if (enumerable == null)
+        if (enumerable is null)
         {
-            return equalityComparer != null
-                ? new HashSet<T>(equalityComparer)
-                : new HashSet<T>();
+            return equalityComparer is null ? new() : new(equalityComparer);
         }
-
-        return equalityComparer != null
-            ? new HashSet<T>(enumerable, equalityComparer)
-            : new HashSet<T>(enumerable);
+        else
+        {
+            return equalityComparer is null ? new(enumerable) : new(enumerable, equalityComparer);
+        }
     }
 
     /// <summary>
     /// Compares each element between two collections. The elements needs in the same order to be considered equal.
     /// </summary>
-    public static bool Equals<T, V>(this IEnumerable<T> first, IEnumerable<V> second,
-        Func<T, V, bool> predicate)
+    public static bool Equals<T, V>(this IEnumerable<T> first, IEnumerable<V> second, Func<T, V, bool> predicate)
     {
         var enum1 = first.GetEnumerator();
         var enum2 = second.GetEnumerator();
-
         var enum1HasNext = enum1.MoveNext();
         var enum2HasNext = enum2.MoveNext();
 
@@ -62,17 +58,11 @@ public static class IEnumerableExtensions
         return enum1HasNext == enum2HasNext;
     }
 
-    public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T> enumerable)
-        where T : class
-    {
-        return enumerable.Where(e => e != null);
-    }
+    public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T> enumerable) where T : class =>
+        enumerable.Where(x => x is not null);
 
-    public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<Nullable<T>> enumerable)
-            where T : struct
-    {
-        return enumerable.Where(x => x.HasValue).Select(x => x.Value);
-    }
+    public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> enumerable) where T : struct =>
+        enumerable.Where(x => x.HasValue).Select(x => x.Value);
 
     /// <summary>
     /// Applies a specified function to the corresponding elements of two sequences,
@@ -90,27 +80,21 @@ public static class IEnumerableExtensions
     /// two input sequences.</returns>
     public static IEnumerable<TResult> Merge<TFirst, TSecond, TResult>(this IEnumerable<TFirst> first, IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> operation)
     {
-        using (var iter1 = first.GetEnumerator())
-        using (var iter2 = second.GetEnumerator())
+        using var iter1 = first.GetEnumerator();
+        using var iter2 = second.GetEnumerator();
+        while (iter1.MoveNext())
         {
-            while (iter1.MoveNext())
-            {
-                yield return operation(iter1.Current,
-                     iter2.MoveNext() ? iter2.Current : default(TSecond));
-            }
+            yield return operation(iter1.Current, iter2.MoveNext() ? iter2.Current : default);
+        }
 
-            while (iter2.MoveNext())
-            {
-                yield return operation(default(TFirst), iter2.Current);
-            }
+        while (iter2.MoveNext())
+        {
+            yield return operation(default, iter2.Current);
         }
     }
 
     public static int IndexOf<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate) =>
-        enumerable
-            .Select((item, index) => new { item, index })
-            .FirstOrDefault(x => predicate(x.item))
-            ?.index ?? -1;
+        enumerable.Select((item, index) => new { item, index }).FirstOrDefault(x => predicate(x.item))?.index ?? -1;
 
     /// <summary>
     /// This is <see cref="string.Join"/> as extension. It concatenates the members of the collection using the specified <paramref name="separator"/> between each member.
