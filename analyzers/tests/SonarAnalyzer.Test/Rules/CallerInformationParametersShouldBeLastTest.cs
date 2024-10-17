@@ -35,16 +35,8 @@ public class CallerInformationParametersShouldBeLastTest
 #if NET
 
     [TestMethod]
-    public void CallerInformationParametersShouldBeLast_CSharp9() =>
-        builder.AddPaths("CallerInformationParametersShouldBeLast.CSharp9.cs").WithTopLevelStatements().Verify();
-
-    [TestMethod]
-    public void CallerInformationParametersShouldBeLast_CSharp10() =>
-        builder.AddPaths("CallerInformationParametersShouldBeLast.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
-
-    [TestMethod]
-    public void CallerInformationParametersShouldBeLast_CSharp11() =>
-        builder.AddPaths("CallerInformationParametersShouldBeLast.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).VerifyNoIssues();
+    public void CallerInformationParametersShouldBeLast_CS_Latest() =>
+        builder.AddPaths("CallerInformationParametersShouldBeLast.Latest.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.CSharpLatest).Verify();
 
 #endif
 

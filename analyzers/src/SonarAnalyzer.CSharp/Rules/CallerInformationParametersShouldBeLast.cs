@@ -35,15 +35,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 ReportOnViolation,
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration,
-                SyntaxKindEx.LocalFunctionStatement);
+                SyntaxKind.DelegateDeclaration,
+                SyntaxKindEx.LocalFunctionStatement,
+                SyntaxKind.ClassDeclaration,
+                SyntaxKindEx.RecordDeclaration,
+                SyntaxKindEx.RecordStructDeclaration);
 
         private static void ReportOnViolation(SonarSyntaxNodeReportingContext context)
         {
             var methodDeclaration = context.Node;
-            var parameterList = LocalFunctionStatementSyntaxWrapper.IsInstance(methodDeclaration)
-                ? ((LocalFunctionStatementSyntaxWrapper)methodDeclaration).ParameterList
-                : ((BaseMethodDeclarationSyntax)methodDeclaration).ParameterList;
-
+            var parameterList = methodDeclaration.ParameterList();
             if (parameterList is null or { Parameters.Count: 0 })
             {
                 return;
