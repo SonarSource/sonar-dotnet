@@ -21,58 +21,42 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class BooleanLiteralUnnecessaryTest
 {
-    [TestClass]
-    public class BooleanLiteralUnnecessaryTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.BooleanLiteralUnnecessary>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.BooleanLiteralUnnecessary>();
 
-        [TestMethod]
-        public void BooleanLiteralUnnecessary_CS() =>
-            builderCS.AddPaths("BooleanLiteralUnnecessary.cs").Verify();
+    [TestMethod]
+    public void BooleanLiteralUnnecessary_CS() =>
+        builderCS.AddPaths("BooleanLiteralUnnecessary.cs").Verify();
 
-        [TestMethod]
-        public void BooleanLiteralUnnecessary_CodeFix_CS() =>
-            builderCS.AddPaths("BooleanLiteralUnnecessary.cs")
-                .WithCodeFix<CS.BooleanLiteralUnnecessaryCodeFix>()
-                .WithCodeFixedPaths("BooleanLiteralUnnecessary.Fixed.cs")
-                .VerifyCodeFix();
-
-        [TestMethod]
-        public void BooleanLiteralUnnecessary_CSharp8() =>
-            builderCS.AddPaths("BooleanLiteralUnnecessary.CSharp8.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .Verify();
-
-        [TestMethod]
-        public void BooleanLiteralUnnecessary_CodeFix_CSharp8() =>
-            builderCS.AddPaths("BooleanLiteralUnnecessary.CSharp8.cs")
-                .WithCodeFix<CS.BooleanLiteralUnnecessaryCodeFix>()
-                .WithCodeFixedPaths("BooleanLiteralUnnecessary.CSharp8.Fixed.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .VerifyCodeFix();
+    [TestMethod]
+    public void BooleanLiteralUnnecessary_CodeFix_CS() =>
+        builderCS.AddPaths("BooleanLiteralUnnecessary.cs")
+            .WithCodeFix<CS.BooleanLiteralUnnecessaryCodeFix>()
+            .WithCodeFixedPaths("BooleanLiteralUnnecessary.Fixed.cs")
+            .VerifyCodeFix();
 
 #if NET
+    [TestMethod]
+    public void BooleanLiteralUnnecessary_Latest() =>
+        builderCS.AddPaths("BooleanLiteralUnnecessary.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
 
-        [TestMethod]
-        public void BooleanLiteralUnnecessary_CSharp9() =>
-            builderCS.AddPaths("BooleanLiteralUnnecessary.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
-
-        [TestMethod]
-        public void BooleanLiteralUnnecessary_CodeFix_CSharp9() =>
-            builderCS.AddPaths("BooleanLiteralUnnecessary.CSharp9.cs")
-                .WithCodeFix<CS.BooleanLiteralUnnecessaryCodeFix>()
-                .WithCodeFixedPaths("BooleanLiteralUnnecessary.CSharp9.Fixed.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .VerifyCodeFix();
+    [TestMethod]
+    public void BooleanLiteralUnnecessary_CodeFix_Latest() =>
+        builderCS.AddPaths("BooleanLiteralUnnecessary.Latest.cs")
+            .WithCodeFix<CS.BooleanLiteralUnnecessaryCodeFix>()
+            .WithCodeFixedPaths("BooleanLiteralUnnecessary.Latest.Fixed.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .VerifyCodeFix();
 
 #endif
 
-        [TestMethod]
-        public void BooleanLiteralUnnecessary_VB() =>
-            new VerifierBuilder<VB.BooleanLiteralUnnecessary>().AddPaths("BooleanLiteralUnnecessary.vb").Verify();
-    }
+    [TestMethod]
+    public void BooleanLiteralUnnecessary_VB() =>
+        new VerifierBuilder<VB.BooleanLiteralUnnecessary>().AddPaths("BooleanLiteralUnnecessary.vb").Verify();
 }
