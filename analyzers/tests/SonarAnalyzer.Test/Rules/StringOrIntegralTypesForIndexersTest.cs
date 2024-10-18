@@ -37,9 +37,9 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
 
         [TestMethod]
-        public void StringOrIntegralTypesForIndexers_CSharp9() =>
-            builder.AddPaths("StringOrIntegralTypesForIndexers.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+        public void StringOrIntegralTypesForIndexers_Latest() =>
+            builder.AddPaths("StringOrIntegralTypesForIndexers.Latest.cs", "StringOrIntegralTypesForIndexers.Latest.Partial.cs")
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .Verify();
 
 #endif
