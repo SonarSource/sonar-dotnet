@@ -50,12 +50,12 @@ public class ObsoleteAttributesTest
 
 #if NET
     [TestMethod]
-    public void ObsoleteAttributesNeedExplanation_CSharp9() =>
-        explanationNeededCS.AddPaths("ObsoleteAttributesNeedExplanation.CSharp9.cs").WithTopLevelStatements().Verify();
-
-    [TestMethod]
-    public void ObsoleteAttributesNeedExplanation_CSharp10() =>
-        explanationNeededCS.AddPaths("ObsoleteAttributesNeedExplanation.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+    public void ObsoleteAttributesNeedExplanation_CS_Latest() =>
+        explanationNeededCS
+            .AddPaths("ObsoleteAttributesNeedExplanation.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithTopLevelStatements()
+            .Verify();
 
     [TestMethod]
     public void ObsoleteAttributesNeedExplanation_VB14() =>
@@ -71,12 +71,14 @@ public class ObsoleteAttributesTest
     public void RemoveObsoleteCode_CS() =>
         removeCS.AddPaths("RemoveObsoleteCode.cs").Verify();
 
+#if NET
     [TestMethod]
-    public void RemoveObsoleteCode_CSharp10() =>
-        removeCS.AddPaths("RemoveObsoleteCode.CSharp10.cs")
-        .WithTopLevelStatements()
-        .WithOptions(ParseOptionsHelper.FromCSharp10)
-        .Verify();
+    public void RemoveObsoleteCode_Latest() =>
+        removeCS.AddPaths("RemoveObsoleteCode.Latest.cs")
+            .WithTopLevelStatements()
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
+#endif
 
     [TestMethod]
     public void RemoveObsoleteCode_VB() =>
