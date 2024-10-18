@@ -21,32 +21,29 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class ParameterAssignedToTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ParameterAssignedTo>();
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ParameterAssignedTo>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void ParameterAssignedTo_CS() =>
-            builderCS.AddPaths("ParameterAssignedTo.cs").Verify();
+[TestClass]
+public class ParameterAssignedToTest
+{
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ParameterAssignedTo>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ParameterAssignedTo>();
+
+    [TestMethod]
+    public void ParameterAssignedTo_CS() =>
+        builderCS.AddPaths("ParameterAssignedTo.cs").Verify();
 
 #if NET
-
-        [TestMethod]
-        public void ParameterAssignedTo_CSharp9() =>
-            builderCS.AddPaths("ParameterAssignedTo.CSharp9.cs").WithTopLevelStatements().Verify();
-
-        [TestMethod]
-        public void ParameterAssignedTo_CSharp10() =>
-            builderCS.AddPaths("ParameterAssignedTo.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
-
+    [TestMethod]
+    public void ParameterAssignedTo_CS_Latest() =>
+        builderCS
+            .AddPaths("ParameterAssignedTo.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithTopLevelStatements()
+            .Verify();
 #endif
 
-        [TestMethod]
-        public void ParameterAssignedTo_VB() =>
-            builderVB.AddPaths("ParameterAssignedTo.vb").Verify();
-    }
+    [TestMethod]
+    public void ParameterAssignedTo_VB() =>
+        builderVB.AddPaths("ParameterAssignedTo.vb").Verify();
 }
