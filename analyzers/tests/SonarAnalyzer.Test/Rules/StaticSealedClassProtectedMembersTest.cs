@@ -34,9 +34,9 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
 
         [TestMethod]
-        public void StaticSealedClassProtectedMembers_CSharp9() =>
-            builder.AddPaths("StaticSealedClassProtectedMembers.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+        public void StaticSealedClassProtectedMembers_Latest() =>
+            builder.AddPaths("StaticSealedClassProtectedMembers.Latest.cs", "StaticSealedClassProtectedMembers.Latest.Partial.cs")
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .Verify();
 
 #endif
