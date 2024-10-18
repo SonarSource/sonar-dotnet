@@ -1,8 +1,20 @@
-﻿using System;
+﻿#nullable enable
+using System;
 
 int target = 32; // Noncompliant {{Add the 'const' modifier to 'target'.}}
 //  ^^^^^^
+int usedTarget = 40; // Compliant
 const int alreadyConst = 32;
+
+(int i, usedTarget) = (target, target);
+(usedTarget, int k) = (alreadyConst, alreadyConst);
+
+var s1 = $"This is a {nameof(target)}";      // Noncompliant {{Add the 'const' modifier to 's1', and replace 'var' with 'string?'.}}
+string s2 = $"This is a {nameof(target)}";   // Noncompliant {{Add the 'const' modifier to 's2'.}}
+var s3 = "This is a" + $" {nameof(target)}"; // Noncompliant {{Add the 'const' modifier to 's3', and replace 'var' with 'string?'.}}
+var s4 = $@"This is a {nameof(target)}";     // Noncompliant {{Add the 'const' modifier to 's4', and replace 'var' with 'string?'.}}
+FormattableString s6 = $"hello";             // Compliant
+#nullable disable
 
 if (target == alreadyConst)
 {
@@ -19,6 +31,42 @@ nuint bar2 = UIntPtr.Zero; // Compliant - UIntPtr.Zero is not compile time const
 if (target == (int)bar)
 {
 }
+
+int i1 = 32; // Noncompliant 
+const int i2 = 32; // Compliant
+
+IntPtr ptrFoo = 42; // Noncompliant
+UIntPtr foo2 = 42; // Noncompliant
+
+const IntPtr constFoo = 42; // Compliant
+const UIntPtr constFoo2 = 42; // Compliant
+
+IntPtr ptrBar = 31; // Compliant
+ptrBar++;
+
+IntPtr ptrBar2 = 31; // Compliant
+ptrBar2++;
+
+IntPtr zero1 = IntPtr.Zero; // Compliant - IntPtr.Zero is not compile time constant
+UIntPtr zero2 = UIntPtr.Zero; // Compliant - UIntPtr.Zero is not compile time constant
+
+IntPtr compared = 42; // Noncompliant - (==) does not alter the value, should be const
+
+if (compared == 42)
+{
+}
+
+Func<nint> staticLambda1 = static () =>
+{
+    IntPtr v = 41; // Noncompliant
+    return v;
+};
+
+Func<nuint> staticLamba2 = static () =>
+{
+    UIntPtr v = 41; // Noncompliant
+    return v;
+};
 
 Func<int, int> staticLambda = static (t) =>
 {
