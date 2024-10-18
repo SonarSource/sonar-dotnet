@@ -4429,3 +4429,19 @@ public class Repro_9580
         }
     }
 }
+
+// https://sonarsource.atlassian.net/browse/NET-540
+public class Repro_NET540
+{
+    private void Method()
+    {
+        bool isDebug = false;
+#if UNSET_PREPROCESSOR
+        isDebug = true;
+#endif
+        if(isDebug) // Noncompliant - FP
+        {
+            // Something
+        }
+    }
+}
