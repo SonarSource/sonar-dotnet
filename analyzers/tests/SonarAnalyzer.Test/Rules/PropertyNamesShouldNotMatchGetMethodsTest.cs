@@ -43,15 +43,12 @@ public class PropertyNamesShouldNotMatchGetMethodsTest
             """).VerifyNoIssuesIgnoreErrors();
 
 #if NET
-
     [TestMethod]
-    public void PropertyNamesShouldNotMatchGetMethods_CSharp9() =>
-        builder.AddPaths("PropertyNamesShouldNotMatchGetMethods.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
-
-    [TestMethod]
-    public void PropertyNamesShouldNotMatchGetMethods_CSharp10() =>
-        builder.AddPaths("PropertyNamesShouldNotMatchGetMethods.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
-
+    public void PropertyNamesShouldNotMatchGetMethods_Latest() =>
+        builder
+            .AddPaths("PropertyNamesShouldNotMatchGetMethods.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
 #endif
 
 }
