@@ -15,11 +15,6 @@
   <description>Shared code between VB.NET plugins</description>
   <inceptionYear>2012</inceptionYear>
 
-  <properties>
-    <!-- used for deployment to SonarSource Artifactory -->
-    <gitRepositoryName>sonar-vbnet-core</gitRepositoryName>
-  </properties>
-
   <dependencies>
     <!-- provided at runtime -->
     <dependency>
