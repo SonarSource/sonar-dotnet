@@ -32,6 +32,12 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("RedundantPropertyNamesInAnonymousClass.cs").Verify();
 
         [TestMethod]
+        public void RedundantPropertyNamesInAnonymousClass_Latest() =>
+            builder.AddPaths("RedundantPropertyNamesInAnonymousClass.Latest.cs", "RedundantPropertyNamesInAnonymousClass.Latest.Partial.cs")
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .Verify();
+
+        [TestMethod]
         public void RedundantPropertyNamesInAnonymousClass_CodeFix() =>
             builder.AddPaths("RedundantPropertyNamesInAnonymousClass.cs")
                 .WithCodeFix<RedundantPropertyNamesInAnonymousClassCodeFix>()
