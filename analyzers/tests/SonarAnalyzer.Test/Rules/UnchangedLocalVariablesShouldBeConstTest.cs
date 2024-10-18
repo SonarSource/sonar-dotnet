@@ -31,27 +31,20 @@ public class UnchangedLocalVariablesShouldBeConstTest
     public void UnchangedLocalVariablesShouldBeConst() =>
         verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.cs").Verify();
 
-    [TestMethod]
-    public void UnchangedLocalVariablesShouldBeConst_CSharp7() =>
-        verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.CSharp7.cs").WithOptions(ParseOptionsHelper.OnlyCSharp7).Verify();
-
 #if NET
 
     [TestMethod]
-    public void UnchangedLocalVariablesShouldBeConst_CSharp9() =>
-        verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.CSharp9.cs").WithTopLevelStatements().Verify();
+    public void UnchangedLocalVariablesShouldBeConst_TopLevelStatements() =>
+        verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.TopLevelStatements.cs")
+        .WithOptions(ParseOptionsHelper.CSharpLatest)
+        .WithTopLevelStatements()
+        .Verify();
 
     [TestMethod]
-    public void UnchangedLocalVariablesShouldBeConst_CSharp10() =>
-        verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).WithTopLevelStatements().Verify();
-
-    [TestMethod]
-    public void UnchangedLocalVariablesShouldBeConst_CSharp11() =>
-        verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).WithTopLevelStatements().Verify();
-
-    [TestMethod]
-    public void UnchangedLocalVariablesShouldBeConst_CSharp12() =>
-        verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+    public void UnchangedLocalVariablesShouldBeConst_Latest() =>
+        verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.Latest.cs")
+        .WithOptions(ParseOptionsHelper.CSharpLatest)
+        .Verify();
 
 #endif
 
