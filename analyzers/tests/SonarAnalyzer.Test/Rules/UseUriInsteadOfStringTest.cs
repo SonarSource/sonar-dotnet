@@ -36,16 +36,16 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
 
         [TestMethod]
-        public void UseUriInsteadOfString_CSharp9() =>
-            builder.AddPaths("UseUriInsteadOfString.CSharp9.cs").WithTopLevelStatements().Verify();
+        public void UseUriInsteadOfString_TopLevelStatements() =>
+            builder.AddPaths("UseUriInsteadOfString.TopLevelStatements.cs")
+                .WithTopLevelStatements()
+                .Verify();
 
         [TestMethod]
-        public void UseUriInsteadOfString_CSharp10() =>
-            builder.AddPaths("UseUriInsteadOfString.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
-
-        [TestMethod]
-        public void UseUriInsteadOfString_CSharp11() =>
-            builder.AddPaths("UseUriInsteadOfString.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+        public void UseUriInsteadOfString_Latest() =>
+            builder.AddPaths("UseUriInsteadOfString.Latest.cs", "UseUriInsteadOfString.Latest.Partial.cs")
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .Verify();
 
 #endif
 
