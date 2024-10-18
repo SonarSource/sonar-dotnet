@@ -20,13 +20,23 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class PreferJaggedArraysOverMultidimensionalTest
 {
-    [TestClass]
-    public class PreferJaggedArraysOverMultidimensionalTest
-    {
-        [TestMethod]
-        public void PreferJaggedArraysOverMultidimensional() =>
-            new VerifierBuilder<PreferJaggedArraysOverMultidimensional>().AddPaths("PreferJaggedArraysOverMultidimensional.cs").Verify();
-    }
+    private readonly VerifierBuilder builder = new VerifierBuilder<PreferJaggedArraysOverMultidimensional>();
+
+    [TestMethod]
+    public void PreferJaggedArraysOverMultidimensional() =>
+        builder.AddPaths("PreferJaggedArraysOverMultidimensional.cs").Verify();
+
+#if NET
+    [TestMethod]
+    public void PreferJaggedArraysOverMultidimensional_Latest() =>
+        builder
+            .AddPaths("PreferJaggedArraysOverMultidimensional.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
+#endif
 }
