@@ -34,21 +34,15 @@ public class ClassWithOnlyStaticMemberTest
 #if NET
 
     [TestMethod]
-    public void ClassWithOnlyStaticMember_CSharp9() =>
-        builder.AddPaths("ClassWithOnlyStaticMember.CSharp9.cs")
+    public void ClassWithOnlyStaticMember_TopLevelStatements() =>
+        builder.AddPaths("ClassWithOnlyStaticMember.TopLevelStatements.cs")
             .WithTopLevelStatements()
             .VerifyNoIssues();
 
     [TestMethod]
-    public void ClassWithOnlyStaticMember_CSharp11() =>
-        builder.AddPaths("ClassWithOnlyStaticMember.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
-            .VerifyNoIssues();
-
-    [TestMethod]
-    public void ClassWithOnlyStaticMember_CSharp12() =>
-        builder.AddPaths("ClassWithOnlyStaticMember.CSharp12.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp12)
+    public void ClassWithOnlyStaticMember_Latest() =>
+        builder.AddPaths("ClassWithOnlyStaticMember.Latest.cs", "ClassWithOnlyStaticMember.Latest.Partial.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
             .Verify();
 
 #endif
