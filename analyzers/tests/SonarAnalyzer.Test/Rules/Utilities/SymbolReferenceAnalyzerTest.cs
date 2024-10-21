@@ -138,6 +138,45 @@ namespace SonarAnalyzer.Test.Rules
             Verify("Method.cs", projectType, 4, 3, 9);
 
         [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
+        public void Verify_Method_Partial_CS(ProjectType projectType)
+        {
+            var builder = CreateBuilder(projectType, "Method_Partial1.cs", "Method_Partial2.cs");
+            builder.VerifyUtilityAnalyzer<SymbolReferenceInfo>(x => x.OrderBy(x => x.FilePath).Should().SatisfyRespectively(
+                p1 =>
+                {
+                    p1.FilePath.Should().Be(@"Utilities\SymbolReferenceAnalyzer\Method_Partial1.cs");
+                    p1.Reference.Should().HaveCount(5, because: "a class, 3 partial methods, and a referencing method are declared");
+
+                    var unimplementedReference = p1.Reference[1];
+                    unimplementedReference.Declaration.StartLine.Should().Be(5, because: "the Unimplemented() method is declared here");
+                    unimplementedReference.Reference.Should().ContainSingle(because: "the method is referenced inside Reference1() once").Subject.StartLine.Should().Be(11, because: "The reference to Unimplemented() happens here");
+
+                    var implemented1Reference = p1.Reference[2];
+                    implemented1Reference.Declaration.StartLine.Should().Be(6, because: "the Implemented1() method is declared here");
+                    implemented1Reference.Reference.Should().BeEmpty(because: "undetected usage of Implemented1()"); // https://sonarsource.atlassian.net/browse/NET-550
+
+                    var implemented2Reference = p1.Reference[3];
+                    implemented2Reference.Declaration.StartLine.Should().Be(7, because: "the Implemented2() method is declared here");
+                    implemented2Reference.Reference.Should().ContainSingle(because: "the method is referenced inside Reference1() once").Subject.StartLine.Should().Be(13, because: "The reference to Implemented2() happens here");
+                },
+                p2 =>
+                {
+                    p2.FilePath.Should().Be(@"Utilities\SymbolReferenceAnalyzer\Method_Partial2.cs");
+                    p2.Reference.Should().HaveCount(4, because: "a class, 2 partial methods, and a referencing method are declared");
+
+                    var implemented1Reference = p2.Reference[1];
+                    implemented1Reference.Declaration.StartLine.Should().Be(5, because: "the Implemented1() method is declared here");
+                    implemented1Reference.Reference.Should().ContainSingle(because: "the method is referenced inside Reference2() once").Subject.StartLine.Should().Be(11, because: "The reference to Implemented1() happens here");
+
+                    var implemented2Reference = p2.Reference[2];
+                    implemented2Reference.Declaration.StartLine.Should().Be(6, because: "the Implemented2() method is declared here");
+                    implemented2Reference.Reference.Should().BeEmpty(because: "undetected usage of Implemented2()"); // https://sonarsource.atlassian.net/browse/NET-550
+                }));
+        }
+
+        [DataTestMethod]
         [DataRow("NamedType.cs", ProjectType.Product)]
         [DataRow("NamedType.cs", ProjectType.Test)]
         [DataRow("NamedType.ReservedKeyword.cs", ProjectType.Product)]
@@ -174,6 +213,31 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow(ProjectType.Test)]
         public void Verify_Property_CS(ProjectType projectType) =>
             Verify("Property.cs", projectType, 5, 3, 9, 10);
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
+        public void Verify_Property_Partial_CS(ProjectType projectType)
+        {
+            var builder = CreateBuilder(projectType, "Property_Partial1.cs", "Property_Partial2.cs");
+            builder.VerifyUtilityAnalyzer<SymbolReferenceInfo>(x => x.OrderBy(x => x.FilePath).Should().SatisfyRespectively(
+                p1 =>
+                {
+                    p1.FilePath.Should().Be(@"Utilities\SymbolReferenceAnalyzer\Property_Partial1.cs");
+                    p1.Reference.Should().HaveCount(3, because: "a class, a property, and a method are declared");
+                    var secondReference = p1.Reference[1];
+                    secondReference.Declaration.StartLine.Should().Be(5, because: "the property is declared here");
+                    secondReference.Reference.Should().BeEmpty(because: "undetected usage of Property in Reference1()"); // https://sonarsource.atlassian.net/browse/NET-550
+                },
+                p2 =>
+                {
+                    p2.FilePath.Should().Be(@"Utilities\SymbolReferenceAnalyzer\Property_Partial2.cs");
+                    p2.Reference.Should().HaveCount(3, because: "a class, a property, and a method are declared");
+                    var secondReference = p2.Reference[1];
+                    secondReference.Declaration.StartLine.Should().Be(5, because: "the property is declared here");
+                    secondReference.Reference.Should().ContainSingle(because: "the property is referenced inside Reference2() once").Subject.StartLine.Should().Be(9, because: "The reference to Property happens here");
+                }));
+        }
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
