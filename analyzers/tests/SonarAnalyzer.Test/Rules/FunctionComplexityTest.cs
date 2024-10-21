@@ -31,18 +31,11 @@ namespace SonarAnalyzer.Test.Rules
         public void FunctionComplexity_CS() =>
             CreateCSBuilder(3).AddPaths("FunctionComplexity.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
-        [TestMethod]
-        public void FunctionComplexity_LocalFunctions() =>
-            CreateCSBuilder(3).AddPaths("FunctionComplexity.LocalFunctions.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
-
 #if NET
         [TestMethod]
-        public void FunctionComplexity_CSharp9() =>
-            CreateCSBuilder(3).AddPaths("FunctionComplexity.CSharp9.cs").WithTopLevelStatements().Verify();
+        public void FunctionComplexity_CS_Latest() =>
+            CreateCSBuilder(3).AddPaths("FunctionComplexity.Latest.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.CSharpLatest).Verify();
 
-        [TestMethod]
-        public void FunctionComplexity_CSharp10() =>
-            CreateCSBuilder(1).AddPaths("FunctionComplexity.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 #endif
 
         [TestMethod]

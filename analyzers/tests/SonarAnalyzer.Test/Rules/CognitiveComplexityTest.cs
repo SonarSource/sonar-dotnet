@@ -37,33 +37,13 @@ namespace SonarAnalyzer.Test.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
 
-        [TestMethod]
-        public void CognitiveComplexity_CS_LocalFunctions() =>
-            builderCS.AddPaths("CognitiveComplexity.LocalFunctions.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .Verify();
-
 #if NET
-
         [TestMethod]
-        public void CognitiveComplexity_CS_CSharp9() =>
-            builderCS.AddPaths("CognitiveComplexity.CSharp9.cs")
+        public void CognitiveComplexity_CS_Latest() =>
+            builderCS.AddPaths("CognitiveComplexity.Latest.cs")
                 .WithTopLevelStatements()
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .Verify();
-
-        [TestMethod]
-        public void CognitiveComplexity_CS_CSharp10() =>
-            builderCS.AddPaths("CognitiveComplexity.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .WithConcurrentAnalysis(false)
-                .Verify();
-
-        [TestMethod]
-        public void CognitiveComplexity_CS_CSharp11() =>
-            builderCS.AddPaths("CognitiveComplexity.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
-
 #endif
 
         [TestMethod]
