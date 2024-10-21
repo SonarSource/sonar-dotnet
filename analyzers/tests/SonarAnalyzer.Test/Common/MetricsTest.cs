@@ -300,38 +300,50 @@ End Class")
 
 #if NET
 
-        [TestMethod]
-        public void Functions()
-        {
-            Functions(AnalyzerLanguage.CSharp, string.Empty).Should().Be(0);
-            Functions(AnalyzerLanguage.CSharp, "class Sample { }").Should().Be(0);
-            Functions(AnalyzerLanguage.CSharp, "abstract class Sample { public abstract void MyMethod1(); }").Should().Be(0);
-            Functions(AnalyzerLanguage.CSharp, "interface Interface { void MyMethod1(); }").Should().Be(0);
-            Functions(AnalyzerLanguage.CSharp, "class Sample { static Sample() { } }").Should().Be(1);
-            Functions(AnalyzerLanguage.CSharp, "class Sample { public Sample() { } }").Should().Be(1);
-            Functions(AnalyzerLanguage.CSharp, "class Sample { ~Sample() { } }").Should().Be(1);
-            Functions(AnalyzerLanguage.CSharp, "class Sample { public void MyMethod2() { } }").Should().Be(1);
-            Functions(AnalyzerLanguage.CSharp, "class Sample { public static Sample operator +(Sample a) { return a; } }").Should().Be(1);
-            Functions(AnalyzerLanguage.CSharp, "class Sample { public int MyProperty2 { get { return 0; } } }").Should().Be(1);
-            Functions(AnalyzerLanguage.CSharp, "class Sample { public int MyProperty3 { set { } } }").Should().Be(1);
-            Functions(AnalyzerLanguage.CSharp, "class Sample { public int MyProperty4 { init { } } }").Should().Be(1);
-            Functions(AnalyzerLanguage.CSharp, "class Sample { public int MyProperty5 { get => 42; } }").Should().Be(1);
-            Functions(AnalyzerLanguage.CSharp, "class Sample { public int MyProperty6 { get { return 0; } set { } } }").Should().Be(2);
-            Functions(AnalyzerLanguage.CSharp, "class Sample { public event System.EventHandler OnSomething { add { } remove {} } }").Should().Be(2);
-            Functions(AnalyzerLanguage.CSharp, "class Sample { void Bar() { void LocalFunction() { } } }").Should().Be(2);
+        [DataTestMethod]
+        [DataRow("", 0)]
+        [DataRow("class Sample { }", 0)]
+        [DataRow("abstract class Sample { public abstract void MyMethod1(); }", 0)]
+        [DataRow("interface Interface { void MyMethod1(); }", 0)]
+        [DataRow("class Sample { static Sample() { } }", 1)]
+        [DataRow("class Sample { public Sample() { } }", 1)]
+        [DataRow("class Sample { ~Sample() { } }", 1)]
+        [DataRow("class Sample { public void MyMethod2() { } }", 1)]
+        [DataRow("class Sample { public static Sample operator +(Sample a) { return a; } }", 1)]
+        [DataRow("class Sample { public int MyProperty { get; set; } }", 2)]
+        [DataRow("class Sample { public int MyProperty { get { return 0; } } }", 1)]
+        [DataRow("class Sample { public int MyProperty { set { } } }", 1)]
+        [DataRow("class Sample { public int MyProperty { init { } } }", 1)]
+        [DataRow("class Sample { public int MyProperty { get => 42; } }", 1)]
+        [DataRow("class Sample { public int MyProperty { get { return 0; } set { } } }", 2)]
+        [DataRow("class Sample { public event System.EventHandler OnSomething { add { } remove {} } }", 2)]
+        [DataRow("class Sample { void Bar() { void LocalFunction() { } } }", 2)]
+        [DataRow("""
+            partial class Sample
+            {
+                public partial int MyProperty { get; set; } // The partial definition part of a property should not be counted. https://sonarsource.atlassian.net/browse/NET-527
+            }
+            partial class Sample
+            {
+                public partial int MyProperty { get => 1; set { } }
+            }
+            """, 4)]
+        public void Functions_CSharp(string function, int expected) =>
+            Functions(AnalyzerLanguage.CSharp, function).Should().Be(expected);
 
-            Functions(AnalyzerLanguage.VisualBasic, string.Empty).Should().Be(0);
-            Functions(AnalyzerLanguage.VisualBasic, "Class Sample \n \n End Class").Should().Be(0);
-            Functions(AnalyzerLanguage.VisualBasic, "MustInherit Class Sample \n MustOverride Sub MyMethod() \n End Class").Should().Be(0);
-            Functions(AnalyzerLanguage.VisualBasic, "Interface MyInterface \n Sub MyMethod() \n End Interface").Should().Be(0);
-            Functions(AnalyzerLanguage.VisualBasic, "Class Sample \n Public Property MyProperty As Integer \n End Class").Should().Be(0);
-            Functions(AnalyzerLanguage.VisualBasic, "Class Sample \n Shared Sub New() \n End Sub \n End Class").Should().Be(1);
-            Functions(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub New() \n End Sub \n End Class").Should().Be(1);
-            Functions(AnalyzerLanguage.VisualBasic, "Class Sample \n Protected Overrides Sub Finalize() \n End Sub \n End Class").Should().Be(1);
-            Functions(AnalyzerLanguage.VisualBasic, "Class Sample \n Sub MyMethod2() \n End Sub \n End Class").Should().Be(1);
-            Functions(AnalyzerLanguage.VisualBasic, "Class Sample \n Public Shared Operator +(a As Sample) As Sample \n Return a \n End Operator \n End Class").Should().Be(1);
-        }
-
+        [DataTestMethod]
+        [DataRow("", 0)]
+        [DataRow("Class Sample \n \n End Class", 0)]
+        [DataRow("MustInherit Class Sample \n MustOverride Sub MyMethod() \n End Class", 0)]
+        [DataRow("Interface MyInterface \n Sub MyMethod() \n End Interface", 0)]
+        [DataRow("Class Sample \n Public Property MyProperty As Integer \n End Class", 0)]
+        [DataRow("Class Sample \n Shared Sub New() \n End Sub \n End Class", 1)]
+        [DataRow("Class Sample \n Sub New() \n End Sub \n End Class", 1)]
+        [DataRow("Class Sample \n Protected Overrides Sub Finalize() \n End Sub \n End Class", 1)]
+        [DataRow("Class Sample \n Sub MyMethod2() \n End Sub \n End Class", 1)]
+        [DataRow("Class Sample \n Public Shared Operator +(a As Sample) As Sample \n Return a \n End Operator \n End Class", 1)]
+        public void Functions_VisualBasic(string function, int expected) =>
+            Functions(AnalyzerLanguage.VisualBasic, function).Should().Be(expected);
 #endif
 
         [TestMethod]
@@ -383,6 +395,10 @@ End Class")
                 .Should().Be(2);
             Complexity(AnalyzerLanguage.CSharp, "class Sample { int MyProperty { get; set; } }")
                 .Should().Be(2);
+            Complexity(AnalyzerLanguage.CSharp, """
+                    partial class Sample { partial int MyProperty { get; set; } }
+                    partial class Sample { partial int MyProperty { get => 1; set { } } }
+                """).Should().Be(4);
             Complexity(AnalyzerLanguage.CSharp, "class Sample { int MyProperty { get => 0; set {} } }")
                 .Should().Be(2);
             Complexity(AnalyzerLanguage.CSharp, "class Sample { public Sample() { } }")
@@ -501,12 +517,12 @@ End Class")
             var csharpText = System.IO.File.ReadAllText(@"TestCases\CognitiveComplexity.cs");
             CognitiveComplexity(AnalyzerLanguage.CSharp, csharpText).Should().Be(109);
 
-            var csharp9Text = System.IO.File.ReadAllText(@"TestCases\CognitiveComplexity.CSharp9.cs");
-            var csharp9Compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, Microsoft.CodeAnalysis.OutputKind.ConsoleApplication)
-                .AddSnippet(csharp9Text)
+            var csharpLatestText = System.IO.File.ReadAllText(@"TestCases\CognitiveComplexity.Latest.cs");
+            var csharpLatestCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, OutputKind.ConsoleApplication)
+                .AddSnippet(csharpLatestText)
                 .GetCompilation();
-            var csharp9SyntaxTree = csharp9Compilation.SyntaxTrees.Single();
-            new CSharpMetrics(csharp9SyntaxTree, csharp9Compilation.GetSemanticModel(csharp9SyntaxTree)).CognitiveComplexity.Should().Be(38);
+            var csharpLatestTree = csharpLatestCompilation.SyntaxTrees.Single();
+            new CSharpMetrics(csharpLatestTree, csharpLatestCompilation.GetSemanticModel(csharpLatestTree)).CognitiveComplexity.Should().Be(46);
 
             var visualBasicCode = System.IO.File.ReadAllText(@"TestCases\CognitiveComplexity.vb");
             CognitiveComplexity(AnalyzerLanguage.VisualBasic, visualBasicCode).Should().Be(122);

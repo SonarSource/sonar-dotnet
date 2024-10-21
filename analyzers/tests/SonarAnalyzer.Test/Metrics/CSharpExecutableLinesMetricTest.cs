@@ -871,6 +871,43 @@ class Program
     public static int Bar() => 42;
 }", 7, 8);
 
+        [TestMethod]
+        public void GetLineNumbers_PartialProperties() =>
+            AssertLineNumbersOfExecutableLines(
+                """
+                partial class Partial
+                {
+                    public partial int Property { get; set; }
+                }
+                partial class Partial
+                {
+                    public partial int Property
+                    {
+                        get => 1;
+                        set { value.ToString(); } // +1
+                    }
+                }
+                """, 10);
+
+        [TestMethod]
+        public void GetLineNumbers_PartialProperties_Excluded() =>
+            AssertLineNumbersOfExecutableLines(
+                """
+                partial class Partial
+                {
+                    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+                    public partial int Property { get; set; }
+                }
+                partial class Partial
+                {
+                    public partial int Property
+                    {
+                        get => 1;
+                        set { value.ToString(); } // The setter should be ignored because ExcludeFromCodeCoverage is applied https://sonarsource.atlassian.net/browse/NET-528
+                    }
+                }
+                """, 11);
+
 #if NET
 
         [TestMethod]
