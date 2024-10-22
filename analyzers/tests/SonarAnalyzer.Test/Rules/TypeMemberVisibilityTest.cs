@@ -34,16 +34,8 @@ public class TypeMemberVisibilityTest
 #if NET
 
     [TestMethod]
-    public void TypeMemberVisibility_CSharp9() =>
-        builder.AddPaths("TypeMemberVisibility.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
-
-    [TestMethod]
-    public void TypeMemberVisibility_CSharp10() =>
-        builder.AddPaths("TypeMemberVisibility.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
-
-    [TestMethod]
-    public void TypeMemberVisibility_CSharp11() =>
-        builder.AddPaths("TypeMemberVisibility.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).VerifyNoIssues();
+    public void TypeMemberVisibility_Latest() =>
+        builder.AddPaths("TypeMemberVisibility.Latest.cs", "TypeMemberVisibility.Latest.Partial.cs").WithOptions(ParseOptionsHelper.CSharpLatest).Verify();
 
 #endif
 

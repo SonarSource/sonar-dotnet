@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tests.Diagnostics
+namespace CSharp9
 {
     internal record Noncompliant // Noncompliant {{Types should not have members with visibility set higher than the type's visibility}}
     {
@@ -107,5 +107,72 @@ namespace Tests.Diagnostics
         public enum MyEnum { }
 
         public record MyRecord { }
+    }
+}
+
+namespace CSharp10
+{
+    internal record struct Noncompliant // Noncompliant {{Types should not have members with visibility set higher than the type's visibility}}
+    //                     ^^^^^^^^^^^^
+    {
+        public Noncompliant() { } // Secondary
+
+        static public decimal A = 3.14m; // Secondary
+        //     ^^^^^^
+        private decimal E = 1m;
+
+        public int PropertyA { get; } = 0; // Secondary
+        private int PropertyE { get; } = 0;
+
+        public int GetA() => 1; // Secondary
+        private int GetE() => 1;
+    }
+
+    internal record struct NoncompliantPositionalRecord(string Property) // Noncompliant
+    {
+        public static decimal A = 3.14m; // Secondary
+    }
+}
+
+
+namespace CSharp11
+{
+    public interface IContract
+    {
+        static abstract void Do();
+    }
+
+    internal class SomeClass : IContract
+    {
+        public static void Do()
+        {
+            throw new NotImplementedException(); // Compliant because comes from the interface
+        }
+    }
+
+    file class LocalFileClass // file-scoped types have no access modifiers. We don't need to check their members.
+    {
+        public void Foo() { }
+    }
+}
+
+namespace CSharp13
+{
+    internal partial class PartialPropertyClass //Noncompliant
+    {
+        public partial int PropertyA { get; } // Secondary
+        private partial int PropertyE { get; }
+    }
+
+    internal partial class OtherPartialPropertyClass //Noncompliant
+    {
+        public partial int PropertyA { get; } // Secondary
+        private partial int PropertyE { get; }
+
+        public partial void VoidMethod() { }   // Secondary
+        partial void AnotherVoidMethod();
+
+        public partial void DoSomething(); // Secondary
+        private partial void DoSomethingElse();
     }
 }
