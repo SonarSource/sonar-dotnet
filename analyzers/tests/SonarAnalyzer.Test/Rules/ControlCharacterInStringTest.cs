@@ -36,15 +36,9 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
 
         [TestMethod]
-        public void ControlCharacterInString_CSharp10() =>
-            builder.AddPaths("ControlCharacterInString.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .Verify();
-
-        [TestMethod]
-        public void ControlCharacterInString_CSharp11() =>
-            builder.AddPaths("ControlCharacterInString.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+        public void ControlCharacterInString_Latest() =>
+            builder.AddPaths("ControlCharacterInString.Latest.cs")
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .Verify();
 
 #endif
