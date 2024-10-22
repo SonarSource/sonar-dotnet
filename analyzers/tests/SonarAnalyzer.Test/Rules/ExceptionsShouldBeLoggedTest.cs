@@ -205,7 +205,7 @@ public class ExceptionsShouldBeLoggedTest
                 }
             }
             """)
-            .AddReferences(NuGetMetadataReference.Log4Net(Constants.NuGetLatestVersion, "netstandard2.0"))
+            .AddReferences(NuGetMetadataReference.Log4Net("3.0.1", "netstandard2.0")) // After 3.0.2 they removed ILogExtensions.
             .Verify();
 
     [DataTestMethod]
