@@ -373,10 +373,6 @@ public class AvoidExcessiveClassCouplingTest
 #if NET
 
     [TestMethod]
-    public void AvoidExcessiveClassCoupling_CSharp9() =>
-        withThreshold1.AddPaths("AvoidExcessiveClassCoupling.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
-
-    [TestMethod]
     public void AvoidExcessiveClassCoupling_InRecord_Enums_Not_Counted() =>
         withThreshold0.AddSnippet("""
             using System;
@@ -418,12 +414,10 @@ public class AvoidExcessiveClassCouplingTest
             """).WithOptions(ParseOptionsHelper.FromCSharp9).VerifyNoIssues();
 
     [TestMethod]
-    public void AvoidExcessiveClassCoupling_CSharp10() =>
-        withThreshold1.AddPaths("AvoidExcessiveClassCoupling.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
-
-    [TestMethod]
-    public void AvoidExcessiveClassCoupling_CSharp11() =>
-        withThreshold1.AddPaths("AvoidExcessiveClassCoupling.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+    public void AvoidExcessiveClassCoupling_Latest() =>
+        withThreshold1.AddPaths("AvoidExcessiveClassCoupling.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
 
 #endif
 
