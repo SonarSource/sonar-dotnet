@@ -35,10 +35,10 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
 
         [TestMethod]
-        public void ConstructorArgumentValueShouldExist_CS_CSharp9() =>
-            builderCS.AddPaths("ConstructorArgumentValueShouldExist.CSharp9.cs")
+        public void ConstructorArgumentValueShouldExist_CS_Latest() =>
+            builderCS.AddPaths("ConstructorArgumentValueShouldExist.Latest.cs", "ConstructorArgumentValueShouldExist.Latest.Partial.cs")
                 .WithConcurrentAnalysis(false)
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .Verify();
 
 #else

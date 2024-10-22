@@ -27,3 +27,16 @@ namespace System.Windows.Markup
         public ConstructorArgumentAttribute(string argumentName) { }
     }
 }
+
+namespace CSharp13
+{
+    //https://sonarsource.atlassian.net/browse/NET-553
+    public partial class MyExtension3 : MarkupExtension
+    {
+        public MyExtension3(object value1) { Value1 = value1; }
+        public override object ProvideValue(IServiceProvider serviceProvider) => null;
+        [ConstructorArgument("value2")] // Noncompliant
+                                        // Noncompliant @-1
+        public partial object Value1 { get; set; }
+    }
+}
