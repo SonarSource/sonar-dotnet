@@ -21,92 +21,71 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class ClassAndMethodNameTest
 {
-    [TestClass]
-    public class ClassAndMethodNameTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ClassAndMethodName>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ClassAndMethodName>();
 
-        [TestMethod]
-        public void ClassAndMethodName_CS() =>
-            builderCS.AddPaths("ClassAndMethodName.cs", "ClassAndMethodName.Partial.cs")
-                .AddReferences(MetadataReferenceFacade.NetStandard21)
-                .WithConcurrentAnalysis(false)
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .Verify();
+    [TestMethod]
+    public void ClassAndMethodName_CS() =>
+        builderCS.AddPaths("ClassAndMethodName.cs", "ClassAndMethodName.Partial.cs")
+            .AddReferences(MetadataReferenceFacade.NetStandard21)
+            .WithConcurrentAnalysis(false)
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
 
-        [TestMethod]
-        public void ClassAndMethodName_InTestProject_CS() =>
-            builderCS.AddPaths("ClassAndMethodName.Tests.cs").AddTestReference().WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+    [TestMethod]
+    public void ClassAndMethodName_InTestProject_CS() =>
+        builderCS.AddPaths("ClassAndMethodName.Tests.cs").AddTestReference().WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
-        [TestMethod]
-        public void ClassAndMethodName_TopLevelStatement_CS() =>
-            builderCS.AddPaths("ClassAndMethodName.TopLevelStatement.cs").WithTopLevelStatements().Verify();
+    [TestMethod]
+    public void ClassAndMethodName_TopLevelStatement_CS() =>
+        builderCS.AddPaths("ClassAndMethodName.TopLevelStatement.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
-        public void ClassAndMethodName_TopLevelStatement_InTestProject_CS() =>
-            builderCS.AddPaths("ClassAndMethodName.TopLevelStatement.Test.cs").AddTestReference().WithTopLevelStatements().Verify();
+    [TestMethod]
+    public void ClassAndMethodName_TopLevelStatement_InTestProject_CS() =>
+        builderCS.AddPaths("ClassAndMethodName.TopLevelStatement.Test.cs").AddTestReference().WithTopLevelStatements().Verify();
 
-        [TestMethod]
-        public void ClassAndMethodName_Record_CS() =>
-            builderCS.AddPaths("ClassAndMethodName.Record.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+    [TestMethod]
+    public void ClassAndMethodName_MethodName_CS_Latest() =>
+        builderCS.AddPaths("ClassAndMethodName.MethodName.Latest.cs").WithOptions(ParseOptionsHelper.CSharpLatest).Verify();
 
-        [TestMethod]
-        public void ClassAndMethodName_Record_InTestProject_CS() =>
-            builderCS.AddPaths("ClassAndMethodName.Record.cs").AddTestReference().WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
-
-        [TestMethod]
-        public void ClassAndMethodName_RecordStruct_CS() =>
-            builderCS.AddPaths("ClassAndMethodName.RecordStruct.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
-
-        [TestMethod]
-        public void ClassAndMethodName_RecordStruct_InTestProject_CS() =>
-            builderCS.AddPaths("ClassAndMethodName.RecordStruct.cs").AddTestReference().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
-
-        [TestMethod]
-        public void ClassAndMethodName_MethodName_CSharp9() =>
-            builderCS.AddPaths("ClassAndMethodName.MethodName.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
-
-        [TestMethod]
-        public void ClassAndMethodName_MethodName_InTestProject_CSharp9() =>
-            builderCS.AddPaths("ClassAndMethodName.MethodName.CSharp9.cs").AddTestReference().WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
-
-        [TestMethod]
-        public void ClassAndMethodName_MethodName_CSharp11() =>
-            builderCS.AddPaths("ClassAndMethodName.MethodName.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+    [TestMethod]
+    public void ClassAndMethodName_MethodName_InTestProject_CS_Latest() =>
+        builderCS.AddPaths("ClassAndMethodName.MethodName.Latest.cs").AddTestReference().WithOptions(ParseOptionsHelper.CSharpLatest).Verify();
 
 #endif
 
-        [DataTestMethod]
-        [DataRow(ProjectType.Product)]
-        [DataRow(ProjectType.Test)]
-        public void ClassAndMethodName_VB(ProjectType projectType) =>
-            new VerifierBuilder<VB.ClassName>().AddPaths("ClassAndMethodName.vb").AddReferences(TestHelper.ProjectTypeReference(projectType)).Verify();
+    [DataTestMethod]
+    [DataRow(ProjectType.Product)]
+    [DataRow(ProjectType.Test)]
+    public void ClassAndMethodName_VB(ProjectType projectType) =>
+        new VerifierBuilder<VB.ClassName>().AddPaths("ClassAndMethodName.vb").AddReferences(TestHelper.ProjectTypeReference(projectType)).Verify();
 
-        [DataTestMethod]
-        [DataRow(ProjectType.Product)]
-        [DataRow(ProjectType.Test)]
-        public void ClassAndMethodName_MethodName(ProjectType projectType) =>
-            builderCS.AddPaths("ClassAndMethodName.MethodName.cs", "ClassAndMethodName.MethodName.Partial.cs")
-                .AddReferences(TestHelper.ProjectTypeReference(projectType))
-                .WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+    [DataTestMethod]
+    [DataRow(ProjectType.Product)]
+    [DataRow(ProjectType.Test)]
+    public void ClassAndMethodName_MethodName(ProjectType projectType) =>
+        builderCS.AddPaths("ClassAndMethodName.MethodName.cs", "ClassAndMethodName.MethodName.Partial.cs")
+            .AddReferences(TestHelper.ProjectTypeReference(projectType))
+            .WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
-        [DataTestMethod]
-        [DataRow("foo", "foo")]
-        [DataRow("Foo", "Foo")]
-        [DataRow("FFF", "FFF")]
-        [DataRow("FfF", "Ff", "F")]
-        [DataRow("Ff9F", "Ff", "9", "F")]
-        [DataRow("你好", "你", "好")]
-        [DataRow("FFf", "F", "Ff")]
-        [DataRow("")]
-        [DataRow("FF9d", "FF", "9", "d")]
-        [DataRow("y2x5__w7", "y", "2", "x", "5", "_", "_", "w", "7")]
-        [DataRow("3%c#account", "3", "%", "c", "#", "account")]
-        public void TestSplitToParts(string name, params string[] expectedParts) =>
-            CS.ClassAndMethodName.SplitToParts(name).Should().BeEquivalentTo(expectedParts);
-    }
+    [DataTestMethod]
+    [DataRow("foo", "foo")]
+    [DataRow("Foo", "Foo")]
+    [DataRow("FFF", "FFF")]
+    [DataRow("FfF", "Ff", "F")]
+    [DataRow("Ff9F", "Ff", "9", "F")]
+    [DataRow("你好", "你", "好")]
+    [DataRow("FFf", "F", "Ff")]
+    [DataRow("")]
+    [DataRow("FF9d", "FF", "9", "d")]
+    [DataRow("y2x5__w7", "y", "2", "x", "5", "_", "_", "w", "7")]
+    [DataRow("3%c#account", "3", "%", "c", "#", "account")]
+    public void TestSplitToParts(string name, params string[] expectedParts) =>
+        CS.ClassAndMethodName.SplitToParts(name).Should().BeEquivalentTo(expectedParts);
 }
