@@ -1,30 +1,28 @@
 <h2>Why is this an issue?</h2>
-<p>A [composite format string](<a
-href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/composite-formatting">https://learn.microsoft.com/en-us/dotnet/standard/base-types/composite-formatting</a>)
-is a string that contains placeholders, represented by indices inside curly braces "{0}", "{1}", etc. These placeholders are replaced by values when
-the string is printed or logged.</p>
+<p>A <a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/composite-formatting">composite format string</a> is a string that contains
+placeholders, represented by indices inside curly braces "{0}", "{1}", etc. These placeholders are replaced by values when the string is printed or
+logged.</p>
 <p>Because composite format strings are interpreted at runtime, rather than validated by the compiler, they can contain errors that lead to unexpected
 behaviors or runtime errors.</p>
 <p>This rule validates the correspondence between arguments and composite formats when calling the following methods:</p>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.format?view=net-7.0"><code>String.Format</code></a> </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.text.stringbuilder.appendformat?view=net-7.0"><code>StringBuilder.AppendFormat</code></a>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.format"><code>String.Format</code></a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.text.stringbuilder.appendformat"><code>StringBuilder.AppendFormat</code></a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.console.write"><code>Console.Write</code></a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.console.writeline"><code>Console.WriteLine</code></a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.textwriter.write"><code>TextWriter.Write</code></a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.textwriter.writeline"><code>TextWriter.WriteLine</code></a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.debug.writeline"><code>Debug.WriteLine(String, Object[])</code></a>
   </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.console.write?view=net-7.0"><code>Console.Write</code></a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.console.writeline?view=net-7.0"><code>Console.WriteLine</code></a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.textwriter.write?view=net-7.0"><code>TextWriter.Write</code></a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.textwriter.writeline?view=net-7.0"><code>TextWriter.WriteLine</code></a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.traceerror"><code>Trace.TraceError(String, Object[])</code></a>
+  </li>
   <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.debug.writeline?view=net-7.0"><code>Debug.WriteLine(String, Object[</code></a><code>)</code>] </li>
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.traceinformation"><code>Trace.TraceInformation(String, Object[])</code></a> </li>
   <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.traceerror?view=net-7.0"><code>Trace.TraceError(String, Object[</code></a><code>)</code>] </li>
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.tracewarning"><code>Trace.TraceWarning(String, Object[])</code></a>
+  </li>
   <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.traceinformation?view=net-7.0"><code>Trace.TraceInformation(String, Object[</code></a><code>)</code>] </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.tracewarning?view=net-7.0"><code>Trace.TraceWarning(String, Object[</code></a><code>)</code>] </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.tracesource.traceinformation?view=net-7.0"><code>TraceSource.TraceInformation(String, Object[</code></a><code>)</code>] </li>
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.tracesource.traceinformation"><code>TraceSource.TraceInformation(String, Object[])</code></a> </li>
 </ul>
 <h3>Exceptions</h3>
 <ul>
