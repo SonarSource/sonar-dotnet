@@ -290,6 +290,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Collections_Generic_SortedSet_T = new("System.Collections.Generic.SortedSet", "T");
     public static readonly KnownType System_Collections_Generic_Stack_T = new("System.Collections.Generic.Stack", "T");
     public static readonly KnownType System_Collections_Generic_LinkedList_T = new("System.Collections.Generic.LinkedList", "T");
+    public static readonly KnownType System_Collections_Generic_OrderedDictionary_TKey_TValue = new("System.Collections.Generic.OrderedDictionary", "TKey", "TValue");
     public static readonly KnownType System_Collections_ICollection = new("System.Collections.ICollection");
     public static readonly KnownType System_Collections_IEnumerable = new("System.Collections.IEnumerable");
     public static readonly KnownType System_Collections_IList = new("System.Collections.IList");
