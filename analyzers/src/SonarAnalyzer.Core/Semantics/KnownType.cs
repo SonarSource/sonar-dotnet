@@ -320,6 +320,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Collections_ObjectModel_ObservableCollection_T = new("System.Collections.ObjectModel.ObservableCollection", "T");
     public static readonly KnownType System_Collections_ObjectModel_ReadOnlyCollection_T = new("System.Collections.ObjectModel.ReadOnlyCollection", "T");
     public static readonly KnownType System_Collections_ObjectModel_ReadOnlyDictionary_TKey_TValue = new("System.Collections.ObjectModel.ReadOnlyDictionary", "TKey", "TValue");
+    public static readonly KnownType System_Collections_ObjectModel_ReadOnlySet_T = new("System.Collections.ObjectModel.ReadOnlySet", "T");
     public static readonly KnownType System_Collections_Queue = new("System.Collections.Queue");
     public static readonly KnownType System_Collections_ReadOnlyCollectionBase = new("System.Collections.ReadOnlyCollectionBase");
     public static readonly KnownType System_Collections_SortedList = new("System.Collections.SortedList");
