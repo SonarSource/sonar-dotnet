@@ -33,6 +33,8 @@ internal sealed class RegexContext
         nameof(Regex.Matches),
         nameof(Regex.Replace),
         nameof(Regex.Split),
+        "EnumerateSplits",  // https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regex.enumeratesplits?view=net-9.0
+        "EnumerateMatches", // https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regex.enumeratematches?view=net-9.0
     };
 
     public SyntaxNode PatternNode { get; }
