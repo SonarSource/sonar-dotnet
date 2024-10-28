@@ -38,9 +38,9 @@ class Compliant
         foreach (Range r in Regex.EnumerateSplits(input, "[0-9]+", options)) { }                          // Compliant
         foreach (Range r in Regex.EnumerateSplits(input, "[0-9]+", options, TimeSpan.FromSeconds(1))) { } // Compliant
 
-        foreach (var m in Regex.EnumerateMatches(input, "[A")) { }                                      // Compliant
-        foreach (var m in Regex.EnumerateMatches(input, "[A", options)) { }                             // Compliant
-        foreach (var m in Regex.EnumerateMatches(input, "[A", options, TimeSpan.FromSeconds(1))) { }    // Compliant
+        foreach (var m in Regex.EnumerateMatches(input, "[A-Z]")) { }                                     // Compliant
+        foreach (var m in Regex.EnumerateMatches(input, "[A-Z]", options)) { }                            // Compliant
+        foreach (var m in Regex.EnumerateMatches(input, "[A-Z]", options, TimeSpan.FromSeconds(1))) { }   // Compliant
     }
 }
 
@@ -79,13 +79,13 @@ class Noncompliant
     // Repro https://sonarsource.atlassian.net/browse/NET-228
     void EnumerateSplitsAndMatchesMethod(ReadOnlySpan<char> input, RegexOptions options)
     {
-        foreach (Range r in Regex.EnumerateSplits(input, "[A")) { } // FN
-        foreach (Range r in Regex.EnumerateSplits(input, "[A", options)) { } // FN
-        foreach (Range r in Regex.EnumerateSplits(input, "[A", options, TimeSpan.FromSeconds(1))) { } // FN
+        foreach (Range r in Regex.EnumerateSplits(input, "[A")) { }                                   // Noncompliant
+        foreach (Range r in Regex.EnumerateSplits(input, "[A", options)) { }                          // Noncompliant
+        foreach (Range r in Regex.EnumerateSplits(input, "[A", options, TimeSpan.FromSeconds(1))) { } // Noncompliant
 
-        foreach (var m in Regex.EnumerateMatches(input, "[A")) { } // FN
-        foreach (var m in Regex.EnumerateMatches(input, "[A", options)) { } // FN
-        foreach (var m in Regex.EnumerateMatches(input, "[A", options, TimeSpan.FromSeconds(1))) { } // FN
+        foreach (var m in Regex.EnumerateMatches(input, "[A")) { }                                    // Noncompliant
+        foreach (var m in Regex.EnumerateMatches(input, "[A", options)) { }                           // Noncompliant
+        foreach (var m in Regex.EnumerateMatches(input, "[A", options, TimeSpan.FromSeconds(1))) { }  // Noncompliant
     }
 
     void EscapeSequence()
