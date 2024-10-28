@@ -14,12 +14,12 @@ class MyClass
     // Repro https://sonarsource.atlassian.net/browse/NET-227
     void EnumerateSplitsAndMatchesMethod(ReadOnlySpan<char> input, RegexOptions options)
     {
-        foreach (Range r in Regex.EnumerateSplits(input, "something")) { } // FN
-        foreach (Range r in Regex.EnumerateSplits(input, "something", options)) { } // FN
+        foreach (Range r in Regex.EnumerateSplits(input, "something")) { }                                   // Noncompliant
+        foreach (Range r in Regex.EnumerateSplits(input, "something", options)) { }                          // Noncompliant
         foreach (Range r in Regex.EnumerateSplits(input, "something", options, TimeSpan.FromSeconds(1))) { } // Compliant
 
-        foreach (var m in Regex.EnumerateMatches(input, "something")) { } // FN
-        foreach (var m in Regex.EnumerateMatches(input, "something", options)) { } // FN
-        foreach (var m in Regex.EnumerateMatches(input, "something", options, TimeSpan.FromSeconds(1))) { } // Compliant
+        foreach (var m in Regex.EnumerateMatches(input, "something")) { }                                    // Noncompliant
+        foreach (var m in Regex.EnumerateMatches(input, "something", options)) { }                           // Noncompliant
+        foreach (var m in Regex.EnumerateMatches(input, "something", options, TimeSpan.FromSeconds(1))) { }  // Compliant
     }
 }

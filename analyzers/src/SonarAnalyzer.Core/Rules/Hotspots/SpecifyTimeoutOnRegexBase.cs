@@ -38,15 +38,17 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : HotspotDiagnostic
         nameof(Regex.Matches),
         nameof(Regex.Replace),
         nameof(Regex.Split),
+        "EnumerateSplits",  // https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regex.enumeratesplits?view=net-9.0
+        "EnumerateMatches", // https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regex.enumeratematches?view=net-9.0
     };
 
     protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
     protected virtual string MessageFormat => "Pass a timeout to limit the execution time.";
 
     private DiagnosticDescriptor Rule => Language.CreateDescriptor(DiagnosticId, MessageFormat);
-
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected SpecifyTimeoutOnRegexBase(IAnalyzerConfiguration config) : base(config) { }
 
