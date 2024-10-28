@@ -43,7 +43,7 @@ D(1, 2);                // Compliant
 D(2);                   // Compliant
 I(MyImmutableArray.Create<int>(new int[] { 1, 2 }));  // Compliant
 I(MyImmutableArray.Create<int>([1, 2]));              // Compliant
-I([1, 2]);              // Noncompliant FP
+I([1, 2]);              // Noncompliant
 I(2);                   // Compliant
 
 static bool A(params int[] array) => true;
