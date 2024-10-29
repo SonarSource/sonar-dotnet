@@ -18,20 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class MutableFieldsShouldNotBePublicReadonly : MutableFieldsShouldNotBe
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class MutableFieldsShouldNotBePublicReadonly : MutableFieldsShouldNotBe
+    private const string DiagnosticId = "S3887";
+    private const string MessageFormat = "Use an immutable collection or reduce the accessibility of the non-private readonly field{0} {1}.";
+
+    protected override ISet<SyntaxKind> InvalidModifiers { get; } = new HashSet<SyntaxKind>
     {
-        private const string DiagnosticId = "S3887";
-        private const string MessageFormat = "Use an immutable collection or reduce the accessibility of the non-private readonly field{0} {1}.";
+        SyntaxKind.PublicKeyword,
+        SyntaxKind.ReadOnlyKeyword
+    };
 
-        public MutableFieldsShouldNotBePublicReadonly() : base(DiagnosticId, MessageFormat) { }
-
-        protected override ISet<SyntaxKind> InvalidModifiers { get; } = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.PublicKeyword,
-            SyntaxKind.ReadOnlyKeyword
-        };
-    }
+    public MutableFieldsShouldNotBePublicReadonly() : base(DiagnosticId, MessageFormat) { }
 }
