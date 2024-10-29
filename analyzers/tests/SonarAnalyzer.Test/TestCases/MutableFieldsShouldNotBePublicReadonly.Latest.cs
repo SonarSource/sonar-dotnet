@@ -95,6 +95,6 @@ namespace CSharp13
     public class NewCollectionTypesInitializedWithMutable(HashSet<string> set)
     {
         public readonly OrderedDictionary<string, string> OrderedDictionary = new(); // Noncompliant
-        public readonly ReadOnlySet<string> ReadOnlySet = new(set);                  // Noncompliant FP
+        public readonly ReadOnlySet<string> ReadOnlySet = new(set);                  // Compliant
     }
 }

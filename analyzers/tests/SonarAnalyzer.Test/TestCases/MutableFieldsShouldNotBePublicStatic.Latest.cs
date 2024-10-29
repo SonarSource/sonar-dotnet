@@ -116,7 +116,7 @@ namespace CSharp13
     // https://sonarsource.atlassian.net/browse/NET-389
     public class ReadOnlySet
     {
-        public static ReadOnlySet<string> readonlySet;                     // Noncompliant FP
+        public static ReadOnlySet<string> readonlySet;                     // Compliant
         public static readonly ReadOnlySet<string> readonlySet2;
     }
 }
