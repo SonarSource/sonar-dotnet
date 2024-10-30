@@ -40,9 +40,9 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
 
         [TestMethod]
-        public void PropertyToAutoProperty_CSharp9() =>
-            builder.AddPaths("PropertyToAutoProperty.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+        public void PropertyToAutoProperty_Latest() =>
+            builder.AddPaths("PropertyToAutoProperty.Latest.cs")
+                .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .Verify();
 
 #endif
