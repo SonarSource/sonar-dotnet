@@ -74,7 +74,7 @@ public class CSharpMetrics : MetricsBase
                 return true;
 
             case SyntaxKind.PropertyDeclaration:
-                return ((PropertyDeclarationSyntax)node).ExpressionBody != null;
+                return ((PropertyDeclarationSyntax)node).ExpressionBody is not null;
 
             case SyntaxKind.ConstructorDeclaration:
             case SyntaxKind.ConversionOperatorDeclaration:
@@ -96,20 +96,13 @@ public class CSharpMetrics : MetricsBase
                     return true;
                 }
 
-                if (!accessor.Parent.Parent.IsAnyKind(SyntaxKind.PropertyDeclaration, SyntaxKind.EventDeclaration))
+                if (accessor is { Parent.Parent: BasePropertyDeclarationSyntax { RawKind: (int)SyntaxKind.PropertyDeclaration or (int)SyntaxKind.EventDeclaration } basePropertyNode })
                 {
-                    // Unexpected
-                    return false;
+                    return !basePropertyNode.Modifiers.Any(x => x.IsAnyKind(SyntaxKind.AbstractKeyword, SyntaxKind.PartialKeyword))
+                        && !basePropertyNode.Parent.IsKind(SyntaxKind.InterfaceDeclaration);
                 }
-
-                var basePropertyNode = (BasePropertyDeclarationSyntax)accessor.Parent.Parent;
-
-                if (basePropertyNode.Modifiers.Any(SyntaxKind.AbstractKeyword))
-                {
-                    return false;
-                }
-
-                return !basePropertyNode.Parent.IsKind(SyntaxKind.InterfaceDeclaration);
+                // Unexpected
+                return false;
 
             default:
                 return false;

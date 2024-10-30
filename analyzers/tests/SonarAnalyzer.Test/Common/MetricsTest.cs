@@ -321,13 +321,23 @@ End Class")
         [DataRow("""
             partial class Sample
             {
-                public partial int MyProperty { get; set; } // The partial definition part of a property should not be counted. https://sonarsource.atlassian.net/browse/NET-527
+                public partial int MyProperty { get; set; } // The partial definition part of a property is not counted.
             }
             partial class Sample
             {
                 public partial int MyProperty { get => 1; set { } }
             }
-            """, 4)]
+            """, 2)]
+        [DataRow("""
+            partial class Sample
+            {
+                public partial int this[int index] { get; set; }
+            }
+            partial class Sample
+            {
+                public partial int this[int index] { get => 1; set { } }
+            }
+            """, 2)]
         public void Functions_CSharp(string function, int expected) =>
             Functions(AnalyzerLanguage.CSharp, function).Should().Be(expected);
 
