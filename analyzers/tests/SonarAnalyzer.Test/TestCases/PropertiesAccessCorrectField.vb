@@ -723,4 +723,17 @@ Namespace Tests.Diagnostics
         End Property
     End Class
 
+    ' https://github.com/SonarSource/sonar-dotnet/issues/9688
+    Public Class Repro_9688
+        Private _feedback As String
+
+        Friend Property Feedback As String
+            Get
+                Return _feedback
+            End Get
+            Private Set(value As String)
+                _feedback &= value ' Compliant
+            End Set
+        End Property
+    End Class
 End Namespace
