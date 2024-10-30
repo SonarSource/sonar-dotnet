@@ -903,10 +903,29 @@ class Program
                     public partial int Property
                     {
                         get => 1;
-                        set { value.ToString(); } // The setter should be ignored because ExcludeFromCodeCoverage is applied https://sonarsource.atlassian.net/browse/NET-528
+                        set { value.ToString(); } // The setter is ignored because of ExcludeFromCodeCoverage in the partial property declaration
                     }
                 }
-                """, 11);
+                """);
+
+        [TestMethod]
+        public void GetLineNumbers_PartialIndexers_Excluded() =>
+            AssertLineNumbersOfExecutableLines(
+                """
+                partial class Partial
+                {
+                    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+                    public partial int this[int index] { get; set; }
+                }
+                partial class Partial
+                {
+                    public partial int this[int index]
+                    {
+                        get => 1;
+                        set { } // The setter is ignored because of ExcludeFromCodeCoverage in the partial indexer declaration
+                    }
+                }
+                """);
 
 #if NET
 
