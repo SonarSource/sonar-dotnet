@@ -77,3 +77,32 @@ public struct Coord
 {
     public int X;
 }
+
+namespace CSharp13
+{
+    // https://sonarsource.atlassian.net/browse/NET-456
+    public partial class PartialProperties
+    {
+        private string field;
+        private int[] array = new int[100];
+
+        public partial string Prop // Compliant
+        {
+            get { return field; }
+            set { field = value; }
+        }
+
+        public partial int this[int index]
+        {
+            get { return array[index]; }
+            set { array[index] = value; }
+        }
+    }
+
+    public partial class PartialProperties
+    {
+        public partial string Prop { get; set; }
+
+        public partial int this[int index] { get; set; }
+    }
+}
