@@ -115,6 +115,8 @@ public static class CSharpExecutableLinesMetric
                     return !HasExcludedCodeAttribute(node, ((BaseMethodDeclarationSyntax)node).AttributeLists, true);
 
                 case SyntaxKind.PropertyDeclaration:
+                    return !HasExcludedCodeAttribute(node, ((BasePropertyDeclarationSyntax)node).AttributeLists, true);
+
                 case SyntaxKind.EventDeclaration:
                     return !HasExcludedCodeAttribute(node, ((BasePropertyDeclarationSyntax)node).AttributeLists, false);
 
@@ -135,7 +137,7 @@ public static class CSharpExecutableLinesMetric
             var hasExcludeFromCodeCoverageAttribute = attributeLists.SelectMany(x => x.Attributes).Any(IsExcludedAttribute);
             return hasExcludeFromCodeCoverageAttribute || !canBePartial
                 ? hasExcludeFromCodeCoverageAttribute
-                : model.GetDeclaredSymbol(node) is { Kind: SymbolKind.Method or SymbolKind.NamedType} symbol
+                : model.GetDeclaredSymbol(node) is { Kind: SymbolKind.Method or SymbolKind.Property or SymbolKind.NamedType} symbol
                   && symbol.HasAttribute(KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute);
         }
 
