@@ -71,11 +71,13 @@ namespace CSharp13
 {
     public partial class LengthLimitedSingletonCollection<T> where T : new()
     {
-        public static partial Dictionary<Type, object> Instances => [];
+        public static partial Dictionary<T, object> Instances => [];
+        public static partial Dictionary<Type, object> Instances2 => new Dictionary<Type, object>();
     }
 
     public partial class LengthLimitedSingletonCollection<T> where T : new()
     {
-        public static partial Dictionary<Type, object> Instances { get; } // Noncompliant FP
+        public static partial Dictionary<T, object> Instances { get; }     // Compliant
+        public static partial Dictionary<Type, object> Instances2 { get; } // Noncompliant
     }
 }
