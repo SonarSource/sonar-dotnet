@@ -27,9 +27,6 @@ public sealed class UnchangedLocalVariablesShouldBeConst : SonarDiagnosticAnalyz
     private const string MessageFormat = "Add the 'const' modifier to '{0}'{1}."; // {1} is a placeholder for optional MessageFormatVarHint
     private const string MessageFormatVarHint = ", and replace 'var' with '{0}'";
 
-    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-
     private enum DeclarationType
     {
         CannotBeConst,
@@ -37,6 +34,10 @@ public sealed class UnchangedLocalVariablesShouldBeConst : SonarDiagnosticAnalyz
         Reference,
         String
     }
+
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
@@ -64,16 +65,16 @@ public sealed class UnchangedLocalVariablesShouldBeConst : SonarDiagnosticAnalyz
             },
             SyntaxKind.LocalDeclarationStatement);
 
-    private static DeclarationType FindDeclarationType(LocalDeclarationStatementSyntax localDeclaration, SemanticModel semanticModel)
+    private static DeclarationType FindDeclarationType(LocalDeclarationStatementSyntax localDeclaration, SemanticModel model)
     {
         var declaredTypeSyntax = localDeclaration.Declaration?.Type;
-        if (declaredTypeSyntax == null)
+        if (declaredTypeSyntax is null)
         {
             return DeclarationType.CannotBeConst;
         }
 
-        var declaredType = semanticModel.GetTypeInfo(declaredTypeSyntax).Type;
-        if (declaredType == null)
+        var declaredType = model.GetTypeInfo(declaredTypeSyntax).Type;
+        if (declaredType is null)
         {
             return DeclarationType.CannotBeConst;
         }
@@ -97,9 +98,9 @@ public sealed class UnchangedLocalVariablesShouldBeConst : SonarDiagnosticAnalyz
         }
     }
 
-    private static bool IsInitializedWithCompatibleConstant(VariableDeclaratorSyntax variableDeclarator, SemanticModel semanticModel, DeclarationType declarationType) =>
+    private static bool IsInitializedWithCompatibleConstant(VariableDeclaratorSyntax variableDeclarator, SemanticModel model, DeclarationType declarationType) =>
         variableDeclarator is { Initializer.Value: { } initializer }
-            && semanticModel.GetConstantValue(initializer) switch
+            && model.GetConstantValue(initializer) switch
             {
                 { HasValue: false } => false,
                 { Value: string } => declarationType == DeclarationType.String,
@@ -107,10 +108,10 @@ public sealed class UnchangedLocalVariablesShouldBeConst : SonarDiagnosticAnalyz
                 _ => declarationType is DeclarationType.Reference or DeclarationType.String,
             };
 
-    private static bool HasMutableUsagesInMethod(SemanticModel semanticModel, VariableDeclaratorSyntax variable)
+    private static bool HasMutableUsagesInMethod(SemanticModel model, VariableDeclaratorSyntax variable)
     {
         var parentSyntax = variable.Ancestors().FirstOrDefault(IsMethodLike);
-        if (parentSyntax == null)
+        if (parentSyntax is null)
         {
             return false;
         }
@@ -120,12 +121,12 @@ public sealed class UnchangedLocalVariablesShouldBeConst : SonarDiagnosticAnalyz
             parentSyntax = parentSyntax.Parent;
         }
 
-        var variableSymbol = semanticModel.GetDeclaredSymbol(variable);
-        return variableSymbol != null
+        var variableSymbol = model.GetDeclaredSymbol(variable);
+        return variableSymbol is not null
             && parentSyntax.DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
-                .Where(x => x.GetName().Equals(variableSymbol.Name) && variableSymbol.Equals(semanticModel.GetSymbolInfo(x).Symbol))
-                .Any(x => IsMutatingUse(semanticModel, x));
+                .Where(x => x.GetName().Equals(variableSymbol.Name) && variableSymbol.Equals(model.GetSymbolInfo(x).Symbol))
+                .Any(x => IsMutatingUse(model, x));
 
         static bool IsMethodLike(SyntaxNode arg) =>
             arg is BaseMethodDeclarationSyntax
@@ -136,30 +137,31 @@ public sealed class UnchangedLocalVariablesShouldBeConst : SonarDiagnosticAnalyz
             || LocalFunctionStatementSyntaxWrapper.IsInstance(arg);
     }
 
-    private static bool IsMutatingUse(SemanticModel semanticModel, IdentifierNameSyntax identifier) =>
+    private static bool IsMutatingUse(SemanticModel model, IdentifierNameSyntax identifier) =>
         identifier.Parent switch
         {
             AssignmentExpressionSyntax { Left: { } left } => identifier.Equals(left),
             ArgumentSyntax argumentSyntax => argumentSyntax.IsInTupleAssignmentTarget() || !argumentSyntax.RefOrOutKeyword.IsKind(SyntaxKind.None),
             PostfixUnaryExpressionSyntax => true,
             PrefixUnaryExpressionSyntax => true,
-            _ => IsUsedAsLambdaExpression(semanticModel, identifier),
+            { } refExpression when RefExpressionSyntaxWrapper.IsInstance(refExpression) => !IsAssignedToRefReadonly(identifier),
+            _ => IsUsedAsLambdaExpression(model, identifier),
         };
 
-    private static bool IsUsedAsLambdaExpression(SemanticModel semanticModel, IdentifierNameSyntax identifier)
+    private static bool IsUsedAsLambdaExpression(SemanticModel model, IdentifierNameSyntax identifier)
     {
         if (identifier.FirstAncestorOrSelf<LambdaExpressionSyntax>().GetSelfOrTopParenthesizedExpression() is { } lambda)
         {
             if (lambda.Parent is ArgumentSyntax argument
                 && argument.FirstAncestorOrSelf<InvocationExpressionSyntax>() is { } invocation)
             {
-                var lookup = new CSharpMethodParameterLookup(invocation, semanticModel);
+                var lookup = new CSharpMethodParameterLookup(invocation, model);
                 return lookup.TryGetSymbol(argument, out var parameter) && parameter.IsType(KnownType.System_Linq_Expressions_Expression_T);
             }
             else if (lambda.Parent is AssignmentExpressionSyntax assignment)
             {
                 // Lambda cannot be on the left side, we don't need to check it
-                return assignment.Left.IsKnownType(KnownType.System_Linq_Expressions_Expression_T, semanticModel);
+                return assignment.Left.IsKnownType(KnownType.System_Linq_Expressions_Expression_T, model);
             }
         }
         return false;
@@ -174,10 +176,15 @@ public sealed class UnchangedLocalVariablesShouldBeConst : SonarDiagnosticAnalyz
             Rule,
             declaratorSyntax.Identifier,
             declaratorSyntax.Identifier.ValueText,
-            AddionalMessageHints(c.SemanticModel, declaratorSyntax));
+            AdditionalMessageHints(c.SemanticModel, declaratorSyntax));
 
-    private static string AddionalMessageHints(SemanticModel semanticModel, VariableDeclaratorSyntax declaratorSyntax) =>
+    private static string AdditionalMessageHints(SemanticModel model, VariableDeclaratorSyntax declaratorSyntax) =>
         declaratorSyntax is { Parent: VariableDeclarationSyntax { Type: { IsVar: true } typeSyntax } }
-            ? string.Format(MessageFormatVarHint, semanticModel.GetTypeInfo(typeSyntax).Type.ToMinimalDisplayString(semanticModel, typeSyntax.SpanStart))
+            ? string.Format(MessageFormatVarHint, model.GetTypeInfo(typeSyntax).Type.ToMinimalDisplayString(model, typeSyntax.SpanStart))
             : string.Empty;
+
+    private static bool IsAssignedToRefReadonly(IdentifierNameSyntax identifier) =>
+        identifier.Ancestors().OfType<VariableDeclaratorSyntax>().FirstOrDefault() is { Parent: VariableDeclarationSyntax { Type: var type } }
+        && RefTypeSyntaxWrapper.IsInstance(type)
+        && ((RefTypeSyntaxWrapper)type).ReadOnlyKeyword.IsKind(SyntaxKind.ReadOnlyKeyword);
 }

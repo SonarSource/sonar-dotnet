@@ -11,9 +11,12 @@ public class Sample(string str)
     }
 
     //https://sonarsource.atlassian.net/browse/NET-534
-    public void Test(int a)
+    public void Test()
     {
-        int b = 42; // Noncompliant FP
+        int a = 42; // Noncompliant
+        ref readonly int r = ref a;
+        
+        int b = 42; // Compliant
         ref int x = ref b;
         x++;
 
@@ -33,6 +36,5 @@ public class Sample(string str)
     {
         var z = number;
     }
-
 }
 
