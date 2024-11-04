@@ -78,6 +78,22 @@ public static class RegexExtensions
             return EmptyMatchCollection;
         }
     }
+
+    /// <summary>
+    /// Replaces <paramref name="input"/> with <paramref name="replacement"/> in <paramref name="regex"/>.
+    /// Returns the original <paramref name="input"/> in case of an <see cref="RegexMatchTimeoutException" />.
+    /// </summary>
+    public static string SafeReplace(this Regex regex, string input, string replacement)
+    {
+        try
+        {
+            return regex.Replace(input, replacement);
+        }
+        catch (RegexMatchTimeoutException)
+        {
+            return input;
+        }
+    }
 }
 
 public static class SafeRegex

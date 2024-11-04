@@ -23,6 +23,7 @@ namespace SonarAnalyzer.Core.Facade;
 public interface ISyntaxKindFacade<out TSyntaxKind> where TSyntaxKind : struct
 {
     abstract TSyntaxKind Attribute { get; }
+    abstract TSyntaxKind AttributeArgument { get; }
     abstract TSyntaxKind[] CastExpressions { get; }
     abstract TSyntaxKind ClassDeclaration { get; }
     abstract TSyntaxKind[] ClassAndRecordDeclarations { get; }

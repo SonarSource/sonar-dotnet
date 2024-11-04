@@ -23,6 +23,7 @@ namespace SonarAnalyzer.CSharp.Core.Facade.Implementation;
 internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
 {
     public SyntaxKind Attribute => SyntaxKind.Attribute;
+    public SyntaxKind AttributeArgument => SyntaxKind.AttributeArgument;
     public SyntaxKind[] CastExpressions => new[] {SyntaxKind.CastExpression };
     public SyntaxKind ClassDeclaration => SyntaxKind.ClassDeclaration;
     public SyntaxKind[] ClassAndRecordDeclarations => new[]

@@ -18,18 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.Shared.Extensions;
+
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class DebuggerDisplayUsesExistingMembers : DebuggerDisplayUsesExistingMembersBase<AttributeSyntax, SyntaxKind>
+public sealed class DebuggerDisplayUsesExistingMembers : DebuggerDisplayUsesExistingMembersBase<AttributeArgumentSyntax, SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override SyntaxNode AttributeFormatString(AttributeSyntax attribute) =>
-        attribute.ArgumentList.Arguments.FirstOrDefault() is { Expression: LiteralExpressionSyntax { RawKind: (int)SyntaxKind.StringLiteralExpression } formatString }
-            ? formatString
-            : null;
+    protected override SyntaxNode AttributeTarget(AttributeArgumentSyntax attribute) =>
+        attribute.GetAncestor<AttributeListSyntax>()?.Parent;
 
-    protected override bool IsValidMemberName(string memberName) =>
-        SyntaxFacts.IsValidIdentifier(memberName);
+    protected override ImmutableArray<SyntaxNode> ResolvableIdentifiers(SyntaxNode expression)
+    {
+        return expression.DescendantNodesAndSelf().Any(x => x.Kind() is SyntaxKindEx.SingleVariableDesignation)
+            ? ImmutableArray<SyntaxNode>.Empty // A variable was declared inside the expression. This would result in FPs and needs more advanced handling.
+            : MostLeftIdentifier(expression);
+
+        static ImmutableArray<SyntaxNode> MostLeftIdentifier(SyntaxNode node) =>
+            node is ExpressionSyntax expression
+            ? expression.ExtractMemberIdentifier().Select(x => x.GetLeftMostInMemberAccess()).ToImmutableArray<SyntaxNode>()
+            : ImmutableArray<SyntaxNode>.Empty;
+    }
 }

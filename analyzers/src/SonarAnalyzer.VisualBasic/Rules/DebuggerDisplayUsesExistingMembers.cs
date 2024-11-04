@@ -21,15 +21,15 @@
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class DebuggerDisplayUsesExistingMembers : DebuggerDisplayUsesExistingMembersBase<AttributeSyntax, SyntaxKind>
+public sealed class DebuggerDisplayUsesExistingMembers : DebuggerDisplayUsesExistingMembersBase<SimpleArgumentSyntax, SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override SyntaxNode AttributeFormatString(AttributeSyntax attribute) =>
-        attribute.ArgumentList.Arguments.FirstOrDefault() is SimpleArgumentSyntax { Expression: LiteralExpressionSyntax { RawKind: (int)SyntaxKind.StringLiteralExpression } formatString }
-            ? formatString
-            : null;
+    protected override SyntaxNode AttributeTarget(SimpleArgumentSyntax attribute) =>
+        attribute.GetAncestor<AttributeListSyntax>()?.Parent;
 
-    protected override bool IsValidMemberName(string memberName) =>
-        SyntaxFacts.IsValidIdentifier(memberName);
+    protected override ImmutableArray<SyntaxNode> ResolvableIdentifiers(SyntaxNode expression) =>
+        expression is IdentifierNameSyntax identifierName
+            ? ImmutableArray.Create<SyntaxNode>(identifierName)
+            : ImmutableArray<SyntaxNode>.Empty;
 }

@@ -68,6 +68,18 @@ public class RegexExtensionsTest
     }
 
     [DataTestMethod]
+    [DataRow(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", 1, @"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj")]
+    [DataRow(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", 1_000_000, @"Replaced")]
+    [DataRow(@"äöü", 1, "äöü")]
+    [DataRow(@"äöü", 1_000_000, "äöü")]
+    public void SafeReplace_Timeout(string input, long timeoutTicks, string expected)
+    {
+        var regex = new Regex(TimeoutPattern, RegexOptions.None, TimeSpan.FromTicks(timeoutTicks));
+        var actual = regex.SafeReplace(input, "Replaced");
+        actual.Should().Be(expected);
+    }
+
+    [DataTestMethod]
     [DataRow(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", 1, false)]
     [DataRow(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", 1_000_000, true)]
     [DataRow(@"äöü", 1, false)]

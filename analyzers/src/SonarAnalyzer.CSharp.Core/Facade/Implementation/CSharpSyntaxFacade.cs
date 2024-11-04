@@ -165,4 +165,7 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
 
     public override bool TryGetOperands(SyntaxNode invocation, out SyntaxNode left, out SyntaxNode right) =>
         Cast<InvocationExpressionSyntax>(invocation).TryGetOperands(out left, out right);
+
+    public override SyntaxNode ParseExpression(string expression) =>
+        SyntaxFactory.ParseExpression(expression);
 }

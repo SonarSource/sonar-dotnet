@@ -148,6 +148,16 @@ public class ArgumentDescriptor
             parameterConstraint: parameterConstraint,
             refKind: null);
 
+    public static ArgumentDescriptor AttributeArgument(KnownType attributeType, string constructorParameterName, int argumentPosition) =>
+        AttributeArgument(
+            x => x is { MethodKind: MethodKind.Constructor, ContainingType: { Name: { } name } type }
+                && attributeType.Matches(type)
+                && AttributeClassNameConstraint(attributeType.TypeName, name, StringComparison.Ordinal),
+            (x, c) => AttributeClassNameConstraint(attributeType.TypeName, x, c),
+            (_, _, _) => true,
+            x => x.Name == constructorParameterName,
+            (_, i) => i is null || i.Value == argumentPosition);
+
     public static ArgumentDescriptor AttributeArgument(string attributeName, string parameterName, int argumentPosition) =>
         AttributeArgument(
             x => x is { MethodKind: MethodKind.Constructor, ContainingType.Name: { } name } && AttributeClassNameConstraint(attributeName, name, StringComparison.Ordinal),
@@ -169,6 +179,16 @@ public class ArgumentDescriptor
             parameterConstraint: parameterConstraint,
             refKind: null);
 
+    public static ArgumentDescriptor AttributeProperty(KnownType attributeType, string propertyName) =>
+        AttributeArgument(
+            attributeConstructorConstraint: x => x is { MethodKind: MethodKind.PropertySet, AssociatedSymbol: { Name: { } name, ContainingType: { } type } }
+                && name == propertyName
+                && attributeType.Matches(type),
+            attributeNameConstraint: (s, c) => AttributeClassNameConstraint(attributeType.TypeName, s, c),
+            (_, _, _) => true,
+            parameterConstraint: _ => true,
+            argumentListConstraint: (_, _) => true);
+
     public static ArgumentDescriptor AttributeProperty(string attributeName, string propertyName) =>
         AttributeArgument(
             attributeConstructorConstraint: x => x is { MethodKind: MethodKind.PropertySet, AssociatedSymbol.Name: { } name } && name == propertyName,
@@ -177,8 +197,8 @@ public class ArgumentDescriptor
             parameterConstraint: _ => true,
             argumentListConstraint: (_, _) => true);
 
-    private static bool AttributeClassNameConstraint(string expectedAttributeName, string nodeClassName, StringComparison c) =>
-        nodeClassName.Equals(expectedAttributeName, c) || nodeClassName.Equals($"{expectedAttributeName}Attribute");
+    private static bool AttributeClassNameConstraint(string attributeTypeName, string nodeClassName, StringComparison c) =>
+        nodeClassName.Equals(attributeTypeName, c) || attributeTypeName.Equals($"{nodeClassName}Attribute", c);
 
     private static ArgumentDescriptor MethodInvocation(KnownType invokedType,
                                                        string methodName,

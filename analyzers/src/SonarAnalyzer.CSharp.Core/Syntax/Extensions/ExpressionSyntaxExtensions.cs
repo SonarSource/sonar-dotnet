@@ -131,17 +131,6 @@ public static class ExpressionSyntaxExtensions
     public static bool IsOnThis(this ExpressionSyntax expression) =>
         IsOn(expression, SyntaxKind.ThisExpression);
 
-    private static bool IsOn(this ExpressionSyntax expression, SyntaxKind onKind) =>
-        expression switch
-        {
-            InvocationExpressionSyntax invocation => IsOn(invocation.Expression, onKind),
-            // Following statement is a simplification as we don't check where the method is defined (so this could be this or base)
-            AliasQualifiedNameSyntax or GenericNameSyntax or IdentifierNameSyntax or QualifiedNameSyntax => true,
-            MemberAccessExpressionSyntax memberAccess => memberAccess.Expression.RemoveParentheses().IsKind(onKind),
-            ConditionalAccessExpressionSyntax conditionalAccess => conditionalAccess.Expression.RemoveParentheses().IsKind(onKind),
-            _ => false,
-        };
-
     public static bool IsInNameOfArgument(this ExpressionSyntax expression, SemanticModel semanticModel)
     {
         var parentInvocation = expression.FirstAncestorOrSelf<InvocationExpressionSyntax>();
@@ -173,4 +162,73 @@ public static class ExpressionSyntaxExtensions
                && topParenthesizedExpression.Parent is AssignmentExpressionSyntax assignment
                && assignment.Left == topParenthesizedExpression;
     }
+
+    /// <summary>
+    /// Extracts all <see cref="SyntaxNode"/> that can be bound to fields, methods, parameters, locals and so on from the <paramref name="expression"/>.
+    /// <list type="table">
+    /// <item><c>a + b</c> returns <c>[IdentifierName(a), IdentifierName(b)]</c></item>
+    /// <item><c>a.b</c> returns <c>[MemberAccess(a, b)]</c></item>
+    /// <item><c>a is b</c> returns <c>[IdentifierName(a)]</c></item>. Note: <c>b</c> can bind to a type or a constant member. The constant member bind is ignored.
+    /// <item><c>(b)a</c> returns <c>[IdentifierName(a)]</c></item>. Note: b can only bind to a type and is not returned.
+    /// <item><c>a is { b.c: d e }</c> returns <c>[IdentifierName(a)]</c></item> Patterns are not visited.
+    /// <item><c>a switch { b c => d }</c> returns <c>[IdentifierName(a), IdentifierName(d)]</c></item> Patterns are not visited.
+    /// </list>
+    /// </summary>
+    public static IReadOnlyCollection<ExpressionSyntax> ExtractMemberIdentifier(this ExpressionSyntax expression) =>
+        expression switch
+        {
+            IdentifierNameSyntax identifier => [identifier], // {Prop} -> Prop
+            MemberAccessExpressionSyntax memberAccess => [memberAccess], // {Prop.Something} -> Prop.Something
+            InvocationExpressionSyntax { ArgumentList.Arguments: { } arguments } invocation =>
+                [invocation, .. arguments.SelectMany(x => ExtractMemberIdentifier(x.Expression))], // {Method(a)} -> Method(), a
+            ElementAccessExpressionSyntax { ArgumentList.Arguments: { } arguments } elementAccess => [elementAccess, .. arguments.SelectMany(x => ExtractMemberIdentifier(x.Expression))],
+            ConditionalAccessExpressionSyntax conditional => [conditional.GetRootConditionalAccessExpression()],
+            AwaitExpressionSyntax { Expression: { } awaited } => ExtractMemberIdentifier(awaited), // {await Prop} _> Prop
+            PrefixUnaryExpressionSyntax { Operand: { } operand } => ExtractMemberIdentifier(operand), // {++Prop} -> Prop
+            PostfixUnaryExpressionSyntax { Operand: { } operand } => ExtractMemberIdentifier(operand), // {Prop++} -> Prop
+            CastExpressionSyntax { Expression: { } operand } => ExtractMemberIdentifier(operand), // {(Type)Prop} -> Prop
+            BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AsExpression or (int)SyntaxKind.IsExpression, Left: { } left } =>
+                ExtractMemberIdentifier(left), // {Prop as Type} or {Prop is Type} -> Prop, {Prop is Constant} is ignored
+            BinaryExpressionSyntax { Left: { } left, Right: { } right } => [.. ExtractMemberIdentifier(left), .. ExtractMemberIdentifier(right)], // {Prop1 + Prop2} -> Prop1, Prop2
+            ParenthesizedExpressionSyntax { Expression: { } parenthesized } => ExtractMemberIdentifier(parenthesized), // {(Prop)} -> Prop
+            InterpolatedStringExpressionSyntax { Contents: { } contents } => [.. contents.OfType<InterpolationSyntax>().SelectMany(x => ExtractMemberIdentifier(x.Expression))],
+            // {Cond ? WhenTrue : WhenFalse} -> Cond, WhenTrue, WhenFalse
+            ConditionalExpressionSyntax { Condition: { } condition, WhenTrue: { } whenTrue, WhenFalse: { } whenFalse } =>
+                [.. ExtractMemberIdentifier(condition), .. ExtractMemberIdentifier(whenTrue), .. ExtractMemberIdentifier(whenFalse)],
+            // {Prop switch { Arm1 => InArm1, _ => InDefault }} -> Prop, InArm1, InDefault
+            { } switchExpression when SwitchExpressionSyntaxWrapper.IsInstance(switchExpression) && (SwitchExpressionSyntaxWrapper)switchExpression is { } wrapped =>
+                [.. ExtractMemberIdentifier(wrapped.GoverningExpression), .. wrapped.Arms.SelectMany(x => ExtractMemberIdentifier(x.Expression))],
+            { } isPattern when IsPatternExpressionSyntaxWrapper.IsInstance(isPattern) && (IsPatternExpressionSyntaxWrapper)isPattern is { } wrapped =>
+                ExtractMemberIdentifier(wrapped.Expression),
+            _ => [],
+        };
+
+    /// <summary>
+    /// On member access like operations, like <c>a.b</c>, c>a.b()</c>, or <c>a[b]</c>, the most left hand
+    /// member (<c>a</c>) is returned. <see langword="this"/> is skipped, so <c>this.a</c> returns <c>a</c>.
+    /// </summary>
+    public static ExpressionSyntax GetLeftMostInMemberAccess(this ExpressionSyntax expression) => expression switch
+    {
+        IdentifierNameSyntax identifier => identifier, // Prop
+        MemberAccessExpressionSyntax { Expression: IdentifierNameSyntax identifier } => identifier, // Prop.Something -> Prop
+        MemberAccessExpressionSyntax { Expression: ThisExpressionSyntax, Name: IdentifierNameSyntax identifier } => identifier, // this.Prop -> Prop
+        MemberAccessExpressionSyntax { Expression: { } left } => GetLeftMostInMemberAccess(left), // Prop.Something.Something -> Prop
+        InvocationExpressionSyntax { Expression: { } left } => GetLeftMostInMemberAccess(left), // Method() -> Method, also this.Method() and Method().Something
+        ElementAccessExpressionSyntax { Expression: { } left } => GetLeftMostInMemberAccess(left), // a[b] -> a
+        ConditionalAccessExpressionSyntax conditional => GetLeftMostInMemberAccess(conditional.GetRootConditionalAccessExpression().Expression), // a?.b -> a
+        ParenthesizedExpressionSyntax { Expression: { } inner } => GetLeftMostInMemberAccess(inner), // (a.b).c -> a
+        PostfixUnaryExpressionSyntax { RawKind: (int)SyntaxKindEx.SuppressNullableWarningExpression } nullSuppression => GetLeftMostInMemberAccess(nullSuppression.Operand), // a! -> a
+        _ => null,
+    };
+
+    private static bool IsOn(this ExpressionSyntax expression, SyntaxKind onKind) =>
+        expression switch
+        {
+            InvocationExpressionSyntax invocation => IsOn(invocation.Expression, onKind),
+            // Following statement is a simplification as we don't check where the method is defined (so this could be this or base)
+            AliasQualifiedNameSyntax or GenericNameSyntax or IdentifierNameSyntax or QualifiedNameSyntax => true,
+            MemberAccessExpressionSyntax memberAccess => memberAccess.Expression.RemoveParentheses().IsKind(onKind),
+            ConditionalAccessExpressionSyntax conditionalAccess => conditionalAccess.Expression.RemoveParentheses().IsKind(onKind),
+            _ => false,
+        };
 }

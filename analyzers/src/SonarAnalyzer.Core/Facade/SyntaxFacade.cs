@@ -63,6 +63,7 @@ public abstract class SyntaxFacade<TSyntaxKind> where TSyntaxKind : struct
     public abstract string StringValue(SyntaxNode node, SemanticModel model);
     public abstract bool TryGetInterpolatedTextValue(SyntaxNode node, SemanticModel model, out string interpolatedValue);
     public abstract bool TryGetOperands(SyntaxNode invocation, out SyntaxNode left, out SyntaxNode right);
+    public abstract SyntaxNode ParseExpression(string expression);
 
     protected static T Cast<T>(SyntaxNode node) where T : SyntaxNode =>
         node as T ?? throw new InvalidCastException($"A {node.GetType().Name} node can not be cast to a {typeof(T).Name} node.");
