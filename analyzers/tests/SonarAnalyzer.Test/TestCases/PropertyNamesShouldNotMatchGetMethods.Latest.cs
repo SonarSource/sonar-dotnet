@@ -191,14 +191,18 @@ namespace Tests.Diagnostics
     // https://sonarsource.atlassian.net/browse/NET-543
     public partial class PartialProperties
     {
-        public partial int Foo { get; }     // Noncompliant
-                                            // Noncompliant @-1
-        public void GetFoo() { }            // Secondary
-                                            // Secondary @-1
+        public partial int Foo { get; }       // Noncompliant {{Change either the name of property 'Foo' or the name of method 'GetFoo' to make them distinguishable.}}
+
+        public void GetFoo() { }              // Secondary
     }
 
     public partial class PartialProperties
     {
-        public partial int Foo { get => 42; }
+        public partial int Foo { get => 42; } // Noncompliant {{Change either the name of property 'Foo' or the name of method 'GetFoo' to make them distinguishable.}}
     }
+}
+
+public partial class PartialCrossFile
+{
+    public partial int Foo { get; } // Noncompliant {{Change either the name of property 'Foo' or the name of method 'GetFoo' to make them distinguishable.}}
 }

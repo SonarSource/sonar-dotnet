@@ -46,7 +46,10 @@ public class PropertyNamesShouldNotMatchGetMethodsTest
     [TestMethod]
     public void PropertyNamesShouldNotMatchGetMethods_Latest() =>
         builder
-            .AddPaths("PropertyNamesShouldNotMatchGetMethods.Latest.cs")
+            .AddPaths(
+                "PropertyNamesShouldNotMatchGetMethods.Latest.cs",
+                "PropertyNamesShouldNotMatchGetMethods.Latest.Partial1.g.cs",
+                "PropertyNamesShouldNotMatchGetMethods.Latest.Partial2.cs")
             .WithOptions(ParseOptionsHelper.CSharpLatest)
             .Verify();
 #endif
