@@ -25,10 +25,10 @@ class RawStringLiterals
     [DebuggerDisplay("""
         Some text{Some
         Property}
-        """)] int NonexistentMultiLine2 => 1;                                     // FN: the new line char make the expression within braces not a valid identifier
+        """)] int NonexistentMultiLine2 => 1;                                     // Noncompliant@-3
     [DebuggerDisplay($$"""""
         Some text{Nonexistent}
-        """"")] int NonexistentMultiLineInterpolated => 1;                        // FN: interpolated raw string literals strings not supported
+        """"")] int NonexistentMultiLineInterpolated => 1;                        // Noncompliant@-2
 }
 
 public class AccessModifiers
@@ -126,7 +126,7 @@ public partial class OtherPartialProperty
 public class EscapeChar
 {
     //https://sonarsource.atlassian.net/browse/NET-359
-    [DebuggerDisplay("{Non\existent}")] // Compliant FN: escape char in braces not a valid identifier
+    [DebuggerDisplay("{Non\existent}")] // Noncompliant {{'{Nonxistent}' is not a valid expression. CS1073: Unexpected token ''.}}
     public int SomeProperty => 1;
 
     [DebuggerDisplay("Test:\e {AnotherProperty}")] // Compliant
@@ -137,4 +137,21 @@ public class EscapeChar
 
     [DebuggerDisplay("{Nonexistent}")] // Noncompliant
     public int OtherProperty => 1;
+}
+
+[DebuggerDisplay("""{Method()}""")]                                                       // Compliant
+[DebuggerDisplay("""{Nonexistent()}""")]                                                  // Noncompliant
+[DebuggerDisplay("""{Property switch { true => "Yes", false => "No" } }""")]              // Compliant
+[DebuggerDisplay("""{Nonexistent switch { true => "Yes", false => "No" } }""")]           // Noncompliant
+[DebuggerDisplay("""{Property switch { true => Nonexistent, false => "No" } }""")]        // Noncompliant
+[DebuggerDisplay("""{Property switch { true => "Yes", false => Nonexistent } }""")]       // Noncompliant
+[DebuggerDisplay("""{Property switch { true => "Yes", false => Nonexistent } ,  nq }""")] // Noncompliant
+[DebuggerDisplay("""{Property switch { true => "Yes", false => Method() } } , nq """)]    // Compliant
+[DebuggerDisplay("""{Property switch { int i => i } }""")]                                // Compliant
+[DebuggerDisplay("""{Property switch { int i => Nonexistent } }""")]                      // FN. The variable designation int i suppresses the processing
+[DebuggerDisplay("""{Property is object o && o.ToString() == string.Empty}""")]           // Compliant
+public class Expressions
+{
+    public object Property { get; }
+    private string Method() => "";
 }

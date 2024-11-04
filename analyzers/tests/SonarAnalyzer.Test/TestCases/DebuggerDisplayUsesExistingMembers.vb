@@ -38,9 +38,9 @@ Public Class TestOnPropertiesAndFields
     <Global.System.Diagnostics.DebuggerDisplay("{Nonexistent}")> Property WithGlobalAndNonexistent As Integer ' Noncompliant {{'Nonexistent' doesn't exist in this context.}}
     '                                          ^^^^^^^^^^^^^^^
 
-    <DebuggerDisplay(ConstantWithInvalidMember)> Property WithFormatAsConstant2 As Integer                            ' FN: constants are not checked
-    <DebuggerDisplay("{Non" & "Existing}")> Property WithFormatAsConcatenationOfLiterals As Integer                   ' FN: only simple literal supported
-    <DebuggerDisplay(ConstantFragment1 & ConstantFragment2)> Property WithFormatAsConcatenationOfConstants As Integer ' FN: only simple literal supported
+    <DebuggerDisplay(ConstantWithInvalidMember)> Property WithFormatAsConstant2 As Integer                            ' Noncompliant
+    <DebuggerDisplay("{Non" & "Existing}")> Property WithFormatAsConcatenationOfLiterals As Integer                   ' Noncompliant
+    <DebuggerDisplay(ConstantFragment1 & ConstantFragment2)> Property WithFormatAsConcatenationOfConstants As Integer ' Noncompliant
 
     <DebuggerDisplay("{Me.NonexistentProperty}")> Property PropertyWithExplicitThis As Integer                        ' FN: "Me." not supported (valid when debugging a VB.NET project)
     <DebuggerDisplay("{this.NonexistentField}")> Property FieldWithExplicitThis As Integer                            ' FN: "this." not supported (valid when debugging a C# project)
@@ -156,8 +156,8 @@ Class SupportWhitespaces
     <DebuggerDisplay("{" & vbTab & "SomeProperty" & vbTab & "}")>
     <DebuggerDisplay("{ Nonexistent}")>                          ' Noncompliant {{'Nonexistent' doesn't exist in this context.}}
     <DebuggerDisplay("{Nonexistent }")>                          ' Noncompliant {{'Nonexistent' doesn't exist in this context.}}
-    <DebuggerDisplay("{" & vbTab & "Nonexistent}")>              ' FN: string concatenation not supported
-    <DebuggerDisplay("{" & vbTab & "Nonexistent" & vbTab & "}")> ' FN: string concatenation not supported
+    <DebuggerDisplay("{" & vbTab & "Nonexistent}")>              ' Noncompliant
+    <DebuggerDisplay("{" & vbTab & "Nonexistent" & vbTab & "}")> ' Noncompliant
     Property SomeProperty As Integer
 End Class
 

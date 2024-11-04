@@ -1273,7 +1273,32 @@ public class ArgumentTrackerTest
             """;
         var context = ArgumentContextCS(snippet);
 
-        var descriptor = ArgumentDescriptor.AttributeArgument("Designer", parameterName, descriptorPosition);
+        var descriptor = ArgumentDescriptor.AttributeArgument("DesignerAttribute", parameterName, descriptorPosition);
+        var result = MatchArgumentCS(context, descriptor);
+        result.Should().BeTrue();
+    }
+
+    [DataTestMethod]
+    [DataRow("""[Obsolete($$"message")]""", "message", 0)]
+    [DataRow("""[ObsoleteAttribute($$"message")]""", "message", 0)]
+    [DataRow("""[ObsoleteAttribute($$"message", true)]""", "message", 0)]
+    [DataRow("""[ObsoleteAttribute(error: true, message: $$"message")]""", "message", 0)]
+    public void Attribute_ConstructorParameters_KnownType(string attribute, string parameterName, int parameterPosition)
+    {
+        var snippet = $$"""
+            using System;
+
+            {{attribute}}
+            public class Test
+            {
+                public void M()
+                {
+                }
+            }
+            """;
+        var context = ArgumentContextCS(snippet);
+
+        var descriptor = ArgumentDescriptor.AttributeArgument(KnownType.System_ObsoleteAttribute, parameterName, parameterPosition);
         var result = MatchArgumentCS(context, descriptor);
         result.Should().BeTrue();
     }
@@ -1331,7 +1356,7 @@ public class ArgumentTrackerTest
             """;
         var context = ArgumentContextVB(snippet);
 
-        var descriptor = ArgumentDescriptor.AttributeArgument("Designer", parameterName, descriptorPosition);
+        var descriptor = ArgumentDescriptor.AttributeArgument("DesignerAttribute", parameterName, descriptorPosition);
         var result = MatchArgumentVB(context, descriptor);
         result.Should().BeTrue();
     }
@@ -1354,6 +1379,36 @@ public class ArgumentTrackerTest
         var context = ArgumentContextCS(snippet);
 
         var descriptor = ArgumentDescriptor.AttributeProperty("AttributeUsage", propertyName);
+        var result = MatchArgumentCS(context, descriptor);
+        result.Should().Be(expected);
+        if (result)
+        {
+            // The mapped parameter is the "value" parameter of the property set method.
+            context.Parameter.Name.Should().Be("value");
+            var method = context.Parameter.ContainingSymbol.Should().BeAssignableTo<IMethodSymbol>().Which;
+            method.MethodKind.Should().Be(MethodKind.PropertySet);
+            method.AssociatedSymbol.Should().BeAssignableTo<IPropertySymbol>().Which.Name.Should().Be(propertyName);
+        }
+    }
+
+    [DataTestMethod]
+    [DataRow("""[AttributeUsage(AttributeTargets.All,  $$AllowMultiple = true)]""", "AllowMultiple", true)]
+    [DataRow("""[AttributeUsage(AttributeTargets.All,  $$AllowMultiple = true, Inherited = true)]""", "AllowMultiple", true)]
+    [DataRow("""[AttributeUsage(AttributeTargets.All,  $$AllowMultiple = true, Inherited = true)]""", "Inherited", false)]
+    [DataRow("""[AttributeUsage(AttributeTargets.All,  AllowMultiple = true, $$Inherited = true)]""", "Inherited", true)]
+    public void Attribute_PropertySetter_KnownType(string attribute, string propertyName, bool expected)
+    {
+        var snippet = $$"""
+            using System;
+
+            {{attribute}}
+            public sealed class TestAttribute: Attribute
+            {
+            }
+            """;
+        var context = ArgumentContextCS(snippet);
+
+        var descriptor = ArgumentDescriptor.AttributeProperty(KnownType.System_AttributeUsageAttribute, propertyName);
         var result = MatchArgumentCS(context, descriptor);
         result.Should().Be(expected);
         if (result)

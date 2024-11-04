@@ -19,22 +19,27 @@
  */
 
 using System.Text.RegularExpressions;
-using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Core.Trackers;
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
-    where TAttributeSyntax : SyntaxNode
+public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeArgumentSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+    where TAttributeArgumentSyntax : SyntaxNode
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S4545";
 
-    private readonly Regex evaluatedExpressionRegex = new(@"\{(?<EvaluatedExpression>[^}]+)\}", RegexOptions.Multiline, RegexConstants.DefaultTimeout);
+    private static readonly ArgumentDescriptor ConstructorDescriptor = ArgumentDescriptor.AttributeArgument(KnownType.System_Diagnostics_DebuggerDisplayAttribute, "value", 0);
+    private static readonly ArgumentDescriptor NameDescriptor = ArgumentDescriptor.AttributeProperty(KnownType.System_Diagnostics_DebuggerDisplayAttribute, nameof(DebuggerDisplayAttribute.Name));
+    private static readonly ArgumentDescriptor TypeDescriptor = ArgumentDescriptor.AttributeProperty(KnownType.System_Diagnostics_DebuggerDisplayAttribute, nameof(DebuggerDisplayAttribute.Type));
 
-    protected abstract SyntaxNode AttributeFormatString(TAttributeSyntax attribute);
-    protected abstract bool IsValidMemberName(string memberName);
+    // Source of the regex: https://stackoverflow.com/questions/546433/regular-expression-to-match-balanced-parentheses#comment120990638_35271017
+    private static readonly Regex EvaluatedExpressionRegex = new(@"\{(?>\{(?<c>)|[^{}]+|\}(?<-c>))*(?(c)(?!))\}", RegexOptions.None, RegexConstants.DefaultTimeout);
+    private static readonly Regex RemoveNqModifierRegex = new(@"\s*,\s*nq\s*$", RegexOptions.None, RegexConstants.DefaultTimeout); // remove the "nq" (no quotes) modifier
+    protected abstract SyntaxNode AttributeTarget(TAttributeArgumentSyntax attribute);
+    protected abstract ImmutableArray<SyntaxNode> ResolvableIdentifiers(SyntaxNode expression);
 
-    protected override string MessageFormat => "'{0}' doesn't exist in this context.";
+    protected override string MessageFormat => "{0}";
 
     protected DebuggerDisplayUsesExistingMembersBase() : base(DiagnosticId) { }
 
@@ -42,31 +47,29 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeSyntax, T
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
             c =>
             {
-                var attribute = (TAttributeSyntax)c.Node;
-                if (Language.Syntax.IsKnownAttributeType(c.SemanticModel, attribute, KnownType.System_Diagnostics_DebuggerDisplayAttribute)
-                    && AttributeFormatString(attribute) is { } formatString
-                    && Language.Syntax.StringValue(formatString, c.SemanticModel) is { } formatStringText
-                    && FirstInvalidMemberName(c, formatStringText, attribute) is { } firstInvalidMember)
+                var attributeArgument = (TAttributeArgumentSyntax)c.Node;
+                var trackingContext = new ArgumentContext(attributeArgument, c.SemanticModel);
+                var argumentMatcher = Language.Tracker.Argument;
+                if (argumentMatcher.Or(
+                    argumentMatcher.MatchArgument(ConstructorDescriptor),
+                    argumentMatcher.MatchArgument(NameDescriptor),
+                    argumentMatcher.MatchArgument(TypeDescriptor))(trackingContext)
+                    && Language.Syntax.NodeExpression(attributeArgument) is { } formatString
+                    && Language.FindConstantValue(c.SemanticModel, formatString) is string formatStringText
+                    && FirstInvalidExpression(c, formatStringText, attributeArgument) is { } firstInvalidMember)
                 {
                     c.ReportIssue(Rule, formatString, firstInvalidMember);
                 }
             },
-            Language.SyntaxKind.Attribute);
+            Language.SyntaxKind.AttributeArgument);
 
-    private string FirstInvalidMemberName(SonarSyntaxNodeReportingContext context, string formatString, TAttributeSyntax attributeSyntax)
+    private string FirstInvalidExpression(SonarSyntaxNodeReportingContext context, string formatString, TAttributeArgumentSyntax attributeSyntax)
     {
-        try
-        {
-            return (attributeSyntax.Parent?.Parent is { } targetSyntax
-                && context.SemanticModel.GetDeclaredSymbol(targetSyntax) is { } targetSymbol
-                && TypeContainingReferencedMembers(targetSymbol) is { } typeSymbol)
-                    ? FirstInvalidMemberName(typeSymbol)
-                    : null;
-        }
-        catch (RegexMatchTimeoutException)
-        {
-            return null;
-        }
+        return (AttributeTarget(attributeSyntax) is { } targetSyntax
+            && context.SemanticModel.GetDeclaredSymbol(targetSyntax) is { } targetSymbol
+            && TypeContainingReferencedMembers(targetSymbol) is { } typeSymbol)
+                ? FirstInvalidMemberName(typeSymbol)
+                : null;
 
         string FirstInvalidMemberName(ITypeSymbol typeSymbol)
         {
@@ -76,23 +79,39 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeSyntax, T
                 .Select(x => x.Name)
                 .ToHashSet(Language.NameComparer);
 
-            foreach (Match match in evaluatedExpressionRegex.SafeMatches(formatString))
+            foreach (Match match in EvaluatedExpressionRegex.SafeMatches(formatString))
             {
-                if (match.Groups["EvaluatedExpression"] is { Success: true, Value: var evaluatedExpression }
-                    && ExtractValidMemberName(evaluatedExpression) is { } memberName
-                    && !allMembers.Contains(memberName))
+                if (match is { Success: true, Value: var evaluatedExpression }
+                    && ParseExpression(evaluatedExpression) is { } parsedExpression
+                    && CheckParsedExpression(allMembers, parsedExpression, evaluatedExpression) is { } message)
                 {
-                    return memberName;
+                    return message;
                 }
             }
-
             return null;
         }
 
-        string ExtractValidMemberName(string evaluatedExpression)
+        string CheckParsedExpression(HashSet<string> allMembers, SyntaxNode parsedExpression, string evaluatedExpression)
         {
-            var sanitizedExpression = evaluatedExpression.Split(',')[0].Trim();
-            return IsValidMemberName(sanitizedExpression) ? sanitizedExpression : null;
+            if (parsedExpression.ContainsDiagnostics
+                && parsedExpression.GetDiagnostics() is { } diagnostics
+                && diagnostics.FirstOrDefault(x => x.Severity == DiagnosticSeverity.Error) is { } firstError)
+            {
+                return $"""'{evaluatedExpression}' is not a valid expression. {firstError.Id}: {firstError.GetMessage()}.""";
+            }
+            if (ResolvableIdentifiers(parsedExpression).Select(Language.GetName).ToImmutableHashSet(Language.NameComparer) is { } resolvableNames
+                && resolvableNames.Except(allMembers) is { Count: > 0 } unresolvableNames)
+            {
+                return $"""'{unresolvableNames.First()}' doesn't exist in this context.""";
+            }
+            return null;
+        }
+
+        SyntaxNode ParseExpression(string evaluatedExpression)
+        {
+            var removeBraces = evaluatedExpression.TrimStart('{').TrimEnd('}').Trim();
+            var sanitizedExpression = RemoveNqModifierRegex.SafeReplace(removeBraces, string.Empty);
+            return Language.Syntax.ParseExpression(sanitizedExpression);
         }
 
         static ITypeSymbol TypeContainingReferencedMembers(ISymbol symbol) =>

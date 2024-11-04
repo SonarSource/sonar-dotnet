@@ -23,6 +23,7 @@ namespace SonarAnalyzer.VisualBasic.Core.Facade.Implementation;
 internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
 {
     public SyntaxKind Attribute => SyntaxKind.Attribute;
+    public SyntaxKind AttributeArgument => SyntaxKind.SimpleArgument;
     public SyntaxKind[] CastExpressions => new[] { SyntaxKind.CTypeExpression, SyntaxKind.DirectCastExpression };
     public SyntaxKind ClassDeclaration => SyntaxKind.ClassBlock;
     public SyntaxKind[] ClassAndRecordDeclarations => new[] { SyntaxKind.ClassBlock };
