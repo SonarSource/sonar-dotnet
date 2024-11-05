@@ -12,7 +12,7 @@ languages in [SonarQube](https://www.sonarsource.com/products/sonarqube), [Sonar
 
 ## Features
 
-* [460+ C# rules](https://rules.sonarsource.com/csharp) and [210+ VB.&#8203;NET rules](https://rules.sonarsource.com/vbnet)
+* [470+ C# rules](https://rules.sonarsource.com/csharp) and [210+ VB.&#8203;NET rules](https://rules.sonarsource.com/vbnet)
 * Metrics (cognitive complexity, duplications, number of lines, etc.)
 * Import of [test coverage reports](https://community.sonarsource.com/t/9871) from Visual Studio Code Coverage, dotCover, OpenCover, Coverlet, Altcover.
 * Import of third-party Roslyn Analyzers results
