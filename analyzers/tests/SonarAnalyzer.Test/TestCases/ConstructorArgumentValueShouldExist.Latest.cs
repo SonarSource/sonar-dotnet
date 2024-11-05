@@ -36,7 +36,6 @@ namespace CSharp13
         public MyExtension3(object value1) { Value1 = value1; }
         public override object ProvideValue(IServiceProvider serviceProvider) => null;
         [ConstructorArgument("value2")] // Noncompliant
-                                        // Noncompliant @-1
         public partial object Value1 { get; set; }
     }
 }

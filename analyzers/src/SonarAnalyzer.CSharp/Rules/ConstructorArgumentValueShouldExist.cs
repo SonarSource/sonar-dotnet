@@ -18,42 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class ConstructorArgumentValueShouldExist : ConstructorArgumentValueShouldExistBase<SyntaxKind, AttributeSyntax>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ConstructorArgumentValueShouldExist : ConstructorArgumentValueShouldExistBase
-    {
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                c =>
-                {
-                    var propertyDeclaration = (PropertyDeclarationSyntax)c.Node;
-                    var propertySymbol = c.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
-                    CheckConstructorArgumentProperty(c, propertyDeclaration, propertySymbol);
-                },
-                SyntaxKind.PropertyDeclaration);
-        }
-
-        protected override IEnumerable<string> GetAllParentClassConstructorArgumentNames(SyntaxNode propertyDeclaration)
-        {
-            return propertyDeclaration
-                .FirstAncestorOrSelf<ClassDeclarationSyntax>()
-                .Members
-                .OfType<ConstructorDeclarationSyntax>()
-                .SelectMany(x => x.ParameterList.Parameters)
-                .Select(x => x.Identifier.ValueText);
-        }
-
-        protected override void ReportIssue(SonarSyntaxNodeReportingContext c, AttributeData constructorArgumentAttribute)
-        {
-            var attributeSyntax =
-                (AttributeSyntax)constructorArgumentAttribute.ApplicationSyntaxReference.GetSyntax();
-            c.ReportIssue(rule, attributeSyntax.ArgumentList.Arguments[0]);
-        }
-    }
+    protected override SyntaxNode GetFirstAttributeArgument(AttributeSyntax attributeSyntax) =>
+        attributeSyntax is { ArgumentList.Arguments: { Count: > 0 } arguments }
+            ? arguments[0]
+            : null;
 }

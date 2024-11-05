@@ -18,45 +18,35 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Rules;
+
+public abstract class ConstructorArgumentValueShouldExistBase<TSyntaxKind, TAttribute> : SonarDiagnosticAnalyzer<TSyntaxKind>
+    where TSyntaxKind : struct
+    where TAttribute : SyntaxNode
 {
-    public abstract class ConstructorArgumentValueShouldExistBase : SonarDiagnosticAnalyzer
-    {
-        protected const string DiagnosticId = "S4260";
-        protected const string MessageFormat =
-            "Change this 'ConstructorArgumentAttribute' value to match one of the existing constructors arguments.";
+    private const string DiagnosticId = "S4260";
 
-        protected static AttributeData GetConstructorArgumentAttributeOrDefault(IPropertySymbol propertySymbol)
-        {
-            var attributes = propertySymbol.GetAttributes(KnownType.System_Windows_Markup_ConstructorArgumentAttribute)
-                .ToList();
+    protected abstract SyntaxNode GetFirstAttributeArgument(TAttribute attributeSyntax);
 
-            return attributes.Count == 1
-                ? attributes[0]
-                : null;
-        }
+    protected override string MessageFormat => "Change this 'ConstructorArgumentAttribute' value to match one of the existing constructors arguments.";
 
-        protected void CheckConstructorArgumentProperty(SonarSyntaxNodeReportingContext c, SyntaxNode propertyDeclaration, IPropertySymbol propertySymbol)
-        {
-            if (propertySymbol == null)
+    protected ConstructorArgumentValueShouldExistBase() : base(DiagnosticId) { }
+
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
+            c =>
             {
-                return;
-            }
+                var attribute = (TAttribute)c.Node;
+                if (Language.Syntax.IsKnownAttributeType(c.SemanticModel, c.Node, KnownType.System_Windows_Markup_ConstructorArgumentAttribute)
+                    && GetFirstAttributeArgument(attribute) is { } firstAttribute
+                    && c.SemanticModel.GetConstantValue(Language.Syntax.NodeExpression(firstAttribute)) is { HasValue: true, Value: string constructorParameterName }
+                    && c.ContainingSymbol is IPropertySymbol { ContainingType: { } containingType }
+                    && !GetConstructorParameterNames(containingType).Contains(constructorParameterName))
+                {
+                    c.ReportIssue(Rule, firstAttribute.GetLocation());
+                }
+            }, Language.SyntaxKind.Attribute);
 
-            var constructorArgumentAttribute = GetConstructorArgumentAttributeOrDefault(propertySymbol);
-            if (constructorArgumentAttribute == null ||
-                constructorArgumentAttribute.ConstructorArguments.Length != 1)
-            {
-                return;
-            }
-            var specifiedName = constructorArgumentAttribute.ConstructorArguments[0].Value.ToString();
-            if (!GetAllParentClassConstructorArgumentNames(propertyDeclaration).Any(n => n == specifiedName))
-            {
-                ReportIssue(c, constructorArgumentAttribute);
-            }
-        }
-
-        protected abstract IEnumerable<string> GetAllParentClassConstructorArgumentNames(SyntaxNode propertyDeclaration);
-        protected abstract void ReportIssue(SonarSyntaxNodeReportingContext c, AttributeData constructorArgumentAttribute);
-    }
+    private static IEnumerable<string> GetConstructorParameterNames(INamedTypeSymbol containingSymbol) =>
+        containingSymbol?.Constructors.SelectMany(x => x.Parameters).Select(x => x.Name) ?? [];
 }
