@@ -1,0 +1,21 @@
+{
+  "title": "First\/Single should be used instead of FirstOrDefault\/SingleOrDefault on collections that are known to be non-empty",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "1min"
+  },
+  "tags": [],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-7130",
+  "sqKey": "S7130",
+  "scope": "All",
+  "quickfix": "targeted",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "CLEAR"
+  }
+}
