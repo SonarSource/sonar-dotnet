@@ -64,7 +64,7 @@ public class DotWriterTest
     public void WriteNode_WithItems()
     {
         var writer = new DotWriter();
-        writer.WriteNode("1", "header", "a", "b", "c");
+        writer.WriteRecordNode("1", "header", "a", "b", "c");
         writer.ToString().Should().BeIgnoringLineEndings("1 [shape=record label=\"{header|a|b|c}\"]\r\n");
     }
 
@@ -72,7 +72,7 @@ public class DotWriterTest
     public void WriteNode_WithEncoding()
     {
         var writer = new DotWriter();
-        writer.WriteNode("1", "header", "\r", "\n", "{", "}", "<", ">", "|", "\"");
+        writer.WriteRecordNode("1", "header", "\r", "\n", "{", "}", "<", ">", "|", "\"");
         writer.ToString().Should().BeIgnoringLineEndings(@"1 [shape=record label=""{header||\n|\{|\}|\<|\>|\||\""}""]" + "\r\n");
     }
 
@@ -80,7 +80,7 @@ public class DotWriterTest
     public void WriteNode_NoItems()
     {
         var writer = new DotWriter();
-        writer.WriteNode("1", "header");
+        writer.WriteRecordNode("1", "header");
         writer.ToString().Should().BeIgnoringLineEndings("1 [shape=record label=\"{header}\"]\r\n");
     }
 }

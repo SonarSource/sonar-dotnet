@@ -120,7 +120,7 @@ public static partial class CfgSerializer
         private void WriteNode(BasicBlock block)
         {
             var header = block.Kind.ToString().ToUpperInvariant() + " #" + block.Ordinal;
-            writer.WriteNode(BlockId(block), header, block.Operations.SelectMany(SerializeOperation).Concat(SerializeBranchValue(block.BranchValue)).ToArray());
+            writer.WriteRecordNode(BlockId(block), header, block.Operations.SelectMany(SerializeOperation).Concat(SerializeBranchValue(block.BranchValue)).ToArray());
         }
 
         private static IEnumerable<string> SerializeBranchValue(IOperation operation) =>
