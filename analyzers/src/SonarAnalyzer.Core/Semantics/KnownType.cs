@@ -272,6 +272,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Collections_Concurrent_ConcurrentDictionary_TKey_TValue = new("System.Collections.Concurrent.ConcurrentDictionary", "TKey", "TValue");
     public static readonly KnownType System_Collections_DictionaryBase = new("System.Collections.DictionaryBase");
     public static readonly KnownType System_Collections_Frozen_FrozenDictionary_TKey_TValue = new("System.Collections.Frozen.FrozenDictionary", "TKey", "TValue");
+    public static readonly KnownType System_Collections_Frozen_FrozenSet = new("System.Collections.Frozen.FrozenSet");
     public static readonly KnownType System_Collections_Frozen_FrozenSet_T = new("System.Collections.Frozen.FrozenSet", "T");
     public static readonly KnownType System_Collections_Generic_Comparer_T = new("System.Collections.Generic.Comparer", "T");
     public static readonly KnownType System_Collections_Generic_Dictionary_TKey_TValue = new("System.Collections.Generic.Dictionary", "TKey", "TValue");

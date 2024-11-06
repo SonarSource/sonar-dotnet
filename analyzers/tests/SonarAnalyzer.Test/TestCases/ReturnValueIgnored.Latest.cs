@@ -61,7 +61,7 @@ class CSharp13
         readonlySet.Min();              // Noncompliant
         readonlySet.ToHashSet();        // Noncompliant
         readonlySet.ToImmutableArray(); // Noncompliant
-        readonlySet.ToFrozenSet();      // FN
+        readonlySet.ToFrozenSet();      // Noncompliant
     }
 
     void LinqExtensions(List<int> list)
