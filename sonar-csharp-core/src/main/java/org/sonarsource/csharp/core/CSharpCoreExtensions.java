@@ -20,6 +20,7 @@
 package org.sonarsource.csharp.core;
 
 import org.sonar.api.Plugin;
+import org.sonar.api.SonarProduct;
 import org.sonarsource.dotnet.shared.plugins.AnalysisWarningsSensor;
 import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
 import org.sonarsource.dotnet.shared.plugins.DotNetRulesDefinition;
@@ -50,43 +51,48 @@ public class CSharpCoreExtensions {
   }
 
   public static void register(Plugin.Context context, PluginMetadata metadata) {
+    // SLCore (and OmniSharp-based SonarLint) needs only DotNetRulesDefinition and its dependencies. The rest should not be present.
     context.addExtensions(
-      // module-level components (some relying on deprecated Scanner APIs)
-      ModuleConfiguration.class,
-      FileTypeSensor.class,
-      LogSensor.class,
-      PropertiesSensor.class,
-      // global components
-      // collectors - they are populated by the module-level sensors
-      ProjectTypeCollector.class,
-      ReportPathCollector.class,
-      CSharpSonarWayProfile.class,
       DotNetRulesDefinition.class,
-      GlobalProtobufFileProcessor.class,
-      RoslynRules.class,
-      // sensor
-      DotNetSensor.class,
-      // language-specific
       metadata,
-      CSharpCorePluginMetadata.CSharp.class,
-      CSharpLanguageConfiguration.class,
-      // filters
-      EncodingPerFile.class,
-      WrongEncodingFileFilter.class,
-      GeneratedFileFilter.class,
-      HashProvider.class,
-      // importers / exporters
-      // Analysis warnings sensor is registered only here, without a language filter, to avoid pushing warnings multiple times.
-      AnalysisWarningsSensor.class,
-      CSharpFileCacheSensor.class,
-      ProtobufDataImporter.class,
-      RoslynDataImporter.class,
-      RoslynProfileExporter.class,
-      SonarLintProfileExporter.class);
+      RoslynRules.class);
 
-    context.addExtensions(new CSharpPropertyDefinitions(metadata).create());
-    context.addExtensions(new CodeCoverageProvider(metadata).extensions());
-    context.addExtensions(new UnitTestResultsProvider(metadata).extensions());
-    context.addExtensions(RoslynProfileExporter.sonarLintRepositoryProperties(metadata));
+    if (context.getRuntime().getProduct() != SonarProduct.SONARLINT) {
+      context.addExtensions(
+        // module-level components (some relying on deprecated Scanner APIs)
+        ModuleConfiguration.class,
+        FileTypeSensor.class,
+        LogSensor.class,
+        PropertiesSensor.class,
+        // global components
+        // collectors - they are populated by the module-level sensors
+        ProjectTypeCollector.class,
+        ReportPathCollector.class,
+        CSharpSonarWayProfile.class,
+        GlobalProtobufFileProcessor.class,
+        // sensor
+        DotNetSensor.class,
+        // language-specific
+        CSharpCorePluginMetadata.CSharp.class,
+        CSharpLanguageConfiguration.class,
+        // filters
+        EncodingPerFile.class,
+        WrongEncodingFileFilter.class,
+        GeneratedFileFilter.class,
+        HashProvider.class,
+        // importers / exporters
+        // Analysis warnings sensor is registered only here, without a language filter, to avoid pushing warnings multiple times.
+        AnalysisWarningsSensor.class,
+        CSharpFileCacheSensor.class,
+        ProtobufDataImporter.class,
+        RoslynDataImporter.class,
+        RoslynProfileExporter.class,
+        SonarLintProfileExporter.class);
+
+      context.addExtensions(new CSharpPropertyDefinitions(metadata).create());
+      context.addExtensions(new CodeCoverageProvider(metadata).extensions());
+      context.addExtensions(new UnitTestResultsProvider(metadata).extensions());
+      context.addExtensions(RoslynProfileExporter.sonarLintRepositoryProperties(metadata));
+    }
   }
 }

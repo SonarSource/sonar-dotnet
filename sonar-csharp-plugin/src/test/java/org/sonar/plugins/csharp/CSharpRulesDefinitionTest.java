@@ -93,7 +93,7 @@ class CSharpRulesDefinitionTest {
 
     RulesDefinition.Rule hardcodedCredentialsRule = repository.rule(SECURITY_HOTSPOT_RULE_KEY);
     assertThat(hardcodedCredentialsRule.type()).isEqualTo(RuleType.SECURITY_HOTSPOT);
-    assertThat(hardcodedCredentialsRule.activatedByDefault()).isFalse();
+    assertThat(hardcodedCredentialsRule.activatedByDefault()).isTrue();
   }
 
   @Test
