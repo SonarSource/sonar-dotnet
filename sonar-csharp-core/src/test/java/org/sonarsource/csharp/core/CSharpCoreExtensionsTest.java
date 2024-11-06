@@ -54,13 +54,13 @@ import static org.sonarsource.dotnet.shared.PropertyUtils.nonProperties;
 class CSharpCoreExtensionsTest {
 
   @Test
-  void register() {
+  void register_scanner() {
     SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
     Plugin.Context context = new Plugin.Context(sonarRuntime);
     CSharpCoreExtensions.register(context, TestCSharpMetadata.INSTANCE);
     var extensions = context.getExtensions();
 
-    Object[] expectedExtensions = new Object[]{
+    Object[] expectedExtensions = new Object[] {
       ModuleConfiguration.class,
       FileTypeSensor.class,
       LogSensor.class,
@@ -95,5 +95,21 @@ class CSharpCoreExtensionsTest {
         + new UnitTestResultsProvider(TestCSharpMetadata.INSTANCE).extensions().size()
         + RoslynProfileExporter.sonarLintRepositoryProperties(TestCSharpMetadata.INSTANCE).size()
         + new CSharpPropertyDefinitions(TestCSharpMetadata.INSTANCE).create().size());
+  }
+
+  @Test
+  void register_sonarlint() {
+    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarLint(Version.create(9, 9));
+    Plugin.Context context = new Plugin.Context(sonarRuntime);
+    CSharpCoreExtensions.register(context, TestCSharpMetadata.INSTANCE);
+    var extensions = context.getExtensions();
+
+    Object[] expectedExtensions = new Object[] {
+      DotNetRulesDefinition.class,
+      RoslynRules.class,
+      TestCSharpMetadata.INSTANCE,
+    };
+
+    assertThat(extensions).containsExactlyInAnyOrder(expectedExtensions);
   }
 }

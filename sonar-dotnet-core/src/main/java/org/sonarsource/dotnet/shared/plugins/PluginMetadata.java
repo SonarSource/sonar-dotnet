@@ -22,9 +22,11 @@ package org.sonarsource.dotnet.shared.plugins;
 import org.sonar.api.ExtensionPoint;
 import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.server.ServerSide;
+import org.sonarsource.api.sonarlint.SonarLintSide;
 
 @ScannerSide
 @ServerSide
+@SonarLintSide
 @ExtensionPoint
 public interface PluginMetadata {
 

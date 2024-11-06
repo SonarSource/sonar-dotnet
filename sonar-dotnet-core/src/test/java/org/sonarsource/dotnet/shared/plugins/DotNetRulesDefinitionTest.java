@@ -55,6 +55,11 @@ public class DotNetRulesDefinitionTest {
     assertThat(rule).isNotNull();
     assertThat(rule.securityStandards())
       .containsExactlyInAnyOrder("cwe:117", "cwe:532", "owaspTop10:a10", "owaspTop10:a3", "owaspTop10-2021:a9");
+    assertThat(rule.activatedByDefault()).isTrue();
+
+    rule = repository.rule("S1117");
+    assertThat(rule).isNotNull();
+    assertThat(rule.activatedByDefault()).isFalse();
   }
 
   @Test

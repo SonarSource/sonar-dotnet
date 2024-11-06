@@ -27,8 +27,10 @@ import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import org.sonar.api.server.ServerSide;
+import org.sonarsource.api.sonarlint.SonarLintSide;
 
 @ServerSide
+@SonarLintSide
 public class RoslynRules {
   private static final Gson GSON = new Gson();
 
