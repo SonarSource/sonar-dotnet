@@ -92,7 +92,7 @@ public static partial class CfgSerializer
             {
                 header += ":" + terminator.Kind().ToString().Replace("Syntax", string.Empty);
             }
-            writer.WriteNode(blockId.Get(block), header, block.Instructions.Select(x => x.ToString()).ToArray());
+            writer.WriteRecordNode(blockId.Get(block), header, block.Instructions.Select(x => x.ToString()).ToArray());
         }
 
         private void WriteEdges(Block block)

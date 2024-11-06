@@ -55,7 +55,7 @@ public class DotWriter
     public void WriteSubGraphEnd() =>
         builder.AppendLine("}");
 
-    public void WriteNode(string id, string header, params string[] items)
+    public void WriteRecordNode(string id, string header, params string[] items)
     {
         // Curly braces in the label reverse the orientation of the columns/rows
         // Columns/rows are created with pipe
@@ -67,6 +67,16 @@ public class DotWriter
             builder.Append("|").Append(Encode(item));
         }
         builder.AppendLine("}\"]");
+    }
+
+    public void WriteNode(string id, string[] attributes)
+    {
+        builder.Append(id);
+        if (attributes.Length > 0)
+        {
+            builder.Append(" [").Append(string.Join(" ", attributes)).Append("]");
+        }
+        builder.AppendLine();
     }
 
     public void WriteEdge(string startId, string endId, string label)
