@@ -58,7 +58,11 @@ if (signedXml.CheckSignature(rsaKey)) {
 </pre>
 <h3>How does this work?</h3>
 <p>Here, the compliant solution provides an RSA public key to the signature validation function. This will ensure only signatures computed with the
-associated private key will be accepted. This prevents signature forgery attacks.</p>
+associated private key will be accepted, preventing signature forgery attacks.</p>
+<p>Using the <code>CheckSignature</code> method without providing a key can be risky because it may search the <code>AddressBook</code> store for
+certificates, which includes all trusted root CA certificates on the machine. This broad trust base can be exploited by attackers. Additionally, if
+the document is not signed with an X.509 signature, the method will use the key embedded in the signature element, which can lead to accepting
+signatures from untrusted sources.</p>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>

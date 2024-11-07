@@ -3,6 +3,9 @@
 in a collection. However, <code>List.Exists</code> can be faster than <code>IEnumerable.Any</code> for <code>List</code> objects, as well as requires
 significantly less memory. For small collections, the performance difference may be negligible, but for large collections, it can be noticeable. The
 same applies to <code>ImmutableList</code> and arrays too.</p>
+<p>It is important to enable this rule with caution, as performance outcomes can vary significantly across different runtimes. Notably, the <a
+href="https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-9/#collections">performance improvements in .NET 9</a> have brought
+<code>Any</code> closer to the performance of collection-specific <code>Exists</code> methods in most scenarios.</p>
 <p><strong>Applies to</strong></p>
 <ul>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.exists">List</a> </li>
@@ -47,27 +50,32 @@ End Function
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.exists">List&lt;T&gt;.Exists(Predicate&lt;T&gt;)</a>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.exists">List&lt;T&gt;.Exists(Predicate&lt;T&gt;)</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.array.exists">Array.Exists&lt;T&gt;(T[], Predicate&lt;T&gt;)</a>
   </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.array.exists">Array.Exists&lt;T&gt;(T[], Predicate&lt;T&gt;)</a> </li>
-  <li> <a
+  <li> Microsoft Learn - <a
   href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablelist-1.exists">ImmutableList&lt;T&gt;.Exists(Predicate&lt;T&gt;)</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.any">Enumerable.Any(Predicate&lt;T&gt;)</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ef/language-reference/linq-to-entities">LINQ to Entities</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.any">Enumerable.Any(Predicate&lt;T&gt;)</a>
+  </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ef/language-reference/linq-to-entities">LINQ to
+  Entities</a> </li>
 </ul>
 <h3>Benchmarks</h3>
 <table>
   <colgroup>
-    <col style="width: 20%;">
-    <col style="width: 20%;">
-    <col style="width: 20%;">
-    <col style="width: 20%;">
-    <col style="width: 20%;">
+    <col style="width: 16.6666%;">
+    <col style="width: 16.6666%;">
+    <col style="width: 16.6666%;">
+    <col style="width: 16.6666%;">
+    <col style="width: 16.6666%;">
+    <col style="width: 16.667%;">
   </colgroup>
   <thead>
     <tr>
       <th>Method</th>
       <th>Runtime</th>
+      <th>Categories</th>
       <th>Mean</th>
       <th>Standard Deviation</th>
       <th>Allocated</th>
@@ -75,31 +83,211 @@ End Function
   </thead>
   <tbody>
     <tr>
-      <td><p>Any</p></td>
-      <td><p>.NET 7.0</p></td>
-      <td><p>6.670 ms</p></td>
-      <td><p>0.1413 ms</p></td>
-      <td><p>40004 B</p></td>
+      <td><p>ArrayAny</p></td>
+      <td><p>.NET 8.0</p></td>
+      <td><p>Array</p></td>
+      <td><p>1,174.0 ns</p></td>
+      <td><p>16.44 ns</p></td>
+      <td><p>32 B</p></td>
     </tr>
     <tr>
-      <td><p>Exists</p></td>
-      <td><p>.NET 7.0</p></td>
-      <td><p>1.364 ms</p></td>
-      <td><p>0.0270 ms</p></td>
-      <td><p>1 B</p></td>
+      <td><p>ArrayExists</p></td>
+      <td><p>.NET 8.0</p></td>
+      <td><p>Array</p></td>
+      <td><p>570.6 ns</p></td>
+      <td><p>7.12 ns</p></td>
+      <td><p>-</p></td>
     </tr>
     <tr>
-      <td><p>Any</p></td>
-      <td><p>.NET Framework 4.6.2</p></td>
-      <td><p>5.380 ms</p></td>
-      <td><p>0.0327 ms</p></td>
-      <td><p>40128 B</p></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
     </tr>
     <tr>
-      <td><p>Exists</p></td>
-      <td><p>.NET Framework 4.6.2</p></td>
-      <td><p>1.575 ms</p></td>
-      <td><p>0.0348 ms</p></td>
+      <td><p>ArrayAny</p></td>
+      <td><p>.NET 9.0</p></td>
+      <td><p>Array</p></td>
+      <td><p>358.5 ns</p></td>
+      <td><p>5.57 ns</p></td>
+      <td><p>-</p></td>
+    </tr>
+    <tr>
+      <td><p>ArrayExists</p></td>
+      <td><p>.NET 9.0</p></td>
+      <td><p>Array</p></td>
+      <td><p>581.6 ns</p></td>
+      <td><p>6.17 ns</p></td>
+      <td><p>-</p></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><p>ArrayAny</p></td>
+      <td><p>.NET Framework 4.8.1</p></td>
+      <td><p>Array</p></td>
+      <td><p>4,896.0 ns</p></td>
+      <td><p>102.83 ns</p></td>
+      <td><p>32 B</p></td>
+    </tr>
+    <tr>
+      <td><p>ArrayExists</p></td>
+      <td><p>.NET Framework 4.8.1</p></td>
+      <td><p>Array</p></td>
+      <td><p>1,649.4 ns</p></td>
+      <td><p>29.81 ns</p></td>
+      <td><p>-</p></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><p>ImmutableListAny</p></td>
+      <td><p>.NET 8.0</p></td>
+      <td><p>ImmutableList&lt;T&gt;</p></td>
+      <td><p>7,859.3 ns</p></td>
+      <td><p>91.45 ns</p></td>
+      <td><p>72 B</p></td>
+    </tr>
+    <tr>
+      <td><p>ImmutableListExists</p></td>
+      <td><p>.NET 8.0</p></td>
+      <td><p>ImmutableList&lt;T&gt;</p></td>
+      <td><p>5,898.1 ns</p></td>
+      <td><p>81.69 ns</p></td>
+      <td><p>-</p></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><p>ImmutableListAny</p></td>
+      <td><p>.NET 9.0</p></td>
+      <td><p>ImmutableList&lt;T&gt;</p></td>
+      <td><p>7,748.9 ns</p></td>
+      <td><p>119.10 ns</p></td>
+      <td><p>72 B</p></td>
+    </tr>
+    <tr>
+      <td><p>ImmutableListExists</p></td>
+      <td><p>.NET 9.0</p></td>
+      <td><p>ImmutableList&lt;T&gt;</p></td>
+      <td><p>5,705.0 ns</p></td>
+      <td><p>31.53 ns</p></td>
+      <td><p>-</p></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><p>ImmutableListAny</p></td>
+      <td><p>.NET Framework 4.8.1</p></td>
+      <td><p>ImmutableList&lt;T&gt;</p></td>
+      <td><p>45,118.5 ns</p></td>
+      <td><p>168.72 ns</p></td>
+      <td><p>72 B</p></td>
+    </tr>
+    <tr>
+      <td><p>ImmutableListExists</p></td>
+      <td><p>.NET Framework 4.8.1</p></td>
+      <td><p>ImmutableList&lt;T&gt;</p></td>
+      <td><p>41,966.0 ns</p></td>
+      <td><p>631.59 ns</p></td>
+      <td><p>-</p></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><p>ListAny</p></td>
+      <td><p>.NET 8.0</p></td>
+      <td><p>List&lt;T&gt;</p></td>
+      <td><p>1,643.5 ns</p></td>
+      <td><p>13.09 ns</p></td>
+      <td><p>40 B</p></td>
+    </tr>
+    <tr>
+      <td><p>ListExists</p></td>
+      <td><p>.NET 8.0</p></td>
+      <td><p>List&lt;T&gt;</p></td>
+      <td><p>726.2 ns</p></td>
+      <td><p>11.99 ns</p></td>
+      <td><p>-</p></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><p>ListAny</p></td>
+      <td><p>.NET 9.0</p></td>
+      <td><p>List&lt;T&gt;</p></td>
+      <td><p>398.6 ns</p></td>
+      <td><p>8.20 ns</p></td>
+      <td><p>-</p></td>
+    </tr>
+    <tr>
+      <td><p>ListExists</p></td>
+      <td><p>.NET 9.0</p></td>
+      <td><p>List&lt;T&gt;</p></td>
+      <td><p>612.4 ns</p></td>
+      <td><p>18.73 ns</p></td>
+      <td><p>-</p></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><p>ListAny</p></td>
+      <td><p>.NET Framework 4.8.1</p></td>
+      <td><p>List&lt;T&gt;</p></td>
+      <td><p>5,621.5 ns</p></td>
+      <td><p>35.80 ns</p></td>
+      <td><p>40 B</p></td>
+    </tr>
+    <tr>
+      <td><p>ListExists</p></td>
+      <td><p>.NET Framework 4.8.1</p></td>
+      <td><p>List&lt;T&gt;</p></td>
+      <td><p>1,748.0 ns</p></td>
+      <td><p>11.76 ns</p></td>
       <td><p>-</p></td>
     </tr>
   </tbody>
@@ -112,41 +300,56 @@ End Function
 </ul>
 <p>The results were generated by running the following snippet with <a href="https://github.com/dotnet/BenchmarkDotNet">BenchmarkDotNet</a>:</p>
 <pre>
-private List&lt;int&gt; data;
-private readonly Random random = new Random();
+// Explicitly cache the delegates to avoid allocations inside the benchmark.
+private readonly static Func&lt;int, bool&gt; ConditionFunc = static x =&gt; x == -1 * Math.Abs(x);
+private readonly static Predicate&lt;int&gt; ConditionPredicate = static x =&gt; x == -1 * Math.Abs(x);
+
+private List&lt;int&gt; list;
+private ImmutableList&lt;int&gt; immutableList;
+private int[] array;
 
 [Params(1_000)]
 public int N { get; set; }
 
 [GlobalSetup]
-public void Setup() =&gt;
-    data = Enumerable.Range(0, N).Select(x =&gt; 43).ToList();
-
-[Benchmark(Baseline = true)]
-public void Any()
+public void GlobalSetup()
 {
-    for (var i = 0; i &lt; N; i++)
-    {
-        _ = data.Any(x =&gt; x % 2 == 0);          // Enumerable.Any
-    }
+    list = Enumerable.Range(0, N).Select(x =&gt; N - x).ToList();
+    immutableList = ImmutableList.CreateRange(list);
+    array = list.ToArray();
 }
 
-[Benchmark]
-public void Exists()
-{
-    for (var i = 0; i &lt; N; i++)
-    {
-        _ = data.Exists(x =&gt; x % 2 == 0);       // List&lt;T&gt;.Exists
-    }
-}
+[BenchmarkCategory("List&lt;T&gt;"), Benchmark]
+public bool ListAny() =&gt;
+    list.Any(ConditionFunc);
+
+[BenchmarkCategory("List&lt;T&gt;"), Benchmark(Baseline = true)]
+public bool ListExists() =&gt;
+    list.Exists(ConditionPredicate);
+
+[BenchmarkCategory("ImmutableList&lt;T&gt;"), Benchmark(Baseline = true)]
+public bool ImmutableListAny() =&gt;
+    immutableList.Any(ConditionFunc);
+
+[BenchmarkCategory("ImmutableList&lt;T&gt;"), Benchmark]
+public bool ImmutableListExists() =&gt;
+    immutableList.Exists(ConditionPredicate);
+
+[BenchmarkCategory("Array"), Benchmark(Baseline = true)]
+public bool ArrayAny() =&gt;
+    array.Any(ConditionFunc);
+
+[BenchmarkCategory("Array"), Benchmark]
+public bool ArrayExists() =&gt;
+    Array.Exists(array, ConditionPredicate);
 </pre>
 <p>Hardware configuration:</p>
 <pre>
-BenchmarkDotNet=v0.13.5, OS=Windows 10 (10.0.19045.2846/22H2/2022Update)
+BenchmarkDotNet v0.14.0, Windows 11 (10.0.22631.4317/23H2/2023Update/SunValley3)
 11th Gen Intel Core i7-11850H 2.50GHz, 1 CPU, 16 logical and 8 physical cores
-.NET SDK=7.0.203
-  [Host]               : .NET 7.0.5 (7.0.523.17405), X64 RyuJIT AVX2
-  .NET 7.0             : .NET 7.0.5 (7.0.523.17405), X64 RyuJIT AVX2
-  .NET Framework 4.6.2 : .NET Framework 4.8.1 (4.8.9139.0), X64 RyuJIT VectorSize=256
+  [Host]               : .NET Framework 4.8.1 (4.8.9277.0), X64 RyuJIT VectorSize=256
+  .NET 8.0             : .NET 8.0.10 (8.0.1024.46610), X64 RyuJIT AVX-512F+CD+BW+DQ+VL+VBMI
+  .NET 9.0             : .NET 9.0.0 (9.0.24.47305), X64 RyuJIT AVX-512F+CD+BW+DQ+VL+VBMI
+  .NET Framework 4.8.1 : .NET Framework 4.8.1 (4.8.9277.0), X64 RyuJIT VectorSize=256
 </pre>
 

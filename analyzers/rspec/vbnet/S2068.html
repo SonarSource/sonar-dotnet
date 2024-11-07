@@ -8,7 +8,6 @@ for applications that are distributed or that are open-source.</p>
 <p>Credentials should be stored outside of the code in a configuration file, a database, or a management service for secrets.</p>
 <p>This rule flags instances of hard-coded credentials used in database and LDAP connections. It looks for hard-coded credentials in connection
 strings, and for variable names that match any of the patterns from the provided list.</p>
-<p>It’s recommended to customize the configuration of this rule with additional credential words such as "oauthToken", "secret", …​</p>
 <h2>Ask Yourself Whether</h2>
 <ul>
   <li> Credentials allow access to a sensitive component like a database, a file storage, an API or a service. </li>

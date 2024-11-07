@@ -51,7 +51,9 @@ using System.Security.Cryptography;
 
 public static void hash(string password)
 {
-    var hashed = new Rfc2898DeriveBytes(password, 32, 10000, HashAlgorithmName.SHA256);
+    var saltSize = 32;
+    var iterations = 100_000;
+    var hashed = new Rfc2898DeriveBytes(password, saltSize, iterations, HashAlgorithmName.SHA512);
 }
 </pre>
 <h3>How does this work?</h3>
