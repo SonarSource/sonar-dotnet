@@ -217,3 +217,52 @@ namespace Repro_8666
         private void DoSomething(IEnumerable<string> numbers) { }   // Noncompliant - FP: the method in the derived class has different arguments
     }
 }
+
+namespace Events
+{
+    public class Class1
+    {
+        internal event EventHandler SomeEvent;
+        internal event EventHandler SomeEvent2;
+    }
+
+    public class Class2 : Class1
+    {
+        private event EventHandler SomeEvent // Noncompliant
+        //                         ^^^^^^^^^
+        {
+            add { }
+            remove { }
+        }
+
+        private event EventHandler SomeEvent2; // Compliant FN: EventFieldDeclaration not supported yet.
+    }
+
+    public class Class3 : Class1
+    {
+        private new event EventHandler SomeEvent // Compliant: new keyword used to hide base class event
+        {
+            add { }
+            remove { }
+        }
+
+        public new event EventHandler SomeEvent2; // Compliant: new keyword used to hide base class event
+    }
+
+    public class Class4
+    {
+        public virtual event EventHandler SomeEvent;
+        public virtual event EventHandler SomeEvent2;
+    }
+
+    public class Class5 : Class4
+    {
+        public override event EventHandler SomeEvent // Compliant: override base class event
+        {
+            add { }
+            remove { }
+        }
+
+        public override event EventHandler SomeEvent2; // Compliant: override base class event
+    }
+}

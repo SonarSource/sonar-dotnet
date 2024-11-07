@@ -20,29 +20,28 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class DoNotDecreaseMemberVisibilityTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotDecreaseMemberVisibility>().WithConcurrentAnalysis(false);
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void DoNotDecreaseMemberVisibility() =>
-            builder.AddPaths("DoNotDecreaseMemberVisibility.cs", "DoNotDecreaseMemberVisibility2.cs")
-                .AddReferences(MetadataReferenceFacade.NetStandard21)
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .Verify();
+[TestClass]
+public class DoNotDecreaseMemberVisibilityTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<DoNotDecreaseMemberVisibility>().WithConcurrentAnalysis(false);
+
+    [TestMethod]
+    public void DoNotDecreaseMemberVisibility() =>
+        builder.AddPaths("DoNotDecreaseMemberVisibility.cs", "DoNotDecreaseMemberVisibility2.cs")
+            .AddReferences(MetadataReferenceFacade.NetStandard21)
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
 
 #if NET
 
-        [TestMethod]
-        public void DoNotDecreaseMemberVisibility_CS_Latest() =>
-            builder.AddPaths("DoNotDecreaseMemberVisibility.Latest.cs")
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
-                .Verify();
+    [TestMethod]
+    public void DoNotDecreaseMemberVisibility_CS_Latest() =>
+        builder.AddPaths("DoNotDecreaseMemberVisibility.Latest.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .Verify();
 
 #endif
 
-    }
 }

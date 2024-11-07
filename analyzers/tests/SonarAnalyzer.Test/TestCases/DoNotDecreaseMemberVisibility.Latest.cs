@@ -231,21 +231,25 @@ namespace PartialProperties
     public partial class DescendantClass : BaseClass
     {
         private partial int Property_01 { get; } // Noncompliant
-        private partial int this[int index] { get; } // Compliant FN
+        //                  ^^^^^^^^^^^
+        private partial int this[int index] { get; } // Noncompliant
+        //                  ^^^^
     }
 
     public partial class DescendantClass : BaseClass
     {
         private partial int Property_01 { get { return 1; } } // Noncompliant
-        private partial int this[int index] { get { return index + 1; } } // Compliant FN
+        //                  ^^^^^^^^^^^
+        private partial int this[int index] { get { return index + 1; } } // Noncompliant
+        //                  ^^^^
     }
 
     // https://sonarsource.atlassian.net/browse/NET-368
     public class AnotherClass : BaseClass
     {
-        private int this[int index]
+        private int this[int index] // Noncompliant
         {
-            get { return index + 1; } // Compliant FN, 
+            get { return index + 1; }
         }
     }
 }
