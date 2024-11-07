@@ -48,12 +48,6 @@ public static class ISymbolExtensions
     public static bool HasNotNullAttribute(this ISymbol parameter) =>
         parameter.GetAttributes() is { Length: > 0 } attributes && attributes.Any(IsNotNullAttribute);
 
-    // https://docs.microsoft.com/dotnet/api/microsoft.validatednotnullattribute
-    // https://docs.microsoft.com/dotnet/csharp/language-reference/attributes/nullable-analysis#postconditions-maybenull-and-notnull
-    // https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#NotNullAttribute
-    private static bool IsNotNullAttribute(AttributeData attribute) =>
-        attribute.HasAnyName("ValidatedNotNullAttribute", "NotNullAttribute");
-
     // https://github.com/dotnet/roslyn/blob/2a594fa2157a734a988f7b5dbac99484781599bd/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/Core/Extensions/ISymbolExtensions.cs#L93
     [ExcludeFromCodeCoverage]
     public static ImmutableArray<ISymbol> ExplicitOrImplicitInterfaceImplementations(this ISymbol symbol)
@@ -288,8 +282,49 @@ public static class ISymbolExtensions
         return false;
     }
 
+    /// <summary>
+    /// Retrieves all parts of a symbol. For partial methods or properties, both the definition and implementation parts are included. For other symbols, the symbol itself is returned.
+    /// </summary>
+    public static IEnumerable<ISymbol> AllPartialParts(this ISymbol symbol)
+    {
+        switch (symbol)
+        {
+            case IMethodSymbol method:
+                yield return method;
+                if (method.PartialImplementationPart is { } implementation)
+                {
+                    yield return implementation;
+                }
+                else if (method.PartialDefinitionPart is { } definition)
+                {
+                    yield return definition;
+                }
+                break;
+            case IPropertySymbol property:
+                yield return property;
+                if (property.PartialImplementationPart() is { } propertyImplementation)
+                {
+                    yield return propertyImplementation;
+                }
+                else if (property.PartialDefinitionPart() is { } propertyDefinition)
+                {
+                    yield return propertyDefinition;
+                }
+                break;
+            default:
+                yield return symbol;
+                break;
+        }
+    }
+
     private static bool CanBeInterfaceMember(ISymbol symbol) =>
         symbol.Kind == SymbolKind.Method
         || symbol.Kind == SymbolKind.Property
         || symbol.Kind == SymbolKind.Event;
+
+    // https://docs.microsoft.com/dotnet/api/microsoft.validatednotnullattribute
+    // https://docs.microsoft.com/dotnet/csharp/language-reference/attributes/nullable-analysis#postconditions-maybenull-and-notnull
+    // https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#NotNullAttribute
+    private static bool IsNotNullAttribute(AttributeData attribute) =>
+        attribute.HasAnyName("ValidatedNotNullAttribute", "NotNullAttribute");
 }
