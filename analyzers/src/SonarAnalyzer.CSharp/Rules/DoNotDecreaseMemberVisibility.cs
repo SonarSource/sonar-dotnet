@@ -18,156 +18,180 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class DoNotDecreaseMemberVisibility : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class DoNotDecreaseMemberVisibility : SonarDiagnosticAnalyzer
+    private const string DiagnosticId = "S4015";
+    private const string MessageFormat = "This member hides '{0}'. Make it non-private or seal the class.";
+
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(c =>
+            {
+                var classDeclaration = (TypeDeclarationSyntax)c.Node;
+                if (classDeclaration.Identifier.IsMissing
+                    || c.IsRedundantPositionalRecordContext()
+                    || !(c.ContainingSymbol is ITypeSymbol { IsSealed: false } classSymbol))
+                {
+                    return;
+                }
+
+                var issueReporter = new IssueReporter(classSymbol, c);
+                foreach (var member in classDeclaration.Members)
+                {
+                    issueReporter.ReportIssue(member);
+                }
+            },
+            SyntaxKind.ClassDeclaration,
+            SyntaxKindEx.RecordDeclaration);
+
+    private sealed class IssueReporter
     {
-        private const string DiagnosticId = "S4015";
-        private const string MessageFormat = "This member hides '{0}'. Make it non-private or seal the class.";
+        private readonly IList<IMethodSymbol> allBaseClassMethods;
+        private readonly IList<IPropertySymbol> allBaseClassProperties;
+        private readonly IList<IEventSymbol> allBaseClassEvents;
 
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private readonly SonarSyntaxNodeReportingContext context;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(c =>
-                {
-                    var classDeclaration = (TypeDeclarationSyntax)c.Node;
-                    if (classDeclaration.Identifier.IsMissing
-                        || c.IsRedundantPositionalRecordContext()
-                        || !(c.ContainingSymbol is ITypeSymbol { IsSealed: false } classSymbol))
-                    {
-                        return;
-                    }
-
-                    var issueReporter = new IssueReporter(classSymbol, c);
-                    foreach (var member in classDeclaration.Members)
-                    {
-                        issueReporter.ReportIssue(member);
-                    }
-                },
-                SyntaxKind.ClassDeclaration,
-                SyntaxKindEx.RecordDeclaration);
-
-        private sealed class IssueReporter
+        public IssueReporter(ITypeSymbol classSymbol, SonarSyntaxNodeReportingContext context)
         {
-            private readonly IList<IMethodSymbol> allBaseClassMethods;
-            private readonly IList<IPropertySymbol> allBaseClassProperties;
-            private readonly SonarSyntaxNodeReportingContext context;
+            this.context = context;
+            var allBaseClassMembers = classSymbol.BaseType
+                    .GetSelfAndBaseTypes()
+                    .SelectMany(x => x.GetMembers())
+                    .Where(x => IsSymbolVisibleFromNamespace(x, classSymbol.ContainingNamespace))
+                    .ToList();
 
-            public IssueReporter(ITypeSymbol classSymbol, SonarSyntaxNodeReportingContext context)
+            allBaseClassMethods = allBaseClassMembers.OfType<IMethodSymbol>().ToList();
+            allBaseClassProperties = allBaseClassMembers.OfType<IPropertySymbol>().ToList();
+            allBaseClassEvents = allBaseClassMembers.OfType<IEventSymbol>().ToList();
+        }
+
+        public void ReportIssue(MemberDeclarationSyntax memberDeclaration)
+        {
+            switch (context.SemanticModel.GetDeclaredSymbol(memberDeclaration))
             {
-                this.context = context;
-                var allBaseClassMembers = classSymbol.BaseType
-                        .GetSelfAndBaseTypes()
-                        .SelectMany(t => t.GetMembers())
-                        .Where(symbol => IsSymbolVisibleFromNamespace(symbol, classSymbol.ContainingNamespace))
-                        .ToList();
+                case IMethodSymbol methodSymbol:
+                    ReportMethodIssue(memberDeclaration, methodSymbol);
+                    break;
+                case IPropertySymbol propertySymbol:
+                    ReportPropertyIssue(memberDeclaration, propertySymbol);
+                    break;
+                case IEventSymbol eventSymbol:
+                    ReportEventIssue(memberDeclaration, eventSymbol);
+                    break;
+            }
+        }
 
-                allBaseClassMethods = allBaseClassMembers.OfType<IMethodSymbol>().ToList();
-                allBaseClassProperties = allBaseClassMembers.OfType<IPropertySymbol>().ToList();
+        private void ReportMethodIssue(MemberDeclarationSyntax memberDeclaration, IMethodSymbol methodSymbol)
+        {
+            if (memberDeclaration is MethodDeclarationSyntax methodDeclaration
+                && !methodDeclaration.Modifiers.Any(SyntaxKind.NewKeyword)
+                && allBaseClassMethods.FirstOrDefault(x =>
+                    IsDecreasingAccess(x.DeclaredAccessibility, methodSymbol.DeclaredAccessibility, false)
+                    && IsMatchingSignature(x, methodSymbol)) is { } hidingMethod)
+            {
+                context.ReportIssue(Rule, methodDeclaration.Identifier, hidingMethod.ToDisplayString());
+            }
+        }
+
+        private void ReportPropertyIssue(MemberDeclarationSyntax memberDeclaration, IPropertySymbol propertySymbol)
+        {
+            if (memberDeclaration is BasePropertyDeclarationSyntax basePropertyDeclaration
+                && !basePropertyDeclaration.Modifiers.Any(SyntaxKind.NewKeyword)
+                && allBaseClassProperties.FirstOrDefault(x => IsDecreasingPropertyAccess(x, propertySymbol, propertySymbol.IsOverride)) is { } hidingProperty)
+            {
+                context.ReportIssue(Rule, GetPropertyToken(basePropertyDeclaration), hidingProperty.ToDisplayString());
+            }
+        }
+
+        private void ReportEventIssue(MemberDeclarationSyntax memberDeclaration, IEventSymbol eventSymbol)
+        {
+            if (memberDeclaration is EventDeclarationSyntax eventDeclaration
+                && !eventDeclaration.Modifiers.Any(SyntaxKind.NewKeyword)
+                && allBaseClassEvents.FirstOrDefault(x => IsDecreasingAccess(x.DeclaredAccessibility, eventSymbol.DeclaredAccessibility, false)
+                    && x.Name == eventSymbol.Name) is { } hidingEvent)
+            {
+                context.ReportIssue(Rule, eventDeclaration.Identifier, hidingEvent.ToDisplayString());
+            }
+        }
+
+        private static SyntaxToken GetPropertyToken(BasePropertyDeclarationSyntax propertyLike) =>
+            propertyLike switch
+            {
+                PropertyDeclarationSyntax property => property.Identifier,
+                IndexerDeclarationSyntax indexer => indexer.ThisKeyword,
+                _ => propertyLike.GetFirstToken()
+            };
+
+        private static bool IsSymbolVisibleFromNamespace(ISymbol symbol, INamespaceSymbol ns) =>
+            symbol.DeclaredAccessibility != Accessibility.Private
+            && (symbol.DeclaredAccessibility != Accessibility.Internal || ns.Equals(symbol.ContainingNamespace));
+
+        private static bool IsDecreasingPropertyAccess(IPropertySymbol baseProperty, IPropertySymbol propertySymbol, bool isOverride)
+        {
+            if (baseProperty.Name != propertySymbol.Name
+                || !AreParameterTypesEqual(baseProperty.Parameters, propertySymbol.Parameters))
+            {
+                return false;
             }
 
-            public void ReportIssue(MemberDeclarationSyntax memberDeclaration)
+            var baseGetAccess = GetEffectiveDeclaredAccess(baseProperty.GetMethod, baseProperty.DeclaredAccessibility);
+            var baseSetAccess = GetEffectiveDeclaredAccess(baseProperty.SetMethod, baseProperty.DeclaredAccessibility);
+
+            var propertyGetAccess = GetEffectiveDeclaredAccess(propertySymbol.GetMethod, baseProperty.DeclaredAccessibility);
+            var propertySetAccess = GetEffectiveDeclaredAccess(propertySymbol.SetMethod, baseProperty.DeclaredAccessibility);
+
+            return IsDecreasingAccess(baseGetAccess, propertyGetAccess, isOverride)
+                   || IsDecreasingAccess(baseSetAccess, propertySetAccess, isOverride);
+        }
+
+        private static Accessibility GetEffectiveDeclaredAccess(ISymbol symbol, Accessibility defaultAccessibility)
+        {
+            if (symbol is null)
             {
-                switch (context.SemanticModel.GetDeclaredSymbol(memberDeclaration))
-                {
-                    case IMethodSymbol methodSymbol:
-                        ReportMethodIssue(memberDeclaration, methodSymbol);
-                        break;
-                    case IPropertySymbol propertySymbol:
-                        ReportPropertyIssue(memberDeclaration, propertySymbol);
-                        break;
-                }
+                return Accessibility.NotApplicable;
             }
 
-            private void ReportMethodIssue(MemberDeclarationSyntax memberDeclaration, IMethodSymbol methodSymbol)
+            return symbol.DeclaredAccessibility == Accessibility.NotApplicable
+                ? defaultAccessibility
+                : symbol.DeclaredAccessibility;
+        }
+
+        private static bool IsMatchingSignature(IMethodSymbol baseMethod, IMethodSymbol methodSymbol) =>
+            baseMethod.Name == methodSymbol.Name
+            && baseMethod.TypeParameters.Length == methodSymbol.TypeParameters.Length
+            && AreParameterTypesEqual(baseMethod.Parameters, methodSymbol.Parameters);
+
+        private static bool AreParameterTypesEqual(IEnumerable<IParameterSymbol> first, IEnumerable<IParameterSymbol> second) =>
+            first.Equals(second, AreParameterTypesEqual);
+
+        private static bool AreParameterTypesEqual(IParameterSymbol first, IParameterSymbol second)
+        {
+            if (first.RefKind != second.RefKind)
             {
-                if (memberDeclaration is MethodDeclarationSyntax methodDeclaration
-                    && !methodDeclaration.Modifiers.Any(SyntaxKind.NewKeyword)
-                    && allBaseClassMethods.FirstOrDefault(x =>
-                        IsDecreasingAccess(x.DeclaredAccessibility, methodSymbol.DeclaredAccessibility, false)
-                        && IsMatchingSignature(x, methodSymbol)) is { } hidingMethod)
-                {
-                    context.ReportIssue(Rule, methodDeclaration.Identifier, hidingMethod.ToDisplayString());
-                }
+                return false;
             }
 
-            private void ReportPropertyIssue(MemberDeclarationSyntax memberDeclaration, IPropertySymbol propertySymbol)
+            return first.Type.TypeKind == TypeKind.TypeParameter
+                ? second.Type.TypeKind == TypeKind.TypeParameter
+                : Equals(first.Type.OriginalDefinition, second.Type.OriginalDefinition);
+        }
+
+        private static bool IsDecreasingAccess(Accessibility baseAccess, Accessibility memberAccess, bool isOverride)
+        {
+            if (memberAccess == Accessibility.NotApplicable && isOverride)
             {
-                if (memberDeclaration is PropertyDeclarationSyntax propertyDeclaration
-                    && !propertyDeclaration.Modifiers.Any(SyntaxKind.NewKeyword)
-                    && allBaseClassProperties.FirstOrDefault(x => IsDecreasingPropertyAccess(x, propertySymbol, propertySymbol.IsOverride)) is { } hidingProperty)
-                {
-                    context.ReportIssue(Rule, propertyDeclaration.Identifier, hidingProperty.ToDisplayString());
-                }
+                return false;
             }
 
-            private static bool IsSymbolVisibleFromNamespace(ISymbol symbol, INamespaceSymbol ns) =>
-                symbol.DeclaredAccessibility != Accessibility.Private
-                && (symbol.DeclaredAccessibility != Accessibility.Internal || ns.Equals(symbol.ContainingNamespace));
-
-            private static bool IsDecreasingPropertyAccess(IPropertySymbol baseProperty, IPropertySymbol propertySymbol, bool isOverride)
-            {
-                if (baseProperty.Name != propertySymbol.Name
-                    || !AreParameterTypesEqual(baseProperty.Parameters, propertySymbol.Parameters))
-                {
-                    return false;
-                }
-
-                var baseGetAccess = GetEffectiveDeclaredAccess(baseProperty.GetMethod, baseProperty.DeclaredAccessibility);
-                var baseSetAccess = GetEffectiveDeclaredAccess(baseProperty.SetMethod, baseProperty.DeclaredAccessibility);
-
-                var propertyGetAccess = GetEffectiveDeclaredAccess(propertySymbol.GetMethod, baseProperty.DeclaredAccessibility);
-                var propertySetAccess = GetEffectiveDeclaredAccess(propertySymbol.SetMethod, baseProperty.DeclaredAccessibility);
-
-                return IsDecreasingAccess(baseGetAccess, propertyGetAccess, isOverride)
-                       || IsDecreasingAccess(baseSetAccess, propertySetAccess, isOverride);
-            }
-
-            private static Accessibility GetEffectiveDeclaredAccess(ISymbol symbol, Accessibility defaultAccessibility)
-            {
-                if (symbol == null)
-                {
-                    return Accessibility.NotApplicable;
-                }
-
-                return symbol.DeclaredAccessibility == Accessibility.NotApplicable
-                    ? defaultAccessibility
-                    : symbol.DeclaredAccessibility;
-            }
-
-            private static bool IsMatchingSignature(IMethodSymbol baseMethod, IMethodSymbol methodSymbol) =>
-                baseMethod.Name == methodSymbol.Name
-                && baseMethod.TypeParameters.Length == methodSymbol.TypeParameters.Length
-                && AreParameterTypesEqual(baseMethod.Parameters, methodSymbol.Parameters);
-
-            private static bool AreParameterTypesEqual(IEnumerable<IParameterSymbol> first, IEnumerable<IParameterSymbol> second) =>
-                first.Equals(second, AreParameterTypesEqual);
-
-            private static bool AreParameterTypesEqual(IParameterSymbol first, IParameterSymbol second)
-            {
-                if (first.RefKind != second.RefKind)
-                {
-                    return false;
-                }
-
-                return first.Type.TypeKind == TypeKind.TypeParameter
-                    ? second.Type.TypeKind == TypeKind.TypeParameter
-                    : Equals(first.Type.OriginalDefinition, second.Type.OriginalDefinition);
-            }
-
-            private static bool IsDecreasingAccess(Accessibility baseAccess, Accessibility memberAccess, bool isOverride)
-            {
-                if (memberAccess == Accessibility.NotApplicable && isOverride)
-                {
-                    return false;
-                }
-
-                return (baseAccess != Accessibility.NotApplicable && memberAccess == Accessibility.Private)
-                       || (baseAccess == Accessibility.Public && memberAccess != Accessibility.Public);
-            }
+            return (baseAccess != Accessibility.NotApplicable && memberAccess == Accessibility.Private)
+                   || (baseAccess == Accessibility.Public && memberAccess != Accessibility.Public);
         }
     }
 }
