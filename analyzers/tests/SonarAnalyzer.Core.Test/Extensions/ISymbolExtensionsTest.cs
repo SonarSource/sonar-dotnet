@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using ISymbolExtensionsCommon = SonarAnalyzer.Core.Extensions.ISymbolExtensions;
 
 namespace SonarAnalyzer.Core.Test.Extensions;
@@ -304,10 +305,139 @@ public class ISymbolExtensionsTest
 #endif
     }
 
+    [TestMethod]
+    public void AllPartialParts_MethodSymbol_NonPartialMethod()
+    {
+        const string code = """
+            public partial class Sample
+            {
+                partial void SymbolMember();
+            }
+            """;
+        var symbol = CreateSymbol(code, AnalyzerLanguage.CSharp);
+        var methodSymbol = symbol as IMethodSymbol;
+
+        var result = ISymbolExtensionsCommon.AllPartialParts(symbol).ToList();
+
+        result.Should().ContainSingle().And.Subject.Should().Contain(methodSymbol);
+    }
+
+    [TestMethod]
+    public void AllPartialParts_MethodSymbol_PartialMethodSameClass()
+    {
+        const string code = """
+            public partial class Sample
+            {
+                partial void SymbolMember();
+                partial void SymbolMember() { }
+            }
+            """;
+        var symbols = CreateSymbols(code, AnalyzerLanguage.CSharp, x => x is MethodDeclarationSyntax);
+
+        var declarationSymbol = symbols[0] as IMethodSymbol;
+        var declarationResult = ISymbolExtensionsCommon.AllPartialParts(declarationSymbol).ToList();
+        declarationResult.Should().HaveCount(2).And.Contain([declarationSymbol, declarationSymbol.PartialImplementationPart]);
+
+        var implementationSymbol = symbols[1] as IMethodSymbol;
+        var implementationResult = ISymbolExtensionsCommon.AllPartialParts(implementationSymbol).ToList();
+        implementationResult.Should().HaveCount(2).And.Contain([implementationSymbol, implementationSymbol.PartialDefinitionPart]);
+    }
+
+    [TestMethod]
+    public void AllPartialParts_MethodSymbol_PartialMethodDifferentClass()
+    {
+        const string code = """
+            public partial class Sample
+            {
+                partial void SymbolMember();
+            }
+            public partial class Sample
+            {
+                partial void SymbolMember() { }
+            }
+            """;
+        var symbols = CreateSymbols(code, AnalyzerLanguage.CSharp, x => x is MethodDeclarationSyntax);
+
+        var declarationSymbol = symbols[0] as IMethodSymbol;
+        var declarationResult = ISymbolExtensionsCommon.AllPartialParts(declarationSymbol).ToList();
+        declarationResult.Should().HaveCount(2).And.Contain([declarationSymbol, declarationSymbol.PartialImplementationPart]);
+
+        var implementationSymbol = symbols[1] as IMethodSymbol;
+        var implementationResult = ISymbolExtensionsCommon.AllPartialParts(implementationSymbol).ToList();
+        implementationResult.Should().HaveCount(2).And.Contain([implementationSymbol, implementationSymbol.PartialDefinitionPart]);
+    }
+
+    [TestMethod]
+    public void AllPartialParts_PropertySymbol_PartialPropertySameClass()
+    {
+        const string code = """
+            public partial class Sample
+            {
+                public partial int SymbolMember { get; set; }
+                public partial int SymbolMember
+                {
+                    get => 0;
+                    set { }
+                }
+            }
+            """;
+        var symbols = CreateSymbols(code, AnalyzerLanguage.CSharp, x => x is PropertyDeclarationSyntax);
+
+        var declarationSymbol = symbols[0] as IPropertySymbol;
+        var declarationResult = ISymbolExtensionsCommon.AllPartialParts(declarationSymbol).ToList();
+        declarationResult.Should().HaveCount(2).And.Contain([declarationSymbol, declarationSymbol.PartialImplementationPart]);
+
+        var implementationSymbol = symbols[1] as IPropertySymbol;
+        var implementationResult = ISymbolExtensionsCommon.AllPartialParts(implementationSymbol).ToList();
+        implementationResult.Should().HaveCount(2).And.Contain([implementationSymbol, implementationSymbol.PartialDefinitionPart]);
+    }
+
+    [TestMethod]
+    public void AllPartialParts_PropertySymbol_PartialPropertyDifferentClass()
+    {
+        const string code = """
+            public partial class Sample
+            {
+                public partial int SymbolMember { get; set; }
+            }
+            public partial class Sample
+            {
+                public partial int SymbolMember
+                {
+                    get => 0;
+                    set { }
+                }
+            }
+            """;
+        var symbols = CreateSymbols(code, AnalyzerLanguage.CSharp, x => x is PropertyDeclarationSyntax);
+
+        var declarationSymbol = symbols[0] as IPropertySymbol;
+        var declarationResult = ISymbolExtensionsCommon.AllPartialParts(declarationSymbol).ToList();
+        declarationResult.Should().HaveCount(2).And.Contain([declarationSymbol, declarationSymbol.PartialImplementationPart]);
+
+        var implementationSymbol = symbols[1] as IPropertySymbol;
+        var implementationResult = ISymbolExtensionsCommon.AllPartialParts(implementationSymbol).ToList();
+        implementationResult.Should().HaveCount(2).And.Contain([implementationSymbol, implementationSymbol.PartialDefinitionPart]);
+    }
+
+    [TestMethod]
+    public void AllPartialParts_OtherSymbol()
+    {
+        var result = ISymbolExtensionsCommon.AllPartialParts(Substitute.For<ISymbol>()).ToList();
+        result.Should().ContainSingle();
+    }
+
     private static ISymbol CreateSymbol(string snippet, AnalyzerLanguage language, ParseOptions parseOptions = null)
     {
         var (tree, semanticModel) = TestHelper.Compile(snippet, false, language, parseOptions: parseOptions);
         var node = tree.GetRoot().DescendantNodes().Last(x => x.ToString().Contains(" SymbolMember"));
         return semanticModel.GetDeclaredSymbol(node);
+    }
+
+    private static List<ISymbol> CreateSymbols(string snippet, AnalyzerLanguage language, Func<SyntaxNode, bool> additionalFilter = null)
+    {
+        var (tree, semanticModel) = TestHelper.Compile(snippet, false, language);
+        var nodes = tree.GetRoot().DescendantNodes().Where(x => x.ToString().Contains("SymbolMember") && (additionalFilter?.Invoke(x) ?? true)).ToList();
+        return nodes.Select(x => semanticModel.GetDeclaredSymbol(x)).ToList();
     }
 }
