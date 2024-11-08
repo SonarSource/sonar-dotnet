@@ -58,7 +58,7 @@ if (-Not (Test-Path $RuleApiJar)) {
 }
 
 $AnalyzersPath = "${PSScriptRoot}\\..\\..\\analyzers"
-$RulesFolderCommon = "${AnalyzersPath}\\src\\SonarAnalyzer.Common\\Rules"
+$RulesFolderCommon = "${AnalyzersPath}\\src\\SonarAnalyzer.Core\\Rules"
 $RulesFolderCS     = "${AnalyzersPath}\\src\\SonarAnalyzer.CSharp\\Rules"
 $RulesFolderVB     = "${AnalyzersPath}\\src\\SonarAnalyzer.VisualBasic\\Rules"
 $RulesFolderTests  = "${AnalyzersPath}\\tests\\SonarAnalyzer.Test\\Rules"
@@ -77,7 +77,7 @@ function UpdateRuleTypeMapping() {
     }
 
     $FileToEdit = if ($Language -eq "cs") {"RuleTypeMappingCS"} else {"RuleTypeMappingVB"}
-    $TestFile = "${AnalyzersPath}\\tests\\SonarAnalyzer.Test\\PackagingTests\\$fileToEdit.cs"
+    $TestFile = "${AnalyzersPath}\\tests\\SonarAnalyzer.TestFramework\\Packaging\\$fileToEdit.cs"
     (Get-Content "${TestFile}") -replace "//\s*\[`"$ruleKey`"\]", "[`"$ruleKey`"] = `"$ruleType`"" | Set-Content "${TestFile}" -Encoding UTF8
 }
 
