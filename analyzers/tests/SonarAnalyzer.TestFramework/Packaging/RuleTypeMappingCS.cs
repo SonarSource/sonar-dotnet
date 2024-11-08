@@ -6342,7 +6342,7 @@ public static class RuleTypeMappingCS
         // ["S6415"],
         // ["S6416"],
         // ["S6417"],
-        // ["S6418"],
+        ["S6418"] = "SECURITY_HOTSPOT",
         ["S6419"] = "CODE_SMELL",
         ["S6420"] = "CODE_SMELL",
         ["S6421"] = "CODE_SMELL",
