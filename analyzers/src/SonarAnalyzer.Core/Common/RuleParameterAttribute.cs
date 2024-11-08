@@ -43,6 +43,11 @@ namespace SonarAnalyzer.Common
         {
         }
 
+        public RuleParameterAttribute(string key, PropertyType type, string description, double defaultValue)
+            : this(key, type, description, defaultValue.ToString(CultureInfo.InvariantCulture))
+        {
+        }
+
         public RuleParameterAttribute(string key, PropertyType type, string description)
             : this(key, type, description, null)
         {
