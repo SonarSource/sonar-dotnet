@@ -17,7 +17,7 @@
   "quickfix": "partial",
   "code": {
     "impacts": {
-      "MAINTAINABILITY": "HIGH"
+      "MAINTAINABILITY": "MEDIUM"
     },
     "attribute": "MODULAR"
   }
