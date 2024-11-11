@@ -85,6 +85,7 @@ namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions
         [DataRow("a[b]", "a")]
         [DataRow("a?[b]", "a")]
         [DataRow("a->b", "a")]
+        [DataRow("int.MaxValue", "int")]
         public void GetLeftMostInMemberAccess(string expression, string expected)
         {
             var parsed = SyntaxFactory.ParseExpression(expression);

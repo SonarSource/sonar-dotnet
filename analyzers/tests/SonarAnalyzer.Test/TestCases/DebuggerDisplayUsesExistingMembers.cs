@@ -10,6 +10,7 @@ class PropertiesAndFields
 
     int SomeProperty => 1;
     int SomeField = 2;
+    string[] DeclaredNamespaces = new string[0];
 
     [DebuggerDisplayAttribute("Hardcoded text")] int WithSuffix => 1;
     [System.Diagnostics.DebuggerDisplay("Hardcoded text")] int WithNamespace => 1;
@@ -62,6 +63,7 @@ class PropertiesAndFields
     [DebuggerDisplay("{true ? 1 : NonexistentProperty}")] int TernaryInFalse => 1;                          // Noncompliant
     [DebuggerDisplay("{true ? 1 : (true ? 0 : 1 + NonexistentProperty)}")] int TernaryNested => 1;          // Noncompliant
     [DebuggerDisplay("{Math.Abs(SomeProperty)}")] int StaticMemberAccess => 1;                              // Noncompliant {{'Math' doesn't exist in this context.}} FP
+    [DebuggerDisplay("CsdlSemanticsModel({string.Join(\",\", DeclaredNamespaces)})")] int ExpressionWithDoubleQuotes => 1; // Compliant https://sonarsource.atlassian.net/browse/NET-646
 }
 
 [DebuggerDisplay("{this.ToString()}")]     // Compliant, valid when debugging a C# project
@@ -193,12 +195,15 @@ public class NoQuotesModifier
     int SomeProperty => 1;
 }
 
-public class InvalidModifier
+public class OtherModifier
 {
-    [DebuggerDisplay("{SomeProperty,asdf}")]  // Noncompliant {{'{SomeProperty,asdf}' is not a valid expression. CS1073: Unexpected token ','.}}
-    [DebuggerDisplay("{SomeProperty, asdf}")] // Noncompliant {{'{SomeProperty, asdf}' is not a valid expression. CS1073: Unexpected token ','.}}
-    [DebuggerDisplay("{Nonexistent,asdf}")]   // Noncompliant {{'{Nonexistent,asdf}' is not a valid expression. CS1073: Unexpected token ','.}}
-    [DebuggerDisplay("{Nonexistent, asdf}")]  // Noncompliant {{'{Nonexistent, asdf}' is not a valid expression. CS1073: Unexpected token ','.}}
+    [DebuggerDisplay("{SomeProperty,d}")]     // Compliant https://sonarsource.atlassian.net/browse/NET-646
+    [DebuggerDisplay("{SomeProperty,raw}")]   // Compliant https://sonarsource.atlassian.net/browse/NET-646
+    [DebuggerDisplay("{SomeProperty,asdf}")]  // Compliant, the qualifiers are not specified in the documentation. We assume any word is valid here
+    [DebuggerDisplay("{SomeProperty, asdf}")] // Compliant
+    [DebuggerDisplay("{Nonexistent,asdf}")]   // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+    [DebuggerDisplay("{Nonexistent, asdf}")]  // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
+    [DebuggerDisplay("{Nonexistent, a12f}")]  // Noncompliant {{'{Nonexistent, a12f}' is not a valid expression. CS1073: Unexpected token ','.}}
     int SomeProperty => 1;
 }
 
@@ -286,6 +291,10 @@ public class Repo_Net575
         Name = "{Nonexistent}",  // Noncompliant {{'Nonexistent' doesn't exist in this context.}}
         Type = "{Nonexistent}")] // Noncompliant
     public int Property { get; }
+
+    [DebuggerDisplay("{Property1}",
+        Type = "{Type}")] // Noncompliant TP https://sonarsource.atlassian.net/browse/NET-646 (Checked in VS: "Type" can not be evaluated by the compiler)
+    public int Property1 { get; }
 }
 
 // Noncompliant@+1 {{'Error' doesn't exist in this context.}}

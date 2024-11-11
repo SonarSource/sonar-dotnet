@@ -212,6 +212,7 @@ public static class ExpressionSyntaxExtensions
         IdentifierNameSyntax identifier => identifier, // Prop
         MemberAccessExpressionSyntax { Expression: IdentifierNameSyntax identifier } => identifier, // Prop.Something -> Prop
         MemberAccessExpressionSyntax { Expression: ThisExpressionSyntax, Name: IdentifierNameSyntax identifier } => identifier, // this.Prop -> Prop
+        MemberAccessExpressionSyntax { Expression: PredefinedTypeSyntax predefinedType } => predefinedType, // int.MaxValue -> int
         MemberAccessExpressionSyntax { Expression: { } left } => GetLeftMostInMemberAccess(left), // Prop.Something.Something -> Prop
         InvocationExpressionSyntax { Expression: { } left } => GetLeftMostInMemberAccess(left), // Method() -> Method, also this.Method() and Method().Something
         ElementAccessExpressionSyntax { Expression: { } left } => GetLeftMostInMemberAccess(left), // a[b] -> a
