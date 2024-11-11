@@ -16,7 +16,7 @@
   "quickfix": "infeasible",
   "code": {
     "impacts": {
-      "MAINTAINABILITY": "HIGH",
+      "MAINTAINABILITY": "MEDIUM",
       "RELIABILITY": "MEDIUM",
       "SECURITY": "MEDIUM"
     },

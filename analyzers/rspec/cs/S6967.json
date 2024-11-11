@@ -9,7 +9,7 @@
   "tags": [
     "asp.net"
   ],
-  "defaultSeverity": "Major",
+  "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-6967",
   "sqKey": "S6967",
   "scope": "All",
