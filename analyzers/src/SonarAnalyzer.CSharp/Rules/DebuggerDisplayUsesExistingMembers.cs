@@ -38,7 +38,7 @@ public sealed class DebuggerDisplayUsesExistingMembers : DebuggerDisplayUsesExis
 
         static ImmutableArray<SyntaxNode> MostLeftIdentifier(SyntaxNode node) =>
             node is ExpressionSyntax expression
-            ? expression.ExtractMemberIdentifier().Select(x => x.GetLeftMostInMemberAccess()).ToImmutableArray<SyntaxNode>()
+            ? expression.ExtractMemberIdentifier().Select(x => x.GetLeftMostInMemberAccess()).OfType<IdentifierNameSyntax>().ToImmutableArray<SyntaxNode>()
             : ImmutableArray<SyntaxNode>.Empty;
     }
 }
