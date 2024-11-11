@@ -16,6 +16,14 @@ public class Program
     string credential = "1IfHMPanImzX8ZxC-Ud6+YhXiLwlXq$f_-3v~.="; // Noncompliant
     string api_key = "1IfHMPanImzX8ZxC-Ud6+YhXiLwlXq$f_-3v~.=";    // Noncompliant
 
+    // validate PEACH FP's no longer raise
+    string END_TOKEN = "EndGlobalSection"; // Compliant
+    string AccessControlAllowCredentials = "Access-Control-Allow-Credentials"; // Compliant
+    string AuthenticatorApp = "OrchardCore.Users.2FA.AuthenticatorApp"; // Compliant
+    string BackOfficeTwoFactorRememberMeAuthenticationType = "UmbracoTwoFactorRememberMeCookie"; // Compliant
+    string RequestVerificationToken = "__RequestVerificationToken";
+    string TokenPasswordResetCode = "PasswordResetCode"; // Compliant
+
     public class Test
     {
         Scaffold api = new Scaffold();

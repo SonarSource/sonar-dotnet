@@ -31,6 +31,7 @@ public sealed class DoNotHardcodeSecrets : ParametrizedDiagnosticAnalyzer
 
     private const string DefaultSecretWords = """api[_\-]?key, auth, credential, secret, token""";
     private const double DefaultRandomnessSensibility = 3;
+    private const double LanuageScoreIncrement = 0.3;
 
     // https://docs.gitguardian.com/secrets-detection/secrets-detection-engine/detectors/generics/generic_high_entropy_secret#:~:text=Follow%20this%20regular%20expression
     private static readonly Regex ValidationPattern = new(@"^[a-zA-Z0-9_.+/~$-]([a-zA-Z0-9_.+\/=~$-]|\\(?![ntr""])){14,1022}[a-zA-Z0-9_.+/=~$-]$", RegexOptions.None, RegexConstants.DefaultTimeout);
@@ -54,7 +55,9 @@ public sealed class DoNotHardcodeSecrets : ParametrizedDiagnosticAnalyzer
 
     [RuleParameter("randomnessSensibility", PropertyType.Float, "Allows to tune the Randomness Sensibility (from 0 to 10)", DefaultRandomnessSensibility)]
     public double RandomnessSensibility { get; set; } = DefaultRandomnessSensibility;
+
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+    private double MaxLanguageScore => (10 - RandomnessSensibility) * LanuageScoreIncrement;
 
     public DoNotHardcodeSecrets() : this(AnalyzerConfiguration.Hotspot) { }
 
@@ -125,5 +128,7 @@ public sealed class DoNotHardcodeSecrets : ParametrizedDiagnosticAnalyzer
         };
 
     private bool IsToken(string value) =>
-        ShannonEntropy.Calculate(value) > RandomnessSensibility && ValidationPattern.SafeIsMatch(value);
+        ShannonEntropy.Calculate(value) > RandomnessSensibility
+        && ValidationPattern.SafeIsMatch(value)
+        && MaxLanguageScore > NaturalLanguageDetector.HumanLanguageScore(value);
 }
