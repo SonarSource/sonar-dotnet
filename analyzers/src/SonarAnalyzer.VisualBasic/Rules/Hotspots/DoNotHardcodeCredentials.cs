@@ -196,7 +196,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     InterpolationSyntax interpolation => interpolation.Expression.FindStringConstant(semanticModel),
                     InterpolatedStringTextSyntax text => text.TextToken.ToString(),
                     _ => null
-                } ?? CredentialSeparator.ToString()); // Unknown elements resolved to separator to terminate the keyword-value sequence
+                } ?? KeywordSeparator.ToString()); // Unknown elements resolved to separator to terminate the keyword-value sequence
 
             protected override string GetVariableName(InterpolatedStringExpressionSyntax syntaxNode) => null;
 
@@ -209,7 +209,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             protected override string GetAssignedValue(InvocationExpressionSyntax syntaxNode, SemanticModel semanticModel)
             {
-                var allArgs = syntaxNode.ArgumentList.Arguments.Select(x => x.GetExpression().FindStringConstant(semanticModel) ?? CredentialSeparator.ToString());
+                var allArgs = syntaxNode.ArgumentList.Arguments.Select(x => x.GetExpression().FindStringConstant(semanticModel) ?? KeywordSeparator.ToString());
                 try
                 {
                     return string.Format(allArgs.First(), allArgs.Skip(1).ToArray());

@@ -24,9 +24,8 @@ using SonarAnalyzer.Core.Common;
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class DoNotHardcodeSecrets : ParametrizedDiagnosticAnalyzer
+public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
 {
-    private const string DiagnosticId = "S6418";
     private const string MessageFormat = "\"{0}\" detected here, make sure this is not a hard-coded secret.";
 
     private const string DefaultSecretWords = """api[_\-]?key, auth, credential, secret, token""";
@@ -35,36 +34,28 @@ public sealed class DoNotHardcodeSecrets : ParametrizedDiagnosticAnalyzer
 
     // https://docs.gitguardian.com/secrets-detection/secrets-detection-engine/detectors/generics/generic_high_entropy_secret#:~:text=Follow%20this%20regular%20expression
     private static readonly Regex ValidationPattern = new(@"^[a-zA-Z0-9_.+/~$-]([a-zA-Z0-9_.+\/=~$-]|\\(?![ntr""])){14,1022}[a-zA-Z0-9_.+/=~$-]$", RegexOptions.None, RegexConstants.DefaultTimeout);
+    private readonly DiagnosticDescriptor rule;
 
-    private readonly IAnalyzerConfiguration configuration;
-    private readonly DiagnosticDescriptor rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-
-    private string secretWords;
-    private Regex secretsPattern;
+    private Regex keyWordInVariablePattern;
 
     [RuleParameter("secretWords", PropertyType.String, "Comma separated list of words identifying potential secret", DefaultSecretWords)]
-    public string SecretWords
-    {
-        get => secretWords;
-        set
-        {
-            secretWords = value;
-            secretsPattern = new Regex(SplitCredentialWordsByComma(secretWords).JoinStr("|"), RegexOptions.IgnoreCase, RegexConstants.DefaultTimeout);
-        }
-    }
+    public string SecretWords { get => FilterWords; set => FilterWords = value; }
 
     [RuleParameter("randomnessSensibility", PropertyType.Float, "Allows to tune the Randomness Sensibility (from 0 to 10)", DefaultRandomnessSensibility)]
     public double RandomnessSensibility { get; set; } = DefaultRandomnessSensibility;
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    protected override string DiagnosticId => "S6418";
+
     private double MaxLanguageScore => (10 - RandomnessSensibility) * LanuageScoreIncrement;
 
     public DoNotHardcodeSecrets() : this(AnalyzerConfiguration.Hotspot) { }
 
-    public DoNotHardcodeSecrets(IAnalyzerConfiguration configuration)
+    public DoNotHardcodeSecrets(IAnalyzerConfiguration configuration) : base(configuration)
     {
+        rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
         SecretWords = DefaultSecretWords;
-        this.configuration = configuration;
     }
 
     protected override void Initialize(SonarParametrizedAnalysisContext context) =>
@@ -80,12 +71,12 @@ public sealed class DoNotHardcodeSecrets : ParametrizedDiagnosticAnalyzer
                 {
                     var node = c.Node;
                     if (FindIdentifier(node) is { } identifier
-                        && secretsPattern.SafeIsMatch(identifier.ValueText)
                         && FindRightHandSide(node) is { } rhs
                         && rhs.FindStringConstant(c.SemanticModel) is { } secret
-                        && IsToken(secret))
+                        && IsToken(secret)
+                        && ShouldRaise(identifier.ValueText, secret, out string message))
                     {
-                        c.ReportIssue(rule, rhs, identifier.ValueText);
+                        c.ReportIssue(rule, rhs, message);
                     }
                 },
             SyntaxKind.AddAssignmentExpression,
@@ -96,17 +87,51 @@ public sealed class DoNotHardcodeSecrets : ParametrizedDiagnosticAnalyzer
             SyntaxKind.SetAccessorDeclaration);
             });
 
-    private static ImmutableList<string> SplitCredentialWordsByComma(string credentialWords) =>
-        credentialWords.ToUpperInvariant()
-        .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-        .Select(x => x.Trim())
-        .Where(x => x.Length != 0)
-        .ToImmutableList();
-
-    private bool IsEnabled(AnalyzerOptions options)
+    protected override void ExtractKeyWords(string value)
     {
-        configuration.Initialize(options);
-        return configuration.IsEnabled(DiagnosticId);
+        keyWords = value;
+        splitKeyWords = SplitKeyWordsByComma(keyWords);
+        keyWordPattern = new Regex(splitKeyWords.JoinStr("|"), RegexOptions.IgnoreCase, RegexTimeout);
+        keyWordInVariablePattern = new Regex($@"(?<secret>{keyWordPattern})\s*[:=]\s*(?<suffix>.+)$", RegexOptions.IgnoreCase, RegexTimeout);
+    }
+
+    protected override bool ShouldRaise(string variableName, string variableValue, out string message)
+    {
+        message = string.Empty;
+        if (string.IsNullOrWhiteSpace(variableValue))
+        {
+            return false;
+        }
+        if (FindKeyWords(variableName, variableValue) is var bannedWords && bannedWords.Any())
+        {
+            message = bannedWords.JoinAnd();
+            return true;
+        }
+        return false;
+    }
+
+    protected override IEnumerable<string> FindKeyWords(string variableName, string variableValue)
+    {
+        var secretWordsFound = new HashSet<string>();
+        var match = keyWordPattern.SafeMatch(variableName);
+        if (match.Success)
+        {
+            secretWordsFound.Add(match.Value);
+        }
+
+        if (secretWordsFound.Any(x => variableValue.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0))
+        {
+            // See https://github.com/SonarSource/sonar-dotnet/issues/2868
+            return [];
+        }
+
+        var variableMatch = keyWordInVariablePattern.SafeMatch(variableValue);
+        if (variableMatch.Success && !IsValidKeyword(variableMatch.Groups["suffix"].Value))
+        {
+            secretWordsFound.Add(variableMatch.Groups["secret"].Value);
+        }
+
+        return secretWordsFound;
     }
 
     private static SyntaxToken? FindIdentifier(SyntaxNode node) =>
