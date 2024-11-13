@@ -34,7 +34,6 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
 
     // https://docs.gitguardian.com/secrets-detection/secrets-detection-engine/detectors/generics/generic_high_entropy_secret#:~:text=Follow%20this%20regular%20expression
     private static readonly Regex ValidationPattern = new(@"^[a-zA-Z0-9_.+/~$-]([a-zA-Z0-9_.+\/=~$-]|\\(?![ntr""])){14,1022}[a-zA-Z0-9_.+/=~$-]$", RegexOptions.None, RegexConstants.DefaultTimeout);
-    private readonly DiagnosticDescriptor rule;
 
     private Regex keyWordInVariablePattern;
 
@@ -58,34 +57,39 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
         SecretWords = DefaultSecretWords;
     }
 
-    protected override void Initialize(SonarParametrizedAnalysisContext context) =>
+    protected override void Initialize(SonarParametrizedAnalysisContext context)
+    {
         context.RegisterCompilationStartAction(
-            c =>
+        c =>
+        {
+            if (!IsEnabled(c.Options))
             {
-                if (!IsEnabled(c.Options))
-                {
-                    return;
-                }
+                return;
+            }
 
-                c.RegisterNodeAction(c =>
+            c.RegisterNodeAction(c =>
+            {
+                var node = c.Node;
+                if (FindIdentifier(node) is { } identifier
+                    && FindRightHandSide(node) is { } rhs
+                    && rhs.FindStringConstant(c.SemanticModel) is { } secret
+                    && IsToken(secret)
+                    && ShouldRaise(identifier.ValueText, secret, out string message))
                 {
-                    var node = c.Node;
-                    if (FindIdentifier(node) is { } identifier
-                        && FindRightHandSide(node) is { } rhs
-                        && rhs.FindStringConstant(c.SemanticModel) is { } secret
-                        && IsToken(secret)
-                        && ShouldRaise(identifier.ValueText, secret, out string message))
-                    {
-                        c.ReportIssue(rule, rhs, message);
-                    }
-                },
-            SyntaxKind.AddAssignmentExpression,
-            SyntaxKind.SimpleAssignmentExpression,
-            SyntaxKind.VariableDeclarator,
-            SyntaxKind.PropertyDeclaration,
-            SyntaxKind.GetAccessorDeclaration,
-            SyntaxKind.SetAccessorDeclaration);
-            });
+                    c.ReportIssue(rule, rhs, message);
+                }
+            },
+        SyntaxKind.AddAssignmentExpression,
+        SyntaxKind.SimpleAssignmentExpression,
+        SyntaxKind.VariableDeclarator,
+        SyntaxKind.PropertyDeclaration,
+        SyntaxKind.GetAccessorDeclaration,
+        SyntaxKind.SetAccessorDeclaration);
+        });
+
+        context.RegisterCompilationAction(CheckWebConfig);
+        context.RegisterCompilationAction(CheckAppSettings);
+    }
 
     protected override void ExtractKeyWords(string value)
     {
@@ -113,10 +117,11 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
     protected override IEnumerable<string> FindKeyWords(string variableName, string variableValue)
     {
         var secretWordsFound = new HashSet<string>();
-        var match = keyWordPattern.SafeMatch(variableName);
-        if (match.Success)
+        if (!string.IsNullOrEmpty(variableName)
+            && keyWordPattern.SafeMatch(variableName) is { } match
+            && match.Success)
         {
-            secretWordsFound.Add(match.Value);
+                secretWordsFound.Add(match.Value);
         }
 
         if (secretWordsFound.Any(x => variableValue.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0))

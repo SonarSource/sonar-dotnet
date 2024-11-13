@@ -18,7 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
+using SonarAnalyzer.Json;
+using SonarAnalyzer.Json.Parsing;
 
 namespace SonarAnalyzer.Rules;
 
@@ -31,6 +35,7 @@ public abstract class DoNotHardcodeBase<TSyntaxKind> : ParametrizedDiagnosticAna
 
     protected readonly IAnalyzerConfiguration configuration;
     protected string keyWords;
+    protected DiagnosticDescriptor rule;
     protected ImmutableList<string> splitKeyWords;
     protected Regex keyWordPattern;
 
@@ -70,4 +75,82 @@ public abstract class DoNotHardcodeBase<TSyntaxKind> : ParametrizedDiagnosticAna
         var candidateKeyword = suffix.Split(KeywordSeparator)[0].Trim();
         return string.IsNullOrWhiteSpace(candidateKeyword) || ValidKeywordPattern.SafeIsMatch(candidateKeyword);
     }
-}
+
+    protected void CheckWebConfig(SonarCompilationReportingContext context)
+    {
+        foreach (var path in context.WebConfigFiles())
+        {
+            if (XmlHelper.ParseXDocument(File.ReadAllText(path)) is { } doc)
+            {
+                CheckWebConfig(context, path, doc.Descendants());
+            }
+        }
+    }
+
+    protected void CheckAppSettings(SonarCompilationReportingContext context)
+    {
+        foreach (var path in context.AppSettingsFiles())
+        {
+            if (JsonNode.FromString(File.ReadAllText(path)) is { } json)
+            {
+                var walker = new CredentialWordsJsonWalker(this, context, path);
+                walker.Visit(json);
+            }
+        }
+    }
+
+    private void CheckWebConfig(SonarCompilationReportingContext context, string path, IEnumerable<XElement> elements)
+    {
+        foreach (var element in elements)
+        {
+            if (!element.HasElements && ShouldRaise(element.Name.LocalName, element.Value, out string message) && element.CreateLocation(path) is { } elementLocation)
+            {
+                context.ReportIssue(Language.GeneratedCodeRecognizer, rule, elementLocation, message);
+            }
+            foreach (var attribute in element.Attributes())
+            {
+                if (ShouldRaise(attribute.Name.LocalName, attribute.Value, out string attributeMessage) && attribute.CreateLocation(path) is { } attributeLocation)
+                {
+                    context.ReportIssue(Language.GeneratedCodeRecognizer, rule, attributeLocation, attributeMessage);
+                }
+            }
+        }
+    }
+
+    private sealed class CredentialWordsJsonWalker : JsonWalker
+    {
+        private readonly DoNotHardcodeBase<TSyntaxKind> analyzer;
+        private readonly SonarCompilationReportingContext context;
+        private readonly string path;
+
+        public CredentialWordsJsonWalker(DoNotHardcodeBase<TSyntaxKind> analyzer, SonarCompilationReportingContext context, string path)
+        {
+            this.analyzer = analyzer;
+            this.context = context;
+            this.path = path;
+        }
+
+        protected override void VisitObject(string key, JsonNode value)
+        {
+            if (value.Kind == Kind.Value)
+            {
+                CheckKeyValue(key, value);
+            }
+            else
+            {
+                base.VisitObject(key, value);
+            }
+        }
+
+        protected override void VisitValue(JsonNode node) =>
+            CheckKeyValue(null, node);
+
+        private void CheckKeyValue(string key, JsonNode value)
+        {
+            if (value.Value is string str && analyzer.ShouldRaise(key, str, out string message))
+            {
+                context.ReportIssue(analyzer.Language.GeneratedCodeRecognizer, analyzer.rule, value.ToLocation(path), message);
+            }
+        }
+    }
+    }
