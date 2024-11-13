@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
 using SonarAnalyzer.Rules.CSharp;
-
 namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]
@@ -28,9 +28,38 @@ public class DoNotHardcodeSecretsTest
     private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new DoNotHardcodeSecrets(AnalyzerConfiguration.AlwaysEnabled))
             .WithBasePath("Hotspots");
 
+    public TestContext TestContext { get; set; }
+
     [TestMethod]
     public void DoNotHardcodeSecrets_DefaultValues() =>
         builder.AddPaths("DoNotHardcodeSecrets.cs").Verify();
 
     // TODO: Add snippet with parametrisation
+    [TestMethod]
+    public void DoNotHardcodeSecrets_WebConfig() =>
+        DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.CSharp, new DoNotHardcodeSecrets(), "WebConfig", "*.config");
+
+    [TestMethod]
+    public void DoNotHardcodeSecrets_AppSettings() =>
+    DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.CSharp, new DoNotHardcodeSecrets(), "AppSettings", "*.json");
+
+    private void DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage language, DiagnosticAnalyzer analyzer, string testDirectory, string pattern)
+    {
+        var root = @$"TestCases\{testDirectory}\DoNotHardcodeSecrets";
+        var paths = Directory.GetFiles(root, pattern, SearchOption.AllDirectories);
+        paths.Should().NotBeEmpty();
+        var compilation = CreateCompilation(language);
+        foreach (var path in paths)
+        {
+            DiagnosticVerifier.Verify(
+                compilation,
+                analyzer,
+                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, path),
+                null,
+                [path]);
+        }
+    }
+
+    private static Compilation CreateCompilation(AnalyzerLanguage language) =>
+        SolutionBuilder.Create().AddProject(language).GetCompilation();
 }

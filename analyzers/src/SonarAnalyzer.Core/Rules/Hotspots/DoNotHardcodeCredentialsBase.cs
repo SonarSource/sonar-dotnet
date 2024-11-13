@@ -18,14 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.IO;
 using System.Security;
 using System.Text.RegularExpressions;
-using System.Xml.Linq;
 using SonarAnalyzer.CFG.Extensions;
 using SonarAnalyzer.Core.Trackers;
-using SonarAnalyzer.Json;
-using SonarAnalyzer.Json.Parsing;
 
 namespace SonarAnalyzer.Rules
 {
@@ -39,7 +35,6 @@ namespace SonarAnalyzer.Rules
         private const string DefaultCredentialWords = "password, passwd, pwd, passphrase";
 
         private static readonly Regex UriUserInfoPattern = CreateUriUserInfoPattern();
-        private readonly DiagnosticDescriptor rule;
 
         protected abstract void InitializeActions(SonarParametrizedAnalysisContext context);
         protected abstract bool IsSecureStringAppendCharFromConstant(SyntaxNode argumentNode, SemanticModel model);
@@ -156,47 +151,6 @@ namespace SonarAnalyzer.Rules
                 $@"(?<{name}>[\w\d{Regex.Escape(UriPasswordSpecialCharacters)}{additionalCharacters}]+)";
         }
 
-        private void CheckWebConfig(SonarCompilationReportingContext context)
-        {
-            foreach (var path in context.WebConfigFiles())
-            {
-                if (XmlHelper.ParseXDocument(File.ReadAllText(path)) is { } doc)
-                {
-                    CheckWebConfig(context, path, doc.Descendants());
-                }
-            }
-        }
-
-        private void CheckWebConfig(SonarCompilationReportingContext context, string path, IEnumerable<XElement> elements)
-        {
-            foreach (var element in elements)
-            {
-                if (!element.HasElements && ShouldRaise(element.Name.LocalName, element.Value, out string message) && element.CreateLocation(path) is { } elementLocation)
-                {
-                    context.ReportIssue(Language.GeneratedCodeRecognizer, rule, elementLocation, message);
-                }
-                foreach (var attribute in element.Attributes())
-                {
-                    if (ShouldRaise(attribute.Name.LocalName, attribute.Value, out string attributeMessage) && attribute.CreateLocation(path) is { } attributeLocation)
-                    {
-                        context.ReportIssue(Language.GeneratedCodeRecognizer, rule, attributeLocation, attributeMessage);
-                    }
-                }
-            }
-        }
-
-        private void CheckAppSettings(SonarCompilationReportingContext context)
-        {
-            foreach (var path in context.AppSettingsFiles())
-            {
-                if (JsonNode.FromString(File.ReadAllText(path)) is { } json)
-                {
-                    var walker = new CredentialWordsJsonWalker(this, context, path);
-                    walker.Visit(json);
-                }
-            }
-        }
-
         private static bool ContainsUriUserInfo(string variableValue)
         {
             var match = UriUserInfoPattern.SafeMatch(variableValue);
@@ -230,43 +184,6 @@ namespace SonarAnalyzer.Rules
                         context.ReportIssue(analyzer.rule, declarator, message);
                     }
                 };
-        }
-
-        private sealed class CredentialWordsJsonWalker : JsonWalker
-        {
-            private readonly DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer;
-            private readonly SonarCompilationReportingContext context;
-            private readonly string path;
-
-            public CredentialWordsJsonWalker(DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer, SonarCompilationReportingContext context, string path)
-            {
-                this.analyzer = analyzer;
-                this.context = context;
-                this.path = path;
-            }
-
-            protected override void VisitObject(string key, JsonNode value)
-            {
-                if (value.Kind == Kind.Value)
-                {
-                    CheckKeyValue(key, value);
-                }
-                else
-                {
-                    base.VisitObject(key, value);
-                }
-            }
-
-            protected override void VisitValue(JsonNode node) =>
-                CheckKeyValue(null, node);
-
-            private void CheckKeyValue(string key, JsonNode value)
-            {
-                if (value.Value is string str && analyzer.ShouldRaise(key, str, out string valueMessage))
-                {
-                    context.ReportIssue(analyzer.Language.GeneratedCodeRecognizer, analyzer.rule, value.ToLocation(path), valueMessage);
-                }
-            }
         }
     }
 }

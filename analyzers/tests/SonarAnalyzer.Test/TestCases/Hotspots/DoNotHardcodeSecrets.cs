@@ -22,6 +22,11 @@ public class Program
     string BackOfficeTwoFactorRememberMeAuthenticationType = "UmbracoTwoFactorRememberMeCookie"; // Compliant
     string RequestVerificationToken = "__RequestVerificationToken";
     string TokenPasswordResetCode = "PasswordResetCode"; // Compliant
+    string AuthenticationServiceName = "marketplacecommerceanalytics";
+    string XAmzSecurityToken = "X-Amz-Security-Token";
+    string ProductPublicKeyToken = "31bf3856ad364e35"; // Noncompliant
+    static string OfficialDesktopPublicKeyToken = "b03f5f7f11d50a3a"; // Noncompliant
+    string VisualBasicAssemblyPublicKeyToken = "PublicKeyToken=" + OfficialDesktopPublicKeyToken; // Compliant as it has 'Token' in name AND in value
 
     string varString = "token=rf6acB24J//1FZLRrKpjmBUYSnUX5CHlt/iD5vVVcgVuAIOB6hzcWjDnv16V6hDLevW0Qs4hKPbP1M4YfuDI16sZna1/VGRLkAbTk6xMPs4epH6A3ZqSyyI-H92y"; // Noncompliant {{"token" detected here, make sure this is not a hard-coded secret.}}
     string secretString = "token=rf6acB24J//1FZLRrKpjmBUYSnUX5CHlt/iD5vVVcgVuAIOB6hzcWjDnv16V6hDLevW0Qs4hKPbP1M4YfuDI16sZna1/VGRLkAbTk6xMPs4epH6A3ZqSyyI-H92y"; // Noncompliant {{"secret and token" detected here, make sure this is not a hard-coded secret.}}
