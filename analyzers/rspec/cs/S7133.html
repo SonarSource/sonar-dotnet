@@ -1,0 +1,77 @@
+<p>This rule raises if you acquire a lock with one of the following methods, and do not release it within the same method.</p>
+<ul>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlock.acquirereaderlock">ReaderWriterLock.AcquireReaderLock</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlock.acquirewriterlock">ReaderWriterLock.AcquireWriterLock</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.enterreadlock">ReaderWriterLockSlim.EnterReadLock</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.enterupgradeablereadlock">ReaderWriterLockSlim.EnterUpgradeableReadLock</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.tryenterreadlock">ReaderWriterLockSlim.TryEnterReadLock</a>
+  </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.tryenterupgradeablereadlock">ReaderWriterLockSlim.TryEnterUpgradeableReadLock</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.enterwritelock">ReaderWriterLockSlim.EnterWriteLock</a>
+  </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.tryenterwritelock">ReaderWriterLockSlim.TryEnterWriteLock</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.spinlock.enter">SpinLock.Enter</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.spinlock.tryenter">SpinLock.TryEnter</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.monitor.enter">Monitor.Enter</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.monitor.tryenter">Monitor.TryEnter</a> </li>
+</ul>
+<h2>Why is this an issue?</h2>
+<p>Not releasing a lock in the same method where you acquire it, and releasing in another one, makes the code less clear and harder to maintain. You
+are also introducing the risk of not releasing a lock at all which can lead to deadlocks or exceptions.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public class Example
+{
+    private static ReaderWriterLock rwLock = new();
+
+    public void AcquireWriterLock() =&gt;
+        rwLock.AcquireWriterLock(2000);  // Noncompliant, as the lock release is on the callers responsibilty
+
+    public void DoSomething()
+    {
+        // ...
+    }
+
+    public void ReleaseWriterLock() =&gt;
+        rwLock.ReleaseWriterLock();
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+public class Example
+{
+    private static ReaderWriterLock rwLock = new();
+
+    public void DoSomething()
+    {
+        rwLock.AcquireWriterLock(2000); // Compliant, locks are released in the same method
+        try
+        {
+            // ...
+        }
+        finally
+        {
+            rwLock.ReleaseWriterLock();
+        }
+    }
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlock">ReaderWriterLock Class</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim">ReaderWriterLockSlim Classs</a>
+  </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.spinlock">SpinLock Struct</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.monitor">Monitor Classs</a> </li>
+</ul>
+

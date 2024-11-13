@@ -7057,7 +7057,7 @@ public static class RuleTypeMappingCS
         ["S7130"] = "CODE_SMELL",
         ["S7131"] = "BUG",
         // ["S7132"],
-        // ["S7133"],
+        ["S7133"] = "BUG",
         // ["S7134"],
         // ["S7135"],
         // ["S7136"],
