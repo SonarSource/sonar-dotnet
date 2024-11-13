@@ -16,13 +16,15 @@ public class Program
     string credential = "1IfHMPanImzX8ZxC-Ud6+YhXiLwlXq$f_-3v~.="; // Noncompliant
     string api_key = "1IfHMPanImzX8ZxC-Ud6+YhXiLwlXq$f_-3v~.=";    // Noncompliant
 
-    // validate PEACH FP's no longer raise
     string END_TOKEN = "EndGlobalSection"; // Compliant
     string AccessControlAllowCredentials = "Access-Control-Allow-Credentials"; // Compliant
     string AuthenticatorApp = "OrchardCore.Users.2FA.AuthenticatorApp"; // Compliant
     string BackOfficeTwoFactorRememberMeAuthenticationType = "UmbracoTwoFactorRememberMeCookie"; // Compliant
     string RequestVerificationToken = "__RequestVerificationToken";
     string TokenPasswordResetCode = "PasswordResetCode"; // Compliant
+
+    string varString = "token=rf6acB24J//1FZLRrKpjmBUYSnUX5CHlt/iD5vVVcgVuAIOB6hzcWjDnv16V6hDLevW0Qs4hKPbP1M4YfuDI16sZna1/VGRLkAbTk6xMPs4epH6A3ZqSyyI-H92y"; // Noncompliant {{"token" detected here, make sure this is not a hard-coded secret.}}
+    string secretString = "token=rf6acB24J//1FZLRrKpjmBUYSnUX5CHlt/iD5vVVcgVuAIOB6hzcWjDnv16V6hDLevW0Qs4hKPbP1M4YfuDI16sZna1/VGRLkAbTk6xMPs4epH6A3ZqSyyI-H92y"; // Noncompliant {{"secret and token" detected here, make sure this is not a hard-coded secret.}}
 
     public class Test
     {
