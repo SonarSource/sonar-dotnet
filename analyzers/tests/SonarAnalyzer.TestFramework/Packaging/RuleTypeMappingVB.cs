@@ -7054,7 +7054,7 @@ public static class RuleTypeMappingVB
         // ["S7127"],
         // ["S7128"],
         // ["S7129"],
-        // ["S7130"],
+        ["S7130"] = "CODE_SMELL",
         // ["S7131"],
         // ["S7132"],
         // ["S7133"],
