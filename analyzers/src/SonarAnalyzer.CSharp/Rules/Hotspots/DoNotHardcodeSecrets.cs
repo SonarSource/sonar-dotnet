@@ -96,7 +96,7 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
         keyWords = value;
         splitKeyWords = SplitKeyWordsByComma(keyWords);
         keyWordPattern = new Regex(splitKeyWords.JoinStr("|"), RegexOptions.IgnoreCase, RegexTimeout);
-        keyWordInVariablePattern = new Regex($@"(?<secret>{keyWordPattern})\s*[:=]\s*(?<suffix>.+)$", RegexOptions.IgnoreCase, RegexTimeout);
+        keyWordInVariablePattern = new Regex($@"(?<secret>{keyWordPattern})\s*[:=]\s*(?<suffix>[^"";$]+)", RegexOptions.IgnoreCase, RegexTimeout);
     }
 
     protected override bool ShouldRaise(string variableName, string variableValue, out string message)
@@ -117,6 +117,7 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
     protected override IEnumerable<string> FindKeyWords(string variableName, string variableValue)
     {
         var secretWordsFound = new HashSet<string>();
+        string tokenToCheck = variableValue;
         if (!string.IsNullOrEmpty(variableName)
             && keyWordPattern.SafeMatch(variableName) is { } match
             && match.Success)
@@ -124,18 +125,19 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
                 secretWordsFound.Add(match.Value);
         }
 
-        if (secretWordsFound.Any(x => variableValue.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0))
-        {
-            // See https://github.com/SonarSource/sonar-dotnet/issues/2868
-            return [];
-        }
-
         var variableMatch = keyWordInVariablePattern.SafeMatch(variableValue);
         if (variableMatch.Success && !IsValidKeyword(variableMatch.Groups["suffix"].Value))
         {
             secretWordsFound.Add(variableMatch.Groups["secret"].Value);
+            tokenToCheck = variableMatch.Groups["suffix"].Value;
         }
 
+        if (secretWordsFound.Any(x => tokenToCheck.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0)
+            || !IsToken(tokenToCheck))
+        {
+            // See https://github.com/SonarSource/sonar-dotnet/issues/2868
+            return [];
+        }
         return secretWordsFound;
     }
 
