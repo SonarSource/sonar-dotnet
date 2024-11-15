@@ -19,7 +19,7 @@ function Get-MsBuildPath {
     $msbuildPath = [environment]::GetEnvironmentVariable($msbuildPathEnvVar, [System.EnvironmentVariableTarget]::Machine)
 
     if (!$msbuildPath) {
-        Write-Host "Environment variable ${msbuildEnv} not found"
+        Write-Host "Environment variable ${msbuildPathEnvVar} not found"
         Write-Host "Trying to find path using 'vswhere.exe'"
 
         # Sets the path to MSBuild into an the MSBUILD_PATH environment variable
