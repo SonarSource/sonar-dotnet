@@ -78,6 +78,11 @@ public abstract class DoNotHardcodeBase<TSyntaxKind> : ParametrizedDiagnosticAna
 
     protected void CheckWebConfig(SonarCompilationReportingContext context)
     {
+        if (!IsEnabled(context.Options))
+        {
+            return;
+        }
+
         foreach (var path in context.WebConfigFiles())
         {
             if (XmlHelper.ParseXDocument(File.ReadAllText(path)) is { } doc)
@@ -89,6 +94,11 @@ public abstract class DoNotHardcodeBase<TSyntaxKind> : ParametrizedDiagnosticAna
 
     protected void CheckAppSettings(SonarCompilationReportingContext context)
     {
+        if (!IsEnabled(context.Options))
+        {
+            return;
+        }
+
         foreach (var path in context.AppSettingsFiles())
         {
             if (JsonNode.FromString(File.ReadAllText(path)) is { } json)

@@ -43,8 +43,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (invocationExpression.Expression is MemberAccessExpressionSyntax memberAccessExpression
                         && memberAccessExpression.Name.Identifier.ValueText == EqualsName
-                        && TryGetFirstArgument(invocationExpression, out var firstArgument)
-                        && IsStringEqualsMethod(memberAccessExpression, c.SemanticModel))
+                        && invocationExpression.TryGetFirstArgument(out var firstArgument)
+                        && memberAccessExpression.IsMemberAccessOnKnownType(EqualsName, KnownType.System_String, c.SemanticModel))
                     {
                         // x.Equals(value), where x is string.Empty, "" or const "", and value is some string
                         if (IsStringIdentifier(firstArgument.Expression, c.SemanticModel)
@@ -63,21 +63,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.InvocationExpression);
-        }
-
-        private static bool TryGetFirstArgument(InvocationExpressionSyntax invocationExpression, out ArgumentSyntax firstArgument)
-        {
-            firstArgument = invocationExpression?.ArgumentList?.Arguments.FirstOrDefault();
-
-            return firstArgument != null;
-        }
-
-        private static bool IsStringEqualsMethod(MemberAccessExpressionSyntax memberAccessExpression, SemanticModel semanticModel)
-        {
-            var methodName = semanticModel.GetSymbolInfo(memberAccessExpression.Name);
-
-            return methodName.Symbol.IsInType(KnownType.System_String)
-                && methodName.Symbol.Name == EqualsName;
         }
 
         private static bool IsStringIdentifier(ExpressionSyntax expression, SemanticModel semanticModel)

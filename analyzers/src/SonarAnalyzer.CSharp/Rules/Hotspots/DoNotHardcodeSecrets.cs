@@ -31,6 +31,7 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
     private const string DefaultSecretWords = """api[_\-]?key, auth, credential, secret, token""";
     private const double DefaultRandomnessSensibility = 3;
     private const double LanuageScoreIncrement = 0.3;
+    private const string EqualsName = nameof(string.Equals);
 
     // https://docs.gitguardian.com/secrets-detection/secrets-detection-engine/detectors/generics/generic_high_entropy_secret#:~:text=Follow%20this%20regular%20expression
     private static readonly Regex ValidationPattern = new(@"^[a-zA-Z0-9_.+/~$-]([a-zA-Z0-9_.+\/=~$-]|\\(?![ntr""])){14,1022}[a-zA-Z0-9_.+/=~$-]$", RegexOptions.None, RegexConstants.DefaultTimeout);
@@ -74,17 +75,35 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
                     && FindRightHandSide(node) is { } rhs
                     && rhs.FindStringConstant(c.SemanticModel) is { } secret
                     && IsToken(secret)
-                    && ShouldRaise(identifier.ValueText, secret, out string message))
+                    && ShouldRaise(identifier.ValueText, secret, out var message))
                 {
                     c.ReportIssue(rule, rhs, message);
                 }
             },
-        SyntaxKind.AddAssignmentExpression,
-        SyntaxKind.SimpleAssignmentExpression,
-        SyntaxKind.VariableDeclarator,
-        SyntaxKind.PropertyDeclaration,
-        SyntaxKind.GetAccessorDeclaration,
-        SyntaxKind.SetAccessorDeclaration);
+            SyntaxKind.AddAssignmentExpression,
+            SyntaxKind.SimpleAssignmentExpression,
+            SyntaxKind.VariableDeclarator,
+            SyntaxKind.PropertyDeclaration,
+            SyntaxKind.GetAccessorDeclaration,
+            SyntaxKind.SetAccessorDeclaration,
+            SyntaxKind.EqualsExpression);
+
+            c.RegisterNodeAction(c =>
+            {
+                var invocationExpression = (InvocationExpressionSyntax)c.Node;
+
+                if (invocationExpression.Expression is MemberAccessExpressionSyntax memberAccessExpression
+                    && memberAccessExpression.Name.Identifier.ValueText == EqualsName
+                    && invocationExpression.TryGetFirstArgument(out var firstArgument)
+                    && memberAccessExpression.IsMemberAccessOnKnownType(EqualsName, KnownType.System_String, c.SemanticModel)
+                    && GetIdentifierAndValue(memberAccessExpression.Expression, firstArgument, out var identifier, out var value)
+                    && value.FindStringConstant(c.SemanticModel) is { } secret
+                    && ShouldRaise(identifier.Value.ValueText, secret, out var message))
+                {
+                    c.ReportIssue(rule, memberAccessExpression, message);
+                }
+            },
+            SyntaxKind.InvocationExpression);
         });
 
         context.RegisterCompilationAction(CheckWebConfig);
@@ -146,7 +165,24 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
         {
             AccessorDeclarationSyntax accessorDeclaration => accessorDeclaration.Parent.Parent.GetIdentifier(),
             AssignmentExpressionSyntax assignmentExpression => assignmentExpression.Left.GetIdentifier(),
+            BinaryExpressionSyntax binaryExpression => GetBinaryExpressionIdentifier(binaryExpression),
             _ => node.GetIdentifier()
+        };
+
+    private static SyntaxToken? GetBinaryExpressionIdentifier(BinaryExpressionSyntax node) =>
+        node switch
+        {
+            { Left: IdentifierNameSyntax identifierLeft } => identifierLeft.Identifier,
+            { Right: IdentifierNameSyntax identifierRight } => identifierRight.Identifier,
+            _ => null
+        };
+
+    private static SyntaxNode? GetBinaryExpressionValue(BinaryExpressionSyntax node) =>
+        node switch
+        {
+            { Left: IdentifierNameSyntax } => node.Right,
+            { Right: IdentifierNameSyntax } => node.Left,
+            _ => null
         };
 
     private static SyntaxNode FindRightHandSide(SyntaxNode node) =>
@@ -156,8 +192,29 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
             VariableDeclaratorSyntax variableDeclarator => variableDeclarator.Initializer?.Value,
             PropertyDeclarationSyntax propertyDeclaration => propertyDeclaration.Initializer?.Value,
             AccessorDeclarationSyntax accessorDeclaration => accessorDeclaration.ExpressionBody()?.Expression,
+            BinaryExpressionSyntax binaryExpression => GetBinaryExpressionValue(binaryExpression),
             _ => null
         };
+
+    private static bool GetIdentifierAndValue(ExpressionSyntax expression, ArgumentSyntax argument, out SyntaxToken? identifier, out LiteralExpressionSyntax value)
+    {
+        identifier = null;
+        value = null;
+        switch (expression)
+        {
+            case MemberAccessExpressionSyntax:
+            case IdentifierNameSyntax:
+            case InvocationExpressionSyntax:
+                identifier = expression.GetIdentifier();
+                value = argument.Expression as LiteralExpressionSyntax;
+                break;
+            case LiteralExpressionSyntax:
+                identifier = argument.Expression.GetIdentifier();
+                value = expression as LiteralExpressionSyntax;
+                break;
+        }
+        return identifier.HasValue && value is not null;
+    }
 
     private bool IsToken(string value) =>
         ShannonEntropy.Calculate(value) > RandomnessSensibility

@@ -60,6 +60,12 @@ public static class InvocationExpressionSyntaxExtensions
         return left is not null && right is not null;
     }
 
+    public static bool TryGetFirstArgument(this InvocationExpressionSyntax invocationExpression, out ArgumentSyntax firstArgument)
+    {
+        firstArgument = invocationExpression?.ArgumentList?.Arguments.FirstOrDefault();
+        return firstArgument is not null;
+    }
+
     public static SyntaxToken? GetMethodCallIdentifier(this InvocationExpressionSyntax invocation) =>
         invocation?.Expression.GetIdentifier();
 
