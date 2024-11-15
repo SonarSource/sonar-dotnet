@@ -20,28 +20,32 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class DurableEntityInterfaceRestrictionsTest
 {
-    [TestClass]
-    public class DurableEntityInterfaceRestrictionsTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<DurableEntityInterfaceRestrictions>()
-            .WithBasePath("CloudNative")
-            .AddReferences(NuGetMetadataReference.MicrosoftAzureWebJobsExtensionsDurableTask());
-
-        [TestMethod]
-        public void DurableEntityInterfaceRestrictions_CS() =>
-            builder.AddPaths("DurableEntityInterfaceRestrictions.cs").Verify();
-
 #if NET
+    private readonly VerifierBuilder builder = new VerifierBuilder<DurableEntityInterfaceRestrictions>()
+        .WithBasePath("CloudNative")
+        .AddReferences(NuGetMetadataReference.MicrosoftAzureWebJobsExtensionsDurableTask());
 
-        [TestMethod]
-        public void DurableEntityInterfaceRestrictions_CSharp11() =>
-            builder.AddPaths("DurableEntityInterfaceRestrictions.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void DurableEntityInterfaceRestrictions_CSharp11() =>
+        builder.AddPaths("DurableEntityInterfaceRestrictions.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
+
+    [TestMethod]
+    public void DurableEntityInterfaceRestrictions_CS_NET() =>
+        builder.AddPaths("DurableEntityInterfaceRestrictions.cs").Verify();
 
 #endif
 
-    }
+    [TestMethod]
+    public void DurableEntityInterfaceRestrictions_CS() =>
+        new VerifierBuilder<DurableEntityInterfaceRestrictions>()
+            .AddReferences(NuGetMetadataReference.MicrosoftAzureWebJobsExtensionsDurableTask("2.13.7"))
+            .WithBasePath("CloudNative")
+            .AddPaths("DurableEntityInterfaceRestrictions.cs").Verify();
 }
