@@ -35,6 +35,7 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
 
     // https://docs.gitguardian.com/secrets-detection/secrets-detection-engine/detectors/generics/generic_high_entropy_secret#:~:text=Follow%20this%20regular%20expression
     private static readonly Regex ValidationPattern = new(@"^[a-zA-Z0-9_.+/~$-]([a-zA-Z0-9_.+\/=~$-]|\\(?![ntr""])){14,1022}[a-zA-Z0-9_.+/=~$-]$", RegexOptions.None, RegexConstants.DefaultTimeout);
+    private static readonly Regex BanList = new(@"public[_.-]?key|document_?key|client[_.-]?id|localhost|127\.0\.0\.1|test|xsrf|csrf", RegexOptions.IgnoreCase, RegexConstants.DefaultTimeout);
 
     private Regex keyWordInVariablePattern;
 
@@ -73,11 +74,16 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
                 var node = c.Node;
                 if (FindIdentifier(node) is { } identifier
                     && FindRightHandSide(node) is { } rhs
-                    && rhs.FindStringConstant(c.SemanticModel) is { } secret
-                    && IsToken(secret)
-                    && ShouldRaise(identifier.ValueText, secret, out var message))
+                    && rhs.FindStringConstant(c.SemanticModel) is { } secret)
                 {
-                    c.ReportIssue(rule, rhs, message);
+                    if (ShouldRaiseBinary(identifier.ValueText, secret))
+                    {
+                        c.ReportIssue(rule, rhs, identifier.ValueText);
+                    }
+                    else if (ShouldRaiseLiteral(secret, out var message))
+                    {
+                        c.ReportIssue(rule, rhs, message);
+                    }
                 }
             },
             SyntaxKind.AddAssignmentExpression,
@@ -98,9 +104,9 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
                     && memberAccessExpression.IsMemberAccessOnKnownType(EqualsName, KnownType.System_String, c.SemanticModel)
                     && GetIdentifierAndValue(memberAccessExpression.Expression, firstArgument, out var identifier, out var value)
                     && value.FindStringConstant(c.SemanticModel) is { } secret
-                    && ShouldRaise(identifier.Value.ValueText, secret, out var message))
+                    && ShouldRaiseBinary(identifier.Value.ValueText, secret))
                 {
-                    c.ReportIssue(rule, memberAccessExpression, message);
+                    c.ReportIssue(rule, memberAccessExpression, identifier.Value.ValueText);
                 }
             },
             SyntaxKind.InvocationExpression);
@@ -115,50 +121,49 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
         keyWords = value;
         splitKeyWords = SplitKeyWordsByComma(keyWords);
         keyWordPattern = new Regex(splitKeyWords.JoinStr("|"), RegexOptions.IgnoreCase, RegexTimeout);
-        keyWordInVariablePattern = new Regex($@"(?<secret>{keyWordPattern})\s*[:=]\s*(?<suffix>[^"";$]+)", RegexOptions.IgnoreCase, RegexTimeout);
+        keyWordInVariablePattern = new Regex($@"(?<secret>\b\w*?({keyWordPattern}))\s*[:=]\s*(?<suffix>[^"";$]+)", RegexOptions.IgnoreCase, RegexTimeout);
     }
 
     protected override bool ShouldRaise(string variableName, string variableValue, out string message)
     {
-        message = string.Empty;
-        if (string.IsNullOrWhiteSpace(variableValue))
+        if (ShouldRaiseBinary(variableName, variableValue))
         {
-            return false;
+            message = variableName;
+            return true;
         }
-        if (FindKeyWords(variableName, variableValue) is var bannedWords && bannedWords.Any())
+        else if (ShouldRaiseLiteral(variableValue, out message))
         {
-            message = bannedWords.JoinAnd();
             return true;
         }
         return false;
     }
 
-    protected override IEnumerable<string> FindKeyWords(string variableName, string variableValue)
+    protected override IEnumerable<string> FindKeyWords(string variableName, string variableValue) =>
+        [];
+
+    private bool ShouldRaiseLiteral(string secret, out string message)
     {
-        var secretWordsFound = new HashSet<string>();
-        string tokenToCheck = variableValue;
-        if (!string.IsNullOrEmpty(variableName)
-            && keyWordPattern.SafeMatch(variableName) is { } match
-            && match.Success)
-        {
-                secretWordsFound.Add(match.Value);
-        }
+        var variableMatch = keyWordInVariablePattern.SafeMatches(secret);
+        var keyWordsFound = new List<string>();
 
-        var variableMatch = keyWordInVariablePattern.SafeMatch(variableValue);
-        if (variableMatch.Success && !IsValidKeyword(variableMatch.Groups["suffix"].Value))
+        foreach (Match match in variableMatch)
         {
-            secretWordsFound.Add(variableMatch.Groups["secret"].Value);
-            tokenToCheck = variableMatch.Groups["suffix"].Value;
+            if (match.Success && !IsValidKeyword(match.Groups["suffix"].Value)
+                && ShouldRaiseBinary(match.Groups["secret"].Value, match.Groups["suffix"].Value))
+            {
+                keyWordsFound.Add(match.Groups["secret"].Value);
+            }
         }
-
-        if (secretWordsFound.Any(x => tokenToCheck.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0)
-            || !IsToken(tokenToCheck))
-        {
-            // See https://github.com/SonarSource/sonar-dotnet/issues/2868
-            return [];
-        }
-        return secretWordsFound;
+        message = keyWordsFound.JoinAnd();
+        return keyWordsFound.Count > 0;
     }
+
+    private bool ShouldRaiseBinary(string left, string right) =>
+        !string.IsNullOrEmpty(left)
+            && keyWordPattern.SafeMatch(left) is { Success: true, Value: var keyWord }
+            && !BanList.SafeIsMatch(left)
+            && right.IndexOf(keyWord, StringComparison.InvariantCultureIgnoreCase) < 0
+            && IsToken(right);
 
     private static SyntaxToken? FindIdentifier(SyntaxNode node) =>
         node switch
