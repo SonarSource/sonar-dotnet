@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class Program
 {
@@ -53,7 +54,69 @@ public class Program
 
             var c_auth = "a";
             c_auth = c_auth + "rf6acB24J//1FZLRrKpjmBUYSnUX5CHlt/iD5vVVcgVuAIOB6hzcWjDnv16V6hDLevW0Qs4hKPbP1M4YfuDI16sZna1/VGRLkAbTk6xMPs4epH6A3ZqSyyI-H92y";  // Compliant does not compile to a constant
+
+            var authToken = "";
+            var shouldNotRaise = ":)";
+            if (authToken == "31bf3856ad364e35") {}// Noncompliant
+            else if ("b03f5f7f11d50a3a" == authToken) {} // Noncompliant
+            else if(shouldNotRaise == "31bf3856ad364e35") {} // Compliant
+            else if("31bf3856ad364e35" == shouldNotRaise) {} // Compliant
+            if ("31bf3856ad364e35".Equals(authToken)){ } // Noncompliant
+            if (authToken.Equals("31bf3856ad364e35")) { } // Noncompliant
+            if ("31bf3856ad364e35".Equals(shouldNotRaise)){ } // Compliant
+            if (shouldNotRaise.Equals("31bf3856ad364e35")) { } // Compliant
+
+            "AuthToken".Equals("31bf3856ad364e35"); // Compliant
+            authToken.Equals(shouldNotRaise); // Compliant
+            shouldNotRaise.Equals(null); // Compliant
+            "AuthToken".Equals(null); // Compliant
+
+            "31bf3856ad364e35".Equals(authToken, StringComparison.CurrentCulture);      // Noncompliant
+            authToken.Equals("31bf3856ad364e35", StringComparison.CurrentCulture);      // Noncompliant
+
+            var bar = new Bar();
+            var foo = new Foo();
+
+            if (bar.test.test.ShouldNotRaise.Equals("31bf3856ad364e35")) { }        // Compliant
+            if("31bf3856ad364e35".Equals(bar.test.test.ShouldNotRaise)) { }         // Compliant
+            if (bar.test.test.Token.Equals("31bf3856ad364e35")) { }                 // Noncompliant
+            if("31bf3856ad364e35".Equals(bar.test.test.Token)) { }                  // Noncompliant
+
+            if (foo.GetToken().Equals("31bf3856ad364e35")) { }                      // Compliant not string.Equals
+            if (foo.GetAuthToken().Equals("31bf3856ad364e35")) { }                  // Noncompliant
+            if ("31bf3856ad364e35".Equals(foo.GetToken())) { }                      // Noncompliant
+            if (foo.GetToken().test.Equals("31bf3856ad364e35")) { }                 // Compliant
+            if ("31bf3856ad364e35".Equals(foo.GetToken().test)) { }                 // Compliant
+
+            string.Equals("31bf3856ad364e35", authToken);                                                           // Compliant FN
+            string.Equals(authToken, "31bf3856ad364e35");                                                           // Compliant FN
+            string.Equals("31bf3856ad364e35", authToken, StringComparison.CurrentCulture);                          // Compliant FN
+            string.Equals(comparisonType: StringComparison.CurrentCulture, a: "31bf3856ad364e35", b: authToken);    // Compliant FN
+            StringComparer.InvariantCulture.Equals("31bf3856ad364e35", authToken);                                  // Compliant FN
+            StringComparer.InvariantCulture.Equals(authToken, "31bf3856ad364e35");                                  // Compliant FN
+            EqualityComparer<string>.Default.Equals("31bf3856ad364e35", authToken);                                 // Compliant FN
+            EqualityComparer<string>.Default.Equals(authToken, "31bf3856ad364e35");                                 // Compliant FN
+            if ("31bf3856ad364e35" is "authToken") { }                                                              // Compliant FN
+            if("authToken" is "31bf3856ad364e35") { }                                                               // Compliant FN
+            switch (authToken)
+            {
+                case "31bf3856ad364e35":                                                                            // Compliant FN
+                    break;
+            }
         }
+    }
+
+    public class Foo
+    {
+        public Bar GetToken() => new Bar();
+        public string GetAuthToken() => "31bf3856ad364e35";
+    }
+
+    public class Bar
+    {
+        public Bar test = new Bar();
+        public string ShouldNotRaise;
+        public string Token;
     }
 
     public class Scaffold

@@ -37,11 +37,11 @@ public class DoNotHardcodeSecretsTest
     // TODO: Add snippet with parametrisation
     [TestMethod]
     public void DoNotHardcodeSecrets_WebConfig() =>
-        DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.CSharp, new DoNotHardcodeSecrets(), "WebConfig", "*.config");
+        DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.CSharp, new DoNotHardcodeSecrets(AnalyzerConfiguration.AlwaysEnabled), "WebConfig", "*.config");
 
     [TestMethod]
     public void DoNotHardcodeSecrets_AppSettings() =>
-    DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.CSharp, new DoNotHardcodeSecrets(), "AppSettings", "*.json");
+    DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.CSharp, new DoNotHardcodeSecrets(AnalyzerConfiguration.AlwaysEnabled), "AppSettings", "*.json");
 
     private void DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage language, DiagnosticAnalyzer analyzer, string testDirectory, string pattern)
     {
