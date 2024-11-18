@@ -32,7 +32,7 @@ Public Class Example
     Private Shared rwLock As New ReaderWriterLock
 
     Public Sub AcquireWriterLock()
-        rwLock.AcquireWriterLock(2000)  ' Noncompliant, As the lock release Is On the callers responsibility
+        rwLock.AcquireWriterLock(2000)  ' Noncompliant, as the lock release is on the callers responsibility
     End Sub
 
     Public Sub DoSomething()
