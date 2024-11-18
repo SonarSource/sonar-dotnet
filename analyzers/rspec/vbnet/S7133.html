@@ -29,41 +29,40 @@ are also introducing the risk of not releasing a lock at all which can lead to d
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-public class Example
-{
-    private static ReaderWriterLock rwLock = new();
+Public Class Example
 
-    public void AcquireWriterLock() =&gt;
-        rwLock.AcquireWriterLock(2000);  // Noncompliant, as the lock release is on the callers responsibility
+    Private Shared rwLock As New ReaderWriterLock
 
-    public void DoSomething()
-    {
-        // ...
-    }
+    Public Sub AcquireWriterLock()
+        rwLock.AcquireWriterLock(2000)  ' Noncompliant, As the lock release Is On the callers responsibility
+    End Sub
 
-    public void ReleaseWriterLock() =&gt;
-        rwLock.ReleaseWriterLock();
-}
+    Public Sub DoSomething()
+        ' ...
+    End Sub
+
+    Public Sub ReleaseWriterLock()
+        rwLock.ReleaseWriterLock()
+    End Sub
+
+End Class
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
-public class Example
-{
-    private static ReaderWriterLock rwLock = new();
+Public Class Example
 
-    public void DoSomething()
-    {
-        rwLock.AcquireWriterLock(2000); // Compliant, locks are released in the same method
-        try
-        {
-            // ...
-        }
-        finally
-        {
-            rwLock.ReleaseWriterLock();
-        }
-    }
-}
+    Private Shared rwLock As New ReaderWriterLock
+
+    Public Sub DoSomething()
+        rwLock.AcquireWriterLock(2000)  ' Compliant, locks are released in the same method
+        Try
+            ' ...
+        Finally
+            rwLock.ReleaseWriterLock()
+        End Try
+    End Sub
+
+End Class
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
