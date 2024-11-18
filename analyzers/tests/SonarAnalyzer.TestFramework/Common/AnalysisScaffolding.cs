@@ -123,6 +123,14 @@ public static class AnalysisScaffolding
                     CreateSetting("sonar.global.test.exclusions", ConcatenateStringArray(globalTestExclusions))),
                 new XElement("Rules", CreateRules(rulesParameters)))).ToString();
 
+    public static SonarSyntaxNodeReportingContext CreateNodeReportingContext(SyntaxNode node, SemanticModel model, Action<Diagnostic> reportIssue)
+    {
+        var options = AnalysisScaffolding.CreateOptions();
+        var containingSymbol = Substitute.For<ISymbol>();
+        var context = new SyntaxNodeAnalysisContext(node, containingSymbol, model, options, reportIssue, _ => true, default);
+        return new SonarSyntaxNodeReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
+    }
+
     private static IEnumerable<XElement> CreateRules(List<SonarLintXmlRule> ruleParameters)
     {
         foreach (var rule in ruleParameters ?? new())
