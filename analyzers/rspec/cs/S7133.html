@@ -20,8 +20,6 @@
   href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.tryenterwritelock">ReaderWriterLockSlim.TryEnterWriteLock</a> </li>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.spinlock.enter">SpinLock.Enter</a> </li>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.spinlock.tryenter">SpinLock.TryEnter</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.monitor.enter">Monitor.Enter</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.monitor.tryenter">Monitor.TryEnter</a> </li>
 </ul>
 <h2>Why is this an issue?</h2>
 <p>Not releasing a lock in the same method where you acquire it, and releasing in another one, makes the code less clear and harder to maintain. You
@@ -72,6 +70,5 @@ public class Example
   <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim">ReaderWriterLockSlim Classs</a>
   </li>
   <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.spinlock">SpinLock Struct</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.monitor">Monitor Classs</a> </li>
 </ul>
 
