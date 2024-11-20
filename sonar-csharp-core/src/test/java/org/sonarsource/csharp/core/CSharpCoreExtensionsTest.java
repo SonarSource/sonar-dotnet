@@ -45,6 +45,7 @@ import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 import org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.RoslynRules;
 import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
+import org.sonarsource.dotnet.shared.plugins.TelemetrySensor;
 import org.sonarsource.dotnet.shared.plugins.UnitTestResultsProvider;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
@@ -64,6 +65,7 @@ class CSharpCoreExtensionsTest {
       ModuleConfiguration.class,
       FileTypeSensor.class,
       LogSensor.class,
+      TelemetrySensor.class,
       PropertiesSensor.class,
       ProjectTypeCollector.class,
       ReportPathCollector.class,
