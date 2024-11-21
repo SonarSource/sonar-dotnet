@@ -159,4 +159,4 @@ If you believe you have discovered a security vulnerability in Sonar's products,
 
 Copyright 2014-2024 SonarSource.
 
-Licensed under the [GNU Lesser General Public License, Version 3.0](http://www.gnu.org/licenses/lgpl.txt)
+Licensed under the [SONAR Source-Available License v1.0](https://www.sonarsource.com/license/ssal/)
