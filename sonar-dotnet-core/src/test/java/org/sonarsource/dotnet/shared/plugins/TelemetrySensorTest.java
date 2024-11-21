@@ -89,11 +89,15 @@ public class TelemetrySensorTest {
       Pair.of("PLUGIN_KEY.LANG_KEY.target_framework.tfm1", "2"),
       Pair.of("PLUGIN_KEY.LANG_KEY.target_framework.tfm3", "1"));
     assertThat(logTester.logs()).containsExactly(
-      "Start importing telemetry.",
-      "Start sending telemetry.",
-      "Found telemetry for 2 projects.",
-      "Aggregated 4 telemetry messages.",
-      "Send 4 telemetry messages.",
-      "Finished sending telemetry.");
+      "Start importing metrics.",
+      "Start adding metrics.",
+      "Found metrics for 2 projects.",
+      "Aggregated 4 metric messages.",
+      "Adding metric: PLUGIN_KEY.LANG_KEY.language_version.cs12=2",
+      "Adding metric: PLUGIN_KEY.LANG_KEY.target_framework.tfm2=2",
+      "Adding metric: PLUGIN_KEY.LANG_KEY.target_framework.tfm1=2",
+      "Adding metric: PLUGIN_KEY.LANG_KEY.target_framework.tfm3=1",
+      "Added 4 metrics.",
+      "Finished adding metrics.");
   }
 }

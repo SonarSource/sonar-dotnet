@@ -38,7 +38,7 @@ public class TelemetryImporterTest {
   }
 
   @Test
-  public void importLogMessagesFromSingleFile() throws IOException {
+  public void importTelemetryMessagesFromSingleFile() throws IOException {
     SensorContext context = mock(SensorContext.class);
     TelemetryImporter sut = new TelemetryImporter(context, "dotnet", "cs");
     try (var tmp = new AutoDeletingTempFile()) {
@@ -70,7 +70,7 @@ public class TelemetryImporterTest {
   }
 
   @Test
-  public void importLogMessagesFromMultipleFile() throws IOException {
+  public void importTelemetryMessagesFromMultipleFile() throws IOException {
     SensorContext context = mock(SensorContext.class);
     TelemetryImporter sut = new TelemetryImporter(context, "dotnet", "cs");
     try (

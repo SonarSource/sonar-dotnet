@@ -45,13 +45,13 @@ public class TelemetrySensor implements Sensor {
 
   @Override
   public void execute(SensorContext context) {
-    LOG.debug("Start importing telemetry.");
+    LOG.debug("Start importing metrics.");
     TelemetryImporter importer = new TelemetryImporter(context, pluginMetadata.pluginKey(), pluginMetadata.languageKey());
     for (Path protobufDir : configuration.protobufReportPaths()) {
       ProtobufDataImporter.parseProtobuf(importer, protobufDir, TELEMETRY_FILENAME);
     }
-    LOG.debug("Start sending telemetry.");
+    LOG.debug("Start adding metrics.");
     importer.save();
-    LOG.debug("Finished sending telemetry.");
+    LOG.debug("Finished adding metrics.");
   }
 }

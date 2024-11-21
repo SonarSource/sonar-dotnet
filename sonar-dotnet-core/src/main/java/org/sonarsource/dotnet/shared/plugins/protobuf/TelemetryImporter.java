@@ -42,10 +42,13 @@ public class TelemetryImporter extends RawProtobufImporter<SonarAnalyzer.Telemet
 
   @Override
   public void save() {
-    LOG.debug("Found telemetry for {} projects.", messages.size());
+    LOG.debug("Found metrics for {} projects.", messages.size());
     var telemetries = aggregator.aggregate(messages);
-    LOG.debug("Aggregated {} telemetry messages.", telemetries.size());
-    telemetries.forEach(telemetry -> context.addTelemetryProperty(telemetry.getKey(), telemetry.getValue()));
-    LOG.debug("Send {} telemetry messages.", telemetries.size());
+    LOG.debug("Aggregated {} metric messages.", telemetries.size());
+    telemetries.forEach(telemetry -> {
+      LOG.debug("Adding metric: {}={}", telemetry.getKey(), telemetry.getValue());
+      context.addTelemetryProperty(telemetry.getKey(), telemetry.getValue());
+    });
+    LOG.debug("Added {} metrics.", telemetries.size());
   }
 }
