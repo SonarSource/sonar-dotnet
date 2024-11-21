@@ -318,3 +318,25 @@ namespace Tests.Diagnostics
         }
     }
 }
+
+// https://sonarsource.atlassian.net/browse/NET-691
+namespace Repro_NET691
+{
+    public class MyClass
+    {
+        private bool myField = true; // Noncompliant FP
+
+        public void ToggleField()
+        {
+            myField.Toggle();
+        }
+    }
+
+    public static class BoolExtension
+    {
+        public static void Toggle(this ref bool value)
+        {
+            value = !value;
+        }
+    }
+}
