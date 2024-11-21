@@ -6,7 +6,7 @@
     <title>SonarAnalyzer for Visual Basic</title>
     <authors>SonarSource</authors>
     <owners>SonarSource</owners>
-    <license type="expression">LGPL-3.0-only</license>
+    <license type="file">LICENSE.txt</license>
     <projectUrl>https://redirect.sonarsource.com/doc/sonar-visualstudio.html</projectUrl>
     <repository type="git" url="https://github.com/SonarSource/sonar-dotnet" />
     <icon>images\sonarsource_64.png</icon>
@@ -27,5 +27,6 @@
     <file src="tools-vbnet\*.ps1" target="tools\" />
     <file src="logos\sonarsource_64.png" target="images\" />
     <file src="..\..\THIRD-PARTY-NOTICES.txt" target="license\" />
+    <file src="..\..\LICENSE.txt"/>
   </files>
 </package>
