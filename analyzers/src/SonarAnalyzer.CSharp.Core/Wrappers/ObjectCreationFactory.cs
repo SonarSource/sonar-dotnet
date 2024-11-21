@@ -96,8 +96,13 @@ public class ObjectCreationFactory
             semanticModel.GetTypeInfo(objectCreation).Type.Is(knownType);
 
         // Return null if TypeSymbol returns null to avoid AD0001 due to this issue: https://github.com/dotnet/roslyn/issues/70041
-        public string TypeAsString(SemanticModel semanticModel) =>
-            TypeSymbol(semanticModel)?.Name;
+        public string TypeAsString(SemanticModel semanticModel)
+        {
+            var typeSymbol = TypeSymbol(semanticModel);
+            return typeSymbol is INamedTypeSymbol namedTypeSymbol && namedTypeSymbol.IsGenericType && namedTypeSymbol.Name == "Nullable"
+                ? namedTypeSymbol.TypeArguments[0].Name
+                : typeSymbol?.Name;
+        }
 
         public ITypeSymbol TypeSymbol(SemanticModel semanticModel) =>
             semanticModel.GetTypeInfo(objectCreation).ConvertedType;

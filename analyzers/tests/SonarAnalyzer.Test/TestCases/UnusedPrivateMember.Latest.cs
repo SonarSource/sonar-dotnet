@@ -872,3 +872,54 @@ namespace CSharp7
     }
 }
 
+// https://sonarsource.atlassian.net/browse/NET-675
+namespace Repro_NET675
+{
+    internal readonly record struct RecordStruct
+    {
+        public string Value { get; }
+
+        private RecordStruct(string value) => Value = value; // Compliant
+
+        public static void Create(string value, out RecordStruct? result)
+        {
+            result = new(value);
+        }
+    }
+
+    internal struct MyStruct
+    {
+        public string Value { get; }
+
+        private MyStruct(string value) => Value = value; // Compliant
+
+        public static void Create(string value, out MyStruct? result)
+        {
+            result = new(value);
+        }
+    }
+
+    internal record class RecordClass
+    {
+        public string Value { get; }
+
+        private RecordClass(string value) => Value = value; // Compliant
+
+        public static void Create(string value, out RecordClass? result)
+        {
+            result = new(value);
+        }
+    }
+
+    internal class MyClass
+    {
+        public string Value { get; }
+
+        private MyClass(string value) => Value = value; // Compliant
+
+        public static void Create(string value, out MyClass? result)
+        {
+            result = new(value);
+        }
+    }
+}
