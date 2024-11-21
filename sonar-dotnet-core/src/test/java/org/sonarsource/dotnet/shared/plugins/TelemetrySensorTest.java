@@ -71,7 +71,7 @@ public class TelemetrySensorTest {
     DefaultSensorDescriptor sensorDescriptor = new DefaultSensorDescriptor();
     sensor.describe(sensorDescriptor);
     assertThat(sensorDescriptor.name()).isEqualTo(LANG_NAME + " Telemetry");
-    assertThat(sensorDescriptor.languages()).isEmpty();
+    assertThat(sensorDescriptor.languages()).containsExactlyInAnyOrder("LANG_KEY");
   }
 
   @Test
