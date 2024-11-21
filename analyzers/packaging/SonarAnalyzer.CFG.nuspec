@@ -6,7 +6,7 @@
     <title>CFG library for SonarAnalyzer</title>
     <authors>SonarSource</authors>
     <owners>SonarSource</owners>
-    <license type="expression">LGPL-3.0-only</license>
+    <license type="file">LICENSE.txt</license>
     <repository type="git" url="https://github.com/SonarSource/sonar-dotnet" />
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>SonarSource CFG library</description>
@@ -19,5 +19,7 @@
   </metadata>
   <files>
     <file src="binaries\SonarAnalyzer.CFG\*.dll" target="lib\netstandard2.0" />
+    <file src="..\..\THIRD-PARTY-NOTICES.txt" target="license\" />
+    <file src="..\..\LICENSE.txt" />
   </files>
 </package>
