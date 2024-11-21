@@ -38,9 +38,8 @@ public class TelemetrySensor implements Sensor {
 
   @Override
   public void describe(SensorDescriptor descriptor) {
-    // We don't filter by language to be invoked on projects without sources - when referencing shared project
     String name = String.format("%s Telemetry", pluginMetadata.languageName());
-    descriptor.name(name);
+    descriptor.name(name).onlyOnLanguage(pluginMetadata.languageKey());
   }
 
   @Override
