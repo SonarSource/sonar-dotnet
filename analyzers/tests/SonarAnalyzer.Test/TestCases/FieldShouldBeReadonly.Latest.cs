@@ -1,5 +1,34 @@
 ﻿using System;
 
+record Person
+{
+    private int birthYear;     // Noncompliant {{Make 'birthYear' 'readonly'.}}
+    int birthMonth = 3;        // Noncompliant
+
+    int legSize1 = 3;
+    int legSize2 = 3;
+    bool usedInInit = false;
+
+    Person(int birthYear)
+    {
+        this.birthYear = birthYear;
+    }
+
+    public int LegSize
+    {
+        get
+        {
+            legSize2++;
+            return legSize1;
+        }
+        init
+        {
+            legSize1 = value;
+            usedInInit = true;
+        }
+    }
+}
+
 record PointerTypes
 {
     private readonly nint _nint; // Compliant
@@ -46,12 +75,12 @@ record PointerTypes
     private void Method_OutArgument(out nuint v) { v = 42; }
 }
 
-class Person
+class Person2
 {
     int somefield = 42; // Compliant
     private readonly Action<int> setter;
 
-    Person(int birthYear)
+    Person2(int birthYear)
     {
         setter = i => { somefield >>>= i; };
     }
