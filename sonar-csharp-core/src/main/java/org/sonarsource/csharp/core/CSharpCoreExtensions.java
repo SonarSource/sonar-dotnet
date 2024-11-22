@@ -38,6 +38,8 @@ import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 import org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.RoslynRules;
 import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
+import org.sonarsource.dotnet.shared.plugins.TelemetryProcessor;
+import org.sonarsource.dotnet.shared.plugins.TelemetryCollector;
 import org.sonarsource.dotnet.shared.plugins.TelemetrySensor;
 import org.sonarsource.dotnet.shared.plugins.UnitTestResultsProvider;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
@@ -61,7 +63,9 @@ public class CSharpCoreExtensions {
         ModuleConfiguration.class,
         FileTypeSensor.class,
         LogSensor.class,
+        TelemetryCollector.class,
         TelemetrySensor.class,
+        TelemetryProcessor.class,
         PropertiesSensor.class,
         // global components
         // collectors - they are populated by the module-level sensors

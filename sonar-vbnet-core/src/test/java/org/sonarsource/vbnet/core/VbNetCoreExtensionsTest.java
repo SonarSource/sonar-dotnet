@@ -41,6 +41,8 @@ import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 import org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.RoslynRules;
 import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
+import org.sonarsource.dotnet.shared.plugins.TelemetryProcessor;
+import org.sonarsource.dotnet.shared.plugins.TelemetryCollector;
 import org.sonarsource.dotnet.shared.plugins.TelemetrySensor;
 import org.sonarsource.dotnet.shared.plugins.UnitTestResultsProvider;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
@@ -60,7 +62,9 @@ class VbNetCoreExtensionsTest {
       // module-level components (some relying on deprecated Scanner APIs)
       FileTypeSensor.class,
       LogSensor.class,
+      TelemetryCollector.class,
       TelemetrySensor.class,
+      TelemetryProcessor.class,
       PropertiesSensor.class,
       ModuleConfiguration.class,
       // global components
