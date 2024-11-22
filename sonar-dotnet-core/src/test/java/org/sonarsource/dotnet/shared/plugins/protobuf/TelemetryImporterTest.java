@@ -20,13 +20,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import org.junit.Test;
-import org.sonar.api.batch.sensor.SensorContext;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
+import org.sonarsource.dotnet.shared.plugins.TelemetryCollector;
 import org.sonarsource.dotnet.shared.plugins.testutils.AutoDeletingTempFile;
 
-import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TelemetryImporterTest {
   private static void WriteTelemetryToFile(Path file, SonarAnalyzer.Telemetry... telemetry) throws IOException {
@@ -39,8 +37,8 @@ public class TelemetryImporterTest {
 
   @Test
   public void importTelemetryMessagesFromSingleFile() throws IOException {
-    SensorContext context = mock(SensorContext.class);
-    TelemetryImporter sut = new TelemetryImporter(context, "dotnet", "cs");
+    TelemetryCollector collector = new TelemetryCollector();
+    TelemetryImporter sut = new TelemetryImporter(collector);
     try (var tmp = new AutoDeletingTempFile()) {
       WriteTelemetryToFile(tmp.getFile(),
         SonarAnalyzer.Telemetry.newBuilder()
@@ -60,22 +58,27 @@ public class TelemetryImporterTest {
           .build());
       sut.accept(tmp.getFile());
       sut.save();
-      var inOrder = inOrder(context);
-      inOrder.verify(context).addTelemetryProperty("dotnet.cs.language_version.cs12", "2");
-      inOrder.verify(context).addTelemetryProperty("dotnet.cs.target_framework.tfm1", "2");
-      inOrder.verify(context).addTelemetryProperty("dotnet.cs.target_framework.tfm2", "2");
-      inOrder.verify(context).addTelemetryProperty("dotnet.cs.target_framework.tfm3", "1");
-      verifyNoMoreInteractions(context);
+      assertThat(collector.getTelemetryMessages()).satisfiesExactly(
+        t -> {
+          assertThat(t.getProjectFullPath()).isEqualTo("A.csproj");
+          assertThat(t.getLanguageVersion()).isEqualTo("cs12");
+          assertThat(t.getTargetFrameworkList()).containsExactlyInAnyOrder("tfm1", "tfm2");
+        },
+        t -> {
+          assertThat(t.getProjectFullPath()).isEqualTo("B.csproj");
+          assertThat(t.getLanguageVersion()).isEqualTo("cs12");
+          assertThat(t.getTargetFrameworkList()).containsExactlyInAnyOrder("tfm1", "tfm2", "tfm3");
+        });
     }
   }
 
   @Test
   public void importTelemetryMessagesFromMultipleFile() throws IOException {
-    SensorContext context = mock(SensorContext.class);
-    TelemetryImporter sut = new TelemetryImporter(context, "dotnet", "cs");
+    TelemetryCollector collector = new TelemetryCollector();
+    TelemetryImporter sut = new TelemetryImporter(collector);
     try (
       var tmp1 = new AutoDeletingTempFile();
-      var tmp2 = new AutoDeletingTempFile();) {
+      var tmp2 = new AutoDeletingTempFile()) {
       WriteTelemetryToFile(tmp1.getFile(),
         SonarAnalyzer.Telemetry.newBuilder()
           .setProjectFullPath("A.csproj")
@@ -94,12 +97,17 @@ public class TelemetryImporterTest {
       sut.accept(tmp1.getFile());
       sut.accept(tmp2.getFile());
       sut.save();
-      var inOrder = inOrder(context);
-      inOrder.verify(context).addTelemetryProperty("dotnet.cs.language_version.cs12", "2");
-      inOrder.verify(context).addTelemetryProperty("dotnet.cs.target_framework.tfm1", "2");
-      inOrder.verify(context).addTelemetryProperty("dotnet.cs.target_framework.tfm2", "2");
-      inOrder.verify(context).addTelemetryProperty("dotnet.cs.target_framework.tfm3", "1");
-      verifyNoMoreInteractions(context);
+      assertThat(collector.getTelemetryMessages()).satisfiesExactly(
+        t -> {
+          assertThat(t.getProjectFullPath()).isEqualTo("A.csproj");
+          assertThat(t.getLanguageVersion()).isEqualTo("cs12");
+          assertThat(t.getTargetFrameworkList()).containsExactlyInAnyOrder("tfm1", "tfm2");
+        },
+        t -> {
+          assertThat(t.getProjectFullPath()).isEqualTo("B.csproj");
+          assertThat(t.getLanguageVersion()).isEqualTo("cs12");
+          assertThat(t.getTargetFrameworkList()).containsExactlyInAnyOrder("tfm1", "tfm2", "tfm3");
+        });
     }
   }
 }

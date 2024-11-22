@@ -16,39 +16,19 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.sonar.api.batch.sensor.SensorContext;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
+import org.sonarsource.dotnet.shared.plugins.TelemetryCollector;
 
 public class TelemetryImporter extends RawProtobufImporter<SonarAnalyzer.Telemetry> {
-  private static final Logger LOG = LoggerFactory.getLogger(TelemetryImporter.class);
-  private final SensorContext context;
-  private final List<SonarAnalyzer.Telemetry> messages = new ArrayList<>();
-  private final TelemetryAggregator aggregator;
+  private final TelemetryCollector collector;
 
-  public TelemetryImporter(SensorContext context, String pluginKey, String language) {
+  public TelemetryImporter(TelemetryCollector collector) {
     super(SonarAnalyzer.Telemetry.parser());
-    this.context = context;
-    this.aggregator = new TelemetryAggregator(pluginKey, language);
+    this.collector = collector;
   }
 
   @Override
   void consume(SonarAnalyzer.Telemetry message) {
-    messages.add(message);
-  }
-
-  @Override
-  public void save() {
-    LOG.debug("Found metrics for {} projects.", messages.size());
-    var telemetries = aggregator.aggregate(messages);
-    LOG.debug("Aggregated {} metric messages.", telemetries.size());
-    telemetries.forEach(telemetry -> {
-      LOG.debug("Adding metric: {}={}", telemetry.getKey(), telemetry.getValue());
-      context.addTelemetryProperty(telemetry.getKey(), telemetry.getValue());
-    });
-    LOG.debug("Added {} metrics.", telemetries.size());
+    collector.addTelemetry(message);
   }
 }

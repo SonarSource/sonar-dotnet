@@ -17,24 +17,18 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
-import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.mockito.stubbing.Answer;
 import org.slf4j.event.Level;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.testfixtures.log.LogTester;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 public class TelemetrySensorTest {
@@ -49,13 +43,14 @@ public class TelemetrySensorTest {
   @Rule
   public LogTester logTester = new LogTester();
 
+  private TelemetryCollector collector;
   private SensorContextTester context;
   private TelemetrySensor sensor;
 
   @Before
   public void prepare() {
     logTester.setLevel(Level.DEBUG);
-    context = spy(SensorContextTester.create(temp.getRoot()));
+    context = SensorContextTester.create(temp.getRoot());
     PluginMetadata metadata = mock(PluginMetadata.class);
     when(metadata.pluginKey()).thenReturn(PLUGIN_KEY);
     when(metadata.languageKey()).thenReturn(LANG_KEY);
@@ -63,7 +58,8 @@ public class TelemetrySensorTest {
     ModuleConfiguration configuration = mock(ModuleConfiguration.class);
     when(configuration.protobufReportPaths()).thenReturn(
       Arrays.stream(TEST_DATA_DIR.toPath().toFile().listFiles(File::isDirectory)).map(File::toPath).toList());
-    sensor = new TelemetrySensor(metadata, configuration);
+    collector = new TelemetryCollector();
+    sensor = new TelemetrySensor(collector, metadata, configuration);
   }
 
   @Test
@@ -76,28 +72,17 @@ public class TelemetrySensorTest {
 
   @Test
   public void executeTelemetrySensor() {
-    final var telemetry = new ArrayList<Pair<String, String>>();
-    doAnswer((Answer<Void>) invocationOnMock -> {
-      // Intercept the call to context.addTelemetryProperty and capture the send telemetry in a list
-      telemetry.add(Pair.of(invocationOnMock.getArgument(0), invocationOnMock.getArgument(1)));
-      return null;
-    }).when(context).addTelemetryProperty(anyString(), anyString());
     sensor.execute(context);
-    assertThat(telemetry).containsSequence(
-      Pair.of("PLUGIN_KEY.LANG_KEY.language_version.cs12", "2"),
-      Pair.of("PLUGIN_KEY.LANG_KEY.target_framework.tfm2", "2"),
-      Pair.of("PLUGIN_KEY.LANG_KEY.target_framework.tfm1", "2"),
-      Pair.of("PLUGIN_KEY.LANG_KEY.target_framework.tfm3", "1"));
+    assertThat(collector.getTelemetryMessages()).satisfiesExactly(
+      t -> {
+        assertThat(t.getLanguageVersion()).isEqualTo("CS12");
+        assertThat(t.getTargetFrameworkList()).containsExactly("TFM1", "TFM2");
+      },
+      t -> {
+        assertThat(t.getLanguageVersion()).isEqualTo("CS12");
+        assertThat(t.getTargetFrameworkList()).containsExactly("TFM1", "TFM2", "TFM3");
+      });
     assertThat(logTester.logs()).containsExactly(
-      "Start importing metrics.",
-      "Start adding metrics.",
-      "Found metrics for 2 projects.",
-      "Aggregated 4 metric messages.",
-      "Adding metric: PLUGIN_KEY.LANG_KEY.language_version.cs12=2",
-      "Adding metric: PLUGIN_KEY.LANG_KEY.target_framework.tfm2=2",
-      "Adding metric: PLUGIN_KEY.LANG_KEY.target_framework.tfm1=2",
-      "Adding metric: PLUGIN_KEY.LANG_KEY.target_framework.tfm3=1",
-      "Added 4 metrics.",
-      "Finished adding metrics.");
+      "Start importing metrics.");
   }
 }

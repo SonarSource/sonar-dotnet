@@ -26,14 +26,21 @@ import org.sonarsource.dotnet.shared.plugins.protobuf.TelemetryImporter;
 
 import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.TELEMETRY_FILENAME;
 
+/**
+ * This sensor is run once per csproj or vbproj build. It reads the protobuf files
+ * associated with the project (can be more than one in case of multitargeting via &lt;TargetFrameworks&gt;)
+ * The telemetry messages are added to the scanner run wide TelemetryCollector and later post-processed by TelemetryProcessor.
+ */
 public class TelemetrySensor implements Sensor {
   private static final Logger LOG = LoggerFactory.getLogger(TelemetrySensor.class);
   private final PluginMetadata pluginMetadata;
   private final ModuleConfiguration configuration;
+  private final TelemetryCollector collector;
 
-  public TelemetrySensor(PluginMetadata pluginMetadata, ModuleConfiguration configuration) {
+  public TelemetrySensor(TelemetryCollector collector, PluginMetadata pluginMetadata, ModuleConfiguration configuration) {
     this.pluginMetadata = pluginMetadata;
     this.configuration = configuration;
+    this.collector = collector;
   }
 
   @Override
@@ -45,12 +52,9 @@ public class TelemetrySensor implements Sensor {
   @Override
   public void execute(SensorContext context) {
     LOG.debug("Start importing metrics.");
-    TelemetryImporter importer = new TelemetryImporter(context, pluginMetadata.pluginKey(), pluginMetadata.languageKey());
+    TelemetryImporter importer = new TelemetryImporter(collector);
     for (Path protobufDir : configuration.protobufReportPaths()) {
       ProtobufDataImporter.parseProtobuf(importer, protobufDir, TELEMETRY_FILENAME);
     }
-    LOG.debug("Start adding metrics.");
-    importer.save();
-    LOG.debug("Finished adding metrics.");
   }
 }
