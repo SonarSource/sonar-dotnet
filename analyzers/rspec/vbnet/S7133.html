@@ -21,6 +21,10 @@
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.spinlock.enter">SpinLock.Enter</a> </li>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.spinlock.tryenter">SpinLock.TryEnter</a> </li>
 </ul>
+<p>This rule will raise an issue when the code uses the <a
+href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose">disposable pattern</a>. This pattern makes locking
+easy to use and delegates the responsibility to the caller. Users should accept issues in such cases, as they should appear only once for each
+synchronization type.</p>
 <h2>Why is this an issue?</h2>
 <p>Not releasing a lock in the same method where you acquire it, and releasing in another one, makes the code less clear and harder to maintain. You
 are also introducing the risk of not releasing a lock at all which can lead to deadlocks or exceptions.</p>
