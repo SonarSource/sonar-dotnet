@@ -346,7 +346,7 @@ public class RoslynProfileExporterTest {
       .containsExactlyInAnyOrder(
         tuple("sonaranalyzer-cs.pluginKey", "csharp"),
         tuple("sonaranalyzer-cs.pluginVersion", "1.2.3.4"),
-        tuple("sonaranalyzer-cs.staticResourceName", "SonarAnalyzer-1.2.3.4.zip"),
+        tuple("sonaranalyzer-cs.staticResourceName", "SonarAnalyzer-csharp-1.2.3.4.zip"),
         tuple("sonaranalyzer-cs.analyzerId", "SonarAnalyzer.CSharp"),
         tuple("sonaranalyzer-cs.ruleNamespace", "SonarAnalyzer.CSharp"),
         tuple("sonaranalyzer-cs.nuget.packageId", "SonarAnalyzer.CSharp"),

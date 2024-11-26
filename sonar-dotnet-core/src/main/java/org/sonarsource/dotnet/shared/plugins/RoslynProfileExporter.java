@@ -91,7 +91,7 @@ public class RoslynProfileExporter extends ProfileExporter {
         .hidden()
         .build(),
       PropertyDefinition.builder(staticResourceNamePropertyKey(sonarAnalyzerPartialRepoKey(metadata)))
-        .defaultValue("SonarAnalyzer-" + version + ".zip")
+        .defaultValue("SonarAnalyzer-" + metadata.pluginKey() + "-" + version + ".zip")
         .hidden()
         .build(),
       PropertyDefinition.builder(analyzerIdPropertyKey(sonarAnalyzerPartialRepoKey(metadata)))

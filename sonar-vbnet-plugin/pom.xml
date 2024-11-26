@@ -142,7 +142,7 @@
           <include>org/sonar/plugins/vbnet/*.json</include>
           <include>org/sonar/plugins/vbnet/*.html</include>
           <include>static/documentation.md</include>
-          <include>static/SonarAnalyzer-${project.version}.zip</include>
+          <include>static/SonarAnalyzer-vbnet-${project.version}.zip</include>
         </includes>
       </resource>
     </resources>
@@ -224,7 +224,6 @@
             <configuration>
               <exportAntProperties>true</exportAntProperties>
               <target>
-                <!-- ITs requires the SonarAnalyzer-VERSION.zip to be present so don't remove these lines -->
                 <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic">
                   <fileset dir="${packaging.directory}/binaries/SonarAnalyzer.VisualBasic/">
                     <include name="*.dll"/>
@@ -233,7 +232,7 @@
                     <include name="THIRD-PARTY-NOTICES.txt"/>
                   </fileset>
                 </copy>
-                <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
+                <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-vbnet-${project.version}.zip"
                      basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic"/>
                 <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/vbnet">
                   <fileset dir="${rspec.directory}/vbnet">
