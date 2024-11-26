@@ -16,9 +16,7 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -45,6 +43,7 @@ import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinition.Context;
 import org.sonar.api.server.rule.RulesDefinition.Repository;
 import org.sonar.api.server.rule.RulesDefinition.Rule;
+import org.sonar.api.utils.ManifestUtils;
 
 /**
  * This profile exporter was build to be used by the SonarQube SonarScanner for .NET (S4MSB) during the Begin step,
@@ -80,54 +79,51 @@ public class RoslynProfileExporter extends ProfileExporter {
     return "roslyn-" + pluginMetadata.languageKey();
   }
 
-  public static List<PropertyDefinition> sonarLintRepositoryProperties(PluginMetadata pluginMetadata) {
-    String analyzerVersion = getAnalyzerVersion();
+  public static List<PropertyDefinition> sonarLintRepositoryProperties(PluginMetadata metadata) {
+    String version = projectVersion();
     return Arrays.asList(
-      PropertyDefinition.builder(pluginKeyPropertyKey(sonarAnalyzerPartialRepoKey(pluginMetadata)))
-        .defaultValue(pluginMetadata.pluginKey())
+      PropertyDefinition.builder(pluginKeyPropertyKey(sonarAnalyzerPartialRepoKey(metadata)))
+        .defaultValue(metadata.pluginKey())
         .hidden()
         .build(),
-      PropertyDefinition.builder(pluginVersionPropertyKey(sonarAnalyzerPartialRepoKey(pluginMetadata)))
-        .defaultValue(analyzerVersion)
+      PropertyDefinition.builder(pluginVersionPropertyKey(sonarAnalyzerPartialRepoKey(metadata)))
+        .defaultValue(version)
         .hidden()
         .build(),
-      PropertyDefinition.builder(staticResourceNamePropertyKey(sonarAnalyzerPartialRepoKey(pluginMetadata)))
-        .defaultValue("SonarAnalyzer-" + analyzerVersion + ".zip")
+      PropertyDefinition.builder(staticResourceNamePropertyKey(sonarAnalyzerPartialRepoKey(metadata)))
+        .defaultValue("SonarAnalyzer-" + version + ".zip")
         .hidden()
         .build(),
-      PropertyDefinition.builder(analyzerIdPropertyKey(sonarAnalyzerPartialRepoKey(pluginMetadata)))
-        .defaultValue(pluginMetadata.analyzerProjectName())
+      PropertyDefinition.builder(analyzerIdPropertyKey(sonarAnalyzerPartialRepoKey(metadata)))
+        .defaultValue(metadata.analyzerProjectName())
         .hidden()
         .build(),
-      PropertyDefinition.builder(ruleNamespacePropertyKey(sonarAnalyzerPartialRepoKey(pluginMetadata)))
-        .defaultValue(pluginMetadata.analyzerProjectName())
+      PropertyDefinition.builder(ruleNamespacePropertyKey(sonarAnalyzerPartialRepoKey(metadata)))
+        .defaultValue(metadata.analyzerProjectName())
         .hidden()
         .build(),
-      PropertyDefinition.builder(nugetPackageIdPropertyKey(sonarAnalyzerPartialRepoKey(pluginMetadata)))
-        .defaultValue(pluginMetadata.analyzerProjectName())
+      PropertyDefinition.builder(nugetPackageIdPropertyKey(sonarAnalyzerPartialRepoKey(metadata)))
+        .defaultValue(metadata.analyzerProjectName())
         .hidden()
         .build(),
-      PropertyDefinition.builder(nugetPackageVersionPropertyKey(sonarAnalyzerPartialRepoKey(pluginMetadata)))
-        .defaultValue(analyzerVersion)
+      PropertyDefinition.builder(nugetPackageVersionPropertyKey(sonarAnalyzerPartialRepoKey(metadata)))
+        .defaultValue(version)
         .hidden()
         .build());
   }
 
-  private static String getAnalyzerVersion() {
-    try {
-      return new BufferedReader(new InputStreamReader(RoslynProfileExporter.class.getResourceAsStream("/static/version.txt"), StandardCharsets.UTF_8)).readLine();
-    } catch (IOException e) {
-      throw new IllegalStateException("Couldn't read C# analyzer version number from '/static/version.txt'", e);
-    }
+  static String projectVersion() {
+    List<String> propertyValues = ManifestUtils.getPropertyValues(RoslynProfileExporter.class.getClassLoader(), "Plugin-Version");
+    return propertyValues.isEmpty() ? "Version-N/A" : propertyValues.iterator().next();
   }
 
   @Override
   public void exportProfile(RulesProfile rulesProfile, Writer writer) {
     try {
       Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(pluginMetadata, rulesProfile.getActiveRules()
-          .stream()
-          .map(r -> RuleKey.of(r.getRepositoryKey(), r.getRuleKey()))
-          .toList());
+        .stream()
+        .map(r -> RuleKey.of(r.getRepositoryKey(), r.getRuleKey()))
+        .toList());
 
       appendLine(writer, "<?xml version=\"1.0\" encoding=\"utf-8\"?>");
       appendLine(writer, "<RoslynExportProfile Version=\"1.0\">");

@@ -141,7 +141,6 @@
         <includes>
           <include>org/sonar/plugins/vbnet/*.json</include>
           <include>org/sonar/plugins/vbnet/*.html</include>
-          <include>static/version.txt</include>
           <include>static/documentation.md</include>
           <include>static/SonarAnalyzer-${project.version}.zip</include>
         </includes>
@@ -254,7 +253,6 @@
                     <include name="documentation.md"/>
                   </fileset>
                 </copy>
-                <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8"/>
               </target>
             </configuration>
             <goals>
