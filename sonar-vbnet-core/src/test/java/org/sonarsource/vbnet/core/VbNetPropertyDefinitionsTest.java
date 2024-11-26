@@ -29,6 +29,19 @@ class VbNetPropertyDefinitionsTest {
     VbNetPropertyDefinitions sut = new VbNetPropertyDefinitions(TestVbNetMetadata.INSTANCE);
     List<PropertyDefinition> properties = sut.create();
     assertThat(properties)
-      .hasSize(9);
+      .hasSize(12);
+  }
+
+  @Test
+  void create_containsScannerForDotNetProperties() {
+    VbNetPropertyDefinitions sut = new VbNetPropertyDefinitions(TestVbNetMetadata.INSTANCE);
+    List<PropertyDefinition> properties = sut.create();
+    // These must exist for S4NET to download the ZIP with analyzers from the server.
+    assertThat(properties)
+      .extracting(PropertyDefinition::key)
+      .contains(
+        "sonar.vbnet.analyzer.dotnet.pluginKey",
+        "sonar.vbnet.analyzer.dotnet.pluginVersion",
+        "sonar.vbnet.analyzer.dotnet.staticResourceName");
   }
 }

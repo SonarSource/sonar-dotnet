@@ -21,6 +21,7 @@ import java.util.List;
 import org.sonar.api.PropertyType;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
+import org.sonar.api.utils.ManifestUtils;
 
 /**
  * This class is responsible to declare all the properties that can be set through SonarQube/SonarCloud UI (settings page).
@@ -42,19 +43,33 @@ public abstract class AbstractPropertyDefinitions {
   public List<PropertyDefinition> create() {
     String languageKey = metadata.languageKey();
     String languageName = metadata.languageName();
+    String version = projectVersion();
     List<PropertyDefinition> result = new ArrayList<>();
     result.add(
       PropertyDefinition.builder(getRoslynJsonReportPathProperty(metadata.languageKey()))
         .multiValues(true)
         .hidden()
         .build());
-
     result.add(
       PropertyDefinition.builder(getAnalyzerWorkDirProperty(languageKey))
         .multiValues(true)
         .hidden()
         .build());
-
+    result.add(
+      PropertyDefinition.builder(pluginKeyPropertyKey(languageKey))
+        .defaultValue(metadata.pluginKey())
+        .hidden()
+        .build());
+    result.add(
+      PropertyDefinition.builder(pluginVersionPropertyKey(languageKey))
+        .defaultValue(version)
+        .hidden()
+        .build());
+    result.add(
+      PropertyDefinition.builder(staticResourceNamePropertyKey(languageKey))
+        .defaultValue("SonarAnalyzer-" + metadata.pluginKey() + "-" + version + ".zip")
+        .hidden()
+        .build());
     result.add(
       PropertyDefinition.builder(getFileSuffixProperty(languageKey))
         .category(languageName)
@@ -64,7 +79,6 @@ public abstract class AbstractPropertyDefinitions {
         .multiValues(true)
         .onQualifiers(Qualifiers.PROJECT)
         .build());
-
     result.add(
       PropertyDefinition.builder(getIgnoreHeaderCommentsProperty(languageKey))
         .category(languageName)
@@ -77,7 +91,6 @@ public abstract class AbstractPropertyDefinitions {
         .onQualifiers(Qualifiers.PROJECT)
         .type(PropertyType.BOOLEAN)
         .build());
-
     result.add(
       PropertyDefinition.builder(getAnalyzeGeneratedCode(languageKey))
         .category(languageName)
@@ -88,7 +101,6 @@ public abstract class AbstractPropertyDefinitions {
         .onQualifiers(Qualifiers.PROJECT)
         .type(PropertyType.BOOLEAN)
         .build());
-
     result.add(
       PropertyDefinition.builder(getIgnoreIssuesProperty(languageKey))
         .type(PropertyType.BOOLEAN)
@@ -133,7 +145,6 @@ public abstract class AbstractPropertyDefinitions {
         .description("External rule categories to be treated as Code Smells. By default, external issues are Code Smells, or Bugs when the severity is error.")
         .onQualifiers(Qualifiers.PROJECT)
         .build());
-
     return result;
   }
 
@@ -179,5 +190,26 @@ public abstract class AbstractPropertyDefinitions {
 
   public static String getPullRequestBase() {
     return PROP_PREFIX + "pullrequest.base";
+  }
+
+  public static String pluginKeyPropertyKey(String languageKey) {
+    return scannerForDotNetProperty(languageKey, "pluginKey");
+  }
+
+  public static String pluginVersionPropertyKey(String languageKey) {
+    return scannerForDotNetProperty(languageKey, "pluginVersion");
+  }
+
+  public static String staticResourceNamePropertyKey(String languageKey) {
+    return scannerForDotNetProperty(languageKey, "staticResourceName");
+  }
+
+  private static String scannerForDotNetProperty(String languageKey, String name) {
+    return PROP_PREFIX + languageKey + ".analyzer.dotnet." + name;
+  }
+
+  static String projectVersion() {
+    List<String> propertyValues = ManifestUtils.getPropertyValues(AbstractPropertyDefinitions.class.getClassLoader(), "Plugin-Version");
+    return propertyValues.isEmpty() ? "Version-N/A" : propertyValues.iterator().next();
   }
 }
