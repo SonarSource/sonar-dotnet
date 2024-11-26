@@ -32,7 +32,7 @@
     <dependency>
       <groupId>org.sonarsource.sonarqube</groupId>
       <artifactId>sonar-ws</artifactId>
-      <version>10.6.0.92116</version>
+      <version>10.7.0.96327</version>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.ucfg</groupId>
