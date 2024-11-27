@@ -19,28 +19,28 @@ package org.sonarsource.vbnet.core;
 import org.sonar.api.Plugin.Context;
 import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
 import org.sonarsource.dotnet.shared.plugins.DotNetRulesDefinition;
-import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
-import org.sonarsource.dotnet.shared.plugins.FileTypeSensor;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
 import org.sonarsource.dotnet.shared.plugins.GlobalProtobufFileProcessor;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
-import org.sonarsource.dotnet.shared.plugins.LogSensor;
 import org.sonarsource.dotnet.shared.plugins.ModuleConfiguration;
 import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 import org.sonarsource.dotnet.shared.plugins.ProjectTypeCollector;
-import org.sonarsource.dotnet.shared.plugins.PropertiesSensor;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
 import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 import org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.RoslynRules;
 import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
-import org.sonarsource.dotnet.shared.plugins.TelemetryProcessor;
 import org.sonarsource.dotnet.shared.plugins.TelemetryCollector;
-import org.sonarsource.dotnet.shared.plugins.TelemetrySensor;
 import org.sonarsource.dotnet.shared.plugins.UnitTestResultsProvider;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
+import org.sonarsource.dotnet.shared.plugins.sensors.DotNetSensor;
+import org.sonarsource.dotnet.shared.plugins.sensors.FileTypeSensor;
+import org.sonarsource.dotnet.shared.plugins.sensors.LogSensor;
+import org.sonarsource.dotnet.shared.plugins.sensors.PropertiesSensor;
+import org.sonarsource.dotnet.shared.plugins.sensors.TelemetryProcessor;
+import org.sonarsource.dotnet.shared.plugins.sensors.TelemetrySensor;
 
 public class VbNetCoreExtensions {
 

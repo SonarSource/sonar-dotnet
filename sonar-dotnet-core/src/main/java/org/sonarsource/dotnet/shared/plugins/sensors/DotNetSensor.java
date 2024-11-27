@@ -14,7 +14,7 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonarsource.dotnet.shared.plugins;
+package org.sonarsource.dotnet.shared.plugins.sensors;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -30,6 +30,14 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.scanner.sensor.ProjectSensor;
+import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
+import org.sonarsource.dotnet.shared.plugins.ProjectTypeCollector;
+import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
+import org.sonarsource.dotnet.shared.plugins.RealPathProvider;
+import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
+import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
+import org.sonarsource.dotnet.shared.plugins.RoslynReport;
+import org.sonarsource.dotnet.shared.plugins.SensorContextUtils;
 
 import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 import static org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter.activeRoslynRulesByPartialRepoKey;
@@ -118,7 +126,7 @@ public class DotNetSensor implements ProjectSensor {
    * we should log a warning to the user, because no files will be analyzed.
    *
    * @param hasFilesOfLanguage True if ANY files of this sensor language have been indexed.
-   * @param hasProjects  True if at least one .NET project has been found in {@link org.sonarsource.dotnet.shared.plugins.FileTypeSensor#execute(SensorContext)}.
+   * @param hasProjects  True if at least one .NET project has been found in {@link FileTypeSensor#execute(SensorContext)}.
    */
   private void log(boolean hasFilesOfLanguage, boolean hasProjects) {
     if (hasProjects) {

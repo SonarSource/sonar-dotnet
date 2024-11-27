@@ -14,13 +14,17 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonarsource.dotnet.shared.plugins;
+package org.sonarsource.dotnet.shared.plugins.sensors;
 
 import java.nio.file.Path;
 import java.util.List;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
+import org.sonarsource.dotnet.shared.plugins.ModuleConfiguration;
+import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
+import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
+import org.sonarsource.dotnet.shared.plugins.RoslynReport;
 
 /**
  * This class is a non-global sensor used to collect all Roslyn reports and all protobufs resulting from the analysis of each and every C#/VB.NET project.
