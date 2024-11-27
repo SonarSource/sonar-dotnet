@@ -41,7 +41,7 @@ public class ProjectTypeCollector {
   // modules that have no files
   private int noFiles = 0;
 
-  void addProjectInfo(boolean hasMainFiles, boolean hasTestFiles) {
+  public void addProjectInfo(boolean hasMainFiles, boolean hasTestFiles) {
     if (hasMainFiles && hasTestFiles) {
       mixed++;
     } else if (hasMainFiles) {
@@ -53,11 +53,11 @@ public class ProjectTypeCollector {
     }
   }
 
-  boolean hasProjects() {
+  public boolean hasProjects() {
     return countProjects() > 0;
   }
 
-  Optional<String> getSummary(String languageName) {
+  public Optional<String> getSummary(String languageName) {
     int projectsCount = countProjects();
     if (projectsCount == 0) {
       return Optional.empty();

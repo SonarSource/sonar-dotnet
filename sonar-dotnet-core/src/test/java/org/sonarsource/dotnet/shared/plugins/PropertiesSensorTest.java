@@ -22,6 +22,7 @@ import java.util.Collections;
 import org.junit.Test;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
+import org.sonarsource.dotnet.shared.plugins.sensors.PropertiesSensor;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;

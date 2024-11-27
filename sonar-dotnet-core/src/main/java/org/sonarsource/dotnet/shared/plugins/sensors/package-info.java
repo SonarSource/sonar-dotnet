@@ -1,6 +1,6 @@
 /*
- * SonarSource :: VB.NET :: Core
- * Copyright (C) 2012-2024 SonarSource SA
+ * SonarSource :: .NET :: Core
+ * Copyright (C) 2014-2024 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -14,14 +14,4 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonarsource.vbnet.core;
-
-import org.sonarsource.dotnet.shared.plugins.HashProvider;
-import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
-import org.sonarsource.dotnet.shared.plugins.sensors.AbstractFileCacheSensor;
-
-public class VbNetFileCacheSensor extends AbstractFileCacheSensor {
-  public VbNetFileCacheSensor(PluginMetadata metadata, HashProvider hashProvider) {
-    super(metadata, hashProvider);
-  }
-}
+package org.sonarsource.dotnet.shared.plugins.sensors;

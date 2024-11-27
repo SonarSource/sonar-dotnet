@@ -28,6 +28,7 @@ import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.testfixtures.log.LogTester;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
+import org.sonarsource.dotnet.shared.plugins.sensors.TelemetryProcessor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;

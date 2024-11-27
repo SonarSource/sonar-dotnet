@@ -16,9 +16,9 @@
  */
 package org.sonarsource.csharp.core;
 
-import org.sonarsource.dotnet.shared.plugins.AbstractFileCacheSensor;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
 import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
+import org.sonarsource.dotnet.shared.plugins.sensors.AbstractFileCacheSensor;
 
 public class CSharpFileCacheSensor extends AbstractFileCacheSensor {
   public CSharpFileCacheSensor(PluginMetadata metadata, HashProvider hashProvider) {

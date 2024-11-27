@@ -14,7 +14,7 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonarsource.dotnet.shared.plugins;
+package org.sonarsource.dotnet.shared.plugins.sensors;
 
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -26,6 +26,10 @@ import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.config.Configuration;
+import org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions;
+import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
+import org.sonarsource.dotnet.shared.plugins.ProjectTypeCollector;
+import org.sonarsource.dotnet.shared.plugins.SensorContextUtils;
 
 import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.PROJECT_BASE_DIR_PROPERTY;
@@ -36,8 +40,10 @@ import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.
  * This class is a non-global sensor used to count the type of files in the .NET projects (i.e. Scanner modules).
  * <p>
  * Why is this needed?
- * - the Scanner for MSBuild categorizes projects as MAIN or TEST (see https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects)
- * - in SQ / SC, users can specify which files should be considered as MAIN (sources) or TEST (test sources) (see https://docs.sonarqube.org/latest/project-administration/narrowing-the-focus/)
+ * - the Scanner for MSBuild categorizes projects as MAIN or TEST
+ *   (see <a href="https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects">...</a>)
+ * - in SQ / SC, users can specify which files should be considered as MAIN (sources) or TEST (test sources)
+ *   (see <a href="https://docs.sonarqube.org/latest/project-administration/narrowing-the-focus/">...</a>)
  * - the categorization is not obvious, so this additional information should help users debug when needed
  */
 @ScannerSide

@@ -26,6 +26,7 @@ import org.slf4j.event.Level;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.testfixtures.log.LogTester;
+import org.sonarsource.dotnet.shared.plugins.sensors.LogSensor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
