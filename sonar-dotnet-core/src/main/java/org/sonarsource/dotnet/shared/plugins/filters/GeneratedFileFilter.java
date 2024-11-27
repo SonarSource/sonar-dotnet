@@ -14,12 +14,14 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonarsource.dotnet.shared.plugins;
+package org.sonarsource.dotnet.shared.plugins.filters;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFileFilter;
+import org.sonarsource.dotnet.shared.plugins.AbstractLanguageConfiguration;
+import org.sonarsource.dotnet.shared.plugins.GlobalProtobufFileProcessor;
 
 /**
  * This class allows to filter files to process based on whether or not they are auto-generated.

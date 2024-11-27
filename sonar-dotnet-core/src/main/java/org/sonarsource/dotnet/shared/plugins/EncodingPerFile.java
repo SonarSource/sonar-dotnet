@@ -32,7 +32,7 @@ public class EncodingPerFile {
     this.globalReportProcessor = globalReportProcessor;
   }
 
-  boolean encodingMatch(InputFile inputFile) {
+  public boolean encodingMatch(InputFile inputFile) {
     String uri = inputFile.uri().toString();
 
     if (!globalReportProcessor.getRoslynEncodingPerUri().containsKey(uri)) {

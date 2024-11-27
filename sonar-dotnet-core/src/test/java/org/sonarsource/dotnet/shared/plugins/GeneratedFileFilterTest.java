@@ -26,6 +26,7 @@ import org.sonar.api.config.PropertyDefinitions;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.System2;
+import org.sonarsource.dotnet.shared.plugins.filters.GeneratedFileFilter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
