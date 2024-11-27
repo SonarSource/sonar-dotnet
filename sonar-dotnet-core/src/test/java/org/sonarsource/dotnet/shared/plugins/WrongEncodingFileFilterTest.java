@@ -19,6 +19,7 @@ package org.sonarsource.dotnet.shared.plugins;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonarsource.dotnet.shared.plugins.filters.WrongEncodingFileFilter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
