@@ -28,7 +28,7 @@ import org.slf4j.event.Level;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-public class VisualStudioTestResultsFileParserTest {
+public class VisualStudioTestResultsFileParserOldTest {
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
@@ -45,14 +45,14 @@ public class VisualStudioTestResultsFileParserTest {
   public void no_counters() {
     thrown.expect(IllegalArgumentException.class);
     thrown.expectMessage("The mandatory <Counters> tag is missing in ");
-    thrown.expectMessage(new File("src/test/resources/visualstudio_test_results/no_counters.trx").getAbsolutePath());
-    new VisualStudioTestResultsFileParser().accept(new File("src/test/resources/visualstudio_test_results/no_counters.trx"), mock(UnitTestResults.class));
+    thrown.expectMessage(new File("src/test/resources/visualstudio_test_results/old/no_counters.trx").getAbsolutePath());
+    new VisualStudioTestResultsFileParserOld().accept(new File("src/test/resources/visualstudio_test_results/old/no_counters.trx"), mock(UnitTestResults.class));
   }
 
   @Test
   public void valid() {
     UnitTestResults results = new UnitTestResults();
-    new VisualStudioTestResultsFileParser().accept(new File("src/test/resources/visualstudio_test_results/valid.trx"), results);
+    new VisualStudioTestResultsFileParserOld().accept(new File("src/test/resources/visualstudio_test_results/old/valid.trx"), results);
 
     assertThat(results.failures()).isEqualTo(14);
     assertThat(results.errors()).isEqualTo(3);
@@ -74,7 +74,7 @@ public class VisualStudioTestResultsFileParserTest {
   @Test
   public void valid_missing_attributes() {
     UnitTestResults results = new UnitTestResults();
-    new VisualStudioTestResultsFileParser().accept(new File("src/test/resources/visualstudio_test_results/valid_missing_attributes.trx"), results);
+    new VisualStudioTestResultsFileParserOld().accept(new File("src/test/resources/visualstudio_test_results/old/valid_missing_attributes.trx"), results);
 
     assertThat(results.tests()).isEqualTo(3);
     assertThat(results.skipped()).isZero();
@@ -90,7 +90,7 @@ public class VisualStudioTestResultsFileParserTest {
   public void invalid_date() {
     UnitTestResults results = new UnitTestResults();
     thrown.expect(ParseErrorException.class);
-    new VisualStudioTestResultsFileParser().accept(new File("src/test/resources/visualstudio_test_results/invalid_date.trx"), results);
+    new VisualStudioTestResultsFileParserOld().accept(new File("src/test/resources/visualstudio_test_results/old/invalid_date.trx"), results);
 
     List<String> debugLogs = logTester.logs(Level.DEBUG);
     assertThat(debugLogs).hasSize(2);
@@ -100,7 +100,7 @@ public class VisualStudioTestResultsFileParserTest {
   @Test
   public void invalid_entity_does_not_fail() {
     UnitTestResults results = new UnitTestResults();
-    new VisualStudioTestResultsFileParser().accept(new File("src/test/resources/visualstudio_test_results/invalid_entities.trx"), results);
+    new VisualStudioTestResultsFileParserOld().accept(new File("src/test/resources/visualstudio_test_results/old/invalid_entities.trx"), results);
 
     assertThat(results.failures()).isEqualTo(14);
     assertThat(results.errors()).isEqualTo(3);
@@ -119,7 +119,7 @@ public class VisualStudioTestResultsFileParserTest {
     UnitTestResults results = new UnitTestResults();
     thrown.expect(IllegalStateException.class);
 
-    new VisualStudioTestResultsFileParser().accept(new File("src/test/resources/visualstudio_test_results/invalid_character.trx"), results);
+    new VisualStudioTestResultsFileParserOld().accept(new File("src/test/resources/visualstudio_test_results/old/invalid_character.trx"), results);
 
   }
 

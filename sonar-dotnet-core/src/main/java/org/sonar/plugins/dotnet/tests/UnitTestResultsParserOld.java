@@ -19,6 +19,10 @@ package org.sonar.plugins.dotnet.tests;
 import java.io.File;
 import java.util.function.BiConsumer;
 
+/**
+ * @deprecated for deletion
+ */
+@Deprecated(forRemoval = true)
 @FunctionalInterface
-interface UnitTestResultsParser extends BiConsumer<File, UnitTestResults> {
+interface UnitTestResultsParserOld extends BiConsumer<File, UnitTestResults> {
 }

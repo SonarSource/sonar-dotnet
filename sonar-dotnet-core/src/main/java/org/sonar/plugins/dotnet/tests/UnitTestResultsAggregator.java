@@ -33,18 +33,18 @@ public class UnitTestResultsAggregator {
 
   private final UnitTestConfiguration unitTestConf;
   private final Configuration configuration;
-  private final VisualStudioTestResultsFileParser visualStudioTestResultsFileParser;
-  private final NUnitTestResultsFileParser nunitTestResultsFileParser;
-  private final XUnitTestResultsFileParser xunitTestResultsFileParser;
+  private final VisualStudioTestResultsFileParserOld visualStudioTestResultsFileParser;
+  private final NUnitTestResultsFileParserOld nunitTestResultsFileParser;
+  private final XUnitTestResultsFileParserOld xunitTestResultsFileParser;
 
   public UnitTestResultsAggregator(UnitTestConfiguration unitTestConf, Configuration configuration) {
-    this(unitTestConf, configuration, new VisualStudioTestResultsFileParser(), new NUnitTestResultsFileParser(), new XUnitTestResultsFileParser());
+    this(unitTestConf, configuration, new VisualStudioTestResultsFileParserOld(), new NUnitTestResultsFileParserOld(), new XUnitTestResultsFileParserOld());
   }
 
   UnitTestResultsAggregator(UnitTestConfiguration unitTestConf, Configuration configuration,
-    VisualStudioTestResultsFileParser visualStudioTestResultsFileParser,
-    NUnitTestResultsFileParser nunitTestResultsFileParser,
-    XUnitTestResultsFileParser xunitTestResultsFileParser) {
+    VisualStudioTestResultsFileParserOld visualStudioTestResultsFileParser,
+    NUnitTestResultsFileParserOld nunitTestResultsFileParser,
+    XUnitTestResultsFileParserOld xunitTestResultsFileParser) {
     this.unitTestConf = unitTestConf;
     this.configuration = configuration;
     this.visualStudioTestResultsFileParser = visualStudioTestResultsFileParser;
@@ -92,7 +92,10 @@ public class UnitTestResultsAggregator {
     return results;
   }
 
-  private static void aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, String[] reportPaths, UnitTestResultsParser parser, UnitTestResults unitTestResults) {
+  private static void aggregate(WildcardPatternFileProvider wildcardPatternFileProvider,
+    String[] reportPaths,
+    UnitTestResultsParserOld parser,
+    UnitTestResults unitTestResults) {
     for (String reportPathPattern : reportPaths) {
       if (!reportPathPattern.isEmpty()) {
         for (File reportFile : wildcardPatternFileProvider.listFiles(reportPathPattern)) {

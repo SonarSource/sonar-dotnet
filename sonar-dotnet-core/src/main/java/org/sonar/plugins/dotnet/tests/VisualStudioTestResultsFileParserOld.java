@@ -29,9 +29,13 @@ import org.slf4j.LoggerFactory;
 
 import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 
-public class VisualStudioTestResultsFileParser implements UnitTestResultsParser {
+/**
+ * @deprecated for deletion
+ */
+@Deprecated(forRemoval = true)
+public class VisualStudioTestResultsFileParserOld implements UnitTestResultsParserOld {
 
-  private static final Logger LOG = LoggerFactory.getLogger(VisualStudioTestResultsFileParser.class);
+  private static final Logger LOG = LoggerFactory.getLogger(VisualStudioTestResultsFileParserOld.class);
 
   @Override
   public void accept(File file, UnitTestResults unitTestResults) {
