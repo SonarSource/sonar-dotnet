@@ -166,13 +166,13 @@ public class UnitTestResultsAggregatorTest {
   public void aggregate_logs_warning_on_exception() {
     UnitTestConfiguration unitTestConf = new UnitTestConfiguration("visualStudioTestResultsFile", "nunitTestResultsFile", "xunitTestResultsFile");
     MapSettings settings = new MapSettings();
-    VisualStudioTestResultsFileParser visualStudioTestResultsFileParser = new VisualStudioTestResultsFileParser();
+    VisualStudioTestResultsFileParserOld VisualStudioTestResultsFileParser = new VisualStudioTestResultsFileParserOld();
     settings.setProperty("visualStudioTestResultsFile", "foo.trx");
 
     WildcardPatternFileProvider wildcardPatternFileProvider = mock(WildcardPatternFileProvider.class);
     when(wildcardPatternFileProvider.listFiles("foo.trx")).thenReturn(new HashSet<>(Collections.singletonList(new File("foo.trx"))));
 
-    new UnitTestResultsAggregator(unitTestConf, settings.asConfig(), visualStudioTestResultsFileParser, null, null)
+    new UnitTestResultsAggregator(unitTestConf, settings.asConfig(), VisualStudioTestResultsFileParser, null, null)
       .aggregate(wildcardPatternFileProvider);
 
     assertThat(logTester.logs(Level.WARN)).containsOnly("Could not import unit test report 'foo.trx': java.io.FileNotFoundException: foo.trx (The system cannot find the file specified)");
@@ -182,9 +182,9 @@ public class UnitTestResultsAggregatorTest {
 
     public final WildcardPatternFileProvider fileProvider = mock(WildcardPatternFileProvider.class);
     public final MapSettings settings = new MapSettings();
-    public final VisualStudioTestResultsFileParser visualStudio = mock(VisualStudioTestResultsFileParser.class);
-    public final NUnitTestResultsFileParser nunit = mock(NUnitTestResultsFileParser.class);
-    public final XUnitTestResultsFileParser xunit = mock(XUnitTestResultsFileParser.class);
+    public final VisualStudioTestResultsFileParserOld visualStudio = mock(VisualStudioTestResultsFileParserOld.class);
+    public final NUnitTestResultsFileParserOld nunit = mock(NUnitTestResultsFileParserOld.class);
+    public final XUnitTestResultsFileParserOld xunit = mock(XUnitTestResultsFileParserOld.class);
     public final UnitTestConfiguration config = new UnitTestConfiguration("visualStudioTestResultsFile", "nunitTestResultsFile", "xunitTestResultsFile");
 
     public AggregateTestContext() {

@@ -28,7 +28,7 @@ import org.slf4j.event.Level;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-public class XUnitTestResultsFileParserTest {
+public class XUnitTestResultsFileParserOldTest {
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
@@ -44,7 +44,7 @@ public class XUnitTestResultsFileParserTest {
   @Test
   public void no_counters() {
     UnitTestResults results = new UnitTestResults();
-    new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/no_counters.xml"), results);
+    new XUnitTestResultsFileParserOld().accept(new File("src/test/resources/xunit/no_counters.xml"), results);
 
     assertThat(logTester.logs(Level.WARN)).contains("One of the assemblies contains no test result, please make sure this is expected.");
     assertThat(results.tests()).isZero();
@@ -59,7 +59,7 @@ public class XUnitTestResultsFileParserTest {
     thrown.expect(ParseErrorException.class);
     thrown.expectMessage("Expected an integer instead of \"invalid\" for the attribute \"total\" in ");
     thrown.expectMessage(new File("src/test/resources/xunit/invalid_total.xml").getAbsolutePath());
-    new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/invalid_total.xml"), mock(UnitTestResults.class));
+    new XUnitTestResultsFileParserOld().accept(new File("src/test/resources/xunit/invalid_total.xml"), mock(UnitTestResults.class));
   }
 
   @Test
@@ -67,13 +67,13 @@ public class XUnitTestResultsFileParserTest {
     thrown.expect(ParseErrorException.class);
     thrown.expectMessage("Expected either an <assemblies> or an <assembly> root tag, but got <foo> instead.");
     thrown.expectMessage(new File("src/test/resources/xunit/invalid_root.xml").getAbsolutePath());
-    new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/invalid_root.xml"), mock(UnitTestResults.class));
+    new XUnitTestResultsFileParserOld().accept(new File("src/test/resources/xunit/invalid_root.xml"), mock(UnitTestResults.class));
   }
 
   @Test
   public void valid() {
     UnitTestResults results = new UnitTestResults();
-    new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/valid.xml"), results);
+    new XUnitTestResultsFileParserOld().accept(new File("src/test/resources/xunit/valid.xml"), results);
 
     assertThat(results.failures()).isEqualTo(3);
     assertThat(results.errors()).isEqualTo(5);
@@ -95,7 +95,7 @@ public class XUnitTestResultsFileParserTest {
   @Test
   public void valid_xunit_1_9_2() {
     UnitTestResults results = new UnitTestResults();
-    new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/valid_xunit-1.9.2.xml"), results);
+    new XUnitTestResultsFileParserOld().accept(new File("src/test/resources/xunit/valid_xunit-1.9.2.xml"), results);
 
     assertThat(results.failures()).isEqualTo(1);
     assertThat(results.errors()).isZero();
@@ -110,7 +110,7 @@ public class XUnitTestResultsFileParserTest {
   @Test
   public void should_not_fail_without_execution_time() {
     UnitTestResults results = new UnitTestResults();
-    new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/no_execution_time.xml"), results);
+    new XUnitTestResultsFileParserOld().accept(new File("src/test/resources/xunit/no_execution_time.xml"), results);
 
     assertThat(results.failures()).isEqualTo(3);
     assertThat(results.errors()).isEqualTo(5);
@@ -127,7 +127,7 @@ public class XUnitTestResultsFileParserTest {
   @Test
   public void empty() {
     UnitTestResults results = new UnitTestResults();
-    new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/empty.xml"), results);
+    new XUnitTestResultsFileParserOld().accept(new File("src/test/resources/xunit/empty.xml"), results);
 
     assertThat(logTester.logs(Level.WARN)).contains("One of the assemblies contains no test result, please make sure this is expected.");
     assertThat(results.tests()).isZero();
@@ -143,7 +143,7 @@ public class XUnitTestResultsFileParserTest {
   @Test
   public void valid_no_total() {
     UnitTestResults results = new UnitTestResults();
-    new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/valid_no_total.xml"), results);
+    new XUnitTestResultsFileParserOld().accept(new File("src/test/resources/xunit/valid_no_total.xml"), results);
 
     assertThat(logTester.logs(Level.WARN)).contains("One of the assemblies contains no test result, please make sure this is expected.");
     assertThat(results.tests()).isZero();

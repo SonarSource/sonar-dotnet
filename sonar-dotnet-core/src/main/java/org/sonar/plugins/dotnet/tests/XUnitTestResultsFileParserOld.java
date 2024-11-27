@@ -24,9 +24,9 @@ import java.io.IOException;
 
 import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 
-public class XUnitTestResultsFileParser implements UnitTestResultsParser {
+public class XUnitTestResultsFileParserOld implements UnitTestResultsParserOld {
 
-  private static final Logger LOG = LoggerFactory.getLogger(XUnitTestResultsFileParser.class);
+  private static final Logger LOG = LoggerFactory.getLogger(XUnitTestResultsFileParserOld.class);
 
   @Override
   public void accept(File file, UnitTestResults unitTestResults) {
