@@ -25,7 +25,12 @@ public static class FrameworkMetadataReference
 {
     public static References MicrosoftVisualBasic { get; } = Create("Microsoft.VisualBasic.dll");
     public static References Mscorlib { get; } = Create("mscorlib.dll");
-    public static References PresentationFramework { get; } = new[] { CreateReference("PresentationFramework.dll", "WPF"), CreateReference("PresentationCore.dll", "WPF") };
+
+    public static References PresentationFramework { get; } =
+    [
+        CreateReference("PresentationFramework.dll", "WPF"), CreateReference("PresentationCore.dll", "WPF"), CreateReference("WindowsBase.dll", "WPF")
+    ];
+
     public static References System { get; } = Create("System.dll");
     public static References SystemComponentModelComposition { get; } = Create("System.ComponentModel.Composition.dll");
     public static References SystemNetHttp { get; } = Create("System.Net.Http.dll");

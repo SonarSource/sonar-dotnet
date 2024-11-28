@@ -72,7 +72,9 @@ public static class MetadataReferenceFacade
 #if NETFRAMEWORK
         FrameworkMetadataReference.PresentationFramework;
 #else
-        Enumerable.Empty<MetadataReference>();
+        [WindowsDesktopMetadataReference.PresentationCore,
+            WindowsDesktopMetadataReference.PresentationFramework,
+            WindowsDesktopMetadataReference.WindowsBase];
 #endif
 
     public static References SystemCollections =>
@@ -258,7 +260,7 @@ public static class MetadataReferenceFacade
 #if NETFRAMEWORK
         FrameworkMetadataReference.SystemWindowsForms;
 #else
-        new[] { WindowsFormsMetadataReference.SystemWindowsForms };
+        new[] { WindowsDesktopMetadataReference.SystemWindowsForms };
 #endif
 
     public static References SystemComponentModelComposition =>

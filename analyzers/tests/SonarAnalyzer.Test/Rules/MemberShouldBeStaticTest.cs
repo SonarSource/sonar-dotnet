@@ -41,7 +41,14 @@ public class MemberShouldBeStaticTest
             .AddReferences(MetadataReferenceFacade.SystemWindowsForms)
             .Verify();
 
+    [TestMethod]
+    public void MemberShouldBeStatic_Xaml() =>
+        builder.AddPaths("MemberShouldBeStatic.Xaml.cs")
+            .AddReferences(MetadataReferenceFacade.PresentationFramework)
+            .Verify();
+
 #if NET
+
     [TestMethod]
     public void MemberShouldBeStatic_Latest() =>
         builder
