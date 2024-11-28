@@ -91,7 +91,7 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
             || methodOrPropertySymbol.GetAttributes().Any(IsIgnoredAttribute)
             || IsAutoProperty(methodOrPropertySymbol)
             || IsPublicControllerMethod(methodOrPropertySymbol)
-            || IsWindowsFormsEventHandler(methodOrPropertySymbol))
+            || IsWindowsDesktopEventHandler(methodOrPropertySymbol))
         {
             return;
         }
@@ -149,11 +149,18 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
         && methodSymbol.GetEffectiveAccessibility() == Accessibility.Public
         && methodSymbol.ContainingType.DerivesFromAny(WebControllerTypes);
 
-    private static bool IsWindowsFormsEventHandler(ISymbol symbol) =>
+    private static bool IsWindowsDesktopEventHandler(ISymbol symbol) =>
         symbol is IMethodSymbol { Parameters.Length: 2 } methodSymbol
         && methodSymbol.Parameters[0].Type.Is(KnownType.System_Object)
         && methodSymbol.Parameters[1].Type.DerivesFrom(KnownType.System_EventArgs)
-        && methodSymbol.ContainingType.Implements(KnownType.System_Windows_Forms_IContainerControl);
+        && (IsContainingTypeWindowsForm(methodSymbol)
+            || IsContainingTypeWpf(methodSymbol));
+
+    private static bool IsContainingTypeWindowsForm(IMethodSymbol methodSymbol) =>
+        methodSymbol.ContainingType.Implements(KnownType.System_Windows_Forms_IContainerControl);
+
+    private static bool IsContainingTypeWpf(IMethodSymbol methodSymbol) =>
+        methodSymbol.ContainingType.DerivesFrom(KnownType.System_Windows_FrameworkElement);
 
     private static bool HasInstanceReferences(IEnumerable<SyntaxNode> nodes, SemanticModel model) =>
         nodes.OfType<ExpressionSyntax>()

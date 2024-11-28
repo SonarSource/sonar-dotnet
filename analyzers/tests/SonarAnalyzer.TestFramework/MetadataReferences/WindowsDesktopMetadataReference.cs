@@ -20,9 +20,12 @@ using static SonarAnalyzer.TestFramework.MetadataReferences.MetadataReferenceFac
 
 namespace SonarAnalyzer.TestFramework.MetadataReferences;
 
-internal static class WindowsFormsMetadataReference
+internal static class WindowsDesktopMetadataReference
 {
+    internal static MetadataReference PresentationFramework { get; } = CreateReference("PresentationFramework.dll", Sdk.WindowsDesktop);
+    internal static MetadataReference PresentationCore { get; } = CreateReference("PresentationCore.dll", Sdk.WindowsDesktop);
     internal static MetadataReference SystemWindowsForms { get; } = CreateReference("System.Windows.Forms.dll", Sdk.WindowsDesktop);
+    internal static MetadataReference WindowsBase { get; } = CreateReference("WindowsBase.dll", Sdk.WindowsDesktop);
 }
 
 #endif

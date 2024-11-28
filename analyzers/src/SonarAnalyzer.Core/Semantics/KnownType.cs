@@ -626,6 +626,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Windows_DependencyObject = new("System.Windows.DependencyObject");
     public static readonly KnownType System_Windows_Forms_Application = new("System.Windows.Forms.Application");
     public static readonly KnownType System_Windows_Forms_IContainerControl = new("System.Windows.Forms.IContainerControl");
+    public static readonly KnownType System_Windows_FrameworkElement = new("System.Windows.FrameworkElement");
     public static readonly KnownType System_Windows_Markup_ConstructorArgumentAttribute = new("System.Windows.Markup.ConstructorArgumentAttribute");
     public static readonly KnownType System_Windows_Markup_XmlnsPrefixAttribute = new("System.Windows.Markup.XmlnsPrefixAttribute");
     public static readonly KnownType System_Windows_Markup_XmlnsDefinitionAttribute = new("System.Windows.Markup.XmlnsDefinitionAttribute");
