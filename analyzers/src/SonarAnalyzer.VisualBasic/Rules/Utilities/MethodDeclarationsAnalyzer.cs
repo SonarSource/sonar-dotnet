@@ -16,7 +16,7 @@
 
 using SonarAnalyzer.Core.Rules.Utilities;
 
-namespace SonarAnalyzer.VisualBasic.Rules.Utilities;
+namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public class MethodDeclarationsAnalyzer : MethodDeclarationsAnalyzerBase<SyntaxKind>

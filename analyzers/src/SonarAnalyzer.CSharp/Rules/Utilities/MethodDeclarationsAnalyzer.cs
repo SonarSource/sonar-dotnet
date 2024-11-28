@@ -16,7 +16,7 @@
 
 using SonarAnalyzer.Core.Rules.Utilities;
 
-namespace SonarAnalyzer.CSharp.Rules.Utilities;
+namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class MethodDeclarationsAnalyzer : MethodDeclarationsAnalyzerBase<SyntaxKind>
