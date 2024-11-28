@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="32dc72b7-35f4-4972-bcfb-972b70eb45bc" name="alexander.meseldzija@PC-L0109 2024-11-25 15:38:27" runUser="PC-L0109\alexander.meseldzija" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2024-11-25T15:38:27.5859867+01:00" queuing="2024-11-25T15:38:27.5859872+01:00" start="2024-11-25T15:38:26.7286526+01:00" finish="2024-11-25T15:38:27.6045199+01:00" />
+  <TestSettings name="default" id="5291548f-8adc-4573-93b0-5bcf78054c8b">
+    <Deployment runDeploymentRoot="alexander.meseldzija_PC-L0109_2024-11-25_15_38_27" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="eff25556-c0df-4a48-b88d-2286e542af4f" testId="d7744238-9adf-b364-3d70-ae38261a8cd8" testName="TestShouldFail" computerName="PC-L0109" duration="00:00:00.0183996" startTime="2024-11-25T15:38:27.3755778+01:00" endTime="2024-11-25T15:38:27.3951390+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="eff25556-c0df-4a48-b88d-2286e542af4f">
+    <Output>
+      <StdOut><</StdOut>
+    </Output>
+    </UnitTestResult>
+  </Results>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>Test 'TestShouldSkip' was skipped in the test run.&#xD;
+  </ResultSummary>
+</TestRun>

@@ -21,11 +21,11 @@ import javax.annotation.Nullable;
 
 public class UnitTestResults {
 
-  private int tests;
-  private int skipped;
-  private int failures;
-  private int errors;
-  private Long executionTime;
+  protected int tests;
+  protected int skipped;
+  protected int failures;
+  protected int errors;
+  protected Long executionTime;
 
   public void add(int tests, int skipped, int failures, int errors, @Nullable Long executionTime) {
     this.tests += tests;
@@ -38,6 +38,19 @@ public class UnitTestResults {
         this.executionTime = 0L;
       }
       this.executionTime += executionTime;
+    }
+  }
+
+  public void add(UnitTestResults unitTestResults) {
+    this.tests += unitTestResults.tests();
+    this.skipped += unitTestResults.skipped();
+    this.failures += unitTestResults.failures();
+    this.errors += unitTestResults.errors();
+    if (unitTestResults.executionTime() != null) {
+      if (this.executionTime == null) {
+        this.executionTime = 0L;
+      }
+      this.executionTime += unitTestResults.executionTime();
     }
   }
 
