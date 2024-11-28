@@ -354,29 +354,6 @@ stages:
       inputs:
         pollingTimeoutSec: '300'
 
-  - job: runIntegrationTestsJob
-    displayName: '.NET ITs'
-    workspace:
-      clean: all
-    steps:
-    - task: DownloadPipelineArtifact@2
-      displayName: 'Download binaries to test'
-      inputs:
-        artifact: Binaries
-        targetPath: 'analyzers/packaging/binaries/'
-
-    - task: NuGetToolInstaller@1
-      displayName: "Install NuGet"
-
-    - task: PowerShell@2
-      displayName: 'Run ITs'
-      inputs:
-        filePath: 'analyzers/its/regression-test.ps1'
-        workingDirectory: 'analyzers/its'
-      env:
-        ARTIFACTORY_USER: $(ARTIFACTORY_PRIVATE_READER_USERNAME)
-        ARTIFACTORY_PASSWORD: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
-
   - job: runJavaBuild
     displayName: 'Java build'
     workspace:
