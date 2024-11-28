@@ -14,7 +14,7 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonarsource.dotnet.shared.plugins;
+package org.sonarsource.dotnet.shared.plugins.sensors;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -41,7 +41,13 @@ import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonarsource.dotnet.shared.plugins.sensors.DotNetSensor;
+import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
+import org.sonarsource.dotnet.shared.plugins.ProjectTypeCollector;
+import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
+import org.sonarsource.dotnet.shared.plugins.RealPathProvider;
+import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
+import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
+import org.sonarsource.dotnet.shared.plugins.RoslynReport;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;

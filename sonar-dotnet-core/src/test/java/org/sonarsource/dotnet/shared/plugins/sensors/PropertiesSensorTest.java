@@ -14,7 +14,7 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonarsource.dotnet.shared.plugins;
+package org.sonarsource.dotnet.shared.plugins.sensors;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,7 +22,10 @@ import java.util.Collections;
 import org.junit.Test;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonarsource.dotnet.shared.plugins.sensors.PropertiesSensor;
+import org.sonarsource.dotnet.shared.plugins.ModuleConfiguration;
+import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
+import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
+import org.sonarsource.dotnet.shared.plugins.RoslynReport;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;

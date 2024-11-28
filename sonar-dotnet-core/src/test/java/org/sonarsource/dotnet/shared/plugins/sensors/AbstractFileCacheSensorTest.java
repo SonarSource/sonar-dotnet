@@ -14,7 +14,7 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonarsource.dotnet.shared.plugins;
+package org.sonarsource.dotnet.shared.plugins.sensors;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,7 +32,8 @@ import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonarsource.dotnet.shared.plugins.sensors.AbstractFileCacheSensor;
+import org.sonarsource.dotnet.shared.plugins.HashProvider;
+import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
