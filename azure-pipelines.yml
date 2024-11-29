@@ -85,8 +85,9 @@ stages:
       displayName: "Build NuGet packages"
       inputs:
         command: pack
-        packagesToPack: 'analyzers/src/**/*.nuspec;analyzers/packaging/*.nuspec'
+        packagesToPack: 'analyzers/packaging/*.nuspec'
         configuration: '$(BuildConfiguration)'
+        buildProperties: 'Version=$(FULL_VERSION)'
         packDestination: '$(Build.ArtifactStagingDirectory)/packages'
         verbosityPack: 'Detailed'
         publishPackageMetadata: true
