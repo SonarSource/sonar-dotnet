@@ -28,6 +28,7 @@ import org.sonarsource.dotnet.shared.plugins.DotNetRulesDefinition;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.GlobalProtobufFileProcessor;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
+import org.sonarsource.dotnet.shared.plugins.MethodDeclarationsCollector;
 import org.sonarsource.dotnet.shared.plugins.ModuleConfiguration;
 import org.sonarsource.dotnet.shared.plugins.ProjectTypeCollector;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
@@ -43,6 +44,7 @@ import org.sonarsource.dotnet.shared.plugins.filters.WrongEncodingFileFilter;
 import org.sonarsource.dotnet.shared.plugins.sensors.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.sensors.FileTypeSensor;
 import org.sonarsource.dotnet.shared.plugins.sensors.LogSensor;
+import org.sonarsource.dotnet.shared.plugins.sensors.MethodDeclarationsSensor;
 import org.sonarsource.dotnet.shared.plugins.sensors.PropertiesSensor;
 import org.sonarsource.dotnet.shared.plugins.sensors.TelemetryProcessor;
 import org.sonarsource.dotnet.shared.plugins.sensors.TelemetrySensor;
@@ -62,6 +64,8 @@ class VbNetCoreExtensionsTest {
       // module-level components (some relying on deprecated Scanner APIs)
       FileTypeSensor.class,
       LogSensor.class,
+      MethodDeclarationsCollector.class,
+      MethodDeclarationsSensor.class,
       TelemetryCollector.class,
       TelemetrySensor.class,
       TelemetryProcessor.class,

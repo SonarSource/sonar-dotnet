@@ -49,6 +49,7 @@ public class ProtobufDataImporter {
   public static final String HIGHLIGHT_FILENAME = "token-type.pb";
   public static final String LOG_FILENAME = "log.pb";
   public static final String TELEMETRY_FILENAME = "telemetry.pb";
+  public static final String METHODDECLARATIONS_FILENAME = "method-declarations.pb";
   public static final String METRICS_FILENAME = "metrics.pb";
   public static final String SYMBOLREFS_FILENAME = "symrefs.pb";
 
