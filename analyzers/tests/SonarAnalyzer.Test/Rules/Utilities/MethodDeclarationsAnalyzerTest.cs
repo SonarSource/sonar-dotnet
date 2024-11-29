@@ -29,7 +29,7 @@ public class MethodDeclarationsAnalyzerTest
     public TestContext TestContext { get; set; }
 
     [TestMethod]
-    public void VerifyTypeDeclarations_TestCode_CSharp() =>
+    public void VerifyMethodDeclarations_TestCode_CSharp() =>
         CreateCSharpBuilder(isTestProject: true, "MethodDeclarations.cs", "MethodDeclarations.Partial.cs")
             .VerifyUtilityAnalyzer<MethodDeclarationsInfo>(x =>
             {
@@ -72,11 +72,15 @@ public class MethodDeclarationsAnalyzerTest
             });
 
     [TestMethod]
-    public void VerifyTypeDeclarations_MainCode_CSharp() =>
+    public void VerifyMethodDeclarations_MainCode_CSharp() =>
         CreateCSharpBuilder(isTestProject: false, "MethodDeclarations.cs", "MethodDeclarations.Partial.cs").VerifyUtilityAnalyzer<MethodDeclarationsInfo>(x => { x.Should().BeEmpty(); });
 
     [TestMethod]
-    public void VerifyTypeDeclarations_TestCode_VB() =>
+    public void VerifyMethodDeclarations_NoDeclarations_CSharp() =>
+        CreateCSharpBuilder(isTestProject: false, "MethodDeclarations.NoMethods.cs").VerifyUtilityAnalyzer<MethodDeclarationsInfo>(x => { x.Should().BeEmpty(); });
+
+    [TestMethod]
+    public void VerifyMethodDeclarations_TestCode_VB() =>
         CreateVisualBasicBuilder(isTestProject: true, "MethodDeclarations.vb", "MethodDeclarations.Partial.vb")
             .VerifyUtilityAnalyzer<MethodDeclarationsInfo>(x =>
             {
@@ -116,8 +120,12 @@ public class MethodDeclarationsAnalyzerTest
             });
 
     [TestMethod]
-    public void VerifyTypeDeclarations_MainCode_VB() =>
+    public void VerifyMethodDeclarations_MainCode_VB() =>
         CreateVisualBasicBuilder(isTestProject: false, "MethodDeclarations.vb", "MethodDeclarations.Partial.vb").VerifyUtilityAnalyzer<MethodDeclarationsInfo>(x => { x.Should().BeEmpty(); });
+
+    [TestMethod]
+    public void VerifyMethodDeclarations_NoDeclarations_VB() =>
+        CreateVisualBasicBuilder(isTestProject: false, "MethodDeclarations.NoMethods.vb").VerifyUtilityAnalyzer<MethodDeclarationsInfo>(x => { x.Should().BeEmpty(); });
 
     private VerifierBuilder CreateCSharpBuilder(bool isTestProject, params string[] fileNames) =>
         CreateBuilder(ParseOptionsHelper.CSharpLatest, new TestMetricsAnalyzerCSharp(GetFilePath(), isTestProject), fileNames);

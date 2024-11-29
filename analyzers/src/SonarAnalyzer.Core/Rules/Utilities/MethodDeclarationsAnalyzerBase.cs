@@ -50,6 +50,13 @@ public abstract class MethodDeclarationsAnalyzerBase<TSyntaxKind>() : UtilityAna
                 MethodName = declarationSymbol.Name
             });
         }
+
+        if (declarations.Count == 0)
+        {
+            // Optimization to reduce report size. Null values are excluded before serialization.
+            return null;
+        }
+
         return new MethodDeclarationsInfo
         {
             FilePath = tree.FilePath,
