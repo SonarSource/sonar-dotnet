@@ -11,16 +11,9 @@
 ## Working with the code
 
 1. Clone [this repository](https://github.com/SonarSource/sonar-dotnet.git)
-1. Download sub-modules `git submodule update --init --recursive`
 1. Build the plugin
-    * To build the plugin while embedding a local build of the analyzer you can either:
-        * run `.\scripts\build\dev-build.ps1 -build -test -buildJava -release`
-
-            The flags `-restore -build -test` need to be run only when you have changed the analyzer. Otherwise you can run only `-buildJava`
-
-        * or run the following commands:
-            1. `msbuild /t:rebuild .\analyzers\SonarAnalyzer.sln`
-            1. `mvn clean install -D analyzer.configuration=Debug`
+    1. `dotnet build .\analyzers\SonarAnalyzer.sln`
+    1. `mvn clean install`
 
 ## Developing with Eclipse or IntelliJ
 
@@ -28,19 +21,7 @@ When working with Eclipse or IntelliJ please follow the [sonar guidelines](https
 
 ## Running Tests
 
-### Unit Tests
-
 As for any maven project, the command `mvn clean install` automatically runs the unit tests.
-
-### Integration Tests
-
-Before running ITs, you need to setup the NUGET_PATH environment variable to point to the *nuget.exe* executable.
-Additional information about the integration tests configuration can be found at the following [internal link](https://xtranet-sonarsource.atlassian.net/wiki/spaces/DEV/pages/776679/Integration+Tests).
-
-To run the ITs, from your command prompt, you can either:
-
-* go to the `its` folder and run `mvn clean install`
-* or run `.\scripts\build\dev-build.ps1 -itsJava`
 
 ## Contributing
 

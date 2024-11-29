@@ -1,15 +1,13 @@
 # Building, Testing and Debugging the .NET Analyzer
 
-All C# and VB.NET code analyzers present in SonarLint for Visual Studio, SonarQube and SonarCloud are being developed here. These analyzers rely on Roslyn 1.3.2 API.
+All C# and VB.NET code analyzers present in SonarQube are being developed here. These analyzers rely on Roslyn 1.3.2 API.
 
 Before following any of the guides below, if you are external contributor you need to delete `analyzers\NuGet.Config`.
 
 ## Working with the code
 
 1. Clone [this repository](https://github.com/SonarSource/sonar-dotnet.git)
-1. Run `.\scripts\build\dev-build.ps1 -build -test`
-
-In general, it is best to run commands from the Visual Studio Developer Command Prompt (if you're using ConEmu, you can setup a console task like `-new_console:C:\Workspace\sonar-dotnet cmd /k ""c:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDevCmd.bat" "` - it starts the Developer Console inside the folder `C:\Workspace\sonar-dotnet`)
+1. Open `analyzers\SonarAnalyzer.sln`
 
 ## Developing with Visual Studio 2022 or Rider
 
@@ -54,7 +52,7 @@ Visual Studio 2022 version 17.6+ is required to build the project (due to source
 
 ### Running Unit Tests
 
-You can run the Unit Tests via the Test Explorer of Visual Studio or using `.\scripts\build\dev-build.ps1 -test`
+You can run the Unit Tests via the Test Explorer of Visual Studio or using `dotnet test analyzers\SonarAnalyzer.sln`
 
 ### Writing Unit Tests
 
@@ -152,7 +150,7 @@ After the debug session, remove the `Debugger.Launch()` line.
   * Open the root folder of the repo
   * Make sure the `its`, `sonar-csharp-plugin`, `sonar-dotnet-core`, and `sonar-vbnet-plugin` folders are are imported as Maven modules (indicated by a blue square). Search for `pom.xml` in the folders and make it a maven project if not.
 * Create `settings.xml` in the `%USERPROFILE%\.m2` directory. A template can be found in the [Developer box section in the extranet](https://xtranet-sonarsource.atlassian.net/wiki/spaces/DEV/pages/776711/Developer+Box#Maven-Settings). Change the username and password settings with the values from the environment variables above.
-* Run `mvn install clean -DskipTests=true` in the respective directories (pom.xml). To build all artefacts run `.\scripts\build\dev-build.ps1 -buildJava`
+* Run `mvn install clean -DskipTests=true` in the respective directories (pom.xml).
 * Use the IDE to run unit tests in the projects.
 
 ## Contributing
