@@ -69,12 +69,8 @@ stages:
 
     - template: set-azp-variables-steps.yml@pipelines-yaml-templates
 
-    - task: VSBuild@1
-      displayName: 'Set BranchName, Sha1 and BuildNumber'
-      inputs:
-        solution: scripts/version/ChangeVersion.proj
-        msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
-        vsVersion: $(vsVersion)
+    - powershell: .\scripts\set-version.ps1 -Version $(SHORT_VERSION) -BuildNumber $(Build.BuildId) -Branch $(Build.SourceBranchName) -Sha1 $(Build.SourceVersion)
+      displayName: "Set Version"
 
     - task: VSBuild@1
       displayName: "Build SonarAnalyzer solution"
@@ -82,15 +78,16 @@ stages:
         solution: '$(solution)'
         platform: '$(buildPlatform)'
         configuration: '$(buildConfiguration)'
-        msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId) /p:WarningLevel=0'
+        msbuildArgs: '/p:WarningLevel=0'
         vsVersion: $(vsVersion)
 
     - task: NuGetCommand@2
       displayName: "Build NuGet packages"
       inputs:
         command: pack
-        packagesToPack: 'analyzers/src/**/*.nuspec;analyzers/packaging/*.nuspec'
+        packagesToPack: 'analyzers/packaging/*.nuspec'
         configuration: '$(BuildConfiguration)'
+        buildProperties: 'Version=$(FULL_VERSION)'
         packDestination: '$(Build.ArtifactStagingDirectory)/packages'
         verbosityPack: 'Detailed'
         publishPackageMetadata: true
@@ -217,7 +214,7 @@ stages:
         scannerMode: 'MSBuild'
         projectKey: 'sonaranalyzer-dotnet'
         projectName: 'Sonar .NET Analyzer'
-        projectVersion: '$(SONAR_PROJECT_VERSION)'
+        projectVersion: '$(SHORT_VERSION)'
         extraProperties: |
           sonar.verbose=true
           sonar.cs.opencover.reportsPaths="$(CoveragePath)/*.xml"
@@ -238,7 +235,7 @@ stages:
         scannerMode: 'MSBuild'
         projectKey: 'sonaranalyzer-dotnet'
         projectName: 'Sonar .NET Analyzer'
-        projectVersion: '$(SONAR_PROJECT_VERSION)'
+        projectVersion: '$(SHORT_VERSION)'
         extraProperties: |
           sonar.verbose=true
           sonar.cs.opencover.reportsPaths="$(CoveragePath)/*.xml"
@@ -249,12 +246,8 @@ stages:
           sonar.analysis.sha1=$(Build.SourceVersion)
           sonar.analysis.repository=$(Build.Repository.ID)
 
-    - task: VSBuild@1
-      displayName: 'Set BranchName, Sha1 and BuildNumber properties from Azure pipeline variables'
-      inputs:
-        solution: scripts/version/ChangeVersion.proj
-        msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
-        vsVersion: $(vsVersion)
+    - powershell: .\scripts\set-version.ps1 -Version $(SHORT_VERSION) -BuildNumber $(Build.BuildId) -Branch $(Build.SourceBranchName) -Sha1 $(Build.SourceVersion)
+      displayName: "Set Version"
 
     - script: '"$(MSBUILD_PATH)" /t:restore /p:RestoreLockedMode=true /p:RestoreConfigFile="analyzers\NuGet.Config" $(solution)'
       env:
@@ -367,9 +360,8 @@ stages:
 
     - template: set-azp-variables-steps.yml@pipelines-yaml-templates
 
-    - template: update-maven-version-steps.yml@pipelines-yaml-templates
-      parameters:
-        mavenSettingsFilePath: $(mavenSettings.secureFilePath)
+    - powershell: .\scripts\set-version.ps1 -Version $(SHORT_VERSION) -BuildNumber $(Build.BuildId) -Branch $(Build.SourceBranchName) -Sha1 $(Build.SourceVersion)
+      displayName: "Set Version"
 
     - task: DownloadPipelineArtifact@2
       displayName: 'Download .NET binaries for Maven build'
@@ -388,7 +380,7 @@ stages:
       displayName: 'Maven build'
       inputs:
         goals: 'verify'
-        options: -B --settings $(mavenSettings.secureFilePath) -Pcoverage -Dsonar.projectVersion=$(SONAR_PROJECT_VERSION)
+        options: -B --settings $(mavenSettings.secureFilePath) -Pcoverage -Dsonar.projectVersion=$(SHORT_VERSION)
         publishJUnitResults: true
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
         testRunTitle: '$(Agent.JobName)'
