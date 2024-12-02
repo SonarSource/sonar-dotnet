@@ -354,40 +354,8 @@ stages:
       inputs:
         pollingTimeoutSec: '300'
 
-  - job: runJavaBuild
-    displayName: 'Java build'
-    workspace:
-      clean: all
-    steps:
-    - task: DownloadPipelineArtifact@2
-      displayName: 'Download .Net binaries for Maven build'
-      inputs:
-        artifact: Binaries
-        targetPath: 'analyzers/packaging/binaries/'
-
-    - template: set-azp-variables-steps.yml@pipelines-yaml-templates
-
-    - task: DownloadSecureFile@1
-      displayName: 'Download Maven settings'
-      name: mavenSettings
-      inputs:
-        secureFile: 'maven-settings.xml'
-
-    - task: DownloadSecureFile@1
-      displayName: 'Download the sign key'
-      name: signKey
-      inputs:
-        secureFile: 'sign-key.asc'
-
-      # Template below is in https://dev.azure.com/sonarsource/DotNetTeam%20Project/_git/pipelines-yaml-templates?path=/update-maven-version-steps.yml&version=GBmaster
-      # For more info see scripts/version/README.md
-    - template: update-maven-version-steps.yml@pipelines-yaml-templates
-      parameters:
-        mavenSettingsFilePath: $(mavenSettings.secureFilePath)
-
-  - job: runJavaUnitTests
-    displayName: 'Java UTs'
-    dependsOn: runJavaBuild
+  - job: buildJava
+    displayName: 'Java Build, UTs and Analysis'
     workspace:
       clean: all
     steps:
@@ -404,7 +372,7 @@ stages:
         mavenSettingsFilePath: $(mavenSettings.secureFilePath)
 
     - task: DownloadPipelineArtifact@2
-      displayName: 'Download .Net binaries for Maven build'
+      displayName: 'Download .NET binaries for Maven build'
       inputs:
         artifact: Binaries
         targetPath: 'analyzers/packaging/binaries/'
@@ -417,7 +385,7 @@ stages:
         scannerMode: 'Other'
 
     - task: Maven@3
-      displayName: 'Maven verify, UTs with SonarCloud'
+      displayName: 'Maven build'
       inputs:
         goals: 'verify'
         options: -B --settings $(mavenSettings.secureFilePath) -Pcoverage -Dsonar.projectVersion=$(SONAR_PROJECT_VERSION)
@@ -429,6 +397,24 @@ stages:
         mavenOptions: $(MAVEN_OPTS)
         sonarQubeRunAnalysis: true
         sqMavenPluginVersionChoice: 'latest'
+
+    - task: CopyFiles@2
+      displayName: "Copy C# Jars to publish directory"
+      inputs:
+        Contents: '*.jar'
+        SourceFolder: 'sonar-csharp-plugin/target'
+        TargetFolder: 'plugin-jars/sonar-csharp-plugin'
+
+    - task: CopyFiles@2
+      displayName: "Copy VB.NET Jars to publish directory"
+      inputs:
+        Contents: '*.jar'
+        SourceFolder: 'sonar-vbnet-plugin/target'
+        TargetFolder: 'plugin-jars/sonar-vbnet-plugin'
+
+    - publish: plugin-jars
+      artifact: plugin-jars
+      displayName: "Publish Jars"
 
     - task: SonarCloudPublish@2
       displayName: 'Code Analysis - Publish QG'
