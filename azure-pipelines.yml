@@ -61,7 +61,9 @@ stages:
       displayName: "NuGet Restore"
 
     - powershell: .\scripts\build\store-azp-variables.ps1
-      displayName: "Set Version Variables"
+      displayName: "Store AZP Variables"
+
+    - template: set-azp-variables-steps.yml@pipelines-yaml-templates
 
     - powershell: .\scripts\set-version.ps1 -Version $(SHORT_VERSION) -BuildNumber $(Build.BuildId) -Branch $(Build.SourceBranchName) -Sha1 $(Build.SourceVersion)
       displayName: "Set Version"
