@@ -30,6 +30,10 @@ public class UseAwaitableMethodTest
         builder.AddPaths("UseAwaitableMethod.cs").Verify();
 
     [TestMethod]
+    public void UseAwaitableMethod_Moq() =>
+        builder.AddReferences(NuGetMetadataReference.Moq(Constants.NuGetLatestVersion)).AddPaths("UseAwaitableMethod.Moq.cs").Verify();
+
+    [TestMethod]
     public void UseAwaitableMethod_CS_Test() =>
         builder
         .WithOptions(ParseOptionsHelper.FromCSharp11)
