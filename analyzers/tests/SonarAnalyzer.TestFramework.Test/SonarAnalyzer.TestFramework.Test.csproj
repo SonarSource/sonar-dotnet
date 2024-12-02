@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\private\analyzers\src\SonarAnalyzer.Enterprise.CSharp\SonarAnalyzer.Enterprise.CSharp.csproj" />
     <ProjectReference Include="..\SonarAnalyzer.TestFramework\SonarAnalyzer.TestFramework.csproj" />
     <ProjectReference Include="..\..\src\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj">
       <Aliases>global,csharp</Aliases>

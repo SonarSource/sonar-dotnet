@@ -15,11 +15,9 @@
  */
 
 using System.IO;
-using System.Reflection;
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 using SonarAnalyzer.TestFramework.Verification;
 using static SonarAnalyzer.TestFramework.Verification.Verifier;
 
@@ -587,40 +585,24 @@ public class VerifierTest
     [TestMethod]
     public void Verify_OnlyDiagnostics()
     {
-        var builder = new VerifierBuilder<SymbolicExecutionRunner>().AddPaths(WriteFile("File.cs", """
-            public class Sample
-            {
-                public void Method()
-                {
-                    var t = true;
-                    if (t)          // S2583
-                        t = true;
-                    else
-                        t = true;
-                    if (t)          // S2589
-                        t = true;
-                }
-            }
-            """));
+        var builder = new VerifierBuilder<ObsoleteAttributes>().AddPaths(WriteFile("File.cs", "[System.Obsolete]public class Sample { }"));
         builder.Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
             There are differences for CSharp7 File.Concurrent.cs:
-              Line 6: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.' Rule S2583
-              Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
-              Line 9 Secondary location: Unexpected issue '' Rule S2583
+              Line 1: Unexpected issue 'Add an explanation.' Rule S1123
+              Line 1: Unexpected issue 'Do not forget to remove this deprecated code someday.' Rule S1133
 
             There are differences for CSharp7 File.cs:
-              Line 6: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.' Rule S2583
-              Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
-              Line 9 Secondary location: Unexpected issue '' Rule S2583
+              Line 1: Unexpected issue 'Add an explanation.' Rule S1123
+              Line 1: Unexpected issue 'Do not forget to remove this deprecated code someday.' Rule S1133
             """);
-        builder.WithOnlyDiagnostics(AnalysisScaffolding.CreateDescriptor("S2589")).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
+        builder.WithOnlyDiagnostics(AnalysisScaffolding.CreateDescriptor("S1123")).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
             There are differences for CSharp7 File.Concurrent.cs:
-              Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
+              Line 1: Unexpected issue 'Add an explanation.' Rule S1123
 
             There are differences for CSharp7 File.cs:
-              Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
+              Line 1: Unexpected issue 'Add an explanation.' Rule S1123
             """);
-        builder.WithOnlyDiagnostics(AnalysisScaffolding.CreateDescriptor("S2259")).Invoking(x => x.VerifyNoIssues()).Should().NotThrow();
+        builder.WithOnlyDiagnostics(AnalysisScaffolding.CreateDescriptor("S0000")).Invoking(x => x.VerifyNoIssues()).Should().NotThrow();
     }
 
     [TestMethod]
