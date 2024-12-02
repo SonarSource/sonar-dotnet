@@ -46,7 +46,7 @@ stages:
   displayName: 'Build:'
   jobs:
   - job: build
-    displayName: 'Build and package'
+    displayName: 'Build'
     workspace:
       clean: all
 
