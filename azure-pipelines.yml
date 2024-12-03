@@ -48,6 +48,10 @@ stages:
     - powershell: .\scripts\build\store-azp-variables.ps1
       displayName: "Store AZP Variables"
 
+    - publish: $(Agent.BuildDirectory)/Azp-Variables
+      artifact: Azp-Variables
+      displayName: "Publish AZP Variables as pipeline artifact"
+
     - template: set-azp-variables-steps.yml@pipelines-yaml-templates
 
     - powershell: .\scripts\set-version.ps1 -Version $(SHORT_VERSION) -BuildNumber $(Build.BuildId) -Branch $(Build.SourceBranchName) -Sha1 $(Build.SourceVersion)
