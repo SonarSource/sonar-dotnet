@@ -16,40 +16,9 @@
  */
 package org.sonar.plugins.dotnet.tests.coverage;
 
-public class CoverageConfiguration {
-
-  private final String languageKey;
-  private final String ncover3PropertyKey;
-  private final String openCoverPropertyKey;
-  private final String dotCoverPropertyKey;
-  private final String visualStudioCoverageXmlPropertyKey;
-
-  public CoverageConfiguration(String languageKey, String ncover3PropertyKey, String openCoverPropertyKey, String dotCoverPropertyKey, String visualStudioCoverageXmlPropertyKey) {
-    this.languageKey = languageKey;
-    this.ncover3PropertyKey = ncover3PropertyKey;
-    this.openCoverPropertyKey = openCoverPropertyKey;
-    this.dotCoverPropertyKey = dotCoverPropertyKey;
-    this.visualStudioCoverageXmlPropertyKey = visualStudioCoverageXmlPropertyKey;
-  }
-
-  public String languageKey() {
-    return languageKey;
-  }
-
-  public String ncover3PropertyKey() {
-    return ncover3PropertyKey;
-  }
-
-  public String openCoverPropertyKey() {
-    return openCoverPropertyKey;
-  }
-
-  public String dotCoverPropertyKey() {
-    return dotCoverPropertyKey;
-  }
-
-  public String visualStudioCoverageXmlPropertyKey() {
-    return visualStudioCoverageXmlPropertyKey;
-  }
-
+public record CoverageConfiguration(String languageKey,
+                                    String ncover3PropertyKey,
+                                    String openCoverPropertyKey,
+                                    String dotCoverPropertyKey,
+                                    String visualStudioCoverageXmlPropertyKey) {
 }

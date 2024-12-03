@@ -115,7 +115,7 @@ public class ScannerFileServiceTest {
     Object argument = andArg2.getValue();
     assertThat(andArg2.getValue()).isExactlyInstanceOf(PathSuffixPredicate.class);
     PathSuffixPredicate pathPredicate = (PathSuffixPredicate) argument;
-    assertThat(pathPredicate.getPathSuffix()).isEqualTo("foo");
+    assertThat(pathPredicate.pathSuffix()).isEqualTo("foo");
     verify(fs).inputFiles(any());
   }
 
@@ -142,7 +142,7 @@ public class ScannerFileServiceTest {
     verify(filePredicates, times(testInput.size())).and(any(), captor.capture());
     List<PathSuffixPredicate> predicates = captor.getAllValues().stream().map(obj -> (PathSuffixPredicate) obj).collect(Collectors.toList());
     for (PathSuffixPredicate predicate : predicates) {
-      assertThat(predicate.getPathSuffix()).isEqualTo("some/path/file.cs");
+      assertThat(predicate.pathSuffix()).isEqualTo("some/path/file.cs");
     }
   }
 

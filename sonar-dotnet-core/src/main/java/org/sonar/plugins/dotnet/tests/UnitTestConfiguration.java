@@ -16,28 +16,7 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-public class UnitTestConfiguration {
-
-  private final String visualStudioTestResultsFilePropertyKey;
-  private final String nunitTestResultsFilePropertyKey;
-  private final String xunitTestResultsFilePropertyKey;
-
-  public UnitTestConfiguration(String visualStudioTestResultsFilePropertyKey, String nunitTestResultsFilePropertyKey, String xunitTestResultsFilePropertyKey) {
-    this.visualStudioTestResultsFilePropertyKey = visualStudioTestResultsFilePropertyKey;
-    this.nunitTestResultsFilePropertyKey = nunitTestResultsFilePropertyKey;
-    this.xunitTestResultsFilePropertyKey = xunitTestResultsFilePropertyKey;
-  }
-
-  public String visualStudioTestResultsFilePropertyKey() {
-    return visualStudioTestResultsFilePropertyKey;
-  }
-
-  public String nunitTestResultsFilePropertyKey() {
-    return nunitTestResultsFilePropertyKey;
-  }
-
-  public String xunitTestResultsFilePropertyKey() {
-    return xunitTestResultsFilePropertyKey;
-  }
-
+public record UnitTestConfiguration(String visualStudioTestResultsFilePropertyKey,
+                                    String nunitTestResultsFilePropertyKey,
+                                    String xunitTestResultsFilePropertyKey) {
 }

@@ -19,20 +19,9 @@ package org.sonar.plugins.dotnet.tests;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.InputFile;
 
-class PathSuffixPredicate implements FilePredicate {
-  private final String pathSuffix;
-
-  PathSuffixPredicate(String pathSuffix) {
-    this.pathSuffix = pathSuffix;
-  }
-
+record PathSuffixPredicate(String pathSuffix) implements FilePredicate {
   @Override
   public boolean apply(InputFile inputFile) {
     return inputFile.uri().getPath().endsWith(pathSuffix);
-  }
-
-  // visible for testing
-  String getPathSuffix() {
-    return pathSuffix;
   }
 }
