@@ -1,0 +1,10 @@
+<assemblies timestamp="11/20/2024 09:45:53">
+  <assembly name="C:\dev\Playground\XUnit\bin\Debug\net9.0\XUnitTestProj.dll" run-date="2024-11-20" run-time="09:45:53" total="1" passed="1" failed="0" skipped="0"  errors="0">
+    <errors />
+    <collection total="1" passed="1" failed="0" skipped="0" name="Test collection for XUnitTestProject1.UnitTest1">
+      <test name="XUnitTestProject1.UnitTest1.XUnitTestMethod1" type="XUnitTestProject1.UnitTest1" method="XUnitTestMethod1" result="Pass">
+        <traits />
+      </test>
+    </collection>
+  </assembly>
+</assemblies>

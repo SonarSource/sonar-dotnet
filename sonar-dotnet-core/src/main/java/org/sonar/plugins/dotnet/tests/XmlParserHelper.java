@@ -22,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Objects;
 import javax.annotation.Nullable;
 import javax.xml.stream.Location;
@@ -57,6 +58,15 @@ public class XmlParserHelper implements AutoCloseable {
     if (!name.equals(rootTag)) {
       throw parseError("Missing root element <" + name + ">");
     }
+  }
+
+  String checkRootTags(List<String> names) {
+    String rootTag = nextStartTag();
+
+    if (!names.contains(rootTag)) {
+      throw parseError("Missing or incorrect root element. Expected one of " + names.stream().map( s -> "<" + s + ">").toList() + ", but got <" + rootTag + "> instead");
+    }
+    return rootTag;
   }
 
   @Nullable

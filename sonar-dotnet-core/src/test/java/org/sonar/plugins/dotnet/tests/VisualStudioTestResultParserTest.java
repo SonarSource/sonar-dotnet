@@ -20,7 +20,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -28,6 +27,8 @@ import org.slf4j.event.Level;
 import org.sonar.api.testfixtures.log.LogTester;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 public class VisualStudioTestResultParserTest {
 
@@ -76,8 +77,8 @@ public class VisualStudioTestResultParserTest {
     assertThat(debugLogs).hasSize(32);
     assertThat(logTester.logs(Level.DEBUG).get(0)).startsWith("Parsed Visual Studio Unit Test - testId:");
     assertThat(logTester.logs(Level.DEBUG).get(15)).startsWith("Parsed Visual Studio Unit Test - testId:");
-    assertThat(logTester.logs(Level.DEBUG).get(16)).startsWith("Associated Visual Studio Unit Test to File - file:");
-    assertThat(logTester.logs(Level.DEBUG).get(31)).startsWith("Associated Visual Studio Unit Test to File - file:");
+    assertThat(logTester.logs(Level.DEBUG).get(16)).startsWith("Added Test Method:");
+    assertThat(logTester.logs(Level.DEBUG).get(31)).startsWith("Added Test Method:");
   }
 
   @Test
@@ -90,9 +91,9 @@ public class VisualStudioTestResultParserTest {
     });
     var file = new File("src/test/resources/visualstudio_test_results/test_name_not_mapped.trx");
 
-    var exception = Assert.assertThrows(IllegalStateException.class, () -> sut.accept(file, results));
+    var exception = assertThrows(IllegalStateException.class, () -> sut.accept(file, results));
 
-    Assert.assertEquals("Test method Playground.Test.TestProject1.UnitTest1.TestShouldFail with testId d7744238-9adf-b364-3d70-ae38261a8cd8 cannot be mapped to the test source file",
+    assertEquals("Test method Playground.Test.TestProject1.UnitTest1.TestShouldFail cannot be mapped to the test source file",
       exception.getMessage());
   }
 
@@ -102,7 +103,7 @@ public class VisualStudioTestResultParserTest {
     var sut = new VisualStudioTestResultParser(new HashMap<>());
     var file = new File("src/test/resources/visualstudio_test_results/invalid_dates.trx");
 
-    var exception = Assert.assertThrows(ParseErrorException.class, () -> sut.accept(file, results));
+    var exception = assertThrows(ParseErrorException.class, () -> sut.accept(file, results));
     assertThat(exception.getMessage()).startsWith("Expected a valid date and time instead of \"2016-xx-14T17:04:31.100+01:00\" for the attribute \"startTime\". Unparseable date: \"2016-xx-14T17:04:31.100+01:00\" in ");
   }
 
@@ -112,7 +113,7 @@ public class VisualStudioTestResultParserTest {
     var sut = new VisualStudioTestResultParser(new HashMap<>());
     var file = new File("src/test/resources/visualstudio_test_results/invalid_character.trx");
 
-    var exception = Assert.assertThrows(IllegalStateException.class, () -> sut.accept(file, results));
+    var exception = assertThrows(IllegalStateException.class, () -> sut.accept(file, results));
 
     assertThat(exception.getMessage()).startsWith("Error while parsing the XML file:");
   }
@@ -123,8 +124,8 @@ public class VisualStudioTestResultParserTest {
     var sut = new VisualStudioTestResultParser(new HashMap<>());
     var file = new File("src/test/resources/visualstudio_test_results/test_result_no_test_method.trx");
 
-    var exception =  Assert.assertThrows(ParseErrorException.class, () -> sut.accept(file, results));
-    Assert.assertEquals("No TestMethod attribute found on UnitTest tag",
+    var exception =  assertThrows(ParseErrorException.class, () -> sut.accept(file, results));
+    assertEquals("No TestMethod attribute found on UnitTest tag",
       exception.getMessage());
   }
 
@@ -134,8 +135,8 @@ public class VisualStudioTestResultParserTest {
     var sut = new VisualStudioTestResultParser(Map.of("Playground.Test.TestProject1.UnitTest1.InvalidOutcome", "C:\\dev\\Playground\\Playground.Test\\Sample.cs"));
     var file = new File("src/test/resources/visualstudio_test_results/invalid_test_outcome.trx");
 
-    var exception = Assert.assertThrows(IllegalArgumentException.class, () -> sut.accept(file,results));
-    Assert.assertEquals("Outcome of unit test must match VSTest Format",
+    var exception = assertThrows(IllegalArgumentException.class, () -> sut.accept(file,results));
+    assertEquals("Outcome of unit test must match VSTest Format",
       exception.getMessage());
   }
 }

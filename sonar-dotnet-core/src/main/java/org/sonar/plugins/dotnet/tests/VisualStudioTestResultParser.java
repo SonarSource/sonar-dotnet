@@ -17,13 +17,14 @@
 package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.slf4j.Logger;
@@ -41,43 +42,25 @@ public class VisualStudioTestResultParser implements UnitTestResultParser {
   @Override
   public void accept(File file, Map<String, UnitTestResults> unitTestResults) {
     LOG.info("Parsing the Visual Studio Test Results file '{}'.", file.getAbsolutePath());
-    new Parser(file, unitTestResults, this.methodFileMap).parse();
+
+    var parser = new Parser(file, unitTestResults, this.methodFileMap, List.of("TestRun"));
+    Map<String, Consumer<XmlParserHelper>> tagHandlers = Map.of(
+      "UnitTestResult", parser::handleUnitTestResultTag,
+      "UnitTest", parser::handleUnitTestTag
+    );
+
+    parser.parse(tagHandlers);
   }
 
-  private static class Parser {
-    private final File file;
+  private static class Parser extends XmlTestReportParser {
     private final Map<String, UnitTestResults> testIdTestResultMap;
-    private final Map<String, UnitTestResults> unitTestResults;
     // Date Format: // https://github.com/microsoft/vstest/blob/7d34b30433259fb914aaaf276fde663a47b6ef2f/src/Microsoft.TestPlatform.Extensions.TrxLogger/XML/XmlPersistence.cs#L557-L572
     private final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
     private final Pattern millisecondsPattern = Pattern.compile("(\\.(\\d{0,3}))\\d*+");
-    private final Map<String, String> methodFileMap;
 
-    Parser(File file,  Map<String, UnitTestResults> unitTestResults, Map<String, String> methodFileMap) {
-      this.file = file;
-      this.unitTestResults = unitTestResults;
+    Parser(File file,  Map<String, UnitTestResults> unitTestResults, Map<String, String> methodFileMap, List<String> rootTags) {
+      super(file, unitTestResults, methodFileMap, rootTags);
       this.testIdTestResultMap = new HashMap<>();
-      this.methodFileMap = methodFileMap;
-    }
-
-    public void parse() {
-      try (XmlParserHelper xmlParserHelper = new XmlParserHelper(file)) {
-        checkRootTag(xmlParserHelper);
-        dispatchTags(xmlParserHelper);
-      } catch (IOException e) {
-        throw new IllegalStateException("Unable to close report", e);
-      }
-    }
-
-    private void dispatchTags(XmlParserHelper xmlParserHelper) {
-      String tagName;
-      while ((tagName = xmlParserHelper.nextStartTag()) != null) {
-        if ("UnitTestResult".equals(tagName)) {
-          handleUnitTestResultTag(xmlParserHelper);
-        } else if ("UnitTest".equals(tagName)) {
-          handleUnitTestTag(xmlParserHelper);
-        }
-      }
     }
 
     private void handleUnitTestResultTag(XmlParserHelper xmlParserHelper) {
@@ -102,7 +85,7 @@ public class VisualStudioTestResultParser implements UnitTestResultParser {
           break;
         }
       }
-      if (tagName == null){
+      if (tagName == null) {
         throw new ParseErrorException("No TestMethod attribute found on UnitTest tag");
       }
 
@@ -110,30 +93,11 @@ public class VisualStudioTestResultParser implements UnitTestResultParser {
       String className = xmlParserHelper.getRequiredAttribute("className");
       String codeBase = xmlParserHelper.getRequiredAttribute("codeBase");
 
-      String dllName = codeBase.substring(codeBase.lastIndexOf(File.separator) + 1, codeBase.lastIndexOf('.'));
-
+      String dllName = extractDllNameFromFilePath(codeBase);
       String fullyQualifiedName = dllName + "." + className + "." + methodName;
 
-      associateTestIdTestResultWithFile(testId, fullyQualifiedName);
-    }
-
-    public void associateTestIdTestResultWithFile(String testId, String methodFullName) {
-      if(!methodFileMap.containsKey(methodFullName)) {
-        throw new IllegalStateException(String.format("Test method %s with testId %s cannot be mapped to the test source file", methodFullName, testId));
-      }
-
-      String fileName = methodFileMap.get(methodFullName);
-
-      if (unitTestResults.containsKey(fileName)) {
-        var fileTestResult = unitTestResults.get(fileName);
-        var testIdTestResult = testIdTestResultMap.get(testId);
-        fileTestResult.add(testIdTestResult);
-      } else {
-        unitTestResults.put(fileName, testIdTestResultMap.get(testId));
-      }
-
-      LOG.debug("Associated Visual Studio Unit Test to File - file: {}, TestId: {} MethodFullName: {}",
-        fileName, testId, methodFullName);
+      var testIdTestResult = testIdTestResultMap.get(testId);
+      addTestResultToFile(fullyQualifiedName, testIdTestResult);
     }
 
     private Date getRequiredDateAttribute(XmlParserHelper xmlParserHelper, String name) {
@@ -160,10 +124,6 @@ public class VisualStudioTestResultParser implements UnitTestResultParser {
       matcher.appendTail(sb);
 
       return sb.toString();
-    }
-
-    private static void checkRootTag(XmlParserHelper xmlParserHelper) {
-      xmlParserHelper.checkRootTag("TestRun");
     }
   }
 }
