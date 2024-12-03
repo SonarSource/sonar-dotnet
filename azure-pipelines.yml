@@ -1,16 +1,5 @@
-schedules:
-# Run from Monday to Friday at 5:30 UTC (https://docs.microsoft.com/en-us/azure/devops/pipelines/process/scheduled-triggers?view=azure-devops&tabs=yaml#cron-syntax)
-- cron: "30 5 * * 1-5"
-  displayName: Daily build
-  branches:
-    include:
-    - master
-    - branch-*
-  always: true
-
 trigger:
 - master
-- branch-*
 
 pool: .net-bubble-aws-re-team-prod
 
@@ -23,16 +12,12 @@ variables:
     value: $[variables.ARTIFACTORY_PRIVATE_READER_USERNAME]
   - name: ARTIFACTORY_QA_READER_USERNAME
     value: $[variables.ARTIFACTORY_PRIVATE_READER_USERNAME]
-  - name: UnitTestProjectPath
-    value: 'analyzers\tests\SonarAnalyzer.Test\'
   - name: UnitTestResultsPath
     value: '$(Build.SourcesDirectory)\TestResults'
   - name: CoveragePath
     value: '$(Build.SourcesDirectory)\coverage'
   - name: UnitTestExclusionsPattern
     value: 'analyzers/tests/SonarAnalyzer.Test/TestCases/**/*'
-  - name: vsVersion
-    value: '17.0'
 
 resources:
   repositories:
