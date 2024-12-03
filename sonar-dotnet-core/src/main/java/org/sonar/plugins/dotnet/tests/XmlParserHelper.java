@@ -41,7 +41,7 @@ public class XmlParserHelper implements AutoCloseable {
   private final InputStreamReader reader;
   private final XMLStreamReader stream;
 
-  XmlParserHelper(File file) {
+  public XmlParserHelper(File file) {
     try {
       this.file = file;
       this.reader = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
@@ -52,7 +52,7 @@ public class XmlParserHelper implements AutoCloseable {
     }
   }
 
-  void checkRootTag(String name) {
+  public void checkRootTag(String name) {
     String rootTag = nextStartTag();
 
     if (!name.equals(rootTag)) {
@@ -70,7 +70,7 @@ public class XmlParserHelper implements AutoCloseable {
   }
 
   @Nullable
-  String nextStartTag() {
+  public String nextStartTag() {
     try {
       while (stream.hasNext()) {
         if (getNextValid() == XMLStreamConstants.START_ELEMENT) {
@@ -80,6 +80,59 @@ public class XmlParserHelper implements AutoCloseable {
       return null;
     } catch (XMLStreamException e) {
       throw new IllegalStateException("Error while parsing the XML file: " + file.getAbsolutePath(), e);
+    }
+  }
+
+  public void checkRequiredAttribute(String name, int expectedValue) {
+    int actualValue = getRequiredIntAttribute(name);
+    if (expectedValue != actualValue) {
+      throw parseError("Expected \"" + expectedValue + "\" instead of \"" + actualValue + "\" for the \"" + name + "\" attribute");
+    }
+  }
+
+  public String getRequiredAttribute(String name) {
+    String value = getAttribute(name);
+    if (value == null) {
+      throw parseError("Missing attribute \"" + name + "\" in element <" + stream.getLocalName() + ">");
+    }
+
+    return value;
+  }
+
+  public XMLStreamReader stream() {
+    return stream;
+  }
+
+  public int getRequiredIntAttribute(String name) {
+    String value = getRequiredAttribute(name);
+    return tagToIntValue(name, value);
+  }
+
+  @Nullable
+  public String getAttribute(String name) {
+    for (int i = 0; i < stream.getAttributeCount(); i++) {
+      if (name.equals(stream.getAttributeLocalName(i))) {
+        return stream.getAttributeValue(i);
+      }
+    }
+
+    return null;
+  }
+
+  public ParseErrorException parseError(String message) {
+    return new ParseErrorException(message + " in " + file.getAbsolutePath() + " at line " + stream.getLocation().getLineNumber());
+  }
+
+  @Override
+  public void close() throws IOException {
+    reader.close();
+
+    if (stream != null) {
+      try {
+        stream.close();
+      } catch (XMLStreamException e) {
+        throw new IllegalStateException(e);
+      }
     }
   }
 
@@ -131,19 +184,7 @@ public class XmlParserHelper implements AutoCloseable {
     }
   }
 
-  void checkRequiredAttribute(String name, int expectedValue) {
-    int actualValue = getRequiredIntAttribute(name);
-    if (expectedValue != actualValue) {
-      throw parseError("Expected \"" + expectedValue + "\" instead of \"" + actualValue + "\" for the \"" + name + "\" attribute");
-    }
-  }
-
-  int getRequiredIntAttribute(String name) {
-    String value = getRequiredAttribute(name);
-    return tagToIntValue(name, value);
-  }
-
-  int getIntAttributeOrZero(String name) {
+  public int getIntAttributeOrZero(String name) {
     String value = getAttribute(name);
     return value == null ? 0 : tagToIntValue(name, value);
   }
@@ -171,49 +212,7 @@ public class XmlParserHelper implements AutoCloseable {
     }
   }
 
-  String getRequiredAttribute(String name) {
-    String value = getAttribute(name);
-    if (value == null) {
-      throw parseError("Missing attribute \"" + name + "\" in element <" + stream.getLocalName() + ">");
-    }
-
-    return value;
-  }
-
-  @Nullable
-  String getAttribute(String name) {
-    for (int i = 0; i < stream.getAttributeCount(); i++) {
-      if (name.equals(stream.getAttributeLocalName(i))) {
-        return stream.getAttributeValue(i);
-      }
-    }
-
-    return null;
-  }
-
-  ParseErrorException parseError(String message) {
-    return new ParseErrorException(message + " in " + file.getAbsolutePath() + " at line " + stream.getLocation().getLineNumber());
-  }
-
-  @Override
-  public void close() throws IOException {
-    reader.close();
-
-    if (stream != null) {
-      try {
-        stream.close();
-      } catch (XMLStreamException e) {
-        throw new IllegalStateException(e);
-      }
-    }
-  }
-
-  XMLStreamReader stream() {
-    return stream;
-  }
-
   XMLStreamReader createXmlStreamReader() throws XMLStreamException {
     return SafetyFactory.createXMLInputFactory().createXMLStreamReader(reader);
   }
-
 }

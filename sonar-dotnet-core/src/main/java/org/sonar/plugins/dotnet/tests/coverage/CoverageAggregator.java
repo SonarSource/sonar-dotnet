@@ -14,7 +14,7 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.plugins.dotnet.tests;
+package org.sonar.plugins.dotnet.tests.coverage;
 
 import java.io.File;
 import java.util.Set;
@@ -24,6 +24,8 @@ import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.scanner.ScannerSide;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.plugins.dotnet.tests.ScannerFileService;
+import org.sonar.plugins.dotnet.tests.WildcardPatternFileProvider;
 
 /**
  * Aggregate the coverage results from different reports of potentially different tools (e.g. aggregate a NCover 3 report with a DotCover one and 3 Visual Studio ones).

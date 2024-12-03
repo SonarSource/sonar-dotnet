@@ -14,29 +14,12 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.plugins.dotnet.tests;
-
-import org.junit.Test;
-import org.mockito.Mockito;
+package org.sonar.plugins.dotnet.tests.coverage;
 
 import java.io.File;
+import java.util.function.BiConsumer;
 
-import static org.mockito.Mockito.*;
-
-public class CoverageCacheTest {
-
-  @Test
-  public void test() {
-    CoverageCache cache = new CoverageCache();
-    CoverageParser parser = mock(CoverageParser.class);
-    File reportFile = mock(File.class);
-    when(reportFile.getAbsolutePath()).thenReturn("foo.txt");
-
-    Coverage coverage = cache.readCoverageFromCacheOrParse(parser, reportFile);
-    verify(parser, Mockito.times(1)).accept(reportFile, coverage);
-
-    cache.readCoverageFromCacheOrParse(parser, reportFile);
-    verify(parser, Mockito.times(1)).accept(Mockito.eq(reportFile), Mockito.any(Coverage.class));
-  }
-
+@FunctionalInterface
+public interface CoverageParser extends BiConsumer<File, Coverage> {
+  String VERIFY_SONARPROJECTPROPERTIES_MESSAGE = "Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.";
 }

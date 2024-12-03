@@ -14,7 +14,7 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.plugins.dotnet.tests;
+package org.sonar.plugins.dotnet.tests.coverage;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,6 +37,8 @@ import org.sonar.api.config.Configuration;
 import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.sonar.api.testfixtures.log.LogTester;
 import org.slf4j.event.Level;
+import org.sonar.plugins.dotnet.tests.VstsUtils;
+import org.sonar.plugins.dotnet.tests.WildcardPatternFileProvider;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;

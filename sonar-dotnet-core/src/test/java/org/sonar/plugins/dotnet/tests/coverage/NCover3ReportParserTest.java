@@ -14,7 +14,7 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.plugins.dotnet.tests;
+package org.sonar.plugins.dotnet.tests.coverage;
 
 import java.io.File;
 import java.util.List;
@@ -26,6 +26,7 @@ import org.junit.rules.ExpectedException;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.testfixtures.log.LogTester;
 import org.slf4j.event.Level;
+import org.sonar.plugins.dotnet.tests.FileService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;

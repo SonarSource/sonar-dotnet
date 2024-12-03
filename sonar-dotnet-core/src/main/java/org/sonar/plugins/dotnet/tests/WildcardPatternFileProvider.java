@@ -47,7 +47,7 @@ public class WildcardPatternFileProvider {
     this.baseDir = baseDir;
   }
 
-  Set<File> listFiles(String pattern) {
+  public Set<File> listFiles(String pattern) {
 
     List<String> elements = Arrays.asList(SEPARATOR_PATTERN.split(pattern));
 

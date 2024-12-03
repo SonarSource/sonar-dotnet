@@ -14,13 +14,13 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.plugins.dotnet.tests;
+package org.sonar.plugins.dotnet.tests.coverage;
 
 import java.util.Objects;
 
 // This class is responsible to keep SQ/SC metrics related to branch coverage
 class BranchCoverage {
-  private int line;
+  private final int line;
   private int conditions;
   private int coveredConditions;
 

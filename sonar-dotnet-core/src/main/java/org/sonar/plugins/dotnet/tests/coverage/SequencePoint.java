@@ -14,15 +14,38 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.plugins.dotnet.tests;
+package org.sonar.plugins.dotnet.tests.coverage;
 
-import org.junit.Test;
+public class SequencePoint {
+  private final int lineStart;
+  private final int lineEnd;
+  private final int hits;
+  private String filePath;
 
-import static org.assertj.core.api.Assertions.assertThat;
+  SequencePoint(String filePath, int lineStart, int lineEnd, int hits) {
+    this(lineStart, lineEnd, hits);
+    this.filePath = filePath;
+  }
 
-public class BranchPointTest {
-  @Test
-  public void givenBranchPointData_getUniqueKey_containsFilePathStartLineAndOffsets(){
-    assertThat(new BranchPoint("path", 1, 2, 3, 4, 5, "coverageIdentifier").getUniqueKey()).isEqualTo("path-1-2-3-4");
+  SequencePoint(int lineStart, int lineEnd, int hits){
+    this.lineStart = lineStart;
+    this.lineEnd = lineEnd;
+    this.hits = hits;
+  }
+
+  public String getFilePath() {
+    return filePath;
+  }
+
+  public int getStartLine() {
+    return lineStart;
+  }
+
+  public int getLineEnd() {
+    return lineEnd;
+  }
+
+  public int getHits() {
+    return hits;
   }
 }

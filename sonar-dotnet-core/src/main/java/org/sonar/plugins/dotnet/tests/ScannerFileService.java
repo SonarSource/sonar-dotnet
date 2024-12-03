@@ -26,6 +26,7 @@ import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.scanner.ScannerSide;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.plugins.dotnet.tests.coverage.CoverageParser;
 
 @ScannerSide
 public class ScannerFileService implements FileService {

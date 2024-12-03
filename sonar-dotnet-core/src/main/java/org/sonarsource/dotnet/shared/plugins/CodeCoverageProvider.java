@@ -24,9 +24,9 @@ import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.api.scanner.ScannerSide;
-import org.sonar.plugins.dotnet.tests.CoverageAggregator;
-import org.sonar.plugins.dotnet.tests.CoverageConfiguration;
-import org.sonar.plugins.dotnet.tests.CoverageReportImportSensor;
+import org.sonar.plugins.dotnet.tests.coverage.CoverageAggregator;
+import org.sonar.plugins.dotnet.tests.coverage.CoverageConfiguration;
+import org.sonar.plugins.dotnet.tests.coverage.CoverageReportImportSensor;
 import org.sonar.plugins.dotnet.tests.ScannerFileService;
 
 @ScannerSide

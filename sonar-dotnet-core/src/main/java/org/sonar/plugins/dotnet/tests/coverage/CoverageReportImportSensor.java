@@ -14,7 +14,7 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.plugins.dotnet.tests;
+package org.sonar.plugins.dotnet.tests.coverage;
 
 import java.io.File;
 import java.util.Map;
@@ -28,6 +28,7 @@ import org.sonar.api.batch.sensor.coverage.NewCoverage;
 import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.plugins.dotnet.tests.WildcardPatternFileProvider;
 
 import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 
