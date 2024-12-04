@@ -120,41 +120,7 @@ stages:
     displayName: '.NET UTs'
     workspace:
       clean: all
-    strategy:
-      matrix:
-        Net48:
-          CoverageArtifactName: 'DotNetCoverageNet48'
-          TestResultsArtifactName: 'DotNetTestResultsNet48'
-          ProjectFilePath: 'tests\SonarAnalyzer.Test\SonarAnalyzer.Test.csproj'
-          FrameworkMoniker: 'net48'
-        Net80:
-          CoverageArtifactName: 'DotNetCoverageNet8'
-          TestResultsArtifactName: 'DotNetTestResultsNet8'
-          ProjectFilePath: 'tests\SonarAnalyzer.Test\SonarAnalyzer.Test.csproj'
-          FrameworkMoniker: 'net8.0'
-        Styling:
-          CoverageArtifactName: 'DotNetCoverageStyling'
-          TestResultsArtifactName: 'DotNetTestResultsStyling'
-          ProjectFilePath: 'tests\SonarAnalyzer.CSharp.Styling.Test\SonarAnalyzer.CSharp.Styling.Test.csproj'
-          FrameworkMoniker: 'net8.0'
-        TestFramework:
-          CoverageArtifactName: 'DotNetCoverageTestFramework'
-          TestResultsArtifactName: 'DotNetTestResultsTestFramework'
-          ProjectFilePath: 'tests\SonarAnalyzer.TestFramework.Test\SonarAnalyzer.TestFramework.Test.csproj'
-          FrameworkMoniker: 'net8.0'
-        ITs.JsonParser:
-          CoverageArtifactName: 'ITs.JsonParserCoverage'
-          TestResultsArtifactName: 'ITs.JsonParserResults'
-          ProjectFilePath: 'tests\ITs.JsonParser.Test\ITs.JsonParser.Test.csproj'
-          FrameworkMoniker: 'net8.0'
-
     steps:
-    - task: UseDotNet@2
-      displayName: Use .NET
-      inputs:
-        packageType: 'sdk'
-        version: 8.0.300
-
     - task: DownloadPipelineArtifact@2
       displayName: 'Download binaries to test'
       inputs:
@@ -162,24 +128,24 @@ stages:
         targetPath: '$(UnitTestProjectPath)\bin'
 
     - powershell: |
-        cd analyzers
-        & dotnet test $(ProjectFilePath) -f $(FrameworkMoniker) -c $(BuildConfiguration) -l trx --results-directory $(UnitTestResultsPath) /p:AltCover=true,AltCoverForce=true,AltCoverVisibleBranches=true,AltCoverAssemblyFilter="testhost|Moq|Humanizer|AltCover|Microsoft|\.Test^",AltCoverPathFilter="SonarAnalyzer\.CFG\\ShimLayer|SonarAnalyzer\.ShimLayer\.CodeGeneration",AltCoverAttributeFilter="ExcludeFromCodeCoverage",AltCoverReport="$(CoveragePath)/coverage.$(CoverageArtifactName).xml"
+        $ProjectNameToken = '$(ProjectName)'  # Workaround for escaping difficulties: Azure DevOps doesn't have ProjectName, so it will not replace it. We need to pass it like that into AltCover via powershell.
+        dotnet test $(Solution) -c $(BuildConfiguration) -l trx --results-directory $(UnitTestResultsPath) /p:AltCover=true,AltCoverForce=true,AltCoverVisibleBranches=true,AltCoverAssemblyFilter="testhost|Moq|Humanizer|AltCover|Microsoft|\.Test^",AltCoverPathFilter="SonarAnalyzer\.CFG\\ShimLayer|SonarAnalyzer\.ShimLayer\.CodeGeneration",AltCoverAttributeFilter="ExcludeFromCodeCoverage",AltCoverReport="$(CoveragePath)/coverage.$ProjectNameToken.xml"
       displayName: '.Net UTs'
       env:
         ARTIFACTORY_USER: $(ARTIFACTORY_PRIVATE_READER_USERNAME)
         ARTIFACTORY_PASSWORD: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
 
     - task: PublishPipelineArtifact@1
-      displayName: 'Save coverage files'
+      displayName: 'Save coverage file'
       inputs:
         path: '$(CoveragePath)'
-        artifact: $(CoverageArtifactName)
+        artifact: DotNetCoverage
 
     - task: PublishPipelineArtifact@1
       displayName: 'Save test results files'
       inputs:
         path: '$(UnitTestResultsPath)'
-        artifact: $(TestResultsArtifactName)
+        artifact: DotNetTestResults
 
     - task: PublishTestResults@2
       condition: always()
@@ -265,63 +231,15 @@ stages:
         vsVersion: $(vsVersion)
 
     - task: DownloadPipelineArtifact@2
-      displayName: 'Download coverage reports'
+      displayName: 'Download coverage report'
       inputs:
-        artifact: DotNetCoverageNet48
-        targetPath: 'coverage'
-
-    - task: DownloadPipelineArtifact@2
-      displayName: 'Download coverage reports'
-      inputs:
-        artifact: DotNetCoverageNet8
-        targetPath: 'coverage'
-
-    - task: DownloadPipelineArtifact@2
-      displayName: 'Download coverage reports'
-      inputs:
-        artifact: DotNetCoverageStyling
-        targetPath: 'coverage'
-
-    - task: DownloadPipelineArtifact@2
-      displayName: 'Download coverage reports'
-      inputs:
-        artifact: DotNetCoverageTestFramework
-        targetPath: 'coverage'
-
-    - task: DownloadPipelineArtifact@2
-      displayName: 'Download coverage reports'
-      inputs:
-        artifact: ITs.JsonParserCoverage
+        artifact: DotNetCoverage
         targetPath: 'coverage'
 
     - task: DownloadPipelineArtifact@2
       displayName: 'Download test results'
       inputs:
-        artifact: DotNetTestResultsNet48
-        targetPath: 'TestResults'
-
-    - task: DownloadPipelineArtifact@2
-      displayName: 'Download test results'
-      inputs:
-        artifact: DotNetTestResultsNet8
-        targetPath: 'TestResults'
-
-    - task: DownloadPipelineArtifact@2
-      displayName: 'Download test results'
-      inputs:
-        artifact: DotNetTestResultsStyling
-        targetPath: 'TestResults'
-
-    - task: DownloadPipelineArtifact@2
-      displayName: 'Download test results'
-      inputs:
-        artifact: DotNetTestResultsTestFramework
-        targetPath: 'TestResults'
-
-    - task: DownloadPipelineArtifact@2
-      displayName: 'Download test results'
-      inputs:
-        artifact: ITs.JsonParserResults
+        artifact: DotNetTestResults
         targetPath: 'TestResults'
 
     - powershell: |
@@ -332,7 +250,7 @@ stages:
         #   `C:\sonar-ci\_work\2\s`
         $CurrentPath = ${env:BUILD_SOURCESDIRECTORY}
         $Pattern = [Regex]::Escape($CurrentPath) -Replace "\\\\\d+\\\\","\\\d+\\" # We replace the existing escaped "\\1\\" digit(s) with actual pattern to search for any other digit(s)
-        dir coverage\*.xml | % {
+        dir coverage.xml | % {
             $Path = $_.FullName
             Write-Host "Updating ${Path} to common root ${CurrentPath}"
             (Get-Content -Path $Path -Raw) -Replace $Pattern,$CurrentPath | Set-Content $Path
