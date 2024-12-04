@@ -17,14 +17,20 @@
 package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
+import java.io.Serializable;
+import java.util.Map;
+import org.sonar.api.batch.fs.InputComponent;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.measures.Metric;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonarsource.dotnet.shared.plugins.MethodDeclarationsCollector;
 import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
+import org.sonarsource.dotnet.shared.plugins.SensorContextUtils;
 
 /**
  * This class is responsible to handle all the C# and VB.NET unit test results reports (parse and report back to SonarQube).
@@ -38,8 +44,14 @@ public class UnitTestResultsImportSensor implements ProjectSensor {
   private final String languageKey;
   private final String languageName;
   private final AnalysisWarnings analysisWarnings;
+  private final MethodDeclarationsCollector collector;
 
-  public UnitTestResultsImportSensor(UnitTestResultsAggregator unitTestResultsAggregator, PluginMetadata pluginMetadata, AnalysisWarnings analysisWarnings) {
+  public UnitTestResultsImportSensor(
+    MethodDeclarationsCollector collector,
+    UnitTestResultsAggregator unitTestResultsAggregator,
+    PluginMetadata pluginMetadata,
+    AnalysisWarnings analysisWarnings) {
+    this.collector = collector;
     this.unitTestResultsAggregator = unitTestResultsAggregator;
     this.languageKey = pluginMetadata.languageKey();
     this.languageName = pluginMetadata.languageName();
@@ -58,7 +70,7 @@ public class UnitTestResultsImportSensor implements ProjectSensor {
   public void execute(SensorContext context) {
     if (unitTestResultsAggregator.hasUnitTestResultsProperty()) {
       try {
-        saveTestMetrics(context);
+        addTestMetrics(context);
       } catch (Exception e) {
         LOG.warn("Could not import unit test report: '{}'", e.getMessage());
         analysisWarnings.addUnique(String.format("Could not import unit test report for '%s'. Please check the logs for more details.", languageName));
@@ -68,37 +80,44 @@ public class UnitTestResultsImportSensor implements ProjectSensor {
     }
   }
 
-  private void saveTestMetrics(SensorContext context) {
-    UnitTestResults aggregatedResults = unitTestResultsAggregator.aggregate(wildcardPatternFileProvider);
+  private void addTestMetrics(SensorContext context) {
+    // Save measures per project (old metrics)
+    var aggregatedResultsPerProject = unitTestResultsAggregator.aggregateOld(wildcardPatternFileProvider);
+    addProjectMeasures(context, aggregatedResultsPerProject);
 
-    context.<Integer>newMeasure()
-      .forMetric(CoreMetrics.TESTS)
-      .on(context.project())
-      .withValue(aggregatedResults.tests())
-      .save();
-    context.<Integer>newMeasure()
-      .forMetric(CoreMetrics.TEST_ERRORS)
-      .on(context.project())
-      .withValue(aggregatedResults.errors())
-      .save();
-    context.<Integer>newMeasure()
-      .forMetric(CoreMetrics.TEST_FAILURES)
-      .on(context.project())
-      .withValue(aggregatedResults.failures())
-      .save();
-    context.<Integer>newMeasure()
-      .forMetric(CoreMetrics.SKIPPED_TESTS)
-      .on(context.project())
-      .withValue(aggregatedResults.skipped())
-      .save();
+    // Save measures per file
+    var methodDeclarations = collector.getMethodDeclarations();
+    var aggregatedResultsPerFile = unitTestResultsAggregator.aggregate(wildcardPatternFileProvider, methodDeclarations);
+    addMeasures(context, aggregatedResultsPerFile);
+  }
 
-    Long executionTime = aggregatedResults.executionTime();
-    if (executionTime != null) {
-      context.<Long>newMeasure()
-        .forMetric(CoreMetrics.TEST_EXECUTION_TIME)
-        .on(context.project())
-        .withValue(executionTime)
-        .save();
+  private static void addProjectMeasures(SensorContext context, UnitTestResults aggregatedResultsPerComponent) {
+    addMeasure(context, context.project(), CoreMetrics.TESTS, aggregatedResultsPerComponent.tests());
+    addMeasure(context, context.project(), CoreMetrics.TEST_ERRORS, aggregatedResultsPerComponent.errors());
+    addMeasure(context, context.project(), CoreMetrics.TEST_FAILURES, aggregatedResultsPerComponent.failures());
+    addMeasure(context, context.project(), CoreMetrics.SKIPPED_TESTS, aggregatedResultsPerComponent.skipped());
+
+    if (aggregatedResultsPerComponent.executionTime() != null) {
+      addMeasure(context, context.project(), CoreMetrics.TEST_EXECUTION_TIME, aggregatedResultsPerComponent.executionTime());
     }
+  }
+
+  private static void addMeasures(SensorContext context, Map<String, UnitTestResults> aggregatedResultsPerFile) {
+    for (var entry : aggregatedResultsPerFile.entrySet()) {
+      var inputFile = SensorContextUtils.toInputFile(context.fileSystem(), entry.getKey());
+      if (inputFile != null) {
+        addMeasure(context, inputFile, CoreMetrics.TESTS, entry.getValue().tests());
+        addMeasure(context, inputFile, CoreMetrics.TEST_ERRORS, entry.getValue().errors());
+        addMeasure(context, inputFile, CoreMetrics.TEST_FAILURES, entry.getValue().failures());
+        addMeasure(context, inputFile, CoreMetrics.SKIPPED_TESTS, entry.getValue().skipped());
+        if (entry.getValue().executionTime() != null) {
+          addMeasure(context, inputFile, CoreMetrics.TEST_EXECUTION_TIME, entry.getValue().executionTime());
+        }
+      }
+    }
+  }
+
+  private static <T extends Serializable> void addMeasure(SensorContext context, InputComponent inputComponent, Metric<T> metric, T value) {
+    context.<T>newMeasure().forMetric(metric).on(inputComponent).withValue(value).save();
   }
 }

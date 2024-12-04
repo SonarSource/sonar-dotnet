@@ -17,11 +17,17 @@
 package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.scanner.ScannerSide;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
+
+import static org.sonarsource.dotnet.protobuf.SonarAnalyzer.MethodDeclarationsInfo;
 
 /**
  * Aggregate the test results from different reports of potentially different tools (e.g. aggregate a NUnit report with a xUnit one and 3 Visual Studio ones).
@@ -33,16 +39,18 @@ public class UnitTestResultsAggregator {
 
   private final UnitTestConfiguration unitTestConf;
   private final Configuration configuration;
-  private final VisualStudioTestResultsFileParserOld visualStudioTestResultsFileParser;
+  private final VisualStudioTestResultParser visualStudioTestResultsFileParser;
   private final NUnitTestResultsFileParserOld nunitTestResultsFileParser;
   private final XUnitTestResultsFileParserOld xunitTestResultsFileParser;
 
   public UnitTestResultsAggregator(UnitTestConfiguration unitTestConf, Configuration configuration) {
-    this(unitTestConf, configuration, new VisualStudioTestResultsFileParserOld(), new NUnitTestResultsFileParserOld(), new XUnitTestResultsFileParserOld());
+    this(unitTestConf, configuration, new VisualStudioTestResultParser(), new NUnitTestResultsFileParserOld(), new XUnitTestResultsFileParserOld());
   }
 
-  UnitTestResultsAggregator(UnitTestConfiguration unitTestConf, Configuration configuration,
-    VisualStudioTestResultsFileParserOld visualStudioTestResultsFileParser,
+  UnitTestResultsAggregator(
+    UnitTestConfiguration unitTestConf,
+    Configuration configuration,
+    VisualStudioTestResultParser visualStudioTestResultsFileParser,
     NUnitTestResultsFileParserOld nunitTestResultsFileParser,
     XUnitTestResultsFileParserOld xunitTestResultsFileParser) {
     this.unitTestConf = unitTestConf;
@@ -62,37 +70,68 @@ public class UnitTestResultsAggregator {
     return hasUnitTestResultsProperty(configuration::hasKey);
   }
 
-  private boolean hasVisualStudioTestResultsFile(Predicate<String> hasKeyPredicate) {
-    return hasKeyPredicate.test(unitTestConf.visualStudioTestResultsFilePropertyKey());
-  }
-
-  private boolean hasNUnitTestResultsFile(Predicate<String> hasKeyPredicate) {
-    return hasKeyPredicate.test(unitTestConf.nunitTestResultsFilePropertyKey());
-  }
-
-  private boolean hasXUnitTestResultsFile(Predicate<String> hasKeyPredicate) {
-    return hasKeyPredicate.test(unitTestConf.xunitTestResultsFilePropertyKey());
-  }
-
-  UnitTestResults aggregate(WildcardPatternFileProvider wildcardPatternFileProvider) {
-    UnitTestResults results = new UnitTestResults();
+  /**
+   * New metrics aggregation (per file).
+   */
+  Map<String, UnitTestResults> aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, Collection<SonarAnalyzer.MethodDeclarationsInfo> methodDeclarations) {
+    var results = new HashMap<String, UnitTestResults>();
 
     if (hasVisualStudioTestResultsFile(configuration::hasKey)) {
-      aggregate(wildcardPatternFileProvider, configuration.getStringArray(unitTestConf.visualStudioTestResultsFilePropertyKey()), visualStudioTestResultsFileParser, results);
+      aggregate(
+        wildcardPatternFileProvider,
+        configuration.getStringArray(unitTestConf.visualStudioTestResultsFilePropertyKey()),
+        visualStudioTestResultsFileParser,
+        computeMethodFileMap(methodDeclarations),
+        results);
     }
-
-    if (hasNUnitTestResultsFile(configuration::hasKey)) {
-      aggregate(wildcardPatternFileProvider, configuration.getStringArray(unitTestConf.nunitTestResultsFilePropertyKey()), nunitTestResultsFileParser, results);
-    }
-
-    if (hasXUnitTestResultsFile(configuration::hasKey)) {
-      aggregate(wildcardPatternFileProvider, configuration.getStringArray(unitTestConf.xunitTestResultsFilePropertyKey()), xunitTestResultsFileParser, results);
-    }
-
     return results;
   }
 
-  private static void aggregate(WildcardPatternFileProvider wildcardPatternFileProvider,
+  /**
+   * Old metrics aggregation (per project).
+   * @deprecated use {@link #aggregate(WildcardPatternFileProvider, Collection)} ()} instead.
+   */
+  @Deprecated(since="10.4", forRemoval=true)
+  UnitTestResults aggregateOld(WildcardPatternFileProvider wildcardPatternFileProvider) {
+    var results = new UnitTestResults();
+
+    if (hasNUnitTestResultsFile(configuration::hasKey)) {
+      aggregateOld(
+        wildcardPatternFileProvider,
+        configuration.getStringArray(unitTestConf.nunitTestResultsFilePropertyKey()),
+        nunitTestResultsFileParser,
+        results);
+    }
+    if (hasXUnitTestResultsFile(configuration::hasKey)) {
+      aggregateOld(
+        wildcardPatternFileProvider,
+        configuration.getStringArray(unitTestConf.xunitTestResultsFilePropertyKey()),
+        xunitTestResultsFileParser,
+        results);
+    }
+    return results;
+  }
+
+  private static void aggregate(
+    WildcardPatternFileProvider wildcardPatternFileProvider,
+    String[] reportFilePatterns,
+    UnitTestResultParser parser,
+    Map<String, String> methodFileMap,
+    Map<String, UnitTestResults> unitTestResultsMap) {
+    for (String reportPathPattern : reportFilePatterns) {
+      if (!reportPathPattern.isEmpty()) {
+        for (File reportFile : wildcardPatternFileProvider.listFiles(reportPathPattern)) {
+          try {
+            parser.parse(reportFile, unitTestResultsMap, methodFileMap);
+          } catch (Exception e) {
+            LOG.warn("Could not import unit test report '{}': {}", reportFile, e.getMessage());
+          }
+        }
+      }
+    }
+  }
+
+  private static void aggregateOld(WildcardPatternFileProvider wildcardPatternFileProvider,
     String[] reportPaths,
     UnitTestResultsParserOld parser,
     UnitTestResults unitTestResults) {
@@ -109,4 +148,28 @@ public class UnitTestResultsAggregator {
     }
   }
 
+  private boolean hasVisualStudioTestResultsFile(Predicate<String> hasKeyPredicate) {
+    return hasKeyPredicate.test(unitTestConf.visualStudioTestResultsFilePropertyKey());
+  }
+
+  private boolean hasNUnitTestResultsFile(Predicate<String> hasKeyPredicate) {
+    return hasKeyPredicate.test(unitTestConf.nunitTestResultsFilePropertyKey());
+  }
+
+  private boolean hasXUnitTestResultsFile(Predicate<String> hasKeyPredicate) {
+    return hasKeyPredicate.test(unitTestConf.xunitTestResultsFilePropertyKey());
+  }
+
+  private static HashMap<String, String> computeMethodFileMap(Collection<SonarAnalyzer.MethodDeclarationsInfo> methodDeclarations) {
+    var results = new HashMap<String, String>();
+    for (MethodDeclarationsInfo methodDeclaration : methodDeclarations) {
+      String assemblyName = methodDeclaration.getAssemblyName();
+      String filePath = methodDeclaration.getFilePath();
+      for (var methodDeclarationInfo : methodDeclaration.getMethodDeclarationsList()) {
+        String key = assemblyName.trim() + "." + methodDeclarationInfo.getTypeName().trim() + "." + methodDeclarationInfo.getMethodName().trim();
+        results.put(key, filePath);
+      }
+    }
+    return results;
+  }
 }
