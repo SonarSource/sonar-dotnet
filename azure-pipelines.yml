@@ -63,7 +63,7 @@ stages:
       inputs:
         SonarCloud: 'SonarCloud'
         organization: 'sonarsource'
-        scannerMode: 'MSBuild'
+        scannerMode: dotnet
         projectKey: 'sonaranalyzer-dotnet'
         projectName: 'Sonar .NET Analyzer'
         projectVersion: '$(SHORT_VERSION)'
@@ -84,7 +84,7 @@ stages:
       inputs:
         SonarCloud: 'SonarCloud'
         organization: 'sonarsource'
-        scannerMode: 'MSBuild'
+        scannerMode: dotnet
         projectKey: 'sonaranalyzer-dotnet'
         projectName: 'Sonar .NET Analyzer'
         projectVersion: '$(SHORT_VERSION)'
