@@ -29,21 +29,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.api.scanner.ScannerSide;
 
+@ScannerSide
 public class VisualStudioTestResultParser implements UnitTestResultParser {
 
   private static final Logger LOG = LoggerFactory.getLogger(VisualStudioTestResultParser.class);
-  private final Map<String, String> methodFileMap;
-
-  VisualStudioTestResultParser(Map<String, String> methodFileMap) {
-    this.methodFileMap = methodFileMap;
-  }
 
   @Override
-  public void accept(File file, Map<String, UnitTestResults> unitTestResults) {
+  public void parse(File file, Map<String, UnitTestResults> unitTestResults, Map<String, String> methodFileMap) {
     LOG.info("Parsing the Visual Studio Test Results file '{}'.", file.getAbsolutePath());
 
-    var parser = new Parser(file, unitTestResults, this.methodFileMap, List.of("TestRun"));
+    var parser = new Parser(file, unitTestResults, methodFileMap, List.of("TestRun"));
     Map<String, Consumer<XmlParserHelper>> tagHandlers = Map.of(
       "UnitTestResult", parser::handleUnitTestResultTag,
       "UnitTest", parser::handleUnitTestTag

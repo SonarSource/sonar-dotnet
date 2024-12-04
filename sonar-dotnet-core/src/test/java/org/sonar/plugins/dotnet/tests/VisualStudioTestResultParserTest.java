@@ -43,8 +43,7 @@ public class VisualStudioTestResultParserTest {
   @Test
   public void valid() {
     Map<String, UnitTestResults> results = new HashMap<>();
-
-    var sut = new VisualStudioTestResultParser(new HashMap<>() {
+    Map<String, String> fileMap = new HashMap<>() {
       {
         put("Playground.Test.TestProject1.UnitTest1.TestMethod1", "C:\\dev\\Playground\\Playground.Test\\Sample.cs");
         put("Playground.Test.TestProject1.UnitTest1.TestShouldFail", "C:\\dev\\Playground\\Playground.Test\\UnitTest1.cs");
@@ -52,9 +51,11 @@ public class VisualStudioTestResultParserTest {
         put("Playground.Test.TestProject1.UnitTest1.TestShouldError", "C:\\dev\\Playground\\Playground.Test\\UnitTest1.cs");
         put("Playground.Test.TestProject1.UnitTest2.TestMethod5", "C:\\dev\\Playground\\Playground.Test\\Sample.cs");
       }
-    });
+    };
 
-    sut.accept(new File("src/test/resources/visualstudio_test_results/valid.trx"), results);
+    var sut = new VisualStudioTestResultParser();
+
+    sut.parse(new File("src/test/resources/visualstudio_test_results/valid.trx"), results, fileMap);
 
     assertThat(results).hasSize(2);
     assertThat(results.get("C:\\dev\\Playground\\Playground.Test\\Sample.cs").tests()).isEqualTo(13);
@@ -84,36 +85,32 @@ public class VisualStudioTestResultParserTest {
   @Test
   public void test_name_not_mapped() {
     Map<String, UnitTestResults> results = new HashMap<>();
-    var sut = new VisualStudioTestResultParser(new HashMap<>() {
-      {
-        put("Some.Other.TestMethod", "C:\\dev\\Playground\\Playground.Test\\Sample.cs");
-      }
-    });
+    Map<String, String> fileMap = Map.of("Some.Other.TestMethod", "C:\\dev\\Playground\\Playground.Test\\Sample.cs");
+    var sut = new VisualStudioTestResultParser();
     var file = new File("src/test/resources/visualstudio_test_results/test_name_not_mapped.trx");
 
-    var exception = assertThrows(IllegalStateException.class, () -> sut.accept(file, results));
+    var exception = assertThrows(IllegalStateException.class, () -> sut.parse(file, results, fileMap));
 
-    assertEquals("Test method Playground.Test.TestProject1.UnitTest1.TestShouldFail cannot be mapped to the test source file",
-      exception.getMessage());
+    assertEquals("Test method Playground.Test.TestProject1.UnitTest1.TestShouldFail cannot be mapped to the test source file", exception.getMessage());
   }
 
   @Test
   public void invalid_date() {
     Map<String, UnitTestResults> results = new HashMap<>();
-    var sut = new VisualStudioTestResultParser(new HashMap<>());
+    var sut = new VisualStudioTestResultParser();
     var file = new File("src/test/resources/visualstudio_test_results/invalid_dates.trx");
 
-    var exception = assertThrows(ParseErrorException.class, () -> sut.accept(file, results));
+    var exception = assertThrows(ParseErrorException.class, () -> sut.parse(file, results, new HashMap<>()));
     assertThat(exception.getMessage()).startsWith("Expected a valid date and time instead of \"2016-xx-14T17:04:31.100+01:00\" for the attribute \"startTime\". Unparseable date: \"2016-xx-14T17:04:31.100+01:00\" in ");
   }
 
   @Test
   public void invalid_character_fail() {
     Map<String, UnitTestResults> results = new HashMap<>();
-    var sut = new VisualStudioTestResultParser(new HashMap<>());
+    var sut = new VisualStudioTestResultParser();
     var file = new File("src/test/resources/visualstudio_test_results/invalid_character.trx");
 
-    var exception = assertThrows(IllegalStateException.class, () -> sut.accept(file, results));
+    var exception = assertThrows(IllegalStateException.class, () -> sut.parse(file, results, new HashMap<>()));
 
     assertThat(exception.getMessage()).startsWith("Error while parsing the XML file:");
   }
@@ -121,22 +118,21 @@ public class VisualStudioTestResultParserTest {
   @Test
   public void test_result_no_test_method() {
     Map<String, UnitTestResults> results = new HashMap<>();
-    var sut = new VisualStudioTestResultParser(new HashMap<>());
+    var sut = new VisualStudioTestResultParser();
     var file = new File("src/test/resources/visualstudio_test_results/test_result_no_test_method.trx");
 
-    var exception =  assertThrows(ParseErrorException.class, () -> sut.accept(file, results));
-    assertEquals("No TestMethod attribute found on UnitTest tag",
-      exception.getMessage());
+    var exception =  assertThrows(ParseErrorException.class, () -> sut.parse(file, results, new HashMap<>()));
+    assertEquals("No TestMethod attribute found on UnitTest tag", exception.getMessage());
   }
 
   @Test
   public void invalid_test_outcome() {
     Map<String, UnitTestResults> results = new HashMap<>();
-    var sut = new VisualStudioTestResultParser(Map.of("Playground.Test.TestProject1.UnitTest1.InvalidOutcome", "C:\\dev\\Playground\\Playground.Test\\Sample.cs"));
+    Map<String, String> fileMap = Map.of("Playground.Test.TestProject1.UnitTest1.InvalidOutcome", "C:\\dev\\Playground\\Playground.Test\\Sample.cs");
+    var sut = new VisualStudioTestResultParser();
     var file = new File("src/test/resources/visualstudio_test_results/invalid_test_outcome.trx");
 
-    var exception = assertThrows(IllegalArgumentException.class, () -> sut.accept(file,results));
-    assertEquals("Outcome of unit test must match VSTest Format",
-      exception.getMessage());
+    var exception = assertThrows(IllegalArgumentException.class, () -> sut.parse(file, results, fileMap));
+    assertEquals("Outcome of unit test must match VSTest Format", exception.getMessage());
   }
 }

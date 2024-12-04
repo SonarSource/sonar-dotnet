@@ -18,8 +18,7 @@ package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
 import java.util.Map;
-import java.util.function.BiConsumer;
 
-@FunctionalInterface
-interface UnitTestResultParser extends BiConsumer<File, Map<String, UnitTestResults>> {
+interface UnitTestResultParser {
+  void parse(File file, Map<String, UnitTestResults> unitTestResults, Map<String, String> methodFileMap);
 }

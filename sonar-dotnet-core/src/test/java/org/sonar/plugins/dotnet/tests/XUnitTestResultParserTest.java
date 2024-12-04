@@ -43,8 +43,7 @@ public class XUnitTestResultParserTest {
   @Test
   public void valid() {
     Map<String, UnitTestResults> results = new HashMap<>();
-
-    var sut = new XUnitTestResultsFileParser(new HashMap<>() {
+    Map<String, String> fileMap = new HashMap<>() {
       {
         put("XUnitTestProj.XUnitTestProject1.UnitTest1.XUnitTestMethod1", "C:\\dev\\Playground\\XUnit\\UnitTest1.cs");
         put("XUnitTestProj.XUnitTestProject1.UnitTest1.XUnitTestShouldFail", "C:\\dev\\Playground\\XUnit\\UnitTest1.cs");
@@ -52,9 +51,11 @@ public class XUnitTestResultParserTest {
         put("XUnitTestProj.XUnitTestProject1.UnitTest1.XUnitTestShouldError", "C:\\dev\\Playground\\XUnit\\UnitTest1.cs");
         put("XUnitTestProj2.XUnitTestProject2.UnitTest2.XUnitTestNotRun", "C:\\dev\\Playground\\XUnit2\\UnitTest1.cs");
       }
-    });
+    };
 
-    sut.accept(new File("src/test/resources/xunit/valid.xml"), results);
+    var sut = new XUnitTestResultsFileParser();
+
+    sut.parse(new File("src/test/resources/xunit/valid.xml"), results, fileMap);
 
     assertThat(results).hasSize(2);
     assertThat(results.get("C:\\dev\\Playground\\XUnit\\UnitTest1.cs").tests()).isEqualTo(4);
@@ -85,10 +86,11 @@ public class XUnitTestResultParserTest {
   @Test
   public void valid_no_execution_time() {
     Map<String, UnitTestResults> results = new HashMap<>();
+    Map<String, String> fileMap = Map.of("XUnitTestProj.XUnitTestProject1.UnitTest1.XUnitTestMethod1", "C:\\dev\\Playground\\XUnit\\UnitTest1.cs");
 
-    var sut = new XUnitTestResultsFileParser(Map.of("XUnitTestProj.XUnitTestProject1.UnitTest1.XUnitTestMethod1", "C:\\dev\\Playground\\XUnit\\UnitTest1.cs"));
+    var sut = new XUnitTestResultsFileParser();
 
-    sut.accept(new File("src/test/resources/xunit/valid_no_execution_time.xml"), results);
+    sut.parse(new File("src/test/resources/xunit/valid_no_execution_time.xml"), results, fileMap);
 
     assertThat(results).hasSize(1);
     assertThat(results.get("C:\\dev\\Playground\\XUnit\\UnitTest1.cs").tests()).isEqualTo(1);
@@ -111,10 +113,11 @@ public class XUnitTestResultParserTest {
   public void valid_data_attribute()
   {
     Map<String, UnitTestResults> results = new HashMap<>();
+    Map<String, String> fileMap = Map.of("XUnitTestProj.DataDrivenWithXUnit.Test.CalculatorTestWithClassData.Add_ShouldReturnCorrectSum", "C:\\dev\\Playground\\XUnit\\UnitTest1.cs");
 
-    var sut = new XUnitTestResultsFileParser(Map.of("XUnitTestProj.DataDrivenWithXUnit.Test.CalculatorTestWithClassData.Add_ShouldReturnCorrectSum", "C:\\dev\\Playground\\XUnit\\UnitTest1.cs"));
+    var sut = new XUnitTestResultsFileParser();
 
-    sut.accept(new File("src/test/resources/xunit/valid_data_attribute.xml"), results);
+    sut.parse(new File("src/test/resources/xunit/valid_data_attribute.xml"), results, fileMap);
 
     assertThat(results).hasSize(1);
     assertThat(results.get("C:\\dev\\Playground\\XUnit\\UnitTest1.cs").tests()).isEqualTo(2);
@@ -136,29 +139,30 @@ public class XUnitTestResultParserTest {
 
   @Test
   public void test_name_not_mapped() {
-    var sut = new XUnitTestResultsFileParser(Map.of("Some.Other.TestMethod", "C:\\dev\\Playground\\XUnit.Test\\Sample.cs"));
+    var sut = new XUnitTestResultsFileParser();
+    Map<String, String> fileMap = Map.of("Some.Other.TestMethod", "C:\\dev\\Playground\\XUnit.Test\\Sample.cs");
 
     var file = new File("src/test/resources/xunit/test_name_not_mapped.xml");
 
-    var exception = assertThrows(IllegalStateException.class, () -> sut.accept(file, new HashMap<>()));
-    assertEquals("Test method XUnitTestProj.XUnitTestProject1.UnitTest1.TestMethodDoesNotExist cannot be mapped to the test source file",
-      exception.getMessage());
+    var exception = assertThrows(IllegalStateException.class, () -> sut.parse(file, new HashMap<>(), fileMap));
+    assertEquals("Test method XUnitTestProj.XUnitTestProject1.UnitTest1.TestMethodDoesNotExist cannot be mapped to the test source file", exception.getMessage());
   }
 
   @Test
   public void invalid_root() {
-    var sut = new XUnitTestResultsFileParser(new HashMap<>());
+    var sut = new XUnitTestResultsFileParser();
     var file = new File("src/test/resources/xunit/invalid_root.xml");
-    var exception = assertThrows(ParseErrorException.class, () -> sut.accept(file, new HashMap<>()));
+    var exception = assertThrows(ParseErrorException.class, () -> sut.parse(file, new HashMap<>(), new HashMap<>()));
     assertThat(exception.getMessage()).startsWith("Missing or incorrect root element. Expected one of [<assembly>, <assemblies>], but got <foo> instead");
   }
 
   @Test
   public void invalid_test_outcome() {
-    var sut = new XUnitTestResultsFileParser(Map.of("Playground.Test.TestProject1.UnitTest1.InvalidOutcome", "C:\\dev\\Playground\\Playground.Test\\Sample.cs"));
+    var sut = new XUnitTestResultsFileParser();
     var file = new File("src/test/resources/xunit/invalid_test_outcome.xml");
+    Map<String, String> fileMap = Map.of("Playground.Test.TestProject1.UnitTest1.InvalidOutcome", "C:\\dev\\Playground\\Playground.Test\\Sample.cs");
 
-    var exception = assertThrows(IllegalArgumentException.class, () -> sut.accept(file,new HashMap<>()));
+    var exception = assertThrows(IllegalArgumentException.class, () -> sut.parse(file, new HashMap<>(), fileMap));
 
     assertEquals("Outcome of unit test must match XUnit Test Format", exception.getMessage());
   }

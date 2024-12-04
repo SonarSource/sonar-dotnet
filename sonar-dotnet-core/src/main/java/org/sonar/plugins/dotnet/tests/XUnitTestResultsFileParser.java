@@ -22,20 +22,17 @@ import java.util.Map;
 import java.util.function.Consumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.api.scanner.ScannerSide;
 
+@ScannerSide
 public class XUnitTestResultsFileParser implements UnitTestResultParser {
   private static final Logger LOG = LoggerFactory.getLogger(XUnitTestResultsFileParser.class);
-  private final Map<String, String> methodFileMap;
-
-  XUnitTestResultsFileParser(Map<String, String> methodFileMap) {
-    this.methodFileMap = methodFileMap;
-  }
 
   @Override
-  public void accept(File file, Map<String, UnitTestResults> unitTestResults) {
+  public void parse(File file, Map<String, UnitTestResults> unitTestResults, Map<String, String> methodFileMap) {
     LOG.info("Parsing the XUnit Test Results file '{}'.", file.getAbsolutePath());
 
-    var parser = new Parser(file, unitTestResults, this.methodFileMap, List.of("assembly", "assemblies"));
+    var parser = new Parser(file, unitTestResults, methodFileMap, List.of("assembly", "assemblies"));
 
     Map<String, Consumer<XmlParserHelper>> tagHandlers = Map.of(
       "assembly", parser::handleAssemblyTag,
