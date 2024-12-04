@@ -39,12 +39,12 @@ public class UnitTestResultsAggregator {
 
   private final UnitTestConfiguration unitTestConf;
   private final Configuration configuration;
-  private final VisualStudioTestResultParser visualStudioTestResultsFileParser;
+  private final VisualStudioTestResultParser visualStudioTestResultsParser;
   private final NUnitTestResultsFileParserOld nunitTestResultsFileParser;
-  private final XUnitTestResultsFileParserOld xunitTestResultsFileParser;
+  private final XUnitTestResultsFileParser xunitTestResultsParser;
 
   public UnitTestResultsAggregator(UnitTestConfiguration unitTestConf, Configuration configuration) {
-    this(unitTestConf, configuration, new VisualStudioTestResultParser(), new NUnitTestResultsFileParserOld(), new XUnitTestResultsFileParserOld());
+    this(unitTestConf, configuration, new VisualStudioTestResultParser(), new NUnitTestResultsFileParserOld(), new XUnitTestResultsFileParser());
   }
 
   UnitTestResultsAggregator(
@@ -52,12 +52,12 @@ public class UnitTestResultsAggregator {
     Configuration configuration,
     VisualStudioTestResultParser visualStudioTestResultsFileParser,
     NUnitTestResultsFileParserOld nunitTestResultsFileParser,
-    XUnitTestResultsFileParserOld xunitTestResultsFileParser) {
+    XUnitTestResultsFileParser xunitTestResultsFileParser) {
     this.unitTestConf = unitTestConf;
     this.configuration = configuration;
-    this.visualStudioTestResultsFileParser = visualStudioTestResultsFileParser;
+    this.visualStudioTestResultsParser = visualStudioTestResultsFileParser;
     this.nunitTestResultsFileParser = nunitTestResultsFileParser;
-    this.xunitTestResultsFileParser = xunitTestResultsFileParser;
+    this.xunitTestResultsParser = xunitTestResultsFileParser;
   }
 
   boolean hasUnitTestResultsProperty(Predicate<String> hasKeyPredicate) {
@@ -74,15 +74,19 @@ public class UnitTestResultsAggregator {
    * New metrics aggregation (per file).
    */
   Map<String, UnitTestResults> aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, Collection<SonarAnalyzer.MethodDeclarationsInfo> methodDeclarations) {
+    HashMap<String, String> fileMethodMap = computeMethodFileMap(methodDeclarations);
     var results = new HashMap<String, UnitTestResults>();
 
     if (hasVisualStudioTestResultsFile(configuration::hasKey)) {
       aggregate(
         wildcardPatternFileProvider,
         configuration.getStringArray(unitTestConf.visualStudioTestResultsFilePropertyKey()),
-        visualStudioTestResultsFileParser,
-        computeMethodFileMap(methodDeclarations),
+        visualStudioTestResultsParser,
+        fileMethodMap,
         results);
+    }
+    if (hasXUnitTestResultsFile(configuration::hasKey)) {
+      aggregate(wildcardPatternFileProvider, configuration.getStringArray(unitTestConf.xunitTestResultsFilePropertyKey()), xunitTestResultsParser, fileMethodMap, results);
     }
     return results;
   }
@@ -94,19 +98,11 @@ public class UnitTestResultsAggregator {
   @Deprecated(since="10.4", forRemoval=true)
   UnitTestResults aggregateOld(WildcardPatternFileProvider wildcardPatternFileProvider) {
     var results = new UnitTestResults();
-
     if (hasNUnitTestResultsFile(configuration::hasKey)) {
       aggregateOld(
         wildcardPatternFileProvider,
         configuration.getStringArray(unitTestConf.nunitTestResultsFilePropertyKey()),
         nunitTestResultsFileParser,
-        results);
-    }
-    if (hasXUnitTestResultsFile(configuration::hasKey)) {
-      aggregateOld(
-        wildcardPatternFileProvider,
-        configuration.getStringArray(unitTestConf.xunitTestResultsFilePropertyKey()),
-        xunitTestResultsFileParser,
         results);
     }
     return results;

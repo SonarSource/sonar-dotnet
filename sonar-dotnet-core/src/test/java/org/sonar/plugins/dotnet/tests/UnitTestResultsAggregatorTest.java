@@ -92,7 +92,7 @@ public class UnitTestResultsAggregatorTest {
 
     verify(context.visualStudio, Mockito.never()).parse(any(), any(), any());
     verify(context.nunit, Mockito.never()).accept(any(), any());
-    verify(context.xunit, Mockito.never()).accept(any(), any());
+    verify(context.xunit, Mockito.never()).parse(any(), any(), any());
   }
 
   @Test
@@ -102,7 +102,7 @@ public class UnitTestResultsAggregatorTest {
 
     verify(context.visualStudio).parse(eq(new File("foo.trx")), notNull(), any());
     verify(context.nunit, Mockito.never()).accept(any(), any());
-    verify(context.xunit, Mockito.never()).accept(any(), any());
+    verify(context.xunit, Mockito.never()).parse(any(), any(), any());
   }
 
   @Test
@@ -112,7 +112,7 @@ public class UnitTestResultsAggregatorTest {
 
     verify(context.visualStudio, Mockito.never()).parse(any(), any(), any());
     verify(context.nunit).accept(eq(new File("foo.xml")), notNull());
-    verify(context.xunit, Mockito.never()).accept(any(), any());
+    verify(context.xunit, Mockito.never()).parse(any(), any(), any());
   }
 
   @Test
@@ -122,7 +122,7 @@ public class UnitTestResultsAggregatorTest {
 
     verify(context.visualStudio, Mockito.never()).parse(any(), any(), any());
     verify(context.nunit, Mockito.never()).accept(any(), any());
-    verify(context.xunit, Mockito.never()).accept(any(), any());
+    verify(context.xunit, Mockito.never()).parse(any(), any(), any());
   }
 
   @Test
@@ -132,7 +132,7 @@ public class UnitTestResultsAggregatorTest {
 
     verify(context.visualStudio, Mockito.never()).parse(any(), any(), any());
     verify(context.nunit, Mockito.never()).accept(any(), any());
-    verify(context.xunit).accept(eq(new File("foo.xml")), notNull());
+    verify(context.xunit, Mockito.never()).parse(any(), notNull(), any());
   }
 
   @Test
@@ -142,33 +142,33 @@ public class UnitTestResultsAggregatorTest {
 
     verify(context.visualStudio, Mockito.never()).parse(any(), any(), any());
     verify(context.nunit, Mockito.never()).accept(any(), any());
-    verify(context.xunit, Mockito.never()).accept(any(), any());
+    verify(context.xunit).parse(eq(new File("foo.xml")), notNull(), any());
   }
 
   @Test
   public void aggregateOld_all_formats_configured() {
     AggregateTestContext context = new AggregateTestContext();
-    context.add("visualStudioTestResultsFile", "foo.trx");
-    context.add("nunitTestResultsFile", "foo.xml");
-    context.add("xunitTestResultsFile", "foo.xml");
+    context.add("visualStudioTestResultsFile", "vs.trx");
+    context.add("nunitTestResultsFile", "nunit.xml");
+    context.add("xunitTestResultsFile", "xunit.xml");
     context.runOld();
 
     verify(context.visualStudio, Mockito.never()).parse(any(), any(), any());
-    verify(context.nunit).accept(eq(new File("foo.xml")), notNull());
-    verify(context.xunit).accept(eq(new File("foo.xml")), notNull());
+    verify(context.nunit).accept(eq(new File("nunit.xml")), notNull());
+    verify(context.xunit, Mockito.never()).parse(any(), any(), any());
   }
 
   @Test
   public void aggregate_all_formats_configured() {
     AggregateTestContext context = new AggregateTestContext();
-    context.add("visualStudioTestResultsFile", "foo.trx");
-    context.add("nunitTestResultsFile", "foo.xml");
-    context.add("xunitTestResultsFile", "foo.xml");
+    context.add("visualStudioTestResultsFile", "vs.trx");
+    context.add("nunitTestResultsFile", "nunit.xml");
+    context.add("xunitTestResultsFile", "xunit.xml");
     context.run();
 
-    verify(context.visualStudio).parse(eq(new File("foo.trx")), notNull(), any());
+    verify(context.visualStudio).parse(eq(new File("vs.trx")), notNull(), any());
     verify(context.nunit, Mockito.never()).accept(any(), any());
-    verify(context.xunit, Mockito.never()).accept(any(), any());
+    verify(context.xunit).parse(eq(new File("xunit.xml")), notNull(), any());
   }
 
   @Test
@@ -178,7 +178,7 @@ public class UnitTestResultsAggregatorTest {
 
     verify(context.visualStudio, Mockito.never()).parse(any(), any(), any());
     verify(context.nunit, Mockito.never()).accept(any(), any());
-    verify(context.xunit, Mockito.never()).accept(any(), any());
+    verify(context.xunit, Mockito.never()).parse(any(), any(), any());
   }
 
   @Test
@@ -188,7 +188,7 @@ public class UnitTestResultsAggregatorTest {
 
     verify(context.visualStudio, Mockito.never()).parse(any(), any(), any());
     verify(context.nunit, Mockito.never()).accept(any(), any());
-    verify(context.xunit, Mockito.never()).accept(any(), any());
+    verify(context.xunit, Mockito.never()).parse(any(), any(), any());
   }
 
   @Test
@@ -207,15 +207,11 @@ public class UnitTestResultsAggregatorTest {
 
     verify(context.fileProvider).listFiles("foo.xml");
     verify(context.fileProvider).listFiles("bar.xml");
-    verify(context.fileProvider).listFiles("foo2.xml");
-    verify(context.fileProvider).listFiles("bar2.xml");
 
-    verify(context.visualStudio, Mockito.never()).parse(any(), any(), any());
     verify(context.visualStudio, Mockito.never()).parse(any(), any(), any());
     verify(context.nunit).accept(eq(new File("foo.xml")), notNull());
     verify(context.nunit).accept(eq(new File("bar.xml")), notNull());
-    verify(context.xunit).accept(eq(new File("foo2.xml")), notNull());
-    verify(context.xunit).accept(eq(new File("bar2.xml")), notNull());
+    verify(context.xunit, Mockito.never()).parse(any(), any(), any());
   }
 
   @Test
@@ -234,13 +230,15 @@ public class UnitTestResultsAggregatorTest {
 
     verify(context.fileProvider).listFiles("*.trx");
     verify(context.fileProvider).listFiles("bar.trx");
+    verify(context.fileProvider).listFiles("foo2.xml");
+    verify(context.fileProvider).listFiles("bar2.xml");
 
     verify(context.visualStudio).parse(eq(new File("foo.trx")), notNull(), any());
     verify(context.visualStudio).parse(eq(new File("bar.trx")), notNull(), any());
     verify(context.nunit, Mockito.never()).accept(any(), any());
     verify(context.nunit, Mockito.never()).accept(any(), any());
-    verify(context.xunit, Mockito.never()).accept(any(), any());
-    verify(context.xunit, Mockito.never()).accept(any(), any());
+    verify(context.xunit).parse(eq(new File("foo2.xml")), notNull(), any());
+    verify(context.xunit).parse(eq(new File("bar2.xml")), notNull(), any());
   }
 
   @Test
@@ -317,9 +315,8 @@ public class UnitTestResultsAggregatorTest {
     public final WildcardPatternFileProvider fileProvider = mock(WildcardPatternFileProvider.class);
     public final MapSettings settings = new MapSettings();
     public final VisualStudioTestResultParser visualStudio = mock(VisualStudioTestResultParser.class);
-
+    public final XUnitTestResultsFileParser xunit = mock(XUnitTestResultsFileParser.class);
     public final NUnitTestResultsFileParserOld nunit = mock(NUnitTestResultsFileParserOld.class);
-    public final XUnitTestResultsFileParserOld xunit = mock(XUnitTestResultsFileParserOld.class);
     public final UnitTestConfiguration config = new UnitTestConfiguration("visualStudioTestResultsFile", "nunitTestResultsFile", "xunitTestResultsFile");
 
     public AggregateTestContext() { }
