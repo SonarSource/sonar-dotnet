@@ -57,13 +57,13 @@ stages:
     - powershell: .\scripts\set-version.ps1 -Version $(SHORT_VERSION) -BuildNumber $(Build.BuildId) -Branch $(Build.SourceBranchName) -Sha1 $(Build.SourceVersion)
       displayName: "Set Version"
 
-    - task: SonarCloudPrepare@2
+    - task: SonarCloudPrepare@3
       displayName: 'Code Analysis - Begin (PR)'
       condition: eq(variables['Build.Reason'], 'PullRequest')
       inputs:
         SonarCloud: 'SonarCloud'
         organization: 'sonarsource'
-        scannerMode: 'MSBuild'
+        scannerMode: dotnet
         projectKey: 'sonaranalyzer-dotnet'
         projectName: 'Sonar .NET Analyzer'
         projectVersion: '$(SHORT_VERSION)'
@@ -78,13 +78,13 @@ stages:
           sonar.analysis.prNumber=$(System.PullRequest.PullRequestNumber)
           sonar.analysis.repository=$(Build.Repository.ID)
 
-    - task: SonarCloudPrepare@2
+    - task: SonarCloudPrepare@3
       displayName: 'Code Analysis - Begin (master or branch)'
       condition: ne(variables['Build.Reason'], 'PullRequest')
       inputs:
         SonarCloud: 'SonarCloud'
         organization: 'sonarsource'
-        scannerMode: 'MSBuild'
+        scannerMode: dotnet
         projectKey: 'sonaranalyzer-dotnet'
         projectName: 'Sonar .NET Analyzer'
         projectVersion: '$(SHORT_VERSION)'
@@ -133,10 +133,10 @@ stages:
         pathToPublish: '$(Build.ArtifactStagingDirectory)/packages'
         artifactName: 'NuGet Packages'
 
-    - task: SonarCloudAnalyze@2
+    - task: SonarCloudAnalyze@3
       displayName: 'Code Analysis - End'
 
-    - task: SonarCloudPublish@2
+    - task: SonarCloudPublish@3
       displayName: 'Code Analysis - Publish QG'
       inputs:
         pollingTimeoutSec: '300'
@@ -147,7 +147,7 @@ stages:
       inputs:
         secureFile: 'maven-settings.xml'
 
-    - task: SonarCloudPrepare@2
+    - task: SonarCloudPrepare@3
       displayName: 'Prepare code analysis for Java plugin'
       inputs:
         SonarCloud: 'SonarCloud'
@@ -186,7 +186,7 @@ stages:
       artifact: plugin-jars
       displayName: "Publish Jars"
 
-    - task: SonarCloudPublish@2
+    - task: SonarCloudPublish@3
       displayName: 'Code Analysis - Publish QG'
       inputs:
         pollingTimeoutSec: '300'
