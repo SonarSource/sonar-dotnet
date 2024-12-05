@@ -40,23 +40,23 @@ public class UnitTestResultsAggregator {
   private final UnitTestConfiguration unitTestConf;
   private final Configuration configuration;
   private final VisualStudioTestResultParser visualStudioTestResultsParser;
-  private final NUnitTestResultsFileParserOld nunitTestResultsFileParser;
+  private final NUnitTestResultsParser nUnitTestResultsParser;
   private final XUnitTestResultsParser xunitTestResultsParser;
 
   public UnitTestResultsAggregator(UnitTestConfiguration unitTestConf, Configuration configuration) {
-    this(unitTestConf, configuration, new VisualStudioTestResultParser(), new NUnitTestResultsFileParserOld(), new XUnitTestResultsParser());
+    this(unitTestConf, configuration, new VisualStudioTestResultParser(), new NUnitTestResultsParser(), new XUnitTestResultsParser());
   }
 
   UnitTestResultsAggregator(
     UnitTestConfiguration unitTestConf,
     Configuration configuration,
     VisualStudioTestResultParser visualStudioTestResultsFileParser,
-    NUnitTestResultsFileParserOld nunitTestResultsFileParser,
+    NUnitTestResultsParser nUnitTestResultsParser,
     XUnitTestResultsParser xunitTestResultsParser) {
     this.unitTestConf = unitTestConf;
     this.configuration = configuration;
     this.visualStudioTestResultsParser = visualStudioTestResultsFileParser;
-    this.nunitTestResultsFileParser = nunitTestResultsFileParser;
+    this.nUnitTestResultsParser = nUnitTestResultsParser;
     this.xunitTestResultsParser = xunitTestResultsParser;
   }
 
@@ -73,37 +73,17 @@ public class UnitTestResultsAggregator {
   /**
    * New metrics aggregation (per file).
    */
-  Map<String, UnitTestResults> aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, Collection<SonarAnalyzer.MethodDeclarationsInfo> methodDeclarations) {
+  Map<String, UnitTestResults> aggregate(WildcardPatternFileProvider wildcardProvider, Collection<SonarAnalyzer.MethodDeclarationsInfo> methodDeclarations) {
     HashMap<String, String> fileMethodMap = computeMethodFileMap(methodDeclarations);
     var results = new HashMap<String, UnitTestResults>();
-
     if (hasVisualStudioTestResultsFile(configuration::hasKey)) {
-      aggregate(
-        wildcardPatternFileProvider,
-        configuration.getStringArray(unitTestConf.visualStudioTestResultsFilePropertyKey()),
-        visualStudioTestResultsParser,
-        fileMethodMap,
-        results);
+      aggregate(wildcardProvider, configuration.getStringArray(unitTestConf.visualStudioTestResultsFilePropertyKey()), visualStudioTestResultsParser, fileMethodMap, results);
     }
     if (hasXUnitTestResultsFile(configuration::hasKey)) {
-      aggregate(wildcardPatternFileProvider, configuration.getStringArray(unitTestConf.xunitTestResultsFilePropertyKey()), xunitTestResultsParser, fileMethodMap, results);
+      aggregate(wildcardProvider, configuration.getStringArray(unitTestConf.xunitTestResultsFilePropertyKey()), xunitTestResultsParser, fileMethodMap, results);
     }
-    return results;
-  }
-
-  /**
-   * Old metrics aggregation (per project).
-   * @deprecated use {@link #aggregate(WildcardPatternFileProvider, Collection)} ()} instead.
-   */
-  @Deprecated(since="10.4", forRemoval=true)
-  UnitTestResults aggregateOld(WildcardPatternFileProvider wildcardPatternFileProvider) {
-    var results = new UnitTestResults();
     if (hasNUnitTestResultsFile(configuration::hasKey)) {
-      aggregateOld(
-        wildcardPatternFileProvider,
-        configuration.getStringArray(unitTestConf.nunitTestResultsFilePropertyKey()),
-        nunitTestResultsFileParser,
-        results);
+      aggregate(wildcardProvider, configuration.getStringArray(unitTestConf.nunitTestResultsFilePropertyKey()), nUnitTestResultsParser, fileMethodMap, results);
     }
     return results;
   }
@@ -119,23 +99,6 @@ public class UnitTestResultsAggregator {
         for (File reportFile : wildcardPatternFileProvider.listFiles(reportPathPattern)) {
           try {
             parser.parse(reportFile, unitTestResultsMap, methodFileMap);
-          } catch (Exception e) {
-            LOG.warn("Could not import unit test report '{}': {}", reportFile, e.getMessage());
-          }
-        }
-      }
-    }
-  }
-
-  private static void aggregateOld(WildcardPatternFileProvider wildcardPatternFileProvider,
-    String[] reportPaths,
-    UnitTestResultsParserOld parser,
-    UnitTestResults unitTestResults) {
-    for (String reportPathPattern : reportPaths) {
-      if (!reportPathPattern.isEmpty()) {
-        for (File reportFile : wildcardPatternFileProvider.listFiles(reportPathPattern)) {
-          try {
-            parser.accept(reportFile, unitTestResults);
           } catch (Exception e) {
             LOG.warn("Could not import unit test report '{}': {}", reportFile, e.getMessage());
           }

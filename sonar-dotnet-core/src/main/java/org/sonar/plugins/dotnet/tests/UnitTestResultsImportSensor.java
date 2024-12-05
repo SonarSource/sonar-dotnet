@@ -81,25 +81,9 @@ public class UnitTestResultsImportSensor implements ProjectSensor {
   }
 
   private void addTestMetrics(SensorContext context) {
-    // Save measures per project (old metrics)
-    var aggregatedResultsPerProject = unitTestResultsAggregator.aggregateOld(wildcardPatternFileProvider);
-    addProjectMeasures(context, aggregatedResultsPerProject);
-
-    // Save measures per file
     var methodDeclarations = collector.getMethodDeclarations();
     var aggregatedResultsPerFile = unitTestResultsAggregator.aggregate(wildcardPatternFileProvider, methodDeclarations);
     addMeasures(context, aggregatedResultsPerFile);
-  }
-
-  private static void addProjectMeasures(SensorContext context, UnitTestResults aggregatedResultsPerComponent) {
-    addMeasure(context, context.project(), CoreMetrics.TESTS, aggregatedResultsPerComponent.tests());
-    addMeasure(context, context.project(), CoreMetrics.TEST_ERRORS, aggregatedResultsPerComponent.errors());
-    addMeasure(context, context.project(), CoreMetrics.TEST_FAILURES, aggregatedResultsPerComponent.failures());
-    addMeasure(context, context.project(), CoreMetrics.SKIPPED_TESTS, aggregatedResultsPerComponent.skipped());
-
-    if (aggregatedResultsPerComponent.executionTime() != null) {
-      addMeasure(context, context.project(), CoreMetrics.TEST_EXECUTION_TIME, aggregatedResultsPerComponent.executionTime());
-    }
   }
 
   private static void addMeasures(SensorContext context, Map<String, UnitTestResults> aggregatedResultsPerFile) {

@@ -60,21 +60,29 @@ public class UnitTestResultsImportSensorTest {
   }
 
   @Test
-  public void should_not_save_metrics_with_empty_results() throws Exception {
-    UnitTestResultsAggregator aggregator = mock(UnitTestResultsAggregator.class);
-    PluginMetadata metadata = mockCSharpMetadata();
-    AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
-    UnitTestResults results = new UnitTestResults();
+  public void should_not_save_metrics_with_empty_execution_time() throws Exception {
+    var metadata = mockCSharpMetadata();
+    var analysisWarnings = mock(AnalysisWarnings.class);
+    var results = new UnitTestResults();
     results.add(42, 1, 2, 3, null);
+    var fileResults = new HashMap<String, UnitTestResults>();
+    var tempFolder = temp.newFolder();
+    var file = File.createTempFile("path", ".cs", tempFolder);
+    fileResults.put(file.getName(), results);
+    var aggregator = mock(UnitTestResultsAggregator.class);
     when(aggregator.hasUnitTestResultsProperty()).thenReturn(true);
-    when(aggregator.aggregateOld(any())).thenReturn(results);
-    SensorContextTester context = SensorContextTester.create(temp.newFolder());
-    when(aggregator.aggregateOld(any())).thenReturn(results);
-    Condition<Tuple> executionTimeMetric = new Condition<>(x -> x.toList().get(0) == CoreMetrics.TEST_EXECUTION_TIME_KEY, CoreMetrics.TEST_EXECUTION_TIME_KEY);
+    when(aggregator.aggregate(any(), any())).thenReturn(fileResults);
+    var context = SensorContextTester.create(tempFolder);
+
+    context.fileSystem().add(new TestInputFileBuilder("projectKey", file.getName())
+      .setLanguage("cs")
+      .setType(InputFile.Type.MAIN)
+      .build());
 
     new UnitTestResultsImportSensor(new MethodDeclarationsCollector(), aggregator, metadata, analysisWarnings).execute(context);
 
-    assertThat(context.measures("projectKey"))
+    var executionTimeMetric = new Condition<Tuple>(x -> x.toList().get(0) == CoreMetrics.TEST_EXECUTION_TIME_KEY, CoreMetrics.TEST_EXECUTION_TIME_KEY);
+    assertThat(context.measures("projectKey:" + file.getName()))
       .extracting("metric.key", "value")
       .containsOnly(
         tuple(CoreMetrics.TESTS_KEY, 42),
@@ -125,15 +133,26 @@ public class UnitTestResultsImportSensorTest {
   }
 
   @Test
-  public void import_two_reports_for_same_project_should_not_throw() throws Exception {
+  public void import_two_reports_for_same_file() throws Exception {
     UnitTestResultsAggregator aggregator = mock(UnitTestResultsAggregator.class);
     PluginMetadata cSharpMetadata = mockCSharpMetadata();
     PluginMetadata vbNetMetadata = mockVbNetMetadata();
     AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
     SensorContextTester context = SensorContextTester.create(temp.newFolder());
-    UnitTestResults results = mock(UnitTestResults.class);
     when(aggregator.hasUnitTestResultsProperty()).thenReturn(true);
-    when(aggregator.aggregateOld(any())).thenReturn(results);
+
+    var tempFolder = temp.newFolder();
+    var file = File.createTempFile("path", ".cs", tempFolder);
+    context.fileSystem().add(new TestInputFileBuilder("projectKey", file.getName())
+      .setLanguage("cs")
+      .setType(InputFile.Type.MAIN)
+      .build());
+
+    UnitTestResults results = new UnitTestResults();
+    results.add(42, 1, 2, 3, 321L);
+    var fileResults = new HashMap<String, UnitTestResults>();
+    fileResults.put(file.getName(), results);
+    when(aggregator.aggregate(any(), any())).thenReturn(fileResults);
 
     var methodDeclarationsCollector = new MethodDeclarationsCollector();
     new UnitTestResultsImportSensor(methodDeclarationsCollector, aggregator, cSharpMetadata, analysisWarnings).execute(context);
@@ -158,7 +177,6 @@ public class UnitTestResultsImportSensorTest {
     var file = File.createTempFile("path", ".cs", tempFolder);
     fileResults.put(file.getName(), results);
     when(aggregator.aggregate(any(), any())).thenReturn(fileResults);
-    when(aggregator.aggregateOld(any())).thenReturn(results);
     SensorContextTester context = SensorContextTester.create(tempFolder);
     context.fileSystem().add(new TestInputFileBuilder("projectKey", file.getName())
       .setLanguage("cs")
@@ -168,17 +186,6 @@ public class UnitTestResultsImportSensorTest {
     UnitTestResultsImportSensor sensor = new UnitTestResultsImportSensor(new MethodDeclarationsCollector(), aggregator, metadata, analysisWarnings);
     sensor.execute(context);
 
-    // Project metrics
-    assertThat(context.measures("projectKey"))
-      .extracting("metric.key", "value")
-      .containsOnly(
-        tuple(CoreMetrics.TESTS_KEY, 42),
-        tuple(CoreMetrics.SKIPPED_TESTS_KEY, 1),
-        tuple(CoreMetrics.TEST_FAILURES_KEY, 2),
-        tuple(CoreMetrics.TEST_ERRORS_KEY, 3),
-        tuple(CoreMetrics.TEST_EXECUTION_TIME_KEY, 321L));
-
-    // File metrics
     assertThat(context.measures("projectKey:" + file.getName()))
       .extracting("metric.key", "value")
       .containsOnly(
@@ -190,7 +197,7 @@ public class UnitTestResultsImportSensorTest {
   }
 
   @Test
-  public void execute_warns_when_no_key_is_present() throws IOException {
+  public void execute_warns_when_no_key_is_present() {
     UnitTestResultsAggregator aggregator = mock(UnitTestResultsAggregator.class);
     PluginMetadata metadata = mockCSharpMetadata();
     when(aggregator.hasUnitTestResultsProperty()).thenReturn(false);
