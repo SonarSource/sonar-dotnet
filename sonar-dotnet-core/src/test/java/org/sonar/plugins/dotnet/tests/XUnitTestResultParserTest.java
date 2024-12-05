@@ -53,7 +53,7 @@ public class XUnitTestResultParserTest {
       }
     };
 
-    var sut = new XUnitTestResultsFileParser();
+    var sut = new XUnitTestResultsParser();
 
     sut.parse(new File("src/test/resources/xunit/valid.xml"), results, fileMap);
 
@@ -75,12 +75,14 @@ public class XUnitTestResultParserTest {
     assertThat(infoLogs.get(0)).startsWith("Parsing the XUnit Test Results file ");
 
     List<String> debugLogs = logTester.logs(Level.DEBUG);
-    assertThat(debugLogs).hasSize(7);
-    assertThat(logTester.logs(Level.DEBUG).get(0)).startsWith("XUnit Assembly found, assembly name:");
-    assertThat(logTester.logs(Level.DEBUG).get(1)).startsWith("Added Test Method:");
-    assertThat(logTester.logs(Level.DEBUG).get(4)).startsWith("Added Test Method:");
-    assertThat(logTester.logs(Level.DEBUG).get(5)).startsWith("XUnit Assembly found, assembly name:");
-    assertThat(logTester.logs(Level.DEBUG).get(6)).startsWith("Added Test Method:");
+    assertThat(debugLogs)
+      .hasSize(7)
+      .contains(
+        "XUnit Assembly found, assembly name: C:\\dev\\Playground\\XUnit\\bin\\Debug\\net9.0\\XUnitTestProj.dll, Extracted dllName: XUnitTestProj",
+        "Added Test Method: XUnitTestProj.XUnitTestProject1.UnitTest1.XUnitTestShouldFail to File: C:\\dev\\Playground\\XUnit\\UnitTest1.cs",
+        "XUnit Assembly found, assembly name: C:\\dev\\Playground\\XUnit\\bin\\Debug\\net9.0\\XUnitTestProj2.dll, Extracted dllName: XUnitTestProj2",
+        "Added Test Method: XUnitTestProj2.XUnitTestProject2.UnitTest2.XUnitTestNotRun to File: C:\\dev\\Playground\\XUnit2\\UnitTest1.cs"
+      );
   }
 
   @Test
@@ -88,7 +90,7 @@ public class XUnitTestResultParserTest {
     Map<String, UnitTestResults> results = new HashMap<>();
     Map<String, String> fileMap = Map.of("XUnitTestProj.XUnitTestProject1.UnitTest1.XUnitTestMethod1", "C:\\dev\\Playground\\XUnit\\UnitTest1.cs");
 
-    var sut = new XUnitTestResultsFileParser();
+    var sut = new XUnitTestResultsParser();
 
     sut.parse(new File("src/test/resources/xunit/valid_no_execution_time.xml"), results, fileMap);
 
@@ -104,7 +106,13 @@ public class XUnitTestResultParserTest {
     assertThat(infoLogs.get(0)).startsWith("Parsing the XUnit Test Results file ");
 
     List<String> debugLogs = logTester.logs(Level.DEBUG);
-    assertThat(debugLogs).hasSize(2);
+    assertThat(debugLogs)
+      .hasSize(2)
+      .contains(
+        "XUnit Assembly found, assembly name: C:\\dev\\Playground\\XUnit\\bin\\Debug\\net9.0\\XUnitTestProj.dll, Extracted dllName: XUnitTestProj",
+        "Added Test Method: XUnitTestProj.XUnitTestProject1.UnitTest1.XUnitTestMethod1 to File: C:\\dev\\Playground\\XUnit\\UnitTest1.cs"
+      );
+
     assertThat(logTester.logs(Level.DEBUG).get(0)).startsWith("XUnit Assembly found, assembly name:");
     assertThat(logTester.logs(Level.DEBUG).get(1)).startsWith("Added Test Method:");
   }
@@ -115,7 +123,7 @@ public class XUnitTestResultParserTest {
     Map<String, UnitTestResults> results = new HashMap<>();
     Map<String, String> fileMap = Map.of("XUnitTestProj.DataDrivenWithXUnit.Test.CalculatorTestWithClassData.Add_ShouldReturnCorrectSum", "C:\\dev\\Playground\\XUnit\\UnitTest1.cs");
 
-    var sut = new XUnitTestResultsFileParser();
+    var sut = new XUnitTestResultsParser();
 
     sut.parse(new File("src/test/resources/xunit/valid_data_attribute.xml"), results, fileMap);
 
@@ -131,15 +139,17 @@ public class XUnitTestResultParserTest {
     assertThat(infoLogs.get(0)).startsWith("Parsing the XUnit Test Results file ");
 
     List<String> debugLogs = logTester.logs(Level.DEBUG);
-    assertThat(debugLogs).hasSize(3);
-    assertThat(logTester.logs(Level.DEBUG).get(0)).startsWith("XUnit Assembly found, assembly name:");
-    assertThat(logTester.logs(Level.DEBUG).get(1)).startsWith("Added Test Method:");
-    assertThat(logTester.logs(Level.DEBUG).get(2)).startsWith("Added Test Method:");
+    assertThat(debugLogs)
+      .hasSize(3)
+      .contains(
+        "XUnit Assembly found, assembly name: C:\\dev\\Playground\\XUnit\\bin\\Debug\\net9.0\\XUnitTestProj.dll, Extracted dllName: XUnitTestProj",
+        "Added Test Method: XUnitTestProj.DataDrivenWithXUnit.Test.CalculatorTestWithClassData.Add_ShouldReturnCorrectSum to File: C:\\dev\\Playground\\XUnit\\UnitTest1.cs"
+      );
   }
 
   @Test
   public void test_name_not_mapped() {
-    var sut = new XUnitTestResultsFileParser();
+    var sut = new XUnitTestResultsParser();
     Map<String, String> fileMap = Map.of("Some.Other.TestMethod", "C:\\dev\\Playground\\XUnit.Test\\Sample.cs");
 
     var file = new File("src/test/resources/xunit/test_name_not_mapped.xml");
@@ -150,7 +160,7 @@ public class XUnitTestResultParserTest {
 
   @Test
   public void invalid_root() {
-    var sut = new XUnitTestResultsFileParser();
+    var sut = new XUnitTestResultsParser();
     var file = new File("src/test/resources/xunit/invalid_root.xml");
     var exception = assertThrows(ParseErrorException.class, () -> sut.parse(file, new HashMap<>(), new HashMap<>()));
     assertThat(exception.getMessage()).startsWith("Missing or incorrect root element. Expected one of [<assembly>, <assemblies>], but got <foo> instead");
@@ -158,7 +168,7 @@ public class XUnitTestResultParserTest {
 
   @Test
   public void invalid_test_outcome() {
-    var sut = new XUnitTestResultsFileParser();
+    var sut = new XUnitTestResultsParser();
     var file = new File("src/test/resources/xunit/invalid_test_outcome.xml");
     Map<String, String> fileMap = Map.of("Playground.Test.TestProject1.UnitTest1.InvalidOutcome", "C:\\dev\\Playground\\Playground.Test\\Sample.cs");
 

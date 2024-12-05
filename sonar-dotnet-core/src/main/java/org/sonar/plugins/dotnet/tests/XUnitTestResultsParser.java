@@ -25,8 +25,8 @@ import org.slf4j.LoggerFactory;
 import org.sonar.api.scanner.ScannerSide;
 
 @ScannerSide
-public class XUnitTestResultsFileParser implements UnitTestResultParser {
-  private static final Logger LOG = LoggerFactory.getLogger(XUnitTestResultsFileParser.class);
+public class XUnitTestResultsParser implements UnitTestResultParser {
+  private static final Logger LOG = LoggerFactory.getLogger(XUnitTestResultsParser.class);
 
   @Override
   public void parse(File file, Map<String, UnitTestResults> unitTestResults, Map<String, String> methodFileMap) {

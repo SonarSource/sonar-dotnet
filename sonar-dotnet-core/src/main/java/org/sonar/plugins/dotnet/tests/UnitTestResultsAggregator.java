@@ -41,10 +41,10 @@ public class UnitTestResultsAggregator {
   private final Configuration configuration;
   private final VisualStudioTestResultParser visualStudioTestResultsParser;
   private final NUnitTestResultsFileParserOld nunitTestResultsFileParser;
-  private final XUnitTestResultsFileParser xunitTestResultsParser;
+  private final XUnitTestResultsParser xunitTestResultsParser;
 
   public UnitTestResultsAggregator(UnitTestConfiguration unitTestConf, Configuration configuration) {
-    this(unitTestConf, configuration, new VisualStudioTestResultParser(), new NUnitTestResultsFileParserOld(), new XUnitTestResultsFileParser());
+    this(unitTestConf, configuration, new VisualStudioTestResultParser(), new NUnitTestResultsFileParserOld(), new XUnitTestResultsParser());
   }
 
   UnitTestResultsAggregator(
@@ -52,12 +52,12 @@ public class UnitTestResultsAggregator {
     Configuration configuration,
     VisualStudioTestResultParser visualStudioTestResultsFileParser,
     NUnitTestResultsFileParserOld nunitTestResultsFileParser,
-    XUnitTestResultsFileParser xunitTestResultsFileParser) {
+    XUnitTestResultsParser xunitTestResultsParser) {
     this.unitTestConf = unitTestConf;
     this.configuration = configuration;
     this.visualStudioTestResultsParser = visualStudioTestResultsFileParser;
     this.nunitTestResultsFileParser = nunitTestResultsFileParser;
-    this.xunitTestResultsParser = xunitTestResultsFileParser;
+    this.xunitTestResultsParser = xunitTestResultsParser;
   }
 
   boolean hasUnitTestResultsProperty(Predicate<String> hasKeyPredicate) {

@@ -45,22 +45,22 @@ public class NUnitTestResultsFileParserOldTest {
   public void no_counters() {
     thrown.expect(ParseErrorException.class);
     thrown.expectMessage("Missing attribute \"total\" in element <test-results> in ");
-    thrown.expectMessage(new File("src/test/resources/nunit/no_counters.xml").getAbsolutePath());
-    new NUnitTestResultsFileParserOld().accept(new File("src/test/resources/nunit/no_counters.xml"), mock(UnitTestResults.class));
+    thrown.expectMessage(new File("src/test/resources/nunit/old/no_counters.xml").getAbsolutePath());
+    new NUnitTestResultsFileParserOld().accept(new File("src/test/resources/nunit/old/no_counters.xml"), mock(UnitTestResults.class));
   }
 
   @Test
   public void wrong_passed_number() {
     thrown.expect(ParseErrorException.class);
     thrown.expectMessage("Expected an integer instead of \"invalid\" for the attribute \"total\" in ");
-    thrown.expectMessage(new File("src/test/resources/nunit/invalid_total.xml").getAbsolutePath());
-    new NUnitTestResultsFileParserOld().accept(new File("src/test/resources/nunit/invalid_total.xml"), mock(UnitTestResults.class));
+    thrown.expectMessage(new File("src/test/resources/nunit/old/invalid_total.xml").getAbsolutePath());
+    new NUnitTestResultsFileParserOld().accept(new File("src/test/resources/nunit/old/invalid_total.xml"), mock(UnitTestResults.class));
   }
 
   @Test
   public void valid() {
     UnitTestResults results = new UnitTestResults();
-    new NUnitTestResultsFileParserOld().accept(new File("src/test/resources/nunit/valid.xml"), results);
+    new NUnitTestResultsFileParserOld().accept(new File("src/test/resources/nunit/old/valid.xml"), results);
 
     assertThat(results.errors()).isEqualTo(30);
     assertThat(results.failures()).isEqualTo(20);
@@ -81,7 +81,7 @@ public class NUnitTestResultsFileParserOldTest {
   @Test
   public void valid_comma_in_double() {
     UnitTestResults results = new UnitTestResults();
-    new NUnitTestResultsFileParserOld().accept(new File("src/test/resources/nunit/valid_comma_in_double.xml"), results);
+    new NUnitTestResultsFileParserOld().accept(new File("src/test/resources/nunit/old/valid_comma_in_double.xml"), results);
 
     assertThat(results.executionTime()).isEqualTo(1051);
 
@@ -93,7 +93,7 @@ public class NUnitTestResultsFileParserOldTest {
   @Test
   public void valid_no_execution_time() {
     UnitTestResults results = new UnitTestResults();
-    new NUnitTestResultsFileParserOld().accept(new File("src/test/resources/nunit/valid_no_execution_time.xml"), results);
+    new NUnitTestResultsFileParserOld().accept(new File("src/test/resources/nunit/old/valid_no_execution_time.xml"), results);
 
     assertThat(results.failures()).isEqualTo(20);
     assertThat(results.errors()).isEqualTo(30);
@@ -109,7 +109,7 @@ public class NUnitTestResultsFileParserOldTest {
   @Test
   public void nunit3_sample() {
     UnitTestResults results = new UnitTestResults();
-    new NUnitTestResultsFileParserOld().accept(new File("src/test/resources/nunit/nunit3_sample.xml"), results);
+    new NUnitTestResultsFileParserOld().accept(new File("src/test/resources/nunit/old/nunit3_sample.xml"), results);
 
     assertThat(results.failures()).isEqualTo(2);
     assertThat(results.errors()).isEqualTo(1);

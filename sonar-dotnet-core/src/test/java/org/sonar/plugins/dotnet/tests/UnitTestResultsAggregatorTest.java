@@ -315,7 +315,7 @@ public class UnitTestResultsAggregatorTest {
     public final WildcardPatternFileProvider fileProvider = mock(WildcardPatternFileProvider.class);
     public final MapSettings settings = new MapSettings();
     public final VisualStudioTestResultParser visualStudio = mock(VisualStudioTestResultParser.class);
-    public final XUnitTestResultsFileParser xunit = mock(XUnitTestResultsFileParser.class);
+    public final XUnitTestResultsParser xunit = mock(XUnitTestResultsParser.class);
     public final NUnitTestResultsFileParserOld nunit = mock(NUnitTestResultsFileParserOld.class);
     public final UnitTestConfiguration config = new UnitTestConfiguration("visualStudioTestResultsFile", "nunitTestResultsFile", "xunitTestResultsFile");
 

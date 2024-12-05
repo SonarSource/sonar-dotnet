@@ -75,11 +75,14 @@ public class VisualStudioTestResultParserTest {
     assertThat(infoLogs.get(0)).startsWith("Parsing the Visual Studio Test Results file ");
 
     List<String> debugLogs = logTester.logs(Level.DEBUG);
-    assertThat(debugLogs).hasSize(32);
-    assertThat(logTester.logs(Level.DEBUG).get(0)).startsWith("Parsed Visual Studio Unit Test - testId:");
-    assertThat(logTester.logs(Level.DEBUG).get(15)).startsWith("Parsed Visual Studio Unit Test - testId:");
-    assertThat(logTester.logs(Level.DEBUG).get(16)).startsWith("Added Test Method:");
-    assertThat(logTester.logs(Level.DEBUG).get(31)).startsWith("Added Test Method:");
+    assertThat(debugLogs)
+      .hasSize(32)
+      .contains(
+        "Parsed Visual Studio Unit Test - testId: d7744238-9adf-b364-3d70-ae38261a8cd8 outcome: Failed, duration: 20",
+        "Parsed Visual Studio Unit Test - testId: c7dc64cd-0233-3937-7ce3-ae46f9eabe5c outcome: NotExecuted, duration: 0",
+        "Added Test Method: Playground.Test.TestProject1.UnitTest1.TestMethod1 to File: C:\\dev\\Playground\\Playground.Test\\Sample.cs",
+        "Added Test Method: Playground.Test.TestProject1.UnitTest1.TestShouldError to File: C:\\dev\\Playground\\Playground.Test\\UnitTest1.cs"
+      );
   }
 
   @Test

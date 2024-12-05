@@ -69,8 +69,8 @@ public class VisualStudioTestResultParser implements UnitTestResultParser {
 
       var testResult = new VisualStudioTestResults(outcome, duration);
       testIdTestResultMap.put(testId, testResult);
-      LOG.debug("Parsed Visual Studio Unit Test - testId: {} outcome: {}, startTime: {}, endTime: {}",
-        testId, outcome, start, finish);
+      LOG.debug("Parsed Visual Studio Unit Test - testId: {} outcome: {}, duration: {}",
+        testId, outcome, duration);
     }
 
     private void handleUnitTestTag(XmlParserHelper xmlParserHelper) {
