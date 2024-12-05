@@ -8,7 +8,7 @@
 |Plugin|[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=org.sonarsource.dotnet%3Asonar-dotnet&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.sonarsource.dotnet%3Asonar-dotnet)|[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=org.sonarsource.dotnet%3Asonar-dotnet&metric=coverage)](https://sonarcloud.io/component_measures?id=org.sonarsource.dotnet%3Asonar-dotnet&metric=coverage)|
 
 [Static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) of C# and VB.NET
-languages in [SonarQube](https://www.sonarsource.com/products/sonarqube), [SonarCloud](https://www.sonarsource.com/products/sonarcloud) and [SonarLint](https://www.sonarsource.com/products/sonarlint) code quality and security products. These Roslyn analyzers allow you to produce [Clean Code](https://www.sonarsource.com/solutions/clean-code/) that is safe, reliable, and maintainable by helping you find and correct bugs, vulnerabilities, and code smells in your codebase.
+languages in [SonarQube server](https://www.sonarsource.com/products/sonarqube), [SonarQube cloud](https://www.sonarsource.com/products/sonarcloud) and [SonarQube for IDE](https://www.sonarsource.com/products/sonarlint) code quality and security products. These Roslyn analyzers allow you to produce [Clean Code](https://www.sonarsource.com/solutions/clean-code/) that is safe, reliable, and maintainable by helping you find and correct bugs, vulnerabilities, and code smells in your codebase.
 
 ## Features
 
@@ -30,7 +30,7 @@ languages in [SonarQube](https://www.sonarsource.com/products/sonarqube), [Sonar
 * [SonarAnalyzer.CSharp](https://www.nuget.org/packages/SonarAnalyzer.CSharp/)
 * [SonarAnalyzer.VisualBasic](https://www.nuget.org/packages/SonarAnalyzer.VisualBasic/)
 
-### Integration with SonarQube and SonarCloud
+### Integration with SonarQube
 
 * [Analyze projects with SonarScanner for .NET](https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html)
 * [Importing code coverage](https://community.sonarsource.com/t/9871)
@@ -85,25 +85,19 @@ To request new rules, Contact us on [our Community Forum](https://community.sona
 If you have an idea for a rule but you are not sure that everyone needs it, you can implement your own Roslyn analyzer.
 - You can start with [this tutorial from Microsoft](https://docs.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/tutorials/how-to-write-csharp-analyzer-code-fix) to write an analyzer.
 - All Roslyn-based issues are picked up by the [SonarScanner for .NET](https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html)
-and pushed to SonarQube / SonarCloud as external issues.
+and pushed to SonarQube as external issues.
 - Also check out [SonarQube Roslyn SDK](https://github.com/SonarSource-VisualStudio/sonarqube-roslyn-sdk) to embed
 your Roslyn analyzer in a SonarQube plugin, if you want to manage your rules from SonarQube.
 
 ## Configuring Rules
 
-### SonarQube / SonarCloud and SonarLint in Connected Mode
+### SonarQube for IDE
 
-Open the rule in SonarQube / SonarCloud, scroll down, and (in case the rule has parameters), you can configure the parameters for each Quality Profile the rule is part of.
+The easiest way is to configure a Quality Profile in SonarQube.
 
-Use SonarLint Connected Mode to connect to SonarQube and SonarCloud.
+Open the rule in SonarQube, scroll down, and (in case the rule has parameters), you can configure the parameters for each Quality Profile the rule is part of.
 
-### SonarLint
-
-The easiest way is to configure a Quality Profile in SonarCloud.
-
-* Create a dummy repository and analyze it in SonarCloud (it's free for open-source).
-* Configure the Quality Profile in SonarCloud for the project you created.
-* Then connect SonarLint to that project, and it will download the configuration (ruleset and SonarLint.xml files) locally and update your project based on the Quality Profile.
+Use SonarQube for IDE Connected Mode to connect to SonarQube server or cloud.
 
 ### Standalone NuGet
 

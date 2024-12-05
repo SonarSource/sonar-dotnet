@@ -145,7 +145,7 @@ public class DotNetSensor implements ProjectSensor {
 
   private static void warnThatProjectContainsOnlyTestCode(FileSystem fs, AnalysisWarnings analysisWarnings, String languageName) {
     LOG.warn("SonarScanner for .NET detected only TEST files and no MAIN files for {} in the current solution. " +
-        "Only TEST-code related results will be imported to your SonarQube/SonarCloud project. " +
+        "Only TEST-code related results will be imported to your SonarQube project. " +
         "Many of our rules (e.g. vulnerabilities) are raised only on MAIN-code. {}",
       languageName, READ_MORE_MESSAGE);
 

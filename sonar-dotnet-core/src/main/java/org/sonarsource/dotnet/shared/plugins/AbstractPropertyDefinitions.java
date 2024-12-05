@@ -24,7 +24,7 @@ import org.sonar.api.resources.Qualifiers;
 import org.sonar.api.utils.ManifestUtils;
 
 /**
- * This class is responsible to declare all the properties that can be set through SonarQube/SonarCloud UI (settings page).
+ * This class is responsible to declare all the properties that can be set through SonarQube UI (settings page).
  */
 public abstract class AbstractPropertyDefinitions {
   private static final String EXTERNAL_ANALYZERS_CATEGORY = "External Analyzers";

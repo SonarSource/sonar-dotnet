@@ -64,7 +64,8 @@ public class DotNetSensorTest {
   private static final String LANG_KEY = "LANG_KEY";
   private static final String A_DIFFERENT_LANG_KEY = "another language than the tested plugin";
   private static final String LANG_NAME = "LANG_NAME";
-  private static final String READ_MORE_LOG = "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects";
+  private static final String READ_MORE_LOG = "Read more about how the SonarScanner for .NET detects test projects: https://github" +
+    ".com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects";
 
   @Rule
   public LogTester logTester = new LogTester();
@@ -129,7 +130,8 @@ public class DotNetSensorTest {
 
     assertThat(logTester.logs(Level.DEBUG)).isEmpty();
     assertThat(logTester.logs(Level.INFO)).containsExactly("TEST PROJECTS SUMMARY");
-    assertThat(logTester.logs(Level.WARN)).containsExactly("No protobuf reports found. The " + LANG_NAME + " files will not have highlighting and metrics. You can get help on the community forum: https://community.sonarsource.com");
+    assertThat(logTester.logs(Level.WARN)).containsExactly("No protobuf reports found. The " + LANG_NAME + " files will not have highlighting and metrics. You can get help on " +
+      "the community forum: https://community.sonarsource.com");
     verify(analysisWarnings, never()).addUnique(any());
     verify(reportPathCollector).protobufDirs();
     verifyNoInteractions(protobufDataImporter);
@@ -137,7 +139,8 @@ public class DotNetSensorTest {
       put("sonaranalyzer-" + LANG_KEY, Arrays.asList(RuleKey.of(REPO_KEY, "S1186"), RuleKey.of(REPO_KEY, "[parameters_key]")));
       put("foo", Collections.singletonList(RuleKey.of("roslyn.foo", "custom-roslyn")));
     }};
-    verify(roslynDataImporter).importRoslynReports(eq(Collections.singletonList(new RoslynReport(null, workDir.getRoot()))), eq(tester), eq(expectedMap), any(RealPathProvider.class));
+    verify(roslynDataImporter).importRoslynReports(eq(Collections.singletonList(new RoslynReport(null, workDir.getRoot()))), eq(tester), eq(expectedMap),
+      any(RealPathProvider.class));
   }
 
   @Test
@@ -149,7 +152,8 @@ public class DotNetSensorTest {
     verify(reportPathCollector).protobufDirs();
     verify(protobufDataImporter).importResults(eq(tester), eq(reportPaths), any(RealPathProvider.class));
     verifyNoInteractions(roslynDataImporter);
-    assertThat(logTester.logs(Level.WARN)).containsExactly("No Roslyn issue reports were found. The " + LANG_NAME + " files have not been analyzed. You can get help on the community forum: https://community.sonarsource.com");
+    assertThat(logTester.logs(Level.WARN)).containsExactly("No Roslyn issue reports were found. The " + LANG_NAME + " files have not been analyzed. You can get help on the " +
+      "community forum: https://community.sonarsource.com");
     verify(analysisWarnings, never()).addUnique(any());
     assertThat(logTester.logs(Level.INFO)).containsExactly("TEST PROJECTS SUMMARY");
     assertThat(logTester.logs(Level.DEBUG)).isEmpty();
@@ -224,7 +228,7 @@ public class DotNetSensorTest {
 
     assertThat(logTester.logs(Level.WARN))
       .containsExactly("SonarScanner for .NET detected only TEST files and no MAIN files for " + LANG_NAME + " in the current solution. " +
-        "Only TEST-code related results will be imported to your SonarQube/SonarCloud project. " +
+        "Only TEST-code related results will be imported to your SonarQube project. " +
         "Many of our rules (e.g. vulnerabilities) are raised only on MAIN-code. " + READ_MORE_LOG);
     verify(analysisWarnings).addUnique("Your project contains only TEST-code for language " + LANG_NAME +
       " and no MAIN-code for any language, so only TEST-code related results are imported. " +
@@ -245,7 +249,7 @@ public class DotNetSensorTest {
 
     assertThat(logTester.logs(Level.WARN))
       .containsExactly("SonarScanner for .NET detected only TEST files and no MAIN files for " + LANG_NAME + " in the current solution. " +
-        "Only TEST-code related results will be imported to your SonarQube/SonarCloud project. " +
+        "Only TEST-code related results will be imported to your SonarQube project. " +
         "Many of our rules (e.g. vulnerabilities) are raised only on MAIN-code. " + READ_MORE_LOG);
     verify(reportPathCollector).protobufDirs();
     verify(protobufDataImporter).importResults(eq(tester), eq(reportPaths), any(RealPathProvider.class));
