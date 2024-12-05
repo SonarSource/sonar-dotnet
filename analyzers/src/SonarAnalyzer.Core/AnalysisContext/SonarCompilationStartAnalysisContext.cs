@@ -45,7 +45,7 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
     public void RegisterNodeAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds)
         where TSyntaxKind : struct
     {
-        if (HasMatchingScope(AnalysisContext.SupportedDiagnostics))
+        if (this.HasMatchingScope(AnalysisContext.SupportedDiagnostics))
         {
             ConcurrentDictionary<SyntaxTree, bool> shouldAnalyzeCache = new();
             Context.RegisterSyntaxNodeAction(x =>

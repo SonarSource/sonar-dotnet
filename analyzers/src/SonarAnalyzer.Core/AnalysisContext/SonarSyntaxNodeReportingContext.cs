@@ -16,17 +16,15 @@
 
 namespace SonarAnalyzer.AnalysisContext;
 
-public sealed class SonarSyntaxNodeReportingContext : SonarTreeReportingContextBase<SyntaxNodeAnalysisContext>
+public readonly record struct SonarSyntaxNodeReportingContext(SonarAnalysisContext AnalysisContext, SyntaxNodeAnalysisContext Context) : ITreeReport, IAnalysisContext
 {
-    public override SyntaxTree Tree => Context.Node.SyntaxTree;
-    public override Compilation Compilation => Context.Compilation;
-    public override AnalyzerOptions Options => Context.Options;
-    public override CancellationToken Cancel => Context.CancellationToken;
+    public SyntaxTree Tree => Context.Node.SyntaxTree;
+    public Compilation Compilation => Context.Compilation;
+    public AnalyzerOptions Options => Context.Options;
+    public CancellationToken Cancel => Context.CancellationToken;
     public SyntaxNode Node => Context.Node;
     public SemanticModel SemanticModel => Context.SemanticModel;
     public ISymbol ContainingSymbol => Context.ContainingSymbol;
-
-    internal SonarSyntaxNodeReportingContext(SonarAnalysisContext analysisContext, SyntaxNodeAnalysisContext context) : base(analysisContext, context) { }
 
     /// <summary>
     /// Roslyn invokes the analyzer twice for positional records. The first invocation is for the class declaration and the second for the ctor represented by the positional parameter list.
@@ -66,6 +64,38 @@ public sealed class SonarSyntaxNodeReportingContext : SonarTreeReportingContextB
             ? method
             : null;
 
-    private protected override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
+    public bool IsRazorAnalysisEnabled() =>
+        AnalysisContext.IsRazorAnalysisEnabled(Options, Compilation);
+
+    public ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
         new(this, diagnostic);
+
+    public void ReportIssue(DiagnosticDescriptor rule,
+                            Location primaryLocation,
+                            IEnumerable<SecondaryLocation> secondaryLocations = null,
+                            ImmutableDictionary<string, string> properties = null,
+                            params string[] messageArgs)
+    {
+        var @this = this;
+        IssueReporter.ReportIssueCore(
+            Compilation,
+            x => @this.HasMatchingScope(x),
+            CreateReportingContext,
+            rule,
+            primaryLocation,
+            secondaryLocations,
+            properties,
+            messageArgs);
+    }
+
+    [Obsolete("Use another overload of ReportIssue, without calling Diagnostic.Create")]
+    public void ReportIssue(Diagnostic diagnostic)
+    {
+        var @this = this;
+        IssueReporter.ReportIssueCore(
+            Compilation,
+            x => @this.HasMatchingScope(x),
+            CreateReportingContext,
+            diagnostic);
+    }
 }

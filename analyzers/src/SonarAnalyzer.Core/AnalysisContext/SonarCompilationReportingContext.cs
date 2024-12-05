@@ -33,7 +33,7 @@ public sealed class SonarCompilationReportingContext : SonarCompilationReporting
 
     public IEnumerable<string> WebConfigFiles()
     {
-        return ProjectConfiguration().FilesToAnalyze.FindFiles(WebConfigRegex).Where(ShouldProcess);
+        return this.ProjectConfiguration().FilesToAnalyze.FindFiles(WebConfigRegex).Where(ShouldProcess);
 
         static bool ShouldProcess(string path) =>
             !Path.GetFileName(path).Equals("web.debug.config", StringComparison.OrdinalIgnoreCase);
@@ -41,12 +41,12 @@ public sealed class SonarCompilationReportingContext : SonarCompilationReporting
 
     public IEnumerable<string> AppSettingsFiles()
     {
-        return ProjectConfiguration().FilesToAnalyze.FindFiles(AppSettingsRegex).Where(ShouldProcess);
+        return this.ProjectConfiguration().FilesToAnalyze.FindFiles(AppSettingsRegex).Where(ShouldProcess);
 
         static bool ShouldProcess(string path) =>
             !Path.GetFileName(path).Equals("appsettings.development.json", StringComparison.OrdinalIgnoreCase);
     }
 
-    private protected override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
+    public override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
         new(this, diagnostic);
 }

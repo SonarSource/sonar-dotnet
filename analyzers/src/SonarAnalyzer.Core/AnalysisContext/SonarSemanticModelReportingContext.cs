@@ -26,6 +26,6 @@ public sealed class SonarSemanticModelReportingContext : SonarTreeReportingConte
 
     internal SonarSemanticModelReportingContext(SonarAnalysisContext analysisContext, SemanticModelAnalysisContext context) : base(analysisContext, context) { }
 
-    private protected override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
+    public override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
         new(this, diagnostic);
 }

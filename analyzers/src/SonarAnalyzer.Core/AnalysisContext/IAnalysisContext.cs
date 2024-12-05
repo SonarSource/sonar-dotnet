@@ -16,15 +16,9 @@
 
 namespace SonarAnalyzer.AnalysisContext;
 
-public sealed class SonarSymbolReportingContext : SonarCompilationReportingContextBase<SymbolAnalysisContext>
+public interface IAnalysisContext
 {
-    public override Compilation Compilation => Context.Compilation;
-    public override AnalyzerOptions Options => Context.Options;
-    public override CancellationToken Cancel => Context.CancellationToken;
-    public ISymbol Symbol => Context.Symbol;
-
-    internal SonarSymbolReportingContext(SonarAnalysisContext analysisContext, SymbolAnalysisContext context) : base(analysisContext, context) { }
-
-    public override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
-       new(this, diagnostic);
+    public Compilation Compilation { get; }
+    public AnalyzerOptions Options { get; }
+    public SonarAnalysisContext AnalysisContext { get; }
 }

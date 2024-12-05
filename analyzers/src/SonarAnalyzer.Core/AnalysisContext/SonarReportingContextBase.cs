@@ -16,137 +16,52 @@
 
 namespace SonarAnalyzer.AnalysisContext;
 
-public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContextBase<TContext>
+public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContextBase<TContext>, IReport
 {
-    private protected abstract ReportingContext CreateReportingContext(Diagnostic diagnostic);
+    public abstract ReportingContext CreateReportingContext(Diagnostic diagnostic);
 
     protected SonarReportingContextBase(SonarAnalysisContext analysisContext, TContext context) : base(analysisContext, context) { }
-
-    protected void ReportIssueCore(Diagnostic diagnostic)
-    {
-        diagnostic = EnsureDiagnosticLocation(diagnostic);
-        if (!GeneratedCodeRecognizer.IsRazorGeneratedFile(diagnostic.Location.SourceTree) // In case of Razor generated content, we don't want to raise any issues
-            && HasMatchingScope(diagnostic.Descriptor)
-            && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(diagnostic.Descriptor, diagnostic.Location?.SourceTree))
-        {
-            var reportingContext = CreateReportingContext(diagnostic);
-            if (!diagnostic.Location.IsValid(reportingContext.Compilation))
-            {
-                Debug.Fail("Primary location should be part of the compilation. An AD0001 is raised if this is not the case.");
-                return;
-            }
-            // This is the current way SonarLint will handle how and what to report.
-            if (SonarAnalysisContext.ReportDiagnostic is not null)
-            {
-                Debug.Assert(SonarAnalysisContext.ShouldDiagnosticBeReported is null, "Not expecting SonarLint to set both the old and the new delegates.");
-                SonarAnalysisContext.ReportDiagnostic(reportingContext);
-                return;
-            }
-            // Standalone NuGet, Scanner run and SonarLint < 4.0 used with latest NuGet
-            if (!VbcHelper.IsTriggeringVbcError(reportingContext.Diagnostic)
-                && (SonarAnalysisContext.ShouldDiagnosticBeReported?.Invoke(reportingContext.SyntaxTree, reportingContext.Diagnostic) ?? true))
-            {
-                reportingContext.ReportDiagnostic(reportingContext.Diagnostic);
-            }
-        }
-    }
-
-    private static Diagnostic EnsureDiagnosticLocation(Diagnostic diagnostic)
-    {
-        if (!GeneratedCodeRecognizer.IsRazorGeneratedFile(diagnostic.Location.SourceTree) || !diagnostic.Location.GetMappedLineSpan().HasMappedPath)
-        {
-            return diagnostic;
-        }
-
-        var mappedLocation = diagnostic.Location.EnsureMappedLocation();
-
-        var descriptor = new DiagnosticDescriptor(diagnostic.Descriptor.Id,
-            diagnostic.Descriptor.Title,
-            diagnostic.GetMessage(),
-            diagnostic.Descriptor.Category,
-            diagnostic.Descriptor.DefaultSeverity,
-            diagnostic.Descriptor.IsEnabledByDefault,
-            diagnostic.Descriptor.Description,
-            diagnostic.Descriptor.HelpLinkUri,
-            diagnostic.Descriptor.CustomTags.ToArray());
-
-        return Diagnostic.Create(descriptor,
-            mappedLocation,
-            diagnostic.AdditionalLocations.Select(x => x.EnsureMappedLocation()).ToImmutableList(),
-            diagnostic.Properties);
-    }
 }
 
 /// <summary>
 /// Base class for reporting contexts that are executed on a known Tree. The decisions about generated code and unchanged files are taken during action registration.
 /// </summary>
-public abstract class SonarTreeReportingContextBase<TContext> : SonarReportingContextBase<TContext>
+public abstract class SonarTreeReportingContextBase<TContext> : SonarReportingContextBase<TContext>, ITreeReport
 {
     public abstract SyntaxTree Tree { get; }
 
     protected SonarTreeReportingContextBase(SonarAnalysisContext analysisContext, TContext context) : base(analysisContext, context) { }
 
+    public void ReportIssue(DiagnosticDescriptor rule,
+                             Location primaryLocation,
+                             IEnumerable<SecondaryLocation> secondaryLocations = null,
+                             ImmutableDictionary<string, string> properties = null,
+                             params string[] messageArgs) =>
+        IssueReporter.ReportIssueCore(
+            Compilation,
+            x => this.HasMatchingScope(x),
+            CreateReportingContext,
+            rule,
+            primaryLocation,
+            secondaryLocations,
+            properties,
+            messageArgs);
+
     [Obsolete("Use another overload of ReportIssue, without calling Diagnostic.Create")]
     public void ReportIssue(Diagnostic diagnostic) =>
-        ReportIssueCore(diagnostic);
-
-    public void ReportIssue(DiagnosticDescriptor rule, SyntaxNode locationSyntax, params string[] messageArgs) =>
-        ReportIssue(rule, locationSyntax.GetLocation(), messageArgs);
-
-    public void ReportIssue(DiagnosticDescriptor rule, SyntaxNode locationSyntax, ImmutableDictionary<string, string> properties, params string[] messageArgs) =>
-        ReportIssue(rule, locationSyntax.GetLocation(), properties, messageArgs);
-
-    public void ReportIssue(DiagnosticDescriptor rule, SyntaxNode primaryLocationSyntax, IEnumerable<SecondaryLocation> secondaryLocations, params string[] messageArgs) =>
-        ReportIssue(rule, primaryLocationSyntax.GetLocation(), secondaryLocations, messageArgs);
-
-    public void ReportIssue(DiagnosticDescriptor rule, SyntaxToken locationToken, params string[] messageArgs) =>
-        ReportIssue(rule, locationToken.GetLocation(), messageArgs);
-
-    public void ReportIssue(DiagnosticDescriptor rule, SyntaxToken locationToken, ImmutableDictionary<string, string> properties, params string[] messageArgs) =>
-        ReportIssue(rule, locationToken.GetLocation(), properties, messageArgs);
-
-    public void ReportIssue(DiagnosticDescriptor rule, SyntaxToken primaryLocationToken, IEnumerable<SecondaryLocation> secondaryLocations, params string[] messageArgs) =>
-        ReportIssue(rule, primaryLocationToken.GetLocation(), secondaryLocations, messageArgs);
-
-    public void ReportIssue(DiagnosticDescriptor rule, Location location, params string[] messageArgs) =>
-        ReportIssueCore(Diagnostic.Create(rule, location, messageArgs));
-
-    public void ReportIssue(DiagnosticDescriptor rule, Location location, ImmutableDictionary<string, string> properties, params string[] messageArgs) =>
-        ReportIssueCore(Diagnostic.Create(rule, location, properties, messageArgs));
-
-    public void ReportIssue(DiagnosticDescriptor rule, Location primaryLocation, IEnumerable<SecondaryLocation> secondaryLocations, params string[] messageArgs) =>
-        ReportIssue(rule, primaryLocation, secondaryLocations, ImmutableDictionary<string, string>.Empty, messageArgs);
-
-    public void ReportIssue(DiagnosticDescriptor rule,
-                            Location primaryLocation,
-                            IEnumerable<SecondaryLocation> secondaryLocations,
-                            ImmutableDictionary<string, string> properties,
-                            params string[] messageArgs)
-    {
-        _ = rule ?? throw new ArgumentNullException(nameof(rule));
-        _ = secondaryLocations ?? throw new ArgumentNullException(nameof(secondaryLocations));
-        _ = properties ?? throw new ArgumentNullException(nameof(properties));
-        secondaryLocations = secondaryLocations.Where(x => x.Location.IsValid(Compilation)).ToArray();
-        properties = properties.AddRange(secondaryLocations.Select((x, index) => new KeyValuePair<string, string>(index.ToString(), x.Message)));
-        ReportIssueCore(Diagnostic.Create(rule, primaryLocation, secondaryLocations.Select(x => x.Location), properties, messageArgs));
-    }
+        IssueReporter.ReportIssueCore(
+            Compilation,
+            x => this.HasMatchingScope(x),
+            CreateReportingContext,
+            diagnostic);
 }
 
 /// <summary>
 /// Base class for reporting contexts that are common for the entire compilation. Specific tree is not known before the action is executed.
 /// </summary>
-public abstract class SonarCompilationReportingContextBase<TContext> : SonarReportingContextBase<TContext>
+public abstract class SonarCompilationReportingContextBase<TContext> : SonarReportingContextBase<TContext>, ICompilationReport
 {
     protected SonarCompilationReportingContextBase(SonarAnalysisContext analysisContext, TContext context) : base(analysisContext, context) { }
-
-    [Obsolete("Use another overload of ReportIssue, without calling Diagnostic.Create")]
-    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
-    {
-        if (ShouldAnalyzeTree(diagnostic.Location.SourceTree, generatedCodeRecognizer))
-        {
-            ReportIssueCore(diagnostic);
-        }
-    }
 
     public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, DiagnosticDescriptor rule, SyntaxNode locationSyntax, params string[] messageArgs) =>
         ReportIssue(generatedCodeRecognizer, rule, locationSyntax.GetLocation(), messageArgs);
@@ -154,27 +69,36 @@ public abstract class SonarCompilationReportingContextBase<TContext> : SonarRepo
     public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, DiagnosticDescriptor rule, SyntaxToken locationToken, params string[] messageArgs) =>
         ReportIssue(generatedCodeRecognizer, rule, locationToken.GetLocation(), messageArgs);
 
-    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, DiagnosticDescriptor rule, Location location, params string[] messageArgs)
-    {
-        if (ShouldAnalyzeTree(location?.SourceTree, generatedCodeRecognizer))
-        {
-            ReportIssueCore(Diagnostic.Create(rule, location, messageArgs));
-        }
-    }
+    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, DiagnosticDescriptor rule, Location location, params string[] messageArgs) =>
+        ReportIssue(generatedCodeRecognizer, rule, location, [], messageArgs);
 
     public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer,
                             DiagnosticDescriptor rule,
                             Location primaryLocation,
-                            IEnumerable<SecondaryLocation> secondaryLocations,
+                            IEnumerable<SecondaryLocation> secondaryLocations = null,
                             params string[] messageArgs)
     {
-        _ = rule ?? throw new ArgumentNullException(nameof(rule));
-        _ = secondaryLocations ?? throw new ArgumentNullException(nameof(secondaryLocations));
         if (ShouldAnalyzeTree(primaryLocation?.SourceTree, generatedCodeRecognizer))
         {
-            secondaryLocations = secondaryLocations.Where(x => x.Location.IsValid(Compilation)).ToArray();
-            var properties = secondaryLocations.Select((x, index) => new KeyValuePair<string, string>(index.ToString(), x.Message)).ToImmutableDictionary();
-            ReportIssueCore(Diagnostic.Create(rule, primaryLocation, secondaryLocations.Select(x => x.Location), properties, messageArgs));
+            secondaryLocations = secondaryLocations?.Where(x => x.Location.IsValid(Compilation)).ToArray();
+            IssueReporter.ReportIssueCore(
+                Compilation,
+                x => this.HasMatchingScope(x),
+                CreateReportingContext,
+                rule,
+                primaryLocation,
+                secondaryLocations,
+                ImmutableDictionary<string, string>.Empty,
+                messageArgs);
+        }
+    }
+
+    [Obsolete("Use another overload of ReportIssue, without calling Diagnostic.Create")]
+    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
+    {
+        if (ShouldAnalyzeTree(diagnostic.Location.SourceTree, generatedCodeRecognizer))
+        {
+            IssueReporter.ReportIssueCore(Compilation, this.HasMatchingScope, CreateReportingContext, diagnostic);
         }
     }
 }

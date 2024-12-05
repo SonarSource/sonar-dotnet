@@ -26,6 +26,6 @@ public sealed class SonarSyntaxTreeReportingContext : SonarTreeReportingContextB
     internal SonarSyntaxTreeReportingContext(SonarAnalysisContext analysisContext, SyntaxTreeAnalysisContext context, Compilation compilation) : base(analysisContext, context) =>
         Compilation = compilation ?? throw new ArgumentNullException(nameof(compilation));
 
-    private protected override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
+    public override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
         new(this, diagnostic);
 }

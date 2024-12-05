@@ -21,6 +21,23 @@ namespace SonarAnalyzer.Core.Extensions;
 
 public static class AnalyzerOptionsExtensions
 {
+    private static readonly SourceTextValueProvider<SonarLintXmlReader> SonarLintXmlProvider = new(x => new SonarLintXmlReader(x));
+
+    public static SonarLintXmlReader SonarLintXml(this AnalyzerOptions options, SonarAnalysisContext context)
+    {
+        if (options.SonarLintXml() is { } sonarLintXml)
+        {
+            return sonarLintXml.GetText() is { } sourceText
+                && context.TryGetValue(sourceText, SonarLintXmlProvider, out var sonarLintXmlReader)
+                ? sonarLintXmlReader
+                : throw new InvalidOperationException($"File '{Path.GetFileName(sonarLintXml.Path)}' has been added as an AdditionalFile but could not be read and parsed.");
+        }
+        else
+        {
+            return SonarLintXmlReader.Empty;
+        }
+    }
+
     public static AdditionalText SonarLintXml(this AnalyzerOptions options) =>
         options.AdditionalFile("SonarLint.xml");
 

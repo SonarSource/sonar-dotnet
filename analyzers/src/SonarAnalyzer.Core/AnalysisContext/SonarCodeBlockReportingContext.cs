@@ -28,6 +28,6 @@ public sealed class SonarCodeBlockReportingContext : SonarTreeReportingContextBa
 
     internal SonarCodeBlockReportingContext(SonarAnalysisContext analysisContext, CodeBlockAnalysisContext context) : base(analysisContext, context) { }
 
-    private protected override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
+    public override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
         new(this, diagnostic);
 }

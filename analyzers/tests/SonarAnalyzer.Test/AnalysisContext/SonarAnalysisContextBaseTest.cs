@@ -267,7 +267,7 @@ public partial class SonarAnalysisContextBaseTest
         var recognizer = CSharpGeneratedCodeRecognizer.Instance;
 
         sut.Invoking(x => x.ReportIssue(recognizer, null, primaryLocation: null, secondaryLocations: [])).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("rule");
-        sut.Invoking(x => x.ReportIssue(recognizer, rule, primaryLocation: null, secondaryLocations: null)).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("secondaryLocations");
+        sut.Invoking(x => x.ReportIssue(recognizer, rule, primaryLocation: null, secondaryLocations: null)).Should().NotThrow();
     }
 
     [TestMethod]

@@ -16,7 +16,7 @@
 
 namespace SonarAnalyzer.Helpers;
 
-internal class ReportingContext : IReportingContext
+public class ReportingContext : IReportingContext
 {
     private readonly Action<Diagnostic> roslynReportDiagnostic;
 

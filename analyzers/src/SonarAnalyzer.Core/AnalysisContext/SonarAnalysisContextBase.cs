@@ -15,10 +15,8 @@
  */
 
 using System.Collections.Concurrent;
-using System.IO;
 using System.Runtime.CompilerServices;
 using Roslyn.Utilities;
-using static SonarAnalyzer.Analyzers.DiagnosticDescriptorFactory;
 
 namespace SonarAnalyzer.AnalysisContext;
 
@@ -26,13 +24,11 @@ public class SonarAnalysisContextBase
 {
     protected static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<string, bool>> FileInclusionCache = new();
     protected static readonly ConditionalWeakTable<Compilation, ImmutableHashSet<string>> UnchangedFilesCache = new();
-    protected static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));
-    protected static readonly SourceTextValueProvider<SonarLintXmlReader> SonarLintXmlProvider = new(x => new SonarLintXmlReader(x));
 
     protected SonarAnalysisContextBase() { }
 }
 
-public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextBase
+public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextBase, IAnalysisContext
 {
     private const string RazorGeneratedFileSuffix = "_razor.g.cs";
 
@@ -52,60 +48,11 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     /// <param name="tree">Tree to decide on. Can be null for Symbol-based and Compilation-based scenarios. And we want to analyze those too.</param>
     /// <param name="generatedCodeRecognizer">When set, generated trees are analyzed only when language-specific 'analyzeGeneratedCode' configuration property is also set.</param>
     public bool ShouldAnalyzeTree(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
-        SonarLintXml() is var sonarLintXml
+        this.SonarLintXml() is var sonarLintXml
         && (generatedCodeRecognizer is null
             || sonarLintXml.AnalyzeGeneratedCode(Compilation.Language)
-            || !tree.IsConsideredGenerated(generatedCodeRecognizer, IsRazorAnalysisEnabled()))
+            || !tree.IsConsideredGenerated(generatedCodeRecognizer, this.IsRazorAnalysisEnabled()))
         && (tree is null || (!IsUnchanged(tree) && !IsExcluded(sonarLintXml, tree.FilePath)));
-
-    /// <summary>
-    /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
-    /// </summary>
-    public ProjectConfigReader ProjectConfiguration()
-    {
-        if (Options.SonarProjectConfig() is { } sonarProjectConfig)
-        {
-            return sonarProjectConfig.GetText() is { } sourceText
-                // TryGetValue catches all exceptions from SourceTextValueProvider and returns false when exception is thrown
-                && AnalysisContext.TryGetValue(sourceText, ProjectConfigProvider, out var cachedProjectConfigReader)
-                ? cachedProjectConfigReader
-                : throw new InvalidOperationException($"File '{Path.GetFileName(sonarProjectConfig.Path)}' has been added as an AdditionalFile but could not be read and parsed.");
-        }
-        else
-        {
-            return ProjectConfigReader.Empty;
-        }
-    }
-
-    /// <summary>
-    /// Reads the properties from the SonarLint.xml file and caches the result for the scope of this analysis.
-    /// </summary>
-    public SonarLintXmlReader SonarLintXml()
-    {
-        if (Options.SonarLintXml() is { } sonarLintXml)
-        {
-            return sonarLintXml.GetText() is { } sourceText
-                && AnalysisContext.TryGetValue(sourceText, SonarLintXmlProvider, out var sonarLintXmlReader)
-                ? sonarLintXmlReader
-                : throw new InvalidOperationException($"File '{Path.GetFileName(sonarLintXml.Path)}' has been added as an AdditionalFile but could not be read and parsed.");
-        }
-        else
-        {
-            return SonarLintXmlReader.Empty;
-        }
-    }
-
-    public bool IsRazorAnalysisEnabled() =>
-        ProjectConfiguration().ProjectType != ProjectType.Unknown
-        && SonarLintXml().AnalyzeRazorCode(Compilation.Language);
-
-    public bool IsTestProject()
-    {
-        var projectType = ProjectConfiguration().ProjectType;
-        return projectType == ProjectType.Unknown
-            ? Compilation.IsTest()              // SonarLint, NuGet or Scanner <= 5.0
-            : projectType == ProjectType.Test;  // Scanner >= 5.1 does authoritative decision that we follow
-    }
 
     [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = true, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
     public bool IsUnchanged(SyntaxTree tree)
@@ -117,51 +64,25 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         return unchangedFiles.Contains(MapFilePath(tree));
     }
 
-    public bool HasMatchingScope(ImmutableArray<DiagnosticDescriptor> descriptors)
-    {
-        // Performance: Don't use descriptors.Any(HasMatchingScope), the delegate creation allocates too much memory. https://github.com/SonarSource/sonar-dotnet/issues/7438
-        foreach (var descriptor in descriptors)
-        {
-            if (HasMatchingScope(descriptor))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public bool HasMatchingScope(DiagnosticDescriptor descriptor)
-    {
-        // MMF-2297: Test Code as 1st Class Citizen is not ready on server side yet.
-        // ScannerRun: Only utility rules and rules with TEST-ONLY scope are executed for test projects for now.
-        // SonarLint & Standalone NuGet & Internal styling rules Txxxx: Respect the scope as before.
-        return IsTestProject()
-            ? ContainsTag(TestSourceScopeTag) && !(descriptor.Id.StartsWith("S") && ProjectConfiguration().IsScannerRun && ContainsTag(MainSourceScopeTag) && !ContainsTag(UtilityTag))
-            : ContainsTag(MainSourceScopeTag);
-
-        bool ContainsTag(string tag) =>
-            descriptor.CustomTags.Contains(tag);
-    }
-
     [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
     private bool IsExcluded(SonarLintXmlReader sonarLintXml, string filePath)
     {
         // If ProjectType is not 'Unknown' it means we are in S4NET context and all files are analyzed.
         // If ProjectType is 'Unknown' then we are in SonarLint or NuGet context and we need to check if the file has been excluded from analysis through SonarLint.xml.
-        if (ProjectConfiguration().ProjectType == ProjectType.Unknown)
+        if (this.ProjectConfiguration().ProjectType == ProjectType.Unknown)
         {
             var fileInclusionCache = FileInclusionCache.GetOrCreateValue(Compilation);
             // Hot path: Don't use GetOrAdd with the value factory parameter. It allocates a delegate which causes GC pressure.
             var isIncluded = fileInclusionCache.TryGetValue(filePath, out var result)
                 ? result
-                : fileInclusionCache.GetOrAdd(filePath, sonarLintXml.IsFileIncluded(filePath, IsTestProject()));
+                : fileInclusionCache.GetOrAdd(filePath, sonarLintXml.IsFileIncluded(filePath, this.IsTestProject()));
             return !isIncluded;
         }
         return false;
     }
 
     private ImmutableHashSet<string> CreateUnchangedFilesHashSet() =>
-        ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration().AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
+        ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, this.ProjectConfiguration().AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
 
     private static string MapFilePath(SyntaxTree tree) =>
         // Currently only .razor file hashes are stored in the cache.
