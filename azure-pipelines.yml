@@ -1,16 +1,5 @@
-schedules:
-# Run from Monday to Friday at 5:30 UTC (https://docs.microsoft.com/en-us/azure/devops/pipelines/process/scheduled-triggers?view=azure-devops&tabs=yaml#cron-syntax)
-- cron: "30 5 * * 1-5"
-  displayName: Daily build
-  branches:
-    include:
-    - master
-    - branch-*
-  always: true
-
 trigger:
 - master
-- branch-*
 
 pool: .net-bubble-aws-re-team-prod
 
@@ -23,16 +12,12 @@ variables:
     value: $[variables.ARTIFACTORY_PRIVATE_READER_USERNAME]
   - name: ARTIFACTORY_QA_READER_USERNAME
     value: $[variables.ARTIFACTORY_PRIVATE_READER_USERNAME]
-  - name: UnitTestProjectPath
-    value: 'analyzers\tests\SonarAnalyzer.Test\'
   - name: UnitTestResultsPath
     value: '$(Build.SourcesDirectory)\TestResults'
   - name: CoveragePath
     value: '$(Build.SourcesDirectory)\coverage'
   - name: UnitTestExclusionsPattern
     value: 'analyzers/tests/SonarAnalyzer.Test/TestCases/**/*'
-  - name: vsVersion
-    value: '17.0'
 
 resources:
   repositories:
@@ -45,8 +30,8 @@ stages:
 - stage: build
   displayName: 'Build:'
   jobs:
-  - job: dotnetBuildjob
-    displayName: 'Build and package'
+  - job: build
+    displayName: 'Build'
     workspace:
       clean: all
 
@@ -71,105 +56,6 @@ stages:
 
     - powershell: .\scripts\set-version.ps1 -Version $(SHORT_VERSION) -BuildNumber $(Build.BuildId) -Branch $(Build.SourceBranchName) -Sha1 $(Build.SourceVersion)
       displayName: "Set Version"
-
-    - task: VSBuild@1
-      displayName: "Build SonarAnalyzer solution"
-      inputs:
-        solution: '$(solution)'
-        platform: '$(buildPlatform)'
-        configuration: '$(buildConfiguration)'
-        msbuildArgs: '/p:WarningLevel=0'
-        vsVersion: $(vsVersion)
-
-    - task: NuGetCommand@2
-      displayName: "Build NuGet packages"
-      inputs:
-        command: pack
-        packagesToPack: 'analyzers/packaging/*.nuspec'
-        configuration: '$(BuildConfiguration)'
-        buildProperties: 'Version=$(FULL_VERSION)'
-        packDestination: '$(Build.ArtifactStagingDirectory)/packages'
-        verbosityPack: 'Detailed'
-        publishPackageMetadata: true
-
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish NuGet packages as build artifacts'
-      inputs:
-        pathToPublish: '$(Build.ArtifactStagingDirectory)/packages'
-        artifactName: 'NuGet Packages'
-
-    - task: PublishPipelineArtifact@1
-      displayName: 'Publish analyzer binaries as pipeline artifact'
-      inputs:
-        path: analyzers/packaging/binaries/
-        artifact: Binaries
-
-    - task: PublishPipelineArtifact@1
-      displayName: 'Publish analyzer test binaries as pipeline artifact'
-      inputs:
-        path: '$(UnitTestProjectPath)\bin'
-        artifact: TestBinaries
-
-- stage: qa
-  # .NET code analysis, UTs, ITs, build Java and publish SC QG
-  displayName: 'Tests:'
-  dependsOn: build
-
-  jobs:
-  - job: runUnitTestsDotNet
-    displayName: '.NET UTs'
-    workspace:
-      clean: all
-    steps:
-    - task: DownloadPipelineArtifact@2
-      displayName: 'Download binaries to test'
-      inputs:
-        artifact: TestBinaries
-        targetPath: '$(UnitTestProjectPath)\bin'
-
-    - powershell: |
-        $ProjectNameToken = '$(ProjectName)'  # Workaround for escaping difficulties: Azure DevOps doesn't have ProjectName, so it will not replace it. We need to pass it like that into AltCover via powershell.
-        dotnet test $(Solution) -c $(BuildConfiguration) -l trx --results-directory $(UnitTestResultsPath) /p:AltCover=true,AltCoverForce=true,AltCoverVisibleBranches=true,AltCoverAssemblyFilter="testhost|Moq|Humanizer|AltCover|Microsoft|\.Test^",AltCoverPathFilter="SonarAnalyzer\.CFG\\ShimLayer|SonarAnalyzer\.ShimLayer\.CodeGeneration",AltCoverAttributeFilter="ExcludeFromCodeCoverage",AltCoverReport="$(CoveragePath)/coverage.$ProjectNameToken.xml"
-      displayName: '.Net UTs'
-      env:
-        ARTIFACTORY_USER: $(ARTIFACTORY_PRIVATE_READER_USERNAME)
-        ARTIFACTORY_PASSWORD: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
-
-    - task: PublishPipelineArtifact@1
-      displayName: 'Save coverage file'
-      inputs:
-        path: '$(CoveragePath)'
-        artifact: DotNetCoverage
-
-    - task: PublishPipelineArtifact@1
-      displayName: 'Save test results files'
-      inputs:
-        path: '$(UnitTestResultsPath)'
-        artifact: DotNetTestResults
-
-    - task: PublishTestResults@2
-      condition: always()
-      displayName: 'Publish test results'
-      inputs:
-        testRunner: VSTest
-        testResultsFiles: '*.trx'
-        searchFolder: '$(UnitTestResultsPath)'
-        testRunTitle: '$(Agent.JobName)'
-
-  - job: dotNetAnalysis
-    displayName: '.Net Analysis'
-    workspace:
-      clean: all
-    # This job runs the .Net code analysis and uploads to SonarCloud the test results and coverage reports generated
-    # in previous jobs.
-    condition: eq(dependencies.runUnitTestsDotNet.result, 'Succeeded')
-    dependsOn:
-    - runUnitTestsDotNet
-    steps:
-    - task: NuGetToolInstaller@1
-      displayName: "Install NuGet"
-
-    - template: set-azp-variables-steps.yml@pipelines-yaml-templates
 
     - task: SonarCloudPrepare@2
       displayName: 'Code Analysis - Begin (PR)'
@@ -212,50 +98,40 @@ stages:
           sonar.analysis.sha1=$(Build.SourceVersion)
           sonar.analysis.repository=$(Build.Repository.ID)
 
-    - powershell: .\scripts\set-version.ps1 -Version $(SHORT_VERSION) -BuildNumber $(Build.BuildId) -Branch $(Build.SourceBranchName) -Sha1 $(Build.SourceVersion)
-      displayName: "Set Version"
-
-    - script: '"$(MSBUILD_PATH)" /t:restore /p:RestoreLockedMode=true /p:RestoreConfigFile="analyzers\NuGet.Config" $(solution)'
+    - powershell: |
+        $ProjectNameToken = '$(ProjectName)'  # Workaround for escaping difficulties: Azure DevOps doesn't have ProjectName, so it will not replace it. We need to pass it like that into AltCover via powershell.
+        dotnet test $(Solution) -c $(BuildConfiguration) -l trx --results-directory $(UnitTestResultsPath) /p:RunAnalyzers=true /p:AltCover=true,AltCoverForce=true,AltCoverVisibleBranches=true,AltCoverAssemblyFilter="testhost|Moq|Humanizer|AltCover|Microsoft|\.Test^",AltCoverPathFilter="SonarAnalyzer\.CFG\\ShimLayer|SonarAnalyzer\.ShimLayer\.CodeGeneration",AltCoverAttributeFilter="ExcludeFromCodeCoverage",AltCoverReport="$(CoveragePath)/coverage.$ProjectNameToken.xml"
+        dotnet build analyzers\src\RuleDescriptorGenerator\RuleDescriptorGenerator.csproj -c $(BuildConfiguration) /p:RunAnalyzers=true # This does not have a test project => we need to build it separately
+      displayName: '.Net UTs'
       env:
         ARTIFACTORY_USER: $(ARTIFACTORY_PRIVATE_READER_USERNAME)
         ARTIFACTORY_PASSWORD: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
-      displayName: "NuGet Restore"
 
-    - task: VSBuild@1
-      displayName: "Run .Net code analysis"
+    - task: PublishTestResults@2
+      condition: always()
+      displayName: 'Publish test results'
       inputs:
-        solution: '$(solution)'
-        platform: '$(buildPlatform)'
-        configuration: '$(buildConfiguration)'
-        msbuildArgs: '/p:RunAnalyzers=true'
-        vsVersion: $(vsVersion)
+        testRunner: VSTest
+        testResultsFiles: '*.trx'
+        searchFolder: '$(UnitTestResultsPath)'
+        testRunTitle: '$(Agent.JobName)'
 
-    - task: DownloadPipelineArtifact@2
-      displayName: 'Download coverage report'
+    - task: NuGetCommand@2
+      displayName: "Build NuGet packages"
       inputs:
-        artifact: DotNetCoverage
-        targetPath: 'coverage'
+        command: pack
+        packagesToPack: 'analyzers/packaging/*.nuspec'
+        configuration: '$(BuildConfiguration)'
+        buildProperties: 'Version=$(FULL_VERSION)'
+        packDestination: '$(Build.ArtifactStagingDirectory)/packages'
+        verbosityPack: 'Detailed'
+        publishPackageMetadata: true
 
-    - task: DownloadPipelineArtifact@2
-      displayName: 'Download test results'
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish NuGet packages as build artifacts'
       inputs:
-        artifact: DotNetTestResults
-        targetPath: 'TestResults'
-
-    - powershell: |
-        # Coverage is computed in another job and can have a different base path.
-        # We need to normalize content of the coverage files to the current VM job path.
-        # Values generated by the agent can look like this:
-        #   `C:\sonar-ci\_work\1\s`
-        #   `C:\sonar-ci\_work\2\s`
-        $CurrentPath = ${env:BUILD_SOURCESDIRECTORY}
-        $Pattern = [Regex]::Escape($CurrentPath) -Replace "\\\\\d+\\\\","\\\d+\\" # We replace the existing escaped "\\1\\" digit(s) with actual pattern to search for any other digit(s)
-        dir coverage.xml | % {
-            $Path = $_.FullName
-            Write-Host "Updating ${Path} to common root ${CurrentPath}"
-            (Get-Content -Path $Path -Raw) -Replace $Pattern,$CurrentPath | Set-Content $Path
-        }
-      displayName: Fix coverage paths
+        pathToPublish: '$(Build.ArtifactStagingDirectory)/packages'
+        artifactName: 'NuGet Packages'
 
     - task: SonarCloudAnalyze@2
       displayName: 'Code Analysis - End'
@@ -265,27 +141,11 @@ stages:
       inputs:
         pollingTimeoutSec: '300'
 
-  - job: buildJava
-    displayName: 'Java Build, UTs and Analysis'
-    workspace:
-      clean: all
-    steps:
     - task: DownloadSecureFile@1
       displayName: 'Download Maven settings'
       name: mavenSettings
       inputs:
         secureFile: 'maven-settings.xml'
-
-    - template: set-azp-variables-steps.yml@pipelines-yaml-templates
-
-    - powershell: .\scripts\set-version.ps1 -Version $(SHORT_VERSION) -BuildNumber $(Build.BuildId) -Branch $(Build.SourceBranchName) -Sha1 $(Build.SourceVersion)
-      displayName: "Set Version"
-
-    - task: DownloadPipelineArtifact@2
-      displayName: 'Download .NET binaries for Maven build'
-      inputs:
-        artifact: Binaries
-        targetPath: 'analyzers/packaging/binaries/'
 
     - task: SonarCloudPrepare@2
       displayName: 'Prepare code analysis for Java plugin'
