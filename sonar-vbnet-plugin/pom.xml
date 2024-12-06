@@ -40,7 +40,6 @@
   <properties>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
-    <documentationDirectory>${project.basedir}/src/main/resources</documentationDirectory>
     <rspec.directory>${project.build.directory}/../../analyzers/rspec</rspec.directory>
     <packaging.directory>${project.build.directory}/../../analyzers/packaging</packaging.directory>
     <maven.deploy.skip>false</maven.deploy.skip>
@@ -141,7 +140,6 @@
         <includes>
           <include>org/sonar/plugins/vbnet/*.json</include>
           <include>org/sonar/plugins/vbnet/*.html</include>
-          <include>static/documentation.md</include>
           <include>static/SonarAnalyzer-vbnet-${project.version}.zip</include>
         </includes>
       </resource>
@@ -247,11 +245,6 @@
                   <arg value="${sonarAnalyzer.workDirectory}/org/sonar/plugins/vbnet/Rules.json"/>
                   <arg value="${packaging.directory}/binaries/SonarAnalyzer.VisualBasic/SonarAnalyzer.VisualBasic.dll"/>
                 </exec>
-                <copy todir="${sonarAnalyzer.workDirectory}/static">
-                  <fileset dir="${documentationDirectory}">
-                    <include name="documentation.md"/>
-                  </fileset>
-                </copy>
               </target>
             </configuration>
             <goals>
