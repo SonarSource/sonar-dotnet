@@ -55,6 +55,18 @@ namespace DataDrivenWithXUnit.Test
 }
 ```
 
+## valid_generic_methods_csharp.xml
+
+This file is generated using the [Calculator](../samples/csharp/Calculator) project and was manually modified to:
+ - use relative path for the assembly
+ - keep only the `collection` with `Calculator.xUnit.GenericTests.GenericTestMethod` tests
+
+## valid_generic_methods_vbnet.xml
+
+This file is generated using the [Calculator](../samples/vbnet/Calculator) project and was manually modified to:
+- use relative path for the assembly
+- keep only the `collection` with `Calculator.xUnit.GenericTests.GenericTestMethod` tests
+
 ## valid_no_execution_time.xml
 
 This is a valid .xml file that consists of a single unit test that has had the execution time removed.

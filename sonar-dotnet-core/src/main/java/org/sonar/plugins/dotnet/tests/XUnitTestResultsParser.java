@@ -43,7 +43,6 @@ public class XUnitTestResultsParser implements UnitTestResultParser {
   }
 
   private static class Parser extends XmlTestReportParser {
-
     private String dllName;
 
     Parser(File file,  Map<String, UnitTestResults> unitTestResults, Map<String, String> methodFileMap, List<String> rootTags) {
@@ -51,28 +50,32 @@ public class XUnitTestResultsParser implements UnitTestResultParser {
     }
 
     private void handleAssemblyTag(XmlParserHelper xmlParserHelper) {
-      String assemblyName = xmlParserHelper.getRequiredAttribute("name");
+      var assemblyName = xmlParserHelper.getRequiredAttribute("name");
       dllName = extractDllNameFromFilePath(assemblyName);
       LOG.debug("XUnit Assembly found, assembly name: {}, Extracted dllName: {}", assemblyName, dllName);
     }
 
     private void handleTestTag(XmlParserHelper xmlParserHelper) {
-      String result = xmlParserHelper.getRequiredAttribute("result");
-      Double time = xmlParserHelper.getDoubleAttribute("time");
-      Long executionTime = time == null ? null : (long) (time * 1000);
-
+      var result = xmlParserHelper.getRequiredAttribute("result");
+      var time = xmlParserHelper.getDoubleAttribute("time");
+      var type = xmlParserHelper.getRequiredAttribute("type");
+      var name = xmlParserHelper.getRequiredAttribute("name");
+      var executionTime = time == null ? null : (long) (time * 1000);
       var testResults = new XUnitTestResults(result, executionTime);
-
-      String type = xmlParserHelper.getRequiredAttribute("type");
-      String name = xmlParserHelper.getRequiredAttribute("name");
-
-      String methodName = name.substring(name.lastIndexOf('.') + 1);
-      if(name.contains("(")) {
-        methodName = methodName.substring(0, methodName.indexOf('('));
-      }
-      String fullName = String.join(".", dllName, type, methodName);
+      var fullName = getFullName(type, name);
 
       addTestResultToFile(fullName, testResults);
+    }
+
+    private String getFullName(String type, String name) {
+      var methodName = name.substring(name.lastIndexOf('.') + 1);
+      if(methodName.contains("<")) {
+        methodName = methodName.substring(0, methodName.indexOf('<'));
+      }
+      if(methodName.contains("(")) {
+        methodName = methodName.substring(0, methodName.indexOf('('));
+      }
+      return String.join(".", dllName, type, methodName);
     }
   }
 }

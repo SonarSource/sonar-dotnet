@@ -148,6 +148,62 @@ public class XUnitTestResultParserTest {
   }
 
   @Test
+  public void valid_generic_method_csharp() {
+    var sut = new XUnitTestResultsParser();
+    Map<String, String> fileMap = Map.of("Calculator.xUnit.Calculator.xUnit.GenericTests.GenericTestMethod", "CalculatorTests.cs");
+    Map<String, UnitTestResults> results = new HashMap<>();
+
+    sut.parse(new File("src/test/resources/xunit/valid_generic_methods_csharp.xml"), results, fileMap);
+
+    assertThat(results).hasSize(1);
+    var calculatorTestsResult = results.get("CalculatorTests.cs");
+    assertThat(calculatorTestsResult.tests()).isEqualTo(2);
+    assertThat(calculatorTestsResult.failures()).isZero();
+    assertThat(calculatorTestsResult.skipped()).isZero();
+    assertThat(calculatorTestsResult.errors()).isZero();
+    assertThat(calculatorTestsResult.executionTime()).isEqualTo(5);
+
+    List<String> infoLogs = logTester.logs(Level.INFO);
+    assertThat(infoLogs).hasSize(1);
+    assertThat(infoLogs.get(0)).startsWith("Parsing the XUnit Test Results file ");
+
+    assertThat(logTester.logs(Level.DEBUG))
+      .hasSize(3)
+      .contains(
+        "XUnit Assembly found, assembly name: Calculator.xUnit\\bin\\Debug\\net9.0\\Calculator.xUnit.dll, Extracted dllName: Calculator.xUnit",
+        "Added Test Method: Calculator.xUnit.Calculator.xUnit.GenericTests.GenericTestMethod to File: CalculatorTests.cs",
+        "Added Test Method: Calculator.xUnit.Calculator.xUnit.GenericTests.GenericTestMethod to File: CalculatorTests.cs");
+  }
+
+  @Test
+  public void valid_generic_method_vbnet() {
+    Map<String, String> fileMap = Map.of("Calculator.xUnit.Calculator.xUnit.GenericTests.GenericTestMethod", "CalculatorTests.vb");
+    var sut = new XUnitTestResultsParser();
+    Map<String, UnitTestResults> results = new HashMap<>();
+
+    sut.parse(new File("src/test/resources/xunit/valid_generic_methods_vbnet.xml"), results, fileMap);
+
+    assertThat(results).hasSize(1);
+    var calculatorTestsResult = results.get("CalculatorTests.vb");
+    assertThat(calculatorTestsResult.tests()).isEqualTo(2);
+    assertThat(calculatorTestsResult.failures()).isZero();
+    assertThat(calculatorTestsResult.skipped()).isZero();
+    assertThat(calculatorTestsResult.errors()).isZero();
+    assertThat(calculatorTestsResult.executionTime()).isEqualTo(7);
+
+    List<String> infoLogs = logTester.logs(Level.INFO);
+    assertThat(infoLogs).hasSize(1);
+    assertThat(infoLogs.get(0)).startsWith("Parsing the XUnit Test Results file ");
+
+    assertThat(logTester.logs(Level.DEBUG))
+      .hasSize(3)
+      .contains(
+        "XUnit Assembly found, assembly name: Calculator.xUnit\\bin\\Debug\\net9.0\\Calculator.xUnit.dll, Extracted dllName: Calculator.xUnit",
+        "Added Test Method: Calculator.xUnit.Calculator.xUnit.GenericTests.GenericTestMethod to File: CalculatorTests.vb",
+        "Added Test Method: Calculator.xUnit.Calculator.xUnit.GenericTests.GenericTestMethod to File: CalculatorTests.vb");
+  }
+
+  @Test
   public void test_name_not_mapped() {
     var sut = new XUnitTestResultsParser();
     var file = new File("src/test/resources/xunit/test_name_not_mapped.xml");
