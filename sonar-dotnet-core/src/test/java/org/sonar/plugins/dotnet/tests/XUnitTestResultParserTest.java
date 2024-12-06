@@ -150,12 +150,13 @@ public class XUnitTestResultParserTest {
   @Test
   public void test_name_not_mapped() {
     var sut = new XUnitTestResultsParser();
-    Map<String, String> fileMap = Map.of("Some.Other.TestMethod", "C:\\dev\\Playground\\XUnit.Test\\Sample.cs");
-
     var file = new File("src/test/resources/xunit/test_name_not_mapped.xml");
 
-    var exception = assertThrows(IllegalStateException.class, () -> sut.parse(file, new HashMap<>(), fileMap));
-    assertEquals("Test method XUnitTestProj.XUnitTestProject1.UnitTest1.TestMethodDoesNotExist cannot be mapped to the test source file", exception.getMessage());
+    sut.parse(file, new HashMap<>(), Map.of("Some.Other.TestMethod", "C:\\dev\\Playground\\XUnit.Test\\Sample.cs"));
+
+    List<String> warnLogs = logTester.logs(Level.WARN);
+    assertThat(warnLogs).hasSize(1);
+    assertThat(warnLogs.get(0)).isEqualTo("Test method XUnitTestProj.XUnitTestProject1.UnitTest1.TestMethodDoesNotExist cannot be mapped to the test source file. The test will not be included.");
   }
 
   @Test

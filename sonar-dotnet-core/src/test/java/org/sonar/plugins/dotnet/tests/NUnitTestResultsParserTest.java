@@ -215,9 +215,11 @@ public class NUnitTestResultsParserTest {
     var sut = new NUnitTestResultsParser();
     var file = new File("src/test/resources/NUnit/test_name_not_mapped.xml");
 
-    var exception = assertThrows(IllegalStateException.class, () -> sut.parse(file, new HashMap<>(), Map.of("Some.Other.TestMethod", "C:\\dev\\Playground\\NUnit.Test\\Sample.cs")));
-    assertEquals("Test method NUnitTestProj.NUnitTestProject.UnitTest1.TestMethodDoesNotExist cannot be mapped to the test source file",
-      exception.getMessage());
+    sut.parse(file, new HashMap<>(), Map.of("Some.Other.TestMethod", "C:\\dev\\Playground\\NUnit.Test\\Sample.cs"));
+
+    List<String> warnLogs = logTester.logs(Level.WARN);
+    assertThat(warnLogs).hasSize(1);
+    assertThat(warnLogs.get(0)).isEqualTo("Test method NUnitTestProj.NUnitTestProject.UnitTest1.TestMethodDoesNotExist cannot be mapped to the test source file. The test will not be included.");
   }
 
   @Test

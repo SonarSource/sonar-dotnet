@@ -87,14 +87,14 @@ public class VisualStudioTestResultParserTest {
 
   @Test
   public void test_name_not_mapped() {
-    Map<String, UnitTestResults> results = new HashMap<>();
-    Map<String, String> fileMap = Map.of("Some.Other.TestMethod", "C:\\dev\\Playground\\Playground.Test\\Sample.cs");
     var sut = new VisualStudioTestResultParser();
     var file = new File("src/test/resources/visualstudio_test_results/test_name_not_mapped.trx");
 
-    var exception = assertThrows(IllegalStateException.class, () -> sut.parse(file, results, fileMap));
+    sut.parse(file, new HashMap<>(), Map.of("Some.Other.TestMethod", "C:\\dev\\Playground\\NUnit.Test\\Sample.cs"));
 
-    assertEquals("Test method Playground.Test.TestProject1.UnitTest1.TestShouldFail cannot be mapped to the test source file", exception.getMessage());
+    List<String> warnLogs = logTester.logs(Level.WARN);
+    assertThat(warnLogs).hasSize(1);
+    assertThat(warnLogs.get(0)).isEqualTo("Test method Playground.Test.TestProject1.UnitTest1.TestShouldFail cannot be mapped to the test source file. The test will not be included.");
   }
 
   @Test

@@ -55,7 +55,8 @@ public abstract class XmlTestReportParser {
 
   protected void addTestResultToFile(String methodFullName, UnitTestResults testResults) {
     if(!methodFileMap.containsKey(methodFullName)) {
-      throw new IllegalStateException(String.format("Test method %s cannot be mapped to the test source file", methodFullName));
+      LOG.warn("Test method {} cannot be mapped to the test source file. The test will not be included.", methodFullName);
+      return;
     }
 
     String fileName = methodFileMap.get(methodFullName);
