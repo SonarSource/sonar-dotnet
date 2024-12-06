@@ -186,7 +186,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
                 else if (expression is InterpolatedStringExpressionSyntax interpolatedString)
                 {
-                    stringWrapper = new StringWrapper(interpolatedString, interpolatedString.GetContentsText());
+                    stringWrapper = new StringWrapper(interpolatedString, interpolatedString.ContentsText());
                     return true;
                 }
                 // if this is a nested binary, we skip it so that we can raise when we visit it.

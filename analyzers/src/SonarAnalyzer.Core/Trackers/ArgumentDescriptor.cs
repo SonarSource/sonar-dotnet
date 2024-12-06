@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Trackers;
 
 public enum MemberKind
 {

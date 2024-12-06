@@ -14,13 +14,13 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.CSharp.Syntax.Utilities;
 
 /// <summary>
 /// Collects all symbol usages from a class declaration. Ignores symbols whose names are not present
 /// in the knownSymbolNames collection for performance reasons.
 /// </summary>
-internal class CSharpSymbolUsageCollector : SafeCSharpSyntaxWalker
+internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
 {
     [Flags]
     private enum SymbolAccess
@@ -50,7 +50,7 @@ internal class CSharpSymbolUsageCollector : SafeCSharpSyntaxWalker
     public HashSet<ISymbol> PrivateAttributes { get; } = [];
     public HashSet<ISymbol> TypesUsedWithReflection { get; } = [];
 
-    public CSharpSymbolUsageCollector(Compilation compilation, IEnumerable<ISymbol> knownSymbols)
+    public SymbolUsageCollector(Compilation compilation, IEnumerable<ISymbol> knownSymbols)
     {
         this.compilation = compilation;
         knownSymbolNames = knownSymbols.Select(GetName).ToHashSet();
@@ -67,16 +67,12 @@ internal class CSharpSymbolUsageCollector : SafeCSharpSyntaxWalker
                 UsedSymbols.UnionWith(GetSymbols(node));
             }
             else if (node.IsKind(SyntaxKindEx.LocalFunctionStatement)
-                     && ((LocalFunctionStatementSyntaxWrapper)node) is { AttributeLists.Count: > 0 }
+                     && (LocalFunctionStatementSyntaxWrapper)node is { AttributeLists.Count: > 0 }
                      && model.GetDeclaredSymbol(node) is IMethodSymbol localFunctionSymbol)
             {
-                UsedSymbols.UnionWith(localFunctionSymbol
-                                        .GetAttributes()
-                                        .Where(a => knownSymbolNames.Contains(a.AttributeClass.Name))
-                                        .Select(a => a.AttributeClass));
+                UsedSymbols.UnionWith(localFunctionSymbol.GetAttributes().Where(x => knownSymbolNames.Contains(x.AttributeClass.Name)).Select(x => x.AttributeClass));
             }
-            else if (node.IsKind(SyntaxKindEx.PrimaryConstructorBaseType)
-                     && knownSymbolNames.Contains(((PrimaryConstructorBaseTypeSyntaxWrapper)node).Type.GetName()))
+            else if (node.IsKind(SyntaxKindEx.PrimaryConstructorBaseType) && knownSymbolNames.Contains(((PrimaryConstructorBaseTypeSyntaxWrapper)node).Type.GetName()))
             {
                 UsedSymbols.UnionWith(GetSymbols(node));
             }
@@ -100,7 +96,7 @@ internal class CSharpSymbolUsageCollector : SafeCSharpSyntaxWalker
                 {
                     UsedSymbols.Add(deconstructors.First());
                 }
-                else if (deconstructors.Length > 1 && FindDeconstructor(deconstructors, leftTupleCount) is {} deconstructor)
+                else if (deconstructors.Length > 1 && FindDeconstructor(deconstructors, leftTupleCount) is { } deconstructor)
                 {
                     UsedSymbols.Add(deconstructor);
                 }
@@ -125,7 +121,7 @@ internal class CSharpSymbolUsageCollector : SafeCSharpSyntaxWalker
         }
 
         static ISymbol FindDeconstructor(IEnumerable<ISymbol> deconstructors, int numberOfArguments) =>
-            deconstructors.FirstOrDefault(m => m.GetParameters().Count() == numberOfArguments && m.DeclaredAccessibility.IsAccessibleOutsideTheType());
+            deconstructors.FirstOrDefault(x => x.GetParameters().Count() == numberOfArguments && x.DeclaredAccessibility.IsAccessibleOutsideTheType());
     }
 
     public override void VisitAttribute(AttributeSyntax node)
@@ -310,7 +306,7 @@ internal class CSharpSymbolUsageCollector : SafeCSharpSyntaxWalker
     /// Given a node, it tries to get the symbol or the candidate symbols (if the compiler cannot find the symbol,
     /// .e.g when the code cannot compile).
     /// </summary>
-    /// <returns>List of symbols</returns>
+    /// <returns>List of symbols.</returns>
     private ImmutableArray<ISymbol> GetSymbols<TSyntaxNode>(TSyntaxNode node)
         where TSyntaxNode : SyntaxNode
     {
@@ -441,9 +437,7 @@ internal class CSharpSymbolUsageCollector : SafeCSharpSyntaxWalker
 
     private static IMethodSymbol GetDefaultConstructor(INamedTypeSymbol namedType) =>
         // See https://github.com/SonarSource/sonar-dotnet/issues/3155
-        namedType != null && namedType.InstanceConstructors != null
-            ? namedType.InstanceConstructors.FirstOrDefault(IsDefaultConstructor)
-            : null;
+        namedType?.InstanceConstructors.FirstOrDefault(IsDefaultConstructor);
 
     private static bool IsDefaultConstructor(IMethodSymbol constructor) =>
         constructor.Parameters.Length == 0;

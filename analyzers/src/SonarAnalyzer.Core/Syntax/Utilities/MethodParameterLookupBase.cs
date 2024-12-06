@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Syntax.Utilities;
 
 public interface IMethodParameterLookup
 {
@@ -42,55 +42,13 @@ public abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodParame
         : this(argumentList, methodSymbolInfo?.Symbol as IMethodSymbol, methodSymbolInfo?.AllSymbols().OfType<IMethodSymbol>()) { }
 
     protected MethodParameterLookupBase(SeparatedSyntaxList<TArgumentSyntax> argumentList, IMethodSymbol methodSymbol)
-        : this(argumentList, methodSymbol, new[] { methodSymbol }) { }
+        : this(argumentList, methodSymbol, [methodSymbol]) { }
 
     private MethodParameterLookupBase(SeparatedSyntaxList<TArgumentSyntax> argumentList, IMethodSymbol methodSymbol, IEnumerable<IMethodSymbol> methodSymbolOrCandidates)
     {
         this.argumentList = argumentList;
         MethodSymbol = methodSymbol;
         MethodSymbolOrCandidates = methodSymbolOrCandidates?.ToImmutableArray() ?? ImmutableArray.Create<IMethodSymbol>();
-    }
-
-    public bool TryGetSymbol(SyntaxNode argument, out IParameterSymbol parameter) =>
-        TryGetSymbol(argument, MethodSymbol, out parameter);
-
-    private bool TryGetSymbol(SyntaxNode argument, IMethodSymbol methodSymbol, out IParameterSymbol parameter)
-    {
-        parameter = null;
-        var arg = argument as TArgumentSyntax ?? throw new ArgumentException($"{nameof(argument)} must be of type {typeof(TArgumentSyntax)}", nameof(argument));
-
-        if (!argumentList.Contains(arg)
-            || methodSymbol is null
-            || methodSymbol.IsVararg)
-        {
-            return false;
-        }
-
-        if (GetNameColonIdentifier(arg) is { } nameColonIdentifier)
-        {
-            parameter = methodSymbol.Parameters.FirstOrDefault(x => x.Name == nameColonIdentifier.ValueText);
-            return parameter is not null;
-        }
-
-        if (GetNameEqualsIdentifier(arg) is { } nameEqualsIdentifier
-            && methodSymbol.ContainingType.GetMembers(nameEqualsIdentifier.ValueText) is { Length: 1 } properties
-            && properties[0] is IPropertySymbol { SetMethod: { } setter } property
-            && property.Name == nameEqualsIdentifier.ValueText
-            && setter.Parameters is { Length: 1 } parameters)
-        {
-            parameter = parameters[0];
-            return parameter is not null;
-        }
-
-        var index = argumentList.IndexOf(arg);
-        if (index >= methodSymbol.Parameters.Length)
-        {
-            var lastParameter = methodSymbol.Parameters.Last();
-            parameter = lastParameter.IsParams ? lastParameter : null;
-            return parameter is not null;
-        }
-        parameter = methodSymbol.Parameters[index];
-        return true;
     }
 
     /// <summary>
@@ -142,8 +100,50 @@ public abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodParame
         return false;
     }
 
-    internal IEnumerable<NodeAndSymbol<TArgumentSyntax, IParameterSymbol>> GetAllArgumentParameterMappings() =>
+    public IEnumerable<NodeAndSymbol<TArgumentSyntax, IParameterSymbol>> GetAllArgumentParameterMappings() =>
         GetAllArgumentParameterMappings(MethodSymbol);
+
+    public bool TryGetSymbol(SyntaxNode argument, out IParameterSymbol parameter) =>
+        TryGetSymbol(argument, MethodSymbol, out parameter);
+
+    private bool TryGetSymbol(SyntaxNode argument, IMethodSymbol methodSymbol, out IParameterSymbol parameter)
+    {
+        parameter = null;
+        var arg = argument as TArgumentSyntax ?? throw new ArgumentException($"{nameof(argument)} must be of type {typeof(TArgumentSyntax)}", nameof(argument));
+
+        if (!argumentList.Contains(arg)
+            || methodSymbol is null
+            || methodSymbol.IsVararg)
+        {
+            return false;
+        }
+
+        if (GetNameColonIdentifier(arg) is { } nameColonIdentifier)
+        {
+            parameter = methodSymbol.Parameters.FirstOrDefault(x => x.Name == nameColonIdentifier.ValueText);
+            return parameter is not null;
+        }
+
+        if (GetNameEqualsIdentifier(arg) is { } nameEqualsIdentifier
+            && methodSymbol.ContainingType.GetMembers(nameEqualsIdentifier.ValueText) is { Length: 1 } properties
+            && properties[0] is IPropertySymbol { SetMethod: { } setter } property
+            && property.Name == nameEqualsIdentifier.ValueText
+            && setter.Parameters is { Length: 1 } parameters)
+        {
+            parameter = parameters[0];
+            return parameter is not null;
+        }
+
+        var index = argumentList.IndexOf(arg);
+        if (index >= methodSymbol.Parameters.Length)
+        {
+            var lastParameter = methodSymbol.Parameters.Last();
+            parameter = lastParameter.IsParams ? lastParameter : null;
+            return parameter is not null;
+        }
+        parameter = methodSymbol.Parameters[index];
+        return true;
+    }
 
     private IEnumerable<NodeAndSymbol<TArgumentSyntax, IParameterSymbol>> GetAllArgumentParameterMappings(IMethodSymbol methodSymbol)
     {

@@ -27,9 +27,8 @@ public class InterpolatedStringExpressionSyntaxExtensionsTest
     [DataRow(@"Const constant As Integer = 1 : Dim mix = $""{constant}{$""{Foo()}""}{""{notConstant}""}""")]
     public void TryGetGetInterpolatedTextValue_UnsupportedSyntaxKinds_ReturnsFalse_VB(string methodBody)
     {
-        var (expression, semanticModel) = CompileVB(methodBody);
-        InterpolatedStringExpressionSyntaxExtensions.TryGetInterpolatedTextValue(expression, semanticModel, out var interpolatedValue).Should().Be(false);
-        interpolatedValue.Should().BeNull();
+        var (expression, model) = CompileVB(methodBody);
+        InterpolatedStringExpressionSyntaxExtensions.InterpolatedTextValue(expression, model).Should().BeNull();
     }
 
     [DataTestMethod]
@@ -39,9 +38,8 @@ public class InterpolatedStringExpressionSyntaxExtensionsTest
     [DataRow(@"notConstantString = ""SomeValue"" : Dim interpolatedString As String = $""{notConstantString}""", "SomeValue")]
     public void TryGetGetInterpolatedTextValue_SupportedSyntaxKinds_ReturnsTrue_VB(string methodBody, string expectedTextValue)
     {
-        var (expression, semanticModel) = CompileVB(methodBody);
-        InterpolatedStringExpressionSyntaxExtensions.TryGetInterpolatedTextValue(expression, semanticModel, out var interpolatedValue).Should().Be(true);
-        interpolatedValue.Should().Be(expectedTextValue);
+        var (expression, model) = CompileVB(methodBody);
+        InterpolatedStringExpressionSyntaxExtensions.InterpolatedTextValue(expression, model).Should().Be(expectedTextValue);
     }
 
     private static (InterpolatedStringExpressionSyntax InterpolatedStringExpression, SemanticModel SemanticModel) CompileVB(string methodBody)

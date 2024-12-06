@@ -245,11 +245,11 @@ public static class SyntaxNodeExtensionsVisualBasic
     public static string GetName(this SyntaxNode expression) =>
         expression.GetIdentifier()?.ValueText ?? string.Empty;
 
-    public static string StringValue(this SyntaxNode node, SemanticModel semanticModel) =>
+    public static string StringValue(this SyntaxNode node, SemanticModel model) =>
         node switch
         {
             LiteralExpressionSyntax literal when literal.IsKind(SyntaxKind.StringLiteralExpression) => literal.Token.ValueText,
-            InterpolatedStringExpressionSyntax expression => expression.TryGetInterpolatedTextValue(semanticModel, out var interpolatedValue) ? interpolatedValue : expression.GetContentsText(),
+            InterpolatedStringExpressionSyntax expression => expression.InterpolatedTextValue(model) ?? expression.ContentsText(),
             _ => null
         };
 

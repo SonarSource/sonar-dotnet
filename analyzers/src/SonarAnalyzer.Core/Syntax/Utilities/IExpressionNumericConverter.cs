@@ -14,15 +14,11 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Syntax.Utilities;
 
-public enum ComparisonKind
+public interface IExpressionNumericConverter
 {
-    None = 0,
-    Equals,
-    NotEquals,
-    LessThan,
-    LessThanOrEqual,
-    GreaterThan,
-    GreaterThanOrEqual,
+    bool TryGetConstantIntValue(SemanticModel model, SyntaxNode expression, out int value);
+    bool TryGetConstantIntValue(SyntaxNode expression, out int value);
+    bool TryGetConstantDoubleValue(SyntaxNode expression, out double value);
 }

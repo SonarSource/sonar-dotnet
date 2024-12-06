@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Syntax.Utilities;
 
 public abstract class ExpressionNumericConverterBase<TLiteralExpressionSyntax, TUnaryExpressionSyntax> : IExpressionNumericConverter
     where TLiteralExpressionSyntax : SyntaxNode
@@ -26,8 +26,8 @@ public abstract class ExpressionNumericConverterBase<TLiteralExpressionSyntax, T
     protected abstract bool IsMinusOperator(TUnaryExpressionSyntax unaryExpression);
     protected abstract SyntaxNode RemoveParentheses(SyntaxNode expression);
 
-    public bool TryGetConstantIntValue(SemanticModel semanticModel, SyntaxNode expression, out int value) =>
-        TryGetConstantValue(semanticModel, expression, Convert.ToInt32, (multiplier, v) => multiplier * v, out value);
+    public bool TryGetConstantIntValue(SemanticModel model, SyntaxNode expression, out int value) =>
+        TryGetConstantValue(model, expression, Convert.ToInt32, (multiplier, v) => multiplier * v, out value);
 
     public bool TryGetConstantIntValue(SyntaxNode expression, out int value) =>
         TryGetConstantValue(null, expression, Convert.ToInt32, (multiplier, v) => multiplier * v, out value);
@@ -38,7 +38,7 @@ public abstract class ExpressionNumericConverterBase<TLiteralExpressionSyntax, T
     public bool TryGetConstantDecimalValue(SyntaxNode expression, out decimal value) =>
         TryGetConstantValue(null, expression, Convert.ToDecimal, (multiplier, v) => multiplier * v, out value);
 
-    private bool TryGetConstantValue<T>(SemanticModel semanticModel, SyntaxNode expression, Func<object, T> converter, Func<int, T, T> multiplierCalculator, out T value)
+    private bool TryGetConstantValue<T>(SemanticModel model, SyntaxNode expression, Func<object, T> converter, Func<int, T, T> multiplierCalculator, out T value)
         where T : struct
     {
         expression = RemoveParentheses(expression);
@@ -50,9 +50,7 @@ public abstract class ExpressionNumericConverterBase<TLiteralExpressionSyntax, T
             value = multiplierCalculator(multiplier, value);
             return true;
         }
-        else if (semanticModel is { }
-            && semanticModel.GetConstantValue(expression) is { HasValue: true } optional
-            && optional.Value is T val)
+        else if (model?.GetConstantValue(expression) is { HasValue: true } optional && optional.Value is T val)
         {
             value = val;
             return true;
@@ -69,7 +67,7 @@ public abstract class ExpressionNumericConverterBase<TLiteralExpressionSyntax, T
         var multiplier = 1;
         internalExpression = expression;
         var unary = internalExpression as TUnaryExpressionSyntax;
-        while (unary != null)
+        while (unary is not null)
         {
             if (!IsSupportedOperator(unary))
             {
@@ -84,7 +82,6 @@ public abstract class ExpressionNumericConverterBase<TLiteralExpressionSyntax, T
             internalExpression = Operand(unary);
             unary = internalExpression as TUnaryExpressionSyntax;
         }
-
         return multiplier;
     }
 }

@@ -14,7 +14,6 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.Core.Syntax.Utilities;
 using SonarAnalyzer.Core.Trackers;
 using SonarAnalyzer.CSharp.Core.Facade.Implementation;
 using SonarAnalyzer.CSharp.Core.Trackers;

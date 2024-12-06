@@ -16,7 +16,7 @@
 
 using System.Text;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Syntax.Utilities;
 
 public abstract class StringInterpolationConstantValueResolver<TSyntaxKind,
                                                                TInterpolatedStringExpressionSyntax,
@@ -30,11 +30,10 @@ public abstract class StringInterpolationConstantValueResolver<TSyntaxKind,
     where TInterpolatedStringTextSyntax : SyntaxNode
 {
     protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-
     protected abstract IEnumerable<TInterpolatedStringContentSyntax> Contents(TInterpolatedStringExpressionSyntax interpolatedStringExpression);
     protected abstract SyntaxToken TextToken(TInterpolatedStringTextSyntax interpolatedStringText);
 
-    public bool TryGetInterpolatedTextValue(TInterpolatedStringExpressionSyntax interpolatedStringExpression, SemanticModel semanticModel, out string interpolatedValue)
+    public string InterpolatedTextValue(TInterpolatedStringExpressionSyntax interpolatedStringExpression, SemanticModel model)
     {
         var resolvedContent = new StringBuilder();
         foreach (var interpolatedStringContent in Contents(interpolatedStringExpression))
@@ -42,18 +41,17 @@ public abstract class StringInterpolationConstantValueResolver<TSyntaxKind,
             if (interpolatedStringContent is TInterpolationSyntax interpolation)
             {
                 if (Language.Syntax.NodeExpression(interpolation) is TInterpolatedStringExpressionSyntax nestedInterpolatedString
-                    && TryGetInterpolatedTextValue(nestedInterpolatedString, semanticModel, out var innerInterpolatedValue))
+                    && InterpolatedTextValue(nestedInterpolatedString, model) is { } innerInterpolatedValue)
                 {
                     resolvedContent.Append(innerInterpolatedValue);
                 }
-                else if (Language.FindConstantValue(semanticModel, Language.Syntax.NodeExpression(interpolation)) is string constantValue)
+                else if (Language.FindConstantValue(model, Language.Syntax.NodeExpression(interpolation)) is string constantValue)
                 {
                     resolvedContent.Append(constantValue);
                 }
                 else
                 {
-                    interpolatedValue = null;
-                    return false;
+                    return null;
                 }
             }
             else if (interpolatedStringContent is TInterpolatedStringTextSyntax interpolatedText)
@@ -62,11 +60,9 @@ public abstract class StringInterpolationConstantValueResolver<TSyntaxKind,
             }
             else
             {
-                interpolatedValue = null;
-                return false;
+                return null;
             }
         }
-        interpolatedValue = resolvedContent.ToString();
-        return true;
+        return resolvedContent.ToString();
     }
 }

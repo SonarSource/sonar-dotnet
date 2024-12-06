@@ -14,13 +14,15 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Syntax.Utilities;
 
-[Flags]
-public enum AccessorAccess
+public enum ComparisonKind
 {
     None = 0,
-    Get = 1,
-    Set = 2,
-    Both = Get | Set
+    Equals,
+    NotEquals,
+    LessThan,
+    LessThanOrEqual,
+    GreaterThan,
+    GreaterThanOrEqual,
 }

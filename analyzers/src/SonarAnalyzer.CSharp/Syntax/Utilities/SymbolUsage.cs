@@ -14,11 +14,16 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Syntax.Utilities;
 
-public interface IExpressionNumericConverter
+internal class SymbolUsage
 {
-    bool TryGetConstantIntValue(SemanticModel semanticModel, SyntaxNode expression, out int value);
-    bool TryGetConstantIntValue(SyntaxNode expression, out int value);
-    bool TryGetConstantDoubleValue(SyntaxNode expression, out double value);
+    public ISymbol Symbol { get; }
+    public SyntaxNode Declaration { get; set; }
+    public SyntaxNode Initializer { get; set; }
+    public HashSet<SyntaxNode> Readings { get; } = new();
+    public HashSet<SyntaxNode> Writings { get; } = new();
+
+    public SymbolUsage(ISymbol symbol) =>
+        Symbol = symbol;
 }

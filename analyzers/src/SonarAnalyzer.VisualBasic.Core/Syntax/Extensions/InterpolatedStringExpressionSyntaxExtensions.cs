@@ -18,9 +18,9 @@ namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
 
 public static class InterpolatedStringExpressionSyntaxExtensions
 {
-    public static string GetContentsText(this InterpolatedStringExpressionSyntax interpolatedStringExpression) =>
-        interpolatedStringExpression.Contents.JoinStr(null, content => content.ToString());
+    public static string ContentsText(this InterpolatedStringExpressionSyntax interpolatedStringExpression) =>
+        interpolatedStringExpression.Contents.JoinStr(null, x => x.ToString());
 
-    public static bool TryGetInterpolatedTextValue(this InterpolatedStringExpressionSyntax interpolatedStringExpression, SemanticModel semanticModel, out string interpolatedValue) =>
-        VisualBasicStringInterpolationConstantValueResolver.Instance.TryGetInterpolatedTextValue(interpolatedStringExpression, semanticModel, out interpolatedValue);
+    public static string InterpolatedTextValue(this InterpolatedStringExpressionSyntax interpolatedStringExpression, SemanticModel model) =>
+        VisualBasicStringInterpolationConstantValueResolver.Instance.InterpolatedTextValue(interpolatedStringExpression, model);
 }

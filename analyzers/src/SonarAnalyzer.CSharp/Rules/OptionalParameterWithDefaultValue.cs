@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var defaultValueAttribute = attributes.FirstOrDefault(a => a.Symbol.IsInType(KnownType.System_ComponentModel_DefaultValueAttribute));
                     if (defaultValueAttribute != null)
                     {
-                        c.ReportIssue(Rule, defaultValueAttribute.SyntaxNode);
+                        c.ReportIssue(Rule, defaultValueAttribute.Node);
                     }
                 },
                 SyntaxKind.Parameter);

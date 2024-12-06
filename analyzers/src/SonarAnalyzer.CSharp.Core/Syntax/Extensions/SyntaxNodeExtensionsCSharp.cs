@@ -497,7 +497,7 @@ public static class SyntaxNodeExtensionsCSharp
         node switch
         {
             LiteralExpressionSyntax literal when literal.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKindEx.Utf8StringLiteralExpression) => literal.Token.ValueText,
-            InterpolatedStringExpressionSyntax expression => expression.TryGetInterpolatedTextValue(model, out var interpolatedValue) ? interpolatedValue : expression.GetContentsText(),
+            InterpolatedStringExpressionSyntax expression => expression.InterpolatedTextValue(model) ?? expression.ContentsText(),
             _ => null
         };
 

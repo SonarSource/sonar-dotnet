@@ -27,9 +27,8 @@ public class InterpolatedStringExpressionSyntaxExtensionsTest
     [DataRow(@"const int constant = 1; var mix = $""{constant}{$""{Foo()}""}{""{notConstant}""}"";")]
     public void TryGetGetInterpolatedTextValue_UnsupportedSyntaxKinds_ReturnsFalse_CS(string snippet)
     {
-        var (expression, semanticModel) = CompileCS(snippet);
-        InterpolatedStringExpressionSyntaxExtensions.TryGetInterpolatedTextValue(expression, semanticModel, out var interpolatedValue).Should().Be(false);
-        interpolatedValue.Should().BeNull();
+        var (expression, model) = CompileCS(snippet);
+        InterpolatedStringExpressionSyntaxExtensions.InterpolatedTextValue(expression, model).Should().BeNull();
     }
 
     [DataTestMethod]
@@ -39,9 +38,8 @@ public class InterpolatedStringExpressionSyntaxExtensionsTest
     [DataRow(@"notConstantString = ""SomeValue""; string interpolatedString = $""{notConstantString}"";", "SomeValue")]
     public void TryGetGetInterpolatedTextValue_SupportedSyntaxKinds_ReturnsTrue_CS(string snippet, string expectedTextValue)
     {
-        var (expression, semanticModel) = CompileCS(snippet);
-        InterpolatedStringExpressionSyntaxExtensions.TryGetInterpolatedTextValue(expression, semanticModel, out var interpolatedValue).Should().Be(true);
-        interpolatedValue.Should().Be(expectedTextValue);
+        var (expression, model) = CompileCS(snippet);
+        InterpolatedStringExpressionSyntaxExtensions.InterpolatedTextValue(expression, model).Should().Be(expectedTextValue);
     }
 
     private static (InterpolatedStringExpressionSyntax InterpolatedStringExpression, SemanticModel SemanticModel) CompileCS(string snippet)

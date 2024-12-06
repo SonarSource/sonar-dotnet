@@ -14,6 +14,8 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using ComparisonKindEnum = SonarAnalyzer.Core.Syntax.Utilities.ComparisonKind;
+
 namespace SonarAnalyzer.CSharp.Core.Facade.Implementation;
 
 internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
@@ -57,13 +59,13 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override ComparisonKind ComparisonKind(SyntaxNode node) =>
         node.Kind() switch
         {
-            SyntaxKind.EqualsExpression => Helpers.ComparisonKind.Equals,
-            SyntaxKind.NotEqualsExpression => Helpers.ComparisonKind.NotEquals,
-            SyntaxKind.LessThanExpression => Helpers.ComparisonKind.LessThan,
-            SyntaxKind.LessThanOrEqualExpression => Helpers.ComparisonKind.LessThanOrEqual,
-            SyntaxKind.GreaterThanExpression => Helpers.ComparisonKind.GreaterThan,
-            SyntaxKind.GreaterThanOrEqualExpression => Helpers.ComparisonKind.GreaterThanOrEqual,
-            _ => Helpers.ComparisonKind.None,
+            SyntaxKind.EqualsExpression => ComparisonKindEnum.Equals,
+            SyntaxKind.NotEqualsExpression => ComparisonKindEnum.NotEquals,
+            SyntaxKind.LessThanExpression => ComparisonKindEnum.LessThan,
+            SyntaxKind.LessThanOrEqualExpression => ComparisonKindEnum.LessThanOrEqual,
+            SyntaxKind.GreaterThanExpression => ComparisonKindEnum.GreaterThan,
+            SyntaxKind.GreaterThanOrEqualExpression => ComparisonKindEnum.GreaterThanOrEqual,
+            _ => ComparisonKindEnum.None,
         };
 
     public override IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum) =>
@@ -156,8 +158,8 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override string StringValue(SyntaxNode node, SemanticModel model) =>
         node.StringValue(model);
 
-    public override bool TryGetInterpolatedTextValue(SyntaxNode node, SemanticModel model, out string interpolatedValue) =>
-        Cast<InterpolatedStringExpressionSyntax>(node).TryGetInterpolatedTextValue(model, out interpolatedValue);
+    public override string InterpolatedTextValue(SyntaxNode node, SemanticModel model) =>
+        Cast<InterpolatedStringExpressionSyntax>(node).InterpolatedTextValue(model);
 
     public override bool TryGetOperands(SyntaxNode invocation, out SyntaxNode left, out SyntaxNode right) =>
         Cast<InvocationExpressionSyntax>(invocation).TryGetOperands(out left, out right);

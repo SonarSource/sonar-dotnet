@@ -15,45 +15,48 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.CSharp.Syntax.Utilities;
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Test.Syntax.Utilities;
 
 [TestClass]
-public class CSharpSymbolUsageCollectorTest
+public class SymbolUsageCollectorTest
 {
     [TestMethod]
     public void VerifyUsagesBeingCollectedOnMatchingSyntaxNodes()
     {
-        const string firstSnippet = @"
-public class Foo
-{
-    private int Field = 42;
-    public int FooMethod(int arg)
-    {
-        Field += arg;
-        return Field;
-    }
-}";
-        const string secondSnippet = @"
-public class Bar
-{
-    private int Field = 42;
-    public int BarMethod()
-    {
-        return Field;
-    }
-}";
+        const string firstSnippet = """
+            public class Foo
+            {
+                private int Field = 42;
+                public int FooMethod(int arg)
+                {
+                    Field += arg;
+                    return Field;
+                }
+            }
+            """;
+        const string secondSnippet = """
+            public class Bar
+            {
+                private int Field = 42;
+                public int BarMethod()
+                {
+                    return Field;
+                }
+            }
+            """;
         var firstCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(firstSnippet).GetCompilation();
         var secondCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(secondSnippet).GetCompilation();
 
         var firstTree = firstCompilation.SyntaxTrees.Single();
         var fooMethod = firstTree.Single<MethodDeclarationSyntax>();
-        var firstCompilationSemanticModel = firstCompilation.GetSemanticModel(firstTree);
-        var firstCompilationFieldSymbol = firstCompilationSemanticModel.GetSymbolInfo(fooMethod.DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression).Symbol;
+        var firstCompilationModel = firstCompilation.GetSemanticModel(firstTree);
+        var firstCompilationFieldSymbol = firstCompilationModel.GetSymbolInfo(fooMethod.DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression).Symbol;
         var firstCompilationKnownSymbols = new List<ISymbol> { firstCompilationFieldSymbol };
 
         // compilation matches semantic model and syntax node
-        var firstCompilationUsageCollector = new CSharpSymbolUsageCollector(firstCompilation, firstCompilationKnownSymbols);
+        var firstCompilationUsageCollector = new SymbolUsageCollector(firstCompilation, firstCompilationKnownSymbols);
         firstCompilationUsageCollector.Visit(fooMethod);
         firstCompilationUsageCollector.UsedSymbols.Should().NotBeEmpty();
         var firstCompilationUsedSymbols = firstCompilationUsageCollector.UsedSymbols;

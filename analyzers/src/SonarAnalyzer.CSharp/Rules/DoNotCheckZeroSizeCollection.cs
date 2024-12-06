@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using Comparison = SonarAnalyzer.Helpers.ComparisonKind;
+using Comparison = SonarAnalyzer.Core.Syntax.Utilities.ComparisonKind;
 
 namespace SonarAnalyzer.Rules.CSharp
 {

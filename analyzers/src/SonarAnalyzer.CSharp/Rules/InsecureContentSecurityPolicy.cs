@@ -59,8 +59,7 @@ public sealed class InsecureContentSecurityPolicy : TrackerHotspotDiagnosticAnal
         node switch
         {
             LiteralExpressionSyntax literal => IsInsecureContentSecurityPolicyValue(literal.Token.ValueText),
-            InterpolatedStringExpressionSyntax interpolatedString => interpolatedString.TryGetInterpolatedTextValue(model, out var interpolatedValue)
-                                                                     && IsInsecureContentSecurityPolicyValue(interpolatedValue ?? interpolatedString.GetContentsText()),
+            InterpolatedStringExpressionSyntax interpolatedString => interpolatedString.InterpolatedTextValue(model) is { } value && IsInsecureContentSecurityPolicyValue(value),
             _ when node.FindConstantValue(model) is string constantValue => IsInsecureContentSecurityPolicyValue(constantValue),
             _ => false,
         };

@@ -14,22 +14,22 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.CSharp.Syntax.Utilities;
 
 internal class AttributeSyntaxSymbolMapping
 {
-    public AttributeSyntax SyntaxNode { get; }
+    public AttributeSyntax Node { get; }
     public IMethodSymbol Symbol { get; }
 
-    private AttributeSyntaxSymbolMapping(AttributeSyntax syntaxNode, IMethodSymbol symbol)
+    private AttributeSyntaxSymbolMapping(AttributeSyntax node, IMethodSymbol symbol)
     {
-        SyntaxNode = syntaxNode;
+        Node = node;
         Symbol = symbol;
     }
 
-    public static IEnumerable<AttributeSyntaxSymbolMapping> GetAttributesForParameter(ParameterSyntax parameter, SemanticModel semanticModel) =>
+    public static IEnumerable<AttributeSyntaxSymbolMapping> GetAttributesForParameter(ParameterSyntax parameter, SemanticModel model) =>
         parameter.AttributeLists
-                 .SelectMany(al => al.Attributes)
-                 .Select(attr => new AttributeSyntaxSymbolMapping(attr, semanticModel.GetSymbolInfo(attr).Symbol as IMethodSymbol))
-                 .Where(attr => attr.Symbol != null);
+            .SelectMany(x => x.Attributes)
+            .Select(x => new AttributeSyntaxSymbolMapping(x, model.GetSymbolInfo(x).Symbol as IMethodSymbol))
+            .Where(x => x.Symbol is not null);
 }

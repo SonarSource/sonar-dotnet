@@ -14,18 +14,10 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Syntax.Utilities;
 
-public class SymbolUsage
+public static class RefKindEx
 {
-    public ISymbol Symbol { get; }
-    public SyntaxNode Declaration { get; set; }
-    public SyntaxNode Initializer { get; set; }
-    public HashSet<SyntaxNode> Readings { get; } = new HashSet<SyntaxNode>();
-    public HashSet<SyntaxNode> Writings { get; } = new HashSet<SyntaxNode>();
-
-    public SymbolUsage(ISymbol symbol)
-    {
-        this.Symbol = symbol;
-    }
+    public const RefKind In = (RefKind)3;
+    public const RefKind RefReadOnlyParameter = (RefKind)4;
 }

@@ -59,7 +59,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
                             return;
                         }
 
-                        var usageCollector = new CSharpSymbolUsageCollector(c.Compilation, removableInternalTypes);
+                        var usageCollector = new SymbolUsageCollector(c.Compilation, removableInternalTypes);
                         foreach (var syntaxTree in c.Compilation.SyntaxTrees.Where(tree => !tree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, c.IsRazorAnalysisEnabled())))
                         {
                             usageCollector.SafeVisit(syntaxTree.GetRoot());
@@ -75,7 +75,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         var fieldLikeSymbols = new BidirectionalDictionary<ISymbol, SyntaxNode>();
         if (GatherSymbols(namedType, context.Compilation, privateSymbols, removableInternalTypes, fieldLikeSymbols, context)
             && privateSymbols.Any()
-            && new CSharpSymbolUsageCollector(context.Compilation, AssociatedSymbols(privateSymbols)) is var usageCollector
+            && new SymbolUsageCollector(context.Compilation, AssociatedSymbols(privateSymbols)) is var usageCollector
             && VisitDeclaringReferences(namedType, usageCollector, context, includeGeneratedFile: true))
         {
             ReportUnusedPrivateMembers(context, usageCollector, privateSymbols, SyntaxConstants.Private, fieldLikeSymbols);
@@ -125,7 +125,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
     }
 
     private static void ReportUnusedPrivateMembers<TContext>(SonarCompilationReportingContextBase<TContext> context,
-                                                             CSharpSymbolUsageCollector usageCollector,
+                                                             SymbolUsageCollector usageCollector,
                                                              ISet<ISymbol> removableSymbols,
                                                              string accessibility,
                                                              BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
@@ -158,10 +158,10 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         return false;
     }
 
-    private static bool IsMentionedInDebuggerDisplay(ISymbol symbol, CSharpSymbolUsageCollector usageCollector) =>
+    private static bool IsMentionedInDebuggerDisplay(ISymbol symbol, SymbolUsageCollector usageCollector) =>
             usageCollector.DebuggerDisplayValues.Any(x => x.Contains(symbol.Name));
 
-    private static void ReportUsedButUnreadFields(SonarSymbolReportingContext context, CSharpSymbolUsageCollector usageCollector, IEnumerable<ISymbol> removableSymbols)
+    private static void ReportUsedButUnreadFields(SonarSymbolReportingContext context, SymbolUsageCollector usageCollector, IEnumerable<ISymbol> removableSymbols)
     {
         var unusedSymbols = GetUnusedSymbols(usageCollector, removableSymbols);
 
@@ -179,7 +179,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         }
     }
 
-    private static HashSet<ISymbol> GetUnusedSymbols(CSharpSymbolUsageCollector usageCollector, IEnumerable<ISymbol> removableSymbols) =>
+    private static HashSet<ISymbol> GetUnusedSymbols(SymbolUsageCollector usageCollector, IEnumerable<ISymbol> removableSymbols) =>
         removableSymbols
             .Except(usageCollector.UsedSymbols)
             .Where(x => !IsMentionedInDebuggerDisplay(x, usageCollector)
@@ -194,7 +194,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         && method.ReturnType.Is(KnownType.Void)
         && method.Parameters.All(x => x.RefKind == RefKind.Out);
 
-    private static bool IsAccessorUsed(ISymbol symbol, CSharpSymbolUsageCollector usageCollector) =>
+    private static bool IsAccessorUsed(ISymbol symbol, SymbolUsageCollector usageCollector) =>
         symbol is IMethodSymbol { AssociatedSymbol: IPropertySymbol property } accessor
         && usageCollector.PropertyAccess.TryGetValue(property, out var access)
         && ((access.HasFlag(AccessorAccess.Get) && accessor.MethodKind == MethodKind.PropertyGet)

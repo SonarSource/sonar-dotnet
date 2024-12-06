@@ -14,13 +14,13 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Syntax.Utilities;
 
-#pragma warning disable S2339 // Public constant members should not be used
-public static class RefKindEx
+[Flags]
+public enum AccessorAccess
 {
-    public const RefKind In = (RefKind)3;
-    public const RefKind RefReadOnlyParameter = (RefKind)4;
+    None = 0,
+    Get = 1,
+    Set = 2,
+    Both = Get | Set
 }
-#pragma warning restore S2339 // Public constant members should not be used
-

@@ -15,6 +15,7 @@
  */
 
 using System.Collections;
+using SonarAnalyzer.Core.Syntax.Utilities;
 using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 using SonarAnalyzer.VisualBasic.Core.Syntax.Utilities;
 using CSharpCodeAnalysis = Microsoft.CodeAnalysis.CSharp;
@@ -22,7 +23,7 @@ using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VBCodeAnalysis = Microsoft.CodeAnalysis.VisualBasic;
 using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Test.Syntax.Utilities;
 
 [TestClass]
 public class MethodParameterLookupTest
@@ -320,15 +321,15 @@ public class MethodParameterLookupTest
         where TArgumentSyntax : SyntaxNode
         where TInvocationSyntax : SyntaxNode
     {
-        public SnippetCompiler Compiler { get; protected set; }
-        public TInvocationSyntax[] MainInvocations { get; protected set; }
-        public TArgumentSyntax SpecialArgument { get; private set; }
-        public IParameterSymbol SpecialParameter { get; private set; }
-
         public abstract TInvocationSyntax[] FindInvocationsIn(string name);
         public abstract object ExtractArgumentValue(TArgumentSyntax argumentSyntax);
         public abstract TArgumentSyntax[] GetArguments(TInvocationSyntax invocation);
         public abstract MethodParameterLookupBase<TArgumentSyntax> CreateLookup(TInvocationSyntax invocation, IMethodSymbol method);
+
+        public SnippetCompiler Compiler { get; protected set; }
+        public TInvocationSyntax[] MainInvocations { get; protected set; }
+        public TArgumentSyntax SpecialArgument { get; private set; }
+        public IParameterSymbol SpecialParameter { get; private set; }
 
         protected InspectionBase(string source, AnalyzerLanguage language)
         {
@@ -409,7 +410,7 @@ public class MethodParameterLookupTest
         private static object ExtractExpectedValue(object expected, string name)
         {
             var pi = expected.GetType().GetProperty(name);
-            if (pi == null)
+            if (pi is null)
             {
                 Assert.Fail($"Parameter name {name} was not expected.");
             }

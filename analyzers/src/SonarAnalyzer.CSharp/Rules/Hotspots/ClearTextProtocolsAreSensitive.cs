@@ -202,12 +202,11 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static string GetText(SyntaxNode node, SemanticModel semanticModel)
+        private static string GetText(SyntaxNode node, SemanticModel model)
         {
             if (node is InterpolatedStringExpressionSyntax interpolatedStringExpression)
             {
-                interpolatedStringExpression.TryGetInterpolatedTextValue(semanticModel, out var interpolatedValue);
-                return interpolatedValue ?? interpolatedStringExpression.GetContentsText();
+                return interpolatedStringExpression.InterpolatedTextValue(model) ?? interpolatedStringExpression.ContentsText();
             }
             else
             {

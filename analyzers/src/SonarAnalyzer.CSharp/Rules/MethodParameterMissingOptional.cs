@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var optionalAttribute = attributes.FirstOrDefault(a => a.Symbol.IsInType(KnownType.System_Runtime_InteropServices_OptionalAttribute));
                     if (optionalAttribute == null)
                     {
-                        c.ReportIssue(Rule, defaultParameterValueAttribute.SyntaxNode);
+                        c.ReportIssue(Rule, defaultParameterValueAttribute.Node);
                     }
                 },
                 SyntaxKind.Parameter);
