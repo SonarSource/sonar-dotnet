@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using static SonarAnalyzer.Analyzers.DiagnosticDescriptorFactory;
+using static SonarAnalyzer.Core.Analyzers.DiagnosticDescriptorFactory;
 
 namespace SonarAnalyzer.AnalysisContext;
 

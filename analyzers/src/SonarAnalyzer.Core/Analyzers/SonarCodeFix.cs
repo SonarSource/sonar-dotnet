@@ -16,7 +16,7 @@
 
 using Microsoft.CodeAnalysis.CodeFixes;
 
-namespace SonarAnalyzer.Analyzers;
+namespace SonarAnalyzer.Core.Analyzers;
 
 public abstract class SonarCodeFix : CodeFixProvider
 {

@@ -15,7 +15,7 @@
  */
 
 using SonarAnalyzer.AnalysisContext;
-using SonarAnalyzer.Analyzers;
+using SonarAnalyzer.Core.Analyzers;
 
 namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions;
 

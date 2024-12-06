@@ -16,16 +16,15 @@
 
 using SonarAnalyzer.Core.Trackers;
 
-namespace SonarAnalyzer.Analyzers;
+namespace SonarAnalyzer.Core.Analyzers;
 
 public abstract class TrackerHotspotDiagnosticAnalyzer<TSyntaxKind> : HotspotDiagnosticAnalyzer where TSyntaxKind : struct
 {
     protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
     protected abstract void Initialize(TrackerInput input);
 
-    protected DiagnosticDescriptor Rule { get; }
-
     public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+    protected DiagnosticDescriptor Rule { get; }
 
     protected TrackerHotspotDiagnosticAnalyzer(IAnalyzerConfiguration configuration, string diagnosticId, string messageFormat) : base(configuration) =>
         Rule = Language.CreateDescriptor(diagnosticId, messageFormat);

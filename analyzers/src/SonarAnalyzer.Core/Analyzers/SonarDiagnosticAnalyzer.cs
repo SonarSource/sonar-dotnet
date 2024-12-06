@@ -16,7 +16,7 @@
 
 using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 
-namespace SonarAnalyzer.Analyzers;
+namespace SonarAnalyzer.Core.Analyzers;
 
 public abstract class SonarDiagnosticAnalyzer : DiagnosticAnalyzer
 {
@@ -49,8 +49,9 @@ public abstract class SonarDiagnosticAnalyzer<TSyntaxKind> : SonarDiagnosticAnal
 {
     protected abstract string MessageFormat { get; }
     protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-    protected DiagnosticDescriptor Rule { get; }
+
     public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+    protected DiagnosticDescriptor Rule { get; }
 
     protected SonarDiagnosticAnalyzer(string diagnosticId) =>
        Rule = Language.CreateDescriptor(diagnosticId, MessageFormat);
