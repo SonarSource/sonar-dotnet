@@ -92,39 +92,4 @@ public class SonarSemanticModelReportingContextTest
             Imports System ' Noncompliant
             """)
             .Verify();
-
-    internal abstract class TestAnalyzer : SonarDiagnosticAnalyzer
-    {
-        public static readonly DiagnosticDescriptor Rule = AnalysisScaffolding.CreateDescriptorMain("SDummy");
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-    }
-
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class TestAnalyzerCS : TestAnalyzer
-    {
-        private readonly Action<SonarAnalysisContext, GeneratedCodeRecognizer> initializeAction;
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => TestGeneratedCodeRecognizer.Instance;
-
-        public TestAnalyzerCS(Action<SonarAnalysisContext, GeneratedCodeRecognizer> action) =>
-            initializeAction = action;
-
-        protected override void Initialize(SonarAnalysisContext context) =>
-            initializeAction(context, GeneratedCodeRecognizer);
-    }
-
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    internal class TestAnalyzerVB : TestAnalyzer
-    {
-        private readonly Action<SonarAnalysisContext, GeneratedCodeRecognizer> initializeAction;
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => TestGeneratedCodeRecognizer.Instance;
-
-        public TestAnalyzerVB(Action<SonarAnalysisContext, GeneratedCodeRecognizer> action) =>
-            initializeAction = action;
-
-        protected override void Initialize(SonarAnalysisContext context) =>
-            initializeAction(context, GeneratedCodeRecognizer);
-    }
 }

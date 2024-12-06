@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net48;net9.0</TargetFrameworks>
+    <IsPackable>false</IsPackable>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+    <PackageReference Include="JetBrains.dotMemoryUnit" Version="3.2.20220510" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SonarAnalyzer.TestFramework\SonarAnalyzer.TestFramework.csproj" />
+    <ProjectReference Include="..\..\src\SonarAnalyzer.CFG\SonarAnalyzer.CFG.csproj" />
+    <ProjectReference Include="..\..\src\SonarAnalyzer.Core\SonarAnalyzer.Core.csproj">
+      <Aliases>global,common</Aliases>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj">
+      <Aliases>global,csharp</Aliases>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\SonarAnalyzer.CSharp.Core\SonarAnalyzer.CSharp.Core.csproj" />
+    <ProjectReference Include="..\..\src\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.csproj">
+      <Aliases>global,vbnet</Aliases>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\SonarAnalyzer.VisualBasic.Core\SonarAnalyzer.VisualBasic.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="FluentAssertions" />
+	  <Using Include="Microsoft.CodeAnalysis" />
+	  <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+    <Using Include="SonarAnalyzer.Analyzers" />
+    <Using Include="SonarAnalyzer.Common" />
+    <Using Include="SonarAnalyzer.Core.Extensions" />
+    <Using Include="SonarAnalyzer.Core.Semantics" />
+    <Using Include="SonarAnalyzer.Helpers" />
+    <Using Include="SonarAnalyzer.TestFramework.Analyzers" />
+    <Using Include="SonarAnalyzer.TestFramework.Build" />
+    <Using Include="SonarAnalyzer.TestFramework.Common" />
+    <Using Include="SonarAnalyzer.TestFramework.Extensions" />
+    <Using Include="SonarAnalyzer.TestFramework.MetadataReferences" />
+    <Using Include="SonarAnalyzer.TestFramework.Verification" />
+  </ItemGroup>
+
+</Project>
