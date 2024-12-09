@@ -53,12 +53,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void AnalyzePatterns(SonarSyntaxNodeReportingContext c, ExpressionSyntax expression, SyntaxNode pattern)
         {
-            var objectToPatternMap = new Dictionary<ExpressionSyntax, SyntaxNode>();
-            PatternExpressionObjectToPatternMapping.MapObjectToPattern(expression, pattern, objectToPatternMap);
-
-            foreach (var exp in objectToPatternMap.Keys)
+            foreach (var pair in expression.MapToPattern(pattern))
             {
-                CheckPatternCondition(c, exp, objectToPatternMap[exp]);
+                CheckPatternCondition(c, pair.Key, pair.Value);
             }
         }
 

@@ -14,9 +14,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.CSharp.Syntax.Extensions;
 
-internal static class PatternExpressionObjectToPatternMapping
+internal static class ExpressionSyntaxExtensions
 {
     /// <summary>
     /// Maps the tuple arguments of <paramref name="expression"/> to the positional sub-pattern of <paramref name="pattern"/>.
@@ -25,26 +25,33 @@ internal static class PatternExpressionObjectToPatternMapping
     /// <param name="expression">A tuple expression.</param>
     /// <param name="pattern">A pattern that can be matched to the tuple <paramref name="expression"/>.</param>
     /// <param name="objectToPatternMap">The mapping between the tuple arguments and the positional sub-patterns.</param>
-    public static void MapObjectToPattern(ExpressionSyntax expression, SyntaxNode pattern, IDictionary<ExpressionSyntax, SyntaxNode> objectToPatternMap)
+    public static Dictionary<ExpressionSyntax, SyntaxNode> MapToPattern(this ExpressionSyntax expression, SyntaxNode pattern)
     {
-        var expressionWithoutParenthesis = expression.RemoveParentheses();
-        var patternWithoutParenthesis = pattern.RemoveParentheses();
+        var map = new Dictionary<ExpressionSyntax, SyntaxNode>();
+        FillPatternMap(map, expression, pattern);
+        return map;
+    }
 
-        if (TupleExpressionSyntaxWrapper.IsInstance(expressionWithoutParenthesis)
-            && (TupleExpressionSyntaxWrapper)expressionWithoutParenthesis is var tupleExpression
-            && RecursivePatternSyntaxWrapper.IsInstance(patternWithoutParenthesis)
-            && (RecursivePatternSyntaxWrapper)patternWithoutParenthesis is var recursivePattern
+    private static void FillPatternMap(Dictionary<ExpressionSyntax, SyntaxNode> map, ExpressionSyntax expression, SyntaxNode pattern)
+    {
+        expression = expression.RemoveParentheses();
+        pattern = pattern.RemoveParentheses();
+
+        if (TupleExpressionSyntaxWrapper.IsInstance(expression)
+            && (TupleExpressionSyntaxWrapper)expression is var tupleExpression
+            && RecursivePatternSyntaxWrapper.IsInstance(pattern)
+            && (RecursivePatternSyntaxWrapper)pattern is var recursivePattern
             && recursivePattern.PositionalPatternClause.SyntaxNode is not null
             && recursivePattern.PositionalPatternClause.Subpatterns.Count == tupleExpression.Arguments.Count)
         {
             for (var i = 0; i < tupleExpression.Arguments.Count; i++)
             {
-                MapObjectToPattern(tupleExpression.Arguments[i].Expression, recursivePattern.PositionalPatternClause.Subpatterns[i].Pattern, objectToPatternMap);
+                FillPatternMap(map, tupleExpression.Arguments[i].Expression, recursivePattern.PositionalPatternClause.Subpatterns[i].Pattern);
             }
         }
         else
         {
-            objectToPatternMap.Add(expressionWithoutParenthesis, patternWithoutParenthesis);
+            map.Add(expression, pattern);
         }
     }
 }

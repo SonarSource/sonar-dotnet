@@ -14,29 +14,10 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.CSharp.Syntax.Extensions;
 
-internal static class CSharpNavigationHelper
+internal static class SwitchSectionSyntaxExtensions
 {
-    public static IList<IfStatementSyntax> PrecedingIfsInConditionChain(this IfStatementSyntax ifStatement)
-    {
-        var ifStatements = new List<IfStatementSyntax>();
-        while (ifStatement.Parent.IsKind(SyntaxKind.ElseClause) && ifStatement.Parent.Parent.IsKind(SyntaxKind.IfStatement))
-        {
-            var precedingIf = (IfStatementSyntax)ifStatement.Parent.Parent;
-            ifStatements.Add(precedingIf);
-            ifStatement = precedingIf;
-        }
-        ifStatements.Reverse();
-        return ifStatements;
-    }
-
-    public static IEnumerable<StatementSyntax> PrecedingStatementsInConditionChain(this IfStatementSyntax ifStatement) =>
-        PrecedingIfsInConditionChain(ifStatement).Select(x => x.Statement);
-
-    public static IEnumerable<ExpressionSyntax> PrecedingConditionsInConditionChain(this IfStatementSyntax ifStatement) =>
-        PrecedingIfsInConditionChain(ifStatement).Select(x => x.Condition);
-
     public static IEnumerable<SwitchSectionSyntax> PrecedingSections(this SwitchSectionSyntax caseStatement)
     {
         if (caseStatement is null)

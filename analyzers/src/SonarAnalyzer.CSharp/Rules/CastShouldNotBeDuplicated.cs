@@ -109,9 +109,7 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
 
     private static void ProcessPatternExpression(SonarSyntaxNodeReportingContext analysisContext, SyntaxNode isPattern, SyntaxNode mainVariableExpression, SyntaxNode parentStatement)
     {
-        var objectToPattern = new Dictionary<ExpressionSyntax, SyntaxNode>();
-        PatternExpressionObjectToPatternMapping.MapObjectToPattern((ExpressionSyntax)mainVariableExpression.RemoveParentheses(), isPattern.RemoveParentheses(), objectToPattern);
-        foreach (var expressionPatternPair in objectToPattern)
+        foreach (var expressionPatternPair in ((ExpressionSyntax)mainVariableExpression).MapToPattern(isPattern))
         {
             var pattern = expressionPatternPair.Value;
             var leftVariable = expressionPatternPair.Key;

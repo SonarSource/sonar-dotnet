@@ -14,41 +14,35 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+using SonarAnalyzer.CSharp.Syntax.Extensions;
+
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public class DoNotWriteToStandardOutput : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class DoNotWriteToStandardOutput : SonarDiagnosticAnalyzer
-    {
-        private const string DiagnosticId = "S106";
-        private const string MessageFormat = "Remove this logging statement.";
+    private const string DiagnosticId = "S106";
+    private const string MessageFormat = "Remove this logging statement.";
 
-        protected static DiagnosticDescriptor Rule =>
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    private static readonly string[] BannedConsoleMembers = ["WriteLine", "Write"];
 
-        private static readonly ISet<string> BannedConsoleMembers = new HashSet<string> { "WriteLine", "Write" };
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
-            ImmutableArray.Create(Rule);
-        protected sealed override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(c =>
+    protected static DiagnosticDescriptor Rule =>
+        DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+    protected sealed override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(c =>
+            {
+                var invocation = (InvocationExpressionSyntax)c.Node;
+                if (c.Compilation.Options.OutputKind != OutputKind.ConsoleApplication
+                    && c.SemanticModel.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol method
+                    && method.IsAny(KnownType.System_Console, BannedConsoleMembers)
+                    && !c.Node.IsInDebugBlock()
+                    && !invocation.IsInConditionalDebug(c.SemanticModel))
                 {
-                    if (c.Compilation.Options.OutputKind == OutputKind.ConsoleApplication)
-                    {
-                        return;
-                    }
-
-                    var methodCall = (InvocationExpressionSyntax)c.Node;
-                    var methodSymbol = c.SemanticModel.GetSymbolInfo(methodCall.Expression).Symbol;
-
-                    if (methodSymbol != null &&
-                        methodSymbol.IsInType(KnownType.System_Console) &&
-                        BannedConsoleMembers.Contains(methodSymbol.Name) &&
-                        !c.Node.IsInDebugBlock() &&
-                        !CSharpDebugOnlyCodeHelper.IsCallerInConditionalDebug(methodCall, c.SemanticModel))
-                    {
-                        c.ReportIssue(Rule, methodCall.Expression);
-                    }
-                },
-                SyntaxKind.InvocationExpression);
-    }
+                    c.ReportIssue(Rule, invocation.Expression);
+                }
+            },
+            SyntaxKind.InvocationExpression);
 }

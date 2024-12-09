@@ -14,10 +14,21 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.CSharp.Syntax.Extensions;
 
-internal static class CSharpIfDirectiveHelper
+internal static class SyntaxNodeExtensions
 {
+    public static bool IsInDebugBlock(this SyntaxNode node) =>
+        node.ActiveConditionalCompilationSections().Contains("DEBUG");
+
+    public static bool IsInConditionalDebug(this SyntaxNode node, SemanticModel model)
+    {
+        var method = node.FirstAncestorOrSelf<MethodDeclarationSyntax>() is { } containingMethod
+            ? model.GetDeclaredSymbol(containingMethod)
+            : null;
+        return method.IsConditionalDebugMethod();
+    }
+
     /// <summary>
     /// Returns a list of the names of #if [NAME] sections that the specified
     /// node is contained in.
@@ -27,7 +38,7 @@ internal static class CSharpIfDirectiveHelper
     /// We don't handle logical operators e.g. #if !DEBUG, and we don't handle cases like
     /// #if !DEBUG ... #else... :DEBUG must be true in the else case.
     /// </remarks>
-    public static IEnumerable<string> ActiveConditionalCompilationSections(SyntaxNode node)
+    public static IEnumerable<string> ActiveConditionalCompilationSections(this SyntaxNode node)
     {
         var directives = CollectPrecedingDirectiveSyntax(node);
         if (directives.Count == 0)
@@ -82,7 +93,8 @@ internal static class CSharpIfDirectiveHelper
     }
 
     /// <summary>
-    /// Collects all of the #if, #else, #elsif and #endif directives occurring in the syntax tree up to the specified node.
+    /// Collects all of the #if, #else, #elsif and #endif directives occuring in the
+    /// syntax tree up to the specified node
     /// </summary>
     private sealed class BranchingDirectiveCollector : SafeCSharpSyntaxWalker
     {

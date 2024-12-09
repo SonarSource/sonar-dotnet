@@ -14,11 +14,11 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.CSharp.Syntax.Extensions;
 
-internal static class CSharpOverloadHelper
+internal static class InvocationExpressionSyntaxExtensions
 {
-    public static bool HasOverloadWithType(InvocationExpressionSyntax invocation, SemanticModel model, ImmutableArray<KnownType> types) =>
+    public static bool HasOverloadWithType(this InvocationExpressionSyntax invocation, SemanticModel model, ImmutableArray<KnownType> types) =>
         model.GetMemberGroup(invocation.Expression)
             .OfType<IMethodSymbol>()
             .Where(x => !x.HasAttribute(KnownType.System_ObsoleteAttribute))
@@ -26,9 +26,12 @@ internal static class CSharpOverloadHelper
             .Any(x => SameParametersExceptWantedType(x, InvocationParameters(invocation, model), types));
 
     // must have same number of arguments + 1 (the argument that should be added) OR is params argument
-    private static bool IsCompatibleOverload(InvocationExpressionSyntax invocation, IMethodSymbol m) =>
-            (m.GetParameters().Count() - invocation.ArgumentList.Arguments.Count == 1) ||
-            (m.GetParameters().Any() && m.GetParameters().Last().IsParams);
+    private static bool IsCompatibleOverload(InvocationExpressionSyntax invocation, IMethodSymbol m)
+    {
+        var parameters = m.GetParameters().ToArray();
+        return parameters.Length - invocation.ArgumentList.Arguments.Count == 1
+            || (parameters.Length != 0 && parameters[parameters.Length - 1].IsParams);
+    }
 
     private static IMethodSymbol InvocationParameters(InvocationExpressionSyntax invocation, SemanticModel model) =>
         model.GetSymbolInfo(invocation.Expression).Symbol as IMethodSymbol;

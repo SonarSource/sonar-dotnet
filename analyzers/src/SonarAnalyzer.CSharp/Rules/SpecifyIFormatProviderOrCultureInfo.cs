@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         c.SemanticModel.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol methodSymbol &&
                         !IsIgnored(methodSymbol) &&
                         CanPotentiallyRaise(methodSymbol) &&
-                        CSharpOverloadHelper.HasOverloadWithType(invocation, c.SemanticModel, formatAndCultureType))
+                        SonarAnalyzer.CSharp.Syntax.Extensions.InvocationExpressionSyntaxExtensions.HasOverloadWithType(invocation, c.SemanticModel, formatAndCultureType))
                     {
                         c.ReportIssue(rule, invocation, invocation.Expression.ToString());
                     }
