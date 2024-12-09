@@ -14,15 +14,10 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Extensions;
+namespace SonarAnalyzer.Core.Semantics.Extensions;
 
-public static class AccessibilityExtensions
+public static class SemanticModelExtensions
 {
-    /// <summary>
-    /// Beware of Accessibility members:
-    /// ProtectedOrInternal = C# "protected internal" or VB.NET "Protected Friend" syntax. Accessible from inheriting class OR the same assembly.
-    /// ProtectedAndInternal = C# "private protected" or VB.NET "Private Protected" syntax. Accessible only from inheriting class in the same assembly.
-    /// </summary>
-    public static bool IsAccessibleOutsideTheType(this Accessibility accessibility) =>
-        accessibility == Accessibility.Public || accessibility == Accessibility.Internal || accessibility == Accessibility.ProtectedOrInternal;
+    public static bool IsExtensionMethod(this SemanticModel model, SyntaxNode expression) =>
+        model.GetSymbolInfo(expression).Symbol is IMethodSymbol memberSymbol && memberSymbol.IsExtensionMethod;
 }

@@ -14,8 +14,8 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using SonarAnalyzer.Core.Syntax.Extensions;
 using SonarAnalyzer.Core.Syntax.Utilities;
-using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions;
 

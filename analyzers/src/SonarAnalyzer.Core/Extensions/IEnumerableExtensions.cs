@@ -14,6 +14,8 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using SonarAnalyzer.Core.Syntax.Extensions;
+
 namespace SonarAnalyzer.Core.Extensions;
 
 public static class IEnumerableExtensions

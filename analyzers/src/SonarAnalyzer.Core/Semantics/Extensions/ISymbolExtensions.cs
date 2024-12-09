@@ -15,8 +15,9 @@
  */
 
 using System.Diagnostics.CodeAnalysis;
+using SonarAnalyzer.Core.Syntax.Extensions;
 
-namespace SonarAnalyzer.Core.Extensions;
+namespace SonarAnalyzer.Core.Semantics.Extensions;
 
 public static class ISymbolExtensions
 {
@@ -86,14 +87,14 @@ public static class ISymbolExtensions
                 .FirstOrDefault(x => symbol.Equals(symbol.ContainingType.FindImplementationForInterfaceMember(x)));
 
     public static T GetOverriddenMember<T>(this T symbol) where T : class, ISymbol =>
-        (symbol is { IsOverride: true })
+        symbol is { IsOverride: true }
             ? symbol.Kind switch
-                {
-                    SymbolKind.Method => (T)((IMethodSymbol)symbol).OverriddenMethod,
-                    SymbolKind.Property => (T)((IPropertySymbol)symbol).OverriddenProperty,
-                    SymbolKind.Event => (T)((IEventSymbol)symbol).OverriddenEvent,
-                    _ => throw new ArgumentException($"Only methods, properties and events can be overridden. {typeof(T).Name} was provided", nameof(symbol))
-                }
+            {
+                SymbolKind.Method => (T)((IMethodSymbol)symbol).OverriddenMethod,
+                SymbolKind.Property => (T)((IPropertySymbol)symbol).OverriddenProperty,
+                SymbolKind.Event => (T)((IEventSymbol)symbol).OverriddenEvent,
+                _ => throw new ArgumentException($"Only methods, properties and events can be overridden. {typeof(T).Name} was provided", nameof(symbol))
+            }
             : null;
 
     public static bool IsChangeable(this ISymbol symbol) =>
@@ -139,7 +140,7 @@ public static class ISymbolExtensions
     }
 
     public static bool IsPubliclyAccessible(this ISymbol symbol) =>
-        GetEffectiveAccessibility(symbol) is Accessibility.Public or Accessibility.Protected or Accessibility.ProtectedOrInternal;
+        symbol.GetEffectiveAccessibility() is Accessibility.Public or Accessibility.Protected or Accessibility.ProtectedOrInternal;
 
     public static bool IsConstructor(this ISymbol symbol) =>
         symbol.Kind == SymbolKind.Method && symbol.Name == ".ctor";

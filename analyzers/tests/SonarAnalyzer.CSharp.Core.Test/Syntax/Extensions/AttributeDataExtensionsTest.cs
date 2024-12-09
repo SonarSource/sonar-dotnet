@@ -15,6 +15,7 @@
  */
 
 using NSubstitute;
+using SonarAnalyzer.Core.Syntax.Extensions;
 
 namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions
 {

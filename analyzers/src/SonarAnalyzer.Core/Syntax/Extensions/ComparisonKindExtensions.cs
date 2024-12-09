@@ -14,12 +14,17 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Test.Extensions;
+namespace SonarAnalyzer.Core.Syntax.Extensions;
 
-[TestClass]
-public class IPropertySymbolExtensionsTest
+public static class ComparisonKindExtensions
 {
-    [TestMethod]
-    public void IsAnyAttributeInOverridingChain_WhenPropertySymbolIsNull_ReturnsFalse() =>
-        IPropertySymbolExtensions.IsAnyAttributeInOverridingChain(null).Should().BeFalse();
+    public static ComparisonKind Mirror(this ComparisonKind comparison) =>
+        comparison switch
+        {
+            ComparisonKind.GreaterThan => ComparisonKind.LessThan,
+            ComparisonKind.GreaterThanOrEqual => ComparisonKind.LessThanOrEqual,
+            ComparisonKind.LessThan => ComparisonKind.GreaterThan,
+            ComparisonKind.LessThanOrEqual => ComparisonKind.GreaterThanOrEqual,
+            _ => comparison,
+        };
 }

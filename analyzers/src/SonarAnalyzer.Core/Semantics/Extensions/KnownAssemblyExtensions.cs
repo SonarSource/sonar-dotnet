@@ -14,12 +14,13 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Test.Extensions;
+namespace SonarAnalyzer.Core.Semantics.Extensions;
 
-[TestClass]
-public class IParameterSymbolExtensionsTest
+internal static class KnownAssemblyExtensions
 {
-    [TestMethod]
-    public void IsType_Null() =>
-        IParameterSymbolExtensions.IsType(null, KnownType.System_Boolean).Should().BeFalse();
+    internal static Func<AssemblyIdentity, bool> And(this Func<AssemblyIdentity, bool> @this, Func<AssemblyIdentity, bool> predicate) =>
+        x => @this(x) && predicate(x);
+
+    internal static Func<AssemblyIdentity, bool> Or(this Func<AssemblyIdentity, bool> @this, Func<AssemblyIdentity, bool> predicate) =>
+        x => @this(x) || predicate(x);
 }

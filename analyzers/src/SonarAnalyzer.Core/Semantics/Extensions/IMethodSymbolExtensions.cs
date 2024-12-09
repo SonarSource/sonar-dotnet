@@ -16,7 +16,7 @@
 
 using Comparison = SonarAnalyzer.Core.Syntax.Utilities.ComparisonKind;
 
-namespace SonarAnalyzer.Core.Extensions;
+namespace SonarAnalyzer.Core.Semantics.Extensions;
 
 public static class IMethodSymbolExtensions
 {

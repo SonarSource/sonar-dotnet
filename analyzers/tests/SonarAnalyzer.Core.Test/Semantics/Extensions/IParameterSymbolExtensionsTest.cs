@@ -14,10 +14,12 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Extensions;
+namespace SonarAnalyzer.Core.Test.Semantics.Extensions;
 
-public static class IParameterSymbolExtensions
+[TestClass]
+public class IParameterSymbolExtensionsTest
 {
-    public static bool IsType(this IParameterSymbol parameter, KnownType type) =>
-        parameter is not null && parameter.Type.Is(type);
+    [TestMethod]
+    public void IsType_Null() =>
+        IParameterSymbolExtensions.IsType(null, KnownType.System_Boolean).Should().BeFalse();
 }

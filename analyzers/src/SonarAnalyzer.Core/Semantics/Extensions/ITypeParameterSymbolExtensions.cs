@@ -14,15 +14,14 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Extensions;
+namespace SonarAnalyzer.Core.Semantics.Extensions;
 
-public static class SymbolInfoExtensions
+internal static class ITypeParameterSymbolExtensions
 {
-    /// <summary>
-    /// Returns the <see cref="SymbolInfo.Symbol"/> or if no symbol could be found the <see cref="SymbolInfo.CandidateSymbols"/>.
-    /// </summary>
-    public static IEnumerable<ISymbol> AllSymbols(this SymbolInfo symbolInfo) =>
-        symbolInfo.Symbol == null
-            ? symbolInfo.CandidateSymbols
-            : new[] { symbolInfo.Symbol };
+    public static bool HasAnyConstraint(this ITypeParameterSymbol typeParameter) =>
+        typeParameter.HasConstructorConstraint
+        || typeParameter.HasReferenceTypeConstraint
+        || typeParameter.HasValueTypeConstraint
+        || !typeParameter.ConstraintTypes.IsEmpty
+        || typeParameter.HasUnmanagedTypeConstraint();
 }

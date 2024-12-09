@@ -16,7 +16,7 @@
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.Core.Test.Extensions;
+namespace SonarAnalyzer.Core.Test.Semantics.Extensions;
 
 [TestClass]
 public class INamespaceSymbolExtensionsTest

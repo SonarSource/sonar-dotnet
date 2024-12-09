@@ -14,14 +14,12 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Extensions;
+namespace SonarAnalyzer.Core.Test.Semantics.Extensions;
 
-internal static class ITypeParameterSymbolExtensions
+[TestClass]
+public class IPropertySymbolExtensionsTest
 {
-    public static bool HasAnyConstraint(this ITypeParameterSymbol typeParameter) =>
-        typeParameter.HasConstructorConstraint
-        || typeParameter.HasReferenceTypeConstraint
-        || typeParameter.HasValueTypeConstraint
-        || !typeParameter.ConstraintTypes.IsEmpty
-        || typeParameter.HasUnmanagedTypeConstraint();
+    [TestMethod]
+    public void IsAnyAttributeInOverridingChain_WhenPropertySymbolIsNull_ReturnsFalse() =>
+        IPropertySymbolExtensions.IsAnyAttributeInOverridingChain(null).Should().BeFalse();
 }

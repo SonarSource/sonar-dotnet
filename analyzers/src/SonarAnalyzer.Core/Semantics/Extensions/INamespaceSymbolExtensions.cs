@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Extensions;
+namespace SonarAnalyzer.Core.Semantics.Extensions;
 
 internal static class INamespaceSymbolExtensions
 {
@@ -63,9 +63,9 @@ internal static class INamespaceSymbolExtensions
         || (namespace1.Name.Equals(namespace2.Name)
             && namespace1.ContainingNamespace is not null
             && namespace2.ContainingNamespace is not null
-            && IsSameNamespace(namespace1.ContainingNamespace, namespace2.ContainingNamespace));
+            && namespace1.ContainingNamespace.IsSameNamespace(namespace2.ContainingNamespace));
 
     public static bool IsSameOrAncestorOf(this INamespaceSymbol thisNamespace, INamespaceSymbol namespaceToCheck) =>
-        IsSameNamespace(thisNamespace, namespaceToCheck)
-        || (namespaceToCheck.ContainingNamespace is not null && IsSameOrAncestorOf(thisNamespace, namespaceToCheck.ContainingNamespace));
+        thisNamespace.IsSameNamespace(namespaceToCheck)
+        || (namespaceToCheck.ContainingNamespace is not null && thisNamespace.IsSameOrAncestorOf(namespaceToCheck.ContainingNamespace));
 }

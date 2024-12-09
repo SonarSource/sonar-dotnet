@@ -17,6 +17,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.Core.Syntax.Extensions;
 
 namespace SonarAnalyzer.TestFramework.Analyzers;
 
@@ -40,7 +41,7 @@ public class DummyAnalyzerWithLocation : SonarDiagnosticAnalyzer
         if (context.Node is InvocationExpressionSyntax invocation
             && invocation.Expression is IdentifierNameSyntax { Identifier.ValueText: "RaiseHere" } identifier)
         {
-            context.ReportIssue(rule, identifier.GetLocation(), invocation.ArgumentList.Arguments.Select(arg => arg.ToSecondaryLocation()));
+            context.ReportIssue(rule, identifier.GetLocation(), invocation.ArgumentList.Arguments.Select(x => x.ToSecondaryLocation()));
         }
     }
 }

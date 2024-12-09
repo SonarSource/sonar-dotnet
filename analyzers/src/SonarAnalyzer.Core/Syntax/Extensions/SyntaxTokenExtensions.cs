@@ -14,13 +14,13 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Extensions;
+namespace SonarAnalyzer.Core.Syntax.Extensions;
 
-internal static class KnownAssemblyExtensions
+public static class SyntaxTokenExtensions
 {
-    internal static Func<AssemblyIdentity, bool> And(this Func<AssemblyIdentity, bool> @this, Func<AssemblyIdentity, bool> predicate)
-        => identity => @this(identity) && predicate(identity);
+    public static int Line(this SyntaxToken token) =>
+        token.GetLocation().StartLine();
 
-    internal static Func<AssemblyIdentity, bool> Or(this Func<AssemblyIdentity, bool> @this, Func<AssemblyIdentity, bool> predicate)
-        => identity => @this(identity) || predicate(identity);
+    public static SecondaryLocation ToSecondaryLocation(this SyntaxToken token, string message = null) =>
+        new(token.GetLocation(), message);
 }

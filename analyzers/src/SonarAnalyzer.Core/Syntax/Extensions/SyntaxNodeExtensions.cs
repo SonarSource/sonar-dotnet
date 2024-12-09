@@ -14,18 +14,18 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Extensions;
+namespace SonarAnalyzer.Core.Syntax.Extensions;
 
 public static class SyntaxNodeExtensions
 {
-    public static bool IsKnownType(this SyntaxNode syntaxNode, KnownType knownType, SemanticModel semanticModel)
+    public static bool IsKnownType(this SyntaxNode node, KnownType knownType, SemanticModel model)
     {
-        var type = semanticModel.GetSymbolInfo(syntaxNode).Symbol.GetSymbolType();
+        var type = model.GetSymbolInfo(node).Symbol.GetSymbolType();
         return type.Is(knownType) || type?.OriginalDefinition?.Is(knownType) == true;
     }
 
-    public static bool IsDeclarationKnownType(this SyntaxNode syntaxNode, KnownType knownType, SemanticModel semanticModel) =>
-        semanticModel.GetDeclaredSymbol(syntaxNode)?.GetSymbolType().Is(knownType) ?? false;
+    public static bool IsDeclarationKnownType(this SyntaxNode node, KnownType knownType, SemanticModel model) =>
+        model.GetDeclaredSymbol(node)?.GetSymbolType().Is(knownType) ?? false;
 
     public static SemanticModel EnsureCorrectSemanticModelOrDefault(this SyntaxNode node, SemanticModel model) =>
         node.SyntaxTree.GetSemanticModelOrDefault(model);

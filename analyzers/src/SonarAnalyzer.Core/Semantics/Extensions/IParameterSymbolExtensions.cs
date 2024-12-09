@@ -14,13 +14,10 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Extensions;
+namespace SonarAnalyzer.Core.Semantics.Extensions;
 
-public static class SyntaxTokenExtensions
+public static class IParameterSymbolExtensions
 {
-    public static int Line(this SyntaxToken token) =>
-        token.GetLocation().StartLine();
-
-    public static SecondaryLocation ToSecondaryLocation(this SyntaxToken token, string message = null) =>
-        new(token.GetLocation(), message);
+    public static bool IsType(this IParameterSymbol parameter, KnownType type) =>
+        parameter is not null && parameter.Type.Is(type);
 }

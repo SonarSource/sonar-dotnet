@@ -17,33 +17,38 @@
 using System.Runtime.CompilerServices;
 using Roslyn.Utilities;
 
-namespace SonarAnalyzer.Core.Extensions;
+namespace SonarAnalyzer.Core.Syntax.Extensions;
 
 internal static class SyntaxTreeExtensions
 {
     private static readonly ConditionalWeakTable<SyntaxTree, object> GeneratedCodeCache = new();
 
     [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
-    public static bool IsGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
-        tree switch
+    public static bool IsGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer)
+    {
+        if (tree is null)
         {
-            null => false,
-            _ => GeneratedCodeCache.TryGetValue(tree, out var result)
+            return false;
+        }
+        else
+        {
+            return GeneratedCodeCache.TryGetValue(tree, out var result)
                 ? (bool)result
-                : IsGeneratedGetOrAdd(tree, generatedCodeRecognizer)
-        };
-
-    private static bool IsGeneratedGetOrAdd(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
-        (bool)GeneratedCodeCache.GetValue(tree, tree => generatedCodeRecognizer.IsGenerated(tree));
+                : IsGeneratedGetOrAdd(tree, generatedCodeRecognizer);
+        }
+    }
 
     public static bool IsConsideredGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, bool isRazorAnalysisEnabled) =>
         isRazorAnalysisEnabled
-            ? IsGenerated(tree, generatedCodeRecognizer) && !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
-            : IsGenerated(tree, generatedCodeRecognizer);
+            ? tree.IsGenerated(generatedCodeRecognizer) && !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
+            : tree.IsGenerated(generatedCodeRecognizer);
 
     public static string GetOriginalFilePath(this SyntaxTree tree) =>
         // Currently we support only C# based generated files.
         tree.GetRoot().DescendantNodes(_ => true, true).OfType<Microsoft.CodeAnalysis.CSharp.Syntax.PragmaChecksumDirectiveTriviaSyntax>().FirstOrDefault() is { } pragmaChecksum
             ? pragmaChecksum.File.ValueText
             : tree.FilePath;
+
+    private static bool IsGeneratedGetOrAdd(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
+        (bool)GeneratedCodeCache.GetValue(tree, x => generatedCodeRecognizer.IsGenerated(x));
 }

@@ -14,10 +14,15 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Extensions;
+namespace SonarAnalyzer.Core.Semantics.Extensions;
 
-internal static class IPropertySymbolExtensions
+public static class SymbolInfoExtensions
 {
-    public static bool IsAnyAttributeInOverridingChain(this IPropertySymbol property) =>
-        property.IsAnyAttributeInOverridingChain(x => x.OverriddenProperty);
+    /// <summary>
+    /// Returns the <see cref="SymbolInfo.Symbol"/> or if no symbol could be found the <see cref="SymbolInfo.CandidateSymbols"/>.
+    /// </summary>
+    public static IEnumerable<ISymbol> AllSymbols(this SymbolInfo symbolInfo) =>
+        symbolInfo.Symbol is null
+            ? symbolInfo.CandidateSymbols
+            : new[] { symbolInfo.Symbol };
 }

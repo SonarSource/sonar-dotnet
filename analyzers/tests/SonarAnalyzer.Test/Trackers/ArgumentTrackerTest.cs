@@ -15,6 +15,7 @@
  */
 
 using Microsoft.CodeAnalysis.Text;
+using SonarAnalyzer.Core.Semantics.Extensions;
 using SonarAnalyzer.Core.Trackers;
 using SonarAnalyzer.CSharp.Core.Trackers;
 using SonarAnalyzer.VisualBasic.Core.Trackers;

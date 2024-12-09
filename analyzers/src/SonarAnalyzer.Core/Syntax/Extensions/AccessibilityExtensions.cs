@@ -14,17 +14,15 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Extensions;
+namespace SonarAnalyzer.Core.Syntax.Extensions;
 
-public static class ComparisonKindExtensions
+public static class AccessibilityExtensions
 {
-    public static ComparisonKind Mirror(this ComparisonKind comparison) =>
-        comparison switch
-        {
-            ComparisonKind.GreaterThan => ComparisonKind.LessThan,
-            ComparisonKind.GreaterThanOrEqual => ComparisonKind.LessThanOrEqual,
-            ComparisonKind.LessThan => ComparisonKind.GreaterThan,
-            ComparisonKind.LessThanOrEqual => ComparisonKind.GreaterThanOrEqual,
-            _ => comparison,
-        };
+    /// <summary>
+    /// Beware of Accessibility members:
+    /// ProtectedOrInternal = C# "protected internal" or VB.NET "Protected Friend" syntax. Accessible from inheriting class OR the same assembly.
+    /// ProtectedAndInternal = C# "private protected" or VB.NET "Private Protected" syntax. Accessible only from inheriting class in the same assembly.
+    /// </summary>
+    public static bool IsAccessibleOutsideTheType(this Accessibility accessibility) =>
+        accessibility == Accessibility.Public || accessibility == Accessibility.Internal || accessibility == Accessibility.ProtectedOrInternal;
 }

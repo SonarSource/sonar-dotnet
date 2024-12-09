@@ -14,10 +14,10 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Extensions;
+namespace SonarAnalyzer.Core.Semantics.Extensions;
 
-public static class SemanticModelExtensions
+internal static class IPropertySymbolExtensions
 {
-    public static bool IsExtensionMethod(this SemanticModel model, SyntaxNode expression) =>
-        model.GetSymbolInfo(expression).Symbol is IMethodSymbol memberSymbol && memberSymbol.IsExtensionMethod;
+    public static bool IsAnyAttributeInOverridingChain(this IPropertySymbol property) =>
+        property.IsAnyAttributeInOverridingChain(x => x.OverriddenProperty);
 }

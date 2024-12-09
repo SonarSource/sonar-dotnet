@@ -20,10 +20,11 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Operations;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.Core.Syntax.Extensions;
 using SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 using SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
 using StyleCop.Analyzers.Lightup;
-using ExtensionsCommon = SonarAnalyzer.Core.Extensions.SyntaxNodeExtensions;
+using ExtensionsCore = SonarAnalyzer.Core.Syntax.Extensions.SyntaxNodeExtensions;
 using ExtensionsShared = SonarAnalyzer.CSharp.Core.Syntax.Extensions.SyntaxNodeExtensionsShared;
 using MicrosoftExtensionsCS = Microsoft.CodeAnalysis.CSharp.Extensions.SyntaxNodeExtensions;
 using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -759,7 +760,7 @@ End Class";
 
     [TestMethod]
     public void Kind_Null_ReturnsNone() =>
-        ExtensionsCommon.Kind<SyntaxKind>(null).Should().Be(SyntaxKind.None);
+        ExtensionsCore.Kind<SyntaxKind>(null).Should().Be(SyntaxKind.None);
 
     [DataTestMethod]
     [DataRow("class Test { }", DisplayName = "When there is no pragma, return default file name.")]
@@ -1306,10 +1307,10 @@ End Class";
             }
             """);
         var method = (MethodDeclarationSyntax)snippet.GetMethodDeclaration("Sample.Method");
-        ExtensionsCommon.IsKnownType(method.ParameterList.Parameters[0].Type, KnownType.System_Collections_Generic_List_T, snippet.SemanticModel).Should().BeTrue();
-        ExtensionsCommon.IsKnownType(method.ParameterList.Parameters[1].Type, KnownType.System_Collections_Generic_List_T, snippet.SemanticModel).Should().BeTrue();
-        ExtensionsCommon.IsKnownType(method.ParameterList.Parameters[2].Type, KnownType.System_Collections_Generic_List_T, snippet.SemanticModel).Should().BeTrue();
-        ExtensionsCommon.IsKnownType(method.ParameterList.Parameters[3].Type, KnownType.System_Collections_Generic_List_T, snippet.SemanticModel).Should().BeFalse();
+        ExtensionsCore.IsKnownType(method.ParameterList.Parameters[0].Type, KnownType.System_Collections_Generic_List_T, snippet.SemanticModel).Should().BeTrue();
+        ExtensionsCore.IsKnownType(method.ParameterList.Parameters[1].Type, KnownType.System_Collections_Generic_List_T, snippet.SemanticModel).Should().BeTrue();
+        ExtensionsCore.IsKnownType(method.ParameterList.Parameters[2].Type, KnownType.System_Collections_Generic_List_T, snippet.SemanticModel).Should().BeTrue();
+        ExtensionsCore.IsKnownType(method.ParameterList.Parameters[3].Type, KnownType.System_Collections_Generic_List_T, snippet.SemanticModel).Should().BeFalse();
     }
 
     private static SyntaxNode NodeBetweenMarkers(string code, AnalyzerLanguage language, bool getInnermostNodeForTie = false, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
