@@ -19,17 +19,15 @@ using System.Text.RegularExpressions;
 
 namespace SonarAnalyzer.AnalysisContext;
 
-public sealed class SonarCompilationReportingContext : SonarCompilationReportingContextBase<CompilationAnalysisContext>
+public readonly record struct SonarCompilationReportingContext(SonarAnalysisContext AnalysisContext, CompilationAnalysisContext Context) : ICompilationReport, IAnalysisContext
 {
     private static readonly TimeSpan FileNameTimeout = TimeSpan.FromMilliseconds(100);
     private static readonly Regex WebConfigRegex = new(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase, FileNameTimeout);
     private static readonly Regex AppSettingsRegex = new(@"[\\\/]appsettings\.([^\\\/]+\.)?json$", RegexOptions.IgnoreCase, FileNameTimeout);
 
-    public override Compilation Compilation => Context.Compilation;
-    public override AnalyzerOptions Options => Context.Options;
-    public override CancellationToken Cancel => Context.CancellationToken;
-
-    internal SonarCompilationReportingContext(SonarAnalysisContext analysisContext, CompilationAnalysisContext context) : base(analysisContext, context) { }
+    public Compilation Compilation => Context.Compilation;
+    public AnalyzerOptions Options => Context.Options;
+    public CancellationToken Cancel => Context.CancellationToken;
 
     public IEnumerable<string> WebConfigFiles()
     {
@@ -47,6 +45,42 @@ public sealed class SonarCompilationReportingContext : SonarCompilationReporting
             !Path.GetFileName(path).Equals("appsettings.development.json", StringComparison.OrdinalIgnoreCase);
     }
 
-    public override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
+    public ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
         new(this, diagnostic);
+
+    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer,
+                        DiagnosticDescriptor rule,
+                        Location primaryLocation,
+                        IEnumerable<SecondaryLocation> secondaryLocations = null,
+                        params string[] messageArgs)
+    {
+        if (this.ShouldAnalyzeTree(primaryLocation?.SourceTree, generatedCodeRecognizer))
+        {
+            var @this = this;
+            secondaryLocations = secondaryLocations?.Where(x => x.Location.IsValid(@this.Compilation)).ToArray();
+            IssueReporter.ReportIssueCore(
+                Compilation,
+                x => @this.HasMatchingScope(x),
+                CreateReportingContext,
+                rule,
+                primaryLocation,
+                secondaryLocations,
+                ImmutableDictionary<string, string>.Empty,
+                messageArgs);
+        }
+    }
+
+    [Obsolete("Use another overload of ReportIssue, without calling Diagnostic.Create")]
+    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
+    {
+        if (this.ShouldAnalyzeTree(diagnostic.Location.SourceTree, generatedCodeRecognizer))
+        {
+            var @this = this;
+            IssueReporter.ReportIssueCore(
+                Compilation,
+                x => @this.HasMatchingScope(x),
+                CreateReportingContext,
+                diagnostic);
+        }
+    }
 }

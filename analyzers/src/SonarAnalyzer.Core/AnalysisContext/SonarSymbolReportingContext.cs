@@ -16,15 +16,49 @@
 
 namespace SonarAnalyzer.AnalysisContext;
 
-public sealed class SonarSymbolReportingContext : SonarCompilationReportingContextBase<SymbolAnalysisContext>
+public readonly record struct SonarSymbolReportingContext(SonarAnalysisContext AnalysisContext, SymbolAnalysisContext Context) : ICompilationReport, IAnalysisContext
 {
-    public override Compilation Compilation => Context.Compilation;
-    public override AnalyzerOptions Options => Context.Options;
-    public override CancellationToken Cancel => Context.CancellationToken;
+    public Compilation Compilation => Context.Compilation;
+    public AnalyzerOptions Options => Context.Options;
+    public CancellationToken Cancel => Context.CancellationToken;
     public ISymbol Symbol => Context.Symbol;
 
-    internal SonarSymbolReportingContext(SonarAnalysisContext analysisContext, SymbolAnalysisContext context) : base(analysisContext, context) { }
-
-    public override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
+    public ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
        new(this, diagnostic);
+
+    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer,
+                        DiagnosticDescriptor rule,
+                        Location primaryLocation,
+                        IEnumerable<SecondaryLocation> secondaryLocations = null,
+                        params string[] messageArgs)
+    {
+        if (this.ShouldAnalyzeTree(primaryLocation?.SourceTree, generatedCodeRecognizer))
+        {
+            var @this = this;
+            secondaryLocations = secondaryLocations?.Where(x => x.Location.IsValid(@this.Compilation)).ToArray();
+            IssueReporter.ReportIssueCore(
+                Compilation,
+                x => @this.HasMatchingScope(x),
+                CreateReportingContext,
+                rule,
+                primaryLocation,
+                secondaryLocations,
+                ImmutableDictionary<string, string>.Empty,
+                messageArgs);
+        }
+    }
+
+    [Obsolete("Use another overload of ReportIssue, without calling Diagnostic.Create")]
+    public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
+    {
+        if (this.ShouldAnalyzeTree(diagnostic.Location.SourceTree, generatedCodeRecognizer))
+        {
+            var @this = this;
+            IssueReporter.ReportIssueCore(
+                Compilation,
+                x => @this.HasMatchingScope(x),
+                CreateReportingContext,
+                diagnostic);
+        }
+    }
 }

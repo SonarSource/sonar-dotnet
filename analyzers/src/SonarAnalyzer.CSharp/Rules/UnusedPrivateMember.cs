@@ -124,11 +124,11 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
                 .SelectMany(x => x.GetSyntax().ChildNodes().OfType<BaseTypeDeclarationSyntax>());
     }
 
-    private static void ReportUnusedPrivateMembers<TContext>(SonarCompilationReportingContextBase<TContext> context,
+    private static void ReportUnusedPrivateMembers<TContext>(TContext context,
                                                              SymbolUsageCollector usageCollector,
                                                              ISet<ISymbol> removableSymbols,
                                                              string accessibility,
-                                                             BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
+                                                             BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols) where TContext : ICompilationReport
     {
         var unusedSymbols = GetUnusedSymbols(usageCollector, removableSymbols);
 
@@ -203,10 +203,10 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
     private static string GetFieldAccessibilityForMessage(ISymbol symbol) =>
         symbol.DeclaredAccessibility == Accessibility.Private ? SyntaxConstants.Private : "private class";
 
-    private static void ReportDiagnosticsForMembers<TContext>(SonarCompilationReportingContextBase<TContext> context,
+    private static void ReportDiagnosticsForMembers<TContext>(TContext context,
                                                               ICollection<ISymbol> unusedSymbols,
                                                               string accessibility,
-                                                              BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
+                                                              BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols) where TContext : ICompilationReport
     {
         var alreadyReportedFieldLikeSymbols = new HashSet<ISymbol>();
         var unusedSymbolSyntaxPairs = unusedSymbols.SelectMany(x => x.DeclaringSyntaxReferences.Select(syntax => new NodeAndSymbol(syntax.GetSyntax(), x)));
@@ -255,9 +255,9 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
                 : node.GetLocation();
     }
 
-    private static void ReportProperty<TContext>(SonarCompilationReportingContextBase<TContext> context,
+    private static void ReportProperty<TContext>(TContext context,
                                                  IPropertySymbol property,
-                                                 IReadOnlyDictionary<IPropertySymbol, AccessorAccess> propertyAccessorAccess)
+                                                 IReadOnlyDictionary<IPropertySymbol, AccessorAccess> propertyAccessorAccess) where TContext : ICompilationReport
     {
         var access = propertyAccessorAccess[property];
         if (access == AccessorAccess.Get

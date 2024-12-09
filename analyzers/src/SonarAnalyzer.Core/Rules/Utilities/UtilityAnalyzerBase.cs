@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules
                 EndOffset = lineSpan.EndLinePosition.Character
             };
 
-        protected virtual UtilityAnalyzerParameters ReadParameters<T>(SonarAnalysisContextBase<T> context)
+        protected virtual UtilityAnalyzerParameters ReadParameters(IAnalysisContext context)
         {
             var outPath = context.ProjectConfiguration().OutPath;
             // For backward compatibility with S4MSB <= 5.0

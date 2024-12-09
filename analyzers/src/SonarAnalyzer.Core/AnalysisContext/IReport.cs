@@ -38,6 +38,9 @@ public interface ITreeReport : IReport
     void ReportIssue(Diagnostic diagnostic);
 }
 
+/// <summary>
+/// Base class for reporting contexts that are common for the entire compilation. Specific tree is not known before the action is executed.
+/// </summary>
 public interface ICompilationReport : IReport
 {
     void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer,

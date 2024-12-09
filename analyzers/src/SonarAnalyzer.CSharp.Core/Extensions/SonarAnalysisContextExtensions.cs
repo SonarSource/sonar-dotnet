@@ -42,19 +42,19 @@ public static class SonarAnalysisContextExtensions
     public static void RegisterCodeBlockStartAction(this SonarAnalysisContext context, Action<SonarCodeBlockStartAnalysisContext<SyntaxKind>> action) =>
         context.RegisterCodeBlockStartAction(CSharpGeneratedCodeRecognizer.Instance, action);
 
-    public static void ReportIssue<TContext>(this SonarCompilationReportingContextBase<TContext> context, DiagnosticDescriptor rule, SyntaxNode locationSyntax, params string[] messageArgs) =>
+    public static void ReportIssue<TContext>(this TContext context, DiagnosticDescriptor rule, SyntaxNode locationSyntax, params string[] messageArgs) where TContext : ICompilationReport =>
         context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, rule, locationSyntax, messageArgs);
 
-    public static void ReportIssue<TContext>(this SonarCompilationReportingContextBase<TContext> context, DiagnosticDescriptor rule, SyntaxToken locationToken, params string[] messageArgs) =>
+    public static void ReportIssue<TContext>(this TContext context, DiagnosticDescriptor rule, SyntaxToken locationToken, params string[] messageArgs) where TContext : ICompilationReport =>
         context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, rule, locationToken, messageArgs);
 
-    public static void ReportIssue<TContext>(this SonarCompilationReportingContextBase<TContext> context, DiagnosticDescriptor rule, Location location, params string[] messageArgs) =>
+    public static void ReportIssue<TContext>(this TContext context, DiagnosticDescriptor rule, Location location, params string[] messageArgs) where TContext : ICompilationReport =>
         context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, rule, location, messageArgs);
 
-    public static void ReportIssue<TContext>(this SonarCompilationReportingContextBase<TContext> context,
+    public static void ReportIssue<TContext>(this TContext context,
                                              DiagnosticDescriptor rule,
                                              Location primaryLocation,
                                              IEnumerable<SecondaryLocation> secondaryLocations,
-                                             params string[] messageArgs) =>
+                                             params string[] messageArgs) where TContext : ICompilationReport =>
         context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, rule, primaryLocation, secondaryLocations, messageArgs);
 }

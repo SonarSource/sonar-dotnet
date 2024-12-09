@@ -165,7 +165,7 @@ public class CopyPasteTokenAnalyzerTest
             this.isTestProject = isTestProject;
         }
 
-        protected override UtilityAnalyzerParameters ReadParameters<T>(SonarAnalysisContextBase<T> context) =>
+        protected override UtilityAnalyzerParameters ReadParameters(IAnalysisContext context) =>
             base.ReadParameters(context) with { IsAnalyzerEnabled = true, OutPath = outPath, IsTestProject = isTestProject };
     }
 
@@ -180,7 +180,7 @@ public class CopyPasteTokenAnalyzerTest
             this.isTestProject = isTestProject;
         }
 
-        protected override UtilityAnalyzerParameters ReadParameters<T>(SonarAnalysisContextBase<T> context) =>
+        protected override UtilityAnalyzerParameters ReadParameters(IAnalysisContext context) =>
             base.ReadParameters(context) with { IsAnalyzerEnabled = true, OutPath = outPath, IsTestProject = isTestProject };
     }
 }

@@ -146,13 +146,13 @@ public class MethodDeclarationsAnalyzerTest
 
     private sealed class TestMetricsAnalyzerCSharp(string outPath, bool isTestProject) : SonarAnalyzer.Rules.CSharp.MethodDeclarationsAnalyzer
     {
-        protected override UtilityAnalyzerParameters ReadParameters<T>(SonarAnalysisContextBase<T> context) =>
+        protected override UtilityAnalyzerParameters ReadParameters(IAnalysisContext context) =>
             base.ReadParameters(context) with { IsAnalyzerEnabled = true, OutPath = outPath, IsTestProject = isTestProject };
     }
 
     private sealed class TestMetricsAnalyzerVisualBasic(string outPath, bool isTestProject) : SonarAnalyzer.Rules.VisualBasic.MethodDeclarationsAnalyzer
     {
-        protected override UtilityAnalyzerParameters ReadParameters<T>(SonarAnalysisContextBase<T> context) =>
+        protected override UtilityAnalyzerParameters ReadParameters(IAnalysisContext context) =>
             base.ReadParameters(context) with { IsAnalyzerEnabled = true, OutPath = outPath, IsTestProject = isTestProject };
     }
 }
