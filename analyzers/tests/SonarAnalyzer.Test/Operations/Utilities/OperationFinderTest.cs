@@ -15,10 +15,10 @@
  */
 
 using Microsoft.CodeAnalysis.Operations;
-using SonarAnalyzer.CFG.Helpers;
+using SonarAnalyzer.CFG.Operations.Utilities;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Test.Operations.Utilities;
 
 [TestClass]
 public class OperationFinderTest

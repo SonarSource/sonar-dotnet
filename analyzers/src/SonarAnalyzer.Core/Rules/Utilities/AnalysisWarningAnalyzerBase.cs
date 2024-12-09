@@ -15,7 +15,7 @@
  */
 
 using System.IO;
-using SonarAnalyzer.CFG.Helpers;
+using SonarAnalyzer.CFG.Common;
 
 namespace SonarAnalyzer.Rules;
 
@@ -24,8 +24,8 @@ public abstract class AnalysisWarningAnalyzerBase : UtilityAnalyzerBase
     private const string DiagnosticId = "S9999-warning";
     private const string Title = "Analysis Warning generator";
 
-    protected virtual int VS2017MajorVersion => RoslynHelper.VS2017MajorVersion; // For testing
-    protected virtual int MinimalSupportedRoslynVersion => RoslynHelper.MinimalSupportedMajorVersion; // For testing
+    protected virtual int VS2017MajorVersion => RoslynVersion.VS2017MajorVersion; // For testing
+    protected virtual int MinimalSupportedRoslynVersion => RoslynVersion.MinimalSupportedMajorVersion; // For testing
 
     protected AnalysisWarningAnalyzerBase() : base(DiagnosticId, Title) { }
 
@@ -42,12 +42,12 @@ public abstract class AnalysisWarningAnalyzerBase : UtilityAnalyzerBase
                 if (!File.Exists(path))
                 {
                     // This can be removed after we bump Microsoft.CodeAnalysis references to 2.0 or higher. MsBuild 14 is bound with Roslyn 1.x.
-                    if (RoslynHelper.IsVersionLessThan(VS2017MajorVersion))
+                    if (RoslynVersion.IsVersionLessThan(VS2017MajorVersion))
                     {
                         WriteAllText(path, "The analysis using MsBuild 14 is no longer supported and the analysis with MsBuild 15 is deprecated. Please update your pipeline to MsBuild 16 or higher.");
                     }
                     // This can be removed after we bump Microsoft.CodeAnalysis references to 3.0 or higher. MsBuild 15 is bound with Roslyn 2.x.
-                    else if (RoslynHelper.IsVersionLessThan(MinimalSupportedRoslynVersion))
+                    else if (RoslynVersion.IsVersionLessThan(MinimalSupportedRoslynVersion))
                     {
                         WriteAllText(path, "The analysis using MsBuild 15 is deprecated. Please update your pipeline to MsBuild 16 or higher.");
                     }

@@ -16,7 +16,6 @@
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using SonarAnalyzer.CFG.Helpers;
 
 namespace SonarAnalyzer.CFG.Roslyn
 {
@@ -65,7 +64,7 @@ namespace SonarAnalyzer.CFG.Roslyn
 
         static BasicBlock()
         {
-            if (RoslynHelper.FlowAnalysisType("BasicBlock") is { } type)
+            if (TypeLoader.FlowAnalysisType("BasicBlock") is { } type)
             {
                 BranchValueProperty = type.GetProperty(nameof(BranchValue));
                 ConditionalSuccessorProperty = type.GetProperty(nameof(ConditionalSuccessor));

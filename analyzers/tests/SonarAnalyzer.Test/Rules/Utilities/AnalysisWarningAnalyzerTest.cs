@@ -16,7 +16,7 @@
 
 using System.IO;
 using SonarAnalyzer.AnalysisContext;
-using SonarAnalyzer.CFG.Helpers;
+using SonarAnalyzer.CFG.Common;
 using SonarAnalyzer.Rules;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
@@ -35,7 +35,7 @@ public class AnalysisWarningAnalyzerTest
     [DataRow(LanguageNames.VisualBasic, false)]
     public void AnalysisWarning_MSBuildSupportedScenario_NoWarning(string languageName, bool isAnalyzerEnabled)
     {
-        var expectedPath = ExecuteAnalyzer(languageName, isAnalyzerEnabled, RoslynHelper.VS2017MajorVersion, RoslynHelper.MinimalSupportedMajorVersion); // Using production value that is lower than our UT Roslyn version
+        var expectedPath = ExecuteAnalyzer(languageName, isAnalyzerEnabled, RoslynVersion.VS2017MajorVersion, RoslynVersion.MinimalSupportedMajorVersion); // Using production value that is lower than our UT Roslyn version
         File.Exists(expectedPath).Should().BeFalse("Analysis warning file should not be generated.");
     }
 
@@ -54,7 +54,7 @@ public class AnalysisWarningAnalyzerTest
     [DataRow(LanguageNames.VisualBasic)]
     public void AnalysisWarning_MSBuild15DeprecatedScenario_GenerateWarning(string languageName)
     {
-        var expectedPath = ExecuteAnalyzer(languageName, true, RoslynHelper.VS2017MajorVersion, 1000); // Requiring too high Roslyn version => we're under unsupported scenario
+        var expectedPath = ExecuteAnalyzer(languageName, true, RoslynVersion.VS2017MajorVersion, 1000); // Requiring too high Roslyn version => we're under unsupported scenario
         File.Exists(expectedPath).Should().BeTrue();
         File.ReadAllText(expectedPath).Should().Be("""[{"text": "The analysis using MsBuild 15 is deprecated. Please update your pipeline to MsBuild 16 or higher."}]""");
     }
@@ -64,10 +64,10 @@ public class AnalysisWarningAnalyzerTest
     [DataRow(LanguageNames.VisualBasic)]
     public void AnalysisWarning_LockFile_PathShouldBeReused(string languageName)
     {
-        var expectedPath = ExecuteAnalyzer(languageName, true, RoslynHelper.VS2017MajorVersion, 1000);
+        var expectedPath = ExecuteAnalyzer(languageName, true, RoslynVersion.VS2017MajorVersion, 1000);
         // Lock file and run it for 2nd time
         using var lockedFile = new FileStream(expectedPath, FileMode.Open, FileAccess.Write, FileShare.None);
-        ExecuteAnalyzer(languageName, true, RoslynHelper.VS2017MajorVersion, 1000).Should().Be(expectedPath, "path should be reused and analyzer should not fail");
+        ExecuteAnalyzer(languageName, true, RoslynVersion.VS2017MajorVersion, 1000).Should().Be(expectedPath, "path should be reused and analyzer should not fail");
     }
 
     [DataTestMethod]
@@ -78,6 +78,14 @@ public class AnalysisWarningAnalyzerTest
         // This will not create the output directory, causing an exception in the File.WriteAllText(...)
         var expectedPath = ExecuteAnalyzer(languageName, true, 500, 1000, false);  // Requiring too high Roslyn version => we're under unsupported scenario
         File.Exists(expectedPath).Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void VirtualProperties()
+    {
+        var sut = new TestAnalysisWarningAnalyzer_NoOverrides();
+        sut.PublicVS2017MajorVersion.Should().Be(2);
+        sut.PublicMinimalSupportedRoslynVersion.Should().Be(3);
     }
 
     private string ExecuteAnalyzer(string languageName, bool isAnalyzerEnabled, int vs2017MajorVersion, int minimalSupportedRoslynVersion, bool createDirectory = true)
@@ -135,5 +143,11 @@ public class AnalysisWarningAnalyzerTest
 
         protected override UtilityAnalyzerParameters ReadParameters<T>(SonarAnalysisContextBase<T> context) =>
             base.ReadParameters(context) with { IsAnalyzerEnabled = isAnalyzerEnabled, OutPath = outPath };
+    }
+
+    private sealed class TestAnalysisWarningAnalyzer_NoOverrides : AnalysisWarningAnalyzerBase
+    {
+        public int PublicVS2017MajorVersion => VS2017MajorVersion;
+        public int PublicMinimalSupportedRoslynVersion => MinimalSupportedRoslynVersion;
     }
 }

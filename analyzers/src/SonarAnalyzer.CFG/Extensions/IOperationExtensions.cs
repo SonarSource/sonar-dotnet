@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.Helpers;
+using SonarAnalyzer.CFG.Operations.Utilities;
 
 namespace SonarAnalyzer.CFG.Extensions;
 

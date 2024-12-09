@@ -14,19 +14,34 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CFG.Helpers;
+using System.Collections;
 
-public static class RoslynHelper
+namespace SonarAnalyzer.CFG.Common;
+
+internal class UniqueQueue<T> : IEnumerable<T>
 {
-    public const int VS2017MajorVersion = 2;
-    public const int MinimalSupportedMajorVersion = 3;
+    private readonly Queue<T> queue = new Queue<T>();
+    private readonly ISet<T> unique = new HashSet<T>();
 
-    public static bool IsRoslynCfgSupported(int minimalVersion = MinimalSupportedMajorVersion) =>
-        !IsVersionLessThan(minimalVersion);
+    public void Enqueue(T item)
+    {
+        if (!unique.Contains(item))
+        {
+            queue.Enqueue(item);
+            unique.Add(item);
+        }
+    }
 
-    public static Type FlowAnalysisType(string typeName) =>
-        typeof(SemanticModel).Assembly.GetType("Microsoft.CodeAnalysis.FlowAnalysis." + typeName);
+    public T Dequeue()
+    {
+        var ret = queue.Dequeue();
+        unique.Remove(ret);
+        return ret;
+    }
 
-    public static bool IsVersionLessThan(int minimalVersion = MinimalSupportedMajorVersion) =>
-        typeof(SemanticModel).Assembly.GetName().Version.Major < minimalVersion;
+    public IEnumerator<T> GetEnumerator() =>
+        queue.GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator() =>
+        GetEnumerator();
 }

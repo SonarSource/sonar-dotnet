@@ -15,8 +15,8 @@
  */
 
 using Microsoft.CodeAnalysis.Operations;
+using SonarAnalyzer.CFG.Common;
 using SonarAnalyzer.CFG.Extensions;
-using SonarAnalyzer.CFG.Helpers;
 using SonarAnalyzer.CFG.Roslyn;
 using StyleCop.Analyzers.Lightup;
 using FlowAnalysis = Microsoft.CodeAnalysis.FlowAnalysis;
@@ -129,10 +129,10 @@ public class RoslynControlFlowGraphTest
     public void RoslynCfgSupportedVersions()
     {
         // We are running on 3 rd major version - it is the minimum requirement
-        RoslynHelper.IsRoslynCfgSupported().Should().BeTrue();
+        RoslynVersion.IsRoslynCfgSupported().Should().BeTrue();
         // If we set minimum requirement to 2 - we will able to pass the check even with old MsBuild
-        RoslynHelper.IsRoslynCfgSupported(2).Should().BeTrue();
+        RoslynVersion.IsRoslynCfgSupported(2).Should().BeTrue();
         // If we set minimum requirement to 100 - we won't be able to pass the check
-        RoslynHelper.IsRoslynCfgSupported(100).Should().BeFalse();
+        RoslynVersion.IsRoslynCfgSupported(100).Should().BeFalse();
     }
 }

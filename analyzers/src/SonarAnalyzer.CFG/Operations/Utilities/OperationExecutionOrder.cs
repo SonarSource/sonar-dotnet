@@ -16,7 +16,7 @@
 
 using System.Collections;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.CFG.Operations.Utilities;
 
 public class OperationExecutionOrder : IEnumerable<IOperationWrapperSonar>
 {
@@ -47,15 +47,6 @@ public class OperationExecutionOrder : IEnumerable<IOperationWrapperSonar>
         {
             this.owner = owner;
             Init();
-        }
-
-        private void Init()
-        {
-            // We need to push them to the stack in reversed order compared to reverseOrder argument
-            foreach (var operation in owner.reverseOrder ? owner.operations : owner.operations.Reverse())
-            {
-                stack.Push(new StackItem(operation));
-            }
         }
 
         public bool MoveNext()
@@ -97,6 +88,15 @@ public class OperationExecutionOrder : IEnumerable<IOperationWrapperSonar>
             while (stack.Any())
             {
                 stack.Pop().Dispose();
+            }
+        }
+
+        private void Init()
+        {
+            // We need to push them to the stack in reversed order compared to reverseOrder argument
+            foreach (var operation in owner.reverseOrder ? owner.operations : owner.operations.Reverse())
+            {
+                stack.Push(new StackItem(operation));
             }
         }
     }

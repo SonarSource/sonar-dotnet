@@ -16,7 +16,7 @@
 
 using SonarAnalyzer.CFG.Roslyn;
 
-namespace SonarAnalyzer.CFG.Helpers;
+namespace SonarAnalyzer.CFG.Operations.Utilities;
 
 public abstract class OperationFinder<TResult>
 {

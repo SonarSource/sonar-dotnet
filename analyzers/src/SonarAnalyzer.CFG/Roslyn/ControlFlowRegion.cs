@@ -16,7 +16,6 @@
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using SonarAnalyzer.CFG.Helpers;
 
 namespace SonarAnalyzer.CFG.Roslyn
 {
@@ -56,7 +55,7 @@ namespace SonarAnalyzer.CFG.Roslyn
 
         static ControlFlowRegion()
         {
-            if (RoslynHelper.FlowAnalysisType("ControlFlowRegion") is { } type)
+            if (TypeLoader.FlowAnalysisType("ControlFlowRegion") is { } type)
             {
                 KindProperty = type.GetProperty(nameof(Kind));
                 EnclosingRegionProperty = type.GetProperty(nameof(EnclosingRegion));

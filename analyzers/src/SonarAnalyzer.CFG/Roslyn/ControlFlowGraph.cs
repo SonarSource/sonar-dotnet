@@ -16,7 +16,7 @@
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using SonarAnalyzer.CFG.Helpers;
+using SonarAnalyzer.CFG.Common;
 
 namespace SonarAnalyzer.CFG.Roslyn
 {
@@ -50,10 +50,10 @@ namespace SonarAnalyzer.CFG.Roslyn
 
         static ControlFlowGraph()
         {
-            if (RoslynHelper.IsRoslynCfgSupported())
+            if (RoslynVersion.IsRoslynCfgSupported())
             {
                 IsAvailable = true;
-                var type = RoslynHelper.FlowAnalysisType("ControlFlowGraph");
+                var type = TypeLoader.FlowAnalysisType("ControlFlowGraph");
                 BlocksProperty = type.GetProperty(nameof(Blocks));
                 LocalFunctionsProperty = type.GetProperty(nameof(LocalFunctions));
                 OriginalOperationProperty = type.GetProperty(nameof(OriginalOperation));

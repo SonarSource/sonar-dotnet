@@ -14,34 +14,10 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using System.Collections;
+namespace SonarAnalyzer.CFG.Roslyn;
 
-namespace SonarAnalyzer.CFG.Helpers;
-
-internal class UniqueQueue<T> : IEnumerable<T>
+internal static class TypeLoader
 {
-    private readonly Queue<T> queue = new Queue<T>();
-    private readonly ISet<T> unique = new HashSet<T>();
-
-    public void Enqueue(T item)
-    {
-        if (!unique.Contains(item))
-        {
-            queue.Enqueue(item);
-            unique.Add(item);
-        }
-    }
-
-    public T Dequeue()
-    {
-        var ret = queue.Dequeue();
-        unique.Remove(ret);
-        return ret;
-    }
-
-    public IEnumerator<T> GetEnumerator() =>
-        queue.GetEnumerator();
-
-    IEnumerator IEnumerable.GetEnumerator() =>
-        GetEnumerator();
+    public static Type FlowAnalysisType(string typeName) =>
+        typeof(SemanticModel).Assembly.GetType("Microsoft.CodeAnalysis.FlowAnalysis." + typeName);
 }

@@ -16,9 +16,10 @@
 
 using System.Collections;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.CFG.Operations.Utilities;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Test.Operations.Utilities;
 
 [TestClass]
 public class OperationExecutionOrderTest

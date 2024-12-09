@@ -15,7 +15,6 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.CFG.Helpers;
 
 namespace SonarAnalyzer.CFG.Sonar
 {

@@ -14,9 +14,10 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.CFG.Helpers;
+using System.Collections;
+using SonarAnalyzer.CFG.Common;
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Test.Common;
 
 [TestClass]
 public class UniqueQueueTest
@@ -45,5 +46,12 @@ public class UniqueQueueTest
         sut.Dequeue().Should().Be(42);
         sut.Dequeue().Should().Be(43);
         sut.Invoking(x => x.Dequeue()).Should().Throw<InvalidOperationException>();
+    }
+
+    [TestMethod]
+    public void GetEnumerator()
+    {
+        var sut = new UniqueQueue<int>();
+        ((IEnumerable)sut).GetEnumerator().Should().NotBeNull();    // For coverage
     }
 }

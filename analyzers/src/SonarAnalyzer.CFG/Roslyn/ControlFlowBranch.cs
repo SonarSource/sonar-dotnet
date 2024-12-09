@@ -16,7 +16,6 @@
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using SonarAnalyzer.CFG.Helpers;
 
 namespace SonarAnalyzer.CFG.Roslyn
 {
@@ -50,7 +49,7 @@ namespace SonarAnalyzer.CFG.Roslyn
 
         static ControlFlowBranch()
         {
-            if (RoslynHelper.FlowAnalysisType("ControlFlowBranch") is { } type)
+            if (TypeLoader.FlowAnalysisType("ControlFlowBranch") is { } type)
             {
                 SourceProperty = type.GetProperty(nameof(Source));
                 DestinationProperty = type.GetProperty(nameof(Destination));

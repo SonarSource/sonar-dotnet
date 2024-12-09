@@ -14,14 +14,16 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CFG.Sonar
-{
-    public  class BlockIdProvider
-    {
-        private readonly Dictionary<Block, string> map = new Dictionary<Block, string>();
-        private int counter;
+namespace SonarAnalyzer.CFG.Common;
 
-        public string Get(Block cfgBlock) =>
-            this.map.GetOrAdd(cfgBlock, b => $"{this.counter++}");
-    }
+public static class RoslynVersion
+{
+    public const int VS2017MajorVersion = 2;
+    public const int MinimalSupportedMajorVersion = 3;
+
+    public static bool IsRoslynCfgSupported(int minimalVersion = MinimalSupportedMajorVersion) =>
+        !IsVersionLessThan(minimalVersion);
+
+    public static bool IsVersionLessThan(int minimalVersion = MinimalSupportedMajorVersion) =>
+        typeof(SemanticModel).Assembly.GetName().Version.Major < minimalVersion;
 }
