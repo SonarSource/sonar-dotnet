@@ -68,7 +68,8 @@ public sealed class SeparateDeclarations : StylingAnalyzer
     private void ValidateSeparatedMember(SonarSyntaxNodeReportingContext context)
     {
         var firstToken = context.Node.GetFirstToken();
-        if (!context.Node.GetModifiers().Any(SyntaxKind.AbstractKeyword)
+        if (!context.Node.Parent.IsKind(SyntaxKind.InterfaceDeclaration)
+            && !context.Node.GetModifiers().Any(SyntaxKind.AbstractKeyword)
             && !firstToken.GetPreviousToken().IsKind(SyntaxKind.OpenBraceToken)
             && !ContainsEmptyLine(firstToken.LeadingTrivia))
         {

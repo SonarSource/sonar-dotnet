@@ -270,3 +270,17 @@ public class MultiLines
 
     public object this[decimal value] => 42;
 }
+
+public interface ISomething
+{
+    void SayHello();    // All compliant
+    int Property { get; }
+    int DoSomething();
+    int MultiLineProperty
+    {
+        get;
+        set;
+    }
+    void DoNothing();
+    void DoNothingAtAll();
+}
