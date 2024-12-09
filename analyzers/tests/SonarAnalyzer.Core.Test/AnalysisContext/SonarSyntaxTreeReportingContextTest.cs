@@ -22,17 +22,6 @@ namespace SonarAnalyzer.Core.Test.AnalysisContext;
 public class SonarSyntaxTreeReportingContextTest
 {
     [TestMethod]
-    public void Constructor_Null_Throws()
-    {
-        var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
-        var treeContext = new SyntaxTreeAnalysisContext(tree, null, _ => { }, _ => true, default);
-        var analysisContext = AnalysisScaffolding.CreateSonarAnalysisContext();
-
-        ((Func<SonarSyntaxTreeReportingContext>)(() => new(null, treeContext, model.Compilation))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("analysisContext");
-        ((Func<SonarSyntaxTreeReportingContext>)(() => new(analysisContext, treeContext, null))).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("compilation");
-    }
-
-    [TestMethod]
     public void Properties_ArePropagated()
     {
         var cancel = new CancellationToken(true);

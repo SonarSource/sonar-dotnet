@@ -24,39 +24,6 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
 }
 
 /// <summary>
-/// Base class for reporting contexts that are executed on a known Tree. The decisions about generated code and unchanged files are taken during action registration.
-/// </summary>
-public abstract class SonarTreeReportingContextBase<TContext> : SonarReportingContextBase<TContext>, ITreeReport
-{
-    public abstract SyntaxTree Tree { get; }
-
-    protected SonarTreeReportingContextBase(SonarAnalysisContext analysisContext, TContext context) : base(analysisContext, context) { }
-
-    public void ReportIssue(DiagnosticDescriptor rule,
-                             Location primaryLocation,
-                             IEnumerable<SecondaryLocation> secondaryLocations = null,
-                             ImmutableDictionary<string, string> properties = null,
-                             params string[] messageArgs) =>
-        IssueReporter.ReportIssueCore(
-            Compilation,
-            x => this.HasMatchingScope(x),
-            CreateReportingContext,
-            rule,
-            primaryLocation,
-            secondaryLocations,
-            properties,
-            messageArgs);
-
-    [Obsolete("Use another overload of ReportIssue, without calling Diagnostic.Create")]
-    public void ReportIssue(Diagnostic diagnostic) =>
-        IssueReporter.ReportIssueCore(
-            Compilation,
-            x => this.HasMatchingScope(x),
-            CreateReportingContext,
-            diagnostic);
-}
-
-/// <summary>
 /// Base class for reporting contexts that are common for the entire compilation. Specific tree is not known before the action is executed.
 /// </summary>
 public abstract class SonarCompilationReportingContextBase<TContext> : SonarReportingContextBase<TContext>, ICompilationReport

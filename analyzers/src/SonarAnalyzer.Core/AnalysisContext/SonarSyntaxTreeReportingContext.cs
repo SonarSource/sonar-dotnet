@@ -16,16 +16,42 @@
 
 namespace SonarAnalyzer.AnalysisContext;
 
-public sealed class SonarSyntaxTreeReportingContext : SonarTreeReportingContextBase<SyntaxTreeAnalysisContext>
+// SyntaxTreeAnalysisContext doesn't hold a Compilation reference, we need to provide it from CompilationStart context via constructor
+public readonly record struct SonarSyntaxTreeReportingContext(SonarAnalysisContext AnalysisContext, SyntaxTreeAnalysisContext Context, Compilation Compilation) : ITreeReport, IAnalysisContext
 {
-    public override SyntaxTree Tree => Context.Tree;
-    public override Compilation Compilation { get; }    // SyntaxTreeAnalysisContext doesn't hold a Compilation reference, we need to provide it from CompilationStart context via constructor
-    public override AnalyzerOptions Options => Context.Options;
-    public override CancellationToken Cancel => Context.CancellationToken;
+    public SyntaxTree Tree => Context.Tree;
+    public AnalyzerOptions Options => Context.Options;
+    public CancellationToken Cancel => Context.CancellationToken;
 
-    internal SonarSyntaxTreeReportingContext(SonarAnalysisContext analysisContext, SyntaxTreeAnalysisContext context, Compilation compilation) : base(analysisContext, context) =>
-        Compilation = compilation ?? throw new ArgumentNullException(nameof(compilation));
-
-    public override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
+    public ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
         new(this, diagnostic);
+
+    public void ReportIssue(DiagnosticDescriptor rule,
+                            Location primaryLocation,
+                            IEnumerable<SecondaryLocation> secondaryLocations = null,
+                            ImmutableDictionary<string, string> properties = null,
+                            params string[] messageArgs)
+    {
+        var @this = this;
+        IssueReporter.ReportIssueCore(
+            Compilation,
+            x => @this.HasMatchingScope(x),
+            CreateReportingContext,
+            rule,
+            primaryLocation,
+            secondaryLocations,
+            properties,
+            messageArgs);
+    }
+
+    [Obsolete("Use another overload of ReportIssue, without calling Diagnostic.Create")]
+    public void ReportIssue(Diagnostic diagnostic)
+    {
+        var @this = this;
+        IssueReporter.ReportIssueCore(
+            Compilation,
+            x => @this.HasMatchingScope(x),
+            CreateReportingContext,
+            diagnostic);
+    }
 }

@@ -21,8 +21,13 @@ public interface IReport
     ReportingContext CreateReportingContext(Diagnostic diagnostic);
 }
 
+/// <summary>
+/// Interface for reporting contexts that are executed on a known Tree. The decisions about generated code and unchanged files are taken during action registration.
+/// </summary>
 public interface ITreeReport : IReport
 {
+    SyntaxTree Tree { get; }
+
     void ReportIssue(DiagnosticDescriptor rule,
                      Location primaryLocation,
                      IEnumerable<SecondaryLocation> secondaryLocations = null,
