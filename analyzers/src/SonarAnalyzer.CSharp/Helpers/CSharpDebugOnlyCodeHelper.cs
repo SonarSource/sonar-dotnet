@@ -18,29 +18,23 @@ namespace SonarAnalyzer.Helpers;
 
 internal static class CSharpDebugOnlyCodeHelper
 {
-    // Looking for an exact case-sensitive match
     public static bool IsDebugString(string text) =>
-        "DEBUG".Equals(text, System.StringComparison.Ordinal);
-
-    #region DEBUG directive blocks
+        text == "DEBUG";
 
     public static bool IsInDebugBlock(this SyntaxNode node) =>
-        CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node)
-        .Any(IsDebugString);
+        CSharpIfDirectiveHelper.ActiveConditionalCompilationSections(node).Any(IsDebugString);
 
-    #endregion
-
-    #region DEBUG conditional method attributes
-
-    public static bool IsCallerInConditionalDebug(SyntaxNode node, SemanticModel semanticModel)
+    public static bool IsCallerInConditionalDebug(SyntaxNode node, SemanticModel model)
     {
-        var methodSymbol = FindContainingMethod(node, semanticModel);
-        return IsConditionalDebugMethod(methodSymbol);
+        var method = node.FirstAncestorOrSelf<MethodDeclarationSyntax>() is { } containingMethod
+            ? model.GetDeclaredSymbol(containingMethod)
+            : null;
+        return IsConditionalDebugMethod(method);
     }
 
     public static bool IsConditionalDebugMethod(this IMethodSymbol methodSymbol)
     {
-        if (methodSymbol == null)
+        if (methodSymbol is null)
         {
             return false;
         }
@@ -49,22 +43,6 @@ internal static class CSharpDebugOnlyCodeHelper
         // the class is an attribute class. So we only need to worry about whether the
         // conditional attribute is on the method.
         return methodSymbol.GetAttributes(KnownType.System_Diagnostics_ConditionalAttribute)
-            .Any(attribute => attribute.ConstructorArguments.Any(
-                constructorArg => constructorArg.Type.Is(KnownType.System_String)
-                      && IsDebugString((string)constructorArg.Value)));
-
+            .Any(x => x.ConstructorArguments.Any(constructorArg => constructorArg.Type.Is(KnownType.System_String) && IsDebugString((string)constructorArg.Value)));
     }
-
-    private static IMethodSymbol FindContainingMethod(SyntaxNode node, SemanticModel semanticModel)
-    {
-        var methodDecl = node.FirstAncestorOrSelf<MethodDeclarationSyntax>();
-        if (methodDecl != null)
-        {
-            return semanticModel.GetDeclaredSymbol(methodDecl);
-        }
-        return null;
-    }
-
-    #endregion
-
 }

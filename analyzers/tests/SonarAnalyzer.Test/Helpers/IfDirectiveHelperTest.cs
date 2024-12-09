@@ -42,7 +42,7 @@ namespace Test
         var node = GetMethod1Node(source);
 
         // Act
-        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        var activeSections = CSharpIfDirectiveHelper.ActiveConditionalCompilationSections(node);
 
         // Assert
         activeSections.Should().NotBeNull();
@@ -86,7 +86,7 @@ namespace Test
         var node = GetMethod1Node(source);
 
         // Act
-        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        var activeSections = CSharpIfDirectiveHelper.ActiveConditionalCompilationSections(node);
 
         // Assert
         activeSections.Should().NotBeNull();
@@ -129,7 +129,7 @@ namespace Test
         var node = GetMethod1Node(source);
 
         // Act
-        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        var activeSections = CSharpIfDirectiveHelper.ActiveConditionalCompilationSections(node);
 
         // Assert
         activeSections.Should().NotBeNull();
@@ -172,7 +172,7 @@ namespace Test
         var node = GetMethod1Node(source);
 
         // Act
-        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        var activeSections = CSharpIfDirectiveHelper.ActiveConditionalCompilationSections(node);
 
         // Assert
         activeSections.Should().NotBeNull();
@@ -209,7 +209,7 @@ namespace Test
         var node = GetMethod1Node(source);
 
         // Act
-        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        var activeSections = CSharpIfDirectiveHelper.ActiveConditionalCompilationSections(node);
 
         // Assert
         activeSections.Should().NotBeNull();
@@ -235,7 +235,7 @@ namespace Test
         var node = GetMethod1Node(source);
 
         // Act
-        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        var activeSections = CSharpIfDirectiveHelper.ActiveConditionalCompilationSections(node);
 
         // Assert
         activeSections.Should().NotBeNull();
@@ -263,7 +263,7 @@ namespace Test
         var node = GetMethod1Node(source);
 
         // Act
-        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        var activeSections = CSharpIfDirectiveHelper.ActiveConditionalCompilationSections(node);
 
         // Assert
         activeSections.Should().NotBeNull();
@@ -292,7 +292,7 @@ namespace Test
         var node = GetMethod1Node(source);
 
         // Act
-        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        var activeSections = CSharpIfDirectiveHelper.ActiveConditionalCompilationSections(node);
 
         // Assert
         activeSections.Should().NotBeNull();
@@ -321,7 +321,7 @@ namespace Test
         var node = GetMethod1Node(source);
 
         // Act
-        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        var activeSections = CSharpIfDirectiveHelper.ActiveConditionalCompilationSections(node);
 
         // Assert
         activeSections.Should().NotBeNull();
@@ -353,7 +353,7 @@ namespace Test
         var node = GetMethod1Node(source);
 
         // Act
-        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        var activeSections = CSharpIfDirectiveHelper.ActiveConditionalCompilationSections(node);
 
         // Assert
         activeSections.Should().NotBeNull();
@@ -384,7 +384,7 @@ namespace Test
         var node = GetMethod1Node(source);
 
         // Act
-        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        var activeSections = CSharpIfDirectiveHelper.ActiveConditionalCompilationSections(node);
 
         // Assert
         activeSections.Should().NotBeNull();
@@ -414,7 +414,7 @@ namespace Test
         var node = GetMethod1Node(source);
 
         // Act
-        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        var activeSections = CSharpIfDirectiveHelper.ActiveConditionalCompilationSections(node);
 
         // Assert
         activeSections.Should().NotBeNull();
@@ -443,7 +443,7 @@ namespace Test
         var node = GetMethod1Node(source);
 
         // Act
-        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        var activeSections = CSharpIfDirectiveHelper.ActiveConditionalCompilationSections(node);
 
         // Assert
         activeSections.Should().NotBeNull();
@@ -488,7 +488,7 @@ namespace Test
         var node = GetMethod1Node(source);
 
         // Act
-        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        var activeSections = CSharpIfDirectiveHelper.ActiveConditionalCompilationSections(node);
 
         // Assert
         activeSections.Should().NotBeNull();
@@ -522,7 +522,7 @@ namespace Test
         var node = GetMethod1Node(source);
 
         // Act
-        var activeSections = CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node);
+        var activeSections = CSharpIfDirectiveHelper.ActiveConditionalCompilationSections(node);
 
         // Assert
         activeSections.Should().NotBeNull();

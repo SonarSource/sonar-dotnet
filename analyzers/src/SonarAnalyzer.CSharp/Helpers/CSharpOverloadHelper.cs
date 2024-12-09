@@ -18,81 +18,70 @@ namespace SonarAnalyzer.Helpers;
 
 internal static class CSharpOverloadHelper
 {
-    public static bool HasOverloadWithType(InvocationExpressionSyntax invocation, SemanticModel semanticModel, ImmutableArray<KnownType> types) =>
-        semanticModel.GetMemberGroup(invocation.Expression)
+    public static bool HasOverloadWithType(InvocationExpressionSyntax invocation, SemanticModel model, ImmutableArray<KnownType> types) =>
+        model.GetMemberGroup(invocation.Expression)
             .OfType<IMethodSymbol>()
-            .Where(m => !m.HasAttribute(KnownType.System_ObsoleteAttribute))
-            .Where(method => IsCompatibleOverload(invocation, method))
-            .Any(methodSignature => SameParametersExceptWantedType(methodSignature, GetInvocationParameters(invocation, semanticModel), types));
+            .Where(x => !x.HasAttribute(KnownType.System_ObsoleteAttribute))
+            .Where(x => IsCompatibleOverload(invocation, x))
+            .Any(x => SameParametersExceptWantedType(x, InvocationParameters(invocation, model), types));
+
+    // must have same number of arguments + 1 (the argument that should be added) OR is params argument
+    private static bool IsCompatibleOverload(InvocationExpressionSyntax invocation, IMethodSymbol m) =>
+            (m.GetParameters().Count() - invocation.ArgumentList.Arguments.Count == 1) ||
+            (m.GetParameters().Any() && m.GetParameters().Last().IsParams);
+
+    private static IMethodSymbol InvocationParameters(InvocationExpressionSyntax invocation, SemanticModel model) =>
+        model.GetSymbolInfo(invocation.Expression).Symbol as IMethodSymbol;
 
     private static bool SameParametersExceptWantedType(IMethodSymbol possibleOverload, IMethodSymbol invocationMethodSymbol, ImmutableArray<KnownType> types)
     {
-        var withTypeParam = possibleOverload;
-        if (possibleOverload.IsGenericMethod && invocationMethodSymbol.IsGenericMethod)
-        {
+        var withTypeParam = possibleOverload.IsGenericMethod && invocationMethodSymbol.IsGenericMethod
             // attempt to create the possibleOverload method symbol with same type arguments as the invocation method
-            withTypeParam = ConstructTypedPossibleOverload(possibleOverload, invocationMethodSymbol);
-        }
-
-        var invocationParameters = invocationMethodSymbol.GetParameters();
-        var parametersWithoutWantedType = withTypeParam.GetParameters().Where(p => !p.Type.IsAny(types)).ToList();
-        var parametersWithoutWantedTypeCount = parametersWithoutWantedType.Count;
-
-        if (parametersWithoutWantedTypeCount == possibleOverload.GetParameters().Count())
+            ? ConstructTypedPossibleOverload(possibleOverload, invocationMethodSymbol)
+            : possibleOverload;
+        var invocationParameters = invocationMethodSymbol.GetParameters().ToArray();
+        var parametersWithoutWantedType = withTypeParam.GetParameters().Where(x => !x.Type.IsAny(types)).ToArray();
+        if (parametersWithoutWantedType.Length == possibleOverload.GetParameters().Count())
         {
             return false;
         }
 
-        var invocationParametersCount = invocationParameters.Count();
-        if (parametersWithoutWantedTypeCount <= invocationParametersCount &&
-            parametersWithoutWantedTypeCount > 0 &&
-            parametersWithoutWantedType.Last().IsParams)
+        if (parametersWithoutWantedType.Length > 0
+            && parametersWithoutWantedType.Length <= invocationParameters.Length
+            && parametersWithoutWantedType[parametersWithoutWantedType.Length - 1].IsParams)
         {
             // check whether has a parameter array argument which matches the invocationParameters
-            var lastIndex = parametersWithoutWantedType.Count - 1;
-            return VerifyCompatibility(invocationParameters.ToList(), parametersWithoutWantedType, parametersWithoutWantedType[lastIndex]);
+            return VerifyCompatibility(invocationParameters, parametersWithoutWantedType, parametersWithoutWantedType[parametersWithoutWantedType.Length - 1]);
         }
-        else if (invocationParametersCount == parametersWithoutWantedTypeCount)
+        else if (invocationParameters.Length == parametersWithoutWantedType.Length)
         {
             // parameters must have the same type
-            return invocationParameters
-                .Select((p, index) => p.Type.DerivesOrImplements(parametersWithoutWantedType[index].Type))
-                .All(isCompatible => isCompatible);
-
+            return invocationParameters.Select((x, index) => x.Type.DerivesOrImplements(parametersWithoutWantedType[index].Type)).All(x => x);
         }
-        return false;
-    }
-
-    private static IMethodSymbol ConstructTypedPossibleOverload(IMethodSymbol possibleOverload, IMethodSymbol invocationMethodSymbol)
-    {
-        if (possibleOverload.TypeParameters.Count() == invocationMethodSymbol.TypeArguments.Count())
+        else
         {
-            return possibleOverload.ConstructedFrom.Construct(invocationMethodSymbol.TypeArguments.ToArray());
+            return false;
         }
-        return possibleOverload;
     }
 
-    // must have same number of arguments + 1 (the argument that should be added) OR is params argument
-    public static bool IsCompatibleOverload(InvocationExpressionSyntax invocation, IMethodSymbol m) =>
-            (m.GetParameters().Count() - invocation.ArgumentList.Arguments.Count == 1) ||
-            (m.GetParameters().Any() && m.GetParameters().Last().IsParams);
-
-    public static IMethodSymbol GetInvocationParameters(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-        semanticModel.GetSymbolInfo(invocation.Expression).Symbol as IMethodSymbol;
+    private static IMethodSymbol ConstructTypedPossibleOverload(IMethodSymbol possibleOverload, IMethodSymbol invocationMethodSymbol) =>
+        possibleOverload.TypeParameters.Length == invocationMethodSymbol.TypeArguments.Length
+            ? possibleOverload.ConstructedFrom.Construct(invocationMethodSymbol.TypeArguments.ToArray())
+            : possibleOverload;
 
     /**
      * Verifies the compatibility between the invocation parameters and the parameters of a possible overload that
      * has the last parameter of 'params' type (variable length parameter).
      */
-    private static bool VerifyCompatibility(IList<IParameterSymbol> invocationParameters, IList<IParameterSymbol> overloadCandidateParameters, IParameterSymbol paramsParameter)
+    private static bool VerifyCompatibility(IParameterSymbol[] invocationParameters, IParameterSymbol[] overloadCandidateParameters, IParameterSymbol paramsParameter)
     {
-        if (!(paramsParameter.Type is IArrayTypeSymbol))
+        if (paramsParameter.Type is not IArrayTypeSymbol)
         {
             return false;
         }
         var i = 0;
         // check parameters before the last parameter
-        for (; i < overloadCandidateParameters.Count - 1; i++)
+        for (; i < overloadCandidateParameters.Length - 1; i++)
         {
             if (!invocationParameters[i].Type.DerivesOrImplements(overloadCandidateParameters[i].Type))
             {
@@ -100,8 +89,8 @@ internal static class CSharpOverloadHelper
             }
         }
         // make sure the rest of the invocation parameters match with the 'params' type
-        var paramsType = GetParamsElementType(paramsParameter.Type);
-        for (; i < invocationParameters.Count - 1; i++)
+        var paramsType = ParamsElementType(paramsParameter.Type);
+        for (; i < invocationParameters.Length - 1; i++)
         {
             if (!invocationParameters[i].Type.DerivesOrImplements(paramsType))
             {
@@ -109,22 +98,12 @@ internal static class CSharpOverloadHelper
             }
         }
 
-        var lastInvocationParameter = invocationParameters[invocationParameters.Count - 1];
-        if (lastInvocationParameter.IsParams)
-        {
-            var elementType = GetParamsElementType(lastInvocationParameter.Type);
-            return elementType is not null && elementType.DerivesOrImplements(paramsType);
-        }
-        else
-        {
-            return lastInvocationParameter.Type.DerivesOrImplements(paramsType);
-        }
+        var lastInvocationParameter = invocationParameters[invocationParameters.Length - 1];
+        return lastInvocationParameter.IsParams
+            ? ParamsElementType(lastInvocationParameter.Type).DerivesOrImplements(paramsType)
+            : lastInvocationParameter.Type.DerivesOrImplements(paramsType);
 
-        ITypeSymbol GetParamsElementType(ITypeSymbol typeSymbol) =>
-            typeSymbol switch
-            {
-                IArrayTypeSymbol symbol => symbol.ElementType,
-                _ => null
-            };
+        static ITypeSymbol ParamsElementType(ITypeSymbol type) =>
+            type is IArrayTypeSymbol symbol ? symbol.ElementType : null;
     }
 }

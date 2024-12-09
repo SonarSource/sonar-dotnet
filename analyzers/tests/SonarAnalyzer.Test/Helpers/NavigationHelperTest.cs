@@ -79,11 +79,11 @@ namespace Test
     public void GetPrecedingIfsInConditionChain()
     {
         var ifStatement1 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().First();
-        ifStatement1.GetPrecedingIfsInConditionChain()
+        ifStatement1.PrecedingIfsInConditionChain()
             .Should().BeEmpty();
 
         var ifStatement2 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().Last();
-        var preceding = ifStatement2.GetPrecedingIfsInConditionChain();
+        var preceding = ifStatement2.PrecedingIfsInConditionChain();
         preceding.Should().ContainSingle();
 
         ifStatement1.Should().BeEquivalentTo(preceding[0]);
@@ -93,11 +93,11 @@ namespace Test
     public void GetPrecedingStatementsInConditionChain()
     {
         var ifStatement1 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().First();
-        ifStatement1.GetPrecedingStatementsInConditionChain()
+        ifStatement1.PrecedingStatementsInConditionChain()
             .Should().BeEmpty();
 
         var ifStatement2 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().Last();
-        var preceding = ifStatement2.GetPrecedingStatementsInConditionChain().ToList();
+        var preceding = ifStatement2.PrecedingStatementsInConditionChain().ToList();
         preceding.Should().ContainSingle();
 
         ifStatement1.Statement.Should().BeEquivalentTo(preceding[0]);
@@ -107,11 +107,11 @@ namespace Test
     public void GetPrecedingConditionsInConditionChain()
     {
         var ifStatement1 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().First();
-        ifStatement1.GetPrecedingConditionsInConditionChain()
+        ifStatement1.PrecedingConditionsInConditionChain()
             .Should().BeEmpty();
 
         var ifStatement2 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().Last();
-        var preceding = ifStatement2.GetPrecedingConditionsInConditionChain().ToList();
+        var preceding = ifStatement2.PrecedingConditionsInConditionChain().ToList();
         preceding.Should().ContainSingle();
 
         ifStatement1.Condition.Should().BeEquivalentTo(preceding[0]);
@@ -122,9 +122,9 @@ namespace Test
     {
         var sections = switchMethod.DescendantNodes().OfType<SwitchSectionSyntax>().ToList();
 
-        sections.Last().GetPrecedingSections().Should().HaveCount(2);
-        sections.First().GetPrecedingSections().Should().BeEmpty();
-        sections.Last().GetPrecedingSections().First().Should().BeEquivalentTo(sections.First());
+        sections.Last().PrecedingSections().Should().HaveCount(2);
+        sections.First().PrecedingSections().Should().BeEmpty();
+        sections.Last().PrecedingSections().First().Should().BeEquivalentTo(sections.First());
     }
 
     [TestMethod]
@@ -132,6 +132,6 @@ namespace Test
     {
         var sections = ifMethod.DescendantNodes().OfType<SwitchSectionSyntax>().ToList();
 
-        sections.FirstOrDefault().GetPrecedingSections().Should().BeEmpty();
+        sections.FirstOrDefault().PrecedingSections().Should().BeEmpty();
     }
 }

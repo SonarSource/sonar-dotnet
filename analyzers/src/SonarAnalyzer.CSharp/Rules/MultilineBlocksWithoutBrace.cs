@@ -56,7 +56,7 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
 
     private static void CheckIf(SonarSyntaxNodeReportingContext context, IfStatementSyntax ifStatement)
     {
-        if (!ifStatement.GetPrecedingIfsInConditionChain().Any()
+        if (!ifStatement.PrecedingIfsInConditionChain().Any()
             && !IsNestedStatement(ifStatement.Statement)
             && LastStatementInIfChain(ifStatement) is { } lastStatementInIfChain
             && !IsStatementCandidateLoop(lastStatementInIfChain))

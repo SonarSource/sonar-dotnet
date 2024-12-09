@@ -18,52 +18,36 @@ namespace SonarAnalyzer.Helpers;
 
 internal static class CSharpNavigationHelper
 {
-    #region If
-
-    public static IList<IfStatementSyntax> GetPrecedingIfsInConditionChain(this IfStatementSyntax ifStatement)
+    public static IList<IfStatementSyntax> PrecedingIfsInConditionChain(this IfStatementSyntax ifStatement)
     {
-        var ifList = new List<IfStatementSyntax>();
-        var currentIf = ifStatement;
-
-        while (currentIf.Parent.IsKind(SyntaxKind.ElseClause) &&
-            currentIf.Parent.Parent.IsKind(SyntaxKind.IfStatement))
+        var ifStatements = new List<IfStatementSyntax>();
+        while (ifStatement.Parent.IsKind(SyntaxKind.ElseClause) && ifStatement.Parent.Parent.IsKind(SyntaxKind.IfStatement))
         {
-            var precedingIf = (IfStatementSyntax)currentIf.Parent.Parent;
-            ifList.Add(precedingIf);
-            currentIf = precedingIf;
+            var precedingIf = (IfStatementSyntax)ifStatement.Parent.Parent;
+            ifStatements.Add(precedingIf);
+            ifStatement = precedingIf;
         }
-
-        ifList.Reverse();
-        return ifList;
+        ifStatements.Reverse();
+        return ifStatements;
     }
 
-    public static IEnumerable<StatementSyntax> GetPrecedingStatementsInConditionChain(
-        this IfStatementSyntax ifStatement)
+    public static IEnumerable<StatementSyntax> PrecedingStatementsInConditionChain(this IfStatementSyntax ifStatement) =>
+        PrecedingIfsInConditionChain(ifStatement).Select(x => x.Statement);
+
+    public static IEnumerable<ExpressionSyntax> PrecedingConditionsInConditionChain(this IfStatementSyntax ifStatement) =>
+        PrecedingIfsInConditionChain(ifStatement).Select(x => x.Condition);
+
+    public static IEnumerable<SwitchSectionSyntax> PrecedingSections(this SwitchSectionSyntax caseStatement)
     {
-        return GetPrecedingIfsInConditionChain(ifStatement).Select(i => i.Statement);
-    }
-
-    public static IEnumerable<ExpressionSyntax> GetPrecedingConditionsInConditionChain(
-        this IfStatementSyntax ifStatement)
-    {
-        return GetPrecedingIfsInConditionChain(ifStatement).Select(i => i.Condition);
-    }
-
-    #endregion If
-
-    #region Switch
-
-    public static IEnumerable<SwitchSectionSyntax> GetPrecedingSections(this SwitchSectionSyntax caseStatement)
-    {
-        if (caseStatement == null)
+        if (caseStatement is null)
         {
-            return new SwitchSectionSyntax[0];
+            return [];
         }
-
-        var switchStatement = (SwitchStatementSyntax)caseStatement.Parent;
-        var currentSectionIndex = switchStatement.Sections.IndexOf(caseStatement);
-        return switchStatement.Sections.Take(currentSectionIndex);
+        else
+        {
+            var switchStatement = (SwitchStatementSyntax)caseStatement.Parent;
+            var currentSectionIndex = switchStatement.Sections.IndexOf(caseStatement);
+            return switchStatement.Sections.Take(currentSectionIndex);
+        }
     }
-
-    #endregion Switch
 }
