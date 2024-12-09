@@ -22,7 +22,8 @@ public sealed class TypeMemberOrdering : StylingAnalyzer
     private const string NestedTypes = "Nested Types";
 
     private static readonly MemberKind Constant = new(1, "Constants");
-    private static readonly MemberKind Abstract = new(10, "Abstract Members");
+    private static readonly MemberKind AbstractMember = new(10, "Abstract Members");
+    private static readonly MemberKind AbstractType = new(40, "Abstract Types");
 
     private static readonly Dictionary<SyntaxKind, MemberKind> MemberKinds = new()
         {
@@ -39,6 +40,7 @@ public sealed class TypeMemberOrdering : StylingAnalyzer
             {SyntaxKind.MethodDeclaration, new(30, "Methods") },
             {SyntaxKind.ConversionOperatorDeclaration, new(31, "Operators") },
             {SyntaxKind.OperatorDeclaration, new(31, "Operators") },
+            // Order 40: Abstract types are handled separtely in the code
             {SyntaxKind.ClassDeclaration, new(40, NestedTypes) },
             {SyntaxKind.InterfaceDeclaration, new(40, NestedTypes) },
             {SyntaxKind.RecordDeclaration, new(40, NestedTypes) },
@@ -93,7 +95,7 @@ public sealed class TypeMemberOrdering : StylingAnalyzer
         }
         else if (member.Modifiers.Any(SyntaxKind.AbstractKeyword))
         {
-            return Abstract;
+            return member is BaseTypeDeclarationSyntax ? AbstractType : AbstractMember;
         }
         else if (MemberKinds.TryGetValue(member.Kind(), out var kind))
         {
