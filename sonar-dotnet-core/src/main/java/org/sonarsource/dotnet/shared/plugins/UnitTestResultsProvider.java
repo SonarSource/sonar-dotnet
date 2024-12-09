@@ -20,11 +20,12 @@ import java.util.Arrays;
 import java.util.List;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.PropertyDefinition;
-import org.sonar.api.resources.Qualifiers;
 import org.sonar.api.scanner.ScannerSide;
 import org.sonar.plugins.dotnet.tests.UnitTestConfiguration;
 import org.sonar.plugins.dotnet.tests.UnitTestResultsAggregator;
 import org.sonar.plugins.dotnet.tests.UnitTestResultsImportSensor;
+
+import static org.sonar.api.config.PropertyDefinition.ConfigScope;
 
 @ScannerSide
 public class UnitTestResultsProvider {
@@ -54,7 +55,7 @@ public class UnitTestResultsProvider {
         .description("Example: \"report.trx\", \"report1.trx,report2.trx\" or \"C:/report.trx\"")
         .category(category)
         .subCategory(SUBCATEGORY)
-        .onlyOnQualifiers(Qualifiers.PROJECT)
+        .onlyOnConfigScopes(List.of(ConfigScope.PROJECT))
         .multiValues(true)
         .build(),
       PropertyDefinition.builder(unitTestConfiguration.nunitTestResultsFilePropertyKey())
@@ -62,7 +63,7 @@ public class UnitTestResultsProvider {
         .description("Example: \"TestResult.xml\", \"TestResult1.xml,TestResult2.xml\" or \"C:/TestResult.xml\"")
         .category(category)
         .subCategory(SUBCATEGORY)
-        .onlyOnQualifiers(Qualifiers.PROJECT)
+        .onlyOnConfigScopes(List.of(ConfigScope.PROJECT))
         .multiValues(true)
         .build(),
       PropertyDefinition.builder(unitTestConfiguration.xunitTestResultsFilePropertyKey())
@@ -70,7 +71,7 @@ public class UnitTestResultsProvider {
         .description("Example: \"TestResult.xml\", \"TestResult1.xml,TestResult2.xml\" or \"C:/TestResult.xml\"")
         .category(category)
         .subCategory(SUBCATEGORY)
-        .onlyOnQualifiers(Qualifiers.PROJECT)
+        .onlyOnConfigScopes(List.of(ConfigScope.PROJECT))
         .multiValues(true)
         .build());
   }

@@ -22,12 +22,13 @@ import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.notifications.AnalysisWarnings;
-import org.sonar.api.resources.Qualifiers;
 import org.sonar.api.scanner.ScannerSide;
 import org.sonar.plugins.dotnet.tests.coverage.CoverageAggregator;
 import org.sonar.plugins.dotnet.tests.coverage.CoverageConfiguration;
 import org.sonar.plugins.dotnet.tests.coverage.CoverageReportImportSensor;
 import org.sonar.plugins.dotnet.tests.ScannerFileService;
+
+import static org.sonar.api.config.PropertyDefinition.ConfigScope;
 
 @ScannerSide
 public class CodeCoverageProvider {
@@ -63,7 +64,7 @@ public class CodeCoverageProvider {
         .description("Example: \"report.nccov\", \"report1.nccov,report2.nccov\" or \"C:/report.nccov\"")
         .category(category)
         .subCategory(SUBCATEGORY)
-        .onlyOnQualifiers(Qualifiers.PROJECT)
+        .onlyOnConfigScopes(List.of(ConfigScope.PROJECT))
         .multiValues(true)
         .build(),
       PropertyDefinition.builder(coverageConf.openCoverPropertyKey())
@@ -71,7 +72,7 @@ public class CodeCoverageProvider {
         .description("Example: \"report.xml\", \"report1.xml,report2.xml\" or \"C:/report.xml\"")
         .category(category)
         .subCategory(SUBCATEGORY)
-        .onlyOnQualifiers(Qualifiers.PROJECT)
+        .onlyOnConfigScopes(List.of(ConfigScope.PROJECT))
         .multiValues(true)
         .build(),
       PropertyDefinition.builder(coverageConf.dotCoverPropertyKey())
@@ -79,7 +80,7 @@ public class CodeCoverageProvider {
         .description("Example: \"report.html\", \"report1.html,report2.html\" or \"C:/report.html\"")
         .category(category)
         .subCategory(SUBCATEGORY)
-        .onlyOnQualifiers(Qualifiers.PROJECT)
+        .onlyOnConfigScopes(List.of(ConfigScope.PROJECT))
         .multiValues(true)
         .build(),
       PropertyDefinition.builder(coverageConf.visualStudioCoverageXmlPropertyKey())
@@ -87,7 +88,7 @@ public class CodeCoverageProvider {
         .description("Example: \"report.coveragexml\", \"report1.coveragexml,report2.coveragexml\" or \"C:/report.coveragexml\"")
         .category(category)
         .subCategory(SUBCATEGORY)
-        .onlyOnQualifiers(Qualifiers.PROJECT)
+        .onlyOnConfigScopes(List.of(ConfigScope.PROJECT))
         .multiValues(true)
         .build());
   }
