@@ -14,12 +14,20 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using System.Collections.Concurrent;
+using System.Runtime.CompilerServices;
+using Roslyn.Utilities;
 using static SonarAnalyzer.Core.Analyzers.DiagnosticDescriptorFactory;
 
 namespace SonarAnalyzer.AnalysisContext;
 
 public static class IAnalysisContextExtensions
 {
+    private const string RazorGeneratedFileSuffix = "_razor.g.cs";
+
+    private static readonly ConditionalWeakTable<Compilation, ImmutableHashSet<string>> UnchangedFilesCache = new();
+    private static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<string, bool>> FileInclusionCache = new();
+
     /// <summary>
     /// Reads the properties from the SonarLint.xml file and caches the result for the scope of this analysis.
     /// </summary>
@@ -68,4 +76,55 @@ public static class IAnalysisContextExtensions
         bool ContainsTag(string tag) =>
             descriptor.CustomTags.Contains(tag);
     }
+
+    /// <param name="tree">Tree to decide on. Can be null for Symbol-based and Compilation-based scenarios. And we want to analyze those too.</param>
+    /// <param name="generatedCodeRecognizer">When set, generated trees are analyzed only when language-specific 'analyzeGeneratedCode' configuration property is also set.</param>
+    public static bool ShouldAnalyzeTree<T>(this T context, SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) where T : IAnalysisContext =>
+        context.SonarLintXml() is var sonarLintXml
+        && (generatedCodeRecognizer is null
+            || sonarLintXml.AnalyzeGeneratedCode(context.Compilation.Language)
+            || !tree.IsConsideredGenerated(generatedCodeRecognizer, context.IsRazorAnalysisEnabled()))
+        && (tree is null || (!context.IsUnchanged(tree) && !context.IsExcluded(sonarLintXml, tree.FilePath)));
+
+    [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = true, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
+    public static bool IsUnchanged<T>(this T context, SyntaxTree tree) where T : IAnalysisContext
+    {
+        // Hot path: Use TryGetValue to prevent the allocation of the GetValue factory delegate in the common case
+        var unchangedFiles = UnchangedFilesCache.TryGetValue(context.Compilation, out var unchangedFilesFromCache)
+            ? unchangedFilesFromCache
+            : UnchangedFilesCache.GetValue(context.Compilation, _ => CreateUnchangedFilesHashSet(context.ProjectConfiguration()));
+        return unchangedFiles.Contains(MapFilePath(tree));
+    }
+
+    [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
+    private static bool IsExcluded<T>(this T context, SonarLintXmlReader sonarLintXml, string filePath) where T : IAnalysisContext
+    {
+        // If ProjectType is not 'Unknown' it means we are in S4NET context and all files are analyzed.
+        // If ProjectType is 'Unknown' then we are in SonarLint or NuGet context and we need to check if the file has been excluded from analysis through SonarLint.xml.
+        if (context.ProjectConfiguration().ProjectType == ProjectType.Unknown)
+        {
+            var fileInclusionCache = FileInclusionCache.GetOrCreateValue(context.Compilation);
+            // Hot path: Don't use GetOrAdd with the value factory parameter. It allocates a delegate which causes GC pressure.
+            var isIncluded = fileInclusionCache.TryGetValue(filePath, out var result)
+                ? result
+                : fileInclusionCache.GetOrAdd(filePath, sonarLintXml.IsFileIncluded(filePath, context.IsTestProject()));
+            return !isIncluded;
+        }
+        return false;
+    }
+
+    private static ImmutableHashSet<string> CreateUnchangedFilesHashSet(ProjectConfigReader config) =>
+        ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, config.AnalysisConfig?.UnchangedFiles() ?? []);
+
+    private static string MapFilePath(SyntaxTree tree) =>
+        // Currently only .razor file hashes are stored in the cache.
+        //
+        // For a file like `Pages\Component.razor`, the compiler generated path has the following pattern:
+        // Microsoft.NET.Sdk.Razor.SourceGenerators\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_Component_razor.g.cs
+        // In order to avoid rebuilding the original file path we have to read it from the pragma directive.
+        //
+        // This should be updated for .cshtml files as well once https://github.com/SonarSource/sonar-dotnet/issues/8032 is done.
+        tree.FilePath.EndsWith(RazorGeneratedFileSuffix, StringComparison.OrdinalIgnoreCase)
+            ? tree.GetOriginalFilePath()
+            : tree.FilePath;
 }

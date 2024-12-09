@@ -18,7 +18,7 @@ namespace SonarAnalyzer.AnalysisContext;
 
 public interface IAnalysisContext
 {
-    public Compilation Compilation { get; }
-    public AnalyzerOptions Options { get; }
-    public SonarAnalysisContext AnalysisContext { get; }
+    Compilation Compilation { get; }
+    AnalyzerOptions Options { get; }
+    SonarAnalysisContext AnalysisContext { get; }
 }

@@ -78,7 +78,7 @@ public abstract class SonarCompilationReportingContextBase<TContext> : SonarRepo
                             IEnumerable<SecondaryLocation> secondaryLocations = null,
                             params string[] messageArgs)
     {
-        if (ShouldAnalyzeTree(primaryLocation?.SourceTree, generatedCodeRecognizer))
+        if (this.ShouldAnalyzeTree(primaryLocation?.SourceTree, generatedCodeRecognizer))
         {
             secondaryLocations = secondaryLocations?.Where(x => x.Location.IsValid(Compilation)).ToArray();
             IssueReporter.ReportIssueCore(
@@ -96,7 +96,7 @@ public abstract class SonarCompilationReportingContextBase<TContext> : SonarRepo
     [Obsolete("Use another overload of ReportIssue, without calling Diagnostic.Create")]
     public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer, Diagnostic diagnostic)
     {
-        if (ShouldAnalyzeTree(diagnostic.Location.SourceTree, generatedCodeRecognizer))
+        if (this.ShouldAnalyzeTree(diagnostic.Location.SourceTree, generatedCodeRecognizer))
         {
             IssueReporter.ReportIssueCore(Compilation, this.HasMatchingScope, CreateReportingContext, diagnostic);
         }

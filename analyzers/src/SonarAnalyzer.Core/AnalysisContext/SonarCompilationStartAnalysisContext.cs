@@ -73,7 +73,7 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
     private bool GetOrAddCanProceedWithAnalysis(GeneratedCodeRecognizer codeRecognizer, ConcurrentDictionary<SyntaxTree, bool> cache, SyntaxTree tree) =>
         cache.GetOrAdd(tree,
             x =>
-                ShouldAnalyzeTree(x, codeRecognizer)
+                this.ShouldAnalyzeTree(x, codeRecognizer)
                 && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(AnalysisContext.SupportedDiagnostics, x)
                 && AnalysisContext.ShouldAnalyzeRazorFile(x));
 }

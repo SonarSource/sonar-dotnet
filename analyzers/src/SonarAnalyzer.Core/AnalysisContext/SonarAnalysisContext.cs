@@ -91,19 +91,19 @@ public class SonarAnalysisContext
     public void RegisterCodeBlockStartAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action)
         where TSyntaxKind : struct =>
         analysisContext.RegisterCodeBlockStartAction<TSyntaxKind>(
-            c => Execute<SonarCodeBlockStartAnalysisContext<TSyntaxKind>, CodeBlockStartAnalysisContext<TSyntaxKind>>(new(this, c), action, c.CodeBlock.SyntaxTree, generatedCodeRecognizer));
+            c => Execute(new(this, c), action, c.CodeBlock.SyntaxTree, generatedCodeRecognizer));
 
     public void RegisterCompilationAction(Action<SonarCompilationReportingContext> action) =>
         analysisContext.RegisterCompilationAction(
-            c => Execute<SonarCompilationReportingContext, CompilationAnalysisContext>(new(this, c), action, null));
+            c => Execute(new(this, c), action, null));
 
     public virtual void RegisterCompilationStartAction(Action<SonarCompilationStartAnalysisContext> action) =>
         analysisContext.RegisterCompilationStartAction(
-            c => Execute<SonarCompilationStartAnalysisContext, CompilationStartAnalysisContext>(new(this, c), action, null));
+            c => Execute(new(this, c), action, null));
 
     public void RegisterSymbolAction(Action<SonarSymbolReportingContext> action, params SymbolKind[] symbolKinds) =>
         analysisContext.RegisterSymbolAction(
-            c => Execute<SonarSymbolReportingContext, SymbolAnalysisContext>(new(this, c), action, null), symbolKinds);
+            c => Execute(new(this, c), action, null), symbolKinds);
 
     public void RegisterNodeAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds)
         where TSyntaxKind : struct =>
@@ -112,12 +112,12 @@ public class SonarAnalysisContext
 
     public void RegisterSemanticModelAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSemanticModelReportingContext> action) =>
         analysisContext.RegisterSemanticModelAction(
-            c => Execute<SonarSemanticModelReportingContext, SemanticModelAnalysisContext>(new(this, c), action, c.SemanticModel.SyntaxTree, generatedCodeRecognizer));
+            action: c => Execute(new(this, c), action, c.SemanticModel.SyntaxTree, generatedCodeRecognizer));
 
     public void RegisterTreeAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxTreeReportingContext> action) =>
         analysisContext.RegisterCompilationStartAction(
             c => c.RegisterSyntaxTreeAction(
-                treeContext => Execute<SonarSyntaxTreeReportingContext, SyntaxTreeAnalysisContext>(new(this, treeContext, c.Compilation), action, treeContext.Tree, generatedCodeRecognizer)));
+                treeContext => Execute(new(this, treeContext, c.Compilation), action, treeContext.Tree, generatedCodeRecognizer)));
 
     /// <summary>
     /// Register action for a SyntaxNode that is executed unconditionally:
@@ -136,8 +136,8 @@ public class SonarAnalysisContext
 
     /// This method will be replaced by <see cref="SonarCompilationStartAnalysisContext.Execute"/> in the future.
     /// <param name="sourceTree">Tree that is definitely known to be analyzed. Pass 'null' if the context doesn't know a specific tree to be analyzed, like a CompilationContext.</param>
-    private void Execute<TSonarContext, TRoslynContext>(TSonarContext context, Action<TSonarContext> action, SyntaxTree sourceTree, GeneratedCodeRecognizer generatedCodeRecognizer = null)
-        where TSonarContext : SonarAnalysisContextBase<TRoslynContext>
+    private void Execute<TSonarContext>(TSonarContext context, Action<TSonarContext> action, SyntaxTree sourceTree, GeneratedCodeRecognizer generatedCodeRecognizer = null)
+        where TSonarContext : IAnalysisContext
     {
         // For each action registered on context we need to do some pre-processing before actually calling the rule.
         // First, we need to ensure the rule does apply to the current scope (main vs test source).
