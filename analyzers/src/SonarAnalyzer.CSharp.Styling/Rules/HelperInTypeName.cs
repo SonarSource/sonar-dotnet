@@ -21,19 +21,36 @@ public sealed class HelperInTypeName : StylingAnalyzer
 {
     public HelperInTypeName() : base("T0006", "Do not use 'Helper' in type names.") { }
 
-    protected override void Initialize(SonarAnalysisContext context) =>
+    protected override void Initialize(SonarAnalysisContext context)
+    {
         context.RegisterNodeAction(c =>
-        {
-            if (c.Node.GetIdentifier() is {} identifier && identifier.ValueText.Contains("Helper"))
             {
-                c.ReportIssue(Rule, identifier);
-            }
-        },
-        SyntaxKind.UsingDirective,
-        SyntaxKind.ClassDeclaration,
-        SyntaxKind.RecordStructDeclaration,
-        SyntaxKind.EnumDeclaration,
-        SyntaxKind.StructDeclaration,
-        SyntaxKind.RecordDeclaration,
-        SyntaxKind.InterfaceDeclaration);
+                if (c.Node.GetIdentifier() is { } identifier && identifier.ValueText.Contains("Helper"))
+                {
+                    c.ReportIssue(Rule, identifier);
+                }
+            },
+            SyntaxKind.UsingDirective,
+            SyntaxKind.ClassDeclaration,
+            SyntaxKind.RecordStructDeclaration,
+            SyntaxKind.EnumDeclaration,
+            SyntaxKind.StructDeclaration,
+            SyntaxKind.RecordDeclaration,
+            SyntaxKind.InterfaceDeclaration);
+
+        context.RegisterNodeAction(c =>
+            {
+                var name = c.Node switch
+                {
+                    NamespaceDeclarationSyntax ns => ns.Name,
+                    FileScopedNamespaceDeclarationSyntax ns => ns.Name
+                };
+                if (name.ToString().Contains("Helper"))
+                {
+                    c.ReportIssue(Rule, name);
+                }
+            },
+           SyntaxKind.NamespaceDeclaration,
+           SyntaxKindEx.FileScopedNamespaceDeclaration);
+    }
 }

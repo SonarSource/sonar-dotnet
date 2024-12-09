@@ -24,4 +24,8 @@ public class HelperInTypeNameTest
     [TestMethod]
     public void HelperInTypeName() =>
         builder.AddPaths("HelperInTypeName.cs").Verify();
+
+    [TestMethod]
+    public void HelperInTypeName_FileScopedNamespace() =>
+        builder.AddSnippet("namespace Something.Helpers;    // Noncompliant").Verify();
 }
