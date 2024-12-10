@@ -30,6 +30,12 @@ public class CommentsShouldNotBeEmptyTest
         builderCS.AddPaths("CommentsShouldNotBeEmpty.cs").Verify();
 
     [TestMethod]
+    public void CommentsShouldNotBeEmpty_CS1() =>
+        builderCS
+            .AddTestReference()
+            .AddPaths("CommentsShouldNotBeEmpty.cs").VerifyNoIssues();
+
+    [TestMethod]
     public void CommentsShouldNotBeEmpty_VB() =>
         builderVB.AddPaths("CommentsShouldNotBeEmpty.vb").Verify();
 }

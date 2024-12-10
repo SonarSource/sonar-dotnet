@@ -49,7 +49,7 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
         {
             ConcurrentDictionary<SyntaxTree, bool> shouldAnalyzeCache = new();
             Context.RegisterSyntaxNodeAction(x =>
-// The hot path starts in the lambda below.
+            // The hot path starts in the lambda below.
 #pragma warning restore HAA0303, HAA0302, HAA0301, HAA0502
                 {
                     if (!shouldAnalyzeCache.TryGetValue(x.Node.SyntaxTree, out var canProceedWithAnalysis))

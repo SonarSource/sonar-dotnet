@@ -43,6 +43,14 @@ public class DisablingRequestValidationTest
             .AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion))
             .VerifyNoIssuesIgnoreErrors();
 
+    [TestMethod]
+    public void DisablingRequestValidation_CS_NoIssuesInTestCode() =>
+         new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled))
+            .AddPaths("DisablingRequestValidation.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion))
+            .AddTestReference()
+            .VerifyNoIssuesIgnoreErrors();
+
     [DataTestMethod]
     [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\Values")]
     [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\Formatting")]

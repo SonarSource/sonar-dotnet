@@ -49,7 +49,7 @@ public sealed class BlazorQueryParameterRoutableComponent : SonarDiagnosticAnaly
         {
             if (c.Compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Components_RouteAttribute) is not null)
             {
-                context.RegisterSymbolAction(CheckQueryProperties, SymbolKind.Property);
+                c.RegisterSymbolAction(CheckQueryProperties, SymbolKind.Property);
             }
         });
 
