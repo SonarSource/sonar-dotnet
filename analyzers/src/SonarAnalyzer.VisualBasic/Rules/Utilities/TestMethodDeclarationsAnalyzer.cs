@@ -19,10 +19,13 @@ using SonarAnalyzer.Core.Rules.Utilities;
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public class MethodDeclarationsAnalyzer : MethodDeclarationsAnalyzerBase<SyntaxKind>
+public class TestMethodDeclarationsAnalyzer : TestMethodDeclarationsAnalyzerBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
 
     protected override IEnumerable<SyntaxNode> GetMethodDeclarations(SyntaxNode node) =>
         node.DescendantNodes().OfType<MethodStatementSyntax>();
+
+    protected override IEnumerable<SyntaxNode> GetTypeDeclarations(SyntaxNode node) =>
+        node.DescendantNodes().OfType<TypeBlockSyntax>();
 }

@@ -24,7 +24,8 @@ public sealed record MethodDeclarationInfoComparer : IEqualityComparer<MethodDec
         (first is null && second is null)
         || (first is not null
             && second is not null
-            && first.TypeName == second.TypeName && first.MethodName == second.MethodName);
+            && first.TypeName == second.TypeName
+            && first.MethodName == second.MethodName);
 
     public int GetHashCode(MethodDeclarationInfo info) =>
         HashCode.Combine(info.TypeName, info.MethodName);

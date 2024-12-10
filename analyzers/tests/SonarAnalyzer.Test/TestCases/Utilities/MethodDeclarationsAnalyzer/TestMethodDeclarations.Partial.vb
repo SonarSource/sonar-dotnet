@@ -1,9 +1,13 @@
-﻿Namespace Samples
+﻿Imports Microsoft.VisualStudio.TestTools.UnitTesting
+
+Namespace Samples
 
     Partial Public Class PartialClass
+        <TestMethod>
         Public Sub InSecondFile()
         End Sub
 
+        <TestMethod>
         Private Sub PartialMethod()
         End Sub
     End Class
