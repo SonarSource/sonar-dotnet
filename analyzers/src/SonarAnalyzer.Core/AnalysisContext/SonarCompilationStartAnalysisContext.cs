@@ -46,6 +46,9 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
     public void RegisterSemanticModelAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSemanticModelReportingContext> action) =>
         Context.RegisterSemanticModelAction(x => Execute(new(AnalysisContext, x), action, x.SemanticModel.SyntaxTree, generatedCodeRecognizer));
 
+    public void RegisterTreeAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxTreeReportingContext> action) =>
+        Context.RegisterSyntaxTreeAction(x => Execute(new(AnalysisContext, x, Context.Compilation), action, x.Tree, generatedCodeRecognizer));
+
 #pragma warning disable HAA0303, HAA0302, HAA0301, HAA0502
 
     [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/8406", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]

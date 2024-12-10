@@ -115,9 +115,8 @@ public class SonarAnalysisContext
             c.RegisterSemanticModelAction(generatedCodeRecognizer, action));
 
     public void RegisterTreeAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxTreeReportingContext> action) =>
-        analysisContext.RegisterCompilationStartAction(
-            c => c.RegisterSyntaxTreeAction(
-                treeContext => Execute(new(this, treeContext, c.Compilation), action, treeContext.Tree, generatedCodeRecognizer)));
+        RegisterCompilationStartAction(c =>
+            c.RegisterTreeAction(generatedCodeRecognizer, action));
 
     /// <summary>
     /// Register action for a SyntaxNode that is executed unconditionally:
