@@ -90,8 +90,8 @@ public class SonarAnalysisContext
 
     public void RegisterCodeBlockStartAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action)
         where TSyntaxKind : struct =>
-        analysisContext.RegisterCodeBlockStartAction<TSyntaxKind>(
-            c => Execute(new(this, c), action, c.CodeBlock.SyntaxTree, generatedCodeRecognizer));
+        RegisterCompilationStartAction(c =>
+            c.RegisterCodeBlockStartAction(generatedCodeRecognizer, action));
 
     public void RegisterCompilationAction(Action<SonarCompilationReportingContext> action) =>
         analysisContext.RegisterCompilationAction(

@@ -40,7 +40,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
             // System.Linq.Enumerable can be found in Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.
             var wellKnownExtensionMethodContainer = BuildWellKnownExtensionMethodContainers(compilationStart.Compilation);
             var exclusions = BuildExclusions(compilationStart.Compilation);
-            context.RegisterCodeBlockStartAction<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, codeBlockStart =>
+            compilationStart.RegisterCodeBlockStartAction<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, codeBlockStart =>
             {
                 if (IsAsyncCodeBlock(codeBlockStart.CodeBlock))
                 {

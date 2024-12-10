@@ -27,6 +27,10 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
     public override CancellationToken Cancel => Context.CancellationToken;
     internal SonarCompilationStartAnalysisContext(SonarAnalysisContext analysisContext, CompilationStartAnalysisContext context) : base(analysisContext, context) { }
 
+    public void RegisterCodeBlockStartAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action)
+        where TSyntaxKind : struct =>
+        Context.RegisterCodeBlockStartAction<TSyntaxKind>(x => Execute(new(AnalysisContext, x), action, x.CodeBlock.SyntaxTree, generatedCodeRecognizer));
+
     public void RegisterSymbolAction(Action<SonarSymbolReportingContext> action, params SymbolKind[] symbolKinds) =>
         Context.RegisterSymbolAction(x => action(new(AnalysisContext, x)), symbolKinds);
 
