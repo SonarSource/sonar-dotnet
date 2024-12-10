@@ -50,46 +50,43 @@ public class NUnitTestResultsParser implements UnitTestResultParser {
     }
 
     private void handleTestSuiteTag(XmlParserHelper xmlParserHelper) {
-      String type = xmlParserHelper.getRequiredAttribute("type");
+      var type = xmlParserHelper.getRequiredAttribute("type");
       if(type.equals("Assembly")) {
-        String assemblyName = xmlParserHelper.getAttribute("fullname");
-        if (assemblyName == null) {
-          // NUnit2 does not have filepath in 'fullname' attribute but in 'name'
-          assemblyName = xmlParserHelper.getRequiredAttribute("name");
-        }
+        var assemblyName = extractName(xmlParserHelper);
         dllName = extractDllNameFromFilePath(assemblyName);
         LOG.debug("NUnit Assembly found, assembly: {}, Extracted dllName: {}", assemblyName, dllName);
       }
     }
 
     private void handleTestCaseTag(XmlParserHelper xmlParserHelper) {
-      String result = xmlParserHelper.getRequiredAttribute("result");
-      String label = xmlParserHelper.getAttribute("label");
-
-      // NUnit 3 time format
-      Double time = xmlParserHelper.getDoubleAttribute("duration");
-      var executionTime = time == null ? null : (long) (time * 1000);
-
-      if(time == null) {
-        // Nunit 2 time format
-        time = xmlParserHelper.getDoubleAttribute("time");
-        executionTime = time == null ? null : (long) (time * 1000);
-      }
-
+      var result = xmlParserHelper.getRequiredAttribute("result");
+      var label = xmlParserHelper.getAttribute("label");
+      var executionTime = extractExecutionTime(xmlParserHelper);
       var testResults = new NUnitTestResults(result, label, executionTime);
-
-      String name = xmlParserHelper.getAttribute("fullname");
-      if (name == null) {
-        // NUnit2 does not have the class & method name in 'fullname' attribute but in 'name'
-        name = xmlParserHelper.getRequiredAttribute("name");
-      }
-
-      if(name.contains("(")) {
-        name = name.substring(0, name.indexOf('('));
-      }
-      String fullName = String.join(".", dllName, name);
+      var name = extractName(xmlParserHelper);
+      var fullName = getFullName(name, dllName);
 
       addTestResultToFile(fullName, testResults);
+    }
+
+    private static Long extractExecutionTime(XmlParserHelper xmlParserHelper) {
+      // NUnit 3
+      var time = xmlParserHelper.getDoubleAttribute("duration");
+      if (time == null) {
+        // NUnit 2
+        time = xmlParserHelper.getDoubleAttribute("time");
+      }
+      return time == null ? null : (long) (time * 1000);
+    }
+
+    private static String extractName(XmlParserHelper xmlParserHelper) {
+      // NUnit 3
+      var name = xmlParserHelper.getAttribute("fullname");
+      if (name == null) {
+        // NUnit 2
+        name = xmlParserHelper.getRequiredAttribute("name");
+      }
+      return name;
     }
   }
 }

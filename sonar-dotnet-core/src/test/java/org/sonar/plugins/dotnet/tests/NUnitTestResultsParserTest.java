@@ -118,10 +118,8 @@ public class NUnitTestResultsParserTest {
         put("mock-assembly.NUnit.Tests.FixtureWithTestCases.MethodWithParameters", "D:\\Dev\\NUnit\\OtherTests.cs");
         put("mock-assembly.NUnit.Tests.Assemblies.MockTestFixture.TestWithManyProperties", "D:\\Dev\\NUnit\\OtherTests.cs");
         put("mock-assembly.NUnit.Tests.ParameterizedFixture", "D:\\Dev\\NUnit\\OtherTests.cs");
-        put("mock-assembly.NUnit.Tests.FixtureWithTestCases.GenericMethod<Double>", "D:\\Dev\\NUnit\\OtherTests.cs");
-        put("mock-assembly.NUnit.Tests.FixtureWithTestCases.GenericMethod<Int32>", "D:\\Dev\\NUnit\\OtherTests.cs");
-        put("mock-assembly.NUnit.Tests.GenericFixture<Double>", "D:\\Dev\\NUnit\\OtherTests.cs");
-        put("mock-assembly.NUnit.Tests.GenericFixture<Int32>", "D:\\Dev\\NUnit\\OtherTests.cs");
+        put("mock-assembly.NUnit.Tests.FixtureWithTestCases.GenericMethod", "D:\\Dev\\NUnit\\OtherTests.cs");
+        put("mock-assembly.NUnit.Tests.GenericFixture", "D:\\Dev\\NUnit\\OtherTests.cs");
         put("mock-assembly.NUnit.Tests.IgnoredFixture.Test1", "D:\\Dev\\NUnit\\OtherTests.cs");
         put("mock-assembly.NUnit.Tests.IgnoredFixture.Test2", "D:\\Dev\\NUnit\\OtherTests.cs");
         put("mock-assembly.NUnit.Tests.IgnoredFixture.Test3", "D:\\Dev\\NUnit\\OtherTests.cs");
@@ -139,6 +137,9 @@ public class NUnitTestResultsParserTest {
     assertThat(results.get("D:\\Dev\\NUnit\\OtherTests.cs").skipped()).isEqualTo(8);
     assertThat(results.get("D:\\Dev\\NUnit\\OtherTests.cs").errors()).isEqualTo(1);
     assertThat(results.get("D:\\Dev\\NUnit\\OtherTests.cs").executionTime()).isEqualTo(27);
+
+    var warnings = logTester.logs(Level.WARN);
+    assertThat(warnings).isEmpty();
 
     List<String> infoLogs = logTester.logs(Level.INFO);
     assertThat(infoLogs).hasSize(1);

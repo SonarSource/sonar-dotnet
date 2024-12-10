@@ -72,4 +72,14 @@ public abstract class XmlTestReportParser {
   protected String extractDllNameFromFilePath(String filePath) {
     return filePath.substring(filePath.lastIndexOf(File.separator) + 1, filePath.lastIndexOf('.'));
   }
+
+  protected String getFullName(String methodName, String dllName) {
+    if(methodName.contains("<")) {
+      methodName = methodName.substring(0, methodName.indexOf('<'));
+    }
+    if(methodName.contains("(")) {
+      methodName = methodName.substring(0, methodName.indexOf('('));
+    }
+    return String.join(".", dllName, methodName);
+  }
 }
