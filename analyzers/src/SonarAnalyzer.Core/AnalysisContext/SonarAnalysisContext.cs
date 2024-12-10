@@ -111,8 +111,8 @@ public class SonarAnalysisContext
             c => c.RegisterNodeAction(generatedCodeRecognizer, action, syntaxKinds));
 
     public void RegisterSemanticModelAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSemanticModelReportingContext> action) =>
-        analysisContext.RegisterSemanticModelAction(
-            action: c => Execute(new(this, c), action, c.SemanticModel.SyntaxTree, generatedCodeRecognizer));
+        RegisterCompilationStartAction(c =>
+            c.RegisterSemanticModelAction(generatedCodeRecognizer, action));
 
     public void RegisterTreeAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxTreeReportingContext> action) =>
         analysisContext.RegisterCompilationStartAction(

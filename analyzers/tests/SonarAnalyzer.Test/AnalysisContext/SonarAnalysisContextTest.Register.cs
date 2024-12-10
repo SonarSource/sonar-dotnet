@@ -137,6 +137,7 @@ public partial class SonarAnalysisContextTest
         var context = new DummyAnalysisContext(TestContext, unchangedFileName);
         var sut = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
         sut.RegisterSemanticModelAction(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
+        ExecutePostponedActions(sut, context);
 
         context.AssertDelegateInvoked(expected);
     }
@@ -157,6 +158,7 @@ public partial class SonarAnalysisContextTest
         var context = new DummyAnalysisContext(TestContext);
         var self = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
         CS.RegisterSemanticModelAction(self, context.DelegateAction);
+        ExecutePostponedActions(self, context);
 
         context.AssertDelegateInvoked(true);
     }
@@ -167,6 +169,7 @@ public partial class SonarAnalysisContextTest
         var context = new DummyAnalysisContext(TestContext);
         var self = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
         VB.RegisterSemanticModelAction(self, context.DelegateAction);
+        ExecutePostponedActions(self, context);
 
         context.AssertDelegateInvoked(true);
     }
@@ -491,7 +494,18 @@ public partial class SonarAnalysisContextTest
             .Do(x => x.Arg<Action<SyntaxNodeAnalysisContext>>()(context.CreateSyntaxNodeAnalysisContext()));    // Invoke to call RegisterSyntaxTreeAction
         mock.When(x => x.RegisterSyntaxTreeAction(Arg.Any<Action<SyntaxTreeAnalysisContext>>()))
             .Do(x => x.Arg<Action<SyntaxTreeAnalysisContext>>()(new SyntaxTreeAnalysisContext(context.Tree, context.Options, _ => { }, _ => true, default)));
+        mock.When(x => x.RegisterSemanticModelAction(Arg.Any<Action<SemanticModelAnalysisContext>>()))
+            .Do(x => x.Arg<Action<SemanticModelAnalysisContext>>()(new SemanticModelAnalysisContext(context.Model, context.Options, _ => { }, _ => true, default)));
         return mock;
+    }
+
+    private static void ExecutePostponedActions(SonarParametrizedAnalysisContext self, DummyAnalysisContext dummyAnalysisContext)
+    {
+        var sub = Substitute.For<CompilationStartAnalysisContext>(dummyAnalysisContext.Model.Compilation, dummyAnalysisContext.Options, CancellationToken.None);
+        sub
+            .When(x => x.RegisterSemanticModelAction(Arg.Any<Action<SemanticModelAnalysisContext>>()))
+            .Do(x => x.Arg<Action<SemanticModelAnalysisContext>>().Invoke(dummyAnalysisContext.CreateSemanticModelAnalysisContext()));
+        self.ExecutePostponedActions(new(self, sub));
     }
 
     private sealed class DummyAnalysisContext : RoslynAnalysisContext

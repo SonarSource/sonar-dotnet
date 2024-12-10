@@ -39,6 +39,9 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
     public void RegisterSemanticModelAction(Action<SonarSemanticModelReportingContext> action) =>
         Context.RegisterSemanticModelAction(x => action(new(AnalysisContext, x)));
 
+    public void RegisterSemanticModelAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSemanticModelReportingContext> action) =>
+        Context.RegisterSemanticModelAction(x => Execute(new(AnalysisContext, x), action, x.SemanticModel.SyntaxTree, generatedCodeRecognizer));
+
 #pragma warning disable HAA0303, HAA0302, HAA0301, HAA0502
 
     [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/8406", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
@@ -76,4 +79,19 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
                 this.ShouldAnalyzeTree(x, codeRecognizer)
                 && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(AnalysisContext.SupportedDiagnostics, x)
                 && AnalysisContext.ShouldAnalyzeRazorFile(x));
+
+    private void Execute<TSonarContext>(TSonarContext context, Action<TSonarContext> action, SyntaxTree sourceTree, GeneratedCodeRecognizer generatedCodeRecognizer = null)
+        where TSonarContext : IAnalysisContext
+    {
+        // For each action registered on context we need to do some pre-processing before actually calling the rule.
+        // First, we need to ensure the rule does apply to the current scope (main vs test source).
+        // Second, we call an external delegate (set by legacy SonarLint for VS) to ensure the rule should be run (usually
+        // the decision is made on based on whether the project contains the analyzer as NuGet).
+        if (context.ShouldAnalyzeTree(sourceTree, generatedCodeRecognizer)
+            && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(AnalysisContext.SupportedDiagnostics, sourceTree)
+            && AnalysisContext.ShouldAnalyzeRazorFile(sourceTree))
+        {
+            action(context);
+        }
+    }
 }
