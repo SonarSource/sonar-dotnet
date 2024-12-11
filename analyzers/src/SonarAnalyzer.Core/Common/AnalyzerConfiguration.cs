@@ -44,6 +44,12 @@ namespace SonarAnalyzer.Common
                 // Ignore options because we always return true for IsEnabled
             }
 
+            private void Unused(bool arg)
+            {
+                if (arg)
+                    Console.WriteLine("arg");
+            }
+
             public bool IsEnabled(string ruleKey) => true;
         }
 
