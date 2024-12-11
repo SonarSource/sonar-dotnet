@@ -136,10 +136,10 @@ stages:
     - task: SonarCloudAnalyze@3
       displayName: 'Code Analysis - End'
 
-    - task: SonarCloudPublish@3
-      displayName: 'Code Analysis - Publish QG'
-      inputs:
-        pollingTimeoutSec: '300'
+#    - task: SonarCloudPublish@3
+#      displayName: 'Code Analysis - Publish QG'
+#      inputs:
+#        pollingTimeoutSec: '300'
 
     - task: DownloadSecureFile@1
       displayName: 'Download Maven settings'
