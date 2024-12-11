@@ -25,7 +25,7 @@ public class CSharpFileCacheSensor extends AbstractFileCacheSensor {
     super(metadata, hashProvider);
   }
 
-private void Unused(bool unused) { }
+private void Unused(String unused) { }
   
   @Override
   protected String[] additionalSupportedExtensions() {
