@@ -95,7 +95,7 @@ namespace SonarAnalyzer.Rules
                     return;
                 }
                 var treeMessages = new ConcurrentStack<TMessage>();
-                startContext.RegisterSemanticModelAction(modelContext =>
+                startContext.RegisterSemanticModelActionInAllFiles(modelContext =>
                 {
                     if (ShouldGenerateMetrics(parameters, modelContext))
                     {

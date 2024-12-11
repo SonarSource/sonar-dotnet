@@ -263,7 +263,7 @@ public partial class SonarAnalysisContextTest
         var context = new DummyAnalysisContext(TestContext);
         var startContext = new DummyCompilationStartAnalysisContext(context);
         var sut = new SonarCompilationStartAnalysisContext(new(context, DummyMainDescriptor), startContext);
-        sut.RegisterSemanticModelAction(_ => { });
+        sut.RegisterSemanticModelActionInAllFiles(_ => { });
 
         startContext.AssertExpectedInvocationCounts(expectedSemanticModelCount: 1);
     }
