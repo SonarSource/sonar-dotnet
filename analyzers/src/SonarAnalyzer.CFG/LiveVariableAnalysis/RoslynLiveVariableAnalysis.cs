@@ -119,16 +119,21 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
             {
                 BuildBranchesFinally(successor.Source, finallyRegion);
             }
+            foreach (var catchOrFilterRegion in successor.EnteringRegions.Where(x => x.Kind == ControlFlowRegionKind.TryAndCatch).SelectMany(CatchOrFilterRegions))
+            {
+                AddBranch(block, Cfg.Blocks[catchOrFilterRegion.FirstBlockOrdinal]);
+            }
         }
         if (block.EnclosingNonLocalLifetimeRegion() is { Kind: ControlFlowRegionKind.Try } tryRegion)
         {
             var catchesAll = false;
-            foreach (var catchOrFilterRegion in block.Successors.SelectMany(CatchOrFilterRegions))
+            if (tryRegion.EnclosingRegion(ControlFlowRegionKind.TryAndCatch) is { } tryAndCatchRegion)
             {
-                var catchOrFilterBlock = Cfg.Blocks[catchOrFilterRegion.FirstBlockOrdinal];
-                AddBranch(block, catchOrFilterBlock);
-                AddPredecessorsOutsideRegion(catchOrFilterBlock);
-                catchesAll = catchesAll || (catchOrFilterRegion.Kind == ControlFlowRegionKind.Catch && IsCatchAllType(catchOrFilterRegion.ExceptionType));
+                foreach (var catchOrFilterRegion in CatchOrFilterRegions(tryAndCatchRegion))
+                {
+                    AddBranch(block, Cfg.Blocks[catchOrFilterRegion.FirstBlockOrdinal]);
+                    catchesAll = catchesAll || (catchOrFilterRegion.Kind == ControlFlowRegionKind.Catch && IsCatchAllType(catchOrFilterRegion.ExceptionType));
+                }
             }
             if (!catchesAll && block.EnclosingRegion(ControlFlowRegionKind.TryAndFinally)?.NestedRegion(ControlFlowRegionKind.Finally) is { } finallyRegion)
             {
@@ -190,11 +195,6 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         var tryRegion = finallyRegion.EnclosingRegion.NestedRegion(ControlFlowRegionKind.Try);
         return tryRegion.Blocks(Cfg).SelectMany(x => x.Successors).Where(x => x.FinallyRegions.Contains(finallyRegion));
     }
-
-    private static IEnumerable<ControlFlowRegion> CatchOrFilterRegions(ControlFlowBranch trySuccessor) =>
-        trySuccessor.Semantics == ControlFlowBranchSemantics.Throw
-            ? CatchOrFilterRegions(trySuccessor.Source.EnclosingRegion.EnclosingRegion)
-            : trySuccessor.LeavingRegions.Where(x => x.Kind == ControlFlowRegionKind.TryAndCatch).SelectMany(CatchOrFilterRegions);
 
     private static IEnumerable<ControlFlowRegion> CatchOrFilterRegions(ControlFlowRegion tryAndCatchRegion)
     {

@@ -140,6 +140,29 @@ public partial class RoslynLiveVariableAnalysisTest
     }
 
     [TestMethod]
+    public void VariableBeforeTry_LiveOut()
+    {
+        const string code = """
+            var usedInCatch = 0;
+            Method(0);
+            try
+            {
+                usedInCatch = 1;
+                Method(1);
+            }
+            catch
+            {
+                Method(usedInCatch);
+            } 
+            """;
+        var context = CreateContextCS(code);
+        context.Validate("Method(0);", LiveOut("usedInCatch"));
+        context.Validate("Method(1);", LiveOut("usedInCatch"));
+        context.Validate("Method(usedInCatch);", LiveIn("usedInCatch"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
     public void Catch_TryHasLocalLifetimeRegion_LiveIn()
     {
         const string code = """
@@ -625,7 +648,7 @@ public partial class RoslynLiveVariableAnalysisTest
             """;
         var context = CreateContextCS(code);
         context.ValidateEntry();
-        context.Validate("Method(0);", LiveIn("value"), LiveOut("value"));
+        context.Validate("Method(0);", LiveIn("value"));
         context.Validate("value = 200;", LiveOut("value"));
         context.Validate("Method(1);", LiveIn("value"));
         context.ValidateExit();
@@ -667,7 +690,7 @@ public partial class RoslynLiveVariableAnalysisTest
             """;
         var context = CreateContextCS(code);
         context.ValidateEntry();
-        context.Validate("Method(0);", LiveIn("value"), LiveOut("value"));
+        context.Validate("Method(0);", LiveIn("value"));
         context.Validate("value = 200;", LiveOut("value"));
         context.Validate("Method(1);", LiveIn("value"));
         context.Validate("Method(2);", LiveIn("value"));
@@ -749,7 +772,7 @@ public partial class RoslynLiveVariableAnalysisTest
             """;
         var context = CreateContextCS(code);
         context.ValidateEntry();
-        context.Validate("Method(0);", LiveIn("value"), LiveOut("value"));
+        context.Validate("Method(0);", LiveIn("value"));
         context.Validate("value = 200;", LiveOut("value"));
         context.Validate("Method(1);", LiveIn("value"), LiveOut("value"));
         context.Validate("Method(2);", LiveIn("value"));

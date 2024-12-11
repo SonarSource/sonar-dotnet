@@ -1596,7 +1596,7 @@ public class PeachValidation
     // https://github.com/SonarSource/sonar-dotnet/issues/9467
     public int ReadAfterCatchAll_WithType(bool condition)
     {
-        var value = 100;    // Noncompliant FP, used after catch all
+        var value = 100;    // used after catch all
         try
         {
             CanThrow();
@@ -1615,7 +1615,7 @@ public class PeachValidation
     // https://github.com/SonarSource/sonar-dotnet/issues/9467
     public int ReadAfterCatchAll_NoType(bool condition)
     {
-        var value = 100;    // Noncompliant FP, used after catch all
+        var value = 100;    // used after catch all
         try
         {
             CanThrow();
@@ -1634,7 +1634,7 @@ public class PeachValidation
     // https://github.com/SonarSource/sonar-dotnet/issues/9467
     public void ReadInCatch_WithBranching(bool condition)
     {
-        var value = 100;    // Noncompliant FP, used in catch
+        var value = 100;    // used in catch
         try
         {
             value = CanThrow();
@@ -1717,4 +1717,75 @@ public class PeachValidation
         throw new Exception();
 
     private void Log(int value) { }
+
+    void LoopInsideTryCatch(List<object> list, bool condition)
+    {
+        object value  = null;
+        try
+        {
+            while (condition)
+            {
+                value  = list.FirstOrDefault(); // Compliant, it's used in catch
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(value );
+        }
+    }
+
+    void LoopInsideTryCatch_Finally(List<object> list, bool condition)
+    {
+        object value = null;
+        try
+        {
+            while (condition)
+            {
+                value = list.FirstOrDefault(); // Compliant, it's used in finally
+            }
+        }
+        catch { }
+        finally
+        {
+            Console.WriteLine(value);
+        }
+    }
+
+    void LoopAndBranchingInsideTryCatch_Finally(List<object> list, bool condition)
+    {
+        object arg1 = null;
+        object arg2 = null;
+        object arg3 = null;
+        object arg4 = null;
+        try
+        {
+            while (condition)
+            {
+                arg1 = list.FirstOrDefault();   // Compliant, it's used in catch
+                if (list.Count > 10)
+                {
+                    arg2 = arg1;                // Compliant, it's used in catch
+                    foreach (var item in list)
+                    {
+                        arg3 = item;            // Compliant, it's used in catch
+                        try
+                        {
+                            foreach (var innerItem in list)
+                            {
+                                arg4 = item;    // Compliant, it's used in catch
+                            }
+                        }
+                        catch { throw; }       // this propagates the livein - liveout to the outer catch
+                    }
+                }
+            }
+        }
+        catch
+        {
+            Console.WriteLine(arg1);
+            Console.WriteLine(arg2);
+            Console.WriteLine(arg3);
+            Console.WriteLine(arg4);
+        }
+    }
 }
