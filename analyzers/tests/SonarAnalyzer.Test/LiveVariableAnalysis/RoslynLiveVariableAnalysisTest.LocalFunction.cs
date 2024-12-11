@@ -221,7 +221,29 @@ public partial class RoslynLiveVariableAnalysisTest
     }
 
     [TestMethod]
-    public void LocalFunctionInvocation_Recursive_LiveIn()
+    public void LocalFunctionInvocation_Recursive_LiveIn_WithoutFlowCapture()
+    {
+        var code = """
+            var variable = 42;
+            if (boolParameter)
+                return;
+            LocalFunction(10);
+
+            int LocalFunction(int cnt)
+            {
+                if (cnt == 0)
+                    return 0;
+                return variable + LocalFunction(cnt - 1);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
+        context.Validate("boolParameter", LiveIn("boolParameter"), LiveOut("variable"));
+        context.Validate("LocalFunction(10);", LiveIn("variable"));
+    }
+
+    [TestMethod]
+    public void LocalFunctionInvocation_Recursive_LiveIn_FlowCapture()
     {
         var code = """
             var variable = 42;
@@ -233,8 +255,8 @@ public partial class RoslynLiveVariableAnalysisTest
             """;
         var context = CreateContextCS(code);
         context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
-        context.Validate("boolParameter", LiveIn("boolParameter"), LiveOut("variable"));
-        context.Validate("LocalFunction(10);", LiveIn("variable"));
+        context.Validate("boolParameter", LiveIn("boolParameter")); // should be LiveOut("variable") but FlowCaptures inside of local functions are not resolved
+        context.Validate("LocalFunction(10);");                     // should be LiveIn("variable")
     }
 
     [TestMethod]

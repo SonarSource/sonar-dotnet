@@ -648,8 +648,8 @@ namespace Tests.Diagnostics
         private void ConditionalEvaluation(bool b1, bool b2, object coalesce, object coalesceAssignment)
         {
             var x = false;  // Compliant ignored value
-            x = true;       // Roslyn CFG FN: Consequence of inaccurate LVA state below
-            x = b1 && b2;   // Roslyn CFG FN: Branching with FlowCaptureOperation
+            x = true;       // Noncompliant
+            x = b1 && b2;   // Noncompliant
             x = b1 || b2;   // Noncompliant
             coalesce = coalesce ?? "Value";   // Noncompliant
             coalesceAssignment ??= "Value";   // Noncompliant
@@ -937,7 +937,7 @@ namespace Tests.Diagnostics
 
         void Method()
         {
-            var x = new ObjectInitializer();     // FN
+            var x = new ObjectInitializer();     // Noncompliant
             x = new ObjectInitializer { ID = 1 };
             x.Method();
         }
