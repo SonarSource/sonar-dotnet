@@ -25,6 +25,8 @@ public class CSharpFileCacheSensor extends AbstractFileCacheSensor {
     super(metadata, hashProvider);
   }
 
+private void Unused(bool unused) { }
+  
   @Override
   protected String[] additionalSupportedExtensions() {
     return new String[]{"cshtml"};
