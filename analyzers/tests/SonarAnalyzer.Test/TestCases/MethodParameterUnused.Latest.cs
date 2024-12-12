@@ -392,7 +392,7 @@ namespace CSharp11
 
         public partial class PartialMethod
         {
-            private partial string ExtendedPartialMethod(string one, string two) // Noncompliant FP
+            private partial string ExtendedPartialMethod(string one, string two) // Compliant, we don't want to raise on partial methods due to generated signatures
             {
                 return two;
             }

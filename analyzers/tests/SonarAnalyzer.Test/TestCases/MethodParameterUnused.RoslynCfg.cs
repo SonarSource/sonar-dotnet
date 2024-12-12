@@ -354,7 +354,7 @@ namespace Tests.TestCases
 
     public partial class PartialMethod_Issue_8988
     {
-        partial void Partial(string one, string two) // Noncompliant FP
+        partial void Partial(string one, string two) // Compliant, we don't want to raise on partial methods due to generated signatures
         {
             Console.Write(two);
         }

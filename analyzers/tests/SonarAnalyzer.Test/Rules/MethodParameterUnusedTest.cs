@@ -94,19 +94,19 @@ public class Sample
                 public partial class Generated
                 {
                     private partial void M(int a, int unused);
-                }             
+                }
                 """)
             .AddSnippet("""
                 using System;
 
                 public partial class Generated
                 {
-                    private partial void M(int a, int unused) // Noncompliant FP
+                    private partial void M(int a, int unused) // Compliant
                     {
                         Console.WriteLine(a);
                     }
                 }
                 """)
             .WithOptions(ParseOptionsHelper.FromCSharp9)
-            .Verify();
+            .VerifyNoIssues();
 }
