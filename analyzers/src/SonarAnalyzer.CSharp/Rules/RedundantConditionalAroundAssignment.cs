@@ -36,9 +36,9 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var ifStatement = (IfStatementSyntax)c.Node;
 
-            if (ifStatement.Else != null
+            if (ifStatement.Else is not null
                 || ifStatement.Parent is ElseClauseSyntax
-                || (ifStatement.FirstAncestorOrSelf<AccessorDeclarationSyntax>()?.IsAnyKind(SyntaxKind.SetAccessorDeclaration, SyntaxKindEx.InitAccessorDeclaration) ?? false)
+                || ifStatement.FirstAncestorOrSelf<AccessorDeclarationSyntax>()?.Kind() is SyntaxKind.SetAccessorDeclaration or SyntaxKindEx.InitAccessorDeclaration
                 || !TryGetNotEqualsCondition(ifStatement, out var condition)
                 || !TryGetSingleAssignment(ifStatement, out var assignment))
             {

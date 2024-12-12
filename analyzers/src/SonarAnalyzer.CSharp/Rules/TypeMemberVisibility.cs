@@ -23,14 +23,14 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Types should not have members with visibility set higher than the type's visibility";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        private static readonly SyntaxKind[] TypeKinds =
-        {
+        private static readonly HashSet<SyntaxKind> TypeKinds =
+        [
             SyntaxKind.ClassDeclaration,
             SyntaxKind.EnumDeclaration,
             SyntaxKindEx.RecordDeclaration,
             SyntaxKindEx.RecordStructDeclaration,
             SyntaxKind.StructDeclaration,
-        };
+        ];
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         c.ReportIssue(Rule, typeDeclaration.Identifier, secondaryLocations);
                     }
                 },
-                TypeKinds);
+                [.. TypeKinds]);
 
         private static SecondaryLocation[] GetInvalidMemberLocations(SemanticModel semanticModel, BaseTypeDeclarationSyntax type)
         {
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
                            .OfType<MemberDeclarationSyntax>()
                            .Where(x => x.Modifiers().AnyOfKind(SyntaxKind.PublicKeyword)
                                        && !x.Modifiers().AnyOfKind(SyntaxKind.OverrideKeyword) // Overridden member need to keep the visibility of the base declaration
-                                       && !x.IsAnyKind(SyntaxKind.OperatorDeclaration, SyntaxKind.ConversionOperatorDeclaration) // Operators must be public
+                                       && !(x.Kind() is SyntaxKind.OperatorDeclaration or SyntaxKind.ConversionOperatorDeclaration) // Operators must be public
                                        && !IsInterfaceImplementation(semanticModel, x))
                            .Select(x => x.Modifiers().Single(modifier => modifier.IsKind(SyntaxKind.PublicKeyword)).ToSecondaryLocation())
                            .ToArray();
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsInterfaceImplementation(SemanticModel semanticModel, MemberDeclarationSyntax declaration) =>
-            semanticModel.GetDeclaredSymbol(declaration)?.GetInterfaceMember() != null;
+            semanticModel.GetDeclaredSymbol(declaration)?.GetInterfaceMember() is not null;
 
         private static BaseTypeDeclarationSyntax GetParentType(SyntaxNode node) =>
             (BaseTypeDeclarationSyntax)node.Ancestors().FirstOrDefault(x => x.IsAnyKind(TypeKinds));

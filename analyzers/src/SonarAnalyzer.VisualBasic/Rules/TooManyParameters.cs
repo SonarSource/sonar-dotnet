@@ -19,8 +19,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class TooManyParameters : TooManyParametersBase<SyntaxKind, ParameterListSyntax>
     {
-        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-
         private static readonly ImmutableDictionary<SyntaxKind, string> NodeToDeclarationName = new Dictionary<SyntaxKind, string>
         {
             { SyntaxKind.SubNewStatement, "Constructor" },
@@ -32,13 +30,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
             { SyntaxKind.FunctionLambdaHeader, "Lambda" },
             { SyntaxKind.PropertyStatement, "Property" },
             { SyntaxKind.EventStatement, "Event" },
-        }.ToImmutableDictionary();
+        }
+        .ToImmutableDictionary();
 
-        private static readonly SyntaxKind[] LambdaHeaders = new[]
-        {
-            SyntaxKind.FunctionLambdaHeader,
-            SyntaxKind.SubLambdaHeader
-        };
+        private static readonly SyntaxKind[] LambdaHeaders =
+            [
+                SyntaxKind.FunctionLambdaHeader,
+                SyntaxKind.SubLambdaHeader
+            ];
+
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         protected override string UserFriendlyNameForNode(SyntaxNode node) =>
             NodeToDeclarationName[node.Kind()];

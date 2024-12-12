@@ -103,7 +103,7 @@ namespace SonarAnalyzer.Rules.XXE
             // and if not we look for the identifier declaration.
             invocation.DescendantNodes()
                       .Union(symbol.GetLocationNodes(invocation))
-                      .Where(x => x.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression))
+                      .Where(x => x?.Kind() is SyntaxKind.ObjectCreationExpression or SyntaxKindEx.ImplicitObjectCreationExpression)
                       .Select(ObjectCreationFactory.Create)
                       .FirstOrDefault(objectCreation => IsXmlReaderSettingsCreationWithInitializer(objectCreation, semanticModel));
 

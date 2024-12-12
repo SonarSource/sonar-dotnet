@@ -83,9 +83,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool ContainsTypeCheckInCaseSwitchLabel(SwitchLabelSyntax switchLabel) =>
             switchLabel is CaseSwitchLabelSyntax caseSwitchLabel && caseSwitchLabel.Value.IsKind(SyntaxKind.IdentifierName);
 
-        private static bool ContainsTypeCheckInPattern(SyntaxNode syntaxNode) =>
-            syntaxNode.DescendantNodesAndSelf()
-                .Any(x => x.IsAnyKind(SyntaxKindEx.ConstantPattern, SyntaxKindEx.DeclarationPattern, SyntaxKindEx.RecursivePattern, SyntaxKindEx.ListPattern) && IsTypeCheckOnThis(x));
+        private static bool ContainsTypeCheckInPattern(SyntaxNode node) =>
+            node.DescendantNodesAndSelf()
+                .Any(x =>
+                    x.Kind() is SyntaxKindEx.ConstantPattern or SyntaxKindEx.DeclarationPattern or SyntaxKindEx.RecursivePattern or SyntaxKindEx.ListPattern
+                    && IsTypeCheckOnThis(x));
 
         private static bool IsTypeCheckOnThis(SyntaxNode pattern)
         {
@@ -112,11 +114,12 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsNotInSubPattern(SyntaxNode node) =>
-            !node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsAnyKind(SyntaxKindEx.IsPatternExpression,
-                                                                  SyntaxKindEx.SwitchExpression,
-                                                                  SyntaxKind.SwitchStatement,
-                                                                  SyntaxKindEx.Subpattern))
-                                                 .IsKind(SyntaxKindEx.Subpattern);
+            !node.FirstAncestorOrSelf<SyntaxNode>(x => x?.Kind() is
+                SyntaxKindEx.IsPatternExpression or
+                SyntaxKindEx.SwitchExpression or
+                SyntaxKind.SwitchStatement or
+                SyntaxKindEx.Subpattern)
+            .IsKind(SyntaxKindEx.Subpattern);
 
         private static void ReportDiagnostic(SonarSyntaxNodeReportingContext context, SyntaxNode node) =>
             context.ReportIssue(Rule, node);

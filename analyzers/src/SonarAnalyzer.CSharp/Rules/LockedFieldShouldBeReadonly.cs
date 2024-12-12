@@ -57,19 +57,20 @@ public sealed class LockedFieldShouldBeReadonly : SonarDiagnosticAnalyzer
     }
 
     private static bool IsCreation(ExpressionSyntax expression) =>
-        expression.IsAnyKind(
-            SyntaxKind.ObjectCreationExpression,
-            SyntaxKind.AnonymousObjectCreationExpression,
-            SyntaxKind.ArrayCreationExpression,
-            SyntaxKind.ImplicitArrayCreationExpression,
-            SyntaxKind.QueryExpression);
+        expression?.Kind() is
+            SyntaxKind.ObjectCreationExpression or
+            SyntaxKind.AnonymousObjectCreationExpression or
+            SyntaxKind.ArrayCreationExpression or
+            SyntaxKind.ImplicitArrayCreationExpression or
+            SyntaxKind.QueryExpression;
 
     private static bool IsOfTypeString(ExpressionSyntax expression, Lazy<ISymbol> lazySymbol) =>
-        expression.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKind.InterpolatedStringExpression)
+        expression?.Kind() is SyntaxKind.StringLiteralExpression or SyntaxKind.InterpolatedStringExpression
         || lazySymbol.Value.GetSymbolType().Is(KnownType.System_String);
 
     private static IFieldSymbol FieldWritable(ExpressionSyntax expression, Lazy<ISymbol> lazySymbol) =>
-        expression.IsAnyKind(SyntaxKind.IdentifierName, SyntaxKind.SimpleMemberAccessExpression) && lazySymbol.Value is IFieldSymbol lockedField && !lockedField.IsReadOnly
+        expression?.Kind() is SyntaxKind.IdentifierName or SyntaxKind.SimpleMemberAccessExpression
+        && lazySymbol.Value is IFieldSymbol lockedField && !lockedField.IsReadOnly
             ? lockedField
             : null;
 }

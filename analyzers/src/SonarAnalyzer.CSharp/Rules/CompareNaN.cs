@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (TryGetFloatingPointType(binaryExpressionSyntax.Left, c.SemanticModel, out var floatingPointType)
                         || TryGetFloatingPointType(binaryExpressionSyntax.Right, c.SemanticModel, out floatingPointType))
                     {
-                        var messageFormat = c.Node.IsAnyKind(SyntaxKind.EqualsExpression, SyntaxKind.NotEqualsExpression)
+                        var messageFormat = c.Node.Kind() is SyntaxKind.EqualsExpression or SyntaxKind.NotEqualsExpression
                             ? MessageFormatEquality
                             : MessageFormatComparison;
 

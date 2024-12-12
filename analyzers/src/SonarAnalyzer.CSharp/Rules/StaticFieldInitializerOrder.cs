@@ -23,14 +23,15 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Move this field's initializer into a static constructor.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        private static readonly SyntaxKind[] EnclosingTypes =
-        {
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.InterfaceDeclaration,
-            SyntaxKind.StructDeclaration,
-            SyntaxKindEx.RecordDeclaration,
-            SyntaxKindEx.RecordStructDeclaration,
-        };
+
+        private static readonly HashSet<SyntaxKind> EnclosingTypes =
+            [
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.InterfaceDeclaration,
+                SyntaxKind.StructDeclaration,
+                SyntaxKindEx.RecordDeclaration,
+                SyntaxKindEx.RecordStructDeclaration,
+            ];
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 

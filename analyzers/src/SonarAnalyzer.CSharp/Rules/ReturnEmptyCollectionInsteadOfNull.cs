@@ -92,19 +92,19 @@ public sealed class ReturnEmptyCollectionInsteadOfNull : SonarDiagnosticAnalyzer
         property.AccessorList.Accessors.FirstOrDefault(x => x.IsKind(SyntaxKind.GetAccessorDeclaration));
 
     private static IEnumerable<SyntaxNode> GetReturnNullOrDefaultExpressions(SyntaxNode methodBlock) =>
-        methodBlock.DescendantNodes(n =>
-                !n.IsAnyKind(
-                    SyntaxKindEx.LocalFunctionStatement,
-                    SyntaxKind.SimpleLambdaExpression,
+        methodBlock.DescendantNodes(x =>
+                !(x.Kind() is
+                    SyntaxKindEx.LocalFunctionStatement or
+                    SyntaxKind.SimpleLambdaExpression or
                     SyntaxKind.ParenthesizedLambdaExpression))
                .OfType<ReturnStatementSyntax>()
-               .SelectMany(statement => GetNullOrDefaultExpressions(statement.Expression));
+               .SelectMany(x => GetNullOrDefaultExpressions(x.Expression));
 
     private static IEnumerable<SyntaxNode> GetNullOrDefaultExpressions(SyntaxNode node)
     {
         node = node.RemoveParentheses();
 
-        if (node.IsNullLiteral() || node.IsAnyKind(SyntaxKindEx.DefaultLiteralExpression, SyntaxKind.DefaultExpression))
+        if (node.IsNullLiteral() || node?.Kind() is SyntaxKindEx.DefaultLiteralExpression or SyntaxKind.DefaultExpression)
         {
             yield return node;
             yield break;

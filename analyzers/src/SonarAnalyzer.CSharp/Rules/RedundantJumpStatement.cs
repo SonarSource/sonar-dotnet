@@ -105,7 +105,7 @@ namespace SonarAnalyzer.Rules.CSharp
             && yieldStatementCount == 1;
 
         private static bool IsThrow(JumpBlock jumpBlock) =>
-            jumpBlock.JumpNode.IsAnyKind(SyntaxKind.ThrowStatement, SyntaxKindEx.ThrowExpression);
+            jumpBlock.JumpNode.Kind() is SyntaxKind.ThrowStatement or SyntaxKindEx.ThrowExpression;
 
         private static bool IsReturnWithExpression(JumpBlock jumpBlock) =>
             jumpBlock.JumpNode is ReturnStatementSyntax { Expression: { } };

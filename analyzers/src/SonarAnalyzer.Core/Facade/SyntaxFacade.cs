@@ -36,6 +36,7 @@ public abstract class SyntaxFacade<TSyntaxKind> where TSyntaxKind : struct
     public abstract bool HasExactlyNArguments(SyntaxNode invocation, int count);
     public abstract SyntaxToken? InvocationIdentifier(SyntaxNode invocation);
     public abstract bool IsAnyKind(SyntaxNode node, ISet<TSyntaxKind> syntaxKinds);
+    [Obsolete("Use the overload with the ISet instead.")]
     public abstract bool IsAnyKind(SyntaxNode node, params TSyntaxKind[] syntaxKinds);
     public abstract bool IsAnyKind(SyntaxTrivia trivia, params TSyntaxKind[] syntaxKinds);
     public abstract bool IsInExpressionTree(SemanticModel model, SyntaxNode node);

@@ -65,18 +65,18 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool CanIfStatementBeMoved(IfStatementSyntax ifStatementSyntax)
         {
-            return ifStatementSyntax.Else == null && (ConditionValidIsPattern() || ConditionValidInvocation());
+            return ifStatementSyntax.Else is null && (ConditionValidIsPattern() || ConditionValidInvocation());
 
-            bool ConditionValidIsPattern() => ifStatementSyntax.Condition.IsAnyKind(SyntaxKind.IsExpression, SyntaxKindEx.IsPatternExpression)
+            bool ConditionValidIsPattern() => ifStatementSyntax.Condition?.Kind() is SyntaxKind.IsExpression or SyntaxKindEx.IsPatternExpression
                                               && !ifStatementSyntax.Condition.DescendantNodes()
-                                                                             .Any(d => d.IsAnyKind(SyntaxKindEx.VarPattern,
-                                                                                                   SyntaxKindEx.SingleVariableDesignation,
-                                                                                                   SyntaxKindEx.ParenthesizedVariableDesignation));
+                                                                             .Any(x => x.Kind() is SyntaxKindEx.VarPattern or
+                                                                                                   SyntaxKindEx.SingleVariableDesignation or
+                                                                                                   SyntaxKindEx.ParenthesizedVariableDesignation);
 
             bool ConditionValidInvocation() => ifStatementSyntax.Condition is InvocationExpressionSyntax invocationExpressionSyntax
                                                && !invocationExpressionSyntax.DescendantNodes()
                                                                              .OfType<ArgumentSyntax>()
-                                                                             .Any(argument => argument.RefOrOutKeyword.IsAnyKind(SyntaxKind.OutKeyword, SyntaxKind.RefKeyword));
+                                                                             .Any(x => x.RefOrOutKeyword.IsAnyKind(SyntaxKind.OutKeyword, SyntaxKind.RefKeyword));
         }
 
         /// <remarks>

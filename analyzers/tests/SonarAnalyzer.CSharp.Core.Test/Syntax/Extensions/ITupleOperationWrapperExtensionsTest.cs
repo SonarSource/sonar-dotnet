@@ -107,9 +107,9 @@ namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions
                  .AddReferences(MetadataReferenceFacade.ProjectDefaultReferences)
                  .WithOptions(new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
             compilation.GetDiagnostics().Should().BeEmpty();
-            var semanticModel = compilation.GetSemanticModel(syntaxTree);
-            var tupleExpression = syntaxTree.GetRoot().DescendantNodes().First(x => x.IsAnyKind(SyntaxKind.TupleExpression, SyntaxKindEx.ParenthesizedVariableDesignation));
-            return ITupleOperationWrapper.FromOperation(semanticModel.GetOperation(tupleExpression));
+            var model = compilation.GetSemanticModel(syntaxTree);
+            var tupleExpression = syntaxTree.GetRoot().DescendantNodes().First(x => x.Kind() is SyntaxKind.TupleExpression or SyntaxKindEx.ParenthesizedVariableDesignation);
+            return ITupleOperationWrapper.FromOperation(model.GetOperation(tupleExpression));
         }
 
         private static string WrapInMethod(string code) =>

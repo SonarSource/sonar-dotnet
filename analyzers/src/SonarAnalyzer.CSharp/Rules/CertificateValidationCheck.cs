@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
         MemberAccessExpressionSyntax>
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
-        protected override SyntaxKind[] MethodDeclarationKinds { get; } = { SyntaxKind.MethodDeclaration, SyntaxKindEx.LocalFunctionStatement };
+        protected override HashSet<SyntaxKind> MethodDeclarationKinds { get; } = [ SyntaxKind.MethodDeclaration, SyntaxKindEx.LocalFunctionStatement ];
 
         internal override MethodParameterLookupBase<ArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method) =>
             argumentListNode switch

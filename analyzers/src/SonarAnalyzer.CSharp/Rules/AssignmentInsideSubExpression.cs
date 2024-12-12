@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
             expression.Parent.FirstAncestorOrSelf<ExpressionSyntax>() != null;
 
         private static bool IsInInitializerExpression(ExpressionSyntax expression) =>
-            expression.Parent.IsAnyKind(SyntaxKindEx.WithInitializerExpression, SyntaxKind.ObjectInitializerExpression);
+            expression.Parent?.Kind() is SyntaxKindEx.WithInitializerExpression or SyntaxKind.ObjectInitializerExpression;
 
         private static bool IsCompliantAssignmentInsideExpression(AssignmentExpressionSyntax assignment, ExpressionSyntax topParenthesizedExpression) =>
             topParenthesizedExpression.Parent.FirstAncestorOrSelf<ExpressionSyntax>() is not { } expressionParent

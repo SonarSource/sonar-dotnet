@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var accessors = prop.AccessorList;
             return accessors is {Accessors: {Count: 1}}
-                   && accessors.Accessors.First().IsAnyKind(SyntaxKind.SetAccessorDeclaration, SyntaxKindEx.InitAccessorDeclaration)
+                   && accessors.Accessors.First().Kind() is SyntaxKind.SetAccessorDeclaration or SyntaxKindEx.InitAccessorDeclaration
                    && !prop.Modifiers.Any(SyntaxKind.OverrideKeyword); // the get may be in the base class
         }
     }

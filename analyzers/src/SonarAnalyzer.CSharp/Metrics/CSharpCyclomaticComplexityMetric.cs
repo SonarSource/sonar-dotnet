@@ -197,7 +197,7 @@ public static class CSharpCyclomaticComplexityMetric
                 var arm = (SwitchExpressionArmSyntaxWrapper)node;
                 AddLocation(arm.EqualsGreaterThanToken);
             }
-            else if (node.IsAnyKind(SyntaxKindEx.AndPattern, SyntaxKindEx.OrPattern))
+            else if (node?.Kind() is SyntaxKindEx.AndPattern or SyntaxKindEx.OrPattern)
             {
                 var binaryPatternNode = (BinaryPatternSyntaxWrapper)node;
                 AddLocation(binaryPatternNode.OperatorToken);

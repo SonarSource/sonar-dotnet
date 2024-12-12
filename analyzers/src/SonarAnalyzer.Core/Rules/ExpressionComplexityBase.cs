@@ -26,8 +26,8 @@ namespace SonarAnalyzer.Rules
         private readonly DiagnosticDescriptor rule;
 
         protected abstract ILanguageFacade Language { get; }
-        protected abstract TSyntaxKind[] ComplexityIncreasingKinds { get; }
-        protected abstract TSyntaxKind[] TransparentKinds { get; }
+        protected abstract HashSet<TSyntaxKind> ComplexityIncreasingKinds { get; }
+        protected abstract HashSet<TSyntaxKind> TransparentKinds { get; }
         protected abstract SyntaxNode[] ExpressionChildren(SyntaxNode node);
 
         [RuleParameter("max", PropertyType.Integer, "Maximum number of allowed conditional operators in an expression", DefaultValueMaximum)]

@@ -101,8 +101,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool CheckSetAccessorIfAny(PropertyDeclarationSyntax propertySyntax, IPropertySymbol propertySymbol, SemanticModel semanticModel)
         {
-            var setAccessor = propertySyntax.AccessorList?.Accessors.FirstOrDefault(a => a.IsAnyKind(SyntaxKind.SetAccessorDeclaration, SyntaxKindEx.InitAccessorDeclaration));
-            if (setAccessor == null)
+            var setAccessor = propertySyntax.AccessorList?.Accessors.FirstOrDefault(x => x.Kind() is SyntaxKind.SetAccessorDeclaration or SyntaxKindEx.InitAccessorDeclaration);
+            if (setAccessor is null)
             {
                 return true;
             }

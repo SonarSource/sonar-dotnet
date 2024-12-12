@@ -43,7 +43,7 @@ public class CSharpBuilderPatternCondition : BuilderPatternCondition<SyntaxKind,
     }
 
     protected override bool IsObjectCreation(SyntaxNode node) =>
-        node.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
+        node?.Kind() is SyntaxKind.ObjectCreationExpression or SyntaxKindEx.ImplicitObjectCreationExpression;
 
     protected override bool IsIdentifier(SyntaxNode node, out string identifierName)
     {

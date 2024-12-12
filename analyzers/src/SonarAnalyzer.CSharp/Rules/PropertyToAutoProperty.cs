@@ -38,7 +38,7 @@ public sealed class PropertyToAutoProperty : SonarDiagnosticAnalyzer
                     && !HasAttributes(accessors)
                     && !propertyDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword)
                     && accessors.FirstOrDefault(x => x.IsKind(SyntaxKind.GetAccessorDeclaration)) is { } getter
-                    && accessors.FirstOrDefault(x => x.IsAnyKind(SyntaxKind.SetAccessorDeclaration, SyntaxKindEx.InitAccessorDeclaration)) is { } setter
+                    && accessors.FirstOrDefault(x => x.Kind() is SyntaxKind.SetAccessorDeclaration or SyntaxKindEx.InitAccessorDeclaration) is { } setter
                     && FieldFromGetter(getter, c.SemanticModel) is { } getterField
                     && FieldFromSetter(setter, c.SemanticModel) is { } setterField
                     && getterField.Equals(setterField)

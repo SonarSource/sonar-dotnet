@@ -27,7 +27,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private protected override bool IsGetTempPathAssignment(InvocationExpressionSyntax invocationExpression, KnownType type, string methodName, SemanticModel semanticModel) =>
             invocationExpression.IsMethodInvocation(type, methodName, semanticModel)
-            && invocationExpression.Parent.IsAnyKind(SyntaxKind.EqualsValueClause, SyntaxKind.SimpleAssignmentExpression, SyntaxKind.ArrowExpressionClause, SyntaxKind.ReturnStatement);
+            && invocationExpression.Parent?.Kind() is
+                SyntaxKind.EqualsValueClause or SyntaxKind.SimpleAssignmentExpression or SyntaxKind.ArrowExpressionClause or SyntaxKind.ReturnStatement;
 
         private protected override bool IsInsecureEnvironmentVariableRetrieval(InvocationExpressionSyntax invocation, KnownType type, string methodName, SemanticModel semanticModel) =>
             invocation.IsMethodInvocation(type, methodName, semanticModel)

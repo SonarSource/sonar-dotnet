@@ -19,17 +19,17 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class EmptyMethod : EmptyMethodBase<SyntaxKind>
     {
-        internal static readonly SyntaxKind[] SupportedSyntaxKinds =
-        {
+        internal static readonly HashSet<SyntaxKind> SupportedSyntaxKinds =
+        [
             SyntaxKind.MethodDeclaration,
             SyntaxKindEx.LocalFunctionStatement,
             SyntaxKind.SetAccessorDeclaration,
             SyntaxKindEx.InitAccessorDeclaration
-        };
+        ];
 
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override SyntaxKind[] SyntaxKinds => SupportedSyntaxKinds;
+        protected override HashSet<SyntaxKind> SyntaxKinds => SupportedSyntaxKinds;
 
         protected override void CheckMethod(SonarSyntaxNodeReportingContext context)
         {

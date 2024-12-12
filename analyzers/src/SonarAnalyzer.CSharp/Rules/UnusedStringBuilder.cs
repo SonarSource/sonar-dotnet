@@ -19,8 +19,8 @@ namespace SonarAnalyzer.Rules.CSharp;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, VariableDeclaratorSyntax, IdentifierNameSyntax>
 {
-    private static readonly SyntaxKind[] SkipChildren =
-    {
+    private static readonly HashSet<SyntaxKind> SkipChildren =
+    [
         SyntaxKind.ClassDeclaration,
         SyntaxKind.StructDeclaration,
         SyntaxKind.EnumDeclaration,
@@ -28,7 +28,7 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
         SyntaxKind.UsingDirective,
         SyntaxKindEx.RecordDeclaration,
         SyntaxKindEx.RecordStructDeclaration
-    };
+    ];
 
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
@@ -67,9 +67,10 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
         };
 
     protected override bool DescendIntoChildren(SyntaxNode node) =>
-        !(node.IsAnyKind(SkipChildren) || (node.IsKind(SyntaxKindEx.LocalFunctionStatement) && ((LocalFunctionStatementSyntaxWrapper)node).Modifiers.Any(SyntaxKind.StaticKeyword)));
+        !(node.IsAnyKind(SkipChildren)
+        || (node.IsKind(SyntaxKindEx.LocalFunctionStatement) && ((LocalFunctionStatementSyntaxWrapper)node).Modifiers.Any(SyntaxKind.StaticKeyword)));
 
-    private static bool IsStringBuilderObjectCreation(ExpressionSyntax expression, SemanticModel semanticModel) =>
+    private static bool IsStringBuilderObjectCreation(ExpressionSyntax expression, SemanticModel model) =>
         ObjectCreationFactory.TryCreate(expression) is { } creation
-        && creation.IsKnownType(KnownType.System_Text_StringBuilder, semanticModel);
+        && creation.IsKnownType(KnownType.System_Text_StringBuilder, model);
 }

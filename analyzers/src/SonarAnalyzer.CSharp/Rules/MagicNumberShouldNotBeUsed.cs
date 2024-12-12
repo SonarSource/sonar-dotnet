@@ -23,21 +23,21 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Assign this magic number '{0}' to a well-named variable or constant, and use that instead.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ISet<string> NotConsideredAsMagicNumbers = new HashSet<string> { "-1", "0", "1" };
-
         private static readonly string[] AcceptedCollectionMembersForSingleDigitComparison = { "Size", "Count", "Length" };
 
-        private static readonly SyntaxKind[] AllowedSingleDigitComparisons =
-        {
-            SyntaxKind.EqualsExpression,
-            SyntaxKind.NotEqualsExpression,
-            SyntaxKind.LessThanOrEqualExpression,
-            SyntaxKind.LessThanExpression,
-            SyntaxKind.GreaterThanExpression,
-            SyntaxKind.GreaterThanOrEqualExpression
-        };
+        private static readonly HashSet<SyntaxKind> AllowedSingleDigitComparisons =
+            [
+                SyntaxKind.EqualsExpression,
+                SyntaxKind.NotEqualsExpression,
+                SyntaxKind.LessThanOrEqualExpression,
+                SyntaxKind.LessThanExpression,
+                SyntaxKind.GreaterThanExpression,
+                SyntaxKind.GreaterThanOrEqualExpression
+            ];
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(

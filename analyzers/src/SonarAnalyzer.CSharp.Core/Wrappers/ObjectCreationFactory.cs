@@ -41,7 +41,7 @@ public class ObjectCreationFactory
         };
 
     public static IObjectCreation TryCreate(SyntaxNode node) =>
-         node.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression)
+         node?.Kind() is SyntaxKind.ObjectCreationExpression or SyntaxKindEx.ImplicitObjectCreationExpression
              ? Create(node)
              : null;
 

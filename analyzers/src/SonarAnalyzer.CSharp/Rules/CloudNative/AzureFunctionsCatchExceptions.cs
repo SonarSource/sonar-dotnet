@@ -53,11 +53,11 @@ namespace SonarAnalyzer.Rules.CSharp
             public override void Visit(SyntaxNode node)
             {
                 if (!HasInvocationOutsideTryCatch   // Stop walking when we know the answer
-                    && !node.IsAnyKind(
-                        SyntaxKind.CatchClause,     // Do not visit content of "catch". It doesn't make sense to wrap logging in catch in another try/catch.
-                        SyntaxKind.AnonymousMethodExpression,
-                        SyntaxKind.SimpleLambdaExpression,
-                        SyntaxKind.ParenthesizedLambdaExpression,
+                    && !(node.Kind() is
+                        SyntaxKind.CatchClause or   // Do not visit content of "catch". It doesn't make sense to wrap logging in catch in another try/catch.
+                        SyntaxKind.AnonymousMethodExpression or
+                        SyntaxKind.SimpleLambdaExpression or
+                        SyntaxKind.ParenthesizedLambdaExpression or
                         SyntaxKindEx.LocalFunctionStatement))
                 {
                     base.Visit(node);

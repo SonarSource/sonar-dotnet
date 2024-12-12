@@ -44,8 +44,9 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterTreeAction(c =>
             {
-                var declarations = c.Tree.GetRoot().DescendantNodes(x => x.IsAnyKind(KindsToBeDescended))
-                     .Where(x => x.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordDeclaration))
+                var declarations = c.Tree.GetRoot()
+                     .DescendantNodes(x => x.IsAnyKind(KindsToBeDescended))
+                     .Where(x => x.Kind() is SyntaxKind.ClassDeclaration or SyntaxKindEx.RecordDeclaration)
                      .Select(x => (TypeDeclarationSyntax)x);
 
                 var model = new Lazy<SemanticModel>(() => c.Compilation.GetSemanticModel(c.Tree));

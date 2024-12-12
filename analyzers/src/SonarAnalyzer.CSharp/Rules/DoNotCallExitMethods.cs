@@ -36,7 +36,11 @@ namespace SonarAnalyzer.Rules.CSharp
             // Do not report if call is inside Main or is a TopLevelStatement.
             invocationSyntax.Ancestors().OfType<GlobalStatementSyntax>().Any()
                 ? invocationSyntax.Ancestors()
-                      .Any(x => x.IsAnyKind(SyntaxKindEx.LocalFunctionStatement, SyntaxKind.ParenthesizedLambdaExpression, SyntaxKind.SimpleLambdaExpression, SyntaxKind.AnonymousMethodExpression))
+                      .Any(x => x?.Kind() is
+                        SyntaxKindEx.LocalFunctionStatement
+                        or SyntaxKind.ParenthesizedLambdaExpression
+                        or SyntaxKind.SimpleLambdaExpression
+                        or SyntaxKind.AnonymousMethodExpression)
                 : !invocationSyntax.Ancestors().OfType<BaseMethodDeclarationSyntax>().Where(x => x.GetIdentifierOrDefault()?.ValueText == "Main")
                       .Select(m => semanticModel.GetDeclaredSymbol(m))
                       .Select(s => s.IsMainMethod())

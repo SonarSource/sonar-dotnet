@@ -117,15 +117,15 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsSecondArgumentStarString(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
             IsStar(invocation.ArgumentList.Arguments[1].Expression, semanticModel);
 
-        private static bool IsStar(ExpressionSyntax expressionSyntax, SemanticModel semanticModel) =>
+        private static bool IsStar(ExpressionSyntax expressionSyntax, SemanticModel model) =>
             expressionSyntax switch
             {
-                InterpolatedStringExpressionSyntax interpolation => interpolation.FindStringConstant(semanticModel) == StarConstant,
-                LiteralExpressionSyntax literal => ContainsStar(semanticModel.GetConstantValue(literal)),
-                IdentifierNameSyntax identifier => ContainsStar(semanticModel.GetConstantValue(identifier)),
-                ImplicitArrayCreationExpressionSyntax arrayCreation => ContainsStar(arrayCreation.Initializer.Expressions, semanticModel),
-                { } objectCreation when objectCreation.IsAnyKind(SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression) =>
-                    ContainsStar(ObjectCreationFactory.Create(objectCreation), semanticModel),
+                InterpolatedStringExpressionSyntax interpolation => interpolation.FindStringConstant(model) == StarConstant,
+                LiteralExpressionSyntax literal => ContainsStar(model.GetConstantValue(literal)),
+                IdentifierNameSyntax identifier => ContainsStar(model.GetConstantValue(identifier)),
+                ImplicitArrayCreationExpressionSyntax arrayCreation => ContainsStar(arrayCreation.Initializer.Expressions, model),
+                { } objectCreation when objectCreation.Kind() is SyntaxKind.ObjectCreationExpression or SyntaxKindEx.ImplicitObjectCreationExpression =>
+                    ContainsStar(ObjectCreationFactory.Create(objectCreation), model),
                 _ => false
             };
 

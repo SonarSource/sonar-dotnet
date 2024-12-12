@@ -47,7 +47,7 @@ public sealed class InitializeStaticFieldsInline : SonarDiagnosticAnalyzer
                         .Select(x => x.Name)
                         .Distinct()
                         .Count();
-                    var hasIfOrSwitch = Array.Exists(bodyDescendantNodes, x => x.IsAnyKind(SyntaxKind.IfStatement, SyntaxKind.SwitchStatement));
+                    var hasIfOrSwitch = Array.Exists(bodyDescendantNodes, x => x.Kind() is SyntaxKind.IfStatement or SyntaxKind.SwitchStatement);
                     if (((hasIfOrSwitch && assignedFieldCount == 1) || (!hasIfOrSwitch && assignedFieldCount > 0))
                         && !HasTupleAssignmentForMultipleFields(bodyDescendantNodes, c.SemanticModel, currentType))
                     {

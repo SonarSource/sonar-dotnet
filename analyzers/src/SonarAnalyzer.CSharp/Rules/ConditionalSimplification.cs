@@ -351,6 +351,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsConditionalStructure(SyntaxNode syntaxNode) =>
             syntaxNode.DescendantNodesAndSelf()
-                      .Any(node => node.IsAnyKind(SyntaxKind.ConditionalExpression, SyntaxKindEx.SwitchExpression));
+                      .Any(x => x.Kind() is SyntaxKind.ConditionalExpression or SyntaxKindEx.SwitchExpression);
     }
 }

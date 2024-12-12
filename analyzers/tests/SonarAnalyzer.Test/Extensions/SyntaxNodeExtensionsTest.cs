@@ -600,11 +600,13 @@ public class C
         var tree = CSharpSyntaxTree.ParseText(code);
         var argument = tree.GetRoot().FindNode(new TextSpan(nodePosition, 0));
         argument = argument.AncestorsAndSelf()
-            .FirstOrDefault(x => x.IsAnyKind(SyntaxKind.Argument,
-                                             SyntaxKindEx.DiscardDesignation,
-                                             SyntaxKindEx.SingleVariableDesignation,
-                                             SyntaxKindEx.ParenthesizedVariableDesignation,
-                                             SyntaxKindEx.TupleExpression)) ?? argument;
+            .FirstOrDefault(x => x?.Kind() is
+                SyntaxKind.Argument or
+                SyntaxKindEx.DiscardDesignation or
+                SyntaxKindEx.SingleVariableDesignation or
+                SyntaxKindEx.ParenthesizedVariableDesignation or
+                SyntaxKindEx.TupleExpression)
+            ?? argument;
         tree.GetDiagnostics().Should().BeEmpty();
         var target = SyntaxNodeExtensionsCSharp.FindAssignmentComplement(argument);
         if (expectedNode is null)

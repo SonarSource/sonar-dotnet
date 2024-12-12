@@ -20,7 +20,7 @@ public static class CompilationUnitSyntaxExtensions
 {
     public static IEnumerable<SyntaxNode> GetTopLevelMainBody(this CompilationUnitSyntax compilationUnit) =>
         compilationUnit.ChildNodes()
-                       .SkipWhile(x => x.IsAnyKind(SyntaxKind.UsingDirective, SyntaxKind.NamespaceDeclaration))
+                       .SkipWhile(x => x.Kind() is SyntaxKind.UsingDirective or SyntaxKind.NamespaceDeclaration)
                        .TakeWhile(x => x.IsKind(SyntaxKind.GlobalStatement));
 
     public static IEnumerable<IMethodDeclaration> GetMethodDeclarations(this CompilationUnitSyntax compilationUnitSyntax) =>

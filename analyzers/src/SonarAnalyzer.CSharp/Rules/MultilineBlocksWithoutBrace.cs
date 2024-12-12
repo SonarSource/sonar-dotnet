@@ -125,8 +125,8 @@ public sealed class MultilineBlocksWithoutBrace : SonarDiagnosticAnalyzer
         : null;
 
     private static bool IsNestedStatement(StatementSyntax statement) =>
-        statement.IsAnyKind(SyntaxKind.IfStatement, SyntaxKind.ForStatement, SyntaxKind.ForEachStatement, SyntaxKind.WhileStatement);
+        statement?.Kind() is SyntaxKind.IfStatement or SyntaxKind.ForStatement or SyntaxKind.ForEachStatement or SyntaxKind.WhileStatement;
 
     private static bool IsStatementCandidateLoop(StatementSyntax statement) =>
-        statement.IsAnyKind(SyntaxKind.ForEachStatement, SyntaxKind.ForStatement, SyntaxKind.WhileStatement);
+        statement?.Kind() is SyntaxKind.ForEachStatement or SyntaxKind.ForStatement or SyntaxKind.WhileStatement;
 }

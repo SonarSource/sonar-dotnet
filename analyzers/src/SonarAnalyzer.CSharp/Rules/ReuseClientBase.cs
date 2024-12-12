@@ -18,6 +18,15 @@ namespace SonarAnalyzer.Rules.CSharp;
 
 public abstract class ReuseClientBase : SonarDiagnosticAnalyzer
 {
+    private static readonly HashSet<SyntaxKind> ConditionalKinds =
+        [
+            SyntaxKind.IfStatement,
+            SyntaxKind.SwitchStatement,
+            SyntaxKindEx.SwitchExpression,
+            SyntaxKind.ConditionalExpression,
+            SyntaxKindEx.CoalesceAssignmentExpression
+        ];
+
     protected abstract ImmutableArray<KnownType> ReusableClients { get; }
 
     protected static bool IsAssignedForReuse(SonarSyntaxNodeReportingContext context) =>
@@ -39,11 +48,7 @@ public abstract class ReuseClientBase : SonarDiagnosticAnalyzer
         && !node.Parent.IsKind(SyntaxKind.ArrowExpressionClause);
 
     private static bool IsInConditionalCode(SyntaxNode node) =>
-        node.HasAncestor(SyntaxKind.IfStatement,
-            SyntaxKind.SwitchStatement,
-            SyntaxKindEx.SwitchExpression,
-            SyntaxKind.ConditionalExpression,
-            SyntaxKindEx.CoalesceAssignmentExpression);
+        node.HasAncestor(ConditionalKinds);
 
     private static bool IsAssignedToStaticFieldOrProperty(SonarSyntaxNodeReportingContext context) =>
         context.Node.Parent.WalkUpParentheses() is AssignmentExpressionSyntax assignment

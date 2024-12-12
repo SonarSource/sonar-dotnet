@@ -42,5 +42,5 @@ public class CSharpRemovableDeclarationCollector : RemovableDeclarationCollector
         IsNodeStructOrClassOrRecordDeclaration(node) || node.IsKind(SyntaxKind.InterfaceDeclaration);
 
     private static bool IsNodeStructOrClassOrRecordDeclaration(SyntaxNode node) =>
-        node.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordDeclaration, SyntaxKindEx.RecordStructDeclaration);
+        node?.Kind() is SyntaxKind.ClassDeclaration or SyntaxKind.StructDeclaration or SyntaxKindEx.RecordDeclaration or SyntaxKindEx.RecordStructDeclaration;
 }

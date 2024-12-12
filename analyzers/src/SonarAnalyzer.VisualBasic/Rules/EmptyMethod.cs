@@ -21,11 +21,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override SyntaxKind[] SyntaxKinds { get; } =
-        {
+        protected override HashSet<SyntaxKind> SyntaxKinds { get; } =
+        [
             SyntaxKind.FunctionBlock,
             SyntaxKind.SubBlock
-        };
+        ];
 
         protected override void CheckMethod(SonarSyntaxNodeReportingContext context)
         {

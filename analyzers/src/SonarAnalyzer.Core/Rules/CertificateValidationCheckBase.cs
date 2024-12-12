@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules
         private const string DiagnosticId = "S4830";
 
         internal /* for testing */ abstract MethodParameterLookupBase<TArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method);
-        protected abstract TSyntaxKind[] MethodDeclarationKinds { get; }
+        protected abstract HashSet<TSyntaxKind> MethodDeclarationKinds { get; }
         protected abstract Location ExpressionLocation(SyntaxNode expression);
         protected abstract void SplitAssignment(TAssignmentExpressionSyntax assignment, out TIdentifierNameSyntax leftIdentifier, out TExpressionSyntax right);
         protected abstract IEqualityComparer<TExpressionSyntax> CreateNodeEqualityComparer();

@@ -21,7 +21,7 @@ namespace SonarAnalyzer.Rules
     {
         internal const string DiagnosticId = "S1186";
 
-        protected abstract TSyntaxKind[] SyntaxKinds { get; }
+        protected abstract HashSet<TSyntaxKind> SyntaxKinds { get; }
         protected abstract void CheckMethod(SonarSyntaxNodeReportingContext context);
 
         protected override string MessageFormat => "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.";

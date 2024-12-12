@@ -154,22 +154,22 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (IsIdentifier(conditionSyntax.Left, identifierName))
             {
-                if (conditionSyntax.IsAnyKind(SyntaxKind.LessThanExpression, SyntaxKind.LessThanOrEqualExpression))
+                if (conditionSyntax.Kind() is SyntaxKind.LessThanExpression or SyntaxKind.LessThanOrEqualExpression)
                 {
                     return Condition.Less;
                 }
-                else if (conditionSyntax.IsAnyKind(SyntaxKind.GreaterThanExpression, SyntaxKind.GreaterThanOrEqualExpression))
+                else if (conditionSyntax.Kind() is SyntaxKind.GreaterThanExpression or SyntaxKind.GreaterThanOrEqualExpression)
                 {
                     return Condition.Greater;
                 }
             }
             else if (IsIdentifier(conditionSyntax.Right, identifierName))
             {
-                if (conditionSyntax.IsAnyKind(SyntaxKind.LessThanExpression, SyntaxKind.LessThanOrEqualExpression))
+                if (conditionSyntax.Kind() is SyntaxKind.LessThanExpression or SyntaxKind.LessThanOrEqualExpression)
                 {
                     return Condition.Greater;
                 }
-                else if (conditionSyntax.IsAnyKind(SyntaxKind.GreaterThanExpression, SyntaxKind.GreaterThanOrEqualExpression))
+                else if (conditionSyntax.Kind() is SyntaxKind.GreaterThanExpression or SyntaxKind.GreaterThanOrEqualExpression)
                 {
                     return Condition.Less;
                 }

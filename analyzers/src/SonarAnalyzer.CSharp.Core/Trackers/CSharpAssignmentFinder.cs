@@ -45,6 +45,27 @@ public class CSharpAssignmentFinder : AssignmentFinder
         return false;
     }
 
+    protected override bool IsIdentifierDeclaration(SyntaxNode node, string identifierName, out SyntaxNode initializer)
+    {
+        if (node.IsKind(SyntaxKindEx.GlobalStatement))
+        {
+            node = ((GlobalStatementSyntax)node).Statement;
+        }
+
+        if (node is LocalDeclarationStatementSyntax declarationStatement
+            && declarationStatement.Declaration.Variables.SingleOrDefault(x => x.Identifier.ValueText == identifierName) is { } declaration)
+        {
+            initializer = declaration.Initializer?.Value;
+            return true;
+        }
+
+        initializer = null;
+        return false;
+    }
+
+    protected override bool IsLoop(SyntaxNode node) =>
+        node?.Kind() is SyntaxKind.ForStatement or SyntaxKind.ForEachStatement or SyntaxKind.WhileStatement or SyntaxKind.DoStatement;
+
     /// <summary>
     /// If <paramref name="identifierName"/> is mutated inside <paramref name="mutation"/> then
     /// the expression representing the new value is returned. The returned expression might be
@@ -73,25 +94,4 @@ public class CSharpAssignmentFinder : AssignmentFinder
             } when argumentExpression.NameIs(identifierName) => argumentExpression,
             _ => null,
         };
-
-    protected override bool IsIdentifierDeclaration(SyntaxNode node, string identifierName, out SyntaxNode initializer)
-    {
-        if (node.IsKind(SyntaxKindEx.GlobalStatement))
-        {
-            node = ((GlobalStatementSyntax)node).Statement;
-        }
-
-        if (node is LocalDeclarationStatementSyntax declarationStatement
-            && declarationStatement.Declaration.Variables.SingleOrDefault(x => x.Identifier.ValueText == identifierName) is { } declaration)
-        {
-            initializer = declaration.Initializer?.Value;
-            return true;
-        }
-
-        initializer = null;
-        return false;
-    }
-
-    protected override bool IsLoop(SyntaxNode node) =>
-        node.IsAnyKind(SyntaxKind.ForStatement, SyntaxKind.ForEachStatement, SyntaxKind.WhileStatement, SyntaxKind.DoStatement);
 }

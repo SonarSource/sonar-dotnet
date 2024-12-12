@@ -34,16 +34,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestCleanupAttribute,
                 KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestInitializeAttribute);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        private static readonly HashSet<SyntaxKind> ParentTypeSyntaxKinds =
+            [
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.StructDeclaration,
+                SyntaxKindEx.RecordDeclaration,
+                SyntaxKindEx.RecordStructDeclaration,
+                SyntaxKind.InterfaceDeclaration
+            ];
 
-        private static readonly SyntaxKind[] ParentTypeSyntaxKinds =
-        {
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.StructDeclaration,
-            SyntaxKindEx.RecordDeclaration,
-            SyntaxKindEx.RecordStructDeclaration,
-            SyntaxKind.InterfaceDeclaration
-        };
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(

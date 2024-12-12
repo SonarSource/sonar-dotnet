@@ -246,7 +246,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             {
                 FieldDeclarationSyntax fieldDeclaration => fieldDeclaration.Declaration.Variables,
                 EventFieldDeclarationSyntax eventDeclaration => eventDeclaration.Declaration.Variables,
-                _ => Enumerable.Empty<VariableDeclaratorSyntax>(),
+                _ => [],
             };
 
         static Location GetIdentifierLocation(SyntaxNode node) =>
@@ -342,7 +342,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         // This override is needed because VisitRecordDeclaration and LocalFunctionStatementSyntax are not available due to the Roslyn version.
         public override void Visit(SyntaxNode node)
         {
-            if (node.IsAnyKind(SyntaxKindEx.RecordDeclaration, SyntaxKindEx.RecordStructDeclaration))
+            if (node.Kind() is SyntaxKindEx.RecordDeclaration or SyntaxKindEx.RecordStructDeclaration)
             {
                 VisitBaseTypeDeclaration(node);
             }

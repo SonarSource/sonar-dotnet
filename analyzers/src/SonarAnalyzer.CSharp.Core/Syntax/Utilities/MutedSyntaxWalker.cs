@@ -22,23 +22,23 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 public class MutedSyntaxWalker : CSharpSyntaxWalker
 {
     // All kinds that SonarAnalysisContextExtensions.RegisterExplodedGraphBasedAnalysis registers for
-    private static readonly SyntaxKind[] RootKinds =
-    [
-        SyntaxKind.AddAccessorDeclaration,
-        SyntaxKind.AnonymousMethodExpression,
-        SyntaxKind.ConstructorDeclaration,
-        SyntaxKind.ConversionOperatorDeclaration,
-        SyntaxKind.DestructorDeclaration,
-        SyntaxKind.GetAccessorDeclaration,
-        SyntaxKindEx.InitAccessorDeclaration,
-        SyntaxKind.MethodDeclaration,
-        SyntaxKind.OperatorDeclaration,
-        SyntaxKind.ParenthesizedLambdaExpression,
-        SyntaxKind.PropertyDeclaration,
-        SyntaxKind.RemoveAccessorDeclaration,
-        SyntaxKind.SetAccessorDeclaration,
-        SyntaxKind.SimpleLambdaExpression
-    ];
+    private static readonly HashSet<SyntaxKind> RootKinds =
+        [
+            SyntaxKind.AddAccessorDeclaration,
+            SyntaxKind.AnonymousMethodExpression,
+            SyntaxKind.ConstructorDeclaration,
+            SyntaxKind.ConversionOperatorDeclaration,
+            SyntaxKind.DestructorDeclaration,
+            SyntaxKind.GetAccessorDeclaration,
+            SyntaxKindEx.InitAccessorDeclaration,
+            SyntaxKind.MethodDeclaration,
+            SyntaxKind.OperatorDeclaration,
+            SyntaxKind.ParenthesizedLambdaExpression,
+            SyntaxKind.PropertyDeclaration,
+            SyntaxKind.RemoveAccessorDeclaration,
+            SyntaxKind.SetAccessorDeclaration,
+            SyntaxKind.SimpleLambdaExpression
+        ];
 
     private readonly SemanticModel model;
     private readonly SyntaxNode root;
@@ -89,6 +89,6 @@ public class MutedSyntaxWalker : CSharpSyntaxWalker
             && node.HasAncestor(SyntaxKindEx.LocalFunctionStatement);
 
         bool IsInUnsupportedExpression() =>
-            node.FirstAncestorOrSelf<SyntaxNode>(x => x.IsAnyKind(SyntaxKindEx.IndexExpression, SyntaxKindEx.RangeExpression)) is not null;
+            node.FirstAncestorOrSelf<SyntaxNode>(x => x?.Kind() is SyntaxKindEx.IndexExpression or SyntaxKindEx.RangeExpression) is not null;
     }
 }

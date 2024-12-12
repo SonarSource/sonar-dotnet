@@ -21,12 +21,6 @@ namespace SonarAnalyzer.Rules.CSharp;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
 {
-    private static readonly ImmutableHashSet<SyntaxKind> ValidTemplateKinds = ImmutableHashSet.Create(
-        SyntaxKind.StringLiteralExpression,
-        SyntaxKind.AddExpression,
-        SyntaxKind.InterpolatedStringExpression,
-        SyntaxKind.InterpolatedStringText);
-
     private static readonly ImmutableHashSet<IMessageTemplateCheck> Checks = ImmutableHashSet.Create<IMessageTemplateCheck>(
                new LoggingTemplatePlaceHoldersShouldBeInOrder(),
                new NamedPlaceholdersShouldBeUnique(),
@@ -60,5 +54,9 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
         });
 
     private static bool HasValidExpression(ArgumentSyntax argument) =>
-        argument.Expression.DescendantNodes().All(x => x.IsAnyKind(ValidTemplateKinds));
+        argument.Expression.DescendantNodes().All(x => x.Kind() is
+            SyntaxKind.StringLiteralExpression or
+            SyntaxKind.AddExpression or
+            SyntaxKind.InterpolatedStringExpression or
+            SyntaxKind.InterpolatedStringText);
 }

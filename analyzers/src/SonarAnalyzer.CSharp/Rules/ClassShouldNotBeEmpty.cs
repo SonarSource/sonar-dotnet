@@ -44,11 +44,12 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
         ((TypeDeclarationSyntax)node).Keyword.ValueText;
 
     protected override bool HasConditionalCompilationDirectives(SyntaxNode node) =>
-        node.DescendantNodes(descendIntoTrivia: true).Any(x => x.IsAnyKind(
-            SyntaxKind.IfDirectiveTrivia,
-            SyntaxKind.ElifDirectiveTrivia,
-            SyntaxKind.ElseDirectiveTrivia,
-            SyntaxKind.EndIfDirectiveTrivia));
+        node.DescendantNodes(descendIntoTrivia: true)
+        .Any(x => x.Kind() is
+            SyntaxKind.IfDirectiveTrivia or
+            SyntaxKind.ElifDirectiveTrivia or
+            SyntaxKind.ElseDirectiveTrivia or
+            SyntaxKind.EndIfDirectiveTrivia);
 
     private static bool LacksParameterizedPrimaryConstructor(SyntaxNode node) =>
         IsParameterlessClass(node)

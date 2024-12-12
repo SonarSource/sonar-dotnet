@@ -19,6 +19,17 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class DeclareTypesInNamespaces : DeclareTypesInNamespacesBase<SyntaxKind>
     {
+        private static readonly HashSet<SyntaxKind> InnerTypeKinds =
+            [
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.StructDeclaration,
+                SyntaxKind.NamespaceDeclaration,
+                SyntaxKind.InterfaceDeclaration,
+                SyntaxKindEx.RecordDeclaration,
+                SyntaxKindEx.RecordStructDeclaration,
+                SyntaxKindEx.FileScopedNamespaceDeclaration
+            ];
+
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override SyntaxKind[] SyntaxKinds { get; } =
@@ -35,14 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
             ((BaseTypeDeclarationSyntax)declaration).Identifier;
 
         protected override bool IsInnerTypeOrWithinNamespace(SyntaxNode declaration, SemanticModel semanticModel) =>
-            declaration.Parent.IsAnyKind(
-                SyntaxKind.ClassDeclaration,
-                SyntaxKind.StructDeclaration,
-                SyntaxKind.NamespaceDeclaration,
-                SyntaxKind.InterfaceDeclaration,
-                SyntaxKindEx.RecordDeclaration,
-                SyntaxKindEx.RecordStructDeclaration,
-                SyntaxKindEx.FileScopedNamespaceDeclaration);
+            declaration.Parent.IsAnyKind(InnerTypeKinds);
 
         protected override bool IsException(SyntaxNode node) =>
             IsTopLevelStatementPartialProgramClass(node);

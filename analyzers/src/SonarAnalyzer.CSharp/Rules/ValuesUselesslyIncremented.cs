@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 case ReturnStatementSyntax:
                 case ArrowExpressionClauseSyntax:
                 case CastExpressionSyntax castExpressionSyntax
-                    when castExpressionSyntax.Parent.IsAnyKind(SyntaxKind.ReturnStatement, SyntaxKind.ArrowExpressionClause):
+                    when castExpressionSyntax.Parent?.Kind() is SyntaxKind.ReturnStatement or SyntaxKind.ArrowExpressionClause:
                 case ArgumentSyntax argumentInAssignment
                     when argumentInAssignment.FindAssignmentComplement() is { } assignmentTarget
                          && CSharpEquivalenceChecker.AreEquivalent(assignmentTarget, increment.Operand):

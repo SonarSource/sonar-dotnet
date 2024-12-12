@@ -20,7 +20,7 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class ExpressionSyntaxExtensions
 {
-    private static readonly SyntaxKind[] LiteralSyntaxKinds =
+    private static readonly HashSet<SyntaxKind> LiteralSyntaxKinds =
         [
             SyntaxKind.CharacterLiteralExpression,
             SyntaxKind.FalseLiteralExpression,

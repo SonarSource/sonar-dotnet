@@ -21,20 +21,20 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade Language { get; } = VisualBasicFacade.Instance;
 
-        protected override SyntaxKind[] TransparentKinds { get; } =
-            {
+        protected override HashSet<SyntaxKind> TransparentKinds { get; } =
+            [
                 SyntaxKind.ParenthesizedExpression,
                 SyntaxKind.NotExpression,
-            };
+            ];
 
-        protected override SyntaxKind[] ComplexityIncreasingKinds { get; } =
-            {
+        protected override HashSet<SyntaxKind> ComplexityIncreasingKinds { get; } =
+            [
                 SyntaxKind.AndExpression,
                 SyntaxKind.AndAlsoExpression,
                 SyntaxKind.OrExpression,
                 SyntaxKind.OrElseExpression,
                 SyntaxKind.ExclusiveOrExpression
-            };
+            ];
 
         protected override SyntaxNode[] ExpressionChildren(SyntaxNode node) =>
             node switch

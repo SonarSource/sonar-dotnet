@@ -22,38 +22,39 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 public static class SyntaxNodeExtensionsCSharp
 {
     private static readonly ControlFlowGraphCache CfgCache = new();
-    private static readonly SyntaxKind[] ParenthesizedNodeKinds = [SyntaxKind.ParenthesizedExpression, SyntaxKindEx.ParenthesizedPattern];
 
-    private static readonly SyntaxKind[] EnclosingScopeSyntaxKinds = [
-        SyntaxKind.AddAccessorDeclaration,
-        SyntaxKind.AnonymousMethodExpression,
-        SyntaxKind.BaseConstructorInitializer,
-        SyntaxKind.CompilationUnit,
-        SyntaxKind.ConstructorDeclaration,
-        SyntaxKind.ConversionOperatorDeclaration,
-        SyntaxKind.DestructorDeclaration,
-        SyntaxKind.EnumMemberDeclaration,
-        SyntaxKind.FieldDeclaration,
-        SyntaxKind.GetAccessorDeclaration,
-        SyntaxKind.GroupClause,
-        SyntaxKindEx.InitAccessorDeclaration,
-        SyntaxKind.JoinClause,
-        SyntaxKind.LetClause,
-        SyntaxKindEx.LocalFunctionStatement,
-        SyntaxKind.MethodDeclaration,
-        SyntaxKind.OrderByClause,
-        SyntaxKind.OperatorDeclaration,
-        SyntaxKind.Parameter,
-        SyntaxKind.ParenthesizedLambdaExpression,
-        SyntaxKindEx.PrimaryConstructorBaseType,
-        SyntaxKind.PropertyDeclaration,
-        SyntaxKind.RemoveAccessorDeclaration,
-        SyntaxKind.QueryContinuation,
-        SyntaxKind.SelectClause,
-        SyntaxKind.SetAccessorDeclaration,
-        SyntaxKind.SimpleLambdaExpression,
-        SyntaxKind.ThisConstructorInitializer,
-        SyntaxKind.WhereClause];
+    private static readonly HashSet<SyntaxKind> EnclosingScopeSyntaxKinds =
+        [
+            SyntaxKind.AddAccessorDeclaration,
+            SyntaxKind.AnonymousMethodExpression,
+            SyntaxKind.BaseConstructorInitializer,
+            SyntaxKind.CompilationUnit,
+            SyntaxKind.ConstructorDeclaration,
+            SyntaxKind.ConversionOperatorDeclaration,
+            SyntaxKind.DestructorDeclaration,
+            SyntaxKind.EnumMemberDeclaration,
+            SyntaxKind.FieldDeclaration,
+            SyntaxKind.GetAccessorDeclaration,
+            SyntaxKind.GroupClause,
+            SyntaxKindEx.InitAccessorDeclaration,
+            SyntaxKind.JoinClause,
+            SyntaxKind.LetClause,
+            SyntaxKindEx.LocalFunctionStatement,
+            SyntaxKind.MethodDeclaration,
+            SyntaxKind.OrderByClause,
+            SyntaxKind.OperatorDeclaration,
+            SyntaxKind.Parameter,
+            SyntaxKind.ParenthesizedLambdaExpression,
+            SyntaxKindEx.PrimaryConstructorBaseType,
+            SyntaxKind.PropertyDeclaration,
+            SyntaxKind.RemoveAccessorDeclaration,
+            SyntaxKind.QueryContinuation,
+            SyntaxKind.SelectClause,
+            SyntaxKind.SetAccessorDeclaration,
+            SyntaxKind.SimpleLambdaExpression,
+            SyntaxKind.ThisConstructorInitializer,
+            SyntaxKind.WhereClause
+       ];
 
     private static readonly SyntaxKind[] NegationOrConditionEnclosingSyntaxKinds = [
         SyntaxKind.AnonymousMethodExpression,
@@ -152,7 +153,7 @@ public static class SyntaxNodeExtensionsCSharp
     public static SyntaxNode RemoveParentheses(this SyntaxNode expression)
     {
         var current = expression;
-        while (current is { } && current.IsAnyKind(ParenthesizedNodeKinds))
+        while (current is { } && current.Kind() is SyntaxKind.ParenthesizedExpression or SyntaxKindEx.ParenthesizedPattern)
         {
             current = current.IsKind(SyntaxKindEx.ParenthesizedPattern)
                 ? ((ParenthesizedPatternSyntaxWrapper)current).Pattern
@@ -248,14 +249,14 @@ public static class SyntaxNodeExtensionsCSharp
         }
         // can be either outermost tuple, or DeclarationExpression if 'node' is SingleVariableDesignationExpression
         var outermostParenthesesExpression = node.AncestorsAndSelf()
-            .TakeWhile(x => x.IsAnyKind(
-                SyntaxKind.Argument,
-                SyntaxKindEx.TupleExpression,
-                SyntaxKindEx.SingleVariableDesignation,
-                SyntaxKindEx.ParenthesizedVariableDesignation,
-                SyntaxKindEx.DiscardDesignation,
-                SyntaxKindEx.DeclarationExpression))
-            .LastOrDefault(x => x.IsAnyKind(SyntaxKindEx.DeclarationExpression, SyntaxKindEx.TupleExpression));
+            .TakeWhile(x => x?.Kind() is
+                SyntaxKind.Argument or
+                SyntaxKindEx.TupleExpression or
+                SyntaxKindEx.SingleVariableDesignation or
+                SyntaxKindEx.ParenthesizedVariableDesignation or
+                SyntaxKindEx.DiscardDesignation or
+                SyntaxKindEx.DeclarationExpression)
+            .LastOrDefault(x => x.Kind() is SyntaxKindEx.DeclarationExpression or SyntaxKindEx.TupleExpression);
         if ((TupleExpressionSyntaxWrapper.IsInstance(outermostParenthesesExpression) || DeclarationExpressionSyntaxWrapper.IsInstance(outermostParenthesesExpression))
             && outermostParenthesesExpression.Parent is AssignmentExpressionSyntax assignment)
         {
@@ -470,12 +471,19 @@ public static class SyntaxNodeExtensionsCSharp
     public static SyntaxNode GetFirstNonParenthesizedParent(this SyntaxNode node) =>
         node.GetSelfOrTopParenthesizedExpression().Parent;
 
-    public static bool HasAncestor(this SyntaxNode node, params SyntaxKind[] syntaxKinds) =>
+    public static bool HasAncestor(this SyntaxNode node, SyntaxKind syntaxKind) =>
+        node.Ancestors().Any(x => x.IsKind(syntaxKind));
+
+    public static bool HasAncestor(this SyntaxNode node, SyntaxKind kind1, SyntaxKind kind2) =>
+        node.Ancestors().Any(x => x.IsKind(kind1) || x.IsKind(kind2));
+
+    public static bool HasAncestor(this SyntaxNode node, ISet<SyntaxKind> syntaxKinds) =>
         node.Ancestors().Any(x => x.IsAnyKind(syntaxKinds));
 
     public static bool IsNullLiteral(this SyntaxNode node) =>
         node is not null && node.IsKind(SyntaxKind.NullLiteralExpression);
 
+    [Obsolete("Either use '.Kind() is A or B'  or the overload with the ISet instead.")]
     public static bool IsAnyKind(this SyntaxNode node, params SyntaxKind[] syntaxKinds) =>
         node is not null && syntaxKinds.Contains((SyntaxKind)node.RawKind);
 
@@ -496,7 +504,7 @@ public static class SyntaxNodeExtensionsCSharp
     public static string StringValue(this SyntaxNode node, SemanticModel model) =>
         node switch
         {
-            LiteralExpressionSyntax literal when literal.IsAnyKind(SyntaxKind.StringLiteralExpression, SyntaxKindEx.Utf8StringLiteralExpression) => literal.Token.ValueText,
+            LiteralExpressionSyntax literal when literal.Kind() is SyntaxKind.StringLiteralExpression or SyntaxKindEx.Utf8StringLiteralExpression => literal.Token.ValueText,
             InterpolatedStringExpressionSyntax expression => expression.InterpolatedTextValue(model) ?? expression.ContentsText(),
             _ => null
         };

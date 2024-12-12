@@ -142,7 +142,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 protected bool IsAllowedInitializationValue(ExpressionSyntax value, Optional<object> constantValue = default) =>
                     (constantValue.HasValue && IsAllowedInitializationConstant(constantValue.Value, value.IsKind(SyntaxKind.IdentifierName)))
-                    || value.IsAnyKind(SyntaxKind.DefaultExpression, SyntaxKind.TrueLiteralExpression, SyntaxKind.FalseLiteralExpression)
+                    || value?.Kind() is SyntaxKind.DefaultExpression or SyntaxKind.TrueLiteralExpression or SyntaxKind.FalseLiteralExpression
                     || value.IsNullLiteral()
                     || IsAllowedNumericInitialization(value)
                     || IsAllowedUnaryNumericInitialization(value)
@@ -162,7 +162,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     expression.IsKind(SyntaxKind.NumericLiteralExpression) && AllowedNumericValues.Contains(((LiteralExpressionSyntax)expression).Token.ValueText);  // -1, 0 or 1
 
                 private static bool IsAllowedUnaryNumericInitialization(ExpressionSyntax expression) =>
-                    expression.IsAnyKind(SyntaxKind.UnaryPlusExpression, SyntaxKind.UnaryMinusExpression) && IsAllowedNumericInitialization(((PrefixUnaryExpressionSyntax)expression).Operand);
+                    expression?.Kind() is SyntaxKind.UnaryPlusExpression or SyntaxKind.UnaryMinusExpression
+                    && IsAllowedNumericInitialization(((PrefixUnaryExpressionSyntax)expression).Operand);
 
                 private bool IsAllowedStringInitialization(ExpressionSyntax expression) =>
                     (expression.IsKind(SyntaxKind.StringLiteralExpression) && AllowedStringValues.Contains(((LiteralExpressionSyntax)expression).Token.ValueText))

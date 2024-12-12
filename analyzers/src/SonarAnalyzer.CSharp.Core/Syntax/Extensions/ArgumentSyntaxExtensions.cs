@@ -41,7 +41,7 @@ public static class ArgumentSyntaxExtensions
 
     public static TupleExpressionSyntaxWrapper? OutermostTuple(this ArgumentSyntax argument) =>
         argument.Ancestors()
-            .TakeWhile(x => x.IsAnyKind(SyntaxKind.Argument, SyntaxKindEx.TupleExpression))
+            .TakeWhile(x => x?.Kind() is SyntaxKind.Argument or SyntaxKindEx.TupleExpression)
             .LastOrDefault(x => x.IsKind(SyntaxKindEx.TupleExpression)) is { } outerTuple
             && TupleExpressionSyntaxWrapper.IsInstance(outerTuple)
                 ? (TupleExpressionSyntaxWrapper)outerTuple

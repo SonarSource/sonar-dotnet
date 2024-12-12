@@ -47,7 +47,7 @@ public sealed class ExceptionsShouldBeLoggedOrThrown : SonarDiagnosticAnalyzer
                              var catchClauseSyntax = (CatchClauseSyntax)c.Node;
                              var walker = new LoggingInvocationWalker(c.SemanticModel);
                              if (catchClauseSyntax.Declaration?.Identifier is { } exceptionIdentifier // there is an exception to log
-                                 && catchClauseSyntax.DescendantNodes().Any(x => x.IsAnyKind(SyntaxKind.ThrowStatement, SyntaxKindEx.ThrowExpression)) // and a throw statement (preliminary check)
+                                 && catchClauseSyntax.DescendantNodes().Any(x => x.Kind() is SyntaxKind.ThrowStatement or SyntaxKindEx.ThrowExpression) // and a throw statement (preliminary check)
                                  && walker.SafeVisit(catchClauseSyntax)
                                  && walker.IsExceptionLogged
                                  && walker.ThrowNode is { } throwStatement)

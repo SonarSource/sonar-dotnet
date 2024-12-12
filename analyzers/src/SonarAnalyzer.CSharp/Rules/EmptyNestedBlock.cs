@@ -19,28 +19,28 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class EmptyNestedBlock : EmptyNestedBlockBase<SyntaxKind>
     {
-        private static readonly SyntaxKind[] AllowedContainerKinds =
-        {
+        private static readonly HashSet<SyntaxKind> AllowedContainerKinds =
+        [
             SyntaxKind.ConstructorDeclaration,
             SyntaxKind.DestructorDeclaration,
             SyntaxKind.MethodDeclaration,
             SyntaxKind.SimpleLambdaExpression,
             SyntaxKind.ParenthesizedLambdaExpression,
             SyntaxKind.AnonymousMethodExpression
-        };
+        ];
 
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override SyntaxKind[] SyntaxKinds { get; } = new[]
-        {
+        protected override SyntaxKind[] SyntaxKinds { get; } =
+        [
                 SyntaxKind.Block,
                 SyntaxKind.SwitchStatement
-        };
+        ];
 
         protected override IEnumerable<SyntaxNode> EmptyBlocks(SyntaxNode node) =>
             (node is SwitchStatementSyntax switchNode && IsEmpty(switchNode))
                 || (node is BlockSyntax blockNode && IsNestedAndEmpty(blockNode))
-                    ? new[] { node }
+                    ? [node]
                     : Enumerable.Empty<SyntaxNode>();
 
         private static bool IsEmpty(SwitchStatementSyntax node) =>

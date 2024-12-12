@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(c =>
                 {
                     if (c.Node.Ancestors()
-                        .TakeWhile(x => !x.IsAnyKind(SyntaxKind.ParenthesizedLambdaExpression, SyntaxKind.SimpleLambdaExpression))
+                        .TakeWhile(x => !(x?.Kind() is SyntaxKind.ParenthesizedLambdaExpression or SyntaxKind.SimpleLambdaExpression))
                         .OfType<ConditionalExpressionSyntax>()
                         .Any())
                     {

@@ -87,7 +87,7 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
             {
                 return IsDuplicatedCastOnSameSymbol(cast.Expression, cast.Type);
             }
-            else if (node is BinaryExpressionSyntax binary && binary.IsAnyKind(SyntaxKind.AsExpression, SyntaxKind.IsExpression))
+            else if (node is BinaryExpressionSyntax binary && binary.Kind() is SyntaxKind.AsExpression or SyntaxKind.IsExpression)
             {
                 return IsDuplicatedCastOnSameSymbol(binary.Left, binary.Right);
             }
@@ -115,7 +115,7 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
             var leftVariable = expressionPatternPair.Key;
             var targetTypes = GetTypesFromPattern(pattern);
             var rightPartsToCheck = new Dictionary<SyntaxNode, Tuple<TypeSyntax, Location>>();
-            foreach (var subPattern in pattern.DescendantNodesAndSelf().Where(x => x.IsAnyKind(SyntaxKindEx.DeclarationPattern, SyntaxKindEx.RecursivePattern)))
+            foreach (var subPattern in pattern.DescendantNodesAndSelf().Where(x => x?.Kind() is SyntaxKindEx.DeclarationPattern or SyntaxKindEx.RecursivePattern))
             {
                 if (DeclarationPatternSyntaxWrapper.IsInstance(subPattern) && (DeclarationPatternSyntaxWrapper)subPattern is var declarationPattern)
                 {

@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(c =>
                 {
                     var block = (BlockSyntax)c.Node;
-                    if (block.Parent.IsAnyKind(SyntaxKind.Block, SyntaxKind.GlobalStatement))
+                    if (block.Parent?.Kind() is SyntaxKind.Block or SyntaxKind.GlobalStatement)
                     {
                         c.ReportIssue(Rule, block.OpenBraceToken);
                     }

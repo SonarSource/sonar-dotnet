@@ -142,10 +142,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ArgumentSyntax ConnectionStringArgument(SeparatedSyntaxList<ArgumentSyntax> argumentList) =>
             // Where(cond).First() is more efficient than First(cond)
             argumentList.Where(a => a.NameColon?.Name.Identifier.ValueText == "connectionString").FirstOrDefault()
-                ?? argumentList.Where(a => a.Expression.IsAnyKind(
-                    SyntaxKind.StringLiteralExpression,
-                    SyntaxKind.InterpolatedStringExpression,
-                    SyntaxKind.AddExpression)).FirstOrDefault()
+                ?? argumentList.Where(x => x.Expression.Kind() is
+                    SyntaxKind.StringLiteralExpression or SyntaxKind.InterpolatedStringExpression or SyntaxKind.AddExpression)
+                    .FirstOrDefault()
                 ?? argumentList.FirstOrDefault();
 
         // For both interpolated strings and concatenation chain, it's easier to search in the string representation of the tree, rather than doing string searches for each individual
