@@ -150,34 +150,59 @@ public class XUnitTestResultParserTest {
   @Test
   public void valid_generic_method_csharp() {
     var sut = new XUnitTestResultsParser();
-    Map<String, String> fileMap = Map.of("Calculator.xUnit.Calculator.xUnit.GenericTests.GenericTestMethod", "CalculatorTests.cs");
+    Map<String, String> fileMap = Map.of(
+      "Calculator.xUnit.Calculator.xUnit.GenericTests.GenericTestMethod", "CalculatorTests.cs",
+      "Calculator.xUnit.Calculator.xUnit.Derived.VirtualMethodInBaseClass", "CalculatorTests.cs",
+      "Calculator.xUnit.Calculator.xUnit.Derived.TestMethodInBaseClass", "CalculatorTests.cs",
+      "Calculator.xUnit.Calculator.xUnit.Tests.TestMethod1", "CalculatorTests.cs",
+      "Calculator.xUnit.Calculator.xUnit.GenericDerivedFromGenericClass.VirtualMethodInBaseClass", "CalculatorTests.cs",
+      "Calculator.xUnit.Calculator.xUnit.GenericDerivedFromGenericClass.GenericDerivedFromGenericClass_PassMethod", "CalculatorTests.cs",
+      "Calculator.xUnit.Calculator.xUnit.GenericDerivedFromGenericClass.TestMethodInBaseClass", "CalculatorTests.cs"
+    );
     Map<String, UnitTestResults> results = new HashMap<>();
 
     sut.parse(new File("src/test/resources/xunit/valid_generic_methods_csharp.xml"), results, fileMap);
 
     assertThat(results).hasSize(1);
     var calculatorTestsResult = results.get("CalculatorTests.cs");
-    assertThat(calculatorTestsResult.tests()).isEqualTo(2);
-    assertThat(calculatorTestsResult.failures()).isZero();
+    assertThat(calculatorTestsResult.tests()).isEqualTo(8);
+    assertThat(calculatorTestsResult.failures()).isEqualTo(3);
     assertThat(calculatorTestsResult.skipped()).isZero();
     assertThat(calculatorTestsResult.errors()).isZero();
-    assertThat(calculatorTestsResult.executionTime()).isEqualTo(5);
+    assertThat(calculatorTestsResult.executionTime()).isEqualTo(29);
+
+    assertThat(logTester.logs(Level.WARN)).isEmpty();
 
     List<String> infoLogs = logTester.logs(Level.INFO);
     assertThat(infoLogs).hasSize(1);
     assertThat(infoLogs.get(0)).startsWith("Parsing the XUnit Test Results file ");
 
     assertThat(logTester.logs(Level.DEBUG))
-      .hasSize(3)
+      .hasSize(9)
       .contains(
         "XUnit Assembly found, assembly name: Calculator.xUnit\\bin\\Debug\\net9.0\\Calculator.xUnit.dll, Extracted dllName: Calculator.xUnit",
+        "Added Test Method: Calculator.xUnit.Calculator.xUnit.GenericDerivedFromGenericClass.VirtualMethodInBaseClass to File: CalculatorTests.cs",
+        "Added Test Method: Calculator.xUnit.Calculator.xUnit.GenericDerivedFromGenericClass.GenericDerivedFromGenericClass_PassMethod to File: CalculatorTests.cs",
+        "Added Test Method: Calculator.xUnit.Calculator.xUnit.GenericDerivedFromGenericClass.TestMethodInBaseClass to File: CalculatorTests.cs",
+        "Added Test Method: Calculator.xUnit.Calculator.xUnit.Derived.VirtualMethodInBaseClass to File: CalculatorTests.cs",
+        "Added Test Method: Calculator.xUnit.Calculator.xUnit.Derived.TestMethodInBaseClass to File: CalculatorTests.cs",
         "Added Test Method: Calculator.xUnit.Calculator.xUnit.GenericTests.GenericTestMethod to File: CalculatorTests.cs",
-        "Added Test Method: Calculator.xUnit.Calculator.xUnit.GenericTests.GenericTestMethod to File: CalculatorTests.cs");
+        "Added Test Method: Calculator.xUnit.Calculator.xUnit.GenericTests.GenericTestMethod to File: CalculatorTests.cs",
+        "Added Test Method: Calculator.xUnit.Calculator.xUnit.Tests.TestMethod1 to File: CalculatorTests.cs"
+      );
   }
 
   @Test
   public void valid_generic_method_vbnet() {
-    Map<String, String> fileMap = Map.of("Calculator.xUnit.Calculator.xUnit.GenericTests.GenericTestMethod", "CalculatorTests.vb");
+    Map<String, String> fileMap = Map.of(
+        "Calculator.xUnit.Calculator.xUnit.GenericDerivedFromGenericClass.VirtualMethodInBaseClass", "CalculatorTests.vb",
+        "Calculator.xUnit.Calculator.xUnit.GenericDerivedFromGenericClass.TestMethodInBaseClass", "CalculatorTests.vb",
+        "Calculator.xUnit.Calculator.xUnit.Derived.VirtualMethodInBaseClass", "CalculatorTests.vb",
+        "Calculator.xUnit.Calculator.xUnit.Derived.TestMethodInBaseClass", "CalculatorTests.vb",
+        "Calculator.xUnit.Calculator.xUnit.GenericTests.GenericTestMethod", "CalculatorTests.vb",
+        "Calculator.xUnit.Calculator.xUnit.Tests.TestMethod1", "CalculatorTests.vb",
+        "Calculator.xUnit.Calculator.xUnit.GenericDerivedFromGenericClass.GenericMethod", "CalculatorTests.vb"
+      );
     var sut = new XUnitTestResultsParser();
     Map<String, UnitTestResults> results = new HashMap<>();
 
@@ -185,22 +210,31 @@ public class XUnitTestResultParserTest {
 
     assertThat(results).hasSize(1);
     var calculatorTestsResult = results.get("CalculatorTests.vb");
-    assertThat(calculatorTestsResult.tests()).isEqualTo(2);
-    assertThat(calculatorTestsResult.failures()).isZero();
+    assertThat(calculatorTestsResult.tests()).isEqualTo(8);
+    assertThat(calculatorTestsResult.failures()).isEqualTo(3);
     assertThat(calculatorTestsResult.skipped()).isZero();
     assertThat(calculatorTestsResult.errors()).isZero();
-    assertThat(calculatorTestsResult.executionTime()).isEqualTo(7);
+    assertThat(calculatorTestsResult.executionTime()).isEqualTo(45);
+
+    assertThat(logTester.logs(Level.WARN)).isEmpty();
 
     List<String> infoLogs = logTester.logs(Level.INFO);
     assertThat(infoLogs).hasSize(1);
     assertThat(infoLogs.get(0)).startsWith("Parsing the XUnit Test Results file ");
 
     assertThat(logTester.logs(Level.DEBUG))
-      .hasSize(3)
+      .hasSize(9)
       .contains(
         "XUnit Assembly found, assembly name: Calculator.xUnit\\bin\\Debug\\net9.0\\Calculator.xUnit.dll, Extracted dllName: Calculator.xUnit",
+        "Added Test Method: Calculator.xUnit.Calculator.xUnit.GenericDerivedFromGenericClass.VirtualMethodInBaseClass to File: CalculatorTests.vb",
+        "Added Test Method: Calculator.xUnit.Calculator.xUnit.GenericDerivedFromGenericClass.GenericMethod to File: CalculatorTests.vb",
+        "Added Test Method: Calculator.xUnit.Calculator.xUnit.GenericDerivedFromGenericClass.TestMethodInBaseClass to File: CalculatorTests.vb",
+        "Added Test Method: Calculator.xUnit.Calculator.xUnit.Derived.VirtualMethodInBaseClass to File: CalculatorTests.vb",
+        "Added Test Method: Calculator.xUnit.Calculator.xUnit.Derived.TestMethodInBaseClass to File: CalculatorTests.vb",
         "Added Test Method: Calculator.xUnit.Calculator.xUnit.GenericTests.GenericTestMethod to File: CalculatorTests.vb",
-        "Added Test Method: Calculator.xUnit.Calculator.xUnit.GenericTests.GenericTestMethod to File: CalculatorTests.vb");
+        "Added Test Method: Calculator.xUnit.Calculator.xUnit.GenericTests.GenericTestMethod to File: CalculatorTests.vb",
+        "Added Test Method: Calculator.xUnit.Calculator.xUnit.Tests.TestMethod1 to File: CalculatorTests.vb"
+      );
   }
 
   @Test

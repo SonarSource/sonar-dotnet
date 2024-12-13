@@ -36,3 +36,10 @@ public class GenericTests
     [InlineData(typeof(string))]
     public void GenericTestMethod<T>(Type type) => Console.WriteLine(type);
 }
+
+public sealed class GenericDerivedFromGenericClass<T> : BaseClass<T> where T : class
+{
+    [Fact]
+    public void GenericDerivedFromGenericClass_PassMethod() =>
+        Assert.Equal(1, 1);
+}

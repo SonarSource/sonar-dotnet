@@ -1,4 +1,4 @@
-﻿namespace Samples;
+﻿namespace Samples.CSharp;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

@@ -1,6 +1,6 @@
 ﻿Imports Microsoft.VisualStudio.TestTools.UnitTesting
 
-Namespace Samples
+Namespace Samples.VB
 
     Public Class Address
         <TestMethod>

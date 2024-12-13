@@ -38,48 +38,76 @@ public class TestMethodDeclarationsAnalyzerTest
                 firstFileDeclarations.AssemblyName.Should().Be("project0");
                 firstFileDeclarations.FilePath.Should().Be(Path.Combine(BasePath, "TestMethodDeclarations.cs"));
                 firstFileDeclarations.MethodDeclarations.Should().BeEquivalentTo([
-                    new MethodDeclarationInfo { TypeName = "Samples.Address", MethodName = "GetZipCode" },
-                    new MethodDeclarationInfo { TypeName = "Samples.BaseClass", MethodName = "BaseClassMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.BaseClass", MethodName = "Method" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Company", MethodName = "GetCompanyName" },
-                    new MethodDeclarationInfo { TypeName = "Samples.DerivedClass", MethodName = "Method" },
-                    new MethodDeclarationInfo { TypeName = "Samples.DerivedClass", MethodName = "BaseClassMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Employee", MethodName = "GetEmployeeName" },
-                    new MethodDeclarationInfo { TypeName = "Samples.FileClass", MethodName = "Method" },
-                    new MethodDeclarationInfo { TypeName = "Samples.GenericClass<T>", MethodName = "Method" },
-                    new MethodDeclarationInfo { TypeName = "Samples.LocalFunctions", MethodName = "Main" },
-                    new MethodDeclarationInfo { TypeName = "Samples.MultipleLevelInheritance", MethodName = "BaseClassMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.MultipleLevelInheritance", MethodName = "Method" },
-                    new MethodDeclarationInfo { TypeName = "Samples.MultipleLevelInheritance", MethodName = "MultipleLevelInheritanceMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.IInterfaceWithTestDeclarations", MethodName = "GetZipCode" },
-                    new MethodDeclarationInfo { TypeName = "Samples.MultipleMethods", MethodName = "Method1" },
-                    new MethodDeclarationInfo { TypeName = "Samples.MultipleMethods", MethodName = "Method2" },
-                    new MethodDeclarationInfo { TypeName = "Samples.NoModifiers", MethodName = "Method" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Overloads", MethodName = "Method" },
-                    new MethodDeclarationInfo { TypeName = "Samples.PartialClass", MethodName = "BaseClassMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.PartialClass", MethodName = "Method" },
-                    new MethodDeclarationInfo { TypeName = "Samples.PartialClass", MethodName = "InFirstFile" },
-                    new MethodDeclarationInfo { TypeName = "Samples.PartialClass", MethodName = "PartialMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Person", MethodName = "GetFullName" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Visibility", MethodName = "InternalMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Visibility", MethodName = "NoAccessModifierMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Visibility", MethodName = "PrivateMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Visibility", MethodName = "PrivateProtectedMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Visibility", MethodName = "ProtectedInternalMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Visibility", MethodName = "ProtectedMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Visibility", MethodName = "PublicMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Visibility.InternalClass", MethodName = "Method" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Visibility.PrivateClass", MethodName = "Method" },
-                    new MethodDeclarationInfo { TypeName = "Samples.WithGenericMethod", MethodName = "Method" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.Address", MethodName = "GetZipCode" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.BaseClass", MethodName = "BaseClassMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.BaseClass", MethodName = "Method" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.Company", MethodName = "GetCompanyName" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.DerivedClass", MethodName = "Method" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.DerivedClass", MethodName = "BaseClassMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.Employee", MethodName = "GetEmployeeName" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.FileClass", MethodName = "Method" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.GenericClass", MethodName = "Method" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.LocalFunctions", MethodName = "Main" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.MultipleLevelInheritance", MethodName = "BaseClassMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.MultipleLevelInheritance", MethodName = "Method" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.MultipleLevelInheritance", MethodName = "MultipleLevelInheritanceMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.IInterfaceWithTestDeclarations", MethodName = "GetZipCode" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.MultipleMethods", MethodName = "Method1" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.MultipleMethods", MethodName = "Method2" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.NoModifiers", MethodName = "Method" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.Overloads", MethodName = "Method" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.PartialClass", MethodName = "BaseClassMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.PartialClass", MethodName = "Method" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.PartialClass", MethodName = "InFirstFile" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.PartialClass", MethodName = "PartialMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.Person", MethodName = "GetFullName" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.Visibility", MethodName = "InternalMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.Visibility", MethodName = "NoAccessModifierMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.Visibility", MethodName = "PrivateMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.Visibility", MethodName = "PrivateProtectedMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.Visibility", MethodName = "ProtectedInternalMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.Visibility", MethodName = "ProtectedMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.Visibility", MethodName = "PublicMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.Visibility.InternalClass", MethodName = "Method" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.Visibility.PrivateClass", MethodName = "Method" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.WithGenericMethod", MethodName = "Method" },
                 ]);
                 var secondFileDeclarations = x.OrderBy(declaration => declaration.FilePath).Skip(1).First();
                 secondFileDeclarations.AssemblyName.Should().Be("project0");
                 secondFileDeclarations.FilePath.Should().Be(Path.Combine(BasePath, "TestMethodDeclarations.Partial.cs"));
                 secondFileDeclarations.MethodDeclarations.Should().BeEquivalentTo([
-                    new MethodDeclarationInfo { TypeName = "Samples.PartialClass", MethodName = "PartialMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.PartialClass", MethodName = "InSecondFile" },
-                    new MethodDeclarationInfo { TypeName = "Samples.PartialClass", MethodName = "BaseClassMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.PartialClass", MethodName = "Method" }
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.PartialClass", MethodName = "PartialMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.PartialClass", MethodName = "InSecondFile" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.PartialClass", MethodName = "BaseClassMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.CSharp.PartialClass", MethodName = "Method" }
+                ]);
+            });
+
+    [TestMethod]
+    public void VerifyMethodDeclarations_TestCode_GlobalNamespace_CSharp() =>
+        CreateCSharpBuilder(isTestProject: true, "TestMethodDeclarations.GlobalNamespace.cs")
+            .VerifyUtilityAnalyzer<MethodDeclarationsInfo>(x =>
+            {
+                x.Should().HaveCount(1);
+                var fileDeclarations = x.OrderBy(declaration => declaration.FilePath).First();
+                fileDeclarations.AssemblyName.Should().Be("project0");
+                fileDeclarations.FilePath.Should().Be(Path.Combine(BasePath, "TestMethodDeclarations.GlobalNamespace.cs"));
+                fileDeclarations.MethodDeclarations.Should().BeEquivalentTo([
+                    new MethodDeclarationInfo { TypeName = "TestClass", MethodName = "TestMethod" }
+                ]);
+            });
+
+    [TestMethod]
+    public void VerifyMethodDeclarations_TestCode_GlobalNamespace_VB() =>
+        CreateVisualBasicBuilder(isTestProject: true, "TestMethodDeclarations.GlobalNamespace.vb")
+            .VerifyUtilityAnalyzer<MethodDeclarationsInfo>(x =>
+            {
+                x.Should().HaveCount(1);
+                var fileDeclarations = x.OrderBy(declaration => declaration.FilePath).First();
+                fileDeclarations.AssemblyName.Should().Be("project0");
+                fileDeclarations.FilePath.Should().Be(Path.Combine(BasePath, "TestMethodDeclarations.GlobalNamespace.vb"));
+                fileDeclarations.MethodDeclarations.Should().BeEquivalentTo([
+                    new MethodDeclarationInfo { TypeName = "TestClass", MethodName = "TestMethod" }
                 ]);
             });
 
@@ -101,45 +129,45 @@ public class TestMethodDeclarationsAnalyzerTest
                 firstFileDeclarations.AssemblyName.Should().Be("project0");
                 firstFileDeclarations.FilePath.Should().Be(Path.Combine(BasePath, "TestMethodDeclarations.Partial.vb"));
                 firstFileDeclarations.MethodDeclarations.Should().BeEquivalentTo([
-                    new MethodDeclarationInfo { TypeName = "Samples.PartialClass", MethodName = "InSecondFile" },
-                    new MethodDeclarationInfo { TypeName = "Samples.PartialClass", MethodName = "PartialMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.PartialClass", MethodName = "BaseClassMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.PartialClass", MethodName = "Method" }
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.PartialClass", MethodName = "InSecondFile" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.PartialClass", MethodName = "PartialMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.PartialClass", MethodName = "BaseClassMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.PartialClass", MethodName = "Method" }
                 ]);
 
                 var secondFileDeclarations = x.OrderBy(declaration => declaration.FilePath).Skip(1).First();
                 secondFileDeclarations.AssemblyName.Should().Be("project0");
                 secondFileDeclarations.FilePath.Should().Be(Path.Combine(BasePath, "TestMethodDeclarations.vb"));
                 secondFileDeclarations.MethodDeclarations.Should().BeEquivalentTo([
-                    new MethodDeclarationInfo { TypeName = "Samples.Address", MethodName = "GetZipCode" },
-                    new MethodDeclarationInfo { TypeName = "Samples.BaseClass", MethodName = "BaseClassMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.BaseClass", MethodName = "Method" },
-                    new MethodDeclarationInfo { TypeName = "Samples.DerivedClass", MethodName = "Method" },
-                    new MethodDeclarationInfo { TypeName = "Samples.DerivedClass", MethodName = "BaseClassMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.GenericClass(Of T)", MethodName = "Method" },
-                    new MethodDeclarationInfo { TypeName = "Samples.MultipleLevelInheritance", MethodName = "MultipleLevelInheritanceMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.MultipleLevelInheritance", MethodName = "Method" },
-                    new MethodDeclarationInfo { TypeName = "Samples.MultipleLevelInheritance", MethodName = "BaseClassMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.IInterfaceWithTestDeclarations", MethodName = "GetZipCode" },
-                    new MethodDeclarationInfo { TypeName = "Samples.MultipleMethods", MethodName = "Method1" },
-                    new MethodDeclarationInfo { TypeName = "Samples.MultipleMethods", MethodName = "Method2" },
-                    new MethodDeclarationInfo { TypeName = "Samples.NoModifiers", MethodName = "Method" },
-                    new MethodDeclarationInfo { TypeName = "Samples.OverloadedMethods", MethodName = "Method" },
-                    new MethodDeclarationInfo { TypeName = "Samples.PartialClass", MethodName = "InFirstFile" },
-                    new MethodDeclarationInfo { TypeName = "Samples.PartialClass", MethodName = "PartialMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.PartialClass", MethodName = "BaseClassMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.PartialClass", MethodName = "Method" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Person", MethodName = "GetFullName" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Visibility", MethodName = "FriendMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Visibility", MethodName = "NoAccessModifierMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Visibility", MethodName = "PrivateMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Visibility", MethodName = "PrivateProtectedMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Visibility", MethodName = "ProtectedFriendMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Visibility", MethodName = "ProtectedMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Visibility", MethodName = "PublicMethod" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Visibility.FriendClass", MethodName = "Method" },
-                    new MethodDeclarationInfo { TypeName = "Samples.Visibility.PrivateClass", MethodName = "Method" },
-                    new MethodDeclarationInfo { TypeName = "Samples.WithGenericMethod", MethodName = "Method" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.Address", MethodName = "GetZipCode" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.BaseClass", MethodName = "BaseClassMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.BaseClass", MethodName = "Method" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.DerivedClass", MethodName = "Method" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.DerivedClass", MethodName = "BaseClassMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.GenericClass", MethodName = "Method" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.MultipleLevelInheritance", MethodName = "MultipleLevelInheritanceMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.MultipleLevelInheritance", MethodName = "Method" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.MultipleLevelInheritance", MethodName = "BaseClassMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.IInterfaceWithTestDeclarations", MethodName = "GetZipCode" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.MultipleMethods", MethodName = "Method1" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.MultipleMethods", MethodName = "Method2" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.NoModifiers", MethodName = "Method" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.OverloadedMethods", MethodName = "Method" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.PartialClass", MethodName = "InFirstFile" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.PartialClass", MethodName = "PartialMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.PartialClass", MethodName = "BaseClassMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.PartialClass", MethodName = "Method" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.Person", MethodName = "GetFullName" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.Visibility", MethodName = "FriendMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.Visibility", MethodName = "NoAccessModifierMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.Visibility", MethodName = "PrivateMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.Visibility", MethodName = "PrivateProtectedMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.Visibility", MethodName = "ProtectedFriendMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.Visibility", MethodName = "ProtectedMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.Visibility", MethodName = "PublicMethod" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.Visibility.FriendClass", MethodName = "Method" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.Visibility.PrivateClass", MethodName = "Method" },
+                    new MethodDeclarationInfo { TypeName = "Samples.VB.WithGenericMethod", MethodName = "Method" },
                 ]);
             });
 

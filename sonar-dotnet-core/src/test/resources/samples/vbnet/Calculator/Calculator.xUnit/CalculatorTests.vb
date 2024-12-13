@@ -38,3 +38,13 @@ Public Class GenericTests
         Console.WriteLine(type)
     End Sub
 End Class
+
+Public NotInheritable Class GenericDerivedFromGenericClass(Of T As Class, U As Class)
+    Inherits BaseClass(Of T)
+
+    <Fact>
+    Public Sub GenericMethod(Of T, U)()
+        Assert.Equal(1, 1)
+    End Sub
+
+End Class

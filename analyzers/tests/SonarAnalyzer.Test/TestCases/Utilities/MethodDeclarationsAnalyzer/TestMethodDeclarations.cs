@@ -1,4 +1,4 @@
-﻿namespace Samples;
+﻿namespace Samples.CSharp;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -158,7 +158,6 @@ public abstract class BaseClass
     [TestMethod]
     public virtual void Method() { }
 }
-
 
 public class DerivedClass : BaseClass
 {

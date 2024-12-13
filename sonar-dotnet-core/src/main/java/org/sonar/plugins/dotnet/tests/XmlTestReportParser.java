@@ -74,11 +74,18 @@ public abstract class XmlTestReportParser {
   }
 
   protected String getFullName(String methodName, String dllName) {
-    if(methodName.contains("<")) {
-      methodName = methodName.substring(0, methodName.indexOf('<'));
+    var separators = List.of("<", "(");
+    for (var separator : separators) {
+      if (methodName.contains(separator)) {
+        methodName = methodName.substring(0, methodName.indexOf(separator));
+      }
     }
-    if(methodName.contains("(")) {
-      methodName = methodName.substring(0, methodName.indexOf('('));
+
+    // Remove the generic arguments part from the method name.
+    // GenericClass`2.Method -> GenericClass.Method
+    if (methodName.contains("`")) {
+      var regexPattern = "`\\d+";
+      methodName = methodName.replaceAll(regexPattern, "");
     }
     return String.join(".", dllName, methodName);
   }

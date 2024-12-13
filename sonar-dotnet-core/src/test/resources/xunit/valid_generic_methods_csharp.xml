@@ -1,11 +1,59 @@
-<assemblies timestamp="12/02/2024 14:11:30">
-  <assembly name="Calculator.xUnit\bin\Debug\net9.0\Calculator.xUnit.dll" run-date="2024-12-02" run-time="14:11:30" total="5" passed="5" failed="0" skipped="0" time="0.756" errors="0">
+<assemblies timestamp="12/11/2024 16:59:07">
+  <assembly name="Calculator.xUnit\bin\Debug\net9.0\Calculator.xUnit.dll" run-date="2024-12-11" run-time="16:59:07" total="8" passed="5" failed="3" skipped="0" time="0.795" errors="0">
     <errors />
-    <collection total="2" passed="2" failed="0" skipped="0" name="Test collection for Calculator.xUnit.GenericTests" time="0.006">
-      <test name="Calculator.xUnit.GenericTests.GenericTestMethod&lt;Object&gt;(type: typeof(string))" type="Calculator.xUnit.GenericTests" method="GenericTestMethod(type: typeof(string))" time="0.0057036" result="Pass">
+    <collection total="3" passed="0" failed="3" skipped="0" name="Test collection for Calculator.xUnit" time="0.003">
+      <test name="Calculator.xUnit.GenericDerivedFromGenericClass`1.VirtualMethodInBaseClass" type="Calculator.xUnit" method="GenericDerivedFromGenericClass`1.VirtualMethodInBaseClass" time="0.0010000" result="Fail">
+        <failure>
+          <message>System.ArgumentException : Cannot create an instance of Calculator.xUnit.GenericDerivedFromGenericClass`1[T] because Type.ContainsGenericParameters is true.</message>
+          <stack-trace>   at System.RuntimeType.CreateInstanceCheckThis()
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at System.Activator.CreateInstance(Type type, Object[] args)
+   at ReflectionAbstractionExtensions.&lt;&gt;c__DisplayClass0_0.&lt;CreateTestClass&gt;b__0() in /_/src/xunit.execution/Extensions/ReflectionAbstractionExtensions.cs:line 42
+   at ReflectionAbstractionExtensions.CreateTestClass(ITest test, Type testClassType, Object[] constructorArguments, IMessageBus messageBus, ExecutionTimer timer, CancellationTokenSource cancellationTokenSource) in /_/src/xunit.execution/Extensions/ReflectionAbstractionExtensions.cs:line 42</stack-trace>
+        </failure>
         <traits />
       </test>
-      <test name="Calculator.xUnit.GenericTests.GenericTestMethod&lt;Object&gt;(type: typeof(int))" type="Calculator.xUnit.GenericTests" method="GenericTestMethod(type: typeof(int))" time="0.0002760" result="Pass">
+      <test name="Calculator.xUnit.GenericDerivedFromGenericClass`1.GenericDerivedFromGenericClass_PassMethod" type="Calculator.xUnit" method="GenericDerivedFromGenericClass`1.GenericDerivedFromGenericClass_PassMethod" time="0.0010000" result="Fail">
+        <failure>
+          <message>System.ArgumentException : Cannot create an instance of Calculator.xUnit.GenericDerivedFromGenericClass`1[T] because Type.ContainsGenericParameters is true.</message>
+          <stack-trace>   at System.RuntimeType.CreateInstanceCheckThis()
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at System.Activator.CreateInstance(Type type, Object[] args)
+   at ReflectionAbstractionExtensions.&lt;&gt;c__DisplayClass0_0.&lt;CreateTestClass&gt;b__0() in /_/src/xunit.execution/Extensions/ReflectionAbstractionExtensions.cs:line 42
+   at ReflectionAbstractionExtensions.CreateTestClass(ITest test, Type testClassType, Object[] constructorArguments, IMessageBus messageBus, ExecutionTimer timer, CancellationTokenSource cancellationTokenSource) in /_/src/xunit.execution/Extensions/ReflectionAbstractionExtensions.cs:line 42</stack-trace>
+        </failure>
+        <traits />
+      </test>
+      <test name="Calculator.xUnit.GenericDerivedFromGenericClass`1.TestMethodInBaseClass" type="Calculator.xUnit" method="GenericDerivedFromGenericClass`1.TestMethodInBaseClass" time="0.0010000" result="Fail">
+        <failure>
+          <message>System.ArgumentException : Cannot create an instance of Calculator.xUnit.GenericDerivedFromGenericClass`1[T] because Type.ContainsGenericParameters is true.</message>
+          <stack-trace>   at System.RuntimeType.CreateInstanceCheckThis()
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at System.Activator.CreateInstance(Type type, Object[] args)
+   at ReflectionAbstractionExtensions.&lt;&gt;c__DisplayClass0_0.&lt;CreateTestClass&gt;b__0() in /_/src/xunit.execution/Extensions/ReflectionAbstractionExtensions.cs:line 42
+   at ReflectionAbstractionExtensions.CreateTestClass(ITest test, Type testClassType, Object[] constructorArguments, IMessageBus messageBus, ExecutionTimer timer, CancellationTokenSource cancellationTokenSource) in /_/src/xunit.execution/Extensions/ReflectionAbstractionExtensions.cs:line 42</stack-trace>
+        </failure>
+        <traits />
+      </test>
+    </collection>
+    <collection total="2" passed="2" failed="0" skipped="0" name="Test collection for Calculator.xUnit.Derived" time="0.010">
+      <test name="Calculator.xUnit.Derived.VirtualMethodInBaseClass" type="Calculator.xUnit.Derived" method="VirtualMethodInBaseClass" time="0.0100342" result="Pass">
+        <traits />
+      </test>
+      <test name="Calculator.xUnit.Derived.TestMethodInBaseClass" type="Calculator.xUnit.Derived" method="TestMethodInBaseClass" time="0.0000956" result="Pass">
+        <traits />
+      </test>
+    </collection>
+    <collection total="2" passed="2" failed="0" skipped="0" name="Test collection for Calculator.xUnit.GenericTests" time="0.009">
+      <test name="Calculator.xUnit.GenericTests.GenericTestMethod&lt;Object&gt;(type: typeof(string))" type="Calculator.xUnit.GenericTests" method="GenericTestMethod(type: typeof(string))" time="0.0079932" result="Pass">
+        <traits />
+      </test>
+      <test name="Calculator.xUnit.GenericTests.GenericTestMethod&lt;Object&gt;(type: typeof(int))" type="Calculator.xUnit.GenericTests" method="GenericTestMethod(type: typeof(int))" time="0.0005094" result="Pass">
+        <traits />
+      </test>
+    </collection>
+    <collection total="1" passed="1" failed="0" skipped="0" name="Test collection for Calculator.xUnit.Tests" time="0.010">
+      <test name="Calculator.xUnit.Tests.TestMethod1" type="Calculator.xUnit.Tests" method="TestMethod1" time="0.0099173" result="Pass">
         <traits />
       </test>
     </collection>

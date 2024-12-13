@@ -1,6 +1,6 @@
 ﻿Imports Microsoft.VisualStudio.TestTools.UnitTesting
 
-Namespace Samples
+Namespace Samples.VB
 
     Partial Public Class PartialClass
         <TestMethod>

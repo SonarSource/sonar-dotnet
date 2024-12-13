@@ -64,16 +64,35 @@ public abstract class TestMethodDeclarationsAnalyzerBase<TSyntaxKind>() : Utilit
     private static MethodDeclarationInfo GetDeclarationInfo(IMethodSymbol methodSymbol) =>
         new()
         {
-            TypeName = methodSymbol.ContainingType.ToDisplayString(),
+            TypeName = Name(methodSymbol.ContainingType),
             MethodName = methodSymbol.Name
         };
 
     private static MethodDeclarationInfo GetDeclarationInfo(ITypeSymbol derivedType, IMethodSymbol methodSymbol) =>
         new()
         {
-            TypeName = derivedType.ToDisplayString(),
+            TypeName = Name(derivedType),
             MethodName = methodSymbol.Name
         };
+
+    private static string Name(ITypeSymbol typeSymbol)
+    {
+        const string separator = ".";
+        var nameParts = new Stack<string>();
+        var currentType = typeSymbol;
+        while (currentType is not null)
+        {
+            nameParts.Push(currentType.Name);
+            currentType = currentType.ContainingType;
+        }
+        var currentNamespace = typeSymbol.ContainingNamespace;
+        while (currentNamespace is not null && !currentNamespace.IsGlobalNamespace)
+        {
+            nameParts.Push(currentNamespace.Name);
+            currentNamespace = currentNamespace.ContainingNamespace;
+        }
+        return string.Join(separator, nameParts);
+    }
 
     private static IEnumerable<MethodDeclarationInfo> GetAllTestMethods(ITypeSymbol derivedType, ITypeSymbol typeSymbol)
     {
