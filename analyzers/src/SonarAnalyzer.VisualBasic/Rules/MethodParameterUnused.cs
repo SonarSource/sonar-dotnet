@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             method.Statements.Count == 0;
 
         private static bool IsVirtualOrOverride(MethodBlockBaseSyntax method) =>
-             method.BlockStatement.Modifiers.Any(x => x.IsAnyKind(SyntaxKind.OverridesKeyword, SyntaxKind.OverridableKeyword));
+             method.BlockStatement.Modifiers.Any(x => x.Kind() is SyntaxKind.OverridesKeyword or SyntaxKind.OverridableKeyword);
 
         private static bool IsInterfaceImplementation(MethodBlockSyntax method) =>
             method.SubOrFunctionStatement.ImplementsClause != null;

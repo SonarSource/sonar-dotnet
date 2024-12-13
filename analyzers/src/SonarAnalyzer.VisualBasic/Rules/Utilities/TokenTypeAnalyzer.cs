@@ -41,14 +41,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 SyntaxFacts.IsKeywordKind(token.Kind());
 
             protected override bool IsNumericLiteral(SyntaxToken token) =>
-                token.IsAnyKind(SyntaxKind.DecimalLiteralToken, SyntaxKind.FloatingLiteralToken, SyntaxKind.IntegerLiteralToken);
+                token.Kind() is SyntaxKind.DecimalLiteralToken or SyntaxKind.FloatingLiteralToken or SyntaxKind.IntegerLiteralToken;
 
             protected override bool IsStringLiteral(SyntaxToken token) =>
-                token.IsAnyKind(
-                    SyntaxKind.StringLiteralToken,
-                    SyntaxKind.CharacterLiteralToken,
-                    SyntaxKind.InterpolatedStringTextToken,
-                    SyntaxKind.EndOfInterpolatedStringToken);
+                token.Kind() is
+                    SyntaxKind.StringLiteralToken or
+                    SyntaxKind.CharacterLiteralToken or
+                    SyntaxKind.InterpolatedStringTextToken or
+                    SyntaxKind.EndOfInterpolatedStringToken;
         }
 
         private sealed class TriviaClassifier : TriviaClassifierBase

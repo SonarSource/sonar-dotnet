@@ -18,6 +18,7 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class SyntaxTokenExtensions
 {
+    [Obsolete("Either use '.Kind() is A or B' or the overload with the ISet instead.")]
     public static bool IsAnyKind(this SyntaxToken token, params SyntaxKind[] syntaxKinds) =>
         syntaxKinds.Contains((SyntaxKind)token.RawKind);
 

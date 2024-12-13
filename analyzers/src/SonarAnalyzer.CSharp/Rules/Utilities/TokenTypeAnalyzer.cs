@@ -335,17 +335,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal sealed class TriviaClassifier : TriviaClassifierBase
         {
-            private static readonly SyntaxKind[] RegularCommentToken =
-            {
-                SyntaxKind.SingleLineCommentTrivia,
-                SyntaxKind.MultiLineCommentTrivia,
-            };
+            private static readonly HashSet<SyntaxKind> RegularCommentToken =
+                [
+                    SyntaxKind.SingleLineCommentTrivia,
+                    SyntaxKind.MultiLineCommentTrivia,
+                ];
 
-            private static readonly SyntaxKind[] DocCommentToken =
-            {
-                SyntaxKind.SingleLineDocumentationCommentTrivia,
-                SyntaxKind.MultiLineDocumentationCommentTrivia,
-            };
+            private static readonly HashSet<SyntaxKind> DocCommentToken =
+                [
+                    SyntaxKind.SingleLineDocumentationCommentTrivia,
+                    SyntaxKind.MultiLineDocumentationCommentTrivia,
+                ];
 
             protected override bool IsRegularComment(SyntaxTrivia trivia) =>
                 trivia.IsAnyKind(RegularCommentToken);

@@ -27,7 +27,7 @@ public sealed class InsteadOfAny : InsteadOfAnyBase<SyntaxKind, InvocationExpres
         && parameters[0].Identifier.GetName() is var lambdaVariableName
         && lambda.Body switch
         {
-            BinaryExpressionSyntax binary when binary.OperatorToken.IsAnyKind(SyntaxKind.EqualsToken, SyntaxKind.IsKeyword) =>
+            BinaryExpressionSyntax binary when binary.OperatorToken.Kind() is SyntaxKind.EqualsToken or SyntaxKind.IsKeyword =>
                 HasValidBinaryOperands(lambdaVariableName, binary.Left, binary.Right, model),
             InvocationExpressionSyntax invocation =>
                 HasValidInvocationOperands(invocation, lambdaVariableName, model),

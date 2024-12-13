@@ -73,17 +73,10 @@ public sealed class SeparateDeclarations : StylingAnalyzer
             && !firstToken.GetPreviousToken().IsKind(SyntaxKind.OpenBraceToken)
             && !ContainsEmptyLine(firstToken.LeadingTrivia))
         {
-            var firstComment = firstToken.LeadingTrivia.FirstOrDefault(IsComment);
+            var firstComment = firstToken.LeadingTrivia.FirstOrDefault(x => x.IsComment());
             context.ReportIssue(Rule, firstComment == default ? firstToken.GetLocation() : firstComment.GetLocation());
         }
     }
-
-    private static bool IsComment(SyntaxTrivia trivia) =>
-        trivia.IsAnyKind(
-            SyntaxKind.SingleLineCommentTrivia,
-            SyntaxKind.MultiLineCommentTrivia,
-            SyntaxKind.SingleLineDocumentationCommentTrivia,
-            SyntaxKind.MultiLineDocumentationCommentTrivia);
 
     private static bool ContainsEmptyLine(SyntaxTriviaList trivia)
     {

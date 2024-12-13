@@ -19,6 +19,17 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class CopyPasteTokenAnalyzer : CopyPasteTokenAnalyzerBase<SyntaxKind>
     {
+        private static readonly HashSet<SyntaxKind> StringKinds =
+            [
+                SyntaxKind.StringLiteralToken,
+                SyntaxKind.InterpolatedStringTextToken,
+                SyntaxKindEx.SingleLineRawStringLiteralToken,
+                SyntaxKindEx.MultiLineRawStringLiteralToken,
+                SyntaxKindEx.Utf8StringLiteralToken,
+                SyntaxKindEx.Utf8SingleLineRawStringLiteralToken,
+                SyntaxKindEx.Utf8MultiLineRawStringLiteralToken
+            ];
+
         protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
 
         protected override bool IsUsingDirective(SyntaxNode node) =>
@@ -30,13 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return "$num";
             }
-            else if (token.IsAnyKind(SyntaxKind.StringLiteralToken,
-                                     SyntaxKind.InterpolatedStringTextToken,
-                                     SyntaxKindEx.SingleLineRawStringLiteralToken,
-                                     SyntaxKindEx.MultiLineRawStringLiteralToken,
-                                     SyntaxKindEx.Utf8StringLiteralToken,
-                                     SyntaxKindEx.Utf8SingleLineRawStringLiteralToken,
-                                     SyntaxKindEx.Utf8MultiLineRawStringLiteralToken))
+            else if (token.IsAnyKind(StringKinds))
             {
                 return "$str";
             }

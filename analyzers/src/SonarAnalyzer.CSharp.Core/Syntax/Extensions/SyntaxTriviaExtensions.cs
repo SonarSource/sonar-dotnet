@@ -18,13 +18,17 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class SyntaxTriviaExtensions
 {
-    public static bool IsAnyKind(this SyntaxTrivia syntaxTravia, params SyntaxKind[] syntaxKinds) =>
-        syntaxKinds.Contains((SyntaxKind)syntaxTravia.RawKind);
-
-    public static bool IsComment(this SyntaxTrivia trivia) =>
-        trivia.IsAnyKind(
+    private static readonly HashSet<SyntaxKind> CommentKinds =
+        [
             SyntaxKind.SingleLineCommentTrivia,
             SyntaxKind.MultiLineCommentTrivia,
             SyntaxKind.SingleLineDocumentationCommentTrivia,
-            SyntaxKind.MultiLineDocumentationCommentTrivia);
+            SyntaxKind.MultiLineDocumentationCommentTrivia
+        ];
+
+    public static bool IsAnyKind(this SyntaxTrivia syntaxTravia, ISet<SyntaxKind> syntaxKinds) =>
+        syntaxKinds.Contains((SyntaxKind)syntaxTravia.RawKind);
+
+    public static bool IsComment(this SyntaxTrivia trivia) =>
+        trivia.IsAnyKind(CommentKinds);
 }

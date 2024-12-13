@@ -28,11 +28,6 @@ internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind
         SyntaxKind.ClassBlock,
         SyntaxKind.ModuleBlock
     };
-    public SyntaxKind[] CommentTrivia => new[]
-    {
-        SyntaxKind.CommentTrivia,
-        SyntaxKind.DocumentationCommentTrivia,
-    };
     public SyntaxKind[] ComparisonKinds => new[]
     {
         SyntaxKind.GreaterThanExpression,

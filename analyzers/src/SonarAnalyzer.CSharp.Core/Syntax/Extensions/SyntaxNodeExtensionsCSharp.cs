@@ -483,7 +483,7 @@ public static class SyntaxNodeExtensionsCSharp
     public static bool IsNullLiteral(this SyntaxNode node) =>
         node is not null && node.IsKind(SyntaxKind.NullLiteralExpression);
 
-    [Obsolete("Either use '.Kind() is A or B'  or the overload with the ISet instead.")]
+    [Obsolete("Either use '.Kind() is A or B' or the overload with the ISet instead.")]
     public static bool IsAnyKind(this SyntaxNode node, params SyntaxKind[] syntaxKinds) =>
         node is not null && syntaxKinds.Contains((SyntaxKind)node.RawKind);
 

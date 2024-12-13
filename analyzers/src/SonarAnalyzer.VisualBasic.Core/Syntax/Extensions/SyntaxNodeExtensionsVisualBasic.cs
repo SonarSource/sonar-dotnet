@@ -233,14 +233,15 @@ public static class SyntaxNodeExtensionsVisualBasic
     public static bool IsNothingLiteral(this SyntaxNode syntaxNode) =>
         syntaxNode is not null && syntaxNode.IsKind(SyntaxKind.NothingLiteralExpression);
 
+    [Obsolete("Either use '.Kind() is A or B' or the overload with the ISet instead.")]
     public static bool IsAnyKind(this SyntaxNode syntaxNode, params SyntaxKind[] syntaxKinds) =>
        syntaxNode is not null && syntaxKinds.Contains((SyntaxKind)syntaxNode.RawKind);
 
-    public static SyntaxNode GetFirstNonParenthesizedParent(this SyntaxNode node) =>
-        node.GetSelfOrTopParenthesizedExpression().Parent;
-
     public static bool IsAnyKind(this SyntaxNode syntaxNode, ISet<SyntaxKind> collection) =>
         syntaxNode is not null && collection.Contains((SyntaxKind)syntaxNode.RawKind);
+
+    public static SyntaxNode GetFirstNonParenthesizedParent(this SyntaxNode node) =>
+        node.GetSelfOrTopParenthesizedExpression().Parent;
 
     public static string GetName(this SyntaxNode expression) =>
         expression.GetIdentifier()?.ValueText ?? string.Empty;

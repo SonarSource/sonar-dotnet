@@ -25,6 +25,7 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
     private const string DiagnosticId = "S4663";
 
     protected abstract string GetCommentText(SyntaxTrivia trivia);
+    protected abstract bool IsValidTriviaType(SyntaxTrivia trivia);
 
     protected override string MessageFormat => "Remove this empty comment";
 
@@ -132,9 +133,6 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
             firstEndOfLineFound = false;
         }
     }
-
-    private bool IsValidTriviaType(SyntaxTrivia trivia) =>
-        Language.Syntax.IsAnyKind(trivia, Language.SyntaxKind.CommentTrivia);
 
     private bool IsSimpleComment(SyntaxTrivia trivia) =>
         Language.Syntax.IsKind(trivia, Language.SyntaxKind.SimpleCommentTrivia);

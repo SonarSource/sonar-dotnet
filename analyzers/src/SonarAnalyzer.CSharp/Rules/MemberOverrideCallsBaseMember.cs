@@ -159,7 +159,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool HasDocumentationComment(SyntaxNode node) =>
             node.GetLeadingTrivia()
-                .Any(t => t.IsAnyKind(SyntaxKind.SingleLineDocumentationCommentTrivia, SyntaxKind.MultiLineDocumentationCommentTrivia));
+                .Any(t => t.Kind() is SyntaxKind.SingleLineDocumentationCommentTrivia or SyntaxKind.MultiLineDocumentationCommentTrivia);
 
         private static bool AreArgumentsMatchParameters(IMethodSymbol methodSymbol, SemanticModel semanticModel, InvocationExpressionSyntax expressionToCheck, IMethodSymbol invokedMethod)
         {

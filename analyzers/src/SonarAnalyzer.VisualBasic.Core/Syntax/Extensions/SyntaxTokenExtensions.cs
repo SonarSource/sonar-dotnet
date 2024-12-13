@@ -20,7 +20,4 @@ public static class SyntaxTokenExtensions
 {
     public static bool IsAnyKind(this SyntaxToken token, ISet<SyntaxKind> collection) =>
         collection.Contains((SyntaxKind)token.RawKind);
-
-    public static bool IsAnyKind(this SyntaxToken token, params SyntaxKind[] syntaxKinds) =>
-        syntaxKinds.Contains((SyntaxKind)token.RawKind);
 }

@@ -26,11 +26,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override string GetCpdValue(SyntaxToken token)
         {
-            if (token.IsAnyKind(SyntaxKind.DecimalLiteralToken, SyntaxKind.FloatingLiteralToken, SyntaxKind.IntegerLiteralToken))
+            if (token.Kind() is SyntaxKind.DecimalLiteralToken or SyntaxKind.FloatingLiteralToken or SyntaxKind.IntegerLiteralToken)
             {
                 return "$num";
             }
-            else if (token.IsAnyKind(SyntaxKind.StringLiteralToken, SyntaxKind.InterpolatedStringTextToken))
+            else if (token.Kind() is SyntaxKind.StringLiteralToken or SyntaxKind.InterpolatedStringTextToken)
             {
                 return "$str";
             }

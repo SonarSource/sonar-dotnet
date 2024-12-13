@@ -30,8 +30,8 @@ public static class BlockSyntaxExtensions
                     || TriviaContainsCommentOrConditionalCompilation(block.CloseBraceToken.LeadingTrivia)));
 
         bool TriviaContainsCommentOrConditionalCompilation(SyntaxTriviaList triviaList) =>
-            triviaList.Any(trivia =>
-                (treatCommentsAsContent && trivia.IsAnyKind(SyntaxKind.SingleLineCommentTrivia, SyntaxKind.MultiLineCommentTrivia))
-                 || (treatConditionalCompilationAsContent && trivia.IsKind(SyntaxKind.DisabledTextTrivia)));
+            triviaList.Any(x =>
+                (treatCommentsAsContent && x.Kind() is SyntaxKind.SingleLineCommentTrivia or SyntaxKind.MultiLineCommentTrivia)
+                 || (treatConditionalCompilationAsContent && x.IsKind(SyntaxKind.DisabledTextTrivia)));
     }
 }

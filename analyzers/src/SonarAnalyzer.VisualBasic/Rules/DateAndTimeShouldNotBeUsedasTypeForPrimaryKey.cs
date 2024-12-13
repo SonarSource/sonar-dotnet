@@ -45,8 +45,8 @@ public sealed class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey : DateAndTimeS
 
     private static bool IsCandidateProperty(PropertyStatementSyntax property) =>
         (property.Modifiers.Any(x => x.IsKind(PublicKeyword))
-         || property.Modifiers.All(x => !x.IsAnyKind(PrivateKeyword, ProtectedKeyword, FriendKeyword)))
-        && property.Modifiers.All(x => !x.IsAnyKind(SharedKeyword, ReadOnlyKeyword, WriteOnlyKeyword));
+         || property.Modifiers.All(x => !(x.Kind() is PrivateKeyword or ProtectedKeyword or FriendKeyword)))
+        && property.Modifiers.All(x => !(x.Kind() is SharedKeyword or ReadOnlyKeyword or WriteOnlyKeyword));
 
     private bool IsKeyProperty(PropertyStatementSyntax property, string className)
     {
