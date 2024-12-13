@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using System.Collections.Concurrent;
+using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
 using SonarAnalyzer.ShimLayer.AnalysisContext;
 
@@ -22,21 +22,20 @@ namespace SonarAnalyzer.AnalysisContext;
 
 public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextBase<CompilationStartAnalysisContext>
 {
-    private readonly HashSet<string> rulesDisabledForRazor =
-        [
-            "S103",
-            "S104",
-            "S109",
-            "S113",
-            "S1147",
-            "S1192",
-            "S1451",
-        ];
+    private static readonly SyntaxTreeValueProvider<ShouldAnalyzeTreeCache> ShouldAnalyzeValueProvider = new(x => new ShouldAnalyzeTreeCache(x));
 
     public override Compilation Compilation => Context.Compilation;
     public override AnalyzerOptions Options => Context.Options;
     public override CancellationToken Cancel => Context.CancellationToken;
     internal SonarCompilationStartAnalysisContext(SonarAnalysisContext analysisContext, CompilationStartAnalysisContext context) : base(analysisContext, context) { }
+
+    /// <inheritdoc cref="CompilationStartAnalysisContext.TryGetValue{TValue}(SourceText, SourceTextValueProvider{TValue}, out TValue)"/>
+    public bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
+        Context.TryGetValue(text, valueProvider, out value);
+
+    /// <inheritdoc cref="CompilationStartAnalysisContext.TryGetValue{TValue}(SyntaxTree, SyntaxTreeValueProvider{TValue}, out TValue)"/>
+    public bool TryGetValue<TValue>(SyntaxTree tree, SyntaxTreeValueProvider<TValue> valueProvider, out TValue value) =>
+        Context.TryGetValue(tree, valueProvider, out value);
 
     public void RegisterCodeBlockStartAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action)
         where TSyntaxKind : struct =>
@@ -64,55 +63,18 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
 
     [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/8406", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
     public void RegisterNodeAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds)
-        where TSyntaxKind : struct
-    {
-        // This is the execute method from below, but optimized for performance. Keep in sync.
-        ConcurrentDictionary<SyntaxTree, bool> shouldAnalyzeCache = new();
-        Context.RegisterSyntaxNodeAction(x =>
-        // The hot path starts in the lambda below.
-#pragma warning restore HAA0303, HAA0302, HAA0301, HAA0502
-            {
-                if (!shouldAnalyzeCache.TryGetValue(x.Node.SyntaxTree, out var canProceedWithAnalysis))
-                {
-                    canProceedWithAnalysis = GetOrAddCanProceedWithAnalysis(generatedCodeRecognizer, shouldAnalyzeCache, x.Node.SyntaxTree);
-                }
-
-                if (canProceedWithAnalysis)
-                {
-#pragma warning disable HAA0502
-                    // https://github.com/SonarSource/sonar-dotnet/issues/8425
-                    action(new(AnalysisContext, x));
-#pragma warning restore HAA0502
-                }
-            },
-            syntaxKinds);
-    }
-
-    private bool ShouldAnalyzeRazorFile(SyntaxTree sourceTree) =>
-        !GeneratedCodeRecognizer.IsRazorGeneratedFile(sourceTree)
-            || !AnalysisContext.SupportedDiagnostics.Any(x => (x.CustomTags.Count() == 1 && x.CustomTags.Contains(DiagnosticDescriptorFactory.TestSourceScopeTag))
-            || rulesDisabledForRazor.Contains(x.Id));
-
-    // Performance: Don't inline to avoid capture class and delegate allocations.
-    private bool GetOrAddCanProceedWithAnalysis(GeneratedCodeRecognizer codeRecognizer, ConcurrentDictionary<SyntaxTree, bool> cache, SyntaxTree tree) =>
-        cache.GetOrAdd(tree,
-            x =>
-                this.ShouldAnalyzeTree(x, codeRecognizer)
-                && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(AnalysisContext.SupportedDiagnostics, x)
-                && ShouldAnalyzeRazorFile(x));
+        where TSyntaxKind : struct =>
+        Context.RegisterSyntaxNodeAction(x => Execute(new(AnalysisContext, x), action, x.Node.SyntaxTree, generatedCodeRecognizer), syntaxKinds);
 
     private void Execute<TSonarContext>(TSonarContext context, Action<TSonarContext> action, SyntaxTree sourceTree, GeneratedCodeRecognizer generatedCodeRecognizer = null)
         where TSonarContext : IAnalysisContext
     {
-        // For each action registered on context we need to do some pre-processing before actually calling the rule.
-        // SonarAnalysisContext.Execute ensures that the rule does apply to the current scope (main vs test source), so we do not need to check this here.
-        // We call an external delegate (set by legacy SonarLint for VS) to ensure the rule should be run (usually
-        // the decision is made on based on whether the project contains the analyzer as NuGet).
-        // IMPORTANT: Keep in sync with RegisterNodeAction<TSyntaxKind>()
         Debug.Assert(context.HasMatchingScope(AnalysisContext.SupportedDiagnostics), "SonarAnalysisContext.Execute does this check. It should never be needed here.");
-        if (context.ShouldAnalyzeTree(sourceTree, generatedCodeRecognizer)
-            && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(AnalysisContext.SupportedDiagnostics, sourceTree)
-            && ShouldAnalyzeRazorFile(sourceTree))
+        if (!TryGetValue(sourceTree, ShouldAnalyzeValueProvider, out var shouldAnalyzeTree))
+        {
+            shouldAnalyzeTree = new ShouldAnalyzeTreeCache(sourceTree);
+        }
+        if (shouldAnalyzeTree.ShouldAnalyze(context, generatedCodeRecognizer))
         {
             action(context);
         }

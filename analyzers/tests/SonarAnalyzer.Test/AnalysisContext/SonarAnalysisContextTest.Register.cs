@@ -348,7 +348,9 @@ public partial class SonarAnalysisContextTest
     public void SonarCompilationStartAnalysisContext_RegisterCodeBlockStartAction_RegistrationIsCalled()
     {
         var context = new DummyAnalysisContext(TestContext);
-        var startContext = new DummyCompilationStartAnalysisContext(context);
+        var startContext = Substitute.For<CompilationStartAnalysisContext>(context.Model.Compilation, context.Options, null);
+        startContext.RegisterCodeBlockStartAction(Arg.Do<Action<CodeBlockStartAnalysisContext<SyntaxKind>>>(x =>
+            x(context.CreateCodeBlockStartAnalysisContext<SyntaxKind>())));
         var sut = new SonarCompilationStartAnalysisContext(new(context, DummyMainDescriptor), startContext);
         var diagnostic = Diagnostic.Create(DiagnosticDescriptorFactory.CreateUtility("TEST", "Test report"), context.Tree.GetRoot().GetLocation());
         var registrationCalled = false;
