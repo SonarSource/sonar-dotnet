@@ -181,7 +181,33 @@ public class NUnitTestResultsParserTest {
         "NUnit Assembly found, assembly: C:\\dev\\Playground\\NUnit\\bin\\Debug\\net9.0\\NUnitTestProj.dll, Extracted dllName: NUnitTestProj"
       );
   }
-  
+
+  @Test
+  public void valid_inheritance() {
+    Map<String, UnitTestResults> results = new HashMap<>();
+
+    Map<String, String> fileMap = new HashMap<>() {
+      {
+        put("MudBlazor.UnitTests.MudBlazor.UnitTests.Utilities.AsyncKeyedLock.AsyncKeyedLockNonPooledTests.Async.ThreeDifferentLocksShouldWork", "AsyncKeyedLockNonPooledTests.cs");
+        put("MudBlazor.UnitTests.MudBlazor.UnitTests.Utilities.AsyncKeyedLock.AsyncKeyedLockNonPooledTests.Sync.ThreeDifferentLocksShouldWork", "AsyncKeyedLockNonPooledTests.cs");
+      }
+    };
+    var sut = new NUnitTestResultsParser();
+    sut.parse(new File("src/test/resources/NUnit/valid_inheritance.xml"), results, fileMap);
+
+    assertThat(results).hasSize(1);
+    assertThat(results.get("AsyncKeyedLockNonPooledTests.cs").tests()).isEqualTo(2);
+
+    List<String> debugLogs = logTester.logs(Level.DEBUG);
+    assertThat(debugLogs)
+      .hasSize(3)
+      .contains(
+        "NUnit Assembly found, assembly: C:\\dev\\trash\\MudBlazor\\src\\MudBlazor.UnitTests\\bin\\Debug\\net8.0\\MudBlazor.UnitTests.dll, Extracted dllName: MudBlazor.UnitTests",
+        "Added Test Method: MudBlazor.UnitTests.MudBlazor.UnitTests.Utilities.AsyncKeyedLock.AsyncKeyedLockNonPooledTests.Async.ThreeDifferentLocksShouldWork to File: AsyncKeyedLockNonPooledTests.cs",
+        "Added Test Method: MudBlazor.UnitTests.MudBlazor.UnitTests.Utilities.AsyncKeyedLock.AsyncKeyedLockNonPooledTests.Sync.ThreeDifferentLocksShouldWork to File: AsyncKeyedLockNonPooledTests.cs"
+      );
+  }
+
   @Test
   public void valid_comma_in_double()
   {

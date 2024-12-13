@@ -87,6 +87,7 @@ public abstract class XmlTestReportParser {
       var regexPattern = "`\\d+";
       methodName = methodName.replaceAll(regexPattern, "");
     }
+    methodName = methodName.replace('+', '.');
     return String.join(".", dllName, methodName);
   }
 }
