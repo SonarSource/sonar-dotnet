@@ -25,7 +25,7 @@ public class UseAspNetModelBindingTest
 {
     private readonly VerifierBuilder builderAspNetCore = new VerifierBuilder<UseAspNetModelBinding>()
         .WithBasePath("AspNet")
-        .WithOptions(ParseOptionsHelper.CSharpLatest)
+        .WithOptions(LanguageOptions.CSharpLatest)
         .AddReferences([
             AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
             AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,

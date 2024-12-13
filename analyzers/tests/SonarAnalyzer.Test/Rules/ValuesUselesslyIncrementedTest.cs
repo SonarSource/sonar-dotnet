@@ -35,11 +35,11 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void ValuesUselesslyIncremented_CSharp10() =>
-            builder.AddPaths("ValuesUselesslyIncremented.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("ValuesUselesslyIncremented.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
 
         [TestMethod]
         public void ValuesUselesslyIncremented_CSharp11() =>
-            builder.AddPaths("ValuesUselesslyIncremented.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).WithTopLevelStatements().Verify();
+            builder.AddPaths("ValuesUselesslyIncremented.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).WithTopLevelStatements().Verify();
 
 #endif
 

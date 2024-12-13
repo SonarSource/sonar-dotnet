@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void TooManyParameters_CS_CustomValues() =>
             builderCSMax3.AddPaths("TooManyParameters_CustomValues.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
 #if NET
@@ -37,19 +37,19 @@ namespace SonarAnalyzer.Test.Rules
         public void TooManyParameters_CS_CustomValues_CSharp9() =>
              builderCSMax3.AddPaths("TooManyParameters_CustomValues.CSharp9.cs")
                 .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
 
         [TestMethod]
         public void TooManyParameters_CS_CustomValues_CSharp11() =>
             builderCSMax3.AddPaths("TooManyParameters_CustomValues.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
         [TestMethod]
         public void TooManyParameters_CS_CustomValues_CSharp12() =>
             builderCSMax3.AddPaths("TooManyParameters_CustomValues.CSharp12.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .WithOptions(LanguageOptions.FromCSharp12)
                 .Verify();
 
 #endif
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void TooManyParameters_CS_DefaultValues() =>
             new VerifierBuilder<CS.TooManyParameters>().AddPaths("TooManyParameters_DefaultValues.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
         [TestMethod]

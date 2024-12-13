@@ -34,14 +34,14 @@ public class DoNotHideBaseClassMethodsTest
     [TestMethod]
     public void DoNotHideBaseClassMethods_CSharp9() =>
         builder.AddPaths("DoNotHideBaseClassMethods.CSharp9.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithOptions(LanguageOptions.FromCSharp9)
             .WithConcurrentAnalysis(false)
             .Verify();
 
     [TestMethod]
     public void DoNotHideBaseClassMethods_CSharp11() =>
         builder.AddPaths("DoNotHideBaseClassMethods.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .WithOptions(LanguageOptions.FromCSharp11)
             .VerifyNoIssues();
 
 #endif

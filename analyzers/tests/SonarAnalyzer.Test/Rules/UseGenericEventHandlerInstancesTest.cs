@@ -33,13 +33,13 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void UseGenericEventHandlerInstances_CSharp9() =>
             builder.AddPaths("UseGenericEventHandlerInstances.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
 
         [TestMethod]
         public void UseGenericEventHandlerInstances_CSharp11() =>
             builder.AddPaths("UseGenericEventHandlerInstances.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
 #endif

@@ -33,7 +33,7 @@ public class CreatingHashAlgorithmsTest
     [TestMethod]
     public void CreatingHashAlgorithms_CSharp8() =>
         builderCS.AddPaths("CreatingHashAlgorithms.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 
     [TestMethod]
@@ -45,7 +45,7 @@ public class CreatingHashAlgorithmsTest
     [TestMethod]
     public void CreatingHashAlgorithms_CS_NetFx() =>
         builderCS.AddPaths("CreatingHashAlgorithms.NetFramework.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 
     [TestMethod]
@@ -58,7 +58,7 @@ public class CreatingHashAlgorithmsTest
 
     [TestMethod]
     public void CreatingHashAlgorithms_CS_Latest() =>
-        builderCS.AddPaths("CreatingHashAlgorithms.Latest.cs").WithOptions(ParseOptionsHelper.CSharpLatest).Verify();
+        builderCS.AddPaths("CreatingHashAlgorithms.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
 #endif
 

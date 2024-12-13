@@ -42,7 +42,7 @@ public class UnnecessaryUsingsTest
 
     [TestMethod]
     public void UnnecessaryUsings_CSharp10_GlobalUsings() =>
-        builder.AddPaths("UnnecessaryUsings.CSharp10.Global.cs", "UnnecessaryUsings.CSharp10.Consumer.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+        builder.AddPaths("UnnecessaryUsings.CSharp10.Global.cs", "UnnecessaryUsings.CSharp10.Consumer.cs").WithTopLevelStatements().WithOptions(LanguageOptions.FromCSharp10).Verify();
 
     [DataTestMethod]
     [DataRow("_ViewImports.cshtml")]
@@ -98,12 +98,12 @@ public class UnnecessaryUsingsTest
 
     [TestMethod]
     public void UnnecessaryUsings_CSharp10_FileScopedNamespace() =>
-        builder.AddPaths("UnnecessaryUsings.CSharp10.FileScopedNamespace.cs").WithOptions(ParseOptionsHelper.FromCSharp10).WithConcurrentAnalysis(false).Verify();
+        builder.AddPaths("UnnecessaryUsings.CSharp10.FileScopedNamespace.cs").WithOptions(LanguageOptions.FromCSharp10).WithConcurrentAnalysis(false).Verify();
 
     [TestMethod]
     public void UnnecessaryUsings_CodeFix_CSharp10_FileScopedNamespace() =>
         builder.AddPaths("UnnecessaryUsings.CSharp10.FileScopedNamespace.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithOptions(LanguageOptions.FromCSharp10)
             .WithCodeFix<UnnecessaryUsingsCodeFix>()
             .WithCodeFixedPaths("UnnecessaryUsings.CSharp10.FileScopedNamespace.Fixed.cs")
             .VerifyCodeFix();
@@ -118,7 +118,7 @@ public class UnnecessaryUsingsTest
 
     [TestMethod]
     public void UnnecessaryUsings_CSharp12() =>
-        builder.AddPaths("UnnecessaryUsings.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).VerifyNoIssues();
+        builder.AddPaths("UnnecessaryUsings.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).VerifyNoIssues();
 
 #elif NETFRAMEWORK
 

@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void LdapConnectionsShouldBeSecure_CSharp8() =>
             builder.AddPaths("LdapConnectionShouldBeSecure.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .AddReferences(MetadataReferenceFacade.SystemDirectoryServices)
                 .AddReferences(MetadataReferenceFacade.NetStandard21)
                 .Verify();
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Test.Rules
         public void LdapConnectionsShouldBeSecure_CS_Latest() =>
             builder.AddPaths("LdapConnectionShouldBeSecure.Latest.cs")
                 .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .AddReferences(MetadataReferenceFacade.SystemDirectoryServices)
                 .Verify();
 

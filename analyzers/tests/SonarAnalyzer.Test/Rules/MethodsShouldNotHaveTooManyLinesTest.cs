@@ -33,11 +33,11 @@ public class MethodsShouldNotHaveTooManyLinesTest
 #if NET
     [TestMethod]
     public void MethodsShouldNotHaveTooManyLines_LocalFunctions() =>
-        CreateCSBuilder(5).AddPaths("MethodsShouldNotHaveTooManyLines.LocalFunctions.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+        CreateCSBuilder(5).AddPaths("MethodsShouldNotHaveTooManyLines.LocalFunctions.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
     [TestMethod]
     public void MethodsShouldNotHaveTooManyLines_LocalFunctions_CSharp9() =>
-        CreateCSBuilder(5).AddPaths("MethodsShouldNotHaveTooManyLines.LocalFunctions.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+        CreateCSBuilder(5).AddPaths("MethodsShouldNotHaveTooManyLines.LocalFunctions.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
 
     [TestMethod]
     public void MethodsShouldNotHaveTooManyLines_CustomValues_CSharp9() =>
@@ -45,7 +45,7 @@ public class MethodsShouldNotHaveTooManyLinesTest
 
     [TestMethod]
     public void MethodsShouldNotHaveTooManyLines_CustomValues_CSharp10() =>
-        CreateCSBuilder(2).AddPaths("MethodsShouldNotHaveTooManyLines_CustomValues.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+        CreateCSBuilder(2).AddPaths("MethodsShouldNotHaveTooManyLines_CustomValues.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
 
     [TestMethod]
     public void MethodsShouldNotHaveTooManyLines_CSharp9_NoUsing() =>
@@ -59,7 +59,7 @@ i++;
 i++;
 i++;
 }")
-        .WithOptions(ParseOptionsHelper.FromCSharp9)
+        .WithOptions(LanguageOptions.FromCSharp9)
         .WithOutputKind(OutputKind.ConsoleApplication)
         .Verify();
 
@@ -72,7 +72,7 @@ i++;
                 i++;
                 i++;
                 """)
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithOptions(LanguageOptions.FromCSharp9)
             .WithOutputKind(OutputKind.ConsoleApplication)
             .VerifyNoIssues();
 #endif
@@ -104,7 +104,7 @@ i++;
     public void MethodsShouldNotHaveTooManyLines_InvalidMaxThreshold_CS(int max)
     {
         var compilation = SolutionBuilder.CreateSolutionFromPath(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.cs")
-            .Compile(ParseOptionsHelper.CSharpLatest.ToArray()).Single();
+            .Compile(LanguageOptions.CSharpLatest.ToArray()).Single();
         var errors = DiagnosticVerifier.AnalyzerExceptions(compilation, new CS.MethodsShouldNotHaveTooManyLines { Max = max });
         errors.Should().OnlyContain(x => x.GetMessage(null).Contains("Invalid rule parameter: maximum number of lines = ")).And.HaveCount(12);
     }
@@ -132,7 +132,7 @@ i++;
     public void MethodsShouldNotHaveTooManyLines_InvalidMaxThreshold_VB(int max)
     {
         var compilation = SolutionBuilder.CreateSolutionFromPath(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.vb")
-            .Compile(ParseOptionsHelper.VisualBasicLatest.ToArray()).Single();
+            .Compile(LanguageOptions.VisualBasicLatest.ToArray()).Single();
         var errors = DiagnosticVerifier.AnalyzerExceptions(compilation, new VB.MethodsShouldNotHaveTooManyLines { Max = max });
         errors.Should().OnlyContain(x => x.GetMessage(null).Contains("Invalid rule parameter: maximum number of lines = ")).And.HaveCount(7);
     }

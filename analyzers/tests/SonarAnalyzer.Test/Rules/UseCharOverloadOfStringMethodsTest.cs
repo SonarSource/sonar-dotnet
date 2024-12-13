@@ -44,7 +44,7 @@ public class UseCharOverloadOfStringMethodsTest
     [TestMethod]
     public void UseCharOverloadOfStringMethods_CS_Latest() =>
         builderCS.AddPaths("UseCharOverloadOfStringMethods.Latest.cs")
-        .WithOptions(ParseOptionsHelper.CSharpLatest)
+        .WithOptions(LanguageOptions.CSharpLatest)
         .Verify();
 
     [TestMethod]

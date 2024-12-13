@@ -32,13 +32,13 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void EventHandlerDelegateShouldHaveProperArguments_CSharp9() =>
             builder.AddPaths("EventHandlerDelegateShouldHaveProperArguments.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
 
         [TestMethod]
         public void EventHandlerDelegateShouldHaveProperArguments_CSharp11() =>
             builder.AddPaths("EventHandlerDelegateShouldHaveProperArguments.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
 #endif

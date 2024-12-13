@@ -31,11 +31,11 @@ public class MethodShouldNotOnlyReturnConstantTest
 
     [TestMethod]
     public void MethodShouldNotOnlyReturnConstant_CSharp8() =>
-        builder.AddPaths("MethodShouldNotOnlyReturnConstant.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).VerifyNoIssues();
+        builder.AddPaths("MethodShouldNotOnlyReturnConstant.CSharp8.cs").WithOptions(LanguageOptions.FromCSharp8).VerifyNoIssues();
 
     [TestMethod]
     public void MethodShouldNotOnlyReturnConstant_CSharp11() =>
-        builder.AddPaths("MethodShouldNotOnlyReturnConstant.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+        builder.AddPaths("MethodShouldNotOnlyReturnConstant.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
 
 #endif
 

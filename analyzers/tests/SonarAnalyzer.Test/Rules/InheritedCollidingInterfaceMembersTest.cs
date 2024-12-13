@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void InheritedCollidingInterfaceMembers_CSharp8() =>
             builder.AddPaths("InheritedCollidingInterfaceMembers.CSharp8.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .AddReferences(MetadataReferenceFacade.NetStandard21)
                 .Verify();
 
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void InheritedCollidingInterfaceMembers_CSharp11() =>
             builder.AddPaths("InheritedCollidingInterfaceMembers.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
 #endif

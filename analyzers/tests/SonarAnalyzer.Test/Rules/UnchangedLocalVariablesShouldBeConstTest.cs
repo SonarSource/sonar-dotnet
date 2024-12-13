@@ -42,21 +42,21 @@ public class UnchangedLocalVariablesShouldBeConstTest
                                 }
                             }
                             """)
-        .WithOptions(ParseOptionsHelper.OnlyCSharp7).Verify();
+        .WithOptions(LanguageOptions.OnlyCSharp7).Verify();
 
 #if NET
 
     [TestMethod]
     public void UnchangedLocalVariablesShouldBeConst_TopLevelStatements() =>
         verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.TopLevelStatements.cs")
-        .WithOptions(ParseOptionsHelper.CSharpLatest)
+        .WithOptions(LanguageOptions.CSharpLatest)
         .WithTopLevelStatements()
         .Verify();
 
     [TestMethod]
     public void UnchangedLocalVariablesShouldBeConst_Latest() =>
         verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.Latest.cs")
-        .WithOptions(ParseOptionsHelper.CSharpLatest)
+        .WithOptions(LanguageOptions.CSharpLatest)
         .Verify();
 
 #endif

@@ -28,5 +28,5 @@ public class AvoidDateTimeNowForBenchmarkingTest
 
     [TestMethod]
     public void AvoidDateTimeNowForBenchmarking_VB() =>
-        new VerifierBuilder<VB.AvoidDateTimeNowForBenchmarking>().AddPaths("AvoidDateTimeNowForBenchmarking.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
+        new VerifierBuilder<VB.AvoidDateTimeNowForBenchmarking>().AddPaths("AvoidDateTimeNowForBenchmarking.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
 }

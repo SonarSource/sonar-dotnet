@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void ParameterNamesShouldNotDuplicateMethodNames_CSharp8() =>
             new VerifierBuilder<ParameterNamesShouldNotDuplicateMethodNames>().AddPaths("ParameterNamesShouldNotDuplicateMethodNames.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
     }
 }

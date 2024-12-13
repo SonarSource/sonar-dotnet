@@ -33,13 +33,13 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void DoNotCallGCSuppressFinalize_NetCore() =>
             builder.AddPaths("DoNotCallGCSuppressFinalize.NetCore.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
         [TestMethod]
         public void DoNotCallGCSuppressFinalize_Net5() =>
             builder.AddPaths("DoNotCallGCSuppressFinalize.Net5.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
 
 #endif

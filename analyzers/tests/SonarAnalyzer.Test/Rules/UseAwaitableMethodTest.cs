@@ -36,7 +36,7 @@ public class UseAwaitableMethodTest
     [TestMethod]
     public void UseAwaitableMethod_CS_Test() =>
         builder
-        .WithOptions(ParseOptionsHelper.FromCSharp11)
+        .WithOptions(LanguageOptions.FromCSharp11)
         .AddReferences(MetadataReferenceFacade.SystemNetPrimitives)
         .AddReferences(MetadataReferenceFacade.SystemNetSockets)
         .AddSnippet("""
@@ -130,14 +130,14 @@ public class UseAwaitableMethodTest
     [TestMethod]
     public void UseAwaitableMethod_CSharp8() =>
         builder
-        .WithOptions(ParseOptionsHelper.FromCSharp8)
+        .WithOptions(LanguageOptions.FromCSharp8)
         .AddPaths("UseAwaitableMethod_CSharp8.cs")
         .Verify();
 
     [TestMethod]
     public void UseAwaitableMethod_EF() =>
         builder
-        .WithOptions(ParseOptionsHelper.FromCSharp11)
+        .WithOptions(LanguageOptions.FromCSharp11)
         .AddReferences([CoreMetadataReference.SystemComponentModelTypeConverter, CoreMetadataReference.SystemDataCommon])
         .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore(EntityFrameworkVersion))
         .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(EntityFrameworkVersion))
@@ -148,7 +148,7 @@ public class UseAwaitableMethodTest
     [TestMethod]
     public void UseAwaitableMethod_MongoDb() =>
         builder
-        .WithOptions(ParseOptionsHelper.FromCSharp11)
+        .WithOptions(LanguageOptions.FromCSharp11)
         .AddReferences(NuGetMetadataReference.MongoDBDriver())
         .AddPaths("UseAwaitableMethod_MongoDBDriver.cs")
         .VerifyNoIssues();

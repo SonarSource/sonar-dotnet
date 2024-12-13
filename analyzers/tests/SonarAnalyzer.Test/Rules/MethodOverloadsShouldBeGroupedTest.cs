@@ -32,19 +32,19 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_CS_CSharp9() =>
-            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
 
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_CS_CSharp10() =>
-            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
 
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_CS_CSharp11() =>
-            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
 
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_CS_CSharp12() =>
-            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).Verify();
 
 #endif
 

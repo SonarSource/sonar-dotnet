@@ -125,7 +125,7 @@ public class RouteTemplateShouldNotStartWithSlashTest
     {
         var builder = builderCS
             .AddReferences(AspNetCoreReferences)
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .WithOptions(LanguageOptions.FromCSharp11)
             .AddSnippet($$"""
                 using Microsoft.AspNetCore.Mvc;
                 using Microsoft.AspNetCore.Mvc.Routing;
@@ -161,7 +161,7 @@ public class RouteTemplateShouldNotStartWithSlashTest
     public void RouteTemplateShouldNotStartWithSlash_CSharp12() =>
         builderCS
             .AddPaths("RouteTemplateShouldNotStartWithSlash.AspNetCore.CSharp12.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .WithOptions(LanguageOptions.FromCSharp12)
             .AddReferences(AspNetCoreReferences)
             .Verify();
 
@@ -230,7 +230,7 @@ public class RouteTemplateShouldNotStartWithSlashTest
     public void RouteTemplateShouldNotStartWithSlash_WithAttributeSyntaxVariations(string attribute, bool compliant)
     {
         var builder = builderCS.AddReferences(AspNet4xReferences("5.2.7"))
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .WithOptions(LanguageOptions.FromCSharp11)
             .AddSnippet($$"""
                 using System.Web.Mvc;
 
@@ -266,7 +266,7 @@ public class RouteTemplateShouldNotStartWithSlashTest
     {
         var builder = builderCS
             .AddReferences(AspNet4xReferences("5.2.7"))
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .WithOptions(LanguageOptions.FromCSharp11)
             .AddSnippet($$"""
                 using System.Web.Mvc;
 

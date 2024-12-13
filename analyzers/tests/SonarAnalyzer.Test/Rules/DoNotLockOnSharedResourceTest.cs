@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void DoNotLockOnSharedResource_CS_Latest() =>
             builderCS.AddPaths("DoNotLockOnSharedResource.Latest.cs")
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 
 #endif

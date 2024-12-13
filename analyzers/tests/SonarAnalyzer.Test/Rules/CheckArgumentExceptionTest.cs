@@ -35,15 +35,15 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void CheckArgumentException_CSharp9() =>
-            builder.AddPaths("CheckArgumentException.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builder.AddPaths("CheckArgumentException.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
 
         [TestMethod]
         public void CheckArgumentException_CSharp10() =>
-            builder.AddPaths("CheckArgumentException.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("CheckArgumentException.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
 
         [TestMethod]
         public void CheckArgumentException_CSharp12() =>
-            builder.AddPaths("CheckArgumentException.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+            builder.AddPaths("CheckArgumentException.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).Verify();
 
 #endif
 

@@ -29,7 +29,7 @@ public class DurableEntityInterfaceRestrictionsTest
     [TestMethod]
     public void DurableEntityInterfaceRestrictions_CSharp11() =>
         builder.AddPaths("DurableEntityInterfaceRestrictions.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .WithOptions(LanguageOptions.FromCSharp11)
             .Verify();
 
     [TestMethod]

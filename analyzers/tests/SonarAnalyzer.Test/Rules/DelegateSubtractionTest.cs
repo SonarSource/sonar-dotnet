@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void DelegateSubtraction_CS_Latest() =>
             builder.AddPaths("DelegateSubtraction.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
         [TestMethod]

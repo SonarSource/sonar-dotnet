@@ -47,21 +47,21 @@ public class RedundantConditionalAroundAssignmentTest
     public void RedundantConditionalAroundAssignment_CSharp10() =>
          builder.AddPaths("RedundantConditionalAroundAssignment.CSharp10.cs")
             .WithTopLevelStatements()
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithOptions(LanguageOptions.FromCSharp10)
             .Verify();
 
     [TestMethod]
     public void RedundantConditionalAroundAssignment_CSharp10_CodeFix() =>
         codeFixBuilder.AddPaths("RedundantConditionalAroundAssignment.CSharp10.cs")
             .WithCodeFixedPaths("RedundantConditionalAroundAssignment.CSharp10.Fixed.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithOptions(LanguageOptions.FromCSharp10)
             .WithTopLevelStatements()
             .VerifyCodeFix();
 
     [TestMethod]
     public void RedundantConditionalAroundAssignment_Latest() =>
          builder.AddPaths("RedundantConditionalAroundAssignment.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .VerifyNoIssues();
 
 #endif

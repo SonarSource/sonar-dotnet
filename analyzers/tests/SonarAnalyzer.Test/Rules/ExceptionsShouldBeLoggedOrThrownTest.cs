@@ -51,7 +51,7 @@ public class ExceptionsShouldBeLoggedOrThrownTest
                 }
                 """)
             .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .VerifyNoIssues();
 
     [TestMethod]

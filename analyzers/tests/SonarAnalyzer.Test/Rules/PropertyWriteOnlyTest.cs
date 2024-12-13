@@ -34,7 +34,7 @@ public class PropertyWriteOnlyTest
         builderCS
             .AddPaths("PropertyWriteOnly.Latest.cs")
             .AddPaths("PropertyWriteOnly.Latest.Partial.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 #endif
 

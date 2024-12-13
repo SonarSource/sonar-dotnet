@@ -31,14 +31,14 @@ public class UnusedStringBuilderTest
 
     [TestMethod]
     public void UnusedStringBuilder_VB() =>
-        builderVB.AddPaths("UnusedStringBuilder.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
+        builderVB.AddPaths("UnusedStringBuilder.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
 
 #if NET
 
     [TestMethod]
     public void UnusedStringBuilder_CSharp9() =>
         builderCS.AddPaths("UnusedStringBuilder.CSharp9.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithOptions(LanguageOptions.FromCSharp9)
             .Verify();
 
     [DataTestMethod]

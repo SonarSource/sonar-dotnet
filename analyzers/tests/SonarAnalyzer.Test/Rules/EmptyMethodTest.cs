@@ -28,7 +28,7 @@ public class EmptyMethodTest
     [TestMethod]
     public void EmptyMethod() =>
         builderCS.AddPaths("EmptyMethod.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .AddReferences(MetadataReferenceFacade.NetStandard21)
             .Verify();
 
@@ -38,7 +38,7 @@ public class EmptyMethodTest
     public void EmptyMethod_CSharp9() =>
         builderCS.AddPaths("EmptyMethod.CSharp9.cs")
             .WithTopLevelStatements()
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithOptions(LanguageOptions.FromCSharp9)
             .Verify();
 
     [TestMethod]
@@ -62,7 +62,7 @@ public class EmptyMethodTest
     [TestMethod]
     public void EmptyMethod_CS_Latest() =>
         builderCS.AddPaths("EmptyMethod.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif

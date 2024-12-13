@@ -25,11 +25,11 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void UnusedReturnValue() =>
-            builder.AddPaths("UnusedReturnValue.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builder.AddPaths("UnusedReturnValue.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
         [TestMethod]
         public void UnusedReturnValueWithPartialClasses() =>
-            builder.AddPaths("UnusedReturnValue.part1.cs", "UnusedReturnValue.part2.cs", "UnusedReturnValue.External.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builder.AddPaths("UnusedReturnValue.part1.cs", "UnusedReturnValue.part2.cs", "UnusedReturnValue.External.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
 #if NET
 
@@ -39,11 +39,11 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void UnusedReturnValue_CSharp10() =>
-            builder.AddPaths("UnusedReturnValue.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("UnusedReturnValue.CSharp10.cs").WithTopLevelStatements().WithOptions(LanguageOptions.FromCSharp10).Verify();
 
         [TestMethod]
         public void UnusedReturnValue_CSharp11() =>
-            builder.AddPaths("UnusedReturnValue.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+            builder.AddPaths("UnusedReturnValue.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
 
 #endif
 

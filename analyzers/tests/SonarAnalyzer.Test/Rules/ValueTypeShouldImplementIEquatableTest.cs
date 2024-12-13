@@ -27,13 +27,13 @@ public class ValueTypeShouldImplementIEquatableTest
 
     [TestMethod]
     public void ValueTypeShouldImplementIEquatable_CS() =>
-        builderCS.AddPaths("ValueTypeShouldImplementIEquatable.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+        builderCS.AddPaths("ValueTypeShouldImplementIEquatable.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
 #if NET
 
     [TestMethod]
     public void ValueTypeShouldImplementIEquatable_CSharp10() =>
-        builderCS.AddPaths("ValueTypeShouldImplementIEquatable.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).VerifyNoIssues();
+        builderCS.AddPaths("ValueTypeShouldImplementIEquatable.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).VerifyNoIssues();
 
 #endif
 

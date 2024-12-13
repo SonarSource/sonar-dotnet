@@ -33,7 +33,7 @@ public class LockedFieldShouldBeReadonlyTest
     public void LockedFieldShouldBeReadonly_Latest() =>
         builder
             .AddPaths("LockedFieldShouldBeReadonly.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif

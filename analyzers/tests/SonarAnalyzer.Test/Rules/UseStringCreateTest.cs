@@ -28,7 +28,7 @@ public class UseStringCreateTest
     [TestMethod]
     public void UseStringCreate_CSharp10() =>
         builderCS.AddPaths("UseStringCreate.CSharp10.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithOptions(LanguageOptions.FromCSharp10)
             .Verify();
 
 #else

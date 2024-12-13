@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void StaticSealedClassProtectedMembers_Latest() =>
             builder.AddPaths("StaticSealedClassProtectedMembers.Latest.cs", "StaticSealedClassProtectedMembers.Latest.Partial.cs")
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 
 #endif

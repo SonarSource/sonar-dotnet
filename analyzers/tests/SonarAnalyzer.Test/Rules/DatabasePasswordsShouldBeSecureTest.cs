@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow("5.0.2", "5.21.1")]
         public void DatabasePasswordsShouldBeSecure_CS(string entityFrameworkCoreVersion, string oracleVersion) =>
             builder.AddPaths("DatabasePasswordsShouldBeSecure.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .AddReferences(GetReferences(entityFrameworkCoreVersion, oracleVersion))
                 .Verify();
 
@@ -42,21 +42,21 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow("5.0.2", "5.21.1")]
         public void DatabasePasswordsShouldBeSecure_CS_Latest(string entityFrameworkCoreVersion, string oracleVersion) =>
             builder.AddPaths("DatabasePasswordsShouldBeSecure.Latest.cs")
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .AddReferences(GetReferences(entityFrameworkCoreVersion, oracleVersion))
                 .Verify();
 
         [TestMethod]
         public void DatabasePasswordsShouldBeSecure_Net5_CS() =>
             builder.AddPaths("DatabasePasswordsShouldBeSecure.Net5.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .AddReferences(GetReferences("5.0.2", "5.21.1"))
                 .Verify();
 
         [TestMethod]
         public void DatabasePasswordsShouldBeSecure_NetCore3_CS() =>
             builder.AddPaths("DatabasePasswordsShouldBeSecure.NetCore31.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .AddReferences(GetReferences("3.1.11", "3.19.80"))
                 .Verify();
 

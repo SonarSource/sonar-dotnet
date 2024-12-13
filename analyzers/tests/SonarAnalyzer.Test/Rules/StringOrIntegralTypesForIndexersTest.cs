@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Test.Rules
         public void StringOrIntegralTypesForIndexers_CSharp8() =>
             builder.AddPaths("StringOrIntegralTypesForIndexers.cs")
                 .AddReferences(MetadataReferenceFacade.NetStandard21)
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
 #if NET
@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void StringOrIntegralTypesForIndexers_Latest() =>
             builder.AddPaths("StringOrIntegralTypesForIndexers.Latest.cs", "StringOrIntegralTypesForIndexers.Latest.Partial.cs")
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 
 #endif

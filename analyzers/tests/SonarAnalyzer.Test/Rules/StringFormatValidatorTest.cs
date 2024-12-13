@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Test.Rules
         public void StringFormatValidator_RuntimeExceptionFree_CSharp11(ProjectType projectType) =>
             builder.AddPaths("StringFormatValidator.RuntimeExceptionFree.CSharp11.cs")
                 .AddReferences(TestHelper.ProjectTypeReference(projectType))
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
         [DataTestMethod]
@@ -60,14 +60,14 @@ namespace SonarAnalyzer.Test.Rules
         public void StringFormatValidator_TypoFree_CSharp11(ProjectType projectType) =>
             builder.AddPaths("StringFormatValidator.TypoFree.CSharp11.cs")
                 .AddReferences(TestHelper.ProjectTypeReference(projectType))
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
         [TestMethod]
         public void StringFormatValidator_Latest() =>
             builder.AddPaths("StringFormatValidator.Latest.cs")
                 .AddReferences(TestHelper.ProjectTypeReference(ProjectType.Product))
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 
 #endif

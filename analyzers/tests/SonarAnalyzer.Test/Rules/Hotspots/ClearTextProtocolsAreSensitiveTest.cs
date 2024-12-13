@@ -34,7 +34,7 @@ public class ClearTextProtocolsAreSensitiveTest
     public void ClearTextProtocolsAreSensitive() =>
         builder.AddPaths("ClearTextProtocolsAreSensitive.cs")
             .AddReferences(AdditionalReferences)
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .WithConcurrentAnalysis(false)
             .Verify();
 
@@ -55,7 +55,7 @@ public class ClearTextProtocolsAreSensitiveTest
         builder.AddPaths("ClearTextProtocolsAreSensitive.Latest.cs")
             .WithTopLevelStatements()
             .AddReferences(AdditionalReferences)
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif

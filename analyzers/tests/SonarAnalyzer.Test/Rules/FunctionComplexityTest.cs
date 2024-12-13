@@ -25,12 +25,12 @@ namespace SonarAnalyzer.Test.Rules
     {
         [TestMethod]
         public void FunctionComplexity_CS() =>
-            CreateCSBuilder(3).AddPaths("FunctionComplexity.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            CreateCSBuilder(3).AddPaths("FunctionComplexity.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
 #if NET
         [TestMethod]
         public void FunctionComplexity_CS_Latest() =>
-            CreateCSBuilder(3).AddPaths("FunctionComplexity.Latest.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.CSharpLatest).Verify();
+            CreateCSBuilder(3).AddPaths("FunctionComplexity.Latest.cs").WithTopLevelStatements().WithOptions(LanguageOptions.CSharpLatest).Verify();
 
 #endif
 

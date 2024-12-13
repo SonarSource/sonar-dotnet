@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void AllBranchesShouldNotHaveSameImplementation_CSharp8() =>
             builderCS.AddPaths("AllBranchesShouldNotHaveSameImplementation.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
 #if NET

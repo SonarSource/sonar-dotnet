@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void UseCurlyBraces_FromCSharp7() =>
             builder.AddPaths("UseCurlyBraces.CSharp7.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp7)
+                .WithOptions(LanguageOptions.FromCSharp7)
                 .Verify();
     }
 }

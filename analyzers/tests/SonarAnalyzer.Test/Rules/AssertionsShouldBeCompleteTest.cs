@@ -72,7 +72,7 @@ public class AssertionsShouldBeCompleteTest
     [TestMethod]
     public void AssertionsShouldBeComplete_FluentAssertions_CSharp8() =>
         fluentAssertions
-        .WithOptions(ParseOptionsHelper.FromCSharp8)
+        .WithOptions(LanguageOptions.FromCSharp8)
         .AddPaths("AssertionsShouldBeComplete.FluentAssertions.CSharp8.cs")
         .WithConcurrentAnalysis(false)
         .Verify();
@@ -87,7 +87,7 @@ public class AssertionsShouldBeCompleteTest
     [TestMethod]
     public void AssertionsShouldBeComplete_NFluent_CSharp11() =>
         nfluent
-        .WithOptions(ParseOptionsHelper.FromCSharp11)
+        .WithOptions(LanguageOptions.FromCSharp11)
         .AddTestReference()
         .AddPaths("AssertionsShouldBeComplete.NFluent.CSharp11.cs")
         .Verify();

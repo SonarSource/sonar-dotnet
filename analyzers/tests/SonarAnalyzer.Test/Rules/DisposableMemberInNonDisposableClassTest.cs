@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void DisposableMemberInNonDisposableClass() =>
-            builder.AddPaths("DisposableMemberInNonDisposableClass.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builder.AddPaths("DisposableMemberInNonDisposableClass.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
 #if NET
 

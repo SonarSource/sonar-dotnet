@@ -31,7 +31,7 @@ public class DateTimeFormatShouldNotBeHardcodedTest
 
     [TestMethod]
     public void DateTimeFormatShouldNotBeHardcoded_VB() =>
-        builderVB.AddPaths("DateTimeFormatShouldNotBeHardcoded.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
+        builderVB.AddPaths("DateTimeFormatShouldNotBeHardcoded.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
 
 #if NET
 
@@ -39,7 +39,7 @@ public class DateTimeFormatShouldNotBeHardcodedTest
     public void DateTimeFormatShouldNotBeHardcoded_CS_Latest() =>
         builderCS
             .AddPaths("DateTimeFormatShouldNotBeHardcoded.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
     [TestMethod]

@@ -40,14 +40,14 @@ namespace SonarAnalyzer.Test.Rules
                 "AvoidExcessiveInheritance_DefaultValues.Records.cs",
                 // The test cases are duplicated to make sure the rules can execute in a concurrent manner.
                 "AvoidExcessiveInheritance_DefaultValues.Records.Concurrent.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .WithAutogenerateConcurrentFiles(false)
                 .Verify();
 
         [TestMethod]
         public void AvoidExcessiveInheritance_DefaultValues_FileScopedTypes() =>
             defaultBuilder.AddPaths("AvoidExcessiveInheritance_DefaultValues.FileScopedTypes.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
 #endif
@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Test.Rules
             new VerifierBuilder()
                 .AddAnalyzer(() => CreateAnalyzerWithFilter("Tests.Diagnostics.*SubRecord"))
                 .AddPaths("AvoidExcessiveInheritance_CustomValues.Records.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .WithAutogenerateConcurrentFiles(false)
                 .Verify();
 

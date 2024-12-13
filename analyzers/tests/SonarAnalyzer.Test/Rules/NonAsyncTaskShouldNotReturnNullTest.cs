@@ -26,7 +26,7 @@ public class NonAsyncTaskShouldNotReturnNullTest
 
     [TestMethod]
     public void NonAsyncTaskShouldNotReturnNull_CS() =>
-        builder.AddPaths("NonAsyncTaskShouldNotReturnNull.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+        builder.AddPaths("NonAsyncTaskShouldNotReturnNull.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
 #if NET
     [TestMethod]
@@ -34,7 +34,7 @@ public class NonAsyncTaskShouldNotReturnNullTest
         builder
             .AddPaths("NonAsyncTaskShouldNotReturnNull.Latest.cs")
             .AddPaths("NonAsyncTaskShouldNotReturnNull.Latest.Partial.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 #endif
 

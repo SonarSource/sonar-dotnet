@@ -49,7 +49,7 @@ public class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKeyTest
     public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_CSharp9() =>
         verifierCS
             .AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.CSharp9.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithOptions(LanguageOptions.FromCSharp9)
             .VerifyNoIssues();
 
 #if NET
@@ -60,7 +60,7 @@ public class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKeyTest
 
     [TestMethod]
     public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_EntityFrameworkCore_VB() =>
-        verifierVB.AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.EntityFrameworkCore.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
+        verifierVB.AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.EntityFrameworkCore.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
 
     [TestMethod]
     public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_FluentApi_CS() =>

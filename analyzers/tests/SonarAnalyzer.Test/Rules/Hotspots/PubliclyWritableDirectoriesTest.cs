@@ -34,12 +34,12 @@ public class PubliclyWritableDirectoriesTest
     [TestMethod]
     public void PubliclyWritableDirectories_CS_Latest() =>
         builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif
 
     [TestMethod]
     public void PubliclyWritableDirectories_VB() =>
-        builderVB.AddPaths(@"Hotspots\PubliclyWritableDirectories.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
+        builderVB.AddPaths(@"Hotspots\PubliclyWritableDirectories.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
 }

@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void UnnecessaryBitwiseOperation_CS_Latest() =>
             builderCS.AddPaths("UnnecessaryBitwiseOperation.Latest.cs")
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 
 #endif

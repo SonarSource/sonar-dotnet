@@ -186,7 +186,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void CheckFileLicense_WhenProvidingAnInvalidRegex_ShouldThrowException_CS()
         {
-            var compilation = SolutionBuilder.CreateSolutionFromPath(@"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs").Compile(ParseOptionsHelper.CSharpLatest.ToArray()).Single();
+            var compilation = SolutionBuilder.CreateSolutionFromPath(@"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs").Compile(LanguageOptions.CSharpLatest.ToArray()).Single();
             var errors = DiagnosticVerifier.AnalyzerExceptions(compilation, new CS.CheckFileLicense { HeaderFormat = FailingSingleLineRegexHeader, IsRegularExpression = true });
             errors.Should().ContainSingle().Which.GetMessage().Should()
                 .Contain("System.InvalidOperationException")
@@ -223,7 +223,7 @@ namespace SonarAnalyzer.Test.Rules
                 .WithCodeFix<CS.CheckFileLicenseCodeFix>()
                 .AddPaths("CheckFileLicense_CSharp9.cs")
                 .WithCodeFixedPaths("CheckFileLicense_CSharp9.Fixed.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .VerifyCodeFix();
 
 #endif

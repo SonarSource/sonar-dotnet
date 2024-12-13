@@ -37,11 +37,11 @@ public class OptionalParameterTest
 
     [TestMethod]
     public void OptionalParameter_CSharp10() =>
-        builderCS.AddPaths("OptionalParameter.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).VerifyNoIssues();
+        builderCS.AddPaths("OptionalParameter.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).VerifyNoIssues();
 
     [TestMethod]
     public void OptionalParameter_CSharp11() =>
-        builderCS.AddPaths("OptionalParameter.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+        builderCS.AddPaths("OptionalParameter.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
 
 #endif
 

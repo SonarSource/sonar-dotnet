@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void UseConstantsWhereAppropriate_CSharp11() =>
-             builder.AddPaths("UseConstantsWhereAppropriate.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+             builder.AddPaths("UseConstantsWhereAppropriate.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
 
 #endif
 

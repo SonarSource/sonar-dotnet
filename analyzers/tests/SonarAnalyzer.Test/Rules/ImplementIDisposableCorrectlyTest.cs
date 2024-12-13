@@ -25,13 +25,13 @@ public class ImplementIDisposableCorrectlyTest
 
     [TestMethod]
     public void ImplementIDisposableCorrectly() =>
-        builder.AddPaths("ImplementIDisposableCorrectly.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+        builder.AddPaths("ImplementIDisposableCorrectly.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
 #if NET
 
     [TestMethod]
     public void ImplementIDisposableCorrectly_FromCSharp9() =>
-        builder.AddPaths("ImplementIDisposableCorrectly.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+        builder.AddPaths("ImplementIDisposableCorrectly.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
 
 #endif
 

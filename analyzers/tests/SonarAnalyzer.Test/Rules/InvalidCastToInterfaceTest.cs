@@ -31,7 +31,7 @@ public class InvalidCastToInterfaceTest
     public void InvalidCastToInterface_CS(ProjectType projectType) =>
         builderCS.AddPaths("InvalidCastToInterface.cs")
             .AddReferences(TestHelper.ProjectTypeReference(projectType).Union(MetadataReferenceFacade.NetStandard21))
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 
     [TestMethod]
@@ -46,7 +46,7 @@ public class InvalidCastToInterfaceTest
 
     [TestMethod]
     public void InvalidCastToInterface_CSharp10() =>
-        builderCS.AddPaths("InvalidCastToInterface.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+        builderCS.AddPaths("InvalidCastToInterface.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
 
 #endif
 }

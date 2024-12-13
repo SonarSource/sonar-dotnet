@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void AbstractTypesShouldNotHaveConstructors_Records() =>
             builder.AddPaths("AbstractTypesShouldNotHaveConstructors.Records.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void AbstractTypesShouldNotHaveConstructors_CSharp12() =>
             builder.AddPaths("AbstractTypesShouldNotHaveConstructors.CSharp12.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .WithOptions(LanguageOptions.FromCSharp12)
                 .VerifyNoIssues();
 
 #endif

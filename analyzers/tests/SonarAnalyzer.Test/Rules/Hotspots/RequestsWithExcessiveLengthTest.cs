@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Test.Rules
                 .AddPaths("RequestsWithExcessiveLength.Latest.cs")
                 .AddReferences(OpenReadStreamReferences())
                 .WithConcurrentAnalysis(false)
-                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .WithOptions(LanguageOptions.FromCSharp12)
                 .Verify();
 
         [TestMethod]
@@ -82,14 +82,14 @@ namespace SonarAnalyzer.Test.Rules
                             """)
                 .AddReferences(OpenReadStreamReferences())
                 .WithConcurrentAnalysis(false)
-                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .WithOptions(LanguageOptions.FromCSharp12)
                 .Verify();
 
 #endif
 
         [TestMethod]
         public void RequestsWithExcessiveLength_VB() =>
-            builderVB.AddPaths(@"RequestsWithExcessiveLength.vb").WithOptions(ParseOptionsHelper.FromVisualBasic15).Verify();
+            builderVB.AddPaths(@"RequestsWithExcessiveLength.vb").WithOptions(LanguageOptions.FromVisualBasic15).Verify();
 
         [TestMethod]
         public void RequestsWithExcessiveLength_VB_CustomValues() =>

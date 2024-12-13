@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void DisposableReturnedFromUsing_CSharp8() =>
             builder.AddPaths("DisposableReturnedFromUsing.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
 #if NET

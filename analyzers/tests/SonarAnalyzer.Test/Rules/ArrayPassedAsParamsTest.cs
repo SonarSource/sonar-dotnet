@@ -34,7 +34,7 @@ public class ArrayPassedAsParamsTest
     [TestMethod]
     public void ArrayPassedAsParams_CS_Latest() =>
         builderCS.AddPaths("ArrayPassedAsParams.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .WithTopLevelStatements()
             .Verify();
 

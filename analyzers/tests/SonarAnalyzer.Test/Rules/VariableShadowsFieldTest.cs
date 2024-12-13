@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void VariableShadowsField() =>
             builder.AddPaths("VariableShadowsField.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
 #if NET
@@ -34,14 +34,14 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void VariableShadowsField_TopLevelStatements() =>
             builder.AddPaths("VariableShadowsField.TopLevelStatements.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .WithTopLevelStatements()
                 .Verify();
 
         [TestMethod]
         public void VariableShadowsField_CS_Latest() =>
             builder.AddPaths("VariableShadowsField.Latest.cs", "VariableShadowsField.Latest.Partial.cs")
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 
 #endif

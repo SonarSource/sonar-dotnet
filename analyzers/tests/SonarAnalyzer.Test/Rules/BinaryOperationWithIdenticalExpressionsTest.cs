@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void BinaryOperationWithIdenticalExpressions_CSharp11() =>
             builderCS.AddPaths("BinaryOperationWithIdenticalExpressions.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
 #endif

@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void SwitchShouldNotBeNested_CSharp8() =>
             new VerifierBuilder<CS.SwitchShouldNotBeNested>().AddPaths("SwitchShouldNotBeNested.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
         [TestMethod]

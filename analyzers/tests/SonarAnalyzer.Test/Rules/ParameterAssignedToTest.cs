@@ -34,7 +34,7 @@ public class ParameterAssignedToTest
     public void ParameterAssignedTo_CS_Latest() =>
         builderCS
             .AddPaths("ParameterAssignedTo.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .WithTopLevelStatements()
             .Verify();
 #endif

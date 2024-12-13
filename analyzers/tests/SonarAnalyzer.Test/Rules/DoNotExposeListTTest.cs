@@ -33,7 +33,7 @@ public class DoNotExposeListTTest
     [TestMethod]
     public void DoNotExposeListT_Latest() =>
         builder.AddPaths("DoNotExposeListT.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .WithTopLevelStatements()
             .Verify();
 #endif

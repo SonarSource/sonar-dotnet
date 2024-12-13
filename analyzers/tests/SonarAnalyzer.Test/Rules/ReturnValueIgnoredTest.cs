@@ -32,7 +32,7 @@ public class ReturnValueIgnoredTest
     [TestMethod]
     public void ReturnValueIgnored_Latest() =>
         builder.AddPaths("ReturnValueIgnored.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .AddReferences(MetadataReferenceFacade.SystemCollections)
             .WithTopLevelStatements()
             .Verify();

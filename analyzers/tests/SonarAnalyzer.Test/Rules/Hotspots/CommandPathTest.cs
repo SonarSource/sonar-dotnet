@@ -39,7 +39,7 @@ public class CommandPathTest
     [TestMethod]
     public void CommandPath_CS_Latest() =>
         builderCS.AddPaths("CommandPath.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif

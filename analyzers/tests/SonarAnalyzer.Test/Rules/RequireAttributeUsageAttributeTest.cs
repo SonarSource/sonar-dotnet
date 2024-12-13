@@ -32,7 +32,7 @@ public class RequireAttributeUsageAttributeTest
     [TestMethod]
     public void RequireAttributeUsageAttribute_CSharp11() =>
         builder.AddPaths("RequireAttributeUsageAttribute.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .WithOptions(LanguageOptions.FromCSharp11)
             .Verify();
 
 #endif

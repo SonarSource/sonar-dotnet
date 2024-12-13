@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void UseUriInsteadOfString_Latest() =>
             builder.AddPaths("UseUriInsteadOfString.Latest.cs", "UseUriInsteadOfString.Latest.Partial.cs")
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 
 #endif

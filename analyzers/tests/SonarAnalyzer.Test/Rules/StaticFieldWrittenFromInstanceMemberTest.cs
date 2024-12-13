@@ -26,7 +26,7 @@ public class StaticFieldWrittenFromInstanceMemberTest
 
     [TestMethod]
     public void StaticFieldWrittenFromInstanceMember() =>
-        builder.AddPaths(@"StaticFieldWrittenFromInstanceMember.cs").WithOptions(ParseOptionsHelper.FromCSharp8).AddReferences(MetadataReferenceFacade.NetStandard21).Verify();
+        builder.AddPaths(@"StaticFieldWrittenFromInstanceMember.cs").WithOptions(LanguageOptions.FromCSharp8).AddReferences(MetadataReferenceFacade.NetStandard21).Verify();
 
     [TestMethod]
     public async Task SecondaryIssueInReferencedCompilation()
@@ -66,7 +66,7 @@ public class Bar
     public void StaticFieldWrittenFromInstanceMember_Latest() =>
         builder.AddPaths(@"StaticFieldWrittenFromInstanceMember.Latest.cs")
             .WithTopLevelStatements()
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif

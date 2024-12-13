@@ -31,10 +31,10 @@ namespace SonarAnalyzer.Test
             Console.WriteLine(@"Running tests initialization...");
             Console.WriteLine(@$"Build reason: {TestContextHelper.BuildReason() ?? "Not set / Local build"}");
 
-            var csVersions = ParseOptionsHelper.Default(LanguageNames.CSharp).Cast<CSharpParseOptions>().Select(x => x.LanguageVersion.ToDisplayString());
+            var csVersions = LanguageOptions.Default(LanguageNames.CSharp).Cast<CSharpParseOptions>().Select(x => x.LanguageVersion.ToDisplayString());
             Console.WriteLine(@"C# versions used for analysis: " + string.Join(", ", csVersions));
 
-            var vbVersions = ParseOptionsHelper.Default(LanguageNames.VisualBasic).Cast<VisualBasicParseOptions>().Select(x => x.LanguageVersion.ToDisplayString());
+            var vbVersions = LanguageOptions.Default(LanguageNames.VisualBasic).Cast<VisualBasicParseOptions>().Select(x => x.LanguageVersion.ToDisplayString());
             Console.WriteLine(@"VB.Net versions used for analysis: " + string.Join(", ", vbVersions));
         }
 

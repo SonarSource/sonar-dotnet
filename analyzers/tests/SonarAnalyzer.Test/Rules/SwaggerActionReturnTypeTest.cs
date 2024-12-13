@@ -23,7 +23,7 @@ namespace SonarAnalyzer.Test.Rules;
 public class SwaggerActionReturnTypeTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<SwaggerActionReturnType>()
-        .WithOptions(ParseOptionsHelper.FromCSharp11)
+        .WithOptions(LanguageOptions.FromCSharp11)
         .AddReferences([
             ..NuGetMetadataReference.SwashbuckleAspNetCoreAnnotations(),
             ..NuGetMetadataReference.SwashbuckleAspNetCoreSwagger(),

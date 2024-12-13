@@ -39,7 +39,7 @@ public class BooleanLiteralUnnecessaryTest
     [TestMethod]
     public void BooleanLiteralUnnecessary_Latest() =>
         builderCS.AddPaths("BooleanLiteralUnnecessary.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
     [TestMethod]
@@ -47,7 +47,7 @@ public class BooleanLiteralUnnecessaryTest
         builderCS.AddPaths("BooleanLiteralUnnecessary.Latest.cs")
             .WithCodeFix<CS.BooleanLiteralUnnecessaryCodeFix>()
             .WithCodeFixedPaths("BooleanLiteralUnnecessary.Latest.Fixed.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .VerifyCodeFix();
 
 #endif

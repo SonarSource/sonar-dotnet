@@ -23,7 +23,7 @@ namespace SonarAnalyzer.Test.Rules
     {
         private readonly VerifierBuilder sonarCfg = new VerifierBuilder()
             .AddAnalyzer(() => new DeadStores(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg))
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .AddReferences(MetadataReferenceFacade.NetStandard21);
 
         private readonly VerifierBuilder roslynCfg = new VerifierBuilder<DeadStores>()
@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void DeadStores_RoslynCfg() =>
             roslynCfg.AddPaths("DeadStores.RoslynCfg.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
 #if NET
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Test.Rules
         public void DeadStores_CS_Latest() =>
             roslynCfg.AddPaths("DeadStores.Latest.cs")
                 .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 
 #endif

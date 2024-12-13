@@ -35,7 +35,7 @@ public class AbstractClassToInterfaceTest
             .AddPaths("AbstractClassToInterface.Latest.cs")
             .AddPaths("AbstractClassToInterface.Latest.Partial.cs")
             .WithConcurrentAnalysis(false)
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif

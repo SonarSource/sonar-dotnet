@@ -33,13 +33,13 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void UninvokedEventDeclaration_CSharp9() =>
             builder.AddPaths("UninvokedEventDeclaration.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
 
         [TestMethod]
         public void UninvokedEventDeclaration_CSharp11() =>
             builder.AddPaths("UninvokedEventDeclaration.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
 #endif

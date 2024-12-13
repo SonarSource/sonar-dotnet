@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void GenericTypeParameterInOut_CSharp7() =>
             builder.AddPaths("GenericTypeParameterInOut.CSharp7.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp7)
+                .WithOptions(LanguageOptions.FromCSharp7)
                 .Verify();
     }
 }

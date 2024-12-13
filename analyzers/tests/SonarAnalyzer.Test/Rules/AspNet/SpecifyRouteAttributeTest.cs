@@ -25,7 +25,7 @@ public class SpecifyRouteAttributeTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<SpecifyRouteAttribute>()
         .WithBasePath("AspNet")
-        .WithOptions(ParseOptionsHelper.FromCSharp12)
+        .WithOptions(LanguageOptions.FromCSharp12)
         .AddReferences([
             AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
             AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,

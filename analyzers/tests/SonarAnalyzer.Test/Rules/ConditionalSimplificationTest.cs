@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void ConditionalSimplification_BeforeCSharp8() =>
-            builder.AddPaths("ConditionalSimplification.BeforeCSharp8.cs").WithOptions(ParseOptionsHelper.BeforeCSharp8).Verify();
+            builder.AddPaths("ConditionalSimplification.BeforeCSharp8.cs").WithOptions(LanguageOptions.BeforeCSharp8).Verify();
 
         [TestMethod]
         public void ConditionalSimplification_CSharp8() =>
@@ -39,19 +39,19 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void ConditionalSimplification_FromCSharp8() =>
-            builder.AddPaths("ConditionalSimplification.FromCSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builder.AddPaths("ConditionalSimplification.FromCSharp8.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
         [TestMethod]
         public void ConditionalSimplification_BeforeCSharp8_CodeFix() =>
             codeFix.AddPaths("ConditionalSimplification.BeforeCSharp8.cs")
                 .WithCodeFixedPaths("ConditionalSimplification.BeforeCSharp8.Fixed.cs")
-                .WithOptions(ParseOptionsHelper.BeforeCSharp8).VerifyCodeFix();
+                .WithOptions(LanguageOptions.BeforeCSharp8).VerifyCodeFix();
 
         [TestMethod]
         public void ConditionalSimplification_FromCSharp8_CodeFix() =>
             codeFix.AddPaths("ConditionalSimplification.FromCSharp8.cs")
                 .WithCodeFixedPaths("ConditionalSimplification.FromCSharp8.Fixed.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .VerifyCodeFix();
 
 #if NET
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Test.Rules
         public void ConditionalSimplification_FromCSharp10() =>
             builder.AddPaths("ConditionalSimplification.FromCSharp10.cs")
                 .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .AddReferences(NuGetMetadataReference.FluentAssertions(Constants.NuGetLatestVersion))
                 .AddReferences(MetadataReferenceFacade.SystemData)
                 .AddReferences(MetadataReferenceFacade.SystemNetHttp)
@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Test.Rules
             codeFix.AddPaths("ConditionalSimplification.FromCSharp10.cs")
                 .WithCodeFixedPaths("ConditionalSimplification.FromCSharp10.Fixed.cs")
                 .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .AddReferences(NuGetMetadataReference.FluentAssertions(Constants.NuGetLatestVersion))
                 .AddReferences(MetadataReferenceFacade.SystemData)
                 .AddReferences(MetadataReferenceFacade.SystemNetHttp)

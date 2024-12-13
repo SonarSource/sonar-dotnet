@@ -34,25 +34,25 @@ public class CastShouldNotBeDuplicatedTest
     [TestMethod]
     public void CastShouldNotBeDuplicated_CSharp9() =>
         Builder.AddPaths("CastShouldNotBeDuplicated.CSharp9.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithOptions(LanguageOptions.FromCSharp9)
             .Verify();
 
     [TestMethod]
     public void CastShouldNotBeDuplicated_CSharp10() =>
         Builder.AddPaths("CastShouldNotBeDuplicated.CSharp10.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithOptions(LanguageOptions.FromCSharp10)
             .Verify();
 
     [TestMethod]
     public void CastShouldNotBeDuplicated_CSharp11() =>
         Builder.AddPaths("CastShouldNotBeDuplicated.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .WithOptions(LanguageOptions.FromCSharp11)
             .Verify();
 
     [TestMethod]
     public void CastShouldNotBeDuplicated_CSharp12() =>
         Builder.AddPaths("CastShouldNotBeDuplicated.CSharp12.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .WithOptions(LanguageOptions.FromCSharp12)
             .Verify();
 
     [TestMethod]

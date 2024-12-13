@@ -31,11 +31,11 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void PartialMethodNoImplementation_CSharp9() =>
-            builder.AddPaths("PartialMethodNoImplementation.CSharp9.Part1.cs", "PartialMethodNoImplementation.CSharp9.Part2.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builder.AddPaths("PartialMethodNoImplementation.CSharp9.Part1.cs", "PartialMethodNoImplementation.CSharp9.Part2.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
 
         [TestMethod]
         public void PartialMethodNoImplementation_CSharp10() =>
-            builder.AddPaths("PartialMethodNoImplementation.CSharp10.Part1.cs", "PartialMethodNoImplementation.CSharp10.Part2.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("PartialMethodNoImplementation.CSharp10.Part1.cs", "PartialMethodNoImplementation.CSharp10.Part2.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
 
 #endif
 

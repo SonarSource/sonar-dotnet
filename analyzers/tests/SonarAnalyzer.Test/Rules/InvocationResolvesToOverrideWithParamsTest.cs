@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Test.Rules
                 """).Model.Compilation.ToMetadataReference();
             builder.AddPaths("InvocationResolvesToOverrideWithParams.cs")
                 .AddReferences(new[] { anotherAssembly })
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
         }
 
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void InvocationResolvesToOverrideWithParams_CS_Latest() =>
             builder.AddPaths("InvocationResolvesToOverrideWithParams.Latest.cs")
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 
 #endif

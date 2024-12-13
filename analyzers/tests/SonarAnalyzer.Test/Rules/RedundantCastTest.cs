@@ -56,12 +56,12 @@ public class RedundantCastTest
 
     [TestMethod]
     public void RedundantCast_CSharp8() =>
-        builder.AddPaths("RedundantCast.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+        builder.AddPaths("RedundantCast.CSharp8.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
 #if NET
     [TestMethod]
     public void RedundantCast_CSharp9() =>
-        builder.AddPaths("RedundantCast.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+        builder.AddPaths("RedundantCast.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
 #endif
 
     [TestMethod]

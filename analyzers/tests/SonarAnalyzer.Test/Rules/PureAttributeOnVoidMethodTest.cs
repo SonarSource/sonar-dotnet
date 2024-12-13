@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void PureAttributeOnVoidMethod_CSharp8() =>
             builderCS.AddPaths("PureAttributeOnVoidMethod.CSharp8.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
 #if NET
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void PureAttributeOnVoidMethod_CSharp11() =>
             builderCS.AddPaths("PureAttributeOnVoidMethod.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
 #endif

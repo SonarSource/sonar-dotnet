@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void NameOfShouldBeUsed_CSharp6() =>
-            builderCS.AddPaths("NameOfShouldBeUsed.cs").WithOptions(ParseOptionsHelper.FromCSharp6).Verify();
+            builderCS.AddPaths("NameOfShouldBeUsed.cs").WithOptions(LanguageOptions.FromCSharp6).Verify();
 
         [TestMethod]
         public void NameOfShouldBeUsed_CSharp5() =>
@@ -42,13 +42,13 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void NameOfShouldBeUsed_CSharp11() =>
-            builderCS.AddPaths("NameOfShouldBeUsed.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+            builderCS.AddPaths("NameOfShouldBeUsed.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
 
 #endif
 
         [TestMethod]
         public void NameOfShouldBeUsed_FromVB14() =>
-            builderVB.AddPaths("NameOfShouldBeUsed.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
+            builderVB.AddPaths("NameOfShouldBeUsed.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
 
         [TestMethod]
         public void NameOfShouldBeUsed_VB12() =>

@@ -39,7 +39,7 @@ public class PropertiesAccessCorrectFieldTest
     public void PropertiesAccessCorrectField_CS_Latest() =>
         builderCS
             .AddPaths("PropertiesAccessCorrectField.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 #else
 
@@ -55,5 +55,5 @@ public class PropertiesAccessCorrectFieldTest
 
     [TestMethod]
     public void PropertiesAccessCorrectField_VB() =>
-        builderVB.AddPaths("PropertiesAccessCorrectField.vb").AddReferences(AdditionalReferences).WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
+        builderVB.AddPaths("PropertiesAccessCorrectField.vb").AddReferences(AdditionalReferences).WithOptions(LanguageOptions.FromVisualBasic14).Verify();
 }

@@ -31,7 +31,7 @@ public class TypeMemberVisibilityTest
 
     [TestMethod]
     public void TypeMemberVisibility_Latest() =>
-        builder.AddPaths("TypeMemberVisibility.Latest.cs", "TypeMemberVisibility.Latest.Partial.cs").WithOptions(ParseOptionsHelper.CSharpLatest).Verify();
+        builder.AddPaths("TypeMemberVisibility.Latest.cs", "TypeMemberVisibility.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
 #endif
 

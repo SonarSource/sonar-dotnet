@@ -197,11 +197,11 @@ public class VerifierBuilderTest
     [TestMethod]
     public void WithOptions_Overwrites_IsImmutable()
     {
-        var only7 = Empty.WithOptions(ParseOptionsHelper.OnlyCSharp7);
-        var from8 = only7.WithOptions(ParseOptionsHelper.FromCSharp8);
+        var only7 = Empty.WithOptions(LanguageOptions.OnlyCSharp7);
+        var from8 = only7.WithOptions(LanguageOptions.FromCSharp8);
         Empty.ParseOptions.Should().BeEmpty();
-        only7.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.OnlyCSharp7);
-        from8.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp8);
+        only7.ParseOptions.Should().BeEquivalentTo(LanguageOptions.OnlyCSharp7);
+        from8.ParseOptions.Should().BeEquivalentTo(LanguageOptions.FromCSharp8);
     }
 
     [TestMethod]
@@ -243,25 +243,25 @@ public class VerifierBuilderTest
         Empty.OutputKind.Should().Be(OutputKind.DynamicallyLinkedLibrary);
         Empty.ParseOptions.Should().BeEmpty();
         sut.OutputKind.Should().Be(OutputKind.ConsoleApplication);
-        sut.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp9);
+        sut.ParseOptions.Should().BeEquivalentTo(LanguageOptions.FromCSharp9);
     }
 
     [TestMethod]
     public void WithTopLevelSupport_PreservesParseOptions()
     {
-        var sut = Empty.WithOptions(ParseOptionsHelper.FromCSharp10).WithTopLevelStatements();
+        var sut = Empty.WithOptions(LanguageOptions.FromCSharp10).WithTopLevelStatements();
         sut.OutputKind.Should().Be(OutputKind.ConsoleApplication);
-        sut.ParseOptions.Should().BeEquivalentTo(ParseOptionsHelper.FromCSharp10);
+        sut.ParseOptions.Should().BeEquivalentTo(LanguageOptions.FromCSharp10);
     }
 
     [TestMethod]
     public void WithTopLevelSupport_ForVisualBasicOptions_NotSupported() =>
-        Empty.WithOptions(ParseOptionsHelper.FromVisualBasic15).Invoking(x => x.WithTopLevelStatements()).Should().Throw<InvalidOperationException>()
+        Empty.WithOptions(LanguageOptions.FromVisualBasic15).Invoking(x => x.WithTopLevelStatements()).Should().Throw<InvalidOperationException>()
             .WithMessage("WithTopLevelStatements is not supported with VisualBasicParseOptions.");
 
     [TestMethod]
     public void WithTopLevelSupport_ForOldCSharp_NotSupported() =>
-        Empty.WithOptions(ParseOptionsHelper.FromCSharp8).Invoking(x => x.WithTopLevelStatements()).Should().Throw<InvalidOperationException>()
+        Empty.WithOptions(LanguageOptions.FromCSharp8).Invoking(x => x.WithTopLevelStatements()).Should().Throw<InvalidOperationException>()
             .WithMessage("WithTopLevelStatements is supported from CSharp9.");
 
     [TestMethod]

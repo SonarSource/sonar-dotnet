@@ -43,7 +43,7 @@ public class SpecifyTimeoutOnRegexTest
     [TestMethod]
     public void SpecifyTimeoutOnRegex_CS_Latest() =>
         builderCS.AddPaths("SpecifyTimeoutOnRegex.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif

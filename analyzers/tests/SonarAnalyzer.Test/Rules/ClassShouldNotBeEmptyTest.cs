@@ -50,21 +50,21 @@ public class ClassShouldNotBeEmptyTest
     public void ClassShouldNotBeEmpty_CSharp9() =>
         builderCS
             .AddPaths("ClassShouldNotBeEmpty.CSharp9.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithOptions(LanguageOptions.FromCSharp9)
             .Verify();
 
     [TestMethod]
     public void ClassShouldNotBeEmpty_CSharp10() =>
         builderCS
             .AddPaths("ClassShouldNotBeEmpty.CSharp10.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithOptions(LanguageOptions.FromCSharp10)
             .Verify();
 
     [TestMethod]
     public void ClassShouldNotBeEmpty_CSharp12() =>
         builderCS
             .AddPaths("ClassShouldNotBeEmpty.CSharp12.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .WithOptions(LanguageOptions.FromCSharp12)
             .Verify();
 
     [TestMethod]

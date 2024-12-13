@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void GetHashCodeMutable_CSharp10() =>
             builder.AddPaths("GetHashCodeMutable.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .Verify();
 
 #endif

@@ -119,7 +119,7 @@ public class ConditionalStructureSameImplementationTest
 #if NET
     [TestMethod]
     public void ConditionalStructureSameImplementation_Switch_CSharp_Latest() =>
-        builderCS.AddPaths("ConditionalStructureSameImplementation_Switch.Latest.cs").WithOptions(ParseOptionsHelper.CSharpLatest).VerifyNoIssues();
+        builderCS.AddPaths("ConditionalStructureSameImplementation_Switch.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).VerifyNoIssues();
 
     [TestMethod]
     public void ConditionalStructureSameImplementation_RazorFile_CorrectMessage() =>

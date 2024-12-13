@@ -31,11 +31,11 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void DoNotUseOutRefParameters_CSharp9() =>
-            builder.AddPaths("DoNotUseOutRefParameters.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builder.AddPaths("DoNotUseOutRefParameters.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
 
         [TestMethod]
         public void DoNotUseOutRefParameters_CSharp11() =>
-            builder.AddPaths("DoNotUseOutRefParameters.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+            builder.AddPaths("DoNotUseOutRefParameters.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
 
 #endif
 

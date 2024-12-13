@@ -32,24 +32,24 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void RedundantInheritanceList_CSharp9() =>
-            rule.AddPaths("RedundantInheritanceList.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            rule.AddPaths("RedundantInheritanceList.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
 
         [TestMethod]
         public void RedundantInheritanceList_CSharp9_CodeFix() =>
             codeFix.AddPaths("RedundantInheritanceList.CSharp9.cs")
                 .WithCodeFixedPaths("RedundantInheritanceList.CSharp9.Fixed.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .VerifyCodeFix();
 
         [TestMethod]
         public void RedundantInheritanceList_CSharp10() =>
-            rule.AddPaths("RedundantInheritanceList.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            rule.AddPaths("RedundantInheritanceList.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
 
         [TestMethod]
         public void RedundantInheritanceList_CSharp10_CodeFix() =>
             codeFix.AddPaths("RedundantInheritanceList.CSharp10.cs")
                 .WithCodeFixedPaths("RedundantInheritanceList.CSharp10.Fixed.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .VerifyCodeFix();
 
 #endif

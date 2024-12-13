@@ -127,7 +127,7 @@ public class FileMetadataAnalyzerTest
             .AddAnalyzer(() => new TestFileMetadataAnalyzer(testRoot, projectType == ProjectType.Test))
             .AddPaths(projectFiles)
             .WithBasePath(BasePath)
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .WithProtobufPath(@$"{testRoot}\file-metadata.pb");
     }
 

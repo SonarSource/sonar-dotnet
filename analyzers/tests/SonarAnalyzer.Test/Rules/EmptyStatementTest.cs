@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void EmptyStatement_CS_Latest() =>
             builder.AddPaths("EmptyStatement.Latest.cs")
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 
 #endif

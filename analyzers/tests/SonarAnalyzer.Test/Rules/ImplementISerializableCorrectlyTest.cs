@@ -31,15 +31,15 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void ImplementISerializableCorrectly_FromCSharp9() =>
-            builder.AddPaths("ImplementISerializableCorrectly.CSharp9.Part1.cs", "ImplementISerializableCorrectly.CSharp9.Part2.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builder.AddPaths("ImplementISerializableCorrectly.CSharp9.Part1.cs", "ImplementISerializableCorrectly.CSharp9.Part2.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
 
         [TestMethod]
         public void ImplementISerializableCorrectly_FromCSharp10() =>
-            builder.AddPaths("ImplementISerializableCorrectly.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("ImplementISerializableCorrectly.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
 
         [TestMethod]
         public void ImplementISerializableCorrectly_FromCSharp12() =>
-            builder.AddPaths("ImplementISerializableCorrectly.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+            builder.AddPaths("ImplementISerializableCorrectly.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).Verify();
 
 #endif
 

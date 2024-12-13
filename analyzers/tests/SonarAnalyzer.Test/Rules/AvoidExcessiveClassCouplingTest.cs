@@ -376,7 +376,7 @@ public class AvoidExcessiveClassCouplingTest
             {
                 public ConsoleColor Foo(ConsoleColor c) { return ConsoleColor.Black; }
             }
-            """).WithOptions(ParseOptionsHelper.FromCSharp9).VerifyNoIssues();
+            """).WithOptions(LanguageOptions.FromCSharp9).VerifyNoIssues();
 
     [TestMethod]
     public void AvoidExcessiveClassCoupling_Base_Records_Interfaces_NotCounted() =>
@@ -391,7 +391,7 @@ public class AvoidExcessiveClassCouplingTest
                 {
                 }
             }
-            """).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            """).WithOptions(LanguageOptions.FromCSharp9).Verify();
 
     [TestMethod]
     public void AvoidExcessiveClassCoupling_Primitive_Types_Not_Counted() =>
@@ -407,12 +407,12 @@ public class AvoidExcessiveClassCouplingTest
                     double d2, string s1,
                     object o1) { }
             }
-            """).WithOptions(ParseOptionsHelper.FromCSharp9).VerifyNoIssues();
+            """).WithOptions(LanguageOptions.FromCSharp9).VerifyNoIssues();
 
     [TestMethod]
     public void AvoidExcessiveClassCoupling_Latest() =>
         withThreshold1.AddPaths("AvoidExcessiveClassCoupling.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif

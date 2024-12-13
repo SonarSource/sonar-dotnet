@@ -26,8 +26,10 @@ namespace SonarAnalyzer.TestFramework.Build;
 /// Local run: Only the latest language version is used to simplify debugging.
 /// CI run: All configured versions are returned.
 /// </summary>
-public static class ParseOptionsHelper
+public static class LanguageOptions
 {
+    private static readonly ImmutableArray<ParseOptions> DefaultParseOptions;
+
     public static ImmutableArray<ParseOptions> BeforeCSharp7 { get; }
     public static ImmutableArray<ParseOptions> BeforeCSharp8 { get; }
     public static ImmutableArray<ParseOptions> BeforeCSharp9 { get; }
@@ -55,11 +57,9 @@ public static class ParseOptionsHelper
     public static ImmutableArray<ParseOptions> FromVisualBasic14 { get; }
     public static ImmutableArray<ParseOptions> FromVisualBasic15 { get; }
 
-    private static readonly ImmutableArray<ParseOptions> DefaultParseOptions;
-
 #pragma warning disable S3963 // The static fields are dependent between them so the values cannot be set inline
 
-    static ParseOptionsHelper()
+    static LanguageOptions()
     {
         var cs12 = CreateOptions(CSharp12);
         var cs11 = CreateOptions(CSharp11);
@@ -100,7 +100,7 @@ public static class ParseOptionsHelper
 #pragma warning restore S3963
 
     public static IEnumerable<ParseOptions> OrDefault(this IEnumerable<ParseOptions> parseOptions, string language) =>
-        parseOptions != null && parseOptions.Any() ? parseOptions : Default(language);
+        parseOptions is not null && parseOptions.Any() ? parseOptions : Default(language);
 
     public static IEnumerable<ParseOptions> Default(string language) =>
         DefaultParseOptions.Where(x => x.Language == language);
@@ -116,7 +116,7 @@ public static class ParseOptionsHelper
     private static ImmutableArray<ParseOptions> FilterByEnvironment(this IEnumerable<ParseOptions> options) =>
         TestContextHelper.IsAzureDevOpsContext && !TestContextHelper.IsPullRequestBuild
             ? options.ToImmutableArray()
-            : ImmutableArray.Create(options.First()); // Use only the oldest version for local test run and debug
+            : [options.First()]; // Use only the oldest version for local test run and debug
 
     private static IEnumerable<ParseOptions> CreateOptions(params CS.LanguageVersion[] options) =>
         options.Select(x => new CS.CSharpParseOptions(x));

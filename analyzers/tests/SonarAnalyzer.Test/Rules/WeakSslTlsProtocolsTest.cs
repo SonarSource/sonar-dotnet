@@ -27,13 +27,13 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void WeakSslTlsProtocols_CSharp() =>
-            builderCS.AddPaths("WeakSslTlsProtocols.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builderCS.AddPaths("WeakSslTlsProtocols.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
 #if NET
 
         [TestMethod]
         public void WeakSslTlsProtocols_CSharp12() =>
-            builderCS.AddPaths("WeakSslTlsProtocols.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+            builderCS.AddPaths("WeakSslTlsProtocols.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).Verify();
 
 #endif
 

@@ -41,7 +41,7 @@ public class RegexMustHaveValidSyntaxTest
     [TestMethod]
     public void RegexMustHaveValidSyntax_CS_Latest() =>
         builderCS.AddPaths("RegexMustHaveValidSyntax.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif

@@ -84,7 +84,7 @@ public class CookieShouldBeSecureTest
     [TestMethod]
     public void CookieShouldBeSecure_Latest() =>
          builder.AddPaths("CookieShouldBeSecure.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .WithTopLevelStatements()
             .AddReferences(GetAdditionalReferences_NetCore())
             .AddReferences(NuGetMetadataReference.Nancy())

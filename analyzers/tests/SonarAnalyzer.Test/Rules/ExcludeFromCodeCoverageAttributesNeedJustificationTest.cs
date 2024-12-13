@@ -46,7 +46,7 @@ public class ExcludeFromCodeCoverageAttributesNeedJustificationTest
 
     [TestMethod]
     public void ExcludeFromCodeCoverageAttributesNeedJustification_CSharp10() =>
-        builderCS.AddPaths("ExcludeFromCodeCoverageAttributesNeedJustification.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+        builderCS.AddPaths("ExcludeFromCodeCoverageAttributesNeedJustification.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
 
     [TestMethod]
     public void ExcludeFromCodeCoverageAttributesNeedJustification_VB() =>

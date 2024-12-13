@@ -71,14 +71,14 @@ namespace SonarAnalyzer.Test.Rules
                     .Concat(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion))
                     .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
                     .ToArray())
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
 
         [TestMethod]
         public void TestMethodShouldHaveCorrectSignature_CSharp11() =>
             builder.AddPaths("TestMethodShouldHaveCorrectSignature.CSharp11.cs")
                 .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1)
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
 #endif

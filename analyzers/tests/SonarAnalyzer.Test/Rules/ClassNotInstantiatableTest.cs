@@ -33,13 +33,13 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void ClassNotInstantiatable_CSharp9() =>
             builderCS.AddPaths("ClassNotInstantiatable.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
 
         [TestMethod]
         public void ClassNotInstantiatable_CSharp11() =>
             builderCS.AddPaths("ClassNotInstantiatable.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
 #endif

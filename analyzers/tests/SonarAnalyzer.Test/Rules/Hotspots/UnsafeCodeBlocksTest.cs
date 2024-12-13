@@ -33,12 +33,12 @@ public class UnsafeCodeBlocksTest
     [TestMethod]
     public void UnsafeRecord() =>
         builder.AddSnippet("""unsafe record MyRecord(byte* Pointer);        // Noncompliant""")
-        .WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+        .WithOptions(LanguageOptions.FromCSharp9).Verify();
 
     [TestMethod]
     public void UnsafeRecordStruct() =>
         builder.AddSnippet("""unsafe record struct MyRecord(byte* Pointer); // Noncompliant""")
-        .WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+        .WithOptions(LanguageOptions.FromCSharp10).Verify();
 
 #endif
 }

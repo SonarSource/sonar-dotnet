@@ -32,13 +32,13 @@ public class InfiniteRecursionTest
     [TestMethod]
     public void InfiniteRecursion_SonarCfg() =>
         sonarCfg.AddPaths("InfiniteRecursion.SonarCfg.cs")
-            .WithOptions(ParseOptionsHelper.OnlyCSharp7)
+            .WithOptions(LanguageOptions.OnlyCSharp7)
             .Verify();
 
     [TestMethod]
     public void InfiniteRecursion_RoslynCfg() =>
         roslynCfg.AddPaths("InfiniteRecursion.RoslynCfg.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 
 #if NET
@@ -46,7 +46,7 @@ public class InfiniteRecursionTest
     [TestMethod]
     public void InfiniteRecursion_RoslynCfg_Latest() =>
         roslynCfg.AddPaths("InfiniteRecursion.RoslynCfg.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif
@@ -143,7 +143,7 @@ public class InfiniteRecursionTest
         """");
 
         roslynCfg.AddSnippet(code.ToString())
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .VerifyNoIssues();
     }
 }

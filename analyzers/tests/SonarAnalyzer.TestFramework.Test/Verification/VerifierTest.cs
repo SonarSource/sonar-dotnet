@@ -154,7 +154,7 @@ public class VerifierTest
     [DataRow("Dummy.SecondaryLocation.cshtml")]
     public void Verify_RazorWithAdditionalLocation(string path) =>
         DummyWithLocation.AddPaths(path)
-            .WithOptions(ParseOptionsHelper.BeforeCSharp10)
+            .WithOptions(LanguageOptions.BeforeCSharp10)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
@@ -163,7 +163,7 @@ public class VerifierTest
     [DataRow("Dummy.SecondaryLocation.cshtml")]
     public void Verify_RazorWithAdditionalLocation_CSharp10(string path) =>
         DummyWithLocation.AddPaths(path)
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithOptions(LanguageOptions.FromCSharp10)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
@@ -181,7 +181,7 @@ public class VerifierTest
     public void Verify_RazorExpressions_Locations(string path) =>
         DummyWithLocation
             .AddPaths(path)
-            .WithOptions(ParseOptionsHelper.BeforeCSharp10)
+            .WithOptions(LanguageOptions.BeforeCSharp10)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
@@ -191,7 +191,7 @@ public class VerifierTest
     public void Verify_RazorExpressions_Locations_CSharp10(string path) =>
         DummyWithLocation
             .AddPaths(path)
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithOptions(LanguageOptions.FromCSharp10)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
@@ -526,8 +526,8 @@ public class VerifierTest
                 System.Exception ex = new();    // C# 9 target-typed new
             }
             """);
-        builder.WithOptions(ParseOptionsHelper.FromCSharp9).Invoking(x => x.Verify()).Should().NotThrow();
-        builder.WithOptions(ParseOptionsHelper.BeforeCSharp9).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
+        builder.WithOptions(LanguageOptions.FromCSharp9).Invoking(x => x.Verify()).Should().NotThrow();
+        builder.WithOptions(LanguageOptions.BeforeCSharp9).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
             There are differences for CSharp5 File.Concurrent.cs:
               Line 4: Unexpected error, use // Error [CS8026] Feature 'target-typed object creation' is not available in C# 5. Please use language version 9.0 or greater.
 
@@ -608,7 +608,7 @@ public class VerifierTest
     [TestMethod]
     public void Verify_NonConcurrentAnalysis()
     {
-        var builder = WithSnippetCS("var topLevelStatement = 42;  // Noncompliant").WithOptions(ParseOptionsHelper.FromCSharp9).WithOutputKind(OutputKind.ConsoleApplication);
+        var builder = WithSnippetCS("var topLevelStatement = 42;  // Noncompliant").WithOptions(LanguageOptions.FromCSharp9).WithOutputKind(OutputKind.ConsoleApplication);
         builder.Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>("Default Verifier behavior duplicates the source file.").WithMessage("""
             There are differences for CSharp9 File.Concurrent.cs:
               Line 1: Unexpected error, use // Error [CS0825] The contextual keyword 'var' may only appear within a local variable declaration or in script code
@@ -620,7 +620,7 @@ public class VerifierTest
     [TestMethod]
     public void Verify_OutputKind()
     {
-        var builder = WithSnippetCS("var topLevelStatement = 42;  // Noncompliant").WithOptions(ParseOptionsHelper.FromCSharp9);
+        var builder = WithSnippetCS("var topLevelStatement = 42;  // Noncompliant").WithOptions(LanguageOptions.FromCSharp9);
         builder.WithTopLevelStatements().Invoking(x => x.Verify()).Should().NotThrow();
         builder.WithOutputKind(OutputKind.ConsoleApplication).WithConcurrentAnalysis(false).Invoking(x => x.Verify()).Should().NotThrow();
         builder.Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""

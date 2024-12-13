@@ -34,26 +34,26 @@ public class ImplementSerializationMethodsCorrectlyTest
     [TestMethod]
     public void ImplementSerializationMethodsCorrectly_CSharp8() =>
         builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp8.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .VerifyNoIssues();
 
     [TestMethod]
     public void ImplementSerializationMethodsCorrectly_CSharp9() =>
         builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp9.cs")
             .WithTopLevelStatements()
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithOptions(LanguageOptions.FromCSharp9)
             .Verify();
 
     [TestMethod]
     public void ImplementSerializationMethodsCorrectly_CSharp10() =>
         builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp10.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithOptions(LanguageOptions.FromCSharp10)
             .Verify();
 
     [TestMethod]
     public void ImplementSerializationMethodsCorrectly_CSharp11() =>
         builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .WithOptions(LanguageOptions.FromCSharp11)
             .Verify();
 
 #endif

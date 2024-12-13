@@ -31,11 +31,11 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void ForLoopConditionAlwaysFalse_CSharp9() =>
-            builder.AddPaths("ForLoopConditionAlwaysFalse.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builder.AddPaths("ForLoopConditionAlwaysFalse.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
 
         [TestMethod]
         public void ForLoopConditionAlwaysFalse_CSharp11() =>
-            builder.AddPaths("ForLoopConditionAlwaysFalse.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+            builder.AddPaths("ForLoopConditionAlwaysFalse.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
 
 #endif
 

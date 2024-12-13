@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Test.Rules
         public void RedundantJumpStatement_CSharp8() =>
             builder.AddPaths("RedundantJumpStatement.cs")
                 .AddReferences(MetadataReferenceFacade.NetStandard21)
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
 #if NET

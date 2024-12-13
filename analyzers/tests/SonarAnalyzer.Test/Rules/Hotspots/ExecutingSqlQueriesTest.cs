@@ -77,7 +77,7 @@ public class ExecutingSqlQueriesTest
     public void ExecutingSqlQueries_VB_Net46() =>
         builderVB
             .AddPaths("ExecutingSqlQueries.Net46.vb")
-            .WithOptions(ParseOptionsHelper.FromVisualBasic15)
+            .WithOptions(LanguageOptions.FromVisualBasic15)
             .AddReferences(GetReferencesNet46(Constants.NuGetLatestVersion))
             .Verify();
 
@@ -95,7 +95,7 @@ public class ExecutingSqlQueriesTest
             .AddPaths("ExecutingSqlQueries.Net46.MonoSqlLite.vb")
             .AddReferences(FrameworkMetadataReference.SystemData)
             .AddReferences(NuGetMetadataReference.MonoDataSqlite())
-            .WithOptions(ParseOptionsHelper.FromVisualBasic14)
+            .WithOptions(LanguageOptions.FromVisualBasic14)
             .Verify();
 
     internal static IEnumerable<MetadataReference> GetReferencesNet46(string sqlServerCeVersion) =>
@@ -113,7 +113,7 @@ public class ExecutingSqlQueriesTest
     public void ExecutingSqlQueries_CS_EntityFrameworkCore2() =>
         builderCS
             .AddPaths("ExecutingSqlQueries.EntityFrameworkCore2.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .AddReferences(GetReferencesEntityFrameworkNetCore("2.2.6").Concat(NuGetMetadataReference.SystemComponentModelTypeConverter()))
             .Verify();
 
@@ -121,7 +121,7 @@ public class ExecutingSqlQueriesTest
     public void ExecutingSqlQueries_CS_EntityFrameworkCore7() =>
         builderCS
             .AddPaths("ExecutingSqlQueries.EntityFrameworkCoreLatest.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .AddReferences(GetReferencesEntityFrameworkNetCore("7.0.14"))
             .Verify();
 
@@ -129,7 +129,7 @@ public class ExecutingSqlQueriesTest
     public void ExecutingSqlQueries_CS_Latest() =>
         builderCS.AddPaths("ExecutingSqlQueries.Latest.cs")
             .WithTopLevelStatements()
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()))
             .Verify();
 
@@ -137,7 +137,7 @@ public class ExecutingSqlQueriesTest
     public void ExecutingSqlQueries_VB_EntityFrameworkCore2() =>
         builderVB
             .AddPaths(@"ExecutingSqlQueries.EntityFrameworkCore2.vb")
-            .WithOptions(ParseOptionsHelper.FromVisualBasic15)
+            .WithOptions(LanguageOptions.FromVisualBasic15)
             .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.DotNetCore220Version))
             .Verify();
 
@@ -145,7 +145,7 @@ public class ExecutingSqlQueriesTest
     public void ExecutingSqlQueries_VB_EntityFrameworkCore7() =>
         builderVB
             .AddPaths(@"ExecutingSqlQueries.EntityFrameworkCoreLatest.vb")
-            .WithOptions(ParseOptionsHelper.FromVisualBasic15)
+            .WithOptions(LanguageOptions.FromVisualBasic15)
             .AddReferences(GetReferencesEntityFrameworkNetCore("7.0.14"))
             .Verify();
 

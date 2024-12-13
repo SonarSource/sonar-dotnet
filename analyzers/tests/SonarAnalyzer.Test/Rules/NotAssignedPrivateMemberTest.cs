@@ -34,7 +34,7 @@ public class NotAssignedPrivateMemberTest
         builder
             .AddPaths("NotAssignedPrivateMember.Latest.cs")
             .AddPaths("NotAssignedPrivateMember.Latest.Partial.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
     [TestMethod]

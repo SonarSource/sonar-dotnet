@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Test.Rules
         public void DangerousGetHandleShouldNotBeCalled_CS_CSharp9() =>
             builderCS.AddPaths("DangerousGetHandleShouldNotBeCalled.CSharp9.cs")
                 .AddReferences(MetadataReferenceFacade.MicrosoftWin32Registry)
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .WithTopLevelStatements()
                 .Verify();
 

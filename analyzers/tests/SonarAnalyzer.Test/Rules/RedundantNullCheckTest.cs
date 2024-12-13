@@ -47,13 +47,13 @@ namespace SonarAnalyzer.Test.Rules
         public void RedundantNullCheck_CSharp10() =>
             builderCS.AddPaths("RedundantNullCheck.CSharp10.cs")
                 .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .Verify();
 
         [TestMethod]
         public void RedundantNullCheck_CSharp11() =>
             builderCS.AddPaths("RedundantNullCheck.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .VerifyNoIssues();
 
         [TestMethod]
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Test.Rules
             codeFixbuilderCS.AddPaths("RedundantNullCheck.CSharp10.cs")
                 .WithCodeFixedPaths("RedundantNullCheck.CSharp10.Fixed.cs")
                 .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .VerifyCodeFix();
 
 #endif

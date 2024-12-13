@@ -31,11 +31,11 @@ public class StreamReadStatementTest
 
     [TestMethod]
     public void StreamReadStatement_CSharp10() =>
-        builder.AddPaths("StreamReadStatement.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).VerifyNoIssues();
+        builder.AddPaths("StreamReadStatement.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).VerifyNoIssues();
 
     [TestMethod]
     public void StreamReadStatement_CSharp11() =>
-        builder.AddPaths("StreamReadStatement.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+        builder.AddPaths("StreamReadStatement.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
 
 #endif
 

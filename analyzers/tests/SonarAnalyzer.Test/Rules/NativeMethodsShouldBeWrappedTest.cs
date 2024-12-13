@@ -44,7 +44,7 @@ public class NativeMethodsShouldBeWrappedTest
         builder
             .AddPaths("NativeMethodsShouldBeWrapped.CSharp11.cs")
             .AddPaths("NativeMethodsShouldBeWrapped.CSharp11.SourceGenerator.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .WithOptions(LanguageOptions.FromCSharp11)
             .WithConcurrentAnalysis(false)
             .Verify();
 

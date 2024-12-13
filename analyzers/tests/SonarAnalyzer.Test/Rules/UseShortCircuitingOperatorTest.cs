@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Test.Rules
             builderCS.WithCodeFix<CS.UseShortCircuitingOperatorCodeFix>()
                 .AddPaths("UseShortCircuitingOperator.CSharp9.cs")
                 .WithCodeFixedPaths("UseShortCircuitingOperator.CSharp9.Fixed.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .VerifyCodeFix();
 
 #endif

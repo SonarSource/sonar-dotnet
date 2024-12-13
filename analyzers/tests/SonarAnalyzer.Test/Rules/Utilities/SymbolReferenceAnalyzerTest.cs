@@ -413,7 +413,7 @@ public class SymbolReferenceAnalyzerTest
             .AddAnalyzer(() => analyzer)
             .AddPaths(fileNames)
             .WithBasePath(BasePath)
-            .WithOptions(ParseOptionsHelper.Latest(language))
+            .WithOptions(LanguageOptions.Latest(language))
             .WithProtobufPath(@$"{testRoot}\symrefs.pb");
     }
 

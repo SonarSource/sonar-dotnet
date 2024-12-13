@@ -35,14 +35,14 @@ public class ClassNamedExceptionTest
     public void ClassNamedException_FromCSharp9() =>
         builderCS
             .AddPaths("ClassNamedException.CSharp9.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithOptions(LanguageOptions.FromCSharp9)
             .VerifyNoIssues();
 
     [TestMethod]
     public void ClassNamedException_FromCSharp10() =>
         builderCS
             .AddPaths("ClassNamedException.CSharp10.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithOptions(LanguageOptions.FromCSharp10)
             .VerifyNoIssues();
 
     [TestMethod]

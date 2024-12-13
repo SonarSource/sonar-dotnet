@@ -20,22 +20,22 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 namespace SonarAnalyzer.TestFramework.Test.Build;
 
 [TestClass]
-public class ParseOptionsHelperTest
+public class LanguageOptionsTest
 {
     [TestMethod]
     public void ExpectedLanguageVersion()
     {
-        var vbVersions = ParseOptionsHelper.FromVisualBasic12.Cast<VB.VisualBasicParseOptions>().Select(x => x.LanguageVersion);
-        var csVersions = ParseOptionsHelper.FromCSharp6.Cast<CS.CSharpParseOptions>().Select(x => x.LanguageVersion);
+        var vbOptions = LanguageOptions.FromVisualBasic12.Cast<VB.VisualBasicParseOptions>().Select(x => x.LanguageVersion);
+        var csOptions = LanguageOptions.FromCSharp6.Cast<CS.CSharpParseOptions>().Select(x => x.LanguageVersion);
         if (!TestContextHelper.IsAzureDevOpsContext || TestContextHelper.IsPullRequestBuild)
         {
-            csVersions.Should().BeEquivalentTo([CS.LanguageVersion.CSharp6]);
-            vbVersions.Should().BeEquivalentTo([VB.LanguageVersion.VisualBasic12]);
+            csOptions.Should().BeEquivalentTo([CS.LanguageVersion.CSharp6]);
+            vbOptions.Should().BeEquivalentTo([VB.LanguageVersion.VisualBasic12]);
         }
         else
         {
             // This should fail when we add new language version
-            csVersions.Should().BeEquivalentTo(
+            csOptions.Should().BeEquivalentTo(
             [
                 CS.LanguageVersion.CSharp6,
                 CS.LanguageVersion.CSharp7,
@@ -50,7 +50,7 @@ public class ParseOptionsHelperTest
                 CS.LanguageVersion.CSharp13
             ]);
 
-            vbVersions.Should().BeEquivalentTo(
+            vbOptions.Should().BeEquivalentTo(
             [
                 VB.LanguageVersion.VisualBasic12,
                 VB.LanguageVersion.VisualBasic14,

@@ -35,7 +35,7 @@ public class SetPropertiesInsteadOfMethodsTest
         builderCS.AddPaths("SetPropertiesInsteadOfMethods.Latest.cs")
             .WithTopLevelStatements()
             .AddReferences(MetadataReferenceFacade.SystemCollections)
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif

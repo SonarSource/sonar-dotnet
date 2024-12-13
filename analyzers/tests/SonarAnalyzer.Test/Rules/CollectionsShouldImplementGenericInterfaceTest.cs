@@ -33,11 +33,11 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void CollectionsShouldImplementGenericInterface_Csharp9() =>
-            builder.AddPaths("CollectionsShouldImplementGenericInterface.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builder.AddPaths("CollectionsShouldImplementGenericInterface.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
 
         [TestMethod]
         public void CollectionsShouldImplementGenericInterface_Csharp10() =>
-            builder.AddPaths("CollectionsShouldImplementGenericInterface.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("CollectionsShouldImplementGenericInterface.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
 
 #endif
 

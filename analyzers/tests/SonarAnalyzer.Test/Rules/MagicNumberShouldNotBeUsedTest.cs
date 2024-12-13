@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void MagicNumberShouldNotBeUsed_CSharp11() =>
-            builder.AddPaths("MagicNumberShouldNotBeUsed.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).WithTopLevelStatements().Verify();
+            builder.AddPaths("MagicNumberShouldNotBeUsed.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).WithTopLevelStatements().Verify();
 
 #endif
 

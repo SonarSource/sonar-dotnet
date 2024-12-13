@@ -149,7 +149,7 @@ public class CopyPasteTokenAnalyzerTest
             .AddAnalyzer(() => analyzer)
             .AddPaths(fileName)
             .WithBasePath(BasePath)
-            .WithOptions(ParseOptionsHelper.Latest(language))
+            .WithOptions(LanguageOptions.Latest(language))
             .WithProtobufPath(@$"{testRoot}\token-cpd.pb");
     }
 

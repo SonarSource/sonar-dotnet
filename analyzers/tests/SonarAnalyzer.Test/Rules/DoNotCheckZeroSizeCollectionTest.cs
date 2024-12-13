@@ -35,12 +35,12 @@ public class DoNotCheckZeroSizeCollectionTest
     public void DoNotCheckZeroSizeCollection_CS_Latest() =>
         builderCS.AddPaths("DoNotCheckZeroSizeCollection.Latest.cs")
             .WithTopLevelStatements()
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif
 
     [TestMethod]
     public void DoNotCheckZeroSizeCollection_VB() =>
-        builderVB.AddPaths("DoNotCheckZeroSizeCollection.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
+        builderVB.AddPaths("DoNotCheckZeroSizeCollection.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
 }

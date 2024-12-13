@@ -160,14 +160,14 @@ public class TestMethodShouldContainAssertionTest
             .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1)
             .AddReferences(NuGetMetadataReference.XunitFramework(Latest))
             .AddReferences(NuGetMetadataReference.NUnit(Latest))
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithOptions(LanguageOptions.FromCSharp9)
             .Verify();
 
     [TestMethod]
     public void TestMethodShouldContainAssertion_CSharp11() =>
         builder.AddPaths("TestMethodShouldContainAssertion.CSharp11.cs")
             .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1)
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .WithOptions(LanguageOptions.FromCSharp11)
             .Verify();
 
 #endif

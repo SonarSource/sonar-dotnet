@@ -32,7 +32,7 @@ public class PreferJaggedArraysOverMultidimensionalTest
     public void PreferJaggedArraysOverMultidimensional_Latest() =>
         builder
             .AddPaths("PreferJaggedArraysOverMultidimensional.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 #endif
 }

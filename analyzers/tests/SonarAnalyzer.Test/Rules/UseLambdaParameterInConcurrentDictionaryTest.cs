@@ -26,13 +26,13 @@ public class UseLambdaParameterInConcurrentDictionaryTest
     public void UseLambdaParameterInConcurrentDictionary_CSharp8() =>
         new VerifierBuilder<CS.UseLambdaParameterInConcurrentDictionary>().AddPaths("UseLambdaParameterInConcurrentDictionary.CSharp8.cs")
             .AddReferences(MetadataReferenceFacade.SystemCollections)
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 
     [TestMethod]
     public void UseLambdaParameterInConcurrentDictionary_VB() =>
         new VerifierBuilder<VB.UseLambdaParameterInConcurrentDictionary>().AddPaths("UseLambdaParameterInConcurrentDictionary.vb")
-            .WithOptions(ParseOptionsHelper.FromVisualBasic14)
+            .WithOptions(LanguageOptions.FromVisualBasic14)
             .AddReferences(MetadataReferenceFacade.SystemCollections)
             .Verify();
 }

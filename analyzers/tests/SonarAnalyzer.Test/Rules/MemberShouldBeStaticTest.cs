@@ -54,7 +54,7 @@ public class MemberShouldBeStaticTest
         builder
             .AddPaths("MemberShouldBeStatic.Latest.cs")
             .AddPaths("MemberShouldBeStatic.Latest.Partial.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .WithTopLevelStatements().Verify();
 #endif
 

@@ -34,7 +34,7 @@ public class ToStringShouldNotReturnNullTest
     [TestMethod]
     public void ToStringShouldNotReturnNull_CSharp9() =>
         builderCS
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithOptions(LanguageOptions.FromCSharp9)
             .WithTopLevelStatements()
             .AddPaths("ToStringShouldNotReturnNull.CSharp9.cs")
             .Verify();
@@ -42,7 +42,7 @@ public class ToStringShouldNotReturnNullTest
     [TestMethod]
     public void ToStringShouldNotReturnNull_CSharp11() =>
         builderCS
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .WithOptions(LanguageOptions.FromCSharp11)
             .AddPaths("ToStringShouldNotReturnNull.CSharp11.cs")
             .VerifyNoIssues();
 

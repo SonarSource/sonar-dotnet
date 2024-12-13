@@ -26,7 +26,7 @@ public class DisposableNotDisposedTest
     [TestMethod]
     public void DisposableNotDisposed() =>
         builder.AddPaths("DisposableNotDisposed.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp7)
+            .WithOptions(LanguageOptions.FromCSharp7)
             .AddReferences(MetadataReferenceFacade.SystemNetHttp)
             .Verify();
 
@@ -41,7 +41,7 @@ public class DisposableNotDisposedTest
     [TestMethod]
     public void DisposableNotDisposed_CSharp8() =>
         builder.AddPaths("DisposableNotDisposed.CSharp8.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .AddReferences(NuGetMetadataReference.FluentAssertions("5.9.0"))
             .Verify();
 
@@ -55,7 +55,7 @@ public class DisposableNotDisposedTest
     [TestMethod]
     public void DisposableNotDisposed_CSharp10() =>
         builder.AddPaths("DisposableNotDisposed.CSharp10.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithOptions(LanguageOptions.FromCSharp10)
             .Verify();
 
 #endif

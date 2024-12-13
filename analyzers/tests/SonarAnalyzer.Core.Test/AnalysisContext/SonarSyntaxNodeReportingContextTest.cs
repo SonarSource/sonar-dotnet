@@ -97,7 +97,7 @@ public class SonarSyntaxNodeReportingContextTest
         new VerifierBuilder()
             .AddAnalyzer(() => new TestAnalyzer([SyntaxKindEx.PrimaryConstructorBaseType], c =>
                 $"IsRedundantPrimaryConstructorBaseTypeContext is {c.IsRedundantPrimaryConstructorBaseTypeContext()}, ContainingSymbol is {c.ContainingSymbol.Kind} {c.ContainingSymbol.ToDisplayString()}"))
-            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .WithOptions(LanguageOptions.FromCSharp12)
             .AddSnippet(snippet)
             .Verify();
     }

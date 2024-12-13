@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void DoNotCallAssemblyLoadInvalidMethods_CSharp9() =>
             builder.AddPaths("DoNotCallAssemblyLoadInvalidMethods.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .WithTopLevelStatements()
                 .AddReferences(MetadataReferenceFacade.SystemSecurityPermissions)
                 .Verify();

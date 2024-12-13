@@ -32,13 +32,13 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void StaticFieldVisible_CSharp9() =>
             builder.AddPaths("StaticFieldVisible.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
 
         [TestMethod]
         public void StaticFieldVisible_CSharp10() =>
             builder.AddPaths("StaticFieldVisible.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .Verify();
 
 #endif

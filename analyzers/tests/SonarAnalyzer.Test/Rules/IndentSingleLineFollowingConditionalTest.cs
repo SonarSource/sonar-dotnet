@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void IndentSingleLineFollowingConditional_FromCSharp11() =>
             builder.AddPaths("IndentSingleLineFollowingConditional.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
         [TestMethod]

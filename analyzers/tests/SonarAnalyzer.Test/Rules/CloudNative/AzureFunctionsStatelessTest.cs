@@ -25,14 +25,14 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void AzureFunctionsStateless_CSharp8() =>
-            builder.AddPaths("AzureFunctionsStateless.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builder.AddPaths("AzureFunctionsStateless.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
 #if NET
 
         [TestMethod]
         public void AzureFunctionsStateless_Latest() =>
             builder.AddPaths("AzureFunctionsStateless.Latest.cs", "AzureFunctionsStateless.Latest.Partial.cs")
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 
 #endif

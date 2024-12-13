@@ -40,13 +40,13 @@ public class DoNotShiftByZeroOrIntSizeTest
     [TestMethod]
     public void DoNotShiftByZeroOrIntSize_CSharp10() =>
         builder.AddPaths("DoNotShiftByZeroOrIntSize.CSharp10.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithOptions(LanguageOptions.FromCSharp10)
             .Verify();
 
     [TestMethod]
     public void DoNotShiftByZeroOrIntSize_CSharp11() =>
         builder.AddPaths("DoNotShiftByZeroOrIntSize.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .WithOptions(LanguageOptions.FromCSharp11)
             .Verify();
 
     [TestMethod]

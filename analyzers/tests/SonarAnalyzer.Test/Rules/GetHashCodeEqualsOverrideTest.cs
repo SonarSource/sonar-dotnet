@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void GetHashCodeEqualsOverride_CSharp9() =>
             builder.AddPaths("GetHashCodeEqualsOverride.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .VerifyNoIssues();
 
 #endif

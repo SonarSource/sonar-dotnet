@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void UriShouldNotBeHardcoded_CS_Latest() =>
             builderCS.AddPaths("UriShouldNotBeHardcoded.Latest.cs")
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 
 #endif

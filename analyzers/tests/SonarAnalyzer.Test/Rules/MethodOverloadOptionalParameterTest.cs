@@ -27,25 +27,25 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void MethodOverloadOptionalParameter() =>
-            builder.AddPaths("MethodOverloadOptionalParameter.cs").AddReferences(MetadataReferenceFacade.NetStandard21).WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builder.AddPaths("MethodOverloadOptionalParameter.cs").AddReferences(MetadataReferenceFacade.NetStandard21).WithOptions(LanguageOptions.FromCSharp8).Verify();
 
 #if NET
 
         [TestMethod]
         public void MethodOverloadOptionalParameter_CSharp9() =>
-            builder.AddPaths("MethodOverloadOptionalParameter.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builder.AddPaths("MethodOverloadOptionalParameter.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
 
         [TestMethod]
         public void MethodOverloadOptionalParameter_CSharp10() =>
-            builder.AddPaths("MethodOverloadOptionalParameter.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("MethodOverloadOptionalParameter.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
 
         [TestMethod]
         public void MethodOverloadOptionalParameter_CSharp11() =>
-            builder.AddPaths("MethodOverloadOptionalParameter.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+            builder.AddPaths("MethodOverloadOptionalParameter.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
 
         [TestMethod]
         public void MethodOverloadOptionalParameter_CSharp12() =>
-            builder.AddPaths("MethodOverloadOptionalParameter.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+            builder.AddPaths("MethodOverloadOptionalParameter.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).Verify();
 
         [TestMethod]
         public void MethodOverloadOptionalParameter_Razor() =>

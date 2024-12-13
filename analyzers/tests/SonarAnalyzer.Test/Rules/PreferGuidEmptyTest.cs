@@ -22,7 +22,7 @@ namespace SonarAnalyzer.Test.Rules
     [TestClass]
     public class PreferGuidEmptyTest
     {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.PreferGuidEmpty>().WithOptions(ParseOptionsHelper.FromCSharp8);
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.PreferGuidEmpty>().WithOptions(LanguageOptions.FromCSharp8);
         private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.PreferGuidEmpty>();
 
         [TestMethod]
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
         [TestMethod]
         public void PreferGuidEmpty_CSharp9() =>
-            builderCS.WithOptions(ParseOptionsHelper.FromCSharp9).AddPaths("PreferGuidEmpty.CSharp9.cs").Verify();
+            builderCS.WithOptions(LanguageOptions.FromCSharp9).AddPaths("PreferGuidEmpty.CSharp9.cs").Verify();
 #endif
 
         [TestMethod]

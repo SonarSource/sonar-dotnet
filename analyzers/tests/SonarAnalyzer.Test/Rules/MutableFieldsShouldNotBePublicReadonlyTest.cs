@@ -33,7 +33,7 @@ public class MutableFieldsShouldNotBePublicReadonlyTest
     public void PublicMutableFieldsShouldNotBeReadonly_CS_Latest() =>
         builder.AddPaths("MutableFieldsShouldNotBePublicReadonly.Latest.cs")
             .AddReferences(MetadataReferenceFacade.SystemCollections)
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif

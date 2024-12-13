@@ -32,7 +32,7 @@ public class CallerInformationParametersShouldBeLastTest
 
     [TestMethod]
     public void CallerInformationParametersShouldBeLast_CS_Latest() =>
-        builder.AddPaths("CallerInformationParametersShouldBeLast.Latest.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.CSharpLatest).Verify();
+        builder.AddPaths("CallerInformationParametersShouldBeLast.Latest.cs").WithTopLevelStatements().WithOptions(LanguageOptions.CSharpLatest).Verify();
 
 #endif
 

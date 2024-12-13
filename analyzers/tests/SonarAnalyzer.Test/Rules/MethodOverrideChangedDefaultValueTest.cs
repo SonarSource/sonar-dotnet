@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Test.Rules
         public void MethodOverrideChangedDefaultValue() =>
             builder.AddPaths("MethodOverrideChangedDefaultValue.cs")
                 .AddReferences(MetadataReferenceFacade.NetStandard21)
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
 #if NET
@@ -35,13 +35,13 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void MethodOverrideChangedDefaultValue_CSharp9() =>
             builder.AddPaths("MethodOverrideChangedDefaultValue.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
 
         [TestMethod]
         public void MethodOverrideChangedDefaultValue_CSharp11() =>
             builder.AddPaths("MethodOverrideChangedDefaultValue.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
         [TestMethod]
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("MethodOverrideChangedDefaultValue.CSharp11.cs")
                 .WithCodeFix<MethodOverrideChangedDefaultValueCodeFix>()
                 .WithCodeFixedPaths("MethodOverrideChangedDefaultValue.CSharp11.Fixed.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .VerifyCodeFix();
 
 #endif
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("MethodOverrideChangedDefaultValue.cs")
                 .WithCodeFix<MethodOverrideChangedDefaultValueCodeFix>()
                 .WithCodeFixedPaths("MethodOverrideChangedDefaultValue.Synchronize.Fixed.cs", "MethodOverrideChangedDefaultValue.Synchronize.Fixed.Batch.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .WithCodeFixTitle(MethodOverrideChangedDefaultValueCodeFix.TitleGeneral)
                 .VerifyCodeFix();
 
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("MethodOverrideChangedDefaultValue.cs")
                 .WithCodeFix<MethodOverrideChangedDefaultValueCodeFix>()
                 .WithCodeFixedPaths("MethodOverrideChangedDefaultValue.Remove.Fixed.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .WithCodeFixTitle(MethodOverrideChangedDefaultValueCodeFix.TitleExplicitInterface)
                 .VerifyCodeFix();
     }

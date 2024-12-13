@@ -25,11 +25,11 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void NumberPatternShouldBeRegular_BeforeCSharp7() =>
-            builder.AddPaths("NumberPatternShouldBeRegular.cs").WithOptions(ParseOptionsHelper.BeforeCSharp7).WithErrorBehavior(CompilationErrorBehavior.Ignore).VerifyNoIssues();
+            builder.AddPaths("NumberPatternShouldBeRegular.cs").WithOptions(LanguageOptions.BeforeCSharp7).WithErrorBehavior(CompilationErrorBehavior.Ignore).VerifyNoIssues();
 
         [TestMethod]
         public void NumberPatternShouldBeRegular_FromCSharp7() =>
-            builder.AddPaths("NumberPatternShouldBeRegular.cs").WithOptions(ParseOptionsHelper.FromCSharp7).Verify();
+            builder.AddPaths("NumberPatternShouldBeRegular.cs").WithOptions(LanguageOptions.FromCSharp7).Verify();
 
 #if NET
 

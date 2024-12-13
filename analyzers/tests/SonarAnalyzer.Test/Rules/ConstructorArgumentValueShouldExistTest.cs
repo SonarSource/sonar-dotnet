@@ -34,7 +34,7 @@ public class ConstructorArgumentValueShouldExistTest
     public void ConstructorArgumentValueShouldExist_CS_Latest() =>
         builderCS.AddPaths("ConstructorArgumentValueShouldExist.Latest.cs", "ConstructorArgumentValueShouldExist.Latest.Partial.cs")
             .WithConcurrentAnalysis(false)
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #else
@@ -48,7 +48,7 @@ public class ConstructorArgumentValueShouldExistTest
     [TestMethod]
     public void ConstructorArgumentValueShouldExist_VB() =>
         new VerifierBuilder<VB.ConstructorArgumentValueShouldExist>().AddPaths("ConstructorArgumentValueShouldExist.vb")
-            .WithOptions(ParseOptionsHelper.FromVisualBasic14)
+            .WithOptions(LanguageOptions.FromVisualBasic14)
             .AddReferences(MetadataReferenceFacade.SystemXaml)
             .Verify();
 

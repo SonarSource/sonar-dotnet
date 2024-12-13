@@ -51,7 +51,7 @@ public class LoggerFieldsShouldBePrivateStaticReadonlyTest
                 }
                 """)
             .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 #endif
 

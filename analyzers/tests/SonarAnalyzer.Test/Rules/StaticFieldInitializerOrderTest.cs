@@ -26,7 +26,7 @@ public class StaticFieldInitializerOrderTest
     [TestMethod]
     public void StaticFieldInitializerOrder() =>
         builder.AddPaths("StaticFieldInitializerOrder.cs", "StaticFieldInitializerOrder_PartialClass.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .AddReferences(MetadataReferenceFacade.NetStandard21)
             .Verify();
 
@@ -34,7 +34,7 @@ public class StaticFieldInitializerOrderTest
 
     [TestMethod]
     public void StaticFieldInitializerOrder_Latest() =>
-        builder.AddPaths("StaticFieldInitializerOrder.Latest.cs").WithOptions(ParseOptionsHelper.CSharpLatest).Verify();
+        builder.AddPaths("StaticFieldInitializerOrder.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
 #endif
 

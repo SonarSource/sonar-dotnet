@@ -35,7 +35,7 @@ public class InsecureContentSecurityPolicyTest
                 AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
                 AspNetCoreMetadataReference.MicrosoftExtensionsPrimitives
             ])
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 }
 

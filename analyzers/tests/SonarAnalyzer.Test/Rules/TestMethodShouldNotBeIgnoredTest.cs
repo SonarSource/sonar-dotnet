@@ -84,14 +84,14 @@ public class TestMethodShouldNotBeIgnoredTest
         builder.AddPaths("TestMethodShouldNotBeIgnored.CSharp9.cs")
             .AddReferences(NuGetMetadataReference.XunitFrameworkV1)
             .AddReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithOptions(LanguageOptions.FromCSharp9)
             .Verify();
 
     [TestMethod]
     public void TestMethodShouldNotBeIgnored_CSharp11() =>
         builder.AddPaths("TestMethodShouldNotBeIgnored.CSharp11.cs")
             .AddReferences(NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion))
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .WithOptions(LanguageOptions.FromCSharp11)
             .Verify();
 
 #endif

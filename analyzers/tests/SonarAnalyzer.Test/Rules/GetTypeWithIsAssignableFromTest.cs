@@ -47,7 +47,7 @@ public class GetTypeWithIsAssignableFromTest
     public void GetTypeWithIsAssignableFrom_CSharp10() =>
         builder.AddPaths("GetTypeWithIsAssignableFrom.CSharp10.cs")
             .WithTopLevelStatements()
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithOptions(LanguageOptions.FromCSharp10)
             .Verify();
 
     [TestMethod]
@@ -56,13 +56,13 @@ public class GetTypeWithIsAssignableFromTest
             .WithCodeFix<GetTypeWithIsAssignableFromCodeFix>()
             .WithCodeFixedPaths("GetTypeWithIsAssignableFrom.CSharp10.Fixed.cs")
             .WithTopLevelStatements()
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithOptions(LanguageOptions.FromCSharp10)
             .VerifyCodeFix();
 
     [TestMethod]
     public void GetTypeWithIsAssignableFrom_CSharp11() =>
         builder.AddPaths("GetTypeWithIsAssignableFrom.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .WithOptions(LanguageOptions.FromCSharp11)
             .VerifyNoIssues();
 
 #endif

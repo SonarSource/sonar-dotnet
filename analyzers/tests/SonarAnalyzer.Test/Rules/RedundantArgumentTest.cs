@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Test.Rules
         public void RedundantArgument_CSharp8() =>
             builder.AddPaths("RedundantArgument.cs")
                 .AddReferences(MetadataReferenceFacade.NetStandard21)
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
 #if NET
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void RedundantArgument_CSharp12() =>
             builder.AddPaths("RedundantArgument.CSharp12.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .WithOptions(LanguageOptions.FromCSharp12)
                 .Verify();
 
 #endif
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Test.Rules
             codeFixBuilder.AddPaths("RedundantArgument.cs")
                 .WithCodeFixedPaths("RedundantArgument.NoNamed.Fixed.cs")
                 .WithCodeFixTitle(RedundantArgumentCodeFix.TitleRemove)
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .VerifyCodeFix();
 
         [TestMethod]
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Test.Rules
             codeFixBuilder.AddPaths("RedundantArgument.cs")
                 .WithCodeFixedPaths("RedundantArgument.Named.Fixed.cs")
                 .WithCodeFixTitle(RedundantArgumentCodeFix.TitleRemoveWithNameAdditions)
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .VerifyCodeFix();
     }
 }

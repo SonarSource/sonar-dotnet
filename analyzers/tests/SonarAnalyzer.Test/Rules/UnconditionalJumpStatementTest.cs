@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void UnconditionalJumpStatement_CSharp8() =>
             new VerifierBuilder<CS.UnconditionalJumpStatement>().AddPaths("UnconditionalJumpStatement.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
         [TestMethod]

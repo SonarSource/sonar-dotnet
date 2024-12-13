@@ -41,13 +41,13 @@ class Bar { }")
         [TestMethod]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_CSharp9() =>
             builderCS.AddPaths("PartCreationPolicyShouldBeUsedWithExportAttribute.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
 
         [TestMethod]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_CSharp12() =>
             builderCS.AddPaths("PartCreationPolicyShouldBeUsedWithExportAttribute.CSharp12.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .WithOptions(LanguageOptions.FromCSharp12)
                 .Verify();
 
 #endif

@@ -78,7 +78,7 @@ public partial class SonarAnalysisContextTest
             {
                 // ToDo: We should find a way to ack the fact the action was not run
                 testCase.Builder
-                    .WithOptions(ParseOptionsHelper.FromCSharp8)
+                    .WithOptions(LanguageOptions.FromCSharp8)
                     .VerifyNoIssuesIgnoreErrors();
             }
         }
@@ -95,7 +95,7 @@ public partial class SonarAnalysisContextTest
         {
             // ToDo: We test that a rule is enabled only by checking the issues are reported
             testCase.Builder
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
         }
     }
@@ -110,7 +110,7 @@ public partial class SonarAnalysisContextTest
             if (hasTestScope)
             {
                 testCase.Builder
-                    .WithOptions(ParseOptionsHelper.FromCSharp8)
+                    .WithOptions(LanguageOptions.FromCSharp8)
                     .WithAdditionalFilePath(sonarProjectConfig)
                     .Verify();
             }
@@ -118,7 +118,7 @@ public partial class SonarAnalysisContextTest
             {
                 // MAIN-only
                 testCase.Builder
-                    .WithOptions(ParseOptionsHelper.FromCSharp8)
+                    .WithOptions(LanguageOptions.FromCSharp8)
                     .WithAdditionalFilePath(sonarProjectConfig)
                     .VerifyNoIssuesIgnoreErrors();
             }
@@ -136,14 +136,14 @@ public partial class SonarAnalysisContextTest
             {
                 // MAIN-only and MAIN & TEST rules
                 testCase.Builder
-                    .WithOptions(ParseOptionsHelper.FromCSharp8)
+                    .WithOptions(LanguageOptions.FromCSharp8)
                     .WithAdditionalFilePath(sonarProjectConfig)
                     .VerifyNoIssuesIgnoreErrors();
             }
             else
             {
                 testCase.Builder
-                    .WithOptions(ParseOptionsHelper.FromCSharp8)
+                    .WithOptions(LanguageOptions.FromCSharp8)
                     .WithAdditionalFilePath(sonarProjectConfig)
                     .Verify();
             }
@@ -160,7 +160,7 @@ public partial class SonarAnalysisContextTest
             if (hasProductScope)
             {
                 testCase.Builder
-                    .WithOptions(ParseOptionsHelper.FromCSharp8)
+                    .WithOptions(LanguageOptions.FromCSharp8)
                     .WithAdditionalFilePath(sonarProjectConfig)
                     .Verify();
             }
@@ -168,7 +168,7 @@ public partial class SonarAnalysisContextTest
             {
                 // TEST-only rule
                 testCase.Builder
-                    .WithOptions(ParseOptionsHelper.FromCSharp8)
+                    .WithOptions(LanguageOptions.FromCSharp8)
                     .WithAdditionalFilePath(sonarProjectConfig)
                     .VerifyNoIssues();
             }
@@ -221,13 +221,13 @@ public partial class SonarAnalysisContextTest
                     if (testCase.Analyzer is AnonymousDelegateEventUnsubscribe || testCase.Analyzer is TestMethodShouldContainAssertion)
                     {
                         testCase.Builder
-                            .WithOptions(ParseOptionsHelper.FromCSharp8)
+                            .WithOptions(LanguageOptions.FromCSharp8)
                             .VerifyNoIssues();
                     }
                     else
                     {
                         testCase.Builder
-                            .WithOptions(ParseOptionsHelper.FromCSharp8)
+                            .WithOptions(LanguageOptions.FromCSharp8)
                             .Verify();
                     }
                 }

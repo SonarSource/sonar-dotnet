@@ -25,6 +25,6 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void AzureFunctionsCatchExceptions_CS() =>
-            builder.AddPaths("AzureFunctionsCatchExceptions.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builder.AddPaths("AzureFunctionsCatchExceptions.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
     }
 }

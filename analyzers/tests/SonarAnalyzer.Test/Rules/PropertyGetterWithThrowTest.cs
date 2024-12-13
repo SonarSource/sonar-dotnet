@@ -38,7 +38,7 @@ public class PropertyGetterWithThrowTest
         builderCS
             .AddPaths("PropertyGetterWithThrow.Latest.cs")
             .AddPaths("PropertyGetterWithThrow.Latest.Partial.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 #endif
 }

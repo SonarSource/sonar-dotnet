@@ -29,12 +29,12 @@ public class ClassAndMethodNameTest
         builderCS.AddPaths("ClassAndMethodName.cs", "ClassAndMethodName.Partial.cs")
             .AddReferences(MetadataReferenceFacade.NetStandard21)
             .WithConcurrentAnalysis(false)
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 
     [TestMethod]
     public void ClassAndMethodName_InTestProject_CS() =>
-        builderCS.AddPaths("ClassAndMethodName.Tests.cs").AddTestReference().WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+        builderCS.AddPaths("ClassAndMethodName.Tests.cs").AddTestReference().WithOptions(LanguageOptions.FromCSharp8).Verify();
 
 #if NET
 
@@ -48,11 +48,11 @@ public class ClassAndMethodNameTest
 
     [TestMethod]
     public void ClassAndMethodName_MethodName_CS_Latest() =>
-        builderCS.AddPaths("ClassAndMethodName.MethodName.Latest.cs").WithOptions(ParseOptionsHelper.CSharpLatest).Verify();
+        builderCS.AddPaths("ClassAndMethodName.MethodName.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]
     public void ClassAndMethodName_MethodName_InTestProject_CS_Latest() =>
-        builderCS.AddPaths("ClassAndMethodName.MethodName.Latest.cs").AddTestReference().WithOptions(ParseOptionsHelper.CSharpLatest).Verify();
+        builderCS.AddPaths("ClassAndMethodName.MethodName.Latest.cs").AddTestReference().WithOptions(LanguageOptions.CSharpLatest).Verify();
 
 #endif
 
@@ -68,7 +68,7 @@ public class ClassAndMethodNameTest
     public void ClassAndMethodName_MethodName(ProjectType projectType) =>
         builderCS.AddPaths("ClassAndMethodName.MethodName.cs", "ClassAndMethodName.MethodName.Partial.cs")
             .AddReferences(TestHelper.ProjectTypeReference(projectType))
-            .WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            .WithOptions(LanguageOptions.FromCSharp8).Verify();
 
     [DataTestMethod]
     [DataRow("foo", "foo")]

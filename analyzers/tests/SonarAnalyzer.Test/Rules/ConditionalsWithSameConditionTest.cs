@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void ConditionalsWithSameCondition_CSharp9() =>
             builder.AddPaths("ConditionalsWithSameCondition.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
 
         [TestMethod]
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void ConditionalsWithSameCondition_CSharp10() =>
             builder.AddPaths("ConditionalsWithSameCondition.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .Verify();
 
         [TestMethod]

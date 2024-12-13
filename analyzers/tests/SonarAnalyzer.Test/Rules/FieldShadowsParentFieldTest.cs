@@ -50,13 +50,13 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void FieldShadowsParentField_CSharp9() =>
             builderCS.AddPaths("FieldShadowsParentField.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
 
         [TestMethod]
         public void FieldsShouldNotDifferByCapitalization_CShar9() =>
             builderCS.AddPaths("FieldsShouldNotDifferByCapitalization.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
 
 #endif

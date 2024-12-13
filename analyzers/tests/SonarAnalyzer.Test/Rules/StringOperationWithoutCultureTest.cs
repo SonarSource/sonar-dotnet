@@ -32,13 +32,13 @@ public class StringOperationWithoutCultureTest
     [TestMethod]
     public void StringOperationWithoutCulture_CSharp10() =>
         builder.AddPaths("StringOperationWithoutCulture.CSharp10.cs")
-        .WithOptions(ParseOptionsHelper.FromCSharp10)
+        .WithOptions(LanguageOptions.FromCSharp10)
         .VerifyNoIssues();
 
     [TestMethod]
     public void StringOperationWithoutCulture_CSharp11() =>
         builder.AddPaths("StringOperationWithoutCulture.CSharp11.cs")
-        .WithOptions(ParseOptionsHelper.FromCSharp11)
+        .WithOptions(LanguageOptions.FromCSharp11)
         .Verify();
 
 #endif

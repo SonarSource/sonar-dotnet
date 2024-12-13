@@ -42,7 +42,7 @@ public class InsteadOfAnyTest
     [TestMethod]
     public void InsteadOfAny_EntityFramework() =>
         builderCS.AddPaths("InsteadOfAny.EntityFramework.Core.cs")
-                 .WithOptions(ParseOptionsHelper.FromCSharp8)
+                 .WithOptions(LanguageOptions.FromCSharp8)
                  .AddReferences(GetReferencesEntityFrameworkNetCore())
                  .Verify();
 
@@ -58,7 +58,7 @@ public class InsteadOfAnyTest
 
     [TestMethod]
     public void ExistsInsteadOfAny_VB() =>
-        builderVB.AddPaths("InsteadOfAny.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
+        builderVB.AddPaths("InsteadOfAny.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
 
     [TestMethod]
     public void InsteadOfAny_EntityFramework_VB() =>

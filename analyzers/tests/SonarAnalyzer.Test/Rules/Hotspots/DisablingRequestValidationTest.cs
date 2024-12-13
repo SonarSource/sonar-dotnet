@@ -132,7 +132,7 @@ public class DisablingRequestValidationTest
         new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled))
             .AddPaths("DisablingRequestValidation.vb")
             .AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion))
-            .WithOptions(ParseOptionsHelper.FromVisualBasic14)
+            .WithOptions(LanguageOptions.FromVisualBasic14)
             .Verify();
 
     [TestMethod]

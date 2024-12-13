@@ -31,11 +31,11 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void EnumerableSumInUnchecked_CSharp9() =>
-            builder.AddPaths("EnumerableSumInUnchecked.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).WithTopLevelStatements().Verify();
+            builder.AddPaths("EnumerableSumInUnchecked.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void EnumerableSumInUnchecked_CSharp11() =>
-            builder.AddPaths("EnumerableSumInUnchecked.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).WithTopLevelStatements().Verify();
+            builder.AddPaths("EnumerableSumInUnchecked.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).WithTopLevelStatements().Verify();
 
 #endif
 

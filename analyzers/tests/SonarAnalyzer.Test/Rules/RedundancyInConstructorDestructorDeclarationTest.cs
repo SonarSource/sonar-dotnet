@@ -38,46 +38,46 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CSharp9() =>
             builder.AddPaths("RedundancyInConstructorDestructorDeclaration.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CSharp10() =>
             builder.AddPaths("RedundancyInConstructorDestructorDeclaration.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .Verify();
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CSharp11() =>
             builder.AddPaths("RedundancyInConstructorDestructorDeclaration.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CSharp12() =>
             builder.AddPaths("RedundancyInConstructorDestructorDeclaration.CSharp12.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .WithOptions(LanguageOptions.FromCSharp12)
                 .Verify();
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_CSharp9() =>
             codeFixBuilderRemoveBaseCall.AddPaths("RedundancyInConstructorDestructorDeclaration.CSharp9.cs")
                 .WithCodeFixedPaths("RedundancyInConstructorDestructorDeclaration.CSharp9.Fixed.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .VerifyCodeFix();
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_CSharp10() =>
             codeFixBuilderRemoveConstructor.AddPaths("RedundancyInConstructorDestructorDeclaration.CSharp10.cs")
                 .WithCodeFixedPaths("RedundancyInConstructorDestructorDeclaration.CSharp10.Fixed.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .VerifyCodeFix();
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_CSharp11() =>
             codeFixBuilderRemoveConstructor.AddPaths("RedundancyInConstructorDestructorDeclaration.CSharp11.cs")
                 .WithCodeFixedPaths("RedundancyInConstructorDestructorDeclaration.CSharp11.Fixed.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .VerifyCodeFix();
 
 #endif

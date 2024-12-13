@@ -32,7 +32,7 @@ public class DoNotCopyArraysInPropertiesTest
     [TestMethod]
     public void DoNotCopyArraysInProperties_CS_Latest() =>
         builder.AddPaths("DoNotCopyArraysInProperties.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif

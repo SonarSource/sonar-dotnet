@@ -34,14 +34,14 @@ namespace SonarAnalyzer.Test.Rules
         public void SetLocaleForDataTypes_CSharp9() =>
             builder.AddPaths("SetLocaleForDataTypes.CSharp9.cs")
                 .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
 
         [TestMethod]
         public void SetLocaleForDataTypes_CSharp10() =>
             builder.AddPaths("SetLocaleForDataTypes.CSharp10.cs")
                 .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .Verify();
 
 #endif

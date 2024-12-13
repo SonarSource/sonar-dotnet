@@ -152,7 +152,7 @@ namespace SonarAnalyzer.Test.Rules
                 .AddAnalyzer(() => new TestMetricsAnalyzer(testRoot, isTestProject))
                 .AddPaths(fileNames)
                 .WithBasePath(BasePath)
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .WithProtobufPath(@$"{testRoot}\metrics.pb");
         }
 

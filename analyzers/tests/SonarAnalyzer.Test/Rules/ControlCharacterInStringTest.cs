@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void ControlCharacterInString_CSharp8() =>
             builder.AddPaths("ControlCharacterInString.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
 #if NET
@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void ControlCharacterInString_Latest() =>
             builder.AddPaths("ControlCharacterInString.Latest.cs")
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 
 #endif

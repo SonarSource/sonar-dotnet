@@ -27,7 +27,7 @@ public class PasswordsShouldBeStoredCorrectlyTest
     [TestMethod]
     public void PasswordsShouldBeStoredCorrectly_CS_Core() =>
         Builder
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .AddPaths("PasswordsShouldBeStoredCorrectly.Core.cs")
             .AddReferences([
                 AspNetCoreMetadataReference.MicrosoftExtensionsIdentityCore,
@@ -40,7 +40,7 @@ public class PasswordsShouldBeStoredCorrectlyTest
     [TestMethod]
     public void PasswordsShouldBeStoredCorrectly_CS_PasswordHasherOptions() =>
         Builder
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithOptions(LanguageOptions.FromCSharp9)
             .AddReferences(NuGetMetadataReference.MicrosoftAspNetIdentity())
             .AddSnippet("""
                 using Microsoft.AspNet.Identity;

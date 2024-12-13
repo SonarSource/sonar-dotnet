@@ -34,7 +34,7 @@ public class CollectionPropertiesShouldBeReadOnlyTest
     public void CollectionPropertiesShouldBeReadOnly_CS_Latest() =>
         builder.AddPaths("CollectionPropertiesShouldBeReadOnly.Latest.cs")
             .WithTopLevelStatements()
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
     [TestMethod]

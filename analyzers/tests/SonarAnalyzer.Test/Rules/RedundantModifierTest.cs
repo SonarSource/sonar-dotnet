@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void RedundantModifier_Latest() =>
             builder.AddPaths("RedundantModifier.Latest.cs", "RedundantModifier.Latest.Partial.cs")
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 
         [TestMethod]
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("RedundantModifier.Latest.cs")
                 .WithCodeFix<RedundantModifierCodeFix>()
                 .WithCodeFixedPaths("RedundantModifier.Latest.Fixed.Checked.cs")
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .WithCodeFixTitle(RedundantModifierCodeFix.TitleChecked)
                 .VerifyCodeFix();
 
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("RedundantModifier.Latest.cs")
                 .WithCodeFix<RedundantModifierCodeFix>()
                 .WithCodeFixedPaths("RedundantModifier.Latest.Fixed.Partial.cs")
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .WithCodeFixTitle(RedundantModifierCodeFix.TitlePartial)
                 .VerifyCodeFix();
 
@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("RedundantModifier.Latest.cs")
                 .WithCodeFix<RedundantModifierCodeFix>()
                 .WithCodeFixedPaths("RedundantModifier.Latest.Fixed.Sealed.cs")
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .WithCodeFixTitle(RedundantModifierCodeFix.TitleSealed)
                 .VerifyCodeFix();
 
@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("RedundantModifier.Latest.cs")
                 .WithCodeFix<RedundantModifierCodeFix>()
                 .WithCodeFixedPaths("RedundantModifier.Latest.Fixed.Unsafe.cs")
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .WithCodeFixTitle(RedundantModifierCodeFix.TitleUnsafe)
                 .VerifyCodeFix();
 

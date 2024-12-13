@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Test.Rules
                         }
                     }
                     """)
-                .WithOptions(ParseOptionsHelper.BeforeCSharp13)
+                .WithOptions(LanguageOptions.BeforeCSharp13)
                 .Verify();
 
 #if NET
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Test.Rules
                     string.Format("bla");                                      // FN
                     string.Format("%s %s", "foo", "bar", "quix", "hi", "bye"); // FN
                     """)
-                .WithOptions(ParseOptionsHelper.FromCSharp13)
+                .WithOptions(LanguageOptions.FromCSharp13)
                 .WithTopLevelStatements()
                 .VerifyNoIssues();
 

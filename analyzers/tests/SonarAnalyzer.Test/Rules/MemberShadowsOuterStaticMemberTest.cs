@@ -30,7 +30,7 @@ public class MemberShadowsOuterStaticMemberTest
 #if NET
     [TestMethod]
     public void MemberShadowsOuterStaticMember_Latest() =>
-        builder.AddPaths("MemberShadowsOuterStaticMember.Latest.cs").WithOptions(ParseOptionsHelper.CSharpLatest).Verify();
+        builder.AddPaths("MemberShadowsOuterStaticMember.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 #endif
 
 }

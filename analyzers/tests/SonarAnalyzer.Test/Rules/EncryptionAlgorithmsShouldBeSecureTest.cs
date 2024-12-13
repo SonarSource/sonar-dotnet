@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void EncryptionAlgorithmsShouldBeSecure_VB_NetStandard21_Net7() =>
             builderVB.AddPaths(@"EncryptionAlgorithmsShouldBeSecure_NetStandard21.Net7.vb")
-                .WithOptions(ParseOptionsHelper.VisualBasicLatest)
+                .WithOptions(LanguageOptions.VisualBasicLatest)
                 .AddReferences(MetadataReferenceFacade.NetStandard21.Concat(GetAdditionalReferences()))
                 .Verify();
 
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void EncryptionAlgorithmsShouldBeSecure_VB_NetStandard21_Net48() =>
             builderVB.AddPaths(@"EncryptionAlgorithmsShouldBeSecure_NetStandard21.Net48.vb")
-                     .WithOptions(ParseOptionsHelper.VisualBasicLatest)
+                     .WithOptions(LanguageOptions.VisualBasicLatest)
                      .AddReferences(MetadataReferenceFacade.NetStandard21.Concat(GetAdditionalReferences()))
                      .Verify();
 

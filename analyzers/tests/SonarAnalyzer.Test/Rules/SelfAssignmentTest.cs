@@ -26,7 +26,7 @@ public class SelfAssignmentTest
 
     [TestMethod]
     public void SelfAssignment_CSharp8() =>
-        builderCS.AddPaths("SelfAssignment.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+        builderCS.AddPaths("SelfAssignment.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
 #if NET
 
@@ -34,7 +34,7 @@ public class SelfAssignmentTest
     public void SelfAssignment_CS_Latest() =>
         builderCS.AddPaths("SelfAssignment.Latest.cs")
             .WithTopLevelStatements()
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif

@@ -33,13 +33,13 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void PublicConstantField_CSharp9() =>
             builderCS.AddPaths("PublicConstantField.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
 
         [TestMethod]
         public void PublicConstantField_CSharp10() =>
             builderCS.AddPaths("PublicConstantField.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .Verify();
 
 #endif

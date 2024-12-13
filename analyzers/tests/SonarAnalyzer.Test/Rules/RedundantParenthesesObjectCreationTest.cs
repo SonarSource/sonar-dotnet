@@ -33,19 +33,19 @@ namespace SonarAnalyzer.Test.Rules
         public void RedundantParenthesesObjectCreation_CSharp9() =>
             builder.AddPaths("RedundantParenthesesObjectCreation.CSharp9.cs")
                 .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
 
         [TestMethod]
         public void RedundantParenthesesObjectCreation_CSharp10() =>
             builder.AddPaths("RedundantParenthesesObjectCreation.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .Verify();
 
         [TestMethod]
         public void RedundantParenthesesObjectCreation_CSharp11() =>
             builder.AddPaths("RedundantParenthesesObjectCreation.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 #endif
 

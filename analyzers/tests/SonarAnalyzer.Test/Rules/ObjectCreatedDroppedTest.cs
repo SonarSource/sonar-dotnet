@@ -30,7 +30,7 @@ public class ObjectCreatedDroppedTest
     [TestMethod]
     public void ObjectCreatedDropped_CSharp9() =>
         builder
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithOptions(LanguageOptions.FromCSharp9)
             .AddPaths("ObjectCreatedDropped.CSharp9.cs")
             .Verify();
 

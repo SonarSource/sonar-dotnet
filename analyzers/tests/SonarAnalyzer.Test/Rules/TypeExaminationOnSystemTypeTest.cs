@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Test.Rules
         public void TypeExaminationOnSystemType_CSharp12() =>
             builder.AddPaths("TypeExaminationOnSystemType.CSharp12.cs")
                 .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .WithOptions(LanguageOptions.FromCSharp12)
                 .Verify();
 
 #endif

@@ -31,7 +31,7 @@ public class OverrideGetHashCodeOnOverridingEqualsTest
 
     [TestMethod]
     public void OverrideGetHashCodeOnOverridingEquals_CSharp9() =>
-        builder.AddPaths("OverrideGetHashCodeOnOverridingEquals.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).VerifyNoIssues();
+        builder.AddPaths("OverrideGetHashCodeOnOverridingEquals.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).VerifyNoIssues();
 
 #endif
 

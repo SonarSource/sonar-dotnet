@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void LoopsAndLinq_CS_Latest() =>
             builder.AddPaths("LoopsAndLinq.Latest.cs")
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 
 #endif

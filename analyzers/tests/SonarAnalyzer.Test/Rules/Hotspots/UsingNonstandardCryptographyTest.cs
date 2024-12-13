@@ -33,15 +33,15 @@ public class UsingNonstandardCryptographyTest
 
     [TestMethod]
     public void UsingNonstandardCryptography_CSharp9() =>
-        builderCS.AddPaths("UsingNonstandardCryptography.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+        builderCS.AddPaths("UsingNonstandardCryptography.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
 
     [TestMethod]
     public void UsingNonstandardCryptography_CSharp10() =>
-        builderCS.AddPaths("UsingNonstandardCryptography.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+        builderCS.AddPaths("UsingNonstandardCryptography.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
 
     [TestMethod]
     public void UsingNonstandardCryptography_CSharp12() =>
-        builderCS.AddPaths("UsingNonstandardCryptography.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+        builderCS.AddPaths("UsingNonstandardCryptography.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).Verify();
 
 #endif
 

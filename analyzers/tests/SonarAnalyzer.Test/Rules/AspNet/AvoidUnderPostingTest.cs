@@ -40,7 +40,7 @@ public class AvoidUnderPostingTest
     [TestMethod]
     public void AvoidUnderPosting_Latest() =>
         builder.AddPaths("AvoidUnderPosting.Latest.cs", "AvoidUnderPosting.Latest.Partial.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
     [DataTestMethod]
@@ -65,7 +65,7 @@ public class AvoidUnderPostingTest
                 [HttpPost] public IActionResult Create(Model model) => View(model);
             }
             """)
-        .WithOptions(ParseOptionsHelper.FromCSharp11)
+        .WithOptions(LanguageOptions.FromCSharp11)
         .Verify();
 
     [DataTestMethod]

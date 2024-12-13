@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void EmptyNamespace_CSharp10() =>
             builder.AddPaths("EmptyNamespace.CSharp10.Empty.cs", "EmptyNamespace.CSharp10.NotEmpty.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .WithConcurrentAnalysis(false)
                 .Verify();
 
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Test.Rules
         public void EmptyNamespace_CSharp10_CodeFix() =>
             builder.AddPaths("EmptyNamespace.CSharp10.Empty.cs")
                 .WithCodeFix<EmptyNamespaceCodeFix>()
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .WithAutogenerateConcurrentFiles(false)
                 .WithCodeFixedPaths("EmptyNamespace.CSharp10.Fixed.cs")
                 .VerifyCodeFix();

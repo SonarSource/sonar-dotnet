@@ -46,7 +46,7 @@ public class PropertyNamesShouldNotMatchGetMethodsTest
                 "PropertyNamesShouldNotMatchGetMethods.Latest.cs",
                 "PropertyNamesShouldNotMatchGetMethods.Latest.Partial1.g.cs",
                 "PropertyNamesShouldNotMatchGetMethods.Latest.Partial2.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 #endif
 

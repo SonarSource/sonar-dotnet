@@ -185,10 +185,10 @@ public class TestMethodDeclarationsAnalyzerTest
         CreateVisualBasicBuilder(isTestProject: true, "TestMethodDeclarations.NoMethods.vb").VerifyUtilityAnalyzer<MethodDeclarationsInfo>(x => { x.Should().BeEmpty(); });
 
     private VerifierBuilder CreateCSharpBuilder(bool isTestProject, params string[] fileNames) =>
-        CreateBuilder(ParseOptionsHelper.CSharpLatest, new TestMetricsAnalyzerCSharp(GetFilePath(), isTestProject), fileNames);
+        CreateBuilder(LanguageOptions.CSharpLatest, new TestMetricsAnalyzerCSharp(GetFilePath(), isTestProject), fileNames);
 
     private VerifierBuilder CreateVisualBasicBuilder(bool isTestProject, params string[] fileNames) =>
-        CreateBuilder(ParseOptionsHelper.VisualBasicLatest, new TestMetricsAnalyzerVisualBasic(GetFilePath(), isTestProject), fileNames);
+        CreateBuilder(LanguageOptions.VisualBasicLatest, new TestMetricsAnalyzerVisualBasic(GetFilePath(), isTestProject), fileNames);
 
     private VerifierBuilder CreateBuilder(ImmutableArray<ParseOptions> parseOptions, DiagnosticAnalyzer analyzer, string[] fileNames) =>
         new VerifierBuilder()

@@ -169,7 +169,7 @@ public class CallModelStateIsValidTest
                     return Ok();
                 }
             }
-            """).WithOptions(ParseOptionsHelper.FromCSharp10).VerifyNoIssues();
+            """).WithOptions(LanguageOptions.FromCSharp10).VerifyNoIssues();
 }
 
 #endif

@@ -175,7 +175,7 @@ public class Some
 
                 public sealed record Bar(string Value) : Foo(Value);
             }
-            """).WithOptions(ParseOptionsHelper.FromCSharp9).VerifyNoIssues();
+            """).WithOptions(LanguageOptions.FromCSharp9).VerifyNoIssues();
 
     [TestMethod]
     public void UnusedPrivateMember_NonExistentRecordPositionalConstructor() =>
@@ -183,7 +183,7 @@ public class Some
 public abstract record Foo
 {
     public sealed record Bar(string Value) : RandomRecord(Value); // Error [CS0246, CS1729] no suitable method found to override
-}").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+}").WithOptions(LanguageOptions.FromCSharp10).Verify();
 
 #endif
 

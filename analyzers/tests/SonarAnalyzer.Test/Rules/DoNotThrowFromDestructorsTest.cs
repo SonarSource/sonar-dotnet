@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void DoNotThrowFromDestructors_CS_CSharp9() =>
             builderCS.AddPaths("DoNotThrowFromDestructors.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
 
 #endif

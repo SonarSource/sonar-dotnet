@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void DoNotCatchSystemException_CSharp10() =>
-            builder.AddPaths("DoNotCatchSystemException.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).WithTopLevelStatements().Verify();
+            builder.AddPaths("DoNotCatchSystemException.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).WithTopLevelStatements().Verify();
 
 #endif
 

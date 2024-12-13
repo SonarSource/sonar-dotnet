@@ -30,12 +30,12 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
         [TestMethod]
         public void MemberOverrideCallsBaseMember_Latest() =>
-            builder.AddPaths("MemberOverrideCallsBaseMember.Latest.cs").WithOptions(ParseOptionsHelper.CSharpLatest).Verify();
+            builder.AddPaths("MemberOverrideCallsBaseMember.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
         [TestMethod]
         public void MemberOverrideCallsBaseMember_Latest_CodeFix() =>
             builder.AddPaths("MemberOverrideCallsBaseMember.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .WithCodeFix<MemberOverrideCallsBaseMemberCodeFix>()
             .WithCodeFixedPaths("MemberOverrideCallsBaseMember.Latest.Fixed.cs")
             .VerifyCodeFix();

@@ -32,19 +32,19 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void RedundantToStringCall_CSharp9() =>
             builder.AddPaths("RedundantToStringCall.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
 
         [TestMethod]
         public void RedundantToStringCall_CSharp10() =>
             builder.AddPaths("RedundantToStringCall.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .Verify();
 
         [TestMethod]
         public void RedundantToStringCall_CSharp11() =>
             builder.AddPaths("RedundantToStringCall.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
 #endif

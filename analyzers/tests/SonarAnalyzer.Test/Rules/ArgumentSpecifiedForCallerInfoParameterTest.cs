@@ -32,13 +32,13 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void ArgumentSpecifiedForCallerInfoParameter_CSharp10() =>
             builder.AddPaths("ArgumentSpecifiedForCallerInfoParameter.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .Verify();
 
         [TestMethod]
         public void ArgumentSpecifiedForCallerInfoParameter_CSharp11() =>
             builder.AddPaths("ArgumentSpecifiedForCallerInfoParameter.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
 #endif

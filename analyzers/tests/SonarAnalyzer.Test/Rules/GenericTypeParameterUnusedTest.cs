@@ -25,7 +25,7 @@ public class GenericTypeParameterUnusedTest
 
     [TestMethod]
     public void GenericTypeParameterUnused() =>
-        builder.AddPaths("GenericTypeParameterUnused.cs", "GenericTypeParameterUnused.Partial.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+        builder.AddPaths("GenericTypeParameterUnused.cs", "GenericTypeParameterUnused.Partial.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
 #if NET
 
@@ -35,15 +35,15 @@ public class GenericTypeParameterUnusedTest
 
     [TestMethod]
     public void GenericTypeParameterUnused_CSharp10() =>
-        builder.AddPaths("GenericTypeParameterUnused.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+        builder.AddPaths("GenericTypeParameterUnused.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
 
     [TestMethod]
     public void GenericTypeParameterUnused_CSharp11() =>
-        builder.AddPaths("GenericTypeParameterUnused.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+        builder.AddPaths("GenericTypeParameterUnused.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
 
     [TestMethod]
     public void GenericTypeParameterUnused_CSharp12() =>
-        builder.AddPaths("GenericTypeParameterUnused.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).VerifyNoIssues();
+        builder.AddPaths("GenericTypeParameterUnused.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).VerifyNoIssues();
 
 #endif
 

@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void DoNotNestTypesInArguments_CSharp8() =>
             new VerifierBuilder<DoNotNestTypesInArguments>().AddPaths("DoNotNestTypesInArguments.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
     }
 }

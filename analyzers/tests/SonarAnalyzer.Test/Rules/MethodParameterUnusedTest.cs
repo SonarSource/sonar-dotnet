@@ -70,7 +70,7 @@ public class Sample
 
     [TestMethod]
     public void MethodParameterUnused_VB() =>
-        new VerifierBuilder<VB.MethodParameterUnused>().AddPaths("MethodParameterUnused.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
+        new VerifierBuilder<VB.MethodParameterUnused>().AddPaths("MethodParameterUnused.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
 
 #if NET
 
@@ -78,7 +78,7 @@ public class Sample
     public void MethodParameterUnused_CS_RoslynCfg_Latest() =>
         roslynCS
             .AddPaths("MethodParameterUnused.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif
@@ -107,6 +107,6 @@ public class Sample
                     }
                 }
                 """)
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithOptions(LanguageOptions.FromCSharp9)
             .VerifyNoIssues();
 }

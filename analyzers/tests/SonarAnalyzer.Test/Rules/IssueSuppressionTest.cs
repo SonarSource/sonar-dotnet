@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void IssueSuppression_CSharp10() =>
-            builder.AddPaths("IssueSuppression.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("IssueSuppression.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
 
 #endif
 

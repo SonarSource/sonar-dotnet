@@ -37,11 +37,11 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void CertificateValidationCheck_CSharp8() =>
-            builderCS.AddPaths("CertificateValidationCheck.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builderCS.AddPaths("CertificateValidationCheck.CSharp8.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
         [TestMethod]
         public void CertificateValidationCheck_CS_CSharp9() =>
-            builderCS.AddPaths("CertificateValidationCheck.CSharp9.cs", "CertificateValidationCheck.CSharp9.Partial.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builderCS.AddPaths("CertificateValidationCheck.CSharp9.cs", "CertificateValidationCheck.CSharp9.Partial.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
 
         [TestMethod]
         public void CertificateValidationCheck_CS_TopLevelStatements() =>

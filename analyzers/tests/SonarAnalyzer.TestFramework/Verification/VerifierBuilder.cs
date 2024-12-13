@@ -133,7 +133,7 @@ public record VerifierBuilder
         {
             throw new InvalidOperationException($"{nameof(WithTopLevelStatements)} is supported from {nameof(CS.LanguageVersion.CSharp9)}.");
         }
-        return (ParseOptions.IsEmpty ? WithOptions(ParseOptionsHelper.FromCSharp9) : this)
+        return (ParseOptions.IsEmpty ? WithOptions(LanguageOptions.FromCSharp9) : this)
             .WithOutputKind(OutputKind.ConsoleApplication)
             .WithConcurrentAnalysis(false);
     }

@@ -167,7 +167,7 @@ public partial class UnusedPrivateMemberTest
     [TestMethod]
     public void UnusedPrivateMember_CS_Latest() =>
         builder.AddPaths("UnusedPrivateMember.Latest.cs", "UnusedPrivateMember.Latest.Partial.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .AddReferences(MetadataReferenceFacade.NetStandard21)
             .AddReferences(MetadataReferenceFacade.MicrosoftExtensionsDependencyInjectionAbstractions)
             .Verify();

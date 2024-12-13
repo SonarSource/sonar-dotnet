@@ -45,20 +45,20 @@ public class LooseFilePermissionsTest
     public void LooseFilePermissions_Windows_CSharp10() =>
         builderCS.AddPaths("LooseFilePermissions.Windows.CSharp10.cs")
             .WithTopLevelStatements()
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithOptions(LanguageOptions.FromCSharp10)
             .Verify();
 
     [TestMethod]
     public void LooseFilePermissions_Windows_CSharp11() =>
         builderCS.AddPaths("LooseFilePermissions.Windows.CSharp11.cs")
             .WithTopLevelStatements()
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .WithOptions(LanguageOptions.FromCSharp11)
             .Verify();
 
     [TestMethod]
     public void LooseFilePermissions_Windows_CSharp12() =>
         builderCS.AddPaths("LooseFilePermissions.Windows.CSharp12.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .WithOptions(LanguageOptions.FromCSharp12)
             .Verify();
 
     [TestMethod]

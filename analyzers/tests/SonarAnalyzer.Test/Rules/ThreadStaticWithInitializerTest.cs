@@ -32,7 +32,7 @@ public class ThreadStaticWithInitializerTest
     [TestMethod]
     public void ThreadStaticWithInitializer_Latest() =>
         builder.AddPaths("ThreadStaticWithInitializer.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif

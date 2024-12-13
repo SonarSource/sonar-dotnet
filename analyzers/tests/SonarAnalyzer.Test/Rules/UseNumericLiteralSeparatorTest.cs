@@ -27,13 +27,13 @@ namespace SonarAnalyzer.Test.Rules
         public void UseNumericLiteralSeparator_BeforeCSharp7() =>
             builder.AddPaths("UseNumericLiteralSeparator.cs")
                 .WithErrorBehavior(CompilationErrorBehavior.Ignore)
-                .WithOptions(ParseOptionsHelper.BeforeCSharp7)
+                .WithOptions(LanguageOptions.BeforeCSharp7)
                 .VerifyNoIssues();
 
         [TestMethod]
         public void UseNumericLiteralSeparator_FromCSharp7() =>
             builder.AddPaths("UseNumericLiteralSeparator.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp7)
+                .WithOptions(LanguageOptions.FromCSharp7)
                 .Verify();
 
 #if NET

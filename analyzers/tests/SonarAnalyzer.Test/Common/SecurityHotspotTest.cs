@@ -26,11 +26,11 @@ public class SecurityHotspotTest
 {
     [TestMethod]
     public void SecurityHotspotRules_DoNotRaiseIssues_CS() =>
-        VerifyNoIssues(AnalyzerLanguage.CSharp, ParseOptionsHelper.FromCSharp9);
+        VerifyNoIssues(AnalyzerLanguage.CSharp, LanguageOptions.FromCSharp9);
 
     [TestMethod]
     public void SecurityHotspotRules_DoNotRaiseIssues_VB() =>
-        VerifyNoIssues(AnalyzerLanguage.VisualBasic, ParseOptionsHelper.FromVisualBasic12);
+        VerifyNoIssues(AnalyzerLanguage.VisualBasic, LanguageOptions.FromVisualBasic12);
 
     private static void VerifyNoIssues(AnalyzerLanguage language, ImmutableArray<ParseOptions> parseOptions)
     {

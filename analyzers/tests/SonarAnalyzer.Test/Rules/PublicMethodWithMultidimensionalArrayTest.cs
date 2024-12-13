@@ -35,13 +35,13 @@ public class PublicMethodWithMultidimensionalArrayTest
     [TestMethod]
     public void PublicMethodWithMultidimensionalArray_CSharp11() =>
         builderCS.AddPaths("PublicMethodWithMultidimensionalArray.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .WithOptions(LanguageOptions.FromCSharp11)
             .Verify();
 
     [TestMethod]
     public void PublicMethodWithMultidimensionalArray_CSharp12() =>
         builderCS.AddPaths("PublicMethodWithMultidimensionalArray.CSharp12.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .WithOptions(LanguageOptions.FromCSharp12)
             .Verify();
 
 #endif

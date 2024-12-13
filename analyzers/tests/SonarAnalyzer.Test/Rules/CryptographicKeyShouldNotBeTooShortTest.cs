@@ -26,7 +26,7 @@ public class CryptographicKeyShouldNotBeTooShortTest
     [TestMethod]
     public void CryptographicKeyShouldNotBeTooShort() =>
         builder.AddPaths("CryptographicKeyShouldNotBeTooShort.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 
 #if NETFRAMEWORK
@@ -34,7 +34,7 @@ public class CryptographicKeyShouldNotBeTooShortTest
     [TestMethod]
     public void CryptographicKeyShouldNotBeTooShort_NetFramework() =>
         builder.AddPaths("CryptographicKeyShouldNotBeTooShort.BeforeNet7.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 
 #else
@@ -42,7 +42,7 @@ public class CryptographicKeyShouldNotBeTooShortTest
     [TestMethod]
     public void CryptographicKeyShouldNotBeTooShort_CS_Latest() =>
         builder.AddPaths("CryptographicKeyShouldNotBeTooShort.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .WithTopLevelStatements()
             .Verify();
 

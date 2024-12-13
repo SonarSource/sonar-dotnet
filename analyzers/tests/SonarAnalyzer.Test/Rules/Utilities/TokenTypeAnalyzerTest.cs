@@ -189,7 +189,7 @@ namespace SonarAnalyzer.Test.Rules
                 .AddAnalyzer(() => analyzer)
                 .AddPaths(fileName)
                 .WithBasePath(BasePath)
-                .WithOptions(ParseOptionsHelper.Latest(language))
+                .WithOptions(LanguageOptions.Latest(language))
                 .WithProtobufPath(@$"{testRoot}\token-type.pb");
         }
 

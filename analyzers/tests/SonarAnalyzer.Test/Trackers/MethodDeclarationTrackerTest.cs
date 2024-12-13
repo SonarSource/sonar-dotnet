@@ -92,7 +92,7 @@ public class Sample
     public static int operator +(Sample a, Sample b) => 42;
 //                             ^
 }";
-        new VerifierBuilder<TestRule_CS>().AddSnippet(code).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+        new VerifierBuilder<TestRule_CS>().AddSnippet(code).WithOptions(LanguageOptions.FromCSharp9).Verify();
     }
 
 #endif

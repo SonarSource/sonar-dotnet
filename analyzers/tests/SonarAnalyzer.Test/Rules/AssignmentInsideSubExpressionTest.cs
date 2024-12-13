@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void AssignmentInsideSubExpression() =>
-            builder.AddPaths("AssignmentInsideSubExpression.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builder.AddPaths("AssignmentInsideSubExpression.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
 #if NET
 
@@ -35,11 +35,11 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void AssignmentInsideSubExpression_CSharp10() =>
-            builder.AddPaths("AssignmentInsideSubExpression.CSharp10.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("AssignmentInsideSubExpression.CSharp10.cs").WithTopLevelStatements().WithOptions(LanguageOptions.FromCSharp10).Verify();
 
         [TestMethod]
         public void AssignmentInsideSubExpression_CSharp11() =>
-            builder.AddPaths("AssignmentInsideSubExpression.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+            builder.AddPaths("AssignmentInsideSubExpression.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
 
 #endif
 

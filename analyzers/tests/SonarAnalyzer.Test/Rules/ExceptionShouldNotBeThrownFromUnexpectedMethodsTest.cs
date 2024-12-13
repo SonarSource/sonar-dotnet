@@ -26,7 +26,7 @@ public class ExceptionShouldNotBeThrownFromUnexpectedMethodsTest
     [TestMethod]
     public void ExceptionShouldNotBeThrownFromUnexpectedMethods() =>
         builder.AddPaths("ExceptionShouldNotBeThrownFromUnexpectedMethods.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 
 #if NET
@@ -34,13 +34,13 @@ public class ExceptionShouldNotBeThrownFromUnexpectedMethodsTest
     [TestMethod]
     public void ExceptionShouldNotBeThrownFromUnexpectedMethods_CSharp9() =>
         builder.AddPaths("ExceptionShouldNotBeThrownFromUnexpectedMethods.CSharp9.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithOptions(LanguageOptions.FromCSharp9)
             .Verify();
 
     [TestMethod]
     public void ExceptionShouldNotBeThrownFromUnexpectedMethods_CSharp11() =>
         builder.AddPaths("ExceptionShouldNotBeThrownFromUnexpectedMethods.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .WithOptions(LanguageOptions.FromCSharp11)
             .Verify();
 
 #endif

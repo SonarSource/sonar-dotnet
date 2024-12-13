@@ -83,7 +83,7 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
     public void BackslashShouldBeAvoidedInAspNetRoutes_AspNet4x_CS_Latest(string actionDeclaration, bool compliant, string displayName)
     {
         actionDeclaration = actionDeclaration.Replace(AttributePlaceholder, "Route");
-        var builder = builderCS.AddReferences(AspNet4xReferences("5.2.7")).WithOptions(ParseOptionsHelper.CSharpLatest).AddSnippet($$"""
+        var builder = builderCS.AddReferences(AspNet4xReferences("5.2.7")).WithOptions(LanguageOptions.CSharpLatest).AddSnippet($$"""
             using System.Web.Mvc;
 
             public class WithAllTypesOfStringsController : Controller
@@ -156,7 +156,7 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
         DynamicDataDisplayNameDeclaringType = typeof(BackslashShouldBeAvoidedInAspNetRoutesTest))]
     public void BackslashShouldBeAvoidedInAspNetRoutes_AspNetCore2x_Route_CS_Latest(string actionDeclaration, bool compliant, string displayName) =>
         TestAspNetCoreAttributeDeclaration(
-            builderCS.AddReferences(AspNetCore2xReferences("2.2.0")).WithOptions(ParseOptionsHelper.CSharpLatest),
+            builderCS.AddReferences(AspNetCore2xReferences("2.2.0")).WithOptions(LanguageOptions.CSharpLatest),
             actionDeclaration,
             compliant);
 
@@ -167,7 +167,7 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
         DynamicDataDisplayNameDeclaringType = typeof(BackslashShouldBeAvoidedInAspNetRoutesTest))]
     public void BackslashShouldBeAvoidedInAspNetRoutes_AspNetCore2x_HttpMethods_CS_Latest(string actionDeclaration, bool compliant, string displayName) =>
         TestAspNetCoreAttributeDeclaration(
-            builderCS.AddReferences(AspNetCore2xReferences("2.2.0")).WithOptions(ParseOptionsHelper.CSharpLatest),
+            builderCS.AddReferences(AspNetCore2xReferences("2.2.0")).WithOptions(LanguageOptions.CSharpLatest),
             actionDeclaration,
             compliant);
 
@@ -178,7 +178,7 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
         DynamicDataDisplayNameDeclaringType = typeof(BackslashShouldBeAvoidedInAspNetRoutesTest))]
     public void BackslashShouldBeAvoidedInAspNetRoutes_AspNetCore3AndAbove_Route_CS_Latest(string actionDeclaration, bool compliant, string displayName) =>
         TestAspNetCoreAttributeDeclaration(
-            builderCS.AddReferences(AspNetCore3AndAboveReferences).WithOptions(ParseOptionsHelper.CSharpLatest),
+            builderCS.AddReferences(AspNetCore3AndAboveReferences).WithOptions(LanguageOptions.CSharpLatest),
             actionDeclaration,
             compliant);
 
@@ -189,7 +189,7 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
         DynamicDataDisplayNameDeclaringType = typeof(BackslashShouldBeAvoidedInAspNetRoutesTest))]
     public void BackslashShouldBeAvoidedInAspNetRoutes_AspNetCore3AndAbove_HttpMethods_CS_Latest(string actionDeclaration, bool compliant, string displayName) =>
         TestAspNetCoreAttributeDeclaration(
-            builderCS.AddReferences(AspNetCore3AndAboveReferences).WithOptions(ParseOptionsHelper.CSharpLatest),
+            builderCS.AddReferences(AspNetCore3AndAboveReferences).WithOptions(LanguageOptions.CSharpLatest),
             actionDeclaration,
             compliant);
 
@@ -207,7 +207,7 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
         builderCS
             .AddPaths("BackslashShouldBeAvoidedInAspNetRoutes.AspNetCore2x.Latest.cs")
             .AddReferences(AspNetCore2xReferences(aspNetCoreVersion))
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
     [TestMethod]
@@ -222,7 +222,7 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
         builderCS
             .AddPaths("BackslashShouldBeAvoidedInAspNetRoutes.AspNetCore3AndAbove.Latest.cs")
             .AddReferences(AspNetCore3AndAboveReferences)
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
     [TestMethod]
@@ -237,7 +237,7 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
         builderCS
             .AddPaths("BackslashShouldBeAvoidedInAspNetRoutes.AspNetCore8AndAbove.Latest.cs")
             .AddReferences(AspNetCore3AndAboveReferences)
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
     [TestMethod]

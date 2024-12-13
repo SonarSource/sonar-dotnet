@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void VariableUnused_CS() =>
-            builderCS.AddPaths("VariableUnused.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builderCS.AddPaths("VariableUnused.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
 #if NET
 
@@ -36,15 +36,15 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void VariableUnused_CSharp10() =>
-            builderCS.AddPaths("VariableUnused.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builderCS.AddPaths("VariableUnused.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
 
         [TestMethod]
         public void VariableUnused_CSharp11() =>
-            builderCS.AddPaths("VariableUnused.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+            builderCS.AddPaths("VariableUnused.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
 
         [TestMethod]
         public void VariableUnused_CSharp12() =>
-            builderCS.AddPaths("VariableUnused.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).VerifyNoIssues();
+            builderCS.AddPaths("VariableUnused.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).VerifyNoIssues();
 
 #endif
 

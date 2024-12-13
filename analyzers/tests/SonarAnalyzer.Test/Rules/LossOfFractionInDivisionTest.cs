@@ -35,11 +35,11 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void LossOfFractionInDivision_FromCSharp10() =>
-            builder.AddPaths("LossOfFractionInDivision.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("LossOfFractionInDivision.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
 
         [TestMethod]
         public void LossOfFractionInDivision_FromCSharp11() =>
-            builder.AddPaths("LossOfFractionInDivision.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+            builder.AddPaths("LossOfFractionInDivision.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
 
 #endif
 

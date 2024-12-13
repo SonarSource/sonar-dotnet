@@ -45,7 +45,7 @@ public class PermissiveCorsTest
     [TestMethod]
     public void PermissiveCors_Latest() =>
         builder.AddPaths("PermissiveCors.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #else
@@ -62,7 +62,7 @@ public class PermissiveCorsTest
     public void PermissiveCors_AspNet_WebApi() =>
         builder
             .AddPaths("PermissiveCors.NetFramework.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithOptions(LanguageOptions.FromCSharp9)
             .Verify();
 
 #endif

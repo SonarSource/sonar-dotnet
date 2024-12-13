@@ -150,7 +150,7 @@ public class MessageTemplatesShouldBeCorrectTest
     public void MessageTemplatesShouldBeCorrect_Latest() =>
         Builder.AddPaths("MessageTemplatesShouldBeCorrect.Latest.cs")
             .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif

@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void ConditionalStructureSameCondition_CS_CSharp10() =>
             builderCS.AddPaths("ConditionalStructureSameCondition.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .Verify();
 
         [TestMethod]

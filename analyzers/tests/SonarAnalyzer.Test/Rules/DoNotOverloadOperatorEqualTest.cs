@@ -32,13 +32,13 @@ public class DoNotOverloadOperatorEqualTest
     [TestMethod]
     public void DoNotOverloadOperatorEqual_CSharp9() =>
         builder.AddPaths("DoNotOverloadOperatorEqual.CSharp9.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithOptions(LanguageOptions.FromCSharp9)
             .Verify();
 
     [TestMethod]
     public void DoNotOverloadOperatorEqual_CSharp11() =>
         builder.AddPaths("DoNotOverloadOperatorEqual.CSharp11.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .WithOptions(LanguageOptions.FromCSharp11)
             .VerifyNoIssues();
 
 #endif

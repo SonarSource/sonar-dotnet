@@ -33,7 +33,7 @@ public class EqualityOnFloatingPointTest
     public void EqualityOnFloatingPoint_CSharp11() =>
         builder.AddPaths("EqualityOnFloatingPoint.CSharp11.cs")
             .AddReferences(new[] { CoreMetadataReference.SystemRuntime })
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .WithOptions(LanguageOptions.FromCSharp11)
             .Verify();
 
 #endif

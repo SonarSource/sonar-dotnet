@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void PropertyToAutoProperty_FromCSharp7() =>
             builder.AddPaths("PropertyToAutoProperty.CSharp7.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp7)
+                .WithOptions(LanguageOptions.FromCSharp7)
                 .Verify();
 
 #if NET
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void PropertyToAutoProperty_Latest() =>
             builder.AddPaths("PropertyToAutoProperty.Latest.cs")
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 
 #endif

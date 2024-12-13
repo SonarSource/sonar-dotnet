@@ -32,7 +32,7 @@ public class ReturnEmptyCollectionInsteadOfNullTest
     [TestMethod]
     public void ReturnEmptyCollectionInsteadOfNull_CSharp8() =>
         builder.AddPaths("ReturnEmptyCollectionInsteadOfNull.CSharp8.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 
 #if NET
@@ -40,7 +40,7 @@ public class ReturnEmptyCollectionInsteadOfNullTest
     [TestMethod]
     public void ReturnEmptyCollectionInsteadOfNull_Latest() =>
         builder.AddPaths("ReturnEmptyCollectionInsteadOfNull.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .WithTopLevelStatements()
             .Verify();
 

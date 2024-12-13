@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void ExpressionComplexity_CSharp8() =>
             builderCS.AddPaths("ExpressionComplexity.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
         [DataTestMethod]
@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Test.Rules
 
 #if NET
 
-            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .WithOptions(LanguageOptions.FromCSharp11)
 
 #endif
 
@@ -101,14 +101,14 @@ namespace SonarAnalyzer.Test.Rules
         public void ExpressionComplexity_CSharp10() =>
             builderCS.AddPaths("ExpressionComplexity.CSharp10.cs")
                 .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .Verify();
 
         [TestMethod]
         public void ExpressionComplexity_CSharp11() =>
             builderCS.AddPaths("ExpressionComplexity.CSharp11.cs")
                 .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
 #endif

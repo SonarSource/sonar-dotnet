@@ -46,7 +46,7 @@ public class DoNotHardcodeCredentialsTest
     public void DoNotHardcodeCredentials_CS_Latest() =>
         builderCS.AddPaths("DoNotHardcodeCredentials.DefaultValues.Latest.cs")
             .AddReferences(AdditionalReferences)
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif
@@ -73,7 +73,7 @@ public class DoNotHardcodeCredentialsTest
 
     [TestMethod]
     public void DoNotHardcodeCredentials_VB_DefaultValues() =>
-        builderVB.AddPaths("DoNotHardcodeCredentials.DefaultValues.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
+        builderVB.AddPaths("DoNotHardcodeCredentials.DefaultValues.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
 
     [TestMethod]
     public void DoNotHardcodeCredentials_VB_CustomValues() =>

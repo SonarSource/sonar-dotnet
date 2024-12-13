@@ -43,7 +43,7 @@ public class StringLiteralShouldNotBeDuplicatedTest
     public void StringLiteralShouldNotBeDuplicated_CS_Latest() =>
         builderCS.AddPaths("StringLiteralShouldNotBeDuplicated.Latest.cs")
             .WithTopLevelStatements()
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
     [TestMethod]

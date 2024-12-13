@@ -31,15 +31,15 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void PropertiesShouldBePreferred_CSharp9() =>
-            builder.AddPaths("PropertiesShouldBePreferred.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builder.AddPaths("PropertiesShouldBePreferred.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
 
         [TestMethod]
         public void PropertiesShouldBePreferred_CSharp10() =>
-            builder.AddPaths("PropertiesShouldBePreferred.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("PropertiesShouldBePreferred.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
 
         [TestMethod]
         public void PropertiesShouldBePreferred_CSharp11() =>
-            builder.AddPaths("PropertiesShouldBePreferred.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+            builder.AddPaths("PropertiesShouldBePreferred.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
 
 #endif
 

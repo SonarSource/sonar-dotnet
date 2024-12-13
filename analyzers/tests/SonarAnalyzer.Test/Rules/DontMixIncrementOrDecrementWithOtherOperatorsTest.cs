@@ -32,7 +32,7 @@ public class DontMixIncrementOrDecrementWithOtherOperatorsTest
     public void DontMixIncrementOrDecrementWithOtherOperators_Latest() =>
         builder
             .AddPaths("DontMixIncrementOrDecrementWithOtherOperators.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 #endif
 

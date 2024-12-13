@@ -50,7 +50,7 @@ public class AvoidLambdaExpressionInLoopsInBlazorTest
         builder.AddPaths("AvoidLambdaExpressionInLoopsInBlazor.cs")
             .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreComponents("7.0.13"))
             .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreComponentsWeb("7.0.13"))
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithOptions(LanguageOptions.FromCSharp10)
             .Verify();
 }
 

@@ -33,7 +33,7 @@ public class MutableFieldsShouldNotBePublicStaticTest
     public void MutableFieldsShouldNotBePublicStatic_CS_Latest() =>
         builder.AddPaths("MutableFieldsShouldNotBePublicStatic.Latest.cs")
             .AddReferences(MetadataReferenceFacade.SystemCollections)
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif

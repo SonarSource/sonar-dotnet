@@ -49,13 +49,13 @@ public class ObsoleteAttributesTest
     public void ObsoleteAttributesNeedExplanation_CS_Latest() =>
         explanationNeededCS
             .AddPaths("ObsoleteAttributesNeedExplanation.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .WithTopLevelStatements()
             .Verify();
 
     [TestMethod]
     public void ObsoleteAttributesNeedExplanation_VB14() =>
-        explanationNeededVB.AddPaths("ObsoleteAttributesNeedExplanation.VB14.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
+        explanationNeededVB.AddPaths("ObsoleteAttributesNeedExplanation.VB14.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
 
 #endif
 
@@ -72,7 +72,7 @@ public class ObsoleteAttributesTest
     public void RemoveObsoleteCode_Latest() =>
         removeCS.AddPaths("RemoveObsoleteCode.Latest.cs")
             .WithTopLevelStatements()
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 #endif
 

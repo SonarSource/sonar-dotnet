@@ -27,17 +27,17 @@ public class ParametersCorrectOrderTest
 
     [TestMethod]
     public void ParametersCorrectOrder_CSharp8() =>
-        builderCS.AddPaths("ParametersCorrectOrder.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+        builderCS.AddPaths("ParametersCorrectOrder.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
 #if NET
 
     [TestMethod]
     public void ParametersCorrectOrder_CSharp11() =>
-        builderCS.AddPaths("ParametersCorrectOrder.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+        builderCS.AddPaths("ParametersCorrectOrder.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
 
     [TestMethod]
     public void ParametersCorrectOrder_CSharp12() =>
-        builderCS.AddPaths("ParametersCorrectOrder.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+        builderCS.AddPaths("ParametersCorrectOrder.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).Verify();
 
 #endif
 

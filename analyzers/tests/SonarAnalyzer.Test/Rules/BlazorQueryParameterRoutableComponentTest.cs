@@ -40,7 +40,7 @@ public class BlazorQueryParameterRoutableComponentTest
 
     [TestMethod]
     public void BlazorQueryParameterRoutableComponent_Partial() =>
-        builder.WithOptions(ParseOptionsHelper.CSharpLatest)
+        builder.WithOptions(LanguageOptions.CSharpLatest)
             .AddPaths("BlazorQueryParameterRoutableComponent_Latest_Partial.razor",
                       "BlazorQueryParameterRoutableComponent_Latest_Partial_1.razor.cs",
                       "BlazorQueryParameterRoutableComponent_Latest_Partial_2.razor.cs")

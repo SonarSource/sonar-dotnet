@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Test.Rules
         public void SwitchSectionShouldNotHaveTooManyStatements_CustomValue_CSharp8() =>
             new VerifierBuilder().AddAnalyzer(() => new CS.SwitchSectionShouldNotHaveTooManyStatements { Threshold = 1 })
                 .AddPaths("SwitchSectionShouldNotHaveTooManyStatements_CustomValue.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
         [TestMethod]

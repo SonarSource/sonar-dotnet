@@ -27,7 +27,7 @@ public class TooManyLabelsInSwitchTest
     [TestMethod]
     public void TooManyLabelsInSwitch_CS() =>
         builderCS.AddPaths("TooManyLabelsInSwitch.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 
 #if NET
@@ -35,7 +35,7 @@ public class TooManyLabelsInSwitchTest
     [TestMethod]
     public void TooManyLabelsInSwitch_CS_Latest() =>
         builderCS.AddPaths("TooManyLabelsInSwitch.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif

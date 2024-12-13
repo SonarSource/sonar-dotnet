@@ -39,19 +39,19 @@ public class MemberInitializedToDefaultTest
 
     [TestMethod]
     public void MemberInitializedToDefault_CSharp8() =>
-        builder.AddPaths("MemberInitializedToDefault.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).VerifyNoIssues();
+        builder.AddPaths("MemberInitializedToDefault.CSharp8.cs").WithOptions(LanguageOptions.FromCSharp8).VerifyNoIssues();
 
     [TestMethod]
     public void MemberInitializedToDefault_CSharp9() =>
-        builder.AddPaths("MemberInitializedToDefault.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+        builder.AddPaths("MemberInitializedToDefault.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
 
     [TestMethod]
     public void MemberInitializedToDefault_CSharp10() =>
-        builder.AddPaths("MemberInitializedToDefault.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+        builder.AddPaths("MemberInitializedToDefault.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
 
     [TestMethod]
     public void MemberInitializedToDefault_CSharp11() =>
-        builder.AddPaths("MemberInitializedToDefault.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+        builder.AddPaths("MemberInitializedToDefault.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
 
     [TestMethod]
     public void MemberInitializedToDefault_CSharp11_CodeFix() =>
@@ -59,7 +59,7 @@ public class MemberInitializedToDefaultTest
         .WithCodeFix<MemberInitializedToDefaultCodeFix>()
         .AddPaths("MemberInitializedToDefault.CSharp11.cs")
         .WithCodeFixedPaths("MemberInitializedToDefault.CSharp11.Fixed.cs")
-        .WithOptions(ParseOptionsHelper.FromCSharp11)
+        .WithOptions(LanguageOptions.FromCSharp11)
         .VerifyCodeFix();
 
 #endif

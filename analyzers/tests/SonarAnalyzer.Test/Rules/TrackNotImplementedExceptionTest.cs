@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Test.Rules
         public void TrackNotImplementedException_CSharp8() =>
             builder.AddPaths("TrackNotImplementedException.cs")
                 .AddReferences(MetadataReferenceFacade.NetStandard21)
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
 #if NET
@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void TrackNotImplementedException_CSharp11() =>
             builder.AddPaths("TrackNotImplementedException.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
 #endif

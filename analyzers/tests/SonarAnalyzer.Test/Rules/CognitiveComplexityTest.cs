@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void CognitiveComplexity_CS() =>
             builderCS.AddPaths("CognitiveComplexity.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
+                .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
 #if NET
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Test.Rules
         public void CognitiveComplexity_CS_Latest() =>
             builderCS.AddPaths("CognitiveComplexity.Latest.cs")
                 .WithTopLevelStatements()
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 #endif
 

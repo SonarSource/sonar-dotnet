@@ -45,20 +45,20 @@ public class ControllersReuseClientTest
     public void ControllersReuseClient_CS8() =>
         builder
             .AddPaths("ControllersReuseClient.CSharp8.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 
     [TestMethod]
     public void ControllersReuseClient_CS9() =>
         builder
             .AddPaths("ControllersReuseClient.CSharp9.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithOptions(LanguageOptions.FromCSharp9)
             .Verify();
 
     [TestMethod]
     public void ControllersReuseClient_CS12() =>
         builder
             .AddPaths("ControllerReuseClient.CSharp12.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+            .WithOptions(LanguageOptions.FromCSharp12).Verify();
 }
 #endif

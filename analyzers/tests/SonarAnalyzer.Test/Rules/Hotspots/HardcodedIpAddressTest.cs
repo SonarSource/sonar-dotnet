@@ -34,12 +34,12 @@ public class HardcodedIpAddressTest
     [TestMethod]
     public void HardcodedIpAddress_CS_Latest() =>
         builderCS.AddPaths(@"Hotspots\HardcodedIpAddress.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif
 
     [TestMethod]
     public void HardcodedIpAddress_VB() =>
-        builderVB.AddPaths(@"Hotspots\HardcodedIpAddress.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
+        builderVB.AddPaths(@"Hotspots\HardcodedIpAddress.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
 }

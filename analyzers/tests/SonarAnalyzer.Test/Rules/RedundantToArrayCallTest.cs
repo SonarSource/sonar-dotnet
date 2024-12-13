@@ -39,13 +39,13 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void RedundantToArrayCall_CSharp11() =>
-            builder.AddPaths("RedundantToArrayCall.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+            builder.AddPaths("RedundantToArrayCall.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
 
         [TestMethod]
         public void RedundantToArrayCall_CSharp11_CodeFix() =>
             builderWithCodeFix
                 .AddPaths("RedundantToArrayCall.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .WithCodeFixedPaths("RedundantToArrayCall.CSharp11.Fixed.cs")
                 .VerifyCodeFix();
 

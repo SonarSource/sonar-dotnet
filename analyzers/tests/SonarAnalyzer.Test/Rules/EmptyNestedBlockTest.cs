@@ -35,7 +35,7 @@ public class EmptyNestedBlockTest
     [TestMethod]
     public void EmptyNestedBlock_CS_Latest() =>
         builderCS.AddPaths("EmptyNestedBlock.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif

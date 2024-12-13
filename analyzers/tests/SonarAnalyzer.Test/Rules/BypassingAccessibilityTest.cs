@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void BypassingAccessibility_CSharp_Latest() =>
-            builderCS.AddPaths("BypassingAccessibility.Latest.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.CSharpLatest).Verify();
+            builderCS.AddPaths("BypassingAccessibility.Latest.cs").WithTopLevelStatements().WithOptions(LanguageOptions.CSharpLatest).Verify();
 
 #endif
 

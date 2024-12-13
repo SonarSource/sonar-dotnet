@@ -32,20 +32,20 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void AsyncVoidMethod_CSharp9() =>
             builder.AddPaths("AsyncVoidMethod.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
 
         [TestMethod]
         public void AsyncVoidMethod_CSharp10() =>
             builder.AddPaths("AsyncVoidMethod.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .AddReferences(NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework)
                 .Verify();
 
         [TestMethod]
         public void AsyncVoidMethod_CSharp11() =>
             builder.AddPaths("AsyncVoidMethod.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
         [DataTestMethod]
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Test.Rules
         public void AsyncVoidMethod_MsTestV2_CSharp11(string testFwkVersion) =>
             builder.AddPaths("AsyncVoidMethod_MsTestV2_CSharp11.cs")
                 // The first version of the framework is not compatible with Net 7 so we need to test only v2 with C#11 features
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
                 .WithConcurrentAnalysis(false)
                 .Verify();

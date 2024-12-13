@@ -25,14 +25,14 @@ public class StaticFieldWrittenFromInstanceConstructorTest
 
     [TestMethod]
     public void StaticFieldWrittenFromInstanceConstructor() =>
-        builder.AddPaths("StaticFieldWrittenFromInstanceConstructor.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+        builder.AddPaths("StaticFieldWrittenFromInstanceConstructor.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
 #if NET
 
     [TestMethod]
     public void StaticFieldWrittenFromInstanceConstructor_Latest() =>
         builder.AddPaths("StaticFieldWrittenFromInstanceConstructor.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif

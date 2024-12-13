@@ -36,20 +36,20 @@ public class JSInvokableMethodsShouldBePublicTest
     public void JSInvokableMethodsShouldBePublic_Razor() =>
         builder
             .AddPaths("JSInvokableMethodsShouldBePublic.razor", "JSInvokableMethodsShouldBePublic.razor.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithOptions(LanguageOptions.FromCSharp9)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
     [TestMethod]
     public void JSInvokableMethodsShouldBePublic_CSharp8() =>
         builder.AddPaths("JSInvokableMethodsShouldBePublic.CSharp8.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 
     [TestMethod]
     public void JSInvokableMethodsShouldBePublic_CSharp9() =>
         builder.AddPaths("JSInvokableMethodsShouldBePublic.CSharp9.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .WithOptions(LanguageOptions.FromCSharp9)
             .VerifyNoIssues();
 }
 

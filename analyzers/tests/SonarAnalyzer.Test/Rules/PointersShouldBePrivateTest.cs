@@ -31,11 +31,11 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void PointersShouldBePrivate_CSharp9() =>
-            builder.AddPaths("PointersShouldBePrivate.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builder.AddPaths("PointersShouldBePrivate.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
 
         [TestMethod]
         public void PointersShouldBePrivate_CSharp11() =>
-            builder.AddPaths("PointersShouldBePrivate.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+            builder.AddPaths("PointersShouldBePrivate.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
 
 #endif
 

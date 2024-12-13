@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void CallToAsyncMethodShouldNotBeBlocking_CSharp11() =>
             builder.AddPaths("CallToAsyncMethodShouldNotBeBlocking.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
 #endif

@@ -83,7 +83,7 @@ public class CookieShouldBeHttpOnlyTest
     public void CookiesShouldBeHttpOnly_Latest() =>
         builder.AddPaths("CookieShouldBeHttpOnly.Latest.cs")
             .WithTopLevelStatements()
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .AddReferences(GetAdditionalReferences_NetCore())
             .AddReferences(NuGetMetadataReference.Nancy())
             .Verify();

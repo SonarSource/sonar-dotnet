@@ -22,5 +22,5 @@ public static class StylingVerifierBuilder
 {
     // This shoudl solve only simple cases. Do not add parametrized overloads to preserver the builder logic.
     public static VerifierBuilder Create<TAnalyzer>() where TAnalyzer : DiagnosticAnalyzer, new() =>
-        new VerifierBuilder<TAnalyzer>().WithOptions(ParseOptionsHelper.CSharpLatest);  // We don't use older version on our codebase => we don't need to waste time testing them.
+        new VerifierBuilder<TAnalyzer>().WithOptions(LanguageOptions.CSharpLatest);  // We don't use older version on our codebase => we don't need to waste time testing them.
 }

@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Test.Rules
             builderCS.AddPaths("InsecureEncryptionAlgorithm.Latest.cs")
                 .WithTopLevelStatements()
                 .AddReferences(GetAdditionalReferences())
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 
 #endif
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Test.Rules
         public void InsecureEncryptionAlgorithm_VB() =>
             builderVB.AddPaths("InsecureEncryptionAlgorithm.vb")
                 .AddReferences(GetAdditionalReferences())
-                .WithOptions(ParseOptionsHelper.FromVisualBasic14)
+                .WithOptions(LanguageOptions.FromVisualBasic14)
                 .Verify();
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>

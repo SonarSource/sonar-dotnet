@@ -30,7 +30,7 @@ public class DisablingCsrfProtectionTest
     [TestMethod]
     public void DisablingCsrfProtection_Latest() =>
         builder.AddPaths("DisablingCsrfProtection.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
     internal static IEnumerable<MetadataReference> AdditionalReferences() =>

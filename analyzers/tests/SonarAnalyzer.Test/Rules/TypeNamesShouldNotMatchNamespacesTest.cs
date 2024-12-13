@@ -31,11 +31,11 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void TypeNamesShouldNotMatchNamespaces_CSharp9() =>
-            builder.AddPaths("TypeNamesShouldNotMatchNamespaces.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builder.AddPaths("TypeNamesShouldNotMatchNamespaces.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
 
         [TestMethod]
         public void TypeNamesShouldNotMatchNamespaces_CSharp10() =>
-            builder.AddPaths("TypeNamesShouldNotMatchNamespaces.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+            builder.AddPaths("TypeNamesShouldNotMatchNamespaces.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
 
 #endif
 

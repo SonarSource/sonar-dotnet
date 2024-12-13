@@ -33,7 +33,7 @@ public class StringConcatenationInLoopTest
     [TestMethod]
     public void StringConcatenationInLoop_CS_Latest() =>
         builderCS.AddPaths("StringConcatenationInLoop.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif

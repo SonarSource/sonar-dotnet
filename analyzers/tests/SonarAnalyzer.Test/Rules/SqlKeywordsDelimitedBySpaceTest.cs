@@ -27,7 +27,7 @@ public class SqlKeywordsDelimitedBySpaceTest
     [TestMethod]
     public void SqlKeywordsDelimitedBySpace_Csharp8() =>
         Builder.AddPaths("SqlKeywordsDelimitedBySpace.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 
     [TestMethod]
@@ -47,21 +47,21 @@ public class SqlKeywordsDelimitedBySpaceTest
     [TestMethod]
     public void SqlKeywordsDelimitedBySpace_CSharp10_GlobalUsings() =>
         Builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsing.cs", "SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsingConsumer.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithOptions(LanguageOptions.FromCSharp10)
             .WithConcurrentAnalysis(false)
             .VerifyNoIssues();
 
     [TestMethod]
     public void SqlKeywordsDelimitedBySpace_CSharp10_FileScopesNamespace() =>
         Builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp10.FileScopedNamespaceDeclaration.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithOptions(LanguageOptions.FromCSharp10)
             .WithConcurrentAnalysis(false)
             .Verify();
 
     [TestMethod]
     public void SqlKeywordsDelimitedBySpace_Latest() =>
         Builder.AddPaths("SqlKeywordsDelimitedBySpace.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .WithConcurrentAnalysis(false)
             .Verify();
 

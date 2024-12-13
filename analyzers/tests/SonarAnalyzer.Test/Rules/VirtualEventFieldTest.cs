@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void VirtualEventField_CSharp9() =>
             builder.AddPaths("VirtualEventField.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
 
         [TestMethod]
@@ -40,13 +40,13 @@ namespace SonarAnalyzer.Test.Rules
             builder.WithCodeFix<VirtualEventFieldCodeFix>()
                 .AddPaths("VirtualEventField.CSharp9.cs")
                 .WithCodeFixedPaths("VirtualEventField.CSharp9.Fixed.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(LanguageOptions.FromCSharp9)
                 .VerifyCodeFix();
 
         [TestMethod]
         public void VirtualEventField_CSharp11() =>
             builder.AddPaths("VirtualEventField.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
 #endif

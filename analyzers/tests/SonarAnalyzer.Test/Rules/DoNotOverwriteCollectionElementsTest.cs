@@ -31,14 +31,14 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void DoNotOverwriteCollectionElements_VB() =>
-            builderVB.AddPaths("DoNotOverwriteCollectionElements.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
+            builderVB.AddPaths("DoNotOverwriteCollectionElements.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
 
 #if NET
 
         [TestMethod]
         public void DoNotOverwriteCollectionElements_CS_Latest() =>
             builderCS.AddPaths("DoNotOverwriteCollectionElements.Latest.cs")
-                .WithOptions(ParseOptionsHelper.CSharpLatest)
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 
 #endif

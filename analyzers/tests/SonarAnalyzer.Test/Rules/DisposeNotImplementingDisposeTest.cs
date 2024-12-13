@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void DisposeNotImplementingDispose() =>
-            builder.AddPaths("DisposeNotImplementingDispose.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builder.AddPaths("DisposeNotImplementingDispose.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
 #if NET
 
@@ -38,13 +38,13 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void DisposeNotImplementingDispose_CSharp10() =>
             builder.AddPaths("DisposeNotImplementingDispose.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .Verify();
 
         [TestMethod]
         public void DisposeNotImplementingDispose_CSharp11() =>
             builder.AddPaths("DisposeNotImplementingDispose.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
 #endif

@@ -38,7 +38,7 @@ public class ClassWithOnlyStaticMemberTest
     [TestMethod]
     public void ClassWithOnlyStaticMember_Latest() =>
         builder.AddPaths("ClassWithOnlyStaticMember.Latest.cs", "ClassWithOnlyStaticMember.Latest.Partial.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif

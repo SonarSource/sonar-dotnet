@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void DeclareTypesInNamespaces_CS_After8() =>
-            nonConcurrent.AddPaths("DeclareTypesInNamespaces.AfterCSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            nonConcurrent.AddPaths("DeclareTypesInNamespaces.AfterCSharp8.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
 #if NET
 
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Test.Rules
         public void DeclareTypesInNamespaces_CS_AfterCSharp10() =>
             nonConcurrent
                 .AddPaths("DeclareTypesInNamespaces.AfterCSharp10.FileScopedNamespace.cs", "DeclareTypesInNamespaces.AfterCSharp10.RecordStruct.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .Verify();
 
 #endif

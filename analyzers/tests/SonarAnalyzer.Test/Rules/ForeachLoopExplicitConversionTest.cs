@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Test.Rules
         public void ForeachLoopExplicitConversion_CSharp10() =>
             builder.AddPaths("ForeachLoopExplicitConversion.CSharp10.cs")
                 .WithAutogenerateConcurrentFiles(false)
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .Verify();
 
         [TestMethod]
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Test.Rules
             builder.WithCodeFix<ForeachLoopExplicitConversionCodeFix>()
                 .AddPaths("ForeachLoopExplicitConversion.CSharp10.cs")
                 .WithCodeFixedPaths("ForeachLoopExplicitConversion.CSharp10.Fixed.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
+                .WithOptions(LanguageOptions.FromCSharp10)
                 .WithOutputKind(OutputKind.DynamicallyLinkedLibrary)
                 .VerifyCodeFix();
 

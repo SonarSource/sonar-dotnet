@@ -32,7 +32,7 @@ public class MultilineBlocksWithoutBraceTest
     public void MultilineBlocksWithoutBrace_Latest() =>
         Builder
             .AddPaths("MultilineBlocksWithoutBrace.Latest.cs")
-            .WithOptions(ParseOptionsHelper.CSharpLatest)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 #endif
 }

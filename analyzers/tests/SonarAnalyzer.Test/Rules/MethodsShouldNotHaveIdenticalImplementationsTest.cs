@@ -28,7 +28,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
 
     [TestMethod]
     public void MethodsShouldNotHaveIdenticalImplementations() =>
-        builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+        builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
     [CombinatorialDataTestMethod]
     public void MethodsShouldNotHaveIdenticalImplementations_MethodTypeParameters(
@@ -54,7 +54,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
                     return true;
                 }
             }
-            """).WithOptions(ParseOptionsHelper.FromCSharp9);
+            """).WithOptions(LanguageOptions.FromCSharp9);
         if (nonCompliant)
         {
             builder.Verify();
@@ -88,7 +88,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
                     return true;
                 }
             }
-            """).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            """).WithOptions(LanguageOptions.FromCSharp9).Verify();
 
     [DataTestMethod]
     [DataRow("", "")]
@@ -123,7 +123,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
                     return true;
                 }
             }
-            """).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            """).WithOptions(LanguageOptions.FromCSharp9).Verify();
 
     [DataTestMethod]
     [DataRow("Of TKey, TValue", "Of TKey, TValue")]
@@ -185,7 +185,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
                     return true;
                 }
             }
-            """).WithOptions(ParseOptionsHelper.FromCSharp9).VerifyNoIssues();
+            """).WithOptions(LanguageOptions.FromCSharp9).VerifyNoIssues();
 
     [DataTestMethod]
     [DataRow("Of TKey, TValue", "Of TKey, TValue As Structure")]
@@ -245,7 +245,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
                     return true;
                 }
             }
-            """).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            """).WithOptions(LanguageOptions.FromCSharp9).Verify();
 
 #if NET
 
@@ -275,7 +275,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
                     return true;
                 }
             }
-            """).WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            """).WithOptions(LanguageOptions.FromCSharp9).Verify();
 
     [TestMethod]
     public void MethodsShouldNotHaveIdenticalImplementations_CSharp9() =>
