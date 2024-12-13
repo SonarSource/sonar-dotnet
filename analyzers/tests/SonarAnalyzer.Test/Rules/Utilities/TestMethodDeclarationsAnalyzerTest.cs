@@ -29,6 +29,11 @@ public class TestMethodDeclarationsAnalyzerTest
     public TestContext TestContext { get; set; }
 
     [TestMethod]
+    public void VerifyMethodDeclarations_ShouldGenerateMetrics_AvoidGeneratedFiles() =>
+        CreateCSharpBuilder(isTestProject: true, "TestMethodDeclarations.Generated.g.cs")
+            .VerifyUtilityAnalyzer<MethodDeclarationsInfo>(x => x.Should().BeEmpty());
+
+    [TestMethod]
     public void VerifyMethodDeclarations_TestCode_CSharp() =>
         CreateCSharpBuilder(isTestProject: true, "TestMethodDeclarations.cs", "TestMethodDeclarations.Partial.cs")
             .VerifyUtilityAnalyzer<MethodDeclarationsInfo>(x =>

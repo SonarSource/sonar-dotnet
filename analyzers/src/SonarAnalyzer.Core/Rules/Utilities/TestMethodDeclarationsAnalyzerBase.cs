@@ -38,7 +38,7 @@ public abstract class TestMethodDeclarationsAnalyzerBase<TSyntaxKind>() : Utilit
 
     protected override bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SyntaxTree tree) =>
         // In this analyzer, we want to always generate the metrics for the test projects (contrary to the base class implementation).
-        parameters.IsTestProject;
+        parameters.IsTestProject && !Language.GeneratedCodeRecognizer.IsGenerated(tree);
 
     protected sealed override MethodDeclarationsInfo CreateMessage(UtilityAnalyzerParameters parameters, SyntaxTree tree, SemanticModel model)
     {
