@@ -61,16 +61,18 @@ public class VisualStudioTestResultParser implements UnitTestResultParser {
     }
 
     private void handleUnitTestResultTag(XmlParserHelper xmlParserHelper) {
-      String testId = xmlParserHelper.getRequiredAttribute("testId");
-      String outcome = xmlParserHelper.getRequiredAttribute("outcome");
-      Date start = getRequiredDateAttribute(xmlParserHelper, "startTime");
-      Date finish = getRequiredDateAttribute(xmlParserHelper, "endTime");
-      long duration = finish.getTime() - start.getTime();
-
+      var testId = xmlParserHelper.getRequiredAttribute("testId");
+      var outcome = xmlParserHelper.getRequiredAttribute("outcome");
+      var start = getRequiredDateAttribute(xmlParserHelper, "startTime");
+      var finish = getRequiredDateAttribute(xmlParserHelper, "endTime");
+      var duration = finish.getTime() - start.getTime();
       var testResult = new VisualStudioTestResults(outcome, duration);
-      testIdTestResultMap.put(testId, testResult);
-      LOG.debug("Parsed Visual Studio Unit Test - testId: {} outcome: {}, duration: {}",
-        testId, outcome, duration);
+      if (testIdTestResultMap.containsKey(testId)) {
+        testIdTestResultMap.get(testId).add(testResult);
+      } else {
+        testIdTestResultMap.put(testId, testResult);
+      }
+      LOG.debug("Parsed Visual Studio Unit Test - testId: {} outcome: {}, duration: {}", testId, outcome, duration);
     }
 
     private void handleUnitTestTag(XmlParserHelper xmlParserHelper) {

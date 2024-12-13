@@ -86,6 +86,42 @@ public class VisualStudioTestResultParserTest {
   }
 
   @Test
+  public void multiple_runs_same_test() {
+    Map<String, UnitTestResults> results = new HashMap<>();
+    Map<String, String> fileMap = new HashMap<>() {
+      {
+        put("TestReport.TestReport.Test1.TestMethod1", "Sample.cs");
+      }
+    };
+
+    var sut = new VisualStudioTestResultParser();
+
+    sut.parse(new File("src/test/resources/visualstudio_test_results/multiple_runs_same_test.trx"), results, fileMap);
+
+    assertThat(results).hasSize(1);
+    assertThat(results.get("Sample.cs").tests()).isEqualTo(2);
+    assertThat(results.get("Sample.cs").failures()).isZero();
+    assertThat(results.get("Sample.cs").skipped()).isZero();
+    assertThat(results.get("Sample.cs").errors()).isZero();
+    assertThat(results.get("Sample.cs").executionTime()).isEqualTo(26);
+
+    assertThat(logTester.logs(Level.WARN)).isEmpty();
+
+    var infoLogs = logTester.logs(Level.INFO);
+    assertThat(infoLogs).hasSize(1);
+    assertThat(infoLogs.get(0)).startsWith("Parsing the Visual Studio Test Results file ");
+
+    var debugLogs = logTester.logs(Level.DEBUG);
+    assertThat(debugLogs)
+      .hasSize(3)
+      .contains(
+        "Parsed Visual Studio Unit Test - testId: ab6094d2-07ab-58c5-03e0-a4fb244efd26 outcome: Passed, duration: 24",
+        "Parsed Visual Studio Unit Test - testId: ab6094d2-07ab-58c5-03e0-a4fb244efd26 outcome: Passed, duration: 2",
+        "Added Test Method: TestReport.TestReport.Test1.TestMethod1 to File: Sample.cs"
+      );
+  }
+
+  @Test
   public void test_name_not_mapped() {
     var sut = new VisualStudioTestResultParser();
     var file = new File("src/test/resources/visualstudio_test_results/test_name_not_mapped.trx");
