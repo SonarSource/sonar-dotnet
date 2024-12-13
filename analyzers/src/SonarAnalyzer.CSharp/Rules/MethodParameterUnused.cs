@@ -286,7 +286,7 @@ public sealed class MethodParameterUnused : MethodParameterUnusedBase
 
         public LvaResult(ControlFlowGraph cfg, CancellationToken cancel)
         {
-            var lva = new RoslynLiveVariableAnalysis(cfg, cancel);
+            var lva = new RoslynLiveVariableAnalysis(cfg, CSharpSyntaxClassifier.Instance, cancel);
             LiveInEntryBlock = lva.LiveIn(cfg.EntryBlock).OfType<IParameterSymbol>().ToImmutableArray();
             CapturedVariables = lva.CapturedVariables;
         }

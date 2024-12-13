@@ -15,6 +15,7 @@
  */
 
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.CFG.Syntax.Utilities;
 
 namespace SonarAnalyzer.CFG.LiveVariableAnalysis;
 
@@ -23,14 +24,16 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
     private readonly Dictionary<CaptureId, List<ISymbol>> flowCaptures = [];
     private readonly Dictionary<int, List<BasicBlock>> blockPredecessors = [];
     private readonly Dictionary<int, List<BasicBlock>> blockSuccessors = [];
+    private readonly SyntaxClassifierBase syntaxClassifier;
 
     internal ImmutableDictionary<int, List<BasicBlock>> BlockPredecessors => blockPredecessors.ToImmutableDictionary();
 
     protected override BasicBlock ExitBlock => Cfg.ExitBlock;
 
-    public RoslynLiveVariableAnalysis(ControlFlowGraph cfg, CancellationToken cancel)
+    public RoslynLiveVariableAnalysis(ControlFlowGraph cfg, SyntaxClassifierBase syntaxClassifier, CancellationToken cancel)
         : base(cfg, OriginalDeclaration(cfg.OriginalOperation), cancel)
     {
+        this.syntaxClassifier = syntaxClassifier;
         foreach (var ordinal in cfg.Blocks.Select(x => x.Ordinal))
         {
             blockPredecessors.Add(ordinal, []);
@@ -53,7 +56,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
             _ when operation.AsFlowCaptureReference() is { } flowCaptureReference => flowCaptures.TryGetValue(flowCaptureReference.Id, out var symbols) ? symbols : [],
             _ => []
         };
-        return candidates.Where(x => IsLocal(x));
+        return candidates.Where(IsLocal);
     }
 
     public override bool IsLocal(ISymbol symbol) =>
@@ -290,19 +293,33 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
                     break;
                 case OperationKindEx.MethodReference:
                     ProcessLocalFunction(cfg, IMethodReferenceOperationWrapper.FromOperation(operation).Method);
+                    // For .Select(variable.MethodReference), there's no LocalReferenceOperation in the CFG for variable, so we handle it from the syntax
+                    if (owner.syntaxClassifier.MemberAccessExpression(operation.Syntax) is { } expression)
+                    {
+                        var symbol = owner.Cfg.OriginalOperation.ToSonar().SemanticModel.GetSymbolInfo(expression).Symbol;
+                        if (symbol is ILocalSymbol or IParameterSymbol && owner.IsLocal(symbol))
+                        {
+                            ProcessParameterOrLocalSymbols([symbol], symbol is IParameterSymbol { RefKind: RefKind.Out }, false);
+                        }
+                    }
                     break;
             }
         }
 
-        private void ProcessParameterOrLocalReference(IOperationWrapper reference)
+        private void ProcessParameterOrLocalReference(IOperationWrapper reference) =>
+            ProcessParameterOrLocalSymbols(
+                owner.ParameterOrLocalSymbols(reference.WrappedOperation),
+                reference.IsOutArgument(),
+                reference.IsAssignmentTarget() || reference.ToSonar().Parent?.Kind == OperationKindEx.FlowCapture);
+
+        private void ProcessParameterOrLocalSymbols(IEnumerable<ISymbol> symbols, bool isOutArgument, bool isAssignmentTarget)
         {
-            var symbols = owner.ParameterOrLocalSymbols(reference.WrappedOperation);
-            if (reference.IsOutArgument())
+            if (isOutArgument)
             {
                 Assigned.UnionWith(symbols);
                 UsedBeforeAssigned.ExceptWith(symbols);
             }
-            else if (!reference.IsAssignmentTarget() && reference.ToSonar().Parent?.Kind != OperationKindEx.FlowCapture)
+            else if (!isAssignmentTarget)
             {
                 UsedBeforeAssigned.UnionWith(symbols);
             }

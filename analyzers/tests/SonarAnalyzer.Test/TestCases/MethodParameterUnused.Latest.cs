@@ -250,6 +250,7 @@ namespace CSharp8
         }
     }
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/5145
     static class Repro5145
     {
         public static void Print(string[] args)
@@ -258,7 +259,7 @@ namespace CSharp8
             Console.WriteLine(GetSegmentSortKey(dict));
         }
 
-        private static int GetSegmentSortKey(IDictionary<string, int> nodes) // Noncompliant - FP, See: https://github.com/SonarSource/sonar-dotnet/issues/5145
+        private static int GetSegmentSortKey(IDictionary<string, int> nodes) // Compliant
         {
             return Run(nodes.TryGetValueOrNull);
         }

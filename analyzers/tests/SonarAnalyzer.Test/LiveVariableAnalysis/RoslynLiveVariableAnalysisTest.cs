@@ -18,7 +18,10 @@ using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.CFG.Syntax.Utilities;
 using SonarAnalyzer.CSharp.Core.Syntax.Extensions;
+using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
+using SonarAnalyzer.VisualBasic.Core.Syntax.Utilities;
 
 namespace SonarAnalyzer.Test.LiveVariableAnalysis;
 
@@ -107,7 +110,7 @@ public partial class RoslynLiveVariableAnalysisTest
     [TestMethod]
     public void ProcessParameterReference_MemberBindingByReference_DifferentCfgOnNetFx_LiveIn()
     {
-        // This specific char/string scenario produces different CFG shape under .NET Framework build.
+        // This specific char/string scenario produces different CFG shape under .NET Framework build. We have a syntax-based solution in place to support it.
         // https://github.com/dotnet/roslyn/issues/56644
         var code = """
             char[] charArray = null;
@@ -118,11 +121,7 @@ public partial class RoslynLiveVariableAnalysisTest
             """;
         var context = CreateContextCS(code);
         context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
-#if NET
         context.Validate("ret = charArray.Any(stringVariable.Contains);", LiveIn("charArray", "stringVariable"));
-#else
-        context.Validate("ret = charArray.Any(stringVariable.Contains);", LiveIn("charArray"));
-#endif
     }
 
     [TestMethod]
@@ -1075,7 +1074,13 @@ public partial class RoslynLiveVariableAnalysisTest
         public Context(string code, AnalyzerLanguage language, string localFunctionName = null)
         {
             Cfg = TestHelper.CompileCfg(code, language, code.Contains("// Error CS"), localFunctionName);
-            Lva = new RoslynLiveVariableAnalysis(Cfg, default);
+            SyntaxClassifierBase syntaxClassifier = language.LanguageName switch
+            {
+                LanguageNames.CSharp => CSharpSyntaxClassifier.Instance,
+                LanguageNames.VisualBasic => VisualBasicSyntaxClassifier.Instance,
+                _ => throw new UnexpectedLanguageException(language)
+            };
+            Lva = new RoslynLiveVariableAnalysis(Cfg, syntaxClassifier, default);
             const string Separator = "----------";
             Console.WriteLine(Separator);
             Console.WriteLine(CfgSerializer.Serialize(Lva));
@@ -1087,7 +1092,7 @@ public partial class RoslynLiveVariableAnalysisTest
             var (tree, model) = TestHelper.Compile(code, false, AnalyzerLanguage.CSharp);
             var node = tree.GetRoot().DescendantNodes().First(x => x.RawKind == (int)syntaxKind);
             Cfg = node.CreateCfg(model, default);
-            Lva = new RoslynLiveVariableAnalysis(Cfg, default);
+            Lva = new RoslynLiveVariableAnalysis(Cfg, CSharpSyntaxClassifier.Instance, default);   // FIXME: null?
         }
 
         public void ValidateAllEmpty()

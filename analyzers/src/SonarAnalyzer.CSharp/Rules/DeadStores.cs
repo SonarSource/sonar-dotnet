@@ -17,7 +17,6 @@
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.CSharp.Core.LiveVariableAnalysis;
-using SonarAnalyzer.CSharp.Walkers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -80,7 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
                 else if (context.Node.CreateCfg(context.SemanticModel, context.Cancel) is { } cfg)
                 {
-                    var lva = new RoslynLiveVariableAnalysis(cfg, context.Cancel);
+                    var lva = new RoslynLiveVariableAnalysis(cfg, CSharpSyntaxClassifier.Instance, context.Cancel);
                     var checker = new RoslynChecker(context, lva);
                     checker.Analyze(cfg.Blocks);
                 }

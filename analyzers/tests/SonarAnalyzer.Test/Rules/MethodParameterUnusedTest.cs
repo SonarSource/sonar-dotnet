@@ -33,14 +33,6 @@ public class MethodParameterUnusedTest
     public void MethodParameterUnused_CS_RoslynCfg() =>
         roslynCS.AddPaths("MethodParameterUnused.RoslynCfg.cs").Verify();
 
-#if NETFRAMEWORK
-
-    [TestMethod]
-    public void MethodParameterUnused_CS_RoslynCfg_NetFx() =>
-        roslynCS.AddPaths("MethodParameterUnused.RoslynCfg.NetFx.cs").Verify();
-
-#endif
-
     [TestMethod]
     public void MethodParameterUnused_CodeFix_CS() =>
         roslynCS.AddPaths("MethodParameterUnused.RoslynCfg.cs")

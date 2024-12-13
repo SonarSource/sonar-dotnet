@@ -656,14 +656,25 @@ namespace Tests.TestCases
 
         // This case is very similar to our MethodParameterUnused.RoslynCfg.Fixed.cs, but it reproduces on .NET build as well.
         // https://github.com/dotnet/roslyn/issues/56644
-        private bool HasAny(string[] smallerOrEqualArray)       // Noncompliant FP
+        private bool HasAny(string[] smallerOrEqualArray)       // Compliant
         {
             return largerArray.Any(smallerOrEqualArray.Contains);
         }
 
-        private static double GetDegreeOfOverlap(string[] largerArray, string[] smallerOrEqualArray)    // Noncompliant FP
+        private static double GetDegreeOfOverlap(string[] largerArray, string[] smallerOrEqualArray)    // Compliant
         {
             return (double)largerArray.Count(smallerOrEqualArray.Contains) / largerArray.Length;
+        }
+    }
+
+    // https://github.com/dotnet/roslyn/issues/56644
+    public class RoslynIssue_56644
+    {
+        private char[] invalidCharacters;
+
+        private bool IsValidViewName(string viewName)   // Compliant, this was working as expected under .NET build, but didn't work under .NET Framework. We handle it by syntax now.
+        {
+            return !this.invalidCharacters.Any(viewName.Contains);
         }
     }
 

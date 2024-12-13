@@ -16,6 +16,7 @@
 
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
+using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 
 namespace SonarAnalyzer.Test.CFG.Roslyn;
 
@@ -321,6 +322,6 @@ public class RoslynLvaSerializerTest
     private static RoslynLiveVariableAnalysis CreateLva(string code)
     {
         var cfg = TestHelper.CompileCfgCS(code);
-        return new RoslynLiveVariableAnalysis(cfg, CancellationToken.None);
+        return new RoslynLiveVariableAnalysis(cfg, CSharpSyntaxClassifier.Instance, CancellationToken.None);
     }
 }
