@@ -58,7 +58,7 @@ stages:
       displayName: "Set Version"
 
     - task: SonarCloudPrepare@3
-      displayName: 'Code Analysis - Begin (PR)'
+      displayName: '.NET Code Analysis - Begin (PR)'
       condition: eq(variables['Build.Reason'], 'PullRequest')
       inputs:
         SonarCloud: 'SonarCloud'
@@ -79,7 +79,7 @@ stages:
           sonar.analysis.repository=$(Build.Repository.ID)
 
     - task: SonarCloudPrepare@3
-      displayName: 'Code Analysis - Begin (master or branch)'
+      displayName: '.NET Code Analysis - Begin (master or branch)'
       condition: ne(variables['Build.Reason'], 'PullRequest')
       inputs:
         SonarCloud: 'SonarCloud'
@@ -102,7 +102,7 @@ stages:
         $ProjectNameToken = '$(ProjectName)'  # Workaround for escaping difficulties: Azure DevOps doesn't have ProjectName, so it will not replace it. We need to pass it like that into AltCover via powershell.
         dotnet test $(Solution) -c $(BuildConfiguration) -l trx --results-directory $(UnitTestResultsPath) /p:RunAnalyzers=true /p:AltCover=true,AltCoverForce=true,AltCoverVisibleBranches=true,AltCoverAssemblyFilter="testhost|Moq|Humanizer|AltCover|Microsoft|\.Test^",AltCoverPathFilter="SonarAnalyzer\.CFG\\ShimLayer|SonarAnalyzer\.ShimLayer\.CodeGeneration",AltCoverAttributeFilter="ExcludeFromCodeCoverage",AltCoverReport="$(CoveragePath)/coverage.$ProjectNameToken.xml"
         dotnet build analyzers\src\RuleDescriptorGenerator\RuleDescriptorGenerator.csproj -c $(BuildConfiguration) /p:RunAnalyzers=true # This does not have a test project => we need to build it separately
-      displayName: '.Net UTs'
+      displayName: '.Net Build and UTs'
       env:
         ARTIFACTORY_USER: $(ARTIFACTORY_PRIVATE_READER_USERNAME)
         ARTIFACTORY_PASSWORD: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
@@ -127,19 +127,8 @@ stages:
         verbosityPack: 'Detailed'
         publishPackageMetadata: true
 
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish NuGet packages as build artifacts'
-      inputs:
-        pathToPublish: '$(Build.ArtifactStagingDirectory)/packages'
-        artifactName: 'NuGet Packages'
-
     - task: SonarCloudAnalyze@3
-      displayName: 'Code Analysis - End'
-
-    - task: SonarCloudPublish@3
-      displayName: 'Code Analysis - Publish QG'
-      inputs:
-        pollingTimeoutSec: '300'
+      displayName: '.NET Code Analysis - End'
 
     - task: DownloadSecureFile@1
       displayName: 'Download Maven settings'
@@ -154,7 +143,7 @@ stages:
         organization: 'sonarsource'
         scannerMode: 'Other'
 
-    - task: Maven@3
+    - task: Maven@4
       displayName: 'Maven build'
       inputs:
         goals: 'verify'
@@ -184,7 +173,11 @@ stages:
 
     - publish: plugin-jars
       artifact: plugin-jars
-      displayName: "Publish Jars"
+      displayName: "Publish Jars as build artifacts"
+
+    - publish: '$(Build.ArtifactStagingDirectory)/packages'
+      artifact: 'NuGet Packages'
+      displayName: 'Publish NuGet packages as build artifacts'
 
     - task: SonarCloudPublish@3
       displayName: 'Code Analysis - Publish QG'
