@@ -1788,4 +1788,32 @@ public class PeachValidation
             Console.WriteLine(arg4);
         }
     }
+
+    void VariableReassignedInCatch()
+    {
+        var usedInCatch = 0;
+        Method(0);
+        try
+        {
+            Method(1);
+            try
+            {
+                usedInCatch = 1;
+                Method(2);
+            }
+            catch
+            {
+                Method(usedInCatch); // This can throw again
+                usedInCatch = 2;     // If Method(3) throws the variable will be used in the outer catch
+                Method(3);
+            }
+        }
+        catch
+        {
+            Method(usedInCatch);
+            Method(4);
+        }
+    }
+
+    void Method(int arg) { }
 }

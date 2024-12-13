@@ -153,12 +153,304 @@ public partial class RoslynLiveVariableAnalysisTest
             catch
             {
                 Method(usedInCatch);
-            } 
+            }
             """;
         var context = CreateContextCS(code);
         context.Validate("Method(0);", LiveOut("usedInCatch"));
         context.Validate("Method(1);", LiveOut("usedInCatch"));
         context.Validate("Method(usedInCatch);", LiveIn("usedInCatch"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void NestedCatch_LiveOutOuterCatch()
+    {
+        const string code = """
+            var usedInCatch = 0;
+            Method(0);
+            try
+            {
+                Method(1);
+                try
+                {
+                    usedInCatch = 1;
+                    Method(2);
+                }
+                catch
+                {
+                    Method(usedInCatch); // This can throw again
+                    Method(3);
+                }
+            }
+            catch
+            {
+                Method(usedInCatch);
+                Method(4);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.Validate("Method(0);", LiveOut("usedInCatch"));
+        context.Validate("Method(1);", LiveIn("usedInCatch"), LiveOut("usedInCatch"));
+        context.Validate("Method(2);", LiveOut("usedInCatch"));
+        context.Validate("Method(3);", LiveIn("usedInCatch"), LiveOut("usedInCatch"));
+        context.Validate("Method(4);", LiveIn("usedInCatch"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void NestedCatch_LiveOutOuterCatch_NestedTwice()
+    {
+        const string code = """
+            var usedInCatch = 0;
+            Method(0);
+            try
+            {
+                Method(1);
+                try
+                {
+                    Method(2);
+                    try
+                    {
+                        usedInCatch = 1;
+                        Method(3);
+                    }
+                    catch
+                    {
+                        Method(usedInCatch); // This can throw again
+                        Method(4);
+                    }
+                }
+                catch
+                {
+                    Method(usedInCatch);
+                    Method(5);
+                }
+            }
+            catch
+            {
+                Method(usedInCatch);
+                Method(6);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.Validate("Method(0);", LiveOut("usedInCatch"));
+        context.Validate("Method(1);", LiveIn("usedInCatch"), LiveOut("usedInCatch"));
+        context.Validate("Method(2);", LiveIn("usedInCatch"), LiveOut("usedInCatch"));
+        context.Validate("Method(3);", LiveOut("usedInCatch"));
+        context.Validate("Method(4);", LiveIn("usedInCatch"), LiveOut("usedInCatch"));
+        context.Validate("Method(5);", LiveIn("usedInCatch"), LiveOut("usedInCatch"));
+        context.Validate("Method(6);", LiveIn("usedInCatch"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void NestedCatch_LiveOutOuterCatch_ForEach()
+    {
+        const string code = """
+            var usedInCatch = 0;
+            Method(0);
+            try
+            {
+                Method(1);
+                try
+                {
+                    Method(2);
+                    var list = new List<int>();
+                    foreach(var i in list)
+                    {
+                        Method(i);
+                        Method(usedInCatch);
+                    }
+                }
+                catch
+                {
+                    Method(usedInCatch);
+                    Method(3);
+                }
+            }
+            catch
+            {
+                Method(usedInCatch);
+                Method(4);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.Validate("Method(0);", LiveOut("usedInCatch"));
+        context.Validate("Method(1);", LiveIn("usedInCatch"), LiveOut("usedInCatch"));
+        context.Validate("Method(2);", LiveIn("usedInCatch"), LiveOut("list", "usedInCatch"));
+        context.Validate("Method(i);", LiveIn("usedInCatch"), LiveOut("usedInCatch"));
+        context.Validate("Method(3);", LiveIn("usedInCatch"), LiveOut("usedInCatch"));
+        context.Validate("Method(4);", LiveIn("usedInCatch"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void NestedCatch_LiveOuterFilterHandler_FromInnerCatch()
+    {
+        const string code = """
+            int usedInCatch = 0;
+            Method(0);
+            try
+            {
+                try
+                {
+                    usedInCatch = 2;
+                    Method(1);
+                }
+                catch
+                {
+                    Method(usedInCatch);
+                    Method(2);
+                }
+            }
+            catch when(usedInCatch > 10)
+            {
+                Method(usedInCatch);
+                Method(3);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.Validate("Method(0);", LiveOut("usedInCatch"));
+        context.Validate("Method(1);", LiveOut("usedInCatch"));
+        context.Validate("Method(2);", LiveIn("usedInCatch"),  LiveOut("usedInCatch"));
+        context.Validate("Method(3);", LiveIn("usedInCatch"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void NestedCatch_LiveOutOuterCatch_FromInnerFilterHandler()
+    {
+        const string code = """
+            int usedInCatch = 0;
+            Method(0);
+            try
+            {
+                try
+                {
+                    usedInCatch = 2;
+                    Method(1);
+                }
+                catch when (true)
+                {
+                    Method(usedInCatch);
+                    Method(2);
+                }
+            }
+            catch
+            {
+                Method(usedInCatch);
+                Method(3);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.Validate("Method(0);", LiveOut("usedInCatch"));
+        context.Validate("Method(1);", LiveOut("usedInCatch"));
+        context.Validate("Method(2);", LiveIn("usedInCatch"), LiveOut("usedInCatch"));
+        context.Validate("Method(3);", LiveIn("usedInCatch"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void NestedCatch_LiveOutOuterCatch_FromFilterHandler()
+    {
+        const string code = """
+            int usedInCatch = 0;
+            Method(0);
+            try
+            {
+                try
+                {
+                    usedInCatch = 2;
+                    Method(1);
+                }
+                catch when(usedInCatch > 10 )
+                {
+                    usedInCatch = 3;
+                    Method(2);
+                }
+            }
+            catch
+            {
+                Method(usedInCatch);
+                Method(3);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.Validate("Method(0);", LiveOut("usedInCatch"));
+        context.Validate("Method(1);", LiveOut("usedInCatch"));
+        context.Validate("Method(2);", LiveOut("usedInCatch"));
+        context.Validate("Method(3);", LiveIn("usedInCatch"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void NestedCatch_LiveOutOuterCatch_CanThrowFromFilterHandler()
+    {
+        const string code = """
+            int usedInCatch = 0;
+            Method(0);
+            try
+            {
+                try
+                {
+                    Method(1);
+                }
+                catch when(Method(2) == usedInCatch) {  }
+            }
+            catch
+            {
+                Method(usedInCatch);
+                Method(3);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.Validate("Method(0);", LiveOut("usedInCatch"));
+        context.Validate("Method(1);", LiveIn("usedInCatch"), LiveOut("usedInCatch"));
+        context.Validate("Method(2) == usedInCatch", LiveIn("usedInCatch"), LiveOut("usedInCatch"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void NestedCatch_LiveOut_ConsecutiveOuterCatch()
+    {
+        const string code = """
+            var usedInCatch = 100;
+            try
+            {
+                try
+                {
+                     Method(usedInCatch);
+                     Method(0);
+                }
+                catch
+                {
+                    usedInCatch = 200;
+                    Method(1);
+                }
+            }
+            catch (ArgumentNullException)
+            {
+                Method(2);
+                Method(usedInCatch);
+            }
+            catch (IOException)
+            {
+                Method(3);
+                Method(usedInCatch);
+            }
+            catch (NullReferenceException)
+            {
+                Method(4);
+                Method(usedInCatch);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("Method(0);", LiveIn("usedInCatch")); // No LiveOut, because inner Catch catches all exceptions and reassigns value
+        context.Validate("Method(1);", LiveOut("usedInCatch"));
+        context.Validate("Method(2);", LiveIn("usedInCatch"));
+        context.Validate("Method(3);", LiveIn("usedInCatch"));
+        context.Validate("Method(4);", LiveIn("usedInCatch"));
         context.ValidateExit();
     }
 
