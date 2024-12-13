@@ -2,6 +2,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+[TestClass]
 public class Address
 {
     [TestMethod]
@@ -14,6 +15,7 @@ public struct Person
     public string GetFullName() => "John Doe";
 }
 
+[TestClass]
 public record class Company
 {
     [TestMethod]
@@ -32,6 +34,7 @@ public enum EnumDeclaration
     Value2
 }
 
+[TestClass]
 public class Visibility
 {
     [TestMethod]
@@ -68,18 +71,21 @@ public class Visibility
     }
 }
 
+[TestClass]
 file class FileClass
 {
     [TestMethod]
     public void Method() { }
 }
 
+[TestClass]
 class NoModifiers
 {
     [TestMethod]
     public void Method() { }
 }
 
+[TestClass]
 public class MultipleMethods
 {
     [TestMethod]
@@ -89,6 +95,7 @@ public class MultipleMethods
     public void Method2() { }
 }
 
+[TestClass]
 public class Overloads
 {
     [TestMethod]
@@ -104,6 +111,7 @@ public class Overloads
     public void Method(int i, string s) { }
 }
 
+[TestClass]
 public class GenericClass<T>
 {
     [TestMethod]
@@ -113,12 +121,14 @@ public class GenericClass<T>
     public void Method<U>() { }
 }
 
+[TestClass]
 public class WithGenericMethod
 {
     [TestMethod]
     public void Method<T>() { }
 }
 
+[TestClass]
 public partial class PartialClass : BaseClass
 {
     [TestMethod]
@@ -127,6 +137,7 @@ public partial class PartialClass : BaseClass
     public partial void PartialMethod(); // Test method attribute is defined in the other file.
 }
 
+[TestClass]
 public class PropertiesAndIndexers
 {
     private int[] values;
@@ -140,6 +151,7 @@ public class PropertiesAndIndexers
     }
 }
 
+[TestClass]
 public class LocalFunctions
 {
     [TestMethod]
@@ -150,6 +162,7 @@ public class LocalFunctions
     }
 }
 
+[TestClass]
 public abstract class BaseClass
 {
     [TestMethod]
@@ -159,12 +172,14 @@ public abstract class BaseClass
     public virtual void Method() { }
 }
 
+
 public class DerivedClass : BaseClass
 {
     [TestMethod]
     public override void Method() { }
 }
 
+[TestClass]
 public class MultipleLevelInheritance : DerivedClass
 {
     [TestMethod]
