@@ -179,7 +179,4 @@ End Class", AnalyzerLanguage.VisualBasic);
         }
         return relativePath;
     }
-
-    public static string ReplaceLineEndings(string input, string replacement) =>
-        Regex.Replace(input, @"\r\n?|\n", replacement, RegexOptions.None, RegexConstants.DefaultTimeout);
 }

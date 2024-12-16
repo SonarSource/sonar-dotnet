@@ -39,9 +39,8 @@ public class EditorConfigGenerator
         razorFiles.Select(x => x.Replace('\\', '/')).Select(ToConfigLine).Prepend("is_global = true").JoinStr(Environment.NewLine);
 
     private string ToConfigLine(string file) =>
-        TestHelper.ReplaceLineEndings(
-            $"""
-            [{file}]
-            build_metadata.AdditionalFiles.TargetPath = {Convert.ToBase64String(Encoding.UTF8.GetBytes(TestHelper.GetRelativePath(rootPath, file)))}
-            """, Environment.NewLine);
+        $"""
+        [{file}]
+        build_metadata.AdditionalFiles.TargetPath = {Convert.ToBase64String(Encoding.UTF8.GetBytes(TestHelper.GetRelativePath(rootPath, file)))}
+        """;
 }

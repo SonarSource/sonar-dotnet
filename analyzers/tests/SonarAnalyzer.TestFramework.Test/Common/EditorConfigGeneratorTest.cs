@@ -52,10 +52,7 @@ public class EditorConfigGeneratorTest
     {
         var rootPath = "C:/Users/Johnny/source/repos/WebApplication";
         var editorConfig = new EditorConfigGenerator(rootPath).Generate([]);
-        editorConfig.Should().Be(
-        $"""
-        is_global = true
-        """.Replace("\n", Environment.NewLine));
+        editorConfig.Should().Be("is_global = true");
     }
 
     [TestMethod]
@@ -64,12 +61,11 @@ public class EditorConfigGeneratorTest
         var rootPath = "C:/Users/Johnny/source/repos/WebApplication";
         var razorFile = "C:/Users/Johnny/source/repos/WebApplication/Component.razor";
         var editorConfig = new EditorConfigGenerator(rootPath).Generate([razorFile]);
-        editorConfig.Should().Be(
-        $"""
-        is_global = true
-        [C:/Users/Johnny/source/repos/WebApplication/Component.razor]
-        build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50LnJhem9y
-        """.Replace("\n", Environment.NewLine));
+        editorConfig.Should().BeIgnoringLineEndings("""
+            is_global = true
+            [C:/Users/Johnny/source/repos/WebApplication/Component.razor]
+            build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50LnJhem9y
+            """);
     }
 
     [TestMethod]
@@ -83,16 +79,15 @@ public class EditorConfigGeneratorTest
             "C:/Users/Johnny/source/repos/Parent.razor"
         };
         var editorConfig = new EditorConfigGenerator(rootPath).Generate(razorFiles);
-        editorConfig.Should().Be(
-        $"""
-        is_global = true
-        [C:/Users/Johnny/source/repos/WebApplication/Component.razor]
-        build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50LnJhem9y
-        [C:/Users/Johnny/source/repos/WebApplication/Folder/Child.razor]
-        build_metadata.AdditionalFiles.TargetPath = Rm9sZGVyXENoaWxkLnJhem9y
-        [C:/Users/Johnny/source/repos/Parent.razor]
-        build_metadata.AdditionalFiles.TargetPath = Li5cUGFyZW50LnJhem9y
-        """.Replace("\n", Environment.NewLine));
+        editorConfig.Should().BeIgnoringLineEndings("""
+            is_global = true
+            [C:/Users/Johnny/source/repos/WebApplication/Component.razor]
+            build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50LnJhem9y
+            [C:/Users/Johnny/source/repos/WebApplication/Folder/Child.razor]
+            build_metadata.AdditionalFiles.TargetPath = Rm9sZGVyXENoaWxkLnJhem9y
+            [C:/Users/Johnny/source/repos/Parent.razor]
+            build_metadata.AdditionalFiles.TargetPath = Li5cUGFyZW50LnJhem9y
+            """);
     }
 
     [TestMethod]
@@ -117,8 +112,7 @@ public class EditorConfigGeneratorTest
     public void GenerateEditorConfig_MixedFiles_Throws()
     {
         var rootPath = "C:/Users/Johnny/source/repos/WebApplication";
-        var generateMixedWithNullElement = () => _ = new EditorConfigGenerator(rootPath)
-            .Generate([null, "C:/Users/Johnny/source/repos/WebApplication/Component.razor", string.Empty]);
+        var generateMixedWithNullElement = () => _ = new EditorConfigGenerator(rootPath).Generate([null, "C:/Users/Johnny/source/repos/WebApplication/Component.razor", string.Empty]);
         generateMixedWithNullElement.Should().Throw<NullReferenceException>();
     }
 }
