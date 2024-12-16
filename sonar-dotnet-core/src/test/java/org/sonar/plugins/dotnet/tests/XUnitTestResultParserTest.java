@@ -244,9 +244,9 @@ public class XUnitTestResultParserTest {
 
     sut.parse(file, new HashMap<>(), Map.of("Some.Other.TestMethod", "C:\\dev\\Playground\\XUnit.Test\\Sample.cs"));
 
-    List<String> warnLogs = logTester.logs(Level.WARN);
-    assertThat(warnLogs).hasSize(1);
-    assertThat(warnLogs.get(0)).isEqualTo("Test method XUnitTestProj.XUnitTestProject1.UnitTest1.TestMethodDoesNotExist cannot be mapped to the test source file. The test will not be included.");
+    List<String> debugLogs = logTester.logs(Level.DEBUG);
+    assertThat(debugLogs).hasSize(2);
+    assertThat(debugLogs.get(1)).isEqualTo("Test method XUnitTestProj.XUnitTestProject1.UnitTest1.TestMethodDoesNotExist cannot be mapped to the test source file. The test will not be included.");
   }
 
   @Test
