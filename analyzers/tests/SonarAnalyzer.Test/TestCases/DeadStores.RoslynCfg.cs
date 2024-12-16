@@ -1815,5 +1815,35 @@ public class PeachValidation
         }
     }
 
+    void VariableUsedInOuterFinally(bool condition)
+    {
+        var usedInOuterFinally = 0;
+        try
+        {
+            usedInOuterFinally = 1;
+            Method(0);
+            try
+            {
+                Method(1);
+            }
+            finally
+            {
+                usedInOuterFinally = 2; // Compliant - used in outer finally
+                Method(2);
+            }
+        }
+        catch (Exception ex)
+        {
+            try
+            {
+                Method(3);
+            }
+            finally
+            {
+                Method(usedInOuterFinally);
+            }
+        }
+    }
+
     void Method(int arg) { }
 }

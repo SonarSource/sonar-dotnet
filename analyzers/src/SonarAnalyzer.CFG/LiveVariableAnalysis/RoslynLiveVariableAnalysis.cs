@@ -144,9 +144,13 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
                 AddPredecessorsOutsideRegion(finallyBlock);
             }
         }
-        if (block.IsEnclosedIn(ControlFlowRegionKind.Catch) || block.IsEnclosedIn(ControlFlowRegionKind.FilterAndHandler))
+        if (block.IsEnclosedIn(ControlFlowRegionKind.Catch) || block.IsEnclosedIn(ControlFlowRegionKind.Filter))
         {
             BuildBranchesCatch(block);
+        }
+        if (block.EnclosingNonLocalLifetimeRegion() is { Kind: ControlFlowRegionKind.Finally })
+        {
+            BuildBranchesToOuterCatch(block, block.EnclosingNonLocalLifetimeRegion().EnclosingRegion);
         }
 
         void AddPredecessorsOutsideRegion(BasicBlock destination)
@@ -165,9 +169,16 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         {
             BuildBranchesRethrow(source);
         }
-        else if (source.EnclosingRegion(ControlFlowRegionKind.TryAndCatch) is { } innerTryCatch
-            && innerTryCatch.EnclosingRegion(ControlFlowRegionKind.Try) is { } outerTry
-            && outerTry.EnclosingRegion(ControlFlowRegionKind.TryAndCatch) is { } outerTryCatch)
+        else if (source.EnclosingRegion(ControlFlowRegionKind.TryAndCatch) is { } innerTryCatch)
+        {
+            BuildBranchesToOuterCatch(source, innerTryCatch);
+        }
+    }
+
+    private void BuildBranchesToOuterCatch(BasicBlock source, ControlFlowRegion region)
+    {
+        if (region.EnclosingRegion(ControlFlowRegionKind.Try) is { } outerTry
+           && outerTry.EnclosingRegion(ControlFlowRegionKind.TryAndCatch) is { } outerTryCatch)
         {
             foreach (var outerCatch in CatchOrFilterRegions(outerTryCatch))
             {

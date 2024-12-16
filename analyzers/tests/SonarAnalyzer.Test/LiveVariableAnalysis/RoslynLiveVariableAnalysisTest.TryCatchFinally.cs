@@ -285,7 +285,7 @@ public partial class RoslynLiveVariableAnalysisTest
     }
 
     [TestMethod]
-    public void NestedCatch_LiveOuterFilterHandler_FromInnerCatch()
+    public void NestedCatch_LiveOutOuterFilterHandler_FromInnerCatch()
     {
         const string code = """
             int usedInCatch = 0;
@@ -395,18 +395,24 @@ public partial class RoslynLiveVariableAnalysisTest
                 {
                     Method(1);
                 }
-                catch when(Method(2) == usedInCatch) {  }
+                catch when(Method(2) == usedInCatch)
+                {
+                    usedInCatch = 1;
+                    Method(3);
+                }
             }
             catch
             {
                 Method(usedInCatch);
-                Method(3);
+                Method(4);
             }
             """;
         var context = CreateContextCS(code);
         context.Validate("Method(0);", LiveOut("usedInCatch"));
         context.Validate("Method(1);", LiveIn("usedInCatch"), LiveOut("usedInCatch"));
         context.Validate("Method(2) == usedInCatch", LiveIn("usedInCatch"), LiveOut("usedInCatch"));
+        context.Validate("Method(3);", LiveOut("usedInCatch"));
+        context.Validate("Method(4);", LiveIn("usedInCatch"));
         context.ValidateExit();
     }
 
@@ -1391,6 +1397,220 @@ public partial class RoslynLiveVariableAnalysisTest
         context.Validate("Method(inner);", LiveIn("inner", "outer"), LiveOut("outer"));
         context.Validate("Method(outer);", LiveIn("outer"));
         context.Validate("Method(2);");
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void NestedFinally_LiveOut_OuterCatch()
+    {
+        const string code = """
+            var usedInOuterCatch = 0;
+            Method(0);
+            try
+            {
+                Method(1);
+                try
+                {
+                    Method(2);
+                }
+                finally
+                {
+                    usedInOuterCatch = 2;
+                    Method(3);
+                }
+            }
+            catch (Exception ex)
+            {
+                Method(usedInOuterCatch);
+                Method(4);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("Method(0);", LiveOut("usedInOuterCatch"));
+        context.Validate("Method(1);", LiveIn("usedInOuterCatch"), LiveOut("usedInOuterCatch"));
+        context.Validate("Method(2);", LiveIn("usedInOuterCatch"), LiveOut("usedInOuterCatch"));
+        context.Validate("Method(3);", LiveOut("usedInOuterCatch"));
+        context.Validate("Method(4);", LiveIn("usedInOuterCatch"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void NestedFinally_LiveOut_NestedTryInOuterCatch()
+    {
+        const string code = """
+            var usedInOuterTry = 0;
+            Method(0);
+            try
+            {
+                Method(1);
+                try
+                {
+                    Method(2);
+                }
+                finally
+                {
+                    usedInOuterTry = 2;
+                    Method(3);
+                }
+            }
+            catch
+            {
+                try
+                {
+                    Method(usedInOuterTry);
+                    Method(4);
+                }
+                catch
+                {
+                    Method(5);
+                }
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("Method(0);", LiveOut("usedInOuterTry"));
+        context.Validate("Method(1);", LiveIn("usedInOuterTry"), LiveOut("usedInOuterTry"));
+        context.Validate("Method(2);", LiveIn("usedInOuterTry"), LiveOut("usedInOuterTry"));
+        context.Validate("Method(3);", LiveOut("usedInOuterTry"));
+        context.Validate("Method(4);", LiveIn("usedInOuterTry"));
+        context.Validate("Method(5);");
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void NestedFinally_LiveOut_NestedFinallyInOuterCatch()
+    {
+        const string code = """
+            var usedInOuterFinally = 0;
+            Method(0);
+            try
+            {
+                Method(usedInOuterFinally);
+                Method(1);
+                try
+                {
+                    Method(2);
+                }
+                finally
+                {
+                    usedInOuterFinally = 2; // Compliant - used in outer finally
+                    Method(3);
+                }
+            }
+            catch
+            {
+                try
+                {
+                    Method(4);
+                }
+                finally
+                {
+                    Method(usedInOuterFinally);
+                    Method(5);
+                }
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("Method(0);", LiveOut("usedInOuterFinally"));
+        context.Validate("Method(1);", LiveIn("usedInOuterFinally"), LiveOut("usedInOuterFinally"));
+        context.Validate("Method(2);", LiveIn("usedInOuterFinally"), LiveOut("usedInOuterFinally"));
+        context.Validate("Method(3);", LiveOut("usedInOuterFinally"));
+        context.Validate("Method(4);", LiveIn("usedInOuterFinally"), LiveOut("usedInOuterFinally"));
+        context.Validate("Method(5);", LiveIn("usedInOuterFinally"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void NestedFinally_LiveOut_NestedFinallyInOuter_ConsecutiveCatch()
+    {
+        const string code = """
+            var usedInOuterFinally = 0;
+            Method(0);
+            try
+            {
+                Method(usedInOuterFinally);
+                Method(1);
+                try
+                {
+                    Method(2);
+                }
+                finally
+                {
+                    usedInOuterFinally = 2; // Compliant - used in outer finally
+                    Method(3);
+                }
+            }
+            catch(NotImplementedException)
+            {
+                Method(4);
+            }
+            catch
+            {
+                try
+                {
+                    Method(5);
+                }
+                finally
+                {
+                    Method(6);
+                    Method(usedInOuterFinally);
+                }
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("Method(0);", LiveOut("usedInOuterFinally"));
+        context.Validate("Method(1);", LiveIn("usedInOuterFinally"), LiveOut("usedInOuterFinally"));
+        context.Validate("Method(2);", LiveIn("usedInOuterFinally"), LiveOut("usedInOuterFinally"));
+        context.Validate("Method(3);", LiveOut("usedInOuterFinally"));
+        context.Validate("Method(4);");
+        context.Validate("Method(5);", LiveIn("usedInOuterFinally"), LiveOut("usedInOuterFinally"));
+        context.Validate("Method(6);", LiveIn("usedInOuterFinally"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
+    public void NestedFinally_LiveOutNestedFinallyInOuter_FinallyHasLocalLifetime()
+    {
+        const string code = """
+            var usedInOuterFinally = 0;
+            Method(0);
+            try
+            {
+                Method(usedInOuterFinally);
+                Method(1);
+                try
+                {
+                    Method(2);
+                }
+                finally
+                {
+                    var t = usedInOuterFinally  > 1 ? 1 : 0; // This causes LocalLifetimeRegion to be generated
+                }
+            }
+            catch
+            {
+                try
+                {
+                    Method(4);
+                }
+                finally
+                {
+                    Method(5);
+                    Method(usedInOuterFinally);
+                }
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("Method(0);", LiveOut("usedInOuterFinally"));
+        context.Validate("Method(1);", LiveIn("usedInOuterFinally"), LiveOut("usedInOuterFinally"));
+        context.Validate("Method(2);", LiveIn("usedInOuterFinally"), LiveOut("usedInOuterFinally"));
+        context.Validate("t = usedInOuterFinally  > 1 ? 1 : 0", LiveIn("usedInOuterFinally"), LiveOut("usedInOuterFinally"));
+        context.Validate("Method(4);", LiveIn("usedInOuterFinally"), LiveOut("usedInOuterFinally"));
+        context.Validate("Method(5);", LiveIn("usedInOuterFinally"));
         context.ValidateExit();
     }
 
