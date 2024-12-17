@@ -30,7 +30,7 @@ public class CSharpFacadeTest
                     M(1);
             }
             """;
-        var (tree, model) = TestHelper.CompileCS(code);
+        var (tree, model) = TestCompiler.CompileCS(code);
         var root = tree.GetRoot();
         var invocation = root.DescendantNodes().OfType<InvocationExpressionSyntax>().First();
         var method = model.GetDeclaredSymbol(root.DescendantNodes().OfType<MethodDeclarationSyntax>().First());
@@ -48,7 +48,7 @@ public class CSharpFacadeTest
                     M(1);
             }
             """;
-        var (tree, model) = TestHelper.CompileCS(code);
+        var (tree, model) = TestCompiler.CompileCS(code);
         var lookup = CSharpFacade.Instance.MethodParameterLookup(tree.GetRoot().DescendantNodes().OfType<InvocationExpressionSyntax>().First(), model);
         lookup.Should().NotBeNull().And.BeOfType<CSharpMethodParameterLookup>();
     }
@@ -66,7 +66,7 @@ public class CSharpFacadeTest
                     new C(1);
             }
             """;
-        var (tree, model) = TestHelper.CompileCS(code);
+        var (tree, model) = TestCompiler.CompileCS(code);
         var root = tree.GetRoot();
         var creation = root.DescendantNodes().OfType<ObjectCreationExpressionSyntax>().First();
         var constructor = model.GetDeclaredSymbol(root.DescendantNodes().OfType<ConstructorDeclarationSyntax>().First());
@@ -87,7 +87,7 @@ public class CSharpFacadeTest
                     new(1);
             }
             """;
-        var (tree, model) = TestHelper.CompileCS(code);
+        var (tree, model) = TestCompiler.CompileCS(code);
         var root = tree.GetRoot();
         var creation = root.DescendantNodes().First(x => x.IsKind(SyntaxKindEx.ImplicitObjectCreationExpression));
         var constructor = model.GetDeclaredSymbol(root.DescendantNodes().OfType<ConstructorDeclarationSyntax>().First());
@@ -106,7 +106,7 @@ public class CSharpFacadeTest
                     M(1);
             }
             """;
-        var (tree, model) = TestHelper.CompileCS(code);
+        var (tree, model) = TestCompiler.CompileCS(code);
         var root = tree.GetRoot();
         var argumentList = root.DescendantNodes().OfType<ArgumentListSyntax>().First();
         var method = model.GetDeclaredSymbol(root.DescendantNodes().OfType<MethodDeclarationSyntax>().First());
@@ -125,7 +125,7 @@ public class CSharpFacadeTest
                     M(1);
             }
             """;
-        var (tree, model) = TestHelper.CompileCS(code);
+        var (tree, model) = TestCompiler.CompileCS(code);
         var root = tree.GetRoot();
         var methodDeclaration = root.DescendantNodes().OfType<MethodDeclarationSyntax>().First();
         var method = model.GetDeclaredSymbol(methodDeclaration);
@@ -144,7 +144,7 @@ public class CSharpFacadeTest
                     M(1);
             }
             """;
-        var (tree, model) = TestHelper.CompileCS(code);
+        var (tree, model) = TestCompiler.CompileCS(code);
         var root = tree.GetRoot();
         var method = model.GetDeclaredSymbol(root.DescendantNodes().OfType<MethodDeclarationSyntax>().First());
         var actual = sut.MethodParameterLookup(null, method);
@@ -162,7 +162,7 @@ public class CSharpFacadeTest
                     M(1);
             }
             """;
-        var (_, model) = TestHelper.CompileCS(code);
+        var (_, model) = TestCompiler.CompileCS(code);
         var actual = sut.MethodParameterLookup(null, model);
         actual.Should().BeNull();
     }

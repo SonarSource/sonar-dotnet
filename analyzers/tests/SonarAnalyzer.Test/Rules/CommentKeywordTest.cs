@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow(ProjectType.Test)]
         public void CommentTodo_CS(ProjectType projectType) =>
             builderCS.AddPaths("CommentTodo.cs")
-                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .AddReferences(TestCompiler.ProjectTypeReference(projectType))
                 .Verify();
 
         [DataTestMethod]
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow(ProjectType.Test)]
         public void CommentFixme_CS(ProjectType projectType) =>
             builderCS.AddPaths("CommentFixme.cs")
-                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .AddReferences(TestCompiler.ProjectTypeReference(projectType))
                 .Verify();
 
         [DataTestMethod]
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow(ProjectType.Test)]
         public void CommentTodo_VB(ProjectType projectType) =>
             builderVB.AddPaths("CommentTodo.vb")
-                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .AddReferences(TestCompiler.ProjectTypeReference(projectType))
                 .Verify();
 
         [DataTestMethod]
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow(ProjectType.Test)]
         public void CommentFixme_VB(ProjectType projectType) =>
             builderVB.AddPaths("CommentFixme.vb")
-                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .AddReferences(TestCompiler.ProjectTypeReference(projectType))
                 .Verify();
     }
 }

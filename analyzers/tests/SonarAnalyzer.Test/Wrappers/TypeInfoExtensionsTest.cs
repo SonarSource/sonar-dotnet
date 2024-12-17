@@ -40,7 +40,7 @@ public class C
     }
 }
 ";
-            var (tree, semanticModel) = TestHelper.CompileCS(code);
+            var (tree, semanticModel) = TestCompiler.CompileCS(code);
             var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("o")); // o in o.ToString()
             var typeInfo = semanticModel.GetTypeInfo(identifier);
 
@@ -79,7 +79,7 @@ public class C {
 
     public static implicit operator B?(C c) => null;
 }";
-            var (tree, semanticModel) = TestHelper.CompileCS(code);
+            var (tree, semanticModel) = TestCompiler.CompileCS(code);
             var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("c")); // c in M(c)
             var typeInfo = semanticModel.GetTypeInfo(identifier);
 
@@ -114,7 +114,7 @@ public class C
     }
 }
 ";
-            var (tree, semanticModel) = TestHelper.CompileCS(code);
+            var (tree, semanticModel) = TestCompiler.CompileCS(code);
             var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("o")); // o in o.ToString()
             var typeInfo = semanticModel.GetTypeInfo(identifier);
             typeInfo.Nullability().Should().Be(new NullabilityInfo(NullableAnnotation.None, NullableFlowState.None));
@@ -139,7 +139,7 @@ public class C
     }}
 }}
 ";
-            var (tree, semanticModel) = TestHelper.CompileCS(code);
+            var (tree, semanticModel) = TestCompiler.CompileCS(code);
             var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("o")); // o in o.ToString()
             var typeInfo = semanticModel.GetTypeInfo(identifier);
             var expected =

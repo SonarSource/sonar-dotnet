@@ -26,7 +26,7 @@ public class SonarCompilationStartAnalysisContextTest
     public void Properties_ArePropagated()
     {
         var cancel = new CancellationToken(true);
-        var compilation = TestHelper.CompileCS("// Nothing to see here").Model.Compilation;
+        var compilation = TestCompiler.CompileCS("// Nothing to see here").Model.Compilation;
         var options = AnalysisScaffolding.CreateOptions();
         var context = Substitute.For<CompilationStartAnalysisContext>(compilation, options, cancel);
         var sut = new SonarCompilationStartAnalysisContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);

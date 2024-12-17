@@ -339,7 +339,7 @@ public class SyntaxNodeExtensionsTest
                 }
             }
             """;
-        var (tree, semanticModel) = TestHelper.CompileCS(code);
+        var (tree, semanticModel) = TestCompiler.CompileCS(code);
         var innerLambda = tree.Single<SyntaxCS.SimpleLambdaExpressionSyntax>();
         innerLambda.Parent.Parent.Should().BeOfType<SyntaxCS.VariableDeclaratorSyntax>().Subject.Identifier.ValueText.Should().Be("innerLambda");
 
@@ -376,7 +376,7 @@ public class SyntaxNodeExtensionsTest
                 End Sub
             End Class
             """;
-        var (tree, semanticModel) = TestHelper.CompileVB(code);
+        var (tree, semanticModel) = TestCompiler.CompileVB(code);
         var innerSub = tree.Single<SyntaxVB.InvocationExpressionSyntax>().FirstAncestorOrSelf<SyntaxVB.SingleLineLambdaExpressionSyntax>();
         innerSub.Parent.Parent.Should().BeOfType<SyntaxVB.VariableDeclaratorSyntax>().Subject.Names.Single().Identifier.ValueText.Should().Be("InnerSingleLineSub");
 
@@ -404,7 +404,7 @@ public class SyntaxNodeExtensionsTest
                 }
             }
             """;
-        var (tree, model) = TestHelper.CompileIgnoreErrorsCS(code);
+        var (tree, model) = TestCompiler.CompileIgnoreErrorsCS(code);
         var lambda = tree.Single<SyntaxCS.ParenthesizedLambdaExpressionSyntax>();
         SyntaxNodeExtensionsCSharp.CreateCfg(lambda, model, default).Should().NotBeNull();
     }
@@ -419,7 +419,7 @@ public class SyntaxNodeExtensionsTest
                 End Sub
             End Class
             """;
-        var (tree, model) = TestHelper.CompileIgnoreErrorsVB(code);
+        var (tree, model) = TestCompiler.CompileIgnoreErrorsVB(code);
         var lambda = tree.Single<SyntaxVB.SingleLineLambdaExpressionSyntax>();
         SyntaxNodeExtensionsVisualBasic.CreateCfg(lambda, model, default).Should().BeNull();
     }
@@ -431,7 +431,7 @@ public class SyntaxNodeExtensionsTest
     [DataRow(@"{ () => => =>")]
     public void CreateCfg_InvalidSyntax_ReturnsCfg_CS(string code)
     {
-        var (tree, model) = TestHelper.CompileIgnoreErrorsCS(code);
+        var (tree, model) = TestCompiler.CompileIgnoreErrorsCS(code);
         var lambda = tree.Single<SyntaxCS.ParenthesizedLambdaExpressionSyntax>();
         SyntaxNodeExtensionsCSharp.CreateCfg(lambda, model, default).Should().NotBeNull();
     }
@@ -458,7 +458,7 @@ public class SyntaxNodeExtensionsTest
                 }
             }
             """;
-        var (tree, model) = TestHelper.CompileCS(code);
+        var (tree, model) = TestCompiler.CompileCS(code);
         var lambda = tree.Single<SyntaxCS.ParenthesizedLambdaExpressionSyntax>();
         Action a = () =>
             {
@@ -488,7 +488,7 @@ public class SyntaxNodeExtensionsTest
                 End Sub
             End Class
             """;
-        var (tree, model) = TestHelper.CompileVB(code);
+        var (tree, model) = TestCompiler.CompileVB(code);
         var lambda = tree.Single<SyntaxVB.SingleLineLambdaExpressionSyntax>();
         Action a = () =>
         {
@@ -511,7 +511,7 @@ public class SyntaxNodeExtensionsTest
                 { }
             }
             """;
-        var compilation1 = TestHelper.CompileCS(code).Model.Compilation;
+        var compilation1 = TestCompiler.CompileCS(code).Model.Compilation;
         var compilation2 = compilation1.WithAssemblyName("Different-Compilation-Reusing-Same-Nodes");
         var method1 = compilation1.SyntaxTrees.Single().Single<SyntaxCS.MethodDeclarationSyntax>();
         var method2 = compilation2.SyntaxTrees.Single().Single<SyntaxCS.MethodDeclarationSyntax>();
@@ -636,7 +636,7 @@ public class Sample
             var withExpression = from xExpres in arr.AsQueryable() where xExpres == 42 orderby xExpres select xExpres.ToString();
     }
 }";
-        var (tree, model) = TestHelper.CompileCS(code);
+        var (tree, model) = TestCompiler.CompileCS(code);
         var allIdentifiers = tree.GetRoot().DescendantNodes().OfType<SyntaxCS.IdentifierNameSyntax>().ToArray();
         allIdentifiers.Where(x => x.Identifier.ValueText == "xNormal").Should().HaveCount(6).And.OnlyContain(x => !SyntaxNodeExtensionsCSharp.IsInExpressionTree(x, model));
         allIdentifiers.Where(x => x.Identifier.ValueText == "xExpres").Should().HaveCount(6).And.OnlyContain(x => SyntaxNodeExtensionsCSharp.IsInExpressionTree(x, model));
@@ -655,7 +655,7 @@ Public Class Sample
         Dim WithExpression = From xExpres In Arr.AsQueryable() Where xExpres = 42 Order By xExpres Select Result = xExpres.ToString()
     End Sub
 End Class";
-        var (tree, model) = TestHelper.CompileVB(code);
+        var (tree, model) = TestCompiler.CompileVB(code);
         var allIdentifiers = tree.GetRoot().DescendantNodes().OfType<SyntaxVB.IdentifierNameSyntax>().ToArray();
         allIdentifiers.Where(x => x.Identifier.ValueText == "xNormal").Should().HaveCount(6).And.OnlyContain(x => !SyntaxNodeExtensionsVisualBasic.IsInExpressionTree(x, model));
         allIdentifiers.Where(x => x.Identifier.ValueText == "xExpres").Should().HaveCount(6).And.OnlyContain(x => SyntaxNodeExtensionsVisualBasic.IsInExpressionTree(x, model));
@@ -1321,7 +1321,7 @@ End Class";
         var lastPosition = code.LastIndexOf("$$");
         var length = lastPosition == position ? 0 : lastPosition - position - "$$".Length;
         code = code.Replace("$$", string.Empty);
-        var (tree, _) = TestHelper.Compile(code, ignoreErrors: false, language, outputKind: outputKind);
+        var (tree, _) = TestCompiler.Compile(code, ignoreErrors: false, language, outputKind: outputKind);
         var node = tree.GetRoot().FindNode(new TextSpan(position, length), getInnermostNodeForTie: getInnermostNodeForTie);
         return node;
     }
@@ -1340,13 +1340,13 @@ End Class";
 
     private static ControlFlowGraph CreateCfgCS<T>(string code) where T : CSharpSyntaxNode
     {
-        var (tree, model) = TestHelper.CompileCS(code);
+        var (tree, model) = TestCompiler.CompileCS(code);
         return SyntaxNodeExtensionsCSharp.CreateCfg(tree.Single<T>(), model, default);
     }
 
     private static ControlFlowGraph CreateCfgVB<T>(string code) where T : Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxNode
     {
-        var (tree, model) = TestHelper.CompileVB(code);
+        var (tree, model) = TestCompiler.CompileVB(code);
         return SyntaxNodeExtensionsVisualBasic.CreateCfg(tree.Single<T>(), model, default);
     }
 }

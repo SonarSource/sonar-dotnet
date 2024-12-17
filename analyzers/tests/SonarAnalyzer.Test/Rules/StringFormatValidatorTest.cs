@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow(ProjectType.Test)]
         public void StringFormatValidator_RuntimeExceptionFree(ProjectType projectType) =>
             builder.AddPaths("StringFormatValidator.RuntimeExceptionFree.cs")
-                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .AddReferences(TestCompiler.ProjectTypeReference(projectType))
                 .Verify();
 
         [DataTestMethod]
@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow(ProjectType.Test)]
         public void StringFormatValidator_TypoFree(ProjectType projectType) =>
             builder.AddPaths("StringFormatValidator.TypoFree.cs")
-                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .AddReferences(TestCompiler.ProjectTypeReference(projectType))
                 .Verify();
 
         [TestMethod]
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow(ProjectType.Test)]
         public void StringFormatValidator_RuntimeExceptionFree_CSharp11(ProjectType projectType) =>
             builder.AddPaths("StringFormatValidator.RuntimeExceptionFree.CSharp11.cs")
-                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .AddReferences(TestCompiler.ProjectTypeReference(projectType))
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
@@ -59,14 +59,14 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow(ProjectType.Test)]
         public void StringFormatValidator_TypoFree_CSharp11(ProjectType projectType) =>
             builder.AddPaths("StringFormatValidator.TypoFree.CSharp11.cs")
-                .AddReferences(TestHelper.ProjectTypeReference(projectType))
+                .AddReferences(TestCompiler.ProjectTypeReference(projectType))
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
         [TestMethod]
         public void StringFormatValidator_Latest() =>
             builder.AddPaths("StringFormatValidator.Latest.cs")
-                .AddReferences(TestHelper.ProjectTypeReference(ProjectType.Product))
+                .AddReferences(TestCompiler.ProjectTypeReference(ProjectType.Product))
                 .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 

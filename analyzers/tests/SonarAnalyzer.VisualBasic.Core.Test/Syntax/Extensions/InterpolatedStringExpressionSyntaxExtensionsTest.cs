@@ -55,7 +55,7 @@ public class InterpolatedStringExpressionSyntaxExtensionsTest
                     End Function
             End Class
             """;
-        var (tree, model) = TestHelper.CompileVB(code);
+        var (tree, model) = TestCompiler.CompileVB(code);
         return (tree.First<InterpolatedStringExpressionSyntax>(), model);
     }
 }

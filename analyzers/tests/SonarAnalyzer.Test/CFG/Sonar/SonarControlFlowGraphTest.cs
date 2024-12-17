@@ -75,7 +75,7 @@ namespace NS
         public Foo(int i) {}
     }
 }";
-            var (tree, semanticModel) = TestHelper.CompileCS(input);
+            var (tree, semanticModel) = TestCompiler.CompileCS(input);
             var cfg = CSharpControlFlowGraph.Create(FirstConstructorBody(tree), semanticModel);
 
             VerifyCfg(cfg, 5);
@@ -115,7 +115,7 @@ namespace NS
         public Foo(int i) {}
     }
 }";
-            var (tree, semanticModel) = TestHelper.CompileCS(input);
+            var (tree, semanticModel) = TestCompiler.CompileCS(input);
             var cfg = CSharpControlFlowGraph.Create(FirstConstructorBody(tree), semanticModel);
 
             VerifyCfg(cfg, 2);
@@ -147,7 +147,7 @@ namespace NS
         public Bar(int i) {}
     }
 }";
-            var (tree, semanticModel) = TestHelper.CompileCS(input);
+            var (tree, semanticModel) = TestCompiler.CompileCS(input);
             var cfg = CSharpControlFlowGraph.Create(FirstConstructorBody(tree), semanticModel);
 
             VerifyCfg(cfg, 2);
@@ -186,7 +186,7 @@ public class Sample
         return {ExtremelyNestedExpression()};
     }}
 }}";
-            var (tree, semanticModel) = TestHelper.CompileCS(input);
+            var (tree, semanticModel) = TestCompiler.CompileCS(input);
             var method = FirstMethod(tree);
             Action a = () => CSharpControlFlowGraph.Create(method.Body, semanticModel);
 
@@ -202,7 +202,7 @@ public class Sample
 {{
     public string Main() =>{ExtremelyNestedExpression()};
 }}";
-            var (tree, semanticModel) = TestHelper.CompileCS(input);
+            var (tree, semanticModel) = TestCompiler.CompileCS(input);
             var method = FirstMethod(tree);
             Action a = () => CSharpControlFlowGraph.Create(method.ExpressionBody, semanticModel);
 
@@ -220,7 +220,7 @@ public class Sample
 
     public void Go(System.Func<string, string> arg) {{ }}
 }}";
-            var (tree, semanticModel) = TestHelper.CompileCS(input);
+            var (tree, semanticModel) = TestCompiler.CompileCS(input);
             var method = FirstMethod(tree);
             CSharpControlFlowGraph.Create(method.ExpressionBody, semanticModel).Should().NotBeNull();
             CSharpControlFlowGraph.TryGet(method, semanticModel, out _).Should().BeTrue();
@@ -236,7 +236,7 @@ public class Sample
 
     public void Go(System.Func<string> arg) {{ }}
 }}";
-            var (tree, semanticModel) = TestHelper.CompileCS(input);
+            var (tree, semanticModel) = TestCompiler.CompileCS(input);
             var method = FirstMethod(tree);
             CSharpControlFlowGraph.Create(method.ExpressionBody, semanticModel).Should().NotBeNull();
             CSharpControlFlowGraph.TryGet(method, semanticModel, out _).Should().BeTrue();
@@ -5074,7 +5074,7 @@ namespace NS
 
         internal static (MethodDeclarationSyntax Method, SemanticModel Model) CompileWithMethodBody(string input)
         {
-            var (tree, semanticModel) = TestHelper.CompileIgnoreErrorsCS(input);
+            var (tree, semanticModel) = TestCompiler.CompileIgnoreErrorsCS(input);
             return (tree.First<MethodDeclarationSyntax>(), semanticModel);
         }
 

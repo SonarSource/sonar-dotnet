@@ -1084,7 +1084,7 @@ class Program
 
         private static void AssertLineNumbersOfExecutableLines(string code, params int[] expectedExecutableLines)
         {
-            var (syntaxTree, semanticModel) = TestHelper.CompileCS(code);
+            var (syntaxTree, semanticModel) = TestCompiler.CompileCS(code);
             CSharpExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel).Should().BeEquivalentTo(expectedExecutableLines);
         }
 

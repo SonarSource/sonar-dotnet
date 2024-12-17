@@ -87,7 +87,7 @@ public class Sample
         var value = 42;
     }
 }";
-            var (tree, model) = TestHelper.CompileCS(code);
+            var (tree, model) = TestCompiler.CompileCS(code);
             var declaration = tree.Single<EqualsValueClauseSyntax>();
             semanticModel = model;
             return new IOperationWrapperSonar(model.GetOperation(declaration));

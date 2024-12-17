@@ -25,7 +25,7 @@ public class SonarCompilationReportingContextTest
     public void Properties_ArePropagated()
     {
         var cancel = new CancellationToken(true);
-        var compilation = TestHelper.CompileCS("// Nothing to see here").Model.Compilation;
+        var compilation = TestCompiler.CompileCS("// Nothing to see here").Model.Compilation;
         var options = AnalysisScaffolding.CreateOptions();
         var context = new CompilationAnalysisContext(compilation, options, _ => { }, _ => true, cancel);
         var sut = new SonarCompilationReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);

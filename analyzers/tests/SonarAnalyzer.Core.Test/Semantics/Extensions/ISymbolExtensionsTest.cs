@@ -425,14 +425,14 @@ public class ISymbolExtensionsTest
 
     private static ISymbol CreateSymbol(string snippet, AnalyzerLanguage language, ParseOptions parseOptions = null)
     {
-        var (tree, semanticModel) = TestHelper.Compile(snippet, false, language, parseOptions: parseOptions);
+        var (tree, semanticModel) = TestCompiler.Compile(snippet, false, language, parseOptions: parseOptions);
         var node = tree.GetRoot().DescendantNodes().Last(x => x.ToString().Contains(" SymbolMember"));
         return semanticModel.GetDeclaredSymbol(node);
     }
 
     private static List<ISymbol> CreateSymbols(string snippet, AnalyzerLanguage language, Func<SyntaxNode, bool> additionalFilter = null)
     {
-        var (tree, semanticModel) = TestHelper.Compile(snippet, false, language);
+        var (tree, semanticModel) = TestCompiler.Compile(snippet, false, language);
         var nodes = tree.GetRoot().DescendantNodes().Where(x => x.ToString().Contains("SymbolMember") && (additionalFilter?.Invoke(x) ?? true)).ToList();
         return nodes.Select(x => semanticModel.GetDeclaredSymbol(x)).ToList();
     }

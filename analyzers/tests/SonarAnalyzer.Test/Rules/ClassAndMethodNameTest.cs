@@ -60,14 +60,14 @@ public class ClassAndMethodNameTest
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void ClassAndMethodName_VB(ProjectType projectType) =>
-        new VerifierBuilder<VB.ClassName>().AddPaths("ClassAndMethodName.vb").AddReferences(TestHelper.ProjectTypeReference(projectType)).Verify();
+        new VerifierBuilder<VB.ClassName>().AddPaths("ClassAndMethodName.vb").AddReferences(TestCompiler.ProjectTypeReference(projectType)).Verify();
 
     [DataTestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void ClassAndMethodName_MethodName(ProjectType projectType) =>
         builderCS.AddPaths("ClassAndMethodName.MethodName.cs", "ClassAndMethodName.MethodName.Partial.cs")
-            .AddReferences(TestHelper.ProjectTypeReference(projectType))
+            .AddReferences(TestCompiler.ProjectTypeReference(projectType))
             .WithOptions(LanguageOptions.FromCSharp8).Verify();
 
     [DataTestMethod]

@@ -321,7 +321,7 @@ public class RoslynLvaSerializerTest
 
     private static RoslynLiveVariableAnalysis CreateLva(string code)
     {
-        var cfg = TestHelper.CompileCfgCS(code);
+        var cfg = TestCompiler.CompileCfgCS(code);
         return new RoslynLiveVariableAnalysis(cfg, CSharpSyntaxClassifier.Instance, CancellationToken.None);
     }
 }

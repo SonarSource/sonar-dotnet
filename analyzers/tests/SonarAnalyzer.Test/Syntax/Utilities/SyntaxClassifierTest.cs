@@ -120,7 +120,7 @@ public class SyntaxClassifierTest
 
     private static SyntaxCS.IdentifierNameSyntax CreateConditionCS(string code)
     {
-        var tree = TestHelper.CompileCS($$"""
+        var tree = TestCompiler.CompileCS($$"""
             using System.Linq;
             public class Sample
             {
@@ -135,7 +135,7 @@ public class SyntaxClassifierTest
 
     private static SyntaxVB.IdentifierNameSyntax CreateConditionVB(string code)
     {
-        var tree = TestHelper.CompileVB($$"""
+        var tree = TestCompiler.CompileVB($$"""
             Public Class Sample
                 Private A As Boolean, B As Boolean, Condition As Boolean
 

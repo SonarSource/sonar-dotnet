@@ -251,7 +251,7 @@ public class KnownAssemblyTest
     [TestMethod]
     public void CompilationShouldNotReferenceAssemblies()
     {
-        var compilation = TestHelper.CompileCS("// Empty file").Model.Compilation;
+        var compilation = TestCompiler.CompileCS("// Empty file").Model.Compilation;
 
         compilation.References(XUnit_Assert).Should().BeFalse();
         compilation.References(MSTest).Should().BeFalse();
@@ -332,7 +332,7 @@ public class KnownAssemblyTest
         CompilationShouldReference(NuGetMetadataReference.CastleCore(), CastleCore);
 
     private static void CompilationShouldReference(IEnumerable<MetadataReference> references, KnownAssembly expectedAssembly) =>
-        TestHelper.CompileCS("// Empty file", references.ToArray()).Model.Compilation.References(expectedAssembly).Should().BeTrue();
+        TestCompiler.CompileCS("// Empty file", references.ToArray()).Model.Compilation.References(expectedAssembly).Should().BeTrue();
 
     private static Compilation CompilationWithReferenceTo(AssemblyIdentity identity)
     {

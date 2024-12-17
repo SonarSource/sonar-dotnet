@@ -431,7 +431,7 @@ public partial class SonarAnalysisContextBaseTest
         var compilation = SolutionBuilder
             .Create()
             .AddProject(analyzerLanguage)
-            .AddReferences(TestHelper.ProjectTypeReference(projectType))
+            .AddReferences(TestCompiler.ProjectTypeReference(projectType))
             .AddSnippet(string.Empty, fileName)
             .GetCompilation();
         var tree = compilation.SyntaxTrees.Single(x => x.FilePath.Contains(fileName));

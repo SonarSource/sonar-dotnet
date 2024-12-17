@@ -30,7 +30,7 @@ public class VisualBasicFacadeTest
                 End Function
             End Class
             """;
-        var (tree, model) = TestHelper.CompileVB(code);
+        var (tree, model) = TestCompiler.CompileVB(code);
         var root = tree.GetRoot();
         var invocation = root.DescendantNodes().OfType<InvocationExpressionSyntax>().First();
         var method = model.GetDeclaredSymbol(root.DescendantNodes().OfType<MethodStatementSyntax>().First());
@@ -48,7 +48,7 @@ public class VisualBasicFacadeTest
                 End Function
             End Class
             """;
-        var (tree, model) = TestHelper.CompileVB(code);
+        var (tree, model) = TestCompiler.CompileVB(code);
         var actual = VisualBasicFacade.Instance.MethodParameterLookup(tree.GetRoot().DescendantNodes().OfType<InvocationExpressionSyntax>().First(), model);
         actual.Should().NotBeNull().And.BeOfType<VisualBasicMethodParameterLookup>();
     }
@@ -67,7 +67,7 @@ public class VisualBasicFacadeTest
                 End Function
             End Class
             """;
-        var (tree, model) = TestHelper.CompileVB(code);
+        var (tree, model) = TestCompiler.CompileVB(code);
         var root = tree.GetRoot();
         var creation = root.DescendantNodes().OfType<ObjectCreationExpressionSyntax>().First();
         var constructor = model.GetDeclaredSymbol(root.DescendantNodes().OfType<SubNewStatementSyntax>().First());
@@ -86,7 +86,7 @@ public class VisualBasicFacadeTest
                 End Function
             End Class
             """;
-        var (tree, model) = TestHelper.CompileVB(code);
+        var (tree, model) = TestCompiler.CompileVB(code);
         var root = tree.GetRoot();
         var argumentList = root.DescendantNodes().OfType<ArgumentListSyntax>().First();
         var method = model.GetDeclaredSymbol(root.DescendantNodes().OfType<MethodStatementSyntax>().First());
@@ -105,7 +105,7 @@ public class VisualBasicFacadeTest
                 End Function
             End Class
             """;
-        var (tree, model) = TestHelper.CompileVB(code);
+        var (tree, model) = TestCompiler.CompileVB(code);
         var root = tree.GetRoot();
         var methodDeclaration = root.DescendantNodes().OfType<MethodStatementSyntax>().First();
         var method = model.GetDeclaredSymbol(methodDeclaration);
@@ -124,7 +124,7 @@ public class VisualBasicFacadeTest
                 End Function
             End Class
             """;
-        var (tree, model) = TestHelper.CompileVB(code);
+        var (tree, model) = TestCompiler.CompileVB(code);
         var root = tree.GetRoot();
         var method = model.GetDeclaredSymbol(root.DescendantNodes().OfType<MethodStatementSyntax>().First());
         var actual = sut.MethodParameterLookup(null, method);
@@ -142,7 +142,7 @@ public class VisualBasicFacadeTest
                 End Function
             End Class
             """;
-        var (_, model) = TestHelper.CompileVB(code);
+        var (_, model) = TestCompiler.CompileVB(code);
         var actual = sut.MethodParameterLookup(null, model);
         actual.Should().BeNull();
     }

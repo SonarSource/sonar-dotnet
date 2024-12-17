@@ -45,7 +45,7 @@ public class Sample
         int LocalMethod() => 42;
     }
 }";
-            var root = TestHelper.CompileCfgCS(code).Root;
+            var root = TestCompiler.CompileCfgCS(code).Root;
 
             root.Should().NotBeNull();
             root.Kind.Should().Be(ControlFlowRegionKind.Root);

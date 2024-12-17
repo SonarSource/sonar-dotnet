@@ -14,48 +14,18 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.CFG.Roslyn;
-
 namespace SonarAnalyzer.Test.TestFramework.Tests.Common;
 
 [TestClass]
-public class TestHelperTest
+public class TestFilesTest
 {
-    private const string CompileCfgLambda = """
-        public class Sample
-        {
-            public void Method()
-            {
-                System.Func<int> f = () => 42;
-            }
-        }
-        """;
-
     public TestContext TestContext { get; set; }
-
-    [TestMethod]
-    public void CompileCfg_LocalfunctionNameAndAnonymousFunctionFragment_Throws() =>
-        ((Func<ControlFlowGraph>)(() => TestHelper.CompileCfg(CompileCfgLambda, AnalyzerLanguage.CSharp, false, "LocalFunctionName", "AnonymousFunctionFragment")))
-            .Should()
-            .Throw<InvalidOperationException>()
-            .WithMessage("Specify localFunctionName or anonymousFunctionFragment.");
-
-    [TestMethod]
-    public void CompileCfg_InvalidAnonymousFunctionFragment_Throws() =>
-        ((Func<ControlFlowGraph>)(() => TestHelper.CompileCfg(CompileCfgLambda, AnalyzerLanguage.CSharp, false, null, "InvalidFragment")))
-            .Should()
-            .Throw<ArgumentException>()
-            .WithMessage("Anonymous function with 'InvalidFragment' fragment was not found.");
-
-    [TestMethod]
-    public void Serialize_Default_Throws() =>
-        ((Func<string>)(() => TestHelper.Serialize(default))).Should().Throw<ArgumentNullException>().Which.ParamName.Should().Be("operation");
 
     [TestMethod]
     public void TestPath_ThisTestHasArbitraryLongNameSoWeTestTheBranchThatDependsOnVeryLongTestNames_ThisIsAFunctionalName_DoNotGetInspiredExlamationMark_ThisIsNotCleanAtAllExclamationMark()
     {
-        TestHelper.TestPath(TestContext, "This is also pretty long file name that will make sure we exceed the maximum reasonable file length 1.txt").Should().Contain("TooLongTestName.0");
-        TestHelper.TestPath(TestContext, "This is also pretty long file name that will make sure we exceed the maximum reasonable file length 2.txt").Should().Contain("TooLongTestName.1");
+        TestFiles.TestPath(TestContext, "This is also pretty long file name that will make sure we exceed the maximum reasonable file length 1.txt").Should().Contain("TooLongTestName.0");
+        TestFiles.TestPath(TestContext, "This is also pretty long file name that will make sure we exceed the maximum reasonable file length 2.txt").Should().Contain("TooLongTestName.1");
     }
 
     [DataTestMethod]
@@ -93,5 +63,5 @@ public class TestHelperTest
     [DataRow(@"C:\", @"\\LOCALHOST\Share\b", @"\\LOCALHOST\Share\b")]
     [DataRow(@"\\LOCALHOST\Share\a", @"\\LOCALHOST\Share\b", @"..\b")]
     public void GetRelativePath_ValidPaths_ReturnsRelativePath(string relativeTo, string path, string expected) =>
-        TestHelper.GetRelativePath(relativeTo, path).Should().Be(expected);
+        TestFiles.GetRelativePath(relativeTo, path).Should().Be(expected);
 }

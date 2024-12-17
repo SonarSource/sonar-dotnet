@@ -86,6 +86,6 @@ public class InvocationExpressionSyntaxExtensionsTest
         var lastPosition = code.LastIndexOf("$$");
         var length = lastPosition == position ? 0 : lastPosition - position - "$$".Length;
         code = code.Replace("$$", string.Empty);
-        return TestHelper.CompileCS(code).Tree.GetRoot().FindNode(new TextSpan(position, length));
+        return TestCompiler.CompileCS(code).Tree.GetRoot().FindNode(new TextSpan(position, length));
     }
 }

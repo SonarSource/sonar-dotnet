@@ -261,7 +261,7 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void ReportIssue_Null_Throws()
     {
-        var compilation = TestHelper.CompileCS("// Nothing to see here").Model.Compilation;
+        var compilation = TestCompiler.CompileCS("// Nothing to see here").Model.Compilation;
         var sut = CreateSut(ProjectType.Product, false);
         var rule = AnalysisScaffolding.CreateDescriptor("Sxxxx", DiagnosticDescriptorFactory.MainSourceScopeTag);
         var recognizer = CSharpGeneratedCodeRecognizer.Instance;
@@ -274,7 +274,7 @@ public partial class SonarAnalysisContextBaseTest
     public void ReportIssue_NullLocation_UsesEmpty()
     {
         Diagnostic lastDiagnostic = null;
-        var compilation = TestHelper.CompileCS("// Nothing to see here").Model.Compilation;
+        var compilation = TestCompiler.CompileCS("// Nothing to see here").Model.Compilation;
         var compilationContext = new CompilationAnalysisContext(compilation, AnalysisScaffolding.CreateOptions(), x => lastDiagnostic = x, _ => true, default);
         var sut = new SonarCompilationReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), compilationContext);
         var rule = AnalysisScaffolding.CreateDescriptor("Sxxxx", DiagnosticDescriptorFactory.MainSourceScopeTag);

@@ -14,8 +14,6 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using System.IO;
-using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Extensions;
@@ -27,7 +25,7 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.TestFramework.Common;
 
-public static class TestHelper
+public static class TestCompiler
 {
     public static (SyntaxTree Tree, SemanticModel Model) CompileIgnoreErrorsCS(string snippet, params MetadataReference[] additionalReferences) =>
         Compile(snippet, true, AnalyzerLanguage.CSharp, additionalReferences);
@@ -64,12 +62,13 @@ public static class TestHelper
             """, AnalyzerLanguage.CSharp);
 
     public static ControlFlowGraph CompileCfgBodyVB(string body = null) =>
-        CompileCfg(
-$@"Public Class Sample
-    Public Sub Main()
-        {body}
-    End Sub
-End Class", AnalyzerLanguage.VisualBasic);
+        CompileCfg($"""
+            Public Class Sample
+                Public Sub Main()
+                    {body}
+                End Sub
+            End Class
+            """, AnalyzerLanguage.VisualBasic);
 
     public static ControlFlowGraph CompileCfgCS(string snippet, bool ignoreErrors = false) =>
         CompileCfg(snippet, AnalyzerLanguage.CSharp, ignoreErrors);
@@ -127,56 +126,5 @@ End Class", AnalyzerLanguage.VisualBasic);
     {
         _ = operation.Instance ?? throw new ArgumentNullException(nameof(operation));
         return operation.Instance.Kind + ": " + operation.Instance.Syntax + (operation.IsImplicit ? " (Implicit)" : null);
-    }
-
-    public static string ToUnixLineEndings(this string value) =>
-        value.Replace(Constants.WindowsLineEnding, Constants.UnixLineEnding);
-
-    public static string TestPath(TestContext context, string fileName)
-    {
-        var root = Path.Combine(context.TestRunDirectory, context.FullyQualifiedTestClassName.Replace("SonarAnalyzer.Test.", null));
-        var directoryName = root.Length + context.TestName.Length + fileName.Length > 250   // 260 can throw PathTooLongException
-            ? $"TooLongTestName.{RootSubdirectoryCount()}"
-            : context.TestName;
-        var path = Path.Combine(root, directoryName, fileName);
-        Directory.CreateDirectory(Path.GetDirectoryName(path));
-        return path;
-
-        int RootSubdirectoryCount() =>
-            Directory.Exists(root) ? Directory.GetDirectories(root).Length : 0;
-    }
-
-    public static string WriteFile(TestContext context, string fileName, string content = null)
-    {
-        var path = TestPath(context, fileName);
-        File.WriteAllText(path, content);
-        return path;
-    }
-
-    public static string GetRelativePath(string relativeTo, string path)
-    {
-        var itemPath = Path.GetFullPath(path);
-        var isDirectory = path.EndsWith(Path.DirectorySeparatorChar.ToString());
-        var p1 = itemPath.Split(new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries);
-        var p2 = relativeTo.Split(new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries);
-
-        var i = 0;
-        while (i < p1.Length
-            && i < p2.Length
-            && string.Equals(p1[i], p2[i], StringComparison.OrdinalIgnoreCase))
-        {
-            i++;
-        }
-
-        if (i == 0)
-        {
-            return itemPath;
-        }
-        var relativePath = Path.Combine(Enumerable.Repeat("..", p2.Length - i).Concat(p1.Skip(i).Take(p1.Length - i)).ToArray());
-        if (isDirectory && p1.Length >= p2.Length)
-        {
-            relativePath += Path.DirectorySeparatorChar;
-        }
-        return relativePath;
     }
 }

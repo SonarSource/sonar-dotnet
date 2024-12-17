@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void InvocationResolvesToOverrideWithParams()
         {
-            var anotherAssembly = TestHelper.CompileCS("""
+            var anotherAssembly = TestCompiler.CompileCS("""
                 public class FromAnotherAssembly
                 {
                     protected int ProtectedOverload(object a, string b) => 42;

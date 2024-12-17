@@ -52,10 +52,10 @@ public static class AnalysisScaffolding
         new(id, "Title", "Message for " + id, "Category", DiagnosticSeverity.Warning, true, customTags: customTags);
 
     public static string CreateAnalysisConfig(TestContext context, IEnumerable<string> unchangedFiles) =>
-        CreateAnalysisConfig(context, "UnchangedFilesPath", TestHelper.WriteFile(context, "UnchangedFiles.txt", unchangedFiles.JoinStr(Environment.NewLine)));
+        CreateAnalysisConfig(context, "UnchangedFilesPath", TestFiles.WriteFile(context, "UnchangedFiles.txt", unchangedFiles.JoinStr(Environment.NewLine)));
 
     public static string CreateAnalysisConfig(TestContext context, string settingsId, string settingValue) =>
-        TestHelper.WriteFile(context, "SonarQubeAnalysisConfig.xml", $"""
+        TestFiles.WriteFile(context, "SonarQubeAnalysisConfig.xml", $"""
             <?xml version="1.0" encoding="utf-8"?>
             <AnalysisConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
                 <AdditionalConfig>
@@ -66,7 +66,7 @@ public static class AnalysisScaffolding
 
     public static string CreateSonarProjectConfigWithFilesToAnalyze(TestContext context, params string[] filesToAnalyze)
     {
-        var filesToAnalyzePath = TestHelper.TestPath(context, "FilesToAnalyze.txt");
+        var filesToAnalyzePath = TestFiles.TestPath(context, "FilesToAnalyze.txt");
         File.WriteAllLines(filesToAnalyzePath, filesToAnalyze);
         return CreateSonarProjectConfig(context, "FilesToAnalyzePath", filesToAnalyzePath, true);
     }
@@ -90,7 +90,7 @@ public static class AnalysisScaffolding
         string[] globalTestExclusions = null,
         List<SonarLintXmlRule> rulesParameters = null,
         bool analyzeRazorCode = true) =>
-        TestHelper.WriteFile(context, "SonarLint.xml", GenerateSonarLintXmlContent(language, analyzeGeneratedCode, ignoreHeaderComments, exclusions, inclusions, globalExclusions, testExclusions, testInclusions, globalTestExclusions, rulesParameters, analyzeRazorCode));
+        TestFiles.WriteFile(context, "SonarLint.xml", GenerateSonarLintXmlContent(language, analyzeGeneratedCode, ignoreHeaderComments, exclusions, inclusions, globalExclusions, testExclusions, testInclusions, globalTestExclusions, rulesParameters, analyzeRazorCode));
 
     public static string GenerateSonarLintXmlContent(
         string language = LanguageNames.CSharp,
@@ -156,7 +156,7 @@ public static class AnalysisScaffolding
 
     private static string CreateSonarProjectConfig(TestContext context, string element, string value, bool isScannerRun, string analysisConfigPath = null)
     {
-        var sonarProjectConfigPath = TestHelper.TestPath(context, "SonarProjectConfig.xml");
+        var sonarProjectConfigPath = TestFiles.TestPath(context, "SonarProjectConfig.xml");
         var outPath = isScannerRun ? Path.GetDirectoryName(sonarProjectConfigPath) : null;
         analysisConfigPath ??= CreateAnalysisConfig(context, "NotImportant", null);
         var projectConfigContent = $"""

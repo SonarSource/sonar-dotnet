@@ -73,13 +73,13 @@ public class ParametersCorrectOrderTest
     [TestMethod]
     public async Task ParametersCorrectOrder_SecondaryLocationsOutsideCurrentCompilation()
     {
-        var library = TestHelper.CompileCS("""
+        var library = TestCompiler.CompileCS("""
             public static class Library
             {
                 public static void Method(int a, int b) { }
             }
             """).Model.Compilation;
-        var usage = TestHelper.CompileCS("""
+        var usage = TestCompiler.CompileCS("""
             public class Usage
             {
                 public void Method()

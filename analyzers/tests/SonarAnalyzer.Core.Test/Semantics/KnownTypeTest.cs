@@ -76,7 +76,7 @@ public class KnownTypeTest
 
     private static ITypeSymbol GetSymbol_CS(string type)
     {
-        var (tree, model) = TestHelper.CompileCS($$"""
+        var (tree, model) = TestCompiler.CompileCS($$"""
             namespace Exceptions { public class Exception { } }
             public class Test<T, T1, T2, T3> { public {{type}} Value; }
             """);
@@ -86,7 +86,7 @@ public class KnownTypeTest
 
     private static ITypeSymbol GetSymbol_VB(string type)
     {
-        var (tree, model) = TestHelper.CompileVB($"Public Class Test(Of TKey, TValue) : Public Value As {type} : End Class");
+        var (tree, model) = TestCompiler.CompileVB($"Public Class Test(Of TKey, TValue) : Public Value As {type} : End Class");
         var expression = tree.Single<VB.ModifiedIdentifierSyntax>();
         return model.GetDeclaredSymbol(expression).GetSymbolType();
     }

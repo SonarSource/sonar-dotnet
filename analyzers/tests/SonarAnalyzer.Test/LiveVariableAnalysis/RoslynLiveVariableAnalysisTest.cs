@@ -1073,7 +1073,7 @@ public partial class RoslynLiveVariableAnalysisTest
 
         public Context(string code, AnalyzerLanguage language, string localFunctionName = null)
         {
-            Cfg = TestHelper.CompileCfg(code, language, code.Contains("// Error CS"), localFunctionName);
+            Cfg = TestCompiler.CompileCfg(code, language, code.Contains("// Error CS"), localFunctionName);
             SyntaxClassifierBase syntaxClassifier = language.LanguageName switch
             {
                 LanguageNames.CSharp => CSharpSyntaxClassifier.Instance,
@@ -1089,7 +1089,7 @@ public partial class RoslynLiveVariableAnalysisTest
 
         public Context(string code, SyntaxKind syntaxKind)
         {
-            var (tree, model) = TestHelper.Compile(code, false, AnalyzerLanguage.CSharp);
+            var (tree, model) = TestCompiler.Compile(code, false, AnalyzerLanguage.CSharp);
             var node = tree.GetRoot().DescendantNodes().First(x => x.RawKind == (int)syntaxKind);
             Cfg = node.CreateCfg(model, default);
             Lva = new RoslynLiveVariableAnalysis(Cfg, CSharpSyntaxClassifier.Instance, default);   // FIXME: null?

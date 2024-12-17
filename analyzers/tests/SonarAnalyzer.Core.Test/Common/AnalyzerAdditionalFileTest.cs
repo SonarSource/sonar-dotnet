@@ -24,7 +24,7 @@ public class AnalyzerAdditionalFileTest
     [TestMethod]
     public void AnalyzerAdditionalFile_GetText()
     {
-        var path = TestHelper.WriteFile(TestContext, "AdditionalFile.txt", "some sample content");
+        var path = TestFiles.WriteFile(TestContext, "AdditionalFile.txt", "some sample content");
         var additionalFile = new AnalyzerAdditionalFile(path);
         var content = additionalFile.GetText();
         content.ToString().Should().Be("some sample content");

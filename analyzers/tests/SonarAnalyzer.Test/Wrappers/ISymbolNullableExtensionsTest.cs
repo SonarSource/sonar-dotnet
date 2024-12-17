@@ -29,7 +29,7 @@ public class ISymbolNullableExtensionsTest
     public void NullableAnnotation_SimpleAnnitations(bool nullable)
     {
         var nullableAnnotation = nullable ? "?" : string.Empty;
-        var (tree, model) = TestHelper.CompileCS($$"""
+        var (tree, model) = TestCompiler.CompileCS($$"""
             #nullable enable
             using System;
             class C
@@ -70,7 +70,7 @@ public class ISymbolNullableExtensionsTest
     public void NullableAnnotation_Receiver(bool nullable)
     {
         var nullableAnnotation = nullable ? "?" : string.Empty;
-        var (tree, model) = TestHelper.CompileCS($$"""
+        var (tree, model) = TestCompiler.CompileCS($$"""
         #nullable enable
         using System;
         static class C
@@ -94,7 +94,7 @@ public class ISymbolNullableExtensionsTest
     public void NullableAnnotation_ReferenceTypeConstrain(bool nullable)
     {
         var nullableAnnotation = nullable ? "?" : string.Empty;
-        var (tree, model) = TestHelper.CompileCS($$"""
+        var (tree, model) = TestCompiler.CompileCS($$"""
         #nullable enable
         using System;
         class C<T> where T: class

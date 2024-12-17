@@ -201,7 +201,7 @@ public class MethodParameterLookupTest
                 }
             }
             """;
-        var (tree, model) = TestHelper.CompileCS(source);
+        var (tree, model) = TestCompiler.CompileCS(source);
         var lookup = new CSharpMethodParameterLookup(tree.GetRoot().DescendantNodes().OfType<CSharpSyntax.InvocationExpressionSyntax>().Single(), model);
 
         lookup.TryGetSyntax("p", out var expressions).Should().BeTrue();
@@ -224,7 +224,7 @@ public class MethodParameterLookupTest
                 End Sub
             End Module
             """;
-        var (tree, model) = TestHelper.CompileIgnoreErrorsVB(source);
+        var (tree, model) = TestCompiler.CompileIgnoreErrorsVB(source);
         var lookup = new VisualBasicMethodParameterLookup(tree.GetRoot().DescendantNodes().OfType<VBSyntax.InvocationExpressionSyntax>().Single(), model);
 
         lookup.TryGetSyntax("a", out var expressions).Should().BeTrue();
@@ -248,7 +248,7 @@ public class MethodParameterLookupTest
                 }
             }
             """;
-        var (tree, model) = TestHelper.CompileCS(source);
+        var (tree, model) = TestCompiler.CompileCS(source);
         var lookup = new CSharpMethodParameterLookup(tree.GetRoot().DescendantNodes().OfType<CSharpSyntax.InvocationExpressionSyntax>().Single(), model);
 
         lookup.TryGetSyntax("a", out var expressions).Should().BeFalse();
@@ -271,7 +271,7 @@ public class MethodParameterLookupTest
                 End Sub
             End Module
             """;
-        var (tree, model) = TestHelper.CompileIgnoreErrorsVB(source);
+        var (tree, model) = TestCompiler.CompileIgnoreErrorsVB(source);
         var lookup = new VisualBasicMethodParameterLookup(tree.GetRoot().DescendantNodes().OfType<VBSyntax.InvocationExpressionSyntax>().Single(), model);
 
         lookup.TryGetSyntax("a", out var expressions).Should().BeFalse();
@@ -293,7 +293,7 @@ public class MethodParameterLookupTest
                 }
             }
             """;
-        var (tree, model) = TestHelper.CompileIgnoreErrorsCS(source);
+        var (tree, model) = TestCompiler.CompileIgnoreErrorsCS(source);
         var lookup = new CSharpMethodParameterLookup(tree.GetRoot().DescendantNodes().OfType<CSharpSyntax.InvocationExpressionSyntax>().Single(), model);
 
         lookup.TryGetSyntax("p", out var expressions).Should().BeFalse();
@@ -310,7 +310,7 @@ public class MethodParameterLookupTest
                 End Sub
             End Module
             """;
-        var (tree, model) = TestHelper.CompileIgnoreErrorsVB(source);
+        var (tree, model) = TestCompiler.CompileIgnoreErrorsVB(source);
         var lookup = new VisualBasicMethodParameterLookup(tree.GetRoot().DescendantNodes().OfType<VBSyntax.InvocationExpressionSyntax>().Single(), model);
 
         lookup.TryGetSyntax("a", out var expressions).Should().BeFalse();

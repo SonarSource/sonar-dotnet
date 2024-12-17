@@ -27,7 +27,7 @@ public class SonarSymbolReportingContextTest
     public void Properties_ArePropagated()
     {
         var cancel = new CancellationToken(true);
-        var (tree, model) = TestHelper.CompileCS("public class Sample { }");
+        var (tree, model) = TestCompiler.CompileCS("public class Sample { }");
         var options = AnalysisScaffolding.CreateOptions();
         var symbol = model.GetDeclaredSymbol(tree.Single<ClassDeclarationSyntax>());
         var context = new SymbolAnalysisContext(symbol, model.Compilation, options, _ => { }, _ => true, cancel);

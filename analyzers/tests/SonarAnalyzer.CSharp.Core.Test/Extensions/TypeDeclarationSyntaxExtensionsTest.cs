@@ -96,7 +96,7 @@ public class TypeDeclarationSyntaxExtensionsTest
 #endif
     public void ParameterList_ReturnsList(string type)
     {
-        var tree = TestHelper.CompileCS($$"""{{type}} Test(int i) { }""").Tree;
+        var tree = TestCompiler.CompileCS($$"""{{type}} Test(int i) { }""").Tree;
         var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
         var parameterList = typeDeclaration.ParameterList();
         parameterList.Should().NotBeNull();
@@ -108,7 +108,7 @@ public class TypeDeclarationSyntaxExtensionsTest
     [TestMethod]
     public void ParameterList_Interface()
     {
-        var tree = TestHelper.CompileCS("interface Test { }").Tree;
+        var tree = TestCompiler.CompileCS("interface Test { }").Tree;
         var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
         var parameterList = typeDeclaration.ParameterList();
         parameterList.Should().BeNull();
@@ -167,7 +167,7 @@ public class TypeDeclarationSyntaxExtensionsTest
 #endif
     public void PrimaryConstructor_PrimaryConstructorOnClass(string type)
     {
-        var (tree, model) = TestHelper.CompileCS($$"""{{type}} Test(int i) { }""");
+        var (tree, model) = TestCompiler.CompileCS($$"""{{type}} Test(int i) { }""");
         var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
         var methodSymbol = typeDeclaration.PrimaryConstructor(model);
         methodSymbol.Should().NotBeNull();
@@ -180,7 +180,7 @@ public class TypeDeclarationSyntaxExtensionsTest
     [TestMethod]
     public void PrimaryConstructor_EmptyPrimaryConstructor()
     {
-        var (tree, model) = TestHelper.CompileCS("public class Test() { }");
+        var (tree, model) = TestCompiler.CompileCS("public class Test() { }");
         var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
         var methodSymbol = typeDeclaration.PrimaryConstructor(model);
         methodSymbol.Should().NotBeNull();
@@ -191,7 +191,7 @@ public class TypeDeclarationSyntaxExtensionsTest
     [TestMethod]
     public void PrimaryConstructor_EmptyPrimaryConstructor_SecondConstructor()
     {
-        var (tree, model) = TestHelper.CompileCS("""
+        var (tree, model) = TestCompiler.CompileCS("""
             public class Test()
             {
                 public Test(int i) : this() { }
@@ -207,7 +207,7 @@ public class TypeDeclarationSyntaxExtensionsTest
     [TestMethod]
     public void PrimaryConstructor_EmptyPrimaryConstructorAndStaticConstructor()
     {
-        var (tree, model) = TestHelper.CompileCS("""
+        var (tree, model) = TestCompiler.CompileCS("""
             public class Test()
             {
                 static Test() { }
@@ -227,7 +227,7 @@ public class TypeDeclarationSyntaxExtensionsTest
     [DataRow("int i, int j, __arglist", 2)]
     public void PrimaryConstructor_ArglistPrimaryConstructor(string parameterList, int expectedNumberOfParameters)
     {
-        var (tree, model) = TestHelper.CompileCS($$"""public class Test({{parameterList}}) { }""");
+        var (tree, model) = TestCompiler.CompileCS($$"""public class Test({{parameterList}}) { }""");
         var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
         var methodSymbol = typeDeclaration.PrimaryConstructor(model);
         methodSymbol.Should().NotBeNull();

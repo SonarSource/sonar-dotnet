@@ -42,7 +42,7 @@ public class RoslynControlFlowGraphTest
                 }
             }
             """;
-        TestHelper.CompileCfgCS(code).Should().NotBeNull();
+        TestCompiler.CompileCfgCS(code).Should().NotBeNull();
     }
 
     [TestMethod]
@@ -55,7 +55,7 @@ public class RoslynControlFlowGraphTest
             void MethodA() { }
             void MethodB() { }
             """;
-        TestHelper.CompileCfg(code, AnalyzerLanguage.CSharp, outputKind: OutputKind.ConsoleApplication).Should().NotBeNull();
+        TestCompiler.CompileCfg(code, AnalyzerLanguage.CSharp, outputKind: OutputKind.ConsoleApplication).Should().NotBeNull();
     }
 
     [TestMethod]
@@ -68,7 +68,7 @@ public class RoslynControlFlowGraphTest
                 End Function
             End Class
             """;
-        TestHelper.CompileCfg(code, AnalyzerLanguage.VisualBasic).Should().NotBeNull();
+        TestCompiler.CompileCfg(code, AnalyzerLanguage.VisualBasic).Should().NotBeNull();
     }
 
     [TestMethod]
@@ -86,7 +86,7 @@ public class RoslynControlFlowGraphTest
                 }
             }
             """;
-        var cfg = TestHelper.CompileCfgCS(code);
+        var cfg = TestCompiler.CompileCfgCS(code);
         cfg.Should().NotBeNull();
         cfg.Root.Should().NotBeNull();
         cfg.Blocks.Should().NotBeNull().And.HaveCount(3); // Enter, Instructions, Exit
@@ -118,7 +118,7 @@ public class RoslynControlFlowGraphTest
                 }
             }
             """;
-        var cfg = TestHelper.CompileCfgCS(code);
+        var cfg = TestCompiler.CompileCfgCS(code);
         var anonymousFunctionOperations = ControlFlowGraphExtensions.FlowAnonymousFunctionOperations(cfg).ToList();
         anonymousFunctionOperations.Should().HaveCount(2);
         cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunctionOperations[0], default).Should().NotBeNull();

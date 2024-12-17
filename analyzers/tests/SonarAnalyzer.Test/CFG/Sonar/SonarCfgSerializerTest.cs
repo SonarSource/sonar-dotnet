@@ -405,7 +405,7 @@ public class SonarCfgSerializerTest
 
     private static IControlFlowGraph CreateMethodCfg(string code)
     {
-        var (tree, model) = TestHelper.CompileIgnoreErrorsCS(code);
+        var (tree, model) = TestCompiler.CompileIgnoreErrorsCS(code);
         return CSharpControlFlowGraph.Create(tree.First<MethodDeclarationSyntax>().Body, model);
     }
 }

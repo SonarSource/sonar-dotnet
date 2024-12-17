@@ -35,7 +35,7 @@ public class Sample
             return 1;
     }
 }";
-            var cfg = TestHelper.CompileCfgCS(code);
+            var cfg = TestCompiler.CompileCfgCS(code);
             /*
              *           Entry 0
              *             |
@@ -80,7 +80,7 @@ public class Sample
     }
 }
 ";
-            var cfg = TestHelper.CompileCfgCS(code);
+            var cfg = TestCompiler.CompileCfgCS(code);
             /*
              *           Entry 0
              *             |
@@ -127,7 +127,7 @@ public class Sample
     }
 }
 ";
-            var cfg = TestHelper.CompileCfgCS(code);
+            var cfg = TestCompiler.CompileCfgCS(code);
             /*
              *           Entry 0
              *             |

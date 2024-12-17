@@ -160,7 +160,7 @@ public partial class UnusedPrivateMemberTest
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void UnusedPrivateMember(ProjectType projectType) =>
-        builder.AddPaths("UnusedPrivateMember.cs").AddReferences(TestHelper.ProjectTypeReference(projectType)).Verify();
+        builder.AddPaths("UnusedPrivateMember.cs").AddReferences(TestCompiler.ProjectTypeReference(projectType)).Verify();
 
 #if NET
 

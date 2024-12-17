@@ -41,6 +41,6 @@ public class EditorConfigGenerator
     private string ToConfigLine(string file) =>
         $"""
         [{file}]
-        build_metadata.AdditionalFiles.TargetPath = {Convert.ToBase64String(Encoding.UTF8.GetBytes(TestHelper.GetRelativePath(rootPath, file)))}
+        build_metadata.AdditionalFiles.TargetPath = {Convert.ToBase64String(Encoding.UTF8.GetBytes(TestFiles.GetRelativePath(rootPath, file)))}
         """;
 }

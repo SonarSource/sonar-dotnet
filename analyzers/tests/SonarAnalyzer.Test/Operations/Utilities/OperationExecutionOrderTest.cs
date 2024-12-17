@@ -148,7 +148,7 @@ public class OperationExecutionOrderTest
                 public int Nested(params int[] values) => 0;
             }
             """;
-        var (tree, semanticModel) = TestHelper.CompileCS(code);
+        var (tree, semanticModel) = TestCompiler.CompileCS(code);
         var body = tree.First<BlockSyntax>();
         var rootOperation = new IOperationWrapperSonar(semanticModel.GetOperation(body));
         return new OperationExecutionOrder(rootOperation.Children, reverseOrder);

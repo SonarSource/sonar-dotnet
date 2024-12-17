@@ -139,7 +139,7 @@ public class ParameterLoaderTest
             }
         };
         var sonarLintXml = AnalysisScaffolding.GenerateSonarLintXmlContent(rulesParameters: ruleParameters);
-        var filePath = TestHelper.WriteFile(TestContext, "SonarLint.xml", sonarLintXml);
+        var filePath = TestFiles.WriteFile(TestContext, "SonarLint.xml", sonarLintXml);
         var compilation = CreateCompilationWithOption(filePath);
         var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
@@ -151,7 +151,7 @@ public class ParameterLoaderTest
         maxValue = 42;
         ruleParameters.First().Parameters.First().Value = maxValue.ToString();
         var modifiedSonarLintXml = AnalysisScaffolding.GenerateSonarLintXmlContent(rulesParameters: ruleParameters);
-        var modifiedFilePath = TestHelper.WriteFile(TestContext, "SonarLint.xml", modifiedSonarLintXml);
+        var modifiedFilePath = TestFiles.WriteFile(TestContext, "SonarLint.xml", modifiedSonarLintXml);
         compilation = CreateCompilationWithOption(modifiedFilePath);
 
         ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintXml());

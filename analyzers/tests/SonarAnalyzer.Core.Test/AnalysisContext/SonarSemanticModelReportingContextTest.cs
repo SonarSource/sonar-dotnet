@@ -27,7 +27,7 @@ public class SonarSemanticModelReportingContextTest
     public void Properties_ArePropagated()
     {
         var cancel = new CancellationToken(true);
-        var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
+        var (tree, model) = TestCompiler.CompileCS("// Nothing to see here");
         var options = AnalysisScaffolding.CreateOptions();
         var context = new SemanticModelAnalysisContext(model, options, _ => { }, _ => true, cancel);
         var sut = new SonarSemanticModelReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);

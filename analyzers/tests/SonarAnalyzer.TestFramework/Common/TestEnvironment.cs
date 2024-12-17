@@ -16,7 +16,7 @@
 
 namespace SonarAnalyzer.TestFramework.Common;
 
-public static class TestContextHelper
+public static class TestEnvironment
 {
     public static bool IsAzureDevOpsContext =>
         BuildReason() is not null;

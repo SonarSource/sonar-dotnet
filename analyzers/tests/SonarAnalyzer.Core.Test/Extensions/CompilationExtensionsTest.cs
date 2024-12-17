@@ -39,7 +39,7 @@ public class CompilationExtensionsTest
     [DataRow("Sample", "MethodWithParameters", true)]
     public void IsMemberAvailable_WithoutTypeCheck(string typeName, string memberName, bool expectedResult)
     {
-        var (_, semanticModel) = TestHelper.Compile(Snippet, false, AnalyzerLanguage.CSharp);
+        var (_, semanticModel) = TestCompiler.Compile(Snippet, false, AnalyzerLanguage.CSharp);
         semanticModel.Compilation.IsMemberAvailable<ISymbol>(new(typeName), memberName)
             .Should().Be(expectedResult);
     }
@@ -47,7 +47,7 @@ public class CompilationExtensionsTest
     [TestMethod]
     public void IsMemberAvailable_WithPredicate()
     {
-        var (_, semanticModel) = TestHelper.Compile(Snippet, false, AnalyzerLanguage.CSharp);
+        var (_, semanticModel) = TestCompiler.Compile(Snippet, false, AnalyzerLanguage.CSharp);
         semanticModel.Compilation.IsMemberAvailable<IFieldSymbol>(new("Sample"), "_field", x => KnownType.System_Int32.Matches(x.Type))
             .Should().BeTrue();
         semanticModel.Compilation.IsMemberAvailable<IPropertySymbol>(new("Sample"), "Property", x => x is { IsReadOnly: true })
@@ -80,7 +80,7 @@ public class CompilationExtensionsTest
     [TestMethod]
     public void ReferencesAny_ShouldThrow()
     {
-        var (_, model) = TestHelper.Compile(string.Empty, false, AnalyzerLanguage.CSharp);
+        var (_, model) = TestCompiler.Compile(string.Empty, false, AnalyzerLanguage.CSharp);
 
         ((Func<bool>)(() => model.Compilation.ReferencesAny()))
             .Should()
@@ -90,7 +90,7 @@ public class CompilationExtensionsTest
 
     private static void ReferencesAny_ShouldBe(bool expected, IEnumerable<MetadataReference> compilationReferences, params KnownAssembly[] checkedAssemblies)
     {
-        var (_, model) = TestHelper.Compile(string.Empty, false, AnalyzerLanguage.CSharp, compilationReferences.ToArray());
+        var (_, model) = TestCompiler.Compile(string.Empty, false, AnalyzerLanguage.CSharp, compilationReferences.ToArray());
         model.Compilation.ReferencesAny(checkedAssemblies).Should().Be(expected);
     }
 }

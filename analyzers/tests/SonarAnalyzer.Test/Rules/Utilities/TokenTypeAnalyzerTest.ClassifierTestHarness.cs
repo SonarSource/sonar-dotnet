@@ -111,7 +111,7 @@ public partial class TokenTypeAnalyzerTest
                 match++;
             }
             sb.Append(code.Substring(lastMatchEnd));
-            var (tree, model) = ignoreCompilationErrors ? TestHelper.CompileIgnoreErrorsCS(sb.ToString()) : TestHelper.CompileCS(sb.ToString());
+            var (tree, model) = ignoreCompilationErrors ? TestCompiler.CompileIgnoreErrorsCS(sb.ToString()) : TestCompiler.CompileCS(sb.ToString());
             return (tree, model, expectedTokens);
         }
 

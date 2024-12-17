@@ -31,7 +31,7 @@ public class SonarAnalysisContextExtensions
     [DataRow("// any random comment", true)]
     public void ReportIssue_SonarSymbolAnalysisContext_CS(string comment, bool expected)
     {
-        var (tree, model) = TestHelper.CompileCS($$"""
+        var (tree, model) = TestCompiler.CompileCS($$"""
                 {{comment}}
                 public class Sample {}
                 """);
@@ -48,7 +48,7 @@ public class SonarAnalysisContextExtensions
     [DataRow("' any random comment", true)]
     public void ReportIssue_SonarSymbolAnalysisContext_VB(string comment, bool expected)
     {
-        var (tree, model) = TestHelper.CompileVB($"""
+        var (tree, model) = TestCompiler.CompileVB($"""
                 {comment}
                 Public Class Sample
                 End Class

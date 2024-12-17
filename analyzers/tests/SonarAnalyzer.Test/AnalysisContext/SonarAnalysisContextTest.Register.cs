@@ -665,7 +665,7 @@ public partial class SonarAnalysisContextTest
         public DummyAnalysisContext(TestContext testContext, params string[] unchangedFiles)
         {
             Options = AnalysisScaffolding.CreateOptions(AnalysisScaffolding.CreateSonarProjectConfigWithUnchangedFiles(testContext, unchangedFiles));
-            (Tree, Model) = TestHelper.CompileCS("public class Sample { }");
+            (Tree, Model) = TestCompiler.CompileCS("public class Sample { }");
         }
 
         public void DelegateAction<T>(T arg) =>

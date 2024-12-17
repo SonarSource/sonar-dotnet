@@ -117,7 +117,7 @@ public class ITypeSymbolExtensionsTest
     [DataRow("System.Collections.Generic.List<int>", "System.IDisposable", false)]
     public void Type_DerivesOrImplements_Type(string typeSymbolName, string typeName, bool expected)
     {
-        var compilation = TestHelper.CompileCS("""
+        var compilation = TestCompiler.CompileCS("""
             using System.Collections.Generic;
             public class IntList : List<int>, IEnumerable<string>
             {
@@ -267,7 +267,7 @@ public class ITypeSymbolExtensionsTest
     [TestMethod]
     public void IsStruct_SelfRefrencingStruct()
     {
-        var (tree, model) = TestHelper.CompileCS("""
+        var (tree, model) = TestCompiler.CompileCS("""
             interface Interface<T> where T: struct, Interface<T> { }
             struct Impl: Interface<Impl> { } // For demonstration how an implementation can look like
 
@@ -606,7 +606,7 @@ public class ITypeSymbolExtensionsTest
 
     private static IFieldSymbol FirstFieldSymbolFromCode(string code)
     {
-        var (tree, model) = TestHelper.CompileCS(code);
+        var (tree, model) = TestCompiler.CompileCS(code);
         var field = tree.GetRoot().DescendantNodes().OfType<FieldDeclarationSyntax>().First();
         var fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(field.Declaration.Variables[0]);
         return fieldSymbol;

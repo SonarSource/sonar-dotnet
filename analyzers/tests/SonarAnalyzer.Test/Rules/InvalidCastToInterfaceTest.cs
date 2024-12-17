@@ -30,7 +30,7 @@ public class InvalidCastToInterfaceTest
     [DataRow(ProjectType.Test)]
     public void InvalidCastToInterface_CS(ProjectType projectType) =>
         builderCS.AddPaths("InvalidCastToInterface.cs")
-            .AddReferences(TestHelper.ProjectTypeReference(projectType).Union(MetadataReferenceFacade.NetStandard21))
+            .AddReferences(TestCompiler.ProjectTypeReference(projectType).Union(MetadataReferenceFacade.NetStandard21))
             .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 

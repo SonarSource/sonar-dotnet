@@ -41,7 +41,7 @@ public class Sample
             field = 42;
     }
 }";
-            var cfg = TestHelper.CompileCfgCS(code);
+            var cfg = TestCompiler.CompileCfgCS(code);
             /*
              *           Entry 0
              *             |
@@ -136,7 +136,7 @@ public class Sample
         return 42;
     }
 }";
-            var cfg = TestHelper.CompileCfgCS(code);
+            var cfg = TestCompiler.CompileCfgCS(code);
             var entry = cfg.EntryBlock;
             var body = cfg.Blocks[1];
             var exit = cfg.ExitBlock;
@@ -163,7 +163,7 @@ public class Sample
             _ => 43
         };
 }";
-            var cfg = TestHelper.CompileCfgCS(code);
+            var cfg = TestCompiler.CompileCfgCS(code);
             /*
              *
              *         Block 1

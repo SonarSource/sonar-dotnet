@@ -819,7 +819,7 @@ public class VerifierTest
     [TestMethod]
     public void VerifyUtilityAnalyzerProducesEmptyProtobuf_EmptyFile()
     {
-        var protobufPath = TestHelper.TestPath(TestContext, "Empty.pb");
+        var protobufPath = TestFiles.TestPath(TestContext, "Empty.pb");
         new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobufPath, null)).AddSnippet("// Nothing to see here").WithProtobufPath(protobufPath)
             .Invoking(x => x.VerifyUtilityAnalyzerProducesEmptyProtobuf())
             .Should().NotThrow();
@@ -828,7 +828,7 @@ public class VerifierTest
     [TestMethod]
     public void VerifyUtilityAnalyzerProducesEmptyProtobuf_WithContent()
     {
-        var protobufPath = TestHelper.TestPath(TestContext, "Empty.pb");
+        var protobufPath = TestFiles.TestPath(TestContext, "Empty.pb");
         var message = new LogInfo { Text = "Lorem Ipsum" };
         new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobufPath, message)).AddSnippet("// Nothing to see here").WithProtobufPath(protobufPath)
             .Invoking(x => x.VerifyUtilityAnalyzerProducesEmptyProtobuf())
@@ -838,7 +838,7 @@ public class VerifierTest
     [TestMethod]
     public void VerifyUtilityAnalyzer_CorrectProtobuf_CS()
     {
-        var protobufPath = TestHelper.TestPath(TestContext, "Log.pb");
+        var protobufPath = TestFiles.TestPath(TestContext, "Log.pb");
         var message = new LogInfo { Text = "Lorem Ipsum" };
         var wasInvoked = false;
         new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobufPath, message)).AddSnippet("// Nothing to see here").WithProtobufPath(protobufPath)
@@ -853,7 +853,7 @@ public class VerifierTest
     [TestMethod]
     public void VerifyUtilityAnalyzer_CorrectProtobuf_VB()
     {
-        var protobufPath = TestHelper.TestPath(TestContext, "Log.pb");
+        var protobufPath = TestFiles.TestPath(TestContext, "Log.pb");
         var message = new LogInfo { Text = "Lorem Ipsum" };
         var wasInvoked = false;
         new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerVB(protobufPath, message)).AddSnippet("' Nothing to see here").WithProtobufPath(protobufPath)
@@ -868,7 +868,7 @@ public class VerifierTest
     [TestMethod]
     public void VerifyUtilityAnalyzer_VerifyProtobuf_PropagateFailedAssertion_CS()
     {
-        var protobufPath = TestHelper.TestPath(TestContext, "Empty.pb");
+        var protobufPath = TestFiles.TestPath(TestContext, "Empty.pb");
         new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobufPath, null)).AddSnippet("// Nothing to see here").WithProtobufPath(protobufPath)
             .Invoking(x => x.VerifyUtilityAnalyzer<LogInfo>(x => throw new AssertFailedException("Some failed assertion about Protobuf")))
             .Should().Throw<AssertFailedException>().WithMessage("Some failed assertion about Protobuf");
@@ -877,7 +877,7 @@ public class VerifierTest
     [TestMethod]
     public void VerifyUtilityAnalyzer_VerifyProtobuf_PropagateFailedAssertion_VB()
     {
-        var protobufPath = TestHelper.TestPath(TestContext, "Empty.pb");
+        var protobufPath = TestFiles.TestPath(TestContext, "Empty.pb");
         new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerVB(protobufPath, null)).AddSnippet("' Nothing to see here").WithProtobufPath(protobufPath)
             .Invoking(x => x.VerifyUtilityAnalyzer<LogInfo>(x => throw new AssertFailedException("Some failed assertion about Protobuf")))
             .Should().Throw<AssertFailedException>().WithMessage("Some failed assertion about Protobuf");
@@ -890,7 +890,7 @@ public class VerifierTest
         DummyVB.AddPaths(WriteFile("File.vb", code));
 
     private string WriteFile(string name, string content) =>
-        TestHelper.WriteFile(TestContext, $@"TestCases\{name}", content);
+        TestFiles.WriteFile(TestContext, $@"TestCases\{name}", content);
 
     private static void ContainsSyntaxTreeWithName(CompilationData compilation, string suffix) =>
         compilation.Compilation.SyntaxTrees.Select(x => x.FilePath).Should().Contain(x => x.EndsWith(suffix));

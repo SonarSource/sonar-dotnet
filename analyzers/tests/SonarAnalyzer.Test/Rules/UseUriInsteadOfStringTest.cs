@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void UseUriInsteadOfString(ProjectType projectType) =>
-            builder.AddPaths("UseUriInsteadOfString.cs").AddReferences(TestHelper.ProjectTypeReference(projectType)).Verify();
+            builder.AddPaths("UseUriInsteadOfString.cs").AddReferences(TestCompiler.ProjectTypeReference(projectType)).Verify();
 
 #if NET
 

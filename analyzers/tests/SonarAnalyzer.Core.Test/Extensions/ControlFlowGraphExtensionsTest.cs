@@ -31,7 +31,7 @@ public class Sample
 {
     public void Method() { }
 }";
-        var (tree, semanticModel) = TestHelper.CompileCS(code);
+        var (tree, semanticModel) = TestCompiler.CompileCS(code);
         var method = tree.Single<MethodDeclarationSyntax>();
         var symbol = semanticModel.GetDeclaredSymbol(method) as IMethodSymbol;
         var cfg = ControlFlowGraph.Create(method, semanticModel, default);
@@ -48,7 +48,7 @@ public class Sample
 {
     public void Method() { }
 }";
-        var cfg = TestHelper.CompileCfgCS(code);
+        var cfg = TestCompiler.CompileCfgCS(code);
         Action a = () => cfg.FindLocalFunctionCfgInScope(null, default);
         a.Should().Throw<ArgumentOutOfRangeException>().WithMessage("Specified argument was out of the range of valid values.*Parameter*localFunction*");
     }

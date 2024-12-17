@@ -32,7 +32,7 @@ public class INamespaceSymbolExtensionsTest
         var snippet = $$"""
             using {{code}};
             """;
-        var (tree, model) = TestHelper.CompileCS(snippet);
+        var (tree, model) = TestCompiler.CompileCS(snippet);
         var name = tree.GetRoot().DescendantNodes().OfType<UsingDirectiveSyntax>().Single().Name;
         var symbol = model.GetSymbolInfo(name).Symbol;
         var ns = symbol.Should().BeAssignableTo<INamespaceSymbol>().Subject;
@@ -47,7 +47,7 @@ public class INamespaceSymbolExtensionsTest
         var snippet = """
             using System;
             """;
-        var (tree, model) = TestHelper.CompileCS(snippet);
+        var (tree, model) = TestCompiler.CompileCS(snippet);
         var name = tree.GetRoot().DescendantNodes().OfType<UsingDirectiveSyntax>().Single().Name;
         var symbol = model.GetSymbolInfo(name).Symbol;
         var ns = symbol.Should().BeAssignableTo<INamespaceSymbol>().Subject;
@@ -73,7 +73,7 @@ public class INamespaceSymbolExtensionsTest
         var snippet = $$"""
             using {{code}};
             """;
-        var (tree, model) = TestHelper.CompileCS(snippet);
+        var (tree, model) = TestCompiler.CompileCS(snippet);
         var name = tree.GetRoot().DescendantNodes().OfType<UsingDirectiveSyntax>().Single().Name;
         var symbol = model.GetSymbolInfo(name).Symbol;
         var ns = symbol.Should().BeAssignableTo<INamespaceSymbol>().Subject;
@@ -86,7 +86,7 @@ public class INamespaceSymbolExtensionsTest
         var snippet = """
             using System;
             """;
-        var (tree, model) = TestHelper.CompileCS(snippet);
+        var (tree, model) = TestCompiler.CompileCS(snippet);
         var name = tree.GetRoot().DescendantNodes().OfType<UsingDirectiveSyntax>().Single().Name;
         var symbol = model.GetSymbolInfo(name).Symbol;
         var ns = symbol.Should().BeAssignableTo<INamespaceSymbol>().Subject;

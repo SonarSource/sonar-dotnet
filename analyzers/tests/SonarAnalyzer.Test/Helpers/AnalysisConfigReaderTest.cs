@@ -38,7 +38,7 @@ public class AnalysisConfigReaderTest
     [DataRow(@"<AnalysisConfig xmlns=""http://www.sonarsource.com/msbuild/integration/2015/1""><AdditionalConfig><ConfigSetting /></AdditionalConfig></AnalysisConfig>")] // No Id attribute
     public void UnexpectedXml_Throws(string xml)
     {
-        var path = TestHelper.WriteFile(TestContext, "SonarQubeAnalysisConfig.xml", xml);
+        var path = TestFiles.WriteFile(TestContext, "SonarQubeAnalysisConfig.xml", xml);
         ((Func<AnalysisConfigReader>)(() => new AnalysisConfigReader(path))).Should().Throw<InvalidOperationException>().WithMessage($"File '{path}' could not be parsed.");
     }
 
@@ -50,7 +50,7 @@ public class AnalysisConfigReaderTest
     [DataRow(@"<AnalysisConfig xmlns=""http://www.sonarsource.com/msbuild/integration/2015/1""></AnalysisConfig>")]
     public void MissingContent_ReturnsEmpty(string xml)
     {
-        var path = TestHelper.WriteFile(TestContext, "SonarQubeAnalysisConfig.xml", xml);
+        var path = TestFiles.WriteFile(TestContext, "SonarQubeAnalysisConfig.xml", xml);
         var sut = new AnalysisConfigReader(path);
         sut.UnchangedFiles().Should().BeEmpty();
     }

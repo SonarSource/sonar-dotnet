@@ -44,7 +44,7 @@ public class IPropertySymbolExtensionTest
                 public {{required}} int Prop { get; set; }
             }
             """;
-        var (tree, model) = TestHelper.CompileCS(code);
+        var (tree, model) = TestCompiler.CompileCS(code);
         var propertyDeclaration = tree.GetRoot().DescendantNodes().OfType<PropertyDeclarationSyntax>().Single();
         var propertySymbol = model.GetDeclaredSymbol(propertyDeclaration).Should().BeAssignableTo<IPropertySymbol>().Subject;
         propertySymbol.IsRequired().Should().Be(propertySymbol.IsRequired);

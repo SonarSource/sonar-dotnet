@@ -37,7 +37,7 @@ public sealed class EnvironmentVariableScope : IDisposable
 
     public void SetVariable(string name, string value)
     {
-        if (setOnlyInAzureDevOpsContext && !TestContextHelper.IsAzureDevOpsContext)
+        if (setOnlyInAzureDevOpsContext && !TestEnvironment.IsAzureDevOpsContext)
         {
             return;
         }

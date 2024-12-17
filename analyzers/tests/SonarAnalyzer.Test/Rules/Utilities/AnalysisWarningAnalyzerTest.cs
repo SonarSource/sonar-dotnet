@@ -91,7 +91,7 @@ public class AnalysisWarningAnalyzerTest
     private string ExecuteAnalyzer(string languageName, bool isAnalyzerEnabled, int vs2017MajorVersion, int minimalSupportedRoslynVersion, bool createDirectory = true)
     {
         var language = AnalyzerLanguage.FromName(languageName);
-        var analysisOutPath = TestHelper.TestPath(TestContext, @$"{languageName}\.sonarqube\out");
+        var analysisOutPath = TestFiles.TestPath(TestContext, @$"{languageName}\.sonarqube\out");
         var projectOutPath = Path.GetFullPath(Path.Combine(analysisOutPath, "0", "output-language"));
         if (createDirectory)
         {

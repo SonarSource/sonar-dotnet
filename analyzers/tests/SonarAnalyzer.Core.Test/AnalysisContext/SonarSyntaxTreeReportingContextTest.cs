@@ -25,7 +25,7 @@ public class SonarSyntaxTreeReportingContextTest
     public void Properties_ArePropagated()
     {
         var cancel = new CancellationToken(true);
-        var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
+        var (tree, model) = TestCompiler.CompileCS("// Nothing to see here");
         var options = AnalysisScaffolding.CreateOptions();
         var context = new SyntaxTreeAnalysisContext(tree, options, _ => { }, _ => true, cancel);
         var sut = new SonarSyntaxTreeReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context, model.Compilation);
@@ -40,8 +40,8 @@ public class SonarSyntaxTreeReportingContextTest
     public void ReportIssue_IgnoreSecondaryLocationOutsideCompilation()
     {
         Diagnostic lastDiagnostic = null;
-        var (tree, model) = TestHelper.CompileCS("using System;");
-        var secondaryTree = TestHelper.CompileCS("namespace Nothing;").Tree; // This tree is not in the analyzed compilation
+        var (tree, model) = TestCompiler.CompileCS("using System;");
+        var secondaryTree = TestCompiler.CompileCS("namespace Nothing;").Tree; // This tree is not in the analyzed compilation
         var context = new SyntaxTreeAnalysisContext(tree, AnalysisScaffolding.CreateOptions(), x => lastDiagnostic = x, _ => true, default);
         var sut = new SonarSyntaxTreeReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context, model.Compilation);
         var rule = AnalysisScaffolding.CreateDescriptor("Sxxxx", DiagnosticDescriptorFactory.MainSourceScopeTag);
@@ -60,7 +60,7 @@ public class SonarSyntaxTreeReportingContextTest
     [TestMethod]
     public void ReportIssue_NullArguments_Throws()
     {
-        var compilation = TestHelper.CompileCS("// Nothing to see here").Model.Compilation;
+        var compilation = TestCompiler.CompileCS("// Nothing to see here").Model.Compilation;
         var context = new SyntaxTreeAnalysisContext(compilation.SyntaxTrees.First(), new AnalyzerOptions([]), _ => { }, _ => true, CancellationToken.None);
         var sut = new SonarSyntaxTreeReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context, compilation);
         var rule = AnalysisScaffolding.CreateDescriptor("Sxxxx", DiagnosticDescriptorFactory.MainSourceScopeTag);
@@ -74,7 +74,7 @@ public class SonarSyntaxTreeReportingContextTest
     public void ReportIssue_PropertiesAndSecondaryLocations_Combine()
     {
         Diagnostic lastDiagnostic = null;
-        var (tree, model) = TestHelper.CompileCS("using System;");
+        var (tree, model) = TestCompiler.CompileCS("using System;");
         var context = new SyntaxTreeAnalysisContext(tree, AnalysisScaffolding.CreateOptions(), x => lastDiagnostic = x, _ => true, default);
         var sut = new SonarSyntaxTreeReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context, model.Compilation);
         var rule = AnalysisScaffolding.CreateDescriptor("Sxxxx", DiagnosticDescriptorFactory.MainSourceScopeTag);

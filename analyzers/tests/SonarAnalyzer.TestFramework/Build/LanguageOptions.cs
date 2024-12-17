@@ -114,7 +114,7 @@ public static class LanguageOptions
         };
 
     private static ImmutableArray<ParseOptions> FilterByEnvironment(this IEnumerable<ParseOptions> options) =>
-        TestContextHelper.IsAzureDevOpsContext && !TestContextHelper.IsPullRequestBuild
+        TestEnvironment.IsAzureDevOpsContext && !TestEnvironment.IsPullRequestBuild
             ? options.ToImmutableArray()
             : [options.First()]; // Use only the oldest version for local test run and debug
 

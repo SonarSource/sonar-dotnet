@@ -27,7 +27,7 @@ public class SonarSyntaxNodeReportingContextTest
     public void Properties_ArePropagated()
     {
         var cancel = new CancellationToken(true);
-        var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
+        var (tree, model) = TestCompiler.CompileCS("// Nothing to see here");
         var node = tree.GetRoot();
         var options = AnalysisScaffolding.CreateOptions();
         var containingSymbol = Substitute.For<ISymbol>();
@@ -51,9 +51,9 @@ public class SonarSyntaxNodeReportingContextTest
     public void ReportIssue_TreeNotInCompilation_DoNotReport(bool reportOnCorrectTree)
     {
         var analysisContext = AnalysisScaffolding.CreateSonarAnalysisContext();
-        var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
+        var (tree, model) = TestCompiler.CompileCS("// Nothing to see here");
         var nodeFromCorrectCompilation = tree.GetRoot();
-        var nodeFromAnotherCompilation = TestHelper.CompileCS("// This is another Compilation with another Tree").Tree.GetRoot();
+        var nodeFromAnotherCompilation = TestCompiler.CompileCS("// This is another Compilation with another Tree").Tree.GetRoot();
         var rule = AnalysisScaffolding.CreateDescriptorMain();
         var node = tree.GetRoot();
         var wasReported = false;

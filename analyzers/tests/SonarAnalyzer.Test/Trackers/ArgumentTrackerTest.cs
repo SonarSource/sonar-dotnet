@@ -1471,10 +1471,10 @@ public class ArgumentTrackerTest
         """;
 
     private static ArgumentContext ArgumentContextCS(string snippet) =>
-        ArgumentContext(snippet, TestHelper.CompileCS, typeof(CS.ArgumentSyntax), typeof(CS.AttributeArgumentSyntax));
+        ArgumentContext(snippet, TestCompiler.CompileCS, typeof(CS.ArgumentSyntax), typeof(CS.AttributeArgumentSyntax));
 
     private static ArgumentContext ArgumentContextVB(string snippet) =>
-        ArgumentContext(snippet, TestHelper.CompileVB, typeof(VB.ArgumentSyntax));
+        ArgumentContext(snippet, TestCompiler.CompileVB, typeof(VB.ArgumentSyntax));
 
     private static ArgumentContext ArgumentContext(string snippet,
         Func<string, MetadataReference[], (SyntaxTree Tree, SemanticModel Model)> compile, params Type[] descriptorNodeTypes)
