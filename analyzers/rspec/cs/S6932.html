@@ -143,7 +143,6 @@ public IActionResult Post()
     var name = Request.Form["name"];                           // Noncompliant: Request.Form
     var birthdate = DateTime.Parse(Request.Form["Birthdate"]); // Noncompliant: Request.Form
 
-    var origin = Request.Headers[HeaderNames.Origin];          // Noncompliant: Request.Headers
     var locale = Request.Query.TryGetValue("locale", out var locales)
         ? locales.ToString()
         : "en-US";                                             // Noncompliant: Request.Query
@@ -263,6 +262,17 @@ public ActionResult Post(User user, [Bind(Prefix = "locale")] string cultureName
     {
         // ...
     }
+}
+
+public IActionResult Post()
+{
+    var origin = Request.Headers[HeaderNames.Origin];          // Compliant: Access via non-constant field
+    var nameField = "name";
+    var name = Request.Form[nameField];                        // Compliant: Access via local
+    var birthdate = DateTime.Parse(Request.Form["Birthdate"]); // Compliant: Access via constant and variable keys is mixed.
+                                                               // Model binding would only work partially in the method, so we do not raise here.
+    return Ok();
+    // ..
 }
 </pre>
 <h3>How does this work?</h3>
