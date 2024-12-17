@@ -30,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonarsource.dotnet.shared.plugins.MethodDeclarationsCollector;
 import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
+import org.sonarsource.dotnet.shared.plugins.RealPathProvider;
 import org.sonarsource.dotnet.shared.plugins.SensorContextUtils;
 
 /**
@@ -44,18 +45,20 @@ public class UnitTestResultsImportSensor implements ProjectSensor {
   private final String languageKey;
   private final String languageName;
   private final AnalysisWarnings analysisWarnings;
+  private final RealPathProvider realPathProvider;
   private final MethodDeclarationsCollector collector;
 
-  public UnitTestResultsImportSensor(
-    MethodDeclarationsCollector collector,
-    UnitTestResultsAggregator unitTestResultsAggregator,
-    PluginMetadata pluginMetadata,
-    AnalysisWarnings analysisWarnings) {
+  public UnitTestResultsImportSensor(MethodDeclarationsCollector collector,
+                                     UnitTestResultsAggregator unitTestResultsAggregator,
+                                     PluginMetadata pluginMetadata,
+                                     AnalysisWarnings analysisWarnings,
+                                     RealPathProvider realPathProvider) {
     this.collector = collector;
     this.unitTestResultsAggregator = unitTestResultsAggregator;
     this.languageKey = pluginMetadata.languageKey();
     this.languageName = pluginMetadata.languageName();
     this.analysisWarnings = analysisWarnings;
+    this.realPathProvider = realPathProvider;
   }
 
   @Override
@@ -86,16 +89,23 @@ public class UnitTestResultsImportSensor implements ProjectSensor {
     addMeasures(context, aggregatedResultsPerFile);
   }
 
-  private static void addMeasures(SensorContext context, Map<String, UnitTestResults> aggregatedResultsPerFile) {
+  private void addMeasures(SensorContext context, Map<String, UnitTestResults> aggregatedResultsPerFile) {
     for (var entry : aggregatedResultsPerFile.entrySet()) {
-      var inputFile = SensorContextUtils.toInputFile(context.fileSystem(), entry.getKey());
-      if (inputFile != null) {
-        addMeasure(context, inputFile, CoreMetrics.TESTS, entry.getValue().tests());
-        addMeasure(context, inputFile, CoreMetrics.TEST_ERRORS, entry.getValue().errors());
-        addMeasure(context, inputFile, CoreMetrics.TEST_FAILURES, entry.getValue().failures());
-        addMeasure(context, inputFile, CoreMetrics.SKIPPED_TESTS, entry.getValue().skipped());
-        if (entry.getValue().executionTime() != null) {
-          addMeasure(context, inputFile, CoreMetrics.TEST_EXECUTION_TIME, entry.getValue().executionTime());
+      var path = realPathProvider.getRealPath(entry.getKey());
+      var inputFile = SensorContextUtils.toInputFile(context.fileSystem(), path);
+      if (inputFile == null) {
+        LOG.debug("Cannot find the file '{}'. No test results will be imported. Mapped path is '{}'.", entry.getKey(), path);
+      } else {
+        var results = entry.getValue();
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("Adding test metrics for file '{}'. Tests: '{}', Errors: `{}`, Failures: '{}'", inputFile.filename(), results.tests(), results.errors(), results.failures());
+        }
+        addMeasure(context, inputFile, CoreMetrics.TESTS, results.tests());
+        addMeasure(context, inputFile, CoreMetrics.TEST_ERRORS, results.errors());
+        addMeasure(context, inputFile, CoreMetrics.TEST_FAILURES, results.failures());
+        addMeasure(context, inputFile, CoreMetrics.SKIPPED_TESTS, results.skipped());
+        if (results.executionTime() != null) {
+          addMeasure(context, inputFile, CoreMetrics.TEST_EXECUTION_TIME, results.executionTime());
         }
       }
     }

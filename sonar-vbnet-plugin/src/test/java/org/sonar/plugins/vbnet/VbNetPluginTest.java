@@ -34,7 +34,7 @@ class VbNetPluginTest {
 
     Plugin.Context context = new Plugin.Context(sonarRuntime);
     new VbNetPlugin().define(context);
-    assertThat(context.getExtensions()).hasSize(60);
+    assertThat(context.getExtensions()).hasSize(61);
   }
 
   @Test

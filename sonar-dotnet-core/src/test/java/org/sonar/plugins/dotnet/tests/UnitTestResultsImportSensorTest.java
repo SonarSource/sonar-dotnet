@@ -38,6 +38,7 @@ import org.sonar.api.testfixtures.log.LogTester;
 import org.slf4j.event.Level;
 import org.sonarsource.dotnet.shared.plugins.MethodDeclarationsCollector;
 import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
+import org.sonarsource.dotnet.shared.plugins.RealPathProvider;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
@@ -47,6 +48,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class UnitTestResultsImportSensorTest {
+
+  private final RealPathProvider realPathProvider = new RealPathProvider();
 
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
@@ -79,7 +82,7 @@ public class UnitTestResultsImportSensorTest {
       .setType(InputFile.Type.MAIN)
       .build());
 
-    new UnitTestResultsImportSensor(new MethodDeclarationsCollector(), aggregator, metadata, analysisWarnings).execute(context);
+    new UnitTestResultsImportSensor(new MethodDeclarationsCollector(), aggregator, metadata, analysisWarnings, mockPathProvider(file)).execute(context);
 
     var executionTimeMetric = new Condition<Tuple>(x -> x.toList().get(0) == CoreMetrics.TEST_EXECUTION_TIME_KEY, CoreMetrics.TEST_EXECUTION_TIME_KEY);
     assertThat(context.measures("projectKey:" + file.getName()))
@@ -103,13 +106,13 @@ public class UnitTestResultsImportSensorTest {
 
     Configuration configWithoutKey = mock(Configuration.class);
 
-    when(unitTestResultsAggregator.hasUnitTestResultsProperty(any(Predicate.class))).thenAnswer((invocationOnMock) -> {
+    when(unitTestResultsAggregator.hasUnitTestResultsProperty(any(Predicate.class))).thenAnswer(invocationOnMock -> {
       Predicate<String> pr = invocationOnMock.getArgument(0);
       return pr.test("expectedKey");
     });
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
 
-    new UnitTestResultsImportSensor(new MethodDeclarationsCollector(), unitTestResultsAggregator, metadata, analysisWarnings).describe(descriptor);
+    new UnitTestResultsImportSensor(new MethodDeclarationsCollector(), unitTestResultsAggregator, metadata, analysisWarnings, mock(RealPathProvider.class)).describe(descriptor);
 
     assertThat(descriptor.configurationPredicate()).accepts(configWithKey);
     assertThat(descriptor.configurationPredicate()).rejects(configWithoutKey);
@@ -122,7 +125,7 @@ public class UnitTestResultsImportSensorTest {
     AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
 
-    new UnitTestResultsImportSensor(new MethodDeclarationsCollector(), unitTestResultsAggregator, metadata, analysisWarnings).describe(descriptor);
+    new UnitTestResultsImportSensor(new MethodDeclarationsCollector(), unitTestResultsAggregator, metadata, analysisWarnings, mock(RealPathProvider.class)).describe(descriptor);
 
     assertThat(descriptor.languages()).containsOnly("cs");
   }
@@ -155,8 +158,8 @@ public class UnitTestResultsImportSensorTest {
     when(aggregator.aggregate(any(), any())).thenReturn(fileResults);
 
     var methodDeclarationsCollector = new MethodDeclarationsCollector();
-    new UnitTestResultsImportSensor(methodDeclarationsCollector, aggregator, cSharpMetadata, analysisWarnings).execute(context);
-    new UnitTestResultsImportSensor(methodDeclarationsCollector, aggregator, vbNetMetadata, analysisWarnings).execute(context);
+    new UnitTestResultsImportSensor(methodDeclarationsCollector, aggregator, cSharpMetadata, analysisWarnings, realPathProvider).execute(context);
+    new UnitTestResultsImportSensor(methodDeclarationsCollector, aggregator, vbNetMetadata, analysisWarnings, realPathProvider).execute(context);
 
     assertThat(logTester.logs(Level.WARN)).containsExactly("Could not import unit test report: 'Can not add the same measure twice'");
     verify(analysisWarnings).addUnique("Could not import unit test report for 'VB.NET'. Please check the logs for more details.");
@@ -183,7 +186,7 @@ public class UnitTestResultsImportSensorTest {
       .setType(InputFile.Type.MAIN)
       .build());
 
-    UnitTestResultsImportSensor sensor = new UnitTestResultsImportSensor(new MethodDeclarationsCollector(), aggregator, metadata, analysisWarnings);
+    UnitTestResultsImportSensor sensor = new UnitTestResultsImportSensor(new MethodDeclarationsCollector(), aggregator, metadata, analysisWarnings, mockPathProvider(file));
     sensor.execute(context);
 
     assertThat(context.measures("projectKey:" + file.getName()))
@@ -202,10 +205,76 @@ public class UnitTestResultsImportSensorTest {
     PluginMetadata metadata = mockCSharpMetadata();
     when(aggregator.hasUnitTestResultsProperty()).thenReturn(false);
 
-    UnitTestResultsImportSensor sensor = new UnitTestResultsImportSensor(new MethodDeclarationsCollector(), aggregator, metadata, null);
+    UnitTestResultsImportSensor sensor = new UnitTestResultsImportSensor(new MethodDeclarationsCollector(), aggregator, metadata, null, mock(RealPathProvider.class));
     sensor.execute(null);
 
     assertThat(logTester.logs(Level.DEBUG)).containsExactly("No unit test results property. Skip Sensor");
+  }
+
+  @Test
+  public void when_file_path_casing_is_wrong_it_uses_the_real_file_path() throws IOException {
+    var aggregator = mock(UnitTestResultsAggregator.class);
+    var cSharpMetadata = mockCSharpMetadata();
+    var analysisWarnings = mock(AnalysisWarnings.class);
+    var context = SensorContextTester.create(temp.newFolder());
+    when(aggregator.hasUnitTestResultsProperty()).thenReturn(true);
+    var results = new UnitTestResults();
+    results.add(42, 1, 2, 3, 321L);
+    var file = createTempFile(context);
+    var pathProvider = mock(RealPathProvider.class);
+    // The Scanner for .NET reads the file paths from the project files, which are case-insensitive and might be different from the actual names.
+    var wrongCasingFileName = file.getName().toUpperCase();
+    when(pathProvider.getRealPath(wrongCasingFileName)).thenReturn(file.getName());
+
+    var fileResults = new HashMap<String, UnitTestResults>();
+    fileResults.put(wrongCasingFileName, results);
+    when(aggregator.aggregate(any(), any())).thenReturn(fileResults);
+
+    var methodDeclarationsCollector = new MethodDeclarationsCollector();
+    new UnitTestResultsImportSensor(methodDeclarationsCollector, aggregator, cSharpMetadata, analysisWarnings, pathProvider).execute(context);
+
+    assertThat(logTester.logs(Level.DEBUG))
+      .hasSize(1)
+      .containsExactly("Adding test metrics for file '" + file.getName() + "'. Tests: '42', Errors: `3`, Failures: '2'");
+  }
+
+  @Test
+  public void when_file_path_cannot_be_found_it_logs_a_warning() throws IOException {
+    var aggregator = mock(UnitTestResultsAggregator.class);
+    var cSharpMetadata = mockCSharpMetadata();
+    var analysisWarnings = mock(AnalysisWarnings.class);
+    var context = SensorContextTester.create(temp.newFolder());
+    when(aggregator.hasUnitTestResultsProperty()).thenReturn(true);
+    var results = new UnitTestResults();
+    results.add(42, 1, 2, 3, 321L);
+    var fileResults = new HashMap<String, UnitTestResults>();
+    fileResults.put("nonexistent.cs", results);
+    when(aggregator.aggregate(any(), any())).thenReturn(fileResults);
+
+    var methodDeclarationsCollector = new MethodDeclarationsCollector();
+    new UnitTestResultsImportSensor(methodDeclarationsCollector, aggregator, cSharpMetadata, analysisWarnings, new RealPathProvider()).execute(context);
+
+    assertThat(logTester.logs(Level.DEBUG))
+      .hasSize(2)
+      .containsExactly(
+        "Failed to retrieve the real full path for 'nonexistent.cs'",
+        "Cannot find the file 'nonexistent.cs'. No test results will be imported. Mapped path is 'nonexistent.cs'.");
+  }
+
+  private File createTempFile(SensorContextTester context) throws IOException {
+    var tempFolder = temp.newFolder();
+    tempFolder.deleteOnExit();
+
+    var file = File.createTempFile("path", ".cs", tempFolder);
+    file.deleteOnExit();
+
+    context.fileSystem()
+      .add(new TestInputFileBuilder("projectKey", file.getName())
+      .setLanguage("cs")
+      .setType(InputFile.Type.MAIN)
+      .build());
+
+    return file;
   }
 
   private PluginMetadata mockCSharpMetadata() {
@@ -220,5 +289,11 @@ public class UnitTestResultsImportSensorTest {
     when(metadata.languageKey()).thenReturn("vb");
     when(metadata.languageName()).thenReturn("VB.NET");
     return metadata;
+  }
+
+  private RealPathProvider mockPathProvider(File file) {
+    var pathProvider = mock(RealPathProvider.class);
+    when(pathProvider.getRealPath(any())).thenReturn(file.getAbsolutePath());
+    return pathProvider;
   }
 }

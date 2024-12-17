@@ -32,6 +32,7 @@ import org.sonarsource.dotnet.shared.plugins.MethodDeclarationsCollector;
 import org.sonarsource.dotnet.shared.plugins.ModuleConfiguration;
 import org.sonarsource.dotnet.shared.plugins.ProjectTypeCollector;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
+import org.sonarsource.dotnet.shared.plugins.RealPathProvider;
 import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 import org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter;
@@ -71,6 +72,7 @@ class CSharpCoreExtensionsTest {
       TelemetryCollector.class,
       TelemetrySensor.class,
       TelemetryProcessor.class,
+      RealPathProvider.class,
       PropertiesSensor.class,
       ProjectTypeCollector.class,
       ReportPathCollector.class,
