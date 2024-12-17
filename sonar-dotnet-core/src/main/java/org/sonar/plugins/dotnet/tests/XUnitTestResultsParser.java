@@ -58,10 +58,11 @@ public class XUnitTestResultsParser implements UnitTestResultParser {
     private void handleTestTag(XmlParserHelper xmlParserHelper) {
       var result = xmlParserHelper.getRequiredAttribute("result");
       var time = xmlParserHelper.getDoubleAttribute("time");
-      var name = xmlParserHelper.getRequiredAttribute("name");
+      var type = xmlParserHelper.getRequiredAttribute("type");
+      var method = xmlParserHelper.getRequiredAttribute("method");
       var executionTime = time == null ? null : (long) (time * 1000);
       var testResults = new XUnitTestResults(result, executionTime);
-      var fullName = getFullName(name, dllName);
+      var fullName = getFullName(type + '.' + method, dllName);
 
       addTestResultToFile(fullName, testResults);
     }
