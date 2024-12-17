@@ -11,8 +11,8 @@
     <repository type="git" url="https://github.com/SonarSource/sonar-dotnet" />
     <icon>images\sonarsource_64.png</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <summary>Roslyn analyzers that spot Bugs, Vulnerabilities and Code Smells in your code. For an even better overall experience, you can use SonarLint for Visual Studio, which is a free extension that can be used standalone or with SonarQube and/or SonarCloud.</summary>
-    <description>Roslyn analyzers that spot Bugs, Vulnerabilities and Code Smells in your code. For an even better overall experience, you can use SonarLint for Visual Studio, which is a free extension (https://www.sonarlint.org/visualstudio/) that can be used standalone or with SonarQube (https://www.sonarqube.org/) and/or SonarCloud (https://sonarcloud.io/).</description>
+    <summary>Roslyn analyzers that spot Bugs, Vulnerabilities and Code Smells in your code. For an even better overall experience, you can use SonarQube for IDE (Visual Studio, Rider), which is a free extension that can be used standalone or with SonarQube (Server, Cloud).</summary>
+    <description>Roslyn analyzers that spot Bugs, Vulnerabilities and Code Smells in your code. For an even better overall experience, you can use SonarQube for IDE (Visual Studio, Rider, see https://www.sonarsource.com/products/sonarlint), which is a free extension that can be used standalone or with SonarQube (Server, Cloud, see: https://www.sonarsource.com/products/sonarqube/ and https://www.sonarsource.com/products/sonarcloud/).</description>
     <releaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/$Version$</releaseNotes>
     <language>en-US</language>
     <copyright>Copyright © 2015-2024 SonarSource SA</copyright>
