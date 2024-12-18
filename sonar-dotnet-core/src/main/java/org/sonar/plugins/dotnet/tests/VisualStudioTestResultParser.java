@@ -25,7 +25,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,7 +75,7 @@ public class VisualStudioTestResultParser implements UnitTestResultParser {
     }
 
     private void handleUnitTestTag(XmlParserHelper xmlParserHelper) {
-      String testId = xmlParserHelper.getRequiredAttribute("id");
+      var testId = xmlParserHelper.getRequiredAttribute("id");
 
       String tagName;
       while ((tagName = xmlParserHelper.nextStartTag()) != null) {
@@ -88,19 +87,17 @@ public class VisualStudioTestResultParser implements UnitTestResultParser {
         throw new ParseErrorException("No TestMethod attribute found on UnitTest tag");
       }
 
-      String methodName = xmlParserHelper.getRequiredAttribute("name");
-      String className = xmlParserHelper.getRequiredAttribute("className");
-      String codeBase = xmlParserHelper.getRequiredAttribute("codeBase");
-
-      String dllName = extractDllNameFromFilePath(codeBase);
-      String fullyQualifiedName = dllName + "." + className + "." + methodName;
-
+      var methodName = xmlParserHelper.getRequiredAttribute("name");
+      var className = xmlParserHelper.getRequiredAttribute("className");
+      var codeBase = xmlParserHelper.getRequiredAttribute("codeBase");
+      var dllName = extractDllNameFromFilePath(codeBase);
+      var fullyQualifiedName = getFullName(className + "." + methodName, dllName);
       var testIdTestResult = testIdTestResultMap.get(testId);
       addTestResultToFile(fullyQualifiedName, testIdTestResult);
     }
 
     private Date getRequiredDateAttribute(XmlParserHelper xmlParserHelper, String name) {
-      String value = xmlParserHelper.getRequiredAttribute(name);
+      var value = xmlParserHelper.getRequiredAttribute(name);
       try {
         value = keepOnlyMilliseconds(value);
         return dateFormat.parse(value);
@@ -110,10 +107,9 @@ public class VisualStudioTestResultParser implements UnitTestResultParser {
     }
 
     private String keepOnlyMilliseconds(String value) {
-      StringBuilder sb = new StringBuilder();
-
-      Matcher matcher = millisecondsPattern.matcher(value);
-      StringBuilder trailingZeros = new StringBuilder();
+      var sb = new StringBuilder();
+      var matcher = millisecondsPattern.matcher(value);
+      var trailingZeros = new StringBuilder();
       while (matcher.find()) {
         String milliseconds = matcher.group(2);
         trailingZeros.setLength(0);

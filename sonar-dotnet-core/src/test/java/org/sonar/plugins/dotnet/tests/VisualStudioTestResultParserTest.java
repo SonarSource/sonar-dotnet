@@ -174,4 +174,52 @@ public class VisualStudioTestResultParserTest {
     var exception = assertThrows(IllegalArgumentException.class, () -> sut.parse(file, results, fileMap));
     assertEquals("Outcome of unit test must match VSTest Format", exception.getMessage());
   }
+
+  @Test
+  public void nunit_project_with_vs_logger() {
+    Map<String, UnitTestResults> results = new HashMap<>();
+    Map<String, String> fileMap = new HashMap<>() {
+      {
+        put("Calculator.NUnit3.Calculator.NUnit3.GenericTests.GenericTest", "Sample.cs");
+        put("Calculator.NUnit3.Calculator.NUnit3.Derived.TestMethodInBaseClass", "Sample.cs");
+        put("Calculator.NUnit3.Calculator.NUnit3.Tests.TestMethod1", "Sample.cs");
+        put("Calculator.NUnit3.Calculator.NUnit3.Derived.VirtualMethodInBaseClass", "Sample.cs");
+      }
+    };
+
+    var sut = new VisualStudioTestResultParser();
+
+    sut.parse(new File("src/test/resources/visualstudio_test_results/nunitproject_with_vs_logger.trx"), results, fileMap);
+
+    assertThat(results).hasSize(1);
+    assertThat(results.get("Sample.cs").tests()).isEqualTo(6);
+    assertThat(results.get("Sample.cs").failures()).isZero();
+    assertThat(results.get("Sample.cs").skipped()).isZero();
+    assertThat(results.get("Sample.cs").errors()).isZero();
+    assertThat(results.get("Sample.cs").executionTime()).isEqualTo(10);
+
+    assertThat(logTester.logs(Level.WARN)).isEmpty();
+
+    var infoLogs = logTester.logs(Level.INFO);
+    assertThat(infoLogs).hasSize(1);
+    assertThat(infoLogs.get(0)).startsWith("Parsing the Visual Studio Test Results file ");
+
+    var debugLogs = logTester.logs(Level.DEBUG);
+    assertThat(debugLogs)
+      .hasSize(12)
+      .contains(
+        "Parsed Visual Studio Unit Test - testId: dfbab7a8-4d30-e4af-b7e9-5f143fa0d63c outcome: Passed, duration: 0",
+        "Parsed Visual Studio Unit Test - testId: e856dddd-b0b9-1283-7d12-995daa1c2159 outcome: Passed, duration: 0",
+        "Parsed Visual Studio Unit Test - testId: 04f8f26c-73f6-0a50-702c-3424ece7fca7 outcome: Passed, duration: 1",
+        "Parsed Visual Studio Unit Test - testId: d19495ce-8556-0afa-0598-f28569986b94 outcome: Passed, duration: 2",
+        "Parsed Visual Studio Unit Test - testId: b1d90856-8e97-2f05-b5a1-46236018b4f5 outcome: Passed, duration: 0",
+        "Parsed Visual Studio Unit Test - testId: 7c7642ed-18fb-4d66-c0f5-3e220f7aa426 outcome: Passed, duration: 7",
+        "Added Test Method: Calculator.NUnit3.Calculator.NUnit3.GenericTests.GenericTest to File: Sample.cs",
+        "Added Test Method: Calculator.NUnit3.Calculator.NUnit3.GenericTests.GenericTest to File: Sample.cs",
+        "Added Test Method: Calculator.NUnit3.Calculator.NUnit3.Derived.TestMethodInBaseClass to File: Sample.cs",
+        "Added Test Method: Calculator.NUnit3.Calculator.NUnit3.GenericTests.GenericTest to File: Sample.cs",
+        "Added Test Method: Calculator.NUnit3.Calculator.NUnit3.Tests.TestMethod1 to File: Sample.cs",
+        "Added Test Method: Calculator.NUnit3.Calculator.NUnit3.Derived.VirtualMethodInBaseClass to File: Sample.cs"
+      );
+  }
 }
