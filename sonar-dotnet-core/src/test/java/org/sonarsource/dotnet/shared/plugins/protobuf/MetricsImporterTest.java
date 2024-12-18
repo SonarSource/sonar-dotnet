@@ -38,7 +38,11 @@ import org.sonar.api.notifications.AnalysisWarnings;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.METRICS_FILENAME;
@@ -96,10 +100,11 @@ public class MetricsImporterTest {
     verify(fileLinesContext).setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, 34, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, 37, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, 58, 1);
+    verify(fileLinesContext, never()).setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, 1, 1);
 
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 1, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 2, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 3, 1);
+    verify(fileLinesContext, never()).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 7, 1);
+    verify(fileLinesContext, times(41)).setIntValue(eq(CoreMetrics.NCLOC_DATA_KEY), anyInt(), eq(1));
   }
 
 }
