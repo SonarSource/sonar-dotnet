@@ -89,7 +89,7 @@ namespace Tests.Diagnostics
 
         public void Foo(BloggingContext context, string query)
         {
-            var b = context.Blogs.FromSql($"{query}"); // Compliant - FN, See: https://github.com/SonarSource/sonar-dotnet/issues/5636
+            var b = context.Blogs.FromSql($"{query}"); // Compliant: interpolated strings are safe in EF (https://learn.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.relationalqueryableextensions.fromsql?view=efcore-2.0#microsoft-entityframeworkcore-relationalqueryableextensions-fromsql-1(system-linq-iqueryable((-0))-system-formattablestring))
         }
     }
 
