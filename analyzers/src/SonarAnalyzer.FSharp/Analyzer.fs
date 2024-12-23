@@ -3,6 +3,8 @@ namespace SonarAnalyzer.FSharp
 open FSharp.Analyzers.SDK
 open FSharp.Analyzers.SDK.Common
 
+// INVOKE: dotnet msbuild /t:AnalyzeFSharpProject ????
+
 [<Analyzer>]
 let myAnalyzer : Analyzer =
     fun ctx ->
