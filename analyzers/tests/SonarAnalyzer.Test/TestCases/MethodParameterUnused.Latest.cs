@@ -433,3 +433,19 @@ namespace CSharp13
         }
     }
 }
+
+namespace ReproMethodGroups
+{
+    internal static class Test
+    {
+        private static string Test1(string x) => string.Empty; // FN
+
+        private static string Test2(string x) => string.Empty; // Noncompliant
+
+        public static void Main()
+        {
+            _ = Enumerable.Empty<string>().Select(Test1);
+            _ = Enumerable.Empty<string>().Select(x => Test2(x));
+        }
+    }
+}
