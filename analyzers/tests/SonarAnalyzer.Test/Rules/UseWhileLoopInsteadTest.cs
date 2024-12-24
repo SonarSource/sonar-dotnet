@@ -16,13 +16,12 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class UseWhileLoopInsteadTest
 {
-    [TestClass]
-    public class UseWhileLoopInsteadTest
-    {
-        [TestMethod]
-        public void UseWhileLoopInstead() =>
-            new VerifierBuilder<UseWhileLoopInstead>().AddPaths("UseWhileLoopInstead.cs").Verify();
-    }
+    [TestMethod]
+    public void UseWhileLoopInstead() =>
+        new VerifierBuilder<UseWhileLoopInstead>().AddPaths("UseWhileLoopInstead.cs").Verify();
 }

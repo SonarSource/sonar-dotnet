@@ -41,6 +41,11 @@ namespace Tests.Diagnostics
             {
 
             }
+
+            for (i = 0; i < 10;) // Noncompliant
+            {
+
+            }
         }
     }
 }

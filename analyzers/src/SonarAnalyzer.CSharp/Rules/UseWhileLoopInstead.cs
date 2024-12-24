@@ -14,32 +14,29 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class UseWhileLoopInstead : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class UseWhileLoopInstead : SonarDiagnosticAnalyzer
-    {
-        internal const string DiagnosticId = "S1264";
-        private const string MessageFormat = "Replace this 'for' loop with a 'while' loop.";
+    private const string DiagnosticId = "S1264";
+    private const string MessageFormat = "Replace this 'for' loop with a 'while' loop.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+    private static readonly DiagnosticDescriptor rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                c =>
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            c =>
+            {
+                var forStatement = (ForStatementSyntax)c.Node;
+
+                if (forStatement.Declaration is null &&
+                    forStatement.Incrementors.Count == 0)
                 {
-                    var forStatement = (ForStatementSyntax)c.Node;
-
-                    if (forStatement.Declaration == null &&
-                        forStatement.Incrementors.Count == 0)
-                    {
-                        c.ReportIssue(rule, forStatement.ForKeyword);
-                    }
-                },
-                SyntaxKind.ForStatement);
-        }
-    }
+                    c.ReportIssue(rule, forStatement.ForKeyword);
+                }
+            },
+            SyntaxKind.ForStatement);
 }
