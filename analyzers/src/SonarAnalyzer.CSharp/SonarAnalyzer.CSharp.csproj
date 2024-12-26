@@ -24,6 +24,7 @@
     <!-- We need to update NuGet and JAR packaging after changing references -->
     <ProjectReference Include="..\SonarAnalyzer.Core\SonarAnalyzer.Core.csproj" />
     <ProjectReference Include="..\SonarAnalyzer.CSharp.Core\SonarAnalyzer.CSharp.Core.csproj" />
+    <ProjectReference Include="..\SonarAnalyzer.FSharp\SonarAnalyzer.FSharp.csproj" />
   </ItemGroup>
 
   <ItemGroup>
