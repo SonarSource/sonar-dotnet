@@ -26,6 +26,24 @@ public class IssueReporterTest
 {
     private readonly DummyDiagnosticReporter reporter = new();
 
+    [DataTestMethod]
+    [DataRow("S1481")]
+    [DataRow("S927")]
+    [DataRow("S4487")]
+    [DataRow("S2696")]
+    [DataRow("S2259")]
+    [DataRow("S1144")]
+    [DataRow("S2325")]
+    [DataRow("S1117")]
+    [DataRow("S1481")]
+    [DataRow("S1871")]
+    public void ReportIssueCore_DesignTimeDiagnostic_ExcludedRule(string diagnosticId)
+    {
+        ReportDiagnostic(@"C:\SonarSource\SomeFile.razor.-6NXeWT5Akt4vxdz.ide.g.cs", true, diagnosticId);
+        reporter.Counter.Should().Be(0);
+        reporter.LastDiagnostic.Should().BeNull();
+    }
+
     [TestMethod]
     public void ReportIssueCore_DesignTimeDiagnostic_HasMappedPath_True()
     {
@@ -42,10 +60,10 @@ public class IssueReporterTest
         reporter.LastDiagnostic.Should().BeNull();
     }
 
-    private Diagnostic ReportDiagnostic(string filePath, bool hasMappedPath)
+    private Diagnostic ReportDiagnostic(string filePath, bool hasMappedPath, string diagnosticId = "id")
     {
         var tree = GetTree(filePath);
-        var diagnostic = GetDiagnostic(tree, hasMappedPath);
+        var diagnostic = GetDiagnostic(diagnosticId, tree, hasMappedPath);
 
         IssueReporter.ReportIssueCore(
             x => true,
@@ -66,10 +84,10 @@ public class IssueReporterTest
         return tree;
     }
 
-    private static Diagnostic GetDiagnostic(SyntaxTree tree, bool hasMappedPath)
+    private static Diagnostic GetDiagnostic(string diagnosticId, SyntaxTree tree, bool hasMappedPath)
     {
         var location = GetLocation(tree, hasMappedPath);
-        var descriptor = new DiagnosticDescriptor("id", "title", "message", "category", DiagnosticSeverity.Warning, true);
+        var descriptor = new DiagnosticDescriptor(diagnosticId, "title", "message", "category", DiagnosticSeverity.Warning, true);
         return Diagnostic.Create(descriptor, location);
     }
 

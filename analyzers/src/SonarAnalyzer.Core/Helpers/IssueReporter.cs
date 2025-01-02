@@ -18,6 +18,18 @@ namespace SonarAnalyzer.Helpers;
 
 public static class IssueReporter
 {
+    private static readonly ImmutableHashSet<string> ExcludedFromDesignTimeRuleIds = ImmutableHashSet.Create(
+        "S1481",
+        "S927",
+        "S4487",
+        "S2696",
+        "S2259",
+        "S1144",
+        "S2325",
+        "S1117",
+        "S1481",
+        "S1871");
+
     public static void ReportIssueCore(
                     Compilation compilation,
                     Func<DiagnosticDescriptor, bool> hasMatchingScope,
@@ -81,7 +93,8 @@ public static class IssueReporter
         // On design time, we only raise on generated .ide.g.cs files if the diagnostic has a mapped location.
         if (GeneratedCodeRecognizer.IsDesignTimeRazorGeneratedFile(diagnostic.Location.SourceTree))
         {
-            return diagnostic.Location.GetMappedLineSpan().HasMappedPath;
+            return diagnostic.Location.GetMappedLineSpan().HasMappedPath
+                && !ExcludedFromDesignTimeRuleIds.Contains(diagnostic.Id);
         }
         // On build time, if the diagnostic has a mapped location, we do the mapping ourselves and raise there.
         else if (GeneratedCodeRecognizer.IsBuildTimeRazorGeneratedFile(diagnostic.Location.SourceTree))
