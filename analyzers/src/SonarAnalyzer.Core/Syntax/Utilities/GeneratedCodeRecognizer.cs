@@ -44,6 +44,8 @@ public abstract class GeneratedCodeRecognizer
 
     private static readonly Regex RazorPattern = new(@".*razor(?!.cshtml)(\.[-\w]*)?(\.ide)?\.g\.cs$", RegexOptions.Compiled | RegexOptions.IgnoreCase, RegexConstants.DefaultTimeout);
 
+    private static readonly Regex CshtmlPattern = new(@".*cshtml(?!.razor)(\.[-\w]*)?(\.ide)?\.g\.cs$", RegexOptions.Compiled | RegexOptions.IgnoreCase, RegexConstants.DefaultTimeout);
+
     protected abstract bool IsTriviaComment(SyntaxTrivia trivia);
     protected abstract string GetAttributeName(SyntaxNode node);
 
@@ -74,7 +76,8 @@ public abstract class GeneratedCodeRecognizer
         && RazorPattern.SafeIsMatch(tree.FilePath);
 
     public static bool IsCshtml(SyntaxTree tree) =>
-        tree.EndsWith("cshtml.g.cs");
+        tree.EndsWith(".g.cs")
+        && CshtmlPattern.SafeIsMatch(tree.FilePath);
 
     private bool HasGeneratedCommentOrAttribute(SyntaxTree tree)
     {

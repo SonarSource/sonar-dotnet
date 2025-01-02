@@ -75,6 +75,10 @@ public class GeneratedCodeRecognizerTest
     [DataRow(@"C:\SonarSource\SomeFile_cshtml.g.cs")]
     [DataRow(@"C:\SonarSource\SomeFile_CSHTML.g.cs")]
     [DataRow(@"SomeFile_cshtml.g.cs")]
+    [DataRow(@"SomeFile_cshtml.ide.g.cs")]
+    [DataRow(@"C:\SonarSource\SomeFile_cshtml.ide.g.cs")]
+    [DataRow(@"C:\SonarSource\SomeFile.cshtml.-6NXeWT5Akt4vxdz.ide.g.cs")]
+    [DataRow(@"SomeFile.cshtml.-6NXeWT5Akt4vxdz.ide.g.cs")]
     public void IsRazorGeneratedFile_RazorGeneratedFiles_Cshtml_ReturnsTrue(string path)
     {
         var tree = Substitute.For<SyntaxTree>();
@@ -90,11 +94,6 @@ public class GeneratedCodeRecognizerTest
     [DataRow(@"C:\SonarSource\SomeFile_razor.g.cs.randomEnding")]
     [DataRow(@"C:\SonarSource\SomeFile_cshtml.g.cs.randomEnding")]
     [DataRow(@"C:\SonarSource\SomeFile_razor.g.ß")]
-    // TODO: These should fail and moved to the test above after https://sonarsource.atlassian.net/browse/NET-893
-    [DataRow(@"SomeFile_cshtml.ide.g.cs")]
-    [DataRow(@"C:\SonarSource\SomeFile_cshtml.ide.g.cs")]
-    [DataRow(@"C:\SonarSource\SomeFile.cshtml.-6NXeWT5Akt4vxdz.ide.g.cs")]
-    [DataRow(@"SomeFile.cshtml.-6NXeWT5Akt4vxdz.ide.g.cs")]
     public void IsRazorGeneratedFile_NonRazorGeneratedFiles_ReturnsFalse(string path)
     {
         var tree = Substitute.For<SyntaxTree>();
@@ -126,7 +125,10 @@ public class GeneratedCodeRecognizerTest
     [DataRow(@"C:\SonarSource\SomeFile.razor.-6NXeWT5Akt4vxdz.ide.g.cs")]
     [DataRow(@"SomeFile_razor.ide.g.cs")]
     [DataRow(@"SomeFile.razor.-6NXeWT5Akt4vxdz.ide.g.cs")]
-    // TODO: Copy the cases above and replace razor with cshtml after https://sonarsource.atlassian.net/browse/NET-893
+    [DataRow(@"C:\SonarSource\SomeFile_cshtml.ide.g.cs")]
+    [DataRow(@"C:\SonarSource\SomeFile.csHTml.-6NXeWT5Akt4vxdz.ide.g.cs")]
+    [DataRow(@"SomeFile_cshtml.ide.g.cs")]
+    [DataRow(@"SomeFile.CSHTmL.-6NXeWT5Akt4vxdz.ide.g.cs")]
     public void IsDesignTimeRazorGeneratedFile_ReturnsTrue(string path)
     {
         var tree = Substitute.For<SyntaxTree>();
