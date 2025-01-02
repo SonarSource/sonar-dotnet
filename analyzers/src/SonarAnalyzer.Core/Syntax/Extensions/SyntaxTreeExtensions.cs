@@ -49,6 +49,9 @@ internal static class SyntaxTreeExtensions
             ? pragmaChecksum.File.ValueText
             : tree.FilePath;
 
+    public static bool EndsWith(this SyntaxTree tree, string suffix) =>
+        tree.FilePath.EndsWith(suffix, StringComparison.OrdinalIgnoreCase);
+
     private static bool IsGeneratedGetOrAdd(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
         (bool)GeneratedCodeCache.GetValue(tree, x => generatedCodeRecognizer.IsGenerated(x));
 }

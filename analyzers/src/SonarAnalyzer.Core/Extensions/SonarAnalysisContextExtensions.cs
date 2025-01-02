@@ -39,6 +39,5 @@ public static class SonarAnalysisContextExtensions
     }
 
     public static bool IsRazorAnalysisEnabled(this SonarAnalysisContext context, AnalyzerOptions options, Compilation compilation) =>
-        context.ProjectConfiguration(options).ProjectType != ProjectType.Unknown
-        && options.SonarLintXml(context).AnalyzeRazorCode(compilation.Language);
+        options.SonarLintXml(context).AnalyzeRazorCode(compilation.Language);
 }

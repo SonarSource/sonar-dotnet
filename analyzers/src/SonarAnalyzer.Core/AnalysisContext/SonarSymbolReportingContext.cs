@@ -55,7 +55,6 @@ public readonly record struct SonarSymbolReportingContext(SonarAnalysisContext A
         {
             var @this = this;
             IssueReporter.ReportIssueCore(
-                Compilation,
                 x => @this.HasMatchingScope(x),
                 CreateReportingContext,
                 diagnostic);

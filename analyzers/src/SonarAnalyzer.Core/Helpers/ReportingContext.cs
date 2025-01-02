@@ -42,7 +42,7 @@ public class ReportingContext : IReportingContext
     public ReportingContext(SonarSemanticModelReportingContext context, Diagnostic diagnostic)
         : this(diagnostic, context.Context.ReportDiagnostic, context.Compilation, context.Tree) { }
 
-    private ReportingContext(Diagnostic diagnostic,
+    internal ReportingContext(Diagnostic diagnostic,
                              Action<Diagnostic> roslynReportDiagnostic,
                              Compilation compilation,
                              SyntaxTree syntaxTree)

@@ -41,18 +41,16 @@ public static class IssueReporter
             additionalLocations: secondaryLocations.Select(x => x.Location),
             properties: properties,
             messageArgs);
-        ReportIssueCore(compilation, hasMatchingScope, createReportingContext, diagnostic);
+        ReportIssueCore(hasMatchingScope, createReportingContext, diagnostic);
     }
 
     [Obsolete("Use another overload of ReportIssue, without calling Diagnostic.Create")]
     public static void ReportIssueCore(
-                    Compilation compilation,
                     Func<DiagnosticDescriptor, bool> hasMatchingScope,
                     Func<Diagnostic, ReportingContext> createReportingContext,
                     Diagnostic diagnostic)
     {
-        diagnostic = EnsureDiagnosticLocation(diagnostic);
-        if (!GeneratedCodeRecognizer.IsRazorGeneratedFile(diagnostic.Location.SourceTree) // In case of Razor generated content, we don't want to raise any issues
+        if (ShouldRaiseOnRazorFile(ref diagnostic)
             && hasMatchingScope(diagnostic.Descriptor)
             && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(diagnostic.Descriptor, diagnostic.Location?.SourceTree))
         {
@@ -78,16 +76,42 @@ public static class IssueReporter
         }
     }
 
-    private static Diagnostic EnsureDiagnosticLocation(Diagnostic diagnostic)
+    private static bool ShouldRaiseOnRazorFile(ref Diagnostic diagnostic)
     {
-        if (!GeneratedCodeRecognizer.IsRazorGeneratedFile(diagnostic.Location.SourceTree) || !diagnostic.Location.GetMappedLineSpan().HasMappedPath)
+        // On design time, we only raise on generated .ide.g.cs files if the diagnostic has a mapped location.
+        if (GeneratedCodeRecognizer.IsDesignTimeRazorGeneratedFile(diagnostic.Location.SourceTree))
         {
-            return diagnostic;
+            return diagnostic.Location.GetMappedLineSpan().HasMappedPath;
         }
+        // On build time, if the diagnostic has a mapped location, we do the mapping ourselves and raise there.
+        else if (GeneratedCodeRecognizer.IsBuildTimeRazorGeneratedFile(diagnostic.Location.SourceTree))
+        {
+            if (diagnostic.Location.GetMappedLineSpan().HasMappedPath)
+            {
+                // we want to map the locations of razor files exclusively during compile time, and not design time (IDE).
+                // The reason is that for IDE, the correct way to raise issues is directly on the generated files.
+                // source: https://github.com/dotnet/razor/issues/9308#issuecomment-1883869224
+                diagnostic = MapDiagnostic(diagnostic);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        // If it is neither a compile nor a design time generated file, it is a normal file.
+        else
+        {
+            return true;
+        }
+    }
 
+    private static Diagnostic MapDiagnostic(Diagnostic diagnostic)
+    {
         var mappedLocation = diagnostic.Location.EnsureMappedLocation();
 
-        var descriptor = new DiagnosticDescriptor(diagnostic.Descriptor.Id,
+        var descriptor = new DiagnosticDescriptor(
+            diagnostic.Descriptor.Id,
             diagnostic.Descriptor.Title,
             diagnostic.GetMessage(),
             diagnostic.Descriptor.Category,

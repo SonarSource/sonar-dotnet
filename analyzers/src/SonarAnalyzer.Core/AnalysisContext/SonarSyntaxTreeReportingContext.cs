@@ -49,7 +49,6 @@ public readonly record struct SonarSyntaxTreeReportingContext(SonarAnalysisConte
     {
         var @this = this;
         IssueReporter.ReportIssueCore(
-            Compilation,
             x => @this.HasMatchingScope(x),
             CreateReportingContext,
             diagnostic);

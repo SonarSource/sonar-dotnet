@@ -77,7 +77,6 @@ public readonly record struct SonarCompilationReportingContext(SonarAnalysisCont
         {
             var @this = this;
             IssueReporter.ReportIssueCore(
-                Compilation,
                 x => @this.HasMatchingScope(x),
                 CreateReportingContext,
                 diagnostic);

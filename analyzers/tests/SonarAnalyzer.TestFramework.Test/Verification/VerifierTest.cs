@@ -206,10 +206,10 @@ public class VerifierTest
     [DataTestMethod]
     [DataRow("Dummy.razor")]
     [DataRow("Dummy.cshtml")]
-    public void Verify_RazorAnalysisInSLAndNugetContext_DoesNotRaise(string path) =>
+    public void Verify_RazorAnalysisInSLAndNugetContext(string path) =>
         DummyWithLocation.AddPaths(path)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Unknown))
-            .VerifyNoIssues();
+            .Verify();
 
     [TestMethod]
     public void Compile_Razor_DefaultFramework()

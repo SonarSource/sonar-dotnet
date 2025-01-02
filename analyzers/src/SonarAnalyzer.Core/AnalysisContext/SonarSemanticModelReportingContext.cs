@@ -50,7 +50,6 @@ public readonly record struct SonarSemanticModelReportingContext(SonarAnalysisCo
     {
         var @this = this;
         IssueReporter.ReportIssueCore(
-            Compilation,
             x => @this.HasMatchingScope(x),
             CreateReportingContext,
             diagnostic);
