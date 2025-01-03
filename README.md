@@ -140,10 +140,10 @@ Then, update the projects to include this additional file:
 
 ### Build configuration
 
-* [VM Images repository](https://github.com/SonarSource/re-ci-images)
-* [Provisioning repository](https://github.com/SonarSource/dotnet-infra/blob/main/src/dotnet_infra/constructs/asg.py)
-* [Azure Pipelines](https://sonarsource.visualstudio.com/DotNetTeam%20Project/_build?definitionId=77&_a=summary)
-* [Peachee configuration](https://github.com/SonarSource/peachee-languages/tree/dotnet)
+* [VM Images repository](https://github.com/SonarSource/dotnet-ci-images)
+* [Provisioning repository](https://github.com/SonarSource/dotnet-infra/blob/main/cdk.context.json)
+* [Azure Pipelines](https://dev.azure.com/sonarsource/Sonar%20.NET%20Enterprise/_build?definitionId=152&_a=summary)
+* [Peachee configuration](https://github.com/SonarSource/peachee-dotnet/tree/dotnet)
 
 ## Security Issues
 
