@@ -449,3 +449,31 @@ namespace ReproMethodGroups
         }
     }
 }
+
+namespace ReproCaptureInLocalFunction
+{
+    internal static class Test
+    {
+        // https://community.sonarsource.com/t/132900
+        private static string CaptureInSwitchExression(string currentUnit) // Noncompliant FP
+        {
+            return GetLongUnit();
+
+            string GetLongUnit()
+            {
+                return currentUnit switch
+                {
+                    "M" => "Meters",
+                    _ => "Yards"
+                };
+            }
+        }
+
+        private static string CaptureSimple(string text) // Compliant
+        {
+            return UpperCase();
+
+            string UpperCase() => text.ToUpper();
+        }
+    }
+}
