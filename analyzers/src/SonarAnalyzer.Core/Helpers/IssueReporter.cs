@@ -14,6 +14,8 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using SonarAnalyzer.CFG.Common;
+
 namespace SonarAnalyzer.Helpers;
 
 public static class IssueReporter
@@ -29,6 +31,10 @@ public static class IssueReporter
         "S1117",
         "S1481",
         "S1871");
+
+    // Minimum supported version for Razor IDE is Visual Studio 17.9/Roslyn 4.9.2
+    // https://learn.microsoft.com/en-us/visualstudio/extensibility/roslyn-version-support?view=vs-2022
+    private static Version minimumDesignTimeRoslynVersion = new("4.9.2");
 
     public static void ReportIssueCore(
                     Compilation compilation,
@@ -88,13 +94,22 @@ public static class IssueReporter
         }
     }
 
+    internal static void SetMinimumDesignTimeRoslynVersion(Version version) =>
+     minimumDesignTimeRoslynVersion = version;
+
+    internal static Version GetMinimumDesignTimeRoslynVersion() =>
+        minimumDesignTimeRoslynVersion;
+
     private static bool ShouldRaiseOnRazorFile(ref Diagnostic diagnostic)
     {
         // On design time, we only raise on generated .ide.g.cs files if the diagnostic has a mapped location.
         if (GeneratedCodeRecognizer.IsDesignTimeRazorGeneratedFile(diagnostic.Location.SourceTree))
         {
             return diagnostic.Location.GetMappedLineSpan().HasMappedPath
-                && !ExcludedFromDesignTimeRuleIds.Contains(diagnostic.Id);
+                && !ExcludedFromDesignTimeRuleIds.Contains(diagnostic.Id)
+                // We only want to raise on design time generated files if the Visual studio version is >= 17.9 which we infer from the Roslyn version
+                // https://learn.microsoft.com/en-us/visualstudio/extensibility/roslyn-version-support?view=vs-2022
+                && !RoslynVersion.IsVersionLessThan(minimumDesignTimeRoslynVersion);
         }
         // On build time, if the diagnostic has a mapped location, we do the mapping ourselves and raise there.
         else if (GeneratedCodeRecognizer.IsBuildTimeRazorGeneratedFile(diagnostic.Location.SourceTree))

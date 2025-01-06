@@ -25,5 +25,11 @@ public static class RoslynVersion
         !IsVersionLessThan(minimalVersion);
 
     public static bool IsVersionLessThan(int minimalVersion = MinimalSupportedMajorVersion) =>
-        typeof(SemanticModel).Assembly.GetName().Version.Major < minimalVersion;
+        CurrentVersion().Major < minimalVersion;
+
+    public static bool IsVersionLessThan(Version version) =>
+        CurrentVersion() < version;
+
+    private static Version CurrentVersion() =>
+        typeof(SemanticModel).Assembly.GetName().Version;
 }

@@ -24,6 +24,7 @@ namespace SonarAnalyzer.Core.Test.Common;
 [TestClass]
 public class IssueReporterTest
 {
+    private readonly Version defaultVersion = new Version("4.9.2");
     private readonly DummyDiagnosticReporter reporter = new();
 
     [DataTestMethod]
@@ -60,15 +61,64 @@ public class IssueReporterTest
         reporter.LastDiagnostic.Should().BeNull();
     }
 
-    private Diagnostic ReportDiagnostic(string filePath, bool hasMappedPath, string diagnosticId = "id")
+    [TestMethod]
+    public void ReportIssueCore_DesignTimeDiagnostic_RoslynVersion_1000_0_0()
     {
+        ReportDiagnostic(@"C:\SonarSource\SomeFile.razor.-6NXeWT5Akt4vxdz.ide.g.cs", hasMappedPath: true, roslynVersion: new Version(1000, 0, 0));
+        reporter.Counter.Should().Be(0);
+        reporter.LastDiagnostic.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void ReportIssueCore_DesignTimeDiagnostic_RoslynVersion_Greater_Than_Current()
+    {
+        Version current = new(typeof(SemanticModel).Assembly.GetName().Version.ToString());
+        Version greaterThanCurrent = new(current.Major, current.Minor, current.Build + 1);
+
+        ReportDiagnostic(@"C:\SonarSource\SomeFile.razor.-6NXeWT5Akt4vxdz.ide.g.cs", hasMappedPath: true, roslynVersion: greaterThanCurrent);
+        reporter.Counter.Should().Be(0);
+        reporter.LastDiagnostic.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void ReportIssueCore_DesignTimeDiagnostic_RoslynVersion_Less_Than_Current()
+    {
+        var lessthanCurrent = LessThanCurrent();
+
+        var diagnostic = ReportDiagnostic(@"C:\SonarSource\SomeFile.razor.-6NXeWT5Akt4vxdz.ide.g.cs", hasMappedPath: true, roslynVersion: lessthanCurrent);
+        reporter.Counter.Should().Be(1);
+        reporter.LastDiagnostic.Should().Be(diagnostic);
+
+        static Version LessThanCurrent()
+        {
+            var roslynVersion = new Version(typeof(SemanticModel).Assembly.GetName().Version.ToString());
+            return roslynVersion.Build switch
+            {
+                > 0 => new Version(roslynVersion.Major, roslynVersion.Minor, roslynVersion.Build - 1),
+                _ when roslynVersion.Minor > 0 => new Version(roslynVersion.Major, roslynVersion.Minor - 1),
+                _ => new Version(roslynVersion.Major - 1, 99, 99),
+            };
+        }
+    }
+
+    [TestMethod]
+    public void ReportIssueCore_MinimumRoslyVersion_Is_4_9_2() =>
+        Assert.AreEqual(defaultVersion, IssueReporter.GetMinimumDesignTimeRoslynVersion());
+
+    private Diagnostic ReportDiagnostic(string filePath, bool hasMappedPath, string diagnosticId = "id", Version roslynVersion = null)
+    {
+        roslynVersion ??= defaultVersion;
         var tree = GetTree(filePath);
         var diagnostic = GetDiagnostic(diagnosticId, tree, hasMappedPath);
+
+        IssueReporter.SetMinimumDesignTimeRoslynVersion(roslynVersion);
 
         IssueReporter.ReportIssueCore(
             x => true,
             x => new DummyReportingContext(reporter, x, tree),
             diagnostic);
+
+        IssueReporter.SetMinimumDesignTimeRoslynVersion(defaultVersion);
 
         return diagnostic;
     }
