@@ -38,6 +38,7 @@ public class IssueReporterTest
     [DataRow("S1117")]
     [DataRow("S1481")]
     [DataRow("S1871")]
+    [DataRow("S108")]
     public void ReportIssueCore_DesignTimeDiagnostic_ExcludedRule(string diagnosticId)
     {
         ReportDiagnostic(@"C:\SonarSource\SomeFile.razor.-6NXeWT5Akt4vxdz.ide.g.cs", true, diagnosticId);

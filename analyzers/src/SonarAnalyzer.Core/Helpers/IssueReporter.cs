@@ -21,6 +21,7 @@ namespace SonarAnalyzer.Helpers;
 public static class IssueReporter
 {
     private static readonly ImmutableHashSet<string> ExcludedFromDesignTimeRuleIds = ImmutableHashSet.Create(
+        "S108",
         "S1481",
         "S927",
         "S4487",
