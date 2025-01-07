@@ -18,6 +18,8 @@ variables:
     value: '$(Build.SourcesDirectory)\coverage'
   - name: UnitTestExclusionsPattern
     value: 'analyzers/tests/SonarAnalyzer.Test/TestCases/**/*'
+  - name: CpdExclusionsPattern
+    value: 'analyzers/rspec/**'
 
 resources:
   repositories:
@@ -77,6 +79,7 @@ stages:
           sonar.analysis.sha1=$(System.PullRequest.SourceCommitId)
           sonar.analysis.prNumber=$(System.PullRequest.PullRequestNumber)
           sonar.analysis.repository=$(Build.Repository.ID)
+          sonar.cpd.exclusions=$(CpdExclusionsPattern)
 
     - task: SonarCloudPrepare@3
       displayName: '.NET Code Analysis - Begin (master or branch)'
@@ -97,6 +100,7 @@ stages:
           sonar.analysis.pipeline=$(Build.BuildId)
           sonar.analysis.sha1=$(Build.SourceVersion)
           sonar.analysis.repository=$(Build.Repository.ID)
+          sonar.cpd.exclusions=$(CpdExclusionsPattern)
 
     - powershell: |
         $ProjectNameToken = '$(ProjectName)'  # Workaround for escaping difficulties: Azure DevOps doesn't have ProjectName, so it will not replace it. We need to pass it like that into AltCover via powershell.
