@@ -102,17 +102,8 @@ public static class IssueReporter
 
     private static bool ShouldRaiseOnRazorFile(ref Diagnostic diagnostic)
     {
-        // On design time, we only raise on generated .ide.g.cs files if the diagnostic has a mapped location.
-        if (GeneratedCodeRecognizer.IsDesignTimeRazorGeneratedFile(diagnostic.Location.SourceTree))
-        {
-            return diagnostic.Location.GetMappedLineSpan().HasMappedPath
-                && !ExcludedFromDesignTimeRuleIds.Contains(diagnostic.Id)
-                // We only want to raise on design time generated files if the Visual studio version is >= 17.9 which we infer from the Roslyn version
-                // https://learn.microsoft.com/en-us/visualstudio/extensibility/roslyn-version-support?view=vs-2022
-                && !RoslynVersion.IsVersionLessThan(minimumDesignTimeRoslynVersion);
-        }
         // On build time, if the diagnostic has a mapped location, we do the mapping ourselves and raise there.
-        else if (GeneratedCodeRecognizer.IsBuildTimeRazorGeneratedFile(diagnostic.Location.SourceTree))
+        if (GeneratedCodeRecognizer.IsBuildTimeRazorGeneratedFile(diagnostic.Location.SourceTree))
         {
             if (diagnostic.Location.GetMappedLineSpan().HasMappedPath)
             {
@@ -127,7 +118,14 @@ public static class IssueReporter
                 return false;
             }
         }
-        // If it is neither a compile nor a design time generated file, it is a normal file.
+        // On design time, we only raise on generated .ide.g.cs files if the diagnostic has a mapped location.
+        else if (GeneratedCodeRecognizer.IsDesignTimeRazorGeneratedFile(diagnostic.Location.SourceTree))
+        {
+            return diagnostic.Location.GetMappedLineSpan().HasMappedPath
+                && !ExcludedFromDesignTimeRuleIds.Contains(diagnostic.Id)
+                && !RoslynVersion.IsVersionLessThan(minimumDesignTimeRoslynVersion);
+        }
+        // If it is not a build/design-time generated file, it is a normal file.
         else
         {
             return true;

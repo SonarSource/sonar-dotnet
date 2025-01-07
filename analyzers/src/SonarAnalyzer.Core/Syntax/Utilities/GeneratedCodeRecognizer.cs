@@ -42,9 +42,21 @@ public abstract class GeneratedCodeRecognizer
         "CompilerGenerated",
         "CompilerGeneratedAttribute");
 
-    private static readonly Regex RazorPattern = new(@".*razor(?!.cshtml)(\.[-\w]*)?(\.ide)?\.g\.cs$", RegexOptions.Compiled | RegexOptions.IgnoreCase, RegexConstants.DefaultTimeout);
+    private static readonly ImmutableArray<string> GeneratedCshtmlSuffixes = ImmutableArray.Create(
+        "cshtml.g.cs",
+        "cshtml.ide.g.cs",
+        "cshtml__virtual.cs");
 
-    private static readonly Regex CshtmlPattern = new(@".*cshtml(?!.razor)(\.[-\w]*)?(\.ide)?\.g\.cs$", RegexOptions.Compiled | RegexOptions.IgnoreCase, RegexConstants.DefaultTimeout);
+    private static readonly ImmutableArray<string> GeneratedRazorSuffixes = ImmutableArray.Create(
+        "razor.g.cs",
+        "razor.ide.g.cs",
+        "razor__virtual.cs");
+
+    // Matches SomeFile.cshtml.-6NXeWT5Akt4vxdz.ide.g.cs
+    private static readonly Regex CshtmlPattern = new(@".*cshtml\.[-\w]*\.ide\.g\.cs$", RegexOptions.Compiled | RegexOptions.IgnoreCase, RegexConstants.DefaultTimeout);
+
+    // Matches SomeFile.razor.-6NXeWT5Akt4vxdz.ide.g.cs
+    private static readonly Regex RazorPattern = new(@".*razor\.[-\w]*\.ide\.g\.cs$", RegexOptions.Compiled | RegexOptions.IgnoreCase, RegexConstants.DefaultTimeout);
 
     protected abstract bool IsTriviaComment(SyntaxTrivia trivia);
     protected abstract string GetAttributeName(SyntaxNode node);
@@ -65,19 +77,20 @@ public abstract class GeneratedCodeRecognizer
     /// </summary>
     public static bool IsDesignTimeRazorGeneratedFile(SyntaxTree tree) =>
         tree is not null
-        && tree.EndsWith("ide.g.cs")
+        && (tree.EndsWith("ide.g.cs")           // Visual Studio
+            || tree.EndsWith("__virtual.cs"))   // VS Code
         && IsRazorGeneratedFile(tree);
 
     public static bool IsRazorGeneratedFile(SyntaxTree tree) =>
         tree is not null && (IsRazor(tree) || IsCshtml(tree));
 
     public static bool IsRazor(SyntaxTree tree) =>
-        tree.EndsWith(".g.cs")
-        && RazorPattern.SafeIsMatch(tree.FilePath);
+        GeneratedRazorSuffixes.Any(tree.EndsWith)
+        || RazorPattern.SafeIsMatch(tree.FilePath);
 
     public static bool IsCshtml(SyntaxTree tree) =>
-        tree.EndsWith(".g.cs")
-        && CshtmlPattern.SafeIsMatch(tree.FilePath);
+        GeneratedCshtmlSuffixes.Any(tree.EndsWith)
+        || CshtmlPattern.SafeIsMatch(tree.FilePath);
 
     private bool HasGeneratedCommentOrAttribute(SyntaxTree tree)
     {

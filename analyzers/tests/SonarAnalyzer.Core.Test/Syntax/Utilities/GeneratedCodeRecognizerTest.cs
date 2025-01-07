@@ -61,6 +61,8 @@ public class GeneratedCodeRecognizerTest
     [DataRow(@"C:\SonarSource\SomeFile.razor.-6NXeWT5Akt4vxdz.ide.g.cs")]
     [DataRow(@"SomeFile_razor.ide.g.cs")]
     [DataRow(@"SomeFile.razor.-6NXeWT5Akt4vxdz.ide.g.cs")]
+    [DataRow(@"SomeFile.razor__virtual.cs")]
+    [DataRow(@"virtualcsharp-razor:///c:/dev/Project/Views/Home/Index.razor__viRtUaL.cs")]
     public void IsRazorGeneratedFile_RazorGeneratedFiles_Razor_ReturnsTrue(string path)
     {
         var tree = Substitute.For<SyntaxTree>();
@@ -79,6 +81,8 @@ public class GeneratedCodeRecognizerTest
     [DataRow(@"C:\SonarSource\SomeFile_cshtml.ide.g.cs")]
     [DataRow(@"C:\SonarSource\SomeFile.cshtml.-6NXeWT5Akt4vxdz.ide.g.cs")]
     [DataRow(@"SomeFile.cshtml.-6NXeWT5Akt4vxdz.ide.g.cs")]
+    [DataRow(@"SomeFile.cshtml__virtual.cs")]
+    [DataRow(@"virtualcsharp-razor:///c:/dev/Project/Views/Home/Index.cshtml__viRtUaL.cs")]
     public void IsRazorGeneratedFile_RazorGeneratedFiles_Cshtml_ReturnsTrue(string path)
     {
         var tree = Substitute.For<SyntaxTree>();
@@ -94,6 +98,7 @@ public class GeneratedCodeRecognizerTest
     [DataRow(@"C:\SonarSource\SomeFile_razor.g.cs.randomEnding")]
     [DataRow(@"C:\SonarSource\SomeFile_cshtml.g.cs.randomEnding")]
     [DataRow(@"C:\SonarSource\SomeFile_razor.g.ß")]
+    [DataRow(@"SomeFile.__virtual.cs")]
     public void IsRazorGeneratedFile_NonRazorGeneratedFiles_ReturnsFalse(string path)
     {
         var tree = Substitute.For<SyntaxTree>();
@@ -129,6 +134,10 @@ public class GeneratedCodeRecognizerTest
     [DataRow(@"C:\SonarSource\SomeFile.csHTml.-6NXeWT5Akt4vxdz.ide.g.cs")]
     [DataRow(@"SomeFile_cshtml.ide.g.cs")]
     [DataRow(@"SomeFile.CSHTmL.-6NXeWT5Akt4vxdz.ide.g.cs")]
+    [DataRow(@"SomeFile.razor__virtual.cs")]
+    [DataRow(@"SomeFile.cshtml__virtual.cs")]
+    [DataRow(@"virtualcsharp-razor:///c:/dev/Project/Views/Home/Index.razor__viRtUaL.cs")]
+    [DataRow(@"virtualcsharp-razor:///c:/dev/Project/Views/Home/Index.cshtml__VIRTUAL.cs")]
     public void IsDesignTimeRazorGeneratedFile_ReturnsTrue(string path)
     {
         var tree = Substitute.For<SyntaxTree>();
