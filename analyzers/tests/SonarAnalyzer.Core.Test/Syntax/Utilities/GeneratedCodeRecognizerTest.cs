@@ -99,6 +99,7 @@ public class GeneratedCodeRecognizerTest
     [DataRow(@"C:\SonarSource\SomeFile_cshtml.g.cs.randomEnding")]
     [DataRow(@"C:\SonarSource\SomeFile_razor.g.ß")]
     [DataRow(@"SomeFile.__virtual.cs")]
+    [DataRow(@"SomeFile.php.-ABC.ide.g.cs")]
     public void IsRazorGeneratedFile_NonRazorGeneratedFiles_ReturnsFalse(string path)
     {
         var tree = Substitute.For<SyntaxTree>();
