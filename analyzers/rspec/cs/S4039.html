@@ -1,11 +1,18 @@
 <h2>Why is this an issue?</h2>
-<p>When a base type explicitly implements a public interface method, that method is only accessible in derived types through a reference to the
-current instance (namely <code>this</code>). If the derived type explicitly overrides that interface method, the base implementation becomes
-inaccessible.</p>
-<p>This rule raises an issue when an unsealed, externally visible type provides an explicit method implementation of a <code>public interface</code>
-and does not provide an alternate, externally visible method with the same name.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>When a base type explicitly implements a public interface method, property or event, that member is only accessible in derived types through a
+reference to the current instance (namely <code>this</code>). If the derived type explicitly overrides that interface member, the base implementation
+becomes inaccessible.</p>
+<p>This rule raises an issue when an unsealed, externally visible type provides an explicit member implementation of an <code>interface</code> and
+does not provide an alternate, externally visible member with the same name.</p>
+<h3>Exceptions</h3>
+<p>This rule does not report a violation for an explicit implementation of <code>IDisposable.Dispose</code> when an externally visible
+<code>Close()</code> or <code>System.IDisposable.Dispose(Boolean)</code> method is provided.</p>
+<h2>How to fix it</h2>
+<p>Make the class sealed, change the class member to a non-explicit declaration, or provide a new class member exposing the functionality of the
+explicit interface member.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 public interface IMyInterface
 {
     void MyMethod();
@@ -17,24 +24,10 @@ public class Foo : IMyInterface
     {
         MyMethod();
     }
-
-    void MyMethod()
-    {
-        // Do something ...
-    }
-}
-
-public class Bar : Foo, IMyInterface
-{
-    public void MyMethod()
-    {
-        // Can't access base.MyMethod()
-        // ((IMyInterface)this).MyMethod() would be a recursive call
-    }
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 public interface IMyInterface
 {
     void MyMethod();
@@ -47,22 +40,18 @@ public class Foo : IMyInterface
         MyMethod();
     }
 
-    protected void MyMethod() // or public
+    // This method can be public or protected
+    protected void MyMethod()
     {
         // Do something ...
     }
 }
-
-public class Bar : Foo, IMyInterface
-{
-    public void MyMethod()
-    {
-        // Do something
-        base.MyMethod();
-    }
-}
 </pre>
-<h3>Exceptions</h3>
-<p>This rule does not report a violation for an explicit implementation of <code>IDisposable.Dispose</code> when an externally visible
-<code>Close()</code> or <code>System.IDisposable.Dispose(Boolean)</code> method is provided.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/explicit-interface-implementation">Explicit Interface
+  Implementation</a> </li>
+</ul>
 
