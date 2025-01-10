@@ -1,5 +1,5 @@
 C# Analyzer Plugin and VB.NET Analyzer Plugin
-Copyright (C) 2014-2024 SonarSource SA
+Copyright (C) 2014-2025 SonarSource SA
 mailto:info AT sonarsource DOT com
 
 This product includes software developed at

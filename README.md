@@ -151,6 +151,6 @@ If you believe you have discovered a security vulnerability in Sonar's products,
 
 ## License
 
-Copyright 2014-2024 SonarSource.
+Copyright 2014-2025 SonarSource.
 
 Licensed under the [SONAR Source-Available License v1.0](https://www.sonarsource.com/license/ssal/)

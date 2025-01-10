@@ -1,6 +1,6 @@
 ﻿/*
 * SonarAnalyzer for .NET
-* Copyright (C) 2014-2024 SonarSource SA
+* Copyright (C) 2014-2025 SonarSource SA
 * mailto:info AT sonarsource DOT com
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.

@@ -17,7 +17,7 @@
     <Version>$(ShortVersion)</Version>
     <FileVersion>$(FullVersion)</FileVersion>
     <InformationalVersion>Version:$(FullVersion) Branch:$(Branch) Sha1:$(Sha1)</InformationalVersion>
-    <Copyright>Copyright © 2015-2024 SonarSource SA</Copyright>
+    <Copyright>Copyright © 2015-2025 SonarSource SA</Copyright>
     <Product>SonarAnalyzer</Product>
     <Trademark>SonarLint, SonarQube, SonarSource</Trademark>
     <NeutralLanguage>en</NeutralLanguage>
