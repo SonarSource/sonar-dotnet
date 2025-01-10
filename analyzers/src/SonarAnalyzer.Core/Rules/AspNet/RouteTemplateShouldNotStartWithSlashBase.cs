@@ -24,6 +24,8 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind>() : 
     private const string DiagnosticId = "S6931";
     private const string MessageOnlyActions = "Change the paths of the actions of this controller to be relative and adapt the controller route accordingly.";
     private const string MessageActionsAndController = "Change the paths of the actions of this controller to be relative and add a controller route with the common prefix.";
+    private const string SecondaryMessageOnlyActions = "Change this path to be relative to the controller route defined on class level.";
+    private const string SecondaryMessageActionsAndController = "Add a controller route with a common prefix and change this path to be relative it.";
 
     protected override string MessageFormat => "{0}";
 
@@ -71,7 +73,11 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind>() : 
             ? MessageOnlyActions
             : MessageActionsAndController;
 
-        var secondaryLocations = actions.SelectMany(x => x.RouteParameters.Keys.ToSecondary());
+        var secondaryIssueMessage = issueMessage == MessageOnlyActions
+            ? SecondaryMessageOnlyActions
+            : SecondaryMessageActionsAndController;
+
+        var secondaryLocations = actions.SelectMany(x => x.RouteParameters.Keys.ToSecondary(secondaryIssueMessage));
         foreach (var identifier in controllerSymbol.DeclaringSyntaxReferences.Select(x => Language.Syntax.NodeIdentifier(x.GetSyntax())).WhereNotNull())
         {
             context.ReportIssue(Language.GeneratedCodeRecognizer, Rule, identifier.GetLocation(), secondaryLocations, issueMessage);
