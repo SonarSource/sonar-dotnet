@@ -100,9 +100,9 @@ public class SingleLine //
 
     void Method()
     {
-        // Noncompliant@+4
-        // Secondary@+4
-        // Secondary@+4
+        // Noncompliant@+4 {{Remove this empty comment}}
+        // Secondary@+4    {{Remove this empty comment}}
+        // Secondary@+4    {{Remove this empty comment}}
 
         //
         //
