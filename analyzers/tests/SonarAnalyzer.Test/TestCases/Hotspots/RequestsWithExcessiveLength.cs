@@ -154,7 +154,7 @@ namespace Tests.Diagnostics
         }
 
         [HttpPost]
-        [RequestSizeLimit(1000000000)] // Secondary [1]
+        [RequestSizeLimit(1000000000)] // Secondary [1] {{Make sure the content length limit is safe here.}}
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         [RequestFormLimits(MultipartBodyLengthLimit = 1000000000)] // Noncompliant [1]
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

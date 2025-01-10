@@ -43,7 +43,7 @@ public class MyController : Controller
     [RequestFormLimits(MultipartBodyLengthLimit = 8_388_609)] // Noncompliant
     public ActionResult RequestFormLimitsAboveLimit()
     {
-        [RequestSizeLimit(8_388_609)] // Secondary [1]
+        [RequestSizeLimit(8_388_609)] // Secondary [1] {{Make sure the content length limit is safe here.}}
         [RequestFormLimits(MultipartBodyLengthLimit = 8_388_609)] // Noncompliant [1]
         ActionResult LocalFunction()
         {

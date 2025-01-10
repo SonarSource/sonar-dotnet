@@ -137,7 +137,7 @@ Namespace Tests.TestCases
 
         <HttpPost>
         <RequestFormLimits(MultipartBodyLengthLimit:=1000000000)> ' Noncompliant [1]
-        <RequestSizeLimit(1000000000)> ' Secondary [1]
+        <RequestSizeLimit(1000000000)> ' Secondary [1] {{Make sure the content length limit is safe here.}}
         Public Function RequestSizeLimitAndFormLimits() As ActionResult
             Return Nothing
         End Function
