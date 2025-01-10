@@ -59,7 +59,7 @@ public sealed class ReturnEmptyCollectionInsteadOfNull : SonarDiagnosticAnalyzer
         {
             if (nullOrDefaultLiterals.Count > 0 && IsReturningCollection(context))
             {
-                context.ReportIssue(Rule, nullOrDefaultLiterals[0], nullOrDefaultLiterals.Skip(1).ToSecondary());
+                context.ReportIssue(Rule, nullOrDefaultLiterals[0], nullOrDefaultLiterals.Skip(1).ToSecondary(MessageFormat));
             }
         }
     }
