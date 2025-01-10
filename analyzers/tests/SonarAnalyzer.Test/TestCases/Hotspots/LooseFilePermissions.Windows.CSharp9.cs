@@ -10,14 +10,14 @@ fileSecurity.AddAccessRule(new ("User", FileSystemRights.ListDirectory, AccessCo
 fileSecurity.AddAccessRule(new ("User", FileSystemRights.ListDirectory, AccessControlType.Deny));
 fileSecurity.AddAccessRule(new ("Everyone", FileSystemRights.ListDirectory, AccessControlType.Deny));
 fileSecurity.RemoveAccessRule(new ("Everyone", FileSystemRights.ListDirectory, AccessControlType.Allow));
-fileSecurity.SetAccessRule(new ("Everyone", FileSystemRights.Write, AccessControlType.Allow)); // Noncompliant
-fileSecurity.AddAccessRule(new ("Everyone", FileSystemRights.Write, AccessControlType.Allow)); // Noncompliant
+fileSecurity.SetAccessRule(new ("Everyone", FileSystemRights.Write, AccessControlType.Allow)); // Noncompliant {{Make sure this permission is safe.}}
+fileSecurity.AddAccessRule(new ("Everyone", FileSystemRights.Write, AccessControlType.Allow)); // Noncompliant {{Make sure this permission is safe.}}
 
 void InVariable(FileSecurity fileSecurity)
 {
     FileSystemAccessRule unsafeAccessRule = new ("Everyone", FileSystemRights.FullControl, AccessControlType.Allow);
-    //                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary
-    //                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary@-1
+    //                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary  {{Make sure this permission is safe.}}
+    //                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary@-1  {{Make sure this permission is safe.}}
 
     fileSecurity.RemoveAccessRule(unsafeAccessRule);
 

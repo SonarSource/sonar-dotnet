@@ -14,11 +14,10 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Rules;
+
+public static class LooseFilePermissionsConfig
 {
-    public static class LooseFilePermissionsConfig
-    {
-        public static readonly ImmutableHashSet<string> WeakFileAccessPermissions =
-            ImmutableHashSet.Create("AllPermissions", "DefaultPermissions", "OtherExecute", "OtherWrite", "OtherRead", "OtherReadWriteExecute");
-    }
+    public static readonly ImmutableHashSet<string> WeakFileAccessPermissions =
+        ImmutableHashSet.Create("AllPermissions", "DefaultPermissions", "OtherExecute", "OtherWrite", "OtherRead", "OtherReadWriteExecute");
 }
