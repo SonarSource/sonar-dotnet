@@ -36,7 +36,7 @@ namespace Tests.Diagnostics
         None = 0,
         Red = 1,
         Orange = 3,
-//      ^^^^^^^^^^ Secondary
+//      ^^^^^^^^^^ Secondary {{Enum value is not a power of two.}}
         Yellow = 4
     }
 
