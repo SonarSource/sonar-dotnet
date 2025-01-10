@@ -21,6 +21,8 @@ public static class SyntaxTokenExtensions
     public static int Line(this SyntaxToken token) =>
         token.GetLocation().StartLine();
 
-    public static SecondaryLocation ToSecondaryLocation(this SyntaxToken token, string message = null) =>
-        new(token.GetLocation(), message);
+    public static SecondaryLocation ToSecondaryLocation(this SyntaxToken token, string message = null, params string[] messageArgs) =>
+        message is not null && messageArgs?.Length > 0
+            ? new(token.GetLocation(), string.Format(message, messageArgs))
+            : new(token.GetLocation(), message);
 }

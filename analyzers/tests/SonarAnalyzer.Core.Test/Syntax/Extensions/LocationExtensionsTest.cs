@@ -86,4 +86,47 @@ public class LocationExtensionsTest
         result.GetLineSpan().Span.End.Line.Should().Be(0);
         result.GetLineSpan().Span.End.Character.Should().Be(19);
     }
+
+    [TestMethod]
+    public void ToSecondary_NullMessage()
+    {
+        var code = "public class C {}";
+        var location = Location.Create(CSharpSyntaxTree.ParseText(code), TextSpan.FromBounds(13, 14));
+
+        var secondaryLocation = location.ToSecondary(null);
+
+        secondaryLocation.Should().NotBeNull();
+        secondaryLocation.Location.Should().Be(location);
+        secondaryLocation.Message.Should().BeNull();
+    }
+
+    [DataTestMethod]
+    [DataRow(null)]
+    [DataRow([])]
+    public void ToSecondary_MessageArgs(string[] messageArgs)
+    {
+        var code = "public class C {}";
+        var location = Location.Create(CSharpSyntaxTree.ParseText(code), TextSpan.FromBounds(13, 14));
+
+        var secondaryLocation = location.ToSecondary("Message", messageArgs);
+
+        secondaryLocation.Should().NotBeNull();
+        secondaryLocation.Location.Should().Be(location);
+        secondaryLocation.Message.Should().Be("Message");
+    }
+
+    [DataTestMethod]
+    [DataRow("Message {0}", "42")]
+    [DataRow("{1} Message {0} ", "42", "21")]
+    public void ToSecondary_MessageFormat(string format, params string[] messageArgs)
+    {
+        var code = "public class C {}";
+        var location = Location.Create(CSharpSyntaxTree.ParseText(code), TextSpan.FromBounds(13, 14));
+
+        var secondaryLocation = location.ToSecondary(format, messageArgs);
+
+        secondaryLocation.Should().NotBeNull();
+        secondaryLocation.Location.Should().Be(location);
+        secondaryLocation.Message.Should().Be(string.Format(format, messageArgs));
+    }
 }

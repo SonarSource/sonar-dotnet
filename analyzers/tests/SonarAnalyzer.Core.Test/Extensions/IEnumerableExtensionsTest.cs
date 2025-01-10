@@ -14,6 +14,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Text;
+
 #pragma warning disable SA1122 // Use string.Empty for empty strings
 
 namespace SonarAnalyzer.Core.Test.Extensions;
@@ -210,6 +213,174 @@ public class IEnumerableExtensionsTest
         };
         var result = collection.JoinAnd();
         result.Should().Be("System.IndexOutOfRangeException: IndexOutOfRangeMessage, System.InvalidOperationException: OperationMessage, and System.NotSupportedException: NotSupportedMessage");
+    }
+
+    [TestMethod]
+    public void ToSecondary_NullMessage()
+    {
+        var code = "public class C {}";
+        List<Location> locations =
+        [
+            Location.Create(CSharpSyntaxTree.ParseText(code), TextSpan.FromBounds(0, 6)),
+            Location.Create(CSharpSyntaxTree.ParseText(code), TextSpan.FromBounds(7, 12)),
+            Location.Create(CSharpSyntaxTree.ParseText(code), TextSpan.FromBounds(13, 14))
+        ];
+
+        var secondaryLocations = locations.ToSecondary(null);
+
+        secondaryLocations.Should().NotBeEmpty()
+            .And.HaveCount(3)
+            .And.AllSatisfy(x => x.Message.Should().BeNull());
+    }
+
+    [DataTestMethod]
+    [DataRow(null)]
+    [DataRow([])]
+    public void ToSecondary_MessageArgs(string[] messageArgs)
+    {
+        var code = "public class C {}";
+        List<Location> locations =
+        [
+            Location.Create(CSharpSyntaxTree.ParseText(code), TextSpan.FromBounds(0, 6)),
+            Location.Create(CSharpSyntaxTree.ParseText(code), TextSpan.FromBounds(7, 12)),
+            Location.Create(CSharpSyntaxTree.ParseText(code), TextSpan.FromBounds(13, 14))
+        ];
+
+        var secondaryLocations = locations.ToSecondary("Message", messageArgs);
+
+        secondaryLocations.Should().NotBeEmpty()
+            .And.HaveCount(3)
+            .And.AllSatisfy(x => x.Message.Should().Be("Message"));
+    }
+
+    [DataTestMethod]
+    [DataRow("Message {0}", "42")]
+    [DataRow("{1} Message {0} ", "42", "21")]
+    public void ToSecondary_MessageFormat(string format, params string[] messageArgs)
+    {
+        var code = "public class C {}";
+        List<Location> locations =
+        [
+            Location.Create(CSharpSyntaxTree.ParseText(code), TextSpan.FromBounds(0, 6)),
+            Location.Create(CSharpSyntaxTree.ParseText(code), TextSpan.FromBounds(7, 12)),
+            Location.Create(CSharpSyntaxTree.ParseText(code), TextSpan.FromBounds(13, 14))
+        ];
+
+        var secondaryLocations = locations.ToSecondary(format, messageArgs);
+
+        secondaryLocations.Should().NotBeEmpty()
+            .And.HaveCount(3)
+            .And.AllSatisfy(x => x.Message.Should().Be(string.Format(format, messageArgs)));
+    }
+
+    [TestMethod]
+    public void ToSecondarySecondary_SyntaxNode_NullMessage()
+    {
+        List<SyntaxNode> nodes =
+        [
+            TestCompiler.NodeBetweenMarkersCS("$$public$$ class C {}"),
+            TestCompiler.NodeBetweenMarkersCS("public $$class$$ C {}"),
+            TestCompiler.NodeBetweenMarkersCS("public class $$C$$ {}"),
+        ];
+
+        var secondaryLocations = nodes.ToSecondaryLocations(null);
+
+        secondaryLocations.Should().NotBeEmpty()
+            .And.HaveCount(3)
+            .And.AllSatisfy(x => x.Message.Should().BeNull());
+    }
+
+    [DataTestMethod]
+    [DataRow(null)]
+    [DataRow([])]
+    public void ToSecondarySecondary_SyntaxNode_MessageArgs(string[] messageArgs)
+    {
+        List<SyntaxNode> nodes =
+        [
+            TestCompiler.NodeBetweenMarkersCS("$$public$$ class C {}"),
+            TestCompiler.NodeBetweenMarkersCS("public $$class$$ C {}"),
+            TestCompiler.NodeBetweenMarkersCS("public class $$C$$ {}"),
+        ];
+
+        var secondaryLocations = nodes.ToSecondaryLocations("Message", messageArgs);
+
+        secondaryLocations.Should().NotBeEmpty()
+            .And.HaveCount(3)
+            .And.AllSatisfy(x => x.Message.Should().Be("Message"));
+    }
+
+    [DataTestMethod]
+    [DataRow("Message {0}", "42")]
+    [DataRow("{1} Message {0} ", "42", "21")]
+    public void ToSecondarySecondary_SyntaxNode_MessageFormat(string format, params string[] messageArgs)
+    {
+        List<SyntaxNode> nodes =
+        [
+            TestCompiler.NodeBetweenMarkersCS("$$public$$ class C {}"),
+            TestCompiler.NodeBetweenMarkersCS("public $$class$$ C {}"),
+            TestCompiler.NodeBetweenMarkersCS("public class $$C$$ {}"),
+        ];
+
+        var secondaryLocations = nodes.ToSecondaryLocations(format, messageArgs);
+
+        secondaryLocations.Should().NotBeEmpty()
+            .And.HaveCount(3)
+            .And.AllSatisfy(x => x.Message.Should().Be(string.Format(format, messageArgs)));
+    }
+
+    [TestMethod]
+    public void ToSecondarySecondary_SyntaxToken_NullMessage()
+    {
+        List<SyntaxToken> nodes =
+        [
+            TestCompiler.TokenBetweenMarkersCS("$$public$$ class C {}"),
+            TestCompiler.TokenBetweenMarkersCS("public $$class$$ C {}"),
+            TestCompiler.TokenBetweenMarkersCS("public class $$C$$ {}"),
+        ];
+
+        var secondaryLocations = nodes.ToSecondaryLocations(null);
+
+        secondaryLocations.Should().NotBeEmpty()
+            .And.HaveCount(3)
+            .And.AllSatisfy(x => x.Message.Should().BeNull());
+    }
+
+    [DataTestMethod]
+    [DataRow(null)]
+    [DataRow([])]
+    public void ToSecondarySecondary_SyntaxToken_MessageArgs(string[] messageArgs)
+    {
+        List<SyntaxToken> nodes =
+        [
+            TestCompiler.TokenBetweenMarkersCS("$$public$$ class C {}"),
+            TestCompiler.TokenBetweenMarkersCS("public $$class$$ C {}"),
+            TestCompiler.TokenBetweenMarkersCS("public class $$C$$ {}"),
+        ];
+
+        var secondaryLocations = nodes.ToSecondaryLocations("Message", messageArgs);
+
+        secondaryLocations.Should().NotBeEmpty()
+            .And.HaveCount(3)
+            .And.AllSatisfy(x => x.Message.Should().Be("Message"));
+    }
+
+    [DataTestMethod]
+    [DataRow("Message {0}", "42")]
+    [DataRow("{1} Message {0} ", "42", "21")]
+    public void ToSecondarySecondary_SyntaxToken_MessageFormat(string format, params string[] messageArgs)
+    {
+        List<SyntaxToken> nodes =
+        [
+            TestCompiler.TokenBetweenMarkersCS("$$public$$ class C {}"),
+            TestCompiler.TokenBetweenMarkersCS("public $$class$$ C {}"),
+            TestCompiler.TokenBetweenMarkersCS("public class $$C$$ {}"),
+        ];
+
+        var secondaryLocations = nodes.ToSecondaryLocations(format, messageArgs);
+
+        secondaryLocations.Should().NotBeEmpty()
+            .And.HaveCount(3)
+            .And.AllSatisfy(x => x.Message.Should().Be(string.Format(format, messageArgs)));
     }
 
     private struct StructType

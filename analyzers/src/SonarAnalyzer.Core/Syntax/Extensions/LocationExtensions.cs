@@ -44,6 +44,8 @@ public static class LocationExtensions
     public static bool IsValid(this Location location, Compilation compilation) =>
         location.Kind != LocationKind.SourceFile || compilation.ContainsSyntaxTree(location.SourceTree);
 
-    public static SecondaryLocation ToSecondary(this Location location, string message = null) =>
-        new(location, message);
+    public static SecondaryLocation ToSecondary(this Location location, string message = null, params string[] messageArgs) =>
+        message is not null && messageArgs?.Length > 0
+            ? new(location, string.Format(message, messageArgs))
+            : new(location, message);
 }

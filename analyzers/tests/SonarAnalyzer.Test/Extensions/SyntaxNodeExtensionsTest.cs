@@ -687,7 +687,7 @@ End Class";
                 }
             }
             """;
-        var node = NodeBetweenMarkers(code, AnalyzerLanguage.CSharp);
+        var node = TestCompiler.NodeBetweenMarkersCS(code);
         var parentConditional = MicrosoftExtensionsCS.GetParentConditionalAccessExpression(node);
         parentConditional.ToString().Should().Be(parent);
         parentConditional.Expression.ToString().Should().Be(parentExpression);
@@ -723,7 +723,7 @@ End Class";
                 End Function
             End Class
             """;
-        var node = NodeBetweenMarkers(code, AnalyzerLanguage.VisualBasic);
+        var node = TestCompiler.NodeBetweenMarkersVB(code);
         var parentConditional = SyntaxNodeExtensionsVisualBasic.GetParentConditionalAccessExpression(node);
         parentConditional.ToString().Should().Be(parent);
         parentConditional.Expression.ToString().Should().Be(parentExpression);
@@ -755,7 +755,7 @@ End Class";
                 }
             }
             """;
-        var node = NodeBetweenMarkers(code, AnalyzerLanguage.CSharp);
+        var node = TestCompiler.NodeBetweenMarkersCS(code);
         var parentConditional = MicrosoftExtensionsCS.GetRootConditionalAccessExpression(node);
         parentConditional.ToString().Should().Be(expression.Replace("$$", string.Empty));
     }
@@ -786,7 +786,7 @@ End Class";
                 }
             }
             """;
-        var node = NodeBetweenMarkers(code, AnalyzerLanguage.CSharp);
+        var node = TestCompiler.NodeBetweenMarkersCS(code);
         var argumentList = SyntaxNodeExtensionsCSharp.ArgumentList(node).Arguments;
         var argument = argumentList.Should().ContainSingle().Which;
         (argument is { Expression: SyntaxCS.LiteralExpressionSyntax { Token.ValueText: "1" } }).Should().BeTrue();
@@ -807,7 +807,7 @@ End Class";
             }
 
             """;
-        var node = NodeBetweenMarkers(code, AnalyzerLanguage.CSharp);
+        var node = TestCompiler.NodeBetweenMarkersCS(code);
         var argumentList = SyntaxNodeExtensionsCSharp.ArgumentList(node).Arguments;
         var argument = argumentList.Should().ContainSingle().Which;
         (argument is { Expression: SyntaxCS.LiteralExpressionSyntax { Token.ValueText: "1" } }).Should().BeTrue();
@@ -820,7 +820,7 @@ End Class";
             public class Base(int p);
             public class Derived(int p): $$Base(1)$$;
             """;
-        var node = NodeBetweenMarkers(code, AnalyzerLanguage.CSharp);
+        var node = TestCompiler.NodeBetweenMarkersCS(code);
         var argumentList = SyntaxNodeExtensionsCSharp.ArgumentList(node).Arguments;
         var argument = argumentList.Should().ContainSingle().Which;
         (argument is { Expression: SyntaxCS.LiteralExpressionSyntax { Token.ValueText: "1" } }).Should().BeTrue();
@@ -837,7 +837,7 @@ End Class";
                 }
             }
             """;
-        var node = NodeBetweenMarkers(code, AnalyzerLanguage.CSharp);
+        var node = TestCompiler.NodeBetweenMarkersCS(code);
         SyntaxNodeExtensionsCSharp.ArgumentList(node).Should().BeNull();
     }
 
@@ -857,7 +857,7 @@ End Class";
                 }
             }
             """;
-        var node = NodeBetweenMarkers(code, AnalyzerLanguage.CSharp);
+        var node = TestCompiler.NodeBetweenMarkersCS(code);
         var sut = () => SyntaxNodeExtensionsCSharp.ArgumentList(node);
         sut.Should().Throw<InvalidOperationException>();
     }
@@ -884,7 +884,7 @@ End Class";
                 End Sub
             End Class
             """;
-        var node = NodeBetweenMarkers(code, AnalyzerLanguage.VisualBasic, getInnermostNodeForTie: true);
+        var node = TestCompiler.NodeBetweenMarkersVB(code, getInnermostNodeForTie: true);
         var argumentList = SyntaxNodeExtensionsVisualBasic.ArgumentList(node);
         var argument = argumentList.Arguments.Should().ContainSingle().Which;
         (argument.GetExpression() is SyntaxVB.LiteralExpressionSyntax { Token.ValueText: "1" }).Should().BeTrue();
@@ -901,7 +901,7 @@ End Class";
                 End Sub
             End Class
             """;
-        var node = NodeBetweenMarkers(code, AnalyzerLanguage.VisualBasic, getInnermostNodeForTie: true);
+        var node = TestCompiler.NodeBetweenMarkersVB(code, getInnermostNodeForTie: true);
         var argumentList = SyntaxNodeExtensionsVisualBasic.ArgumentList(node);
         argumentList.Arguments.Should().SatisfyRespectively(
             x => (x.GetExpression() is SyntaxVB.IdentifierNameSyntax { Identifier.ValueText: "s" }).Should().BeTrue(),
@@ -916,7 +916,7 @@ End Class";
             Public Class C
             End Class
             """;
-        var node = NodeBetweenMarkers(code, AnalyzerLanguage.VisualBasic, getInnermostNodeForTie: true);
+        var node = TestCompiler.NodeBetweenMarkersVB(code, getInnermostNodeForTie: true);
         var argumentList = SyntaxNodeExtensionsVisualBasic.ArgumentList(node);
         var argument = argumentList.Arguments.Should().ContainSingle().Which;
         (argument.GetExpression() is SyntaxVB.LiteralExpressionSyntax { Token.ValueText: "1" }).Should().BeTrue();
@@ -936,7 +936,7 @@ End Class";
                 End Sub
             End Class
             """;
-        var node = NodeBetweenMarkers(code, AnalyzerLanguage.VisualBasic, getInnermostNodeForTie: true);
+        var node = TestCompiler.NodeBetweenMarkersVB(code, getInnermostNodeForTie: true);
         var argumentList = SyntaxNodeExtensionsVisualBasic.ArgumentList(node);
         var argument = argumentList.Arguments.Should().ContainSingle().Which;
         (argument.GetExpression() is SyntaxVB.LiteralExpressionSyntax { Token.ValueText: "1" }).Should().BeTrue();
@@ -952,7 +952,7 @@ End Class";
                 End Sub
             End Class
             """;
-        var node = NodeBetweenMarkers(code, AnalyzerLanguage.VisualBasic, getInnermostNodeForTie: false);
+        var node = TestCompiler.NodeBetweenMarkersVB(code, getInnermostNodeForTie: false);
         SyntaxNodeExtensionsVisualBasic.ArgumentList(node).Should().BeNull();
     }
 
@@ -971,7 +971,7 @@ End Class";
                 End Sub
             End Class
             """;
-        var node = NodeBetweenMarkers(code, AnalyzerLanguage.VisualBasic, getInnermostNodeForTie: true);
+        var node = TestCompiler.NodeBetweenMarkersVB(code, getInnermostNodeForTie: true);
         var sut = () => SyntaxNodeExtensionsVisualBasic.ArgumentList(node);
         sut.Should().Throw<InvalidOperationException>();
     }
@@ -984,12 +984,12 @@ End Class";
     [DataRow("""public delegate void M(int p);""")]
     public void ParameterList_Methods(string declarations)
     {
-        var node = NodeBetweenMarkers($$"""
+        var node = TestCompiler.NodeBetweenMarkersCS($$"""
             public class C
             {
                 $${{declarations}}$$
             }
-            """, AnalyzerLanguage.CSharp);
+            """);
         var actual = SyntaxNodeExtensionsCSharp.ParameterList(node);
         actual.Should().NotBeNull();
         var entry = actual.Parameters.Should().ContainSingle().Which;
@@ -1003,7 +1003,7 @@ End Class";
     [DataRow("""Func<int, int> f = $$delegate (int p) { return 0; }$$;""")]
     public void ParameterList_NestedMethods(string declarations)
     {
-        var node = NodeBetweenMarkers($$"""
+        var node = TestCompiler.NodeBetweenMarkersCS($$"""
             using System;
 
             public class C
@@ -1013,7 +1013,7 @@ End Class";
                     {{declarations}}
                 }
             }
-            """, AnalyzerLanguage.CSharp);
+            """);
         var actual = SyntaxNodeExtensionsCSharp.ParameterList(node);
         actual.Should().NotBeNull();
         var entry = actual.Parameters.Should().ContainSingle().Which;
@@ -1023,12 +1023,12 @@ End Class";
     [TestMethod]
     public void ParameterList_Destructor()
     {
-        var node = NodeBetweenMarkers("""
+        var node = TestCompiler.NodeBetweenMarkersCS("""
             public class C
             {
                 $$~C() { }$$
             }
-            """, AnalyzerLanguage.CSharp);
+            """);
         var actual = SyntaxNodeExtensionsCSharp.ParameterList(node);
         actual.Should().NotBeNull();
         actual.Parameters.Should().BeEmpty();
@@ -1046,12 +1046,12 @@ End Class";
 #endif
     public void ParameterList_PrimaryConstructors(string type)
     {
-        var node = NodeBetweenMarkers($$"""
+        var node = TestCompiler.NodeBetweenMarkersCS($$"""
             $$public {{type}} C(int p)
             {
 
             }$$
-            """, AnalyzerLanguage.CSharp);
+            """);
         var actual = SyntaxNodeExtensionsCSharp.ParameterList(node);
         actual.Should().NotBeNull();
         var entry = actual.Parameters.Should().ContainSingle().Which;
@@ -1063,13 +1063,13 @@ End Class";
     [DataRow("$$class Nested { }$$")]
     public void ParameterList_ReturnsNull(string declaration)
     {
-        var node = NodeBetweenMarkers($$"""
+        var node = TestCompiler.NodeBetweenMarkersCS($$"""
             using System.Collections.Generic;
             public class C
             {
                 {{declaration}}
             }
-            """, AnalyzerLanguage.CSharp);
+            """);
         var actual = SyntaxNodeExtensionsCSharp.ParameterList(node);
         actual.Should().BeNull();
     }
@@ -1137,7 +1137,7 @@ End Class";
     [DataRow("""void M(int p) { $$ref int$$ i = ref p; }""", "int")]              // RefTypeSyntax
     public void GetIdentifier_Members(string member, string expected)
     {
-        var node = NodeBetweenMarkers($$"""
+        var node = TestCompiler.NodeBetweenMarkersCS($$"""
             using System;
             using System.Collections.Generic;
             using System.Diagnostics;
@@ -1147,7 +1147,7 @@ End Class";
                 public Test(int i) { }
                 {{member}}
             }
-            """, AnalyzerLanguage.CSharp);
+            """);
         var actual = SyntaxNodeExtensionsCSharp.GetIdentifier(node);
         if (expected is null)
         {
@@ -1167,9 +1167,9 @@ End Class";
     [DataRow("""$$using System.Collections;$$""", null)]    // UsingDirectiveSyntax
     public void GetIdentifier_CompilationUnit(string member, string expected)
     {
-        var node = NodeBetweenMarkers($$"""
+        var node = TestCompiler.NodeBetweenMarkersCS($$"""
             {{member}}
-            """, AnalyzerLanguage.CSharp);
+            """);
         var actual = SyntaxNodeExtensionsCSharp.GetIdentifier(node);
         if (expected is null)
         {
@@ -1187,13 +1187,13 @@ End Class";
     [DataRow(""" : $$Test.Base(i)$$""", "Base")]  // NamespaceDeclarationSyntax
     public void GetIdentifier_PrimaryConstructor(string baseType, string expected)
     {
-        var node = NodeBetweenMarkers($$"""
+        var node = TestCompiler.NodeBetweenMarkersCS($$"""
             namespace Test;
             public class Base(int i)
             {
             }
             public class Derived(int i) {{baseType}} { }
-            """, AnalyzerLanguage.CSharp);
+            """);
         var actual = SyntaxNodeExtensionsCSharp.GetIdentifier(node);
         if (expected is null)
         {
@@ -1234,7 +1234,7 @@ End Class";
 #endif
     public void EnclosingScope_Members(string member, SyntaxKind expectedSyntaxKind)
     {
-        var node = NodeBetweenMarkers($$"""
+        var node = TestCompiler.NodeBetweenMarkersCS($$"""
             using System;
 
             public class Base
@@ -1248,7 +1248,7 @@ End Class";
                 Derived(string arg) { }
                 {{member}}
             }
-            """, AnalyzerLanguage.CSharp);
+            """);
         var actual = SyntaxNodeExtensionsCSharp.EnclosingScope(node)?.Kind() ?? SyntaxKind.None;
         actual.Should().Be(expectedSyntaxKind);
     }
@@ -1256,11 +1256,11 @@ End Class";
     [TestMethod]
     public void EnclosingScope_TopLevelStatements()
     {
-        var node = NodeBetweenMarkers($$"""
+        var node = TestCompiler.NodeBetweenMarkersCS($$"""
             using System;
 
             $$Console.WriteLine("")$$;
-            """, AnalyzerLanguage.CSharp, outputKind: OutputKind.ConsoleApplication);
+            """, outputKind: OutputKind.ConsoleApplication);
         var actual = SyntaxNodeExtensionsCSharp.EnclosingScope(node)?.Kind() ?? SyntaxKind.None;
         actual.Should().Be(SyntaxKind.CompilationUnit);
     }
@@ -1282,7 +1282,7 @@ End Class";
     [DataRow("from x in qry select x into $$y$$ select y", SyntaxKind.QueryContinuation)]
     public void EnclosingScope_QueryExpressionSyntax(string qry, SyntaxKind expected)
     {
-        var node = NodeBetweenMarkers($$"""
+        var node = TestCompiler.NodeBetweenMarkersCS($$"""
             using System;
             using System.Linq;
 
@@ -1293,7 +1293,7 @@ End Class";
                     _ = {{qry}};
                 }
             }
-            """, AnalyzerLanguage.CSharp);
+            """);
         var actual = SyntaxNodeExtensionsCSharp.EnclosingScope(node)?.Kind();
         actual.Should().Be(expected);
     }
@@ -1315,15 +1315,41 @@ End Class";
         ExtensionsCore.IsKnownType(method.ParameterList.Parameters[3].Type, KnownType.System_Collections_Generic_List_T, snippet.SemanticModel).Should().BeFalse();
     }
 
-    private static SyntaxNode NodeBetweenMarkers(string code, AnalyzerLanguage language, bool getInnermostNodeForTie = false, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
+    [TestMethod]
+    public void ToSecondaryLocation_NullMessage()
     {
-        var position = code.IndexOf("$$");
-        var lastPosition = code.LastIndexOf("$$");
-        var length = lastPosition == position ? 0 : lastPosition - position - "$$".Length;
-        code = code.Replace("$$", string.Empty);
-        var (tree, _) = TestCompiler.Compile(code, ignoreErrors: false, language, outputKind: outputKind);
-        var node = tree.GetRoot().FindNode(new TextSpan(position, length), getInnermostNodeForTie: getInnermostNodeForTie);
-        return node;
+        var code = "public class $$C$$ {}";
+        var node = TestCompiler.NodeBetweenMarkersCS(code);
+        var secondaryLocation = node.ToSecondaryLocation(null);
+        secondaryLocation.Should().NotBeNull();
+        secondaryLocation.Location.Should().Be(node.GetLocation());
+        secondaryLocation.Message.Should().BeNull();
+    }
+
+    [DataTestMethod]
+    [DataRow(null)]
+    [DataRow([])]
+    public void ToSecondaryLocation_MessageArgs(string[] messageArgs)
+    {
+        var code = "public class $$C$$ {}";
+        var node = TestCompiler.NodeBetweenMarkersCS(code);
+        var secondaryLocation = node.ToSecondaryLocation("Message", messageArgs);
+        secondaryLocation.Should().NotBeNull();
+        secondaryLocation.Location.Should().Be(node.GetLocation());
+        secondaryLocation.Message.Should().Be("Message");
+    }
+
+    [DataTestMethod]
+    [DataRow("Message {0}", "42")]
+    [DataRow("{1} Message {0} ", "42", "21")]
+    public void ToSecondaryLocation_MessageFormat(string format, params string[] messageArgs)
+    {
+        var code = "public class $$C$$ {}";
+        var node = TestCompiler.NodeBetweenMarkersCS(code);
+        var secondaryLocation = node.ToSecondaryLocation(format, messageArgs);
+        secondaryLocation.Should().NotBeNull();
+        secondaryLocation.Location.Should().Be(node.GetLocation());
+        secondaryLocation.Message.Should().Be(string.Format(format, messageArgs));
     }
 
     private static SyntaxToken GetFirstTokenOfKind(SyntaxTree tree, SyntaxKind kind) =>

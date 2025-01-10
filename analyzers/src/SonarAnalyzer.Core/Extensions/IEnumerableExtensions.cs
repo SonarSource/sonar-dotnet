@@ -146,12 +146,12 @@ public static class IEnumerableExtensions
             _ => string.Empty,
         };
 
-    public static IEnumerable<SecondaryLocation> ToSecondary(this IEnumerable<Location> locations, string message = null) =>
-        locations.Select(x => x.ToSecondary(message));
+    public static IEnumerable<SecondaryLocation> ToSecondary(this IEnumerable<Location> locations, string message = null, params string[] messageArgs) =>
+        locations.Select(x => x.ToSecondary(message, messageArgs));
 
-    public static IEnumerable<SecondaryLocation> ToSecondaryLocations(this IEnumerable<SyntaxNode> nodes, string message = null) =>
-        nodes.Select(x => x.ToSecondaryLocation(message));
+    public static IEnumerable<SecondaryLocation> ToSecondaryLocations(this IEnumerable<SyntaxNode> nodes, string message = null, params string[] messageArgs) =>
+        nodes.Select(x => x.ToSecondaryLocation(message, messageArgs));
 
-    public static IEnumerable<SecondaryLocation> ToSecondaryLocations(this IEnumerable<SyntaxToken> nodes, string message = null) =>
-        nodes.Select(x => x.ToSecondaryLocation(message));
+    public static IEnumerable<SecondaryLocation> ToSecondaryLocations(this IEnumerable<SyntaxToken> nodes, string message = null, params string[] messageArgs) =>
+        nodes.Select(x => x.ToSecondaryLocation(message, messageArgs));
 }

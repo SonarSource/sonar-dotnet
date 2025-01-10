@@ -61,6 +61,8 @@ public static class SyntaxNodeExtensions
     public static TSyntaxKind Kind<TSyntaxKind>(this SyntaxNode node) where TSyntaxKind : struct, Enum =>
         node is null ? default : (TSyntaxKind)Enum.ToObject(typeof(TSyntaxKind), node.RawKind);
 
-    public static SecondaryLocation ToSecondaryLocation(this SyntaxNode node, string message = null) =>
-        new(node.GetLocation(), message);
+    public static SecondaryLocation ToSecondaryLocation(this SyntaxNode node, string message = null, params string[] messageArgs) =>
+        message is not null && messageArgs?.Length > 0
+            ? new(node.GetLocation(), string.Format(message, messageArgs))
+            : new(node.GetLocation(), message);
 }
