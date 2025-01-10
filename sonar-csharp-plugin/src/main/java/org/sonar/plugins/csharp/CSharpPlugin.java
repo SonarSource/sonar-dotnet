@@ -1,6 +1,6 @@
 /*
  * SonarC#
- * Copyright (C) 2014-2024 SonarSource SA
+ * Copyright (C) 2014-2025 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
