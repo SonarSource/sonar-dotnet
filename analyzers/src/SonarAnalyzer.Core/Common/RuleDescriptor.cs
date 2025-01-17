@@ -19,15 +19,15 @@ namespace SonarAnalyzer.Common
     public record RuleDescriptor(string Id, string Title, string Type, string DefaultSeverity, string Status, SourceScope Scope, bool SonarWay, string Description)
     {
         public string Category =>
-            $"{DefaultSeverity} {ReadableType}";
+            $"{DefaultSeverity}_{ReadableType}";
 
         private string ReadableType =>
             Type switch
             {
                 "BUG" => "Bug",
-                "CODE_SMELL" => "Code Smell",
+                "CODE_SMELL" => "Code_Smell",
                 "VULNERABILITY" => "Vulnerability",
-                "SECURITY_HOTSPOT" => "Security Hotspot",
+                "SECURITY_HOTSPOT" => "Security_Hotspot",
                 _ => throw new UnexpectedValueException(nameof(Type), Type)
             };
 
