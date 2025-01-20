@@ -21,6 +21,8 @@ public abstract class UseWhereBeforeOrderByBase<TSyntaxKind, TInvocation> : Sona
     where TInvocation : SyntaxNode
 {
     private const string DiagnosticId = "S6607";
+    private const string SecondaryMessage = """This "{0}" precedes a "Where" - you should change the order.""";
+
     protected override string MessageFormat => "\"Where\" should be used before \"{0}\"";
 
     protected UseWhereBeforeOrderByBase() : base(DiagnosticId) { }
@@ -38,7 +40,7 @@ public abstract class UseWhereBeforeOrderByBase<TSyntaxKind, TInvocation> : Sona
                 && Language.Syntax.NodeIdentifier(right) is { } rightIdentifier
                 && Language.Syntax.NodeIdentifier(left) is { } leftIdentifier)
             {
-                c.ReportIssue(Rule, rightIdentifier.GetLocation(), [leftIdentifier.ToSecondaryLocation()], orderByMethodDescription);
+                c.ReportIssue(Rule, rightIdentifier.GetLocation(), [leftIdentifier.ToSecondaryLocation(SecondaryMessage, orderByMethodDescription)], orderByMethodDescription);
             }
         },
         Language.SyntaxKind.InvocationExpression);
