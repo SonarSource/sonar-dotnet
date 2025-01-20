@@ -23,6 +23,8 @@ public sealed class SpecifyRouteAttribute() : SonarDiagnosticAnalyzer<SyntaxKind
 {
     private const string DiagnosticId = "S6934";
 
+    private const string SecondaryLocationMessage = "By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.";
+
     protected override string MessageFormat => "Specify the RouteAttribute when an HttpMethodAttribute or RouteAttribute is specified at an action level.";
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
@@ -48,7 +50,7 @@ public sealed class SpecifyRouteAttribute() : SonarDiagnosticAnalyzer<SyntaxKind
                         && method.IsControllerActionMethod()
                         && method.GetAttributesWithInherited().Any(x => !CanBeIgnored(x.GetAttributeRouteTemplate())))
                     {
-                        secondaryLocations.Push(methodDeclaration.Identifier.ToSecondaryLocation());
+                        secondaryLocations.Push(methodDeclaration.Identifier.ToSecondaryLocation(SecondaryLocationMessage));
                     }
                 }, SyntaxKind.MethodDeclaration);
                 symbolStart.RegisterSymbolEndAction(symbolEnd => ReportIssues(symbolEnd, symbolStart.Symbol, secondaryLocations));

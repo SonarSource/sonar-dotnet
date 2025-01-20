@@ -46,87 +46,87 @@ public class RouteTemplatesAreSpecifiedController : Controller                  
 
     [HttpGet("GetFirst")]
     [HttpGet("GetSecond")]
-    public IActionResult GetMultipleTemplates() => View();                      // Secondary [controller]
+    public IActionResult GetMultipleTemplates() => View();                      // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [HttpGet("GetFirst")]
     [HttpPut("PutFirst")]
-    public IActionResult MixGetAndPut() => View();                              // Secondary [controller]
+    public IActionResult MixGetAndPut() => View();                              // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [HttpGet("GetFirst")]
     [HttpPut()]
-    public IActionResult MixWithTemplateAndWithout() => View();                 // Secondary [controller]
+    public IActionResult MixWithTemplateAndWithout() => View();                 // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [HttpGet()]
     [HttpPut()]
     public IActionResult MixWithoutTemplate() => View();
 
     [HttpPost("CreateObject")]
-    public IActionResult Post() => View();                                      // Secondary [controller]
+    public IActionResult Post() => View();                                      // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [HttpPut("UpdateObject")]
-    public IActionResult Put() => View();                                       // Secondary [controller]
+    public IActionResult Put() => View();                                       // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [HttpDelete("DeleteObject")]
-    public IActionResult Delete() => View();                                    // Secondary [controller]
+    public IActionResult Delete() => View();                                    // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [HttpPatch("PatchObject")]
-    public IActionResult Patch() => View();                                     // Secondary [controller]
+    public IActionResult Patch() => View();                                     // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [HttpHead("Head")]
-    public IActionResult HttpHead() => View();                                  // Secondary [controller]
+    public IActionResult HttpHead() => View();                                  // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [HttpOptions("Options")]
-    public IActionResult HttpOptions() => View();                               // Secondary [controller]
+    public IActionResult HttpOptions() => View();                               // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [Route("details")]
-    public IActionResult WithRoute() => View();                                 // Secondary [controller]
+    public IActionResult WithRoute() => View();                                 // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [Route("details", Order = 1)]
-    public IActionResult WithRouteAndProperties1() => View();                   // Secondary [controller]
+    public IActionResult WithRouteAndProperties1() => View();                   // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [Route("details", Order = 1, Name = "Details")]
-    public IActionResult WithRouteAndProperties2() => View();                   // Secondary [controller]
+    public IActionResult WithRouteAndProperties2() => View();                   // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [Route("details", Name = "Details", Order = 1)]
-    public IActionResult WithRouteAndProperties3() => View();                   // Secondary [controller]
+    public IActionResult WithRouteAndProperties3() => View();                   // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [Route("[controller]/List/{sortBy}/{direction}")]
     [HttpGet("[controller]/Search/{sortBy}/{direction}")]
-    public IActionResult RouteAndMethodMix(string sortBy) => View();            // Secondary [controller]
+    public IActionResult RouteAndMethodMix(string sortBy) => View();            // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [HttpGet("details", Order = 1)]
-    public IActionResult MultipleProperties1() => View();                       // Secondary [controller]
+    public IActionResult MultipleProperties1() => View();                       // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [HttpGet("details", Order = 1, Name = "Details")]
-    public IActionResult MultipleProperties2() => View();                       // Secondary [controller]
+    public IActionResult MultipleProperties2() => View();                       // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [HttpGet("details", Name = "Details", Order = 1)]
-    public IActionResult MultipleProperties3() => View();                       // Secondary [controller]
+    public IActionResult MultipleProperties3() => View();                       // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [HttpGet(ConstantRoute)]
-    public IActionResult Constant() => View();                                  // Secondary [controller]
+    public IActionResult Constant() => View();                                  // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [HttpGet("""
              ConstantRoute
              """)]
-    public IActionResult Constant2() => View();                                 // Secondary [controller]
+    public IActionResult Constant2() => View();                                 // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [HttpGet($"Route {ConstantRoute}")]
-    public IActionResult Interpolation1() => View();                            // Secondary [controller]
+    public IActionResult Interpolation1() => View();                            // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [HttpGet($"""
              {ConstantRoute}
              """)]
-    public IActionResult Interpolation2() => View();                            // Secondary [controller]
+    public IActionResult Interpolation2() => View();                            // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [HttpGet("GetObject")]
-    public ActionResult WithActionResult() => View();                           // Secondary [controller]
+    public ActionResult WithActionResult() => View();                           // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [Route(" ")]
-    public IActionResult WithSpace() => View();                                 // Secondary [controller]
+    public IActionResult WithSpace() => View();                                 // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     [Route("\t")]
-    public IActionResult WithTab() => View();                                 // Secondary [controller]
+    public IActionResult WithTab() => View();                                   // Secondary [controller] {{By specifying an HttpMethodAttribute or RouteAttribute here, you will need to specify the RouteAttribute at the class level.}}
 
     // [HttpPost("Comment")]
     public IActionResult Comment() => View();
