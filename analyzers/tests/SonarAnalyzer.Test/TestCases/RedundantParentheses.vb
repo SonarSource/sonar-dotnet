@@ -13,8 +13,8 @@ Namespace Tests.TestCases
             Return False
 
             Return (((a)))
-'                  ^^ Noncompliant [0]
-'                       ^^ Secondary@-1 [0]
+'                  ^^ Noncompliant [0] {{Remove these redundant parentheses.}}
+'                       ^^ Secondary@-1 [0] {{Remove the redundant closing parentheses.}}
 
             If (a IsNot Nothing) Then
             End If

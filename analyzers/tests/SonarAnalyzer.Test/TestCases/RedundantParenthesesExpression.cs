@@ -22,8 +22,8 @@ namespace Tests.Diagnostics
             return (false);
             return (((1)+(1))-(2));
             return (((a)));
-//                 ^^ Noncompliant [0]
-//                      ^^ Secondary@-1 [0]
+//                 ^^ Noncompliant [0] {{Remove these redundant parentheses.}}
+//                      ^^ Secondary@-1 [0] {{Remove the redundant closing parentheses.}}
             var x = 1;
             return (x + 1);
             return (string.Empty);
