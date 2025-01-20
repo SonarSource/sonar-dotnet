@@ -20,14 +20,14 @@ namespace Tests.Diagnostics
             var once = await valueTask; // Noncompliant {{Refactor this 'ValueTask' usage to consume it only once.}}
 //                           ^^^^^^^^^
             var twice = await valueTask;
-//                            ^^^^^^^^^ Secondary
+//                            ^^^^^^^^^ Secondary {{The 'ValueTask' is consumed here again}}
         }
 
         public void Foo2(ValueTaskProvider stream)
         {
             var valueTask = stream.ReadAsync();
             var once = valueTask.AsTask(); // Noncompliant
-            var twice = valueTask.AsTask(); // Secondary
+            var twice = valueTask.AsTask(); // Secondary {{The 'ValueTask' is consumed here again}}
         }
 
         public async void Foo3(ValueTaskProvider stream)
