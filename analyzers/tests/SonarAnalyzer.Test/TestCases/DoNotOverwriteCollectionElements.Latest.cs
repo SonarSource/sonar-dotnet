@@ -7,14 +7,14 @@ class CSharp11
 
     void OverwriteDictionary()
     {
-        dictionary["""a"""] = 1; // Secondary
+        dictionary["""a"""] = 1; // Secondary {{The index/key set here gets set again later.}}
         dictionary["""a"""] = 2; // Noncompliant
     }
 
     void OverwriteArray()
     {
         string[] array = new string[2];
-        array[0] = """a"""; // Secondary
+        array[0] = """a"""; // Secondary  {{The index/key set here gets set again later.}}
         array[1] = """b""";
         array[0] = """c"""; // Noncompliant
     }

@@ -14,91 +14,92 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Rules;
+
+public abstract class DoNotOverwriteCollectionElementsBase<TSyntaxKind, TStatementSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
+    where TSyntaxKind : struct
+    where TStatementSyntax : SyntaxNode
 {
-    public abstract class DoNotOverwriteCollectionElementsBase<TSyntaxKind, TStatementSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
-        where TSyntaxKind : struct
-        where TStatementSyntax : SyntaxNode
+    protected const string DiagnosticId = "S4143";
+
+    /// <summary>
+    /// Returns the index or key from the provided InvocationExpression or SimpleAssignmentExpression.
+    /// Returns null if the provided SyntaxNode is not an InvocationExpression or SimpleAssignmentExpression.
+    /// </summary>
+    protected abstract SyntaxNode GetIndexOrKey(TStatementSyntax statement);
+
+    /// <summary>
+    /// Returns the identifier of a collection that is modified in the provided InvocationExpression
+    /// or SimpleAssignmentExpression. Returns null if the provided SyntaxNode is not an
+    /// InvocationExpression or SimpleAssignmentExpression.
+    /// </summary>
+    protected abstract SyntaxNode GetCollectionIdentifier(TStatementSyntax statement);
+
+    /// <summary>
+    /// Returns a value specifying whether the provided SyntaxNode is an identifier or
+    /// a literal (string, numeric, bool, etc.).
+    /// </summary>
+    protected abstract bool IsIdentifierOrLiteral(SyntaxNode node);
+
+    protected override string MessageFormat => "Verify this is the index/key that was intended; " +
+        "a value has already been set for it.";
+
+    private static string SecondaryMessage => "The index/key set here gets set again later.";
+
+    protected DoNotOverwriteCollectionElementsBase() : base(DiagnosticId) { }
+
+    protected void AnalysisAction(SonarSyntaxNodeReportingContext context)
     {
-        protected const string DiagnosticId = "S4143";
+        var statement = (TStatementSyntax)context.Node;
+        var collectionIdentifier = GetCollectionIdentifier(statement);
+        var indexOrKey = GetIndexOrKey(statement);
 
-        /// <summary>
-        /// Returns the index or key from the provided InvocationExpression or SimpleAssignmentExpression.
-        /// Returns null if the provided SyntaxNode is not an InvocationExpression or SimpleAssignmentExpression.
-        /// </summary>
-        protected abstract SyntaxNode GetIndexOrKey(TStatementSyntax statement);
-
-        /// <summary>
-        /// Returns the identifier of a collection that is modified in the provided InvocationExpression
-        /// or SimpleAssignmentExpression. Returns null if the provided SyntaxNode is not an
-        /// InvocationExpression or SimpleAssignmentExpression.
-        /// </summary>
-        protected abstract SyntaxNode GetCollectionIdentifier(TStatementSyntax statement);
-
-        /// <summary>
-        /// Returns a value specifying whether the provided SyntaxNode is an identifier or
-        /// a literal (string, numeric, bool, etc.).
-        /// </summary>
-        protected abstract bool IsIdentifierOrLiteral(SyntaxNode syntaxNode);
-
-        protected override string MessageFormat => "Verify this is the index/key that was intended; " +
-            "a value has already been set for it.";
-
-        protected DoNotOverwriteCollectionElementsBase() : base(DiagnosticId) { }
-
-        protected void AnalysisAction(SonarSyntaxNodeReportingContext context)
+        if (collectionIdentifier is null
+            || indexOrKey is null
+            || !IsIdentifierOrLiteral(indexOrKey)
+            || !IsDictionaryOrCollection(collectionIdentifier, context.SemanticModel))
         {
-            var statement = (TStatementSyntax)context.Node;
-            var collectionIdentifier = GetCollectionIdentifier(statement);
-            var indexOrKey = GetIndexOrKey(statement);
-
-            if (collectionIdentifier == null
-                || indexOrKey == null
-                || !IsIdentifierOrLiteral(indexOrKey)
-                || !IsDictionaryOrCollection(collectionIdentifier, context.SemanticModel))
-            {
-                return;
-            }
-
-            var previousSet = GetPreviousStatements(statement)
-                .TakeWhile(IsSameCollection(collectionIdentifier))
-                .FirstOrDefault(IsSameIndexOrKey(indexOrKey));
-
-            if (previousSet is not null)
-            {
-                context.ReportIssue(Rule, context.Node, [previousSet.ToSecondaryLocation()]);
-            }
+            return;
         }
 
-        private Func<TStatementSyntax, bool> IsSameCollection(SyntaxNode collectionIdentifier) =>
-            statement =>
-                GetCollectionIdentifier(statement) is SyntaxNode identifier &&
-                identifier.ToString() == collectionIdentifier.ToString();
+        var previousSet = GetPreviousStatements(statement)
+            .TakeWhile(IsSameCollection(collectionIdentifier))
+            .FirstOrDefault(IsSameIndexOrKey(indexOrKey));
 
-        private Func<TStatementSyntax, bool> IsSameIndexOrKey(SyntaxNode indexOrKey) =>
-            statement => GetIndexOrKey(statement)?.ToString() == indexOrKey.ToString();
-
-        private static bool IsDictionaryOrCollection(SyntaxNode identifier, SemanticModel semanticModel)
+        if (previousSet is not null)
         {
-            var identifierType = semanticModel.GetTypeInfo(identifier).Type;
-            return identifierType.DerivesOrImplements(KnownType.System_Collections_Generic_IDictionary_TKey_TValue)
-                || identifierType.DerivesOrImplements(KnownType.System_Collections_Generic_ICollection_T);
+            context.ReportIssue(Rule, context.Node, [previousSet.ToSecondaryLocation(SecondaryMessage)]);
         }
+    }
 
-        /// <summary>
-        /// Returns all statements before the specified statement within the containing method.
-        /// This method recursively traverses all parent blocks of the provided statement.
-        /// </summary>
-        private static IEnumerable<TStatementSyntax> GetPreviousStatements(TStatementSyntax statement)
-        {
-            var previousStatements = statement.Parent.ChildNodes()
-                .OfType<TStatementSyntax>()
-                .TakeWhile(x => x != statement)
-                .Reverse();
+    private Func<TStatementSyntax, bool> IsSameCollection(SyntaxNode collectionIdentifier) =>
+        x =>
+            GetCollectionIdentifier(x) is SyntaxNode identifier &&
+            identifier.ToString() == collectionIdentifier.ToString();
 
-            return statement.Parent is TStatementSyntax parentStatement
-                ? previousStatements.Union(GetPreviousStatements(parentStatement))
-                : previousStatements;
-        }
+    private Func<TStatementSyntax, bool> IsSameIndexOrKey(SyntaxNode indexOrKey) =>
+        x => GetIndexOrKey(x)?.ToString() == indexOrKey.ToString();
+
+    private static bool IsDictionaryOrCollection(SyntaxNode identifier, SemanticModel model)
+    {
+        var identifierType = model.GetTypeInfo(identifier).Type;
+        return identifierType.DerivesOrImplements(KnownType.System_Collections_Generic_IDictionary_TKey_TValue)
+            || identifierType.DerivesOrImplements(KnownType.System_Collections_Generic_ICollection_T);
+    }
+
+    /// <summary>
+    /// Returns all statements before the specified statement within the containing method.
+    /// This method recursively traverses all parent blocks of the provided statement.
+    /// </summary>
+    private static IEnumerable<TStatementSyntax> GetPreviousStatements(TStatementSyntax statement)
+    {
+        var previousStatements = statement.Parent.ChildNodes()
+            .OfType<TStatementSyntax>()
+            .TakeWhile(x => x != statement)
+            .Reverse();
+
+        return statement.Parent is TStatementSyntax parentStatement
+            ? previousStatements.Union(GetPreviousStatements(parentStatement))
+            : previousStatements;
     }
 }
