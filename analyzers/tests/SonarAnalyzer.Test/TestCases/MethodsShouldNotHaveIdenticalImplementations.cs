@@ -5,9 +5,9 @@ namespace Tests.Diagnostics
     class Program
     {
         void Foo1()
-//           ^^^^ Secondary
-//           ^^^^ Secondary@-1
-//           ^^^^ Secondary@-2
+//           ^^^^ Secondary {{Update this method so that its implementation is not identical to 'Foo2'.}}
+//           ^^^^ Secondary@-1 {{Update this method so that its implementation is not identical to 'Foo3'.}}
+//           ^^^^ Secondary@-2 {{Update this method so that its implementation is not identical to 'Foo4'.}}
         {
             string s = "test";
             Console.WriteLine("Result: {0}", s);

@@ -51,7 +51,9 @@ public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TSyntaxKi
                     foreach (var duplicate in duplicates)
                     {
                         methodsToHandle.Remove(duplicate);
-                        c.ReportIssue(SupportedDiagnostics[0], GetMethodIdentifier(duplicate), [GetMethodIdentifier(method).ToSecondaryLocation()], GetMethodIdentifier(method).ValueText);
+                        var identifier = GetMethodIdentifier(method);
+                        var otherIdentifier = GetMethodIdentifier(duplicate);
+                        c.ReportIssue(SupportedDiagnostics[0], otherIdentifier, [identifier.ToSecondaryLocation(MessageFormat, otherIdentifier.ValueText)], identifier.ValueText);
                     }
                 }
             },

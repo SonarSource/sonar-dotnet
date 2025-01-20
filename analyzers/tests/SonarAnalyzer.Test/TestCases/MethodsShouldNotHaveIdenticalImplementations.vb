@@ -10,9 +10,9 @@ Namespace Tests.Diagnostics
         End Sub
 
         Sub Foo1()
-'           ^^^^ Secondary
-'           ^^^^ Secondary@-1
-'           ^^^^ Secondary@-2
+'           ^^^^ Secondary {{Update this method so that its implementation is not identical to 'Foo2'.}}
+'           ^^^^ Secondary@-1 {{Update this method so that its implementation is not identical to 'Foo3'.}}
+'           ^^^^ Secondary@-2 {{Update this method so that its implementation is not identical to 'Foo4'.}}
 
             Dim s As String = "test"
             Console.WriteLine("Result: {0}", s)
