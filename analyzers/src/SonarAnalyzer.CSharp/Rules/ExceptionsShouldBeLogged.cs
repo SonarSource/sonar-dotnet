@@ -49,7 +49,7 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
                                 walker.LoggingInvocationsWithoutException.Any())
                             {
                                 var primaryLocation = walker.LoggingInvocationsWithoutException[0].GetLocation();
-                                var secondaryLocations = walker.LoggingInvocationsWithoutException.Skip(1).ToSecondaryLocations();
+                                var secondaryLocations = walker.LoggingInvocationsWithoutException.Skip(1).ToSecondaryLocations(MessageFormat);
                                 c.ReportIssue(Rule, primaryLocation, secondaryLocations);
                             }
                         },

@@ -37,7 +37,7 @@ public class TestCases
             logger.LogWarning(new EventId(1), "Message!");          // Noncompliant {{Logging in a catch clause should pass the caught exception as a parameter.}}
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             logger.LogWarning(new EventId(1), "Message!");
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary {{Logging in a catch clause should pass the caught exception as a parameter.}}
         }
     }
 
