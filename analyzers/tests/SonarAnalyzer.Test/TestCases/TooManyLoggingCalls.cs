@@ -10,8 +10,8 @@ public class Program
     {
         logger.LogInformation("Info 1");    // Noncompliant {{Reduce the number of Information logging calls within this code block from 3 to the 2 allowed.}}
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        logger.LogInformation("Info 2");    // Secondary
-        logger.LogInformation("Info 3");    // Secondary
+        logger.LogInformation("Info 2");    // Secondary {{Reduce the number of Information logging calls within this code block from 3 to the 2 allowed.}}
+        logger.LogInformation("Info 3");    // Secondary {{Reduce the number of Information logging calls within this code block from 3 to the 2 allowed.}}
 
         logger.LogError("Error 1");         // Noncompliant {{Reduce the number of Error logging calls within this code block from 2 to the 1 allowed.}}
         logger.LogError("Error 2");         // Secondary

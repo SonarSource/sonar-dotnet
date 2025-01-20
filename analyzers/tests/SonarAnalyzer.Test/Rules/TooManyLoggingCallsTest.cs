@@ -22,10 +22,12 @@ namespace SonarAnalyzer.Test.Rules;
 public class TooManyLoggingCallsTest
 {
     private readonly VerifierBuilder defaultBuilder = new VerifierBuilder<TooManyLoggingCalls>();
+
     private readonly VerifierBuilder configuredBuilder = new VerifierBuilder().AddAnalyzer(() => new TooManyLoggingCalls
     {
         DebugThreshold = 1,
     });
+
     private readonly VerifierBuilder misconfiguredBuilder = new VerifierBuilder().AddAnalyzer(() => new TooManyLoggingCalls
     {
         DebugThreshold = 0,
