@@ -26,15 +26,17 @@ internal class ParameterValidationInMethodWalker : SafeCSharpSyntaxWalker
             SyntaxKind.ParenthesizedLambdaExpression    // Func
         };
 
-    private readonly SemanticModel semanticModel;
+    private readonly SemanticModel model;
     private readonly List<SecondaryLocation> argumentExceptionLocations = new();
 
     protected bool keepWalking = true;
 
     public IEnumerable<SecondaryLocation> ArgumentExceptionLocations => argumentExceptionLocations;
 
-    public ParameterValidationInMethodWalker(SemanticModel semanticModel) =>
-        this.semanticModel = semanticModel;
+    protected virtual string SecondaryMessage => null;
+
+    public ParameterValidationInMethodWalker(SemanticModel model) =>
+        this.model = model;
 
     public override void Visit(SyntaxNode node)
     {
@@ -48,11 +50,11 @@ internal class ParameterValidationInMethodWalker : SafeCSharpSyntaxWalker
     public override void VisitThrowStatement(ThrowStatementSyntax node)
     {
         // When throw is like `throw new XXX` where XXX derives from ArgumentException, save location
-        if (node.Expression != null
-            && semanticModel.GetTypeInfo(node.Expression) is var typeInfo
+        if (node.Expression is not null
+            && model.GetTypeInfo(node.Expression) is var typeInfo
             && typeInfo.Type.DerivesFrom(KnownType.System_ArgumentException))
         {
-            argumentExceptionLocations.Add(node.Expression.ToSecondaryLocation());
+            argumentExceptionLocations.Add(node.Expression.ToSecondaryLocation(SecondaryMessage));
         }
 
         // there is no need to visit children
@@ -60,10 +62,10 @@ internal class ParameterValidationInMethodWalker : SafeCSharpSyntaxWalker
 
     public override void VisitInvocationExpression(InvocationExpressionSyntax node)
     {
-        if (node.IsMemberAccessOnKnownType("ThrowIfNull", KnownType.System_ArgumentNullException, semanticModel))
+        if (node.IsMemberAccessOnKnownType("ThrowIfNull", KnownType.System_ArgumentNullException, model))
         {
             // "ThrowIfNull" returns void so it cannot be an argument. We can stop.
-            argumentExceptionLocations.Add(node.ToSecondaryLocation());
+            argumentExceptionLocations.Add(node.ToSecondaryLocation(SecondaryMessage));
         }
         else
         {

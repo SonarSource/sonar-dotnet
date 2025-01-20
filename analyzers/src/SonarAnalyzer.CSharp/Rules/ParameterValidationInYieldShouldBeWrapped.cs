@@ -16,49 +16,48 @@
 
 using SonarAnalyzer.CSharp.Walkers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class ParameterValidationInYieldShouldBeWrapped : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ParameterValidationInYieldShouldBeWrapped : SonarDiagnosticAnalyzer
-    {
-        private const string DiagnosticId = "S4456";
-        private const string MessageFormat = "Split this method into two, one handling parameters check and the other " +
-           "handling the iterator.";
+    private const string DiagnosticId = "S4456";
+    private const string MessageFormat = "Split this method into two, one handling parameters check and the other handling the iterator.";
 
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(
-                c =>
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            c =>
+            {
+                var methodDeclaration = (MethodDeclarationSyntax)c.Node;
+
+                var walker = new ParameterValidationInYieldWalker(c.SemanticModel);
+                walker.SafeVisit(methodDeclaration);
+
+                if (walker.HasYieldStatement &&
+                    walker.ArgumentExceptionLocations.Any())
                 {
-                    var methodDeclaration = (MethodDeclarationSyntax)c.Node;
+                    c.ReportIssue(Rule, methodDeclaration.Identifier, walker.ArgumentExceptionLocations);
+                }
+            },
+            SyntaxKind.MethodDeclaration);
 
-                    var walker = new ParameterValidationInYieldWalker(c.SemanticModel);
-                    walker.SafeVisit(methodDeclaration);
+    private sealed class ParameterValidationInYieldWalker : ParameterValidationInMethodWalker
+    {
+        public bool HasYieldStatement { get; private set; }
 
-                    if (walker.HasYieldStatement &&
-                        walker.ArgumentExceptionLocations.Any())
-                    {
-                        c.ReportIssue(Rule, methodDeclaration.Identifier, walker.ArgumentExceptionLocations);
-                    }
-                },
-                SyntaxKind.MethodDeclaration);
-
-        private sealed class ParameterValidationInYieldWalker : ParameterValidationInMethodWalker
+        public ParameterValidationInYieldWalker(SemanticModel model)
+            : base(model)
         {
-            public bool HasYieldStatement { get; private set; }
+        }
 
-            public ParameterValidationInYieldWalker(SemanticModel semanticModel)
-                : base(semanticModel)
-            {
-            }
-
-            public override void VisitYieldStatement(YieldStatementSyntax node)
-            {
-                HasYieldStatement = true;
-                base.VisitYieldStatement(node);
-            }
+        public override void VisitYieldStatement(YieldStatementSyntax node)
+        {
+            HasYieldStatement = true;
+            base.VisitYieldStatement(node);
         }
     }
 }

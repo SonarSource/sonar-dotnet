@@ -16,47 +16,50 @@
 
 using SonarAnalyzer.CSharp.Walkers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class ParameterValidationInAsyncShouldBeWrapped : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ParameterValidationInAsyncShouldBeWrapped : SonarDiagnosticAnalyzer
-    {
-        private const string DiagnosticId = "S4457";
-        private const string MessageFormat = "Split this method into two, one handling parameters check and the other handling the asynchronous code.";
+    private const string DiagnosticId = "S4457";
+    private const string MessageFormat = "Split this method into two, one handling parameters check and the other handling the asynchronous code.";
+    private const string SecondaryLocationMessage = "This ArgumentException will be raised only after observing the task.";
 
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(
-                c =>
-                {
-                    var method = (MethodDeclarationSyntax)c.Node;
-                    if (!method.Modifiers.Any(SyntaxKind.AsyncKeyword)
-                        || method.HasReturnTypeVoid()
-                        || (method.Identifier.ValueText == "Main" && c.SemanticModel.GetDeclaredSymbol(method).IsMainMethod()))
-                    {
-                        return;
-                    }
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-                    var walker = new ParameterValidationInAsyncWalker(c.SemanticModel);
-                    walker.SafeVisit(method);
-                    if (walker.ArgumentExceptionLocations.Any())
-                    {
-                        c.ReportIssue(Rule, method.Identifier, walker.ArgumentExceptionLocations);
-                    }
-                },
-                SyntaxKind.MethodDeclaration);
-
-        private sealed class ParameterValidationInAsyncWalker : ParameterValidationInMethodWalker
-        {
-            public ParameterValidationInAsyncWalker(SemanticModel semanticModel)
-                : base(semanticModel)
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            c =>
             {
-            }
+                var method = (MethodDeclarationSyntax)c.Node;
+                if (!method.Modifiers.Any(SyntaxKind.AsyncKeyword)
+                    || method.HasReturnTypeVoid()
+                    || (method.Identifier.ValueText == "Main" && c.SemanticModel.GetDeclaredSymbol(method).IsMainMethod()))
+                {
+                    return;
+                }
 
-            public override void VisitAwaitExpression(AwaitExpressionSyntax node) =>
-                keepWalking = false;
+                var walker = new ParameterValidationInAsyncWalker(c.SemanticModel);
+                walker.SafeVisit(method);
+                if (walker.ArgumentExceptionLocations.Any())
+                {
+                    c.ReportIssue(Rule, method.Identifier, walker.ArgumentExceptionLocations);
+                }
+            },
+            SyntaxKind.MethodDeclaration);
+
+    private sealed class ParameterValidationInAsyncWalker : ParameterValidationInMethodWalker
+    {
+        protected override string SecondaryMessage => SecondaryLocationMessage;
+
+        public ParameterValidationInAsyncWalker(SemanticModel model)
+            : base(model)
+        {
         }
+
+        public override void VisitAwaitExpression(AwaitExpressionSyntax node) =>
+            keepWalking = false;
     }
 }
