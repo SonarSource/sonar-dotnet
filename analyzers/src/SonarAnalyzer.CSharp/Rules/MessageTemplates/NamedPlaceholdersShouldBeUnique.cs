@@ -36,7 +36,7 @@ public sealed class NamedPlaceholdersShouldBeUnique : IMessageTemplateCheck
         {
             var templateStart = templateArgument.Expression.GetLocation().SourceSpan.Start;
             var locations = group.Select(x => Location.Create(context.Tree, new(templateStart + x.Start, x.Length)));
-            context.ReportIssue(Rule, locations.First(), locations.Skip(1).ToSecondary(), group.First().Name);
+            context.ReportIssue(Rule, locations.First(), locations.Skip(1).ToSecondary(MessageFormat, group.First().Name), group.First().Name);
         }
     }
 }

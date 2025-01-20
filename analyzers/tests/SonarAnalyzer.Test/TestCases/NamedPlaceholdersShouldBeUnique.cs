@@ -62,7 +62,7 @@ namespace MicrosoftTests
         {
             logger.Log(LogLevel.Trace, "Hey {foo} and {foo}", foo, bar);
             //                               ^^^ {{Message template placeholder 'foo' is not unique.}}
-            //                                         ^^^ Secondary @-1
+            //                                         ^^^ Secondary @-1 {{Message template placeholder 'foo' is not unique.}}
 
             logger.LogInformation("Hey {foo} and {foo} and {foo}", foo, bar);
             //                          ^^^ {{Message template placeholder 'foo' is not unique.}}
@@ -71,14 +71,14 @@ namespace MicrosoftTests
 
             logger.LogInformation("Hey {foo} and {foo} and {foo} and {bar}", foo, foo, foo, bar);
             //                          ^^^ {{Message template placeholder 'foo' is not unique.}}
-            //                                    ^^^ Secondary @-1
-            //                                              ^^^ Secondary @-2
+            //                                    ^^^ Secondary @-1 {{Message template placeholder 'foo' is not unique.}}
+            //                                              ^^^ Secondary @-2 {{Message template placeholder 'foo' is not unique.}}
 
             logger.LogCritical("Hey {foo} and {bar} and {foo} and {bar}", foo, bar, foo, bar);
             //                       ^^^ {{Message template placeholder 'foo' is not unique.}}
-            //                                           ^^^ Secondary @-1
+            //                                           ^^^ Secondary @-1 {{Message template placeholder 'foo' is not unique.}}
             //                                 ^^^ @-2 {{Message template placeholder 'bar' is not unique.}}
-            //                                                     ^^^ Secondary @-3
+            //                                                     ^^^ Secondary @-3 {{Message template placeholder 'bar' is not unique.}}
 
             logger.LogDebug("Hey {foo} and {bar} and {foo} and {bar} and {baz} {baz}", foo, bar, foo, bar, baz, baz);
             //                    ^^^ {{Message template placeholder 'foo' is not unique.}}
