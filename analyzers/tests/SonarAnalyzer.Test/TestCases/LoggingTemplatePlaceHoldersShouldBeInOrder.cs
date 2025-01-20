@@ -47,11 +47,11 @@ public class Program
 
         logger.LogInformation("Arg: {First} {Second}", second, first);
         //                           ^^^^^ {{Template placeholders should be in the right order: placeholder 'First' does not match with argument 'second'.}}
-        //                                             ^^^^^^ Secondary @-1
+        //                                             ^^^^^^ Secondary @-1 {{The argument should be 'first' to match placeholder 'First'.}}
 
         logger.LogInformation("Arg: {First} {Third} {Second}", first, second, third);
         //                                   ^^^^^ {{Template placeholders should be in the right order: placeholder 'Third' does not match with argument 'second'.}}
-        //                                                            ^^^^^^ Secondary @-1
+        //                                                            ^^^^^^ Secondary @-1 {{The argument should be 'third' to match placeholder 'Third'.}}
 
         logger.LogInformation("Arg: {First} {First}", first, second);   // Compliant - S6677 should raise for duplicate placeholder names, but not this rule
         logger.LogInformation(@"

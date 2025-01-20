@@ -22,6 +22,7 @@ public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplat
 {
     private const string DiagnosticId = "S6673";
     private const string MessageFormat = "Template placeholders should be in the right order: placeholder '{0}' does not match with argument '{1}'.";
+    private const string SecondaryMessageFormat = "The argument should be '{0}' to match placeholder '{1}'.";
 
     internal static readonly DiagnosticDescriptor S6673 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -37,15 +38,18 @@ public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplat
             if (placeholder.Name != "_"
                 && !int.TryParse(placeholder.Name, out _)
                 && Array.FindIndex(placeholders, x => x.Name == placeholder.Name) == i // don't raise for duplicate placeholders
-                && OutOfOrderPlaceholderValue(placeholder, i, placeholderValues) is { } outOfOrderArgument)
+                && OutOfOrderPlaceholderValue(placeholder, i, placeholderValues, out var betterFitArgument) is { } outOfOrderArgument)
             {
                 var templateStart = templateArgument.Expression.GetLocation().SourceSpan.Start;
                 var primaryLocation = Location.Create(context.Tree, new(templateStart + placeholder.Start, placeholder.Length));
-                context.ReportIssue(Rule, primaryLocation, [outOfOrderArgument.ToSecondaryLocation()], placeholder.Name, outOfOrderArgument.ToString());
+                context.ReportIssue(Rule, primaryLocation, SecondaryLocations(outOfOrderArgument, betterFitArgument, placeholder), placeholder.Name, outOfOrderArgument.ToString());
                 return; // only raise on the first out-of-order placeholder to make the rule less noisy
             }
         }
     }
+
+    private static IEnumerable<SecondaryLocation> SecondaryLocations(SyntaxNode node, SyntaxNode betterFitArgument, MessageTemplatesParser.Placeholder placeholder) =>
+        [node.ToSecondaryLocation(SecondaryMessageFormat, betterFitArgument.GetName(), placeholder.Name)];
 
     private static IEnumerable<SyntaxNode> PlaceholderValues(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol)
     {
@@ -70,8 +74,13 @@ public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplat
         }
     }
 
-    private static SyntaxNode OutOfOrderPlaceholderValue(MessageTemplatesParser.Placeholder placeholder, int placeholderIndex, ImmutableArray<SyntaxNode> placeholderValues)
+    private static SyntaxNode OutOfOrderPlaceholderValue(
+        MessageTemplatesParser.Placeholder placeholder,
+        int placeholderIndex,
+        ImmutableArray<SyntaxNode> placeholderValues,
+        out SyntaxNode betterFitArgument)
     {
+        betterFitArgument = null;
         if (placeholderIndex < placeholderValues.Length && MatchesName(placeholder.Name, placeholderValues[placeholderIndex], isStrict: false) is not false)
         {
             return null;
@@ -82,6 +91,7 @@ public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplat
             {
                 if (i != placeholderIndex && placeholderIndex < placeholderValues.Length && MatchesName(placeholder.Name, placeholderValues[i], isStrict: true) is true)
                 {
+                    betterFitArgument = placeholderValues.Skip(i).FirstOrDefault(x => MatchesName(placeholder.Name, x, isStrict: true) is true);
                     return placeholderValues[placeholderIndex];
                 }
             }
