@@ -9,7 +9,7 @@ Namespace Tests.TestCases
             If cond1 Then
             End If
 
-            If cond1 Then ' Secondary [0]
+            If cond1 Then ' Secondary [0] {{Merge this if statement with its nested one.}}
                 If cond2 Then ' Noncompliant [0] {{Merge this if statement with the enclosing one.}}
                 End If
             End If

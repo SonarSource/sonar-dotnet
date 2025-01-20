@@ -14,12 +14,11 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Rules
-{
-    public abstract class IfCollapsibleBase : SonarDiagnosticAnalyzer
-    {
-        protected const string DiagnosticId = "S1066";
-        protected const string MessageFormat = "Merge this if statement with the enclosing one.";
-    }
-}
+namespace SonarAnalyzer.Rules;
 
+public abstract class IfCollapsibleBase : SonarDiagnosticAnalyzer
+{
+    protected const string DiagnosticId = "S1066";
+    protected const string MessageFormat = "Merge this if statement with the enclosing one.";
+    protected const string SecondaryMessage = "Merge this if statement with its nested one.";
+}

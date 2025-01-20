@@ -19,7 +19,7 @@ namespace Tests.TestCases
                 }
             }
 
-            if (cond1) 
+            if (cond1)
 //          ^^ Secondary [0]
             {
                 if (cond2 || cond3)
@@ -28,7 +28,7 @@ namespace Tests.TestCases
                 }
             }
 
-            if (cond1) // Secondary [1]
+            if (cond1) // Secondary [1] {{Merge this if statement with its nested one.}}
                 if (cond2 || cond3) // Noncompliant [1] {{Merge this if statement with the enclosing one.}}
                 {
                 }

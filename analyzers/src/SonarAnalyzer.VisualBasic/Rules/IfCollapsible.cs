@@ -14,42 +14,38 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Rules.VisualBasic
+namespace SonarAnalyzer.Rules.VisualBasic;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class IfCollapsible : IfCollapsibleBase
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class IfCollapsible : IfCollapsibleBase
-    {
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+    private static readonly DiagnosticDescriptor rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                c =>
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            c =>
+            {
+                var multilineIfBlock = (MultiLineIfBlockSyntax)c.Node;
+
+                if (multilineIfBlock.ElseIfBlocks.Count > 0 ||
+                    multilineIfBlock.ElseBlock is not null)
                 {
-                    var multilineIfBlock = (MultiLineIfBlockSyntax)c.Node;
+                    return;
+                }
 
-                    if (multilineIfBlock.ElseIfBlocks.Count > 0 ||
-                        multilineIfBlock.ElseBlock != null)
-                    {
-                        return;
-                    }
+                var parentMultilineIfBlock = multilineIfBlock.Parent as MultiLineIfBlockSyntax;
 
-                    var parentMultilineIfBlock = multilineIfBlock.Parent as MultiLineIfBlockSyntax;
+                if (parentMultilineIfBlock is null ||
+                    parentMultilineIfBlock.ElseIfBlocks.Count != 0 ||
+                    parentMultilineIfBlock.ElseBlock is not null ||
+                    parentMultilineIfBlock.Statements.Count != 1)
+                {
+                    return;
+                }
 
-                    if (parentMultilineIfBlock == null ||
-                        parentMultilineIfBlock.ElseIfBlocks.Count != 0 ||
-                        parentMultilineIfBlock.ElseBlock != null ||
-                        parentMultilineIfBlock.Statements.Count != 1)
-                    {
-                        return;
-                    }
-
-                    c.ReportIssue(rule, multilineIfBlock.IfStatement.IfKeyword, [parentMultilineIfBlock.IfStatement.IfKeyword.ToSecondaryLocation()]);
-                },
-                SyntaxKind.MultiLineIfBlock);
-        }
-    }
+                c.ReportIssue(rule, multilineIfBlock.IfStatement.IfKeyword, [parentMultilineIfBlock.IfStatement.IfKeyword.ToSecondaryLocation(SecondaryMessage)]);
+            },
+            SyntaxKind.MultiLineIfBlock);
 }
-

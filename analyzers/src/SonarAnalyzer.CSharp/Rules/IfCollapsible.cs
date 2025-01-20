@@ -14,51 +14,50 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class IfCollapsible : IfCollapsibleBase
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class IfCollapsible : IfCollapsibleBase
-    {
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(
-                c =>
-                {
-                    var ifStatement = (IfStatementSyntax)c.Node;
-
-                    if (ifStatement.Else is not null)
-                    {
-                        return;
-                    }
-
-                    var parentIfStatement = GetParentIfStatement(ifStatement);
-                    if (parentIfStatement is { Else: null })
-                    {
-                        c.ReportIssue(Rule, ifStatement.IfKeyword, [parentIfStatement.IfKeyword.ToSecondaryLocation()]);
-                    }
-                },
-                SyntaxKind.IfStatement);
-
-        private static IfStatementSyntax GetParentIfStatement(IfStatementSyntax ifStatement)
-        {
-            var parent = ifStatement.Parent;
-
-            while (parent.IsKind(SyntaxKind.Block))
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            c =>
             {
-                var block = (BlockSyntax)parent;
+                var ifStatement = (IfStatementSyntax)c.Node;
 
-                if (block.Statements.Count != 1)
+                if (ifStatement.Else is not null)
                 {
-                    return null;
+                    return;
                 }
 
-                parent = parent.Parent;
+                var parentIfStatement = GetParentIfStatement(ifStatement);
+                if (parentIfStatement is { Else: null })
+                {
+                    c.ReportIssue(Rule, ifStatement.IfKeyword, [parentIfStatement.IfKeyword.ToSecondaryLocation(SecondaryMessage)]);
+                }
+            },
+            SyntaxKind.IfStatement);
+
+    private static IfStatementSyntax GetParentIfStatement(IfStatementSyntax ifStatement)
+    {
+        var parent = ifStatement.Parent;
+
+        while (parent.IsKind(SyntaxKind.Block))
+        {
+            var block = (BlockSyntax)parent;
+
+            if (block.Statements.Count != 1)
+            {
+                return null;
             }
 
-            return parent as IfStatementSyntax;
+            parent = parent.Parent;
         }
+
+        return parent as IfStatementSyntax;
     }
 }
