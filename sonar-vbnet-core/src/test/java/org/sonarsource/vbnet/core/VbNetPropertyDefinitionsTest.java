@@ -29,19 +29,36 @@ class VbNetPropertyDefinitionsTest {
     VbNetPropertyDefinitions sut = new VbNetPropertyDefinitions(TestVbNetMetadata.INSTANCE);
     List<PropertyDefinition> properties = sut.create();
     assertThat(properties)
-      .hasSize(12);
+      .hasSize(19);
   }
 
   @Test
   void create_containsScannerForDotNetProperties() {
     VbNetPropertyDefinitions sut = new VbNetPropertyDefinitions(TestVbNetMetadata.INSTANCE);
     List<PropertyDefinition> properties = sut.create();
-    // These must exist for S4NET to download the ZIP with analyzers from the server.
+    // These must exist for S4NET to download the ZIP with analyzers from the server and populate the Sonar-cs.ruleset.
     assertThat(properties)
       .extracting(PropertyDefinition::key)
       .contains(
+        "sonar.vbnet.analyzer.dotnet.analyzerId",
+        "sonar.vbnet.analyzer.dotnet.ruleNamespace",
         "sonar.vbnet.analyzer.dotnet.pluginKey",
         "sonar.vbnet.analyzer.dotnet.pluginVersion",
         "sonar.vbnet.analyzer.dotnet.staticResourceName");
+  }
+
+  @Test
+  void create_containsLegacyScannerForDotNetProperties() {
+    VbNetPropertyDefinitions sut = new VbNetPropertyDefinitions(TestVbNetMetadata.INSTANCE);
+    List<PropertyDefinition> properties = sut.create();
+    // These must exist for S4NET <= 9.0.2 to download the ZIP with analyzers from the server and populate the Sonar-cs.ruleset.
+    assertThat(properties)
+      .extracting(PropertyDefinition::key)
+      .contains(
+        "sonaranalyzer-vbnet.pluginKey",
+        "sonaranalyzer-vbnet.pluginVersion",
+        "sonaranalyzer-vbnet.staticResourceName",
+        "sonaranalyzer-vbnet.analyzerId",
+        "sonaranalyzer-vbnet.ruleNamespace");
   }
 }

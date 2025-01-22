@@ -34,7 +34,7 @@ class CSharpPluginTest {
 
     Plugin.Context context = new Plugin.Context(sonarRuntime);
     new CSharpPlugin().define(context);
-    assertThat(context.getExtensions()).hasSize(63);
+    assertThat(context.getExtensions()).hasSize(62);
   }
 
   @Test

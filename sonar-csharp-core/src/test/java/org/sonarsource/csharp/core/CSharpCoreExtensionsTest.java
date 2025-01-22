@@ -35,7 +35,6 @@ import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
 import org.sonarsource.dotnet.shared.plugins.RealPathProvider;
 import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
-import org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.RoslynRules;
 import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.TelemetryCollector;
@@ -92,7 +91,6 @@ class CSharpCoreExtensionsTest {
       CSharpFileCacheSensor.class,
       ProtobufDataImporter.class,
       RoslynDataImporter.class,
-      RoslynProfileExporter.class,
       SonarLintProfileExporter.class
     };
 
@@ -102,7 +100,6 @@ class CSharpCoreExtensionsTest {
       expectedExtensions.length
         + new CodeCoverageProvider(TestCSharpMetadata.INSTANCE).extensions().size()
         + new UnitTestResultsProvider(TestCSharpMetadata.INSTANCE).extensions().size()
-        + RoslynProfileExporter.sonarLintRepositoryProperties(TestCSharpMetadata.INSTANCE).size()
         + new CSharpPropertyDefinitions(TestCSharpMetadata.INSTANCE).create().size());
   }
 

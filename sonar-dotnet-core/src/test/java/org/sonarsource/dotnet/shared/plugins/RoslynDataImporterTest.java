@@ -23,11 +23,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
@@ -39,6 +36,8 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
+import org.sonar.api.batch.rule.internal.NewActiveRule;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.testfixtures.log.LogTester;
@@ -46,6 +45,7 @@ import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class RoslynDataImporterTest {
   @Rule
@@ -55,7 +55,8 @@ public class RoslynDataImporterTest {
   @Rule
   public LogTester logTester = new LogTester();
 
-  private RoslynDataImporter roslynDataImporter = new RoslynDataImporter(mock(AbstractLanguageConfiguration.class));
+  private PluginMetadata metadata = csPluginMetadata();
+  private RoslynDataImporter roslynDataImporter = new RoslynDataImporter(metadata, mock(AbstractLanguageConfiguration.class));
   private SensorContextTester tester;
   private Path workDir;
 
@@ -84,8 +85,8 @@ public class RoslynDataImporterTest {
 
   @Test
   public void roslynReportIsProcessed() {
-    Map<String, List<RuleKey>> activeRules = createActiveRules();
-    roslynDataImporter.importRoslynReports(Collections.singletonList(new RoslynReport(tester.project(), workDir.resolve("roslyn-report.json"))), tester, activeRules,
+    addActiveRules();
+    roslynDataImporter.importRoslynReports(Collections.singletonList(new RoslynReport(tester.project(), workDir.resolve("roslyn-report.json"))), tester,
       String::toString);
 
     assertThat(tester.allIssues())
@@ -107,8 +108,8 @@ public class RoslynDataImporterTest {
 
   @Test
   public void roslynEmptyReportShouldNotFail() {
-    Map<String, List<RuleKey>> activeRules = createActiveRules();
-    roslynDataImporter.importRoslynReports(Collections.singletonList(new RoslynReport(null, workDir.resolve("roslyn-report-empty.json"))), tester, activeRules, String::toString);
+    addActiveRules();
+    roslynDataImporter.importRoslynReports(Collections.singletonList(new RoslynReport(null, workDir.resolve("roslyn-report-empty.json"))), tester, String::toString);
 
     assertThat(tester.allIssues()).isEmpty();
     assertThat(tester.allExternalIssues()).isEmpty();
@@ -117,25 +118,24 @@ public class RoslynDataImporterTest {
 
   @Test
   public void failWithDuplicateRuleKey() {
-    Map<String, List<RuleKey>> activeRules = new HashMap<String, List<RuleKey>>() {{
-      put("sonaranalyzer-cs", Collections.singletonList(RuleKey.of("csharpsquid", "[parameters_key]")));
-      put("foo", Collections.singletonList(RuleKey.of("roslyn.foo", "[parameters_key]")));
-    }};
+    tester.setActiveRules(new ActiveRulesBuilder()
+      .addRule(createRule("csharpsquid", "[parameters_key]"))
+      .addRule(createRule("roslyn.foo", "[parameters_key]"))
+      .build());
 
     exception.expectMessage("Rule keys must be unique, but \"[parameters_key]\" is defined in both the \"roslyn.foo\" and \"csharpsquid\" rule repositories.");
-    roslynDataImporter.importRoslynReports(Collections.singletonList(new RoslynReport(null, workDir.resolve("roslyn-report.json"))), tester, activeRules, String::toString);
+    roslynDataImporter.importRoslynReports(Collections.singletonList(new RoslynReport(null, workDir.resolve("roslyn-report.json"))), tester, String::toString);
   }
 
   @Test
   public void internalIssuesFromExternalRepositoriesWithInvalidLocationShouldNotFail() throws IOException {
     final String repositoryName = "roslyn.stylecop.analyzers.cs";
-    Map<String, List<RuleKey>> activeRules = Collections.singletonMap(repositoryName, Collections.singletonList(RuleKey.of(repositoryName, "SA1629")));
-
+    tester.setActiveRules(new ActiveRulesBuilder()
+      .addRule(createRule(repositoryName, "SA1629"))
+      .build());
     Path reportPath = updateCodeFilePathsInReport("roslyn-report-invalid-location.json", true);
-
     RoslynReport report = new RoslynReport(tester.project(), reportPath);
-
-    roslynDataImporter.importRoslynReports(Collections.singletonList(report), tester, activeRules, String::toString);
+    roslynDataImporter.importRoslynReports(Collections.singletonList(report), tester, String::toString);
 
     assertThat(tester.allIssues()).hasSize(2);
     assertThat(tester.allAdHocRules()).isEmpty();
@@ -163,30 +163,36 @@ public class RoslynDataImporterTest {
 
   @Test
   public void internalIssuesFromCSharpRepositoryWithInvalidLocationShouldFail() throws IOException {
-    assertInvalidLocationFail("csharpsquid");
+    assertInvalidLocationFail("csharpsquid", roslynDataImporter);
   }
 
   @Test
   public void internalIssuesFromVBNetRepositoryWithInvalidLocationShouldFail() throws IOException {
-    assertInvalidLocationFail("vbnet");
+    PluginMetadata vbPluginMetadata = mock(PluginMetadata.class);
+    when(vbPluginMetadata.repositoryKey()).thenReturn("vbnet");
+
+    RoslynDataImporter vbNetRoslynDataImporter = new RoslynDataImporter(vbPluginMetadata, mock(AbstractLanguageConfiguration.class));
+    assertInvalidLocationFail("vbnet", vbNetRoslynDataImporter);
   }
 
-  private void assertInvalidLocationFail(String repositoryName) throws IOException {
-    Map<String, List<RuleKey>> activeRules = Collections.singletonMap(repositoryName, Collections.singletonList(RuleKey.of(repositoryName, "SA1629")));
+  private void assertInvalidLocationFail(String repositoryName, RoslynDataImporter sut) throws IOException {
+    tester.setActiveRules(new ActiveRulesBuilder()
+      .addRule(createRule(repositoryName, "SA1629"))
+      .build());
 
     Path reportPath = updateCodeFilePathsInReport("roslyn-report-invalid-location.json", true);
-
     RoslynReport report = new RoslynReport(tester.project(), reportPath);
 
     exception.expectMessage("99 is not a valid line offset for pointer. File Program.cs has 15 character(s) at line 13");
-    roslynDataImporter.importRoslynReports(Collections.singletonList(report), tester, activeRules, String::toString);
+    sut.importRoslynReports(Collections.singletonList(report), tester, String::toString);
   }
 
-  private static Map<String, List<RuleKey>> createActiveRules() {
-    return new HashMap<String, List<RuleKey>>() {{
-      put("sonaranalyzer-cs", Arrays.asList(RuleKey.of("csharpsquid", "S1186"), RuleKey.of("csharpsquid", "[parameters_key]")));
-      put("foo", Collections.singletonList(RuleKey.of("roslyn.foo", "custom-roslyn")));
-    }};
+  private void addActiveRules() {
+    tester.setActiveRules(new ActiveRulesBuilder()
+      .addRule(createRule("csharpsquid", "[parameters_key]"))
+      .addRule(createRule("csharpsquid", "S1186"))
+      .addRule(createRule("roslyn.foo", "custom-roslyn"))
+      .build());
   }
 
   // Updates the file paths in the roslyn report to point to real cs file in the resources.
@@ -203,10 +209,19 @@ public class RoslynDataImporterTest {
     }
 
     String reportContent = new String(Files.readAllBytes(reportPath), StandardCharsets.UTF_8);
-
     reportContent = StringUtils.replace(reportContent, "Program.cs", StringEscapeUtils.escapeJavaScript(csFilePath));
     Files.write(reportPath, reportContent.getBytes(StandardCharsets.UTF_8), StandardOpenOption.WRITE);
-
     return reportPath;
+  }
+  private NewActiveRule createRule(String repositoryKey, String ruleKey) {
+    return new NewActiveRule.Builder()
+      .setRuleKey(RuleKey.of(repositoryKey, ruleKey))
+      .build();
+  }
+
+  private static PluginMetadata csPluginMetadata() {
+    PluginMetadata metadata = mock(PluginMetadata.class);
+    when(metadata.repositoryKey()).thenReturn("csharpsquid");
+    return metadata;
   }
 }

@@ -18,17 +18,14 @@ package org.sonarsource.dotnet.shared.plugins.sensors;
 
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Map;
 import java.util.function.UnaryOperator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile.Type;
-import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.notifications.AnalysisWarnings;
-import org.sonar.api.rule.RuleKey;
 import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 import org.sonarsource.dotnet.shared.plugins.ProjectTypeCollector;
@@ -40,7 +37,6 @@ import org.sonarsource.dotnet.shared.plugins.RoslynReport;
 import org.sonarsource.dotnet.shared.plugins.SensorContextUtils;
 
 import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
-import static org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter.activeRoslynRulesByPartialRepoKey;
 
 /**
  * This class is the main sensor for C# and VB.NET which is going to process all Roslyn reports and protobuf contents and then push them to SonarQube.
@@ -112,12 +108,7 @@ public class DotNetSensor implements ProjectSensor {
     if (roslynReports.isEmpty()) {
       LOG.warn("No Roslyn issue reports were found. The {} files have not been analyzed. {}", lazy(pluginMetadata::languageName), GET_HELP_MESSAGE);
     } else {
-      Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(pluginMetadata, context.activeRules()
-        .findAll()
-        .stream()
-        .map(ActiveRule::ruleKey)
-        .toList());
-      roslynDataImporter.importRoslynReports(roslynReports, context, activeRoslynRulesByPartialRepoKey, toRealPath);
+      roslynDataImporter.importRoslynReports(roslynReports, context, toRealPath);
     }
   }
 

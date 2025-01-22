@@ -29,7 +29,7 @@ class CSharpPropertyDefinitionsTest {
     CSharpPropertyDefinitions sut = new CSharpPropertyDefinitions(TestCSharpMetadata.INSTANCE);
     List<PropertyDefinition> properties = sut.create();
     assertThat(properties)
-      .hasSize(13)
+      .hasSize(20)
       .extracting(PropertyDefinition::name).containsOnlyOnce("Analyze Razor code");
   }
 
@@ -37,13 +37,30 @@ class CSharpPropertyDefinitionsTest {
   void create_containsScannerForDotNetProperties() {
     CSharpPropertyDefinitions sut = new CSharpPropertyDefinitions(TestCSharpMetadata.INSTANCE);
     List<PropertyDefinition> properties = sut.create();
-    // These must exist for S4NET to download the ZIP with analyzers from the server.
+    // These must exist for S4NET to download the ZIP with analyzers from the server and populate the Sonar-cs.ruleset.
     assertThat(properties)
       .extracting(PropertyDefinition::key)
       .contains(
+        "sonar.cs.analyzer.dotnet.analyzerId",
+        "sonar.cs.analyzer.dotnet.ruleNamespace",
         "sonar.cs.analyzer.dotnet.pluginKey",
         "sonar.cs.analyzer.dotnet.pluginVersion",
         "sonar.cs.analyzer.dotnet.staticResourceName");
+  }
+
+  @Test
+  void create_containsLegacyScannerForDotNetProperties() {
+    CSharpPropertyDefinitions sut = new CSharpPropertyDefinitions(TestCSharpMetadata.INSTANCE);
+    List<PropertyDefinition> properties = sut.create();
+    // These must exist for S4NET <= 9.0.2 to download the ZIP with analyzers from the server and populate the Sonar-cs.ruleset.
+    assertThat(properties)
+      .extracting(PropertyDefinition::key)
+      .contains(
+        "sonaranalyzer-cs.pluginKey",
+        "sonaranalyzer-cs.pluginVersion",
+        "sonaranalyzer-cs.staticResourceName",
+        "sonaranalyzer-cs.analyzerId",
+        "sonaranalyzer-cs.ruleNamespace");
   }
 
   @Test

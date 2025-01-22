@@ -18,11 +18,8 @@ package org.sonarsource.dotnet.shared.plugins.sensors;
 
 import java.io.File;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import org.junit.Before;
 import org.junit.Rule;
@@ -80,6 +77,7 @@ public class DotNetSensorTest {
   private ReportPathCollector reportPathCollector = mock(ReportPathCollector.class);
   private ProjectTypeCollector projectTypeCollector = mock(ProjectTypeCollector.class);
   private AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
+  private PluginMetadata pluginMetadata = mock(PluginMetadata.class);
 
   private SensorContextTester tester;
   private DotNetSensor sensor;
@@ -95,7 +93,6 @@ public class DotNetSensorTest {
     when(reportPathCollector.protobufDirs()).thenReturn(reportPaths);
     when(projectTypeCollector.getSummary(LANG_NAME)).thenReturn(Optional.of("TEST PROJECTS SUMMARY"));
     when(projectTypeCollector.hasProjects()).thenReturn(true);
-    PluginMetadata pluginMetadata = mock(PluginMetadata.class);
     when(pluginMetadata.languageKey()).thenReturn(LANG_KEY);
     when(pluginMetadata.repositoryKey()).thenReturn(REPO_KEY);
     when(pluginMetadata.languageName()).thenReturn(LANG_NAME);
@@ -135,11 +132,7 @@ public class DotNetSensorTest {
     verify(analysisWarnings, never()).addUnique(any());
     verify(reportPathCollector).protobufDirs();
     verifyNoInteractions(protobufDataImporter);
-    Map<String, List<RuleKey>> expectedMap = new HashMap<String, List<RuleKey>>() {{
-      put("sonaranalyzer-" + LANG_KEY, Arrays.asList(RuleKey.of(REPO_KEY, "S1186"), RuleKey.of(REPO_KEY, "[parameters_key]")));
-      put("foo", Collections.singletonList(RuleKey.of("roslyn.foo", "custom-roslyn")));
-    }};
-    verify(roslynDataImporter).importRoslynReports(eq(Collections.singletonList(new RoslynReport(null, workDir.getRoot()))), eq(tester), eq(expectedMap),
+    verify(roslynDataImporter).importRoslynReports(eq(Collections.singletonList(new RoslynReport(null, workDir.getRoot()))), eq(tester),
       any(RealPathProvider.class));
   }
 

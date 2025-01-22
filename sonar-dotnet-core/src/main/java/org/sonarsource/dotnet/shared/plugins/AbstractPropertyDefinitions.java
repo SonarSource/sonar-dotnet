@@ -28,7 +28,7 @@ import org.sonar.api.utils.ManifestUtils;
  */
 public abstract class AbstractPropertyDefinitions {
   private static final String EXTERNAL_ANALYZERS_CATEGORY = "External Analyzers";
-
+  private static final String LEGACY_PROP_PREFIX = "sonaranalyzer-";  // properties that use this are legacy for compatibility with S4NET <= 9.0.2
   protected static final String PROP_PREFIX = "sonar.";
   public static final String PROJECT_KEY_PROPERTY = PROP_PREFIX + "projectKey";
   public static final String PROJECT_NAME_PROPERTY = PROP_PREFIX + "projectName";
@@ -46,32 +46,32 @@ public abstract class AbstractPropertyDefinitions {
     String version = projectVersion();
     List<PropertyDefinition> result = new ArrayList<>();
     result.add(
-      PropertyDefinition.builder(getRoslynJsonReportPathProperty(metadata.languageKey()))
+      PropertyDefinition.builder(roslynJsonReportPathProperty(languageKey))
         .multiValues(true)
         .hidden()
         .build());
     result.add(
-      PropertyDefinition.builder(getAnalyzerWorkDirProperty(languageKey))
+      PropertyDefinition.builder(analyzerWorkDirProperty(languageKey))
         .multiValues(true)
         .hidden()
         .build());
     result.add(
-      PropertyDefinition.builder(pluginKeyPropertyKey(languageKey))
+      PropertyDefinition.builder(pluginKeyScannerPropertyKey(languageKey))
         .defaultValue(metadata.pluginKey())
         .hidden()
         .build());
     result.add(
-      PropertyDefinition.builder(pluginVersionPropertyKey(languageKey))
+      PropertyDefinition.builder(pluginVersionScannerPropertyKey(languageKey))
         .defaultValue(version)
         .hidden()
         .build());
     result.add(
-      PropertyDefinition.builder(staticResourceNamePropertyKey(languageKey))
+      PropertyDefinition.builder(staticResourceNameScannerPropertyKey(languageKey))
         .defaultValue("SonarAnalyzer-" + metadata.pluginKey() + "-" + version + ".zip")
         .hidden()
         .build());
     result.add(
-      PropertyDefinition.builder(getFileSuffixProperty(languageKey))
+      PropertyDefinition.builder(fileSuffixProperty(languageKey))
         .category(languageName)
         .defaultValue(metadata.fileSuffixesDefaultValue())
         .name("File suffixes")
@@ -80,7 +80,7 @@ public abstract class AbstractPropertyDefinitions {
         .onQualifiers(Qualifiers.PROJECT)
         .build());
     result.add(
-      PropertyDefinition.builder(getIgnoreHeaderCommentsProperty(languageKey))
+      PropertyDefinition.builder(ignoreHeaderCommentsProperty(languageKey))
         .category(languageName)
         .defaultValue("true")
         .name("Ignore header comments")
@@ -92,7 +92,7 @@ public abstract class AbstractPropertyDefinitions {
         .type(PropertyType.BOOLEAN)
         .build());
     result.add(
-      PropertyDefinition.builder(getAnalyzeGeneratedCode(languageKey))
+      PropertyDefinition.builder(analyzeGeneratedCode(languageKey))
         .category(languageName)
         .defaultValue("false")
         .name("Analyze generated code")
@@ -102,7 +102,7 @@ public abstract class AbstractPropertyDefinitions {
         .type(PropertyType.BOOLEAN)
         .build());
     result.add(
-      PropertyDefinition.builder(getIgnoreIssuesProperty(languageKey))
+      PropertyDefinition.builder(ignoreIssuesProperty(languageKey))
         .type(PropertyType.BOOLEAN)
         .category(EXTERNAL_ANALYZERS_CATEGORY)
         .subCategory(languageName)
@@ -113,7 +113,7 @@ public abstract class AbstractPropertyDefinitions {
         .onQualifiers(Qualifiers.PROJECT)
         .build());
     result.add(
-      PropertyDefinition.builder(getBugCategoriesProperty(languageKey))
+      PropertyDefinition.builder(bugCategoriesProperty(languageKey))
         .type(PropertyType.STRING)
         .multiValues(true)
         .category(EXTERNAL_ANALYZERS_CATEGORY)
@@ -124,7 +124,7 @@ public abstract class AbstractPropertyDefinitions {
         .onQualifiers(Qualifiers.PROJECT)
         .build());
     result.add(
-      PropertyDefinition.builder(getVulnerabilityCategoriesProperty(languageKey))
+      PropertyDefinition.builder(vulnerabilityCategoriesProperty(languageKey))
         .type(PropertyType.STRING)
         .multiValues(true)
         .category(EXTERNAL_ANALYZERS_CATEGORY)
@@ -135,7 +135,7 @@ public abstract class AbstractPropertyDefinitions {
         .onQualifiers(Qualifiers.PROJECT)
         .build());
     result.add(
-      PropertyDefinition.builder(getCodeSmellCategoriesProperty(languageKey))
+      PropertyDefinition.builder(codeSmellCategoriesProperty(languageKey))
         .type(PropertyType.STRING)
         .multiValues(true)
         .category(EXTERNAL_ANALYZERS_CATEGORY)
@@ -145,67 +145,128 @@ public abstract class AbstractPropertyDefinitions {
         .description("External rule categories to be treated as Code Smells. By default, external issues are Code Smells, or Bugs when the severity is error.")
         .onQualifiers(Qualifiers.PROJECT)
         .build());
+    result.add(
+      PropertyDefinition.builder(analyzerIdScannerPropertyKey(languageKey))
+        .defaultValue(metadata.analyzerProjectName())
+        .hidden()
+        .build());
+    result.add(
+      PropertyDefinition.builder(ruleNamespaceScannerPropertyKey(languageKey))
+        .defaultValue(metadata.analyzerProjectName())
+        .hidden()
+        .build());
+    result.add(
+      PropertyDefinition.builder(pluginKeyLegacyScannerPropertyKey(languageKey))
+        .defaultValue(metadata.pluginKey())
+        .hidden()
+        .build());
+    result.add(
+      PropertyDefinition.builder(pluginVersionLegacyScannerPropertyKey(languageKey))
+        .defaultValue(version)
+        .hidden()
+        .build());
+    result.add(
+      PropertyDefinition.builder(staticResourceNameLegacyScannerPropertyKey(languageKey))
+        .defaultValue("SonarAnalyzer-" + metadata.pluginKey() + "-" + version + ".zip")
+        .hidden()
+        .build());
+    result.add(
+      PropertyDefinition.builder(analyzerIdLegacyScannerPropertyKey(languageKey))
+        .defaultValue(metadata.analyzerProjectName())
+        .hidden()
+        .build());
+    result.add(
+      PropertyDefinition.builder(ruleNamespaceLegacyScannerPropertyKey(languageKey))
+        .defaultValue(metadata.analyzerProjectName())
+        .hidden()
+        .build());
     return result;
   }
 
-  public static String getIgnoreHeaderCommentsProperty(String languageKey) {
+  public static String ignoreHeaderCommentsProperty(String languageKey) {
     return PROP_PREFIX + languageKey + ".ignoreHeaderComments";
   }
 
-  public static String getAnalyzeGeneratedCode(String languageKey) {
+  public static String analyzeGeneratedCode(String languageKey) {
     return PROP_PREFIX + languageKey + ".analyzeGeneratedCode";
   }
 
-  public static String getFileSuffixProperty(String languageKey) {
+  public static String fileSuffixProperty(String languageKey) {
     return PROP_PREFIX + languageKey + ".file.suffixes";
   }
 
-  public static String getRoslynJsonReportPathProperty(String languageKey) {
+  public static String roslynJsonReportPathProperty(String languageKey) {
     return PROP_PREFIX + languageKey + ".roslyn.reportFilePaths";
   }
 
-  public static String getAnalyzerWorkDirProperty(String languageKey) {
+  public static String analyzerWorkDirProperty(String languageKey) {
     return PROP_PREFIX + languageKey + ".analyzer.projectOutPaths";
   }
 
-  public static String getIgnoreIssuesProperty(String languageKey) {
+  public static String ignoreIssuesProperty(String languageKey) {
     return PROP_PREFIX + languageKey + ".roslyn.ignoreIssues";
   }
 
-  public static String getBugCategoriesProperty(String languageKey) {
+  public static String bugCategoriesProperty(String languageKey) {
     return PROP_PREFIX + languageKey + ".roslyn.bugCategories";
   }
 
-  public static String getCodeSmellCategoriesProperty(String languageKey) {
+  public static String codeSmellCategoriesProperty(String languageKey) {
     return PROP_PREFIX + languageKey + ".roslyn.codeSmellCategories";
   }
 
-  public static String getVulnerabilityCategoriesProperty(String languageKey) {
+  public static String vulnerabilityCategoriesProperty(String languageKey) {
     return PROP_PREFIX + languageKey + ".roslyn.vulnerabilityCategories";
   }
 
-  public static String getPullRequestCacheBasePath() {
+  public static String pullRequestCacheBasePath() {
     return PROP_PREFIX + "pullrequest.cache.basepath";
   }
 
-  public static String getPullRequestBase() {
+  public static String pullRequestBase() {
     return PROP_PREFIX + "pullrequest.base";
   }
 
-  public static String pluginKeyPropertyKey(String languageKey) {
+  public static String pluginKeyScannerPropertyKey(String languageKey) {
     return scannerForDotNetProperty(languageKey, "pluginKey");
   }
 
-  public static String pluginVersionPropertyKey(String languageKey) {
+  public static String pluginVersionScannerPropertyKey(String languageKey) {
     return scannerForDotNetProperty(languageKey, "pluginVersion");
   }
 
-  public static String staticResourceNamePropertyKey(String languageKey) {
+  public static String staticResourceNameScannerPropertyKey(String languageKey) {
     return scannerForDotNetProperty(languageKey, "staticResourceName");
+  }
+  public static String analyzerIdScannerPropertyKey(String languageKey) {
+    return scannerForDotNetProperty(languageKey, "analyzerId");
+  }
+  public static String ruleNamespaceScannerPropertyKey(String languageKey) {
+    return scannerForDotNetProperty(languageKey, "ruleNamespace");
   }
 
   private static String scannerForDotNetProperty(String languageKey, String name) {
     return PROP_PREFIX + languageKey + ".analyzer.dotnet." + name;
+  }
+
+  private static String pluginKeyLegacyScannerPropertyKey(String languageKey) {
+    return LEGACY_PROP_PREFIX + languageKey + ".pluginKey";
+  }
+
+  private static String pluginVersionLegacyScannerPropertyKey(String languageKey) {
+    return LEGACY_PROP_PREFIX + languageKey + ".pluginVersion";
+  }
+
+  private static String staticResourceNameLegacyScannerPropertyKey(String languageKey) {
+    return LEGACY_PROP_PREFIX + languageKey + ".staticResourceName";
+  }
+
+  private static String analyzerIdLegacyScannerPropertyKey(String languageKey) {
+    return LEGACY_PROP_PREFIX + languageKey + ".analyzerId";
+  }
+
+  private static String ruleNamespaceLegacyScannerPropertyKey(String languageKey) {
+    return LEGACY_PROP_PREFIX + languageKey + ".ruleNamespace";
   }
 
   static String projectVersion() {

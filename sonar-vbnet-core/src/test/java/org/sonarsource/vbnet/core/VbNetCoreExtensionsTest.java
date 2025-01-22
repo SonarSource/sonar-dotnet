@@ -35,7 +35,6 @@ import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
 import org.sonarsource.dotnet.shared.plugins.RealPathProvider;
 import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
-import org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.RoslynRules;
 import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.TelemetryCollector;
@@ -96,7 +95,6 @@ class VbNetCoreExtensionsTest {
       // importers / exporters
       ProtobufDataImporter.class,
       RoslynDataImporter.class,
-      RoslynProfileExporter.class,
       SonarLintProfileExporter.class
     };
 
@@ -106,7 +104,6 @@ class VbNetCoreExtensionsTest {
       expectedExtensions.length
         + new CodeCoverageProvider(TestVbNetMetadata.INSTANCE).extensions().size()
         + new UnitTestResultsProvider(TestVbNetMetadata.INSTANCE).extensions().size()
-        + RoslynProfileExporter.sonarLintRepositoryProperties(TestVbNetMetadata.INSTANCE).size()
         + new VbNetPropertyDefinitions(TestVbNetMetadata.INSTANCE).create().size());
   }
 }

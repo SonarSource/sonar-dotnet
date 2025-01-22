@@ -37,7 +37,7 @@ import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonarsource.dotnet.shared.plugins.protobuf.FileMetadataImporter;
 
-import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getAnalyzerWorkDirProperty;
+import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.analyzerWorkDirProperty;
 import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.FILEMETADATA_FILENAME;
 
 /**
@@ -99,7 +99,7 @@ public class GlobalProtobufFileProcessor extends ProjectBuilder {
   }
 
   private List<Path> protobufReportPaths(Map<String, String> moduleProps) {
-    return Arrays.stream(parseAsStringArray(moduleProps.get(getAnalyzerWorkDirProperty(metadata.languageKey()))))
+    return Arrays.stream(parseAsStringArray(moduleProps.get(analyzerWorkDirProperty(metadata.languageKey()))))
       .map(x -> Paths.get(x).resolve(ModuleConfiguration.getAnalyzerReportDir(metadata.languageKey())))
       .toList();
   }

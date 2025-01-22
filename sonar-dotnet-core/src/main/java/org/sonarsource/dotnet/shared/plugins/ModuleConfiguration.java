@@ -33,8 +33,8 @@ import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.config.Configuration;
 
 import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
-import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getAnalyzerWorkDirProperty;
-import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getRoslynJsonReportPathProperty;
+import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.analyzerWorkDirProperty;
+import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.roslynJsonReportPathProperty;
 
 /**
  * This configuration is at the level of the project ("module" in scanner-cli terminology).
@@ -76,13 +76,13 @@ public class ModuleConfiguration {
    * - The directory contains at least one protobuf
    */
   public List<Path> protobufReportPaths() {
-    List<Path> analyzerWorkDirPaths = Arrays.stream(configuration.getStringArray(getAnalyzerWorkDirProperty(metadata.languageKey())))
+    List<Path> analyzerWorkDirPaths = Arrays.stream(configuration.getStringArray(analyzerWorkDirProperty(metadata.languageKey())))
       .map(Paths::get)
       .toList();
 
     if (analyzerWorkDirPaths.isEmpty() && !configuration.hasKey("sonar.tests")) {
       LOG.debug("Project '{}': Property missing: '{}'. No protobuf files will be loaded for this project.", projectKey,
-        lazy(() -> getAnalyzerWorkDirProperty(metadata.languageKey())));
+        lazy(() -> analyzerWorkDirProperty(metadata.languageKey())));
     }
 
     return analyzerWorkDirPaths.stream().map(x -> x.resolve(getAnalyzerReportDir(metadata.languageKey())))
@@ -91,7 +91,7 @@ public class ModuleConfiguration {
   }
 
   public List<Path> roslynReportPaths() {
-    String[] strPaths = configuration.getStringArray(getRoslynJsonReportPathProperty(metadata.languageKey()));
+    String[] strPaths = configuration.getStringArray(roslynJsonReportPathProperty(metadata.languageKey()));
     if (strPaths.length > 0) {
       LOG.debug("Project '{}': The Roslyn JSON report path has '{}'", projectKey, lazy(() -> String.join(",", strPaths)));
       return Arrays.stream(strPaths)

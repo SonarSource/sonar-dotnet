@@ -55,7 +55,7 @@ public abstract class AbstractFileCacheSensor implements ProjectSensor {
   @Override
   public void execute(SensorContext context) {
     var configuration = context.config();
-    if (configuration.get(AbstractPropertyDefinitions.getPullRequestBase()).isPresent()) {
+    if (configuration.get(AbstractPropertyDefinitions.pullRequestBase()).isPresent()) {
       LOG.debug("Incremental PR analysis: Cache is not uploaded for pull requests.");
       return;
     }
@@ -66,7 +66,7 @@ public abstract class AbstractFileCacheSensor implements ProjectSensor {
     }
 
     var basePath = configuration
-      .get(AbstractPropertyDefinitions.getPullRequestCacheBasePath())
+      .get(AbstractPropertyDefinitions.pullRequestCacheBasePath())
       .map(x -> Paths.get(x).toUri());
     if (basePath.isEmpty()) {
       LOG.warn("Incremental PR analysis: Could not determine common base path, cache will not be computed. Consider setting 'sonar.projectBaseDir' property.");

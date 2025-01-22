@@ -90,7 +90,7 @@ public class FileTypeSensor implements Sensor {
   }
 
   private Optional<String> getAnalyzerWorkDir(Configuration configuration) {
-    String property = AbstractPropertyDefinitions.getAnalyzerWorkDirProperty(pluginMetadata.languageKey());
+    String property = AbstractPropertyDefinitions.analyzerWorkDirProperty(pluginMetadata.languageKey());
     String[] values = configuration.getStringArray(property);
     if (values == null || values.length == 0) {
       return Optional.empty();

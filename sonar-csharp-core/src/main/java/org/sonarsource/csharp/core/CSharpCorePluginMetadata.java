@@ -41,7 +41,7 @@ public abstract class CSharpCorePluginMetadata implements PluginMetadata {
 
   @Override
   public String fileSuffixesKey() {
-    return AbstractPropertyDefinitions.getFileSuffixProperty(languageKey());
+    return AbstractPropertyDefinitions.fileSuffixProperty(languageKey());
   }
 
   @Override

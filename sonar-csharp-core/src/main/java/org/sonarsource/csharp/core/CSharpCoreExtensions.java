@@ -31,7 +31,6 @@ import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
 import org.sonarsource.dotnet.shared.plugins.RealPathProvider;
 import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
-import org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.RoslynRules;
 import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.TelemetryCollector;
@@ -95,13 +94,11 @@ public class CSharpCoreExtensions {
         CSharpFileCacheSensor.class,
         ProtobufDataImporter.class,
         RoslynDataImporter.class,
-        RoslynProfileExporter.class,
         SonarLintProfileExporter.class);
 
       context.addExtensions(new CSharpPropertyDefinitions(metadata).create());
       context.addExtensions(new CodeCoverageProvider(metadata).extensions());
       context.addExtensions(new UnitTestResultsProvider(metadata).extensions());
-      context.addExtensions(RoslynProfileExporter.sonarLintRepositoryProperties(metadata));
     }
   }
 }

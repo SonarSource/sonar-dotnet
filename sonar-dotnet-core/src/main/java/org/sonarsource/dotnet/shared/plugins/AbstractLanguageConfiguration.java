@@ -35,22 +35,22 @@ public abstract class AbstractLanguageConfiguration {
   }
 
   public boolean ignoreThirdPartyIssues() {
-    return configuration.getBoolean(AbstractPropertyDefinitions.getIgnoreIssuesProperty(metadata.languageKey())).orElse(false);
+    return configuration.getBoolean(AbstractPropertyDefinitions.ignoreIssuesProperty(metadata.languageKey())).orElse(false);
   }
 
   public Set<String> bugCategories() {
-    return new HashSet<>(asList(configuration.getStringArray(AbstractPropertyDefinitions.getBugCategoriesProperty(metadata.languageKey()))));
+    return new HashSet<>(asList(configuration.getStringArray(AbstractPropertyDefinitions.bugCategoriesProperty(metadata.languageKey()))));
   }
 
   public Set<String> codeSmellCategories() {
-    return new HashSet<>(asList(configuration.getStringArray(AbstractPropertyDefinitions.getCodeSmellCategoriesProperty(metadata.languageKey()))));
+    return new HashSet<>(asList(configuration.getStringArray(AbstractPropertyDefinitions.codeSmellCategoriesProperty(metadata.languageKey()))));
   }
 
   public Set<String> vulnerabilityCategories() {
-    return new HashSet<>(asList(configuration.getStringArray(AbstractPropertyDefinitions.getVulnerabilityCategoriesProperty(metadata.languageKey()))));
+    return new HashSet<>(asList(configuration.getStringArray(AbstractPropertyDefinitions.vulnerabilityCategoriesProperty(metadata.languageKey()))));
   }
 
   public boolean analyzeGeneratedCode() {
-    return configuration.getBoolean(AbstractPropertyDefinitions.getAnalyzeGeneratedCode(metadata.languageKey())).orElse(false);
+    return configuration.getBoolean(AbstractPropertyDefinitions.analyzeGeneratedCode(metadata.languageKey())).orElse(false);
   }
 }

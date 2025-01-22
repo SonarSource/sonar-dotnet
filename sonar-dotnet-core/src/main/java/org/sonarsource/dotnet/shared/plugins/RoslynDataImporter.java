@@ -20,8 +20,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.UnaryOperator;
+import org.sonar.api.batch.rule.ActiveRule;
+import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.rule.RuleKey;
 import org.sonar.api.scanner.ScannerSide;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,15 +35,18 @@ import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 @ScannerSide
 public class RoslynDataImporter {
   private static final Logger LOG = LoggerFactory.getLogger(RoslynDataImporter.class);
+  private static final String ROSLYN_REPOSITORY_PREFIX = "roslyn.";
   private final AbstractLanguageConfiguration config;
+  private final PluginMetadata metadata;
 
-  public RoslynDataImporter(AbstractLanguageConfiguration config) {
+  public RoslynDataImporter(PluginMetadata metadata, AbstractLanguageConfiguration config) {
+    this.metadata = metadata;
     this.config = config;
   }
 
-  public void importRoslynReports(List<RoslynReport> reports, final SensorContext context, Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey,
+  public void importRoslynReports(List<RoslynReport> reports,  final SensorContext context,
     UnaryOperator<String> toRealPath) {
-    Map<String, String> repositoryKeyByRoslynRuleKey = getRepoKeyByRoslynRuleKey(activeRoslynRulesByPartialRepoKey);
+    Map<String, String> repositoryKeyByRoslynRuleKey = repoKeyByRoslynRuleKey(context.activeRules());
     boolean ignoreThirdPartyIssues = config.ignoreThirdPartyIssues();
     SarifParserCallback callback = new SarifParserCallbackImpl(context, repositoryKeyByRoslynRuleKey, ignoreThirdPartyIssues, config.bugCategories(),
       config.codeSmellCategories(), config.vulnerabilityCategories());
@@ -55,14 +59,14 @@ public class RoslynDataImporter {
     }
   }
 
-  private static Map<String, String> getRepoKeyByRoslynRuleKey(Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey) {
+  private Map<String, String> repoKeyByRoslynRuleKey(ActiveRules activeRules){
     Map<String, String> repositoryKeyByRoslynRuleKey = new HashMap<>();
-    for (List<RuleKey> rules : activeRoslynRulesByPartialRepoKey.values()) {
-      for (RuleKey activeRoslynRuleKey : rules) {
-        String previousRepositoryKey = repositoryKeyByRoslynRuleKey.put(activeRoslynRuleKey.rule(), activeRoslynRuleKey.repository());
+    for (ActiveRule activeRule : activeRules.findAll()) {
+      if (activeRule.ruleKey().repository().startsWith(ROSLYN_REPOSITORY_PREFIX) || metadata.repositoryKey().equals(activeRule.ruleKey().repository())) {
+        String previousRepositoryKey = repositoryKeyByRoslynRuleKey.put(activeRule.ruleKey().rule(), activeRule.ruleKey().repository());
         if (previousRepositoryKey != null) {
-          throw new IllegalArgumentException("Rule keys must be unique, but \"" + activeRoslynRuleKey.rule() +
-            "\" is defined in both the \"" + previousRepositoryKey + "\" and \"" + activeRoslynRuleKey.repository() +
+          throw new IllegalArgumentException("Rule keys must be unique, but \"" + activeRule.ruleKey().rule() +
+            "\" is defined in both the \"" + previousRepositoryKey + "\" and \"" + activeRule.ruleKey().repository() +
             "\" rule repositories.");
         }
       }
