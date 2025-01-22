@@ -74,7 +74,7 @@ public abstract class DoNotOverwriteCollectionElementsBase<TSyntaxKind, TStateme
 
     private Func<TStatementSyntax, bool> IsSameCollection(SyntaxNode collectionIdentifier) =>
         x =>
-            GetCollectionIdentifier(x) is SyntaxNode identifier &&
+            GetCollectionIdentifier(x) is { } identifier &&
             identifier.ToString() == collectionIdentifier.ToString();
 
     private Func<TStatementSyntax, bool> IsSameIndexOrKey(SyntaxNode indexOrKey) =>
